@@ -20,7 +20,7 @@
 int main() {
 
 	LOG("Hello world!");
-	Hero person(20,100,5,10,40,64);
+	Hero person(20,0,true,100,true,5,10,40,64);
 	//pauses the program for viewing
 	system("PAUSE");
 

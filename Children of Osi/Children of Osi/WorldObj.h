@@ -1,13 +1,16 @@
 #pragma once
+#include <string>
 
 class WorldObj
 {
 public:
 	WorldObj();
-	WorldObj(int a);
+	WorldObj(int a, int rot, bool col);
 	~WorldObj();
 private:
 	int x;
+	int rotation;
+	bool collision;
 };
 
 class LivingObj :
@@ -15,10 +18,11 @@ class LivingObj :
 {
 public:
 	LivingObj();
-	LivingObj(int a,int b);
+	LivingObj(int a, int rot, bool col, int b, bool life);
 	~LivingObj();
 private:
 	int health;
+	bool alive;
 };
 
 class NPC :
@@ -26,7 +30,7 @@ class NPC :
 {
 public:
 	NPC();
-	NPC(int a, int b, int c);
+	NPC(int a, int rot, bool col, int b, bool life, int c);
 	~NPC();
 private:
 	int faction;
@@ -37,7 +41,7 @@ class Soldier :
 {
 public:
 	Soldier();
-	Soldier(int a, int b, int c, int d);
+	Soldier(int a, int rot, bool col, int b, bool life, int c, int d);
 	~Soldier();
 private:
 	int atk;
@@ -48,7 +52,7 @@ class SplSoldier :
 {
 public:
 	SplSoldier();
-	SplSoldier(int a, int b, int c, int d, int e);
+	SplSoldier(int a, int rot, bool col, int b, bool life, int c, int d, int e);
 	~SplSoldier();
 private:
 	int ase;
@@ -59,7 +63,7 @@ class Hero :
 {
 public:
 	Hero();
-	Hero(int a, int b, int c, int d, int e, int f);
+	Hero(int a, int rot, bool col, int b, bool life, int c, int d, int e, int f);
 	~Hero();
 private:
 	int affinity;
