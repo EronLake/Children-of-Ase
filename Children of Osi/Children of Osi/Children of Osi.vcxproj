@@ -112,9 +112,11 @@
   <ItemGroup>
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="TaskBuffer.cpp" />
+    <ClCompile Include="WorldObj.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TaskBuffer.h" />
+    <ClInclude Include="WorldObj.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -5,6 +5,7 @@
 //------------------------------
 
 #include <iostream>
+#include "WorldObj.h"
 
 //toggles debug longging statements 
 #define DEBUG 1
@@ -19,7 +20,7 @@
 int main() {
 
 	LOG("Hello world!");
-
+	Hero person(20,100,5,10,40,64);
 	//pauses the program for viewing
 	system("PAUSE");
 
