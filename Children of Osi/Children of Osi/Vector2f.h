@@ -1,0 +1,17 @@
+#pragma once
+class Vector2f
+{
+public:
+	Vector2f();
+	Vector2f(float x, float y);
+	~Vector2f();
+	void setXloc(float x);
+	void setYloc(float y);
+	float getXloc();
+	float getYloc();
+
+private:
+	float xloc;
+	float yloc;
+};
+

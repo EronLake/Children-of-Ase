@@ -13,12 +13,12 @@ WorldObj::WorldObj()
 
 WorldObj::WorldObj(float x, float y, bool col)
 {
-	xloc = x;
-	yloc = y;
+	loc.setXloc(x);
+	loc.setYloc(y);
 	rotation = 0;
 	collision = col;
-	cout <<"X-Loc: "<< xloc << endl;
-	cout << "Y-Loc: " << yloc << endl;
+	cout <<"X-Loc: "<< loc.getXloc() << endl;
+	cout << "Y-Loc: " << loc.getYloc() << endl;
 	cout << "Rotation: " << rotation << endl;
 	cout << "Collision: " << collision << endl;
 }

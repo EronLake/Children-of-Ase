@@ -6,6 +6,7 @@
 
 #include <iostream>
 #include "WorldObj.h"
+#include "Vector2f.h"
 
 //toggles debug longging statements 
 #define DEBUG 1

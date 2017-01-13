@@ -1,5 +1,6 @@
 #pragma once
 #include <string>
+#include "Vector2f.h"
 
 class WorldObj
 {
@@ -8,8 +9,7 @@ public:
 	WorldObj(float x,float y, bool col);
 	~WorldObj();
 private:
-	float xloc;
-	float yloc;
+	Vector2f loc;
 	int rotation;
 	bool collision;
 };
