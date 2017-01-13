@@ -17,10 +17,17 @@
 
 #endif
 
+using namespace std;
+
 int main() {
 
 	LOG("Hello world!");
-	Hero person(20,0,true,100,true,5,10,40,64);
+	Hero person(20,0,true);
+	person.setHealth(-10);
+	person.setAlive(false);
+	int he = person.getHealth();
+	bool al = person.getAlive();
+	cout << "person is " << al << " with " << he << endl;
 	//pauses the program for viewing
 	system("PAUSE");
 

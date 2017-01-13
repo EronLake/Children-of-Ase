@@ -11,12 +11,14 @@ WorldObj::WorldObj()
 {
 }
 
-WorldObj::WorldObj(int a, int rot, bool col)
+WorldObj::WorldObj(float x, float y, bool col)
 {
-	x = a;
-	rotation = rot;
+	xloc = x;
+	yloc = y;
+	rotation = 0;
 	collision = col;
-	cout <<"Xpos: "<< x << endl;
+	cout <<"X-Loc: "<< xloc << endl;
+	cout << "Y-Loc: " << yloc << endl;
 	cout << "Rotation: " << rotation << endl;
 	cout << "Collision: " << collision << endl;
 }
@@ -29,10 +31,10 @@ LivingObj::LivingObj()
 {
 }
 
-LivingObj::LivingObj(int a, int rot, bool col, int b, bool life): WorldObj(a,rot,col)
+LivingObj::LivingObj(float x, float y, bool col): WorldObj(x,y,col)
 {
-	health = b;
-	alive = life;
+	health = 1;
+	alive = true;
 	cout <<"Health: "<< health << endl;
 	cout <<"Alive: " << alive << endl;
 }
@@ -41,13 +43,33 @@ LivingObj::~LivingObj()
 {
 }
 
+int LivingObj::getHealth()
+{
+	return health;
+}
+
+void LivingObj::setHealth(int h)
+{
+	health=h;
+}
+
+bool LivingObj::getAlive()
+{
+	return alive;
+}
+
+void LivingObj::setAlive(bool v)
+{
+	alive=v;
+}
+
 NPC::NPC()
 {
 }
 
-NPC::NPC(int a, int rot, bool col,  int b, bool life, int c):LivingObj(a, rot, col,b,life)
+NPC::NPC(float x, float y, bool col):LivingObj(x,y, col)
 {
-	faction = c;
+	faction = 0;
 	cout <<"Faction: "<< faction << endl;
 }
 
@@ -59,9 +81,9 @@ Soldier::Soldier()
 {
 }
 
-Soldier::Soldier(int a, int rot, bool col, int b, bool life, int c, int d) :NPC(a, rot, col, b,life,c)
+Soldier::Soldier(float x, float y, bool col) :NPC(x, y, col)
 {
-	atk = d;
+	atk = 1;
 	cout <<"Attack: "<< atk << endl;
 }
 
@@ -73,9 +95,9 @@ SplSoldier::SplSoldier()
 {
 }
 
-SplSoldier::SplSoldier(int a, int rot, bool col, int b, bool life, int c, int d, int e) :Soldier(a, rot, col, b,life, c,d)
+SplSoldier::SplSoldier(float x, float y, bool col) :Soldier(x, y, col)
 {
-	ase = e;
+	ase = 10;
 	cout <<"Ase: "<< ase << endl;
 }
 
@@ -87,9 +109,9 @@ Hero::Hero()
 {
 }
 
-Hero::Hero(int a, int rot, bool col, int b, bool life, int c, int d, int e,int f) :SplSoldier(a, rot, col, b,life, c, d,e)
+Hero::Hero(float x, float y, bool col) :SplSoldier(x, y, col)
 {
-	affinity = f;
+	affinity = 0;
 	cout << "Affinity: "<<affinity<< endl;
 }
 

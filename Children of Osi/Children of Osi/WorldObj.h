@@ -5,10 +5,11 @@ class WorldObj
 {
 public:
 	WorldObj();
-	WorldObj(int a, int rot, bool col);
+	WorldObj(float x,float y, bool col);
 	~WorldObj();
 private:
-	int x;
+	float xloc;
+	float yloc;
 	int rotation;
 	bool collision;
 };
@@ -18,8 +19,12 @@ class LivingObj :
 {
 public:
 	LivingObj();
-	LivingObj(int a, int rot, bool col, int b, bool life);
+	LivingObj(float x, float y, bool col);
 	~LivingObj();
+	int getHealth();
+	void setHealth(int h);
+	bool getAlive();
+	void setAlive(bool v);
 private:
 	int health;
 	bool alive;
@@ -30,7 +35,7 @@ class NPC :
 {
 public:
 	NPC();
-	NPC(int a, int rot, bool col, int b, bool life, int c);
+	NPC(float x, float y, bool col);
 	~NPC();
 private:
 	int faction;
@@ -41,7 +46,7 @@ class Soldier :
 {
 public:
 	Soldier();
-	Soldier(int a, int rot, bool col, int b, bool life, int c, int d);
+	Soldier(float x, float y, bool col);
 	~Soldier();
 private:
 	int atk;
@@ -52,7 +57,7 @@ class SplSoldier :
 {
 public:
 	SplSoldier();
-	SplSoldier(int a, int rot, bool col, int b, bool life, int c, int d, int e);
+	SplSoldier(float x, float y, bool col);
 	~SplSoldier();
 private:
 	int ase;
@@ -63,7 +68,7 @@ class Hero :
 {
 public:
 	Hero();
-	Hero(int a, int rot, bool col, int b, bool life, int c, int d, int e, int f);
+	Hero(float x, float y, bool col);
 	~Hero();
 private:
 	int affinity;
