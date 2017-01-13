@@ -2,7 +2,6 @@
 #include <iostream>
 #include <string>
 
-
 using namespace std;
 
 
@@ -15,16 +14,47 @@ WorldObj::WorldObj(float x, float y, bool col)
 {
 	loc.setXloc(x);
 	loc.setYloc(y);
-	rotation = 0;
+	rotation.setXloc(1);
+	rotation.setYloc(1);
 	collision = col;
 	cout <<"X-Loc: "<< loc.getXloc() << endl;
 	cout << "Y-Loc: " << loc.getYloc() << endl;
-	cout << "Rotation: " << rotation << endl;
+	cout << "Rotation: " << rotation.getXloc()<<" , " << rotation.getYloc()<< endl;
 	cout << "Collision: " << collision << endl;
 }
 
 WorldObj::~WorldObj()
 {
+}
+
+Vector2f WorldObj::getLoc()
+{
+	return loc;
+}
+
+Vector2f WorldObj::getRot()
+{
+	return rotation;
+}
+
+void WorldObj::setLoc(Vector2f l)
+{
+	loc = l;
+}
+
+void WorldObj::setRot(Vector2f r)
+{
+	rotation = r;
+}
+
+void WorldObj::setCollision(bool c)
+{
+	collision = c;
+}
+
+bool WorldObj::getCollision()
+{
+	return collision;
 }
 
 LivingObj::LivingObj()
@@ -91,6 +121,16 @@ Soldier::~Soldier()
 {
 }
 
+void Soldier::setAtk(int a)
+{
+	atk = a;
+}
+
+int Soldier::getAtk()
+{
+	return atk;
+}
+
 SplSoldier::SplSoldier()
 {
 }
@@ -103,6 +143,16 @@ SplSoldier::SplSoldier(float x, float y, bool col) :Soldier(x, y, col)
 
 SplSoldier::~SplSoldier()
 {
+}
+
+void SplSoldier::setAse(int a)
+{
+	ase = a;
+}
+
+int SplSoldier::getAse()
+{
+	return ase;
 }
 
 Hero::Hero()

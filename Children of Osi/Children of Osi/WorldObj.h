@@ -8,9 +8,15 @@ public:
 	WorldObj();
 	WorldObj(float x,float y, bool col);
 	~WorldObj();
+	void setLoc(Vector2f l);
+	Vector2f getLoc();
+	void setRot(Vector2f r);
+	Vector2f getRot();
+	void setCollision(bool c);
+	bool getCollision();
 private:
 	Vector2f loc;
-	int rotation;
+	Vector2f rotation;
 	bool collision;
 };
 
@@ -48,6 +54,8 @@ public:
 	Soldier();
 	Soldier(float x, float y, bool col);
 	~Soldier();
+	int getAtk();
+	void setAtk(int a);
 private:
 	int atk;
 };
@@ -59,6 +67,8 @@ public:
 	SplSoldier();
 	SplSoldier(float x, float y, bool col);
 	~SplSoldier();
+	int getAse();
+	void setAse(int a);
 private:
 	int ase;
 };

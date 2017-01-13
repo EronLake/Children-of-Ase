@@ -7,6 +7,7 @@
 #include <iostream>
 #include "WorldObj.h"
 #include "Vector2f.h"
+#include "Player.h"
 
 //toggles debug longging statements 
 #define DEBUG 1
@@ -26,9 +27,9 @@ int main() {
 	Hero person(20,0,true);
 	person.setHealth(-10);
 	person.setAlive(false);
-	int he = person.getHealth();
-	bool al = person.getAlive();
-	cout << "person is " << al << " with " << he << endl;
+	cout << "person is " << person.getAlive() << " with " << person.getHealth() << endl;
+	cout<<"at location " << person.getLoc().getXloc() << " , " << person.getLoc().getYloc() << endl;
+	Player me(30, 32, true);
 	//pauses the program for viewing
 	system("PAUSE");
 
