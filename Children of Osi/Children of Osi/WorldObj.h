@@ -18,6 +18,12 @@ public:
 	void shiftY(float dist);
 	void setRot(Vector2f r);
 	Vector2f getRot();
+	void setRotX(float x);
+	void setRotY(float y);
+	float getRotX();
+	float getRotY();
+	void shiftRotX(float dist);
+	void shiftRotY(float dist);	
 	void setCollision(bool c);
 	bool getCollision();
 	//void setName(string n);

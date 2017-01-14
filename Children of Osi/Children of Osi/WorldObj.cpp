@@ -32,6 +32,11 @@ Vector2f WorldObj::getLoc()
 	return loc;
 }
 
+void WorldObj::setLoc(Vector2f l)
+{
+	loc = l;
+}
+
 float WorldObj::getX()
 {
 	return loc.getXloc();
@@ -67,9 +72,34 @@ Vector2f WorldObj::getRot()
 	return rotation;
 }
 
-void WorldObj::setLoc(Vector2f l)
+float WorldObj::getRotX()
 {
-	loc = l;
+	return rotation.getXloc();
+}
+
+void WorldObj::setRotX(float x)
+{
+	rotation.setXloc(x);
+}
+
+float WorldObj::getRotY()
+{
+	return rotation.getYloc();
+}
+
+void WorldObj::setRotY(float y)
+{
+	rotation.setYloc(y);
+}
+
+void WorldObj::shiftRotX(float dist)
+{
+	rotation.shiftXloc(dist);
+}
+
+void WorldObj::shiftRotY(float dist)
+{
+	rotation.shiftYloc(dist);
 }
 
 void WorldObj::setRot(Vector2f r)
