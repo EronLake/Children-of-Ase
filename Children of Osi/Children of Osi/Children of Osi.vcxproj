@@ -110,14 +110,24 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Hero.cpp" />
+    <ClCompile Include="LivingObj.cpp" />
     <ClCompile Include="Main.cpp" />
+    <ClCompile Include="NPC.cpp" />
     <ClCompile Include="Player.cpp" />
+    <ClCompile Include="Soldier.cpp" />
+    <ClCompile Include="SplSoldier.cpp" />
     <ClCompile Include="TaskBuffer.cpp" />
     <ClCompile Include="Vector2f.cpp" />
     <ClCompile Include="WorldObj.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Hero.h" />
+    <ClInclude Include="LivingObj.h" />
+    <ClInclude Include="NPC.h" />
     <ClInclude Include="Player.h" />
+    <ClInclude Include="Soldier.h" />
+    <ClInclude Include="SplSoldier.h" />
     <ClInclude Include="TaskBuffer.h" />
     <ClInclude Include="Vector2f.h" />
     <ClInclude Include="WorldObj.h" />

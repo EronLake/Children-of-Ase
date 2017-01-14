@@ -1,5 +1,5 @@
 #pragma once
-#include "WorldObj.h"
+#include "LivingObj.h"
 class Player :
 	public LivingObj
 {

@@ -6,6 +6,11 @@
 
 #include <iostream>
 #include "WorldObj.h"
+#include "LivingObj.h"
+#include "NPC.h"
+#include "Soldier.h"
+#include "SplSoldier.h"
+#include "Hero.h"
 #include "Vector2f.h"
 #include "Player.h"
 
@@ -34,10 +39,10 @@ int main() {
 	system("PAUSE");
 
 	//demonstration of a meory leak
-	while (true) {
+	/*while (true) {
 		void* a = malloc(64);
 		delete a;
-	}
+	}*/
 
 	return 0;
 }

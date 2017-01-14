@@ -57,114 +57,13 @@ bool WorldObj::getCollision()
 	return collision;
 }
 
-LivingObj::LivingObj()
+/*void WorldObj::setName(string na)
 {
+	name=na;
 }
 
-LivingObj::LivingObj(float x, float y, bool col): WorldObj(x,y,col)
+string WorldObj::getName()
 {
-	health = 1;
-	alive = true;
-	cout <<"Health: "<< health << endl;
-	cout <<"Alive: " << alive << endl;
+	return name;
 }
-
-LivingObj::~LivingObj()
-{
-}
-
-int LivingObj::getHealth()
-{
-	return health;
-}
-
-void LivingObj::setHealth(int h)
-{
-	health=h;
-}
-
-bool LivingObj::getAlive()
-{
-	return alive;
-}
-
-void LivingObj::setAlive(bool v)
-{
-	alive=v;
-}
-
-NPC::NPC()
-{
-}
-
-NPC::NPC(float x, float y, bool col):LivingObj(x,y, col)
-{
-	faction = 0;
-	cout <<"Faction: "<< faction << endl;
-}
-
-NPC::~NPC()
-{
-}
-
-Soldier::Soldier()
-{
-}
-
-Soldier::Soldier(float x, float y, bool col) :NPC(x, y, col)
-{
-	atk = 1;
-	cout <<"Attack: "<< atk << endl;
-}
-
-Soldier::~Soldier()
-{
-}
-
-void Soldier::setAtk(int a)
-{
-	atk = a;
-}
-
-int Soldier::getAtk()
-{
-	return atk;
-}
-
-SplSoldier::SplSoldier()
-{
-}
-
-SplSoldier::SplSoldier(float x, float y, bool col) :Soldier(x, y, col)
-{
-	ase = 10;
-	cout <<"Ase: "<< ase << endl;
-}
-
-SplSoldier::~SplSoldier()
-{
-}
-
-void SplSoldier::setAse(int a)
-{
-	ase = a;
-}
-
-int SplSoldier::getAse()
-{
-	return ase;
-}
-
-Hero::Hero()
-{
-}
-
-Hero::Hero(float x, float y, bool col) :SplSoldier(x, y, col)
-{
-	affinity = 0;
-	cout << "Affinity: "<<affinity<< endl;
-}
-
-Hero::~Hero()
-{
-}
+*/
