@@ -110,6 +110,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Factions.cpp" />
     <ClCompile Include="Hero.cpp" />
     <ClCompile Include="LivingObj.cpp" />
     <ClCompile Include="Main.cpp" />
@@ -122,6 +123,7 @@
     <ClCompile Include="WorldObj.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Factions.h" />
     <ClInclude Include="Hero.h" />
     <ClInclude Include="LivingObj.h" />
     <ClInclude Include="NPC.h" />

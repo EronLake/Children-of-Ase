@@ -27,3 +27,9 @@ int Soldier::getAtk()
 {
 	return atk;
 }
+
+void Soldier::goAtk(LivingObj *target)
+{
+	(*target).addHealth(-atk);
+	cout << "attack for: " << atk << endl;
+}

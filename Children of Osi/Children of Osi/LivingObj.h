@@ -14,6 +14,7 @@ public:
 	void setHealth(int h);
 	bool getAlive();
 	void setAlive(bool v);
+	void addHealth(int h);
 private:
 	int health;
 	bool alive;

@@ -11,5 +11,6 @@ public:
 	void setAse(int a);
 private:
 	int ase;
+	int attacks[3];
 };
 

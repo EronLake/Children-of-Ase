@@ -9,6 +9,7 @@ public:
 	~Soldier();
 	int getAtk();
 	void setAtk(int a);
+	void goAtk(LivingObj *target);
 private:
 	int atk;
 };

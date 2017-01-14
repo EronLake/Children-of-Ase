@@ -17,3 +17,13 @@ NPC::NPC(float x, float y, bool col) :LivingObj(x, y, col)
 NPC::~NPC()
 {
 }
+
+void NPC::setFaction(int f)
+{
+	faction=f;
+}
+
+int NPC::getFaction()
+{
+	return faction;
+}

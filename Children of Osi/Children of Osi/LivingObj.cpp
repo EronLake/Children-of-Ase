@@ -38,3 +38,10 @@ void LivingObj::setAlive(bool v)
 {
 	alive = v;
 }
+
+void LivingObj::addHealth(int h)
+{
+	cout << health << " + "<< endl;
+	health += h;
+	cout << h << " = " << health << endl;
+}
