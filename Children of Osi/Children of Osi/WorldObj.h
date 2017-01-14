@@ -10,6 +10,12 @@ public:
 	~WorldObj();
 	void setLoc(Vector2f l);
 	Vector2f getLoc();
+	void setX(float x);
+	void setY(float y);
+	float getX();
+	float getY();
+	void shiftX(float dist);
+	void shiftY(float dist);
 	void setRot(Vector2f r);
 	Vector2f getRot();
 	void setCollision(bool c);

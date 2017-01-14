@@ -42,7 +42,7 @@ int main() {
 	person.setHealth(-10);
 	person.setAlive(false);
 	cout << "person is " << person.getAlive() << " with " << person.getHealth() << endl;
-	cout<<"at location " << person.getLoc().getXloc() << " , " << person.getLoc().getYloc() << endl;
+	cout<<"at location " << person.getX() << " , " << person.getY() << endl;
 	Player me(30, 32, true);
 	NPC citizen(22, 2, true);
 	citizen.setHealth(10);
@@ -52,6 +52,9 @@ int main() {
 	cout << fac.getFRel(citizen.getFaction(), person.getFaction()) << endl;
 	fac.setFRel(citizen.getFaction(), person.getFaction(), -1);
 	cout << fac.getFRel(citizen.getFaction(), person.getFaction()) << endl;
+	citizen.shiftX(2);
+	citizen.shiftY(3);
+	cout << "citizen is now at: " << citizen.getX() << " , " << citizen.getY() << endl;
 	//pauses the program for viewing
 	system("PAUSE");
 

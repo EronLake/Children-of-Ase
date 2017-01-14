@@ -35,3 +35,13 @@ void Vector2f::setYloc(float y)
 {
 	yloc = y;
 }
+
+void Vector2f::shiftXloc(float dist)
+{
+	xloc += dist;
+}
+
+void Vector2f::shiftYloc(float dist)
+{
+	yloc += dist;
+}

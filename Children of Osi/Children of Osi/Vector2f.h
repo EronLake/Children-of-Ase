@@ -9,7 +9,8 @@ public:
 	void setYloc(float y);
 	float getXloc();
 	float getYloc();
-
+	void shiftXloc(float dist);
+	void shiftYloc(float dist);
 private:
 	float xloc;
 	float yloc;

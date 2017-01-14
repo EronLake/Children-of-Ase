@@ -1,11 +1,3 @@
-﻿  Main.cpp
-c:\users\acalb\desktop\childrenosi\children-of-osi\children of osi\children of osi\main.cpp(35): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
-  Factions.cpp
-  Generating Code...
-  Skipping... (no relevant changes detected)
-  SplSoldier.cpp
-  Soldier.cpp
-  NPC.cpp
-  Hero.cpp
+﻿  WorldObj.cpp
   Children of Osi.vcxproj -> C:\Users\acalb\Desktop\ChildrenOsi\Children-of-Osi\Children of Osi\Debug\Children of Osi.exe
   Children of Osi.vcxproj -> C:\Users\acalb\Desktop\ChildrenOsi\Children-of-Osi\Children of Osi\Debug\Children of Osi.pdb (Partial PDB)
