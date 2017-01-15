@@ -18,6 +18,8 @@
 #include "Player.h"
 #include "Factions.h"
 #include <crtdbg.h>
+#include "Rectangle.h"
+#include "QuadTree.h"
 #define _CRTDBG_MAP_ALLOC
 
 //toggles debug longging statements 
@@ -71,6 +73,12 @@ int main() {
 	}*/
 	_CrtSetReportMode(_CRT_ERROR, _CRTDBG_MODE_DEBUG);
 	_CrtDumpMemoryLeaks();
+
+
+	//Alex: test QT tomorrow on hero obj, and make QT generic to take in any obj
+
+
+
 	return 0;
 }
 

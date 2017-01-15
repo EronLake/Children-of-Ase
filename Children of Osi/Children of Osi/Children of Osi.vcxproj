@@ -116,6 +116,8 @@
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="NPC.cpp" />
     <ClCompile Include="Player.cpp" />
+    <ClCompile Include="QuadTree.cpp" />
+    <ClCompile Include="Rectangle.h" />
     <ClCompile Include="Soldier.cpp" />
     <ClCompile Include="SplSoldier.cpp" />
     <ClCompile Include="TaskBuffer.cpp" />
@@ -128,11 +130,16 @@
     <ClInclude Include="LivingObj.h" />
     <ClInclude Include="NPC.h" />
     <ClInclude Include="Player.h" />
+    <ClInclude Include="QuadTree.h" />
+    <ClInclude Include="resource.h" />
     <ClInclude Include="Soldier.h" />
     <ClInclude Include="SplSoldier.h" />
     <ClInclude Include="TaskBuffer.h" />
     <ClInclude Include="Vector2f.h" />
     <ClInclude Include="WorldObj.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="Children of Osi.rc" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
