@@ -117,6 +117,16 @@ bool WorldObj::getCollision()
 	return collision;
 }
 
+void WorldObj::setInteractable(bool i)
+{
+	interactable = i;
+}
+
+bool WorldObj::getInteractable()
+{
+	return interactable;
+}
+
 /*void WorldObj::setName(string na)
 {
 	name=na;

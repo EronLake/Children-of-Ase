@@ -17,6 +17,8 @@
 #include "Vector2f.h"
 #include "Player.h"
 #include "Factions.h"
+#include <crtdbg.h>
+#define _CRTDBG_MAP_ALLOC
 
 //toggles debug longging statements 
 #define DEBUG 1
@@ -46,12 +48,16 @@ int main() {
 	Player me(30, 32, true);
 	NPC citizen(22, 2, true);
 	citizen.setHealth(10);
+	citizen.setInteractable(true);
+	cout << "Interactable: " << citizen.getInteractable() << endl;
 	person.setAtk(2);
+	person.setInCombat(true);
+	cout <<"In Combat: " <<person.getInCombat()<< endl;
 	person.goAtk(&citizen);
 	cout << "Citizen's Health: " << citizen.getHealth() << endl;
-	cout << fac.getFRel(citizen.getFaction(), person.getFaction()) << endl;
+	cout << "Faction Relationship was: "<<fac.getFRel(citizen.getFaction(), person.getFaction()) << endl;
 	fac.setFRel(citizen.getFaction(), person.getFaction(), -1);
-	cout << fac.getFRel(citizen.getFaction(), person.getFaction()) << endl;
+	cout << "Faction Relationship now: " << fac.getFRel(citizen.getFaction(), person.getFaction()) << endl;
 	citizen.shiftX(2);
 	citizen.shiftY(3);
 	cout << "citizen is now at: " << citizen.getX() << " , " << citizen.getY() << endl;
@@ -63,7 +69,8 @@ int main() {
 		void* a = malloc(64);
 		delete a;
 	}*/
-
+	_CrtSetReportMode(_CRT_ERROR, _CRTDBG_MODE_DEBUG);
+	_CrtDumpMemoryLeaks();
 	return 0;
 }
 

@@ -26,12 +26,15 @@ public:
 	void shiftRotY(float dist);	
 	void setCollision(bool c);
 	bool getCollision();
+	void setInteractable(bool i);
+	bool getInteractable();
 	//void setName(string n);
 	//string getName();
 private:
 	Vector2f loc;
 	Vector2f rotation;
 	bool collision;
+	bool interactable;
 	//string name;
 };
 

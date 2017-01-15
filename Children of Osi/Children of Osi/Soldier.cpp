@@ -33,3 +33,13 @@ void Soldier::goAtk(LivingObj *target)
 	(*target).addHealth(-atk);
 	cout << "attack for: " << atk << endl;
 }
+
+void Soldier::setInCombat(bool c)
+{
+	inCombat=c;
+}
+
+bool Soldier::getInCombat()
+{
+	return inCombat;
+}
