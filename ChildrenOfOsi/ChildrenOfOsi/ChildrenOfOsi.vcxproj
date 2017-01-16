@@ -156,8 +156,6 @@
     <ClInclude Include="resource.h" />
     <ClInclude Include="Soldier.h" />
     <ClInclude Include="SplSoldier.h" />
-    <ClInclude Include="stdafx.h" />
-    <ClInclude Include="targetver.h" />
     <ClInclude Include="TaskBuffer.h" />
     <ClInclude Include="Vector2f.h" />
     <ClInclude Include="WorldObj.h" />
@@ -173,12 +171,6 @@
     <ClCompile Include="QuadTree.cpp" />
     <ClCompile Include="Soldier.cpp" />
     <ClCompile Include="SplSoldier.cpp" />
-    <ClCompile Include="stdafx.cpp">
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
-    </ClCompile>
     <ClCompile Include="TaskBuffer.cpp" />
     <ClCompile Include="Vector2f.cpp" />
     <ClCompile Include="WorldObj.cpp" />
