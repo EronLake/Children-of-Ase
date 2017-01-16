@@ -1,18 +1,7 @@
-﻿  WorldObj.cpp
-  Vector2f.cpp
-  TaskBuffer.cpp
-  SplSoldier.cpp
-  Soldier.cpp
-  Rectangle.h
-  QuadTree.cpp
-  Player.cpp
-  NPC.cpp
-  Main.cpp
-c:\users\acalb\desktop\childrenosi\children-of-osi\children of osi\children of osi\main.cpp(39): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
-  LivingObj.cpp
-  Hero.cpp
-  Factions.cpp
-  Generating Code...
-  LINK : C:\Users\acalb\Desktop\ChildrenOsi\Children-of-Osi\Children of Osi\Debug\Children of Osi.exe not found or not built by the last incremental link; performing full link
-  Children of Osi.vcxproj -> C:\Users\acalb\Desktop\ChildrenOsi\Children-of-Osi\Children of Osi\Debug\Children of Osi.exe
-  Children of Osi.vcxproj -> C:\Users\acalb\Desktop\ChildrenOsi\Children-of-Osi\Children of Osi\Debug\Children of Osi.pdb (Partial PDB)
+﻿  movement.cpp
+c:\users\aou4\documents\children-of-osi\children of osi\children of osi\movement.cpp(10): warning C4305: 'argument': truncation from 'double' to 'float'
+c:\users\aou4\documents\children-of-osi\children of osi\children of osi\movement.cpp(14): warning C4305: 'argument': truncation from 'double' to 'float'
+c:\users\aou4\documents\children-of-osi\children of osi\children of osi\movement.cpp(18): warning C4305: 'argument': truncation from 'double' to 'float'
+c:\users\aou4\documents\children-of-osi\children of osi\children of osi\movement.cpp(22): warning C4305: 'argument': truncation from 'double' to 'float'
+  Children of Osi.vcxproj -> C:\Users\aou4\Documents\Children-of-Osi\Children of Osi\Debug\Children of Osi.exe
+  Children of Osi.vcxproj -> C:\Users\aou4\Documents\Children-of-Osi\Children of Osi\Debug\Children of Osi.pdb (Partial PDB)

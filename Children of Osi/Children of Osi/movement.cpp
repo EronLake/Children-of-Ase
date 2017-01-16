@@ -1,6 +1,5 @@
 #pragma comment(lib, "user32.lib")
 #include "common.h"
-#include "movement.h"
 #include "Player.h"
 #include <Windows.h>
 
@@ -23,13 +22,4 @@ void movePlayer(Player player) {
 		player.shiftX(.1);
 		cout << "\nX: " << player.getX() << " Y: " << player.getY();
 	}
-}
-
-int main() {
-	bool loopGame = true;
-	Player shango(10, 10, true);
-	while (loopGame) {
-		movePlayer(shango);
-	}
-
 }
