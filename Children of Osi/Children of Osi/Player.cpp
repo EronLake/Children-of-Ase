@@ -6,7 +6,7 @@ Player::Player()
 {
 }
 
-Player::Player(float x, float y, bool col):LivingObj(x,y,col)
+Player::Player(float x, float y, bool col):Hero(x,y,col)
 {
 }
 

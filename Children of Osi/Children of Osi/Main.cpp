@@ -18,7 +18,7 @@
 #include "Player.h"
 #include "Factions.h"
 #include <crtdbg.h>
-#include "Rectangle.h"
+//#include "Rectangle.h"
 #include "QuadTree.h"
 #define _CRTDBG_MAP_ALLOC
 

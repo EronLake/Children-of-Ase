@@ -1,7 +1,7 @@
 #pragma once
-#include "LivingObj.h"
+#include "Hero.h"
 class Player :
-	public LivingObj
+	public Hero
 {
 public:
 	Player();

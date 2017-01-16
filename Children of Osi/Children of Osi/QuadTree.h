@@ -4,8 +4,6 @@
 
 using namespace std;
 
-class Rectangle;
-
 class QuadTree
 {
 private:
