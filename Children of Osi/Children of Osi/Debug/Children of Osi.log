@@ -1,7 +1,0 @@
-﻿  movement.cpp
-c:\users\aou4\documents\children-of-osi\children of osi\children of osi\movement.cpp(10): warning C4305: 'argument': truncation from 'double' to 'float'
-c:\users\aou4\documents\children-of-osi\children of osi\children of osi\movement.cpp(14): warning C4305: 'argument': truncation from 'double' to 'float'
-c:\users\aou4\documents\children-of-osi\children of osi\children of osi\movement.cpp(18): warning C4305: 'argument': truncation from 'double' to 'float'
-c:\users\aou4\documents\children-of-osi\children of osi\children of osi\movement.cpp(22): warning C4305: 'argument': truncation from 'double' to 'float'
-  Children of Osi.vcxproj -> C:\Users\aou4\Documents\Children-of-Osi\Children of Osi\Debug\Children of Osi.exe
-  Children of Osi.vcxproj -> C:\Users\aou4\Documents\Children-of-Osi\Children of Osi\Debug\Children of Osi.pdb (Partial PDB)
