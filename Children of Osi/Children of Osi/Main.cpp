@@ -60,6 +60,8 @@ int main() {
 	cout << "Faction Relationship was: "<<fac.getFRel(citizen.getFaction(), person.getFaction()) << endl;
 	fac.setFRel(citizen.getFaction(), person.getFaction(), -1);
 	cout << "Faction Relationship now: " << fac.getFRel(citizen.getFaction(), person.getFaction()) << endl;
+	citizen.setSpeed(2);
+	cout << "Speed: " << citizen.getSpeed() << endl;
 	citizen.shiftX(2);
 	citizen.shiftY(3);
 	cout << "citizen is now at: " << citizen.getX() << " , " << citizen.getY() << endl;

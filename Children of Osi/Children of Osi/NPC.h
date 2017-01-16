@@ -11,7 +11,10 @@ public:
 	~NPC();
 	void setFaction(int f);
 	int getFaction();
+	void setSpeed(float);
+	float getSpeed();
 private:
 	int faction;
+	float speed;
 };
 

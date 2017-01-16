@@ -27,3 +27,14 @@ int NPC::getFaction()
 {
 	return faction;
 }
+
+void NPC::setSpeed(float s)
+{
+	speed=s;
+}
+
+float NPC::getSpeed()
+{
+	return speed;
+}
+
