@@ -156,7 +156,9 @@
     <ClInclude Include="resource.h" />
     <ClInclude Include="Soldier.h" />
     <ClInclude Include="SplSoldier.h" />
+    <ClInclude Include="Sprite.h" />
     <ClInclude Include="TaskBuffer.h" />
+    <ClInclude Include="Texture.h" />
     <ClInclude Include="Vector2f.h" />
     <ClInclude Include="WorldObj.h" />
   </ItemGroup>
@@ -171,7 +173,9 @@
     <ClCompile Include="QuadTree.cpp" />
     <ClCompile Include="Soldier.cpp" />
     <ClCompile Include="SplSoldier.cpp" />
+    <ClCompile Include="Sprite.cpp" />
     <ClCompile Include="TaskBuffer.cpp" />
+    <ClCompile Include="Texture.cpp" />
     <ClCompile Include="Vector2f.cpp" />
     <ClCompile Include="WorldObj.cpp" />
   </ItemGroup>
