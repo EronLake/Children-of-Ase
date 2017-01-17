@@ -38,3 +38,22 @@ float NPC::getSpeed()
 	return speed;
 }
 
+void NPC::moveRight()
+{
+	(*this).shiftX(speed);
+}
+
+void NPC::moveLeft()
+{
+	(*this).shiftX(-speed);
+}
+
+void NPC::moveUp()
+{
+	(*this).shiftY(speed);
+}
+
+void NPC::moveDown()
+{
+	(*this).shiftY(-speed);
+}

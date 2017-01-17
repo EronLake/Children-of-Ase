@@ -13,6 +13,10 @@ public:
 	int getFaction();
 	void setSpeed(float);
 	float getSpeed();
+	void moveRight();
+	void moveLeft();
+	void moveUp();
+	void moveDown();
 private:
 	int faction;
 	float speed;

@@ -64,6 +64,8 @@ int main() {
 	cout << "Speed: " << citizen.getSpeed() << endl;
 	citizen.shiftX(2);
 	citizen.shiftY(3);
+	citizen.moveUp();
+	citizen.moveRight();
 	cout << "citizen is now at: " << citizen.getX() << " , " << citizen.getY() << endl;
 	//pauses the program for viewing
 	system("PAUSE");
