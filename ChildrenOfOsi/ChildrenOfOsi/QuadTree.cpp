@@ -5,6 +5,7 @@ QuadTree::QuadTree(unsigned int p_treelv, Rectangle * p_bounds)
 {
 	treelv = p_treelv;
 	bounds = p_bounds;
+	for(int i=0;i<4;i++) { nodes.push_back(nullptr); }
 }
 
 QuadTree::~QuadTree()
@@ -25,24 +26,24 @@ void QuadTree::clear()
 void QuadTree::split()
 {
 	float swidth = bounds->getWidth() / 2;
-	float slength = bounds->getHeight() / 2;
+	float sheight = bounds->getHeight() / 2;
 	float x = bounds->getX();
 	float y = bounds->getY();
 
-	nodes[0] = new QuadTree(treelv + 1, new Rectangle(Vector2f((x + swidth),y), swidth, slength));
-	nodes[1] = new QuadTree(treelv + 1, new Rectangle(Vector2f(x, y), swidth, slength));
-	nodes[2] = new QuadTree(treelv + 1, new Rectangle(Vector2f(x, (y + slength)), swidth, slength));
-	nodes[3] = new QuadTree(treelv + 1, new Rectangle(Vector2f((x + swidth), (y+ slength)), swidth, slength));
+	nodes[0] = new QuadTree(treelv + 1, new Rectangle(Vector2f((x + swidth),y), swidth, sheight));
+	nodes[1] = new QuadTree(treelv + 1, new Rectangle(Vector2f(x, y), swidth, sheight));
+	nodes[2] = new QuadTree(treelv + 1, new Rectangle(Vector2f(x, (y + sheight)), swidth, sheight));
+	nodes[3] = new QuadTree(treelv + 1, new Rectangle(Vector2f((x + swidth), (y+ sheight)), swidth, sheight));
 }
 
 int QuadTree::getIndex(Rectangle * myrec)
 {
 	//int index = -1;	//obj belongs in parent node
-	double vertMdPt = bounds->getX() + bounds->getWidth() / 2;
-	double horiMdPt = bounds->getY() + bounds->getHeight() / 2;
-	bool fitTop = (myrec->getY() < horiMdPt && myrec->getHeight() < horiMdPt);
-	bool fitBot = (myrec->getX() > horiMdPt);
-	if (myrec->getX() < vertMdPt && myrec->getWidth() < vertMdPt) {		//fit in the left quadrants
+	double vertMdPt = bounds->getX() + (bounds->getWidth() / 2);
+	double horiMdPt = bounds->getY() + (bounds->getHeight() / 2);
+	bool fitTop = (myrec->getY() < horiMdPt && (myrec->getY() + myrec->getHeight()) < horiMdPt);
+	bool fitBot = (myrec->getY() > horiMdPt);
+	if (myrec->getX() < vertMdPt && (myrec->getX() + myrec->getWidth()) < vertMdPt) {		//fit in the left quadrants
 		if (fitTop) {
 			return 1;
 		}

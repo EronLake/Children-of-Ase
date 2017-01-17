@@ -7,8 +7,8 @@ using namespace std;
 class QuadTree
 {
 private:
-	unsigned int maxObj = 100;
-	unsigned int maxLevel = 10;
+	unsigned int maxObj = 10;
+	unsigned int maxLevel = 5;
 	unsigned int treelv;
 	Rectangle* bounds;
 	vector<Rectangle*> objs;
