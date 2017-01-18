@@ -1,17 +1,28 @@
 #pragma once
 #include "Vector2f.h"
 #include "common.h"
-//#include <GL/glew.h>
 
 class Texture
 {
 public:
 	Texture();
 	~Texture();
-	void Generate(unsigned char* data);
+	void setWidth(float w);
+	float getWidth();
+	void setHeight(float h);
+	float getHeight();
+	void setFWidth(float w);
+	float getFWidth();
+	void setFrames(int f);
+	int getFrames();
+	void setAnimated(bool a);
+	bool getAnimated();
 private:
-	Vector2f size;
 	FILE *imageFile;
-	int id;
+	float width;
+	float height;
+	int frames;
+	float frameW;
+	bool animated;
 };
 

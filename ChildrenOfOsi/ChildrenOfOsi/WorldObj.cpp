@@ -127,6 +127,41 @@ bool WorldObj::getInteractable()
 	return interactable;
 }
 
+float WorldObj::getWidth()
+{
+	return width;
+}
+
+void WorldObj::setWidth(float w)
+{
+	width=w;
+}
+
+float WorldObj::getHeight()
+{
+	return height;
+}
+
+void WorldObj::setHeight(float h)
+{
+	height=h;
+}
+
+Sprite WorldObj::getSprite()
+{
+	return sprite;
+}
+
+void WorldObj::setSprite(Sprite s)
+{
+	sprite = s;
+}
+
+void WorldObj::animateObj()
+{
+	sprite.animate();
+}
+
 /*void WorldObj::setName(string na)
 {
 	name=na;

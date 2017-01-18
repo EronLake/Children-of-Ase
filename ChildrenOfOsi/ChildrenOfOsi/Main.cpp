@@ -69,7 +69,7 @@ void testQuadTree() {
 		cout << "total number of collidable obj is " << count << endl;
 		mybool = false;
 	}
-	system("PAUSE");
+	//system("PAUSE");
 }
 
 
@@ -80,8 +80,8 @@ int main() {
 	for (int i = 0; i < 10; i++) {
 		rInt[i] = rand() % 4 - 1;
 	}
-	//Factions fac(rInt);
-	//Hero person(20,0,true);
+	Factions fac(rInt);
+	Hero person(20,0,true);
 	//person.setHealth(-10);
 	//person.setAlive(false);
 	//cout << "person is " << person.getAlive() << " with " << person.getHealth() << endl;
@@ -119,8 +119,16 @@ int main() {
 	//Alex: test QT tomorrow on hero obj, and make QT generic to take in any obj
 	testQuadTree();
 
-
-
+	Texture test;
+	test.setFrames(5);
+	test.setFWidth(100);
+	Sprite sp;
+	sp.setTexture(&test);
+	test.setAnimated(true);
+	person.setSprite(sp);
+	for (int i = 0; i < 20;i++) {
+		person.animateObj();
+	}
 	_CrtSetReportMode(_CRT_ERROR, _CRTDBG_MODE_DEBUG);
 	_CrtDumpMemoryLeaks();
 

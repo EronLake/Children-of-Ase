@@ -8,9 +8,12 @@ class Sprite
 public:
 	Sprite();
 	~Sprite();
+	void setTexture(Texture *t);
+	void animate();
 private:
-	Vector2f coordinates;
-	Vector2f angle;
-	Texture tex;
+	Texture *tex;
+	int index;
+	float start;
+	float stop;
 };
 

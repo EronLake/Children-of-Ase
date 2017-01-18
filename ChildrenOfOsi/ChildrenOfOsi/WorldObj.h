@@ -1,6 +1,7 @@
 #pragma once
 #include <string>
 #include "Vector2f.h"
+#include "Sprite.h"
 
 class WorldObj
 {
@@ -28,13 +29,23 @@ public:
 	bool getCollision();
 	void setInteractable(bool i);
 	bool getInteractable();
+	void setWidth(float w);
+	float getWidth();
+	void setHeight(float h);
+	float getHeight();
+	Sprite getSprite();
+	void setSprite(Sprite s);
+	void animateObj();
 	//void setName(string n);
 	//string getName();
 private:
+	Sprite sprite;
 	Vector2f loc;
 	Vector2f rotation;
 	bool collision;
 	bool interactable;
+	float width;
+	float height;
 	//string name;
 };
 
