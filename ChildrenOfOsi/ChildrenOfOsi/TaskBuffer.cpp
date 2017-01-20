@@ -21,7 +21,7 @@ TaskBuffer::~TaskBuffer()
 void TaskBuffer::run(MessageLog* mLog, std::unordered_map<std::string, Manager*> mTable)
 {
 	//LOG("TaskBuffer Running");
-	if (isEmpty() == false) {
+	while (isEmpty() == false) {
 		Task* current_task = (pop());
 		assignTask(current_task, mLog, mTable);
 	}
