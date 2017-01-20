@@ -146,9 +146,13 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="common.h" />
+    <ClInclude Include="DummyController.h" />
     <ClInclude Include="Factions.h" />
     <ClInclude Include="Hero.h" />
+    <ClInclude Include="Input.h" />
     <ClInclude Include="LivingObj.h" />
+    <ClInclude Include="Manager.h" />
+    <ClInclude Include="MessageLog.h" />
     <ClInclude Include="NPC.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="QuadTree.h" />
@@ -157,16 +161,21 @@
     <ClInclude Include="Soldier.h" />
     <ClInclude Include="SplSoldier.h" />
     <ClInclude Include="Sprite.h" />
+    <ClInclude Include="Task.h" />
     <ClInclude Include="TaskBuffer.h" />
     <ClInclude Include="Texture.h" />
     <ClInclude Include="Vector2f.h" />
     <ClInclude Include="WorldObj.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="DummyController.cpp" />
     <ClCompile Include="Factions.cpp" />
     <ClCompile Include="Hero.cpp" />
+    <ClCompile Include="Input.cpp" />
     <ClCompile Include="LivingObj.cpp" />
     <ClCompile Include="Main.cpp" />
+    <ClCompile Include="Manager.cpp" />
+    <ClCompile Include="MessageLog.cpp" />
     <ClCompile Include="movement.cpp" />
     <ClCompile Include="NPC.cpp" />
     <ClCompile Include="Player.cpp" />
@@ -174,6 +183,7 @@
     <ClCompile Include="Soldier.cpp" />
     <ClCompile Include="SplSoldier.cpp" />
     <ClCompile Include="Sprite.cpp" />
+    <ClCompile Include="Task.cpp" />
     <ClCompile Include="TaskBuffer.cpp" />
     <ClCompile Include="Texture.cpp" />
     <ClCompile Include="Vector2f.cpp" />

@@ -20,17 +20,16 @@
 #include <crtdbg.h>
 //#include "Rectangle.h"
 #include "QuadTree.h"
+
+#include "Common.h"
+#include <iostream>
+#include "Input.h"
+#include "Task.h"
+#include "TaskBuffer.h"
+#include "MessageLog.h"
+#include "DummyController.h"
+#include "Manager.h"
 #define _CRTDBG_MAP_ALLOC
-
-//toggles debug longging statements 
-#define DEBUG 1
-
-#if DEBUG 
-#define LOG(input) std::cout << "LOG:" << input << std::endl
-#else 
-#define LOG(input) 
-
-#endif
 
 using namespace std;
 
@@ -39,6 +38,7 @@ void testQuadTree();
 bool checkCollision(Rectangle *recA, Rectangle *recB);	//given two bounding boxes, check if they collide
 bool coordOverlap(int value, int min, int max) { return (value >= min) && (value <= max); }		//helper func for checkCollision
 
+void ERONS_LOOP();
 
 int main() {
 	LOG("Hello world!");
@@ -49,6 +49,8 @@ int main() {
 	}
 	Factions fac(rInt);
 	Hero person(20,0,true);
+
+	ERONS_LOOP();
 	//person.setHealth(-10);
 	//person.setAlive(false);
 	//cout << "person is " << person.getAlive() << " with " << person.getHealth() << endl;
@@ -99,6 +101,8 @@ int main() {
 	_CrtSetReportMode(_CRT_ERROR, _CRTDBG_MODE_DEBUG);
 	_CrtDumpMemoryLeaks();
 
+
+
 	return 0;
 }
 
@@ -142,6 +146,7 @@ void testQuadTree()
 		mybool = false;
 	}
 	system("PAUSE");
+
 }
 
 bool checkCollision(Rectangle *recA, Rectangle *recB)
@@ -151,5 +156,42 @@ bool checkCollision(Rectangle *recA, Rectangle *recB)
 	return xCollide && yCollide;
 }
 
+void ERONS_LOOP() {
+	/////////////////////////////////////////////////////////////////
+	//ERON'S LOOP NO TOUCHY
+	/////////////////////////////////////////////////////////////////
+	LOG("Hello world!");
+
+	//pauses the program for viewing
+	system("PAUSE");
+
+	//demonstration of a meory leak
+	//while (true) {
+	//	void* a = malloc(64);
+	//	delete a;
+	//}
+
+	//psuedo Gameloop
+	Input* iController = new Input();
+	TaskBuffer* tBuffer = new TaskBuffer();
+	MessageLog* mLog = new MessageLog();
+
+	//create Managers and add to Manager table
+
+	DummyController* DumM = new DummyController();
+
+	std::unordered_map<std::string, Manager*> manager_table;
+
+	manager_table["DumM"] = DumM;
 
 
+
+	while (true) {
+		//clock 
+		iController->InputCheck(tBuffer, mLog);
+		tBuffer->run(mLog, manager_table);
+	}
+}
+/////////////////////////////////////////////////////////////////
+//ERON'S LOOP NO TOUCHY
+/////////////////////////////////////////////////////////////////

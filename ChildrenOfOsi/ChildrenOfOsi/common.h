@@ -24,3 +24,16 @@
 #include <map>
 #include <cstdlib>
 #include <sstream>
+#include <unordered_map>
+#include <queue>
+
+
+//toggles debug longging statements 
+#define DEBUG 1
+
+#if DEBUG 
+#define LOG(input) std::cout << "LOG:" << input << std::endl
+#else 
+#define LOG(input) 
+
+#endif
