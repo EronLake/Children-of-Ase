@@ -38,6 +38,7 @@ public:
 	void animateObj();
 	//void setName(string n);
 	//string getName();
+	WorldObj(Vector2f p_topLeft, float p_width, float p_height);
 private:
 	Sprite sprite;
 	Vector2f loc;

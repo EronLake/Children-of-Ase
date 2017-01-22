@@ -172,3 +172,9 @@ string WorldObj::getName()
 	return name;
 }
 */
+
+WorldObj::WorldObj(Vector2f p_topLeft, float p_width, float p_height) {
+	loc= p_topLeft;
+	width = p_width;
+	height = p_height;
+}
