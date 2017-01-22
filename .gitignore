@@ -1,6 +1,8 @@
-.vs/
-Children of Osi/Debug/
-Debug/
+ChildrenOfOsi/.vs/
+ChildrenOfOsi/Debug/
+ChildrenOfOsi/ipch/
+ChildrenOfOsi/x64/
 
-Children of Osi.VC.db
-Children of Osi.VC.VC.opendb
+
+ChildrenOfOsi/Children of Osi.VC.db
+ChildrenOfOsi/Children of Osi.VC.VC.opendb
