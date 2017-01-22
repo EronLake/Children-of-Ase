@@ -1,5 +1,4 @@
 <memorypools>
   <pool name="TestPool" size="1024" />
   <pool name="BoundedTestPool" size="1024" boundsCheck="1" />
-  <pool name="HeroPool" size="2048" />
 </memorypools>

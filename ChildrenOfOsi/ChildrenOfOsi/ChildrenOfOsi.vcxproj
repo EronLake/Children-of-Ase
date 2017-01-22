@@ -145,6 +145,13 @@
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\Allocation.h" />
+    <ClInclude Include="..\Errors.h" />
+    <ClInclude Include="..\MemoryPool.h" />
+    <ClInclude Include="..\MemoryPoolManager.h" />
+    <ClInclude Include="..\StandardMemoryPool.h" />
+    <ClInclude Include="..\tinystr.h" />
+    <ClInclude Include="..\tinyxml.h" />
     <ClInclude Include="common.h" />
     <ClInclude Include="DummyController.h" />
     <ClInclude Include="Factions.h" />
@@ -168,6 +175,12 @@
     <ClInclude Include="WorldObj.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\MemoryPool.cpp" />
+    <ClCompile Include="..\MemoryPoolManager.cpp" />
+    <ClCompile Include="..\tinystr.cpp" />
+    <ClCompile Include="..\tinyxml.cpp" />
+    <ClCompile Include="..\tinyxmlerror.cpp" />
+    <ClCompile Include="..\tinyxmlparser.cpp" />
     <ClCompile Include="DummyController.cpp" />
     <ClCompile Include="Factions.cpp" />
     <ClCompile Include="Hero.cpp" />
@@ -188,6 +201,12 @@
     <ClCompile Include="Texture.cpp" />
     <ClCompile Include="Vector2f.cpp" />
     <ClCompile Include="WorldObj.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <Xml Include="..\pools.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\StandardMemoryPool.inl" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

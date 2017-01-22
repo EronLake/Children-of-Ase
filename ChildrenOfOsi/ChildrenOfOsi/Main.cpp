@@ -3,10 +3,9 @@
 //MyGameEngine
 //main.cpp
 //------------------------------
-
+//#include "Allocation.h"
 #include <conio.h>
 #include <tchar.h>
-#include "Allocation.h"
 #include <stdio.h>   
 #include <stdlib.h>     
 #include <time.h>
@@ -24,7 +23,7 @@
 //#include "Rectangle.h"
 #include "QuadTree.h"
 
-#include "Common.h"
+#include "common.h"
 #include <iostream>
 #include "Input.h"
 #include "Task.h"
@@ -34,196 +33,16 @@
 #include "Manager.h"
 #define _CRTDBG_MAP_ALLOC
 
-typedef unsigned char BYTE;
-
 using namespace std;
 
 
-//void testQuadTree();
-//bool checkCollision(Rectangle *recA, Rectangle *recB);	//given two bounding boxes, check if they collide
-//bool coordOverlap(int value, int min, int max) { return (value >= min) && (value <= max); }		//helper func for checkCollision
+void testQuadTree();
+bool checkCollision(Rectangle *recA, Rectangle *recB);	//given two bounding boxes, check if they collide
+bool coordOverlap(int value, int min, int max) { return (value >= min) && (value <= max); }		//helper func for checkCollision
 
 void ERONS_LOOP();
 
-class Warrior {
-public:
-	Warrior(int hp, bool ali, float _x, float _y)
-	{
-		health = hp;
-		alive = ali;
-		x = _x;
-		y = _y;
-	}
-
-	Warrior()
-	{
-		health = 500;
-		alive = true;
-		x = 0;
-		y = 200;
-	}
-
-	int health;
-	bool alive;
-	float x;
-	float y;
-
-
-};
-
-/**
-*   \brief Execute a test on several pool's functionalities.
-*/
-bool memoryStandardUnitTest(MemoryPool* pool, bool dumpMemoryStates)
-{
-	// If bounds check is on, we need to alter some math here and there
-	bool hasBoundsCheckOn = pool->hasBoundsCheckOn();
-	BYTE poolSizeOffset = hasBoundsCheckOn ? 48 : 16;
-
-	// Trash tests -------------------------------------------------------------------------
-	// Check trash on creation
-	BYTE* ptr = (BYTE*)pool->allocate(1);
-	// I read outside the allocated chunk to check the memory creation trashing
-	if (*(ptr + 100) != pool->s_trashOnCreation) { return false; }
-
-	// Check trash on alloc
-	if (*ptr != pool->s_trashOnAllocSignature) return false;
-
-	// Check trash on Free
-	pool->free(ptr);
-	if (*ptr != pool->s_trashOnFreeSignature) return false;
-
-	// Full allocation test ----------------------------------------------------------------
-	ptr = (BYTE*)pool->allocate(1024);
-
-	// Not enough memory
-	if (ptr != NULL) return false;
-
-	// Now should be fine
-	ptr = (BYTE*)pool->allocate(1024 - 16 * 6);
-	if (hasBoundsCheckOn && pool->integrityCheck() != true) return false;
-	pool->free(ptr);
-	if (hasBoundsCheckOn && pool->integrityCheck() != true) return false;
-
-	// Integrity tests ---------------------------------------------------------------------
-	// Allocate some memory
-	BYTE* block[4];
-	block[0] = (BYTE*)pool->allocate(140);
-	block[1] = (BYTE*)pool->allocate(70);
-	block[2] = (BYTE*)pool->allocate(16);
-	block[3] = (BYTE*)pool->allocate(1);
-
-	if (hasBoundsCheckOn)
-	{
-		// Copy several bytes around
-		memset(block[0], 65, 140);
-		memset(block[1], 67, 70);
-		memset(block[2], 69, 8);
-		memset(block[2] + 8, 70, 8);
-		*block[3] = 'A';
-
-		// This copy is fine, lets check this
-		if (pool->integrityCheck() != true) return false;
-
-		// Copy some bytes around stomping over a block
-		memset(block[0], 65, 141);
-
-		// This copy is wrong, integrity check must detect this
-		if (pool->integrityCheck() != false) return false;
-
-		//Lets fix the memory
-		memset(block[0] + 140, '[', 1);
-
-		// This copy is fine, lets check this
-		if (pool->integrityCheck() != true) return false;
-	}
-
-	if (dumpMemoryStates)
-		MemoryPoolManager::it().dumpPool("severalAllocations_", pool);
-
-	pool->free(block[0]);
-	pool->free(block[1]);
-	pool->free(block[2]);
-	pool->free(block[3]);
-
-	// This copy is fine, lets check this
-	if (pool->getFreePoolSize() != pool->getTotalPoolSize() - poolSizeOffset) return false;
-
-	// Sparse allocation deallocation --------------------------------------------------------
-	// Allocate some memory
-	block[0] = (BYTE*)pool->allocate(512);
-	block[1] = (BYTE*)pool->allocate(128);
-	block[2] = (BYTE*)pool->allocate(64);
-	block[3] = (BYTE*)pool->allocate(8);
-
-	// This copy is fine, lets check this
-	if (pool->integrityCheck() != true) return false;
-
-	pool->free(block[0]);
-	if (hasBoundsCheckOn && pool->integrityCheck() != true) return false;
-	pool->free(block[2]);
-	if (hasBoundsCheckOn && pool->integrityCheck() != true) return false;
-	pool->free(block[3]);
-	if (hasBoundsCheckOn && pool->integrityCheck() != true) return false;
-	pool->free(block[1]);
-	if (hasBoundsCheckOn && pool->integrityCheck() != true) return false;
-
-	block[0] = (BYTE*)pool->allocate(128);
-	block[1] = (BYTE*)pool->allocate(128);
-	block[2] = (BYTE*)pool->allocate(128);
-	pool->free(block[1]);
-	block[1] = (BYTE*)pool->allocate(64);
-	block[3] = (BYTE*)pool->allocate(64);
-	pool->free(block[2]);
-	block[2] = (BYTE*)pool->allocate(150);
-
-	if (dumpMemoryStates)
-		MemoryPoolManager::it().dumpPool("sparseAllocations_", pool);
-
-	pool->free(block[0]);
-	pool->free(block[1]);
-	pool->free(block[2]);
-	pool->free(block[3]);
-
-	// This copy is fine, lets check this
-	if (hasBoundsCheckOn && pool->integrityCheck() != true) return false;
-
-	if (pool->getFreePoolSize() != pool->getTotalPoolSize() - poolSizeOffset) return false;
-
-	if (dumpMemoryStates)
-		MemoryPoolManager::it().dumpPool("allFree_", pool);
-
-	return true;
-}
-
-bool memoryObjectStorageTest(MemoryPool* pool, bool dumpMemoryStates)
-{
-	/*Test that adds 2 Hero objects to the pool HeroPool specified in
-	pools.xml file and then deletes both objects from the pool.*/
-	Warrior* myWarrior = NEW(POOL("HeroPool")) Warrior(500, true, 5.0, 6.0);
-	Warrior* Oshosi = NEW(POOL("HeroPool")) Warrior();
-	std::cout << myWarrior->health << std::endl;
-	std::cout << myWarrior->alive << std::endl;
-	std::cout << myWarrior->x << std::endl;
-	std::cout << myWarrior->y << std::endl;
-
-	std::cout << Oshosi->health << std::endl;
-	std::cout << Oshosi->alive << std::endl;
-	std::cout << Oshosi->x << std::endl;
-	std::cout << Oshosi->y << std::endl;
-	std::cout << myWarrior << std::endl;
-	std::cout << Oshosi << std::endl;
-
-	//DELETE(POOL("HeroPool"), myWarrior);
-	//DELETE(POOL("HeroPool"), Oshosi);
-	if (dumpMemoryStates)
-		MemoryPoolManager::it().dumpPool("allFree_", pool);
-	return true;
-}
-
-int main(int argc, _TCHAR* argv[]) {
-	bool want = false;
-	if (want) {
+int main() {
 		LOG("Hello world!");
 		srand(time(NULL));
 		int rInt[10];
@@ -283,22 +102,7 @@ int main(int argc, _TCHAR* argv[]) {
 		//}
 		_CrtSetReportMode(_CRT_ERROR, _CRTDBG_MODE_DEBUG);
 		_CrtDumpMemoryLeaks();
-	}
-	bool dumpMemoryStates = true;
-
-	if (!memoryStandardUnitTest(POOL("TestPool"), dumpMemoryStates))              printf("Memory test on TestPool failed\n");
-	else                                                                            printf("Memory test on TestPool succeeded\n");
-
-
-
-
-	if (!memoryStandardUnitTest(POOL("BoundedTestPool"), dumpMemoryStates))         printf("Memory test on BoundedTestPool failed\n");
-	else                                                                            printf("Memory test on BoundedTestPool succeeded\n");
-
-	if (!memoryObjectStorageTest(POOL("HeroPool"), dumpMemoryStates))               printf("Memory test on HeroPool failed\n");
-	else                                                                            printf("Memory test on HeroPool succeeded\n");
-
-	_getch();
+	                                                                       
 
 	return 0;
 }
