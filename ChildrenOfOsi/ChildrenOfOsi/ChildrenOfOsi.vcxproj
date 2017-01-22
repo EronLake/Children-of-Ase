@@ -74,6 +74,8 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
+    <IncludePath>$(SolutionDir)\External Dependencies\OpenGL\GLEW\include;$(SolutionDir)\External Dependencies\OpenGL\GLFW\include;$(SolutionDir)\External Dependencies\OpenGL\SOIL\include;$(IncludePath)</IncludePath>
+    <LibraryPath>$(SolutionDir)\External Dependencies\OpenGL\GLEW\lib;$(SolutionDir)\External Dependencies\OpenGL\GLFW\lib;$(SolutionDir)\External Dependencies\OpenGL\SOIL\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
@@ -105,6 +107,7 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>opengl32.lib;glew32s.lib;glfw3.lib;SOIL.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -150,6 +153,7 @@
     <ClInclude Include="DummyController.h" />
     <ClInclude Include="Errors.h" />
     <ClInclude Include="Factions.h" />
+    <ClInclude Include="GameWindow.h" />
     <ClInclude Include="Hero.h" />
     <ClInclude Include="Input.h" />
     <ClInclude Include="LivingObj.h" />
@@ -177,6 +181,7 @@
   <ItemGroup>
     <ClCompile Include="DummyController.cpp" />
     <ClCompile Include="Factions.cpp" />
+    <ClCompile Include="GameWindow.cpp" />
     <ClCompile Include="Hero.cpp" />
     <ClCompile Include="Input.cpp" />
     <ClCompile Include="LivingObj.cpp" />
