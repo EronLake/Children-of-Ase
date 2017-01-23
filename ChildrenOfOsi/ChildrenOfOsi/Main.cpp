@@ -51,6 +51,12 @@ int main() {
 		}
 		Factions fac(rInt);
 		Hero person(20, 0, true);
+		Texture* still = new Texture();
+		still->setFile("img.png");
+		Sprite* objSpt = new Sprite();
+		objSpt->setTexture(still);
+		person.setSprite(*objSpt);
+		person.drawObj();
 		//Hero* person= NEW(POOL("HeroPool")) Hero(20, 0, true);
 		//cout << "It got here" << endl;
 		//ERONS_LOOP();
