@@ -1,7 +1,8 @@
 #pragma once
-#include <string>
+#include "common.h"
 #include "Vector2f.h"
 #include "Sprite.h"
+using namespace std;
 
 class WorldObj
 {
@@ -36,9 +37,10 @@ public:
 	Sprite getSprite();
 	void setSprite(Sprite s);
 	void animateObj();
-	//void setName(string n);
-	//string getName();
+	void setName(string n);
+	string getName();
 	WorldObj(Vector2f p_topLeft, float p_width, float p_height);
+	void drawObj();
 private:
 	Sprite sprite;
 	Vector2f loc;
@@ -47,7 +49,7 @@ private:
 	bool interactable;
 	float width;
 	float height;
-	//string name;
+	string name;
 };
 
 

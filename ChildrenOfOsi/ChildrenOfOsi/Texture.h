@@ -1,6 +1,7 @@
 #pragma once
 #include "Vector2f.h"
 #include "common.h"
+using namespace std;
 
 class Texture
 {
@@ -17,8 +18,10 @@ public:
 	int getFrames();
 	void setAnimated(bool a);
 	bool getAnimated();
+	string getFile();
+	void setFile(string image);
 private:
-	FILE *imageFile;
+	string imageFile;
 	float width;
 	float height;
 	int frames;

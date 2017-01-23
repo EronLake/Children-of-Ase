@@ -1,55 +1,24 @@
 ﻿  WorldObj.cpp
-  Vector2f.cpp
-  tinyxmlparser.cpp
-  tinyxmlerror.cpp
-  tinyxml.cpp
-  tinystr.cpp
-  Texture.cpp
-  TaskBuffer.cpp
-  Task.cpp
-  Sprite.cpp
+  Generating Code...
+  Compiling...
+  movement.cpp
+c:\users\acalb\desktop\childrenosi\children-of-osi\childrenofosi\childrenofosi\movement.cpp(10): warning C4305: 'argument': truncation from 'double' to 'float'
+c:\users\acalb\desktop\childrenosi\children-of-osi\childrenofosi\childrenofosi\movement.cpp(14): warning C4305: 'argument': truncation from 'double' to 'float'
+c:\users\acalb\desktop\childrenosi\children-of-osi\childrenofosi\childrenofosi\movement.cpp(18): warning C4305: 'argument': truncation from 'double' to 'float'
+c:\users\acalb\desktop\childrenosi\children-of-osi\childrenofosi\childrenofosi\movement.cpp(22): warning C4305: 'argument': truncation from 'double' to 'float'
   SplSoldier.cpp
   Soldier.cpp
   QuadTree.cpp
   Projectile.cpp
   Player.cpp
   NPC.cpp
-  movement.cpp
-c:\users\acalb\desktop\childrenosi\children-of-osi\childrenofosi\childrenofosi\movement.cpp(10): warning C4305: 'argument': truncation from 'double' to 'float'
-c:\users\acalb\desktop\childrenosi\children-of-osi\childrenofosi\childrenofosi\movement.cpp(14): warning C4305: 'argument': truncation from 'double' to 'float'
-c:\users\acalb\desktop\childrenosi\children-of-osi\childrenofosi\childrenofosi\movement.cpp(18): warning C4305: 'argument': truncation from 'double' to 'float'
-c:\users\acalb\desktop\childrenosi\children-of-osi\childrenofosi\childrenofosi\movement.cpp(22): warning C4305: 'argument': truncation from 'double' to 'float'
-  MessageLog.cpp
-  MemoryPoolManager.cpp
-c:\users\acalb\desktop\childrenosi\children-of-osi\childrenofosi\childrenofosi\standardmemorypool.inl(184): warning C4477: 'fprintf' : format string '%08x' requires an argument of type 'unsigned int', but variadic argument 1 has type 'StandardMemoryPool::Chunk *'
-c:\users\acalb\desktop\childrenosi\children-of-osi\childrenofosi\childrenofosi\standardmemorypool.inl(184): warning C4313: 'fprintf': '%x' in format string conflicts with argument 1 of type 'StandardMemoryPool::Chunk *'
-c:\users\acalb\desktop\childrenosi\children-of-osi\childrenofosi\childrenofosi\standardmemorypool.inl(186): warning C4477: 'fprintf' : format string '%08x' requires an argument of type 'unsigned int', but variadic argument 1 has type 'StandardMemoryPool::Chunk *'
-c:\users\acalb\desktop\childrenosi\children-of-osi\childrenofosi\childrenofosi\standardmemorypool.inl(186): warning C4313: 'fprintf': '%x' in format string conflicts with argument 1 of type 'StandardMemoryPool::Chunk *'
-c:\users\acalb\desktop\childrenosi\children-of-osi\childrenofosi\childrenofosi\standardmemorypool.inl(194): warning C4477: 'fprintf' : format string '%08x' requires an argument of type 'unsigned int', but variadic argument 1 has type 'BYTE *'
-c:\users\acalb\desktop\childrenosi\children-of-osi\childrenofosi\childrenofosi\standardmemorypool.inl(194): warning C4313: 'fprintf': '%x' in format string conflicts with argument 1 of type 'BYTE *'
-c:\users\acalb\desktop\childrenosi\children-of-osi\childrenofosi\childrenofosi\standardmemorypool.inl(200): warning C4477: 'fprintf' : format string '%08x' requires an argument of type 'unsigned int', but variadic argument 1 has type 'BYTE *'
-c:\users\acalb\desktop\childrenosi\children-of-osi\childrenofosi\childrenofosi\standardmemorypool.inl(200): warning C4313: 'fprintf': '%x' in format string conflicts with argument 1 of type 'BYTE *'
-c:\users\acalb\desktop\childrenosi\children-of-osi\childrenofosi\childrenofosi\standardmemorypool.inl(208): warning C4474: 'fprintf' : too many arguments passed for format string
-  c:\users\acalb\desktop\childrenosi\children-of-osi\childrenofosi\childrenofosi\standardmemorypool.inl(208): note: placeholders and their parameters expect 0 variadic arguments, but 1 were provided
-c:\users\acalb\desktop\childrenosi\children-of-osi\childrenofosi\childrenofosi\standardmemorypool.inl(214): warning C4477: 'fprintf' : format string '%08x' requires an argument of type 'unsigned int', but variadic argument 1 has type 'BYTE *'
-c:\users\acalb\desktop\childrenosi\children-of-osi\childrenofosi\childrenofosi\standardmemorypool.inl(214): warning C4313: 'fprintf': '%x' in format string conflicts with argument 1 of type 'BYTE *'
-c:\users\acalb\desktop\childrenosi\children-of-osi\childrenofosi\childrenofosi\standardmemorypool.inl(230): warning C4474: 'fprintf' : too many arguments passed for format string
-  c:\users\acalb\desktop\childrenosi\children-of-osi\childrenofosi\childrenofosi\standardmemorypool.inl(230): note: placeholders and their parameters expect 0 variadic arguments, but 1 were provided
-  MemoryPool.cpp
-  Generating Code...
-  Compiling...
-  Manager.cpp
   Main.cpp
 c:\users\acalb\desktop\childrenosi\children-of-osi\childrenofosi\childrenofosi\main.cpp(47): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
 c:\users\acalb\desktop\childrenosi\children-of-osi\childrenofosi\childrenofosi\main.cpp(119): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
 c:\users\acalb\desktop\childrenosi\children-of-osi\childrenofosi\childrenofosi\main.cpp(159): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
 c:\users\acalb\desktop\childrenosi\children-of-osi\childrenofosi\childrenofosi\main.cpp(160): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
   LivingObj.cpp
-  Input.cpp
   Hero.cpp
-  GameWindow.cpp
-  Factions.cpp
-  DummyController.cpp
   Generating Code...
 GameWindow.obj : error LNK2019: unresolved external symbol glewInit referenced in function "private: static void __cdecl osi::GameWindow::setupWindow(void)" (?setupWindow@GameWindow@osi@@CAXXZ)
 GameWindow.obj : error LNK2019: unresolved external symbol glfwInit referenced in function "private: static void __cdecl osi::GameWindow::setupWindow(void)" (?setupWindow@GameWindow@osi@@CAXXZ)

@@ -35,3 +35,8 @@ void Sprite::animate()
 		}
 	}
 }
+
+string Sprite::getTfile() 
+{
+	return (*tex).getFile();
+}
