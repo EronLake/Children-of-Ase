@@ -9,7 +9,7 @@ class WorldObj
 public:
 	WorldObj();
 	WorldObj(float x,float y, bool col);
-	~WorldObj();
+	virtual ~WorldObj();
 	void setLoc(Vector2f l);
 	Vector2f getLoc();
 	void setX(float x);

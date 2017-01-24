@@ -1,24 +1,7 @@
-﻿  WorldObj.cpp
+﻿  GameWindow.cpp
   Generating Code...
   Compiling...
-  movement.cpp
-c:\users\acalb\desktop\childrenosi\children-of-osi\childrenofosi\childrenofosi\movement.cpp(10): warning C4305: 'argument': truncation from 'double' to 'float'
-c:\users\acalb\desktop\childrenosi\children-of-osi\childrenofosi\childrenofosi\movement.cpp(14): warning C4305: 'argument': truncation from 'double' to 'float'
-c:\users\acalb\desktop\childrenosi\children-of-osi\childrenofosi\childrenofosi\movement.cpp(18): warning C4305: 'argument': truncation from 'double' to 'float'
-c:\users\acalb\desktop\childrenosi\children-of-osi\childrenofosi\childrenofosi\movement.cpp(22): warning C4305: 'argument': truncation from 'double' to 'float'
-  SplSoldier.cpp
-  Soldier.cpp
-  QuadTree.cpp
-  Projectile.cpp
-  Player.cpp
-  NPC.cpp
-  Main.cpp
-c:\users\acalb\desktop\childrenosi\children-of-osi\childrenofosi\childrenofosi\main.cpp(47): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
-c:\users\acalb\desktop\childrenosi\children-of-osi\childrenofosi\childrenofosi\main.cpp(119): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-c:\users\acalb\desktop\childrenosi\children-of-osi\childrenofosi\childrenofosi\main.cpp(159): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-c:\users\acalb\desktop\childrenosi\children-of-osi\childrenofosi\childrenofosi\main.cpp(160): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-  LivingObj.cpp
-  Hero.cpp
+  WorldObj.cpp
   Generating Code...
 GameWindow.obj : error LNK2019: unresolved external symbol glewInit referenced in function "private: static void __cdecl osi::GameWindow::setupWindow(void)" (?setupWindow@GameWindow@osi@@CAXXZ)
 GameWindow.obj : error LNK2019: unresolved external symbol glfwInit referenced in function "private: static void __cdecl osi::GameWindow::setupWindow(void)" (?setupWindow@GameWindow@osi@@CAXXZ)

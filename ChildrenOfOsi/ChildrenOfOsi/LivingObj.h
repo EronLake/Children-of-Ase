@@ -1,7 +1,5 @@
 #pragma once
 #include "WorldObj.h"
-#include <iostream>
-#include <string>
 
 class LivingObj :
 	public WorldObj

@@ -1,5 +1,4 @@
 #pragma once
-#include "WorldObj.h"
 #include "LivingObj.h"
 
 class Projectile :

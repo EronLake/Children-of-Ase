@@ -9,14 +9,6 @@
 #include <stdio.h>   
 #include <stdlib.h>     
 #include <time.h>
-#include <iostream>
-#include "WorldObj.h"
-#include "LivingObj.h"
-#include "NPC.h"
-#include "Soldier.h"
-#include "SplSoldier.h"
-#include "Hero.h"
-#include "Vector2f.h"
 #include "Player.h"
 #include "Factions.h"
 #include <crtdbg.h>
@@ -24,13 +16,13 @@
 #include "QuadTree.h"
 
 #include "common.h"
-#include <iostream>
 #include "Input.h"
 #include "Task.h"
 #include "TaskBuffer.h"
 #include "MessageLog.h"
 #include "DummyController.h"
 #include "Manager.h"
+#include "CheckClass.h"
 #define _CRTDBG_MAP_ALLOC
 
 using namespace std;
@@ -57,6 +49,7 @@ int main() {
 		objSpt->setTexture(still);
 		person.setSprite(*objSpt);
 		person.drawObj();
+		cout << CheckClass::isNPC(&person)<< endl;
 		//Hero* person= NEW(POOL("HeroPool")) Hero(20, 0, true);
 		//cout << "It got here" << endl;
 		//ERONS_LOOP();
