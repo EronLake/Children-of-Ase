@@ -9,7 +9,7 @@ public:
 	Projectile(float x, float y, bool col, int d);
 	~Projectile();
 	void Hit(LivingObj *target);
-private:
+protected:
 	int dmg;
 };
 

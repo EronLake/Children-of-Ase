@@ -13,7 +13,7 @@ public:
 	bool getAlive();
 	void setAlive(bool v);
 	void addHealth(int h);
-private:
+protected:
 	int health;
 	bool alive;
 };
