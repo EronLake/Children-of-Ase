@@ -14,7 +14,7 @@ public:
 	bool getAlive();
 	void setAlive(bool v);
 	void addHealth(int h);
-protected:
+private:
 	int health;
 	bool alive;
 };
