@@ -1,14 +1,15 @@
 #pragma once
-#include <string>
+#include "common.h"
 #include "Vector2f.h"
 #include "Sprite.h"
+using namespace std;
 
 class WorldObj
 {
 public:
 	WorldObj();
 	WorldObj(float x,float y, bool col);
-	~WorldObj();
+	virtual ~WorldObj();
 	void setLoc(Vector2f l);
 	Vector2f getLoc();
 	void setX(float x);
@@ -36,9 +37,11 @@ public:
 	Sprite getSprite();
 	void setSprite(Sprite s);
 	void animateObj();
-	//void setName(string n);
-	//string getName();
-private:
+	void setName(string n);
+	string getName();
+	WorldObj(Vector2f p_topLeft, float p_width, float p_height);
+	void drawObj();
+protected:
 	Sprite sprite;
 	Vector2f loc;
 	Vector2f rotation;
@@ -46,7 +49,7 @@ private:
 	bool interactable;
 	float width;
 	float height;
-	//string name;
+	string name;
 };
 
 
