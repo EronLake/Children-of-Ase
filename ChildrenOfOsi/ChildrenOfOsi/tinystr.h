@@ -38,7 +38,7 @@ distribution.
 
 #ifndef TIXML_STRING_INCLUDED
 #define TIXML_STRING_INCLUDED
-
+#include "stdafx.h"
 #include <assert.h>
 #include <string.h>
 

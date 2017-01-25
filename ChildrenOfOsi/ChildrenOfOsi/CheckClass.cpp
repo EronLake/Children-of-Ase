@@ -1,5 +1,5 @@
+#include "stdafx.h"
 #include "CheckClass.h"
-
 bool CheckClass::isHero(WorldObj* test) 
 {
 	if (Hero* d = dynamic_cast<Hero*>(test)) return true;

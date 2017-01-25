@@ -1,5 +1,6 @@
 #pragma once
 #include "NPC.h"
+#include "stdafx.h"
 class Soldier :
 	public NPC
 {

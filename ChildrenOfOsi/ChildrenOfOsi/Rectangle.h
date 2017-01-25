@@ -1,4 +1,5 @@
 #include "common.h"
+#include "stdafx.h"
 #include "Vector2f.h"
 using namespace std;
 

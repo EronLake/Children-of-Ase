@@ -1,4 +1,5 @@
 #pragma once
+#include "stdafx.h"
 #include "Hero.h"
 class Player :
 	public Hero

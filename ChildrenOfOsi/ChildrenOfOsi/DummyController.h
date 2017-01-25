@@ -1,5 +1,5 @@
 #pragma once
-
+#include "stdafx.h"
 #include "common.h"
 #include "Task.h"
 #include "MessageLog.h"

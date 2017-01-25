@@ -1,3 +1,4 @@
+#include "stdafx.h"
 #pragma once
 #include "Vector2f.h"
 #include "common.h"

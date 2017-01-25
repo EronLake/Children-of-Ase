@@ -1,5 +1,5 @@
+#include "stdafx.h"
 #include "DummyController.h"
-
 
 
 DummyController::DummyController(MessageLog* _mLog, TaskBuffer* _tBuffer)

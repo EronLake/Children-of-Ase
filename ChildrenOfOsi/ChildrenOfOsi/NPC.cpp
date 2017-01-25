@@ -1,3 +1,4 @@
+#include "stdafx.h"
 #include "NPC.h"
 using namespace std;
 

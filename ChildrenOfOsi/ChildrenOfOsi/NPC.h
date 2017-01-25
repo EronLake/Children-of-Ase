@@ -1,4 +1,5 @@
 #pragma once
+#include "stdafx.h"
 #include "LivingObj.h"
 #include "Factions.h"
 

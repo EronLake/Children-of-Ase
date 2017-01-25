@@ -1,4 +1,5 @@
 #pragma comment(lib, "user32.lib")
+#include "stdafx.h"
 #include "common.h"
 #include "Movement.h"
 

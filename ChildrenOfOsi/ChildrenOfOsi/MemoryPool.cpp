@@ -1,3 +1,4 @@
+#include "stdafx.h"
 #include "MemoryPoolManager.h"
 
 const BYTE  MemoryPool::s_startBound[16] = {'[','B','l','o','c','k','.','.','.','.','S','t','a','r','t',']'};

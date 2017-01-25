@@ -1,3 +1,4 @@
+#include "stdafx.h"
 #include "Hero.h"
 using namespace std;
 

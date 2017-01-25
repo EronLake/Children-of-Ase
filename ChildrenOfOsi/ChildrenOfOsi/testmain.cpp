@@ -1,9 +1,9 @@
+#include "stdafx.h"
 using namespace std;
-
 
 #include <cstdio>
 #include <iostream>
-#include "fmod.hpp"
+//#include "fmod.hpp"
 #include "SoundSystem.h"
 
 /*typedef FMOD::Sound* SoundClass;

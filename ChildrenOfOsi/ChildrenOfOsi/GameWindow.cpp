@@ -1,3 +1,4 @@
+#include "stdafx.h"
 //#include "GameWindow.h"
 //
 //const std::string osi::GameWindow::STD_VERTEX_SHADER_PATH = "./OpenGL Shaders/StdVertexShader.vert.glsl";
