@@ -145,6 +145,7 @@
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="CheckClass.h" />
     <ClInclude Include="common.h" />
     <ClInclude Include="DummyController.h" />
     <ClInclude Include="Factions.h" />
@@ -170,6 +171,7 @@
     <ClInclude Include="WorldObj.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="CheckClass.cpp" />
     <ClCompile Include="DummyController.cpp" />
     <ClCompile Include="Factions.cpp" />
     <ClCompile Include="Hero.cpp" />
