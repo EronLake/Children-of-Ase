@@ -1,4 +1,5 @@
-//#pragma once
+#pragma once
+#include "stdafx.h"
 //
 //#ifndef GLEW_STATIC
 //#define GLEW_STATIC

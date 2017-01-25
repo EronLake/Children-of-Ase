@@ -1,5 +1,5 @@
 #pragma once
-
+#include "stdafx.h"
 #include "Errors.h"
 #include "MemoryPool.h"
 #include <map>

@@ -1,3 +1,4 @@
+#include "stdafx.h"
 #include "MemoryPoolManager.h"
 #include "StandardMemoryPool.h"
 #include "tinyxml.h"

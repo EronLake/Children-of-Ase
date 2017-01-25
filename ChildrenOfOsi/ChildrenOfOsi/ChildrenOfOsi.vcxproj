@@ -19,7 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{54EBF289-CB7B-4052-A93B-75652E6E45E5}</ProjectGuid>
+    <ProjectGuid>{5486675C-7D63-4CF7-8CE5-E51BAEE89640}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>ChildrenOfOsi</RootNamespace>
     <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
@@ -83,7 +83,7 @@
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
-      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <PrecompiledHeader>Use</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -96,7 +96,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
-      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <PrecompiledHeader>Use</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -142,31 +142,44 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <Text Include="message_log.txt" />
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Allocation.h" />
     <ClInclude Include="CheckClass.h" />
     <ClInclude Include="common.h" />
     <ClInclude Include="DummyController.h" />
+    <ClInclude Include="Errors.h" />
     <ClInclude Include="Factions.h" />
+    <ClInclude Include="GameWindow.h" />
     <ClInclude Include="Hero.h" />
     <ClInclude Include="Input.h" />
     <ClInclude Include="LivingObj.h" />
     <ClInclude Include="Manager.h" />
+    <ClInclude Include="MemoryPool.h" />
+    <ClInclude Include="MemoryPoolManager.h" />
     <ClInclude Include="MessageLog.h" />
     <ClInclude Include="Movement.h" />
     <ClInclude Include="NPC.h" />
     <ClInclude Include="PhysicsManager.h" />
     <ClInclude Include="Player.h" />
+    <ClInclude Include="Projectile.h" />
     <ClInclude Include="QuadTree.h" />
     <ClInclude Include="Rectangle.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="Soldier.h" />
+    <ClInclude Include="SoundSystem.h" />
     <ClInclude Include="SplSoldier.h" />
     <ClInclude Include="Sprite.h" />
+    <ClInclude Include="StandardMemoryPool.h" />
+    <ClInclude Include="stdafx.h" />
+    <ClInclude Include="targetver.h" />
     <ClInclude Include="Task.h" />
     <ClInclude Include="TaskBuffer.h" />
     <ClInclude Include="Texture.h" />
+    <ClInclude Include="tinystr.h" />
+    <ClInclude Include="tinyxml.h" />
     <ClInclude Include="Vector2f.h" />
     <ClInclude Include="WorldObj.h" />
   </ItemGroup>
@@ -174,25 +187,47 @@
     <ClCompile Include="CheckClass.cpp" />
     <ClCompile Include="DummyController.cpp" />
     <ClCompile Include="Factions.cpp" />
+    <ClCompile Include="GameWindow.cpp" />
     <ClCompile Include="Hero.cpp" />
     <ClCompile Include="Input.cpp" />
     <ClCompile Include="LivingObj.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Manager.cpp" />
+    <ClCompile Include="MemoryPool.cpp" />
+    <ClCompile Include="MemoryPoolManager.cpp" />
     <ClCompile Include="MessageLog.cpp" />
-    <ClCompile Include="Movement.cpp" />
+    <ClCompile Include="movement.cpp" />
     <ClCompile Include="NPC.cpp" />
     <ClCompile Include="PhysicsManager.cpp" />
     <ClCompile Include="Player.cpp" />
+    <ClCompile Include="Projectile.cpp" />
     <ClCompile Include="QuadTree.cpp" />
     <ClCompile Include="Soldier.cpp" />
+    <ClCompile Include="SoundSystem.cpp" />
     <ClCompile Include="SplSoldier.cpp" />
     <ClCompile Include="Sprite.cpp" />
+    <ClCompile Include="stdafx.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
+    </ClCompile>
     <ClCompile Include="Task.cpp" />
     <ClCompile Include="TaskBuffer.cpp" />
+    <ClCompile Include="testmain.cpp" />
     <ClCompile Include="Texture.cpp" />
+    <ClCompile Include="tinystr.cpp" />
+    <ClCompile Include="tinyxml.cpp" />
+    <ClCompile Include="tinyxmlerror.cpp" />
+    <ClCompile Include="tinyxmlparser.cpp" />
     <ClCompile Include="Vector2f.cpp" />
     <ClCompile Include="WorldObj.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <Xml Include="pools.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="StandardMemoryPool.inl" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

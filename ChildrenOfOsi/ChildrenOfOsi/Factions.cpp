@@ -1,3 +1,4 @@
+#include "stdafx.h"
 #include "Factions.h"
 #include <stdio.h>   
 #include <stdlib.h>   

@@ -2,7 +2,7 @@
 // file: common.h 
 // commonly used libs
 
-
+#include "stdafx.h"
 #include <stdio.h>
 #include <stdint.h>
 #include <stdlib.h>

@@ -1,3 +1,4 @@
+#include "stdafx.h"
 #include "LivingObj.h"
 using namespace std;
 

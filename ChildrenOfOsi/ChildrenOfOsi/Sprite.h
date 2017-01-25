@@ -1,4 +1,5 @@
 #pragma once
+#include "stdafx.h"
 #include "Vector2f.h"
 #include "common.h"
 #include "Texture.h"

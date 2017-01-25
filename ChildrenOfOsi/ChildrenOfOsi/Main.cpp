@@ -6,6 +6,7 @@
 //#include "Allocation.h"
 //#include <conio.h>
 //#include <tchar.h>
+#include "stdafx.h"
 #include <stdio.h>   
 #include <stdlib.h>     
 #include <time.h>
