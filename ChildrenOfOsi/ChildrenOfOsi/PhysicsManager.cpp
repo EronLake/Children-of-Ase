@@ -22,41 +22,42 @@ PhysicsManager::~PhysicsManager()
 
 void PhysicsManager::register_manager()
 {
-	tBuffer->add_to_table("MOV", this);
+	tBuffer->add_to_table("MOVE", this);
 }
 
 void PhysicsManager::execute_task(Task* current_task)
 {
-	WorldObj* player = new WorldObj(0.0,0.0,false);
-	if (current_task->name == "Move_Up") {
+	int result;
+	if (player == NULL) {
+		result = 1;
+		LOG("Error: No player object");
+		current_task->updateStatus("FAILED");
+	}
+	else {
+		if (current_task->name == "Move_Up") {
+			result = Movement::move_up(player);
+		} 
+		else if (current_task->name == "Move_Down") {
+			result = Movement::move_down(player);
+		}
+		else if (current_task->name == "Move_Left") {
+			result = Movement::move_left(player);
+		}
+		else if (current_task->name == "Move_Right") {
+			result = Movement::move_right(player);
+		} 
+		else {
+			result = 1;
+			LOG("Error: Task name does not exist"); //perror?
+		}
+	}
 
-		//int result = move_up();
-		int result = 0;
-		if (result == 0) {
-			current_task->updateStatus("COMPLETED");
-		}
-		else {
-			current_task->updateStatus("FAILED");
-		}
-		this->send_result(current_task);
+	if (result == 0) {
+		current_task->updateStatus("COMPLETED");
 	}
-	else if (current_task->name == "Move_Down") {
-		//THIS IS WHAT YOU EDIT
-		//////////////////////////////////////
-		//int result = move_down(); r
-		int result = 0;
-		//////////////////////////////////////
-		if (result == 0) {
-			current_task->updateStatus("COMPLETED");
-		}
-		else {
-			current_task->updateStatus("FAILED");
-		}
-		this->send_result(current_task);
+	else {
+		current_task->updateStatus("FAILED");
 	}
-	else
-	{
-		LOG("Error: Task name does not exist"); //perror?
-	}
+	this->send_result(current_task);
 }
 

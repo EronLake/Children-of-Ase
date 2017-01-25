@@ -28,6 +28,7 @@
 #include "TaskBuffer.h"
 #include "MessageLog.h"
 #include "DummyController.h"
+#include "PhysicsManager.h"
 #include "Manager.h"
 
 #include "Movement.h"
@@ -53,40 +54,7 @@ int main() {
 	Factions fac(rInt);
 	Hero person(20,0,true);
 	
-	WorldObj* player = new WorldObj(0.0, 0.0, true);
-	WorldObj* screen = new WorldObj(0.0, 0.0, false);//20.0, 20.0);
-	screen->setWidth(20);
-	screen->setHeight(20);
-
-	//QuadTree* tree = new QuadTree(0, screen);
-	Movement::initTree(screen);
-
-	while (1) {
-		int key;
-
-		if (_kbhit())
-		{
-			key = _getch();
-
-			if (key == 'w')
-			{
-				Movement::move_up(player);
-			}
-			else if (key == 's')
-			{
-				Movement::move_down(player);
-			}
-			else if (key == 'a')
-			{
-				Movement::move_left(player);
-			}
-			else if (key == 'd')
-			{
-				Movement::move_right(player);
-			}
-
-		}
-	}
+	
 	ERONS_LOOP();
 	//person.setHealth(-10);
 	//person.setAlive(false);
@@ -190,7 +158,7 @@ int main() {
 
 void ERONS_LOOP() {
 	/////////////////////////////////////////////////////////////////
-	//ERON'S LOOP NO TOUCHY
+	//ERON'S LOOP NO TOUCHY    **** Justin touched it, oops ****
 	/////////////////////////////////////////////////////////////////
 	LOG("Hello world!");
 
@@ -207,11 +175,13 @@ void ERONS_LOOP() {
 	MessageLog* mLog = new MessageLog();
 	TaskBuffer* tBuffer = new TaskBuffer(mLog);
 	Input* iController = new Input(mLog, tBuffer);
-	
 	//create Managers and add to Manager table
 
 	DummyController* DumM = new DummyController(mLog,tBuffer);
+	PhysicsManager* PhysM = new PhysicsManager(mLog, tBuffer);
 	DumM->register_manager();
+	PhysM->register_manager();
+
 
 	//std::unordered_map<std::string, Manager*> manager_table;
 

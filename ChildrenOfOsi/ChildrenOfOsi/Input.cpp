@@ -23,13 +23,20 @@ void Input::InputCheck()
 
 		if (key == 'w') 
 		{
-			createTask("Move_Up", "DUM");
+			createTask("Move_Up", "MOVE");
+		}
+		else if (key == 'a')
+		{
+			createTask("Move_Left", "MOVE");
 		}
 		else if (key == 's')
 		{
-			createTask("Move_Down", "DUM");
+			createTask("Move_Down", "MOVE");
 		}
-			
+		else if (key == 'd')
+		{
+			createTask("Move_Right", "MOVE");
+		}
 	}
 }
 

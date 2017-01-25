@@ -1,4 +1,5 @@
 #include "common.h"
+#include "WorldObj.h"
 #pragma once
 
 class Task
