@@ -10,6 +10,8 @@ Movement::~Movement() {
 
 }
 
+//use speed variable instead of .1
+
 std::vector <WorldObj*> Movement::objs;
 QuadTree* Movement::tree;
 

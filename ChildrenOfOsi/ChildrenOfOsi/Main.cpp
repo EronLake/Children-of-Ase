@@ -56,7 +56,7 @@ int main() {
 		cout << CheckClass::isNPC(&person)<< endl;
 		//Hero* person= NEW(POOL("HeroPool")) Hero(20, 0, true);
 		//cout << "It got here" << endl;
-		//ERONS_LOOP();
+		ERONS_LOOP();
 		//person.setHealth(-10);
 		//person.setAlive(false);
 		//cout << "person is " << person.getAlive() << " with " << person.getHealth() << endl;
