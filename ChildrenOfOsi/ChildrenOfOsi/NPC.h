@@ -17,7 +17,7 @@ public:
 	void moveLeft();
 	void moveUp();
 	void moveDown();
-private:
+protected:
 	int faction;
 	float speed;
 };

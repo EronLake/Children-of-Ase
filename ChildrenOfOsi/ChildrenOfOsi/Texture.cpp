@@ -59,3 +59,13 @@ void Texture::setAnimated(bool a)
 {
 	animated=a;
 }
+
+string Texture::getFile()
+{
+	return imageFile;
+}
+
+void Texture::setFile(string image)
+{
+	imageFile = image;
+}
