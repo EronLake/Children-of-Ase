@@ -28,15 +28,19 @@
 #include "TaskBuffer.h"
 #include "MessageLog.h"
 #include "DummyController.h"
+#include "PhysicsManager.h"
 #include "Manager.h"
+
+#include "Movement.h"
+#include <conio.h>
 #define _CRTDBG_MAP_ALLOC
 
 using namespace std;
 
 
-void testQuadTree();
-bool checkCollision(Rectangle *recA, Rectangle *recB);	//given two bounding boxes, check if they collide
-bool coordOverlap(int value, int min, int max) { return (value >= min) && (value <= max); }		//helper func for checkCollision
+//void testQuadTree();
+//bool checkCollision(Rectangle *recA, Rectangle *recB);	//given two bounding boxes, check if they collide
+//bool coordOverlap(int value, int min, int max) { return (value >= min) && (value <= max); }		//helper func for checkCollision
 
 void ERONS_LOOP();
 
@@ -49,7 +53,8 @@ int main() {
 	}
 	Factions fac(rInt);
 	Hero person(20,0,true);
-
+	
+	
 	ERONS_LOOP();
 	//person.setHealth(-10);
 	//person.setAlive(false);
@@ -86,7 +91,7 @@ int main() {
 
 
 	//Alex: test QT tomorrow on hero obj, and make QT generic to take in any obj
-	testQuadTree();
+	//testQuadTree();
 
 	//Texture test;
 	//test.setFrames(5);
@@ -106,7 +111,7 @@ int main() {
 	return 0;
 }
 
-void testQuadTree()
+/*void testQuadTree()
 {
 	Rectangle* testrec = new Rectangle(Vector2f(0.0, 0.0), 100.0, 100.0);	//init screen
 	Rectangle* Alex = new Rectangle(Vector2f(51.0, 51.0), 20.0, 20.0);	//init player
@@ -147,18 +152,13 @@ void testQuadTree()
 	}
 	system("PAUSE");
 
-}
+}*/
 
-bool checkCollision(Rectangle *recA, Rectangle *recB)
-{
-	bool xCollide = coordOverlap(recA->getX(), recB->getX(), recB->getX() + recB->getWidth()) || coordOverlap(recB->getX(), recA->getX(), recA->getX() + recA->getWidth());
-	bool yCollide = coordOverlap(recA->getY(), recB->getY(), recB->getY() + recB->getHeight()) || coordOverlap(recB->getY(), recA->getY(), recA->getY() + recA->getHeight());
-	return xCollide && yCollide;
-}
+
 
 void ERONS_LOOP() {
 	/////////////////////////////////////////////////////////////////
-	//ERON'S LOOP NO TOUCHY
+	//ERON'S LOOP NO TOUCHY    **** Justin touched it, oops ****
 	/////////////////////////////////////////////////////////////////
 	LOG("Hello world!");
 
@@ -175,11 +175,13 @@ void ERONS_LOOP() {
 	MessageLog* mLog = new MessageLog();
 	TaskBuffer* tBuffer = new TaskBuffer(mLog);
 	Input* iController = new Input(mLog, tBuffer);
-	
 	//create Managers and add to Manager table
 
 	DummyController* DumM = new DummyController(mLog,tBuffer);
+	PhysicsManager* PhysM = new PhysicsManager(mLog, tBuffer);
 	DumM->register_manager();
+	PhysM->register_manager();
+
 
 	//std::unordered_map<std::string, Manager*> manager_table;
 

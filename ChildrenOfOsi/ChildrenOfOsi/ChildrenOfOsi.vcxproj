@@ -153,7 +153,9 @@
     <ClInclude Include="LivingObj.h" />
     <ClInclude Include="Manager.h" />
     <ClInclude Include="MessageLog.h" />
+    <ClInclude Include="Movement.h" />
     <ClInclude Include="NPC.h" />
+    <ClInclude Include="PhysicsManager.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="QuadTree.h" />
     <ClInclude Include="Rectangle.h" />
@@ -176,8 +178,9 @@
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Manager.cpp" />
     <ClCompile Include="MessageLog.cpp" />
-    <ClCompile Include="movement.cpp" />
+    <ClCompile Include="Movement.cpp" />
     <ClCompile Include="NPC.cpp" />
+    <ClCompile Include="PhysicsManager.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="QuadTree.cpp" />
     <ClCompile Include="Soldier.cpp" />
