@@ -29,14 +29,17 @@
 #include "MessageLog.h"
 #include "DummyController.h"
 #include "Manager.h"
+
+#include "Movement.h"
+#include <conio.h>
 #define _CRTDBG_MAP_ALLOC
 
 using namespace std;
 
 
-void testQuadTree();
-bool checkCollision(Rectangle *recA, Rectangle *recB);	//given two bounding boxes, check if they collide
-bool coordOverlap(int value, int min, int max) { return (value >= min) && (value <= max); }		//helper func for checkCollision
+//void testQuadTree();
+//bool checkCollision(Rectangle *recA, Rectangle *recB);	//given two bounding boxes, check if they collide
+//bool coordOverlap(int value, int min, int max) { return (value >= min) && (value <= max); }		//helper func for checkCollision
 
 void ERONS_LOOP();
 
@@ -49,7 +52,41 @@ int main() {
 	}
 	Factions fac(rInt);
 	Hero person(20,0,true);
+	
+	WorldObj* player = new WorldObj(0.0, 0.0, true);
+	WorldObj* screen = new WorldObj(0.0, 0.0, false);//20.0, 20.0);
+	screen->setWidth(20);
+	screen->setHeight(20);
 
+	//QuadTree* tree = new QuadTree(0, screen);
+	Movement::initTree(screen);
+
+	while (1) {
+		int key;
+
+		if (_kbhit())
+		{
+			key = _getch();
+
+			if (key == 'w')
+			{
+				Movement::move_up(player);
+			}
+			else if (key == 's')
+			{
+				Movement::move_down(player);
+			}
+			else if (key == 'a')
+			{
+				Movement::move_left(player);
+			}
+			else if (key == 'd')
+			{
+				Movement::move_right(player);
+			}
+
+		}
+	}
 	ERONS_LOOP();
 	//person.setHealth(-10);
 	//person.setAlive(false);
@@ -86,7 +123,7 @@ int main() {
 
 
 	//Alex: test QT tomorrow on hero obj, and make QT generic to take in any obj
-	testQuadTree();
+	//testQuadTree();
 
 	//Texture test;
 	//test.setFrames(5);
@@ -106,7 +143,7 @@ int main() {
 	return 0;
 }
 
-void testQuadTree()
+/*void testQuadTree()
 {
 	Rectangle* testrec = new Rectangle(Vector2f(0.0, 0.0), 100.0, 100.0);	//init screen
 	Rectangle* Alex = new Rectangle(Vector2f(51.0, 51.0), 20.0, 20.0);	//init player
@@ -147,14 +184,9 @@ void testQuadTree()
 	}
 	system("PAUSE");
 
-}
+}*/
 
-bool checkCollision(Rectangle *recA, Rectangle *recB)
-{
-	bool xCollide = coordOverlap(recA->getX(), recB->getX(), recB->getX() + recB->getWidth()) || coordOverlap(recB->getX(), recA->getX(), recA->getX() + recA->getWidth());
-	bool yCollide = coordOverlap(recA->getY(), recB->getY(), recB->getY() + recB->getHeight()) || coordOverlap(recB->getY(), recA->getY(), recA->getY() + recA->getHeight());
-	return xCollide && yCollide;
-}
+
 
 void ERONS_LOOP() {
 	/////////////////////////////////////////////////////////////////
