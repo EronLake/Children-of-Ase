@@ -16,7 +16,7 @@ public:
 	void setHeight(float h) { height = h; }
 	float getWidth() { return width; }
 	float getHeight() { return height; }
-protected:
+private:
 	int atk;
 	bool inCombat;
 	float width;

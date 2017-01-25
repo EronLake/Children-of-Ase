@@ -1,6 +1,6 @@
 #pragma once
 #include "common.h"
-#include "WorldObj.h"
+#include "Rectangle.h"
 
 using namespace std;
 
@@ -10,17 +10,17 @@ private:
 	unsigned int maxObj = 10;
 	unsigned int maxLevel = 5;
 	unsigned int treelv;
-	WorldObj* bounds;
-	vector<WorldObj*> objs;
+	Rectangle* bounds;
+	vector<Rectangle*> objs;
 	vector<QuadTree*> nodes;
 
 public:
-	QuadTree(unsigned int p_treelv, WorldObj* p_bounds);
+	QuadTree(unsigned int p_treelv, Rectangle* p_bounds);
 	~QuadTree();
 	void clear();
 	void split();
-	int getIndex(WorldObj* myrec);
-	void insert(WorldObj* myrec);
-	vector<WorldObj*> retrieve(vector<WorldObj*> &listOfObj, WorldObj* myrec);
+	int getIndex(Rectangle* myrec);
+	void insert(Rectangle* myrec);
+	vector<Rectangle*> retrieve(vector<Rectangle*> &listOfObj, Rectangle* myrec);
 };
 

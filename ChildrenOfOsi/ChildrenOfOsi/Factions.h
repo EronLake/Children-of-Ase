@@ -7,7 +7,7 @@ public:
 	~Factions();
 	int getFRel(int f1, int f2);
 	void setFRel(int f1, int f2, int rel);
-protected:
+private:
 	int factions[5][5];
 };
 

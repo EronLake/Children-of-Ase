@@ -1,4 +1,6 @@
 #include "LivingObj.h"
+#include <iostream>
+#include <string>
 using namespace std;
 
 LivingObj::LivingObj()

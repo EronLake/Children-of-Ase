@@ -1,7 +1,7 @@
 #include "QuadTree.h"
 
 
-QuadTree::QuadTree(unsigned int p_treelv, WorldObj * p_bounds)
+QuadTree::QuadTree(unsigned int p_treelv, Rectangle * p_bounds)
 {
 	treelv = p_treelv;
 	bounds = p_bounds;
@@ -30,13 +30,13 @@ void QuadTree::split()
 	float x = bounds->getX();
 	float y = bounds->getY();
 
-	nodes[0] = new QuadTree(treelv + 1, new WorldObj(Vector2f((x + swidth),y), swidth, sheight));
-	nodes[1] = new QuadTree(treelv + 1, new WorldObj(Vector2f(x, y), swidth, sheight));
-	nodes[2] = new QuadTree(treelv + 1, new WorldObj(Vector2f(x, (y + sheight)), swidth, sheight));
-	nodes[3] = new QuadTree(treelv + 1, new WorldObj(Vector2f((x + swidth), (y+ sheight)), swidth, sheight));
+	nodes[0] = new QuadTree(treelv + 1, new Rectangle(Vector2f((x + swidth),y), swidth, sheight));
+	nodes[1] = new QuadTree(treelv + 1, new Rectangle(Vector2f(x, y), swidth, sheight));
+	nodes[2] = new QuadTree(treelv + 1, new Rectangle(Vector2f(x, (y + sheight)), swidth, sheight));
+	nodes[3] = new QuadTree(treelv + 1, new Rectangle(Vector2f((x + swidth), (y+ sheight)), swidth, sheight));
 }
 
-int QuadTree::getIndex(WorldObj * myrec)
+int QuadTree::getIndex(Rectangle * myrec)
 {
 	//int index = -1;	//obj belongs in parent node
 	double vertMdPt = bounds->getX() + (bounds->getWidth() / 2);
@@ -62,7 +62,7 @@ int QuadTree::getIndex(WorldObj * myrec)
 	return -1;
 }
 
-void QuadTree::insert(WorldObj * myrec)
+void QuadTree::insert(Rectangle * myrec)
 {
 	if (nodes[0] != nullptr) {			//first determine which node to add obj to
 		int index = getIndex(myrec);
@@ -89,7 +89,7 @@ void QuadTree::insert(WorldObj * myrec)
 	}
 }
 
-vector<WorldObj*> QuadTree::retrieve(vector<WorldObj*>& listOfObj, WorldObj * myrec)
+vector<Rectangle*> QuadTree::retrieve(vector<Rectangle*>& listOfObj, Rectangle * myrec)
 {
 	int index = getIndex(myrec);	//get index of obj
 	if (index != -1 && nodes[0] != nullptr) {

@@ -1,5 +1,8 @@
 #include "WorldObj.h"
-#include "GameWindow.h"
+#include <iostream>
+#include <string>
+
+using namespace std;
 
 
 
@@ -159,13 +162,7 @@ void WorldObj::animateObj()
 	sprite.animate();
 }
 
-void WorldObj::drawObj()
-{
-	//osi::GameWindow::drawSprite((int)loc.getXloc(), (int)loc.getYloc(), (int)width, (int)height, sprite.getTfile());
-	cout << sprite.getTfile() << endl;
-}
-
-void WorldObj::setName(string na)
+/*void WorldObj::setName(string na)
 {
 	name=na;
 }
@@ -174,9 +171,4 @@ string WorldObj::getName()
 {
 	return name;
 }
-
-WorldObj::WorldObj(Vector2f p_topLeft, float p_width, float p_height) {
-	loc= p_topLeft;
-	width = p_width;
-	height = p_height;
-}
+*/
