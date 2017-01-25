@@ -1,8 +1,9 @@
 #include "TaskBuffer.h"
 
 //------------------------------------------------------
-TaskBuffer::TaskBuffer()
+TaskBuffer::TaskBuffer(MessageLog* _mLog)
 {
+	mLog = _mLog;
 	LOG("TaskBuffer Objected Constructed");
 }
 //------------------------------------------------------
@@ -18,51 +19,40 @@ TaskBuffer::~TaskBuffer()
 //------------------------------------------------------
 
 
-void TaskBuffer::run(MessageLog* mLog, std::unordered_map<std::string, Manager*> mTable)
+void TaskBuffer::run()
 {
 	//LOG("TaskBuffer Running");
 	while (isEmpty() == false) {
 		Task* current_task = (pop());
-		assignTask(current_task, mLog, mTable);
+		assignTask(current_task);
 	}
 	//LOG("TaskBuffer Stoping");
 }
 
 
 //------------------------------------------------------
-void TaskBuffer::assignTask(Task* current_task,MessageLog* mLog,
-							std::unordered_map<std::string, Manager*> mTable)
+void TaskBuffer::assignTask(Task* current_task)
 {
 	if (current_task->status == "CREATED" ||
-		current_task->status == "WORKING")
+		current_task->status == "PASSED")
 	{
 		//confirm task was assigned and is working in MessageLog
 		current_task->updateStatus("WORKING");
-		if (current_task->name == "MemM:Mk Obj")
+		//switch(current_task->type) {
+		//	case('DUM'):
+		//	{
+		if (mTable.count(current_task->type) != 0)
 		{
-			//call Memory Manager Function to handle task
-			mLog->logMessage(current_task);
-			std::cout << "MemM:Mk Obj assigned" << std::endl;
-
-		}
-		else if (current_task->name == "MemM:Obj Freed")
+				//call DummyController Function to handle task
+				std::vector<Manager*> type_man_vec = mTable.find(current_task->type)->second;
+				mLog->logMessage(current_task);
+				for (auto itr = type_man_vec.begin(); itr != type_man_vec.end(); itr++)
+				{
+					(*itr)->execute_task(current_task);
+				}	
+		}else
 		{
-			//call Memory Manager Function to handle task
-			mLog->logMessage(current_task);
-			std::cout << "MemM:Obj Freed" << std::endl;
-		}
-		else if (current_task->name == "PhyM:Move Up" ||
-				current_task->name == "PhyM:Move Down")
-		{
-			//call Memory Manager Function to handle task
-			mLog->logMessage(current_task);
-			mTable.find("DumM")->second->execute_task(current_task, 
-						mLog,this);
-		}
-		else
-		{
-			LOG("Error: Task name does not exist"); //perror?
-			return;
+				LOG("Error: Task type does not exist"); //perror?
 		}
 	}
 	else if (current_task->status == "COMPLETED" ||
@@ -117,6 +107,10 @@ void TaskBuffer::empty()
 	queue_buffer.empty();
 }
 
+void TaskBuffer::add_to_table(std::string type, Manager* manager)
+{
+	mTable[type].push_back(manager);
+}
 
 //------------------------------------------------------
 

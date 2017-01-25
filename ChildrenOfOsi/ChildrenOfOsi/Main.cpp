@@ -172,24 +172,26 @@ void ERONS_LOOP() {
 	//}
 
 	//psuedo Gameloop
-	Input* iController = new Input();
-	TaskBuffer* tBuffer = new TaskBuffer();
 	MessageLog* mLog = new MessageLog();
-
+	TaskBuffer* tBuffer = new TaskBuffer(mLog);
+	Input* iController = new Input(mLog, tBuffer);
+	
 	//create Managers and add to Manager table
 
-	DummyController* DumM = new DummyController();
+	DummyController* DumM = new DummyController(mLog,tBuffer);
+	DumM->register_manager();
 
-	std::unordered_map<std::string, Manager*> manager_table;
+	//std::unordered_map<std::string, Manager*> manager_table;
 
-	manager_table["DumM"] = DumM;
+	//manager_table["DumM"] = DumM;
 
 
 
 	while (true) {
 		//clock 
-		iController->InputCheck(tBuffer, mLog);
-		tBuffer->run(mLog, manager_table);
+		iController->InputCheck();
+		tBuffer->run();
+		//draw
 	}
 }
 /////////////////////////////////////////////////////////////////

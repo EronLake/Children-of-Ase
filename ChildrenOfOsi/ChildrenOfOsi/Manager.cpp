@@ -1,35 +1,38 @@
 #include "Manager.h"
 #include "TaskBuffer.h"
 
-Manager::Manager()
+Manager::Manager(MessageLog* _mLog, TaskBuffer* _tBuffer)
 {
-	LOG("TaskBuffer Objected Constructed");
+	mLog = _mLog;
+	tBuffer = _tBuffer;
 }
 
 
 Manager::~Manager()
 {
-	LOG("TaskBuffer Objected Destroyed");
 }
 
-void Manager::send_result(Task* current_task, TaskBuffer* tBuffer)
+void Manager::register_manager() 
+{
+	LOG("register_manager function not defined");
+}
+
+void Manager::send_result(Task* current_task)
 {
 	tBuffer->push(current_task);
 }
 
-void Manager::createTask(TaskBuffer* tBuffer, MessageLog* mLog,
-	std::string task_name)
+void Manager::createTask(std::string task_name, std::string type)
 {
-	std::string task_status = "CREATED";
-	Task* new_task = new Task(task_name, task_status);
+	std::string task_status = "PASSED";
+	Task* new_task = new Task(task_name, task_status,type);
 	tBuffer->push(new_task);
 	mLog->logMessage(new_task);
 }
 
-void  Manager::execute_task(Task* current_task, MessageLog* mLog,
-							TaskBuffer* tbuffer) 
+void  Manager::execute_task(Task* current_task) 
 {
-	LOG("TaskBuffer Objected Constructed");
+	LOG("Execute Task");
 }
 
 

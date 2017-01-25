@@ -10,11 +10,11 @@
 class DummyController: public Manager
 {
 public:
-	DummyController();
+	DummyController(MessageLog* _mLog, TaskBuffer* _tBuffer);
 	~DummyController();
 
-	virtual void execute_task(Task* current_task, MessageLog* mLog,
-						TaskBuffer* tBuffer) final;
+	virtual void register_manager() final;
+	virtual void execute_task(Task* current_task) final;
 
 	int move_up();
 	int move_down();

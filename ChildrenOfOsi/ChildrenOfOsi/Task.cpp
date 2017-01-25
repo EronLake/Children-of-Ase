@@ -1,10 +1,11 @@
 #include "Task.h"
 
 
-Task::Task(std::string _name,std::string _status)
+Task::Task(std::string _name,std::string _status, std::string _type)
 {
 	name = _name;
-	//manager_name
+	type = _type;
+	//[buffer,manager,class]
 	//fucntion_name
 	//object
 

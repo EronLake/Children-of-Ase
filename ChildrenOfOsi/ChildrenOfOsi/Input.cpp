@@ -1,8 +1,10 @@
 #include "Input.h"
 #include <conio.h>
 
-Input::Input()
+Input::Input(MessageLog* _mLog, TaskBuffer* _tBuffer)
 {
+	mLog = _mLog;
+	tBuffer = _tBuffer;
 	LOG("Input Objected Constructed");
 }
 
@@ -12,7 +14,7 @@ Input::~Input()
 	LOG("Input Objected Destroyed");
 }
 
-void Input::InputCheck(TaskBuffer* tBuffer, MessageLog* mLog)
+void Input::InputCheck()
 {
 	int key;
 	if (_kbhit())
@@ -21,21 +23,20 @@ void Input::InputCheck(TaskBuffer* tBuffer, MessageLog* mLog)
 
 		if (key == 'w') 
 		{
-			createTask(tBuffer, mLog, "PhyM:Move Up");
+			createTask("Move_Up", "DUM");
 		}
 		else if (key == 's')
 		{
-			createTask(tBuffer, mLog, "PhyM:Move Down");
+			createTask("Move_Down", "DUM");
 		}
 			
 	}
 }
 
-void Input::createTask(TaskBuffer* tBuffer, MessageLog* mLog,
-						std::string task_name)
+void Input::createTask(std::string task_name, std::string type)
 {
 	std::string task_status = "CREATED";
-	Task* new_task = new Task(task_name, task_status);
+	Task* new_task = new Task(task_name, task_status, type);
 	tBuffer->push(new_task);
 	mLog->logMessage(new_task);
 }

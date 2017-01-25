@@ -9,13 +9,16 @@
 
 class Input
 {
+private:
+	MessageLog* mLog;
+	TaskBuffer* tBuffer;
+
 public:
-	Input();
+	Input(MessageLog* _mLog, TaskBuffer* _tBuffer);
 	~Input();
 
-	void InputCheck(TaskBuffer* Tbuffer, MessageLog* Mlog);
+	void InputCheck();
 
-	void createTask(TaskBuffer* Tbuffer, MessageLog* Mlog,
-		std::string task_name);
+	void createTask(std::string task_name, std::string type);
 };
 

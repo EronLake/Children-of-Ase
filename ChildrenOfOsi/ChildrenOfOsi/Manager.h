@@ -8,17 +8,20 @@ class TaskBuffer;
 
 class Manager
 {
+protected:
+	MessageLog* mLog;
+	TaskBuffer* tBuffer;
 public:
-	Manager();
+	Manager(MessageLog* _mLog, TaskBuffer* _tBuffer);
 	~Manager();
 
-	void send_result(Task* current_task, TaskBuffer* tBuffer);
+	virtual void register_manager();
 
-	void createTask(TaskBuffer* tBuffer, MessageLog* mLog,
-		std::string task_name);
+	void send_result(Task* current_task);
 
-	virtual void execute_task(Task* current_task, MessageLog* mLog,
-		TaskBuffer* tBuffer);
+	void createTask(std::string task_name, std::string type);
+
+	virtual void execute_task(Task* current_task);
 };
 
 

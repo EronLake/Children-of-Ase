@@ -91,7 +91,7 @@
       <Filter>Header Files\Task Manager</Filter>
     </ClInclude>
     <ClInclude Include="DummyController.h">
-      <Filter>Header Files\Task Manager</Filter>
+      <Filter>Header Files\Engine Managers</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -137,9 +137,6 @@
     <ClCompile Include="Texture.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="DummyController.cpp">
-      <Filter>Source Files\Task Manager</Filter>
-    </ClCompile>
     <ClCompile Include="Input.cpp">
       <Filter>Source Files\Task Manager</Filter>
     </ClCompile>
@@ -154,6 +151,9 @@
     </ClCompile>
     <ClCompile Include="Manager.cpp">
       <Filter>Source Files\Task Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="DummyController.cpp">
+      <Filter>Source Files\Engine Managers</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
