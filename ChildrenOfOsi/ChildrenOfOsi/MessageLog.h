@@ -17,4 +17,3 @@ public:
 	void push_to_log(std::string message);
 
 };
-

@@ -42,8 +42,8 @@ public:
 	string getName();
 	WorldObj(Vector2f p_topLeft, float p_width, float p_height);
 	void drawObj();
-protected:
 	Sprite sprite;
+private:
 	Vector2f loc;
 	Vector2f rotation;
 	bool collision;
