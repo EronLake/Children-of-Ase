@@ -67,4 +67,3 @@ void PhysicsManager::execute_task(Task* current_task)
 	}
 	this->send_result(current_task);
 }
-

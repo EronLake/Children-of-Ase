@@ -133,6 +133,9 @@
     <ClInclude Include="RenderHelper.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="memManager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -238,6 +241,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Movement.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+	<ClCompile Include="memManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
