@@ -167,6 +167,8 @@
     <ClInclude Include="Projectile.h" />
     <ClInclude Include="QuadTree.h" />
     <ClInclude Include="Rectangle.h" />
+    <ClInclude Include="RenderHelper.h" />
+    <ClInclude Include="RenderManager.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="Soldier.h" />
     <ClInclude Include="SoundSystem.h" />
@@ -196,12 +198,14 @@
     <ClCompile Include="MemoryPool.cpp" />
     <ClCompile Include="MemoryPoolManager.cpp" />
     <ClCompile Include="MessageLog.cpp" />
-    <ClCompile Include="movement.cpp" />
+    <ClCompile Include="Movement.cpp" />
     <ClCompile Include="NPC.cpp" />
     <ClCompile Include="PhysicsManager.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Projectile.cpp" />
     <ClCompile Include="QuadTree.cpp" />
+    <ClCompile Include="RenderHelper.cpp" />
+    <ClCompile Include="RenderManager.cpp" />
     <ClCompile Include="Soldier.cpp" />
     <ClCompile Include="SoundSystem.cpp" />
     <ClCompile Include="SplSoldier.cpp" />
