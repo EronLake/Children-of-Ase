@@ -15,7 +15,7 @@
 #include <crtdbg.h>
 //#include "Rectangle.h"
 #include "QuadTree.h"
-
+#include "GameWindow.h"
 #include "common.h"
 #include "Input.h"
 #include "Task.h"
@@ -37,15 +37,11 @@ bool checkCollision(WorldObj *recA, WorldObj *recB);	//given two bounding boxes,
 bool coordOverlap(int value, int min, int max) { return (value >= min) && (value <= max); }		//helper func for checkCollision
 
 void ERONS_LOOP();
+void ALESSIO_TEST();
 void ALEX_LOOP(QuadTree* _physicsQuadTree, WorldObj* _player, vector<WorldObj*> &_recVec);
 
 int main() {
 		LOG("Hello world!");
-		srand(time(NULL));
-		int rInt[10];
-		for (int i = 0; i < 10; i++) {
-			rInt[i] = rand() % 4 - 1;
-		}
 
 		/************************************************************************************************SET-UP*******************************************************/
 		WorldObj* screen = new WorldObj(Vector2f(0.0, 0.0), 100.0, 100.0);	//init screen
@@ -64,49 +60,9 @@ int main() {
 
 		QuadTree* collideTree = new QuadTree(0, screen);
 
-
-
-
-
 		/************************************************************************************************TESTING*******************************************************/
-		// TRY PUTTING YOUR TEST CODE IN A FUNC IF POSSIBLE
-
-		/* ALLESIO */
-		Factions fac(rInt);
-		Hero person(20, 0, true);
-		Texture* still = new Texture();
-		still->setFile("img.png");
-		Sprite* objSpt = new Sprite();
-		objSpt->setTexture(still);
-		person.setSprite(*objSpt);
-		person.drawObj();
-		cout << CheckClass::isNPC(&person)<< endl;
-		//Hero* person= NEW(POOL("HeroPool")) Hero(20, 0, true);
-		//cout << "It got here" << endl;
-		//person.setHealth(-10);
-		//person.setAlive(false);
-		//cout << "person is " << person.getAlive() << " with " << person.getHealth() << endl;
-		//cout<<"at location " << person.getX() << " , " << person.getY() << endl;
-		//Player me(30, 32, true);
-		//NPC citizen(22, 2, true);
-		//citizen.setHealth(10);
-		//citizen.setInteractable(true);
-		//cout << "Interactable: " << citizen.getInteractable() << endl;
-		//person.setAtk(2);
-		//person.setInCombat(true);
-		//cout <<"In Combat: " <<person.getInCombat()<< endl;
-		//person.goAtk(&citizen);
-		//cout << "Citizen's Health: " << citizen.getHealth() << endl;
-		//cout << "Faction Relationship was: "<<fac.getFRel(citizen.getFaction(), person.getFaction()) << endl;
-		//fac.setFRel(citizen.getFaction(), person.getFaction(), -1);
-		//cout << "Faction Relationship now: " << fac.getFRel(citizen.getFaction(), person.getFaction()) << endl;
-		//citizen.setSpeed(2);
-		//cout << "Speed: " << citizen.getSpeed() << endl;
-		//citizen.shiftX(2);
-		//citizen.shiftY(3);
-		//citizen.moveUp();
-		//citizen.moveRight();
-		//cout << "citizen is now at: " << citizen.getX() << " , " << citizen.getY() << endl;
+		
+		
 		////pauses the program for viewing
 		//system("PAUSE");
 
@@ -115,25 +71,14 @@ int main() {
 		//	void* a = malloc(64);
 		//	delete a;
 		//}
-
-		//Texture test;
-		//test.setFrames(5);
-		//test.setFWidth(100);
-		//Sprite sp;
-		//sp.setTexture(&test);
-		//test.setAnimated(true);
-		//person.setSprite(sp);
-		//for (int i = 0; i < 20;i++) {
-		//	person.animateObj();
-		//}
-
-
+		/*ALESSIO*/
+		//ALESSIO_TEST();
 
 		/* ALEX */
 		ALEX_LOOP(collideTree, Alex, recVec);
 
 		/* ERON */
-		//ERONS_LOOP();
+		ERONS_LOOP();
 
 
 		_CrtSetReportMode(_CRT_ERROR, _CRTDBG_MODE_DEBUG);
@@ -196,12 +141,62 @@ bool checkCollision(WorldObj *recA, WorldObj *recB)
 	return xCollide && yCollide;
 }
 
+void ALESSIO_TEST() {
+	srand(time(NULL));
+	int rInt[10];
+	for (int i = 0; i < 10; i++) {
+		rInt[i] = rand() % 4 - 1;
+	}
+	Factions fac(rInt);
+	Hero person(20, 0, true);
+	Texture still;
+	still.setFile("img.png");
+	Sprite objSpt;
+	objSpt.setTexture(&still);
+	person.setSprite(objSpt);
+	person.drawObj();
+	cout <<"Is person an NPC: "<< CheckClass::isNPC(&person) << endl;
+	person.setHealth(-10);
+	person.setAlive(false);
+	cout << "person is " << person.getAlive() << " with " << person.getHealth() << endl;
+	cout<<"at location " << person.getX() << " , " << person.getY() << endl;
+	Player me(30, 32, true);
+	NPC citizen(22, 2, true);
+	citizen.setHealth(10);
+	citizen.setInteractable(true);
+	cout << "Interactable: " << citizen.getInteractable() << endl;
+	person.setAtk(2);
+	person.setInCombat(true);
+	cout <<"In Combat: " <<person.getInCombat()<< endl;
+	person.goAtk(&citizen);
+	cout << "Citizen's Health: " << citizen.getHealth() << endl;
+	cout << "Faction Relationship was: "<<fac.getFRel(citizen.getFaction(), person.getFaction()) << endl;
+	fac.setFRel(citizen.getFaction(), person.getFaction(), -1);
+	cout << "Faction Relationship now: " << fac.getFRel(citizen.getFaction(), person.getFaction()) << endl;
+	citizen.setSpeed(2);
+	cout << "Speed: " << citizen.getSpeed() << endl;
+	citizen.shiftX(2);
+	citizen.shiftY(3);
+	citizen.moveUp();
+	citizen.moveRight();
+	cout << "citizen is now at: " << citizen.getX() << " , " << citizen.getY() << endl;
+	Texture test;
+	test.setFrames(5);
+	test.setFWidth(100);
+	Sprite sp;
+	sp.setTexture(&test);
+	test.setAnimated(true);
+	person.setSprite(sp);
+	for (int i = 0; i < 20;i++) {
+		person.animateObj();
+	}
+}
 
 void ALEX_LOOP(QuadTree* _physicsQuadTree, WorldObj* _player, vector<WorldObj*> &_recVec) {
-	LOG("Hello world!");
+	//LOG("Hello world!");
 
 	//pauses the program for viewing
-	system("PAUSE");
+	//system("PAUSE");
 
 	//demonstration of a meory leak
 	//while (true) {
