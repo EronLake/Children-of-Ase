@@ -164,6 +164,7 @@
     <ClInclude Include="NPC.h" />
     <ClInclude Include="PhysicsManager.h" />
     <ClInclude Include="Player.h" />
+    <ClInclude Include="Pool.h" />
     <ClInclude Include="Projectile.h" />
     <ClInclude Include="QuadTree.h" />
     <ClInclude Include="Rectangle.h" />
@@ -200,6 +201,7 @@
     <ClCompile Include="NPC.cpp" />
     <ClCompile Include="PhysicsManager.cpp" />
     <ClCompile Include="Player.cpp" />
+    <ClCompile Include="Pool.cpp" />
     <ClCompile Include="Projectile.cpp" />
     <ClCompile Include="QuadTree.cpp" />
     <ClCompile Include="Soldier.cpp" />
