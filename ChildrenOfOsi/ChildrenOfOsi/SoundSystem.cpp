@@ -1,3 +1,4 @@
+#include "stdafx.h"
 using namespace std;
 #include <iostream>
 #include "fmod.hpp"

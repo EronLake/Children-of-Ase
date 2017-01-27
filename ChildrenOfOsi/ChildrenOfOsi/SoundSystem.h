@@ -1,4 +1,5 @@
 #pragma once
+#include "stdafx.h"
 #include "SoundObject.h"
 typedef FMOD::Sound* SoundClass;
 #include <vector>

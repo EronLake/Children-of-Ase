@@ -214,7 +214,6 @@
     </ClCompile>
     <ClCompile Include="Task.cpp" />
     <ClCompile Include="TaskBuffer.cpp" />
-    <ClCompile Include="testmain.cpp" />
     <ClCompile Include="Texture.cpp" />
     <ClCompile Include="tinystr.cpp" />
     <ClCompile Include="tinyxml.cpp" />
