@@ -8,7 +8,7 @@ public:
 	Hero();
 	Hero(float x, float y, bool col);
 	~Hero();
-protected:
+private:
 	int affinity;
 };
 

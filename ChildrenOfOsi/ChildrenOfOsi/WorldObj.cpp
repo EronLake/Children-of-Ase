@@ -15,10 +15,10 @@ WorldObj::WorldObj(float x, float y, bool col)
 	rotation.setXloc(1);
 	rotation.setYloc(1);
 	collision = col;
-	cout <<"X-Loc: "<< loc.getXloc() << endl;
-	cout << "Y-Loc: " << loc.getYloc() << endl;
-	cout << "Rotation: " << rotation.getXloc()<<" , " << rotation.getYloc()<< endl;
-	cout << "Collision: " << collision << endl;
+	//cout <<"X-Loc: "<< loc.getXloc() << endl;
+	//cout << "Y-Loc: " << loc.getYloc() << endl;
+	//cout << "Rotation: " << rotation.getXloc()<<" , " << rotation.getYloc()<< endl;
+	//cout << "Collision: " << collision << endl;
 }
 
 WorldObj::~WorldObj()

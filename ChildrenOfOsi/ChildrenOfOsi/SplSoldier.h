@@ -10,7 +10,7 @@ public:
 	~SplSoldier();
 	int getAse();
 	void setAse(int a);
-protected:
+private:
 	int ase;
 	int attacks[3];
 };

@@ -71,9 +71,13 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
+    <IncludePath>$(SolutionDir)\External Dependencies\GLEW\include;$(SolutionDir)\External Dependencies\GLFW\include;$(SolutionDir)\External Dependencies\SOIL\include;$(IncludePath)</IncludePath>
+    <LibraryPath>$(SolutionDir)\External Dependencies\GLEW\lib;$(SolutionDir)\External Dependencies\GLFW\lib;$(SolutionDir)\External Dependencies\SOIL\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
+    <IncludePath>$(SolutionDir)\External Dependencies\GLEW\include;$(SolutionDir)\External Dependencies\GLFW\include;$(SolutionDir)\External Dependencies\SOIL\include;$(IncludePath)</IncludePath>
+    <LibraryPath>$(SolutionDir)\External Dependencies\GLEW\lib;$(SolutionDir)\External Dependencies\GLFW\lib;$(SolutionDir)\External Dependencies\SOIL\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
@@ -92,6 +96,7 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>opengl32.lib;glew32s.lib;glfw3.lib;SOIL.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -105,6 +110,7 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>opengl32.lib;glew32s.lib;glfw3.lib;SOIL.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -167,6 +173,8 @@
     <ClInclude Include="Projectile.h" />
     <ClInclude Include="QuadTree.h" />
     <ClInclude Include="Rectangle.h" />
+    <ClInclude Include="RenderHelper.h" />
+    <ClInclude Include="RenderManager.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="Soldier.h" />
     <ClInclude Include="SoundSystem.h" />
@@ -196,12 +204,14 @@
     <ClCompile Include="MemoryPool.cpp" />
     <ClCompile Include="MemoryPoolManager.cpp" />
     <ClCompile Include="MessageLog.cpp" />
-    <ClCompile Include="movement.cpp" />
+    <ClCompile Include="Movement.cpp" />
     <ClCompile Include="NPC.cpp" />
     <ClCompile Include="PhysicsManager.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Projectile.cpp" />
     <ClCompile Include="QuadTree.cpp" />
+    <ClCompile Include="RenderHelper.cpp" />
+    <ClCompile Include="RenderManager.cpp" />
     <ClCompile Include="Soldier.cpp" />
     <ClCompile Include="SoundSystem.cpp" />
     <ClCompile Include="SplSoldier.cpp" />
