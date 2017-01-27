@@ -157,6 +157,7 @@
     <ClInclude Include="Input.h" />
     <ClInclude Include="LivingObj.h" />
     <ClInclude Include="Manager.h" />
+    <ClInclude Include="memManager.h" />
     <ClInclude Include="MemoryPool.h" />
     <ClInclude Include="MemoryPoolManager.h" />
     <ClInclude Include="MessageLog.h" />
@@ -194,6 +195,7 @@
     <ClCompile Include="LivingObj.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Manager.cpp" />
+    <ClCompile Include="memManager.cpp" />
     <ClCompile Include="MemoryPool.cpp" />
     <ClCompile Include="MemoryPoolManager.cpp" />
     <ClCompile Include="MessageLog.cpp" />
