@@ -32,12 +32,12 @@
 using namespace std;
 
 
-
-//void testQuadTree();
-//bool checkCollision(WorldObj *recA, WorldObj *recB);	//given two bounding boxes, check if they collide
-//bool coordOverlap(int value, int min, int max) { return (value >= min) && (value <= max); }		//helper func for checkCollision
+void testQuadTree();
+bool checkCollision(WorldObj *recA, WorldObj *recB);	//given two bounding boxes, check if they collide
+bool coordOverlap(int value, int min, int max) { return (value >= min) && (value <= max); }		//helper func for checkCollision
 
 void ERONS_LOOP();
+void ALEX_LOOP(QuadTree* _physicsQuadTree, WorldObj* _player, vector<WorldObj*> &_recVec);
 
 int main() {
 		LOG("Hello world!");
@@ -46,6 +46,32 @@ int main() {
 		for (int i = 0; i < 10; i++) {
 			rInt[i] = rand() % 4 - 1;
 		}
+
+		/************************************************************************************************SET-UP*******************************************************/
+		WorldObj* screen = new WorldObj(Vector2f(0.0, 0.0), 100.0, 100.0);	//init screen
+		WorldObj* Alex = new WorldObj(Vector2f(20.0, 20.0), 20.0, 20.0);	//init player
+		vector<WorldObj*> recVec;	//obj vector
+
+		//for (int i = 0; i < 2; i++) {		//init obj vec
+		//	WorldObj* myRec = new WorldObj(Vector2f(rand() % 90, rand() % 90), 10.0, 10.0);
+		//	cout << "X: " << myRec->getX() << ", Y: " << myRec->getY() << endl;
+		//	recVec.push_back(myRec);
+		//}
+
+		WorldObj* myRec1 = new WorldObj(Vector2f(60, 60), 10.0, 10.0);
+		WorldObj* myRec2 = new WorldObj(Vector2f(80, 80), 10.0, 10.0);
+		recVec.push_back(myRec1); recVec.push_back(myRec2);
+
+		QuadTree* collideTree = new QuadTree(0, screen);
+
+
+
+
+
+		/************************************************************************************************TESTING*******************************************************/
+		// TRY PUTTING YOUR TEST CODE IN A FUNC IF POSSIBLE
+
+		/* ALLESIO */
 		Factions fac(rInt);
 		Hero person(20, 0, true);
 		Texture* still = new Texture();
@@ -57,7 +83,6 @@ int main() {
 		cout << CheckClass::isNPC(&person)<< endl;
 		//Hero* person= NEW(POOL("HeroPool")) Hero(20, 0, true);
 		//cout << "It got here" << endl;
-		ERONS_LOOP();
 		//person.setHealth(-10);
 		//person.setAlive(false);
 		//cout << "person is " << person.getAlive() << " with " << person.getHealth() << endl;
@@ -91,10 +116,6 @@ int main() {
 		//	delete a;
 		//}
 
-
-		//Alex: test QT tomorrow on hero obj, and make QT generic to take in any obj
-		//testQuadTree();
-
 		//Texture test;
 		//test.setFrames(5);
 		//test.setFWidth(100);
@@ -105,6 +126,16 @@ int main() {
 		//for (int i = 0; i < 20;i++) {
 		//	person.animateObj();
 		//}
+
+
+
+		/* ALEX */
+		ALEX_LOOP(collideTree, Alex, recVec);
+
+		/* ERON */
+		//ERONS_LOOP();
+
+
 		_CrtSetReportMode(_CRT_ERROR, _CRTDBG_MODE_DEBUG);
 		_CrtDumpMemoryLeaks();
 	                                   
@@ -116,55 +147,97 @@ int main() {
 
 void testQuadTree()
 {
-	//WorldObj* testrec = new WorldObj(Vector2f(0.0, 0.0), 100.0, 100.0);	//init screen
-	//WorldObj* Alex = new WorldObj(Vector2f(51.0, 51.0), 20.0, 20.0);	//init player
-	//vector<WorldObj*> recVec;	//obj vector
+	WorldObj* testrec = new WorldObj(Vector2f(0.0, 0.0), 100.0, 100.0);	//init screen
+	WorldObj* Alex = new WorldObj(Vector2f(51.0, 51.0), 20.0, 20.0);	//init player
+	vector<WorldObj*> recVec;	//obj vector
 
-	//for (int i = 0; i < 100; i++) {		//init obj vec
-	//	WorldObj* myRec = new WorldObj(Vector2f(rand() % 90, rand() % 90), 10.0, 10.0);
-	//	recVec.push_back(myRec);
-	//}
-	////cout << "before making tree\n";
+	for (int i = 0; i < 100; i++) {		//init obj vec
+		WorldObj* myRec = new WorldObj(Vector2f(rand() % 90, rand() % 90), 10.0, 10.0);
+		recVec.push_back(myRec);
+	}
+	//cout << "before making tree\n";
 
-	//QuadTree* myTree = new QuadTree(0, testrec);	//init 
-	////cout << "after making tree\n";
-	//bool mybool = true;
-	//while (mybool) {	//tick every frame
-	//	//cout << "before clear" << endl;
-	//	myTree->clear();	//clear my tree
-	//	//cout << "after clear" << endl;
-	//	for (int i = 0; i < recVec.size(); i++) {
-	//		//cout << "before insert" << endl;
-	//		myTree->insert(recVec[i]);	//insert all obj into tree
-	//		//cout << "after insert" << endl;
-	//	}
-	//	vector<WorldObj*> collidable;
-	//	myTree->retrieve(collidable, Alex);	//vector now holds all collidable obj to Alex
-	//	//cout << "after retrieve" << endl;
-	//	//int count = 0;
-	//	for (int i = 0; i < collidable.size(); i++) {
-	//		if (checkCollision(collidable[i], Alex)) {
-	//			cout << "collision between Alex and obj number " << i << endl;
-	//			cout << "Alex width and height are " << Alex->getWidth() << ", " << Alex->getHeight() << endl;
-	//			cout << "obj width and height are " << collidable[i]->getWidth() << ", " << collidable[i]->getHeight() << endl;
-	//			cout << "Alex's bounds are " << Alex->getX() << ", " << Alex->getY() << endl;
-	//			cout << "Obj bounds are " << collidable[i]->getX() << ", " << collidable[i]->getY() << endl;
-	//		}
-	//	}
-	//	mybool = false;
-	//}
-	//system("PAUSE");
+	QuadTree* myTree = new QuadTree(0, testrec);	//init 
+	//cout << "after making tree\n";
+	bool mybool = true;
+	while (mybool) {	//tick every frame
+		//cout << "before clear" << endl;
+		myTree->clear();	//clear my tree
+		//cout << "after clear" << endl;
+		for (int i = 0; i < recVec.size(); i++) {
+			//cout << "before insert" << endl;
+			myTree->insert(recVec[i]);	//insert all obj into tree
+			//cout << "after insert" << endl;
+		}
+		vector<WorldObj*> collidable;
+		myTree->retrieve(collidable, Alex);	//vector now holds all collidable obj to Alex
+		//cout << "after retrieve" << endl;
+		//int count = 0;
+		for (int i = 0; i < collidable.size(); i++) {
+			if (checkCollision(collidable[i], Alex)) {
+				cout << "collision between Alex and obj number " << i << endl;
+				cout << "Alex width and height are " << Alex->getWidth() << ", " << Alex->getHeight() << endl;
+				cout << "obj width and height are " << collidable[i]->getWidth() << ", " << collidable[i]->getHeight() << endl;
+				cout << "Alex's bounds are " << Alex->getX() << ", " << Alex->getY() << endl;
+				cout << "Obj bounds are " << collidable[i]->getX() << ", " << collidable[i]->getY() << endl;
+			}
+		}
+		mybool = false;
+	}
+	system("PAUSE");
 
 }
 
 
-//bool checkCollision(WorldObj *recA, WorldObj *recB)
-//{
-//	bool xCollide = coordOverlap(recA->getX(), recB->getX(), recB->getX() + recB->getWidth()) || coordOverlap(recB->getX(), recA->getX(), recA->getX() + recA->getWidth());
-//	bool yCollide = coordOverlap(recA->getY(), recB->getY(), recB->getY() + recB->getHeight()) || coordOverlap(recB->getY(), recA->getY(), recA->getY() + recA->getHeight());
-//	return xCollide && yCollide;
-//}
+bool checkCollision(WorldObj *recA, WorldObj *recB)
+{
+	bool xCollide = coordOverlap(recA->getX(), recB->getX(), recB->getX() + recB->getWidth()) || coordOverlap(recB->getX(), recA->getX(), recA->getX() + recA->getWidth());
+	bool yCollide = coordOverlap(recA->getY(), recB->getY(), recB->getY() + recB->getHeight()) || coordOverlap(recB->getY(), recA->getY(), recA->getY() + recA->getHeight());
+	return xCollide && yCollide;
+}
 
+
+void ALEX_LOOP(QuadTree* _physicsQuadTree, WorldObj* _player, vector<WorldObj*> &_recVec) {
+	LOG("Hello world!");
+
+	//pauses the program for viewing
+	system("PAUSE");
+
+	//demonstration of a meory leak
+	//while (true) {
+	//	void* a = malloc(64);
+	//	delete a;
+	//}
+
+	//psuedo Gameloop
+	MessageLog* mLog = new MessageLog();
+	TaskBuffer* tBuffer = new TaskBuffer(mLog);
+	Input* iController = new Input(mLog, tBuffer, _player);
+	//create Managers and add to Manager table
+
+	DummyController* DumM = new DummyController(mLog, tBuffer);
+	PhysicsManager* PhysM = new PhysicsManager(mLog, tBuffer, _physicsQuadTree);
+	DumM->register_manager();
+	PhysM->register_manager();
+
+
+	//std::unordered_map<std::string, Manager*> manager_table;
+
+	//manager_table["DumM"] = DumM;
+
+
+
+	while (true) {
+		_physicsQuadTree->clear();
+		for (int i = 0; i < _recVec.size(); i++) {
+			_physicsQuadTree->insert(_recVec[i]);	//insert all obj into tree
+		}
+		//clock 
+		iController->InputCheck();
+		tBuffer->run();
+		//draw
+	}
+}
 
 void ERONS_LOOP() {
 	/////////////////////////////////////////////////////////////////
