@@ -1,40 +1,41 @@
 #include "stdafx.h"
 #include "memManager.h"
+#include "Pool.h"
 
 
 memManager::memManager(MessageLog* _mLog, TaskBuffer* _tBuffer)
 	: Manager(_mLog, _tBuffer)
 {
-	//THIS IS WHAT YOU EDIT (JUST THE NAME IN PRINT STATEMENT)
-	//////////////////////////////////////
-	LOG("Memory Manager Objected Constructed");
-	//////////////////////////////////////
+	
+	LOG("memManager Object Constructed");
+	
 }
 
 
 memManager::~memManager()
 {
-	//THIS IS WHAT YOU EDIT (JUST THE NAME IN PRINT STATEMENT)
-	//////////////////////////////////////
-	LOG("Memory Manager Objected Destroyed");
-	//////////////////////////////////////
+	
+	LOG("memManager Object Destroyed");
+
 }
 
 void memManager::register_manager()
 {
-	//THIS IS WHAT YOU EDIT
-	//////////////////////////////////////
-	tBuffer->add_to_table("DUM", this);
-	//////////////////////////////////////
+	
+	tBuffer->add_to_table("CREATE_POOL", this);
+	tBuffer->add_to_table("MODIFY_POOL", this);
+	
 }
 
 void memManager::execute_task(Task* current_task)
 {
-	if (current_task->name == "Move_Up") {
-		//THIS IS WHAT YOU EDIT
-		//////////////////////////////////////
-		int result = move_up();
-		//////////////////////////////////////
+	int result;
+	MemoryPool* p = create_pool(4096);
+	MemNode* m = init_pool(p, 32);
+	if (current_task->name == "create_pool") {
+		if(p != nullptr && m != nullptr)
+	        result = 0;
+		
 		if (result == 0) {
 			current_task->updateStatus("COMPLETED");
 		}
@@ -43,11 +44,38 @@ void memManager::execute_task(Task* current_task)
 		}
 		this->send_result(current_task);
 	}
-	else if (current_task->name == "Move_Down") {
-		//THIS IS WHAT YOU EDIT
-		//////////////////////////////////////
-		int result = move_down();
-		//////////////////////////////////////
+	else if (current_task->name == "destroy_pool") {
+		destroy_pool(p);
+		destroy_MemNode_list(m);
+		result = 0;
+		
+		if (result == 0) {
+			current_task->updateStatus("COMPLETED");
+		}
+		else {
+			current_task->updateStatus("FAILED");
+		}
+		this->send_result(current_task);
+	}
+	else if (current_task->name == "add_to_pool") {
+		void* f = find_available_block(m);
+		result = 0;
+
+		if (result == 0) {
+			current_task->updateStatus("COMPLETED");
+		}
+		else {
+			current_task->updateStatus("FAILED");
+		}
+		this->send_result(current_task);
+	}
+	else if (current_task->name == "remove_from_pool") {
+		void* f = make_Available(m,p,0);
+		if(f != NULL)
+		    result = 0;
+		else 
+			result = 1;
+
 		if (result == 0) {
 			current_task->updateStatus("COMPLETED");
 		}
@@ -62,19 +90,5 @@ void memManager::execute_task(Task* current_task)
 	}
 }
 
-//WRITE EQUIVLENT FUNCTIONS IN A SEPARATE CLASS FILE 
-//////////////////////////////////////
-int memManager::move_up()
-{
-	std::cout << "PhyM:Move Up" << std::endl;
-	return 0;
-}
-
-int memManager::move_down()
-{
-	std::cout << "PhyM:Move Down" << std::endl;
-	return 1;
-}
-//////////////////////////////////////
 
 

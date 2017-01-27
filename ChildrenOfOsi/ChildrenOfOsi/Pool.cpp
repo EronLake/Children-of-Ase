@@ -89,7 +89,7 @@ void* find_available_block(MemNode* head_ptr) {
 	return NULL;
 }
 
-MemNode* MemNode::make_Available(MemNode* head_ptr, MemoryPool* p, size_t node_number) {
+MemNode* make_Available(MemNode* head_ptr, MemoryPool* p, size_t node_number) {
 	size_t count = 0;
 	MemNode* h = head_ptr;
 	if (node_number >= p->num_of_blocks)

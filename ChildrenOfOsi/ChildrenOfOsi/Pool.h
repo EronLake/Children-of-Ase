@@ -29,9 +29,18 @@ public:
 	void setAvailability(bool avail);
 	void* getBlockPointer();
 	void setBlockPointer(void* ptr);
-	MemNode* make_Available(MemNode* head_ptr, MemoryPool* p, size_t node_number);
 private:
 	MemNode* next;
 	bool is_available;
 	void* block_pointer;
 };
+
+MemNode* init_pool(MemoryPool *p, size_t bsize);
+size_t get_free_pool_size(MemoryPool* p);
+void destroy_pool(MemoryPool* p);
+MemoryPool* create_pool(size_t sizeInBytes);
+void destroy_MemNode_list(MemNode* head_ptr);
+MemNode* make_Available(MemNode* head_ptr, MemoryPool* p, size_t node_number);
+void* find_available_block(MemNode* head_ptr);
+
+

@@ -146,11 +146,9 @@
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Allocation.h" />
     <ClInclude Include="CheckClass.h" />
     <ClInclude Include="common.h" />
     <ClInclude Include="DummyController.h" />
-    <ClInclude Include="Errors.h" />
     <ClInclude Include="Factions.h" />
     <ClInclude Include="GameWindow.h" />
     <ClInclude Include="Hero.h" />
@@ -158,8 +156,6 @@
     <ClInclude Include="LivingObj.h" />
     <ClInclude Include="Manager.h" />
     <ClInclude Include="memManager.h" />
-    <ClInclude Include="MemoryPool.h" />
-    <ClInclude Include="MemoryPoolManager.h" />
     <ClInclude Include="MessageLog.h" />
     <ClInclude Include="Movement.h" />
     <ClInclude Include="NPC.h" />
@@ -174,14 +170,11 @@
     <ClInclude Include="SoundSystem.h" />
     <ClInclude Include="SplSoldier.h" />
     <ClInclude Include="Sprite.h" />
-    <ClInclude Include="StandardMemoryPool.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
     <ClInclude Include="Task.h" />
     <ClInclude Include="TaskBuffer.h" />
     <ClInclude Include="Texture.h" />
-    <ClInclude Include="tinystr.h" />
-    <ClInclude Include="tinyxml.h" />
     <ClInclude Include="Vector2f.h" />
     <ClInclude Include="WorldObj.h" />
   </ItemGroup>
@@ -196,8 +189,6 @@
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Manager.cpp" />
     <ClCompile Include="memManager.cpp" />
-    <ClCompile Include="MemoryPool.cpp" />
-    <ClCompile Include="MemoryPoolManager.cpp" />
     <ClCompile Include="MessageLog.cpp" />
     <ClCompile Include="movement.cpp" />
     <ClCompile Include="NPC.cpp" />
@@ -220,18 +211,8 @@
     <ClCompile Include="TaskBuffer.cpp" />
     <ClCompile Include="testmain.cpp" />
     <ClCompile Include="Texture.cpp" />
-    <ClCompile Include="tinystr.cpp" />
-    <ClCompile Include="tinyxml.cpp" />
-    <ClCompile Include="tinyxmlerror.cpp" />
-    <ClCompile Include="tinyxmlparser.cpp" />
     <ClCompile Include="Vector2f.cpp" />
     <ClCompile Include="WorldObj.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <Xml Include="pools.xml" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="StandardMemoryPool.inl" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
