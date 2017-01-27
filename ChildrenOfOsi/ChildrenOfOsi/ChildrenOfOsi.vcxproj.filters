@@ -58,10 +58,7 @@
     <ClInclude Include="Manager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="MemoryPool.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="MemoryPoolManager.h">
+    <ClInclude Include="Pool.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="MessageLog.h">
@@ -101,9 +98,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Sprite.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="StandardMemoryPool.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Task.h">
@@ -168,10 +162,7 @@
     <ClCompile Include="Manager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="MemoryPool.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="MemoryPoolManager.cpp">
+    <ClCompile Include="Pool.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="MessageLog.cpp">
@@ -248,11 +239,5 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <Xml Include="pools.xml" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="StandardMemoryPool.inl">
-      <Filter>Header Files</Filter>
-    </None>
   </ItemGroup>
 </Project>

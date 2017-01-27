@@ -1,5 +1,4 @@
 #include "stdafx.h"
-#include <stdio.h>
 #include "Pool.h"
 
 MemNode::MemNode() {
@@ -53,27 +52,7 @@ void MemNode::setBlockPointer(void* ptr) {
 /////////////////////////////////////////
 /*Stuff that was originally in Main*/
 /////////////////////////////////////////
-class Warrior {
-public:
-	Warrior(int hp, bool ali, float _x, float _y)
-	{
-		health = hp;
-		alive = ali;
-		x = _x;
-		y = _y;
-	}
 
-	Warrior() :health(500), alive(true), x(0), y(200) {};
-
-	~Warrior() {};
-
-	int health;
-	bool alive;
-	float x;
-	float y;
-
-
-};
 
 void* find_available_block(MemNode* head_ptr) {
 	if (head_ptr == NULL)

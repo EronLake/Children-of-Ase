@@ -1,9 +1,14 @@
 #pragma once
-#include <stdio.h>   
+#include "stdafx.h"  
 #include <stdlib.h>     
 #include <time.h>
 #include <iostream>
 #include <string>
+
+#ifndef POOL_H
+#define POOL_H
+
+#endif /* POOL_H */
 
 class MemoryPool {
 public:
@@ -33,6 +38,28 @@ private:
 	MemNode* next;
 	bool is_available;
 	void* block_pointer;
+};
+
+class Warrior {
+public:
+	Warrior(int hp, bool ali, float _x, float _y)
+	{
+		health = hp;
+		alive = ali;
+		x = _x;
+		y = _y;
+	}
+
+	Warrior() :health(500), alive(true), x(0), y(200) {};
+
+	~Warrior() {};
+
+	int health;
+	bool alive;
+	float x;
+	float y;
+
+
 };
 
 MemNode* init_pool(MemoryPool *p, size_t bsize);
