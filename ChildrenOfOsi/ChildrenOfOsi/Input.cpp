@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "Input.h"
 #include <conio.h>
+#include <Windows.h>
 
 Input::Input(MessageLog* _mLog, TaskBuffer* _tBuffer)
 {
@@ -25,35 +26,28 @@ Input::~Input()
 
 void Input::InputCheck()
 {
-	int key;
-	if (_kbhit())
+	short W = GetKeyState('W') >> 15;
+	short A = GetKeyState('A') >> 15;
+	short S = GetKeyState('S') >> 15;
+	short D = GetKeyState('D') >> 15;
+
+	if (W)
 	{
-		key = _getch();
-
-		if (key == 'w')
-		{
-			//createTask("Move_Up", "MOVE");
-			createTaskWithObj("Move_Up", "MOVE", player);
-		}
-		else if (key == 'a')
-		{
-			//createTask("Move_Left", "MOVE");
-			createTaskWithObj("Move_Left", "MOVE", player);
-
-		}
-		else if (key == 's')
-		{
-			//createTask("Move_Down", "MOVE");
-			createTaskWithObj("Move_Down", "MOVE", player);
-
-		}
-		else if (key == 'd')
-		{
-			//createTask("Move_Right", "MOVE");
-			createTaskWithObj("Move_Right", "MOVE", player);
-
-		}
+		createTaskWithObj("Move_Up", "MOVE", player);
 	}
+	if (A)
+	{
+		createTaskWithObj("Move_Left", "MOVE", player);
+	}
+	if (S)
+	{
+		createTaskWithObj("Move_Down", "MOVE", player);
+	}
+	if (D)
+	{
+		createTaskWithObj("Move_Right", "MOVE", player);
+	}
+
 }
 
 void Input::createTask(std::string task_name, std::string type)

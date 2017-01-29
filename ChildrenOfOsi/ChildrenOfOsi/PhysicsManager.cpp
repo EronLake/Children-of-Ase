@@ -1,4 +1,3 @@
-#pragma comment(lib, "user32.lib")
 #include "stdafx.h"
 #include "PhysicsManager.h"
 
@@ -17,6 +16,8 @@ PhysicsManager::PhysicsManager(MessageLog * _mLog, TaskBuffer * _tBuffer, QuadTr
 	LOG("PhysicsManager W/QT Object Constructed");
 	//init a movement obj 
 	moveHelper = new Movement(_physicsQuadTree);
+	//init mapping of tasks to functions
+	//moveHelper->init_task_map();
 }
 
 
@@ -38,9 +39,17 @@ void PhysicsManager::execute_task(Task* current_task)
 	if (current_task->objToUpdate == NULL) {
 		result = 1;
 		LOG("Error: No player object");
-		current_task->updateStatus("FAILED");
 	}
 	else {
+		//result = moveHelper->move(current_task);// = moveHelper->taskMap.find(current_task->name);
+		/*if (moveHelper->iter == moveHelper->taskMap.end()) {
+			result = 1;
+			LOG("Error: Task name '" << current_task->name << "' does not exist");
+		}
+		else {
+			(moveHelper->iter->second)(current_task->objToUpdate);
+		}*/
+
 		if (current_task->name == "Move_Up") {
 			result = moveHelper->move_up(current_task->objToUpdate);
 		}
@@ -57,8 +66,7 @@ void PhysicsManager::execute_task(Task* current_task)
 			result = 1;
 			LOG("Error: Task name does not exist"); //perror?
 		}
-	}
-
+	} 
 	if (result == 0) {
 		current_task->updateStatus("COMPLETED");
 	}
