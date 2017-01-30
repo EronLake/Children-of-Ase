@@ -30,6 +30,8 @@ void Input::InputCheck()
 	short A = GetKeyState('A') >> 15;
 	short S = GetKeyState('S') >> 15;
 	short D = GetKeyState('D') >> 15;
+	short R = GetKeyState('R') >> 15;
+	short T = GetKeyState('T') >> 15;
 
 	if (W)
 	{
@@ -47,7 +49,13 @@ void Input::InputCheck()
 	{
 		createTaskWithObj("Move_Right", "MOVE", player);
 	}
-
+	if (R) {
+//      Soldier* soldier;
+//		create("Create_Soldier", "MODIFY_POOL", soldier, ... );
+	}
+	if (T) {
+		
+	}
 }
 
 void Input::createTask(std::string task_name, std::string type)
