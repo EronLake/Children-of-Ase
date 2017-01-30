@@ -97,6 +97,7 @@ vector<WorldObj*> QuadTree::retrieve(vector<WorldObj*>& listOfObj, WorldObj * my
 		nodes[index]->retrieve(listOfObj, myrec);
 	}
 	listOfObj.insert(listOfObj.end(), objs.begin(), objs.end());	//append all objects in the node to listOfObj
+	//objs.clear();
 	return listOfObj;
 }
 

@@ -1,9 +1,7 @@
 
 .vs/
-ChildrenofOsi/Debug/
-Children of Osi/Debug/
-Debug/
 
+ChildrenofOsi/ChildrenofOsi/Debug
 ChildrenofOsi/ChildrenofOsi.VC.db
 ChildrenofOsi/ChildrenofOsi.VC.VC.opendb
 
@@ -13,7 +11,9 @@ Children of Osi.VC.VC.opendb
 ChildrenOfOsi/ChildrenOfOsi.VC.db
 
 ChildrenOfOsi/.vs/
-ChildrenOfOsi/Debug/
+ChildrenOfOsi/Debug/ChildrenOfOsi.pdb
+ChildrenOfOsi/Debug/ChildrenOfOsi.ilk
+ChildrenOfOsi/Debug/ChildrenOfOsi.exe
 ChildrenOfOsi/ipch/
 ChildrenOfOsi/x64/
 

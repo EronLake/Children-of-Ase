@@ -2,6 +2,8 @@
 #include "stdafx.h"
 #include "common.h"
 #include "QuadTree.h"
+#include "Task.h"
+
 class Movement {
 public:
 	Movement(QuadTree* QT);
@@ -12,6 +14,7 @@ public:
 	int move_down(WorldObj* obj);
 	int move_left(WorldObj* obj);
 	int move_right(WorldObj* obj);
+	//void init_task_map();
 
 private:
 

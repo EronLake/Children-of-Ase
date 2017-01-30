@@ -16,11 +16,11 @@ Movement::~Movement() {
 int Movement::move_up(WorldObj* obj) {
 	//get list to check collision with
 	objVec = tree->retrieve(objVec, obj);
-	obj->shiftY(-1.0);
+	obj->shiftY(-0.01);
 	for (int i = 0; i < objVec.size(); i++) {
 		if (collision(objVec[i], obj)) {
-			std::cout << "failed to move up. collision." << std::endl;
-			obj->shiftY(1.0);
+			LOG("failed to move up. collision.");
+			obj->shiftY(0.01);
 			break;
 		}
 	}
@@ -30,11 +30,11 @@ int Movement::move_up(WorldObj* obj) {
 int Movement::move_down(WorldObj* obj) {
 	//get list to check collision with
 	objVec = tree->retrieve(objVec, obj);
-	obj->shiftY(1.0);
+	obj->shiftY(0.01);
 	for (int i = 0; i < objVec.size(); i++) {
 		if (collision(objVec[i], obj)) {
-			std::cout << "failed to move down. collision." << std::endl;
-			obj->shiftY(-1.0);
+			LOG("failed to move down. collision.");
+			obj->shiftY(-0.01);
 			break;
 		}
 	}
@@ -44,11 +44,11 @@ int Movement::move_down(WorldObj* obj) {
 int Movement::move_left(WorldObj* obj) {
 	//get list to check collision with
 	objVec = tree->retrieve(objVec, obj);
-	obj->shiftX(-1.0);
+	obj->shiftX(-0.01);
 	for (int i = 0; i < objVec.size(); i++) {
 		if (collision(objVec[i], obj)) {
-			std::cout << "failed to move left. collision." << std::endl;
-			obj->shiftX(1.0);
+			LOG("failed to move left. collision.");
+			obj->shiftX(0.01);
 			break;
 		}
 	}
@@ -58,17 +58,24 @@ int Movement::move_left(WorldObj* obj) {
 int Movement::move_right(WorldObj* obj) {
 	//get list to check collision with
 	objVec = tree->retrieve(objVec, obj);
-	obj->shiftX(1.0);
+	obj->shiftX(0.01);
 	for (int i = 0; i < objVec.size(); i++) {
 		if (collision(objVec[i], obj)) {
-			std::cout << "failed to move right. collision." << std::endl;
-			obj->shiftX(-1.0);
+			LOG("failed to move right. collision.");
+			obj->shiftX(-0.01);
 			break;
 		}
 	}
 	LOG("X: " << obj->getX() << " Y: " << obj->getY());
 	return 0;
 }
+
+/*void Movement::init_task_map() {
+	taskMap.emplace("Move_Up", &Movement::move_up);
+	taskMap.emplace("Move_Down", &Movement::move_down);
+	taskMap.emplace("Move_Left", &Movement::move_left);
+	taskMap.emplace("Move_Right", &Movement::move_right);
+}*/
 
 bool Movement::collision(WorldObj* recA, WorldObj* recB)
 {
