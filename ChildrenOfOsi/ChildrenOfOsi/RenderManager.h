@@ -10,7 +10,6 @@ class RenderManager : public Manager
 {
 public:
 	RenderManager(MessageLog* _mLog, TaskBuffer* _tBuffer);
-	RenderManager(MessageLog* _mLog, TaskBuffer* _tBuffer, QuadTree* _renderQuadTree);
 	~RenderManager();
 
 	virtual void register_manager() final;

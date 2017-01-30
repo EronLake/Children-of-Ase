@@ -2,14 +2,9 @@
 #include "RenderManager.h"
 
 
-RenderManager::RenderManager(MessageLog* _mLog, TaskBuffer* _tBuffer) : Manager(_mLog, _tBuffer)
+RenderManager::RenderManager(MessageLog * _mLog, TaskBuffer * _tBuffer) : Manager(_mLog, _tBuffer)
 {
-	LOG("RenderManager Object Constructed");
-}
-
-RenderManager::RenderManager(MessageLog * _mLog, TaskBuffer * _tBuffer, QuadTree * _physicsQuadTree) : Manager(_mLog, _tBuffer)
-{
-	renderHelper = new RenderHelper(_physicsQuadTree);
+	renderHelper = new RenderHelper();
 	LOG("RenderManager W/QT Object Constructed");
 }
 
