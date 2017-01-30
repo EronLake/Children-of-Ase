@@ -17,4 +17,8 @@ public:
 	virtual void register_manager() final;
 	virtual void execute_task(Task* current_task) final;
 
+private:
+	//MemoryPool* hero_pool;
+	//MemNode* hero_head;
+
 };

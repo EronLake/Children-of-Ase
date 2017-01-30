@@ -6,7 +6,8 @@
 memManager::memManager(MessageLog* _mLog, TaskBuffer* _tBuffer)
 	: Manager(_mLog, _tBuffer)
 {
-	
+//	hero_pool = create_pool();
+//	hero_head = init_pool();
 	LOG("memManager Object Constructed");
 	
 }
