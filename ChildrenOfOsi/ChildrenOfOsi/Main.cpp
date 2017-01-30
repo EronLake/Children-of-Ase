@@ -22,6 +22,8 @@
 #include "PhysicsManager.h"
 #include "Manager.h"
 #include "Movement.h"
+#include "RenderHelper.h"
+#include "RenderManager.h"
 #include <conio.h>
 #include "CheckClass.h"
 #include "Pool.h"
