@@ -26,8 +26,13 @@
 #include "RenderManager.h"
 #include <conio.h>
 #include "CheckClass.h"
+
 #include "Pool.h"
 #include "memManager.h"
+
+#include "fmod.hpp"
+#include "SoundSystem.h"
+
 #define _CRTDBG_MAP_ALLOC
 
 using namespace std;
@@ -41,7 +46,11 @@ void ERONS_LOOP();
 void ALESSIO_TEST();
 void ALEX_LOOP(QuadTree* _physicsQuadTree, WorldObj* _player, vector<WorldObj*> &_recVec);
 
+
 void Darion_Ian_Test();
+
+void ANDREWS_TEST();
+
 
 int main() {
 		LOG("Hello world!");
@@ -231,6 +240,7 @@ void ALEX_LOOP(QuadTree* _physicsQuadTree, WorldObj* _player, vector<WorldObj*> 
 
 
 
+
 	while (true) {
 		_physicsQuadTree->clear();
 		for (int i = 0; i < _recVec.size(); i++) {
@@ -320,3 +330,37 @@ void Darion_Ian_Test() {
 /////////////////////////////////////////////////////////////////
 //ERON'S LOOP NO TOUCHY
 /////////////////////////////////////////////////////////////////
+
+void ANDREWS_TEST() {
+	FMOD::Channel *channels[32]; //all of the channels
+
+	foo::soundType type;
+	FMOD::Sound* soundSample;
+	const char* name;              //the variables required
+	FMOD::Channel* channel;
+	bool ispaused;
+	unsigned int time;
+
+	// Initialize our sound system
+	SoundSystemClass soundsystem;
+
+	type = foo::soundType::music;
+	name = "04.wav";
+	channel = channels[0];//assign the channel
+	ispaused = false;
+
+	soundsystem.createSound(&soundSample, name);// Create the sound
+	soundSample->getLength(&time, FMOD_TIMEUNIT_PCM);// Find the length
+
+													 //SoundObject* playable = new SoundObject("04.wav", &soundSample, type);
+													 //object stuff
+
+
+	soundsystem.playSound(soundSample, false, channel, ispaused); 	// Play the sound, with loop mode
+
+
+	cout << "Press return to quit." << endl;  // Do something meanwhile...
+	cin.get();
+
+	soundsystem.releaseSound(soundSample); // Release the sound
+}
