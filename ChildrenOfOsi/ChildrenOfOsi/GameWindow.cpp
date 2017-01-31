@@ -236,10 +236,10 @@ void osi::GameWindow::setupStdShaders()
     std::size_t fileLength = static_cast<std::size_t>(fileStream.tellg());
     fileStream.seekg(0, fileStream.end);
     vertexShaderSource = new char[fileLength + 1];
-    fileStream.read(fragmentShaderSource, fileLength);
+    fileStream.read(vertexShaderSource, fileLength);
     vertexShaderSource[fileLength] = '\0';
 
-    std::cout << vertexShaderSource << std::endl;
+    std::cout << "|\n" << vertexShaderSource << "\n|" << "File length: " << fileLength << std::endl;
   }
   else {
     fileStream.close();
