@@ -69,5 +69,14 @@ MemoryPool* create_pool(size_t sizeInBytes);
 void destroy_MemNode_list(MemNode* head_ptr);
 MemNode* make_Available(MemNode* head_ptr, MemoryPool* p, size_t node_number);
 void* find_available_block(MemNode* head_ptr);
+//void add_hero();
+//void add_soldier();
+//void add_tree();
+//void add_projectile();
+//void add_quest();
+//void add_villager();
+//void add_rock();
+//void add_ase();
+//Need to update parameters as we go
 
 

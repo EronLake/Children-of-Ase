@@ -7,7 +7,22 @@ memManager::memManager(MessageLog* _mLog, TaskBuffer* _tBuffer)
 	: Manager(_mLog, _tBuffer)
 {
 //	hero_pool = create_pool();
-//	hero_head = init_pool();
+//	hero_head = init_pool(hero_pool,);
+//  soldier_pool = create_pool();
+//  soldier_head = init_pool(soldier_pool,);
+//  tree_pool = create_pool();
+//  tree_pool = init_pool(tree_pool,)
+//  projectile_pool = create_pool();
+//  projectile_head = init_pool(projectile_head,);
+//  quest_pool = create_pool();
+//  quest_head = init_pool(quest_pool,);
+//  villager_pool = create_pool();
+//  villager_head = init_pool(villager_pool,_;
+//  rock_pool = create_pool();
+//  rock_head = init_pool(rock_pool,);
+//  ase_pool = create_pool();
+//  ase_head = init_pool(ase_pool,);
+//Need to add more pools
 	LOG("memManager Object Constructed");
 	
 }
