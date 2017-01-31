@@ -223,8 +223,8 @@ void osi::GameWindow::setupWindow()
 void osi::GameWindow::setupStdShaders()
 {
   std::ifstream fileStream;
-  char *vertexShaderSource;
-  char *fragmentShaderSource;
+  char *vertexShaderSource = nullptr;
+  char *fragmentShaderSource = nullptr;
 
   GLint compileStepSuccess;
   GLchar compileStepInfoLog[1024];
@@ -233,13 +233,9 @@ void osi::GameWindow::setupStdShaders()
   fileStream.open(GameWindow::STD_VERTEX_SHADER_PATH);
   if(fileStream) {
     fileStream.seekg(0, fileStream.end);
-	std::size_t fileLength = static_cast<std::size_t>(fileStream.tellg());
-    fileStream.seekg(0, fileStream.beg);
+    std::size_t fileLength = static_cast<std::size_t>(fileStream.tellg());
+    fileStream.seekg(0, fileStream.end);
     vertexShaderSource = new char[fileLength + 1];
-	for (int i = 0; i < fileLength + 1; i++) {
-		vertexShaderSource[i] = NULL;
-		//std::cout << vertexShaderSource[i] << std::endl;
-	}
     fileStream.read(vertexShaderSource, fileLength);
     vertexShaderSource[fileLength] = '\0';
 
@@ -282,13 +278,8 @@ void osi::GameWindow::setupStdShaders()
     std::size_t fileLength = static_cast<std::size_t>(fileStream.tellg());
     fileStream.seekg(0, fileStream.beg);
     fragmentShaderSource = new char[fileLength + 1];
-	for (int i = 0; i < fileLength + 1; i++) {
-		fragmentShaderSource[i] = NULL;
-		//std::cout << fragmentShaderSource[i] << std::endl;
-	}
     fileStream.read(fragmentShaderSource, fileLength);
     fragmentShaderSource[fileLength] = '\0';
-	std::cout << "|\n" << fragmentShaderSource << "\n|" << "File length: " << fileLength << std::endl;
   }
   else {
     delete[] vertexShaderSource;
