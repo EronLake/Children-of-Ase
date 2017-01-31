@@ -233,6 +233,8 @@
     <Xml Include="pools.xml" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="OpenGL Shaders\StdFragmentShader.frag.glsl" />
+    <None Include="OpenGL Shaders\StdVertexShader.vert.glsl" />
     <None Include="StandardMemoryPool.inl" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
