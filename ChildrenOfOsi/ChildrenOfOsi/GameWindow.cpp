@@ -138,7 +138,7 @@ void osi::GameWindow::drawSprite(float x, float y, float width, float height, co
 /// <param name="colorData">An array of unsigned bytes of color imformation</param>
 void osi::GameWindow::drawSprite(float x, float y, float displayWidth, float displayHeight, int imageWidth, int imageHeight, const unsigned char *colorData)
 {
-  
+
 }
 
 void osi::GameWindow::refresh()
@@ -223,8 +223,8 @@ void osi::GameWindow::setupWindow()
 void osi::GameWindow::setupStdShaders()
 {
   std::ifstream fileStream;
-  char *vertexShaderSource;
-  char *fragmentShaderSource;
+  char *vertexShaderSource = nullptr;
+  char *fragmentShaderSource = nullptr;
 
   GLint compileStepSuccess;
   GLchar compileStepInfoLog[1024];
@@ -233,17 +233,11 @@ void osi::GameWindow::setupStdShaders()
   fileStream.open(GameWindow::STD_VERTEX_SHADER_PATH);
   if(fileStream) {
     fileStream.seekg(0, fileStream.end);
-	std::size_t fileLength = static_cast<std::size_t>(fileStream.tellg());
+    std::size_t fileLength = static_cast<std::size_t>(fileStream.tellg());
     fileStream.seekg(0, fileStream.beg);
     vertexShaderSource = new char[fileLength + 1];
-	for (int i = 0; i < fileLength + 1; i++) {
-		vertexShaderSource[i] = NULL;
-		//std::cout << vertexShaderSource[i] << std::endl;
-	}
     fileStream.read(vertexShaderSource, fileLength);
     vertexShaderSource[fileLength] = '\0';
-
-    std::cout << "|\n" << vertexShaderSource << "\n|" << "File length: " << fileLength << std::endl;
   }
   else {
     fileStream.close();
@@ -282,13 +276,8 @@ void osi::GameWindow::setupStdShaders()
     std::size_t fileLength = static_cast<std::size_t>(fileStream.tellg());
     fileStream.seekg(0, fileStream.beg);
     fragmentShaderSource = new char[fileLength + 1];
-	for (int i = 0; i < fileLength + 1; i++) {
-		fragmentShaderSource[i] = NULL;
-		//std::cout << fragmentShaderSource[i] << std::endl;
-	}
     fileStream.read(fragmentShaderSource, fileLength);
     fragmentShaderSource[fileLength] = '\0';
-	std::cout << "|\n" << fragmentShaderSource << "\n|" << "File length: " << fileLength << std::endl;
   }
   else {
     delete[] vertexShaderSource;
