@@ -238,6 +238,9 @@ void osi::GameWindow::setupStdShaders()
     vertexShaderSource = new char[fileLength + 1];
     fileStream.read(vertexShaderSource, fileLength);
     vertexShaderSource[fileLength] = '\0';
+
+    std::cout << vertexShaderSource << std::endl;
+    std::cout << "File length: " << fileLength << std::endl;
   }
   else {
     fileStream.close();
@@ -278,6 +281,9 @@ void osi::GameWindow::setupStdShaders()
     fragmentShaderSource = new char[fileLength + 1];
     fileStream.read(fragmentShaderSource, fileLength);
     fragmentShaderSource[fileLength] = '\0';
+
+    std::cout << fragmentShaderSource << std::endl;
+    std::cout << "File length: " << fileLength << std::endl;
   }
   else {
     delete[] vertexShaderSource;

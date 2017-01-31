@@ -11,5 +11,5 @@ void main()
 {
   gl_Position = vec4(iPosition, 1.0F);
   oColor = iColor;
-  oTextureCoords = oTextureCoords;
+  oTextureCoords = iTextureCoords;
 }
