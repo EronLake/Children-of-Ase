@@ -53,8 +53,8 @@ void Input::InputCheck()
 //      Soldier* soldier;
 //		create("Create_Soldier", "MODIFY_POOL", soldier, ... );
 	}
-	if (T) {
-		
+	if (T) { //Failure check on fake task name
+		createTaskWithObj("Move_Out", "MOVE", player);
 	}
 }
 
