@@ -102,7 +102,9 @@ void memManager::execute_task(Task* current_task)
 	}
 	else
 	{
-		LOG("Error: Task name does not exist"); //perror?
+		LOG("Error: Task '" << current_task->name << "' does not exist.");
+		current_task->updateStatus("FAILED");
+		this->send_result(current_task);
 	}
 }
 
