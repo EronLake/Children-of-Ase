@@ -9,6 +9,7 @@ public:
 	void createSound(SoundClass *pSound, const char* pFile);
 	void playSound(SoundClass pSound, bool bLoop, FMOD::Channel* channel, bool ispaused);
 	void releaseSound(SoundClass pSound);
+	int doNothing();
 	//void playSoundObject(SoundObject sound);
 	//void changeSoundSource(SoundObject sound, const char* name);
 	//FMOD::Channel *channels[32];
