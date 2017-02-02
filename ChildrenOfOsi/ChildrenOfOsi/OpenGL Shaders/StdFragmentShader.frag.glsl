@@ -1,7 +1,7 @@
 #version 330 core
 
-in vec3 iColor;
-in vec2 iTextureCoords;
+uniform vec3 iColor;
+uniform vec2 iTextureCoords;
 
 out vec4 oColor;
 

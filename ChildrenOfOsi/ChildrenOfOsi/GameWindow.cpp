@@ -195,7 +195,7 @@ void osi::GameWindow::setupWindow()
   glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
   glfwWindowHint(GLFW_RESIZABLE, GL_FALSE);
 
-  GLFWwindow *window = glfwCreateWindow(1280, 720, "Children of Osi", nullptr, nullptr);
+  GameWindow::window = glfwCreateWindow(1280, 720, "Children of Osi", nullptr, nullptr);
   if(window == nullptr) {
     glfwTerminate();
     throw osi::WindowingError("Failed to create window.");
