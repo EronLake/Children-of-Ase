@@ -2,6 +2,7 @@
 #include "Input.h"
 #include <conio.h>
 #include <Windows.h>
+#include "Soldier.h"
 
 Input::Input(MessageLog* _mLog, TaskBuffer* _tBuffer)
 {
@@ -50,8 +51,8 @@ void Input::InputCheck()
 		createTaskWithObj("Move_Right", "MOVE", player);
 	}
 	if (R) {
-//      Soldier* soldier;
-//		create("Create_Soldier", "MODIFY_POOL", soldier, ... );
+		//Soldier* soldier = nullptr;
+		createTask("add_soldier", "MODIFY_POOL");
 	}
 	if (T) {
 		

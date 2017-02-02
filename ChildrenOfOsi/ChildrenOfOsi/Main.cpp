@@ -27,11 +27,11 @@
 #include <conio.h>
 #include "CheckClass.h"
 
-#include "Pool.h"
-#include "memManager.h"
+//#include "Pool.h"
 
 #include "fmod.hpp"
 #include "SoundSystem.h"
+#include "memManager.h"
 
 #define _CRTDBG_MAP_ALLOC
 
@@ -47,7 +47,7 @@ void ALESSIO_TEST();
 void ALEX_LOOP(QuadTree* _physicsQuadTree, WorldObj* _player, vector<WorldObj*> &_recVec);
 
 
-void Darion_Ian_Test();
+//void Darion_Ian_Test();
 
 void ANDREWS_TEST();
 
@@ -85,7 +85,7 @@ int main() {
 		//}
 
 		/*Darion Ian Test*/
-		Darion_Ian_Test();
+		//Darion_Ian_Test();
 
 		/*ALESSIO*/
 		//ALESSIO_TEST();
@@ -295,7 +295,7 @@ void ERONS_LOOP() {
 		//draw
 	}
 }
-
+ /*
 void Darion_Ian_Test() {
 	MemoryPool* hero_pool = create_pool(2048);
 	MemNode* head_ptr = init_pool(hero_pool, 32);
@@ -327,6 +327,7 @@ void Darion_Ian_Test() {
 
 
 }
+ */
 /////////////////////////////////////////////////////////////////
 //ERON'S LOOP NO TOUCHY
 /////////////////////////////////////////////////////////////////
