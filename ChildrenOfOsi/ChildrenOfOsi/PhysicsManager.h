@@ -1,4 +1,5 @@
 #pragma once
+#include <map>
 #include "stdafx.h"
 #include "common.h"
 #include "Player.h"
@@ -18,7 +19,12 @@ public:
 
 private:
 	//use this to communicate with movement helper(needed to access quadtree for collision)
-	Movement* moveHelper;
+	typedef int (Movement::*fn_ptr)(WorldObj*);
+	typedef std::map<std::string, fn_ptr> functionMapper;
 
+    functionMapper task_map;
+    functionMapper::const_iterator it;
+
+	Movement* moveHelper;
 };
 

@@ -54,8 +54,8 @@ void Input::InputCheck()
 		//Soldier* soldier = nullptr;
 		createTask("add_soldier", "MODIFY_POOL");
 	}
-	if (T) {
-		
+	if (T) { //Failure check on fake task name
+		createTaskWithObj("Move_Out", "MOVE", player);
 	}
 }
 

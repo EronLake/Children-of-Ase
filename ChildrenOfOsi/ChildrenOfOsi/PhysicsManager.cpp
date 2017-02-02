@@ -16,14 +16,17 @@ PhysicsManager::PhysicsManager(MessageLog * _mLog, TaskBuffer * _tBuffer, QuadTr
 	LOG("PhysicsManager W/QT Object Constructed");
 	//init a movement obj 
 	moveHelper = new Movement(_physicsQuadTree);
+
 	//init mapping of tasks to functions
-	//moveHelper->init_task_map();
+	task_map["Move_Up"] = &Movement::move_up;
+	task_map["Move_Down"] = &Movement::move_down;
+	task_map["Move_Left"] = &Movement::move_left;
+	task_map["Move_Right"] = &Movement::move_right;
 }
 
 
 PhysicsManager::~PhysicsManager()
 {
-
 	LOG("PhysicsManager Object Destroyed");
 	delete(moveHelper);
 }
@@ -41,32 +44,16 @@ void PhysicsManager::execute_task(Task* current_task)
 		LOG("Error: No player object");
 	}
 	else {
-		//result = moveHelper->move(current_task);// = moveHelper->taskMap.find(current_task->name);
-		/*if (moveHelper->iter == moveHelper->taskMap.end()) {
+		it = task_map.find(current_task->name);
+		if (it == task_map.end()) {
 			result = 1;
-			LOG("Error: Task name '" << current_task->name << "' does not exist");
+			LOG("Error: Task '" << current_task->name << "' does not exist.");
 		}
 		else {
-			(moveHelper->iter->second)(current_task->objToUpdate);
-		}*/
-
-		if (current_task->name == "Move_Up") {
-			result = moveHelper->move_up(current_task->objToUpdate);
-		}
-		else if (current_task->name == "Move_Down") {
-			result = moveHelper->move_down(current_task->objToUpdate);
-		}
-		else if (current_task->name == "Move_Left") {
-			result = moveHelper->move_left(current_task->objToUpdate);
-		}
-		else if (current_task->name == "Move_Right") {
-			result = moveHelper->move_right(current_task->objToUpdate);
-		}
-		else {
-			result = 1;
-			LOG("Error: Task name does not exist"); //perror?
+			result = (moveHelper->*(it->second))(current_task->objToUpdate);
 		}
 	} 
+
 	if (result == 0) {
 		current_task->updateStatus("COMPLETED");
 	}

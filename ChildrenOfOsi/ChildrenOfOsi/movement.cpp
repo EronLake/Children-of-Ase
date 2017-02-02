@@ -7,6 +7,7 @@
 Movement::Movement(QuadTree* QT) {
 	tree = QT;
 }
+
 Movement::~Movement() {
 
 }

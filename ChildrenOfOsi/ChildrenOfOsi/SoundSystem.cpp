@@ -57,6 +57,10 @@ FMOD_RESULT result;
 	{
 		pSound->release();
 	};
+	int SoundSystemClass::doNothing() {
+		cout << "You did NOTHING!" << endl;
+		return 1;
+	}
 	/*void SoundSystemClass::playSoundObject(SoundObject sound)
 	{
 		FMOD::Sound* soundSample = sound.getSound();

@@ -43,22 +43,37 @@ bool osi::GameWindow::terminate()
   glDeleteBuffers(1, &elementBufferObjectId);
   glfwTerminate();
 
-  return false;
+  osi::GameWindow::window = nullptr;
+  osi::GameWindow::windowWidthPx = -1;
+  osi::GameWindow::windowHeightPx = -1;
+  osi::GameWindow::vertexArrayObjectId = 0;
+  osi::GameWindow::vertexBufferObjectId = 0;
+  osi::GameWindow::elementBufferObjectId = 0;
+  osi::GameWindow::shaderProgramId = 0;
+
+  return true;
 }
 
 /// <summary>Returns whether there is a game window currently active.</summary>
 /// <returns>Returns whether a window is currently active.</returns>
-inline bool osi::GameWindow::isActive()
+bool osi::GameWindow::isActive()
 {
   return GameWindow::window != nullptr;
 }
 
+/// <summary>Returns whether the GLFW window is still running.</summary>
+/// <returns>Returns whether GLFW is not yet ready to close.</returns>
+bool osi::GameWindow::isRunning()
+{
+  return !glfwWindowShouldClose(osi::GameWindow::window);
+}
+
 /// <summary>Draws the specified image file at the given position and size.</summary>
 /// <param name="x">The horizontal X position of the sprite's top-left corner</param>
-/// <param name="y">the vertical Y position of the sprite's top-left corner</param>
+/// <param name="y">The vertical Y position of the sprite's top-left corner</param>
 /// <param name="width">The width of the sprite in device-independent pixels</param>
 /// <param name="height">The height of the sprite in device-independent pixels</param>
-void osi::GameWindow::drawSprite(int x, int y, int width, int height, const std::string& fileName)
+void osi::GameWindow::drawSprite(float x, float y, float width, float height, const std::string& fileName)
 {
   std::vector<GLfloat> GlCoordTL = GameWindow::dpCoordToGL(x, y);
   std::vector<GLfloat> GlCoordBR = GameWindow::dpCoordToGL(x + width, y + height);
@@ -111,8 +126,34 @@ void osi::GameWindow::drawSprite(int x, int y, int width, int height, const std:
 
   SOIL_free_image_data(image);
   glBindTexture(GL_TEXTURE_2D, 0);
+}
 
+/// <summary></summary>
+/// <param name="x">The horizontal X position of the sprite's top-left corner</param>
+/// <param name="y">The vertical Y position of the sprite's top-left corner</param>
+/// <param name="displayWidth">The width of the sprite in device-independent pixels</param>
+/// <param name="displayHeight">The height of the sprite in device-independent pixels</param>
+/// <param name="imageWidth">The width of the image used in pixels</param>
+/// <param name="imageHeight">The height of the image used in pixels</param>
+/// <param name="colorData">An array of unsigned bytes of color imformation</param>
+void osi::GameWindow::drawSprite(float x, float y, float displayWidth, float displayHeight, int imageWidth, int imageHeight, const unsigned char *colorData)
+{
 
+}
+
+void osi::GameWindow::refresh()
+{
+  glfwPollEvents();
+
+  glClearColor(0.5F, 0.5F, 0.5F, 1.0F);
+  glClear(GL_COLOR_BUFFER_BIT);
+
+  glUseProgram(osi::GameWindow::shaderProgramId);
+  glBindVertexArray(osi::GameWindow::vertexArrayObjectId);
+  glDrawArrays(GL_TRIANGLES, 0, 3);
+  glBindVertexArray(0);
+
+  glfwSwapBuffers(osi::GameWindow::window);
 }
 
 /// <summary>Converts a pair of coordinates from device-independent pixels
@@ -125,7 +166,7 @@ void osi::GameWindow::drawSprite(int x, int y, int width, int height, const std:
 /// <param name="x">The horizontal X coordinate</param>
 /// <param name="y">The vertical Y coordinate</param>
 /// <returns>Returns a vector, size 2, containing the transformed coordinates.</returns>
-std::vector<GLfloat> osi::GameWindow::dpCoordToGL(int x, int y)
+std::vector<GLfloat> osi::GameWindow::dpCoordToGL(float x, float y)
 {
   GLfloat glX;
   if(x < 0)                         glX = -1;
@@ -154,10 +195,10 @@ void osi::GameWindow::setupWindow()
   glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
   glfwWindowHint(GLFW_RESIZABLE, GL_FALSE);
 
-  GLFWwindow *window = glfwCreateWindow(1280, 720, "Children of Osi", nullptr, nullptr);
+  GameWindow::window = glfwCreateWindow(1280, 720, "Children of Osi", nullptr, nullptr);
   if(window == nullptr) {
     glfwTerminate();
-    throw std::runtime_error("Failed to create window.");
+    throw osi::WindowingError("Failed to create window.");
   }
 
   glfwMakeContextCurrent(window);
@@ -165,7 +206,7 @@ void osi::GameWindow::setupWindow()
   glewExperimental = GL_TRUE;
   if(glewInit() != GLEW_OK) {
     glfwTerminate();
-    throw std::runtime_error("Failed to initialize GLEW.");
+    throw osi::WindowingError("Failed to initialize GLEW.");
   }
 
   glfwGetFramebufferSize(window, &GameWindow::windowWidthPx, &GameWindow::windowHeightPx);
@@ -181,17 +222,32 @@ void osi::GameWindow::setupWindow()
 /// </remarks>
 void osi::GameWindow::setupStdShaders()
 {
-  std::ifstream fileStream(GameWindow::STD_VERTEX_SHADER_PATH);
-  std::string shaderSourceString = "";
-  char fileBuffer[256];
+  std::ifstream fileStream;
+  GLchar *vertexShaderSource = nullptr;
+  GLchar *fragmentShaderSource = nullptr;
 
   GLint compileStepSuccess;
   GLchar compileStepInfoLog[1024];
 
-  // Read entirety of vertex shader source code into shaderSourceString
-  while(fileStream.good()) {
-    fileStream.getline(fileBuffer, 256);
-    shaderSourceString += fileBuffer;
+  // Read entirety of vertex shader source code into vertexShaderSource
+  fileStream.open(GameWindow::STD_VERTEX_SHADER_PATH);
+  if(fileStream) {
+    fileStream.seekg(0, fileStream.end);
+    std::size_t fileLength = static_cast<std::size_t>(fileStream.tellg());
+    fileStream.seekg(0, fileStream.beg);
+    
+    vertexShaderSource = new GLchar[fileLength + 1];
+    for(std::size_t i = 0; i <= fileLength; ++i)
+      vertexShaderSource[i] = '\0';
+    fileStream.read(vertexShaderSource, fileLength);
+
+    std::cout << vertexShaderSource << std::endl;
+    std::cout << "File length: " << fileLength << std::endl;
+  }
+  else {
+    fileStream.close();
+    throw osi::ShaderCompilationError("Error opening standard vertex shader: \""
+      + GameWindow::STD_VERTEX_SHADER_PATH + "\"");
   }
 
   // Close the stream and ready it for the next file
@@ -199,7 +255,6 @@ void osi::GameWindow::setupStdShaders()
   fileStream.clear();
 
   // Compile the vertex shader
-  const char * const vertexShaderSource = shaderSourceString.c_str();
   GLuint vertexShaderId = glCreateShader(GL_VERTEX_SHADER);
   glShaderSource(vertexShaderId, 1, &vertexShaderSource, NULL);
   glCompileShader(vertexShaderId);
@@ -208,21 +263,43 @@ void osi::GameWindow::setupStdShaders()
   glGetShaderiv(vertexShaderId, GL_COMPILE_STATUS, &compileStepSuccess);
   if(!compileStepSuccess) {
     glGetShaderInfoLog(vertexShaderId, 1024, NULL, compileStepInfoLog);
+
     glDeleteShader(vertexShaderId);
-    throw std::runtime_error("ERROR::SHADER::VERTEX::COMPILATION_FAILED\n" + std::string(compileStepInfoLog) + "\n");
+    delete[] vertexShaderSource;
+
+    std::cout << compileStepInfoLog << std::endl;
+    std::cout << vertexShaderSource << std::endl;
+
+    throw osi::ShaderCompilationError("ERROR::SHADER::VERTEX::COMPILATION_FAILED\n"
+      + std::string(compileStepInfoLog) + "\n");
   }
 
-  // Read entirety of fragment shader source code into shaderSourceString
+  // Read entirety of fragment shader source code into fragmentShaderSource
   fileStream.open(GameWindow::STD_FRAGMENT_SHADER_PATH);
-  while(fileStream.good()) {
-    fileStream.getline(fileBuffer, 256);
-    shaderSourceString += fileBuffer;
+  if(fileStream) {
+    fileStream.seekg(0, fileStream.end);
+    std::size_t fileLength = static_cast<std::size_t>(fileStream.tellg());
+    fileStream.seekg(0, fileStream.beg);
+
+    fragmentShaderSource = new GLchar[fileLength + 1];
+    for(std::size_t i = 0; i <= fileLength; ++i)
+      fragmentShaderSource[i] = '\0';
+    fileStream.read(fragmentShaderSource, fileLength);
+
+    std::cout << fragmentShaderSource << std::endl;
+    std::cout << "File length: " << fileLength << std::endl;
+  }
+  else {
+    delete[] vertexShaderSource;
+    fileStream.close();
+    throw osi::ShaderCompilationError("Error opening standard fragment shader: \""
+      + GameWindow::STD_FRAGMENT_SHADER_PATH + "\"");
   }
 
+  // Close the file stream for good
   fileStream.close();
 
   // Compile the fragment shader
-  const char * const fragmentShaderSource = shaderSourceString.c_str();
   GLuint fragmentShaderId = glCreateShader(GL_FRAGMENT_SHADER);
   glShaderSource(fragmentShaderId, 1, &fragmentShaderSource, NULL);
   glCompileShader(fragmentShaderId);
@@ -231,9 +308,14 @@ void osi::GameWindow::setupStdShaders()
   glGetShaderiv(fragmentShaderId, GL_COMPILE_STATUS, &compileStepSuccess);
   if(!compileStepSuccess) {
     glGetShaderInfoLog(fragmentShaderId, 1024, NULL, compileStepInfoLog);
+
     glDeleteShader(vertexShaderId);
     glDeleteShader(fragmentShaderId);
-    throw std::runtime_error("ERROR::SHADER::FRAGMENT::COMPILATION_FAILED\n" + std::string(compileStepInfoLog) + "\n");
+    delete[] vertexShaderSource;
+    delete[] fragmentShaderSource;
+
+    throw osi::ShaderCompilationError("ERROR::SHADER::FRAGMENT::COMPILATION_FAILED\n"
+      + std::string(compileStepInfoLog) + "\n");
   }
 
   // Link the shaders
@@ -246,12 +328,19 @@ void osi::GameWindow::setupStdShaders()
   glGetProgramiv(GameWindow::shaderProgramId, GL_LINK_STATUS, &compileStepSuccess);
   if(!compileStepSuccess) {
     glGetProgramInfoLog(GameWindow::shaderProgramId, 1024, NULL, compileStepInfoLog);
+
     glDeleteShader(vertexShaderId);
     glDeleteShader(fragmentShaderId);
-    throw std::runtime_error("ERROR::SHADER::PROGRAM::LINKING_FAILED\n" + std::string(compileStepInfoLog) + "\n");
+    delete[] vertexShaderSource;
+    delete[] fragmentShaderSource;
+
+    throw osi::ShaderCompilationError("ERROR::SHADER::PROGRAM::LINKING_FAILED\n"
+      + std::string(compileStepInfoLog) + "\n");
   }
 
-  // With compilation complete, deallocate the unneeded shaders
+  // With compilation complete, deallocate the unneeded shaders and free up the source code strings
   glDeleteShader(vertexShaderId);
   glDeleteShader(fragmentShaderId);
+  delete[] vertexShaderSource;
+  delete[] fragmentShaderSource;
 }
