@@ -50,7 +50,7 @@ void Input::InputCheck()
 	}
 	if (R) {
 		//Soldier* soldier = nullptr;
-		createTask("add_soldier", "MODIFY_POOL");
+		//createTask("add_soldier", "MODIFY_POOL");
 	}
 	if (T) { //Failure check on fake task name
 		gameplay_functions->move_out(player);
