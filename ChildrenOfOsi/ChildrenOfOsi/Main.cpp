@@ -243,7 +243,7 @@ void ALEX_LOOP(QuadTree* _physicsQuadTree, WorldObj* _player, vector<WorldObj*> 
 
 	//manager_table["DumM"] = DumM;
 
-
+	
 
 
 	while (true) {

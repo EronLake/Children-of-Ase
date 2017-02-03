@@ -44,7 +44,7 @@ void PhysicsManager::execute_task(Task* current_task)
 		LOG("Error: No player object");
 	}
 	else {
-		it = task_map.find(current_task->name);
+		auto it = task_map.find(current_task->name);
 		if (it == task_map.end()) {
 			result = 1;
 			LOG("Error: Task '" << current_task->name << "' does not exist.");
