@@ -86,7 +86,10 @@ int main() {
 
 		/*Darion Ian Test*/
 		//Darion_Ian_Test();
-
+		osi::GameWindow::init();
+		while (osi::GameWindow::isRunning())
+			osi::GameWindow::refresh();
+		osi::GameWindow::terminate();
 		/*ALESSIO*/
 		//ALESSIO_TEST();
 
