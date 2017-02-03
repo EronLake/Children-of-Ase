@@ -37,3 +37,14 @@ void Task::updateStatus(std::string new_status)
 	status = new_status;
 }
 
+Task* Task::clone_task()
+{
+	//dupliacates all of the attibutes of original task
+	Task* duplicate_task = new Task(name,
+									status,
+									type,
+									objToUpdate);
+
+	return duplicate_task;
+}
+

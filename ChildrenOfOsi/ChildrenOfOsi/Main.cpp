@@ -223,22 +223,27 @@ void ALEX_LOOP(QuadTree* _physicsQuadTree, WorldObj* _player, vector<WorldObj*> 
 	//psuedo Gameloop
 	MessageLog* mLog = new MessageLog();
 	TaskBuffer* tBuffer = new TaskBuffer(mLog);
-	Input* iController = new Input(mLog, tBuffer, _player);
+
+	ChildrenOfOsi* gameplay_functions = new ChildrenOfOsi(mLog, tBuffer);
+	Input* iController = new Input(gameplay_functions, _player);
 	//create Managers and add to Manager table
 
 	DummyController* DumM = new DummyController(mLog, tBuffer);
 	PhysicsManager* PhysM = new PhysicsManager(mLog, tBuffer, _physicsQuadTree);
 	memManager* memM = new memManager(mLog, tBuffer);
+
+	//the order defines what order the managers the tasks will be sent to
 	DumM->register_manager();
 	PhysM->register_manager();
 	memM->register_manager();
+	
 
 
 	//std::unordered_map<std::string, Manager*> manager_table;
 
 	//manager_table["DumM"] = DumM;
 
-
+	
 
 
 	while (true) {
@@ -271,15 +276,20 @@ void ERONS_LOOP() {
 	//psuedo Gameloop
 	MessageLog* mLog = new MessageLog();
 	TaskBuffer* tBuffer = new TaskBuffer(mLog);
-	Input* iController = new Input(mLog, tBuffer);
+
+	ChildrenOfOsi* gameplay_functions = new ChildrenOfOsi(mLog, tBuffer);
+	Input* iController = new Input(gameplay_functions);
 	//create Managers and add to Manager table
 
 	DummyController* DumM = new DummyController(mLog,tBuffer);
 	PhysicsManager* PhysM = new PhysicsManager(mLog, tBuffer);
 	memManager* memM = new memManager(mLog, tBuffer);
+
+	//the order defines what order the managers the tasks will be sent to
 	DumM->register_manager();
 	PhysM->register_manager();
 	memM->register_manager();
+	
 
 
 	//std::unordered_map<std::string, Manager*> manager_table;

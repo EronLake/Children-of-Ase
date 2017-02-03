@@ -50,9 +50,11 @@ void TaskBuffer::assignTask(Task* current_task)
 			mLog->logMessage(current_task);
 			for (auto itr = type_man_vec.begin(); itr != type_man_vec.end(); itr++)
 			{
-				//may need to create a clone task function
-				(*itr)->execute_task(current_task);
+				//clone task and send off to manager
+				Task* duplicate_task = current_task->clone_task();
+				(*itr)->execute_task(duplicate_task);
 			}
+			delete current_task;
 		}
 		else
 		{

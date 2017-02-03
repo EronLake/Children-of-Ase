@@ -25,6 +25,7 @@ void AudioManager::register_manager()
 {
 	//THIS IS WHAT YOU EDIT
 	//////////////////////////////////////
+	//might need to take in move as well
 	tBuffer->add_to_table("AUD", this);
 	//////////////////////////////////////
 }

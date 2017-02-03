@@ -19,6 +19,7 @@ public:
 	~Task();
 
 	void updateStatus(std::string new_status);
+	Task* clone_task();
 
 
 };
