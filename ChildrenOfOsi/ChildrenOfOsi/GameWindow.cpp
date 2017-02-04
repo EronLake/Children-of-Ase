@@ -73,8 +73,11 @@ bool osi::GameWindow::isRunning()
 /// <param name="y">The vertical Y position of the sprite's top-left corner</param>
 /// <param name="width">The width of the sprite in device-independent pixels</param>
 /// <param name="height">The height of the sprite in device-independent pixels</param>
-void osi::GameWindow::drawSprite(float x, float y, float width, float height, const std::string& fileName)
+void osi::GameWindow::drawSprite(float x, float y, float width, float height, const std::string& fileName, int id)
 {
+	std::cout << width << std::endl;
+	std::cout << "x: " << x <<std::endl;
+	osi::GameWindow::vertexArrayObjectId = id;
   std::vector<GLfloat> GlCoordTL = GameWindow::dpCoordToGL(x, y);
   std::vector<GLfloat> GlCoordBR = GameWindow::dpCoordToGL(x + width, y + height);
 
@@ -85,10 +88,9 @@ void osi::GameWindow::drawSprite(float x, float y, float width, float height, co
     GlCoordBR[0], GlCoordBR[1], 0.0F,   1.0F, 0.0F, 1.0F,   1.0F, 1.0F, // Bottom-right corner
     GlCoordBR[0], GlCoordTL[1], 0.0F,   1.0F, 0.0F, 1.0F,   1.0F, 0.0F, // Top-right corner
   };
-
   GLuint spriteVertexIndices[] = {
-    0, 1, 2, // First triangle
-    0, 3, 2, // Second triangle
+	  0, 3, 2, // First triangle
+	  0, 2, 1
   };
 
   glGenVertexArrays(1, &vertexArrayObjectId);
@@ -119,7 +121,8 @@ void osi::GameWindow::drawSprite(float x, float y, float width, float height, co
   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 
-  int imageWidth, imageHeight;
+  int imageWidth;
+  int imageHeight;
   unsigned char *image = SOIL_load_image(fileName.c_str(), &imageWidth, &imageHeight, 0, SOIL_LOAD_RGBA);
   glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, imageWidth, imageHeight, 0, GL_RGBA, GL_UNSIGNED_BYTE, image);
   glGenerateMipmap(GL_TEXTURE_2D);
@@ -149,8 +152,13 @@ void osi::GameWindow::refresh()
   glClear(GL_COLOR_BUFFER_BIT);
 
   glUseProgram(osi::GameWindow::shaderProgramId);
-  glBindVertexArray(osi::GameWindow::vertexArrayObjectId);
-  glDrawArrays(GL_TRIANGLES, 0, 3);
+  glBindVertexArray(2);
+ // glBindVertexArray(1);
+ // glDrawArrays(GL_TRIANGLES, 0, 3);
+  glDrawElements(GL_TRIANGLES,12, GL_UNSIGNED_INT, 0);
+ glBindVertexArray(1);
+  // glDrawArrays(GL_TRIANGLES, 0, 3);
+ glDrawElements(GL_TRIANGLES, 12, GL_UNSIGNED_INT, 0);
   glBindVertexArray(0);
 
   glfwSwapBuffers(osi::GameWindow::window);
