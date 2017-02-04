@@ -202,11 +202,15 @@ void ALESSIO_TEST() {
 	std::cout << person.sprite.getTfile() << std::endl;
 	person.setCollision(true);
 	osi::GameWindow::init();
+	float z = 0;
 	while (osi::GameWindow::isRunning()) {
 		osi::GameWindow::refresh();
 		std::cout << person.getWidth() << std::endl;
-		person.WorldObj::drawObj();
-		osi::GameWindow::drawSprite(600,150,100,100,"smile1.png");
+		//person.WorldObj::drawObj();
+		//osi::GameWindow::refresh();
+		osi::GameWindow::drawSprite(600+z,150,100,100,"smile1.png",1);
+		z += .1;
+		osi::GameWindow::drawSprite(100, 150, 100, 100, "smile1.png", 0);
 	}
 	osi::GameWindow::terminate();
 }

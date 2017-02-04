@@ -73,10 +73,11 @@ bool osi::GameWindow::isRunning()
 /// <param name="y">The vertical Y position of the sprite's top-left corner</param>
 /// <param name="width">The width of the sprite in device-independent pixels</param>
 /// <param name="height">The height of the sprite in device-independent pixels</param>
-void osi::GameWindow::drawSprite(float x, float y, float width, float height, const std::string& fileName)
+void osi::GameWindow::drawSprite(float x, float y, float width, float height, const std::string& fileName, int id)
 {
 	std::cout << width << std::endl;
-	std::cout << "y: " << y <<std::endl;
+	std::cout << "x: " << x <<std::endl;
+	osi::GameWindow::vertexArrayObjectId = id;
   std::vector<GLfloat> GlCoordTL = GameWindow::dpCoordToGL(x, y);
   std::vector<GLfloat> GlCoordBR = GameWindow::dpCoordToGL(x + width, y + height);
 
@@ -151,9 +152,13 @@ void osi::GameWindow::refresh()
   glClear(GL_COLOR_BUFFER_BIT);
 
   glUseProgram(osi::GameWindow::shaderProgramId);
-  glBindVertexArray(osi::GameWindow::vertexArrayObjectId);
+  glBindVertexArray(2);
+ // glBindVertexArray(1);
  // glDrawArrays(GL_TRIANGLES, 0, 3);
-  glDrawElements(GL_TRIANGLES, 9, GL_UNSIGNED_INT, 0);
+  glDrawElements(GL_TRIANGLES,12, GL_UNSIGNED_INT, 0);
+ glBindVertexArray(1);
+  // glDrawArrays(GL_TRIANGLES, 0, 3);
+ glDrawElements(GL_TRIANGLES, 12, GL_UNSIGNED_INT, 0);
   glBindVertexArray(0);
 
   glfwSwapBuffers(osi::GameWindow::window);
