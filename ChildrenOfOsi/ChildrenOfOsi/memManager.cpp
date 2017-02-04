@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "memManager.h"
 #include "Pool.h"
+#include "ChildrenOfOsi.h"
 
 
 memManager::memManager(MessageLog* _mLog, TaskBuffer* _tBuffer)
@@ -69,10 +70,13 @@ void memManager::register_manager()
 void memManager::execute_task(Task* current_task)
 {
 	int result;
-    if (current_task->name == "add_soldier") {
-		add_soldier();
+	float xpos = current_task->arg1;
+	float ypos = current_task->arg2;
+	bool coll = current_task->arg3;
+	int d = current_task->arg4;
+    if (current_task->name == "Add_Soldier") {
+		store_soldier(xpos,ypos,coll);
 		result = 0;
-		
 		if (result == 0) {
 			current_task->updateStatus("COMPLETED");
 		}
@@ -81,7 +85,7 @@ void memManager::execute_task(Task* current_task)
 		}
 		this->send_result(current_task);
 	}
-	else if (current_task->name == "add_hero") {
+	else if (current_task->name == "Add_Hero") {
 		//add_hero();
 		result = 0;
 
@@ -93,7 +97,7 @@ void memManager::execute_task(Task* current_task)
 		}
 		this->send_result(current_task);
 	}
-	else if (current_task->name == "add_projectile") {
+	else if (current_task->name == "Add_Projectile") {
 		//add_projectile();
 		result = 0;
 
@@ -105,7 +109,7 @@ void memManager::execute_task(Task* current_task)
 		}
 		this->send_result(current_task);
 	}
-	else if (current_task->name == "add_spl_soldier") {
+	else if (current_task->name == "Add_Spl_Soldier") {
 		//add_spl_soldier();
 		result = 0;
 
@@ -117,7 +121,7 @@ void memManager::execute_task(Task* current_task)
 		}
 		this->send_result(current_task);
 	}
-	else if (current_task->name == "add_livingObj") {
+	else if (current_task->name == "Add_LivingObj") {
 		//add_livingObj();
 		result = 0;
 
@@ -129,7 +133,7 @@ void memManager::execute_task(Task* current_task)
 		}
 		this->send_result(current_task);
 	}
-	else if (current_task->name == "add_worldObj") {
+	else if (current_task->name == "Add_WorldObj") {
 		//add_worldObj();
 		result = 0;
 
@@ -141,7 +145,7 @@ void memManager::execute_task(Task* current_task)
 		}
 		this->send_result(current_task);
 	}
-	else if (current_task->name == "add_npc") {
+	else if (current_task->name == "Add_NPC") {
 		//add_npc();
 		result = 0;
 
@@ -159,37 +163,40 @@ void memManager::execute_task(Task* current_task)
 	}
 }
 
-///*
-void add_hero() {
-	Hero* h = new(find_available_block(hero_head)) Hero();
+
+void store_hero(float x, float y, bool col) {
+	Hero* h = new(find_available_block(hero_head)) Hero(x,y,col);
 }
 
-void add_soldier() {
-	Soldier* s = new(find_available_block(soldier_head)) Soldier();
+void store_soldier(float x, float y, bool col) {
+	Soldier* s = new(find_available_block(soldier_head)) Soldier(x, y, col);
 	std::cout << "soldier created" << std::endl;
 	std::cout << "soldier Address: " << s << std::endl;
+	std::cout << "soldier xpos: " << s->getX() << std::endl;
+	std::cout << "soldier ypos: " << s->getY() << std::endl;
+	std::cout << "soldier col: " << s->getCollision() << std::endl;
 }
 
-void add_spl_soldier() {
-	SplSoldier* spl = new(find_available_block(spl_soldier_head)) SplSoldier();
+void store_spl_soldier(float x, float y, bool col) {
+	SplSoldier* spl = new(find_available_block(spl_soldier_head)) SplSoldier(x, y, col);
 }
 
-void add_livingObj() {
-	LivingObj* lobj = new(find_available_block(livingObj_head)) LivingObj();
+void store_livingObj(float x, float y, bool col) {
+	LivingObj* lobj = new(find_available_block(livingObj_head)) LivingObj(x, y, col);
 }
 
-void add_worldObj() {
-	WorldObj* wobj = new(find_available_block(worldObj_head)) WorldObj();
+void store_worldObj(float x, float y, bool col) {
+	WorldObj* wobj = new(find_available_block(worldObj_head)) WorldObj(x, y, col);
 }
 
-void add_projectile() {
-	Projectile* p = new(find_available_block(projectile_head)) Projectile();
+void store_projectile(float x, float y, bool col, int d) {
+	Projectile* p = new(find_available_block(projectile_head)) Projectile(x, y, col, d);
 }
 
-void add_npc() {
-	NPC* npc = new(find_available_block(npc_head)) NPC();
+void store_npc(float x, float y, bool col) {
+	NPC* npc = new(find_available_block(npc_head)) NPC(x, y, col);
 }
-//*/
+
 
 
 

@@ -27,6 +27,78 @@ Task::Task(std::string _name, std::string _status, std::string _type, WorldObj *
 	LOG("Task Object W/WOBJ Constructed");
 }
 
+Task::Task(std::string _name, std::string _status, std::string _type, float x, float y, bool col)
+{
+	name = _name;
+	type = _type;
+	//[buffer,manager,class]
+	//fucntion_name
+	//object
+
+	status = _status;
+
+	arg1 = x;
+	arg2 = y;
+	arg3 = col;
+	arg4 = 0;
+
+	LOG("Task Object W/WOBJ Constructed");
+}
+
+Task::Task(std::string _name, std::string _status, std::string _type, float x, float y, bool col, int d)
+{
+	name = _name;
+	type = _type;
+	//[buffer,manager,class]
+	//fucntion_name
+	//object
+
+	status = _status;
+
+	arg1 = x;
+	arg2 = y;
+	arg3 = col;
+	arg4 = d;
+
+	LOG("Task Object W/WOBJ Constructed");
+}
+
+Task::Task(std::string _name, std::string _status, std::string _type, WorldObj* _objToUpdate, float x, float y, bool col) {
+	name = _name;
+	type = _type;
+	//[buffer,manager,class]
+	//fucntion_name
+	//object
+
+	status = _status;
+
+	arg1 = x;
+	arg2 = y;
+	arg3 = col;
+	arg4 = 0;
+
+	LOG("Task Object W/WOBJ Constructed");
+}
+
+Task::Task(std::string _name, std::string _status, std::string _type, WorldObj* _objToUpdate, float x, float y, bool col, int d) {
+	name = _name;
+	type = _type;
+	//[buffer,manager,class]
+	//fucntion_name
+	//object
+
+	status = _status;
+
+	arg1 = x;
+	arg2 = y;
+	arg3 = col;
+	arg4 = d;
+
+	LOG("Task Object W/WOBJ Constructed");
+}
+
+
+
 Task::~Task()
 {
 	LOG("Task Objected Destroyed");
@@ -43,7 +115,11 @@ Task* Task::clone_task()
 	Task* duplicate_task = new Task(name,
 									status,
 									type,
-									objToUpdate);
+									objToUpdate,
+		                            arg1,
+		                            arg2,
+		                            arg3,
+		                            arg4);
 
 	return duplicate_task;
 }

@@ -41,10 +41,11 @@ static MemNode* worldObj_head = nullptr;
 static MemoryPool* npc_pool = nullptr;
 static MemNode* npc_head = nullptr;
 
-void add_hero();
-void add_soldier();
-void add_projectile();
-void add_spl_soldier();
-void add_livingObj();
-void add_worldObj();
-void add_npc();
+void store_hero(float x, float y, bool col);
+void store_soldier(float x, float y, bool col);
+void store_projectile(float x, float y, bool col, int d);
+void store_spl_soldier(float x, float y, bool col);
+void store_livingObj(float x, float y, bool col);
+void store_worldObj(float x, float y, bool col);
+void store_npc(float x, float y, bool col);
+
