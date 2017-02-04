@@ -86,12 +86,9 @@ int main() {
 
 		/*Darion Ian Test*/
 		//Darion_Ian_Test();
-		osi::GameWindow::init();
-		while (osi::GameWindow::isRunning())
-			osi::GameWindow::refresh();
-		osi::GameWindow::terminate();
+
 		/*ALESSIO*/
-		//ALESSIO_TEST();
+		ALESSIO_TEST();
 
 		/* ALEX */
 		ALEX_LOOP(collideTree, Alex, recVec);
@@ -167,13 +164,10 @@ void ALESSIO_TEST() {
 		rInt[i] = rand() % 4 - 1;
 	}
 	Factions fac(rInt);
-	Hero person(20, 0, true);
+	Hero person(20, 0, false);
 	Texture still;
-	still.setFile("img.png");
-	Sprite objSpt;
-	objSpt.setTexture(&still);
-	person.setSprite(objSpt);
-	person.drawObj();
+	still.setFile("smile1.png");
+	person.sprite.setTexture(&still);
 	cout <<"Is person an NPC: "<< CheckClass::isNPC(&person) << endl;
 	person.setHealth(-10);
 	person.setAlive(false);
@@ -199,16 +193,22 @@ void ALESSIO_TEST() {
 	citizen.moveUp();
 	citizen.moveRight();
 	cout << "citizen is now at: " << citizen.getX() << " , " << citizen.getY() << endl;
-	Texture test;
-	test.setFrames(5);
-	test.setFWidth(100);
-	Sprite sp;
-	sp.setTexture(&test);
-	test.setAnimated(true);
-	person.setSprite(sp);
-	for (int i = 0; i < 20;i++) {
-		person.animateObj();
+	person.WorldObj::setWidth(500);
+	person.WorldObj::setHeight(400);
+	person.setX(10);
+	person.setY(100);
+	std::cout << person.getHeight() << std::endl;
+	std::cout << person.getWidth() << std::endl;
+	std::cout << person.sprite.getTfile() << std::endl;
+	person.setCollision(true);
+	osi::GameWindow::init();
+	while (osi::GameWindow::isRunning()) {
+		osi::GameWindow::refresh();
+		std::cout << person.getWidth() << std::endl;
+		person.WorldObj::drawObj();
+		osi::GameWindow::drawSprite(600,150,100,100,"smile1.png");
 	}
+	osi::GameWindow::terminate();
 }
 
 void ALEX_LOOP(QuadTree* _physicsQuadTree, WorldObj* _player, vector<WorldObj*> &_recVec) {
