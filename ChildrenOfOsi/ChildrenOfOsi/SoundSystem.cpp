@@ -4,6 +4,8 @@ using namespace std;
 #include "fmod.hpp"
 #include "fmod_errors.h" // Only if you want error checking
 #include "SoundSystem.h"
+#include <map>
+#include <string>
 typedef FMOD::Sound* SoundClass;
 FMOD_RESULT result;
 
@@ -30,6 +32,7 @@ FMOD_RESULT result;
 		
 		// Initialize our Instance with 36 Channels
 		m_pSystem->init(36, FMOD_INIT_NORMAL, 0);
+
 	};
 
 	void SoundSystemClass::createSound(SoundClass *pSound, const char* pFile)
@@ -57,10 +60,40 @@ FMOD_RESULT result;
 	{
 		pSound->release();
 	};
-	int SoundSystemClass::doNothing() {
-		cout << "You did NOTHING!" << endl;
-		return 1;
-	}
+	int SoundSystemClass::playSong1() {
+		foo::soundType type;
+		FMOD::Sound* soundSample;
+		const char* name;              //the variables required
+		FMOD::Channel* channel;
+		bool ispaused;
+		unsigned int time;
+
+		// Initialize our sound system
+		SoundSystemClass soundsystem;
+
+		type = foo::soundType::music;
+		name = "04.wav";
+		channel = channels[0];//assign the channel
+		ispaused = false;
+
+		soundsystem.createSound(&soundSample, name);// Create the sound
+		soundSample->getLength(&time, FMOD_TIMEUNIT_PCM);// Find the length
+
+														 //SoundObject* playable = new SoundObject("04.wav", &soundSample, type);
+														 //object stuff
+
+
+		soundsystem.playSound(soundSample, false, channel, ispaused); 	// Play the sound, with loop mode
+
+
+		cout << "Press return to quit." << endl;  // Do something meanwhile...
+		cin.get();
+
+		soundsystem.releaseSound(soundSample); 
+		return 1;// Release the sound
+	};
+	
+	
 	/*void SoundSystemClass::playSoundObject(SoundObject sound)
 	{
 		FMOD::Sound* soundSample = sound.getSound();

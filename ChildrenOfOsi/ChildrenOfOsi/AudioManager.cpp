@@ -9,6 +9,7 @@ AudioManager::AudioManager(MessageLog* _mLog, TaskBuffer* _tBuffer)
 	//////////////////////////////////////
 	LOG("AudioManager Object Constructed");
 	soundsystem = new SoundSystemClass();
+	FnMap["playSong1"] = &SoundSystemClass::playSong1;
 	//////////////////////////////////////
 }
 
@@ -31,10 +32,11 @@ void AudioManager::register_manager()
 
 void AudioManager::execute_task(Task* current_task)
 {
-	if (current_task->name == "Play_SFX") {
+	if (current_task->name == "playSong1") {
 		//THIS IS WHAT YOU EDIT
 		//////////////////////////////////////
-		int result = soundsystem->doNothing();
+		int result = (soundsystem->*(FnMap[current_task->name]))();
+		//(moveHelper->*(it->second))(current_task->objToUpdate)
 		//////////////////////////////////////
 		if (result == 0) {
 			current_task->updateStatus("COMPLETED");
@@ -44,32 +46,7 @@ void AudioManager::execute_task(Task* current_task)
 		}
 		this->send_result(current_task);
 	}
-	else if (current_task->name == "Play_Music") {
-		//THIS IS WHAT YOU EDIT
-		//////////////////////////////////////
-		int result = soundsystem->doNothing();
-		//////////////////////////////////////
-		if (result == 0) {
-			current_task->updateStatus("COMPLETED");
-		}
-		else {
-			current_task->updateStatus("FAILED");
-		}
-		this->send_result(current_task);
-	}
-	else if (current_task->name == "Toggle_SFX") {
-		//THIS IS WHAT YOU EDIT
-		//////////////////////////////////////
-		int result = soundsystem->doNothing();
-		//////////////////////////////////////
-		if (result == 0) {
-			current_task->updateStatus("COMPLETED");
-		}
-		else {
-			current_task->updateStatus("FAILED");
-		}
-		this->send_result(current_task);
-	}
+	
 	else
 	{
 		LOG("Error: Task name does not exist"); //perror?

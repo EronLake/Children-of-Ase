@@ -19,4 +19,8 @@ public:
 
 private:
 	SoundSystemClass* soundsystem;
+	typedef int (SoundSystemClass::*fn_ptr)();
+	typedef std::map<std::string, fn_ptr> functionMapper;
+	//typedef int(SoundSystemClass::*FnPtr)();
+	functionMapper FnMap;
 };
