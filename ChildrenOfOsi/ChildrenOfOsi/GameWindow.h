@@ -6,8 +6,10 @@
 
 #include "stdafx.h"
 
+#include <cstdlib>
 #include <exception>
 #include <fstream>
+#include <iostream>
 #include <string>
 #include <vector>
 
@@ -27,8 +29,11 @@ namespace osi
     static bool init();
     static bool terminate();
     static bool isActive();
+    static bool isRunning();
 
-    static void drawSprite(int, int, int, int, const std::string&);
+    static void drawSprite(float, float, float, float, const std::string&);
+    static void drawSprite(float, float, float, float, int, int, const unsigned char *);
+    static void refresh();
 
     private:
 
@@ -42,14 +47,28 @@ namespace osi
     static GLuint vertexBufferObjectId;
     static GLuint elementBufferObjectId;
     static GLuint shaderProgramId;
+	static GLuint textureId;
+	static int numObjects;
 
     GameWindow() = delete;
     ~GameWindow() = delete;
     GameWindow& operator=(const GameWindow&) = delete;
     GameWindow& operator=(const GameWindow&&) = delete;
 
-    static std::vector<GLfloat> dpCoordToGL(int, int);
+    static std::vector<GLfloat> dpCoordToGL(float, float);
     static void setupWindow();
     static void setupStdShaders();
+  };
+
+  class WindowingError: public std::runtime_error
+  {
+    public:
+    WindowingError(const std::string& what): std::runtime_error(what) {};
+  };
+
+  class ShaderCompilationError: public std::runtime_error
+  {
+    public:
+    ShaderCompilationError(const std::string& what): std::runtime_error(what) {};
   };
 }

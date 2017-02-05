@@ -1,4 +1,5 @@
 #include "stdafx.h"
+//#include "memManager.h"
 #include "Pool.h"
 
 MemNode::MemNode() {
@@ -157,3 +158,5 @@ MemNode* init_pool(MemoryPool *p, size_t bsize) {
 	std::cout << "pool initialized" << std::endl;
 	return head;
 }
+
+

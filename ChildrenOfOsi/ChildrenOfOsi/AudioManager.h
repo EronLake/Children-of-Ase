@@ -12,6 +12,7 @@ class AudioManager : public Manager
 {
 public:
 	AudioManager(MessageLog* _mLog, TaskBuffer* _tBuffer);
+
 	~AudioManager();
 
 	virtual void register_manager() final;

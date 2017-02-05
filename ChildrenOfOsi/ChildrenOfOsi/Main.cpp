@@ -27,11 +27,11 @@
 #include <conio.h>
 #include "CheckClass.h"
 
-#include "Pool.h"
-#include "memManager.h"
+//#include "Pool.h"
 
 #include "fmod.hpp"
 #include "SoundSystem.h"
+#include "memManager.h"
 
 #define _CRTDBG_MAP_ALLOC
 
@@ -47,7 +47,7 @@ void ALESSIO_TEST();
 void ALEX_LOOP(QuadTree* _physicsQuadTree, WorldObj* _player, vector<WorldObj*> &_recVec);
 
 
-void Darion_Ian_Test();
+//void Darion_Ian_Test();
 
 void ANDREWS_TEST();
 
@@ -85,10 +85,10 @@ int main() {
 		//}
 
 		/*Darion Ian Test*/
-		Darion_Ian_Test();
+		//Darion_Ian_Test();
 
 		/*ALESSIO*/
-		//ALESSIO_TEST();
+		ALESSIO_TEST();
 
 		/* ALEX */
 		ALEX_LOOP(collideTree, Alex, recVec);
@@ -164,13 +164,10 @@ void ALESSIO_TEST() {
 		rInt[i] = rand() % 4 - 1;
 	}
 	Factions fac(rInt);
-	Hero person(20, 0, true);
+	Hero person(20, 0, false);
 	Texture still;
-	still.setFile("img.png");
-	Sprite objSpt;
-	objSpt.setTexture(&still);
-	person.setSprite(objSpt);
-	person.drawObj();
+	still.setFile("smile1.png");
+	person.sprite.setTexture(&still);
 	cout <<"Is person an NPC: "<< CheckClass::isNPC(&person) << endl;
 	person.setHealth(-10);
 	person.setAlive(false);
@@ -196,16 +193,23 @@ void ALESSIO_TEST() {
 	citizen.moveUp();
 	citizen.moveRight();
 	cout << "citizen is now at: " << citizen.getX() << " , " << citizen.getY() << endl;
-	Texture test;
-	test.setFrames(5);
-	test.setFWidth(100);
-	Sprite sp;
-	sp.setTexture(&test);
-	test.setAnimated(true);
-	person.setSprite(sp);
-	for (int i = 0; i < 20;i++) {
-		person.animateObj();
+	person.WorldObj::setWidth(100);
+	person.WorldObj::setHeight(100);
+	person.setX(10);
+	person.setY(300);
+	person.setCollision(true);
+	osi::GameWindow::init();
+	float z = 0;
+	while (osi::GameWindow::isRunning()) {
+		person.WorldObj::drawObj();
+		person.WorldObj::shiftX(1);
+		//osi::GameWindow::refresh();
+		osi::GameWindow::drawSprite(600+z,150,100,100, "bluewood.jpg");
+		z += .5;
+		osi::GameWindow::drawSprite(100, 150, 100, 100, "phi.png");
+		osi::GameWindow::refresh();
 	}
+	osi::GameWindow::terminate();
 }
 
 void ALEX_LOOP(QuadTree* _physicsQuadTree, WorldObj* _player, vector<WorldObj*> &_recVec) {
@@ -223,22 +227,27 @@ void ALEX_LOOP(QuadTree* _physicsQuadTree, WorldObj* _player, vector<WorldObj*> 
 	//psuedo Gameloop
 	MessageLog* mLog = new MessageLog();
 	TaskBuffer* tBuffer = new TaskBuffer(mLog);
-	Input* iController = new Input(mLog, tBuffer, _player);
+
+	ChildrenOfOsi* gameplay_functions = new ChildrenOfOsi(mLog, tBuffer);
+	Input* iController = new Input(gameplay_functions, _player);
 	//create Managers and add to Manager table
 
 	DummyController* DumM = new DummyController(mLog, tBuffer);
 	PhysicsManager* PhysM = new PhysicsManager(mLog, tBuffer, _physicsQuadTree);
 	memManager* memM = new memManager(mLog, tBuffer);
+
+	//the order defines what order the managers the tasks will be sent to
 	DumM->register_manager();
 	PhysM->register_manager();
 	memM->register_manager();
+	
 
 
 	//std::unordered_map<std::string, Manager*> manager_table;
 
 	//manager_table["DumM"] = DumM;
 
-
+	
 
 
 	while (true) {
@@ -271,15 +280,20 @@ void ERONS_LOOP() {
 	//psuedo Gameloop
 	MessageLog* mLog = new MessageLog();
 	TaskBuffer* tBuffer = new TaskBuffer(mLog);
-	Input* iController = new Input(mLog, tBuffer);
+
+	ChildrenOfOsi* gameplay_functions = new ChildrenOfOsi(mLog, tBuffer);
+	Input* iController = new Input(gameplay_functions);
 	//create Managers and add to Manager table
 
 	DummyController* DumM = new DummyController(mLog,tBuffer);
 	PhysicsManager* PhysM = new PhysicsManager(mLog, tBuffer);
 	memManager* memM = new memManager(mLog, tBuffer);
+
+	//the order defines what order the managers the tasks will be sent to
 	DumM->register_manager();
 	PhysM->register_manager();
 	memM->register_manager();
+	
 
 
 	//std::unordered_map<std::string, Manager*> manager_table;
@@ -295,7 +309,7 @@ void ERONS_LOOP() {
 		//draw
 	}
 }
-
+ /*
 void Darion_Ian_Test() {
 	MemoryPool* hero_pool = create_pool(2048);
 	MemNode* head_ptr = init_pool(hero_pool, 32);
@@ -327,6 +341,7 @@ void Darion_Ian_Test() {
 
 
 }
+ */
 /////////////////////////////////////////////////////////////////
 //ERON'S LOOP NO TOUCHY
 /////////////////////////////////////////////////////////////////

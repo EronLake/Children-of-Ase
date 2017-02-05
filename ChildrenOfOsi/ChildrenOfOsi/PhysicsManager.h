@@ -23,7 +23,7 @@ private:
 	typedef std::map<std::string, fn_ptr> functionMapper;
 
     functionMapper task_map;
-    functionMapper::const_iterator it;
+    //functionMapper::const_iterator it;
 
 	Movement* moveHelper;
 };
