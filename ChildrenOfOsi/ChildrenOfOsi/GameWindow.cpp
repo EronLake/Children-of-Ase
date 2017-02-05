@@ -11,6 +11,8 @@ GLuint osi::GameWindow::vertexArrayObjectId = 0;
 GLuint osi::GameWindow::vertexBufferObjectId = 0;
 GLuint osi::GameWindow::elementBufferObjectId = 0;
 GLuint osi::GameWindow::shaderProgramId = 0;
+GLuint osi::GameWindow::textureId = 0;
+int osi::GameWindow::numObjects = 1;
 
 /// <summary>Initializes the game's window. This will cause the application
 /// window to become visible to the end user. Only one such window may exist at
@@ -24,7 +26,7 @@ bool osi::GameWindow::init()
 
   GameWindow::setupWindow();
   GameWindow::setupStdShaders();
-
+  glEnable(GL_TEXTURE_2D);
   return true;
 }
 
@@ -73,23 +75,21 @@ bool osi::GameWindow::isRunning()
 /// <param name="y">The vertical Y position of the sprite's top-left corner</param>
 /// <param name="width">The width of the sprite in device-independent pixels</param>
 /// <param name="height">The height of the sprite in device-independent pixels</param>
-void osi::GameWindow::drawSprite(float x, float y, float width, float height, const std::string& fileName, int id)
+void osi::GameWindow::drawSprite(float x, float y, float width, float height, const std::string& fileName)
 {
-	std::cout << width << std::endl;
-	std::cout << "x: " << x <<std::endl;
-	osi::GameWindow::vertexArrayObjectId = id;
+	//std::cout << "x: " << x <<std::endl;
   std::vector<GLfloat> GlCoordTL = GameWindow::dpCoordToGL(x, y);
   std::vector<GLfloat> GlCoordBR = GameWindow::dpCoordToGL(x + width, y + height);
 
   GLfloat spriteCoords[] = {
     // Vertices                         // Vertex colors    // Texture coordinates
-    GlCoordTL[0], GlCoordTL[1], 0.0F,   1.0F, 0.0F, 1.0F,   0.0F, 1.0F, // Top-left corner
-    GlCoordTL[0], GlCoordBR[1], 0.0F,   1.0F, 0.0F, 1.0F,   0.0F, 0.0F, // Bottom-left corner
-    GlCoordBR[0], GlCoordBR[1], 0.0F,   1.0F, 0.0F, 1.0F,   1.0F, 1.0F, // Bottom-right corner
-    GlCoordBR[0], GlCoordTL[1], 0.0F,   1.0F, 0.0F, 1.0F,   1.0F, 0.0F, // Top-right corner
+    GlCoordTL[0], GlCoordTL[1], 0.0F,   1.0F, 0.0F, 0.0F,   0.0F, 1.0F, // Top-left corner
+    GlCoordTL[0], GlCoordBR[1], 0.0F,   1.0F, 0.0F, 0.0F,   0.0F, 0.0F, // Bottom-left corner
+    GlCoordBR[0], GlCoordBR[1], 0.0F,   1.0F, 0.0F, 0.0F,   1.0F, 0.0F, // Bottom-right corner
+    GlCoordBR[0], GlCoordTL[1], 0.0F,   1.0F, 0.0F, 0.0F,   1.0F, 1.0F, // Top-right corner
   };
   GLuint spriteVertexIndices[] = {
-	  0, 3, 2, // First triangle
+	  0, 2, 3, // First triangle
 	  0, 2, 1
   };
 
@@ -99,9 +99,9 @@ void osi::GameWindow::drawSprite(float x, float y, float width, float height, co
 
   glBindVertexArray(vertexArrayObjectId);
   glBindBuffer(GL_ARRAY_BUFFER, vertexBufferObjectId);
-  glBufferData(GL_ARRAY_BUFFER, sizeof(spriteCoords), spriteCoords, GL_STATIC_DRAW);
+  glBufferData(GL_ARRAY_BUFFER, sizeof(spriteCoords), spriteCoords, GL_STREAM_DRAW);
   glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, elementBufferObjectId);
-  glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(spriteVertexIndices), spriteVertexIndices, GL_STATIC_DRAW);
+  glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(spriteVertexIndices), spriteVertexIndices, GL_STREAM_DRAW);
 
   glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(GLfloat), (GLvoid *) 0);
   glEnableVertexAttribArray(0);
@@ -111,24 +111,26 @@ void osi::GameWindow::drawSprite(float x, float y, float width, float height, co
   glEnableVertexAttribArray(2);
 
   glBindVertexArray(0);
-
-  GLuint textureId;
+  
+  //GLuint textureId;
   glGenTextures(1, &textureId);
   glBindTexture(GL_TEXTURE_2D, textureId);
-
+  std::cout << "New Texture: " << textureId << std::endl;
   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
-  glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+  glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 
   int imageWidth;
   int imageHeight;
   unsigned char *image = SOIL_load_image(fileName.c_str(), &imageWidth, &imageHeight, 0, SOIL_LOAD_RGBA);
+  std::cout << "Width: "<<imageWidth << std::endl;
+  std::cout << "Height: " << imageHeight << std::endl;
   glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, imageWidth, imageHeight, 0, GL_RGBA, GL_UNSIGNED_BYTE, image);
   glGenerateMipmap(GL_TEXTURE_2D);
-
   SOIL_free_image_data(image);
   glBindTexture(GL_TEXTURE_2D, 0);
+  numObjects++;
 }
 
 /// <summary></summary>
@@ -150,15 +152,18 @@ void osi::GameWindow::refresh()
 
   glClearColor(0.5F, 0.5F, 0.5F, 1.0F);
   glClear(GL_COLOR_BUFFER_BIT);
-
   glUseProgram(osi::GameWindow::shaderProgramId);
-  glBindVertexArray(2);
- // glBindVertexArray(1);
- // glDrawArrays(GL_TRIANGLES, 0, 3);
-  glDrawElements(GL_TRIANGLES,12, GL_UNSIGNED_INT, 0);
- glBindVertexArray(1);
+  for (vertexArrayObjectId=1; vertexArrayObjectId < numObjects; vertexArrayObjectId++) {
+	  std::cout  <<"Loaded Texture: " << vertexArrayObjectId << std::endl;
+	  glBindTexture(GL_TEXTURE_2D, vertexArrayObjectId);
+	  glBindVertexArray(vertexArrayObjectId);
+	  glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
+	  glDeleteVertexArrays(1, &vertexArrayObjectId);
+	  glDeleteTextures(1, &vertexArrayObjectId);
+  }
+  numObjects = 1;
+  textureId = 1;
   // glDrawArrays(GL_TRIANGLES, 0, 3);
- glDrawElements(GL_TRIANGLES, 12, GL_UNSIGNED_INT, 0);
   glBindVertexArray(0);
 
   glfwSwapBuffers(osi::GameWindow::window);

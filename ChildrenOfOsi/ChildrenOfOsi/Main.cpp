@@ -193,24 +193,21 @@ void ALESSIO_TEST() {
 	citizen.moveUp();
 	citizen.moveRight();
 	cout << "citizen is now at: " << citizen.getX() << " , " << citizen.getY() << endl;
-	person.WorldObj::setWidth(500);
-	person.WorldObj::setHeight(400);
+	person.WorldObj::setWidth(100);
+	person.WorldObj::setHeight(100);
 	person.setX(10);
-	person.setY(100);
-	std::cout << person.getHeight() << std::endl;
-	std::cout << person.getWidth() << std::endl;
-	std::cout << person.sprite.getTfile() << std::endl;
+	person.setY(300);
 	person.setCollision(true);
 	osi::GameWindow::init();
 	float z = 0;
 	while (osi::GameWindow::isRunning()) {
-		osi::GameWindow::refresh();
-		std::cout << person.getWidth() << std::endl;
-		//person.WorldObj::drawObj();
+		person.WorldObj::drawObj();
+		person.WorldObj::shiftX(1);
 		//osi::GameWindow::refresh();
-		osi::GameWindow::drawSprite(600+z,150,100,100,"smile1.png",1);
-		z += .1;
-		osi::GameWindow::drawSprite(100, 150, 100, 100, "smile1.png", 0);
+		osi::GameWindow::drawSprite(600+z,150,100,100, "bluewood.jpg");
+		z += .5;
+		osi::GameWindow::drawSprite(100, 150, 100, 100, "phi.png");
+		osi::GameWindow::refresh();
 	}
 	osi::GameWindow::terminate();
 }

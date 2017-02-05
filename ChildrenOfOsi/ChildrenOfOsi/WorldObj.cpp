@@ -162,11 +162,7 @@ void WorldObj::animateObj()
 
 void WorldObj::drawObj()
 {
-	cout << collision << endl;
-	cout << width << endl;
-	cout << this->getX() << endl;
-	cout << sprite.getTfile() << endl;
-	osi::GameWindow::drawSprite(loc.getXloc(), loc.getYloc(), width, height, sprite.getTfile(),0);
+	osi::GameWindow::drawSprite(loc.getXloc(), loc.getYloc(), width, height, sprite.getTfile());
 }
 
 void WorldObj::setName(string na)

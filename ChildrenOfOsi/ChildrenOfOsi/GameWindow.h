@@ -31,7 +31,7 @@ namespace osi
     static bool isActive();
     static bool isRunning();
 
-    static void drawSprite(float, float, float, float, const std::string&, int id);
+    static void drawSprite(float, float, float, float, const std::string&);
     static void drawSprite(float, float, float, float, int, int, const unsigned char *);
     static void refresh();
 
@@ -47,6 +47,8 @@ namespace osi
     static GLuint vertexBufferObjectId;
     static GLuint elementBufferObjectId;
     static GLuint shaderProgramId;
+	static GLuint textureId;
+	static int numObjects;
 
     GameWindow() = delete;
     ~GameWindow() = delete;
