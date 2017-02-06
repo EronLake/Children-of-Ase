@@ -1,12 +1,20 @@
 #include "stdafx.h"
 #include "Input.h"
 #include <conio.h>
+#include <Windows.h>
+#include "Soldier.h"
 
-Input::Input(MessageLog* _mLog, TaskBuffer* _tBuffer)
+Input::Input(ChildrenOfOsi* _gameplay_functions)
 {
-	mLog = _mLog;
-	tBuffer = _tBuffer;
+	gameplay_functions = _gameplay_functions;
 	LOG("Input Objected Constructed");
+}
+
+Input::Input(ChildrenOfOsi* _gameplay_functions, WorldObj * _player)
+{
+	gameplay_functions = _gameplay_functions;
+	player = _player;
+	LOG("Input Object W/Player Constructed");
 }
 
 
@@ -17,35 +25,38 @@ Input::~Input()
 
 void Input::InputCheck()
 {
-	int key;
-	if (_kbhit())
-	{
-		key = _getch();
+	short W = GetKeyState('W') >> 15;
+	short A = GetKeyState('A') >> 15;
+	short S = GetKeyState('S') >> 15;
+	short D = GetKeyState('D') >> 15;
+	short R = GetKeyState('R') >> 15;
+	short T = GetKeyState('T') >> 15;
 
-		if (key == 'w') 
-		{
-			createTask("Move_Up", "MOVE");
-		}
-		else if (key == 'a')
-		{
-			createTask("Move_Left", "MOVE");
-		}
-		else if (key == 's')
-		{
-			createTask("Move_Down", "MOVE");
-		}
-		else if (key == 'd')
-		{
-			createTask("Move_Right", "MOVE");
-		}
+	if (W)
+	{
+		gameplay_functions->move_up(player);
+	}
+	if (A)
+	{
+		gameplay_functions->move_left(player);
+	}
+	if (S)
+	{
+		gameplay_functions->move_down(player);
+	}
+	if (D)
+	{
+		gameplay_functions->move_right(player);
+	}
+	if (R) {
+		gameplay_functions->add_soldier(9.6f,100.3f,true);
+	}
+	if (T) { //Failure check on fake task name
+		gameplay_functions->move_out(player);
 	}
 }
 
-void Input::createTask(std::string task_name, std::string type)
-{
-	std::string task_status = "CREATED";
-	Task* new_task = new Task(task_name, task_status, type);
-	tBuffer->push(new_task);
-	mLog->logMessage(new_task);
-}
+
+
+
 

@@ -34,6 +34,7 @@ void TaskBuffer::run()
 //------------------------------------------------------
 void TaskBuffer::assignTask(Task* current_task)
 {
+	//will a manager ever create a task or simply pass one?
 	if (current_task->status == "CREATED" ||
 		current_task->status == "PASSED")
 	{
@@ -44,26 +45,30 @@ void TaskBuffer::assignTask(Task* current_task)
 		//	{
 		if (mTable.count(current_task->type) != 0)
 		{
-				//call DummyController Function to handle task
-				std::vector<Manager*> type_man_vec = mTable.find(current_task->type)->second;
-				mLog->logMessage(current_task);
-				for (auto itr = type_man_vec.begin(); itr != type_man_vec.end(); itr++)
-				{
-					//may need to create a clone task function
-					(*itr)->execute_task(current_task);
-				}	
-		}else
+			//call DummyController Function to handle task
+			std::vector<Manager*> type_man_vec = mTable.find(current_task->type)->second;
+			mLog->logMessage(current_task);
+			for (auto itr = type_man_vec.begin(); itr != type_man_vec.end(); itr++)
+			{
+				//clone task and send off to manager
+				Task* duplicate_task = current_task->clone_task();
+				(*itr)->execute_task(duplicate_task);
+			}
+			delete current_task;
+		}
+		else
 		{
-				LOG("Error: Task type does not exist"); //perror?
+			LOG("Error: Task type does not exist"); //perror?
 		}
 	}
 	else if (current_task->status == "COMPLETED" ||
-			 current_task->status == "FAILED")
+		current_task->status == "FAILED")
 	{
 		//confirm task was completed or failed in MessageLog
 		mLog->logMessage(current_task);
 		delete current_task;
-	}else
+	}
+	else
 	{
 		LOG("not valid status");
 	}
@@ -96,7 +101,7 @@ Task* TaskBuffer::pop()
 
 //------------------------------------------------------
 //checks if the TaskBuffer is empty
-bool TaskBuffer::isEmpty() 
+bool TaskBuffer::isEmpty()
 {
 	return (queue_buffer.size() == 0);
 }

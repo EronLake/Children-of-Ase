@@ -9,12 +9,12 @@ class Texture
 public:
 	Texture();
 	~Texture();
-	void setWidth(float w);
+	void setWidth(int w);
 	float getWidth();
-	void setHeight(float h);
+	void setHeight(int h);
 	float getHeight();
-	void setFWidth(float w);
-	float getFWidth();
+	void setFrameWidth(int w);
+	float getFrameWidth();
 	void setFrames(int f);
 	int getFrames();
 	void setAnimated(bool a);
@@ -23,10 +23,10 @@ public:
 	void setFile(string image);
 private:
 	string imageFile;
-	float width;
-	float height;
+	int width;
+	int height;
 	int frames;
-	float frameW;
+	int frameWidth;
 	bool animated;
 };
 

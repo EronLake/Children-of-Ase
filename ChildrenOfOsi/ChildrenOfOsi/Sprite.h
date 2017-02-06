@@ -16,7 +16,7 @@ public:
 private:
 	Texture *tex;
 	int index;
-	float start;
-	float stop;
+	int start;
+	int stop;
 };
 

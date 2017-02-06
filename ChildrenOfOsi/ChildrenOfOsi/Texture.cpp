@@ -16,7 +16,7 @@ float Texture::getWidth()
 	return width;
 }
 
-void Texture::setWidth(float w)
+void Texture::setWidth(int w)
 {
 	width = w;
 }
@@ -26,19 +26,19 @@ float Texture::getHeight()
 	return height;
 }
 
-void Texture::setHeight(float h)
+void Texture::setHeight(int h)
 {
 	height = h;
 }
 
-float Texture::getFWidth()
+float Texture::getFrameWidth()
 {
-	return frameW;
+	return frameWidth;
 }
 
-void Texture::setFWidth(float w)
+void Texture::setFrameWidth(int w)
 {
-	frameW = w;
+	frameWidth = w;
 }
 
 int Texture::getFrames()

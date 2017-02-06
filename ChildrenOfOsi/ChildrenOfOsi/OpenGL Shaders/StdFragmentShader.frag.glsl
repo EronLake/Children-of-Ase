@@ -1,13 +1,12 @@
-# version 330 core
+#version 330 core
 
-in vec3 iColor;
-in vec2 iTextureCoords;
-
-out vec4 oColor;
+in vec4 oColor;
+in vec2 oTextureCoords;
+out vec4 zColor;
 
 uniform sampler2D tex;
 
 void main()
 {
-  oColor = texture(tex, iTextureCoords);
+  zColor = texture(tex, oTextureCoords);
 }
