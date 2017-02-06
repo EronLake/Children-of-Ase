@@ -126,6 +126,8 @@ void osi::GameWindow::drawSprite(float x, float y, float width, float height, co
   unsigned char *image = SOIL_load_image(fileName.c_str(), &imageWidth, &imageHeight, 0, SOIL_LOAD_RGBA);
   std::cout << "Width: "<<imageWidth << std::endl;
   std::cout << "Height: " << imageHeight << std::endl;
+  glEnable(GL_BLEND);
+  glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
   glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, imageWidth, imageHeight, 0, GL_RGBA, GL_UNSIGNED_BYTE, image);
   glGenerateMipmap(GL_TEXTURE_2D);
   SOIL_free_image_data(image);
@@ -181,15 +183,11 @@ void osi::GameWindow::refresh()
 /// <returns>Returns a vector, size 2, containing the transformed coordinates.</returns>
 std::vector<GLfloat> osi::GameWindow::dpCoordToGL(float x, float y)
 {
-  GLfloat glX;
-  if(x < 0)                         glX = -1;
-  else if(x >= WINDOW_WIDTH_DP - 1) glX = 1;
-  else                              glX = (x - (0.5F * (WINDOW_WIDTH_DP - 1))) / (0.5F * (WINDOW_WIDTH_DP - 1));
+  GLfloat glX;                           
+  glX = (x - (0.5F * (WINDOW_WIDTH_DP - 1))) / (0.5F * (WINDOW_WIDTH_DP - 1));
 
   GLfloat glY;
-  if(y < 0)                          glY = 1;
-  else if(y >= WINDOW_HEIGHT_DP - 1) glY = -1;
-  else                               glY = -((y - (0.5F * (WINDOW_HEIGHT_DP - 1))) / (0.5F * (WINDOW_HEIGHT_DP - 1)));
+  glY = -((y - (0.5F * (WINDOW_HEIGHT_DP - 1))) / (0.5F * (WINDOW_HEIGHT_DP - 1)));
 
   return {glX, glY};
 }

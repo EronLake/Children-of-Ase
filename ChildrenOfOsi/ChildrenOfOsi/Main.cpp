@@ -204,9 +204,9 @@ void ALESSIO_TEST() {
 		person.WorldObj::drawObj();
 		person.WorldObj::shiftX(1);
 		//osi::GameWindow::refresh();
-		osi::GameWindow::drawSprite(600+z,150,100,100, "bluewood.jpg");
+		osi::GameWindow::drawSprite(600+z,150,100,100, "phi.png");
 		z += .5;
-		osi::GameWindow::drawSprite(100, 150, 100, 100, "phi.png");
+		osi::GameWindow::drawSprite(100, 150, 100, 100, "bluewood.jpg");
 		osi::GameWindow::refresh();
 	}
 	osi::GameWindow::terminate();
