@@ -2,6 +2,9 @@
 #pragma once
 #include "Vector2f.h"
 #include "common.h"
+#include "GLEW\glew.h"
+#include "GLFW/glfw3.h"
+#include "SOIL/SOIL.h"
 using namespace std;
 
 class Texture
@@ -20,7 +23,9 @@ public:
 	void setAnimated(bool a);
 	bool getAnimated();
 	string getFile();
-	void setFile(string image);
+	void setFile(string img);
+	void load();
+	unsigned char* getImage();
 private:
 	string imageFile;
 	int width;
@@ -28,5 +33,6 @@ private:
 	int frames;
 	int frameWidth;
 	bool animated;
+	unsigned char *image;
 };
 

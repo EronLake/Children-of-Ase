@@ -66,7 +66,18 @@ string Texture::getFile()
 	return imageFile;
 }
 
-void Texture::setFile(string image)
+void Texture::setFile(string img)
 {
-	imageFile = image;
+	imageFile = img;
+}
+
+unsigned char* Texture::getImage()
+{
+	return image;
+}
+
+void Texture::load()
+{
+	image = SOIL_load_image(imageFile.c_str(), &width, &height, 0, SOIL_LOAD_RGBA);
+	//SOIL_free_image_data(image);
 }

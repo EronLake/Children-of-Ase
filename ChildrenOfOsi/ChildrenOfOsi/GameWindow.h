@@ -16,6 +16,7 @@
 #include "GLEW\glew.h"
 #include "GLFW/glfw3.h"
 #include "SOIL/SOIL.h"
+#include "Sprite.h"
 
 namespace osi
 {
@@ -31,7 +32,7 @@ namespace osi
     static bool isActive();
     static bool isRunning();
 
-    static void drawSprite(float, float, float, float, const std::string&);
+    static void drawSprite(float, float, float, float, Sprite t);
     static void drawSprite(float, float, float, float, int, int, const unsigned char *);
     static void refresh();
 

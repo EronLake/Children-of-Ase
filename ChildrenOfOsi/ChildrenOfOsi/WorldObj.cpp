@@ -162,7 +162,7 @@ void WorldObj::animateObj()
 
 void WorldObj::drawObj()
 {
-	osi::GameWindow::drawSprite(loc.getXloc(), loc.getYloc(), width, height, sprite.getTfile());
+	osi::GameWindow::drawSprite(loc.getXloc(), loc.getYloc(), width, height, sprite);
 }
 
 void WorldObj::setName(string na)
