@@ -1,4 +1,6 @@
 #pragma once
+#ifndef POOL_H
+#define POOL_H
 #include "stdafx.h"  
 #include <stdlib.h>     
 #include <time.h>
@@ -13,11 +15,6 @@
 #include "Projectile.h"
 
 
-#ifndef POOL_H
-#define POOL_H
-
-#endif /* POOL_H */
-
 class MemoryPool {
 public:
 	MemoryPool(size_t size) {};
@@ -27,7 +24,7 @@ public:
 	size_t pool_size;
 	size_t block_size;
 	size_t num_of_blocks;
-
+	
 };
 
 class MemNode {
@@ -46,6 +43,19 @@ private:
 	MemNode* next;
 	bool is_available;
 	void* block_pointer;
+};
+
+class MemoryHelper {
+public:
+    int store_hero(float x, float y, bool col);
+	int store_soldier(float x, float y, bool col);
+	int store_projectile(float x, float y, bool col);
+	int store_spl_soldier(float x, float y, bool col);
+	int store_livingObj(float x, float y, bool col);
+	int store_worldObj(float x, float y, bool col);
+	int store_npc(float x, float y, bool col);
+private:
+
 };
 
 class Warrior {
@@ -79,4 +89,4 @@ MemNode* make_Available(MemNode* head_ptr, MemoryPool* p, size_t node_number);
 void* find_available_block(MemNode* head_ptr);
 
 
-
+#endif POOL_H 

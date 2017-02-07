@@ -23,7 +23,7 @@ public:
 	Task(std::string _name, std::string _status, std::string _type, float x, float y, bool col);
 	Task(std::string _name, std::string _status, std::string _type, float x, float y, bool col, int d);
 	Task(std::string name, std::string status, std::string _type, WorldObj* _objToUpdate, float x, float y, bool col);
-	Task(std::string name, std::string status, std::string _type, WorldObj* _objToUpdate, float x, float y, bool col, int d);
+	//Task(std::string name, std::string status, std::string _type, WorldObj* _objToUpdate, float x, float y, bool col, int d);
 	~Task();
 
 	void updateStatus(std::string new_status);

@@ -80,7 +80,7 @@ Task::Task(std::string _name, std::string _status, std::string _type, WorldObj* 
 	LOG("Task Object W/WOBJ Constructed");
 }
 
-Task::Task(std::string _name, std::string _status, std::string _type, WorldObj* _objToUpdate, float x, float y, bool col, int d) {
+/*Task::Task(std::string _name, std::string _status, std::string _type, WorldObj* _objToUpdate, float x, float y, bool col, int d) {
 	name = _name;
 	type = _type;
 	//[buffer,manager,class]
@@ -95,7 +95,7 @@ Task::Task(std::string _name, std::string _status, std::string _type, WorldObj* 
 	arg4 = d;
 
 	LOG("Task Object W/WOBJ Constructed");
-}
+}*/
 
 
 
@@ -118,8 +118,7 @@ Task* Task::clone_task()
 									objToUpdate,
 		                            arg1,
 		                            arg2,
-		                            arg3,
-		                            arg4);
+		                            arg3);
 
 	return duplicate_task;
 }

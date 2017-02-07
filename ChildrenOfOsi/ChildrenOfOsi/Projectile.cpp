@@ -6,9 +6,9 @@ Projectile::Projectile()
 {
 }
 
-Projectile::Projectile(float x, float y, bool col, int d) : WorldObj(x, y, col)
+Projectile::Projectile(float x, float y, bool col) : WorldObj(x, y, col)
 {
-	dmg = d;
+	//dmg = d;
 }
 
 Projectile::~Projectile()
@@ -19,3 +19,6 @@ Projectile::~Projectile()
 {
 	 (*target).addHealth(-dmg);
 }
+ void Projectile::setDmg(int d) {
+	 dmg = d;
+ }

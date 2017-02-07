@@ -7,9 +7,10 @@ class Projectile :
 {
 public:
 	Projectile();
-	Projectile(float x, float y, bool col, int d);
+	Projectile(float x, float y, bool col);// , int d);
 	~Projectile();
 	void Hit(LivingObj *target);
+	void setDmg(int d);
 private:
 	int dmg;
 };

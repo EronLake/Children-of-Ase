@@ -48,8 +48,6 @@ void PhysicsManager::execute_task(Task* current_task)
 		if (it == task_map.end()) {
 			result = 1;
 			LOG("Error: Task '" << current_task->name << "' does not exist.");
-			current_task->updateStatus("FAILED");
-			this->send_result(current_task);
 		}
 		else {
 			result = (moveHelper->*(it->second))(current_task->objToUpdate);
