@@ -74,6 +74,7 @@ Task::Task(std::string _name, std::string _status, std::string _type, WorldObj* 
 	//object
 
 	status = _status;
+	objToUpdate = _objToUpdate;
 
 	arg1 = x;
 	arg2 = y;
@@ -91,6 +92,7 @@ Task::Task(std::string _name, std::string _status, std::string _type, WorldObj* 
 	//object
 
 	status = _status;
+	objToUpdate = _objToUpdate;
 
 	arg1 = x;
 	arg2 = y;

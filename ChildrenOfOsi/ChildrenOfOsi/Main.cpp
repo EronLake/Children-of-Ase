@@ -78,7 +78,7 @@ int main() {
 /* ERON */
 //		ERONS_LOOP();
 		/*ALESSIO*/
-		ALESSIO_TEST();
+		//ALESSIO_TEST();
 
 		/* ALEX */
 		ALEX_LOOP(collideTree);

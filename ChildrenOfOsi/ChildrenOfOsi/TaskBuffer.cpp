@@ -51,10 +51,9 @@ void TaskBuffer::assignTask(Task* current_task)
 			for (auto itr = type_man_vec.begin(); itr != type_man_vec.end(); itr++)
 			{
 				//clone task and send off to manager
+				LOG("TASK DUPLICATED");
 				Task* duplicate_task = current_task->clone_task();
-				if (duplicate_task->objToUpdate == nullptr) {
-					LOG("DUPLICATED TASK OBJ TO UPDATE IS nullptr");
-				}
+
 				(*itr)->execute_task(duplicate_task);
 			}
 			delete current_task;
