@@ -40,9 +40,9 @@ bool osi::GameWindow::terminate()
   if(!GameWindow::isActive())
     return false;
 
-  glDeleteVertexArrays(1, &vertexArrayObjectId[0]);
-  glDeleteBuffers(1, &vertexBufferObjectId[0]);
-  glDeleteBuffers(1, &elementBufferObjectId[0]);
+ // glDeleteVertexArrays(1, &vertexArrayObjectId[0]);
+ // glDeleteBuffers(1, &vertexBufferObjectId[0]);
+  //glDeleteBuffers(1, &elementBufferObjectId[0]);
   glfwTerminate();
 
   osi::GameWindow::window = nullptr;
@@ -80,13 +80,15 @@ void osi::GameWindow::drawSprite(float x, float y, float width, float height, Sp
 	//std::cout << "x: " << x <<std::endl;
   std::vector<GLfloat> GlCoordTL = GameWindow::dpCoordToGL(x, y);
   std::vector<GLfloat> GlCoordBR = GameWindow::dpCoordToGL(x + width, y + height);
+  float x1 =t.start/t.getTexture().getWidth();
+  float x2 = t.stop / t.getTexture().getWidth();
 
   GLfloat spriteCoords[] = {
     // Vertices                         // Vertex colors    // Texture coordinates
-    GlCoordTL[0], GlCoordTL[1], 0.0F,   1.0F, 0.0F, 0.0F,   0.0F, 1.0F, // Top-left corner
-    GlCoordTL[0], GlCoordBR[1], 0.0F,   1.0F, 0.0F, 0.0F,   0.0F, 0.0F, // Bottom-left corner
-    GlCoordBR[0], GlCoordBR[1], 0.0F,   1.0F, 0.0F, 0.0F,   1.0F, 0.0F, // Bottom-right corner
-    GlCoordBR[0], GlCoordTL[1], 0.0F,   1.0F, 0.0F, 0.0F,   1.0F, 1.0F, // Top-right corner
+    GlCoordTL[0], GlCoordTL[1], 0.0F,   1.0F, 0.0F, 0.0F,  x1, 1.0F, // Top-left corner
+    GlCoordTL[0], GlCoordBR[1], 0.0F,   1.0F, 0.0F, 0.0F,   x1, 0.0F, // Bottom-left corner
+    GlCoordBR[0], GlCoordBR[1], 0.0F,   1.0F, 0.0F, 0.0F,   x2, 0.0F, // Bottom-right corner
+    GlCoordBR[0], GlCoordTL[1], 0.0F,   1.0F, 0.0F, 0.0F,   x2, 1.0F, // Top-right corner
   };
   GLuint spriteVertexIndices[] = {
 	  0, 2, 3, // First triangle
@@ -127,8 +129,6 @@ void osi::GameWindow::drawSprite(float x, float y, float width, float height, Sp
   int imageWidth=t.getTexture().getWidth();
   int imageHeight=t.getTexture().getHeight();
  // unsigned char *image = SOIL_load_image(fileName.c_str(), &imageWidth, &imageHeight, 0, SOIL_LOAD_RGBA);
-  std::cout << "Width: "<<imageWidth << std::endl;
-  std::cout << "Height: " << imageHeight << std::endl;
   glEnable(GL_BLEND);
   glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
   glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, imageWidth, imageHeight, 0, GL_RGBA, GL_UNSIGNED_BYTE, t.getTexture().getImage());
@@ -168,6 +168,10 @@ void osi::GameWindow::refresh()
   }
   // glDrawArrays(GL_TRIANGLES, 0, 3);
   glBindVertexArray(0);
+  vertexArrayObjectId.clear();
+  textureId.clear();
+  vertexBufferObjectId.clear();
+  elementBufferObjectId.clear();
   numObjects = 0;
   glfwSwapBuffers(osi::GameWindow::window);
 }

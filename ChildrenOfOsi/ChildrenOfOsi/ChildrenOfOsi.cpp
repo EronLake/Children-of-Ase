@@ -72,7 +72,13 @@ void ChildrenOfOsi::add_projectile(float x, float y, bool col, int d) {
 void ChildrenOfOsi::add_npc(float x,float y, bool col) {
 	createTaskWithParams("Add_NPC", "MODIFY_POOL", x, y, col);
 }
+
 //*/
+
+void ChildrenOfOsi::play_sound() {
+	createTask("Play", "SOUND");
+}
+
 //----------------------------------------------------
 
 

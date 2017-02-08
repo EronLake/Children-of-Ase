@@ -9,6 +9,12 @@
 #include "Movement.h"
 
 class PhysicsManager : public Manager {
+private:
+	typedef int (Movement::*fn_ptr)(WorldObj*);
+	typedef std::map<std::string, fn_ptr> functionMapper;
+    functionMapper task_map;
+	Movement* moveHelper;
+
 public:
 	PhysicsManager(MessageLog* _mLog, TaskBuffer* _tBuffer);
 	PhysicsManager(MessageLog* _mLog, TaskBuffer* _tBuffer, QuadTree* _physicsQuadTree);
@@ -16,15 +22,5 @@ public:
 
 	virtual void register_manager() final;
 	virtual void execute_task(Task* current_task) final;
-
-private:
-	//use this to communicate with movement helper(needed to access quadtree for collision)
-	typedef int (Movement::*fn_ptr)(WorldObj*);
-	typedef std::map<std::string, fn_ptr> functionMapper;
-
-    functionMapper task_map;
-    //functionMapper::const_iterator it;
-
-	Movement* moveHelper;
 };
 

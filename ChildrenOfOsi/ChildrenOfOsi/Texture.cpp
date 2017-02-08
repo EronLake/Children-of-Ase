@@ -49,6 +49,7 @@ int Texture::getFrames()
 void Texture::setFrames(int f)
 {
 	frames = f;
+	frameWidth = width / frames;
 }
 
 bool Texture::getAnimated()

@@ -22,7 +22,6 @@ void Sprite::setTexture(Texture *t)
 
 void Sprite::animate() 
 {
-	if ((*tex).getAnimated()) {
 		if (index < (*tex).getFrames()) {
 			index++;
 			start = (*tex).getFrameWidth()*index;
@@ -34,7 +33,6 @@ void Sprite::animate()
 			start = 0;
 			stop = (*tex).getFrameWidth();
 		}
-	}
 }
 
 string Sprite::getTfile() 

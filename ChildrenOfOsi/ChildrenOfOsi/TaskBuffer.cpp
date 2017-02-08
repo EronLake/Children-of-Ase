@@ -58,7 +58,7 @@ void TaskBuffer::assignTask(Task* current_task)
 		}
 		else
 		{
-			LOG("Error: Task type does not exist"); //perror?
+			LOG("Error: Task type '" << current_task->type << "' does not exist"); //perror?
 		}
 	}
 	else if (current_task->status == "COMPLETED" ||

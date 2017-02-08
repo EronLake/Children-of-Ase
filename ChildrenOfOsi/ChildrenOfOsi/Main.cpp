@@ -20,6 +20,7 @@
 #include "MessageLog.h"
 #include "DummyController.h"
 #include "PhysicsManager.h"
+#include "AudioManager.h"
 #include "Manager.h"
 #include "Movement.h"
 #include "RenderHelper.h"
@@ -86,15 +87,15 @@ int main() {
 
 		/*Darion Ian Test*/
 		//Darion_Ian_Test();
-
+/* ERON */
+//		ERONS_LOOP();
 		/*ALESSIO*/
 		ALESSIO_TEST();
 
 		/* ALEX */
 		ALEX_LOOP(collideTree, Alex, recVec);
 
-		/* ERON */
-		ERONS_LOOP();
+		
 
 
 		_CrtSetReportMode(_CRT_ERROR, _CRTDBG_MODE_DEBUG);
@@ -164,10 +165,17 @@ void ALESSIO_TEST() {
 		rInt[i] = rand() % 4 - 1;
 	}
 	Factions fac(rInt);
+	Hero person2(20, 0, false);
+	Texture still2;
+	still2.setFile("YemojasHouse.png");
+	still2.load();
+	still2.setFrames(2);
+	person2.sprite.setTexture(&still2);
 	Hero person(20, 0, false);
 	Texture still;
-	still.setFile("smile1.png");
+	still.setFile("phi.png");
 	still.load();
+	still.setFrames(3);
 	person.sprite.setTexture(&still);
 	cout <<"Is person an NPC: "<< CheckClass::isNPC(&person) << endl;
 	person.setHealth(-10);
@@ -198,12 +206,19 @@ void ALESSIO_TEST() {
 	person.WorldObj::setHeight(100);
 	person.setX(10);
 	person.setY(300);
+	person2.WorldObj::setWidth(960);
+	person2.WorldObj::setHeight(540);
+	person2.setX(0);
+	person2.setY(0);
+	
 	person.setCollision(true);
 	osi::GameWindow::init();
 	float z = 0;
 	while (osi::GameWindow::isRunning()) {
+		person2.WorldObj::drawObj();
 		person.WorldObj::drawObj();
 		person.WorldObj::shiftX(1);
+		person.WorldObj::animateObj();
 		//osi::GameWindow::refresh();
 		//osi::GameWindow::drawSprite(600+z,150,100,100, "phi.png");
 		z += .5;
@@ -289,11 +304,13 @@ void ERONS_LOOP() {
 	DummyController* DumM = new DummyController(mLog,tBuffer);
 	PhysicsManager* PhysM = new PhysicsManager(mLog, tBuffer);
 	memManager* memM = new memManager(mLog, tBuffer);
+	AudioManager* AudM = new AudioManager(mLog, tBuffer);
 
 	//the order defines what order the managers the tasks will be sent to
 	DumM->register_manager();
 	PhysM->register_manager();
 	memM->register_manager();
+	AudM->register_manager();
 	
 
 
