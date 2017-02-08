@@ -20,6 +20,7 @@
 #include "MessageLog.h"
 #include "DummyController.h"
 #include "PhysicsManager.h"
+#include "AudioManager.h"
 #include "Manager.h"
 #include "Movement.h"
 #include "RenderHelper.h"
@@ -86,15 +87,15 @@ int main() {
 
 		/*Darion Ian Test*/
 		//Darion_Ian_Test();
-
+/* ERON */
+//		ERONS_LOOP();
 		/*ALESSIO*/
 		ALESSIO_TEST();
 
 		/* ALEX */
 		ALEX_LOOP(collideTree, Alex, recVec);
 
-		/* ERON */
-		ERONS_LOOP();
+		
 
 
 		_CrtSetReportMode(_CRT_ERROR, _CRTDBG_MODE_DEBUG);
@@ -289,11 +290,13 @@ void ERONS_LOOP() {
 	DummyController* DumM = new DummyController(mLog,tBuffer);
 	PhysicsManager* PhysM = new PhysicsManager(mLog, tBuffer);
 	memManager* memM = new memManager(mLog, tBuffer);
+	AudioManager* AudM = new AudioManager(mLog, tBuffer);
 
 	//the order defines what order the managers the tasks will be sent to
 	DumM->register_manager();
 	PhysM->register_manager();
 	memM->register_manager();
+	AudM->register_manager();
 	
 
 

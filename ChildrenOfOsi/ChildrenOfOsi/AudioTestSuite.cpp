@@ -12,5 +12,5 @@ AudioTestSuite::~AudioTestSuite()
 }
 
 bool AudioTestSuite::execute_test() {
-
+	return false;
 }

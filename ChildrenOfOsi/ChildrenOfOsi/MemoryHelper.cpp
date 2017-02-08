@@ -15,12 +15,12 @@ MemoryHelper::~MemoryHelper()
 
 
 int MemoryHelper::store_hero(float x, float y, bool col) {
-	Hero* h = new(find_available_block(memManager::hero_head)) Hero(x, y, col);
+	Hero* h = new(find_available_block(hero_head)) Hero(x, y, col);
 	return 0;
 }
 
 int MemoryHelper::store_soldier(float x, float y, bool col) {
-	Soldier* s = new(find_available_block(memManager::soldier_head)) Soldier(x, y, col);
+	Soldier* s = new(find_available_block(soldier_head)) Soldier(x, y, col);
 	std::cout << "soldier created" << std::endl;
 	std::cout << "soldier Address: " << s << std::endl;
 	std::cout << "soldier xpos: " << s->getX() << std::endl;
@@ -30,27 +30,27 @@ int MemoryHelper::store_soldier(float x, float y, bool col) {
 }
 
 int MemoryHelper::store_spl_soldier(float x, float y, bool col) {
-	SplSoldier* spl = new(find_available_block(memManager::spl_soldier_head)) SplSoldier(x, y, col);
+	SplSoldier* spl = new(find_available_block(spl_soldier_head)) SplSoldier(x, y, col);
 	return 0;
 }
 
 int MemoryHelper::store_livingObj(float x, float y, bool col) {
-	LivingObj* lobj = new(find_available_block(memManager::livingObj_head)) LivingObj(x, y, col);
+	LivingObj* lobj = new(find_available_block(livingObj_head)) LivingObj(x, y, col);
 	return 0;
 }
 
 int MemoryHelper::store_worldObj(float x, float y, bool col) {
-	WorldObj* wobj = new(find_available_block(memManager::worldObj_head)) WorldObj(x, y, col);
+	WorldObj* wobj = new(find_available_block(worldObj_head)) WorldObj(x, y, col);
 	return 0;
 }
 
 int MemoryHelper::store_projectile(float x, float y, bool col) {
-	Projectile* p = new(find_available_block(memManager::projectile_head)) Projectile(x, y, col);
+	Projectile* p = new(find_available_block(projectile_head)) Projectile(x, y, col);
 	return 0;
 }
 
 int MemoryHelper::store_npc(float x, float y, bool col) {
-	NPC* npc = new(find_available_block(memManager::npc_head)) NPC(x, y, col);
+	NPC* npc = new(find_available_block(npc_head)) NPC(x, y, col);
 	return 0;
 }
 

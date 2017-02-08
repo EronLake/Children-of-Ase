@@ -52,8 +52,8 @@ void Input::InputCheck()
 		gameplay_functions->add_soldier(9.6f,100.3f,true);
 	}
 	if (T) { //Failure check on fake task name
-		gameplay_functions->move_out(player);
-		gameplay_functions->
+		//gameplay_functions->move_out(player);
+		gameplay_functions->play_sound();
 	}
 }
 

@@ -7,7 +7,7 @@ AudioManager::AudioManager(MessageLog* _mLog, TaskBuffer* _tBuffer)
 {
 	LOG("AudioManager Object Constructed");
 	soundHelper = new SoundSystemClass();
-	task_map["playSong1"] = &SoundSystemClass::playSong1;
+	task_map["Play"] = &SoundSystemClass::playSong1;
 }
 
 
@@ -18,7 +18,7 @@ AudioManager::~AudioManager()
 
 void AudioManager::register_manager()
 {
-	tBuffer->add_to_table("AUD", this);
+	tBuffer->add_to_table("SOUND", this);
 }
 
 void AudioManager::execute_task(Task* current_task)

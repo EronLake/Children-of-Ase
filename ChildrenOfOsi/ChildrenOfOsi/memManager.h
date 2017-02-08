@@ -23,6 +23,17 @@ private:
 
 public:
 
+
+
+	memManager(MessageLog* _mLog, TaskBuffer* _tBuffer);
+	~memManager();
+
+	virtual void register_manager() final;
+	virtual void execute_task(Task* current_task) final;
+
+};
+
+
 	static MemoryPool* hero_pool;// = nullptr;
 	static MemNode* hero_head;// = nullptr;
 
@@ -43,15 +54,4 @@ public:
 
 	static MemoryPool* npc_pool;// = nullptr;
 	static MemNode* npc_head;// = nullptr;
-
-	memManager(MessageLog* _mLog, TaskBuffer* _tBuffer);
-	~memManager();
-
-	virtual void register_manager() final;
-	virtual void execute_task(Task* current_task) final;
-
-};
-
-
-
 
