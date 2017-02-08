@@ -39,7 +39,7 @@ void PhysicsManager::register_manager()
 void PhysicsManager::execute_task(Task* current_task)
 {
 	int result;
-	if (current_task->objToUpdate == NULL) {
+	if (current_task->objToUpdate == nullptr) {
 		result = 1;
 		LOG("Error: No player object");
 	}

@@ -52,6 +52,9 @@ void TaskBuffer::assignTask(Task* current_task)
 			{
 				//clone task and send off to manager
 				Task* duplicate_task = current_task->clone_task();
+				if (duplicate_task->objToUpdate == nullptr) {
+					LOG("DUPLICATED TASK OBJ TO UPDATE IS nullptr");
+				}
 				(*itr)->execute_task(duplicate_task);
 			}
 			delete current_task;

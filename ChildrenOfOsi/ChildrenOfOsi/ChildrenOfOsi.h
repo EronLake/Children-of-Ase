@@ -21,6 +21,9 @@ public:
 	void move_right(WorldObj * player);
 	void move_out(WorldObj * player);
 
+	//functions for rendering
+	void draw_frame(WorldObj* player);
+
 	//functions for creating objects in memory
 	void add_hero(float x, float y, bool col);
     void add_soldier(float x, float y, bool col);

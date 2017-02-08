@@ -24,6 +24,9 @@ Task::Task(std::string _name, std::string _status, std::string _type, WorldObj *
 
 	status = _status;
 	objToUpdate = _objToUpdate;
+	if (objToUpdate == nullptr) {
+		LOG("TASK IS MADE, BUT OBJ IS ALREADY A NULLPTR");
+	}
 	LOG("Task Object W/WOBJ Constructed");
 }
 
@@ -42,7 +45,7 @@ Task::Task(std::string _name, std::string _status, std::string _type, float x, f
 	arg3 = col;
 	arg4 = 0;
 
-	LOG("Task Object W/WOBJ Constructed");
+	LOG("Task Object W/WOBJ&PARAM Constructed");
 }
 
 Task::Task(std::string _name, std::string _status, std::string _type, float x, float y, bool col, int d)
@@ -60,7 +63,7 @@ Task::Task(std::string _name, std::string _status, std::string _type, float x, f
 	arg3 = col;
 	arg4 = d;
 
-	LOG("Task Object W/WOBJ Constructed");
+	LOG("Task Object W/WOBJ&MOREPARAM Constructed");
 }
 
 Task::Task(std::string _name, std::string _status, std::string _type, WorldObj* _objToUpdate, float x, float y, bool col) {
@@ -77,7 +80,7 @@ Task::Task(std::string _name, std::string _status, std::string _type, WorldObj* 
 	arg3 = col;
 	arg4 = 0;
 
-	LOG("Task Object W/WOBJ Constructed");
+	LOG("Task Object W/WOBJ&EVENMOREPARAM Constructed");
 }
 
 /*Task::Task(std::string _name, std::string _status, std::string _type, WorldObj* _objToUpdate, float x, float y, bool col, int d) {

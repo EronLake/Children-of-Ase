@@ -45,7 +45,7 @@ bool coordOverlap(int value, int min, int max) { return (value >= min) && (value
 
 void ERONS_LOOP();
 void ALESSIO_TEST();
-void ALEX_LOOP(QuadTree* _physicsQuadTree, WorldObj* _player, vector<WorldObj*> &_recVec);
+void ALEX_LOOP(QuadTree* _Quadtree);
 
 
 //void Darion_Ian_Test();
@@ -57,19 +57,7 @@ int main() {
 		LOG("Hello world!");
 
 		/************************************************************************************************SET-UP*******************************************************/
-		WorldObj* screen = new WorldObj(Vector2f(0.0, 0.0), 100.0, 100.0);	//init screen
-		WorldObj* Alex = new WorldObj(Vector2f(20.0, 20.0), 20.0, 20.0);	//init player
-		vector<WorldObj*> recVec;	//obj vector
-
-		//for (int i = 0; i < 2; i++) {		//init obj vec
-		//	WorldObj* myRec = new WorldObj(Vector2f(rand() % 90, rand() % 90), 10.0, 10.0);
-		//	cout << "X: " << myRec->getX() << ", Y: " << myRec->getY() << endl;
-		//	recVec.push_back(myRec);
-		//}
-
-		WorldObj* myRec1 = new WorldObj(Vector2f(60, 60), 10.0, 10.0);
-		WorldObj* myRec2 = new WorldObj(Vector2f(80, 80), 10.0, 10.0);
-		recVec.push_back(myRec1); recVec.push_back(myRec2);
+		WorldObj* screen = new WorldObj(Vector2f(0.0, 0.0), 960U, 540U);	//init screen
 
 		QuadTree* collideTree = new QuadTree(0, screen);
 
@@ -93,7 +81,7 @@ int main() {
 		ALESSIO_TEST();
 
 		/* ALEX */
-		ALEX_LOOP(collideTree, Alex, recVec);
+		ALEX_LOOP(collideTree);
 
 		
 
@@ -228,8 +216,21 @@ void ALESSIO_TEST() {
 	osi::GameWindow::terminate();
 }
 
-void ALEX_LOOP(QuadTree* _physicsQuadTree, WorldObj* _player, vector<WorldObj*> &_recVec) {
+void ALEX_LOOP(QuadTree* _QuadTree) {
 	//LOG("Hello world!");
+
+	WorldObj* Alex = new WorldObj(Vector2f(400.0, 400.0), 20.0, 20.0);	//init player
+	Texture playerTexture;
+	playerTexture.setFile("smile1.png");
+	playerTexture.load();
+	playerTexture.setFrames(3);
+	Alex->sprite.setTexture(&playerTexture);
+
+	vector<WorldObj*> recVec;	
+
+	WorldObj* myRec1 = new WorldObj(Vector2f(60, 60), 10.0, 10.0);
+	WorldObj* myRec2 = new WorldObj(Vector2f(80, 80), 10.0, 10.0);
+	recVec.push_back(myRec1); recVec.push_back(myRec2);
 
 	//pauses the program for viewing
 	//system("PAUSE");
@@ -245,37 +246,40 @@ void ALEX_LOOP(QuadTree* _physicsQuadTree, WorldObj* _player, vector<WorldObj*> 
 	TaskBuffer* tBuffer = new TaskBuffer(mLog);
 
 	ChildrenOfOsi* gameplay_functions = new ChildrenOfOsi(mLog, tBuffer);
-	Input* iController = new Input(gameplay_functions, _player);
+	Input* iController = new Input(gameplay_functions, Alex);
 	//create Managers and add to Manager table
 
 	DummyController* DumM = new DummyController(mLog, tBuffer);
-	PhysicsManager* PhysM = new PhysicsManager(mLog, tBuffer, _physicsQuadTree);
-	memManager* memM = new memManager(mLog, tBuffer);
+	PhysicsManager* PhysM = new PhysicsManager(mLog, tBuffer, _QuadTree);
+	RenderManager* RenM = new RenderManager(mLog, tBuffer, _QuadTree);
+	//memManager* memM = new memManager(mLog, tBuffer);
 
 	//the order defines what order the managers the tasks will be sent to
 	DumM->register_manager();
 	PhysM->register_manager();
-	memM->register_manager();
-	
+	//memM->register_manager();
+	RenM->register_manager();
 
 
 	//std::unordered_map<std::string, Manager*> manager_table;
 
 	//manager_table["DumM"] = DumM;
 
-	
-
-
+	//osi::GameWindow::init();
 	while (true) {
-		_physicsQuadTree->clear();
-		for (int i = 0; i < _recVec.size(); i++) {
-			_physicsQuadTree->insert(_recVec[i]);	//insert all obj into tree
+		_QuadTree->clear();
+		for (int i = 0; i < recVec.size(); i++) {
+			_QuadTree->insert(recVec[i]);	//insert all obj into tree
 		}
 		//clock 
 		iController->InputCheck();
-		tBuffer->run();
 		//draw
+		//gameplay_functions->draw_frame(Alex);
+		//run task buffer
+		tBuffer->run();
+		
 	}
+	//osi::GameWindow::terminate();
 }
 
 void ERONS_LOOP() {
