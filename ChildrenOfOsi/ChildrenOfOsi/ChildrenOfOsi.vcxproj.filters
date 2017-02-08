@@ -61,6 +61,12 @@
     <Filter Include="Source Files\Physics">
       <UniqueIdentifier>{626b3316-ae83-4e45-8b2b-aeed053ceb3d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Unit Tests">
+      <UniqueIdentifier>{66df2eb7-fb57-4905-905e-336b650dacb8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Unit Tests">
+      <UniqueIdentifier>{8b96d545-a6ac-4d6f-9b0e-2ed60d238416}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -172,6 +178,9 @@
     <ClInclude Include="CheckClass.h">
       <Filter>Header Files\Game Objects</Filter>
     </ClInclude>
+    <ClInclude Include="AudioTestSuite.h">
+      <Filter>Header Files\Unit Tests</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -269,6 +278,9 @@
     </ClCompile>
     <ClCompile Include="QuadTree.cpp">
       <Filter>Source Files\Game Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="AudioTestSuite.cpp">
+      <Filter>Source Files\Unit Tests</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -30,8 +30,11 @@ public:
 	void add_worldObj(float x, float y, bool col);
 	void add_npc(float x, float y, bool col);
 
+	//functions for audio
+	void play_sound();
+
 	void createTask(std::string task_name, std::string type, WorldObj * objToUpdate = NULL);
 	void ChildrenOfOsi::createTaskWithParams(std::string task_name, std::string type, float x, float y, bool col);
-	void ChildrenOfOsi::createTaskForProjectile(std::string task_name, std::string type, float x, float y, bool col, int d);
+	//void ChildrenOfOsi::createTaskForProjectile(std::string task_name, std::string type, float x, float y, bool col, int d);
 };
 

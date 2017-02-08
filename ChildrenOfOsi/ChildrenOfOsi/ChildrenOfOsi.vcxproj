@@ -153,6 +153,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AudioManager.h" />
+    <ClInclude Include="AudioTestSuite.h" />
     <ClInclude Include="CheckClass.h" />
     <ClInclude Include="ChildrenOfOsi.h" />
     <ClInclude Include="common.h" />
@@ -190,6 +191,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="AudioManager.cpp" />
+    <ClCompile Include="AudioTestSuite.cpp" />
     <ClCompile Include="CheckClass.cpp" />
     <ClCompile Include="ChildrenOfOsi.cpp" />
     <ClCompile Include="DummyController.cpp" />

@@ -10,18 +10,16 @@
 
 class AudioManager : public Manager
 {
+private:
+	SoundSystemClass* soundHelper;
+	typedef int (SoundSystemClass::*fn_ptr)();
+	typedef std::map<std::string, fn_ptr> functionMapper;
+	functionMapper task_map;
+
 public:
 	AudioManager(MessageLog* _mLog, TaskBuffer* _tBuffer);
-
 	~AudioManager();
 
 	virtual void register_manager() final;
 	virtual void execute_task(Task* current_task) final;
-
-private:
-	SoundSystemClass* soundsystem;
-	typedef int (SoundSystemClass::*fn_ptr)();
-	typedef std::map<std::string, fn_ptr> functionMapper;
-	//typedef int(SoundSystemClass::*FnPtr)();
-	functionMapper FnMap;
 };

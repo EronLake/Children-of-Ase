@@ -53,6 +53,7 @@ void Input::InputCheck()
 	}
 	if (T) { //Failure check on fake task name
 		gameplay_functions->move_out(player);
+		gameplay_functions->
 	}
 }
 
