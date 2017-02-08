@@ -81,6 +81,7 @@ int main() {
 		//ALESSIO_TEST();
 
 		/* ALEX */
+		testQuadTree();
 		ALEX_LOOP(collideTree);
 
 		
@@ -223,7 +224,7 @@ void ALEX_LOOP(QuadTree* _QuadTree) {
 	Texture* playerTexture = new Texture();
 	playerTexture->setFile("phi.png");
 	playerTexture->load();
-	playerTexture->setFrames(1);
+	playerTexture->setFrames(2);
 	Alex->sprite.setTexture(playerTexture);
 
 	vector<WorldObj*> recVec;	
@@ -280,6 +281,7 @@ void ALEX_LOOP(QuadTree* _QuadTree) {
 		//clock 
 		iController->InputCheck();
 		Alex->WorldObj::drawObj();
+		Alex->WorldObj::animateObj();
 		osi::GameWindow::refresh();
 		//draw
 		//gameplay_functions->draw_frame(Alex);

@@ -3,6 +3,7 @@
 #include "common.h"
 #include "Vector2f.h"
 #include "Sprite.h"
+#include "Rectangle.h"
 
 using namespace std;
 
@@ -44,6 +45,8 @@ public:
 	WorldObj(Vector2f p_topLeft, float p_width, float p_height);
 	void drawObj();
 	Sprite sprite;
+	vector<Rectangle> body;
+	void offsetBody(int i, float x1, float x2, float y1, float y2);
 private:
 	Vector2f loc;
 	Vector2f rotation;

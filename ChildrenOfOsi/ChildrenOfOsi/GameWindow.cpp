@@ -80,15 +80,17 @@ void osi::GameWindow::drawSprite(float x, float y, float width, float height, Sp
 	//std::cout << "x: " << x <<std::endl;
   std::vector<GLfloat> GlCoordTL = GameWindow::dpCoordToGL(x, y);
   std::vector<GLfloat> GlCoordBR = GameWindow::dpCoordToGL(x + width, y + height);
-  float x1 =t.start/t.getTexture().getWidth();
-  float x2 = t.stop / t.getTexture().getWidth();
+  float x1 =t.getStart()/t.getTexture().getWidth();
+  float x2 = t.getStop()/ t.getTexture().getWidth();
+  float y1 = t.getTop() / t.getTexture().getHeight();
+  float y2 = t.getBottom() / t.getTexture().getHeight();
 
   GLfloat spriteCoords[] = {
     // Vertices                         // Vertex colors    // Texture coordinates
-    GlCoordTL[0], GlCoordTL[1], 0.0F,   1.0F, 0.0F, 0.0F,  x1, 1.0F, // Top-left corner
-    GlCoordTL[0], GlCoordBR[1], 0.0F,   1.0F, 0.0F, 0.0F,   x1, 0.0F, // Bottom-left corner
-    GlCoordBR[0], GlCoordBR[1], 0.0F,   1.0F, 0.0F, 0.0F,   x2, 0.0F, // Bottom-right corner
-    GlCoordBR[0], GlCoordTL[1], 0.0F,   1.0F, 0.0F, 0.0F,   x2, 1.0F, // Top-right corner
+    GlCoordTL[0], GlCoordTL[1], 0.0F,   1.0F, 0.0F, 0.0F,  x1, y1, // Top-left corner
+    GlCoordTL[0], GlCoordBR[1], 0.0F,   1.0F, 0.0F, 0.0F,   x1, y2, // Bottom-left corner
+    GlCoordBR[0], GlCoordBR[1], 0.0F,   1.0F, 0.0F, 0.0F,   x2, y2, // Bottom-right corner
+    GlCoordBR[0], GlCoordTL[1], 0.0F,   1.0F, 0.0F, 0.0F,   x2, y1, // Top-right corner
   };
   GLuint spriteVertexIndices[] = {
 	  0, 2, 3, // First triangle

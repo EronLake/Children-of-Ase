@@ -19,5 +19,9 @@ public:
 	float getY() { return topLeft.getYloc(); }
 	float getWidth() { return width; }
 	float getHeight() { return height; }
-
+	void setX(float x) { topLeft.setXloc(x); }
+	void setY(float y) { topLeft.setYloc(y); }
+	void setLoc(Vector2f l) { topLeft=l; }
+	void setWidth(float w) { width=w; }
+	void setHeight(float h) { height=h; }
 };
