@@ -14,10 +14,10 @@ public:
 	void animate();
 	string getTfile();
 	Texture getTexture();
+	int start;
+	int stop;
 private:
 	Texture *tex;
 	int index;
-	int start;
-	int stop;
 };
 
