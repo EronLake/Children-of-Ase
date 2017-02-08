@@ -3,6 +3,7 @@
 #include "common.h"
 #include "Vector2f.h"
 #include "Sprite.h"
+
 using namespace std;
 
 class WorldObj
