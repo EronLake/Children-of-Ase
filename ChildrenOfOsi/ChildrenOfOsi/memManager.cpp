@@ -1,35 +1,39 @@
 #include "stdafx.h"
 #include "memManager.h"
-#include "Pool.h"
+#include "MemoryPool.h"
 #include "ChildrenOfOsi.h"
+#include "MemoryHelper.h"
+
 
 
 memManager::memManager(MessageLog* _mLog, TaskBuffer* _tBuffer)
 	: Manager(_mLog, _tBuffer)
 {
 /*create and initialize all of the pools*/
-	hero_pool = create_pool(4096);
-	hero_head = init_pool(hero_pool,32);
 
-	livingObj_pool = create_pool(4096);
-	livingObj_head = init_pool(livingObj_pool, 32);
+	memHelper = new MemoryHelper();
 
-	projectile_pool = create_pool(4096);
-	projectile_head = init_pool(projectile_pool, 32);
+	hero_pool = memHelper->create_pool(4096);
+	hero_head = memHelper->init_pool(hero_pool,32);
 
-	soldier_pool = create_pool(4096);
-	soldier_head = init_pool(soldier_pool, 32);
+	livingObj_pool = memHelper->create_pool(4096);
+	livingObj_head = memHelper->init_pool(livingObj_pool, 32);
 
-	spl_soldier_pool = create_pool(4096);
-	spl_soldier_head = init_pool(spl_soldier_pool, 32);
+	projectile_pool = memHelper->create_pool(4096);
+	projectile_head = memHelper->init_pool(projectile_pool, 32);
 
-	worldObj_pool = create_pool(4096);
-	worldObj_head = init_pool(worldObj_pool, 32);
+	soldier_pool = memHelper->create_pool(4096);
+	soldier_head = memHelper->init_pool(soldier_pool, 32);
 
-	npc_pool = create_pool(4096);
-	npc_head = init_pool(npc_pool, 32);
+	spl_soldier_pool = memHelper->create_pool(4096);
+	spl_soldier_head = memHelper->init_pool(spl_soldier_pool, 32);
 
-	//memHelper = new MemoryHelper();
+	worldObj_pool = memHelper->create_pool(4096);
+	worldObj_head = memHelper->init_pool(worldObj_pool, 32);
+
+	npc_pool = memHelper->create_pool(4096);
+	npc_head = memHelper->init_pool(npc_pool, 32);
+
 
 	task_map["Add_Hero"] = &MemoryHelper::store_hero;
 	task_map["Add_LivingObj"] = &MemoryHelper::store_livingObj;
@@ -46,26 +50,27 @@ memManager::memManager(MessageLog* _mLog, TaskBuffer* _tBuffer)
 
 memManager::~memManager()
 {
-	destroy_pool(hero_pool);
-	destroy_MemNode_list(hero_head);
+	memHelper->destroy_pool(hero_pool);
+	memHelper->destroy_MemNode_list(hero_head);
 
-	destroy_pool(livingObj_pool);
-	destroy_MemNode_list(livingObj_head);
+	memHelper->destroy_pool(livingObj_pool);
+	memHelper->destroy_MemNode_list(livingObj_head);
 
-	destroy_pool(projectile_pool);
-	destroy_MemNode_list(projectile_head);
+	memHelper->destroy_pool(projectile_pool);
+	memHelper->destroy_MemNode_list(projectile_head);
 
-	destroy_pool(soldier_pool);
-	destroy_MemNode_list(soldier_head);
+	memHelper->destroy_pool(soldier_pool);
+	memHelper->destroy_MemNode_list(soldier_head);
 
-	destroy_pool(spl_soldier_pool);
-	destroy_MemNode_list(spl_soldier_head);
+	memHelper->destroy_pool(spl_soldier_pool);
+	memHelper->destroy_MemNode_list(spl_soldier_head);
 
-	destroy_pool(worldObj_pool);
-	destroy_MemNode_list(worldObj_head);
+	memHelper->destroy_pool(worldObj_pool);
+	memHelper->destroy_MemNode_list(worldObj_head);
 
-	destroy_pool(npc_pool);
-	destroy_MemNode_list(npc_head);
+	memHelper->destroy_pool(npc_pool);
+	memHelper->destroy_MemNode_list(npc_head);
+
 	LOG("memManager Object Destroyed");
 
 }

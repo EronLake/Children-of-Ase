@@ -7,12 +7,12 @@ const std::string osi::GameWindow::STD_FRAGMENT_SHADER_PATH = "./OpenGL Shaders/
 GLFWwindow *osi::GameWindow::window = nullptr;
 int osi::GameWindow::windowWidthPx = -1;
 int osi::GameWindow::windowHeightPx = -1;
-GLuint osi::GameWindow::vertexArrayObjectId = 0;
-GLuint osi::GameWindow::vertexBufferObjectId = 0;
-GLuint osi::GameWindow::elementBufferObjectId = 0;
+vector<GLuint> osi::GameWindow::vertexArrayObjectId;
+vector<GLuint> osi::GameWindow::vertexBufferObjectId;
+vector<GLuint> osi::GameWindow::elementBufferObjectId;
 GLuint osi::GameWindow::shaderProgramId = 0;
-GLuint osi::GameWindow::textureId = 0;
-int osi::GameWindow::numObjects = 1;
+vector<GLuint> osi::GameWindow::textureId;
+int osi::GameWindow::numObjects = 0;
 
 /// <summary>Initializes the game's window. This will cause the application
 /// window to become visible to the end user. Only one such window may exist at
@@ -40,17 +40,17 @@ bool osi::GameWindow::terminate()
   if(!GameWindow::isActive())
     return false;
 
-  glDeleteVertexArrays(1, &vertexArrayObjectId);
-  glDeleteBuffers(1, &vertexBufferObjectId);
-  glDeleteBuffers(1, &elementBufferObjectId);
+  glDeleteVertexArrays(1, &vertexArrayObjectId[0]);
+  glDeleteBuffers(1, &vertexBufferObjectId[0]);
+  glDeleteBuffers(1, &elementBufferObjectId[0]);
   glfwTerminate();
 
   osi::GameWindow::window = nullptr;
   osi::GameWindow::windowWidthPx = -1;
   osi::GameWindow::windowHeightPx = -1;
-  osi::GameWindow::vertexArrayObjectId = 0;
-  osi::GameWindow::vertexBufferObjectId = 0;
-  osi::GameWindow::elementBufferObjectId = 0;
+  osi::GameWindow::vertexArrayObjectId;
+  osi::GameWindow::vertexBufferObjectId;
+  osi::GameWindow::elementBufferObjectId;
   osi::GameWindow::shaderProgramId = 0;
 
   return true;
@@ -92,15 +92,18 @@ void osi::GameWindow::drawSprite(float x, float y, float width, float height, Sp
 	  0, 2, 3, // First triangle
 	  0, 2, 1
   };
+  numObjects++;
+  vertexArrayObjectId.push_back(numObjects);
+  vertexBufferObjectId.push_back(numObjects);
+  elementBufferObjectId.push_back(numObjects);
+  glGenVertexArrays(1, &vertexArrayObjectId[numObjects-1]);
+  glGenBuffers(1, &vertexBufferObjectId[numObjects - 1]);
+  glGenBuffers(1, &elementBufferObjectId[numObjects - 1]);
 
-  glGenVertexArrays(1, &vertexArrayObjectId);
-  glGenBuffers(1, &vertexBufferObjectId);
-  glGenBuffers(1, &elementBufferObjectId);
-
-  glBindVertexArray(vertexArrayObjectId);
-  glBindBuffer(GL_ARRAY_BUFFER, vertexBufferObjectId);
+  glBindVertexArray(vertexArrayObjectId[numObjects - 1]);
+  glBindBuffer(GL_ARRAY_BUFFER, vertexBufferObjectId[numObjects - 1]);
   glBufferData(GL_ARRAY_BUFFER, sizeof(spriteCoords), spriteCoords, GL_STREAM_DRAW);
-  glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, elementBufferObjectId);
+  glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, elementBufferObjectId[numObjects - 1]);
   glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(spriteVertexIndices), spriteVertexIndices, GL_STREAM_DRAW);
 
   glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(GLfloat), (GLvoid *) 0);
@@ -113,16 +116,16 @@ void osi::GameWindow::drawSprite(float x, float y, float width, float height, Sp
   glBindVertexArray(0);
   
   //GLuint textureId;
-  glGenTextures(1, &textureId);
-  glBindTexture(GL_TEXTURE_2D, textureId);
-  std::cout << "New Texture: " << textureId << std::endl;
+  textureId.push_back(numObjects);
+  glGenTextures(1, &textureId[numObjects-1]);
+  glBindTexture(GL_TEXTURE_2D, textureId[numObjects-1]);
   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 
-  int imageWidth=t.getTexture().getHeight();
-  int imageHeight=t.getTexture().getWidth();
+  int imageWidth=t.getTexture().getWidth();
+  int imageHeight=t.getTexture().getHeight();
  // unsigned char *image = SOIL_load_image(fileName.c_str(), &imageWidth, &imageHeight, 0, SOIL_LOAD_RGBA);
   std::cout << "Width: "<<imageWidth << std::endl;
   std::cout << "Height: " << imageHeight << std::endl;
@@ -130,9 +133,8 @@ void osi::GameWindow::drawSprite(float x, float y, float width, float height, Sp
   glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
   glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, imageWidth, imageHeight, 0, GL_RGBA, GL_UNSIGNED_BYTE, t.getTexture().getImage());
   glGenerateMipmap(GL_TEXTURE_2D);
-  //SOIL_free_image_data(image);
+ // SOIL_free_image_data(t.getTexture().getImage());
   glBindTexture(GL_TEXTURE_2D, 0);
-  numObjects++;
 }
 
 /// <summary></summary>
@@ -155,19 +157,18 @@ void osi::GameWindow::refresh()
   glClearColor(0.5F, 0.5F, 0.5F, 1.0F);
   glClear(GL_COLOR_BUFFER_BIT);
   glUseProgram(osi::GameWindow::shaderProgramId);
-  for (vertexArrayObjectId=1; vertexArrayObjectId < numObjects; vertexArrayObjectId++) {
-	  std::cout  <<"Loaded Texture: " << vertexArrayObjectId << std::endl;
-	  glBindTexture(GL_TEXTURE_2D, vertexArrayObjectId);
-	  glBindVertexArray(vertexArrayObjectId);
+  for (GLint i=0; i < numObjects; i++) {
+	  glBindTexture(GL_TEXTURE_2D, textureId[i]);
+	  glBindVertexArray(vertexArrayObjectId[i]);
 	  glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
-	  glDeleteVertexArrays(1, &vertexArrayObjectId);
-	  glDeleteTextures(1, &vertexArrayObjectId);
+	  glDeleteVertexArrays(1, &vertexArrayObjectId[i]);
+	  glDeleteTextures(1, &textureId[i]);
+	  glDeleteBuffers(1, &vertexBufferObjectId[i]);
+	  glDeleteBuffers(1, &elementBufferObjectId[i]);
   }
-  numObjects = 1;
-  textureId = 1;
   // glDrawArrays(GL_TRIANGLES, 0, 3);
   glBindVertexArray(0);
-
+  numObjects = 0;
   glfwSwapBuffers(osi::GameWindow::window);
 }
 
