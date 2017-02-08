@@ -75,7 +75,7 @@ bool osi::GameWindow::isRunning()
 /// <param name="y">The vertical Y position of the sprite's top-left corner</param>
 /// <param name="width">The width of the sprite in device-independent pixels</param>
 /// <param name="height">The height of the sprite in device-independent pixels</param>
-void osi::GameWindow::drawSprite(float x, float y, float width, float height, const std::string& fileName)
+void osi::GameWindow::drawSprite(float x, float y, float width, float height, Sprite t)
 {
 	//std::cout << "x: " << x <<std::endl;
   std::vector<GLfloat> GlCoordTL = GameWindow::dpCoordToGL(x, y);
@@ -121,16 +121,16 @@ void osi::GameWindow::drawSprite(float x, float y, float width, float height, co
   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 
-  int imageWidth;
-  int imageHeight;
-  unsigned char *image = SOIL_load_image(fileName.c_str(), &imageWidth, &imageHeight, 0, SOIL_LOAD_RGBA);
+  int imageWidth=t.getTexture().getHeight();
+  int imageHeight=t.getTexture().getWidth();
+ // unsigned char *image = SOIL_load_image(fileName.c_str(), &imageWidth, &imageHeight, 0, SOIL_LOAD_RGBA);
   std::cout << "Width: "<<imageWidth << std::endl;
   std::cout << "Height: " << imageHeight << std::endl;
   glEnable(GL_BLEND);
   glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-  glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, imageWidth, imageHeight, 0, GL_RGBA, GL_UNSIGNED_BYTE, image);
+  glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, imageWidth, imageHeight, 0, GL_RGBA, GL_UNSIGNED_BYTE, t.getTexture().getImage());
   glGenerateMipmap(GL_TEXTURE_2D);
-  SOIL_free_image_data(image);
+  //SOIL_free_image_data(image);
   glBindTexture(GL_TEXTURE_2D, 0);
   numObjects++;
 }

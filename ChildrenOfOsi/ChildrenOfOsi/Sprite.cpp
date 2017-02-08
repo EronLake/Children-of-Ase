@@ -41,3 +41,8 @@ string Sprite::getTfile()
 {
 	return (*tex).getFile();
 }
+
+Texture Sprite::getTexture()
+{
+	return *tex;
+}

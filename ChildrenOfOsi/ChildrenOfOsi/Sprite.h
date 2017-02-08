@@ -13,6 +13,7 @@ public:
 	void setTexture(Texture *t);
 	void animate();
 	string getTfile();
+	Texture getTexture();
 private:
 	Texture *tex;
 	int index;

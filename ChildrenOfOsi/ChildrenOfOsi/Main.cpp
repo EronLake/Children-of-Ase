@@ -167,6 +167,7 @@ void ALESSIO_TEST() {
 	Hero person(20, 0, false);
 	Texture still;
 	still.setFile("smile1.png");
+	still.load();
 	person.sprite.setTexture(&still);
 	cout <<"Is person an NPC: "<< CheckClass::isNPC(&person) << endl;
 	person.setHealth(-10);
@@ -204,9 +205,9 @@ void ALESSIO_TEST() {
 		person.WorldObj::drawObj();
 		person.WorldObj::shiftX(1);
 		//osi::GameWindow::refresh();
-		osi::GameWindow::drawSprite(600+z,150,100,100, "phi.png");
+		//osi::GameWindow::drawSprite(600+z,150,100,100, "phi.png");
 		z += .5;
-		osi::GameWindow::drawSprite(100, 150, 100, 100, "bluewood.jpg");
+		//osi::GameWindow::drawSprite(100, 150, 100, 100, "bluewood.jpg");
 		osi::GameWindow::refresh();
 	}
 	osi::GameWindow::terminate();
