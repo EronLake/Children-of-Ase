@@ -220,11 +220,11 @@ void ALEX_LOOP(QuadTree* _QuadTree) {
 	//LOG("Hello world!");
 
 	WorldObj* Alex = new WorldObj(Vector2f(400.0, 400.0), 20.0, 20.0);	//init player
-	Texture playerTexture;
-	playerTexture.setFile("smile1.png");
-	playerTexture.load();
-	playerTexture.setFrames(3);
-	Alex->sprite.setTexture(&playerTexture);
+	Texture* playerTexture = new Texture();
+	playerTexture->setFile("phi.png");
+	playerTexture->load();
+	playerTexture->setFrames(1);
+	Alex->sprite.setTexture(playerTexture);
 
 	vector<WorldObj*> recVec;	
 
@@ -265,21 +265,30 @@ void ALEX_LOOP(QuadTree* _QuadTree) {
 
 	//manager_table["DumM"] = DumM;
 
-	//osi::GameWindow::init();
-	while (true) {
+	Alex->WorldObj::setWidth(100);
+	Alex->WorldObj::setHeight(100);
+	Alex->setX(100);
+	Alex->setY(100);
+
+	osi::GameWindow::init();
+	LOG("PAST WINDOW INIT ***********************");
+	while (osi::GameWindow::isRunning()) {
 		_QuadTree->clear();
 		for (int i = 0; i < recVec.size(); i++) {
 			_QuadTree->insert(recVec[i]);	//insert all obj into tree
 		}
 		//clock 
 		iController->InputCheck();
+		Alex->WorldObj::drawObj();
+		osi::GameWindow::refresh();
 		//draw
 		//gameplay_functions->draw_frame(Alex);
 		//run task buffer
 		tBuffer->run();
+
 		
 	}
-	//osi::GameWindow::terminate();
+	osi::GameWindow::terminate();
 }
 
 void ERONS_LOOP() {

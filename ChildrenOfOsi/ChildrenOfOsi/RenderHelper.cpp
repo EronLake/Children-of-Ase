@@ -21,10 +21,11 @@ void RenderHelper::initCamera(WorldObj * player)
 // Don't need to pass in obj to draw frame, but will pass in to keep consistent style in map and pass in player to get camera coord.
 int RenderHelper::draw_frame(WorldObj * obj)
 {
-	initCamera(obj);
+	//initCamera(obj);
 	//pass in the camera bound for rendering instead of the object
 	objVec = tree->retrieve(objVec, obj);
 	for (int i = 0; i < objVec.size(); i++) {
+		LOG("BEFORE DRAWING**");
 		objVec[i]->WorldObj::drawObj();
 	}
 	osi::GameWindow::refresh();

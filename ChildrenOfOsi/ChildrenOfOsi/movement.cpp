@@ -17,11 +17,11 @@ Movement::~Movement() {
 int Movement::move_up(WorldObj* obj) {
 	//get list to check collision with
 	objVec = tree->retrieve(objVec, obj);
-	obj->shiftY(-0.01);
+	obj->shiftY(-moveSpeed);
 	for (int i = 0; i < objVec.size(); i++) {
 		if (collision(objVec[i], obj)) {
 			LOG("failed to move up. collision.");
-			obj->shiftY(0.01);
+			obj->shiftY(moveSpeed);
 			break;
 		}
 	}
@@ -31,11 +31,11 @@ int Movement::move_up(WorldObj* obj) {
 int Movement::move_down(WorldObj* obj) {
 	//get list to check collision with
 	objVec = tree->retrieve(objVec, obj);
-	obj->shiftY(0.01);
+	obj->shiftY(moveSpeed);
 	for (int i = 0; i < objVec.size(); i++) {
 		if (collision(objVec[i], obj)) {
 			LOG("failed to move down. collision.");
-			obj->shiftY(-0.01);
+			obj->shiftY(-moveSpeed);
 			break;
 		}
 	}
@@ -45,11 +45,11 @@ int Movement::move_down(WorldObj* obj) {
 int Movement::move_left(WorldObj* obj) {
 	//get list to check collision with
 	objVec = tree->retrieve(objVec, obj);
-	obj->shiftX(-0.01);
+	obj->shiftX(-moveSpeed);
 	for (int i = 0; i < objVec.size(); i++) {
 		if (collision(objVec[i], obj)) {
 			LOG("failed to move left. collision.");
-			obj->shiftX(0.01);
+			obj->shiftX(moveSpeed);
 			break;
 		}
 	}
@@ -59,11 +59,11 @@ int Movement::move_left(WorldObj* obj) {
 int Movement::move_right(WorldObj* obj) {
 	//get list to check collision with
 	objVec = tree->retrieve(objVec, obj);
-	obj->shiftX(0.01);
+	obj->shiftX(moveSpeed);
 	for (int i = 0; i < objVec.size(); i++) {
 		if (collision(objVec[i], obj)) {
 			LOG("failed to move right. collision.");
-			obj->shiftX(-0.01);
+			obj->shiftX(-moveSpeed);
 			break;
 		}
 	}
