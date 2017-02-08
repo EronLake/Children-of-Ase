@@ -95,57 +95,57 @@ int main() {
 }
 
 
-
-void testQuadTree()
-{
-	WorldObj* testrec = new WorldObj(Vector2f(0.0, 0.0), 100.0, 100.0);	//init screen
-	WorldObj* Alex = new WorldObj(Vector2f(51.0, 51.0), 20.0, 20.0);	//init player
-	vector<WorldObj*> recVec;	//obj vector
-
-	for (int i = 0; i < 100; i++) {		//init obj vec
-		WorldObj* myRec = new WorldObj(Vector2f(rand() % 90, rand() % 90), 10.0, 10.0);
-		recVec.push_back(myRec);
-	}
-	//cout << "before making tree\n";
-
-	QuadTree* myTree = new QuadTree(0, testrec);	//init 
-	//cout << "after making tree\n";
-	bool mybool = true;
-	while (mybool) {	//tick every frame
-		//cout << "before clear" << endl;
-		myTree->clear();	//clear my tree
-		//cout << "after clear" << endl;
-		for (int i = 0; i < recVec.size(); i++) {
-			//cout << "before insert" << endl;
-			myTree->insert(recVec[i]);	//insert all obj into tree
-			//cout << "after insert" << endl;
-		}
-		vector<WorldObj*> collidable;
-		myTree->retrieve(collidable, Alex);	//vector now holds all collidable obj to Alex
-		//cout << "after retrieve" << endl;
-		//int count = 0;
-		for (int i = 0; i < collidable.size(); i++) {
-			if (checkCollision(collidable[i], Alex)) {
-				cout << "collision between Alex and obj number " << i << endl;
-				cout << "Alex width and height are " << Alex->getWidth() << ", " << Alex->getHeight() << endl;
-				cout << "obj width and height are " << collidable[i]->getWidth() << ", " << collidable[i]->getHeight() << endl;
-				cout << "Alex's bounds are " << Alex->getX() << ", " << Alex->getY() << endl;
-				cout << "Obj bounds are " << collidable[i]->getX() << ", " << collidable[i]->getY() << endl;
-			}
-		}
-		mybool = false;
-	}
-	system("PAUSE");
-
-}
-
-
-bool checkCollision(WorldObj *recA, WorldObj *recB)
-{
-	bool xCollide = coordOverlap(recA->getX(), recB->getX(), recB->getX() + recB->getWidth()) || coordOverlap(recB->getX(), recA->getX(), recA->getX() + recA->getWidth());
-	bool yCollide = coordOverlap(recA->getY(), recB->getY(), recB->getY() + recB->getHeight()) || coordOverlap(recB->getY(), recA->getY(), recA->getY() + recA->getHeight());
-	return xCollide && yCollide;
-}
+//
+//void testQuadTree()
+//{
+//	WorldObj* testrec = new WorldObj(Vector2f(0.0, 0.0), 100.0, 100.0);	//init screen
+//	WorldObj* Alex = new WorldObj(Vector2f(51.0, 51.0), 20.0, 20.0);	//init player
+//	vector<WorldObj*> recVec;	//obj vector
+//
+//	for (int i = 0; i < 100; i++) {		//init obj vec
+//		WorldObj* myRec = new WorldObj(Vector2f(rand() % 90, rand() % 90), 10.0, 10.0);
+//		recVec.push_back(myRec);
+//	}
+//	//cout << "before making tree\n";
+//
+//	QuadTree* myTree = new QuadTree(0, testrec);	//init 
+//	//cout << "after making tree\n";
+//	bool mybool = true;
+//	while (mybool) {	//tick every frame
+//		//cout << "before clear" << endl;
+//		myTree->clear();	//clear my tree
+//		//cout << "after clear" << endl;
+//		for (int i = 0; i < recVec.size(); i++) {
+//			//cout << "before insert" << endl;
+//			myTree->insert(recVec[i]);	//insert all obj into tree
+//			//cout << "after insert" << endl;
+//		}
+//		vector<WorldObj*> collidable;
+//		myTree->retrieve(collidable, Alex);	//vector now holds all collidable obj to Alex
+//		//cout << "after retrieve" << endl;
+//		//int count = 0;
+//		for (int i = 0; i < collidable.size(); i++) {
+//			if (checkCollision(collidable[i], Alex)) {
+//				cout << "collision between Alex and obj number " << i << endl;
+//				cout << "Alex width and height are " << Alex->getWidth() << ", " << Alex->getHeight() << endl;
+//				cout << "obj width and height are " << collidable[i]->getWidth() << ", " << collidable[i]->getHeight() << endl;
+//				cout << "Alex's bounds are " << Alex->getX() << ", " << Alex->getY() << endl;
+//				cout << "Obj bounds are " << collidable[i]->getX() << ", " << collidable[i]->getY() << endl;
+//			}
+//		}
+//		mybool = false;
+//	}
+//	system("PAUSE");
+//
+//}
+//
+//
+//bool checkCollision(WorldObj *recA, WorldObj *recB)
+//{
+//	bool xCollide = coordOverlap(recA->getX(), recB->getX(), recB->getX() + recB->getWidth()) || coordOverlap(recB->getX(), recA->getX(), recA->getX() + recA->getWidth());
+//	bool yCollide = coordOverlap(recA->getY(), recB->getY(), recB->getY() + recB->getHeight()) || coordOverlap(recB->getY(), recA->getY(), recA->getY() + recA->getHeight());
+//	return xCollide && yCollide;
+//}
 
 void ALESSIO_TEST() {
 	srand(time(NULL));
@@ -229,9 +229,12 @@ void ALEX_LOOP(QuadTree* _QuadTree) {
 
 	vector<WorldObj*> recVec;	
 
-	WorldObj* myRec1 = new WorldObj(Vector2f(60, 60), 10.0, 10.0);
-	WorldObj* myRec2 = new WorldObj(Vector2f(80, 80), 10.0, 10.0);
-	recVec.push_back(myRec1); recVec.push_back(myRec2);
+	for (int i = 0; i < 4; i++) {
+		WorldObj* objs = new WorldObj(Vector2f(100 + i * 2, 100 + i * 2), 50.0, 50.0);
+		objs->sprite.setTexture(playerTexture);
+		recVec.push_back(objs);
+	}
+	//recVec.push_back(myRec1); recVec.push_back(myRec2);
 
 	//pauses the program for viewing
 	//system("PAUSE");
@@ -281,7 +284,10 @@ void ALEX_LOOP(QuadTree* _QuadTree) {
 		//clock 
 		iController->InputCheck();
 		Alex->WorldObj::drawObj();
-		Alex->WorldObj::animateObj();
+		for (int i = 0; i < recVec.size(); i++) {
+			recVec[i]->drawObj();
+		}
+		//Alex->WorldObj::animateObj();
 		osi::GameWindow::refresh();
 		//draw
 		//gameplay_functions->draw_frame(Alex);
