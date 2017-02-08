@@ -14,8 +14,11 @@ RenderHelper::~RenderHelper()
 void RenderHelper::initCamera(WorldObj * player)
 {
 	//apply the bounding box on the player to make the camera
-	
-
+	int camX = player->getX() - (960 / 2) + (player->getWidth() / 2);
+	int camY = player->getY() - (540 / 2) + (player->getHeight() / 2);
+	camera = new WorldObj(camX, camY,false);
+	camera->setWidth(960);
+	camera->setHeight(540);
 }
 
 // Don't need to pass in obj to draw frame, but will pass in to keep consistent style in map and pass in player to get camera coord.

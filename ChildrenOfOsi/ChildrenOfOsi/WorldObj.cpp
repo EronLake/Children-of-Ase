@@ -44,6 +44,9 @@ float WorldObj::getX()
 
 void WorldObj::setX(float x)
 {
+	for (int i = 0; i < body.size(); i++) {
+		body[i].setX(x+(loc.getXloc()-body[i].getX()));
+	}
 	loc.setXloc(x);
 }
 
@@ -55,16 +58,25 @@ float WorldObj::getY()
 void WorldObj::setY(float y)
 {
 	loc.setYloc(y);
+	for (int i = 0; i < body.size(); i++) {
+		body[i].setY(y + (loc.getYloc() - body[i].getY()));
+	}
 }
 
 void WorldObj::shiftX(float dist)
 {
 	loc.shiftXloc(dist);
+	for (int i = 0; i < body.size(); i++) {
+		body[i].setX(body[i].getX() + dist);
+	}
 }
 
 void WorldObj::shiftY(float dist)
 {
 	loc.shiftYloc(dist);
+	for (int i = 0; i < body.size(); i++) {
+		body[i].setY(body[i].getY()+dist);
+	}
 }
 
 Vector2f WorldObj::getRot()
@@ -183,7 +195,7 @@ WorldObj::WorldObj(Vector2f p_topLeft, float p_width, float p_height) {
 	loc= p_topLeft;
 	width = p_width;
 	height = p_height;
-	Rectangle init(loc, 0, 0);
+	Rectangle init(loc, p_width, p_height);
 	body.push_back(init);
 }
 

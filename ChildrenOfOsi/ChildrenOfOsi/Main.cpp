@@ -39,9 +39,9 @@
 using namespace std;
 
 
-void testQuadTree();
-bool checkCollision(WorldObj *recA, WorldObj *recB);	//given two bounding boxes, check if they collide
-bool coordOverlap(int value, int min, int max) { return (value >= min) && (value <= max); }		//helper func for checkCollision
+//void testQuadTree();
+//bool checkCollision(WorldObj *recA, WorldObj *recB);	//given two bounding boxes, check if they collide
+//bool coordOverlap(int value, int min, int max) { return (value >= min) && (value <= max); }		//helper func for checkCollision
 
 void ERONS_LOOP();
 void ALESSIO_TEST();
@@ -81,7 +81,7 @@ int main() {
 		//ALESSIO_TEST();
 
 		/* ALEX */
-		testQuadTree();
+		//testQuadTree();
 		ALEX_LOOP(collideTree);
 
 		
@@ -220,18 +220,19 @@ void ALESSIO_TEST() {
 void ALEX_LOOP(QuadTree* _QuadTree) {
 	//LOG("Hello world!");
 
-	WorldObj* Alex = new WorldObj(Vector2f(400.0, 400.0), 20.0, 20.0);	//init player
+	WorldObj* Alex = new WorldObj(Vector2f(500.0, 100.0), 100.0, 100.0);	//init player
 	Texture* playerTexture = new Texture();
 	playerTexture->setFile("phi.png");
 	playerTexture->load();
-	playerTexture->setFrames(2);
+	playerTexture->setFrames(1);
 	Alex->sprite.setTexture(playerTexture);
-
+	Alex->offsetBody(0, 50, 50, 50, 50);
 	vector<WorldObj*> recVec;	
 
-	for (int i = 0; i < 4; i++) {
-		WorldObj* objs = new WorldObj(Vector2f(100 + i * 2, 100 + i * 2), 50.0, 50.0);
+	for (int i = 1; i < 5; i++) {
+		WorldObj* objs = new WorldObj(Vector2f(100 * i , 100 * i ), 200.0, 200.0);
 		objs->sprite.setTexture(playerTexture);
+		objs->offsetBody(0, 50, 50, 50, 50);
 		recVec.push_back(objs);
 	}
 	//recVec.push_back(myRec1); recVec.push_back(myRec2);
@@ -269,10 +270,10 @@ void ALEX_LOOP(QuadTree* _QuadTree) {
 
 	//manager_table["DumM"] = DumM;
 
-	Alex->WorldObj::setWidth(100);
+/*	Alex->WorldObj::setWidth(100);
 	Alex->WorldObj::setHeight(100);
 	Alex->setX(100);
-	Alex->setY(100);
+	Alex->setY(100);*/
 
 	osi::GameWindow::init();
 	LOG("PAST WINDOW INIT ***********************");
