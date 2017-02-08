@@ -1,5 +1,6 @@
 #ifndef SoundObjectHEADER
 #define SoundObjectHEADER
+
 #include "fmod.hpp"
 #include "soundType.h"
 class SoundObject {

@@ -1,6 +1,6 @@
 #include "stdafx.h"
 #include "ChildrenOfOsi.h"
-#include "Pool.h"
+#include "MemoryPool.h"
 #include "memManager.h"
 
 ChildrenOfOsi::ChildrenOfOsi(MessageLog* _mLog, TaskBuffer* _tBuffer)
