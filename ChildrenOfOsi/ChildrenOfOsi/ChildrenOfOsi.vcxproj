@@ -186,6 +186,7 @@
     <ClInclude Include="targetver.h" />
     <ClInclude Include="Task.h" />
     <ClInclude Include="TaskBuffer.h" />
+    <ClInclude Include="TestManager.h" />
     <ClInclude Include="Texture.h" />
     <ClInclude Include="Vector2f.h" />
     <ClInclude Include="WorldObj.h" />
@@ -227,6 +228,7 @@
     </ClCompile>
     <ClCompile Include="Task.cpp" />
     <ClCompile Include="TaskBuffer.cpp" />
+    <ClCompile Include="TestManager.cpp" />
     <ClCompile Include="Texture.cpp" />
     <ClCompile Include="Vector2f.cpp" />
     <ClCompile Include="WorldObj.cpp" />

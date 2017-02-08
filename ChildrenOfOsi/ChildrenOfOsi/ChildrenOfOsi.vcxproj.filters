@@ -178,6 +178,9 @@
     <ClInclude Include="MemoryPool.h">
       <Filter>Header Files\Memory</Filter>
     </ClInclude>
+    <ClInclude Include="TestManager.h">
+      <Filter>Header Files\Managers</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -281,6 +284,9 @@
     </ClCompile>
     <ClCompile Include="MemoryPool.cpp">
       <Filter>Source Files\Memory</Filter>
+    </ClCompile>
+    <ClCompile Include="TestManager.cpp">
+      <Filter>Source Files\Managers</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -1,6 +1,6 @@
 #include "stdafx.h"
-#include "memManager.h"
-#include "MemoryPool.h"
+//#include "memManager.h"
+//#include "MemoryPool.h"
 #include "ChildrenOfOsi.h"
 #include "MemoryHelper.h"
 
@@ -195,4 +195,30 @@ void memManager::execute_task(Task* current_task)
 	{
 		LOG("Error: Task name does not exist"); //perror?
 	}*/
+
 }
+
+/*This code fixes the stupid linker errors with the pool and head pointers.*/
+/*Discovered that defining the vars in the memManager constructor is good 
+but then the definitions are not recognized during compile time,causing the
+linker errors.*/
+MemoryPool* memManager::hero_pool = nullptr;
+MemNode* memManager::hero_head = nullptr;
+
+MemoryPool* memManager::livingObj_pool = nullptr;
+MemNode* memManager::livingObj_head = nullptr;
+
+MemoryPool* memManager::projectile_pool = nullptr;
+MemNode* memManager::projectile_head = nullptr;
+
+MemoryPool* memManager::soldier_pool = nullptr;
+MemNode* memManager::soldier_head = nullptr;
+
+MemoryPool* memManager::spl_soldier_pool = nullptr;
+MemNode* memManager::spl_soldier_head = nullptr;
+
+MemoryPool* memManager::worldObj_pool = nullptr;
+MemNode* memManager::worldObj_head = nullptr;
+
+MemoryPool* memManager::npc_pool = nullptr;
+MemNode* memManager::npc_head = nullptr;
