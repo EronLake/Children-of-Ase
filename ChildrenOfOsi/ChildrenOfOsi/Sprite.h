@@ -14,10 +14,17 @@ public:
 	void animate();
 	string getTfile();
 	Texture getTexture();
-	int start;
-	int stop;
+	float getStart();
+	float getStop();
+	float getTop();
+	float getBottom();
 private:
+	float start;
+	float stop;
+	float top;
+	float bottom;
 	Texture *tex;
 	int index;
+	int tempTime;
 };
 

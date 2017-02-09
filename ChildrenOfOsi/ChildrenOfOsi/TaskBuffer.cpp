@@ -53,7 +53,7 @@ void TaskBuffer::assignTask(Task* current_task)
 				//clone task and send off to manager
 				LOG("TASK DUPLICATED");
 				Task* duplicate_task = current_task->clone_task();
-
+				LOG("PRIOR TO EXECUTING THE DUP TASK");
 				(*itr)->execute_task(duplicate_task);
 			}
 			delete current_task;

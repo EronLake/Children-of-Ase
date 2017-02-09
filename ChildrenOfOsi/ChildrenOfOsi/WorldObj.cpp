@@ -15,6 +15,8 @@ WorldObj::WorldObj(float x, float y, bool col)
 	rotation.setXloc(1);
 	rotation.setYloc(1);
 	collision = col;
+	Rectangle init(loc,0,0);
+	body.push_back(init);
 	//cout <<"X-Loc: "<< loc.getXloc() << endl;
 	//cout << "Y-Loc: " << loc.getYloc() << endl;
 	//cout << "Rotation: " << rotation.getXloc()<<" , " << rotation.getYloc()<< endl;
@@ -42,6 +44,9 @@ float WorldObj::getX()
 
 void WorldObj::setX(float x)
 {
+	for (int i = 0; i < body.size(); i++) {
+		body[i].setX(x+(loc.getXloc()-body[i].getX()));
+	}
 	loc.setXloc(x);
 }
 
@@ -53,16 +58,25 @@ float WorldObj::getY()
 void WorldObj::setY(float y)
 {
 	loc.setYloc(y);
+	for (int i = 0; i < body.size(); i++) {
+		body[i].setY(y + (loc.getYloc() - body[i].getY()));
+	}
 }
 
 void WorldObj::shiftX(float dist)
 {
 	loc.shiftXloc(dist);
+	for (int i = 0; i < body.size(); i++) {
+		body[i].setX(body[i].getX() + dist);
+	}
 }
 
 void WorldObj::shiftY(float dist)
 {
 	loc.shiftYloc(dist);
+	for (int i = 0; i < body.size(); i++) {
+		body[i].setY(body[i].getY()+dist);
+	}
 }
 
 Vector2f WorldObj::getRot()
@@ -133,6 +147,7 @@ float WorldObj::getWidth()
 void WorldObj::setWidth(float w)
 {
 	width=w;
+	body[0].setWidth(w);
 }
 
 float WorldObj::getHeight()
@@ -143,6 +158,7 @@ float WorldObj::getHeight()
 void WorldObj::setHeight(float h)
 {
 	height=h;
+	body[0].setHeight(h);
 }
 
 Sprite WorldObj::getSprite()
@@ -179,4 +195,13 @@ WorldObj::WorldObj(Vector2f p_topLeft, float p_width, float p_height) {
 	loc= p_topLeft;
 	width = p_width;
 	height = p_height;
+	Rectangle init(loc, p_width, p_height);
+	body.push_back(init);
+}
+
+void WorldObj::offsetBody(int i, float x1, float x2, float y1, float y2) {
+	body[i].setX(body[i].getX()+x1);
+	body[i].setY(body[i].getY() + y1);
+	body[i].setWidth(body[i].getWidth() - x2);
+	body[i].setHeight(body[i].getHeight() - y2);
 }

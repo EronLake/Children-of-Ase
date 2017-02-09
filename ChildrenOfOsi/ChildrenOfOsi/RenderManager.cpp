@@ -46,6 +46,7 @@ void RenderManager::execute_task(Task* current_task)
 			this->send_result(current_task);
 		}
 		else {
+			LOG("EXECUTION PRIOR TO RESULT");
 			result = (renderHelper->*(it->second))(current_task->objToUpdate);
 
 		}

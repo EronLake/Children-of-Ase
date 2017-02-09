@@ -17,11 +17,11 @@ Movement::~Movement() {
 int Movement::move_up(WorldObj* obj) {
 	//get list to check collision with
 	objVec = tree->retrieve(objVec, obj);
-	obj->shiftY(-0.01);
+	obj->shiftY(-moveSpeed);
 	for (int i = 0; i < objVec.size(); i++) {
 		if (collision(objVec[i], obj)) {
 			LOG("failed to move up. collision.");
-			obj->shiftY(0.01);
+			obj->shiftY(moveSpeed);
 			break;
 		}
 	}
@@ -31,11 +31,11 @@ int Movement::move_up(WorldObj* obj) {
 int Movement::move_down(WorldObj* obj) {
 	//get list to check collision with
 	objVec = tree->retrieve(objVec, obj);
-	obj->shiftY(0.01);
+	obj->shiftY(moveSpeed);
 	for (int i = 0; i < objVec.size(); i++) {
 		if (collision(objVec[i], obj)) {
 			LOG("failed to move down. collision.");
-			obj->shiftY(-0.01);
+			obj->shiftY(-moveSpeed);
 			break;
 		}
 	}
@@ -45,11 +45,11 @@ int Movement::move_down(WorldObj* obj) {
 int Movement::move_left(WorldObj* obj) {
 	//get list to check collision with
 	objVec = tree->retrieve(objVec, obj);
-	obj->shiftX(-0.01);
+	obj->shiftX(-moveSpeed);
 	for (int i = 0; i < objVec.size(); i++) {
 		if (collision(objVec[i], obj)) {
 			LOG("failed to move left. collision.");
-			obj->shiftX(0.01);
+			obj->shiftX(moveSpeed);
 			break;
 		}
 	}
@@ -59,11 +59,11 @@ int Movement::move_left(WorldObj* obj) {
 int Movement::move_right(WorldObj* obj) {
 	//get list to check collision with
 	objVec = tree->retrieve(objVec, obj);
-	obj->shiftX(0.01);
+	obj->shiftX(moveSpeed);
 	for (int i = 0; i < objVec.size(); i++) {
 		if (collision(objVec[i], obj)) {
 			LOG("failed to move right. collision.");
-			obj->shiftX(-0.01);
+			obj->shiftX(-moveSpeed);
 			break;
 		}
 	}
@@ -80,8 +80,12 @@ int Movement::move_right(WorldObj* obj) {
 
 bool Movement::collision(WorldObj* recA, WorldObj* recB)
 {
-	bool xCollide = coordOverlap(recA->getX(), recB->getX(), recB->getX() + recB->getWidth()) || coordOverlap(recB->getX(), recA->getX(), recA->getX() + recA->getWidth());
-	bool yCollide = coordOverlap(recA->getY(), recB->getY(), recB->getY() + recB->getHeight()) || coordOverlap(recB->getY(), recA->getY(), recA->getY() + recA->getHeight());
-	return xCollide && yCollide;
-
+	for (int i = 0; i < (*recA).body.size(); i++) {
+		for (int j = 0; j < (*recB).body.size(); j++) {
+			bool xCollide = coordOverlap(recA->body[i].getX(), recB->body[j].getX(), recB->body[j].getX() + recB->body[j].getWidth()) || coordOverlap(recB->body[j].getX(), recA->body[i].getX(), recA->body[i].getX() + recA->body[i].getWidth());
+			bool yCollide = coordOverlap(recA->body[i].getY(), recB->body[j].getY(), recB->body[j].getY() + recB->body[j].getHeight()) || coordOverlap(recB->body[j].getY(), recA->body[i].getY(), recA->body[i].getY() + recA->body[i].getHeight());
+			if (xCollide && yCollide)return true;
+		}
+	}
+	return false;
 }
