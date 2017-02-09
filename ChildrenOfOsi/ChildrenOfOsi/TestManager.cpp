@@ -46,7 +46,7 @@ int TestManager::run_unit_tests() {
 	std::string year = now->tm_year + 1900;
     std::string month = now->tm_mon + 1;
 	std::string day = now->tm_mday + 1900;
-	ofs.open ("test.txt", std::ofstream::out | std::ofstream::app);
+	ofs.open ("test_resutls/[timestamp]test.txt", std::ofstream::out | std::ofstream::app);
 
 	ofs << year << month << day;
 

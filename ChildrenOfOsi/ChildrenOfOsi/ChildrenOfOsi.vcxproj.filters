@@ -61,6 +61,12 @@
     <Filter Include="Source Files\Physics">
       <UniqueIdentifier>{626b3316-ae83-4e45-8b2b-aeed053ceb3d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Test Suites">
+      <UniqueIdentifier>{e10243bc-3dde-40ef-8a3e-aea267a2eed0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Test Suites">
+      <UniqueIdentifier>{13b14e4b-4bc6-48ee-b33a-e97bde78c459}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -181,6 +187,15 @@
     <ClInclude Include="TestManager.h">
       <Filter>Header Files\Managers</Filter>
     </ClInclude>
+    <ClInclude Include="AudioTestSuite.h">
+      <Filter>Header Files\Test Suites</Filter>
+    </ClInclude>
+    <ClInclude Include="MemoryTestSuite.h">
+      <Filter>Header Files\Test Suites</Filter>
+    </ClInclude>
+    <ClInclude Include="Containers.h">
+      <Filter>Header Files\Memory</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -287,6 +302,15 @@
     </ClCompile>
     <ClCompile Include="TestManager.cpp">
       <Filter>Source Files\Managers</Filter>
+    </ClCompile>
+    <ClCompile Include="AudioTestSuite.cpp">
+      <Filter>Source Files\Test Suites</Filter>
+    </ClCompile>
+    <ClCompile Include="MemoryTestSuite.cpp">
+      <Filter>Source Files\Test Suites</Filter>
+    </ClCompile>
+    <ClCompile Include="Containers.cpp">
+      <Filter>Source Files\Memory</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

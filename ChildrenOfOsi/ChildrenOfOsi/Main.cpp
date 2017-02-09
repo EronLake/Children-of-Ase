@@ -34,6 +34,8 @@
 #include "SoundSystem.h"
 #include "memManager.h"
 
+#include "MemoryTestSuite.h"
+
 #define _CRTDBG_MAP_ALLOC
 
 using namespace std;
@@ -76,12 +78,12 @@ int main() {
 		/*Darion Ian Test*/
 		//Darion_Ian_Test();
 /* ERON */
-//		ERONS_LOOP();
+		ERONS_LOOP();
 		/*ALESSIO*/
 		//ALESSIO_TEST();
 
 		/* ALEX */
-		ALEX_LOOP(collideTree);
+		//ALEX_LOOP(collideTree);
 
 		
 
@@ -296,7 +298,7 @@ void ERONS_LOOP() {
 	//	void* a = malloc(64);
 	//	delete a;
 	//}
-
+	/*
 	//psuedo Gameloop
 	MessageLog* mLog = new MessageLog();
 	TaskBuffer* tBuffer = new TaskBuffer(mLog);
@@ -330,6 +332,13 @@ void ERONS_LOOP() {
 		tBuffer->run();
 		//draw
 	}
+	*/
+
+	MemoryTestSuite* mem_tester = new MemoryTestSuite();
+
+	
+	std::cout << mem_tester->execute_tests() << std::endl;
+	system("PAUSE");
 }
  /*
 void Darion_Ian_Test() {

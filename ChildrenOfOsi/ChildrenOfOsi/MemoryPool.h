@@ -8,7 +8,6 @@
 #include "Hero.h"
 #include "SplSoldier.h"
 #include "LivingObj.h"
-#include "LivingObj.h"
 #include "WorldObj.h"
 #include "NPC.h"
 #include "Projectile.h"
