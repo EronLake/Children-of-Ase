@@ -202,6 +202,9 @@
     <ClInclude Include="AudioTestSuite.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="TaskBufferTestSuite.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -311,6 +314,9 @@
     </ClCompile>
     <ClCompile Include="AudioTestSuite.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="TaskBufferTestSuite.cpp">
+      <Filter>Source Files\Task Buffer</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -165,6 +165,7 @@
     <ClInclude Include="DummyController.h" />
     <ClInclude Include="Factions.h" />
     <ClInclude Include="GameWindow.h" />
+    <ClInclude Include="TaskBufferTestSuite.h" />
     <ClInclude Include="Hero.h" />
     <ClInclude Include="Input.h" />
     <ClInclude Include="LivingObj.h" />
@@ -225,6 +226,7 @@
     <ClCompile Include="RenderManager.cpp" />
     <ClCompile Include="Soldier.cpp" />
     <ClCompile Include="SoundSystem.cpp" />
+    <ClCompile Include="TaskBufferTestSuite.cpp" />
     <ClCompile Include="SplSoldier.cpp" />
     <ClCompile Include="Sprite.cpp" />
     <ClCompile Include="stdafx.cpp">
