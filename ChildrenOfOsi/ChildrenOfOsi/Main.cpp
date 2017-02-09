@@ -34,8 +34,6 @@
 #include "SoundSystem.h"
 #include "memManager.h"
 
-#define _CRTDBG_MAP_ALLOC
-
 using namespace std;
 
 
@@ -82,14 +80,7 @@ int main() {
 
 		/* ALEX */
 		//testQuadTree();
-		ALEX_LOOP(collideTree);
-
-		
-
-
-		_CrtSetReportMode(_CRT_ERROR, _CRTDBG_MODE_DEBUG);
-		_CrtDumpMemoryLeaks();
-	                                   
+		ALEX_LOOP(collideTree);                                
 
 	return 0;
 }
