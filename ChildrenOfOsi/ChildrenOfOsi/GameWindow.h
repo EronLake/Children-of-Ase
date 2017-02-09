@@ -48,7 +48,7 @@ namespace osi
     static vector<GLuint> vertexBufferObjectId;
     static vector<GLuint> elementBufferObjectId;
     static GLuint shaderProgramId;
-	static vector<GLuint> textureId;
+	static vector<GLuint> textures;
 	static int numObjects;
 
     GameWindow() = delete;

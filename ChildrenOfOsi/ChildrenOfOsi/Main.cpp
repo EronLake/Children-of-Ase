@@ -63,7 +63,7 @@ int main() {
 
 		/************************************************************************************************TESTING*******************************************************/
 		
-		
+		osi::GameWindow::init();
 		////pauses the program for viewing
 		//system("PAUSE");
 
@@ -201,7 +201,7 @@ void ALESSIO_TEST() {
 	person2.setY(0);
 	
 	person.setCollision(true);
-	osi::GameWindow::init();
+	//osi::GameWindow::init();
 	float z = 0;
 	while (osi::GameWindow::isRunning()) {
 		person2.WorldObj::drawObj();
@@ -275,7 +275,7 @@ void ALEX_LOOP(QuadTree* _QuadTree) {
 	Alex->setX(100);
 	Alex->setY(100);*/
 
-	osi::GameWindow::init();
+	//osi::GameWindow::init();
 	LOG("PAST WINDOW INIT ***********************");
 	while (osi::GameWindow::isRunning()) {
 		_QuadTree->clear();

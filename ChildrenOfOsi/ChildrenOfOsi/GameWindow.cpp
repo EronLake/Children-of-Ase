@@ -11,7 +11,7 @@ vector<GLuint> osi::GameWindow::vertexArrayObjectId;
 vector<GLuint> osi::GameWindow::vertexBufferObjectId;
 vector<GLuint> osi::GameWindow::elementBufferObjectId;
 GLuint osi::GameWindow::shaderProgramId = 0;
-vector<GLuint> osi::GameWindow::textureId;
+vector<GLuint> osi::GameWindow::textures;
 int osi::GameWindow::numObjects = 0;
 
 /// <summary>Initializes the game's window. This will cause the application
@@ -27,6 +27,7 @@ bool osi::GameWindow::init()
   GameWindow::setupWindow();
   GameWindow::setupStdShaders();
   glEnable(GL_TEXTURE_2D);
+  glewExperimental = GL_TRUE;
   return true;
 }
 
@@ -119,24 +120,25 @@ void osi::GameWindow::drawSprite(float x, float y, float width, float height, Sp
 
   glBindVertexArray(0);
   
-  //GLuint textureId;
-  textureId.push_back(numObjects);
-  glGenTextures(1, &textureId[numObjects-1]);
-  glBindTexture(GL_TEXTURE_2D, textureId[numObjects-1]);
-  glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
-  glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
-  glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-  glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+  textures.push_back(t.getTexture().getId());
+ // //GLuint textureId;
+ // textureId.push_back(numObjects);
+ // glGenTextures(1, &textureId[numObjects-1]);
+ // glBindTexture(GL_TEXTURE_2D, textureId[numObjects-1]);
+ // glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+ // glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+ // glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+ // glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 
-  int imageWidth=t.getTexture().getWidth();
-  int imageHeight=t.getTexture().getHeight();
- // unsigned char *image = SOIL_load_image(fileName.c_str(), &imageWidth, &imageHeight, 0, SOIL_LOAD_RGBA);
-  glEnable(GL_BLEND);
-  glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-  glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, imageWidth, imageHeight, 0, GL_RGBA, GL_UNSIGNED_BYTE, t.getTexture().getImage());
-  glGenerateMipmap(GL_TEXTURE_2D);
- // SOIL_free_image_data(t.getTexture().getImage());
-  glBindTexture(GL_TEXTURE_2D, 0);
+ // int imageWidth=t.getTexture().getWidth();
+ // int imageHeight=t.getTexture().getHeight();
+ //// unsigned char *image = SOIL_load_image(fileName.c_str(), &imageWidth, &imageHeight, 0, SOIL_LOAD_RGBA);
+ // glEnable(GL_BLEND);
+ // glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+ // glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, imageWidth, imageHeight, 0, GL_RGBA, GL_UNSIGNED_BYTE, t.getTexture().getImage());
+ // glGenerateMipmap(GL_TEXTURE_2D);
+ //// SOIL_free_image_data(t.getTexture().getImage());
+ // glBindTexture(GL_TEXTURE_2D, 0);
 }
 
 /// <summary></summary>
@@ -160,18 +162,18 @@ void osi::GameWindow::refresh()
   glClear(GL_COLOR_BUFFER_BIT);
   glUseProgram(osi::GameWindow::shaderProgramId);
   for (GLint i=0; i < numObjects; i++) {
-	  glBindTexture(GL_TEXTURE_2D, textureId[i]);
+	  glBindTexture(GL_TEXTURE_2D, Texture::textureId[textures[i]-1]);
 	  glBindVertexArray(vertexArrayObjectId[i]);
 	  glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
 	  glDeleteVertexArrays(1, &vertexArrayObjectId[i]);
-	  glDeleteTextures(1, &textureId[i]);
+	  //glDeleteTextures(1, &Texture::textureId[i]);
 	  glDeleteBuffers(1, &vertexBufferObjectId[i]);
 	  glDeleteBuffers(1, &elementBufferObjectId[i]);
   }
   // glDrawArrays(GL_TRIANGLES, 0, 3);
   glBindVertexArray(0);
   vertexArrayObjectId.clear();
-  textureId.clear();
+  textures.clear();
   vertexBufferObjectId.clear();
   elementBufferObjectId.clear();
   numObjects = 0;

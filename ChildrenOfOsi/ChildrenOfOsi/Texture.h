@@ -26,7 +26,11 @@ public:
 	void setFile(string img);
 	void load();
 	unsigned char* getImage();
+	static vector<GLuint> textureId;
+	static int textureSize;
+	int getId();
 private:
+	int txId;
 	string imageFile;
 	int width;
 	int height;
