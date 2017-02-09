@@ -33,6 +33,7 @@
 #include "fmod.hpp"
 #include "SoundSystem.h"
 #include "memManager.h"
+#include "TestManager.h"
 
 using namespace std;
 
@@ -249,12 +250,14 @@ void ALEX_LOOP(QuadTree* _QuadTree) {
 	PhysicsManager* PhysM = new PhysicsManager(mLog, tBuffer, _QuadTree);
 	RenderManager* RenM = new RenderManager(mLog, tBuffer, _QuadTree);
 	//memManager* memM = new memManager(mLog, tBuffer);
+	TestManager* TestM = new TestManager(mLog, tBuffer);
 
 	//the order defines what order the managers the tasks will be sent to
 	DumM->register_manager();
 	PhysM->register_manager();
 	//memM->register_manager();
 	RenM->register_manager();
+	TestM->register_manager();
 
 
 	//std::unordered_map<std::string, Manager*> manager_table;
@@ -318,12 +321,14 @@ void ERONS_LOOP() {
 	PhysicsManager* PhysM = new PhysicsManager(mLog, tBuffer);
 	memManager* memM = new memManager(mLog, tBuffer);
 	AudioManager* AudM = new AudioManager(mLog, tBuffer);
+	TestManager* TestM = new TestManager(mLog, tBuffer);
 
 	//the order defines what order the managers the tasks will be sent to
 	DumM->register_manager();
 	PhysM->register_manager();
 	memM->register_manager();
 	AudM->register_manager();
+	TestM->register_manager();
 	
 
 

@@ -61,10 +61,28 @@
     <Filter Include="Source Files\Physics">
       <UniqueIdentifier>{626b3316-ae83-4e45-8b2b-aeed053ceb3d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Test Outputs">
+      <UniqueIdentifier>{96db10b9-e8eb-4172-b555-c070368c94e3}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
     <Text Include="message_log.txt" />
+    <Text Include="physics_test.txt">
+      <Filter>Header Files\Test Outputs</Filter>
+    </Text>
+    <Text Include="render_test.txt">
+      <Filter>Header Files\Test Outputs</Filter>
+    </Text>
+    <Text Include="memory_test.txt">
+      <Filter>Header Files\Test Outputs</Filter>
+    </Text>
+    <Text Include="audio_test.txt">
+      <Filter>Header Files\Test Outputs</Filter>
+    </Text>
+    <Text Include="task_buffer_test.txt">
+      <Filter>Header Files\Test Outputs</Filter>
+    </Text>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
