@@ -107,7 +107,7 @@ bool TaskBufferTestSuite:: execute_tests() {
 	return pass;
 }
 
-bool TaskBufferTestSuite::TaskBuffer_constructor_test()//Don't really know how to Test this out??? Update: Revised it to test constructior
+bool TaskBufferTestSuite::TaskBuffer_constructor_test()//Don't really know how to Test this out??? Update: Revised it to test constructor
 {
 	MessageLog* ML = new MessageLog();
 	TaskBuffer* TB = new TaskBuffer(ML);
