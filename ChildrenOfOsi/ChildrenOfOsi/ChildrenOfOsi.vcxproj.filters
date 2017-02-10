@@ -61,8 +61,16 @@
     <Filter Include="Source Files\Physics">
       <UniqueIdentifier>{626b3316-ae83-4e45-8b2b-aeed053ceb3d}</UniqueIdentifier>
     </Filter>
+<<<<<<< HEAD
+    <Filter Include="Source Files\Test Suites">
+      <UniqueIdentifier>{e10243bc-3dde-40ef-8a3e-aea267a2eed0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Test Suites">
+      <UniqueIdentifier>{13b14e4b-4bc6-48ee-b33a-e97bde78c459}</UniqueIdentifier>
+=======
     <Filter Include="Header Files\Test Outputs">
       <UniqueIdentifier>{96db10b9-e8eb-4172-b555-c070368c94e3}</UniqueIdentifier>
+>>>>>>> 01559d3128ac04a654965cb931f423654eebbd17
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -200,7 +208,17 @@
       <Filter>Header Files\Managers</Filter>
     </ClInclude>
     <ClInclude Include="AudioTestSuite.h">
+<<<<<<< HEAD
+      <Filter>Header Files\Test Suites</Filter>
+    </ClInclude>
+    <ClInclude Include="MemoryTestSuite.h">
+      <Filter>Header Files\Test Suites</Filter>
+    </ClInclude>
+    <ClInclude Include="Containers.h">
+      <Filter>Header Files\Memory</Filter>
+=======
       <Filter>Header Files</Filter>
+>>>>>>> 01559d3128ac04a654965cb931f423654eebbd17
     </ClInclude>
     <ClInclude Include="TaskBufferTestSuite.h">
       <Filter>Header Files</Filter>
@@ -313,7 +331,17 @@
       <Filter>Source Files\Managers</Filter>
     </ClCompile>
     <ClCompile Include="AudioTestSuite.cpp">
+<<<<<<< HEAD
+      <Filter>Source Files\Test Suites</Filter>
+    </ClCompile>
+    <ClCompile Include="MemoryTestSuite.cpp">
+      <Filter>Source Files\Test Suites</Filter>
+    </ClCompile>
+    <ClCompile Include="Containers.cpp">
+      <Filter>Source Files\Memory</Filter>
+=======
       <Filter>Source Files</Filter>
+>>>>>>> 01559d3128ac04a654965cb931f423654eebbd17
     </ClCompile>
     <ClCompile Include="TaskBufferTestSuite.cpp">
       <Filter>Source Files\Task Buffer</Filter>

@@ -33,7 +33,13 @@
 #include "fmod.hpp"
 #include "SoundSystem.h"
 #include "memManager.h"
+
+#include "MemoryTestSuite.h"
+
+#define _CRTDBG_MAP_ALLOC
+
 #include "TestManager.h"
+
 
 using namespace std;
 
@@ -75,13 +81,23 @@ int main() {
 		/*Darion Ian Test*/
 		//Darion_Ian_Test();
 /* ERON */
-//		ERONS_LOOP();
+		ERONS_LOOP();
 		/*ALESSIO*/
 		//ALESSIO_TEST();
 
 		/* ALEX */
+		//ALEX_LOOP(collideTree);
+
+		
+
+
+		_CrtSetReportMode(_CRT_ERROR, _CRTDBG_MODE_DEBUG);
+		_CrtDumpMemoryLeaks();
+	                                   
+
 		//testQuadTree();
 		ALEX_LOOP(collideTree);                                
+
 
 	return 0;
 }
@@ -308,7 +324,7 @@ void ERONS_LOOP() {
 	//	void* a = malloc(64);
 	//	delete a;
 	//}
-
+	/*
 	//psuedo Gameloop
 	MessageLog* mLog = new MessageLog();
 	TaskBuffer* tBuffer = new TaskBuffer(mLog);
@@ -344,6 +360,14 @@ void ERONS_LOOP() {
 		tBuffer->run();
 		//draw
 	}
+	*/
+
+	MemoryTestSuite* mem_tester = new MemoryTestSuite();
+
+	
+	std::cout << mem_tester->execute_tests() << std::endl;
+	std::cout << "made it " << std::endl;
+	system("PAUSE");
 }
  /*
 void Darion_Ian_Test() {
