@@ -47,6 +47,7 @@ public:
 	Sprite sprite;
 	vector<Rectangle> body;
 	void offsetBody(int i, float x1, float x2, float y1, float y2);
+	void _print();
 private:
 	Vector2f loc;
 	Vector2f rotation;

@@ -167,6 +167,7 @@
     <ClInclude Include="DummyController.h" />
     <ClInclude Include="Factions.h" />
     <ClInclude Include="GameWindow.h" />
+    <ClInclude Include="PhysicsTestSuite.h" />
     <ClInclude Include="TaskBufferTestSuite.h" />
     <ClInclude Include="Hero.h" />
     <ClInclude Include="Input.h" />
@@ -224,6 +225,7 @@
     <ClCompile Include="Movement.cpp" />
     <ClCompile Include="NPC.cpp" />
     <ClCompile Include="PhysicsManager.cpp" />
+    <ClCompile Include="PhysicsTestSuite.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="MemoryPool.cpp" />
     <ClCompile Include="Projectile.cpp" />
