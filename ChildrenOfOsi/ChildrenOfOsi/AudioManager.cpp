@@ -7,8 +7,8 @@ AudioManager::AudioManager(MessageLog* _mLog, TaskBuffer* _tBuffer)
 	: Manager(_mLog, _tBuffer)
 {
 	LOG("AudioManager Object Constructed");
-	soundHelper = new SoundSystemClass();
-	task_map["Play"] = &SoundSystemClass::playSong1;
+	soundHelper = new SoundSystem();
+	task_map["Play"] = &SoundSystem::playSong1;
 }
 
 

@@ -11,8 +11,8 @@
 class AudioManager : public Manager
 {
 private:
-	SoundSystemClass* soundHelper;
-	typedef int (SoundSystemClass::*fn_ptr)();
+	SoundSystem* soundHelper;
+	typedef int (SoundSystem::*fn_ptr)();
 	typedef std::map<std::string, fn_ptr> functionMapper;
 	functionMapper task_map;
 

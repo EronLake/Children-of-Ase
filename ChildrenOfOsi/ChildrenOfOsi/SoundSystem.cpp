@@ -1,4 +1,5 @@
 #include "stdafx.h"
+#include "common.h"
 using namespace std;
 #include <iostream>
 #include "fmod.hpp"
@@ -10,9 +11,9 @@ typedef FMOD::Sound* SoundClass;
 FMOD_RESULT result;
 
 	// Pointer to the FMOD instance
-	FMOD::System *m_pSystem;
+	//FMOD::System *m_pSystem;
 
-	SoundSystemClass::SoundSystemClass()
+	SoundSystem::SoundSystem()
 	{
 		if (FMOD::System_Create(&m_pSystem) != FMOD_OK)
 		{
@@ -21,7 +22,7 @@ FMOD_RESULT result;
 		}
 
 
-		int driverCount = 0;
+		driverCount = 0;
 		m_pSystem->getNumDrivers(&driverCount);
 
 		if (driverCount == 0)
@@ -32,24 +33,34 @@ FMOD_RESULT result;
 		
 		// Initialize our Instance with 36 Channels
 		m_pSystem->init(36, FMOD_INIT_NORMAL, 0);
-		char* name = "04.wav";
-		FMOD::Sound* songAddress;
-		
-		sounds_map[name] = songAddress;
+		string name = "violin.mp3";
+		SoundClass songAddress = nullptr;
+
 		this->createSound(&songAddress, name);
+		
+		sounds[name] = songAddress;
 
 
+	}
 
-	};
+	SoundSystem::~SoundSystem() {
+		LOG("SoundSystem Destructed");
+	}
 
-	void SoundSystemClass::createSound(SoundClass *pSound, const char* pFile)
+	void SoundSystem::createSound(SoundClass *pSound, string pFile)
 	{
-		result = m_pSystem->createSound(pFile, FMOD_DEFAULT, 0, pSound);//fmod createSound takes (const char *name_or_data, FMOD_MODE mode, FMOD_CREATESOUNDEXINFO *exinfo, FMOD::Sound **sound)
+		auto sound = sounds.find(pFile);
+		if (sound != sounds.end()) return; //Sound already loaded
 
+		result = m_pSystem->createSound(pFile.c_str(), FMOD_DEFAULT, 0, pSound);//fmod createSound takes (const char *name_or_data, FMOD_MODE mode, FMOD_CREATESOUNDEXINFO *exinfo, FMOD::Sound **sound)
 		cout << FMOD_ErrorString(result) << endl;
-	};
 
-	void SoundSystemClass::playSound(SoundClass pSound, bool bLoop, FMOD::Channel* channel, bool ispaused )
+		if (pSound) {
+			sounds[pFile] = *pSound;
+		}
+	}
+
+	void SoundSystem::playSound(SoundClass pSound, bool bLoop, FMOD::Channel* channel, bool ispaused )
 	{
 		if (!bLoop)
 			pSound->setMode(FMOD_LOOP_OFF);
@@ -59,15 +70,17 @@ FMOD_RESULT result;
 			pSound->setLoopCount(-1);
 		}
 
+
+
 		result = m_pSystem->playSound(pSound,0, ispaused, &channel); //fmod playsound takes  (FMOD::Sound *sound,FMOD::ChannelGroup *channelgroup, bool paused, FMOD::Channel **channel)
 		cout << FMOD_ErrorString(result) << endl;
 	};
 	
-	void SoundSystemClass::releaseSound(SoundClass pSound)
+	void SoundSystem::releaseSound(SoundClass pSound)
 	{
 		pSound->release();
 	};
-	int SoundSystemClass::playSong1() {
+	int SoundSystem::playSong1() {
 		foo::soundType type;
 		FMOD::Sound* soundSample;
 		const char* name;              //the variables required
@@ -76,10 +89,10 @@ FMOD_RESULT result;
 		unsigned int time;
 
 		// Initialize our sound system
-		SoundSystemClass soundsystem;
+		SoundSystem soundsystem;
 
 		type = foo::soundType::music;
-		name = "04.wav";
+		name = "violin.mp3";
 		channel = channels[0];//assign the channel
 		ispaused = false;
 
@@ -90,31 +103,31 @@ FMOD_RESULT result;
 														 //object stuff
 
 
-		playSound(this->sounds_map[name], false, channel, ispaused); 	// Play the sound, with loop mode
+		playSound(sounds[name], false, channel, ispaused); 	// Play the sound, with loop mode
 
 
-		cout << "Press return to quit." << endl;  // Do something meanwhile...
-		cin.get();
+		//cout << "Press return to quit." << endl;  // Do something meanwhile...
+		//cin.get();
 
-		releaseSound(this->sounds_map[name]); 
+		//releaseSound(sounds[name]); 
 		return 0;// Release the sound
 	};
 	
 	
-	/*void SoundSystemClass::playSoundObject(SoundObject sound)
+	/*void SoundSystem::playSoundObject(SoundObject sound)
 	{
 		FMOD::Sound* soundSample = sound.getSound();
-		SoundSystemClass::createSound(&soundSample, sound.getName());
+		SoundSystem::createSound(&soundSample, sound.getName());
 		bool bLoop = false;
-		SoundSystemClass::playSound(sound.getSound(), bLoop);
+		SoundSystem::playSound(sound.getSound(), bLoop);
 		if (bLoop == false){
 			// then wait until over and remove
-			SoundSystemClass::releaseSound(sound.getSound());
+			SoundSystem::releaseSound(sound.getSound());
 		}
 		
 
 	};*/
-	/*void SoundSystemClass::changeSoundSource(SoundObject sound, const char* name)
+	/*void SoundSystem::changeSoundSource(SoundObject sound, const char* name)
 	{
 		// switch the address of the sound being played.
 	};*/

@@ -35,6 +35,7 @@
 #include "memManager.h"
 
 #include "MemoryTestSuite.h"
+#include "AudioTestSuite.h"
 
 #define _CRTDBG_MAP_ALLOC
 
@@ -60,7 +61,7 @@ void ANDREWS_TEST();
 
 int main() {
 		LOG("Hello world!");
-
+	//	ERONS_LOOP();
 		/************************************************************************************************SET-UP*******************************************************/
 		WorldObj* screen = new WorldObj(Vector2f(0.0, 0.0), 960U, 540U);	//init screen
 
@@ -81,7 +82,7 @@ int main() {
 		/*Darion Ian Test*/
 		//Darion_Ian_Test();
 /* ERON */
-		ERONS_LOOP();
+		//ERONS_LOOP();
 		/*ALESSIO*/
 		//ALESSIO_TEST();
 
@@ -324,7 +325,7 @@ void ERONS_LOOP() {
 	//	void* a = malloc(64);
 	//	delete a;
 	//}
-	/*
+	
 	//psuedo Gameloop
 	MessageLog* mLog = new MessageLog();
 	TaskBuffer* tBuffer = new TaskBuffer(mLog);
@@ -346,7 +347,10 @@ void ERONS_LOOP() {
 	AudM->register_manager();
 	TestM->register_manager();
 	
-
+	AudioTestSuite* aTest = new AudioTestSuite();
+	bool test = aTest->execute_tests();
+	if (test) LOG("AudioTestSuite: PASSED");
+	else LOG("AudioTestSuite: FAILED");
 
 	//std::unordered_map<std::string, Manager*> manager_table;
 
@@ -360,7 +364,7 @@ void ERONS_LOOP() {
 		tBuffer->run();
 		//draw
 	}
-	*/
+	
 
 	MemoryTestSuite* mem_tester = new MemoryTestSuite();
 
@@ -417,7 +421,7 @@ void ANDREWS_TEST() {
 	unsigned int time;
 
 	// Initialize our sound system
-	SoundSystemClass soundsystem;
+	SoundSystem soundsystem;
 
 	type = foo::soundType::music;
 	name = "04.wav";
