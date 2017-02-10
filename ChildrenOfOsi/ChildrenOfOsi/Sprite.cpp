@@ -1,73 +1,39 @@
 #include "stdafx.h"
 #include "Sprite.h"
 
-using namespace std;
-
-Sprite::Sprite()
-{
-}
-
-
-Sprite::~Sprite()
-{
-}
-
+/**
+ * Changes this sprite to wrap the texture specified.
+ */
 void Sprite::setTexture(Texture *t)
 {
-	tex = t;
-	index = 0;
-	start = 0;
-	stop = (*tex).getFrameWidth();
-	top = (*tex).getHeight();
-	bottom = 0;
-	tempTime = 0;
+  tex = t;
+  index = 0;
+  start = 0;
+  stop = tex->getFrameWidth();
+  top = tex->getHeight();
+  bottom = 0;
+  tempTime = 0;
 }
 
-void Sprite::animate() 
+/**
+ * Advances this sprite's animation, if any, by one frame.
+ */
+void Sprite::animate()
 {
-	tempTime++;
-	if (tempTime==30) {
-		if (index < (*tex).getFrames()) {
-			index++;
-			start = (*tex).getFrameWidth()*index;
-			stop = (*tex).getFrameWidth()*(index + 1);
-			cout << "Animated start: " << start << " stop: " << stop << endl;
-		}
-		else {
-			index = 0;
-			start = 0;
-			stop = (*tex).getFrameWidth();
-		}
-		tempTime = 0;
-	}
-}
+  ++this->tempTime;
+  if(this->tempTime == 30) {
+    if(this->index < this->tex->getFrames()) {
+      ++this->index;
+      this->start = tex->getFrameWidth() * index;
+      this->stop = tex->getFrameWidth() * (index + 1);
+      LOG("Animated start: " << this->start << " stop: " << this->stop << std::endl);
+    }
+    else {
+      this->index = 0;
+      this->start = 0;
+      this->stop = this->tex->getFrameWidth();
+    }
 
-string Sprite::getTfile() 
-{
-	return (*tex).getFile();
-}
-
-Texture Sprite::getTexture()
-{
-	return *tex;
-}
-
-float Sprite::getStart()
-{
-	return start;
-}
-
-float Sprite::getStop()
-{
-	return stop;
-}
-
-float Sprite::getTop()
-{
-	return top;
-}
-
-float Sprite::getBottom()
-{
-	return bottom;
+    this->tempTime = 0;
+  }
 }

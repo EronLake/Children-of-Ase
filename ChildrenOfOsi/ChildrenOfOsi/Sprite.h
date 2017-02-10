@@ -1,30 +1,34 @@
 #pragma once
+
 #include "stdafx.h"
-#include "Vector2f.h"
+
 #include "common.h"
 #include "Texture.h"
-using namespace std;
 
 class Sprite
 {
-public:
-	Sprite();
-	~Sprite();
-	void setTexture(Texture *t);
-	void animate();
-	string getTfile();
-	Texture getTexture();
-	float getStart();
-	float getStop();
-	float getTop();
-	float getBottom();
-private:
-	float start;
-	float stop;
-	float top;
-	float bottom;
-	Texture *tex;
-	int index;
-	int tempTime;
+  public:
+
+  Sprite():
+    start(0), stop(0), top(0), bottom(0), index(0), tempTime(0), tex(nullptr) {};
+  ~Sprite() = default;
+
+  int getStart() { return this->start; };
+  int getStop() { return this->stop; };
+  int getTop() { return this->top; };
+  int getBottom() { return this->bottom; };
+  Texture getTexture() { return *(this->tex); }
+  std::string getTexFile() { return this->tex->getFile(); }
+
+  void setTexture(Texture *t);
+  void animate();
+
+  private:
+
+  int start, stop;
+  int top, bottom;
+
+  Texture *tex;
+  int index, tempTime;
 };
 
