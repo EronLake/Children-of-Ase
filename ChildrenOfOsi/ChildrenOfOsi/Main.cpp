@@ -27,6 +27,7 @@
 #include "RenderManager.h"
 #include <conio.h>
 #include "CheckClass.h"
+#include "TaskBufferTestSuite.h"
 
 //#include "Pool.h"
 
@@ -64,7 +65,7 @@ void PHYSICS_TEST();
 
 int main() {
 		LOG("Hello world!");
-	//	ERONS_LOOP();
+		ERONS_LOOP();
 		/************************************************************************************************SET-UP*******************************************************/
 		WorldObj* screen = new WorldObj(Vector2f(0.0, 0.0), 960U, 540U);	//init screen
 
@@ -99,7 +100,6 @@ int main() {
 		_CrtSetReportMode(_CRT_ERROR, _CRTDBG_MODE_DEBUG);
 		_CrtDumpMemoryLeaks();
 	                                   
-
 		//testQuadTree();
 		//ALEX_LOOP(collideTree);                                
 
@@ -317,7 +317,7 @@ void ALEX_LOOP(QuadTree* _QuadTree) {
 
 void ERONS_LOOP() {
 	/////////////////////////////////////////////////////////////////
-	//ERON'S LOOP NO TOUCHY    **** Justin touched it, oops ****
+	//ERON'S LOOP NO TOUCHY    **** Justin touched it, oops ****  ****Ian did too. Sue me****
 	/////////////////////////////////////////////////////////////////
 	LOG("Hello world!");
 
@@ -355,6 +355,11 @@ void ERONS_LOOP() {
 	bool test = aTest->execute_tests();
 	if (test) LOG("AudioTestSuite: PASSED");
 	else LOG("AudioTestSuite: FAILED");
+
+	TaskBufferTestSuite* TB_Test = new TaskBufferTestSuite(); //Ian Testing
+	bool test_2 = TB_Test->execute_tests();
+	if (test_2) LOG("TaskBufferTestSuite: PASSED");
+	else LOG("TaskBufferTestSuite: FAILED");
 
 	//std::unordered_map<std::string, Manager*> manager_table;
 

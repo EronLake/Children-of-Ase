@@ -15,8 +15,8 @@ class TaskBufferTestSuite
 public:
 	TaskBufferTestSuite();
 	~TaskBufferTestSuite();
-	MessageLog* ML;
-	TaskBuffer* TB;
+	//MessageLog* ML;
+	//TaskBuffer* TB;
 
 	bool execute_tests(); //Runs all other tests and checks them
 
