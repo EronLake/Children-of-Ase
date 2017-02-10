@@ -88,7 +88,7 @@ int main() {
 		/*Darion Ian Test*/
 		//Darion_Ian_Test();
 /* ERON */
-//		ERONS_LOOP();
+		ERONS_LOOP();
 		/*ALESSIO*/
 		ALESSIO_TEST();
 

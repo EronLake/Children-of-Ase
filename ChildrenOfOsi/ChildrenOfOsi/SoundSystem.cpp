@@ -32,6 +32,13 @@ FMOD_RESULT result;
 		
 		// Initialize our Instance with 36 Channels
 		m_pSystem->init(36, FMOD_INIT_NORMAL, 0);
+		char* name = "04.wav";
+		FMOD::Sound* songAddress;
+		
+		sounds_map[name] = songAddress;
+		this->createSound(&songAddress, name);
+
+
 
 	};
 
@@ -76,21 +83,21 @@ FMOD_RESULT result;
 		channel = channels[0];//assign the channel
 		ispaused = false;
 
-		soundsystem.createSound(&soundSample, name);// Create the sound
-		soundSample->getLength(&time, FMOD_TIMEUNIT_PCM);// Find the length
+		//this->createSound(&soundSample, name);// Create the sound
+		//soundSample->getLength(&time, FMOD_TIMEUNIT_PCM);// Find the length
 
 														 //SoundObject* playable = new SoundObject("04.wav", &soundSample, type);
 														 //object stuff
 
 
-		soundsystem.playSound(soundSample, false, channel, ispaused); 	// Play the sound, with loop mode
+		playSound(this->sounds_map[name], false, channel, ispaused); 	// Play the sound, with loop mode
 
 
 		cout << "Press return to quit." << endl;  // Do something meanwhile...
 		cin.get();
 
-		soundsystem.releaseSound(soundSample); 
-		return 1;// Release the sound
+		releaseSound(this->sounds_map[name]); 
+		return 0;// Release the sound
 	};
 	
 	

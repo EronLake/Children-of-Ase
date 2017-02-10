@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "AudioManager.h"
+#include "fmod.hpp"
 
 
 AudioManager::AudioManager(MessageLog* _mLog, TaskBuffer* _tBuffer)

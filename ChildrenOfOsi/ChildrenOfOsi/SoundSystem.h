@@ -13,6 +13,8 @@ public:
 	//void changeSoundSource(SoundObject sound, const char* name);
 	FMOD::Channel *channels[32];
 	int playSong1();
+	map<char*, FMOD::Sound*> sounds_map;
+	//sounds sounds_map;
 	
 	
 	
