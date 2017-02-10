@@ -1,38 +1,59 @@
-#include "stdafx.h"
 #pragma once
-#include "Vector2f.h"
+
+#ifndef GLEW_STATIC
+#define GLEW_STATIC
+#endif
+
+#include "stdafx.h"
+
 #include "common.h"
+#include "Vector2f.h"
+
 #include "GLEW\glew.h"
 #include "GLFW/glfw3.h"
 #include "SOIL/SOIL.h"
-using namespace std;
 
 class Texture
 {
-public:
-	Texture();
-	~Texture();
-	void setWidth(int w);
-	float getWidth();
-	void setHeight(int h);
-	float getHeight();
-	void setFrameWidth(int w);
-	float getFrameWidth();
-	void setFrames(int f);
-	int getFrames();
-	void setAnimated(bool a);
-	bool getAnimated();
-	string getFile();
-	void setFile(string img);
-	void load();
-	unsigned char* getImage();
-private:
-	string imageFile;
-	int width;
-	int height;
-	int frames;
-	int frameWidth;
-	bool animated;
-	unsigned char *image;
+  public:
+
+  Texture() = default;
+  Texture(const std::string& fileName):
+    imageFile(fileName) {}
+  Texture(const std::string& fileName, int w, int h, int frames = 1):
+    imageFile(fileName), width(w), height(h), frames(frames), frameWidth(width) {}
+  ~Texture() = default;
+
+  static std::vector<GLuint> textureId;
+  static int textureSize;
+
+  int getId() const { return this->txId; }
+  std::string getFile() const { return this->imageFile; }
+  int getWidth() const { return this->width; }
+  int getHeight() const { return this->height; }
+  int getFrames() const { return this->frames; }
+  float getFrameWidth() const { return this->frameWidth; }
+  unsigned char * getImage() const { return this->image; }
+  bool getAnimated() const { return this->animated; }
+
+  void setFile(const std::string& fileName) { this->imageFile = fileName; }
+  void setWidth(int w) { this->width = w; }
+  void setHeight(int h) { this->height = h; }
+  void setFrames(int f) { this->frameWidth = this->width / (this->frames = f); }
+  void setFrameWidth(float fw) { this->frameWidth = fw; }
+  void setAnimated(bool a) { this->animated = a; }
+
+  void load();
+
+  private:
+
+  int txId;
+  std::string imageFile;
+
+  int width, height;
+  int frames, frameWidth;
+
+  unsigned char *image;
+  bool animated;
 };
 

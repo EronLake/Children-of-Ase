@@ -1,5 +1,6 @@
 #pragma once
 #include "stdafx.h"
+#include <map>
 #include "common.h"
 #include "Player.h"
 #include "MessageLog.h"
@@ -10,6 +11,7 @@ class RenderManager : public Manager
 {
 public:
 	RenderManager(MessageLog* _mLog, TaskBuffer* _tBuffer);
+	RenderManager(MessageLog* _mLog, TaskBuffer* _tBuffer, QuadTree* _renderQuadTree);
 	~RenderManager();
 
 	virtual void register_manager() final;
@@ -17,5 +19,10 @@ public:
 private:
 	//use this to communicate with render helper
 	RenderHelper* renderHelper;
+
+	typedef int (RenderHelper::*fptr)(WorldObj*);
+	typedef std::map<std::string, fptr> functionMapper;
+	functionMapper task_map;
+
 };
 

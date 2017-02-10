@@ -4,11 +4,13 @@
 
 AudioTestSuite::AudioTestSuite()
 {
+	LOG("AudioTestSuite Object Constructed");
 }
 
 
 AudioTestSuite::~AudioTestSuite()
 {
+	LOG("AudioTestSuite Object Destroyed");
 }
 
 bool AudioTestSuite::execute_test() {

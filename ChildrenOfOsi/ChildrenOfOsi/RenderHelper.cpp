@@ -1,31 +1,49 @@
 #include "stdafx.h"
 #include "RenderHelper.h"
-#include <iterator>
 
-RenderHelper::RenderHelper()
+
+RenderHelper::RenderHelper(QuadTree * QT)
 {
-	Camera = new WorldObj(0,0,true);
-	Camera->setHeight(1000);
-	Camera->setWidth(1000);
+	tree = QT;
 }
-
 
 RenderHelper::~RenderHelper()
 {
 }
 
-void RenderHelper::getRenderObjs(vector<WorldObj*> collidable)
+void RenderHelper::initCamera(WorldObj * player)
 {
-	objVec.clear();
-	for (vector<WorldObj*>::iterator i=collidable.begin(); i != collidable.end(); ++i) {
-		if (Collision(Camera, *i))objVec.push_back(*i);
+	//apply the bounding box on the player to make the camera
+	int camX = player->getX() - (960 / 2) + (player->getWidth() / 2);
+	int camY = player->getY() - (540 / 2) + (player->getHeight() / 2);
+	camera = new WorldObj(camX, camY,false);
+	camera->setWidth(960);
+	camera->setHeight(540);
+}
+
+// Don't need to pass in obj to draw frame, but will pass in to keep consistent style in map and pass in player to get camera coord.
+int RenderHelper::draw_frame(WorldObj * obj)
+{
+	//initCamera(obj);
+	//pass in the camera bound for rendering instead of the object
+	objVec = tree->retrieve(objVec, obj);
+	for (int i = 0; i < objVec.size(); i++) {
+		LOG("BEFORE DRAWING**");
+		objVec[i]->WorldObj::drawObj();
 	}
+	osi::GameWindow::refresh();
+	return 0;
 }
 
-bool RenderHelper::Collision(WorldObj* recA, WorldObj* recB)
+int RenderHelper::sprite_change(WorldObj * obj)
 {
-	bool xCollide = coordOverlap(recA->getX(), recB->getX(), recB->getX() + recB->getWidth()) || coordOverlap(recB->getX(), recA->getX(), recA->getX() + recA->getWidth());
-	bool yCollide = coordOverlap(recA->getY(), recB->getY(), recB->getY() + recB->getHeight()) || coordOverlap(recB->getY(), recA->getY(), recA->getY() + recA->getHeight());
-	return xCollide && yCollide;
-
+	return 0;
 }
+
+int RenderHelper::sprite_update(WorldObj * obj)
+{
+	return 0;
+}
+
+
+

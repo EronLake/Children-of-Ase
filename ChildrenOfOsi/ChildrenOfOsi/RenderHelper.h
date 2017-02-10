@@ -4,13 +4,15 @@
 class RenderHelper
 {
 public:
-	RenderHelper();
+	RenderHelper(QuadTree* QT);
 	~RenderHelper();
-	void getRenderObjs(vector<WorldObj*> collidable);
-	bool Collision(WorldObj* recA, WorldObj* recB);
-	bool coordOverlap(int value, int min, int max) { return (value >= min) && (value <= max); }
+	void initCamera(WorldObj* player);
+	int draw_frame(WorldObj* obj);
+	int sprite_change(WorldObj* obj);
+	int sprite_update(WorldObj* obj);
+	QuadTree* tree;
 private:
-	WorldObj* Camera;
+	WorldObj* camera;
 	std::vector<WorldObj*> objVec;
 };
 

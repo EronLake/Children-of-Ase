@@ -23,7 +23,26 @@ private:
 
 public:
 
+	static MemoryPool* hero_pool;
+	static MemNode* hero_head;
 
+	static MemoryPool* livingObj_pool;
+	static MemNode* livingObj_head;
+
+	static MemoryPool* projectile_pool;
+	static MemNode* projectile_head;
+
+	static MemoryPool* soldier_pool;
+	static MemNode* soldier_head;
+
+	static MemoryPool* spl_soldier_pool;
+	static MemNode* spl_soldier_head;
+
+	static MemoryPool* worldObj_pool;
+	static MemNode* worldObj_head;
+
+	static MemoryPool* npc_pool;
+	static MemNode* npc_head;
 
 	memManager(MessageLog* _mLog, TaskBuffer* _tBuffer);
 	~memManager();
@@ -34,24 +53,5 @@ public:
 };
 
 
-	static MemoryPool* hero_pool;// = nullptr;
-	static MemNode* hero_head;// = nullptr;
 
-	static MemoryPool* livingObj_pool;// = nullptr;
-	static MemNode* livingObj_head;// = nullptr;
-
-	static MemoryPool* projectile_pool;// = nullptr;
-	static MemNode* projectile_head;// = nullptr;
-
-	static MemoryPool* soldier_pool;// = nullptr;
-	static MemNode* soldier_head;// = nullptr;
-
-	static MemoryPool* spl_soldier_pool;// = nullptr;
-	static MemNode* spl_soldier_head;// = nullptr;
-
-	static MemoryPool* worldObj_pool;// = nullptr;
-	static MemNode* worldObj_head;// = nullptr;
-
-	static MemoryPool* npc_pool;// = nullptr;
-	static MemNode* npc_head;// = nullptr;
 

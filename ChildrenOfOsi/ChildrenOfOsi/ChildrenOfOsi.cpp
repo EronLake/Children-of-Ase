@@ -21,6 +21,9 @@ ChildrenOfOsi::~ChildrenOfOsi()
 
 void ChildrenOfOsi::move_up(WorldObj * player)
 {
+	if (player == nullptr) {
+		LOG("children of osi move up func, player obj is nullptr");
+	}
 	createTask("Move_Up", "MOVE", player);
 }
 
@@ -42,6 +45,11 @@ void ChildrenOfOsi::move_right(WorldObj * player)
 void ChildrenOfOsi::move_out(WorldObj * player)
 {
 	createTask("Move_Out", "MOVE", player);
+}
+
+void ChildrenOfOsi::draw_frame(WorldObj * player)
+{
+	createTask("Draw_Frame", "DRAW", player);
 }
 
 ///*
@@ -87,6 +95,9 @@ void ChildrenOfOsi::createTask(std::string task_name, std::string type, WorldObj
 {
 	//maybe just pass in the string craeated
 	std::string task_status = "CREATED";
+	if (objToUpdate == nullptr) {
+		LOG("childrenofosi createtask func, obj to update is a nullptr");
+	}
 	Task* new_task = new Task(task_name, task_status, type, objToUpdate);
 	tBuffer->push(new_task);
 	mLog->logMessage(new_task);
