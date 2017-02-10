@@ -157,6 +157,7 @@
     <Text Include="task_buffer_test.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="AIHelper.h" />
     <ClInclude Include="AIManager.h" />
     <ClInclude Include="AudioManager.h" />
     <ClInclude Include="AudioTestSuite.h" />
@@ -203,6 +204,7 @@
     <ClInclude Include="WorldObj.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="AIHelper.cpp" />
     <ClCompile Include="AIManager.cpp" />
     <ClCompile Include="AudioManager.cpp" />
     <ClCompile Include="AudioTestSuite.cpp" />
