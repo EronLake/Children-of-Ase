@@ -217,8 +217,8 @@ void ALESSIO_TEST() {
 	//osi::GameWindow::init();
 	float z = 0;
 	while (osi::GameWindow::isRunning()) {
-		person2.WorldObj::drawObj();
-		person.WorldObj::drawObj();
+		/*person2.WorldObj::drawObj();
+		person.WorldObj::drawObj();*/
 		person.WorldObj::shiftX(1);
 		person.WorldObj::animateObj();
 		//osi::GameWindow::refresh();
@@ -299,14 +299,14 @@ void ALEX_LOOP(QuadTree* _QuadTree) {
 		}
 		//clock 
 		iController->InputCheck();
-		Alex->WorldObj::drawObj();
-		for (int i = 0; i < recVec.size(); i++) {
-			recVec[i]->drawObj();
-		}
+		//Alex->WorldObj::drawObj();
+		//for (int i = 0; i < recVec.size(); i++) {
+		//	recVec[i]->drawObj();
+		//}
 		//Alex->WorldObj::animateObj();
-		osi::GameWindow::refresh();
+		//i::GameWindow::refresh();
 		//draw
-		//gameplay_functions->draw_frame(Alex);
+		gameplay_functions->draw_frame(Alex);
 		//run task buffer
 		tBuffer->run();
 
@@ -521,10 +521,10 @@ void ANDREWS_LOOP(QuadTree* _QuadTree) {
 		}
 		//clock 
 		iController->InputCheck();
-		Alex->WorldObj::drawObj();
-		for (int i = 0; i < recVec.size(); i++) {
-			recVec[i]->drawObj();
-		}
+		//Alex->WorldObj::drawObj();
+		//for (int i = 0; i < recVec.size(); i++) {
+		//	recVec[i]->drawObj();
+		//}
 		//Alex->WorldObj::animateObj();
 		osi::GameWindow::refresh();
 		//draw

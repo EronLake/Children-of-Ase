@@ -176,10 +176,6 @@ void WorldObj::animateObj()
 	sprite.animate();
 }
 
-void WorldObj::drawObj()
-{
-	osi::GameWindow::drawSprite(loc.getXloc(), loc.getYloc(), width, height, sprite);
-}
 
 void WorldObj::setName(string na)
 {
@@ -197,6 +193,11 @@ WorldObj::WorldObj(Vector2f p_topLeft, float p_width, float p_height) {
 	height = p_height;
 	Rectangle init(loc, p_width, p_height);
 	body.push_back(init);
+}
+
+void WorldObj::drawObj(float _x, float _y)
+{
+	osi::GameWindow::drawSprite(loc.getXloc(), loc.getYloc(), width, height, sprite);
 }
 
 void WorldObj::offsetBody(int i, float x1, float x2, float y1, float y2) {
