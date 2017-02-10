@@ -23,3 +23,10 @@ ChildrenOfOsi/ChildrenOfOsi.VC.VC.opendb
 
 ChildrenOfOsi/ChildrenOfOsi/x64/
 
+
+ChildrenOfOsi/ChildrenOfOsi/memory_test.txt
+ChildrenOfOsi/ChildrenOfOsi/audio_test.txt
+ChildrenOfOsi/ChildrenOfOsi/physics_test.txt
+ChildrenOfOsi/ChildrenOfOsi/render_test.txt
+ChildrenOfOsi/ChildrenOfOsi/task_buffer_test.txt
+ChildrenOfOsi/ChildrenOfOsi/message_log.txt

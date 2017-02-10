@@ -205,3 +205,11 @@ void WorldObj::offsetBody(int i, float x1, float x2, float y1, float y2) {
 	body[i].setWidth(body[i].getWidth() - x2);
 	body[i].setHeight(body[i].getHeight() - y2);
 }
+void WorldObj::_print() {
+	std::cout << "Object Name" << getName() << std::endl;
+	std::cout << "X Location" << getX() << std::endl;
+	std::cout << "Y Location" << getY() << std::endl;
+	std::cout << "Rotation Vector" << getX() << std::endl;
+	std::cout << "Width" << getY() << std::endl;
+	std::cout << "Height" << getX() << std::endl;
+}

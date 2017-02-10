@@ -7,11 +7,11 @@ const std::string osi::GameWindow::STD_FRAGMENT_SHADER_PATH = "./OpenGL Shaders/
 GLFWwindow *osi::GameWindow::window = nullptr;
 int osi::GameWindow::windowWidthPx = -1;
 int osi::GameWindow::windowHeightPx = -1;
-vector<GLuint> osi::GameWindow::vertexArrayObjectId;
-vector<GLuint> osi::GameWindow::vertexBufferObjectId;
-vector<GLuint> osi::GameWindow::elementBufferObjectId;
+std::vector<GLuint> osi::GameWindow::vertexArrayObjectId;
+std::vector<GLuint> osi::GameWindow::vertexBufferObjectId;
+std::vector<GLuint> osi::GameWindow::elementBufferObjectId;
 GLuint osi::GameWindow::shaderProgramId = 0;
-vector<GLuint> osi::GameWindow::textures;
+std::vector<GLuint> osi::GameWindow::textures;
 int osi::GameWindow::numObjects = 0;
 
 /// <summary>Initializes the game's window. This will cause the application
@@ -81,17 +81,17 @@ void osi::GameWindow::drawSprite(float x, float y, float width, float height, Sp
 	//std::cout << "x: " << x <<std::endl;
   std::vector<GLfloat> GlCoordTL = GameWindow::dpCoordToGL(x, y);
   std::vector<GLfloat> GlCoordBR = GameWindow::dpCoordToGL(x + width, y + height);
-  float x1 =t.getStart()/t.getTexture().getWidth();
-  float x2 = t.getStop()/ t.getTexture().getWidth();
-  float y1 = t.getTop() / t.getTexture().getHeight();
-  float y2 = t.getBottom() / t.getTexture().getHeight();
+  float x1 = static_cast<float>(t.getStart()) / static_cast<float>(t.getTexture().getWidth());
+  float x2 = static_cast<float>(t.getStop()) / static_cast<float>(t.getTexture().getWidth());
+  float y1 = static_cast<float>(t.getTop()) / static_cast<float>(t.getTexture().getHeight());
+  float y2 = static_cast<float>(t.getBottom()) / static_cast<float>(t.getTexture().getHeight());
 
   GLfloat spriteCoords[] = {
     // Vertices                         // Vertex colors    // Texture coordinates
     GlCoordTL[0], GlCoordTL[1], 0.0F,   1.0F, 0.0F, 0.0F,  x1, y1, // Top-left corner
-    GlCoordTL[0], GlCoordBR[1], 0.0F,   1.0F, 0.0F, 0.0F,   x1, y2, // Bottom-left corner
-    GlCoordBR[0], GlCoordBR[1], 0.0F,   1.0F, 0.0F, 0.0F,   x2, y2, // Bottom-right corner
-    GlCoordBR[0], GlCoordTL[1], 0.0F,   1.0F, 0.0F, 0.0F,   x2, y1, // Top-right corner
+    GlCoordTL[0], GlCoordBR[1], 0.0F,   1.0F, 0.0F, 0.0F,  x1, y2, // Bottom-left corner
+    GlCoordBR[0], GlCoordBR[1], 0.0F,   1.0F, 0.0F, 0.0F,  x2, y2, // Bottom-right corner
+    GlCoordBR[0], GlCoordTL[1], 0.0F,   1.0F, 0.0F, 0.0F,  x2, y1, // Top-right corner
   };
   GLuint spriteVertexIndices[] = {
 	  0, 2, 3, // First triangle

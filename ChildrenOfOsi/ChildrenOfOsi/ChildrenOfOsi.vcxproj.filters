@@ -40,6 +40,8 @@
     <ClCompile Include="Vector2f.cpp" />
     <ClCompile Include="WorldObj.cpp" />
     <ClCompile Include="AIManager.cpp" />
+    <ClCompile Include="TaskBufferTestSuite.cpp" />
+    <ClCompile Include="PhysicsTestSuite.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AudioManager.h" />
@@ -84,6 +86,8 @@
     <ClInclude Include="Vector2f.h" />
     <ClInclude Include="WorldObj.h" />
     <ClInclude Include="AIManager.h" />
+    <ClInclude Include="TaskBufferTestSuite.h" />
+    <ClInclude Include="PhysicsTestSuite.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram.cd" />

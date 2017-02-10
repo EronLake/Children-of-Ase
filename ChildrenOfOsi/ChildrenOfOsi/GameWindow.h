@@ -44,12 +44,12 @@ namespace osi
     static GLFWwindow *window;
     static int windowWidthPx;
     static int windowHeightPx;
-    static vector<GLuint> vertexArrayObjectId;
-    static vector<GLuint> vertexBufferObjectId;
-    static vector<GLuint> elementBufferObjectId;
+    static std::vector<GLuint> vertexArrayObjectId;
+    static std::vector<GLuint> vertexBufferObjectId;
+    static std::vector<GLuint> elementBufferObjectId;
     static GLuint shaderProgramId;
-	static vector<GLuint> textures;
-	static int numObjects;
+    static std::vector<GLuint> textures;
+    static int numObjects;
 
     GameWindow() = delete;
     ~GameWindow() = delete;
