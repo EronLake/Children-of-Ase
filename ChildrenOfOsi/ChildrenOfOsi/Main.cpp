@@ -28,6 +28,7 @@
 #include <conio.h>
 #include "CheckClass.h"
 #include "TaskBufferTestSuite.h"
+#include <Windows.h>
 
 //#include "Pool.h"
 
@@ -56,7 +57,7 @@ void ALEX_LOOP(QuadTree* _Quadtree);
 void ANDREWS_LOOP(QuadTree* _QuadTree);
 void FPS(bool b);
 
-
+bool collide(WorldObj* recA, WorldObj* recB);
 //void Darion_Ian_Test();
 
 void ANDREWS_TEST();
@@ -289,36 +290,107 @@ void ALEX_LOOP(QuadTree* _QuadTree) {
 
 	//osi::GameWindow::init();
 	LOG("PAST WINDOW INIT ***********************");
-	clock_t current_ticks, delta_ticks;
+	clock_t start_tick, current_ticks, delta_ticks;
 	clock_t fps = 0;
+	int fs = 60;
 	while (osi::GameWindow::isRunning()) {
-		current_ticks = clock();
+		start_tick = clock();
 		_QuadTree->clear();
 		for (int i = 0; i < recVec.size(); i++) {
 			_QuadTree->insert(recVec[i]);	//insert all obj into tree
 		}
 		//clock 
-		//iController->InputCheck();
+		
 		Alex->WorldObj::drawObj(0,0);
 		for (int i = 0; i < recVec.size(); i++) {
 			recVec[i]->drawObj(0,0);
 		}
 		Alex->WorldObj::animateObj();
-		//Alex->WorldObj::shiftX(.5);
+		short W = GetKeyState('W') >> 15;
+		short A = GetKeyState('A') >> 15;
+		short S = GetKeyState('S') >> 15;
+		short D = GetKeyState('D') >> 15;
+		short R = GetKeyState('R') >> 15;
+		short T = GetKeyState('T') >> 15;
+/*
+		if (W)
+		{
+			recVec = _QuadTree->retrieve(recVec, Alex);
+			Alex->WorldObj::shiftY(-.5);
+			for (int i = 0; i < recVec.size(); i++) {
+				if (collide(recVec[i], Alex)) {
+					Alex->shiftY(.5);
+					break;
+				}
+			}
+		}
+		if (A)
+		{
+			recVec = _QuadTree->retrieve(recVec, Alex);
+			Alex->WorldObj::shiftX(-.5);
+			for (int i = 0; i < recVec.size(); i++) {
+				if (collide(recVec[i], Alex)) {
+					Alex->shiftX(.5);
+					break;
+				}
+			}
+		}
+		if (S)
+		{
+			recVec = _QuadTree->retrieve(recVec, Alex);
+			Alex->WorldObj::shiftY(.5);
+			for (int i = 0; i < recVec.size(); i++) {
+				if (collide(recVec[i], Alex)) {
+					Alex->shiftY(-.5);
+					break;
+				}
+			}
+		}
+		if (D)
+		{
+			recVec = _QuadTree->retrieve(recVec, Alex);
+			Alex->WorldObj::shiftX(.5);
+			for (int i = 0; i < recVec.size(); i++) {
+				if (collide(recVec[i], Alex)) {
+					Alex->shiftX(-.5);
+					break;
+				}
+			}
+		}
+		*/
 		osi::GameWindow::refresh();
 		//draw
 		//gameplay_functions->draw_frame(Alex);
 		//run task buffer
+		iController->InputCheck();
 		tBuffer->run();
-
-
-		delta_ticks = clock() - current_ticks; //the time, in ms, that took to render the scene
+	//	cout << tBuffer->queue_buffer.size() << endl;
+		//tBuffer->empty();
+	
+		
+		if ((1000/fs) > (clock() - start_tick)){ //delta_ticks) {
+			Sleep((1000/fs) - (clock() - start_tick));
+		}
+		delta_ticks = clock() - start_tick; //the time, in ms, that took to render the scene
 		if (delta_ticks > 0)
 		fps = CLOCKS_PER_SEC / delta_ticks;
 		cout << "FPS: "<<fps << endl;
 	}
 	osi::GameWindow::terminate();
 }
+bool coordOverlap(int value, int min, int max) { return (value >= min) && (value <= max); }
+bool collide(WorldObj* recA, WorldObj* recB)
+{
+	for (int i = 0; i < (*recA).body.size(); i++) {
+		for (int j = 0; j < (*recB).body.size(); j++) {
+			bool xCollide = coordOverlap(recA->body[i].getX(), recB->body[j].getX(), recB->body[j].getX() + recB->body[j].getWidth()) || coordOverlap(recB->body[j].getX(), recA->body[i].getX(), recA->body[i].getX() + recA->body[i].getWidth());
+			bool yCollide = coordOverlap(recA->body[i].getY(), recB->body[j].getY(), recB->body[j].getY() + recB->body[j].getHeight()) || coordOverlap(recB->body[j].getY(), recA->body[i].getY(), recA->body[i].getY() + recA->body[i].getHeight());
+			if (xCollide && yCollide)return true;
+		}
+	}
+	return false;
+}
+
 
 void ERONS_LOOP() {
 	/////////////////////////////////////////////////////////////////

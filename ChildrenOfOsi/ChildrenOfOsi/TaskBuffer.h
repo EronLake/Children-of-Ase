@@ -10,7 +10,7 @@
 class TaskBuffer
 {
 private:
-	std::priority_queue<Task*> queue_buffer;
+	
 	MessageLog* mLog;
 	std::unordered_map<std::string, std::vector<Manager*>> mTable;
 
@@ -25,6 +25,7 @@ public:
 	void push(Task* new_task);
 	Task* pop();
 	void add_to_table(std::string type, Manager* manager);
+	std::priority_queue<Task*> queue_buffer;
 };
 
 
