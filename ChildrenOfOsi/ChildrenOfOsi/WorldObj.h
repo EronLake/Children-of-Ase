@@ -43,7 +43,7 @@ public:
 	void setName(string n);
 	string getName();
 	WorldObj(Vector2f p_topLeft, float p_width, float p_height);
-	void drawObj();
+	void drawObj(float _x, float _y);
 	Sprite sprite;
 	vector<Rectangle> body;
 	void offsetBody(int i, float x1, float x2, float y1, float y2);

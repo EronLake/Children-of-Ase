@@ -5,20 +5,20 @@
 #include "MessageLog.h"
 #include "TaskBuffer.h"
 #include "Manager.h"
+#include "AIHelper.h"
 
 class AIManager : public Manager
 {
 private:
-	typedef int (Movement::*fn_ptr)(WorldObj*);
+	AIHelper* aiHelper;
+	typedef int (AIHelper::*fn_ptr)(WorldObj*);
 	typedef std::map<std::string, fn_ptr> functionMapper;
 	functionMapper task_map;
-	Movement* moveHelper;
-	Vector2f destination;
 
 
 public:
 	AIManager(MessageLog* _mLog, TaskBuffer* _tBuffer);
-	AIManager(MessageLog* _mLog, TaskBuffer* _tBuffer, QuadTree * _physicsQuadTree);
+	AIManager(MessageLog* _mLog, TaskBuffer* _tBuffer, WorldObj* obj);
 	~AIManager();
 
 	virtual void register_manager() final;

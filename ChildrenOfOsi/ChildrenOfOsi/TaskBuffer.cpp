@@ -105,7 +105,7 @@ Task* TaskBuffer::pop()
 //checks if the TaskBuffer is empty
 bool TaskBuffer::isEmpty()
 {
-	return (queue_buffer.size() == 0);
+	return queue_buffer.empty(); 
 }
 //------------------------------------------------------
 
@@ -113,7 +113,9 @@ bool TaskBuffer::isEmpty()
 //empties the TaskBuffer
 void TaskBuffer::empty()
 {
-	queue_buffer.empty();
+	if (!queue_buffer.empty()) {
+		queue_buffer = std::priority_queue<Task*>();
+	}
 }
 
 void TaskBuffer::add_to_table(std::string type, Manager* manager)
