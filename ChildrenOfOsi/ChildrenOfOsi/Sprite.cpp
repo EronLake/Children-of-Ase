@@ -22,7 +22,7 @@ void Sprite::animate()
 {
   ++this->tempTime;
   if(this->tempTime == 30) {
-    if(this->index < this->tex->getFrames()) {
+    if(this->index < this->tex->getFrames()-1) {
       ++this->index;
       this->start = tex->getFrameWidth() * index;
       this->stop = tex->getFrameWidth() * (index + 1);

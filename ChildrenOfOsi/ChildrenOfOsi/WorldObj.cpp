@@ -197,7 +197,7 @@ WorldObj::WorldObj(Vector2f p_topLeft, float p_width, float p_height) {
 
 void WorldObj::drawObj(float _x, float _y)
 {
-	osi::GameWindow::drawSprite(loc.getXloc(), loc.getYloc(), width, height, sprite);
+	osi::GameWindow::drawSprite(loc.getXloc()-_x, loc.getYloc()-_y, width, height, sprite);
 }
 
 void WorldObj::offsetBody(int i, float x1, float x2, float y1, float y2) {
