@@ -298,12 +298,12 @@ void ALEX_LOOP(QuadTree* _QuadTree) {
 			_QuadTree->insert(recVec[i]);	//insert all obj into tree
 		}
 		//clock 
-		//iController->InputCheck();
+		iController->InputCheck();
 		Alex->WorldObj::drawObj(0,0);
 		for (int i = 0; i < recVec.size(); i++) {
 			recVec[i]->drawObj(0,0);
 		}
-		Alex->WorldObj::animateObj();
+		//Alex->WorldObj::animateObj();
 		//Alex->WorldObj::shiftX(.5);
 		osi::GameWindow::refresh();
 		//draw
