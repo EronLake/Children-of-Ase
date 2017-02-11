@@ -42,6 +42,7 @@
     <ClCompile Include="AIManager.cpp" />
     <ClCompile Include="TaskBufferTestSuite.cpp" />
     <ClCompile Include="PhysicsTestSuite.cpp" />
+    <ClCompile Include="AIHelper.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AudioManager.h" />
@@ -88,6 +89,7 @@
     <ClInclude Include="AIManager.h" />
     <ClInclude Include="TaskBufferTestSuite.h" />
     <ClInclude Include="PhysicsTestSuite.h" />
+    <ClInclude Include="AIHelper.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram.cd" />

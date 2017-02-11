@@ -27,17 +27,6 @@ bool TaskBufferTestSuite:: execute_tests() {
 	}
 
 	//--------------------------------------------------
-	if (TaskBuffer_destructor_test() == true)
-	{
-		LOG("TaskBuffer_destructor_test: " << "PASS");
-	}
-	else
-	{
-		LOG("TaskBuffer_destructor_test: " << "FAIL");
-		pass = false;
-	}
-
-	//--------------------------------------------------
 	if (run_test() == true)
 	{
 		LOG("run_test: " << "PASS");
@@ -104,47 +93,35 @@ bool TaskBufferTestSuite:: execute_tests() {
 	}
 
 	//--------------------------------------------------
+	if (TaskBuffer_destructor_test() == true)
+	{
+		LOG("TaskBuffer_destructor_test: " << "PASS");
+	}
+	else
+	{
+		LOG("TaskBuffer_destructor_test: " << "FAIL");
+		pass = false;
+	}
+
+	//--------------------------------------------------
 	return pass;
 }
 
-bool TaskBufferTestSuite::TaskBuffer_constructor_test()//Don't really know how to Test this out???
+bool TaskBufferTestSuite::TaskBuffer_constructor_test()//Don't really know how to Test this out??? Update: Revised it to test constructor
 {
+	MessageLog* ML = new MessageLog();
+	TaskBuffer* TB = new TaskBuffer(ML);
+	delete(TB);
+	delete(ML);
 	return true;
 }
 bool TaskBufferTestSuite::TaskBuffer_destructor_test()
 {
+	
 	return true;
 }
-bool TaskBufferTestSuite::run_test()
-{
-	bool pass = false;
-	std::string test_1 = "test_1";
-	std::string test_2 = "CREATED";
-	std::string test_3 = "type";
-	Task* test_task = new Task(test_1, test_2, test_3);
-	MessageLog* ML = new MessageLog();
-	TaskBuffer* TB = new TaskBuffer(ML);
-	TB->push(test_task);
-	TB->run();
-	if (TB->isEmpty() == true)
-	{
-		pass = true;
-	}
-	return pass;
-}
-bool TaskBufferTestSuite::assignTask_test() //Not Super sure how to test this function out???
-{
-	bool pass = false;
-	std::string test_1 = "test_1";
-	std::string test_2 = "CREATED";
-	std::string test_3 = "type";
-	Task* test_task = new Task(test_1, test_2, test_3);
-	MessageLog* ML = new MessageLog();
-	TaskBuffer* TB = new TaskBuffer(ML);
-	TB->assignTask(test_task);
-	pass = true;
-	return pass;
-}
+
+
 bool TaskBufferTestSuite::isEmpty_test()
 {
 	bool pass = false;
@@ -152,7 +129,7 @@ bool TaskBufferTestSuite::isEmpty_test()
 	bool flag_2 = false;
 	std::string test_1 = "test_1";
 	std::string test_2 = "CREATED";
-	std::string test_3 = "type";
+	std::string test_3 = "type_test";
 	Task* test_task = new Task(test_1, test_2, test_3);
 	MessageLog* ML = new MessageLog();
 	TaskBuffer* TB = new TaskBuffer(ML);
@@ -169,6 +146,10 @@ bool TaskBufferTestSuite::isEmpty_test()
 	{
 		pass = true;
 	}
+	TB->empty();
+	delete(TB);
+	delete(ML);
+	
 	return pass;
 }
 bool TaskBufferTestSuite::empty_test()
@@ -176,16 +157,21 @@ bool TaskBufferTestSuite::empty_test()
 	bool pass = false;
 	std::string test_1 = "test_1";
 	std::string test_2 = "CREATED";
-	std::string test_3 = "type";
+	std::string test_3 = "type_test";
 	Task* test_task = new Task(test_1, test_2, test_3);
 	MessageLog* ML = new MessageLog();
 	TaskBuffer* TB = new TaskBuffer(ML);
+
 	TB->push(test_task);
 	TB->empty();
 	if (TB->isEmpty() == true)
 	{
 		pass = true;
 	}
+	TB->empty();
+	delete(TB);
+	delete(ML);
+	
 	return pass;
 }
 bool TaskBufferTestSuite::push_test()
@@ -195,7 +181,7 @@ bool TaskBufferTestSuite::push_test()
 	bool flag_2 = false;
 	std::string test_1 = "test_1";
 	std::string test_2 = "CREATED";
-	std::string test_3 = "type";
+	std::string test_3 = "type_test";
 	Task* test_task = new Task(test_1, test_2, test_3);
 	MessageLog* ML = new MessageLog();
 	TaskBuffer* TB = new TaskBuffer(ML);
@@ -212,6 +198,10 @@ bool TaskBufferTestSuite::push_test()
 	{
 		pass = true;
 	}
+	TB->empty();
+	delete(TB);
+	delete(ML);
+	
 	return pass;
 }
 bool TaskBufferTestSuite::pop_test()
@@ -222,7 +212,7 @@ bool TaskBufferTestSuite::pop_test()
 	bool flag_3 = false;
 	std::string test_1 = "test_1";
 	std::string test_2 = "CREATED";
-	std::string test_3 = "type";
+	std::string test_3 = "type_test";
 	Task* test_task = new Task(test_1, test_2, test_3);
 	MessageLog* ML = new MessageLog();
 	TaskBuffer* TB = new TaskBuffer(ML);
@@ -244,5 +234,53 @@ bool TaskBufferTestSuite::pop_test()
 	{
 		pass = true;
 	}
+	TB->empty();
+	delete(TB);
+	delete(ML);
+	
+	return pass;
+}
+
+bool TaskBufferTestSuite::assignTask_test() //Not Super sure how to test this function out??? Update: Revised it to actually have a test condition
+{
+	bool pass = false;
+	std::string test_1 = "test_1";
+	std::string test_2 = "CREATED";
+	std::string test_3 = "type_test";
+	Task* test_task = new Task(test_1, test_2, test_3);
+	MessageLog* ML = new MessageLog();
+	TaskBuffer* TB = new TaskBuffer(ML);
+	TB->assignTask(test_task);
+	if (test_task->status == "WORKING")
+	{
+		pass = true;
+	}
+	TB->empty();
+	delete(TB);
+	delete(ML);
+	
+	return pass;
+}
+
+bool TaskBufferTestSuite::run_test()
+{
+	bool pass = false;
+	std::string test_1 = "test_1";
+	std::string test_2 = "CREATED";
+	std::string test_3 = "type_test";
+	Task* test_task = new Task(test_1, test_2, test_3);
+	MessageLog* ML = new MessageLog();
+	TaskBuffer* TB = new TaskBuffer(ML);
+	ML->logMessage(test_task);
+	TB->push(test_task);
+	TB->run();
+	if (TB->isEmpty() == true)
+	{
+		pass = true;
+	}
+	TB->empty();
+	delete(TB);
+	delete(ML);
+	
 	return pass;
 }
