@@ -300,64 +300,13 @@ void ALEX_LOOP(QuadTree* _QuadTree) {
 			_QuadTree->insert(recVec[i]);	//insert all obj into tree
 		}
 		//clock 
-		
+		//iController->InputCheck();
 		Alex->WorldObj::drawObj(0,0);
 		for (int i = 0; i < recVec.size(); i++) {
 			recVec[i]->drawObj(0,0);
 		}
 		Alex->WorldObj::animateObj();
-		short W = GetKeyState('W') >> 15;
-		short A = GetKeyState('A') >> 15;
-		short S = GetKeyState('S') >> 15;
-		short D = GetKeyState('D') >> 15;
-		short R = GetKeyState('R') >> 15;
-		short T = GetKeyState('T') >> 15;
-/*
-		if (W)
-		{
-			recVec = _QuadTree->retrieve(recVec, Alex);
-			Alex->WorldObj::shiftY(-.5);
-			for (int i = 0; i < recVec.size(); i++) {
-				if (collide(recVec[i], Alex)) {
-					Alex->shiftY(.5);
-					break;
-				}
-			}
-		}
-		if (A)
-		{
-			recVec = _QuadTree->retrieve(recVec, Alex);
-			Alex->WorldObj::shiftX(-.5);
-			for (int i = 0; i < recVec.size(); i++) {
-				if (collide(recVec[i], Alex)) {
-					Alex->shiftX(.5);
-					break;
-				}
-			}
-		}
-		if (S)
-		{
-			recVec = _QuadTree->retrieve(recVec, Alex);
-			Alex->WorldObj::shiftY(.5);
-			for (int i = 0; i < recVec.size(); i++) {
-				if (collide(recVec[i], Alex)) {
-					Alex->shiftY(-.5);
-					break;
-				}
-			}
-		}
-		if (D)
-		{
-			recVec = _QuadTree->retrieve(recVec, Alex);
-			Alex->WorldObj::shiftX(.5);
-			for (int i = 0; i < recVec.size(); i++) {
-				if (collide(recVec[i], Alex)) {
-					Alex->shiftX(-.5);
-					break;
-				}
-			}
-		}
-		*/
+		//Alex->WorldObj::shiftX(.5);
 		osi::GameWindow::refresh();
 		//draw
 		//gameplay_functions->draw_frame(Alex);
@@ -377,18 +326,6 @@ void ALEX_LOOP(QuadTree* _QuadTree) {
 		cout << "FPS: "<<fps << endl;
 	}
 	osi::GameWindow::terminate();
-}
-bool coordOverlap(int value, int min, int max) { return (value >= min) && (value <= max); }
-bool collide(WorldObj* recA, WorldObj* recB)
-{
-	for (int i = 0; i < (*recA).body.size(); i++) {
-		for (int j = 0; j < (*recB).body.size(); j++) {
-			bool xCollide = coordOverlap(recA->body[i].getX(), recB->body[j].getX(), recB->body[j].getX() + recB->body[j].getWidth()) || coordOverlap(recB->body[j].getX(), recA->body[i].getX(), recA->body[i].getX() + recA->body[i].getWidth());
-			bool yCollide = coordOverlap(recA->body[i].getY(), recB->body[j].getY(), recB->body[j].getY() + recB->body[j].getHeight()) || coordOverlap(recB->body[j].getY(), recA->body[i].getY(), recA->body[i].getY() + recA->body[i].getHeight());
-			if (xCollide && yCollide)return true;
-		}
-	}
-	return false;
 }
 
 
