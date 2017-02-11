@@ -29,7 +29,7 @@
 
 
 //toggles debug longging statements 
-#define DEBUG 1
+#define DEBUG 0
 
 #if DEBUG 
 #define LOG(input) std::cout << "LOG:" << input << std::endl
