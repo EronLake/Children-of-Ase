@@ -57,7 +57,7 @@ void ALEX_LOOP(QuadTree* _Quadtree);
 void ANDREWS_LOOP(QuadTree* _QuadTree);
 void FPS(bool b);
 
-bool collide(WorldObj* recA, WorldObj* recB);
+//bool collide(WorldObj* recA, WorldObj* recB);
 //void Darion_Ian_Test();
 
 void ANDREWS_TEST();
@@ -231,11 +231,16 @@ void ALESSIO_TEST() {
 void ALEX_LOOP(QuadTree* _QuadTree) {
 	//LOG("Hello world!");
 
-	WorldObj* Alex = new WorldObj(Vector2f(500.0, 100.0), 100.0, 100.0);	//init player
+	WorldObj* Alex = new WorldObj(Vector2f(1000.0, 600.0), 100.0, 100.0);	//init player
 	Texture* playerTexture = new Texture();
+	Texture* objTexture = new Texture();
+	objTexture->setFile("bluewood.jpg");
 	playerTexture->setFile("phi.png");
+
 	playerTexture->load();
+	objTexture->load();
 	playerTexture->setFrames(1);
+	objTexture->setFrames(1);
 	Alex->sprite.setTexture(playerTexture);
 	Alex->offsetBody(0, 50, 50, 50, 50);
 	vector<WorldObj*> recVec;	
@@ -243,9 +248,14 @@ void ALEX_LOOP(QuadTree* _QuadTree) {
 	for (int i = 1; i < 5; i++) {
 		WorldObj* objs = new WorldObj(Vector2f(100 * i , 100 * i ), 200.0, 200.0);
 		objs->sprite.setTexture(playerTexture);
+		//objs->offsetBody(0, 50, 50, 50, 50);
 		//objs->offsetBody(0, 70, 70, 70, 70);
 		recVec.push_back(objs);
 	}
+	WorldObj* staticRec = new WorldObj(Vector2f(1800, 1350), 100.0, 100.0);
+	staticRec->sprite.setTexture(playerTexture);
+	recVec.push_back(staticRec);
+
 	//recVec.push_back(myRec1); recVec.push_back(myRec2);
 
 	//pauses the program for viewing
@@ -283,16 +293,16 @@ void ALEX_LOOP(QuadTree* _QuadTree) {
 
 	//manager_table["DumM"] = DumM;
 
-	Alex->WorldObj::setWidth(100);
-	Alex->WorldObj::setHeight(100);
-	Alex->setX(10);
-	Alex->setY(10);
+	//Alex->WorldObj::setWidth(100);
+	//Alex->WorldObj::setHeight(100);
+	//Alex->setX(10);
+	//Alex->setY(10);
 
 	//osi::GameWindow::init();
 	LOG("PAST WINDOW INIT ***********************");
 	clock_t start_tick, current_ticks, delta_ticks;
 	clock_t fps = 0;
-	int fs = 60;
+	int fs = 120;
 	while (osi::GameWindow::isRunning()) {
 		start_tick = clock();
 		_QuadTree->clear();
@@ -300,24 +310,24 @@ void ALEX_LOOP(QuadTree* _QuadTree) {
 			_QuadTree->insert(recVec[i]);	//insert all obj into tree
 		}
 		//clock 
-		//iController->InputCheck();
-		Alex->WorldObj::drawObj(0,0);
-		for (int i = 0; i < recVec.size(); i++) {
-			recVec[i]->drawObj(0,0);
-		}
-		Alex->WorldObj::animateObj();
-		//Alex->WorldObj::shiftX(.5);
-		osi::GameWindow::refresh();
-		//draw
-		//gameplay_functions->draw_frame(Alex);
-		//run task buffer
 		iController->InputCheck();
+		//Alex->WorldObj::drawObj(0,0);
+		//for (int i = 0; i < recVec.size(); i++) {
+		//	recVec[i]->drawObj(0,0);
+		//}
+		//Alex->WorldObj::animateObj();
+		////Alex->WorldObj::shiftX(.5);
+		//osi::GameWindow::refresh();
+		//draw
+		gameplay_functions->draw_frame(Alex);
+		//run task buffer
+		//iController->InputCheck();
 		tBuffer->run();
 	//	cout << tBuffer->queue_buffer.size() << endl;
 		//tBuffer->empty();
 	
 		
-		if ((1000/fs) > (clock() - start_tick)){ //delta_ticks) {
+		if ((1000/fs) > (clock() - start_tick)){ //delta_ticks) {www
 			Sleep((1000/fs) - (clock() - start_tick));
 		}
 		delta_ticks = clock() - start_tick; //the time, in ms, that took to render the scene
