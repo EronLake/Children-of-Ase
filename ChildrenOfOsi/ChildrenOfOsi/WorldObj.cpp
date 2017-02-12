@@ -203,8 +203,11 @@ void WorldObj::drawObj(float _x, float _y)
 void WorldObj::offsetBody(int i, float x1, float x2, float y1, float y2) {
 	body[i].setX(body[i].getX()+x1);
 	body[i].setY(body[i].getY() + y1);
-	body[i].setWidth(body[i].getWidth() - x2);
-	body[i].setHeight(body[i].getHeight() - y2);
+	//cout << "body X is " << body[i].getX() << " and Y is " << body[i].getY();
+	body[i].setWidth(body[i].getWidth() - (x1+x2));
+	body[i].setHeight(body[i].getHeight() -(y1+y2));
+	//cout << "body width is " << body[i].getWidth() << " and height is " << body[i].getHeight();
+
 }
 void WorldObj::_print() {
 	std::cout << "Object Name" << getName() << std::endl;
