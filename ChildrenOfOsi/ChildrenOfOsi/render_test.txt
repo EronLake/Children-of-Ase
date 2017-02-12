@@ -121,3 +121,5 @@
 2/11/2017   4:43   Render manager unit test passed!
 2/11/2017   4:45   Render manager unit test passed!
 >>>>>>> d41838d318fb2cb6acd4da1d949fefbcbcf13d1e
+2/11/2017   6:16   Render manager unit test failed!
+2/11/2017   6:44   Render manager unit test failed!

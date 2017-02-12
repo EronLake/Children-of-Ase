@@ -9,7 +9,7 @@ public:
 	PhysicsTestSuite();
 	~PhysicsTestSuite();
 
-	bool execute_test();
+	bool execute_tests();
 	bool test_movement();
 	bool test_collision();
 

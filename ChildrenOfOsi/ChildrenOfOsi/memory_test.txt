@@ -122,3 +122,5 @@
 2/11/2017   4:43   Memory manager unit test passed!
 2/11/2017   4:45   Memory manager unit test passed!
 >>>>>>> d41838d318fb2cb6acd4da1d949fefbcbcf13d1e
+2/11/2017   6:16   Memory manager unit test failed!
+2/11/2017   6:44   Memory manager unit test failed!

@@ -17,8 +17,29 @@ PhysicsTestSuite::~PhysicsTestSuite()
 	LOG("AudioTestSuite Object Destroyed");
 }
 
-bool PhysicsTestSuite::execute_test() {
-	return false;
+bool PhysicsTestSuite::execute_tests() {
+	bool pass = true;
+	if (test_movement())
+	{
+		LOG("Movement Test: " << "PASS");
+	}
+	else
+	{
+		LOG("Movement Test: " << "FAIL");
+		pass = false;
+	}
+	if (test_collision()) 
+	{
+		LOG("Collision Test: " << "PASS");
+
+	}
+	else
+	{
+		LOG("Collision Test: " << "FAIL");
+		pass = false;
+
+	}
+	return pass;
 }
 bool PhysicsTestSuite::test_movement() {
 	WorldObj* screen = new WorldObj(Vector2f(0.0, 0.0), 960U, 540U);
@@ -35,6 +56,7 @@ bool PhysicsTestSuite::test_movement() {
 	x->setX(.5);
 	x->setY(.5);
 	movetests->move_up(x);
+	//up is negative y, down is positive y
 	if (x->getY() > .5) {
 		//fail if move down
 		cout << endl;

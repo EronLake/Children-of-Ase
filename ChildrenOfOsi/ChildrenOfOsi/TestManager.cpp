@@ -5,6 +5,7 @@
 #include <iostream>
 #include "TaskBufferTestSuite.h"
 #include "AudioTestSuite.h"
+#include "PhysicsTestSuite.h"
 
 
 TestManager::TestManager(MessageLog * _mLog, TaskBuffer * _tBuffer) : Manager(_mLog, _tBuffer)
@@ -24,9 +25,9 @@ void TestManager::register_manager()
 
 void TestManager::execute_task(Task* current_task)
 {
-	int result = run_unit_tests();
+	bool result = run_unit_tests();
 	if (current_task->name == "Run_Unit_Tests") {
-		if (result == 0) {
+		if (result == true) {
 			current_task->updateStatus("COMPLETED");
 		}
 		else {
@@ -52,13 +53,9 @@ bool memory_unit_test() {
 	return 0;
 }
 
-bool physics_unit_test() {
-	return 1;
-}
-
 /*NOTE: txt file outputs are located in Header Files/Test Outputs*/
 bool TestManager::run_unit_tests() {
-    bool result = false;
+    bool result = true;
     std::ofstream ofs;
 	time_t t = time(0);   // get time now
 	struct tm  now;
@@ -77,12 +74,13 @@ bool TestManager::run_unit_tests() {
 	/*Instantiations of test suite classes*/
 	TaskBufferTestSuite* t_suite = new TaskBufferTestSuite();
 	AudioTestSuite* a_suite = new AudioTestSuite();
+	PhysicsTestSuite* p_suite = new PhysicsTestSuite();
 
 ///////////Your unit test function calls here/////////////
 	bool a_test = a_suite->execute_tests();
 	bool r_test = render_unit_test();
 	bool m_test = memory_unit_test();
-	bool p_test = physics_unit_test();
+	bool p_test = p_suite->execute_tests();
 	bool t_test = t_suite->execute_tests();
 
 	if (a_test) {
