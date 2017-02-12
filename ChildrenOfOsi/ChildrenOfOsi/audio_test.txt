@@ -46,6 +46,7 @@
 2/10/2017   7:47   Audio manager unit test passed!
 2/10/2017   7:47   Audio manager unit test passed!
 2/10/2017   7:47   Audio manager unit test passed!
+<<<<<<< HEAD
 2/11/2017   2:48   Audio manager unit test passed!
 2/11/2017   2:57   Audio manager unit test passed!
 2/11/2017   3:1   Audio manager unit test passed!
@@ -110,3 +111,14 @@
 2/11/2017   5:20   Audio manager unit test passed!
 2/11/2017   5:21   Audio manager unit test passed!
 2/11/2017   5:21   Audio manager unit test passed!
+=======
+2/11/2017   4:3   Audio manager unit test passed!
+2/11/2017   4:5   Audio manager unit test passed!
+2/11/2017   4:8   Audio manager unit test passed!
+2/11/2017   4:13   Audio manager unit test passed!
+2/11/2017   4:15   Audio manager unit test passed!
+2/11/2017   4:16   Audio manager unit test passed!
+2/11/2017   4:35   Audio manager unit test passed!
+2/11/2017   4:43   Audio manager unit test passed!
+2/11/2017   4:45   Audio manager unit test passed!
+>>>>>>> d41838d318fb2cb6acd4da1d949fefbcbcf13d1e

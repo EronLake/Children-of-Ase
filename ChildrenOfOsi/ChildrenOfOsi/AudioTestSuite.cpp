@@ -1,6 +1,8 @@
 #include "stdafx.h"
 #include "AudioTestSuite.h"
 #include <Windows.h>
+#include "fmod.hpp"
+#include "fmod_errors.h"
 
 AudioTestSuite::AudioTestSuite()
 {
@@ -93,17 +95,14 @@ bool AudioTestSuite::create_sound_test() {
 
 bool AudioTestSuite::play_sound_test() {
 	std::string name = "violin.mp3";
+	int numChan;
 	bool played = true;
 	FMOD::Sound* test_sound;
-	FMOD::Channel* channel = test_soundSystem->channels[0];
+	FMOD::Channel* channel = NULL;
 	test_soundSystem->playSound(test_soundSystem->sounds[name], false, channel, false);
-	Sleep(6000);
-	for (int i = 0; i < 32; i++) {
-		test_soundSystem->channels[i]->getCurrentSound(&test_sound);
-	//t	LOG("play_sound_test: channel " << i << " playing " << test_sound);
-		if (test_sound == test_soundSystem->sounds[name]) return true;
-	}
-	channel->isPlaying(&played);
+	FMOD_RESULT result = test_soundSystem->m_pSystem->getChannelsPlaying(&numChan, 0);
+	LOG(result);
+	LOG(numChan);
 	if (played == false) {
 		LOG("play_sound_test: Channel not playing any sound");
 	}
