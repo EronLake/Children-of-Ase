@@ -66,7 +66,7 @@ void PHYSICS_TEST();
 
 int main() {
 		//LOG("Hello world!");
-	//	ERONS_LOOP();
+		ERONS_LOOP();
 		/************************************************************************************************SET-UP*******************************************************/
 		WorldObj* screen = new WorldObj(Vector2f(0.0, 0.0), 960U, 540U);	//init screen
 

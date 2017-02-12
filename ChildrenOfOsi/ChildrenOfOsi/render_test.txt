@@ -45,3 +45,12 @@
 2/10/2017   7:47   Render manager unit test passed!
 2/10/2017   7:47   Render manager unit test passed!
 2/10/2017   7:47   Render manager unit test passed!
+2/11/2017   4:3   Render manager unit test passed!
+2/11/2017   4:5   Render manager unit test passed!
+2/11/2017   4:8   Render manager unit test passed!
+2/11/2017   4:13   Render manager unit test passed!
+2/11/2017   4:15   Render manager unit test passed!
+2/11/2017   4:16   Render manager unit test passed!
+2/11/2017   4:35   Render manager unit test passed!
+2/11/2017   4:43   Render manager unit test passed!
+2/11/2017   4:45   Render manager unit test passed!
