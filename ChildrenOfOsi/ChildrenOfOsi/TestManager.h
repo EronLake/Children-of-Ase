@@ -14,7 +14,7 @@ private:
 
 
 public:
-	int run_unit_tests();
+	bool run_unit_tests();
 	TestManager(MessageLog* _mLog, TaskBuffer* _tBuffer);
 	~TestManager();
 

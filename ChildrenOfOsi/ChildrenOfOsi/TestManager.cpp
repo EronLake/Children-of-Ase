@@ -3,6 +3,8 @@
 #include <fstream>
 #include <ctime>
 #include <iostream>
+#include "TaskBufferTestSuite.h"
+#include "AudioTestSuite.h"
 
 
 TestManager::TestManager(MessageLog * _mLog, TaskBuffer * _tBuffer) : Manager(_mLog, _tBuffer)
@@ -41,30 +43,22 @@ void TestManager::execute_task(Task* current_task)
 /*Placeholder definitions for unit tests.
 Only for purpose of testing test manager while people
 work on their unit tests.*/
-int audio_unit_test() {
-	return 0;
 
-}
-
-int render_unit_test() {
+bool render_unit_test() {
 	return 0;
 }
 
-int memory_unit_test() {
+bool memory_unit_test() {
 	return 0;
 }
 
-int task_buffer_unit_test() {
-	return 1;
-}
-
-int physics_unit_test() {
+bool physics_unit_test() {
 	return 1;
 }
 
 /*NOTE: txt file outputs are located in Header Files/Test Outputs*/
-int TestManager::run_unit_tests() {
-    int result = 0;
+bool TestManager::run_unit_tests() {
+    bool result = false;
     std::ofstream ofs;
 	time_t t = time(0);   // get time now
 	struct tm  now;
@@ -75,17 +69,23 @@ int TestManager::run_unit_tests() {
 	int year = now.tm_year + 1900;
     int month = now.tm_mon + 1;
 	int day = now.tm_mday;
-	int hour = now.tm_hour - 12;
+	int hour = now.tm_hour;
+	if (hour > 12)
+		hour -= 12;
 	int minute = now.tm_min;
 
-///////////Your unit test function calls here/////////////
-	int a_test = audio_unit_test();
-	int r_test = render_unit_test();
-	int m_test = memory_unit_test();
-	int p_test = physics_unit_test();
-	int t_test = task_buffer_unit_test();
+	/*Instantiations of test suite classes*/
+	TaskBufferTestSuite* t_suite = new TaskBufferTestSuite();
+	AudioTestSuite* a_suite = new AudioTestSuite();
 
-	if (a_test == 0) {
+///////////Your unit test function calls here/////////////
+	bool a_test = a_suite->execute_tests();
+	bool r_test = render_unit_test();
+	bool m_test = memory_unit_test();
+	bool p_test = physics_unit_test();
+	bool t_test = t_suite->execute_tests();
+
+	if (a_test) {
 	    ofs.open ("audio_test.txt", std::ofstream::out | std::ofstream::app);
 
 	    ofs << month << "/" << day << "/" << year << "   "<<hour << ":" << minute<<"   Audio manager unit test passed!" << endl;
@@ -94,7 +94,7 @@ int TestManager::run_unit_tests() {
 		
 	}
 	else {
-		result = 1;
+		result = false;
 		ofs.open ("audio_test.txt", std::ofstream::out | std::ofstream::app);
 
 		ofs << month << "/" << day << "/" << year << "   " << hour << ":" << minute << "   Audio manager unit test failed!" << endl;
@@ -102,7 +102,7 @@ int TestManager::run_unit_tests() {
 		ofs.close();
 
 	}
-	if (r_test == 0) {
+	if (r_test) {
 	    ofs.open ("render_test.txt", std::ofstream::out | std::ofstream::app);
 
 		ofs << month << "/" << day << "/" << year << "   " << hour << ":" << minute << "   Render manager unit test passed!" << endl;
@@ -111,7 +111,7 @@ int TestManager::run_unit_tests() {
 
 	}
 	else {
-		result = 1;
+		result = false;
 		ofs.open ("render_test.txt", std::ofstream::out | std::ofstream::app);
 
 		ofs << month << "/" << day << "/" << year << "   " << hour << ":" << minute << "   Render manager unit test failed!" << endl;
@@ -119,7 +119,7 @@ int TestManager::run_unit_tests() {
 		ofs.close();
 
 	}
-	if (m_test == 0) {
+	if (m_test) {
 	    ofs.open ("memory_test.txt", std::ofstream::out | std::ofstream::app);
 
 		ofs << month << "/" << day << "/" << year << "   " << hour << ":" << minute << "   Memory manager unit test passed!" << endl;
@@ -128,7 +128,7 @@ int TestManager::run_unit_tests() {
 
 	}
 	else {
-		result = 1;
+		result = false;
 		ofs.open ("memory_test.txt", std::ofstream::out | std::ofstream::app);
 
 		ofs << month << "/" << day << "/" << year << "   " << hour << ":" << minute << "   Memory manager unit test failed!" << endl;
@@ -136,7 +136,7 @@ int TestManager::run_unit_tests() {
 		ofs.close();
 
 	}
-	if (p_test == 0) {
+	if (p_test) {
 	    ofs.open ("physics_test.txt", std::ofstream::out | std::ofstream::app);
 
 		ofs << month << "/" << day << "/" << year << "   " << hour << ":" << minute << "   Physics manager unit test passed!" << endl;
@@ -145,7 +145,7 @@ int TestManager::run_unit_tests() {
 
 	}
 	else {
-		result = 1;
+		result = false;
 		ofs.open ("physics_test.txt", std::ofstream::out | std::ofstream::app);
 
 		ofs << month << "/" << day << "/" << year << "   " << hour << ":" << minute << "   Physics manager unit test failed!" << endl;
@@ -153,7 +153,7 @@ int TestManager::run_unit_tests() {
 		ofs.close();
 
 	}
-	if (t_test == 0) {
+	if (t_test) {
 	    ofs.open ("task_buffer_test.txt", std::ofstream::out | std::ofstream::app);
 
 		ofs << month << "/" << day << "/" << year << "   " << hour << ":" << minute << "   Task buffer unit test passed!" << endl;
@@ -162,7 +162,7 @@ int TestManager::run_unit_tests() {
 
 	}
 	else {
-		result = 1;
+		result = false;
 		ofs.open ("task_buffer_test.txt", std::ofstream::out | std::ofstream::app);
 
 		ofs << month << "/" << day << "/" << year << "   " << hour << ":" << minute << "   Task buffer unit test failed!" << endl;
