@@ -5,24 +5,13 @@ ChildrenofOsi/ChildrenofOsi/Debug
 ChildrenofOsi/ChildrenofOsi.VC.db
 ChildrenofOsi/ChildrenofOsi.VC.VC.opendb
 
-Children of Osi.VC.db
-Children of Osi.VC.VC.opendb
-
-ChildrenOfOsi/ChildrenOfOsi.VC.db
-
 ChildrenOfOsi/.vs/
 ChildrenOfOsi/Debug/ChildrenOfOsi.pdb
 ChildrenOfOsi/Debug/ChildrenOfOsi.ilk
 ChildrenOfOsi/Debug/ChildrenOfOsi.exe
 ChildrenOfOsi/ipch/
 ChildrenOfOsi/x64/
-
-
-ChildrenOfOsi/ChildrenOfOsi.VC.db
-ChildrenOfOsi/ChildrenOfOsi.VC.VC.opendb
-
 ChildrenOfOsi/ChildrenOfOsi/x64/
-
 
 ChildrenOfOsi/ChildrenOfOsi/memory_test.txt
 ChildrenOfOsi/ChildrenOfOsi/audio_test.txt
@@ -30,9 +19,4 @@ ChildrenOfOsi/ChildrenOfOsi/physics_test.txt
 ChildrenOfOsi/ChildrenOfOsi/render_test.txt
 ChildrenOfOsi/ChildrenOfOsi/task_buffer_test.txt
 ChildrenOfOsi/ChildrenOfOsi/message_log.txt
-ChildrenOfOsi/ChildrenOfOsi/task_buffer_test.txt
-ChildrenOfOsi/ChildrenOfOsi/render_test.txt
-ChildrenOfOsi/ChildrenOfOsi/memory_test.txt
-ChildrenOfOsi/ChildrenOfOsi/message_log.txt
-ChildrenOfOsi/ChildrenOfOsi/audio_test.txt
 *.txt

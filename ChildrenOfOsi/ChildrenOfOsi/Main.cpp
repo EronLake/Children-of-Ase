@@ -66,7 +66,7 @@ void PHYSICS_TEST();
 
 int main() {
 		//LOG("Hello world!");
-		ERONS_LOOP();
+		//ERONS_LOOP();
 		/************************************************************************************************SET-UP*******************************************************/
 		WorldObj* screen = new WorldObj(Vector2f(0.0, 0.0), 960U, 540U);	//init screen
 
@@ -302,7 +302,7 @@ void ALEX_LOOP(QuadTree* _QuadTree) {
 	LOG("PAST WINDOW INIT ***********************");
 	clock_t start_tick, current_ticks, delta_ticks;
 	clock_t fps = 0;
-	int fs = 120;
+	int fs = 60;
 	while (osi::GameWindow::isRunning()) {
 		start_tick = clock();
 		_QuadTree->clear();

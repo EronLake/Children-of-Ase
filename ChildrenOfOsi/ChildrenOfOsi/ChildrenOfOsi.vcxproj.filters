@@ -127,6 +127,9 @@
     <ClCompile Include="stdafx.cpp">
       <Filter>Misc</Filter>
     </ClCompile>
+    <ClCompile Include="DialogueController.cpp">
+      <Filter>Dialogue</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AIHelper.h">
@@ -264,6 +267,9 @@
     <ClInclude Include="stdafx.h">
       <Filter>Misc</Filter>
     </ClInclude>
+    <ClInclude Include="DialogueController.h">
+      <Filter>Dialogue</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Text Include="audio_test.txt">
@@ -315,6 +321,9 @@
     </Filter>
     <Filter Include="Misc">
       <UniqueIdentifier>{de6df43b-54b6-4728-b585-06d2c1d1050f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Dialogue">
+      <UniqueIdentifier>{4e78cd9b-909c-46c8-a324-86a4b6805108}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

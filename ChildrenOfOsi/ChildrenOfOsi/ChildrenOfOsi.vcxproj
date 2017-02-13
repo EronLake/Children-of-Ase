@@ -165,6 +165,7 @@
     <ClInclude Include="ChildrenOfOsi.h" />
     <ClInclude Include="common.h" />
     <ClInclude Include="Containers.h" />
+    <ClInclude Include="DialogueController.h" />
     <ClInclude Include="DummyController.h" />
     <ClInclude Include="Factions.h" />
     <ClInclude Include="GameWindow.h" />
@@ -211,6 +212,7 @@
     <ClCompile Include="CheckClass.cpp" />
     <ClCompile Include="ChildrenOfOsi.cpp" />
     <ClCompile Include="Containers.cpp" />
+    <ClCompile Include="DialogueController.cpp" />
     <ClCompile Include="DummyController.cpp" />
     <ClCompile Include="Factions.cpp" />
     <ClCompile Include="GameWindow.cpp" />
