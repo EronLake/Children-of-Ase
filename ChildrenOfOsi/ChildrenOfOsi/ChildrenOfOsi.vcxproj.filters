@@ -1,106 +1,325 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClCompile Include="AudioManager.cpp" />
-    <ClCompile Include="AudioTestSuite.cpp" />
-    <ClCompile Include="CheckClass.cpp" />
-    <ClCompile Include="ChildrenOfOsi.cpp" />
-    <ClCompile Include="Containers.cpp" />
-    <ClCompile Include="DummyController.cpp" />
-    <ClCompile Include="Factions.cpp" />
-    <ClCompile Include="GameWindow.cpp" />
-    <ClCompile Include="Hero.cpp" />
-    <ClCompile Include="Input.cpp" />
-    <ClCompile Include="LivingObj.cpp" />
-    <ClCompile Include="Main.cpp" />
-    <ClCompile Include="Manager.cpp" />
-    <ClCompile Include="memManager.cpp" />
-    <ClCompile Include="MemNode.cpp" />
-    <ClCompile Include="MemoryHelper.cpp" />
-    <ClCompile Include="MemoryTestSuite.cpp" />
-    <ClCompile Include="MessageLog.cpp" />
-    <ClCompile Include="Movement.cpp" />
-    <ClCompile Include="NPC.cpp" />
-    <ClCompile Include="PhysicsManager.cpp" />
-    <ClCompile Include="Player.cpp" />
-    <ClCompile Include="MemoryPool.cpp" />
-    <ClCompile Include="Projectile.cpp" />
-    <ClCompile Include="QuadTree.cpp" />
-    <ClCompile Include="RenderHelper.cpp" />
-    <ClCompile Include="RenderManager.cpp" />
-    <ClCompile Include="Soldier.cpp" />
-    <ClCompile Include="SoundSystem.cpp" />
-    <ClCompile Include="SplSoldier.cpp" />
-    <ClCompile Include="Sprite.cpp" />
-    <ClCompile Include="stdafx.cpp" />
-    <ClCompile Include="Task.cpp" />
-    <ClCompile Include="TaskBuffer.cpp" />
-    <ClCompile Include="TestManager.cpp" />
-    <ClCompile Include="Texture.cpp" />
-    <ClCompile Include="Vector2f.cpp" />
-    <ClCompile Include="WorldObj.cpp" />
-    <ClCompile Include="AIManager.cpp" />
-    <ClCompile Include="TaskBufferTestSuite.cpp" />
-    <ClCompile Include="PhysicsTestSuite.cpp" />
-    <ClCompile Include="AIHelper.cpp" />
+    <ClCompile Include="AIHelper.cpp">
+      <Filter>AI</Filter>
+    </ClCompile>
+    <ClCompile Include="AudioManager.cpp">
+      <Filter>Audio</Filter>
+    </ClCompile>
+    <ClCompile Include="AudioTestSuite.cpp">
+      <Filter>Audio</Filter>
+    </ClCompile>
+    <ClCompile Include="AIManager.cpp">
+      <Filter>AI</Filter>
+    </ClCompile>
+    <ClCompile Include="CheckClass.cpp">
+      <Filter>Game Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="ChildrenOfOsi.cpp">
+      <Filter>Input</Filter>
+    </ClCompile>
+    <ClCompile Include="Containers.cpp">
+      <Filter>Memory</Filter>
+    </ClCompile>
+    <ClCompile Include="DummyController.cpp">
+      <Filter>Task Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="Factions.cpp">
+      <Filter>Game Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="Hero.cpp">
+      <Filter>Game Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="Input.cpp">
+      <Filter>Input</Filter>
+    </ClCompile>
+    <ClCompile Include="GameWindow.cpp">
+      <Filter>Rendering</Filter>
+    </ClCompile>
+    <ClCompile Include="LivingObj.cpp">
+      <Filter>Game Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="Manager.cpp">
+      <Filter>Task Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="memManager.cpp">
+      <Filter>Memory</Filter>
+    </ClCompile>
+    <ClCompile Include="MemNode.cpp">
+      <Filter>Memory</Filter>
+    </ClCompile>
+    <ClCompile Include="MemoryHelper.cpp">
+      <Filter>Memory</Filter>
+    </ClCompile>
+    <ClCompile Include="MemoryPool.cpp">
+      <Filter>Memory</Filter>
+    </ClCompile>
+    <ClCompile Include="MemoryTestSuite.cpp">
+      <Filter>Memory</Filter>
+    </ClCompile>
+    <ClCompile Include="Movement.cpp">
+      <Filter>Physics</Filter>
+    </ClCompile>
+    <ClCompile Include="PhysicsManager.cpp">
+      <Filter>Physics</Filter>
+    </ClCompile>
+    <ClCompile Include="PhysicsTestSuite.cpp">
+      <Filter>Physics</Filter>
+    </ClCompile>
+    <ClCompile Include="MessageLog.cpp">
+      <Filter>Task Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="NPC.cpp">
+      <Filter>Game Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="Projectile.cpp">
+      <Filter>Game Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="Player.cpp">
+      <Filter>Game Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="RenderHelper.cpp">
+      <Filter>Rendering</Filter>
+    </ClCompile>
+    <ClCompile Include="RenderManager.cpp">
+      <Filter>Rendering</Filter>
+    </ClCompile>
+    <ClCompile Include="QuadTree.cpp">
+      <Filter>Physics</Filter>
+    </ClCompile>
+    <ClCompile Include="Soldier.cpp">
+      <Filter>Game Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="SplSoldier.cpp">
+      <Filter>Game Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="Sprite.cpp">
+      <Filter>Game Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="Task.cpp">
+      <Filter>Task Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="TaskBuffer.cpp">
+      <Filter>Task Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="TaskBufferTestSuite.cpp">
+      <Filter>Task Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="TestManager.cpp">
+      <Filter>Task Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="Texture.cpp">
+      <Filter>Rendering</Filter>
+    </ClCompile>
+    <ClCompile Include="Vector2f.cpp">
+      <Filter>Physics</Filter>
+    </ClCompile>
+    <ClCompile Include="WorldObj.cpp">
+      <Filter>Game Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="SoundSystem.cpp">
+      <Filter>Audio</Filter>
+    </ClCompile>
+    <ClCompile Include="Main.cpp">
+      <Filter>Misc</Filter>
+    </ClCompile>
+    <ClCompile Include="stdafx.cpp">
+      <Filter>Misc</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="AudioManager.h" />
-    <ClInclude Include="AudioTestSuite.h" />
-    <ClInclude Include="CheckClass.h" />
-    <ClInclude Include="ChildrenOfOsi.h" />
-    <ClInclude Include="common.h" />
-    <ClInclude Include="Containers.h" />
-    <ClInclude Include="DummyController.h" />
-    <ClInclude Include="Factions.h" />
-    <ClInclude Include="GameWindow.h" />
-    <ClInclude Include="Hero.h" />
-    <ClInclude Include="Input.h" />
-    <ClInclude Include="LivingObj.h" />
-    <ClInclude Include="Manager.h" />
-    <ClInclude Include="memManager.h" />
-    <ClInclude Include="MemNode.h" />
-    <ClInclude Include="MemoryHelper.h" />
-    <ClInclude Include="MemoryTestSuite.h" />
-    <ClInclude Include="MessageLog.h" />
-    <ClInclude Include="Movement.h" />
-    <ClInclude Include="NPC.h" />
-    <ClInclude Include="PhysicsManager.h" />
-    <ClInclude Include="Player.h" />
-    <ClInclude Include="MemoryPool.h" />
-    <ClInclude Include="Projectile.h" />
-    <ClInclude Include="QuadTree.h" />
-    <ClInclude Include="Rectangle.h" />
-    <ClInclude Include="RenderHelper.h" />
-    <ClInclude Include="RenderManager.h" />
-    <ClInclude Include="resource.h" />
-    <ClInclude Include="Soldier.h" />
-    <ClInclude Include="SoundSystem.h" />
-    <ClInclude Include="SplSoldier.h" />
-    <ClInclude Include="Sprite.h" />
-    <ClInclude Include="stdafx.h" />
-    <ClInclude Include="targetver.h" />
-    <ClInclude Include="Task.h" />
-    <ClInclude Include="TaskBuffer.h" />
-    <ClInclude Include="TestManager.h" />
-    <ClInclude Include="Texture.h" />
-    <ClInclude Include="Vector2f.h" />
-    <ClInclude Include="WorldObj.h" />
-    <ClInclude Include="AIManager.h" />
-    <ClInclude Include="TaskBufferTestSuite.h" />
-    <ClInclude Include="PhysicsTestSuite.h" />
-    <ClInclude Include="AIHelper.h" />
+    <ClInclude Include="AIHelper.h">
+      <Filter>AI</Filter>
+    </ClInclude>
+    <ClInclude Include="AudioManager.h">
+      <Filter>Audio</Filter>
+    </ClInclude>
+    <ClInclude Include="AIManager.h">
+      <Filter>AI</Filter>
+    </ClInclude>
+    <ClInclude Include="AudioTestSuite.h">
+      <Filter>Audio</Filter>
+    </ClInclude>
+    <ClInclude Include="CheckClass.h">
+      <Filter>Game Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="ChildrenOfOsi.h">
+      <Filter>Input</Filter>
+    </ClInclude>
+    <ClInclude Include="Containers.h">
+      <Filter>Memory</Filter>
+    </ClInclude>
+    <ClInclude Include="DummyController.h">
+      <Filter>Task Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="Factions.h">
+      <Filter>Game Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="Hero.h">
+      <Filter>Game Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="Input.h">
+      <Filter>Input</Filter>
+    </ClInclude>
+    <ClInclude Include="GameWindow.h">
+      <Filter>Rendering</Filter>
+    </ClInclude>
+    <ClInclude Include="LivingObj.h">
+      <Filter>Game Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="Manager.h">
+      <Filter>Task Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="memManager.h">
+      <Filter>Memory</Filter>
+    </ClInclude>
+    <ClInclude Include="MemNode.h">
+      <Filter>Memory</Filter>
+    </ClInclude>
+    <ClInclude Include="MemoryHelper.h">
+      <Filter>Memory</Filter>
+    </ClInclude>
+    <ClInclude Include="MemoryPool.h">
+      <Filter>Memory</Filter>
+    </ClInclude>
+    <ClInclude Include="MemoryTestSuite.h">
+      <Filter>Memory</Filter>
+    </ClInclude>
+    <ClInclude Include="Movement.h">
+      <Filter>Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="PhysicsManager.h">
+      <Filter>Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="PhysicsTestSuite.h">
+      <Filter>Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="MessageLog.h">
+      <Filter>Task Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="NPC.h">
+      <Filter>Game Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="Player.h">
+      <Filter>Game Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="Projectile.h">
+      <Filter>Game Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="RenderHelper.h">
+      <Filter>Rendering</Filter>
+    </ClInclude>
+    <ClInclude Include="RenderManager.h">
+      <Filter>Rendering</Filter>
+    </ClInclude>
+    <ClInclude Include="Rectangle.h">
+      <Filter>Game Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="QuadTree.h">
+      <Filter>Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="Soldier.h">
+      <Filter>Game Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="SplSoldier.h">
+      <Filter>Game Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="Sprite.h">
+      <Filter>Game Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="Task.h">
+      <Filter>Task Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="targetver.h">
+      <Filter>Task Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="TaskBuffer.h">
+      <Filter>Task Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="TaskBufferTestSuite.h">
+      <Filter>Task Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="TestManager.h">
+      <Filter>Task Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="Texture.h">
+      <Filter>Rendering</Filter>
+    </ClInclude>
+    <ClInclude Include="Vector2f.h">
+      <Filter>Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="WorldObj.h">
+      <Filter>Game Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="SoundSystem.h">
+      <Filter>Audio</Filter>
+    </ClInclude>
+    <ClInclude Include="common.h">
+      <Filter>Misc</Filter>
+    </ClInclude>
+    <ClInclude Include="resource.h">
+      <Filter>Misc</Filter>
+    </ClInclude>
+    <ClInclude Include="stdafx.h">
+      <Filter>Misc</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <None Include="ClassDiagram.cd" />
+    <Text Include="audio_test.txt">
+      <Filter>Audio</Filter>
+    </Text>
+    <Text Include="memory_test.txt">
+      <Filter>Memory</Filter>
+    </Text>
+    <Text Include="physics_test.txt">
+      <Filter>Physics</Filter>
+    </Text>
+    <Text Include="message_log.txt">
+      <Filter>Task Manager</Filter>
+    </Text>
+    <Text Include="render_test.txt">
+      <Filter>Rendering</Filter>
+    </Text>
+    <Text Include="task_buffer_test.txt">
+      <Filter>Task Manager</Filter>
+    </Text>
+    <Text Include="ReadMe.txt">
+      <Filter>Misc</Filter>
+    </Text>
   </ItemGroup>
   <ItemGroup>
-    <Text Include="audio_test.txt" />
-    <Text Include="memory_test.txt" />
-    <Text Include="message_log.txt" />
-    <Text Include="physics_test.txt" />
-    <Text Include="ReadMe.txt" />
-    <Text Include="render_test.txt" />
-    <Text Include="task_buffer_test.txt" />
+    <Filter Include="Task Manager">
+      <UniqueIdentifier>{b652d4c4-522f-4787-bcb8-6a409450dac1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Rendering">
+      <UniqueIdentifier>{8fd12ca3-31b7-4d21-b496-de0df489926d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Audio">
+      <UniqueIdentifier>{fcf2a215-44df-4ef2-bc75-00ae5ccc57c5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Physics">
+      <UniqueIdentifier>{6177734e-99ee-46b7-a873-608cea35423d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="AI">
+      <UniqueIdentifier>{adc2442d-8789-417a-927f-db119f95b9d0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Input">
+      <UniqueIdentifier>{83be8f18-3888-4c5f-9021-06757847841a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Memory">
+      <UniqueIdentifier>{342983fa-60ae-4af6-bce3-268f856afd96}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game Objects">
+      <UniqueIdentifier>{c8f5e7fe-4d48-45a6-a537-ec013cb87555}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Misc">
+      <UniqueIdentifier>{de6df43b-54b6-4728-b585-06d2c1d1050f}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ClassDiagram.cd">
+      <Filter>Game Objects</Filter>
+    </None>
   </ItemGroup>
 </Project>
