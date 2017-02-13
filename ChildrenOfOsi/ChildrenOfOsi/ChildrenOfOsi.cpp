@@ -53,32 +53,32 @@ void ChildrenOfOsi::draw_frame(WorldObj * player)
 }
 
 ///*
-void ChildrenOfOsi::add_hero(float x, float y, bool col) {
-	createTaskWithParams("Add_Hero", "MODIFY_POOL", x, y, col);
+void ChildrenOfOsi::add_hero(std::string key, float x, float y, bool col) {
+	createTaskWithParams("Add_Hero", "MODIFY_POOL", key, x, y, col);
 }
 
-void ChildrenOfOsi::add_soldier(float x, float y, bool col) {
-	createTaskWithParams("Add_Soldier", "MODIFY_POOL", x, y, col);
+void ChildrenOfOsi::add_soldier(std::string key, float x, float y, bool col) {
+	createTaskWithParams("Add_Soldier", "MODIFY_POOL", key, x, y, col);
 }
 
-void ChildrenOfOsi::add_spl_soldier(float x, float y, bool col) {
-	createTaskWithParams("Add_Spl_Soldier", "MODIFY_POOL", x, y, col);
+void ChildrenOfOsi::add_spl_soldier(std::string key, float x, float y, bool col) {
+	createTaskWithParams("Add_Spl_Soldier", "MODIFY_POOL", key, x, y, col);
 }
 
-void ChildrenOfOsi::add_livingObj(float x, float y, bool col) {
-	createTaskWithParams("Add_LivingObj", "MODIFY_POOL", x, y, col);
+void ChildrenOfOsi::add_livingObj(std::string key, float x, float y, bool col) {
+	createTaskWithParams("Add_LivingObj", "MODIFY_POOL", key, x, y, col);
 }
 
-void ChildrenOfOsi::add_worldObj(float x, float y, bool col) {
-	createTaskWithParams("Add_WorldObj", "MODIFY_POOL",x, y, col);
+void ChildrenOfOsi::add_worldObj(std::string key, float x, float y, bool col) {
+	createTaskWithParams("Add_WorldObj", "MODIFY_POOL", key, x, y, col);
 }
 
-void ChildrenOfOsi::add_projectile(float x, float y, bool col, int d) {
-	createTaskWithParams("Add_Projectile", "MODIFY_POOL", x, y, col); //, d); Dmg might have to be defined separately
+void ChildrenOfOsi::add_projectile(std::string key, float x, float y, bool col, int d) {
+	createTaskWithParams("Add_Projectile", "MODIFY_POOL", key, x, y, col); //, d); Dmg might have to be defined separately
 }
 
-void ChildrenOfOsi::add_npc(float x,float y, bool col) {
-	createTaskWithParams("Add_NPC", "MODIFY_POOL", x, y, col);
+void ChildrenOfOsi::add_npc(std::string key, float x,float y, bool col) {
+	createTaskWithParams("Add_NPC", "MODIFY_POOL", key, x, y, col);
 }
 
 //*/
@@ -103,11 +103,11 @@ void ChildrenOfOsi::createTask(std::string task_name, std::string type, WorldObj
 	mLog->logMessage(new_task);
 }
 
-void ChildrenOfOsi::createTaskWithParams(std::string task_name, std::string type, float x, float y, bool col)
+void ChildrenOfOsi::createTaskWithParams(std::string task_name, std::string type, std::string key, float x, float y, bool col)
 {
 	//maybe just pass in the string craeated
 	std::string task_status = "CREATED";
-	Task* new_task = new Task(task_name, task_status, type, x, y, col);
+	Task* new_task = new Task(task_name, task_status, type, key, x, y, col);
 	tBuffer->push(new_task);
 	mLog->logMessage(new_task);
 }

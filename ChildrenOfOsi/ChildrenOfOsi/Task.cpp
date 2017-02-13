@@ -30,7 +30,7 @@ Task::Task(std::string _name, std::string _status, std::string _type, WorldObj *
 	LOG("Task Object W/WOBJ Constructed");
 }
 
-Task::Task(std::string _name, std::string _status, std::string _type, float x, float y, bool col)
+Task::Task(std::string _name, std::string _status, std::string _type, std::string _key, float x, float y, bool col)
 {
 	name = _name;
 	type = _type;
@@ -40,6 +40,7 @@ Task::Task(std::string _name, std::string _status, std::string _type, float x, f
 
 	status = _status;
 
+	key = _key;
 	arg1 = x;
 	arg2 = y;
 	arg3 = col;
@@ -48,7 +49,7 @@ Task::Task(std::string _name, std::string _status, std::string _type, float x, f
 	LOG("Task Object W/WOBJ&PARAM Constructed");
 }
 
-Task::Task(std::string _name, std::string _status, std::string _type, float x, float y, bool col, int d)
+Task::Task(std::string _name, std::string _status, std::string _type, std::string _key, float x, float y, bool col, int d)
 {
 	name = _name;
 	type = _type;
@@ -58,6 +59,7 @@ Task::Task(std::string _name, std::string _status, std::string _type, float x, f
 
 	status = _status;
 
+	key = _key;
 	arg1 = x;
 	arg2 = y;
 	arg3 = col;
@@ -66,7 +68,7 @@ Task::Task(std::string _name, std::string _status, std::string _type, float x, f
 	LOG("Task Object W/WOBJ&MOREPARAM Constructed");
 }
 
-Task::Task(std::string _name, std::string _status, std::string _type, WorldObj* _objToUpdate, float x, float y, bool col) {
+Task::Task(std::string _name, std::string _status, std::string _type, WorldObj* _objToUpdate, std::string _key, float x, float y, bool col) {
 	name = _name;
 	type = _type;
 	//[buffer,manager,class]
@@ -76,6 +78,7 @@ Task::Task(std::string _name, std::string _status, std::string _type, WorldObj* 
 	status = _status;
 	objToUpdate = _objToUpdate;
 
+	key = _key;
 	arg1 = x;
 	arg2 = y;
 	arg3 = col;
@@ -94,6 +97,7 @@ Task::Task(std::string _name, std::string _status, std::string _type, WorldObj* 
 	status = _status;
 	objToUpdate = _objToUpdate;
 
+	key = _key;
 	arg1 = x;
 	arg2 = y;
 	arg3 = col;
@@ -121,6 +125,7 @@ Task* Task::clone_task()
 									status,
 									type,
 									objToUpdate,
+									key,
 		                            arg1,
 		                            arg2,
 		                            arg3);

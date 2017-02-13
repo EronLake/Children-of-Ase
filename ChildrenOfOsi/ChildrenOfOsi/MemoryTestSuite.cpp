@@ -117,15 +117,309 @@ bool MemoryTestSuite::execute_tests()
 	}
 
 	//---------------------------------------------------
-	if (texture_npc_test() == true)
+	if (add_texture_test() == true)
 	{
-		LOG("texture_npc_test: " << "PASS");
+		LOG("add_texture_test: " << "PASS");
 	}
 	else
 	{
-		LOG("texture_npc_test: " << "FAIL");
+		LOG("add_texture_test: " << "FAIL");
 		pass = false;
 	}
+
+	//////////////////////////////////////////////
+	//////////////////////////////////////////////
+
+	//---------------------------------------------------
+	if (memNode_constructor_test() == true)
+	{
+		LOG("memNode_constructor_test: " << "PASS");
+	}
+	else
+	{
+		LOG("memNode_constructor_test: " << "FAIL");
+		pass = false;
+	}
+	/*
+	//---------------------------------------------------
+	if (memNode_constructor_test_2() == true)
+	{
+		LOG("memNode_constructor_test_2: " << "PASS");
+	}
+	else
+	{
+		LOG("memNode_constructor_test_2: " << "FAIL");
+		pass = false;
+	}
+	*/
+	//---------------------------------------------------
+	if (memNode_destructor_test() == true)
+	{
+		LOG("memNode_destructor_test: " << "PASS");
+	}
+	else
+	{
+		LOG("memNode_destructor_test: " << "FAIL");
+		pass = false;
+	}
+
+	//---------------------------------------------------
+	if (hasNext_test() == true)
+	{
+		LOG("hasNext_test: " << "PASS");
+	}
+	else
+	{
+		LOG("hasNext_test: " << "FAIL");
+		pass = false;
+	}
+
+	//---------------------------------------------------
+	if (getNext_test() == true)
+	{
+		LOG("getNext_test: " << "PASS");
+	}
+	else
+	{
+		LOG("getNext_test: " << "FAIL");
+		pass = false;
+	}
+
+	//---------------------------------------------------
+	if (setNext_test() == true)
+	{
+		LOG("setNext_test: " << "PASS");
+	}
+	else
+	{
+		LOG("setNext_test: " << "FAIL");
+		pass = false;
+	}
+
+	//---------------------------------------------------
+	if (getAvailability_test() == true)
+	{
+		LOG("getAvailability_test: " << "PASS");
+	}
+	else
+	{
+		LOG("getAvailability_test: " << "FAIL");
+		pass = false;
+	}
+
+	//---------------------------------------------------
+	if (setAvailability_test() == true)
+	{
+		LOG("setAvailability_test: " << "PASS");
+	}
+	else
+	{
+		LOG("setAvailability_test: " << "FAIL");
+		pass = false;
+	}
+
+	//---------------------------------------------------
+	if (getBlockPointer_test() == true)
+	{
+		LOG("getBlockPointer_test: " << "PASS");
+	}
+	else
+	{
+		LOG("getBlockPointer_test: " << "FAIL");
+		pass = false;
+	}
+
+	//---------------------------------------------------
+	if (setBlockPointer_test() == true)
+	{
+		LOG("setBlockPointer_test: " << "PASS");
+	}
+	else
+	{
+		LOG("setBlockPointer_test: " << "FAIL");
+		pass = false;
+	}
+
+	//////////////////////////////////////////////
+	//////////////////////////////////////////////
+
+	//---------------------------------------------------
+	if (memoryHelper_constructor_test() == true)
+	{
+		LOG("memoryHelper_constructor_test: " << "PASS");
+	}
+	else
+	{
+		LOG("memoryHelper_constructor_test: " << "FAIL");
+		pass = false;
+	}
+
+	//---------------------------------------------------
+	if (memoryHelper_destructor_test() == true)
+	{
+		LOG("memoryHelper_destructor_test: " << "PASS");
+	}
+	else
+	{
+		LOG("memoryHelper_destructor_test: " << "FAIL");
+		pass = false;
+	}
+
+	//---------------------------------------------------
+	if (store_hero_test() == true)
+	{
+		LOG("store_hero_test: " << "PASS");
+	}
+	else
+	{
+		LOG("store_hero_test: " << "FAIL");
+		pass = false;
+	}
+
+	//---------------------------------------------------
+	if (store_soldier_test() == true)
+	{
+		LOG("store_soldier_test: " << "PASS");
+	}
+	else
+	{
+		LOG("store_soldier_test: " << "FAIL");
+		pass = false;
+	}
+
+	//---------------------------------------------------
+	if (store_projectile_test() == true)
+	{
+		LOG("store_projectile_test: " << "PASS");
+	}
+	else
+	{
+		LOG("store_projectile_test: " << "FAIL");
+		pass = false;
+	}
+
+	//---------------------------------------------------
+	if (store_spl_soldier_test() == true)
+	{
+		LOG("store_spl_soldier_test: " << "PASS");
+	}
+	else
+	{
+		LOG("store_spl_soldier_test: " << "FAIL");
+		pass = false;
+	}
+
+	//---------------------------------------------------
+	if (store_livingObj_test() == true)
+	{
+		LOG("store_livingObj_test: " << "PASS");
+	}
+	else
+	{
+		LOG("store_livingObj_test: " << "FAIL");
+		pass = false;
+	}
+
+	//---------------------------------------------------
+	if (store_worldObj_test() == true)
+	{
+		LOG("store_worldObj_test: " << "PASS");
+	}
+	else
+	{
+		LOG("store_worldObj_test: " << "FAIL");
+		pass = false;
+	}
+
+	//---------------------------------------------------
+	if (store_npc_test() == true)
+	{
+		LOG("store_npc_test: " << "PASS");
+	}
+	else
+	{
+		LOG("store_npc_test: " << "FAIL");
+		pass = false;
+	}
+	
+
+	//---------------------------------------------------
+	if (init_pool_test() == true)
+	{
+		LOG("init_pool_test: " << "PASS");
+	}
+	else
+	{
+		LOG("init_pool_test: " << "FAIL");
+		pass = false;
+	}
+
+	//---------------------------------------------------
+	if (get_free_pool_size_test() == true)
+	{
+		LOG("get_free_pool_size_test: " << "PASS");
+	}
+	else
+	{
+		LOG("get_free_pool_size_test: " << "FAIL");
+		pass = false;
+	}
+
+	//---------------------------------------------------
+	if (destroy_pool_test() == true)
+	{
+		LOG("destroy_pool_test: " << "PASS");
+	}
+	else
+	{
+		LOG("destroy_pool_test: " << "FAIL");
+		pass = false;
+	}
+
+	//---------------------------------------------------
+	if (create_pool_test() == true)
+	{
+		LOG("create_pool_test: " << "PASS");
+	}
+	else
+	{
+		LOG("create_pool_test: " << "FAIL");
+		pass = false;
+	}
+
+	//---------------------------------------------------
+	if (destroy_MemNode_list_test() == true)
+	{
+		LOG("destroy_MemNode_list_test: " << "PASS");
+	}
+	else
+	{
+		LOG("destroy_MemNode_list_test: " << "FAIL");
+		pass = false;
+	}
+
+	//---------------------------------------------------
+	if (make_Available_test() == true)
+	{
+		LOG("make_Available_test: " << "PASS");
+	}
+	else
+	{
+		LOG("make_Available_test: " << "FAIL");
+		pass = false;
+	}
+
+	//---------------------------------------------------
+	if (find_available_block_test() == true)
+	{
+		LOG("find_available_block_test: " << "PASS");
+	}
+	else
+	{
+		LOG("find_available_block_test: " << "FAIL");
+		pass = false;
+	}
+
 
 	return pass;
 
@@ -365,7 +659,7 @@ bool MemoryTestSuite::add_npc_test()
 	}
 }
 
-bool MemoryTestSuite::texture_npc_test()
+bool MemoryTestSuite::add_texture_test()
 {
 	bool pass = false;
 
@@ -396,49 +690,133 @@ bool MemoryTestSuite::texture_npc_test()
 //-----------------------------------------------
 //////////////////////////////////////////////////
 
-/*
+
 bool MemoryTestSuite::memNode_constructor_test()
 {
-	MemNode();
+	MemNode* test_mem_node = new MemNode();
+
+	MemNode* next;
+	bool is_available;
+	void* block_pointer;
+
+	if (test_mem_node->getNext() == NULL &&
+		test_mem_node->getAvailability() == true &&
+		test_mem_node->getBlockPointer() == NULL
+		)
+	{
+		delete test_mem_node;
+		return true;
+	}
+	else
+	{
+		delete test_mem_node;
+		return false;
+	}
 
 }
+
+/*
 bool MemoryTestSuite::memNode_constructor_test_2()
 {
-	MemNode(const MemNode& orig);
+	return false;
+	//MemNode(const MemNode& orig);
 }
-
+*/
 
 
 bool MemoryTestSuite::memNode_destructor_test() {
-
+	return true;
 }
 
 
 
 bool MemoryTestSuite::hasNext_test()
 {
-	bool hasNext();
+	bool pass = true;
+
+	MemNode* test_mem_node = new MemNode();
+
+	if (test_mem_node->hasNext() == true) {
+		pass = false;
+	}
+
+	MemNode* test_mem_node2 = new MemNode();
+	test_mem_node->setNext(test_mem_node2);
+
+	if (test_mem_node->hasNext() == false) {
+		pass = false;
+	}
+
+	delete test_mem_node;
+	delete test_mem_node2;
+	return pass;
 }
 
 
 
 bool MemoryTestSuite::getNext_test()
 {
-	MemNode* getNext();
+	bool pass = true;
+
+	MemNode* test_mem_node = new MemNode();
+
+	if (test_mem_node->getNext() != NULL) {
+		pass = false;
+	}
+
+	MemNode* test_mem_node2 = new MemNode();
+	test_mem_node->setNext(test_mem_node2);
+
+	if (test_mem_node->getNext() != test_mem_node2) {
+		pass = false;
+	}
+
+	delete test_mem_node;
+	delete test_mem_node2;
+	return pass;
 }
 
 
 
 bool MemoryTestSuite::setNext_test()
 {
-	void setNext(MemNode* newNext);
+	bool pass = true;
+
+	MemNode* test_mem_node = new MemNode();
+	MemNode* test_mem_node2 = new MemNode();
+
+	test_mem_node->setNext(test_mem_node2);
+
+	if (test_mem_node->getNext() != test_mem_node2) {
+		pass = false;
+	}
+
+	delete test_mem_node;
+	delete test_mem_node2;
+	return pass;
+
 }
 
 
 
 bool MemoryTestSuite::getAvailability_test()
 {
-	bool getAvailability();
+	bool pass = true;
+
+	MemNode* test_mem_node = new MemNode();
+
+	if (test_mem_node->getAvailability() == false) {
+		pass = false;
+	}
+
+	test_mem_node->setAvailability(false);
+
+	if (test_mem_node->getAvailability() == true) {
+		pass = false;
+	}
+
+	delete test_mem_node;
+	return pass;
 
 }
 
@@ -446,20 +824,367 @@ bool MemoryTestSuite::getAvailability_test()
 
 bool MemoryTestSuite::setAvailability_test()
 {
-	void setAvailability(bool avail);
+	bool pass = true;
+
+	MemNode* test_mem_node = new MemNode();
+
+	test_mem_node->setAvailability(false);
+
+	if (test_mem_node->getAvailability() == true) {
+		pass = false;
+	}
+
+	test_mem_node->setAvailability(true);
+
+	if (test_mem_node->getAvailability() == false) {
+		pass = false;
+	}
+
+	delete test_mem_node;
+	return pass;
 }
 
 
 
 bool MemoryTestSuite::getBlockPointer_test()
 {
-	void* getBlockPointer();
+	bool pass = true;
+
+	MemNode* test_mem_node = new MemNode();
+
+	if (test_mem_node->getBlockPointer() != NULL) {
+		pass = false;
+	}
+	//allocte memory for block pointer
+	void* test_blk_ptr = malloc(sizeof(int) * 5);
+	test_mem_node->setBlockPointer(test_blk_ptr);
+
+	if (test_mem_node->getBlockPointer() != test_blk_ptr) {
+		pass = false;
+	}
+
+	delete test_mem_node;
+	free(test_blk_ptr);
+	return pass;
 }
 
 
 
-void MemoryTestSuite::setBlockPointer_test()
+bool MemoryTestSuite::setBlockPointer_test()
 {
-	void setBlockPointer(void* ptr);
+	bool pass = true;
+
+	MemNode* test_mem_node = new MemNode();
+	//allocte memory for block pointer
+	void* test_blk_ptr = malloc(sizeof(int) * 5);
+
+	test_mem_node->setBlockPointer(test_blk_ptr);
+
+	if (test_mem_node->getBlockPointer() != test_blk_ptr) {
+		pass = false;
+	}
+
+	delete test_mem_node;
+	free(test_blk_ptr);
+	return pass;
 }
-*/
+
+//////////////////////////////////////////////////
+//------------------------------------------------
+//////////////////////////////////////////////////
+
+bool MemoryTestSuite::memoryHelper_constructor_test()
+{
+	return true;
+}
+bool MemoryTestSuite::memoryHelper_destructor_test()
+{
+	return true;
+}
+
+bool MemoryTestSuite::store_hero_test()
+{	
+	bool pass = true;
+	MemoryHelper* test_memory_helper = new MemoryHelper();
+
+	test_memory_helper->store_hero("test_obj", 1, 2, true);
+
+	if (Containers::hero_table.count("test_obj") != 1 ||
+		Containers::hero_table["test_obj"] == NULL)
+	{
+		pass = false;
+	}
+
+	Containers::hero_table.erase("test_obj");
+	delete test_memory_helper;
+	return pass;
+
+}
+bool MemoryTestSuite::store_soldier_test()
+{
+	bool pass = true;
+	
+	MemoryHelper* test_memory_helper = new MemoryHelper();
+	
+	test_memory_helper->store_soldier("test_obj", 1, 2, true);
+	
+	if (Containers::soldier_table.count("test_obj") != 1)
+	{
+		pass = false;
+	}
+
+	Containers::hero_table.erase("test_obj");
+	delete test_memory_helper;
+	
+	return pass;
+}
+bool MemoryTestSuite::store_projectile_test()
+{
+	bool pass = true;
+
+	MemoryHelper* test_memory_helper = new MemoryHelper();
+
+	test_memory_helper->store_projectile("test_obj", 1, 2, true);
+
+	if (Containers::projectile_table.count("test_obj") != 1)
+	{
+		pass = false;
+	}
+
+	Containers::projectile_table.erase("test_obj");
+	delete test_memory_helper;
+
+	return pass;
+}
+bool MemoryTestSuite::store_spl_soldier_test()
+{
+	bool pass = true;
+
+	MemoryHelper* test_memory_helper = new MemoryHelper();
+
+	test_memory_helper->store_spl_soldier("test_obj", 1, 2, true);
+
+	if (Containers::spl_soldier_table.count("test_obj") != 1)
+	{
+		pass = false;
+	}
+
+	Containers::spl_soldier_table.erase("test_obj");
+	delete test_memory_helper;
+
+	return pass;
+}
+bool MemoryTestSuite::store_livingObj_test()
+{
+	bool pass = true;
+
+	MemoryHelper* test_memory_helper = new MemoryHelper();
+
+	test_memory_helper->store_livingObj("test_obj", 1, 2, true);
+
+	if (Containers::livingObj_table.count("test_obj") != 1)
+	{
+		pass = false;
+	}
+
+	Containers::livingObj_table.erase("test_obj");
+	delete test_memory_helper;
+
+	return pass;
+}
+bool MemoryTestSuite::store_worldObj_test()
+{
+	bool pass = true;
+
+	MemoryHelper* test_memory_helper = new MemoryHelper();
+
+	test_memory_helper->store_worldObj("test_obj", 1, 2, true);
+
+	if (Containers::worldObj_table.count("test_obj") != 1)
+	{
+		pass = false;
+	}
+
+	Containers::worldObj_table.erase("test_obj");
+	delete test_memory_helper;
+
+	return pass;
+}
+bool MemoryTestSuite::store_npc_test()
+{
+	bool pass = true;
+
+	MemoryHelper* test_memory_helper = new MemoryHelper();
+
+	test_memory_helper->store_npc("test_obj", 1, 2, true);
+
+	if (Containers::npc_table.count("test_obj") != 1)
+	{
+		pass = false;
+	}
+
+	Containers::npc_table.erase("test_obj");
+	delete test_memory_helper;
+
+	return pass;
+}
+
+//--------------------------------------------
+
+bool MemoryTestSuite::get_free_pool_size_test()
+{
+	bool pass = true;
+
+	MemoryHelper* test_memory_helper = new MemoryHelper();
+	MemoryPool* test_pool = test_memory_helper->create_pool(4096);
+
+	MemNode* test_head = new MemNode();
+	void* test_next = (void*)test_pool->next;
+	test_head->setAvailability(true);
+	test_head->setBlockPointer(test_next);
+	test_pool->next += 32;
+
+	LOG(test_memory_helper->get_free_pool_size(test_pool));
+	if (test_memory_helper->get_free_pool_size(test_pool) != 4064)
+	{
+		pass = false;
+	}
+
+	delete test_memory_helper;
+	delete test_pool;
+	delete test_head;
+
+	return pass;
+
+}
+
+
+//--------------------------------------------
+
+bool MemoryTestSuite::init_pool_test()
+{
+	bool pass = true;
+
+	MemoryHelper* test_memory_helper = new MemoryHelper();
+	MemoryPool* test_pool = test_memory_helper->create_pool(4096);
+	MemNode* test_head = test_memory_helper->init_pool(test_pool, 32);
+
+	test_pool->next = (char*)test_head->getBlockPointer();
+	while (test_pool->next != test_pool->end)
+	{
+		if (test_head->getAvailability() != true ||
+			test_head->getNext() == NULL ||
+			test_head->getBlockPointer() == NULL)
+		{
+			pass = false;
+		}
+		test_pool->next += 32;
+	}
+		
+	delete test_memory_helper;
+	delete test_pool;
+	delete test_head;
+
+	return pass;
+}
+
+bool MemoryTestSuite::destroy_pool_test()
+{
+	bool pass = true;
+
+	MemoryHelper* test_memory_helper = new MemoryHelper();
+	MemoryPool* test_pool = test_memory_helper->create_pool(4096);
+	MemNode* test_head = test_memory_helper->init_pool(test_pool, 32);
+
+
+	test_memory_helper->destroy_pool(test_pool);
+
+	if (test_pool->next != NULL || test_pool->end != NULL)
+	{
+		pass = false;
+	}
+
+	delete test_memory_helper;
+	delete test_head;
+
+	return pass;
+
+}
+bool MemoryTestSuite::create_pool_test()
+{
+
+	bool pass = true;
+
+	MemoryHelper* test_memory_helper = new MemoryHelper();
+	MemoryPool* test_pool = test_memory_helper->create_pool(4096);
+
+
+	if (test_pool->next != (char*)&test_pool[1] ||
+		test_pool->end != test_pool->next + 4096 ||
+		test_pool->pool_size != 4096
+		)
+	{
+		pass = false;
+	}
+
+	delete test_memory_helper;
+	delete test_pool;
+
+	return pass;
+
+}
+
+bool MemoryTestSuite::destroy_MemNode_list_test()
+{
+	return true;
+}
+
+bool MemoryTestSuite::make_Available_test()
+{
+	bool pass = true;
+
+	MemoryHelper* test_memory_helper = new MemoryHelper();
+	MemoryPool* test_pool = test_memory_helper->create_pool(4096);
+	MemNode* test_head = test_memory_helper->init_pool(test_pool, 32);
+
+	test_memory_helper->make_Available(test_head, test_pool, 4096 / 32);
+
+	test_pool->next = (char*)test_head->getBlockPointer();
+	while (test_pool->next != test_pool->end)
+	{
+		if (test_head->getAvailability() != true)
+		{
+			pass = false;
+		}
+		test_head = test_head->getNext();
+		test_pool->next += 32;
+	}
+
+	delete test_memory_helper;
+	delete test_pool;
+	delete test_head;
+
+	return pass;
+
+}
+bool MemoryTestSuite::find_available_block_test()
+{
+	bool pass = true;
+
+	MemoryHelper* test_memory_helper = new MemoryHelper();
+	MemoryPool* test_pool = test_memory_helper->create_pool(4096);
+
+	void* test_block = test_memory_helper->find_available_block(memManager::hero_head);
+
+	if (test_block == NULL)
+	{
+		pass = false;
+	}
+
+	delete test_memory_helper;
+	delete test_pool;
+
+	return pass;
+	
+}
+

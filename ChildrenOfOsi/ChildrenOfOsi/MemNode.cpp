@@ -7,13 +7,13 @@ MemNode::MemNode() {
 	LOG("MemNode Object Constructed");
 }
 
-
+/*
 MemNode::MemNode(const MemNode& orig) {
 	next = orig.next;
 	is_available = orig.is_available;
 	LOG("MemNode Object Constructed");
 }
-
+*/
 MemNode::~MemNode() {
 	LOG("MemNode Object Destroyed");
 }

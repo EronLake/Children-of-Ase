@@ -12,6 +12,7 @@ public:
 	std::string name;
 	std::string status;
 	std::string type;
+	std::string key;
 	float arg1;
 	float arg2;
 	bool arg3;
@@ -20,10 +21,10 @@ public:
 
 	Task(std::string name, std::string status, std::string _type);
 	Task(std::string name, std::string status, std::string _type, WorldObj* _objToUpdate);
-	Task(std::string _name, std::string _status, std::string _type, float x, float y, bool col);
-	Task(std::string _name, std::string _status, std::string _type, float x, float y, bool col, int d);
-	Task(std::string name, std::string status, std::string _type, WorldObj* _objToUpdate, float x, float y, bool col);
-	//Task(std::string name, std::string status, std::string _type, WorldObj* _objToUpdate, float x, float y, bool col, int d);
+	Task(std::string _name, std::string _status, std::string _type, std::string key, float x, float y, bool col);
+	Task(std::string _name, std::string _status, std::string _type, std::string key, float x, float y, bool col, int d);
+	Task(std::string name, std::string status, std::string _type, WorldObj* _objToUpdate, std::string key, float x, float y, bool col);
+	//Task(std::string name, std::string status, std::string _type, WorldObj* _objToUpdate, std::string key,float x, float y, bool col, int d);
 	~Task();
 
 	void updateStatus(std::string new_status);

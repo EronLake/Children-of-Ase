@@ -3,18 +3,20 @@
 #include "MemNode.h"
 #include "MemoryPool.h"
 #include "memManager.h"
+#include "Containers.h"
 
 class MemoryHelper
 {
 public:
 
-	int store_hero(float x, float y, bool col);
-	int store_soldier(float x, float y, bool col);
-	int store_projectile(float x, float y, bool col);
-	int store_spl_soldier(float x, float y, bool col);
-	int store_livingObj(float x, float y, bool col);
-	int store_worldObj(float x, float y, bool col);
-	int store_npc(float x, float y, bool col);
+	int store_hero(std::string key, float x, float y, bool col);
+	int store_soldier(std::string key, float x, float y, bool col);
+	int store_projectile(std::string key, float x, float y, bool col);
+	int store_spl_soldier(std::string key, float x, float y, bool col);
+	int store_livingObj(std::string key, float x, float y, bool col);
+	int store_worldObj(std::string key, float x, float y, bool col);
+	int store_npc(std::string key, float x, float y, bool col);
+	//int store_texture(std::string key, float x, float y, bool col);
 
 	MemoryHelper::MemoryHelper();
 	MemoryHelper::~MemoryHelper();

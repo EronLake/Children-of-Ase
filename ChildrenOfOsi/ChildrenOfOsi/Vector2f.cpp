@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "Vector2f.h"
+#include "common.h"
 
 
 

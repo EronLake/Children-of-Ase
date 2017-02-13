@@ -362,11 +362,17 @@ void ERONS_LOOP() {
 	}
 	*/
 
+	MessageLog* mLog = new MessageLog();
+	TaskBuffer* tBuffer = new TaskBuffer(mLog);
+
 	MemoryTestSuite* mem_tester = new MemoryTestSuite();
+	memManager* test_memManager = new memManager(mLog, tBuffer);
 
 	
 	std::cout << mem_tester->execute_tests() << std::endl;
-	std::cout << "made it " << std::endl;
+	std::cout << "true: " << true << std::endl;
+	std::cout << "false: " << false << std::endl;
+	delete test_memManager;
 	system("PAUSE");
 }
  /*

@@ -6,13 +6,13 @@ class MemNode
 
 private:
 	MemNode* next;
-	bool is_available;
-	void* block_pointer;
+	bool is_available = true ;
+	void* block_pointer = NULL;
 
 public:
 
 	MemNode();
-	MemNode(const MemNode& orig);
+	//MemNode(const MemNode& orig);
 	virtual ~MemNode();
 	bool hasNext();
 	MemNode* getNext();

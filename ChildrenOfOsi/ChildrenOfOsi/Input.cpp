@@ -49,7 +49,7 @@ void Input::InputCheck()
 		gameplay_functions->move_right(player);
 	}
 	if (R) {
-		gameplay_functions->add_soldier(9.6f,100.3f,true);
+		gameplay_functions->add_soldier("soldier",9.6f,100.3f,true);
 	}
 	if (T) { //Failure check on fake task name
 		//gameplay_functions->move_out(player);

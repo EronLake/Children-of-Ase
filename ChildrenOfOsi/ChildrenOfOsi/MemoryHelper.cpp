@@ -14,13 +14,16 @@ MemoryHelper::~MemoryHelper()
 }
 
 
-int MemoryHelper::store_hero(float x, float y, bool col) {
+int MemoryHelper::store_hero(std::string key, float x, float y, bool col) {
 	Hero* h = new(find_available_block(memManager::hero_head)) Hero(x, y, col);
+	Containers::add_hero(key,h);
 	return 0;
 }
 
-int MemoryHelper::store_soldier(float x, float y, bool col) {
+int MemoryHelper::store_soldier(std::string key, float x, float y, bool col) {
 	Soldier* s = new(find_available_block(memManager::soldier_head)) Soldier(x, y, col);
+	Containers::add_soldier(key, s);
+
 	std::cout << "soldier created" << std::endl;
 	std::cout << "soldier Address: " << s << std::endl;
 	std::cout << "soldier xpos: " << s->getX() << std::endl;
@@ -29,30 +32,43 @@ int MemoryHelper::store_soldier(float x, float y, bool col) {
 	return 0;
 }
 
-int MemoryHelper::store_spl_soldier(float x, float y, bool col) {
+int MemoryHelper::store_spl_soldier(std::string key, float x, float y, bool col) {
 	SplSoldier* spl = new(find_available_block(memManager::spl_soldier_head)) SplSoldier(x, y, col);
+	Containers::add_spl_soldier(key, spl);
 	return 0;
 }
 
-int MemoryHelper::store_livingObj(float x, float y, bool col) {
+int MemoryHelper::store_livingObj(std::string key, float x, float y, bool col) {
 	LivingObj* lobj = new(find_available_block(memManager::livingObj_head)) LivingObj(x, y, col);
+	Containers::add_livingObj(key, lobj);
 	return 0;
 }
 
-int MemoryHelper::store_worldObj(float x, float y, bool col) {
+int MemoryHelper::store_worldObj(std::string key, float x, float y, bool col) {
 	WorldObj* wobj = new(find_available_block(memManager::worldObj_head)) WorldObj(x, y, col);
+	Containers::add_worldObj(key, wobj);
 	return 0;
 }
 
-int MemoryHelper::store_projectile(float x, float y, bool col) {
+int MemoryHelper::store_projectile(std::string key, float x, float y, bool col) {
 	Projectile* p = new(find_available_block(memManager::projectile_head)) Projectile(x, y, col);
+	Containers::add_projectile(key, p);
 	return 0;
 }
 
-int MemoryHelper::store_npc(float x, float y, bool col) {
+int MemoryHelper::store_npc(std::string key, float x, float y, bool col) {
 	NPC* npc = new(find_available_block(memManager::npc_head)) NPC(x, y, col);
+	Containers::add_npc(key, npc);
 	return 0;
 }
+
+/*
+int MemoryHelper::store_texture(std::string key, float x, float y, bool col) {
+	Texture* t = new(find_available_block(memManager::texture_head)) Texture(x, y, col);
+	Containers::add_texture(key, t);
+	return 0;
+}
+*/
 
 /////////////////////////////////////////
 /*Stuff that was originally in Main*/
@@ -96,7 +112,7 @@ void MemoryHelper::destroy_MemNode_list(MemNode* head_ptr) {
 		tmp->setBlockPointer(NULL);
 		free(tmp);
 	}
-	std::cout << "Memory Nodes Destroyed" << std::endl;
+	LOG("Memory Nodes Destroyed");
 
 }
 
@@ -113,7 +129,7 @@ MemoryPool* MemoryHelper::create_pool(size_t sizeInBytes) {
 	p->next = (char*)&p[1];
 	p->end = p->next + sizeInBytes;
 	p->pool_size = sizeInBytes;
-	std::cout << "pool created" << std::endl;
+	LOG("pool created");
 	return p;
 }
 
@@ -121,12 +137,14 @@ void MemoryHelper::destroy_pool(MemoryPool* p) {
 	free(p);
 	p->next = NULL;
 	p->end = NULL;
-	std::cout << "pool destroyed" << std::endl;
+	LOG("pool destroyed");
 }
+
 
 size_t MemoryHelper::get_free_pool_size(MemoryPool* p) {
 	return p->end - p->next;
 }
+
 
 /*Return Value: Returns a pointer to the head of a MemNode linked list.
 Arguments: Takes a pointer to the memory pool to initialize and the size in
@@ -161,7 +179,7 @@ MemNode* MemoryHelper::init_pool(MemoryPool *p, size_t bsize) {
 		newNode->setBlockPointer(mem);
 		p->next += bsize;
 	}
-	std::cout << "pool initialized" << std::endl;
+	LOG("pool initialized");
 	return head;
 }
 

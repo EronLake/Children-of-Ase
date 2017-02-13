@@ -25,19 +25,19 @@ public:
 	void draw_frame(WorldObj* player);
 
 	//functions for creating objects in memory
-	void add_hero(float x, float y, bool col);
-    void add_soldier(float x, float y, bool col);
-	void add_projectile(float x, float y, bool col, int d);
-	void add_spl_soldier(float x, float y, bool col);
-	void add_livingObj(float x, float y, bool col);
-	void add_worldObj(float x, float y, bool col);
-	void add_npc(float x, float y, bool col);
+	void add_hero(std::string key, float x, float y, bool col);
+    void add_soldier(std::string key, float x, float y, bool col);
+	void add_projectile(std::string key, float x, float y, bool col, int d);
+	void add_spl_soldier(std::string key, float x, float y, bool col);
+	void add_livingObj(std::string key, float x, float y, bool col);
+	void add_worldObj(std::string key, float x, float y, bool col);
+	void add_npc(std::string key, float x, float y, bool col);
 
 	//functions for audio
 	void play_sound();
 
 	void createTask(std::string task_name, std::string type, WorldObj * objToUpdate = NULL);
-	void ChildrenOfOsi::createTaskWithParams(std::string task_name, std::string type, float x, float y, bool col);
+	void ChildrenOfOsi::createTaskWithParams(std::string task_name, std::string type, std::string key, float x, float y, bool col);
 	//void ChildrenOfOsi::createTaskForProjectile(std::string task_name, std::string type, float x, float y, bool col, int d);
 };
 

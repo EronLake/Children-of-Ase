@@ -85,6 +85,7 @@ void memManager::register_manager()
 void memManager::execute_task(Task* current_task)
 {
 	int result;
+	std::string key = current_task->key;
 	float xpos = current_task->arg1;
 	float ypos = current_task->arg2;
 	bool coll = current_task->arg3;
@@ -96,7 +97,7 @@ void memManager::execute_task(Task* current_task)
 		LOG("Error: Task '" << current_task->name << "' does not exist.");
 	}
 	else {
-		result = (memHelper->*(it->second))(xpos,ypos,coll);
+		result = (memHelper->*(it->second))(key,xpos,ypos,coll);
 	}
 
 	if (result == 0) {
