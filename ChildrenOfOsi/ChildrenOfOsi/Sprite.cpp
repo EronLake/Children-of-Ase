@@ -21,7 +21,7 @@ void Sprite::setTexture(Texture *t)
 void Sprite::animate()
 {
   ++this->tempTime;
-  if(this->tempTime == 30) {
+  if(this->tempTime == 5) {
     if(this->index < this->tex->getFrames()-1) {
       ++this->index;
       this->start = tex->getFrameWidth() * index;

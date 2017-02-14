@@ -171,7 +171,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 
 	playerTexture->load();
 	objTexture->load();
-	playerTexture->setFrames(1);
+	playerTexture->setFrames(26);
 	objTexture->setFrames(1);
 	Alex->sprite.setTexture(playerTexture);
 	Alex->offsetBody(0, 50, 50, 50, 50);
