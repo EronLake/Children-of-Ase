@@ -52,8 +52,20 @@ int RenderHelper::draw_frame(WorldObj * obj)
 	return 0;
 }
 
-int RenderHelper::sprite_change(WorldObj * obj)
+int RenderHelper::sprite_up(WorldObj * obj)
 {
+	return 0;
+}
+
+int RenderHelper::sprite_down(WorldObj* obj) {
+	return 0;
+}
+
+int RenderHelper::sprite_left(WorldObj* obj) {
+	return 0;
+}
+
+int RenderHelper::sprite_right(WorldObj* obj) {
 	return 0;
 }
 

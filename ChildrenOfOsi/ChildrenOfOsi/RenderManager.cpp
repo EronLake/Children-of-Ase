@@ -13,7 +13,10 @@ RenderManager::RenderManager(MessageLog * _mLog, TaskBuffer * _tBuffer, QuadTree
 	LOG("RenderingManager W/QT Object Constructed");
 	renderHelper = new RenderHelper(_renderQuadTree);
 	task_map["Draw_Frame"] = &RenderHelper::draw_frame;
-	task_map["Sprite_Change"] = &RenderHelper::sprite_change;
+	task_map["Move_Up"] = &RenderHelper::sprite_up;
+	task_map["Move_Down"] = &RenderHelper::sprite_down;
+	task_map["Move_Left"] = &RenderHelper::sprite_left;
+	task_map["Move_Right"] = &RenderHelper::sprite_right;
 	task_map["Sprite_Update"] = &RenderHelper::sprite_update;
 
 }
