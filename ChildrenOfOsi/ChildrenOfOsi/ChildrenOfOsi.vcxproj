@@ -257,6 +257,10 @@
   <ItemGroup>
     <None Include="ClassDiagram.cd" />
   </ItemGroup>
+  <ItemGroup>
+    <Image Include="..\..\..\..\..\Pictures\Osi\ShangoForwardSprite.png" />
+    <Image Include="..\..\..\..\..\Pictures\Osi\YemojasHouse.png" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

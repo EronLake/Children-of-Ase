@@ -56,6 +56,7 @@ void ALESSIO_TEST();
 void ALEX_LOOP(QuadTree* _Quadtree);
 void ANDREWS_LOOP(QuadTree* _QuadTree);
 void FPS(bool b);
+void GAMEPLAY_LOOP(QuadTree* _Quadtree);
 
 //bool collide(WorldObj* recA, WorldObj* recB);
 //void Darion_Ian_Test();
@@ -99,7 +100,8 @@ int main() {
 
 	                                   
 		//testQuadTree();
-		ALEX_LOOP(collideTree);                                
+		//ALEX_LOOP(collideTree);        
+		GAMEPLAY_LOOP(collideTree);
 
 
 	return 0;
@@ -157,6 +159,116 @@ int main() {
 //	bool yCollide = coordOverlap(recA->getY(), recB->getY(), recB->getY() + recB->getHeight()) || coordOverlap(recB->getY(), recA->getY(), recA->getY() + recA->getHeight());
 //	return xCollide && yCollide;
 //}
+
+void GAMEPLAY_LOOP(QuadTree* _QuadTree)
+{
+
+	WorldObj* Alex = new WorldObj(Vector2f(1000.0, 600.0), 100.0, 100.0);	//init player
+	Texture* playerTexture = new Texture();
+	Texture* objTexture = new Texture();
+	objTexture->setFile("YemojasHouse.png");
+	playerTexture->setFile("ShangoForwardSprite.png");
+
+	playerTexture->load();
+	objTexture->load();
+	playerTexture->setFrames(1);
+	objTexture->setFrames(1);
+	Alex->sprite.setTexture(playerTexture);
+	Alex->offsetBody(0, 50, 50, 50, 50);
+	vector<WorldObj*> recVec;
+
+	for (int i = 1; i < 5; i++) {
+		WorldObj* objs = new WorldObj(Vector2f(100 * i, 100 * i), 200.0, 200.0);
+		objs->sprite.setTexture(objTexture);
+		//objs->offsetBody(0, 50, 50, 50, 50);
+		//objs->offsetBody(0, 70, 70, 70, 70);
+		recVec.push_back(objs);
+	}
+	WorldObj* staticRec = new WorldObj(Vector2f(1800, 1350), 100.0, 100.0);
+	staticRec->sprite.setTexture(playerTexture);
+	recVec.push_back(staticRec);
+
+	//recVec.push_back(myRec1); recVec.push_back(myRec2);
+
+	//pauses the program for viewing
+	//system("PAUSE");
+
+	//demonstration of a meory leak
+	//while (true) {
+	//	void* a = malloc(64);
+	//	delete a;
+	//}
+
+	//psuedo Gameloop
+	MessageLog* mLog = new MessageLog();
+	TaskBuffer* tBuffer = new TaskBuffer(mLog);
+
+	ChildrenOfOsi* gameplay_functions = new ChildrenOfOsi(mLog, tBuffer);
+	Input* iController = new Input(gameplay_functions, Alex);
+	//create Managers and add to Manager table
+
+	DummyController* DumM = new DummyController(mLog, tBuffer);
+	PhysicsManager* PhysM = new PhysicsManager(mLog, tBuffer, _QuadTree);
+	RenderManager* RenM = new RenderManager(mLog, tBuffer, _QuadTree);
+	memManager* memM = new memManager(mLog, tBuffer);
+	TestManager* TestM = new TestManager(mLog, tBuffer);
+
+	//the order defines what order the managers the tasks will be sent to
+	DumM->register_manager();
+	PhysM->register_manager();
+	memM->register_manager();
+	RenM->register_manager();
+	TestM->register_manager();
+
+
+	//std::unordered_map<std::string, Manager*> manager_table;
+
+	//manager_table["DumM"] = DumM;
+
+	//Alex->WorldObj::setWidth(100);
+	//Alex->WorldObj::setHeight(100);
+	//Alex->setX(10);
+	//Alex->setY(10);
+
+	//osi::GameWindow::init();
+	LOG("PAST WINDOW INIT ***********************");
+	clock_t start_tick, current_ticks, delta_ticks;
+	clock_t fps = 0;
+	int fs = 60;
+	while (osi::GameWindow::isRunning()) {
+		start_tick = clock();
+		_QuadTree->clear();
+		for (int i = 0; i < recVec.size(); i++) {
+			_QuadTree->insert(recVec[i]);	//insert all obj into tree
+		}
+		//clock 
+		iController->InputCheck();
+		//Alex->WorldObj::drawObj(0,0);
+		//for (int i = 0; i < recVec.size(); i++) {
+		//	recVec[i]->drawObj(0,0);
+		//}
+		//Alex->WorldObj::animateObj();
+		////Alex->WorldObj::shiftX(.5);
+		//osi::GameWindow::refresh();
+		//draw
+		gameplay_functions->draw_frame(Alex);
+		//run task buffer
+		//iController->InputCheck();
+		tBuffer->run();
+		//	cout << tBuffer->queue_buffer.size() << endl;
+		//tBuffer->empty();
+
+
+		if ((1000 / fs) > (clock() - start_tick)) { //delta_ticks) {www
+			Sleep((1000 / fs) - (clock() - start_tick));
+		}
+		delta_ticks = clock() - start_tick; //the time, in ms, that took to render the scene
+		if (delta_ticks > 0)
+			fps = CLOCKS_PER_SEC / delta_ticks;
+		cout << "FPS: " << fps << endl;
+	}
+	osi::GameWindow::terminate();
+}
 
 void ALESSIO_TEST() {
 	srand(time(NULL));
@@ -234,7 +346,7 @@ void ALEX_LOOP(QuadTree* _QuadTree) {
 	WorldObj* Alex = new WorldObj(Vector2f(1000.0, 600.0), 100.0, 100.0);	//init player
 	Texture* playerTexture = new Texture();
 	Texture* objTexture = new Texture();
-	objTexture->setFile("bluewood.jpg");
+	objTexture->setFile("YemojasHouse.jpg");
 	playerTexture->setFile("phi.png");
 
 	playerTexture->load();
@@ -247,7 +359,7 @@ void ALEX_LOOP(QuadTree* _QuadTree) {
 
 	for (int i = 1; i < 5; i++) {
 		WorldObj* objs = new WorldObj(Vector2f(100 * i , 100 * i ), 200.0, 200.0);
-		objs->sprite.setTexture(playerTexture);
+		objs->sprite.setTexture(objTexture);
 		//objs->offsetBody(0, 50, 50, 50, 50);
 		//objs->offsetBody(0, 70, 70, 70, 70);
 		recVec.push_back(objs);
@@ -284,7 +396,7 @@ void ALEX_LOOP(QuadTree* _QuadTree) {
 	//the order defines what order the managers the tasks will be sent to
 	DumM->register_manager();
 	PhysM->register_manager();
-	//memM->register_manager();
+	memM->register_manager();
 	RenM->register_manager();
 	TestM->register_manager();
 

@@ -332,4 +332,8 @@
       <Filter>Game Objects</Filter>
     </None>
   </ItemGroup>
+  <ItemGroup>
+    <Image Include="..\..\..\..\..\Pictures\Osi\YemojasHouse.png" />
+    <Image Include="..\..\..\..\..\Pictures\Osi\ShangoForwardSprite.png" />
+  </ItemGroup>
 </Project>
