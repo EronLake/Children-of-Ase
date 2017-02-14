@@ -1,6 +1,7 @@
 #pragma once
 #include "QuadTree.h"
 #include "GameWindow.h"
+
 class RenderHelper
 {
 public:
@@ -14,5 +15,11 @@ public:
 private:
 	WorldObj* camera;
 	std::vector<WorldObj*> objVec;
+
+	//hold size of camera and map. first is width, second is height
+	Vector2f cameraSize;
+	Vector2f mapSize;
+	Vector2f CamOffset;
+	
 };
 

@@ -32,7 +32,7 @@ class Texture
   int getWidth() const { return this->width; }
   int getHeight() const { return this->height; }
   int getFrames() const { return this->frames; }
-  float getFrameWidth() const { return this->frameWidth; }
+  int getFrameWidth() const { return this->frameWidth; }
   unsigned char * getImage() const { return this->image; }
   bool getAnimated() const { return this->animated; }
 
@@ -40,7 +40,7 @@ class Texture
   void setWidth(int w) { this->width = w; }
   void setHeight(int h) { this->height = h; }
   void setFrames(int f) { this->frameWidth = this->width / (this->frames = f); }
-  void setFrameWidth(float fw) { this->frameWidth = fw; }
+  void setFrameWidth(int fw) { this->frameWidth = fw; }
   void setAnimated(bool a) { this->animated = a; }
 
   void load();

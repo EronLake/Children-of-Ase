@@ -16,6 +16,7 @@ Movement::~Movement() {
 
 int Movement::move_up(WorldObj* obj) {
 	//get list to check collision with
+	objVec.clear();
 	objVec = tree->retrieve(objVec, obj);
 	obj->shiftY(-moveSpeed);
 	for (int i = 0; i < objVec.size(); i++) {
@@ -30,6 +31,7 @@ int Movement::move_up(WorldObj* obj) {
 }
 int Movement::move_down(WorldObj* obj) {
 	//get list to check collision with
+	objVec.clear();
 	objVec = tree->retrieve(objVec, obj);
 	obj->shiftY(moveSpeed);
 	for (int i = 0; i < objVec.size(); i++) {
@@ -44,6 +46,7 @@ int Movement::move_down(WorldObj* obj) {
 }
 int Movement::move_left(WorldObj* obj) {
 	//get list to check collision with
+	objVec.clear();
 	objVec = tree->retrieve(objVec, obj);
 	obj->shiftX(-moveSpeed);
 	for (int i = 0; i < objVec.size(); i++) {
@@ -58,6 +61,7 @@ int Movement::move_left(WorldObj* obj) {
 }
 int Movement::move_right(WorldObj* obj) {
 	//get list to check collision with
+	objVec.clear();
 	objVec = tree->retrieve(objVec, obj);
 	obj->shiftX(moveSpeed);
 	for (int i = 0; i < objVec.size(); i++) {

@@ -463,7 +463,7 @@ bool MemoryTestSuite::add_hero_test()
 {
 	bool pass = false;
 
-	std::string hero_name = "_test_hero";
+	std::string hero_name = "test_hero";
 	Hero* hero_value = new Hero();
 
 	//called add_hero()
@@ -907,7 +907,8 @@ bool MemoryTestSuite::store_hero_test()
 	bool pass = true;
 	MemoryHelper* test_memory_helper = new MemoryHelper();
 
-	test_memory_helper->store_hero("test_obj", 1, 2, true);
+	std::cout << "------------------------"<< test_memory_helper->store_hero("test_obj", 1, 2, true);
+
 
 	if (Containers::hero_table.count("test_obj") != 1 ||
 		Containers::hero_table["test_obj"] == NULL)

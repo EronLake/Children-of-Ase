@@ -27,6 +27,8 @@
 #include "RenderManager.h"
 #include <conio.h>
 #include "CheckClass.h"
+#include "TaskBufferTestSuite.h"
+#include <Windows.h>
 
 //#include "Pool.h"
 
@@ -35,10 +37,11 @@
 #include "memManager.h"
 
 #include "MemoryTestSuite.h"
-
-#define _CRTDBG_MAP_ALLOC
+#include "AudioTestSuite.h"
 
 #include "TestManager.h"
+#include "PhysicsTestSuite.h"
+#include <ctime> 
 
 
 using namespace std;
@@ -51,16 +54,19 @@ using namespace std;
 void ERONS_LOOP();
 void ALESSIO_TEST();
 void ALEX_LOOP(QuadTree* _Quadtree);
+void ANDREWS_LOOP(QuadTree* _QuadTree);
+void FPS(bool b);
 
-
+//bool collide(WorldObj* recA, WorldObj* recB);
 //void Darion_Ian_Test();
 
 void ANDREWS_TEST();
+void PHYSICS_TEST();
 
 
 int main() {
-		LOG("Hello world!");
-
+		//LOG("Hello world!");
+		//ERONS_LOOP();
 		/************************************************************************************************SET-UP*******************************************************/
 		WorldObj* screen = new WorldObj(Vector2f(0.0, 0.0), 960U, 540U);	//init screen
 
@@ -81,20 +87,17 @@ int main() {
 		/*Darion Ian Test*/
 		//Darion_Ian_Test();
 /* ERON */
-		ERONS_LOOP();
+		//ERONS_LOOP();
 		/*ALESSIO*/
 		//ALESSIO_TEST();
 
 		/* ALEX */
 		//ALEX_LOOP(collideTree);
+		//ANDREWS_LOOP(collideTree);
 
 		
 
-
-		_CrtSetReportMode(_CRT_ERROR, _CRTDBG_MODE_DEBUG);
-		_CrtDumpMemoryLeaks();
 	                                   
-
 		//testQuadTree();
 		ALEX_LOOP(collideTree);                                
 
@@ -212,8 +215,8 @@ void ALESSIO_TEST() {
 	//osi::GameWindow::init();
 	float z = 0;
 	while (osi::GameWindow::isRunning()) {
-		person2.WorldObj::drawObj();
-		person.WorldObj::drawObj();
+		/*person2.WorldObj::drawObj();
+		person.WorldObj::drawObj();*/
 		person.WorldObj::shiftX(1);
 		person.WorldObj::animateObj();
 		//osi::GameWindow::refresh();
@@ -228,11 +231,16 @@ void ALESSIO_TEST() {
 void ALEX_LOOP(QuadTree* _QuadTree) {
 	//LOG("Hello world!");
 
-	WorldObj* Alex = new WorldObj(Vector2f(500.0, 100.0), 100.0, 100.0);	//init player
+	WorldObj* Alex = new WorldObj(Vector2f(1000.0, 600.0), 100.0, 100.0);	//init player
 	Texture* playerTexture = new Texture();
+	Texture* objTexture = new Texture();
+	objTexture->setFile("bluewood.jpg");
 	playerTexture->setFile("phi.png");
+
 	playerTexture->load();
+	objTexture->load();
 	playerTexture->setFrames(1);
+	objTexture->setFrames(1);
 	Alex->sprite.setTexture(playerTexture);
 	Alex->offsetBody(0, 50, 50, 50, 50);
 	vector<WorldObj*> recVec;	
@@ -240,9 +248,14 @@ void ALEX_LOOP(QuadTree* _QuadTree) {
 	for (int i = 1; i < 5; i++) {
 		WorldObj* objs = new WorldObj(Vector2f(100 * i , 100 * i ), 200.0, 200.0);
 		objs->sprite.setTexture(playerTexture);
-		objs->offsetBody(0, 50, 50, 50, 50);
+		//objs->offsetBody(0, 50, 50, 50, 50);
+		//objs->offsetBody(0, 70, 70, 70, 70);
 		recVec.push_back(objs);
 	}
+	WorldObj* staticRec = new WorldObj(Vector2f(1800, 1350), 100.0, 100.0);
+	staticRec->sprite.setTexture(playerTexture);
+	recVec.push_back(staticRec);
+
 	//recVec.push_back(myRec1); recVec.push_back(myRec2);
 
 	//pauses the program for viewing
@@ -265,7 +278,7 @@ void ALEX_LOOP(QuadTree* _QuadTree) {
 	DummyController* DumM = new DummyController(mLog, tBuffer);
 	PhysicsManager* PhysM = new PhysicsManager(mLog, tBuffer, _QuadTree);
 	RenderManager* RenM = new RenderManager(mLog, tBuffer, _QuadTree);
-	//memManager* memM = new memManager(mLog, tBuffer);
+	memManager* memM = new memManager(mLog, tBuffer);
 	TestManager* TestM = new TestManager(mLog, tBuffer);
 
 	//the order defines what order the managers the tasks will be sent to
@@ -280,39 +293,55 @@ void ALEX_LOOP(QuadTree* _QuadTree) {
 
 	//manager_table["DumM"] = DumM;
 
-/*	Alex->WorldObj::setWidth(100);
-	Alex->WorldObj::setHeight(100);
-	Alex->setX(100);
-	Alex->setY(100);*/
+	//Alex->WorldObj::setWidth(100);
+	//Alex->WorldObj::setHeight(100);
+	//Alex->setX(10);
+	//Alex->setY(10);
 
 	//osi::GameWindow::init();
 	LOG("PAST WINDOW INIT ***********************");
+	clock_t start_tick, current_ticks, delta_ticks;
+	clock_t fps = 0;
+	int fs = 60;
 	while (osi::GameWindow::isRunning()) {
+		start_tick = clock();
 		_QuadTree->clear();
 		for (int i = 0; i < recVec.size(); i++) {
 			_QuadTree->insert(recVec[i]);	//insert all obj into tree
 		}
 		//clock 
 		iController->InputCheck();
-		Alex->WorldObj::drawObj();
-		for (int i = 0; i < recVec.size(); i++) {
-			recVec[i]->drawObj();
-		}
+		//Alex->WorldObj::drawObj(0,0);
+		//for (int i = 0; i < recVec.size(); i++) {
+		//	recVec[i]->drawObj(0,0);
+		//}
 		//Alex->WorldObj::animateObj();
-		osi::GameWindow::refresh();
+		////Alex->WorldObj::shiftX(.5);
+		//osi::GameWindow::refresh();
 		//draw
-		//gameplay_functions->draw_frame(Alex);
+		gameplay_functions->draw_frame(Alex);
 		//run task buffer
+		//iController->InputCheck();
 		tBuffer->run();
-
+	//	cout << tBuffer->queue_buffer.size() << endl;
+		//tBuffer->empty();
+	
 		
+		if ((1000/fs) > (clock() - start_tick)){ //delta_ticks) {www
+			Sleep((1000/fs) - (clock() - start_tick));
+		}
+		delta_ticks = clock() - start_tick; //the time, in ms, that took to render the scene
+		if (delta_ticks > 0)
+		fps = CLOCKS_PER_SEC / delta_ticks;
+		cout << "FPS: "<<fps << endl;
 	}
 	osi::GameWindow::terminate();
 }
 
+
 void ERONS_LOOP() {
 	/////////////////////////////////////////////////////////////////
-	//ERON'S LOOP NO TOUCHY    **** Justin touched it, oops ****
+	//ERON'S LOOP NO TOUCHY    **** Justin touched it, oops ****  ****Ian did too. Sue me****
 	/////////////////////////////////////////////////////////////////
 	LOG("Hello world!");
 
@@ -324,7 +353,7 @@ void ERONS_LOOP() {
 	//	void* a = malloc(64);
 	//	delete a;
 	//}
-	/*
+	
 	//psuedo Gameloop
 	MessageLog* mLog = new MessageLog();
 	TaskBuffer* tBuffer = new TaskBuffer(mLog);
@@ -346,7 +375,15 @@ void ERONS_LOOP() {
 	AudM->register_manager();
 	TestM->register_manager();
 	
+	AudioTestSuite* aTest = new AudioTestSuite();
+	bool test = aTest->execute_tests();
+	if (test) LOG("AudioTestSuite: PASSED");
+	else LOG("AudioTestSuite: FAILED");
 
+	TaskBufferTestSuite* TB_Test = new TaskBufferTestSuite(); //Ian Testing
+	bool test_2 = TB_Test->execute_tests();
+	if (test_2) LOG("TaskBufferTestSuite: PASSED");
+	else LOG("TaskBufferTestSuite: FAILED");
 
 	//std::unordered_map<std::string, Manager*> manager_table;
 
@@ -360,8 +397,7 @@ void ERONS_LOOP() {
 		tBuffer->run();
 		//draw
 	}
-	*/
-
+	/*
 	MessageLog* mLog = new MessageLog();
 	TaskBuffer* tBuffer = new TaskBuffer(mLog);
 
@@ -374,6 +410,7 @@ void ERONS_LOOP() {
 	std::cout << "false: " << false << std::endl;
 	delete test_memManager;
 	system("PAUSE");
+	*/
 }
  /*
 void Darion_Ian_Test() {
@@ -423,7 +460,7 @@ void ANDREWS_TEST() {
 	unsigned int time;
 
 	// Initialize our sound system
-	SoundSystemClass soundsystem;
+	SoundSystem soundsystem;
 
 	type = foo::soundType::music;
 	name = "04.wav";
@@ -444,4 +481,120 @@ void ANDREWS_TEST() {
 	cin.get();
 
 	soundsystem.releaseSound(soundSample); // Release the sound
+}
+void ANDREWS_LOOP(QuadTree* _QuadTree) {
+	//LOG("Hello world!");
+
+	WorldObj* Alex = new WorldObj(Vector2f(500.0, 100.0), 100.0, 100.0);	//init player
+	Texture* playerTexture = new Texture();
+	playerTexture->setFile("phi.png");
+	playerTexture->load();
+	playerTexture->setFrames(1);
+	Alex->sprite.setTexture(playerTexture);
+	Alex->offsetBody(0, 50, 50, 50, 50);
+	vector<WorldObj*> recVec;
+
+	for (int i = 1; i < 5; i++) {
+		WorldObj* objs = new WorldObj(Vector2f(100 * i, 100 * i), 200.0, 200.0);
+		objs->sprite.setTexture(playerTexture);
+		objs->offsetBody(0, 50, 50, 50, 50);
+		recVec.push_back(objs);
+	}
+	//recVec.push_back(myRec1); recVec.push_back(myRec2);
+
+	//pauses the program for viewing
+	//system("PAUSE");
+
+	//demonstration of a meory leak
+	//while (true) {
+	//	void* a = malloc(64);
+	//	delete a;
+	//}
+
+	//psuedo Gameloop
+	MessageLog* mLog = new MessageLog();
+	TaskBuffer* tBuffer = new TaskBuffer(mLog);
+
+	ChildrenOfOsi* gameplay_functions = new ChildrenOfOsi(mLog, tBuffer);
+	Input* iController = new Input(gameplay_functions, Alex);
+	//create Managers and add to Manager table
+
+	DummyController* DumM = new DummyController(mLog, tBuffer);
+	PhysicsManager* PhysM = new PhysicsManager(mLog, tBuffer, _QuadTree);
+	RenderManager* RenM = new RenderManager(mLog, tBuffer, _QuadTree);
+	//memManager* memM = new memManager(mLog, tBuffer);
+	TestManager* TestM = new TestManager(mLog, tBuffer);
+	AudioManager* AudM = new AudioManager(mLog, tBuffer);
+
+	//the order defines what order the managers the tasks will be sent to
+	DumM->register_manager();
+	PhysM->register_manager();
+	//memM->register_manager();
+	RenM->register_manager();
+	TestM->register_manager();
+	AudM->register_manager();
+
+	cout << endl;
+	cout << "STARTING PHYSICS TESTS" << endl;
+	PHYSICS_TEST();
+
+	//std::unordered_map<std::string, Manager*> manager_table;
+
+	//manager_table["DumM"] = DumM;
+
+	/*	Alex->WorldObj::setWidth(100);
+	Alex->WorldObj::setHeight(100);
+	Alex->setX(100);
+	Alex->setY(100);*/
+
+	//osi::GameWindow::init();
+	LOG("PAST WINDOW INIT ***********************");
+	while (osi::GameWindow::isRunning()) {
+		_QuadTree->clear();
+		for (int i = 0; i < recVec.size(); i++) {
+			_QuadTree->insert(recVec[i]);	//insert all obj into tree
+		}
+		//clock 
+		iController->InputCheck();
+		//Alex->WorldObj::drawObj();
+		//for (int i = 0; i < recVec.size(); i++) {
+		//	recVec[i]->drawObj();
+		//}
+		//Alex->WorldObj::animateObj();
+		osi::GameWindow::refresh();
+		//draw
+		//gameplay_functions->draw_frame(Alex);
+		//run task buffer
+		tBuffer->run();
+
+
+	}
+	osi::GameWindow::terminate();
+}
+
+void PHYSICS_TEST() {
+	PhysicsTestSuite* test = new PhysicsTestSuite();
+	if (test->test_movement()) {
+		cout << "MOVEMENT TEST SUCCEEDED" << endl;
+	}
+	else {
+		cout << "MOVEMENT TEST FAILED" << endl;
+	}
+
+	if (test->test_collision()) {
+		cout << "COLLISION TEST SUCCEEDED" << endl;
+	}
+	else {
+		cout << "COLLISION TEST FAILED" << endl;
+	}
+}
+
+void FPS(bool b) {
+	if (b) {
+		time_t sec;
+		time(&sec);
+	}
+	time_t now; 
+	time(&now);
+
 }

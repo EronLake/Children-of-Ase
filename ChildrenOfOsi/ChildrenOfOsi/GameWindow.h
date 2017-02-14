@@ -16,6 +16,7 @@
 #include "GLEW\glew.h"
 #include "GLFW/glfw3.h"
 #include "SOIL/SOIL.h"
+
 #include "Sprite.h"
 
 namespace osi
@@ -27,13 +28,16 @@ namespace osi
     static constexpr unsigned int WINDOW_WIDTH_DP = 960U;
     static constexpr unsigned int WINDOW_HEIGHT_DP = 540U;
 
+    static const std::string ASSETS_PATH;
+    static const std::string FONTS_PATH;
+
     static bool init();
     static bool terminate();
     static bool isActive();
     static bool isRunning();
 
     static void drawSprite(float, float, float, float, Sprite t);
-    static void drawSprite(float, float, float, float, int, int, const unsigned char *);
+    static void drawText(float, float, float, float, float, const std::string&);
     static void refresh();
 
     private:
@@ -44,12 +48,12 @@ namespace osi
     static GLFWwindow *window;
     static int windowWidthPx;
     static int windowHeightPx;
-    static vector<GLuint> vertexArrayObjectId;
-    static vector<GLuint> vertexBufferObjectId;
-    static vector<GLuint> elementBufferObjectId;
+    static std::vector<GLuint> vertexArrayObjectId;
+    static std::vector<GLuint> vertexBufferObjectId;
+    static std::vector<GLuint> elementBufferObjectId;
     static GLuint shaderProgramId;
-	static vector<GLuint> textures;
-	static int numObjects;
+    static std::vector<GLuint> textures;
+    static int numObjects;
 
     GameWindow() = delete;
     ~GameWindow() = delete;

@@ -1,24 +1,28 @@
 #include "stdafx.h"
 #include "GameWindow.h"
 
+const std::string osi::GameWindow::ASSETS_PATH = "./Assets/";
+const std::string osi::GameWindow::FONTS_PATH = GameWindow::ASSETS_PATH + "Fonts/";
+
 const std::string osi::GameWindow::STD_VERTEX_SHADER_PATH = "./OpenGL Shaders/StdVertexShader.vert.glsl";
 const std::string osi::GameWindow::STD_FRAGMENT_SHADER_PATH = "./OpenGL Shaders/StdFragmentShader.frag.glsl";
 
 GLFWwindow *osi::GameWindow::window = nullptr;
 int osi::GameWindow::windowWidthPx = -1;
 int osi::GameWindow::windowHeightPx = -1;
-vector<GLuint> osi::GameWindow::vertexArrayObjectId;
-vector<GLuint> osi::GameWindow::vertexBufferObjectId;
-vector<GLuint> osi::GameWindow::elementBufferObjectId;
+std::vector<GLuint> osi::GameWindow::vertexArrayObjectId;
+std::vector<GLuint> osi::GameWindow::vertexBufferObjectId;
+std::vector<GLuint> osi::GameWindow::elementBufferObjectId;
 GLuint osi::GameWindow::shaderProgramId = 0;
-vector<GLuint> osi::GameWindow::textures;
+std::vector<GLuint> osi::GameWindow::textures;
 int osi::GameWindow::numObjects = 0;
 
-/// <summary>Initializes the game's window. This will cause the application
-/// window to become visible to the end user. Only one such window may exist at
-/// a time.</summary>
-/// <remarks>This function will have no effect if a window already exists.</remarks>
-/// <returns>Returns whether a window was opened.</returns>
+/**
+ * Initializes the game's window. This will cause the application window to
+ * become visible to the end user. Only one such window may exist at a time.
+ * 
+ * Returns: Returns whether a window was opened
+ */
 bool osi::GameWindow::init()
 {
   if(GameWindow::isActive())
@@ -31,11 +35,12 @@ bool osi::GameWindow::init()
   return true;
 }
 
-/// <summary>Closes the game window and cleans up GLFW.</summary>
-/// <remarks>
-/// This function will have no effect if there is no game window.
-/// </remarks>
-/// <returns>Returns whether there is a window to be terminated.</returns>
+/**
+ * Closes the game window and cleans up GLFW. This function will have no effect
+ * if there is no game window.
+ * 
+ * Returns: Returns whether a window was indeed terminated
+ */
 bool osi::GameWindow::terminate()
 {
   if(!GameWindow::isActive())
@@ -57,41 +62,49 @@ bool osi::GameWindow::terminate()
   return true;
 }
 
-/// <summary>Returns whether there is a game window currently active.</summary>
-/// <returns>Returns whether a window is currently active.</returns>
+/**
+ * Returns whether there is a game window currently active.
+ * Returns: Returns whether the window pointer is non-null
+ */
 bool osi::GameWindow::isActive()
 {
   return GameWindow::window != nullptr;
 }
 
-/// <summary>Returns whether the GLFW window is still running.</summary>
-/// <returns>Returns whether GLFW is not yet ready to close.</returns>
+/**
+ * Returns whether the GLFW window is still running.
+ * Returns: Returns whether GLFW is not yet ready to close
+ */
 bool osi::GameWindow::isRunning()
 {
   return !glfwWindowShouldClose(osi::GameWindow::window);
 }
 
-/// <summary>Draws the specified image file at the given position and size.</summary>
-/// <param name="x">The horizontal X position of the sprite's top-left corner</param>
-/// <param name="y">The vertical Y position of the sprite's top-left corner</param>
-/// <param name="width">The width of the sprite in device-independent pixels</param>
-/// <param name="height">The height of the sprite in device-independent pixels</param>
-void osi::GameWindow::drawSprite(float x, float y, float width, float height, Sprite t)
+/**
+ * Draws the specified sprite at the given position and size.
+ * 
+ * Param x: The horizontal X position of the sprite's top-left corner
+ * Param y: The vertical Y position of the sprite's top-left corner
+ * Param width: The width of the sprite in device-independent pixels
+ * Param height: The height of the sprite in device-independent pixels
+ * Param sp: The sprite to be drawn
+ */
+void osi::GameWindow::drawSprite(float x, float y, float width, float height, Sprite sp)
 {
 	//std::cout << "x: " << x <<std::endl;
   std::vector<GLfloat> GlCoordTL = GameWindow::dpCoordToGL(x, y);
   std::vector<GLfloat> GlCoordBR = GameWindow::dpCoordToGL(x + width, y + height);
-  float x1 =t.getStart()/t.getTexture().getWidth();
-  float x2 = t.getStop()/ t.getTexture().getWidth();
-  float y1 = t.getTop() / t.getTexture().getHeight();
-  float y2 = t.getBottom() / t.getTexture().getHeight();
+  float x1 = static_cast<float>(sp.getStart()) / static_cast<float>(sp.getTexture().getWidth());
+  float x2 = static_cast<float>(sp.getStop()) / static_cast<float>(sp.getTexture().getWidth());
+  float y1 = static_cast<float>(sp.getTop()) / static_cast<float>(sp.getTexture().getHeight());
+  float y2 = static_cast<float>(sp.getBottom()) / static_cast<float>(sp.getTexture().getHeight());
 
   GLfloat spriteCoords[] = {
     // Vertices                         // Vertex colors    // Texture coordinates
     GlCoordTL[0], GlCoordTL[1], 0.0F,   1.0F, 0.0F, 0.0F,  x1, y1, // Top-left corner
-    GlCoordTL[0], GlCoordBR[1], 0.0F,   1.0F, 0.0F, 0.0F,   x1, y2, // Bottom-left corner
-    GlCoordBR[0], GlCoordBR[1], 0.0F,   1.0F, 0.0F, 0.0F,   x2, y2, // Bottom-right corner
-    GlCoordBR[0], GlCoordTL[1], 0.0F,   1.0F, 0.0F, 0.0F,   x2, y1, // Top-right corner
+    GlCoordTL[0], GlCoordBR[1], 0.0F,   1.0F, 0.0F, 0.0F,  x1, y2, // Bottom-left corner
+    GlCoordBR[0], GlCoordBR[1], 0.0F,   1.0F, 0.0F, 0.0F,  x2, y2, // Bottom-right corner
+    GlCoordBR[0], GlCoordTL[1], 0.0F,   1.0F, 0.0F, 0.0F,  x2, y1, // Top-right corner
   };
   GLuint spriteVertexIndices[] = {
 	  0, 2, 3, // First triangle
@@ -120,7 +133,7 @@ void osi::GameWindow::drawSprite(float x, float y, float width, float height, Sp
 
   glBindVertexArray(0);
   
-  textures.push_back(t.getTexture().getId());
+  textures.push_back(sp.getTexture().getId());
  // //GLuint textureId;
  // textureId.push_back(numObjects);
  // glGenTextures(1, &textureId[numObjects-1]);
@@ -141,19 +154,27 @@ void osi::GameWindow::drawSprite(float x, float y, float width, float height, Sp
  // glBindTexture(GL_TEXTURE_2D, 0);
 }
 
-/// <summary></summary>
-/// <param name="x">The horizontal X position of the sprite's top-left corner</param>
-/// <param name="y">The vertical Y position of the sprite's top-left corner</param>
-/// <param name="displayWidth">The width of the sprite in device-independent pixels</param>
-/// <param name="displayHeight">The height of the sprite in device-independent pixels</param>
-/// <param name="imageWidth">The width of the image used in pixels</param>
-/// <param name="imageHeight">The height of the image used in pixels</param>
-/// <param name="colorData">An array of unsigned bytes of color imformation</param>
-void osi::GameWindow::drawSprite(float x, float y, float displayWidth, float displayHeight, int imageWidth, int imageHeight, const unsigned char *colorData)
+/**
+ * Draw the specified text string to the screen with the given coordinates and area.
+ * 
+ * Param x: The horizontal X coordinate of the text region's top-left corner
+ * Param y: The vertical Y coordinate of the text region's top-right corner
+ * Param fieldWidth: The maximum width, in device-independent pixels, of any
+ * line in the text region
+ * Param fieldHeight: The maximum height, in device-inpedenant pixels, of the
+ * written text; if the string provided would require more space to draw than is
+ * available, then it will be truncated
+ * Param charHeight: The height of each line of text
+ * Param text: The text to be drawn
+ */
+void osi::GameWindow::drawText(float x, float y, float fieldWidth, float fieldHeight, float charHeight, const std::string& text)
 {
 
 }
 
+/**
+ * Refreshes the game window, drawing the next frame.
+ */
 void osi::GameWindow::refresh()
 {
   glfwPollEvents();
@@ -180,16 +201,17 @@ void osi::GameWindow::refresh()
   glfwSwapBuffers(osi::GameWindow::window);
 }
 
-/// <summary>Converts a pair of coordinates from device-independent pixels
-/// to the normalized corrdinates used by OpenGL.</summary>
-/// <remarks>
-/// The coordinates are returned as a vector with the X and Y as its only two
-/// elements. Arguments outside the ranges [0, WINDOW_WIDTH_DP) and
-/// [0, WINDOW_HEIGHT_DP) will be clamped to within OpenGL's range of [-1, 1].
-/// </remarks>
-/// <param name="x">The horizontal X coordinate</param>
-/// <param name="y">The vertical Y coordinate</param>
-/// <returns>Returns a vector, size 2, containing the transformed coordinates.</returns>
+/**
+ * Converts a pair of coordinates from device-independent pixels to the
+ * normalized coordinates used by OpenGL. The coordinates are returned as a
+ * vector with the X and Y as its only two elements. Arguments outside the
+ * ranges [0, WINDOW_WIDTH_DP) and [0, WINDOW_HEIGHT_DP) will be clamped to
+ * within OpenGL's range of [-1, 1].
+ * 
+ * Param x: The horizontal X coordinate
+ * Param y: The vertical Y coordinate
+ * Return: Returns a vector, size 2, containing the transformed coordinates
+ */
 std::vector<GLfloat> osi::GameWindow::dpCoordToGL(float x, float y)
 {
   GLfloat glX;                           
@@ -201,12 +223,11 @@ std::vector<GLfloat> osi::GameWindow::dpCoordToGL(float x, float y)
   return {glX, glY};
 }
 
-/// <summary>Handles the setup of the window itself when initializing.</summary>
-/// <remarks>
-/// The tasks of this function include providing GLFW the necessary window
-/// hints; determining the dimensions at which the window will display; and
-/// setting up GLEW.
-/// </remarks>
+/**
+ * Handles the setup of the window itself when initializing. The tasks of this
+ * function include providing GLFW the necessary window hints; determining the
+ * dimensions at which the window will display; and setting up GLEW.
+ */
 void osi::GameWindow::setupWindow()
 {
   glfwInit();
@@ -233,13 +254,12 @@ void osi::GameWindow::setupWindow()
   glViewport(0, 0, GameWindow::windowWidthPx, GameWindow::windowHeightPx);
 }
 
-/// <summary>Loads, compiles, and links the standard OpenGL shaders as used by
-/// the game window.</summary>
-/// <remarks>
-/// The shaders loaded are determined by the value of the private constants
-/// <code>GameWindow::STD_VERTEX_SHADER_PATH</code> and
-/// <code>GameWindow::STD_FRAGMENT_SHADER_PATH</code>.
-/// </remarks>
+/**
+ * Loads, compiles, and links the standard OpenGL shaders as used by the game
+ * window. The shaders loaded are determined by the value of the private
+ * constants GameWindow::STD_VERTEX_SHADER_PATH and
+ * GameWindow::STD_FRAGMENT_SHADER_PATH.
+ */
 void osi::GameWindow::setupStdShaders()
 {
   std::ifstream fileStream;

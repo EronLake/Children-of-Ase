@@ -157,15 +157,20 @@
     <Text Include="task_buffer_test.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="AIHelper.h" />
+    <ClInclude Include="AIManager.h" />
     <ClInclude Include="AudioManager.h" />
     <ClInclude Include="AudioTestSuite.h" />
     <ClInclude Include="CheckClass.h" />
     <ClInclude Include="ChildrenOfOsi.h" />
     <ClInclude Include="common.h" />
     <ClInclude Include="Containers.h" />
+    <ClInclude Include="DialogueController.h" />
     <ClInclude Include="DummyController.h" />
     <ClInclude Include="Factions.h" />
     <ClInclude Include="GameWindow.h" />
+    <ClInclude Include="PhysicsTestSuite.h" />
+    <ClInclude Include="TaskBufferTestSuite.h" />
     <ClInclude Include="Hero.h" />
     <ClInclude Include="Input.h" />
     <ClInclude Include="LivingObj.h" />
@@ -200,11 +205,14 @@
     <ClInclude Include="WorldObj.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="AIHelper.cpp" />
+    <ClCompile Include="AIManager.cpp" />
     <ClCompile Include="AudioManager.cpp" />
     <ClCompile Include="AudioTestSuite.cpp" />
     <ClCompile Include="CheckClass.cpp" />
     <ClCompile Include="ChildrenOfOsi.cpp" />
     <ClCompile Include="Containers.cpp" />
+    <ClCompile Include="DialogueController.cpp" />
     <ClCompile Include="DummyController.cpp" />
     <ClCompile Include="Factions.cpp" />
     <ClCompile Include="GameWindow.cpp" />
@@ -221,6 +229,7 @@
     <ClCompile Include="Movement.cpp" />
     <ClCompile Include="NPC.cpp" />
     <ClCompile Include="PhysicsManager.cpp" />
+    <ClCompile Include="PhysicsTestSuite.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="MemoryPool.cpp" />
     <ClCompile Include="Projectile.cpp" />
@@ -229,6 +238,7 @@
     <ClCompile Include="RenderManager.cpp" />
     <ClCompile Include="Soldier.cpp" />
     <ClCompile Include="SoundSystem.cpp" />
+    <ClCompile Include="TaskBufferTestSuite.cpp" />
     <ClCompile Include="SplSoldier.cpp" />
     <ClCompile Include="Sprite.cpp" />
     <ClCompile Include="stdafx.cpp">

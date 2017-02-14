@@ -16,6 +16,8 @@ MemoryHelper::~MemoryHelper()
 
 int MemoryHelper::store_hero(std::string key, float x, float y, bool col) {
 	Hero* h = new(find_available_block(memManager::hero_head)) Hero(x, y, col);
+
+	std::cout << h;
 	Containers::add_hero(key,h);
 	return 0;
 }

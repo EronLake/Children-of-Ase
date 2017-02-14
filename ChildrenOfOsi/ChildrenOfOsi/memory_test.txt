@@ -7,3 +7,8 @@
 2/10/2017   -1:27   Memory manager unit test passed!
 2/13/2017   -4:56   Memory manager unit test passed!
 2/13/2017   -4:57   Memory manager unit test passed!
+2/13/2017   3:18   Memory manager unit test failed!
+2/13/2017   3:50   Memory manager unit test failed!
+2/13/2017   3:52   Memory manager unit test failed!
+2/13/2017   3:53   Memory manager unit test failed!
+2/13/2017   4:21   Memory manager unit test passed!
