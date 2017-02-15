@@ -34,7 +34,7 @@ dialogue_point DialogueHelper::choose_conv_pt(dialogue_point)
 
 }
 
-dialogue_point DialogueHelper::choose_reply(dialogue_point point)
+dialogue_point DialogueHelper::choose_reply_pt(dialogue_point point)
 {
 	for (int i = 0; i < possible_reply_pts.size(); i++)
 	{
@@ -46,7 +46,7 @@ dialogue_point DialogueHelper::choose_reply(dialogue_point point)
 	return{ "error phrase_type not found" };
 
 }
-/*
+
 std::vector<dialogue_point> DialogueHelper::get_possible_conv_pts()
 {
 	return possible_conv_pts;
@@ -56,4 +56,3 @@ std::vector<dialogue_point> DialogueHelper::get_possible_reply_pts()
 {
 	return possible_conv_pts;
 }
-*/

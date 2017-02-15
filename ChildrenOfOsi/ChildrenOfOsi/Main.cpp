@@ -43,6 +43,10 @@
 #include "PhysicsTestSuite.h"
 #include <ctime> 
 
+#include "DialogueController.h"
+#include "DialogueHelper.h"
+#include "DialougeTestSuite.h"
+
 
 using namespace std;
 
@@ -88,7 +92,7 @@ int main() {
 		/*Darion Ian Test*/
 		//Darion_Ian_Test();
 /* ERON */
-		//ERONS_LOOP();
+		ERONS_LOOP();
 		/*ALESSIO*/
 		//ALESSIO_TEST();
 
@@ -101,7 +105,7 @@ int main() {
 	                                   
 		//testQuadTree();
 		//ALEX_LOOP(collideTree);        
-		GAMEPLAY_LOOP(collideTree);
+		//GAMEPLAY_LOOP(collideTree);
 
 
 	return 0;
@@ -497,7 +501,7 @@ void ERONS_LOOP() {
 	//	void* a = malloc(64);
 	//	delete a;
 	//}
-	
+	/*
 	//psuedo Gameloop
 	MessageLog* mLog = new MessageLog();
 	TaskBuffer* tBuffer = new TaskBuffer(mLog);
@@ -541,20 +545,20 @@ void ERONS_LOOP() {
 		tBuffer->run();
 		//draw
 	}
-	/*
+	*/
 	MessageLog* mLog = new MessageLog();
 	TaskBuffer* tBuffer = new TaskBuffer(mLog);
 
-	MemoryTestSuite* mem_tester = new MemoryTestSuite();
-	memManager* test_memManager = new memManager(mLog, tBuffer);
+	DialougeTestSuite* dilg_tester = new DialougeTestSuite();
+	//* test_dManager = new memManager(mLog, tBuffer);
 
 	
-	std::cout << mem_tester->execute_tests() << std::endl;
+	std::cout << dilg_tester->execute_tests() << std::endl;
 	std::cout << "true: " << true << std::endl;
 	std::cout << "false: " << false << std::endl;
-	delete test_memManager;
+	delete dilg_tester;
 	system("PAUSE");
-	*/
+	
 }
  /*
 void Darion_Ian_Test() {

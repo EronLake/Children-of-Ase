@@ -2,6 +2,7 @@
 #include "DialougeTestSuite.h"
 
 
+
 DialougeTestSuite::DialougeTestSuite()
 {
 }
@@ -76,7 +77,7 @@ bool DialougeTestSuite::DialogueHelper_destructor_test()
 }
 
 bool DialougeTestSuite::choose_conv_pt_test()
-{/*
+{
 	bool pass = false;
 
 	DialogueHelper* test_helper = new DialogueHelper();
@@ -85,16 +86,30 @@ bool DialougeTestSuite::choose_conv_pt_test()
 
 	//called test_function()
 	std::vector<std::string> test_conv_pt = test_helper->choose_conv_pt(test_dialog_pt);
-	for (auto i = test_helper->c.begin(); i != test_conv_pt.end(); i++) {
-		if(i-> )
+	for (int i = 0; i < test_helper->get_possible_conv_pts().size(); i++) {
+		if(test_helper->get_possible_conv_pts()[i] == test_conv_pt)
+		{
+			pass = true;
+		}
 	}
 
 	return pass;
-	*/
-	return false;
 }
 
 bool DialougeTestSuite::choose_reply_test()
 {
-	return false;
+	bool pass = false;
+
+	DialogueHelper* test_helper = new DialogueHelper();
+
+	std::vector<std::string> test_dialog_pt = { "what", "variable" };
+
+	//called test_function()
+	std::vector<std::string> test_conv_pt = test_helper->choose_reply_pt(test_dialog_pt);
+	if (test_conv_pt[0] == test_dialog_pt[0])
+	{
+		pass = true;
+	}
+
+	return pass;
 }
