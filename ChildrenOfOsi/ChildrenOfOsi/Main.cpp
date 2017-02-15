@@ -166,14 +166,35 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	WorldObj* Alex = new WorldObj(Vector2f(1000.0, 600.0), 100.0, 100.0);	//init player
 	Texture* playerTexture = new Texture();
 	Texture* objTexture = new Texture();
+	Texture* uptex = new Texture();
+	Texture* downtex = new Texture();
+	Texture* lefttex = new Texture();
+	Texture* righttex = new Texture();
+
 	objTexture->setFile("YemojasHouse.png");
 	playerTexture->setFile("ShangoForwardSprite.png");
+	uptex->setFile("ShangoBackSprite.png");
+	downtex->setFile("ShangoForwardSprite.png");
+	lefttex->setFile("ShangoLeftSprite.png");
+	righttex->setFile("ShangoRightSprite.png");
 
 	playerTexture->load();
+	uptex->load();
+	downtex->load();
+	lefttex->load();
+	righttex->load();
 	objTexture->load();
 	playerTexture->setFrames(26);
+	uptex->setFrames(26);
+	downtex->setFrames(26);
+	lefttex->setFrames(26);
+	righttex->setFrames(26);
 	objTexture->setFrames(1);
 	Alex->sprite.setTexture(playerTexture);
+	Alex->sprite.up = uptex;
+	Alex->sprite.down = downtex;
+	Alex->sprite.left = lefttex;
+	Alex->sprite.right = righttex;
 	Alex->offsetBody(0, 50, 50, 50, 50);
 	vector<WorldObj*> recVec;
 
@@ -346,14 +367,25 @@ void ALEX_LOOP(QuadTree* _QuadTree) {
 	WorldObj* Alex = new WorldObj(Vector2f(1000.0, 600.0), 100.0, 100.0);	//init player
 	Texture* playerTexture = new Texture();
 	Texture* objTexture = new Texture();
+	Texture* uptex = new Texture();
+	Texture* downtex = new Texture();
+	Texture* lefttex = new Texture();
+	Texture* righttex = new Texture();
+
 	objTexture->setFile("YemojasHouse.jpg");
 	playerTexture->setFile("phi.png");
+
+	//uptex->setFile("Shango")
 
 	playerTexture->load();
 	objTexture->load();
 	playerTexture->setFrames(1);
 	objTexture->setFrames(1);
 	Alex->sprite.setTexture(playerTexture);
+	Alex->sprite.up = uptex;
+	Alex->sprite.down = downtex;
+	Alex->sprite.left = lefttex;
+	Alex->sprite.right = righttex;
 	Alex->offsetBody(0, 50, 50, 50, 50);
 	vector<WorldObj*> recVec;	
 

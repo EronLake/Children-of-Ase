@@ -22,6 +22,12 @@ class Sprite
 
   void setTexture(Texture *t);
   void animate();
+  //Texture *tex;
+  Texture *idle;
+  Texture *up;
+  Texture *down;
+  Texture *left;
+  Texture *right;
 
   private:
 
@@ -29,6 +35,7 @@ class Sprite
   int top, bottom;
 
   Texture *tex;
+
   int index, tempTime;
 };
 

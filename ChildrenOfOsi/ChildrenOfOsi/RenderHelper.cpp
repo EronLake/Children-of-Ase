@@ -54,18 +54,22 @@ int RenderHelper::draw_frame(WorldObj * obj)
 
 int RenderHelper::sprite_up(WorldObj * obj)
 {
+	obj->sprite.setTexture(obj->sprite.up);
 	return 0;
 }
 
 int RenderHelper::sprite_down(WorldObj* obj) {
+	obj->sprite.setTexture(obj->sprite.down);
 	return 0;
 }
 
 int RenderHelper::sprite_left(WorldObj* obj) {
+	obj->sprite.setTexture(obj->sprite.left);
 	return 0;
 }
 
 int RenderHelper::sprite_right(WorldObj* obj) {
+	obj->sprite.setTexture(obj->sprite.right);
 	return 0;
 }
 

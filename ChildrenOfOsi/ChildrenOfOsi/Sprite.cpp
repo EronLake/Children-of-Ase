@@ -6,6 +6,7 @@
  */
 void Sprite::setTexture(Texture *t)
 {
+	if (tex == t) return; 
   tex = t;
   index = 0;
   start = 0;
@@ -21,7 +22,7 @@ void Sprite::setTexture(Texture *t)
 void Sprite::animate()
 {
   ++this->tempTime;
-  if(this->tempTime == 5) {
+  if(this->tempTime == 2) {
     if(this->index < this->tex->getFrames()-1) {
       ++this->index;
       this->start = tex->getFrameWidth() * index;

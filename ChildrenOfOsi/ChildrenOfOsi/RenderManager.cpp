@@ -28,7 +28,7 @@ RenderManager::~RenderManager()
 void RenderManager::register_manager()
 {
 	tBuffer->add_to_table("DRAW", this);
-	tBuffer->add_to_table("SPRITE", this);
+	tBuffer->add_to_table("MOVE", this);
 	//tBuffer->add_to_table("RENDER", this);
 }
 

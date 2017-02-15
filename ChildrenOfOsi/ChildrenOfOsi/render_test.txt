@@ -38,3 +38,14 @@
 2/14/2017   3:11   Render manager unit test failed!
 2/14/2017   3:15   Render manager unit test failed!
 2/14/2017   3:23   Render manager unit test failed!
+2/14/2017   3:42   Render manager unit test failed!
+2/14/2017   3:51   Render manager unit test failed!
+2/14/2017   3:52   Render manager unit test failed!
+2/14/2017   3:52   Render manager unit test failed!
+2/14/2017   3:55   Render manager unit test failed!
+2/14/2017   3:57   Render manager unit test failed!
+2/14/2017   3:58   Render manager unit test failed!
+2/14/2017   3:59   Render manager unit test failed!
+2/14/2017   4:1   Render manager unit test failed!
+2/14/2017   4:2   Render manager unit test failed!
+2/14/2017   4:3   Render manager unit test failed!
