@@ -128,7 +128,10 @@
       <Filter>Test</Filter>
     </ClCompile>
     <ClCompile Include="Main.cpp" />
-    <ClCompile Include="DialogueHelper.cpp" />
+    <ClCompile Include="DialogueHelper.cpp">
+      <Filter>Dialogue</Filter>
+    </ClCompile>
+    <ClCompile Include="DialougeTestSuite.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AIHelper.h">
@@ -269,7 +272,10 @@
     <ClInclude Include="TestManager.h">
       <Filter>Test</Filter>
     </ClInclude>
-    <ClInclude Include="DialogueHelper.h" />
+    <ClInclude Include="DialogueHelper.h">
+      <Filter>Dialogue</Filter>
+    </ClInclude>
+    <ClInclude Include="DialougeTestSuite.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="audio_test.txt">

@@ -544,6 +544,7 @@ bool MemoryTestSuite::add_projectile_test()
 	else
 	{
 		LOG("TESTING ERROR: did not remove test_projectile from table");
+		return false;
 	}
 
 }
