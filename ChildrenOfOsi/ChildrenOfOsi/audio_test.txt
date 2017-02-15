@@ -38,3 +38,14 @@
 2/14/2017   3:11   Audio manager unit test passed!
 2/14/2017   3:15   Audio manager unit test passed!
 2/14/2017   3:23   Audio manager unit test passed!
+2/14/2017   3:30   Audio manager unit test passed!
+2/14/2017   3:31   Audio manager unit test passed!
+2/14/2017   3:32   Audio manager unit test passed!
+2/14/2017   3:33   Audio manager unit test passed!
+2/14/2017   3:36   Audio manager unit test passed!
+2/14/2017   3:50   Audio manager unit test passed!
+2/14/2017   3:53   Audio manager unit test passed!
+2/14/2017   3:57   Audio manager unit test passed!
+2/14/2017   3:59   Audio manager unit test passed!
+2/14/2017   4:4   Audio manager unit test passed!
+2/14/2017   4:5   Audio manager unit test passed!

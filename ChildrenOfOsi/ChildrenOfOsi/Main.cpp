@@ -164,16 +164,28 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 {
 
 	WorldObj* Alex = new WorldObj(Vector2f(1000.0, 600.0), 100.0, 100.0);	//init player
-	Texture* playerTexture = new Texture();
+	Texture* playerTextureForward = new Texture();
+	Texture* playerTextureBack = new Texture();
+	Texture* playerTextureLeft = new Texture();
+	Texture* playerTextureRight = new Texture();
 	Texture* objTexture = new Texture();
 	objTexture->setFile("YemojasHouse.png");
-	playerTexture->setFile("ShangoForwardSprite.png");
+	playerTextureForward->setFile("ShangoForwardSprite.png");
+	playerTextureBack->setFile("ShangoBackSprite.png");
+	playerTextureLeft->setFile("ShangoLeftSprite.png");
+	playerTextureRight->setFile("ShangoRightSprite.png");
 
-	playerTexture->load();
+	playerTextureForward->load();
+	playerTextureBack->load();
+	playerTextureLeft->load();
+	playerTextureRight->load();
 	objTexture->load();
-	playerTexture->setFrames(26);
+	playerTextureForward->setFrames(26);
+	playerTextureBack->setFrames(26);
+	playerTextureLeft->setFrames(26);
+	playerTextureRight->setFrames(26);
 	objTexture->setFrames(1);
-	Alex->sprite.setTexture(playerTexture);
+	Alex->sprite.setTexture(playerTextureForward);
 	Alex->offsetBody(0, 50, 50, 50, 50);
 	vector<WorldObj*> recVec;
 
@@ -185,7 +197,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 		recVec.push_back(objs);
 	}
 	WorldObj* staticRec = new WorldObj(Vector2f(1800, 1350), 100.0, 100.0);
-	staticRec->sprite.setTexture(playerTexture);
+	staticRec->sprite.setTexture(playerTextureForward);
 	recVec.push_back(staticRec);
 
 	//recVec.push_back(myRec1); recVec.push_back(myRec2);
@@ -231,6 +243,10 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	//Alex->setY(10);
 
 	//osi::GameWindow::init();
+	bool flag_1 = true;
+	bool flag_2 = true;
+	bool flag_3 = true;
+	bool flag_4 = true;
 	LOG("PAST WINDOW INIT ***********************");
 	clock_t start_tick, current_ticks, delta_ticks;
 	clock_t fps = 0;
@@ -243,6 +259,47 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 		}
 		//clock 
 		iController->InputCheck();
+		short W = GetKeyState('W') >> 15;
+		short A = GetKeyState('A') >> 15;
+		short S = GetKeyState('S') >> 15;
+		short D = GetKeyState('D') >> 15;
+		short W_2 = GetAsyncKeyState('W');
+		short A_2 = GetAsyncKeyState('A');
+		short S_2 = GetAsyncKeyState('S');
+		short D_2 = GetAsyncKeyState('S');
+
+		if ((W) && (flag_1 == true))
+		{
+			Alex->sprite.setTexture(playerTextureBack);
+			flag_1 = false;
+			flag_2 = true;
+			flag_3 = true;
+			flag_4 = true;
+		}
+		if ((A) && flag_2)
+		{
+			Alex->sprite.setTexture(playerTextureLeft);
+			flag_1 = true;
+			flag_2 = false;
+			flag_3 = true;
+			flag_4 = true;
+		}
+		if ((S) && flag_3)
+		{
+			Alex->sprite.setTexture(playerTextureForward);
+			flag_1 = true;
+			flag_2 = true;
+			flag_3 = false;
+			flag_4 = true;
+		}
+		if ((D) && flag_4)
+		{
+			Alex->sprite.setTexture(playerTextureRight);
+			flag_1 = true;
+			flag_2 = true;
+			flag_3 = true;
+			flag_4 = false;
+		}
 		//Alex->WorldObj::drawObj(0,0);
 		//for (int i = 0; i < recVec.size(); i++) {
 		//	recVec[i]->drawObj(0,0);
