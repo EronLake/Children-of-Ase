@@ -5,18 +5,18 @@
 DialogueHelper::DialogueHelper()
 {
 
-	possible_conv_pts.push_back(std::make_pair("what", "variable"));
-	possible_conv_pts.push_back(std::make_pair("who", "variable"));
-	possible_conv_pts.push_back(std::make_pair("where", "variable"));
-	possible_conv_pts.push_back(std::make_pair("how", "variable"));
-	possible_conv_pts.push_back(std::make_pair("why", "variable"));
+	possible_conv_pts.push_back({ "what", "variable" });
+	possible_conv_pts.push_back({ "who", "variable" });
+	possible_conv_pts.push_back({ "where", "variable" });
+	possible_conv_pts.push_back({ "how", "variable" });
+	possible_conv_pts.push_back({ "why", "variable" });
 
 
-	possible_replys.push_back(std::make_pair("what", "variable"));
-	possible_replys.push_back(std::make_pair("who", "variable"));
-	possible_replys.push_back(std::make_pair("where", "variable"));
-	possible_replys.push_back(std::make_pair("how", "variable"));
-	possible_replys.push_back(std::make_pair("why", "variable"));
+	possible_reply_pts.push_back({ "what", "variable" });
+	possible_reply_pts.push_back({ "who", "variable" });
+	possible_reply_pts.push_back({ "where", "variable" });
+	possible_reply_pts.push_back({ "how", "variable" });
+	possible_reply_pts.push_back({ "why", "variable" });
 
 }
 
@@ -26,8 +26,7 @@ DialogueHelper::~DialogueHelper()
 }
 
 //functions where heroes make dialogue choices
-std::tuple<std::string, std::string> DialogueHelper::choose_conv_pt(std::string phrase_type, 
-																	std::string variable)
+dialogue_point DialogueHelper::choose_conv_pt(dialogue_point)
 {
 	int conv_pt_index = rand() % possible_conv_pts.size();
 	return possible_conv_pts[conv_pt_index];
@@ -35,16 +34,25 @@ std::tuple<std::string, std::string> DialogueHelper::choose_conv_pt(std::string 
 
 }
 
-std::tuple<std::string, std::string> DialogueHelper::choose_reply(std::string phrase_type, 
-																	std::string variable)
+dialogue_point DialogueHelper::choose_reply_pt(dialogue_point point)
 {
-	for (int i = 0; i < possible_replys.size(); i++)
+	for (int i = 0; i < possible_reply_pts.size(); i++)
 	{
-		if (std::get<0>(possible_replys[i]) == phrase_type)
+		if (possible_reply_pts[i][0] == point[0])
 		{
-			return possible_replys[i];
+			return possible_reply_pts[i];
 		}
 	}
-	return std::make_pair("error","phrase_type not found");
+	return{ "error phrase_type not found" };
 
+}
+
+std::vector<dialogue_point> DialogueHelper::get_possible_conv_pts()
+{
+	return possible_conv_pts;
+}
+
+std::vector<dialogue_point> DialogueHelper::get_possible_reply_pts()
+{
+	return possible_conv_pts;
 }

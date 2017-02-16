@@ -167,6 +167,7 @@
     <ClInclude Include="Containers.h" />
     <ClInclude Include="DialogueController.h" />
     <ClInclude Include="DialogueHelper.h" />
+    <ClInclude Include="DialougeTestSuite.h" />
     <ClInclude Include="DummyController.h" />
     <ClInclude Include="Factions.h" />
     <ClInclude Include="GameWindow.h" />
@@ -215,6 +216,7 @@
     <ClCompile Include="Containers.cpp" />
     <ClCompile Include="DialogueController.cpp" />
     <ClCompile Include="DialogueHelper.cpp" />
+    <ClCompile Include="DialougeTestSuite.cpp" />
     <ClCompile Include="DummyController.cpp" />
     <ClCompile Include="Factions.cpp" />
     <ClCompile Include="GameWindow.cpp" />
