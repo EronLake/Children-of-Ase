@@ -17,9 +17,10 @@
 #include "GLFW/glfw3.h"
 #include "SOIL/SOIL.h"
 
-#include <ft2build.h>
-#include FT_FREETYPE_H
+// #include <ft2build.h>
+// #include FT_FREETYPE_H
 
+#include "AssetInfo.h"
 #include "Sprite.h"
 
 namespace osi
@@ -30,9 +31,6 @@ namespace osi
 
     static constexpr unsigned int WINDOW_WIDTH_DP = 960U;
     static constexpr unsigned int WINDOW_HEIGHT_DP = 540U;
-
-    static const std::string ASSETS_PATH;
-    static const std::string FONTS_PATH;
 
     static bool init();
     static bool terminate();
@@ -58,8 +56,8 @@ namespace osi
     static std::vector<GLuint> textures;
     static GLuint shaderProgramId;
 
-    static FT_Library fontLibrary;
-    static FT_Face stdFont;
+    // static FT_Library fontLibrary;
+    // static std::unordered_map<std::string, FT_Face *> fonts;
 
     static int numObjects;
 

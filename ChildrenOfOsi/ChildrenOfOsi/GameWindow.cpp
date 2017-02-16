@@ -1,9 +1,6 @@
 #include "stdafx.h"
 #include "GameWindow.h"
 
-const std::string osi::GameWindow::ASSETS_PATH = "./Assets/";
-const std::string osi::GameWindow::FONTS_PATH = GameWindow::ASSETS_PATH + "Fonts/";
-
 const std::string osi::GameWindow::STD_VERTEX_SHADER_PATH = "./OpenGL Shaders/StdVertexShader.vert.glsl";
 const std::string osi::GameWindow::STD_FRAGMENT_SHADER_PATH = "./OpenGL Shaders/StdFragmentShader.frag.glsl";
 
@@ -186,7 +183,7 @@ void osi::GameWindow::refresh()
   glClearColor(0.5F, 0.5F, 0.5F, 1.0F);
   glClear(GL_COLOR_BUFFER_BIT);
   glUseProgram(osi::GameWindow::shaderProgramId);
-  for (GLint i=0; i < numObjects; i++) {
+  for (GLint i = 0; i < numObjects; ++i) {
 	  glBindTexture(GL_TEXTURE_2D, Texture::textureId[textures[i]-1]);
 	  glBindVertexArray(vertexArrayObjectId[i]);
 	  glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
@@ -392,11 +389,16 @@ void osi::GameWindow::setupStdShaders()
 /**
  * 
  */
-void osi::GameWindow::setupFonts()
+/*void osi::GameWindow::setupFonts()
 {
   if(FT_Init_FreeType(&GameWindow::fontLibrary))
     throw FontInitializationError("ERROR::FREETYPE: Could not initialize FreeType Library.");
-  if(FT_New_Face(GameWindow::fontLibrary, "", 0, &GameWindow::stdFont))
-    throw FontInitializationError("ERROR::FREETYPE: Failed to load font \"Arial\"");
+  int fontIndex = 0;
+  for(auto& fontName : fontPaths) {
+    GameWindow::fonts.emplace(fontName, nullptr);
+    if(FT_New_Face(GameWindow::fontLibrary, fontName.c_str(), fontIndex++, GameWindow::fonts[fontName])) {
+      throw FontInitializationError("ERROR::FREETYPE: Failed to load font \"" + fontName + "\"");
+    }
+  }
 
-}
+}*/
