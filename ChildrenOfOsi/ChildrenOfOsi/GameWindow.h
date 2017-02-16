@@ -17,6 +17,9 @@
 #include "GLFW/glfw3.h"
 #include "SOIL/SOIL.h"
 
+#include <ft2build.h>
+#include FT_FREETYPE_H
+
 #include "Sprite.h"
 
 namespace osi
@@ -36,7 +39,7 @@ namespace osi
     static bool isActive();
     static bool isRunning();
 
-    static void drawSprite(float, float, float, float, Sprite t);
+    static void drawSprite(float, float, float, float, Sprite);
     static void drawText(float, float, float, float, float, const std::string&);
     static void refresh();
 
@@ -48,21 +51,29 @@ namespace osi
     static GLFWwindow *window;
     static int windowWidthPx;
     static int windowHeightPx;
+
     static std::vector<GLuint> vertexArrayObjectId;
     static std::vector<GLuint> vertexBufferObjectId;
     static std::vector<GLuint> elementBufferObjectId;
-    static GLuint shaderProgramId;
     static std::vector<GLuint> textures;
+    static GLuint shaderProgramId;
+
+    static FT_Library fontLibrary;
+    static FT_Face stdFont;
+
     static int numObjects;
 
     GameWindow() = delete;
-    ~GameWindow() = delete;
+    GameWindow(const GameWindow&) = delete;
+    GameWindow(const GameWindow&&) = delete;
     GameWindow& operator=(const GameWindow&) = delete;
     GameWindow& operator=(const GameWindow&&) = delete;
+    ~GameWindow() = delete;
 
     static std::vector<GLfloat> dpCoordToGL(float, float);
     static void setupWindow();
     static void setupStdShaders();
+    static void setupFonts();
   };
 
   class WindowingError: public std::runtime_error
@@ -75,5 +86,11 @@ namespace osi
   {
     public:
     ShaderCompilationError(const std::string& what): std::runtime_error(what) {};
+  };
+
+  class FontInitializationError: public std::runtime_error
+  {
+    public:
+    FontInitializationError(const std::string& what): std::runtime_error(what) {};
   };
 }

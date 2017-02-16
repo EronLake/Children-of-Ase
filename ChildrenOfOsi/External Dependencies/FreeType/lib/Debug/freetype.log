@@ -1,0 +1,43 @@
+﻿  autofit.c
+  bdf.c
+  cff.c
+  ftbase.c
+  ftbitmap.c
+  ftcache.c
+  ftfstype.c
+  ftgasp.c
+  ftglyph.c
+  ftgzip.c
+  ftinit.c
+  ftlzw.c
+  ftstroke.c
+  ftsystem.c
+  smooth.c
+  ftbbox.c
+  ftfntfmt.c
+  ftmm.c
+  ftpfr.c
+  ftsynth.c
+  fttype1.c
+  ftwinfnt.c
+  ftlcdfil.c
+  ftgxval.c
+c:\users\daniel\code libraries\c\opengl\freetype\src\base\ftobjs.c(4883): warning C4702: unreachable code
+c:\users\daniel\code libraries\c\opengl\freetype\src\base\ftobjs.c(4884): warning C4702: unreachable code
+  ftotval.c
+  ftpatent.c
+  pcf.c
+  pfr.c
+  psaux.c
+  pshinter.c
+  psmodule.c
+  raster.c
+  sfnt.c
+  truetype.c
+  type1.c
+  type1cid.c
+  type42.c
+  winfnt.c
+c:\users\daniel\code libraries\c\opengl\freetype\src\sfnt\ttsbit.c(1452): warning C4100: 'metrics_only': unreferenced formal parameter (compiling source file ..\..\..\src\sfnt\sfnt.c)
+  ftdebug.c
+  freetype.vcxproj -> C:\Users\Daniel\Code Libraries\C\OpenGL\FreeType\builds\windows\vc2010\.\..\..\..\objs\vc2010\Win32\freetype271d.lib

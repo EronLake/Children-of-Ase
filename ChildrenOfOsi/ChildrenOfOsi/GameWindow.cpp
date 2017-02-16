@@ -10,11 +10,13 @@ const std::string osi::GameWindow::STD_FRAGMENT_SHADER_PATH = "./OpenGL Shaders/
 GLFWwindow *osi::GameWindow::window = nullptr;
 int osi::GameWindow::windowWidthPx = -1;
 int osi::GameWindow::windowHeightPx = -1;
+
 std::vector<GLuint> osi::GameWindow::vertexArrayObjectId;
 std::vector<GLuint> osi::GameWindow::vertexBufferObjectId;
 std::vector<GLuint> osi::GameWindow::elementBufferObjectId;
-GLuint osi::GameWindow::shaderProgramId = 0;
 std::vector<GLuint> osi::GameWindow::textures;
+GLuint osi::GameWindow::shaderProgramId = 0;
+
 int osi::GameWindow::numObjects = 0;
 
 /**
@@ -30,6 +32,8 @@ bool osi::GameWindow::init()
 
   GameWindow::setupWindow();
   GameWindow::setupStdShaders();
+  // GameWindow::setupFonts();
+
   glEnable(GL_TEXTURE_2D);
   glewExperimental = GL_TRUE;
   return true;
@@ -46,18 +50,18 @@ bool osi::GameWindow::terminate()
   if(!GameWindow::isActive())
     return false;
 
- // glDeleteVertexArrays(1, &vertexArrayObjectId[0]);
- // glDeleteBuffers(1, &vertexBufferObjectId[0]);
-  //glDeleteBuffers(1, &elementBufferObjectId[0]);
   glfwTerminate();
 
-  osi::GameWindow::window = nullptr;
-  osi::GameWindow::windowWidthPx = -1;
-  osi::GameWindow::windowHeightPx = -1;
-  osi::GameWindow::vertexArrayObjectId;
-  osi::GameWindow::vertexBufferObjectId;
-  osi::GameWindow::elementBufferObjectId;
-  osi::GameWindow::shaderProgramId = 0;
+  GameWindow::window = nullptr;
+  GameWindow::windowWidthPx = -1;
+  GameWindow::windowHeightPx = -1;
+
+  GameWindow::vertexArrayObjectId;
+  GameWindow::vertexBufferObjectId;
+  GameWindow::elementBufferObjectId;
+  GameWindow::textures;
+
+  GameWindow::shaderProgramId = 0;
 
   return true;
 }
@@ -383,4 +387,16 @@ void osi::GameWindow::setupStdShaders()
   glDeleteShader(fragmentShaderId);
   delete[] vertexShaderSource;
   delete[] fragmentShaderSource;
+}
+
+/**
+ * 
+ */
+void osi::GameWindow::setupFonts()
+{
+  if(FT_Init_FreeType(&GameWindow::fontLibrary))
+    throw FontInitializationError("ERROR::FREETYPE: Could not initialize FreeType Library.");
+  if(FT_New_Face(GameWindow::fontLibrary, "", 0, &GameWindow::stdFont))
+    throw FontInitializationError("ERROR::FREETYPE: Failed to load font \"Arial\"");
+
 }
