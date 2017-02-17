@@ -238,12 +238,14 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	RenderManager* RenM = new RenderManager(mLog, tBuffer, _QuadTree);
 	memManager* memM = new memManager(mLog, tBuffer);
 	TestManager* TestM = new TestManager(mLog, tBuffer);
+	AudioManager* AudM = new AudioManager(mLog, tBuffer);
 
 	//the order defines what order the managers the tasks will be sent to
 	DumM->register_manager();
 	PhysM->register_manager();
 	memM->register_manager();
 	RenM->register_manager();
+	AudM->register_manager();
 	TestM->register_manager();
 
 
