@@ -1,6 +1,7 @@
 #include "common.h"
 #include "stdafx.h"
 #include "Vector2f.h"
+#include "Sprite.h"
 using namespace std;
 
 class Rectangle
@@ -16,6 +17,7 @@ public:
 	}
 	Rectangle() {}
 	~Rectangle() {}
+	Sprite sprite;
 	float getX() { return topLeft.getXloc(); }
 	float getY() { return topLeft.getYloc(); }
 	float getWidth() { return width; }
@@ -25,4 +27,6 @@ public:
 	void setLoc(Vector2f l) { topLeft=l; }
 	void setWidth(float w) { width=w; }
 	void setHeight(float h) { height=h; }
+	Sprite getSprite() { return sprite; }
+	void setSprite(Sprite s) { sprite = s; }
 };

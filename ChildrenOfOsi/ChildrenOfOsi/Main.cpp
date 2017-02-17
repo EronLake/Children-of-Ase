@@ -92,7 +92,7 @@ int main() {
 		/*Darion Ian Test*/
 		//Darion_Ian_Test();
 /* ERON */
-		ERONS_LOOP();
+		//ERONS_LOOP();
 		/*ALESSIO*/
 		//ALESSIO_TEST();
 
@@ -105,7 +105,7 @@ int main() {
 	                                   
 		//testQuadTree();
 		//ALEX_LOOP(collideTree);        
-		//GAMEPLAY_LOOP(collideTree);
+		GAMEPLAY_LOOP(collideTree);
 
 
 	return 0;
@@ -175,6 +175,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	Texture* lefttex = new Texture();
 	Texture* righttex = new Texture();
 
+	//load sprite from a configuration file?
 	objTexture->setFile("YemojasHouse.png");
 	playerTexture->setFile("ShangoForwardSprite.png");
 	uptex->setFile("ShangoBackSprite.png");
