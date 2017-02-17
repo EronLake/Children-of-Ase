@@ -14,6 +14,7 @@ public:
 		width = p_width;
 		height = p_height;
 	}
+	Rectangle() {}
 	~Rectangle() {}
 	float getX() { return topLeft.getXloc(); }
 	float getY() { return topLeft.getYloc(); }
