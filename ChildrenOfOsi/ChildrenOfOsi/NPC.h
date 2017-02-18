@@ -9,6 +9,7 @@ class NPC :
 public:
 	NPC();
 	NPC(float x, float y, bool col);
+	NPC(Vector2f p_topLeft, float p_width, float p_height);
 	~NPC();
 	void setFaction(int f);
 	int getFaction();

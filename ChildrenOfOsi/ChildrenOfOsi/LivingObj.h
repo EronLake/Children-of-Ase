@@ -8,6 +8,7 @@ class LivingObj :
 public:
 	LivingObj();
 	LivingObj(float x, float y, bool col);
+	LivingObj(Vector2f p_topLeft, float p_width, float p_height);
 	~LivingObj();
 	int getHealth();
 	void setHealth(int h);

@@ -1,6 +1,17 @@
 #include "stdafx.h"
 #include "DialogueController.h"
 
+Player* DialogueController::player;
+WorldObj* DialogueController::other;
+int DialogueController::state = 0;
+//States:
+//0 is no conversation
+//1 is waiting for player input
+//2 is waiting for player response
+//3 is npc conversation point
+//4 is npc response
+DialogueHelper DialogueController::dialogue;
+
 
 DialogueController::DialogueController()
 {
@@ -13,29 +24,37 @@ DialogueController::~DialogueController()
 
 void DialogueController::PlayerChoose()
 {
+	vector<dialogue_point> options = dialogue.get_possible_conv_pts();
 	state = 1;
+	//give options to ALex
 }
 
-void DialogueController::PlayerConversationPoint(std::string info)
+void DialogueController::PlayerConversationPoint(dialogue_point info)
 {
 	state = 4;
-	NPCResponse(info);
+	dialogue.choose_conv_pt(info);
+	otherResponse(info);
 }
 
-void DialogueController::PlayerResponse(std::string info)
+void DialogueController::PlayerResponse(dialogue_point info)
 {
-	state = 3;
-}
-
-void DialogueController::NPCConversationPoint()
-{
-	std::string response = "...";//chooseDialogue(npc);
-	state=2;
-}
-
-void DialogueController::NPCResponse(std::string info)
-{
+	dialogue.choose_reply_pt(info);
 	state = 1;
+	PlayerChoose();
+}
+
+void DialogueController::otherConversationPoint()
+{
+	//dialogue.choose_conv_pt(info);
+	state=2;
+	vector<dialogue_point> options = dialogue.get_possible_conv_pts();
+	//give options to Alex
+}
+
+void DialogueController::otherResponse(dialogue_point info)
+{
+	dialogue_point response=dialogue.choose_reply_pt(info);
+	state = 3;
 }
 
 void DialogueController::setPlayer(Player* p)
@@ -44,18 +63,21 @@ void DialogueController::setPlayer(Player* p)
 	state = 0;
 }
 
-void DialogueController::startConversation(NPC* n, bool playerTalk)
+void DialogueController::startConversation(WorldObj* n, bool playerTalk)
 {
+	for (int i = 0; i < 100; i++) {
+		std::cout << player->getName() << " talked with " << n->getName() << std::endl;
+	}
 	if (playerTalk) {
 		PlayerChoose();
 	}
 	else {
 		state = 3;
-		NPCConversationPoint();
+		otherConversationPoint();
 	}
 }
 
-NPC* DialogueController::getNPC()
+WorldObj* DialogueController::getOther()
 {
-	return npc;
+	return other;
 }

@@ -30,5 +30,6 @@ public:
 	~DialogueGui();
 	void loadTexture();
 	void setSprite();
+	void drawGui();
 };
 

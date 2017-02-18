@@ -5,7 +5,8 @@
 DialogueGui::DialogueGui()
 {
 	//init coord of all the icons
-	//background = new Rectangle(Vector2f())
+	background = new Rectangle(Vector2f(70, 270), 960, 540);
+	//swordIcon = new Rectangle(Vector2f(142, 302), 960, 540);
 }
 
 
@@ -54,4 +55,9 @@ void DialogueGui::setSprite()
 	dialogueBox->sprite.setTexture(dialogueBoxTex);
 	responseBox1->sprite.setTexture(responseBoxTex);
 	responseBox2->sprite.setTexture(responseBoxTex);
+}
+
+void DialogueGui::drawGui()
+{
+	//osi::GameWindow::drawSprite(loc.getXloc() - _x, loc.getYloc() - _y, width, height, sprite);
 }
