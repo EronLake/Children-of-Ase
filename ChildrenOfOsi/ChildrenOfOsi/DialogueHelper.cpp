@@ -15,7 +15,7 @@ DialogueHelper dialogue;
 
 DialogueHelper::DialogueHelper()
 {
-
+	srand(time(0));
 	possible_conv_pts.push_back({ "what", "variable" });
 	possible_conv_pts.push_back({ "who", "variable" });
 	possible_conv_pts.push_back({ "where", "variable" });
@@ -66,4 +66,34 @@ std::vector<dialogue_point> DialogueHelper::get_possible_conv_pts()
 std::vector<dialogue_point> DialogueHelper::get_possible_reply_pts()
 {
 	return possible_conv_pts;
+}
+
+dialogue_template get_template() {
+	Json::Value root;
+	Json::Reader reader;
+
+	std::ifstream file("level_objects/entities.json");
+	file >> root;
+
+	if (!reader.parse(file, root, true)) {
+		//for some reason it always fails to parse
+		std::cout << "Failed to parse configuration\n"
+			<< reader.getFormattedErrorMessages();
+	}
+	//set to 30 in file, but constantly returns 0
+	int width = root["jumper.width"].asInt();
+	//equivalent code, also returns 0
+	width = root.get("jumper.width", 30).asInt();
+
+	dialogue_template dtemp;
+
+	return dtemp;
+
+
+}
+
+dialogue_point get_dialog(std::string name) {
+	dialogue_point dpoint;
+	return dpoint;
+
 }

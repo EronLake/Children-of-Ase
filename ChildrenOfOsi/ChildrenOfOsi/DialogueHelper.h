@@ -1,7 +1,10 @@
 #pragma once
 #include "common.h"
+#include "json.h"
+
 
 typedef std::vector<std::string> dialogue_point;
+typedef std::vector<std::string> dialogue_template;
 
 class DialogueHelper
 {
@@ -19,5 +22,7 @@ public:
 	dialogue_point choose_reply_pt(dialogue_point);
 	std::vector<dialogue_point> get_possible_conv_pts();
 	std::vector<dialogue_point> get_possible_reply_pts();
+	dialogue_template get_template();
+	dialogue_point get_dialog(std::string name);
 };
 
