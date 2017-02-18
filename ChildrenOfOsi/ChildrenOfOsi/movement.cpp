@@ -89,6 +89,8 @@ int Movement::talk(WorldObj* obj) {
 	objVec = tree->retrieve(objVec, obj);
 	if (CheckClass::isPlayer(obj)) {
 		Player* d = dynamic_cast<Player*>(obj);
+		d->updateTalk();
+		std::cout << "Talking Width "<< d->talk.getWidth()<<std::endl;
 		for (int i = 0; i < objVec.size(); i++) {
 			if (objVec[i]->getInteractable()) {
 				if (interaction(d, objVec[i])) {

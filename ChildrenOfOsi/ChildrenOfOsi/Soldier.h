@@ -14,10 +14,7 @@ public:
 	void goAtk(LivingObj *target);
 	void setInCombat(bool c);
 	bool getInCombat();
-	void setWidth(float w) { width = w; };
-	void setHeight(float h) { height = h; }
-	float getWidth() { return width; }
-	float getHeight() { return height; }
+
 private:
 	int atk;
 	bool inCombat;

@@ -206,6 +206,7 @@
     <ClInclude Include="Texture.h" />
     <ClInclude Include="Vector2f.h" />
     <ClInclude Include="WorldObj.h" />
+    <ClInclude Include="Wrapper.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="AIHelper.cpp" />
@@ -259,6 +260,7 @@
     <ClCompile Include="Texture.cpp" />
     <ClCompile Include="Vector2f.cpp" />
     <ClCompile Include="WorldObj.cpp" />
+    <ClCompile Include="Wrapper.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="AssetInfo.h" />

@@ -36,7 +36,6 @@ int RenderHelper::draw_frame(WorldObj * obj)
 	//pass in the camera bound for rendering instead of the object
 	objVec.clear();
 	objVec = tree->retrieve(objVec, camera);
-	std::cout << "Alex width in render helper: " << obj->WorldObj::getWidth() << std::endl;
 	obj->WorldObj::drawObj(camera->getX(), camera->getY());
 	obj->WorldObj::animateObj();
 	/*for (int i = 0; i < obj->body.size(); i++) {

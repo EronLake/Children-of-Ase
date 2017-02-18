@@ -135,6 +135,9 @@
     <ClCompile Include="DialogueGui.cpp">
       <Filter>Dialogue</Filter>
     </ClCompile>
+    <ClCompile Include="Wrapper.cpp">
+      <Filter>Misc</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AIHelper.h">
@@ -281,6 +284,9 @@
     <ClInclude Include="DialougeTestSuite.h" />
     <ClInclude Include="DialogueGui.h">
       <Filter>Dialogue</Filter>
+    </ClInclude>
+    <ClInclude Include="Wrapper.h">
+      <Filter>Misc</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
