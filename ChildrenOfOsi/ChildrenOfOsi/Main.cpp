@@ -72,6 +72,8 @@ void PHYSICS_TEST();
 
 
 int main() {
+	    DialogueHelper* dhelper = new DialogueHelper();
+		dhelper->get_dialog("Yemoja");
 		//LOG("Hello world!");
 		//ERONS_LOOP();
 		/************************************************************************************************SET-UP*******************************************************/
