@@ -15,6 +15,7 @@ public:
 	int sprite_left(WorldObj* obj);
 	int sprite_right(WorldObj* obj);
 	int sprite_update(WorldObj* obj);
+	int drawDiaGui(WorldObj* obj);
 	QuadTree* tree;
 private:
 	WorldObj* camera;

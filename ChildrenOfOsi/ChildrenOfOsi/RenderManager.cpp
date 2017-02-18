@@ -18,6 +18,7 @@ RenderManager::RenderManager(MessageLog * _mLog, TaskBuffer * _tBuffer, QuadTree
 	task_map["Move_Left"] = &RenderHelper::sprite_left;
 	task_map["Move_Right"] = &RenderHelper::sprite_right;
 	task_map["Sprite_Update"] = &RenderHelper::sprite_update;
+	task_map["Talk"] = &RenderHelper::drawDiaGui;
 
 }
 
@@ -30,6 +31,7 @@ void RenderManager::register_manager()
 	tBuffer->add_to_table("DRAW", this);
 	tBuffer->add_to_table("MOVE", this);
 	//tBuffer->add_to_table("RENDER", this);
+	//tBuffer->add_to_table("INTERACT", this);
 }
 
 void RenderManager::execute_task(Task* current_task)

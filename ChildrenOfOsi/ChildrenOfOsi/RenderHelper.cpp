@@ -51,7 +51,7 @@ int RenderHelper::draw_frame(WorldObj * obj)
 		objVec[i]->WorldObj::drawObj(camera->getX(), camera->getY());
 		objVec[i]->WorldObj::animateObj();
 	}
-	convoGui->drawGui();
+	//convoGui->drawGui();
 	osi::GameWindow::refresh();
 	return 0;
 }
@@ -79,6 +79,22 @@ int RenderHelper::sprite_right(WorldObj* obj) {
 
 int RenderHelper::sprite_update(WorldObj * obj)
 {
+	return 0;
+}
+
+int RenderHelper::drawDiaGui(WorldObj* obj)
+{
+	obj->WorldObj::drawObj(camera->getX(), camera->getY());
+	obj->WorldObj::animateObj();
+	for (int i = 0; i < objVec.size(); i++) {
+		LOG("BEFORE DRAWING**");
+		//cout << objVec[i]->getX() - camera->getX() << endl;
+		//LOG(objVec[i]->getX(), ", ", objVec[i]->getY());
+		objVec[i]->WorldObj::drawObj(camera->getX(), camera->getY());
+		objVec[i]->WorldObj::animateObj();
+	}
+	convoGui->drawGui();
+	osi::GameWindow::refresh();
 	return 0;
 }
 
