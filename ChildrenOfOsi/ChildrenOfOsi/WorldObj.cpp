@@ -12,10 +12,10 @@ WorldObj::WorldObj(float x, float y, bool col)
 {
 	loc.setXloc(x);
 	loc.setYloc(y);
-	rotation.setXloc(1);
-	rotation.setYloc(1);
+	//rotation.setXloc(1);
+	//rotation.setYloc(1);
 	collision = col;
-	Rectangle init(loc,0,0);
+	Rectangle init(loc,1,1);
 	body.push_back(init);
 	//cout <<"X-Loc: "<< loc.getXloc() << endl;
 	//cout << "Y-Loc: " << loc.getYloc() << endl;

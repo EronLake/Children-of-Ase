@@ -10,7 +10,6 @@ public:
 	Player(Vector2f p_topLeft, float p_width, float p_height);
 	~Player();
 	void setTalkDist(float dist);
-private:
 	Rectangle talk;
 };
 

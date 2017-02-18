@@ -168,8 +168,17 @@ int main() {
 void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 {
 
+
 	Player* Alex = new Player(Vector2f(1000.0, 600.0), 100.0, 100.0);	//init player
 	cout << "Alex's width and height is " << Alex->getWidth() << ", " << Alex->getHeight() << endl;
+
+	//Player* Alex = new Player(1000,600, true);	//init player
+	WorldObj* Alex = new WorldObj(1000, 600, true);
+	std::cout << "Alex width: "<<Alex->getWidth() << std::endl;
+	Alex->setWidth(100);
+	std::cout << "Alex new width: " << Alex->getWidth()<< std::endl;
+	Alex->setHeight(100);
+
 	Texture* playerTexture = new Texture();
 	Texture* objTexture = new Texture();
 	Texture* uptex = new Texture();
@@ -203,11 +212,16 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	Alex->sprite.left = lefttex;
 	Alex->sprite.right = righttex;
 	Alex->offsetBody(0, 50, 50, 50, 50);
+	Alex->setInteractable(true);
+	Alex->setName("Alex");
+	//Alex->setTalkDist(100);
 	vector<WorldObj*> recVec;
 
 	for (int i = 1; i < 5; i++) {
 		WorldObj* objs = new WorldObj(Vector2f(100 * i, 100 * i), 200.0, 200.0);
 		objs->sprite.setTexture(objTexture);
+		objs->setInteractable(true);
+		objs->setName("Building "+i);
 		//objs->offsetBody(0, 50, 50, 50, 50);
 		//objs->offsetBody(0, 70, 70, 70, 70);
 		recVec.push_back(objs);
@@ -281,8 +295,12 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 		////Alex->WorldObj::shiftX(.5);
 		//osi::GameWindow::refresh();
 		//draw
+		std::cout << "Alex width in loop: " << Alex->getWidth() << std::endl;
+		std::cout << "Alex X in loop: " << Alex->getX() << std::endl;
 		gameplay_functions->draw_frame(Alex);
+
 		//gameplay_functions->draw_frame(convoGui);
+		std::cout << "Alex width in loop2: " << Alex->getWidth() << std::endl;
 		//run task buffer
 		//iController->InputCheck();
 		tBuffer->run();
@@ -473,7 +491,7 @@ void ALEX_LOOP(QuadTree* _QuadTree) {
 		////Alex->WorldObj::shiftX(.5);
 		//osi::GameWindow::refresh();
 		//draw
-		gameplay_functions->draw_frame(Alex);
+		//gameplay_functions->draw_frame(Alex);
 		//run task buffer
 		//iController->InputCheck();
 		tBuffer->run();

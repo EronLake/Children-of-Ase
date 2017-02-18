@@ -1,0 +1,105 @@
+{
+	"Greeting": {
+		"1": "Hello",
+		"2": "Greetings"
+	},
+
+	"Extra_Dialogue": {
+		"1": "I have to admit I am impressed that you fared the harshness of the savannah and made it to our Village in one piece",
+		"2": "It is not often we find ourselves having visitors in this village, and it is even rarer that we know nothing about our guests",
+		"3": "I welcome you if you stand before me with peaceful intentions. Just know that if you plan on harming the people of this village or myself, it is the last mistake you will ever make"
+	},
+
+	"Introduction": {
+		"1": "My name is",
+		"2": "My people call me",
+		"3": "I am known as"
+	},
+
+	"Refute_Question": {
+		"1": "I do not see any reason why I should tell you that",
+		"2": "I know too little about you to say that",
+		"3": "I need to know you better before I tell you that"
+	},
+
+	"Name_1": {
+		"1": "Yemoja"
+	},
+
+	"Ask_Name": {
+		"1": "What do you call yourself",
+		"2": "Now, who are you",
+		"3": "What do people call you"
+	},
+
+	"Ask_Reason": {
+		"1": "Why are you here before me",
+		"2": "Do  you have a reason to be here",
+		"3": "What are your intentions"
+	},
+
+	"Ask_Origin": {
+		"1": "Where are you from",
+		"2": "Which village do you come from",
+		"3": "Where do you come from"
+	},
+
+	"Friend_Reason": {
+		"1": "I am glad to hear that you approach me with friendly intentions",
+		"2": "I am pleased that you are willing to cooperate with my village and I",
+		"3": "I hope we can remain friendly in the future"
+	},
+
+	"Bad_Reason": {
+		"1": "I am  disappointed that you are here for that",
+		"2": "Such a shame. I was hoping we could be allies",
+		"3": "You should tread very carefully with your wordsfrom now on, friend"
+	},
+
+	"Response_Origin": {
+		"1": "So you are not from around here, interesting",
+		"2": "You have walked very far to get here then",
+		"3": "I'm suprised you have traveled so far"
+	},
+
+	"Identifier": {
+		"1": "Stranger",
+		"2": "Traveler"
+	},
+
+	"Response_Name": {
+		"1": "So you are known as",
+		"2": "Nice to meet you",
+		"3": "I am pleased to make your acquaintance"
+	},
+
+	"Name_2": {
+		"1": "Shango"
+	},
+
+	"Good_Intentions": {
+		"1": "I hope we get along",
+		"2": "You should introduce yourself to the people of the village"
+	},
+
+	"Village_1": {
+		"1": "Oasis Village"
+	},
+
+	"Village_Response": {
+		"1": "You are in our",
+		"2": "This is our"
+	},
+
+	"Familiar_Greet": {
+		"1": "Good to see you",
+		"2": "I hope life is treating you well",
+		"3": "It seems we cross paths yet again"
+	},
+
+	"Question_Denied": {
+		"1": "I see you don't want to cooperate",
+		"2": "I feel like it would be in both our interests if you would tell me",
+		"3": "I must ask you to reconsider answering me"
+	}
+}
