@@ -29,7 +29,7 @@ bool osi::GameWindow::init()
 
   GameWindow::setupWindow();
   GameWindow::setupStdShaders();
-  // GameWindow::setupFonts();
+  GameWindow::setupFont("Arial", 48);
 
   glEnable(GL_TEXTURE_2D);
   glewExperimental = GL_TRUE;
@@ -389,16 +389,18 @@ void osi::GameWindow::setupStdShaders()
 /**
  * 
  */
-/*void osi::GameWindow::setupFonts()
+void osi::GameWindow::setupFont(const std::string& fontName, int fontHeight)
 {
-  if(FT_Init_FreeType(&GameWindow::fontLibrary))
+  FT_Library fontLib;
+  if(FT_Init_FreeType(&fontLib))
     throw FontInitializationError("ERROR::FREETYPE: Could not initialize FreeType Library.");
-  int fontIndex = 0;
-  for(auto& fontName : fontPaths) {
-    GameWindow::fonts.emplace(fontName, nullptr);
-    if(FT_New_Face(GameWindow::fontLibrary, fontName.c_str(), fontIndex++, GameWindow::fonts[fontName])) {
-      throw FontInitializationError("ERROR::FREETYPE: Failed to load font \"" + fontName + "\"");
-    }
-  }
 
-}*/
+  FT_Face face;
+  if(FT_New_Face(fontLib, (FONTS_PATH + fontName + ".ttf").c_str(), 0, &face))
+    throw FontInitializationError("ERROR::FREETYPE: Failed to load font \"" + fontName +"\"");
+  FT_Set_Pixel_Sizes(face, 0, fontHeight);
+
+  for(GLchar ch = 0x00; ch <= 0x7F; ++ch) {
+
+  }
+}
