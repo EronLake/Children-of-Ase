@@ -36,11 +36,12 @@ int RenderHelper::draw_frame(WorldObj * obj)
 	//pass in the camera bound for rendering instead of the object
 	objVec.clear();
 	objVec = tree->retrieve(objVec, camera);
-	obj->drawObj(camera->getX(), camera->getY());
-	obj->animateObj();
-	for (int i = 0; i < obj->body.size(); i++) {
+	std::cout << "Alex width in render helper: " << obj->WorldObj::getWidth() << std::endl;
+	obj->WorldObj::drawObj(camera->getX(), camera->getY());
+	obj->WorldObj::animateObj();
+	/*for (int i = 0; i < obj->body.size(); i++) {
 		osi::GameWindow::drawSprite(obj->body[i].getX()-camera->getX(), obj->body[i].getY()-camera->getY(), obj->body[i].getWidth(), obj->body[i].getHeight(), obj->getSprite());
-	}
+	}*/
 	for (int i = 0; i < objVec.size(); i++) {
 		LOG("BEFORE DRAWING**");
 		//cout << objVec[i]->getX() - camera->getX() << endl;

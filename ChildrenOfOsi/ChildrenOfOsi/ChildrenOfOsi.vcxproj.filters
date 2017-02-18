@@ -339,5 +339,8 @@
     <None Include="ClassDiagram.cd">
       <Filter>Game Objects</Filter>
     </None>
+    <None Include="AssetInfo.h">
+      <Filter>Rendering</Filter>
+    </None>
   </ItemGroup>
 </Project>

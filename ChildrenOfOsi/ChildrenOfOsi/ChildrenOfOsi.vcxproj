@@ -71,8 +71,8 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>$(SolutionDir)\External Dependencies\GLEW\include;$(SolutionDir)\External Dependencies\GLFW\include;$(SolutionDir)\External Dependencies\SOIL\include;$(SolutionDir)\External Dependencies\FMOD\inc;$(IncludePath)</IncludePath>
-    <LibraryPath>$(SolutionDir)\External Dependencies\FMOD\lib;$(SolutionDir)\External Dependencies\GLEW\lib;$(SolutionDir)\External Dependencies\GLFW\lib;$(SolutionDir)\External Dependencies\SOIL\lib;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(SolutionDir)\External Dependencies\GLEW\include;$(SolutionDir)\External Dependencies\GLFW\include;$(SolutionDir)\External Dependencies\SOIL\include;$(SolutionDir)\External Dependencies\FreeType\include;$(SolutionDir)\External Dependencies\FMOD\inc;$(IncludePath)</IncludePath>
+    <LibraryPath>$(SolutionDir)\External Dependencies\FMOD\lib;$(SolutionDir)\External Dependencies\GLEW\lib;$(SolutionDir)\External Dependencies\GLFW\lib;$(SolutionDir)\External Dependencies\FreeType\lib;$(SolutionDir)\External Dependencies\SOIL\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
@@ -96,7 +96,7 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>fmod_vc.lib;fmodL_vc.lib;opengl32.lib;glew32s.lib;glfw3.lib;SOIL.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>opengl32.lib;glew32s.lib;glfw3.lib;SOIL.lib;freetype271d.lib;fmod_vc.lib;fmodL_vc.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -259,6 +259,7 @@
     <ClCompile Include="WorldObj.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="AssetInfo.h" />
     <None Include="ClassDiagram.cd" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

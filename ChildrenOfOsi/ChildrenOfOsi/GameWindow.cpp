@@ -1,20 +1,19 @@
 #include "stdafx.h"
 #include "GameWindow.h"
 
-const std::string osi::GameWindow::ASSETS_PATH = "./Assets/";
-const std::string osi::GameWindow::FONTS_PATH = GameWindow::ASSETS_PATH + "Fonts/";
-
 const std::string osi::GameWindow::STD_VERTEX_SHADER_PATH = "./OpenGL Shaders/StdVertexShader.vert.glsl";
 const std::string osi::GameWindow::STD_FRAGMENT_SHADER_PATH = "./OpenGL Shaders/StdFragmentShader.frag.glsl";
 
 GLFWwindow *osi::GameWindow::window = nullptr;
 int osi::GameWindow::windowWidthPx = -1;
 int osi::GameWindow::windowHeightPx = -1;
+
 std::vector<GLuint> osi::GameWindow::vertexArrayObjectId;
 std::vector<GLuint> osi::GameWindow::vertexBufferObjectId;
 std::vector<GLuint> osi::GameWindow::elementBufferObjectId;
-GLuint osi::GameWindow::shaderProgramId = 0;
 std::vector<GLuint> osi::GameWindow::textures;
+GLuint osi::GameWindow::shaderProgramId = 0;
+
 int osi::GameWindow::numObjects = 0;
 
 /**
@@ -30,6 +29,8 @@ bool osi::GameWindow::init()
 
   GameWindow::setupWindow();
   GameWindow::setupStdShaders();
+  // GameWindow::setupFonts();
+
   glEnable(GL_TEXTURE_2D);
   glewExperimental = GL_TRUE;
   return true;
@@ -46,18 +47,18 @@ bool osi::GameWindow::terminate()
   if(!GameWindow::isActive())
     return false;
 
- // glDeleteVertexArrays(1, &vertexArrayObjectId[0]);
- // glDeleteBuffers(1, &vertexBufferObjectId[0]);
-  //glDeleteBuffers(1, &elementBufferObjectId[0]);
   glfwTerminate();
 
-  osi::GameWindow::window = nullptr;
-  osi::GameWindow::windowWidthPx = -1;
-  osi::GameWindow::windowHeightPx = -1;
-  osi::GameWindow::vertexArrayObjectId;
-  osi::GameWindow::vertexBufferObjectId;
-  osi::GameWindow::elementBufferObjectId;
-  osi::GameWindow::shaderProgramId = 0;
+  GameWindow::window = nullptr;
+  GameWindow::windowWidthPx = -1;
+  GameWindow::windowHeightPx = -1;
+
+  GameWindow::vertexArrayObjectId;
+  GameWindow::vertexBufferObjectId;
+  GameWindow::elementBufferObjectId;
+  GameWindow::textures;
+
+  GameWindow::shaderProgramId = 0;
 
   return true;
 }
@@ -182,7 +183,7 @@ void osi::GameWindow::refresh()
   glClearColor(0.5F, 0.5F, 0.5F, 1.0F);
   glClear(GL_COLOR_BUFFER_BIT);
   glUseProgram(osi::GameWindow::shaderProgramId);
-  for (GLint i=0; i < numObjects; i++) {
+  for (GLint i = 0; i < numObjects; ++i) {
 	  glBindTexture(GL_TEXTURE_2D, Texture::textureId[textures[i]-1]);
 	  glBindVertexArray(vertexArrayObjectId[i]);
 	  glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
@@ -384,3 +385,20 @@ void osi::GameWindow::setupStdShaders()
   delete[] vertexShaderSource;
   delete[] fragmentShaderSource;
 }
+
+/**
+ * 
+ */
+/*void osi::GameWindow::setupFonts()
+{
+  if(FT_Init_FreeType(&GameWindow::fontLibrary))
+    throw FontInitializationError("ERROR::FREETYPE: Could not initialize FreeType Library.");
+  int fontIndex = 0;
+  for(auto& fontName : fontPaths) {
+    GameWindow::fonts.emplace(fontName, nullptr);
+    if(FT_New_Face(GameWindow::fontLibrary, fontName.c_str(), fontIndex++, GameWindow::fonts[fontName])) {
+      throw FontInitializationError("ERROR::FREETYPE: Failed to load font \"" + fontName + "\"");
+    }
+  }
+
+}*/

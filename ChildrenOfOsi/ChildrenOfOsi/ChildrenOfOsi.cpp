@@ -47,8 +47,15 @@ void ChildrenOfOsi::move_out(WorldObj * player)
 	createTask("Move_Out", "MOVE", player);
 }
 
+void ChildrenOfOsi::talk(WorldObj * player)
+{
+	createTask("Talk", "INTERACT", player);
+}
+
 void ChildrenOfOsi::draw_frame(WorldObj * player)
 {
+	std::cout << "Alex width in osi: " << player->getWidth() << std::endl;
+	std::cout << "Alex X in osi: " << player->getX() << std::endl;
 	createTask("Draw_Frame", "DRAW", player);
 }
 
@@ -83,8 +90,8 @@ void ChildrenOfOsi::add_npc(std::string key, float x,float y, bool col) {
 
 //*/
 
-void ChildrenOfOsi::play_sound() {
-	createTask("Play", "SOUND");
+void ChildrenOfOsi::play_sound(string name) {
+	createTask(name, "SOUND");
 }
 
 //----------------------------------------------------

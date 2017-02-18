@@ -1,6 +1,17 @@
 #include "stdafx.h"
 #include "DialogueHelper.h"
+#include "Player.h"
 
+Player* player;
+WorldObj* other;
+int state=0;
+//States:
+//0 is no conversation
+//1 is waiting for player input
+//2 is waiting for player response
+//3 is npc conversation point
+//4 is npc response
+DialogueHelper dialogue;
 
 DialogueHelper::DialogueHelper()
 {
