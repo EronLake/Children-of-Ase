@@ -84,6 +84,24 @@ int Movement::move_right(WorldObj* obj) {
 	return 0;
 }
 
+int Movement::talk(WorldObj* obj) {
+	objVec.clear();
+	objVec = tree->retrieve(objVec, obj);
+	if (CheckClass::isPlayer(obj)) {
+		Player* d = dynamic_cast<Player*>(obj);
+		for (int i = 0; i < objVec.size(); i++) {
+			if (objVec[i]->getInteractable()) {
+				if (interaction(d, objVec[i])) {
+					LOG("Player interacted with an object");
+					DialogueController::startConversation(objVec[i],true);
+					return 1;
+				}
+			}
+		}
+	}
+	return 0;
+}
+
 /*void Movement::init_task_map() {
 	taskMap.emplace("Move_Up", &Movement::move_up);
 	taskMap.emplace("Move_Down", &Movement::move_down);
@@ -99,6 +117,16 @@ bool Movement::collision(WorldObj* recA, WorldObj* recB)
 			bool yCollide = coordOverlap(recA->body[i].getY(), recB->body[j].getY(), recB->body[j].getY() + recB->body[j].getHeight()) || coordOverlap(recB->body[j].getY(), recA->body[i].getY(), recA->body[i].getY() + recA->body[i].getHeight());
 			if (xCollide && yCollide)return true;
 		}
+	}
+	return false;
+}
+
+bool Movement::interaction(Player* recA, WorldObj* recB)
+{
+	for (int j = 0; j < (*recB).body.size(); j++) {
+			bool xCollide = coordOverlap(recA->talk.getX(), recB->body[j].getX(), recB->body[j].getX() + recB->body[j].getWidth()) || coordOverlap(recB->body[j].getX(), recA->talk.getX(), recA->talk.getX() + recA->talk.getWidth());
+			bool yCollide = coordOverlap(recA->talk.getY(), recB->body[j].getY(), recB->body[j].getY() + recB->body[j].getHeight()) || coordOverlap(recB->body[j].getY(), recA->talk.getY(), recA->talk.getY() + recA->talk.getHeight());
+			if (xCollide && yCollide)return true;
 	}
 	return false;
 }

@@ -29,3 +29,9 @@ bool CheckClass::isLiving(WorldObj* test)
 	if (LivingObj* d = dynamic_cast<LivingObj*>(test)) return true;
 	else return false;
 }
+
+bool CheckClass::isPlayer(WorldObj* test)
+{
+	if (Player* d = dynamic_cast<Player*>(test)) return true;
+	else return false;
+}

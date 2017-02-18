@@ -24,6 +24,7 @@ PhysicsManager::PhysicsManager(MessageLog * _mLog, TaskBuffer * _tBuffer, QuadTr
 	task_map["Move_Down"] = &Movement::move_down;
 	task_map["Move_Left"] = &Movement::move_left;
 	task_map["Move_Right"] = &Movement::move_right;
+	task_map["Talk"] = &Movement::talk;
 }
 
 
@@ -36,7 +37,8 @@ PhysicsManager::~PhysicsManager()
 void PhysicsManager::register_manager()
 {
 	tBuffer->add_to_table("MOVE", this);
-	
+	tBuffer->add_to_table("INTERACT", this);
+
 }
 
 void PhysicsManager::execute_task(Task* current_task)
