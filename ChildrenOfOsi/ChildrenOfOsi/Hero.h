@@ -5,8 +5,10 @@ class Hero :
 	public SplSoldier
 {
 public:
+	int name;
+
 	Hero();
-	Hero(float x, float y, bool col);
+	Hero(int name, float x, float y, bool col);
 	~Hero();
 private:
 	int affinity;

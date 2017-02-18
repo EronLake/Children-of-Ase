@@ -15,7 +15,24 @@ MemoryHelper::~MemoryHelper()
 
 
 int MemoryHelper::store_hero(std::string key, float x, float y, bool col) {
-	Hero* h = new(find_available_block(memManager::hero_head)) Hero(x, y, col);
+	int name = 0;
+	if (key == "Yemoja")
+	{
+		name = YEMOJA;
+	}
+	else if (key == "Oshosi")
+	{
+		name = OYA;
+	}
+	else if (key == "Yemoja")
+	{
+		name = OSHOSI;
+	}
+	else if (key == "Yemoja")
+	{
+		name = OGUN;
+	}
+	Hero* h = new(find_available_block(memManager::hero_head)) Hero(name,x, y, col);
 
 	std::cout << h;
 	Containers::add_hero(key,h);

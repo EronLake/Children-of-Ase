@@ -6,7 +6,7 @@ class Player :
 {
 public:
 	Player();
-	Player(float x, float y, bool col);
+	Player(int name, float x, float y, bool col);
 	~Player();
 	void setTalkDist(float dist);
 private:

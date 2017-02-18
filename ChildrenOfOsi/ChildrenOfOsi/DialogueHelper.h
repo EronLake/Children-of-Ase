@@ -1,5 +1,6 @@
 #pragma once
 #include "common.h"
+#include "Hero.h"
 
 typedef std::vector<std::string> dialogue_point;
 
@@ -19,5 +20,7 @@ public:
 	dialogue_point choose_reply_pt(dialogue_point);
 	std::vector<dialogue_point> get_possible_conv_pts();
 	std::vector<dialogue_point> get_possible_reply_pts();
+	std::string gen_dialog(dialogue_point, Hero*);
+	std::string gen_reply(dialogue_point);
 };
 

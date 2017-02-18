@@ -7,7 +7,7 @@ Player::Player()
 {
 }
 
-Player::Player(float x, float y, bool col):Hero(x,y,col)
+Player::Player(int name, float x, float y, bool col):Hero(name,x,y,col)
 {
 }
 

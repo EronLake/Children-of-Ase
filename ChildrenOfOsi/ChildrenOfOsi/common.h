@@ -27,6 +27,11 @@
 #include <unordered_map>
 #include <queue>
 
+#define SHANGO 1
+#define YEMOJA 2
+#define OYA 3
+#define OSHOSI 4
+#define OGUN 5
 
 //toggles debug longging statements 
 #define DEBUG 1

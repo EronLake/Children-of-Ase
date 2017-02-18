@@ -7,9 +7,10 @@ Hero::Hero()
 {
 }
 
-Hero::Hero(float x, float y, bool col) :SplSoldier(x, y, col)
+Hero::Hero(int _name, float x, float y, bool col) :SplSoldier(x, y, col)
 {
 	affinity = 0;
+	name = _name;
 	cout << "Affinity: " << affinity << endl;
 }
 

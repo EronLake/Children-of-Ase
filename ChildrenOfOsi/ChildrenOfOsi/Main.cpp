@@ -47,7 +47,6 @@
 #include "DialogueHelper.h"
 #include "DialougeTestSuite.h"
 
-
 using namespace std;
 
 
@@ -305,13 +304,13 @@ void ALESSIO_TEST() {
 		rInt[i] = rand() % 4 - 1;
 	}
 	Factions fac(rInt);
-	Hero person2(20, 0, false);
+	Hero person2(OYA, 20, 0, false);
 	Texture still2;
 	still2.setFile("YemojasHouse.png");
 	still2.load();
 	still2.setFrames(2);
 	person2.sprite.setTexture(&still2);
-	Hero person(20, 0, false);
+	Hero person(YEMOJA, 20, 0, false);
 	Texture still;
 	still.setFile("phi.png");
 	still.load();
@@ -322,7 +321,7 @@ void ALESSIO_TEST() {
 	person.setAlive(false);
 	cout << "person is " << person.getAlive() << " with " << person.getHealth() << endl;
 	cout<<"at location " << person.getX() << " , " << person.getY() << endl;
-	Player me(30, 32, true);
+	Player me(SHANGO,30, 32, true);
 	NPC citizen(22, 2, true);
 	citizen.setHealth(10);
 	citizen.setInteractable(true);

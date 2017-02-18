@@ -56,3 +56,14 @@ std::vector<dialogue_point> DialogueHelper::get_possible_reply_pts()
 {
 	return possible_conv_pts;
 }
+
+
+std::string DialogueHelper::gen_dialog(dialogue_point, Hero* hero)
+{
+	//get_template()
+	return "nothing";
+}
+std::string DialogueHelper::gen_reply(dialogue_point)
+{
+	return "nothing";
+}
