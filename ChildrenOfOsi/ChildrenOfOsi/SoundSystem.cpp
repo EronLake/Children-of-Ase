@@ -33,13 +33,21 @@ FMOD_RESULT result;
 		
 		// Initialize our Instance with 36 Channels
 		m_pSystem->init(36, FMOD_INIT_NORMAL, 0);
-		string name = "violin.mp3";
-		SoundClass songAddress = nullptr;
+		string oasis = "shangodrums.wav";
+		string bump = "bump_0.wav";
+		string walk = "walk_0.wav";
 
-		this->createSound(&songAddress, name);
-		
-		sounds[name] = songAddress;
+		SoundClass oasisAddress = nullptr;
+		SoundClass bumpAddress = nullptr;
+		SoundClass walkAddress = nullptr;
 
+		this->createSound(&oasisAddress, oasis);
+		this->createSound(&bumpAddress, bump);
+		this->createSound(&walkAddress, walk);
+
+		sounds[oasis] = oasisAddress;
+		sounds[bump] = bumpAddress;
+		sounds[walk] = walkAddress;
 
 	}
 
@@ -70,7 +78,7 @@ FMOD_RESULT result;
 			pSound->setLoopCount(-1);
 		}
 
-
+		channel->setVolume(.3);
 
 		result = m_pSystem->playSound(pSound,0, ispaused, &channel); //fmod playsound takes  (FMOD::Sound *sound,FMOD::ChannelGroup *channelgroup, bool paused, FMOD::Channel **channel)
 		cout << FMOD_ErrorString(result) << endl;
@@ -92,8 +100,9 @@ FMOD_RESULT result;
 		SoundSystem soundsystem;
 
 		type = foo::soundType::music;
-		name = "violin.mp3";
+		name = "shangodrums.wav";
 		channel = channels[0];//assign the channel
+		
 		ispaused = false;
 
 		//this->createSound(&soundSample, name);// Create the sound
@@ -103,13 +112,77 @@ FMOD_RESULT result;
 														 //object stuff
 
 
-		playSound(sounds[name], false, channel, ispaused); 	// Play the sound, with loop mode
+		playSound(sounds[name], true, channel, ispaused); 	// Play the sound, with loop mode
 
 
 		//cout << "Press return to quit." << endl;  // Do something meanwhile...
 		//cin.get();
 
 		//releaseSound(sounds[name]); 
+		return 0;// Release the sound
+	};
+	int SoundSystem::playBump() {
+		foo::soundType type;
+		FMOD::Sound* soundSample;
+		const char* name;              //the variables required
+		FMOD::Channel* channel;
+		bool ispaused;
+		unsigned int time;
+
+		// Initialize our sound system
+		SoundSystem soundsystem;
+
+		type = foo::soundType::music;
+		name = "bump_0.wav";
+		channel = channels[0];//assign the channel
+		ispaused = false;
+
+		//this->createSound(&soundSample, name);// Create the sound
+		//soundSample->getLength(&time, FMOD_TIMEUNIT_PCM);// Find the length
+
+		//SoundObject* playable = new SoundObject("04.wav", &soundSample, type);
+		//object stuff
+
+
+		playSound(sounds[name], false, channel, ispaused); 	// Play the sound, with loop mode
+
+
+															//cout << "Press return to quit." << endl;  // Do something meanwhile...
+															//cin.get();
+
+															//releaseSound(sounds[name]); 
+		return 0;// Release the sound
+	};
+	int SoundSystem::playWalk() {
+		foo::soundType type;
+		FMOD::Sound* soundSample;
+		const char* name;              //the variables required
+		FMOD::Channel* channel;
+		bool ispaused;
+		unsigned int time;
+
+		// Initialize our sound system
+		SoundSystem soundsystem;
+
+		type = foo::soundType::music;
+		name = "walk_0.wav";
+		channel = channels[0];//assign the channel
+		ispaused = false;
+
+		//this->createSound(&soundSample, name);// Create the sound
+		//soundSample->getLength(&time, FMOD_TIMEUNIT_PCM);// Find the length
+
+		//SoundObject* playable = new SoundObject("04.wav", &soundSample, type);
+		//object stuff
+
+
+		playSound(sounds[name], true, channel, ispaused); 	// Play the sound, with loop mode
+
+
+															//cout << "Press return to quit." << endl;  // Do something meanwhile...
+															//cin.get();
+
+															//releaseSound(sounds[name]); 
 		return 0;// Release the sound
 	};
 	

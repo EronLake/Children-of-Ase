@@ -131,7 +131,9 @@
     <ClCompile Include="DialogueHelper.cpp">
       <Filter>Dialogue</Filter>
     </ClCompile>
-    <ClCompile Include="DialougeTestSuite.cpp" />
+    <ClCompile Include="DialougeTestSuite.cpp">
+      <Filter>Dialogue</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AIHelper.h">
@@ -275,7 +277,9 @@
     <ClInclude Include="DialogueHelper.h">
       <Filter>Dialogue</Filter>
     </ClInclude>
-    <ClInclude Include="DialougeTestSuite.h" />
+    <ClInclude Include="DialougeTestSuite.h">
+      <Filter>Dialogue</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Text Include="audio_test.txt">

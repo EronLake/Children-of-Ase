@@ -87,11 +87,13 @@
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
-      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
+      <AdditionalIncludeDirectories>$(ProjectDir)\jsoncpp\json\json.h</AdditionalIncludeDirectories>
+      <AdditionalUsingDirectories>$(ProjectDir)\json\json.h</AdditionalUsingDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -101,11 +103,13 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
-      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
+      <AdditionalIncludeDirectories>$(ProjectDir)\jsoncpp\json\json.h</AdditionalIncludeDirectories>
+      <AdditionalUsingDirectories>$(ProjectDir)\json\json.h</AdditionalUsingDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -166,11 +170,15 @@
     <ClInclude Include="common.h" />
     <ClInclude Include="Containers.h" />
     <ClInclude Include="DialogueController.h" />
+    <ClInclude Include="DialogueGui.h" />
     <ClInclude Include="DialogueHelper.h" />
     <ClInclude Include="DialougeTestSuite.h" />
     <ClInclude Include="DummyController.h" />
     <ClInclude Include="Factions.h" />
+    <ClInclude Include="GameMap.h" />
     <ClInclude Include="GameWindow.h" />
+    <ClInclude Include="json-forwards.h" />
+    <ClInclude Include="json.h" />
     <ClInclude Include="PhysicsTestSuite.h" />
     <ClInclude Include="TaskBufferTestSuite.h" />
     <ClInclude Include="Hero.h" />
@@ -205,6 +213,7 @@
     <ClInclude Include="Texture.h" />
     <ClInclude Include="Vector2f.h" />
     <ClInclude Include="WorldObj.h" />
+    <ClInclude Include="Wrapper.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="AIHelper.cpp" />
@@ -215,13 +224,16 @@
     <ClCompile Include="ChildrenOfOsi.cpp" />
     <ClCompile Include="Containers.cpp" />
     <ClCompile Include="DialogueController.cpp" />
+    <ClCompile Include="DialogueGui.cpp" />
     <ClCompile Include="DialogueHelper.cpp" />
     <ClCompile Include="DialougeTestSuite.cpp" />
     <ClCompile Include="DummyController.cpp" />
     <ClCompile Include="Factions.cpp" />
+    <ClCompile Include="GameMap.cpp" />
     <ClCompile Include="GameWindow.cpp" />
     <ClCompile Include="Hero.cpp" />
     <ClCompile Include="Input.cpp" />
+    <ClCompile Include="jsoncpp.cpp" />
     <ClCompile Include="LivingObj.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Manager.cpp" />
@@ -257,10 +269,13 @@
     <ClCompile Include="Texture.cpp" />
     <ClCompile Include="Vector2f.cpp" />
     <ClCompile Include="WorldObj.cpp" />
+    <ClCompile Include="Wrapper.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="AssetInfo.h" />
     <None Include="ClassDiagram.cd" />
+    <None Include="script_templates.json" />
+    <None Include="Yemoja_dialog.json" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -3,6 +3,7 @@
 #include "Task.h"
 #include "TaskBuffer.h"
 #include "MessageLog.h"
+#include "Player.h"
 
 
 class ChildrenOfOsi
@@ -20,9 +21,11 @@ public:
 	void move_down(WorldObj * player);
 	void move_right(WorldObj * player);
 	void move_out(WorldObj * player);
+	void talk(WorldObj * player);
 
 	//functions for rendering
 	void draw_frame(WorldObj* player);
+	void drawDiaGui(WorldObj* player);
 
 	//functions for creating objects in memory
 	void add_hero(std::string key, float x, float y, bool col);
@@ -34,10 +37,11 @@ public:
 	void add_npc(std::string key, float x, float y, bool col);
 
 	//functions for audio
-	void play_sound();
+	void play_sound(string name);
 
 	void createTask(std::string task_name, std::string type, WorldObj * objToUpdate = NULL);
 	void ChildrenOfOsi::createTaskWithParams(std::string task_name, std::string type, std::string key, float x, float y, bool col);
 	//void ChildrenOfOsi::createTaskForProjectile(std::string task_name, std::string type, float x, float y, bool col, int d);
+
 };
 

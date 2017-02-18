@@ -7,16 +7,14 @@ class Soldier :
 public:
 	Soldier();
 	Soldier(float x, float y, bool col);
+	Soldier(Vector2f p_topLeft, float p_width, float p_height);
 	~Soldier();
 	int getAtk();
 	void setAtk(int a);
 	void goAtk(LivingObj *target);
 	void setInCombat(bool c);
 	bool getInCombat();
-	void setWidth(float w) { width = w; };
-	void setHeight(float h) { height = h; }
-	float getWidth() { return width; }
-	float getHeight() { return height; }
+
 private:
 	int atk;
 	bool inCombat;

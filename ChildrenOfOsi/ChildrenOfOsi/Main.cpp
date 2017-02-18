@@ -29,6 +29,7 @@
 #include "CheckClass.h"
 #include "TaskBufferTestSuite.h"
 #include <Windows.h>
+//#include "DialogueGui.h"
 
 //#include "Pool.h"
 
@@ -47,8 +48,8 @@
 #include "DialogueHelper.h"
 #include "DialougeTestSuite.h"
 
-
 using namespace std;
+
 
 
 //void testQuadTree();
@@ -70,6 +71,8 @@ void PHYSICS_TEST();
 
 
 int main() {
+	    DialogueHelper* dhelper = new DialogueHelper();
+		dhelper->get_dialog("Yemoja");
 		//LOG("Hello world!");
 		//ERONS_LOOP();
 		/************************************************************************************************SET-UP*******************************************************/
@@ -92,7 +95,7 @@ int main() {
 		/*Darion Ian Test*/
 		//Darion_Ian_Test();
 /* ERON */
-		ERONS_LOOP();
+		//ERONS_LOOP();
 		/*ALESSIO*/
 		//ALESSIO_TEST();
 
@@ -105,7 +108,7 @@ int main() {
 	                                   
 		//testQuadTree();
 		//ALEX_LOOP(collideTree);        
-		//GAMEPLAY_LOOP(collideTree);
+		GAMEPLAY_LOOP(collideTree);
 
 
 	return 0;
@@ -167,44 +170,78 @@ int main() {
 void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 {
 
-	WorldObj* Alex = new WorldObj(Vector2f(1000.0, 600.0), 100.0, 100.0);	//init player
+
+	Player* Alex = new Player(SHANGO, Vector2f(1000.0, 600.0), 100.0, 100.0);	//init player
+	cout << "Alex's width and height is " << Alex->getWidth() << ", " << Alex->getHeight() << endl;
+
+	//DialogueGui* convoGui = new DialogueGui();
+
+	//Player* Alex = new Player(1000,600, true);	//init player
+	//WorldObj* Alex = new WorldObj(1000, 600, true);
+
 	Texture* playerTexture = new Texture();
 	Texture* objTexture = new Texture();
-	Texture* uptex = new Texture();
-	Texture* downtex = new Texture();
-	Texture* lefttex = new Texture();
-	Texture* righttex = new Texture();
+	Texture* upRunTex = new Texture();
+	Texture* downRunTex = new Texture();
+	Texture* leftRunTex = new Texture();
+	Texture* rightRunTex = new Texture();
+	Texture* upIdleTex = new Texture();
+	Texture* downIdleTex = new Texture();
+	Texture* leftIdleTex = new Texture();
+	Texture* rightIdleTex = new Texture();
 
+	//load sprite from a configuration file?
 	objTexture->setFile("YemojasHouse.png");
-	playerTexture->setFile("ShangoForwardSprite.png");
-	uptex->setFile("ShangoBackSprite.png");
-	downtex->setFile("ShangoForwardSprite.png");
-	lefttex->setFile("ShangoLeftSprite.png");
-	righttex->setFile("ShangoRightSprite.png");
+	playerTexture->setFile("ShangoFrontIdle.png");
+	upRunTex->setFile("ShangoBackSprite.png");
+	downRunTex->setFile("ShangoForwardSprite.png");
+	leftRunTex->setFile("ShangoLeftSprite.png");
+	rightRunTex->setFile("ShangoRightSprite.png");
+	upIdleTex->setFile("ShangoBackIdle.png");
+	downIdleTex->setFile("ShangoFrontIdle.png");
+	leftIdleTex->setFile("ShangoLeftIdle.png");
+	rightIdleTex->setFile("ShangoRightIdle.png");
+
+	/* SET UP SPRITE CHANGE, MIGHT NEED A SINGLETON?*/
 
 	playerTexture->load();
-	uptex->load();
-	downtex->load();
-	lefttex->load();
-	righttex->load();
+	upRunTex->load();
+	downRunTex->load();
+	leftRunTex->load();
+	rightRunTex->load();
+	upIdleTex->load();
+	downIdleTex->load();
+	leftIdleTex->load();
+	rightIdleTex->load();
 	objTexture->load();
-	playerTexture->setFrames(26);
-	uptex->setFrames(26);
-	downtex->setFrames(26);
-	lefttex->setFrames(26);
-	righttex->setFrames(26);
+	playerTexture->setFrames(1);
+	upRunTex->setFrames(26);
+	downRunTex->setFrames(26);
+	leftRunTex->setFrames(26);
+	rightRunTex->setFrames(26);
+	upIdleTex->setFrames(1);
+	downIdleTex->setFrames(1);
+	leftIdleTex->setFrames(1);
+	rightIdleTex->setFrames(1);
 	objTexture->setFrames(1);
 	Alex->sprite.setTexture(playerTexture);
-	Alex->sprite.up = uptex;
-	Alex->sprite.down = downtex;
-	Alex->sprite.left = lefttex;
-	Alex->sprite.right = righttex;
+	Alex->sprite.up = upRunTex;
+	Alex->sprite.down = downRunTex;
+	Alex->sprite.left = leftRunTex;
+	Alex->sprite.right = rightRunTex;
 	Alex->offsetBody(0, 50, 50, 50, 50);
+	Alex->setInteractable(true);
+	Alex->setName("Alex");
+	Alex->setTalkDist(20);
+	DialogueController::setPlayer(Alex);
 	vector<WorldObj*> recVec;
 
 	for (int i = 1; i < 5; i++) {
 		WorldObj* objs = new WorldObj(Vector2f(100 * i, 100 * i), 200.0, 200.0);
 		objs->sprite.setTexture(objTexture);
+		objs->setInteractable(true);
+		std::string building="Building ";
+		objs->setName(building+= std::to_string(i));
 		//objs->offsetBody(0, 50, 50, 50, 50);
 		//objs->offsetBody(0, 70, 70, 70, 70);
 		recVec.push_back(objs);
@@ -237,12 +274,14 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	RenderManager* RenM = new RenderManager(mLog, tBuffer, _QuadTree);
 	memManager* memM = new memManager(mLog, tBuffer);
 	TestManager* TestM = new TestManager(mLog, tBuffer);
+	AudioManager* AudM = new AudioManager(mLog, tBuffer);
 
 	//the order defines what order the managers the tasks will be sent to
 	DumM->register_manager();
 	PhysM->register_manager();
 	memM->register_manager();
 	RenM->register_manager();
+	AudM->register_manager();
 	TestM->register_manager();
 
 
@@ -267,7 +306,9 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 			_QuadTree->insert(recVec[i]);	//insert all obj into tree
 		}
 		//clock 
+
 		iController->InputCheck();
+
 		//Alex->WorldObj::drawObj(0,0);
 		//for (int i = 0; i < recVec.size(); i++) {
 		//	recVec[i]->drawObj(0,0);
@@ -276,7 +317,16 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 		////Alex->WorldObj::shiftX(.5);
 		//osi::GameWindow::refresh();
 		//draw
-		gameplay_functions->draw_frame(Alex);
+		if (DialogueController::getState() == 0) {
+			//LOG("ERROR AFTER PRESSING Q TO QUIT THE DIALOGUE GUI");
+			gameplay_functions->draw_frame(Alex);
+		}
+		else if (DialogueController::getState() > 0) {
+			gameplay_functions->drawDiaGui(Alex);
+		}
+		//convoGui->drawGui();
+
+		//gameplay_functions->draw_frame(convoGui);
 		//run task buffer
 		//iController->InputCheck();
 		tBuffer->run();
@@ -291,6 +341,8 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 		if (delta_ticks > 0)
 			fps = CLOCKS_PER_SEC / delta_ticks;
 		cout << "FPS: " << fps << endl;
+
+
 	}
 	osi::GameWindow::terminate();
 }
@@ -302,13 +354,13 @@ void ALESSIO_TEST() {
 		rInt[i] = rand() % 4 - 1;
 	}
 	Factions fac(rInt);
-	Hero person2(20, 0, false);
+	Hero person2(OYA, 20, 0, false);
 	Texture still2;
 	still2.setFile("YemojasHouse.png");
 	still2.load();
 	still2.setFrames(2);
 	person2.sprite.setTexture(&still2);
-	Hero person(20, 0, false);
+	Hero person(YEMOJA, 20, 0, false);
 	Texture still;
 	still.setFile("phi.png");
 	still.load();
@@ -319,7 +371,7 @@ void ALESSIO_TEST() {
 	person.setAlive(false);
 	cout << "person is " << person.getAlive() << " with " << person.getHealth() << endl;
 	cout<<"at location " << person.getX() << " , " << person.getY() << endl;
-	Player me(30, 32, true);
+	Player me(SHANGO,30, 32, true);
 	NPC citizen(22, 2, true);
 	citizen.setHealth(10);
 	citizen.setInteractable(true);
@@ -467,7 +519,7 @@ void ALEX_LOOP(QuadTree* _QuadTree) {
 		////Alex->WorldObj::shiftX(.5);
 		//osi::GameWindow::refresh();
 		//draw
-		gameplay_functions->draw_frame(Alex);
+		//gameplay_functions->draw_frame(Alex);
 		//run task buffer
 		//iController->InputCheck();
 		tBuffer->run();
@@ -545,7 +597,7 @@ void ERONS_LOOP() {
 		tBuffer->run();
 		//draw
 	}
-	*/
+	*//*
 	MessageLog* mLog = new MessageLog();
 	TaskBuffer* tBuffer = new TaskBuffer(mLog);
 
@@ -557,6 +609,13 @@ void ERONS_LOOP() {
 	std::cout << "true: " << true << std::endl;
 	std::cout << "false: " << false << std::endl;
 	delete dilg_tester;
+	*/
+
+	DialogueHelper* dilgH = new DialogueHelper();
+
+	Hero* oya = new Hero(OYA, 20, 0, false);
+	dilgH->gen_dialog({ "what", "variable" }, oya);
+
 	system("PAUSE");
 	
 }

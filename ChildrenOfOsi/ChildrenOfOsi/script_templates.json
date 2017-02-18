@@ -1,0 +1,192 @@
+{
+	"conversation_templates": {
+		"1": {
+			"1": "Greeting" ,
+			"2": "." ,
+			"3":"Extra_Dialogue",
+			"4": "."
+		},
+
+		"2": {
+			"1": "Greeting" ,
+			"2": "." 
+		},
+
+		"3": {
+			"1": "Refute_Question" ,
+			"2": "." 
+		},
+
+		"4": {
+			"1": "Refute_Question" ,
+			"2": "_" ,
+			"3":"Identifier",
+			"4": "."
+		},
+
+		"5": {
+			"1": "Refute_Question" ,
+			"2": "_" ,
+			"3":"Name_2",
+			"4": "."
+		},
+
+		"6": {
+			"1": "Introduction" ,
+			"2": "_" ,
+			"3":"Name_1",
+			"4": "."
+		},
+
+		"7": {
+			"1": "Introduction" ,
+			"2": "_" ,
+			"3":"Name_1",
+			"4": ".",
+			"5": "Extra_Dialogue",
+			"6": "."
+		},
+
+		"8": {
+			"1": "Response_Name" ,
+			"2": "_" ,
+			"3":"Name_2",
+			"4": ".",
+			"5": "Good_Intentions",
+			"6": "."
+		},
+
+		"9": {
+			"1": "Response_Name" ,
+			"2": "_" ,
+			"3":"Name_2",
+			"4": "."
+		},
+
+		"10": {
+			"1": "Response_Origin" ,
+			"2": "." 
+		},
+
+		"11": {
+			"1": "Friend_Reason" ,
+			"2": "_" ,
+			"3":"Name_2",
+			"4": ".",
+			"5": "Good_Intentions",
+			"6": "."
+		},
+
+		"12": {
+			"1": "Friend_Reason" ,
+			"2": "_" ,
+			"3":"Name_2",
+			"4": "."
+		},
+
+		"13": {
+			"1": "Friend_Reason" ,
+			"2": "." 
+		},
+
+		"14": {
+			"1": "Bad_Reason" ,
+			"2": "." 
+		},
+
+		"15": {
+			"1": "Village_Response" ,
+			"2": "_" ,
+			"3":"Village_1",
+			"4": ",",
+			"5": "Name_2",
+			"6": "."
+		},
+
+		"16": {
+			"1": "Village_Response" ,
+			"2": "_" ,
+			"3":"Village_1",
+			"4": "."
+		},
+
+		"17": {
+			"1": "Familiar_Greet" ,
+			"2": "." 
+		},
+
+		"18": {
+			"1": "Familiar_Greet" ,
+			"2": "_" ,
+			"3":"Name_2",
+			"4": "."
+		},
+
+		"19": {
+			"1": "Familiar_Greet" ,
+			"2": "_" ,
+			"3":"Name_2",
+			"4": ".",
+			"5": "Good_Intentions",
+			"6": "."
+		},
+
+		"20": {
+			"1": "Question_Denied" ,
+			"2": "." 
+		}
+
+	},
+
+	"question_templates": {
+	    "1": {
+			"1": "Ask_Name" ,
+			"2": "_" ,
+			"3":"Identifier",
+			"4": "?"
+		},
+
+		"2": {
+			"1": "Ask_Name" ,
+			"2": "?" 
+		},
+
+		"3": {
+			"1": "Ask_Reason" ,
+			"2": "_",
+			"3": "Indetifier",
+			"4": "?" 
+		},
+
+		"4": {
+			"1": "Ask_Reason" ,
+			"2": "?" 
+		},
+
+		"5": {
+			"1": "Ask_Reason" ,
+			"2": "_" ,
+			"3":"Name_2",
+			"4": "?"
+		},
+
+		"6": {
+			"1": "Ask_Origin" ,
+			"2": "_" ,
+			"3":"Identifier",
+			"4": "?"
+		},
+
+		"7": {
+			"1": "Ask_Origin" ,
+			"2": "?" 
+		},
+
+		"8": {
+			"1": "Ask_Origin" ,
+			"2": "_" ,
+			"3":"Name_2",
+			"4": "?"
+		}
+	}
+}

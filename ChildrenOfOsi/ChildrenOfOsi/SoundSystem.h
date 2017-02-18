@@ -29,6 +29,8 @@ public:
 	//void changeSoundSource(SoundObject sound, const char* name);
 	FMOD::Channel *channels[32];
 	int playSong1();
+	int playBump();
+	int playWalk();
 	//sounds sounds_map;
 	
 	

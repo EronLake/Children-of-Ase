@@ -45,10 +45,10 @@ public:
 	WorldObj(Vector2f p_topLeft, float p_width, float p_height);
 	void drawObj(float _x, float _y);
 	Sprite sprite;
-	Sprite sprite_up;
-	Sprite sprite_down;
-	Sprite sprite_left;
-	Sprite sprite_right;
+	//Sprite sprite_up;
+	//Sprite sprite_down;
+	//Sprite sprite_left;
+	//Sprite sprite_right;
 	vector<Rectangle> body;
 	void offsetBody(int i, float x1, float x2, float y1, float y2);
 	void _print();
