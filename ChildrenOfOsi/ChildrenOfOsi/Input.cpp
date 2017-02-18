@@ -31,6 +31,7 @@ void Input::InputCheck()
 	short D = GetKeyState('D') >> 15;
 	short R = GetKeyState('R') >> 15;
 	short T = GetKeyState('T') >> 15;
+	short E = GetKeyState('E') >> 15;
 
 	if (W)
 	{
@@ -54,6 +55,12 @@ void Input::InputCheck()
 	if (T) { //Failure check on fake task name
 		//gameplay_functions->move_out(player);
 		gameplay_functions->play_sound();
+	}
+	if (E) {
+		for (int i = 0; i < 50; i++) {
+			std::cout << "Pressed E" << std::endl;
+		}
+		gameplay_functions->talk(player);
 	}
 }
 

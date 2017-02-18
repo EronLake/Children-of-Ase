@@ -3,6 +3,7 @@
 #include "Task.h"
 #include "TaskBuffer.h"
 #include "MessageLog.h"
+#include "Player.h"
 
 
 class ChildrenOfOsi
@@ -20,6 +21,7 @@ public:
 	void move_down(WorldObj * player);
 	void move_right(WorldObj * player);
 	void move_out(WorldObj * player);
+	void talk(WorldObj * player);
 
 	//functions for rendering
 	void draw_frame(WorldObj* player);
