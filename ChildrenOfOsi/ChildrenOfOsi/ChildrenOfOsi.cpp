@@ -57,6 +57,11 @@ void ChildrenOfOsi::draw_frame(WorldObj * player)
 	createTask("Draw_Frame", "DRAW", player);
 }
 
+void ChildrenOfOsi::drawDiaGui(WorldObj* player)
+{
+	createTask("Talk", "DRAW", player);
+}
+
 ///*
 void ChildrenOfOsi::add_hero(std::string key, float x, float y, bool col) {
 	createTaskWithParams("Add_Hero", "MODIFY_POOL", key, x, y, col);
