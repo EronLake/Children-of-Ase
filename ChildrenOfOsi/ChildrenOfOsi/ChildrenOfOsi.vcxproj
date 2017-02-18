@@ -175,6 +175,7 @@
     <ClInclude Include="DialougeTestSuite.h" />
     <ClInclude Include="DummyController.h" />
     <ClInclude Include="Factions.h" />
+    <ClInclude Include="GameMap.h" />
     <ClInclude Include="GameWindow.h" />
     <ClInclude Include="json-forwards.h" />
     <ClInclude Include="json.h" />
@@ -228,6 +229,7 @@
     <ClCompile Include="DialougeTestSuite.cpp" />
     <ClCompile Include="DummyController.cpp" />
     <ClCompile Include="Factions.cpp" />
+    <ClCompile Include="GameMap.cpp" />
     <ClCompile Include="GameWindow.cpp" />
     <ClCompile Include="Hero.cpp" />
     <ClCompile Include="Input.cpp" />

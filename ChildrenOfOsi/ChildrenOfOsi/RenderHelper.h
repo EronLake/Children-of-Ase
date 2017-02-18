@@ -2,6 +2,7 @@
 #include "QuadTree.h"
 #include "GameWindow.h"
 #include "DialogueGui.h"
+#include "GameMap.h"
 
 class RenderHelper
 {
@@ -20,6 +21,7 @@ public:
 private:
 	WorldObj* camera;
 	DialogueGui* convoGui;
+	GameMap* gmap;
 	std::vector<WorldObj*> objVec;
 
 	//hold size of camera and map. first is width, second is height

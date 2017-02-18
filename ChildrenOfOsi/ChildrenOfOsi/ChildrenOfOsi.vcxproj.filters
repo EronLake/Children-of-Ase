@@ -141,6 +141,9 @@
     <ClCompile Include="jsoncpp.cpp">
       <Filter>JSON</Filter>
     </ClCompile>
+    <ClCompile Include="GameMap.cpp">
+      <Filter>Rendering</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AIHelper.h">
@@ -296,6 +299,9 @@
     </ClInclude>
     <ClInclude Include="json-forwards.h">
       <Filter>JSON</Filter>
+    </ClInclude>
+    <ClInclude Include="GameMap.h">
+      <Filter>Rendering</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
