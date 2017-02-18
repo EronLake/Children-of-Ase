@@ -1,6 +1,7 @@
 #pragma once
 #include "QuadTree.h"
 #include "GameWindow.h"
+#include "DialogueGui.h"
 
 class RenderHelper
 {
@@ -17,6 +18,7 @@ public:
 	QuadTree* tree;
 private:
 	WorldObj* camera;
+	DialogueGui* convoGui;
 	std::vector<WorldObj*> objVec;
 
 	//hold size of camera and map. first is width, second is height

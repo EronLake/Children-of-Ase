@@ -52,6 +52,7 @@
 using namespace std;
 
 
+
 //void testQuadTree();
 //bool checkCollision(WorldObj *recA, WorldObj *recB);	//given two bounding boxes, check if they collide
 //bool coordOverlap(int value, int min, int max) { return (value >= min) && (value <= max); }		//helper func for checkCollision
@@ -171,6 +172,8 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 
 	Player* Alex = new Player(Vector2f(1000.0, 600.0), 100.0, 100.0);	//init player
 	cout << "Alex's width and height is " << Alex->getWidth() << ", " << Alex->getHeight() << endl;
+
+	//DialogueGui* convoGui = new DialogueGui();
 
 	//Player* Alex = new Player(1000,600, true);	//init player
 	//WorldObj* Alex = new WorldObj(1000, 600, true);
@@ -294,6 +297,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 		//osi::GameWindow::refresh();
 		//draw
 		gameplay_functions->draw_frame(Alex);
+		//convoGui->drawGui();
 
 		//gameplay_functions->draw_frame(convoGui);
 		//run task buffer

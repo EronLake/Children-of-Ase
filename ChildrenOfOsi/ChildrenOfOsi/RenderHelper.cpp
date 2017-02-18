@@ -10,6 +10,9 @@ RenderHelper::RenderHelper(QuadTree * QT)
 	cameraSize.setYloc(540);
 	mapSize.setXloc(10000);
 	mapSize.setYloc(10000);
+	convoGui = new DialogueGui();
+	convoGui->loadTexture();
+	convoGui->setSprite();
 }
 
 RenderHelper::~RenderHelper()
@@ -48,6 +51,7 @@ int RenderHelper::draw_frame(WorldObj * obj)
 		objVec[i]->WorldObj::drawObj(camera->getX(), camera->getY());
 		objVec[i]->WorldObj::animateObj();
 	}
+	convoGui->drawGui();
 	osi::GameWindow::refresh();
 	return 0;
 }

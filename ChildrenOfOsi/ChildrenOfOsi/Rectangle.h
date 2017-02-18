@@ -1,7 +1,10 @@
-#include "common.h"
+#pragma once
+
+//#include "common.h"
 #include "stdafx.h"
 #include "Vector2f.h"
 #include "Sprite.h"
+
 using namespace std;
 
 class Rectangle
