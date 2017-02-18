@@ -83,8 +83,8 @@ void ChildrenOfOsi::add_npc(std::string key, float x,float y, bool col) {
 
 //*/
 
-void ChildrenOfOsi::play_sound() {
-	createTask("Play", "SOUND");
+void ChildrenOfOsi::play_sound(string name) {
+	createTask(name, "SOUND");
 }
 
 //----------------------------------------------------

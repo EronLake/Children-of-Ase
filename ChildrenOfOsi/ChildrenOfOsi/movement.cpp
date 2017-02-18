@@ -2,10 +2,15 @@
 #include "stdafx.h"
 #include "common.h"
 #include "Movement.h"
+#include "PhysicsManager.h"
+
+
 
 
 Movement::Movement(QuadTree* QT) {
 	tree = QT;
+	
+
 }
 
 Movement::~Movement() {
@@ -21,6 +26,7 @@ int Movement::move_up(WorldObj* obj) {
 	obj->shiftY(-moveSpeed);
 	for (int i = 0; i < objVec.size(); i++) {
 		if (collision(objVec[i], obj)) {
+			manager->createTask("Bump","SOUND");
 			LOG("failed to move up. collision.");
 			obj->shiftY(moveSpeed);
 			break;
@@ -37,6 +43,7 @@ int Movement::move_down(WorldObj* obj) {
 	for (int i = 0; i < objVec.size(); i++) {
 		if (collision(objVec[i], obj)) {
 			LOG("failed to move down. collision.");
+			manager->createTask("Bump", "SOUND");
 			obj->shiftY(-moveSpeed);
 			break;
 		}
@@ -52,6 +59,7 @@ int Movement::move_left(WorldObj* obj) {
 	for (int i = 0; i < objVec.size(); i++) {
 		if (collision(objVec[i], obj)) {
 			LOG("failed to move left. collision.");
+			manager->createTask("Bump", "SOUND");
 			obj->shiftX(moveSpeed);
 			break;
 		}
@@ -67,6 +75,7 @@ int Movement::move_right(WorldObj* obj) {
 	for (int i = 0; i < objVec.size(); i++) {
 		if (collision(objVec[i], obj)) {
 			LOG("failed to move right. collision.");
+			manager->createTask("Bump", "SOUND");
 			obj->shiftX(-moveSpeed);
 			break;
 		}

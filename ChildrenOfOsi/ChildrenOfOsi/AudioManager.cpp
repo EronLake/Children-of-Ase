@@ -9,6 +9,8 @@ AudioManager::AudioManager(MessageLog* _mLog, TaskBuffer* _tBuffer)
 	LOG("AudioManager Object Constructed");
 	soundHelper = new SoundSystem();
 	task_map["Play"] = &SoundSystem::playSong1;
+	task_map["Bump"] = &SoundSystem::playBump;
+	task_map["Walk"] = &SoundSystem::playWalk;
 }
 
 

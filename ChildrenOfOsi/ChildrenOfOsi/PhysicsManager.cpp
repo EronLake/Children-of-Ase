@@ -16,6 +16,8 @@ PhysicsManager::PhysicsManager(MessageLog * _mLog, TaskBuffer * _tBuffer, QuadTr
 	LOG("PhysicsManager W/QT Object Constructed");
 	//init a movement obj 
 	moveHelper = new Movement(_physicsQuadTree);
+	moveHelper->manager = this;
+	
 
 	//init mapping of tasks to functions
 	task_map["Move_Up"] = &Movement::move_up;
@@ -34,6 +36,7 @@ PhysicsManager::~PhysicsManager()
 void PhysicsManager::register_manager()
 {
 	tBuffer->add_to_table("MOVE", this);
+	
 }
 
 void PhysicsManager::execute_task(Task* current_task)

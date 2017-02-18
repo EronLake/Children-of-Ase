@@ -13,6 +13,7 @@ Input::Input(ChildrenOfOsi* _gameplay_functions)
 Input::Input(ChildrenOfOsi* _gameplay_functions, WorldObj * _player)
 {
 	gameplay_functions = _gameplay_functions;
+	gameplay_functions->play_sound("Play");
 	player = _player;
 	LOG("Input Object W/Player Constructed");
 }
@@ -53,7 +54,8 @@ void Input::InputCheck()
 	}
 	if (T) { //Failure check on fake task name
 		//gameplay_functions->move_out(player);
-		gameplay_functions->play_sound();
+		//gameplay_functions->play_sound("Bump");
+		
 	}
 }
 

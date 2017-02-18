@@ -4,6 +4,8 @@
 #include "QuadTree.h"
 #include "Task.h"
 
+class PhysicsManager;
+
 class Movement {
 public:
 	Movement(QuadTree* QT);
@@ -16,6 +18,8 @@ public:
 	int move_right(WorldObj* obj);
 	//void init_task_map();
     QuadTree* tree;
+	PhysicsManager* manager;
+
 
 private:
 	bool collision(WorldObj* recA, WorldObj* recB);
@@ -23,4 +27,5 @@ private:
 	//hold obj to check with. init before each move funcs call
 	std::vector<WorldObj*> objVec;
 	float moveSpeed = 6.0f;
+
 };
