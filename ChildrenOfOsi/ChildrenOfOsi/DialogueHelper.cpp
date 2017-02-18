@@ -15,7 +15,7 @@ DialogueHelper dialogue;
 
 DialogueHelper::DialogueHelper()
 {
-
+	srand(time(0)); // seed the rand function
 	possible_conv_pts.push_back({ "what", "variable" });
 	possible_conv_pts.push_back({ "who", "variable" });
 	possible_conv_pts.push_back({ "where", "variable" });
@@ -78,3 +78,71 @@ std::string DialogueHelper::gen_reply(dialogue_point)
 {
 	return "nothing";
 }
+
+dialogue_template DialogueHelper::get_template() {
+	Json::Value root;
+	Json::Reader reader;
+
+	std::ifstream file("script_templates.json");
+	file >> root;
+
+	
+	dialogue_template dtemp;
+
+	//get a random conversation template
+	int j = rand() % root["conversation_templates"].size() + 1;
+
+	/*populate a dialogue template using the contents
+	of the randomly obtained dialogue template*/
+	for (int i = 1; i <= root["conversation_templates"]
+		[to_string(j)].size(); i++) {
+		dtemp.push_back(root["conversation_templates"][to_string(j)]
+			[to_string(i)].asString());
+	}
+
+	return dtemp;
+
+}
+
+dialogue_point DialogueHelper::get_dialog(std::string name) {
+
+	dialogue_template dtemp = get_template();
+
+	Json::Value root;
+	Json::Reader reader;
+
+	std::string dialogue_filename = name + "_dialog.json";
+
+	std::ifstream file(dialogue_filename);
+	file >> root;
+
+	dialogue_point dpoint;
+	
+
+	/*look up appropriate random phrases using dialogue template
+	if the string is punctuation then do not look it up and
+	instead push the string right away*/
+	int j = 0;
+	std::string tmp = "";
+	for (int i = 1; i <= dtemp.size(); i++ ) {
+		tmp = dtemp[i - 1];
+		if (tmp != "?" && tmp != "," && tmp != "." && 
+			tmp != "!" && tmp != "_") {
+			j = rand() % root[tmp].size() + 1;
+			dpoint.push_back(root[tmp][to_string(j)]
+				.asString());
+		}
+		else {
+			dpoint.push_back(tmp);
+
+		}
+
+	}
+	for (int i = 0; i < dpoint.size(); i++){
+		std::cout << "dialogue point: "<< dpoint[i] << std::endl;
+	}
+	
+	return dpoint;
+
+}
+

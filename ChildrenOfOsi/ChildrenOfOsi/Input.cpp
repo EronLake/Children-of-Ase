@@ -33,36 +33,41 @@ void Input::InputCheck()
 	short R = GetKeyState('R') >> 15;
 	short T = GetKeyState('T') >> 15;
 	short E = GetKeyState('E') >> 15;
+	short Q = GetKeyState('Q') >> 15;
+	if (DialogueController::getState() == 0) {
 
-	if (W)
-	{
-		gameplay_functions->move_up(player);
-	}
-	if (A)
-	{
-		gameplay_functions->move_left(player);
-	}
-	if (S)
-	{
-		gameplay_functions->move_down(player);
-	}
-	if (D)
-	{
-		gameplay_functions->move_right(player);
-	}
-	if (R) {
-		gameplay_functions->add_soldier("soldier",9.6f,100.3f,true);
-	}
-	if (T) { //Failure check on fake task name
-		//gameplay_functions->move_out(player);
-		//gameplay_functions->play_sound("Bump");
-		
-	}
-	if (E) {
-		for (int i = 0; i < 50; i++) {
-			std::cout << "Pressed E" << std::endl;
+		if (W)
+		{
+			gameplay_functions->move_up(player);
 		}
-		gameplay_functions->talk(player);
+		if (A)
+		{
+			gameplay_functions->move_left(player);
+		}
+		if (S)
+		{
+			gameplay_functions->move_down(player);
+		}
+		if (D)
+		{
+			gameplay_functions->move_right(player);
+		}
+		if (R) {
+			gameplay_functions->add_soldier("soldier", 9.6f, 100.3f, true);
+		}
+		if (E) {
+			for (int i = 0; i < 50; i++) {
+				std::cout << "Pressed E" << std::endl;
+			}
+			gameplay_functions->talk(player);
+		}
+
+	}
+	
+	if (DialogueController::getState() > 0) {
+		if (Q) {
+			DialogueController::exitDialogue();
+		}
 	}
 }
 

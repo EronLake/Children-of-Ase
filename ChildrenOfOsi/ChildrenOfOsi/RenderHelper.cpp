@@ -10,6 +10,12 @@ RenderHelper::RenderHelper(QuadTree * QT)
 	cameraSize.setYloc(540);
 	mapSize.setXloc(10000);
 	mapSize.setYloc(10000);
+	convoGui = new DialogueGui();
+	convoGui->loadTexture();
+	convoGui->setSprite();
+	gmap = new GameMap();
+	gmap->loadTexture();
+	gmap->setSprite();
 }
 
 RenderHelper::~RenderHelper()
@@ -36,6 +42,7 @@ int RenderHelper::draw_frame(WorldObj * obj)
 	//pass in the camera bound for rendering instead of the object
 	objVec.clear();
 	objVec = tree->retrieve(objVec, camera);
+	gmap->drawMap(camera->getX(), camera->getY());
 	obj->WorldObj::drawObj(camera->getX(), camera->getY());
 	obj->WorldObj::animateObj();
 	/*for (int i = 0; i < obj->body.size(); i++) {
@@ -48,9 +55,29 @@ int RenderHelper::draw_frame(WorldObj * obj)
 		objVec[i]->WorldObj::drawObj(camera->getX(), camera->getY());
 		objVec[i]->WorldObj::animateObj();
 	}
+	//convoGui->drawGui();
 	osi::GameWindow::refresh();
 	return 0;
 }
+
+
+int RenderHelper::drawDiaGui(WorldObj* obj)
+{
+	gmap->drawMap(camera->getX(), camera->getY());
+	obj->WorldObj::drawObj(camera->getX(), camera->getY());
+	obj->WorldObj::animateObj();
+	for (int i = 0; i < objVec.size(); i++) {
+		LOG("BEFORE DRAWING**");
+		//cout << objVec[i]->getX() - camera->getX() << endl;
+		//LOG(objVec[i]->getX(), ", ", objVec[i]->getY());
+		objVec[i]->WorldObj::drawObj(camera->getX(), camera->getY());
+		objVec[i]->WorldObj::animateObj();
+	}
+	convoGui->drawGui();
+	osi::GameWindow::refresh();
+	return 0;
+}
+
 
 int RenderHelper::sprite_up(WorldObj * obj)
 {

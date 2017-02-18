@@ -81,3 +81,13 @@ WorldObj* DialogueController::getOther()
 {
 	return other;
 }
+
+int DialogueController::getState()
+{
+	return state;
+}
+
+void DialogueController::exitDialogue()
+{
+	state=0;
+}

@@ -2,7 +2,7 @@
 #include "stdafx.h"
 #include "common.h"
 #include "ChildrenOfOsi.h"
-
+#include "DialogueController.h"
 
 
 

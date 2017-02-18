@@ -1,6 +1,8 @@
 #pragma once
 #include "common.h"
 #include "Rectangle.h"
+#include "GameWindow.h"
+
 
 class DialogueGui
 {
@@ -15,6 +17,8 @@ private:
 	Rectangle* dialogueBox;
 	Rectangle* responseBox1;
 	Rectangle* responseBox2;
+	Rectangle* portrait1;
+	Rectangle* portrait2;
 
 	//Texture
 	Texture* backgroundTex;
@@ -31,5 +35,7 @@ public:
 	void loadTexture();
 	void setSprite();
 	void drawGui();
+	void setPortrait1(Sprite portrait1Sprite);
+	void setPortrait2(Sprite portrait2Sprite);
 };
 

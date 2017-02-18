@@ -51,6 +51,7 @@
 using namespace std;
 
 
+
 //void testQuadTree();
 //bool checkCollision(WorldObj *recA, WorldObj *recB);	//given two bounding boxes, check if they collide
 //bool coordOverlap(int value, int min, int max) { return (value >= min) && (value <= max); }		//helper func for checkCollision
@@ -70,6 +71,8 @@ void PHYSICS_TEST();
 
 
 int main() {
+	    DialogueHelper* dhelper = new DialogueHelper();
+		dhelper->get_dialog("Yemoja");
 		//LOG("Hello world!");
 		//ERONS_LOOP();
 		/************************************************************************************************SET-UP*******************************************************/
@@ -171,41 +174,61 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	Player* Alex = new Player(SHANGO, Vector2f(1000.0, 600.0), 100.0, 100.0);	//init player
 	cout << "Alex's width and height is " << Alex->getWidth() << ", " << Alex->getHeight() << endl;
 
+	//DialogueGui* convoGui = new DialogueGui();
+
 	//Player* Alex = new Player(1000,600, true);	//init player
 	//WorldObj* Alex = new WorldObj(1000, 600, true);
 
 	Texture* playerTexture = new Texture();
 	Texture* objTexture = new Texture();
-	Texture* uptex = new Texture();
-	Texture* downtex = new Texture();
-	Texture* lefttex = new Texture();
-	Texture* righttex = new Texture();
+	Texture* upRunTex = new Texture();
+	Texture* downRunTex = new Texture();
+	Texture* leftRunTex = new Texture();
+	Texture* rightRunTex = new Texture();
+	Texture* upIdleTex = new Texture();
+	Texture* downIdleTex = new Texture();
+	Texture* leftIdleTex = new Texture();
+	Texture* rightIdleTex = new Texture();
 
 	//load sprite from a configuration file?
 	objTexture->setFile("YemojasHouse.png");
-	playerTexture->setFile("ShangoForwardSprite.png");
-	uptex->setFile("ShangoBackSprite.png");
-	downtex->setFile("ShangoForwardSprite.png");
-	lefttex->setFile("ShangoLeftSprite.png");
-	righttex->setFile("ShangoRightSprite.png");
+	playerTexture->setFile("ShangoFrontIdle.png");
+	upRunTex->setFile("ShangoBackSprite.png");
+	downRunTex->setFile("ShangoForwardSprite.png");
+	leftRunTex->setFile("ShangoLeftSprite.png");
+	rightRunTex->setFile("ShangoRightSprite.png");
+	upIdleTex->setFile("ShangoBackIdle.png");
+	downIdleTex->setFile("ShangoFrontIdle.png");
+	leftIdleTex->setFile("ShangoLeftIdle.png");
+	rightIdleTex->setFile("ShangoRightIdle.png");
+
+	/* SET UP SPRITE CHANGE, MIGHT NEED A SINGLETON?*/
 
 	playerTexture->load();
-	uptex->load();
-	downtex->load();
-	lefttex->load();
-	righttex->load();
+	upRunTex->load();
+	downRunTex->load();
+	leftRunTex->load();
+	rightRunTex->load();
+	upIdleTex->load();
+	downIdleTex->load();
+	leftIdleTex->load();
+	rightIdleTex->load();
 	objTexture->load();
-	playerTexture->setFrames(26);
-	uptex->setFrames(26);
-	downtex->setFrames(26);
-	lefttex->setFrames(26);
-	righttex->setFrames(26);
+	playerTexture->setFrames(1);
+	upRunTex->setFrames(26);
+	downRunTex->setFrames(26);
+	leftRunTex->setFrames(26);
+	rightRunTex->setFrames(26);
+	upIdleTex->setFrames(1);
+	downIdleTex->setFrames(1);
+	leftIdleTex->setFrames(1);
+	rightIdleTex->setFrames(1);
 	objTexture->setFrames(1);
 	Alex->sprite.setTexture(playerTexture);
-	Alex->sprite.up = uptex;
-	Alex->sprite.down = downtex;
-	Alex->sprite.left = lefttex;
-	Alex->sprite.right = righttex;
+	Alex->sprite.up = upRunTex;
+	Alex->sprite.down = downRunTex;
+	Alex->sprite.left = leftRunTex;
+	Alex->sprite.right = rightRunTex;
 	Alex->offsetBody(0, 50, 50, 50, 50);
 	Alex->setInteractable(true);
 	Alex->setName("Alex");
@@ -283,7 +306,9 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 			_QuadTree->insert(recVec[i]);	//insert all obj into tree
 		}
 		//clock 
+
 		iController->InputCheck();
+
 		//Alex->WorldObj::drawObj(0,0);
 		//for (int i = 0; i < recVec.size(); i++) {
 		//	recVec[i]->drawObj(0,0);
@@ -292,7 +317,14 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 		////Alex->WorldObj::shiftX(.5);
 		//osi::GameWindow::refresh();
 		//draw
-		gameplay_functions->draw_frame(Alex);
+		if (DialogueController::getState() == 0) {
+			//LOG("ERROR AFTER PRESSING Q TO QUIT THE DIALOGUE GUI");
+			gameplay_functions->draw_frame(Alex);
+		}
+		else if (DialogueController::getState() > 0) {
+			gameplay_functions->drawDiaGui(Alex);
+		}
+		//convoGui->drawGui();
 
 		//gameplay_functions->draw_frame(convoGui);
 		//run task buffer
@@ -309,6 +341,8 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 		if (delta_ticks > 0)
 			fps = CLOCKS_PER_SEC / delta_ticks;
 		cout << "FPS: " << fps << endl;
+
+
 	}
 	osi::GameWindow::terminate();
 }
