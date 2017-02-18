@@ -7,6 +7,7 @@ class Soldier :
 public:
 	Soldier();
 	Soldier(float x, float y, bool col);
+	Soldier(Vector2f p_topLeft, float p_width, float p_height);
 	~Soldier();
 	int getAtk();
 	void setAtk(int a);

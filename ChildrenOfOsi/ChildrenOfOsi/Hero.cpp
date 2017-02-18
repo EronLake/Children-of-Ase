@@ -13,6 +13,10 @@ Hero::Hero(float x, float y, bool col) :SplSoldier(x, y, col)
 	cout << "Affinity: " << affinity << endl;
 }
 
+Hero::Hero(Vector2f p_topLeft, float p_width, float p_height):SplSoldier(p_topLeft,p_width,p_height)
+{
+}
+
 Hero::~Hero()
 {
 }

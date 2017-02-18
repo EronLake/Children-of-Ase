@@ -29,6 +29,7 @@
 #include "CheckClass.h"
 #include "TaskBufferTestSuite.h"
 #include <Windows.h>
+//#include "DialogueGui.h"
 
 //#include "Pool.h"
 
@@ -167,7 +168,8 @@ int main() {
 void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 {
 
-	WorldObj* Alex = new WorldObj(Vector2f(1000.0, 600.0), 100.0, 100.0);	//init player
+	Player* Alex = new Player(Vector2f(1000.0, 600.0), 100.0, 100.0);	//init player
+	cout << "Alex's width and height is " << Alex->getWidth() << ", " << Alex->getHeight() << endl;
 	Texture* playerTexture = new Texture();
 	Texture* objTexture = new Texture();
 	Texture* uptex = new Texture();
@@ -280,6 +282,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 		//osi::GameWindow::refresh();
 		//draw
 		gameplay_functions->draw_frame(Alex);
+		//gameplay_functions->draw_frame(convoGui);
 		//run task buffer
 		//iController->InputCheck();
 		tBuffer->run();

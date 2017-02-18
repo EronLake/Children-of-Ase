@@ -13,6 +13,10 @@ Soldier::Soldier(float x, float y, bool col) :NPC(x, y, col)
 	cout << "Attack: " << atk << endl;
 }
 
+Soldier::Soldier(Vector2f p_topLeft, float p_width, float p_height):NPC(p_topLeft,p_width,p_height)
+{
+}
+
 Soldier::~Soldier()
 {
 }

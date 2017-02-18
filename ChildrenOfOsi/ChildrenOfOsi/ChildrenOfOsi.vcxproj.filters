@@ -132,6 +132,9 @@
       <Filter>Dialogue</Filter>
     </ClCompile>
     <ClCompile Include="DialougeTestSuite.cpp" />
+    <ClCompile Include="DialogueGui.cpp">
+      <Filter>Dialogue</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AIHelper.h">
@@ -276,6 +279,9 @@
       <Filter>Dialogue</Filter>
     </ClInclude>
     <ClInclude Include="DialougeTestSuite.h" />
+    <ClInclude Include="DialogueGui.h">
+      <Filter>Dialogue</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Text Include="audio_test.txt">

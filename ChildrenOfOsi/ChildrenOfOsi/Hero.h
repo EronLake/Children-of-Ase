@@ -7,6 +7,7 @@ class Hero :
 public:
 	Hero();
 	Hero(float x, float y, bool col);
+	Hero(Vector2f p_topLeft, float p_width, float p_height);
 	~Hero();
 private:
 	int affinity;

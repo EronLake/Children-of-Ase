@@ -13,6 +13,10 @@ NPC::NPC(float x, float y, bool col) :LivingObj(x, y, col)
 	cout << "Faction: " << faction << endl;
 }
 
+NPC::NPC(Vector2f p_topLeft, float p_width, float p_height):LivingObj(p_topLeft,p_width,p_height)
+{
+}
+
 NPC::~NPC()
 {
 }
