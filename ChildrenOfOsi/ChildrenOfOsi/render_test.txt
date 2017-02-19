@@ -151,10 +151,29 @@
 2/18/2017   2:15   Render manager unit test failed!
 2/18/2017   2:15   Render manager unit test failed!
 2/18/2017   2:16   Render manager unit test failed!
+<<<<<<< HEAD
+2/18/2017   4:38   Render manager unit test failed!
+2/18/2017   4:40   Render manager unit test failed!
+=======
 2/18/2017   2:34   Render manager unit test failed!
 2/18/2017   2:53   Render manager unit test failed!
 2/18/2017   2:59   Render manager unit test failed!
 2/18/2017   3:16   Render manager unit test failed!
 2/18/2017   3:18   Render manager unit test failed!
+<<<<<<< HEAD
+2/18/2017   3:25   Render manager unit test failed!
+2/18/2017   3:31   Render manager unit test failed!
+2/18/2017   3:35   Render manager unit test failed!
+2/18/2017   3:39   Render manager unit test failed!
+2/18/2017   3:49   Render manager unit test failed!
+2/18/2017   3:49   Render manager unit test failed!
+2/18/2017   3:50   Render manager unit test failed!
+2/18/2017   4:21   Render manager unit test failed!
+2/18/2017   4:24   Render manager unit test failed!
+2/18/2017   4:38   Render manager unit test failed!
+=======
 >>>>>>> 3fce55038d3c11c0406a631f6909dc59420388ed
 2/18/2017   3:35   Render manager unit test failed!
+>>>>>>> 0f3c7d7ecd9216eab09d8c68f6e69247c820ee7b
+>>>>>>> 586f52722669ec40b4c30e9694afdd6dd0cd6473
+2/18/2017   5:56   Render manager unit test failed!

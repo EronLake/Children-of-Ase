@@ -134,6 +134,18 @@
     <ClCompile Include="DialougeTestSuite.cpp">
       <Filter>Dialogue</Filter>
     </ClCompile>
+    <ClCompile Include="DialogueGui.cpp">
+      <Filter>Dialogue</Filter>
+    </ClCompile>
+    <ClCompile Include="GameMap.cpp">
+      <Filter>Game Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="jsoncpp.cpp">
+      <Filter>Dialogue</Filter>
+    </ClCompile>
+    <ClCompile Include="Wrapper.cpp">
+      <Filter>Misc</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AIHelper.h">
@@ -280,6 +292,21 @@
     <ClInclude Include="DialougeTestSuite.h">
       <Filter>Dialogue</Filter>
     </ClInclude>
+    <ClInclude Include="DialogueGui.h">
+      <Filter>Dialogue</Filter>
+    </ClInclude>
+    <ClInclude Include="GameMap.h">
+      <Filter>Game Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="json-forwards.h">
+      <Filter>Dialogue</Filter>
+    </ClInclude>
+    <ClInclude Include="json.h">
+      <Filter>Dialogue</Filter>
+    </ClInclude>
+    <ClInclude Include="Wrapper.h">
+      <Filter>Misc</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Text Include="audio_test.txt">
@@ -345,6 +372,15 @@
     </None>
     <None Include="AssetInfo.h">
       <Filter>Rendering</Filter>
+    </None>
+    <None Include="Shango_dialog.json">
+      <Filter>Dialogue</Filter>
+    </None>
+    <None Include="Yemoja_dialog.json">
+      <Filter>Dialogue</Filter>
+    </None>
+    <None Include="script_templates.json">
+      <Filter>Dialogue</Filter>
     </None>
   </ItemGroup>
 </Project>

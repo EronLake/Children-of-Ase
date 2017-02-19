@@ -151,10 +151,29 @@
 2/18/2017   2:15   Task buffer unit test passed!
 2/18/2017   2:15   Task buffer unit test passed!
 2/18/2017   2:16   Task buffer unit test passed!
+<<<<<<< HEAD
+2/18/2017   4:38   Task buffer unit test passed!
+2/18/2017   4:40   Task buffer unit test passed!
+=======
 2/18/2017   2:34   Task buffer unit test passed!
 2/18/2017   2:53   Task buffer unit test passed!
 2/18/2017   2:59   Task buffer unit test passed!
 2/18/2017   3:16   Task buffer unit test passed!
 2/18/2017   3:18   Task buffer unit test passed!
+<<<<<<< HEAD
+2/18/2017   3:25   Task buffer unit test passed!
+2/18/2017   3:31   Task buffer unit test passed!
+2/18/2017   3:35   Task buffer unit test passed!
+2/18/2017   3:39   Task buffer unit test passed!
+2/18/2017   3:49   Task buffer unit test passed!
+2/18/2017   3:49   Task buffer unit test passed!
+2/18/2017   3:50   Task buffer unit test passed!
+2/18/2017   4:21   Task buffer unit test passed!
+2/18/2017   4:24   Task buffer unit test passed!
+2/18/2017   4:38   Task buffer unit test passed!
+=======
 >>>>>>> 3fce55038d3c11c0406a631f6909dc59420388ed
 2/18/2017   3:35   Task buffer unit test passed!
+>>>>>>> 0f3c7d7ecd9216eab09d8c68f6e69247c820ee7b
+>>>>>>> 586f52722669ec40b4c30e9694afdd6dd0cd6473
+2/18/2017   5:56   Task buffer unit test passed!

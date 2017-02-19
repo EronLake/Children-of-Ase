@@ -71,8 +71,8 @@ void PHYSICS_TEST();
 
 
 int main() {
-	    DialogueHelper* dhelper = new DialogueHelper();
-		dhelper->get_dialog("Yemoja");
+	 //   DialogueHelper* dhelper = new DialogueHelper();
+		//dhelper->get_dialog("Yemoja");
 		//LOG("Hello world!");
 		//ERONS_LOOP();
 		/************************************************************************************************SET-UP*******************************************************/
@@ -180,6 +180,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	//WorldObj* Alex = new WorldObj(1000, 600, true);
 
 	Texture* playerTexture = new Texture();
+	Texture* playerIdleTex = new Texture();
 	Texture* objTexture = new Texture();
 	Texture* upRunTex = new Texture();
 	Texture* downRunTex = new Texture();
@@ -193,6 +194,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	//load sprite from a configuration file?
 	objTexture->setFile("YemojasHouse.png");
 	playerTexture->setFile("ShangoFrontIdle.png");
+	playerIdleTex->setFile("ShangoFrontIdle.png");
 	upRunTex->setFile("ShangoBackSprite.png");
 	downRunTex->setFile("ShangoForwardSprite.png");
 	leftRunTex->setFile("ShangoLeftSprite.png");
@@ -205,6 +207,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	/* SET UP SPRITE CHANGE, MIGHT NEED A SINGLETON?*/
 
 	playerTexture->load();
+	playerIdleTex->load();
 	upRunTex->load();
 	downRunTex->load();
 	leftRunTex->load();
@@ -215,6 +218,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	rightIdleTex->load();
 	objTexture->load();
 	playerTexture->setFrames(1);
+	playerIdleTex->setFrames(1);
 	upRunTex->setFrames(26);
 	downRunTex->setFrames(26);
 	leftRunTex->setFrames(26);
@@ -225,10 +229,18 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	rightIdleTex->setFrames(1);
 	objTexture->setFrames(1);
 	Alex->sprite.setTexture(playerTexture);
+	Alex->sprite.setIdleTexture(playerIdleTex);
 	Alex->sprite.up = upRunTex;
 	Alex->sprite.down = downRunTex;
 	Alex->sprite.left = leftRunTex;
 	Alex->sprite.right = rightRunTex;
+
+	Alex->sprite.id_up = upIdleTex;
+	Alex->sprite.id_left =leftIdleTex;
+	Alex->sprite.id_right = rightIdleTex;
+	Alex->sprite.id_down = downIdleTex;
+
+
 	Alex->offsetBody(0, 50, 50, 50, 50);
 	Alex->setInteractable(true);
 	Alex->setName("Alex");
@@ -427,6 +439,7 @@ void ALEX_LOOP(QuadTree* _QuadTree) {
 	Texture* downtex = new Texture();
 	Texture* lefttex = new Texture();
 	Texture* righttex = new Texture();
+
 
 	objTexture->setFile("YemojasHouse.jpg");
 	playerTexture->setFile("phi.png");

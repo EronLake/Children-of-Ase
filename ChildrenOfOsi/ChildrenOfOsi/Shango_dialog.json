@@ -1,0 +1,99 @@
+{
+	"Greeting": {
+		"1": "Hello",
+		"2": "I greet you"
+	},
+
+	"Extra_Dialogue": {
+		"1": "I have traveled far to make it to this village",
+		"2": "I am curious as to why there is a desolate village such as this all the way out here",
+		"3": "The savannah was very harsh. I am surprised this village is as prosperous as it is"
+	},
+
+	"Introduction": {
+		"1": "My name is",
+		"2": "I am called",
+		"3": "I am known as"
+	},
+
+	"Refute_Question": {
+		"1": "We are not friendly enough for me to answer that",
+		"2": "I do not want to tell you that",
+		"3": "I refuse to say anything about that subject"
+	},
+
+	"Name_1": {
+		"1": "Shango"
+	},
+
+	"Ask_Name": {
+		"1": "I am curious as to what you call yourself",
+		"2": "What do the residents of this village know you as",
+		"3": "What is a strong leader such as yourself called"
+	},
+
+
+	"Ask_Origin": {
+		"1": "What is this village known as",
+		"2": "What do you and the people here call this village",
+		"3": "Where do you come from"
+	},
+
+	"Friend_Response": {
+		"1": "I am here to form a friendship with this village and its people",
+		"2": "I come before you with only peaceful intentions",
+		"3": "I wanted to see the rumored beauty of your village for myself"
+	},
+
+	"Bad_Response": {
+		"1": "I am here to see how pathetic this village is for my own eyes",
+		"2": "I came here to determine whether or not you could defend yourself from Ogun. Your defenses are laughable to say the least",
+		"3": "This village is as awful as the surrounding landscape"
+	},
+
+	"Response_Origin": {
+		"1": "So the Oasis Village was real all along",
+		"2": "The Oasis Village is very well hidden by the harshness of the Savannah",
+		"3": "I’m impressed the Oasis Village has been hidden for so long"
+	},
+
+	"Identifier": {
+		"1": "Leader"
+	},
+
+	"Response_Name": {
+		"1": "It is an honor to be in you presence",
+		"2": "It is truly a pleasure to meet you",
+		"3": "I have heard many great things about you"
+	},
+
+	"Name_2": {
+		"1": "Yemoja"
+	},
+
+	"Good_Intentions": {
+		"1": "I look forward to getting along with the people of this village",
+		"2": "I hope I can become a valuable asset to your village"
+	},
+
+	"Village_1": {
+		"1": "Ile-Ife"
+	},
+
+	"Village_Response": {
+		"1": "I have traveled from the far away city of",
+		"2": "I come from the city of"
+	},
+
+	"Familiar_Greet": {
+		"1": "I am happy to see you in good health",
+		"2": "I hope you and the village have been prosperous",
+		"3": "It is a honor to once again be in your presence"
+	},
+
+	"Question_Denied": {
+		"1": "I understand",
+		"2": "I hope you will reconsider",
+		"3": "Maybe you will tell me in the future"
+	}
+}

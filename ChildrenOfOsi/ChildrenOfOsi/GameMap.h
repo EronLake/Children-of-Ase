@@ -17,10 +17,12 @@ private:
 	Rectangle* mapTopRight;
 	Rectangle* mapBottomLeft;
 	Rectangle* mapBottomRight;
+	//Rectangle* river;
 
 	Texture* topLeftTex;
 	Texture* topRightTex;
 	Texture* bottomLeftTex;
 	Texture* bottomRightTex;
+	//Texture* riverTex;
 };
 

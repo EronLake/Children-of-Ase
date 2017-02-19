@@ -275,6 +275,7 @@
     <None Include="AssetInfo.h" />
     <None Include="ClassDiagram.cd" />
     <None Include="script_templates.json" />
+    <None Include="Shango_dialog.json" />
     <None Include="Yemoja_dialog.json" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

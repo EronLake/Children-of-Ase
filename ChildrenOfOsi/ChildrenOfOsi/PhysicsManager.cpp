@@ -21,9 +21,14 @@ PhysicsManager::PhysicsManager(MessageLog * _mLog, TaskBuffer * _tBuffer, QuadTr
 
 	//init mapping of tasks to functions
 	task_map["Move_Up"] = &Movement::move_up;
+	task_map["Move_Up_Left"] = &Movement::move_up_left;
+	task_map["Move_Up_Right"] = &Movement::move_up_right;
 	task_map["Move_Down"] = &Movement::move_down;
+	task_map["Move_Down_Left"] = &Movement::move_down_left;
+	task_map["Move_Down_Right"] = &Movement::move_down_right;
 	task_map["Move_Left"] = &Movement::move_left;
 	task_map["Move_Right"] = &Movement::move_right;
+	task_map["Stop"] = &Movement::doNothing;
 	task_map["Talk"] = &Movement::talk;
 }
 

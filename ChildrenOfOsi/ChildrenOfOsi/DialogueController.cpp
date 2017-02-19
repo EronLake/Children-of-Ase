@@ -11,6 +11,9 @@ int DialogueController::state = 0;
 //3 is npc conversation point
 //4 is npc response
 DialogueHelper DialogueController::dialogue;
+dialogue_point DialogueController::options;
+std::string DialogueController::message;
+int DialogueController::optionsIndex=0;
 
 
 DialogueController::DialogueController()
@@ -24,9 +27,11 @@ DialogueController::~DialogueController()
 
 void DialogueController::PlayerChoose()
 {
-	vector<dialogue_point> options = dialogue.get_possible_conv_pts();
+	//options = dialogue.get_possible_conv_pts();
 	state = 1;
-	//give options to ALex
+	optionsIndex = 0;
+	getOptions();
+	//give option to Alex
 }
 
 void DialogueController::PlayerConversationPoint(dialogue_point info)
@@ -45,16 +50,31 @@ void DialogueController::PlayerResponse(dialogue_point info)
 
 void DialogueController::otherConversationPoint()
 {
-	//dialogue.choose_conv_pt(info);
-	state=2;
-	vector<dialogue_point> options = dialogue.get_possible_conv_pts();
-	//give options to Alex
+	//dialogue_point line = dialogue.choose_reply_pt();
+	//options = dialogue.get_possible_reply_pts();
+	state = 2;
+	optionsIndex = 0;
+	getOptions();
+	//give info to Alex
 }
 
 void DialogueController::otherResponse(dialogue_point info)
 {
-	dialogue_point response=dialogue.choose_reply_pt(info);
+	dialogue_point line=dialogue.choose_reply_pt(info);
 	state = 3;
+}
+
+vector<std::string> DialogueController::getOptions()
+{
+	vector<std::string> tmp;
+	if (options.size() > 2 * optionsIndex) {
+		tmp.push_back(options[2 * optionsIndex]);
+	}
+	if (options.size() > 2 * optionsIndex +1) {
+		tmp.push_back(options[2 * optionsIndex + 1]);
+	}
+	return tmp;
+	//give tmp to Alex
 }
 
 void DialogueController::setPlayer(Player* p)
@@ -89,5 +109,6 @@ int DialogueController::getState()
 
 void DialogueController::exitDialogue()
 {
+	other = nullptr;
 	state=0;
 }
