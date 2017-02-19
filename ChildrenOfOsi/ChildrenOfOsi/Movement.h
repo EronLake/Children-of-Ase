@@ -16,7 +16,11 @@ public:
 	//void playerAction(string task_name, WorldObj* player);
 	//static void initTree(WorldObj* screen);
 	int move_up(WorldObj* obj);
+	int move_up_right(WorldObj* obj);
+	int move_up_left(WorldObj* obj);
 	int move_down(WorldObj* obj);
+	int move_down_right(WorldObj* obj);
+	int move_down_left(WorldObj* obj);
 	int move_left(WorldObj* obj);
 	int move_right(WorldObj* obj);
 	int talk(WorldObj* obj);

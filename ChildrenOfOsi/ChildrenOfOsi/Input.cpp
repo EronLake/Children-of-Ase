@@ -26,35 +26,52 @@ Input::~Input()
 
 void Input::InputCheck()
 {
-	short W = GetKeyState('W') >> 15;
-	short A = GetKeyState('A') >> 15;
-	short S = GetKeyState('S') >> 15;
-	short D = GetKeyState('D') >> 15;
-	short R = GetKeyState('R') >> 15;
-	short T = GetKeyState('T') >> 15;
-	short E = GetKeyState('E') >> 15;
-	short Q = GetKeyState('Q') >> 15;
+	W = GetKeyState('W') >> 15;
+	A = GetKeyState('A') >> 15;
+	S = GetKeyState('S') >> 15;
+	D = GetKeyState('D') >> 15;
+	E = GetKeyState('E') >> 15;
+	Q = GetKeyState('Q') >> 15;
+
 	if (DialogueController::getState() == 0) {
 
-		if (W)
+		if (W)                //Moving up
 		{
-			gameplay_functions->move_up(player);
+			if (A) {          //Moving up and left
+				gameplay_functions->move_up_left(player);   
+			}
+			else if (D) {     //Moving up and right
+				gameplay_functions->move_up_right(player);
+			}
+			else {
+				gameplay_functions->move_up(player);
+			}
 		}
-		if (A)
-		{
+		else if (S)          //Moving down
+		{ 
+			if (A) {         //Moving down and left
+				gameplay_functions->move_down_left(player);
+			}
+			else if (D) {    //Moving down and right
+				gameplay_functions->move_down_right(player);
+			}
+			else {
+			    gameplay_functions->move_down(player);
+			} 
+		}
+		else if (A) {      //Only moving left
 			gameplay_functions->move_left(player);
 		}
-		if (S)
-		{
-			gameplay_functions->move_down(player);
-		}
-		if (D)
+		else if (D)        //Only moving right
 		{
 			gameplay_functions->move_right(player);
 		}
-		if (R) {
-			gameplay_functions->add_soldier("soldier", 9.6f, 100.3f, true);
+
+		if (!(W || A || S || D))  // No movement keys pressed
+		{
+			//Set texture to idle
 		}
+
 		if (E) {
 			for (int i = 0; i < 50; i++) {
 				std::cout << "Pressed E" << std::endl;
