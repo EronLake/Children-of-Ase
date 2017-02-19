@@ -71,7 +71,7 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>$(SolutionDir)\External Dependencies\GLEW\include;$(SolutionDir)\External Dependencies\GLFW\include;$(SolutionDir)\External Dependencies\SOIL\include;$(SolutionDir)\External Dependencies\FreeType\include;$(SolutionDir)\External Dependencies\FMOD\inc;$(IncludePath)</IncludePath>
+    <IncludePath>$(SolutionDir)\External Dependencies\GLEW\include;$(SolutionDir)\External Dependencies\GLFW\include;$(SolutionDir)\External Dependencies\SOIL\include;$(SolutionDir)\External Dependencies\FreeType\include;$(SolutionDir)\External Dependencies\FMOD\inc;$(SolutionDir)\External Dependencies\OpenGL Mathematics\include;$(IncludePath)</IncludePath>
     <LibraryPath>$(SolutionDir)\External Dependencies\FMOD\lib;$(SolutionDir)\External Dependencies\GLEW\lib;$(SolutionDir)\External Dependencies\GLFW\lib;$(SolutionDir)\External Dependencies\FreeType\lib;$(SolutionDir)\External Dependencies\SOIL\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">

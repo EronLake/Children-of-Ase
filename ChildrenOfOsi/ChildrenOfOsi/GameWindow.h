@@ -13,6 +13,8 @@
 #include <string>
 #include <vector>
 
+#include <glm/vec2.hpp>
+
 #include "GLEW\glew.h"
 #include "GLFW/glfw3.h"
 #include "SOIL/SOIL.h"
@@ -28,8 +30,8 @@ namespace osi
   struct Glyph
   {
     GLuint textureId;
-    std::pair<int, int> size;
-    std::pair<int, int> bearing;
+    glm::ivec2 size;
+    glm::ivec2 bearing;
     GLuint advance;
   };
 
