@@ -1,6 +1,7 @@
 #pragma once
 #include "common.h"
 #include "Rectangle.h"
+#include "GameWindow.h"
 
 
 class DialogueGui

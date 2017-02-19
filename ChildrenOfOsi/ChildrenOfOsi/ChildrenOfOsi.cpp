@@ -47,6 +47,24 @@ void ChildrenOfOsi::move_out(WorldObj * player)
 	createTask("Move_Out", "MOVE", player);
 }
 
+void ChildrenOfOsi::move_up_left(WorldObj* player)
+{
+	createTask("Move_Up_Left", "MOVE", player);
+}
+void ChildrenOfOsi::move_up_right(WorldObj* player)
+{
+	createTask("Move_Up_Right", "MOVE", player);
+}
+void ChildrenOfOsi::move_down_left(WorldObj* player)
+{
+	createTask("Move_Down_Left", "MOVE", player);
+}
+void ChildrenOfOsi::move_down_right(WorldObj* player)
+{
+	createTask("Move_Down_Right", "MOVE", player);
+}
+
+
 void ChildrenOfOsi::talk(WorldObj * player)
 {
 	createTask("Talk", "INTERACT", player);

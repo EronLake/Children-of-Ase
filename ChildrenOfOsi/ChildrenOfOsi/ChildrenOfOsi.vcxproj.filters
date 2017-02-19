@@ -131,15 +131,8 @@
     <ClCompile Include="DialogueHelper.cpp">
       <Filter>Dialogue</Filter>
     </ClCompile>
-    <ClCompile Include="DialougeTestSuite.cpp" />
-    <ClCompile Include="DialogueGui.cpp">
+    <ClCompile Include="DialougeTestSuite.cpp">
       <Filter>Dialogue</Filter>
-    </ClCompile>
-    <ClCompile Include="Wrapper.cpp">
-      <Filter>Misc</Filter>
-    </ClCompile>
-    <ClCompile Include="jsoncpp.cpp">
-      <Filter>JSON</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -284,18 +277,8 @@
     <ClInclude Include="DialogueHelper.h">
       <Filter>Dialogue</Filter>
     </ClInclude>
-    <ClInclude Include="DialougeTestSuite.h" />
-    <ClInclude Include="DialogueGui.h">
+    <ClInclude Include="DialougeTestSuite.h">
       <Filter>Dialogue</Filter>
-    </ClInclude>
-    <ClInclude Include="Wrapper.h">
-      <Filter>Misc</Filter>
-    </ClInclude>
-    <ClInclude Include="json.h">
-      <Filter>JSON</Filter>
-    </ClInclude>
-    <ClInclude Include="json-forwards.h">
-      <Filter>JSON</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -355,12 +338,6 @@
     <Filter Include="Test">
       <UniqueIdentifier>{3d5edb63-77a0-4034-93a0-d37a5b407654}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Dialogue\character_json">
-      <UniqueIdentifier>{bccc0322-e471-4d6c-85fa-c2f08980cf1b}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="JSON">
-      <UniqueIdentifier>{7bff1925-d4c4-4671-afdd-85c8618fb80b}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram.cd">
@@ -368,12 +345,6 @@
     </None>
     <None Include="AssetInfo.h">
       <Filter>Rendering</Filter>
-    </None>
-    <None Include="Yemoja_dialog.json">
-      <Filter>Dialogue\character_json</Filter>
-    </None>
-    <None Include="script_templates.json">
-      <Filter>Dialogue\character_json</Filter>
     </None>
   </ItemGroup>
 </Project>
