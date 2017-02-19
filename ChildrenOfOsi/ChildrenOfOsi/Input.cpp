@@ -35,12 +35,9 @@ void Input::InputCheck()
 	short E = GetKeyState('E') >> 15;
 	short Q = GetKeyState('Q') >> 15;
 	short H = GetKeyState('H') >> 15;
-	W = GetKeyState('W') >> 15;
-	A = GetKeyState('A') >> 15;
-	S = GetKeyState('S') >> 15;
-	D = GetKeyState('D') >> 15;
-	E = GetKeyState('E') >> 15;
-	Q = GetKeyState('Q') >> 15;
+	short J = GetKeyState('J') >> 15;
+	short K = GetKeyState('K') >> 15;
+	short L = GetKeyState('L') >> 15;
 
 	if (DialogueController::getState() == 0) {
 
@@ -97,6 +94,15 @@ void Input::InputCheck()
 		}
 		if (H) {
 			gameplay_functions->setSwordGlow(player);
+		}
+		if (J) {
+			gameplay_functions->setHeartGlow(player);
+		}
+		if (K) {
+			gameplay_functions->setFaceGlow(player);
+		}
+		if (L) {
+			gameplay_functions->setQuestionGlow(player);
 		}
 	}
 }

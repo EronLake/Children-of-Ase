@@ -41,6 +41,10 @@ public:
 	void drawGui();
 	void setPortrait1(Sprite portrait1Sprite);
 	void setPortrait2(Sprite portrait2Sprite);
+	void setSwordGlow();
+	void setHeartGlow();
+	void setFaceGlow();
+	void setQuestionGlow();
 	
 };
 

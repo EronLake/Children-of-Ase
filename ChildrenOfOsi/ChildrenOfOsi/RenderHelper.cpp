@@ -78,6 +78,30 @@ int RenderHelper::drawDiaGui(WorldObj* obj)
 	return 0;
 }
 
+int RenderHelper::setSwordGlow(WorldObj * obj)
+{
+	convoGui->setSwordGlow();
+	return 0;
+}
+
+int RenderHelper::setHeartGlow(WorldObj * obj)
+{
+	convoGui->setHeartGlow();
+	return 0;
+}
+
+int RenderHelper::setFaceGlow(WorldObj * obj)
+{
+	convoGui->setFaceGlow();
+	return 0;
+}
+
+int RenderHelper::setQuestionGlow(WorldObj * obj)
+{
+	convoGui->setQuestionGlow();
+	return 0;
+}
+
 
 int RenderHelper::sprite_up(WorldObj * obj)
 {

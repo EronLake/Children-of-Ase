@@ -101,6 +101,38 @@ void DialogueGui::setPortrait2(Sprite portrait2Sprite)
 	portrait2->sprite = portrait2Sprite;
 }
 
+void DialogueGui::setSwordGlow()
+{
+	heartIcon->sprite.setTexture(heartTex);
+	faceIcon->sprite.setTexture(faceTex);
+	questionIcon->sprite.setTexture(questionTex);
+	swordIcon->sprite.setTexture(swordGlowTex);
+}
+
+void DialogueGui::setHeartGlow()
+{
+	swordIcon->sprite.setTexture(swordTex);
+	faceIcon->sprite.setTexture(faceTex);
+	questionIcon->sprite.setTexture(questionTex);
+	heartIcon->sprite.setTexture(heartGlowTex);
+}
+
+void DialogueGui::setFaceGlow()
+{
+	heartIcon->sprite.setTexture(heartTex);
+	swordIcon->sprite.setTexture(swordTex);
+	questionIcon->sprite.setTexture(questionTex);
+	faceIcon->sprite.setTexture(faceGlowTex);
+}
+
+void DialogueGui::setQuestionGlow()
+{
+	heartIcon->sprite.setTexture(heartTex);
+	faceIcon->sprite.setTexture(faceTex);
+	swordIcon->sprite.setTexture(swordTex);
+	questionIcon->sprite.setTexture(questionGlowTex);
+}
+
 void DialogueGui::drawGui()
 {
 	osi::GameWindow::drawSprite(background->getX(), background->getY(), background->getWidth(), background->getHeight(), background->sprite);
