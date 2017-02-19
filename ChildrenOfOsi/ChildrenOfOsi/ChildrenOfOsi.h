@@ -25,6 +25,7 @@ public:
 	void move_down_left(WorldObj* player);
 	void move_down_right(WorldObj* player);
 	void move_out(WorldObj * player);
+	void stop(WorldObj* player);
 	void talk(WorldObj * player);
 
 	//functions for rendering

@@ -64,6 +64,9 @@ void ChildrenOfOsi::move_down_right(WorldObj* player)
 	createTask("Move_Down_Right", "MOVE", player);
 }
 
+void ChildrenOfOsi::stop(WorldObj* player) {
+	createTask("Stop", "MOVE", player);
+}
 
 void ChildrenOfOsi::talk(WorldObj * player)
 {

@@ -39,14 +39,21 @@ int Movement::move_up_left(WorldObj* obj) {
 	//get list to check collision with
 	objVec.clear();
 	objVec = tree->retrieve(objVec, obj);
-	obj->shiftY(-(moveSpeed / 2));
-	obj->shiftX(-(moveSpeed / 2));
+	obj->shiftY(-diagSpeed);
 	for (int i = 0; i < objVec.size(); i++) {
 		if (collision(objVec[i], obj)) {
 			manager->createTask("Bump", "SOUND");
 			LOG("failed to move up. collision.");
-			obj->shiftY(moveSpeed / 2);
-			obj->shiftX(moveSpeed / 2);
+			obj->shiftY(diagSpeed);
+			break;
+		}
+	}	
+	obj->shiftX(-diagSpeed);
+	for (int i = 0; i < objVec.size(); i++) {
+		if (collision(objVec[i], obj)) {
+			manager->createTask("Bump", "SOUND");
+			LOG("failed to move up. collision.");
+			obj->shiftX(diagSpeed);
 			break;
 		}
 	}
@@ -57,14 +64,21 @@ int Movement::move_up_right(WorldObj* obj) {
 	//get list to check collision with
 	objVec.clear();
 	objVec = tree->retrieve(objVec, obj);
-	obj->shiftY(-(moveSpeed/2));
-	obj->shiftX((moveSpeed / 2));
+	obj->shiftY(-diagSpeed);
 	for (int i = 0; i < objVec.size(); i++) {
 		if (collision(objVec[i], obj)) {
 			manager->createTask("Bump", "SOUND");
 			LOG("failed to move up. collision.");
-			obj->shiftY(moveSpeed / 2);
-			obj->shiftX(-(moveSpeed / 2));
+			obj->shiftY(diagSpeed);
+			break;
+		}
+	}
+	obj->shiftX(diagSpeed);
+	for (int i = 0; i < objVec.size(); i++) {
+		if (collision(objVec[i], obj)) {
+			manager->createTask("Bump", "SOUND");
+			LOG("failed to move up. collision.");
+			obj->shiftX(-diagSpeed);
 			break;
 		}
 	}
@@ -91,14 +105,22 @@ int Movement::move_down_left(WorldObj* obj) {
 	//get list to check collision with
 	objVec.clear();
 	objVec = tree->retrieve(objVec, obj);
-	obj->shiftY(moveSpeed / 2);
-	obj->shiftX(-(moveSpeed / 2));
+	obj->shiftY(diagSpeed);
 	for (int i = 0; i < objVec.size(); i++) {
 		if (collision(objVec[i], obj)) {
 			LOG("failed to move down. collision.");
 			manager->createTask("Bump", "SOUND");
-			obj->shiftY(-(moveSpeed / 2));
-			obj->shiftX(moveSpeed / 2);
+			obj->shiftY(-diagSpeed);
+			break;
+		}
+	}
+	obj->shiftX(-diagSpeed);
+
+	for (int i = 0; i < objVec.size(); i++) {
+		if (collision(objVec[i], obj)) {
+			LOG("failed to move down. collision.");
+			manager->createTask("Bump", "SOUND");
+			obj->shiftX(diagSpeed);
 			break;
 		}
 	}
@@ -109,14 +131,21 @@ int Movement::move_down_right(WorldObj* obj) {
 	//get list to check collision with
 	objVec.clear();
 	objVec = tree->retrieve(objVec, obj);
-	obj->shiftY(moveSpeed / 2);
-	obj->shiftX(moveSpeed / 2);
+	obj->shiftY(diagSpeed);
 	for (int i = 0; i < objVec.size(); i++) {
 		if (collision(objVec[i], obj)) {
 			LOG("failed to move down. collision.");
 			manager->createTask("Bump", "SOUND");
-			obj->shiftY(-(moveSpeed / 2));
-			obj->shiftX(-(moveSpeed / 2));
+			obj->shiftY(-diagSpeed);
+			break;
+		}
+	}
+	obj->shiftX(diagSpeed);
+	for (int i = 0; i < objVec.size(); i++) {
+		if (collision(objVec[i], obj)) {
+			LOG("failed to move down. collision.");
+			manager->createTask("Bump", "SOUND");
+			obj->shiftX(-diagSpeed);
 			break;
 		}
 	}
@@ -173,6 +202,10 @@ int Movement::talk(WorldObj* obj) {
 			}
 		}
 	}
+	return 0;
+}
+
+int Movement::doNothing(WorldObj* obj) {
 	return 0;
 }
 

@@ -18,12 +18,21 @@ class Sprite
   int getTop() { return this->top; };
   int getBottom() { return this->bottom; };
   Texture getTexture() { return *(this->tex); }
+  Texture* getIdleTexture() { return(this->idle); }
   std::string getTexFile() { return this->tex->getFile(); }
+  bool isIdle() { return (this->idle == this->tex); }
 
   void setTexture(Texture *t);
+  void setIdleTexture(Texture *t);
   void animate();
   //Texture *tex;
-  Texture *idle;
+  
+
+  Texture *id_up;
+  Texture *id_left;
+  Texture *id_right;
+  Texture *id_down;
+
   Texture *up;
   Texture *down;
   Texture *left;
@@ -35,6 +44,7 @@ class Sprite
   int top, bottom;
 
   Texture *tex;
+  Texture *idle;
 
   int index, tempTime;
 };

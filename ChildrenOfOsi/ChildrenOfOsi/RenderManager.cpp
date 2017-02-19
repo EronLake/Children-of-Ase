@@ -21,6 +21,7 @@ RenderManager::RenderManager(MessageLog * _mLog, TaskBuffer * _tBuffer, QuadTree
 	task_map["Move_Down_Left"] = &RenderHelper::sprite_left;
 	task_map["Move_Left"] = &RenderHelper::sprite_left;
 	task_map["Move_Right"] = &RenderHelper::sprite_right;
+	task_map["Stop"] = &RenderHelper::sprite_idle;
 	task_map["Sprite_Update"] = &RenderHelper::sprite_update;
 	task_map["Talk"] = &RenderHelper::drawDiaGui;
 

@@ -70,6 +70,7 @@ void Input::InputCheck()
 		if (!(W || A || S || D))  // No movement keys pressed
 		{
 			//Set texture to idle
+			gameplay_functions->stop(player);
 		}
 
 		if (E) {
