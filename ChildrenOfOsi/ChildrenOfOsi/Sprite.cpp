@@ -16,6 +16,18 @@ void Sprite::setTexture(Texture *t)
   tempTime = 0;
 }
 
+void Sprite::setIdleTexture(Texture *t)
+{
+	if (idle == t) return;
+	idle = t;
+	index = 0;
+	start = 0;
+	stop = idle->getFrameWidth();
+	top = idle->getHeight();
+	bottom = 0;
+	tempTime = 0;
+}
+
 /**
  * Advances this sprite's animation, if any, by one frame.
  */

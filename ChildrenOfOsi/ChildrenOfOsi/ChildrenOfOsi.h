@@ -20,7 +20,12 @@ public:
 	void move_left(WorldObj * player);
 	void move_down(WorldObj * player);
 	void move_right(WorldObj * player);
+	void move_up_left(WorldObj* player);
+	void move_up_right(WorldObj* player);
+	void move_down_left(WorldObj* player);
+	void move_down_right(WorldObj* player);
 	void move_out(WorldObj * player);
+	void stop(WorldObj* player);
 	void talk(WorldObj * player);
 	void setSwordGlow(WorldObj* player);
 	void setHeartGlow(WorldObj* player);
