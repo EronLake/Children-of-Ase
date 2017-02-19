@@ -134,10 +134,18 @@
     <ClCompile Include="DialougeTestSuite.cpp">
       <Filter>Dialogue</Filter>
     </ClCompile>
-    <ClCompile Include="DialogueGui.cpp" />
-    <ClCompile Include="GameMap.cpp" />
-    <ClCompile Include="jsoncpp.cpp" />
-    <ClCompile Include="Wrapper.cpp" />
+    <ClCompile Include="DialogueGui.cpp">
+      <Filter>Dialogue</Filter>
+    </ClCompile>
+    <ClCompile Include="GameMap.cpp">
+      <Filter>Game Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="jsoncpp.cpp">
+      <Filter>Dialogue</Filter>
+    </ClCompile>
+    <ClCompile Include="Wrapper.cpp">
+      <Filter>Misc</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AIHelper.h">
@@ -284,11 +292,21 @@
     <ClInclude Include="DialougeTestSuite.h">
       <Filter>Dialogue</Filter>
     </ClInclude>
-    <ClInclude Include="DialogueGui.h" />
-    <ClInclude Include="GameMap.h" />
-    <ClInclude Include="json-forwards.h" />
-    <ClInclude Include="json.h" />
-    <ClInclude Include="Wrapper.h" />
+    <ClInclude Include="DialogueGui.h">
+      <Filter>Dialogue</Filter>
+    </ClInclude>
+    <ClInclude Include="GameMap.h">
+      <Filter>Game Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="json-forwards.h">
+      <Filter>Dialogue</Filter>
+    </ClInclude>
+    <ClInclude Include="json.h">
+      <Filter>Dialogue</Filter>
+    </ClInclude>
+    <ClInclude Include="Wrapper.h">
+      <Filter>Misc</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Text Include="audio_test.txt">
@@ -355,8 +373,14 @@
     <None Include="AssetInfo.h">
       <Filter>Rendering</Filter>
     </None>
-    <None Include="script_templates.json" />
-    <None Include="Yemoja_dialog.json" />
-    <None Include="Shango_dialog.json" />
+    <None Include="Shango_dialog.json">
+      <Filter>Dialogue</Filter>
+    </None>
+    <None Include="Yemoja_dialog.json">
+      <Filter>Dialogue</Filter>
+    </None>
+    <None Include="script_templates.json">
+      <Filter>Dialogue</Filter>
+    </None>
   </ItemGroup>
 </Project>
