@@ -134,6 +134,10 @@
     <ClCompile Include="DialougeTestSuite.cpp">
       <Filter>Dialogue</Filter>
     </ClCompile>
+    <ClCompile Include="DialogueGui.cpp" />
+    <ClCompile Include="GameMap.cpp" />
+    <ClCompile Include="jsoncpp.cpp" />
+    <ClCompile Include="Wrapper.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AIHelper.h">
@@ -280,6 +284,11 @@
     <ClInclude Include="DialougeTestSuite.h">
       <Filter>Dialogue</Filter>
     </ClInclude>
+    <ClInclude Include="DialogueGui.h" />
+    <ClInclude Include="GameMap.h" />
+    <ClInclude Include="json-forwards.h" />
+    <ClInclude Include="json.h" />
+    <ClInclude Include="Wrapper.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="audio_test.txt">
@@ -346,5 +355,8 @@
     <None Include="AssetInfo.h">
       <Filter>Rendering</Filter>
     </None>
+    <None Include="script_templates.json" />
+    <None Include="Yemoja_dialog.json" />
+    <None Include="Shango_dialog.json" />
   </ItemGroup>
 </Project>
