@@ -152,3 +152,13 @@
 2/18/2017   2:59   Memory manager unit test passed!
 2/18/2017   3:16   Memory manager unit test passed!
 2/18/2017   3:18   Memory manager unit test passed!
+2/18/2017   3:25   Memory manager unit test passed!
+2/18/2017   3:31   Memory manager unit test passed!
+2/18/2017   3:35   Memory manager unit test passed!
+2/18/2017   3:39   Memory manager unit test passed!
+2/18/2017   3:49   Memory manager unit test passed!
+2/18/2017   3:49   Memory manager unit test passed!
+2/18/2017   3:50   Memory manager unit test passed!
+2/18/2017   4:21   Memory manager unit test passed!
+2/18/2017   4:24   Memory manager unit test passed!
+2/18/2017   4:38   Memory manager unit test passed!

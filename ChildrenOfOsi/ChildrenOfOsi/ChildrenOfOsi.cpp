@@ -52,6 +52,29 @@ void ChildrenOfOsi::talk(WorldObj * player)
 	createTask("Talk", "INTERACT", player);
 }
 
+void ChildrenOfOsi::setSwordGlow(WorldObj* player)
+{
+	createTask("GSword", "DRAW", player);
+}
+
+void ChildrenOfOsi::setHeartGlow(WorldObj * player)
+{
+	createTask("GHeart", "DRAW", player);
+
+}
+
+void ChildrenOfOsi::setFaceGlow(WorldObj * player)
+{
+	createTask("GFace", "DRAW", player);
+
+}
+
+void ChildrenOfOsi::setQuestionGlow(WorldObj * player)
+{
+	createTask("GQuestion", "DRAW", player);
+
+}
+
 void ChildrenOfOsi::draw_frame(WorldObj * player)
 {
 	createTask("Draw_Frame", "DRAW", player);

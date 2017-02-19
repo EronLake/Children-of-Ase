@@ -17,11 +17,16 @@ DialogueGui::DialogueGui()
 	portrait2 = new Rectangle(Vector2f(700, 70), 300, 400);
 	backgroundTex = new Texture();
 	swordTex = new Texture();
+	swordGlowTex = new Texture();
 	heartTex = new Texture();
+	heartGlowTex = new Texture();
 	faceTex = new Texture();
+	faceGlowTex = new Texture();
 	questionTex = new Texture();
+	questionGlowTex = new Texture();
 	dialogueBoxTex = new Texture();
 	responseBoxTex = new Texture();
+
 }
 
 
@@ -33,30 +38,42 @@ void DialogueGui::loadTexture()
 {
 	//setFile, load, setFrame
 	// read access violation here, some sort of nullptr
-	backgroundTex->setFile("DialogueGuiBackground.png");
-	swordTex->setFile("DialogueGuiSword.png");
-	heartTex->setFile("DialogueGuiHeart.png");
-	faceTex->setFile("DialogueGuiFace.png");
-	questionTex->setFile("DialogueGuiQuestion.png");
-	dialogueBoxTex->setFile("DialogueGuiDiaBox.png");
-	responseBoxTex->setFile("DialogueGuiResponseBox.png");
+	backgroundTex->setFile("DGBackground.png");
+	swordTex->setFile("DGSword.png");
+	swordGlowTex->setFile("DGGlowSword.png");
+	heartTex->setFile("DGHeart.png");
+	heartGlowTex->setFile("DGGlowHeart.png");
+	faceTex->setFile("DGFace.png");
+	faceGlowTex->setFile("DGGlowFace.png");
+	questionTex->setFile("DGQuestion.png");
+	questionGlowTex->setFile("DGGlowQuestion.png");
+	dialogueBoxTex->setFile("DGDiaBox.png");
+	responseBoxTex->setFile("DGResponseBox.png");
 
 
 	//load the texture
 	backgroundTex->load();
 	swordTex->load();
+	swordGlowTex->load();
 	heartTex->load();
+	heartGlowTex->load();
 	faceTex->load();
+	faceGlowTex->load();
 	questionTex->load();
+	questionGlowTex->load();
 	dialogueBoxTex->load();
 	responseBoxTex->load();
 
 	//setframe
 	backgroundTex->setFrames(1);
 	swordTex->setFrames(1);
+	swordGlowTex->setFrames(1);
 	heartTex->setFrames(1);
+	heartGlowTex->setFrames(1);
 	faceTex->setFrames(1);
+	faceGlowTex->setFrames(1);
 	questionTex->setFrames(1);
+	questionGlowTex->setFrames(1);
 	dialogueBoxTex->setFrames(1);
 	responseBoxTex->setFrames(1);
 
@@ -65,7 +82,7 @@ void DialogueGui::loadTexture()
 void DialogueGui::setSprite()
 {
 	background->sprite.setTexture(backgroundTex);
-	swordIcon->sprite.setTexture(swordTex);
+	swordIcon->sprite.setTexture(swordGlowTex);
 	heartIcon->sprite.setTexture(heartTex);
 	faceIcon->sprite.setTexture(faceTex);
 	questionIcon->sprite.setTexture(questionTex);

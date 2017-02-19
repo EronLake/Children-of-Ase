@@ -17,6 +17,11 @@ public:
 	int sprite_right(WorldObj* obj);
 	int sprite_update(WorldObj* obj);
 	int drawDiaGui(WorldObj* obj);
+	int setSwordGlow(WorldObj* obj);
+	int setHeartGlow(WorldObj* obj);
+	int setFaceGlow(WorldObj* obj);
+	int setQuestionGlow(WorldObj* obj);
+
 	QuadTree* tree;
 private:
 	WorldObj* camera;

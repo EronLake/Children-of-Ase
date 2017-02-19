@@ -34,6 +34,7 @@ void Input::InputCheck()
 	short T = GetKeyState('T') >> 15;
 	short E = GetKeyState('E') >> 15;
 	short Q = GetKeyState('Q') >> 15;
+	short H = GetKeyState('H') >> 15;
 	if (DialogueController::getState() == 0) {
 
 		if (W)
@@ -67,6 +68,9 @@ void Input::InputCheck()
 	if (DialogueController::getState() > 0) {
 		if (Q) {
 			DialogueController::exitDialogue();
+		}
+		if (H) {
+			gameplay_functions->setSwordGlow(player);
 		}
 	}
 }

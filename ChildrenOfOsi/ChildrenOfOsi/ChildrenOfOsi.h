@@ -22,6 +22,10 @@ public:
 	void move_right(WorldObj * player);
 	void move_out(WorldObj * player);
 	void talk(WorldObj * player);
+	void setSwordGlow(WorldObj* player);
+	void setHeartGlow(WorldObj* player);
+	void setFaceGlow(WorldObj* player);
+	void setQuestionGlow(WorldObj* player);
 
 	//functions for rendering
 	void draw_frame(WorldObj* player);
