@@ -12,7 +12,7 @@ int DialogueController::state = 0;
 //4 is npc response
 DialogueHelper DialogueController::dialogue;
 dialogue_point DialogueController::options;
-dialogue_point DialogueController::response;
+std::string DialogueController::message;
 int DialogueController::optionsIndex=0;
 
 
@@ -64,7 +64,7 @@ void DialogueController::otherResponse(dialogue_point info)
 	state = 3;
 }
 
-void DialogueController::getOptions()
+vector<std::string> DialogueController::getOptions()
 {
 	vector<std::string> tmp;
 	if (options.size() > 2 * optionsIndex) {
@@ -73,6 +73,7 @@ void DialogueController::getOptions()
 	if (options.size() > 2 * optionsIndex +1) {
 		tmp.push_back(options[2 * optionsIndex + 1]);
 	}
+	return tmp;
 	//give tmp to Alex
 }
 
