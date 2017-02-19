@@ -15,6 +15,8 @@ public:
 	static void PlayerResponse(dialogue_point info);
 	static void otherConversationPoint();
 	static void otherResponse(dialogue_point info);
+	static void getOptions();
+	static void setOptionsIndex(int i) { optionsIndex = i; };
 	static void setPlayer(Player* p);
 	static void startConversation(WorldObj* n,bool playerTalk);
 	static WorldObj* getOther();
@@ -31,5 +33,8 @@ private:
 	//3 is npc conversation point
 	//4 is npc response
 	static DialogueHelper dialogue;
+	static dialogue_point options;
+	static dialogue_point response;
+	static int optionsIndex;
 };
 
