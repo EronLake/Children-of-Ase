@@ -7,11 +7,11 @@ Player::Player()
 {
 }
 
-Player::Player(float x, float y, bool col):Hero(x,y,col)
+Player::Player(int name, float x, float y, bool col):Hero(name,x,y,col)
 {
 }
 
-Player::Player(Vector2f p_topLeft, float p_width, float p_height):Hero(p_topLeft,p_width,p_height)
+Player::Player(int name, Vector2f p_topLeft, float p_width, float p_height):Hero(name,p_topLeft,p_width,p_height)
 {
 }
 

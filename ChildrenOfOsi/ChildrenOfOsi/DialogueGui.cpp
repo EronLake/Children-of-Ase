@@ -1,6 +1,6 @@
 #include "stdafx.h"
 #include "DialogueGui.h"
-#include "GameWindow.h"
+//#include "GameWindow.h"
 
 DialogueGui::DialogueGui()
 {
