@@ -71,8 +71,8 @@ void PHYSICS_TEST();
 
 
 int main() {
-	    DialogueHelper* dhelper = new DialogueHelper();
-		dhelper->get_dialog("Yemoja");
+	    //DialogueHelper* dhelper = new DialogueHelper();
+		//dhelper->get_dialog("Yemoja");
 		//LOG("Hello world!");
 		//ERONS_LOOP();
 		/************************************************************************************************SET-UP*******************************************************/
@@ -95,7 +95,7 @@ int main() {
 		/*Darion Ian Test*/
 		//Darion_Ian_Test();
 /* ERON */
-		//ERONS_LOOP();
+		ERONS_LOOP();
 		/*ALESSIO*/
 		//ALESSIO_TEST();
 
@@ -613,12 +613,23 @@ void ERONS_LOOP() {
 
 	DialogueHelper* dilgH = new DialogueHelper();
 
-	Hero* oya = new Hero(OYA, 20, 0, false);
-	dilgH->gen_dialog({ "what", "variable" }, oya);
+	Hero* yemoja = new Hero(YEMOJA, 20, 0, false);
 
+	dialogue_point point1 = dilgH->choose_conv_pt({""});
+
+	std::string sentence1 = dilgH->gen_dialog({ "name","question_name" }, yemoja);
+	std::cout << sentence1 << std::endl;
+
+	dialogue_point point2 = dilgH->choose_reply_pt({ "name","question_name" });
+
+	std::string sentence2 = dilgH->gen_dialog(point2, yemoja);
+	std::cout << sentence2 << std::endl;
+	//dilgH->gen_dialog({ "what", "variable" }, yemoja);
+	std::cout << "///////////////////////////" << endl;
 	system("PAUSE");
 	
 }
+
  /*
 void Darion_Ian_Test() {
 	MemoryPool* hero_pool = create_pool(2048);

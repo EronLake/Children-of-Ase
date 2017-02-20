@@ -32,28 +32,42 @@ void DialogueController::PlayerChoose()
 void DialogueController::PlayerConversationPoint(dialogue_point info)
 {
 	state = 4;
-	dialogue.choose_conv_pt(info);
+	//dialogue.choose_conv_pt(info);
+	//dialogue_point =  call(GUI)
 	otherResponse(info);
 }
 
 void DialogueController::PlayerResponse(dialogue_point info)
 {
-	dialogue.choose_reply_pt(info);
+	//dialogue.choose_reply_pt(info);
+	//dialogue_point =  call(GUI)
 	state = 1;
 	PlayerChoose();
 }
 
-void DialogueController::otherConversationPoint()
+void DialogueController::otherConversationPoint(dialogue_point info)
 {
-	//dialogue.choose_conv_pt(info);
+	//dialogue_point point = dialogue.choose_conv_pt(info);
+
+	//std::string sentence = dialogue.gen_dialog(point,hero);
+	
+	//return sentence 
+
 	state=2;
-	vector<dialogue_point> options = dialogue.get_possible_conv_pts();
+	//vector<dialogue_point> options = dialogue.get_possible_conv_pts();
 	//give options to Alex
 }
 
 void DialogueController::otherResponse(dialogue_point info)
 {
-	dialogue_point response=dialogue.choose_reply_pt(info);
+	//dialogue_point point = dialogue.choose_reply_pt(info);
+
+	//std::string sentence = dialogue.gen_dialog(point,hero);
+
+	//return sentence 
+
+
+	//dialogue_point response=dialogue.choose_reply_pt(info);
 	state = 3;
 }
 
@@ -73,7 +87,7 @@ void DialogueController::startConversation(WorldObj* n, bool playerTalk)
 	}
 	else {
 		state = 3;
-		otherConversationPoint();
+		otherConversationPoint({"greeting","greeting" });
 	}
 }
 

@@ -24,11 +24,12 @@ public:
 	std::vector<dialogue_point> get_possible_conv_pts();
 	std::vector<dialogue_point> get_possible_reply_pts();
 
-	std::string gen_dialog(dialogue_point, Hero*);
-	std::string gen_reply(dialogue_point);
+	std::string gen_dialog(dialogue_point diog_pt, Hero* hero);
+	std::string gen_reply(dialogue_point diog_pt, Hero* hero);
 
-	dialogue_template get_template();
-	dialogue_point get_dialog(std::string name);
+	dialogue_template get_template(dialogue_point diog_pt);
+	dialogue_point get_dialog(std::string name, dialogue_point diog_pt);
+	std::string convert_to_sentence(dialogue_point dialog_pt);
 
 };
 

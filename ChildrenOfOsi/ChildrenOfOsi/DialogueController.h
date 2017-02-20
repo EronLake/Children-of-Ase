@@ -13,7 +13,7 @@ public:
 	static void PlayerChoose();
 	static void PlayerConversationPoint(dialogue_point info);
 	static void PlayerResponse(dialogue_point info);
-	static void otherConversationPoint();
+	static void otherConversationPoint(dialogue_point info);
 	static void otherResponse(dialogue_point info);
 	static void setPlayer(Player* p);
 	static void startConversation(WorldObj* n,bool playerTalk);
