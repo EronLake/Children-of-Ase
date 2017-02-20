@@ -13,18 +13,28 @@
 #include <string>
 #include <vector>
 
+#include <glm/vec2.hpp>
+
 #include "GLEW\glew.h"
 #include "GLFW/glfw3.h"
 #include "SOIL/SOIL.h"
 
-// #include <ft2build.h>
-// #include FT_FREETYPE_H
+#include <ft2build.h>
+#include FT_FREETYPE_H
 
 #include "AssetInfo.h"
 #include "Sprite.h"
 
 namespace osi
 {
+  struct Glyph
+  {
+    GLuint textureId;
+    glm::ivec2 size;
+    glm::ivec2 bearing;
+    GLuint advance;
+  };
+
   struct GameWindow
   {
     public:
@@ -56,8 +66,7 @@ namespace osi
     static std::vector<GLuint> textures;
     static GLuint shaderProgramId;
 
-    // static FT_Library fontLibrary;
-    // static std::unordered_map<std::string, FT_Face *> fonts;
+    static std::unordered_map<std::string, std::unordered_map<GLchar, Glyph>> fontCharacters;
 
     static int numObjects;
 
@@ -71,7 +80,7 @@ namespace osi
     static std::vector<GLfloat> dpCoordToGL(float, float);
     static void setupWindow();
     static void setupStdShaders();
-    static void setupFonts();
+    static void setupFont(const std::string&, int);
   };
 
   class WindowingError: public std::runtime_error

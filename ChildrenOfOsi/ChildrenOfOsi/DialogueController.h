@@ -15,6 +15,9 @@ public:
 	static void PlayerResponse(dialogue_point info);
 	static void otherConversationPoint(dialogue_point info);
 	static void otherResponse(dialogue_point info);
+	static vector<std::string> getOptions();
+	static std::string getMessage() { return message; };
+	static void setOptionsIndex(int i) { optionsIndex = i; };
 	static void setPlayer(Player* p);
 	static void startConversation(WorldObj* n,bool playerTalk);
 	static WorldObj* getOther();
@@ -31,5 +34,8 @@ private:
 	//3 is npc conversation point
 	//4 is npc response
 	static DialogueHelper dialogue;
+	static dialogue_point options;
+	static std::string message;
+	static int optionsIndex;
 };
 

@@ -19,7 +19,7 @@ int osi::GameWindow::numObjects = 0;
 /**
  * Initializes the game's window. This will cause the application window to
  * become visible to the end user. Only one such window may exist at a time.
- * 
+ *
  * Returns: Returns whether a window was opened
  */
 bool osi::GameWindow::init()
@@ -29,7 +29,7 @@ bool osi::GameWindow::init()
 
   GameWindow::setupWindow();
   GameWindow::setupStdShaders();
-  // GameWindow::setupFonts();
+  // GameWindow::setupFont("Arial", 48);
 
   glEnable(GL_TEXTURE_2D);
   glewExperimental = GL_TRUE;
@@ -39,7 +39,7 @@ bool osi::GameWindow::init()
 /**
  * Closes the game window and cleans up GLFW. This function will have no effect
  * if there is no game window.
- * 
+ *
  * Returns: Returns whether a window was indeed terminated
  */
 bool osi::GameWindow::terminate()
@@ -83,7 +83,7 @@ bool osi::GameWindow::isRunning()
 
 /**
  * Draws the specified sprite at the given position and size.
- * 
+ *
  * Param x: The horizontal X position of the sprite's top-left corner
  * Param y: The vertical Y position of the sprite's top-left corner
  * Param width: The width of the sprite in device-independent pixels
@@ -92,7 +92,7 @@ bool osi::GameWindow::isRunning()
  */
 void osi::GameWindow::drawSprite(float x, float y, float width, float height, Sprite sp)
 {
-	//std::cout << "x: " << x <<std::endl;
+  //std::cout << "x: " << x <<std::endl;
   std::vector<GLfloat> GlCoordTL = GameWindow::dpCoordToGL(x, y);
   std::vector<GLfloat> GlCoordBR = GameWindow::dpCoordToGL(x + width, y + height);
   float x1 = static_cast<float>(sp.getStart()) / static_cast<float>(sp.getTexture().getWidth());
@@ -108,14 +108,14 @@ void osi::GameWindow::drawSprite(float x, float y, float width, float height, Sp
     GlCoordBR[0], GlCoordTL[1], 0.0F,   1.0F, 0.0F, 0.0F,  x2, y1, // Top-right corner
   };
   GLuint spriteVertexIndices[] = {
-	  0, 2, 3, // First triangle
-	  0, 2, 1
+    0, 2, 3, // First triangle
+    0, 2, 1
   };
   numObjects++;
   vertexArrayObjectId.push_back(numObjects);
   vertexBufferObjectId.push_back(numObjects);
   elementBufferObjectId.push_back(numObjects);
-  glGenVertexArrays(1, &vertexArrayObjectId[numObjects-1]);
+  glGenVertexArrays(1, &vertexArrayObjectId[numObjects - 1]);
   glGenBuffers(1, &vertexBufferObjectId[numObjects - 1]);
   glGenBuffers(1, &elementBufferObjectId[numObjects - 1]);
 
@@ -133,7 +133,7 @@ void osi::GameWindow::drawSprite(float x, float y, float width, float height, Sp
   glEnableVertexAttribArray(2);
 
   glBindVertexArray(0);
-  
+
   textures.push_back(sp.getTexture().getId());
  // //GLuint textureId;
  // textureId.push_back(numObjects);
@@ -157,7 +157,7 @@ void osi::GameWindow::drawSprite(float x, float y, float width, float height, Sp
 
 /**
  * Draw the specified text string to the screen with the given coordinates and area.
- * 
+ *
  * Param x: The horizontal X coordinate of the text region's top-left corner
  * Param y: The vertical Y coordinate of the text region's top-right corner
  * Param fieldWidth: The maximum width, in device-independent pixels, of any
@@ -183,14 +183,14 @@ void osi::GameWindow::refresh()
   glClearColor(0.5F, 0.5F, 0.5F, 1.0F);
   glClear(GL_COLOR_BUFFER_BIT);
   glUseProgram(osi::GameWindow::shaderProgramId);
-  for (GLint i = 0; i < numObjects; ++i) {
-	  glBindTexture(GL_TEXTURE_2D, Texture::textureId[textures[i]-1]);
-	  glBindVertexArray(vertexArrayObjectId[i]);
-	  glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
-	  glDeleteVertexArrays(1, &vertexArrayObjectId[i]);
-	  //glDeleteTextures(1, &Texture::textureId[i]);
-	  glDeleteBuffers(1, &vertexBufferObjectId[i]);
-	  glDeleteBuffers(1, &elementBufferObjectId[i]);
+  for(GLint i = 0; i < numObjects; ++i) {
+    glBindTexture(GL_TEXTURE_2D, Texture::textureId[textures[i] - 1]);
+    glBindVertexArray(vertexArrayObjectId[i]);
+    glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
+    glDeleteVertexArrays(1, &vertexArrayObjectId[i]);
+    //glDeleteTextures(1, &Texture::textureId[i]);
+    glDeleteBuffers(1, &vertexBufferObjectId[i]);
+    glDeleteBuffers(1, &elementBufferObjectId[i]);
   }
   // glDrawArrays(GL_TRIANGLES, 0, 3);
   glBindVertexArray(0);
@@ -208,14 +208,14 @@ void osi::GameWindow::refresh()
  * vector with the X and Y as its only two elements. Arguments outside the
  * ranges [0, WINDOW_WIDTH_DP) and [0, WINDOW_HEIGHT_DP) will be clamped to
  * within OpenGL's range of [-1, 1].
- * 
+ *
  * Param x: The horizontal X coordinate
  * Param y: The vertical Y coordinate
  * Return: Returns a vector, size 2, containing the transformed coordinates
  */
 std::vector<GLfloat> osi::GameWindow::dpCoordToGL(float x, float y)
 {
-  GLfloat glX;                           
+  GLfloat glX;
   glX = (x - (0.5F * (WINDOW_WIDTH_DP - 1))) / (0.5F * (WINDOW_WIDTH_DP - 1));
 
   GLfloat glY;
@@ -276,7 +276,7 @@ void osi::GameWindow::setupStdShaders()
     fileStream.seekg(0, fileStream.end);
     std::size_t fileLength = static_cast<std::size_t>(fileStream.tellg());
     fileStream.seekg(0, fileStream.beg);
-    
+
     vertexShaderSource = new GLchar[fileLength + 1];
     for(std::size_t i = 0; i <= fileLength; ++i)
       vertexShaderSource[i] = '\0';
@@ -387,18 +387,53 @@ void osi::GameWindow::setupStdShaders()
 }
 
 /**
- * 
+ *
  */
-/*void osi::GameWindow::setupFonts()
+/*void osi::GameWindow::setupFont(const std::string& fontName, int fontHeight)
 {
-  if(FT_Init_FreeType(&GameWindow::fontLibrary))
+  // Initialize the font library
+  FT_Library fontLib;
+  if(FT_Init_FreeType(&fontLib))
     throw FontInitializationError("ERROR::FREETYPE: Could not initialize FreeType Library.");
-  int fontIndex = 0;
-  for(auto& fontName : fontPaths) {
-    GameWindow::fonts.emplace(fontName, nullptr);
-    if(FT_New_Face(GameWindow::fontLibrary, fontName.c_str(), fontIndex++, GameWindow::fonts[fontName])) {
-      throw FontInitializationError("ERROR::FREETYPE: Failed to load font \"" + fontName + "\"");
+
+  // Set up the font face
+  FT_Face face;
+  if(FT_New_Face(fontLib, (FONTS_PATH + fontName + ".ttf").c_str(), 0, &face))
+    throw FontInitializationError("ERROR::FREETYPE: Failed to load font \"" + fontName + "\"");
+  FT_Set_Pixel_Sizes(face, 0, fontHeight);
+
+  glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
+
+  // Load up all the characters in the ASCII set
+  for(GLchar ch = 0x00; ch <= 0x7F; ++ch) {
+    if(FT_Load_Char(face, ch, FT_LOAD_RENDER)) {
+      FT_Done_Face(face);
+      FT_Done_FreeType(fontLib);
+      throw FontInitializationError(std::string("ERROR::FREETYTPE: Failed to load glyph: ") + ch);
     }
+
+    GLuint textureId;
+    glGenTextures(1, &textureId);
+    glBindTexture(GL_TEXTURE_2D, textureId);
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_RED,
+      face->glyph->bitmap.width, face->glyph->bitmap.rows,
+      0, GL_RED, GL_UNSIGNED_BYTE, face->glyph->bitmap.buffer);
+
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+
+    std::string fontKey = fontName + ' ' + std::to_string(fontHeight);
+    fontCharacters[fontKey][ch] = {
+      textureId,
+      glm::ivec2(face->glyph->bitmap.width, face->glyph->bitmap.rows),
+      glm::ivec2(face->glyph->bitmap_left, face->glyph->bitmap_top),
+      static_cast<GLuint>(face->glyph->advance.x)
+    };
   }
 
+  glPixelStorei(GL_UNPACK_ALIGNMENT, 4);
+  FT_Done_Face(face);
+  FT_Done_FreeType(fontLib);
 }*/
