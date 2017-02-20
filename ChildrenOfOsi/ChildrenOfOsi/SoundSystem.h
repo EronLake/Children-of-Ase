@@ -23,7 +23,8 @@ public:
 //	channelMap channels;
 
 	void createSound(SoundClass *pSound, std::string pFile);
-	void playSound(SoundClass pSound, bool bLoop, FMOD::Channel* channel, bool ispaused);
+	void playSound(SoundClass pSound, bool bLoop, FMOD::Channel* channel, bool ispaused,float volume);
+	void playMusic(SoundClass pSound, bool bLoop, FMOD::Channel* channel, bool ispaused, float volume);
 	void releaseSound(SoundClass pSound);
 	//void playSoundObject(SoundObject sound);
 	//void changeSoundSource(SoundObject sound, const char* name);
