@@ -18,9 +18,9 @@
 #include "GLEW\glew.h"
 #include "GLFW/glfw3.h"
 #include "SOIL/SOIL.h"
-
-#include <ft2build.h>
-#include FT_FREETYPE_H
+//
+//#include <ft2build.h>
+//#include FT_FREETYPE_H
 
 #include "AssetInfo.h"
 #include "Sprite.h"
@@ -48,7 +48,7 @@ namespace osi
     static bool isRunning();
 
     static void drawSprite(float, float, float, float, Sprite);
-    static void drawText(float, float, float, float, float, const std::string&);
+    //static void drawText(float, float, float, float, float, const std::string&);
     static void refresh();
 
     private:
@@ -80,7 +80,7 @@ namespace osi
     static std::vector<GLfloat> dpCoordToGL(float, float);
     static void setupWindow();
     static void setupStdShaders();
-    static void setupFont(const std::string&, int);
+    //static void setupFont(const std::string&, int);
   };
 
   class WindowingError: public std::runtime_error
@@ -95,9 +95,9 @@ namespace osi
     ShaderCompilationError(const std::string& what): std::runtime_error(what) {};
   };
 
-  class FontInitializationError: public std::runtime_error
-  {
-    public:
-    FontInitializationError(const std::string& what): std::runtime_error(what) {};
-  };
+  //class FontInitializationError: public std::runtime_error
+  //{
+  //  public:
+  //  FontInitializationError(const std::string& what): std::runtime_error(what) {};
+  //};
 }
