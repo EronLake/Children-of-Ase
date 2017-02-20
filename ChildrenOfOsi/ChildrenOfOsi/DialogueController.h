@@ -11,10 +11,10 @@ public:
 	DialogueController();
 	~DialogueController();
 	static void PlayerChoose();
-	static void PlayerConversationPoint(dialogue_point info);
-	static void PlayerResponse(dialogue_point info);
+	static void PlayerConversationPoint(int info);
+	static void PlayerResponse(int info);
 	static void otherConversationPoint();
-	static void otherResponse(dialogue_point info);
+	static void otherResponse(std::string info);
 	static vector<std::string> getOptions();
 	static std::string getMessage() { return message; };
 	static void setOptionsIndex(int i) { optionsIndex = i; };

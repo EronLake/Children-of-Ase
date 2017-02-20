@@ -30,38 +30,41 @@ void DialogueController::PlayerChoose()
 	//options = dialogue.get_possible_conv_pts();
 	state = 1;
 	optionsIndex = 0;
-	getOptions();
+	//getOptions();
 	//give option to Alex
 }
 
-void DialogueController::PlayerConversationPoint(dialogue_point info)
+void DialogueController::PlayerConversationPoint(int info)
 {
 	state = 4;
-	dialogue.choose_conv_pt(info);
-	otherResponse(info);
+	//dialogue.choose_conv_pt(info);
+	std::string choice = options[2 * optionsIndex + info];
+	otherResponse(choice);
 }
 
-void DialogueController::PlayerResponse(dialogue_point info)
+void DialogueController::PlayerResponse(int info)
 {
-	dialogue.choose_reply_pt(info);
 	state = 1;
+	std::string choice = options[2 * optionsIndex + info];
+	//dialogue.choose_reply_pt(info);
 	PlayerChoose();
 }
 
 void DialogueController::otherConversationPoint()
 {
-	//dialogue_point line = dialogue.choose_reply_pt();
+	//message += "\n"+"\n"+dialogue.choose_reply_pt();
 	//options = dialogue.get_possible_reply_pts();
 	state = 2;
 	optionsIndex = 0;
-	getOptions();
+	//getOptions();
 	//give info to Alex
 }
 
-void DialogueController::otherResponse(dialogue_point info)
+void DialogueController::otherResponse(std::string info)
 {
-	dialogue_point line=dialogue.choose_reply_pt(info);
+	//dialogue_point line=dialogue.choose_reply_pt(info);
 	state = 3;
+	otherConversationPoint();
 }
 
 vector<std::string> DialogueController::getOptions()
@@ -88,6 +91,7 @@ void DialogueController::startConversation(WorldObj* n, bool playerTalk)
 	for (int i = 0; i < 100; i++) {
 		std::cout << player->getName() << " talked with " << n->getName() << std::endl;
 	}
+	other = n;
 	if (playerTalk) {
 		PlayerChoose();
 	}
