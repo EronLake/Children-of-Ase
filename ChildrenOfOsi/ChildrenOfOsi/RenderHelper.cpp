@@ -13,6 +13,9 @@ RenderHelper::RenderHelper(QuadTree * QT)
 	convoGui = new DialogueGui();
 	convoGui->loadTexture();
 	convoGui->setSprite();
+	gmap = new GameMap();
+	gmap->loadTexture();
+	gmap->setSprite();
 }
 
 RenderHelper::~RenderHelper()
@@ -39,6 +42,7 @@ int RenderHelper::draw_frame(WorldObj * obj)
 	//pass in the camera bound for rendering instead of the object
 	objVec.clear();
 	objVec = tree->retrieve(objVec, camera);
+	gmap->drawMap(camera->getX(), camera->getY());
 	obj->WorldObj::drawObj(camera->getX(), camera->getY());
 	obj->WorldObj::animateObj();
 	/*for (int i = 0; i < obj->body.size(); i++) {
@@ -56,34 +60,10 @@ int RenderHelper::draw_frame(WorldObj * obj)
 	return 0;
 }
 
-int RenderHelper::sprite_up(WorldObj * obj)
-{
-	obj->sprite.setTexture(obj->sprite.up);
-	return 0;
-}
-
-int RenderHelper::sprite_down(WorldObj* obj) {
-	obj->sprite.setTexture(obj->sprite.down);
-	return 0;
-}
-
-int RenderHelper::sprite_left(WorldObj* obj) {
-	obj->sprite.setTexture(obj->sprite.left);
-	return 0;
-}
-
-int RenderHelper::sprite_right(WorldObj* obj) {
-	obj->sprite.setTexture(obj->sprite.right);
-	return 0;
-}
-
-int RenderHelper::sprite_update(WorldObj * obj)
-{
-	return 0;
-}
 
 int RenderHelper::drawDiaGui(WorldObj* obj)
 {
+	gmap->drawMap(camera->getX(), camera->getY());
 	obj->WorldObj::drawObj(camera->getX(), camera->getY());
 	obj->WorldObj::animateObj();
 	for (int i = 0; i < objVec.size(); i++) {
@@ -95,6 +75,68 @@ int RenderHelper::drawDiaGui(WorldObj* obj)
 	}
 	convoGui->drawGui();
 	osi::GameWindow::refresh();
+	return 0;
+}
+
+int RenderHelper::setSwordGlow(WorldObj * obj)
+{
+	convoGui->setSwordGlow();
+	return 0;
+}
+
+int RenderHelper::setHeartGlow(WorldObj * obj)
+{
+	convoGui->setHeartGlow();
+	return 0;
+}
+
+int RenderHelper::setFaceGlow(WorldObj * obj)
+{
+	convoGui->setFaceGlow();
+	return 0;
+}
+
+int RenderHelper::setQuestionGlow(WorldObj * obj)
+{
+	convoGui->setQuestionGlow();
+	return 0;
+}
+
+
+int RenderHelper::sprite_up(WorldObj * obj)
+{
+	obj->sprite.setTexture(obj->sprite.up);
+	obj->sprite.setIdleTexture(obj->sprite.id_up);
+	return 0;
+}
+
+int RenderHelper::sprite_down(WorldObj* obj) {
+	obj->sprite.setTexture(obj->sprite.down);
+	obj->sprite.setIdleTexture(obj->sprite.id_down);
+	return 0;
+}
+
+int RenderHelper::sprite_left(WorldObj* obj) {
+	obj->sprite.setTexture(obj->sprite.left);
+	obj->sprite.setIdleTexture(obj->sprite.id_left);
+	return 0;
+}
+
+int RenderHelper::sprite_right(WorldObj* obj) {
+	obj->sprite.setTexture(obj->sprite.right);
+	obj->sprite.setIdleTexture(obj->sprite.id_right);
+	return 0;
+}
+
+int RenderHelper::sprite_idle(WorldObj* obj) {
+	//if (!obj->sprite.isIdle()) {
+		obj->sprite.setTexture((obj->sprite.getIdleTexture()));
+	//}
+	return 0;
+}
+
+int RenderHelper::sprite_update(WorldObj * obj)
+{
 	return 0;
 }
 

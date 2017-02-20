@@ -34,27 +34,51 @@ void Input::InputCheck()
 	short T = GetKeyState('T') >> 15;
 	short E = GetKeyState('E') >> 15;
 	short Q = GetKeyState('Q') >> 15;
+	short H = GetKeyState('H') >> 15;
+	short J = GetKeyState('J') >> 15;
+	short K = GetKeyState('K') >> 15;
+	short L = GetKeyState('L') >> 15;
+
 	if (DialogueController::getState() == 0) {
 
-		if (W)
+		if (W)                //Moving up
 		{
-			gameplay_functions->move_up(player);
+			if (A) {          //Moving up and left
+				gameplay_functions->move_up_left(player);   
+			}
+			else if (D) {     //Moving up and right
+				gameplay_functions->move_up_right(player);
+			}
+			else {
+				gameplay_functions->move_up(player);
+			}
 		}
-		if (A)
-		{
+		else if (S)          //Moving down
+		{ 
+			if (A) {         //Moving down and left
+				gameplay_functions->move_down_left(player);
+			}
+			else if (D) {    //Moving down and right
+				gameplay_functions->move_down_right(player);
+			}
+			else {
+			    gameplay_functions->move_down(player);
+			} 
+		}
+		else if (A) {      //Only moving left
 			gameplay_functions->move_left(player);
 		}
-		if (S)
-		{
-			gameplay_functions->move_down(player);
-		}
-		if (D)
+		else if (D)        //Only moving right
 		{
 			gameplay_functions->move_right(player);
 		}
-		if (R) {
-			gameplay_functions->add_soldier("soldier", 9.6f, 100.3f, true);
+
+		if (!(W || A || S || D))  // No movement keys pressed
+		{
+			//Set texture to idle
+			gameplay_functions->stop(player);
 		}
+
 		if (E) {
 			for (int i = 0; i < 50; i++) {
 				std::cout << "Pressed E" << std::endl;
@@ -67,6 +91,18 @@ void Input::InputCheck()
 	if (DialogueController::getState() > 0) {
 		if (Q) {
 			DialogueController::exitDialogue();
+		}
+		if (H) {
+			gameplay_functions->setSwordGlow(player);
+		}
+		if (J) {
+			gameplay_functions->setHeartGlow(player);
+		}
+		if (K) {
+			gameplay_functions->setFaceGlow(player);
+		}
+		if (L) {
+			gameplay_functions->setQuestionGlow(player);
 		}
 	}
 }

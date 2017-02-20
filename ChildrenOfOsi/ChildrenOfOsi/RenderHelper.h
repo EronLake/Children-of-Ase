@@ -2,6 +2,7 @@
 #include "QuadTree.h"
 #include "GameWindow.h"
 #include "DialogueGui.h"
+#include "GameMap.h"
 
 class RenderHelper
 {
@@ -14,12 +15,19 @@ public:
 	int sprite_down(WorldObj* obj);
 	int sprite_left(WorldObj* obj);
 	int sprite_right(WorldObj* obj);
+	int sprite_idle(WorldObj* obj);
 	int sprite_update(WorldObj* obj);
 	int drawDiaGui(WorldObj* obj);
+	int setSwordGlow(WorldObj* obj);
+	int setHeartGlow(WorldObj* obj);
+	int setFaceGlow(WorldObj* obj);
+	int setQuestionGlow(WorldObj* obj);
+
 	QuadTree* tree;
 private:
 	WorldObj* camera;
 	DialogueGui* convoGui;
+	GameMap* gmap;
 	std::vector<WorldObj*> objVec;
 
 	//hold size of camera and map. first is width, second is height

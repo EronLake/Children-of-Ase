@@ -48,7 +48,6 @@
 #include "DialogueHelper.h"
 #include "DialougeTestSuite.h"
 
-
 using namespace std;
 
 
@@ -72,6 +71,8 @@ void PHYSICS_TEST();
 
 
 int main() {
+	 //   DialogueHelper* dhelper = new DialogueHelper();
+		//dhelper->get_dialog("Yemoja");
 		//LOG("Hello world!");
 		//ERONS_LOOP();
 		/************************************************************************************************SET-UP*******************************************************/
@@ -170,7 +171,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 {
 
 
-	Player* Alex = new Player(Vector2f(1000.0, 600.0), 100.0, 100.0);	//init player
+	Player* Alex = new Player(SHANGO, Vector2f(1000.0, 600.0), 100.0, 100.0);	//init player
 	cout << "Alex's width and height is " << Alex->getWidth() << ", " << Alex->getHeight() << endl;
 
 	//DialogueGui* convoGui = new DialogueGui();
@@ -179,6 +180,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	//WorldObj* Alex = new WorldObj(1000, 600, true);
 
 	Texture* playerTexture = new Texture();
+	Texture* playerIdleTex = new Texture();
 	Texture* objTexture = new Texture();
 	Texture* upRunTex = new Texture();
 	Texture* downRunTex = new Texture();
@@ -192,6 +194,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	//load sprite from a configuration file?
 	objTexture->setFile("YemojasHouse.png");
 	playerTexture->setFile("ShangoFrontIdle.png");
+	playerIdleTex->setFile("ShangoFrontIdle.png");
 	upRunTex->setFile("ShangoBackSprite.png");
 	downRunTex->setFile("ShangoForwardSprite.png");
 	leftRunTex->setFile("ShangoLeftSprite.png");
@@ -204,6 +207,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	/* SET UP SPRITE CHANGE, MIGHT NEED A SINGLETON?*/
 
 	playerTexture->load();
+	playerIdleTex->load();
 	upRunTex->load();
 	downRunTex->load();
 	leftRunTex->load();
@@ -214,6 +218,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	rightIdleTex->load();
 	objTexture->load();
 	playerTexture->setFrames(1);
+	playerIdleTex->setFrames(1);
 	upRunTex->setFrames(26);
 	downRunTex->setFrames(26);
 	leftRunTex->setFrames(26);
@@ -224,10 +229,18 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	rightIdleTex->setFrames(1);
 	objTexture->setFrames(1);
 	Alex->sprite.setTexture(playerTexture);
+	Alex->sprite.setIdleTexture(playerIdleTex);
 	Alex->sprite.up = upRunTex;
 	Alex->sprite.down = downRunTex;
 	Alex->sprite.left = leftRunTex;
 	Alex->sprite.right = rightRunTex;
+
+	Alex->sprite.id_up = upIdleTex;
+	Alex->sprite.id_left =leftIdleTex;
+	Alex->sprite.id_right = rightIdleTex;
+	Alex->sprite.id_down = downIdleTex;
+
+
 	Alex->offsetBody(0, 50, 50, 50, 50);
 	Alex->setInteractable(true);
 	Alex->setName("Alex");
@@ -353,13 +366,13 @@ void ALESSIO_TEST() {
 		rInt[i] = rand() % 4 - 1;
 	}
 	Factions fac(rInt);
-	Hero person2(20, 0, false);
+	Hero person2(OYA, 20, 0, false);
 	Texture still2;
 	still2.setFile("YemojasHouse.png");
 	still2.load();
 	still2.setFrames(2);
 	person2.sprite.setTexture(&still2);
-	Hero person(20, 0, false);
+	Hero person(YEMOJA, 20, 0, false);
 	Texture still;
 	still.setFile("phi.png");
 	still.load();
@@ -370,7 +383,7 @@ void ALESSIO_TEST() {
 	person.setAlive(false);
 	cout << "person is " << person.getAlive() << " with " << person.getHealth() << endl;
 	cout<<"at location " << person.getX() << " , " << person.getY() << endl;
-	Player me(30, 32, true);
+	Player me(SHANGO,30, 32, true);
 	NPC citizen(22, 2, true);
 	citizen.setHealth(10);
 	citizen.setInteractable(true);
@@ -426,6 +439,7 @@ void ALEX_LOOP(QuadTree* _QuadTree) {
 	Texture* downtex = new Texture();
 	Texture* lefttex = new Texture();
 	Texture* righttex = new Texture();
+
 
 	objTexture->setFile("YemojasHouse.jpg");
 	playerTexture->setFile("phi.png");
@@ -596,7 +610,7 @@ void ERONS_LOOP() {
 		tBuffer->run();
 		//draw
 	}
-	*/
+	*//*
 	MessageLog* mLog = new MessageLog();
 	TaskBuffer* tBuffer = new TaskBuffer(mLog);
 
@@ -608,6 +622,13 @@ void ERONS_LOOP() {
 	std::cout << "true: " << true << std::endl;
 	std::cout << "false: " << false << std::endl;
 	delete dilg_tester;
+	*/
+
+	DialogueHelper* dilgH = new DialogueHelper();
+
+	Hero* oya = new Hero(OYA, 20, 0, false);
+	dilgH->gen_dialog({ "what", "variable" }, oya);
+
 	system("PAUSE");
 	
 }
