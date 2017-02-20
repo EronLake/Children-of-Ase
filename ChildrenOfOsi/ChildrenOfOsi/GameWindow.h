@@ -66,7 +66,7 @@ namespace osi
     static std::vector<GLuint> textures;
     static GLuint shaderProgramId;
 
-    static std::unordered_map<std::pair<std::string, int>, std::unordered_map<GLchar, Glyph>> fontCharacters;
+    static std::unordered_map<std::string, std::unordered_map<GLchar, Glyph>> fontCharacters;
 
     static int numObjects;
 
