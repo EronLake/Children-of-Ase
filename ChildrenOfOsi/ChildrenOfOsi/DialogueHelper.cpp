@@ -15,16 +15,28 @@ DialogueHelper dialogue;
 
 DialogueHelper::DialogueHelper()
 {
-	srand(time(0)); // seed the rand function
-	possible_conv_pts.push_back({ "name","question_name"});
-	possible_conv_pts.push_back({ "reason","question_reason" });
-	possible_conv_pts.push_back({ "origin","question_origin" });
-	possible_conv_pts.push_back({ "greeting","greeting" });
+	//srand(time(0)); // seed the rand function
+	//possible_conv_pts[0].push_back({ "placeholder","placeholder" });
+	//possible_conv_pts[1].push_back({ "placeholder","placeholder" });
+	//possible_conv_pts[2].push_back({ "placeholder","placeholder" });
+	for (int i = 0; i < 5; i++) 
+	{
+		possible_conv_pts.push_back({});
+	}
+	for (int i = 0; i < 5; i++) 
+	{
+		possible_reply_pts.push_back({});
+	}
 
-	possible_reply_pts.push_back({ "denied","question_denied" });
-	possible_reply_pts.push_back({ "name","introduction" });
-	possible_reply_pts.push_back({ "reason","response_reason" });
-	possible_reply_pts.push_back({ "origin","response_origin" });
+	possible_conv_pts[3].push_back({ "name","question_name" });
+	possible_conv_pts[3].push_back({ "reason","question_reason" });
+	possible_conv_pts[3].push_back({ "origin","question_origin" });
+	possible_conv_pts[3].push_back({ "greeting","greeting" });
+
+	possible_reply_pts[3].push_back({ "denied","question_denied" });
+	possible_reply_pts[3].push_back({ "name","introduction" });
+	possible_reply_pts[3].push_back({ "reason","response_reason" });
+	possible_reply_pts[3].push_back({ "origin","response_origin" });
 
 }
 
@@ -34,33 +46,33 @@ DialogueHelper::~DialogueHelper()
 }
 
 //functions where heroes make dialogue choices
-dialogue_point DialogueHelper::choose_conv_pt(dialogue_point)
+dialogue_point DialogueHelper::choose_conv_pt(dialogue_point point, int optn_inx)
 {
 	int conv_pt_index = rand() % possible_conv_pts.size();
-	return possible_conv_pts[conv_pt_index];
+	return possible_conv_pts[optn_inx][conv_pt_index];
 
 
 }
 
-dialogue_point DialogueHelper::choose_reply_pt(dialogue_point point)
+dialogue_point DialogueHelper::choose_reply_pt(std::string point, int optn_inx)
 {
-	for (int i = 0; i < possible_reply_pts.size(); i++)
+	for (int i = 0; i < possible_reply_pts[optn_inx].size(); i++)
 	{
-		if (possible_reply_pts[i][0] == point[0])
+		if (possible_reply_pts[optn_inx][i][0] == point)
 		{
-			return possible_reply_pts[i];
+			return possible_reply_pts[optn_inx][i];
 		}
 	}
 	return{ "error phrase_type not found" };
 
 }
 
-std::vector<dialogue_point> DialogueHelper::get_possible_conv_pts()
+std::vector<std::vector<dialogue_point>> DialogueHelper::get_possible_conv_pts()
 {
 	return possible_conv_pts;
 }
 
-std::vector<dialogue_point> DialogueHelper::get_possible_reply_pts()
+std::vector<std::vector<dialogue_point>> DialogueHelper::get_possible_reply_pts()
 {
 	return possible_conv_pts;
 }

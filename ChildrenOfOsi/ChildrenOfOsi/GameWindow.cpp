@@ -14,6 +14,8 @@ std::vector<GLuint> osi::GameWindow::elementBufferObjectId;
 std::vector<GLuint> osi::GameWindow::textures;
 GLuint osi::GameWindow::shaderProgramId = 0;
 
+std::unordered_map<std::string, std::unordered_map<GLchar, osi::Glyph>> osi::GameWindow::fontCharacters;
+
 int osi::GameWindow::numObjects = 0;
 
 /**
@@ -29,7 +31,7 @@ bool osi::GameWindow::init()
 
   GameWindow::setupWindow();
   GameWindow::setupStdShaders();
-  // GameWindow::setupFont("Arial", 48);
+  GameWindow::setupFont("Arial", 48);
 
   glEnable(GL_TEXTURE_2D);
   glewExperimental = GL_TRUE;
@@ -389,7 +391,7 @@ void osi::GameWindow::setupStdShaders()
 /**
  *
  */
-/*void osi::GameWindow::setupFont(const std::string& fontName, int fontHeight)
+void osi::GameWindow::setupFont(const std::string& fontName, int fontHeight)
 {
   // Initialize the font library
   FT_Library fontLib;
@@ -425,7 +427,7 @@ void osi::GameWindow::setupStdShaders()
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 
     std::string fontKey = fontName + ' ' + std::to_string(fontHeight);
-    fontCharacters[fontKey][ch] = {
+    GameWindow::fontCharacters[fontKey][ch] = {
       textureId,
       glm::ivec2(face->glyph->bitmap.width, face->glyph->bitmap.rows),
       glm::ivec2(face->glyph->bitmap_left, face->glyph->bitmap_top),
@@ -436,4 +438,4 @@ void osi::GameWindow::setupStdShaders()
   glPixelStorei(GL_UNPACK_ALIGNMENT, 4);
   FT_Done_Face(face);
   FT_Done_FreeType(fontLib);
-}*/
+}

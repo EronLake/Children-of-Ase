@@ -6,7 +6,7 @@
 class CheckClass
 {
 public:
-	static bool isHero(WorldObj* test);
+	static Hero* isHero(WorldObj* test);
 	static bool isSplSoldier(WorldObj* test);
 	static bool isSoldier(WorldObj* test);
 	static bool isNPC(WorldObj* test);

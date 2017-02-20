@@ -625,19 +625,19 @@ void ERONS_LOOP() {
 	delete dilg_tester;
 	*/
 
-	DialogueHelper* dilgH = new DialogueHelper();
+	//DialogueHelper* dilgH = new DialogueHelper();
 
-	Hero* yemoja = new Hero(YEMOJA, 20, 0, false);
+	//Hero* yemoja = new Hero(YEMOJA, 20, 0, false);
 
-	dialogue_point point1 = dilgH->choose_conv_pt({""});
+	//dialogue_point point1 = dilgH->choose_conv_pt({""});
 
-	std::string sentence1 = dilgH->gen_dialog({ "name","question_name" }, yemoja);
-	std::cout << sentence1 << std::endl;
+	//std::string sentence1 = dilgH->gen_dialog({ "name","question_name" }, yemoja);
+	//std::cout << sentence1 << std::endl;
 
-	dialogue_point point2 = dilgH->choose_reply_pt({ "name","question_name" });
+	//dialogue_point point2 = dilgH->choose_reply_pt({ "name","question_name" });
 
-	std::string sentence2 = dilgH->gen_dialog(point2, yemoja);
-	std::cout << sentence2 << std::endl;
+	//std::string sentence2 = dilgH->gen_dialog(point2, yemoja);
+	//std::cout << sentence2 << std::endl;
 	//dilgH->gen_dialog({ "what", "variable" }, yemoja);
 	std::cout << "///////////////////////////" << endl;
 	system("PAUSE");

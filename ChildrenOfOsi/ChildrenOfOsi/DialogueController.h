@@ -11,11 +11,15 @@ public:
 	DialogueController();
 	~DialogueController();
 	static void PlayerChoose();
-	static void PlayerConversationPoint(dialogue_point info);
-	static void PlayerResponse(dialogue_point info);
-	static void otherConversationPoint(dialogue_point info);
-	static void otherResponse(dialogue_point info);
+
+	static void PlayerConversationPoint(int info);
+	static void PlayerResponse(int info);
+	static void otherConversationPoint(dialogue_point line);
+	static void otherResponse(std::string info);
+
 	static vector<std::string> getOptions();
+	static vector<std::string> getReplyOptions();
+
 	static std::string getMessage() { return message; };
 	static void setOptionsIndex(int i) { optionsIndex = i; };
 	static void setPlayer(Player* p);
@@ -27,6 +31,7 @@ private:
 	static Player* player;
 	static WorldObj* other;
 	static int state;
+	static std::string replyString;
 	//States:
 	//0 is no conversation
 	//1 is waiting for player input
@@ -34,7 +39,8 @@ private:
 	//3 is npc conversation point
 	//4 is npc response
 	static DialogueHelper dialogue;
-	static dialogue_point options;
+	static std::vector<std::vector<dialogue_point>> options;
+	static std::vector<std::vector<dialogue_point>> replyOptions;
 	static std::string message;
 	static int optionsIndex;
 };
