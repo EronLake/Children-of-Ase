@@ -68,7 +68,7 @@ FMOD_RESULT result;
 		}
 	}
 
-	void SoundSystem::playSound(SoundClass pSound, bool bLoop, FMOD::Channel* channel, bool ispaused )
+	void SoundSystem::playSound(SoundClass pSound, bool bLoop, FMOD::Channel* channel, bool ispaused , float volume)
 	{
 		if (!bLoop)
 			pSound->setMode(FMOD_LOOP_OFF);
@@ -78,9 +78,36 @@ FMOD_RESULT result;
 			pSound->setLoopCount(-1);
 		}
 
-		channel->setVolume(.3);
+		
 
 		result = m_pSystem->playSound(pSound,0, ispaused, &channel); //fmod playsound takes  (FMOD::Sound *sound,FMOD::ChannelGroup *channelgroup, bool paused, FMOD::Channel **channel)
+		channel->setVolume(volume);
+		channel->setPaused(false);
+		
+		if (bLoop){
+		channel->setLoopCount(-1);
+		}
+		cout << FMOD_ErrorString(result) << endl;
+	};
+	void SoundSystem::playMusic(SoundClass pSound, bool bLoop, FMOD::Channel* channel, bool ispaused, float volume)
+	{
+		if (!bLoop)
+			pSound->setMode(FMOD_LOOP_OFF);
+		else
+		{
+			pSound->setMode(FMOD_LOOP_NORMAL);
+			pSound->setLoopCount(-1);
+		}
+			
+
+
+		result = m_pSystem->playSound(pSound, 0, ispaused, &channel); //fmod playsound takes  (FMOD::Sound *sound,FMOD::ChannelGroup *channelgroup, bool paused, FMOD::Channel **channel)
+		channel->setVolume(volume);
+		channel->setPaused(false);
+		channel->setPriority(0);
+		if (bLoop) {
+			channel->setLoopCount(-1);
+		}
 		cout << FMOD_ErrorString(result) << endl;
 	};
 	
@@ -103,7 +130,7 @@ FMOD_RESULT result;
 		name = "shangodrums.wav";
 		channel = channels[0];//assign the channel
 		
-		ispaused = false;
+		ispaused = true;
 
 		//this->createSound(&soundSample, name);// Create the sound
 		//soundSample->getLength(&time, FMOD_TIMEUNIT_PCM);// Find the length
@@ -112,7 +139,9 @@ FMOD_RESULT result;
 														 //object stuff
 
 
-		playSound(sounds[name], true, channel, ispaused); 	// Play the sound, with loop mode
+		playMusic(sounds[name], true, channel, ispaused,.1); 
+		
+		// Play the sound, with loop mode
 
 
 		//cout << "Press return to quit." << endl;  // Do something meanwhile...
@@ -134,7 +163,7 @@ FMOD_RESULT result;
 
 		type = foo::soundType::music;
 		name = "bump_0.wav";
-		channel = channels[0];//assign the channel
+		channel = channels[1];//assign the channel
 		ispaused = false;
 
 		//this->createSound(&soundSample, name);// Create the sound
@@ -144,7 +173,7 @@ FMOD_RESULT result;
 		//object stuff
 
 
-		playSound(sounds[name], false, channel, ispaused); 	// Play the sound, with loop mode
+		playSound(sounds[name], false, channel, ispaused,1); 	// Play the sound, with loop mode
 
 
 															//cout << "Press return to quit." << endl;  // Do something meanwhile...
@@ -166,7 +195,7 @@ FMOD_RESULT result;
 
 		type = foo::soundType::music;
 		name = "walk_0.wav";
-		channel = channels[0];//assign the channel
+		channel = channels[2];//assign the channel
 		ispaused = false;
 
 		//this->createSound(&soundSample, name);// Create the sound
@@ -176,7 +205,7 @@ FMOD_RESULT result;
 		//object stuff
 
 
-		playSound(sounds[name], true, channel, ispaused); 	// Play the sound, with loop mode
+		playSound(sounds[name], true, channel, ispaused,1); 	// Play the sound, with loop mode
 
 
 															//cout << "Press return to quit." << endl;  // Do something meanwhile...

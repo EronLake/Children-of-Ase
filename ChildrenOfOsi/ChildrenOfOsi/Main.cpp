@@ -706,7 +706,7 @@ void ANDREWS_TEST() {
 													 //object stuff
 
 
-	soundsystem.playSound(soundSample, false, channel, ispaused); 	// Play the sound, with loop mode
+	//soundsystem.playSound(soundSample, false, channel, ispaused, 1); 	// Play the sound, with loop mode
 
 
 	cout << "Press return to quit." << endl;  // Do something meanwhile...
