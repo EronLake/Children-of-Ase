@@ -16,6 +16,7 @@ std::vector<std::vector<dialogue_point>> DialogueController::options;
 std::vector<std::vector<dialogue_point>> DialogueController::replyOptions;
 std::string DialogueController::message;
 int DialogueController::optionsIndex=0;
+int DialogueController::select = 0;
 std::string DialogueController::replyString;
 
 
@@ -34,18 +35,17 @@ void DialogueController::PlayerChoose()
 	replyOptions = dialogue.get_possible_reply_pts();
 	state = 1;
 	optionsIndex = 3;
-	PlayerConversationPoint(0);
+	//PlayerConversationPoint();
 	//give option to Alex
 }
 
-void DialogueController::PlayerConversationPoint(int info)
+void DialogueController::PlayerConversationPoint()
 {
 	state = 4;
 	while (options[optionsIndex].size() == 0) {
 		optionsIndex++;
 		if (optionsIndex >= options.size()) {
-			perror("no options");
-			break;
+			optionsIndex = 0;
 		}
 	}
 	vector<std::string> print = getOptions();
@@ -53,8 +53,8 @@ void DialogueController::PlayerConversationPoint(int info)
 	for (int i = 0; i < print.size(); i++) {
 		std::cout << print[i] << std::endl;
 	}
-	dialogue_point choice = options[optionsIndex][info];
-	std::cout << player->name<< endl;
+	std::cout <<"Select: "<< select << endl;
+	dialogue_point choice = options[optionsIndex][select];
 	std::string conversation_pt_sentence = dialogue.gen_dialog(choice, player);
 	message = conversation_pt_sentence;
 	std::cout << "PLAYER COONVERSATION POINT////////////////////////////////////" << std::endl;
@@ -62,17 +62,16 @@ void DialogueController::PlayerConversationPoint(int info)
 	otherResponse(choice[0]);
 }
 
-void DialogueController::PlayerResponse(int info)
+void DialogueController::PlayerResponse()
 {
-	state = 1;
-	dialogue_point choice = replyOptions[optionsIndex][info];
+	std::cout << "Select: " << select << endl;
+	dialogue_point choice = replyOptions[optionsIndex][select];
 
 	std::string reply_pt_sentence = dialogue.gen_dialog(choice, player);
 	//draws reply
 	message = reply_pt_sentence;
 	std::cout << "PLAYER RESPONSE////////////////////////////////////" << std::endl;
 	std::cout << "Shango: " << getMessage() << std::endl;
-	
 	PlayerChoose();
 }
 
@@ -91,7 +90,6 @@ void DialogueController::otherConversationPoint(dialogue_point line)
 	std::string reply_pt_sentence = dialogue.gen_dialog(line, temp_hero);
 	std::string con_pt_sentence = dialogue.gen_dialog(point, temp_hero);
 	
-	state=2;
 	//give options to Alex
 	message = reply_pt_sentence + "\n\n" + con_pt_sentence;
 	std::cout << "HERO REPLY/COONVERSATION POINT////////////////////////////////////" << std::endl;
@@ -101,11 +99,12 @@ void DialogueController::otherConversationPoint(dialogue_point line)
 	for (int i = 0; i < print.size(); i++) {
 		std::cout << print[i] << std::endl;
 	}
+	select = 0;
 	state = 2;
-	optionsIndex = 3;
+	//optionsIndex = 3;
 	//getOptions();
 	//give info to Alex
-	PlayerResponse(0);
+	//PlayerResponse();
 }
 
 void DialogueController::otherResponse(std::string info)
