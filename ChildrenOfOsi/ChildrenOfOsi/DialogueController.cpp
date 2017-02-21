@@ -78,8 +78,9 @@ void DialogueController::otherConversationPoint(dialogue_point line)
 	dialogue_point point = dialogue.choose_conv_pt(line, optionsIndex);
 	replyString = point[0];
 
-	Hero* temp_hero = CheckClass::isHero(other);
-	if (!temp_hero)
+	Hero* temp_hero = nullptr;
+	
+	if (!CheckClass::isHero(other, temp_hero))
 	{
 		perror("you cannot talk to this type of object");
 	}

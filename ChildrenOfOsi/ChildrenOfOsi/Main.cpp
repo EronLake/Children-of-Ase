@@ -71,8 +71,7 @@ void PHYSICS_TEST();
 
 
 int main() {
-
-	    //DialogueHelper* dhelper = new DialogueHelper();
+	 //   DialogueHelper* dhelper = new DialogueHelper();
 		//dhelper->get_dialog("Yemoja");
 		//LOG("Hello world!");
 		//ERONS_LOOP();
@@ -95,7 +94,7 @@ int main() {
 
 		/*Darion Ian Test*/
 		//Darion_Ian_Test();
-		/* ERON */
+/* ERON */
 		//ERONS_LOOP();
 		/*ALESSIO*/
 		//ALESSIO_TEST();
@@ -179,10 +178,9 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 
 	//Player* Alex = new Player(1000,600, true);	//init player
 	//WorldObj* Alex = new WorldObj(1000, 600, true);
-
+    Texture* objTexture = new Texture();
 	Texture* playerTexture = new Texture();
 	Texture* playerIdleTex = new Texture();
-	Texture* objTexture = new Texture();
 	Texture* upRunTex = new Texture();
 	Texture* downRunTex = new Texture();
 	Texture* leftRunTex = new Texture();
@@ -218,6 +216,8 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	leftIdleTex->load();
 	rightIdleTex->load();
 	objTexture->load();
+
+    objTexture->setFrames(1);
 	playerTexture->setFrames(1);
 	playerIdleTex->setFrames(1);
 	upRunTex->setFrames(26);
@@ -228,7 +228,9 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	downIdleTex->setFrames(1);
 	leftIdleTex->setFrames(1);
 	rightIdleTex->setFrames(1);
-	objTexture->setFrames(1);
+	
+
+
 	Alex->sprite.setTexture(playerTexture);
 	Alex->sprite.setIdleTexture(playerIdleTex);
 	Alex->sprite.up = upRunTex;
@@ -246,26 +248,21 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	Alex->setInteractable(true);
 	Alex->setName("Alex");
 	Alex->setTalkDist(20);
-	for (int i = 0; i < 100;i++) {
-		cout << "NAME " << Alex->name << endl;
-	}
 	DialogueController::setPlayer(Alex);
 	vector<WorldObj*> recVec;
 
 	for (int i = 1; i < 5; i++) {
 		WorldObj* objs = new WorldObj(Vector2f(100 * i, 100 * i), 200.0, 200.0);
 		objs->sprite.setTexture(objTexture);
-		objs->setInteractable(false);
+		objs->setInteractable(true);
 		std::string building="Building ";
 		objs->setName(building+= std::to_string(i));
 		//objs->offsetBody(0, 50, 50, 50, 50);
 		//objs->offsetBody(0, 70, 70, 70, 70);
 		recVec.push_back(objs);
 	}
-	Hero* staticRec = new Hero(YEMOJA,Vector2f(1800, 1350), 100.0, 100.0);
+	Hero* staticRec = new Hero(YEMOJA, Vector2f(1000, 800), 100.0, 100.0);
 	staticRec->sprite.setTexture(playerTexture);
-	staticRec->setName("Yemoja");
-	staticRec->setInteractable(true);
 	staticRec->sprite.setIdleTexture(playerIdleTex);
 	staticRec->sprite.up = upRunTex;
 	staticRec->sprite.down = downRunTex;
@@ -275,7 +272,16 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	staticRec->sprite.id_left = leftIdleTex;
 	staticRec->sprite.id_right = rightIdleTex;
 	staticRec->sprite.id_down = downIdleTex;
+
+	staticRec->setName("Yemoja");
+	staticRec->setInteractable(true);
+
+
+	staticRec->goal.setXloc(500);
+	staticRec->goal.setYloc(1200);
+
 	recVec.push_back(staticRec);
+
 
 	//recVec.push_back(myRec1); recVec.push_back(myRec2);
 
@@ -334,7 +340,39 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	
 		}
 		//clock 
-		gameplay_functions->move_up_left(staticRec);
+		float diffX = staticRec->getX() - staticRec->goal.getXloc();
+		float diffY = staticRec->getY() - staticRec->goal.getYloc();
+		if (abs(diffX) < 6) diffX = 0;
+		if (abs(diffY) < 6) diffY = 0;
+		bool left = false;
+		bool up = false;
+		bool down = false;
+		bool right = false;
+
+		if (diffX < 0) right = true;
+		if (diffX > 0) left = true;
+		if (diffY < 0) down = true;
+		if (diffY > 0) up = true;
+
+		if (up) {
+			if (right) gameplay_functions->move_up_right(staticRec);
+			else if (left) gameplay_functions->move_up_left(staticRec);
+			else gameplay_functions->move_up(staticRec);
+		}
+		else if (down) {
+			if (right) gameplay_functions->move_down_right(staticRec);
+			else if (left) gameplay_functions->move_down_left(staticRec);
+			else gameplay_functions->move_down(staticRec);
+		}
+		else if (right) {
+			gameplay_functions->move_right(staticRec);
+		}
+		else if (left) {
+			gameplay_functions->move_left(staticRec);
+		}
+		else {
+			gameplay_functions->stop(staticRec);
+		}
 		iController->InputCheck();
 
 		//Alex->WorldObj::drawObj(0,0);
@@ -640,25 +678,14 @@ void ERONS_LOOP() {
 	delete dilg_tester;
 	*/
 
-	//DialogueHelper* dilgH = new DialogueHelper();
+	DialogueHelper* dilgH = new DialogueHelper();
 
-	//Hero* yemoja = new Hero(YEMOJA, 20, 0, false);
+	Hero* oya = new Hero(OYA, 20, 0, false);
+	dilgH->gen_dialog({ "what", "variable" }, oya);
 
-	//dialogue_point point1 = dilgH->choose_conv_pt({""});
-
-	//std::string sentence1 = dilgH->gen_dialog({ "name","question_name" }, yemoja);
-	//std::cout << sentence1 << std::endl;
-
-	//dialogue_point point2 = dilgH->choose_reply_pt({ "name","question_name" });
-
-	//std::string sentence2 = dilgH->gen_dialog(point2, yemoja);
-	//std::cout << sentence2 << std::endl;
-	//dilgH->gen_dialog({ "what", "variable" }, yemoja);
-	std::cout << "///////////////////////////" << endl;
 	system("PAUSE");
 	
 }
-
  /*
 void Darion_Ian_Test() {
 	MemoryPool* hero_pool = create_pool(2048);
@@ -721,7 +748,7 @@ void ANDREWS_TEST() {
 													 //object stuff
 
 
-	//soundsystem.playSound(soundSample, false, channel, ispaused, 1); 	// Play the sound, with loop mode
+	soundsystem.playSound(soundSample, false, channel, ispaused, 1); 	// Play the sound, with loop mode
 
 
 	cout << "Press return to quit." << endl;  // Do something meanwhile...
