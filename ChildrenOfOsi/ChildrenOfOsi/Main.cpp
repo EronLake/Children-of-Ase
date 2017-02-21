@@ -71,7 +71,8 @@ void PHYSICS_TEST();
 
 
 int main() {
-	 //   DialogueHelper* dhelper = new DialogueHelper();
+
+	    //DialogueHelper* dhelper = new DialogueHelper();
 		//dhelper->get_dialog("Yemoja");
 		//LOG("Hello world!");
 		//ERONS_LOOP();
@@ -94,7 +95,7 @@ int main() {
 
 		/*Darion Ian Test*/
 		//Darion_Ian_Test();
-/* ERON */
+		/* ERON */
 		//ERONS_LOOP();
 		/*ALESSIO*/
 		//ALESSIO_TEST();
@@ -245,21 +246,26 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	Alex->setInteractable(true);
 	Alex->setName("Alex");
 	Alex->setTalkDist(20);
+	for (int i = 0; i < 100;i++) {
+		cout << "NAME " << Alex->name << endl;
+	}
 	DialogueController::setPlayer(Alex);
 	vector<WorldObj*> recVec;
 
 	for (int i = 1; i < 5; i++) {
 		WorldObj* objs = new WorldObj(Vector2f(100 * i, 100 * i), 200.0, 200.0);
 		objs->sprite.setTexture(objTexture);
-		objs->setInteractable(true);
+		objs->setInteractable(false);
 		std::string building="Building ";
 		objs->setName(building+= std::to_string(i));
 		//objs->offsetBody(0, 50, 50, 50, 50);
 		//objs->offsetBody(0, 70, 70, 70, 70);
 		recVec.push_back(objs);
 	}
-	WorldObj* staticRec = new WorldObj(Vector2f(2000, 2000), 100.0, 100.0);
+	Hero* staticRec = new Hero(YEMOJA,Vector2f(1800, 1350), 100.0, 100.0);
 	staticRec->sprite.setTexture(playerTexture);
+	staticRec->setName("Yemoja");
+	staticRec->setInteractable(true);
 	staticRec->sprite.setIdleTexture(playerIdleTex);
 	staticRec->sprite.up = upRunTex;
 	staticRec->sprite.down = downRunTex;
@@ -634,14 +640,25 @@ void ERONS_LOOP() {
 	delete dilg_tester;
 	*/
 
-	DialogueHelper* dilgH = new DialogueHelper();
+	//DialogueHelper* dilgH = new DialogueHelper();
 
-	Hero* oya = new Hero(OYA, 20, 0, false);
-	dilgH->gen_dialog({ "what", "variable" }, oya);
+	//Hero* yemoja = new Hero(YEMOJA, 20, 0, false);
 
+	//dialogue_point point1 = dilgH->choose_conv_pt({""});
+
+	//std::string sentence1 = dilgH->gen_dialog({ "name","question_name" }, yemoja);
+	//std::cout << sentence1 << std::endl;
+
+	//dialogue_point point2 = dilgH->choose_reply_pt({ "name","question_name" });
+
+	//std::string sentence2 = dilgH->gen_dialog(point2, yemoja);
+	//std::cout << sentence2 << std::endl;
+	//dilgH->gen_dialog({ "what", "variable" }, yemoja);
+	std::cout << "///////////////////////////" << endl;
 	system("PAUSE");
 	
 }
+
  /*
 void Darion_Ian_Test() {
 	MemoryPool* hero_pool = create_pool(2048);
@@ -704,7 +721,7 @@ void ANDREWS_TEST() {
 													 //object stuff
 
 
-	soundsystem.playSound(soundSample, false, channel, ispaused); 	// Play the sound, with loop mode
+	//soundsystem.playSound(soundSample, false, channel, ispaused, 1); 	// Play the sound, with loop mode
 
 
 	cout << "Press return to quit." << endl;  // Do something meanwhile...

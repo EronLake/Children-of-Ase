@@ -99,7 +99,7 @@ bool AudioTestSuite::play_sound_test() {
 	bool played = true;
 	FMOD::Sound* test_sound;
 	FMOD::Channel* channel = NULL;
-	test_soundSystem->playSound(test_soundSystem->sounds[name], false, channel, false);
+	test_soundSystem->playSound(test_soundSystem->sounds[name], false, channel, false,1);
 	FMOD_RESULT result = test_soundSystem->m_pSystem->getChannelsPlaying(&numChan, 0);
 	LOG(result);
 	LOG(numChan);
