@@ -31,8 +31,9 @@ DialogueController::~DialogueController()
 void DialogueController::PlayerChoose()
 {
 	options = dialogue.get_possible_conv_pts();
+	replyOptions = dialogue.get_possible_reply_pts();
 	state = 1;
-	optionsIndex = 0;
+	optionsIndex = 3;
 	PlayerConversationPoint(0);
 	//give option to Alex
 }
@@ -55,6 +56,8 @@ void DialogueController::PlayerConversationPoint(int info)
 	dialogue_point choice = options[optionsIndex][info];
 	std::cout << player->name<< endl;
 	std::string conversation_pt_sentence = dialogue.gen_dialog(choice, player);
+	message = conversation_pt_sentence;
+	std::cout << "PLAYER COONVERSATION POINT////////////////////////////////////" << std::endl;
 	std::cout << "Shango: " << conversation_pt_sentence << std::endl;
 	otherResponse(choice[0]);
 }
@@ -67,6 +70,7 @@ void DialogueController::PlayerResponse(int info)
 	std::string reply_pt_sentence = dialogue.gen_dialog(choice, player);
 	//draws reply
 	message = reply_pt_sentence;
+	std::cout << "PLAYER RESPONSE////////////////////////////////////" << std::endl;
 	std::cout << "Shango: " << getMessage() << std::endl;
 	
 	PlayerChoose();
@@ -87,14 +91,10 @@ void DialogueController::otherConversationPoint(dialogue_point line)
 	std::string reply_pt_sentence = dialogue.gen_dialog(line, temp_hero);
 	std::string con_pt_sentence = dialogue.gen_dialog(point, temp_hero);
 	
-	//return sentence 
-
 	state=2;
-	//vector<dialogue_point> options = dialogue.get_possible_conv_pts();
 	//give options to Alex
-
-	//dialogue_point line = dialogue.choose_reply_pt();
 	message = reply_pt_sentence + "\n\n" + con_pt_sentence;
+	std::cout << "HERO REPLY/COONVERSATION POINT////////////////////////////////////" << std::endl;
 	std::cout << other->getName() << ": "<< message << std::endl;
 	replyOptions = dialogue.get_possible_reply_pts();
 	vector<std::string> print = getReplyOptions();
@@ -102,7 +102,7 @@ void DialogueController::otherConversationPoint(dialogue_point line)
 		std::cout << print[i] << std::endl;
 	}
 	state = 2;
-	optionsIndex = 0;
+	optionsIndex = 3;
 	//getOptions();
 	//give info to Alex
 	PlayerResponse(0);
