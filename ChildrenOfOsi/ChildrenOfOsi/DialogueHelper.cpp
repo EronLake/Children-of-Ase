@@ -81,6 +81,7 @@ std::vector<std::vector<dialogue_point>> DialogueHelper::get_possible_reply_pts(
 std::string DialogueHelper::gen_dialog(dialogue_point diog_pt, Hero* hero)
 {
 	std::string name;
+	std::cout << hero->name << std::endl;
 	if (hero->name == SHANGO)
 	{
 		name = "Shango";
@@ -100,7 +101,7 @@ std::string DialogueHelper::gen_dialog(dialogue_point diog_pt, Hero* hero)
 	{
 		name = "Ogun";
 	}
-
+	std::cout << name << std::endl;
 	std::string sentence = convert_to_sentence(get_dialog(name, diog_pt));
 
 	std::cout << sentence << std::endl;
@@ -173,7 +174,7 @@ dialogue_point DialogueHelper::get_dialog(std::string name, dialogue_point diog_
 
 	Json::Value root;
 	Json::Reader reader;
-
+	std::cout <<name + "_dialog.json" << std::endl;
 	std::string dialogue_filename = name + "_dialog.json";
 
 	std::ifstream file(dialogue_filename);

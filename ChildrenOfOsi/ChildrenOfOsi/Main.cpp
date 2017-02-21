@@ -95,8 +95,8 @@ int main() {
 
 		/*Darion Ian Test*/
 		//Darion_Ian_Test();
-/* ERON */
-		ERONS_LOOP();
+		/* ERON */
+		//ERONS_LOOP();
 		/*ALESSIO*/
 		//ALESSIO_TEST();
 
@@ -246,21 +246,26 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	Alex->setInteractable(true);
 	Alex->setName("Alex");
 	Alex->setTalkDist(20);
+	for (int i = 0; i < 100;i++) {
+		cout << "NAME " << Alex->name << endl;
+	}
 	DialogueController::setPlayer(Alex);
 	vector<WorldObj*> recVec;
 
 	for (int i = 1; i < 5; i++) {
 		WorldObj* objs = new WorldObj(Vector2f(100 * i, 100 * i), 200.0, 200.0);
 		objs->sprite.setTexture(objTexture);
-		objs->setInteractable(true);
+		objs->setInteractable(false);
 		std::string building="Building ";
 		objs->setName(building+= std::to_string(i));
 		//objs->offsetBody(0, 50, 50, 50, 50);
 		//objs->offsetBody(0, 70, 70, 70, 70);
 		recVec.push_back(objs);
 	}
-	WorldObj* staticRec = new WorldObj(Vector2f(1800, 1350), 100.0, 100.0);
+	Hero* staticRec = new Hero(YEMOJA,Vector2f(1800, 1350), 100.0, 100.0);
 	staticRec->sprite.setTexture(playerTexture);
+	staticRec->setName("Yemoja");
+	staticRec->setInteractable(true);
 	recVec.push_back(staticRec);
 
 	//recVec.push_back(myRec1); recVec.push_back(myRec2);

@@ -80,9 +80,7 @@ void Input::InputCheck()
 		}
 
 		if (E) {
-			for (int i = 0; i < 50; i++) {
-				std::cout << "Pressed E" << std::endl;
-			}
+			std::cout << "Pressed E" << std::endl;
 			gameplay_functions->talk(player);
 		}
 
