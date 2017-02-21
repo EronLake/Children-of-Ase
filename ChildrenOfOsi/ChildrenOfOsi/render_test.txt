@@ -206,3 +206,6 @@
 2/20/2017   1:18   Render manager unit test failed!
 2/20/2017   1:24   Render manager unit test failed!
 >>>>>>> c6b48db57b3fadf898a5d1148ad4f381c94a952f
+2/20/2017   1:55   Render manager unit test failed!
+2/20/2017   6:18   Render manager unit test failed!
+2/20/2017   6:43   Render manager unit test failed!
