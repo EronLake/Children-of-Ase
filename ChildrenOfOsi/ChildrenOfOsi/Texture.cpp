@@ -26,3 +26,9 @@ void Texture::load()
 	SOIL_free_image_data(image);
 	glBindTexture(GL_TEXTURE_2D, 0);
 }
+
+void Texture::setFile(const std::string& fileName, int f) {
+	this->imageFile = fileName; 
+	this->load();
+	this->setFrames(f);
+}

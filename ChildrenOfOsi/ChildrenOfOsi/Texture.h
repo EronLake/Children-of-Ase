@@ -36,7 +36,7 @@ class Texture
   unsigned char * getImage() const { return this->image; }
   bool getAnimated() const { return this->animated; }
 
-  void setFile(const std::string& fileName) { this->imageFile = fileName; }
+  void setFile(const std::string& fileName, int f);
   void setWidth(int w) { this->width = w; }
   void setHeight(int h) { this->height = h; }
   void setFrames(int f) { this->frameWidth = this->width / (this->frames = f); }
