@@ -18,6 +18,8 @@ private:
 	short D;
 	short Q;
 	short E;
+	bool disable;
+	int count;
 
 public:
 	Input(ChildrenOfOsi* gameplay_function);

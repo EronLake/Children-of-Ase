@@ -1,9 +1,11 @@
 #include "stdafx.h"
 #include "CheckClass.h"
-bool CheckClass::isHero(WorldObj* test, Hero* hero) 
-{
-	if (hero = dynamic_cast<Hero*>(test)) return true;
-	else return false;
+Hero* CheckClass::isHero(WorldObj* test) 
+{ 
+	Hero* hero;
+	hero = dynamic_cast<Hero*>(test);
+	return hero;
+
 }
 
 bool CheckClass::isSplSoldier(WorldObj* test, SplSoldier* spl)

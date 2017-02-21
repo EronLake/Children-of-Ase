@@ -134,6 +134,11 @@ void ChildrenOfOsi::add_projectile(std::string key, float x, float y, bool col, 
 void ChildrenOfOsi::add_npc(std::string key, float x,float y, bool col) {
 	createTaskWithParams("Add_NPC", "MODIFY_POOL", key, x, y, col);
 }
+/*
+void ChildrenOfOsi::add_texture(std::string key, float x=0, float y=0, bool col=0) {
+	createTaskWithParams("Add_Texture", "MODIFY_POOL", key, x, y, col);
+}
+*/
 
 //*/
 

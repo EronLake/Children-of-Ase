@@ -16,19 +16,25 @@ public:
 
 	int nextChannelId;
 	int driverCount;
+	FMOD::Channel *chnls[32];
 	
 	typedef std::map<std::string, SoundClass> soundMap;
+	typedef std::map<std::string, FMOD::Channel**> channelMap;
 	//typedef map<int, FMOD::Channel*> channelMap;
 	soundMap sounds;
+	channelMap channels;
 //	channelMap channels;
 
 	void createSound(SoundClass *pSound, std::string pFile);
 	void playSound(SoundClass pSound, bool bLoop, FMOD::Channel* channel, bool ispaused,float volume);
-	void playMusic(SoundClass pSound, bool bLoop, FMOD::Channel* channel, bool ispaused, float volume);
+	void playMusic(SoundClass pSound, bool bLoop, FMOD::Channel*& channel, bool ispaused, float volume);
+	void playAmbient(SoundClass pSound, bool bLoop, FMOD::Channel*& channel, bool ispaused, float volume);
 	void releaseSound(SoundClass pSound);
+	int SoundSystem::pauseSound(std::string name);
+	int SoundSystem::unpauseSound(std::string name);
 	//void playSoundObject(SoundObject sound);
 	//void changeSoundSource(SoundObject sound, const char* name);
-	FMOD::Channel *channels[32];
+	
 	int playSong1();
 	int playBump();
 	int playWalk();

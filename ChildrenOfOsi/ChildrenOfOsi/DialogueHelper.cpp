@@ -19,11 +19,11 @@ DialogueHelper::DialogueHelper()
 	//possible_conv_pts[0].push_back({ "placeholder","placeholder" });
 	//possible_conv_pts[1].push_back({ "placeholder","placeholder" });
 	//possible_conv_pts[2].push_back({ "placeholder","placeholder" });
-	for (int i = 0; i < 5; i++) 
+	for (int i = 0; i < 4; i++) 
 	{
 		possible_conv_pts.push_back({});
 	}
-	for (int i = 0; i < 5; i++) 
+	for (int i = 0; i < 4; i++) 
 	{
 		possible_reply_pts.push_back({});
 	}
@@ -31,7 +31,7 @@ DialogueHelper::DialogueHelper()
 	possible_conv_pts[3].push_back({ "name","question_name" });
 	possible_conv_pts[3].push_back({ "reason","question_reason" });
 	possible_conv_pts[3].push_back({ "origin","question_origin" });
-	possible_conv_pts[3].push_back({ "greeting","greeting" });
+	//possible_conv_pts[3].push_back({ "greeting","greeting" });
 
 	possible_reply_pts[3].push_back({ "denied","question_denied" });
 	possible_reply_pts[3].push_back({ "name","introduction" });
@@ -48,9 +48,9 @@ DialogueHelper::~DialogueHelper()
 //functions where heroes make dialogue choices
 dialogue_point DialogueHelper::choose_conv_pt(dialogue_point point, int optn_inx)
 {
-	int conv_pt_index = rand() % possible_conv_pts.size();
-	return possible_conv_pts[optn_inx][conv_pt_index];
+	int conv_pt_index = rand() % (possible_conv_pts[optn_inx].size());
 
+	return possible_conv_pts[optn_inx][conv_pt_index];
 
 }
 
@@ -74,14 +74,13 @@ std::vector<std::vector<dialogue_point>> DialogueHelper::get_possible_conv_pts()
 
 std::vector<std::vector<dialogue_point>> DialogueHelper::get_possible_reply_pts()
 {
-	return possible_conv_pts;
+	return possible_reply_pts;
 }
 
 
 std::string DialogueHelper::gen_dialog(dialogue_point diog_pt, Hero* hero)
 {
 	std::string name;
-	std::cout << hero->name << std::endl;
 	if (hero->name == SHANGO)
 	{
 		name = "Shango";
@@ -101,7 +100,6 @@ std::string DialogueHelper::gen_dialog(dialogue_point diog_pt, Hero* hero)
 	{
 		name = "Ogun";
 	}
-	std::cout << name << std::endl;
 	std::string sentence = convert_to_sentence(get_dialog(name, diog_pt));
 
 	std::cout << sentence << std::endl;

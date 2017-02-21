@@ -38,45 +38,17 @@ void DialogueGui::loadTexture()
 {
 	//setFile, load, setFrame
 	// read access violation here, some sort of nullptr
-	backgroundTex->setFile("DGBackground.png");
-	swordTex->setFile("DGSword.png");
-	swordGlowTex->setFile("DGGlowSword.png");
-	heartTex->setFile("DGHeart.png");
-	heartGlowTex->setFile("DGGlowHeart.png");
-	faceTex->setFile("DGFace.png");
-	faceGlowTex->setFile("DGGlowFace.png");
-	questionTex->setFile("DGQuestion.png");
-	questionGlowTex->setFile("DGGlowQuestion.png");
-	dialogueBoxTex->setFile("DGDiaBox.png");
-	responseBoxTex->setFile("DGResponseBox.png");
-
-
-	//load the texture
-	backgroundTex->load();
-	swordTex->load();
-	swordGlowTex->load();
-	heartTex->load();
-	heartGlowTex->load();
-	faceTex->load();
-	faceGlowTex->load();
-	questionTex->load();
-	questionGlowTex->load();
-	dialogueBoxTex->load();
-	responseBoxTex->load();
-
-	//setframe
-	backgroundTex->setFrames(1);
-	swordTex->setFrames(1);
-	swordGlowTex->setFrames(1);
-	heartTex->setFrames(1);
-	heartGlowTex->setFrames(1);
-	faceTex->setFrames(1);
-	faceGlowTex->setFrames(1);
-	questionTex->setFrames(1);
-	questionGlowTex->setFrames(1);
-	dialogueBoxTex->setFrames(1);
-	responseBoxTex->setFrames(1);
-
+	backgroundTex->setFile("DGBackground.png",1);
+	swordTex->setFile("DGSword.png",1);
+	swordGlowTex->setFile("DGGlowSword.png", 1);
+	heartTex->setFile("DGHeart.png", 1);
+	heartGlowTex->setFile("DGGlowHeart.png", 1);
+	faceTex->setFile("DGFace.png", 1);
+	faceGlowTex->setFile("DGGlowFace.png", 1);
+	questionTex->setFile("DGQuestion.png", 1);
+	questionGlowTex->setFile("DGGlowQuestion.png", 1);
+	dialogueBoxTex->setFile("DGDiaBox.png", 1);
+	responseBoxTex->setFile("DGResponseBox.png", 1);
 }
 
 void DialogueGui::setSprite()
