@@ -31,7 +31,7 @@ DialogueHelper::DialogueHelper()
 	possible_conv_pts[3].push_back({ "name","question_name" });
 	possible_conv_pts[3].push_back({ "reason","question_reason" });
 	possible_conv_pts[3].push_back({ "origin","question_origin" });
-	possible_conv_pts[3].push_back({ "greeting","greeting" });
+	//possible_conv_pts[3].push_back({ "greeting","greeting" });
 
 	possible_reply_pts[3].push_back({ "denied","question_denied" });
 	possible_reply_pts[3].push_back({ "name","introduction" });
@@ -48,9 +48,9 @@ DialogueHelper::~DialogueHelper()
 //functions where heroes make dialogue choices
 dialogue_point DialogueHelper::choose_conv_pt(dialogue_point point, int optn_inx)
 {
-	int conv_pt_index = rand() % possible_conv_pts.size();
-	return possible_conv_pts[optn_inx][conv_pt_index];
+	int conv_pt_index = rand() % (possible_conv_pts[optn_inx].size());
 
+	return possible_conv_pts[optn_inx][conv_pt_index];
 
 }
 
@@ -74,7 +74,7 @@ std::vector<std::vector<dialogue_point>> DialogueHelper::get_possible_conv_pts()
 
 std::vector<std::vector<dialogue_point>> DialogueHelper::get_possible_reply_pts()
 {
-	return possible_conv_pts;
+	return possible_reply_pts;
 }
 
 

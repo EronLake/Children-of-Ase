@@ -92,6 +92,12 @@
 	},
 
 	"Question_Denied": {
+		"1": "I would rather not say",
+		"2": "I apoligize, but I would like to keep that to myself",
+		"3": "Maybe I will tell you in the future"
+	},
+
+	"Question_Denied_Old": {
 		"1": "I understand",
 		"2": "I hope you will reconsider",
 		"3": "Maybe you will tell me in the future"
