@@ -14,6 +14,8 @@ Input::Input(ChildrenOfOsi* _gameplay_functions, WorldObj * _player)
 {
 	gameplay_functions = _gameplay_functions;
 	gameplay_functions->play_sound("Play");
+	gameplay_functions->play_sound("Walk");
+	gameplay_functions->play_sound("Pause");
 	player = _player;
 	LOG("Input Object W/Player Constructed");
 }
@@ -43,6 +45,7 @@ void Input::InputCheck()
 
 		if (W)                //Moving up
 		{
+			gameplay_functions->play_sound("Unpause");
 			if (A) {          //Moving up and left
 				gameplay_functions->move_up_left(player);   
 			}
@@ -55,6 +58,7 @@ void Input::InputCheck()
 		}
 		else if (S)          //Moving down
 		{ 
+			gameplay_functions->play_sound("Unpause");
 			if (A) {         //Moving down and left
 				gameplay_functions->move_down_left(player);
 			}
@@ -66,11 +70,16 @@ void Input::InputCheck()
 			} 
 		}
 		else if (A) {      //Only moving left
+			gameplay_functions->play_sound("Unpause");
 			gameplay_functions->move_left(player);
 		}
 		else if (D)        //Only moving right
 		{
+			gameplay_functions->play_sound("Unpause");
 			gameplay_functions->move_right(player);
+		}
+		else {
+			gameplay_functions->play_sound("Pause");
 		}
 
 		if (!(W || A || S || D))  // No movement keys pressed
