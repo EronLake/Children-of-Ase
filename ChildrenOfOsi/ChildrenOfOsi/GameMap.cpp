@@ -24,10 +24,10 @@ GameMap::~GameMap()
 
 void GameMap::loadTexture()
 {
-	topLeftTex->setFile("MapTopLeft.png");
-	topRightTex->setFile("MapTopRight.png");
-	bottomLeftTex->setFile("MapBottomLeft.png");
-	bottomRightTex->setFile("MapBottomRight.png");
+	topLeftTex->setFile("Assets/Sprites/MapTopLeft.png");
+	topRightTex->setFile("Assets/Sprites/MapTopRight.png");
+	bottomLeftTex->setFile("Assets/Sprites/MapBottomLeft.png");
+	bottomRightTex->setFile("Assets/Sprites/MapBottomRight.png");
 	//riverTex->setFile("River.png");
 
 	topLeftTex->load();

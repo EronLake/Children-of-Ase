@@ -48,6 +48,8 @@
 #include "DialogueHelper.h"
 #include "DialougeTestSuite.h"
 
+#include "ObjConfig.h"
+
 using namespace std;
 
 
@@ -71,7 +73,7 @@ void PHYSICS_TEST();
 
 
 int main() {
-
+		//ERONS_LOOP();
 	    //DialogueHelper* dhelper = new DialogueHelper();
 		//dhelper->get_dialog("Yemoja");
 		//LOG("Hello world!");
@@ -96,7 +98,7 @@ int main() {
 		/*Darion Ian Test*/
 		//Darion_Ian_Test();
 		/* ERON */
-		//ERONS_LOOP();
+		
 		/*ALESSIO*/
 		//ALESSIO_TEST();
 
@@ -179,6 +181,13 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 
 	//Player* Alex = new Player(1000,600, true);	//init player
 	//WorldObj* Alex = new WorldObj(1000, 600, true);
+	vector<WorldObj*> recVec;
+	vector<WorldObj*>* recVec_ptr = &recVec;
+
+	ObjConfig::import_config(recVec_ptr);
+
+	//std::cout << recVec.size() << "///////////////////////////" << endl;
+	//system("PAUSE");
 
 	Texture* playerTexture = new Texture();
 	Texture* playerIdleTex = new Texture();
@@ -193,17 +202,17 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	Texture* rightIdleTex = new Texture();
 
 	//load sprite from a configuration file?
-	objTexture->setFile("YemojasHouse.png");
-	playerTexture->setFile("ShangoFrontIdle.png");
-	playerIdleTex->setFile("ShangoFrontIdle.png");
-	upRunTex->setFile("ShangoBackSprite.png");
-	downRunTex->setFile("ShangoForwardSprite.png");
-	leftRunTex->setFile("ShangoLeftSprite.png");
-	rightRunTex->setFile("ShangoRightSprite.png");
-	upIdleTex->setFile("ShangoBackIdle.png");
-	downIdleTex->setFile("ShangoFrontIdle.png");
-	leftIdleTex->setFile("ShangoLeftIdle.png");
-	rightIdleTex->setFile("ShangoRightIdle.png");
+	objTexture->setFile("Assets/Sprites/YemojasHouse.png");
+	playerTexture->setFile("Assets/Sprites/ShangoFrontIdle.png");
+	playerIdleTex->setFile("Assets/Sprites/ShangoFrontIdle.png");
+	upRunTex->setFile("Assets/Sprites/ShangoBackSprite.png");
+	downRunTex->setFile("Assets/Sprites/ShangoForwardSprite.png");
+	leftRunTex->setFile("Assets/Sprites/ShangoLeftSprite.png");
+	rightRunTex->setFile("Assets/Sprites/ShangoRightSprite.png");
+	upIdleTex->setFile("Assets/Sprites/ShangoBackIdle.png");
+	downIdleTex->setFile("Assets/Sprites/ShangoFrontIdle.png");
+	leftIdleTex->setFile("Assets/Sprites/ShangoLeftIdle.png");
+	rightIdleTex->setFile("Assets/Sprites/ShangoRightIdle.png");
 
 	/* SET UP SPRITE CHANGE, MIGHT NEED A SINGLETON?*/
 
@@ -250,10 +259,10 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 		cout << "NAME " << Alex->name << endl;
 	}
 	DialogueController::setPlayer(Alex);
-	vector<WorldObj*> recVec;
+	//vector<WorldObj*> recVec;
 
 	for (int i = 1; i < 5; i++) {
-		WorldObj* objs = new WorldObj(Vector2f(100 * i, 100 * i), 200.0, 200.0);
+		WorldObj* objs = new WorldObj(Vector2f(100 * i, 100 * i), 600.0, 400.0);
 		objs->sprite.setTexture(objTexture);
 		objs->setInteractable(false);
 		std::string building="Building ";
@@ -644,8 +653,8 @@ void ERONS_LOOP() {
 	//std::string sentence2 = dilgH->gen_dialog(point2, yemoja);
 	//std::cout << sentence2 << std::endl;
 	//dilgH->gen_dialog({ "what", "variable" }, yemoja);
-	std::cout << "///////////////////////////" << endl;
-	system("PAUSE");
+
+	
 	
 }
 

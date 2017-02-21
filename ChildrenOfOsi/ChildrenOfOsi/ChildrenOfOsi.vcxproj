@@ -179,6 +179,7 @@
     <ClInclude Include="GameWindow.h" />
     <ClInclude Include="json-forwards.h" />
     <ClInclude Include="json.h" />
+    <ClInclude Include="ObjConfig.h" />
     <ClInclude Include="PhysicsTestSuite.h" />
     <ClInclude Include="TaskBufferTestSuite.h" />
     <ClInclude Include="Hero.h" />
@@ -244,6 +245,7 @@
     <ClCompile Include="MessageLog.cpp" />
     <ClCompile Include="Movement.cpp" />
     <ClCompile Include="NPC.cpp" />
+    <ClCompile Include="ObjConfig.cpp" />
     <ClCompile Include="PhysicsManager.cpp" />
     <ClCompile Include="PhysicsTestSuite.cpp" />
     <ClCompile Include="Player.cpp" />
@@ -274,6 +276,7 @@
   <ItemGroup>
     <None Include="AssetInfo.h" />
     <None Include="ClassDiagram.cd" />
+    <None Include="config.json" />
     <None Include="script_templates.json" />
     <None Include="Shango_dialog.json" />
     <None Include="Yemoja_dialog.json" />
