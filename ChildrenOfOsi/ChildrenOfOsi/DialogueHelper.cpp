@@ -15,19 +15,28 @@ DialogueHelper dialogue;
 
 DialogueHelper::DialogueHelper()
 {
-	srand(time(0)); // seed the rand function
-	possible_conv_pts.push_back({ "what", "variable" });
-	possible_conv_pts.push_back({ "who", "variable" });
-	possible_conv_pts.push_back({ "where", "variable" });
-	possible_conv_pts.push_back({ "how", "variable" });
-	possible_conv_pts.push_back({ "why", "variable" });
+	//srand(time(0)); // seed the rand function
+	//possible_conv_pts[0].push_back({ "placeholder","placeholder" });
+	//possible_conv_pts[1].push_back({ "placeholder","placeholder" });
+	//possible_conv_pts[2].push_back({ "placeholder","placeholder" });
+	for (int i = 0; i < 5; i++) 
+	{
+		possible_conv_pts.push_back({});
+	}
+	for (int i = 0; i < 5; i++) 
+	{
+		possible_reply_pts.push_back({});
+	}
 
+	possible_conv_pts[3].push_back({ "name","question_name" });
+	possible_conv_pts[3].push_back({ "reason","question_reason" });
+	possible_conv_pts[3].push_back({ "origin","question_origin" });
+	possible_conv_pts[3].push_back({ "greeting","greeting" });
 
-	possible_reply_pts.push_back({ "what", "variable" });
-	possible_reply_pts.push_back({ "who", "variable" });
-	possible_reply_pts.push_back({ "where", "variable" });
-	possible_reply_pts.push_back({ "how", "variable" });
-	possible_reply_pts.push_back({ "why", "variable" });
+	possible_reply_pts[3].push_back({ "denied","question_denied" });
+	possible_reply_pts[3].push_back({ "name","introduction" });
+	possible_reply_pts[3].push_back({ "reason","response_reason" });
+	possible_reply_pts[3].push_back({ "origin","response_origin" });
 
 }
 
@@ -37,49 +46,100 @@ DialogueHelper::~DialogueHelper()
 }
 
 //functions where heroes make dialogue choices
-dialogue_point DialogueHelper::choose_conv_pt(dialogue_point)
+dialogue_point DialogueHelper::choose_conv_pt(dialogue_point point, int optn_inx)
 {
 	int conv_pt_index = rand() % possible_conv_pts.size();
-	return possible_conv_pts[conv_pt_index];
+	return possible_conv_pts[optn_inx][conv_pt_index];
 
 
 }
 
-dialogue_point DialogueHelper::choose_reply_pt(dialogue_point point)
+dialogue_point DialogueHelper::choose_reply_pt(std::string point, int optn_inx)
 {
-	for (int i = 0; i < possible_reply_pts.size(); i++)
+	for (int i = 0; i < possible_reply_pts[optn_inx].size(); i++)
 	{
-		if (possible_reply_pts[i][0] == point[0])
+		if (possible_reply_pts[optn_inx][i][0] == point)
 		{
-			return possible_reply_pts[i];
+			return possible_reply_pts[optn_inx][i];
 		}
 	}
 	return{ "error phrase_type not found" };
 
 }
 
-std::vector<dialogue_point> DialogueHelper::get_possible_conv_pts()
+std::vector<std::vector<dialogue_point>> DialogueHelper::get_possible_conv_pts()
 {
 	return possible_conv_pts;
 }
 
-std::vector<dialogue_point> DialogueHelper::get_possible_reply_pts()
+std::vector<std::vector<dialogue_point>> DialogueHelper::get_possible_reply_pts()
 {
 	return possible_conv_pts;
 }
 
 
-std::string DialogueHelper::gen_dialog(dialogue_point, Hero* hero)
+std::string DialogueHelper::gen_dialog(dialogue_point diog_pt, Hero* hero)
 {
-	//get_template()
-	return "nothing";
-}
-std::string DialogueHelper::gen_reply(dialogue_point)
-{
-	return "nothing";
+	std::string name;
+	std::cout << hero->name << std::endl;
+	if (hero->name == SHANGO)
+	{
+		name = "Shango";
+	}else if (hero->name == YEMOJA)
+	{
+		name = "Yemoja";
+	}
+	else if (hero->name == OSHOSI)
+	{
+		name = "Oshosi";
+	}
+	else if (hero->name == OYA)
+	{
+		name = "Oya";
+	}
+	else if (hero->name == OGUN)
+	{
+		name = "Ogun";
+	}
+	std::cout << name << std::endl;
+	std::string sentence = convert_to_sentence(get_dialog(name, diog_pt));
+
+	std::cout << sentence << std::endl;
+	return sentence;
 }
 
-dialogue_template DialogueHelper::get_template() {
+//poientially don't need this function
+std::string DialogueHelper::gen_reply(dialogue_point diog_pt, Hero* hero)
+{
+	std::string name;
+	if (hero->name == SHANGO)
+	{
+		name = "Shango";
+	}
+	else if (hero->name == YEMOJA)
+	{
+		name = "Yemoja";
+	}
+	else if (hero->name == OSHOSI)
+	{
+		name = "Oshosi";
+	}
+	else if (hero->name == OYA)
+	{
+		name = "Oya";
+	}
+	else if (hero->name == OGUN)
+	{
+		name = "Ogun";
+	}
+
+	std::string sentence = convert_to_sentence(get_dialog(name, diog_pt));
+
+	std::cout << sentence << std::endl;
+	return sentence;
+}
+
+dialogue_template DialogueHelper::get_template(dialogue_point diog_pt) {
 	Json::Value root;
 	Json::Reader reader;
 
@@ -89,28 +149,32 @@ dialogue_template DialogueHelper::get_template() {
 	
 	dialogue_template dtemp;
 
+	std::cout << diog_pt[1] + "_templates" << std::endl;
 	//get a random conversation template
-	int j = rand() % root["conversation_templates"].size() + 1;
+	int j = rand() % root[diog_pt[1] + "_templates"].size() + 1;
 
 	/*populate a dialogue template using the contents
 	of the randomly obtained dialogue template*/
-	for (int i = 1; i <= root["conversation_templates"]
+	for (int i = 1; i <= root[diog_pt[1] + "_templates"]
 		[to_string(j)].size(); i++) {
-		dtemp.push_back(root["conversation_templates"][to_string(j)]
+		dtemp.push_back(root[diog_pt[1] + "_templates"][to_string(j)]
 			[to_string(i)].asString());
 	}
-
+	for (int i = 0; i < dtemp.size(); i++)
+	{
+		std::cout << dtemp[i] << std::endl;
+	}
 	return dtemp;
 
 }
 
-dialogue_point DialogueHelper::get_dialog(std::string name) {
+dialogue_point DialogueHelper::get_dialog(std::string name, dialogue_point diog_pt) {
 
-	dialogue_template dtemp = get_template();
+	dialogue_template dtemp = get_template(diog_pt);
 
 	Json::Value root;
 	Json::Reader reader;
-
+	std::cout <<name + "_dialog.json" << std::endl;
 	std::string dialogue_filename = name + "_dialog.json";
 
 	std::ifstream file(dialogue_filename);
@@ -144,5 +208,18 @@ dialogue_point DialogueHelper::get_dialog(std::string name) {
 	
 	return dpoint;
 
+}
+
+std::string DialogueHelper::convert_to_sentence(dialogue_point dialog_pt)
+{
+	string sentence;
+	for (auto i = dialog_pt.begin(); i != dialog_pt.end(); ++i) {
+		std::string tmp = "";
+		for (auto j = (*i).begin(); j != (*i).end(); ++j) {
+			tmp += *j;
+		}
+		sentence += tmp;
+	}
+	return sentence;
 }
 

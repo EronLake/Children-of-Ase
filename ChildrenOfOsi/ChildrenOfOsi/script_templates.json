@@ -1,5 +1,5 @@
 {
-	"conversation_templates": {
+	"greeting_templates": {
 		"1": {
 			"1": "Greeting" ,
 			"2": "." ,
@@ -10,44 +10,53 @@
 		"2": {
 			"1": "Greeting" ,
 			"2": "." 
-		},
+		}
+	},
 
-		"3": {
+	"refute_question_templates": {
+
+		"1": {
 			"1": "Refute_Question" ,
 			"2": "." 
 		},
 
-		"4": {
+		"2": {
 			"1": "Refute_Question" ,
 			"2": "_" ,
 			"3":"Identifier",
 			"4": "."
 		},
 
-		"5": {
+		"3": {
 			"1": "Refute_Question" ,
 			"2": "_" ,
 			"3":"Name_2",
 			"4": "."
-		},
+		}
+	},
 
-		"6": {
+	"introduction_templates": {
+
+		"1": {
 			"1": "Introduction" ,
 			"2": "_" ,
 			"3":"Name_1",
 			"4": "."
 		},
 
-		"7": {
+		"2": {
 			"1": "Introduction" ,
 			"2": "_" ,
 			"3":"Name_1",
 			"4": ".",
 			"5": "Extra_Dialogue",
 			"6": "."
-		},
+		}
+	},
 
-		"8": {
+	"response_name_templates": {
+
+		"1": {
 			"1": "Response_Name" ,
 			"2": "_" ,
 			"3":"Name_2",
@@ -56,19 +65,25 @@
 			"6": "."
 		},
 
-		"9": {
+		"2": {
 			"1": "Response_Name" ,
 			"2": "_" ,
 			"3":"Name_2",
 			"4": "."
-		},
+		}
+	},
 
-		"10": {
+	"response_origin_templates": {
+
+		"1": {
 			"1": "Response_Origin" ,
 			"2": "." 
-		},
+		}
+	},
 
-		"11": {
+	"response_reason_templates": {
+
+		"1": {
 			"1": "Friend_Reason" ,
 			"2": "_" ,
 			"3":"Name_2",
@@ -77,24 +92,30 @@
 			"6": "."
 		},
 
-		"12": {
+		"2": {
 			"1": "Friend_Reason" ,
 			"2": "_" ,
 			"3":"Name_2",
 			"4": "."
 		},
 
-		"13": {
+		"3": {
 			"1": "Friend_Reason" ,
 			"2": "." 
-		},
+		}
+	},
 
-		"14": {
+	"bad_reason_templates": {
+
+		"1": {
 			"1": "Bad_Reason" ,
 			"2": "." 
-		},
+		}
+	},
 
-		"15": {
+	"village_response_templates": {
+
+		"1": {
 			"1": "Village_Response" ,
 			"2": "_" ,
 			"3":"Village_1",
@@ -103,42 +124,46 @@
 			"6": "."
 		},
 
-		"16": {
+		"2": {
 			"1": "Village_Response" ,
 			"2": "_" ,
 			"3":"Village_1",
 			"4": "."
-		},
+		}
+	},
 
-		"17": {
+	"familiar_greet_templates": {
+		"1": {
 			"1": "Familiar_Greet" ,
 			"2": "." 
 		},
 
-		"18": {
+		"2": {
 			"1": "Familiar_Greet" ,
 			"2": "_" ,
 			"3":"Name_2",
 			"4": "."
 		},
 
-		"19": {
+		"3": {
 			"1": "Familiar_Greet" ,
 			"2": "_" ,
 			"3":"Name_2",
 			"4": ".",
 			"5": "Good_Intentions",
 			"6": "."
-		},
+		}
+	},
 
-		"20": {
+	"question_denied_templates": {
+		"1": {
 			"1": "Question_Denied" ,
 			"2": "." 
 		}
 
 	},
 
-	"question_templates": {
+	"question_name_templates": {
 	    "1": {
 			"1": "Ask_Name" ,
 			"2": "_" ,
@@ -149,40 +174,46 @@
 		"2": {
 			"1": "Ask_Name" ,
 			"2": "?" 
-		},
+		}
+	},
 
-		"3": {
+	"question_reason_templates": {
+
+		"1": {
 			"1": "Ask_Reason" ,
 			"2": "_",
 			"3": "Indetifier",
 			"4": "?" 
 		},
 
-		"4": {
+		"2": {
 			"1": "Ask_Reason" ,
 			"2": "?" 
 		},
 
-		"5": {
+		"3": {
 			"1": "Ask_Reason" ,
 			"2": "_" ,
 			"3":"Name_2",
 			"4": "?"
-		},
+		}
+	},
 
-		"6": {
+	"question_origin_templates": {
+
+		"1": {
 			"1": "Ask_Origin" ,
 			"2": "_" ,
 			"3":"Identifier",
 			"4": "?"
 		},
 
-		"7": {
+		"2": {
 			"1": "Ask_Origin" ,
 			"2": "?" 
 		},
 
-		"8": {
+		"3": {
 			"1": "Ask_Origin" ,
 			"2": "_" ,
 			"3":"Name_2",
