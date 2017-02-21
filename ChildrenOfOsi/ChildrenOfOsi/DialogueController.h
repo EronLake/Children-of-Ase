@@ -12,16 +12,20 @@ public:
 	~DialogueController();
 	static void PlayerChoose();
 
-	static void PlayerConversationPoint(int info);
-	static void PlayerResponse(int info);
+	static void PlayerConversationPoint();
+	static void PlayerResponse();
 	static void otherConversationPoint(dialogue_point line);
 	static void otherResponse(std::string info);
 
 	static vector<std::string> getOptions();
+	static int getOSize() { return options.size(); };
 	static vector<std::string> getReplyOptions();
 
 	static std::string getMessage() { return message; };
-	static void setOptionsIndex(int i) { optionsIndex = i; };
+	static void setOptionsIndex(int i) { optionsIndex = i; select = 0; };
+	static int getOptionsIndex() { return optionsIndex; };
+	static void setSelect(int i) { select = i; };
+	static int getSelect() { return select; };
 	static void setPlayer(Player* p);
 	static void startConversation(WorldObj* n,bool playerTalk);
 	static WorldObj* getOther();
@@ -43,5 +47,6 @@ private:
 	static std::vector<std::vector<dialogue_point>> replyOptions;
 	static std::string message;
 	static int optionsIndex;
+	static int select;
 };
 

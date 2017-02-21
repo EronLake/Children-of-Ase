@@ -212,8 +212,45 @@
 2/20/2017   1:18   Memory manager unit test passed!
 2/20/2017   1:24   Memory manager unit test passed!
 >>>>>>> c6b48db57b3fadf898a5d1148ad4f381c94a952f
+<<<<<<< HEAD
+2/20/2017   1:55   Memory manager unit test passed!
+2/20/2017   6:18   Memory manager unit test passed!
+2/20/2017   6:43   Memory manager unit test passed!
+=======
 >>>>>>> fcf8eb858d0f29bae0cf5d9c54bd9de6505661c6
 2/20/2017   3:21   Memory manager unit test passed!
+<<<<<<< HEAD
+>>>>>>> 6a5476d65de33cb33d14950dd830f8acc2b3c8e0
+2/20/2017   7:9   Memory manager unit test passed!
+2/20/2017   7:12   Memory manager unit test passed!
+2/20/2017   7:15   Memory manager unit test passed!
+2/20/2017   7:16   Memory manager unit test passed!
+2/20/2017   7:17   Memory manager unit test passed!
+2/20/2017   7:20   Memory manager unit test passed!
+2/20/2017   7:35   Memory manager unit test passed!
+2/20/2017   7:42   Memory manager unit test passed!
+2/20/2017   7:48   Memory manager unit test passed!
+2/20/2017   7:55   Memory manager unit test passed!
+2/20/2017   7:56   Memory manager unit test passed!
+2/20/2017   7:59   Memory manager unit test passed!
+2/20/2017   8:9   Memory manager unit test passed!
+2/20/2017   8:11   Memory manager unit test passed!
+2/20/2017   8:18   Memory manager unit test passed!
+2/20/2017   8:19   Memory manager unit test passed!
+2/20/2017   8:24   Memory manager unit test passed!
+2/20/2017   8:27   Memory manager unit test passed!
+2/20/2017   8:30   Memory manager unit test passed!
+2/20/2017   8:31   Memory manager unit test passed!
+2/20/2017   8:32   Memory manager unit test passed!
+2/20/2017   8:34   Memory manager unit test passed!
+2/20/2017   8:38   Memory manager unit test passed!
+2/20/2017   8:39   Memory manager unit test passed!
+2/20/2017   8:40   Memory manager unit test passed!
+2/20/2017   8:42   Memory manager unit test passed!
+2/20/2017   8:44   Memory manager unit test passed!
+2/20/2017   8:46   Memory manager unit test passed!
+2/20/2017   8:50   Memory manager unit test passed!
+=======
 2/20/2017   5:8   Memory manager unit test passed!
 2/20/2017   5:10   Memory manager unit test passed!
 2/20/2017   5:20   Memory manager unit test passed!
@@ -249,6 +286,7 @@
 2/20/2017   7:22   Memory manager unit test passed!
 2/20/2017   7:26   Memory manager unit test passed!
 2/20/2017   7:32   Memory manager unit test passed!
+<<<<<<< HEAD
 2/20/2017   8:49   Memory manager unit test passed!
 2/20/2017   8:51   Memory manager unit test passed!
 2/20/2017   8:55   Memory manager unit test passed!
@@ -274,3 +312,7 @@
 2/21/2017   1:33   Memory manager unit test passed!
 2/21/2017   1:35   Memory manager unit test passed!
 2/21/2017   1:40   Memory manager unit test passed!
+=======
+>>>>>>> 7eeecb19eeb63f8757941e27b2805e4e2228fb30
+>>>>>>> cdcec399ea48cf878ea28ddd062823c0f94f92a8
+2/21/2017   1:45   Memory manager unit test passed!

@@ -2,6 +2,7 @@
 #include "QuadTree.h"
 #include "GameWindow.h"
 #include "DialogueGui.h"
+#include "DialogueController.h"
 #include "GameMap.h"
 
 class RenderHelper

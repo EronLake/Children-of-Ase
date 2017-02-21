@@ -33,9 +33,9 @@ FMOD_RESULT result;
 		
 		// Initialize our Instance with 36 Channels
 		m_pSystem->init(36, FMOD_INIT_NORMAL, 0);
-		string oasis = "shangodrums.wav";
+		string oasis = "oasis.wav";
 		string bump = "bump_0.wav";
-		string walk = "walk_0.wav";
+		string walk = "walk_loop.wav";
 
 		SoundClass oasisAddress = nullptr;
 		SoundClass bumpAddress = nullptr;
@@ -89,7 +89,7 @@ FMOD_RESULT result;
 		}
 		cout << FMOD_ErrorString(result) << endl;
 	};
-	void SoundSystem::playMusic(SoundClass pSound, bool bLoop, FMOD::Channel* channel, bool ispaused, float volume)
+	void SoundSystem::playMusic(SoundClass pSound, bool bLoop, FMOD::Channel*& channel, bool ispaused, float volume)
 	{
 		if (!bLoop)
 			pSound->setMode(FMOD_LOOP_OFF);
@@ -110,7 +110,27 @@ FMOD_RESULT result;
 		}
 		cout << FMOD_ErrorString(result) << endl;
 	};
-	
+	void SoundSystem::playAmbient(SoundClass pSound, bool bLoop, FMOD::Channel*& channel, bool ispaused, float volume)
+	{
+		if (!bLoop)
+			pSound->setMode(FMOD_LOOP_OFF);
+		else
+		{
+			pSound->setMode(FMOD_LOOP_NORMAL);
+			pSound->setLoopCount(-1);
+		}
+
+
+
+		result = m_pSystem->playSound(pSound, 0, ispaused, &channel); //fmod playsound takes  (FMOD::Sound *sound,FMOD::ChannelGroup *channelgroup, bool paused, FMOD::Channel **channel)
+		channel->setVolume(volume);
+		channel->setPaused(false);
+		channel->setPriority(1);
+		if (bLoop) {
+			channel->setLoopCount(-1);
+		}
+		cout << FMOD_ErrorString(result) << endl;
+	};
 	void SoundSystem::releaseSound(SoundClass pSound)
 	{
 		pSound->release();
@@ -119,7 +139,8 @@ FMOD_RESULT result;
 		foo::soundType type;
 		FMOD::Sound* soundSample;
 		const char* name;              //the variables required
-		FMOD::Channel* channel;
+
+		chnls[0] = nullptr;
 		bool ispaused;
 		unsigned int time;
 
@@ -127,8 +148,8 @@ FMOD_RESULT result;
 		SoundSystem soundsystem;
 
 		type = foo::soundType::music;
-		name = "shangodrums.wav";
-		channel = channels[0];//assign the channel
+		name = "oasis.wav";
+		channels[name] = &chnls[0];//assign the channel
 		
 		ispaused = true;
 
@@ -139,7 +160,7 @@ FMOD_RESULT result;
 														 //object stuff
 
 
-		playMusic(sounds[name], true, channel, ispaused,.1); 
+		playMusic(sounds[name], true, chnls[0], ispaused,.6);
 		
 		// Play the sound, with loop mode
 
@@ -154,7 +175,7 @@ FMOD_RESULT result;
 		foo::soundType type;
 		FMOD::Sound* soundSample;
 		const char* name;              //the variables required
-		FMOD::Channel* channel;
+		chnls[1] = nullptr;
 		bool ispaused;
 		unsigned int time;
 
@@ -163,7 +184,7 @@ FMOD_RESULT result;
 
 		type = foo::soundType::music;
 		name = "bump_0.wav";
-		channel = channels[1];//assign the channel
+		channels[name] = &chnls[1];//assign the channel
 		ispaused = false;
 
 		//this->createSound(&soundSample, name);// Create the sound
@@ -173,7 +194,7 @@ FMOD_RESULT result;
 		//object stuff
 
 
-		playSound(sounds[name], false, channel, ispaused,1); 	// Play the sound, with loop mode
+		playSound(sounds[name], false, chnls[1], ispaused,1.5); 	// Play the sound, with loop mode
 
 
 															//cout << "Press return to quit." << endl;  // Do something meanwhile...
@@ -186,7 +207,8 @@ FMOD_RESULT result;
 		foo::soundType type;
 		FMOD::Sound* soundSample;
 		const char* name;              //the variables required
-		FMOD::Channel* channel;
+
+		chnls[2] = nullptr;
 		bool ispaused;
 		unsigned int time;
 
@@ -194,9 +216,9 @@ FMOD_RESULT result;
 		SoundSystem soundsystem;
 
 		type = foo::soundType::music;
-		name = "walk_0.wav";
-		channel = channels[2];//assign the channel
-		ispaused = false;
+		name = "walk_loop.wav";
+		channels[name] = &chnls[2];//assign the channel
+		ispaused = true;
 
 		//this->createSound(&soundSample, name);// Create the sound
 		//soundSample->getLength(&time, FMOD_TIMEUNIT_PCM);// Find the length
@@ -205,7 +227,8 @@ FMOD_RESULT result;
 		//object stuff
 
 
-		playSound(sounds[name], true, channel, ispaused,1); 	// Play the sound, with loop mode
+		playAmbient(sounds[name], true, chnls[2], ispaused,.6); 	
+// Play the sound, with loop mode
 
 
 															//cout << "Press return to quit." << endl;  // Do something meanwhile...
@@ -213,6 +236,40 @@ FMOD_RESULT result;
 
 															//releaseSound(sounds[name]); 
 		return 0;// Release the sound
+	};
+	int SoundSystem::pauseSound(string name) {
+	            //the variables required
+		FMOD::Channel* channel;
+		if ((channels[name])) {
+			channel = *(channels[name]);
+			bool playing = false;
+			bool* isplaying = &playing;
+			channel->isPlaying(isplaying);
+			if (*isplaying) {
+				channel->setPaused(true);
+			}
+
+		}
+		
+																//cout << "Press return to quit." << endl;  // Do something meanwhile...
+																//cin.get();
+
+																//releaseSound(sounds[name]); 
+		return 0;// Release the sound 
+	};
+	int SoundSystem::unpauseSound(string name)
+	{
+		FMOD::Channel* channel;
+		if ((channels[name])) {
+			channel = *(channels[name]);
+			bool playing = true;
+			bool* isplaying = &playing;
+			channel->isPlaying(isplaying);
+			if (*isplaying) {
+				channel->setPaused(false);
+			}
+		}
+		return 0;
 	};
 	
 	

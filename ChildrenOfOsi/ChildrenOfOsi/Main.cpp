@@ -255,9 +255,6 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	Alex->setInteractable(true);
 	Alex->setName("Alex");
 	Alex->setTalkDist(20);
-	for (int i = 0; i < 100;i++) {
-		cout << "NAME " << Alex->name << endl;
-	}
 	DialogueController::setPlayer(Alex);
 	//vector<WorldObj*> recVec;
 
@@ -367,7 +364,9 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 		delta_ticks = clock() - start_tick; //the time, in ms, that took to render the scene
 		if (delta_ticks > 0)
 			fps = CLOCKS_PER_SEC / delta_ticks;
-		cout << "FPS: " << fps << endl;
+		if (DialogueController::getState() == 0) {
+			cout << "FPS: " << fps << endl;
+		}
 
 
 	}

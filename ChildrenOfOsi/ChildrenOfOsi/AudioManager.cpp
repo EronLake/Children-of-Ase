@@ -8,9 +8,11 @@ AudioManager::AudioManager(MessageLog* _mLog, TaskBuffer* _tBuffer)
 {
 	LOG("AudioManager Object Constructed");
 	soundHelper = new SoundSystem();
-	task_map["Play"] = &SoundSystem::playSong1;
-	task_map["Bump"] = &SoundSystem::playBump;
-	task_map["Walk"] = &SoundSystem::playWalk;
+	sound_map["Play"] = &SoundSystem::playSong1;
+	sound_map["Bump"] = &SoundSystem::playBump;
+	sound_map["Walk"] = &SoundSystem::playWalk;
+	function_map["Pause"] = &SoundSystem::pauseSound;
+	function_map["Unpause"] = &SoundSystem::unpauseSound;
 }
 
 
@@ -27,13 +29,20 @@ void AudioManager::register_manager()
 void AudioManager::execute_task(Task* current_task)
 {
 	int result;
-	auto it = task_map.find(current_task->name);
-	if (it == task_map.end()) {
+	auto it = sound_map.find(current_task->name);
+	auto it2 = function_map.find(current_task->name);
+	if (it == sound_map.end()&& it2 == function_map.end()) {
 		result = 1;
 		LOG("Error: Task '" << current_task->name << "' does not exist.");
 	}
 	else {
-		result = (soundHelper->*(it->second))();
+		if (current_task->name == "Pause" || current_task->name == "Unpause") {
+			result = (soundHelper->*(it2->second))("walk_loop.wav");
+			
+		}
+		else {
+			result = (soundHelper->*(it->second))();
+		}
 	}
 
 	if (result == 0) {
