@@ -60,6 +60,7 @@ void Input::InputCheck()
 			}
 			else if (D) {    //Moving down and right
 				gameplay_functions->move_down_right(player);
+
 			}
 			else {
 			    gameplay_functions->move_down(player);

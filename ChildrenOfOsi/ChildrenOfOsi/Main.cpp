@@ -258,8 +258,17 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 		//objs->offsetBody(0, 70, 70, 70, 70);
 		recVec.push_back(objs);
 	}
-	WorldObj* staticRec = new WorldObj(Vector2f(1800, 1350), 100.0, 100.0);
+	WorldObj* staticRec = new WorldObj(Vector2f(2000, 2000), 100.0, 100.0);
 	staticRec->sprite.setTexture(playerTexture);
+	staticRec->sprite.setIdleTexture(playerIdleTex);
+	staticRec->sprite.up = upRunTex;
+	staticRec->sprite.down = downRunTex;
+	staticRec->sprite.left = leftRunTex;
+	staticRec->sprite.right = rightRunTex;
+	staticRec->sprite.id_up = upIdleTex;
+	staticRec->sprite.id_left = leftIdleTex;
+	staticRec->sprite.id_right = rightIdleTex;
+	staticRec->sprite.id_down = downIdleTex;
 	recVec.push_back(staticRec);
 
 	//recVec.push_back(myRec1); recVec.push_back(myRec2);
@@ -316,9 +325,10 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 		_QuadTree->clear();
 		for (int i = 0; i < recVec.size(); i++) {
 			_QuadTree->insert(recVec[i]);	//insert all obj into tree
+	
 		}
 		//clock 
-
+		gameplay_functions->move_up_left(staticRec);
 		iController->InputCheck();
 
 		//Alex->WorldObj::drawObj(0,0);
