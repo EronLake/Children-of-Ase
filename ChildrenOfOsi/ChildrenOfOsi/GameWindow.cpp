@@ -3,6 +3,8 @@
 
 const std::string osi::GameWindow::STD_VERTEX_SHADER_PATH = "./OpenGL Shaders/StdVertexShader.vert.glsl";
 const std::string osi::GameWindow::STD_FRAGMENT_SHADER_PATH = "./OpenGL Shaders/StdFragmentShader.frag.glsl";
+const std::string osi::GameWindow::FONT_VERTEX_SHADER_PATH = "./OpenGL Shaders/FontvertexShader.frag.glsl";
+const std::string osi::GameWindow::FONT_FRAGMENT_SHADER_PATH = "./OpenGL Shaders/FontFragmentShader.frag.glsl";
 
 GLFWwindow *osi::GameWindow::window = nullptr;
 int osi::GameWindow::windowWidthPx = -1;
@@ -14,7 +16,7 @@ std::vector<GLuint> osi::GameWindow::elementBufferObjectId;
 std::vector<GLuint> osi::GameWindow::textures;
 GLuint osi::GameWindow::shaderProgramId = 0;
 
-//std::unordered_map<std::string, std::unordered_map<GLchar, osi::Glyph>> osi::GameWindow::fontCharacters;
+std::unordered_map<std::string, std::unordered_map<GLchar, osi::Glyph>> osi::GameWindow::fontCharacters;
 
 int osi::GameWindow::numObjects = 0;
 
@@ -31,7 +33,7 @@ bool osi::GameWindow::init()
 
   GameWindow::setupWindow();
   GameWindow::setupStdShaders();
-  //GameWindow::setupFont("Arial", 48);
+  // GameWindow::setupFont("Arial", 48);
 
   glEnable(GL_TEXTURE_2D);
   glewExperimental = GL_TRUE;
@@ -111,7 +113,7 @@ void osi::GameWindow::drawSprite(float x, float y, float width, float height, Sp
   };
   GLuint spriteVertexIndices[] = {
     0, 2, 3, // First triangle
-    0, 2, 1
+    0, 2, 1  // Second triangle
   };
   numObjects++;
   vertexArrayObjectId.push_back(numObjects);
@@ -170,10 +172,10 @@ void osi::GameWindow::drawSprite(float x, float y, float width, float height, Sp
  * Param charHeight: The height of each line of text
  * Param text: The text to be drawn
  */
-//void osi::GameWindow::drawText(float x, float y, float fieldWidth, float fieldHeight, float charHeight, const std::string& text)
-//{
-//
-//}
+void osi::GameWindow::drawText(float x, float y, float fieldWidth, float fieldHeight, float charHeight, const std::string& text)
+{
+
+}
 
 /**
  * Refreshes the game window, drawing the next frame.
@@ -391,51 +393,51 @@ void osi::GameWindow::setupStdShaders()
 /**
  *
  */
-//void osi::GameWindow::setupFont(const std::string& fontName, int fontHeight)
-//{
-//  // Initialize the font library
-//  FT_Library fontLib;
-//  if(FT_Init_FreeType(&fontLib))
-//    throw FontInitializationError("ERROR::FREETYPE: Could not initialize FreeType Library.");
-//
-//  // Set up the font face
-//  FT_Face face;
-//  if(FT_New_Face(fontLib, (FONTS_PATH + fontName + ".ttf").c_str(), 0, &face))
-//    throw FontInitializationError("ERROR::FREETYPE: Failed to load font \"" + fontName + "\"");
-//  FT_Set_Pixel_Sizes(face, 0, fontHeight);
-//
-//  glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
-//
-//  // Load up all the characters in the ASCII set
-//  for(GLchar ch = 0x00; ch <= 0x7F; ++ch) {
-//    if(FT_Load_Char(face, ch, FT_LOAD_RENDER)) {
-//      FT_Done_Face(face);
-//      FT_Done_FreeType(fontLib);
-//      throw FontInitializationError(std::string("ERROR::FREETYTPE: Failed to load glyph: ") + ch);
-//    }
-//
-//    GLuint textureId;
-//    glGenTextures(1, &textureId);
-//    glBindTexture(GL_TEXTURE_2D, textureId);
-//    glTexImage2D(GL_TEXTURE_2D, 0, GL_RED,
-//      face->glyph->bitmap.width, face->glyph->bitmap.rows,
-//      0, GL_RED, GL_UNSIGNED_BYTE, face->glyph->bitmap.buffer);
-//
-//    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
-//    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
-//    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-//    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-//
-//    std::string fontKey = fontName + ' ' + std::to_string(fontHeight);
-//    GameWindow::fontCharacters[fontKey][ch] = {
-//      textureId,
-//      glm::ivec2(face->glyph->bitmap.width, face->glyph->bitmap.rows),
-//      glm::ivec2(face->glyph->bitmap_left, face->glyph->bitmap_top),
-//      static_cast<GLuint>(face->glyph->advance.x)
-//    };
-//  }
-//
-//  glPixelStorei(GL_UNPACK_ALIGNMENT, 4);
-//  FT_Done_Face(face);
-//  FT_Done_FreeType(fontLib);
-//}
+void osi::GameWindow::setupFont(const std::string& fontName, int fontHeight)
+{
+  // Initialize the font library
+  FT_Library fontLib;
+  if(FT_Init_FreeType(&fontLib))
+    throw FontInitializationError("ERROR::FREETYPE: Could not initialize FreeType Library.");
+
+  // Set up the font face
+  FT_Face face;
+  if(FT_New_Face(fontLib, (FONTS_PATH + fontName + ".ttf").c_str(), 0, &face))
+    throw FontInitializationError("ERROR::FREETYPE: Failed to load font \"" + fontName + "\"");
+  FT_Set_Pixel_Sizes(face, 0, fontHeight);
+
+  glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
+
+  // Load up all the characters in the ASCII set
+  for(GLchar ch = 0x00; ch <= 0x7F; ++ch) {
+    if(FT_Load_Char(face, ch, FT_LOAD_RENDER)) {
+      FT_Done_Face(face);
+      FT_Done_FreeType(fontLib);
+      throw FontInitializationError(std::string("ERROR::FREETYTPE: Failed to load glyph: ") + ch);
+    }
+
+    GLuint textureId;
+    glGenTextures(1, &textureId);
+    glBindTexture(GL_TEXTURE_2D, textureId);
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_RED,
+      face->glyph->bitmap.width, face->glyph->bitmap.rows,
+      0, GL_RED, GL_UNSIGNED_BYTE, face->glyph->bitmap.buffer);
+
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+
+    std::string fontKey = fontName + ' ' + std::to_string(fontHeight);
+    GameWindow::fontCharacters[fontKey][ch] = {
+      textureId,
+      glm::ivec2(face->glyph->bitmap.width, face->glyph->bitmap.rows),
+      glm::ivec2(face->glyph->bitmap_left, face->glyph->bitmap_top),
+      static_cast<GLuint>(face->glyph->advance.x)
+    };
+  }
+
+  glPixelStorei(GL_UNPACK_ALIGNMENT, 4);
+  FT_Done_Face(face);
+  FT_Done_FreeType(fontLib);
+}
