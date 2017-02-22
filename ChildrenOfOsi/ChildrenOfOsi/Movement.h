@@ -36,6 +36,6 @@ private:
 	bool coordOverlap(int value, int min, int max) { return (value >= min) && (value <= max); }
 	//hold obj to check with. init before each move funcs call
 	std::vector<WorldObj*> objVec;
-	float moveSpeed = 6.0f;
+	float moveSpeed = 24.0f;
 	float diagSpeed = sqrt((moveSpeed * moveSpeed) / 2);
 };

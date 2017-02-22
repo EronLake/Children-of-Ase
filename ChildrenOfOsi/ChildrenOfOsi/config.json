@@ -1,31 +1,254 @@
 {
-	"building_1": {
-		"x": 37.0,				"y":35.0,			"width":600.0,				"hight":400.0,
-		"name":"building1",		"tex_file":"Assets/Sprites/YemojasHouse.png",	"frame_num":1
-	},
-
-	"building_2": {
-		"x": 37.0,				"y":40.0,			"width":600.0,				"hight":400.0,
-		"name":"building1",		"tex_file":"Assets/Sprites/YemojasHouse.png",	"frame_num":1
-	},
-
-	"building_3": {
-		"x": 40.0,				"y":35.0,			"width":600.0,				"hight":400.0,
-		"name":"building1",		"tex_file":"Assets/Sprites/YemojasHouse.png",	"frame_num":1
-	},
-
-	"building_4": {
-		"x": 3.0,				"y":3.0,			"width":600.0,				"hight":400.0,
-		"name":"building1",		"tex_file":"Assets/Sprites/YemojasHouse.png",	"frame_num":1
-	},
-
-	"building_5": {
-		"x": 4.0,				"y":4.0,			"width":600.0,				"hight":400.0,
-		"name":"building1",		"tex_file":"Assets/Sprites/YemojasHouse.png",	"frame_num":1
-	},
-
-	"building_6": {
-		"x": 4.0,				"y":4.0,			"width":600.0,				"hight":400.0,
-		"name":"building1",		"tex_file":"Assets/Sprites/YemojasHouse.png",	"frame_num":1
-	}
+   "YemojasHouse" : {
+      "frame_num" : 1,
+      "hight" : 400.0,
+      "name" : "YemojasHouse",
+      "tex_file" : "Assets/Sprites/Elder_House.png",
+      "width" : 600.0,
+      "x" : 15.0,
+      "y" : 4.0
+   },
+   "building_1" : {
+      "frame_num" : 1,
+      "hight" : 400.0,
+      "name" : "building1",
+      "tex_file" : "Assets/Sprites/Elder_House.png",
+      "width" : 600.0,
+      "x" : 37.0,
+      "y" : 35.0
+   },
+   "building_10" : {
+      "frame_num" : 1,
+      "hight" : 400.0,
+      "name" : "YemojasHouse",
+      "tex_file" : "Assets/Sprites/Elder_House.png",
+      "width" : 600.0,
+      "x" : 87.0,
+      "y" : 83.0
+   },
+   "building_11" : {
+      "frame_num" : 1,
+      "hight" : 400.0,
+      "name" : "YemojasHouse",
+      "tex_file" : "Assets/Sprites/Elder_House.png",
+      "width" : 600.0,
+      "x" : 92.0,
+      "y" : 83.0
+   },
+   "building_12" : {
+      "frame_num" : 1,
+      "hight" : 400.0,
+      "name" : "YemojasHouse",
+      "tex_file" : "Assets/Sprites/Elder_House.png",
+      "width" : 600.0,
+      "x" : 92.0,
+      "y" : 79.0
+   },
+   "building_2" : {
+      "frame_num" : 1,
+      "hight" : 400.0,
+      "name" : "YemojasHouse",
+      "tex_file" : "Assets/Sprites/Elder_House.png",
+      "width" : 600.0,
+      "x" : 81.0,
+      "y" : 71.0
+   },
+   "building_3" : {
+      "frame_num" : 1,
+      "hight" : 400.0,
+      "name" : "YemojasHouse",
+      "tex_file" : "Assets/Sprites/Elder_House.png",
+      "width" : 600.0,
+      "x" : 88.0,
+      "y" : 71.0
+   },
+   "building_4" : {
+      "frame_num" : 1,
+      "hight" : 400.0,
+      "name" : "YemojasHouse",
+      "tex_file" : "Assets/Sprites/Elder_House.png",
+      "width" : 600.0,
+      "x" : 92.0,
+      "y" : 71.0
+   },
+   "building_5" : {
+      "frame_num" : 1,
+      "hight" : 400.0,
+      "name" : "YemojasHouse",
+      "tex_file" : "Assets/Sprites/Elder_House.png",
+      "width" : 600.0,
+      "x" : 92.0,
+      "y" : 75.0
+   },
+   "building_6" : {
+      "frame_num" : 1,
+      "hight" : 400.0,
+      "name" : "YemojasHouse",
+      "tex_file" : "Assets/Sprites/Elder_House.png",
+      "width" : 600.0,
+      "x" : 76.0,
+      "y" : 75.0
+   },
+   "building_7" : {
+      "frame_num" : 1,
+      "hight" : 400.0,
+      "name" : "YemojasHouse",
+      "tex_file" : "Assets/Sprites/Elder_House.png",
+      "width" : 600.0,
+      "x" : 76.0,
+      "y" : 79.0
+   },
+   "building_8" : {
+      "frame_num" : 1,
+      "hight" : 400.0,
+      "name" : "YemojasHouse",
+      "tex_file" : "Assets/Sprites/Elder_House.png",
+      "width" : 600.0,
+      "x" : 76.0,
+      "y" : 83.0
+   },
+   "building_9" : {
+      "frame_num" : 1,
+      "hight" : 400.0,
+      "name" : "YemojasHouse",
+      "tex_file" : "Assets/Sprites/Elder_House.png",
+      "width" : 600.0,
+      "x" : 81.0,
+      "y" : 83.0
+   },
+   "bush_1" : {
+      "frame_num" : 1,
+      "hight" : 400.0,
+      "name" : "bush_1",
+      "tex_file" : "Assets/Sprites/Bush.png",
+      "width" : 600.0,
+      "x" : 63.0,
+      "y" : 68.0
+   },
+   "bush_2" : {
+      "frame_num" : 1,
+      "hight" : 400.0,
+      "name" : "bush_2",
+      "tex_file" : "Assets/Sprites/Bush.png",
+      "width" : 600.0,
+      "x" : 64.0,
+      "y" : 69.0
+   },
+   "bush_3" : {
+      "frame_num" : 1,
+      "hight" : 400.0,
+      "name" : "bush_3",
+      "tex_file" : "Assets/Sprites/Bush.png",
+      "width" : 600.0,
+      "x" : 66.0,
+      "y" : 70.0
+   },
+   "rock_1" : {
+      "frame_num" : 1,
+      "hight" : 400.0,
+      "name" : "rock_1",
+      "tex_file" : "Assets/Sprites/Rock_2.png",
+      "width" : 600.0,
+      "x" : 41.0,
+      "y" : 36.0
+   },
+   "rock_2" : {
+      "frame_num" : 1,
+      "hight" : 400.0,
+      "name" : "rock_2",
+      "tex_file" : "Assets/Sprites/Rock.png",
+      "width" : 600.0,
+      "x" : 45.0,
+      "y" : 42.0
+   },
+   "rock_3" : {
+      "frame_num" : 1,
+      "hight" : 400.0,
+      "name" : "rock_3",
+      "tex_file" : "Assets/Sprites/Rock.png",
+      "width" : 600.0,
+      "x" : 41.0,
+      "y" : 46.0
+   },
+   "rock_4" : {
+      "frame_num" : 1,
+      "hight" : 400.0,
+      "name" : "rock_4",
+      "tex_file" : "Assets/Sprites/Rock_2.png",
+      "width" : 600.0,
+      "x" : 100.0,
+      "y" : 87.0
+   },
+   "tree_1" : {
+      "frame_num" : 1,
+      "hight" : 400.0,
+      "name" : "tree_1",
+      "tex_file" : "Assets/Sprites/Tree.png",
+      "width" : 600.0,
+      "x" : 39.0,
+      "y" : 35.0
+   },
+   "tree_2" : {
+      "frame_num" : 1,
+      "hight" : 400.0,
+      "name" : "tree_2",
+      "tex_file" : "Assets/Sprites/Tree_2.png",
+      "width" : 600.0,
+      "x" : 50.0,
+      "y" : 62.0
+   },
+   "tree_3" : {
+      "frame_num" : 1,
+      "hight" : 400.0,
+      "name" : "tree_3",
+      "tex_file" : "Assets/Sprites/Tree_2.png",
+      "width" : 600.0,
+      "x" : 53.0,
+      "y" : 63.0
+   },
+   "tree_4" : {
+      "frame_num" : 1,
+      "hight" : 400.0,
+      "name" : "tree_4",
+      "tex_file" : "Assets/Sprites/Tree.png",
+      "width" : 600.0,
+      "x" : 73.0,
+      "y" : 72.0
+   },
+   "tree_5" : {
+      "frame_num" : 1,
+      "hight" : 400.0,
+      "name" : "tree_5",
+      "tex_file" : "Assets/Sprites/Tree_2.png",
+      "width" : 600.0,
+      "x" : 72.0,
+      "y" : 84.0
+   },
+   "tree_6" : {
+      "frame_num" : 1,
+      "hight" : 400.0,
+      "name" : "tree_6",
+      "tex_file" : "Assets/Sprites/Tree.png",
+      "width" : 600.0,
+      "x" : 78.0,
+      "y" : 90.0
+   },
+   "tree_7" : {
+      "frame_num" : 1,
+      "hight" : 400.0,
+      "name" : "tree_7",
+      "tex_file" : "Assets/Sprites/Tree.png",
+      "width" : 600.0,
+      "x" : 85.0,
+      "y" : 90.0
+   },
+   "tree_8" : {
+      "frame_num" : 1,
+      "hight" : 400.0,
+      "name" : "tree_8",
+      "tex_file" : "Assets/Sprites/Tree_2.png",
+      "width" : 600.0,
+      "x" : 99.0,
+      "y" : 86.0
+   }
 }

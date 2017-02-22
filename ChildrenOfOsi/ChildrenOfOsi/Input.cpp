@@ -3,6 +3,7 @@
 #include <conio.h>
 #include <Windows.h>
 #include "Soldier.h"
+#include "json.h"
 
 Input::Input(ChildrenOfOsi* _gameplay_functions)
 {
@@ -97,6 +98,58 @@ void Input::InputCheck()
 		if (E) {
 			std::cout << "Pressed E" << std::endl;
 			gameplay_functions->talk(player);
+		}
+
+		if (L) {
+			std::string image_name;
+			std::string obj_name;
+
+			std::cout << "Pressed Enter" << std::endl;
+			std::cout << "INPUT FILE NAME " << std::endl;
+			std::cout << "///////////////////////////////" << std::endl;
+			std::cin >> image_name;
+			std::cout << "INPUT OBJECT NAME " << std::endl;
+			std::cout << "///////////////////////////////" << std::endl;
+			std::cin >> obj_name;
+			std::cout << image_name << ": "<<  player->getX() << ":" << player->getY() << std::endl;
+
+
+			Json::Value root;
+			Json::Reader reader;
+
+			std::ifstream in_file("config.json");
+			in_file >> root;
+			in_file.close();
+
+			std::ofstream file;
+			file.open("config.json");
+
+
+			//populate 'value_obj' with the objects, arrays etc.
+			Json::Value new_obj = {};
+
+			new_obj["x"] = floor(player->getX()/100);
+			new_obj["y"] = floor(player->getY()/100);
+
+			new_obj["hight"] = 400.0;
+			new_obj["width"] = 600.0;
+
+			new_obj["frame_num"] = 1;
+
+			new_obj["name"] = obj_name;
+			new_obj["tex_file"] = "Assets/Sprites/" + image_name + ".png";
+			
+		
+			root[obj_name] = new_obj;
+
+			Json::StyledWriter styledWriter;
+			file << styledWriter.write(root);
+
+			file.close();
+
+			system("PAUSE");
+			
+			
 		}
 
 	}

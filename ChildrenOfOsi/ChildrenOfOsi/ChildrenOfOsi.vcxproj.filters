@@ -391,5 +391,8 @@
     <None Include="config.json">
       <Filter>Game Objects</Filter>
     </None>
+    <None Include="test.json">
+      <Filter>Game Objects</Filter>
+    </None>
   </ItemGroup>
 </Project>

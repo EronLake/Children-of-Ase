@@ -257,7 +257,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	Alex->setTalkDist(20);
 	DialogueController::setPlayer(Alex);
 	//vector<WorldObj*> recVec;
-
+	/*
 	for (int i = 1; i < 5; i++) {
 		WorldObj* objs = new WorldObj(Vector2f(100 * i, 100 * i), 600.0, 400.0);
 		objs->sprite.setTexture(objTexture);
@@ -268,6 +268,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 		//objs->offsetBody(0, 70, 70, 70, 70);
 		recVec.push_back(objs);
 	}
+	*/
 	Hero* staticRec = new Hero(YEMOJA,Vector2f(1800, 1350), 100.0, 100.0);
 	staticRec->sprite.setTexture(playerTexture);
 	staticRec->setName("Yemoja");
