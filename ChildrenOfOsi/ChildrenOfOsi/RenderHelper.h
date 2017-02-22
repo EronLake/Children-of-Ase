@@ -2,6 +2,7 @@
 #include "QuadTree.h"
 #include "GameWindow.h"
 #include "DialogueGui.h"
+#include "DialogueController.h"
 #include "GameMap.h"
 
 class RenderHelper
@@ -22,7 +23,8 @@ public:
 	int setHeartGlow(WorldObj* obj);
 	int setFaceGlow(WorldObj* obj);
 	int setQuestionGlow(WorldObj* obj);
-
+	void sortVec();
+	bool compY(WorldObj* a, WorldObj* b);
 	QuadTree* tree;
 private:
 	WorldObj* camera;

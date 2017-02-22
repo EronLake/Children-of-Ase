@@ -1,0 +1,49 @@
+{
+	"building_1": {
+		"x": 37.0,				"y":35.0,			"width":600.0,				"hight":400.0,
+    "name": "building1",
+    "tex_file": "Assets/Sprites/YemojasHouse.png",
+    "frame_num": 1,
+    "bodyx1":110, "bodyx2":150, "bodyy1":120, "bodyy2":60
+	},
+
+	"building_2": {
+		"x": 37.0,				"y":33.0,			"width":600.0,				"hight":400.0,
+    "name": "building1",
+    "tex_file": "Assets/Sprites/YemojasHouse.png",
+    "frame_num": 1,
+    "bodyx1":110, "bodyx2":150, "bodyy1":120, "bodyy2":60
+	},
+
+	"building_3": {
+		"x": 40.0,				"y":35.0,			"width":600.0,				"hight":400.0,
+    "name": "building1",
+    "tex_file": "Assets/Sprites/YemojasHouse.png",
+    "frame_num": 1,
+    "bodyx1":110, "bodyx2":150, "bodyy1":120, "bodyy2":60
+	},
+
+	"building_4": {
+		"x": 38.0,				"y":34.0,			"width":600.0,				"hight":400.0,
+    "name": "building1",
+    "tex_file": "Assets/Sprites/YemojasHouse.png",
+    "frame_num": 1,
+    "bodyx1":110, "bodyx2":150, "bodyy1":120, "bodyy2":60
+	},
+
+	"building_5": {
+		"x": 38.0,				"y":32.0,			"width":600.0,				"hight":400.0,
+    "name": "building1",
+    "tex_file": "Assets/Sprites/YemojasHouse.png",
+    "frame_num": 1,
+    "bodyx1":110, "bodyx2":150, "bodyy1":120, "bodyy2":60
+	},
+
+	"building_6": {
+		"x": 37.0,				"y":35.0,			"width":600.0,				"hight":400.0,
+    "name": "building1",
+    "tex_file": "Assets/Sprites/YemojasHouse.png",
+    "frame_num": 1,
+    "bodyx1":110, "bodyx2":150, "bodyy1":120, "bodyy2":60
+	}
+}

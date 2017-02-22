@@ -7,10 +7,10 @@ class CheckClass
 {
 public:
 	static Hero* isHero(WorldObj* test);
-	static bool isSplSoldier(WorldObj* test);
-	static bool isSoldier(WorldObj* test);
-	static bool isNPC(WorldObj* test);
-	static bool isLiving(WorldObj* test);
-	static bool isPlayer(WorldObj* test);
+	static bool isSplSoldier(WorldObj* test, SplSoldier* spl = nullptr);
+	static bool isSoldier(WorldObj* test, Soldier* soldier = nullptr);
+	static bool isNPC(WorldObj* test, NPC* npc = nullptr);
+	static bool isLiving(WorldObj* test, LivingObj* living = nullptr);
+	static bool isPlayer(WorldObj* test, Player* player = nullptr);
 };
 

@@ -1,5 +1,7 @@
 #include "stdafx.h"
 #include "RenderHelper.h"
+#include <algorithm>
+#include <vector> 
 
 
 RenderHelper::RenderHelper(QuadTree * QT)
@@ -43,11 +45,13 @@ int RenderHelper::draw_frame(WorldObj * obj)
 	objVec.clear();
 	objVec = tree->retrieve(objVec, camera);
 	gmap->drawMap(camera->getX(), camera->getY());
-	obj->WorldObj::drawObj(camera->getX(), camera->getY());
-	obj->WorldObj::animateObj();
+	//obj->WorldObj::drawObj(camera->getX(), camera->getY());
+	//obj->WorldObj::animateObj();
+	objVec.push_back(obj);
 	/*for (int i = 0; i < obj->body.size(); i++) {
 		osi::GameWindow::drawSprite(obj->body[i].getX()-camera->getX(), obj->body[i].getY()-camera->getY(), obj->body[i].getWidth(), obj->body[i].getHeight(), obj->getSprite());
 	}*/
+	sortVec();
 	for (int i = 0; i < objVec.size(); i++) {
 		LOG("BEFORE DRAWING**");
 		//cout << objVec[i]->getX() - camera->getX() << endl;
@@ -72,6 +76,21 @@ int RenderHelper::drawDiaGui(WorldObj* obj)
 		//LOG(objVec[i]->getX(), ", ", objVec[i]->getY());
 		objVec[i]->WorldObj::drawObj(camera->getX(), camera->getY());
 		objVec[i]->WorldObj::animateObj();
+	}
+	std::string m = DialogueController::getMessage();
+	//	std::cout << "Message: " << m << std::endl;
+	std::vector<std::string> show;
+	if (DialogueController::getState() == 1) {
+		show = DialogueController::getOptions();
+		for (int i = 0; i < show.size(); i++) {
+		//	std::cout << i << ": " << show[i] << std::endl;
+		}
+	}
+	if (DialogueController::getState() == 2) {
+		show = DialogueController::getReplyOptions();
+		for (int i = 0; i < show.size(); i++) {
+		//	std::cout << i<<": "<<show[i] << std::endl;
+		}
 	}
 	convoGui->drawGui();
 	osi::GameWindow::refresh();
@@ -140,5 +159,14 @@ int RenderHelper::sprite_update(WorldObj * obj)
 	return 0;
 }
 
+void RenderHelper::sortVec()
+{
+	sort(objVec.begin(),objVec.end(), [](WorldObj* a, WorldObj* b){
+		return ((a->body[0].getY() + a->body[0].getHeight()) < (b->body[0].getY() + b->body[0].getHeight()));
+	});
+}
 
+bool RenderHelper::compY(WorldObj* a, WorldObj* b) {
+	return ((a->getY() + a->getHeight()) < (b->getY() + b->getHeight()));
+}
 

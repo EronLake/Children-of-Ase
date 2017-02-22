@@ -83,7 +83,7 @@ bool AudioTestSuite::SoundSystem_destructor_test() {
 
 bool AudioTestSuite::create_sound_test() {
 	FMOD::Sound* test_address;
-	std::string name = "violin.mp3";
+	std::string name = "bump_0.wav";
 	test_soundSystem->createSound(&test_address, name);
 	auto test_sound = test_soundSystem->sounds.find(name);
 	if (test_sound == test_soundSystem->sounds.end()) {
@@ -94,7 +94,7 @@ bool AudioTestSuite::create_sound_test() {
 }
 
 bool AudioTestSuite::play_sound_test() {
-	std::string name = "violin.mp3";
+	std::string name = "bump_0.wav";
 	int numChan;
 	bool played = true;
 	FMOD::Sound* test_sound;

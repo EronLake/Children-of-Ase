@@ -146,6 +146,9 @@
     <ClCompile Include="Wrapper.cpp">
       <Filter>Misc</Filter>
     </ClCompile>
+    <ClCompile Include="ObjConfig.cpp">
+      <Filter>Game Objects</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AIHelper.h">
@@ -307,6 +310,10 @@
     <ClInclude Include="Wrapper.h">
       <Filter>Misc</Filter>
     </ClInclude>
+    <ClInclude Include="ObjConfig.h">
+      <Filter>Game Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="resource2.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="audio_test.txt">
@@ -397,5 +404,11 @@
     <None Include="OpenGL Shaders\StdVertexShader.vert.glsl">
       <Filter>Rendering\Shaders</Filter>
     </None>
+    <None Include="config.json">
+      <Filter>Game Objects</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="ChildrenOfOsi1.rc" />
   </ItemGroup>
 </Project>

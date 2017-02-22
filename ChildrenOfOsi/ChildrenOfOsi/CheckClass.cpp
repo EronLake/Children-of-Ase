@@ -1,37 +1,39 @@
 #include "stdafx.h"
 #include "CheckClass.h"
 Hero* CheckClass::isHero(WorldObj* test) 
-{
-	Hero* d = dynamic_cast<Hero*>(test);
-	return d;
+{ 
+	Hero* hero;
+	hero = dynamic_cast<Hero*>(test);
+	return hero;
+
 }
 
-bool CheckClass::isSplSoldier(WorldObj* test)
+bool CheckClass::isSplSoldier(WorldObj* test, SplSoldier* spl)
 {
-	if (SplSoldier* d = dynamic_cast<SplSoldier*>(test)) return true;
+	if (spl = dynamic_cast<SplSoldier*>(test)) return true;
 	else return false;
 }
 
-bool CheckClass::isSoldier(WorldObj* test)
+bool CheckClass::isSoldier(WorldObj* test, Soldier* soldier)
 {
-	if (Soldier* d = dynamic_cast<Soldier*>(test)) return true;
+	if (soldier = dynamic_cast<Soldier*>(test)) return true;
 	else return false;
 }
 
-bool CheckClass::isNPC(WorldObj* test)
+bool CheckClass::isNPC(WorldObj* test, NPC* npc)
 {
-	if (NPC* d = dynamic_cast<NPC*>(test)) return true;
+	if (npc = dynamic_cast<NPC*>(test)) return true;
 	else return false;
 }
 
-bool CheckClass::isLiving(WorldObj* test)
+bool CheckClass::isLiving(WorldObj* test, LivingObj* living)
 {
-	if (LivingObj* d = dynamic_cast<LivingObj*>(test)) return true;
+	if (living = dynamic_cast<LivingObj*>(test)) return true;
 	else return false;
 }
 
-bool CheckClass::isPlayer(WorldObj* test)
+bool CheckClass::isPlayer(WorldObj* test, Player* player)
 {
-	if (Player* d = dynamic_cast<Player*>(test)) return true;
+	if (player = dynamic_cast<Player*>(test)) return true;
 	else return false;
 }
