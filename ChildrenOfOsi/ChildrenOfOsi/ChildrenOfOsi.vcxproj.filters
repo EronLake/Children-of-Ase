@@ -313,6 +313,7 @@
     <ClInclude Include="ObjConfig.h">
       <Filter>Game Objects</Filter>
     </ClInclude>
+    <ClInclude Include="resource2.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="audio_test.txt">
@@ -391,5 +392,8 @@
     <None Include="config.json">
       <Filter>Game Objects</Filter>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="ChildrenOfOsi1.rc" />
   </ItemGroup>
 </Project>

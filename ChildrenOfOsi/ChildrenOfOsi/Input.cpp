@@ -127,7 +127,8 @@ void Input::InputCheck()
 			count = 0;
 		}
 		if (!disable) {
-			if (W && DialogueController::getState() == 1) {
+			int State = DialogueController::getState();
+			if (W && State == 1) {
 				int tmp = DialogueController::getOptionsIndex();
 				if (tmp > 0) {
 					DialogueController::setOptionsIndex(--tmp);
@@ -141,9 +142,8 @@ void Input::InputCheck()
 					}
 				}
 			}
-			if (S && DialogueController::getState() == 1) {
+			if (S && State == 1) {
 				int tmp = DialogueController::getOptionsIndex();
-				std::cout << "Size: " << (DialogueController::getOSize() - 1);
 				if (tmp < DialogueController::getOSize() - 1) {
 					DialogueController::setOptionsIndex(++tmp);
 					disable = true;
@@ -156,7 +156,7 @@ void Input::InputCheck()
 					}
 				}
 			}
-			if (D && DialogueController::getState() < 3) {
+			if (D && State < 3) {
 				int tmp = DialogueController::getSelect();
 				if (DialogueController::getState() == 1) {
 					if (tmp < (DialogueController::getOptions().size() - 1)) {
@@ -164,14 +164,14 @@ void Input::InputCheck()
 						disable = true;
 						std::cout << "Index: " << tmp << std::endl;
 					}
-					if (tmp > (DialogueController::getReplyOptions().size() - 1)) {
+					if (tmp > (DialogueController::getOptions().size() - 1)) {
 						tmp = 0;
 						DialogueController::setSelect(tmp);
 						disable = true;
 						std::cout << "Index: " << tmp << std::endl;
 					}
 				}
-				if (DialogueController::getState() == 2) {
+				if (State == 2) {
 					if (tmp < (DialogueController::getReplyOptions().size() - 1)) {
 						DialogueController::setSelect(++tmp);
 						disable = true;
@@ -185,7 +185,7 @@ void Input::InputCheck()
 					}
 				}
 			}
-			if (A && DialogueController::getState() < 3) {
+			if (A && State < 3) {
 				int tmp = DialogueController::getSelect();
 				if (tmp > 0) {
 					DialogueController::setSelect(--tmp);
