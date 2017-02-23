@@ -149,6 +149,9 @@
     <ClCompile Include="ObjConfig.cpp">
       <Filter>Game Objects</Filter>
     </ClCompile>
+    <ClCompile Include="Relationship.cpp">
+      <Filter>Relationship</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AIHelper.h">
@@ -314,6 +317,9 @@
       <Filter>Game Objects</Filter>
     </ClInclude>
     <ClInclude Include="resource2.h" />
+    <ClInclude Include="Relationship.h">
+      <Filter>Relationship</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Text Include="audio_test.txt">
@@ -374,6 +380,9 @@
     </Filter>
     <Filter Include="Rendering\Shaders">
       <UniqueIdentifier>{9833d3aa-a6f5-4851-b7ad-8e4fccde265b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Relationship">
+      <UniqueIdentifier>{fd28ec2b-c7cf-4ef1-8e49-b51846a92e9d}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
