@@ -260,6 +260,15 @@ void osi::GameWindow::setupWindow()
 }
 
 /**
+ * 
+ */
+GLuint osi::GameWindow::setupShaders(const std::string& vertexShaderPath, const std::string& fragmentShaderPath)
+{
+
+  return 0;
+}
+
+/**
  * Loads, compiles, and links the standard OpenGL shaders as used by the game
  * window. The shaders loaded are determined by the value of the private
  * constants GameWindow::STD_VERTEX_SHADER_PATH and
@@ -391,7 +400,9 @@ void osi::GameWindow::setupStdShaders()
 }
 
 /**
- *
+ * Sets up the texture information for the specified font at the given size. The
+ * unique string identifying the font in the map with be of form "name size",
+ * where "name" is fontName and "size" is the string form of fontHeight.
  */
 void osi::GameWindow::setupFont(const std::string& fontName, int fontHeight)
 {
@@ -409,7 +420,7 @@ void osi::GameWindow::setupFont(const std::string& fontName, int fontHeight)
   glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
 
   // Load up all the characters in the ASCII set
-  for(GLchar ch = 0x00; ch <= 0x7F; ++ch) {
+  for(GLchar ch = 0x00; ch >= 0x00 && ch <= 0x7F; ++ch) {
     if(FT_Load_Char(face, ch, FT_LOAD_RENDER)) {
       FT_Done_Face(face);
       FT_Done_FreeType(fontLib);

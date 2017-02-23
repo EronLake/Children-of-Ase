@@ -81,6 +81,7 @@ namespace osi
 
     static std::vector<GLfloat> dpCoordToGL(float, float);
     static void setupWindow();
+    static GLuint setupShaders(const std::string&, const std::string&);
     static void setupStdShaders();
     static void setupFont(const std::string&, int);
   };
