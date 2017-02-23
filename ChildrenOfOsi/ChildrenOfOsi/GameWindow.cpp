@@ -33,7 +33,7 @@ bool osi::GameWindow::init()
 
   GameWindow::setupWindow();
   GameWindow::setupStdShaders();
-  // GameWindow::setupFont("Arial", 48);
+  GameWindow::setupFont("Arial", 48);
 
   glEnable(GL_TEXTURE_2D);
   glewExperimental = GL_TRUE;
@@ -264,8 +264,120 @@ void osi::GameWindow::setupWindow()
  */
 GLuint osi::GameWindow::setupShaders(const std::string& vertexShaderPath, const std::string& fragmentShaderPath)
 {
+  std::ifstream fileStream;
+  GLchar *vertexShaderSource = nullptr;
+  GLchar *fragmentShaderSource = nullptr;
 
-  return 0;
+  GLint compileStepSuccess;
+  GLchar compileStepInfoLog[1024];
+
+  // Read entirety of vertex shader source code into vertexShaderSource
+  fileStream.open(vertexShaderPath.c_str());
+  if(fileStream) {
+    fileStream.seekg(fileStream.end);
+    std::size_t fileLength = static_cast<std::size_t>(fileStream.tellg());
+    fileStream.seekg(fileStream.beg);
+
+    vertexShaderSource = new GLchar[fileLength + 1];
+    for(std::size_t i = 0; i < fileLength; ++i)
+      vertexShaderSource[i] = fileStream.get();
+    vertexShaderSource[fileLength] = '\0';
+  }
+  else {
+    fileStream.close();
+
+    throw ShaderCompilationError("Error reading vertex shader file: \"" + vertexShaderPath + "\"");
+  }
+
+  // Close the stream and ready it for the next file
+  fileStream.close();
+  fileStream.clear();
+
+  fileStream.open(fragmentShaderPath);
+  if(fileStream) {
+    fileStream.seekg(fileStream.end);
+    std::size_t fileLength = static_cast<std::size_t>(fileStream.tellg());
+    fileStream.seekg(fileStream.beg);
+
+    fragmentShaderSource = new GLchar[fileLength + 1];
+    for(std::size_t i = 0; i < fileLength; ++i)
+      fragmentShaderSource[i] = fileStream.get();
+    fragmentShaderSource[fileLength] = '\0';
+  }
+  else {
+    delete[] vertexShaderSource;
+    fileStream.close();
+
+    throw ShaderCompilationError("Error reading fragment shader file: \"" + fragmentShaderPath + "\"");
+  }
+
+  // Close the file stream for good this time
+  fileStream.close();
+
+  // Compile the vertex shader
+  GLuint vertexShaderId = glCreateShader(GL_VERTEX_SHADER);
+  glShaderSource(vertexShaderId, 1, &vertexShaderSource, NULL);
+  glCompileShader(vertexShaderId);
+
+  // Check for errors in compilation of the vertex shader
+  glGetShaderiv(vertexShaderId, GL_COMPILE_STATUS, &compileStepSuccess);
+  if(!compileStepSuccess) {
+    glGetShaderInfoLog(vertexShaderId, 1024, NULL, compileStepInfoLog);
+
+    glDeleteShader(vertexShaderId);
+    delete[] vertexShaderSource;
+    delete[] fragmentShaderSource;
+
+    throw ShaderCompilationError("ERROR::SHADER::VERTEX::COMPILATION_FAILED\n"
+      + std::string(compileStepInfoLog) + "\n");
+  }
+
+  // Compile the fragment shader
+  GLuint fragmentShaderId = glCreateShader(GL_FRAGMENT_SHADER);
+  glShaderSource(fragmentShaderId, 1, &fragmentShaderSource, NULL);
+  glCompileShader(fragmentShaderId);
+
+  // Check for errors in compilation of the fragment shader
+  glGetShaderiv(fragmentShaderId, GL_COMPILE_STATUS, &compileStepSuccess);
+  if(!compileStepSuccess) {
+    glGetShaderInfoLog(fragmentShaderId, 1024, NULL, compileStepInfoLog);
+
+    glDeleteShader(vertexShaderId);
+    glDeleteShader(fragmentShaderId);
+    delete[] vertexShaderSource;
+    delete[] fragmentShaderSource;
+
+    throw ShaderCompilationError("ERROR::SHADER::FRAGMENT::COMPILATION_FAILED\n"
+      + std::string(compileStepInfoLog) + "\n");
+  }
+
+  // Link the shaders
+  GLuint programId = glCreateProgram();
+  glAttachShader(programId, vertexShaderId);
+  glAttachShader(programId, fragmentShaderId);
+  glLinkProgram(programId);
+
+  // Check for linking errors
+  glGetProgramiv(programId, GL_LINK_STATUS, &compileStepSuccess);
+  if(!compileStepSuccess) {
+    glGetProgramInfoLog(programId, 1024, NULL, compileStepInfoLog);
+
+    glDeleteShader(vertexShaderId);
+    glDeleteShader(fragmentShaderId);
+    delete[] vertexShaderSource;
+    delete[] fragmentShaderSource;
+
+    throw ShaderCompilationError("ERROR::SHADER::PROGRAM::LINKING_FAILED\n"
+      + std::string(compileStepInfoLog) + "\n");
+  }
+
+  // With compilation complete, deallocate the unneeded shaders and free up the source code strings
+  glDeleteShader(vertexShaderId);
+  glDeleteShader(fragmentShaderId);
+  delete[] vertexShaderSource;
+  delete[] fragmentShaderSource;
+
+  return programId;
 }
 
 /**
