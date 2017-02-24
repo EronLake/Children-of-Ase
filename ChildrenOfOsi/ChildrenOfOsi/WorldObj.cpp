@@ -6,6 +6,7 @@
 
 WorldObj::WorldObj()
 {
+	body.push_back({});
 }
 
 WorldObj::WorldObj(float x, float y, bool col)
@@ -25,16 +26,6 @@ WorldObj::WorldObj(float x, float y, bool col)
 
 WorldObj::~WorldObj()
 {
-}
-
-Vector2f WorldObj::getLoc()
-{
-	return loc;
-}
-
-void WorldObj::setLoc(Vector2f l)
-{
-	loc = l;
 }
 
 float WorldObj::getX()
@@ -119,72 +110,16 @@ void WorldObj::setRot(Vector2f r)
 	rotation = r;
 }
 
-void WorldObj::setCollision(bool c)
-{
-	collision = c;
-}
-
-bool WorldObj::getCollision()
-{
-	return collision;
-}
-
-void WorldObj::setInteractable(bool i)
-{
-	interactable = i;
-}
-
-bool WorldObj::getInteractable()
-{
-	return interactable;
-}
-
-float WorldObj::getWidth()
-{
-	return width;
-}
-
 void WorldObj::setWidth(float w)
 {
 	width=w;
 	body[0].setWidth(w);
 }
 
-float WorldObj::getHeight()
-{
-	return height;
-}
-
 void WorldObj::setHeight(float h)
 {
 	height=h;
 	body[0].setHeight(h);
-}
-
-Sprite WorldObj::getSprite()
-{
-	return sprite;
-}
-
-void WorldObj::setSprite(Sprite s)
-{
-	sprite = s;
-}
-
-void WorldObj::animateObj()
-{
-	sprite.animate();
-}
-
-
-void WorldObj::setName(string na)
-{
-	name=na;
-}
-
-string WorldObj::getName()
-{
-	return name;
 }
 
 WorldObj::WorldObj(Vector2f p_topLeft, float p_width, float p_height) {

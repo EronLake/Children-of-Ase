@@ -678,10 +678,8 @@ void ALESSIO_TEST() {
 	citizen.setHealth(10);
 	citizen.setInteractable(true);
 	cout << "Interactable: " << citizen.getInteractable() << endl;
-	person.setAtk(2);
 	person.setInCombat(true);
 	cout <<"In Combat: " <<person.getInCombat()<< endl;
-	person.goAtk(&citizen);
 	cout << "Citizen's Health: " << citizen.getHealth() << endl;
 	cout << "Faction Relationship was: "<<fac.getFRel(citizen.getFaction(), person.getFaction()) << endl;
 	fac.setFRel(citizen.getFaction(), person.getFaction(), -1);
