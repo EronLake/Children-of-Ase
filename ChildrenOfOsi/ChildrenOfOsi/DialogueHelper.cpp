@@ -190,7 +190,7 @@ dialogue_point DialogueHelper::get_dialog(std::string name, dialogue_point diog_
 		tmp = dtemp[i - 1];
 		if (tmp != "?" && tmp != "," && tmp != "." && 
 			tmp != "!" && tmp != "_") {
-			j = rand() % root[tmp].size() + 1;
+			j = rand() % (root[tmp].size() + 1);
 			dpoint.push_back(root[tmp][to_string(j)]
 				.asString());
 		}

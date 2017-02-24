@@ -161,6 +161,7 @@ void DialogueController::startConversation(WorldObj* n, bool playerTalk)
 {
 	std::cout << player->getName() << " talked with " << n->getName() << std::endl;
 	other = n;
+	message = "";
 	if (playerTalk) {
 		PlayerChoose();
 	}

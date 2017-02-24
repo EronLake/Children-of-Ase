@@ -23,7 +23,8 @@ public:
 	int setHeartGlow(WorldObj* obj);
 	int setFaceGlow(WorldObj* obj);
 	int setQuestionGlow(WorldObj* obj);
-
+	void sortVec();
+	bool compY(WorldObj* a, WorldObj* b);
 	QuadTree* tree;
 private:
 	WorldObj* camera;

@@ -313,6 +313,7 @@
     <ClInclude Include="ObjConfig.h">
       <Filter>Game Objects</Filter>
     </ClInclude>
+    <ClInclude Include="resource2.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="audio_test.txt">
@@ -371,6 +372,9 @@
     <Filter Include="Test">
       <UniqueIdentifier>{3d5edb63-77a0-4034-93a0-d37a5b407654}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Rendering\Shaders">
+      <UniqueIdentifier>{9833d3aa-a6f5-4851-b7ad-8e4fccde265b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram.cd">
@@ -388,8 +392,23 @@
     <None Include="script_templates.json">
       <Filter>Dialogue</Filter>
     </None>
+    <None Include="OpenGL Shaders\FontFragmentShader.frag.glsl">
+      <Filter>Rendering\Shaders</Filter>
+    </None>
+    <None Include="OpenGL Shaders\FontVertexShader.vert.glsl">
+      <Filter>Rendering\Shaders</Filter>
+    </None>
+    <None Include="OpenGL Shaders\StdFragmentShader.frag.glsl">
+      <Filter>Rendering\Shaders</Filter>
+    </None>
+    <None Include="OpenGL Shaders\StdVertexShader.vert.glsl">
+      <Filter>Rendering\Shaders</Filter>
+    </None>
     <None Include="config.json">
       <Filter>Game Objects</Filter>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="ChildrenOfOsi1.rc" />
   </ItemGroup>
 </Project>

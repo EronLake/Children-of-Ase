@@ -3,6 +3,8 @@
 
 const std::string osi::GameWindow::STD_VERTEX_SHADER_PATH = "./OpenGL Shaders/StdVertexShader.vert.glsl";
 const std::string osi::GameWindow::STD_FRAGMENT_SHADER_PATH = "./OpenGL Shaders/StdFragmentShader.frag.glsl";
+const std::string osi::GameWindow::FONT_VERTEX_SHADER_PATH = "./OpenGL Shaders/FontVertexShader.vert.glsl";
+const std::string osi::GameWindow::FONT_FRAGMENT_SHADER_PATH = "./OpenGL Shaders/FontFragmentShader.frag.glsl";
 
 GLFWwindow *osi::GameWindow::window = nullptr;
 int osi::GameWindow::windowWidthPx = -1;
@@ -12,9 +14,10 @@ std::vector<GLuint> osi::GameWindow::vertexArrayObjectId;
 std::vector<GLuint> osi::GameWindow::vertexBufferObjectId;
 std::vector<GLuint> osi::GameWindow::elementBufferObjectId;
 std::vector<GLuint> osi::GameWindow::textures;
-GLuint osi::GameWindow::shaderProgramId = 0;
+GLuint osi::GameWindow::stdShaderProgramId = 0;
+GLuint osi::GameWindow::fontShaderProgramId = 0;
 
-//std::unordered_map<std::string, std::unordered_map<GLchar, osi::Glyph>> osi::GameWindow::fontCharacters;
+std::unordered_map<std::string, std::unordered_map<GLchar, osi::Glyph>> osi::GameWindow::fontCharacters;
 
 int osi::GameWindow::numObjects = 0;
 
@@ -30,8 +33,9 @@ bool osi::GameWindow::init()
     return false;
 
   GameWindow::setupWindow();
-  GameWindow::setupStdShaders();
-  //GameWindow::setupFont("Arial", 48);
+  GameWindow::stdShaderProgramId = GameWindow::setupShaders(STD_VERTEX_SHADER_PATH, STD_FRAGMENT_SHADER_PATH);
+  GameWindow::fontShaderProgramId = GameWindow::setupShaders(FONT_VERTEX_SHADER_PATH, FONT_FRAGMENT_SHADER_PATH);
+  GameWindow::setupFont("Arial", 48);
 
   glEnable(GL_TEXTURE_2D);
   glewExperimental = GL_TRUE;
@@ -60,7 +64,8 @@ bool osi::GameWindow::terminate()
   GameWindow::elementBufferObjectId;
   GameWindow::textures;
 
-  GameWindow::shaderProgramId = 0;
+  GameWindow::stdShaderProgramId = 0;
+  GameWindow::fontShaderProgramId = 0;
 
   return true;
 }
@@ -111,7 +116,7 @@ void osi::GameWindow::drawSprite(float x, float y, float width, float height, Sp
   };
   GLuint spriteVertexIndices[] = {
     0, 2, 3, // First triangle
-    0, 2, 1
+    0, 2, 1  // Second triangle
   };
   numObjects++;
   vertexArrayObjectId.push_back(numObjects);
@@ -170,10 +175,10 @@ void osi::GameWindow::drawSprite(float x, float y, float width, float height, Sp
  * Param charHeight: The height of each line of text
  * Param text: The text to be drawn
  */
-//void osi::GameWindow::drawText(float x, float y, float fieldWidth, float fieldHeight, float charHeight, const std::string& text)
-//{
-//
-//}
+void osi::GameWindow::drawText(float x, float y, float fieldWidth, float fieldHeight, float charHeight, const std::string& text)
+{
+
+}
 
 /**
  * Refreshes the game window, drawing the next frame.
@@ -184,7 +189,7 @@ void osi::GameWindow::refresh()
 
   glClearColor(0.5F, 0.5F, 0.5F, 1.0F);
   glClear(GL_COLOR_BUFFER_BIT);
-  glUseProgram(osi::GameWindow::shaderProgramId);
+  glUseProgram(GameWindow::stdShaderProgramId);
   for(GLint i = 0; i < numObjects; ++i) {
     glBindTexture(GL_TEXTURE_2D, Texture::textureId[textures[i] - 1]);
     glBindVertexArray(vertexArrayObjectId[i]);
@@ -255,6 +260,131 @@ void osi::GameWindow::setupWindow()
 
   glfwGetFramebufferSize(window, &GameWindow::windowWidthPx, &GameWindow::windowHeightPx);
   glViewport(0, 0, GameWindow::windowWidthPx, GameWindow::windowHeightPx);
+}
+
+/**
+ * Loads, compiles, and links the vertex/fragment shader pair whose paths are
+ * specified. the ID of the shader program is returned.
+ * Param vertexShaderPath: The path to the vertex shader to be used
+ * Param fragmentShaderPath: The path to the fragment shader to be used
+ * Return: Returns the shader program ID related to the given shaders
+ */
+GLuint osi::GameWindow::setupShaders(const std::string& vertexShaderPath, const std::string& fragmentShaderPath)
+{
+  std::ifstream fileStream;
+  GLchar *vertexShaderSource = nullptr;
+  GLchar *fragmentShaderSource = nullptr;
+
+  GLint compileStepSuccess;
+  GLchar compileStepInfoLog[1024];
+
+  // Read entirety of vertex shader source code into vertexShaderSource
+  fileStream.open(vertexShaderPath.c_str());
+  if(fileStream) {
+    fileStream.seekg(0, fileStream.end);
+    std::size_t fileLength = static_cast<std::size_t>(fileStream.tellg());
+    fileStream.seekg(0, fileStream.beg);
+
+    vertexShaderSource = new GLchar[fileLength + 1];
+    for(std::size_t i = 0; i <= fileLength; ++i)
+      vertexShaderSource[i] = '\0';
+    fileStream.read(vertexShaderSource, fileLength);
+  }
+  else {
+    fileStream.close();
+
+    throw ShaderCompilationError("Error reading vertex shader file: \"" + vertexShaderPath + "\"");
+  }
+
+  // Close the stream and ready it for the next file
+  fileStream.close();
+  fileStream.clear();
+
+  fileStream.open(fragmentShaderPath);
+  if(fileStream) {
+    fileStream.seekg(0, fileStream.end);
+    std::size_t fileLength = static_cast<std::size_t>(fileStream.tellg());
+    fileStream.seekg(0, fileStream.beg);
+
+    fragmentShaderSource = new GLchar[fileLength + 1];
+    for(std::size_t i = 0; i <= fileLength; ++i)
+      fragmentShaderSource[i] = '\0';
+    fileStream.read(fragmentShaderSource, fileLength);
+  }
+  else {
+    delete[] vertexShaderSource;
+    fileStream.close();
+
+    throw ShaderCompilationError("Error reading fragment shader file: \"" + fragmentShaderPath + "\"");
+  }
+
+  // Close the file stream for good this time
+  fileStream.close();
+
+  // Compile the vertex shader
+  GLuint vertexShaderId = glCreateShader(GL_VERTEX_SHADER);
+  glShaderSource(vertexShaderId, 1, &vertexShaderSource, NULL);
+  glCompileShader(vertexShaderId);
+
+  // Check for errors in compilation of the vertex shader
+  glGetShaderiv(vertexShaderId, GL_COMPILE_STATUS, &compileStepSuccess);
+  if(!compileStepSuccess) {
+    glGetShaderInfoLog(vertexShaderId, 1024, NULL, compileStepInfoLog);
+
+    glDeleteShader(vertexShaderId);
+    delete[] vertexShaderSource;
+    delete[] fragmentShaderSource;
+
+    throw ShaderCompilationError("ERROR::SHADER::VERTEX::COMPILATION_FAILED\n"
+      + std::string(compileStepInfoLog) + "\n");
+  }
+
+  // Compile the fragment shader
+  GLuint fragmentShaderId = glCreateShader(GL_FRAGMENT_SHADER);
+  glShaderSource(fragmentShaderId, 1, &fragmentShaderSource, NULL);
+  glCompileShader(fragmentShaderId);
+
+  // Check for errors in compilation of the fragment shader
+  glGetShaderiv(fragmentShaderId, GL_COMPILE_STATUS, &compileStepSuccess);
+  if(!compileStepSuccess) {
+    glGetShaderInfoLog(fragmentShaderId, 1024, NULL, compileStepInfoLog);
+
+    glDeleteShader(vertexShaderId);
+    glDeleteShader(fragmentShaderId);
+    delete[] vertexShaderSource;
+    delete[] fragmentShaderSource;
+
+    throw ShaderCompilationError("ERROR::SHADER::FRAGMENT::COMPILATION_FAILED\n"
+      + std::string(compileStepInfoLog) + "\n");
+  }
+
+  // Link the shaders
+  GLuint programId = glCreateProgram();
+  glAttachShader(programId, vertexShaderId);
+  glAttachShader(programId, fragmentShaderId);
+  glLinkProgram(programId);
+
+  // Check for linking errors
+  glGetProgramiv(programId, GL_LINK_STATUS, &compileStepSuccess);
+  if(!compileStepSuccess) {
+    glGetProgramInfoLog(programId, 1024, NULL, compileStepInfoLog);
+
+    glDeleteShader(vertexShaderId);
+    glDeleteShader(fragmentShaderId);
+    delete[] vertexShaderSource;
+    delete[] fragmentShaderSource;
+
+    throw ShaderCompilationError("ERROR::SHADER::PROGRAM::LINKING_FAILED\n"
+      + std::string(compileStepInfoLog) + "\n");
+  }
+
+  // With compilation complete, deallocate the unneeded shaders and free up the source code strings
+  glDeleteShader(vertexShaderId);
+  glDeleteShader(fragmentShaderId);
+  delete[] vertexShaderSource;
+  delete[] fragmentShaderSource;
+
+  return programId;
 }
 
 /**
@@ -362,15 +492,15 @@ void osi::GameWindow::setupStdShaders()
   }
 
   // Link the shaders
-  GameWindow::shaderProgramId = glCreateProgram();
-  glAttachShader(GameWindow::shaderProgramId, vertexShaderId);
-  glAttachShader(GameWindow::shaderProgramId, fragmentShaderId);
-  glLinkProgram(GameWindow::shaderProgramId);
+  GameWindow::stdShaderProgramId = glCreateProgram();
+  glAttachShader(GameWindow::stdShaderProgramId, vertexShaderId);
+  glAttachShader(GameWindow::stdShaderProgramId, fragmentShaderId);
+  glLinkProgram(GameWindow::stdShaderProgramId);
 
   // Check for linking errors
-  glGetProgramiv(GameWindow::shaderProgramId, GL_LINK_STATUS, &compileStepSuccess);
+  glGetProgramiv(GameWindow::stdShaderProgramId, GL_LINK_STATUS, &compileStepSuccess);
   if(!compileStepSuccess) {
-    glGetProgramInfoLog(GameWindow::shaderProgramId, 1024, NULL, compileStepInfoLog);
+    glGetProgramInfoLog(GameWindow::stdShaderProgramId, 1024, NULL, compileStepInfoLog);
 
     glDeleteShader(vertexShaderId);
     glDeleteShader(fragmentShaderId);
@@ -389,53 +519,55 @@ void osi::GameWindow::setupStdShaders()
 }
 
 /**
- *
+ * Sets up the texture information for the specified font at the given size. The
+ * unique string identifying the font in the map with be of form "name size",
+ * where "name" is fontName and "size" is the string form of fontHeight.
  */
-//void osi::GameWindow::setupFont(const std::string& fontName, int fontHeight)
-//{
-//  // Initialize the font library
-//  FT_Library fontLib;
-//  if(FT_Init_FreeType(&fontLib))
-//    throw FontInitializationError("ERROR::FREETYPE: Could not initialize FreeType Library.");
-//
-//  // Set up the font face
-//  FT_Face face;
-//  if(FT_New_Face(fontLib, (FONTS_PATH + fontName + ".ttf").c_str(), 0, &face))
-//    throw FontInitializationError("ERROR::FREETYPE: Failed to load font \"" + fontName + "\"");
-//  FT_Set_Pixel_Sizes(face, 0, fontHeight);
-//
-//  glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
-//
-//  // Load up all the characters in the ASCII set
-//  for(GLchar ch = 0x00; ch <= 0x7F; ++ch) {
-//    if(FT_Load_Char(face, ch, FT_LOAD_RENDER)) {
-//      FT_Done_Face(face);
-//      FT_Done_FreeType(fontLib);
-//      throw FontInitializationError(std::string("ERROR::FREETYTPE: Failed to load glyph: ") + ch);
-//    }
-//
-//    GLuint textureId;
-//    glGenTextures(1, &textureId);
-//    glBindTexture(GL_TEXTURE_2D, textureId);
-//    glTexImage2D(GL_TEXTURE_2D, 0, GL_RED,
-//      face->glyph->bitmap.width, face->glyph->bitmap.rows,
-//      0, GL_RED, GL_UNSIGNED_BYTE, face->glyph->bitmap.buffer);
-//
-//    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
-//    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
-//    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-//    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-//
-//    std::string fontKey = fontName + ' ' + std::to_string(fontHeight);
-//    GameWindow::fontCharacters[fontKey][ch] = {
-//      textureId,
-//      glm::ivec2(face->glyph->bitmap.width, face->glyph->bitmap.rows),
-//      glm::ivec2(face->glyph->bitmap_left, face->glyph->bitmap_top),
-//      static_cast<GLuint>(face->glyph->advance.x)
-//    };
-//  }
-//
-//  glPixelStorei(GL_UNPACK_ALIGNMENT, 4);
-//  FT_Done_Face(face);
-//  FT_Done_FreeType(fontLib);
-//}
+void osi::GameWindow::setupFont(const std::string& fontName, int fontHeight)
+{
+  // Initialize the font library
+  FT_Library fontLib;
+  if(FT_Init_FreeType(&fontLib))
+    throw FontInitializationError("ERROR::FREETYPE: Could not initialize FreeType Library.");
+
+  // Set up the font face
+  FT_Face face;
+  if(FT_New_Face(fontLib, (FONTS_PATH + fontName + ".ttf").c_str(), 0, &face))
+    throw FontInitializationError("ERROR::FREETYPE: Failed to load font \"" + fontName + "\"");
+  FT_Set_Pixel_Sizes(face, 0, fontHeight);
+
+  glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
+
+  // Load up all the characters in the ASCII set
+  for(GLchar ch = 0x00; ch >= 0x00 && ch <= 0x7F; ++ch) {
+    if(FT_Load_Char(face, ch, FT_LOAD_RENDER)) {
+      FT_Done_Face(face);
+      FT_Done_FreeType(fontLib);
+      throw FontInitializationError(std::string("ERROR::FREETYTPE: Failed to load glyph: ") + ch);
+    }
+
+    GLuint textureId;
+    glGenTextures(1, &textureId);
+    glBindTexture(GL_TEXTURE_2D, textureId);
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_RED,
+      face->glyph->bitmap.width, face->glyph->bitmap.rows,
+      0, GL_RED, GL_UNSIGNED_BYTE, face->glyph->bitmap.buffer);
+
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+
+    std::string fontKey = fontName + ' ' + std::to_string(fontHeight);
+    GameWindow::fontCharacters[fontKey][ch] = {
+      textureId,
+      glm::ivec2(face->glyph->bitmap.width, face->glyph->bitmap.rows),
+      glm::ivec2(face->glyph->bitmap_left, face->glyph->bitmap_top),
+      static_cast<GLuint>(face->glyph->advance.x)
+    };
+  }
+
+  glPixelStorei(GL_UNPACK_ALIGNMENT, 4);
+  FT_Done_Face(face);
+  FT_Done_FreeType(fontLib);
+}

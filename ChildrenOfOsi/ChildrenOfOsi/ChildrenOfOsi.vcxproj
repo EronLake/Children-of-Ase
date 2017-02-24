@@ -181,6 +181,7 @@
     <ClInclude Include="json.h" />
     <ClInclude Include="ObjConfig.h" />
     <ClInclude Include="PhysicsTestSuite.h" />
+    <ClInclude Include="resource2.h" />
     <ClInclude Include="TaskBufferTestSuite.h" />
     <ClInclude Include="Hero.h" />
     <ClInclude Include="Input.h" />
@@ -276,10 +277,17 @@
   <ItemGroup>
     <None Include="AssetInfo.h" />
     <None Include="ClassDiagram.cd" />
+    <None Include="OpenGL Shaders\FontFragmentShader.frag.glsl" />
+    <None Include="OpenGL Shaders\FontVertexShader.vert.glsl" />
+    <None Include="OpenGL Shaders\StdFragmentShader.frag.glsl" />
+    <None Include="OpenGL Shaders\StdVertexShader.vert.glsl" />
     <None Include="config.json" />
     <None Include="script_templates.json" />
     <None Include="Shango_dialog.json" />
     <None Include="Yemoja_dialog.json" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="ChildrenOfOsi1.rc" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
