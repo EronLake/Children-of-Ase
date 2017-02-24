@@ -15,6 +15,7 @@ public:
 	bool getAlive();
 	void setAlive(bool v);
 	void addHealth(int h);
+	Vector2f goal;
 private:
 	int health;
 	bool alive;

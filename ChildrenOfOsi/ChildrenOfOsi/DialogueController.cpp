@@ -34,7 +34,7 @@ void DialogueController::PlayerChoose()
 	options = dialogue.get_possible_conv_pts();
 	replyOptions = dialogue.get_possible_reply_pts();
 	state = 1;
-	optionsIndex = 3;
+	optionsIndex = 0;
 	//PlayerConversationPoint();
 	//give option to Alex
 }
@@ -81,8 +81,9 @@ void DialogueController::otherConversationPoint(dialogue_point line)
 	dialogue_point point = dialogue.choose_conv_pt(line, optionsIndex);
 	replyString = point[0];
 
-	Hero* temp_hero = CheckClass::isHero(other);
-	if (!temp_hero)
+	Hero* temp_hero;
+	
+	if (temp_hero = CheckClass::isHero(other))
 	{
 		perror("you cannot talk to this type of object");
 	}
@@ -160,6 +161,7 @@ void DialogueController::startConversation(WorldObj* n, bool playerTalk)
 {
 	std::cout << player->getName() << " talked with " << n->getName() << std::endl;
 	other = n;
+	message = "";
 	if (playerTalk) {
 		PlayerChoose();
 	}

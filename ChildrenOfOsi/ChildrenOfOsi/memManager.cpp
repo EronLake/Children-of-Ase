@@ -13,26 +13,29 @@ memManager::memManager(MessageLog* _mLog, TaskBuffer* _tBuffer)
 
 	memHelper = new MemoryHelper();
 
-	hero_pool = memHelper->create_pool(4096);
-	hero_head = memHelper->init_pool(hero_pool,32);
+	hero_pool = memHelper->create_pool(sizeof(Hero) * 32);
+	hero_head = memHelper->init_pool(hero_pool, sizeof(Hero));
 
-	livingObj_pool = memHelper->create_pool(4096);
-	livingObj_head = memHelper->init_pool(livingObj_pool, 32);
+	livingObj_pool = memHelper->create_pool(sizeof(LivingObj) * 32);
+	livingObj_head = memHelper->init_pool(livingObj_pool, sizeof(LivingObj));
 
-	projectile_pool = memHelper->create_pool(4096);
-	projectile_head = memHelper->init_pool(projectile_pool, 32);
+	projectile_pool = memHelper->create_pool(sizeof(Projectile) * 32);
+	projectile_head = memHelper->init_pool(projectile_pool, sizeof(Projectile));
 
-	soldier_pool = memHelper->create_pool(4096);
-	soldier_head = memHelper->init_pool(soldier_pool, 32);
+	soldier_pool = memHelper->create_pool(sizeof(Soldier) * 32);
+	soldier_head = memHelper->init_pool(soldier_pool, sizeof(Soldier));
 
-	spl_soldier_pool = memHelper->create_pool(4096);
-	spl_soldier_head = memHelper->init_pool(spl_soldier_pool, 32);
+	spl_soldier_pool = memHelper->create_pool(sizeof(SplSoldier) * 32);
+	spl_soldier_head = memHelper->init_pool(spl_soldier_pool, sizeof(SplSoldier));
 
-	worldObj_pool = memHelper->create_pool(4096);
-	worldObj_head = memHelper->init_pool(worldObj_pool, 32);
+	worldObj_pool = memHelper->create_pool(sizeof(WorldObj)*32);
+	worldObj_head = memHelper->init_pool(worldObj_pool, sizeof(WorldObj));
 
-	npc_pool = memHelper->create_pool(4096);
-	npc_head = memHelper->init_pool(npc_pool, 32);
+	npc_pool = memHelper->create_pool(sizeof(NPC) * 32);
+	npc_head = memHelper->init_pool(npc_pool, sizeof(NPC));
+
+	texture_pool = memHelper->create_pool(sizeof(Texture) * 32);
+	texture_head = memHelper->init_pool(texture_pool, sizeof(Texture));
 
 
 	task_map["Add_Hero"] = &MemoryHelper::store_hero;
@@ -42,6 +45,7 @@ memManager::memManager(MessageLog* _mLog, TaskBuffer* _tBuffer)
 	task_map["Add_Soldier"] = &MemoryHelper::store_soldier;
 	task_map["Add_Spl_Soldier"] = &MemoryHelper::store_spl_soldier;
 	task_map["Add_WorldObj"] = &MemoryHelper::store_worldObj;
+	task_map["Add_Texture"] = &MemoryHelper::store_texture;
 
 	LOG("memManager Object Constructed");
 	
@@ -70,6 +74,9 @@ memManager::~memManager()
 
 	memHelper->destroy_pool(npc_pool);
 	memHelper->destroy_MemNode_list(npc_head);
+
+	memHelper->destroy_pool(texture_pool);
+	memHelper->destroy_MemNode_list(texture_head);
 
 	LOG("memManager Object Destroyed");
 
@@ -223,3 +230,6 @@ MemNode* memManager::worldObj_head = nullptr;
 
 MemoryPool* memManager::npc_pool = nullptr;
 MemNode* memManager::npc_head = nullptr;
+
+MemoryPool* memManager::texture_pool = nullptr;
+MemNode* memManager::texture_head = nullptr;

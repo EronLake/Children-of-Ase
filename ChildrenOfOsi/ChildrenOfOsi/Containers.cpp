@@ -44,6 +44,7 @@ void Containers::add_npc(std::string key, NPC* value)
 
 void Containers::add_texture(std::string key, Texture* value)
 {
+	LOG(key << "/" << value);
 	texture_table[key] = value;
 }
 

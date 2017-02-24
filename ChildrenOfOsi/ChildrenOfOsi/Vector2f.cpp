@@ -47,3 +47,25 @@ void Vector2f::shiftYloc(float dist)
 {
 	yloc += dist;
 }
+
+float Vector2f::dist(Vector2f end)
+{
+	float xDiff = abs(xloc - (end.getXloc()));
+	float yDiff = abs(yloc - (end.getYloc()));
+	return (xDiff + yDiff);
+}
+
+bool Vector2f::operator==(const Vector2f v) const
+{
+	if (v.xloc == xloc && v.yloc == yloc) {
+		return true;
+	}
+	return false;
+}
+bool Vector2f::operator<(const Vector2f v) const
+{
+	if (xloc < v.xloc || (!(v.xloc < xloc)) && (v.yloc < yloc)) {
+		return true;
+	}
+	return false;
+}

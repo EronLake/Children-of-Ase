@@ -12,7 +12,10 @@ public:
 	float getYloc();
 	void shiftXloc(float dist);
 	void shiftYloc(float dist);
-private:
+	float dist(Vector2f end);
+    bool operator==(const Vector2f v) const;
+	bool operator<(const Vector2f v) const;
+//private:
 	float xloc;
 	float yloc;
 };

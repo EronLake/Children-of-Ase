@@ -71,6 +71,7 @@ void Input::InputCheck()
 			}
 			else if (D) {    //Moving down and right
 				gameplay_functions->move_down_right(player);
+
 			}
 			else {
 			    gameplay_functions->move_down(player);
@@ -137,7 +138,12 @@ void Input::InputCheck()
 			new_obj["frame_num"] = 1;
 
 			new_obj["name"] = obj_name;
-			new_obj["tex_file"] = "Assets/Sprites/" + image_name + ".png";
+			new_obj["tex_file"] = image_name;
+
+			new_obj["bodyx1"] = 110;
+			new_obj["bodyx2"] = 150;
+			new_obj["bodyy1"] = 120;
+			new_obj["bodyy2"] = 60;
 			
 		
 			root[obj_name] = new_obj;
@@ -174,40 +180,41 @@ void Input::InputCheck()
 			DialogueController::setOptionsIndex(3);
 			gameplay_functions->setQuestionGlow(player);
 		}
-		if (count == 60) {
+		if (count == 10) {
 			disable = false;
 			count = 0;
 		}
 		if (!disable) {
-			if (W && DialogueController::getState() == 1) {
+			int State = DialogueController::getState();
+			if (W && State == 1) {
 				int tmp = DialogueController::getOptionsIndex();
 				if (tmp > 0) {
 					DialogueController::setOptionsIndex(--tmp);
 					disable = true;
 					std::cout << "OptionsIndex: " << tmp << std::endl;
 					switch (DialogueController::getOptionsIndex()) {
-					case 0: gameplay_functions->setSwordGlow(player);
-					case 1: gameplay_functions->setHeartGlow(player);
-					case 2: gameplay_functions->setFaceGlow(player);
-					case 3: gameplay_functions->setQuestionGlow(player);
+					case 0: gameplay_functions->setSwordGlow(player); break;
+					case 1: gameplay_functions->setHeartGlow(player); break;
+					case 2: gameplay_functions->setFaceGlow(player); break;
+					case 3: gameplay_functions->setQuestionGlow(player); break;
 					}
 				}
 			}
-			if (S && DialogueController::getState() == 1) {
+			if (S && State == 1) {
 				int tmp = DialogueController::getOptionsIndex();
 				if (tmp < DialogueController::getOSize() - 1) {
 					DialogueController::setOptionsIndex(++tmp);
 					disable = true;
 					std::cout << "OptionsIndex: " << tmp << std::endl;
 					switch (DialogueController::getOptionsIndex()) {
-					case 0: gameplay_functions->setSwordGlow(player);
-					case 1: gameplay_functions->setHeartGlow(player);
-					case 2: gameplay_functions->setFaceGlow(player);
-					case 3: gameplay_functions->setQuestionGlow(player);
+					case 0: gameplay_functions->setSwordGlow(player); break;
+					case 1: gameplay_functions->setHeartGlow(player); break;
+					case 2: gameplay_functions->setFaceGlow(player); break;
+					case 3: gameplay_functions->setQuestionGlow(player); break;
 					}
 				}
 			}
-			if (D && DialogueController::getState() < 3) {
+			if (D && State < 3) {
 				int tmp = DialogueController::getSelect();
 				if (DialogueController::getState() == 1) {
 					if (tmp < (DialogueController::getOptions().size() - 1)) {
@@ -215,14 +222,14 @@ void Input::InputCheck()
 						disable = true;
 						std::cout << "Index: " << tmp << std::endl;
 					}
-					if (tmp > (DialogueController::getReplyOptions().size() - 1)) {
+					if (tmp > (DialogueController::getOptions().size() - 1)) {
 						tmp = 0;
 						DialogueController::setSelect(tmp);
 						disable = true;
 						std::cout << "Index: " << tmp << std::endl;
 					}
 				}
-				if (DialogueController::getState() == 2) {
+				if (State == 2) {
 					if (tmp < (DialogueController::getReplyOptions().size() - 1)) {
 						DialogueController::setSelect(++tmp);
 						disable = true;
@@ -236,7 +243,7 @@ void Input::InputCheck()
 					}
 				}
 			}
-			if (A && DialogueController::getState() < 3) {
+			if (A && State < 3) {
 				int tmp = DialogueController::getSelect();
 				if (tmp > 0) {
 					DialogueController::setSelect(--tmp);

@@ -3,7 +3,7 @@
 #include "common.h"
 #include "Movement.h"
 #include "PhysicsManager.h"
-
+#include "CheckClass.h"
 
 
 
@@ -25,6 +25,9 @@ int Movement::move_up(WorldObj* obj) {
 	objVec = tree->retrieve(objVec, obj);
 	obj->shiftY(-moveSpeed);
 	for (int i = 0; i < objVec.size(); i++) {
+		if (obj == objVec[i]) {
+			break;
+		}
 		if (collision(objVec[i], obj)) {
 			manager->createTask("Bump","SOUND");
 			LOG("failed to move up. collision.");
@@ -41,6 +44,9 @@ int Movement::move_up_left(WorldObj* obj) {
 	objVec = tree->retrieve(objVec, obj);
 	obj->shiftY(-diagSpeed);
 	for (int i = 0; i < objVec.size(); i++) {
+		if (obj == objVec[i]) {
+			break;
+		}
 		if (collision(objVec[i], obj)) {
 			manager->createTask("Bump", "SOUND");
 			LOG("failed to move up. collision.");
@@ -50,6 +56,9 @@ int Movement::move_up_left(WorldObj* obj) {
 	}	
 	obj->shiftX(-diagSpeed);
 	for (int i = 0; i < objVec.size(); i++) {
+		if (obj == objVec[i]) {
+			break;
+		}
 		if (collision(objVec[i], obj)) {
 			manager->createTask("Bump", "SOUND");
 			LOG("failed to move up. collision.");
@@ -66,6 +75,9 @@ int Movement::move_up_right(WorldObj* obj) {
 	objVec = tree->retrieve(objVec, obj);
 	obj->shiftY(-diagSpeed);
 	for (int i = 0; i < objVec.size(); i++) {
+		if (obj == objVec[i]) {
+			break;
+		}
 		if (collision(objVec[i], obj)) {
 			manager->createTask("Bump", "SOUND");
 			LOG("failed to move up. collision.");
@@ -75,6 +87,9 @@ int Movement::move_up_right(WorldObj* obj) {
 	}
 	obj->shiftX(diagSpeed);
 	for (int i = 0; i < objVec.size(); i++) {
+		if (obj == objVec[i]) {
+			break;
+		}
 		if (collision(objVec[i], obj)) {
 			manager->createTask("Bump", "SOUND");
 			LOG("failed to move up. collision.");
@@ -91,6 +106,9 @@ int Movement::move_down(WorldObj* obj) {
 	objVec = tree->retrieve(objVec, obj);
 	obj->shiftY(moveSpeed);
 	for (int i = 0; i < objVec.size(); i++) {
+		if (obj == objVec[i]) {
+			break;
+		}
 		if (collision(objVec[i], obj)) {
 			LOG("failed to move down. collision.");
 			manager->createTask("Bump", "SOUND");
@@ -107,6 +125,9 @@ int Movement::move_down_left(WorldObj* obj) {
 	objVec = tree->retrieve(objVec, obj);
 	obj->shiftY(diagSpeed);
 	for (int i = 0; i < objVec.size(); i++) {
+		if (obj == objVec[i]) {
+			break;
+		}
 		if (collision(objVec[i], obj)) {
 			LOG("failed to move down. collision.");
 			manager->createTask("Bump", "SOUND");
@@ -117,6 +138,9 @@ int Movement::move_down_left(WorldObj* obj) {
 	obj->shiftX(-diagSpeed);
 
 	for (int i = 0; i < objVec.size(); i++) {
+		if (obj == objVec[i]) {
+			break;
+		}
 		if (collision(objVec[i], obj)) {
 			LOG("failed to move down. collision.");
 			manager->createTask("Bump", "SOUND");
@@ -133,6 +157,9 @@ int Movement::move_down_right(WorldObj* obj) {
 	objVec = tree->retrieve(objVec, obj);
 	obj->shiftY(diagSpeed);
 	for (int i = 0; i < objVec.size(); i++) {
+		if (obj == objVec[i]) {
+			break;
+		}
 		if (collision(objVec[i], obj)) {
 			LOG("failed to move down. collision.");
 			manager->createTask("Bump", "SOUND");
@@ -142,6 +169,9 @@ int Movement::move_down_right(WorldObj* obj) {
 	}
 	obj->shiftX(diagSpeed);
 	for (int i = 0; i < objVec.size(); i++) {
+		if (obj == objVec[i]) {
+			break;
+		}
 		if (collision(objVec[i], obj)) {
 			LOG("failed to move down. collision.");
 			manager->createTask("Bump", "SOUND");
@@ -158,6 +188,9 @@ int Movement::move_left(WorldObj* obj) {
 	objVec = tree->retrieve(objVec, obj);
 	obj->shiftX(-moveSpeed);
 	for (int i = 0; i < objVec.size(); i++) {
+		if (obj == objVec[i]) {
+			break;
+		}
 		if (collision(objVec[i], obj)) {
 			LOG("failed to move left. collision.");
 			manager->createTask("Bump", "SOUND");
@@ -174,6 +207,9 @@ int Movement::move_right(WorldObj* obj) {
 	objVec = tree->retrieve(objVec, obj);
 	obj->shiftX(moveSpeed);
 	for (int i = 0; i < objVec.size(); i++) {
+		if (obj == objVec[i]) {
+			break;
+		}
 		if (collision(objVec[i], obj)) {
 			LOG("failed to move right. collision.");
 			manager->createTask("Bump", "SOUND");
@@ -193,6 +229,9 @@ int Movement::talk(WorldObj* obj) {
 		d->updateTalk();
 		std::cout << "Talking Width "<< d->talk.getWidth()<<std::endl;
 		for (int i = 0; i < objVec.size(); i++) {
+			if (obj == objVec[i]) {
+				break;
+			}
 			if (objVec[i]->getInteractable()) {
 				if (interaction(d, objVec[i])) {
 					LOG("Player interacted with an object");

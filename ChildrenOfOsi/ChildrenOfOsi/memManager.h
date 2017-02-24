@@ -18,10 +18,9 @@ private:
 	typedef std::map<std::string, fn_ptr> functionMapper;
 
 	functionMapper task_map;
-
 	MemoryHelper* memHelper;
 
-public:
+public:	
 
 	static MemoryPool* hero_pool;
 	static MemNode* hero_head;
@@ -43,6 +42,9 @@ public:
 
 	static MemoryPool* npc_pool;
 	static MemNode* npc_head;
+
+	static MemoryPool* texture_pool;
+	static MemNode* texture_head;
 
 	memManager(MessageLog* _mLog, TaskBuffer* _tBuffer);
 	~memManager();

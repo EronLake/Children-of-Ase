@@ -65,6 +65,7 @@ int MemoryHelper::store_livingObj(std::string key, float x, float y, bool col) {
 
 int MemoryHelper::store_worldObj(std::string key, float x, float y, bool col) {
 	WorldObj* wobj = new(find_available_block(memManager::worldObj_head)) WorldObj(x, y, col);
+	if (wobj == NULL) return -1;
 	Containers::add_worldObj(key, wobj);
 	return 0;
 }
@@ -81,13 +82,16 @@ int MemoryHelper::store_npc(std::string key, float x, float y, bool col) {
 	return 0;
 }
 
-/*
+
 int MemoryHelper::store_texture(std::string key, float x, float y, bool col) {
-	Texture* t = new(find_available_block(memManager::texture_head)) Texture(x, y, col);
+	LOG(key);
+	LOG(memManager::texture_head);
+	Texture* t = new(find_available_block(memManager::texture_head)) Texture();
+	if (t == NULL) return -1;
 	Containers::add_texture(key, t);
 	return 0;
 }
-*/
+
 
 /////////////////////////////////////////
 /*Stuff that was originally in Main*/

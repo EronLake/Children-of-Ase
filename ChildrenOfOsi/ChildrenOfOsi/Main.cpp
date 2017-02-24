@@ -73,8 +73,12 @@ void PHYSICS_TEST();
 
 
 int main() {
+
+	 //   DialogueHelper* dhelper = new DialogueHelper();
+
 		//ERONS_LOOP();
 	    //DialogueHelper* dhelper = new DialogueHelper();
+
 		//dhelper->get_dialog("Yemoja");
 		//LOG("Hello world!");
 		//ERONS_LOOP();
@@ -97,6 +101,9 @@ int main() {
 
 		/*Darion Ian Test*/
 		//Darion_Ian_Test();
+
+/* ERON */
+		//ERONS_LOOP();
 		/* ERON */
 		
 		/*ALESSIO*/
@@ -173,118 +180,9 @@ int main() {
 void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 {
 
-
 	Player* Alex = new Player(SHANGO, Vector2f(1000.0, 600.0), 100.0, 100.0);	//init player
 	cout << "Alex's width and height is " << Alex->getWidth() << ", " << Alex->getHeight() << endl;
 
-	//DialogueGui* convoGui = new DialogueGui();
-
-	//Player* Alex = new Player(1000,600, true);	//init player
-	//WorldObj* Alex = new WorldObj(1000, 600, true);
-	vector<WorldObj*> recVec;
-	vector<WorldObj*>* recVec_ptr = &recVec;
-
-	ObjConfig::import_config(recVec_ptr);
-
-	//std::cout << recVec.size() << "///////////////////////////" << endl;
-	//system("PAUSE");
-
-	Texture* playerTexture = new Texture();
-	Texture* playerIdleTex = new Texture();
-	Texture* objTexture = new Texture();
-	Texture* upRunTex = new Texture();
-	Texture* downRunTex = new Texture();
-	Texture* leftRunTex = new Texture();
-	Texture* rightRunTex = new Texture();
-	Texture* upIdleTex = new Texture();
-	Texture* downIdleTex = new Texture();
-	Texture* leftIdleTex = new Texture();
-	Texture* rightIdleTex = new Texture();
-
-	//load sprite from a configuration file?
-	objTexture->setFile("Assets/Sprites/YemojasHouse.png");
-	playerTexture->setFile("Assets/Sprites/ShangoFrontIdle.png");
-	playerIdleTex->setFile("Assets/Sprites/ShangoFrontIdle.png");
-	upRunTex->setFile("Assets/Sprites/ShangoBackSprite.png");
-	downRunTex->setFile("Assets/Sprites/ShangoForwardSprite.png");
-	leftRunTex->setFile("Assets/Sprites/ShangoLeftSprite.png");
-	rightRunTex->setFile("Assets/Sprites/ShangoRightSprite.png");
-	upIdleTex->setFile("Assets/Sprites/ShangoBackIdle.png");
-	downIdleTex->setFile("Assets/Sprites/ShangoFrontIdle.png");
-	leftIdleTex->setFile("Assets/Sprites/ShangoLeftIdle.png");
-	rightIdleTex->setFile("Assets/Sprites/ShangoRightIdle.png");
-
-	/* SET UP SPRITE CHANGE, MIGHT NEED A SINGLETON?*/
-
-	playerTexture->load();
-	playerIdleTex->load();
-	upRunTex->load();
-	downRunTex->load();
-	leftRunTex->load();
-	rightRunTex->load();
-	upIdleTex->load();
-	downIdleTex->load();
-	leftIdleTex->load();
-	rightIdleTex->load();
-	objTexture->load();
-	playerTexture->setFrames(1);
-	playerIdleTex->setFrames(1);
-	upRunTex->setFrames(26);
-	downRunTex->setFrames(26);
-	leftRunTex->setFrames(26);
-	rightRunTex->setFrames(26);
-	upIdleTex->setFrames(1);
-	downIdleTex->setFrames(1);
-	leftIdleTex->setFrames(1);
-	rightIdleTex->setFrames(1);
-	objTexture->setFrames(1);
-	Alex->sprite.setTexture(playerTexture);
-	Alex->sprite.setIdleTexture(playerIdleTex);
-	Alex->sprite.up = upRunTex;
-	Alex->sprite.down = downRunTex;
-	Alex->sprite.left = leftRunTex;
-	Alex->sprite.right = rightRunTex;
-
-	Alex->sprite.id_up = upIdleTex;
-	Alex->sprite.id_left =leftIdleTex;
-	Alex->sprite.id_right = rightIdleTex;
-	Alex->sprite.id_down = downIdleTex;
-
-
-	Alex->offsetBody(0, 50, 50, 50, 50);
-	Alex->setInteractable(true);
-	Alex->setName("Alex");
-	Alex->setTalkDist(20);
-	DialogueController::setPlayer(Alex);
-	//vector<WorldObj*> recVec;
-	/*
-	for (int i = 1; i < 5; i++) {
-		WorldObj* objs = new WorldObj(Vector2f(100 * i, 100 * i), 600.0, 400.0);
-		objs->sprite.setTexture(objTexture);
-		objs->setInteractable(false);
-		std::string building="Building ";
-		objs->setName(building+= std::to_string(i));
-		//objs->offsetBody(0, 50, 50, 50, 50);
-		//objs->offsetBody(0, 70, 70, 70, 70);
-		recVec.push_back(objs);
-	}
-	*/
-	Hero* staticRec = new Hero(YEMOJA,Vector2f(1800, 1350), 100.0, 100.0);
-	staticRec->sprite.setTexture(playerTexture);
-	staticRec->setName("Yemoja");
-	staticRec->setInteractable(true);
-	recVec.push_back(staticRec);
-
-	//recVec.push_back(myRec1); recVec.push_back(myRec2);
-
-	//pauses the program for viewing
-	//system("PAUSE");
-
-	//demonstration of a meory leak
-	//while (true) {
-	//	void* a = malloc(64);
-	//	delete a;
-	//}
 
 	//psuedo Gameloop
 	MessageLog* mLog = new MessageLog();
@@ -310,6 +208,121 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	TestM->register_manager();
 
 
+	
+
+	//DialogueGui* convoGui = new DialogueGui();
+
+	//Player* Alex = new Player(1000,600, true);	//init player
+	//WorldObj* Alex = new WorldObj(1000, 600, true);
+
+
+	vector<WorldObj*> recVec;
+	vector<WorldObj*>* recVec_ptr = &recVec;
+
+	ObjConfig::import_config(recVec_ptr, gameplay_functions, tBuffer);
+
+	tBuffer->run();
+
+	//std::cout << recVec.size() << "///////////////////////////" << endl;
+	//system("PAUSE");
+
+    Texture* objTexture = new Texture();
+	Texture* playerTexture = new Texture();
+	Texture* playerIdleTex = new Texture();
+	Texture* upRunTex = new Texture();
+	Texture* downRunTex = new Texture();
+	Texture* leftRunTex = new Texture();
+	Texture* rightRunTex = new Texture();
+	Texture* upIdleTex = new Texture();
+	Texture* downIdleTex = new Texture();
+	Texture* leftIdleTex = new Texture();
+	Texture* rightIdleTex = new Texture();
+
+	//load sprite from a configuration file?
+	objTexture->setFile("Assets/Sprites/YemojasHouse.png",1);
+	playerTexture->setFile("Assets/Sprites/ShangoFrontIdle.png",1);
+	playerIdleTex->setFile("Assets/Sprites/ShangoFrontIdle.png",1);
+	upRunTex->setFile("Assets/Sprites/ShangoBackSprite.png",26);
+	downRunTex->setFile("Assets/Sprites/ShangoForwardSprite.png",26);
+	leftRunTex->setFile("Assets/Sprites/ShangoLeftSprite.png",26);
+	rightRunTex->setFile("Assets/Sprites/ShangoRightSprite.png",26);
+	upIdleTex->setFile("Assets/Sprites/ShangoBackIdle.png",1);
+	downIdleTex->setFile("Assets/Sprites/ShangoFrontIdle.png",1);
+	leftIdleTex->setFile("Assets/Sprites/ShangoLeftIdle.png",1);
+	rightIdleTex->setFile("Assets/Sprites/ShangoRightIdle.png",1);
+
+	/* SET UP SPRITE CHANGE, MIGHT NEED A SINGLETON?*/
+
+
+	Alex->sprite.setTexture(playerTexture);
+	Alex->sprite.setIdleTexture(playerIdleTex);
+	Alex->sprite.up = upRunTex;
+	Alex->sprite.down = downRunTex;
+	Alex->sprite.left = leftRunTex;
+	Alex->sprite.right = rightRunTex;
+
+	Alex->sprite.id_up = upIdleTex;
+	Alex->sprite.id_left =leftIdleTex;
+	Alex->sprite.id_right = rightIdleTex;
+	Alex->sprite.id_down = downIdleTex;
+
+
+	Alex->offsetBody(0, 50, 50, 50, 50);
+	Alex->setInteractable(true);
+	Alex->setName("Alex");
+	Alex->setTalkDist(20);
+	DialogueController::setPlayer(Alex);
+	//vector<WorldObj*> recVec;
+	/*
+	for (int i = 1; i < 5; i++) {
+		WorldObj* objs = new WorldObj(Vector2f(220+50 * i, 300 * (i*2)), 600.0, 400.0);
+		objs->sprite.setTexture(objTexture);
+		objs->setInteractable(true);
+		std::string building="Building ";
+		objs->setName(building+= std::to_string(i));
+		//objs->offsetBody(0, 50, 50, 50, 50);
+		objs->offsetBody(0, 110, 150, 120, 60);
+		recVec.push_back(objs);
+	}
+	*/
+
+	Hero* staticRec = new Hero(YEMOJA, Vector2f(1000, 800), 100.0, 100.0);
+
+	staticRec->sprite.setTexture(playerTexture);
+	staticRec->sprite.setIdleTexture(playerIdleTex);
+	staticRec->sprite.up = upRunTex;
+	staticRec->sprite.down = downRunTex;
+	staticRec->sprite.left = leftRunTex;
+	staticRec->sprite.right = rightRunTex;
+	staticRec->sprite.id_up = upIdleTex;
+	staticRec->sprite.id_left = leftIdleTex;
+	staticRec->sprite.id_right = rightIdleTex;
+	staticRec->sprite.id_down = downIdleTex;
+
+	staticRec->setName("Yemoja");
+	staticRec->setInteractable(true);
+
+
+	staticRec->goal.setXloc(500);
+	staticRec->goal.setYloc(1200);
+
+	recVec.push_back(staticRec);
+
+
+	//recVec.push_back(myRec1); recVec.push_back(myRec2);
+
+	//pauses the program for viewing
+	//system("PAUSE");
+
+	//demonstration of a meory leak
+	//while (true) {
+	//	void* a = malloc(64);
+	//	delete a;
+	//}
+
+	
+
+
 	//std::unordered_map<std::string, Manager*> manager_table;
 
 	//manager_table["DumM"] = DumM;
@@ -329,9 +342,43 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 		_QuadTree->clear();
 		for (int i = 0; i < recVec.size(); i++) {
 			_QuadTree->insert(recVec[i]);	//insert all obj into tree
+	
 		}
 		//clock 
+		cout << "Here we are!" << endl;
+		float diffX = staticRec->getX() - staticRec->goal.getXloc();
+		float diffY = staticRec->getY() - staticRec->goal.getYloc();
+		if (abs(diffX) < 6) diffX = 0;
+		if (abs(diffY) < 6) diffY = 0;
+		bool left = false;
+		bool up = false;
+		bool down = false;
+		bool right = false;
 
+		if (diffX < 0) right = true;
+		if (diffX > 0) left = true;
+		if (diffY < 0) down = true;
+		if (diffY > 0) up = true;
+
+		if (up) {
+			if (right) gameplay_functions->move_up_right(staticRec);
+			else if (left) gameplay_functions->move_up_left(staticRec);
+			else gameplay_functions->move_up(staticRec);
+		}
+		else if (down) {
+			if (right) gameplay_functions->move_down_right(staticRec);
+			else if (left) gameplay_functions->move_down_left(staticRec);
+			else gameplay_functions->move_down(staticRec);
+		}
+		else if (right) {
+			gameplay_functions->move_right(staticRec);
+		}
+		else if (left) {
+			gameplay_functions->move_left(staticRec);
+		}
+		else {
+			gameplay_functions->stop(staticRec);
+		}
 		iController->InputCheck();
 
 		//Alex->WorldObj::drawObj(0,0);
@@ -383,15 +430,11 @@ void ALESSIO_TEST() {
 	Factions fac(rInt);
 	Hero person2(OYA, 20, 0, false);
 	Texture still2;
-	still2.setFile("YemojasHouse.png");
-	still2.load();
-	still2.setFrames(2);
+	still2.setFile("YemojasHouse.png",1);
 	person2.sprite.setTexture(&still2);
 	Hero person(YEMOJA, 20, 0, false);
 	Texture still;
-	still.setFile("phi.png");
-	still.load();
-	still.setFrames(3);
+	still.setFile("phi.png",1);
 	person.sprite.setTexture(&still);
 	cout <<"Is person an NPC: "<< CheckClass::isNPC(&person) << endl;
 	person.setHealth(-10);
@@ -456,15 +499,11 @@ void ALEX_LOOP(QuadTree* _QuadTree) {
 	Texture* righttex = new Texture();
 
 
-	objTexture->setFile("YemojasHouse.jpg");
-	playerTexture->setFile("phi.png");
+	objTexture->setFile("YemojasHouse.jpg",1);
+	playerTexture->setFile("phi.png",1);
 
 	//uptex->setFile("Shango")
 
-	playerTexture->load();
-	objTexture->load();
-	playerTexture->setFrames(1);
-	objTexture->setFrames(1);
 	Alex->sprite.setTexture(playerTexture);
 	Alex->sprite.up = uptex;
 	Alex->sprite.down = downtex;
@@ -639,11 +678,10 @@ void ERONS_LOOP() {
 	delete dilg_tester;
 	*/
 
-	//DialogueHelper* dilgH = new DialogueHelper();
+	DialogueHelper* dilgH = new DialogueHelper();
 
-	//Hero* yemoja = new Hero(YEMOJA, 20, 0, false);
-
-	//dialogue_point point1 = dilgH->choose_conv_pt({""});
+	Hero* oya = new Hero(OYA, 20, 0, false);
+	dilgH->gen_dialog({ "what", "variable" }, oya);
 
 	//std::string sentence1 = dilgH->gen_dialog({ "name","question_name" }, yemoja);
 	//std::cout << sentence1 << std::endl;
@@ -655,9 +693,7 @@ void ERONS_LOOP() {
 	//dilgH->gen_dialog({ "what", "variable" }, yemoja);
 
 	
-	
 }
-
  /*
 void Darion_Ian_Test() {
 	MemoryPool* hero_pool = create_pool(2048);
@@ -720,7 +756,7 @@ void ANDREWS_TEST() {
 													 //object stuff
 
 
-	//soundsystem.playSound(soundSample, false, channel, ispaused, 1); 	// Play the sound, with loop mode
+	soundsystem.playSound(soundSample, false, channel, ispaused, 1); 	// Play the sound, with loop mode
 
 
 	cout << "Press return to quit." << endl;  // Do something meanwhile...
@@ -733,9 +769,7 @@ void ANDREWS_LOOP(QuadTree* _QuadTree) {
 
 	WorldObj* Alex = new WorldObj(Vector2f(500.0, 100.0), 100.0, 100.0);	//init player
 	Texture* playerTexture = new Texture();
-	playerTexture->setFile("phi.png");
-	playerTexture->load();
-	playerTexture->setFrames(1);
+	playerTexture->setFile("phi.png",1);
 	Alex->sprite.setTexture(playerTexture);
 	Alex->offsetBody(0, 50, 50, 50, 50);
 	vector<WorldObj*> recVec;

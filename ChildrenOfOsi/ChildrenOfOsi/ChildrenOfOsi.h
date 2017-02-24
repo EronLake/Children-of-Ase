@@ -44,7 +44,7 @@ public:
 	void add_livingObj(std::string key, float x, float y, bool col);
 	void add_worldObj(std::string key, float x, float y, bool col);
 	void add_npc(std::string key, float x, float y, bool col);
-	//void add_texture(std::string key, float x, float y, bool col);
+	void add_texture(std::string key, float x, float y, bool col);
 
 	//functions for audio
 	void play_sound(string name);

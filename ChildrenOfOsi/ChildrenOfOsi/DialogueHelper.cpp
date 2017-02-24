@@ -19,11 +19,11 @@ DialogueHelper::DialogueHelper()
 	//possible_conv_pts[0].push_back({ "placeholder","placeholder" });
 	//possible_conv_pts[1].push_back({ "placeholder","placeholder" });
 	//possible_conv_pts[2].push_back({ "placeholder","placeholder" });
-	for (int i = 0; i < 5; i++) 
+	for (int i = 0; i < 4; i++) 
 	{
 		possible_conv_pts.push_back({});
 	}
-	for (int i = 0; i < 5; i++) 
+	for (int i = 0; i < 4; i++) 
 	{
 		possible_reply_pts.push_back({});
 	}
@@ -190,7 +190,7 @@ dialogue_point DialogueHelper::get_dialog(std::string name, dialogue_point diog_
 		tmp = dtemp[i - 1];
 		if (tmp != "?" && tmp != "," && tmp != "." && 
 			tmp != "!" && tmp != "_") {
-			j = rand() % root[tmp].size() + 1;
+			j = rand() % (root[tmp].size() + 1);
 			dpoint.push_back(root[tmp][to_string(j)]
 				.asString());
 		}

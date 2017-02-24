@@ -20,8 +20,6 @@ public:
 	static std::unordered_map<std::string, SplSoldier*> spl_soldier_table;
 	static std::unordered_map<std::string, WorldObj*> worldObj_table;
 	static std::unordered_map<std::string, NPC*> npc_table;
-
-	//still need to impliment store function
 	static std::unordered_map<std::string, Texture*> texture_table;
 
 	Containers();
@@ -34,7 +32,5 @@ public:
 	static void add_spl_soldier(std::string, SplSoldier*);
 	static void add_worldObj(std::string, WorldObj*);
 	static void add_npc(std::string, NPC*);
-
-	//still need to impliment store function
 	static void add_texture(std::string, Texture*);
 };
