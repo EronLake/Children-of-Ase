@@ -66,7 +66,8 @@ namespace osi
     static std::vector<GLuint> vertexBufferObjectId;
     static std::vector<GLuint> elementBufferObjectId;
     static std::vector<GLuint> textures;
-    static GLuint shaderProgramId;
+    static GLuint stdShaderProgramId;
+    static GLuint fontShaderProgramId;
 
     static std::unordered_map<std::string, std::unordered_map<GLchar, Glyph>> fontCharacters;
 

@@ -3,7 +3,7 @@
 
 const std::string osi::GameWindow::STD_VERTEX_SHADER_PATH = "./OpenGL Shaders/StdVertexShader.vert.glsl";
 const std::string osi::GameWindow::STD_FRAGMENT_SHADER_PATH = "./OpenGL Shaders/StdFragmentShader.frag.glsl";
-const std::string osi::GameWindow::FONT_VERTEX_SHADER_PATH = "./OpenGL Shaders/FontvertexShader.frag.glsl";
+const std::string osi::GameWindow::FONT_VERTEX_SHADER_PATH = "./OpenGL Shaders/FontVertexShader.vert.glsl";
 const std::string osi::GameWindow::FONT_FRAGMENT_SHADER_PATH = "./OpenGL Shaders/FontFragmentShader.frag.glsl";
 
 GLFWwindow *osi::GameWindow::window = nullptr;
@@ -14,7 +14,8 @@ std::vector<GLuint> osi::GameWindow::vertexArrayObjectId;
 std::vector<GLuint> osi::GameWindow::vertexBufferObjectId;
 std::vector<GLuint> osi::GameWindow::elementBufferObjectId;
 std::vector<GLuint> osi::GameWindow::textures;
-GLuint osi::GameWindow::shaderProgramId = 0;
+GLuint osi::GameWindow::stdShaderProgramId = 0;
+GLuint osi::GameWindow::fontShaderProgramId = 0;
 
 std::unordered_map<std::string, std::unordered_map<GLchar, osi::Glyph>> osi::GameWindow::fontCharacters;
 
@@ -32,7 +33,8 @@ bool osi::GameWindow::init()
     return false;
 
   GameWindow::setupWindow();
-  GameWindow::setupStdShaders();
+  GameWindow::stdShaderProgramId = GameWindow::setupShaders(STD_VERTEX_SHADER_PATH, STD_FRAGMENT_SHADER_PATH);
+  GameWindow::fontShaderProgramId = GameWindow::setupShaders(FONT_VERTEX_SHADER_PATH, FONT_FRAGMENT_SHADER_PATH);
   GameWindow::setupFont("Arial", 48);
 
   glEnable(GL_TEXTURE_2D);
@@ -62,7 +64,8 @@ bool osi::GameWindow::terminate()
   GameWindow::elementBufferObjectId;
   GameWindow::textures;
 
-  GameWindow::shaderProgramId = 0;
+  GameWindow::stdShaderProgramId = 0;
+  GameWindow::fontShaderProgramId = 0;
 
   return true;
 }
@@ -186,7 +189,7 @@ void osi::GameWindow::refresh()
 
   glClearColor(0.5F, 0.5F, 0.5F, 1.0F);
   glClear(GL_COLOR_BUFFER_BIT);
-  glUseProgram(osi::GameWindow::shaderProgramId);
+  glUseProgram(GameWindow::stdShaderProgramId);
   for(GLint i = 0; i < numObjects; ++i) {
     glBindTexture(GL_TEXTURE_2D, Texture::textureId[textures[i] - 1]);
     glBindVertexArray(vertexArrayObjectId[i]);
@@ -260,7 +263,11 @@ void osi::GameWindow::setupWindow()
 }
 
 /**
- * 
+ * Loads, compiles, and links the vertex/fragment shader pair whose paths are
+ * specified. the ID of the shader program is returned.
+ * Param vertexShaderPath: The path to the vertex shader to be used
+ * Param fragmentShaderPath: The path to the fragment shader to be used
+ * Return: Returns the shader program ID related to the given shaders
  */
 GLuint osi::GameWindow::setupShaders(const std::string& vertexShaderPath, const std::string& fragmentShaderPath)
 {
@@ -274,14 +281,14 @@ GLuint osi::GameWindow::setupShaders(const std::string& vertexShaderPath, const 
   // Read entirety of vertex shader source code into vertexShaderSource
   fileStream.open(vertexShaderPath.c_str());
   if(fileStream) {
-    fileStream.seekg(fileStream.end);
+    fileStream.seekg(0, fileStream.end);
     std::size_t fileLength = static_cast<std::size_t>(fileStream.tellg());
-    fileStream.seekg(fileStream.beg);
+    fileStream.seekg(0, fileStream.beg);
 
     vertexShaderSource = new GLchar[fileLength + 1];
-    for(std::size_t i = 0; i < fileLength; ++i)
-      vertexShaderSource[i] = fileStream.get();
-    vertexShaderSource[fileLength] = '\0';
+    for(std::size_t i = 0; i <= fileLength; ++i)
+      vertexShaderSource[i] = '\0';
+    fileStream.read(vertexShaderSource, fileLength);
   }
   else {
     fileStream.close();
@@ -295,14 +302,14 @@ GLuint osi::GameWindow::setupShaders(const std::string& vertexShaderPath, const 
 
   fileStream.open(fragmentShaderPath);
   if(fileStream) {
-    fileStream.seekg(fileStream.end);
+    fileStream.seekg(0, fileStream.end);
     std::size_t fileLength = static_cast<std::size_t>(fileStream.tellg());
-    fileStream.seekg(fileStream.beg);
+    fileStream.seekg(0, fileStream.beg);
 
     fragmentShaderSource = new GLchar[fileLength + 1];
-    for(std::size_t i = 0; i < fileLength; ++i)
-      fragmentShaderSource[i] = fileStream.get();
-    fragmentShaderSource[fileLength] = '\0';
+    for(std::size_t i = 0; i <= fileLength; ++i)
+      fragmentShaderSource[i] = '\0';
+    fileStream.read(fragmentShaderSource, fileLength);
   }
   else {
     delete[] vertexShaderSource;
@@ -485,15 +492,15 @@ void osi::GameWindow::setupStdShaders()
   }
 
   // Link the shaders
-  GameWindow::shaderProgramId = glCreateProgram();
-  glAttachShader(GameWindow::shaderProgramId, vertexShaderId);
-  glAttachShader(GameWindow::shaderProgramId, fragmentShaderId);
-  glLinkProgram(GameWindow::shaderProgramId);
+  GameWindow::stdShaderProgramId = glCreateProgram();
+  glAttachShader(GameWindow::stdShaderProgramId, vertexShaderId);
+  glAttachShader(GameWindow::stdShaderProgramId, fragmentShaderId);
+  glLinkProgram(GameWindow::stdShaderProgramId);
 
   // Check for linking errors
-  glGetProgramiv(GameWindow::shaderProgramId, GL_LINK_STATUS, &compileStepSuccess);
+  glGetProgramiv(GameWindow::stdShaderProgramId, GL_LINK_STATUS, &compileStepSuccess);
   if(!compileStepSuccess) {
-    glGetProgramInfoLog(GameWindow::shaderProgramId, 1024, NULL, compileStepInfoLog);
+    glGetProgramInfoLog(GameWindow::stdShaderProgramId, 1024, NULL, compileStepInfoLog);
 
     glDeleteShader(vertexShaderId);
     glDeleteShader(fragmentShaderId);
