@@ -46,10 +46,10 @@ public:
 	Vector2f goal;
 	unordered_map<Vector2f, Vector2f> came_from;
 	unordered_map<Vector2f, double> cost_so_far;
-	vector<Vector2f> get_path();
+	vector<Vector2f> get_path(NPC* npc);
 	int astar_search(WorldObj* obj);
 	int plan_step(WorldObj* obj);
-   AIManager* manager;
+    AIManager* manager;
 private:
 	
 	//std::vector<WorldObj*> objVec;

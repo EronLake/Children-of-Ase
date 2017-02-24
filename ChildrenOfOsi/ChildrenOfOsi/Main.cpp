@@ -183,7 +183,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 {
 
 
-	Player* Alex = new Player(SHANGO, Vector2f(1400.0, 1200.0), 100.0, 100.0);	//init player
+	Player* Alex = new Player(SHANGO, Vector2f(4900.0, 3700.0), 100.0, 100.0);	//init player
 	cout << "Alex's width and height is " << Alex->getWidth() << ", " << Alex->getHeight() << endl;
 
 	//DialogueGui* convoGui = new DialogueGui();
@@ -201,8 +201,10 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	//system("PAUSE");
 
     Texture* objTexture = new Texture();
+
 	Texture* playerTexture = new Texture();
 	Texture* playerIdleTex = new Texture();
+
 	Texture* upRunTex = new Texture();
 	Texture* downRunTex = new Texture();
 	Texture* leftRunTex = new Texture();
@@ -212,10 +214,31 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	Texture* leftIdleTex = new Texture();
 	Texture* rightIdleTex = new Texture();
 
+	Texture* h_upRunTex = new Texture();
+	Texture* h_downRunTex = new Texture();
+	Texture* h_leftRunTex = new Texture();
+	Texture* h_rightRunTex = new Texture();
+	Texture* h_upIdleTex = new Texture();
+	Texture* h_downIdleTex = new Texture();
+	Texture* h_leftIdleTex = new Texture();
+	Texture* h_rightIdleTex = new Texture();
+
+	Texture* treeTex = new Texture();
+	Texture* treeTex1 = new Texture();
+	Texture* treeTex2 = new Texture();
+
+	Texture* rockTex = new Texture();
+	Texture* rockTex1 = new Texture();
+	Texture* rockTex2 = new Texture();
+
+	Texture* pierTex = new Texture();
+
 	//load sprite from a configuration file?
 	objTexture->setFile("Assets/Sprites/YemojasHouse.png",1);
+
 	playerTexture->setFile("Assets/Sprites/ShangoFrontIdle.png",1);
 	playerIdleTex->setFile("Assets/Sprites/ShangoFrontIdle.png",1);
+
 	upRunTex->setFile("Assets/Sprites/ShangoBackSprite.png",26);
 	downRunTex->setFile("Assets/Sprites/ShangoForwardSprite.png",26);
 	leftRunTex->setFile("Assets/Sprites/ShangoLeftSprite.png",26);
@@ -225,6 +248,25 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	leftIdleTex->setFile("Assets/Sprites/ShangoLeftIdle.png",1);
 	rightIdleTex->setFile("Assets/Sprites/ShangoRightIdle.png",1);
 
+
+	h_upRunTex->setFile("Assets/Sprites/YemojaBackSprite.png", 26);
+	h_downRunTex->setFile("Assets/Sprites/YemojaForwardSprite.png", 26);
+	h_leftRunTex->setFile("Assets/Sprites/YemojaLeftSprite.png", 26);
+	h_rightRunTex->setFile("Assets/Sprites/YemojaRightSprite.png", 26);
+	h_upIdleTex->setFile("Assets/Sprites/YemojaBackIdle.png", 1);
+	h_downIdleTex->setFile("Assets/Sprites/YemojaFrontIdle.png", 1);
+	h_leftIdleTex->setFile("Assets/Sprites/YemojaLeftIdle.png", 1);
+	h_rightIdleTex->setFile("Assets/Sprites/YemojaRightIdle.png", 1);
+
+	treeTex->setFile("Assets/Sprites/tree.png", 1);
+	treeTex1->setFile("Assets/Sprites/tree1.png", 1);
+	treeTex2->setFile("Assets/Sprites/tree2.png", 1);
+
+	rockTex->setFile("Assets/Sprites/rock.png", 1);
+	rockTex1->setFile("Assets/Sprites/rock1.png", 1);
+	rockTex2->setFile("Assets/Sprites/rock2.png", 1);
+
+	pierTex->setFile("Assets/Sprites/pier.png", 1);
 	/* SET UP SPRITE CHANGE, MIGHT NEED A SINGLETON?*/
 
 
@@ -252,7 +294,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 
 	for (int i = 1; i < 6; i++) {
 		if (i > 4) {
-			WorldObj* obj = new WorldObj(Vector2f(1600, 1050),300,200);
+			WorldObj* obj = new WorldObj(Vector2f(4100, 3550),500,333);
 		
 			obj->sprite.setTexture(objTexture);
 			obj->setInteractable(true);
@@ -276,7 +318,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	vector<Vector2f> vertices;
 	vector<pair<Vector2f, Vector2f>> edges;
 	
-	for (int i = 0; i < 1; i++) {
+	for (int i = 0; i < vec.size(); i++) {
 		WorldObj *obj = vec[i];
 		float w = obj->body[0].getWidth();
 		float h = obj->body[0].getHeight();
@@ -311,7 +353,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 
 	bool visible = true;
 	for (Vector2f first : ai->graph.vertices) {
-		//graph.insert(first);
+		//ai->graph.insert(first);
 		for (Vector2f second : ai->graph.vertices) {
 			if (first == second) continue;
 			visible = true;
@@ -328,27 +370,38 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 		}
 	}
 
-	Hero* staticRec = new Hero(YEMOJA, Vector2f(1450, 1050), 100.0, 100.0);
-	staticRec->sprite.setTexture(playerTexture);
-	staticRec->sprite.setIdleTexture(playerIdleTex);
-	staticRec->sprite.up = upRunTex;
-	staticRec->sprite.down = downRunTex;
-	staticRec->sprite.left = leftRunTex;
-	staticRec->sprite.right = rightRunTex;
-	staticRec->sprite.id_up = upIdleTex;
-	staticRec->sprite.id_left = leftIdleTex;
-	staticRec->sprite.id_right = rightIdleTex;
-	staticRec->sprite.id_down = downIdleTex;
+	Hero* staticRec = new Hero(YEMOJA, Vector2f(4950, 3550), 100.0, 100.0);
+	staticRec->sprite.setTexture(h_downIdleTex);
+	staticRec->sprite.setIdleTexture(h_downIdleTex);
+	staticRec->sprite.up = h_upRunTex;
+	staticRec->sprite.down = h_downRunTex;
+	staticRec->sprite.left = h_leftRunTex;
+	staticRec->sprite.right = h_rightRunTex;
+	staticRec->sprite.id_up = h_upIdleTex;
+	staticRec->sprite.id_left = h_leftIdleTex;
+	staticRec->sprite.id_right = h_rightIdleTex;
+	staticRec->sprite.id_down = h_downIdleTex;
 
 	staticRec->setName("Yemoja");
 	staticRec->setInteractable(true);
 
-
+	WorldObj* tree = new WorldObj(Vector2f(4000, 2600), 800, 500);
+	tree->sprite.setTexture(treeTex);
+	tree->offsetBody(0, 275, 375, 375, 75);
+	WorldObj* tree1 = new WorldObj(Vector2f(3300, 4600), 700, 600);
+	tree1->sprite.setTexture(treeTex1);
+	tree1->offsetBody(0, 275, 375, 375, 75);
+	WorldObj* tree2 = new WorldObj(Vector2f(4700, 4500), 700, 600);
+	tree2->sprite.setTexture(treeTex2);
+	tree2->offsetBody(0, 275, 375, 375, 75);
+	//WorldObj* tree1 = new WorldObj(Vector2f())
 	//staticRec->goal.setXloc(500);
 	//staticRec->goal.setYloc(1200);
 
 	recVec.push_back(staticRec);
-
+	recVec.push_back(tree);
+	recVec.push_back(tree1);
+	recVec.push_back(tree2);
 	recVec.push_back(vec[0]);
 	//recVec.push_back(vec[1]);
 	//recVec.push_back(myRec1); recVec.push_back(myRec2);
@@ -400,13 +453,17 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	*/
 	//ai->graph = graph;
 	ai->start = staticRec->getLoc();
-	ai->goal = { 1775.00,1350.00 };
+	ai->goal = { 1100.00,1100.00 };
 
 	ai->graph.insert(ai->start);
-	ai->graph.insert(ai->goal);
+	//ai->graph.insert(ai->goal);
 
-	staticRec->destination = { 1500.00,1100.00 };
-
+	staticRec->destination = { 4600.00,3600.00 };
+	ai->graph.insert(staticRec->destination);
+	ai->graph.insert(Vector2f(5000.00, 4100.00));
+	ai->graph.insert(Vector2f(4600.00, 3600.00));
+	ai->graph.insert(Vector2f(4500.00, 4000.00));
+	ai->graph.insert(Vector2f(5650.00, 3700.00));
 	for (Vector2f vert : ai->graph.vertices) {
 		std::cout << "X: " << vert.getXloc() << " Y: " << vert.getYloc() << std::endl;
 	}
@@ -415,6 +472,8 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	}
 
 	ai->graph._print();
+
+
 
 	//ai->astar_search(staticRec);
 
@@ -433,12 +492,17 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	//Alex->WorldObj::setHeight(100);
 	//Alex->setX(10);
 	//Alex->setY(10);
-    gameplay_functions->get_path(staticRec); //Generate the waypoints to the destination
+	ai->astar_search(staticRec);
+   // gameplay_functions->get_path(staticRec); //Generate the waypoints to the destination
+	staticRec->setMode(WANDER);
 	//osi::GameWindow::init();
 	LOG("PAST WINDOW INIT ***********************");
 	clock_t start_tick, current_ticks, delta_ticks;
 	clock_t fps = 0;
 	int fs = 60;
+	int wait_time = fs*3; //always wait 3 seconds
+	int count = 0;
+	int state = 0;
 	while (osi::GameWindow::isRunning()) {
 		start_tick = clock();
 		_QuadTree->clear();
@@ -446,22 +510,50 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 			_QuadTree->insert(recVec[i]);	//insert all obj into tree
 	
 		}
-
+		state = DialogueController::getState();
 
 		if (staticRec->destination != Vector2f(0, 0)) { //Hero has a destination
-			if (staticRec->waypoint != Vector2f(0,0)) { //Hero has a waypoint to the desination
+			if (staticRec->waypoint != Vector2f(0,0) && state == 0) { //Hero has a waypoint to the desination, and not in dialog
 				gameplay_functions->move_toward(staticRec); //Take a step towards the current waypoint
 				std::cout << "Request a step" << std::endl;
+			}
+			else if (state == 0)                //Hero needs waypoints to destination, and not in dialog
+			{
+				gameplay_functions->get_path(staticRec); //Generate waypoints to destination
 			}
 		}
 
 		else if (staticRec->getMode() != WAIT) //Hero has no destination, and not in wait mode.
 		{
+			int r = rand() % 4;
+			ai->start = staticRec->getLoc();
+			std::cout << "at " << ai->start.getXloc() << "," << ai->start.getYloc() << std::endl;
+			std::cout << "picked " << r << std::endl;
+			switch (r) {
+			case 0:
+				
+				staticRec->destination = Vector2f(5000.00, 4100.00);
+				break;
+			case 1:
+				staticRec->destination = Vector2f(4600.00, 3600.0);
+				break;
+			case 2:
+				staticRec->destination = Vector2f(4500.00, 4000.0);
+				break;
+			case 3:
+				staticRec->destination = Vector2f(5650.00, 3700.00);
+				break;
+			}
 			//Generate the destination
 		}
-
-		
-		
+		else   //Hero has no destination and is waiting to generate one
+		{
+			count++;
+			if (count >= wait_time) {
+				count = 0;
+				staticRec->setMode(WANDER);
+			}
+		}
 		//ai->plan_step(staticRec);
 		//clock 
 		/*float diffX = staticRec->getX() - staticRec->goal.getXloc();
@@ -472,6 +564,14 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 
 		staticRec->setDiagXSpeed(diagSpeed);
 		staticRec->setDiagYSpeed((slope*diagSpeed));
+
+
+		X: 1520 Y: 970
+		X: 1520 Y: 1230
+		X: 1450 Y: 1050
+		X: 1520 Y: 970
+		X: 1520 Y: 1230
+		X: 1450 Y: 1050
 
 		if (abs(diffX) < 6) diffX = 0;
 		if (abs(diffY) < 6) diffY = 0;
@@ -519,12 +619,14 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 		////Alex->WorldObj::shiftX(.5);
 		//osi::GameWindow::refresh();
 		//draw
-		if (DialogueController::getState() == 0) {
+		if (state == 0) {
 			//LOG("ERROR AFTER PRESSING Q TO QUIT THE DIALOGUE GUI");
 			gameplay_functions->draw_frame(Alex);
+			
 		}
-		else if (DialogueController::getState() > 0) {
+		else if (state > 0) {
 			gameplay_functions->drawDiaGui(Alex);
+			gameplay_functions->stop(staticRec);
 		}
 		//convoGui->drawGui();
 

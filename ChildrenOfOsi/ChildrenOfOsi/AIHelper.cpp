@@ -97,10 +97,10 @@ inline double heuristic(Vector2f start, Vector2f goal) {
 	return ((double)start.dist(goal));
 }
 
-vector<Vector2f> AIHelper::get_path()
+vector<Vector2f> AIHelper::get_path(NPC* obj)
 {
 	vector<Vector2f> path;
-	Vector2f current = goal;
+	Vector2f current = obj->destination;
 	//path.push_back(current);
 	//std::cout << "Push to path" << std::endl;
 	//std::cout << "X: " << current.getXloc() << " Y: " << current.getYloc() << std::endl;
@@ -111,12 +111,14 @@ vector<Vector2f> AIHelper::get_path()
 		current = came_from[current];
 	}
 	//std::reverse(path.begin(), path.end());
+	path.push_back(start);
 	return path;
 }
 
 //template<typename G>
 int AIHelper::astar_search(WorldObj* obj)// VisibilityGraph graph, Vector2f start, Vector2f goal, unordered_map<Vector2f, Vector2f> came_from, unordered_map<Vector2f, double> cost_so_far)
 {	
+	bool path_exists = false;
 	NPC* npc;
 	if (!(npc = CheckClass::isNPC(obj))) {
 		LOG("Error: No movable object");
@@ -136,8 +138,9 @@ int AIHelper::astar_search(WorldObj* obj)// VisibilityGraph graph, Vector2f star
 		Vector2f current = frontier.top().second;
 		frontier.pop();
 		std::cout << "Popping" << std::endl;
-		if (current == goal) {
+		if (current == npc->destination) {
 			std::cout << "Found a path" << std::endl;
+			path_exists = true;
 			//for (auto vert : came_from) {
 			//	std::cout << "X: " << vert.getXloc() << " Y: " << vert.getYloc() << std::endl;
 			//}
@@ -150,16 +153,21 @@ int AIHelper::astar_search(WorldObj* obj)// VisibilityGraph graph, Vector2f star
 			double cost = cost_so_far[current] + graph.cost(current, next);
 			if (!cost_so_far.count(next) || cost < cost_so_far[next]) {
 				cost_so_far[next] = cost;
-				double priority = cost + heuristic(next, goal);
+				double priority = cost + heuristic(next, npc->destination);
 				frontier.emplace(priority, next);
 				came_from[next] = current;
 			}
 		}
 	}
-
-	npc->waypoints = get_path();
-	npc->waypoint = npc->waypoints.back();
-
+	if (!path_exists) {
+		npc->waypoint = Vector2f(0, 0);
+	}
+	else {
+		npc->waypoints = get_path(npc);
+		npc->waypoint = npc->waypoints.back();
+		came_from.clear();
+		cost_so_far.clear();
+	}
 //	std::cout << "Done" << std::endl;
 	for (int i = 0; i < came_from.size(); i++) {
 //		std::cout << "X: " << came_from[i].getXloc() << " Y: " << came_from[i].getYloc() << std::endl;
@@ -240,9 +248,12 @@ int AIHelper::plan_step(WorldObj* obj) {
 		{
 			std::cout << "Reached waypoint" << std::endl;
 			manager->createTaskWithObj("Stop", "MOVE", obj);
+			npc->setLoc(npc->waypoint);
 			if (npc->waypoints.size() == 0) { //This was the final waypoint, destination reached
+				std::cout << "Last waypoint" << std::endl;
 				npc->destination = Vector2f(0, 0); //"nullify" destination
 				npc->waypoint = Vector2f(0, 0); //"nullify" waypoint
+				npc->setMode(WAIT);
 			}
 			else //Set the obj's new waypoint to be the next in the path to destination
 			{
