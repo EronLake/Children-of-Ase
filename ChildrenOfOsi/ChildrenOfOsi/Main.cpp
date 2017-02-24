@@ -10,7 +10,7 @@
 #include "Player.h"
 #include "Factions.h"
 #include <crtdbg.h>
-//#include "Rectangle.h"
+#include "Rectangle.h"
 #include "QuadTree.h"
 #include "GameWindow.h"
 #include "common.h"
@@ -47,6 +47,8 @@
 #include "DialogueController.h"
 #include "DialogueHelper.h"
 #include "DialougeTestSuite.h"
+
+#include "AIManager.h"
 
 #include "ObjConfig.h"
 
@@ -181,7 +183,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 {
 
 
-	Player* Alex = new Player(SHANGO, Vector2f(1000.0, 600.0), 100.0, 100.0);	//init player
+	Player* Alex = new Player(SHANGO, Vector2f(1400.0, 1200.0), 100.0, 100.0);	//init player
 	cout << "Alex's width and height is " << Alex->getWidth() << ", " << Alex->getHeight() << endl;
 
 	//DialogueGui* convoGui = new DialogueGui();
@@ -246,7 +248,21 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	DialogueController::setPlayer(Alex);
 	//vector<WorldObj*> recVec;
 
-	for (int i = 1; i < 5; i++) {
+	vector<WorldObj*> vec;
+
+	for (int i = 1; i < 6; i++) {
+		if (i > 4) {
+			WorldObj* obj = new WorldObj(Vector2f(1600, 1050),300,200);
+		
+			obj->sprite.setTexture(objTexture);
+			obj->setInteractable(true);
+			std::string building = "Building ";
+			obj->setName(building += std::to_string(i));
+			//objs->offsetBody(0, 50, 50, 50, 50);
+			obj->offsetBody(0, 25, 50, 25, 25);
+			vec.push_back(obj);
+			continue;
+		}
 		WorldObj* objs = new WorldObj(Vector2f(220+50 * i, 300 * (i*2)), 600.0, 400.0);
 		objs->sprite.setTexture(objTexture);
 		objs->setInteractable(true);
@@ -255,8 +271,64 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 		//objs->offsetBody(0, 50, 50, 50, 50);
 		objs->offsetBody(0, 110, 150, 120, 60);
 		recVec.push_back(objs);
+		
 	}
-	Hero* staticRec = new Hero(YEMOJA, Vector2f(1000, 800), 100.0, 100.0);
+	vector<Vector2f> vertices;
+	vector<pair<Vector2f, Vector2f>> edges;
+	
+	for (int i = 0; i < 1; i++) {
+		WorldObj *obj = vec[i];
+		float w = obj->body[0].getWidth();
+		float h = obj->body[0].getHeight();
+		Vector2f p1 = { obj->body[0].getX() - 105,obj->body[0].getY() - 105 };
+		Vector2f p2 = obj->body[0].getTR();
+		Vector2f p3 = obj->body[0].getBL();
+		Vector2f p4 = obj->body[0].getBR();
+		vertices.push_back(p1);
+		vertices.push_back(p2);
+		vertices.push_back(p3);
+		vertices.push_back(p4);
+		edges.push_back({ p1, p2 });
+		edges.push_back({ p1, p3 });
+		edges.push_back({ p2, p4 });
+		edges.push_back({ p3, p4 });
+		//Put edges in the hit box to prevent
+		//visibility lines through the diagonal
+		edges.push_back({ p2, p3 });
+		edges.push_back({ p1, p4 });
+	}
+
+	AIHelper* ai = new AIHelper();
+	//VisibilityGraph graph;
+	ai->graph.vertices = vertices;
+	ai->graph.obstacles = edges;
+	for (Vector2f vert : ai->graph.vertices) {
+		std::cout << "X: " << vert.getXloc() << " Y: " << vert.getYloc() << std::endl;
+	}
+	for (auto edge : ai->graph.obstacles) {
+		std::cout << "EDGE from " << edge.first.getXloc() << "," << edge.first.getYloc() << " to " << edge.second.getXloc() << "," << edge.second.getYloc() << std::endl;
+	}
+
+	bool visible = true;
+	for (Vector2f first : ai->graph.vertices) {
+		//graph.insert(first);
+		for (Vector2f second : ai->graph.vertices) {
+			if (first == second) continue;
+			visible = true;
+			for (auto check : ai->graph.obstacles) {
+				if (ai->graph.intersect(first, second, check.first, check.second)) {
+					visible = false;
+					break;
+				}
+			}
+			if (visible) { //put vertices in each other's neighbor list
+				ai->graph.edges[first].push_back(second);
+				ai->graph.edges[second].push_back(first);
+			}
+		}
+	}
+
+	Hero* staticRec = new Hero(YEMOJA, Vector2f(1450, 1050), 100.0, 100.0);
 	staticRec->sprite.setTexture(playerTexture);
 	staticRec->sprite.setIdleTexture(playerIdleTex);
 	staticRec->sprite.up = upRunTex;
@@ -272,12 +344,13 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	staticRec->setInteractable(true);
 
 
-	staticRec->goal.setXloc(500);
-	staticRec->goal.setYloc(1200);
+	//staticRec->goal.setXloc(500);
+	//staticRec->goal.setYloc(1200);
 
 	recVec.push_back(staticRec);
 
-
+	recVec.push_back(vec[0]);
+	//recVec.push_back(vec[1]);
 	//recVec.push_back(myRec1); recVec.push_back(myRec2);
 
 	//pauses the program for viewing
@@ -303,6 +376,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	memManager* memM = new memManager(mLog, tBuffer);
 	TestManager* TestM = new TestManager(mLog, tBuffer);
 	AudioManager* AudM = new AudioManager(mLog, tBuffer);
+	AIManager* AIM = new AIManager(mLog, tBuffer, ai);
 
 	//the order defines what order the managers the tasks will be sent to
 	DumM->register_manager();
@@ -310,8 +384,46 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	memM->register_manager();
 	RenM->register_manager();
 	AudM->register_manager();
+	AIM->register_manager();
 	TestM->register_manager();
 
+	
+
+/*	VisibilityGraph graph{ {
+		{{1400.00,800.00}, {{1400.00, 900.00},{1200.00,800.00}}},
+		{{1400.00,900.00}, {{1400.00,800.00},{1200.00,800.00},{1300.00,1000.00}}},
+		{{1200.00,800.00}, {{1400.00,800.00},{1400.00,900.00},{1100.00,900.00}}},
+		{{1300.00,1000.00}, {{1400.00,900.00},{1100.00,900.00},{1200.00,600.00}}},
+		{{1100.00,900.00}, {{1200.00,800.00},{1300.00,1000.00},{1200.00,600.00}}},
+		{{1200.00,600.00}, {{1100.00,900.00},{1300.00,1000.00}}}
+	} };
+	*/
+	//ai->graph = graph;
+	ai->start = staticRec->getLoc();
+	ai->goal = { 1775.00,1350.00 };
+
+	ai->graph.insert(ai->start);
+	ai->graph.insert(ai->goal);
+
+	staticRec->destination = { 1500.00,1100.00 };
+
+	for (Vector2f vert : ai->graph.vertices) {
+		std::cout << "X: " << vert.getXloc() << " Y: " << vert.getYloc() << std::endl;
+	}
+	for (auto edge : ai->graph.obstacles) {
+		std::cout << "EDGE from " << edge.first.getXloc() << "," << edge.first.getYloc() << " to " << edge.second.getXloc() << "," << edge.second.getYloc() << std::endl;
+	}
+
+	ai->graph._print();
+
+	//ai->astar_search(staticRec);
+
+	//vector<Vector2f> path = ai->get_path();
+
+
+	//for (Vector2f next : path) {
+	//	std::cout << "X: " << next.getXloc() << " Y: " << next.getYloc() << std::endl;
+	//}
 
 	//std::unordered_map<std::string, Manager*> manager_table;
 
@@ -321,7 +433,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	//Alex->WorldObj::setHeight(100);
 	//Alex->setX(10);
 	//Alex->setY(10);
-
+    gameplay_functions->get_path(staticRec); //Generate the waypoints to the destination
 	//osi::GameWindow::init();
 	LOG("PAST WINDOW INIT ***********************");
 	clock_t start_tick, current_ticks, delta_ticks;
@@ -334,9 +446,33 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 			_QuadTree->insert(recVec[i]);	//insert all obj into tree
 	
 		}
+
+
+		if (staticRec->destination != Vector2f(0, 0)) { //Hero has a destination
+			if (staticRec->waypoint != Vector2f(0,0)) { //Hero has a waypoint to the desination
+				gameplay_functions->move_toward(staticRec); //Take a step towards the current waypoint
+				std::cout << "Request a step" << std::endl;
+			}
+		}
+
+		else if (staticRec->getMode() != WAIT) //Hero has no destination, and not in wait mode.
+		{
+			//Generate the destination
+		}
+
+		
+		
+		//ai->plan_step(staticRec);
 		//clock 
-		float diffX = staticRec->getX() - staticRec->goal.getXloc();
+		/*float diffX = staticRec->getX() - staticRec->goal.getXloc();
 		float diffY = staticRec->getY() - staticRec->goal.getYloc();
+		float slope = abs(diffY / diffX);
+
+		float diagSpeed = sqrt(staticRec->getSpeed()*staticRec->getSpeed() / (slope + 1));
+
+		staticRec->setDiagXSpeed(diagSpeed);
+		staticRec->setDiagYSpeed((slope*diagSpeed));
+
 		if (abs(diffX) < 6) diffX = 0;
 		if (abs(diffY) < 6) diffY = 0;
 		bool left = false;
@@ -344,30 +480,35 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 		bool down = false;
 		bool right = false;
 
+		//gameplay_functions->move_toward(staticRec);
+
 		if (diffX < 0) right = true;
 		if (diffX > 0) left = true;
 		if (diffY < 0) down = true;
 		if (diffY > 0) up = true;
-
 		if (up) {
-			if (right) gameplay_functions->move_up_right(staticRec);
-			else if (left) gameplay_functions->move_up_left(staticRec);
-			else gameplay_functions->move_up(staticRec);
+			gameplay_functions->move_toward(staticRec);
+		//	if (right) gameplay_functions->move_up_right(staticRec);
+		//	else if (left) gameplay_functions->move_up_left(staticRec);
+			//else gameplay_functions->move_up(staticRec);
 		}
 		else if (down) {
-			if (right) gameplay_functions->move_down_right(staticRec);
-			else if (left) gameplay_functions->move_down_left(staticRec);
-			else gameplay_functions->move_down(staticRec);
+			gameplay_functions->move_toward(staticRec);
+			//if (right) gameplay_functions->move_down_right(staticRec);
+			//else if (left) gameplay_functions->move_down_left(staticRec);
+			//else gameplay_functions->move_down(staticRec);
 		}
 		else if (right) {
-			gameplay_functions->move_right(staticRec);
+			gameplay_functions->move_toward(staticRec);
+		//	gameplay_functions->move_right(staticRec);
 		}
 		else if (left) {
-			gameplay_functions->move_left(staticRec);
+			gameplay_functions->move_toward(staticRec);
+			//gameplay_functions->move_left(staticRec);
 		}
 		else {
 			gameplay_functions->stop(staticRec);
-		}
+		}*/
 		iController->InputCheck();
 
 		//Alex->WorldObj::drawObj(0,0);

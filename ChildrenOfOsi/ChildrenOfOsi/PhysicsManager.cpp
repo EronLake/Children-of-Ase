@@ -1,6 +1,6 @@
 #include "stdafx.h"
 #include "PhysicsManager.h"
-
+#include "CheckClass.h"
 
 
 PhysicsManager::PhysicsManager(MessageLog* _mLog, TaskBuffer* _tBuffer)
@@ -28,7 +28,6 @@ PhysicsManager::PhysicsManager(MessageLog * _mLog, TaskBuffer * _tBuffer, QuadTr
 	task_map["Move_Down_Right"] = &Movement::move_down_right;
 	task_map["Move_Left"] = &Movement::move_left;
 	task_map["Move_Right"] = &Movement::move_right;
-	task_map["Stop"] = &Movement::doNothing;
 	task_map["Talk"] = &Movement::talk;
 }
 
@@ -49,18 +48,23 @@ void PhysicsManager::register_manager()
 void PhysicsManager::execute_task(Task* current_task)
 {
 	int result;
-	if (current_task->objToUpdate == nullptr) {
+	NPC* obj;
+	if (!(obj = CheckClass::isNPC(current_task->objToUpdate))) {
 		result = 1;
-		LOG("Error: No player object");
+		LOG("Error: No movable object");
 	}
 	else {
+		moveHelper->moveSpeed = obj->getSpeed();
+		moveHelper->diagXSpeed = obj->getDiagXSpeed();
+		moveHelper->diagYSpeed = obj->getDiagYSpeed();
+
 		auto it = task_map.find(current_task->name);
 		if (it == task_map.end()) {
 			result = 1;
 			LOG("Error: Task '" << current_task->name << "' does not exist.");
 		}
 		else {
-			result = (moveHelper->*(it->second))(current_task->objToUpdate);
+			result = (moveHelper->*(it->second))(obj);
 		}
 	} 
 

@@ -26,6 +26,8 @@ public:
 	void move_down_right(WorldObj* player);
 	void move_out(WorldObj * player);
 	void stop(WorldObj* player);
+	void move_toward(WorldObj* player);
+	void get_path(WorldObj* obj);
 	void talk(WorldObj * player);
 	void setSwordGlow(WorldObj* player);
 	void setHeartGlow(WorldObj* player);

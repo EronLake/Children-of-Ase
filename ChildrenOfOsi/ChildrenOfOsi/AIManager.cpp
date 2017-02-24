@@ -3,20 +3,15 @@
 
 
 
-AIManager::AIManager(MessageLog* _mLog, TaskBuffer* _tBuffer)
+AIManager::AIManager(MessageLog* _mLog, TaskBuffer* _tBuffer, AIHelper* ai)
 	: Manager(_mLog, _tBuffer)
 {
 	LOG("AIManager Object Constructed");
+	aiHelper = ai;
+	aiHelper->manager = this;
+	task_map["Path"] = &AIHelper::astar_search;
+	task_map["Move"] = &AIHelper::plan_step;
 
-}
-
-AIManager::AIManager(MessageLog* _mLog, TaskBuffer* _tBuffer, WorldObj* obj)
-	: Manager(_mLog, _tBuffer)
-{
-	LOG("AIManager W/World Object Constructed");
-	aiHelper = new AIHelper(obj);
-
-	task_map["Shortest_Path"] = &AIHelper::Astar;
 }
 
 AIManager::~AIManager()
@@ -33,16 +28,22 @@ void AIManager::register_manager()
 void AIManager::execute_task(Task* current_task)
 {
 	int result;
-	
-	auto it = task_map.find(current_task->name);
-	if (it == task_map.end()) {
+	NPC* obj;
+	if (!(obj = CheckClass::isNPC(current_task->objToUpdate))) {
 		result = 1;
-		LOG("Error: Task '" << current_task->name << "' does not exist.");
+		LOG("Error: No movable object");
 	}
-	else {
-		result = (aiHelper->*(it->second))(current_task->objToUpdate);
+	else
+	{
+		auto it = task_map.find(current_task->name);
+		if (it == task_map.end()) {
+			result = 1;
+			LOG("Error: Task '" << current_task->name << "' does not exist.");
+		}
+		else {
+			result = (aiHelper->*(it->second))(obj);
+		}
 	}
-
 	if (result == 0) {
 		current_task->updateStatus("COMPLETED");
 	}

@@ -23,11 +23,15 @@ public:
 	int move_down_left(WorldObj* obj);
 	int move_left(WorldObj* obj);
 	int move_right(WorldObj* obj);
-	int doNothing(WorldObj* obj);
+//	int move_toward(WorldObj* obj);
 	int talk(WorldObj* obj);
 	//void init_task_map();
     QuadTree* tree;
 	PhysicsManager* manager;
+	float moveSpeed = 6.0f;
+	float diagSpeed = sqrt((moveSpeed * moveSpeed) / 2);
+	float diagXSpeed = diagSpeed;
+	float diagYSpeed = diagSpeed;
 
 
 private:
@@ -36,6 +40,5 @@ private:
 	bool coordOverlap(int value, int min, int max) { return (value >= min) && (value <= max); }
 	//hold obj to check with. init before each move funcs call
 	std::vector<WorldObj*> objVec;
-	float moveSpeed = 6.0f;
-	float diagSpeed = sqrt((moveSpeed * moveSpeed) / 2);
+	
 };
