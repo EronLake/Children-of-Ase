@@ -287,6 +287,11 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	Alex->setInteractable(true);
 	Alex->setName("Alex");
 	Alex->setTalkDist(20);
+	Alex->melee.setCollision(true);
+	Alex->melee.setDmg(10);
+	Alex->melee.setDestroy(false);
+	Alex->melee.setWidth(Alex->getWidth());
+	Alex->melee.setHeight(Alex->getHeight());
 	DialogueController::setPlayer(Alex);
 	//vector<WorldObj*> recVec;
 
@@ -384,6 +389,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 
 	staticRec->setName("Yemoja");
 	staticRec->setInteractable(true);
+	staticRec->setHealth(100);
 
 	WorldObj* tree = new WorldObj(Vector2f(4000, 2600), 800, 500);
 	tree->sprite.setTexture(treeTex);

@@ -15,6 +15,8 @@ Soldier::Soldier(float x, float y, bool col) :NPC(x, y, col)
 
 Soldier::Soldier(Vector2f p_topLeft, float p_width, float p_height):NPC(p_topLeft,p_width,p_height)
 {
+	melee.setX(p_topLeft.getXloc());
+	melee.setY(p_topLeft.getYloc());
 	melee.setWidth(p_width);
 	melee.setHeight(p_height);
 	melee.setDestroy(false);
@@ -54,4 +56,23 @@ Projectile* Soldier::newAttack(int i)
 	p->setHeight(h);
 	p->setDirection(d);
 	return p;
+}
+
+void Soldier::meleeAttack() {
+	float x=getX();
+	float y=getY();
+	std::string d = getDirection();
+	if (d.compare("UP")) {
+		y= y-(melee.getHeight()+1);
+	} else if (d.compare("DOWN")) {
+		y = y+(getHeight() + 1);
+	}
+	else if (d.compare("LEFT")) {
+		x = x-(melee.getWidth() + 1);
+	}
+	else if (d.compare("RIGHT")) {
+		x = x+(getWidth() + 1);
+	}
+	melee.setX(x);
+	melee.setY(y);
 }

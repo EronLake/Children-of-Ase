@@ -25,6 +25,7 @@ public:
 	int move_right(WorldObj* obj);
 //	int move_toward(WorldObj* obj);
 	int talk(WorldObj* obj);
+	int melee(WorldObj* obj);
 	//void init_task_map();
     QuadTree* tree;
 	PhysicsManager* manager;

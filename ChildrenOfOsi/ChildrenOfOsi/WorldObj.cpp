@@ -6,7 +6,11 @@
 
 WorldObj::WorldObj()
 {
-	body.push_back({});
+	loc.setXloc(0);
+	loc.setYloc(0);
+	collision = false;
+	Rectangle init(loc, 1, 1);
+	body.push_back(init);
 }
 
 WorldObj::WorldObj(float x, float y, bool col)
@@ -48,10 +52,10 @@ float WorldObj::getY()
 
 void WorldObj::setY(float y)
 {
-	loc.setYloc(y);
 	for (int i = 0; i < body.size(); i++) {
 		body[i].setY(y + (loc.getYloc() - body[i].getY()));
 	}
+	loc.setYloc(y);
 }
 
 void WorldObj::shiftX(float dist)

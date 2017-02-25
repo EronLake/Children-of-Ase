@@ -2,7 +2,6 @@
 #include "NPC.h"
 #include "stdafx.h"
 #include "Projectile.h"
-#include "Attack.h"
 class Soldier :
 	public NPC
 {
@@ -14,8 +13,9 @@ public:
 	void setInCombat(bool c) { inCombat = c; };
 	bool getInCombat() { return inCombat; };
 	Projectile melee;
-	vector<Attack*> atkTypes;
+	vector<Projectile*> atkTypes;
 	Projectile* newAttack(int i);
+	void meleeAttack();
 private:
 	bool inCombat;
 };

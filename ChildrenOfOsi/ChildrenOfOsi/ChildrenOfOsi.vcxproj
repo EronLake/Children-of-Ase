@@ -163,7 +163,6 @@
   <ItemGroup>
     <ClInclude Include="AIHelper.h" />
     <ClInclude Include="AIManager.h" />
-    <ClInclude Include="Attack.h" />
     <ClInclude Include="AudioManager.h" />
     <ClInclude Include="AudioTestSuite.h" />
     <ClInclude Include="CheckClass.h" />
@@ -221,7 +220,6 @@
   <ItemGroup>
     <ClCompile Include="AIHelper.cpp" />
     <ClCompile Include="AIManager.cpp" />
-    <ClCompile Include="Attack.cpp" />
     <ClCompile Include="AudioManager.cpp" />
     <ClCompile Include="AudioTestSuite.cpp" />
     <ClCompile Include="CheckClass.cpp" />

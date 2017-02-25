@@ -46,6 +46,7 @@ void Input::InputCheck()
 	short L = GetKeyState('L') >> 15;
 	short ENTER = GetKeyState('\n') >> 15;
 	short V = GetKeyState('V') >> 15;
+	short F = GetKeyState('F') >> 15;
 
 	if (DialogueController::getState() == 0) {
 
@@ -53,12 +54,15 @@ void Input::InputCheck()
 		{
 			gameplay_functions->play_sound("Unpause");
 			if (A) {          //Moving up and left
+				player->setDirection("LEFT");
 				gameplay_functions->move_up_left(player);   
 			}
 			else if (D) {     //Moving up and right
+				player->setDirection("RIGHT");
 				gameplay_functions->move_up_right(player);
 			}
 			else {
+				player->setDirection("UP");
 				gameplay_functions->move_up(player);
 			}
 		}
@@ -66,22 +70,27 @@ void Input::InputCheck()
 		{ 
 			gameplay_functions->play_sound("Unpause");
 			if (A) {         //Moving down and left
+				player->setDirection("LEFT");
 				gameplay_functions->move_down_left(player);
 			}
 			else if (D) {    //Moving down and right
+				player->setDirection("RIGHT");
 				gameplay_functions->move_down_right(player);
 
 			}
 			else {
+				player->setDirection("DOWN");
 			    gameplay_functions->move_down(player);
 			} 
 		}
 		else if (A) {      //Only moving left
+			player->setDirection("LEFT");
 			gameplay_functions->play_sound("Unpause");
 			gameplay_functions->move_left(player);
 		}
 		else if (D)        //Only moving right
 		{
+			player->setDirection("RIGHT");
 			gameplay_functions->play_sound("Unpause");
 			gameplay_functions->move_right(player);
 		}
@@ -98,6 +107,10 @@ void Input::InputCheck()
 		if (E) {
 			std::cout << "Pressed E" << std::endl;
 			gameplay_functions->talk(player);
+		}
+		if (F) {
+			std::cout << "Pressed F" << std::endl;
+			gameplay_functions->melee(player);
 		}
 
 	}

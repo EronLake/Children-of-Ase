@@ -302,6 +302,32 @@ int Movement::talk(WorldObj* obj) {
 	return 0;
 }
 
+int Movement::melee(WorldObj* obj) {
+	objVec.clear();
+	objVec = tree->retrieve(objVec, obj);
+	Soldier* d = CheckClass::isSoldier(obj);
+	if (d) {
+		d->meleeAttack();
+		for (int i = 0; i < objVec.size(); i++) {
+			if (obj == objVec[i]) {
+				break;
+			}
+			LivingObj* liv = CheckClass::isLiving(objVec[i]);
+			if (liv) {
+				if (collision(&(d->melee), liv)) {
+					for (int i = 0; i < 100; i++) {
+						std::cout << "Player Meleed an object" << std::endl;
+						std::cout << liv->getHealth() << std::endl;
+					}
+					d->melee.Hit(liv);
+					return 1;
+				}
+			}
+		}
+	}
+	return 0;
+}
+
 /*int Movement::doNothing(WorldObj* obj) {
 	return 0;
 }*/

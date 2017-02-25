@@ -149,7 +149,6 @@
     <ClCompile Include="ObjConfig.cpp">
       <Filter>Game Objects</Filter>
     </ClCompile>
-    <ClCompile Include="Attack.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AIHelper.h">
@@ -315,7 +314,6 @@
       <Filter>Game Objects</Filter>
     </ClInclude>
     <ClInclude Include="resource2.h" />
-    <ClInclude Include="Attack.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="audio_test.txt">
