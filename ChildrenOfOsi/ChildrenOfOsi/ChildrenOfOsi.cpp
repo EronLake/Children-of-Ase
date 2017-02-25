@@ -68,10 +68,26 @@ void ChildrenOfOsi::stop(WorldObj* player) {
 	createTask("Stop", "MOVE", player);
 }
 
+////////////////////////////////////////////////////
+////////////////////////////////////////////////////
+
+void ChildrenOfOsi::move_toward(WorldObj* obj) {
+	createTask("Move", "AI", obj);
+}
+void ChildrenOfOsi::get_path(WorldObj* obj) {
+	createTask("Path", "AI", obj);
+}
+
+////////////////////////////////////////////////////
+////////////////////////////////////////////////////
+
 void ChildrenOfOsi::talk(WorldObj * player)
 {
 	createTask("Talk", "INTERACT", player);
 }
+
+////////////////////////////////////////////////////
+////////////////////////////////////////////////////
 
 void ChildrenOfOsi::setSwordGlow(WorldObj* player)
 {
@@ -106,7 +122,9 @@ void ChildrenOfOsi::drawDiaGui(WorldObj* player)
 	createTask("Talk", "DRAW", player);
 }
 
-///*
+///////////////////////////////////////////////////
+///////////////////////////////////////////////////
+
 void ChildrenOfOsi::add_hero(std::string key, float x, float y, bool col) {
 	createTaskWithParams("Add_Hero", "MODIFY_POOL", key, x, y, col);
 }
@@ -140,16 +158,17 @@ void ChildrenOfOsi::add_texture(std::string key, float x=0, float y=0, bool col=
 }
 
 
-//*/
+//////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////
 
 void ChildrenOfOsi::play_sound(string name) {
 	createTask(name, "SOUND");
 }
 
 //----------------------------------------------------
-
-
 //----------------------------------------------------
+
+
 void ChildrenOfOsi::createTask(std::string task_name, std::string type, WorldObj * objToUpdate)
 {
 	//maybe just pass in the string craeated

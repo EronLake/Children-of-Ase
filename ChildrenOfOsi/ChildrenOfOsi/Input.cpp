@@ -5,19 +5,22 @@
 #include "Soldier.h"
 #include "json.h"
 
-Input::Input(ChildrenOfOsi* _gameplay_functions)
+
+Input::Input(ChildrenOfOsi* _gameplay_functions, RenderHelper* _rHelper)
 {
 	disable = false;
 	count = 0;
 	gameplay_functions = _gameplay_functions;
+	rHelper = _rHelper;
 	LOG("Input Objected Constructed");
 }
 
-Input::Input(ChildrenOfOsi* _gameplay_functions, WorldObj * _player)
+Input::Input(ChildrenOfOsi* _gameplay_functions, WorldObj * _player, RenderHelper* _rHelper)
 {
 	disable = false;
 	count = 0;
 	gameplay_functions = _gameplay_functions;
+	rHelper = _rHelper;
 	gameplay_functions->play_sound("Play");
 	gameplay_functions->play_sound("Walk");
 	gameplay_functions->play_sound("Pause");
@@ -47,6 +50,7 @@ void Input::InputCheck()
 	short L = GetKeyState('L') >> 15;
 	short ENTER = GetKeyState('\n') >> 15;
 	short V = GetKeyState('V') >> 15;
+
 
 	if (DialogueController::getState() == 0) {
 
@@ -155,6 +159,26 @@ void Input::InputCheck()
 
 			system("PAUSE");
 			
+			
+		}
+
+		if ((GetKeyState(VK_LBUTTON) & 0x100) != 0)
+		{
+			/*POINT p;
+			if (ScreenToClient(window, &p))
+			{
+				cout << "////////////////////////" << endl;
+				cout << p.x << p.y << endl;
+				cout << "////////////////////////" << endl;
+			}*/
+			double xpos;
+			double ypos;
+			glfwGetCursorPos(osi::GameWindow::window, &xpos, &ypos);
+			cout << "////////////////////////" << endl;
+			//cout << xpos << ":" << ypos << endl;
+			cout << "X: "<< rHelper->camera->getX() + xpos << endl;
+			cout << "Y: "<< rHelper->camera->getY() + ypos << endl;
+			cout << "////////////////////////" << endl;
 			
 		}
 

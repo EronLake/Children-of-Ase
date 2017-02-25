@@ -1,6 +1,6 @@
 #version 330 core
 
-in vec2 iTexCoords;
+uniform vec2 iTexCoords;
 
 out vec4 oColor;
 
