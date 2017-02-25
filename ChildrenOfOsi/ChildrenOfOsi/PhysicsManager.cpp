@@ -29,6 +29,7 @@ PhysicsManager::PhysicsManager(MessageLog * _mLog, TaskBuffer * _tBuffer, QuadTr
 	task_map["Move_Left"] = &Movement::move_left;
 	task_map["Move_Right"] = &Movement::move_right;
 	task_map["Talk"] = &Movement::talk;
+	task_map["Melee"] = &Movement::melee;
 }
 
 

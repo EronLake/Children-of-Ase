@@ -86,6 +86,10 @@ void ChildrenOfOsi::talk(WorldObj * player)
 	createTask("Talk", "INTERACT", player);
 }
 
+void ChildrenOfOsi::melee(WorldObj * player)
+{
+	createTask("Melee", "INTERACT", player);
+}
 ////////////////////////////////////////////////////
 ////////////////////////////////////////////////////
 
