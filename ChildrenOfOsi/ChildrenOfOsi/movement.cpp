@@ -21,6 +21,7 @@ Movement::~Movement() {
 
 int Movement::move_up(WorldObj* obj) {
 	//get list to check collision with
+	obj->setDirection("UP");
 	objVec.clear();
 	objVec = tree->retrieve(objVec, obj);
 
@@ -45,6 +46,7 @@ int Movement::move_up(WorldObj* obj) {
 	return 0;
 }
 int Movement::move_up_left(WorldObj* obj) {
+	obj->setDirection("LEFT");
 	//get list to check collision with
 	objVec.clear();
 	objVec = tree->retrieve(objVec, obj);
@@ -84,6 +86,7 @@ int Movement::move_up_left(WorldObj* obj) {
 	return 0;
 }
 int Movement::move_up_right(WorldObj* obj) {
+	obj->setDirection("RIGHT");
 	//get list to check collision with
 	objVec.clear();
 	objVec = tree->retrieve(objVec, obj);
@@ -123,6 +126,7 @@ int Movement::move_up_right(WorldObj* obj) {
 	return 0;
 }
 int Movement::move_down(WorldObj* obj) {
+	obj->setDirection("DOWN");
 	//get list to check collision with
 	objVec.clear();
 	objVec = tree->retrieve(objVec, obj);
@@ -149,6 +153,7 @@ int Movement::move_down(WorldObj* obj) {
 	return 0;
 }
 int Movement::move_down_left(WorldObj* obj) {
+	obj->setDirection("LEFT");
 	//get list to check collision with
 	objVec.clear();
 	objVec = tree->retrieve(objVec, obj);
@@ -189,6 +194,7 @@ int Movement::move_down_left(WorldObj* obj) {
 	return 0;
 }
 int Movement::move_down_right(WorldObj* obj) {
+	obj->setDirection("RIGHT");
 	//get list to check collision with
 	objVec.clear();
 	objVec = tree->retrieve(objVec, obj);
@@ -228,6 +234,7 @@ int Movement::move_down_right(WorldObj* obj) {
 	return 0;
 }
 int Movement::move_left(WorldObj* obj) {
+	obj->setDirection("LEFT");
 	//get list to check collision with
 	objVec.clear();
 	objVec = tree->retrieve(objVec, obj);
@@ -253,6 +260,7 @@ int Movement::move_left(WorldObj* obj) {
 	return 0;
 }
 int Movement::move_right(WorldObj* obj) {
+	obj->setDirection("RIGHT");
 	//get list to check collision with
 	objVec.clear();
 	objVec = tree->retrieve(objVec, obj);
@@ -309,19 +317,16 @@ int Movement::melee(WorldObj* obj) {
 	if (d) {
 		d->meleeAttack();
 		for (int i = 0; i < objVec.size(); i++) {
-			if (obj == objVec[i]) {
-				break;
-			}
+			if (obj != objVec[i]) {
 			LivingObj* liv = CheckClass::isLiving(objVec[i]);
 			if (liv) {
 				if (collision(&(d->melee), liv)) {
-					for (int i = 0; i < 100; i++) {
-						std::cout << "Player Meleed an object" << std::endl;
-						std::cout << liv->getHealth() << std::endl;
-					}
+					std::cout << "Player hit " << liv->getName() << std::endl;
 					d->melee.Hit(liv);
+					std::cout << liv->getName() << "'s health is now " << liv->getHealth() << std::endl;
 					return 1;
 				}
+			}
 			}
 		}
 	}

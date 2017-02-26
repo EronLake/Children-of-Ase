@@ -21,7 +21,7 @@ public:
 	void meleeAttack();
 	void setCD(int c) { cdTotal = c; };
 	int getCD() { return cdTotal; };
-	void updateCD() { if (cdFrame >= cdTotal) { cdFrame++; } else cool = true; };
+	void updateCD() { if (cdFrame < cdTotal) { cdFrame++; } else cool = true; };
 	int framesCD() { return cdFrame; };
 	void setCool(bool c) { cool = c; };
 	bool getCool() { return cool; };

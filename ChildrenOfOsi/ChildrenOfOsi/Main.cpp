@@ -203,6 +203,8 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	memManager* memM = new memManager(mLog, tBuffer);
 	TestManager* TestM = new TestManager(mLog, tBuffer);
 	AudioManager* AudM = new AudioManager(mLog, tBuffer);
+	AIHelper* ai = new AIHelper();
+	AIManager* AIM = new AIManager(mLog, tBuffer, ai);
 
 	//the order defines what order the managers the tasks will be sent to
 	DumM->register_manager();
@@ -211,6 +213,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	RenM->register_manager();
 	AudM->register_manager();
 	TestM->register_manager();
+	AIM->register_manager();
 
 
 	//DialogueGui* convoGui = new DialogueGui();
@@ -237,6 +240,9 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	Texture* downIdleTex = new Texture();
 	Texture* leftIdleTex = new Texture();
 	Texture* rightIdleTex = new Texture();
+
+	Texture* yemojaTexture = new Texture();
+	Texture* yemojaIdleTex = new Texture();
 
 	Texture* h_upRunTex = new Texture();
 	Texture* h_downRunTex = new Texture();
@@ -272,6 +278,8 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	leftIdleTex->setFile("Assets/Sprites/ShangoLeftIdle.png",1);
 	rightIdleTex->setFile("Assets/Sprites/ShangoRightIdle.png",1);
 
+	yemojaTexture->setFile("Assets/Sprites/YemojaFrontIdle.png", 1);
+	yemojaIdleTex->setFile("Assets/Sprites/YemojaFrontIdle.png", 1);
 
 	h_upRunTex->setFile("Assets/Sprites/YemojaBackSprite.png", 26);
 	h_downRunTex->setFile("Assets/Sprites/YemojaForwardSprite.png", 26);
@@ -372,21 +380,21 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	}
 	
 
-	Hero* staticRec = new Hero(YEMOJA, Vector2f(1000, 800), 100.0, 100.0);
+	Hero* staticRec = new Hero(YEMOJA, Vector2f(4600, 3600), 100.0, 100.0);
 
-	staticRec->sprite.setTexture(playerTexture);
-	staticRec->sprite.setIdleTexture(playerIdleTex);
-	staticRec->sprite.up = upRunTex;
-	staticRec->sprite.down = downRunTex;
-	staticRec->sprite.left = leftRunTex;
-	staticRec->sprite.right = rightRunTex;
-	staticRec->sprite.id_up = upIdleTex;
-	staticRec->sprite.id_left = leftIdleTex;
-	staticRec->sprite.id_right = rightIdleTex;
-	staticRec->sprite.id_down = downIdleTex;
+	staticRec->sprite.setTexture(yemojaTexture);
+	staticRec->sprite.setIdleTexture(yemojaIdleTex);
+	staticRec->sprite.up = h_upRunTex;
+	staticRec->sprite.down = h_downRunTex;
+	staticRec->sprite.left = h_leftRunTex;
+	staticRec->sprite.right = h_rightRunTex;
+	staticRec->sprite.id_up = h_upIdleTex;
+	staticRec->sprite.id_left = h_leftIdleTex;
+	staticRec->sprite.id_right = h_rightIdleTex;
+	staticRec->sprite.id_down = h_downIdleTex;
 
 
-	AIHelper* ai = new AIHelper();
+
 	//VisibilityGraph graph;
 	ai->graph.vertices = vertices;
 	ai->graph.obstacles = edges;
@@ -398,7 +406,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	}
 
 	bool visible = true;
-	for (Vector2f first : ai->graph.vertices) {
+	/*for (Vector2f first : ai->graph.vertices) {
 		//ai->graph.insert(first);
 		for (Vector2f second : ai->graph.vertices) {
 			if (first == second) continue;
@@ -414,7 +422,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 				ai->graph.edges[second].push_back(first);
 			}
 		}
-	}
+	}*/
 
 	staticRec->setName("Yemoja");
 	staticRec->setInteractable(true);

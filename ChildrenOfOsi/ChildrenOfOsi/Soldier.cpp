@@ -44,16 +44,16 @@ Attack* Soldier::newAttack(int i)
 		float y = getY();
 		std::string d = getDirection();
 		if (d.compare("UP")) {
-			y -= available[i]->getHeight() + 1;
+			y = y - (available[i]->getHeight() + 1);
 		}
-		else if (d.compare("DOWN")) {
-			y += getHeight() + 1;
+		else if (d.compare("DOWN") == 0) {
+			y = y + (getHeight() + 1);
 		}
-		else if (d.compare("LEFT")) {
-			x -= available[i]->getWidth() + 1;
+		else if (d.compare("LEFT") == 0) {
+			x = x - (available[i]->getWidth() + 1);
 		}
-		else if (d.compare("RIGHT")) {
-			x += getWidth() + 1;
+		else if (d.compare("RIGHT") == 0) {
+			x = x + (getWidth() + 1);
 		}
 		Attack* p = new Attack(x, y, true);
 		p->setDmg(available[i]->getDmg());
@@ -76,13 +76,13 @@ void Soldier::meleeAttack() {
 	std::string d = getDirection();
 	if (d.compare("UP")) {
 		y= y-(melee.getHeight()+1);
-	} else if (d.compare("DOWN")) {
+	} else if (d.compare("DOWN")==0) {
 		y = y+(getHeight() + 1);
 	}
-	else if (d.compare("LEFT")) {
+	else if (d.compare("LEFT")==0) {
 		x = x-(melee.getWidth() + 1);
 	}
-	else if (d.compare("RIGHT")) {
+	else if (d.compare("RIGHT")==0) {
 		x = x+(getWidth() + 1);
 	}
 	melee.setX(x);
