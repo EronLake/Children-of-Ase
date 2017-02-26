@@ -149,8 +149,8 @@ void ChildrenOfOsi::add_worldObj(std::string key, float x, float y, bool col) {
 	createTaskWithParams("Add_WorldObj", "MODIFY_POOL", key, x, y, col);
 }
 
-void ChildrenOfOsi::add_projectile(std::string key, float x, float y, bool col, int d) {
-	createTaskWithParams("Add_Projectile", "MODIFY_POOL", key, x, y, col); //, d); Dmg might have to be defined separately
+void ChildrenOfOsi::add_Attack(std::string key, float x, float y, bool col, int d) {
+	createTaskWithParams("Add_Attack", "MODIFY_POOL", key, x, y, col); //, d); Dmg might have to be defined separately
 }
 
 void ChildrenOfOsi::add_npc(std::string key, float x,float y, bool col) {
@@ -194,7 +194,7 @@ void ChildrenOfOsi::createTaskWithParams(std::string task_name, std::string type
 	mLog->logMessage(new_task);
 }
 
-/*void ChildrenOfOsi::createTaskForProjectile(std::string task_name, std::string type, float x, float y, bool col, int d) {
+/*void ChildrenOfOsi::createTaskForAttack(std::string task_name, std::string type, float x, float y, bool col, int d) {
 	std::string task_status = "CREATED";
 	Task* new_task = new Task(task_name, task_status, type, x, y, col, d);
 	tBuffer->push(new_task);

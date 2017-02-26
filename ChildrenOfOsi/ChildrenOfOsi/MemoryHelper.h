@@ -11,7 +11,7 @@ public:
 
 	int store_hero(std::string key, float x, float y, bool col);
 	int store_soldier(std::string key, float x, float y, bool col);
-	int store_projectile(std::string key, float x, float y, bool col);
+	int store_Attack(std::string key, float x, float y, bool col);
 	int store_spl_soldier(std::string key, float x, float y, bool col);
 	int store_livingObj(std::string key, float x, float y, bool col);
 	int store_worldObj(std::string key, float x, float y, bool col);

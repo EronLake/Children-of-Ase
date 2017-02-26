@@ -629,6 +629,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 		////Alex->WorldObj::shiftX(.5);
 		//osi::GameWindow::refresh();
 		//draw
+		Alex->updateCD();
 		if (state == 0) {
 			//LOG("ERROR AFTER PRESSING Q TO QUIT THE DIALOGUE GUI");
 			gameplay_functions->draw_frame(Alex);
@@ -730,7 +731,7 @@ void ALESSIO_TEST() {
 void ALEX_LOOP(QuadTree* _QuadTree) {
 	//LOG("Hello world!");
 
-	WorldObj* Alex = new WorldObj(Vector2f(1000.0, 600.0), 100.0, 100.0);	//init player
+	Player* Alex = new Player(SHANGO,Vector2f(1000.0, 600.0), 100.0, 100.0);	//init player
 	Texture* playerTexture = new Texture();
 	Texture* objTexture = new Texture();
 	Texture* uptex = new Texture();
@@ -1010,7 +1011,7 @@ void ANDREWS_TEST() {
 void ANDREWS_LOOP(QuadTree* _QuadTree) {
 	//LOG("Hello world!");
 
-	WorldObj* Alex = new WorldObj(Vector2f(500.0, 100.0), 100.0, 100.0);	//init player
+	Player* Alex = new Player(SHANGO,Vector2f(500.0, 100.0), 100.0, 100.0);	//init player
 	Texture* playerTexture = new Texture();
 	playerTexture->setFile("phi.png",1);
 	Alex->sprite.setTexture(playerTexture);

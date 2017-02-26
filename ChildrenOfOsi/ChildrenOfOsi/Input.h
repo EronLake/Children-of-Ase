@@ -21,6 +21,7 @@ private:
 	short D;
 	short Q;
 	short E;
+	short F;
 	bool disable;
 	int count;
 

@@ -11,6 +11,9 @@ Soldier::Soldier(float x, float y, bool col) :NPC(x, y, col)
 {
 	melee.setDestroy(false);
 	melee.setSpeed(0);
+	cdTotal = 60;
+	cdFrame = 0;
+	cool = false;
 }
 
 Soldier::Soldier(Vector2f p_topLeft, float p_width, float p_height):NPC(p_topLeft,p_width,p_height)
@@ -21,41 +24,50 @@ Soldier::Soldier(Vector2f p_topLeft, float p_width, float p_height):NPC(p_topLef
 	melee.setHeight(p_height);
 	melee.setDestroy(false);
 	melee.setSpeed(0);
+	cdTotal = 60;
+	cdFrame = 0;
+	cool = false;
 }
 
 Soldier::~Soldier()
 {
 }
 
-Projectile* Soldier::newAttack(int i)
+Attack* Soldier::newAttack(int i)
 {
-	float w = atkTypes[i]->getWidth();
-	if (w == 0)w = getWidth();
-	float h = atkTypes[i]->getHeight();
-	if (w == 0)w = getHeight();
-	float x=getX();
-	float y=getY();
-	std::string d = getDirection();
-	if (d.compare("UP")) {
-		y-= atkTypes[i]->getHeight()+1;
-	} else if (d.compare("DOWN")) {
-		y += getHeight() + 1;
+	if (available[i] != NULL) {
+		float w = available[i]->getWidth();
+		if (w == 0)w = getWidth();
+		float h = available[i]->getHeight();
+		if (w == 0)w = getHeight();
+		float x = getX();
+		float y = getY();
+		std::string d = getDirection();
+		if (d.compare("UP")) {
+			y -= available[i]->getHeight() + 1;
+		}
+		else if (d.compare("DOWN")) {
+			y += getHeight() + 1;
+		}
+		else if (d.compare("LEFT")) {
+			x -= available[i]->getWidth() + 1;
+		}
+		else if (d.compare("RIGHT")) {
+			x += getWidth() + 1;
+		}
+		Attack* p = new Attack(x, y, true);
+		p->setDmg(available[i]->getDmg());
+		p->setDuration(available[i]->getDuration());
+		p->setDestroy(available[i]->getDestroy());
+		p->setSpeed(available[i]->getSpeed());
+		p->setWidth(w);
+		p->setHeight(h);
+		p->setDirection(d);
+		cdMap[available[i]] = 0;
+		cool = false;
+		cdFrame = 0;
+		return p;
 	}
-	else if (d.compare("LEFT")) {
-		x -= atkTypes[i]->getWidth() + 1;
-	}
-	else if (d.compare("RIGHT")) {
-		x += getWidth() + 1;
-	}
-	Projectile* p = new Projectile(x, y, true);
-	p->setDmg(atkTypes[i]->getDmg());
-	p->setDuration(atkTypes[i]->getDuration());
-	p->setDestroy(atkTypes[i]->getDestroy());
-	p->setSpeed(atkTypes[i]->getSpeed());
-	p->setWidth(w);
-	p->setHeight(h);
-	p->setDirection(d);
-	return p;
 }
 
 void Soldier::meleeAttack() {
@@ -75,4 +87,6 @@ void Soldier::meleeAttack() {
 	}
 	melee.setX(x);
 	melee.setY(y);
+	cool = false;
+	cdFrame = 0;
 }

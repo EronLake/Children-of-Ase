@@ -70,9 +70,9 @@ int MemoryHelper::store_worldObj(std::string key, float x, float y, bool col) {
 	return 0;
 }
 
-int MemoryHelper::store_projectile(std::string key, float x, float y, bool col) {
-	Projectile* p = new(find_available_block(memManager::projectile_head)) Projectile(x, y, col);
-	Containers::add_projectile(key, p);
+int MemoryHelper::store_Attack(std::string key, float x, float y, bool col) {
+	Attack* p = new(find_available_block(memManager::Attack_head)) Attack(x, y, col);
+	Containers::add_Attack(key, p);
 	return 0;
 }
 

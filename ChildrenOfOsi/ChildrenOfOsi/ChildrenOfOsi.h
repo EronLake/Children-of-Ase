@@ -42,7 +42,7 @@ public:
 	//functions for creating objects in memory
 	void add_hero(std::string key, float x, float y, bool col);
     void add_soldier(std::string key, float x, float y, bool col);
-	void add_projectile(std::string key, float x, float y, bool col, int d);
+	void add_Attack(std::string key, float x, float y, bool col, int d);
 	void add_spl_soldier(std::string key, float x, float y, bool col);
 	void add_livingObj(std::string key, float x, float y, bool col);
 	void add_worldObj(std::string key, float x, float y, bool col);
@@ -54,7 +54,7 @@ public:
 
 	void createTask(std::string task_name, std::string type, WorldObj * objToUpdate = NULL);
 	void ChildrenOfOsi::createTaskWithParams(std::string task_name, std::string type, std::string key, float x, float y, bool col);
-	//void ChildrenOfOsi::createTaskForProjectile(std::string task_name, std::string type, float x, float y, bool col, int d);
+	//void ChildrenOfOsi::createTaskForAttack(std::string task_name, std::string type, float x, float y, bool col, int d);
 
 };
 

@@ -19,8 +19,8 @@ memManager::memManager(MessageLog* _mLog, TaskBuffer* _tBuffer)
 	livingObj_pool = memHelper->create_pool(sizeof(LivingObj) * 32);
 	livingObj_head = memHelper->init_pool(livingObj_pool, sizeof(LivingObj));
 
-	projectile_pool = memHelper->create_pool(sizeof(Projectile) * 32);
-	projectile_head = memHelper->init_pool(projectile_pool, sizeof(Projectile));
+	Attack_pool = memHelper->create_pool(sizeof(Attack) * 32);
+	Attack_head = memHelper->init_pool(Attack_pool, sizeof(Attack));
 
 	soldier_pool = memHelper->create_pool(sizeof(Soldier) * 32);
 	soldier_head = memHelper->init_pool(soldier_pool, sizeof(Soldier));
@@ -41,7 +41,7 @@ memManager::memManager(MessageLog* _mLog, TaskBuffer* _tBuffer)
 	task_map["Add_Hero"] = &MemoryHelper::store_hero;
 	task_map["Add_LivingObj"] = &MemoryHelper::store_livingObj;
 	task_map["Add_NPC"] = &MemoryHelper::store_npc;
-	task_map["Add_Projectile"] = &MemoryHelper::store_projectile;
+	task_map["Add_Attack"] = &MemoryHelper::store_Attack;
 	task_map["Add_Soldier"] = &MemoryHelper::store_soldier;
 	task_map["Add_Spl_Soldier"] = &MemoryHelper::store_spl_soldier;
 	task_map["Add_WorldObj"] = &MemoryHelper::store_worldObj;
@@ -60,8 +60,8 @@ memManager::~memManager()
 	memHelper->destroy_pool(livingObj_pool);
 	memHelper->destroy_MemNode_list(livingObj_head);
 
-	memHelper->destroy_pool(projectile_pool);
-	memHelper->destroy_MemNode_list(projectile_head);
+	memHelper->destroy_pool(Attack_pool);
+	memHelper->destroy_MemNode_list(Attack_head);
 
 	memHelper->destroy_pool(soldier_pool);
 	memHelper->destroy_MemNode_list(soldier_head);
@@ -139,8 +139,8 @@ void memManager::execute_task(Task* current_task)
 		}
 		this->send_result(current_task);
 	}
-	else if (current_task->name == "Add_Projectile") {
-		//add_projectile();
+	else if (current_task->name == "Add_Attack") {
+		//add_Attack();
 		result = 0;
 
 		if (result == 0) {
@@ -216,8 +216,8 @@ MemNode* memManager::hero_head = nullptr;
 MemoryPool* memManager::livingObj_pool = nullptr;
 MemNode* memManager::livingObj_head = nullptr;
 
-MemoryPool* memManager::projectile_pool = nullptr;
-MemNode* memManager::projectile_head = nullptr;
+MemoryPool* memManager::Attack_pool = nullptr;
+MemNode* memManager::Attack_head = nullptr;
 
 MemoryPool* memManager::soldier_pool = nullptr;
 MemNode* memManager::soldier_head = nullptr;

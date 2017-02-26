@@ -3,6 +3,7 @@
 #include <conio.h>
 #include <Windows.h>
 #include "Soldier.h"
+#include "CheckClass.h"
 #include "json.h"
 
 
@@ -115,7 +116,12 @@ void Input::InputCheck()
 		}
 		if (F) {
 			std::cout << "Pressed F" << std::endl;
-			gameplay_functions->melee(player);
+			Player* t = CheckClass::isPlayer(player);
+			if (t) {
+				if (t->getCool()) {
+					gameplay_functions->melee(player);
+				}
+			}
 		}
 
 		if (L) {

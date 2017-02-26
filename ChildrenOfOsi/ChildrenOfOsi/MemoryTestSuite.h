@@ -18,7 +18,7 @@ public:
 	bool Containers_destructor_test();
 	bool add_hero_test();
 	bool add_livingObj_test();
-	bool add_projectile_test();
+	bool add_Attack_test();
 	bool add_soldier_test();
 	bool add_spl_soldier_test();
 	bool add_worldObj_test();
@@ -44,7 +44,7 @@ public:
 	//memory pool tests
 	bool store_hero_test();
 	bool store_soldier_test();
-	bool store_projectile_test();
+	bool store_Attack_test();
 	bool store_spl_soldier_test();
 	bool store_livingObj_test();
 	bool store_worldObj_test();

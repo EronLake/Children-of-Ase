@@ -28,8 +28,8 @@ public:
 	static MemoryPool* livingObj_pool;
 	static MemNode* livingObj_head;
 
-	static MemoryPool* projectile_pool;
-	static MemNode* projectile_head;
+	static MemoryPool* Attack_pool;
+	static MemNode* Attack_head;
 
 	static MemoryPool* soldier_pool;
 	static MemNode* soldier_head;
