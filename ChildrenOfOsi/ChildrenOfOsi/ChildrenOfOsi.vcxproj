@@ -181,6 +181,7 @@
     <ClInclude Include="json.h" />
     <ClInclude Include="ObjConfig.h" />
     <ClInclude Include="PhysicsTestSuite.h" />
+    <ClInclude Include="Relationship.h" />
     <ClInclude Include="resource2.h" />
     <ClInclude Include="TaskBufferTestSuite.h" />
     <ClInclude Include="Hero.h" />
@@ -257,6 +258,7 @@
     <ClCompile Include="RenderManager.cpp" />
     <ClCompile Include="Soldier.cpp" />
     <ClCompile Include="SoundSystem.cpp" />
+    <ClCompile Include="Relationship.cpp" />
     <ClCompile Include="TaskBufferTestSuite.cpp" />
     <ClCompile Include="SplSoldier.cpp" />
     <ClCompile Include="Sprite.cpp" />
