@@ -149,6 +149,9 @@
     <ClCompile Include="Attack.cpp">
       <Filter>Game Objects</Filter>
     </ClCompile>
+    <ClCompile Include="Relationship.cpp" />
+    <ClCompile Include="Action.cpp" />
+    <ClCompile Include="ActionPool.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AIHelper.h">
@@ -314,6 +317,9 @@
     <ClInclude Include="Attack.h">
       <Filter>Game Objects</Filter>
     </ClInclude>
+    <ClInclude Include="Relationship.h" />
+    <ClInclude Include="Action.h" />
+    <ClInclude Include="ActionPool.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="audio_test.txt">

@@ -3,7 +3,6 @@
 
 class Relationship {
 private:
-	std::unordered_map<std::string, int> relationship_map;
 	int affinity;
 	int notoriety;
 	int strength;
@@ -11,9 +10,13 @@ private:
 public:
 	Relationship();
 	~Relationship();
-	void set_val(std::string key, int value);
-	void update_val(std::string key, int value);
-	int get_value(std::string key);
-
-
+	void setAffinity(int a) { affinity = a; };
+	void addAffinity(int a) { affinity += a; };
+	int getAffinity() { return affinity; };
+	void setNotoriety(int n) { notoriety = n; };
+	void addNotoriety(int n) { notoriety += n; };
+	int getNotoriety() { return notoriety; };
+	void setStrength(int s) { strength = s; };
+	void addStrength(int s) { strength += s; };
+	int getStrength() { return strength; };
 };

@@ -161,6 +161,8 @@
     <Text Include="task_buffer_test.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Action.h" />
+    <ClInclude Include="ActionPool.h" />
     <ClInclude Include="AIHelper.h" />
     <ClInclude Include="AIManager.h" />
     <ClInclude Include="AudioManager.h" />
@@ -219,6 +221,8 @@
     <ClInclude Include="Wrapper.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Action.cpp" />
+    <ClCompile Include="ActionPool.cpp" />
     <ClCompile Include="AIHelper.cpp" />
     <ClCompile Include="AIManager.cpp" />
     <ClCompile Include="AudioManager.cpp" />
