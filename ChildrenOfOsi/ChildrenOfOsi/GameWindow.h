@@ -13,7 +13,9 @@
 #include <string>
 #include <vector>
 
-#include <glm/vec2.hpp>
+#include <glm/glm.hpp>
+#include <glm/gtc/matrix_transform.hpp>
+#include <glm/gtc/type_ptr.hpp>
 
 #include "GLEW\glew.h"
 #include "GLFW/glfw3.h"
@@ -29,10 +31,10 @@ namespace osi
 {
   struct Glyph
   {
-    GLuint textureId;
-    glm::ivec2 size;
-    glm::ivec2 bearing;
-    GLuint advance;
+    GLuint textureId;   // ID handle for the texture
+    glm::ivec2 size;    // Dimensions of the glyph
+    glm::ivec2 bearing; // Offset from baseline to left, top of glyph
+    GLuint advance;     // Complete horizontal offset to next glyph
   };
 
   struct GameWindow
@@ -48,7 +50,7 @@ namespace osi
     static bool isRunning();
 
     static void drawSprite(float, float, float, float, Sprite);
-    static void drawText(float, float, float, float, float, const std::string&);
+    static void drawText(const std::string&, const std::string&, float, float, float, float, glm::ivec3);
     static void refresh();
 
     private:
@@ -66,6 +68,10 @@ namespace osi
     static std::vector<GLuint> vertexBufferObjectId;
     static std::vector<GLuint> elementBufferObjectId;
     static std::vector<GLuint> textures;
+
+    static GLuint fontVAO;
+    static GLuint fontVBO;
+
     static GLuint stdShaderProgramId;
     static GLuint fontShaderProgramId;
 
@@ -80,10 +86,9 @@ namespace osi
     GameWindow& operator=(const GameWindow&&) = delete;
     ~GameWindow() = delete;
 
-    static std::vector<GLfloat> dpCoordToGL(float, float);
+    static glm::vec2 dpCoordToGL(float, float);
     static void setupWindow();
     static GLuint setupShaders(const std::string&, const std::string&);
-    static void setupStdShaders();
     static void setupFont(const std::string&, int);
   };
 
