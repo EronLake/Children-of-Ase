@@ -4,10 +4,10 @@
 
 GameMap::GameMap()
 {
-	mapTopLeft = new Rectangle(Vector2f(0.0, 0.0), 5000.0, 5000.0);
-	mapTopRight = new Rectangle(Vector2f(5000.0, 0.0), 5000.0, 5000.0);
-	mapBottomLeft = new Rectangle(Vector2f(0.0, 5000.0), 5000.0, 5000.0);
-	mapBottomRight = new Rectangle(Vector2f(5000.0, 5000.0), 5000.0, 5000.0);
+	mapTopLeft = new Rectangle(Vector2f(0.0, 0.0), 10000.0, 10000.0);
+	mapTopRight = new Rectangle(Vector2f(10000.0, 0.0), 10000.0, 10000.0);
+	mapBottomLeft = new Rectangle(Vector2f(0.0, 10000.0), 10000.0, 10000.0);
+	mapBottomRight = new Rectangle(Vector2f(10000.0, 10000.0), 10000.0, 10000.0);
 	//river = new Rectangle(Vector2f(0.0, 0.0), 10000.0, 10000.0);
 	//alllocate mem for texture
 	topLeftTex = new Texture();

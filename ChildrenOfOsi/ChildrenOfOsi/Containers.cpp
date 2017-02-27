@@ -21,9 +21,9 @@ void Containers::add_livingObj(std::string key, LivingObj* value)
 {
 	livingObj_table[key] = value;
 }
-void Containers::add_projectile(std::string key, Projectile* value)
+void Containers::add_Attack(std::string key, Attack* value)
 {
-	projectile_table[key] = value;
+	Attack_table[key] = value;
 }
 void Containers::add_soldier(std::string key, Soldier* value)
 {
@@ -44,6 +44,7 @@ void Containers::add_npc(std::string key, NPC* value)
 
 void Containers::add_texture(std::string key, Texture* value)
 {
+	LOG(key << "/" << value);
 	texture_table[key] = value;
 }
 
@@ -52,7 +53,7 @@ void Containers::add_texture(std::string key, Texture* value)
 //should eventually be moved to main
 std::unordered_map<std::string, Hero*> Containers::hero_table;
 std::unordered_map<std::string, LivingObj*> Containers::livingObj_table;
-std::unordered_map<std::string, Projectile*> Containers::projectile_table;
+std::unordered_map<std::string, Attack*> Containers::Attack_table;
 std::unordered_map<std::string, Soldier*> Containers::soldier_table;
 std::unordered_map<std::string, SplSoldier*> Containers::spl_soldier_table;
 std::unordered_map<std::string, WorldObj*> Containers::worldObj_table;

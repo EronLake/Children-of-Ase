@@ -62,6 +62,13 @@ bool Vector2f::operator==(const Vector2f v) const
 	}
 	return false;
 }
+bool Vector2f::operator!=(const Vector2f v) const
+{
+	if (v.xloc != xloc || v.yloc != yloc) {
+		return true;
+	}
+	return false;
+}
 bool Vector2f::operator<(const Vector2f v) const
 {
 	if (xloc < v.xloc || (!(v.xloc < xloc)) && (v.yloc < yloc)) {

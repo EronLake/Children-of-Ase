@@ -68,10 +68,30 @@ void ChildrenOfOsi::stop(WorldObj* player) {
 	createTask("Stop", "MOVE", player);
 }
 
+////////////////////////////////////////////////////
+////////////////////////////////////////////////////
+
+void ChildrenOfOsi::move_toward(WorldObj* obj) {
+	createTask("Move", "AI", obj);
+}
+void ChildrenOfOsi::get_path(WorldObj* obj) {
+	createTask("Path", "AI", obj);
+}
+
+////////////////////////////////////////////////////
+////////////////////////////////////////////////////
+
 void ChildrenOfOsi::talk(WorldObj * player)
 {
 	createTask("Talk", "INTERACT", player);
 }
+
+void ChildrenOfOsi::melee(WorldObj * player)
+{
+	createTask("Melee", "INTERACT", player);
+}
+////////////////////////////////////////////////////
+////////////////////////////////////////////////////
 
 void ChildrenOfOsi::setSwordGlow(WorldObj* player)
 {
@@ -106,7 +126,9 @@ void ChildrenOfOsi::drawDiaGui(WorldObj* player)
 	createTask("Talk", "DRAW", player);
 }
 
-///*
+///////////////////////////////////////////////////
+///////////////////////////////////////////////////
+
 void ChildrenOfOsi::add_hero(std::string key, float x, float y, bool col) {
 	createTaskWithParams("Add_Hero", "MODIFY_POOL", key, x, y, col);
 }
@@ -127,29 +149,30 @@ void ChildrenOfOsi::add_worldObj(std::string key, float x, float y, bool col) {
 	createTaskWithParams("Add_WorldObj", "MODIFY_POOL", key, x, y, col);
 }
 
-void ChildrenOfOsi::add_projectile(std::string key, float x, float y, bool col, int d) {
-	createTaskWithParams("Add_Projectile", "MODIFY_POOL", key, x, y, col); //, d); Dmg might have to be defined separately
+void ChildrenOfOsi::add_Attack(std::string key, float x, float y, bool col, int d) {
+	createTaskWithParams("Add_Attack", "MODIFY_POOL", key, x, y, col); //, d); Dmg might have to be defined separately
 }
 
 void ChildrenOfOsi::add_npc(std::string key, float x,float y, bool col) {
 	createTaskWithParams("Add_NPC", "MODIFY_POOL", key, x, y, col);
 }
-/*
+
 void ChildrenOfOsi::add_texture(std::string key, float x=0, float y=0, bool col=0) {
 	createTaskWithParams("Add_Texture", "MODIFY_POOL", key, x, y, col);
 }
-*/
 
-//*/
+
+//////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////
 
 void ChildrenOfOsi::play_sound(string name) {
 	createTask(name, "SOUND");
 }
 
 //----------------------------------------------------
-
-
 //----------------------------------------------------
+
+
 void ChildrenOfOsi::createTask(std::string task_name, std::string type, WorldObj * objToUpdate)
 {
 	//maybe just pass in the string craeated
@@ -171,7 +194,7 @@ void ChildrenOfOsi::createTaskWithParams(std::string task_name, std::string type
 	mLog->logMessage(new_task);
 }
 
-/*void ChildrenOfOsi::createTaskForProjectile(std::string task_name, std::string type, float x, float y, bool col, int d) {
+/*void ChildrenOfOsi::createTaskForAttack(std::string task_name, std::string type, float x, float y, bool col, int d) {
 	std::string task_status = "CREATED";
 	Task* new_task = new Task(task_name, task_status, type, x, y, col, d);
 	tBuffer->push(new_task);

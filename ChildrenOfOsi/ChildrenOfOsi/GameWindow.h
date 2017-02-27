@@ -44,6 +44,9 @@ namespace osi
     static constexpr unsigned int WINDOW_WIDTH_DP = 960U;
     static constexpr unsigned int WINDOW_HEIGHT_DP = 540U;
 
+	//need this for map editor
+	static GLFWwindow *window;
+
     static bool init();
     static bool terminate();
     static bool isActive();
@@ -53,6 +56,7 @@ namespace osi
     static void drawText(const std::string&, const std::string&, float, float, float, float, glm::ivec3);
     static void refresh();
 
+	
     private:
 
     static const std::string STD_VERTEX_SHADER_PATH;
@@ -60,7 +64,7 @@ namespace osi
     static const std::string FONT_VERTEX_SHADER_PATH;
     static const std::string FONT_FRAGMENT_SHADER_PATH;
 
-    static GLFWwindow *window;
+    
     static int windowWidthPx;
     static int windowHeightPx;
 

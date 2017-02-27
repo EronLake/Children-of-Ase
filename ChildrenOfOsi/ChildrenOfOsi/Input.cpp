@@ -3,20 +3,25 @@
 #include <conio.h>
 #include <Windows.h>
 #include "Soldier.h"
+#include "CheckClass.h"
+#include "json.h"
 
-Input::Input(ChildrenOfOsi* _gameplay_functions)
+
+Input::Input(ChildrenOfOsi* _gameplay_functions, RenderHelper* _rHelper)
 {
 	disable = false;
 	count = 0;
 	gameplay_functions = _gameplay_functions;
+	rHelper = _rHelper;
 	LOG("Input Objected Constructed");
 }
 
-Input::Input(ChildrenOfOsi* _gameplay_functions, WorldObj * _player)
+Input::Input(ChildrenOfOsi* _gameplay_functions, WorldObj * _player, RenderHelper* _rHelper)
 {
 	disable = false;
 	count = 0;
 	gameplay_functions = _gameplay_functions;
+	rHelper = _rHelper;
 	gameplay_functions->play_sound("Play");
 	gameplay_functions->play_sound("Walk");
 	gameplay_functions->play_sound("Pause");
@@ -46,6 +51,8 @@ void Input::InputCheck()
 	short L = GetKeyState('L') >> 15;
 	short ENTER = GetKeyState('\n') >> 15;
 	short V = GetKeyState('V') >> 15;
+	short F = GetKeyState('F') >> 15;
+
 
 	if (DialogueController::getState() == 0) {
 
@@ -98,6 +105,92 @@ void Input::InputCheck()
 		if (E) {
 			std::cout << "Pressed E" << std::endl;
 			gameplay_functions->talk(player);
+		}
+		if (F) {
+			Player* t = CheckClass::isPlayer(player);
+			if (t) {
+				if (t->getCool()) {
+					std::cout << "Pressed F" << std::endl;
+					gameplay_functions->melee(player);
+				}
+			}
+		}
+
+		if (L) {
+			std::string image_name;
+			std::string obj_name;
+
+			std::cout << "Pressed Enter" << std::endl;
+			std::cout << "INPUT FILE NAME " << std::endl;
+			std::cout << "///////////////////////////////" << std::endl;
+			std::cin >> image_name;
+			std::cout << "INPUT OBJECT NAME " << std::endl;
+			std::cout << "///////////////////////////////" << std::endl;
+			std::cin >> obj_name;
+			std::cout << image_name << ": "<<  player->getX() << ":" << player->getY() << std::endl;
+
+
+			Json::Value root;
+			Json::Reader reader;
+
+			std::ifstream in_file("config.json");
+			in_file >> root;
+			in_file.close();
+
+			std::ofstream file;
+			file.open("config.json");
+
+
+			//populate 'value_obj' with the objects, arrays etc.
+			Json::Value new_obj = {};
+
+			new_obj["x"] = floor(player->getX()/100);
+			new_obj["y"] = floor(player->getY()/100);
+
+			new_obj["hight"] = 400.0;
+			new_obj["width"] = 600.0;
+
+			new_obj["frame_num"] = 1;
+
+			new_obj["name"] = obj_name;
+			new_obj["tex_file"] = image_name;
+
+			new_obj["bodyx1"] = 110;
+			new_obj["bodyx2"] = 150;
+			new_obj["bodyy1"] = 120;
+			new_obj["bodyy2"] = 60;
+			
+		
+			root[obj_name] = new_obj;
+
+			Json::StyledWriter styledWriter;
+			file << styledWriter.write(root);
+
+			file.close();
+
+			system("PAUSE");
+			
+			
+		}
+
+		if ((GetKeyState(VK_LBUTTON) & 0x100) != 0)
+		{
+			/*POINT p;
+			if (ScreenToClient(window, &p))
+			{
+				cout << "////////////////////////" << endl;
+				cout << p.x << p.y << endl;
+				cout << "////////////////////////" << endl;
+			}*/
+			double xpos;
+			double ypos;
+			glfwGetCursorPos(osi::GameWindow::window, &xpos, &ypos);
+			cout << "////////////////////////" << endl;
+			//cout << xpos << ":" << ypos << endl;
+			cout << "X: "<< rHelper->camera->getX() + xpos << endl;
+			cout << "Y: "<< rHelper->camera->getY() + ypos << endl;
+			cout << "////////////////////////" << endl;
+			
 		}
 
 	}

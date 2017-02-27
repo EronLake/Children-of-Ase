@@ -62,13 +62,13 @@ bool MemoryTestSuite::execute_tests()
 	}
 
 	//---------------------------------------------------
-	if (add_projectile_test() == true)
+	if (add_Attack_test() == true)
 	{
-		LOG("add_projectile_test: " << "PASS");
+		LOG("add_Attack_test: " << "PASS");
 	}
 	else
 	{
-		LOG("add_projectile_test: " << "FAIL");
+		LOG("add_Attack_test: " << "FAIL");
 		pass = false;
 	}
 
@@ -288,13 +288,13 @@ bool MemoryTestSuite::execute_tests()
 	}
 
 	//---------------------------------------------------
-	if (store_projectile_test() == true)
+	if (store_Attack_test() == true)
 	{
-		LOG("store_projectile_test: " << "PASS");
+		LOG("store_Attack_test: " << "PASS");
 	}
 	else
 	{
-		LOG("store_projectile_test: " << "FAIL");
+		LOG("store_Attack_test: " << "FAIL");
 		pass = false;
 	}
 
@@ -436,7 +436,7 @@ bool MemoryTestSuite::Containers_constructor_test()
 
 	if (Containers::hero_table.size() >= 0 &&
 		Containers::livingObj_table.size() >= 0 &&
-		Containers::projectile_table.size() >= 0 &&
+		Containers::Attack_table.size() >= 0 &&
 		Containers::soldier_table.size() == 0 &&
 		Containers::spl_soldier_table.size() >= 0 &&
 		Containers::worldObj_table.size() >= 0 &&
@@ -520,30 +520,30 @@ bool MemoryTestSuite::add_livingObj_test()
 
 
 
-bool MemoryTestSuite::add_projectile_test()
+bool MemoryTestSuite::add_Attack_test()
 {
 	bool pass = false;
 
-	std::string projectile_name = "test_projectile";
-	Projectile* projectile_value = new Projectile();
+	std::string Attack_name = "test_Attack";
+	Attack* Attack_value = new Attack();
 
 	//called add_hero()
-	Containers::add_projectile(projectile_name, projectile_value);
+	Containers::add_Attack(Attack_name, Attack_value);
 
-	if (Containers::projectile_table.count(projectile_name) == 1)
+	if (Containers::Attack_table.count(Attack_name) == 1)
 	{
 		pass = true;
-		Containers::projectile_table.erase(projectile_name);
-		delete projectile_value;
+		Containers::Attack_table.erase(Attack_name);
+		delete Attack_value;
 	}
 
-	if (Containers::projectile_table.count(projectile_name) == 0)
+	if (Containers::Attack_table.count(Attack_name) == 0)
 	{
 		return pass;
 	}
 	else
 	{
-		LOG("TESTING ERROR: did not remove test_projectile from table");
+		LOG("TESTING ERROR: did not remove test_Attack from table");
 		return false;
 	}
 
@@ -940,20 +940,20 @@ bool MemoryTestSuite::store_soldier_test()
 	
 	return pass;
 }
-bool MemoryTestSuite::store_projectile_test()
+bool MemoryTestSuite::store_Attack_test()
 {
 	bool pass = true;
 
 	MemoryHelper* test_memory_helper = new MemoryHelper();
 
-	test_memory_helper->store_projectile("test_obj", 1, 2, true);
+	test_memory_helper->store_Attack("test_obj", 1, 2, true);
 
-	if (Containers::projectile_table.count("test_obj") != 1)
+	if (Containers::Attack_table.count("test_obj") != 1)
 	{
 		pass = false;
 	}
 
-	Containers::projectile_table.erase("test_obj");
+	Containers::Attack_table.erase("test_obj");
 	delete test_memory_helper;
 
 	return pass;

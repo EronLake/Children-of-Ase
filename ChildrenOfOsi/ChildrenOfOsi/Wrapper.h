@@ -1,6 +1,6 @@
 #pragma once
 #include "Player.h"
-#include "Projectile.h"
+#include "Attack.h"
 
 class Wrapper
 {

@@ -17,8 +17,7 @@ private:
 
 
 public:
-	AIManager(MessageLog* _mLog, TaskBuffer* _tBuffer);
-	AIManager(MessageLog* _mLog, TaskBuffer* _tBuffer, WorldObj* obj);
+	AIManager(MessageLog* _mLog, TaskBuffer* _tBuffer, AIHelper* ai);
 	~AIManager();
 
 	virtual void register_manager() final;

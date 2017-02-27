@@ -13,35 +13,39 @@ memManager::memManager(MessageLog* _mLog, TaskBuffer* _tBuffer)
 
 	memHelper = new MemoryHelper();
 
-	hero_pool = memHelper->create_pool(4096);
-	hero_head = memHelper->init_pool(hero_pool,32);
+	hero_pool = memHelper->create_pool(sizeof(Hero) * 32);
+	hero_head = memHelper->init_pool(hero_pool, sizeof(Hero));
 
-	livingObj_pool = memHelper->create_pool(4096);
-	livingObj_head = memHelper->init_pool(livingObj_pool, 32);
+	livingObj_pool = memHelper->create_pool(sizeof(LivingObj) * 32);
+	livingObj_head = memHelper->init_pool(livingObj_pool, sizeof(LivingObj));
 
-	projectile_pool = memHelper->create_pool(4096);
-	projectile_head = memHelper->init_pool(projectile_pool, 32);
+	Attack_pool = memHelper->create_pool(sizeof(Attack) * 32);
+	Attack_head = memHelper->init_pool(Attack_pool, sizeof(Attack));
 
-	soldier_pool = memHelper->create_pool(4096);
-	soldier_head = memHelper->init_pool(soldier_pool, 32);
+	soldier_pool = memHelper->create_pool(sizeof(Soldier) * 32);
+	soldier_head = memHelper->init_pool(soldier_pool, sizeof(Soldier));
 
-	spl_soldier_pool = memHelper->create_pool(4096);
-	spl_soldier_head = memHelper->init_pool(spl_soldier_pool, 32);
+	spl_soldier_pool = memHelper->create_pool(sizeof(SplSoldier) * 32);
+	spl_soldier_head = memHelper->init_pool(spl_soldier_pool, sizeof(SplSoldier));
 
-	worldObj_pool = memHelper->create_pool(4096);
-	worldObj_head = memHelper->init_pool(worldObj_pool, 32);
+	worldObj_pool = memHelper->create_pool(sizeof(WorldObj)*32);
+	worldObj_head = memHelper->init_pool(worldObj_pool, sizeof(WorldObj));
 
-	npc_pool = memHelper->create_pool(4096);
-	npc_head = memHelper->init_pool(npc_pool, 32);
+	npc_pool = memHelper->create_pool(sizeof(NPC) * 32);
+	npc_head = memHelper->init_pool(npc_pool, sizeof(NPC));
+
+	texture_pool = memHelper->create_pool(sizeof(Texture) * 32);
+	texture_head = memHelper->init_pool(texture_pool, sizeof(Texture));
 
 
 	task_map["Add_Hero"] = &MemoryHelper::store_hero;
 	task_map["Add_LivingObj"] = &MemoryHelper::store_livingObj;
 	task_map["Add_NPC"] = &MemoryHelper::store_npc;
-	task_map["Add_Projectile"] = &MemoryHelper::store_projectile;
+	task_map["Add_Attack"] = &MemoryHelper::store_Attack;
 	task_map["Add_Soldier"] = &MemoryHelper::store_soldier;
 	task_map["Add_Spl_Soldier"] = &MemoryHelper::store_spl_soldier;
 	task_map["Add_WorldObj"] = &MemoryHelper::store_worldObj;
+	task_map["Add_Texture"] = &MemoryHelper::store_texture;
 
 	LOG("memManager Object Constructed");
 	
@@ -56,8 +60,8 @@ memManager::~memManager()
 	memHelper->destroy_pool(livingObj_pool);
 	memHelper->destroy_MemNode_list(livingObj_head);
 
-	memHelper->destroy_pool(projectile_pool);
-	memHelper->destroy_MemNode_list(projectile_head);
+	memHelper->destroy_pool(Attack_pool);
+	memHelper->destroy_MemNode_list(Attack_head);
 
 	memHelper->destroy_pool(soldier_pool);
 	memHelper->destroy_MemNode_list(soldier_head);
@@ -70,6 +74,9 @@ memManager::~memManager()
 
 	memHelper->destroy_pool(npc_pool);
 	memHelper->destroy_MemNode_list(npc_head);
+
+	memHelper->destroy_pool(texture_pool);
+	memHelper->destroy_MemNode_list(texture_head);
 
 	LOG("memManager Object Destroyed");
 
@@ -132,8 +139,8 @@ void memManager::execute_task(Task* current_task)
 		}
 		this->send_result(current_task);
 	}
-	else if (current_task->name == "Add_Projectile") {
-		//add_projectile();
+	else if (current_task->name == "Add_Attack") {
+		//add_Attack();
 		result = 0;
 
 		if (result == 0) {
@@ -209,8 +216,8 @@ MemNode* memManager::hero_head = nullptr;
 MemoryPool* memManager::livingObj_pool = nullptr;
 MemNode* memManager::livingObj_head = nullptr;
 
-MemoryPool* memManager::projectile_pool = nullptr;
-MemNode* memManager::projectile_head = nullptr;
+MemoryPool* memManager::Attack_pool = nullptr;
+MemNode* memManager::Attack_head = nullptr;
 
 MemoryPool* memManager::soldier_pool = nullptr;
 MemNode* memManager::soldier_head = nullptr;
@@ -223,3 +230,6 @@ MemNode* memManager::worldObj_head = nullptr;
 
 MemoryPool* memManager::npc_pool = nullptr;
 MemNode* memManager::npc_head = nullptr;
+
+MemoryPool* memManager::texture_pool = nullptr;
+MemNode* memManager::texture_head = nullptr;

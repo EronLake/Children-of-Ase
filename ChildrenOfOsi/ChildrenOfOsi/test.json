@@ -1,0 +1,65 @@
+{
+   "building_1" : {
+      "frame_num" : 1,
+      "hight" : 400.0,
+      "name" : "building1",
+      "tex_file" : "Assets/Sprites/YemojasHouse.png",
+      "width" : 600.0,
+      "x" : 37.0,
+      "y" : 35.0
+   },
+   "building_2" : {
+      "frame_num" : 1,
+      "hight" : 400.0,
+      "name" : "building1",
+      "tex_file" : "Assets/Sprites/YemojasHouse.png",
+      "width" : 600.0,
+      "x" : 37.0,
+      "y" : 40.0
+   },
+   "building_3" : {
+      "frame_num" : 1,
+      "hight" : 400.0,
+      "name" : "building1",
+      "tex_file" : "Assets/Sprites/YemojasHouse.png",
+      "width" : 600.0,
+      "x" : 40.0,
+      "y" : 35.0
+   },
+   "building_4" : {
+      "frame_num" : 1,
+      "hight" : 400.0,
+      "name" : "building1",
+      "tex_file" : "Assets/Sprites/YemojasHouse.png",
+      "width" : 600.0,
+      "x" : 3.0,
+      "y" : 3.0
+   },
+   "building_5" : {
+      "frame_num" : 1,
+      "hight" : 400.0,
+      "name" : "building1",
+      "tex_file" : "Assets/Sprites/YemojasHouse.png",
+      "width" : 600.0,
+      "x" : 4.0,
+      "y" : 4.0
+   },
+   "building_6" : {
+      "frame_num" : 1,
+      "hight" : 400.0,
+      "name" : "building1",
+      "tex_file" : "Assets/Sprites/YemojasHouse.png",
+      "width" : 600.0,
+      "x" : 4.0,
+      "y" : 4.0
+   },
+   "building_new" : {
+      "frame_num" : 1,
+      "hight" : 400.0,
+      "name" : "building1",
+      "tex_file" : "Assets/Sprites/YemojasHouse.png",
+      "width" : 600.0,
+      "x" : 4.0,
+      "y" : 4.0
+   }
+}
