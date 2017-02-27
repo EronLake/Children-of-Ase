@@ -73,9 +73,6 @@
     <ClCompile Include="NPC.cpp">
       <Filter>Game Objects</Filter>
     </ClCompile>
-    <ClCompile Include="Projectile.cpp">
-      <Filter>Game Objects</Filter>
-    </ClCompile>
     <ClCompile Include="Player.cpp">
       <Filter>Game Objects</Filter>
     </ClCompile>
@@ -149,8 +146,8 @@
     <ClCompile Include="ObjConfig.cpp">
       <Filter>Game Objects</Filter>
     </ClCompile>
-    <ClCompile Include="Relationship.cpp">
-      <Filter>Relationship</Filter>
+    <ClCompile Include="Attack.cpp">
+      <Filter>Game Objects</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -227,9 +224,6 @@
       <Filter>Game Objects</Filter>
     </ClInclude>
     <ClInclude Include="Player.h">
-      <Filter>Game Objects</Filter>
-    </ClInclude>
-    <ClInclude Include="Projectile.h">
       <Filter>Game Objects</Filter>
     </ClInclude>
     <ClInclude Include="RenderHelper.h">
@@ -317,8 +311,8 @@
       <Filter>Game Objects</Filter>
     </ClInclude>
     <ClInclude Include="resource2.h" />
-    <ClInclude Include="Relationship.h">
-      <Filter>Relationship</Filter>
+    <ClInclude Include="Attack.h">
+      <Filter>Game Objects</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -381,9 +375,6 @@
     <Filter Include="Rendering\Shaders">
       <UniqueIdentifier>{9833d3aa-a6f5-4851-b7ad-8e4fccde265b}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Relationship">
-      <UniqueIdentifier>{fd28ec2b-c7cf-4ef1-8e49-b51846a92e9d}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram.cd">
@@ -414,6 +405,9 @@
       <Filter>Rendering\Shaders</Filter>
     </None>
     <None Include="config.json">
+      <Filter>Game Objects</Filter>
+    </None>
+    <None Include="test.json">
       <Filter>Game Objects</Filter>
     </None>
   </ItemGroup>

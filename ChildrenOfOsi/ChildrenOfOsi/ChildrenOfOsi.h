@@ -26,7 +26,10 @@ public:
 	void move_down_right(WorldObj* player);
 	void move_out(WorldObj * player);
 	void stop(WorldObj* player);
+	void move_toward(WorldObj* player);
+	void get_path(WorldObj* obj);
 	void talk(WorldObj * player);
+	void melee(WorldObj * player);
 	void setSwordGlow(WorldObj* player);
 	void setHeartGlow(WorldObj* player);
 	void setFaceGlow(WorldObj* player);
@@ -39,19 +42,19 @@ public:
 	//functions for creating objects in memory
 	void add_hero(std::string key, float x, float y, bool col);
     void add_soldier(std::string key, float x, float y, bool col);
-	void add_projectile(std::string key, float x, float y, bool col, int d);
+	void add_Attack(std::string key, float x, float y, bool col, int d);
 	void add_spl_soldier(std::string key, float x, float y, bool col);
 	void add_livingObj(std::string key, float x, float y, bool col);
 	void add_worldObj(std::string key, float x, float y, bool col);
 	void add_npc(std::string key, float x, float y, bool col);
-	//void add_texture(std::string key, float x, float y, bool col);
+	void add_texture(std::string key, float x, float y, bool col);
 
 	//functions for audio
 	void play_sound(string name);
 
 	void createTask(std::string task_name, std::string type, WorldObj * objToUpdate = NULL);
 	void ChildrenOfOsi::createTaskWithParams(std::string task_name, std::string type, std::string key, float x, float y, bool col);
-	//void ChildrenOfOsi::createTaskForProjectile(std::string task_name, std::string type, float x, float y, bool col, int d);
+	//void ChildrenOfOsi::createTaskForAttack(std::string task_name, std::string type, float x, float y, bool col, int d);
 
 };
 

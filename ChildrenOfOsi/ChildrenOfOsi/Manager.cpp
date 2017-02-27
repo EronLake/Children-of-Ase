@@ -31,6 +31,14 @@ void Manager::createTask(std::string task_name, std::string type)
 	mLog->logMessage(new_task);
 }
 
+void Manager::createTaskWithObj(std::string task_name, std::string type, WorldObj* obj)
+{
+	std::string task_status = "PASSED";
+	Task* new_task = new Task(task_name, task_status, type, obj);
+	tBuffer->push(new_task);
+	mLog->logMessage(new_task);
+}
+
 void  Manager::execute_task(Task* current_task) 
 {
 	LOG("Execute Task");

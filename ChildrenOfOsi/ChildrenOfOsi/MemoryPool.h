@@ -10,7 +10,7 @@
 #include "LivingObj.h"
 #include "WorldObj.h"
 #include "NPC.h"
-#include "Projectile.h"
+#include "Attack.h"
 
 
 class MemoryPool {

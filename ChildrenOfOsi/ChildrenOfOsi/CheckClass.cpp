@@ -5,35 +5,39 @@ Hero* CheckClass::isHero(WorldObj* test)
 	Hero* hero;
 	hero = dynamic_cast<Hero*>(test);
 	return hero;
-
 }
 
-bool CheckClass::isSplSoldier(WorldObj* test, SplSoldier* spl)
+SplSoldier* CheckClass::isSplSoldier(WorldObj* test)
 {
-	if (spl = dynamic_cast<SplSoldier*>(test)) return true;
-	else return false;
+	SplSoldier* spl;
+	spl = dynamic_cast<SplSoldier*>(test);
+	return spl;
 }
 
-bool CheckClass::isSoldier(WorldObj* test, Soldier* soldier)
+Soldier* CheckClass::isSoldier(WorldObj* test)
 {
-	if (soldier = dynamic_cast<Soldier*>(test)) return true;
-	else return false;
+	Soldier* soldier;
+	soldier = dynamic_cast<Soldier*>(test);
+	return soldier;
 }
 
-bool CheckClass::isNPC(WorldObj* test, NPC* npc)
+NPC* CheckClass::isNPC(WorldObj* test)
 {
-	if (npc = dynamic_cast<NPC*>(test)) return true;
-	else return false;
+	NPC* npc;
+	npc = dynamic_cast<NPC*>(test);
+	return npc;
 }
 
-bool CheckClass::isLiving(WorldObj* test, LivingObj* living)
+LivingObj* CheckClass::isLiving(WorldObj* test)
 {
-	if (living = dynamic_cast<LivingObj*>(test)) return true;
-	else return false;
+	LivingObj* living;
+	living = dynamic_cast<LivingObj*>(test);
+	return living;
 }
 
-bool CheckClass::isPlayer(WorldObj* test, Player* player)
+Player* CheckClass::isPlayer(WorldObj* test)
 {
-	if (player = dynamic_cast<Player*>(test)) return true;
-	else return false;
+	Player* player;
+	player = dynamic_cast<Player*>(test);
+	return player;
 }

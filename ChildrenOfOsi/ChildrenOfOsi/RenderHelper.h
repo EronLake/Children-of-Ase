@@ -26,8 +26,10 @@ public:
 	void sortVec();
 	bool compY(WorldObj* a, WorldObj* b);
 	QuadTree* tree;
-private:
+	//need this for map editor
 	WorldObj* camera;
+private:
+	
 	DialogueGui* convoGui;
 	GameMap* gmap;
 	std::vector<WorldObj*> objVec;

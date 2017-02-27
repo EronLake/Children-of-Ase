@@ -11,38 +11,69 @@ ObjConfig::~ObjConfig()
 {
 }
 
-void ObjConfig::import_config(vector<WorldObj*>* recVec)
+void ObjConfig::import_config(vector<WorldObj*>* recVec, ChildrenOfOsi* gameplay_func, TaskBuffer* tBuffer)
 {
 	Json::Value root;
 	Json::Reader reader;
+
 
 	std::ifstream file("config.json");
 	file >> root;
 
 	for (auto itr = root.begin(); itr != root.end(); itr++) 
 	{
-		set_world_obj(recVec,	(*itr)["x"].asFloat(), (*itr)["x"].asFloat(), 
-								(*itr)["width"].asFloat(), (*itr)["hight"].asFloat(),
-								(*itr)["name"].asString(), (*itr)["tex_file"].asString(), 
-								(*itr)["frame_num"].asInt(), 
-								(*itr)["bodyx1"].asInt(), (*itr)["bodyx2"].asInt(), 
-								(*itr)["bodyy1"].asInt(), (*itr)["bodyy2"].asInt());
+		set_world_obj(recVec,gameplay_func,tBuffer, (*itr)["x"].asFloat(), (*itr)["y"].asFloat(),
+													(*itr)["width"].asFloat(), (*itr)["hight"].asFloat(),
+													(*itr)["name"].asString(), (*itr)["tex_file"].asString(), 
+													(*itr)["frame_num"].asInt(), 
+													(*itr)["bodyx1"].asFloat(), (*itr)["bodyx2"].asFloat(),
+													(*itr)["bodyy1"].asFloat(), (*itr)["bodyy2"].asFloat());
 	}
+	cout << "done" << endl;
 
 }
 
-void ObjConfig::set_world_obj(vector<WorldObj*>* recVec, float x, float y, float width, float hight,
-								std::string name,std::string tex_file,int frame_num,float bodyx1,float bodyx2, float bodyy1, float bodyy2)
+void ObjConfig::set_world_obj(vector<WorldObj*>* recVec, ChildrenOfOsi* gameplay_func, TaskBuffer* tBuffer, float x, float y, float width, float hight,
+	std::string name, std::string tex_file, int frame_num, float bodyx1, float bodyx2, float bodyy1, float bodyy2)
 {
-	Texture* tempTexture = new Texture();
-	tempTexture->setFile(tex_file,frame_num);
-	std::cout << "this is a test"<< std::endl;
+	
+	LOG(Containers::texture_table[tex_file]);
+	if (Containers::texture_table[tex_file]) {
+		cout << tex_file << "Already in Table /////////////////////////////"  << endl;	
+	}
+	else
+	{
+		cout << tex_file << "Not in Table /////////////////////////////" << endl;
+		gameplay_func->add_texture(tex_file, 0, 0, 0);
 
-	WorldObj* temp_objs = new WorldObj(Vector2f(100 * x, 100 * y), width, hight);
-	temp_objs->sprite.setTexture(tempTexture);
-	temp_objs->setInteractable(false);
-	temp_objs->setName(name);
-	temp_objs->offsetBody(0,bodyx1, bodyx2, bodyy1, bodyy2);
-	recVec->push_back(temp_objs);
+		//set file takes up memory
+		tBuffer->run();
+		Containers::texture_table[tex_file]->setFile("Assets/Sprites/" + tex_file + ".png", frame_num);
+		
+	}
+	
+	gameplay_func->add_worldObj(name, 100*x, 100*y, true);
+
+	tBuffer->run();
+	
+	//WorldObj* temp_objs = Containers::worldObj_table[name];
+	//WorldObj* temp_objs = new WorldObj(Vector2f(100 * x, 100 * y), width, hight);
+	//Containers::worldObj_table[name] = new WorldObj(Vector2f(100 * x, 100 * y), width, hight);
+	//WorldObj* temp_objs = Containers::worldObj_table[name];
+	//WorldObj* temp_objs = new WorldObj(Vector2f(100 * x, 100 * y), width, hight);
+	
+	//Containers::worldObj_table[name]->setLoc(Vector2f(100 * x, 100 * y));
+	Containers::worldObj_table[name]->setWidth(width);
+	Containers::worldObj_table[name]->setHeight(hight);
+	
+	Containers::worldObj_table[name]->sprite.setTexture(Containers::texture_table[tex_file]);
+	Containers::worldObj_table[name]->setInteractable(false);
+	//Containers::worldObj_table[name]->setName(name);
+	Containers::worldObj_table[name]->offsetBody(0,bodyx1, bodyx2, bodyy1, bodyy2);
+	//cout << "texfile" << endl;
+	//cout << Containers::worldObj_table.size() << endl;
+	
+	recVec->push_back(Containers::worldObj_table[name]);
+	
 
 }

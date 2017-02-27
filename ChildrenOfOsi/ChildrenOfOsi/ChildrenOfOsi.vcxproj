@@ -198,7 +198,7 @@
     <ClInclude Include="PhysicsManager.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="MemoryPool.h" />
-    <ClInclude Include="Projectile.h" />
+    <ClInclude Include="Attack.h" />
     <ClInclude Include="QuadTree.h" />
     <ClInclude Include="Rectangle.h" />
     <ClInclude Include="RenderHelper.h" />
@@ -252,7 +252,7 @@
     <ClCompile Include="PhysicsTestSuite.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="MemoryPool.cpp" />
-    <ClCompile Include="Projectile.cpp" />
+    <ClCompile Include="Attack.cpp" />
     <ClCompile Include="QuadTree.cpp" />
     <ClCompile Include="RenderHelper.cpp" />
     <ClCompile Include="RenderManager.cpp" />
@@ -286,6 +286,7 @@
     <None Include="config.json" />
     <None Include="script_templates.json" />
     <None Include="Shango_dialog.json" />
+    <None Include="test.json" />
     <None Include="Yemoja_dialog.json" />
   </ItemGroup>
   <ItemGroup>
