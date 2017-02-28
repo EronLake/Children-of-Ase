@@ -152,6 +152,8 @@
     <ClCompile Include="Relationship.cpp" />
     <ClCompile Include="Action.cpp" />
     <ClCompile Include="ActionPool.cpp" />
+    <ClCompile Include="Alliance.cpp" />
+    <ClCompile Include="War.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AIHelper.h">
@@ -320,6 +322,8 @@
     <ClInclude Include="Relationship.h" />
     <ClInclude Include="Action.h" />
     <ClInclude Include="ActionPool.h" />
+    <ClInclude Include="Alliance.h" />
+    <ClInclude Include="War.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="audio_test.txt">

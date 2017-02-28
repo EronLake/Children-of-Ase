@@ -8,8 +8,7 @@ std::vector<GLuint> Texture::textureId;
  */
 void Texture::load()
 {
-  Texture::textureId.push_back(this->txId = Texture::textureId.size() + 1);
-	this->image = SOIL_load_image(imageFile.c_str(), &(this->width), &(this->height), 0, SOIL_LOAD_RGBA);
+  Texture::textureId.push_back(txId = Texture::textureId.size() + 1);
 
 	glGenTextures(1, &Texture::textureId[txId - 1]);
 	glBindTexture(GL_TEXTURE_2D, Texture::textureId[txId - 1]);
@@ -18,7 +17,7 @@ void Texture::load()
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 
-	image = SOIL_load_image(imageFile.c_str(), &(this->width), &(this->height), 0, SOIL_LOAD_RGBA);
+	image = SOIL_load_image(imageFile.c_str(), &(width), &(height), 0, SOIL_LOAD_RGBA);
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, image);

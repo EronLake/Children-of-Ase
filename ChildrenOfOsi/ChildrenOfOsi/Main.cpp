@@ -490,7 +490,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 
 	ai->graph._print();
 
-	/*Alex->addRelationship(staticRec);
+	Alex->addRelationship(staticRec);
 	ActionPool poolAct = ActionPool(Alex);
 	Action mic = Action();
 	mic.postconds["aff"] = 5;
@@ -506,9 +506,11 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	vector<Action> test= poolAct.getActions(staticRec,poolAct.macro.back());
 	std::cout << test.back().getName() << endl;
 	for (int i = 0; i < test.size(); i++) {
-		int t=test[i].exeAction();
-		if (t)std::cout << "Yes" << endl;
-	}*/
+		std::cout << "--------HERE----------" << std::endl;
+		std::cout << test[i].getName() << std::endl;
+		//int t=test[i].exeAction();
+		//if (t)std::cout << "Yes" << endl;
+	}
 
 
 
