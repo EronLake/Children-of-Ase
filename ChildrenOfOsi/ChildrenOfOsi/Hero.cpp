@@ -15,6 +15,7 @@ Hero::Hero(int _name, float x, float y, bool col) :SplSoldier(x, y, col)
 	NPC::setSpeed(speed);
 	NPC::setDiagXSpeed(sqrt((speed*speed) / 2));
 	NPC::setDiagYSpeed(sqrt((speed*speed) / 2));
+	//actions.setOwner(this);
 }
 
 Hero::Hero(int _name, Vector2f p_topLeft, float p_width, float p_height):SplSoldier(p_topLeft,p_width,p_height)
@@ -24,6 +25,7 @@ Hero::Hero(int _name, Vector2f p_topLeft, float p_width, float p_height):SplSold
 	NPC::setSpeed(speed);
 	NPC::setDiagXSpeed(sqrt((speed*speed) / 2));
 	NPC::setDiagYSpeed(sqrt((speed*speed) / 2));
+	//actions.setOwner(this);
 }
 
 Hero::~Hero()

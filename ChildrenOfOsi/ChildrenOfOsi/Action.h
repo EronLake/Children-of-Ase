@@ -13,8 +13,16 @@ public:
 	int getUtility() { return utility; };
 	void setHero(Hero* h) { hero = h; };
 	Hero* getHero() { return hero; };
+	void setOwner(Hero* o) { owner = o; };//preConditionsNeeded also sets owner
+	Hero* getOwner() { return owner; };
+	vector<std::string> preConditionsNeeded(Hero* o, Hero* h);
+	int exeAction();
+	void setName(string n) { name = n; };
+	string getName() { return name; };
 private:
+	std::string name;
 	int utility;
+	Hero* owner;
 	Hero* hero;
 };
 
