@@ -8,7 +8,7 @@ private:
 	int strength;
 
 public:
-	Relationship(int p_affi = 50, int p_noto = 50, int p_str = 50);
+	Relationship();
 	~Relationship();
 	void setAffinity(int a) { affinity = a; };
 	void addAffinity(int a) { affinity += a; };
@@ -19,6 +19,4 @@ public:
 	void setStrength(int s) { strength = s; };
 	void addStrength(int s) { strength += s; };
 	int getStrength() { return strength; };
-
-	friend std::ostream& operator<<(std::ostream& os, const Relationship& relation);
 };

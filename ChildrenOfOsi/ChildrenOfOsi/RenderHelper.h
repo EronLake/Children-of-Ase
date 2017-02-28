@@ -25,7 +25,6 @@ public:
 	int setQuestionGlow(WorldObj* obj);
 	void sortVec();
 	bool compY(WorldObj* a, WorldObj* b);
-	int updateGuiText(WorldObj* obj);
 	QuadTree* tree;
 	//need this for map editor
 	WorldObj* camera;

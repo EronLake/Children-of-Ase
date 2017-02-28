@@ -170,9 +170,3 @@ bool RenderHelper::compY(WorldObj* a, WorldObj* b) {
 	return ((a->getY() + a->getHeight()) < (b->getY() + b->getHeight()));
 }
 
-int RenderHelper::updateGuiText(WorldObj * obj)
-{
-	convoGui->updateText();
-	return 0;
-}
-

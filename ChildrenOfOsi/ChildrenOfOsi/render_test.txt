@@ -483,10 +483,3 @@
 2/25/2017   4:7   Render manager unit test failed!
 2/25/2017   4:11   Render manager unit test failed!
 2/25/2017   4:14   Render manager unit test failed!
-2/27/2017   10:19   Render manager unit test failed!
-2/27/2017   10:28   Render manager unit test failed!
-2/27/2017   11:1   Render manager unit test failed!
-2/27/2017   11:32   Render manager unit test failed!
-2/27/2017   11:38   Render manager unit test failed!
-2/27/2017   11:40   Render manager unit test failed!
-2/27/2017   11:41   Render manager unit test failed!

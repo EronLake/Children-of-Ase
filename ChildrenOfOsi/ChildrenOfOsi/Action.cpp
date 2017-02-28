@@ -17,37 +17,37 @@ vector<std::string> Action::preConditionsNeeded(Hero* o, Hero* h) {
 	int tmp;
 	for (auto i = preconds.begin(); i != preconds.end(); ++i) {
 		if (i->first.compare("affAbove") == 0) {
-			tmp = (i->second) - (owner->getRelation(h->getNameNum())->getAffinity());
+			tmp = i->second - owner->rel[h->getName()].getAffinity();
 			if (tmp>0) {
 				needs.push_back("affAbove");
 			}
 		}
 		else if (i->first.compare("affBelow") == 0) {
-			tmp = (i->second) - (owner->getRelation(h->getNameNum())->getAffinity());
+			tmp = i->second - owner->rel[h->getName()].getAffinity();
 			if (tmp<0) {
 				needs.push_back("affBelow");
 			}
 		}
 		else if (i->first.compare("notAbove") == 0) {
-			tmp = (i->second) - (owner->getRelation(h->getNameNum())->getAffinity());
+			tmp = i->second - owner->rel[h->getName()].getAffinity();
 			if (tmp>0) {
 				needs.push_back("notAbove");
 			}
 		}
 		else if (i->first.compare("notBelow") == 0) {
-			tmp = (i->second) - (owner->getRelation(h->getNameNum())->getAffinity());
+			tmp = i->second - owner->rel[h->getName()].getAffinity();
 			if (tmp<0) {
 				needs.push_back("notBelow");
 			}
 		}
 		else if (i->first.compare("strAbove") == 0) {
-			tmp = (i->second) - (owner->getRelation(h->getNameNum())->getAffinity());
+			tmp = i->second - owner->rel[h->getName()].getAffinity();
 			if (tmp>0) {
 				needs.push_back("strAbove");
 			}
 		}
 		else if (i->first.compare("strBelow") == 0) {
-			tmp = (i->second) - (owner->getRelation(h->getNameNum())->getAffinity());
+			tmp = i->second - owner->rel[h->getName()].getAffinity();
 			if (tmp<0) {
 				needs.push_back("strBelow");
 			}
@@ -62,13 +62,13 @@ int Action::exeAction() {
 		int tmp;
 		for (auto i = postconds.begin(); i != postconds.end(); ++i) {
 			if (i->first.compare("aff") == 0) {
-				owner->getRelation(hero->getNameNum())->addAffinity(i->second);
+				owner->rel[hero->getName()].addAffinity(i->second);
 			}
 			else if (i->first.compare("not") == 0) {
-				owner->getRelation(hero->getNameNum())->addNotoriety(i->second);
+				owner->rel[hero->getName()].addNotoriety(i->second);
 			}
 			else if (i->first.compare("str") == 0) {
-				owner->getRelation(hero->getNameNum())->addStrength(i->second);
+				owner->rel[hero->getName()].addStrength(i->second);
 			}
 		}
 		return 1;

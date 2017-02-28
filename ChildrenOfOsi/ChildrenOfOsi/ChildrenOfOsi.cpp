@@ -126,11 +126,6 @@ void ChildrenOfOsi::drawDiaGui(WorldObj* player)
 	createTask("Talk", "DRAW", player);
 }
 
-void ChildrenOfOsi::updateGuiText(WorldObj * player)
-{
-	createTask("Update_Text", "DRAW", player);
-}
-
 ///////////////////////////////////////////////////
 ///////////////////////////////////////////////////
 

@@ -28,7 +28,6 @@ RenderManager::RenderManager(MessageLog * _mLog, TaskBuffer * _tBuffer, QuadTree
 	task_map["GHeart"] = &RenderHelper::setHeartGlow;
 	task_map["GFace"] = &RenderHelper::setFaceGlow;
 	task_map["GQuestion"] = &RenderHelper::setQuestionGlow;
-	task_map["Update_Text"] = &RenderHelper::updateGuiText;
 
 }
 

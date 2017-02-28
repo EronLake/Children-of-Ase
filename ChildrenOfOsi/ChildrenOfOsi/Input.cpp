@@ -296,10 +296,6 @@ void Input::InputCheck()
 					disable = true;
 					DialogueController::PlayerResponse();
 				}
-				cout << "DIALOGUE MESSAGE IS " << DialogueController::getMessage() << endl;
-				cout << DialogueController::getOptions()[0] << endl;
-				cout << DialogueController::getOptions()[1] << endl;
-				gameplay_functions->updateGuiText(player);
 			}
 		}
 		else {

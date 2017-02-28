@@ -44,18 +44,3 @@ void Player::updateTalk()
 	talk.setWidth((*this).getWidth() + (2 * distance));
 	talk.setHeight((*this).getHeight() + (2 * distance));
 }
-
-void Player::addRelationship(int p_HeroNum, Relationship * p_relations)
-{
-	relationMap[p_HeroNum] = p_relations;
-}
-
-void Player::removeRelation(int p_heroNum)
-{
-	relationMap.erase(p_heroNum);
-}
-
-Relationship * Player::getRelation(int p_heroNum)
-{
-	return relationMap[p_heroNum];
-}
