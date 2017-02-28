@@ -14,5 +14,10 @@ public:
 	void updateTalk();
 	Rectangle talk;
 	float distance;
+	void addRelationship(int p_HeroNum, Relationship* p_relations);
+	void removeRelation(int p_heroNum);
+	Relationship* getRelation(int p_heroNum);
+private:
+	std::unordered_map<int, Relationship*> relationMap;
 };
 

@@ -42,6 +42,8 @@ public:
 	void animateObj() { sprite.animate(); };
 	void setName(string n) { name = n; };
 	string getName() { return name; };
+	void setNameNum(int n) { nameNum = n; }
+	int getNameNum() { return nameNum; }
 	WorldObj(Vector2f p_topLeft, float p_width, float p_height);
 	void drawObj(float _x, float _y);
 	Sprite sprite;
@@ -63,6 +65,7 @@ private:
 	float width;
 	float height;
 	string name;
+	int nameNum;
 };
 
 

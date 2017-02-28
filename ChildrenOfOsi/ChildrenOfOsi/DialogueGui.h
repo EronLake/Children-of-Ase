@@ -2,6 +2,7 @@
 #include "common.h"
 #include "Rectangle.h"
 #include "GameWindow.h"
+#include "DialogueController.h"
 
 
 class DialogueGui
@@ -33,6 +34,11 @@ private:
 	Texture* dialogueBoxTex;
 	Texture* responseBoxTex;
 
+	//strings
+	std::string dialogueStr = "";
+	std::string responseStr1 = "";
+	std::string responseStr2 = "";
+
 public:
 	DialogueGui();
 	~DialogueGui();
@@ -45,6 +51,7 @@ public:
 	void setHeartGlow();
 	void setFaceGlow();
 	void setQuestionGlow();
+	void updateText();
 	
 };
 

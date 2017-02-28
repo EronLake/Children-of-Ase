@@ -35,9 +35,11 @@ public:
 	void setFaceGlow(WorldObj* player);
 	void setQuestionGlow(WorldObj* player);
 
+
 	//functions for rendering
 	void draw_frame(WorldObj* player);
 	void drawDiaGui(WorldObj* player);
+	void updateGuiText(WorldObj* player);
 
 	//functions for creating objects in memory
 	void add_hero(std::string key, float x, float y, bool col);

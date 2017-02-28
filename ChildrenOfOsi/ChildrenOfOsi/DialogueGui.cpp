@@ -105,8 +105,16 @@ void DialogueGui::setQuestionGlow()
 	questionIcon->sprite.setTexture(questionGlowTex);
 }
 
+void DialogueGui::updateText()
+{
+	dialogueStr = DialogueController::getMessage();
+	responseStr1 = DialogueController::getOptions()[0];
+	responseStr2 = DialogueController::getOptions()[1];
+}
+
 void DialogueGui::drawGui()
 {
+
 	osi::GameWindow::drawSprite(background->getX(), background->getY(), background->getWidth(), background->getHeight(), background->sprite);
 	osi::GameWindow::drawSprite(swordIcon->getX(), swordIcon->getY(), swordIcon->getWidth(), swordIcon->getHeight(), swordIcon->sprite);
 	osi::GameWindow::drawSprite(heartIcon->getX(), heartIcon->getY(), heartIcon->getWidth(), heartIcon->getHeight(), heartIcon->sprite);
@@ -115,5 +123,10 @@ void DialogueGui::drawGui()
 	osi::GameWindow::drawSprite(dialogueBox->getX(), dialogueBox->getY(), dialogueBox->getWidth(), dialogueBox->getHeight(), dialogueBox->sprite);
 	osi::GameWindow::drawSprite(responseBox1->getX(), responseBox1->getY(), responseBox1->getWidth(), responseBox1->getHeight(), responseBox1->sprite);
 	osi::GameWindow::drawSprite(responseBox2->getX(), responseBox2->getY(), responseBox2->getWidth(), responseBox2->getHeight(), responseBox2->sprite);
+
+	osi::GameWindow::drawText(dialogueStr, "Arial 48", 254, 303, 600, 80,glm::ivec3(0,0,0));
+	osi::GameWindow::drawText(responseStr1, "Arial 48", 280, 390, 544, 45, glm::ivec3(0, 0, 0));
+	osi::GameWindow::drawText(responseStr2, "Arial 48", 280, 440, 544, 45, glm::ivec3(0, 0, 0));
+
 
 }

@@ -149,9 +149,17 @@
     <ClCompile Include="Attack.cpp">
       <Filter>Game Objects</Filter>
     </ClCompile>
-    <ClCompile Include="Relationship.cpp" />
     <ClCompile Include="Action.cpp" />
     <ClCompile Include="ActionPool.cpp" />
+    <ClCompile Include="Relationship.cpp">
+      <Filter>Relationship</Filter>
+    </ClCompile>
+    <ClCompile Include="Alliance.cpp">
+      <Filter>Relationship</Filter>
+    </ClCompile>
+    <ClCompile Include="War.cpp">
+      <Filter>Relationship</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AIHelper.h">
@@ -317,9 +325,17 @@
     <ClInclude Include="Attack.h">
       <Filter>Game Objects</Filter>
     </ClInclude>
-    <ClInclude Include="Relationship.h" />
     <ClInclude Include="Action.h" />
     <ClInclude Include="ActionPool.h" />
+    <ClInclude Include="Relationship.h">
+      <Filter>Relationship</Filter>
+    </ClInclude>
+    <ClInclude Include="Alliance.h">
+      <Filter>Relationship</Filter>
+    </ClInclude>
+    <ClInclude Include="War.h">
+      <Filter>Relationship</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Text Include="audio_test.txt">
@@ -380,6 +396,9 @@
     </Filter>
     <Filter Include="Rendering\Shaders">
       <UniqueIdentifier>{9833d3aa-a6f5-4851-b7ad-8e4fccde265b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Relationship">
+      <UniqueIdentifier>{d5736e39-ef1b-44e9-bb57-754b5696cc57}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
