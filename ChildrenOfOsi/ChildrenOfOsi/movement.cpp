@@ -21,6 +21,7 @@ Movement::~Movement() {
 
 int Movement::move_up(WorldObj* obj) {
 	//get list to check collision with
+	if (obj->sprite.getLock())return 0;
 	obj->setDirection("UP");
 	objVec.clear();
 	objVec = tree->retrieve(objVec, obj);
@@ -46,6 +47,7 @@ int Movement::move_up(WorldObj* obj) {
 	return 0;
 }
 int Movement::move_up_left(WorldObj* obj) {
+	if (obj->sprite.getLock())return 0;
 	obj->setDirection("LEFT");
 	//get list to check collision with
 	objVec.clear();
@@ -86,6 +88,7 @@ int Movement::move_up_left(WorldObj* obj) {
 	return 0;
 }
 int Movement::move_up_right(WorldObj* obj) {
+	if (obj->sprite.getLock())return 0;
 	obj->setDirection("RIGHT");
 	//get list to check collision with
 	objVec.clear();
@@ -126,6 +129,7 @@ int Movement::move_up_right(WorldObj* obj) {
 	return 0;
 }
 int Movement::move_down(WorldObj* obj) {
+	if (obj->sprite.getLock())return 0;
 	obj->setDirection("DOWN");
 	//get list to check collision with
 	objVec.clear();
@@ -153,6 +157,7 @@ int Movement::move_down(WorldObj* obj) {
 	return 0;
 }
 int Movement::move_down_left(WorldObj* obj) {
+	if (obj->sprite.getLock())return 0;
 	obj->setDirection("LEFT");
 	//get list to check collision with
 	objVec.clear();
@@ -194,6 +199,7 @@ int Movement::move_down_left(WorldObj* obj) {
 	return 0;
 }
 int Movement::move_down_right(WorldObj* obj) {
+	if (obj->sprite.getLock())return 0;
 	obj->setDirection("RIGHT");
 	//get list to check collision with
 	objVec.clear();
@@ -234,6 +240,7 @@ int Movement::move_down_right(WorldObj* obj) {
 	return 0;
 }
 int Movement::move_left(WorldObj* obj) {
+	if (obj->sprite.getLock())return 0;
 	obj->setDirection("LEFT");
 	//get list to check collision with
 	objVec.clear();
@@ -260,6 +267,7 @@ int Movement::move_left(WorldObj* obj) {
 	return 0;
 }
 int Movement::move_right(WorldObj* obj) {
+	if (obj->sprite.getLock())return 0;
 	obj->setDirection("RIGHT");
 	//get list to check collision with
 	objVec.clear();
@@ -302,7 +310,6 @@ int Movement::talk(WorldObj* obj) {
 				if (interaction(d, objVec[i])) {
 					LOG("Player interacted with an object");
 					DialogueController::startConversation(objVec[i],true);
-					return 1;
 				}
 			}
 		}
@@ -324,7 +331,6 @@ int Movement::melee(WorldObj* obj) {
 					std::cout << "Player hit " << liv->getName() << std::endl;
 					d->melee.Hit(liv);
 					std::cout << liv->getName() << "'s health is now " << liv->getHealth() << std::endl;
-					return 1;
 				}
 			}
 			}

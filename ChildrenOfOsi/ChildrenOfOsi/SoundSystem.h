@@ -38,6 +38,7 @@ public:
 	int playSong1();
 	int playBump();
 	int playWalk();
+	int playSixers();
 	//sounds sounds_map;
 	
 	

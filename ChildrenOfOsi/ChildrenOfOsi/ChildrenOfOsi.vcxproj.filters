@@ -149,6 +149,12 @@
     <ClCompile Include="Attack.cpp">
       <Filter>Game Objects</Filter>
     </ClCompile>
+    <ClCompile Include="Relationship.cpp" />
+    <ClCompile Include="Action.cpp" />
+    <ClCompile Include="ActionPool.cpp" />
+    <ClCompile Include="Alliance.cpp" />
+    <ClCompile Include="War.cpp" />
+    <ClCompile Include="TextObj.cpp" />
     <ClCompile Include="Memory.cpp">
       <Filter>AI</Filter>
     </ClCompile>
@@ -317,6 +323,12 @@
     <ClInclude Include="Attack.h">
       <Filter>Game Objects</Filter>
     </ClInclude>
+    <ClInclude Include="Relationship.h" />
+    <ClInclude Include="Action.h" />
+    <ClInclude Include="ActionPool.h" />
+    <ClInclude Include="Alliance.h" />
+    <ClInclude Include="War.h" />
+    <ClInclude Include="TextObj.h" />
     <ClInclude Include="Memory.h">
       <Filter>AI</Filter>
     </ClInclude>

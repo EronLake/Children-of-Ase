@@ -36,18 +36,22 @@ FMOD_RESULT result;
 		string oasis = "oasis.wav";
 		string bump = "bump_0.wav";
 		string walk = "walk_loop.wav";
+		string sixers = "76ersAnthem.mp3";
 
 		SoundClass oasisAddress = nullptr;
 		SoundClass bumpAddress = nullptr;
 		SoundClass walkAddress = nullptr;
+		SoundClass sixAddress = nullptr;
 
 		this->createSound(&oasisAddress, oasis);
 		this->createSound(&bumpAddress, bump);
 		this->createSound(&walkAddress, walk);
+		this->createSound(&sixAddress, sixers);
 
 		sounds[oasis] = oasisAddress;
 		sounds[bump] = bumpAddress;
 		sounds[walk] = walkAddress;
+		sounds[sixers] = sixAddress;
 
 	}
 
@@ -291,3 +295,25 @@ FMOD_RESULT result;
 		// switch the address of the sound being played.
 	};*/
 	
+	int SoundSystem::playSixers() {
+		foo::soundType type;
+		FMOD::Sound* soundSample;
+		const char* name;              //the variables required
+
+		chnls[0] = nullptr;
+		bool ispaused;
+		unsigned int time;
+
+		// Initialize our sound system
+		SoundSystem soundsystem;
+
+		type = foo::soundType::music;
+		name = "76ersAnthem.mp3";
+		channels[name] = &chnls[0];//assign the channel
+
+		ispaused = true;
+		
+		playMusic(sounds[name], true, chnls[0], ispaused, .6);
+
+		return 0;// Release the sound
+	};

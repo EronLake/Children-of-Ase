@@ -2,7 +2,7 @@
 #include "common.h"
 #include "Rectangle.h"
 #include "GameWindow.h"
-
+#include "DialogueController.h"
 
 class DialogueGui
 {

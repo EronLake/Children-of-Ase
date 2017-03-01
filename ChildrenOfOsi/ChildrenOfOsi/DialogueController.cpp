@@ -150,9 +150,6 @@ vector<std::string> DialogueController::getReplyOptions()
 
 void DialogueController::setPlayer(Player* p)
 {
-	for (int i = 0; i < 100; i++) {
-		cout << "NAME in controller " << p->name << endl;
-	}
 	player = p;
 	state = 0;
 }
@@ -161,7 +158,8 @@ void DialogueController::startConversation(WorldObj* n, bool playerTalk)
 {
 	std::cout << player->getName() << " talked with " << n->getName() << std::endl;
 	other = n;
-	message = "";
+	message = "You started talking to ";
+	message += n->getName();
 	if (playerTalk) {
 		PlayerChoose();
 	}

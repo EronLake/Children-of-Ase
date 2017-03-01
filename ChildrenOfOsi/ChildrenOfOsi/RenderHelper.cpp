@@ -77,21 +77,6 @@ int RenderHelper::drawDiaGui(WorldObj* obj)
 		objVec[i]->WorldObj::drawObj(camera->getX(), camera->getY());
 		objVec[i]->WorldObj::animateObj();
 	}
-	std::string m = DialogueController::getMessage();
-	//	std::cout << "Message: " << m << std::endl;
-	std::vector<std::string> show;
-	if (DialogueController::getState() == 1) {
-		show = DialogueController::getOptions();
-		for (int i = 0; i < show.size(); i++) {
-		//	std::cout << i << ": " << show[i] << std::endl;
-		}
-	}
-	if (DialogueController::getState() == 2) {
-		show = DialogueController::getReplyOptions();
-		for (int i = 0; i < show.size(); i++) {
-		//	std::cout << i<<": "<<show[i] << std::endl;
-		}
-	}
 	convoGui->drawGui();
 	osi::GameWindow::refresh();
 	return 0;
@@ -144,6 +129,22 @@ int RenderHelper::sprite_left(WorldObj* obj) {
 int RenderHelper::sprite_right(WorldObj* obj) {
 	obj->sprite.setTexture(obj->sprite.right);
 	obj->sprite.setIdleTexture(obj->sprite.id_right);
+	return 0;
+}
+
+int RenderHelper::sprite_atk(WorldObj * obj)
+{
+	std::string check = obj->getDirection();
+	if (check.compare("UP") == 0) {
+		obj->sprite.setTexture(obj->sprite.atk_up);
+	} else 	if (check.compare("DOWN") == 0) {
+		obj->sprite.setTexture(obj->sprite.atk_down);
+	} else 	if (check.compare("RIGHT") == 0) {
+		obj->sprite.setTexture(obj->sprite.atk_right);
+	} else	if (check.compare("LEFT") == 0) {
+		obj->sprite.setTexture(obj->sprite.atk_left);
+	}
+	obj->sprite.lockAnimation();
 	return 0;
 }
 

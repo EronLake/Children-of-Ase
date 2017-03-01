@@ -6,20 +6,31 @@ const std::string osi::GameWindow::STD_FRAGMENT_SHADER_PATH = "./OpenGL Shaders/
 const std::string osi::GameWindow::FONT_VERTEX_SHADER_PATH = "./OpenGL Shaders/FontVertexShader.vert.glsl";
 const std::string osi::GameWindow::FONT_FRAGMENT_SHADER_PATH = "./OpenGL Shaders/FontFragmentShader.frag.glsl";
 
+GLFWmonitor *osi::GameWindow::primaryMonitor = nullptr;
 GLFWwindow *osi::GameWindow::window = nullptr;
+int osi::GameWindow::monitorWidthPx = -1;
+int osi::GameWindow::monitorHeightPx = -1;
 int osi::GameWindow::windowWidthPx = -1;
 int osi::GameWindow::windowHeightPx = -1;
+double osi::GameWindow::dpScaleWidth = 1.0;
+double osi::GameWindow::dpScaleHeight = 1.0;
 
 std::vector<GLuint> osi::GameWindow::vertexArrayObjectId;
 std::vector<GLuint> osi::GameWindow::vertexBufferObjectId;
 std::vector<GLuint> osi::GameWindow::elementBufferObjectId;
 std::vector<GLuint> osi::GameWindow::textures;
+
+GLuint osi::GameWindow::fontVAO = 0;
+GLuint osi::GameWindow::fontVBO = 0;
+
 GLuint osi::GameWindow::stdShaderProgramId = 0;
 GLuint osi::GameWindow::fontShaderProgramId = 0;
 
 std::unordered_map<std::string, std::unordered_map<GLchar, osi::Glyph>> osi::GameWindow::fontCharacters;
 
 int osi::GameWindow::numObjects = 0;
+
+std::vector<TextObj> osi::GameWindow::text;
 
 /**
  * Initializes the game's window. This will cause the application window to
@@ -56,13 +67,20 @@ bool osi::GameWindow::terminate()
   glfwTerminate();
 
   GameWindow::window = nullptr;
+  GameWindow::monitorWidthPx = -1;
+  GameWindow::monitorHeightPx = -1;
   GameWindow::windowWidthPx = -1;
   GameWindow::windowHeightPx = -1;
+  GameWindow::dpScaleWidth = 1.0;
+  GameWindow::dpScaleHeight = 1.0;
 
   GameWindow::vertexArrayObjectId;
   GameWindow::vertexBufferObjectId;
   GameWindow::elementBufferObjectId;
   GameWindow::textures;
+
+  GameWindow::fontVAO = 0;
+  GameWindow::fontVBO = 0;
 
   GameWindow::stdShaderProgramId = 0;
   GameWindow::fontShaderProgramId = 0;
@@ -99,26 +117,29 @@ bool osi::GameWindow::isRunning()
  */
 void osi::GameWindow::drawSprite(float x, float y, float width, float height, Sprite sp)
 {
-  //std::cout << "x: " << x <<std::endl;
-  std::vector<GLfloat> GlCoordTL = GameWindow::dpCoordToGL(x, y);
-  std::vector<GLfloat> GlCoordBR = GameWindow::dpCoordToGL(x + width, y + height);
+  glUseProgram(GameWindow::stdShaderProgramId);
+
+  glm::vec2 glCoordTL = GameWindow::dpCoordToGL(x, y);
+  glm::vec2 glCoordBR = GameWindow::dpCoordToGL(x + width, y + height);
   float x1 = static_cast<float>(sp.getStart()) / static_cast<float>(sp.getTexture().getWidth());
   float x2 = static_cast<float>(sp.getStop()) / static_cast<float>(sp.getTexture().getWidth());
   float y1 = static_cast<float>(sp.getTop()) / static_cast<float>(sp.getTexture().getHeight());
   float y2 = static_cast<float>(sp.getBottom()) / static_cast<float>(sp.getTexture().getHeight());
 
   GLfloat spriteCoords[] = {
-    // Vertices                         // Vertex colors    // Texture coordinates
-    GlCoordTL[0], GlCoordTL[1], 0.0F,   1.0F, 0.0F, 0.0F,  x1, y1, // Top-left corner
-    GlCoordTL[0], GlCoordBR[1], 0.0F,   1.0F, 0.0F, 0.0F,  x1, y2, // Bottom-left corner
-    GlCoordBR[0], GlCoordBR[1], 0.0F,   1.0F, 0.0F, 0.0F,  x2, y2, // Bottom-right corner
-    GlCoordBR[0], GlCoordTL[1], 0.0F,   1.0F, 0.0F, 0.0F,  x2, y1, // Top-right corner
+    // Vertices                       // Vertex colors    // Texture coordinates
+    glCoordTL.x, glCoordTL.y, 0.0F,   1.0F, 0.0F, 0.0F,  x1, y1, // Top-left corner
+    glCoordTL.x, glCoordBR.y, 0.0F,   1.0F, 0.0F, 0.0F,  x1, y2, // Bottom-left corner
+    glCoordBR.x, glCoordBR.y, 0.0F,   1.0F, 0.0F, 0.0F,  x2, y2, // Bottom-right corner
+    glCoordBR.x, glCoordTL.y, 0.0F,   1.0F, 0.0F, 0.0F,  x2, y1, // Top-right corner
   };
+
   GLuint spriteVertexIndices[] = {
     0, 2, 3, // First triangle
-    0, 2, 1  // Second triangle
+    0, 2, 1, // Second triangle
   };
-  numObjects++;
+
+  ++numObjects;
   vertexArrayObjectId.push_back(numObjects);
   vertexBufferObjectId.push_back(numObjects);
   elementBufferObjectId.push_back(numObjects);
@@ -142,29 +163,17 @@ void osi::GameWindow::drawSprite(float x, float y, float width, float height, Sp
   glBindVertexArray(0);
 
   textures.push_back(sp.getTexture().getId());
- // //GLuint textureId;
- // textureId.push_back(numObjects);
- // glGenTextures(1, &textureId[numObjects-1]);
- // glBindTexture(GL_TEXTURE_2D, textureId[numObjects-1]);
- // glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
- // glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
- // glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
- // glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-
- // int imageWidth=t.getTexture().getWidth();
- // int imageHeight=t.getTexture().getHeight();
- //// unsigned char *image = SOIL_load_image(fileName.c_str(), &imageWidth, &imageHeight, 0, SOIL_LOAD_RGBA);
- // glEnable(GL_BLEND);
- // glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
- // glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, imageWidth, imageHeight, 0, GL_RGBA, GL_UNSIGNED_BYTE, t.getTexture().getImage());
- // glGenerateMipmap(GL_TEXTURE_2D);
- //// SOIL_free_image_data(t.getTexture().getImage());
- // glBindTexture(GL_TEXTURE_2D, 0);
 }
 
 /**
- * Draw the specified text string to the screen with the given coordinates and area.
+ * Draws the specified text string, in the specified font and color, at the
+ * given position and within the given bounds. If the font specified does not
+ * exist, or either of the dimensions of the bounding box are non-positive,
+ * no text will be drawn.
  *
+ * Param text: The string of text to be drawn
+ * Param fontName: The string key for the font to be used, of the form
+ * "fontName fontSize", e.g. "Arial 48"
  * Param x: The horizontal X coordinate of the text region's top-left corner
  * Param y: The vertical Y coordinate of the text region's top-right corner
  * Param fieldWidth: The maximum width, in device-independent pixels, of any
@@ -172,12 +181,64 @@ void osi::GameWindow::drawSprite(float x, float y, float width, float height, Sp
  * Param fieldHeight: The maximum height, in device-inpedenant pixels, of the
  * written text; if the string provided would require more space to draw than is
  * available, then it will be truncated
- * Param charHeight: The height of each line of text
- * Param text: The text to be drawn
+ * Param color: The color in which to draw the text, as integers [0, 255]
  */
-void osi::GameWindow::drawText(float x, float y, float fieldWidth, float fieldHeight, float charHeight, const std::string& text)
+void osi::GameWindow::drawText(const std::string& text, const std::string& fontName, float x, float y, float fieldWidth, float fieldHeight, glm::ivec3 color)
 {
+  // Return immediately if arguments are invalid
+  if(GameWindow::fontCharacters.find(text) == GameWindow::fontCharacters.end()) return;
+  else if(fieldWidth <= 0.0F || fieldHeight <= 0.0F) return;
 
+  glm::vec2 textBoundsTL = GameWindow::dpCoordToGL(x, y);
+  glm::vec2 currentTextTL(textBoundsTL);
+
+  if(color.x < 0) color.x = 0; else if(color.x > 255) color.x = 255;
+  if(color.y < 0) color.y = 0; else if(color.y > 255) color.y = 255;
+  if(color.z < 0) color.z = 0; else if(color.z > 255) color.z = 255;
+  GLfloat colorRed   = static_cast<float>(color.x) / 255.0F;
+  GLfloat colorGreen = static_cast<float>(color.y) / 255.0F;
+  GLfloat colorBlue  = static_cast<float>(color.z) / 255.0F;
+
+  glUseProgram(GameWindow::fontShaderProgramId);
+  glUniform3f(glGetUniformLocation(GameWindow::fontShaderProgramId, "textColor"), colorRed, colorGreen, colorBlue);
+
+  glEnable(GL_CULL_FACE);
+  glEnable(GL_BLEND);
+  glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+
+  for(auto& ch : text) {
+    if(ch < '\x00' || ch > '\x7F')
+      continue;
+
+    Glyph glyph = fontCharacters[fontName][ch];
+    GLfloat chX = currentTextTL.x + glyph.bearing.x;
+    GLfloat chY = currentTextTL.y - glyph.size.y - glyph.bearing.y;
+    GLfloat chW = static_cast<GLfloat>(glyph.size.x);
+    GLfloat chH = static_cast<GLfloat>(glyph.size.y);
+
+    GLfloat vertices[6][4] = {
+      {chX,       chY + chH, 0.0F, 0.0F}, // 
+      {chX,       chY,       0.0F, 1.0F}, // 
+      {chX + chW, chY,       1.0F, 1.0F}, // 
+
+      {chX,       chY + chH, 0.0F, 0.0F}, // 
+      {chX + chW,       chY, 1.0F, 1.0F}, // 
+      {chX + chW, chY + chH, 1.0F, 0.0F}, // 
+    };
+
+    glBindTexture(GL_TEXTURE_2D, glyph.textureId);
+
+    glBindBuffer(GL_ARRAY_BUFFER, 0);
+    glBufferSubData(GL_ARRAY_BUFFER, 0, sizeof(vertices), vertices);
+    glBindBuffer(GL_ARRAY_BUFFER, 0);
+
+    glDrawArrays(GL_TRIANGLES, 0, 6);
+
+    currentTextTL.x += (glyph.advance >> 6);
+  }
+
+  glBindVertexArray(0);
+  glBindTexture(GL_TEXTURE_2D, 0);
 }
 
 /**
@@ -189,24 +250,27 @@ void osi::GameWindow::refresh()
 
   glClearColor(0.5F, 0.5F, 0.5F, 1.0F);
   glClear(GL_COLOR_BUFFER_BIT);
-  glUseProgram(GameWindow::stdShaderProgramId);
+
   for(GLint i = 0; i < numObjects; ++i) {
     glBindTexture(GL_TEXTURE_2D, Texture::textureId[textures[i] - 1]);
     glBindVertexArray(vertexArrayObjectId[i]);
     glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
     glDeleteVertexArrays(1, &vertexArrayObjectId[i]);
-    //glDeleteTextures(1, &Texture::textureId[i]);
     glDeleteBuffers(1, &vertexBufferObjectId[i]);
     glDeleteBuffers(1, &elementBufferObjectId[i]);
   }
-  // glDrawArrays(GL_TRIANGLES, 0, 3);
+  for (int i = 0; i < text.size(); i++) {
+	  drawText(text[i].getText(), text[i].getFont(), text[i].getX(), text[i].getY(), text[i].getWidth(), text[i].getHeight(), text[i].getColor());
+  }
   glBindVertexArray(0);
   vertexArrayObjectId.clear();
-  textures.clear();
   vertexBufferObjectId.clear();
   elementBufferObjectId.clear();
+  textures.clear();
   numObjects = 0;
-  glfwSwapBuffers(osi::GameWindow::window);
+  text.clear();
+
+  glfwSwapBuffers(GameWindow::window);
 }
 
 /**
@@ -220,7 +284,7 @@ void osi::GameWindow::refresh()
  * Param y: The vertical Y coordinate
  * Return: Returns a vector, size 2, containing the transformed coordinates
  */
-std::vector<GLfloat> osi::GameWindow::dpCoordToGL(float x, float y)
+glm::vec2 osi::GameWindow::dpCoordToGL(float x, float y)
 {
   GLfloat glX;
   glX = (x - (0.5F * (WINDOW_WIDTH_DP - 1))) / (0.5F * (WINDOW_WIDTH_DP - 1));
@@ -244,7 +308,8 @@ void osi::GameWindow::setupWindow()
   glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
   glfwWindowHint(GLFW_RESIZABLE, GL_FALSE);
 
-  GameWindow::window = glfwCreateWindow(1280, 720, "Children of Osi", nullptr, nullptr);
+  GameWindow::primaryMonitor = glfwGetPrimaryMonitor();
+  GameWindow::window = glfwCreateWindow(1280, 720, "Children of Osi", /*GameWindow::primaryMonitor*/ nullptr, nullptr);
   if(window == nullptr) {
     glfwTerminate();
     throw osi::WindowingError("Failed to create window.");
@@ -258,8 +323,32 @@ void osi::GameWindow::setupWindow()
     throw osi::WindowingError("Failed to initialize GLEW.");
   }
 
-  glfwGetFramebufferSize(window, &GameWindow::windowWidthPx, &GameWindow::windowHeightPx);
-  glViewport(0, 0, GameWindow::windowWidthPx, GameWindow::windowHeightPx);
+  GameWindow::monitorWidthPx = glfwGetVideoMode(GameWindow::primaryMonitor)->width;
+  GameWindow::monitorHeightPx = glfwGetVideoMode(GameWindow::primaryMonitor)->height;
+
+  double aspectRatio = static_cast<double>(GameWindow::monitorWidthPx) / static_cast<double>(GameWindow::monitorHeightPx);
+  if(aspectRatio == (16.0 / 9.0)) {
+    glfwGetFramebufferSize(window, &GameWindow::windowWidthPx, &GameWindow::windowHeightPx);
+    glViewport(0, 0, GameWindow::windowWidthPx, GameWindow::windowHeightPx);
+  }
+  else {
+    // If screen is wider than 16:9
+    if(aspectRatio > (16.0 / 9.0)) {
+      glfwGetFramebufferSize(window, &GameWindow::windowWidthPx, &GameWindow::windowHeightPx);
+      GameWindow::windowWidthPx = static_cast<int>(floor(GameWindow::windowHeightPx * (16.0 / 9.0)));
+      glViewport(0, 0, GameWindow::windowWidthPx, GameWindow::windowHeightPx);
+    }
+
+    // If screen is narrower than 16:9
+    else {
+      glfwGetFramebufferSize(window, &GameWindow::windowWidthPx, &GameWindow::windowHeightPx);
+      GameWindow::windowHeightPx = static_cast<int>(floor(GameWindow::windowWidthPx * (9.0 / 16.0)));
+      glViewport(0, 0, GameWindow::windowWidthPx, GameWindow::windowHeightPx);
+    }
+  }
+
+  GameWindow::dpScaleWidth = static_cast<double>(GameWindow::windowWidthPx) / static_cast<double>(GameWindow::WINDOW_WIDTH_DP);
+  GameWindow::dpScaleHeight = static_cast<double>(GameWindow::windowHeightPx) / static_cast<double>(GameWindow::WINDOW_HEIGHT_DP);
 }
 
 /**
@@ -388,137 +477,6 @@ GLuint osi::GameWindow::setupShaders(const std::string& vertexShaderPath, const 
 }
 
 /**
- * Loads, compiles, and links the standard OpenGL shaders as used by the game
- * window. The shaders loaded are determined by the value of the private
- * constants GameWindow::STD_VERTEX_SHADER_PATH and
- * GameWindow::STD_FRAGMENT_SHADER_PATH.
- */
-void osi::GameWindow::setupStdShaders()
-{
-  std::ifstream fileStream;
-  GLchar *vertexShaderSource = nullptr;
-  GLchar *fragmentShaderSource = nullptr;
-
-  GLint compileStepSuccess;
-  GLchar compileStepInfoLog[1024];
-
-  // Read entirety of vertex shader source code into vertexShaderSource
-  fileStream.open(GameWindow::STD_VERTEX_SHADER_PATH);
-  if(fileStream) {
-    fileStream.seekg(0, fileStream.end);
-    std::size_t fileLength = static_cast<std::size_t>(fileStream.tellg());
-    fileStream.seekg(0, fileStream.beg);
-
-    vertexShaderSource = new GLchar[fileLength + 1];
-    for(std::size_t i = 0; i <= fileLength; ++i)
-      vertexShaderSource[i] = '\0';
-    fileStream.read(vertexShaderSource, fileLength);
-
-    std::cout << vertexShaderSource << std::endl;
-    std::cout << "File length: " << fileLength << std::endl;
-  }
-  else {
-    fileStream.close();
-    throw osi::ShaderCompilationError("Error opening standard vertex shader: \""
-      + GameWindow::STD_VERTEX_SHADER_PATH + "\"");
-  }
-
-  // Close the stream and ready it for the next file
-  fileStream.close();
-  fileStream.clear();
-
-  // Compile the vertex shader
-  GLuint vertexShaderId = glCreateShader(GL_VERTEX_SHADER);
-  glShaderSource(vertexShaderId, 1, &vertexShaderSource, NULL);
-  glCompileShader(vertexShaderId);
-
-  // Check for errors in compilation of the vertex shader
-  glGetShaderiv(vertexShaderId, GL_COMPILE_STATUS, &compileStepSuccess);
-  if(!compileStepSuccess) {
-    glGetShaderInfoLog(vertexShaderId, 1024, NULL, compileStepInfoLog);
-
-    glDeleteShader(vertexShaderId);
-    delete[] vertexShaderSource;
-
-    std::cout << compileStepInfoLog << std::endl;
-    std::cout << vertexShaderSource << std::endl;
-
-    throw osi::ShaderCompilationError("ERROR::SHADER::VERTEX::COMPILATION_FAILED\n"
-      + std::string(compileStepInfoLog) + "\n");
-  }
-
-  // Read entirety of fragment shader source code into fragmentShaderSource
-  fileStream.open(GameWindow::STD_FRAGMENT_SHADER_PATH);
-  if(fileStream) {
-    fileStream.seekg(0, fileStream.end);
-    std::size_t fileLength = static_cast<std::size_t>(fileStream.tellg());
-    fileStream.seekg(0, fileStream.beg);
-
-    fragmentShaderSource = new GLchar[fileLength + 1];
-    for(std::size_t i = 0; i <= fileLength; ++i)
-      fragmentShaderSource[i] = '\0';
-    fileStream.read(fragmentShaderSource, fileLength);
-
-    std::cout << fragmentShaderSource << std::endl;
-    std::cout << "File length: " << fileLength << std::endl;
-  }
-  else {
-    delete[] vertexShaderSource;
-    fileStream.close();
-    throw osi::ShaderCompilationError("Error opening standard fragment shader: \""
-      + GameWindow::STD_FRAGMENT_SHADER_PATH + "\"");
-  }
-
-  // Close the file stream for good
-  fileStream.close();
-
-  // Compile the fragment shader
-  GLuint fragmentShaderId = glCreateShader(GL_FRAGMENT_SHADER);
-  glShaderSource(fragmentShaderId, 1, &fragmentShaderSource, NULL);
-  glCompileShader(fragmentShaderId);
-
-  // Check for errors in compilation of the fragment shader
-  glGetShaderiv(fragmentShaderId, GL_COMPILE_STATUS, &compileStepSuccess);
-  if(!compileStepSuccess) {
-    glGetShaderInfoLog(fragmentShaderId, 1024, NULL, compileStepInfoLog);
-
-    glDeleteShader(vertexShaderId);
-    glDeleteShader(fragmentShaderId);
-    delete[] vertexShaderSource;
-    delete[] fragmentShaderSource;
-
-    throw osi::ShaderCompilationError("ERROR::SHADER::FRAGMENT::COMPILATION_FAILED\n"
-      + std::string(compileStepInfoLog) + "\n");
-  }
-
-  // Link the shaders
-  GameWindow::stdShaderProgramId = glCreateProgram();
-  glAttachShader(GameWindow::stdShaderProgramId, vertexShaderId);
-  glAttachShader(GameWindow::stdShaderProgramId, fragmentShaderId);
-  glLinkProgram(GameWindow::stdShaderProgramId);
-
-  // Check for linking errors
-  glGetProgramiv(GameWindow::stdShaderProgramId, GL_LINK_STATUS, &compileStepSuccess);
-  if(!compileStepSuccess) {
-    glGetProgramInfoLog(GameWindow::stdShaderProgramId, 1024, NULL, compileStepInfoLog);
-
-    glDeleteShader(vertexShaderId);
-    glDeleteShader(fragmentShaderId);
-    delete[] vertexShaderSource;
-    delete[] fragmentShaderSource;
-
-    throw osi::ShaderCompilationError("ERROR::SHADER::PROGRAM::LINKING_FAILED\n"
-      + std::string(compileStepInfoLog) + "\n");
-  }
-
-  // With compilation complete, deallocate the unneeded shaders and free up the source code strings
-  glDeleteShader(vertexShaderId);
-  glDeleteShader(fragmentShaderId);
-  delete[] vertexShaderSource;
-  delete[] fragmentShaderSource;
-}
-
-/**
  * Sets up the texture information for the specified font at the given size. The
  * unique string identifying the font in the map with be of form "name size",
  * where "name" is fontName and "size" is the string form of fontHeight.
@@ -539,7 +497,7 @@ void osi::GameWindow::setupFont(const std::string& fontName, int fontHeight)
   glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
 
   // Load up all the characters in the ASCII set
-  for(GLchar ch = 0x00; ch >= 0x00 && ch <= 0x7F; ++ch) {
+  for(GLchar ch = '\x00'; ch >= '\x00' && ch <= '\x7F'; ++ch) {
     if(FT_Load_Char(face, ch, FT_LOAD_RENDER)) {
       FT_Done_Face(face);
       FT_Done_FreeType(fontLib);
@@ -570,4 +528,22 @@ void osi::GameWindow::setupFont(const std::string& fontName, int fontHeight)
   glPixelStorei(GL_UNPACK_ALIGNMENT, 4);
   FT_Done_Face(face);
   FT_Done_FreeType(fontLib);
+
+  glm::mat4 projection = glm::ortho(0.0F, static_cast<GLfloat>(GameWindow::windowWidthPx),
+    0.0F, static_cast<GLfloat>(GameWindow::windowHeightPx));
+  glUniformMatrix4fv(glGetUniformLocation(GameWindow::fontShaderProgramId, "projection"),
+    1, GL_FALSE, glm::value_ptr(projection));
+
+  glGenVertexArrays(1, &fontVAO);
+  glGenBuffers(1, &fontVBO);
+
+  glBindVertexArray(fontVAO);
+  glBindBuffer(GL_ARRAY_BUFFER, fontVBO);
+  glBufferData(GL_ARRAY_BUFFER, sizeof(GLfloat) * 6 * 4, NULL, GL_STREAM_DRAW);
+
+  glEnableVertexAttribArray(0);
+  glVertexAttribPointer(0, 4, GL_FLOAT, GL_FALSE, 4 * sizeof(GLfloat), 0);
+
+  glBindBuffer(GL_ARRAY_BUFFER, 0);
+  glBindVertexArray(0);
 }
