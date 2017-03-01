@@ -23,7 +23,8 @@ RenderManager::RenderManager(MessageLog * _mLog, TaskBuffer * _tBuffer, QuadTree
 	task_map["Move_Right"] = &RenderHelper::sprite_right;
 	task_map["Stop"] = &RenderHelper::sprite_idle;
 	task_map["Sprite_Update"] = &RenderHelper::sprite_update;
-	task_map["Talk"] = &RenderHelper::drawDiaGui;
+	task_map["Dialogue"] = &RenderHelper::drawDiaGui;
+	task_map["Melee"] = &RenderHelper::sprite_atk;
 	task_map["GSword"] = &RenderHelper::setSwordGlow;
 	task_map["GHeart"] = &RenderHelper::setHeartGlow;
 	task_map["GFace"] = &RenderHelper::setFaceGlow;
@@ -40,7 +41,7 @@ void RenderManager::register_manager()
 	tBuffer->add_to_table("DRAW", this);
 	tBuffer->add_to_table("MOVE", this);
 	//tBuffer->add_to_table("RENDER", this);
-	//tBuffer->add_to_table("INTERACT", this);
+	tBuffer->add_to_table("INTERACT", this);
 }
 
 void RenderManager::execute_task(Task* current_task)

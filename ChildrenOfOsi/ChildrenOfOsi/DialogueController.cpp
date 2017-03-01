@@ -150,9 +150,6 @@ vector<std::string> DialogueController::getReplyOptions()
 
 void DialogueController::setPlayer(Player* p)
 {
-	for (int i = 0; i < 100; i++) {
-		cout << "NAME in controller " << p->name << endl;
-	}
 	player = p;
 	state = 0;
 }

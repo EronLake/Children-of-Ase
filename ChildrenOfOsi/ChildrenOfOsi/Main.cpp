@@ -241,6 +241,10 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	Texture* downIdleTex = new Texture();
 	Texture* leftIdleTex = new Texture();
 	Texture* rightIdleTex = new Texture();
+	Texture* upAtkTex = new Texture();
+	Texture* downAtkTex = new Texture();
+	Texture* leftAtkTex = new Texture();
+	Texture* rightAtkTex = new Texture();
 
 	Texture* yemojaTexture = new Texture();
 	Texture* yemojaIdleTex = new Texture();
@@ -278,6 +282,10 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	downIdleTex->setFile("Assets/Sprites/ShangoFrontIdle.png",1);
 	leftIdleTex->setFile("Assets/Sprites/ShangoLeftIdle.png",1);
 	rightIdleTex->setFile("Assets/Sprites/ShangoRightIdle.png",1);
+	upAtkTex->setFile("Assets/Sprites/ShangoBackSwing.png", 24);
+	downAtkTex->setFile("Assets/Sprites/ShangoForwardSwing.png", 24);
+	leftAtkTex->setFile("Assets/Sprites/ShangoLeftSwing.png", 24);
+	rightAtkTex->setFile("Assets/Sprites/ShangoRightSwing.png", 24);
 
 	yemojaTexture->setFile("Assets/Sprites/YemojaFrontIdle.png", 1);
 	yemojaIdleTex->setFile("Assets/Sprites/YemojaFrontIdle.png", 1);
@@ -314,6 +322,11 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	Alex->sprite.id_left =leftIdleTex;
 	Alex->sprite.id_right = rightIdleTex;
 	Alex->sprite.id_down = downIdleTex;
+
+	Alex->sprite.atk_up = upAtkTex;
+	Alex->sprite.atk_down = downAtkTex;
+	Alex->sprite.atk_left = leftAtkTex;
+	Alex->sprite.atk_right = rightAtkTex;
 
 
 	Alex->offsetBody(0, 50, 50, 50, 50);
@@ -490,7 +503,6 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 
 	ai->graph._print();
 
-	Alex->addRelationship(staticRec);
 	ActionPool poolAct = ActionPool(Alex);
 	Action mic = Action();
 	mic.postconds["aff"] = 5;
