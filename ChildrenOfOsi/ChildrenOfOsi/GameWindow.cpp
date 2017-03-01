@@ -6,9 +6,14 @@ const std::string osi::GameWindow::STD_FRAGMENT_SHADER_PATH = "./OpenGL Shaders/
 const std::string osi::GameWindow::FONT_VERTEX_SHADER_PATH = "./OpenGL Shaders/FontVertexShader.vert.glsl";
 const std::string osi::GameWindow::FONT_FRAGMENT_SHADER_PATH = "./OpenGL Shaders/FontFragmentShader.frag.glsl";
 
+GLFWmonitor *osi::GameWindow::primaryMonitor = nullptr;
 GLFWwindow *osi::GameWindow::window = nullptr;
+int osi::GameWindow::monitorWidthPx = -1;
+int osi::GameWindow::monitorHeightPx = -1;
 int osi::GameWindow::windowWidthPx = -1;
 int osi::GameWindow::windowHeightPx = -1;
+double osi::GameWindow::dpScaleWidth = 1.0;
+double osi::GameWindow::dpScaleHeight = 1.0;
 
 std::vector<GLuint> osi::GameWindow::vertexArrayObjectId;
 std::vector<GLuint> osi::GameWindow::vertexBufferObjectId;
@@ -60,13 +65,20 @@ bool osi::GameWindow::terminate()
   glfwTerminate();
 
   GameWindow::window = nullptr;
+  GameWindow::monitorWidthPx = -1;
+  GameWindow::monitorHeightPx = -1;
   GameWindow::windowWidthPx = -1;
   GameWindow::windowHeightPx = -1;
+  GameWindow::dpScaleWidth = 1.0;
+  GameWindow::dpScaleHeight = 1.0;
 
   GameWindow::vertexArrayObjectId;
   GameWindow::vertexBufferObjectId;
   GameWindow::elementBufferObjectId;
   GameWindow::textures;
+
+  GameWindow::fontVAO = 0;
+  GameWindow::fontVBO = 0;
 
   GameWindow::stdShaderProgramId = 0;
   GameWindow::fontShaderProgramId = 0;
@@ -199,8 +211,8 @@ void osi::GameWindow::drawText(const std::string& text, const std::string& fontN
     Glyph glyph = fontCharacters[fontName][ch];
     GLfloat chX = currentTextTL.x + glyph.bearing.x;
     GLfloat chY = currentTextTL.y - glyph.size.y - glyph.bearing.y;
-    GLfloat chW = glyph.size.x;
-    GLfloat chH = glyph.size.y;
+    GLfloat chW = static_cast<GLfloat>(glyph.size.x);
+    GLfloat chH = static_cast<GLfloat>(glyph.size.y);
 
     GLfloat vertices[6][4] = {
       {chX,       chY + chH, 0.0F, 0.0F}, // 
@@ -291,7 +303,8 @@ void osi::GameWindow::setupWindow()
   glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
   glfwWindowHint(GLFW_RESIZABLE, GL_FALSE);
 
-  GameWindow::window = glfwCreateWindow(1280, 720, "Children of Osi", nullptr, nullptr);
+  GameWindow::primaryMonitor = glfwGetPrimaryMonitor();
+  GameWindow::window = glfwCreateWindow(1280, 720, "Children of Osi", /*GameWindow::primaryMonitor*/ nullptr, nullptr);
   if(window == nullptr) {
     glfwTerminate();
     throw osi::WindowingError("Failed to create window.");
@@ -305,8 +318,32 @@ void osi::GameWindow::setupWindow()
     throw osi::WindowingError("Failed to initialize GLEW.");
   }
 
-  glfwGetFramebufferSize(window, &GameWindow::windowWidthPx, &GameWindow::windowHeightPx);
-  glViewport(0, 0, GameWindow::windowWidthPx, GameWindow::windowHeightPx);
+  GameWindow::monitorWidthPx = glfwGetVideoMode(GameWindow::primaryMonitor)->width;
+  GameWindow::monitorHeightPx = glfwGetVideoMode(GameWindow::primaryMonitor)->height;
+
+  double aspectRatio = static_cast<double>(GameWindow::monitorWidthPx) / static_cast<double>(GameWindow::monitorHeightPx);
+  if(aspectRatio == (16.0 / 9.0)) {
+    glfwGetFramebufferSize(window, &GameWindow::windowWidthPx, &GameWindow::windowHeightPx);
+    glViewport(0, 0, GameWindow::windowWidthPx, GameWindow::windowHeightPx);
+  }
+  else {
+    // If screen is wider than 16:9
+    if(aspectRatio > (16.0 / 9.0)) {
+      glfwGetFramebufferSize(window, &GameWindow::windowWidthPx, &GameWindow::windowHeightPx);
+      GameWindow::windowWidthPx = static_cast<int>(floor(GameWindow::windowHeightPx * (16.0 / 9.0)));
+      glViewport(0, 0, GameWindow::windowWidthPx, GameWindow::windowHeightPx);
+    }
+
+    // If screen is narrower than 16:9
+    else {
+      glfwGetFramebufferSize(window, &GameWindow::windowWidthPx, &GameWindow::windowHeightPx);
+      GameWindow::windowHeightPx = static_cast<int>(floor(GameWindow::windowWidthPx * (9.0 / 16.0)));
+      glViewport(0, 0, GameWindow::windowWidthPx, GameWindow::windowHeightPx);
+    }
+  }
+
+  GameWindow::dpScaleWidth = static_cast<double>(GameWindow::windowWidthPx) / static_cast<double>(GameWindow::WINDOW_WIDTH_DP);
+  GameWindow::dpScaleHeight = static_cast<double>(GameWindow::windowHeightPx) / static_cast<double>(GameWindow::WINDOW_HEIGHT_DP);
 }
 
 /**
