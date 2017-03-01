@@ -51,6 +51,7 @@
 #include "AIManager.h"
 
 #include "ObjConfig.h"
+#include "ActionPool.h"
 
 using namespace std;
 
@@ -240,6 +241,10 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	Texture* downIdleTex = new Texture();
 	Texture* leftIdleTex = new Texture();
 	Texture* rightIdleTex = new Texture();
+	Texture* upAtkTex = new Texture();
+	Texture* downAtkTex = new Texture();
+	Texture* leftAtkTex = new Texture();
+	Texture* rightAtkTex = new Texture();
 
 	Texture* yemojaTexture = new Texture();
 	Texture* yemojaIdleTex = new Texture();
@@ -277,6 +282,10 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	downIdleTex->setFile("Assets/Sprites/ShangoFrontIdle.png",1);
 	leftIdleTex->setFile("Assets/Sprites/ShangoLeftIdle.png",1);
 	rightIdleTex->setFile("Assets/Sprites/ShangoRightIdle.png",1);
+	upAtkTex->setFile("Assets/Sprites/ShangoBackSwing.png", 24);
+	downAtkTex->setFile("Assets/Sprites/ShangoForwardSwing.png", 24);
+	leftAtkTex->setFile("Assets/Sprites/ShangoLeftSwing.png", 24);
+	rightAtkTex->setFile("Assets/Sprites/ShangoRightSwing.png", 24);
 
 	yemojaTexture->setFile("Assets/Sprites/YemojaFrontIdle.png", 1);
 	yemojaIdleTex->setFile("Assets/Sprites/YemojaFrontIdle.png", 1);
@@ -313,6 +322,11 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	Alex->sprite.id_left =leftIdleTex;
 	Alex->sprite.id_right = rightIdleTex;
 	Alex->sprite.id_down = downIdleTex;
+
+	Alex->sprite.atk_up = upAtkTex;
+	Alex->sprite.atk_down = downAtkTex;
+	Alex->sprite.atk_left = leftAtkTex;
+	Alex->sprite.atk_right = rightAtkTex;
 
 
 	Alex->offsetBody(0, 50, 50, 50, 50);
@@ -488,6 +502,27 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	}
 
 	ai->graph._print();
+
+	ActionPool poolAct = ActionPool(Alex);
+	Action mic = Action();
+	mic.postconds["aff"] = 5;
+	mic.setName("High Five");
+	Action mac = Action();
+	mac.preconds["affAbove"] = 55;
+	mac.postconds["aff"] = 5;
+	mac.setName("Did we just become best friends?");
+	poolAct.micro.push_back(mic);
+	poolAct.macro.push_back(mac);
+	poolAct.updateMiddle();
+	std::cout << poolAct.macro.back().getName()<< endl;
+	vector<Action> test= poolAct.getActions(staticRec,poolAct.macro.back());
+	std::cout << test.back().getName() << endl;
+	for (int i = 0; i < test.size(); i++) {
+		std::cout << "--------HERE----------" << std::endl;
+		std::cout << test[i].getName() << std::endl;
+		//int t=test[i].exeAction();
+		//if (t)std::cout << "Yes" << endl;
+	}
 
 
 
@@ -673,67 +708,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 }
 
 void ALESSIO_TEST() {
-	srand(time(NULL));
-	int rInt[10];
-	for (int i = 0; i < 10; i++) {
-		rInt[i] = rand() % 4 - 1;
-	}
-	Factions fac(rInt);
-	Hero person2(OYA, 20, 0, false);
-	Texture still2;
-	still2.setFile("YemojasHouse.png",1);
-	person2.sprite.setTexture(&still2);
-	Hero person(YEMOJA, 20, 0, false);
-	Texture still;
-	still.setFile("phi.png",1);
-	person.sprite.setTexture(&still);
-	cout <<"Is person an NPC: "<< CheckClass::isNPC(&person) << endl;
-	person.setHealth(-10);
-	person.setAlive(false);
-	cout << "person is " << person.getAlive() << " with " << person.getHealth() << endl;
-	cout<<"at location " << person.getX() << " , " << person.getY() << endl;
-	Player me(SHANGO,30, 32, true);
-	NPC citizen(22, 2, true);
-	citizen.setHealth(10);
-	citizen.setInteractable(true);
-	cout << "Interactable: " << citizen.getInteractable() << endl;
-	person.setInCombat(true);
-	cout <<"In Combat: " <<person.getInCombat()<< endl;
-	cout << "Citizen's Health: " << citizen.getHealth() << endl;
-	cout << "Faction Relationship was: "<<fac.getFRel(citizen.getFaction(), person.getFaction()) << endl;
-	fac.setFRel(citizen.getFaction(), person.getFaction(), -1);
-	cout << "Faction Relationship now: " << fac.getFRel(citizen.getFaction(), person.getFaction()) << endl;
-	citizen.setSpeed(2);
-	cout << "Speed: " << citizen.getSpeed() << endl;
-	citizen.shiftX(2);
-	citizen.shiftY(3);
-	citizen.moveUp();
-	citizen.moveRight();
-	cout << "citizen is now at: " << citizen.getX() << " , " << citizen.getY() << endl;
-	person.WorldObj::setWidth(100);
-	person.WorldObj::setHeight(100);
-	person.setX(10);
-	person.setY(300);
-	person2.WorldObj::setWidth(960);
-	person2.WorldObj::setHeight(540);
-	person2.setX(0);
-	person2.setY(0);
 	
-	person.setCollision(true);
-	//osi::GameWindow::init();
-	float z = 0;
-	while (osi::GameWindow::isRunning()) {
-		/*person2.WorldObj::drawObj();
-		person.WorldObj::drawObj();*/
-		person.WorldObj::shiftX(1);
-		person.WorldObj::animateObj();
-		//osi::GameWindow::refresh();
-		//osi::GameWindow::drawSprite(600+z,150,100,100, "phi.png");
-		z += .5;
-		//osi::GameWindow::drawSprite(100, 150, 100, 100, "bluewood.jpg");
-		osi::GameWindow::refresh();
-	}
-	osi::GameWindow::terminate();
 }
 
 void ALEX_LOOP(QuadTree* _QuadTree) {

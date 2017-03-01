@@ -30,6 +30,8 @@ std::unordered_map<std::string, std::unordered_map<GLchar, osi::Glyph>> osi::Gam
 
 int osi::GameWindow::numObjects = 0;
 
+std::vector<TextObj> osi::GameWindow::text;
+
 /**
  * Initializes the game's window. This will cause the application window to
  * become visible to the end user. Only one such window may exist at a time.
@@ -257,13 +259,16 @@ void osi::GameWindow::refresh()
     glDeleteBuffers(1, &vertexBufferObjectId[i]);
     glDeleteBuffers(1, &elementBufferObjectId[i]);
   }
-
+  for (int i = 0; i < text.size(); i++) {
+	  drawText(text[i].getText(), text[i].getFont(), text[i].getX(), text[i].getY(), text[i].getWidth(), text[i].getHeight(), text[i].getColor());
+  }
   glBindVertexArray(0);
   vertexArrayObjectId.clear();
   vertexBufferObjectId.clear();
   elementBufferObjectId.clear();
   textures.clear();
   numObjects = 0;
+  text.clear();
 
   glfwSwapBuffers(GameWindow::window);
 }

@@ -10,7 +10,7 @@ class Sprite
   public:
 
   Sprite():
-    start(0), stop(0), top(0), bottom(0), index(0), tempTime(0), tex(nullptr) {};
+    start(0), stop(0), top(0), bottom(0), index(0), tempTime(0), tex(nullptr),lock(false) {};
   ~Sprite() = default;
 
   int getStart() { return this->start; };
@@ -27,6 +27,9 @@ class Sprite
   void animate();
   //Texture *tex;
   
+  void lockAnimation() { lock = true; };
+  void unlockAnimation() { lock = false; };
+  bool getLock() { return lock; };
 
   Texture *id_up;
   Texture *id_left;
@@ -38,6 +41,11 @@ class Sprite
   Texture *left;
   Texture *right;
 
+  Texture *atk_up;
+  Texture *atk_down;
+  Texture *atk_left;
+  Texture *atk_right;
+
   private:
 
   int start, stop;
@@ -47,5 +55,7 @@ class Sprite
   Texture *idle;
 
   int index, tempTime;
+
+  bool lock;
 };
 

@@ -161,8 +161,11 @@
     <Text Include="task_buffer_test.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Action.h" />
+    <ClInclude Include="ActionPool.h" />
     <ClInclude Include="AIHelper.h" />
     <ClInclude Include="AIManager.h" />
+    <ClInclude Include="Alliance.h" />
     <ClInclude Include="AudioManager.h" />
     <ClInclude Include="AudioTestSuite.h" />
     <ClInclude Include="CheckClass.h" />
@@ -213,14 +216,19 @@
     <ClInclude Include="Task.h" />
     <ClInclude Include="TaskBuffer.h" />
     <ClInclude Include="TestManager.h" />
+    <ClInclude Include="TextObj.h" />
     <ClInclude Include="Texture.h" />
     <ClInclude Include="Vector2f.h" />
+    <ClInclude Include="War.h" />
     <ClInclude Include="WorldObj.h" />
     <ClInclude Include="Wrapper.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Action.cpp" />
+    <ClCompile Include="ActionPool.cpp" />
     <ClCompile Include="AIHelper.cpp" />
     <ClCompile Include="AIManager.cpp" />
+    <ClCompile Include="Alliance.cpp" />
     <ClCompile Include="AudioManager.cpp" />
     <ClCompile Include="AudioTestSuite.cpp" />
     <ClCompile Include="CheckClass.cpp" />
@@ -271,8 +279,10 @@
     <ClCompile Include="Task.cpp" />
     <ClCompile Include="TaskBuffer.cpp" />
     <ClCompile Include="TestManager.cpp" />
+    <ClCompile Include="TextObj.cpp" />
     <ClCompile Include="Texture.cpp" />
     <ClCompile Include="Vector2f.cpp" />
+    <ClCompile Include="War.cpp" />
     <ClCompile Include="WorldObj.cpp" />
     <ClCompile Include="Wrapper.cpp" />
   </ItemGroup>
