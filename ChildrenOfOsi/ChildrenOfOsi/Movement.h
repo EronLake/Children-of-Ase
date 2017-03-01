@@ -29,10 +29,10 @@ public:
 	//void init_task_map();
     QuadTree* tree;
 	PhysicsManager* manager;
-	float moveSpeed = 6.0f;
-	float diagSpeed = sqrt((moveSpeed * moveSpeed) / 2);
-	float diagXSpeed = diagSpeed;
-	float diagYSpeed = diagSpeed;
+	float moveSpeed;
+	float diagSpeed;
+	float diagXSpeed; 
+	float diagYSpeed;
 
 
 private:

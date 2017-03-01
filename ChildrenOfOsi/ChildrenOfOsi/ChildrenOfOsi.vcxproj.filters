@@ -149,6 +149,9 @@
     <ClCompile Include="Attack.cpp">
       <Filter>Game Objects</Filter>
     </ClCompile>
+    <ClCompile Include="Memory.cpp">
+      <Filter>AI</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AIHelper.h">
@@ -313,6 +316,9 @@
     <ClInclude Include="resource2.h" />
     <ClInclude Include="Attack.h">
       <Filter>Game Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="Memory.h">
+      <Filter>AI</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

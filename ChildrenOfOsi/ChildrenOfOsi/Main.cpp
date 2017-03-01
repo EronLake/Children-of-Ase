@@ -212,7 +212,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	memM->register_manager();
 	RenM->register_manager();
 	AudM->register_manager();
-	TestM->register_manager();
+	//TestM->register_manager();
 	AIM->register_manager();
 
 
