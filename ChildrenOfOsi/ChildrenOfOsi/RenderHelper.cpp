@@ -79,16 +79,19 @@ int RenderHelper::drawDiaGui(WorldObj* obj)
 	}
 	std::string m = DialogueController::getMessage();
 	//	std::cout << "Message: " << m << std::endl;
+	osi::GameWindow::createText(m, 254, 303, 600, 80,glm::vec3(50,0,0));
 	std::vector<std::string> show;
 	if (DialogueController::getState() == 1) {
 		show = DialogueController::getOptions();
 		for (int i = 0; i < show.size(); i++) {
+			osi::GameWindow::createText(show[i], 280, 390+(60*i), 544, 45, glm::vec3(50, 0, 0));
 		//	std::cout << i << ": " << show[i] << std::endl;
 		}
 	}
 	if (DialogueController::getState() == 2) {
 		show = DialogueController::getReplyOptions();
 		for (int i = 0; i < show.size(); i++) {
+			osi::GameWindow::createText(show[i], 280, 390 + (60 * i), 544, 45, glm::vec3(50, 0, 0));
 		//	std::cout << i<<": "<<show[i] << std::endl;
 		}
 	}

@@ -26,6 +26,7 @@
 
 #include "AssetInfo.h"
 #include "Sprite.h"
+#include "TextObj.h"
 
 namespace osi
 {
@@ -44,6 +45,7 @@ namespace osi
     static constexpr unsigned int WINDOW_WIDTH_DP = 960U;
     static constexpr unsigned int WINDOW_HEIGHT_DP = 540U;
 
+	static std::vector<TextObj> text;
 	//need this for map editor
 	static GLFWwindow *window;
 
@@ -53,6 +55,7 @@ namespace osi
     static bool isRunning();
 
     static void drawSprite(float, float, float, float, Sprite);
+	static void createText(std::string t, float xCord, float yCord, float w, float h, glm::ivec3 c) { text.push_back(TextObj(t,xCord,yCord,w,h,c)); };
     static void drawText(const std::string&, const std::string&, float, float, float, float, glm::ivec3);
     static void refresh();
 
