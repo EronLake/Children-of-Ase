@@ -505,25 +505,22 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 
 	ActionPool poolAct = ActionPool(Alex);
 	Action mic = Action();
+	mic.preconds["affAbove"] = 50;
 	mic.postconds["aff"] = 5;
-	mic.setName("High Five");
 	Action mac = Action();
 	mac.preconds["affAbove"] = 55;
 	mac.postconds["aff"] = 5;
-	mac.setName("Did we just become best friends?");
+	mac.setOwner(Alex);
+	mac.setHero(staticRec);
 	poolAct.micro.push_back(mic);
 	poolAct.macro.push_back(mac);
 	poolAct.updateMiddle();
 	std::cout << poolAct.macro.back().getName()<< endl;
 	vector<Action> test= poolAct.getActions(staticRec,poolAct.macro.back());
-	std::cout << test.back().getName() << endl;
 	for (int i = 0; i < test.size(); i++) {
-		std::cout << "--------HERE----------" << std::endl;
-		std::cout << test[i].getName() << std::endl;
-		//int t=test[i].exeAction();
-		//if (t)std::cout << "Yes" << endl;
+		int t=test[i].exeAction();
 	}
-
+	poolAct.macro.back().exeAction();
 
 
 	//ai->astar_search(staticRec);

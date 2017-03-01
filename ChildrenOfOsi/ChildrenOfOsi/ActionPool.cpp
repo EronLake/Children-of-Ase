@@ -32,6 +32,7 @@ vector<Action> ActionPool::getActions(Hero* h, Action macro)
 	for (int p= 0; p < points.size(); p++) {
 		list.push_back(*points[p]);
 		list.back().setHero(h);
+		list.back().setOwner(owner);
 	}
 	return list;
 }

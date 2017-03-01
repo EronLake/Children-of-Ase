@@ -134,9 +134,6 @@ int RenderHelper::sprite_right(WorldObj* obj) {
 
 int RenderHelper::sprite_atk(WorldObj * obj)
 {
-	for (int i = 0; i < 10; i++) {
-		std::cout << "~~~~~~~~~~~~~~~~~~~~" << std::endl;
-	}
 	std::string check = obj->getDirection();
 	if (check.compare("UP") == 0) {
 		obj->sprite.setTexture(obj->sprite.atk_up);
