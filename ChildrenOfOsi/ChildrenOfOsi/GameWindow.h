@@ -6,6 +6,7 @@
 
 #include "stdafx.h"
 
+#include <cmath>
 #include <cstdlib>
 #include <exception>
 #include <fstream>
@@ -13,7 +14,9 @@
 #include <string>
 #include <vector>
 
-#include <glm/vec2.hpp>
+#include <glm/glm.hpp>
+#include <glm/gtc/matrix_transform.hpp>
+#include <glm/gtc/type_ptr.hpp>
 
 #include "GLEW\glew.h"
 #include "GLFW/glfw3.h"
@@ -24,15 +27,16 @@
 
 #include "AssetInfo.h"
 #include "Sprite.h"
+#include "TextObj.h"
 
 namespace osi
 {
   struct Glyph
   {
-    GLuint textureId;
-    glm::ivec2 size;
-    glm::ivec2 bearing;
-    GLuint advance;
+    GLuint textureId;   // ID handle for the texture
+    glm::ivec2 size;    // Dimensions of the glyph
+    glm::ivec2 bearing; // Offset from baseline to left, top of glyph
+    GLuint advance;     // Complete horizontal offset to next glyph
   };
 
   struct GameWindow
@@ -42,19 +46,24 @@ namespace osi
     static constexpr unsigned int WINDOW_WIDTH_DP = 960U;
     static constexpr unsigned int WINDOW_HEIGHT_DP = 540U;
 
-	//need this for map editor
-	static GLFWwindow *window;
+    // Need this for map editor
+    static GLFWwindow *window;
+
+    static std::vector<TextObj> text;
 
     static bool init();
     static bool terminate();
     static bool isActive();
     static bool isRunning();
 
+    static const GLFWmonitor * const getPrimaryMonitor() { return GameWindow::primaryMonitor; }
+    static const GLFWwindow * const getWindow() { return GameWindow::window; }
+
     static void drawSprite(float, float, float, float, Sprite);
-    static void drawText(float, float, float, float, float, const std::string&);
+    static void createText(std::string t, float xCord, float yCord, float w, float h, glm::ivec3 c) { text.push_back(TextObj(t, xCord, yCord, w, h, c)); };
+    static void drawText(const std::string&, const std::string&, float, float, float, float, glm::ivec3);
     static void refresh();
 
-	
     private:
 
     static const std::string STD_VERTEX_SHADER_PATH;
@@ -62,14 +71,20 @@ namespace osi
     static const std::string FONT_VERTEX_SHADER_PATH;
     static const std::string FONT_FRAGMENT_SHADER_PATH;
 
-    
-    static int windowWidthPx;
-    static int windowHeightPx;
+    static GLFWmonitor *primaryMonitor;
+
+    static int monitorWidthPx, monitorHeightPx;
+    static int windowWidthPx, windowHeightPx;
+    static double dpScaleWidth, dpScaleHeight;
 
     static std::vector<GLuint> vertexArrayObjectId;
     static std::vector<GLuint> vertexBufferObjectId;
     static std::vector<GLuint> elementBufferObjectId;
     static std::vector<GLuint> textures;
+
+    static GLuint fontVAO;
+    static GLuint fontVBO;
+
     static GLuint stdShaderProgramId;
     static GLuint fontShaderProgramId;
 
@@ -84,11 +99,10 @@ namespace osi
     GameWindow& operator=(const GameWindow&&) = delete;
     ~GameWindow() = delete;
 
-    static std::vector<GLfloat> dpCoordToGL(float, float);
+    static glm::vec2 dpCoordToGL(float, float);
     static void setupWindow();
     static GLuint setupShaders(const std::string&, const std::string&);
-    static void setupStdShaders();
-    static void setupFont(const std::string&, int);
+    static void setupFont(const std::string&, unsigned int);
   };
 
   class WindowingError: public std::runtime_error

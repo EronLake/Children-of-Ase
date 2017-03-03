@@ -16,6 +16,7 @@ public:
 	int sprite_down(WorldObj* obj);
 	int sprite_left(WorldObj* obj);
 	int sprite_right(WorldObj* obj);
+	int sprite_atk(WorldObj* obj);
 	int sprite_idle(WorldObj* obj);
 	int sprite_update(WorldObj* obj);
 	int drawDiaGui(WorldObj* obj);

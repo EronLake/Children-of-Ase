@@ -123,7 +123,7 @@ void ChildrenOfOsi::draw_frame(WorldObj * player)
 
 void ChildrenOfOsi::drawDiaGui(WorldObj* player)
 {
-	createTask("Talk", "DRAW", player);
+	createTask("Dialogue", "DRAW", player);
 }
 
 ///////////////////////////////////////////////////

@@ -6,7 +6,7 @@
  */
 void Sprite::setTexture(Texture *t)
 {
-	if (tex == t) return; 
+	if (tex == t || lock) return; 
   tex = t;
   index = 0;
   start = 0;
@@ -18,7 +18,7 @@ void Sprite::setTexture(Texture *t)
 
 void Sprite::setIdleTexture(Texture *t)
 {
-	if (idle == t) return;
+	if (idle == t || lock) return;
 	idle = t;
 	index = 0;
 	start = 0;
@@ -45,6 +45,10 @@ void Sprite::animate()
       this->index = 0;
       this->start = 0;
       this->stop = this->tex->getFrameWidth();
+	  if (lock) {
+		  lock = false;
+		  setTexture(idle);
+	  }
     }
 
     this->tempTime = 0;
