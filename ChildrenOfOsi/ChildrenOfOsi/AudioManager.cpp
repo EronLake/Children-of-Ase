@@ -11,6 +11,7 @@ AudioManager::AudioManager(MessageLog* _mLog, TaskBuffer* _tBuffer)
 	sound_map["Play"] = &SoundSystem::playSong1;
 	sound_map["Bump"] = &SoundSystem::playBump;
 	sound_map["Walk"] = &SoundSystem::playWalk;
+	sound_map["Sixers"] = &SoundSystem::playSixers;
 	function_map["Pause"] = &SoundSystem::pauseSound;
 	function_map["Unpause"] = &SoundSystem::unpauseSound;
 }

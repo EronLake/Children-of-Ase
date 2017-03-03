@@ -155,6 +155,9 @@
     <ClCompile Include="Alliance.cpp" />
     <ClCompile Include="War.cpp" />
     <ClCompile Include="TextObj.cpp" />
+    <ClCompile Include="Memory.cpp">
+      <Filter>AI</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AIHelper.h">
@@ -326,6 +329,9 @@
     <ClInclude Include="Alliance.h" />
     <ClInclude Include="War.h" />
     <ClInclude Include="TextObj.h" />
+    <ClInclude Include="Memory.h">
+      <Filter>AI</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Text Include="audio_test.txt">

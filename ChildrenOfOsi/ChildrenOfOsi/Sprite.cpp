@@ -45,7 +45,10 @@ void Sprite::animate()
       this->index = 0;
       this->start = 0;
       this->stop = this->tex->getFrameWidth();
-	  lock = false;
+	  if (lock) {
+		  lock = false;
+		  setTexture(idle);
+	  }
     }
 
     this->tempTime = 0;

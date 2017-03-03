@@ -182,6 +182,7 @@
     <ClInclude Include="GameWindow.h" />
     <ClInclude Include="json-forwards.h" />
     <ClInclude Include="json.h" />
+    <ClInclude Include="Memory.h" />
     <ClInclude Include="ObjConfig.h" />
     <ClInclude Include="PhysicsTestSuite.h" />
     <ClInclude Include="Relationship.h" />
@@ -250,6 +251,7 @@
     <ClCompile Include="Manager.cpp" />
     <ClCompile Include="memManager.cpp" />
     <ClCompile Include="MemNode.cpp" />
+    <ClCompile Include="Memory.cpp" />
     <ClCompile Include="MemoryHelper.cpp" />
     <ClCompile Include="MemoryTestSuite.cpp" />
     <ClCompile Include="MessageLog.cpp" />

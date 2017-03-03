@@ -22,9 +22,10 @@ Input::Input(ChildrenOfOsi* _gameplay_functions, WorldObj * _player, RenderHelpe
 	count = 0;
 	gameplay_functions = _gameplay_functions;
 	rHelper = _rHelper;
-	gameplay_functions->play_sound("Play");
+	//gameplay_functions->play_sound("Play");
 	gameplay_functions->play_sound("Walk");
 	gameplay_functions->play_sound("Pause");
+	gameplay_functions->play_sound("Sixers");
 	player = _player;
 	LOG("Input Object W/Player Constructed");
 }

@@ -29,30 +29,31 @@ vector<std::string> Action::preConditionsNeeded(Hero* o, Hero* h) {
 			}
 		}
 		else if (i->first.compare("notAbove") == 0) {
-			tmp = i->second - owner->rel[h->name]->getAffinity();
+			tmp = i->second - owner->rel[h->name]->getNotoriety();
 			if (tmp>0) {
 				needs.push_back("notAbove");
 			}
 		}
 		else if (i->first.compare("notBelow") == 0) {
-			tmp = i->second - owner->rel[h->name]->getAffinity();
+			tmp = i->second - owner->rel[h->name]->getNotoriety();
 			if (tmp<0) {
 				needs.push_back("notBelow");
 			}
 		}
 		else if (i->first.compare("strAbove") == 0) {
-			tmp = i->second - owner->rel[h->name]->getAffinity();
+			tmp = i->second - owner->rel[h->name]->getStrength();
 			if (tmp>0) {
 				needs.push_back("strAbove");
 			}
 		}
 		else if (i->first.compare("strBelow") == 0) {
-			tmp = i->second - owner->rel[h->name]->getAffinity();
+			tmp = i->second - owner->rel[h->name]->getStrength();
 			if (tmp<0) {
 				needs.push_back("strBelow");
 			}
 		}
 	}
+	std::cout << "HERE 2.5" << endl;
 	return needs;
 }
 
