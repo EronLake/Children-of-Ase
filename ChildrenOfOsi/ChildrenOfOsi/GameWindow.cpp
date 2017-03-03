@@ -186,7 +186,7 @@ void osi::GameWindow::drawSprite(float x, float y, float width, float height, Sp
 void osi::GameWindow::drawText(const std::string& text, const std::string& fontName, float x, float y, float fieldWidth, float fieldHeight, glm::ivec3 color)
 {
   // Return immediately if arguments are invalid
-  if(GameWindow::fontCharacters.find(text) == GameWindow::fontCharacters.end()) return;
+  if(GameWindow::fontCharacters.find(fontName) == GameWindow::fontCharacters.end()) return;
   else if(fieldWidth <= 0.0F || fieldHeight <= 0.0F) return;
 
   glm::vec2 textBoundsTL = GameWindow::dpCoordToGL(x, y);
@@ -217,13 +217,13 @@ void osi::GameWindow::drawText(const std::string& text, const std::string& fontN
     GLfloat chH = static_cast<GLfloat>(glyph.size.y);
 
     GLfloat vertices[6][4] = {
-      {chX,       chY + chH, 0.0F, 0.0F}, // 
-      {chX,       chY,       0.0F, 1.0F}, // 
-      {chX + chW, chY,       1.0F, 1.0F}, // 
+      {chX,       chY + chH, 0.0F, 0.0F},
+      {chX,       chY,       0.0F, 1.0F}, 
+      {chX + chW, chY,       1.0F, 1.0F},
 
-      {chX,       chY + chH, 0.0F, 0.0F}, // 
-      {chX + chW,       chY, 1.0F, 1.0F}, // 
-      {chX + chW, chY + chH, 1.0F, 0.0F}, // 
+      {chX,       chY + chH, 0.0F, 0.0F},
+      {chX + chW,       chY, 1.0F, 1.0F},
+      {chX + chW, chY + chH, 1.0F, 0.0F},
     };
 
     glBindTexture(GL_TEXTURE_2D, glyph.textureId);
@@ -236,6 +236,8 @@ void osi::GameWindow::drawText(const std::string& text, const std::string& fontN
 
     currentTextTL.x += (glyph.advance >> 6);
   }
+
+  glDisable(GL_CULL_FACE);
 
   glBindVertexArray(0);
   glBindTexture(GL_TEXTURE_2D, 0);
@@ -259,9 +261,11 @@ void osi::GameWindow::refresh()
     glDeleteBuffers(1, &vertexBufferObjectId[i]);
     glDeleteBuffers(1, &elementBufferObjectId[i]);
   }
-  for (int i = 0; i < text.size(); i++) {
+
+  for (int i = 0; i < text.size(); ++i) {
 	  drawText(text[i].getText(), text[i].getFont(), text[i].getX(), text[i].getY(), text[i].getWidth(), text[i].getHeight(), text[i].getColor());
   }
+
   glBindVertexArray(0);
   vertexArrayObjectId.clear();
   vertexBufferObjectId.clear();
@@ -481,7 +485,7 @@ GLuint osi::GameWindow::setupShaders(const std::string& vertexShaderPath, const 
  * unique string identifying the font in the map with be of form "name size",
  * where "name" is fontName and "size" is the string form of fontHeight.
  */
-void osi::GameWindow::setupFont(const std::string& fontName, int fontHeight)
+void osi::GameWindow::setupFont(const std::string& fontName, unsigned int fontHeight)
 {
   // Initialize the font library
   FT_Library fontLib;
@@ -492,7 +496,7 @@ void osi::GameWindow::setupFont(const std::string& fontName, int fontHeight)
   FT_Face face;
   if(FT_New_Face(fontLib, (FONTS_PATH + fontName + ".ttf").c_str(), 0, &face))
     throw FontInitializationError("ERROR::FREETYPE: Failed to load font \"" + fontName + "\"");
-  FT_Set_Pixel_Sizes(face, 0, fontHeight);
+  FT_Set_Pixel_Sizes(face, 0, static_cast<FT_UInt>(round(fontHeight * GameWindow::dpScaleHeight)));
 
   glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
 
