@@ -41,15 +41,15 @@ Hero::~Hero()
 
 void Hero::addRelationship(int hero) {
 	rel[hero] =new Relationship();
-}
+};
 
 void Hero::setPersonality(int a, int k, int h, int p, int r, int e, int g){
 	traits = new Personality();
-	traits.setAggression(a);
-	traits.setKindness(k);
-	traits.setHonor(h);
-	traits.setPride(p);
-	traits.setRecklessness(r);
-	traits.setExtroversion(e);
-	traits.setGreed(g);
-}
+	traits->setAggression(a);
+	traits->setKindness(k);
+	traits->setHonor(h);
+	traits->setPride(p);
+	traits->setRecklessness(r);
+	traits->setExtroversion(e);
+	traits->setGreed(g);
+};

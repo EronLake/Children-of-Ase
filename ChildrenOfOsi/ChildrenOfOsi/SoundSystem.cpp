@@ -72,7 +72,7 @@ FMOD_RESULT result;
 		}
 	}
 
-	void SoundSystem::playSound(SoundClass pSound, bool bLoop, FMOD::Channel* channel, bool ispaused , float volume)
+	void SoundSystem::playSound(SoundClass pSound, bool bLoop, FMOD::Channel*& channel, bool ispaused , float volume)
 	{
 		if (!bLoop)
 			pSound->setMode(FMOD_LOOP_OFF);
