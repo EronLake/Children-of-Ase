@@ -158,6 +158,12 @@
     <ClCompile Include="Memory.cpp">
       <Filter>AI</Filter>
     </ClCompile>
+    <ClCompile Include="Planner.cpp">
+      <Filter>AI</Filter>
+    </ClCompile>
+    <ClCompile Include="Personality.cpp">
+      <Filter>AI</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AIHelper.h">
@@ -330,6 +336,12 @@
     <ClInclude Include="War.h" />
     <ClInclude Include="TextObj.h" />
     <ClInclude Include="Memory.h">
+      <Filter>AI</Filter>
+    </ClInclude>
+    <ClInclude Include="Planner.h">
+      <Filter>AI</Filter>
+    </ClInclude>
+    <ClInclude Include="Personality.h">
       <Filter>AI</Filter>
     </ClInclude>
   </ItemGroup>

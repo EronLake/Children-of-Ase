@@ -180,6 +180,8 @@
     <ClInclude Include="Factions.h" />
     <ClInclude Include="GameMap.h" />
     <ClInclude Include="GameWindow.h" />
+    <ClInclude Include="Personality.h" />
+    <ClInclude Include="Planner.h" />
     <ClInclude Include="json-forwards.h" />
     <ClInclude Include="json.h" />
     <ClInclude Include="Memory.h" />
@@ -243,6 +245,8 @@
     <ClCompile Include="Factions.cpp" />
     <ClCompile Include="GameMap.cpp" />
     <ClCompile Include="GameWindow.cpp" />
+    <ClCompile Include="Personality.cpp" />
+    <ClCompile Include="Planner.cpp" />
     <ClCompile Include="Hero.cpp" />
     <ClCompile Include="Input.cpp" />
     <ClCompile Include="jsoncpp.cpp" />
