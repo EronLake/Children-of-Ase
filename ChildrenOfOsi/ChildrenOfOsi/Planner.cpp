@@ -8,5 +8,5 @@ Planner::Planner(Hero* hero) {
 };
 int Planner::personality_appeal(Action* action) {
 
-
+	return 0;
 };
