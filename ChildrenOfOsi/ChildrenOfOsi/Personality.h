@@ -5,13 +5,13 @@ public:
 	Personality();
 	Personality(int a, int k,int h,int p,int r, int e, int g);
 	~Personality();
-	void getAggression(int a) { agg=a; };
-	void getKindness(int k) { kind=k; };
-	void getHonor(int h) { honor=h; };
-	void getPride(int p) { pride=p; };
-	void getRecklessness(int r) { reck=r; };
-	void getExtraversion(int e) { extra=e; };
-	void getGreed(int g) { greed=g; };
+	void setAggression(int a) { agg=a; };
+	void setKindness(int k) { kind=k; };
+	void setHonor(int h) { honor=h; };
+	void setPride(int p) { pride=p; };
+	void setRecklessness(int r) { reck=r; };
+	void setExtroversion(int e) { extro=e; };
+	void setGreed(int g) { greed=g; };
 	int getAggression() { return agg; };
 	int getKindness() { return kind; };
 	int getHonor() { return honor; };
@@ -25,7 +25,7 @@ private:
 	int honor;
 	int pride;
 	int reck;
-	int extra;
+	int extro;
 	int greed;
 };
 

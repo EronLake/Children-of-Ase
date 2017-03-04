@@ -18,6 +18,8 @@ Hero::Hero(int _name, float x, float y, bool col) :SplSoldier(x, y, col)
 	for (int i = 1; i < 6; i++) {
 		if(i!=name)rel[i] = new Relationship();
 	}
+
+	planner = new Planner(this);
 }
 
 Hero::Hero(int _name, Vector2f p_topLeft, float p_width, float p_height):SplSoldier(p_topLeft,p_width,p_height)
@@ -30,6 +32,7 @@ Hero::Hero(int _name, Vector2f p_topLeft, float p_width, float p_height):SplSold
 	for (int i = 1; i < 6; i++) {
 		if (i != name)rel[i] = new Relationship();
 	}
+
 }
 
 Hero::~Hero()
@@ -38,4 +41,15 @@ Hero::~Hero()
 
 void Hero::addRelationship(int hero) {
 	rel[hero] =new Relationship();
+}
+
+void Hero::setPersonality(int a, int k, int h, int p, int r, int e, int g){
+	traits = new Personality();
+	traits.setAggression(a);
+	traits.setKindness(k);
+	traits.setHonor(h);
+	traits.setPride(p);
+	traits.setRecklessness(r);
+	traits.setExtroversion(e);
+	traits.setGreed(g);
 }

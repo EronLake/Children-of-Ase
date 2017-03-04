@@ -12,7 +12,7 @@ Personality::Personality(int a, int k, int h, int p, int r, int e, int g) {
 	honor = h;
 	pride = p;
 	reck = r;
-	extra = e;
+	extro = e;
 	greed = g;
 }
 
