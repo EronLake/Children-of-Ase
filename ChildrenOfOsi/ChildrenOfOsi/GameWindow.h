@@ -102,7 +102,7 @@ namespace osi
     static glm::vec2 dpCoordToGL(float, float);
     static void setupWindow();
     static GLuint setupShaders(const std::string&, const std::string&);
-    static void setupFont(const std::string&, int);
+    static void setupFont(const std::string&, unsigned int);
   };
 
   class WindowingError: public std::runtime_error
