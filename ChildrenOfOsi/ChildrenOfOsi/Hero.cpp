@@ -19,7 +19,7 @@ Hero::Hero(int _name, float x, float y, bool col) :SplSoldier(x, y, col)
 		if(i!=name)rel[i] = new Relationship();
 	}
 
-	planner = new Planner(this);
+	//planner = new Planner(this);
 }
 
 Hero::Hero(int _name, Vector2f p_topLeft, float p_width, float p_height):SplSoldier(p_topLeft,p_width,p_height)

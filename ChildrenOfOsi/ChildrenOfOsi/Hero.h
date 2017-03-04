@@ -17,7 +17,7 @@ public:
 
 	unordered_map<int, Relationship*> rel;
 	Personality* traits;
-	Planner* planner;
+	//Planner* planner;
     
     int name;
 

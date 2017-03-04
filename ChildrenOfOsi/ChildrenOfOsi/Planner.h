@@ -8,6 +8,9 @@ public:
 	Planner(Hero* evaluateHero);
 private:
 	Hero* evaluateHero;
+
+	
 	int personality_appeal(Action* evaluateAction);
+
 
 };

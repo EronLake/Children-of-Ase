@@ -17,7 +17,7 @@ public:
 	int getHonor() { return honor; };
 	int getPride() { return pride; };
 	int getRecklessness() { return reck; };
-	int getExtraversion() { return extra; };
+	int getExtroversion() { return extro; };
 	int getGreed() { return greed; };
 private:
 	int agg;
