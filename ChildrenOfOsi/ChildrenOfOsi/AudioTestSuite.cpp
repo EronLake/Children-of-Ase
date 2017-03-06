@@ -84,7 +84,7 @@ bool AudioTestSuite::SoundSystem_destructor_test() {
 bool AudioTestSuite::create_sound_test() {
 	FMOD::Sound* test_address;
 	std::string name = "bump_0.wav";
-	test_soundSystem->createSound(&test_address, name);
+	test_soundSystem->createSound(&test_soundSystem->sounds[name], name);
 	auto test_sound = test_soundSystem->sounds.find(name);
 	if (test_sound == test_soundSystem->sounds.end()) {
 		LOG("create_sound_test: Sound not found in map");
@@ -98,7 +98,7 @@ bool AudioTestSuite::play_sound_test() {
 	int numChan;
 	bool played = true;
 	FMOD::Sound* test_sound;
-	FMOD::Channel* channel = NULL;
+	FMOD::Channel* channel = nullptr;
 	test_soundSystem->playSound(test_soundSystem->sounds[name], false, channel, false,1);
 	FMOD_RESULT result = test_soundSystem->m_pSystem->getChannelsPlaying(&numChan, 0);
 	LOG(result);

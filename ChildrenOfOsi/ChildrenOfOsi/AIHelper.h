@@ -18,7 +18,6 @@ namespace std {
 }
 
 struct VisibilityGraph {
-	typedef typename vector<Vector2f>::iterator iter;
 	unordered_map<Vector2f, vector<Vector2f>> edges;
 	vector<Vector2f> vertices;
 	vector<pair<Vector2f, Vector2f>> obstacles;

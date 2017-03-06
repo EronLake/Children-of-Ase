@@ -31,7 +31,7 @@ int Movement::move_up(WorldObj* obj) {
 	{
 		float moveSpeed = npc->getSpeed();
 	}
-	obj->shiftY(-moveSpeed);
+	obj->shiftY(-moveSpeed*speed_magnifier);
 	for (int i = 0; i < objVec.size(); i++) {
 		if (obj == objVec[i]) {
 			break;
@@ -39,7 +39,7 @@ int Movement::move_up(WorldObj* obj) {
 		if (collision(objVec[i], obj)) {
 			manager->createTask("Bump","SOUND");
 			LOG("failed to move up. collision.");
-			obj->shiftY(moveSpeed);
+			obj->shiftY(moveSpeed*speed_magnifier);
 			break;
 		}
 	}
@@ -60,7 +60,7 @@ int Movement::move_up_left(WorldObj* obj) {
 		float diagXSpeed = npc->getDiagXSpeed();
 	}
 
-	obj->shiftY(-diagYSpeed);
+	obj->shiftY(-diagYSpeed*speed_magnifier);
 	for (int i = 0; i < objVec.size(); i++) {
 		if (obj == objVec[i]) {
 			break;
@@ -68,11 +68,11 @@ int Movement::move_up_left(WorldObj* obj) {
 		if (collision(objVec[i], obj)) {
 			manager->createTask("Bump", "SOUND");
 			LOG("failed to move up. collision.");
-			obj->shiftY(diagYSpeed);
+			obj->shiftY(diagYSpeed*speed_magnifier);
 			break;
 		}
 	}	
-	obj->shiftX(-diagXSpeed);
+	obj->shiftX(-diagXSpeed*speed_magnifier);
 	for (int i = 0; i < objVec.size(); i++) {
 		if (obj == objVec[i]) {
 			break;
@@ -80,7 +80,7 @@ int Movement::move_up_left(WorldObj* obj) {
 		if (collision(objVec[i], obj)) {
 			manager->createTask("Bump", "SOUND");
 			LOG("failed to move up. collision.");
-			obj->shiftX(diagXSpeed);
+			obj->shiftX(diagXSpeed*speed_magnifier);
 			break;
 		}
 	}
@@ -97,11 +97,11 @@ int Movement::move_up_right(WorldObj* obj) {
 	NPC* npc;
 	if (npc = CheckClass::isNPC(obj))
 	{
-		float diagYSpeed = npc->getDiagYSpeed();
-		float diagXSpeed = npc->getDiagXSpeed();
+		float diagYSpeed = npc->getDiagYSpeed()*speed_magnifier;
+		float diagXSpeed = npc->getDiagXSpeed()*speed_magnifier;
 	}
 
-	obj->shiftY(-diagYSpeed);
+	obj->shiftY(-diagYSpeed*speed_magnifier);
 	for (int i = 0; i < objVec.size(); i++) {
 		if (obj == objVec[i]) {
 			break;
@@ -109,11 +109,11 @@ int Movement::move_up_right(WorldObj* obj) {
 		if (collision(objVec[i], obj)) {
 			manager->createTask("Bump", "SOUND");
 			LOG("failed to move up. collision.");
-			obj->shiftY(diagYSpeed);
+			obj->shiftY(diagYSpeed*speed_magnifier);
 			break;
 		}
 	}
-	obj->shiftX(diagXSpeed);
+	obj->shiftX(diagXSpeed*speed_magnifier);
 	for (int i = 0; i < objVec.size(); i++) {
 		if (obj == objVec[i]) {
 			break;
@@ -121,7 +121,7 @@ int Movement::move_up_right(WorldObj* obj) {
 		if (collision(objVec[i], obj)) {
 			manager->createTask("Bump", "SOUND");
 			LOG("failed to move up. collision.");
-			obj->shiftX(-diagXSpeed);
+			obj->shiftX(-diagXSpeed*speed_magnifier);
 			break;
 		}
 	}
@@ -141,7 +141,7 @@ int Movement::move_down(WorldObj* obj) {
 		float moveSpeed = npc->getSpeed();
 	}
 
-	obj->shiftY(moveSpeed);
+	obj->shiftY(moveSpeed*speed_magnifier);
 	for (int i = 0; i < objVec.size(); i++) {
 		if (obj == objVec[i]) {
 			break;
@@ -149,7 +149,7 @@ int Movement::move_down(WorldObj* obj) {
 		if (collision(objVec[i], obj)) {
 			LOG("failed to move down. collision.");
 			manager->createTask("Bump", "SOUND");
-			obj->shiftY(-moveSpeed);
+			obj->shiftY(-moveSpeed*speed_magnifier);
 			break;
 		}
 	}
@@ -170,7 +170,7 @@ int Movement::move_down_left(WorldObj* obj) {
 		float diagXSpeed = npc->getDiagXSpeed();
 	}
 
-	obj->shiftY(diagYSpeed);
+	obj->shiftY(diagYSpeed*speed_magnifier);
 	for (int i = 0; i < objVec.size(); i++) {
 		if (obj == objVec[i]) {
 			break;
@@ -178,11 +178,11 @@ int Movement::move_down_left(WorldObj* obj) {
 		if (collision(objVec[i], obj)) {
 			LOG("failed to move down. collision.");
 			manager->createTask("Bump", "SOUND");
-			obj->shiftY(-diagYSpeed);
+			obj->shiftY(-diagYSpeed*speed_magnifier);
 			break;
 		}
 	}
-	obj->shiftX(-diagXSpeed);
+	obj->shiftX(-diagXSpeed*speed_magnifier);
 
 	for (int i = 0; i < objVec.size(); i++) {
 		if (obj == objVec[i]) {
@@ -191,7 +191,7 @@ int Movement::move_down_left(WorldObj* obj) {
 		if (collision(objVec[i], obj)) {
 			LOG("failed to move down. collision.");
 			manager->createTask("Bump", "SOUND");
-			obj->shiftX(diagXSpeed);
+			obj->shiftX(diagXSpeed*speed_magnifier);
 			break;
 		}
 	}
@@ -212,7 +212,7 @@ int Movement::move_down_right(WorldObj* obj) {
 		float diagXSpeed = npc->getDiagXSpeed();
 	}
 
-	obj->shiftY(diagYSpeed);
+	obj->shiftY(diagYSpeed*speed_magnifier);
 	for (int i = 0; i < objVec.size(); i++) {
 		if (obj == objVec[i]) {
 			break;
@@ -220,11 +220,11 @@ int Movement::move_down_right(WorldObj* obj) {
 		if (collision(objVec[i], obj)) {
 			LOG("failed to move down. collision.");
 			manager->createTask("Bump", "SOUND");
-			obj->shiftY(-diagYSpeed);
+			obj->shiftY(-diagYSpeed*speed_magnifier);
 			break;
 		}
 	}
-	obj->shiftX(diagXSpeed);
+	obj->shiftX(diagXSpeed*speed_magnifier);
 	for (int i = 0; i < objVec.size(); i++) {
 		if (obj == objVec[i]) {
 			break;
@@ -232,7 +232,7 @@ int Movement::move_down_right(WorldObj* obj) {
 		if (collision(objVec[i], obj)) {
 			LOG("failed to move down. collision.");
 			manager->createTask("Bump", "SOUND");
-			obj->shiftX(-diagXSpeed);
+			obj->shiftX(-diagXSpeed*speed_magnifier);
 			break;
 		}
 	}
@@ -251,7 +251,7 @@ int Movement::move_left(WorldObj* obj) {
 	{
 		float moveSpeed = npc->getSpeed();
 	}
-	obj->shiftX(-moveSpeed);
+	obj->shiftX(-moveSpeed*speed_magnifier);
 	for (int i = 0; i < objVec.size(); i++) {
 		if (obj == objVec[i]) {
 			break;
@@ -259,7 +259,7 @@ int Movement::move_left(WorldObj* obj) {
 		if (collision(objVec[i], obj)) {
 			LOG("failed to move left. collision.");
 			manager->createTask("Bump", "SOUND");
-			obj->shiftX(moveSpeed);
+			obj->shiftX(moveSpeed*speed_magnifier);
 			break;
 		}
 	}
@@ -279,7 +279,7 @@ int Movement::move_right(WorldObj* obj) {
 		float moveSpeed = npc->getSpeed();
 	}
 
-	obj->shiftX(moveSpeed);
+	obj->shiftX(moveSpeed*speed_magnifier);
 	for (int i = 0; i < objVec.size(); i++) {
 		if (obj == objVec[i]) {
 			break;
@@ -287,7 +287,7 @@ int Movement::move_right(WorldObj* obj) {
 		if (collision(objVec[i], obj)) {
 			LOG("failed to move right. collision.");
 			manager->createTask("Bump", "SOUND");
-			obj->shiftX(-moveSpeed);
+			obj->shiftX(-moveSpeed*speed_magnifier);
 			break;
 		}
 	}
