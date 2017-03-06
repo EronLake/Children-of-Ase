@@ -7,22 +7,28 @@
 #include "json.h"
 
 
-Input::Input(ChildrenOfOsi* _gameplay_functions, RenderHelper* _rHelper)
+Input::Input(ChildrenOfOsi* _gameplay_functions, RenderHelper* _rHelper, TaskBuffer* _tBuffer, vector<WorldObj*>* _recVec)
 {
 	disable = false;
 	count = 0;
 	gameplay_functions = _gameplay_functions;
 	rHelper = _rHelper;
+	tBuffer = _tBuffer;
+	recVec = _recVec;
 	LOG("Input Objected Constructed");
 }
 
-Input::Input(ChildrenOfOsi* _gameplay_functions, WorldObj * _player, RenderHelper* _rHelper)
+Input::Input(ChildrenOfOsi* _gameplay_functions, WorldObj * _player, RenderHelper* _rHelper, TaskBuffer* _tBuffer, vector<WorldObj*>* _recVec)
 {
 	disable = false;
 	count = 0;
 	gameplay_functions = _gameplay_functions;
 	rHelper = _rHelper;
+	tBuffer = _tBuffer;
+	recVec = _recVec;
+
 	//gameplay_functions->play_sound("Play");
+
 	gameplay_functions->play_sound("Walk");
 	gameplay_functions->play_sound("Pause");
 	gameplay_functions->play_sound("Sixers");
@@ -117,20 +123,115 @@ void Input::InputCheck()
 			}
 		}
 
+		/*
 		if (L) {
+		std::string image_name;
+		std::string obj_name;
+
+		std::cout << "Pressed Enter" << std::endl;
+		std::cout << "INPUT FILE NAME " << std::endl;
+		std::cout << "///////////////////////////////" << std::endl;
+		std::cin >> image_name;
+		std::cout << "INPUT OBJECT NAME " << std::endl;
+		std::cout << "///////////////////////////////" << std::endl;
+		std::cin >> obj_name;
+		std::cout << image_name << ": " << player->getX() << ":" << player->getY() << std::endl;
+
+
+		Json::Value root;
+		Json::Reader reader;
+
+		std::ifstream in_file("config.json");
+		in_file >> root;
+		in_file.close();
+
+		std::ofstream file;
+		file.open("config.json");
+
+
+		//populate 'value_obj' with the objects, arrays etc.
+		Json::Value new_obj = {};
+
+		new_obj["x"] = floor(player->getX() / 100);
+		new_obj["y"] = floor(player->getY() / 100);
+
+		new_obj["hight"] = 400.0;
+		new_obj["width"] = 600.0;
+
+		new_obj["frame_num"] = 1;
+
+		new_obj["name"] = obj_name;
+		new_obj["tex_file"] = image_name;
+
+		new_obj["bodyx1"] = 110;
+		new_obj["bodyx2"] = 150;
+		new_obj["bodyy1"] = 120;
+		new_obj["bodyy2"] = 60;
+
+
+		root[obj_name] = new_obj;
+
+		Json::StyledWriter styledWriter;
+		file << styledWriter.write(root);
+
+		file.close();
+
+		system("PAUSE");
+
+
+		}
+		*/
+		
+		
+		if (L && (GetKeyState(VK_LBUTTON) & 0x100) == 0)
+		{
 			std::string image_name;
 			std::string obj_name;
+			int frame_num;
 
 			std::cout << "Pressed Enter" << std::endl;
 			std::cout << "INPUT FILE NAME " << std::endl;
 			std::cout << "///////////////////////////////" << std::endl;
 			std::cin >> image_name;
+			std::cout << "INPUT FRAME NUMBER(PROBABLY 1) " << std::endl;
+			std::cout << "///////////////////////////////" << std::endl;
+			std::cin >> frame_num;
+			std::cout << image_name << ": " << player->getX() << ":" << player->getY() << std::endl;
 			std::cout << "INPUT OBJECT NAME " << std::endl;
 			std::cout << "///////////////////////////////" << std::endl;
 			std::cin >> obj_name;
-			std::cout << image_name << ": "<<  player->getX() << ":" << player->getY() << std::endl;
+			std::cout << image_name << ": " << player->getX() << ":" << player->getY() << std::endl;
 
 
+			if (Containers::texture_table[image_name]) {
+				cout << image_name << "Already in Table /////////////////////////////" << endl;
+			}
+			else
+			{
+				cout << image_name << "Not in Table /////////////////////////////" << endl;
+				gameplay_functions->add_texture(image_name, 0, 0, 0);
+
+				//set file takes up memory
+				tBuffer->run();
+				Containers::texture_table[image_name]->setFile("Assets/Sprites/" + image_name + ".png", frame_num);
+
+			}
+
+			gameplay_functions->add_worldObj(obj_name, (player->getX()) + 20, (player->getY()) + 20, true);
+
+			tBuffer->run();
+
+			Containers::worldObj_table[obj_name]->setWidth(500);
+			Containers::worldObj_table[obj_name]->setHeight(500);
+
+			Containers::worldObj_table[obj_name]->sprite.setTexture(Containers::texture_table[image_name]);
+			Containers::worldObj_table[obj_name]->setInteractable(false);
+			Containers::worldObj_table[obj_name]->offsetBody(0, 100, 100, 100, 100);
+
+			recVec->push_back(Containers::worldObj_table[obj_name]);
+
+
+			//this adds the object to the config file
 			Json::Value root;
 			Json::Reader reader;
 
@@ -145,23 +246,12 @@ void Input::InputCheck()
 			//populate 'value_obj' with the objects, arrays etc.
 			Json::Value new_obj = {};
 
-			new_obj["x"] = floor(player->getX()/100);
-			new_obj["y"] = floor(player->getY()/100);
+			new_obj["x"] = floor(player->getX() / 100); new_obj["y"] = floor(player->getY() / 100);
+			new_obj["hight"] = 500; new_obj["width"] = 500;
+			new_obj["frame_num"] = frame_num;
+			new_obj["name"] = obj_name; new_obj["tex_file"] = image_name;
+			new_obj["bodyx1"] = 0; new_obj["bodyx2"] = 0; new_obj["bodyy1"] = 0; new_obj["bodyy2"] = 0;
 
-			new_obj["hight"] = 400.0;
-			new_obj["width"] = 600.0;
-
-			new_obj["frame_num"] = 1;
-
-			new_obj["name"] = obj_name;
-			new_obj["tex_file"] = image_name;
-
-			new_obj["bodyx1"] = 110;
-			new_obj["bodyx2"] = 150;
-			new_obj["bodyy1"] = 120;
-			new_obj["bodyy2"] = 60;
-			
-		
 			root[obj_name] = new_obj;
 
 			Json::StyledWriter styledWriter;
@@ -169,9 +259,9 @@ void Input::InputCheck()
 
 			file.close();
 
+
 			system("PAUSE");
-			
-			
+
 		}
 
 		if ((GetKeyState(VK_LBUTTON) & 0x100) != 0)
@@ -179,23 +269,202 @@ void Input::InputCheck()
 			/*POINT p;
 			if (ScreenToClient(window, &p))
 			{
-				cout << "////////////////////////" << endl;
-				cout << p.x << p.y << endl;
-				cout << "////////////////////////" << endl;
+			cout << "////////////////////////" << endl;
+			cout << p.x << p.y << endl;
+			cout << "////////////////////////" << endl;
 			}*/
+
 			double xpos;
 			double ypos;
 			glfwGetCursorPos(osi::GameWindow::window, &xpos, &ypos);
-			cout << "////////////////////////" << endl;
-			//cout << xpos << ":" << ypos << endl;
-			cout << "X: "<< rHelper->camera->getX() + xpos << endl;
-			cout << "Y: "<< rHelper->camera->getY() + ypos << endl;
-			cout << "////////////////////////" << endl;
-			
-		}
 
+			double mouseX = rHelper->camera->getX() + xpos * osi::GameWindow::WINDOW_WIDTH_DP / 1300;
+			double mouseY = rHelper->camera->getY() + ypos * osi::GameWindow::WINDOW_HEIGHT_DP / 700;
+
+			std::cout << "////////////////////////" << endl;
+			//std::cout << xpos << ":" << ypos << endl;
+			std::cout << "X: " << xpos << endl;
+			std::cout << "Y: " << ypos << endl;
+			std::cout << "////////////////////////" << endl;
+
+			bool xCollide;
+			bool yCollide;
+
+			std::string collide_with = "";
+
+			for (auto itr = Containers::worldObj_table.begin(); itr != Containers::worldObj_table.end(); itr++)
+			{
+				//for (int i = 0; i < itr->second->size(); i++) {
+				xCollide = coordOverlap(itr->second->getX(), mouseX, mouseX) || coordOverlap(mouseX, itr->second->getX(), itr->second->getX() + itr->second->getWidth());
+				yCollide = coordOverlap(itr->second->getY(), mouseY, mouseY) || coordOverlap(mouseY, itr->second->getY(), itr->second->getY() + itr->second->getHeight());
+				if (xCollide && yCollide)
+				{
+					collide_with = itr->first;
+					std::cout << "////////////////////////" << endl;
+					std::cout << "COLLIDED WITH: " << collide_with << endl;
+					std::cout << "////////////////////////" << endl;
+
+					//float diffX = Containers::worldObj_table[collide_with]->body[i].getX() - Containers::worldObj_table[collide_with]->getX();
+					//float diffY = Containers::worldObj_table[collide_with]->body[i].getY() - Containers::worldObj_table[collide_with]->getY();
+
+					//Containers::worldObj_table[collide_with]->body[i].setX(mouseX - Containers::worldObj_table[collide_with]->body[i].getWidth());
+					//Containers::worldObj_table[collide_with]->body[i].setY(mouseY - Containers::worldObj_table[collide_with]->body[i].getHeight());
+
+				}
+				//}
+			}
+
+			if (collide_with != "")
+			{
+				Containers::worldObj_table[collide_with]->setX(mouseX - (Containers::worldObj_table[collide_with]->getWidth()) / 2);
+				Containers::worldObj_table[collide_with]->setY(mouseY - (Containers::worldObj_table[collide_with]->getHeight()) / 2);
+
+				int body_number = 0;
+				float left;
+				float right;
+				float top;
+				float bottom;
+
+				if (L)
+				{
+					std::cout << "////////////////////////" << endl;
+					std::cout << "ENTER NAME OF THE VARIABLE YOU WOULD LIKE TO CHANGE: ";
+
+					string variable_for_change;
+					cin >> variable_for_change;
+
+					if (variable_for_change == "width")
+					{
+						std::cout << "////////////////////////" << endl;
+						std::cout << "ENTER WIDTH AS FLOAT: ";
+
+						float value_to_change_to;
+						cin >> value_to_change_to;
+
+						Containers::worldObj_table[collide_with]->setWidth(value_to_change_to);
+					}
+					else if (variable_for_change == "height")
+					{
+						std::cout << "////////////////////////" << endl;
+						std::cout << "ENTER HEIGHT AS FLOAT: ";
+
+						float value_to_change_to;
+						cin >> value_to_change_to;
+
+						Containers::worldObj_table[collide_with]->setHeight(value_to_change_to);
+					}
+
+					if (variable_for_change == "size")
+					{
+						std::cout << "////////////////////////" << endl;
+						std::cout << "ENTER SIZE AS FLOAT: ";
+
+						float value_to_change_to;
+						cin >> value_to_change_to;
+
+						Containers::worldObj_table[collide_with]->setWidth(value_to_change_to);
+						Containers::worldObj_table[collide_with]->setHeight(value_to_change_to);
+					}
+					else if (variable_for_change == "xloc")
+					{
+						std::cout << "////////////////////////" << endl;
+						std::cout << "ENTER X LOC AS FLOAT: ";
+
+						float value_to_change_to;
+						cin >> value_to_change_to;
+
+						Containers::worldObj_table[collide_with]->setX(value_to_change_to);
+					}
+					else if (variable_for_change == "yloc")
+					{
+						std::cout << "////////////////////////" << endl;
+						std::cout << "ENTER Y LOC AS FLOAT: ";
+
+						float value_to_change_to;
+						cin >> value_to_change_to;
+
+						Containers::worldObj_table[collide_with]->setY(value_to_change_to);
+
+					}
+					else if (variable_for_change == "offset")
+					{
+						std::cout << "////////////////////////" << endl;
+						std::cout << "ENTER BODY NUMBER AS INT(0 if only one body): ";
+						cin >> body_number;
+
+						std::cout << "ENTER LEFT LOC AS FLOAT: ";
+						cin >> left;
+
+						std::cout << "ENTER RIGHT LOC AS FLOAT: ";
+						cin >> right;
+
+						std::cout << "ENTER TOP LOC AS FLOAT: ";
+						cin >> top;
+
+						std::cout << "ENTER BOTTOM LOC AS FLOAT: ";
+						cin >> bottom;
+
+						Containers::worldObj_table[collide_with]->offsetBody(body_number, left, right, top, bottom);
+
+						std::cout << "///////////////////////////////////" << endl;
+						std::cout << "body X is " << Containers::worldObj_table[collide_with]->body[body_number].getX() << " and Y is " << Containers::worldObj_table[collide_with]->body[body_number].getY() << endl;
+						std::cout << "body X is " << Containers::worldObj_table[collide_with]->body[body_number].getX() << " and Y is " << Containers::worldObj_table[collide_with]->body[body_number].getY() << endl;
+						std::cout << "///////////////////////////////////" << endl;
+
+					}
+				}
+				//this adds the object to the config file
+				Json::Value root;
+				Json::Reader reader;
+
+				std::ifstream in_file("config.json");
+				in_file >> root;
+				in_file.close();
+
+				std::ofstream file;
+				file.open("config.json");
+
+
+				//populate 'value_obj' with the objects, arrays etc.
+				Json::Value new_obj = {};
+
+				new_obj["x"] = Containers::worldObj_table[collide_with]->getX() / 100;
+				new_obj["y"] = Containers::worldObj_table[collide_with]->getY() / 100;
+				new_obj["hight"] = Containers::worldObj_table[collide_with]->getHeight();
+				new_obj["width"] = Containers::worldObj_table[collide_with]->getWidth();
+				new_obj["frame_num"] = Containers::worldObj_table[collide_with]->body.size();
+				new_obj["name"] = collide_with;
+				string tex_file = Containers::worldObj_table[collide_with]->sprite.getTexture().getFile();
+				tex_file = tex_file.substr(15, tex_file.size()); //shaves off front
+				tex_file = tex_file.substr(0, tex_file.size() - 4); //shaves off tail
+				new_obj["tex_file"] = tex_file;
+
+				new_obj["bodyx1"] = (Containers::worldObj_table[collide_with]->getLoc().getXloc()-
+									Containers::worldObj_table[collide_with]->body[body_number].getX());
+				
+				new_obj["bodyx2"] = ((Containers::worldObj_table[collide_with]->body[body_number].getX() + Containers::worldObj_table[collide_with]->body[body_number].getWidth()) -
+									(Containers::worldObj_table[collide_with]->getLoc().getXloc() + Containers::worldObj_table[collide_with]->getWidth()));
+					
+
+				new_obj["bodyy1"] = (Containers::worldObj_table[collide_with]->getLoc().getYloc() -
+									Containers::worldObj_table[collide_with]->body[body_number].getY());
+
+				new_obj["bodyy2"] = ((Containers::worldObj_table[collide_with]->body[body_number].getY() + Containers::worldObj_table[collide_with]->body[body_number].getHeight()) -
+									(Containers::worldObj_table[collide_with]->getLoc().getYloc() + Containers::worldObj_table[collide_with]->getHeight()));
+									
+
+				root[collide_with] = new_obj;
+
+				Json::StyledWriter styledWriter;
+				file << styledWriter.write(root);
+
+				file.close();
+
+			}
+		}
+		
 	}
-	
+
 	if (DialogueController::getState() > 0) {
 		if (Q) {
 			DialogueController::exitDialogue();
