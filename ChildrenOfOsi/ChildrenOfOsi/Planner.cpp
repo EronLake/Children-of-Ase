@@ -16,3 +16,13 @@ int Planner::personality_appeal(Action* evaluateAction) {
 		(evaluateHero->traits->getRecklessness()*evaluateAction->multipliers->getRecklessness())+
 		(evaluateHero->traits->getExtroversion()*evaluateAction->multipliers->getExtroversion()));
 };
+vector<Action> Planner::prioritize_preconditions(Action goal) {
+	vector<Action> actionlist; //temporary
+	struct greaterAction {
+		inline bool operator()(Action& action1, Action& action2) {
+			return (action1.getUtility() > action2.getUtility());		
+		};
+	};
+	std::sort(actionlist.begin(), actionlist.end(), greaterAction());
+	return actionlist;
+};
