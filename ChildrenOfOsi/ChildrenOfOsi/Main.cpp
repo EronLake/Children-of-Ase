@@ -49,6 +49,7 @@
 #include "DialougeTestSuite.h"
 
 #include "AIManager.h"
+#include "AIController.h"
 
 #include "ObjConfig.h"
 #include "ActionPool.h"
@@ -183,6 +184,7 @@ int main() {
 void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 {
 
+
 	Player* Alex = new Player(SHANGO, Vector2f(4900.0, 3700.0), 100.0, 100.0);	//init player
 	cout << "Alex's width and height is " << Alex->getWidth() << ", " << Alex->getHeight() << endl;
 
@@ -206,6 +208,8 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	AudioManager* AudM = new AudioManager(mLog, tBuffer);
 	AIHelper* ai = new AIHelper();
 	AIManager* AIM = new AIManager(mLog, tBuffer, ai);
+
+	AIController* AiController = new AIController();
 
 	//the order defines what order the managers the tasks will be sent to
 	DumM->register_manager();
@@ -503,7 +507,8 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 
 	ai->graph._print();
 
-	ActionPool poolAct = ActionPool(Alex);
+	ActionPool* poolAct = new ActionPool(Alex);
+	Alex->actionPool = poolAct;
 	Action mic = Action();
 	mic.preconds["affAbove"] = 50;
 	mic.postconds["aff"] = 5;
@@ -512,15 +517,15 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	mac.postconds["aff"] = 5;
 	mac.setOwner(Alex);
 	mac.setHero(staticRec);
-	poolAct.micro.push_back(mic);
-	poolAct.macro.push_back(mac);
-	poolAct.updateMiddle();
-	std::cout << poolAct.macro.back().getName()<< endl;
-	vector<Action> test= poolAct.getActions(staticRec,poolAct.macro.back());
+	poolAct->micro.push_back(mic);
+	poolAct->macro.push_back(mac);
+	poolAct->updateMiddle();
+	std::cout << poolAct->macro.back().getName()<< endl;
+	vector<Action> test= poolAct->getActions(staticRec,poolAct->macro.back());
 	for (int i = 0; i < test.size(); i++) {
 		int t=test[i].exeAction();
 	}
-	poolAct.macro.back().exeAction();
+	poolAct->macro.back().exeAction();
 
 
 	//ai->astar_search(staticRec);
@@ -688,6 +693,16 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 		//	cout << tBuffer->queue_buffer.size() << endl;
 		//tBuffer->empty();
 
+		/////////////////////////////////////////////////////////////////
+		/////////////////////////////////////////////////////////////////
+		/////////////////////////////////////////////////////////////////
+		for (auto iter : staticRec->rel) {
+			if (iter.second->isChanged()) {
+				//reevaluate goals with iter.first
+
+				iter.second->setChanged(false);
+			}
+		}
 
 		if ((1000 / fs) > (clock() - start_tick)) { //delta_ticks) {www
 			Sleep((1000 / fs) - (clock() - start_tick));

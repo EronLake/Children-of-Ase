@@ -11,7 +11,7 @@ public:
 	unordered_map<std::string, int> postconds;
 	void setUtility(int u) { utility = u; };
 	int getUtility() { return utility; };
-	void setHero(Hero* h) { hero = h; };
+	void setHero(Hero* h) { hero = h; recieverName = h->name; };
 	Hero* getHero() { return hero; };
 	void setOwner(Hero* o) { owner = o; };//preConditionsNeeded also sets owner
 	Hero* getOwner() { return owner; };
@@ -19,8 +19,10 @@ public:
 	int exeAction();
 	void setName(string n) { name = n; };
 	string getName() { return name; };
-private:
+	int recieverName;
 	std::string name;
+private:
+	//std::string name;
 	int utility;
 	Hero* owner;
 	Hero* hero;

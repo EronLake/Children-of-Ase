@@ -164,6 +164,9 @@
     <ClCompile Include="Personality.cpp">
       <Filter>AI</Filter>
     </ClCompile>
+    <ClCompile Include="AIController.cpp">
+      <Filter>AI</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AIHelper.h">
@@ -342,6 +345,9 @@
       <Filter>AI</Filter>
     </ClInclude>
     <ClInclude Include="Personality.h">
+      <Filter>AI</Filter>
+    </ClInclude>
+    <ClInclude Include="AIController.h">
       <Filter>AI</Filter>
     </ClInclude>
   </ItemGroup>

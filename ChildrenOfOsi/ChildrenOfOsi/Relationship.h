@@ -7,16 +7,27 @@ private:
 	int notoriety;
 	int strength;
 
+	int aff_counter;
+	int aff_max_change;
+	int not_counter;
+	int not_max_change;
+	int str_counter;
+	int str_max_change;
+
+	bool changed;
+
 public:
 	Relationship();
 	~Relationship();
-	void setAffinity(int a) { affinity = a; };
-	void addAffinity(int a) { affinity += a; };
-	int getAffinity() { return affinity; };
-	void setNotoriety(int n) { notoriety = n; };
-	void addNotoriety(int n) { notoriety += n; };
-	int getNotoriety() { return notoriety; };
-	void setStrength(int s) { strength = s; };
-	void addStrength(int s) { strength += s; };
-	int getStrength() { return strength; };
+	void setAffinity(int a);
+	void addAffinity(int a);
+	int getAffinity();
+	void setNotoriety(int n);
+	void addNotoriety(int n);
+	int getNotoriety();
+	void setStrength(int s);
+	void addStrength(int s);
+	int getStrength();
+	bool isChanged() { return changed; };
+	void setChanged(bool c) { changed = c; };
 };

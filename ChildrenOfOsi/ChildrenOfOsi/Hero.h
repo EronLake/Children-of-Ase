@@ -4,6 +4,7 @@
 #include "Relationship.h"
 #include "Personality.h"
 
+class ActionPool;
 
 class Hero :
 	public SplSoldier
@@ -19,7 +20,10 @@ public:
 	Personality* traits;
 	//Planner* planner;
     
+	ActionPool* actionPool;
+
     int name;
+
 
 	void addRelationship(int hero);
 	void Hero::setPersonality(int a, int k, int h, int p, int r, int e, int g);
