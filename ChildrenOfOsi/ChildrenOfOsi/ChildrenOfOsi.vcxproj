@@ -171,6 +171,7 @@
     <ClInclude Include="CheckClass.h" />
     <ClInclude Include="ChildrenOfOsi.h" />
     <ClInclude Include="common.h" />
+    <ClInclude Include="Conditions.h" />
     <ClInclude Include="Containers.h" />
     <ClInclude Include="DialogueController.h" />
     <ClInclude Include="DialogueGui.h" />
@@ -236,6 +237,7 @@
     <ClCompile Include="AudioTestSuite.cpp" />
     <ClCompile Include="CheckClass.cpp" />
     <ClCompile Include="ChildrenOfOsi.cpp" />
+    <ClCompile Include="Conditions.cpp" />
     <ClCompile Include="Containers.cpp" />
     <ClCompile Include="DialogueController.cpp" />
     <ClCompile Include="DialogueGui.cpp" />
