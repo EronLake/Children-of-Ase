@@ -6,6 +6,9 @@ private:
 	int affinity;
 	int notoriety;
 	int strength;
+	int affEstimate;
+	int notorEstimate;
+	int strEstimate;
 
 public:
 	Relationship();
@@ -19,4 +22,13 @@ public:
 	void setStrength(int s) { strength = s; };
 	void addStrength(int s) { strength += s; };
 	int getStrength() { return strength; };
+	void setAffEstimate(int a) { affEstimate = a; };
+	void addAffEstimate(int a) { affEstimate += a; };
+	int getAffEstimate() { return affEstimate; };
+	void setNotorEstimate(int n) { notorEstimate = n; };
+	void addNotorEstimate(int n) { notorEstimate += n; };
+	int getNotorEstimate() { return notorEstimate; };
+	void setStrEstimate(int s) { strEstimate = s; };
+	void addStrEstimate(int s) { strEstimate += s; };
+	int getStrEstimate() { return strEstimate; };
 };
