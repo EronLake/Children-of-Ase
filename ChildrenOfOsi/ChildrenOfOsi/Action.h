@@ -14,8 +14,7 @@ public:
 
 	void setUtility(int u) { utility = u; };
 	int getUtility() { return utility; };
-
-	void setHero(Hero* h) { hero = h; };
+	void setHero(Hero* h) { hero = h; recieverName = h->name; };
 	Hero* getHero() { return hero; };
 
 	void setOwner(Hero* o) { owner = o; };//preConditionsNeeded also sets owner
@@ -30,8 +29,10 @@ public:
 	Personality* multipliers;
 	void setMultipliers(int a, int k, int h, int p, int r, int e, int g);
 
-private:
+	int recieverName;
 	std::string name;
+private:
+	//std::string name;
 	int utility;
 	Hero* owner;
 	Hero* hero;
