@@ -1,4 +1,17 @@
 {
+   "1" : {
+      "bodyx1" : 0,
+      "bodyx2" : 0,
+      "bodyy1" : 0,
+      "bodyy2" : 0,
+      "frame_num" : 1,
+      "hight" : 500,
+      "name" : "1",
+      "tex_file" : "size",
+      "width" : 500,
+      "x" : 171.0,
+      "y" : 190.0
+   },
    "YemojasHouse" : {
       "bodyx1" : 110,
       "bodyx2" : 150,
@@ -220,6 +233,71 @@
       "x" : 66.0,
       "y" : 70.0
    },
+   "jun_tree_1" : {
+      "bodyx1" : 1000.0,
+      "bodyx2" : 1000.0,
+      "bodyy1" : 1000.0,
+      "bodyy2" : 1000.0,
+      "frame_num" : 1,
+      "hight" : 1000.0,
+      "name" : "jun_tree_1",
+      "tex_file" : "Tree_2",
+      "width" : 1000.0,
+      "x" : 178.0385589599609,
+      "y" : 185.6195068359375
+   },
+   "jun_tree_2" : {
+      "bodyx1" : -1000.0,
+      "bodyx2" : -1000.0,
+      "bodyy1" : -1000.0,
+      "bodyy2" : -1000.0,
+      "frame_num" : 1,
+      "hight" : 1000.0,
+      "name" : "jun_tree_2",
+      "tex_file" : "Tree_2",
+      "width" : 1000.0,
+      "x" : 178.7154541015625,
+      "y" : 190.6619110107422
+   },
+   "jun_tree_3" : {
+      "bodyx1" : 1000.0,
+      "bodyx2" : 1000.0,
+      "bodyy1" : 1000.0,
+      "bodyy2" : 1000.0,
+      "frame_num" : 1,
+      "hight" : 1000.0,
+      "name" : "jun_tree_3",
+      "tex_file" : "Tree",
+      "width" : 1000.0,
+      "x" : 172.4367523193359,
+      "y" : 188.7686004638672
+   },
+   "jun_tree_4" : {
+      "bodyx1" : -1000.0,
+      "bodyx2" : -1000.0,
+      "bodyy1" : -1000.0,
+      "bodyy2" : -1000.0,
+      "frame_num" : 1,
+      "hight" : 1000.0,
+      "name" : "jun_tree_4",
+      "tex_file" : "Tree_2",
+      "width" : 1000.0,
+      "x" : 168.9582977294922,
+      "y" : 195.1083068847656
+   },
+   "jun_tree_5" : {
+      "bodyx1" : -1000.0,
+      "bodyx2" : -1000.0,
+      "bodyy1" : -1000.0,
+      "bodyy2" : -1000.0,
+      "frame_num" : 1,
+      "hight" : 1000.0,
+      "name" : "jun_tree_5",
+      "tex_file" : "Tree_2",
+      "width" : 1000.0,
+      "x" : 170.3870544433594,
+      "y" : 184.2688446044922
+   },
    "oasis_center" : {
       "bodyx1" : 170.0019531250,
       "bodyx2" : 510.00878906250,
@@ -284,6 +362,19 @@
       "width" : 150.0,
       "x" : 100.0,
       "y" : 87.0
+   },
+   "teaching_tree" : {
+      "bodyx1" : 100.0,
+      "bodyx2" : -300.0,
+      "bodyy1" : 100.0,
+      "bodyy2" : -100.0,
+      "frame_num" : 1,
+      "hight" : 4.0,
+      "name" : "teaching_tree",
+      "tex_file" : "Tree_2",
+      "width" : 500.0,
+      "x" : 166.3432159423828,
+      "y" : 182.9833831787109
    },
    "tree_1" : {
       "bodyx1" : 110.0002441406250,
@@ -399,8 +490,8 @@
       "name" : "tree_test",
       "tex_file" : "Tree",
       "width" : 500.0,
-      "x" : 40.0,
-      "y" : 36.0
+      "x" : 42.46584320068359,
+      "y" : 33.27971267700195
    },
    "tree_test_2" : {
       "bodyx1" : 0.0,

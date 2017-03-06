@@ -36,12 +36,12 @@ private:
 	Hero* owner;
 	Hero* hero;
 
-	std::vector<RelPrerec*> rel_prerec_list;
-	std::vector<RelAssumpPrerec*> rel_assump_prerec_list;
-	std::vector<TimePrerec*> time_prerec_list;
-	std::vector<MemoryNumPrerec*> memory_num_prerec_list;
-	std::vector<particularMemPrerec*> particular_mem_prerec_list;
-	std::vector<ParticularMemStatePrerec*> particular_mem_state_prerec_list;
-	std::vector<ParticularStatePrerec*> particular_state_prerec_list;
+	//std::vector<RelPrerec*> rel_prerec_list;
+	//std::vector<RelAssumpPrerec*> rel_assump_prerec_list;
+	//std::vector<TimePrerec*> time_prerec_list;
+	//std::vector<MemoryNumPrerec*> memory_num_prerec_list;
+	//std::vector<particularMemPrerec*> particular_mem_prerec_list;
+	//std::vector<ParticularMemStatePrerec*> particular_mem_state_prerec_list;
+	//std::vector<ParticularStatePrerec*> particular_state_prerec_list;
 };
 
