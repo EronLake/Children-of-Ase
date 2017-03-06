@@ -53,8 +53,8 @@ namespace osi
 
     static bool init();
     static bool terminate();
-    static bool isActive();
-    static bool isRunning();
+    static bool isActive() { return GameWindow::window != nullptr; };
+    static bool isRunning() { return !glfwWindowShouldClose(osi::GameWindow::window); };
 
     static const GLFWmonitor * const getPrimaryMonitor() { return GameWindow::primaryMonitor; }
     static const GLFWwindow * const getWindow() { return GameWindow::window; }
@@ -100,6 +100,8 @@ namespace osi
     ~GameWindow() = delete;
 
     static glm::vec2 dpCoordToGL(float, float);
+    static glm::vec2 dpDimensionsToGL(float, float);
+
     static void setupWindow();
     static GLuint setupShaders(const std::string&, const std::string&);
     static void setupFont(const std::string&, unsigned int);

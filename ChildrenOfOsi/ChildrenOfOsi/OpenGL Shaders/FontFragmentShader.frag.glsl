@@ -1,14 +1,14 @@
 #version 330 core
 
-uniform vec2 iTexCoords;
+in vec2 texCoords;
 
-out vec4 oColor;
+out vec4 color;
 
 uniform sampler2D text;
 uniform vec3 textColor;
 
 void main()
 {
-  vec4 sampled = vec4(1.0, 1.0, 1.0, texture(text, iTexCoords).r);
-  oColor = vec4(textColor, 1.0) * sampled;
+  vec4 sampled = vec4(1.0, 1.0, 1.0, texture(text, texCoords).r);
+  color = vec4(textColor, 1.0) * sampled;
 }

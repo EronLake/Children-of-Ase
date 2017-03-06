@@ -89,24 +89,6 @@ bool osi::GameWindow::terminate()
 }
 
 /**
- * Returns whether there is a game window currently active.
- * Returns: Returns whether the window pointer is non-null
- */
-bool osi::GameWindow::isActive()
-{
-  return GameWindow::window != nullptr;
-}
-
-/**
- * Returns whether the GLFW window is still running.
- * Returns: Returns whether GLFW is not yet ready to close
- */
-bool osi::GameWindow::isRunning()
-{
-  return !glfwWindowShouldClose(osi::GameWindow::window);
-}
-
-/**
  * Draws the specified sprite at the given position and size.
  *
  * Param x: The horizontal X position of the sprite's top-left corner
@@ -201,21 +183,26 @@ void osi::GameWindow::drawText(const std::string& text, const std::string& fontN
 
   glUseProgram(GameWindow::fontShaderProgramId);
   glUniform3f(glGetUniformLocation(GameWindow::fontShaderProgramId, "textColor"), colorRed, colorGreen, colorBlue);
+  glActiveTexture(GL_TEXTURE0);
+  glBindVertexArray(GameWindow::fontVAO);
 
   glEnable(GL_CULL_FACE);
-  glEnable(GL_BLEND);
-  glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+  // glEnable(GL_BLEND);
+  // glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
   for(auto& ch : text) {
     if(ch < '\x00' || ch > '\x7F')
       continue;
 
     Glyph glyph = fontCharacters[fontName][ch];
-    GLfloat chX = currentTextTL.x + glyph.bearing.x;
-    GLfloat chY = currentTextTL.y - glyph.size.y - glyph.bearing.y;
-    GLfloat chW = static_cast<GLfloat>(glyph.size.x);
-    GLfloat chH = static_cast<GLfloat>(glyph.size.y);
+    GLfloat chX = 0; /*currentTextTL.x + dpCoordToGL(glyph.bearing.x, 0).x;*/
+    GLfloat chY = 0; /*currentTextTL.y - dpCoordToGL(0, glyph.size.y - glyph.bearing.y).y;*/
+    GLfloat chW = 0.10; /*dpDimensionsToGL(static_cast<GLfloat>(glyph.size.x), 0).x;*/
+    GLfloat chH = 0.10; /*dpDimensionsToGL(0, static_cast<GLfloat>(glyph.size.y)).y;*/
 
+    std::cout << "Glyph coordinates: (" << chX << ", " << chY << ")" << std::endl;
+    std::cout << "Glyph dimensions: (" << chW << ", " << chH << ")" << std::endl;
+    
     GLfloat vertices[6][4] = {
       {chX,       chY + chH, 0.0F, 0.0F},
       {chX,       chY,       0.0F, 1.0F}, 
@@ -228,9 +215,8 @@ void osi::GameWindow::drawText(const std::string& text, const std::string& fontN
 
     glBindTexture(GL_TEXTURE_2D, glyph.textureId);
 
-    glBindBuffer(GL_ARRAY_BUFFER, 0);
+    glBindBuffer(GL_ARRAY_BUFFER, fontVBO);
     glBufferSubData(GL_ARRAY_BUFFER, 0, sizeof(vertices), vertices);
-    glBindBuffer(GL_ARRAY_BUFFER, 0);
 
     glDrawArrays(GL_TRIANGLES, 0, 6);
 
@@ -240,6 +226,7 @@ void osi::GameWindow::drawText(const std::string& text, const std::string& fontN
   glDisable(GL_CULL_FACE);
 
   glBindVertexArray(0);
+  glBindBuffer(GL_ARRAY_BUFFER, 0);
   glBindTexture(GL_TEXTURE_2D, 0);
 }
 
@@ -290,13 +277,18 @@ void osi::GameWindow::refresh()
  */
 glm::vec2 osi::GameWindow::dpCoordToGL(float x, float y)
 {
-  GLfloat glX;
-  glX = (x - (0.5F * (WINDOW_WIDTH_DP - 1))) / (0.5F * (WINDOW_WIDTH_DP - 1));
-
-  GLfloat glY;
-  glY = -((y - (0.5F * (WINDOW_HEIGHT_DP - 1))) / (0.5F * (WINDOW_HEIGHT_DP - 1)));
-
+  GLfloat glX = (x - (0.5F * (WINDOW_WIDTH_DP - 1))) / (0.5F * (WINDOW_WIDTH_DP - 1));
+  GLfloat glY = -((y - (0.5F * (WINDOW_HEIGHT_DP - 1))) / (0.5F * (WINDOW_HEIGHT_DP - 1)));
   return {glX, glY};
+}
+
+/**
+ * 
+ */
+glm::vec2 osi::GameWindow::dpDimensionsToGL(float x, float y)
+{
+  glm::vec2 asCoords = GameWindow::dpCoordToGL(x, y);
+  return {asCoords.x + 1, asCoords.y + 1};
 }
 
 /**
