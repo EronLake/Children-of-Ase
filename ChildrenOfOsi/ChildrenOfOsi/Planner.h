@@ -31,6 +31,8 @@ private:
 	int prereq_appeal(Action step);
 	int cost(Action step);
 	int personality_appeal(Action evaluateAction);
+	vector<Action> prioritize_preconditions(Action goal);
+	int personality_appeal(Action* evaluateAction);
 
 
 };

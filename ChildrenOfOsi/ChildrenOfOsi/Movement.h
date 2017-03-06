@@ -29,6 +29,7 @@ public:
 	//void init_task_map();
     QuadTree* tree;
 	PhysicsManager* manager;
+	float speed_magnifier = 5.0f;
 	float moveSpeed;
 	float diagSpeed;
 	float diagXSpeed; 
