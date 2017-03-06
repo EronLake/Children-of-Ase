@@ -61,5 +61,19 @@
       "width" : 600.0,
       "x" : 4.0,
       "y" : 4.0
+   },
+   "Action_name" : {
+	"prerec1":{
+		"prerec_type": "rel_rec",
+		"rel_type": "strength",
+		"rel_dir": "upper",
+		"desired_rel_val": "50"
+	},
+	"prerec2":{
+		"prerec_type": "rel_rec",
+		"rel_type": "strength",
+		"rel_dir": "upper",
+		"desired_rel_val": "90",
+	},
    }
 }
