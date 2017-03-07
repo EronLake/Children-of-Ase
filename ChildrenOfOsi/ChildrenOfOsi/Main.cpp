@@ -185,7 +185,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 {
 
 
-	Player* Alex = new Player(SHANGO, Vector2f(4900.0, 3700.0), 100.0, 100.0);	//init player
+	Player* Alex = new Player(SHANGO, Vector2f(4900.0, 3700.0), 150.0, 150.0);	//init player
 	cout << "Alex's width and height is " << Alex->getWidth() << ", " << Alex->getHeight() << endl;
 
 	vector<WorldObj*> recVec;
@@ -276,10 +276,10 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	playerTexture->setFile("Assets/Sprites/ShangoFrontIdle.png",1);
 	playerIdleTex->setFile("Assets/Sprites/ShangoFrontIdle.png",1);
 
-	upRunTex->setFile("Assets/Sprites/ShangoBackSprite.png",26);
-	downRunTex->setFile("Assets/Sprites/ShangoForwardSprite.png",26);
-	leftRunTex->setFile("Assets/Sprites/ShangoLeftSprite.png",26);
-	rightRunTex->setFile("Assets/Sprites/ShangoRightSprite.png",26);
+	upRunTex->setFile("Assets/Sprites/ShangoBackSprint.png",16);
+	downRunTex->setFile("Assets/Sprites/ShangoForwardSprint.png",16);
+	leftRunTex->setFile("Assets/Sprites/ShangoLeftSprint.png",16);
+	rightRunTex->setFile("Assets/Sprites/ShangoRightSprint.png",16);
 	upIdleTex->setFile("Assets/Sprites/ShangoBackIdle.png",1);
 	downIdleTex->setFile("Assets/Sprites/ShangoFrontIdle.png",1);
 	leftIdleTex->setFile("Assets/Sprites/ShangoLeftIdle.png",1);
