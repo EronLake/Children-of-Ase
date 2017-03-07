@@ -17,12 +17,13 @@ int Planner::personality_appeal(Action* evaluateAction) {
 		(evaluateHero->traits->getExtroversion()*evaluateAction->multipliers->getExtroversion()));
 };
 vector<Action> Planner::prioritize_preconditions(Action goal) {
-	vector<Action> actionlist; //temporary
-	struct greaterAction {
-		inline bool operator()(Action& action1, Action& action2) {
-			return (action1.getUtility() > action2.getUtility());		
+	vector<Action> preconlist; //temporary
+	//eventually wanna do for every precondition, generate cost and return a map from precondition to cost 
+	struct lesserCost{
+		inline bool operator()(Action& action1, Action& action2) {//is temporarily an action
+			return (action1.getUtility() < action2.getUtility());		
 		};
 	};
-	std::sort(actionlist.begin(), actionlist.end(), greaterAction());
-	return actionlist;
+	std::sort(preconlist.begin(), preconlist.end(), lesserCost());
+	return preconlist;
 };
