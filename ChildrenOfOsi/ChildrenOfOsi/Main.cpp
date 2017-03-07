@@ -278,8 +278,8 @@ void RenderText(Shader &shader, std::string text, GLfloat x, GLfloat y, GLfloat 
 
 int main()
 {
-  doTutorialStuff();
-  return 0;
+ // doTutorialStuff();
+  //return 0;
 
   // DialogueHelper* dhelper = new DialogueHelper();
 
