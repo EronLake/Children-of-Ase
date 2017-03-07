@@ -93,3 +93,52 @@ vector<Action> Planner::prioritize_preconditions(Action goal) {
 	std::sort(actionlist.begin(), actionlist.end(), greaterAction());
 	return actionlist;
 };
+
+vector<Action> Planner::get_end_states() {
+	vector<Action> states;
+	for (auto iter : end_states)
+	{
+		states.push_back(iter.second);
+	}
+	return states;
+}
+
+vector<Action> Planner::get_milestones_for_goal(Action goal)
+{
+	vector<Action> milestones_for_goal = milestones.at(goal);
+	return milestones_for_goal;
+}
+
+vector<Action> Planner::get_milestone_frontier() {
+	vector<Action> frontier;
+	for (auto iter : milestones)
+	{
+		Action goal = iter.first;           //The goal associated with the milestone list
+		vector<Action> path = iter.second;  //The milestone list
+
+		if (path.size() == 0) {               //If there are no milestones yet
+			frontier.push_back(goal);       //Put the goal itself in the frontier
+		}
+		else
+		{
+			frontier.push_back(path.back());  //Otherwise, put the back of the path (current milestone) in the frontier
+		}
+	}
+	return frontier;
+}
+
+void Planner::add_milestone(Action goal, Action milestone) {
+	milestones[goal].push_back(milestone);
+}
+
+void Planner::generate_milestones(Action state, Action goal) {
+	if (goal.preConditionsNeeded(evaluateHero, goal.getHero()).size() == 0)
+	{
+		current_action = goal;
+	}
+	else
+	{
+		milestones[state].push_back(choose_next_step(goal, get_milestone_frontier()));
+		generate_milestones(state, milestones[state].back());
+	}
+}

@@ -395,8 +395,20 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 		edges.push_back({ p1, p4 });
 	}
 	
+	gameplay_functions->add_hero("Yemoja", 4600, 3600, true);
 
-	Hero* staticRec = new Hero(YEMOJA, Vector2f(4600, 3600), 100.0, 100.0);
+	tBuffer->run();
+
+	Hero* staticRec = Containers::hero_table["Yemoja"];
+
+	staticRec->setWidth(100);
+	staticRec->setHeight(100);
+	staticRec->name = YEMOJA;
+	//Hero* staticRec = new Hero(YEMOJA, Vector2f(4600, 3600), 100.0, 100.0);
+	///should actually use gameplay_functions->add_hero("Yemoja", 4600, 3600, true)
+	/// Containers::hero_table[name]->setWidht(widht)
+
+
 
 	staticRec->sprite.setTexture(yemojaTexture);
 	staticRec->sprite.setIdleTexture(yemojaIdleTex);

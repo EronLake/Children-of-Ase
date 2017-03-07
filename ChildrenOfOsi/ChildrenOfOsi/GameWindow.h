@@ -26,6 +26,7 @@
 #include FT_FREETYPE_H
 
 #include "AssetInfo.h"
+#include "Shader.h"
 #include "Sprite.h"
 #include "TextObj.h"
 
@@ -85,6 +86,7 @@ namespace osi
     static GLuint fontVAO;
     static GLuint fontVBO;
 
+    static Shader fontShader;
     static GLuint stdShaderProgramId;
     static GLuint fontShaderProgramId;
 
