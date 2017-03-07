@@ -182,6 +182,7 @@
     <ClInclude Include="Factions.h" />
     <ClInclude Include="GameMap.h" />
     <ClInclude Include="GameWindow.h" />
+    <ClInclude Include="Shader.h" />
     <ClInclude Include="Personality.h" />
     <ClInclude Include="Planner.h" />
     <ClInclude Include="json-forwards.h" />

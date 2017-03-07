@@ -23,6 +23,7 @@ std::vector<GLuint> osi::GameWindow::textures;
 GLuint osi::GameWindow::fontVAO = 0;
 GLuint osi::GameWindow::fontVBO = 0;
 
+Shader osi::GameWindow::fontShader;
 GLuint osi::GameWindow::stdShaderProgramId = 0;
 GLuint osi::GameWindow::fontShaderProgramId = 0;
 
@@ -181,14 +182,15 @@ void osi::GameWindow::drawText(const std::string& text, const std::string& fontN
   GLfloat colorGreen = static_cast<float>(color.y) / 255.0F;
   GLfloat colorBlue  = static_cast<float>(color.z) / 255.0F;
 
-  glUseProgram(GameWindow::fontShaderProgramId);
+  // glUseProgram(GameWindow::fontShaderProgramId);
+  GameWindow::fontShader.Use();
   glUniform3f(glGetUniformLocation(GameWindow::fontShaderProgramId, "textColor"), colorRed, colorGreen, colorBlue);
   glActiveTexture(GL_TEXTURE0);
   glBindVertexArray(GameWindow::fontVAO);
 
   glEnable(GL_CULL_FACE);
-  // glEnable(GL_BLEND);
-  // glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+  glEnable(GL_BLEND);
+  glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
   for(auto& ch : text) {
     if(ch < '\x00' || ch > '\x7F')
@@ -204,19 +206,19 @@ void osi::GameWindow::drawText(const std::string& text, const std::string& fontN
     std::cout << "Glyph dimensions: (" << chW << ", " << chH << ")" << std::endl;
     
     GLfloat vertices[6][4] = {
-      {chX,       chY + chH, 0.0F, 0.0F},
-      {chX,       chY,       0.0F, 1.0F}, 
-      {chX + chW, chY,       1.0F, 1.0F},
+      {chX,       chY + chH, 0.0F, 0.0F}, // Bottom left
+      {chX,       chY,       0.0F, 1.0F}, // Top left
+      {chX + chW, chY,       1.0F, 1.0F}, // Top right
 
-      {chX,       chY + chH, 0.0F, 0.0F},
-      {chX + chW,       chY, 1.0F, 1.0F},
-      {chX + chW, chY + chH, 1.0F, 0.0F},
+      {chX,       chY + chH, 0.0F, 0.0F}, // Bottom left
+      {chX + chW,       chY, 1.0F, 1.0F}, // Top right
+      {chX + chW, chY + chH, 1.0F, 0.0F}, // Bottom right
     };
 
     glBindTexture(GL_TEXTURE_2D, glyph.textureId);
-
     glBindBuffer(GL_ARRAY_BUFFER, fontVBO);
     glBufferSubData(GL_ARRAY_BUFFER, 0, sizeof(vertices), vertices);
+    glBindBuffer(GL_ARRAY_BUFFER, 0);
 
     glDrawArrays(GL_TRIANGLES, 0, 6);
 
@@ -226,7 +228,6 @@ void osi::GameWindow::drawText(const std::string& text, const std::string& fontN
   glDisable(GL_CULL_FACE);
 
   glBindVertexArray(0);
-  glBindBuffer(GL_ARRAY_BUFFER, 0);
   glBindTexture(GL_TEXTURE_2D, 0);
 }
 
@@ -479,6 +480,9 @@ GLuint osi::GameWindow::setupShaders(const std::string& vertexShaderPath, const 
  */
 void osi::GameWindow::setupFont(const std::string& fontName, unsigned int fontHeight)
 {
+  Shader s(osi::GameWindow::FONT_VERTEX_SHADER_PATH.c_str(), osi::GameWindow::FONT_FRAGMENT_SHADER_PATH.c_str());
+  GameWindow::fontShader = s;
+
   // Initialize the font library
   FT_Library fontLib;
   if(FT_Init_FreeType(&fontLib))
@@ -535,7 +539,7 @@ void osi::GameWindow::setupFont(const std::string& fontName, unsigned int fontHe
 
   glBindVertexArray(fontVAO);
   glBindBuffer(GL_ARRAY_BUFFER, fontVBO);
-  glBufferData(GL_ARRAY_BUFFER, sizeof(GLfloat) * 6 * 4, NULL, GL_STREAM_DRAW);
+  glBufferData(GL_ARRAY_BUFFER, sizeof(GLfloat) * 6 * 4, NULL, GL_DYNAMIC_DRAW);
 
   glEnableVertexAttribArray(0);
   glVertexAttribPointer(0, 4, GL_FLOAT, GL_FALSE, 4 * sizeof(GLfloat), 0);

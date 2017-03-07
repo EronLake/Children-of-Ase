@@ -356,6 +356,9 @@
       <Filter>AI</Filter>
     </ClInclude>
     <ClInclude Include="Action.h" />
+    <ClInclude Include="Shader.h">
+      <Filter>Rendering</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Text Include="audio_test.txt">
