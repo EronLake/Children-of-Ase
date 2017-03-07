@@ -272,17 +272,17 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	//load sprite from a configuration file?
 	objTexture->setFile("Assets/Sprites/YemojasHouse.png",1);
 
-	playerTexture->setFile("Assets/Sprites/ShangoFrontIdle.png",1);
-	playerIdleTex->setFile("Assets/Sprites/ShangoFrontIdle.png",1);
+	playerTexture->setFile("Assets/Sprites/ShangoForwardIdle.png",22);
+	playerIdleTex->setFile("Assets/Sprites/ShangoForwardIdle.png",22);
 
 	upRunTex->setFile("Assets/Sprites/ShangoBackSprint.png",16);
 	downRunTex->setFile("Assets/Sprites/ShangoForwardSprint.png",16);
 	leftRunTex->setFile("Assets/Sprites/ShangoLeftSprint.png",16);
 	rightRunTex->setFile("Assets/Sprites/ShangoRightSprint.png",16);
-	upIdleTex->setFile("Assets/Sprites/ShangoBackIdle.png",1);
-	downIdleTex->setFile("Assets/Sprites/ShangoFrontIdle.png",1);
-	leftIdleTex->setFile("Assets/Sprites/ShangoLeftIdle.png",1);
-	rightIdleTex->setFile("Assets/Sprites/ShangoRightIdle.png",1);
+	upIdleTex->setFile("Assets/Sprites/ShangoBackIdle.png",22);
+	downIdleTex->setFile("Assets/Sprites/ShangoForwardIdle.png",22);
+	leftIdleTex->setFile("Assets/Sprites/ShangoLeftIdle.png",22);
+	rightIdleTex->setFile("Assets/Sprites/ShangoRightIdle.png",22);
 	upAtkTex->setFile("Assets/Sprites/ShangoBackSwing.png", 24);
 	downAtkTex->setFile("Assets/Sprites/ShangoForwardSwing.png", 24);
 	leftAtkTex->setFile("Assets/Sprites/ShangoLeftSwing.png", 24);

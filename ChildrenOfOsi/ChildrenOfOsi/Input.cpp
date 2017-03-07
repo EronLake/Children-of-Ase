@@ -27,7 +27,7 @@ Input::Input(ChildrenOfOsi* _gameplay_functions, WorldObj * _player, RenderHelpe
 	tBuffer = _tBuffer;
 	recVec = _recVec;
 
-	//gameplay_functions->play_sound("Play");
+	gameplay_functions->play_sound("Play");
 
 	gameplay_functions->play_sound("Walk");
 	gameplay_functions->play_sound("Pause");
