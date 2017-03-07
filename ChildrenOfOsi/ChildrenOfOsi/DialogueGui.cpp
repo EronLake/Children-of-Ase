@@ -26,6 +26,8 @@ DialogueGui::DialogueGui()
 	questionGlowTex = new Texture();
 	dialogueBoxTex = new Texture();
 	responseBoxTex = new Texture();
+	black = glm::vec3(0, 0, 0);
+	red = glm::vec3(50, 0, 0);
 
 }
 
@@ -117,19 +119,29 @@ void DialogueGui::drawGui()
 	osi::GameWindow::drawSprite(responseBox2->getX(), responseBox2->getY(), responseBox2->getWidth(), responseBox2->getHeight(), responseBox2->sprite);
 	std::string message = DialogueController::getMessage();
 	//	std::cout << "Message: " << m << std::endl;
-	osi::GameWindow::createText(message, 254, 303, 600, 80, glm::vec3(50, 0, 0));
+	osi::GameWindow::createText(message, 254, 303, 600, 80, black);
 	std::vector<std::string> options;
 	if (DialogueController::getState() == 1) {
 		options = DialogueController::getOptions();
 		for (int i = 0; i < options.size(); i++) {
-			osi::GameWindow::createText(options[i], 280, 390 + (60 * i), 544, 45, glm::vec3(50, 0, 0));
+			if (DialogueController::getSelect() == i) {
+				osi::GameWindow::createText(options[i], 280, 390 + (32 * i), 544, 45, red);
+			}
+			else {
+				osi::GameWindow::createText(options[i], 280, 390 + (32 * i), 544, 45, black);
+			}
 			//	std::cout << i << ": " << show[i] << std::endl;
 		}
 	}
 	if (DialogueController::getState() == 2) {
 		options = DialogueController::getReplyOptions();
 		for (int i = 0; i < options.size(); i++) {
-			osi::GameWindow::createText(options[i], 280, 390 + (60 * i), 544, 45, glm::vec3(50, 0, 0));
+			if (DialogueController::getSelect() == i) {
+				osi::GameWindow::createText(options[i], 280, 390 + (32 * i), 544, 45, red);
+			}
+			else {
+				osi::GameWindow::createText(options[i], 280, 390 + (32 * i), 544, 45, black);
+			}
 			//	std::cout << i<<": "<<show[i] << std::endl;
 		}
 	}
