@@ -21,4 +21,7 @@ public:
 
 	void init_plans();
 
+	void reevaluate_state(int me, int them);
+
+	void execute();
 };
