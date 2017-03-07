@@ -520,10 +520,10 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	ActionPool* poolAct = new ActionPool(Alex);
 	Alex->actionPool = poolAct;
 	Action mic = Action();
-	mic.preconds["affAbove"] = 50;
+	//mic.preconds["affAbove"] = 50;
 	mic.postconds["aff"] = 5;
 	Action mac = Action();
-	mac.preconds["affAbove"] = 55;
+	//mac.preconds["affAbove"] = 55;
 	mac.postconds["aff"] = 5;
 	mac.setOwner(Alex);
 	mac.setHero(staticRec);
