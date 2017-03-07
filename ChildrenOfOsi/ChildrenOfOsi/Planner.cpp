@@ -94,7 +94,7 @@ vector<Action> Planner::prioritize_preconditions(Action goal) {
 
 	std::sort(preconlist.begin(), preconlist.end(), lesserCost());
 	return preconlist;
-};
+};		
 
 vector<Action> Planner::get_end_states() {
 	vector<Action> states;
@@ -144,4 +144,4 @@ void Planner::generate_milestones(Action state, Action goal) {
 		generate_milestones(state, milestones[state].back());
 	}
 }
->>>>>>> 1225adaf832d0a2a111b3647db6b58bd62d79940
+
