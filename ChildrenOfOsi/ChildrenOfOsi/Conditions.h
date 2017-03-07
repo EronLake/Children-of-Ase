@@ -2,7 +2,7 @@
 #include "Hero.h"
 #include "Memory.h"
 #include "common.h"
-#include "Action.h"
+//#include "ActionPool.h"
 
 
 /*
@@ -29,10 +29,11 @@ public:
 
 };
 */
+class ActionPool;
 class Preconditions
 {
 public:
-	virtual float get_cost();
+	virtual float get_cost() = 0;
 };
 
 class RelPrecon : public Preconditions
