@@ -49,6 +49,7 @@
 #include "DialougeTestSuite.h"
 
 #include "AIManager.h"
+#include "AIController.h"
 
 #include "ObjConfig.h"
 #include "ActionPool.h"
@@ -183,7 +184,8 @@ int main() {
 void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 {
 
-	Player* Alex = new Player(SHANGO, Vector2f(4900.0, 3700.0), 100.0, 100.0);	//init player
+
+	Player* Alex = new Player(SHANGO, Vector2f(4900.0, 3700.0), 150.0, 150.0);	//init player
 	cout << "Alex's width and height is " << Alex->getWidth() << ", " << Alex->getHeight() << endl;
 
 	vector<WorldObj*> recVec;
@@ -208,6 +210,8 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	AudioManager* AudM = new AudioManager(mLog, tBuffer);
 	AIHelper* ai = new AIHelper();
 	AIManager* AIM = new AIManager(mLog, tBuffer, ai);
+
+	AIController* AiController = new AIController();
 
 	//the order defines what order the managers the tasks will be sent to
 	DumM->register_manager();
@@ -272,10 +276,10 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	playerTexture->setFile("Assets/Sprites/ShangoFrontIdle.png",1);
 	playerIdleTex->setFile("Assets/Sprites/ShangoFrontIdle.png",1);
 
-	upRunTex->setFile("Assets/Sprites/ShangoBackSprite.png",26);
-	downRunTex->setFile("Assets/Sprites/ShangoForwardSprite.png",26);
-	leftRunTex->setFile("Assets/Sprites/ShangoLeftSprite.png",26);
-	rightRunTex->setFile("Assets/Sprites/ShangoRightSprite.png",26);
+	upRunTex->setFile("Assets/Sprites/ShangoBackSprint.png",16);
+	downRunTex->setFile("Assets/Sprites/ShangoForwardSprint.png",16);
+	leftRunTex->setFile("Assets/Sprites/ShangoLeftSprint.png",16);
+	rightRunTex->setFile("Assets/Sprites/ShangoRightSprint.png",16);
 	upIdleTex->setFile("Assets/Sprites/ShangoBackIdle.png",1);
 	downIdleTex->setFile("Assets/Sprites/ShangoFrontIdle.png",1);
 	leftIdleTex->setFile("Assets/Sprites/ShangoLeftIdle.png",1);
@@ -391,8 +395,20 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 		edges.push_back({ p1, p4 });
 	}
 	
+	gameplay_functions->add_hero("Yemoja", 4600, 3600, true);
 
-	Hero* staticRec = new Hero(YEMOJA, Vector2f(4600, 3600), 100.0, 100.0);
+	tBuffer->run();
+
+	Hero* staticRec = Containers::hero_table["Yemoja"];
+
+	staticRec->setWidth(100);
+	staticRec->setHeight(100);
+	staticRec->name = YEMOJA;
+	//Hero* staticRec = new Hero(YEMOJA, Vector2f(4600, 3600), 100.0, 100.0);
+	///should actually use gameplay_functions->add_hero("Yemoja", 4600, 3600, true)
+	/// Containers::hero_table[name]->setWidht(widht)
+
+
 
 	staticRec->sprite.setTexture(yemojaTexture);
 	staticRec->sprite.setIdleTexture(yemojaIdleTex);
@@ -501,7 +517,8 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 
 	ai->graph._print();
 
-	ActionPool poolAct = ActionPool(Alex);
+	ActionPool* poolAct = new ActionPool(Alex);
+	Alex->actionPool = poolAct;
 	Action mic = Action();
 	mic.preconds["affAbove"] = 50;
 	mic.postconds["aff"] = 5;
@@ -510,15 +527,15 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	mac.postconds["aff"] = 5;
 	mac.setOwner(Alex);
 	mac.setHero(staticRec);
-	poolAct.micro.push_back(mic);
-	poolAct.macro.push_back(mac);
-	poolAct.updateMiddle();
-	std::cout << poolAct.macro.back().getName()<< endl;
-	vector<Action> test= poolAct.getActions(staticRec,poolAct.macro.back());
+	poolAct->micro.push_back(mic);
+	poolAct->macro.push_back(mac);
+	poolAct->updateMiddle();
+	std::cout << poolAct->macro.back().getName()<< endl;
+	vector<Action> test= poolAct->getActions(staticRec,poolAct->macro.back());
 	for (int i = 0; i < test.size(); i++) {
 		int t=test[i].exeAction();
 	}
-	poolAct.macro.back().exeAction();
+	poolAct->macro.back().exeAction();
 
 
 	//ai->astar_search(staticRec);
@@ -686,6 +703,16 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 		//	cout << tBuffer->queue_buffer.size() << endl;
 		//tBuffer->empty();
 
+		/////////////////////////////////////////////////////////////////
+		/////////////////////////////////////////////////////////////////
+		/////////////////////////////////////////////////////////////////
+		for (auto iter : staticRec->rel) {
+			if (iter.second->isChanged()) {
+				//reevaluate goals with iter.first
+
+				iter.second->setChanged(false);
+			}
+		}
 
 		if ((1000 / fs) > (clock() - start_tick)) { //delta_ticks) {www
 			Sleep((1000 / fs) - (clock() - start_tick));

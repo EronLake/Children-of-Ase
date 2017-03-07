@@ -86,3 +86,11 @@ void Action::setMultipliers(int a, int k, int h, int p, int r, int e, int g) {
 	multipliers->setExtroversion(e);
 	multipliers->setGreed(g);
 };
+
+bool Action::operator==(const Action a) const
+{
+	if (a.name == name && a.hero == hero && a.owner == owner) {
+		return true;
+	}
+	return false;
+}
