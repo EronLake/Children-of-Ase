@@ -23,7 +23,7 @@ std::vector<GLuint> osi::GameWindow::textures;
 GLuint osi::GameWindow::fontVAO = 0;
 GLuint osi::GameWindow::fontVBO = 0;
 
-Shader osi::GameWindow::fontShader;
+// Shader osi::GameWindow::fontShader;
 GLuint osi::GameWindow::stdShaderProgramId = 0;
 GLuint osi::GameWindow::fontShaderProgramId = 0;
 
@@ -182,8 +182,8 @@ void osi::GameWindow::drawText(const std::string& text, const std::string& fontN
   GLfloat colorGreen = static_cast<float>(color.y) / 255.0F;
   GLfloat colorBlue  = static_cast<float>(color.z) / 255.0F;
 
-  // glUseProgram(GameWindow::fontShaderProgramId);
-  GameWindow::fontShader.Use();
+  glUseProgram(GameWindow::fontShaderProgramId);
+  // GameWindow::fontShader.Use();
   glUniform3f(glGetUniformLocation(GameWindow::fontShaderProgramId, "textColor"), colorRed, colorGreen, colorBlue);
   glActiveTexture(GL_TEXTURE0);
   glBindVertexArray(GameWindow::fontVAO);
@@ -480,8 +480,8 @@ GLuint osi::GameWindow::setupShaders(const std::string& vertexShaderPath, const 
  */
 void osi::GameWindow::setupFont(const std::string& fontName, unsigned int fontHeight)
 {
-  Shader s(osi::GameWindow::FONT_VERTEX_SHADER_PATH.c_str(), osi::GameWindow::FONT_FRAGMENT_SHADER_PATH.c_str());
-  GameWindow::fontShader = s;
+  // Shader s(osi::GameWindow::FONT_VERTEX_SHADER_PATH.c_str(), osi::GameWindow::FONT_FRAGMENT_SHADER_PATH.c_str());
+  // GameWindow::fontShader = s;
 
   // Initialize the font library
   FT_Library fontLib;
@@ -526,6 +526,7 @@ void osi::GameWindow::setupFont(const std::string& fontName, unsigned int fontHe
   }
 
   glPixelStorei(GL_UNPACK_ALIGNMENT, 4);
+  glBindTexture(GL_TEXTURE_2D, 0);
   FT_Done_Face(face);
   FT_Done_FreeType(fontLib);
 
