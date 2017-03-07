@@ -37,21 +37,25 @@ FMOD_RESULT result;
 		string bump = "bump_0.wav";
 		string walk = "walk_loop.wav";
 		string sixers = "76ersAnthem.mp3";
+		string sketch = "Children of Osi Sketch 2.mp3";
 
 		SoundClass oasisAddress = nullptr;
 		SoundClass bumpAddress = nullptr;
 		SoundClass walkAddress = nullptr;
 		SoundClass sixAddress = nullptr;
+		SoundClass sketch2Address = nullptr;
 
 		this->createSound(&oasisAddress, oasis);
 		this->createSound(&bumpAddress, bump);
 		this->createSound(&walkAddress, walk);
 		this->createSound(&sixAddress, sixers);
+		this->createSound(&sketch2Address, sketch);
 
 		sounds[oasis] = oasisAddress;
 		sounds[bump] = bumpAddress;
 		sounds[walk] = walkAddress;
 		sounds[sixers] = sixAddress;
+		sounds[sketch] = sketch2Address;
 
 	}
 
@@ -152,7 +156,7 @@ FMOD_RESULT result;
 		SoundSystem soundsystem;
 
 		type = foo::soundType::music;
-		name = "oasis.wav";
+		name = "Children of Osi Sketch 2.mp3";
 		channels[name] = &chnls[0];//assign the channel
 		
 		ispaused = true;
