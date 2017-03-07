@@ -2,14 +2,19 @@
 #include "common.h"
 #include "Player.h"
 #include "Conditions.h"
+#include <memory>
+
+
 
 class Action
 {
+	
 public:
 	Action();
 	~Action();
+	
 
-	unordered_map<std::string, int> preconds;
+	unordered_map<std::string, std::shared_ptr<Preconditions>> preconds;
 	unordered_map<std::string, int> postconds;
 
 	void setUtility(int u) { utility = u; };

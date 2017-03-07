@@ -2,7 +2,7 @@
 #include "Hero.h"
 #include "Memory.h"
 #include "common.h"
-#include "Action.h"
+//#include "ActionPool.h"
 
 class Preconditions
 {
@@ -13,6 +13,7 @@ public:
 	~Preconditions();
 	virtual float get_cost();
 	std::string get_type();
+
 };
 
 class RelPrecon : public Preconditions
@@ -106,3 +107,17 @@ public:
 };
 
 //BETRAYALS NEED TO BE ACCOUNTED FOR
+
+class Postcondition
+{
+protected:
+	std::string type;
+
+public:
+	//Comparing village states
+	Postcondition();
+	~Postcondition();
+
+	virtual float get_utility();
+	std::string get_type();
+};

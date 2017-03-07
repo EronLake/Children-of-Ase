@@ -1,18 +1,19 @@
 #include "stdafx.h"
 #include "Action.h"
+#include "Conditions.h"
 
 
 Action::Action()
 {
-}
+};
 
 
 Action::~Action()
 {
-}
+};
 
 vector<std::string> Action::preConditionsNeeded(Hero* o, Hero* h) {
-	vector<std::string> needs;
+	vector<std::string> needs;/*
 	owner = o;
 	int tmp;
 	for (auto i = preconds.begin(); i != preconds.end(); ++i) {
@@ -53,7 +54,7 @@ vector<std::string> Action::preConditionsNeeded(Hero* o, Hero* h) {
 			}
 		}
 	}
-	std::cout << "HERE 2.5" << endl;
+	std::cout << "HERE 2.5" << endl;*/
 	return needs;
 }
 

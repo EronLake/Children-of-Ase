@@ -265,3 +265,38 @@ float StatePrerec::get_cost()
 
 	return cost;
 }
+
+
+
+////////////////////////////////////////////////////////////////////////////////////
+//MEMORY POSTCONDITION
+////////////////////////////////////////////////////////////////////////////////////
+Postcondition::Postcondition()
+{
+	/*state_manager st_man,
+	std::string required state,
+	std::vectorr<relevant villages>*/
+
+	type = "state";
+
+	LOG("particularMemPrerec Object Constructed");
+}
+
+
+Postcondition::~Postcondition()
+{
+	LOG("particularMemPrerec Object Destroyed");
+}
+
+float Postcondition::get_utility()
+{
+	float utility = 10.0;
+	float magnifier = 10.0;//this has to essentially the cost of an average state change
+
+	return utility;
+}
+
+std::string Postcondition::get_type()
+{
+	return type;
+}
