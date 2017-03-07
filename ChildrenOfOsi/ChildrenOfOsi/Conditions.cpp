@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "Conditions.h"
 
-
+/*
 Conditions::Conditions()
 {
 }
@@ -10,7 +10,8 @@ Conditions::Conditions()
 Conditions::~Conditions()
 {
 }
-
+*/
+/*
 float Conditions::rel_prerec_cost(Hero* curr_hero, Hero* other_hero, std::string rel_type, int desired_rel_val)
 {
 	return 0.0;
@@ -37,12 +38,23 @@ float Conditions::particular_mem_prerec_cost(std::vector<Memory>* memories, std:
 	return 0.0;
 }
 
-float Conditions::particular_mem_state_prerec_cost(std::vector<Memory>* memories, std::string rec_mem/*, state_manager*, required state, relevant villages */)
+float Conditions::particular_mem_state_prerec_cost(std::vector<Memory>* memories, std::string rec_mem/*, state_manager*, required state, relevant villages )
 {
 	return 0.0;
 }
 
-float Conditions::particular_state_prerec_cost(/*, state_manager*, required state, std::vectorr<relevant villages> */)
+float Conditions::particular_state_prerec_cost(/*, state_manager*, required state, std::vectorr<relevant villages> )
+{
+	return 0.0;
+}
+*/
+
+float Preconditions::get_cost()
+{
+	return 0.0;
+}
+
+float RelPrecon::get_cost(Hero* curr_hero, Hero* other_hero, std::string rel_type, int desired_rel_val)
 {
 	return 0.0;
 }
