@@ -23,6 +23,7 @@ public:
 	void setMultipliers(int a, int k, int h, int p, int r, int e, int g);
 	int recieverName;
 	std::string name;
+	bool operator==(const Action a) const;
 private:
 	//std::string name;
 	int utility;
