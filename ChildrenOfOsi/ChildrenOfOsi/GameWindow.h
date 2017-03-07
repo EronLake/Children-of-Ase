@@ -86,7 +86,7 @@ namespace osi
     static GLuint fontVAO;
     static GLuint fontVBO;
 
-    static Shader fontShader;
+    // static Shader fontShader;
     static GLuint stdShaderProgramId;
     static GLuint fontShaderProgramId;
 
