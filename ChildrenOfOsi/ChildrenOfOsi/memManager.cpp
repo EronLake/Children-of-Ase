@@ -13,13 +13,13 @@ memManager::memManager(MessageLog* _mLog, TaskBuffer* _tBuffer)
 
 	memHelper = new MemoryHelper();
 
-	hero_pool = memHelper->create_pool(sizeof(Hero) * 32);
+	hero_pool = memHelper->create_pool(sizeof(Hero) * 4);
 	hero_head = memHelper->init_pool(hero_pool, sizeof(Hero));
 
 	livingObj_pool = memHelper->create_pool(sizeof(LivingObj) * 32);
 	livingObj_head = memHelper->init_pool(livingObj_pool, sizeof(LivingObj));
 
-	Attack_pool = memHelper->create_pool(sizeof(Attack) * 32);
+	Attack_pool = memHelper->create_pool(sizeof(Attack) * 16);
 	Attack_head = memHelper->init_pool(Attack_pool, sizeof(Attack));
 
 	soldier_pool = memHelper->create_pool(sizeof(Soldier) * 32);
@@ -28,7 +28,7 @@ memManager::memManager(MessageLog* _mLog, TaskBuffer* _tBuffer)
 	spl_soldier_pool = memHelper->create_pool(sizeof(SplSoldier) * 32);
 	spl_soldier_head = memHelper->init_pool(spl_soldier_pool, sizeof(SplSoldier));
 
-	worldObj_pool = memHelper->create_pool(sizeof(WorldObj)*32);
+	worldObj_pool = memHelper->create_pool(sizeof(WorldObj)*64);
 	worldObj_head = memHelper->init_pool(worldObj_pool, sizeof(WorldObj));
 
 	npc_pool = memHelper->create_pool(sizeof(NPC) * 32);

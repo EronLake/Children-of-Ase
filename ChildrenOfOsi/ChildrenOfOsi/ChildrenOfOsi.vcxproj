@@ -163,6 +163,7 @@
   <ItemGroup>
     <ClInclude Include="Action.h" />
     <ClInclude Include="ActionPool.h" />
+    <ClInclude Include="AIController.h" />
     <ClInclude Include="AIHelper.h" />
     <ClInclude Include="AIManager.h" />
     <ClInclude Include="Alliance.h" />
@@ -171,6 +172,7 @@
     <ClInclude Include="CheckClass.h" />
     <ClInclude Include="ChildrenOfOsi.h" />
     <ClInclude Include="common.h" />
+    <ClInclude Include="Conditions.h" />
     <ClInclude Include="Containers.h" />
     <ClInclude Include="DialogueController.h" />
     <ClInclude Include="DialogueGui.h" />
@@ -229,6 +231,7 @@
   <ItemGroup>
     <ClCompile Include="Action.cpp" />
     <ClCompile Include="ActionPool.cpp" />
+    <ClCompile Include="AIController.cpp" />
     <ClCompile Include="AIHelper.cpp" />
     <ClCompile Include="AIManager.cpp" />
     <ClCompile Include="Alliance.cpp" />
@@ -236,6 +239,7 @@
     <ClCompile Include="AudioTestSuite.cpp" />
     <ClCompile Include="CheckClass.cpp" />
     <ClCompile Include="ChildrenOfOsi.cpp" />
+    <ClCompile Include="Conditions.cpp" />
     <ClCompile Include="Containers.cpp" />
     <ClCompile Include="DialogueController.cpp" />
     <ClCompile Include="DialogueGui.cpp" />

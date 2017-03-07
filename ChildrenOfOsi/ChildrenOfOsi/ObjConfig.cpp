@@ -69,7 +69,9 @@ void ObjConfig::set_world_obj(vector<WorldObj*>* recVec, ChildrenOfOsi* gameplay
 	Containers::worldObj_table[name]->sprite.setTexture(Containers::texture_table[tex_file]);
 	Containers::worldObj_table[name]->setInteractable(false);
 	//Containers::worldObj_table[name]->setName(name);
-	Containers::worldObj_table[name]->offsetBody(0,bodyx1, bodyx2, bodyy1, bodyy2);
+
+	//Containers::worldObj_table[name]->offsetBody(0,bodyx1, bodyx2, bodyy1, bodyy2);
+	Containers::worldObj_table[name]->offsetBody(0, 1000, 1000, 1000, 1000);
 	//cout << "texfile" << endl;
 	//cout << Containers::worldObj_table.size() << endl;
 	
