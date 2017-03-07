@@ -343,7 +343,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	//vector<WorldObj*> recVec;
 
 	vector<WorldObj*> vec;
-
+	/*
 	for (int i = 1; i < 6; i++) {
 		if (i > 4) {
 			WorldObj* obj = new WorldObj(Vector2f(4100, 3550),500,333);
@@ -368,7 +368,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 		recVec.push_back(objs);
 		
 	}
-
+	*/
 	vector<Vector2f> vertices;
 	vector<pair<Vector2f, Vector2f>> edges;
 	
@@ -454,7 +454,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	staticRec->setName("Yemoja");
 	staticRec->setInteractable(true);
 	staticRec->setHealth(100);
-
+	/*
 	WorldObj* tree = new WorldObj(Vector2f(4000, 2600), 800, 500);
 	tree->sprite.setTexture(treeTex);
 	tree->offsetBody(0, 275, 375, 375, 75);
@@ -467,12 +467,13 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	//WorldObj* tree1 = new WorldObj(Vector2f())
 	//staticRec->goal.setXloc(500);
 	//staticRec->goal.setYloc(1200);
-
+	*/
 	recVec.push_back(staticRec);
-	recVec.push_back(tree);
-	recVec.push_back(tree1);
-	recVec.push_back(tree2);
-	recVec.push_back(vec[0]);
+	//recVec.push_back(tree);
+	//recVec.push_back(tree1);
+	//recVec.push_back(tree2);
+	//recVec.push_back(vec[0]);
+	
 	//recVec.push_back(vec[1]);
 	//recVec.push_back(myRec1); recVec.push_back(myRec2);
 
