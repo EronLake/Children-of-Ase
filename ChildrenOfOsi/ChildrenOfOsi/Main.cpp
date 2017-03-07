@@ -707,12 +707,16 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 		/////////////////////////////////////////////////////////////////
 		/////////////////////////////////////////////////////////////////
 		for (auto iter : staticRec->rel) {
-			if (iter.second->isChanged()) {
-				//reevaluate goals with iter.first
+			Relationship* my_rel = iter.second;
+			int with_hero = iter.first;
 
-				iter.second->setChanged(false);
+			if (my_rel->isChanged()) {
+				//reevaluate goals for with_hero
+				AiController->reevaluate_state(YEMOJA, with_hero);
+				my_rel->setChanged(false);
 			}
 		}
+		AiController->execute();
 
 		if ((1000 / fs) > (clock() - start_tick)) { //delta_ticks) {www
 			Sleep((1000 / fs) - (clock() - start_tick));

@@ -38,6 +38,7 @@ void Planner::choose_end_with(int hero) {
 	case YEMOJA:
 		//evaluate relationship
 		// end_states[YEMOJA] = picked_state
+		// insert the endstate into milestones, with empty milestone vector
 		break;
 	case OYA:
 		break;
@@ -65,7 +66,7 @@ Action Planner::choose_next_step(Action goal, vector<Action> goals) {
 			best_step = &step;
 		}
 	}
-
+	best_step->setUtility(best_value);
 	return *best_step;
 }
 
@@ -94,24 +95,26 @@ vector<Action> Planner::prioritize_preconditions(Action goal) {
 	return actionlist;
 };
 
+//Returns a vector holding all 4 ideal end_states (as actions)
 vector<Action> Planner::get_end_states() {
 	vector<Action> states;
-	for (auto iter : end_states)
+	for (auto iter : *end_states)
 	{
 		states.push_back(iter.second);
 	}
 	return states;
 }
 
-vector<Action> Planner::get_milestones_for_goal(Action goal)
-{
-	vector<Action> milestones_for_goal = milestones.at(goal);
-	return milestones_for_goal;
-}
+//Returns the current Action list of milestones for the given end_state
+//vector<Action> Planner::get_milestones_for_goal(Action goal)
+//{
+//	vector<Action> milestones_for_goal = milestones.at(goal);
+//	return milestones_for_goal;
+//}
 
 vector<Action> Planner::get_milestone_frontier() {
 	vector<Action> frontier;
-	for (auto iter : milestones)
+	for (auto iter : *milestones)
 	{
 		Action goal = iter.first;           //The goal associated with the milestone list
 		vector<Action> path = iter.second;  //The milestone list
@@ -127,18 +130,24 @@ vector<Action> Planner::get_milestone_frontier() {
 	return frontier;
 }
 
+//Adds the milestone action to the Goal action's milestonelist
 void Planner::add_milestone(Action goal, Action milestone) {
-	milestones[goal].push_back(milestone);
+	milestones->at(goal).push_back(milestone);
 }
 
 void Planner::generate_milestones(Action state, Action goal) {
 	if (goal.preConditionsNeeded(evaluateHero, goal.getHero()).size() == 0)
 	{
-		current_action = goal;
+		if (goal.getUtility() > current_action_value)
+		{
+			current_end_state = state;
+			current_action = goal;
+			current_action_value = goal.getUtility();
+		}
 	}
 	else
 	{
-		milestones[state].push_back(choose_next_step(goal, get_milestone_frontier()));
-		generate_milestones(state, milestones[state].back());
+		milestones->at(state).push_back(choose_next_step(goal, get_milestone_frontier()));
+		generate_milestones(state, milestones->at(state).back());
 	}
 }
