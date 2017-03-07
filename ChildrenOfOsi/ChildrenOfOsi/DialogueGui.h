@@ -32,6 +32,9 @@ private:
 	Texture* questionGlowTex;
 	Texture* dialogueBoxTex;
 	Texture* responseBoxTex;
+	
+	glm::vec3 black;
+	glm::vec3 red;
 
 public:
 	DialogueGui();

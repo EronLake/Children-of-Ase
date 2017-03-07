@@ -1,6 +1,10 @@
 #include "Planner.h"
 
+
 Planner::Planner() {
+
+};
+Planner::~Planner() {
 
 };
 Planner::Planner(Hero* hero) {
@@ -8,26 +12,29 @@ Planner::Planner(Hero* hero) {
 	//actions = new ActionPool(evaluateHero);
 }
 
-vector<std::string> prioritize_preconds(Action goal) {
-	return{ "Precondition 1" };
-}
+
+
 
 int Planner::cost(Action step) {
 	int cost = 0;
 
 	return cost;
 }
-int Planner::prereq_appeal(Action step) {
+int Planner::prereq_appeal(Action step, vector<std::shared_ptr<Preconditions>> priority_preconds) {
 	int appeal = 0;
-
+	//iterate through postconditions.
+	//for each one, get its corresponding precondition rank
+	//	(this is done by comparing types)
+	//	multiply the rank of the precondition by the utility of the postcondition that satisfies it
+	//  += appeal
 	return appeal;
 }
 
-int Planner::heuristic(Action step, vector<std::string> priority_preconds, vector<Action> goals) {
+int Planner::heuristic(Action step, vector<std::shared_ptr<Preconditions>> priority_preconds, vector<Action> goals) {
 	int value = 0;
 
 	value += personality_appeal(step);
-	value += prereq_appeal(step);
+	value += prereq_appeal(step,priority_preconds);
 	value -= cost(step);
 
 	return value;
@@ -55,7 +62,7 @@ Action Planner::choose_next_step(Action goal, vector<Action> goals) {
 	Action* best_step = nullptr;
 	int best_value = 0;
 
-	vector<std::string> priority_preconds = prioritize_preconds(goal);
+	vector<std::shared_ptr<Preconditions>> priority_preconds = prioritize_preconditions(goal);
 	vector<Action> possible_steps = evaluateHero->actionPool->getActions(evaluateHero, goal);
 
 	for (Action step : possible_steps) {
@@ -84,16 +91,23 @@ int Planner::personality_appeal(Action* evaluateAction) {
 		(evaluateHero->traits->getRecklessness()*evaluateAction->multipliers->getRecklessness())+
 		(evaluateHero->traits->getExtroversion()*evaluateAction->multipliers->getExtroversion()));
 };
-vector<Action> Planner::prioritize_preconditions(Action goal) {
-	vector<Action> actionlist; //temporary
-	struct greaterAction {
-		inline bool operator()(Action& action1, Action& action2) {
-			return (action1.getUtility() > action2.getUtility());		
+vector<std::shared_ptr<Preconditions>> Planner::prioritize_preconditions(Action goal) {
+	vector<std::shared_ptr<Preconditions>> preconlist;
+	for (auto &iter : goal.preconds) {
+		preconlist.push_back(iter.second);
+	}
+	
+	//temporary
+	//eventually wanna do for every precondition, generate cost and return a map from precondition to cost 
+	struct lesserCost{
+		inline bool operator()(std::shared_ptr<Preconditions> & precond1, std::shared_ptr<Preconditions> & precond2) {//is temporarily an action
+			return (precond1->get_cost() > precond2->get_cost());		
 		};
 	};
-	std::sort(actionlist.begin(), actionlist.end(), greaterAction());
-	return actionlist;
-};
+
+	std::sort(preconlist.begin(), preconlist.end(), lesserCost());
+	return preconlist;
+};		
 
 //Returns a vector holding all 4 ideal end_states (as actions)
 vector<Action> Planner::get_end_states() {
@@ -151,3 +165,4 @@ void Planner::generate_milestones(Action state, Action goal) {
 		generate_milestones(state, milestones->at(state).back());
 	}
 }
+

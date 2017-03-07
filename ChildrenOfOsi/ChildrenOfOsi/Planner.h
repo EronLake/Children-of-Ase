@@ -1,7 +1,9 @@
 #include "Personality.h"
-#include "ActionPool.h"
 #include "Hero.h"
 
+#include "Conditions.h"
+
+#include "ActionPool.h"
 typedef unordered_map<int, Action> StateList;
 typedef unordered_map<Action, vector<Action>> MilestoneList;
 
@@ -18,6 +20,7 @@ class Planner {
 
 public:
 	Planner();
+	~Planner();
 	Planner(Hero* evaluateHero);
 
 	void choose_end_with(int hero);
@@ -49,12 +52,12 @@ private:
 	Action current_action;
 	int current_action_value;
 
-	int heuristic(Action step, vector <std::string> priority_preconds, vector<Action> goals);
+	int heuristic(Action step, vector <std::shared_ptr<Preconditions>> priority_preconds, vector<Action> goals);
 	
-	int prereq_appeal(Action step);
+	int prereq_appeal(Action step, vector<std::shared_ptr<Preconditions>> priority_preconds);
 	int cost(Action step);
 	int personality_appeal(Action evaluateAction);
-	vector<Action> prioritize_preconditions(Action goal);
+	vector<std::shared_ptr<Preconditions>> prioritize_preconditions(Action goal);
 	int personality_appeal(Action* evaluateAction);
 
 
