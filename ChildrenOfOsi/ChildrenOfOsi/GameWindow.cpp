@@ -534,7 +534,7 @@ void osi::GameWindow::setupFont(const std::string& fontName, unsigned int fontHe
 		std::cout << "ERROR::FREETYPE: Failed to load font" << std::endl;
 
 	// Set size to load glyphs as
-	FT_Set_Pixel_Sizes(face, 0, 32);
+	FT_Set_Pixel_Sizes(face, 0, 16);
 
 	// Disable byte-alignment restriction
 	glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
@@ -596,7 +596,8 @@ void osi::GameWindow::setupFont(const std::string& fontName, unsigned int fontHe
 
 void osi::GameWindow::RenderText(std::string text, GLfloat x, GLfloat y, GLfloat scale, glm::vec3 color)
 {
-	y = WINDOW_HEIGHT_DP - y-32;
+	y = WINDOW_HEIGHT_DP - y-18;
+	GLfloat lineStart = x;
 	// Activate corresponding render state	
 	//shader.Use();
 	glUseProgram(GameWindow::fontShaderProgramId);
@@ -608,7 +609,10 @@ void osi::GameWindow::RenderText(std::string text, GLfloat x, GLfloat y, GLfloat
 	std::string::const_iterator c;
 	for (c = text.begin(); c != text.end(); c++) {
 		Character ch = Characters[*c];
-
+		if (*c == '\n') {
+			x = lineStart;
+			y -= ch.Size.y;
+		}
 		GLfloat xpos = x + ch.Bearing.x * scale;
 		GLfloat ypos = y - (ch.Size.y - ch.Bearing.y) * scale;
 
