@@ -170,6 +170,15 @@
       <Filter>AI</Filter>
     </ClCompile>
     <ClCompile Include="Action.cpp" />
+    <ClCompile Include="Line.cpp">
+      <Filter>Physics</Filter>
+    </ClCompile>
+    <ClCompile Include="Point.cpp">
+      <Filter>Physics</Filter>
+    </ClCompile>
+    <ClCompile Include="RiverObj.cpp">
+      <Filter>Physics</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AIHelper.h">
@@ -358,6 +367,15 @@
     <ClInclude Include="Action.h" />
     <ClInclude Include="Shader.h">
       <Filter>Rendering</Filter>
+    </ClInclude>
+    <ClInclude Include="Line.h">
+      <Filter>Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="Point.h">
+      <Filter>Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="RiverObj.h">
+      <Filter>Physics</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

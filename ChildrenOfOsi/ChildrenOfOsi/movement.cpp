@@ -9,6 +9,7 @@
 
 Movement::Movement(QuadTree* QT) {
 	tree = QT;
+	rivObj = new RiverObj();
 	
 
 }
@@ -38,6 +39,14 @@ int Movement::move_up(WorldObj* obj) {
 		}
 		if (collision(objVec[i], obj)) {
 			manager->createTask("Bump","SOUND");
+			LOG("failed to move up. collision.");
+			obj->shiftY(moveSpeed*speed_magnifier);
+			break;
+		}
+	}
+	for (int i = 0; i < rivObj->getLines().size(); i++) {
+		if (lineCollision((rivObj->getLines())[i], (Line(Point(obj->getX(), obj->getY() + 50), Point(obj->getX() + obj->getWidth(), obj->getY() + 50))))) {
+			manager->createTask("Bump", "SOUND");
 			LOG("failed to move up. collision.");
 			obj->shiftY(moveSpeed*speed_magnifier);
 			break;
@@ -389,6 +398,20 @@ bool Movement::collision(WorldObj* recA, WorldObj* recB)
 	return false;
 }
 
+bool Movement::lineCollision(Line l1, Line l2)
+{
+	float denom = ((l1.getP2().getX() - l1.getP1().getX()) * (l2.getP2().getY() - l2.getP1().getY())) - ((l1.getP2().getY() - l1.getP1().getY()) * (l2.getP2().getX() - l2.getP1().getX()));
+	float num1 = ((l1.getP1().getY() - l2.getP1().getY()) * (l2.getP2().getX() - l2.getP1().getX())) - ((l1.getP1().getX() - l2.getP1().getX()) * (l2.getP2().getY() - l2.getP1().getY()));
+	float num2 = ((l1.getP1().getY() - l2.getP1().getY()) * (l1.getP2().getX() - l1.getP1().getX())) - ((l1.getP1().getX() - l2.getP1().getX()) * (l1.getP2().getY() - l1.getP1().getY()));
+
+	if (denom == 0) return num1 == 0 && num2 == 0;
+
+	float r = num1 / denom;
+	float s = num2 / denom;
+
+	return (r >= 0 && r <= 1) && (s >= 0 && s <= 1);
+}
+
 bool Movement::interaction(Player* recA, WorldObj* recB)
 {
 	for (int j = 0; j < (*recB).body.size(); j++) {
@@ -398,3 +421,4 @@ bool Movement::interaction(Player* recA, WorldObj* recB)
 	}
 	return false;
 }
+
