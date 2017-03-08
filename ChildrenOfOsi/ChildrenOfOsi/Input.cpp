@@ -59,6 +59,8 @@ void Input::InputCheck()
 	short ENTER = GetKeyState('\n') >> 15;
 	short V = GetKeyState('V') >> 15;
 	short F = GetKeyState('F') >> 15;
+	short P = GetKeyState('P') >> 15;
+	short Z = GetKeyState('Z') >> 15;
 
 	if (DialogueController::getState() == 0) {
 		gameplay_functions->combat(player);
@@ -122,6 +124,27 @@ void Input::InputCheck()
 					gameplay_functions->melee(player);
 				}
 			}
+		}
+		float firstOld = 0;
+		float secondOld = 0;
+		if (P) {
+			std::cout << player->getX() << " " << player->getY() << std::endl;
+			std::ofstream rivFile;
+			rivFile.open("rivLines.txt", std::ios_base::app);
+			rivFile << firstOld << " " << secondOld << ", ";
+			rivFile << player->getX() << " " << player->getY()+player->getHeight() << std::endl;
+			firstOld = player->getX();
+			secondOld = player->getY() + player->getHeight();
+			rivFile.close();
+			//std::system("PAUSE");
+		}
+		if (Z) {
+			std::ofstream rivFile;
+			rivFile.open("rivLines.txt", std::ios_base::app);
+			rivFile << std::endl;
+			rivFile << std::endl;
+			rivFile << std::endl;
+			rivFile.close();
 		}
 
 		/*

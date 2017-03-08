@@ -54,6 +54,8 @@
 #include "ObjConfig.h"
 #include "ActionPool.h"
 
+#include "Line.h"
+
 using namespace std;
 
 
@@ -74,6 +76,7 @@ void GAMEPLAY_LOOP(QuadTree* _Quadtree);
 
 void ANDREWS_TEST();
 void PHYSICS_TEST();
+bool lineCollision(Line l1, Line l2);
 
 int main() {
 
@@ -94,7 +97,9 @@ int main() {
 		
 		osi::GameWindow::init();
 		////pauses the program for viewing
+
 		//system("PAUSE");
+
 
 		////demonstration of a meory leak
 		///*while (true) {
@@ -1122,6 +1127,20 @@ void PHYSICS_TEST() {
 	else {
 		cout << "COLLISION TEST FAILED" << endl;
 	}
+}
+
+bool lineCollision(Line l1, Line l2)
+{
+	float denom = ((l1.getP2().getX() - l1.getP1().getX()) * (l2.getP2().getY() - l2.getP1().getY())) - ((l1.getP2().getY() - l1.getP1().getY()) * (l2.getP2().getX() - l2.getP1().getX()));
+    float num1 = ((l1.getP1().getY() - l2.getP1().getY()) * (l2.getP2().getX() - l2.getP1().getX())) - ((l1.getP1().getX() - l2.getP1().getX()) * (l2.getP2().getY() - l2.getP1().getY()));
+    float num2 = ((l1.getP1().getY() - l2.getP1().getY()) * (l1.getP2().getX() - l1.getP1().getX())) - ((l1.getP1().getX() - l2.getP1().getX()) * (l1.getP2().getY() - l1.getP1().getY()));
+
+    if (denom == 0) return num1 == 0 && num2 == 0;
+
+    float r = num1 / denom;
+    float s = num2 / denom;
+
+    return (r >= 0 && r <= 1) && (s >= 0 && s <= 1);
 }
 
 void FPS(bool b) {

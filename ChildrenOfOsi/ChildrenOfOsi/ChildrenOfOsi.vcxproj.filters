@@ -171,6 +171,15 @@
     </ClCompile>
     <ClCompile Include="Action.cpp" />
     <ClCompile Include="CombatController.cpp" />
+    <ClCompile Include="Line.cpp">
+      <Filter>Physics</Filter>
+    </ClCompile>
+    <ClCompile Include="Point.cpp">
+      <Filter>Physics</Filter>
+    </ClCompile>
+    <ClCompile Include="RiverObj.cpp">
+      <Filter>Physics</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AIHelper.h">
@@ -361,6 +370,15 @@
       <Filter>Rendering</Filter>
     </ClInclude>
     <ClInclude Include="CombatController.h" />
+    <ClInclude Include="Line.h">
+      <Filter>Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="Point.h">
+      <Filter>Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="RiverObj.h">
+      <Filter>Physics</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Text Include="audio_test.txt">

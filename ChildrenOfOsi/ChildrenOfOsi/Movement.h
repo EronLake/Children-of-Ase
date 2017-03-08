@@ -7,6 +7,7 @@
 #include "CheckClass.h"
 #include "DialogueController.h"
 #include "CombatController.h"
+#include "RiverObj.h"
 
 class PhysicsManager;
 
@@ -31,8 +32,9 @@ public:
 	int meleeSwing(WorldObj* obj);
 	//void init_task_map();
     QuadTree* tree;
+	RiverObj* rivObj;
 	PhysicsManager* manager;
-	float speed_magnifier = 5.0f;
+	float speed_magnifier = 2.0f;
 	float moveSpeed;
 	float diagSpeed;
 	float diagXSpeed; 
@@ -41,6 +43,7 @@ public:
 
 private:
 	bool collision(WorldObj* recA, WorldObj* recB);
+	bool lineCollision(Line l1, Line l2);
 	bool interaction(Player* recA, WorldObj* recB);
 	bool coordOverlap(int value, int min, int max) { return (value >= min) && (value <= max); }
 	//hold obj to check with. init before each move funcs call

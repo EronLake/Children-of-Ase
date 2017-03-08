@@ -183,6 +183,9 @@
     <ClInclude Include="Factions.h" />
     <ClInclude Include="GameMap.h" />
     <ClInclude Include="GameWindow.h" />
+    <ClInclude Include="Line.h" />
+    <ClInclude Include="Point.h" />
+    <ClInclude Include="RiverObj.h" />
     <ClInclude Include="Shader.h" />
     <ClInclude Include="Personality.h" />
     <ClInclude Include="Planner.h" />
@@ -252,6 +255,7 @@
     <ClCompile Include="Factions.cpp" />
     <ClCompile Include="GameMap.cpp" />
     <ClCompile Include="GameWindow.cpp" />
+    <ClCompile Include="Line.cpp" />
     <ClCompile Include="Personality.cpp" />
     <ClCompile Include="Planner.cpp" />
     <ClCompile Include="Hero.cpp" />
@@ -274,9 +278,11 @@
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="MemoryPool.cpp" />
     <ClCompile Include="Attack.cpp" />
+    <ClCompile Include="Point.cpp" />
     <ClCompile Include="QuadTree.cpp" />
     <ClCompile Include="RenderHelper.cpp" />
     <ClCompile Include="RenderManager.cpp" />
+    <ClCompile Include="RiverObj.cpp" />
     <ClCompile Include="Soldier.cpp" />
     <ClCompile Include="SoundSystem.cpp" />
     <ClCompile Include="Relationship.cpp" />
