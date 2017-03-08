@@ -21,3 +21,24 @@ Attack::~Attack()
 		 Attack::~Attack();
 	 }
 }
+
+ bool Attack::updateDuration() {
+	 duration--;
+	 if (duration == 0)return false;
+	 return true;
+ }
+ void Attack::move() {
+	 std::string d = getDirection();
+	 if (d.compare("UP")) {
+		 shiftY(-speed);
+	 }
+	 else if (d.compare("DOWN") == 0) {
+		 shiftY(speed);
+	 }
+	 else if (d.compare("LEFT") == 0) {
+		 shiftX(-speed);
+	 }
+	 else if (d.compare("RIGHT") == 0) {
+		 shiftX(speed);
+	 }
+ }

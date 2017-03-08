@@ -6,6 +6,7 @@
 #include "Player.h"
 #include "CheckClass.h"
 #include "DialogueController.h"
+#include "CombatController.h"
 
 class PhysicsManager;
 
@@ -26,6 +27,8 @@ public:
 //	int move_toward(WorldObj* obj);
 	int talk(WorldObj* obj);
 	int melee(WorldObj* obj);
+	int attack(WorldObj* obj);
+	int meleeSwing(WorldObj* obj);
 	//void init_task_map();
     QuadTree* tree;
 	PhysicsManager* manager;
@@ -34,7 +37,7 @@ public:
 	float diagSpeed;
 	float diagXSpeed; 
 	float diagYSpeed;
-
+	CombatController combatControl;
 
 private:
 	bool collision(WorldObj* recA, WorldObj* recB);

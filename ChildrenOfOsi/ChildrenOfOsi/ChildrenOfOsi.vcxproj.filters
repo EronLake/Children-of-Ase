@@ -170,6 +170,7 @@
       <Filter>AI</Filter>
     </ClCompile>
     <ClCompile Include="Action.cpp" />
+    <ClCompile Include="CombatController.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AIHelper.h">
@@ -359,6 +360,7 @@
     <ClInclude Include="Shader.h">
       <Filter>Rendering</Filter>
     </ClInclude>
+    <ClInclude Include="CombatController.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="audio_test.txt">

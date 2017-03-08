@@ -90,6 +90,11 @@ void ChildrenOfOsi::melee(WorldObj * player)
 {
 	createTask("Melee", "INTERACT", player);
 }
+
+void ChildrenOfOsi::combat(WorldObj * player)
+{
+	createTask("Attack", "COMBAT", player);
+}
 ////////////////////////////////////////////////////
 ////////////////////////////////////////////////////
 

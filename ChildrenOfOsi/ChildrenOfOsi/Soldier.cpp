@@ -14,6 +14,7 @@ Soldier::Soldier(float x, float y, bool col) :NPC(x, y, col)
 	cdTotal = 60;
 	cdFrame = 0;
 	cool = false;
+	melee.setFrom(this);
 }
 
 Soldier::Soldier(Vector2f p_topLeft, float p_width, float p_height):NPC(p_topLeft,p_width,p_height)
@@ -27,6 +28,7 @@ Soldier::Soldier(Vector2f p_topLeft, float p_width, float p_height):NPC(p_topLef
 	cdTotal = 60;
 	cdFrame = 0;
 	cool = false;
+	melee.setFrom(this);
 }
 
 Soldier::~Soldier()
@@ -66,11 +68,12 @@ Attack* Soldier::newAttack(int i)
 		cdMap[available[i]] = 0;
 		cool = false;
 		cdFrame = 0;
+		available.erase(available.begin()+i);
 		return p;
 	}
 }
 
-void Soldier::meleeAttack() {
+Attack* Soldier::meleeAttack() {
 	float x=getX();
 	float y=getY();
 	std::string d = getDirection();
@@ -87,6 +90,24 @@ void Soldier::meleeAttack() {
 	}
 	melee.setX(x);
 	melee.setY(y);
+	melee.setDuration(1);
+	melee.setPause(12);
 	cool = false;
 	cdFrame = 0;
+	return &melee;
+}
+
+void Soldier::updateCD() {
+	if (cdFrame < cdTotal) { 
+		cdFrame++; 
+	}
+	else cool = true;
+	for (auto i = cdMap.begin(); i != cdMap.end(); ++i) {
+		if (i->second < i->first->getCoolDown()) {
+			i->second++;
+			if (i->second >= i->first->getCoolDown()) {
+				available.push_back(i->first);
+			}
+		}
+	}
 }

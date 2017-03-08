@@ -30,6 +30,7 @@ public:
 	void get_path(WorldObj* obj);
 	void talk(WorldObj * player);
 	void melee(WorldObj * player);
+	void combat(WorldObj * player);
 	void setSwordGlow(WorldObj* player);
 	void setHeartGlow(WorldObj* player);
 	void setFaceGlow(WorldObj* player);

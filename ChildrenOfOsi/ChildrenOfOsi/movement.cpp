@@ -318,6 +318,41 @@ int Movement::talk(WorldObj* obj) {
 }
 
 int Movement::melee(WorldObj* obj) {
+	Soldier* d = CheckClass::isSoldier(obj);
+	if (d) {
+		combatControl.addAttack(d->meleeAttack());
+		std::cout << "Attack Added" << std::endl;
+	}
+	return 0;
+}
+
+int Movement::attack(WorldObj* obj) {
+	objVec.clear();
+	objVec = tree->retrieve(objVec, obj);
+	combatControl.update();
+	vector<Attack*> atk = combatControl.getAttacks();
+	for (int a = 0; a < atk.size();a++) {
+		std::cout << "Attack Exists" << std::endl;
+		if (atk[a]->getPause() == 0) {
+			for (int i = 0; i < 50; i++) {
+				std::cout << "Attack Collidable" << std::endl;
+			}
+			for (int i = 0; i < objVec.size(); i++) {
+					LivingObj* liv = CheckClass::isLiving(objVec[i]);
+					if (liv) {
+						if (collision(atk[a], liv)) {
+							std::cout << "Player hit " << liv->getName() << std::endl;
+							atk[a]->Hit(liv);
+							std::cout << liv->getName() << "'s health is now " << liv->getHealth() << std::endl;
+						}
+					}
+			}
+		}
+	}
+	return 0;
+}
+
+int Movement::meleeSwing(WorldObj* obj) {
 	objVec.clear();
 	objVec = tree->retrieve(objVec, obj);
 	Soldier* d = CheckClass::isSoldier(obj);
@@ -325,14 +360,14 @@ int Movement::melee(WorldObj* obj) {
 		d->meleeAttack();
 		for (int i = 0; i < objVec.size(); i++) {
 			if (obj != objVec[i]) {
-			LivingObj* liv = CheckClass::isLiving(objVec[i]);
-			if (liv) {
-				if (collision(&(d->melee), liv)) {
-					std::cout << "Player hit " << liv->getName() << std::endl;
-					d->melee.Hit(liv);
-					std::cout << liv->getName() << "'s health is now " << liv->getHealth() << std::endl;
+				LivingObj* liv = CheckClass::isLiving(objVec[i]);
+				if (liv) {
+					if (collision(&(d->melee), liv)) {
+						std::cout << "Player hit " << liv->getName() << std::endl;
+						d->melee.Hit(liv);
+						std::cout << liv->getName() << "'s health is now " << liv->getHealth() << std::endl;
+					}
 				}
-			}
 			}
 		}
 	}

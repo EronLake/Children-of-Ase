@@ -60,9 +60,8 @@ void Input::InputCheck()
 	short V = GetKeyState('V') >> 15;
 	short F = GetKeyState('F') >> 15;
 
-
 	if (DialogueController::getState() == 0) {
-
+		gameplay_functions->combat(player);
 		if (W)                //Moving up
 		{
 			gameplay_functions->play_sound("Unpause");
@@ -117,7 +116,9 @@ void Input::InputCheck()
 			Player* t = CheckClass::isPlayer(player);
 			if (t) {
 				if (t->getCool()) {
-					std::cout << "Pressed F" << std::endl;
+					for (int i = 0; i < 50; i++) {
+						std::cout << "Pressed F" << std::endl;
+					}
 					gameplay_functions->melee(player);
 				}
 			}

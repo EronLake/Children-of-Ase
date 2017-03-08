@@ -18,10 +18,10 @@ public:
 	vector<Attack*>available;
 	unordered_map<Attack*,int> cdMap;
 	Attack* newAttack(int i);
-	void meleeAttack();
+	Attack* meleeAttack();
 	void setCD(int c) { cdTotal = c; };
 	int getCD() { return cdTotal; };
-	void updateCD() { if (cdFrame < cdTotal) { cdFrame++; } else cool = true; };
+	void updateCD();
 	int framesCD() { return cdFrame; };
 	void setCool(bool c) { cool = c; };
 	bool getCool() { return cool; };
