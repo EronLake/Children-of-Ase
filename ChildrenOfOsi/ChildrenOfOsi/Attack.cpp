@@ -16,15 +16,23 @@ Attack::~Attack()
 
  void Attack::Hit(LivingObj *target)
 {
+	 for (int i = 0; i < hitObjs.size(); i++) {
+		 if (target == hitObjs[i])return;
+	 }
 	 (*target).addHealth(-dmg);
 	 if (destroyOnCollision) {
 		 Attack::~Attack();
+	 } else {
+		 hitObjs.push_back(target);
 	 }
 }
 
  bool Attack::updateDuration() {
 	 duration--;
-	 if (duration == 0)return false;
+	 if (duration == 0) {
+		 hitObjs.clear();
+		 return false;
+	 }
 	 return true;
  }
  void Attack::move() {

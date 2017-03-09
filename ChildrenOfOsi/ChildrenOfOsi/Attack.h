@@ -22,8 +22,8 @@ public:
 	void setCoolDown(int c) { cooldown = c; };
 	int getCoolDown() { return cooldown; };
 	void move();
-	void setFrom(WorldObj* o) { fromObj = 0; };
-	WorldObj* getFrom() { return fromObj; };
+	void addHit(WorldObj* o) { hitObjs.push_back(o); };
+	vector<WorldObj*> getHits() { return hitObjs; };
 	void setPause(int p) { pause = p; };
 	void updatePause() { pause--; };
 	int getPause() { return pause; };
@@ -34,5 +34,5 @@ private:
 	float speed;
 	int cooldown;
 	int pause;
-	WorldObj* fromObj;
+	vector<WorldObj*> hitObjs;
 };
