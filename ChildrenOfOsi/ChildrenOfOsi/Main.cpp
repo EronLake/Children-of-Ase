@@ -8,7 +8,7 @@
 #include <stdlib.h>     
 #include <time.h>
 #include "Player.h"
-#include "Factions.h"
+#include "Village.h"
 #include <crtdbg.h>
 #include "Rectangle.h"
 #include "QuadTree.h"

@@ -180,7 +180,8 @@
     <ClInclude Include="DialogueHelper.h" />
     <ClInclude Include="DialougeTestSuite.h" />
     <ClInclude Include="DummyController.h" />
-    <ClInclude Include="Factions.h" />
+    <ClInclude Include="Party.h" />
+    <ClInclude Include="Village.h" />
     <ClInclude Include="GameMap.h" />
     <ClInclude Include="GameWindow.h" />
     <ClInclude Include="Line.h" />
@@ -252,7 +253,8 @@
     <ClCompile Include="DialogueHelper.cpp" />
     <ClCompile Include="DialougeTestSuite.cpp" />
     <ClCompile Include="DummyController.cpp" />
-    <ClCompile Include="Factions.cpp" />
+    <ClCompile Include="Party.cpp" />
+    <ClCompile Include="Village.cpp" />
     <ClCompile Include="GameMap.cpp" />
     <ClCompile Include="GameWindow.cpp" />
     <ClCompile Include="Line.cpp" />

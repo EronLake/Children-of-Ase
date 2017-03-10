@@ -1,17 +1,18 @@
 #pragma once
 
 #include "common.h"
-#include "Factions.h"
+#include "Village.h"
 
 class Alliance
 {
 private:
-	std::vector<Factions*> allies;
+	std::vector<Village*> allies;
 
 public:
 	Alliance();
+	Alliance(Village* v);
 	~Alliance();
-	void addToAlliance(Factions* p_factionToAdd);
-	void removeFromAlliance(Factions* p_factionToRemove);
+	void addToAlliance(Village* p_factionToAdd);
+	Alliance* removeFromAlliance(Village* p_factionToRemove);
 };
 

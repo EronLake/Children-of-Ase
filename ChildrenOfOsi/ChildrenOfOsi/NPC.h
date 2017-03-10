@@ -1,7 +1,8 @@
 #pragma once
 #include "stdafx.h"
 #include "LivingObj.h"
-#include "Factions.h"
+
+class Village;
 
 #define WANDER 0
 #define WAIT 1
@@ -15,8 +16,8 @@ public:
 	NPC(float x, float y, bool col);
 	NPC(Vector2f p_topLeft, float p_width, float p_height);
 	~NPC();
-	void setFaction(int f);
-	int getFaction();
+	void setVillage(Village* v) { village = v; };
+	Village* getVillage() { return village; };
 	void setSpeed(float);
 	float getSpeed();
 	void setDiagSpeed(float);
@@ -37,7 +38,7 @@ public:
 	vector<Vector2f> waypoints;
 
 private:
-	int faction;
+	Village* village;
 	float speed;
 	float diagSpeed;
 	float diagXSpeed;
