@@ -31,6 +31,7 @@ PhysicsManager::PhysicsManager(MessageLog * _mLog, TaskBuffer * _tBuffer, QuadTr
 	task_map["Talk"] = &Movement::talk;
 	task_map["Melee"] = &Movement::melee;
 	task_map["Attack"] = &Movement::attack;
+	task_map["SpecialAttack"] = &Movement::specialAttack;
 }
 
 
@@ -52,27 +53,32 @@ void PhysicsManager::execute_task(Task* current_task)
 {
 	int result;
 	NPC* obj;
-	if (!(obj = CheckClass::isNPC(current_task->objToUpdate))) {
-		result = 1;
-		LOG("Error: No movable object");
-	}
-	else {
-		moveHelper->moveSpeed = obj->getSpeed();
-		moveHelper->diagXSpeed = obj->getDiagXSpeed();
-		moveHelper->diagYSpeed = obj->getDiagYSpeed();
-
-		auto it = task_map.find(current_task->name);
-		if (it == task_map.end()) {
+	if (current_task->objToUpdate->getType() >= 3) {
+		if (!(obj = CheckClass::isNPC(current_task->objToUpdate))) {
 			result = 1;
-			LOG("Error: Task '" << current_task->name << "' does not exist.");
+			LOG("Error: No movable object");
 		}
 		else {
-			result = (moveHelper->*(it->second))(obj);
-		}
-	} 
+			moveHelper->moveSpeed = obj->getSpeed();
+			moveHelper->diagXSpeed = obj->getDiagXSpeed();
+			moveHelper->diagYSpeed = obj->getDiagYSpeed();
 
-	if (result == 0) {
-		current_task->updateStatus("COMPLETED");
+			auto it = task_map.find(current_task->name);
+			if (it == task_map.end()) {
+				result = 1;
+				LOG("Error: Task '" << current_task->name << "' does not exist.");
+			}
+			else {
+				result = (moveHelper->*(it->second))(obj);
+			}
+		}
+
+		if (result == 0) {
+			current_task->updateStatus("COMPLETED");
+		}
+		else {
+			current_task->updateStatus("FAILED");
+		}
 	}
 	else {
 		current_task->updateStatus("FAILED");

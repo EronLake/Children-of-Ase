@@ -10,12 +10,14 @@ LivingObj::LivingObj(float x, float y, bool col) : WorldObj(x, y, col)
 {
 	health = 1;
 	alive = true;
-	cout << "Health: " << health << endl;
-	cout << "Alive: " << alive << endl;
+	setType(1);
 }
 
 LivingObj::LivingObj(Vector2f p_topLeft, float p_width, float p_height):WorldObj(p_topLeft,p_width,p_height)
 {
+	health = 1;
+	alive = true;
+	setType(1);
 }
 
 LivingObj::~LivingObj()

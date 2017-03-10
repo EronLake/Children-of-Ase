@@ -19,27 +19,30 @@ public:
 	bool getEvade() { return evade; };
 	void setHold(bool h) {holdPos = h; };
 	bool getHold() { return holdPos; };
+	void setPatrol(bool p) { patrol=p; };
+	bool getPatrol() { return patrol; };
 	Attack melee;
 	vector<Attack*>atkType;
-	vector<Attack*>available;
 	unordered_map<Attack*,int> cdMap;
+	void addAttackType(Attack* a);
 	Attack* newAttack(int i);
 	Attack* meleeAttack();
 	void setCD(int c) { cdTotal = c; };
 	int getCD() { return cdTotal; };
 	void updateCD();
-	int framesCD() { return cdFrame; };
+	int timeCD() { return cdTime; };
 	void setCool(bool c) { cool = c; };
 	bool getCool() { return cool; };
 	void setParty(Party* p) { party=p; };
-	bool getParty() { return party; };
+	Party* getParty() { return party; };
 private:
 	Party* party;
 	bool inCombat;
 	bool evade;
 	bool holdPos;
+	bool patrol;
 	int cdTotal;
-	int cdFrame;
+	int cdTime;
 	bool cool;
 };
 

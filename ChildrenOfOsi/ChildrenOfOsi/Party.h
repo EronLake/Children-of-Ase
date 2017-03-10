@@ -24,5 +24,6 @@ private:
 				// 1: Attack
 				// 2: Defend
 				// 3: Patrol
+				// 4: Flee
 };
 

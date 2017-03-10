@@ -29,23 +29,28 @@ void AIManager::execute_task(Task* current_task)
 {
 	int result;
 	NPC* obj;
-	if (!(obj = CheckClass::isNPC(current_task->objToUpdate))) {
-		result = 1;
-		LOG("Error: No movable object");
-	}
-	else
-	{
-		auto it = task_map.find(current_task->name);
-		if (it == task_map.end()) {
+	if (current_task->objToUpdate->getType() >= 3) {
+		if (!(obj = CheckClass::isNPC(current_task->objToUpdate))) {
 			result = 1;
-			LOG("Error: Task '" << current_task->name << "' does not exist.");
+			LOG("Error: No movable object");
+		}
+		else
+		{
+			auto it = task_map.find(current_task->name);
+			if (it == task_map.end()) {
+				result = 1;
+				LOG("Error: Task '" << current_task->name << "' does not exist.");
+			}
+			else {
+				result = (aiHelper->*(it->second))(obj);
+			}
+		}
+		if (result == 0) {
+			current_task->updateStatus("COMPLETED");
 		}
 		else {
-			result = (aiHelper->*(it->second))(obj);
+			current_task->updateStatus("FAILED");
 		}
-	}
-	if (result == 0) {
-		current_task->updateStatus("COMPLETED");
 	}
 	else {
 		current_task->updateStatus("FAILED");

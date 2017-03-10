@@ -41,3 +41,10 @@ Player* CheckClass::isPlayer(WorldObj* test)
 	player = dynamic_cast<Player*>(test);
 	return player;
 }
+
+Attack* CheckClass::isAttack(WorldObj* test)
+{
+	Attack* attack;
+	attack = dynamic_cast<Attack*>(test);
+	return attack;
+}

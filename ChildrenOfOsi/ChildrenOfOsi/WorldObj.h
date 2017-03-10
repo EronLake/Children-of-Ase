@@ -54,6 +54,8 @@ public:
 	void _print();
 	void setDirection(std::string d) { direction = d; };
 	std::string getDirection() { return direction; };
+	void setType(int t) { type = t; };
+	int getType() { return type; };
 private:
 	std::string direction;
 	Vector2f loc;
@@ -63,6 +65,7 @@ private:
 	float width;
 	float height;
 	string name;
+	int type; //  -1: Attack, 0: WorldObj, 1: LivingObj, 2: NPC, 3: Soldier, 4: SplSoldier, 5: Hero, 6: Player
 };
 
 

@@ -46,6 +46,11 @@ class Sprite
   Texture *atk_left;
   Texture *atk_right;
 
+  Texture *hurt_up;
+  Texture *hurt_down;
+  Texture *hurt_left;
+  Texture *hurt_right;
+
   private:
 
   int start, stop;

@@ -4,10 +4,12 @@
 
 Attack::Attack()
 {
+	setType(-1);
 }
 
 Attack::Attack(float x, float y, bool col) : WorldObj(x, y, col)
 {
+	setType(-1);
 }
 
 Attack::~Attack()
@@ -21,14 +23,14 @@ Attack::~Attack()
 	 }
 	 (*target).addHealth(-dmg);
 	 if (destroyOnCollision) {
-		 Attack::~Attack();
+		 delete this;
 	 } else {
 		 hitObjs.push_back(target);
 	 }
 }
 
  bool Attack::updateDuration() {
-	 duration--;
+	 if (duration>=0)duration--;
 	 if (duration == 0) {
 		 hitObjs.clear();
 		 return false;
@@ -37,7 +39,7 @@ Attack::~Attack()
  }
  void Attack::move() {
 	 std::string d = getDirection();
-	 if (d.compare("UP")) {
+	 if (d.compare("UP")==0) {
 		 shiftY(-speed);
 	 }
 	 else if (d.compare("DOWN") == 0) {

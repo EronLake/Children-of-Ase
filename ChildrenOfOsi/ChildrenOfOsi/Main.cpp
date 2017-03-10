@@ -251,6 +251,10 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	Texture* downAtkTex = new Texture();
 	Texture* leftAtkTex = new Texture();
 	Texture* rightAtkTex = new Texture();
+	Texture* upHurtTex = new Texture();
+	Texture* downHurtTex = new Texture();
+	Texture* leftHurtTex = new Texture();
+	Texture* rightHurtTex = new Texture();
 
 	Texture* yemojaTexture = new Texture();
 	Texture* yemojaIdleTex = new Texture();
@@ -292,6 +296,11 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	downAtkTex->setFile("Assets/Sprites/ShangoForwardSwing.png", 24);
 	leftAtkTex->setFile("Assets/Sprites/ShangoLeftSwing.png", 24);
 	rightAtkTex->setFile("Assets/Sprites/ShangoRightSwing.png", 24);
+	upHurtTex->setFile("Assets/Sprites/ShangoBackRecoil.png", 18);
+	downHurtTex->setFile("Assets/Sprites/ShangoForwardRecoil.png", 18);
+	leftHurtTex->setFile("Assets/Sprites/ShangoLeftRecoil.png", 18);
+	rightHurtTex->setFile("Assets/Sprites/ShangoRightRecoil.png", 18);
+
 
 	yemojaTexture->setFile("Assets/Sprites/YemojaFrontIdle.png", 1);
 	yemojaIdleTex->setFile("Assets/Sprites/YemojaFrontIdle.png", 1);
@@ -309,9 +318,8 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	treeTex1->setFile("Assets/Sprites/tree1.png", 1);
 	treeTex2->setFile("Assets/Sprites/tree2.png", 1);
 
-	rockTex->setFile("Assets/Sprites/rock.png", 1);
-	rockTex1->setFile("Assets/Sprites/rock1.png", 1);
-	rockTex2->setFile("Assets/Sprites/rock2.png", 1);
+	rockTex->setFile("Assets/Sprites/rock_1.png", 1);
+	rockTex2->setFile("Assets/Sprites/rock_2.png", 1);
 
 	pierTex->setFile("Assets/Sprites/pier.png", 1);
 	/* SET UP SPRITE CHANGE, MIGHT NEED A SINGLETON?*/
@@ -334,6 +342,10 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	Alex->sprite.atk_left = leftAtkTex;
 	Alex->sprite.atk_right = rightAtkTex;
 
+	Alex->sprite.hurt_up = upHurtTex;
+	Alex->sprite.hurt_down = downHurtTex;
+	Alex->sprite.hurt_left = leftHurtTex;
+	Alex->sprite.hurt_right = rightHurtTex;
 
 	Alex->offsetBody(0, 50, 50, 50, 50);
 	Alex->setInteractable(true);
@@ -342,12 +354,23 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	Alex->melee.setCollision(true);
 	Alex->melee.setDmg(10);
 	Alex->melee.setDestroy(false);
-	Alex->melee.setWidth(Alex->getWidth());
-	Alex->melee.setHeight(Alex->getHeight());
+	Alex->melee.setWidth(Alex->body[0].getWidth());
+	Alex->melee.setHeight(Alex->body[0].getHeight());
+	Attack* rockThrow = new Attack();
+	rockThrow->setDmg(5);
+	rockThrow->setSpeed(10);
+	rockThrow->setDestroy(true);
+	rockThrow->setDuration(1000);
+	rockThrow->setCoolDown(124);
+	rockThrow->setPause(0);
+	rockThrow->sprite.setTexture(rockTex);
+	Alex->addAttackType(rockThrow);
+	//Alex->melee.sprite.setTexture(rockTex);
 	DialogueController::setPlayer(Alex);
 	//vector<WorldObj*> recVec;
 
 	vector<WorldObj*> vec;
+	//vec.push_back(&Alex->melee);
 
 	for (int i = 1; i < 6; i++) {
 		if (i > 4) {
@@ -424,6 +447,10 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	staticRec->sprite.id_left = h_leftIdleTex;
 	staticRec->sprite.id_right = h_rightIdleTex;
 	staticRec->sprite.id_down = h_downIdleTex;
+	staticRec->sprite.hurt_up = upHurtTex;
+	staticRec->sprite.hurt_down = downHurtTex;
+	staticRec->sprite.hurt_left = leftHurtTex;
+	staticRec->sprite.hurt_right = rightHurtTex;
 
 
 

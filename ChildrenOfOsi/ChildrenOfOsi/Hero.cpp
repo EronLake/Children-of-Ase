@@ -18,7 +18,7 @@ Hero::Hero(int _name, float x, float y, bool col) :SplSoldier(x, y, col)
 	for (int i = 1; i < 6; i++) {
 		if(i!=name)rel[i] = new Relationship();
 	}
-
+	setType(5);
 	//planner = new Planner(this);
 }
 
@@ -32,7 +32,7 @@ Hero::Hero(int _name, Vector2f p_topLeft, float p_width, float p_height):SplSold
 	for (int i = 1; i < 6; i++) {
 		if (i != name)rel[i] = new Relationship();
 	}
-
+	setType(5);
 }
 
 Hero::~Hero()

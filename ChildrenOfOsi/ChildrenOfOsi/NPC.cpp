@@ -13,7 +13,7 @@ NPC::NPC(float x, float y, bool col) :LivingObj(x, y, col)
 	speed = 6.0F;
 	diagXSpeed = sqrt((speed*speed) / 2);
 	diagYSpeed = sqrt((speed*speed) / 2);
-	
+	setType(2);
 }
 
 NPC::NPC(Vector2f p_topLeft, float p_width, float p_height):LivingObj(p_topLeft,p_width,p_height)
@@ -22,6 +22,7 @@ NPC::NPC(Vector2f p_topLeft, float p_width, float p_height):LivingObj(p_topLeft,
 	speed = 6.0F;
 	diagXSpeed = sqrt((speed*speed) / 2);
 	diagYSpeed = sqrt((speed*speed) / 2);
+	setType(2);
 }
 
 NPC::~NPC()

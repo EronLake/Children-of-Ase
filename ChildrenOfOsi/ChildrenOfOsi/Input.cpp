@@ -115,13 +115,26 @@ void Input::InputCheck()
 			gameplay_functions->talk(player);
 		}
 		if (F) {
-			Player* t = CheckClass::isPlayer(player);
-			if (t) {
-				if (t->getCool()) {
-					for (int i = 0; i < 50; i++) {
+			if (player->getType() == 6) {
+				Player* t = CheckClass::isPlayer(player);
+				if (t) {
+					if (t->getCool()) {
 						std::cout << "Pressed F" << std::endl;
+						gameplay_functions->melee(t);
 					}
-					gameplay_functions->melee(player);
+				}
+			}
+		}
+		if (R) {
+			if (player->getType() == 6) {
+				Player* t = CheckClass::isPlayer(player);
+				if (t) {
+					if (t->getCool()) {
+						for (int i = 0; i < 100; i++) {
+							std::cout << "Pressed R" << std::endl;
+						}
+						gameplay_functions->special(t->newAttack(0));
+					}
 				}
 			}
 		}

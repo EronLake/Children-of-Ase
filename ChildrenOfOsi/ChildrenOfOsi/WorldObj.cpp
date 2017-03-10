@@ -11,6 +11,7 @@ WorldObj::WorldObj()
 	collision = false;
 	Rectangle init(loc, 1, 1);
 	body.push_back(init);
+	type = 0;
 }
 
 WorldObj::WorldObj(float x, float y, bool col)
@@ -22,6 +23,7 @@ WorldObj::WorldObj(float x, float y, bool col)
 	collision = col;
 	Rectangle init(loc,1,1);
 	body.push_back(init);
+	type = 0;
 	//cout <<"X-Loc: "<< loc.getXloc() << endl;
 	//cout << "Y-Loc: " << loc.getYloc() << endl;
 	//cout << "Rotation: " << rotation.getXloc()<<" , " << rotation.getYloc()<< endl;
@@ -132,6 +134,7 @@ WorldObj::WorldObj(Vector2f p_topLeft, float p_width, float p_height) {
 	height = p_height;
 	Rectangle init(loc, p_width, p_height);
 	body.push_back(init);
+	type = 0;
 }
 
 void WorldObj::drawObj(float _x, float _y)
