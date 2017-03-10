@@ -356,6 +356,9 @@ int Movement::melee(WorldObj* obj) {
 }
 
 int Movement::specialAttack(WorldObj* obj) {
+	for (int i = 0; i < 100;i++) {
+		std::cout << "Object Type: " << obj->getType() << std::endl;
+	}
 	if (obj->getType() == -1) {
 		Attack* a = CheckClass::isAttack(obj);
 		if (a) {
@@ -375,9 +378,8 @@ int Movement::attack(WorldObj* obj) {
 	for (int a = 0; a < atk.size();a++) {
 		//std::cout << "Attack Exists" << std::endl;
 		if (atk[a]->getPause() == 0) {
-			for (int i = 0; i < 50; i++) {
-				//std::cout << "Attack Collidable" << std::endl;
-			}
+			manager->createTaskWithObj("Sprite_Update", "DRAW", atk[a]);
+			//std::cout << "Attack Collidable" << std::endl;
 			for (int i = 0; i < objVec.size(); i++) {
 				if (objVec[i]->getType() >= 2) {
 					LivingObj* liv = CheckClass::isLiving(objVec[i]);

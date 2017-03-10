@@ -176,6 +176,7 @@ int RenderHelper::sprite_idle(WorldObj* obj) {
 
 int RenderHelper::sprite_update(WorldObj * obj)
 {
+	obj->WorldObj::drawObj(camera->getX(), camera->getY());
 	return 0;
 }
 

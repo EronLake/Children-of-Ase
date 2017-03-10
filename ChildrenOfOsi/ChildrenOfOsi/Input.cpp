@@ -3,6 +3,7 @@
 #include <conio.h>
 #include <Windows.h>
 #include "Soldier.h"
+#include "Attack.h"
 #include "CheckClass.h"
 #include "json.h"
 
@@ -130,10 +131,11 @@ void Input::InputCheck()
 				Player* t = CheckClass::isPlayer(player);
 				if (t) {
 					if (t->getCool()) {
-						for (int i = 0; i < 100; i++) {
-							std::cout << "Pressed R" << std::endl;
+						std::cout << "Pressed R" << std::endl;
+						Attack* ak = t->newAttack(0);
+						if (ak != nullptr) {
+							gameplay_functions->special(ak);
 						}
-						gameplay_functions->special(t->newAttack(0));
 					}
 				}
 			}

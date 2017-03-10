@@ -278,7 +278,10 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 
 	Texture* pierTex = new Texture();
 
+	Texture* blank = new Texture();
+
 	//load sprite from a configuration file?
+	blank->setFile("Assets/Sprites/blank.png", 1);
 	objTexture->setFile("Assets/Sprites/YemojasHouse.png",1);
 
 	playerTexture->setFile("Assets/Sprites/ShangoForwardIdle.png",22);
@@ -365,6 +368,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	rockThrow->setPause(0);
 	rockThrow->sprite.setTexture(rockTex);
 	Alex->addAttackType(rockThrow);
+	Alex->melee.sprite.setTexture(blank);
 	//Alex->melee.sprite.setTexture(rockTex);
 	DialogueController::setPlayer(Alex);
 	//vector<WorldObj*> recVec;
