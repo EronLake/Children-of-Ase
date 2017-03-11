@@ -94,8 +94,15 @@ int main() {
 		QuadTree* collideTree = new QuadTree(0, screen);
 
 		/************************************************************************************************TESTING*******************************************************/
-		
-		osi::GameWindow::init();
+		while (1) {
+			Player* Daniel = new Player(SHANGO, Vector2f(512.0, 512.0), 150.0, 150.0);
+			Soldier* Alex = new Soldier(Vector2f(512.0 - 200.0, 512.0 - 200.0), 150.0, 150.0);
+			cout << "Alex's target location is: " << Alex->getEvadeRange(Daniel).getXloc() << ", " << Alex->getEvadeRange(Daniel).getYloc() << endl;
+			cout << "Alex's target location is COMBAT: " << Alex->getCombatMoveDestination().getXloc() << ", " << Alex->getCombatMoveDestination().getYloc() << endl;
+
+
+		}
+		//osi::GameWindow::init();
 		////pauses the program for viewing
 
 		//system("PAUSE");
@@ -126,7 +133,7 @@ int main() {
 	                                   
 		//testQuadTree();
 		//ALEX_LOOP(collideTree);        
-		GAMEPLAY_LOOP(collideTree);
+		//GAMEPLAY_LOOP(collideTree);
 
 
 	return 0;
@@ -227,6 +234,8 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	AudM->register_manager();
 	//TestM->register_manager();
 	AIM->register_manager();
+
+
 
 
 	//DialogueGui* convoGui = new DialogueGui();
