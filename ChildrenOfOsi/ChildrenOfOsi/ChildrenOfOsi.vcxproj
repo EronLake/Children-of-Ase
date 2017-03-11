@@ -171,6 +171,7 @@
     <ClInclude Include="AudioTestSuite.h" />
     <ClInclude Include="CheckClass.h" />
     <ClInclude Include="ChildrenOfOsi.h" />
+    <ClInclude Include="CombatController.h" />
     <ClInclude Include="common.h" />
     <ClInclude Include="Conditions.h" />
     <ClInclude Include="Containers.h" />
@@ -179,9 +180,13 @@
     <ClInclude Include="DialogueHelper.h" />
     <ClInclude Include="DialougeTestSuite.h" />
     <ClInclude Include="DummyController.h" />
-    <ClInclude Include="Factions.h" />
+    <ClInclude Include="Party.h" />
+    <ClInclude Include="Village.h" />
     <ClInclude Include="GameMap.h" />
     <ClInclude Include="GameWindow.h" />
+    <ClInclude Include="Line.h" />
+    <ClInclude Include="Point.h" />
+    <ClInclude Include="RiverObj.h" />
     <ClInclude Include="Shader.h" />
     <ClInclude Include="Personality.h" />
     <ClInclude Include="Planner.h" />
@@ -240,6 +245,7 @@
     <ClCompile Include="AudioTestSuite.cpp" />
     <ClCompile Include="CheckClass.cpp" />
     <ClCompile Include="ChildrenOfOsi.cpp" />
+    <ClCompile Include="CombatController.cpp" />
     <ClCompile Include="Conditions.cpp" />
     <ClCompile Include="Containers.cpp" />
     <ClCompile Include="DialogueController.cpp" />
@@ -247,9 +253,11 @@
     <ClCompile Include="DialogueHelper.cpp" />
     <ClCompile Include="DialougeTestSuite.cpp" />
     <ClCompile Include="DummyController.cpp" />
-    <ClCompile Include="Factions.cpp" />
+    <ClCompile Include="Party.cpp" />
+    <ClCompile Include="Village.cpp" />
     <ClCompile Include="GameMap.cpp" />
     <ClCompile Include="GameWindow.cpp" />
+    <ClCompile Include="Line.cpp" />
     <ClCompile Include="Personality.cpp" />
     <ClCompile Include="Planner.cpp" />
     <ClCompile Include="Hero.cpp" />
@@ -272,9 +280,11 @@
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="MemoryPool.cpp" />
     <ClCompile Include="Attack.cpp" />
+    <ClCompile Include="Point.cpp" />
     <ClCompile Include="QuadTree.cpp" />
     <ClCompile Include="RenderHelper.cpp" />
     <ClCompile Include="RenderManager.cpp" />
+    <ClCompile Include="RiverObj.cpp" />
     <ClCompile Include="Soldier.cpp" />
     <ClCompile Include="SoundSystem.cpp" />
     <ClCompile Include="Relationship.cpp" />

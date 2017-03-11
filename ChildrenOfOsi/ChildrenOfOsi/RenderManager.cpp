@@ -25,6 +25,7 @@ RenderManager::RenderManager(MessageLog * _mLog, TaskBuffer * _tBuffer, QuadTree
 	task_map["Sprite_Update"] = &RenderHelper::sprite_update;
 	task_map["Dialogue"] = &RenderHelper::drawDiaGui;
 	task_map["Melee"] = &RenderHelper::sprite_atk;
+	task_map["Hurt"] = &RenderHelper::sprite_hurt;
 	task_map["GSword"] = &RenderHelper::setSwordGlow;
 	task_map["GHeart"] = &RenderHelper::setHeartGlow;
 	task_map["GFace"] = &RenderHelper::setFaceGlow;

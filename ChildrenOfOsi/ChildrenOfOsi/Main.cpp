@@ -8,7 +8,7 @@
 #include <stdlib.h>     
 #include <time.h>
 #include "Player.h"
-#include "Factions.h"
+#include "Village.h"
 #include <crtdbg.h>
 #include "Rectangle.h"
 #include "QuadTree.h"
@@ -54,6 +54,8 @@
 #include "ObjConfig.h"
 #include "ActionPool.h"
 
+#include "Line.h"
+
 using namespace std;
 
 
@@ -74,6 +76,7 @@ void GAMEPLAY_LOOP(QuadTree* _Quadtree);
 
 void ANDREWS_TEST();
 void PHYSICS_TEST();
+bool lineCollision(Line l1, Line l2);
 
 int main() {
 
@@ -94,7 +97,9 @@ int main() {
 		
 		osi::GameWindow::init();
 		////pauses the program for viewing
+
 		//system("PAUSE");
+
 
 		////demonstration of a meory leak
 		///*while (true) {
@@ -246,6 +251,10 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	Texture* downAtkTex = new Texture();
 	Texture* leftAtkTex = new Texture();
 	Texture* rightAtkTex = new Texture();
+	Texture* upHurtTex = new Texture();
+	Texture* downHurtTex = new Texture();
+	Texture* leftHurtTex = new Texture();
+	Texture* rightHurtTex = new Texture();
 
 	Texture* yemojaTexture = new Texture();
 	Texture* yemojaIdleTex = new Texture();
@@ -269,7 +278,10 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 
 	Texture* pierTex = new Texture();
 
+	Texture* blank = new Texture();
+
 	//load sprite from a configuration file?
+	blank->setFile("Assets/Sprites/blank.png", 1);
 	objTexture->setFile("Assets/Sprites/YemojasHouse.png",1);
 
 	playerTexture->setFile("Assets/Sprites/ShangoForwardIdle.png",22);
@@ -287,6 +299,11 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	downAtkTex->setFile("Assets/Sprites/ShangoForwardSwing.png", 24);
 	leftAtkTex->setFile("Assets/Sprites/ShangoLeftSwing.png", 24);
 	rightAtkTex->setFile("Assets/Sprites/ShangoRightSwing.png", 24);
+	upHurtTex->setFile("Assets/Sprites/ShangoBackRecoil.png", 18);
+	downHurtTex->setFile("Assets/Sprites/ShangoForwardRecoil.png", 18);
+	leftHurtTex->setFile("Assets/Sprites/ShangoLeftRecoil.png", 18);
+	rightHurtTex->setFile("Assets/Sprites/ShangoRightRecoil.png", 18);
+
 
 	yemojaTexture->setFile("Assets/Sprites/YemojaFrontIdle.png", 1);
 	yemojaIdleTex->setFile("Assets/Sprites/YemojaFrontIdle.png", 1);
@@ -304,9 +321,8 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	treeTex1->setFile("Assets/Sprites/tree1.png", 1);
 	treeTex2->setFile("Assets/Sprites/tree2.png", 1);
 
-	rockTex->setFile("Assets/Sprites/rock.png", 1);
-	rockTex1->setFile("Assets/Sprites/rock1.png", 1);
-	rockTex2->setFile("Assets/Sprites/rock2.png", 1);
+	rockTex->setFile("Assets/Sprites/rock_1.png", 1);
+	rockTex2->setFile("Assets/Sprites/rock_2.png", 1);
 
 	pierTex->setFile("Assets/Sprites/pier.png", 1);
 	/* SET UP SPRITE CHANGE, MIGHT NEED A SINGLETON?*/
@@ -329,6 +345,10 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	Alex->sprite.atk_left = leftAtkTex;
 	Alex->sprite.atk_right = rightAtkTex;
 
+	Alex->sprite.hurt_up = upHurtTex;
+	Alex->sprite.hurt_down = downHurtTex;
+	Alex->sprite.hurt_left = leftHurtTex;
+	Alex->sprite.hurt_right = rightHurtTex;
 
 	Alex->offsetBody(0, 50, 50, 50, 50);
 	Alex->setInteractable(true);
@@ -337,13 +357,25 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	Alex->melee.setCollision(true);
 	Alex->melee.setDmg(10);
 	Alex->melee.setDestroy(false);
-	Alex->melee.setWidth(Alex->getWidth());
-	Alex->melee.setHeight(Alex->getHeight());
+	Alex->melee.setWidth(Alex->body[0].getWidth());
+	Alex->melee.setHeight(Alex->body[0].getHeight());
+	Attack* rockThrow = new Attack();
+	rockThrow->setDmg(5);
+	rockThrow->setSpeed(10);
+	rockThrow->setDestroy(true);
+	rockThrow->setDuration(1000);
+	rockThrow->setCoolDown(124);
+	rockThrow->setPause(0);
+	rockThrow->sprite.setTexture(rockTex);
+	Alex->addAttackType(rockThrow);
+	Alex->melee.sprite.setTexture(blank);
+	//Alex->melee.sprite.setTexture(rockTex);
 	DialogueController::setPlayer(Alex);
 	//vector<WorldObj*> recVec;
 
 	vector<WorldObj*> vec;
-	/*
+	//vec.push_back(&Alex->melee);
+
 	for (int i = 1; i < 6; i++) {
 		if (i > 4) {
 			WorldObj* obj = new WorldObj(Vector2f(4100, 3550),500,333);
@@ -368,7 +400,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 		recVec.push_back(objs);
 		
 	}
-	*/
+
 	vector<Vector2f> vertices;
 	vector<pair<Vector2f, Vector2f>> edges;
 	
@@ -419,6 +451,10 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	staticRec->sprite.id_left = h_leftIdleTex;
 	staticRec->sprite.id_right = h_rightIdleTex;
 	staticRec->sprite.id_down = h_downIdleTex;
+	staticRec->sprite.hurt_up = upHurtTex;
+	staticRec->sprite.hurt_down = downHurtTex;
+	staticRec->sprite.hurt_left = leftHurtTex;
+	staticRec->sprite.hurt_right = rightHurtTex;
 
 
 
@@ -1123,6 +1159,20 @@ void PHYSICS_TEST() {
 	else {
 		cout << "COLLISION TEST FAILED" << endl;
 	}
+}
+
+bool lineCollision(Line l1, Line l2)
+{
+	float denom = ((l1.getP2().getX() - l1.getP1().getX()) * (l2.getP2().getY() - l2.getP1().getY())) - ((l1.getP2().getY() - l1.getP1().getY()) * (l2.getP2().getX() - l2.getP1().getX()));
+    float num1 = ((l1.getP1().getY() - l2.getP1().getY()) * (l2.getP2().getX() - l2.getP1().getX())) - ((l1.getP1().getX() - l2.getP1().getX()) * (l2.getP2().getY() - l2.getP1().getY()));
+    float num2 = ((l1.getP1().getY() - l2.getP1().getY()) * (l1.getP2().getX() - l1.getP1().getX())) - ((l1.getP1().getX() - l2.getP1().getX()) * (l1.getP2().getY() - l1.getP1().getY()));
+
+    if (denom == 0) return num1 == 0 && num2 == 0;
+
+    float r = num1 / denom;
+    float s = num2 / denom;
+
+    return (r >= 0 && r <= 1) && (s >= 0 && s <= 1);
 }
 
 void FPS(bool b) {

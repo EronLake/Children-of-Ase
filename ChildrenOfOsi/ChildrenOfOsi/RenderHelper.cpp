@@ -148,6 +148,25 @@ int RenderHelper::sprite_atk(WorldObj * obj)
 	return 0;
 }
 
+int RenderHelper::sprite_hurt(WorldObj * obj)
+{
+	std::string check = obj->getDirection();
+	if (check.compare("UP") == 0) {
+		obj->sprite.setTexture(obj->sprite.hurt_up);
+	}
+	else 	if (check.compare("DOWN") == 0) {
+		obj->sprite.setTexture(obj->sprite.hurt_down);
+	}
+	else 	if (check.compare("RIGHT") == 0) {
+		obj->sprite.setTexture(obj->sprite.hurt_right);
+	}
+	else	if (check.compare("LEFT") == 0) {
+		obj->sprite.setTexture(obj->sprite.hurt_left);
+	}
+	obj->sprite.lockAnimation();
+	return 0;
+}
+
 int RenderHelper::sprite_idle(WorldObj* obj) {
 	//if (!obj->sprite.isIdle()) {
 		obj->sprite.setTexture((obj->sprite.getIdleTexture()));
@@ -157,6 +176,7 @@ int RenderHelper::sprite_idle(WorldObj* obj) {
 
 int RenderHelper::sprite_update(WorldObj * obj)
 {
+	obj->WorldObj::drawObj(camera->getX(), camera->getY());
 	return 0;
 }
 
