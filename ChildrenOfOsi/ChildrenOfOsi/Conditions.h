@@ -4,36 +4,16 @@
 #include "common.h"
 //#include "ActionPool.h"
 
-
-/*
-class Conditions
-{
-public:
-	Conditions();
-	~Conditions();
-
-	//prerecs
-
-	
-	
-	
-	
-																					  //Having particular memory
-	static float particular_mem_prerec_cost(std::vector<Memory>* memories, std::string rec_mem);//Hero* curr_hero could also just pass in the hero
-																						   //Having Particular memory and village state[for revolt]
-	static float particular_mem_state_prerec_cost(std::vector<Memory>* memories, std::string rec_mem/*, state_manager*, required state, std::vectorr<relevant villages> );
-	//Comparing village states
-	static float particular_state_prerec_cost(/*, state_manager*, required state, std::vectorr<relevant villages> );
-	//? ? ? Betrayal ? ? ?
-	//maybe can be handled in the past memories?
-
-};
-*/
-class ActionPool;
 class Preconditions
 {
+protected:
+	std::string type;
 public:
-	virtual float get_cost() = 0;
+	Preconditions();
+	~Preconditions();
+	virtual float get_cost();
+	std::string get_type();
+
 };
 
 class RelPrecon : public Preconditions
@@ -42,78 +22,163 @@ private:
 	Hero* curr_hero;
 	Hero* other_hero;
 	std::string rel_type;
-	std::string rel_dir;
+	std::string rel_bound;
 	int desired_rel_val;
 
 public:
-	//RelPrecon();
-	//~RelPrecon();
+	RelPrecon(Hero* curr_hero, Hero* other_hero, std::string rel_type, std::string rel_bound, int desired_rel_val);
+	~RelPrecon();
 
 	//Require particular relationship towards a hero
-	virtual float get_cost(Hero* curr_hero, Hero* other_hero, std::string rel_type, int desired_rel_val); //override;
+	virtual float get_cost() final;
 };
-/*
-class RelAssumpPrerec
+
+class RelEstimPrerec : Preconditions
 {
 private:
 	Hero* curr_hero;
 	Hero* other_hero;
 	std::string rel_type;
+	std::string rel_bound;
 	int desired_rel_val;
 
 public:
 	
-	RelAssumpPrerec();
-	~RelAssumpPrerec();
+	RelEstimPrerec(Hero* curr_hero, Hero* other_hero, std::string rel_type, std::string rel_bound, int desired_rel_val);
+	~RelEstimPrerec();
 
 	//Require particular assumption of hero relationship towards sel
-	float cost(Hero* curr_hero, Hero* other_hero, std::string rel_type, int desired_rel_val) override;
+	float get_cost() final;
 
 };
 
-class TimePrerec
+class TimePrerec : Preconditions
 {
 private:
 	int time_rec;
 
 public:
-	TimePrerec();
+	TimePrerec(int time_rec);
 	~TimePrerec();
 
 	//Global Time restrictions
-	float cost(int time_rec) override;//needs to access some type of global clock
+	virtual float get_cost() final;//needs to access some type of global clock
 
 };
 
-class MemoryNumPrerec
+class MemoryNumPrerec : Preconditions
 {
 private:
 	std::vector<Memory>* memories;
 	int rec_num_of_mem;
 public:
+	MemoryNumPrerec(std::vector<Memory>* memories, int rec_num_of_mem);
+	~MemoryNumPrerec();
 
 	//Memories is not empty
-	float memory_num_prerec_cost(std::vector<Memory>* memories, int rec_num_of_mem);//Hero* curr_hero could also just pass in the hero
+	float get_cost();//Hero* curr_hero could also just pass in the hero
 };
 
-class particularMemPrerec
+class MemPrerec : Preconditions
 {
-public:
+private:
 	std::vector<Memory>* memories;
 	std::string rec_mem;
+public:
+	MemPrerec(std::vector<Memory>* memories, std::string rec_mem);
+	~MemPrerec();
+
+	//Having particular memory
+	virtual float get_cost() final;//Hero* curr_hero could also just pass in the hero
 };
 
-class ParticularMemStatePrerec
+
+class StatePrerec : Preconditions
 {
+private:
+	/*state_manager st_man, 
+	std::string required state, 
+	std::vectorr<relevant villages>*/
 public:
-	std::vector<Memory>* memories;
-	std::string rec_mem;
-	/*, state_manager*, required state, std::vectorr<relevant villages> 
+	//Comparing village states
+	StatePrerec();
+	~StatePrerec();
+	virtual float get_cost() final;
 };
 
-class ParticularStatePrerec
+//BETRAYALS NEED TO BE ACCOUNTED FOR
+
+
+//--------------------------------------------------------
+
+class Postcondition
 {
+protected:
+	std::string type;
+
 public:
-	, state_manager*, required state, std::vectorr<relevant villages> 
+	//Comparing village states
+	Postcondition();
+	~Postcondition();
+
+	virtual float get_utility();
+	void apply_utility();
+	std::string get_type();
+
 };
-*/
+
+
+class RelPost : Postcondition
+{
+private:
+	Hero* curr_hero;
+	Hero* other_hero;
+	std::string rel_type;
+	int utility;
+
+public:
+
+	RelPost(Hero* _curr_hero, Hero* _other_hero, std::string rel_type, int rel_val);
+	~RelPost();
+
+	//Require particular assumption of hero relationship towards sel
+	float get_utility() final;
+	void apply_utility();
+
+};
+
+
+class RelEstimPost : Postcondition
+{
+private:
+	Hero* curr_hero;
+	Hero* other_hero;
+	std::string rel_type;
+	int utility;
+
+public:
+
+	RelEstimPost(Hero* _curr_hero, Hero* _other_hero, std::string rel_type, int rel_val);
+	~RelEstimPost();
+
+	//Require particular assumption of hero relationship towards sel
+	float get_utility() final;
+	void apply_utility();
+
+};
+
+class StatePost : Postcondition
+{
+private:
+	/*state_manager st_man,
+	std::string state,
+	std::vectorr<relevant villages>*/
+	int utility;
+public:
+	//Comparing village states
+	StatePost(int _utility);
+	~StatePost();
+	float get_utility() final;
+	void apply_utility();
+
+};

@@ -39,6 +39,13 @@ void Manager::createTaskWithObj(std::string task_name, std::string type, WorldOb
 	mLog->logMessage(new_task);
 }
 
+void Manager::createTaskWithParams(std::string task_name, std::string type, std::string key, float x, float y, bool col) {
+	std::string task_status = "CREATED";
+	Task* new_task = new Task(task_name, task_status, type, key, x, y, col);
+	tBuffer->push(new_task);
+	mLog->logMessage(new_task);
+}
+
 void  Manager::execute_task(Task* current_task) 
 {
 	LOG("Execute Task");

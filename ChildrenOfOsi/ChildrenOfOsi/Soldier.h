@@ -2,6 +2,9 @@
 #include "NPC.h"
 #include "stdafx.h"
 #include "Attack.h"
+#include "Containers.h"
+
+class Party;
 
 class Soldier :
 	public NPC
@@ -13,22 +16,40 @@ public:
 	~Soldier();
 	void setInCombat(bool c) { inCombat = c; };
 	bool getInCombat() { return inCombat; };
-	Attack melee;
+	void setEvade(bool e) { evade = e; };
+	bool getEvade() { return evade; };
+	void setHold(bool h) {holdPos = h; };
+	bool getHold() { return holdPos; };
+	void setPatrol(bool p) { patrol=p; };
+	bool getPatrol() { return patrol; };
+	Attack* melee;
 	vector<Attack*>atkType;
-	vector<Attack*>available;
 	unordered_map<Attack*,int> cdMap;
-	Attack* newAttack(int i);
-	void meleeAttack();
+	void addAttackType(Attack* a);
+	void newAttack(int i, Attack* a);
+	void meleeAttack(Attack* a);
 	void setCD(int c) { cdTotal = c; };
 	int getCD() { return cdTotal; };
-	void updateCD() { if (cdFrame < cdTotal) { cdFrame++; } else cool = true; };
-	int framesCD() { return cdFrame; };
+	void updateCD();
+	int timeCD() { return cdTime; };
 	void setCool(bool c) { cool = c; };
 	bool getCool() { return cool; };
+	void setParty(Party* p) { party=p; };
+	Party* getParty() { return party; };
+	int getInstances() { return instances; };
+	std::string getKey() { return key; };
+	std::string getAtKey() { return atkey="Soldier" + std::to_string(getID()) + "_" + std::to_string(atkType.size()) + "_" + std::to_string(instances); };
 private:
+	Party* party;
 	bool inCombat;
+	bool evade;
+	bool holdPos;
+	bool patrol;
 	int cdTotal;
-	int cdFrame;
+	int cdTime;
 	bool cool;
+	int instances;
+	std::string key;
+	std::string atkey;
 };
 

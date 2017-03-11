@@ -3,6 +3,7 @@
 #include <conio.h>
 #include <Windows.h>
 #include "Soldier.h"
+#include "Attack.h"
 #include "CheckClass.h"
 #include "json.h"
 
@@ -59,10 +60,11 @@ void Input::InputCheck()
 	short ENTER = GetKeyState('\n') >> 15;
 	short V = GetKeyState('V') >> 15;
 	short F = GetKeyState('F') >> 15;
-
+	short P = GetKeyState('P') >> 15;
+	short Z = GetKeyState('Z') >> 15;
 
 	if (DialogueController::getState() == 0) {
-
+		gameplay_functions->combat(player);
 		if (W)                //Moving up
 		{
 			gameplay_functions->play_sound("Unpause");
@@ -114,13 +116,52 @@ void Input::InputCheck()
 			gameplay_functions->talk(player);
 		}
 		if (F) {
-			Player* t = CheckClass::isPlayer(player);
-			if (t) {
-				if (t->getCool()) {
-					std::cout << "Pressed F" << std::endl;
-					gameplay_functions->melee(player);
+			if (player->getType() == 6) {
+				Player* t = CheckClass::isPlayer(player);
+				if (t) {
+					if (t->getCool()) {
+						std::cout << "Pressed F" << std::endl;
+						gameplay_functions->add_Attack(t->getAtKey(), 0, 0, true, 10);
+						tBuffer->run();
+						t->meleeAttack(Containers::Attack_table[t->getAtKey()]);
+						gameplay_functions->melee(t);
+					}
 				}
 			}
+		}
+		if (R) {
+			if (player->getType() == 6) {
+				Player* t = CheckClass::isPlayer(player);
+				if (t) {
+					if (t->getCool()) {
+						std::cout << "Pressed R" << std::endl;
+						gameplay_functions->add_Attack(t->getAtKey(), 0, 0, true, 10);
+						tBuffer->run();
+						t->newAttack(0, Containers::Attack_table[t->getAtKey()]);
+					}
+				}
+			}
+		}
+		float firstOld = 0;
+		float secondOld = 0;
+		if (P) {
+			std::cout << player->getX() << " " << player->getY() << std::endl;
+			std::ofstream rivFile;
+			rivFile.open("rivLines.txt", std::ios_base::app);
+			rivFile << firstOld << " " << secondOld << ", ";
+			rivFile << player->getX() << " " << player->getY()+player->getHeight() << std::endl;
+			firstOld = player->getX();
+			secondOld = player->getY() + player->getHeight();
+			rivFile.close();
+			//std::system("PAUSE");
+		}
+		if (Z) {
+			std::ofstream rivFile;
+			rivFile.open("rivLines.txt", std::ios_base::app);
+			rivFile << std::endl;
+			rivFile << std::endl;
+			rivFile << std::endl;
+			rivFile.close();
 		}
 
 		/*

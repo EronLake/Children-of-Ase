@@ -90,6 +90,17 @@ void ChildrenOfOsi::melee(WorldObj * player)
 {
 	createTask("Melee", "INTERACT", player);
 }
+
+void ChildrenOfOsi::special(WorldObj * player)
+{
+	std::cout << "Object Type: " << player->getType() << std::endl;
+	createTask("Special_Attack", "COMBAT", player);
+}
+
+void ChildrenOfOsi::combat(WorldObj * player)
+{
+	createTask("Attack", "COMBAT", player);
+}
 ////////////////////////////////////////////////////
 ////////////////////////////////////////////////////
 

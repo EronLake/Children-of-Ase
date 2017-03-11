@@ -82,10 +82,14 @@ void DialogueController::otherConversationPoint(dialogue_point line)
 	replyString = point[0];
 
 	Hero* temp_hero;
-	
-	if (temp_hero = CheckClass::isHero(other))
-	{
-		perror("you cannot talk to this type of object");
+	if (other->getType() >= 2) {
+		if (temp_hero = CheckClass::isHero(other))
+		{
+			perror("you cannot talk to this type of object");
+		}
+	}
+	else {
+		return;
 	}
 
 	std::string reply_pt_sentence = dialogue.gen_dialog(line, temp_hero);

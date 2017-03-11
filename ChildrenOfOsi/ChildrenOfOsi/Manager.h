@@ -24,6 +24,8 @@ public:
 
 	void createTaskWithObj(std::string task_name, std::string type, WorldObj* obj);
 
+	void createTaskWithParams(std::string task_name, std::string type, std::string key, float x, float y, bool col);
+
 	virtual void execute_task(Task* current_task);
 };
 

@@ -19,11 +19,8 @@ public:
 	unordered_map<int, Relationship*> rel;
 	Personality* traits;
 	//Planner* planner;
-    
 	ActionPool* actionPool;
-
     int name;
-
 
 	void addRelationship(int hero);
 	void Hero::setPersonality(int a, int k, int h, int p, int r, int e, int g);

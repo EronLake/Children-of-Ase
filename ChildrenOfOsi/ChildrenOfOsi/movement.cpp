@@ -9,6 +9,7 @@
 
 Movement::Movement(QuadTree* QT) {
 	tree = QT;
+	rivObj = new RiverObj();
 	
 
 }
@@ -27,20 +28,30 @@ int Movement::move_up(WorldObj* obj) {
 	objVec = tree->retrieve(objVec, obj);
 
 	NPC* npc;
-	if (npc = CheckClass::isNPC(obj))
-	{
-		float moveSpeed = npc->getSpeed();
-	}
-	obj->shiftY(-moveSpeed*speed_magnifier);
-	for (int i = 0; i < objVec.size(); i++) {
-		if (obj == objVec[i]) {
-			break;
+	if (obj->getType() >= 2) {
+		if (npc = CheckClass::isNPC(obj))
+		{
+			float moveSpeed = npc->getSpeed();
 		}
-		if (collision(objVec[i], obj)) {
-			manager->createTask("Bump","SOUND");
-			LOG("failed to move up. collision.");
-			obj->shiftY(moveSpeed*speed_magnifier);
-			break;
+		obj->shiftY(-moveSpeed*speed_magnifier);
+		for (int i = 0; i < objVec.size(); i++) {
+			if (obj == objVec[i]) {
+				break;
+			}
+			if (collision(objVec[i], obj)) {
+				manager->createTask("Bump", "SOUND");
+				LOG("failed to move up. collision.");
+				obj->shiftY(moveSpeed*speed_magnifier);
+				break;
+			}
+		}
+		for (int i = 0; i < rivObj->getLines().size(); i++) {
+			if (lineCollision((rivObj->getLines())[i], (Line(Point(obj->getX(), obj->getY() + 50), Point(obj->getX() + obj->getWidth(), obj->getY() + 50))))) {
+				manager->createTask("Bump", "SOUND");
+				LOG("failed to move up. collision.");
+				obj->shiftY(moveSpeed*speed_magnifier);
+				break;
+			}
 		}
 	}
 	LOG("X: " << obj->getX() << " Y: " << obj->getY());
@@ -54,34 +65,36 @@ int Movement::move_up_left(WorldObj* obj) {
 	objVec = tree->retrieve(objVec, obj);
 
 	NPC* npc;
-	if (npc = CheckClass::isNPC(obj))
-	{
-		float diagYSpeed = npc->getDiagYSpeed();
-		float diagXSpeed = npc->getDiagXSpeed();
-	}
+	if (obj->getType() >= 2) {
+		if (npc = CheckClass::isNPC(obj))
+		{
+			float diagYSpeed = npc->getDiagYSpeed();
+			float diagXSpeed = npc->getDiagXSpeed();
+		}
 
-	obj->shiftY(-diagYSpeed*speed_magnifier);
-	for (int i = 0; i < objVec.size(); i++) {
-		if (obj == objVec[i]) {
-			break;
+		obj->shiftY(-diagYSpeed*speed_magnifier);
+		for (int i = 0; i < objVec.size(); i++) {
+			if (obj == objVec[i]) {
+				break;
+			}
+			if (collision(objVec[i], obj)) {
+				manager->createTask("Bump", "SOUND");
+				LOG("failed to move up. collision.");
+				obj->shiftY(diagYSpeed*speed_magnifier);
+				break;
+			}
 		}
-		if (collision(objVec[i], obj)) {
-			manager->createTask("Bump", "SOUND");
-			LOG("failed to move up. collision.");
-			obj->shiftY(diagYSpeed*speed_magnifier);
-			break;
-		}
-	}	
-	obj->shiftX(-diagXSpeed*speed_magnifier);
-	for (int i = 0; i < objVec.size(); i++) {
-		if (obj == objVec[i]) {
-			break;
-		}
-		if (collision(objVec[i], obj)) {
-			manager->createTask("Bump", "SOUND");
-			LOG("failed to move up. collision.");
-			obj->shiftX(diagXSpeed*speed_magnifier);
-			break;
+		obj->shiftX(-diagXSpeed*speed_magnifier);
+		for (int i = 0; i < objVec.size(); i++) {
+			if (obj == objVec[i]) {
+				break;
+			}
+			if (collision(objVec[i], obj)) {
+				manager->createTask("Bump", "SOUND");
+				LOG("failed to move up. collision.");
+				obj->shiftX(diagXSpeed*speed_magnifier);
+				break;
+			}
 		}
 	}
 	LOG("X: " << obj->getX() << " Y: " << obj->getY());
@@ -95,34 +108,36 @@ int Movement::move_up_right(WorldObj* obj) {
 	objVec = tree->retrieve(objVec, obj);
 
 	NPC* npc;
-	if (npc = CheckClass::isNPC(obj))
-	{
-		float diagYSpeed = npc->getDiagYSpeed()*speed_magnifier;
-		float diagXSpeed = npc->getDiagXSpeed()*speed_magnifier;
-	}
+	if (obj->getType() >= 2) {
+		if (npc = CheckClass::isNPC(obj))
+		{
+			float diagYSpeed = npc->getDiagYSpeed()*speed_magnifier;
+			float diagXSpeed = npc->getDiagXSpeed()*speed_magnifier;
+		}
 
-	obj->shiftY(-diagYSpeed*speed_magnifier);
-	for (int i = 0; i < objVec.size(); i++) {
-		if (obj == objVec[i]) {
-			break;
+		obj->shiftY(-diagYSpeed*speed_magnifier);
+		for (int i = 0; i < objVec.size(); i++) {
+			if (obj == objVec[i]) {
+				break;
+			}
+			if (collision(objVec[i], obj)) {
+				manager->createTask("Bump", "SOUND");
+				LOG("failed to move up. collision.");
+				obj->shiftY(diagYSpeed*speed_magnifier);
+				break;
+			}
 		}
-		if (collision(objVec[i], obj)) {
-			manager->createTask("Bump", "SOUND");
-			LOG("failed to move up. collision.");
-			obj->shiftY(diagYSpeed*speed_magnifier);
-			break;
-		}
-	}
-	obj->shiftX(diagXSpeed*speed_magnifier);
-	for (int i = 0; i < objVec.size(); i++) {
-		if (obj == objVec[i]) {
-			break;
-		}
-		if (collision(objVec[i], obj)) {
-			manager->createTask("Bump", "SOUND");
-			LOG("failed to move up. collision.");
-			obj->shiftX(-diagXSpeed*speed_magnifier);
-			break;
+		obj->shiftX(diagXSpeed*speed_magnifier);
+		for (int i = 0; i < objVec.size(); i++) {
+			if (obj == objVec[i]) {
+				break;
+			}
+			if (collision(objVec[i], obj)) {
+				manager->createTask("Bump", "SOUND");
+				LOG("failed to move up. collision.");
+				obj->shiftX(-diagXSpeed*speed_magnifier);
+				break;
+			}
 		}
 	}
 	LOG("X: " << obj->getX() << " Y: " << obj->getY());
@@ -136,21 +151,23 @@ int Movement::move_down(WorldObj* obj) {
 	objVec = tree->retrieve(objVec, obj);
 
 	NPC* npc;
-	if (npc = CheckClass::isNPC(obj))
-	{
-		float moveSpeed = npc->getSpeed();
-	}
-
-	obj->shiftY(moveSpeed*speed_magnifier);
-	for (int i = 0; i < objVec.size(); i++) {
-		if (obj == objVec[i]) {
-			break;
+	if (obj->getType() >= 2) {
+		if (npc = CheckClass::isNPC(obj))
+		{
+			float moveSpeed = npc->getSpeed();
 		}
-		if (collision(objVec[i], obj)) {
-			LOG("failed to move down. collision.");
-			manager->createTask("Bump", "SOUND");
-			obj->shiftY(-moveSpeed*speed_magnifier);
-			break;
+
+		obj->shiftY(moveSpeed*speed_magnifier);
+		for (int i = 0; i < objVec.size(); i++) {
+			if (obj == objVec[i]) {
+				break;
+			}
+			if (collision(objVec[i], obj)) {
+				LOG("failed to move down. collision.");
+				manager->createTask("Bump", "SOUND");
+				obj->shiftY(-moveSpeed*speed_magnifier);
+				break;
+			}
 		}
 	}
 	LOG("X: " << obj->getX() << " Y: " << obj->getY());
@@ -164,35 +181,37 @@ int Movement::move_down_left(WorldObj* obj) {
 	objVec = tree->retrieve(objVec, obj);
 
 	NPC* npc;
-	if (npc = CheckClass::isNPC(obj))
-	{
-		float diagYSpeed = npc->getDiagYSpeed();
-		float diagXSpeed = npc->getDiagXSpeed();
-	}
+	if (obj->getType() >= 2) {
+		if (npc = CheckClass::isNPC(obj))
+		{
+			float diagYSpeed = npc->getDiagYSpeed();
+			float diagXSpeed = npc->getDiagXSpeed();
+		}
 
-	obj->shiftY(diagYSpeed*speed_magnifier);
-	for (int i = 0; i < objVec.size(); i++) {
-		if (obj == objVec[i]) {
-			break;
+		obj->shiftY(diagYSpeed*speed_magnifier);
+		for (int i = 0; i < objVec.size(); i++) {
+			if (obj == objVec[i]) {
+				break;
+			}
+			if (collision(objVec[i], obj)) {
+				LOG("failed to move down. collision.");
+				manager->createTask("Bump", "SOUND");
+				obj->shiftY(-diagYSpeed*speed_magnifier);
+				break;
+			}
 		}
-		if (collision(objVec[i], obj)) {
-			LOG("failed to move down. collision.");
-			manager->createTask("Bump", "SOUND");
-			obj->shiftY(-diagYSpeed*speed_magnifier);
-			break;
-		}
-	}
-	obj->shiftX(-diagXSpeed*speed_magnifier);
+		obj->shiftX(-diagXSpeed*speed_magnifier);
 
-	for (int i = 0; i < objVec.size(); i++) {
-		if (obj == objVec[i]) {
-			break;
-		}
-		if (collision(objVec[i], obj)) {
-			LOG("failed to move down. collision.");
-			manager->createTask("Bump", "SOUND");
-			obj->shiftX(diagXSpeed*speed_magnifier);
-			break;
+		for (int i = 0; i < objVec.size(); i++) {
+			if (obj == objVec[i]) {
+				break;
+			}
+			if (collision(objVec[i], obj)) {
+				LOG("failed to move down. collision.");
+				manager->createTask("Bump", "SOUND");
+				obj->shiftX(diagXSpeed*speed_magnifier);
+				break;
+			}
 		}
 	}
 	LOG("X: " << obj->getX() << " Y: " << obj->getY());
@@ -206,34 +225,36 @@ int Movement::move_down_right(WorldObj* obj) {
 	objVec = tree->retrieve(objVec, obj);
 
 	NPC* npc;
-	if (npc = CheckClass::isNPC(obj))
-	{
-		float diagYSpeed = npc->getDiagYSpeed();
-		float diagXSpeed = npc->getDiagXSpeed();
-	}
+	if (obj->getType() >= 2) {
+		if (npc = CheckClass::isNPC(obj))
+		{
+			float diagYSpeed = npc->getDiagYSpeed();
+			float diagXSpeed = npc->getDiagXSpeed();
+		}
 
-	obj->shiftY(diagYSpeed*speed_magnifier);
-	for (int i = 0; i < objVec.size(); i++) {
-		if (obj == objVec[i]) {
-			break;
+		obj->shiftY(diagYSpeed*speed_magnifier);
+		for (int i = 0; i < objVec.size(); i++) {
+			if (obj == objVec[i]) {
+				break;
+			}
+			if (collision(objVec[i], obj)) {
+				LOG("failed to move down. collision.");
+				manager->createTask("Bump", "SOUND");
+				obj->shiftY(-diagYSpeed*speed_magnifier);
+				break;
+			}
 		}
-		if (collision(objVec[i], obj)) {
-			LOG("failed to move down. collision.");
-			manager->createTask("Bump", "SOUND");
-			obj->shiftY(-diagYSpeed*speed_magnifier);
-			break;
-		}
-	}
-	obj->shiftX(diagXSpeed*speed_magnifier);
-	for (int i = 0; i < objVec.size(); i++) {
-		if (obj == objVec[i]) {
-			break;
-		}
-		if (collision(objVec[i], obj)) {
-			LOG("failed to move down. collision.");
-			manager->createTask("Bump", "SOUND");
-			obj->shiftX(-diagXSpeed*speed_magnifier);
-			break;
+		obj->shiftX(diagXSpeed*speed_magnifier);
+		for (int i = 0; i < objVec.size(); i++) {
+			if (obj == objVec[i]) {
+				break;
+			}
+			if (collision(objVec[i], obj)) {
+				LOG("failed to move down. collision.");
+				manager->createTask("Bump", "SOUND");
+				obj->shiftX(-diagXSpeed*speed_magnifier);
+				break;
+			}
 		}
 	}
 	LOG("X: " << obj->getX() << " Y: " << obj->getY());
@@ -247,20 +268,22 @@ int Movement::move_left(WorldObj* obj) {
 	objVec = tree->retrieve(objVec, obj);
 
 	NPC* npc;
-	if (npc = CheckClass::isNPC(obj))
-	{
-		float moveSpeed = npc->getSpeed();
-	}
-	obj->shiftX(-moveSpeed*speed_magnifier);
-	for (int i = 0; i < objVec.size(); i++) {
-		if (obj == objVec[i]) {
-			break;
+	if (obj->getType() >= 2) {
+		if (npc = CheckClass::isNPC(obj))
+		{
+			float moveSpeed = npc->getSpeed();
 		}
-		if (collision(objVec[i], obj)) {
-			LOG("failed to move left. collision.");
-			manager->createTask("Bump", "SOUND");
-			obj->shiftX(moveSpeed*speed_magnifier);
-			break;
+		obj->shiftX(-moveSpeed*speed_magnifier);
+		for (int i = 0; i < objVec.size(); i++) {
+			if (obj == objVec[i]) {
+				break;
+			}
+			if (collision(objVec[i], obj)) {
+				LOG("failed to move left. collision.");
+				manager->createTask("Bump", "SOUND");
+				obj->shiftX(moveSpeed*speed_magnifier);
+				break;
+			}
 		}
 	}
 	LOG("X: " << obj->getX() << " Y: " << obj->getY());
@@ -274,21 +297,23 @@ int Movement::move_right(WorldObj* obj) {
 	objVec = tree->retrieve(objVec, obj);
 
 	NPC* npc;
-	if (npc = CheckClass::isNPC(obj))
-	{
-		float moveSpeed = npc->getSpeed();
-	}
-
-	obj->shiftX(moveSpeed*speed_magnifier);
-	for (int i = 0; i < objVec.size(); i++) {
-		if (obj == objVec[i]) {
-			break;
+	if (obj->getType() >= 2) {
+		if (npc = CheckClass::isNPC(obj))
+		{
+			float moveSpeed = npc->getSpeed();
 		}
-		if (collision(objVec[i], obj)) {
-			LOG("failed to move right. collision.");
-			manager->createTask("Bump", "SOUND");
-			obj->shiftX(-moveSpeed*speed_magnifier);
-			break;
+
+		obj->shiftX(moveSpeed*speed_magnifier);
+		for (int i = 0; i < objVec.size(); i++) {
+			if (obj == objVec[i]) {
+				break;
+			}
+			if (collision(objVec[i], obj)) {
+				LOG("failed to move right. collision.");
+				manager->createTask("Bump", "SOUND");
+				obj->shiftX(-moveSpeed*speed_magnifier);
+				break;
+			}
 		}
 	}
 	LOG("X: " << obj->getX() << " Y: " << obj->getY());
@@ -298,18 +323,20 @@ int Movement::move_right(WorldObj* obj) {
 int Movement::talk(WorldObj* obj) {
 	objVec.clear();
 	objVec = tree->retrieve(objVec, obj);
-	if (CheckClass::isPlayer(obj)) {
-		Player* d = dynamic_cast<Player*>(obj);
-		d->updateTalk();
-		std::cout << "Talking Width "<< d->talk.getWidth()<<std::endl;
-		for (int i = 0; i < objVec.size(); i++) {
-			if (obj == objVec[i]) {
-				break;
-			}
-			if (objVec[i]->getInteractable()) {
-				if (interaction(d, objVec[i])) {
-					LOG("Player interacted with an object");
-					DialogueController::startConversation(objVec[i],true);
+	if (obj->getType() == 6) {
+		if (CheckClass::isPlayer(obj)) {
+			Player* d = dynamic_cast<Player*>(obj);
+			d->updateTalk();
+			std::cout << "Talking Width " << d->talk.getWidth() << std::endl;
+			for (int i = 0; i < objVec.size(); i++) {
+				if (obj == objVec[i]) {
+					break;
+				}
+				if (objVec[i]->getInteractable()) {
+					if (interaction(d, objVec[i])) {
+						LOG("Player interacted with an object");
+						DialogueController::startConversation(objVec[i], true);
+					}
 				}
 			}
 		}
@@ -318,21 +345,92 @@ int Movement::talk(WorldObj* obj) {
 }
 
 int Movement::melee(WorldObj* obj) {
+	if (obj->getType() >= 3) {
+		Soldier* d = CheckClass::isSoldier(obj);
+		if (d) {
+			//d->meleeAttack();
+			//std::cout << "Attack Added" << std::endl;
+		}
+	}
+	return 0;
+}
+
+int Movement::specialAttack(WorldObj* obj) {
+	for (int i = 0; i < 100;i++) {
+		std::cout << "Object Type: " << obj->getType() << std::endl;
+	}
+	if (obj->getType() == -1) {
+		Attack* a = CheckClass::isAttack(obj);
+		if (a) {
+			//combatControl.addAttack(a);
+			tree->insert(a);
+			std::cout << "Attack Added" << std::endl;
+		}
+	}
+	return 0;
+}
+
+int Movement::attack(WorldObj* obj) {
 	objVec.clear();
 	objVec = tree->retrieve(objVec, obj);
-	Soldier* d = CheckClass::isSoldier(obj);
-	if (d) {
-		d->meleeAttack();
-		for (int i = 0; i < objVec.size(); i++) {
-			if (obj != objVec[i]) {
-			LivingObj* liv = CheckClass::isLiving(objVec[i]);
-			if (liv) {
-				if (collision(&(d->melee), liv)) {
-					std::cout << "Player hit " << liv->getName() << std::endl;
-					d->melee.Hit(liv);
-					std::cout << liv->getName() << "'s health is now " << liv->getHealth() << std::endl;
+	for (auto a = Containers::Attack_table.begin(); a !=Containers::Attack_table.end();++a) {
+		//std::cout << "Attack Exists" << std::endl;
+		if (a->second->getPause() == 0) {
+			a->second->move();
+			if (!a->second->updateDuration()) {
+				if (!a->second->getKeep()) {
+					Containers::Attack_table.erase(a);
+				}
+				else {
+					a->second->setPause(-1);
 				}
 			}
+		}
+		else {
+			a->second->updatePause();
+			std::cout << "Pause: " << a->second->getPause() << std::endl;
+		}
+		if (a->second->getPause() == 0) {
+			manager->createTaskWithObj("Sprite_Update", "DRAW", a->second);
+			//std::cout << "Attack Collidable" << std::endl;
+			for (int i = 0; i < objVec.size(); i++) {
+				if (objVec[i]->getType() >= 2) {
+					LivingObj* liv = CheckClass::isLiving(objVec[i]);
+					if (liv) {
+						if (collision(a->second, liv)) {
+							std::cout << "Player hit " << liv->getName() << std::endl;
+							a->second->Hit(liv);
+							manager->createTaskWithObj("Hurt", "DRAW", liv);
+							std::cout << liv->getName() << "'s health is now " << liv->getHealth() << std::endl;
+						}
+					}
+				}
+			}
+		}
+	}
+	return 0;
+}
+
+int Movement::meleeSwing(WorldObj* obj) {
+	objVec.clear();
+	objVec = tree->retrieve(objVec, obj);
+	if (obj->getType() >= 3) {
+		Soldier* d = CheckClass::isSoldier(obj);
+		if (d) {
+			//d->meleeAttack();
+			for (int i = 0; i < objVec.size(); i++) {
+				if (obj != objVec[i]) {
+					if (objVec[i]->getType() >= 1) {
+						LivingObj* liv = CheckClass::isLiving(objVec[i]);
+						if (liv) {
+							if (collision(d->melee, liv)) {
+								std::cout << "Player hit " << liv->getName() << std::endl;
+								d->melee->Hit(liv);
+								std::cout << liv->getName() << "'s health is now " << liv->getHealth() << std::endl;
+							}
+						}
+					}
+				}
 			}
 		}
 	}
@@ -389,6 +487,20 @@ bool Movement::collision(WorldObj* recA, WorldObj* recB)
 	return false;
 }
 
+bool Movement::lineCollision(Line l1, Line l2)
+{
+	float denom = ((l1.getP2().getX() - l1.getP1().getX()) * (l2.getP2().getY() - l2.getP1().getY())) - ((l1.getP2().getY() - l1.getP1().getY()) * (l2.getP2().getX() - l2.getP1().getX()));
+	float num1 = ((l1.getP1().getY() - l2.getP1().getY()) * (l2.getP2().getX() - l2.getP1().getX())) - ((l1.getP1().getX() - l2.getP1().getX()) * (l2.getP2().getY() - l2.getP1().getY()));
+	float num2 = ((l1.getP1().getY() - l2.getP1().getY()) * (l1.getP2().getX() - l1.getP1().getX())) - ((l1.getP1().getX() - l2.getP1().getX()) * (l1.getP2().getY() - l1.getP1().getY()));
+
+	if (denom == 0) return num1 == 0 && num2 == 0;
+
+	float r = num1 / denom;
+	float s = num2 / denom;
+
+	return (r >= 0 && r <= 1) && (s >= 0 && s <= 1);
+}
+
 bool Movement::interaction(Player* recA, WorldObj* recB)
 {
 	for (int j = 0; j < (*recB).body.size(); j++) {
@@ -398,3 +510,4 @@ bool Movement::interaction(Player* recA, WorldObj* recB)
 	}
 	return false;
 }
+

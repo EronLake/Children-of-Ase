@@ -1,13 +1,15 @@
 #pragma once
 
 #include "common.h"
-#include "Hero.h"
-#include "SplSoldier.h"
-#include "LivingObj.h"
-#include "WorldObj.h"
-#include "NPC.h"
-#include "Attack.h"
 #include "Texture.h"
+
+class Hero;
+class Soldier;
+class SplSoldier;
+class LivingObj;
+class WorldObj;
+class NPC;
+class Attack;
 
 class Containers
 {
