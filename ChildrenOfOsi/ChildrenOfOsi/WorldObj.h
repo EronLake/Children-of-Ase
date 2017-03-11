@@ -56,7 +56,10 @@ public:
 	std::string getDirection() { return direction; };
 	void setType(int t) { type = t; };
 	int getType() { return type; };
+	int getID() { return ID; };
 private:
+	int ID;
+	static int idNum;
 	std::string direction;
 	Vector2f loc;
 	Vector2f rotation;

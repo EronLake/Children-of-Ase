@@ -5,11 +5,23 @@
 Attack::Attack()
 {
 	setType(-1);
+	dmg = 0;
+	duration = 62; //-1 will mean infinity
+	destroyOnCollision = true;
+	speed = 0;
+	cooldown = 62;
+	pause = 62;
 }
 
 Attack::Attack(float x, float y, bool col) : WorldObj(x, y, col)
 {
 	setType(-1);
+	dmg=0;
+	duration=62; //-1 will mean infinity
+	destroyOnCollision=true;
+	speed=0;
+	cooldown=62;
+	pause=62;
 }
 
 Attack::~Attack()
@@ -23,7 +35,7 @@ Attack::~Attack()
 	 }
 	 (*target).addHealth(-dmg);
 	 if (destroyOnCollision) {
-		 delete this;
+		 //delete this;
 	 } else {
 		 hitObjs.push_back(target);
 	 }

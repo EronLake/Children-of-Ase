@@ -348,8 +348,8 @@ int Movement::melee(WorldObj* obj) {
 	if (obj->getType() >= 3) {
 		Soldier* d = CheckClass::isSoldier(obj);
 		if (d) {
-			combatControl.addAttack(d->meleeAttack());
-			std::cout << "Attack Added" << std::endl;
+			//d->meleeAttack();
+			//std::cout << "Attack Added" << std::endl;
 		}
 	}
 	return 0;
@@ -362,7 +362,7 @@ int Movement::specialAttack(WorldObj* obj) {
 	if (obj->getType() == -1) {
 		Attack* a = CheckClass::isAttack(obj);
 		if (a) {
-			combatControl.addAttack(a);
+			//combatControl.addAttack(a);
 			tree->insert(a);
 			std::cout << "Attack Added" << std::endl;
 		}
@@ -373,20 +373,33 @@ int Movement::specialAttack(WorldObj* obj) {
 int Movement::attack(WorldObj* obj) {
 	objVec.clear();
 	objVec = tree->retrieve(objVec, obj);
-	combatControl.update();
-	vector<Attack*> atk = combatControl.getAttacks();
-	for (int a = 0; a < atk.size();a++) {
+	for (auto a = Containers::Attack_table.begin(); a !=Containers::Attack_table.end();++a) {
 		//std::cout << "Attack Exists" << std::endl;
-		if (atk[a]->getPause() == 0) {
-			manager->createTaskWithObj("Sprite_Update", "DRAW", atk[a]);
+		if (a->second->getPause() == 0) {
+			a->second->move();
+			if (!a->second->updateDuration()) {
+				if (!a->second->getKeep()) {
+					Containers::Attack_table.erase(a);
+				}
+				else {
+					a->second->setPause(-1);
+				}
+			}
+		}
+		else {
+			a->second->updatePause();
+			std::cout << "Pause: " << a->second->getPause() << std::endl;
+		}
+		if (a->second->getPause() == 0) {
+			manager->createTaskWithObj("Sprite_Update", "DRAW", a->second);
 			//std::cout << "Attack Collidable" << std::endl;
 			for (int i = 0; i < objVec.size(); i++) {
 				if (objVec[i]->getType() >= 2) {
 					LivingObj* liv = CheckClass::isLiving(objVec[i]);
 					if (liv) {
-						if (collision(atk[a], liv)) {
+						if (collision(a->second, liv)) {
 							std::cout << "Player hit " << liv->getName() << std::endl;
-							atk[a]->Hit(liv);
+							a->second->Hit(liv);
 							manager->createTaskWithObj("Hurt", "DRAW", liv);
 							std::cout << liv->getName() << "'s health is now " << liv->getHealth() << std::endl;
 						}
@@ -404,15 +417,15 @@ int Movement::meleeSwing(WorldObj* obj) {
 	if (obj->getType() >= 3) {
 		Soldier* d = CheckClass::isSoldier(obj);
 		if (d) {
-			d->meleeAttack();
+			//d->meleeAttack();
 			for (int i = 0; i < objVec.size(); i++) {
 				if (obj != objVec[i]) {
 					if (objVec[i]->getType() >= 1) {
 						LivingObj* liv = CheckClass::isLiving(objVec[i]);
 						if (liv) {
-							if (collision(&(d->melee), liv)) {
+							if (collision(d->melee, liv)) {
 								std::cout << "Player hit " << liv->getName() << std::endl;
-								d->melee.Hit(liv);
+								d->melee->Hit(liv);
 								std::cout << liv->getName() << "'s health is now " << liv->getHealth() << std::endl;
 							}
 						}

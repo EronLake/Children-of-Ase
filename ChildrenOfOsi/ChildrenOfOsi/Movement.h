@@ -41,7 +41,6 @@ public:
 	float diagSpeed;
 	float diagXSpeed; 
 	float diagYSpeed;
-	CombatController combatControl;
 
 private:
 	bool collision(WorldObj* recA, WorldObj* recB);

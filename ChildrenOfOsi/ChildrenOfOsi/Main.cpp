@@ -217,6 +217,8 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 
 	AIController* AiController = new AIController();
 
+	CombatController* combatControl = new CombatController();
+
 	//the order defines what order the managers the tasks will be sent to
 	DumM->register_manager();
 	PhysM->register_manager();
@@ -354,11 +356,16 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	Alex->setInteractable(true);
 	Alex->setName("Alex");
 	Alex->setTalkDist(20);
-	Alex->melee.setCollision(true);
-	Alex->melee.setDmg(10);
-	Alex->melee.setDestroy(false);
-	Alex->melee.setWidth(Alex->body[0].getWidth());
-	Alex->melee.setHeight(Alex->body[0].getHeight());
+	gameplay_functions->add_Attack(Alex->getKey(), Alex->body[0].getX(), Alex->body[0].getY(),true,10);
+	tBuffer->run();
+	Alex->melee = Containers::Attack_table[Alex->getKey()];
+	Alex->melee->setDmg(10);
+	Alex->melee->setCoolDown(1000);
+	Alex->melee->setPause(-1);
+	Alex->melee->setDestroy(false);
+	Alex->melee->setKeep(true);
+	Alex->melee->setWidth(Alex->body[0].getWidth());
+	Alex->melee->setHeight(Alex->body[0].getHeight());
 	Attack* rockThrow = new Attack();
 	rockThrow->setDmg(5);
 	rockThrow->setSpeed(10);
@@ -368,8 +375,8 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	rockThrow->setPause(0);
 	rockThrow->sprite.setTexture(rockTex);
 	Alex->addAttackType(rockThrow);
-	Alex->melee.sprite.setTexture(blank);
-	//Alex->melee.sprite.setTexture(rockTex);
+	//Alex->melee->sprite.setTexture(blank);
+	Alex->melee->sprite.setTexture(upHurtTex);
 	DialogueController::setPlayer(Alex);
 	//vector<WorldObj*> recVec;
 
@@ -605,6 +612,10 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	while (osi::GameWindow::isRunning()) {
 		start_tick = clock();
 		_QuadTree->clear();
+		Alex->updateCD();
+		for (auto i = Containers::Attack_table.begin(); i != Containers::Attack_table.begin(); ++i) {
+			if (i->second->getPause()==0)recVec.push_back(i->second);
+		}
 		for (int i = 0; i < recVec.size(); i++) {
 			_QuadTree->insert(recVec[i]);	//insert all obj into tree
 	
@@ -720,7 +731,6 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 		////Alex->WorldObj::shiftX(.5);
 		//osi::GameWindow::refresh();
 		//draw
-		Alex->updateCD();
 		if (state == 0) {
 			//LOG("ERROR AFTER PRESSING Q TO QUIT THE DIALOGUE GUI");
 			gameplay_functions->draw_frame(Alex);

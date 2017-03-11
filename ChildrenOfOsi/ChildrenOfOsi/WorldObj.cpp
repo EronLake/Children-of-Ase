@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "WorldObj.h"
 #include "GameWindow.h"
-
+int WorldObj::idNum = 0;
 
 
 WorldObj::WorldObj()
@@ -12,6 +12,7 @@ WorldObj::WorldObj()
 	Rectangle init(loc, 1, 1);
 	body.push_back(init);
 	type = 0;
+	ID = idNum++;
 }
 
 WorldObj::WorldObj(float x, float y, bool col)
@@ -24,6 +25,7 @@ WorldObj::WorldObj(float x, float y, bool col)
 	Rectangle init(loc,1,1);
 	body.push_back(init);
 	type = 0;
+	ID = idNum++;
 	//cout <<"X-Loc: "<< loc.getXloc() << endl;
 	//cout << "Y-Loc: " << loc.getYloc() << endl;
 	//cout << "Rotation: " << rotation.getXloc()<<" , " << rotation.getYloc()<< endl;

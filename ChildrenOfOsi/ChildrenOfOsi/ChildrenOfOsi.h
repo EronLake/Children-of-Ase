@@ -5,7 +5,6 @@
 #include "MessageLog.h"
 #include "Player.h"
 
-
 class ChildrenOfOsi
 {
 private:

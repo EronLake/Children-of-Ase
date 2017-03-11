@@ -2,6 +2,7 @@
 #include "NPC.h"
 #include "stdafx.h"
 #include "Attack.h"
+#include "Containers.h"
 
 class Party;
 
@@ -21,12 +22,12 @@ public:
 	bool getHold() { return holdPos; };
 	void setPatrol(bool p) { patrol=p; };
 	bool getPatrol() { return patrol; };
-	Attack melee;
+	Attack* melee;
 	vector<Attack*>atkType;
 	unordered_map<Attack*,int> cdMap;
 	void addAttackType(Attack* a);
-	Attack* newAttack(int i);
-	Attack* meleeAttack();
+	void newAttack(int i, Attack* a);
+	void meleeAttack(Attack* a);
 	void setCD(int c) { cdTotal = c; };
 	int getCD() { return cdTotal; };
 	void updateCD();
@@ -35,6 +36,9 @@ public:
 	bool getCool() { return cool; };
 	void setParty(Party* p) { party=p; };
 	Party* getParty() { return party; };
+	int getInstances() { return instances; };
+	std::string getKey() { return key; };
+	std::string getAtKey() { return atkey="Soldier" + std::to_string(getID()) + "_" + std::to_string(atkType.size()) + "_" + std::to_string(instances); };
 private:
 	Party* party;
 	bool inCombat;
@@ -44,5 +48,8 @@ private:
 	int cdTotal;
 	int cdTime;
 	bool cool;
+	int instances;
+	std::string key;
+	std::string atkey;
 };
 

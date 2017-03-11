@@ -25,8 +25,10 @@ public:
 	void addHit(WorldObj* o) { hitObjs.push_back(o); };
 	vector<WorldObj*> getHits() { return hitObjs; };
 	void setPause(int p) { pause = p; };
-	void updatePause() { pause--; };
+	void updatePause() { if (pause>0)pause--; };
 	int getPause() { return pause; };
+	void setKeep(bool k) { keep=k; };
+	bool getKeep() { return keep; };
 private:
 	int dmg;
 	int duration; //-1 will mean infinity
@@ -35,4 +37,5 @@ private:
 	int cooldown;
 	int pause;
 	vector<WorldObj*> hitObjs;
+	bool keep;
 };

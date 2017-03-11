@@ -9,26 +9,24 @@ Soldier::Soldier()
 
 Soldier::Soldier(float x, float y, bool col) :NPC(x, y, col)
 {
-	melee.setDestroy(false);
-	melee.setSpeed(3);
+	key = "Soldier" + std::to_string(getID()) + "_0";
 	cdTotal = 60;
 	cdTime = 0;
 	cool = false;
 	setType(3);
+	//Containers::add_Attack(key,melee);
+	//melee = Containers::Attack_table[key];
 }
 
 Soldier::Soldier(Vector2f p_topLeft, float p_width, float p_height):NPC(p_topLeft,p_width,p_height)
 {
-	melee.setX(body[0].getX());
-	melee.setY(body[0].getY());
-	melee.setWidth(body[0].getWidth());
-	melee.setHeight(body[0].getHeight());
-	melee.setDestroy(false);
-	melee.setSpeed(3);
+	key= "Soldier" + std::to_string(getID()) + "_0";
 	cdTotal = 60;
 	cdTime = 0;
 	cool = false;
 	setType(3);
+	//Containers::add_Attack(key, melee);
+	//melee = Containers::Attack_table[key];
 }
 
 Soldier::~Soldier()
@@ -38,11 +36,15 @@ Soldier::~Soldier()
 void Soldier::addAttackType(Attack* a) {
 	atkType.push_back(a);
 	cdMap[a] = a->getCoolDown();
+	//std::string key = "Soldier" + std::to_string(getID()) + "_"+ std::to_string(atkType.size());
+	//Containers::add_Attack(key, a);
 }
 
-Attack* Soldier::newAttack(int i)
+void Soldier::newAttack(int i, Attack* a)
 {
 	if (cdMap[atkType[i]] == 0) {
+		Attack* p = a;
+		*p = *atkType[i];
 		float w = atkType[i]->getWidth();
 		if (w == 0)w = body[0].getWidth();
 		float h = atkType[i]->getHeight();
@@ -62,7 +64,10 @@ Attack* Soldier::newAttack(int i)
 		else if (d.compare("RIGHT") == 0) {
 			x = x + (getWidth() + 1);
 		}
-		Attack* p = new Attack(x, y, true);
+		p->setX(x);
+		p->setY(y);
+		p->setCollision(true);
+		p->addHit(this);
 		p->setDmg(atkType[i]->getDmg());
 		p->setDuration(atkType[i]->getDuration());
 		p->setDestroy(atkType[i]->getDestroy());
@@ -73,41 +78,44 @@ Attack* Soldier::newAttack(int i)
 		cdMap[atkType[i]] = atkType[i]->getCoolDown();
 		cool = false;
 		cdTime = cdTotal;
-		return p;
+		instances++;
 	}
 }
 
-Attack* Soldier::meleeAttack() {
-	melee.addHit(this);
+void Soldier::meleeAttack(Attack* a) {
+	*a = *melee;
+	melee = a;
+	melee->addHit(this);
 	float x= body[0].getX();
 	float y= body[0].getY();
-	melee.setDuration(5);
-	melee.setPause(13);
+	melee->setDuration(5);
+	melee->setPause(13);
 	std::string d = getDirection();
 	if (d.compare("UP")==0) {
-		y= y-(melee.getHeight()+1);
-		x +=( melee.getSpeed()*melee.getDuration()/2);
-		melee.setDirection("LEFT");
+		y= y-(melee->getHeight()+1);
+		x +=( melee->getSpeed()*melee->getDuration()/2);
+		melee->setDirection("LEFT");
 	} else if (d.compare("DOWN")==0) {
 		y = y+(body[0].getHeight() + 1);
-		x -= (melee.getSpeed()*melee.getDuration()/2);
-		melee.setDirection("RIGHT");
+		x -= (melee->getSpeed()*melee->getDuration()/2);
+		melee->setDirection("RIGHT");
 	}
 	else if (d.compare("LEFT")==0) {
-		x = x-(melee.getWidth() + 1);
-		y -= (melee.getSpeed()*melee.getDuration()/2);
-		melee.setDirection("DOWN");
+		x = x-(melee->getWidth() + 1);
+		y -= (melee->getSpeed()*melee->getDuration()/2);
+		melee->setDirection("DOWN");
 	}
 	else if (d.compare("RIGHT")==0) {
 		x = x+(body[0].getWidth() + 1);
-		y += (melee.getSpeed()*melee.getDuration()/2);
-		melee.setDirection("UP");
+		y += (melee->getSpeed()*melee->getDuration()/2);
+		melee->setDirection("UP");
 	}
-	melee.setX(x);
-	melee.setY(y);
+	melee->setX(x);
+	melee->setY(y);
 	cool = false;
 	cdTime = cdTotal;
-	return &melee;
+	//std::string key = "Soldier" + std::to_string(getID()) + "_0";
+	//Containers::add_Attack(key, melee);
 }
 
 void Soldier::updateCD() {
