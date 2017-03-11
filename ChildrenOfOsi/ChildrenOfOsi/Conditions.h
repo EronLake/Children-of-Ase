@@ -33,7 +33,7 @@ public:
 	virtual float get_cost() final;
 };
 
-class RelEstimpPrerec : Preconditions
+class RelEstimPrerec : Preconditions
 {
 private:
 	Hero* curr_hero;
@@ -44,8 +44,8 @@ private:
 
 public:
 	
-	RelEstimpPrerec(Hero* curr_hero, Hero* other_hero, std::string rel_type, std::string rel_bound, int desired_rel_val);
-	~RelEstimpPrerec();
+	RelEstimPrerec(Hero* curr_hero, Hero* other_hero, std::string rel_type, std::string rel_bound, int desired_rel_val);
+	~RelEstimPrerec();
 
 	//Require particular assumption of hero relationship towards sel
 	float get_cost() final;
@@ -108,6 +108,9 @@ public:
 
 //BETRAYALS NEED TO BE ACCOUNTED FOR
 
+
+//--------------------------------------------------------
+
 class Postcondition
 {
 protected:
@@ -119,5 +122,63 @@ public:
 	~Postcondition();
 
 	virtual float get_utility();
+	void apply_utility();
 	std::string get_type();
+
+};
+
+
+class RelPost : Postcondition
+{
+private:
+	Hero* curr_hero;
+	Hero* other_hero;
+	std::string rel_type;
+	int utility;
+
+public:
+
+	RelPost(Hero* _curr_hero, Hero* _other_hero, std::string rel_type, int rel_val);
+	~RelPost();
+
+	//Require particular assumption of hero relationship towards sel
+	float get_utility() final;
+	void apply_utility();
+
+};
+
+
+class RelEstimPost : Postcondition
+{
+private:
+	Hero* curr_hero;
+	Hero* other_hero;
+	std::string rel_type;
+	int utility;
+
+public:
+
+	RelEstimPost(Hero* _curr_hero, Hero* _other_hero, std::string rel_type, int rel_val);
+	~RelEstimPost();
+
+	//Require particular assumption of hero relationship towards sel
+	float get_utility() final;
+	void apply_utility();
+
+};
+
+class StatePost : Postcondition
+{
+private:
+	/*state_manager st_man,
+	std::string state,
+	std::vectorr<relevant villages>*/
+	int utility;
+public:
+	//Comparing village states
+	StatePost(int _utility);
+	~StatePost();
+	float get_utility() final;
+	void apply_utility();
+
 };

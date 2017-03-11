@@ -84,7 +84,7 @@ float RelPrecon::get_cost()
 //RELATIONSHIP ASSUMPTION PRECONDITION
 ////////////////////////////////////////////////////////////////////////////////////
 
-RelEstimpPrerec::RelEstimpPrerec(Hero* _curr_hero, Hero* _other_hero, std::string _rel_type, std::string _rel_bound, int _desired_rel_val)
+RelEstimPrerec::RelEstimPrerec(Hero* _curr_hero, Hero* _other_hero, std::string _rel_type, std::string _rel_bound, int _desired_rel_val)
 {
 	curr_hero = _curr_hero;
 	other_hero = _other_hero;
@@ -94,16 +94,16 @@ RelEstimpPrerec::RelEstimpPrerec(Hero* _curr_hero, Hero* _other_hero, std::strin
 
 	type = "relationship_estimate";
 
-	LOG("RelEstimpPrerec Object Constructed");
+	LOG("RelEstimPrerec Object Constructed");
 }
 
 
-RelEstimpPrerec::~RelEstimpPrerec()
+RelEstimPrerec::~RelEstimPrerec()
 {
-	LOG("RelEstimpPrerec Object Destroyed");
+	LOG("RelEstimPrerec Object Destroyed");
 }
 
-float RelEstimpPrerec::get_cost()
+float RelEstimPrerec::get_cost()
 {
 	int current_est;
 	if (rel_type == "Affinity")
@@ -239,7 +239,7 @@ float MemPrerec::get_cost()
 }
 
 ////////////////////////////////////////////////////////////////////////////////////
-//MEMORY PRECONDITION
+//STATE PRECONDITION
 ////////////////////////////////////////////////////////////////////////////////////
 StatePrerec::StatePrerec()
 {
@@ -268,6 +268,11 @@ float StatePrerec::get_cost()
 
 
 
+
+
+
+
+
 ////////////////////////////////////////////////////////////////////////////////////
 //MEMORY POSTCONDITION
 ////////////////////////////////////////////////////////////////////////////////////
@@ -290,13 +295,138 @@ Postcondition::~Postcondition()
 
 float Postcondition::get_utility()
 {
-	float utility = 10.0;
-	float magnifier = 10.0;//this has to essentially the cost of an average state change
+	LOG("virtual function");
+	return 0.0;
+}
 
-	return utility;
+void Postcondition::apply_utility()
+{
+	LOG("virtual function");
 }
 
 std::string Postcondition::get_type()
 {
 	return type;
+}
+
+
+//---------------------------------------------------------------------------------
+
+////////////////////////////////////////////////////////////////////////////////////
+//RELATIONSHIP POSTCONDITION
+////////////////////////////////////////////////////////////////////////////////////
+
+RelPost::RelPost(Hero* _curr_hero, Hero* _other_hero, std::string _rel_type, int _utility)
+{
+	rel_type = _rel_type;
+	utility = _utility;
+
+	type = "relationship";
+
+	LOG("RelEstimPost Object Constructed");
+}
+
+
+RelPost::~RelPost()
+{
+	LOG("RelEstimPost Object Destroyed");
+}
+
+float RelPost::get_utility()
+{
+	return utility;
+}
+
+void RelPost::apply_utility()
+{
+	if (rel_type == "Affinity")
+	{
+		curr_hero->rel[other_hero->name]->addAffinity(utility);
+	}
+	else if (rel_type == "Notoriety")
+	{
+		curr_hero->rel[other_hero->name]->addNotoriety(utility);
+	}
+	else if (rel_type == "Strength")
+	{
+		curr_hero->rel[other_hero->name]->addStrength(utility);
+	}
+}
+
+//---------------------------------------------------------------------------------
+
+
+
+////////////////////////////////////////////////////////////////////////////////////
+//RELATIONSHIP ASSUMPTION POSTCONDITION
+////////////////////////////////////////////////////////////////////////////////////
+
+RelEstimPost::RelEstimPost(Hero* _curr_hero, Hero* _other_hero, std::string _rel_type, int _utility)
+{
+	rel_type = _rel_type;
+	utility = _utility;
+
+	type = "relationship_estimate";
+
+	LOG("RelEstimPost Object Constructed");
+}
+
+
+RelEstimPost::~RelEstimPost()
+{
+	LOG("RelEstimPost Object Destroyed");
+}
+
+float RelEstimPost::get_utility()
+{
+	return utility;
+}
+
+void RelEstimPost::apply_utility()
+{
+	if (rel_type == "Affinity")
+	{
+		curr_hero->rel[other_hero->name]->addAffEstimate(utility);
+	}
+	else if (rel_type == "Notoriety")
+	{
+		curr_hero->rel[other_hero->name]->addNotorEstimate(utility);
+	}
+	else if (rel_type == "Strength")
+	{
+		curr_hero->rel[other_hero->name]->addStrEstimate(utility);
+	}
+}
+
+//---------------------------------------------------------------------------------
+
+////////////////////////////////////////////////////////////////////////////////////
+//STATE PRECONDITION
+////////////////////////////////////////////////////////////////////////////////////
+StatePost::StatePost(int _utility)
+{
+	/*state_manager st_man,
+	std::string required state,
+	std::vectorr<relevant villages>*/
+	utility = _utility;
+
+	type = "state";
+
+	LOG("StatePost Object Constructed");
+}
+
+
+StatePost::~StatePost()
+{
+	LOG("StatePost Object Destroyed");
+}
+
+float StatePost::get_utility()
+{
+	return utility;
+}
+
+void StatePost::apply_utility()
+{
+	LOG("Still needs to be implimented");
 }
