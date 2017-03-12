@@ -57,7 +57,14 @@ public:
 	void setType(int t) { type = t; };
 	int getType() { return type; };
 	int getID() { return ID; };
+	int getEvasionRadius();
+	void setEvasionRadius(std::size_t _radius);
+	Vector2f getEvadeRange(WorldObj* _enemy);
+	Vector2f getCombatMoveDestination();
+	
+
 private:
+	bool targetIsWithinRange(Rectangle _bound);
 	int ID;
 	static int idNum;
 	std::string direction;
@@ -69,6 +76,8 @@ private:
 	float height;
 	string name;
 	int type; //  -1: Attack, 0: WorldObj, 1: LivingObj, 2: NPC, 3: Soldier, 4: SplSoldier, 5: Hero, 6: Player
+	int evasionRadius = 225;
+	Vector2f combatMoveDestination;
 };
 
 

@@ -133,11 +133,12 @@ void Input::InputCheck()
 			if (player->getType() == 6) {
 				Player* t = CheckClass::isPlayer(player);
 				if (t) {
-					if (t->getCool()) {
+					if (t->getCool(0)) {
 						std::cout << "Pressed R" << std::endl;
 						gameplay_functions->add_Attack(t->getAtKey(), 0, 0, true, 10);
 						tBuffer->run();
 						t->newAttack(0, Containers::Attack_table[t->getAtKey()]);
+						gameplay_functions->melee(t);
 					}
 				}
 			}
