@@ -15,9 +15,12 @@ class memManager : public Manager
 private:
 
 	typedef int (MemoryHelper::*fn_ptr)(std::string,float, float, bool);
+	typedef int (MemoryHelper::*fn_ptr2)(WorldObj* obj, int num);
 	typedef std::map<std::string, fn_ptr> functionMapper;
+	typedef std::map<std::string, fn_ptr2> function2Mapper;
 
 	functionMapper task_map;
+	function2Mapper task_map2;
 	MemoryHelper* memHelper;
 
 public:	

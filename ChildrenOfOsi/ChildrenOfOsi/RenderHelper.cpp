@@ -139,14 +139,14 @@ int RenderHelper::sprite_right(WorldObj* obj) {
 
 int RenderHelper::sprite_atk(WorldObj * obj)
 {
-	std::string check = obj->getDirection();
-	if (check.compare("UP") == 0) {
+	int check = obj->getDirection();
+	if (check == 8) {
 		obj->sprite.setTexture(obj->sprite.atk_up);
-	} else 	if (check.compare("DOWN") == 0) {
+	} else 	if (check == 2) {
 		obj->sprite.setTexture(obj->sprite.atk_down);
-	} else 	if (check.compare("RIGHT") == 0) {
+	} else 	if (check == 6) {
 		obj->sprite.setTexture(obj->sprite.atk_right);
-	} else	if (check.compare("LEFT") == 0) {
+	} else	if (check == 4) {
 		obj->sprite.setTexture(obj->sprite.atk_left);
 	}
 	obj->sprite.lockAnimation();
@@ -155,17 +155,17 @@ int RenderHelper::sprite_atk(WorldObj * obj)
 
 int RenderHelper::sprite_hurt(WorldObj * obj)
 {
-	std::string check = obj->getDirection();
-	if (check.compare("UP") == 0) {
+	int check = obj->getDirection();
+	if (check == 8) {
 		obj->sprite.setTexture(obj->sprite.hurt_up);
 	}
-	else 	if (check.compare("DOWN") == 0) {
+	else 	if (check == 2) {
 		obj->sprite.setTexture(obj->sprite.hurt_down);
 	}
-	else 	if (check.compare("RIGHT") == 0) {
+	else 	if (check == 6) {
 		obj->sprite.setTexture(obj->sprite.hurt_right);
 	}
-	else	if (check.compare("LEFT") == 0) {
+	else	if (check == 4) {
 		obj->sprite.setTexture(obj->sprite.hurt_left);
 	}
 	obj->sprite.lockAnimation();

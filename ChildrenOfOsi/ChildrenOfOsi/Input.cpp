@@ -122,23 +122,29 @@ void Input::InputCheck()
 				if (t) {
 					if (t->getCool()) {
 						std::cout << "Pressed F" << std::endl;
-						gameplay_functions->add_Attack(t->getAtKey(), 0, 0, true, 10);
-						tBuffer->run();
-						t->meleeAttack(Containers::Attack_table[t->getAtKey()]);
+						t->meleeAttack();
 						gameplay_functions->melee(t);
 					}
 				}
 			}
-		}
-		if (R) {
+		} else if (R) {
 			if (player->getType() == 6) {
 				Player* t = CheckClass::isPlayer(player);
 				if (t) {
 					if (t->getCool(0)) {
 						std::cout << "Pressed R" << std::endl;
-						gameplay_functions->add_Attack(t->getAtKey(), 0, 0, true, 10);
-						tBuffer->run();
-						t->newAttack(0, Containers::Attack_table[t->getAtKey()]);
+						gameplay_functions->special(t,0);
+						gameplay_functions->melee(t);
+					}
+				}
+			}
+		} else if (T) {
+			if (player->getType() == 6) {
+				Player* t = CheckClass::isPlayer(player);
+				if (t) {
+					if (t->getCool(1)) {
+						std::cout << "Pressed R" << std::endl;
+						gameplay_functions->special(t, 1);
 						gameplay_functions->melee(t);
 					}
 				}

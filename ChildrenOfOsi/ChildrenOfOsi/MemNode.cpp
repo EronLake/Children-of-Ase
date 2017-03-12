@@ -52,3 +52,12 @@ void* MemNode::getBlockPointer() {
 void MemNode::setBlockPointer(void* ptr) {
 	block_pointer = ptr;
 }
+
+std::string MemNode::getUniqueString() {
+	return unique_string;
+
+}
+void MemNode::setUniqueString(std::string str) {
+	unique_string = str;
+
+}

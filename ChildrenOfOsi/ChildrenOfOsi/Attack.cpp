@@ -11,6 +11,7 @@ Attack::Attack()
 	speed = 0;
 	cooldown = 62;
 	pause = 62;
+	turn = 0;
 }
 
 Attack::Attack(float x, float y, bool col) : WorldObj(x, y, col)
@@ -22,6 +23,7 @@ Attack::Attack(float x, float y, bool col) : WorldObj(x, y, col)
 	speed=0;
 	cooldown=62;
 	pause=62;
+	turn = 0;
 }
 
 Attack::~Attack()
@@ -40,23 +42,33 @@ Attack::~Attack()
  bool Attack::updateDuration() {
 	 if (duration>0)duration--;
 	 if (duration == 0) {
-		 hitObjs.clear();
-		 return false;
+		 /*if (turn>0) {
+			 setDirWithBase(6);
+			 duration += 7;
+			 turn--;
+		 }
+		 else {*/
+			 hitObjs.clear();
+			 return false;
+		// }
 	 }
 	 return true;
  }
+
  void Attack::move() {
-	 std::string d = getDirection();
-	 if (d.compare("UP")==0) {
+	 int d = getDirection();
+	 if (d == 8) {
 		 shiftY(-speed);
 	 }
-	 else if (d.compare("DOWN") == 0) {
+	 else if (d == 2) {
 		 shiftY(speed);
 	 }
-	 else if (d.compare("LEFT") == 0) {
+	 else if (d == 4) {
 		 shiftX(-speed);
 	 }
-	 else if (d.compare("RIGHT") == 0) {
+	 else if (d == 6) {
 		 shiftX(speed);
 	 }
  }
+
+ 

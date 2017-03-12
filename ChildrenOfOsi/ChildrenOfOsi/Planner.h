@@ -59,7 +59,7 @@ private:
 	
 	int prereq_appeal(Action step, vector<std::shared_ptr<Preconditions>> priority_preconds);
 	int cost(Action step);
-	int personality_appeal(Action evaluateAction);
+
 	vector<std::shared_ptr<Preconditions>> prioritize_preconditions(Action goal);
 	int personality_appeal(Action* evaluateAction);
 

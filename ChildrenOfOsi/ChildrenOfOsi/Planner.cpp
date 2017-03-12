@@ -23,6 +23,15 @@ int Planner::cost(Action step) {
 int Planner::prereq_appeal(Action step, vector<std::shared_ptr<Preconditions>> priority_preconds) {
 	int appeal = 0;
 	//iterate through postconditions.
+	for (auto i = std::begin(priority_preconds); i != std::end(priority_preconds); i++) {
+		for (auto iter : step.postconds) {
+			if (iter.second->get_type() == (*i)->get_type()) {
+				
+				appeal += iter.second->get_utility()*(i-priority_preconds.begin());
+
+			}
+		}
+	}
 	//for each one, get its corresponding precondition rank
 	//	(this is done by comparing types)
 	//	multiply the rank of the precondition by the utility of the postcondition that satisfies it
@@ -33,7 +42,7 @@ int Planner::prereq_appeal(Action step, vector<std::shared_ptr<Preconditions>> p
 int Planner::heuristic(Action step, vector<std::shared_ptr<Preconditions>> priority_preconds, vector<Action> goals) {
 	int value = 0;
 
-	value += personality_appeal(step);
+	value += personality_appeal(&step);
 	value += prereq_appeal(step,priority_preconds);
 	value -= cost(step);
 
@@ -77,10 +86,7 @@ Action Planner::choose_next_step(Action goal, vector<Action> goals) {
 	return *best_step;
 }
 
-int Planner::personality_appeal(Action action) {
 
-	return 0;
-};
 int Planner::personality_appeal(Action* evaluateAction) {
 	
 	return ((evaluateHero->traits->getHonor()*evaluateAction->multipliers->getHonor())+

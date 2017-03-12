@@ -23,7 +23,7 @@ Movement::~Movement() {
 int Movement::move_up(WorldObj* obj) {
 	//get list to check collision with
 	if (obj->sprite.getLock())return 0;
-	obj->setDirection("UP");
+	obj->setDirection(8);
 	objVec.clear();
 	objVec = tree->retrieve(objVec, obj);
 
@@ -59,7 +59,7 @@ int Movement::move_up(WorldObj* obj) {
 }
 int Movement::move_up_left(WorldObj* obj) {
 	if (obj->sprite.getLock())return 0;
-	obj->setDirection("LEFT");
+	obj->setDirection(4);
 	//get list to check collision with
 	objVec.clear();
 	objVec = tree->retrieve(objVec, obj);
@@ -102,7 +102,7 @@ int Movement::move_up_left(WorldObj* obj) {
 }
 int Movement::move_up_right(WorldObj* obj) {
 	if (obj->sprite.getLock())return 0;
-	obj->setDirection("RIGHT");
+	obj->setDirection(6);
 	//get list to check collision with
 	objVec.clear();
 	objVec = tree->retrieve(objVec, obj);
@@ -145,7 +145,7 @@ int Movement::move_up_right(WorldObj* obj) {
 }
 int Movement::move_down(WorldObj* obj) {
 	if (obj->sprite.getLock())return 0;
-	obj->setDirection("DOWN");
+	obj->setDirection(2);
 	//get list to check collision with
 	objVec.clear();
 	objVec = tree->retrieve(objVec, obj);
@@ -175,7 +175,7 @@ int Movement::move_down(WorldObj* obj) {
 }
 int Movement::move_down_left(WorldObj* obj) {
 	if (obj->sprite.getLock())return 0;
-	obj->setDirection("LEFT");
+	obj->setDirection(4);
 	//get list to check collision with
 	objVec.clear();
 	objVec = tree->retrieve(objVec, obj);
@@ -219,7 +219,7 @@ int Movement::move_down_left(WorldObj* obj) {
 }
 int Movement::move_down_right(WorldObj* obj) {
 	if (obj->sprite.getLock())return 0;
-	obj->setDirection("RIGHT");
+	obj->setDirection(6);
 	//get list to check collision with
 	objVec.clear();
 	objVec = tree->retrieve(objVec, obj);
@@ -262,7 +262,7 @@ int Movement::move_down_right(WorldObj* obj) {
 }
 int Movement::move_left(WorldObj* obj) {
 	if (obj->sprite.getLock())return 0;
-	obj->setDirection("LEFT");
+	obj->setDirection(4);
 	//get list to check collision with
 	objVec.clear();
 	objVec = tree->retrieve(objVec, obj);
@@ -291,7 +291,7 @@ int Movement::move_left(WorldObj* obj) {
 }
 int Movement::move_right(WorldObj* obj) {
 	if (obj->sprite.getLock())return 0;
-	obj->setDirection("RIGHT");
+	obj->setDirection(6);
 	//get list to check collision with
 	objVec.clear();
 	objVec = tree->retrieve(objVec, obj);
@@ -356,14 +356,10 @@ int Movement::melee(WorldObj* obj) {
 }
 
 int Movement::specialAttack(WorldObj* obj) {
-	for (int i = 0; i < 100;i++) {
-		std::cout << "Object Type: " << obj->getType() << std::endl;
-	}
-	if (obj->getType() == -1) {
-		Attack* a = CheckClass::isAttack(obj);
+	if (obj->getType() >= 3) {
+		Soldier* a = CheckClass::isSoldier(obj);
 		if (a) {
-			//combatControl.addAttack(a);
-			tree->insert(a);
+			//a->newAttack(a->triedAttack(), Containers::Attack_table[a->getAtKey()]);
 			std::cout << "Attack Added" << std::endl;
 		}
 	}
@@ -399,8 +395,7 @@ int Movement::attack(WorldObj* obj) {
 			}
 			if (a->second->updateDuration()==false) {
 				if (a->second->getKeep()==false) {
-					//Containers::Attack_table.erase(a);
-					a->second->setPause(-2);
+					manager->createTaskWithParams("Del_Attack", "MODIFY_POOL", a->first,0,0,true);
 				}
 				else {
 					a->second->setPause(-1);
