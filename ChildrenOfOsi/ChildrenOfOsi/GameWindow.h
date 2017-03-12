@@ -11,7 +11,9 @@
 #include <exception>
 #include <fstream>
 #include <iostream>
+#include <map>
 #include <string>
+#include <unordered_map>
 #include <vector>
 
 #include <glm/glm.hpp>
@@ -37,7 +39,7 @@ namespace osi
     GLuint textureId;   // ID handle for the texture
     glm::ivec2 size;    // Dimensions of the glyph
     glm::ivec2 bearing; // Offset from baseline to left, top of glyph
-    GLuint advance;     // Complete horizontal offset to next glyph
+    FT_Pos advance;     // Complete horizontal offset to next glyph
   };
 
   struct GameWindow
@@ -65,17 +67,15 @@ namespace osi
     static void drawText(const std::string&, const std::string&, float, float, float, float, glm::ivec3);
     static void refresh();
 
-	static void RenderText(std::string text, GLfloat x, GLfloat y, GLfloat scale, glm::vec3 color);
+    static void RenderText(std::string text, GLfloat x, GLfloat y, GLfloat scale, glm::vec3 color);
 
     private:
-	static Shader* s;
     static const std::string STD_VERTEX_SHADER_PATH;
     static const std::string STD_FRAGMENT_SHADER_PATH;
     static const std::string FONT_VERTEX_SHADER_PATH;
     static const std::string FONT_FRAGMENT_SHADER_PATH;
 
     static GLFWmonitor *primaryMonitor;
-
     static int monitorWidthPx, monitorHeightPx;
     static int windowWidthPx, windowHeightPx;
     static double dpScaleWidth, dpScaleHeight;
@@ -88,7 +88,7 @@ namespace osi
     static GLuint fontVAO;
     static GLuint fontVBO;
 
-    // static Shader fontShader;
+    static Shader* s;
     static GLuint stdShaderProgramId;
     static GLuint fontShaderProgramId;
 
