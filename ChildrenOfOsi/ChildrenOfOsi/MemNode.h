@@ -1,6 +1,7 @@
 #pragma once
 #include "common.h"
 
+
 class MemNode
 {
 
@@ -8,6 +9,7 @@ private:
 	MemNode* next;
 	bool is_available = true ;
 	void* block_pointer = NULL;
+	std::string unique_string = "";
 
 public:
 
@@ -21,6 +23,8 @@ public:
 	void setAvailability(bool avail);
 	void* getBlockPointer();
 	void setBlockPointer(void* ptr);
+	std::string getUniqueString();
+	void setUniqueString(std::string str);
 
 };
 

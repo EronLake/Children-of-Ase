@@ -28,8 +28,8 @@ public:
 	void destroy_pool(MemoryPool* p);
 	MemoryPool* create_pool(size_t sizeInBytes);
 	void destroy_MemNode_list(MemNode* head_ptr);
-	MemNode* make_Available(MemNode* head_ptr, MemoryPool* p, size_t node_number);
-	void* find_available_block(MemNode* head_ptr);
+	MemNode* make_Available(MemNode* head_ptr, MemoryPool* p, std::string key);
+	void* find_available_block(MemNode* head_ptr, std::string str);
 
 };
 

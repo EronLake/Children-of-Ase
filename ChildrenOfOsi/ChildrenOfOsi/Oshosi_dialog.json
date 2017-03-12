@@ -1,0 +1,325 @@
+{
+	"Greeting": {
+		"1": "Hmm, it seems a nobody wants my attention!",
+		"2": "What does an untrained greenhorn like you want with me?",
+		"3": "Just finished training, so I guess I can chat for a bit.",
+		"4": "I can see you are well trained. I will lend you my ear.",
+		"5": "I have heard much of your strength! If there is any way I can help you, name it!"
+	},
+
+	"Farewell": {
+		"1": "Away with you! You clearly no nothing of the hunt",
+		"2": "I won't be so quick to speak with you again next time if you don't get stronger.",
+		"3": "Goodbye young warrior.",
+		"4": "I look forward to our next encounter.",
+		"5": "We should train again sometime my good friend. Until then."
+	},
+
+	"Ask_About_Origin": {
+		"3": "I am a hero of the mountain village."
+	},
+
+	"Ask_Name": {
+		"3": "I am Oshosi.",
+		"4": "They call me Oshosi. I am a fearless hunter with an eye for talent and I can tell you aren't lacking in that area."
+	},
+
+	"Ask_About_Yemoja": {
+		"1": "She is the weakling hero of the oasis village that only knows how to defend.",
+		"2": "She is so naive, but she has kept the oasis village safe.",
+		"3": "She is so naive, but she has kept the oasis village safe.",
+		"4": "Yemoja is the kind and caring hero of the oasis village.",
+		"5": "Yemoja is the beautiful oasis village hero whose defense is boundless."
+	},
+
+	"Ask_About_Ogun": {
+		"1": "That man is as arrogant and ruthless as they come.",
+		"2": "His ego far outweighs his strength.",
+		"3": "He is the hero of the iron fortress to the north.",
+		"4": "He knows a thing or two about the hunt and his strength is vast.",
+		"5": "He is a powerful iron master and the only one that could best me in a hunt."
+	},
+
+	"Ask_About_Oya": {
+		"1": "She knows nothing of the world and her jungle home ",
+		"2": "She feins wisdom, but she is actually foolish.",
+		"3":
+		"4":
+		"5":
+	},
+
+	"Ask_About_Memories": {
+		"1": "Hello",
+		"2": "Greetings",
+		"3":
+		"4":
+		"5":
+	},
+
+	"Ask_About_Specific_Events": {
+		"1": "Hello",
+		"2": "Greetings",
+		"3":
+		"4":
+		"5":
+	},
+
+	"Ask_About_Possible_Actions": {
+		"1": "Hello",
+		"2": "Greetings",
+		"3":
+		"4":
+		"5":
+	},
+
+	"Ask_About_Relationships": {
+		"1": "Hello",
+		"2": "Greetings",
+		"3":
+		"4":
+		"5":
+	},
+
+	"Ask_To_Form_Alliance": {
+		"1": "Hello",
+		"2": "Greetings",
+		"3":
+		"4":
+		"5":
+	},
+
+    "Move_To_Conquer": {
+		"1": "Hello",
+		"2": "Greetings",
+		"3":
+		"4":
+		"5":
+	},
+
+    "Move_To_Alliance": {
+		"1": "Hello",
+		"2": "Greetings",
+		"3":
+		"4":
+		"5":
+	},
+
+	"Move_To_Revolt": {
+		"1": "Hello",
+		"2": "Greetings",
+		"3":
+		"4":
+		"5":
+	},
+
+	"Move_To_Destroy": {
+		"1": "Hello",
+		"2": "Greetings",
+		"3":
+		"4":
+		"5":
+	},
+
+	"Duel": {
+		"1": "Hello",
+		"2": "Greetings",
+		"3":
+		"4":
+		"5":
+	},
+
+	"Spar": {
+		"1": "Hello",
+		"2": "Greetings",
+		"3":
+		"4":
+		"5":
+	},
+
+	"Bribe": {
+		"1": "Hello",
+		"2": "Greetings",
+		"3":
+		"4":
+		"5":
+	},
+
+	"Ask_To_Join_Party": {
+		"1": "Hello",
+		"2": "Greetings",
+		"3":
+		"4":
+		"5":
+	},
+
+	"Compliment": {
+		"1": "Hello",
+		"2": "Greetings",
+		"3":
+		"4":
+		"5":
+	},
+
+	"Grovel": {
+		"1": "Hello",
+		"2": "Greetings",
+		"3":
+		"4":
+		"5":
+	},
+
+	"Move_To_Spy": {
+		"1": "Hello",
+		"2": "Greetings",
+		"3":
+		"4":
+		"5":
+	},
+
+	"Move_To_Training": {
+		"1": "Hello",
+		"2": "Greetings",
+		"3":
+		"4":
+		"5":
+	},
+
+	"Request_Teaching": {
+		"1": "Hello",
+		"2": "Greetings",
+		"3":
+		"4":
+		"5":
+	},
+
+	"Offer_Teaching": {
+		"1": "Hello",
+		"2": "Greetings",
+		"3":
+		"4":
+		"5":
+	},
+
+	"Boast": {
+		"1": "Hello",
+		"2": "Greetings",
+		"3":
+		"4":
+		"5":
+	},
+
+	"Intimidate": {
+		"1": "Hello",
+		"2": "Greetings",
+		"3":
+		"4":
+		"5":
+	},
+
+	"Insult": {
+		"1": "Hello",
+		"2": "Greetings",
+		"3":
+		"4":
+		"5":
+	},
+
+	"Extra_Dialogue": {
+		"1": "I have to admit I am impressed that you fared the harshness of the savannah and made it to our Village in one piece",
+		"2": "It is not often we find ourselves having visitors in this village, and it is even rarer that we know nothing about our guests",
+		"3": "I welcome you if you stand before me with peaceful intentions. Just know that if you plan on harming the people of this village or myself, it is the last mistake you will ever make"
+	},
+
+	"Introduction": {
+		"1": "My name is",
+		"2": "My people call me",
+		"3": "I am known as"
+	},
+
+	"Refute_Question": {
+		"1": "I do not see any reason why I should tell you that",
+		"2": "I know too little about you to say that",
+		"3": "I need to know you better before I tell you that"
+	},
+
+	"Name_1": {
+		"1": "Yemoja"
+	},
+
+	"Ask_Name": {
+		"1": "What do you call yourself",
+		"2": "Now, who are you",
+		"3": "What do people call you"
+	},
+
+	"Ask_Reason": {
+		"1": "Why are you here before me",
+		"2": "Do  you have a reason to be here",
+		"3": "What are your intentions"
+	},
+
+	"Ask_Origin": {
+		"1": "Where are you from",
+		"2": "Which village do you come from",
+		"3": "Where do you come from"
+	},
+
+	"Friend_Reason": {
+		"1": "I am glad to hear that you approach me with friendly intentions",
+		"2": "I am pleased that you are willing to cooperate with my village and I",
+		"3": "I hope we can remain friendly in the future"
+	},
+
+	"Bad_Reason": {
+		"1": "I am  disappointed that you are here for that",
+		"2": "Such a shame. I was hoping we could be allies",
+		"3": "You should tread very carefully with your wordsfrom now on, friend"
+	},
+
+	"Response_Origin": {
+		"1": "So you are not from around here, interesting",
+		"2": "You have walked very far to get here then",
+		"3": "I'm suprised you have traveled so far"
+	},
+
+	"Identifier": {
+		"1": "Stranger",
+		"2": "Traveler"
+	},
+
+	"Response_Name": {
+		"1": "So you are known as",
+		"2": "Nice to meet you",
+		"3": "I am pleased to make your acquaintance"
+	},
+
+	"Name_2": {
+		"1": "Shango"
+	},
+
+	"Good_Intentions": {
+		"1": "I hope we get along",
+		"2": "You should introduce yourself to the people of the village"
+	},
+
+	"Village_1": {
+		"1": "Oasis Village"
+	},
+
+	"Village_Response": {
+		"1": "You are in our",
+		"2": "This is our"
+	},
+
+	"Familiar_Greet": {
+		"1": "Good to see you",
+		"2": "I hope life is treating you well",
+		"3": "It seems we cross paths yet again"
+	},
+
+	"Question_Denied": {
+		"1": "I see you don't want to cooperate",
+		"2": "I feel like it would be in both our interests if you would tell me",
+		"3": "I must ask you to reconsider answering me"
+	}
+}

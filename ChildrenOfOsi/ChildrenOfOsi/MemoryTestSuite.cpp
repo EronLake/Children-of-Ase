@@ -1143,13 +1143,14 @@ bool MemoryTestSuite::destroy_MemNode_list_test()
 
 bool MemoryTestSuite::make_Available_test()
 {
+	std::string key = "";
 	bool pass = true;
 
 	MemoryHelper* test_memory_helper = new MemoryHelper();
 	MemoryPool* test_pool = test_memory_helper->create_pool(4096);
 	MemNode* test_head = test_memory_helper->init_pool(test_pool, 32);
 
-	test_memory_helper->make_Available(test_head, test_pool, 4096 / 32);
+	test_memory_helper->make_Available(test_head, test_pool, key);
 
 	test_pool->next = (char*)test_head->getBlockPointer();
 	while (test_pool->next != test_pool->end)
@@ -1171,12 +1172,13 @@ bool MemoryTestSuite::make_Available_test()
 }
 bool MemoryTestSuite::find_available_block_test()
 {
+	std::string key = "";
 	bool pass = true;
-
+	
 	MemoryHelper* test_memory_helper = new MemoryHelper();
 	MemoryPool* test_pool = test_memory_helper->create_pool(4096);
 
-	void* test_block = test_memory_helper->find_available_block(memManager::hero_head);
+	void* test_block = test_memory_helper->find_available_block(memManager::hero_head, key);
 
 	if (test_block == NULL)
 	{
