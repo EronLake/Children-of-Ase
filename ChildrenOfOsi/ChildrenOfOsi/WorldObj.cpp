@@ -175,9 +175,9 @@ void WorldObj::setEvasionRadius(std::size_t _radius)
 bool WorldObj::targetIsWithinRange(Rectangle _bound) {
 
 	return (combatMoveDestination.getXloc() > _bound.getX()
-		&& combatMoveDestination.getXloc() < _bound.getX() + _bound.getWidth()
+		&& combatMoveDestination.getXloc() < (_bound.getX() + _bound.getWidth())
 		&& combatMoveDestination.getYloc() > _bound.getY()
-		&& combatMoveDestination.getYloc() < _bound.getY() + _bound.getHeight());
+		&& combatMoveDestination.getYloc() < (_bound.getY() + _bound.getHeight()));
 
 }
 
@@ -188,9 +188,11 @@ Vector2f WorldObj::getEvadeRange(WorldObj * _enemy)
 	float leftBound = _enemy->getX() - _enemy->getEvasionRadius();
 	Rectangle rangeBound(Vector2f((_enemy->getX() - _enemy->getEvasionRadius()), (_enemy->getY() - _enemy->getEvasionRadius())), 2 *_enemy->getEvasionRadius(), 2 * _enemy->getEvasionRadius());
 	if (targetIsWithinRange(rangeBound)) return combatMoveDestination;
-	float XCoord = rand() % (int)(rangeBound.getWidth() + rangeBound.getX());
-	float YCoord = rand() % (int)(rangeBound.getHeight() + rangeBound.getY());
+
+	float XCoord = rand() % (int)rangeBound.getWidth() + (int)rangeBound.getX();
+	float YCoord = rand() % (int)rangeBound.getHeight() + (int)rangeBound.getY();
 	combatMoveDestination = Vector2f(XCoord, YCoord);
+
 	return combatMoveDestination;
 }
 

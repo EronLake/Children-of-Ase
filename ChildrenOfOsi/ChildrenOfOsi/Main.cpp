@@ -94,15 +94,16 @@ int main() {
 		QuadTree* collideTree = new QuadTree(0, screen);
 
 		/************************************************************************************************TESTING*******************************************************/
-		while (1) {
-			Player* Daniel = new Player(SHANGO, Vector2f(512.0, 512.0), 150.0, 150.0);
-			Soldier* Alex = new Soldier(Vector2f(512.0 - 200.0, 512.0 - 200.0), 150.0, 150.0);
-			cout << "Alex's target location is: " << Alex->getEvadeRange(Daniel).getXloc() << ", " << Alex->getEvadeRange(Daniel).getYloc() << endl;
-			cout << "Alex's target location is COMBAT: " << Alex->getCombatMoveDestination().getXloc() << ", " << Alex->getCombatMoveDestination().getYloc() << endl;
-
-
-		}
-		//osi::GameWindow::init();
+		//Player* Daniel = new Player(SHANGO, Vector2f(512.0, 512.0), 150.0, 150.0);
+		//Soldier* Alex = new Soldier(Vector2f(512.0 - 150.0, 512.0 - 150.0), 150.0, 150.0);
+		//while (1) {
+		//	
+		//	Alex->getEvadeRange(Daniel);
+		//	cout << "COMBAT RANGE WITH GETTER IS " << Alex->getCombatMoveDestination().getXloc() << ", " << Alex->getCombatMoveDestination().getYloc() << endl;
+		//	//cout << "Alex's target location is: " << Alex->getEvadeRange(Daniel).getXloc() << ", " << Alex->getEvadeRange(Daniel).getYloc() << endl;
+		//	//cout << "Alex's target location is COMBAT: " << Alex->getCombatMoveDestination().getXloc() << ", " << Alex->getCombatMoveDestination().getYloc() << endl;
+		//}
+		osi::GameWindow::init();
 		////pauses the program for viewing
 
 		//system("PAUSE");
@@ -133,70 +134,20 @@ int main() {
 	                                   
 		//testQuadTree();
 		//ALEX_LOOP(collideTree);        
-		//GAMEPLAY_LOOP(collideTree);
+		GAMEPLAY_LOOP(collideTree);
 
 
 	return 0;
 }
 
 
-//
-//void testQuadTree()
-//{
-//	WorldObj* testrec = new WorldObj(Vector2f(0.0, 0.0), 100.0, 100.0);	//init screen
-//	WorldObj* Alex = new WorldObj(Vector2f(51.0, 51.0), 20.0, 20.0);	//init player
-//	vector<WorldObj*> recVec;	//obj vector
-//
-//	for (int i = 0; i < 100; i++) {		//init obj vec
-//		WorldObj* myRec = new WorldObj(Vector2f(rand() % 90, rand() % 90), 10.0, 10.0);
-//		recVec.push_back(myRec);
-//	}
-//	//cout << "before making tree\n";
-//
-//	QuadTree* myTree = new QuadTree(0, testrec);	//init 
-//	//cout << "after making tree\n";
-//	bool mybool = true;
-//	while (mybool) {	//tick every frame
-//		//cout << "before clear" << endl;
-//		myTree->clear();	//clear my tree
-//		//cout << "after clear" << endl;
-//		for (int i = 0; i < recVec.size(); i++) {
-//			//cout << "before insert" << endl;
-//			myTree->insert(recVec[i]);	//insert all obj into tree
-//			//cout << "after insert" << endl;
-//		}
-//		vector<WorldObj*> collidable;
-//		myTree->retrieve(collidable, Alex);	//vector now holds all collidable obj to Alex
-//		//cout << "after retrieve" << endl;
-//		//int count = 0;
-//		for (int i = 0; i < collidable.size(); i++) {
-//			if (checkCollision(collidable[i], Alex)) {
-//				cout << "collision between Alex and obj number " << i << endl;
-//				cout << "Alex width and height are " << Alex->getWidth() << ", " << Alex->getHeight() << endl;
-//				cout << "obj width and height are " << collidable[i]->getWidth() << ", " << collidable[i]->getHeight() << endl;
-//				cout << "Alex's bounds are " << Alex->getX() << ", " << Alex->getY() << endl;
-//				cout << "Obj bounds are " << collidable[i]->getX() << ", " << collidable[i]->getY() << endl;
-//			}
-//		}
-//		mybool = false;
-//	}
-//	system("PAUSE");
-//
-//}
-//
-//
-//bool checkCollision(WorldObj *recA, WorldObj *recB)
-//{
-//	bool xCollide = coordOverlap(recA->getX(), recB->getX(), recB->getX() + recB->getWidth()) || coordOverlap(recB->getX(), recA->getX(), recA->getX() + recA->getWidth());
-//	bool yCollide = coordOverlap(recA->getY(), recB->getY(), recB->getY() + recB->getHeight()) || coordOverlap(recB->getY(), recA->getY(), recA->getY() + recA->getHeight());
-//	return xCollide && yCollide;
-//}
-
 void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 {
 
 
+	//Player* Alex = new Player(SHANGO, Vector2f(4900.0, 3700.0), 40.0, 40.0);	//init player
 	Player* Alex = new Player(SHANGO, Vector2f(4900.0, 3700.0), 150.0, 150.0);	//init player
+	//Hero* otherShango = new Hero(SHANGO, Vector2f(4900.0, 3500.0), 150.0, 150.0);
 	cout << "Alex's width and height is " << Alex->getWidth() << ", " << Alex->getHeight() << endl;
 
 	vector<WorldObj*> recVec;
@@ -569,26 +520,6 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 
 	ai->graph._print();
 
-	ActionPool* poolAct = new ActionPool(Alex);
-	Alex->actionPool = poolAct;
-	Action mic = Action();
-	//mic.preconds["affAbove"] = 50;
-	mic.postconds["aff"] = 5;
-	Action mac = Action();
-	//mac.preconds["affAbove"] = 55;
-	mac.postconds["aff"] = 5;
-	mac.setOwner(Alex);
-	mac.setHero(staticRec);
-	poolAct->micro.push_back(mic);
-	poolAct->macro.push_back(mac);
-	poolAct->updateMiddle();
-	std::cout << poolAct->macro.back().getName()<< endl;
-	vector<Action> test= poolAct->getActions(staticRec,poolAct->macro.back());
-	for (int i = 0; i < test.size(); i++) {
-		int t=test[i].exeAction();
-	}
-	poolAct->macro.back().exeAction();
-
 
 	//ai->astar_search(staticRec);
 
@@ -610,6 +541,28 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	ai->astar_search(staticRec);
    // gameplay_functions->get_path(staticRec); //Generate the waypoints to the destination
 	staticRec->setMode(WANDER);
+
+	ActionPool* poolAct = new ActionPool(Alex);
+	Alex->actionPool = poolAct;
+	Action mic = Action();
+	//mic.preconds["affAbove"] = 50;
+	mic.postconds["aff"] = 5;
+	Action mac = Action();
+	//mac.preconds["affAbove"] = 55;
+	mac.postconds["aff"] = 5;
+	mac.setOwner(Alex);
+	mac.setHero(staticRec);
+	poolAct->micro.push_back(mic);
+	poolAct->macro.push_back(mac);
+	poolAct->updateMiddle();
+	std::cout << poolAct->macro.back().getName() << endl;
+	vector<Action> test = poolAct->getActions(staticRec, poolAct->macro.back());
+	for (int i = 0; i < test.size(); i++) {
+		int t = test[i].exeAction();
+	}
+	poolAct->macro.back().exeAction();
+
+
 	//osi::GameWindow::init();
 	LOG("PAST WINDOW INIT ***********************");
 	clock_t start_tick, current_ticks, delta_ticks;
