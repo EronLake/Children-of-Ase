@@ -566,7 +566,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	//mic.postconds["aff"] = 5;
 	Action mac = Action();
 	//mac.preconds["affAbove"] = 55;
-	mac.postconds["aff"] = 5;
+//	mac.postconds["aff"] = 5;
 	mac.setDoer(Alex);
 	mac.setReceiver(staticRec);
 	poolAct->micro.push_back(mic);

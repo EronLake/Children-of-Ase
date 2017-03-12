@@ -25,5 +25,8 @@ public:
 
 	static bool hero_respond(Action* act);
 
+	static void execute_train(Action* train);
+	static void execute_train_with(Action* train_with);
+
 };
 

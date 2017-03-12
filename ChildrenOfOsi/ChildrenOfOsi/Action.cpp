@@ -64,13 +64,13 @@ int Action::exeAction() {
 		int tmp;
 		for (auto i = postconds.begin(); i != postconds.end(); ++i) {
 			if (i->first.compare("aff") == 0) {
-				doer->rel[receiver->name]->addAffinity(i->second);
+//				doer->rel[receiver->name]->addAffinity(i->second);
 			}
 			else if (i->first.compare("not") == 0) {
-				doer->rel[receiver->name]->addNotoriety(i->second);
+//				doer->rel[receiver->name]->addNotoriety(i->second);
 			}
 			else if (i->first.compare("str") == 0) {
-				doer->rel[receiver->name]->addStrength(i->second);
+//				doer->rel[receiver->name]->addStrength(i->second);
 			}
 		}
 		return 1;

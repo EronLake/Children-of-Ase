@@ -40,6 +40,9 @@ public:
 	int recieverName;
 	std::string name;
 	bool operator==(const Action a) const;
+
+	int checkpoint;
+
 private:
 	//std::string name;
 	int utility;

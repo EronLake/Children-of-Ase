@@ -61,3 +61,11 @@ bool ActionHelper::hero_respond(Action* act) {
 
 	return interact;
 }
+
+void ActionHelper::execute_train(Action* train) {
+
+}
+
+void ActionHelper::execute_train_with(Action* train_with) {
+
+}
