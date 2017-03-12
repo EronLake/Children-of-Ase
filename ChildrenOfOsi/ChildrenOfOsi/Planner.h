@@ -30,7 +30,7 @@ public:
 	StateList* get_end_state_map() { return end_states; }
 	vector<Action> get_end_states();
 	MilestoneList* get_milestone_map() { return milestones; }
-	vector<Action> get_milestones_for_goal(Action goal);
+	//vector<Action> get_milestones_for_goal(Action goal);
 	vector<Action> get_milestone_frontier();
 	Action get_current_action() { return current_action; }
 	int get_current_action_value() { return current_action_value; }
@@ -56,7 +56,7 @@ private:
 	
 	int prereq_appeal(Action step, vector<std::shared_ptr<Preconditions>> priority_preconds);
 	int cost(Action step);
-	int personality_appeal(Action evaluateAction);
+
 	vector<std::shared_ptr<Preconditions>> prioritize_preconditions(Action goal);
 	int personality_appeal(Action* evaluateAction);
 

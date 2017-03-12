@@ -546,12 +546,12 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	Alex->actionPool = poolAct;
 	Action mic = Action();
 	//mic.preconds["affAbove"] = 50;
-	mic.postconds["aff"] = 5;
+	//mic.postconds["aff"] = 5;
 	Action mac = Action();
 	//mac.preconds["affAbove"] = 55;
-	mac.postconds["aff"] = 5;
-	mac.setOwner(Alex);
-	mac.setHero(staticRec);
+	//mac.postconds["aff"] = 5;
+	//mac.setOwner(Alex);
+	//mac.setHero(staticRec);
 	poolAct->micro.push_back(mic);
 	poolAct->macro.push_back(mac);
 	poolAct->updateMiddle();

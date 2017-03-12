@@ -15,7 +15,7 @@ public:
 	
 
 	unordered_map<std::string, std::shared_ptr<Preconditions>> preconds;
-	unordered_map<std::string, int> postconds;
+	unordered_map<std::string, std::shared_ptr<Postcondition>> postconds;
 
 	void setUtility(int u) { utility = u; };
 	int getUtility() { return utility; };
