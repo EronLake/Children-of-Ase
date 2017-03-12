@@ -21,6 +21,7 @@ public:
 
 	Task(std::string name, std::string status, std::string _type);
 	Task(std::string name, std::string status, std::string _type, WorldObj* _objToUpdate);
+	Task(std::string name, std::string status, std::string _type, WorldObj* _objToUpdate, int num);
 	Task(std::string _name, std::string _status, std::string _type, std::string key, float x, float y, bool col);
 	Task(std::string _name, std::string _status, std::string _type, std::string key, float x, float y, bool col, int d);
 	Task(std::string name, std::string status, std::string _type, WorldObj* _objToUpdate, std::string key, float x, float y, bool col);

@@ -87,9 +87,7 @@ void Soldier::newAttack(int i, Attack* a)
 	}
 }
 
-void Soldier::meleeAttack(Attack* a) {
-	*a = *melee;
-	melee = a;
+void Soldier::meleeAttack() {
 	melee->addHit(this);
 	float x= body[0].getX();
 	float y= body[0].getY();

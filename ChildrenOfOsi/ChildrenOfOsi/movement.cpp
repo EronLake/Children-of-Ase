@@ -356,14 +356,10 @@ int Movement::melee(WorldObj* obj) {
 }
 
 int Movement::specialAttack(WorldObj* obj) {
-	for (int i = 0; i < 100;i++) {
-		std::cout << "Object Type: " << obj->getType() << std::endl;
-	}
-	if (obj->getType() == -1) {
-		Attack* a = CheckClass::isAttack(obj);
+	if (obj->getType() >= 3) {
+		Soldier* a = CheckClass::isSoldier(obj);
 		if (a) {
-			//combatControl.addAttack(a);
-			tree->insert(a);
+			//a->newAttack(a->triedAttack(), Containers::Attack_table[a->getAtKey()]);
 			std::cout << "Attack Added" << std::endl;
 		}
 	}

@@ -4,6 +4,7 @@
 #include "MemoryPool.h"
 #include "memManager.h"
 #include "Containers.h"
+#include "CheckClass.h"
 
 class MemoryHelper
 {
@@ -12,6 +13,7 @@ public:
 	int store_hero(std::string key, float x, float y, bool col);
 	int store_soldier(std::string key, float x, float y, bool col);
 	int store_Attack(std::string key, float x, float y, bool col);
+	int new_Attack(WorldObj* obj, int num);
 	int store_spl_soldier(std::string key, float x, float y, bool col);
 	int store_livingObj(std::string key, float x, float y, bool col);
 	int store_worldObj(std::string key, float x, float y, bool col);

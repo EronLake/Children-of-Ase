@@ -76,6 +76,16 @@ int MemoryHelper::store_Attack(std::string key, float x, float y, bool col) {
 	return 0;
 }
 
+int MemoryHelper::new_Attack(WorldObj* s, int i) {
+	if (s->getType() >= 3) {
+		Soldier* obj = CheckClass::isSoldier(s);
+		Attack* p = new(find_available_block(memManager::Attack_head)) Attack(0, 0, true);
+		Containers::add_Attack(obj->getAtKey(), p);
+		obj->newAttack(i, p);
+	}
+	return 0;
+}
+
 int MemoryHelper::store_npc(std::string key, float x, float y, bool col) {
 	NPC* npc = new(find_available_block(memManager::npc_head, key)) NPC(x, y, col);
 	Containers::add_npc(key, npc);
