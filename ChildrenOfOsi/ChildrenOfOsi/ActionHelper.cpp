@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "ActionHelper.h"
 
+AIController* ActionHelper::ai = nullptr;
 
 ActionHelper::ActionHelper()
 {
@@ -16,8 +17,8 @@ ActionHelper::~ActionHelper()
 void ActionHelper::create_memory(Action* action) {
 	int type = 0;           
 	vector<NPC*> people;
-	people.push_back(action->getOwner());/*needs to be changed to did*/
-	people.push_back(action->getHero());
+	people.push_back(action->getDoer());/*needs to be changed to did*/
+	people.push_back(action->getReceiver());
 	people.push_back(action->getOwner());
 
 	string category;         //ACTIONS: fail, success, incomplete                            FACTS: fact type (i.e. name, origin, etc)
@@ -32,4 +33,31 @@ void ActionHelper::create_memory(Action* action) {
 
 	//Memory(int t, int frames, vector<NPC*> p, string cat="",string cont="",string where="",int why=-1, int when=-1);
 
+}
+
+//For actions that require the receiver to decide
+//whether or not to stop their current_action and participate
+//
+//Compares the given action's value to the receiver's current_action_value
+//to determine whether the receiver will accept the interaction
+bool ActionHelper::hero_respond(Action* act) {
+	bool interact = true;
+
+	int doer = act->getDoer()->name;
+	int responder = act->getReceiver()->name;
+
+	Planner* hero_planner = ai->hero_planners[responder];
+
+	int value = hero_planner->value_of(act);
+
+	if (value < 0) {  //This action's cost outweights its benefit, no thanks
+		interact = false;
+	}
+	//The value of my current action is at least twice as big as this action's value. No thanks
+	else if (value < (hero_planner->get_current_action_value() - value)) 
+	{
+		interact = true;
+	}
+
+	return interact;
 }

@@ -1,7 +1,9 @@
+#pragma once
 #include "Hero.h"
 #include "Planner.h"
 #include "Containers.h"
 #include "ActionPool.h"
+
 class AIController {
 private:
 
@@ -9,11 +11,13 @@ private:
 	//planners[3] = oya
 	//planners[4] = oshosi
 	//planners[5] = ogun
-	unordered_map<int, Planner*> hero_planners;
+	
 
 public:
 	AIController();
 	~AIController();
+
+	unordered_map<int, Planner*> hero_planners;
 
 	Hero* get_hero_object(int h);
 

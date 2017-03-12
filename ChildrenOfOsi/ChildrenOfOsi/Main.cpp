@@ -53,11 +53,11 @@
 
 #include "ObjConfig.h"
 #include "ActionPool.h"
-
+#include "ActionHelper.h"
+//class ActionHelper;
 #include "Line.h"
 
 using namespace std;
-
 
 
 //void testQuadTree();
@@ -77,6 +77,9 @@ void GAMEPLAY_LOOP(QuadTree* _Quadtree);
 void ANDREWS_TEST();
 void PHYSICS_TEST();
 bool lineCollision(Line l1, Line l2);
+
+//AIController* AiController = new AIController();
+//AIController* ActionHelper::ai = AiController;
 
 int main() {
 
@@ -174,6 +177,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	AIManager* AIM = new AIManager(mLog, tBuffer, ai);
 
 	AIController* AiController = new AIController();
+	ActionHelper::ai = AiController;
 
 	CombatController* combatControl = new CombatController();
 
@@ -551,8 +555,8 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	Action mac = Action();
 	//mac.preconds["affAbove"] = 55;
 	mac.postconds["aff"] = 5;
-	mac.setOwner(Alex);
-	mac.setHero(staticRec);
+	mac.setDoer(Alex);
+	mac.setReceiver(staticRec);
 	poolAct->micro.push_back(mic);
 	poolAct->macro.push_back(mac);
 	poolAct->updateMiddle();

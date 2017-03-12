@@ -4,6 +4,7 @@
 #include "Conditions.h"
 
 #include "ActionPool.h"
+
 typedef unordered_map<int, Action> StateList;
 typedef unordered_map<Action, vector<Action>> MilestoneList;
 
@@ -30,7 +31,7 @@ public:
 	StateList* get_end_state_map() { return end_states; }
 	vector<Action> get_end_states();
 	MilestoneList* get_milestone_map() { return milestones; }
-	vector<Action> get_milestones_for_goal(Action goal);
+	//vector<Action> get_milestones_for_goal(Action goal);
 	vector<Action> get_milestone_frontier();
 	Action get_current_action() { return current_action; }
 	int get_current_action_value() { return current_action_value; }
@@ -39,6 +40,8 @@ public:
 	void add_milestone(Action goal, Action milestone);
 
 	void generate_milestones(Action state, Action goal);
+
+	int value_of(Action* action);
 
 private:
 	Hero* evaluateHero;
