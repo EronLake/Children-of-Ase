@@ -146,11 +146,6 @@
     <ClCompile Include="Attack.cpp">
       <Filter>Game Objects</Filter>
     </ClCompile>
-    <ClCompile Include="Relationship.cpp" />
-    <ClCompile Include="ActionPool.cpp" />
-    <ClCompile Include="Alliance.cpp" />
-    <ClCompile Include="War.cpp" />
-    <ClCompile Include="TextObj.cpp" />
     <ClCompile Include="Memory.cpp">
       <Filter>AI</Filter>
     </ClCompile>
@@ -163,11 +158,6 @@
     <ClCompile Include="AIController.cpp">
       <Filter>AI</Filter>
     </ClCompile>
-    <ClCompile Include="Conditions.cpp">
-      <Filter>AI</Filter>
-    </ClCompile>
-    <ClCompile Include="Action.cpp" />
-    <ClCompile Include="CombatController.cpp" />
     <ClCompile Include="Line.cpp">
       <Filter>Physics</Filter>
     </ClCompile>
@@ -180,7 +170,36 @@
     <ClCompile Include="Village.cpp">
       <Filter>Game Objects</Filter>
     </ClCompile>
-    <ClCompile Include="Party.cpp" />
+    <ClCompile Include="Conditions.cpp">
+      <Filter>AI\Actions</Filter>
+    </ClCompile>
+    <ClCompile Include="Action.cpp">
+      <Filter>AI\Actions</Filter>
+    </ClCompile>
+    <ClCompile Include="ActionHelper.cpp">
+      <Filter>AI\Actions</Filter>
+    </ClCompile>
+    <ClCompile Include="ActionPool.cpp">
+      <Filter>AI\Actions</Filter>
+    </ClCompile>
+    <ClCompile Include="Alliance.cpp">
+      <Filter>AI\Relationships</Filter>
+    </ClCompile>
+    <ClCompile Include="Party.cpp">
+      <Filter>AI\Relationships</Filter>
+    </ClCompile>
+    <ClCompile Include="Relationship.cpp">
+      <Filter>AI\Relationships</Filter>
+    </ClCompile>
+    <ClCompile Include="War.cpp">
+      <Filter>AI\Relationships</Filter>
+    </ClCompile>
+    <ClCompile Include="TextObj.cpp">
+      <Filter>Dialogue</Filter>
+    </ClCompile>
+    <ClCompile Include="CombatController.cpp">
+      <Filter>AI</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AIHelper.h">
@@ -343,11 +362,6 @@
     <ClInclude Include="Attack.h">
       <Filter>Game Objects</Filter>
     </ClInclude>
-    <ClInclude Include="Relationship.h" />
-    <ClInclude Include="ActionPool.h" />
-    <ClInclude Include="Alliance.h" />
-    <ClInclude Include="War.h" />
-    <ClInclude Include="TextObj.h" />
     <ClInclude Include="Memory.h">
       <Filter>AI</Filter>
     </ClInclude>
@@ -360,14 +374,9 @@
     <ClInclude Include="AIController.h">
       <Filter>AI</Filter>
     </ClInclude>
-    <ClInclude Include="Conditions.h">
-      <Filter>AI</Filter>
-    </ClInclude>
-    <ClInclude Include="Action.h" />
     <ClInclude Include="Shader.h">
       <Filter>Rendering</Filter>
     </ClInclude>
-    <ClInclude Include="CombatController.h" />
     <ClInclude Include="Line.h">
       <Filter>Physics</Filter>
     </ClInclude>
@@ -380,7 +389,36 @@
     <ClInclude Include="Village.h">
       <Filter>Game Objects</Filter>
     </ClInclude>
-    <ClInclude Include="Party.h" />
+    <ClInclude Include="Conditions.h">
+      <Filter>AI\Actions</Filter>
+    </ClInclude>
+    <ClInclude Include="Action.h">
+      <Filter>AI\Actions</Filter>
+    </ClInclude>
+    <ClInclude Include="ActionHelper.h">
+      <Filter>AI\Actions</Filter>
+    </ClInclude>
+    <ClInclude Include="ActionPool.h">
+      <Filter>AI\Actions</Filter>
+    </ClInclude>
+    <ClInclude Include="Alliance.h">
+      <Filter>AI\Relationships</Filter>
+    </ClInclude>
+    <ClInclude Include="Party.h">
+      <Filter>AI\Relationships</Filter>
+    </ClInclude>
+    <ClInclude Include="Relationship.h">
+      <Filter>AI\Relationships</Filter>
+    </ClInclude>
+    <ClInclude Include="War.h">
+      <Filter>AI\Relationships</Filter>
+    </ClInclude>
+    <ClInclude Include="TextObj.h">
+      <Filter>Dialogue</Filter>
+    </ClInclude>
+    <ClInclude Include="CombatController.h">
+      <Filter>AI</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Text Include="audio_test.txt">
@@ -441,6 +479,12 @@
     </Filter>
     <Filter Include="Rendering\Shaders">
       <UniqueIdentifier>{9833d3aa-a6f5-4851-b7ad-8e4fccde265b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="AI\Actions">
+      <UniqueIdentifier>{233db740-76de-4bf9-96f8-3990718645c7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="AI\Relationships">
+      <UniqueIdentifier>{208c7dff-11a9-46ae-8f1b-2153f54d6a2b}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
