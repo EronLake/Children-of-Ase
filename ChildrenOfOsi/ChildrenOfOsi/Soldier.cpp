@@ -43,12 +43,14 @@ void Soldier::addAttackType(Attack* a) {
 void Soldier::newAttack(int i, Attack* a)
 {
 	if (cdMap[atkType[i]] == 0) {
+		std::cout << "Attack A: " << &a << std::endl;
 		Attack* p = a;
+		std::cout << "Attack P: " << &p << std::endl;
 		*p = *atkType[i];
 		float w = atkType[i]->getWidth();
 		if (w == 0)w = body[0].getWidth();
 		float h = atkType[i]->getHeight();
-		if (w == 0)w = body[0].getHeight();
+		if (h == 0)h = body[0].getHeight();
 		float x = body[0].getX();
 		float y = body[0].getY();
 		std::string d = getDirection();
@@ -75,10 +77,13 @@ void Soldier::newAttack(int i, Attack* a)
 		p->setWidth(w);
 		p->setHeight(h);
 		p->setDirection(d);
+		p->setPause(18);
+		p->setKeep(false);
 		cdMap[atkType[i]] = atkType[i]->getCoolDown();
 		cool = false;
 		cdTime = cdTotal;
 		instances++;
+		if (instances == 99)instances = 0;
 	}
 }
 
@@ -89,7 +94,7 @@ void Soldier::meleeAttack(Attack* a) {
 	float x= body[0].getX();
 	float y= body[0].getY();
 	melee->setDuration(5);
-	melee->setPause(13);
+	melee->setPause(18);
 	std::string d = getDirection();
 	if (d.compare("UP")==0) {
 		y= y-(melee->getHeight()+1);
@@ -127,4 +132,8 @@ void Soldier::updateCD() {
 			i->second--;
 		}
 	}
+}
+
+bool Soldier::getCool(int c) {
+	return (cool && (cdMap[atkType[c]]==0));
 }

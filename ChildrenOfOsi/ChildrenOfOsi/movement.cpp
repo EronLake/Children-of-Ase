@@ -377,22 +377,12 @@ int Movement::attack(WorldObj* obj) {
 		//std::cout << "Attack Exists" << std::endl;
 		if (a->second->getPause() == 0) {
 			a->second->move();
-			if (!a->second->updateDuration()) {
-				if (!a->second->getKeep()) {
-					Containers::Attack_table.erase(a);
-				}
-				else {
-					a->second->setPause(-1);
-				}
-			}
-		}
-		else {
+		} else {
 			a->second->updatePause();
 			std::cout << "Pause: " << a->second->getPause() << std::endl;
 		}
 		if (a->second->getPause() == 0) {
-			manager->createTaskWithObj("Sprite_Update", "DRAW", a->second);
-			//std::cout << "Attack Collidable" << std::endl;
+			std::cout << "Attack Collidable" << std::endl;
 			for (int i = 0; i < objVec.size(); i++) {
 				if (objVec[i]->getType() >= 2) {
 					LivingObj* liv = CheckClass::isLiving(objVec[i]);
@@ -400,10 +390,20 @@ int Movement::attack(WorldObj* obj) {
 						if (collision(a->second, liv)) {
 							std::cout << "Player hit " << liv->getName() << std::endl;
 							a->second->Hit(liv);
+							if (a->second->getDestroy())a->second->setDuration(0);
 							manager->createTaskWithObj("Hurt", "DRAW", liv);
 							std::cout << liv->getName() << "'s health is now " << liv->getHealth() << std::endl;
 						}
 					}
+				}
+			}
+			if (a->second->updateDuration()==false) {
+				if (a->second->getKeep()==false) {
+					//Containers::Attack_table.erase(a);
+					a->second->setPause(-2);
+				}
+				else {
+					a->second->setPause(-1);
 				}
 			}
 		}
