@@ -129,8 +129,8 @@ MemNode* MemoryHelper::make_Available(MemNode* head_ptr, MemoryPool* p, std::str
 			h->setAvailability(true);
 			return h;
 		}
-		if(h->hasNext())
-		    h = h->getNext();
+		//if(h->hasNext())
+		h = h->getNext();
 
 	}
 	//h->setAvailability(true);
