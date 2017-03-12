@@ -47,6 +47,7 @@ memManager::memManager(MessageLog* _mLog, TaskBuffer* _tBuffer)
 	task_map["Add_Spl_Soldier"] = &MemoryHelper::store_spl_soldier;
 	task_map["Add_WorldObj"] = &MemoryHelper::store_worldObj;
 	task_map["Add_Texture"] = &MemoryHelper::store_texture;
+	task_map["Del_Attack"] = &MemoryHelper::del_Attack;
 
 	LOG("memManager Object Constructed");
 	

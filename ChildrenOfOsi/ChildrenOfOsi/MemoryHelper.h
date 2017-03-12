@@ -19,6 +19,7 @@ public:
 	int store_worldObj(std::string key, float x, float y, bool col);
 	int store_npc(std::string key, float x, float y, bool col);
 	int store_texture(std::string key, float x, float y, bool col);
+	int del_Attack(std::string key, float x, float y, bool col);
 
 	MemoryHelper::MemoryHelper();
 	MemoryHelper::~MemoryHelper();

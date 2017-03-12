@@ -395,8 +395,7 @@ int Movement::attack(WorldObj* obj) {
 			}
 			if (a->second->updateDuration()==false) {
 				if (a->second->getKeep()==false) {
-					//Containers::Attack_table.erase(a);
-					a->second->setPause(-2);
+					manager->createTaskWithParams("Del_Attack", "MODIFY_POOL", a->first,0,0,true);
 				}
 				else {
 					a->second->setPause(-1);

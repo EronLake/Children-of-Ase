@@ -79,7 +79,7 @@ int MemoryHelper::store_Attack(std::string key, float x, float y, bool col) {
 int MemoryHelper::new_Attack(WorldObj* s, int i) {
 	if (s->getType() >= 3) {
 		Soldier* obj = CheckClass::isSoldier(s);
-		Attack* p = new(find_available_block(memManager::Attack_head)) Attack(0, 0, true);
+		Attack* p = new(find_available_block(memManager::Attack_head, obj->getAtKey())) Attack(0, 0, true);
 		Containers::add_Attack(obj->getAtKey(), p);
 		obj->newAttack(i, p);
 	}
@@ -102,7 +102,11 @@ int MemoryHelper::store_texture(std::string key, float x, float y, bool col) {
 	return 0;
 }
 
-
+int MemoryHelper::del_Attack(std::string key, float x, float y, bool col) {
+	make_Available(memManager::Attack_head, memManager::Attack_pool, key);
+	Containers::Attack_table.erase(Containers::Attack_table.find(key));
+	return 0;
+}
 /////////////////////////////////////////
 /*Stuff that was originally in Main*/
 /////////////////////////////////////////
