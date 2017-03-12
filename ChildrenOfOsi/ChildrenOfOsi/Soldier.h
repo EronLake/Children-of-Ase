@@ -34,6 +34,7 @@ public:
 	int timeCD() { return cdTime; };
 	void setCool(bool c) { cool = c; };
 	bool getCool() { return cool; };
+	bool getCool(int c);
 	void setParty(Party* p) { party=p; };
 	Party* getParty() { return party; };
 	int getInstances() { return instances; };

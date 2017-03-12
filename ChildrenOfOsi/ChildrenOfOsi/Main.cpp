@@ -243,7 +243,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	Texture* blank = new Texture();
 
 	//load sprite from a configuration file?
-	blank->setFile("Assets/Sprites/blank.png", 1);
+	blank->setFile("Assets/Sprites/blank1.png", 1);
 	objTexture->setFile("Assets/Sprites/YemojasHouse.png",1);
 
 	playerTexture->setFile("Assets/Sprites/ShangoForwardIdle.png",22);
@@ -320,6 +320,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	tBuffer->run();
 	Alex->melee = Containers::Attack_table[Alex->getKey()];
 	Alex->melee->setDmg(10);
+	Alex->melee->setSpeed(5);
 	Alex->melee->setCoolDown(1000);
 	Alex->melee->setPause(-1);
 	Alex->melee->setDestroy(false);
@@ -330,13 +331,13 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	rockThrow->setDmg(5);
 	rockThrow->setSpeed(10);
 	rockThrow->setDestroy(true);
-	rockThrow->setDuration(1000);
+	rockThrow->setDuration(248);
 	rockThrow->setCoolDown(124);
 	rockThrow->setPause(0);
 	rockThrow->sprite.setTexture(rockTex);
 	Alex->addAttackType(rockThrow);
 	//Alex->melee->sprite.setTexture(blank);
-	Alex->melee->sprite.setTexture(upHurtTex);
+	Alex->melee->sprite.setTexture(blank);
 	DialogueController::setPlayer(Alex);
 	//vector<WorldObj*> recVec;
 
@@ -575,9 +576,6 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 		start_tick = clock();
 		_QuadTree->clear();
 		Alex->updateCD();
-		for (auto i = Containers::Attack_table.begin(); i != Containers::Attack_table.begin(); ++i) {
-			if (i->second->getPause()==0)recVec.push_back(i->second);
-		}
 		for (int i = 0; i < recVec.size(); i++) {
 			_QuadTree->insert(recVec[i]);	//insert all obj into tree
 	
