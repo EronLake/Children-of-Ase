@@ -126,14 +126,24 @@ void Input::InputCheck()
 					}
 				}
 			}
-		}
-		if (R) {
+		} else if (R) {
 			if (player->getType() == 6) {
 				Player* t = CheckClass::isPlayer(player);
 				if (t) {
 					if (t->getCool(0)) {
 						std::cout << "Pressed R" << std::endl;
 						gameplay_functions->special(t,0);
+						gameplay_functions->melee(t);
+					}
+				}
+			}
+		} else if (T) {
+			if (player->getType() == 6) {
+				Player* t = CheckClass::isPlayer(player);
+				if (t) {
+					if (t->getCool(1)) {
+						std::cout << "Pressed R" << std::endl;
+						gameplay_functions->special(t, 1);
 						gameplay_functions->melee(t);
 					}
 				}

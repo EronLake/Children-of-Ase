@@ -61,7 +61,9 @@ public:
 	void setEvasionRadius(std::size_t _radius);
 	Vector2f getEvadeRange(WorldObj* _enemy);
 	Vector2f getCombatMoveDestination();
-	
+	void setBaseDir(int d) { baseDir = d; };
+	void setDirWithBase(int od);
+	int getBaseDir() { return baseDir; };
 
 private:
 	bool targetIsWithinRange(Rectangle _bound);
@@ -78,6 +80,7 @@ private:
 	int type; //  -1: Attack, 0: WorldObj, 1: LivingObj, 2: NPC, 3: Soldier, 4: SplSoldier, 5: Hero, 6: Player
 	int evasionRadius = 225;
 	Vector2f combatMoveDestination;
+	int baseDir;
 };
 
 

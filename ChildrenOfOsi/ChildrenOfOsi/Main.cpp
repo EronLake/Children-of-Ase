@@ -322,7 +322,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	Alex->melee->setDmg(10);
 	Alex->melee->setSpeed(5);
 	Alex->melee->setBaseDir(4);
-	Alex->melee->setCoolDown(1000);
+	Alex->melee->setCoolDown(62);
 	Alex->melee->setPause(-1);
 	Alex->melee->setDestroy(false);
 	Alex->melee->setKeep(true);
@@ -333,14 +333,25 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	rockThrow->setSpeed(10);
 	rockThrow->setDestroy(true);
 	rockThrow->setDuration(248);
-	rockThrow->setCoolDown(124);
-	rockThrow->setPause(0);
+	rockThrow->setCoolDown(120);
+	rockThrow->setPause(18);
 	rockThrow->sprite.setTexture(rockTex);
 	Alex->addAttackType(rockThrow);
 	//Alex->melee->sprite.setTexture(blank);
 	Alex->melee->sprite.setTexture(blank);
 	DialogueController::setPlayer(Alex);
 	//vector<WorldObj*> recVec;
+	Attack* spin = new Attack();
+	spin->setTurn(3);
+	spin->setDmg(7);
+	spin->setSpeed(7);
+	spin->setDestroy(true);
+	spin->setDuration(5);
+	spin->setBaseDir(6);
+	spin->setCoolDown(600);
+	spin->setPause(18);
+	spin->sprite.setTexture(blank);
+	Alex->addAttackType(spin);
 
 	vector<WorldObj*> vec;
 	//vec.push_back(&Alex->melee);
