@@ -162,6 +162,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Action.h" />
+    <ClInclude Include="ActionHelper.h" />
     <ClInclude Include="ActionPool.h" />
     <ClInclude Include="AIController.h" />
     <ClInclude Include="AIHelper.h" />
@@ -236,6 +237,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Action.cpp" />
+    <ClCompile Include="ActionHelper.cpp" />
     <ClCompile Include="ActionPool.cpp" />
     <ClCompile Include="AIController.cpp" />
     <ClCompile Include="AIHelper.cpp" />

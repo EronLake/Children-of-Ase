@@ -33,6 +33,7 @@ public:
 	void setMode(int m);
 	int getMode();
 
+
 	Vector2f destination;
 	Vector2f waypoint;
 	vector<Vector2f> waypoints;
@@ -43,7 +44,8 @@ private:
 	float diagSpeed;
 	float diagXSpeed;
 	float diagYSpeed;
-	
 	int move_mode;
+	
+
 };
 

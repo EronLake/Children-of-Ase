@@ -48,6 +48,11 @@ int RenderHelper::draw_frame(WorldObj * obj)
 	//obj->WorldObj::drawObj(camera->getX(), camera->getY());
 	//obj->WorldObj::animateObj();
 	objVec.push_back(obj);
+	for (auto i = Containers::Attack_table.begin(); i != Containers::Attack_table.end();++i) {
+		if (i->second->getPause() == 0) {
+			objVec.push_back(i->second);
+		}
+	}
 	/*for (int i = 0; i < obj->body.size(); i++) {
 		osi::GameWindow::drawSprite(obj->body[i].getX()-camera->getX(), obj->body[i].getY()-camera->getY(), obj->body[i].getWidth(), obj->body[i].getHeight(), obj->getSprite());
 	}*/
@@ -176,7 +181,6 @@ int RenderHelper::sprite_idle(WorldObj* obj) {
 
 int RenderHelper::sprite_update(WorldObj * obj)
 {
-	obj->WorldObj::drawObj(camera->getX(), camera->getY());
 	return 0;
 }
 

@@ -34,15 +34,11 @@ Attack::~Attack()
 		 if (target == hitObjs[i])return;
 	 }
 	 (*target).addHealth(-dmg);
-	 if (destroyOnCollision) {
-		 //delete this;
-	 } else {
-		 hitObjs.push_back(target);
-	 }
+	 hitObjs.push_back(target);
 }
 
  bool Attack::updateDuration() {
-	 if (duration>=0)duration--;
+	 if (duration>0)duration--;
 	 if (duration == 0) {
 		 hitObjs.clear();
 		 return false;

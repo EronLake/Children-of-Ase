@@ -93,3 +93,5 @@ int NPC::getMode()
 {
 	return move_mode;
 }
+
+
