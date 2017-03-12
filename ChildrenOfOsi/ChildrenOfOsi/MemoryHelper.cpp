@@ -124,11 +124,13 @@ MemNode* MemoryHelper::make_Available(MemNode* head_ptr, MemoryPool* p, std::str
 				h = h->getNext();
 		}
 	}*/
-	while (h->hasNext()) {
+	while (h != NULL) {
 		if (h->getUniqueString() == key) {
 			h->setAvailability(true);
 			return h;
 		}
+		if(h->hasNext())
+		    h = h->getNext();
 
 	}
 	//h->setAvailability(true);
