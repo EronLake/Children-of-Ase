@@ -53,18 +53,18 @@ void Soldier::newAttack(int i, Attack* a)
 		if (h == 0)h = body[0].getHeight();
 		float x = body[0].getX();
 		float y = body[0].getY();
-		std::string d = getDirection();
-		if (d.compare("UP")) {
+		int d = getDirection();
+		if (d == 8) {
 			y = y - (atkType[i]->getHeight() + 1);
 		}
-		else if (d.compare("DOWN") == 0) {
-			y = y + (getHeight() + 1);
+		else if (d == 2) {
+			y = y + (body[0].getHeight() + 1);
 		}
-		else if (d.compare("LEFT") == 0) {
+		else if (d == 4) {
 			x = x - (atkType[i]->getWidth() + 1);
 		}
-		else if (d.compare("RIGHT") == 0) {
-			x = x + (getWidth() + 1);
+		else if (d == 6) {
+			x = x + (body[0].getWidth() + 1);
 		}
 		p->setX(x);
 		p->setY(y);
@@ -76,7 +76,7 @@ void Soldier::newAttack(int i, Attack* a)
 		p->setSpeed(atkType[i]->getSpeed());
 		p->setWidth(w);
 		p->setHeight(h);
-		p->setDirection(d);
+		p->setDirWithBase(d);
 		p->setPause(18);
 		p->setKeep(false);
 		cdMap[atkType[i]] = atkType[i]->getCoolDown();
@@ -93,26 +93,23 @@ void Soldier::meleeAttack() {
 	float y= body[0].getY();
 	melee->setDuration(5);
 	melee->setPause(18);
-	std::string d = getDirection();
-	if (d.compare("UP")==0) {
+	int d = getDirection();
+	if (d==8) {
 		y= y-(melee->getHeight()+1);
 		x +=( melee->getSpeed()*melee->getDuration()/2);
-		melee->setDirection("LEFT");
-	} else if (d.compare("DOWN")==0) {
+	} else if (d==2) {
 		y = y+(body[0].getHeight() + 1);
 		x -= (melee->getSpeed()*melee->getDuration()/2);
-		melee->setDirection("RIGHT");
 	}
-	else if (d.compare("LEFT")==0) {
+	else if (d==4) {
 		x = x-(melee->getWidth() + 1);
 		y -= (melee->getSpeed()*melee->getDuration()/2);
-		melee->setDirection("DOWN");
 	}
-	else if (d.compare("RIGHT")==0) {
+	else if (d==6) {
 		x = x+(body[0].getWidth() + 1);
 		y += (melee->getSpeed()*melee->getDuration()/2);
-		melee->setDirection("UP");
 	}
+	melee->setDirWithBase(d);
 	melee->setX(x);
 	melee->setY(y);
 	cool = false;

@@ -52,8 +52,8 @@ public:
 	vector<Rectangle> body;
 	void offsetBody(int i, float x1, float x2, float y1, float y2);
 	void _print();
-	void setDirection(std::string d) { direction = d; };
-	std::string getDirection() { return direction; };
+	void setDirection(int d) { direction = d; };
+	int getDirection() { return direction; };
 	void setType(int t) { type = t; };
 	int getType() { return type; };
 	int getID() { return ID; };
@@ -67,7 +67,7 @@ private:
 	bool targetIsWithinRange(Rectangle _bound);
 	int ID;
 	static int idNum;
-	std::string direction;
+	int direction; // 2: Down, 4:Left, 6: Right, 8: Up Like a number pad in case we want to use diagnol
 	Vector2f loc;
 	Vector2f rotation;
 	bool collision;

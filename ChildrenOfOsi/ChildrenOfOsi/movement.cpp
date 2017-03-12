@@ -23,7 +23,7 @@ Movement::~Movement() {
 int Movement::move_up(WorldObj* obj) {
 	//get list to check collision with
 	if (obj->sprite.getLock())return 0;
-	obj->setDirection("UP");
+	obj->setDirection(8);
 	objVec.clear();
 	objVec = tree->retrieve(objVec, obj);
 
@@ -59,7 +59,7 @@ int Movement::move_up(WorldObj* obj) {
 }
 int Movement::move_up_left(WorldObj* obj) {
 	if (obj->sprite.getLock())return 0;
-	obj->setDirection("LEFT");
+	obj->setDirection(4);
 	//get list to check collision with
 	objVec.clear();
 	objVec = tree->retrieve(objVec, obj);
@@ -102,7 +102,7 @@ int Movement::move_up_left(WorldObj* obj) {
 }
 int Movement::move_up_right(WorldObj* obj) {
 	if (obj->sprite.getLock())return 0;
-	obj->setDirection("RIGHT");
+	obj->setDirection(6);
 	//get list to check collision with
 	objVec.clear();
 	objVec = tree->retrieve(objVec, obj);
@@ -145,7 +145,7 @@ int Movement::move_up_right(WorldObj* obj) {
 }
 int Movement::move_down(WorldObj* obj) {
 	if (obj->sprite.getLock())return 0;
-	obj->setDirection("DOWN");
+	obj->setDirection(2);
 	//get list to check collision with
 	objVec.clear();
 	objVec = tree->retrieve(objVec, obj);
@@ -175,7 +175,7 @@ int Movement::move_down(WorldObj* obj) {
 }
 int Movement::move_down_left(WorldObj* obj) {
 	if (obj->sprite.getLock())return 0;
-	obj->setDirection("LEFT");
+	obj->setDirection(4);
 	//get list to check collision with
 	objVec.clear();
 	objVec = tree->retrieve(objVec, obj);
@@ -219,7 +219,7 @@ int Movement::move_down_left(WorldObj* obj) {
 }
 int Movement::move_down_right(WorldObj* obj) {
 	if (obj->sprite.getLock())return 0;
-	obj->setDirection("RIGHT");
+	obj->setDirection(6);
 	//get list to check collision with
 	objVec.clear();
 	objVec = tree->retrieve(objVec, obj);
@@ -262,7 +262,7 @@ int Movement::move_down_right(WorldObj* obj) {
 }
 int Movement::move_left(WorldObj* obj) {
 	if (obj->sprite.getLock())return 0;
-	obj->setDirection("LEFT");
+	obj->setDirection(4);
 	//get list to check collision with
 	objVec.clear();
 	objVec = tree->retrieve(objVec, obj);
@@ -291,7 +291,7 @@ int Movement::move_left(WorldObj* obj) {
 }
 int Movement::move_right(WorldObj* obj) {
 	if (obj->sprite.getLock())return 0;
-	obj->setDirection("RIGHT");
+	obj->setDirection(6);
 	//get list to check collision with
 	objVec.clear();
 	objVec = tree->retrieve(objVec, obj);

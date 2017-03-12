@@ -11,6 +11,7 @@ Attack::Attack()
 	speed = 0;
 	cooldown = 62;
 	pause = 62;
+	baseDir = 8;
 }
 
 Attack::Attack(float x, float y, bool col) : WorldObj(x, y, col)
@@ -22,6 +23,7 @@ Attack::Attack(float x, float y, bool col) : WorldObj(x, y, col)
 	speed=0;
 	cooldown=62;
 	pause=62;
+	baseDir = 8;
 }
 
 Attack::~Attack()
@@ -45,18 +47,67 @@ Attack::~Attack()
 	 }
 	 return true;
  }
+
  void Attack::move() {
-	 std::string d = getDirection();
-	 if (d.compare("UP")==0) {
+	 int d = getDirection();
+	 if (d == 8) {
 		 shiftY(-speed);
 	 }
-	 else if (d.compare("DOWN") == 0) {
+	 else if (d == 2) {
 		 shiftY(speed);
 	 }
-	 else if (d.compare("LEFT") == 0) {
+	 else if (d == 4) {
 		 shiftX(-speed);
 	 }
-	 else if (d.compare("RIGHT") == 0) {
+	 else if (d == 6) {
 		 shiftX(speed);
 	 }
+ }
+
+ void Attack::setDirWithBase(int od) {
+	 if (od == 8) {
+		 if (baseDir == 2) {
+			 od = 2;
+		 }
+		 else if (baseDir == 4) {
+			 od = 4;
+		 }
+		 else if (baseDir == 6) {
+			 od = 6;
+		 }
+	 }
+	 else if (od == 2) {
+		 if (baseDir == 2) {
+			 od = 8;
+		 }
+		 else if (baseDir == 4) {
+			 od = 6;
+		 }
+		 else if (baseDir == 6) {
+			 od = 4;
+		 }
+	 }
+	 else if (od == 4) {
+		 if (baseDir == 2) {
+			 od = 6;
+		 }
+		 else if (baseDir == 4) {
+			 od = 2;
+		 }
+		 else if (baseDir == 6) {
+			 od = 8;
+		 }
+	 }
+	 else if (od == 6) {
+		 if (baseDir == 2) {
+			 od = 4;
+		 }
+		 else if (baseDir == 4) {
+			 od = 8;
+		 }
+		 else if (baseDir == 6) {
+			 od = 2;
+		 }
+	 }
+	 setDirection(od);
  }
