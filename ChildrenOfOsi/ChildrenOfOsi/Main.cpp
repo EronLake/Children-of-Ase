@@ -755,8 +755,8 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 		if (otherShango->getCurrentEnemy() != nullptr) {
 			cout << "*************************************************MOVING TO ENEMY******************************************" << endl;
 			Vector2f l= otherShango->getCurrentEnemy()->getLoc();
-			l.shiftXloc(otherShango->getCurrentEnemy()->getWidth()/4);
-			l.shiftYloc(otherShango->getCurrentEnemy()->getHeight()/4);
+			l.shiftXloc(otherShango->getCurrentEnemy()->getWidth());
+			l.shiftYloc(otherShango->getCurrentEnemy()->getHeight());
 			otherShango->waypoint = l;
 			otherShango->destination =l;
 			gameplay_functions->move_toward(otherShango);
