@@ -7,6 +7,7 @@ class Alliance
 {
 private:
 	std::vector<Village*> allies;
+	std::vector<Village*> enemies;
 
 public:
 	Alliance();
