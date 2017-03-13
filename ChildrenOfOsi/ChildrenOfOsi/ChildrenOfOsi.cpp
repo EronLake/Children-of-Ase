@@ -176,6 +176,14 @@ void ChildrenOfOsi::add_texture(std::string key, float x=0, float y=0, bool col=
 	createTaskWithParams("Add_Texture", "MODIFY_POOL", key, x, y, col);
 }
 
+void ChildrenOfOsi::add_memory(std::string key, int hero_name, int t, int frames, vector<NPC*> p, string cat, string cont, string where, int why, int when) {
+	createTaskAddMem("Add_Memory", "MODIFY_POOL", key, hero_name, t, frames, p, cat, cont, where, why, when);
+}
+
+void ChildrenOfOsi::add_action(std::string key, float x = 0, float y = 0, bool col = 0) {
+	createTaskWithParams("Add_Action", "MODIFY_POOL", key, x, y, col);
+}
+
 
 //////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////
@@ -205,6 +213,15 @@ void ChildrenOfOsi::createTaskWithParams(std::string task_name, std::string type
 	//maybe just pass in the string craeated
 	std::string task_status = "CREATED";
 	Task* new_task = new Task(task_name, task_status, type, key, x, y, col);
+	tBuffer->push(new_task);
+	mLog->logMessage(new_task);
+}
+
+void ChildrenOfOsi::createTaskAddMem(std::string task_name, std::string type, std::string key, int hero_name, int t, int frames, vector<NPC*> p, string cat, string cont, string where, int why, int when)
+{
+	//maybe just pass in the string craeated
+	std::string task_status = "CREATED";
+	Task* new_task = new Task(task_name, task_status, type, key, hero_name, t, frames, p, cat, cont, where, why,when);
 	tBuffer->push(new_task);
 	mLog->logMessage(new_task);
 }

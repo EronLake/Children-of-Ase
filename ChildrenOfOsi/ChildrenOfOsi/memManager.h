@@ -7,6 +7,9 @@
 #include "Manager.h"
 #include "MemoryPool.h"
 #include "MemNode.h"
+#include "Memory.h"
+#include "Action.h"
+
 
 class MemoryHelper;
 
@@ -16,11 +19,14 @@ private:
 
 	typedef int (MemoryHelper::*fn_ptr)(std::string,float, float, bool);
 	typedef int (MemoryHelper::*fn_ptr2)(WorldObj* obj, int num);
+	typedef int (MemoryHelper::*fn_ptr3)(std::string key, int hero_name, int mem_type, int frames, vector<NPC*> people, string cat, string cont, string where, int why, int when);
 	typedef std::map<std::string, fn_ptr> functionMapper;
 	typedef std::map<std::string, fn_ptr2> function2Mapper;
+	typedef std::map<std::string, fn_ptr3> HeroMemfunctionMapper;
 
 	functionMapper task_map;
 	function2Mapper task_map2;
+	HeroMemfunctionMapper task_map3;
 	MemoryHelper* memHelper;
 
 public:	
@@ -48,6 +54,24 @@ public:
 
 	static MemoryPool* texture_pool;
 	static MemNode* texture_head;
+
+	static MemoryPool* oya_memory_pool;
+	static MemNode* oya_memory_head;
+
+	static MemoryPool* yemoja_memory_pool;
+	static MemNode* yemoja_memory_head;
+
+	static MemoryPool* oshosi_memory_pool;
+	static MemNode* oshosi_memory_head;
+
+	static MemoryPool* ogun_memory_pool;
+	static MemNode* ogun_memory_head;
+
+	static MemoryPool* shango_memory_pool;
+	static MemNode* shango_memory_head;
+
+	static MemoryPool* action_pool;
+	static MemNode* action_head;
 
 	memManager(MessageLog* _mLog, TaskBuffer* _tBuffer);
 	~memManager();

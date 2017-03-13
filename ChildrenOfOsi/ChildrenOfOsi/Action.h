@@ -4,8 +4,6 @@
 #include "Conditions.h"
 #include <memory>
 
-
-
 class Action
 {
 	
@@ -41,12 +39,16 @@ public:
 	std::string name;
 	bool operator==(const Action a) const;
 
+	void setWhy(int w) { why = w; };
+	int getWhy() { return why; };
 	int checkpoint;
 	int current_timer;
 
 private:
 	//std::string name;
 	int utility;
+	int why;
+
 	Hero* owner;
 	Hero* receiver;
 	Hero* doer;

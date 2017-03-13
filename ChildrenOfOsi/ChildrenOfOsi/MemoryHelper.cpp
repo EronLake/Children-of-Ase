@@ -121,11 +121,72 @@ int MemoryHelper::store_npc(std::string key, float x, float y, bool col) {
 
 
 int MemoryHelper::store_texture(std::string key, float x, float y, bool col) {
-	LOG(key);
-	LOG(memManager::texture_head);
+
 	Texture* t = new(find_available_block(memManager::texture_head, key)) Texture();
 	if (t == NULL) return -1;
 	Containers::add_texture(key, t);
+	return 0;
+}
+
+int MemoryHelper::store_memory(std::string key, int hero_name, int t, int frames, vector<NPC*> p, string cat, string cont, string where, int why, int when) {
+	Memory* m;
+	
+	if (hero_name = OYA)
+	{
+		Memory* m = new(find_available_block(memManager::oya_memory_head, key)) Memory(t, frames, p, cat, cont, where, why, when);
+		if (m == NULL) return -1;
+		Containers::add_memory(key, hero_name, m);
+		return 0;
+	}
+	else if (hero_name = YEMOJA)
+	{
+		Memory* m = new(find_available_block(memManager::yemoja_memory_head, key)) Memory(t, frames, p, cat, cont, where, why, when);
+		if (m == NULL) return -1;
+		Containers::add_memory(key, hero_name, m);
+		return 0;
+
+	}
+	else if (hero_name = OSHOSI)
+	{
+		Memory* m = new(find_available_block(memManager::oshosi_memory_head, key)) Memory(t, frames, p, cat, cont, where, why, when);
+		if (m == NULL) return -1;
+		Containers::add_memory(key, hero_name, m);
+		return 0;
+
+	}
+	else if (hero_name = OGUN)
+	{
+		Memory* m = new(find_available_block(memManager::ogun_memory_head, key)) Memory(t, frames, p, cat, cont, where, why, when);
+		if (m == NULL) return -1;
+		Containers::add_memory(key, hero_name, m);
+		return 0;
+
+	}
+	else if (hero_name = SHANGO)
+	{
+		Memory* m = new(find_available_block(memManager::shango_memory_head, key)) Memory(t, frames, p, cat, cont, where, why, when);
+		if (m == NULL) return -1;
+		Containers::add_memory(key, hero_name, m);
+		return 0;
+
+	}
+	
+}
+
+int MemoryHelper::store_action(std::string key) {
+	LOG(key);
+	LOG(memManager::texture_head);
+	Action* a = new(find_available_block(memManager::action_head, key)) Action();
+	if (a == NULL) return -1;
+	
+	/*
+	a->setName(string n);
+	a->setMultipliers(int a, int k, int h, int p, int r, int e, int g);
+	a->setOwner(Hero* o);
+	setHero(Hero* h);
+	setUtility(int u);
+	*/
+	Containers::add_action(key, a);
 	return 0;
 }
 
@@ -134,6 +195,7 @@ int MemoryHelper::del_Attack(std::string key, float x, float y, bool col) {
 	Containers::Attack_table.erase(Containers::Attack_table.find(key));
 	return 0;
 }
+
 /////////////////////////////////////////
 /*Stuff that was originally in Main*/
 /////////////////////////////////////////

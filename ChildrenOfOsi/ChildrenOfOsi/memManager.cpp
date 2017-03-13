@@ -37,6 +37,24 @@ memManager::memManager(MessageLog* _mLog, TaskBuffer* _tBuffer)
 	texture_pool = memHelper->create_pool(sizeof(Texture) * 32);
 	texture_head = memHelper->init_pool(texture_pool, sizeof(Texture));
 
+	oya_memory_pool = memHelper->create_pool(sizeof(Memory) * 40);
+	oya_memory_head = memHelper->init_pool(texture_pool, sizeof(Memory));
+
+	yemoja_memory_pool = memHelper->create_pool(sizeof(Memory) * 40);
+	yemoja_memory_head = memHelper->init_pool(texture_pool, sizeof(Memory));
+
+	oshosi_memory_pool = memHelper->create_pool(sizeof(Memory) * 40);
+	oshosi_memory_head = memHelper->init_pool(texture_pool, sizeof(Memory));
+
+	ogun_memory_pool = memHelper->create_pool(sizeof(Memory) * 40);
+	ogun_memory_head = memHelper->init_pool(texture_pool, sizeof(Memory));
+
+	shango_memory_pool = memHelper->create_pool(sizeof(Memory) * 40);
+	shango_memory_head = memHelper->init_pool(texture_pool, sizeof(Memory));
+
+	action_pool = memHelper->create_pool(sizeof(Action) * 200);
+	action_head = memHelper->init_pool(texture_pool, sizeof(Action));
+
 
 	task_map["Add_Hero"] = &MemoryHelper::store_hero;
 	task_map["Add_LivingObj"] = &MemoryHelper::store_livingObj;
@@ -48,6 +66,9 @@ memManager::memManager(MessageLog* _mLog, TaskBuffer* _tBuffer)
 	task_map["Add_Spl_Soldier"] = &MemoryHelper::store_spl_soldier;
 	task_map["Add_WorldObj"] = &MemoryHelper::store_worldObj;
 	task_map["Add_Texture"] = &MemoryHelper::store_texture;
+	//adds a hero memory so uses a different function ptr map
+	task_map3["Add_Memory"] = &MemoryHelper::store_memory;
+	//task_map["Add_Action"] = &MemoryHelper::store_action;
 	task_map["Del_Attack"] = &MemoryHelper::del_Attack;
 
 	LOG("memManager Object Constructed");
@@ -81,6 +102,24 @@ memManager::~memManager()
 	memHelper->destroy_pool(texture_pool);
 	memHelper->destroy_MemNode_list(texture_head);
 
+	memHelper->destroy_pool(oya_memory_pool);
+	memHelper->destroy_MemNode_list(oya_memory_head);
+
+	memHelper->destroy_pool(yemoja_memory_pool);
+	memHelper->destroy_MemNode_list(yemoja_memory_head);
+
+	memHelper->destroy_pool(oshosi_memory_pool);
+	memHelper->destroy_MemNode_list(oshosi_memory_head);
+
+	memHelper->destroy_pool(ogun_memory_pool);
+	memHelper->destroy_MemNode_list(ogun_memory_head);
+
+	memHelper->destroy_pool(shango_memory_pool);
+	memHelper->destroy_MemNode_list(shango_memory_head);
+
+	memHelper->destroy_pool(action_pool);
+	memHelper->destroy_MemNode_list(action_head);
+
 	LOG("memManager Object Destroyed");
 
 }
@@ -95,26 +134,42 @@ void memManager::register_manager()
 void memManager::execute_task(Task* current_task)
 {
 	int result;
-	WorldObj* obj= current_task->objToUpdate;
+	WorldObj* obj = current_task->objToUpdate;
 	std::string key = current_task->key;
 	float xpos = current_task->arg1;
 	float ypos = current_task->arg2;
 	bool coll = current_task->arg3;
-	int num= current_task->arg4;
+	//also used fot the hero_number
+	int num = current_task->arg4;
+
+	int mem_type = current_task->mem_type;
+	int frames = current_task->frames;
+	vector<NPC*> people = current_task->people;
+	std::string cat = current_task->cat;
+	std::string cont = current_task->cont;
+	std::string where = current_task->where;
+	int why = current_task->why;
+	int when = current_task->when;
 //	int d = current_task->arg4;
 
 	auto it = task_map.find(current_task->name);
 	auto it2 = task_map2.find(current_task->name);
-	if (it == task_map.end() && it2 == task_map2.end()) {
+	auto it3 = task_map3.find(current_task->name);
+	if (it == task_map.end() && it2 == task_map2.end() && it3 == task_map3.end()) {
 		result = 1;
 		LOG("Error: Task '" << current_task->name << "' does not exist.");
 	}
 	else {
-		if (obj == nullptr) {
+		//check if updating an existing object
+		if (obj == nullptr && people.size() == 0) {
 			result = (memHelper->*(it->second))(key, xpos, ypos, coll);
 		}
-		else {
+		//check if adding a memory
+		else if (people.size() == 0) {
 			result = (memHelper->*(it2->second))(obj, num);
+		}
+		else {
+			result = (memHelper->*(it3->second))(key, num, mem_type,frames, people,cat,cont, where, why, when);
 		}
 	}
 
@@ -244,3 +299,21 @@ MemNode* memManager::npc_head = nullptr;
 
 MemoryPool* memManager::texture_pool = nullptr;
 MemNode* memManager::texture_head = nullptr;
+
+MemoryPool* memManager::oya_memory_pool = nullptr;
+MemNode* memManager::oya_memory_head = nullptr;
+
+MemoryPool* memManager::yemoja_memory_pool = nullptr;
+MemNode* memManager::yemoja_memory_head = nullptr;
+
+MemoryPool* memManager::oshosi_memory_pool = nullptr;
+MemNode* memManager::oshosi_memory_head = nullptr;
+
+MemoryPool* memManager::ogun_memory_pool = nullptr;
+MemNode* memManager::ogun_memory_head = nullptr;
+
+MemoryPool* memManager::shango_memory_pool = nullptr;
+MemNode* memManager::shango_memory_head = nullptr;
+
+MemoryPool* memManager::action_pool = nullptr;
+MemNode* memManager::action_head = nullptr;

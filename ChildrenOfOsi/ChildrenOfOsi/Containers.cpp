@@ -48,6 +48,36 @@ void Containers::add_texture(std::string key, Texture* value)
 	texture_table[key] = value;
 }
 
+void Containers::add_memory(std::string key, int hero_name, Memory* value)
+{
+	if (hero_name = OYA)
+	{
+		oya_memory_table[key] = value;
+	}
+	else if (hero_name = YEMOJA)
+	{
+		yemoja_memory_table[key] = value;
+	}
+	else if (hero_name = OSHOSI)
+	{
+		oshosi_memory_table[key] = value;
+	}
+	else if (hero_name = OGUN)
+	{
+		ogun_memory_table[key] = value;
+	}
+	else if (hero_name = SHANGO)
+	{
+		shango_memory_table[key] = value;
+	}
+
+}
+
+void Containers::add_action(std::string key, Action* value)
+{
+	action_table[key] = value;
+}
+
 
 //need to declare tables in global scope before other functions can use them
 //should eventually be moved to main
@@ -59,3 +89,9 @@ std::unordered_map<std::string, SplSoldier*> Containers::spl_soldier_table;
 std::unordered_map<std::string, WorldObj*> Containers::worldObj_table;
 std::unordered_map<std::string, NPC*> Containers::npc_table;
 std::unordered_map<std::string, Texture*> Containers::texture_table;
+std::unordered_map<std::string, Memory*> Containers::oya_memory_table;
+std::unordered_map<std::string, Memory*> Containers::yemoja_memory_table;
+std::unordered_map<std::string, Memory*> Containers::oshosi_memory_table;
+std::unordered_map<std::string, Memory*> Containers::ogun_memory_table;
+std::unordered_map<std::string, Memory*> Containers::shango_memory_table;
+std::unordered_map<std::string, Action*> Containers::action_table;

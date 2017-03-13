@@ -14,25 +14,52 @@ ActionHelper::~ActionHelper()
 	LOG("ActionHelper Object Destroyed");
 }
 
-void ActionHelper::create_memory(Action* action) {
+void ActionHelper::create_memory(Action* action, Hero* hero)
+{
+	std::string key = std::to_string(hero->mem_counter);
 	int type = 0;           
-	vector<NPC*> people;
+	std::vector<NPC*> people;
 	people.push_back(action->getDoer());/*needs to be changed to did*/
 	people.push_back(action->getReceiver());
 	people.push_back(action->getOwner());
 
-	string category;         //ACTIONS: fail, success, incomplete                            FACTS: fact type (i.e. name, origin, etc)
-	string content;          //ACTIONS: action name                                          FACTS: actual data (i.e. "Yemoja", "Oasis", etc)
-	string where;            //ACTIONS: where the event occured                              
-	int why;                 //ACTIONS: do-er's motivation (0=affinity, 1=strength, 2=notoriety, -1=idk)
-	int when;                //ACTIONS: when the event occured (incomplete: when it started, complete: when it completed)
-	string reason;           //ACTIONS: reason for failure or success
+	int time = 0;//int time = get world time
+	std::string category = "incomplete";
+	string where = NULL;
+	int when = -1;
+	
 
-	//int time;/ 
-
+	//string category;         //ACTIONS: fail, success, incomplete     FACTS: fact type (i.e. name, origin, etc)
+	//string content;          //ACTIONS: action name                   FACTS: actual data (i.e. "Yemoja", "Oasis", etc)
+	//string where;            //ACTIONS: where the event occured                              
+	//int why;                 //ACTIONS: do-er's motivation (0=affinity, 1=strength, 2=notoriety, -1=idk)
+	//int when;                //ACTIONS: when the event occured (incomplete: when it started, complete: when it completed)
+	//string reason;           //ACTIONS: reason for failure or success
 
 	//Memory(int t, int frames, vector<NPC*> p, string cat="",string cont="",string where="",int why=-1, int when=-1);
+	gameplay_func->add_memory(key, hero->name, type, time, people, category,action->getName(), where, action->getWhy(), when);
+	hero->mem_counter++;
 
+	if (hero->name = OYA)
+	{
+		hero->memories.push_back(Containers::oya_memory_table[key]);
+	}
+	else if (hero->name = YEMOJA)
+	{
+		hero->memories.push_back(Containers::yemoja_memory_table[key]);
+	}
+	else if (hero->name = OSHOSI)
+	{
+		hero->memories.push_back(Containers::oshosi_memory_table[key]);
+	}
+	else if (hero->name = OGUN)
+	{
+		hero->memories.push_back(Containers::ogun_memory_table[key]);
+	}
+	else if (hero->name = SHANGO)
+	{
+		hero->memories.push_back(Containers::shango_memory_table[key]);
+	}
 }
 
 //Decrement the action's timer and return its new value. 
@@ -84,7 +111,7 @@ void ActionHelper::execute_train(Action* train) {
 	switch (train->checkpoint) {
 	case 0: //Pick training location, create memory, increment checkpoint
 		train->getDoer()->destination = { 1000,1000 }; //should select from set of pre-defined, stored in Hero, or village?
-		create_memory(train);
+		create_memory(train, train->getDoer());
 		train->checkpoint++;
 		break;
 	case 1: //If destination is reached, start a timer and move to next checkpoint
@@ -113,7 +140,7 @@ void ActionHelper::execute_form_alliance(Action* form_alliance) {
 	Hero* responder = form_alliance->getReceiver();
 	switch (form_alliance->checkpoint) {
 	case 0:
-		create_memory(form_alliance);
+		create_memory(form_alliance, doer);
 		
 		form_alliance->getDoer()->destination = { 1000,1000 };
 		form_alliance->checkpoint++;
@@ -139,3 +166,5 @@ void ActionHelper::execute_form_alliance(Action* form_alliance) {
 		
 	}
 }
+
+ChildrenOfOsi* ActionHelper::gameplay_func;
