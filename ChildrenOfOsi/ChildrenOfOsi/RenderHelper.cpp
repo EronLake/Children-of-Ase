@@ -32,7 +32,7 @@ void RenderHelper::initCamera(WorldObj * player)
 	camera->setLoc(Vector2f(camX, camY));
 	camera->setWidth(cameraSize.getXloc());
 	camera->setHeight(cameraSize.getYloc());
-	cout << "Camera has coord " << camera->getX() << ", " << camera->getY() << " and width and height of " << camera->getWidth() << ", " << camera->getHeight() << endl;
+	//cout << "Camera has coord " << camera->getX() << ", " << camera->getY() << " and width and height of " << camera->getWidth() << ", " << camera->getHeight() << endl;
 
 
 }
