@@ -38,6 +38,18 @@ void WorldObj::shiftY(float dist)
 	}
 }
 
+void WorldObj::setWidth(float w)
+{
+  this->width = w;
+  this->body[0].setWidth(w);
+}
+
+void WorldObj::setHeight(float h)
+{
+  this->height = h;
+  this->body[0].setHeight(h);
+}
+
 void WorldObj::drawObj(float _x, float _y)
 {
 	osi::GameWindow::drawSprite(loc.getXloc()-_x, loc.getYloc()-_y, width, height, sprite);

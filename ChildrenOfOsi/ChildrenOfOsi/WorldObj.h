@@ -1,9 +1,11 @@
 #pragma once
 #include "stdafx.h"
 
-#include "Vector2f.h"
-#include "Sprite.h"
+#include <vector>
+
 #include "Rectangle.h"
+#include "Sprite.h"
+#include "Vector2f.h"
 
 using namespace std;
 
@@ -62,8 +64,8 @@ class WorldObj
   void setRotY(float y) { this->rotation.setYloc(y); };
   void shiftRotX(float dist) { this->rotation.shiftXloc(dist); };
   void shiftRotY(float dist) { this->rotation.shiftYloc(dist); };
-  void setWidth(float w) { this->body[0].setWidth(this->width = w); };
-  void setHeight(float h) { this->body[0].setHeight(this->height = h); };
+  void setWidth(float w);
+  void setHeight(float h);
 
   // Higher-level setter methods
   void setName(std::string n) { this->name = n; };
