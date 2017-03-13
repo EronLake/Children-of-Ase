@@ -42,6 +42,7 @@ public:
 	bool operator==(const Action a) const;
 
 	int checkpoint;
+	int current_timer;
 
 private:
 	//std::string name;
