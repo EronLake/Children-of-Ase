@@ -64,8 +64,8 @@ class WorldObj
   void setRotY(float y) { this->rotation.setYloc(y); };
   void shiftRotX(float dist) { this->rotation.shiftXloc(dist); };
   void shiftRotY(float dist) { this->rotation.shiftYloc(dist); };
-  void setWidth(float w);
-  void setHeight(float h);
+  void setWidth(float w) { this->body[0].setWidth(this->width = w); };
+  void setHeight(float h) { this->body[0].setHeight(this->height = h); };
 
   // Higher-level setter methods
   void setName(std::string n) { this->name = n; };
@@ -92,7 +92,7 @@ class WorldObj
   Sprite sprite;
   vector<Rectangle> body;
 
-  private:
+  protected:
 
   static constexpr int TYPE_ATTACK = -1;
   static constexpr int TYPE_WORLDOBJ = 0;
@@ -107,6 +107,8 @@ class WorldObj
   static constexpr int DIRECTION_DOWN = 2;
   static constexpr int DIRECTION_LEFT = 4;
   static constexpr int DIRECTION_RIGHT = 6;
+
+  private:
 
   static int idNum;
 

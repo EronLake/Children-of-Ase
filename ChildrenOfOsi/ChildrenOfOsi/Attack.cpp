@@ -26,10 +26,6 @@ Attack::Attack(float x, float y, bool col) : WorldObj(x, y, col)
 	turn = 0;
 }
 
-Attack::~Attack()
-{
-}
-
  void Attack::Hit(LivingObj *target)
 {
 	 for (int i = 0; i < hitObjs.size(); i++) {

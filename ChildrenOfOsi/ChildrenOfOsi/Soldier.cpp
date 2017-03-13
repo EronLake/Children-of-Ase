@@ -1,11 +1,10 @@
 #include "stdafx.h"
+
 #include "Soldier.h"
+
 using namespace std;
 
-
-Soldier::Soldier()
-{
-}
+Soldier::Soldier() {}
 
 Soldier::Soldier(float x, float y, bool col) :NPC(x, y, col)
 {
@@ -25,35 +24,34 @@ Soldier::Soldier(Vector2f p_topLeft, float p_width, float p_height):NPC(p_topLef
 	setType(3);
 }
 
-Soldier::~Soldier()
-{
-}
+Soldier::~Soldier() {}
 
 void Soldier::addAttackType(Attack* a) {
-	atkType.push_back(a);
-	cdMap[a] = a->getCoolDown();
+	attackTypes.push_back(a);
+	cooldownMap[a] = a->getCoolDown();
 }
 
 void Soldier::newAttack(int i, Attack* a)
 {
-	if (cdMap[atkType[i]] == 0) {
+	if (cooldownMap[attackTypes[i]] == 0) {
 		Attack* p = a;
-		*p = *atkType[i];
-		float w = atkType[i]->getWidth();
+		*p = *attackTypes[i];
+
+		float w = attackTypes[i]->getWidth();
 		if (w == 0)w = body[0].getWidth();
-		float h = atkType[i]->getHeight();
+		float h = attackTypes[i]->getHeight();
 		if (h == 0)h = body[0].getHeight();
 		float x = body[0].getX();
 		float y = body[0].getY();
 		int d = getDirection();
 		if (d == 8) {
-			y = y - (atkType[i]->getHeight() + 1);
+			y = y - (attackTypes[i]->getHeight() + 1);
 		}
 		else if (d == 2) {
 			y = y + (body[0].getHeight() + 1);
 		}
 		else if (d == 4) {
-			x = x - (atkType[i]->getWidth() + 1);
+			x = x - (attackTypes[i]->getWidth() + 1);
 		}
 		else if (d == 6) {
 			x = x + (body[0].getWidth() + 1);
@@ -62,16 +60,16 @@ void Soldier::newAttack(int i, Attack* a)
 		p->setY(y);
 		p->setCollision(true);
 		p->addHit(this);
-		p->setDmg(atkType[i]->getDmg());
-		p->setDuration(atkType[i]->getDuration());
-		p->setDestroy(atkType[i]->getDestroy());
-		p->setSpeed(atkType[i]->getSpeed());
+		p->setDmg(attackTypes[i]->getDmg());
+		p->setDuration(attackTypes[i]->getDuration());
+		p->setDestroy(attackTypes[i]->getDestroy());
+		p->setSpeed(attackTypes[i]->getSpeed());
 		p->setWidth(w);
 		p->setHeight(h);
 		p->setDirWithBase(d);
-		p->setPause(atkType[i]->getPause());
+		p->setPause(attackTypes[i]->getPause());
 		p->setKeep(false);
-		cdMap[atkType[i]] = atkType[i]->getCoolDown();
+		cooldownMap[attackTypes[i]] = attackTypes[i]->getCoolDown();
 		cool = false;
 		cdTime = cdTotal;
 		instances++;
@@ -86,7 +84,8 @@ void Soldier::meleeAttack() {
 	melee->setDuration(5);
 	melee->setPause(24);
 	int d = getDirection();
-	melee->setBaseDir(4);//shouldn't need to be done
+	melee->setBaseDir(4); // Shouldn't need to be done
+
 	if (d==8) {
 		y= y-(melee->getHeight()+1);
 		x +=( melee->getSpeed()*melee->getDuration()/2);
@@ -113,7 +112,7 @@ void Soldier::updateCD() {
 	if (cdTime > 0) { 
 		cdTime--; 
 	} else cool = true;
-	for (auto i = cdMap.begin(); i != cdMap.end(); ++i) {
+	for (auto i = cooldownMap.begin(); i != cooldownMap.end(); ++i) {
 		if (i->second >0) {
 			i->second--;
 		}
@@ -121,10 +120,39 @@ void Soldier::updateCD() {
 }
 
 bool Soldier::getCool(int c) {
-	return (cool && (cdMap[atkType[c]]==0));
+	return (cool && (cooldownMap[attackTypes[c]]==0));
 }
 
 void Soldier::resetCD(int c) {
 	cdTime = 0;
-	cdMap[atkType[c]] = 0;
+	cooldownMap[attackTypes[c]] = 0;
+}
+
+/**
+ * Returns whether this solider has any non-melee attacks remaining.
+ * Returns: true if any of this solider's attacks have a non-zero cooldown, 
+ * otherwise false
+ */
+bool Soldier::hasAttacks()
+{
+  if(this->attackTypes.empty())
+    return false;
+  else {
+    for(auto& attackCooldown : this->cooldownMap)
+      if(attackCooldown.second != 0) return true;
+    return false;
+  }
+}
+
+/**
+ * Returns the next attack which this soldier should perform at this time. 
+*/
+Attack * Soldier::nextAttack()
+{
+  if(!(this->hasAttacks()))
+    return this->melee;
+  else {
+
+    return nullptr;
+  }
 }
