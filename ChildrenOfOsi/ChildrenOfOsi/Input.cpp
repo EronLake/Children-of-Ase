@@ -57,11 +57,12 @@ void Input::InputCheck()
 	short J = GetKeyState('J') >> 15;
 	short K = GetKeyState('K') >> 15;
 	short L = GetKeyState('L') >> 15;
-	short ENTER = GetKeyState('\n') >> 15;
+	short ENTER = GetKeyState(VK_RETURN) >> 15;
 	short V = GetKeyState('V') >> 15;
 	short F = GetKeyState('F') >> 15;
 	short P = GetKeyState('P') >> 15;
 	short Z = GetKeyState('Z') >> 15;
+
 
 	if (DialogueController::getState() == 0) {
 		gameplay_functions->combat(player);
@@ -121,23 +122,29 @@ void Input::InputCheck()
 				if (t) {
 					if (t->getCool()) {
 						std::cout << "Pressed F" << std::endl;
-						gameplay_functions->add_Attack(t->getAtKey(), 0, 0, true, 10);
-						tBuffer->run();
-						t->meleeAttack(Containers::Attack_table[t->getAtKey()]);
+						t->meleeAttack();
 						gameplay_functions->melee(t);
 					}
 				}
 			}
-		}
-		if (R) {
+		} else if (R) {
 			if (player->getType() == 6) {
 				Player* t = CheckClass::isPlayer(player);
 				if (t) {
 					if (t->getCool(0)) {
 						std::cout << "Pressed R" << std::endl;
-						gameplay_functions->add_Attack(t->getAtKey(), 0, 0, true, 10);
-						tBuffer->run();
-						t->newAttack(0, Containers::Attack_table[t->getAtKey()]);
+						gameplay_functions->special(t,0);
+						gameplay_functions->melee(t);
+					}
+				}
+			}
+		} else if (T) {
+			if (player->getType() == 6) {
+				Player* t = CheckClass::isPlayer(player);
+				if (t) {
+					if (t->getCool(1)) {
+						std::cout << "Pressed R" << std::endl;
+						gameplay_functions->special(t, 1);
 						gameplay_functions->melee(t);
 					}
 				}
@@ -598,7 +605,7 @@ void Input::InputCheck()
 					std::cout << "Index: " << tmp << std::endl;
 				}
 			}
-			if (V) {
+			if (ENTER) {
 				std::cout << "ENTER" << std::endl;
 				if (DialogueController::getState() == 1) {
 					disable = true;

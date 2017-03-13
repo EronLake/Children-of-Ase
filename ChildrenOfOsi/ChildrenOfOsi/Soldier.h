@@ -27,7 +27,7 @@ public:
 	unordered_map<Attack*,int> cdMap;
 	void addAttackType(Attack* a);
 	void newAttack(int i, Attack* a);
-	void meleeAttack(Attack* a);
+	void meleeAttack();
 	void setCD(int c) { cdTotal = c; };
 	int getCD() { return cdTotal; };
 	void updateCD();
@@ -40,6 +40,8 @@ public:
 	int getInstances() { return instances; };
 	std::string getKey() { return key; };
 	std::string getAtKey() { return atkey="Soldier" + std::to_string(getID()) + "_" + std::to_string(atkType.size()) + "_" + std::to_string(instances); };
+	void resetCD(int c);
+
 private:
 	Party* party;
 	bool inCombat;

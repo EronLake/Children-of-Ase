@@ -52,8 +52,8 @@ public:
 	vector<Rectangle> body;
 	void offsetBody(int i, float x1, float x2, float y1, float y2);
 	void _print();
-	void setDirection(std::string d) { direction = d; };
-	std::string getDirection() { return direction; };
+	void setDirection(int d) { direction = d; };
+	int getDirection() { return direction; };
 	void setType(int t) { type = t; };
 	int getType() { return type; };
 	int getID() { return ID; };
@@ -61,13 +61,15 @@ public:
 	void setEvasionRadius(std::size_t _radius);
 	Vector2f getEvadeRange(WorldObj* _enemy);
 	Vector2f getCombatMoveDestination();
-	
+	void setBaseDir(int d) { baseDir = d; };
+	void setDirWithBase(int od);
+	int getBaseDir() { return baseDir; };
 
 private:
 	bool targetIsWithinRange(Rectangle _bound);
 	int ID;
 	static int idNum;
-	std::string direction;
+	int direction; // 2: Down, 4:Left, 6: Right, 8: Up Like a number pad in case we want to use diagnol
 	Vector2f loc;
 	Vector2f rotation;
 	bool collision;
@@ -78,6 +80,7 @@ private:
 	int type; //  -1: Attack, 0: WorldObj, 1: LivingObj, 2: NPC, 3: Soldier, 4: SplSoldier, 5: Hero, 6: Player
 	int evasionRadius = 225;
 	Vector2f combatMoveDestination;
+	int baseDir;
 };
 
 

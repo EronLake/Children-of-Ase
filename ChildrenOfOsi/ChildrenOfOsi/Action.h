@@ -19,11 +19,14 @@ public:
 
 	void setUtility(int u) { utility = u; };
 	int getUtility() { return utility; };
-	void setHero(Hero* h) { hero = h; recieverName = h->name; };
-	Hero* getHero() { return hero; };
+	void setReceiver(Hero* h) { receiver = h; recieverName = h->name; };
+	Hero* getReceiver() { return receiver; };
 
 	void setOwner(Hero* o) { owner = o; };//preConditionsNeeded also sets owner
 	Hero* getOwner() { return owner; };
+
+	void setDoer(Hero* d) { doer = d; };
+	Hero* getDoer() { return doer; };
 
 	vector<std::string> preConditionsNeeded(Hero* o, Hero* h);
 	int exeAction();
@@ -37,11 +40,15 @@ public:
 	int recieverName;
 	std::string name;
 	bool operator==(const Action a) const;
+
+	int checkpoint;
+
 private:
 	//std::string name;
 	int utility;
 	Hero* owner;
-	Hero* hero;
+	Hero* receiver;
+	Hero* doer;
 
 	//std::vector<RelPrerec*> rel_prerec_list;
 	//std::vector<RelAssumpPrerec*> rel_assump_prerec_list;

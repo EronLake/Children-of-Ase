@@ -29,6 +29,8 @@ public:
 	int getPause() { return pause; };
 	void setKeep(bool k) { keep=k; };
 	bool getKeep() { return keep; };
+	void setTurn(int d) { turn = d; };
+	int getTurn() { return turn; };
 private:
 	int dmg;
 	int duration; //-1 will mean infinity
@@ -38,4 +40,5 @@ private:
 	int pause;
 	vector<WorldObj*> hitObjs;
 	bool keep;
+	int turn;
 };

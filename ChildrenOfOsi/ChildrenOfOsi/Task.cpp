@@ -30,6 +30,24 @@ Task::Task(std::string _name, std::string _status, std::string _type, WorldObj *
 	LOG("Task Object W/WOBJ Constructed");
 }
 
+Task::Task(std::string _name, std::string _status, std::string _type, WorldObj * _objToUpdate, int num)
+{
+	name = _name;
+	type = _type;
+	//[buffer,manager,class]
+	//fucntion_name
+	//object
+
+	status = _status;
+	objToUpdate = _objToUpdate;
+	arg4 = num;
+
+	if (objToUpdate == nullptr) {
+		LOG("TASK IS MADE, BUT OBJ IS ALREADY A NULLPTR");
+	}
+	LOG("Task Object W/WOBJ Constructed");
+}
+
 Task::Task(std::string _name, std::string _status, std::string _type, std::string _key, float x, float y, bool col)
 {
 	name = _name;

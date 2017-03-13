@@ -201,3 +201,51 @@ Vector2f WorldObj::getCombatMoveDestination()
 	return combatMoveDestination;
 }
 
+void WorldObj::setDirWithBase(int od) {
+	if (od == 8) {
+		if (baseDir == 2) {
+			od = 2;
+		}
+		else if (baseDir == 4) {
+			od = 4;
+		}
+		else if (baseDir == 6) {
+			od = 6;
+		}
+	}
+	else if (od == 2) {
+		if (baseDir == 2) {
+			od = 8;
+		}
+		else if (baseDir == 4) {
+			od = 6;
+		}
+		else if (baseDir == 6) {
+			od = 4;
+		}
+	}
+	else if (od == 4) {
+		if (baseDir == 2) {
+			od = 6;
+		}
+		else if (baseDir == 4) {
+			od = 2;
+		}
+		else if (baseDir == 6) {
+			od = 8;
+		}
+	}
+	else if (od == 6) {
+		if (baseDir == 2) {
+			od = 4;
+		}
+		else if (baseDir == 4) {
+			od = 8;
+		}
+		else if (baseDir == 6) {
+			od = 2;
+		}
+	}
+	setDirection(od);
+}
+

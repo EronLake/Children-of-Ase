@@ -91,10 +91,9 @@ void ChildrenOfOsi::melee(WorldObj * player)
 	createTask("Melee", "INTERACT", player);
 }
 
-void ChildrenOfOsi::special(WorldObj * player)
+void ChildrenOfOsi::special(WorldObj * player, int num)
 {
-	std::cout << "Object Type: " << player->getType() << std::endl;
-	createTask("Special_Attack", "COMBAT", player);
+	createTask("New_Attack", "MODIFY_POOL", player);
 }
 
 void ChildrenOfOsi::combat(WorldObj * player)

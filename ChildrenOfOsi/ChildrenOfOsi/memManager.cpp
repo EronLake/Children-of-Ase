@@ -42,10 +42,12 @@ memManager::memManager(MessageLog* _mLog, TaskBuffer* _tBuffer)
 	task_map["Add_LivingObj"] = &MemoryHelper::store_livingObj;
 	task_map["Add_NPC"] = &MemoryHelper::store_npc;
 	task_map["Add_Attack"] = &MemoryHelper::store_Attack;
+	task_map2["New_Attack"] = &MemoryHelper::new_Attack;
 	task_map["Add_Soldier"] = &MemoryHelper::store_soldier;
 	task_map["Add_Spl_Soldier"] = &MemoryHelper::store_spl_soldier;
 	task_map["Add_WorldObj"] = &MemoryHelper::store_worldObj;
 	task_map["Add_Texture"] = &MemoryHelper::store_texture;
+	task_map["Del_Attack"] = &MemoryHelper::del_Attack;
 
 	LOG("memManager Object Constructed");
 	
@@ -92,19 +94,27 @@ void memManager::register_manager()
 void memManager::execute_task(Task* current_task)
 {
 	int result;
+	WorldObj* obj= current_task->objToUpdate;
 	std::string key = current_task->key;
 	float xpos = current_task->arg1;
 	float ypos = current_task->arg2;
 	bool coll = current_task->arg3;
+	int num= current_task->arg4;
 //	int d = current_task->arg4;
 
 	auto it = task_map.find(current_task->name);
-	if (it == task_map.end()) {
+	auto it2 = task_map2.find(current_task->name);
+	if (it == task_map.end() && it2 == task_map2.end()) {
 		result = 1;
 		LOG("Error: Task '" << current_task->name << "' does not exist.");
 	}
 	else {
-		result = (memHelper->*(it->second))(key,xpos,ypos,coll);
+		if (obj == nullptr) {
+			result = (memHelper->*(it->second))(key, xpos, ypos, coll);
+		}
+		else {
+			result = (memHelper->*(it2->second))(obj, num);
+		}
 	}
 
 	if (result == 0) {
