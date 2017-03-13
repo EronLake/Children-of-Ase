@@ -6,6 +6,7 @@
 #include "Memory.h"
 
 class ActionPool;
+class Party;
 
 class Hero :
 	public SplSoldier
@@ -26,6 +27,7 @@ public:
 	int mem_counter;
 	vector<Memory*> memories;
 
+	Party* cur_party;
 
 	void addRelationship(int hero);
 	void Hero::setPersonality(int a, int k, int h, int p, int r, int e, int g);

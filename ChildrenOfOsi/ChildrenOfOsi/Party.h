@@ -16,8 +16,11 @@ public:
 	Alliance* getAlliance() { return faction; };
 	void setMode(int m);
 	int getMode() { return mode; };
+
+	vector<Soldier*> getParty() { vector<Soldier*> full_group = members; full_group.push_back(leader); return full_group; };
+	
 private:
-	vector<Soldier*> group;
+	vector<Soldier*> members;
 	Soldier* leader;
 	Alliance* faction; // LOL
 	int mode;   // 0: Idle

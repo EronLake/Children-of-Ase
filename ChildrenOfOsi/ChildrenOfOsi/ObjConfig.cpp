@@ -36,10 +36,10 @@ void ObjConfig::import_config(vector<WorldObj*>* recVec, ChildrenOfOsi* gameplay
 void ObjConfig::set_world_obj(vector<WorldObj*>* recVec, ChildrenOfOsi* gameplay_func, TaskBuffer* tBuffer, float x, float y, float width, float hight,
 	std::string name, std::string tex_file, int frame_num, float bodyx1, float bodyx2, float bodyy1, float bodyy2)
 {
-	
+
 	LOG(Containers::texture_table[tex_file]);
 	if (Containers::texture_table[tex_file]) {
-		cout << tex_file << "Already in Table /////////////////////////////"  << endl;	
+		cout << tex_file << "Already in Table /////////////////////////////" << endl;
 	}
 	else
 	{
@@ -49,9 +49,17 @@ void ObjConfig::set_world_obj(vector<WorldObj*>* recVec, ChildrenOfOsi* gameplay
 		//set file takes up memory
 		tBuffer->run();
 		Containers::texture_table[tex_file]->setFile("Assets/Sprites/" + tex_file + ".png", frame_num);
-		
+
 	}
-	
+
+	/* For Spencer 
+	if (tex_file == "){
+		gameplay_func->add_worldObj(name, 100 * x, 100 * y, true);
+	gameplay_func->add_worldObj(name, 100 * x, 100 * y, true);
+	gameplay_func->add_worldObj(name, 100 * x, 100 * y, true);
+	}
+	*/
+
 	gameplay_func->add_worldObj(name, 100*x, 100*y, true);
 
 	tBuffer->run();

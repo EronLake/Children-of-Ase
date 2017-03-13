@@ -61,6 +61,45 @@ void ActionHelper::create_memory(Action* action, Hero* hero)
 		hero->memories.push_back(Containers::shango_memory_table[key]);
 	}
 }
+/*
+static void battle_sim(Action* battle) 
+{{
+		//may we have offensive team attack first? Slightly randomized
+		Party* Attackers = battle->getDoer()->cur_party;
+		Party* Defenders = battle->getReceiver()->cur_party;
+
+		vector<Soldier*> larger;
+		vector<Soldier*> smaller;
+		//Check which party is l larger
+		if (Attackers->getParty().size() >= Defenders->getParty().size())
+		{
+			larger = Attackers->getParty();
+			smaller = Attackers->getParty();
+		}
+		else
+		{
+			smaller = Attackers->getParty();
+			larger = Attackers->getParty();
+		}
+
+			for(int i = 0; i < larger.size(); i++)
+			{
+			larger[i] party_small[i%party_small.size()]
+			Party_large[i] attack(reduce health with the worth of one attack) with
+			party_small[i%party_small.size()]
+
+			if (party_small[i%party_small.size()] 	heath == 0) remove from party
+			(kill / retreat)
+
+				party_small[i%party_small.size()] attack(reduce health with the worth of
+					one attack) with Party_large[i]
+
+				if (Party_large[i] heath == 0) remove from party
+				(kill / retreat)
+		}
+
+}
+*/
 
 //Decrement the action's timer and return its new value. 
 //Whenever a Hero is a "waiting", this function would be called

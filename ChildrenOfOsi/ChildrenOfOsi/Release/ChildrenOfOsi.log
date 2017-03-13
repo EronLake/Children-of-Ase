@@ -1,84 +1,124 @@
-﻿  stdafx.cpp
+﻿  Action.cpp
+c:\cygwin64\home\eronj\children-of-osi\childrenofosi\childrenofosi\Texture.h(12): fatal error C1083: Cannot open include file: 'GLEW\glew.h': No such file or directory
+  ActionHelper.cpp
+c:\cygwin64\home\eronj\children-of-osi\childrenofosi\childrenofosi\Texture.h(12): fatal error C1083: Cannot open include file: 'GLEW\glew.h': No such file or directory
+  ActionPool.cpp
+c:\cygwin64\home\eronj\children-of-osi\childrenofosi\childrenofosi\Texture.h(12): fatal error C1083: Cannot open include file: 'GLEW\glew.h': No such file or directory
+  AIController.cpp
+AIController.cpp(158): fatal error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "stdafx.h"' to your source?
   AIHelper.cpp
-c:\users\jpfarris\documents\171\children-of-osi\childrenofosi\childrenofosi\Texture.h(12): fatal error C1083: Cannot open include file: 'GLEW\glew.h': No such file or directory
+c:\cygwin64\home\eronj\children-of-osi\childrenofosi\childrenofosi\Texture.h(12): fatal error C1083: Cannot open include file: 'GLEW\glew.h': No such file or directory
   AIManager.cpp
-c:\users\jpfarris\documents\171\children-of-osi\childrenofosi\childrenofosi\Texture.h(12): fatal error C1083: Cannot open include file: 'GLEW\glew.h': No such file or directory
+c:\cygwin64\home\eronj\children-of-osi\childrenofosi\childrenofosi\Texture.h(12): fatal error C1083: Cannot open include file: 'GLEW\glew.h': No such file or directory
+  Alliance.cpp
+c:\cygwin64\home\eronj\children-of-osi\childrenofosi\childrenofosi\Texture.h(12): fatal error C1083: Cannot open include file: 'GLEW\glew.h': No such file or directory
   AudioManager.cpp
-c:\users\jpfarris\documents\171\children-of-osi\childrenofosi\childrenofosi\Texture.h(12): fatal error C1083: Cannot open include file: 'GLEW\glew.h': No such file or directory
+c:\cygwin64\home\eronj\children-of-osi\childrenofosi\childrenofosi\Texture.h(12): fatal error C1083: Cannot open include file: 'GLEW\glew.h': No such file or directory
   AudioTestSuite.cpp
-c:\users\jpfarris\documents\171\children-of-osi\childrenofosi\childrenofosi\SoundObject.h(4): fatal error C1083: Cannot open include file: 'fmod.hpp': No such file or directory
+c:\cygwin64\home\eronj\children-of-osi\childrenofosi\childrenofosi\SoundObject.h(4): fatal error C1083: Cannot open include file: 'fmod.hpp': No such file or directory
   CheckClass.cpp
-c:\users\jpfarris\documents\171\children-of-osi\childrenofosi\childrenofosi\Texture.h(12): fatal error C1083: Cannot open include file: 'GLEW\glew.h': No such file or directory
+c:\cygwin64\home\eronj\children-of-osi\childrenofosi\childrenofosi\Texture.h(12): fatal error C1083: Cannot open include file: 'GLEW\glew.h': No such file or directory
   ChildrenOfOsi.cpp
-c:\users\jpfarris\documents\171\children-of-osi\childrenofosi\childrenofosi\Texture.h(12): fatal error C1083: Cannot open include file: 'GLEW\glew.h': No such file or directory
+c:\cygwin64\home\eronj\children-of-osi\childrenofosi\childrenofosi\Texture.h(12): fatal error C1083: Cannot open include file: 'GLEW\glew.h': No such file or directory
+  CombatController.cpp
+c:\cygwin64\home\eronj\children-of-osi\childrenofosi\childrenofosi\Texture.h(12): fatal error C1083: Cannot open include file: 'GLEW\glew.h': No such file or directory
+  Conditions.cpp
+c:\cygwin64\home\eronj\children-of-osi\childrenofosi\childrenofosi\Texture.h(12): fatal error C1083: Cannot open include file: 'GLEW\glew.h': No such file or directory
   Containers.cpp
-c:\users\jpfarris\documents\171\children-of-osi\childrenofosi\childrenofosi\Texture.h(12): fatal error C1083: Cannot open include file: 'GLEW\glew.h': No such file or directory
+c:\cygwin64\home\eronj\children-of-osi\childrenofosi\childrenofosi\Texture.h(12): fatal error C1083: Cannot open include file: 'GLEW\glew.h': No such file or directory
   DialogueController.cpp
-c:\users\jpfarris\documents\171\children-of-osi\childrenofosi\childrenofosi\Texture.h(12): fatal error C1083: Cannot open include file: 'GLEW\glew.h': No such file or directory
+c:\cygwin64\home\eronj\children-of-osi\childrenofosi\childrenofosi\Texture.h(12): fatal error C1083: Cannot open include file: 'GLEW\glew.h': No such file or directory
+  DialogueGui.cpp
+c:\cygwin64\home\eronj\children-of-osi\childrenofosi\childrenofosi\Texture.h(12): fatal error C1083: Cannot open include file: 'GLEW\glew.h': No such file or directory
+  DialogueHelper.cpp
+c:\cygwin64\home\eronj\children-of-osi\childrenofosi\childrenofosi\Texture.h(12): fatal error C1083: Cannot open include file: 'GLEW\glew.h': No such file or directory
+  DialougeTestSuite.cpp
+c:\cygwin64\home\eronj\children-of-osi\childrenofosi\childrenofosi\Texture.h(12): fatal error C1083: Cannot open include file: 'GLEW\glew.h': No such file or directory
   DummyController.cpp
-c:\users\jpfarris\documents\171\children-of-osi\childrenofosi\childrenofosi\Texture.h(12): fatal error C1083: Cannot open include file: 'GLEW\glew.h': No such file or directory
-  Factions.cpp
-  GameWindow.cpp
-c:\users\jpfarris\documents\171\children-of-osi\childrenofosi\childrenofosi\GameWindow.h(16): fatal error C1083: Cannot open include file: 'GLEW\glew.h': No such file or directory
-  Hero.cpp
-c:\users\jpfarris\documents\171\children-of-osi\childrenofosi\childrenofosi\Texture.h(12): fatal error C1083: Cannot open include file: 'GLEW\glew.h': No such file or directory
-  Input.cpp
-c:\users\jpfarris\documents\171\children-of-osi\childrenofosi\childrenofosi\Texture.h(12): fatal error C1083: Cannot open include file: 'GLEW\glew.h': No such file or directory
-  LivingObj.cpp
-c:\users\jpfarris\documents\171\children-of-osi\childrenofosi\childrenofosi\Texture.h(12): fatal error C1083: Cannot open include file: 'GLEW\glew.h': No such file or directory
-  Main.cpp
-c:\users\jpfarris\documents\171\children-of-osi\childrenofosi\childrenofosi\Texture.h(12): fatal error C1083: Cannot open include file: 'GLEW\glew.h': No such file or directory
-  Manager.cpp
-c:\users\jpfarris\documents\171\children-of-osi\childrenofosi\childrenofosi\Texture.h(12): fatal error C1083: Cannot open include file: 'GLEW\glew.h': No such file or directory
-  memManager.cpp
-c:\users\jpfarris\documents\171\children-of-osi\childrenofosi\childrenofosi\Texture.h(12): fatal error C1083: Cannot open include file: 'GLEW\glew.h': No such file or directory
-  MemNode.cpp
-  MemoryHelper.cpp
-c:\users\jpfarris\documents\171\children-of-osi\childrenofosi\childrenofosi\Texture.h(12): fatal error C1083: Cannot open include file: 'GLEW\glew.h': No such file or directory
-  MemoryTestSuite.cpp
-c:\users\jpfarris\documents\171\children-of-osi\childrenofosi\childrenofosi\Texture.h(12): fatal error C1083: Cannot open include file: 'GLEW\glew.h': No such file or directory
+c:\cygwin64\home\eronj\children-of-osi\childrenofosi\childrenofosi\Texture.h(12): fatal error C1083: Cannot open include file: 'GLEW\glew.h': No such file or directory
+  Party.cpp
+c:\cygwin64\home\eronj\children-of-osi\childrenofosi\childrenofosi\Texture.h(12): fatal error C1083: Cannot open include file: 'GLEW\glew.h': No such file or directory
   Compiling...
+  Village.cpp
+c:\cygwin64\home\eronj\children-of-osi\childrenofosi\childrenofosi\Texture.h(12): fatal error C1083: Cannot open include file: 'GLEW\glew.h': No such file or directory
+  GameMap.cpp
+c:\cygwin64\home\eronj\children-of-osi\childrenofosi\childrenofosi\Texture.h(12): fatal error C1083: Cannot open include file: 'GLEW\glew.h': No such file or directory
+  GameWindow.cpp
+c:\cygwin64\home\eronj\children-of-osi\childrenofosi\childrenofosi\GameWindow.h(19): fatal error C1083: Cannot open include file: 'glm/glm.hpp': No such file or directory
+  Planner.cpp
+Planner.cpp(184): fatal error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "stdafx.h"' to your source?
+  Hero.cpp
+c:\cygwin64\home\eronj\children-of-osi\childrenofosi\childrenofosi\Texture.h(12): fatal error C1083: Cannot open include file: 'GLEW\glew.h': No such file or directory
+  Input.cpp
+c:\cygwin64\home\eronj\children-of-osi\childrenofosi\childrenofosi\Texture.h(12): fatal error C1083: Cannot open include file: 'GLEW\glew.h': No such file or directory
+  jsoncpp.cpp
+jsoncpp.cpp(4232): fatal error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "stdafx.h"' to your source?
+  LivingObj.cpp
+c:\cygwin64\home\eronj\children-of-osi\childrenofosi\childrenofosi\Texture.h(12): fatal error C1083: Cannot open include file: 'GLEW\glew.h': No such file or directory
+  Main.cpp
+c:\cygwin64\home\eronj\children-of-osi\childrenofosi\childrenofosi\Texture.h(12): fatal error C1083: Cannot open include file: 'GLEW\glew.h': No such file or directory
+  Manager.cpp
+c:\cygwin64\home\eronj\children-of-osi\childrenofosi\childrenofosi\Texture.h(12): fatal error C1083: Cannot open include file: 'GLEW\glew.h': No such file or directory
+  memManager.cpp
+c:\cygwin64\home\eronj\children-of-osi\childrenofosi\childrenofosi\Texture.h(12): fatal error C1083: Cannot open include file: 'GLEW\glew.h': No such file or directory
+  Memory.cpp
+c:\cygwin64\home\eronj\children-of-osi\childrenofosi\childrenofosi\Texture.h(12): fatal error C1083: Cannot open include file: 'GLEW\glew.h': No such file or directory
+  MemoryHelper.cpp
+c:\cygwin64\home\eronj\children-of-osi\childrenofosi\childrenofosi\Texture.h(12): fatal error C1083: Cannot open include file: 'GLEW\glew.h': No such file or directory
+  MemoryTestSuite.cpp
+c:\cygwin64\home\eronj\children-of-osi\childrenofosi\childrenofosi\Texture.h(12): fatal error C1083: Cannot open include file: 'GLEW\glew.h': No such file or directory
   MessageLog.cpp
-c:\users\jpfarris\documents\171\children-of-osi\childrenofosi\childrenofosi\Texture.h(12): fatal error C1083: Cannot open include file: 'GLEW\glew.h': No such file or directory
+c:\cygwin64\home\eronj\children-of-osi\childrenofosi\childrenofosi\Texture.h(12): fatal error C1083: Cannot open include file: 'GLEW\glew.h': No such file or directory
   Movement.cpp
-c:\users\jpfarris\documents\171\children-of-osi\childrenofosi\childrenofosi\Texture.h(12): fatal error C1083: Cannot open include file: 'GLEW\glew.h': No such file or directory
+c:\cygwin64\home\eronj\children-of-osi\childrenofosi\childrenofosi\Texture.h(12): fatal error C1083: Cannot open include file: 'GLEW\glew.h': No such file or directory
   NPC.cpp
-c:\users\jpfarris\documents\171\children-of-osi\childrenofosi\childrenofosi\Texture.h(12): fatal error C1083: Cannot open include file: 'GLEW\glew.h': No such file or directory
+c:\cygwin64\home\eronj\children-of-osi\childrenofosi\childrenofosi\Texture.h(12): fatal error C1083: Cannot open include file: 'GLEW\glew.h': No such file or directory
+  ObjConfig.cpp
+c:\cygwin64\home\eronj\children-of-osi\childrenofosi\childrenofosi\Texture.h(12): fatal error C1083: Cannot open include file: 'GLEW\glew.h': No such file or directory
   PhysicsManager.cpp
-c:\users\jpfarris\documents\171\children-of-osi\childrenofosi\childrenofosi\Texture.h(12): fatal error C1083: Cannot open include file: 'GLEW\glew.h': No such file or directory
+c:\cygwin64\home\eronj\children-of-osi\childrenofosi\childrenofosi\Texture.h(12): fatal error C1083: Cannot open include file: 'GLEW\glew.h': No such file or directory
   PhysicsTestSuite.cpp
-c:\users\jpfarris\documents\171\children-of-osi\childrenofosi\childrenofosi\Texture.h(12): fatal error C1083: Cannot open include file: 'GLEW\glew.h': No such file or directory
+c:\cygwin64\home\eronj\children-of-osi\childrenofosi\childrenofosi\Texture.h(12): fatal error C1083: Cannot open include file: 'GLEW\glew.h': No such file or directory
+  Compiling...
   Player.cpp
-c:\users\jpfarris\documents\171\children-of-osi\childrenofosi\childrenofosi\Texture.h(12): fatal error C1083: Cannot open include file: 'GLEW\glew.h': No such file or directory
+c:\cygwin64\home\eronj\children-of-osi\childrenofosi\childrenofosi\Texture.h(12): fatal error C1083: Cannot open include file: 'GLEW\glew.h': No such file or directory
   MemoryPool.cpp
-c:\users\jpfarris\documents\171\children-of-osi\childrenofosi\childrenofosi\Texture.h(12): fatal error C1083: Cannot open include file: 'GLEW\glew.h': No such file or directory
-  Projectile.cpp
-c:\users\jpfarris\documents\171\children-of-osi\childrenofosi\childrenofosi\Texture.h(12): fatal error C1083: Cannot open include file: 'GLEW\glew.h': No such file or directory
+c:\cygwin64\home\eronj\children-of-osi\childrenofosi\childrenofosi\Texture.h(12): fatal error C1083: Cannot open include file: 'GLEW\glew.h': No such file or directory
+  Attack.cpp
+c:\cygwin64\home\eronj\children-of-osi\childrenofosi\childrenofosi\Texture.h(12): fatal error C1083: Cannot open include file: 'GLEW\glew.h': No such file or directory
+  Point.cpp
   QuadTree.cpp
-c:\users\jpfarris\documents\171\children-of-osi\childrenofosi\childrenofosi\Texture.h(12): fatal error C1083: Cannot open include file: 'GLEW\glew.h': No such file or directory
+c:\cygwin64\home\eronj\children-of-osi\childrenofosi\childrenofosi\Texture.h(12): fatal error C1083: Cannot open include file: 'GLEW\glew.h': No such file or directory
   RenderHelper.cpp
-c:\users\jpfarris\documents\171\children-of-osi\childrenofosi\childrenofosi\Texture.h(12): fatal error C1083: Cannot open include file: 'GLEW\glew.h': No such file or directory
+c:\cygwin64\home\eronj\children-of-osi\childrenofosi\childrenofosi\Texture.h(12): fatal error C1083: Cannot open include file: 'GLEW\glew.h': No such file or directory
   RenderManager.cpp
-c:\users\jpfarris\documents\171\children-of-osi\childrenofosi\childrenofosi\Texture.h(12): fatal error C1083: Cannot open include file: 'GLEW\glew.h': No such file or directory
+c:\cygwin64\home\eronj\children-of-osi\childrenofosi\childrenofosi\Texture.h(12): fatal error C1083: Cannot open include file: 'GLEW\glew.h': No such file or directory
+  RiverObj.cpp
   Soldier.cpp
-c:\users\jpfarris\documents\171\children-of-osi\childrenofosi\childrenofosi\Texture.h(12): fatal error C1083: Cannot open include file: 'GLEW\glew.h': No such file or directory
+c:\cygwin64\home\eronj\children-of-osi\childrenofosi\childrenofosi\Texture.h(12): fatal error C1083: Cannot open include file: 'GLEW\glew.h': No such file or directory
   SoundSystem.cpp
 SoundSystem.cpp(5): fatal error C1083: Cannot open include file: 'fmod.hpp': No such file or directory
+  Relationship.cpp
   TaskBufferTestSuite.cpp
-c:\users\jpfarris\documents\171\children-of-osi\childrenofosi\childrenofosi\Texture.h(12): fatal error C1083: Cannot open include file: 'GLEW\glew.h': No such file or directory
+c:\cygwin64\home\eronj\children-of-osi\childrenofosi\childrenofosi\Texture.h(12): fatal error C1083: Cannot open include file: 'GLEW\glew.h': No such file or directory
   SplSoldier.cpp
-c:\users\jpfarris\documents\171\children-of-osi\childrenofosi\childrenofosi\Texture.h(12): fatal error C1083: Cannot open include file: 'GLEW\glew.h': No such file or directory
+c:\cygwin64\home\eronj\children-of-osi\childrenofosi\childrenofosi\Texture.h(12): fatal error C1083: Cannot open include file: 'GLEW\glew.h': No such file or directory
   Sprite.cpp
-c:\users\jpfarris\documents\171\children-of-osi\childrenofosi\childrenofosi\Texture.h(12): fatal error C1083: Cannot open include file: 'GLEW\glew.h': No such file or directory
+c:\cygwin64\home\eronj\children-of-osi\childrenofosi\childrenofosi\Texture.h(12): fatal error C1083: Cannot open include file: 'GLEW\glew.h': No such file or directory
   Task.cpp
-c:\users\jpfarris\documents\171\children-of-osi\childrenofosi\childrenofosi\Texture.h(12): fatal error C1083: Cannot open include file: 'GLEW\glew.h': No such file or directory
+c:\cygwin64\home\eronj\children-of-osi\childrenofosi\childrenofosi\Texture.h(12): fatal error C1083: Cannot open include file: 'GLEW\glew.h': No such file or directory
   TaskBuffer.cpp
-c:\users\jpfarris\documents\171\children-of-osi\childrenofosi\childrenofosi\Texture.h(12): fatal error C1083: Cannot open include file: 'GLEW\glew.h': No such file or directory
+c:\cygwin64\home\eronj\children-of-osi\childrenofosi\childrenofosi\Texture.h(12): fatal error C1083: Cannot open include file: 'GLEW\glew.h': No such file or directory
   TestManager.cpp
-c:\users\jpfarris\documents\171\children-of-osi\childrenofosi\childrenofosi\Texture.h(12): fatal error C1083: Cannot open include file: 'GLEW\glew.h': No such file or directory
+c:\cygwin64\home\eronj\children-of-osi\childrenofosi\childrenofosi\Texture.h(12): fatal error C1083: Cannot open include file: 'GLEW\glew.h': No such file or directory
+  TextObj.cpp
+c:\cygwin64\home\eronj\children-of-osi\childrenofosi\childrenofosi\TextObj.h(3): fatal error C1083: Cannot open include file: 'glm/glm.hpp': No such file or directory
   Texture.cpp
-c:\users\jpfarris\documents\171\children-of-osi\childrenofosi\childrenofosi\Texture.h(12): fatal error C1083: Cannot open include file: 'GLEW\glew.h': No such file or directory
-  Compiling...
+c:\cygwin64\home\eronj\children-of-osi\childrenofosi\childrenofosi\Texture.h(12): fatal error C1083: Cannot open include file: 'GLEW\glew.h': No such file or directory
   Vector2f.cpp
+  Compiling...
+  War.cpp
   WorldObj.cpp
-c:\users\jpfarris\documents\171\children-of-osi\childrenofosi\childrenofosi\Texture.h(12): fatal error C1083: Cannot open include file: 'GLEW\glew.h': No such file or directory
+c:\cygwin64\home\eronj\children-of-osi\childrenofosi\childrenofosi\Texture.h(12): fatal error C1083: Cannot open include file: 'GLEW\glew.h': No such file or directory
+  Wrapper.cpp
+c:\cygwin64\home\eronj\children-of-osi\childrenofosi\childrenofosi\Texture.h(12): fatal error C1083: Cannot open include file: 'GLEW\glew.h': No such file or directory
