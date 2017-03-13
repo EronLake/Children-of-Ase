@@ -22,8 +22,8 @@ class WorldObj
   { this->body.push_back({loc, p_width, p_height}); }
 
   WorldObj(float x, float y, bool col):
-    ID(idNum++), loc()
-  {}
+    ID(idNum++), loc({x, y}), collision(col), type(0)
+  { this->body.push_back({loc, 1.0F, 1.0F}); }
 
   virtual ~WorldObj() = default;
 
