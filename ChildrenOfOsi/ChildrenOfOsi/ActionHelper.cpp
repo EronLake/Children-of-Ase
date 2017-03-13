@@ -69,3 +69,6 @@ void ActionHelper::execute_train(Action* train) {
 void ActionHelper::execute_train_with(Action* train_with) {
 
 }
+void ActionHelper::execute_form_alliance(Action* form_alliance) {
+
+}
