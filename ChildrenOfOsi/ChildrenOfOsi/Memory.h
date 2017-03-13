@@ -63,8 +63,5 @@ public:
 	void toldBy(NPC* w);
 	NPC* source();
 
-
-
-
 };
 

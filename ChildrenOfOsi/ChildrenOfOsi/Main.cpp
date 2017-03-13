@@ -178,6 +178,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 
 	AIController* AiController = new AIController();
 	ActionHelper::ai = AiController;
+	ActionHelper::gameplay_func = gameplay_functions;
 
 	CombatController* combatControl = new CombatController();
 

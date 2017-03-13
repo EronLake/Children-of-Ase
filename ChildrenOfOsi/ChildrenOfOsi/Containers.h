@@ -10,6 +10,8 @@ class LivingObj;
 class WorldObj;
 class NPC;
 class Attack;
+class Memory;
+class Action;
 
 class Containers
 {
@@ -24,6 +26,14 @@ public:
 	static std::unordered_map<std::string, NPC*> npc_table;
 	static std::unordered_map<std::string, Texture*> texture_table;
 
+	static std::unordered_map<std::string, Memory*> oya_memory_table;
+	static std::unordered_map<std::string, Memory*> yemoja_memory_table;
+	static std::unordered_map<std::string, Memory*> oshosi_memory_table;
+	static std::unordered_map<std::string, Memory*> ogun_memory_table;
+	static std::unordered_map<std::string, Memory*> shango_memory_table;
+
+	static std::unordered_map<std::string, Action*> action_table;
+
 	Containers();
 	~Containers();
 
@@ -35,4 +45,6 @@ public:
 	static void add_worldObj(std::string, WorldObj*);
 	static void add_npc(std::string, NPC*);
 	static void add_texture(std::string, Texture*);
+	static void add_memory(std::string, int hero_name, Memory*);
+	static void add_action(std::string, Action*);
 };

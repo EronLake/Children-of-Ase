@@ -2,8 +2,9 @@
 #include "common.h"
 #include "Action.h"
 #include "Memory.h"
-
 #include "AIController.h"
+#include "ChildrenOfOsi.h"
+#include "Containers.h"
 
 class ActionHelper
 {
@@ -12,9 +13,12 @@ public:
 	ActionHelper();
 	~ActionHelper();
 
+	//does these need to be static as well?
 	static AIController* ai;
+	static ChildrenOfOsi* gameplay_func;
 
-	static void create_memory(Action* );
+
+	static void create_memory(Action*, Hero* hero);
 
 	static int retrieve_time(Action* action);
 	static void set_timer(Action* action, int wait_time);

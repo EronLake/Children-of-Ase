@@ -3,6 +3,7 @@
 #include "SplSoldier.h"
 #include "Relationship.h"
 #include "Personality.h"
+#include "Memory.h"
 
 class ActionPool;
 
@@ -21,6 +22,10 @@ public:
 	//Planner* planner;
 	ActionPool* actionPool;
     int name;
+
+	int mem_counter;
+	vector<Memory*> memories;
+
 
 	void addRelationship(int hero);
 	void Hero::setPersonality(int a, int k, int h, int p, int r, int e, int g);

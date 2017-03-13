@@ -1,6 +1,7 @@
 #pragma once
 #include "stdafx.h"
 #include "Hero.h"
+#include "Memory.h"
 class Player :
 	public Hero
 {
@@ -14,5 +15,8 @@ public:
 	void updateTalk();
 	Rectangle talk;
 	float distance;
+
+	int mem_counter;
+	vector<Memory*> memories;
 };
 
