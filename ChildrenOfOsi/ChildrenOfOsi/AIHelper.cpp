@@ -180,7 +180,7 @@ int AIHelper::astar_search(WorldObj* obj)// VisibilityGraph graph, Vector2f star
 
 int AIHelper::plan_step(WorldObj* obj) {
 	int result;
-	std::cout << "take a step" << std::endl;
+	//std::cout << "take a step" << std::endl;
 
 	NPC* npc;
 	if (obj->getType() >= 3) {
@@ -201,12 +201,12 @@ int AIHelper::plan_step(WorldObj* obj) {
 		float ySpeed = slope*xSpeed;
 		npc->setDiagXSpeed(xSpeed);
 		npc->setDiagYSpeed(ySpeed);
-		std::cout << diffX << " and " << diffY << std::endl;
+		//std::cout << diffX << " and " << diffY << std::endl;
 
 		if (abs(diffX) < speed) diffX = 0;
 		if (abs(diffY) < speed) diffY = 0;
 
-		std::cout << "new " << diffX << " and " << diffY << std::endl;
+		//std::cout << "new " << diffX << " and " << diffY << std::endl;
 
 		//diagXSpeed = npc->getDiagXSpeed();
 		//diagYSpeed = npc->getDiagYSpeed();
@@ -248,7 +248,7 @@ int AIHelper::plan_step(WorldObj* obj) {
 			}
 			else  //Waypoint is close enough to stop
 			{
-				std::cout << "Reached waypoint" << std::endl;
+				//std::cout << "Reached waypoint" << std::endl;
 				manager->createTaskWithObj("Stop", "MOVE", obj);
 				npc->setLoc(npc->waypoint);
 				if (npc->waypoints.size() == 0) { //This was the final waypoint, destination reached

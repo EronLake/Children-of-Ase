@@ -13,25 +13,25 @@ memManager::memManager(MessageLog* _mLog, TaskBuffer* _tBuffer)
 
 	memHelper = new MemoryHelper();
 
-	hero_pool = memHelper->create_pool(sizeof(Hero) * 4);
-	hero_head = memHelper->init_pool(hero_pool, sizeof(Hero));
+	hero_pool = memHelper->create_pool(sizeof(Hero) * 8);
+	hero_head = memHelper->init_pool(hero_pool, sizeof(Hero)*2);
 
-	livingObj_pool = memHelper->create_pool(sizeof(LivingObj) * 32);
-	livingObj_head = memHelper->init_pool(livingObj_pool, sizeof(LivingObj));
+	livingObj_pool = memHelper->create_pool(sizeof(LivingObj) * 64);
+	livingObj_head = memHelper->init_pool(livingObj_pool, sizeof(LivingObj)*2);
 
-	Attack_pool = memHelper->create_pool(sizeof(Attack) * 16);
-	Attack_head = memHelper->init_pool(Attack_pool, sizeof(Attack));
+	Attack_pool = memHelper->create_pool(sizeof(Attack) * 64);
+	Attack_head = memHelper->init_pool(Attack_pool, sizeof(Attack)*2);
 
-	soldier_pool = memHelper->create_pool(sizeof(Soldier) * 32);
-	soldier_head = memHelper->init_pool(soldier_pool, sizeof(Soldier));
+	soldier_pool = memHelper->create_pool(sizeof(Soldier) * 64);
+	soldier_head = memHelper->init_pool(soldier_pool, sizeof(Soldier)*2);
 
-	spl_soldier_pool = memHelper->create_pool(sizeof(SplSoldier) * 32);
-	spl_soldier_head = memHelper->init_pool(spl_soldier_pool, sizeof(SplSoldier));
+	spl_soldier_pool = memHelper->create_pool(sizeof(SplSoldier) * 64);
+	spl_soldier_head = memHelper->init_pool(spl_soldier_pool, sizeof(SplSoldier)*2);
 
-	worldObj_pool = memHelper->create_pool(sizeof(WorldObj)*64);
-	worldObj_head = memHelper->init_pool(worldObj_pool, sizeof(WorldObj));
+	worldObj_pool = memHelper->create_pool(sizeof(WorldObj)*128);
+	worldObj_head = memHelper->init_pool(worldObj_pool, sizeof(WorldObj)*2);
 
-	npc_pool = memHelper->create_pool(sizeof(NPC) * 32);
+	npc_pool = memHelper->create_pool(sizeof(NPC) * 64);
 	npc_head = memHelper->init_pool(npc_pool, sizeof(NPC));
 
 	texture_pool = memHelper->create_pool(sizeof(Texture) * 32);

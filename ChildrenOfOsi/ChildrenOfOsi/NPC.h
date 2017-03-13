@@ -32,6 +32,8 @@ public:
 	void moveDown();
 	void setMode(int m);
 	int getMode();
+	WorldObj* getCurrentEnemy();
+	void setCurrentEnemy(WorldObj* p_enemy);
 
 
 	Vector2f destination;
@@ -44,7 +46,8 @@ private:
 	float diagSpeed;
 	float diagXSpeed;
 	float diagYSpeed;
-	int move_mode;
+	int move_mode;	//0 is attack, 1 is evade
+	WorldObj* currentEnemy;
 	
 
 };
