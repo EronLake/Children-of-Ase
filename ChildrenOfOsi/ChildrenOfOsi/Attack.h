@@ -35,6 +35,7 @@ class Attack: public WorldObj
   void updatePause() { if(this->pause > 0) --pause; };
   void setKeep(bool k) { this->keep = k; };
   void addHit(WorldObj* o) { this->hitObjs.push_back(o); };
+  bool beenHit(WorldObj* o);
   void Hit(LivingObj *target);
 
   void move();

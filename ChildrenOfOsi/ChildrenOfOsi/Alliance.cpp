@@ -1,6 +1,6 @@
 #include "stdafx.h"
 #include "Alliance.h"
-
+std::vector<Alliance*> Alliance::Alliances;
 
 Alliance::Alliance()
 {
@@ -26,21 +26,21 @@ void Alliance::addToAlliance(Village * p_faction)
 	}
 }
 
-Alliance* Alliance::removeFromAlliance(Village * p_factionToRemove)
+void Alliance::removeFromAlliance(Village * p_factionToRemove)
 {
 	allies.erase(std::remove(allies.begin(), allies.end(), p_factionToRemove), allies.end());
-	Alliance* newAll = new Alliance(p_factionToRemove);
-	newAll->updateEnemies();
+	Alliance::Alliances.push_back(new Alliance(p_factionToRemove));
 	updateEnemies();
-	return newAll;
 }
 
 void Alliance::updateEnemies() {
-	enemies.clear();
-	for (int i = 0; i < allies.size(); i++) {
-		std::vector<Village*> tmp = War::getWars(allies[i]);
-		for (int j = 0; j < tmp.size(); j++) {
-			enemies.push_back(tmp[j]);
+	for (auto itor = Alliance::Alliances.begin(); itor != Alliance::Alliances.end(); ++itor) {
+		(*itor)->enemies.clear();
+		for (int i = 0; i < (*itor)->allies.size(); i++) {
+			std::vector<Village*> tmp = War::getWars((*itor)->allies[i]);
+			for (int j = 0; j < tmp.size(); j++) {
+				(*itor)->enemies.push_back(tmp[j]);
+			}
 		}
 	}
 }
