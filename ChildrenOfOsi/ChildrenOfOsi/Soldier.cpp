@@ -12,7 +12,6 @@ Soldier::Soldier(float x, float y, bool col) :NPC(x, y, col)
 	key = "Soldier" + std::to_string(getID()) + "_0";
 	cdTotal = 60;
 	cdTime = 0;
-	cool = false;
 	setType(3);
 }
 
@@ -21,7 +20,6 @@ Soldier::Soldier(Vector2f p_topLeft, float p_width, float p_height):NPC(p_topLef
 	key= "Soldier" + std::to_string(getID()) + "_0";
 	cdTotal = 60;
 	cdTime = 0;
-	cool = false;
 	setType(3);
 }
 
@@ -72,7 +70,6 @@ void Soldier::newAttack(int i, Attack* a)
 		p->setPause(atkType[i]->getPause());
 		p->setKeep(false);
 		cdMap[atkType[i]] = atkType[i]->getCoolDown();
-		cool = false;
 		cdTime = cdTotal;
 		instances++;
 		if (instances == 99)instances = 0;
@@ -105,14 +102,13 @@ void Soldier::meleeAttack() {
 	melee->setDirWithBase(d);
 	melee->setX(x);
 	melee->setY(y);
-	cool = false;
 	cdTime = cdTotal;
 }
 
 void Soldier::updateCD() {
 	if (cdTime > 0) { 
 		cdTime--; 
-	} else cool = true;
+	} 
 	for (auto i = cdMap.begin(); i != cdMap.end(); ++i) {
 		if (i->second >0) {
 			i->second--;
@@ -121,7 +117,7 @@ void Soldier::updateCD() {
 }
 
 bool Soldier::getCool(int c) {
-	return (cool && (cdMap[atkType[c]]==0));
+	return ((cdTime==0) && (cdMap[atkType[c]]==0));
 }
 
 void Soldier::resetCD(int c) {

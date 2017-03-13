@@ -320,21 +320,25 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	Alex->setInteractable(true);
 	Alex->setName("Alex");
 	Alex->setTalkDist(20);
+
 	Alex->setDirection(2);
 	//gameplay_functions->add_Attack(Alex->getKey(), Alex->body[0].getX(), Alex->body[0].getY(),true,10);
 
+	gameplay_functions->add_Attack(Alex->getKey(), Alex->body[0].getX(), Alex->body[0].getY(),true,10);
+
+
 	tBuffer->run();
 
-	//Alex->melee = Containers::Attack_table[Alex->getKey()];
-	//Alex->melee->setDmg(10);
-	//Alex->melee->setSpeed(5);
-	//Alex->melee->setBaseDir(4);
-	//Alex->melee->setCoolDown(62);
-	//Alex->melee->setPause(-1);
-	//Alex->melee->setDestroy(false);
-	//Alex->melee->setKeep(true);
-	//Alex->melee->setWidth(Alex->body[0].getWidth());
-	//Alex->melee->setHeight(Alex->body[0].getHeight());
+	Alex->melee = Containers::Attack_table[Alex->getKey()];
+	Alex->melee->setDmg(10);
+	Alex->melee->setSpeed(5);
+	Alex->melee->setBaseDir(4);
+	Alex->melee->setCoolDown(120);
+	Alex->melee->setPause(-1);
+	Alex->melee->setDestroy(false);
+	Alex->melee->setKeep(true);
+	Alex->melee->setWidth(Alex->body[0].getWidth());
+	Alex->melee->setHeight(Alex->body[0].getHeight());
 
 
 	Attack* rockThrow = new Attack();
@@ -345,15 +349,14 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	rockThrow->setCoolDown(120);
 	rockThrow->setPause(24);
 	rockThrow->sprite.setTexture(rockTex);
-	//Alex->addAttackType(rockThrow);
+	Alex->addAttackType(rockThrow);
 
 	//Alex->melee->sprite.setTexture(blank);
-	//Alex->melee->sprite.setTexture(blank);
+	Alex->melee->sprite.setTexture(blank);
 
 	DialogueController::setPlayer(Alex);
 	//vector<WorldObj*> recVec;
 	Attack* spin = new Attack();
-	spin->setTurn(3);
 	spin->setDmg(7);
 	spin->setSpeed(7);
 	spin->setDestroy(true);
@@ -361,8 +364,38 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	spin->setBaseDir(6);
 	spin->setCoolDown(600);
 	spin->setPause(24);
-	spin->sprite.setTexture(blank);
-	//Alex->addAttackType(spin);
+	spin->sprite.setTexture(rockTex);
+	Alex->addAttackType(spin);
+	Attack* spin2 = new Attack();
+	spin2->setDmg(7);
+	spin2->setSpeed(7);
+	spin2->setDestroy(true);
+	spin2->setDuration(5);
+	spin2->setBaseDir(6);
+	spin2->setCoolDown(600);
+	spin2->setPause(29);
+	spin2->sprite.setTexture(rockTex);
+	Alex->addAttackType(spin2);
+	Attack* spin3 = new Attack();
+	spin3->setDmg(7);
+	spin3->setSpeed(7);
+	spin3->setDestroy(true);
+	spin3->setDuration(5);
+	spin3->setBaseDir(6);
+	spin3->setCoolDown(600);
+	spin3->setPause(34);
+	spin3->sprite.setTexture(rockTex);
+	Alex->addAttackType(spin3);
+	Attack* spin4 = new Attack();
+	spin4->setDmg(7);
+	spin4->setSpeed(7);
+	spin4->setDestroy(true);
+	spin4->setDuration(5);
+	spin4->setBaseDir(6);
+	spin4->setCoolDown(600);
+	spin4->setPause(39);
+	spin4->sprite.setTexture(rockTex);
+	Alex->addAttackType(spin4);
 
 	vector<WorldObj*> vec;
 	//vec.push_back(&Alex->melee);
@@ -485,7 +518,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	otherShango->melee->setDmg(10);
 	otherShango->melee->setSpeed(5);
 	otherShango->melee->setBaseDir(4);
-	otherShango->melee->setCoolDown(62);
+	otherShango->melee->setCoolDown(200);
 	otherShango->melee->setPause(-1);
 	otherShango->melee->setDestroy(false);
 	otherShango->melee->setKeep(true);
@@ -494,7 +527,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 
 	otherShango->addAttackType(rockThrow);
 	otherShango->melee->sprite.setTexture(blank);
-	otherShango->addAttackType(spin);
+	//otherShango->addAttackType(spin);
 
 
 
@@ -733,6 +766,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 		//if OS has an enemy, move to the enemy
 		if (otherShango->getCurrentEnemy() != nullptr && OSAtkMode) {
 			cout << "*************************************************MOVING TO ENEMY******************************************" << endl;
+
 				//enemy is facing up
 				if (otherShango->getCurrentEnemy()->getDirection() == 8) {
 	
@@ -760,12 +794,55 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 				}
 			gameplay_functions->move_toward(otherShango);
 
-			//if at destination, attack
-		if (otherShango->destination == otherShango->getLoc()) {
-				std::cout << "Pressed F" << std::endl;
-				//gameplay_functions->special(otherShango, 0);
-				otherShango->meleeAttack();
-				gameplay_functions->melee(otherShango);	
+		//	//if at destination, attack
+		//if (otherShango->destination == otherShango->getLoc()) {
+		//		std::cout << "Pressed F" << std::endl;
+		//		//gameplay_functions->special(otherShango, 0);
+		//		otherShango->meleeAttack();
+		//		gameplay_functions->melee(otherShango);	
+
+			//Vector2f l= otherShango->getCurrentEnemy()->getLoc();
+			//l.shiftXloc(otherShango->getCurrentEnemy()->getWidth());
+			//l.shiftYloc(otherShango->getCurrentEnemy()->getHeight());
+			//otherShango->waypoint = l;
+			//otherShango->destination =l;
+			//gameplay_functions->move_toward(otherShango);
+
+			////if at destination, attack
+			//if (otherShango->destination.getXloc() == otherShango->getX()) {
+			//	if (abs(otherShango->destination.getYloc()-otherShango->getY())<300) {
+			//		if (otherShango->getCool(0)) {
+			//			if (otherShango->destination.getYloc() > otherShango->getY()) {
+			//				otherShango->setDirection(2);
+			//			}
+			//			else {
+			//				otherShango->setDirection(8);
+			//			}
+			//		}
+			//	}
+			//} else if (otherShango->destination.getYloc() == otherShango->getY()) {
+			//	if (abs(otherShango->destination.getXloc() - otherShango->getX())<300) {
+			//		if (otherShango->getCool(0)) {
+			//			if (otherShango->destination.getXloc() > otherShango->getX()) {
+			//				otherShango->setDirection(6);
+			//			}
+			//			else {
+			//				otherShango->setDirection(4);
+			//			}
+			//		}
+			//	}
+			//}
+
+			//npc is at enemy destination, attack.
+			if (otherShango->destination == otherShango->getLoc()) {
+				if (otherShango->getCool()) {
+					std::cout << "Pressed F" << std::endl;
+					//gameplay_functions->special(otherShango, 0);
+					otherShango->meleeAttack();
+					gameplay_functions->melee(otherShango);
+				}
+				
+
 			}
 		}
 
