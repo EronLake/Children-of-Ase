@@ -58,4 +58,11 @@ Attack::Attack(float x, float y, bool col) : WorldObj(x, y, col)
 	 }
  }
 
+ bool Attack::beenHit(WorldObj* o) {
+	 for (auto i = hitObjs.begin(); i != hitObjs.end(); ++i) {
+		 if (*i == o) return true;
+	 }
+	 return false;
+ }
+
  

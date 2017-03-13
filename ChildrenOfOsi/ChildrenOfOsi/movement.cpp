@@ -369,6 +369,7 @@ int Movement::specialAttack(WorldObj* obj) {
 int Movement::attack(WorldObj* obj) {
 	objVec.clear();
 	objVec = tree->retrieve(objVec, obj);
+	objVec.push_back(obj);
 	for (auto a = Containers::Attack_table.begin(); a !=Containers::Attack_table.end();++a) {
 		//std::cout << "Attack Exists" << std::endl;
 		if (a->second->getPause() == 0) {
@@ -383,7 +384,7 @@ int Movement::attack(WorldObj* obj) {
 				if (objVec[i]->getType() >= 2) {
 					LivingObj* liv = CheckClass::isLiving(objVec[i]);
 					if (liv) {
-						if (collision(a->second, liv)) {
+						if (collision(a->second, liv) && !a->second->beenHit(liv)) {
 							std::cout << "Player hit " << liv->getName() << std::endl;
 							a->second->Hit(liv);
 							if (a->second->getDestroy())a->second->setDuration(0);
