@@ -33,8 +33,6 @@ struct VisibilityGraph {
 	void _print();
 };
 
-
-
 class AIHelper
 {
 public:

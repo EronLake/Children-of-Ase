@@ -150,8 +150,8 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 
 	//Player* Alex = new Player(SHANGO, Vector2f(4900.0, 3700.0), 40.0, 40.0);	//init player
 	Player* Alex = new Player(SHANGO, Vector2f(4900.0, 3700.0), 150.0, 150.0);	//init player
-	//Hero* otherShango = new Hero(SHANGO, Vector2f(4900.0, 3500.0), 150.0, 150.0);
-	cout << "Alex's width and height is " << Alex->getWidth() << ", " << Alex->getHeight() << endl;
+
+	//cout << "Alex's width and height is " << Alex->getWidth() << ", " << Alex->getHeight() << endl;
 
 	vector<WorldObj*> recVec;
 	vector<WorldObj*>* recVec_ptr = &recVec;
@@ -321,17 +321,21 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	Alex->setName("Alex");
 	Alex->setTalkDist(20);
 	gameplay_functions->add_Attack(Alex->getKey(), Alex->body[0].getX(), Alex->body[0].getY(),true,10);
+
 	tBuffer->run();
+
 	Alex->melee = Containers::Attack_table[Alex->getKey()];
 	Alex->melee->setDmg(10);
 	Alex->melee->setSpeed(5);
 	Alex->melee->setBaseDir(4);
-	Alex->melee->setCoolDown(62);
+	Alex->melee->setCoolDown(120);
 	Alex->melee->setPause(-1);
 	Alex->melee->setDestroy(false);
 	Alex->melee->setKeep(true);
 	Alex->melee->setWidth(Alex->body[0].getWidth());
 	Alex->melee->setHeight(Alex->body[0].getHeight());
+
+
 	Attack* rockThrow = new Attack();
 	rockThrow->setDmg(5);
 	rockThrow->setSpeed(10);
@@ -341,8 +345,10 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	rockThrow->setPause(24);
 	rockThrow->sprite.setTexture(rockTex);
 	Alex->addAttackType(rockThrow);
+
 	//Alex->melee->sprite.setTexture(blank);
 	Alex->melee->sprite.setTexture(blank);
+
 	DialogueController::setPlayer(Alex);
 	//vector<WorldObj*> recVec;
 	Attack* spin = new Attack();
@@ -441,9 +447,12 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	
 	gameplay_functions->add_hero("Yemoja", 4600, 3600, true);
 
+	gameplay_functions->add_hero("otherShango", 4900, 3300, true);
+
 	tBuffer->run();
 
 	Hero* staticRec = Containers::hero_table["Yemoja"];
+	Hero* otherShango = Containers::hero_table["otherShango"];
 
 	staticRec->setWidth(100);
 	staticRec->setHeight(100);
@@ -452,7 +461,8 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	///should actually use gameplay_functions->add_hero("Yemoja", 4600, 3600, true)
 	/// Containers::hero_table[name]->setWidht(widht)
 
-
+	otherShango->setWidth(100);
+	otherShango->setHeight(100);
 
 	staticRec->sprite.setTexture(yemojaTexture);
 	staticRec->sprite.setIdleTexture(yemojaIdleTex);
@@ -469,16 +479,62 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	staticRec->sprite.hurt_left = leftHurtTex;
 	staticRec->sprite.hurt_right = rightHurtTex;
 
+	otherShango->sprite.setTexture(playerTexture);
+	otherShango->sprite.setIdleTexture(playerIdleTex);
+	otherShango->sprite.up = upRunTex;
+	otherShango->sprite.down = downRunTex;
+	otherShango->sprite.left = leftRunTex;
+	otherShango->sprite.right = rightRunTex;
+
+	otherShango->sprite.id_up = upIdleTex;
+	otherShango->sprite.id_left = leftIdleTex;
+	otherShango->sprite.id_right = rightIdleTex;
+	otherShango->sprite.id_down = downIdleTex;
+
+	otherShango->sprite.atk_up = upAtkTex;
+	otherShango->sprite.atk_down = downAtkTex;
+	otherShango->sprite.atk_left = leftAtkTex;
+	otherShango->sprite.atk_right = rightAtkTex;
+
+	otherShango->sprite.hurt_up = upHurtTex;
+	otherShango->sprite.hurt_down = downHurtTex;
+	otherShango->sprite.hurt_left = leftHurtTex;
+	otherShango->sprite.hurt_right = rightHurtTex;
+
+	otherShango->offsetBody(0, 50, 50, 50, 50);
+	otherShango->setInteractable(true);
+	otherShango->setName("otherShango");
+
+	gameplay_functions->add_Attack(otherShango->getKey(), otherShango->body[0].getX(), otherShango->body[0].getY(), true, 10);
+	tBuffer->run();
+
+
+	otherShango->melee = Containers::Attack_table[otherShango->getKey()];
+	otherShango->melee->setDmg(10);
+	otherShango->melee->setSpeed(5);
+	otherShango->melee->setBaseDir(4);
+	otherShango->melee->setCoolDown(200);
+	otherShango->melee->setPause(-1);
+	otherShango->melee->setDestroy(false);
+	otherShango->melee->setKeep(true);
+	otherShango->melee->setWidth(otherShango->body[0].getWidth());
+	otherShango->melee->setHeight(otherShango->body[0].getHeight());
+
+	otherShango->addAttackType(rockThrow);
+	otherShango->melee->sprite.setTexture(blank);
+	//otherShango->addAttackType(spin);
+
+
 
 
 	//VisibilityGraph graph;
 	ai->graph.vertices = vertices;
 	ai->graph.obstacles = edges;
 	for (Vector2f vert : ai->graph.vertices) {
-		std::cout << "X: " << vert.getXloc() << " Y: " << vert.getYloc() << std::endl;
+		//std::cout << "X: " << vert.getXloc() << " Y: " << vert.getYloc() << std::endl;
 	}
 	for (auto edge : ai->graph.obstacles) {
-		std::cout << "EDGE from " << edge.first.getXloc() << "," << edge.first.getYloc() << " to " << edge.second.getXloc() << "," << edge.second.getYloc() << std::endl;
+		//std::cout << "EDGE from " << edge.first.getXloc() << "," << edge.first.getYloc() << " to " << edge.second.getXloc() << "," << edge.second.getYloc() << std::endl;
 	}
 
 	bool visible = true;
@@ -518,6 +574,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	//staticRec->goal.setYloc(1200);
 	*/
 	recVec.push_back(staticRec);
+	recVec.push_back(otherShango);
 	//recVec.push_back(tree);
 	//recVec.push_back(tree1);
 	//recVec.push_back(tree2);
@@ -558,10 +615,10 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	ai->graph.insert(Vector2f(4500.00, 4000.00));
 	ai->graph.insert(Vector2f(5650.00, 3700.00));
 	for (Vector2f vert : ai->graph.vertices) {
-		std::cout << "X: " << vert.getXloc() << " Y: " << vert.getYloc() << std::endl;
+		//std::cout << "X: " << vert.getXloc() << " Y: " << vert.getYloc() << std::endl;
 	}
 	for (auto edge : ai->graph.obstacles) {
-		std::cout << "EDGE from " << edge.first.getXloc() << "," << edge.first.getYloc() << " to " << edge.second.getXloc() << "," << edge.second.getYloc() << std::endl;
+		//std::cout << "EDGE from " << edge.first.getXloc() << "," << edge.first.getYloc() << " to " << edge.second.getXloc() << "," << edge.second.getYloc() << std::endl;
 	}
 
 	ai->graph._print();
@@ -608,7 +665,8 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	}
 	poolAct->macro.back().exeAction();
 
-
+	Vector2f otherShangoInitialLoc = otherShango->getLoc();
+	vector<WorldObj*> enemyVec;
 	//osi::GameWindow::init();
 	LOG("PAST WINDOW INIT ***********************");
 	clock_t start_tick, current_ticks, delta_ticks;
@@ -621,6 +679,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 		start_tick = clock();
 		_QuadTree->clear();
 		Alex->updateCD();
+		otherShango->updateCD();
 		for (int i = 0; i < recVec.size(); i++) {
 			_QuadTree->insert(recVec[i]);	//insert all obj into tree
 	
@@ -630,7 +689,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 		if (staticRec->destination != Vector2f(0, 0)) { //Hero has a destination
 			if (staticRec->waypoint != Vector2f(0,0) && state == 0) { //Hero has a waypoint to the desination, and not in dialog
 				gameplay_functions->move_toward(staticRec); //Take a step towards the current waypoint
-				std::cout << "Request a step" << std::endl;
+			//	std::cout << "Request a step" << std::endl;
 			}
 			else if (state == 0)                //Hero needs waypoints to destination, and not in dialog
 			{
@@ -642,8 +701,8 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 		{
 			int r = rand() % 4;
 			ai->start = staticRec->getLoc();
-			std::cout << "at " << ai->start.getXloc() << "," << ai->start.getYloc() << std::endl;
-			std::cout << "picked " << r << std::endl;
+			//std::cout << "at " << ai->start.getXloc() << "," << ai->start.getYloc() << std::endl;
+			//std::cout << "picked " << r << std::endl;
 			switch (r) {
 			case 0:
 				
@@ -669,6 +728,88 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 				staticRec->setMode(WANDER);
 			}
 		}
+
+
+		cout << "Alex's position is " << Alex->getLoc().getXloc() << ", " << Alex->getLoc().getYloc() << endl;
+		cout << "OS's position is " << otherShango->getLoc().getXloc() << ", " << otherShango->getLoc().getYloc() << endl;
+
+		/* DEFINE COMBAT MOVEMENT AI HERE 
+		   At the start of each frame, we want to check for a given npc, whether there is hostile enemy on the map.
+		   Then, set the enemy and set the waypoint and destination to be the enemy's location. Since we do not have access
+		   to skills and cooldowns and what not, */
+		//attack mode
+		enemyVec.clear();
+		enemyVec.push_back(Alex);
+		if (enemyVec.empty()) otherShango->setMode(1);
+		for (auto it : enemyVec) {
+			//if discovered Alex, set otherShango combat mode to 0(attack).
+			if (otherShango->getCurrentEnemy() != nullptr) break;
+			if (it == Alex) {
+				cout << "*************************************FOUND ENEMY****************************************" << endl;
+				otherShango->setMode(0);
+				otherShango->setCurrentEnemy(it);
+				break;
+			}
+		}
+		//if OS has an enemy, move to the enemy
+		if (otherShango->getCurrentEnemy() != nullptr) {
+			cout << "*************************************************MOVING TO ENEMY******************************************" << endl;
+			Vector2f l= otherShango->getCurrentEnemy()->getLoc();
+			l.shiftXloc(otherShango->getCurrentEnemy()->getWidth()/4);
+			l.shiftYloc(otherShango->getCurrentEnemy()->getHeight()/4);
+			otherShango->waypoint = l;
+			otherShango->destination =l;
+			gameplay_functions->move_toward(otherShango);
+
+			//if at destination, attack
+			if (otherShango->destination.getXloc() == otherShango->getX()) {
+				if (abs(otherShango->destination.getYloc()-otherShango->getY())<300) {
+					if (otherShango->getCool(0)) {
+						if (otherShango->destination.getYloc() > otherShango->getY()) {
+							otherShango->setDirection(2);
+						}
+						else {
+							otherShango->setDirection(8);
+						}
+					}
+				}
+			} else if (otherShango->destination.getYloc() == otherShango->getY()) {
+				if (abs(otherShango->destination.getXloc() - otherShango->getX())<300) {
+					if (otherShango->getCool(0)) {
+						if (otherShango->destination.getXloc() > otherShango->getX()) {
+							otherShango->setDirection(6);
+						}
+						else {
+							otherShango->setDirection(4);
+						}
+					}
+				}
+			}
+
+			if (otherShango->destination == otherShango->getLoc()) {
+				if (otherShango->getCool()) {
+					std::cout << "Pressed F" << std::endl;
+					//gameplay_functions->special(otherShango, 0);
+					otherShango->meleeAttack();
+					gameplay_functions->melee(otherShango);
+				}
+				
+			}
+		}
+
+		//evade mode
+		if (otherShango->getCurrentEnemy() != nullptr) {
+			//if OS is in evade mode
+			if (otherShango->getMode() == 1) {
+
+			}
+		}
+
+	
+
+
+
+		
 		//ai->plan_step(staticRec);
 		//clock 
 
@@ -776,7 +917,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 		if (delta_ticks > 0)
 			fps = CLOCKS_PER_SEC / delta_ticks;
 		if (DialogueController::getState() == 0) {
-			cout << "FPS: " << fps << endl;
+			//cout << "FPS: " << fps << endl;
 		}
 
 

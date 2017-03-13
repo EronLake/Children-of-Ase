@@ -32,8 +32,7 @@ public:
 	int getCD() { return cdTotal; };
 	void updateCD();
 	int timeCD() { return cdTime; };
-	void setCool(bool c) { cool = c; };
-	bool getCool() { return cool; };
+	bool getCool() { return (cdTime==0); };
 	bool getCool(int c);
 	void setParty(Party* p) { party=p; };
 	Party* getParty() { return party; };
@@ -50,7 +49,6 @@ private:
 	bool patrol;
 	int cdTotal;
 	int cdTime;
-	bool cool;
 	int instances;
 	std::string key;
 	std::string atkey;
