@@ -1,41 +1,60 @@
 #pragma once
+
 #include "stdafx.h"
+
+#include <cstdint>
+
 #include "LivingObj.h"
 
-class Attack :
-	public WorldObj
+class Attack: public WorldObj
 {
-public:
-	Attack();
-	Attack(float x, float y, bool col);// , int d);
-	~Attack();
-	void Hit(LivingObj *target);
-	void setDmg(int d) { dmg = d; };
-	int getDmg() { return dmg; };
-	void setDuration(int d) { duration = d; };
-	bool updateDuration();
-	int getDuration() { return duration; };
-	void setDestroy(bool d) { destroyOnCollision = d; };
-	bool getDestroy() {return destroyOnCollision;};
-	void setSpeed(float s) { speed=s; };
-	float getSpeed() { return speed; };
-	void setCoolDown(int c) { cooldown = c; };
-	int getCoolDown() { return cooldown; };
-	void move();
-	void addHit(WorldObj* o) { hitObjs.push_back(o); };
-	vector<WorldObj*> getHits() { return hitObjs; };
-	void setPause(int p) { pause = p; };
-	void updatePause() { if (pause>0)pause--; };
-	int getPause() { return pause; };
-	void setKeep(bool k) { keep=k; };
-	bool getKeep() { return keep; };
-private:
-	int dmg;
-	int duration; //-1 will mean infinity
-	bool destroyOnCollision;
-	float speed;
-	int cooldown;
-	int pause;
-	vector<WorldObj*> hitObjs;
-	bool keep;
+  public:
+
+  Attack();
+  Attack(float x, float y, bool col);// , int d);
+  ~Attack() = default;
+
+  int getDmg() { return this->dmg; };
+  int getDuration() { return this->duration; };
+  float getSpeed() { return this->speed; };
+  bool getDestroy() { return this->destroyOnCollision; };
+
+  int getCoolDown() { return this->cooldown; };
+  int getPause() { return this->pause; };
+  bool getKeep() { return this->keep; };
+  vector<WorldObj*> getHits() { return this->hitObjs; };
+
+  void setDmg(int d) { this->dmg = d; };
+  void setDuration(int d) { this->duration = d; };
+  bool updateDuration();
+  void setSpeed(float s) { this->speed = s; };
+  void setDestroy(bool d) { this->destroyOnCollision = d; };
+  
+  void setCoolDown(int c) { this->cooldown = c; };
+  void setPause(int p) { this->pause = p; };
+  void updatePause() { if(this->pause > 0) --pause; };
+  void setKeep(bool k) { this->keep = k; };
+  void addHit(WorldObj* o) { this->hitObjs.push_back(o); };
+  void Hit(LivingObj *target);
+
+  void move();
+
+  enum class AttackTypes: uint8_t
+  {
+    SPECIAL_MELEE,
+    SPECIAL_PROJECTILE,
+    SUMMONING
+  };
+
+  private:
+
+  int dmg;
+  int duration; // -1 will mean infinity
+  float speed;
+  bool destroyOnCollision;
+  
+  int cooldown;
+  int pause;
+  bool keep;
+  vector<WorldObj*> hitObjs;
 };
