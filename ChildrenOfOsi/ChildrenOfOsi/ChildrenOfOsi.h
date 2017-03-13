@@ -30,6 +30,7 @@ public:
 	void talk(WorldObj * player);
 	void melee(WorldObj * player);
 	void special(WorldObj * player, int num);
+	void spin(WorldObj * player, int num);
 	void combat(WorldObj * player);
 	void setSwordGlow(WorldObj* player);
 	void setHeartGlow(WorldObj* player);

@@ -143,8 +143,8 @@ void Input::InputCheck()
 				Player* t = CheckClass::isPlayer(player);
 				if (t) {
 					if (t->getCool(1)) {
-						std::cout << "Pressed R" << std::endl;
-						gameplay_functions->special(t, 1);
+						std::cout << "Pressed T" << std::endl;
+						gameplay_functions->spin(t, 1);
 						gameplay_functions->melee(t);
 					}
 				}

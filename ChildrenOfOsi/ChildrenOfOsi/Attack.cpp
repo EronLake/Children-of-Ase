@@ -11,7 +11,6 @@ Attack::Attack()
 	speed = 0;
 	cooldown = 62;
 	pause = 62;
-	turn = 0;
 }
 
 Attack::Attack(float x, float y, bool col) : WorldObj(x, y, col)
@@ -23,7 +22,6 @@ Attack::Attack(float x, float y, bool col) : WorldObj(x, y, col)
 	speed=0;
 	cooldown=62;
 	pause=62;
-	turn = 0;
 }
 
  void Attack::Hit(LivingObj *target)
@@ -38,15 +36,8 @@ Attack::Attack(float x, float y, bool col) : WorldObj(x, y, col)
  bool Attack::updateDuration() {
 	 if (duration>0)duration--;
 	 if (duration == 0) {
-		 /*if (turn>0) {
-			 setDirWithBase(6);
-			 duration += 7;
-			 turn--;
-		 }
-		 else {*/
-			 hitObjs.clear();
-			 return false;
-		// }
+		hitObjs.clear();
+		return false;
 	 }
 	 return true;
  }

@@ -1,15 +1,22 @@
 #pragma once
+//#include "Village.h"
+//#include "Alliance.h"
+#include "common.h"
+class Village;
+class Alliance;
 
-#include "Alliance.h"
 class War
 {
 private:
-	std::pair<Alliance*, Alliance*> warParties;
+	std::pair<Village*, Village*> warParties;
+	static std::vector<War*> wars;
 
 public:
 	War();
 	~War();
-	void setWarParties(Alliance* p_alliance1, Alliance* p_alliance2);
-	std::pair<Alliance*, Alliance*> getWarParties();
+	void setWarParties(Village* p_alliance1, Village* p_alliance2);
+	std::pair<Village*, Village*> getWarParties();
+	static void endWar(Village* one, Village* two);
+	static std::vector<Village*> getWars(Village* vil);
 };
 

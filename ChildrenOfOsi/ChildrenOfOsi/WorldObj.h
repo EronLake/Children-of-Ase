@@ -15,19 +15,20 @@ class WorldObj
 
   WorldObj():
     ID(idNum++), loc(0, 0), collision(false), type(0)
-  { this->body.push_back({{0.0F, 0.0F}, 1.0F, 1.0F}); };
+  {this->body.push_back({ {0.0F, 0.0F}, 1.0F, 1.0F }); evasionBound = new Rectangle();};
 
   WorldObj(Vector2f p_topLeft, float p_width, float p_height):
     ID(idNum++), loc(p_topLeft), width(p_width), height(p_height), collision(false), type(0)
-  { this->body.push_back({loc, p_width, p_height}); }
+  { this->body.push_back({loc, p_width, p_height}); evasionBound = new Rectangle();}
 
   WorldObj(float x, float y, bool col):
     ID(idNum++), loc({x, y}), collision(col), type(0)
-  { this->body.push_back({loc, 1.0F, 1.0F}); }
+  { this->body.push_back({loc, 1.0F, 1.0F}); evasionBound = new Rectangle();}
 
   virtual ~WorldObj() = default;
 
   // Basic geometric information getters
+
   Vector2f getLoc() { return this->loc; };
   float getX() { return this->loc.getXloc(); };
   float getY() { return this->loc.getYloc(); };
@@ -36,6 +37,7 @@ class WorldObj
   float getRotY() { return this->rotation.getYloc(); };
   float getWidth() { return this->width; };
   float getHeight() { return this->height; };
+
 
   // Higher-level getter methods
   int getID() { return this->ID; };
@@ -50,6 +52,7 @@ class WorldObj
   int getEvasionRadius() { return this->evasionRadius; };
   Vector2f getEvadeRange(WorldObj* _enemy);
   Vector2f getCombatMoveDestination() { return this->combatMoveDestination; };
+  Vector2f getStrafeLocation(WorldObj* _enemy);
 
   int getBaseDir() const { return baseDir; };
 
@@ -126,10 +129,11 @@ class WorldObj
 
   int evasionRadius = 225;
   Vector2f combatMoveDestination;
+  Rectangle* evasionBound;
 
   int baseDir;
 
-  bool targetIsWithinRange(Rectangle _bound);
+  bool targetIsWithinRange(Rectangle* _bound);
 };
 
 

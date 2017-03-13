@@ -96,6 +96,11 @@ void ChildrenOfOsi::special(WorldObj * player, int num)
 	createTask("New_Attack", "MODIFY_POOL", player);
 }
 
+void ChildrenOfOsi::spin(WorldObj * player, int num)
+{
+	createTask("New_Spin", "MODIFY_POOL", player);
+}
+
 void ChildrenOfOsi::combat(WorldObj * player)
 {
 	createTask("Attack", "COMBAT", player);
