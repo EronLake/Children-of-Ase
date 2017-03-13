@@ -30,7 +30,7 @@ class WorldObj
   // Basic geometric information getters
   Vector2f getLoc() const { return this->loc; };
   float getX() const { return this->loc.getXloc(); };
-  float getY() const { return this->loc.getYloc; };
+  float getY() const { return this->loc.getYloc(); };
   Vector2f getRot() const { return this->rotation; };
   float getRotX() const { return this->rotation.getXloc(); };
   float getRotY() const { return this->rotation.getYloc(); };

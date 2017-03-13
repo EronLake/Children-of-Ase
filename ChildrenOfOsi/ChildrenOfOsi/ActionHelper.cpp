@@ -109,11 +109,12 @@ void ActionHelper::execute_train_with(Action* train_with) {
 
 }
 void ActionHelper::execute_form_alliance(Action* form_alliance) {
+	Hero* doer = form_alliance->getDoer();
+	Hero* responder = form_alliance->getReceiver();
 	switch (form_alliance->checkpoint) {
 	case 0:
 		create_memory(form_alliance);
-		Hero* doer = form_alliance->getDoer();
-		Hero* responder = form_alliance->getReceiver();
+		
 		form_alliance->getDoer()->destination = { 1000,1000 };
 		form_alliance->checkpoint++;
 		break;
@@ -121,7 +122,7 @@ void ActionHelper::execute_form_alliance(Action* form_alliance) {
 	case 1:
 		if (form_alliance->getDoer()->destination == Vector2f(0, 0)) {
 			Planner* hero_planner = ai->hero_planners[responder->name];
-			if (form_alliance->getName() == hero_planner->get_end_state_map[responder->name]->getName()) {
+			if (form_alliance->getName() == ((*hero_planner->get_end_state_map())[responder->name]).getName()){
 				if (!form_alliance->exeAction()) {
 					//update memory failed
 				}
@@ -133,7 +134,6 @@ void ActionHelper::execute_form_alliance(Action* form_alliance) {
 			else {
 				//update memory failed
 			}
-			break;
 
 		}
 		
