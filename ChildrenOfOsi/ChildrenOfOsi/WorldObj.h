@@ -51,6 +51,8 @@ class WorldObj
   Vector2f getEvadeRange(WorldObj* _enemy);
   Vector2f getCombatMoveDestination() const { return this->combatMoveDestination; };
 
+  int getBaseDir() const { return baseDir; };
+
   // Basic geometric information getters
   void setLoc(Vector2f l) { this->loc = l; };
   void setX(float x);
@@ -58,12 +60,12 @@ class WorldObj
   void shiftX(float dist);
   void shiftY(float dist);
   void setRot(Vector2f r) { this->rotation = r; };
-  void setRotX(float x);
-  void setRotY(float y);
-  void shiftRotX(float dist);
-  void shiftRotY(float dist);
-  void setWidth(float w);
-  void setHeight(float h);
+  void setRotX(float x) { this->rotation.setXloc(x); };
+  void setRotY(float y) { this->rotation.setYloc(y); };
+  void shiftRotX(float dist) { this->rotation.shiftXloc(dist); };
+  void shiftRotY(float dist) { this->rotation.shiftYloc(dist); };
+  void setWidth(float w) { this->body[0].setWidth(this->width = w); };
+  void setHeight(float h) { this->body[0].setHeight(this->height = h); };
 
   // Higher-level setter methods
   void setName(std::string n) { this->name = n; };
@@ -76,10 +78,13 @@ class WorldObj
   // Higher-level setters cont.
   void offsetBody(int i, float x1, float x2, float y1, float y2);
   void drawObj(float _x, float _y);
-  void animateObj() { sprite.animate(); };
+  void animateObj() { this->sprite.animate(); };
 
   // Combat AI information setters
   void setEvasionRadius(int _radius) { this->evasionRadius = _radius; }
+
+  void setBaseDir(int d) { this->baseDir = d; };
+  void setDirWithBase(int od);
 
   // String conversion
   void _print();
@@ -119,6 +124,8 @@ class WorldObj
 
   int evasionRadius = 225;
   Vector2f combatMoveDestination;
+
+  int baseDir;
 
   bool targetIsWithinRange(Rectangle _bound) const;
 };

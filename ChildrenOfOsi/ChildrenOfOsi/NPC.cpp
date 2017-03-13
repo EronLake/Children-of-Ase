@@ -14,6 +14,7 @@ NPC::NPC(float x, float y, bool col) :LivingObj(x, y, col)
 	diagXSpeed = sqrt((speed*speed) / 2);
 	diagYSpeed = sqrt((speed*speed) / 2);
 	setType(2);
+	currentEnemy = nullptr;
 }
 
 NPC::NPC(Vector2f p_topLeft, float p_width, float p_height):LivingObj(p_topLeft,p_width,p_height)
@@ -23,6 +24,7 @@ NPC::NPC(Vector2f p_topLeft, float p_width, float p_height):LivingObj(p_topLeft,
 	diagXSpeed = sqrt((speed*speed) / 2);
 	diagYSpeed = sqrt((speed*speed) / 2);
 	setType(2);
+	currentEnemy = nullptr;
 }
 
 NPC::~NPC()
@@ -92,6 +94,16 @@ void NPC::setMode(int m)
 int NPC::getMode()
 {
 	return move_mode;
+}
+
+WorldObj * NPC::getCurrentEnemy()
+{
+	return currentEnemy;
+}
+
+void NPC::setCurrentEnemy(WorldObj * p_enemy)
+{
+	currentEnemy = p_enemy;
 }
 
 

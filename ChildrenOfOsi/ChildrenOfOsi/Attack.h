@@ -29,9 +29,8 @@ public:
 	int getPause() { return pause; };
 	void setKeep(bool k) { keep=k; };
 	bool getKeep() { return keep; };
-	void setBaseDir(int d) { baseDir = d; };
-	void setDirWithBase(int od);
-	int getBaseDir() { return baseDir; };
+	void setTurn(int d) { turn = d; };
+	int getTurn() { return turn; };
 private:
 	int dmg;
 	int duration; //-1 will mean infinity
@@ -41,5 +40,5 @@ private:
 	int pause;
 	vector<WorldObj*> hitObjs;
 	bool keep;
-	int baseDir;
+	int turn;
 };

@@ -156,7 +156,7 @@ void Planner::add_milestone(Action goal, Action milestone) {
 }
 
 void Planner::generate_milestones(Action state, Action goal) {
-	if (goal.preConditionsNeeded(evaluateHero, goal.getHero()).size() == 0)
+	if (goal.preConditionsNeeded(evaluateHero, goal.getReceiver()).size() == 0)
 	{
 		if (goal.getUtility() > current_action_value)
 		{
@@ -172,3 +172,12 @@ void Planner::generate_milestones(Action state, Action goal) {
 	}
 }
 
+//Returns the value of the given action according to the end state you are currently focusing on,
+//with consideration towards the other three end states
+int Planner::value_of(Action* action) {
+	int action_value;
+
+	action_value = heuristic(*action, prioritize_preconditions(current_end_state), get_end_states());
+
+	return action_value;
+}

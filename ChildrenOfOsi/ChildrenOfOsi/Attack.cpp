@@ -11,7 +11,7 @@ Attack::Attack()
 	speed = 0;
 	cooldown = 62;
 	pause = 62;
-	baseDir = 8;
+	turn = 0;
 }
 
 Attack::Attack(float x, float y, bool col) : WorldObj(x, y, col)
@@ -23,7 +23,7 @@ Attack::Attack(float x, float y, bool col) : WorldObj(x, y, col)
 	speed=0;
 	cooldown=62;
 	pause=62;
-	baseDir = 8;
+	turn = 0;
 }
 
 Attack::~Attack()
@@ -42,8 +42,15 @@ Attack::~Attack()
  bool Attack::updateDuration() {
 	 if (duration>0)duration--;
 	 if (duration == 0) {
-		 hitObjs.clear();
-		 return false;
+		 /*if (turn>0) {
+			 setDirWithBase(6);
+			 duration += 7;
+			 turn--;
+		 }
+		 else {*/
+			 hitObjs.clear();
+			 return false;
+		// }
 	 }
 	 return true;
  }
@@ -64,50 +71,4 @@ Attack::~Attack()
 	 }
  }
 
- void Attack::setDirWithBase(int od) {
-	 if (od == 8) {
-		 if (baseDir == 2) {
-			 od = 2;
-		 }
-		 else if (baseDir == 4) {
-			 od = 4;
-		 }
-		 else if (baseDir == 6) {
-			 od = 6;
-		 }
-	 }
-	 else if (od == 2) {
-		 if (baseDir == 2) {
-			 od = 8;
-		 }
-		 else if (baseDir == 4) {
-			 od = 6;
-		 }
-		 else if (baseDir == 6) {
-			 od = 4;
-		 }
-	 }
-	 else if (od == 4) {
-		 if (baseDir == 2) {
-			 od = 6;
-		 }
-		 else if (baseDir == 4) {
-			 od = 2;
-		 }
-		 else if (baseDir == 6) {
-			 od = 8;
-		 }
-	 }
-	 else if (od == 6) {
-		 if (baseDir == 2) {
-			 od = 4;
-		 }
-		 else if (baseDir == 4) {
-			 od = 8;
-		 }
-		 else if (baseDir == 6) {
-			 od = 2;
-		 }
-	 }
-	 setDirection(od);
- }
+ 

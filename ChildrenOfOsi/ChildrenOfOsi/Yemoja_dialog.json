@@ -1,20 +1,130 @@
 {
-	"Greeting": {
-		"1": "Hello",
-		"2": "Greetings"
-	},
+    "Greeting": {
+        "1": "Oh... it's you. Let's just get this over with",
+        "2": "I guess anyone nowadays thinks they can just walk in and talk to me",
+        "3": "Hello",
+        "4": "It is good to see you",
+        "5": "My friend, it is so good to see you. I hope you have been doing well"
+    },
 
-	"Extra_Dialogue": {
-		"1": "I have to admit I am impressed that you fared the harshness of the savannah and made it to our Village in one piece",
-		"2": "It is not often we find ourselves having visitors in this village, and it is even rarer that we know nothing about our guests",
-		"3": "I welcome you if you stand before me with peaceful intentions. Just know that if you plan on harming the people of this village or myself, it is the last mistake you will ever make"
-	},
+    "Farewell": {
+        "1": "Please just leave already",
+        "2": "*tch*",
+        "3": "Goodbye",
+        "4": "I hope to see you again soon",
+        "5": "Feel free to come talk to me anytime"
+    },
 
-	"Introduction": {
-		"1": "My name is",
-		"2": "My people call me",
-		"3": "I am known as"
-	},
+    "Extra_Dialogue": {
+        "1": "I have to admit I am impressed that you fared the harshness of the savannah and made it to our Village in one piece",
+        "2": "It is not often we find ourselves having visitors in this village, and it is even rarer that we know nothing about our guests",
+        "3": "I welcome you if you stand before me with peaceful intentions. Just know that if you plan on harming the people of this village or myself, it is the last mistake you will ever make"
+    },
+
+    "Introduction": {
+        "3": "I am known as"
+    },
+
+    "Ask_Oya": {
+        "1": "She is a silly woman located in the forest to the Southeast",
+        "2": "You mean that buffoon of a Hero that lives in the forest to the Southeast",
+        "3": "Oya is the Hero that lives in the Southeast forest",
+        "4": "Oya is a wise Hero that lives in a village in the forest to the Southeast of here",
+        "5": "Ah Oya. She is a wise and respected Hero that lives in a beautiful village located in the forest to the Southeast"
+    },
+
+    "Ask_Ogun_response": {
+        "1": "Ogun is that horrible warrior that hides away in his iron fortress to the North of the desert",
+        "2": "Ogun is a Hero that has made too many enemies for himself by flaunting his militaristic strength. He resides in that iron fortress to the North, you cannot miss it",
+        "3": "Ogun is a Hero that resides in the iron fortress to the North of here",
+        "4": "Ogun is a powerful Hero that lives in the iron fortress that is North of the desert",
+        "5": "Ogun is a strong leader and a powerful Hero that lives in the iron fortress to the North"
+    },
+
+    "Ask_Ogun": {
+        "1": "Ogun is that horrible warrior that hides away in his iron fortress to the North of the desert",
+        "2": "Ogun is a Hero that has made too many enemies for himself by flaunting his militaristic strength. He resides in that iron fortress to the North, you cannot miss it",
+        "3": "Ogun is a Hero that resides in the iron fortress to the North of here",
+        "4": "Ogun is a powerful Hero that lives in the iron fortress that is North of the desert",
+        "5": "Ogun is a strong leader and a powerful Hero that lives in the iron fortress to the North"
+    },
+
+    "Ask_Oshosi": {
+        "1": "Oshosi is that foolish man that hides away in the mountains to the Northeast of here. He lets his enflated ego get in the way of the safety of the village he lives in",
+        "2": "Oshosi is a fool of a Hero that runs his mouth more than he should. He resides in the mountains to the Northeast of here",
+        "3": "Oshosi is the Hero that resides in the mountains to the Northeast of here",
+        "4": "Oshosi is a brash Hero, but he only has the best of intentions with his actions. He lives in a mountain village to the Northeast of here",
+        "5": "Oshosi is what I would call a misguided man with a heart of gold. He and I may disagree on things, but we both get along quite well. He lives in the mountains to the Northeast of this village"
+    },
+
+    "Relationship_Oya": {
+        "1": "Let's just say that Oya and I rarely see eye to eye on anything",
+        "2": "I am glad that Oya resides far away from this village so I do not have to deal with her",
+        "3": "I wouldn't say that Oya and I are friends, but I definitely would not say we are enemies",
+        "4": "Oya is a wise leader whom I respect dearly. I am happy to say that we are both on good terms",
+        "5": "Oya is the wisest person I know. Her wisdom has helped guide me multiple times in the past and I consider her one of my closest friends"
+    },
+
+    "Relationship_Ogun": {
+        "1": "I cannot stand that Ogun resides so close to me. The fact that he exists makes me worry constantly for the safety of this village",
+        "2": "Ogun is a nuisance. I hope he never discovers this village and harms its people",
+        "3": "Ogun and I are content simply leaving eachother alone",
+        "4": "Ogun is not simply all strength. I respect him for his cunning as well",
+        "5": "I feel much more confident in the safety of this village knowing that Ogun and I are on such good terms"
+    },
+
+    "Relationship_Oshosi": {
+        "1": "Pssh. I cannot take that foolish man seriously at all. I do not know how the people of the mountain village put up with his false bravado and silly antics",
+        "2": "He lets his infalted ego get to his head. He constantly puts his own agenda before helping the people of the mountain village",
+        "3": "Oshosi and I occasionally talk, but I cannot say that we are close or hostile with one another",
+        "4": "Oshosi is well intentioned with his actions, even though we do not see eye to eye on everything. I am happy to be his friend, though",
+        "5": "I am happy to be close with Oshosi. He is a strong leader and he has supported me countless times in the past"
+    },
+
+    "Ask_Alliance": {
+        "2": "I honestly do not see how allying with you will help this village become any safer",
+        "3": "I do not know you that well, but this one time I will go against my better judgement and accept this alliance with you",
+        "4": "I think that forming an alliance with you is a situation that benefits the both of us. I accept",
+        "5": "I am more than happy to ally with you Shango. I know that you will help make this village safer"
+    },
+
+    "Move_to_conquer": {
+        "3": "I am not sure that conquest is the best idea for ensuring the safety of this village, but I will keep it in mind",
+        "4": "I think that moving to conquer is a risky move, but I am glad that you gave me this advice",
+        "5": "I respect your advice, and will definitely consider conquest as a powerful strategic move"
+    },
+
+    "Move_to_alliance": {
+        "3": "I believe you allying with a certain village would be beneficial",
+        "4": "An alliance can possibly help ensure the safety of this village, so I will definitely consider it",
+        "5": "Your advice always has my best interests in mind it seems, so I promise you I will deeply consider as alliance"
+    },
+
+    "Move_to_alliance_response": {
+        "1": "I absolutely refuse. The very idea of being in an alliance with that village disgusts me",
+        "2": "An alliance can possibly help ensure the safety of this village, so I will definitely consider it",
+        "3": "I will have to think deeply as to whether or not this alliance is a good idea",
+        "4": "An alliance can possibly help ensure the safety of this village, so I will definitely consider it",
+        "5": "Your advice always has my best interests in mind it seems, so I promise you I will deeply consider as alliance"
+    },
+
+    "Move_to_revolt": {
+        "3": "It seems very risky to even be talking about this, but I cannot say that I haven't considered revolt",
+        "4": "I know it would help this village prosper if we were to revolt, but it just seems so dangerous. I will have to think about this",
+        "5": "I know you are right. This tyranny can last no longer. The only possible solution I can think of is revolt"
+    },
+
+    "Move_to_destroy": {
+        "3": "It is possible that this village would be safer if that village was out of the picture entirely. But I know that it is risky",
+        "4": "Getting rid a village is no easy task, but I am not someone to back down from a challenge if the safety of this village is on the line",
+        "5": "I usually try to avoid such violence and destruction, but deep down I know that you are right. This is the only real way to keep this village safe"
+    },
+
+    "Move_to_spy": {
+        "3": "It is possible that this village would be safer if that village was out of the picture entirely. But I know that it is risky",
+        "4": "Getting rid a village is no easy task, but I am not someone to back down from a challenge if the safety of this village is on the line",
+        "5": "I usually try to avoid such violence and destruction, but deep down I know that you are right. This is the only real way to keep this village safe"
+    },
 
 	"Refute_Question": {
 		"1": "I do not see any reason why I should tell you that",
@@ -27,9 +137,8 @@
 	},
 
 	"Ask_Name": {
-		"1": "What do you call yourself",
-		"2": "Now, who are you",
-		"3": "What do people call you"
+		"3": "What do people call you",
+		"4": "What do you call yourself, friend"
 	},
 
 	"Ask_Reason": {
@@ -39,9 +148,7 @@
 	},
 
 	"Ask_Origin": {
-		"1": "Where are you from",
-		"2": "Which village do you come from",
-		"3": "Where do you come from"
+		"3": "Which village do you come from"
 	},
 
 	"Friend_Reason": {

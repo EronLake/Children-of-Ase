@@ -1,36 +1,10 @@
 #include "stdafx.h"
+
 #include "WorldObj.h"
+
 #include "GameWindow.h"
+
 int WorldObj::idNum = 0;
-
-
-WorldObj::WorldObj()
-{
-	loc.setXloc(0);
-	loc.setYloc(0);
-	collision = false;
-	Rectangle init(loc, 1, 1);
-	body.push_back(init);
-	type = 0;
-	ID = idNum++;
-}
-
-WorldObj::WorldObj(float x, float y, bool col)
-{
-	loc.setXloc(x);
-	loc.setYloc(y);
-	//rotation.setXloc(1);
-	//rotation.setYloc(1);
-	collision = col;
-	Rectangle init(loc,1,1);
-	body.push_back(init);
-	type = 0;
-	ID = idNum++;
-	//cout <<"X-Loc: "<< loc.getXloc() << endl;
-	//cout << "Y-Loc: " << loc.getYloc() << endl;
-	//cout << "Rotation: " << rotation.getXloc()<<" , " << rotation.getYloc()<< endl;
-	//cout << "Collision: " << collision << endl;
-}
 
 void WorldObj::setX(float x)
 {
@@ -64,38 +38,6 @@ void WorldObj::shiftY(float dist)
 	}
 }
 
-void WorldObj::setRotX(float x)
-{
-	rotation.setXloc(x);
-}
-
-void WorldObj::setRotY(float y)
-{
-	rotation.setYloc(y);
-}
-
-void WorldObj::shiftRotX(float dist)
-{
-	rotation.shiftXloc(dist);
-}
-
-void WorldObj::shiftRotY(float dist)
-{
-	rotation.shiftYloc(dist);
-}
-
-void WorldObj::setWidth(float w)
-{
-	this->width = w;
-	body[0].setWidth(w);
-}
-
-void WorldObj::setHeight(float h)
-{
-  this->height = h;
-	body[0].setHeight(h);
-}
-
 WorldObj::WorldObj(Vector2f p_topLeft, float p_width, float p_height) {
 	loc= p_topLeft;
 	width = p_width;
@@ -124,7 +66,32 @@ bool WorldObj::targetIsWithinRange(Rectangle _bound) const {
 		&& combatMoveDestination.getXloc() < (_bound.getX() + _bound.getWidth())
 		&& combatMoveDestination.getYloc() > _bound.getY()
 		&& combatMoveDestination.getYloc() < (_bound.getY() + _bound.getHeight()));
+}
 
+void WorldObj::setDirWithBase(int od)
+{
+  if(od == 8) {
+    if(baseDir == 2) od = 2;
+    else if(baseDir == 4) od = 4;
+    else if(baseDir == 6) od = 6;
+  }
+  else if(od == 2) {
+    if(baseDir == 2) od = 8;
+    else if(baseDir == 4) od = 6;
+    else if(baseDir == 6) od = 4;
+  }
+  else if(od == 4) {
+    if(baseDir == 2) od = 6;
+    else if(baseDir == 4) od = 2;
+    else if(baseDir == 6) od = 8;
+  }
+  else if(od == 6) {
+    if(baseDir == 2) od = 4;
+    else if(baseDir == 4) od = 8;
+    else if(baseDir == 6) od = 2;
+  }
+
+  setDirection(od);
 }
 
 //takes in a worldobj, returns a vector2f denoting where current obj is suppose to move to
@@ -139,11 +106,6 @@ Vector2f WorldObj::getEvadeRange(WorldObj * _enemy)
 	float YCoord = rand() % (int)rangeBound.getHeight() + (int)rangeBound.getY();
 	combatMoveDestination = Vector2f(XCoord, YCoord);
 
-	return combatMoveDestination;
-}
-
-Vector2f WorldObj::getCombatMoveDestination() const
-{
 	return combatMoveDestination;
 }
 
@@ -165,4 +127,5 @@ std::ostream& operator<<(ostream& out, const WorldObj& that)
   out << "Rotation Vector" << that.getX() << std::endl;
   out << "Width" << that.getY() << std::endl;
   out << "Height" << that.getX() << std::endl;
+  return out;
 }

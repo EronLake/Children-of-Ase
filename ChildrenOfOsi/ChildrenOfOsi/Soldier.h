@@ -40,6 +40,7 @@ public:
 	int getInstances() { return instances; };
 	std::string getKey() { return key; };
 	std::string getAtKey() { return atkey="Soldier" + std::to_string(getID()) + "_" + std::to_string(atkType.size()) + "_" + std::to_string(instances); };
+	void resetCD(int c);
 
 private:
 	Party* party;
