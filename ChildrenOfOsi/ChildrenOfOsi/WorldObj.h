@@ -1,55 +1,58 @@
 #pragma once
 #include "stdafx.h"
-#include "common.h"
-#include "Vector2f.h"
-#include "Sprite.h"
+
+#include <vector>
+
 #include "Rectangle.h"
+#include "Sprite.h"
+#include "Vector2f.h"
 
 using namespace std;
 
 class WorldObj
 {
-  friend std::ostream& operator<<(ostream&, const WorldObj&);
-
   public:
 
   WorldObj():
     ID(idNum++), loc(0, 0), collision(false), type(0)
-  { this->body.push_back({{0.0F, 0.0F}, 1.0F, 1.0F}); };
+  {this->body.push_back({ {0.0F, 0.0F}, 1.0F, 1.0F }); evasionBound = new Rectangle();};
 
   WorldObj(Vector2f p_topLeft, float p_width, float p_height):
     ID(idNum++), loc(p_topLeft), width(p_width), height(p_height), collision(false), type(0)
-  { this->body.push_back({loc, p_width, p_height}); }
+  { this->body.push_back({loc, p_width, p_height}); evasionBound = new Rectangle();}
 
   WorldObj(float x, float y, bool col):
-    ID(idNum++), loc()
-  {}
+    ID(idNum++), loc({x, y}), collision(col), type(0)
+  { this->body.push_back({loc, 1.0F, 1.0F}); evasionBound = new Rectangle();}
 
   virtual ~WorldObj() = default;
 
   // Basic geometric information getters
-  Vector2f getLoc() const { return this->loc; };
-  float getX() const { return this->loc.getXloc(); };
-  float getY() const { return this->loc.getYloc(); };
-  Vector2f getRot() const { return this->rotation; };
-  float getRotX() const { return this->rotation.getXloc(); };
-  float getRotY() const { return this->rotation.getYloc(); };
-  float getWidth() const { return this->width; };
-  float getHeight() const { return this->height; };
+
+  Vector2f getLoc() { return this->loc; };
+  float getX() { return this->loc.getXloc(); };
+  float getY() { return this->loc.getYloc(); };
+  Vector2f getRot() { return this->rotation; };
+  float getRotX() { return this->rotation.getXloc(); };
+  float getRotY() { return this->rotation.getYloc(); };
+  float getWidth() { return this->width; };
+  float getHeight() { return this->height; };
+
 
   // Higher-level getter methods
-  int getID() const { return this->ID; };
-  std::string getName() const { return this->name; };
-  int getType() const { return this->type; };
-  Sprite getSprite() const { return this->sprite; };
-  int getDirection() const { return this->direction; };
-  bool getCollision() const { return this->collision; };
-  bool getInteractable() const { return this->interactable; };
+  int getID() { return this->ID; };
+  std::string getName() { return this->name; };
+  int getType() { return this->type; };
+  Sprite getSprite() { return this->sprite; };
+  int getDirection() { return this->direction; };
+  bool getCollision() { return this->collision; };
+  bool getInteractable() { return this->interactable; };
 
   // Combat AI information getters
-  int getEvasionRadius() const { return this->evasionRadius; };
+  int getEvasionRadius() { return this->evasionRadius; };
   Vector2f getEvadeRange(WorldObj* _enemy);
-  Vector2f getCombatMoveDestination() const { return this->combatMoveDestination; };
+  Vector2f getCombatMoveDestination() { return this->combatMoveDestination; };
+  Vector2f getStrafeLocation(WorldObj* _enemy);
 
   int getBaseDir() const { return baseDir; };
 
@@ -64,8 +67,8 @@ class WorldObj
   void setRotY(float y) { this->rotation.setYloc(y); };
   void shiftRotX(float dist) { this->rotation.shiftXloc(dist); };
   void shiftRotY(float dist) { this->rotation.shiftYloc(dist); };
-  void setWidth(float w) { this->body[0].setWidth(this->width = w); };
-  void setHeight(float h) { this->body[0].setHeight(this->height = h); };
+  void setWidth(float w);
+  void setHeight(float h);
 
   // Higher-level setter methods
   void setName(std::string n) { this->name = n; };
@@ -124,10 +127,11 @@ class WorldObj
 
   int evasionRadius = 225;
   Vector2f combatMoveDestination;
+  Rectangle* evasionBound;
 
   int baseDir;
 
-  bool targetIsWithinRange(Rectangle _bound) const;
+  bool targetIsWithinRange(Rectangle* _bound);
 };
 
 

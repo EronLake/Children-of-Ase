@@ -38,13 +38,16 @@ void WorldObj::shiftY(float dist)
 	}
 }
 
-WorldObj::WorldObj(Vector2f p_topLeft, float p_width, float p_height) {
-	loc= p_topLeft;
-	width = p_width;
-	height = p_height;
-	Rectangle init(loc, p_width, p_height);
-	body.push_back(init);
-	type = 0;
+void WorldObj::setWidth(float w)
+{
+  this->width = w;
+  this->body[0].setWidth(w);
+}
+
+void WorldObj::setHeight(float h)
+{
+  this->height = h;
+  this->body[0].setHeight(h);
 }
 
 void WorldObj::drawObj(float _x, float _y)
@@ -60,12 +63,12 @@ void WorldObj::offsetBody(int i, float x1, float x2, float y1, float y2) {
 
 }
 
-bool WorldObj::targetIsWithinRange(Rectangle _bound) const {
+bool WorldObj::targetIsWithinRange(Rectangle* _bound) {
 
-	return (combatMoveDestination.getXloc() > _bound.getX()
-		&& combatMoveDestination.getXloc() < (_bound.getX() + _bound.getWidth())
-		&& combatMoveDestination.getYloc() > _bound.getY()
-		&& combatMoveDestination.getYloc() < (_bound.getY() + _bound.getHeight()));
+	return (combatMoveDestination.getXloc() > _bound->getX()
+		&& combatMoveDestination.getXloc() < (_bound->getX() + _bound->getWidth())
+		&& combatMoveDestination.getYloc() > _bound->getY()
+		&& combatMoveDestination.getYloc() < (_bound->getY() + _bound->getHeight()));
 }
 
 void WorldObj::setDirWithBase(int od)
@@ -99,14 +102,28 @@ Vector2f WorldObj::getEvadeRange(WorldObj * _enemy)
 {
 	//gen the rectangle bound to move
 	float leftBound = _enemy->getX() - _enemy->getEvasionRadius();
-	Rectangle rangeBound(Vector2f((_enemy->getX() - _enemy->getEvasionRadius()), (_enemy->getY() - _enemy->getEvasionRadius())), 2 *_enemy->getEvasionRadius(), 2 * _enemy->getEvasionRadius());
-	if (targetIsWithinRange(rangeBound)) return combatMoveDestination;
+	evasionBound = new Rectangle(Vector2f((_enemy->getX() - _enemy->getEvasionRadius()), (_enemy->getY() - _enemy->getEvasionRadius())), 2 *_enemy->getEvasionRadius(), 2 * _enemy->getEvasionRadius());
+	if (targetIsWithinRange(evasionBound)) return combatMoveDestination;
 
-	float XCoord = rand() % (int)rangeBound.getWidth() + (int)rangeBound.getX();
-	float YCoord = rand() % (int)rangeBound.getHeight() + (int)rangeBound.getY();
+	float XCoord = rand() % (int)evasionBound->getWidth() + (int)evasionBound->getX();
+	float YCoord = rand() % (int)evasionBound->getHeight() + (int)evasionBound->getY();
 	combatMoveDestination = Vector2f(XCoord, YCoord);
 
 	return combatMoveDestination;
+}
+
+Vector2f WorldObj::getStrafeLocation(WorldObj * _enemy)
+{
+	float XCoord;
+	if (this->getX() < ((evasionBound->getX() + evasionBound->getWidth()) / 2)) {
+		XCoord = rand() % 50 + ((int)evasionBound->getX()+(int)evasionBound->getWidth() - 50);
+	}
+	else {
+		XCoord = rand() % 50 + ((int)evasionBound->getX());
+	}
+	return Vector2f(XCoord, combatMoveDestination.getYloc());
+
+	
 }
 
 void WorldObj::_print()
@@ -117,15 +134,4 @@ void WorldObj::_print()
   std::cout << "Rotation Vector" << getX() << std::endl;
   std::cout << "Width" << getY() << std::endl;
   std::cout << "Height" << getX() << std::endl;
-}
-
-std::ostream& operator<<(ostream& out, const WorldObj& that)
-{
-  out << "Object Name" << that.getName() << std::endl;
-  out << "X Location" << that.getX() << std::endl;
-  out << "Y Location" << that.getY() << std::endl;
-  out << "Rotation Vector" << that.getX() << std::endl;
-  out << "Width" << that.getY() << std::endl;
-  out << "Height" << that.getX() << std::endl;
-  return out;
 }
