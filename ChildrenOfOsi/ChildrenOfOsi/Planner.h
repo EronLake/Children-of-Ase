@@ -4,6 +4,7 @@
 #include "Conditions.h"
 
 #include "ActionPool.h"
+
 typedef unordered_map<int, Action> StateList;
 typedef unordered_map<Action, vector<Action>> MilestoneList;
 
@@ -39,6 +40,8 @@ public:
 	void add_milestone(Action goal, Action milestone);
 
 	void generate_milestones(Action state, Action goal);
+
+	int value_of(Action* action);
 
 private:
 	Hero* evaluateHero;

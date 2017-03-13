@@ -10,11 +10,11 @@ public:
 	vector<Action> macro;
 	unordered_map<std::string, vector<Action*>> middleLink;
 	vector<Action> getActions(Hero* h, Action macro);
-	void setOwner(Hero* o) { owner = o; };
-	Hero* getOwner() { return owner; };
+	void setDoer(Hero* o) { doer = o; };
+	Hero* getDoer() { return doer; };
 	void updateMiddle();
 private:
-	Hero* owner;
+	Hero* doer;
 	vector<Action*> addVec(vector<Action*> a, vector<Action*> b);
 };
 

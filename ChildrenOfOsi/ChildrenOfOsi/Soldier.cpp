@@ -84,7 +84,7 @@ void Soldier::meleeAttack() {
 	float x= body[0].getX();
 	float y= body[0].getY();
 	melee->setDuration(5);
-	melee->setPause(18);
+	melee->setPause(24);
 	int d = getDirection();
 	melee->setBaseDir(4);//shouldn't need to be done
 	if (d==8) {

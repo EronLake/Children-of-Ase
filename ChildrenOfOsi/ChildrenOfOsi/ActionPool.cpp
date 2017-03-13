@@ -4,7 +4,7 @@
 
 ActionPool::ActionPool(Hero* h)
 {
-	owner = h;
+	doer = h;
 	//micro.push_back({});
 	//macro.push_back({});
 	middleLink["affAbove"];
@@ -24,15 +24,15 @@ vector<Action> ActionPool::getActions(Hero* h, Action macro)
 {
 	vector<Action*> points;
 	vector<Action> list;
-	vector<std::string> needs = macro.preConditionsNeeded(owner,h);
+	vector<std::string> needs = macro.preConditionsNeeded(doer,h);
 	for (int i = 0; i < needs.size(); i++) {
 		auto j = middleLink.find(needs[i]);
 		if (j != middleLink.end()) points=addVec(points,j->second);
 	}
 	for (int p= 0; p < points.size(); p++) {
 		list.push_back(*points[p]);
-		list.back().setHero(h);
-		list.back().setOwner(owner);
+		list.back().setReceiver(h);
+		list.back().setDoer(doer);
 	}
 	return list;
 }

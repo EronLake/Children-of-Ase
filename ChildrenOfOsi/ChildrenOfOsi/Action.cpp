@@ -59,18 +59,18 @@ vector<std::string> Action::preConditionsNeeded(Hero* o, Hero* h) {
 }
 
 int Action::exeAction() {
-	vector<std::string> check = preConditionsNeeded(owner, hero);
+	vector<std::string> check = preConditionsNeeded(doer, receiver);
 	if (check.empty()) {
 		int tmp;
 		for (auto i = postconds.begin(); i != postconds.end(); ++i) {
 			if (i->first.compare("aff") == 0) {
-				//owner->rel[hero->name]->addAffinity(i->second);
+//				doer->rel[receiver->name]->addAffinity(i->second);
 			}
 			else if (i->first.compare("not") == 0) {
-				//owner->rel[hero->name]->addNotoriety(i->second);
+//				doer->rel[receiver->name]->addNotoriety(i->second);
 			}
 			else if (i->first.compare("str") == 0) {
-				//owner->rel[hero->name]->addStrength(i->second);
+//				doer->rel[receiver->name]->addStrength(i->second);
 			}
 		}
 		return 1;
@@ -90,7 +90,7 @@ void Action::setMultipliers(int a, int k, int h, int p, int r, int e, int g) {
 
 bool Action::operator==(const Action a) const
 {
-	if (a.name == name && a.hero == hero && a.owner == owner) {
+	if (a.name == name && a.receiver == receiver && a.doer == doer) {
 		return true;
 	}
 	return false;
