@@ -338,7 +338,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	rockThrow->setDestroy(true);
 	rockThrow->setDuration(248);
 	rockThrow->setCoolDown(120);
-	rockThrow->setPause(18);
+	rockThrow->setPause(24);
 	rockThrow->sprite.setTexture(rockTex);
 	Alex->addAttackType(rockThrow);
 	//Alex->melee->sprite.setTexture(blank);
@@ -353,7 +353,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	spin->setDuration(5);
 	spin->setBaseDir(6);
 	spin->setCoolDown(600);
-	spin->setPause(18);
+	spin->setPause(24);
 	spin->sprite.setTexture(blank);
 	Alex->addAttackType(spin);
 
