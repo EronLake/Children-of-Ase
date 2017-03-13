@@ -28,8 +28,6 @@ public:
 	void addAttackType(Attack* a);
 	void newAttack(int i, Attack* a);
 	void meleeAttack();
-	void setCD(int c) { cdTotal = c; };
-	int getCD() { return cdTotal; };
 	void updateCD();
 	int timeCD() { return cdTime; };
 	bool getCool();
@@ -47,7 +45,6 @@ private:
 	bool evade;
 	bool holdPos;
 	bool patrol;
-	int cdTotal;
 	int cdTime;
 	int instances;
 	std::string key;
