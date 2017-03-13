@@ -32,26 +32,12 @@ WorldObj::WorldObj(float x, float y, bool col)
 	//cout << "Collision: " << collision << endl;
 }
 
-WorldObj::~WorldObj()
-{
-}
-
-float WorldObj::getX()
-{
-	return loc.getXloc();
-}
-
 void WorldObj::setX(float x)
 {
 	for (int i = 0; i < body.size(); i++) {
 		body[i].setX(x+(loc.getXloc()-body[i].getX()));
 	}
 	loc.setXloc(x);
-}
-
-float WorldObj::getY()
-{
-	return loc.getYloc();
 }
 
 void WorldObj::setY(float y)
@@ -78,24 +64,9 @@ void WorldObj::shiftY(float dist)
 	}
 }
 
-Vector2f WorldObj::getRot()
-{
-	return rotation;
-}
-
-float WorldObj::getRotX()
-{
-	return rotation.getXloc();
-}
-
 void WorldObj::setRotX(float x)
 {
 	rotation.setXloc(x);
-}
-
-float WorldObj::getRotY()
-{
-	return rotation.getYloc();
 }
 
 void WorldObj::setRotY(float y)
@@ -113,20 +84,15 @@ void WorldObj::shiftRotY(float dist)
 	rotation.shiftYloc(dist);
 }
 
-void WorldObj::setRot(Vector2f r)
-{
-	rotation = r;
-}
-
 void WorldObj::setWidth(float w)
 {
-	width=w;
+	this->width = w;
 	body[0].setWidth(w);
 }
 
 void WorldObj::setHeight(float h)
 {
-	height=h;
+  this->height = h;
 	body[0].setHeight(h);
 }
 
@@ -147,32 +113,12 @@ void WorldObj::drawObj(float _x, float _y)
 void WorldObj::offsetBody(int i, float x1, float x2, float y1, float y2) {
 	body[i].setX(body[i].getX()+x1);
 	body[i].setY(body[i].getY() + y1);
-	//cout << "body X is " << body[i].getX() << " and Y is " << body[i].getY();
 	body[i].setWidth(body[i].getWidth() - (x1+x2));
 	body[i].setHeight(body[i].getHeight() -(y1+y2));
-	//cout << "body width is " << body[i].getWidth() << " and height is " << body[i].getHeight();
 
 }
-void WorldObj::_print() {
-	std::cout << "Object Name" << getName() << std::endl;
-	std::cout << "X Location" << getX() << std::endl;
-	std::cout << "Y Location" << getY() << std::endl;
-	std::cout << "Rotation Vector" << getX() << std::endl;
-	std::cout << "Width" << getY() << std::endl;
-	std::cout << "Height" << getX() << std::endl;
-}
 
-int WorldObj::getEvasionRadius()
-{
-	return evasionRadius;
-}
-
-void WorldObj::setEvasionRadius(std::size_t _radius)
-{
-	evasionRadius = _radius;
-}
-
-bool WorldObj::targetIsWithinRange(Rectangle _bound) {
+bool WorldObj::targetIsWithinRange(Rectangle _bound) const {
 
 	return (combatMoveDestination.getXloc() > _bound.getX()
 		&& combatMoveDestination.getXloc() < (_bound.getX() + _bound.getWidth())
@@ -196,8 +142,27 @@ Vector2f WorldObj::getEvadeRange(WorldObj * _enemy)
 	return combatMoveDestination;
 }
 
-Vector2f WorldObj::getCombatMoveDestination()
+Vector2f WorldObj::getCombatMoveDestination() const
 {
 	return combatMoveDestination;
 }
 
+void WorldObj::_print()
+{
+  std::cout << "Object Name" << getName() << std::endl;
+  std::cout << "X Location" << getX() << std::endl;
+  std::cout << "Y Location" << getY() << std::endl;
+  std::cout << "Rotation Vector" << getX() << std::endl;
+  std::cout << "Width" << getY() << std::endl;
+  std::cout << "Height" << getX() << std::endl;
+}
+
+std::ostream& operator<<(ostream& out, const WorldObj& that)
+{
+  out << "Object Name" << that.getName() << std::endl;
+  out << "X Location" << that.getX() << std::endl;
+  out << "Y Location" << that.getY() << std::endl;
+  out << "Rotation Vector" << that.getX() << std::endl;
+  out << "Width" << that.getY() << std::endl;
+  out << "Height" << that.getX() << std::endl;
+}
