@@ -2,6 +2,7 @@
 
 #include "common.h"
 #include "Village.h"
+#include "War.h"
 
 class Alliance
 {
@@ -15,5 +16,6 @@ public:
 	~Alliance();
 	void addToAlliance(Village* p_factionToAdd);
 	Alliance* removeFromAlliance(Village* p_factionToRemove);
+	void updateEnemies();
 };
 

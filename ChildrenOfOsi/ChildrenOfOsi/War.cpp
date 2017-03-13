@@ -36,13 +36,13 @@ void War::endWar(Village* one, Village* two) {
 	}
 }
 
-std::vector<War*> War::getWars(Village* vil) {
-	std::vector<War*> tmp;
+std::vector<Village*> War::getWars(Village* vil) {
+	std::vector<Village*> tmp;
 	for (auto i = wars.begin(); i != wars.end(); ++i) {
 		if ((*i)->getWarParties().first == vil) {
-			tmp.push_back(*i);
+			tmp.push_back((*i)->warParties.second);
 		} else if ((*i)->getWarParties().second == vil) {
-			tmp.push_back(*i);
+			tmp.push_back((*i)->warParties.first);
 		}
 	}
 	return tmp;

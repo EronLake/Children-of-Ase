@@ -116,6 +116,10 @@ void Soldier::updateCD() {
 	}
 }
 
+bool Soldier::getCool() {
+	return (cdTime==0);
+}
+
 bool Soldier::getCool(int c) {
 	return ((cdTime==0) && (cdMap[atkType[c]]==0));
 }

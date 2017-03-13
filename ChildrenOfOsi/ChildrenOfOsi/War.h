@@ -17,6 +17,6 @@ public:
 	void setWarParties(Village* p_alliance1, Village* p_alliance2);
 	std::pair<Village*, Village*> getWarParties();
 	static void endWar(Village* one, Village* two);
-	static std::vector<War*> getWars(Village* vil);
+	static std::vector<Village*> getWars(Village* vil);
 };
 

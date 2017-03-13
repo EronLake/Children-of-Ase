@@ -18,11 +18,29 @@ Alliance::~Alliance()
 
 void Alliance::addToAlliance(Village * p_faction)
 {
+	
 	allies.push_back(p_faction);
+	std::vector<Village*> tmp = War::getWars(p_faction);
+	for (int j = 0; j < tmp.size(); j++) {
+		enemies.push_back(tmp[j]);
+	}
 }
 
 Alliance* Alliance::removeFromAlliance(Village * p_factionToRemove)
 {
 	allies.erase(std::remove(allies.begin(), allies.end(), p_factionToRemove), allies.end());
-	return new Alliance(p_factionToRemove);
+	Alliance* newAll = new Alliance(p_factionToRemove);
+	newAll->updateEnemies();
+	updateEnemies();
+	return newAll;
+}
+
+void Alliance::updateEnemies() {
+	enemies.clear();
+	for (int i = 0; i < allies.size(); i++) {
+		std::vector<Village*> tmp = War::getWars(allies[i]);
+		for (int j = 0; j < tmp.size(); j++) {
+			enemies.push_back(tmp[j]);
+		}
+	}
 }

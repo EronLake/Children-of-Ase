@@ -32,7 +32,7 @@ public:
 	int getCD() { return cdTotal; };
 	void updateCD();
 	int timeCD() { return cdTime; };
-	bool getCool() { return (cdTime==0); };
+	bool getCool();
 	bool getCool(int c);
 	void setParty(Party* p) { party=p; };
 	Party* getParty() { return party; };
