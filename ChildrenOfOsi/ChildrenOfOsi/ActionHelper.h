@@ -16,6 +16,9 @@ public:
 
 	static void create_memory(Action* );
 
+	static int retrieve_time(Action* action);
+	static void set_timer(Action* action, int wait_time);
+
 	//Check alliance acceptance 
 	//Go to location
 	//Create memory
@@ -23,7 +26,7 @@ public:
 	//Collect hero location Timer
 	//Battle simulation(timer)
 
-	static bool hero_respond(Action* act);
+	static bool hero_respond(Action* action);
 
 	static void execute_train(Action* train);
 	static void execute_train_with(Action* train_with);
