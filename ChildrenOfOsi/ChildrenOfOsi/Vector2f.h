@@ -17,8 +17,8 @@ class Vector2f
   Vector2f& operator=(Vector2f&&) = default;
   ~Vector2f() = default;
 
-  float getXloc() const { return this->xloc; };
-  float getYloc() const { return this->yloc; };
+  float getXloc() { return this->xloc; };
+  float getYloc() { return this->yloc; };
 
   void setXloc(float x) { this->xloc = x; };
   void setYloc(float y) { this->yloc = y; };
@@ -28,10 +28,10 @@ class Vector2f
   float dist(Vector2f end);
 
   bool operator==(const Vector2f& that) const { return this->xloc == that.xloc && this->yloc == that.yloc; };
-  bool operator!=(const Vector2f& that) const { return !(*this == that); };
-  bool operator<(const Vector2f& that) const { return this->xloc < that.xloc || this->yloc < that.yloc; };
-  bool operator<=(const Vector2f& that) const { return *this < that || *this == that; }
-  bool operator>(const Vector2f& that) const { return !(*this <= that); }
-  bool operator>=(const Vector2f& that) const { return !(*this < that); }
+  bool operator!=(const Vector2f& that) const  { return !(this->xloc == that.xloc && this->yloc == that.yloc); };
+  bool operator<(const Vector2f& that) const  { return this->xloc < that.xloc || this->yloc < that.yloc; };
+  bool operator<=(const Vector2f& that) const  { return (this->xloc < that.xloc || this->yloc < that.yloc) || (this->xloc == that.xloc && this->yloc == that.yloc); }
+  bool operator>(const Vector2f& that) const  { return !((this->xloc < that.xloc || this->yloc < that.yloc) || (this->xloc == that.xloc && this->yloc == that.yloc)); }
+  bool operator>=(const Vector2f& that) const  { return !(this->xloc < that.xloc || this->yloc < that.yloc); }
 };
 

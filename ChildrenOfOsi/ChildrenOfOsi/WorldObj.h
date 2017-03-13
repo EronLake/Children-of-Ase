@@ -1,6 +1,6 @@
 #pragma once
 #include "stdafx.h"
-#include "common.h"
+
 #include "Vector2f.h"
 #include "Sprite.h"
 #include "Rectangle.h"
@@ -9,8 +9,6 @@ using namespace std;
 
 class WorldObj
 {
-  friend std::ostream& operator<<(ostream&, const WorldObj&);
-
   public:
 
   WorldObj():
@@ -28,28 +26,28 @@ class WorldObj
   virtual ~WorldObj() = default;
 
   // Basic geometric information getters
-  Vector2f getLoc() const { return this->loc; };
-  float getX() const { return this->loc.getXloc(); };
-  float getY() const { return this->loc.getYloc; };
-  Vector2f getRot() const { return this->rotation; };
-  float getRotX() const { return this->rotation.getXloc(); };
-  float getRotY() const { return this->rotation.getYloc(); };
-  float getWidth() const { return this->width; };
-  float getHeight() const { return this->height; };
+  Vector2f getLoc() { return this->loc; };
+  float getX() { return this->loc.getXloc(); };
+  float getY() { return this->loc.getYloc(); };
+  Vector2f getRot() { return this->rotation; };
+  float getRotX() { return this->rotation.getXloc(); };
+  float getRotY() { return this->rotation.getYloc(); };
+  float getWidth() { return this->width; };
+  float getHeight() { return this->height; };
 
   // Higher-level getter methods
-  int getID() const { return this->ID; };
-  std::string getName() const { return this->name; };
-  int getType() const { return this->type; };
-  Sprite getSprite() const { return this->sprite; };
-  int getDirection() const { return this->direction; };
-  bool getCollision() const { return this->collision; };
-  bool getInteractable() const { return this->interactable; };
+  int getID() { return this->ID; };
+  std::string getName() { return this->name; };
+  int getType() { return this->type; };
+  Sprite getSprite() { return this->sprite; };
+  int getDirection() { return this->direction; };
+  bool getCollision() { return this->collision; };
+  bool getInteractable() { return this->interactable; };
 
   // Combat AI information getters
-  int getEvasionRadius() const { return this->evasionRadius; };
+  int getEvasionRadius() { return this->evasionRadius; };
   Vector2f getEvadeRange(WorldObj* _enemy);
-  Vector2f getCombatMoveDestination() const { return this->combatMoveDestination; };
+  Vector2f getCombatMoveDestination() { return this->combatMoveDestination; };
 
   int getBaseDir() const { return baseDir; };
 
@@ -127,7 +125,7 @@ class WorldObj
 
   int baseDir;
 
-  bool targetIsWithinRange(Rectangle _bound) const;
+  bool targetIsWithinRange(Rectangle _bound);
 };
 
 

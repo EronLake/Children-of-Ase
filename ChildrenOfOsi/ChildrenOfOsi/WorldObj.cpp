@@ -38,15 +38,6 @@ void WorldObj::shiftY(float dist)
 	}
 }
 
-WorldObj::WorldObj(Vector2f p_topLeft, float p_width, float p_height) {
-	loc= p_topLeft;
-	width = p_width;
-	height = p_height;
-	Rectangle init(loc, p_width, p_height);
-	body.push_back(init);
-	type = 0;
-}
-
 void WorldObj::drawObj(float _x, float _y)
 {
 	osi::GameWindow::drawSprite(loc.getXloc()-_x, loc.getYloc()-_y, width, height, sprite);
@@ -60,7 +51,7 @@ void WorldObj::offsetBody(int i, float x1, float x2, float y1, float y2) {
 
 }
 
-bool WorldObj::targetIsWithinRange(Rectangle _bound) const {
+bool WorldObj::targetIsWithinRange(Rectangle _bound) {
 
 	return (combatMoveDestination.getXloc() > _bound.getX()
 		&& combatMoveDestination.getXloc() < (_bound.getX() + _bound.getWidth())
@@ -117,15 +108,4 @@ void WorldObj::_print()
   std::cout << "Rotation Vector" << getX() << std::endl;
   std::cout << "Width" << getY() << std::endl;
   std::cout << "Height" << getX() << std::endl;
-}
-
-std::ostream& operator<<(ostream& out, const WorldObj& that)
-{
-  out << "Object Name" << that.getName() << std::endl;
-  out << "X Location" << that.getX() << std::endl;
-  out << "Y Location" << that.getY() << std::endl;
-  out << "Rotation Vector" << that.getX() << std::endl;
-  out << "Width" << that.getY() << std::endl;
-  out << "Height" << that.getX() << std::endl;
-  return out;
 }
