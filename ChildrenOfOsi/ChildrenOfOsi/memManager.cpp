@@ -20,7 +20,7 @@ memManager::memManager(MessageLog* _mLog, TaskBuffer* _tBuffer)
 	livingObj_head = memHelper->init_pool(livingObj_pool, sizeof(LivingObj)*2);
 
 	Attack_pool = memHelper->create_pool(sizeof(Attack) * 64);
-	Attack_head = memHelper->init_pool(Attack_pool, sizeof(Attack)*2);
+	Attack_head = memHelper->init_pool(Attack_pool, sizeof(Attack)*4);
 
 	soldier_pool = memHelper->create_pool(sizeof(Soldier) * 64);
 	soldier_head = memHelper->init_pool(soldier_pool, sizeof(Soldier)*2);
@@ -43,6 +43,7 @@ memManager::memManager(MessageLog* _mLog, TaskBuffer* _tBuffer)
 	task_map["Add_NPC"] = &MemoryHelper::store_npc;
 	task_map["Add_Attack"] = &MemoryHelper::store_Attack;
 	task_map2["New_Attack"] = &MemoryHelper::new_Attack;
+	task_map2["New_Spin"] = &MemoryHelper::new_Spin;
 	task_map["Add_Soldier"] = &MemoryHelper::store_soldier;
 	task_map["Add_Spl_Soldier"] = &MemoryHelper::store_spl_soldier;
 	task_map["Add_WorldObj"] = &MemoryHelper::store_worldObj;
