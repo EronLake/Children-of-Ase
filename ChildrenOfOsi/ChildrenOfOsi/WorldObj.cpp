@@ -103,12 +103,15 @@ Vector2f WorldObj::getEvadeRange(WorldObj * _enemy)
 	//gen the rectangle bound to move
 	float leftBound = _enemy->getX() - _enemy->getEvasionRadius();
 	evasionBound = new Rectangle(Vector2f((_enemy->getX() - _enemy->getEvasionRadius()), (_enemy->getY() - _enemy->getEvasionRadius())), 2 *_enemy->getEvasionRadius(), 2 * _enemy->getEvasionRadius());
-	if (targetIsWithinRange(evasionBound)) return combatMoveDestination;
-
+	if (targetIsWithinRange(evasionBound)) {
+		cout << "COMBAT DESTINATION FROM EVADERANGE IS " << combatMoveDestination.getXloc() << ", " << combatMoveDestination.getYloc() << endl;
+		return combatMoveDestination;
+	}
 	float XCoord = rand() % (int)evasionBound->getWidth() + (int)evasionBound->getX();
 	float YCoord = rand() % (int)evasionBound->getHeight() + (int)evasionBound->getY();
 	combatMoveDestination = Vector2f(XCoord, YCoord);
 
+	cout << "COMBAT DESTINATION FROM EVADERANGE IS " << combatMoveDestination.getXloc() << ", " << combatMoveDestination.getYloc() << endl;
 	return combatMoveDestination;
 }
 
@@ -116,7 +119,8 @@ Vector2f WorldObj::getStrafeLocation(WorldObj * _enemy)
 {
 	float XCoord;
 	if (this->getX() < ((evasionBound->getX() + evasionBound->getWidth()) / 2)) {
-		XCoord = rand() % 50 + ((int)evasionBound->getX()+(int)evasionBound->getWidth() - 50);
+		//XCoord = rand() % 50 + ((int)evasionBound->getX()+(int)evasionBound->getWidth() - 50);
+		XCoord = rand() % (int)evasionBound->getWidth() + (int)evasionBound->getX();
 	}
 	else {
 		XCoord = rand() % 50 + ((int)evasionBound->getX());
