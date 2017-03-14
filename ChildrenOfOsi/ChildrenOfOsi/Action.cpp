@@ -17,7 +17,7 @@ Action::Action(Hero* _owner, Hero* _receiver, Hero* _doer, int _utility, int _wh
 	why = _why;
 	recieverName = receiver->name;
 	name = _name;
-	execute  = ActionExecFunctions::ActionExecMap[_exe_name];
+	execute_ptr  = ActionExecFunctions::ActionExecMap[_exe_name];
 };
 
 

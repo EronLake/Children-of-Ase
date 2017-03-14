@@ -56,6 +56,7 @@
 #include "ActionHelper.h"
 //class ActionHelper;
 #include "Line.h"
+#include "ActionExecFunctions.h"
 
 using namespace std;
 
@@ -1290,7 +1291,7 @@ void ERONS_LOOP(QuadTree* _QuadTree) {
 	ActionHelper::ai = AiController;
 	ActionHelper::gameplay_func = gameplay_functions;
 
-	CombatController* combatControl = new CombatController();
+	CombatController* combatControl = new CombatController(gameplay_functions);
 
 	//the order defines what order the managers the tasks will be sent to
 	DumM->register_manager();
@@ -1569,9 +1570,6 @@ void ERONS_LOOP(QuadTree* _QuadTree) {
 	staticRec->setWidth(100);
 	staticRec->setHeight(100);
 	staticRec->name = YEMOJA;
-	//Hero* staticRec = new Hero(YEMOJA, Vector2f(4600, 3600), 100.0, 100.0);
-	///should actually use gameplay_functions->add_hero("Yemoja", 4600, 3600, true)
-	/// Containers::hero_table[name]->setWidht(widht)
 
 	otherShango->setWidth(150);
 	otherShango->setHeight(150);
@@ -1634,7 +1632,7 @@ void ERONS_LOOP(QuadTree* _QuadTree) {
 
 	otherShango->addAttackType(rockThrow);
 	otherShango->melee->sprite.setTexture(blank);
-	//otherShango->addAttackType(spin);
+
 
 
 
@@ -1650,70 +1648,14 @@ void ERONS_LOOP(QuadTree* _QuadTree) {
 	}
 
 	bool visible = true;
-	/*for (Vector2f first : ai->graph.vertices) {
-	//ai->graph.insert(first);
-	for (Vector2f second : ai->graph.vertices) {
-	if (first == second) continue;
-	visible = true;
-	for (auto check : ai->graph.obstacles) {
-	if (ai->graph.intersect(first, second, check.first, check.second)) {
-	visible = false;
-	break;
-	}
-	}
-	if (visible) { //put vertices in each other's neighbor list
-	ai->graph.edges[first].push_back(second);
-	ai->graph.edges[second].push_back(first);
-	}
-	}
-	}*/
 
 	staticRec->setName("Yemoja");
 	staticRec->setInteractable(true);
 	staticRec->setHealth(100);
-	/*
-	WorldObj* tree = new WorldObj(Vector2f(4000, 2600), 800, 500);
-	tree->sprite.setTexture(treeTex);
-	tree->offsetBody(0, 275, 375, 375, 75);
-	WorldObj* tree1 = new WorldObj(Vector2f(3300, 4600), 700, 600);
-	tree1->sprite.setTexture(treeTex1);
-	tree1->offsetBody(0, 275, 375, 375, 75);
-	WorldObj* tree2 = new WorldObj(Vector2f(4700, 4500), 700, 600);
-	tree2->sprite.setTexture(treeTex2);
-	tree2->offsetBody(0, 275, 375, 375, 75);
-	//WorldObj* tree1 = new WorldObj(Vector2f())
-	//staticRec->goal.setXloc(500);
-	//staticRec->goal.setYloc(1200);
-	*/
+
 	recVec.push_back(staticRec);
 	recVec.push_back(otherShango);
-	//recVec.push_back(tree);
-	//recVec.push_back(tree1);
-	//recVec.push_back(tree2);
-	//recVec.push_back(vec[0]);
-
-	//recVec.push_back(vec[1]);
-	//recVec.push_back(myRec1); recVec.push_back(myRec2);
-
-	//pauses the program for viewing
-	//system("PAUSE");
-
-	//demonstration of a meory leak
-	//while (true) {
-	//	void* a = malloc(64);
-	//	delete a;
-	//}
-
-	/*	VisibilityGraph graph{ {
-	{{1400.00,800.00}, {{1400.00, 900.00},{1200.00,800.00}}},
-	{{1400.00,900.00}, {{1400.00,800.00},{1200.00,800.00},{1300.00,1000.00}}},
-	{{1200.00,800.00}, {{1400.00,800.00},{1400.00,900.00},{1100.00,900.00}}},
-	{{1300.00,1000.00}, {{1400.00,900.00},{1100.00,900.00},{1200.00,600.00}}},
-	{{1100.00,900.00}, {{1200.00,800.00},{1300.00,1000.00},{1200.00,600.00}}},
-	{{1200.00,600.00}, {{1100.00,900.00},{1300.00,1000.00}}}
-	} };
-	*/
-	//ai->graph = graph;
+	
 	ai->start = staticRec->getLoc();
 	ai->goal = { 1100.00,1100.00 };
 
@@ -1735,24 +1677,6 @@ void ERONS_LOOP(QuadTree* _QuadTree) {
 
 	ai->graph._print();
 
-
-	//ai->astar_search(staticRec);
-
-	//vector<Vector2f> path = ai->get_path();
-
-
-	//for (Vector2f next : path) {
-	//	std::cout << "X: " << next.getXloc() << " Y: " << next.getYloc() << std::endl;
-	//}
-
-	//std::unordered_map<std::string, Manager*> manager_table;
-
-	//manager_table["DumM"] = DumM;
-
-	//Alex->WorldObj::setWidth(100);
-	//Alex->WorldObj::setHeight(100);
-	//Alex->setX(10);
-	//Alex->setY(10);
 	ai->astar_search(staticRec);
 	// gameplay_functions->get_path(staticRec); //Generate the waypoints to the destination
 	staticRec->setMode(WANDER);
@@ -1984,90 +1908,7 @@ void ERONS_LOOP(QuadTree* _QuadTree) {
 		else {
 
 		}
-		//toggle between evade and attack mode
-		//if (M) {
-		//	if (OSAtkMode) {
-		//		OSAtkMode = false;
-		//		otherShango->waypoint = Vector2f(-1, -1);
-		//		otherShango->destination = Vector2f(-1, -1);
-		//	}
-		//	else {
-		//		OSAtkMode = true;
-		//	}
-		//}
 
-
-
-
-
-
-		//ai->plan_step(staticRec);
-		//clock 
-
-		/*float diffX = staticRec->getX() - staticRec->goal.getXloc();
-
-		float diffY = staticRec->getY() - staticRec->goal.getYloc();
-		float slope = abs(diffY / diffX);
-
-		float diagSpeed = sqrt(staticRec->getSpeed()*staticRec->getSpeed() / (slope + 1));
-
-		staticRec->setDiagXSpeed(diagSpeed);
-		staticRec->setDiagYSpeed((slope*diagSpeed));
-
-
-		X: 1520 Y: 970
-		X: 1520 Y: 1230
-		X: 1450 Y: 1050
-		X: 1520 Y: 970
-		X: 1520 Y: 1230
-		X: 1450 Y: 1050
-
-		if (abs(diffX) < 6) diffX = 0;
-		if (abs(diffY) < 6) diffY = 0;
-		bool left = false;
-		bool up = false;
-		bool down = false;
-		bool right = false;
-
-		//gameplay_functions->move_toward(staticRec);
-
-		if (diffX < 0) right = true;
-		if (diffX > 0) left = true;
-		if (diffY < 0) down = true;
-		if (diffY > 0) up = true;
-		if (up) {
-		gameplay_functions->move_toward(staticRec);
-		//	if (right) gameplay_functions->move_up_right(staticRec);
-		//	else if (left) gameplay_functions->move_up_left(staticRec);
-		//else gameplay_functions->move_up(staticRec);
-		}
-		else if (down) {
-		gameplay_functions->move_toward(staticRec);
-		//if (right) gameplay_functions->move_down_right(staticRec);
-		//else if (left) gameplay_functions->move_down_left(staticRec);
-		//else gameplay_functions->move_down(staticRec);
-		}
-		else if (right) {
-		gameplay_functions->move_toward(staticRec);
-		//	gameplay_functions->move_right(staticRec);
-		}
-		else if (left) {
-		gameplay_functions->move_toward(staticRec);
-		//gameplay_functions->move_left(staticRec);
-		}
-		else {
-		gameplay_functions->stop(staticRec);
-		}*/
-		iController->InputCheck();
-
-		//Alex->WorldObj::drawObj(0,0);
-		//for (int i = 0; i < recVec.size(); i++) {
-		//	recVec[i]->drawObj(0,0);
-		//}
-		//Alex->WorldObj::animateObj();
-		////Alex->WorldObj::shiftX(.5);
-		//osi::GameWindow::refresh();
-		//draw
 		if (state == 0) {
 			//LOG("ERROR AFTER PRESSING Q TO QUIT THE DIALOGUE GUI");
 			gameplay_functions->draw_frame(Alex);
@@ -2082,6 +1923,8 @@ void ERONS_LOOP(QuadTree* _QuadTree) {
 		//gameplay_functions->draw_frame(convoGui);
 		//run task buffer
 		//iController->InputCheck();
+		//ActionExecFunctions::ActionExecMap[AiController->hero_planners[YEMOJA]->get_current_action()]
+		AiController->hero_planners[YEMOJA]->get_current_action().execute();
 		tBuffer->run();
 		//	cout << tBuffer->queue_buffer.size() << endl;
 		//tBuffer->empty();

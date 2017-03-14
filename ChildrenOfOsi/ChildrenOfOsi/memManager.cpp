@@ -19,7 +19,7 @@ memManager::memManager(MessageLog* _mLog, TaskBuffer* _tBuffer)
 	livingObj_pool = memHelper->create_pool(sizeof(LivingObj) * 64);
 	livingObj_head = memHelper->init_pool(livingObj_pool, sizeof(LivingObj)*2);
 
-	Attack_pool = memHelper->create_pool(sizeof(Attack) * 64);
+	Attack_pool = memHelper->create_pool(sizeof(Attack) * 256);
 	Attack_head = memHelper->init_pool(Attack_pool, sizeof(Attack)*4);
 
 	soldier_pool = memHelper->create_pool(sizeof(Soldier) * 64);

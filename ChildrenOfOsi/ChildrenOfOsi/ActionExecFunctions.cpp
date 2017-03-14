@@ -97,6 +97,7 @@ void ActionExecFunctions::execute_fight(Action* fight)
 	*/
 
 	switch (fight->checkpoint) {
+		cout << "PLEASE BE FIGHTING" << endl;
 	case 0: //Pick village location(location of fight target), create memory, increment checkpoint
 		fight->getDoer()->destination = { 1000,1000 }; //need to somehow retrieve location of target village
 		ActionHelper::create_memory(fight, fight->getDoer());

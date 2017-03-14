@@ -57,7 +57,8 @@ public:
 
 	int time_stamp; // don't initialize here (get initialized when the action begins/memory gets created)
 
-	void (*execute)(Action* cur_action);
+	void (*execute_ptr)(Action* cur_action);
+	void execute() { execute_ptr(this); };
 
 private:
 	//std::string name;
