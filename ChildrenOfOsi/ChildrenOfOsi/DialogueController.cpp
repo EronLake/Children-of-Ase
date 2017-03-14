@@ -94,9 +94,9 @@ void DialogueController::otherConversationPoint(dialogue_point line)
 
 	std::string reply_pt_sentence = dialogue.gen_dialog(line, temp_hero);
 	std::string con_pt_sentence = dialogue.gen_dialog(point, temp_hero);
-	
+	std::cout << "------------REPLY:"<<reply_pt_sentence << std::endl;
 	//give options to Alex
-	message = other->getName() + ": " + reply_pt_sentence+ "\n\n" + con_pt_sentence;
+	message = other->getName() + ": " + reply_pt_sentence + "\n" +con_pt_sentence;
 	std::cout << "HERO REPLY/COONVERSATION POINT////////////////////////////////////" << std::endl;
 	std::cout << other->getName() << ": "<< message << std::endl;
 	replyOptions = dialogue.get_possible_reply_pts();
@@ -114,7 +114,6 @@ void DialogueController::otherConversationPoint(dialogue_point line)
 
 void DialogueController::otherResponse(std::string info)
 {
-	message = "/n/n";
 	dialogue_point line = dialogue.choose_reply_pt(info, optionsIndex);
 
 	state = 3;

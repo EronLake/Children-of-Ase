@@ -3,6 +3,7 @@
 #include <ctime>
 
 bool MakeForest = false;
+bool PlacePlant = true;
 float topLeftx;
 float topLefty;
 float topRightx;
@@ -32,7 +33,7 @@ void ObjConfig::import_config(vector<WorldObj*>* recVec, ChildrenOfOsi* gameplay
 	for (auto itr = root.begin(); itr != root.end(); itr++)
 	{
 
-		if (MakeForest) {
+		if (MakeForest||PlacePlant) {
 
 			if ((*itr)["name"].asString() == "JungleTopLeft") {
 				topLeftx = (*itr)["x"].asFloat();
@@ -65,7 +66,8 @@ void ObjConfig::import_config(vector<WorldObj*>* recVec, ChildrenOfOsi* gameplay
 	}
 
 	cout << "done" << endl;
-	if (MakeForest) {
+	if (MakeForest||PlacePlant) {
+
 		Json::Value root;
 		Json::Reader reader;
 		std::ifstream in_file("config.json");
@@ -84,20 +86,39 @@ void ObjConfig::import_config(vector<WorldObj*>* recVec, ChildrenOfOsi* gameplay
 			randomX = rand() % XDistancs + topLeftx;
 			randomY = rand() % YDistancs + topLefty;
 			stringstream TreeName;
-			TreeName << "Jungle_Tree_Num_" << i;
+			TreeName << "Jungle_Element_Num_" << i;
 			string WhichSprite;
-			int whichTreeNumber = rand() % 3;
-			if (whichTreeNumber == 0) {
-				WhichSprite = "Jungle_Tree_1";
-			}
-			else if (whichTreeNumber == 1) {
-				WhichSprite = "Jungle_Tree_2";
+			if (PlacePlant) {
+				string PlantSprites[]{
+					"Jungle_Bush",
+					"Jungle_Flower1",
+					"Jungle_Flower2",
+					"Jungle_Flower3",
+					"Jungle_Plant1",
+					"Jungle_Plant2",
+					"Jungle_Plant3",
+					"Jungle_Plant4",
+					"Jungle_scrub1",
+					"Jungle_scrub2",
+					"Jungle_scrub3",
+					"Jungle_scrub4"
+				};
+				WhichSprite = PlantSprites[rand() % 12];
+				set_world_obj(recVec, gameplay_func, tBuffer, randomX, randomY, 50, 50, TreeName.str(), WhichSprite, 1, 1000, 1000, 1000, 1000);
+
 			}
 			else {
-				WhichSprite = "Jungle_Tree_3";
+
+				string TreeSprites[] = {
+					"Jungle_Tree_1",
+					"Jungle_Tree_2",
+					"Jungle_Tree_3",
+					"Jungle_Tree_4",
+					"Jungle_Tree_5" };
+				WhichSprite = TreeSprites[rand() % 5];
+				set_world_obj(recVec, gameplay_func, tBuffer, randomX, randomY, 500.0, 500.0, TreeName.str(), WhichSprite, 1, 1000, 1000, 1000, 1000);
 			}
 
-			set_world_obj(recVec, gameplay_func, tBuffer, randomX, randomY, 500.0, 500.0, TreeName.str(), WhichSprite, 1, 1000, 1000, 1000, 1000);
 
 
 
@@ -134,6 +155,9 @@ void ObjConfig::import_config(vector<WorldObj*>* recVec, ChildrenOfOsi* gameplay
 
 
 }
+
+
+
 
 void ObjConfig::set_world_obj(vector<WorldObj*>* recVec, ChildrenOfOsi* gameplay_func, TaskBuffer* tBuffer, float x, float y, float width, float hight,
 	std::string name, std::string tex_file, int frame_num, float bodyx1, float bodyx2, float bodyy1, float bodyy2)
