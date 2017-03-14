@@ -670,6 +670,12 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	oya->setSpeed(5);
 	oya->offsetBody(0, 50, 50, 50, 50);
 	oya->shiftY(300);
+
+	Planner* YemojaPlanner = new Planner();
+	AiController->hero_planners[YEMOJA] = YemojaPlanner;
+	Action* test_train = new Action(staticRec, otherShango, staticRec, 10, 1, "train", "execute_train");
+	AiController->hero_planners[YEMOJA]->set_current_action(test_train);
+
 	/*
 	WorldObj* tree = new WorldObj(Vector2f(4000, 2600), 800, 500);
 	tree->sprite.setTexture(treeTex);
@@ -792,7 +798,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	LOG("PAST WINDOW INIT ***********************");
 	clock_t start_tick, current_ticks, delta_ticks;
 	clock_t fps = 0;
-	int fs = 60;
+	int fs = 120;
 	int wait_time = fs*3; //always wait 3 seconds
 	int count = 0;
 	int state = 0;
@@ -1090,9 +1096,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 		//gameplay_functions->draw_frame(convoGui);
 		//run task buffer
 		//iController->InputCheck();
-		Action* test_fight = new Action(staticRec, otherShango, staticRec, 10, 1, "fight", "execute_fight");
-		Action* temp_action = AiController->hero_planners[YEMOJA]->get_current_action();
-		temp_action->execute();
+		//temp_action->execute();
 
 		tBuffer->run();
 		//	cout << tBuffer->queue_buffer.size() << endl;
@@ -1569,7 +1573,7 @@ void ERONS_LOOP(QuadTree* _QuadTree) {
 
 	Action* test_fight = new Action(staticRec, otherShango, staticRec, 10, 1, "fight", "execute_fight");
 
-	AiController->hero_planners[YEMOJA]->set_current_action(*test_fight);
+	AiController->hero_planners[YEMOJA]->set_current_action(test_fight);
 
 	staticRec->setWidth(100);
 	staticRec->setHeight(100);

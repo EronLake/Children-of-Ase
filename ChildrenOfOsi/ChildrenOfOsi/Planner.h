@@ -33,13 +33,13 @@ public:
 	MilestoneList* get_milestone_map() { return milestones; }
 	//vector<Action> get_milestones_for_goal(Action goal);
 	vector<Action> get_milestone_frontier();
-	Action* get_current_action() { return &current_action; }
+	Action* get_current_action() { return current_action; }
 	int get_current_action_value() { return current_action_value; }
 	Action get_current_end_state() { return current_end_state; }
-	void set_current_action(Action action) { current_action = action; current_action_value = action.getUtility(); }
+	void set_current_action(Action* action) { current_action = action; current_action_value = action->getUtility(); }
 	void add_milestone(Action goal, Action milestone);
 
-	void generate_milestones(Action state, Action goal);
+	void generate_milestones(Action state, Action* goal);
 
 	int value_of(Action* action);
 
@@ -52,7 +52,7 @@ private:
 	MilestoneList* milestones;
 
 	Action current_end_state;
-	Action current_action;
+	Action* current_action = NULL;
 	int current_action_value;
 
 	int heuristic(Action step, vector <std::shared_ptr<Preconditions>> priority_preconds, vector<Action> goals);

@@ -25,7 +25,7 @@ void ActionHelper::create_memory(Action* action, Hero* hero)
 
 	action->time_stamp = frame_count;//int time = get world time
 	std::string category = "incomplete";
-	string where = NULL;
+	string where = "not yet defined";
 	int when = -1;
 
 	//string category;         //ACTIONS: fail, success, incomplete     FACTS: fact type (i.e. name, origin, etc)

@@ -92,7 +92,7 @@ void AIController::init_plans() {
 			//Recursive function that continues to append actions to 
 			//"state"'s list of milestones until it reaches an action with no
 			//preconditions left
-			planner->generate_milestones(state, curr_milestone);
+			planner->generate_milestones(state, &curr_milestone);
 			
 		}
 
@@ -118,7 +118,7 @@ void AIController::reevaluate_state(int me, int them) {
 
 		planner->add_milestone(state, milestone);                  //Add the first milestone to the action path
 
-		planner->generate_milestones(state, milestone);          //Generate the rest of the milestones for this state
+		planner->generate_milestones(state, &milestone);          //Generate the rest of the milestones for this state
 	}
 	else
 	{
@@ -129,7 +129,7 @@ void AIController::reevaluate_state(int me, int them) {
 void AIController::execute() {
 	for (auto iter : hero_planners) {
 		Planner* planner = iter.second;
-		Action* curr_action = &planner->get_current_action();
+		Action* curr_action = planner->get_current_action();
 		Action* curr_goal = &planner->get_current_end_state();
 
 		StateList* end_states = planner->get_end_state_map();
@@ -150,7 +150,7 @@ void AIController::execute() {
 			for (auto itor : frontier) {
 				if (itor.getUtility() > best) {
 					best = itor.getUtility();
-					planner->set_current_action(itor);
+					planner->set_current_action(&itor);
 				}
 			}
 		}
