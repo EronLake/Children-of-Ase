@@ -28,7 +28,7 @@ memManager::memManager(MessageLog* _mLog, TaskBuffer* _tBuffer)
 	spl_soldier_pool = memHelper->create_pool(sizeof(SplSoldier) * 64);
 	spl_soldier_head = memHelper->init_pool(spl_soldier_pool, sizeof(SplSoldier)*2);
 
-	worldObj_pool = memHelper->create_pool(sizeof(WorldObj)*128);
+	worldObj_pool = memHelper->create_pool(sizeof(WorldObj)*456);
 	worldObj_head = memHelper->init_pool(worldObj_pool, sizeof(WorldObj)*2);
 
 	npc_pool = memHelper->create_pool(sizeof(NPC) * 64);

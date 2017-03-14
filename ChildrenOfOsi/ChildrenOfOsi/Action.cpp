@@ -12,6 +12,25 @@ Action::~Action()
 {
 };
 
+void Action::applyUtiliites(bool ifsucc)
+{
+	if (ifsucc == true) 
+	{
+		for (auto itr = succ_postconds.begin(); itr != succ_postconds.end(); itr++) 
+		{
+			itr->second->apply_utility();
+		}
+	}
+	else
+	{
+		for (auto itr = fail_postconds.begin(); itr != succ_postconds.end(); itr++)
+		{
+			itr->second->apply_utility();
+		}
+	}
+	
+}
+
 vector<std::string> Action::preConditionsNeeded(Hero* o, Hero* h) {
 	vector<std::string> needs;/*
 	owner = o;
@@ -62,7 +81,7 @@ int Action::exeAction() {
 	vector<std::string> check = preConditionsNeeded(doer, receiver);
 	if (check.empty()) {
 		int tmp;
-		for (auto i = postconds.begin(); i != postconds.end(); ++i) {
+		for (auto i = succ_postconds.begin(); i != succ_postconds.end(); ++i) {
 			if (i->first.compare("aff") == 0) {
 				//doer->rel[receiver->name]->addAffinity(i->second);
 			}

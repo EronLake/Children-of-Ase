@@ -23,11 +23,10 @@ void ActionHelper::create_memory(Action* action, Hero* hero)
 	people.push_back(action->getReceiver());
 	people.push_back(action->getOwner());
 
-	int time = 0;//int time = get world time
+	action->time_stamp = 0;//int time = get world time
 	std::string category = "incomplete";
 	string where = NULL;
 	int when = -1;
-	
 
 	//string category;         //ACTIONS: fail, success, incomplete     FACTS: fact type (i.e. name, origin, etc)
 	//string content;          //ACTIONS: action name                   FACTS: actual data (i.e. "Yemoja", "Oasis", etc)
@@ -37,7 +36,7 @@ void ActionHelper::create_memory(Action* action, Hero* hero)
 	//string reason;           //ACTIONS: reason for failure or success
 
 	//Memory(int t, int frames, vector<NPC*> p, string cat="",string cont="",string where="",int why=-1, int when=-1);
-	gameplay_func->add_memory(key, hero->name, type, time, people, category,action->getName(), where, action->getWhy(), when);
+	gameplay_func->add_memory(key, hero->name, type, action->time_stamp, people, category,action->getName() + std::to_string(action->time_stamp), where, action->getWhy(), when);
 	hero->mem_counter++;
 
 	if (hero->name = OYA)
@@ -131,6 +130,15 @@ void ActionHelper::attack_helper(Soldier* attacker, Soldier* defender)
 	}
 }
 
+void ActionHelper::if_kill(Hero* Doer, Hero* Receiver)
+{
+	if (Doer->rel[Receiver->name]->getAffinity() < 20) {
+		Receiver->kill();
+
+		//need to add the memory to memories
+	}
+}
+
 
 //Decrement the action's timer and return its new value. 
 //Whenever a Hero is a "waiting", this function would be called
@@ -177,146 +185,5 @@ bool ActionHelper::hero_respond(Action* action) {
 	return interact;
 }
 
-void ActionHelper::execute_train(Action* train) {
-	switch (train->checkpoint) {
-	case 0: //Pick training location, create memory, increment checkpoint
-		train->getDoer()->destination = { 1000,1000 }; //should select from set of pre-defined, stored in Hero, or village?
-		create_memory(train, train->getDoer());
-		train->checkpoint++;
-		break;
-	case 1: //If destination is reached, start a timer and move to next checkpoint
-		if (train->getDoer()->destination == Vector2f(0, 0)) {
-			set_timer(train, 3600);  //Wait 1 minute (60 frames times 60 seconds)
-			train->checkpoint++;
-		}
-		break;
-	case 2: //If timer is complete, set village as destination, apply postconds, update memory
-		if (retrieve_time(train) == 0) {
-			train->getDoer()->destination = { 500,500 }; //Also predefined, maybe as "home_location" in hero
-			//Apply post-conditions
-			//Call update_memory function
-			//Mark action as executed?
-		}
-		break;
-
-	}
-}
-
-void ActionHelper::execute_train_with(Action* train_with) {
-
-}
-void ActionHelper::execute_form_alliance(Action* form_alliance) {
-	Hero* doer = form_alliance->getDoer();
-	Hero* responder = form_alliance->getReceiver();
-	switch (form_alliance->checkpoint) {
-	case 0:
-		create_memory(form_alliance, doer);
-		
-		form_alliance->getDoer()->destination = { 1000,1000 };
-		form_alliance->checkpoint++;
-		break;
-
-	case 1:
-		if (form_alliance->getDoer()->destination == Vector2f(0, 0)) {
-			Planner* hero_planner = ai->hero_planners[responder->name];
-			if (form_alliance->getName() == ((*hero_planner->get_end_state_map())[responder->name]).getName()){
-				int temp = 0;
-				for (auto& iter : form_alliance->preconds) {
-					
-					temp += iter.second->get_cost();
-				}
-				if (temp != 0) {
-					//success
-					for (auto& i : form_alliance->postconds) {
-
-					i.second->apply_utility();
-					}
-				}
-				else {
-					//failed
-				}
-			}
-			else {
-				//update memory failed
-			}
-
-		}
-		
-	}
-}
-
-void ActionHelper::fight(Action* fight) 
-{
-	/*	/Create Memory
-		/Locate hero (maybe start by going to heroes village)
-		/Travel to village
-		/check if there/reset desination and find target
-		/Engage in battle (talk first?)
-		If win - update with win post conditions 
-		Else - update with lost post conditions
-		Update memory all participants with memory
-		Prompt for kill?
-	*/
-
-	switch (fight->checkpoint) {
-	case 0: //Pick village location(location of fight target), create memory, increment checkpoint
-		fight->getDoer()->destination = { 1000,1000 }; //need to somehow retrieve location of target village
-		create_memory(fight, fight->getDoer());
-		fight->checkpoint++;
-		break;
-	case 1: //If destination is reached, check if hero is there start a timer and move if not, fight otherwise
-		if (fight->getDoer()->destination == Vector2f(0, 0))//needs to be changed to use party location right 
-		{
-			//if the target hero is in the village then begin the battle
-			if (fight->getDoer()->getLoc() == fight->getReceiver()->getLoc()) // need to change this so it checks if the party is close by
-			{
-				fight->checkpoint+= 2;
-			}
-			set_timer(fight, 3600);  //Wait 1 minute (60 frames times 60 seconds) trying to find out the hero's location
-			fight->checkpoint++;
-		}
-		break;
-	case 2: //If timer is complete, set village as destination to the location of the target hero 
-		if (retrieve_time(fight) == 0) 
-		{
-			fight->getDoer()->destination = fight->getReceiver()->getLoc(); //go to the target hero's location
-			fight->checkpoint++;
-		}
-		break;
-	case 3: //If both niether party is empty then contiue the fight 
-		//(may need to change this to account for hero death)
-		if (fight->getDoer()->getParty()->getMembers().size() == 0 || fight->getReceiver()->getParty()->getMembers().size() == 0) 
-		{
-			fight->checkpoint++;
-		} 
-		//do a single round of battle every 10 sec
-		if (retrieve_time(fight) == 0)
-		{
-			battle_sim(fight);
-			set_timer(fight, 600);
-		}
-
-		//NEED TO SOMEHOW ACCOUNT FOR IF A PLAYER GETS CLOSE
-		
-		break;
-	case 4: //If win update apply win-post else apply loss-post and update memory
-		//check if the target's party is empty(may need to change this to account for hero death)
-		if (fight->getReceiver()->getParty()->getMembers().size() == 0) {
-			//Apply succ-post-conditions
-														 											 
-		}
-		else
-		{
-			//Apply fail-post-conditions
-		}
-
-		//Call update_memory function
-		//Mark action as executed?
-		//create prompt for kill action
-		break;
-
-	}
-
-}
 
 ChildrenOfOsi* ActionHelper::gameplay_func;

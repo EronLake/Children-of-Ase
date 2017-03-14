@@ -53,7 +53,7 @@ vector<Action*> ActionPool::addVec(vector<Action*> a, vector<Action*> b) {
 
 void ActionPool::updateMiddle() {
 	for (int i = 0; i < micro.size(); i++) {
-		for (auto it = micro[i].postconds.begin(); it != micro[i].postconds.end(); ++it) {
+		for (auto it = micro[i].succ_postconds.begin(); it != micro[i].succ_postconds.end(); ++it) {
 			if (it->first.compare("aff") == 0) {
 				if (it->second > 0) {
 					middleLink["affAbove"].push_back(&micro[i]);

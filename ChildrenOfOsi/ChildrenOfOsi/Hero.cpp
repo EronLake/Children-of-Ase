@@ -56,6 +56,18 @@ void Hero::setPersonality(int a, int k, int h, int p, int r, int e, int g){
 	traits->setGreed(g);
 };
 
+Memory* Hero::find_mem(std::string mem_name)
+{
+	for (int i = 0; i < memories.size(); i++) 
+	{
+		if (memories[i]->getContent() == mem_name)
+		{
+			return memories[i];
+		}
+	}
+	return nullptr;
+}
+
 //overloads a soldier function
 void Hero::defeat()
 {

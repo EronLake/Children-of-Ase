@@ -26,6 +26,7 @@ public:
 
 	int mem_counter;
 	vector<Memory*> memories;
+	Memory* find_mem(std::string mem_name);
 
 	Party* cur_party;
 	virtual void defeat();
