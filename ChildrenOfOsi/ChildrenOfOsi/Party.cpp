@@ -16,7 +16,7 @@ void Party::addToParty(Soldier* s, bool lead) {
 	if (lead)leader = s;
 }
 
-void Party::removeFromParty(Soldier* s) {
+void Party::removeSoldier(Soldier* s) {
 	for (auto i = members.begin(); i != members.end(); ++i) {
 		if (*i == s) {
 			members.erase(i);

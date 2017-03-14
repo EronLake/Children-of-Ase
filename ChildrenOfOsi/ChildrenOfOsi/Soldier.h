@@ -20,7 +20,6 @@ class Soldier:
   Soldier(Vector2f p_topLeft, float p_width, float p_height);
   ~Soldier();
 
-  Party* getParty() { return party; };
   int getInstances() { return instances; };
 
   bool getInCombat() { return inCombat; };
@@ -28,8 +27,8 @@ class Soldier:
   bool getHold() { return holdPos; };
   bool getPatrol() { return patrol; };
 
-  bool getCool() { return this->cdTime == 0; };
-  bool getCool(int c) { return (this->cdTime == 0 && cooldownMap[attackTypes[c]] == 0); };
+  bool getCool() { return ((this->cdTime == 0) && (this->sprite.getLock() == false)); };
+  bool getCool(int c) { return ((this->cdTime == 0) && (cooldownMap[attackTypes[c]] == 0) && (this->sprite.getLock() == false)); };
   int timeCD() { return cdTime; };
 
   void setInCombat(bool c) { inCombat = c; };
@@ -46,6 +45,9 @@ class Soldier:
   void resetCD(int c);
   
   void setParty(Party* p) { party = p; };
+  Party* getParty() { return party; };
+  virtual void defeat();
+
   std::string getKey() { return key; };
   std::string getAtKey() { return atkey = "Soldier" + std::to_string(getID()) + "_" + std::to_string(attackTypes.size()) + "_" + std::to_string(instances); };
 

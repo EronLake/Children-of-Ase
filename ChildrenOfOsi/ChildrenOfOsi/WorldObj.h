@@ -15,15 +15,21 @@ class WorldObj
 
   WorldObj():
     ID(idNum++), loc(0, 0), collision(false), type(0)
-  {this->body.push_back({ {0.0F, 0.0F}, 1.0F, 1.0F }); evasionBound = new Rectangle();};
+  {
+	  this->body.push_back({ {0.0F, 0.0F}, 1.0F, 1.0F }); evasionBound = new Rectangle(); direction = 2;
+  };
 
   WorldObj(Vector2f p_topLeft, float p_width, float p_height):
     ID(idNum++), loc(p_topLeft), width(p_width), height(p_height), collision(false), type(0)
-  { this->body.push_back({loc, p_width, p_height}); evasionBound = new Rectangle();}
+  {
+	  this->body.push_back({ loc, p_width, p_height }); evasionBound = new Rectangle(); direction = 2;
+  }
 
   WorldObj(float x, float y, bool col):
     ID(idNum++), loc({x, y}), collision(col), type(0)
-  { this->body.push_back({loc, 1.0F, 1.0F}); evasionBound = new Rectangle();}
+  {
+	  this->body.push_back({ loc, 1.0F, 1.0F }); evasionBound = new Rectangle(); direction = 2;
+  }
 
   virtual ~WorldObj() = default;
 
@@ -71,6 +77,7 @@ class WorldObj
   void setHeight(float h) { this->body[0].setHeight(this->height = h); };
 
   // Higher-level setter methods
+  void setID(int i) { ID=i; };
   void setName(std::string n) { this->name = n; };
   void setType(int t) { this->type = t; };
   void setSprite(Sprite s) { this->sprite = s; };

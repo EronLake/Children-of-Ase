@@ -26,8 +26,13 @@ public:
 
 	int mem_counter;
 	vector<Memory*> memories;
+	Memory* find_mem(std::string mem_name);
 
 	Party* cur_party;
+	virtual void defeat();
+	void kill();
+
+	bool incapacitated;
 
 	void addRelationship(int hero);
 	void Hero::setPersonality(int a, int k, int h, int p, int r, int e, int g);

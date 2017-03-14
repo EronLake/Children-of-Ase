@@ -24,7 +24,7 @@ int Planner::prereq_appeal(Action step, vector<std::shared_ptr<Preconditions>> p
 	int appeal = 0;
 	//iterate through postconditions.
 	for (auto i = std::begin(priority_preconds); i != std::end(priority_preconds); i++) {
-		for (auto iter : step.postconds) {
+		for (auto iter : step.succ_postconds) {
 			if (iter.second->get_type() == (*i)->get_type()) {
 				
 				appeal += iter.second->get_utility()*(i-priority_preconds.begin());

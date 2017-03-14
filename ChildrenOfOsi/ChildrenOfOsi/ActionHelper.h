@@ -5,6 +5,7 @@
 #include "AIController.h"
 #include "ChildrenOfOsi.h"
 #include "Containers.h"
+#include "Party.h"
 
 class ActionHelper
 {
@@ -21,6 +22,8 @@ public:
 	static void create_memory(Action*, Hero* hero);
 
 	static void battle_sim(Action* train_with);
+	static void attack_helper(Soldier* attacker, Soldier* defender);
+	static void if_kill(Hero* Doer, Hero* Receiver);
 
 	static int retrieve_time(Action* action);
 	static void set_timer(Action* action, int wait_time);
@@ -33,10 +36,6 @@ public:
 	//Battle simulation(timer)
 
 	static bool hero_respond(Action* action);
-
-	static void execute_train(Action* train);
-	static void execute_train_with(Action* train_with);
-	static void execute_form_alliance(Action* form_alliance);
 
 };
 

@@ -23,11 +23,10 @@ void ActionHelper::create_memory(Action* action, Hero* hero)
 	people.push_back(action->getReceiver());
 	people.push_back(action->getOwner());
 
-	int time = 0;//int time = get world time
+	action->time_stamp = 0;//int time = get world time
 	std::string category = "incomplete";
 	string where = NULL;
 	int when = -1;
-	
 
 	//string category;         //ACTIONS: fail, success, incomplete     FACTS: fact type (i.e. name, origin, etc)
 	//string content;          //ACTIONS: action name                   FACTS: actual data (i.e. "Yemoja", "Oasis", etc)
@@ -37,7 +36,7 @@ void ActionHelper::create_memory(Action* action, Hero* hero)
 	//string reason;           //ACTIONS: reason for failure or success
 
 	//Memory(int t, int frames, vector<NPC*> p, string cat="",string cont="",string where="",int why=-1, int when=-1);
-	gameplay_func->add_memory(key, hero->name, type, time, people, category,action->getName(), where, action->getWhy(), when);
+	gameplay_func->add_memory(key, hero->name, type, action->time_stamp, people, category,action->getName() + std::to_string(action->time_stamp), where, action->getWhy(), when);
 	hero->mem_counter++;
 
 	if (hero->name = OYA)
@@ -61,9 +60,9 @@ void ActionHelper::create_memory(Action* action, Hero* hero)
 		hero->memories.push_back(Containers::shango_memory_table[key]);
 	}
 }
-/*
-static void battle_sim(Action* battle) 
-{{
+
+void ActionHelper::battle_sim(Action* battle)
+{
 		//may we have offensive team attack first? Slightly randomized
 		Party* Attackers = battle->getDoer()->cur_party;
 		Party* Defenders = battle->getReceiver()->cur_party;
@@ -71,35 +70,75 @@ static void battle_sim(Action* battle)
 		vector<Soldier*> larger;
 		vector<Soldier*> smaller;
 		//Check which party is l larger
-		if (Attackers->getParty().size() >= Defenders->getParty().size())
-		{
-			larger = Attackers->getParty();
-			smaller = Attackers->getParty();
+		
+		//this pairs every solider with a counterpart in the other party
+		//with the larger team ganging up on the smaller one
+		if (Attackers->getMembers().size() >= Defenders->getMembers().size())
+		{ 
+			larger = Attackers->getMembers();
+			smaller = Defenders->getMembers();
+
+			// all attackers attack first
+			for (int i = 0; i < larger.size(); i++)
+			{
+				attack_helper(Attackers->getMembers()[i], Defenders->getMembers()[i%smaller.size()]);
+			}
+			//all defenders attack second
+			for (int i = 0; i < smaller.size(); i++)
+			{
+				attack_helper(Defenders->getMembers()[i], Attackers->getMembers()[i]);
+			}
 		}
 		else
 		{
-			smaller = Attackers->getParty();
-			larger = Attackers->getParty();
-		}
+			smaller = Attackers->getMembers();
+			larger = Defenders->getMembers();
 
-			for(int i = 0; i < larger.size(); i++)
+			// all attackers attack first
+			for (int i = 0; i < smaller.size(); i++)
 			{
-			larger[i] party_small[i%party_small.size()]
-			Party_large[i] attack(reduce health with the worth of one attack) with
-			party_small[i%party_small.size()]
-
-			if (party_small[i%party_small.size()] 	heath == 0) remove from party
-			(kill / retreat)
-
-				party_small[i%party_small.size()] attack(reduce health with the worth of
-					one attack) with Party_large[i]
-
-				if (Party_large[i] heath == 0) remove from party
-				(kill / retreat)
+			attack_helper(Attackers->getMembers()[i], Defenders->getMembers()[i]);
+			}
+			//all defenders attack second
+			for (int i = 0; i < larger.size(); i++)
+			{
+			attack_helper(Defenders->getMembers()[i], Attackers->getMembers()[i%smaller.size()]);
+			}
 		}
+		
 
 }
-*/
+
+void ActionHelper::attack_helper(Soldier* attacker, Soldier* defender)
+{
+	//total damage of all attacks
+	int damage = 0;
+	for (int a = 0; a < attacker->attackTypes.size(); a++)
+	{
+		damage += attacker->attackTypes[a]->getDmg();
+	}
+	//take average of all attacks
+	damage = damage / attacker->attackTypes.size();
+	//take off damage from the average of all their attacks AKA larger attack smaller
+	defender->addHealth(-damage);
+
+	//check if the attacked part has died
+	if (defender->getHealth() <= 0)
+	{
+		//kill the soldier/incapacitate the Hero if they run out of health
+		defender->defeat();
+	}
+}
+
+void ActionHelper::if_kill(Hero* Doer, Hero* Receiver)
+{
+	if (Doer->rel[Receiver->name]->getAffinity() < 20) {
+		Receiver->kill();
+
+		//need to add the memory to memories
+	}
+}
+
 
 //Decrement the action's timer and return its new value. 
 //Whenever a Hero is a "waiting", this function would be called
@@ -146,72 +185,5 @@ bool ActionHelper::hero_respond(Action* action) {
 	return interact;
 }
 
-void ActionHelper::execute_train(Action* train) {
-	switch (train->checkpoint) {
-	case 0: //Pick training location, create memory, increment checkpoint
-		train->getDoer()->destination = { 1000,1000 }; //should select from set of pre-defined, stored in Hero, or village?
-		create_memory(train, train->getDoer());
-		train->checkpoint++;
-		break;
-	case 1: //If destination is reached, start a timer and move to next checkpoint
-		if (train->getDoer()->destination == Vector2f(0, 0)) {
-			set_timer(train, 3600);  //Wait 1 minute (60 frames times 60 seconds)
-			train->checkpoint++;
-		}
-		break;
-	case 2: //If timer is complete, set village as destination, apply postconds, update memory
-		if (retrieve_time(train) == 0) {
-			train->getDoer()->destination = { 500,500 }; //Also predefined, maybe as "home_location" in hero
-			//Apply post-conditions
-			//Call update_memory function
-			//Mark action as executed?
-		}
-		break;
-
-	}
-}
-
-void ActionHelper::execute_train_with(Action* train_with) {
-
-}
-void ActionHelper::execute_form_alliance(Action* form_alliance) {
-	Hero* doer = form_alliance->getDoer();
-	Hero* responder = form_alliance->getReceiver();
-	switch (form_alliance->checkpoint) {
-	case 0:
-		create_memory(form_alliance, doer);
-		
-		form_alliance->getDoer()->destination = { 1000,1000 };
-		form_alliance->checkpoint++;
-		break;
-
-	case 1:
-		if (form_alliance->getDoer()->destination == Vector2f(0, 0)) {
-			Planner* hero_planner = ai->hero_planners[responder->name];
-			if (form_alliance->getName() == ((*hero_planner->get_end_state_map())[responder->name]).getName()){
-				int temp = 0;
-				for (auto& iter : form_alliance->preconds) {
-					
-					temp += iter.second->get_cost();
-				}
-				if (temp != 0) {
-					//success
-					for (auto& i : form_alliance->postconds) {
-
-					i.second->apply_utility();
-					}
-				}
-				else {
-					//failed
-				}
-			}
-			else {
-				//update memory failed
-			}
-
-		}
-		
-	}
-}
 
 ChildrenOfOsi* ActionHelper::gameplay_func;

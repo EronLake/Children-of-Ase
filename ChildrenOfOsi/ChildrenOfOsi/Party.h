@@ -9,7 +9,7 @@ public:
 	Party();
 	~Party();
 	void addToParty(Soldier* s, bool lead);
-	void removeFromParty(Soldier* s);
+	void removeSoldier(Soldier* s);
 	void setLeader(Soldier* s);
 	Soldier* getLeader() { return leader; };
 	void setAlliance(Alliance* a) { faction = a; };
@@ -17,7 +17,7 @@ public:
 	void setMode(int m);
 	int getMode() { return mode; };
 
-	vector<Soldier*> getParty() { vector<Soldier*> full_group = members; full_group.push_back(leader); return full_group; };
+	vector<Soldier*> getMembers() { return members; };
 	
 private:
 	vector<Soldier*> members;

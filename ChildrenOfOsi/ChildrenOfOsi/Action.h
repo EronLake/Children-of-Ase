@@ -13,7 +13,12 @@ public:
 	
 
 	unordered_map<std::string, std::shared_ptr<Preconditions>> preconds;
-	unordered_map<std::string, std::shared_ptr<Postcondition>> postconds;
+
+
+	unordered_map<std::string, std::shared_ptr<Postcondition>> succ_postconds;
+	unordered_map<std::string, std::shared_ptr<Postcondition>> fail_postconds;
+
+	void applyUtiliites(bool ifsucc);
 
 	void setUtility(int u) { utility = u; };
 	int getUtility() { return utility; };
@@ -43,6 +48,8 @@ public:
 	int getWhy() { return why; };
 	int checkpoint;
 	int current_timer;
+
+	int time_stamp;
 
 private:
 	//std::string name;
