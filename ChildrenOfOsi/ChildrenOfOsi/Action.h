@@ -4,11 +4,14 @@
 #include "Conditions.h"
 #include <memory>
 
+class ActionExecFunctions;
+
 class Action
 {
 	
 public:
 	Action();
+	Action(Hero* owner, Hero* receiver, Hero* doer, int utility,int why, std::string name, std::string _exe_name);
 	~Action();
 	
 
@@ -21,7 +24,7 @@ public:
 	void applyUtiliites(bool ifsucc);
 
 	void setUtility(int u) { utility = u; };
-	int getUtility() { return utility; };
+	int getUtility() { return utility; }; //NEED TO CHANGE SO THAT IT USESES THE SUCC_POST CONDITIONS
 	void setReceiver(Hero* h) { receiver = h; recieverName = h->name; };
 	Hero* getReceiver() { return receiver; };
 
@@ -32,7 +35,7 @@ public:
 	Hero* getDoer() { return doer; };
 
 	vector<std::string> preConditionsNeeded(Hero* o, Hero* h);
-	int exeAction();
+	int exeAction();//not sure what this does
 
 	void setName(string n) { name = n; };
 	string getName() { return name; };
@@ -40,21 +43,26 @@ public:
 	Personality* multipliers;
 	void setMultipliers(int a, int k, int h, int p, int r, int e, int g);
 
-	int recieverName;
-	std::string name;
+	
 	bool operator==(const Action a) const;
 
 	void setWhy(int w) { why = w; };
 	int getWhy() { return why; };
-	int checkpoint;
-	int current_timer;
 
-	int time_stamp;
+	int recieverName;
+	std::string name;
+
+	int checkpoint;	//don't initialize used in action execution
+	int current_timer; //don't initialize used in action execution
+
+	int time_stamp; // don't initialize here (get initialized when the action begins/memory gets created)
+
+	void (*execute)(Action* cur_action);
 
 private:
 	//std::string name;
 	int utility;
-	int why;
+	int why; //should eventually be set to a precondition
 
 	Hero* owner;
 	Hero* receiver;

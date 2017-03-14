@@ -23,7 +23,7 @@ void ActionHelper::create_memory(Action* action, Hero* hero)
 	people.push_back(action->getReceiver());
 	people.push_back(action->getOwner());
 
-	action->time_stamp = 0;//int time = get world time
+	action->time_stamp = frame_count;//int time = get world time
 	std::string category = "incomplete";
 	string where = NULL;
 	int when = -1;

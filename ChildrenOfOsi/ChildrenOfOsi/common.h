@@ -33,6 +33,9 @@
 #define OSHOSI 4
 #define OGUN 5
 
+
+static int frame_count = 0;
+
 //toggles debug longging statements 
 #define DEBUG 0
 
