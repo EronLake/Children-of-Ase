@@ -51,6 +51,8 @@ public:
 
 	int time_stamp;
 
+	bool executed = false;
+
 private:
 	//std::string name;
 	int utility;
