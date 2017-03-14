@@ -584,6 +584,7 @@ void osi::GameWindow::RenderText(std::string text, GLfloat x, GLfloat y, GLfloat
 	for (c = text.begin(); c != text.end(); c++) {
 		Character ch = Characters[*c];
 		if (*c == '\n' || x>850) {
+			if (x>850)y -= ch.Size.y;
 			x = lineStart;
 			y -= ch.Size.y;
 		}  if (*c != '\n'){

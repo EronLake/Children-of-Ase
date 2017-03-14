@@ -13,7 +13,7 @@ memManager::memManager(MessageLog* _mLog, TaskBuffer* _tBuffer)
 
 	memHelper = new MemoryHelper();
 
-	hero_pool = memHelper->create_pool(sizeof(Hero) * 8);
+	hero_pool = memHelper->create_pool(sizeof(Hero) * 32);
 	hero_head = memHelper->init_pool(hero_pool, sizeof(Hero)*2);
 
 	livingObj_pool = memHelper->create_pool(sizeof(LivingObj) * 64);
@@ -32,7 +32,7 @@ memManager::memManager(MessageLog* _mLog, TaskBuffer* _tBuffer)
 	worldObj_head = memHelper->init_pool(worldObj_pool, sizeof(WorldObj)*2);
 
 	npc_pool = memHelper->create_pool(sizeof(NPC) * 64);
-	npc_head = memHelper->init_pool(npc_pool, sizeof(NPC));
+	npc_head = memHelper->init_pool(npc_pool, sizeof(NPC)*2);
 
 	texture_pool = memHelper->create_pool(sizeof(Texture) * 32);
 	texture_head = memHelper->init_pool(texture_pool, sizeof(Texture));

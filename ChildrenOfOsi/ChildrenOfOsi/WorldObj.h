@@ -77,6 +77,7 @@ class WorldObj
   void setHeight(float h) { this->body[0].setHeight(this->height = h); };
 
   // Higher-level setter methods
+  void setID(int i) { ID=i; };
   void setName(std::string n) { this->name = n; };
   void setType(int t) { this->type = t; };
   void setSprite(Sprite s) { this->sprite = s; };
