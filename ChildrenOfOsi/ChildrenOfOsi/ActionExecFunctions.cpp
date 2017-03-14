@@ -134,8 +134,9 @@ void ActionExecFunctions::execute_fight(Action* fight)
 	case 4: //If win update apply win-post else apply loss-post and update memory
 			//create_memory(fight, fight->getOwner()); do we want to update the owner immeadiately?
 
-		Memory* curr_mem = fight->getDoer()->find_mem(fight->getName() + std::to_string(fight->time_stamp));
-		if (curr_mem == nullptr)
+		Memory* doer_mem = fight->getDoer()->find_mem(fight->getName() + std::to_string(fight->time_stamp));
+		Memory* receiver_mem = fight->getReceiver()->find_mem(fight->getName() + std::to_string(fight->time_stamp));
+		if (doer_mem == nullptr || receiver_mem == nullptr)
 		{
 			perror("something is wrong with the current hero memory creation function");
 		}
@@ -144,24 +145,29 @@ void ActionExecFunctions::execute_fight(Action* fight)
 		if (fight->getReceiver()->getParty()->getMembers().size() == 0) {
 			//Apply succ-post-conditions
 			fight->applyUtiliites(true);
-			//update_memory category as a success
-			curr_mem->setCategory("success");
+			//update_memory category as a success 
+			doer_mem->setCategory("success"); receiver_mem->setCategory("fail");
 			//update reason
-			curr_mem->setReason("They couldnt handle me"); //need to create a reason function
+			doer_mem->setReason("They couldnt handle me"); //need to create a reason function
+			receiver_mem->setReason("They attack while my gard was down");
 		}
 		else
 		{
 			//Apply fail-post-conditions
 			fight->applyUtiliites(false);
 			//update_memory as faiure
-			curr_mem->setCategory("fail");
+			doer_mem->setCategory("fail"); receiver_mem->setCategory("success");
 			//update reason
-			curr_mem->setReason("I was too weak");//need to create a reason function
+			doer_mem->setReason("I was too weak");//need to create a reason function
+			receiver_mem->setReason("They were foolish to attack");
 		}
 		//update where
-		curr_mem->setWhere(std::to_string(fight->getDoer()->getLoc().xloc));
+		doer_mem->setWhere(std::to_string(fight->getDoer()->getLoc().xloc));
+		receiver_mem->setWhere(std::to_string(fight->getReceiver()->getLoc().xloc));
 		//update when
-		curr_mem->setWhen(/*get global frame*/0);
+		doer_mem->setWhen(/*get global frame*/0);
+		receiver_mem->setWhen(/*get global frame*/0);
+
 
 		//Mark action as executed?
 
