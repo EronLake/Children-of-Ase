@@ -26,16 +26,16 @@ int Movement::move_up(WorldObj* obj) {
 	obj->setDirection(8);
 	objVec.clear();
 	objVec = tree->retrieve(objVec, obj);
-
+	int my_type = obj->getType();
 	NPC* npc;
-	if (obj->getType() >= 2) {
+	if (my_type >= 2) {
 		if (npc = CheckClass::isNPC(obj))
 		{
 			float moveSpeed = npc->getSpeed();
 		}
 		obj->shiftY(-moveSpeed*speed_magnifier);
 		for (int i = 0; i < objVec.size(); i++) {
-			if (obj == objVec[i]) {
+			if (obj == objVec[i] || (my_type >= 2 && objVec[i]->getType() >= 2)) {
 				break;
 			}
 			if (collision(objVec[i], obj)) {
@@ -63,9 +63,9 @@ int Movement::move_up_left(WorldObj* obj) {
 	//get list to check collision with
 	objVec.clear();
 	objVec = tree->retrieve(objVec, obj);
-
+	int my_type = obj->getType();
 	NPC* npc;
-	if (obj->getType() >= 2) {
+	if (my_type >= 2) {
 		if (npc = CheckClass::isNPC(obj))
 		{
 			float diagYSpeed = npc->getDiagYSpeed();
@@ -74,7 +74,7 @@ int Movement::move_up_left(WorldObj* obj) {
 
 		obj->shiftY(-diagYSpeed*speed_magnifier);
 		for (int i = 0; i < objVec.size(); i++) {
-			if (obj == objVec[i]) {
+			if (obj == objVec[i] || (my_type >= 2 && objVec[i]->getType() >= 2)) {
 				break;
 			}
 			if (collision(objVec[i], obj)) {
@@ -86,7 +86,7 @@ int Movement::move_up_left(WorldObj* obj) {
 		}
 		obj->shiftX(-diagXSpeed*speed_magnifier);
 		for (int i = 0; i < objVec.size(); i++) {
-			if (obj == objVec[i]) {
+			if (obj == objVec[i] || (my_type >= 2 && objVec[i]->getType() >= 2)) {
 				break;
 			}
 			if (collision(objVec[i], obj)) {
@@ -106,9 +106,9 @@ int Movement::move_up_right(WorldObj* obj) {
 	//get list to check collision with
 	objVec.clear();
 	objVec = tree->retrieve(objVec, obj);
-
+	int my_type = obj->getType();
 	NPC* npc;
-	if (obj->getType() >= 2) {
+	if (my_type >= 2) {
 		if (npc = CheckClass::isNPC(obj))
 		{
 			float diagYSpeed = npc->getDiagYSpeed()*speed_magnifier;
@@ -117,7 +117,7 @@ int Movement::move_up_right(WorldObj* obj) {
 
 		obj->shiftY(-diagYSpeed*speed_magnifier);
 		for (int i = 0; i < objVec.size(); i++) {
-			if (obj == objVec[i]) {
+			if (obj == objVec[i] || (my_type >= 2 && objVec[i]->getType() >= 2)) {
 				break;
 			}
 			if (collision(objVec[i], obj)) {
@@ -129,7 +129,7 @@ int Movement::move_up_right(WorldObj* obj) {
 		}
 		obj->shiftX(diagXSpeed*speed_magnifier);
 		for (int i = 0; i < objVec.size(); i++) {
-			if (obj == objVec[i]) {
+			if (obj == objVec[i] || (my_type >= 2 && objVec[i]->getType() >= 2)) {
 				break;
 			}
 			if (collision(objVec[i], obj)) {
@@ -149,9 +149,9 @@ int Movement::move_down(WorldObj* obj) {
 	//get list to check collision with
 	objVec.clear();
 	objVec = tree->retrieve(objVec, obj);
-
+	int my_type = obj->getType();
 	NPC* npc;
-	if (obj->getType() >= 2) {
+	if (my_type >= 2) {
 		if (npc = CheckClass::isNPC(obj))
 		{
 			float moveSpeed = npc->getSpeed();
@@ -159,7 +159,7 @@ int Movement::move_down(WorldObj* obj) {
 
 		obj->shiftY(moveSpeed*speed_magnifier);
 		for (int i = 0; i < objVec.size(); i++) {
-			if (obj == objVec[i]) {
+			if (obj == objVec[i] || (my_type >= 2 && objVec[i]->getType() >= 2)) {
 				break;
 			}
 			if (collision(objVec[i], obj)) {
@@ -179,9 +179,9 @@ int Movement::move_down_left(WorldObj* obj) {
 	//get list to check collision with
 	objVec.clear();
 	objVec = tree->retrieve(objVec, obj);
-
+	int my_type = obj->getType();
 	NPC* npc;
-	if (obj->getType() >= 2) {
+	if (my_type >= 2) {
 		if (npc = CheckClass::isNPC(obj))
 		{
 			float diagYSpeed = npc->getDiagYSpeed();
@@ -190,7 +190,7 @@ int Movement::move_down_left(WorldObj* obj) {
 
 		obj->shiftY(diagYSpeed*speed_magnifier);
 		for (int i = 0; i < objVec.size(); i++) {
-			if (obj == objVec[i]) {
+			if (obj == objVec[i] || (my_type >= 2 && objVec[i]->getType() >= 2)) {
 				break;
 			}
 			if (collision(objVec[i], obj)) {
@@ -203,7 +203,7 @@ int Movement::move_down_left(WorldObj* obj) {
 		obj->shiftX(-diagXSpeed*speed_magnifier);
 
 		for (int i = 0; i < objVec.size(); i++) {
-			if (obj == objVec[i]) {
+			if (obj == objVec[i] || (my_type >= 2 && objVec[i]->getType() >= 2)) {
 				break;
 			}
 			if (collision(objVec[i], obj)) {
@@ -223,9 +223,9 @@ int Movement::move_down_right(WorldObj* obj) {
 	//get list to check collision with
 	objVec.clear();
 	objVec = tree->retrieve(objVec, obj);
-
+	int my_type = obj->getType();
 	NPC* npc;
-	if (obj->getType() >= 2) {
+	if (my_type >= 2) {
 		if (npc = CheckClass::isNPC(obj))
 		{
 			float diagYSpeed = npc->getDiagYSpeed();
@@ -234,7 +234,7 @@ int Movement::move_down_right(WorldObj* obj) {
 
 		obj->shiftY(diagYSpeed*speed_magnifier);
 		for (int i = 0; i < objVec.size(); i++) {
-			if (obj == objVec[i]) {
+			if (obj == objVec[i] || (my_type >= 2 && objVec[i]->getType() >= 2)) {
 				break;
 			}
 			if (collision(objVec[i], obj)) {
@@ -246,7 +246,7 @@ int Movement::move_down_right(WorldObj* obj) {
 		}
 		obj->shiftX(diagXSpeed*speed_magnifier);
 		for (int i = 0; i < objVec.size(); i++) {
-			if (obj == objVec[i]) {
+			if (obj == objVec[i] || (my_type >= 2 && objVec[i]->getType() >= 2)) {
 				break;
 			}
 			if (collision(objVec[i], obj)) {
@@ -266,16 +266,16 @@ int Movement::move_left(WorldObj* obj) {
 	//get list to check collision with
 	objVec.clear();
 	objVec = tree->retrieve(objVec, obj);
-
+	int my_type = obj->getType();
 	NPC* npc;
-	if (obj->getType() >= 2) {
+	if (my_type >= 2) {
 		if (npc = CheckClass::isNPC(obj))
 		{
 			float moveSpeed = npc->getSpeed();
 		}
 		obj->shiftX(-moveSpeed*speed_magnifier);
 		for (int i = 0; i < objVec.size(); i++) {
-			if (obj == objVec[i]) {
+			if (obj == objVec[i] || (my_type >= 2 && objVec[i]->getType() >= 2)) {
 				break;
 			}
 			if (collision(objVec[i], obj)) {
@@ -295,9 +295,9 @@ int Movement::move_right(WorldObj* obj) {
 	//get list to check collision with
 	objVec.clear();
 	objVec = tree->retrieve(objVec, obj);
-
+	int my_type = obj->getType();
 	NPC* npc;
-	if (obj->getType() >= 2) {
+	if (my_type >= 2) {
 		if (npc = CheckClass::isNPC(obj))
 		{
 			float moveSpeed = npc->getSpeed();
@@ -305,7 +305,7 @@ int Movement::move_right(WorldObj* obj) {
 
 		obj->shiftX(moveSpeed*speed_magnifier);
 		for (int i = 0; i < objVec.size(); i++) {
-			if (obj == objVec[i]) {
+			if (obj == objVec[i] || (my_type >= 2 && objVec[i]->getType() >= 2)) {
 				break;
 			}
 			if (collision(objVec[i], obj)) {

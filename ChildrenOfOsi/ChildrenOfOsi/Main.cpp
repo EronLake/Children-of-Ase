@@ -181,7 +181,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	ActionHelper::ai = AiController;
 	ActionHelper::gameplay_func = gameplay_functions;
 
-	CombatController* combatControl = new CombatController();
+	CombatController* combatControl = new CombatController(gameplay_functions);
 
 	//the order defines what order the managers the tasks will be sent to
 	DumM->register_manager();
@@ -277,7 +277,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	yemojaIdleTex->setFile("Assets/Sprites/YemojaFrontIdle.png", 1);
 
 	h_upRunTex->setFile("Assets/Sprites/YemojaBackSprite.png", 26);
-	h_downRunTex->setFile("Assets/Sprites/YemojaForwardSprite.png", 26);
+	h_downRunTex->setFile("Assets/Sprites/YemojaFrontSprite.png", 26);
 	h_leftRunTex->setFile("Assets/Sprites/YemojaLeftSprite.png", 26);
 	h_rightRunTex->setFile("Assets/Sprites/YemojaRightSprite.png", 26);
 	h_upIdleTex->setFile("Assets/Sprites/YemojaBackIdle.png", 1);
@@ -320,7 +320,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 
 	Alex->offsetBody(0, 50, 50, 50, 50);
 	Alex->setInteractable(true);
-	Alex->setName("Alex");
+	Alex->setName("Shango");
 	Alex->setTalkDist(20);
 
 	Alex->setDirection(2);
@@ -453,13 +453,18 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	}
 	
 	gameplay_functions->add_hero("Yemoja", 4600, 3600, true);
-
+	gameplay_functions->add_hero("Oya", 4400, 3600, true);
 	gameplay_functions->add_hero("otherShango", 4900, 3300, true);
+	gameplay_functions->add_hero("sold1", 4900, 3300, true);
+	gameplay_functions->add_hero("sold2", 4900, 3300, true);
 
 	tBuffer->run();
 
 	Hero* staticRec = Containers::hero_table["Yemoja"];
+	Hero* oya = Containers::hero_table["Oya"];
 	Hero* otherShango = Containers::hero_table["otherShango"];
+	Hero* sold1 = Containers::hero_table["sold1"];
+	Hero* sold2 = Containers::hero_table["sold2"];
 
 	staticRec->setWidth(100);
 	staticRec->setHeight(100);
@@ -531,8 +536,102 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	otherShango->melee->sprite.setTexture(blank);
 	//otherShango->addAttackType(spin);
 
+	sold1->setWidth(150);
+	sold1->setHeight(150);
+	sold1->sprite.setTexture(playerTexture);
+	sold1->sprite.setIdleTexture(playerIdleTex);
+	sold1->sprite.up = upRunTex;
+	sold1->sprite.down = downRunTex;
+	sold1->sprite.left = leftRunTex;
+	sold1->sprite.right = rightRunTex;
 
+	sold1->sprite.id_up = upIdleTex;
+	sold1->sprite.id_left = leftIdleTex;
+	sold1->sprite.id_right = rightIdleTex;
+	sold1->sprite.id_down = downIdleTex;
 
+	sold1->sprite.atk_up = upAtkTex;
+	sold1->sprite.atk_down = downAtkTex;
+	sold1->sprite.atk_left = leftAtkTex;
+	sold1->sprite.atk_right = rightAtkTex;
+
+	sold1->sprite.hurt_up = upHurtTex;
+	sold1->sprite.hurt_down = downHurtTex;
+	sold1->sprite.hurt_left = leftHurtTex;
+	sold1->sprite.hurt_right = rightHurtTex;
+
+	sold1->offsetBody(0, 50, 50, 50, 50);
+	sold1->setInteractable(true);
+	sold1->setName("sold1");
+
+	sold2->setWidth(150);
+	sold2->setHeight(150);
+	sold2->sprite.setTexture(playerTexture);
+	sold2->sprite.setIdleTexture(playerIdleTex);
+	sold2->sprite.up = upRunTex;
+	sold2->sprite.down = downRunTex;
+	sold2->sprite.left = leftRunTex;
+	sold2->sprite.right = rightRunTex;
+
+	sold2->sprite.id_up = upIdleTex;
+	sold2->sprite.id_left = leftIdleTex;
+	sold2->sprite.id_right = rightIdleTex;
+	sold2->sprite.id_down = downIdleTex;
+
+	sold2->sprite.atk_up = upAtkTex;
+	sold2->sprite.atk_down = downAtkTex;
+	sold2->sprite.atk_left = leftAtkTex;
+	sold2->sprite.atk_right = rightAtkTex;
+
+	sold2->sprite.hurt_up = upHurtTex;
+	sold2->sprite.hurt_down = downHurtTex;
+	sold2->sprite.hurt_left = leftHurtTex;
+	sold2->sprite.hurt_right = rightHurtTex;
+
+	sold2->offsetBody(0, 50, 50, 50, 50);
+	sold2->setInteractable(true);
+	sold2->setName("sold2");
+
+	sold1->setLoc(Alex->getLoc());
+	sold2->setLoc(Alex->getLoc());
+	sold1->shiftX(200);
+	sold2->shiftX(-200);
+	sold1->setSpeed(3);
+	sold2->setSpeed(2);
+	gameplay_functions->add_Attack(sold1->getKey(), sold1->body[0].getX(), sold1->body[0].getY(), true, 10);
+	tBuffer->run();
+	sold1->melee = Containers::Attack_table[sold1->getKey()];
+	gameplay_functions->add_Attack(sold2->getKey(), sold2->body[0].getX(), sold2->body[0].getY(), true, 10);
+	tBuffer->run();
+	sold2->melee = Containers::Attack_table[sold2->getKey()];
+	sold1->melee->setDmg(10);
+	sold1->melee->setSpeed(5);
+	sold1->melee->setBaseDir(4);
+	sold1->melee->setCoolDown(200);
+	sold1->melee->setPause(-1);
+	sold1->melee->setDestroy(false);
+	sold1->melee->setKeep(true);
+	sold1->melee->setWidth(otherShango->body[0].getWidth());
+	sold1->melee->setHeight(otherShango->body[0].getHeight());
+	
+	sold2->melee->setDmg(10);
+	sold2->melee->setSpeed(5);
+	sold2->melee->setBaseDir(4);
+	sold2->melee->setCoolDown(200);
+	sold2->melee->setPause(-1);
+	sold2->melee->setDestroy(false);
+	sold2->melee->setKeep(true);
+	sold2->melee->setWidth(otherShango->body[0].getWidth());
+	sold2->melee->setHeight(otherShango->body[0].getHeight());
+
+	sold1->melee->setCoolDown(100);
+	sold2->melee->setCoolDown(62);
+	sold1->melee->sprite.setTexture(blank);
+	sold2->melee->sprite.setTexture(blank);
+	combatControl->addtoTargets(Alex);
+	combatControl->addtoTargets(otherShango);
+	//combatControl->addtoTargets(sold1);
+	//combatControl->addtoTargets(sold2);
 
 	//VisibilityGraph graph;
 	ai->graph.vertices = vertices;
@@ -566,6 +665,10 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	staticRec->setName("Yemoja");
 	staticRec->setInteractable(true);
 	staticRec->setHealth(100);
+	*oya = *staticRec;
+	oya->setSpeed(5);
+	oya->offsetBody(0, 50, 50, 50, 50);
+	oya->shiftY(300);
 	/*
 	WorldObj* tree = new WorldObj(Vector2f(4000, 2600), 800, 500);
 	tree->sprite.setTexture(treeTex);
@@ -582,6 +685,9 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	*/
 	recVec.push_back(staticRec);
 	recVec.push_back(otherShango);
+	recVec.push_back(sold1);
+	recVec.push_back(sold2);
+	recVec.push_back(oya);
 	//recVec.push_back(tree);
 	//recVec.push_back(tree1);
 	//recVec.push_back(tree2);
@@ -675,6 +781,8 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	Vector2f otherShangoInitialLoc = otherShango->getLoc();
 
 	otherShango->setEvade(false);
+	sold1->setEvade(false);
+	sold2->setEvade(false);
 	bool OSAtkMode = true;
 	short M = GetKeyState('M') >> 15;
 
@@ -692,6 +800,8 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 		_QuadTree->clear();
 		Alex->updateCD();
 		otherShango->updateCD();
+		sold1->updateCD();
+		sold2->updateCD();
 		for (int i = 0; i < recVec.size(); i++) {
 			_QuadTree->insert(recVec[i]);	//insert all obj into tree
 	
@@ -878,6 +988,9 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 		else {
 
 		}
+		combatControl->fight(sold1,state);
+		combatControl->fight(sold2, state);
+		combatControl->follow(oya, Alex,state);
 		//toggle between evade and attack mode
 		//if (M) {
 		//	if (OSAtkMode) {
@@ -1002,7 +1115,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 		if (delta_ticks > 0)
 			fps = CLOCKS_PER_SEC / delta_ticks;
 		if (DialogueController::getState() == 0) {
-			//cout << "FPS: " << fps << endl;
+			cout << "FPS: " << fps << endl;
 		}
 
 

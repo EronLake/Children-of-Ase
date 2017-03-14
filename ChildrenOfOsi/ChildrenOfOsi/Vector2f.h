@@ -29,7 +29,7 @@ class Vector2f
 
   bool operator==(const Vector2f& that) const { return this->xloc == that.xloc && this->yloc == that.yloc; };
   bool operator!=(const Vector2f& that) const  { return !(this->xloc == that.xloc && this->yloc == that.yloc); };
-  bool operator<(const Vector2f& that) const  { return this->xloc < that.xloc || this->yloc < that.yloc; };
+  bool operator<(const Vector2f& that) const  { return this->xloc < that.xloc || (!(that.xloc < this->xloc)) && (that.yloc < this->yloc); };
   bool operator<=(const Vector2f& that) const  { return (this->xloc < that.xloc || this->yloc < that.yloc) || (this->xloc == that.xloc && this->yloc == that.yloc); }
   bool operator>(const Vector2f& that) const  { return !((this->xloc < that.xloc || this->yloc < that.yloc) || (this->xloc == that.xloc && this->yloc == that.yloc)); }
   bool operator>=(const Vector2f& that) const  { return !(this->xloc < that.xloc || this->yloc < that.yloc); }
