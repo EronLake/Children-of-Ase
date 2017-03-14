@@ -388,6 +388,7 @@ int Movement::attack(WorldObj* obj) {
 							std::cout << "Player hit " << liv->getName() << std::endl;
 							a->second->Hit(liv);
 							if (a->second->getDestroy())a->second->setDuration(0);
+							liv->sprite.unlockAnimation();
 							manager->createTaskWithObj("Hurt", "DRAW", liv);
 							std::cout << liv->getName() << "'s health is now " << liv->getHealth() << std::endl;
 						}

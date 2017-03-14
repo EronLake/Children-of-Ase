@@ -42,16 +42,16 @@ void Soldier::newAttack(int i, Attack* a)
     float y = body[0].getY();
     int d = getDirection();
     if(d == 8) {
-      y = y - (attackTypes[i]->getHeight()/2);
+      y = y - (attackTypes[i]->getHeight()/1.2);
     }
     else if(d == 2) {
-      y = y + (body[0].getHeight()/2);
+      y = y + (body[0].getHeight()/1.2);
     }
     else if(d == 4) {
-      x = x - (attackTypes[i]->getWidth()/2);
+      x = x - (attackTypes[i]->getWidth()/1.2);
     }
     else if(d == 6) {
-      x = x + (body[0].getWidth()/2);
+      x = x + (body[0].getWidth()/1.2);
     }
     p->setX(x);
     p->setY(y);
@@ -85,19 +85,19 @@ void Soldier::meleeAttack()
 
   if(d == 8) {
     y = y - (melee->getHeight()/2);
-    x += (melee->getSpeed()*melee->getDuration() / 2);
+    x += (melee->getSpeed()*melee->getDuration() / 1.2);
   }
   else if(d == 2) {
     y = y + (body[0].getHeight()/2);
-    x -= (melee->getSpeed()*melee->getDuration() / 2);
+    x -= (melee->getSpeed()*melee->getDuration() / 1.2);
   }
   else if(d == 4) {
     x = x - (melee->getWidth()/2);
-    y -= (melee->getSpeed()*melee->getDuration() / 2);
+    y -= (melee->getSpeed()*melee->getDuration() / 1.2);
   }
   else if(d == 6) {
     x = x + (body[0].getWidth()/2);
-    y += (melee->getSpeed()*melee->getDuration() / 2);
+    y += (melee->getSpeed()*melee->getDuration() / 1.2);
   }
   melee->setDirWithBase(d);
   melee->setX(x);
