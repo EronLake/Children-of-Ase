@@ -200,7 +200,9 @@
     <ClCompile Include="CombatController.cpp">
       <Filter>AI</Filter>
     </ClCompile>
-    <ClCompile Include="ActionExecFunctions.cpp" />
+    <ClCompile Include="ActionExecFunctions.cpp">
+      <Filter>AI\Actions</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AIHelper.h">
@@ -420,7 +422,9 @@
     <ClInclude Include="CombatController.h">
       <Filter>AI</Filter>
     </ClInclude>
-    <ClInclude Include="ActionExecFunctions.h" />
+    <ClInclude Include="ActionExecFunctions.h">
+      <Filter>AI\Actions</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Text Include="audio_test.txt">

@@ -1,15 +1,22 @@
 #include "stdafx.h"
 #include "ActionExecFunctions.h"
 
+std::unordered_map<std::string, execute_ptr> ActionExecFunctions::ActionExecMap{
+	{ "execute_train",			&execute_train			},
+	{ "execute_train_with",		&execute_train_with		},
+	{ "execute_fight",			&execute_fight			},
+	{ "execute_form_alliance",	&execute_form_alliance	}
+};
+
 
 ActionExecFunctions::ActionExecFunctions()
 {
-}
+};
 
 
 ActionExecFunctions::~ActionExecFunctions()
 {
-}
+};
 
 void ActionExecFunctions::execute_train(Action* train) {
 	switch (train->checkpoint) {
@@ -154,6 +161,7 @@ void ActionExecFunctions::execute_fight(Action* fight)
 	*/
 
 	switch (fight->checkpoint) {
+		cout << "PLEASE BE FIGHTING" << endl;
 	case 0: //Pick village location(location of fight target), create memory, increment checkpoint
 		fight->getDoer()->destination = { 1000,1000 }; //need to somehow retrieve location of target village
 		ActionHelper::create_memory(fight, fight->getDoer());
@@ -229,8 +237,8 @@ void ActionExecFunctions::execute_fight(Action* fight)
 		doer_mem->setWhere(std::to_string(fight->getDoer()->getLoc().xloc));
 		receiver_mem->setWhere(std::to_string(fight->getReceiver()->getLoc().xloc));
 		//update when
-		doer_mem->setWhen(/*get global frame*/0);
-		receiver_mem->setWhen(/*get global frame*/0);
+		doer_mem->setWhen(frame_count);
+		receiver_mem->setWhen(frame_count);
 
 
 		//Mark action as executed?

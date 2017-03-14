@@ -1,10 +1,23 @@
 #include "stdafx.h"
 #include "Action.h"
 #include "Conditions.h"
+#include "ActionExecFunctions.h"
 
 
 Action::Action()
 {
+};
+
+Action::Action(Hero* _owner, Hero* _receiver, Hero* _doer, int _utility, int _why, std::string _name, std::string _exe_name)
+{
+	owner = _owner;
+	receiver = _receiver;
+	doer = _doer;
+	utility = _utility;
+	why = _why;
+	recieverName = receiver->name;
+	name = _name;
+	execute_ptr  = ActionExecFunctions::ActionExecMap[_exe_name];
 };
 
 

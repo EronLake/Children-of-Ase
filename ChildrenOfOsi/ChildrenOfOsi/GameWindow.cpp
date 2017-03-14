@@ -583,14 +583,17 @@ void osi::GameWindow::RenderText(std::string text, GLfloat x, GLfloat y, GLfloat
 	std::string::const_iterator c;
 	for (c = text.begin(); c != text.end(); c++) {
 		Character ch = Characters[*c];
-		if (*c == '\n' || x>850) {
+		if (*c == '\n' || ((*c == ' ')&&(x>750))) {
 			if (x>850)y -= ch.Size.y;
 			x = lineStart;
 			y -= ch.Size.y;
-		}  if (*c != '\n'){
+		}
+		if (*c == '_' || *c == ' ') {
+			x+= (ch.Bearing.x * scale);
+			x += (ch.Advance >> 6) * scale;
+		} else if (*c != '\n') {
 			GLfloat xpos = x + ch.Bearing.x * scale;
 			GLfloat ypos = y - (ch.Size.y - ch.Bearing.y) * scale;
-
 			GLfloat w = ch.Size.x * scale;
 			GLfloat h = ch.Size.y * scale;
 			// Update VBO for each character
