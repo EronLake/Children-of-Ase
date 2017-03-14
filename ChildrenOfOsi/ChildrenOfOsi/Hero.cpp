@@ -1,6 +1,8 @@
 #include "stdafx.h"
 #include "Hero.h"
 #include "NPC.h"
+#include "Party.h"
+
 using namespace std;
 
 
@@ -53,3 +55,17 @@ void Hero::setPersonality(int a, int k, int h, int p, int r, int e, int g){
 	traits->setExtroversion(e);
 	traits->setGreed(g);
 };
+
+//overloads a soldier function
+void Hero::defeat()
+{
+	this->getParty()->removeSoldier(this);
+	incapacitated = true;
+}
+
+//overloads a soldier function
+void Hero::kill()
+{
+	this->getParty()->removeSoldier(this);
+	this->setParty(NULL);
+}

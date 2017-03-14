@@ -61,9 +61,9 @@ void ActionHelper::create_memory(Action* action, Hero* hero)
 		hero->memories.push_back(Containers::shango_memory_table[key]);
 	}
 }
-/*
-static void battle_sim(Action* battle) 
-{{
+
+void ActionHelper::battle_sim(Action* battle)
+{
 		//may we have offensive team attack first? Slightly randomized
 		Party* Attackers = battle->getDoer()->cur_party;
 		Party* Defenders = battle->getReceiver()->cur_party;
@@ -71,35 +71,66 @@ static void battle_sim(Action* battle)
 		vector<Soldier*> larger;
 		vector<Soldier*> smaller;
 		//Check which party is l larger
-		if (Attackers->getParty().size() >= Defenders->getParty().size())
-		{
-			larger = Attackers->getParty();
-			smaller = Attackers->getParty();
+		
+		//this pairs every solider with a counterpart in the other party
+		//with the larger team ganging up on the smaller one
+		if (Attackers->getMembers().size() >= Defenders->getMembers().size())
+		{ 
+			larger = Attackers->getMembers();
+			smaller = Defenders->getMembers();
+
+			// all attackers attack first
+			for (int i = 0; i < larger.size(); i++)
+			{
+				attack_helper(Attackers->getMembers()[i], Defenders->getMembers()[i%smaller.size()]);
+			}
+			//all defenders attack second
+			for (int i = 0; i < smaller.size(); i++)
+			{
+				attack_helper(Defenders->getMembers()[i], Attackers->getMembers()[i]);
+			}
 		}
 		else
 		{
-			smaller = Attackers->getParty();
-			larger = Attackers->getParty();
-		}
+			smaller = Attackers->getMembers();
+			larger = Defenders->getMembers();
 
-			for(int i = 0; i < larger.size(); i++)
+			// all attackers attack first
+			for (int i = 0; i < smaller.size(); i++)
 			{
-			larger[i] party_small[i%party_small.size()]
-			Party_large[i] attack(reduce health with the worth of one attack) with
-			party_small[i%party_small.size()]
-
-			if (party_small[i%party_small.size()] 	heath == 0) remove from party
-			(kill / retreat)
-
-				party_small[i%party_small.size()] attack(reduce health with the worth of
-					one attack) with Party_large[i]
-
-				if (Party_large[i] heath == 0) remove from party
-				(kill / retreat)
+			attack_helper(Attackers->getMembers()[i], Defenders->getMembers()[i]);
+			}
+			//all defenders attack second
+			for (int i = 0; i < larger.size(); i++)
+			{
+			attack_helper(Defenders->getMembers()[i], Attackers->getMembers()[i%smaller.size()]);
+			}
 		}
+		
 
 }
-*/
+
+void ActionHelper::attack_helper(Soldier* attacker, Soldier* defender)
+{
+	//total damage of all attacks
+	int damage = 0;
+	for (int a = 0; a < attacker->attackTypes.size(); a++)
+	{
+		damage += attacker->attackTypes[a]->getDmg();
+	}
+	//take average of all attacks
+	damage = damage / attacker->attackTypes.size();
+	//take off damage from the average of all their attacks AKA larger attack smaller
+	defender->addHealth(-damage);
+
+	//check if the attacked part has died
+	if (defender->getHealth() <= 0)
+	{
+		//kill the soldier/incapacitate the Hero if they run out of health
+		defender->defeat();
+	}
+}
+
 
 //Decrement the action's timer and return its new value. 
 //Whenever a Hero is a "waiting", this function would be called
@@ -204,6 +235,80 @@ void ActionHelper::execute_form_alliance(Action* form_alliance) {
 		}
 		
 	}
+}
+
+void ActionHelper::fight(Action* fight) 
+{
+	/*	/Create Memory
+		/Locate hero (maybe start by going to heroes village)
+		/Travel to village
+		/check if there/reset desination and find target
+		/Engage in battle (talk first?)
+		If win - update with win post conditions 
+		Else - update with lost post conditions
+		Update memory all participants with memory
+		Prompt for kill?
+	*/
+
+	switch (fight->checkpoint) {
+	case 0: //Pick village location(location of fight target), create memory, increment checkpoint
+		fight->getDoer()->destination = { 1000,1000 }; //need to somehow retrieve location of target village
+		create_memory(fight, fight->getDoer());
+		fight->checkpoint++;
+		break;
+	case 1: //If destination is reached, check if hero is there start a timer and move if not, fight otherwise
+		if (fight->getDoer()->destination == Vector2f(0, 0))//needs to be changed to use party location right 
+		{
+			//if the target hero is in the village then begin the battle
+			if (fight->getDoer()->getLoc() == fight->getReceiver()->getLoc()) // need to change this so it checks if the party is close by
+			{
+				fight->checkpoint+= 2;
+			}
+			set_timer(fight, 3600);  //Wait 1 minute (60 frames times 60 seconds) trying to find out the hero's location
+			fight->checkpoint++;
+		}
+		break;
+	case 2: //If timer is complete, set village as destination to the location of the target hero 
+		if (retrieve_time(fight) == 0) 
+		{
+			fight->getDoer()->destination = fight->getReceiver()->getLoc(); //go to the target hero's location
+			fight->checkpoint++;
+		}
+		break;
+	case 3: //If both niether party is empty then contiue the fight 
+		//(may need to change this to account for hero death)
+		if (fight->getDoer()->getParty()->getMembers().size() == 0 || fight->getReceiver()->getParty()->getMembers().size() == 0) 
+		{
+			fight->checkpoint++;
+		} 
+		//do a single round of battle every 10 sec
+		if (retrieve_time(fight) == 0)
+		{
+			battle_sim(fight);
+			set_timer(fight, 600);
+		}
+
+		//NEED TO SOMEHOW ACCOUNT FOR IF A PLAYER GETS CLOSE
+		
+		break;
+	case 4: //If win update apply win-post else apply loss-post and update memory
+		//check if the target's party is empty(may need to change this to account for hero death)
+		if (fight->getReceiver()->getParty()->getMembers().size() == 0) {
+			//Apply succ-post-conditions
+														 											 
+		}
+		else
+		{
+			//Apply fail-post-conditions
+		}
+
+		//Call update_memory function
+		//Mark action as executed?
+		//create prompt for kill action
+		break;
+
+	}
+
 }
 
 ChildrenOfOsi* ActionHelper::gameplay_func;

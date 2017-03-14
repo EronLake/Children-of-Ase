@@ -20,7 +20,6 @@ class Soldier:
   Soldier(Vector2f p_topLeft, float p_width, float p_height);
   ~Soldier();
 
-  Party* getParty() { return party; };
   int getInstances() { return instances; };
 
   bool getInCombat() { return inCombat; };
@@ -48,6 +47,9 @@ class Soldier:
   void setCD(int c) { cdTotal = c; };
   
   void setParty(Party* p) { party = p; };
+  Party* getParty() { return party; };
+  virtual void defeat();
+
   std::string getKey() { return key; };
   std::string getAtKey() { return atkey = "Soldier" + std::to_string(getID()) + "_" + std::to_string(attackTypes.size()) + "_" + std::to_string(instances); };
 

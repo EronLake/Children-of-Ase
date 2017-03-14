@@ -1,6 +1,7 @@
 #include "stdafx.h"
 
 #include "Soldier.h"
+#include "Party.h"
 
 using namespace std;
 
@@ -138,6 +139,19 @@ bool Soldier::hasAttacks()
     return false;
   }
 }
+/*
+//this function is overloaded by Hero. Acts lik kill for soldiers
+void Soldier::defeat()
+{
+	//this->getParty()->removeSoldier(this);
+}
+*/
+//this removes the soldier from the party and sets its party to null
+void Soldier::defeat()
+{
+	this->getParty()->removeSoldier(this);
+	this->setParty(NULL);
+}
 
 /**
  * Returns the next attack which this soldier should perform at this time.
@@ -151,3 +165,4 @@ Attack * Soldier::nextAttack()
     return nullptr;
   }
 }
+
