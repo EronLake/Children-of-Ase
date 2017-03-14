@@ -27,8 +27,8 @@ class Soldier:
   bool getHold() { return holdPos; };
   bool getPatrol() { return patrol; };
 
-  bool getCool() { return this->cdTime == 0; };
-  bool getCool(int c) { return (this->cdTime == 0 && cooldownMap[attackTypes[c]] == 0); };
+  bool getCool() { return ((this->cdTime == 0) && (this->sprite.getLock() == false)); };
+  bool getCool(int c) { return ((this->cdTime == 0) && (cooldownMap[attackTypes[c]] == 0) && (this->sprite.getLock() == false)); };
   int timeCD() { return cdTime; };
 
   void setInCombat(bool c) { inCombat = c; };

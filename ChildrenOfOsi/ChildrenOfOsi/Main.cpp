@@ -264,8 +264,8 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	rightIdleTex->setFile("Assets/Sprites/ShangoRightIdle.png",22);
 	upAtkTex->setFile("Assets/Sprites/ShangoBackSwing.png", 24);
 	downAtkTex->setFile("Assets/Sprites/ShangoForwardSwing.png", 24);
-	leftAtkTex->setFile("Assets/Sprites/ShangoLeftSwing.png", 24);
-	rightAtkTex->setFile("Assets/Sprites/ShangoRightSwing.png", 24);
+	leftAtkTex->setFile("Assets/Sprites/ShangoLeftSwingEffect.png", 24);
+	rightAtkTex->setFile("Assets/Sprites/ShangoRightSwingEffect.png", 24);
 	upHurtTex->setFile("Assets/Sprites/ShangoBackRecoil.png", 18);
 	downHurtTex->setFile("Assets/Sprites/ShangoForwardRecoil.png", 18);
 	leftHurtTex->setFile("Assets/Sprites/ShangoLeftRecoil.png", 18);
@@ -344,7 +344,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 
 	Attack* rockThrow = new Attack();
 	rockThrow->setDmg(5);
-	rockThrow->setSpeed(10);
+	rockThrow->setSpeed(20);
 	rockThrow->setDestroy(true);
 	rockThrow->setDuration(248);
 	rockThrow->setCoolDown(120);
@@ -673,6 +673,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 
 	Vector2f otherShangoInitialLoc = otherShango->getLoc();
 
+	otherShango->setEvade(false);
 	bool OSAtkMode = true;
 	short M = GetKeyState('M') >> 15;
 
@@ -752,7 +753,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 		//attack mode
 		enemyVec.clear();
 		enemyVec.push_back(Alex);
-		if (enemyVec.empty()) OSAtkMode = false;
+		if (enemyVec.empty()) otherShango->setEvade(true);
 		for (auto it : enemyVec) {
 			//if discovered Alex, set otherShango combat mode to 0(attack).
 			if (otherShango->getCurrentEnemy() != nullptr) break;
@@ -766,44 +767,59 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 		}
 
 		if (otherShango->getCool()) {
-			OSAtkMode = true;
-		}
-		else if (otherShango->waypoint != Vector2f(-1,-1)) {
-			OSAtkMode = false;
-			otherShango->waypoint = Vector2f(-1, -1);
-			otherShango->destination = Vector2f(-1, -1);
+			otherShango->setEvade(false);
+		} else if (otherShango->destination == otherShango->getLoc() || otherShango->destination==Vector2f(0,0)) {
+			otherShango->setEvade(true);
+			//otherShango->waypoint = Vector2f(-1, -1);
+			float x = rand() % 300 + 100;
+			int x2 = rand() % 2;
+			float y = rand() % 300 + 100;
+			int y2 = rand() % 2;
+			if (x2 == 0)x = -x;
+			if (y2 == 0)y = -y;
+			otherShango->destination = Vector2f(otherShango->getCurrentEnemy()->getX()+x, otherShango->getCurrentEnemy()->getY()+y);
+			otherShango->waypoint = Vector2f(otherShango->getCurrentEnemy()->getX() + x, otherShango->getCurrentEnemy()->getY() + y);
 		}
 
 		//if OS has an enemy, move to the enemy
-		if (otherShango->getCurrentEnemy() != nullptr && OSAtkMode) {
+		if (otherShango->getCurrentEnemy() != nullptr && !otherShango->getEvade() ){//&& otherShango->destination != Vector2f(0,0)) {
 			cout << "*************************************************MOVING TO ENEMY******************************************" << endl;
 			otherShango->waypoint = Vector2f(otherShango->getCurrentEnemy()->getX() + (otherShango->getCurrentEnemy()->getWidth() / 4), otherShango->getCurrentEnemy()->getY() + (otherShango->getCurrentEnemy()->getHeight()/4));
 			otherShango->destination = Vector2f(otherShango->getCurrentEnemy()->getX() + (otherShango->getCurrentEnemy()->getWidth() / 4), otherShango->getCurrentEnemy()->getY() + (otherShango->getCurrentEnemy()->getHeight()/4));
 
 				//enemy is facing up
-				if (otherShango->getCurrentEnemy()->getDirection() == 8) {
-	
-					otherShango->waypoint.shiftYloc(-80);
-					otherShango->destination.shiftYloc(-80);
+			if (otherShango->getCurrentEnemy()->getDirection() == 8) {
+
+				otherShango->waypoint.shiftYloc(-80);
+				otherShango->destination.shiftYloc(-80);
+				otherShango->waypoint.shiftXloc(-30);
+				otherShango->destination.shiftXloc(-30);
 
 				//enemy is facing right
-				}
-				else if (otherShango->getCurrentEnemy()->getDirection() == 6) {
+			}
+			else if (otherShango->getCurrentEnemy()->getDirection() == 6) {
 
-					otherShango->waypoint.shiftXloc(30);
-					otherShango->destination.shiftXloc(30);
-				}
+				otherShango->waypoint.shiftXloc(30);
+				otherShango->destination.shiftXloc(30);
+				otherShango->waypoint.shiftYloc(-30);
+				otherShango->destination.shiftYloc(-30);
+			}
 				//enemy is facing left
-				else if (otherShango->getCurrentEnemy()->getDirection() == 4) {
-					otherShango->waypoint.shiftXloc(-80);
-					otherShango->destination.shiftXloc(-80);
-				}
+			else if (otherShango->getCurrentEnemy()->getDirection() == 4) {
+				otherShango->waypoint.shiftXloc(-80);
+				otherShango->destination.shiftXloc(-80);
+				otherShango->waypoint.shiftYloc(-30);
+				otherShango->destination.shiftYloc(-30);
+			}
 				//enemy is facing down
-				else if (otherShango->getCurrentEnemy()->getDirection() == 2) {
-					otherShango->waypoint.shiftYloc(30);
-					otherShango->destination.shiftYloc(30);
-				}
-			gameplay_functions->move_toward(otherShango);
+			else if (otherShango->getCurrentEnemy()->getDirection() == 2) {
+				otherShango->waypoint.shiftYloc(30);
+				otherShango->destination.shiftYloc(30);
+				otherShango->waypoint.shiftXloc(-30);
+				otherShango->destination.shiftXloc(-30);
+			}
+
+			//gameplay_functions->move_toward(otherShango);
 
 			//npc is at enemy destination, attack.
 			if (otherShango->destination == otherShango->getLoc()) {
@@ -821,25 +837,46 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 		}
 
 		////evade mode
-		//if (otherShango->getCurrentEnemy() != nullptr && !(OSAtkMode)) {
-		//	//if OS is in evade mode, use the getEvadeRange method to find the waypoint and set it to destination
-		//	if (otherShango->destination == Vector2f(-1, -1)) {
-		//		cout << "****INSIDE THE EVADE MODE SETTER*****" << endl;
-		//		otherShango->waypoint = otherShango->getEvadeRange(otherShango->getCurrentEnemy());
-		//		otherShango->destination = otherShango->waypoint;
-		//		cout << "shango waypoint is " << otherShango->waypoint.getXloc() << otherShango->waypoint.getYloc() << endl;
-		//	}
-		//	//if reached destination, strafe left or right
-		//	if (otherShango->getLoc() == otherShango->destination) {
-		//		cout << "******* INSIDE THE EVADE MODE STRAFE *******" << endl;
-		//		otherShango->waypoint = otherShango->getStrafeLocation(otherShango->getCurrentEnemy());
-		//		otherShango->destination = otherShango->waypoint;
-		//		cout << "othershango destination inside strafe function is " << otherShango->waypoint.getXloc() << ", " << otherShango->waypoint.getYloc() << endl;
-		//	}
-		//	gameplay_functions->move_toward(otherShango);
-		//}
+		if (otherShango->getCurrentEnemy() != nullptr && otherShango->getEvade() ){//&& otherShango->destination != Vector2f(0, 0)) {
+			//if OS is in evade mode, use the getEvadeRange method to find the waypoint and set it to destination
+			if (otherShango->destination == Vector2f(-1, -1)) {
+				cout << "****INSIDE THE EVADE MODE SETTER*****" << endl;
+				//otherShango->waypoint = otherShango->getEvadeRange(otherShango->getCurrentEnemy());
+				otherShango->destination = otherShango->getEvadeRange(otherShango->getCurrentEnemy());
+				cout << "shango waypoint is " << otherShango->waypoint.getXloc() << otherShango->waypoint.getYloc() << endl;
+			}
+			//if reached destination, strafe left or right
+			if (otherShango->getLoc() == otherShango->destination) {
+				cout << "******* INSIDE THE EVADE MODE STRAFE *******" << endl;
+				//otherShango->waypoint = otherShango->getStrafeLocation(otherShango->getCurrentEnemy());
+				otherShango->destination = otherShango->getEvadeRange(otherShango->getCurrentEnemy());
+				cout << "othershango destination inside strafe function is " << otherShango->waypoint.getXloc() << ", " << otherShango->waypoint.getYloc() << endl;
+			}
+			/*if (otherShango->waypoint != Vector2f(0, 0) && state == 0) { //Hero has a waypoint to the desination, and not in dialog
+				gameplay_functions->move_toward(otherShango); //Take a step towards the current waypoint
+															  //	std::cout << "Request a step" << std::endl;
+			}
+			else if (state == 0)                //Hero needs waypoints to destination, and not in dialog
+			{
+				gameplay_functions->get_path(otherShango); //Generate waypoints to destination
+			}/**/
+			//gameplay_functions->move_toward(otherShango);
+		}
+	//	ai->graph.insert(otherShango->destination);
+		//ai->graph.insert(otherShango->getLoc());
+		if (otherShango->destination != Vector2f(0, 0)) { //Hero has a destination
+			if (otherShango->waypoint != Vector2f(0, 0) && state == 0) { //Hero has a waypoint to the desination, and not in dialog
+				gameplay_functions->move_toward(otherShango); //Take a step towards the current waypoint
+															//	std::cout << "Request a step" << std::endl;
+			}
+			else if (state == 0)                //Hero needs waypoints to destination, and not in dialog
+			{
+				gameplay_functions->get_path(otherShango); //Generate waypoints to destination
+			}
+		}
+		else {
 
-
+		}
 		//toggle between evade and attack mode
 		//if (M) {
 		//	if (OSAtkMode) {
