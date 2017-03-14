@@ -81,6 +81,7 @@ void AIController::init_plans() {
 		}
 
 		// For each end state, look at the milestone and generate a path 
+
 		MilestoneList* milestones_by_goal = planner->get_milestone_map();
 		for (auto iter : *milestones_by_goal)
 		{
@@ -128,27 +129,31 @@ void AIController::reevaluate_state(int me, int them) {
 void AIController::execute() {
 	for (auto iter : hero_planners) {
 		Planner* planner = iter.second;
-		Action curr_action = planner->get_current_action();
-		Action curr_goal = planner->get_current_end_state();
+		Action* curr_action = &planner->get_current_action();
+		Action* curr_goal = &planner->get_current_end_state();
 
 		StateList* end_states = planner->get_end_state_map();
 		MilestoneList* milestones = planner->get_milestone_map();
 
-		std::cout << "Executing action " << curr_action.name << std::endl;
+		std::cout << "Executing action " << curr_action->name << std::endl;
 
-		milestones->at(curr_goal).pop_back();              //Remove the curr_action from curr_goal's milestone list
+		//Call execute function pointer of the action itself
+		curr_action->execute();
+		if (curr_action->executed) {
 
-		vector<Action> frontier = planner->get_milestone_frontier();
+			milestones->at(*curr_goal).pop_back();              //Remove the curr_action from curr_goal's milestone list
 
-		//Loop over all the next milestones to find the most valuable action, and set it to current action
-		int best = 0;
-		for (auto itor : frontier) {
-			if (itor.getUtility() > best) {
-				best = itor.getUtility();
-				planner->set_current_action(itor);
+			vector<Action> frontier = planner->get_milestone_frontier();
+
+			//Loop over all the next milestones to find the most valuable action, and set it to current action
+			int best = 0;
+			for (auto itor : frontier) {
+				if (itor.getUtility() > best) {
+					best = itor.getUtility();
+					planner->set_current_action(itor);
+				}
 			}
 		}
-
 		//planner->get_milestones_for_goal(curr_goal).pop_back();  
 
 

@@ -60,6 +60,8 @@ public:
 	void (*execute_ptr)(Action* cur_action);
 	void execute() { execute_ptr(this); };
 
+	bool executed = false;
+
 private:
 	//std::string name;
 	int utility;

@@ -33,10 +33,18 @@ void ActionExecFunctions::execute_train(Action* train) {
 		break;
 	case 2: //If timer is complete, set village as destination, apply postconds, update memory
 		if (ActionHelper::retrieve_time(train) == 0) {
+			Memory* doer_mem = train->getDoer()->find_mem(train->getName() + std::to_string(train->time_stamp));
+			//Memory* receiver_mem = fight->getReceiver()->find_mem(fight->getName() + std::to_string(fight->time_stamp));
+			if (doer_mem == nullptr)
+			{
+				perror("something is wrong with the current hero memory creation function");
+			}
 			train->getDoer()->destination = { 500,500 }; //Also predefined, maybe as "home_location" in hero
-														 //Apply post-conditions
-														 //Call update_memory function
-														 //Mark action as executed?
+			train->applyUtiliites(true);				 //Apply post-conditions
+			train->executed = true;
+			doer_mem->setCategory("success");			 //Call update_memory function
+			doer_mem->setReason("I am good at training");
+			doer_mem->setWhen(/*get global frame*/0);        
 		}
 		break;
 
@@ -44,7 +52,62 @@ void ActionExecFunctions::execute_train(Action* train) {
 }
 
 void ActionExecFunctions::execute_train_with(Action* train_with) {
+	switch (train_with->checkpoint) {
+	case 0: //Pick training location, create memory, increment checkpoint
+		ActionHelper::create_memory(train_with, train_with->getDoer());
+		if (ActionHelper::hero_respond(train_with)) //Other hero agrees to train with you
+		{
+			train_with->getDoer()->destination = { 1000,1000 }; //should select from set of pre-defined, stored in Hero, or village?
+			train_with->checkpoint++;
+		}
+		else
+		{
+			Memory* doer_mem = train_with->getDoer()->find_mem(train_with->getName() + std::to_string(train_with->time_stamp));
+			doer_mem->setCategory("fail");
+			doer_mem->setReason("they did not want to train with me");
+			doer_mem->setWhen(/*get global frame*/0); 
+		}
 
+		break;
+	case 1: //If destination is reached, start a timer and move to next checkpoint
+		if (train_with->getDoer()->destination == Vector2f(0, 0)) {
+			ActionHelper::set_timer(train_with, 1200);  //Wait 20 seconds for greetings (60 frames times 20 seconds)
+			train_with->checkpoint++;
+		}
+		break;
+	case 2: //When greeting timer is complete, set train destination for both heros
+		if (ActionHelper::retrieve_time(train_with) == 0) //Greeting timer complete
+		{
+			train_with->getDoer()->destination = { 2000,2000 };
+			train_with->getReceiver()->destination = { 2000,2000 };
+			train_with->checkpoint++;
+		}
+		break;
+	case 3:  //When train destination is reached, start a time for 1 minute
+		if (train_with->getDoer()->destination == Vector2f(0, 0))
+		{
+			ActionHelper::set_timer(train_with, 3600); //Wait 1 minute for training (60 frames times 60 seconds)
+			train_with->checkpoint++;
+		}
+		break;
+	case 4: //If timer is complete, set village as destination, apply postconds, update memory
+		if (ActionHelper::retrieve_time(train_with) == 0) {
+			Memory* doer_mem = train_with->getDoer()->find_mem(train_with->getName() + std::to_string(train_with->time_stamp));
+			//Memory* receiver_mem = fight->getReceiver()->find_mem(fight->getName() + std::to_string(fight->time_stamp));
+			if (doer_mem == nullptr)
+			{
+				perror("something is wrong with the current hero memory creation function");
+			}
+			train_with->getDoer()->destination = { 500,500 }; //Also predefined, maybe as "home_location" in hero
+			train_with->applyUtiliites(true);				 //Apply post-conditions
+			train_with->executed = true;
+			doer_mem->setCategory("success");			 //Call update_memory function
+			doer_mem->setReason("I am good at training");
+			doer_mem->setWhen(/*get global frame*/0);
+		}
+		break;
+
+	}
 }
 void ActionExecFunctions::execute_form_alliance(Action* form_alliance) {
 	Hero* doer = form_alliance->getDoer();
@@ -69,6 +132,7 @@ void ActionExecFunctions::execute_form_alliance(Action* form_alliance) {
 				if (temp != 0) {
 					//success
 					form_alliance->applyUtiliites(true);
+					form_alliance->executed = true;
 				}
 				else {
 					//failed
@@ -179,6 +243,7 @@ void ActionExecFunctions::execute_fight(Action* fight)
 
 
 		//Mark action as executed?
+		fight->executed = true;
 
 		//create prompt for kill action
 		(fight->getDoer(), fight->getReceiver());
