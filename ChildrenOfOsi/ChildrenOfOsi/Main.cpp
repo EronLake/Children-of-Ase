@@ -319,7 +319,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 
 	Alex->offsetBody(0, 50, 50, 50, 50);
 	Alex->setInteractable(true);
-	Alex->setName("Alex");
+	Alex->setName("Shango");
 	Alex->setTalkDist(20);
 
 	Alex->setDirection(2);
@@ -667,6 +667,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	*oya = *staticRec;
 	oya->setSpeed(5);
 	oya->offsetBody(0, 50, 50, 50, 50);
+	oya->shiftY(300);
 	/*
 	WorldObj* tree = new WorldObj(Vector2f(4000, 2600), 800, 500);
 	tree->sprite.setTexture(treeTex);
