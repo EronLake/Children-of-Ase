@@ -1113,7 +1113,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 		if (delta_ticks > 0)
 			fps = CLOCKS_PER_SEC / delta_ticks;
 		if (DialogueController::getState() == 0) {
-			//cout << "FPS: " << fps << endl;
+			cout << "FPS: " << fps << endl;
 		}
 
 

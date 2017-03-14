@@ -194,17 +194,36 @@ int AIHelper::plan_step(WorldObj* obj) {
 		float diffX = npc->getX() - npc->waypoint.getXloc();
 		float diffY = npc->getY() - npc->waypoint.getYloc();
 
-		float slope = abs(diffY / diffX);
 		float speed = npc->getSpeed();
 
-		float xSpeed = sqrt((speed*speed) / (slope + 1));
-		float ySpeed = slope*xSpeed;
+		if (abs(diffX) < (speed*1.5)) diffX = 0;
+		if (abs(diffY) < (speed*1.5)) diffY = 0;
+
+
+		float slope;
+		float xSpeed;
+		float ySpeed;
+
+		if (diffX == 0) {
+			xSpeed = 0;
+			ySpeed = speed;
+		}
+		else
+		{
+			slope = abs(diffY / diffX);
+			xSpeed = speed / (slope + 1);
+			ySpeed = xSpeed*slope;
+		}
+		
+
+
+	//	float xSpeed = sqrt((speed*speed) / (slope + 1));
+	//	float ySpeed = slope*xSpeed;
 		npc->setDiagXSpeed(xSpeed);
 		npc->setDiagYSpeed(ySpeed);
 		//std::cout << diffX << " and " << diffY << std::endl;
 
-		if (abs(diffX) < speed) diffX = 0;
-		if (abs(diffY) < speed) diffY = 0;
+
 
 		//std::cout << "new " << diffX << " and " << diffY << std::endl;
 
