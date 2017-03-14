@@ -583,10 +583,10 @@ void osi::GameWindow::RenderText(std::string text, GLfloat x, GLfloat y, GLfloat
 	std::string::const_iterator c;
 	for (c = text.begin(); c != text.end(); c++) {
 		Character ch = Characters[*c];
-		if (*c == '\n' || ((*c == ' ')&&(x>750))) {
-			if (x>850)y -= ch.Size.y;
+		if (*c == '\n' || ((*c == ' ')&&(x>750)) || ((*c == '_') && (x>750))) {
+			if (*c==' ' || *c=='_')y -= 18 * scale;
 			x = lineStart;
-			y -= ch.Size.y;
+			y -= (ch.Size.y + ch.Bearing.y) * scale;
 		}
 		if (*c == '_' || *c == ' ') {
 			x+= (ch.Bearing.x * scale);
