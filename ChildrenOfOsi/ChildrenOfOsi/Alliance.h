@@ -9,13 +9,14 @@ class Alliance
 private:
 	std::vector<Village*> allies;
 	std::vector<Village*> enemies;
+	static std::vector<Alliance*>Alliances;
 
 public:
 	Alliance();
 	Alliance(Village* v);
 	~Alliance();
 	void addToAlliance(Village* p_factionToAdd);
-	Alliance* removeFromAlliance(Village* p_factionToRemove);
-	void updateEnemies();
+	void removeFromAlliance(Village* p_factionToRemove);
+	static void updateEnemies();
 };
 

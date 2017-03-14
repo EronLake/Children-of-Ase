@@ -88,6 +88,7 @@ class WorldObj
 
   void setBaseDir(int d) { this->baseDir = d; };
   void setDirWithBase(int od);
+  void face(WorldObj* other);
 
   // String conversion
   void _print();

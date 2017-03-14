@@ -10,7 +10,6 @@ Soldier::Soldier() {}
 Soldier::Soldier(float x, float y, bool col):NPC(x, y, col)
 {
   key = "Soldier" + std::to_string(getID()) + "_0";
-  cdTotal = 60;
   cdTime = 0;
   setType(3);
 }
@@ -18,7 +17,6 @@ Soldier::Soldier(float x, float y, bool col):NPC(x, y, col)
 Soldier::Soldier(Vector2f p_topLeft, float p_width, float p_height):NPC(p_topLeft, p_width, p_height)
 {
   key = "Soldier" + std::to_string(getID()) + "_0";
-  cdTotal = 60;
   cdTime = 0;
   setType(3);
 }
@@ -45,16 +43,16 @@ void Soldier::newAttack(int i, Attack* a)
     float y = body[0].getY();
     int d = getDirection();
     if(d == 8) {
-      y = y - (attackTypes[i]->getHeight() + 1);
+      y = y - (attackTypes[i]->getHeight()/2);
     }
     else if(d == 2) {
-      y = y + (body[0].getHeight() + 1);
+      y = y + (body[0].getHeight()/2);
     }
     else if(d == 4) {
-      x = x - (attackTypes[i]->getWidth() + 1);
+      x = x - (attackTypes[i]->getWidth()/2);
     }
     else if(d == 6) {
-      x = x + (body[0].getWidth() + 1);
+      x = x + (body[0].getWidth()/2);
     }
     p->setX(x);
     p->setY(y);
@@ -70,7 +68,7 @@ void Soldier::newAttack(int i, Attack* a)
     p->setPause(attackTypes[i]->getPause());
     p->setKeep(false);
     cooldownMap[attackTypes[i]] = attackTypes[i]->getCoolDown();
-    cdTime = cdTotal;
+	cdTime = attackTypes[i]->getCoolDown();
     instances++;
     if(instances == 99)instances = 0;
   }
@@ -87,25 +85,25 @@ void Soldier::meleeAttack()
   melee->setBaseDir(4); // Shouldn't need to be done
 
   if(d == 8) {
-    y = y - (melee->getHeight() + 1);
+    y = y - (melee->getHeight()/2);
     x += (melee->getSpeed()*melee->getDuration() / 2);
   }
   else if(d == 2) {
-    y = y + (body[0].getHeight() + 1);
+    y = y + (body[0].getHeight()/2);
     x -= (melee->getSpeed()*melee->getDuration() / 2);
   }
   else if(d == 4) {
-    x = x - (melee->getWidth() + 1);
+    x = x - (melee->getWidth()/2);
     y -= (melee->getSpeed()*melee->getDuration() / 2);
   }
   else if(d == 6) {
-    x = x + (body[0].getWidth() + 1);
+    x = x + (body[0].getWidth()/2);
     y += (melee->getSpeed()*melee->getDuration() / 2);
   }
   melee->setDirWithBase(d);
   melee->setX(x);
   melee->setY(y);
-  cdTime = cdTotal;
+  cdTime = melee->getCoolDown();
 }
 
 void Soldier::updateCD()

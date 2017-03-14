@@ -30,7 +30,6 @@ class Soldier:
   bool getCool() { return this->cdTime == 0; };
   bool getCool(int c) { return (this->cdTime == 0 && cooldownMap[attackTypes[c]] == 0); };
   int timeCD() { return cdTime; };
-  int getCD() { return cdTotal; };
 
   void setInCombat(bool c) { inCombat = c; };
   void setEvade(bool e) { evade = e; };
@@ -44,7 +43,6 @@ class Soldier:
 
   void updateCD();
   void resetCD(int c);
-  void setCD(int c) { cdTotal = c; };
   
   void setParty(Party* p) { party = p; };
   Party* getParty() { return party; };
@@ -63,7 +61,6 @@ class Soldier:
   bool holdPos;
   bool patrol;
 
-  int cdTotal;
   int cdTime;
   
   std::string key;

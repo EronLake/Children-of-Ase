@@ -467,8 +467,8 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	///should actually use gameplay_functions->add_hero("Yemoja", 4600, 3600, true)
 	/// Containers::hero_table[name]->setWidht(widht)
 
-	otherShango->setWidth(100);
-	otherShango->setHeight(100);
+	otherShango->setWidth(150);
+	otherShango->setHeight(150);
 
 	staticRec->sprite.setTexture(yemojaTexture);
 	staticRec->sprite.setIdleTexture(yemojaIdleTex);
@@ -519,7 +519,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	otherShango->melee->setDmg(10);
 	otherShango->melee->setSpeed(5);
 	otherShango->melee->setBaseDir(4);
-	otherShango->melee->setCoolDown(1000);
+	otherShango->melee->setCoolDown(200);
 	otherShango->melee->setPause(-1);
 	otherShango->melee->setDestroy(false);
 	otherShango->melee->setKeep(true);
@@ -777,36 +777,37 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 		//if OS has an enemy, move to the enemy
 		if (otherShango->getCurrentEnemy() != nullptr && OSAtkMode) {
 			cout << "*************************************************MOVING TO ENEMY******************************************" << endl;
+			otherShango->waypoint = Vector2f(otherShango->getCurrentEnemy()->getX() + (otherShango->getCurrentEnemy()->getWidth() / 4), otherShango->getCurrentEnemy()->getY() + (otherShango->getCurrentEnemy()->getHeight()/4));
+			otherShango->destination = Vector2f(otherShango->getCurrentEnemy()->getX() + (otherShango->getCurrentEnemy()->getWidth() / 4), otherShango->getCurrentEnemy()->getY() + (otherShango->getCurrentEnemy()->getHeight()/4));
 
 				//enemy is facing up
 				if (otherShango->getCurrentEnemy()->getDirection() == 8) {
 	
-					otherShango->waypoint = Vector2f(otherShango->getCurrentEnemy()->getX(), otherShango->getCurrentEnemy()->getY() + 60);
-					otherShango->destination = Vector2f(otherShango->getCurrentEnemy()->getX(), otherShango->getCurrentEnemy()->getY() + 60);
+					otherShango->waypoint.shiftYloc(-80);
+					otherShango->destination.shiftYloc(-80);
 
 				//enemy is facing right
 				}
 				else if (otherShango->getCurrentEnemy()->getDirection() == 6) {
 
-					otherShango->waypoint = Vector2f(otherShango->getCurrentEnemy()->getX()-15, otherShango->getCurrentEnemy()->getY());
-					otherShango->destination = Vector2f(otherShango->getCurrentEnemy()->getX()-15, otherShango->getCurrentEnemy()->getY());
+					otherShango->waypoint.shiftXloc(30);
+					otherShango->destination.shiftXloc(30);
 				}
 				//enemy is facing left
 				else if (otherShango->getCurrentEnemy()->getDirection() == 4) {
-
-					otherShango->waypoint = Vector2f(otherShango->getCurrentEnemy()->getX() +60, otherShango->getCurrentEnemy()->getY());
-					otherShango->destination = Vector2f(otherShango->getCurrentEnemy()->getX() +60, otherShango->getCurrentEnemy()->getY());
+					otherShango->waypoint.shiftXloc(-80);
+					otherShango->destination.shiftXloc(-80);
 				}
 				//enemy is facing down
 				else if (otherShango->getCurrentEnemy()->getDirection() == 2) {
-
-					otherShango->waypoint = Vector2f(otherShango->getCurrentEnemy()->getX(), otherShango->getCurrentEnemy()->getY()-15);
-					otherShango->destination = Vector2f(otherShango->getCurrentEnemy()->getX(), otherShango->getCurrentEnemy()->getY()-15);
+					otherShango->waypoint.shiftYloc(30);
+					otherShango->destination.shiftYloc(30);
 				}
 			gameplay_functions->move_toward(otherShango);
 
 			//npc is at enemy destination, attack.
 			if (otherShango->destination == otherShango->getLoc()) {
+				otherShango->face(otherShango->getCurrentEnemy());
 				cout << "COOL DOWN FOR ATTACK IS " << otherShango->getCool() << endl;
 				if (otherShango->getCool()) {
 					std::cout << "Pressed F" << std::endl;

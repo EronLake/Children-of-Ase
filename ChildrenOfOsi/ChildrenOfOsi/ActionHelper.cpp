@@ -220,12 +220,20 @@ void ActionHelper::execute_form_alliance(Action* form_alliance) {
 		if (form_alliance->getDoer()->destination == Vector2f(0, 0)) {
 			Planner* hero_planner = ai->hero_planners[responder->name];
 			if (form_alliance->getName() == ((*hero_planner->get_end_state_map())[responder->name]).getName()){
-				if (!form_alliance->exeAction()) {
-					//update memory failed
+				int temp = 0;
+				for (auto& iter : form_alliance->preconds) {
+					
+					temp += iter.second->get_cost();
+				}
+				if (temp != 0) {
+					//success
+					for (auto& i : form_alliance->postconds) {
+
+					i.second->apply_utility();
+					}
 				}
 				else {
-					//update memory success
-					//add receiver to doer's alliance
+					//failed
 				}
 			}
 			else {

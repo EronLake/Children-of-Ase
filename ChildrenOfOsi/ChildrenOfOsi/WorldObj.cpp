@@ -85,6 +85,20 @@ void WorldObj::setDirWithBase(int od)
   setDirection(od);
 }
 
+void WorldObj::face(WorldObj* other) {
+	int f = 2;
+	if (other->getDirection() == 2) {
+		f = 8;
+	}
+	else if (other->getDirection() == 4) {
+		f = 6;
+	}
+	else if (other->getDirection() == 6) {
+		f = 4;
+	}
+	setDirection(f);
+}
+
 //takes in a worldobj, returns a vector2f denoting where current obj is suppose to move to
 Vector2f WorldObj::getEvadeRange(WorldObj * _enemy)
 {
