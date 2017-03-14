@@ -81,6 +81,7 @@ void AIController::init_plans() {
 		}
 
 		// For each end state, look at the milestone and generate a path 
+
 		MilestoneList* milestones_by_goal = planner->get_milestone_map();
 		for (auto iter : *milestones_by_goal)
 		{
@@ -137,6 +138,7 @@ void AIController::execute() {
 		std::cout << "Executing action " << curr_action->name << std::endl;
 
 		//Call execute function pointer of the action itself
+		curr_action->execute();
 		if (curr_action->executed) {
 
 			milestones->at(*curr_goal).pop_back();              //Remove the curr_action from curr_goal's milestone list
