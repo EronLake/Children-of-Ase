@@ -65,7 +65,7 @@ using namespace std;
 //bool checkCollision(WorldObj *recA, WorldObj *recB);	//given two bounding boxes, check if they collide
 //bool coordOverlap(int value, int min, int max) { return (value >= min) && (value <= max); }		//helper func for checkCollision
 
-void ERONS_LOOP();
+void ERONS_LOOP(QuadTree* _Quadtree);
 void ALESSIO_TEST();
 void ALEX_LOOP(QuadTree* _Quadtree);
 void ANDREWS_LOOP(QuadTree* _QuadTree);
@@ -123,7 +123,7 @@ int main() {
 		//Darion_Ian_Test();
 
 /* ERON */
-		//ERONS_LOOP();
+		//ERONS_LOOP(collideTree);
 		/* ERON */
 		
 		/*ALESSIO*/
@@ -1090,6 +1090,10 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 		//gameplay_functions->draw_frame(convoGui);
 		//run task buffer
 		//iController->InputCheck();
+		Action* test_fight = new Action(staticRec, otherShango, staticRec, 10, 1, "fight", "execute_fight");
+		Action* temp_action = AiController->hero_planners[YEMOJA]->get_current_action();
+		temp_action->execute();
+
 		tBuffer->run();
 		//	cout << tBuffer->queue_buffer.size() << endl;
 		//tBuffer->empty();
@@ -1924,7 +1928,7 @@ void ERONS_LOOP(QuadTree* _QuadTree) {
 		//run task buffer
 		//iController->InputCheck();
 		//ActionExecFunctions::ActionExecMap[AiController->hero_planners[YEMOJA]->get_current_action()]
-		AiController->hero_planners[YEMOJA]->get_current_action().execute();
+		AiController->hero_planners[YEMOJA]->get_current_action()->execute();
 		tBuffer->run();
 		//	cout << tBuffer->queue_buffer.size() << endl;
 		//tBuffer->empty();

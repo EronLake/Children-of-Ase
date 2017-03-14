@@ -33,7 +33,7 @@ public:
 	MilestoneList* get_milestone_map() { return milestones; }
 	//vector<Action> get_milestones_for_goal(Action goal);
 	vector<Action> get_milestone_frontier();
-	Action get_current_action() { return current_action; }
+	Action* get_current_action() { return &current_action; }
 	int get_current_action_value() { return current_action_value; }
 	Action get_current_end_state() { return current_end_state; }
 	void set_current_action(Action action) { current_action = action; current_action_value = action.getUtility(); }
