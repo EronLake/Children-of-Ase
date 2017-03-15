@@ -26,6 +26,7 @@ class Soldier:
   bool getEvade() { return evade; };
   bool getHold() { return holdPos; };
   bool getPatrol() { return patrol; };
+  bool getSwingLeft() { return swingLeft; };
   bool getCombo();
 
   bool getCool();

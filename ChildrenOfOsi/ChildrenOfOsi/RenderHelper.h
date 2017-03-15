@@ -5,6 +5,8 @@
 #include "DialogueController.h"
 #include "GameMap.h"
 #include "Containers.h"
+#include "CheckClass.h"
+
 
 class RenderHelper
 {

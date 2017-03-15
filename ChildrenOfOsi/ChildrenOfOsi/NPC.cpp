@@ -34,6 +34,8 @@ NPC::~NPC()
 void NPC::setSpeed(float s)
 {
 	speed=s;
+	diagXSpeed = sqrt((speed*speed) / 2);
+	diagYSpeed = sqrt((speed*speed) / 2);
 }
 
 float NPC::getSpeed()

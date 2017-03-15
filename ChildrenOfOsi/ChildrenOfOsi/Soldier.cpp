@@ -102,13 +102,14 @@ void Soldier::meleeAttack()
   float x = body[0].getX();
   float y = body[0].getY();
   melee->setDuration(5);
-  melee->setPause(24);
   int d = getDirection();
   if (!swingLeft) {
 	  melee->setBaseDir(6);
+	  melee->setPause(10);
   }
   else {
 	  melee->setBaseDir(4);
+	  melee->setPause(24);
   }
   if(d == 8) {
     y = y - (melee->getHeight()/1.2);
@@ -226,7 +227,7 @@ int Soldier::getAttackIndex(Attack* atk) {
 }
 
 bool Soldier::getCombo() { 
-	return (cdTime>0 && cdTime<10);
+	return (cdTime>0 && cdTime<15);
 }
 
 
