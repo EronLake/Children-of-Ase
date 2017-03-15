@@ -448,6 +448,9 @@
     <Text Include="ReadMe.txt">
       <Filter>Misc</Filter>
     </Text>
+    <Text Include="dialog_template_output.txt">
+      <Filter>Dialogue</Filter>
+    </Text>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Task Manager">

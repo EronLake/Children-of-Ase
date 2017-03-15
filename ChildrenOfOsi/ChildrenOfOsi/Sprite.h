@@ -46,6 +46,11 @@ class Sprite
   Texture *atk_left;
   Texture *atk_right;
 
+  Texture *atk2_up;
+  Texture *atk2_down;
+  Texture *atk2_left;
+  Texture *atk2_right;
+
   Texture *hurt_up;
   Texture *hurt_down;
   Texture *hurt_left;

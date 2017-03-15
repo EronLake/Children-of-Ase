@@ -138,6 +138,7 @@ std::string DialogueHelper::gen_reply(dialogue_point diog_pt, Hero* hero)
 }
 
 dialogue_template DialogueHelper::get_template(dialogue_point diog_pt) {
+	std::ofstream ofs;
 	Json::Value root;
 	Json::Reader reader;
 
@@ -149,8 +150,11 @@ dialogue_template DialogueHelper::get_template(dialogue_point diog_pt) {
 
 	std::cout << diog_pt[1] + "_templates" << std::endl;
 	//get a random conversation template
-	int j = rand() % root[diog_pt[1] + "_templates"].size() + 1;
-
+	int j = 0;
+	if (root[diog_pt[1] + "_templates"].size() > 1)
+		j = rand() % root[diog_pt[1] + "_templates"].size() + 1;
+	else
+		j = 1;
 	/*populate a dialogue template using the contents
 	of the randomly obtained dialogue template*/
 	for (int i = 1; i <= root[diog_pt[1] + "_templates"]
@@ -158,16 +162,22 @@ dialogue_template DialogueHelper::get_template(dialogue_point diog_pt) {
 		dtemp.push_back(root[diog_pt[1] + "_templates"][to_string(j)]
 			[to_string(i)].asString());
 	}
+	ofs.open("dialog_template_output.txt", std::ofstream::out | std::ofstream::app);
+
+	
 	for (int i = 0; i < dtemp.size(); i++)
 	{
-		std::cout << dtemp[i] << std::endl;
+		ofs << dtemp[i] << std::endl;
+		
+		//std::cout << dtemp[i] << std::endl;
 	}
+	ofs.close();
 	return dtemp;
 
 }
 
 dialogue_point DialogueHelper::get_dialog(std::string name, dialogue_point diog_pt) {
-
+	std::ofstream ofs;
 	dialogue_template dtemp = get_template(diog_pt);
 
 	Json::Value root;
@@ -190,7 +200,10 @@ dialogue_point DialogueHelper::get_dialog(std::string name, dialogue_point diog_
 		tmp = dtemp[i - 1];
 		if (tmp != "?" && tmp != "," && tmp != "." && 
 			tmp != "!" && tmp != "_") {
-			j = rand() % (root[tmp].size() + 1);
+			if(root[tmp].size() > 1)
+			    j = rand() % (root[tmp].size() + 1);
+			else
+				j = 1;
 			dpoint.push_back(root[tmp][to_string(j)]
 				.asString());
 		}
@@ -200,10 +213,12 @@ dialogue_point DialogueHelper::get_dialog(std::string name, dialogue_point diog_
 		}
 
 	}
+	ofs.open("dialog_template_output.txt", std::ofstream::out | std::ofstream::app);
 	for (int i = 0; i < dpoint.size(); i++){
-		std::cout << "dialogue point: "<< dpoint[i] << std::endl;
+		ofs << "dialogue point: " << dpoint[i] << std::endl;
+		//std::cout << "dialogue point: "<< dpoint[i] << std::endl;
 	}
-	
+	ofs.close();
 	return dpoint;
 
 }

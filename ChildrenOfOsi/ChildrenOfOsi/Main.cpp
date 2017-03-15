@@ -220,6 +220,10 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	Texture* downAtkTex = new Texture();
 	Texture* leftAtkTex = new Texture();
 	Texture* rightAtkTex = new Texture();
+	Texture* upAtk2Tex = new Texture();
+	Texture* downAtk2Tex = new Texture();
+	Texture* leftAtk2Tex = new Texture();
+	Texture* rightAtk2Tex = new Texture();
 	Texture* upHurtTex = new Texture();
 	Texture* downHurtTex = new Texture();
 	Texture* leftHurtTex = new Texture();
@@ -298,6 +302,10 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	downAtkTex->setFile("Assets/Sprites/ShangoForwardSwing.png", 24);
 	leftAtkTex->setFile("Assets/Sprites/ShangoLeftSwingEffect.png", 24);
 	rightAtkTex->setFile("Assets/Sprites/ShangoRightSwingEffect.png", 24);
+	upAtk2Tex->setFile("Assets/Sprites/ShangoBackLunge.png", 7);
+	downAtk2Tex->setFile("Assets/Sprites/ShangoForwardLunge.png", 7);
+	leftAtk2Tex->setFile("Assets/Sprites/ShangoLeftSwingLunge.png", 7);
+	rightAtk2Tex->setFile("Assets/Sprites/ShangoRightSwingLunge.png", 7);
 	upHurtTex->setFile("Assets/Sprites/ShangoBackRecoil.png", 18);
 	downHurtTex->setFile("Assets/Sprites/ShangoForwardRecoil.png", 18);
 	leftHurtTex->setFile("Assets/Sprites/ShangoLeftRecoil.png", 18);
@@ -371,6 +379,10 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	Alex->sprite.atk_down = downAtkTex;
 	Alex->sprite.atk_left = leftAtkTex;
 	Alex->sprite.atk_right = rightAtkTex;
+	Alex->sprite.atk2_up = upAtk2Tex;
+	Alex->sprite.atk2_down = downAtk2Tex;
+	Alex->sprite.atk2_left = leftAtk2Tex;
+	Alex->sprite.atk2_right = rightAtk2Tex;
 
 	Alex->sprite.hurt_up = upHurtTex;
 	Alex->sprite.hurt_down = downHurtTex;
@@ -394,7 +406,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	Alex->melee->setDmg(10);
 	Alex->melee->setSpeed(5);
 	Alex->melee->setBaseDir(4);
-	Alex->melee->setCoolDown(40);
+	Alex->melee->setCoolDown(50);
 	Alex->melee->setPause(-1);
 	Alex->melee->setDestroy(false);
 	Alex->melee->setKeep(true);
@@ -406,11 +418,21 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	rockThrow->setDmg(5);
 	rockThrow->setSpeed(20);
 	rockThrow->setDestroy(true);
-	rockThrow->setDuration(200);
+	rockThrow->setDuration(100);
 	rockThrow->setCoolDown(120);
 	rockThrow->setPause(24);
 	rockThrow->sprite.setTexture(rockTex);
 	Alex->addAttackType(rockThrow);
+
+	Attack* fireball = new Attack();
+	fireball->setDmg(15);
+	fireball->setSpeed(10);
+	fireball->setDestroy(true);
+	fireball->setDuration(100);
+	fireball->setCoolDown(240);
+	fireball->setPause(24);
+	fireball->sprite.setTexture(rockTex);
+	Alex->addAttackType(fireball);
 
 	//Alex->melee->sprite.setTexture(blank);
 	Alex->melee->sprite.setTexture(blank);

@@ -28,6 +28,8 @@ void WorldObj::shiftX(float dist)
 	for (int i = 0; i < body.size(); i++) {
 		body[i].setX(body[i].getX() + dist);
 	}
+	std::cout << name<<": Body X: " << body[0].getX() << " X: "<<loc.getXloc() << std::endl;
+	std::cout << "Shifting" << body[0].getX()-loc.getXloc() << std::endl;
 }
 
 void WorldObj::shiftY(float dist)
