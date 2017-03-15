@@ -180,13 +180,13 @@ bool Soldier::hasAttacks()
     return false;
   }
 }
+
 /*
-//this function is overloaded by Hero. Acts lik kill for soldiers
+ * This function is overloaded by Hero. Acts like kill for soldiers
 void Soldier::defeat()
 {
 	//this->getParty()->removeSoldier(this);
-}
-*/
+}*/
 //this removes the soldier from the party and sets its party to null
 void Soldier::defeat()
 {
@@ -196,14 +196,33 @@ void Soldier::defeat()
 
 /**
  * Returns the next attack which this soldier should perform at this time.
+ * Summoning abilities always take precendence over anything else. After those,
+ * special abilities take precendence over the standrd melee attack, which is
+ * the last resort. If every attack, even the basic melee attack, is on cooldown
+ * then nullptr will be returned.
+ * 
+ * Returns: A pointer to the next attack this solider should perform, based on
+ * the cooldowns of all their abilities
 */
 Attack * Soldier::nextAttack()
 {
   if(!(this->hasAttacks()))
     return this->melee;
   else {
+    for(auto& attack : this->attackTypes) {
+      if(attack->getType() == Attack::AttackTypes::SUMMONING && attack->getCoolDown() == 0) {
+        return attack;
+      }
+    }
 
-    return nullptr;
+    for(auto& attack : this->attackTypes) {
+      if(attack->getType() != Attack::AttackTypes::SUMMONING && attack->getCoolDown() == 0) {
+        return attack;
+      }
+    }
+
+    if(this->melee->getCoolDown() == 0) return this->melee;
+    else return nullptr;
   }
 }
 
