@@ -94,7 +94,7 @@ class WorldObj
   void setEvasionRadius(int _radius) { this->evasionRadius = _radius; }
 
   void setBaseDir(int d) { this->baseDir = d; };
-  void setDirWithBase(int od);
+  void setDirWithBase(int od, bool update);
   void face(WorldObj* other);
 
   // String conversion

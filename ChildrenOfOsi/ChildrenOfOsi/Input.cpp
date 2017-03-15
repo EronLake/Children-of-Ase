@@ -125,6 +125,19 @@ void Input::InputCheck()
 						t->meleeAttack();
 						gameplay_functions->melee(t);
 					}
+					else if (t->getCombo()) {
+						std::cout << "COMBO" << std::endl;
+						t->sprite.unlockAnimation();
+						t->resetCD();
+						if (t->getCool()) {
+							std::cout << "Pressed F" << std::endl;
+							t->flipSwing();
+							t->meleeAttack();
+							gameplay_functions->melee(t);
+						} else {
+							t->sprite.lockAnimation();
+						}
+					}
 				}
 			}
 		} else if (R) {
@@ -144,6 +157,9 @@ void Input::InputCheck()
 				if (t) {
 					if (t->getCool(1)) {
 						std::cout << "Pressed T" << std::endl;
+						t->meleeAttack();
+						gameplay_functions->melee(t);
+						t->resetCD(1);
 						gameplay_functions->special(t, 1);
 						gameplay_functions->melee(t);
 					}

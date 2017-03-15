@@ -16,6 +16,7 @@ Soldier::Soldier(float x, float y, bool col):NPC(x, y, col)
   maxAse = 0;
   stamina= 100;
   maxStamina = 100;
+  swingLeft = true;
 }
 
 Soldier::Soldier(Vector2f p_topLeft, float p_width, float p_height):NPC(p_topLeft, p_width, p_height)
@@ -27,6 +28,7 @@ Soldier::Soldier(Vector2f p_topLeft, float p_width, float p_height):NPC(p_topLef
   maxAse = 0;
   stamina = 100;
   maxStamina = 100;
+  swingLeft = true;
 }
 
 Soldier::~Soldier() {}
@@ -50,17 +52,26 @@ void Soldier::newAttack(int i, Attack* a)
     float x = body[0].getX();
     float y = body[0].getY();
     int d = getDirection();
+	int bd = attackTypes[i]->getBaseDir();
     if(d == 8) {
-      y = y - (attackTypes[i]->getHeight()/1.2);
+      y = y - (attackTypes[i]->getHeight() / 1.2);
+	  if (bd == 4)x += (attackTypes[i]->getSpeed()*attackTypes[i]->getDuration() / 1.2);
+	  if (bd == 6)x -= (attackTypes[i]->getSpeed()*attackTypes[i]->getDuration() / 1.2);
     }
     else if(d == 2) {
-      y = y + (body[0].getHeight()/1.2);
+      y = y + (body[0].getHeight() / 1.2);
+	  if (bd == 4)x -= (attackTypes[i]->getSpeed()*attackTypes[i]->getDuration() / 1.2);
+	  if (bd == 6)x += (attackTypes[i]->getSpeed()*attackTypes[i]->getDuration() / 1.2);
     }
     else if(d == 4) {
-      x = x - (attackTypes[i]->getWidth()/1.2);
+      x = x - (attackTypes[i]->getWidth() / 1.2);
+	  if (bd == 4)y -= (attackTypes[i]->getSpeed()*attackTypes[i]->getDuration() / 1.2);
+	  if (bd == 6)y += (attackTypes[i]->getSpeed()*attackTypes[i]->getDuration() / 1.2);
     }
     else if(d == 6) {
-      x = x + (body[0].getWidth()/1.2);
+      x = x + (body[0].getWidth() / 1.2);
+	  if (bd == 4 )y += (attackTypes[i]->getSpeed()*attackTypes[i]->getDuration() / 1.2);
+	  if (bd == 6)y -= (attackTypes[i]->getSpeed()*attackTypes[i]->getDuration()/1.2);
     }
     p->setX(x);
     p->setY(y);
@@ -72,7 +83,7 @@ void Soldier::newAttack(int i, Attack* a)
     p->setSpeed(attackTypes[i]->getSpeed());
     p->setWidth(w);
     p->setHeight(h);
-    p->setDirWithBase(d);
+    p->setDirWithBase(d,false);
     p->setPause(attackTypes[i]->getPause());
     p->setKeep(false);
     cooldownMap[attackTypes[i]] = attackTypes[i]->getCoolDown();
@@ -81,6 +92,7 @@ void Soldier::newAttack(int i, Attack* a)
 	ase -= attackTypes[i]->getAseCost();
     instances++;
     if(instances == 99)instances = 0;
+	if (attackTypes[i]->getTurn())setDirWithBase(6,true);
   //}
 }
 
@@ -92,25 +104,33 @@ void Soldier::meleeAttack()
   melee->setDuration(5);
   melee->setPause(24);
   int d = getDirection();
-  melee->setBaseDir(4); // Shouldn't need to be done
-
+  if (!swingLeft) {
+	  melee->setBaseDir(6);
+  }
+  else {
+	  melee->setBaseDir(4);
+  }
   if(d == 8) {
-    y = y - (melee->getHeight()/2);
-    x += (melee->getSpeed()*melee->getDuration() / 1.2);
+    y = y - (melee->getHeight()/1.2);
+	if (swingLeft) { x += (melee->getSpeed()*melee->getDuration() / 1.2); }
+	else { x -= (melee->getSpeed()*melee->getDuration() / 1.2); }
   }
   else if(d == 2) {
-    y = y + (body[0].getHeight()/2);
-    x -= (melee->getSpeed()*melee->getDuration() / 1.2);
+    y = y + (body[0].getHeight()/1.2);
+	if (swingLeft) { x -= (melee->getSpeed()*melee->getDuration() / 1.2); }
+	else { x += (melee->getSpeed()*melee->getDuration() / 1.2); }
   }
   else if(d == 4) {
-    x = x - (melee->getWidth()/2);
-    y -= (melee->getSpeed()*melee->getDuration() / 1.2);
+    x = x - (melee->getWidth()/1.2);
+	if (swingLeft) { y -= (melee->getSpeed()*melee->getDuration() / 1.2); }
+	else { y += (melee->getSpeed()*melee->getDuration() / 1.2); }
   }
   else if(d == 6) {
-    x = x + (body[0].getWidth()/2);
-    y += (melee->getSpeed()*melee->getDuration() / 1.2);
+    x = x + (body[0].getWidth()/1.2);
+	if (swingLeft) { y += (melee->getSpeed()*melee->getDuration() / 1.2); }
+	else { y -= (melee->getSpeed()*melee->getDuration() / 1.2); }
   }
-  melee->setDirWithBase(d);
+  melee->setDirWithBase(d,false);
   melee->setX(x);
   melee->setY(y);
   cdTime = melee->getCoolDown();
@@ -118,7 +138,12 @@ void Soldier::meleeAttack()
 
 void Soldier::updateCD()
 {
-  if(cdTime > 0) --cdTime;
+	if (cdTime > 0) {
+		--cdTime;
+	}
+	else {
+		swingLeft = true;
+	}
   for(auto i = cooldownMap.begin(); i != cooldownMap.end(); ++i) {
     if(i->second > 0) {
       i->second--;
@@ -126,6 +151,12 @@ void Soldier::updateCD()
   }
   if (ase < maxAse)ase++;
   if (stamina < maxStamina)stamina++;
+}
+
+
+void Soldier::resetCD()
+{
+	cdTime = 0;
 }
 
 void Soldier::resetCD(int c)
@@ -193,5 +224,10 @@ int Soldier::getAttackIndex(Attack* atk) {
 	}
 	return -1;
 }
+
+bool Soldier::getCombo() { 
+	return (cdTime>0 && cdTime<10);
+}
+
 
 

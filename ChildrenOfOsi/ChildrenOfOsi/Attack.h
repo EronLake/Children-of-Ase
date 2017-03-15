@@ -24,6 +24,7 @@ class Attack: public WorldObj
   int getAseCost() { return this->aseCost; };
   int getPause() { return this->pause; };
   bool getKeep() { return this->keep; };
+  bool getTurn() { return this->turn; };
   vector<WorldObj*> getHits() { return this->hitObjs; };
 
   void setDmg(int d) { this->dmg = d; };
@@ -38,6 +39,7 @@ class Attack: public WorldObj
   void setPause(int p) { this->pause = p; };
   void updatePause() { if(this->pause > 0) --pause; };
   void setKeep(bool k) { this->keep = k; };
+  void setTurn(bool t) { this->turn=t; };
   void addHit(WorldObj* o) { this->hitObjs.push_back(o); };
   bool beenHit(WorldObj* o);
   void Hit(LivingObj *target);
@@ -69,4 +71,5 @@ class Attack: public WorldObj
   bool keep;
   vector<WorldObj*> hitObjs;
   Attack* next;
+  bool turn;
 };

@@ -59,8 +59,9 @@ bool WorldObj::targetIsWithinRange(Rectangle* _bound) {
 		&& combatMoveDestination.getYloc() < (_bound->getY() + _bound->getHeight()));
 }
 
-void WorldObj::setDirWithBase(int od)
+void WorldObj::setDirWithBase(int od, bool update)
 {
+	if (update)baseDir = direction;
   if(od == 8) {
     if(baseDir == 2) od = 2;
     else if(baseDir == 4) od = 4;

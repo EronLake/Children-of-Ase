@@ -83,7 +83,6 @@ int MemoryHelper::new_Attack(WorldObj* s, int i) {
 		Containers::add_Attack(obj->getAtKey(), p);
 		obj->newAttack(i, p);
 		if (p->getNextAttack() != nullptr) {
-			obj->setDirWithBase(6);
 			new_Attack(obj, obj->getAttackIndex(p->getNextAttack()));
 		}
 	}

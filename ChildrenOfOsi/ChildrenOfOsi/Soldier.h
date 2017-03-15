@@ -26,6 +26,7 @@ class Soldier:
   bool getEvade() { return evade; };
   bool getHold() { return holdPos; };
   bool getPatrol() { return patrol; };
+  bool getCombo();
 
   bool getCool();
   bool getCool(int c);
@@ -42,6 +43,7 @@ class Soldier:
   void setAse(int a) { ase = a; };
   void setMaxStamina(int s) { maxStamina = s; };
   void setMaxAse(int a) { maxAse = a; };
+  void flipSwing() { swingLeft = !swingLeft; };
   
 
   void meleeAttack();
@@ -50,6 +52,7 @@ class Soldier:
   Attack * nextAttack();
 
   void updateCD();
+  void resetCD();
   void resetCD(int c);
   
   void setParty(Party* p) { party = p; };
@@ -74,6 +77,7 @@ class Soldier:
   int maxStamina;
   int ase;
   int maxAse;
+  bool swingLeft;
   
   std::string key;
   std::string atkey;
