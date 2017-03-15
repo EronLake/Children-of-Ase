@@ -20,11 +20,15 @@ class Attack: public WorldObj
   bool getDestroy() { return this->destroyOnCollision; };
 
   int getCoolDown() { return this->cooldown; };
+  int getStaminaCost() { return this->staminaCost; };
+  int getAseCost() { return this->aseCost; };
   int getPause() { return this->pause; };
   bool getKeep() { return this->keep; };
   vector<WorldObj*> getHits() { return this->hitObjs; };
 
   void setDmg(int d) { this->dmg = d; };
+  void setStaminaCost(int c) { this->staminaCost = c; };
+  void setAseCost(int c) { this->aseCost=c; };
   void setDuration(int d) { this->duration = d; };
   bool updateDuration();
   void setSpeed(float s) { this->speed = s; };
@@ -40,6 +44,10 @@ class Attack: public WorldObj
 
   void move();
 
+  void Attack::setNextAttack(Attack* n) { next = n; };
+  Attack* Attack::getNextAttack() { return next; };
+
+
   enum class AttackTypes: uint8_t
   {
     SPECIAL_MELEE,
@@ -53,9 +61,12 @@ class Attack: public WorldObj
   int duration; // -1 will mean infinity
   float speed;
   bool destroyOnCollision;
+  int aseCost;
+  int staminaCost;
   
   int cooldown;
   int pause;
   bool keep;
   vector<WorldObj*> hitObjs;
+  Attack* next;
 };

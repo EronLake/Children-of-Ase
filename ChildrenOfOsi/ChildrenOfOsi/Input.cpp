@@ -144,7 +144,7 @@ void Input::InputCheck()
 				if (t) {
 					if (t->getCool(1)) {
 						std::cout << "Pressed T" << std::endl;
-						gameplay_functions->spin(t, 1);
+						gameplay_functions->special(t, 1);
 						gameplay_functions->melee(t);
 					}
 				}

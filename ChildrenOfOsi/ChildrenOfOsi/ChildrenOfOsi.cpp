@@ -94,12 +94,7 @@ void ChildrenOfOsi::melee(WorldObj * player)
 
 void ChildrenOfOsi::special(WorldObj * player, int num)
 {
-	createTask("New_Attack", "MODIFY_POOL", player);
-}
-
-void ChildrenOfOsi::spin(WorldObj * player, int num)
-{
-	createTask("New_Spin", "MODIFY_POOL", player);
+	createTaskWithNum("New_Attack", "MODIFY_POOL", player,num);
 }
 
 void ChildrenOfOsi::combat(WorldObj * player)
@@ -205,6 +200,18 @@ void ChildrenOfOsi::createTask(std::string task_name, std::string type, WorldObj
 		LOG("childrenofosi createtask func, obj to update is a nullptr");
 	}
 	Task* new_task = new Task(task_name, task_status, type, objToUpdate);
+	tBuffer->push(new_task);
+	mLog->logMessage(new_task);
+}
+
+void ChildrenOfOsi::createTaskWithNum(std::string task_name, std::string type, WorldObj * objToUpdate,int num)
+{
+	//maybe just pass in the string craeated
+	std::string task_status = "CREATED";
+	if (objToUpdate == nullptr) {
+		LOG("childrenofosi createtask func, obj to update is a nullptr");
+	}
+	Task* new_task = new Task(task_name, task_status, type, objToUpdate,num);
 	tBuffer->push(new_task);
 	mLog->logMessage(new_task);
 }

@@ -3,7 +3,7 @@
 #include <ctime>
 
 bool MakeForest = false;
-bool PlacePlant = true;
+bool PlacePlant = false;
 float topLeftx;
 float topLefty;
 float topRightx;

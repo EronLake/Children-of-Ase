@@ -12,6 +12,10 @@ Soldier::Soldier(float x, float y, bool col):NPC(x, y, col)
   key = "Soldier" + std::to_string(getID()) + "_0";
   cdTime = 0;
   setType(3);
+  ase = 0;
+  maxAse = 0;
+  stamina= 100;
+  maxStamina = 100;
 }
 
 Soldier::Soldier(Vector2f p_topLeft, float p_width, float p_height):NPC(p_topLeft, p_width, p_height)
@@ -19,6 +23,10 @@ Soldier::Soldier(Vector2f p_topLeft, float p_width, float p_height):NPC(p_topLef
   key = "Soldier" + std::to_string(getID()) + "_0";
   cdTime = 0;
   setType(3);
+  ase = 0;
+  maxAse = 0;
+  stamina = 100;
+  maxStamina = 100;
 }
 
 Soldier::~Soldier() {}
@@ -31,7 +39,7 @@ void Soldier::addAttackType(Attack* a)
 
 void Soldier::newAttack(int i, Attack* a)
 {
-  if(cooldownMap[attackTypes[i]] == 0) {
+  //if(cooldownMap[attackTypes[i]] == 0 && stamina>=attackTypes[i]->getStaminaCost() && ase>=attackTypes[i]->getAseCost()) {
     Attack* p = a;
     *p = *attackTypes[i];
 
@@ -69,9 +77,11 @@ void Soldier::newAttack(int i, Attack* a)
     p->setKeep(false);
     cooldownMap[attackTypes[i]] = attackTypes[i]->getCoolDown();
 	cdTime = attackTypes[i]->getCoolDown();
+	stamina -= attackTypes[i]->getStaminaCost();
+	ase -= attackTypes[i]->getAseCost();
     instances++;
     if(instances == 99)instances = 0;
-  }
+  //}
 }
 
 void Soldier::meleeAttack()
@@ -114,6 +124,8 @@ void Soldier::updateCD()
       i->second--;
     }
   }
+  if (ase < maxAse)ase++;
+  if (stamina < maxStamina)stamina++;
 }
 
 void Soldier::resetCD(int c)
@@ -163,4 +175,23 @@ Attack * Soldier::nextAttack()
     return nullptr;
   }
 }
+
+bool Soldier::getCool() { 
+	return ((this->cdTime == 0) && (this->sprite.getLock() == false) && 
+		(stamina >= melee->getStaminaCost()) && (ase >= melee->getAseCost()));
+}
+
+bool Soldier::getCool(int c) { 
+	return ((this->cdTime == 0) && (cooldownMap[attackTypes[c]] == 0) 
+		&& (this->sprite.getLock() == false) && (stamina>=attackTypes[c]->getStaminaCost())
+		&& (ase>=attackTypes[c]->getAseCost()));
+}
+
+int Soldier::getAttackIndex(Attack* atk) {
+	for (int i = 0; i < attackTypes.size(); i++) {
+		if (attackTypes[i] == atk)return i;
+	}
+	return -1;
+}
+
 

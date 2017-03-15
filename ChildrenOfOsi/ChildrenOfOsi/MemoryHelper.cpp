@@ -82,33 +82,10 @@ int MemoryHelper::new_Attack(WorldObj* s, int i) {
 		Attack* p = new(find_available_block(memManager::Attack_head, obj->getAtKey())) Attack(0, 0, true);
 		Containers::add_Attack(obj->getAtKey(), p);
 		obj->newAttack(i, p);
-	}
-	return 0;
-}
-
-int MemoryHelper::new_Spin(WorldObj* s, int i) {
-	if (s->getType() >= 3) {
-		Soldier* obj = CheckClass::isSoldier(s);
-		Attack* p = new(find_available_block(memManager::Attack_head, obj->getAtKey())) Attack(0, 0, true);
-		Containers::add_Attack(obj->getAtKey(), p);
-		obj->newAttack(i, p);
-		obj->setDirWithBase(6);
-		obj->resetCD(i+1);
-		Attack* p2 = new(find_available_block(memManager::Attack_head, obj->getAtKey())) Attack(0, 0, true);
-		Containers::add_Attack(obj->getAtKey(), p2);
-		obj->newAttack(i+1, p2);
-		obj->setDirWithBase(6);
-		obj->resetCD(i + 2);
-		Attack* p3 = new(find_available_block(memManager::Attack_head, obj->getAtKey())) Attack(0, 0, true);
-		Containers::add_Attack(obj->getAtKey(), p3);
-		obj->newAttack(i+2 + 1, p3);
-		obj->setDirWithBase(6);
-		obj->resetCD(i + 3);
-		Attack* p4 = new(find_available_block(memManager::Attack_head, obj->getAtKey())) Attack(0, 0, true);
-		Containers::add_Attack(obj->getAtKey(), p4);
-		obj->newAttack(i + 3, p4);
-		obj->setDirWithBase(6);
-		obj->resetCD(i + 3);
+		if (p->getNextAttack() != nullptr) {
+			obj->setDirWithBase(6);
+			new_Attack(obj, obj->getAttackIndex(p->getNextAttack()));
+		}
 	}
 	return 0;
 }

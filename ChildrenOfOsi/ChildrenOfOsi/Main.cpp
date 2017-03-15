@@ -365,7 +365,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	spin->setDestroy(true);
 	spin->setDuration(5);
 	spin->setBaseDir(6);
-	spin->setCoolDown(600);
+	spin->setCoolDown(100);
 	spin->setPause(24);
 	spin->sprite.setTexture(rockTex);
 	Alex->addAttackType(spin);
@@ -375,7 +375,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	spin2->setDestroy(true);
 	spin2->setDuration(5);
 	spin2->setBaseDir(6);
-	spin2->setCoolDown(600);
+	spin2->setCoolDown(0);
 	spin2->setPause(29);
 	spin2->sprite.setTexture(rockTex);
 	Alex->addAttackType(spin2);
@@ -385,7 +385,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	spin3->setDestroy(true);
 	spin3->setDuration(5);
 	spin3->setBaseDir(6);
-	spin3->setCoolDown(600);
+	spin3->setCoolDown(0);
 	spin3->setPause(34);
 	spin3->sprite.setTexture(rockTex);
 	Alex->addAttackType(spin3);
@@ -395,10 +395,13 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	spin4->setDestroy(true);
 	spin4->setDuration(5);
 	spin4->setBaseDir(6);
-	spin4->setCoolDown(600);
+	spin4->setCoolDown(0);
 	spin4->setPause(39);
 	spin4->sprite.setTexture(rockTex);
 	Alex->addAttackType(spin4);
+	spin->setNextAttack(spin2);
+	spin2->setNextAttack(spin3);
+	spin3->setNextAttack(spin4);
 
 	vector<WorldObj*> vec;
 	//vec.push_back(&Alex->melee);
@@ -456,16 +459,12 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	gameplay_functions->add_hero("Yemoja", 4600, 3600, true);
 	gameplay_functions->add_hero("Oya", 4400, 3600, true);
 	gameplay_functions->add_hero("otherShango", 4900, 3300, true);
-	gameplay_functions->add_hero("sold1", 4900, 3300, true);
-	gameplay_functions->add_hero("sold2", 4900, 3300, true);
 
 	tBuffer->run();
 
 	Hero* staticRec = Containers::hero_table["Yemoja"];
 	Hero* oya = Containers::hero_table["Oya"];
 	Hero* otherShango = Containers::hero_table["otherShango"];
-	Hero* sold1 = Containers::hero_table["sold1"];
-	Hero* sold2 = Containers::hero_table["sold2"];
 
 	staticRec->setWidth(100);
 	staticRec->setHeight(100);
@@ -537,102 +536,8 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	otherShango->melee->sprite.setTexture(blank);
 	//otherShango->addAttackType(spin);
 
-	sold1->setWidth(150);
-	sold1->setHeight(150);
-	sold1->sprite.setTexture(playerTexture);
-	sold1->sprite.setIdleTexture(playerIdleTex);
-	sold1->sprite.up = upRunTex;
-	sold1->sprite.down = downRunTex;
-	sold1->sprite.left = leftRunTex;
-	sold1->sprite.right = rightRunTex;
-
-	sold1->sprite.id_up = upIdleTex;
-	sold1->sprite.id_left = leftIdleTex;
-	sold1->sprite.id_right = rightIdleTex;
-	sold1->sprite.id_down = downIdleTex;
-
-	sold1->sprite.atk_up = upAtkTex;
-	sold1->sprite.atk_down = downAtkTex;
-	sold1->sprite.atk_left = leftAtkTex;
-	sold1->sprite.atk_right = rightAtkTex;
-
-	sold1->sprite.hurt_up = upHurtTex;
-	sold1->sprite.hurt_down = downHurtTex;
-	sold1->sprite.hurt_left = leftHurtTex;
-	sold1->sprite.hurt_right = rightHurtTex;
-
-	sold1->offsetBody(0, 50, 50, 50, 50);
-	sold1->setInteractable(true);
-	sold1->setName("sold1");
-
-	sold2->setWidth(150);
-	sold2->setHeight(150);
-	sold2->sprite.setTexture(playerTexture);
-	sold2->sprite.setIdleTexture(playerIdleTex);
-	sold2->sprite.up = upRunTex;
-	sold2->sprite.down = downRunTex;
-	sold2->sprite.left = leftRunTex;
-	sold2->sprite.right = rightRunTex;
-
-	sold2->sprite.id_up = upIdleTex;
-	sold2->sprite.id_left = leftIdleTex;
-	sold2->sprite.id_right = rightIdleTex;
-	sold2->sprite.id_down = downIdleTex;
-
-	sold2->sprite.atk_up = upAtkTex;
-	sold2->sprite.atk_down = downAtkTex;
-	sold2->sprite.atk_left = leftAtkTex;
-	sold2->sprite.atk_right = rightAtkTex;
-
-	sold2->sprite.hurt_up = upHurtTex;
-	sold2->sprite.hurt_down = downHurtTex;
-	sold2->sprite.hurt_left = leftHurtTex;
-	sold2->sprite.hurt_right = rightHurtTex;
-
-	sold2->offsetBody(0, 50, 50, 50, 50);
-	sold2->setInteractable(true);
-	sold2->setName("sold2");
-
-	sold1->setLoc(Alex->getLoc());
-	sold2->setLoc(Alex->getLoc());
-	sold1->shiftX(200);
-	sold2->shiftX(-200);
-	sold1->setSpeed(3);
-	sold2->setSpeed(2);
-	gameplay_functions->add_Attack(sold1->getKey(), sold1->body[0].getX(), sold1->body[0].getY(), true, 10);
-	tBuffer->run();
-	sold1->melee = Containers::Attack_table[sold1->getKey()];
-	gameplay_functions->add_Attack(sold2->getKey(), sold2->body[0].getX(), sold2->body[0].getY(), true, 10);
-	tBuffer->run();
-	sold2->melee = Containers::Attack_table[sold2->getKey()];
-	sold1->melee->setDmg(10);
-	sold1->melee->setSpeed(5);
-	sold1->melee->setBaseDir(4);
-	sold1->melee->setCoolDown(200);
-	sold1->melee->setPause(-1);
-	sold1->melee->setDestroy(false);
-	sold1->melee->setKeep(true);
-	sold1->melee->setWidth(otherShango->body[0].getWidth());
-	sold1->melee->setHeight(otherShango->body[0].getHeight());
-	
-	sold2->melee->setDmg(10);
-	sold2->melee->setSpeed(5);
-	sold2->melee->setBaseDir(4);
-	sold2->melee->setCoolDown(200);
-	sold2->melee->setPause(-1);
-	sold2->melee->setDestroy(false);
-	sold2->melee->setKeep(true);
-	sold2->melee->setWidth(otherShango->body[0].getWidth());
-	sold2->melee->setHeight(otherShango->body[0].getHeight());
-
-	sold1->melee->setCoolDown(100);
-	sold2->melee->setCoolDown(62);
-	sold1->melee->sprite.setTexture(blank);
-	sold2->melee->sprite.setTexture(blank);
 	combatControl->addtoTargets(Alex);
 	combatControl->addtoTargets(otherShango);
-	//combatControl->addtoTargets(sold1);
-	//combatControl->addtoTargets(sold2);
 
 	//VisibilityGraph graph;
 	ai->graph.vertices = vertices;
@@ -686,8 +591,6 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	*/
 	recVec.push_back(staticRec);
 	recVec.push_back(otherShango);
-	recVec.push_back(sold1);
-	recVec.push_back(sold2);
 	recVec.push_back(oya);
 	//recVec.push_back(tree);
 	//recVec.push_back(tree1);
@@ -782,8 +685,6 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	Vector2f otherShangoInitialLoc = otherShango->getLoc();
 
 	otherShango->setEvade(false);
-	sold1->setEvade(false);
-	sold2->setEvade(false);
 	bool OSAtkMode = true;
 	short M = GetKeyState('M') >> 15;
 	Party* party = new Party();
@@ -806,8 +707,6 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 		_QuadTree->clear();
 		Alex->updateCD();
 		otherShango->updateCD();
-		sold1->updateCD();
-		sold2->updateCD();
 		for (int i = 0; i < recVec.size(); i++) {
 			_QuadTree->insert(recVec[i]);	//insert all obj into tree
 	
@@ -994,8 +893,6 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 		else {
 
 		}
-		combatControl->fight(sold1,state);
-		combatControl->fight(sold2, state);
 		combatControl->follow(oya, state);
 		//toggle between evade and attack mode
 		//if (M) {
