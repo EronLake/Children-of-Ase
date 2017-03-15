@@ -3,7 +3,6 @@
 #include "Attack.h"
 #include "Containers.h"
 #include "NPC.h"
-// #include "Party.h"
 
 class Party;
 
@@ -36,6 +35,11 @@ class Soldier: public NPC
   int getStamina() { return stamina; };
   int getAse() { return ase; };
   int getAttackIndex(Attack* atk);
+
+  bool isAllyOf(const Soldier&);
+  bool isAllyOf(const Party&);
+  bool isEnemyOf(const Soldier&);
+  bool isEnemyOf(const Party&);
 
   void setParty(Party* p) { party = p; };
   void setInCombat(bool c) { inCombat = c; };

@@ -22,10 +22,10 @@ class Party
   Party() = default;
   ~Party() = default;
 
-  Alliance * const getAlliance() { return this->faction; }
-  Soldier * const getLeader() { return this->leader; }
+  Alliance * getAlliance() const { return this->faction; }
+  Soldier * getLeader() const { return this->leader; }
   vector<Soldier *>& getMembers() { return members; }
-  int getMode() { return this->mode; }
+  int getMode() const { return this->mode; }
 
   void setAlliance(Alliance *a) { this->faction = a; }
   void setLeader(Soldier *);
