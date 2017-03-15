@@ -210,13 +210,13 @@ Attack * Soldier::nextAttack()
     return this->melee;
   else {
     for(auto& attack : this->attackTypes) {
-      if(attack->getType() == Attack::AttackTypes::SUMMONING && attack->getCoolDown() == 0) {
+      if(attack->getAttackType() == Attack::AttackTypes::SUMMONING && attack->getCoolDown() == 0) {
         return attack;
       }
     }
 
     for(auto& attack : this->attackTypes) {
-      if(attack->getType() != Attack::AttackTypes::SUMMONING && attack->getCoolDown() == 0) {
+      if(attack->getAttackType() != Attack::AttackTypes::SUMMONING && attack->getCoolDown() == 0) {
         return attack;
       }
     }

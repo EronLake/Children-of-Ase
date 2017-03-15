@@ -28,7 +28,7 @@ class Attack: public WorldObj
   bool getKeep() { return this->keep; };
   bool getTurn() { return this->turn; };
   vector<WorldObj*> getHits() { return this->hitObjs; };
-  AttackTypes getType() { return this->type; }
+  AttackTypes getAttackType() { return this->attackType; }
 
   void setDmg(int d) { this->dmg = d; };
   void setStaminaCost(int c) { this->staminaCost = c; };
@@ -37,7 +37,7 @@ class Attack: public WorldObj
   bool updateDuration();
   void setSpeed(float s) { this->speed = s; };
   void setDestroy(bool d) { this->destroyOnCollision = d; };
-  void setType(AttackTypes t) { this->type = t; }
+  void setAttackType(AttackTypes t) { this->attackType = t; }
   
   void setCoolDown(int c) { this->cooldown = c; };
   void setPause(int p) { this->pause = p; };
@@ -76,5 +76,5 @@ class Attack: public WorldObj
   vector<WorldObj*> hitObjs;
   Attack* next;
   bool turn;
-  AttackTypes type;
+  AttackTypes attackType;
 };
