@@ -786,6 +786,11 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	sold2->setEvade(false);
 	bool OSAtkMode = true;
 	short M = GetKeyState('M') >> 15;
+	Party* party = new Party();
+	Alex->setParty(party);
+	party->addToParty(Alex,true);
+	oya->setParty(party);
+	party->addToParty(oya, false);
 
 	vector<WorldObj*> enemyVec;
 	//osi::GameWindow::init();
@@ -991,7 +996,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 		}
 		combatControl->fight(sold1,state);
 		combatControl->fight(sold2, state);
-		combatControl->follow(oya, Alex,state);
+		combatControl->follow(oya, state);
 		//toggle between evade and attack mode
 		//if (M) {
 		//	if (OSAtkMode) {

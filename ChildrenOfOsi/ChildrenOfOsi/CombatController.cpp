@@ -157,7 +157,9 @@ void CombatController::fight(Soldier* sold1, int state) {
 	}
 }
 
-void CombatController::follow(Soldier* sold1, Soldier* sold2,int state) {
+void CombatController::follow(Soldier* sold1, int state) {
+	Soldier* sold2 = sold1->getParty()->getLeader();
+	if (sold1 == sold2)return;
 	sold1->setCurrentEnemy(sold2);
 	sold1->waypoint = Vector2f(sold1->getCurrentEnemy()->getX() + (sold1->getCurrentEnemy()->getWidth() / 4), sold1->getCurrentEnemy()->getY() + (sold1->getCurrentEnemy()->getHeight() / 4));
 	sold1->destination = Vector2f(sold1->getCurrentEnemy()->getX() + (sold1->getCurrentEnemy()->getWidth() / 4), sold1->getCurrentEnemy()->getY() + (sold1->getCurrentEnemy()->getHeight() / 4));
