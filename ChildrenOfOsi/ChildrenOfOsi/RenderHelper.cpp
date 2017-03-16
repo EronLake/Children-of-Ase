@@ -62,6 +62,9 @@ int RenderHelper::draw_frame(WorldObj * obj)
 		//cout << objVec[i]->getX() - camera->getX() << endl;
 		//LOG(objVec[i]->getX(), ", ", objVec[i]->getY());
 		objVec[i]->WorldObj::drawObj(camera->getX(), camera->getY());
+		//for (int j = 0; j < objVec[i]->body.size(); j++) {
+			objVec[i]->body[0].drawObj(camera->getX(), camera->getY());
+		//}
 		objVec[i]->WorldObj::animateObj();
 	}
 	//convoGui->drawGui();

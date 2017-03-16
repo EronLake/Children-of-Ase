@@ -60,7 +60,7 @@
 
 using namespace std;
 
-
+Texture* Rectangle::tex = new Texture();
 //void testQuadTree();
 //bool checkCollision(WorldObj *recA, WorldObj *recB);	//given two bounding boxes, check if they collide
 //bool coordOverlap(int value, int min, int max) { return (value >= min) && (value <= max); }		//helper func for checkCollision
@@ -283,9 +283,12 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	Texture* pierTex = new Texture();
 
 	Texture* blank = new Texture();
+	Texture* border = new Texture();
 
 	//load sprite from a configuration file?
-	blank->setFile("Assets/Sprites/blank1.png", 1);
+	blank->setFile("Assets/Sprites/blank.png", 1);
+	Rectangle::tex->setFile("Assets/Sprites/border.png", 1);
+	border->setFile("Assets/Sprites/border.png", 1);
 	objTexture->setFile("Assets/Sprites/YemojasHouse.png",1);
 
 	playerTexture->setFile("Assets/Sprites/ShangoForwardIdle.png",22);
@@ -364,6 +367,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	/* SET UP SPRITE CHANGE, MIGHT NEED A SINGLETON?*/
 
 
+
 	Alex->sprite.setTexture(playerTexture);
 	Alex->sprite.setIdleTexture(playerIdleTex);
 	Alex->sprite.up = upRunTex;
@@ -436,7 +440,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	Alex->addAttackType(fireball);
 
 	//Alex->melee->sprite.setTexture(blank);
-	Alex->melee->sprite.setTexture(blank);
+	Alex->melee->sprite.setTexture(border);
 
 	DialogueController::setPlayer(Alex);
 	//vector<WorldObj*> recVec;
@@ -449,7 +453,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	spin->setCoolDown(100);
 	spin->setPause(48);
 	spin->setTurn(true);
-	spin->sprite.setTexture(blank);
+	spin->sprite.setTexture(border);
 	Alex->addAttackType(spin);
 	Attack* spin2 = new Attack();
 	spin2->setDmg(7);
@@ -460,7 +464,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	spin2->setCoolDown(0);
 	spin2->setPause(53);
 	spin2->setTurn(true);
-	spin2->sprite.setTexture(blank);
+	spin2->sprite.setTexture(border);
 	Alex->addAttackType(spin2);
 	Attack* spin3 = new Attack();
 	spin3->setDmg(7);
@@ -471,7 +475,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	spin3->setCoolDown(0);
 	spin3->setPause(58);
 	spin3->setTurn(true);
-	spin3->sprite.setTexture(blank);
+	spin3->sprite.setTexture(border);
 	Alex->addAttackType(spin3);
 	Attack* spin4 = new Attack();
 	spin4->setDmg(7);
@@ -482,7 +486,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	spin4->setCoolDown(0);
 	spin4->setPause(63);
 	spin4->setTurn(true);
-	spin4->sprite.setTexture(blank);
+	spin4->sprite.setTexture(border);
 	Alex->addAttackType(spin4);
 	spin->setNextAttack(spin2);
 	spin2->setNextAttack(spin3);
@@ -619,11 +623,11 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	silverSoldier->melee->setHeight(silverSoldier->body[0].getHeight());
 
 	silverSoldier->addAttackType(rockThrow);
-	silverSoldier->melee->sprite.setTexture(blank);
+	silverSoldier->melee->sprite.setTexture(border);
 	//silverSoldier->addAttackType(spin);
 
 	combatControl->addtoTargets(Alex);
-	combatControl->addtoTargets(silverSoldier);
+	//combatControl->addtoTargets(silverSoldier);
 
 	//VisibilityGraph graph;
 	ai->graph.vertices = vertices;
@@ -841,8 +845,10 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 				staticRec->setMode(WANDER);
 			}
 		}
+		combatControl->follow(oya, state);
+		combatControl->fight(silverSoldier, state);
 
-
+		/*
 		cout << "Alex's position is " << Alex->getLoc().getXloc() << ", " << Alex->getLoc().getYloc() << endl;
 		cout << "OS's position is " << silverSoldier->getLoc().getXloc() << ", " << silverSoldier->getLoc().getYloc() << endl;
 		cout << "OS's DESTINATION IS: " << silverSoldier->destination.getXloc() << ", " << silverSoldier->destination.getYloc() << endl;
@@ -853,6 +859,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 		   to skills and cooldowns and what not,
 		   * WHEN NPC REACHES DESTINATION, destination is being automatically set to (0,0)!!! */
 		//attack mode
+		/*
 		enemyVec.clear();
 		enemyVec.push_back(Alex);
 		if (enemyVec.empty()) silverSoldier->setEvade(true);
@@ -961,7 +968,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 			else if (state == 0)                //Hero needs waypoints to destination, and not in dialog
 			{
 				gameplay_functions->get_path(silverSoldier); //Generate waypoints to destination
-			}/**/
+			}
 			//gameplay_functions->move_toward(silverSoldier);
 		}
 	//	ai->graph.insert(silverSoldier->destination);
@@ -993,7 +1000,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 		//}
 
 	
-
+	*/
 
 
 		

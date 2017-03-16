@@ -62,8 +62,23 @@ void CombatController::fight(Soldier* sold1, int state) {
 	//if OS has an enemy, move to the enemy
 	if (sold1->getCurrentEnemy() != nullptr && !sold1->getEvade()) {//&& silverSoldier->destination != Vector2f(0,0)) {
 		cout << "*************************************************MOVING TO ENEMY******************************************" << endl;
+
 		sold1->waypoint = Vector2f(sold1->getCurrentEnemy()->getX() + (sold1->getCurrentEnemy()->getWidth() / 4), sold1->getCurrentEnemy()->getY() + (sold1->getCurrentEnemy()->getHeight() / 4));
 		sold1->destination = Vector2f(sold1->getCurrentEnemy()->getX() + (sold1->getCurrentEnemy()->getWidth() / 4), sold1->getCurrentEnemy()->getY() + (sold1->getCurrentEnemy()->getHeight() / 4));
+
+		vector<Vector2f> dirs;
+
+		dirs.push_back( { sold1->waypoint.getXloc() - 30, sold1->waypoint.getYloc() - 80 });
+		dirs.push_back({ sold1->waypoint.getXloc() - 30, sold1->waypoint.getYloc() + 30 });
+		dirs.push_back({ sold1->waypoint.getXloc() - 80, sold1->waypoint.getYloc() - 30 });
+		dirs.push_back({ sold1->waypoint.getXloc() + 30, sold1->waypoint.getYloc() - 30 });
+
+		float smallest;
+		int small;
+		for (int i = 0; i < dirs.size(); i++) {
+			
+		}
+
 
 		//enemy is facing up
 		if (sold1->getCurrentEnemy()->getDirection() == 8) {
