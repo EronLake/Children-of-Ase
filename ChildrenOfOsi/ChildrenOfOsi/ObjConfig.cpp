@@ -3,7 +3,7 @@
 #include <ctime>
 
 bool MakeForest = false;
-bool PlacePlant = true;
+bool PlacePlant = false;
 float topLeftx;
 float topLefty;
 float topRightx;
@@ -197,6 +197,3 @@ void ObjConfig::set_world_obj(vector<WorldObj*>* recVec, ChildrenOfOsi* gameplay
 
 }
 
-void MakeingTheForest() {
-
-}
