@@ -91,15 +91,19 @@ void WorldObj::setDirWithBase(int od, bool update)
 }
 
 void WorldObj::face(WorldObj* other) {
-	int f = 2;
-	if (other->getDirection() == 2) {
-		f = 8;
-	}
-	else if (other->getDirection() == 4) {
-		f = 6;
-	}
-	else if (other->getDirection() == 6) {
-		f = 4;
+	int f = 6;
+	if (getX() > other->getX()) {
+		if (getY() > other->getY()) {
+			if (getX() > other->getX() + other->getWidth()) {
+				f = 4;
+			}
+			else {
+				f = 8;
+			}
+		}
+		else {
+			f = 2;
+		}
 	}
 	setDirection(f);
 }

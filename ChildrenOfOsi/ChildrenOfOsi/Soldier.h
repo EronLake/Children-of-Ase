@@ -63,6 +63,8 @@ class Soldier:
   std::string getKey() { return key; };
   std::string getAtKey() { return atkey = "Soldier" + std::to_string(getID()) + "_" + std::to_string(attackTypes.size()) + "_" + std::to_string(instances); };
 
+  vector<Attack*> getCurrentAttacks() { return currentAttacks; };
+
   private:
 
   Party* party;
@@ -84,5 +86,6 @@ class Soldier:
   std::string atkey;
 
   bool hasAttacks();
+  vector<Attack*> currentAttacks;
 };
 

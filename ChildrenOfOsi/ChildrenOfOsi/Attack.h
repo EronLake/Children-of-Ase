@@ -25,6 +25,7 @@ class Attack: public WorldObj
   int getPause() { return this->pause; };
   bool getKeep() { return this->keep; };
   bool getTurn() { return this->turn; };
+  bool getCanCancel() { return this->canCancel; };
   vector<WorldObj*> getHits() { return this->hitObjs; };
 
   void setDmg(int d) { this->dmg = d; };
@@ -36,6 +37,7 @@ class Attack: public WorldObj
   void setDestroy(bool d) { this->destroyOnCollision = d; };
   
   void setCoolDown(int c) { this->cooldown = c; };
+  void setCanCancel(int c) { this->canCancel = c; };
   void setPause(int p) { this->pause = p; };
   void updatePause() { if(this->pause > 0) --pause; };
   void setKeep(bool k) { this->keep = k; };
@@ -72,4 +74,5 @@ class Attack: public WorldObj
   vector<WorldObj*> hitObjs;
   Attack* next;
   bool turn;
+  bool canCancel;
 };

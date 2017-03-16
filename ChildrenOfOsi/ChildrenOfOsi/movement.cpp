@@ -381,16 +381,25 @@ int Movement::attack(WorldObj* obj) {
 		if (a->second->getPause() == 0) {
 			std::cout << "Attack Collidable" << std::endl;
 			for (int i = 0; i < objVec.size(); i++) {
-				if (objVec[i]->getType() >= 2) {
+				if (objVec[i]->getType() > 1) {
 					LivingObj* liv = CheckClass::isLiving(objVec[i]);
 					if (liv) {
-						if (collision(a->second, liv) && !a->second->beenHit(liv)) {
+						if (collision(a->second, liv) && !a->second->beenHit(liv) && (a->second->getDuration()!=0)) {
 							std::cout << "Player hit " << liv->getName() << std::endl;
 							a->second->Hit(liv);
 							if (a->second->getDestroy())a->second->setDuration(0);
 							liv->sprite.unlockAnimation();
 							manager->createTaskWithObj("Hurt", "DRAW", liv);
 							std::cout << liv->getName() << "'s health is now " << liv->getHealth() << std::endl;
+							if (objVec[i]->getType() > 2) {
+								Soldier* s = CheckClass::isSoldier(liv);
+								if (s) {
+									vector<Attack*> delAtk= s->getCurrentAttacks();
+									for (int j = 0; j < delAtk.size();j++) {
+										delAtk[j]->setDuration(0);
+									}
+								}
+							}
 						}
 					}
 				}
