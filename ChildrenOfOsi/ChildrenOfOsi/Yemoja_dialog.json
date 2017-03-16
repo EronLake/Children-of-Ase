@@ -22,7 +22,7 @@
     },
 
     "Introduction": {
-        "1": "I am known as Yemoja."
+        "1": "I am known as Yemoja"
     },
 
     "Ask_Oya": {
@@ -143,12 +143,12 @@
 
 	"Ask_Reason": {
 		"1": "Why are you here before me",
-		"2": "Do  you have a reason to be here",
-		"3": "What are your intentions"
+		"2": "Do you have a reason to be here",
+		"3": "What are your intentions "
 	},
 
 	"Ask_Origin": {
-		"1": "Which village do you come from"
+		"1": "Which village do you come from "
 	},
 
 	"Friend_Reason": {
@@ -160,7 +160,7 @@
 	"Bad_Reason": {
 		"1": "I am  disappointed that you are here for that",
 		"2": "Such a shame. I was hoping we could be allies",
-		"3": "You should tread very carefully with your wordsfrom now on, friend"
+		"3": "You should tread very carefully with your words from now on, friend"
 	},
 
 	"Response_Origin": {

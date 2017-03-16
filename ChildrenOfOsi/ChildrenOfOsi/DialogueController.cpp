@@ -18,7 +18,7 @@ std::string DialogueController::message;
 int DialogueController::optionsIndex=0;
 int DialogueController::select = 0;
 std::string DialogueController::replyString;
-
+bool init_conv = false;
 
 DialogueController::DialogueController()
 {
@@ -34,7 +34,10 @@ void DialogueController::PlayerChoose()
 	options = dialogue.get_possible_conv_pts();
 	replyOptions = dialogue.get_possible_reply_pts();
 	state = 1;
-	optionsIndex = 0;
+	if(!init_conv)
+	    optionsIndex = 0; //had at 3 for testing at one point
+	else
+		optionsIndex = 3;
 	//PlayerConversationPoint();
 	//give option to Alex
 }
@@ -56,7 +59,7 @@ void DialogueController::PlayerConversationPoint()
 	std::cout <<"Select: "<< select << endl;
 	dialogue_point choice = options[optionsIndex][select];
 	std::string conversation_pt_sentence = dialogue.gen_dialog(choice, player);
-	message += conversation_pt_sentence;
+	message += player->getName() + ": " + conversation_pt_sentence;
 	std::cout << "PLAYER COONVERSATION POINT////////////////////////////////////" << std::endl;
 	std::cout << "Shango: " << conversation_pt_sentence << std::endl;
 	otherResponse(choice[0]);
@@ -69,9 +72,10 @@ void DialogueController::PlayerResponse()
 
 	std::string reply_pt_sentence = dialogue.gen_dialog(choice, player);
 	//draws reply
-	//message = player->getName()+": "+reply_pt_sentence +"\n\n";
+	message = player->getName()+": "+reply_pt_sentence +"\n\n";
 	std::cout << "PLAYER RESPONSE////////////////////////////////////" << std::endl;
 	std::cout << "Shango: " << getMessage() << std::endl;
+	init_conv = true;
 	PlayerChoose();
 }
 
@@ -105,7 +109,7 @@ void DialogueController::otherConversationPoint(dialogue_point line)
 		std::cout << print[i] << std::endl;
 	}
 	select = 0;
-	state = 2;
+	state = 2; //had at 0 for testing a time
 	//optionsIndex = 3;
 	//getOptions();
 	//give info to Alex
@@ -186,4 +190,5 @@ void DialogueController::exitDialogue()
 {
 	other = nullptr;
 	state=0;
+	init_conv = false;
 }

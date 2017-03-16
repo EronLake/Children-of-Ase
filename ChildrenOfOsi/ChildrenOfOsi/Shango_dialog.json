@@ -5,15 +5,15 @@
 	},
 
 	"Extra_Dialogue": {
-		"1": "I have traveled far to make it to this village",
+		"1": "I come from far away.",
 		"2": "I am curious as to why there is a desolate village such as this all the way out here",
 		"3": "The savannah was very harsh. I am surprised this village is as prosperous as it is"
 	},
 
 	"Introduction": {
-		"1": "My name is",
-		"2": "I am called",
-		"3": "I am known as"
+		"1": "My name is Shango",
+		"2": "I am called Shango",
+		"3": "I am known as Shango"
 	},
 
 	"Refute_Question": {
@@ -39,13 +39,30 @@
 		"3": "Where do you come from"
 	},
 
+	"Ask_Reason": {
+		"1": "Why do you choose to live here",
+		"2": "Do you like it here"
+	},
+
 	"Friend_Response": {
 		"1": "I am here to form a friendship with this village and its people",
 		"2": "I come before you with only peaceful intentions",
 		"3": "I wanted to see the rumored beauty of your village for myself"
 	},
 
+	"Friend_Reason": {
+		"1": "I am here to form a friendship with this village and its people",
+		"2": "I come before you with only peaceful intentions",
+		"3": "I wanted to see the rumored beauty of your village for myself"
+	},
+
 	"Bad_Response": {
+		"1": "I am here to see how pathetic this village is for my own eyes",
+		"2": "I came here to determine whether or not you could defend yourself from Ogun. Your defenses are laughable to say the least",
+		"3": "This village is as awful as the surrounding landscape"
+	},
+
+	"Bad_Reason": {
 		"1": "I am here to see how pathetic this village is for my own eyes",
 		"2": "I came here to determine whether or not you could defend yourself from Ogun. Your defenses are laughable to say the least",
 		"3": "This village is as awful as the surrounding landscape"
@@ -58,7 +75,7 @@
 	},
 
 	"Identifier": {
-		"1": "Leader"
+		"1": "leader"
 	},
 
 	"Response_Name": {

@@ -78,7 +78,9 @@ void ObjConfig::import_config(vector<WorldObj*>* recVec, ChildrenOfOsi* gameplay
 		cout << "Makeing Forest" << endl;
 		int XDistancs = abs(topLeftx - topRightx);
 		int YDistancs = abs(topLefty - botLefty);
-		srand(time(0));
+		
+		
+		(time(0));
 		for (int i = 1; i < 100; i++) {
 			float randomX;
 			float randomY;
