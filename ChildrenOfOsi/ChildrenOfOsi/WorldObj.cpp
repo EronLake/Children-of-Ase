@@ -9,7 +9,7 @@ int WorldObj::idNum = 0;
 void WorldObj::setX(float x)
 {
 	for (int i = 0; i < body.size(); i++) {
-		body[i].setX(x+(loc.getXloc()-body[i].getX()));
+		body[i].setX(x-(loc.getXloc()-body[i].getX()));
 	}
 	loc.setXloc(x);
 }
@@ -17,7 +17,7 @@ void WorldObj::setX(float x)
 void WorldObj::setY(float y)
 {
 	for (int i = 0; i < body.size(); i++) {
-		body[i].setY(y + (loc.getYloc() - body[i].getY()));
+		body[i].setY(y - (loc.getYloc() - body[i].getY()));
 	}
 	loc.setYloc(y);
 }
@@ -29,7 +29,7 @@ void WorldObj::shiftX(float dist)
 		body[i].setX(body[i].getX() + dist);
 	}
 	std::cout << name<<": Body X: " << body[0].getX() << " X: "<<loc.getXloc() << std::endl;
-	std::cout << "Shifting" << body[0].getX()-loc.getXloc() << std::endl;
+	std::cout << "X Offset" << body[0].getX()-loc.getXloc() << std::endl;
 }
 
 void WorldObj::shiftY(float dist)
@@ -38,6 +38,8 @@ void WorldObj::shiftY(float dist)
 	for (int i = 0; i < body.size(); i++) {
 		body[i].setY(body[i].getY()+dist);
 	}
+	std::cout << name << ": Body Y: " << body[0].getY() << " Y: " << loc.getYloc() << std::endl;
+	std::cout << "Y Offset" << body[0].getY() - loc.getYloc() << std::endl;
 }
 
 void WorldObj::drawObj(float _x, float _y)
