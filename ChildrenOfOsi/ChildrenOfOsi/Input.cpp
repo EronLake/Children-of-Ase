@@ -124,7 +124,15 @@ void Input::InputCheck()
 			std::cout << "Pressed E" << std::endl;
 			gameplay_functions->talk(player);
 		}
-		if (F) {
+		if ((W||A||S||D) && F) {
+			if (t->getCool()) {
+				std::cout << "Pressed Moving F" << std::endl;
+				t->flipSwing();
+				t->meleeAttack();
+				gameplay_functions->melee(t);
+			}
+		}
+		 else if (F) {
 			if (t) {
 					if (t->getCool()) {
 						std::cout << "Pressed F" << std::endl;
@@ -144,6 +152,15 @@ void Input::InputCheck()
 							t->sprite.lockAnimation();
 						}
 					} 
+			}
+		}
+		else if (R && SHIFT) {
+			if (t) {
+				if (t->getCool(1)) {
+					std::cout << "Pressed Shift+R" << std::endl;
+					gameplay_functions->special(t, 1);
+					gameplay_functions->melee(t);
+				}
 			}
 		} else if (R) {
 				if (t) {

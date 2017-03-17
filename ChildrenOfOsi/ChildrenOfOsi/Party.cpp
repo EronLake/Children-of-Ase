@@ -16,7 +16,7 @@ Party::Party(Alliance *a): faction(a), leader(nullptr), target(nullptr), mode(Pa
 /**
  * Creates a new party with the given leader, as a part of no faction.
  */
-Party::Party(Soldier *leader): faction(nullptr), leader(leader), target(nullptr)
+Party::Party(Soldier *leader) : faction(nullptr), leader(leader), target(nullptr)
 {
   this->addToParty(leader, true);
   this->setMode(Party::MODE_IDLE);
@@ -26,7 +26,7 @@ Party::Party(Soldier *leader): faction(nullptr), leader(leader), target(nullptr)
  * Creates a new party as a part of the specified alliance and with the given
  * leader. The leader will be the only initial member of this party.
  */
-Party::Party(Alliance *a, Soldier *leader) : faction(a), leader(leader), target(nullptr)
+Party::Party(Alliance *a, Soldier *leader): faction(a), leader(leader), target(nullptr)
 {
   this->addToParty(leader, true);
   this->setMode(Party::MODE_IDLE);

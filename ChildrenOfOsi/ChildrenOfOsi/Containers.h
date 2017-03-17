@@ -12,6 +12,8 @@ class NPC;
 class Attack;
 class Memory;
 class Action;
+class Tag;
+class ConversationPoint;
 
 class Containers
 {
@@ -34,6 +36,9 @@ public:
 
 	static std::unordered_map<std::string, Action*> action_table;
 
+	static std::unordered_map<std::string, Tag*> tag_table;
+	static std::unordered_map<std::string, ConversationPoint*> conv_point_table;
+
 	Containers();
 	~Containers();
 
@@ -47,4 +52,6 @@ public:
 	static void add_texture(std::string, Texture*);
 	static void add_memory(std::string, int hero_name, Memory*);
 	static void add_action(std::string, Action*);
+	static void add_tag(std::string, Tag*);
+	static void add_conv_point(std::string, ConversationPoint*);
 };

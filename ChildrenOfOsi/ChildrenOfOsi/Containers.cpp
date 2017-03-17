@@ -78,6 +78,16 @@ void Containers::add_action(std::string key, Action* value)
 	action_table[key] = value;
 }
 
+void Containers::add_tag(std::string key, Tag* t)
+{
+	tag_table[key] = t;
+}
+
+void Containers::add_conv_point(std::string key, ConversationPoint* c)
+{
+	conv_point_table[key] = c;
+}
+
 
 //need to declare tables in global scope before other functions can use them
 //should eventually be moved to main
@@ -95,3 +105,5 @@ std::unordered_map<std::string, Memory*> Containers::oshosi_memory_table;
 std::unordered_map<std::string, Memory*> Containers::ogun_memory_table;
 std::unordered_map<std::string, Memory*> Containers::shango_memory_table;
 std::unordered_map<std::string, Action*> Containers::action_table;
+std::unordered_map<std::string, Tag*> Containers::tag_table;
+std::unordered_map<std::string, ConversationPoint*> Containers::conv_point_table;

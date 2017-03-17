@@ -73,6 +73,12 @@ public:
 	static MemoryPool* action_pool;
 	static MemNode* action_head;
 
+	static MemoryPool* tag_pool;
+	static MemNode* tag_head;
+
+	static MemoryPool* conv_point_pool;
+	static MemNode* conv_point_head;
+
 	memManager(MessageLog* _mLog, TaskBuffer* _tBuffer);
 	~memManager();
 
