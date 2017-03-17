@@ -1,7 +1,9 @@
 #include "stdafx.h"
 
-#include "Party.h"
 #include "Soldier.h"
+
+#include "Party.h"
+#include "Vector2f.h"
 
 using namespace std;
 
@@ -244,6 +246,58 @@ bool Soldier::isAllyOf(Soldier *s) { return this->party->isAllyOf(s); }
 bool Soldier::isAllyOf(Party *p) { return this->party->isAllyOf(p); }
 bool Soldier::isEnemyOf(Soldier *s) { return this->party->isEnemyOf(s); }
 bool Soldier::isEnemyOf(Party *p) { return this->party->isEnemyOf(p); }
+
+/**
+ * Return whether the given world object is within the range of this soldier's
+ * aggression.
+ */
+bool Soldier::isInAggroRangeOf(WorldObj *w)
+{
+  if(w == nullptr) return false;
+  float distanceX = abs(this->getX() - w->getX());
+  float distanceY = abs(this->getY() - w->getY());
+  float distance = sqrt(pow(distanceX, 2) + pow(distanceY, 2));
+  return distance <= this->aggroRange;
+}
+
+/**
+ * Returns whether the leader of the given party is within the range of this
+ * soldier's aggression.
+ */
+bool Soldier::isInAggroRangeOf(Party *p)
+{
+  if(p == nullptr) return false;
+  float distanceX = abs(this->getX() - p->getLeader()->getX());
+  float distanceY = abs(this->getY() - p->getLeader()->getY());
+  float distance = sqrt(pow(distanceX, 2) + pow(distanceY, 2));
+  return distance <= this->aggroRange;
+}
+
+/**
+ * Returns whether the given world object is near enoguh for this soldier to
+ * continue pursuit after it has fled.
+ */
+bool Soldier::isInPursuitRangeOf(WorldObj *w)
+{
+  if(w == nullptr) return false;
+  float distanceX = abs(this->getX() - w->getX());
+  float distanceY = abs(this->getY() - w->getY());
+  float distance = sqrt(pow(distanceX, 2) + pow(distanceY, 2));
+  return distance <= this->pursuitRange;
+}
+
+/**
+ * Returns whether the leader of the given party is near enough for this soldier
+ * to continue pursuit after they have fled.
+ */
+bool Soldier::isInPursuitRangeOf(Party *p)
+{
+  if(p == nullptr) return false;
+  float distanceX = abs(this->getX() - p->getLeader()->getX());
+  float distanceY = abs(this->getY() - p->getLeader()->getY());
+  float distance = sqrt(pow(distanceX, 2) + pow(distanceY, 2));
+  return distance <= this->pursuitRange;
+}
 
 bool Soldier::getCool()
 {
