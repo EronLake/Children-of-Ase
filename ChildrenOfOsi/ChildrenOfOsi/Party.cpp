@@ -180,16 +180,16 @@ void Party::setMode(int m)
   }
 }
 
-<<<<<<< HEAD
 void Party::updateFollowers() {
-	Soldier* prev=nullptr;
-	for (auto i = members.rbegin(); i != members.rend();++i) {
+	Soldier* prev = nullptr;
+	for (auto i = members.rbegin(); i != members.rend(); ++i) {
 		if (prev != nullptr) {
 			prev->setCurrentLeader(*i);
 		}
 		prev = *i;
 	}
-=======
+}
+
 void Party::findEnemy()
 {
 
@@ -197,6 +197,4 @@ void Party::findEnemy()
 
 void Party::update()
 {
-
->>>>>>> origin/Sprint2
 }

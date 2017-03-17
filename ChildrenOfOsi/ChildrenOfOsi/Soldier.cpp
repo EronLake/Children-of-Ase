@@ -15,19 +15,9 @@ aggroRange(Soldier::DEFAULT_AGGRO_RANGE),
 pursuitRange(Soldier::DEFAULT_PURSUIT_RANGE),
 cdTime(0), swingLeft(true)
 {
-  /*key = "Soldier" + std::to_string(getID()) + "_0";
-  cdTime = 0;
-  ase = 0;
-  maxAse = 0;
-  stamina = 100;
-  maxStamina = 100;
-<<<<<<< HEAD
-  swingLeft = true;
   evasionBound = new Rectangle();
-=======
-  swingLeft = true;*/
+  swingLeft = true;
   setType(WorldObj::TYPE_SOLDIER);
->>>>>>> origin/Sprint2
 }
 
 Soldier::Soldier(Vector2f p_topLeft, float p_width, float p_height): NPC(p_topLeft, p_width, p_height),
@@ -38,19 +28,9 @@ aggroRange(Soldier::DEFAULT_AGGRO_RANGE),
 pursuitRange(Soldier::DEFAULT_PURSUIT_RANGE),
 cdTime(0), swingLeft(true)
 {
-  /*key = "Soldier" + std::to_string(getID()) + "_0";
-  cdTime = 0;
-  ase = 0;
-  maxAse = 0;
-  stamina = 100;
-  maxStamina = 100;
-<<<<<<< HEAD
   swingLeft = true;
   evasionBound = new Rectangle();
-=======
-  swingLeft = true;*/
   setType(WorldObj::TYPE_SOLDIER);
->>>>>>> origin/Sprint2
 }
 
 void Soldier::addAttackType(Attack* a)
