@@ -28,4 +28,6 @@ public:
 	void reevaluate_state(int me, int them);
 
 	void execute();
+
+	bool give_as_quest(Action* action);
 };

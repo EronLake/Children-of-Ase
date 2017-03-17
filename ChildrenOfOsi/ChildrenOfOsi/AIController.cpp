@@ -160,3 +160,22 @@ void AIController::execute() {
 
 	}
 }
+
+bool AIController::give_as_quest(Action* action) {
+	Hero* me = action->getOwner();
+	Hero* them = action->getReceiver();
+	Action* curr_goal = &hero_planners[me->name]->get_current_end_state();
+	for (auto postcond_key : action->succ_postconds) {
+		Postcondition* post = postcond_key.second.get();
+		if (post->get_type() != "relationship") //Skip if post_cond is not a RelPost
+		{
+			continue;
+		}
+		RelPost* post_cond = dynamic_cast<RelPost*>(post);
+		string pre_fulfilled = post_cond->fulfills_which(curr_goal->preConditionsNeeded(me, them), curr_goal->preconds);
+		if (pre_fulfilled == "\0")  //Skip if post_cond fulfills no pre-conditions
+		{         
+			continue;
+		}
+	}
+}
