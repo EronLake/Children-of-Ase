@@ -81,9 +81,15 @@ std::vector<std::vector<dialogue_point>> DialogueHelper::get_possible_conv_pts()
 	return possible_conv_pts;
 }
 
-std::vector<std::vector<dialogue_point>> DialogueHelper::get_possible_reply_pts()
+std::vector<dialogue_point> DialogueHelper::get_possible_reply_pts(std:: string point)
 {
-	return possible_reply_pts;
+	std::vector<dialogue_point> reply;
+	for (int i = 0; i < possible_reply_pts[3].size(); i++) {
+		if (possible_reply_pts[3][i][0].compare("denied") == 0 || possible_reply_pts[3][i][0].compare(point) == 0) {
+			reply.push_back({ possible_reply_pts[3][i] });
+		}
+	}
+	return reply;
 }
 
 
