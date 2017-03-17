@@ -287,7 +287,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 
 	//load sprite from a configuration file?
 	blank->setFile("Assets/Sprites/blank.png", 1);
-	Rectangle::tex->setFile("Assets/Sprites/border.png", 1);
+	Rectangle::tex->setFile("Assets/Sprites/betterborder.png", 1);
 	border->setFile("Assets/Sprites/border.png", 1);
 	objTexture->setFile("Assets/Sprites/YemojasHouse.png",1);
 
@@ -308,8 +308,8 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	rightAtkTex->setFile("Assets/Sprites/ShangoRightSwingEffect.png", 24);
 	upAtk2Tex->setFile("Assets/Sprites/ShangoBackLunge.png", 7);
 	downAtk2Tex->setFile("Assets/Sprites/ShangoForwardLunge.png", 7);
-	leftAtk2Tex->setFile("Assets/Sprites/ShangoLeftSwingLunge.png", 7);
-	rightAtk2Tex->setFile("Assets/Sprites/ShangoRightSwingLunge.png", 7);
+	leftAtk2Tex->setFile("Assets/Sprites/ShangoLeftLunge.png", 7);
+	rightAtk2Tex->setFile("Assets/Sprites/ShangoRightLunge.png", 7);
 	upHurtTex->setFile("Assets/Sprites/ShangoBackRecoil.png", 18);
 	downHurtTex->setFile("Assets/Sprites/ShangoForwardRecoil.png", 18);
 	leftHurtTex->setFile("Assets/Sprites/ShangoLeftRecoil.png", 18);
@@ -341,8 +341,8 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	ss_rightIdleTex->setFile("Assets/Sprites/SilverSoldierRightIdle.png", 22);
 	ss_upAtkTex->setFile("Assets/Sprites/SilverSoldierBackSwing.png", 24);
 	ss_downAtkTex->setFile("Assets/Sprites/SilverSoldierForwardSwing.png", 24);
-	ss_leftAtkTex->setFile("Assets/Sprites/SilverSoldierLeftSwingEffect.png", 24);
-	ss_rightAtkTex->setFile("Assets/Sprites/SilverSoldierRightSwingEffect.png", 24);
+	ss_leftAtkTex->setFile("Assets/Sprites/SilverSoldierLeftSwing.png", 24);
+	ss_rightAtkTex->setFile("Assets/Sprites/SilverSoldierRightSwing.png", 24);
 	ss_upHurtTex->setFile("Assets/Sprites/SilverSoldierBackRecoil.png", 18);
 	ss_downHurtTex->setFile("Assets/Sprites/SilverSoldierForwardRecoil.png", 18);
 	ss_leftHurtTex->setFile("Assets/Sprites/SilverSoldierLeftRecoil.png", 18);
@@ -448,7 +448,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	spin->setDmg(7);
 	spin->setSpeed(15);
 	spin->setDestroy(false);
-	spin->setDuration(5);
+	spin->setDuration(7);
 	spin->setBaseDir(6);
 	spin->setCoolDown(100);
 	spin->setPause(48);
@@ -459,7 +459,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	spin2->setDmg(7);
 	spin2->setSpeed(15);
 	spin2->setDestroy(false);
-	spin2->setDuration(5);
+	spin2->setDuration(7);
 	spin2->setBaseDir(6);
 	spin2->setCoolDown(0);
 	spin2->setPause(53);
@@ -470,7 +470,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	spin3->setDmg(7);
 	spin3->setSpeed(15);
 	spin3->setDestroy(false);
-	spin3->setDuration(5);
+	spin3->setDuration(7);
 	spin3->setBaseDir(6);
 	spin3->setCoolDown(0);
 	spin3->setPause(58);
@@ -481,7 +481,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	spin4->setDmg(7);
 	spin4->setSpeed(15);
 	spin4->setDestroy(false);
-	spin4->setDuration(5);
+	spin4->setDuration(7);
 	spin4->setBaseDir(6);
 	spin4->setCoolDown(0);
 	spin4->setPause(63);
