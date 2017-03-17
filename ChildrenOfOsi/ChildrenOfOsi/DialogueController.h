@@ -44,7 +44,7 @@ private:
 	//4 is npc response
 	static DialogueHelper dialogue;
 	static std::vector<std::vector<dialogue_point>> options;
-	static std::vector<std::vector<dialogue_point>> replyOptions;
+	static std::vector<dialogue_point> replyOptions;
 	static std::string message;
 	static int optionsIndex;
 	static int select;
