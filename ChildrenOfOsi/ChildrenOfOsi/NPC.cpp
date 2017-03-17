@@ -98,14 +98,4 @@ int NPC::getMode()
 	return move_mode;
 }
 
-WorldObj * NPC::getCurrentEnemy()
-{
-	return currentEnemy;
-}
-
-void NPC::setCurrentEnemy(WorldObj * p_enemy)
-{
-	currentEnemy = p_enemy;
-}
-
 

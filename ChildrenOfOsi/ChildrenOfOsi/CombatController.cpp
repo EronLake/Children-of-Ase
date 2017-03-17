@@ -181,14 +181,13 @@ void CombatController::fight(Soldier* sold1, int state) {
 }
 
 void CombatController::follow(Soldier* sold1, int state) {
-	Soldier* sold2 = sold1->getParty()->getLeader();
-	if (sold1 == sold2)return;
-	sold1->setCurrentEnemy(sold2);
-	sold1->waypoint = Vector2f(sold1->getCurrentEnemy()->getX() + (sold1->getCurrentEnemy()->getWidth() / 4), sold1->getCurrentEnemy()->getY() + (sold1->getCurrentEnemy()->getHeight() / 4));
-	sold1->destination = Vector2f(sold1->getCurrentEnemy()->getX() + (sold1->getCurrentEnemy()->getWidth() / 4), sold1->getCurrentEnemy()->getY() + (sold1->getCurrentEnemy()->getHeight() / 4));
+	Soldier* sold2 = sold1->getCurrentLeader();
+	if (sold2==nullptr)return;
+	sold1->waypoint = Vector2f(sold2->getX() + (sold2->getWidth() / 4), sold2->getY() + (sold2->getHeight() / 4));
+	sold1->destination = Vector2f(sold2->getX() + (sold2->getWidth() / 4), sold2->getY() + (sold2->getHeight() / 4));
 
 	//enemy is facing up
-	if (sold1->getCurrentEnemy()->getDirection() == 2) {
+	if (sold2->getDirection() == 2) {
 
 		sold1->waypoint.shiftYloc(-100);
 		sold1->destination.shiftYloc(-100);
@@ -197,7 +196,7 @@ void CombatController::follow(Soldier* sold1, int state) {
 
 		//enemy is facing right
 	}
-	else if (sold1->getCurrentEnemy()->getDirection() == 4) {
+	else if (sold2->getDirection() == 4) {
 
 		sold1->waypoint.shiftXloc(60);
 		sold1->destination.shiftXloc(60);
@@ -205,14 +204,14 @@ void CombatController::follow(Soldier* sold1, int state) {
 		sold1->destination.shiftYloc(-30);
 	}
 	//enemy is facing left
-	else if (sold1->getCurrentEnemy()->getDirection() == 6) {
+	else if (sold2->getDirection() == 6) {
 		sold1->waypoint.shiftXloc(-100);
 		sold1->destination.shiftXloc(-100);
 		sold1->waypoint.shiftYloc(-30);
 		sold1->destination.shiftYloc(-30);
 	}
 	//enemy is facing down
-	else if (sold1->getCurrentEnemy()->getDirection() == 8) {
+	else if (sold2->getDirection() == 8) {
 		sold1->waypoint.shiftYloc(60);
 		sold1->destination.shiftYloc(60);
 		sold1->waypoint.shiftXloc(-30);

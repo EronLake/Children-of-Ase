@@ -110,3 +110,13 @@ void Party::setMode(int m)
     }
   }
 }
+
+void Party::updateFollowers() {
+	Soldier* prev=nullptr;
+	for (auto i = members.rbegin(); i != members.rend();++i) {
+		if (prev != nullptr) {
+			prev->setCurrentLeader(*i);
+		}
+		prev = *i;
+	}
+}

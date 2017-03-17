@@ -15,6 +15,7 @@ Soldier::Soldier(float x, float y, bool col): NPC(x, y, col)
   stamina = 100;
   maxStamina = 100;
   swingLeft = true;
+  evasionBound = new Rectangle();
 }
 
 Soldier::Soldier(Vector2f p_topLeft, float p_width, float p_height): NPC(p_topLeft, p_width, p_height)
@@ -27,6 +28,7 @@ Soldier::Soldier(Vector2f p_topLeft, float p_width, float p_height): NPC(p_topLe
   stamina = 100;
   maxStamina = 100;
   swingLeft = true;
+  evasionBound = new Rectangle();
 }
 
 void Soldier::addAttackType(Attack* a)
@@ -269,4 +271,45 @@ int Soldier::getAttackIndex(Attack* atk)
 bool Soldier::getCombo()
 {
   return (cdTime > 0 && cdTime < 15);
+}
+
+
+bool Soldier::targetIsWithinRange(Rectangle* _bound) {
+
+	return (combatMoveDestination.getXloc() > _bound->getX()
+		&& combatMoveDestination.getXloc() < (_bound->getX() + _bound->getWidth())
+		&& combatMoveDestination.getYloc() > _bound->getY()
+		&& combatMoveDestination.getYloc() < (_bound->getY() + _bound->getHeight()));
+}
+
+Vector2f Soldier::getEvadeRange(Soldier * _enemy)
+{
+	//gen the rectangle bound to move
+	float leftBound = _enemy->getX() - _enemy->getEvasionRadius();
+	evasionBound = new Rectangle(Vector2f((_enemy->getX() - _enemy->getEvasionRadius()), (_enemy->getY() - _enemy->getEvasionRadius())), 2 * _enemy->getEvasionRadius(), 2 * _enemy->getEvasionRadius());
+	if (targetIsWithinRange(evasionBound)) {
+		cout << "COMBAT DESTINATION FROM EVADERANGE IS " << combatMoveDestination.getXloc() << ", " << combatMoveDestination.getYloc() << endl;
+		return combatMoveDestination;
+	}
+	float XCoord = rand() % (int)evasionBound->getWidth() + (int)evasionBound->getX();
+	float YCoord = rand() % (int)evasionBound->getHeight() + (int)evasionBound->getY();
+	combatMoveDestination = Vector2f(XCoord, YCoord);
+
+	cout << "COMBAT DESTINATION FROM EVADERANGE IS " << combatMoveDestination.getXloc() << ", " << combatMoveDestination.getYloc() << endl;
+	return combatMoveDestination;
+}
+
+Vector2f Soldier::getStrafeLocation(Soldier * _enemy)
+{
+	float XCoord;
+	if (this->getX() < ((evasionBound->getX() + evasionBound->getWidth()) / 2)) {
+		//XCoord = rand() % 50 + ((int)evasionBound->getX()+(int)evasionBound->getWidth() - 50);
+		XCoord = rand() % (int)evasionBound->getWidth() + (int)evasionBound->getX();
+	}
+	else {
+		XCoord = rand() % 50 + ((int)evasionBound->getX());
+	}
+	return Vector2f(XCoord, combatMoveDestination.getYloc());
+
+
 }

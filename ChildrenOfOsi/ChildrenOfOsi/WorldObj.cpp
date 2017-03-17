@@ -55,14 +55,6 @@ void WorldObj::offsetBody(int i, float x1, float x2, float y1, float y2) {
 
 }
 
-bool WorldObj::targetIsWithinRange(Rectangle* _bound) {
-
-	return (combatMoveDestination.getXloc() > _bound->getX()
-		&& combatMoveDestination.getXloc() < (_bound->getX() + _bound->getWidth())
-		&& combatMoveDestination.getYloc() > _bound->getY()
-		&& combatMoveDestination.getYloc() < (_bound->getY() + _bound->getHeight()));
-}
-
 void WorldObj::setDirWithBase(int od, bool update)
 {
 	if (update)baseDir = direction;
@@ -109,37 +101,6 @@ void WorldObj::face(WorldObj* other) {
 }
 
 //takes in a worldobj, returns a vector2f denoting where current obj is suppose to move to
-Vector2f WorldObj::getEvadeRange(WorldObj * _enemy)
-{
-	//gen the rectangle bound to move
-	float leftBound = _enemy->getX() - _enemy->getEvasionRadius();
-	evasionBound = new Rectangle(Vector2f((_enemy->getX() - _enemy->getEvasionRadius()), (_enemy->getY() - _enemy->getEvasionRadius())), 2 *_enemy->getEvasionRadius(), 2 * _enemy->getEvasionRadius());
-	if (targetIsWithinRange(evasionBound)) {
-		cout << "COMBAT DESTINATION FROM EVADERANGE IS " << combatMoveDestination.getXloc() << ", " << combatMoveDestination.getYloc() << endl;
-		return combatMoveDestination;
-	}
-	float XCoord = rand() % (int)evasionBound->getWidth() + (int)evasionBound->getX();
-	float YCoord = rand() % (int)evasionBound->getHeight() + (int)evasionBound->getY();
-	combatMoveDestination = Vector2f(XCoord, YCoord);
-
-	cout << "COMBAT DESTINATION FROM EVADERANGE IS " << combatMoveDestination.getXloc() << ", " << combatMoveDestination.getYloc() << endl;
-	return combatMoveDestination;
-}
-
-Vector2f WorldObj::getStrafeLocation(WorldObj * _enemy)
-{
-	float XCoord;
-	if (this->getX() < ((evasionBound->getX() + evasionBound->getWidth()) / 2)) {
-		//XCoord = rand() % 50 + ((int)evasionBound->getX()+(int)evasionBound->getWidth() - 50);
-		XCoord = rand() % (int)evasionBound->getWidth() + (int)evasionBound->getX();
-	}
-	else {
-		XCoord = rand() % 50 + ((int)evasionBound->getX());
-	}
-	return Vector2f(XCoord, combatMoveDestination.getYloc());
-
-	
-}
 
 void WorldObj::_print()
 {

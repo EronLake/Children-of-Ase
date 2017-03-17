@@ -68,6 +68,20 @@ class Soldier: public NPC
 
   vector<Attack*> getCurrentAttacks() { return currentAttacks; };
 
+  void setEvasionRadius(int _radius) { this->evasionRadius = _radius; }
+
+  int getEvasionRadius() { return this->evasionRadius; };
+  Vector2f getEvadeRange(Soldier* _enemy);
+  Vector2f getCombatMoveDestination() { return this->combatMoveDestination; };
+  Vector2f getStrafeLocation(Soldier* _enemy);
+
+
+  Soldier* getCurrentEnemy() { return currentEnemy; };
+  void setCurrentEnemy(Soldier* p_enemy) { currentEnemy = p_enemy; };
+
+  Soldier* getCurrentLeader() { return currentLeader; };
+  void setCurrentLeader(Soldier* p_leader) { currentLeader = p_leader; };
+
   private:
 
   Party* party;
@@ -90,5 +104,14 @@ class Soldier: public NPC
 
   bool hasAttacks();
   vector<Attack*> currentAttacks;
+
+  int evasionRadius = 225;
+  Vector2f combatMoveDestination;
+  Rectangle* evasionBound;
+
+  bool targetIsWithinRange(Rectangle* _bound);
+
+  Soldier* currentEnemy;
+  Soldier* currentLeader;
 };
 

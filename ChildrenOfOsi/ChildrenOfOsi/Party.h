@@ -41,6 +41,7 @@ class Party
   void addToParty(Soldier *, bool);
   void removeSoldier(Soldier *);
   void setMode(int);
+  void updateFollowers();
 
   private:
 

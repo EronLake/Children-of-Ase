@@ -825,6 +825,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	party->addToParty(silverSoldier, false);
 	staticRec->setParty(party);
 	party->addToParty(staticRec, false);
+	party->updateFollowers();
 
 	vector<WorldObj*> enemyVec;
 	//osi::GameWindow::init();
@@ -1821,133 +1822,133 @@ void ERONS_LOOP(QuadTree* _QuadTree) {
 		to skills and cooldowns and what not,
 		* WHEN NPC REACHES DESTINATION, destination is being automatically set to (0,0)!!! */
 		//attack mode
-		enemyVec.clear();
-		enemyVec.push_back(Alex);
-		if (enemyVec.empty()) silverSoldier->setEvade(true);
-		for (auto it : enemyVec) {
-			//if discovered Alex, set silverSoldier combat mode to 0(attack).
-			if (silverSoldier->getCurrentEnemy() != nullptr) break;
-			if (it == Alex) {
-				cout << "*************************************FOUND ENEMY****************************************" << endl;
-				//silverSoldier->setMode(0);
-				OSAtkMode = true;
-				silverSoldier->setCurrentEnemy(it);
-				break;
-			}
-		}
+		//enemyVec.clear();
+		//enemyVec.push_back(Alex);
+		//if (enemyVec.empty()) silverSoldier->setEvade(true);
+		//for (auto it : enemyVec) {
+		//	//if discovered Alex, set silverSoldier combat mode to 0(attack).
+		//	if (silverSoldier->getCurrentEnemy() != nullptr) break;
+		//	if (it == Alex) {
+		//		cout << "*************************************FOUND ENEMY****************************************" << endl;
+		//		//silverSoldier->setMode(0);
+		//		OSAtkMode = true;
+		//		silverSoldier->setCurrentEnemy(it);
+		//		break;
+		//	}
+		//}
 
-		if (silverSoldier->getCool()) {
-			silverSoldier->setEvade(false);
-		}
-		else if (silverSoldier->destination == silverSoldier->getLoc() || silverSoldier->destination == Vector2f(0, 0)) {
-			silverSoldier->setEvade(true);
-			//silverSoldier->waypoint = Vector2f(-1, -1);
-			float x = rand() % 300 + 100;
-			int x2 = rand() % 2;
-			float y = rand() % 300 + 100;
-			int y2 = rand() % 2;
-			if (x2 == 0)x = -x;
-			if (y2 == 0)y = -y;
-			silverSoldier->destination = Vector2f(silverSoldier->getCurrentEnemy()->getX() + x, silverSoldier->getCurrentEnemy()->getY() + y);
-			silverSoldier->waypoint = Vector2f(silverSoldier->getCurrentEnemy()->getX() + x, silverSoldier->getCurrentEnemy()->getY() + y);
-		}
+		//if (silverSoldier->getCool()) {
+		//	silverSoldier->setEvade(false);
+		//}
+		//else if (silverSoldier->destination == silverSoldier->getLoc() || silverSoldier->destination == Vector2f(0, 0)) {
+		//	silverSoldier->setEvade(true);
+		//	//silverSoldier->waypoint = Vector2f(-1, -1);
+		//	float x = rand() % 300 + 100;
+		//	int x2 = rand() % 2;
+		//	float y = rand() % 300 + 100;
+		//	int y2 = rand() % 2;
+		//	if (x2 == 0)x = -x;
+		//	if (y2 == 0)y = -y;
+		//	silverSoldier->destination = Vector2f(silverSoldier->getCurrentEnemy()->getX() + x, silverSoldier->getCurrentEnemy()->getY() + y);
+		//	silverSoldier->waypoint = Vector2f(silverSoldier->getCurrentEnemy()->getX() + x, silverSoldier->getCurrentEnemy()->getY() + y);
+		//}
 
-		//if OS has an enemy, move to the enemy
-		if (silverSoldier->getCurrentEnemy() != nullptr && !silverSoldier->getEvade()) {//&& silverSoldier->destination != Vector2f(0,0)) {
-			cout << "*************************************************MOVING TO ENEMY******************************************" << endl;
-			silverSoldier->waypoint = Vector2f(silverSoldier->getCurrentEnemy()->getX() + (silverSoldier->getCurrentEnemy()->getWidth() / 4), silverSoldier->getCurrentEnemy()->getY() + (silverSoldier->getCurrentEnemy()->getHeight() / 4));
-			silverSoldier->destination = Vector2f(silverSoldier->getCurrentEnemy()->getX() + (silverSoldier->getCurrentEnemy()->getWidth() / 4), silverSoldier->getCurrentEnemy()->getY() + (silverSoldier->getCurrentEnemy()->getHeight() / 4));
+		////if OS has an enemy, move to the enemy
+		//if (silverSoldier->getCurrentEnemy() != nullptr && !silverSoldier->getEvade()) {//&& silverSoldier->destination != Vector2f(0,0)) {
+		//	cout << "*************************************************MOVING TO ENEMY******************************************" << endl;
+		//	silverSoldier->waypoint = Vector2f(silverSoldier->getCurrentEnemy()->getX() + (silverSoldier->getCurrentEnemy()->getWidth() / 4), silverSoldier->getCurrentEnemy()->getY() + (silverSoldier->getCurrentEnemy()->getHeight() / 4));
+		//	silverSoldier->destination = Vector2f(silverSoldier->getCurrentEnemy()->getX() + (silverSoldier->getCurrentEnemy()->getWidth() / 4), silverSoldier->getCurrentEnemy()->getY() + (silverSoldier->getCurrentEnemy()->getHeight() / 4));
 
-			//enemy is facing up
-			if (silverSoldier->getCurrentEnemy()->getDirection() == 8) {
+		//	//enemy is facing up
+		//	if (silverSoldier->getCurrentEnemy()->getDirection() == 8) {
 
-				silverSoldier->waypoint.shiftYloc(-80);
-				silverSoldier->destination.shiftYloc(-80);
-				silverSoldier->waypoint.shiftXloc(-30);
-				silverSoldier->destination.shiftXloc(-30);
+		//		silverSoldier->waypoint.shiftYloc(-80);
+		//		silverSoldier->destination.shiftYloc(-80);
+		//		silverSoldier->waypoint.shiftXloc(-30);
+		//		silverSoldier->destination.shiftXloc(-30);
 
-				//enemy is facing right
-			}
-			else if (silverSoldier->getCurrentEnemy()->getDirection() == 6) {
+		//		//enemy is facing right
+		//	}
+		//	else if (silverSoldier->getCurrentEnemy()->getDirection() == 6) {
 
-				silverSoldier->waypoint.shiftXloc(30);
-				silverSoldier->destination.shiftXloc(30);
-				silverSoldier->waypoint.shiftYloc(-30);
-				silverSoldier->destination.shiftYloc(-30);
-			}
-			//enemy is facing left
-			else if (silverSoldier->getCurrentEnemy()->getDirection() == 4) {
-				silverSoldier->waypoint.shiftXloc(-80);
-				silverSoldier->destination.shiftXloc(-80);
-				silverSoldier->waypoint.shiftYloc(-30);
-				silverSoldier->destination.shiftYloc(-30);
-			}
-			//enemy is facing down
-			else if (silverSoldier->getCurrentEnemy()->getDirection() == 2) {
-				silverSoldier->waypoint.shiftYloc(30);
-				silverSoldier->destination.shiftYloc(30);
-				silverSoldier->waypoint.shiftXloc(-30);
-				silverSoldier->destination.shiftXloc(-30);
-			}
+		//		silverSoldier->waypoint.shiftXloc(30);
+		//		silverSoldier->destination.shiftXloc(30);
+		//		silverSoldier->waypoint.shiftYloc(-30);
+		//		silverSoldier->destination.shiftYloc(-30);
+		//	}
+		//	//enemy is facing left
+		//	else if (silverSoldier->getCurrentEnemy()->getDirection() == 4) {
+		//		silverSoldier->waypoint.shiftXloc(-80);
+		//		silverSoldier->destination.shiftXloc(-80);
+		//		silverSoldier->waypoint.shiftYloc(-30);
+		//		silverSoldier->destination.shiftYloc(-30);
+		//	}
+		//	//enemy is facing down
+		//	else if (silverSoldier->getCurrentEnemy()->getDirection() == 2) {
+		//		silverSoldier->waypoint.shiftYloc(30);
+		//		silverSoldier->destination.shiftYloc(30);
+		//		silverSoldier->waypoint.shiftXloc(-30);
+		//		silverSoldier->destination.shiftXloc(-30);
+		//	}
 
-			//gameplay_functions->move_toward(silverSoldier);
+		//	//gameplay_functions->move_toward(silverSoldier);
 
-			//npc is at enemy destination, attack.
-			if (silverSoldier->destination == silverSoldier->getLoc()) {
-				silverSoldier->face(silverSoldier->getCurrentEnemy());
-				cout << "COOL DOWN FOR ATTACK IS " << silverSoldier->getCool() << endl;
-				if (silverSoldier->getCool()) {
-					std::cout << "Pressed F" << std::endl;
-					//gameplay_functions->special(silverSoldier, 0);
-					silverSoldier->meleeAttack();
-					gameplay_functions->melee(silverSoldier);
-				}
+		//	//npc is at enemy destination, attack.
+		//	if (silverSoldier->destination == silverSoldier->getLoc()) {
+		//		silverSoldier->face(silverSoldier->getCurrentEnemy());
+		//		cout << "COOL DOWN FOR ATTACK IS " << silverSoldier->getCool() << endl;
+		//		if (silverSoldier->getCool()) {
+		//			std::cout << "Pressed F" << std::endl;
+		//			//gameplay_functions->special(silverSoldier, 0);
+		//			silverSoldier->meleeAttack();
+		//			gameplay_functions->melee(silverSoldier);
+		//		}
 
 
-			}
-		}
+		//	}
+		//}
 
-		////evade mode
-		if (silverSoldier->getCurrentEnemy() != nullptr && silverSoldier->getEvade()) {//&& silverSoldier->destination != Vector2f(0, 0)) {
-																				   //if OS is in evade mode, use the getEvadeRange method to find the waypoint and set it to destination
-			if (silverSoldier->destination == Vector2f(-1, -1)) {
-				cout << "****INSIDE THE EVADE MODE SETTER*****" << endl;
-				//silverSoldier->waypoint = silverSoldier->getEvadeRange(silverSoldier->getCurrentEnemy());
-				silverSoldier->destination = silverSoldier->getEvadeRange(silverSoldier->getCurrentEnemy());
-				cout << "shango waypoint is " << silverSoldier->waypoint.getXloc() << silverSoldier->waypoint.getYloc() << endl;
-			}
-			//if reached destination, strafe left or right
-			if (silverSoldier->getLoc() == silverSoldier->destination) {
-				cout << "******* INSIDE THE EVADE MODE STRAFE *******" << endl;
-				//silverSoldier->waypoint = silverSoldier->getStrafeLocation(silverSoldier->getCurrentEnemy());
-				silverSoldier->destination = silverSoldier->getEvadeRange(silverSoldier->getCurrentEnemy());
-				cout << "silverSoldier destination inside strafe function is " << silverSoldier->waypoint.getXloc() << ", " << silverSoldier->waypoint.getYloc() << endl;
-			}
-			/*if (silverSoldier->waypoint != Vector2f(0, 0) && state == 0) { //Hero has a waypoint to the desination, and not in dialog
-			gameplay_functions->move_toward(silverSoldier); //Take a step towards the current waypoint
-			//	std::cout << "Request a step" << std::endl;
-			}
-			else if (state == 0)                //Hero needs waypoints to destination, and not in dialog
-			{
-			gameplay_functions->get_path(silverSoldier); //Generate waypoints to destination
-			}/**/
-			//gameplay_functions->move_toward(silverSoldier);
-		}
-		//	ai->graph.insert(silverSoldier->destination);
-		//ai->graph.insert(silverSoldier->getLoc());
-		if (silverSoldier->destination != Vector2f(0, 0)) { //Hero has a destination
-			if (silverSoldier->waypoint != Vector2f(0, 0) && state == 0) { //Hero has a waypoint to the desination, and not in dialog
-				gameplay_functions->move_toward(silverSoldier); //Take a step towards the current waypoint
-															  //	std::cout << "Request a step" << std::endl;
-			}
-			else if (state == 0)                //Hero needs waypoints to destination, and not in dialog
-			{
-				gameplay_functions->get_path(silverSoldier); //Generate waypoints to destination
-			}
-		}
-		else {
+		//////evade mode
+		//if (silverSoldier->getCurrentEnemy() != nullptr && silverSoldier->getEvade()) {//&& silverSoldier->destination != Vector2f(0, 0)) {
+		//																		   //if OS is in evade mode, use the getEvadeRange method to find the waypoint and set it to destination
+		//	if (silverSoldier->destination == Vector2f(-1, -1)) {
+		//		cout << "****INSIDE THE EVADE MODE SETTER*****" << endl;
+		//		//silverSoldier->waypoint = silverSoldier->getEvadeRange(silverSoldier->getCurrentEnemy());
+		//		silverSoldier->destination = silverSoldier->getEvadeRange(silverSoldier->getCurrentEnemy());
+		//		cout << "shango waypoint is " << silverSoldier->waypoint.getXloc() << silverSoldier->waypoint.getYloc() << endl;
+		//	}
+		//	//if reached destination, strafe left or right
+		//	if (silverSoldier->getLoc() == silverSoldier->destination) {
+		//		cout << "******* INSIDE THE EVADE MODE STRAFE *******" << endl;
+		//		//silverSoldier->waypoint = silverSoldier->getStrafeLocation(silverSoldier->getCurrentEnemy());
+		//		silverSoldier->destination = silverSoldier->getEvadeRange(silverSoldier->getCurrentEnemy());
+		//		cout << "silverSoldier destination inside strafe function is " << silverSoldier->waypoint.getXloc() << ", " << silverSoldier->waypoint.getYloc() << endl;
+		//	}
+		//	/*if (silverSoldier->waypoint != Vector2f(0, 0) && state == 0) { //Hero has a waypoint to the desination, and not in dialog
+		//	gameplay_functions->move_toward(silverSoldier); //Take a step towards the current waypoint
+		//	//	std::cout << "Request a step" << std::endl;
+		//	}
+		//	else if (state == 0)                //Hero needs waypoints to destination, and not in dialog
+		//	{
+		//	gameplay_functions->get_path(silverSoldier); //Generate waypoints to destination
+		//	}/**/
+		//	//gameplay_functions->move_toward(silverSoldier);
+		//}
+		////	ai->graph.insert(silverSoldier->destination);
+		////ai->graph.insert(silverSoldier->getLoc());
+		//if (silverSoldier->destination != Vector2f(0, 0)) { //Hero has a destination
+		//	if (silverSoldier->waypoint != Vector2f(0, 0) && state == 0) { //Hero has a waypoint to the desination, and not in dialog
+		//		gameplay_functions->move_toward(silverSoldier); //Take a step towards the current waypoint
+		//													  //	std::cout << "Request a step" << std::endl;
+		//	}
+		//	else if (state == 0)                //Hero needs waypoints to destination, and not in dialog
+		//	{
+		//		gameplay_functions->get_path(silverSoldier); //Generate waypoints to destination
+		//	}
+		//}
+		//else {
 
-		}
+		//}
 
 		if (state == 0) {
 			//LOG("ERROR AFTER PRESSING Q TO QUIT THE DIALOGUE GUI");
