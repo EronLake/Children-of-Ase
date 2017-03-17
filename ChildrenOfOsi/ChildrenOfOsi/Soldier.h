@@ -1,5 +1,7 @@
 #pragma once
 
+#include <cmath>
+
 #include "Attack.h"
 #include "Containers.h"
 #include "NPC.h"
@@ -31,9 +33,11 @@ class Soldier: public NPC
 
   bool getCool();
   bool getCool(int c);
-  int timeCD() { return cdTime; };
-  int getStamina() { return stamina; };
-  int getAse() { return ase; };
+  int timeCD() { return this->cdTime; };
+  int getStamina() { return this->stamina; };
+  int getMaxStamina() { return this->maxStamina; }
+  int getAse() { return this->ase; };
+  int getMaxAse() { return this->maxAse; }
   int getAttackIndex(Attack* atk);
 
   bool isAllyOf(Soldier *);
@@ -41,20 +45,31 @@ class Soldier: public NPC
   bool isEnemyOf(Soldier  *);
   bool isEnemyOf(Party *);
 
-  void setParty(Party* p) { party = p; };
-  void setInCombat(bool c) { inCombat = c; };
-  void setEvade(bool e) { evade = e; };
-  void setHold(bool h) { holdPos = h; };
-  void setPatrol(bool p) { patrol = p; };
-  void setStamina(int s) { stamina=s; };
-  void setAse(int a) { ase = a; };
-  void setMaxStamina(int s) { maxStamina = s; };
-  void setMaxAse(int a) { maxAse = a; };
-  void flipSwing() { swingLeft = !swingLeft; };
+  std::size_t getAggroRange() { return this->aggroRange; }
+  std::size_t getPursuitRange() { return this->pursuitRange; }
+  bool isInAggroRangeOf(WorldObj *);
+  bool isInAggroRangeOf(Party *);
+  bool isInPursuitRangeOf(WorldObj *);
+  bool isInPursuitRangeOf(Party *);
+
+  void setParty(Party* p) { this->party = p; };
+  void setInCombat(bool c) { this->inCombat = c; };
+  void setEvade(bool e) { this->evade = e; };
+  void setHold(bool h) { this->holdPos = h; };
+  void setPatrol(bool p) { this->patrol = p; };
+  void setAggroRange(std::size_t range) { this->aggroRange = min(range, this->pursuitRange); }
+  void setPursuitRange(std::size_t range) { this->pursuitRange = max(range, this->aggroRange); }
+
+  void setStamina(int s) { this->stamina=s; };
+  void setMaxStamina(int s) { this->maxStamina = s; };
+  void setAse(int a) { this->ase = a; };
+  void setMaxAse(int a) { this->maxAse = a; };
+  void flipSwing() { this->swingLeft = !swingLeft; };
 
   void meleeAttack();
   void addAttackType(Attack* a);
   void newAttack(int i, Attack* a);
+  bool hasAttacks();
   Attack * nextAttack();
 
   void updateCD();
@@ -84,13 +99,18 @@ class Soldier: public NPC
 
   private:
 
-  Party* party;
+  static constexpr std::size_t DEFAULT_AGGRO_RANGE = 200;
+  static constexpr std::size_t DEFAULT_PURSUIT_RANGE = 500;
+
+  Party *party;
   int instances;
 
   bool inCombat;
   bool evade;
   bool holdPos;
   bool patrol;
+  std::size_t aggroRange;
+  std::size_t pursuitRange;
 
   int cdTime;
   int stamina;
@@ -102,7 +122,6 @@ class Soldier: public NPC
   std::string key;
   std::string atkey;
 
-  bool hasAttacks();
   vector<Attack*> currentAttacks;
 
   int evasionRadius = 225;

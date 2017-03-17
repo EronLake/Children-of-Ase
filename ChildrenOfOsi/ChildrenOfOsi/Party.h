@@ -19,10 +19,10 @@ class Party
   static constexpr int MODE_PATROL = 3;
   static constexpr int MODE_FLEE = 4;
 
-  Party() = default;
-  Party(Alliance *a): faction(a) {}
-  Party(Soldier *leader): leader(leader) {}
-  Party(Alliance *a, Soldier *leader): faction(a), leader(leader) {}
+  Party();
+  Party(Alliance *a);
+  Party(Soldier *leader);
+  Party(Alliance *a, Soldier *leader);
   Party(Alliance *a, Soldier *leader, const vector<Soldier *>& members);
   ~Party() = default;
 
@@ -40,14 +40,20 @@ class Party
   void setLeader(Soldier *);
   void addToParty(Soldier *, bool);
   void removeSoldier(Soldier *);
+  void clear();
   void setMode(int);
   void updateFollowers();
 
+  void findEnemy();
+  void update();
+
   private:
 
-  Alliance *faction; // LOL
+  Alliance *faction;
   vector<Soldier *> members;
   Soldier *leader;
+
+  LivingObj *target;
   int mode;
 };
 
