@@ -94,18 +94,15 @@ void WorldObj::face(WorldObj* other) {
 	int f = 6;
 	if (getX() > other->getX()) {
 		if (getY() > other->getY()) {
-			if (getX() > other->getX() + other->getWidth()) {
+			if (getX() > other->getX() + other->body[0].getWidth()) {
 				f = 4;
 			}
 			else {
 				f = 8;
 			}
 		}
-		else if (getY() < other->getY()){
-			f = 2;
-		}
 		else {
-
+			f = 2;
 		}
 	}
 	setDirection(f);

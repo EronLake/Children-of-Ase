@@ -689,17 +689,17 @@
       "y" : 155.0
    },
    "Jungle_Element_Num_52" : {
-      "bodyx1" : 1000,
-      "bodyx2" : 1000,
-      "bodyy1" : 1000,
-      "bodyy2" : 1000,
+      "bodyx1" : 0.0,
+      "bodyx2" : 0.0,
+      "bodyy1" : 0.0,
+      "bodyy2" : 0.0,
       "frame_num" : 1,
-      "hight" : 500,
+      "hight" : 500.0,
       "name" : "Jungle_Element_Num_52",
       "tex_file" : "Jungle_Bush",
-      "width" : 500,
-      "x" : 142.0,
-      "y" : 166.0
+      "width" : 500.0,
+      "x" : 144.2036285400391,
+      "y" : 164.5353546142578
    },
    "Jungle_Element_Num_53" : {
       "bodyx1" : 1000,
@@ -1339,17 +1339,17 @@
       "y" : 164.0
    },
    "Jungle_Element_Num_98" : {
-      "bodyx1" : 1000,
-      "bodyx2" : 1000,
-      "bodyy1" : 1000,
-      "bodyy2" : 1000,
+      "bodyx1" : 0.0,
+      "bodyx2" : 0.0,
+      "bodyy1" : 0.0,
+      "bodyy2" : 0.0,
       "frame_num" : 1,
-      "hight" : 500,
+      "hight" : 500.0,
       "name" : "Jungle_Element_Num_98",
       "tex_file" : "Jungle_Plant2",
-      "width" : 500,
-      "x" : 145.0,
-      "y" : 161.0
+      "width" : 500.0,
+      "x" : 143.0516357421875,
+      "y" : 163.0233459472656
    },
    "Jungle_Element_Num_99" : {
       "bodyx1" : 1000,
@@ -2392,17 +2392,17 @@
       "y" : 151.0292053222656
    },
    "Jungle_Tree_Num_82" : {
-      "bodyx1" : -1000.0,
-      "bodyx2" : -1000.0,
-      "bodyy1" : -1000.0,
-      "bodyy2" : -1000.0,
+      "bodyx1" : 0.0,
+      "bodyx2" : 0.0,
+      "bodyy1" : 0.0,
+      "bodyy2" : 0.0,
       "frame_num" : 1,
       "hight" : 500.0,
       "name" : "Jungle_Tree_Num_82",
       "tex_file" : "Jungle_Tree_2",
       "width" : 500.0,
-      "x" : 149.2297515869141,
-      "y" : 165.9138031005859
+      "x" : 150.0153350830078,
+      "y" : 163.6096343994141
    },
    "Jungle_Tree_Num_83" : {
       "bodyx1" : -1000.0,
@@ -2535,17 +2535,17 @@
       "y" : 140.0
    },
    "Jungle_Tree_Num_92" : {
-      "bodyx1" : 1000,
-      "bodyx2" : 1000,
-      "bodyy1" : 1000,
-      "bodyy2" : 1000,
+      "bodyx1" : 0.0,
+      "bodyx2" : 0.0,
+      "bodyy1" : 0.0,
+      "bodyy2" : 0.0,
       "frame_num" : 1,
-      "hight" : 500,
+      "hight" : 500.0,
       "name" : "Jungle_Tree_Num_92",
       "tex_file" : "Jungle_Tree_2",
-      "width" : 500,
-      "x" : 142.0,
-      "y" : 173.0
+      "width" : 500.0,
+      "x" : 142.9999389648438,
+      "y" : 170.0973510742188
    },
    "Jungle_Tree_Num_93" : {
       "bodyx1" : 1000,
@@ -2639,30 +2639,30 @@
       "y" : 133.0
    }, //////////////////////////////Oasis Stuff///////////////////////
    "OasisHouse2" : {
-      "bodyx1" : -1000.0,
-      "bodyx2" : -1000.0,
-      "bodyy1" : -1000.0,
-      "bodyy2" : -1000.0,
+      "bodyx1" : 0.0,
+      "bodyx2" : 0.0,
+      "bodyy1" : 0.0,
+      "bodyy2" : 0.0,
       "frame_num" : 1,
       "hight" : 500.0,
       "name" : "OasisHouse2",
       "tex_file" : "Oasis_House",
       "width" : 500.0,
-      "x" : 78.83092498779297,
-      "y" : 66.84279632568359
+      "x" : 84.22545623779297,
+      "y" : 65.83251190185547
    },
    "OasisHouse3" : {
-      "bodyx1" : -1000.0,
-      "bodyx2" : -1000.0,
-      "bodyy1" : -1000.0,
-      "bodyy2" : -1000.0,
+      "bodyx1" : 0.0,
+      "bodyx2" : 0.0,
+      "bodyy1" : 0.0,
+      "bodyy2" : 0.0,
       "frame_num" : 1,
       "hight" : 500.0,
       "name" : "OasisHouse3",
       "tex_file" : "Oasis_House",
       "width" : 600.0,
-      "x" : 91.75387573242188,
-      "y" : 69.49647521972656
+      "x" : 92.37315368652344,
+      "y" : 65.30673217773438
    },
    "OasisHouse4" : {
       "bodyx1" : 1000.0,
@@ -2768,6 +2768,19 @@
       "x" : 91.87941741943359,
       "y" : 82.25676727294922
    },
+   "barrel1" : {
+      "bodyx1" : 0.0,
+      "bodyx2" : 0.0,
+      "bodyy1" : 0.0,
+      "bodyy2" : 0.0,
+      "frame_num" : 1,
+      "hight" : 75.0,
+      "name" : "barrel1",
+      "tex_file" : "Barrel",
+      "width" : 75.0,
+      "x" : 52.62317276000977,
+      "y" : 39.25979614257813
+   },
    "barrl" : {
       "bodyx1" : 0,
       "bodyx2" : 0,
@@ -2794,6 +2807,19 @@
       "x" : 54.71527481079102,
       "y" : 15.26224899291992
    },
+   "center" : {
+      "bodyx1" : -100.0,
+      "bodyx2" : -100.0,
+      "bodyy1" : -100.0,
+      "bodyy2" : -100.0,
+      "frame_num" : 1,
+      "hight" : 500.0,
+      "name" : "center",
+      "tex_file" : "Forest_Town_Center",
+      "width" : 500.0,
+      "x" : 59.98624420166016,
+      "y" : 40.97751998901367
+   },
    "jim" : {
       "bodyx1" : 0,
       "bodyx2" : 0,
@@ -2819,5 +2845,18 @@
       "width" : 50.0,
       "x" : 93.12042236328125,
       "y" : 153.3115539550781
+   },
+   "mybrrl" : {
+      "bodyx1" : 0.0,
+      "bodyx2" : 0.0,
+      "bodyy1" : 0.0,
+      "bodyy2" : 0.0,
+      "frame_num" : 1,
+      "hight" : 500.0,
+      "name" : "mybrrl",
+      "tex_file" : "Barrel.png",
+      "width" : 500.0,
+      "x" : 95.99329376220703,
+      "y" : 58.64627456665039
    }
 }

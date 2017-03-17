@@ -148,8 +148,8 @@ int main() {
 
 void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 {
-
-
+	Rectangle::tex->setFile("Assets/Sprites/betterborder.png", 1);
+	
 	//Player* Alex = new Player(SHANGO, Vector2f(4900.0, 3700.0), 40.0, 40.0);	//init player
 	Player* Alex = new Player(SHANGO, Vector2f(4900.0, 3700.0), 150.0, 150.0);	//init player
 
@@ -166,7 +166,10 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	RenderManager* RenM = new RenderManager(mLog, tBuffer, _QuadTree);
 
 	ChildrenOfOsi* gameplay_functions = new ChildrenOfOsi(mLog, tBuffer);
-	Input* iController = new Input(gameplay_functions, Alex, RenM->renderHelper, tBuffer, recVec_ptr);
+
+  
+
+	
 	//create Managers and add to Manager table
 
 	DummyController* DumM = new DummyController(mLog, tBuffer);
@@ -193,9 +196,12 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	//TestM->register_manager();
 	AIM->register_manager();
     
-	RenM->register_manager();
-
-
+ 	RenM->register_manager();
+//	gameplay_functions->add_hero("Shango", 4900, 3700, true);
+//	tBuffer->run();
+//	Hero* alex = Containers::hero_table["Shango"];
+//	Player* Alex = dynamic_cast<Player*>(alex);
+    Input* iController = new Input(gameplay_functions, Alex, RenM->renderHelper, tBuffer, recVec_ptr);
 
 	//DialogueGui* convoGui = new DialogueGui();
 
@@ -203,6 +209,12 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	//WorldObj* Alex = new WorldObj(1000, 600, true);
 
 	ObjConfig::import_config(recVec_ptr, gameplay_functions, tBuffer);
+	
+	
+	
+	//WorldObj* barrel = new WorldObj(Vector2f(5200, 3900), 75, 75);
+	//Alex->name = SHANGO;
+	
 
     Texture* objTexture = new Texture();
 
@@ -285,11 +297,13 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	Texture* blank = new Texture();
 	Texture* border = new Texture();
 
+
+
 	//load sprite from a configuration file?
 	blank->setFile("Assets/Sprites/blank.png", 1);
-	Rectangle::tex->setFile("Assets/Sprites/border.png", 1);
 	border->setFile("Assets/Sprites/border.png", 1);
 	objTexture->setFile("Assets/Sprites/YemojasHouse.png",1);
+	Soldier* silverSoldier = new Soldier(4900, 3300, true);
 
 	playerTexture->setFile("Assets/Sprites/ShangoForwardIdle.png",22);
 	playerIdleTex->setFile("Assets/Sprites/ShangoForwardIdle.png",22);
@@ -308,8 +322,8 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	rightAtkTex->setFile("Assets/Sprites/ShangoRightSwingEffect.png", 24);
 	upAtk2Tex->setFile("Assets/Sprites/ShangoBackLunge.png", 7);
 	downAtk2Tex->setFile("Assets/Sprites/ShangoForwardLunge.png", 7);
-	leftAtk2Tex->setFile("Assets/Sprites/ShangoLeftSwingLunge.png", 7);
-	rightAtk2Tex->setFile("Assets/Sprites/ShangoRightSwingLunge.png", 7);
+	leftAtk2Tex->setFile("Assets/Sprites/ShangoLeftLunge.png", 7);
+	rightAtk2Tex->setFile("Assets/Sprites/ShangoRightLunge.png", 7);
 	upHurtTex->setFile("Assets/Sprites/ShangoBackRecoil.png", 18);
 	downHurtTex->setFile("Assets/Sprites/ShangoForwardRecoil.png", 18);
 	leftHurtTex->setFile("Assets/Sprites/ShangoLeftRecoil.png", 18);
@@ -341,8 +355,8 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	ss_rightIdleTex->setFile("Assets/Sprites/SilverSoldierRightIdle.png", 22);
 	ss_upAtkTex->setFile("Assets/Sprites/SilverSoldierBackSwing.png", 24);
 	ss_downAtkTex->setFile("Assets/Sprites/SilverSoldierForwardSwing.png", 24);
-	ss_leftAtkTex->setFile("Assets/Sprites/SilverSoldierLeftSwingEffect.png", 24);
-	ss_rightAtkTex->setFile("Assets/Sprites/SilverSoldierRightSwingEffect.png", 24);
+	ss_leftAtkTex->setFile("Assets/Sprites/SilverSoldierLeftSwing.png", 24);
+	ss_rightAtkTex->setFile("Assets/Sprites/SilverSoldierRightSwing.png", 24);
 	ss_upHurtTex->setFile("Assets/Sprites/SilverSoldierBackRecoil.png", 18);
 	ss_downHurtTex->setFile("Assets/Sprites/SilverSoldierForwardRecoil.png", 18);
 	ss_leftHurtTex->setFile("Assets/Sprites/SilverSoldierLeftRecoil.png", 18);
@@ -448,7 +462,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	spin->setDmg(7);
 	spin->setSpeed(15);
 	spin->setDestroy(false);
-	spin->setDuration(5);
+	spin->setDuration(7);
 	spin->setBaseDir(6);
 	spin->setCoolDown(100);
 	spin->setPause(48);
@@ -459,7 +473,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	spin2->setDmg(7);
 	spin2->setSpeed(15);
 	spin2->setDestroy(false);
-	spin2->setDuration(5);
+	spin2->setDuration(7);
 	spin2->setBaseDir(6);
 	spin2->setCoolDown(0);
 	spin2->setPause(53);
@@ -470,7 +484,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	spin3->setDmg(7);
 	spin3->setSpeed(15);
 	spin3->setDestroy(false);
-	spin3->setDuration(5);
+	spin3->setDuration(7);
 	spin3->setBaseDir(6);
 	spin3->setCoolDown(0);
 	spin3->setPause(58);
@@ -481,7 +495,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	spin4->setDmg(7);
 	spin4->setSpeed(15);
 	spin4->setDestroy(false);
-	spin4->setDuration(5);
+	spin4->setDuration(7);
 	spin4->setBaseDir(6);
 	spin4->setCoolDown(0);
 	spin4->setPause(63);
@@ -543,17 +557,36 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 		//visibility lines through the diagonal
 		edges.push_back({ p2, p3 });
 		edges.push_back({ p1, p4 });
-	}
 	
+	}
+	//Texture* barrelTex = new Texture();
+	//gameplay_functions->add_texture("barrelTex", 0, 0, 0);
+	//tBuffer->run();
+
+	
+
+	//gameplay_functions->add_worldObj("barrel1", 5200, 3900, true);
+	//tBuffer->run();
+
 	gameplay_functions->add_hero("Yemoja", 4600, 3600, true);
 	gameplay_functions->add_hero("Oya", 4400, 3600, true);
-	gameplay_functions->add_soldier("silverSoldier", 4900, 3300, true);
+	//gameplay_functions->add_soldier("silverSoldier", 4900, 3300, true);
 
 	tBuffer->run();
-
+	
 	Hero* staticRec = Containers::hero_table["Yemoja"];
 	Hero* oya = Containers::hero_table["Oya"];
-	Soldier* silverSoldier = Containers::soldier_table["silverSoldier"];
+	//Containers::soldier_table["silverSoldier"];
+	//WorldObj* barrel = Containers::worldObj_table["barrel1"];
+//    Containers::texture_table["barrelTex"]->setFile("Assets/Sprites/Barrel.png", 1);
+	
+//	Texture* barrelTex = 
+	//barrel->setWidth(75);
+	//barrel->setHeight(75);
+
+	//barrel->sprite.setTexture(Containers::texture_table["barrelTex"]);
+
+	
 
 	staticRec->setWidth(100);
 	staticRec->setHeight(100);
@@ -665,6 +698,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	oya->setSpeed(5);
 	oya->offsetBody(0, 50, 50, 50, 50);
 	oya->shiftY(300);
+	
 	/*
 	WorldObj* tree = new WorldObj(Vector2f(4000, 2600), 800, 500);
 	tree->sprite.setTexture(treeTex);
@@ -682,7 +716,8 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	recVec.push_back(staticRec);
 	recVec.push_back(silverSoldier);
 	recVec.push_back(oya);
-	//recVec.push_back(tree);
+	//recVec.push_back(barrel);
+	//recVec.push_back(tree);;
 	//recVec.push_back(tree1);
 	//recVec.push_back(tree2);
 	//recVec.push_back(vec[0]);
