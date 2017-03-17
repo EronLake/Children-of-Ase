@@ -1,18 +1,17 @@
 #pragma once
-#include "NPC.h"
-#include "stdafx.h"
+
 #include "Attack.h"
 #include "Containers.h"
+#include "NPC.h"
 
 class Party;
 
-class Soldier:
-  public NPC
+class Soldier: public NPC
 {
   public:
 
   Attack* melee;
-  vector<Attack*>attackTypes;
+  vector<Attack*> attackTypes;
   unordered_map<Attack*, int> cooldownMap;
 
   Soldier();
@@ -22,6 +21,7 @@ class Soldier:
 
   int getInstances() { return instances; };
 
+  Party * getParty() { return party; };
   bool getInCombat() { return inCombat; };
   bool getEvade() { return evade; };
   bool getHold() { return holdPos; };
@@ -36,6 +36,12 @@ class Soldier:
   int getAse() { return ase; };
   int getAttackIndex(Attack* atk);
 
+  bool isAllyOf(const Soldier&);
+  bool isAllyOf(const Party&);
+  bool isEnemyOf(const Soldier&);
+  bool isEnemyOf(const Party&);
+
+  void setParty(Party* p) { party = p; };
   void setInCombat(bool c) { inCombat = c; };
   void setEvade(bool e) { evade = e; };
   void setHold(bool h) { holdPos = h; };
@@ -45,7 +51,6 @@ class Soldier:
   void setMaxStamina(int s) { maxStamina = s; };
   void setMaxAse(int a) { maxAse = a; };
   void flipSwing() { swingLeft = !swingLeft; };
-  
 
   void meleeAttack();
   void addAttackType(Attack* a);
@@ -56,8 +61,6 @@ class Soldier:
   void resetCD();
   void resetCD(int c);
   
-  void setParty(Party* p) { party = p; };
-  Party* getParty() { return party; };
   virtual void defeat();
 
   std::string getKey() { return key; };

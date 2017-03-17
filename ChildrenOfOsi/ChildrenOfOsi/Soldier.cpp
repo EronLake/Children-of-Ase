@@ -1,7 +1,7 @@
 #include "stdafx.h"
 
-#include "Soldier.h"
 #include "Party.h"
+#include "Soldier.h"
 
 using namespace std;
 
@@ -14,7 +14,7 @@ Soldier::Soldier(float x, float y, bool col):NPC(x, y, col)
   setType(3);
   ase = 0;
   maxAse = 0;
-  stamina= 100;
+  stamina = 100;
   maxStamina = 100;
   swingLeft = true;
 }
@@ -110,30 +110,30 @@ void Soldier::meleeAttack()
 	  melee->setPause(5);
   }
   else {
-	  melee->setBaseDir(4);
-	  melee->setPause(24);
+    melee->setBaseDir(4);
+    melee->setPause(24);
   }
   if(d == 8) {
-    y = y - (melee->getHeight()/1.2);
-	if (swingLeft) { x += (melee->getSpeed()*melee->getDuration() / 1.2); }
-	else { x -= (melee->getSpeed()*melee->getDuration() / 1.2); }
+    y = y - (melee->getHeight() / 1.2);
+    if(swingLeft) { x += (melee->getSpeed()*melee->getDuration() / 1.2); }
+    else { x -= (melee->getSpeed()*melee->getDuration() / 1.2); }
   }
   else if(d == 2) {
-    y = y + (body[0].getHeight()/1.2);
-	if (swingLeft) { x -= (melee->getSpeed()*melee->getDuration() / 1.2); }
-	else { x += (melee->getSpeed()*melee->getDuration() / 1.2); }
+    y = y + (body[0].getHeight() / 1.2);
+    if(swingLeft) { x -= (melee->getSpeed()*melee->getDuration() / 1.2); }
+    else { x += (melee->getSpeed()*melee->getDuration() / 1.2); }
   }
   else if(d == 4) {
-    x = x - (melee->getWidth()/1.2);
-	if (swingLeft) { y -= (melee->getSpeed()*melee->getDuration() / 1.2); }
-	else { y += (melee->getSpeed()*melee->getDuration() / 1.2); }
+    x = x - (melee->getWidth() / 1.2);
+    if(swingLeft) { y -= (melee->getSpeed()*melee->getDuration() / 1.2); }
+    else { y += (melee->getSpeed()*melee->getDuration() / 1.2); }
   }
   else if(d == 6) {
-    x = x + (body[0].getWidth()/1.2);
-	if (swingLeft) { y += (melee->getSpeed()*melee->getDuration() / 1.2); }
-	else { y -= (melee->getSpeed()*melee->getDuration() / 1.2); }
+    x = x + (body[0].getWidth() / 1.2);
+    if(swingLeft) { y += (melee->getSpeed()*melee->getDuration() / 1.2); }
+    else { y -= (melee->getSpeed()*melee->getDuration() / 1.2); }
   }
-  melee->setDirWithBase(d,false);
+  melee->setDirWithBase(d, false);
   melee->setX(x);
   melee->setY(y);
   currentAttacks.push_back(melee);
@@ -142,34 +142,35 @@ void Soldier::meleeAttack()
 
 void Soldier::updateCD()
 {
-	if (cdTime > 0) {
-		--cdTime;
-	}
-	else {
-		swingLeft = true;
-	}
+  if(cdTime > 0) {
+    --cdTime;
+  }
+  else {
+    swingLeft = true;
+  }
   for(auto i = cooldownMap.begin(); i != cooldownMap.end(); ++i) {
     if(i->second > 0) {
       i->second--;
     }
   }
-  for (auto i = currentAttacks.begin(); i != currentAttacks.end(); ++i) {
-	  if (*i == nullptr) {
-		  currentAttacks.erase(i);
-	  } else {
-		 if((*i)->getPause() == 0 && !(*i)->getCanCancel()){
-			 currentAttacks.erase(i);
-		 }
-	  }
+  for(auto i = currentAttacks.begin(); i != currentAttacks.end(); ++i) {
+    if(*i == nullptr) {
+      currentAttacks.erase(i);
+    }
+    else {
+      if((*i)->getPause() == 0 && !(*i)->getCanCancel()) {
+        currentAttacks.erase(i);
+      }
+    }
   }
-  if (ase < maxAse)ase++;
-  if (stamina < maxStamina)stamina++;
+  if(ase < maxAse)ase++;
+  if(stamina < maxStamina)stamina++;
 }
 
 
 void Soldier::resetCD()
 {
-	cdTime = 0;
+  cdTime = 0;
 }
 
 void Soldier::resetCD(int c)
@@ -178,11 +179,24 @@ void Soldier::resetCD(int c)
   cooldownMap[attackTypes[c]] = 0;
 }
 
+/*
+ * This function is overloaded by Hero. Acts like kill for soldiers
+void Soldier::defeat()
+{
+  //this->getParty()->removeSoldier(this);
+}*/
+//this removes the soldier from the party and sets its party to null
+void Soldier::defeat()
+{
+  this->getParty()->removeSoldier(this);
+  this->setParty(NULL);
+}
+
 /**
- * Returns whether this solider has any non-melee attacks remaining.
- * Returns: true if any of this solider's attacks have a non-zero cooldown,
- * otherwise false
- */
+* Returns whether this solider has any non-melee attacks remaining.
+* Returns: true if any of this solider's attacks have a non-zero cooldown,
+* otherwise false
+*/
 bool Soldier::hasAttacks()
 {
   if(this->attackTypes.empty())
@@ -193,54 +207,66 @@ bool Soldier::hasAttacks()
     return false;
   }
 }
-/*
-//this function is overloaded by Hero. Acts lik kill for soldiers
-void Soldier::defeat()
-{
-	//this->getParty()->removeSoldier(this);
-}
-*/
-//this removes the soldier from the party and sets its party to null
-void Soldier::defeat()
-{
-	this->getParty()->removeSoldier(this);
-	this->setParty(NULL);
-}
 
 /**
  * Returns the next attack which this soldier should perform at this time.
+ * Summoning abilities always take precendence over anything else. After those,
+ * special abilities take precendence over the standrd melee attack, which is
+ * the last resort. If every attack, even the basic melee attack, is on cooldown
+ * then nullptr will be returned.
+ *
+ * Returns: A pointer to the next attack this solider should perform, based on
+ * the cooldowns of all their abilities
 */
 Attack * Soldier::nextAttack()
 {
   if(!(this->hasAttacks()))
     return this->melee;
   else {
+    for(auto& attack : this->attackTypes) {
+      if(attack->getAttackType() == Attack::AttackTypes::SUMMONING && attack->getCoolDown() == 0) {
+        return attack;
+      }
+    }
 
-    return nullptr;
+    for(auto& attack : this->attackTypes) {
+      if(attack->getAttackType() != Attack::AttackTypes::SUMMONING && attack->getCoolDown() == 0) {
+        return attack;
+      }
+    }
+
+    if(this->melee->getCoolDown() == 0) return this->melee;
+    else return nullptr;
   }
 }
 
-bool Soldier::getCool() { 
-	return ((this->cdTime == 0) && (this->sprite.getLock() == false) && 
-		(stamina >= melee->getStaminaCost()) && (ase >= melee->getAseCost()));
+bool Soldier::isAllyOf(const Soldier& s) { return this->party->getAlliance() == s.party->getAlliance(); }
+bool Soldier::isAllyOf(const Party& p) { return this->party->getAlliance() == p.getAlliance(); }
+bool Soldier::isEnemyOf(const Soldier& s) { return this->party->getAlliance() != s.party->getAlliance(); }
+bool Soldier::isEnemyOf(const Party& p) { return this->party->getAlliance() != p.getAlliance(); }
+
+bool Soldier::getCool()
+{
+  return ((this->cdTime == 0) && (this->sprite.getLock() == false) &&
+    (stamina >= melee->getStaminaCost()) && (ase >= melee->getAseCost()));
 }
 
-bool Soldier::getCool(int c) { 
-	return ((this->cdTime == 0) && (cooldownMap[attackTypes[c]] == 0) 
-		&& (this->sprite.getLock() == false) && (stamina>=attackTypes[c]->getStaminaCost())
-		&& (ase>=attackTypes[c]->getAseCost()));
+bool Soldier::getCool(int c)
+{
+  return ((this->cdTime == 0) && (cooldownMap[attackTypes[c]] == 0)
+    && (this->sprite.getLock() == false) && (stamina >= attackTypes[c]->getStaminaCost())
+    && (ase >= attackTypes[c]->getAseCost()));
 }
 
-int Soldier::getAttackIndex(Attack* atk) {
-	for (int i = 0; i < attackTypes.size(); i++) {
-		if (attackTypes[i] == atk)return i;
-	}
-	return -1;
+int Soldier::getAttackIndex(Attack* atk)
+{
+  for(int i = 0; i < attackTypes.size(); i++) {
+    if(attackTypes[i] == atk)return i;
+  }
+  return -1;
 }
 
-bool Soldier::getCombo() { 
-	return (cdTime>0 && cdTime<15);
+bool Soldier::getCombo()
+{
+  return (cdTime > 0 && cdTime < 15);
 }
-
-
-
