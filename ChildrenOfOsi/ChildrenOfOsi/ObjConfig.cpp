@@ -13,6 +13,7 @@ float botLeftx;
 float botLefty;
 float botRightx;
 float botRighty;
+float whynot;
 
 ObjConfig::ObjConfig()
 {
