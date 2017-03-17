@@ -373,7 +373,7 @@ std::string RelPost::fulfills_which(vector<std::string> preconds, Precond_map ma
 		
 
 	}
-
+	return pre_fulfilled;
 }
 //---------------------------------------------------------------------------------
 

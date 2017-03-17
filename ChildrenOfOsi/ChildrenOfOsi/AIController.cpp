@@ -162,6 +162,7 @@ void AIController::execute() {
 }
 
 bool AIController::give_as_quest(Action* action) {
+	bool is_quest = false;
 	Hero* me = action->getOwner();
 	Hero* them = action->getReceiver();
 	Action* curr_goal = &hero_planners[me->name]->get_current_end_state();
@@ -178,4 +179,5 @@ bool AIController::give_as_quest(Action* action) {
 			continue;
 		}
 	}
+	return is_quest;
 }
