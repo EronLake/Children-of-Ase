@@ -7,28 +7,40 @@
 
 using namespace std;
 
-Soldier::Soldier(float x, float y, bool col): NPC(x, y, col)
+Soldier::Soldier(float x, float y, bool col): NPC(x, y, col),
+key(string("Soldier") + std::to_string(getID()) + "_0"), party(nullptr), instances(0),
+inCombat(false), evade(false), holdPos(false), patrol(false),
+stamina(100), maxStamina(100), ase(100), maxAse(100),
+aggroRange(Soldier::DEFAULT_AGGRO_RANGE),
+pursuitRange(Soldier::DEFAULT_PURSUIT_RANGE),
+cdTime(0), swingLeft(true)
 {
-  key = "Soldier" + std::to_string(getID()) + "_0";
+  /*key = "Soldier" + std::to_string(getID()) + "_0";
   cdTime = 0;
-  setType(3);
   ase = 0;
   maxAse = 0;
   stamina = 100;
   maxStamina = 100;
-  swingLeft = true;
+  swingLeft = true;*/
+  setType(WorldObj::TYPE_SOLDIER);
 }
 
-Soldier::Soldier(Vector2f p_topLeft, float p_width, float p_height): NPC(p_topLeft, p_width, p_height)
+Soldier::Soldier(Vector2f p_topLeft, float p_width, float p_height): NPC(p_topLeft, p_width, p_height),
+key(string("Soldier") + std::to_string(getID()) + "_0"), party(nullptr), instances(0),
+inCombat(false), evade(false), holdPos(false), patrol(false),
+stamina(100), maxStamina(100), ase(100), maxAse(100),
+aggroRange(Soldier::DEFAULT_AGGRO_RANGE),
+pursuitRange(Soldier::DEFAULT_PURSUIT_RANGE),
+cdTime(0), swingLeft(true)
 {
-  key = "Soldier" + std::to_string(getID()) + "_0";
+  /*key = "Soldier" + std::to_string(getID()) + "_0";
   cdTime = 0;
-  setType(3);
   ase = 0;
   maxAse = 0;
   stamina = 100;
   maxStamina = 100;
-  swingLeft = true;
+  swingLeft = true;*/
+  setType(WorldObj::TYPE_SOLDIER);
 }
 
 void Soldier::addAttackType(Attack* a)
@@ -40,58 +52,58 @@ void Soldier::addAttackType(Attack* a)
 void Soldier::newAttack(int i, Attack* a)
 {
   //if(cooldownMap[attackTypes[i]] == 0 && stamina>=attackTypes[i]->getStaminaCost() && ase>=attackTypes[i]->getAseCost()) {
-    Attack* p = a;
-    *p = *attackTypes[i];
+  Attack* p = a;
+  *p = *attackTypes[i];
 
-    float w = attackTypes[i]->getWidth();
-    if(w == 0)w = body[0].getWidth();
-    float h = attackTypes[i]->getHeight();
-    if(h == 0)h = body[0].getHeight();
-    float x = body[0].getX();
-    float y = body[0].getY();
-    int d = getDirection();
-	int bd = attackTypes[i]->getBaseDir();
-    if(d == 8) {
-      y = y - (h);
-	  if (bd == 4)x += (attackTypes[i]->getSpeed()*attackTypes[i]->getDuration()/2);
-	  if (bd == 6)x -= (attackTypes[i]->getSpeed()*attackTypes[i]->getDuration()/2);
-    }
-    else if(d == 2) {
-      y = y + (h);
-	  if (bd == 4)x -= (attackTypes[i]->getSpeed()*attackTypes[i]->getDuration()/2);
-	  if (bd == 6)x += (attackTypes[i]->getSpeed()*attackTypes[i]->getDuration()/2);
-    }
-    else if(d == 4) {
-      x = x - (w);
-	  if (bd == 4)y -= (attackTypes[i]->getSpeed()*attackTypes[i]->getDuration()/2);
-	  if (bd == 6)y += (attackTypes[i]->getSpeed()*attackTypes[i]->getDuration()/2);
-    }
-    else if(d == 6) {
-      x = x + (w);
-	  if (bd == 4 )y += (attackTypes[i]->getSpeed()*attackTypes[i]->getDuration()/2);
-	  if (bd == 6)y -= (attackTypes[i]->getSpeed()*attackTypes[i]->getDuration()/2);
-    }
-    p->setX(x);
-    p->setY(y);
-    p->setCollision(true);
-    p->addHit(this);
-    p->setDmg(attackTypes[i]->getDmg());
-    p->setDuration(attackTypes[i]->getDuration());
-    p->setDestroy(attackTypes[i]->getDestroy());
-    p->setSpeed(attackTypes[i]->getSpeed());
-    p->setWidth(w);
-    p->setHeight(h);
-    p->setDirWithBase(d,false);
-    p->setPause(attackTypes[i]->getPause());
-    p->setKeep(false);
-    cooldownMap[attackTypes[i]] = attackTypes[i]->getCoolDown();
-	cdTime = attackTypes[i]->getCoolDown();
-	stamina -= attackTypes[i]->getStaminaCost();
-	ase -= attackTypes[i]->getAseCost();
-    instances++;
-    if(instances == 99)instances = 0;
-	currentAttacks.push_back(p);
-	if (attackTypes[i]->getTurn())setDirWithBase(6,true);
+  float w = attackTypes[i]->getWidth();
+  if(w == 0)w = body[0].getWidth();
+  float h = attackTypes[i]->getHeight();
+  if(h == 0)h = body[0].getHeight();
+  float x = body[0].getX();
+  float y = body[0].getY();
+  int d = getDirection();
+  int bd = attackTypes[i]->getBaseDir();
+  if(d == 8) {
+    y = y - (h);
+    if(bd == 4)x += (attackTypes[i]->getSpeed()*attackTypes[i]->getDuration() / 2);
+    if(bd == 6)x -= (attackTypes[i]->getSpeed()*attackTypes[i]->getDuration() / 2);
+  }
+  else if(d == 2) {
+    y = y + (h);
+    if(bd == 4)x -= (attackTypes[i]->getSpeed()*attackTypes[i]->getDuration() / 2);
+    if(bd == 6)x += (attackTypes[i]->getSpeed()*attackTypes[i]->getDuration() / 2);
+  }
+  else if(d == 4) {
+    x = x - (w);
+    if(bd == 4)y -= (attackTypes[i]->getSpeed()*attackTypes[i]->getDuration() / 2);
+    if(bd == 6)y += (attackTypes[i]->getSpeed()*attackTypes[i]->getDuration() / 2);
+  }
+  else if(d == 6) {
+    x = x + (w);
+    if(bd == 4)y += (attackTypes[i]->getSpeed()*attackTypes[i]->getDuration() / 2);
+    if(bd == 6)y -= (attackTypes[i]->getSpeed()*attackTypes[i]->getDuration() / 2);
+  }
+  p->setX(x);
+  p->setY(y);
+  p->setCollision(true);
+  p->addHit(this);
+  p->setDmg(attackTypes[i]->getDmg());
+  p->setDuration(attackTypes[i]->getDuration());
+  p->setDestroy(attackTypes[i]->getDestroy());
+  p->setSpeed(attackTypes[i]->getSpeed());
+  p->setWidth(w);
+  p->setHeight(h);
+  p->setDirWithBase(d, false);
+  p->setPause(attackTypes[i]->getPause());
+  p->setKeep(false);
+  cooldownMap[attackTypes[i]] = attackTypes[i]->getCoolDown();
+  cdTime = attackTypes[i]->getCoolDown();
+  stamina -= attackTypes[i]->getStaminaCost();
+  ase -= attackTypes[i]->getAseCost();
+  instances++;
+  if(instances == 99)instances = 0;
+  currentAttacks.push_back(p);
+  if(attackTypes[i]->getTurn())setDirWithBase(6, true);
   //}
 }
 
@@ -103,9 +115,9 @@ void Soldier::meleeAttack()
   melee->setDuration(5);
   melee->setCanCancel(true);
   int d = getDirection();
-  if (!swingLeft) {
-	  melee->setBaseDir(6);
-	  melee->setPause(5);
+  if(!swingLeft) {
+    melee->setBaseDir(6);
+    melee->setPause(5);
   }
   else {
     melee->setBaseDir(4);

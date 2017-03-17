@@ -3,21 +3,80 @@
 #include "Party.h"
 
 /**
+ * Creates a new party with no alliegances, no leader, and no members.
+ */
+Party::Party(): faction(nullptr), leader(nullptr), target(nullptr), mode(Party::MODE_IDLE) {}
+
+/**
+ * Creates a new party with alliegance to the given faction, but no members nor
+ * any leader.
+ */
+Party::Party(Alliance *a): faction(a), leader(nullptr), target(nullptr), mode(Party::MODE_IDLE) {}
+
+/**
+ * Creates a new party with the given leader, as a part of no faction.
+ */
+Party::Party(Soldier *leader): faction(nullptr), leader(leader), target(nullptr)
+{
+  this->addToParty(leader, true);
+  this->setMode(Party::MODE_IDLE);
+}
+
+/**
+ * Creates a new party as a part of the specified alliance and with the given
+ * leader. The leader will be the only initial member of this party.
+ */
+Party::Party(Alliance *a, Soldier *leader) : faction(a), leader(leader), target(nullptr)
+{
+  this->addToParty(leader, true);
+  this->setMode(Party::MODE_IDLE);
+}
+
+/**
  * Creates a new party as a part of the specified alliance and with the given
  * leader and additional members. Note that if the vector of additional members
  * contains the leader, they will be added twice.
  */
-Party::Party(Alliance *a, Soldier *leader, const vector<Soldier *>& members): faction(a), leader(leader)
+Party::Party(Alliance *a, Soldier *leader, const vector<Soldier *>& members): faction(a), leader(leader), target(nullptr)
 {
+  this->addToParty(leader, true);
+  this->setMode(Party::MODE_IDLE);
   for(auto& member : members) {
     this->addToParty(member, false);
   }
 }
 
-bool Party::isAllyOf(Soldier *s) { return this->faction == s->getParty()->getAlliance(); }
-bool Party::isAllyOf(Party *p) { return this->faction == p->faction; }
-bool Party::isEnemyOf(Soldier *s) { return this->faction != s->getParty()->getAlliance(); }
-bool Party::isEnemyOf(Party *p) { return this->faction != p->faction; }
+/**
+ * Returns whether the given soldier is an ally of this party.
+ */
+bool Party::isAllyOf(Soldier *s)
+{
+  return this->faction == s->getParty()->getAlliance();
+}
+
+/**
+ * Returns whether the given party is an ally of this one.
+ */
+bool Party::isAllyOf(Party *p)
+{
+  return this->faction == p->faction;
+}
+
+/**
+ * Returns whether the given soldier is an enemy of this party.
+ */
+bool Party::isEnemyOf(Soldier *s)
+{
+  return this->faction != s->getParty()->getAlliance();
+}
+
+/**
+ * Returns whether the given party is an eney of this one.
+ */
+bool Party::isEnemyOf(Party *p)
+{
+  return this->faction != p->faction;
+}
 
 /**
  * Adds the given solider to this party, and sets them as the new leader if
@@ -25,9 +84,12 @@ bool Party::isEnemyOf(Party *p) { return this->faction != p->faction; }
  */
 void Party::addToParty(Soldier* s, bool isLeader)
 {
-  members.push_back(s);
-  if(isLeader || members.size() == 1)
-    this->leader = s;
+  if(s != nullptr) {
+    this->members.push_back(s);
+    s->setParty(this);
+    if(isLeader || members.size() == 1)
+      this->leader = s;
+  }
 }
 
 /**
@@ -40,11 +102,21 @@ void Party::removeSoldier(Soldier* s)
   for(auto& i = this->members.begin(); i != this->members.end(); ++i) {
     if(*i == s) {
       this->members.erase(i);
+      s->setParty(nullptr);
       if(leader == s) {
         leader = *members.begin();
       }
     }
   }
+}
+
+/**
+ * Clears this party of all members, also leaving it leaderless.
+ */
+void Party::clear()
+{
+  this->members.clear();
+  this->leader = nullptr;
 }
 
 /**
@@ -57,6 +129,7 @@ void Party::setLeader(Soldier* s)
   for(auto i = members.begin(); i != members.end(); ++i) {
     if(*i == s) {
       leader = s;
+      break;
     }
   }
 }
@@ -71,7 +144,7 @@ void Party::setMode(int m)
 {
   this->mode = m;
   if(mode == Party::MODE_IDLE) {
-    for(auto& member: this->members) {
+    for(auto& member : this->members) {
       member->setInCombat(false);
       member->setEvade(false);
       member->setHold(false);
@@ -105,4 +178,14 @@ void Party::setMode(int m)
       member->setEvade(true);
     }
   }
+}
+
+void Party::findEnemy()
+{
+
+}
+
+void Party::update()
+{
+
 }

@@ -57,6 +57,8 @@ class Soldier: public NPC
   void setEvade(bool e) { this->evade = e; };
   void setHold(bool h) { this->holdPos = h; };
   void setPatrol(bool p) { this->patrol = p; };
+  void setAggroRange(std::size_t range) { this->aggroRange = min(range, this->pursuitRange); }
+  void setPursuitRange(std::size_t range) { this->pursuitRange = max(range, this->aggroRange); }
 
   void setStamina(int s) { this->stamina=s; };
   void setMaxStamina(int s) { this->maxStamina = s; };
@@ -82,6 +84,9 @@ class Soldier: public NPC
   vector<Attack*> getCurrentAttacks() { return currentAttacks; };
 
   private:
+
+  static constexpr std::size_t DEFAULT_AGGRO_RANGE = 200;
+  static constexpr std::size_t DEFAULT_PURSUIT_RANGE = 500;
 
   Party *party;
   int instances;
