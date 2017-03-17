@@ -14,10 +14,10 @@ class Soldier: public NPC
   vector<Attack*> attackTypes;
   unordered_map<Attack*, int> cooldownMap;
 
-  Soldier();
+  Soldier() = default;
   Soldier(float x, float y, bool col);
   Soldier(Vector2f p_topLeft, float p_width, float p_height);
-  ~Soldier();
+  ~Soldier() = default;
 
   int getInstances() { return instances; };
 
@@ -36,10 +36,10 @@ class Soldier: public NPC
   int getAse() { return ase; };
   int getAttackIndex(Attack* atk);
 
-  bool isAllyOf(const Soldier&);
-  bool isAllyOf(const Party&);
-  bool isEnemyOf(const Soldier&);
-  bool isEnemyOf(const Party&);
+  bool isAllyOf(Soldier *);
+  bool isAllyOf(Party *);
+  bool isEnemyOf(Soldier  *);
+  bool isEnemyOf(Party *);
 
   void setParty(Party* p) { party = p; };
   void setInCombat(bool c) { inCombat = c; };

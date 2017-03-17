@@ -5,9 +5,7 @@
 
 using namespace std;
 
-Soldier::Soldier() {}
-
-Soldier::Soldier(float x, float y, bool col):NPC(x, y, col)
+Soldier::Soldier(float x, float y, bool col): NPC(x, y, col)
 {
   key = "Soldier" + std::to_string(getID()) + "_0";
   cdTime = 0;
@@ -19,7 +17,7 @@ Soldier::Soldier(float x, float y, bool col):NPC(x, y, col)
   swingLeft = true;
 }
 
-Soldier::Soldier(Vector2f p_topLeft, float p_width, float p_height):NPC(p_topLeft, p_width, p_height)
+Soldier::Soldier(Vector2f p_topLeft, float p_width, float p_height): NPC(p_topLeft, p_width, p_height)
 {
   key = "Soldier" + std::to_string(getID()) + "_0";
   cdTime = 0;
@@ -30,8 +28,6 @@ Soldier::Soldier(Vector2f p_topLeft, float p_width, float p_height):NPC(p_topLef
   maxStamina = 100;
   swingLeft = true;
 }
-
-Soldier::~Soldier() {}
 
 void Soldier::addAttackType(Attack* a)
 {
@@ -144,17 +140,17 @@ void Soldier::meleeAttack()
 
 void Soldier::updateCD()
 {
-  if(cdTime > 0) {
+  if(cdTime > 0)
     --cdTime;
-  }
-  else {
+  else
     swingLeft = true;
-  }
+
   for(auto i = cooldownMap.begin(); i != cooldownMap.end(); ++i) {
     if(i->second > 0) {
       i->second--;
     }
   }
+
   for(auto i = currentAttacks.begin(); i != currentAttacks.end(); ++i) {
     if(*i == nullptr) {
       currentAttacks.erase(i);
@@ -165,8 +161,11 @@ void Soldier::updateCD()
       }
     }
   }
-  if(ase < maxAse)ase++;
-  if(stamina < maxStamina)stamina++;
+
+  if(ase < maxAse)
+    ++ase;
+  if(stamina < maxStamina)
+    ++stamina;
 }
 
 
@@ -187,6 +186,7 @@ void Soldier::defeat()
 {
   //this->getParty()->removeSoldier(this);
 }*/
+
 //this removes the soldier from the party and sets its party to null
 void Soldier::defeat()
 {
@@ -242,10 +242,10 @@ Attack * Soldier::nextAttack()
   }
 }
 
-bool Soldier::isAllyOf(const Soldier& s) { return this->party->getAlliance() == s.party->getAlliance(); }
-bool Soldier::isAllyOf(const Party& p) { return this->party->getAlliance() == p.getAlliance(); }
-bool Soldier::isEnemyOf(const Soldier& s) { return this->party->getAlliance() != s.party->getAlliance(); }
-bool Soldier::isEnemyOf(const Party& p) { return this->party->getAlliance() != p.getAlliance(); }
+bool Soldier::isAllyOf(Soldier *s) { return this->party->isAllyOf(s); }
+bool Soldier::isAllyOf(Party *p) { return this->party->isAllyOf(p); }
+bool Soldier::isEnemyOf(Soldier *s) { return this->party->isEnemyOf(s); }
+bool Soldier::isEnemyOf(Party *p) { return this->party->isEnemyOf(p); }
 
 bool Soldier::getCool()
 {
