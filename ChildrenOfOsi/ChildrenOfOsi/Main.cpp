@@ -93,7 +93,7 @@ int main() {
 		//LOG("Hello world!");
 		//ERONS_LOOP();
 		/************************************************************************************************SET-UP*******************************************************/
-		WorldObj* screen = new WorldObj(Vector2f(0.0, 0.0), 960U, 540U);	//init screen
+		WorldObj* screen = new WorldObj(Vector2f(0.0, 0.0), 20000U, 20000U);	//init screen
 
 		QuadTree* collideTree = new QuadTree(0, screen);
 
@@ -833,7 +833,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 		Alex->updateCD();
 		silverSoldier->updateCD();
 		for (int i = 0; i < recVec.size(); i++) {
-			_QuadTree->insert(recVec[i]);	//insert all obj into tree
+			_QuadTree->Insert(recVec[i]);	//insert all obj into tree
 	
 		}
 		state = DialogueController::getState();
@@ -1248,7 +1248,7 @@ void ALEX_LOOP(QuadTree* _QuadTree) {
 		start_tick = clock();
 		_QuadTree->clear();
 		for (int i = 0; i < recVec.size(); i++) {
-			_QuadTree->insert(recVec[i]);	//insert all obj into tree
+			_QuadTree->Insert(recVec[i]);	//insert all obj into tree
 		}
 		//clock 
 		iController->InputCheck();
@@ -1752,7 +1752,7 @@ void ERONS_LOOP(QuadTree* _QuadTree) {
 		Alex->updateCD();
 		silverSoldier->updateCD();
 		for (int i = 0; i < recVec.size(); i++) {
-			_QuadTree->insert(recVec[i]);	//insert all obj into tree
+			_QuadTree->Insert(recVec[i]);	//insert all obj into tree
 
 		}
 		state = DialogueController::getState();
@@ -2131,7 +2131,7 @@ void ANDREWS_LOOP(QuadTree* _QuadTree) {
 	while (osi::GameWindow::isRunning()) {
 		_QuadTree->clear();
 		for (int i = 0; i < recVec.size(); i++) {
-			_QuadTree->insert(recVec[i]);	//insert all obj into tree
+			_QuadTree->Insert(recVec[i]);	//insert all obj into tree
 		}
 		//clock 
 		iController->InputCheck();
