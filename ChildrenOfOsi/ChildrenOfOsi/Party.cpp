@@ -25,9 +25,13 @@ bool Party::isEnemyOf(Party *p) { return this->faction != p->faction; }
  */
 void Party::addToParty(Soldier* s, bool isLeader)
 {
-  members.push_back(s);
-  if(isLeader || members.size() == 1)
-    this->leader = s;
+  if (isLeader || members.size() == 0) {
+	  members.insert(members.begin(), s);
+	  this->leader = s;
+  }
+  else {
+	  members.push_back(s);
+  }
 }
 
 /**

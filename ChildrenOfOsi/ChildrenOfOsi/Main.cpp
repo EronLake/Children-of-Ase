@@ -93,7 +93,7 @@ int main() {
 		//LOG("Hello world!");
 		//ERONS_LOOP();
 		/************************************************************************************************SET-UP*******************************************************/
-		WorldObj* screen = new WorldObj(Vector2f(0.0, 0.0), 960U, 540U);	//init screen
+		WorldObj* screen = new WorldObj(Vector2f(0.0, 0.0), 20000U, 20000U);	//init screen
 
 		QuadTree* collideTree = new QuadTree(0, screen);
 
@@ -297,6 +297,8 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	Texture* blank = new Texture();
 	Texture* border = new Texture();
 
+	Texture* fire = new Texture();
+
 
 
 	//load sprite from a configuration file?
@@ -378,6 +380,8 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	rockTex2->setFile("Assets/Sprites/rock_2.png", 1);
 
 	pierTex->setFile("Assets/Sprites/pier.png", 1);
+
+	fire->setFile("Assets/Sprites/fireballsprite1.jpg", 10);
 	/* SET UP SPRITE CHANGE, MIGHT NEED A SINGLETON?*/
 
 
@@ -450,7 +454,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	fireball->setDuration(100);
 	fireball->setCoolDown(240);
 	fireball->setPause(24);
-	fireball->sprite.setTexture(rockTex);
+	fireball->sprite.setTexture(fire);
 	Alex->addAttackType(fireball);
 
 	//Alex->melee->sprite.setTexture(blank);
@@ -817,6 +821,10 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	party->addToParty(Alex,true);
 	oya->setParty(party);
 	party->addToParty(oya, false);
+	silverSoldier->setParty(party);
+	party->addToParty(silverSoldier, false);
+	staticRec->setParty(party);
+	party->addToParty(staticRec, false);
 
 	vector<WorldObj*> enemyVec;
 	//osi::GameWindow::init();
@@ -833,12 +841,12 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 		Alex->updateCD();
 		silverSoldier->updateCD();
 		for (int i = 0; i < recVec.size(); i++) {
-			_QuadTree->insert(recVec[i]);	//insert all obj into tree
+			_QuadTree->Insert(recVec[i]);	//insert all obj into tree
 	
 		}
 		state = DialogueController::getState();
 
-		if (staticRec->destination != Vector2f(0, 0)) { //Hero has a destination
+	/*	if (staticRec->destination != Vector2f(0, 0)) { //Hero has a destination
 			if (staticRec->waypoint != Vector2f(0,0) && state == 0) { //Hero has a waypoint to the desination, and not in dialog
 				gameplay_functions->move_toward(staticRec); //Take a step towards the current waypoint
 			//	std::cout << "Request a step" << std::endl;
@@ -879,9 +887,11 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 				count = 0;
 				staticRec->setMode(WANDER);
 			}
-		}
+		}*/
 		combatControl->follow(oya, state);
-		combatControl->fight(silverSoldier, state);
+		combatControl->follow(silverSoldier, state);
+		combatControl->follow(staticRec, state);
+		//combatControl->fight(silverSoldier, state);
 
 		/*
 		cout << "Alex's position is " << Alex->getLoc().getXloc() << ", " << Alex->getLoc().getYloc() << endl;
@@ -1248,7 +1258,7 @@ void ALEX_LOOP(QuadTree* _QuadTree) {
 		start_tick = clock();
 		_QuadTree->clear();
 		for (int i = 0; i < recVec.size(); i++) {
-			_QuadTree->insert(recVec[i]);	//insert all obj into tree
+			_QuadTree->Insert(recVec[i]);	//insert all obj into tree
 		}
 		//clock 
 		iController->InputCheck();
@@ -1752,7 +1762,7 @@ void ERONS_LOOP(QuadTree* _QuadTree) {
 		Alex->updateCD();
 		silverSoldier->updateCD();
 		for (int i = 0; i < recVec.size(); i++) {
-			_QuadTree->insert(recVec[i]);	//insert all obj into tree
+			_QuadTree->Insert(recVec[i]);	//insert all obj into tree
 
 		}
 		state = DialogueController::getState();
@@ -2131,7 +2141,7 @@ void ANDREWS_LOOP(QuadTree* _QuadTree) {
 	while (osi::GameWindow::isRunning()) {
 		_QuadTree->clear();
 		for (int i = 0; i < recVec.size(); i++) {
-			_QuadTree->insert(recVec[i]);	//insert all obj into tree
+			_QuadTree->Insert(recVec[i]);	//insert all obj into tree
 		}
 		//clock 
 		iController->InputCheck();
