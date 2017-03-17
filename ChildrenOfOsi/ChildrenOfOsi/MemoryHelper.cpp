@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "MemoryHelper.h"
+#include "Tag.h"
 
 
 MemoryHelper::MemoryHelper()
@@ -169,6 +170,18 @@ int MemoryHelper::store_action(std::string key) {
 int MemoryHelper::del_Attack(std::string key, float x, float y, bool col) {
 	make_Available(memManager::Attack_head, memManager::Attack_pool, key);
 	Containers::Attack_table.erase(Containers::Attack_table.find(key));
+	return 0;
+}
+
+int MemoryHelper::store_tag(std::string key) {
+	Tag* tag = new(find_available_block(memManager::tag_head, key)) Tag();
+	Containers::add_tag(key, tag);
+	return 0;
+}
+
+int MemoryHelper::store_conv_point(std::string key) {
+	ConversationPoint* conv_point = new(find_available_block(memManager::conv_point_head, key)) ConversationPoint();
+	Containers::add_conv_point(key, conv_point);
 	return 0;
 }
 

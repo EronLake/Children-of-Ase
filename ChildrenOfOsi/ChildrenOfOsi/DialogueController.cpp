@@ -189,5 +189,8 @@ void DialogueController::exitDialogue()
 {
 	other = nullptr;
 	state=0;
-	init_conv = false;
+	if (optionsIndex == 3)
+		init_conv = true;
+	else
+	    init_conv = false;
 }

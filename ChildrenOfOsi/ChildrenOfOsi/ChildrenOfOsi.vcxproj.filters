@@ -203,6 +203,8 @@
     <ClCompile Include="ActionExecFunctions.cpp">
       <Filter>AI\Actions</Filter>
     </ClCompile>
+    <ClCompile Include="ConversationPoint.cpp" />
+    <ClCompile Include="Tag.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AIHelper.h">
@@ -425,6 +427,8 @@
     <ClInclude Include="ActionExecFunctions.h">
       <Filter>AI\Actions</Filter>
     </ClInclude>
+    <ClInclude Include="ConversationPoint.h" />
+    <ClInclude Include="Tag.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="audio_test.txt">

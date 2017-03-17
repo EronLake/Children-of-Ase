@@ -3,6 +3,7 @@
 //#include "MemoryPool.h"
 #include "ChildrenOfOsi.h"
 #include "MemoryHelper.h"
+#include "Tag.h"
 
 
 
@@ -55,6 +56,12 @@ memManager::memManager(MessageLog* _mLog, TaskBuffer* _tBuffer)
 	action_pool = memHelper->create_pool(sizeof(Action) * 200);
 	action_head = memHelper->init_pool(texture_pool, sizeof(Action));
 
+	tag_pool = memHelper->create_pool(sizeof(Tag) * 32);
+	tag_head = memHelper->init_pool(tag_pool, sizeof(Tag) * 2);
+
+	conv_point_pool = memHelper->create_pool(sizeof(ConversationPoint) * 32);
+	conv_point_head = memHelper->init_pool(conv_point_pool, sizeof(ConversationPoint) * 2);
+
 
 	task_map["Add_Hero"] = &MemoryHelper::store_hero;
 	task_map["Add_LivingObj"] = &MemoryHelper::store_livingObj;
@@ -69,6 +76,8 @@ memManager::memManager(MessageLog* _mLog, TaskBuffer* _tBuffer)
 	task_map3["Add_Memory"] = &MemoryHelper::store_memory;
 	//task_map["Add_Action"] = &MemoryHelper::store_action;
 	task_map["Del_Attack"] = &MemoryHelper::del_Attack;
+	//task_map["Add_Tag"] = &MemoryHelper::store_tag;
+	//task_map["Add_Conv_Point"] = &MemoryHelper::store_conv_point;
 
 	LOG("memManager Object Constructed");
 	
@@ -118,6 +127,12 @@ memManager::~memManager()
 
 	memHelper->destroy_pool(action_pool);
 	memHelper->destroy_MemNode_list(action_head);
+
+	memHelper->destroy_pool(tag_pool);
+	memHelper->destroy_MemNode_list(tag_head);
+
+	memHelper->destroy_pool(conv_point_pool);
+	memHelper->destroy_MemNode_list(conv_point_head);
 
 	LOG("memManager Object Destroyed");
 
@@ -316,3 +331,9 @@ MemNode* memManager::shango_memory_head = nullptr;
 
 MemoryPool* memManager::action_pool = nullptr;
 MemNode* memManager::action_head = nullptr;
+
+MemoryPool* memManager::tag_pool = nullptr;
+MemNode* memManager::tag_head = nullptr;
+
+MemoryPool* memManager::conv_point_pool = nullptr;
+MemNode* memManager::conv_point_head = nullptr;
