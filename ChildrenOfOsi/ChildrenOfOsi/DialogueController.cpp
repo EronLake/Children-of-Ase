@@ -13,7 +13,7 @@ int DialogueController::state = 0;
 //4 is npc response
 DialogueHelper DialogueController::dialogue;
 std::vector<std::vector<dialogue_point>> DialogueController::options;
-std::vector<std::vector<dialogue_point>> DialogueController::replyOptions;
+std::vector<dialogue_point> DialogueController::replyOptions;
 std::string DialogueController::message;
 int DialogueController::optionsIndex=0;
 int DialogueController::select = 0;
@@ -32,7 +32,7 @@ DialogueController::~DialogueController()
 void DialogueController::PlayerChoose()
 {
 	options = dialogue.get_possible_conv_pts();
-	replyOptions = dialogue.get_possible_reply_pts();
+	//replyOptions = dialogue.get_possible_reply_pts();
 	state = 1;
 	if(!init_conv)
 	    optionsIndex = 0; //had at 3 for testing at one point
@@ -68,7 +68,7 @@ void DialogueController::PlayerConversationPoint()
 void DialogueController::PlayerResponse()
 {
 	std::cout << "Select: " << select << endl;
-	dialogue_point choice = replyOptions[optionsIndex][select];
+	dialogue_point choice = replyOptions[select];
 
 	std::string reply_pt_sentence = dialogue.gen_dialog(choice, player);
 	//draws reply
@@ -103,7 +103,7 @@ void DialogueController::otherConversationPoint(dialogue_point line)
 	message = other->getName() + ": " + reply_pt_sentence + "\n" +con_pt_sentence;
 	std::cout << "HERO REPLY/COONVERSATION POINT////////////////////////////////////" << std::endl;
 	std::cout << other->getName() << ": "<< message << std::endl;
-	replyOptions = dialogue.get_possible_reply_pts();
+	replyOptions = dialogue.get_possible_reply_pts(point[0]);
 	vector<std::string> print = getReplyOptions();
 	for (int i = 0; i < print.size(); i++) {
 		std::cout << print[i] << std::endl;
@@ -141,13 +141,12 @@ vector<std::string> DialogueController::getReplyOptions()
 {
 	vector<std::string> tmp;
 
-	for (int i = 0; i < replyOptions[optionsIndex].size(); i++)
+	for (int i = 0; i < replyOptions.size(); i++)
 	{
-		if (replyOptions[optionsIndex][i][0] == replyString ||
-			replyOptions[optionsIndex][i][0] == "denied")
-		{
-			tmp.push_back(replyOptions[optionsIndex][i][1]);
-		}
+		/*if (replyOptions[optionsIndex][i][0].compare(replyString)==0 ||
+			replyOptions[optionsIndex][i][0].compare("denied")==0)
+		{*/
+			tmp.push_back(replyOptions[i][1]);
 		
 	}
 

@@ -101,8 +101,11 @@ void WorldObj::face(WorldObj* other) {
 				f = 8;
 			}
 		}
-		else {
+		else if (getY() < other->getY()){
 			f = 2;
+		}
+		else {
+
 		}
 	}
 	setDirection(f);
