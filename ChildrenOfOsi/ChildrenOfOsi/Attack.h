@@ -27,23 +27,25 @@ class Attack: public WorldObj
   int getPause() { return this->pause; };
   bool getKeep() { return this->keep; };
   bool getTurn() { return this->turn; };
+  bool getCanCancel() { return this->canCancel; };
   vector<WorldObj*> getHits() { return this->hitObjs; };
   AttackTypes getAttackType() { return this->attackType; }
 
   void setDmg(int d) { this->dmg = d; };
   void setStaminaCost(int c) { this->staminaCost = c; };
-  void setAseCost(int c) { this->aseCost=c; };
+  void setAseCost(int c) { this->aseCost = c; };
   void setDuration(int d) { this->duration = d; };
   bool updateDuration();
   void setSpeed(float s) { this->speed = s; };
   void setDestroy(bool d) { this->destroyOnCollision = d; };
   void setAttackType(AttackTypes t) { this->attackType = t; }
-  
+
   void setCoolDown(int c) { this->cooldown = c; };
+  void setCanCancel(int c) { this->canCancel = c; };
   void setPause(int p) { this->pause = p; };
   void updatePause() { if(this->pause > 0) --pause; };
   void setKeep(bool k) { this->keep = k; };
-  void setTurn(bool t) { this->turn=t; };
+  void setTurn(bool t) { this->turn = t; };
   void addHit(WorldObj* o) { this->hitObjs.push_back(o); };
   bool beenHit(WorldObj* o);
   void Hit(LivingObj *target);
@@ -69,7 +71,7 @@ class Attack: public WorldObj
   bool destroyOnCollision;
   int aseCost;
   int staminaCost;
-  
+
   int cooldown;
   int pause;
   bool keep;
@@ -77,4 +79,5 @@ class Attack: public WorldObj
   Attack* next;
   bool turn;
   AttackTypes attackType;
+  bool canCancel;
 };

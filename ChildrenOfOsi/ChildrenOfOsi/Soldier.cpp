@@ -53,6 +53,7 @@ void Soldier::newAttack(int i, Attack* a)
   float y = body[0].getY();
   int d = getDirection();
   int bd = attackTypes[i]->getBaseDir();
+
   if(d == 8) {
     y = y - (attackTypes[i]->getHeight() / 1.2);
     if(bd == 4)x += (attackTypes[i]->getSpeed()*attackTypes[i]->getDuration() / 1.2);
@@ -73,6 +74,7 @@ void Soldier::newAttack(int i, Attack* a)
     if(bd == 4)y += (attackTypes[i]->getSpeed()*attackTypes[i]->getDuration() / 1.2);
     if(bd == 6)y -= (attackTypes[i]->getSpeed()*attackTypes[i]->getDuration() / 1.2);
   }
+
   p->setX(x);
   p->setY(y);
   p->setCollision(true);
@@ -92,6 +94,7 @@ void Soldier::newAttack(int i, Attack* a)
   ase -= attackTypes[i]->getAseCost();
   instances++;
   if(instances == 99)instances = 0;
+  currentAttacks.push_back(p);
   if(attackTypes[i]->getTurn())setDirWithBase(6, true);
   //}
 }
@@ -102,6 +105,7 @@ void Soldier::meleeAttack()
   float x = body[0].getX();
   float y = body[0].getY();
   melee->setDuration(5);
+  melee->setCanCancel(true);
   int d = getDirection();
   if(!swingLeft) {
     melee->setBaseDir(6);
@@ -134,6 +138,7 @@ void Soldier::meleeAttack()
   melee->setDirWithBase(d, false);
   melee->setX(x);
   melee->setY(y);
+  currentAttacks.push_back(melee);
   cdTime = melee->getCoolDown();
 }
 
@@ -148,6 +153,16 @@ void Soldier::updateCD()
   for(auto i = cooldownMap.begin(); i != cooldownMap.end(); ++i) {
     if(i->second > 0) {
       i->second--;
+    }
+  }
+  for(auto i = currentAttacks.begin(); i != currentAttacks.end(); ++i) {
+    if(*i == nullptr) {
+      currentAttacks.erase(i);
+    }
+    else {
+      if((*i)->getPause() == 0 && !(*i)->getCanCancel()) {
+        currentAttacks.erase(i);
+      }
     }
   }
   if(ase < maxAse)ase++;
@@ -257,6 +272,3 @@ bool Soldier::getCombo()
 {
   return (cdTime > 0 && cdTime < 15);
 }
-
-
-

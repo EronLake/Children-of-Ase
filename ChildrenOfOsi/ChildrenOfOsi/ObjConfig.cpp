@@ -78,7 +78,9 @@ void ObjConfig::import_config(vector<WorldObj*>* recVec, ChildrenOfOsi* gameplay
 		cout << "Makeing Forest" << endl;
 		int XDistancs = abs(topLeftx - topRightx);
 		int YDistancs = abs(topLefty - botLefty);
-		srand(time(0));
+		
+		
+		(time(0));
 		for (int i = 1; i < 100; i++) {
 			float randomX;
 			float randomY;
@@ -190,7 +192,7 @@ void ObjConfig::set_world_obj(vector<WorldObj*>* recVec, ChildrenOfOsi* gameplay
 	Containers::worldObj_table[name]->sprite.setTexture(Containers::texture_table[tex_file]);
 	Containers::worldObj_table[name]->setInteractable(false);
 
-	Containers::worldObj_table[name]->offsetBody(0, 1000, 1000, 1000, 1000);
+	Containers::worldObj_table[name]->offsetBody(0, 0, 0, 0, 0);
 
 	recVec->push_back(Containers::worldObj_table[name]);
 

@@ -63,7 +63,7 @@ class WorldObj
   int getBaseDir() const { return baseDir; };
 
   // Basic geometric information getters
-  void setLoc(Vector2f l) { this->loc = l; };
+  void setLoc(Vector2f l) { this->setX(l.getXloc()); this->setY(l.getYloc()); };
   void setX(float x);
   void setY(float y);
   void shiftX(float dist);

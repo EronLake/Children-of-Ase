@@ -271,7 +271,7 @@ int AIHelper::plan_step(WorldObj* obj) {
 				manager->createTaskWithObj("Stop", "MOVE", obj);
 				npc->setLoc(npc->waypoint);
 				if (npc->waypoints.size() == 0) { //This was the final waypoint, destination reached
-					std::cout << "Last waypoint" << std::endl;
+					std::cout << npc->getName() << ": Last waypoint" << std::endl;
 					npc->destination = Vector2f(0, 0); //"nullify" destination
 					npc->waypoint = Vector2f(0, 0); //"nullify" waypoint
 					npc->setMode(WAIT);

@@ -22,7 +22,7 @@
     },
 
     "Introduction": {
-        "1": "I am known as Yemoja."
+        "1": "I am known as Yemoja"
     },
 
     "Ask_Oya": {
@@ -142,31 +142,31 @@
 	},
 
 	"Ask_Reason": {
-		"1": "Why are you here before me",
-		"2": "Do  you have a reason to be here",
-		"3": "What are your intentions"
+		"1": "Why are you here before me ",
+		"2": "Do you have a reason to be here ",
+		"3": "What are your intentions "
 	},
 
 	"Ask_Origin": {
-		"1": "Which village do you come from"
+		"1": "Which village do you come from "
 	},
 
 	"Friend_Reason": {
-		"1": "I am glad to hear that you approach me with friendly intentions",
-		"2": "I am pleased that you are willing to cooperate with my village and I",
-		"3": "I hope we can remain friendly in the future"
+		"1": "I am here because I enjoy the company of the kind villagers",
+		"2": "I am here to protect all of the villagers",
+		"3": "I have lived here for years and have grown fond of this place"
 	},
 
 	"Bad_Reason": {
 		"1": "I am  disappointed that you are here for that",
 		"2": "Such a shame. I was hoping we could be allies",
-		"3": "You should tread very carefully with your wordsfrom now on, friend"
+		"3": "You should tread very carefully with your words from now on, friend"
 	},
 
 	"Response_Origin": {
-		"1": "So you are not from around here, interesting",
-		"2": "You have walked very far to get here then",
-		"3": "I'm suprised you have traveled so far"
+		"1": "I was born and raised here in the oasis village",
+		"2": "This oasis is my place of origin",
+		"3": "I have lived in this village for as long as I can remember"
 	},
 
 	"Identifier": {

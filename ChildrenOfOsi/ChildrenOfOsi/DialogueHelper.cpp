@@ -15,7 +15,7 @@ DialogueHelper dialogue;
 
 DialogueHelper::DialogueHelper()
 {
-	//srand(time(0)); // seed the rand function
+	srand(time(0)); //ensure good variation of random numbers when using rand()
 	//possible_conv_pts[0].push_back({ "placeholder","placeholder" });
 	//possible_conv_pts[1].push_back({ "placeholder","placeholder" });
 	//possible_conv_pts[2].push_back({ "placeholder","placeholder" });
@@ -48,18 +48,27 @@ DialogueHelper::~DialogueHelper()
 //functions where heroes make dialogue choices
 dialogue_point DialogueHelper::choose_conv_pt(dialogue_point point, int optn_inx)
 {
+	//std::ofstream ofs;
+	//ofs.open("dialog_template_output.txt", std::ofstream::out | std::ofstream::app);
 	int conv_pt_index = rand() % (possible_conv_pts[optn_inx].size());
-
+	for (int i = 0; i < possible_conv_pts[optn_inx][conv_pt_index].size(); ++i) {
+		//ofs << "pcp: "<<possible_conv_pts[optn_inx][conv_pt_index][i] << " ";
+	}
+	//ofs.close();
 	return possible_conv_pts[optn_inx][conv_pt_index];
 
 }
 
 dialogue_point DialogueHelper::choose_reply_pt(std::string point, int optn_inx)
 {
+	//std::ofstream ofs;
+	//ofs.open("dialog_template_output.txt", std::ofstream::out | std::ofstream::app);
 	for (int i = 0; i < possible_reply_pts[optn_inx].size(); i++)
 	{
+		//ofs << "prp: " << possible_reply_pts[optn_inx][i][i] << " ";
 		if (possible_reply_pts[optn_inx][i][0] == point)
 		{
+			//ofs.close();
 			return possible_reply_pts[optn_inx][i];
 		}
 	}
@@ -72,9 +81,15 @@ std::vector<std::vector<dialogue_point>> DialogueHelper::get_possible_conv_pts()
 	return possible_conv_pts;
 }
 
-std::vector<std::vector<dialogue_point>> DialogueHelper::get_possible_reply_pts()
+std::vector<dialogue_point> DialogueHelper::get_possible_reply_pts(std:: string point)
 {
-	return possible_reply_pts;
+	std::vector<dialogue_point> reply;
+	for (int i = 0; i < possible_reply_pts[3].size(); i++) {
+		if (possible_reply_pts[3][i][0].compare("denied") == 0 || possible_reply_pts[3][i][0].compare(point) == 0) {
+			reply.push_back({ possible_reply_pts[3][i] });
+		}
+	}
+	return reply;
 }
 
 
@@ -138,7 +153,7 @@ std::string DialogueHelper::gen_reply(dialogue_point diog_pt, Hero* hero)
 }
 
 dialogue_template DialogueHelper::get_template(dialogue_point diog_pt) {
-	std::ofstream ofs;
+	//std::ofstream ofs;
 	Json::Value root;
 	Json::Reader reader;
 
@@ -162,23 +177,29 @@ dialogue_template DialogueHelper::get_template(dialogue_point diog_pt) {
 		dtemp.push_back(root[diog_pt[1] + "_templates"][to_string(j)]
 			[to_string(i)].asString());
 	}
-	ofs.open("dialog_template_output.txt", std::ofstream::out | std::ofstream::app);
+	//ofs.open("dialog_template_output.txt", std::ofstream::out | std::ofstream::app);
 
-	
+	for (int i = 0; i < diog_pt.size(); ++i) {
+		//ofs << "diog_pt: " << diog_pt[i] << std::endl;
+	}
 	for (int i = 0; i < dtemp.size(); i++)
 	{
-		ofs << dtemp[i] << std::endl;
+		//ofs << "dialogue template: " << dtemp[i] << std::endl;
 		
 		//std::cout << dtemp[i] << std::endl;
 	}
-	ofs.close();
+	//ofs.close();
 	return dtemp;
 
 }
 
 dialogue_point DialogueHelper::get_dialog(std::string name, dialogue_point diog_pt) {
 	std::ofstream ofs;
+	ofs.open("dialog_template_output.txt", std::ofstream::out | std::ofstream::app);
 	dialogue_template dtemp = get_template(diog_pt);
+	//for (int i = 0; i < dtemp.size(); ++i) {
+		//ofs << "template test: " << dtemp[i] << std::endl;
+	//}
 
 	Json::Value root;
 	Json::Reader reader;
@@ -190,7 +211,7 @@ dialogue_point DialogueHelper::get_dialog(std::string name, dialogue_point diog_
 
 	dialogue_point dpoint;
 	
-
+	//ofs.open("dialog_template_output.txt", std::ofstream::out | std::ofstream::app);
 	/*look up appropriate random phrases using dialogue template
 	if the string is punctuation then do not look it up and
 	instead push the string right away*/
@@ -201,11 +222,14 @@ dialogue_point DialogueHelper::get_dialog(std::string name, dialogue_point diog_
 		if (tmp != "?" && tmp != "," && tmp != "." && 
 			tmp != "!" && tmp != "_") {
 			if(root[tmp].size() > 1)
-			    j = rand() % (root[tmp].size() + 1);
+			    j = rand() % root[tmp].size() + 1;
 			else
 				j = 1;
+			//ofs << "j=: " << j << std::endl;
 			dpoint.push_back(root[tmp][to_string(j)]
 				.asString());
+			ofs << "dp: " << root[tmp][to_string(j)]
+				.asString() << std::endl;
 		}
 		else {
 			dpoint.push_back(tmp);
@@ -213,12 +237,12 @@ dialogue_point DialogueHelper::get_dialog(std::string name, dialogue_point diog_
 		}
 
 	}
-	ofs.open("dialog_template_output.txt", std::ofstream::out | std::ofstream::app);
+	//ofs.open("dialog_template_output.txt", std::ofstream::out | std::ofstream::app);
 	for (int i = 0; i < dpoint.size(); i++){
-		ofs << "dialogue point: " << dpoint[i] << std::endl;
+		//ofs << "dialogue point: " << dpoint[i] << std::endl;
 		//std::cout << "dialogue point: "<< dpoint[i] << std::endl;
 	}
-	ofs.close();
+	//ofs.close();
 	return dpoint;
 
 }
