@@ -24,11 +24,6 @@
 			"1": "Refute_Question" ,
 			"2":"Identifier",
 			"3": "."
-		},
-
-		"3": {
-			"1": "Refute_Question" ,
-			"2": "."
 		}
 	},
 
@@ -82,11 +77,6 @@
 		"2": {
 			"1": "Friend_Reason" ,
 			"2": "."
-		},
-
-		"3": {
-			"1": "Friend_Reason" ,
-			"2": "." 
 		}
 	},
 
@@ -104,12 +94,6 @@
 			"1": "Village_Response" ,
 			"2":"Village_1",
 			"3": "."
-		},
-
-		"2": {
-			"1": "Village_Response" ,
-			"2":"Village_1",
-			"3": "."
 		}
 	},
 
@@ -120,11 +104,6 @@
 		},
 
 		"2": {
-			"1": "Familiar_Greet" ,
-			"2": "."
-		},
-
-		"3": {
 			"1": "Familiar_Greet" ,
 			"2": ".",
 			"3": "Good_Intentions",
@@ -164,11 +143,6 @@
 		"2": {
 			"1": "Ask_Reason" ,
 			"2": "?" 
-		},
-
-		"3": {
-			"1": "Ask_Reason",
-			"2": "?"
 		}
 	},
 
@@ -183,11 +157,6 @@
 		"2": {
 			"1": "Ask_Origin" ,
 			"2": "?" 
-		},
-
-		"3": {
-			"1": "Ask_Origin" ,
-			"2": "?"
 		}
 	}
 }
