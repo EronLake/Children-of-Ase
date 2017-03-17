@@ -30,7 +30,6 @@ public:
 	void talk(WorldObj * player);
 	void melee(WorldObj * player);
 	void special(WorldObj * player, int num);
-	void spin(WorldObj * player, int num);
 	void combat(WorldObj * player);
 	void setSwordGlow(WorldObj* player);
 	void setHeartGlow(WorldObj* player);
@@ -57,6 +56,7 @@ public:
 	void play_sound(string name);
 
 	void createTask(std::string task_name, std::string type, WorldObj * objToUpdate = NULL);
+	void createTaskWithNum(std::string task_name, std::string type, WorldObj * objToUpdate,int num);
 	void ChildrenOfOsi::createTaskWithParams(std::string task_name, std::string type, std::string key, float x, float y, bool col);
 	void ChildrenOfOsi::createTaskAddMem(std::string task_name, std::string type, std::string key, int hero_name, int t, int frames, vector<NPC*> p, string cat, string cont, string where, int why, int when);
 	//void ChildrenOfOsi::createTaskForAttack(std::string task_name, std::string type, float x, float y, bool col, int d);

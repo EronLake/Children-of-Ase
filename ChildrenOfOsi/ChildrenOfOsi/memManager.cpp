@@ -38,22 +38,27 @@ memManager::memManager(MessageLog* _mLog, TaskBuffer* _tBuffer)
 	texture_head = memHelper->init_pool(texture_pool, sizeof(Texture));
 
 	oya_memory_pool = memHelper->create_pool(sizeof(Memory) * 40);
-	oya_memory_head = memHelper->init_pool(texture_pool, sizeof(Memory));
+	oya_memory_head = memHelper->init_pool(oya_memory_pool, sizeof(Memory));
+	memHelper->fill_mem_pool(oya_memory_head, OYA);
 
 	yemoja_memory_pool = memHelper->create_pool(sizeof(Memory) * 40);
-	yemoja_memory_head = memHelper->init_pool(texture_pool, sizeof(Memory));
+	yemoja_memory_head = memHelper->init_pool(yemoja_memory_pool, sizeof(Memory));
+	memHelper->fill_mem_pool(yemoja_memory_head, YEMOJA);
 
 	oshosi_memory_pool = memHelper->create_pool(sizeof(Memory) * 40);
-	oshosi_memory_head = memHelper->init_pool(texture_pool, sizeof(Memory));
+	oshosi_memory_head = memHelper->init_pool(oshosi_memory_pool, sizeof(Memory));
+	memHelper->fill_mem_pool(oshosi_memory_head, OSHOSI);
 
 	ogun_memory_pool = memHelper->create_pool(sizeof(Memory) * 40);
-	ogun_memory_head = memHelper->init_pool(texture_pool, sizeof(Memory));
+	ogun_memory_head = memHelper->init_pool(ogun_memory_pool, sizeof(Memory));
+	memHelper->fill_mem_pool(ogun_memory_head, OGUN);
 
 	shango_memory_pool = memHelper->create_pool(sizeof(Memory) * 40);
-	shango_memory_head = memHelper->init_pool(texture_pool, sizeof(Memory));
+	shango_memory_head = memHelper->init_pool(shango_memory_pool, sizeof(Memory));
+	memHelper->fill_mem_pool(shango_memory_head, SHANGO);
 
 	action_pool = memHelper->create_pool(sizeof(Action) * 200);
-	action_head = memHelper->init_pool(texture_pool, sizeof(Action));
+	action_head = memHelper->init_pool(action_pool, sizeof(Action));
 
 
 	task_map["Add_Hero"] = &MemoryHelper::store_hero;
@@ -61,7 +66,6 @@ memManager::memManager(MessageLog* _mLog, TaskBuffer* _tBuffer)
 	task_map["Add_NPC"] = &MemoryHelper::store_npc;
 	task_map["Add_Attack"] = &MemoryHelper::store_Attack;
 	task_map2["New_Attack"] = &MemoryHelper::new_Attack;
-	task_map2["New_Spin"] = &MemoryHelper::new_Spin;
 	task_map["Add_Soldier"] = &MemoryHelper::store_soldier;
 	task_map["Add_Spl_Soldier"] = &MemoryHelper::store_spl_soldier;
 	task_map["Add_WorldObj"] = &MemoryHelper::store_worldObj;

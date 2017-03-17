@@ -58,6 +58,7 @@ void Input::InputCheck()
 	short K = GetKeyState('K') >> 15;
 	short L = GetKeyState('L') >> 15;
 	short ENTER = GetKeyState(VK_RETURN) >> 15;
+	short SHIFT = GetKeyState(VK_LSHIFT) >> 15;
 	short V = GetKeyState('V') >> 15;
 	short F = GetKeyState('F') >> 15;
 	short P = GetKeyState('P') >> 15;
@@ -65,7 +66,14 @@ void Input::InputCheck()
 
 
 	if (DialogueController::getState() == 0) {
+		Player* t = CheckClass::isPlayer(player);
 		gameplay_functions->combat(player);
+		if (SHIFT) {
+				t->setSpeed(15);
+		}
+		else {
+			t->setSpeed(8);
+		}
 		if (W)                //Moving up
 		{
 			gameplay_functions->play_sound("Unpause");
@@ -117,19 +125,27 @@ void Input::InputCheck()
 			gameplay_functions->talk(player);
 		}
 		if (F) {
-			if (player->getType() == 6) {
-				Player* t = CheckClass::isPlayer(player);
-				if (t) {
+			if (t) {
 					if (t->getCool()) {
 						std::cout << "Pressed F" << std::endl;
 						t->meleeAttack();
 						gameplay_functions->melee(t);
 					}
-				}
+					else if (t->getCombo()) {
+						std::cout << "COMBO" << std::endl;
+						t->sprite.unlockAnimation();
+						t->resetCD();
+						if (t->getCool()) {
+							std::cout << "Pressed F" << std::endl;
+							t->flipSwing();
+							t->meleeAttack();
+							gameplay_functions->melee(t);
+						} else {
+							t->sprite.lockAnimation();
+						}
+					} 
 			}
 		} else if (R) {
-			if (player->getType() == 6) {
-				Player* t = CheckClass::isPlayer(player);
 				if (t) {
 					if (t->getCool(0)) {
 						std::cout << "Pressed R" << std::endl;
@@ -137,18 +153,17 @@ void Input::InputCheck()
 						gameplay_functions->melee(t);
 					}
 				}
-			}
 		} else if (T) {
-			if (player->getType() == 6) {
-				Player* t = CheckClass::isPlayer(player);
 				if (t) {
-					if (t->getCool(1)) {
+					if (t->getCool(2)) {
 						std::cout << "Pressed T" << std::endl;
-						gameplay_functions->spin(t, 1);
+						t->meleeAttack();
+						gameplay_functions->melee(t);
+						t->resetCD(2);
+						gameplay_functions->special(t, 2);
 						gameplay_functions->melee(t);
 					}
 				}
-			}
 		}
 		float firstOld = 0;
 		float secondOld = 0;
@@ -170,7 +185,7 @@ void Input::InputCheck()
 			rivFile << std::endl;
 			rivFile << std::endl;
 			rivFile.close();
-		}
+		} 
 
 		/*
 		if (L) {

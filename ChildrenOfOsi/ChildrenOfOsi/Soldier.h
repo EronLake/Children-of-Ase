@@ -26,22 +26,34 @@ class Soldier:
   bool getEvade() { return evade; };
   bool getHold() { return holdPos; };
   bool getPatrol() { return patrol; };
+  bool getSwingLeft() { return swingLeft; };
+  bool getCombo();
 
-  bool getCool() { return ((this->cdTime == 0) && (this->sprite.getLock() == false)); };
-  bool getCool(int c) { return ((this->cdTime == 0) && (cooldownMap[attackTypes[c]] == 0) && (this->sprite.getLock() == false)); };
+  bool getCool();
+  bool getCool(int c);
   int timeCD() { return cdTime; };
+  int getStamina() { return stamina; };
+  int getAse() { return ase; };
+  int getAttackIndex(Attack* atk);
 
   void setInCombat(bool c) { inCombat = c; };
   void setEvade(bool e) { evade = e; };
   void setHold(bool h) { holdPos = h; };
   void setPatrol(bool p) { patrol = p; };
+  void setStamina(int s) { stamina=s; };
+  void setAse(int a) { ase = a; };
+  void setMaxStamina(int s) { maxStamina = s; };
+  void setMaxAse(int a) { maxAse = a; };
+  void flipSwing() { swingLeft = !swingLeft; };
   
+
   void meleeAttack();
   void addAttackType(Attack* a);
   void newAttack(int i, Attack* a);
   Attack * nextAttack();
 
   void updateCD();
+  void resetCD();
   void resetCD(int c);
   
   void setParty(Party* p) { party = p; };
@@ -62,6 +74,11 @@ class Soldier:
   bool patrol;
 
   int cdTime;
+  int stamina;
+  int maxStamina;
+  int ase;
+  int maxAse;
+  bool swingLeft;
   
   std::string key;
   std::string atkey;

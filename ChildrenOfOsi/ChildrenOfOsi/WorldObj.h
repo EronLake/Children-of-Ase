@@ -63,7 +63,7 @@ class WorldObj
   int getBaseDir() const { return baseDir; };
 
   // Basic geometric information getters
-  void setLoc(Vector2f l) { this->loc = l; };
+  void setLoc(Vector2f l) { this->setX(l.getXloc()); this->setY(l.getYloc()); };
   void setX(float x);
   void setY(float y);
   void shiftX(float dist);
@@ -94,7 +94,7 @@ class WorldObj
   void setEvasionRadius(int _radius) { this->evasionRadius = _radius; }
 
   void setBaseDir(int d) { this->baseDir = d; };
-  void setDirWithBase(int od);
+  void setDirWithBase(int od, bool update);
   void face(WorldObj* other);
 
   // String conversion

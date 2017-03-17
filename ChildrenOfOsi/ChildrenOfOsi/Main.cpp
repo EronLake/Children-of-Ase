@@ -188,11 +188,12 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	DumM->register_manager();
 	PhysM->register_manager();
 	memM->register_manager();
-	RenM->register_manager();
+	
 	AudM->register_manager();
 	//TestM->register_manager();
 	AIM->register_manager();
-
+    
+	RenM->register_manager();
 
 
 
@@ -220,6 +221,10 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	Texture* downAtkTex = new Texture();
 	Texture* leftAtkTex = new Texture();
 	Texture* rightAtkTex = new Texture();
+	Texture* upAtk2Tex = new Texture();
+	Texture* downAtk2Tex = new Texture();
+	Texture* leftAtk2Tex = new Texture();
+	Texture* rightAtk2Tex = new Texture();
 	Texture* upHurtTex = new Texture();
 	Texture* downHurtTex = new Texture();
 	Texture* leftHurtTex = new Texture();
@@ -236,6 +241,36 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	Texture* h_downIdleTex = new Texture();
 	Texture* h_leftIdleTex = new Texture();
 	Texture* h_rightIdleTex = new Texture();
+
+	Texture* silverSoldierTexture = new Texture();
+	Texture* silverSoldierIdleTex = new Texture();
+
+	Texture* ss_upRunTex = new Texture();
+	Texture* ss_downRunTex = new Texture();
+	Texture* ss_leftRunTex = new Texture();
+	Texture* ss_rightRunTex = new Texture();
+	Texture* ss_upIdleTex = new Texture();
+	Texture* ss_downIdleTex = new Texture();
+	Texture* ss_leftIdleTex = new Texture();
+	Texture* ss_rightIdleTex = new Texture();
+	Texture* ss_upAtkTex = new Texture();
+	Texture* ss_downAtkTex = new Texture();
+	Texture* ss_leftAtkTex = new Texture();
+	Texture* ss_rightAtkTex = new Texture();
+	Texture* ss_upHurtTex = new Texture();
+	Texture* ss_downHurtTex = new Texture();
+	Texture* ss_leftHurtTex = new Texture();
+	Texture* ss_rightHurtTex = new Texture();
+	Texture* ss_upWalkTex = new Texture();
+	Texture* ss_downWalkTex = new Texture();
+	Texture* ss_leftWalkTex = new Texture();
+	Texture* ss_rightWalkTex = new Texture();
+	Texture* ss_upLungeTex = new Texture();
+	Texture* ss_downLungeTex = new Texture();
+	Texture* ss_leftLungeTex = new Texture();
+	Texture* ss_rightLungeTex = new Texture();
+
+
 
 	Texture* treeTex = new Texture();
 	Texture* treeTex1 = new Texture();
@@ -268,6 +303,10 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	downAtkTex->setFile("Assets/Sprites/ShangoForwardSwing.png", 24);
 	leftAtkTex->setFile("Assets/Sprites/ShangoLeftSwingEffect.png", 24);
 	rightAtkTex->setFile("Assets/Sprites/ShangoRightSwingEffect.png", 24);
+	upAtk2Tex->setFile("Assets/Sprites/ShangoBackLunge.png", 7);
+	downAtk2Tex->setFile("Assets/Sprites/ShangoForwardLunge.png", 7);
+	leftAtk2Tex->setFile("Assets/Sprites/ShangoLeftSwingLunge.png", 7);
+	rightAtk2Tex->setFile("Assets/Sprites/ShangoRightSwingLunge.png", 7);
 	upHurtTex->setFile("Assets/Sprites/ShangoBackRecoil.png", 18);
 	downHurtTex->setFile("Assets/Sprites/ShangoForwardRecoil.png", 18);
 	leftHurtTex->setFile("Assets/Sprites/ShangoLeftRecoil.png", 18);
@@ -285,6 +324,34 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	h_downIdleTex->setFile("Assets/Sprites/YemojaFrontIdle.png", 1);
 	h_leftIdleTex->setFile("Assets/Sprites/YemojaLeftIdle.png", 1);
 	h_rightIdleTex->setFile("Assets/Sprites/YemojaRightIdle.png", 1);
+
+	silverSoldierTexture->setFile("Assets/Sprites/SilverSoldierForwardIdle.png", 22);
+	silverSoldierIdleTex->setFile("Assets/Sprites/SilverSoldierForwardIdle.png", 22);
+
+	ss_upRunTex->setFile("Assets/Sprites/SilverSoldierBackSprint.png", 16);
+	ss_downRunTex->setFile("Assets/Sprites/SilverSoldierForwardSprint.png", 16);
+	ss_leftRunTex->setFile("Assets/Sprites/SilverSoldierLeftSprint.png", 16);
+	ss_rightRunTex->setFile("Assets/Sprites/SilverSoldierRightSprint.png", 16);
+	ss_upIdleTex->setFile("Assets/Sprites/SilverSoldierBackIdle.png", 22);
+	ss_downIdleTex->setFile("Assets/Sprites/SilverSoldierForwardIdle.png", 22);
+	ss_leftIdleTex->setFile("Assets/Sprites/SilverSoldierLeftIdle.png", 22);
+	ss_rightIdleTex->setFile("Assets/Sprites/SilverSoldierRightIdle.png", 22);
+	ss_upAtkTex->setFile("Assets/Sprites/SilverSoldierBackSwing.png", 24);
+	ss_downAtkTex->setFile("Assets/Sprites/SilverSoldierForwardSwing.png", 24);
+	ss_leftAtkTex->setFile("Assets/Sprites/SilverSoldierLeftSwingEffect.png", 24);
+	ss_rightAtkTex->setFile("Assets/Sprites/SilverSoldierRightSwingEffect.png", 24);
+	ss_upHurtTex->setFile("Assets/Sprites/SilverSoldierBackRecoil.png", 18);
+	ss_downHurtTex->setFile("Assets/Sprites/SilverSoldierForwardRecoil.png", 18);
+	ss_leftHurtTex->setFile("Assets/Sprites/SilverSoldierLeftRecoil.png", 18);
+	ss_rightHurtTex->setFile("Assets/Sprites/SilverSoldierRightRecoil.png", 18);
+	ss_upWalkTex->setFile("Assets/Sprites/SilverSoldierBackWalk.png", 32);
+	ss_downWalkTex->setFile("Assets/Sprites/SilverSoldierForwardWalk.png", 32);
+	ss_leftWalkTex->setFile("Assets/Sprites/SilverSoldierLeftWalk.png", 32);
+	ss_rightWalkTex->setFile("Assets/Sprites/SilverSoldierRightWalk.png", 32);
+	ss_upLungeTex->setFile("Assets/Sprites/SilverSoldierBackLunge.png", 7);
+	ss_downLungeTex->setFile("Assets/Sprites/SilverSoldierForwardLunge.png", 7);
+	ss_leftLungeTex->setFile("Assets/Sprites/SilverSoldierLeftLunge.png", 7);
+	ss_rightLungeTex->setFile("Assets/Sprites/SilverSoldierRightLunge.png", 7);
 
 	treeTex->setFile("Assets/Sprites/tree.png", 1);
 	treeTex1->setFile("Assets/Sprites/tree1.png", 1);
@@ -313,6 +380,10 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	Alex->sprite.atk_down = downAtkTex;
 	Alex->sprite.atk_left = leftAtkTex;
 	Alex->sprite.atk_right = rightAtkTex;
+	Alex->sprite.atk2_up = upAtk2Tex;
+	Alex->sprite.atk2_down = downAtk2Tex;
+	Alex->sprite.atk2_left = leftAtk2Tex;
+	Alex->sprite.atk2_right = rightAtk2Tex;
 
 	Alex->sprite.hurt_up = upHurtTex;
 	Alex->sprite.hurt_down = downHurtTex;
@@ -336,7 +407,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	Alex->melee->setDmg(10);
 	Alex->melee->setSpeed(5);
 	Alex->melee->setBaseDir(4);
-	Alex->melee->setCoolDown(120);
+	Alex->melee->setCoolDown(50);
 	Alex->melee->setPause(-1);
 	Alex->melee->setDestroy(false);
 	Alex->melee->setKeep(true);
@@ -348,11 +419,21 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	rockThrow->setDmg(5);
 	rockThrow->setSpeed(20);
 	rockThrow->setDestroy(true);
-	rockThrow->setDuration(248);
+	rockThrow->setDuration(100);
 	rockThrow->setCoolDown(120);
 	rockThrow->setPause(24);
 	rockThrow->sprite.setTexture(rockTex);
 	Alex->addAttackType(rockThrow);
+
+	Attack* fireball = new Attack();
+	fireball->setDmg(15);
+	fireball->setSpeed(10);
+	fireball->setDestroy(true);
+	fireball->setDuration(100);
+	fireball->setCoolDown(240);
+	fireball->setPause(24);
+	fireball->sprite.setTexture(rockTex);
+	Alex->addAttackType(fireball);
 
 	//Alex->melee->sprite.setTexture(blank);
 	Alex->melee->sprite.setTexture(blank);
@@ -361,44 +442,51 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	//vector<WorldObj*> recVec;
 	Attack* spin = new Attack();
 	spin->setDmg(7);
-	spin->setSpeed(7);
-	spin->setDestroy(true);
+	spin->setSpeed(15);
+	spin->setDestroy(false);
 	spin->setDuration(5);
 	spin->setBaseDir(6);
-	spin->setCoolDown(600);
-	spin->setPause(24);
-	spin->sprite.setTexture(rockTex);
+	spin->setCoolDown(100);
+	spin->setPause(48);
+	spin->setTurn(true);
+	spin->sprite.setTexture(blank);
 	Alex->addAttackType(spin);
 	Attack* spin2 = new Attack();
 	spin2->setDmg(7);
-	spin2->setSpeed(7);
-	spin2->setDestroy(true);
+	spin2->setSpeed(15);
+	spin2->setDestroy(false);
 	spin2->setDuration(5);
 	spin2->setBaseDir(6);
-	spin2->setCoolDown(600);
-	spin2->setPause(29);
-	spin2->sprite.setTexture(rockTex);
+	spin2->setCoolDown(0);
+	spin2->setPause(53);
+	spin2->setTurn(true);
+	spin2->sprite.setTexture(blank);
 	Alex->addAttackType(spin2);
 	Attack* spin3 = new Attack();
 	spin3->setDmg(7);
-	spin3->setSpeed(7);
-	spin3->setDestroy(true);
+	spin3->setSpeed(15);
+	spin3->setDestroy(false);
 	spin3->setDuration(5);
 	spin3->setBaseDir(6);
-	spin3->setCoolDown(600);
-	spin3->setPause(34);
-	spin3->sprite.setTexture(rockTex);
+	spin3->setCoolDown(0);
+	spin3->setPause(58);
+	spin3->setTurn(true);
+	spin3->sprite.setTexture(blank);
 	Alex->addAttackType(spin3);
 	Attack* spin4 = new Attack();
 	spin4->setDmg(7);
-	spin4->setSpeed(7);
-	spin4->setDestroy(true);
+	spin4->setSpeed(15);
+	spin4->setDestroy(false);
 	spin4->setDuration(5);
 	spin4->setBaseDir(6);
-	spin4->setCoolDown(600);
-	spin4->setPause(39);
-	spin4->sprite.setTexture(rockTex);
+	spin4->setCoolDown(0);
+	spin4->setPause(63);
+	spin4->setTurn(true);
+	spin4->sprite.setTexture(blank);
 	Alex->addAttackType(spin4);
+	spin->setNextAttack(spin2);
+	spin2->setNextAttack(spin3);
+	spin3->setNextAttack(spin4);
 
 	vector<WorldObj*> vec;
 	//vec.push_back(&Alex->melee);
@@ -455,17 +543,13 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	
 	gameplay_functions->add_hero("Yemoja", 4600, 3600, true);
 	gameplay_functions->add_hero("Oya", 4400, 3600, true);
-	gameplay_functions->add_hero("otherShango", 4900, 3300, true);
-	gameplay_functions->add_hero("sold1", 4900, 3300, true);
-	gameplay_functions->add_hero("sold2", 4900, 3300, true);
+	gameplay_functions->add_soldier("silverSoldier", 4900, 3300, true);
 
 	tBuffer->run();
 
 	Hero* staticRec = Containers::hero_table["Yemoja"];
 	Hero* oya = Containers::hero_table["Oya"];
-	Hero* otherShango = Containers::hero_table["otherShango"];
-	Hero* sold1 = Containers::hero_table["sold1"];
-	Hero* sold2 = Containers::hero_table["sold2"];
+	Soldier* silverSoldier = Containers::soldier_table["silverSoldier"];
 
 	staticRec->setWidth(100);
 	staticRec->setHeight(100);
@@ -474,8 +558,8 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	///should actually use gameplay_functions->add_hero("Yemoja", 4600, 3600, true)
 	/// Containers::hero_table[name]->setWidht(widht)
 
-	otherShango->setWidth(150);
-	otherShango->setHeight(150);
+	silverSoldier->setWidth(150);
+	silverSoldier->setHeight(150);
 
 	staticRec->sprite.setTexture(yemojaTexture);
 	staticRec->sprite.setIdleTexture(yemojaIdleTex);
@@ -492,147 +576,54 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	staticRec->sprite.hurt_left = leftHurtTex;
 	staticRec->sprite.hurt_right = rightHurtTex;
 
-	otherShango->sprite.setTexture(playerTexture);
-	otherShango->sprite.setIdleTexture(playerIdleTex);
-	otherShango->sprite.up = upRunTex;
-	otherShango->sprite.down = downRunTex;
-	otherShango->sprite.left = leftRunTex;
-	otherShango->sprite.right = rightRunTex;
+	silverSoldier->sprite.setTexture(silverSoldierTexture);
+	silverSoldier->sprite.setIdleTexture(silverSoldierIdleTex);
+	silverSoldier->sprite.up = ss_upRunTex;
+	silverSoldier->sprite.down = ss_downRunTex;
+	silverSoldier->sprite.left = ss_leftRunTex;
+	silverSoldier->sprite.right = ss_rightRunTex;
 
-	otherShango->sprite.id_up = upIdleTex;
-	otherShango->sprite.id_left = leftIdleTex;
-	otherShango->sprite.id_right = rightIdleTex;
-	otherShango->sprite.id_down = downIdleTex;
+	silverSoldier->sprite.id_up = ss_upIdleTex;
+	silverSoldier->sprite.id_left = ss_leftIdleTex;
+	silverSoldier->sprite.id_right = ss_rightIdleTex;
+	silverSoldier->sprite.id_down = ss_downIdleTex;
 
-	otherShango->sprite.atk_up = upAtkTex;
-	otherShango->sprite.atk_down = downAtkTex;
-	otherShango->sprite.atk_left = leftAtkTex;
-	otherShango->sprite.atk_right = rightAtkTex;
+	silverSoldier->sprite.atk_up = ss_upAtkTex;
+	silverSoldier->sprite.atk_down = ss_downAtkTex;
+	silverSoldier->sprite.atk_left = ss_leftAtkTex;
+	silverSoldier->sprite.atk_right = ss_rightAtkTex;
 
-	otherShango->sprite.hurt_up = upHurtTex;
-	otherShango->sprite.hurt_down = downHurtTex;
-	otherShango->sprite.hurt_left = leftHurtTex;
-	otherShango->sprite.hurt_right = rightHurtTex;
+	silverSoldier->sprite.hurt_up = ss_upHurtTex;
+	silverSoldier->sprite.hurt_down = ss_downHurtTex;
+	silverSoldier->sprite.hurt_left = ss_leftHurtTex;
+	silverSoldier->sprite.hurt_right = ss_rightHurtTex;
 
-	otherShango->offsetBody(0, 50, 50, 50, 50);
-	otherShango->setInteractable(true);
-	otherShango->setName("otherShango");
 
-	gameplay_functions->add_Attack(otherShango->getKey(), otherShango->body[0].getX(), otherShango->body[0].getY(), true, 10);
+	silverSoldier->offsetBody(0, 50, 50, 50, 50);
+	silverSoldier->setInteractable(true);
+	silverSoldier->setName("silverSoldier");
+
+	gameplay_functions->add_Attack(silverSoldier->getKey(), silverSoldier->body[0].getX(), silverSoldier->body[0].getY(), true, 10);
 	tBuffer->run();
 
 
-	otherShango->melee = Containers::Attack_table[otherShango->getKey()];
-	otherShango->melee->setDmg(10);
-	otherShango->melee->setSpeed(5);
-	otherShango->melee->setBaseDir(4);
-	otherShango->melee->setCoolDown(200);
-	otherShango->melee->setPause(-1);
-	otherShango->melee->setDestroy(false);
-	otherShango->melee->setKeep(true);
-	otherShango->melee->setWidth(otherShango->body[0].getWidth());
-	otherShango->melee->setHeight(otherShango->body[0].getHeight());
+	silverSoldier->melee = Containers::Attack_table[silverSoldier->getKey()];
+	silverSoldier->melee->setDmg(10);
+	silverSoldier->melee->setSpeed(5);
+	silverSoldier->melee->setBaseDir(4);
+	silverSoldier->melee->setCoolDown(200);
+	silverSoldier->melee->setPause(-1);
+	silverSoldier->melee->setDestroy(false);
+	silverSoldier->melee->setKeep(true);
+	silverSoldier->melee->setWidth(silverSoldier->body[0].getWidth());
+	silverSoldier->melee->setHeight(silverSoldier->body[0].getHeight());
 
-	otherShango->addAttackType(rockThrow);
-	otherShango->melee->sprite.setTexture(blank);
-	//otherShango->addAttackType(spin);
+	silverSoldier->addAttackType(rockThrow);
+	silverSoldier->melee->sprite.setTexture(blank);
+	//silverSoldier->addAttackType(spin);
 
-	sold1->setWidth(150);
-	sold1->setHeight(150);
-	sold1->sprite.setTexture(playerTexture);
-	sold1->sprite.setIdleTexture(playerIdleTex);
-	sold1->sprite.up = upRunTex;
-	sold1->sprite.down = downRunTex;
-	sold1->sprite.left = leftRunTex;
-	sold1->sprite.right = rightRunTex;
-
-	sold1->sprite.id_up = upIdleTex;
-	sold1->sprite.id_left = leftIdleTex;
-	sold1->sprite.id_right = rightIdleTex;
-	sold1->sprite.id_down = downIdleTex;
-
-	sold1->sprite.atk_up = upAtkTex;
-	sold1->sprite.atk_down = downAtkTex;
-	sold1->sprite.atk_left = leftAtkTex;
-	sold1->sprite.atk_right = rightAtkTex;
-
-	sold1->sprite.hurt_up = upHurtTex;
-	sold1->sprite.hurt_down = downHurtTex;
-	sold1->sprite.hurt_left = leftHurtTex;
-	sold1->sprite.hurt_right = rightHurtTex;
-
-	sold1->offsetBody(0, 50, 50, 50, 50);
-	sold1->setInteractable(true);
-	sold1->setName("sold1");
-
-	sold2->setWidth(150);
-	sold2->setHeight(150);
-	sold2->sprite.setTexture(playerTexture);
-	sold2->sprite.setIdleTexture(playerIdleTex);
-	sold2->sprite.up = upRunTex;
-	sold2->sprite.down = downRunTex;
-	sold2->sprite.left = leftRunTex;
-	sold2->sprite.right = rightRunTex;
-
-	sold2->sprite.id_up = upIdleTex;
-	sold2->sprite.id_left = leftIdleTex;
-	sold2->sprite.id_right = rightIdleTex;
-	sold2->sprite.id_down = downIdleTex;
-
-	sold2->sprite.atk_up = upAtkTex;
-	sold2->sprite.atk_down = downAtkTex;
-	sold2->sprite.atk_left = leftAtkTex;
-	sold2->sprite.atk_right = rightAtkTex;
-
-	sold2->sprite.hurt_up = upHurtTex;
-	sold2->sprite.hurt_down = downHurtTex;
-	sold2->sprite.hurt_left = leftHurtTex;
-	sold2->sprite.hurt_right = rightHurtTex;
-
-	sold2->offsetBody(0, 50, 50, 50, 50);
-	sold2->setInteractable(true);
-	sold2->setName("sold2");
-
-	sold1->setLoc(Alex->getLoc());
-	sold2->setLoc(Alex->getLoc());
-	sold1->shiftX(200);
-	sold2->shiftX(-200);
-	sold1->setSpeed(3);
-	sold2->setSpeed(2);
-	gameplay_functions->add_Attack(sold1->getKey(), sold1->body[0].getX(), sold1->body[0].getY(), true, 10);
-	tBuffer->run();
-	sold1->melee = Containers::Attack_table[sold1->getKey()];
-	gameplay_functions->add_Attack(sold2->getKey(), sold2->body[0].getX(), sold2->body[0].getY(), true, 10);
-	tBuffer->run();
-	sold2->melee = Containers::Attack_table[sold2->getKey()];
-	sold1->melee->setDmg(10);
-	sold1->melee->setSpeed(5);
-	sold1->melee->setBaseDir(4);
-	sold1->melee->setCoolDown(200);
-	sold1->melee->setPause(-1);
-	sold1->melee->setDestroy(false);
-	sold1->melee->setKeep(true);
-	sold1->melee->setWidth(otherShango->body[0].getWidth());
-	sold1->melee->setHeight(otherShango->body[0].getHeight());
-	
-	sold2->melee->setDmg(10);
-	sold2->melee->setSpeed(5);
-	sold2->melee->setBaseDir(4);
-	sold2->melee->setCoolDown(200);
-	sold2->melee->setPause(-1);
-	sold2->melee->setDestroy(false);
-	sold2->melee->setKeep(true);
-	sold2->melee->setWidth(otherShango->body[0].getWidth());
-	sold2->melee->setHeight(otherShango->body[0].getHeight());
-
-	sold1->melee->setCoolDown(100);
-	sold2->melee->setCoolDown(62);
-	sold1->melee->sprite.setTexture(blank);
-	sold2->melee->sprite.setTexture(blank);
 	combatControl->addtoTargets(Alex);
-	combatControl->addtoTargets(otherShango);
-	//combatControl->addtoTargets(sold1);
-	//combatControl->addtoTargets(sold2);
+	combatControl->addtoTargets(silverSoldier);
 
 	//VisibilityGraph graph;
 	ai->graph.vertices = vertices;
@@ -673,7 +664,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 
 	Planner* YemojaPlanner = new Planner();
 	AiController->hero_planners[YEMOJA] = YemojaPlanner;
-	Action* test_train = new Action(staticRec, otherShango, staticRec, 10, 1, "train", "execute_train");
+	Action* test_train = new Action(staticRec, oya, staticRec, 10, 1, "train", "execute_train");
 	AiController->hero_planners[YEMOJA]->set_current_action(test_train);
 
 	/*
@@ -691,9 +682,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	//staticRec->goal.setYloc(1200);
 	*/
 	recVec.push_back(staticRec);
-	recVec.push_back(otherShango);
-	recVec.push_back(sold1);
-	recVec.push_back(sold2);
+	recVec.push_back(silverSoldier);
 	recVec.push_back(oya);
 	//recVec.push_back(tree);
 	//recVec.push_back(tree1);
@@ -785,13 +774,16 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	}
 	poolAct->macro.back().exeAction();
 
-	Vector2f otherShangoInitialLoc = otherShango->getLoc();
+	Vector2f silverSoldierInitialLoc = silverSoldier->getLoc();
 
-	otherShango->setEvade(false);
-	sold1->setEvade(false);
-	sold2->setEvade(false);
+	silverSoldier->setEvade(false);
 	bool OSAtkMode = true;
 	short M = GetKeyState('M') >> 15;
+	Party* party = new Party();
+	Alex->setParty(party);
+	party->addToParty(Alex,true);
+	oya->setParty(party);
+	party->addToParty(oya, false);
 
 	vector<WorldObj*> enemyVec;
 	//osi::GameWindow::init();
@@ -806,9 +798,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 		start_tick = clock();
 		_QuadTree->clear();
 		Alex->updateCD();
-		otherShango->updateCD();
-		sold1->updateCD();
-		sold2->updateCD();
+		silverSoldier->updateCD();
 		for (int i = 0; i < recVec.size(); i++) {
 			_QuadTree->insert(recVec[i]);	//insert all obj into tree
 	
@@ -860,8 +850,8 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 
 
 		cout << "Alex's position is " << Alex->getLoc().getXloc() << ", " << Alex->getLoc().getYloc() << endl;
-		cout << "OS's position is " << otherShango->getLoc().getXloc() << ", " << otherShango->getLoc().getYloc() << endl;
-		cout << "OS's DESTINATION IS: " << otherShango->destination.getXloc() << ", " << otherShango->destination.getYloc() << endl;
+		cout << "OS's position is " << silverSoldier->getLoc().getXloc() << ", " << silverSoldier->getLoc().getYloc() << endl;
+		cout << "OS's DESTINATION IS: " << silverSoldier->destination.getXloc() << ", " << silverSoldier->destination.getYloc() << endl;
 
 		/* DEFINE COMBAT MOVEMENT AI HERE 
 		   At the start of each frame, we want to check for a given npc, whether there is hostile enemy on the map.
@@ -871,83 +861,83 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 		//attack mode
 		enemyVec.clear();
 		enemyVec.push_back(Alex);
-		if (enemyVec.empty()) otherShango->setEvade(true);
+		if (enemyVec.empty()) silverSoldier->setEvade(true);
 		for (auto it : enemyVec) {
-			//if discovered Alex, set otherShango combat mode to 0(attack).
-			if (otherShango->getCurrentEnemy() != nullptr) break;
+			//if discovered Alex, set silverSoldier combat mode to 0(attack).
+			if (silverSoldier->getCurrentEnemy() != nullptr) break;
 			if (it == Alex) {
 				cout << "*************************************FOUND ENEMY****************************************" << endl;
-				//otherShango->setMode(0);
+				//silverSoldier->setMode(0);
 				OSAtkMode = true;
-				otherShango->setCurrentEnemy(it);
+				silverSoldier->setCurrentEnemy(it);
 				break;
 			}
 		}
 
-		if (otherShango->getCool()) {
-			otherShango->setEvade(false);
-		} else if (otherShango->destination == otherShango->getLoc() || otherShango->destination==Vector2f(0,0)) {
-			otherShango->setEvade(true);
-			//otherShango->waypoint = Vector2f(-1, -1);
+		if (silverSoldier->getCool()) {
+			silverSoldier->setEvade(false);
+		} else if (silverSoldier->destination == silverSoldier->getLoc() || silverSoldier->destination==Vector2f(0,0)) {
+			silverSoldier->setEvade(true);
+			//silverSoldier->waypoint = Vector2f(-1, -1);
 			float x = rand() % 300 + 100;
 			int x2 = rand() % 2;
 			float y = rand() % 300 + 100;
 			int y2 = rand() % 2;
 			if (x2 == 0)x = -x;
 			if (y2 == 0)y = -y;
-			otherShango->destination = Vector2f(otherShango->getCurrentEnemy()->getX()+x, otherShango->getCurrentEnemy()->getY()+y);
-			otherShango->waypoint = Vector2f(otherShango->getCurrentEnemy()->getX() + x, otherShango->getCurrentEnemy()->getY() + y);
+			silverSoldier->destination = Vector2f(silverSoldier->getCurrentEnemy()->getX()+x, silverSoldier->getCurrentEnemy()->getY()+y);
+			silverSoldier->waypoint = Vector2f(silverSoldier->getCurrentEnemy()->getX() + x, silverSoldier->getCurrentEnemy()->getY() + y);
 		}
 
 		//if OS has an enemy, move to the enemy
-		if (otherShango->getCurrentEnemy() != nullptr && !otherShango->getEvade() ){//&& otherShango->destination != Vector2f(0,0)) {
+		if (silverSoldier->getCurrentEnemy() != nullptr && !silverSoldier->getEvade() ){//&& silverSoldier->destination != Vector2f(0,0)) {
 			cout << "*************************************************MOVING TO ENEMY******************************************" << endl;
-			otherShango->waypoint = Vector2f(otherShango->getCurrentEnemy()->getX() + (otherShango->getCurrentEnemy()->getWidth() / 4), otherShango->getCurrentEnemy()->getY() + (otherShango->getCurrentEnemy()->getHeight()/4));
-			otherShango->destination = Vector2f(otherShango->getCurrentEnemy()->getX() + (otherShango->getCurrentEnemy()->getWidth() / 4), otherShango->getCurrentEnemy()->getY() + (otherShango->getCurrentEnemy()->getHeight()/4));
+			silverSoldier->waypoint = Vector2f(silverSoldier->getCurrentEnemy()->getX() + (silverSoldier->getCurrentEnemy()->getWidth() / 4), silverSoldier->getCurrentEnemy()->getY() + (silverSoldier->getCurrentEnemy()->getHeight()/4));
+			silverSoldier->destination = Vector2f(silverSoldier->getCurrentEnemy()->getX() + (silverSoldier->getCurrentEnemy()->getWidth() / 4), silverSoldier->getCurrentEnemy()->getY() + (silverSoldier->getCurrentEnemy()->getHeight()/4));
 
 				//enemy is facing up
-			if (otherShango->getCurrentEnemy()->getDirection() == 8) {
+			if (silverSoldier->getCurrentEnemy()->getDirection() == 8) {
 
-				otherShango->waypoint.shiftYloc(-80);
-				otherShango->destination.shiftYloc(-80);
-				otherShango->waypoint.shiftXloc(-30);
-				otherShango->destination.shiftXloc(-30);
+				silverSoldier->waypoint.shiftYloc(-80);
+				silverSoldier->destination.shiftYloc(-80);
+				silverSoldier->waypoint.shiftXloc(-30);
+				silverSoldier->destination.shiftXloc(-30);
 
 				//enemy is facing right
 			}
-			else if (otherShango->getCurrentEnemy()->getDirection() == 6) {
+			else if (silverSoldier->getCurrentEnemy()->getDirection() == 6) {
 
-				otherShango->waypoint.shiftXloc(30);
-				otherShango->destination.shiftXloc(30);
-				otherShango->waypoint.shiftYloc(-30);
-				otherShango->destination.shiftYloc(-30);
+				silverSoldier->waypoint.shiftXloc(30);
+				silverSoldier->destination.shiftXloc(30);
+				silverSoldier->waypoint.shiftYloc(-30);
+				silverSoldier->destination.shiftYloc(-30);
 			}
 				//enemy is facing left
-			else if (otherShango->getCurrentEnemy()->getDirection() == 4) {
-				otherShango->waypoint.shiftXloc(-80);
-				otherShango->destination.shiftXloc(-80);
-				otherShango->waypoint.shiftYloc(-30);
-				otherShango->destination.shiftYloc(-30);
+			else if (silverSoldier->getCurrentEnemy()->getDirection() == 4) {
+				silverSoldier->waypoint.shiftXloc(-80);
+				silverSoldier->destination.shiftXloc(-80);
+				silverSoldier->waypoint.shiftYloc(-30);
+				silverSoldier->destination.shiftYloc(-30);
 			}
 				//enemy is facing down
-			else if (otherShango->getCurrentEnemy()->getDirection() == 2) {
-				otherShango->waypoint.shiftYloc(30);
-				otherShango->destination.shiftYloc(30);
-				otherShango->waypoint.shiftXloc(-30);
-				otherShango->destination.shiftXloc(-30);
+			else if (silverSoldier->getCurrentEnemy()->getDirection() == 2) {
+				silverSoldier->waypoint.shiftYloc(30);
+				silverSoldier->destination.shiftYloc(30);
+				silverSoldier->waypoint.shiftXloc(-30);
+				silverSoldier->destination.shiftXloc(-30);
 			}
 
-			//gameplay_functions->move_toward(otherShango);
+			//gameplay_functions->move_toward(silverSoldier);
 
 			//npc is at enemy destination, attack.
-			if (otherShango->destination == otherShango->getLoc()) {
-				otherShango->face(otherShango->getCurrentEnemy());
-				cout << "COOL DOWN FOR ATTACK IS " << otherShango->getCool() << endl;
-				if (otherShango->getCool()) {
+			if (silverSoldier->destination == silverSoldier->getLoc()) {
+				silverSoldier->face(silverSoldier->getCurrentEnemy());
+				cout << "COOL DOWN FOR ATTACK IS " << silverSoldier->getCool() << endl;
+				if (silverSoldier->getCool()) {
 					std::cout << "Pressed F" << std::endl;
-					//gameplay_functions->special(otherShango, 0);
-					otherShango->meleeAttack();
-					gameplay_functions->melee(otherShango);
+					//gameplay_functions->special(silverSoldier, 0);
+					silverSoldier->meleeAttack();
+					gameplay_functions->melee(silverSoldier);
 				}
 				
 
@@ -955,55 +945,53 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 		}
 
 		////evade mode
-		if (otherShango->getCurrentEnemy() != nullptr && otherShango->getEvade() ){//&& otherShango->destination != Vector2f(0, 0)) {
+		if (silverSoldier->getCurrentEnemy() != nullptr && silverSoldier->getEvade() ){//&& silverSoldier->destination != Vector2f(0, 0)) {
 			//if OS is in evade mode, use the getEvadeRange method to find the waypoint and set it to destination
-			if (otherShango->destination == Vector2f(-1, -1)) {
+			if (silverSoldier->destination == Vector2f(-1, -1)) {
 				cout << "****INSIDE THE EVADE MODE SETTER*****" << endl;
-				//otherShango->waypoint = otherShango->getEvadeRange(otherShango->getCurrentEnemy());
-				otherShango->destination = otherShango->getEvadeRange(otherShango->getCurrentEnemy());
-				cout << "shango waypoint is " << otherShango->waypoint.getXloc() << otherShango->waypoint.getYloc() << endl;
+				//silverSoldier->waypoint = silverSoldier->getEvadeRange(silverSoldier->getCurrentEnemy());
+				silverSoldier->destination = silverSoldier->getEvadeRange(silverSoldier->getCurrentEnemy());
+				cout << "shango waypoint is " << silverSoldier->waypoint.getXloc() << silverSoldier->waypoint.getYloc() << endl;
 			}
 			//if reached destination, strafe left or right
-			if (otherShango->getLoc() == otherShango->destination) {
+			if (silverSoldier->getLoc() == silverSoldier->destination) {
 				cout << "******* INSIDE THE EVADE MODE STRAFE *******" << endl;
-				//otherShango->waypoint = otherShango->getStrafeLocation(otherShango->getCurrentEnemy());
-				otherShango->destination = otherShango->getEvadeRange(otherShango->getCurrentEnemy());
-				cout << "othershango destination inside strafe function is " << otherShango->waypoint.getXloc() << ", " << otherShango->waypoint.getYloc() << endl;
+				//silverSoldier->waypoint = silverSoldier->getStrafeLocation(silverSoldier->getCurrentEnemy());
+				silverSoldier->destination = silverSoldier->getEvadeRange(silverSoldier->getCurrentEnemy());
+				cout << "silverSoldier destination inside strafe function is " << silverSoldier->waypoint.getXloc() << ", " << silverSoldier->waypoint.getYloc() << endl;
 			}
-			/*if (otherShango->waypoint != Vector2f(0, 0) && state == 0) { //Hero has a waypoint to the desination, and not in dialog
-				gameplay_functions->move_toward(otherShango); //Take a step towards the current waypoint
+			/*if (silverSoldier->waypoint != Vector2f(0, 0) && state == 0) { //Hero has a waypoint to the desination, and not in dialog
+				gameplay_functions->move_toward(silverSoldier); //Take a step towards the current waypoint
 															  //	std::cout << "Request a step" << std::endl;
 			}
 			else if (state == 0)                //Hero needs waypoints to destination, and not in dialog
 			{
-				gameplay_functions->get_path(otherShango); //Generate waypoints to destination
+				gameplay_functions->get_path(silverSoldier); //Generate waypoints to destination
 			}/**/
-			//gameplay_functions->move_toward(otherShango);
+			//gameplay_functions->move_toward(silverSoldier);
 		}
-	//	ai->graph.insert(otherShango->destination);
-		//ai->graph.insert(otherShango->getLoc());
-		if (otherShango->destination != Vector2f(0, 0)) { //Hero has a destination
-			if (otherShango->waypoint != Vector2f(0, 0) && state == 0) { //Hero has a waypoint to the desination, and not in dialog
-				gameplay_functions->move_toward(otherShango); //Take a step towards the current waypoint
+	//	ai->graph.insert(silverSoldier->destination);
+		//ai->graph.insert(silverSoldier->getLoc());
+		if (silverSoldier->destination != Vector2f(0, 0)) { //Hero has a destination
+			if (silverSoldier->waypoint != Vector2f(0, 0) && state == 0) { //Hero has a waypoint to the desination, and not in dialog
+				gameplay_functions->move_toward(silverSoldier); //Take a step towards the current waypoint
 															//	std::cout << "Request a step" << std::endl;
 			}
 			else if (state == 0)                //Hero needs waypoints to destination, and not in dialog
 			{
-				gameplay_functions->get_path(otherShango); //Generate waypoints to destination
+				gameplay_functions->get_path(silverSoldier); //Generate waypoints to destination
 			}
 		}
 		else {
 
 		}
-		combatControl->fight(sold1,state);
-		combatControl->fight(sold2, state);
-		combatControl->follow(oya, Alex,state);
+		combatControl->follow(oya, state);
 		//toggle between evade and attack mode
 		//if (M) {
 		//	if (OSAtkMode) {
 		//		OSAtkMode = false;
-		//		otherShango->waypoint = Vector2f(-1, -1);
-		//		otherShango->destination = Vector2f(-1, -1);
+		//		silverSoldier->waypoint = Vector2f(-1, -1);
+		//		silverSoldier->destination = Vector2f(-1, -1);
 		//	}
 		//	else {
 		//		OSAtkMode = true;
@@ -1072,7 +1060,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 		else {
 			gameplay_functions->stop(staticRec);
 		}*/
-		iController->InputCheck();
+		//iController->InputCheck();
 
 		//Alex->WorldObj::drawObj(0,0);
 		//for (int i = 0; i < recVec.size(); i++) {
@@ -1115,6 +1103,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 				my_rel->setChanged(false);
 			}
 		}
+		//getting here-------------------------------------------------------------------------***********
 		AiController->execute();
 
 		if ((1000 / fs) > (clock() - start_tick)) { //delta_ticks) {www
@@ -1127,7 +1116,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 			cout << "FPS: " << fps << endl;
 		}
 
-
+		frame_count++;
 	}
 	osi::GameWindow::terminate();
 }
@@ -1564,14 +1553,14 @@ void ERONS_LOOP(QuadTree* _QuadTree) {
 
 	gameplay_functions->add_hero("Yemoja", 4600, 3600, true);
 
-	gameplay_functions->add_hero("otherShango", 4900, 3300, true);
+	gameplay_functions->add_hero("silverSoldier", 4900, 3300, true);
 
 	tBuffer->run();
 
 	Hero* staticRec = Containers::hero_table["Yemoja"];
-	Hero* otherShango = Containers::hero_table["otherShango"];
+	Hero* silverSoldier = Containers::hero_table["silverSoldier"];
 
-	Action* test_fight = new Action(staticRec, otherShango, staticRec, 10, 1, "fight", "execute_fight");
+	Action* test_fight = new Action(staticRec, silverSoldier, staticRec, 10, 1, "fight", "execute_fight");
 
 	AiController->hero_planners[YEMOJA]->set_current_action(test_fight);
 
@@ -1579,8 +1568,8 @@ void ERONS_LOOP(QuadTree* _QuadTree) {
 	staticRec->setHeight(100);
 	staticRec->name = YEMOJA;
 
-	otherShango->setWidth(150);
-	otherShango->setHeight(150);
+	silverSoldier->setWidth(150);
+	silverSoldier->setHeight(150);
 
 	staticRec->sprite.setTexture(yemojaTexture);
 	staticRec->sprite.setIdleTexture(yemojaIdleTex);
@@ -1597,49 +1586,49 @@ void ERONS_LOOP(QuadTree* _QuadTree) {
 	staticRec->sprite.hurt_left = leftHurtTex;
 	staticRec->sprite.hurt_right = rightHurtTex;
 
-	otherShango->sprite.setTexture(playerTexture);
-	otherShango->sprite.setIdleTexture(playerIdleTex);
-	otherShango->sprite.up = upRunTex;
-	otherShango->sprite.down = downRunTex;
-	otherShango->sprite.left = leftRunTex;
-	otherShango->sprite.right = rightRunTex;
+	silverSoldier->sprite.setTexture(playerTexture);
+	silverSoldier->sprite.setIdleTexture(playerIdleTex);
+	silverSoldier->sprite.up = upRunTex;
+	silverSoldier->sprite.down = downRunTex;
+	silverSoldier->sprite.left = leftRunTex;
+	silverSoldier->sprite.right = rightRunTex;
 
-	otherShango->sprite.id_up = upIdleTex;
-	otherShango->sprite.id_left = leftIdleTex;
-	otherShango->sprite.id_right = rightIdleTex;
-	otherShango->sprite.id_down = downIdleTex;
+	silverSoldier->sprite.id_up = upIdleTex;
+	silverSoldier->sprite.id_left = leftIdleTex;
+	silverSoldier->sprite.id_right = rightIdleTex;
+	silverSoldier->sprite.id_down = downIdleTex;
 
-	otherShango->sprite.atk_up = upAtkTex;
-	otherShango->sprite.atk_down = downAtkTex;
-	otherShango->sprite.atk_left = leftAtkTex;
-	otherShango->sprite.atk_right = rightAtkTex;
+	silverSoldier->sprite.atk_up = upAtkTex;
+	silverSoldier->sprite.atk_down = downAtkTex;
+	silverSoldier->sprite.atk_left = leftAtkTex;
+	silverSoldier->sprite.atk_right = rightAtkTex;
 
-	otherShango->sprite.hurt_up = upHurtTex;
-	otherShango->sprite.hurt_down = downHurtTex;
-	otherShango->sprite.hurt_left = leftHurtTex;
-	otherShango->sprite.hurt_right = rightHurtTex;
+	silverSoldier->sprite.hurt_up = upHurtTex;
+	silverSoldier->sprite.hurt_down = downHurtTex;
+	silverSoldier->sprite.hurt_left = leftHurtTex;
+	silverSoldier->sprite.hurt_right = rightHurtTex;
 
-	otherShango->offsetBody(0, 50, 50, 50, 50);
-	otherShango->setInteractable(true);
-	otherShango->setName("otherShango");
+	silverSoldier->offsetBody(0, 50, 50, 50, 50);
+	silverSoldier->setInteractable(true);
+	silverSoldier->setName("silverSoldier");
 
-	gameplay_functions->add_Attack(otherShango->getKey(), otherShango->body[0].getX(), otherShango->body[0].getY(), true, 10);
+	gameplay_functions->add_Attack(silverSoldier->getKey(), silverSoldier->body[0].getX(), silverSoldier->body[0].getY(), true, 10);
 	tBuffer->run();
 
 
-	otherShango->melee = Containers::Attack_table[otherShango->getKey()];
-	otherShango->melee->setDmg(10);
-	otherShango->melee->setSpeed(5);
-	otherShango->melee->setBaseDir(4);
-	otherShango->melee->setCoolDown(200);
-	otherShango->melee->setPause(-1);
-	otherShango->melee->setDestroy(false);
-	otherShango->melee->setKeep(true);
-	otherShango->melee->setWidth(otherShango->body[0].getWidth());
-	otherShango->melee->setHeight(otherShango->body[0].getHeight());
+	silverSoldier->melee = Containers::Attack_table[silverSoldier->getKey()];
+	silverSoldier->melee->setDmg(10);
+	silverSoldier->melee->setSpeed(5);
+	silverSoldier->melee->setBaseDir(4);
+	silverSoldier->melee->setCoolDown(200);
+	silverSoldier->melee->setPause(-1);
+	silverSoldier->melee->setDestroy(false);
+	silverSoldier->melee->setKeep(true);
+	silverSoldier->melee->setWidth(silverSoldier->body[0].getWidth());
+	silverSoldier->melee->setHeight(silverSoldier->body[0].getHeight());
 
-	otherShango->addAttackType(rockThrow);
-	otherShango->melee->sprite.setTexture(blank);
+	silverSoldier->addAttackType(rockThrow);
+	silverSoldier->melee->sprite.setTexture(blank);
 
 
 
@@ -1662,7 +1651,7 @@ void ERONS_LOOP(QuadTree* _QuadTree) {
 	staticRec->setHealth(100);
 
 	recVec.push_back(staticRec);
-	recVec.push_back(otherShango);
+	recVec.push_back(silverSoldier);
 	
 	ai->start = staticRec->getLoc();
 	ai->goal = { 1100.00,1100.00 };
@@ -1709,9 +1698,9 @@ void ERONS_LOOP(QuadTree* _QuadTree) {
 	}
 	poolAct->macro.back().exeAction();
 
-	Vector2f otherShangoInitialLoc = otherShango->getLoc();
+	Vector2f silverSoldierInitialLoc = silverSoldier->getLoc();
 
-	otherShango->setEvade(false);
+	silverSoldier->setEvade(false);
 	bool OSAtkMode = true;
 	short M = GetKeyState('M') >> 15;
 
@@ -1728,7 +1717,7 @@ void ERONS_LOOP(QuadTree* _QuadTree) {
 		start_tick = clock();
 		_QuadTree->clear();
 		Alex->updateCD();
-		otherShango->updateCD();
+		silverSoldier->updateCD();
 		for (int i = 0; i < recVec.size(); i++) {
 			_QuadTree->insert(recVec[i]);	//insert all obj into tree
 
@@ -1780,8 +1769,8 @@ void ERONS_LOOP(QuadTree* _QuadTree) {
 
 
 		cout << "Alex's position is " << Alex->getLoc().getXloc() << ", " << Alex->getLoc().getYloc() << endl;
-		cout << "OS's position is " << otherShango->getLoc().getXloc() << ", " << otherShango->getLoc().getYloc() << endl;
-		cout << "OS's DESTINATION IS: " << otherShango->destination.getXloc() << ", " << otherShango->destination.getYloc() << endl;
+		cout << "OS's position is " << silverSoldier->getLoc().getXloc() << ", " << silverSoldier->getLoc().getYloc() << endl;
+		cout << "OS's DESTINATION IS: " << silverSoldier->destination.getXloc() << ", " << silverSoldier->destination.getYloc() << endl;
 
 		/* DEFINE COMBAT MOVEMENT AI HERE
 		At the start of each frame, we want to check for a given npc, whether there is hostile enemy on the map.
@@ -1791,84 +1780,84 @@ void ERONS_LOOP(QuadTree* _QuadTree) {
 		//attack mode
 		enemyVec.clear();
 		enemyVec.push_back(Alex);
-		if (enemyVec.empty()) otherShango->setEvade(true);
+		if (enemyVec.empty()) silverSoldier->setEvade(true);
 		for (auto it : enemyVec) {
-			//if discovered Alex, set otherShango combat mode to 0(attack).
-			if (otherShango->getCurrentEnemy() != nullptr) break;
+			//if discovered Alex, set silverSoldier combat mode to 0(attack).
+			if (silverSoldier->getCurrentEnemy() != nullptr) break;
 			if (it == Alex) {
 				cout << "*************************************FOUND ENEMY****************************************" << endl;
-				//otherShango->setMode(0);
+				//silverSoldier->setMode(0);
 				OSAtkMode = true;
-				otherShango->setCurrentEnemy(it);
+				silverSoldier->setCurrentEnemy(it);
 				break;
 			}
 		}
 
-		if (otherShango->getCool()) {
-			otherShango->setEvade(false);
+		if (silverSoldier->getCool()) {
+			silverSoldier->setEvade(false);
 		}
-		else if (otherShango->destination == otherShango->getLoc() || otherShango->destination == Vector2f(0, 0)) {
-			otherShango->setEvade(true);
-			//otherShango->waypoint = Vector2f(-1, -1);
+		else if (silverSoldier->destination == silverSoldier->getLoc() || silverSoldier->destination == Vector2f(0, 0)) {
+			silverSoldier->setEvade(true);
+			//silverSoldier->waypoint = Vector2f(-1, -1);
 			float x = rand() % 300 + 100;
 			int x2 = rand() % 2;
 			float y = rand() % 300 + 100;
 			int y2 = rand() % 2;
 			if (x2 == 0)x = -x;
 			if (y2 == 0)y = -y;
-			otherShango->destination = Vector2f(otherShango->getCurrentEnemy()->getX() + x, otherShango->getCurrentEnemy()->getY() + y);
-			otherShango->waypoint = Vector2f(otherShango->getCurrentEnemy()->getX() + x, otherShango->getCurrentEnemy()->getY() + y);
+			silverSoldier->destination = Vector2f(silverSoldier->getCurrentEnemy()->getX() + x, silverSoldier->getCurrentEnemy()->getY() + y);
+			silverSoldier->waypoint = Vector2f(silverSoldier->getCurrentEnemy()->getX() + x, silverSoldier->getCurrentEnemy()->getY() + y);
 		}
 
 		//if OS has an enemy, move to the enemy
-		if (otherShango->getCurrentEnemy() != nullptr && !otherShango->getEvade()) {//&& otherShango->destination != Vector2f(0,0)) {
+		if (silverSoldier->getCurrentEnemy() != nullptr && !silverSoldier->getEvade()) {//&& silverSoldier->destination != Vector2f(0,0)) {
 			cout << "*************************************************MOVING TO ENEMY******************************************" << endl;
-			otherShango->waypoint = Vector2f(otherShango->getCurrentEnemy()->getX() + (otherShango->getCurrentEnemy()->getWidth() / 4), otherShango->getCurrentEnemy()->getY() + (otherShango->getCurrentEnemy()->getHeight() / 4));
-			otherShango->destination = Vector2f(otherShango->getCurrentEnemy()->getX() + (otherShango->getCurrentEnemy()->getWidth() / 4), otherShango->getCurrentEnemy()->getY() + (otherShango->getCurrentEnemy()->getHeight() / 4));
+			silverSoldier->waypoint = Vector2f(silverSoldier->getCurrentEnemy()->getX() + (silverSoldier->getCurrentEnemy()->getWidth() / 4), silverSoldier->getCurrentEnemy()->getY() + (silverSoldier->getCurrentEnemy()->getHeight() / 4));
+			silverSoldier->destination = Vector2f(silverSoldier->getCurrentEnemy()->getX() + (silverSoldier->getCurrentEnemy()->getWidth() / 4), silverSoldier->getCurrentEnemy()->getY() + (silverSoldier->getCurrentEnemy()->getHeight() / 4));
 
 			//enemy is facing up
-			if (otherShango->getCurrentEnemy()->getDirection() == 8) {
+			if (silverSoldier->getCurrentEnemy()->getDirection() == 8) {
 
-				otherShango->waypoint.shiftYloc(-80);
-				otherShango->destination.shiftYloc(-80);
-				otherShango->waypoint.shiftXloc(-30);
-				otherShango->destination.shiftXloc(-30);
+				silverSoldier->waypoint.shiftYloc(-80);
+				silverSoldier->destination.shiftYloc(-80);
+				silverSoldier->waypoint.shiftXloc(-30);
+				silverSoldier->destination.shiftXloc(-30);
 
 				//enemy is facing right
 			}
-			else if (otherShango->getCurrentEnemy()->getDirection() == 6) {
+			else if (silverSoldier->getCurrentEnemy()->getDirection() == 6) {
 
-				otherShango->waypoint.shiftXloc(30);
-				otherShango->destination.shiftXloc(30);
-				otherShango->waypoint.shiftYloc(-30);
-				otherShango->destination.shiftYloc(-30);
+				silverSoldier->waypoint.shiftXloc(30);
+				silverSoldier->destination.shiftXloc(30);
+				silverSoldier->waypoint.shiftYloc(-30);
+				silverSoldier->destination.shiftYloc(-30);
 			}
 			//enemy is facing left
-			else if (otherShango->getCurrentEnemy()->getDirection() == 4) {
-				otherShango->waypoint.shiftXloc(-80);
-				otherShango->destination.shiftXloc(-80);
-				otherShango->waypoint.shiftYloc(-30);
-				otherShango->destination.shiftYloc(-30);
+			else if (silverSoldier->getCurrentEnemy()->getDirection() == 4) {
+				silverSoldier->waypoint.shiftXloc(-80);
+				silverSoldier->destination.shiftXloc(-80);
+				silverSoldier->waypoint.shiftYloc(-30);
+				silverSoldier->destination.shiftYloc(-30);
 			}
 			//enemy is facing down
-			else if (otherShango->getCurrentEnemy()->getDirection() == 2) {
-				otherShango->waypoint.shiftYloc(30);
-				otherShango->destination.shiftYloc(30);
-				otherShango->waypoint.shiftXloc(-30);
-				otherShango->destination.shiftXloc(-30);
+			else if (silverSoldier->getCurrentEnemy()->getDirection() == 2) {
+				silverSoldier->waypoint.shiftYloc(30);
+				silverSoldier->destination.shiftYloc(30);
+				silverSoldier->waypoint.shiftXloc(-30);
+				silverSoldier->destination.shiftXloc(-30);
 			}
 
-			//gameplay_functions->move_toward(otherShango);
+			//gameplay_functions->move_toward(silverSoldier);
 
 			//npc is at enemy destination, attack.
-			if (otherShango->destination == otherShango->getLoc()) {
-				otherShango->face(otherShango->getCurrentEnemy());
-				cout << "COOL DOWN FOR ATTACK IS " << otherShango->getCool() << endl;
-				if (otherShango->getCool()) {
+			if (silverSoldier->destination == silverSoldier->getLoc()) {
+				silverSoldier->face(silverSoldier->getCurrentEnemy());
+				cout << "COOL DOWN FOR ATTACK IS " << silverSoldier->getCool() << endl;
+				if (silverSoldier->getCool()) {
 					std::cout << "Pressed F" << std::endl;
-					//gameplay_functions->special(otherShango, 0);
-					otherShango->meleeAttack();
-					gameplay_functions->melee(otherShango);
+					//gameplay_functions->special(silverSoldier, 0);
+					silverSoldier->meleeAttack();
+					gameplay_functions->melee(silverSoldier);
 				}
 
 
@@ -1876,41 +1865,41 @@ void ERONS_LOOP(QuadTree* _QuadTree) {
 		}
 
 		////evade mode
-		if (otherShango->getCurrentEnemy() != nullptr && otherShango->getEvade()) {//&& otherShango->destination != Vector2f(0, 0)) {
+		if (silverSoldier->getCurrentEnemy() != nullptr && silverSoldier->getEvade()) {//&& silverSoldier->destination != Vector2f(0, 0)) {
 																				   //if OS is in evade mode, use the getEvadeRange method to find the waypoint and set it to destination
-			if (otherShango->destination == Vector2f(-1, -1)) {
+			if (silverSoldier->destination == Vector2f(-1, -1)) {
 				cout << "****INSIDE THE EVADE MODE SETTER*****" << endl;
-				//otherShango->waypoint = otherShango->getEvadeRange(otherShango->getCurrentEnemy());
-				otherShango->destination = otherShango->getEvadeRange(otherShango->getCurrentEnemy());
-				cout << "shango waypoint is " << otherShango->waypoint.getXloc() << otherShango->waypoint.getYloc() << endl;
+				//silverSoldier->waypoint = silverSoldier->getEvadeRange(silverSoldier->getCurrentEnemy());
+				silverSoldier->destination = silverSoldier->getEvadeRange(silverSoldier->getCurrentEnemy());
+				cout << "shango waypoint is " << silverSoldier->waypoint.getXloc() << silverSoldier->waypoint.getYloc() << endl;
 			}
 			//if reached destination, strafe left or right
-			if (otherShango->getLoc() == otherShango->destination) {
+			if (silverSoldier->getLoc() == silverSoldier->destination) {
 				cout << "******* INSIDE THE EVADE MODE STRAFE *******" << endl;
-				//otherShango->waypoint = otherShango->getStrafeLocation(otherShango->getCurrentEnemy());
-				otherShango->destination = otherShango->getEvadeRange(otherShango->getCurrentEnemy());
-				cout << "othershango destination inside strafe function is " << otherShango->waypoint.getXloc() << ", " << otherShango->waypoint.getYloc() << endl;
+				//silverSoldier->waypoint = silverSoldier->getStrafeLocation(silverSoldier->getCurrentEnemy());
+				silverSoldier->destination = silverSoldier->getEvadeRange(silverSoldier->getCurrentEnemy());
+				cout << "silverSoldier destination inside strafe function is " << silverSoldier->waypoint.getXloc() << ", " << silverSoldier->waypoint.getYloc() << endl;
 			}
-			/*if (otherShango->waypoint != Vector2f(0, 0) && state == 0) { //Hero has a waypoint to the desination, and not in dialog
-			gameplay_functions->move_toward(otherShango); //Take a step towards the current waypoint
+			/*if (silverSoldier->waypoint != Vector2f(0, 0) && state == 0) { //Hero has a waypoint to the desination, and not in dialog
+			gameplay_functions->move_toward(silverSoldier); //Take a step towards the current waypoint
 			//	std::cout << "Request a step" << std::endl;
 			}
 			else if (state == 0)                //Hero needs waypoints to destination, and not in dialog
 			{
-			gameplay_functions->get_path(otherShango); //Generate waypoints to destination
+			gameplay_functions->get_path(silverSoldier); //Generate waypoints to destination
 			}/**/
-			//gameplay_functions->move_toward(otherShango);
+			//gameplay_functions->move_toward(silverSoldier);
 		}
-		//	ai->graph.insert(otherShango->destination);
-		//ai->graph.insert(otherShango->getLoc());
-		if (otherShango->destination != Vector2f(0, 0)) { //Hero has a destination
-			if (otherShango->waypoint != Vector2f(0, 0) && state == 0) { //Hero has a waypoint to the desination, and not in dialog
-				gameplay_functions->move_toward(otherShango); //Take a step towards the current waypoint
+		//	ai->graph.insert(silverSoldier->destination);
+		//ai->graph.insert(silverSoldier->getLoc());
+		if (silverSoldier->destination != Vector2f(0, 0)) { //Hero has a destination
+			if (silverSoldier->waypoint != Vector2f(0, 0) && state == 0) { //Hero has a waypoint to the desination, and not in dialog
+				gameplay_functions->move_toward(silverSoldier); //Take a step towards the current waypoint
 															  //	std::cout << "Request a step" << std::endl;
 			}
 			else if (state == 0)                //Hero needs waypoints to destination, and not in dialog
 			{
-				gameplay_functions->get_path(otherShango); //Generate waypoints to destination
+				gameplay_functions->get_path(silverSoldier); //Generate waypoints to destination
 			}
 		}
 		else {

@@ -22,7 +22,7 @@
     },
 
     "Introduction": {
-        "3": "I am known as"
+        "1": "I am known as Yemoja."
     },
 
     "Ask_Oya": {
@@ -137,8 +137,8 @@
 	},
 
 	"Ask_Name": {
-		"3": "What do people call you",
-		"4": "What do you call yourself, friend"
+		"1": "What do people call you",
+		"2": "What do you call yourself, friend"
 	},
 
 	"Ask_Reason": {
@@ -148,7 +148,7 @@
 	},
 
 	"Ask_Origin": {
-		"3": "Which village do you come from"
+		"1": "Which village do you come from"
 	},
 
 	"Friend_Reason": {
@@ -170,8 +170,8 @@
 	},
 
 	"Identifier": {
-		"1": "Stranger",
-		"2": "Traveler"
+		"1": "stranger",
+		"2": "traveler"
 	},
 
 	"Response_Name": {

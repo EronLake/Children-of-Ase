@@ -137,23 +137,48 @@ int RenderHelper::sprite_right(WorldObj* obj) {
 	return 0;
 }
 
-int RenderHelper::sprite_atk(WorldObj * obj)
+int RenderHelper::sprite_atk(WorldObj * o)
 {
-	int check = obj->getDirection();
-	if (check == 8) {
-		obj->sprite.setTexture(obj->sprite.atk_up);
-		obj->sprite.setIdleTexture(obj->sprite.id_up);
-	} else 	if (check == 2) {
-		obj->sprite.setTexture(obj->sprite.atk_down);
-		obj->sprite.setIdleTexture(obj->sprite.id_down);
-	} else 	if (check == 6) {
-		obj->sprite.setTexture(obj->sprite.atk_right);
-		obj->sprite.setIdleTexture(obj->sprite.id_right);
-	} else	if (check == 4) {
-		obj->sprite.setTexture(obj->sprite.atk_left);
-		obj->sprite.setIdleTexture(obj->sprite.id_left);
+	if (o->getType() > 2) {
+		Soldier* obj = CheckClass::isSoldier(o);
+		int check = obj->getDirection();
+		if (check == 8) {
+			if (obj->getSwingLeft()) {
+				obj->sprite.setTexture(obj->sprite.atk_up);
+			}else {
+				obj->sprite.setTexture(obj->sprite.atk2_up);
+			}
+			obj->sprite.setIdleTexture(obj->sprite.id_up);
+		}
+		else 	if (check == 2) {
+			if (obj->getSwingLeft()) {
+				obj->sprite.setTexture(obj->sprite.atk_down);
+			}
+			else {
+				obj->sprite.setTexture(obj->sprite.atk2_down);
+			}
+			obj->sprite.setIdleTexture(obj->sprite.id_down);
+		}
+		else 	if (check == 6) {
+			if (obj->getSwingLeft()) {
+				obj->sprite.setTexture(obj->sprite.atk_right);
+			}
+			else {
+				obj->sprite.setTexture(obj->sprite.atk2_right);
+			}
+			obj->sprite.setIdleTexture(obj->sprite.id_right);
+		}
+		else	if (check == 4) {
+			if (obj->getSwingLeft()) {
+				obj->sprite.setTexture(obj->sprite.atk_left);
+			}
+			else {
+				obj->sprite.setTexture(obj->sprite.atk2_left);
+			}
+			obj->sprite.setIdleTexture(obj->sprite.id_left);
+		}
+		obj->sprite.lockAnimation();
 	}
-	obj->sprite.lockAnimation();
 	return 0;
 }
 

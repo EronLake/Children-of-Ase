@@ -14,7 +14,6 @@ public:
 	int store_soldier(std::string key, float x, float y, bool col);
 	int store_Attack(std::string key, float x, float y, bool col);
 	int new_Attack(WorldObj* obj, int num);
-	int new_Spin(WorldObj* obj, int num);
 	int store_spl_soldier(std::string key, float x, float y, bool col);
 	int store_livingObj(std::string key, float x, float y, bool col);
 	int store_worldObj(std::string key, float x, float y, bool col);
@@ -37,6 +36,8 @@ public:
 	void destroy_MemNode_list(MemNode* head_ptr);
 	MemNode* make_Available(MemNode* head_ptr, MemoryPool* p, std::string key);
 	void* find_available_block(MemNode* head_ptr, std::string str);
+
+	void fill_mem_pool(MemNode* head_ptr, int hero_name);
 
 };
 

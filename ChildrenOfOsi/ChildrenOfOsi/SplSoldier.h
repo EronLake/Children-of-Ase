@@ -9,10 +9,6 @@ public:
 	SplSoldier(float x, float y, bool col);
 	SplSoldier(Vector2f p_topLeft, float p_width, float p_height);
 	~SplSoldier();
-	int getAse();
-	void setAse(int a);
 private:
-	int ase;
-	int attacks[3];
 };
 

@@ -34,7 +34,6 @@ void ActionHelper::create_memory(Action* action, Hero* hero)
 	//int why;                 //ACTIONS: do-er's motivation (0=affinity, 1=strength, 2=notoriety, -1=idk)
 	//int when;                //ACTIONS: when the event occured (incomplete: when it started, complete: when it completed)
 	//string reason;           //ACTIONS: reason for failure or success
-
 	//Memory(int t, int frames, vector<NPC*> p, string cat="",string cont="",string where="",int why=-1, int when=-1);
 	gameplay_func->add_memory(key, hero->name, type, action->time_stamp, people, category,action->getName() + std::to_string(action->time_stamp), where, action->getWhy(), when);
 	hero->mem_counter++;
@@ -42,6 +41,7 @@ void ActionHelper::create_memory(Action* action, Hero* hero)
 	if (hero->name = OYA)
 	{
 		hero->memories.push_back(Containers::oya_memory_table[key]);
+		bool the_same_ptr = hero->memories[0] = Containers::oya_memory_table[key];
 	}
 	else if (hero->name = YEMOJA)
 	{

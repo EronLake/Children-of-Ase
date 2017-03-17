@@ -22,21 +22,21 @@ void CombatController::update()
 void CombatController::fight(Soldier* sold1, int state) {
 	if (enemyVec.empty()) sold1->setEvade(true);
 	while(sold1->getCurrentEnemy() == nullptr){
-		//if discovered Alex, set otherShango combat mode to 0(attack).
+		//if discovered Alex, set silverSoldier combat mode to 0(attack).
 		auto it =enemyVec[rand() % enemyVec.size()];
 		if (it != sold1) {
 			cout << "*************************************FOUND ENEMY****************************************" << endl;
-			//otherShango->setMode(0);
+			//silverSoldier->setMode(0);
 			sold1->setEvade(false);
 			sold1->setCurrentEnemy(it);
 		}
 	}
 	/*for (auto it : enemyVec) {
-		//if discovered Alex, set otherShango combat mode to 0(attack).
+		//if discovered Alex, set silverSoldier combat mode to 0(attack).
 		if (sold1->getCurrentEnemy() != nullptr) break;
 		if (it != sold1) {
 			cout << "*************************************FOUND ENEMY****************************************" << endl;
-			//otherShango->setMode(0);
+			//silverSoldier->setMode(0);
 			sold1->setEvade(false);
 			sold1->setCurrentEnemy(it);
 			break;
@@ -48,7 +48,7 @@ void CombatController::fight(Soldier* sold1, int state) {
 	}
 	else if (sold1->destination == sold1->getLoc() || sold1->destination == Vector2f(0, 0)) {
 		sold1->setEvade(true);
-		//otherShango->waypoint = Vector2f(-1, -1);
+		//silverSoldier->waypoint = Vector2f(-1, -1);
 		float x = rand() % 300 + 100;
 		int x2 = rand() % 2;
 		float y = rand() % 300 + 100;
@@ -60,7 +60,7 @@ void CombatController::fight(Soldier* sold1, int state) {
 	}
 
 	//if OS has an enemy, move to the enemy
-	if (sold1->getCurrentEnemy() != nullptr && !sold1->getEvade()) {//&& otherShango->destination != Vector2f(0,0)) {
+	if (sold1->getCurrentEnemy() != nullptr && !sold1->getEvade()) {//&& silverSoldier->destination != Vector2f(0,0)) {
 		cout << "*************************************************MOVING TO ENEMY******************************************" << endl;
 		sold1->waypoint = Vector2f(sold1->getCurrentEnemy()->getX() + (sold1->getCurrentEnemy()->getWidth() / 4), sold1->getCurrentEnemy()->getY() + (sold1->getCurrentEnemy()->getHeight() / 4));
 		sold1->destination = Vector2f(sold1->getCurrentEnemy()->getX() + (sold1->getCurrentEnemy()->getWidth() / 4), sold1->getCurrentEnemy()->getY() + (sold1->getCurrentEnemy()->getHeight() / 4));
@@ -97,7 +97,7 @@ void CombatController::fight(Soldier* sold1, int state) {
 			sold1->destination.shiftXloc(-30);
 		}
 
-		//gameplay_functions->move_toward(otherShango);
+		//gameplay_functions->move_toward(silverSoldier);
 
 		//npc is at enemy destination, attack.
 		if (sold1->destination == sold1->getLoc()) {
@@ -105,7 +105,7 @@ void CombatController::fight(Soldier* sold1, int state) {
 			cout << "COOL DOWN FOR ATTACK IS " << sold1->getCool() << endl;
 			if (sold1->getCool()) {
 				std::cout << "Pressed F" << std::endl;
-				//gameplay_functions->special(otherShango, 0);
+				//gameplay_functions->special(silverSoldier, 0);
 				sold1->meleeAttack();
 				gameplay_functions->melee(sold1);
 				sold1->setCurrentEnemy(nullptr);
@@ -116,32 +116,32 @@ void CombatController::fight(Soldier* sold1, int state) {
 	}
 
 	////evade mode
-	if (sold1->getCurrentEnemy() != nullptr && sold1->getEvade()) {//&& otherShango->destination != Vector2f(0, 0)) {
+	if (sold1->getCurrentEnemy() != nullptr && sold1->getEvade()) {//&& silverSoldier->destination != Vector2f(0, 0)) {
 																   //if OS is in evade mode, use the getEvadeRange method to find the waypoint and set it to destination
 		if (sold1->destination == Vector2f(-1, -1)) {
 			cout << "****INSIDE THE EVADE MODE SETTER*****" << endl;
-			//otherShango->waypoint = otherShango->getEvadeRange(otherShango->getCurrentEnemy());
+			//silverSoldier->waypoint = silverSoldier->getEvadeRange(silverSoldier->getCurrentEnemy());
 			sold1->destination = sold1->getEvadeRange(sold1->getCurrentEnemy());
 			cout << "shango waypoint is " << sold1->waypoint.getXloc() << sold1->waypoint.getYloc() << endl;
 		}
 		//if reached destination, strafe left or right
 		if (sold1->getLoc() == sold1->destination) {
 			cout << "******* INSIDE THE EVADE MODE STRAFE *******" << endl;
-			//otherShango->waypoint = otherShango->getStrafeLocation(otherShango->getCurrentEnemy());
+			//silverSoldier->waypoint = silverSoldier->getStrafeLocation(silverSoldier->getCurrentEnemy());
 			sold1->destination = sold1->getEvadeRange(sold1->getCurrentEnemy());
 		}
-		/*if (otherShango->waypoint != Vector2f(0, 0) && state == 0) { //Hero has a waypoint to the desination, and not in dialog
-		gameplay_functions->move_toward(otherShango); //Take a step towards the current waypoint
+		/*if (silverSoldier->waypoint != Vector2f(0, 0) && state == 0) { //Hero has a waypoint to the desination, and not in dialog
+		gameplay_functions->move_toward(silverSoldier); //Take a step towards the current waypoint
 		//	std::cout << "Request a step" << std::endl;
 		}
 		else if (state == 0)                //Hero needs waypoints to destination, and not in dialog
 		{
-		gameplay_functions->get_path(otherShango); //Generate waypoints to destination
+		gameplay_functions->get_path(silverSoldier); //Generate waypoints to destination
 		}/**/
-		//gameplay_functions->move_toward(otherShango);
+		//gameplay_functions->move_toward(silverSoldier);
 	}
-	//	ai->graph.insert(otherShango->destination);
-	//ai->graph.insert(otherShango->getLoc());
+	//	ai->graph.insert(silverSoldier->destination);
+	//ai->graph.insert(silverSoldier->getLoc());
 	if (sold1->destination != Vector2f(0, 0)) { //Hero has a destination
 		if (sold1->waypoint != Vector2f(0, 0) && state == 0) { //Hero has a waypoint to the desination, and not in dialog
 			gameplay_functions->move_toward(sold1); //Take a step towards the current waypoint
@@ -157,7 +157,9 @@ void CombatController::fight(Soldier* sold1, int state) {
 	}
 }
 
-void CombatController::follow(Soldier* sold1, Soldier* sold2,int state) {
+void CombatController::follow(Soldier* sold1, int state) {
+	Soldier* sold2 = sold1->getParty()->getLeader();
+	if (sold1 == sold2)return;
 	sold1->setCurrentEnemy(sold2);
 	sold1->waypoint = Vector2f(sold1->getCurrentEnemy()->getX() + (sold1->getCurrentEnemy()->getWidth() / 4), sold1->getCurrentEnemy()->getY() + (sold1->getCurrentEnemy()->getHeight() / 4));
 	sold1->destination = Vector2f(sold1->getCurrentEnemy()->getX() + (sold1->getCurrentEnemy()->getWidth() / 4), sold1->getCurrentEnemy()->getY() + (sold1->getCurrentEnemy()->getHeight() / 4));

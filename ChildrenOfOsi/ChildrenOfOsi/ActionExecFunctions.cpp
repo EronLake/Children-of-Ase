@@ -19,8 +19,8 @@ ActionExecFunctions::~ActionExecFunctions()
 };
 
 void ActionExecFunctions::execute_train(Action* train) {
-	//cout << "++++++++++++++++PLEASE BE FIGHTING++++++++++++++++" << endl;
-	return;
+	cout << "++++++++++++++++PLEASE BE FIGHTING++++++++++++++++" << endl;
+	
 	switch (train->checkpoint) {
 	case 0: //Pick training location, create memory, increment checkpoint
 		cout << "---------------------CASE 0---------------------" << endl;

@@ -1,5 +1,6 @@
 #pragma once
 #include "Player.h"
+#include "Party.h"
 #include "Attack.h"
 #include "ChildrenOfOsi.h"
 #include "Containers.h"
@@ -13,7 +14,7 @@ public:
 	void update();
 	void clearSoldiers() { soldiers.clear();};
 	void fight(Soldier* sold1, int state);
-	void follow(Soldier* follower,Soldier* follow, int state);
+	void follow(Soldier* follower, int state);
 	void addtoTargets(Soldier* sold2) { enemyVec.push_back(sold2); };
 private:
 	vector<Soldier*> soldiers;
