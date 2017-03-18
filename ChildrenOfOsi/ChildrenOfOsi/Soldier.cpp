@@ -87,7 +87,7 @@ void Soldier::newAttack(int i, Attack* a)
   p->setPause(attackTypes[i]->getPause());
   p->setKeep(false);
   cooldownMap[attackTypes[i]] = attackTypes[i]->getCoolDown();
-  cdTime = attackTypes[i]->getCoolDown();
+  cdTime = melee->getCoolDown();
   stamina -= attackTypes[i]->getStaminaCost();
   ase -= attackTypes[i]->getAseCost();
   instances++;
@@ -324,7 +324,7 @@ int Soldier::getAttackIndex(Attack* atk)
 
 bool Soldier::getCombo()
 {
-  return (cdTime > 0 && cdTime < 15);
+  return (cdTime > 0 && cdTime < 5);
 }
 
 

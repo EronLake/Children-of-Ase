@@ -61,11 +61,28 @@ void CombatController::fight(Soldier* sold1, int state) {
 
 	//if OS has an enemy, move to the enemy
 	if (sold1->getCurrentEnemy() != nullptr && !sold1->getEvade()) {//&& silverSoldier->destination != Vector2f(0,0)) {
-		//cout << "*************************************************MOVING TO ENEMY******************************************" << endl;
+		std::cout << "*************************************************MOVING TO ENEMY******************************************" << endl;
 
-		sold1->waypoint = Vector2f(sold1->getCurrentEnemy()->getX() + (sold1->getCurrentEnemy()->getWidth() / 4), sold1->getCurrentEnemy()->getY() + (sold1->getCurrentEnemy()->getHeight() / 4));
-		sold1->destination = Vector2f(sold1->getCurrentEnemy()->getX() + (sold1->getCurrentEnemy()->getWidth() / 4), sold1->getCurrentEnemy()->getY() + (sold1->getCurrentEnemy()->getHeight() / 4));
+		sold1->waypoint = Vector2f(sold1->getCurrentEnemy()->getX() /*+ (sold1->getCurrentEnemy()->getWidth() / 4)*/, sold1->getCurrentEnemy()->getY() /*+ (sold1->getCurrentEnemy()->getHeight() / 4)*/);
+		sold1->destination = Vector2f(sold1->getCurrentEnemy()->getX() /*+ (sold1->getCurrentEnemy()->getWidth() / 4)*/, sold1->getCurrentEnemy()->getY() /*+ (sold1->getCurrentEnemy()->getHeight() / 4)*/);
 
+		Soldier* sold2 = sold1->getCurrentEnemy();
+		std::cout << dist_by_center(sold1, sold2) << std::endl;
+		
+		if (dist_by_center(sold1, sold2)<(sold1->body[0].getWidth()/2 + sold1->melee->getHeight())) {
+			sold1->destination = Vector2f(0, 0);
+			sold1->waypoint = Vector2f(0, 0);
+			//gameplay_functions->stop(sold1);
+			sold1->face(sold2);
+			if (sold1->getCool()) {
+				std::cout << "Pressed F" << std::endl;
+				//gameplay_functions->special(silverSoldier, 0);
+				sold1->meleeAttack();
+				gameplay_functions->melee(sold1);
+				sold1->setCurrentEnemy(nullptr);
+			}
+		}
+/*
 		vector<Vector2f> dirs;
 
 		dirs.push_back( { sold1->waypoint.getXloc() - 30, sold1->waypoint.getYloc() - 80 });
@@ -118,7 +135,7 @@ void CombatController::fight(Soldier* sold1, int state) {
 			sold1->destination.shiftYloc(30);
 			sold1->waypoint.shiftXloc(-30);
 			sold1->destination.shiftXloc(-30);
-		}*/
+		}// /
 
 		//gameplay_functions->move_toward(silverSoldier);
 
@@ -136,7 +153,7 @@ void CombatController::fight(Soldier* sold1, int state) {
 
 
 		}
-	}
+*/	}
 
 	////evade mode
 	if (sold1->getCurrentEnemy() != nullptr && sold1->getEvade()) {//&& silverSoldier->destination != Vector2f(0, 0)) {
@@ -183,9 +200,10 @@ void CombatController::fight(Soldier* sold1, int state) {
 void CombatController::follow(Soldier* sold1, int state) {
 	Soldier* sold2 = sold1->getCurrentLeader();
 	if (sold2==nullptr)return;
-	sold1->waypoint = Vector2f(sold2->body[0].getX() + (sold2->body[0].getWidth() / 2), sold2->body[0].getY() + (sold2->body[0].getHeight() / 2));
-	sold1->destination = Vector2f(sold2->body[0].getX() + (sold2->body[0].getWidth() / 2), sold2->body[0].getY() + (sold2->body[0].getHeight() / 2));
-
+	if (dist_by_center(sold1, sold2) > (sold1->body[0].getWidth() * 5)) {
+		sold1->waypoint = Vector2f(sold2->body[0].getX(), sold2->body[0].getY());
+		sold1->destination = Vector2f(sold2->body[0].getX(), sold2->body[0].getY());
+	}
 	/*//enemy is facing up
 	if (sold1->getCurrentEnemy()->getDirection() == 2) {
 
@@ -217,7 +235,7 @@ void CombatController::follow(Soldier* sold1, int state) {
 		sold1->waypoint.shiftXloc(-30);
 		sold1->destination.shiftXloc(-30);
 	}*/
-	if (distBetween(sold1,sold2)<(sold1->body[0].getWidth()*3)) {
+	if (dist_by_center(sold1,sold2)<(sold1->body[0].getWidth()*3)) {
 		sold1->destination = Vector2f(0, 0);
 		sold1->waypoint = Vector2f(0, 0);
 		gameplay_functions->stop(sold1);
@@ -234,9 +252,10 @@ void CombatController::follow(Soldier* sold1, int state) {
 	}
 }
 
-float CombatController::distBetween(Soldier* sold1, Soldier* sold2) {
-	float a = (sold1->body[0].getX() + (sold1->body[0].getWidth() / 2) - sold2->body[0].getX() + (sold2->body[0].getWidth() / 2));
-	float b= (sold1->body[0].getY() + (sold1->body[0].getHeight() / 2) - sold2->body[0].getY() + (sold2->body[0].getHeight() / 2));
+float CombatController::dist_by_center(Soldier* sold1, Soldier* sold2) {
+	//std::cout << "Soldier: " <<
+	float a = ((sold1->body[0].getX() + (sold1->body[0].getWidth() / 2)) - (sold2->body[0].getX() + (sold2->body[0].getWidth() / 2)));
+	float b= ((sold1->body[0].getY() + (sold1->body[0].getHeight() / 2)) - (sold2->body[0].getY() + (sold2->body[0].getHeight() / 2)));
 	float c = sqrt(a*a + b*b);
 	return c;
 }

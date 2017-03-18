@@ -208,7 +208,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	//Player* Alex = new Player(1000,600, true);	//init player
 	//WorldObj* Alex = new WorldObj(1000, 600, true);
 
-	ObjConfig::import_config(recVec_ptr, gameplay_functions, tBuffer);
+	//ObjConfig::import_config(recVec_ptr, gameplay_functions, tBuffer);
 	
 	
 	
@@ -429,7 +429,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	Alex->melee->setDmg(10);
 	Alex->melee->setSpeed(5);
 	Alex->melee->setBaseDir(4);
-	Alex->melee->setCoolDown(50);
+	Alex->melee->setCoolDown(37);
 	Alex->melee->setPause(-1);
 	Alex->melee->setDestroy(false);
 	Alex->melee->setKeep(true);
@@ -652,12 +652,12 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	silverSoldier->melee->setDmg(10);
 	silverSoldier->melee->setSpeed(5);
 	silverSoldier->melee->setBaseDir(4);
-	silverSoldier->melee->setCoolDown(200);
+	silverSoldier->melee->setCoolDown(100);
 	silverSoldier->melee->setPause(-1);
 	silverSoldier->melee->setDestroy(false);
 	silverSoldier->melee->setKeep(true);
-	silverSoldier->melee->setWidth(silverSoldier->body[0].getWidth());
-	silverSoldier->melee->setHeight(silverSoldier->body[0].getHeight());
+	silverSoldier->melee->setWidth(50);
+	silverSoldier->melee->setHeight(50);
 
 	silverSoldier->addAttackType(rockThrow);
 	silverSoldier->melee->sprite.setTexture(border);
@@ -825,7 +825,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	short M = GetKeyState('M') >> 15;
 	Party* party = new Party();
 
-	party->addToParty(silverSoldier, false);
+	//party->addToParty(silverSoldier, false);
 	
 	party->addToParty(Alex,true);
 		
@@ -840,7 +840,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	LOG("PAST WINDOW INIT ***********************");
 	clock_t start_tick, current_ticks, delta_ticks;
 	clock_t fps = 0;
-	int fs = 120;
+	int fs = 24;
 	int wait_time = fs*3; //always wait 3 seconds
 	int count = 0;
 	int state = 0;
@@ -898,9 +898,9 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 			}
 		}*/
 		combatControl->follow(oya, state);
-		combatControl->follow(silverSoldier, state);
+		//combatControl->follow(silverSoldier, state);
 		combatControl->follow(staticRec, state);
-		//combatControl->fight(silverSoldier, state);
+		combatControl->fight(silverSoldier, state);
 
 		/*
 		//cout << "Alex's position is " << Alex->getLoc().getXloc() << ", " << Alex->getLoc().getYloc() << endl;
@@ -1159,7 +1159,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 			}
 		}
 		//getting here-------------------------------------------------------------------------***********
-		AiController->execute();
+	//	AiController->execute();
 
 		if ((1000 / fs) > (clock() - start_tick)) { //delta_ticks) {www
 			Sleep((1000 / fs) - (clock() - start_tick));
@@ -1168,7 +1168,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 		if (delta_ticks > 0)
 			fps = CLOCKS_PER_SEC / delta_ticks;
 		if (DialogueController::getState() == 0) {
-			//cout << "FPS: " << fps << endl;
+			cout << "FPS: " << fps << endl;
 		}
 
 		frame_count++;
