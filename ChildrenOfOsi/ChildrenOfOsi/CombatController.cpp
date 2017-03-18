@@ -240,3 +240,25 @@ float CombatController::distBetween(Soldier* sold1, Soldier* sold2) {
 	float c = sqrt(a*a + b*b);
 	return c;
 }
+
+void CombatController::checkParties() {
+	for (auto i = Village::villagesWorld.begin(); i != Village::villagesWorld.end(); ++i) {
+		vector<Village*> warVils = War::getWars(*i);
+		for (auto j = warVils.begin(); j != warVils.end();++j) {
+			vector<Party*> partiesA;
+			vector<Party*> partiesB;
+			for (auto a = partiesA.begin(); a != partiesA.end(); ++a) {
+				if ((*a)->getMode()==1 || (*a)->getMode() == 2) {
+					for (auto b = partiesB.begin(); b != partiesB.end(); ++b) {
+						if (distBetween((*a)->getLeader(), (*b)->getLeader()) < 1000) {
+							(*a)->addToCurrentEnemies(*b);
+							(*a)->setMode(1);
+							(*b)->addToCurrentEnemies(*a);
+							(*b)->setMode(1);
+						}
+					}
+				}
+			}
+		}
+	}
+}
