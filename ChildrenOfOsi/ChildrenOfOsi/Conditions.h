@@ -4,6 +4,8 @@
 #include "common.h"
 //#include "ActionPool.h"
 
+
+
 class Preconditions
 {
 protected:
@@ -124,6 +126,7 @@ public:
 	virtual float get_utility();
 	void apply_utility();
 	std::string get_type();
+	
 
 };
 
@@ -144,7 +147,8 @@ public:
 	//Require particular assumption of hero relationship towards sel
 	float get_utility() final;
 	void apply_utility();
-
+	typedef unordered_map<std::string, std::shared_ptr<Preconditions>> Precond_map;
+	std::string fulfills_which(vector<std::string> preconds, Precond_map map);
 };
 
 

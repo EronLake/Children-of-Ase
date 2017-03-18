@@ -60,7 +60,7 @@
 
 using namespace std;
 
-
+Texture* Rectangle::tex = new Texture();
 //void testQuadTree();
 //bool checkCollision(WorldObj *recA, WorldObj *recB);	//given two bounding boxes, check if they collide
 //bool coordOverlap(int value, int min, int max) { return (value >= min) && (value <= max); }		//helper func for checkCollision
@@ -93,7 +93,7 @@ int main() {
 		//LOG("Hello world!");
 		//ERONS_LOOP();
 		/************************************************************************************************SET-UP*******************************************************/
-		WorldObj* screen = new WorldObj(Vector2f(0.0, 0.0), 960U, 540U);	//init screen
+		WorldObj* screen = new WorldObj(Vector2f(0.0, 0.0), 20000U, 20000U);	//init screen
 
 		QuadTree* collideTree = new QuadTree(0, screen);
 
@@ -103,9 +103,9 @@ int main() {
 		//while (1) {
 		//	
 		//	Alex->getEvadeRange(Daniel);
-		//	cout << "COMBAT RANGE WITH GETTER IS " << Alex->getCombatMoveDestination().getXloc() << ", " << Alex->getCombatMoveDestination().getYloc() << endl;
-		//	//cout << "Alex's target location is: " << Alex->getEvadeRange(Daniel).getXloc() << ", " << Alex->getEvadeRange(Daniel).getYloc() << endl;
-		//	//cout << "Alex's target location is COMBAT: " << Alex->getCombatMoveDestination().getXloc() << ", " << Alex->getCombatMoveDestination().getYloc() << endl;
+		//	//cout << "COMBAT RANGE WITH GETTER IS " << Alex->getCombatMoveDestination().getXloc() << ", " << Alex->getCombatMoveDestination().getYloc() << endl;
+		//	////cout << "Alex's target location is: " << Alex->getEvadeRange(Daniel).getXloc() << ", " << Alex->getEvadeRange(Daniel).getYloc() << endl;
+		//	////cout << "Alex's target location is COMBAT: " << Alex->getCombatMoveDestination().getXloc() << ", " << Alex->getCombatMoveDestination().getYloc() << endl;
 		//}
 		osi::GameWindow::init();
 		////pauses the program for viewing
@@ -148,12 +148,12 @@ int main() {
 
 void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 {
-
-
+	Rectangle::tex->setFile("Assets/Sprites/betterborder.png", 1);
+	
 	//Player* Alex = new Player(SHANGO, Vector2f(4900.0, 3700.0), 40.0, 40.0);	//init player
 	Player* Alex = new Player(SHANGO, Vector2f(4900.0, 3700.0), 150.0, 150.0);	//init player
 
-	//cout << "Alex's width and height is " << Alex->getWidth() << ", " << Alex->getHeight() << endl;
+	////cout << "Alex's width and height is " << Alex->getWidth() << ", " << Alex->getHeight() << endl;
 
 	vector<WorldObj*> recVec;
 	vector<WorldObj*>* recVec_ptr = &recVec;
@@ -166,7 +166,10 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	RenderManager* RenM = new RenderManager(mLog, tBuffer, _QuadTree);
 
 	ChildrenOfOsi* gameplay_functions = new ChildrenOfOsi(mLog, tBuffer);
-	Input* iController = new Input(gameplay_functions, Alex, RenM->renderHelper, tBuffer, recVec_ptr);
+
+  
+
+	
 	//create Managers and add to Manager table
 
 	DummyController* DumM = new DummyController(mLog, tBuffer);
@@ -193,9 +196,12 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	//TestM->register_manager();
 	AIM->register_manager();
     
-	RenM->register_manager();
-
-
+ 	RenM->register_manager();
+//	gameplay_functions->add_hero("Shango", 4900, 3700, true);
+//	tBuffer->run();
+//	Hero* alex = Containers::hero_table["Shango"];
+//	Player* Alex = dynamic_cast<Player*>(alex);
+    Input* iController = new Input(gameplay_functions, Alex, RenM->renderHelper, tBuffer, recVec_ptr);
 
 	//DialogueGui* convoGui = new DialogueGui();
 
@@ -203,6 +209,12 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	//WorldObj* Alex = new WorldObj(1000, 600, true);
 
 	ObjConfig::import_config(recVec_ptr, gameplay_functions, tBuffer);
+	
+	
+	
+	//WorldObj* barrel = new WorldObj(Vector2f(5200, 3900), 75, 75);
+	//Alex->name = SHANGO;
+	
 
     Texture* objTexture = new Texture();
 
@@ -283,10 +295,17 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	Texture* pierTex = new Texture();
 
 	Texture* blank = new Texture();
+	Texture* border = new Texture();
+
+	Texture* fire = new Texture();
+
+
 
 	//load sprite from a configuration file?
-	blank->setFile("Assets/Sprites/blank1.png", 1);
+	blank->setFile("Assets/Sprites/blank.png", 1);
+	border->setFile("Assets/Sprites/border.png", 1);
 	objTexture->setFile("Assets/Sprites/YemojasHouse.png",1);
+	Soldier* silverSoldier = new Soldier(4900, 3300, true);
 
 	playerTexture->setFile("Assets/Sprites/ShangoForwardIdle.png",22);
 	playerIdleTex->setFile("Assets/Sprites/ShangoForwardIdle.png",22);
@@ -305,8 +324,8 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	rightAtkTex->setFile("Assets/Sprites/ShangoRightSwingEffect.png", 24);
 	upAtk2Tex->setFile("Assets/Sprites/ShangoBackLunge.png", 7);
 	downAtk2Tex->setFile("Assets/Sprites/ShangoForwardLunge.png", 7);
-	leftAtk2Tex->setFile("Assets/Sprites/ShangoLeftSwingLunge.png", 7);
-	rightAtk2Tex->setFile("Assets/Sprites/ShangoRightSwingLunge.png", 7);
+	leftAtk2Tex->setFile("Assets/Sprites/ShangoLeftLunge.png", 7);
+	rightAtk2Tex->setFile("Assets/Sprites/ShangoRightLunge.png", 7);
 	upHurtTex->setFile("Assets/Sprites/ShangoBackRecoil.png", 18);
 	downHurtTex->setFile("Assets/Sprites/ShangoForwardRecoil.png", 18);
 	leftHurtTex->setFile("Assets/Sprites/ShangoLeftRecoil.png", 18);
@@ -338,8 +357,8 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	ss_rightIdleTex->setFile("Assets/Sprites/SilverSoldierRightIdle.png", 22);
 	ss_upAtkTex->setFile("Assets/Sprites/SilverSoldierBackSwing.png", 24);
 	ss_downAtkTex->setFile("Assets/Sprites/SilverSoldierForwardSwing.png", 24);
-	ss_leftAtkTex->setFile("Assets/Sprites/SilverSoldierLeftSwingEffect.png", 24);
-	ss_rightAtkTex->setFile("Assets/Sprites/SilverSoldierRightSwingEffect.png", 24);
+	ss_leftAtkTex->setFile("Assets/Sprites/SilverSoldierLeftSwing.png", 24);
+	ss_rightAtkTex->setFile("Assets/Sprites/SilverSoldierRightSwing.png", 24);
 	ss_upHurtTex->setFile("Assets/Sprites/SilverSoldierBackRecoil.png", 18);
 	ss_downHurtTex->setFile("Assets/Sprites/SilverSoldierForwardRecoil.png", 18);
 	ss_leftHurtTex->setFile("Assets/Sprites/SilverSoldierLeftRecoil.png", 18);
@@ -361,7 +380,10 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	rockTex2->setFile("Assets/Sprites/rock_2.png", 1);
 
 	pierTex->setFile("Assets/Sprites/pier.png", 1);
+
+	fire->setFile("Assets/Sprites/fireballsprite1.jpg", 10);
 	/* SET UP SPRITE CHANGE, MIGHT NEED A SINGLETON?*/
+
 
 
 	Alex->sprite.setTexture(playerTexture);
@@ -432,11 +454,11 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	fireball->setDuration(100);
 	fireball->setCoolDown(240);
 	fireball->setPause(24);
-	fireball->sprite.setTexture(rockTex);
+	fireball->sprite.setTexture(fire);
 	Alex->addAttackType(fireball);
 
 	//Alex->melee->sprite.setTexture(blank);
-	Alex->melee->sprite.setTexture(blank);
+	Alex->melee->sprite.setTexture(border);
 
 	DialogueController::setPlayer(Alex);
 	//vector<WorldObj*> recVec;
@@ -444,45 +466,45 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	spin->setDmg(7);
 	spin->setSpeed(15);
 	spin->setDestroy(false);
-	spin->setDuration(5);
+	spin->setDuration(7);
 	spin->setBaseDir(6);
 	spin->setCoolDown(100);
 	spin->setPause(48);
 	spin->setTurn(true);
-	spin->sprite.setTexture(blank);
+	spin->sprite.setTexture(border);
 	Alex->addAttackType(spin);
 	Attack* spin2 = new Attack();
 	spin2->setDmg(7);
 	spin2->setSpeed(15);
 	spin2->setDestroy(false);
-	spin2->setDuration(5);
+	spin2->setDuration(7);
 	spin2->setBaseDir(6);
 	spin2->setCoolDown(0);
 	spin2->setPause(53);
 	spin2->setTurn(true);
-	spin2->sprite.setTexture(blank);
+	spin2->sprite.setTexture(border);
 	Alex->addAttackType(spin2);
 	Attack* spin3 = new Attack();
 	spin3->setDmg(7);
 	spin3->setSpeed(15);
 	spin3->setDestroy(false);
-	spin3->setDuration(5);
+	spin3->setDuration(7);
 	spin3->setBaseDir(6);
 	spin3->setCoolDown(0);
 	spin3->setPause(58);
 	spin3->setTurn(true);
-	spin3->sprite.setTexture(blank);
+	spin3->sprite.setTexture(border);
 	Alex->addAttackType(spin3);
 	Attack* spin4 = new Attack();
 	spin4->setDmg(7);
 	spin4->setSpeed(15);
 	spin4->setDestroy(false);
-	spin4->setDuration(5);
+	spin4->setDuration(7);
 	spin4->setBaseDir(6);
 	spin4->setCoolDown(0);
 	spin4->setPause(63);
 	spin4->setTurn(true);
-	spin4->sprite.setTexture(blank);
+	spin4->sprite.setTexture(border);
 	Alex->addAttackType(spin4);
 	spin->setNextAttack(spin2);
 	spin2->setNextAttack(spin3);
@@ -539,17 +561,36 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 		//visibility lines through the diagonal
 		edges.push_back({ p2, p3 });
 		edges.push_back({ p1, p4 });
-	}
 	
+	}
+	//Texture* barrelTex = new Texture();
+	//gameplay_functions->add_texture("barrelTex", 0, 0, 0);
+	//tBuffer->run();
+
+	
+
+	//gameplay_functions->add_worldObj("barrel1", 5200, 3900, true);
+	//tBuffer->run();
+
 	gameplay_functions->add_hero("Yemoja", 4600, 3600, true);
 	gameplay_functions->add_hero("Oya", 4400, 3600, true);
-	gameplay_functions->add_soldier("silverSoldier", 4900, 3300, true);
+	//gameplay_functions->add_soldier("silverSoldier", 4900, 3300, true);
 
 	tBuffer->run();
-
+	
 	Hero* staticRec = Containers::hero_table["Yemoja"];
 	Hero* oya = Containers::hero_table["Oya"];
-	Soldier* silverSoldier = Containers::soldier_table["silverSoldier"];
+	//Containers::soldier_table["silverSoldier"];
+	//WorldObj* barrel = Containers::worldObj_table["barrel1"];
+//    Containers::texture_table["barrelTex"]->setFile("Assets/Sprites/Barrel.png", 1);
+	
+//	Texture* barrelTex = 
+	//barrel->setWidth(75);
+	//barrel->setHeight(75);
+
+	//barrel->sprite.setTexture(Containers::texture_table["barrelTex"]);
+
+	
 
 	staticRec->setWidth(100);
 	staticRec->setHeight(100);
@@ -619,20 +660,20 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	silverSoldier->melee->setHeight(silverSoldier->body[0].getHeight());
 
 	silverSoldier->addAttackType(rockThrow);
-	silverSoldier->melee->sprite.setTexture(blank);
+	silverSoldier->melee->sprite.setTexture(border);
 	//silverSoldier->addAttackType(spin);
 
 	combatControl->addtoTargets(Alex);
-	combatControl->addtoTargets(silverSoldier);
+	//combatControl->addtoTargets(silverSoldier);
 
 	//VisibilityGraph graph;
 	ai->graph.vertices = vertices;
 	ai->graph.obstacles = edges;
 	for (Vector2f vert : ai->graph.vertices) {
-		//std::cout << "X: " << vert.getXloc() << " Y: " << vert.getYloc() << std::endl;
+		////std:://cout << "X: " << vert.getXloc() << " Y: " << vert.getYloc() << std::endl;
 	}
 	for (auto edge : ai->graph.obstacles) {
-		//std::cout << "EDGE from " << edge.first.getXloc() << "," << edge.first.getYloc() << " to " << edge.second.getXloc() << "," << edge.second.getYloc() << std::endl;
+		////std:://cout << "EDGE from " << edge.first.getXloc() << "," << edge.first.getYloc() << " to " << edge.second.getXloc() << "," << edge.second.getYloc() << std::endl;
 	}
 
 	bool visible = true;
@@ -667,6 +708,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	Action* test_train = new Action(staticRec, oya, staticRec, 10, 1, "train", "execute_train");
 	AiController->hero_planners[YEMOJA]->set_current_action(test_train);
 
+
 	/*
 	WorldObj* tree = new WorldObj(Vector2f(4000, 2600), 800, 500);
 	tree->sprite.setTexture(treeTex);
@@ -684,7 +726,8 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	recVec.push_back(staticRec);
 	recVec.push_back(silverSoldier);
 	recVec.push_back(oya);
-	//recVec.push_back(tree);
+	//recVec.push_back(barrel);
+	//recVec.push_back(tree);;
 	//recVec.push_back(tree1);
 	//recVec.push_back(tree2);
 	//recVec.push_back(vec[0]);
@@ -724,10 +767,10 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	ai->graph.insert(Vector2f(4500.00, 4000.00));
 	ai->graph.insert(Vector2f(5650.00, 3700.00));
 	for (Vector2f vert : ai->graph.vertices) {
-		//std::cout << "X: " << vert.getXloc() << " Y: " << vert.getYloc() << std::endl;
+		////std:://cout << "X: " << vert.getXloc() << " Y: " << vert.getYloc() << std::endl;
 	}
 	for (auto edge : ai->graph.obstacles) {
-		//std::cout << "EDGE from " << edge.first.getXloc() << "," << edge.first.getYloc() << " to " << edge.second.getXloc() << "," << edge.second.getYloc() << std::endl;
+		////std:://cout << "EDGE from " << edge.first.getXloc() << "," << edge.first.getYloc() << " to " << edge.second.getXloc() << "," << edge.second.getYloc() << std::endl;
 	}
 
 	ai->graph._print();
@@ -739,7 +782,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 
 
 	//for (Vector2f next : path) {
-	//	std::cout << "X: " << next.getXloc() << " Y: " << next.getYloc() << std::endl;
+	//	//std:://cout << "X: " << next.getXloc() << " Y: " << next.getYloc() << std::endl;
 	//}
 
 	//std::unordered_map<std::string, Manager*> manager_table;
@@ -767,7 +810,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	poolAct->micro.push_back(mic);
 	poolAct->macro.push_back(mac);
 	poolAct->updateMiddle();
-	std::cout << poolAct->macro.back().getName() << endl;
+	//std:://cout << poolAct->macro.back().getName() << endl;
 	vector<Action> test = poolAct->getActions(staticRec, poolAct->macro.back());
 	for (int i = 0; i < test.size(); i++) {
 		int t = test[i].exeAction();
@@ -784,6 +827,10 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	party->addToParty(Alex,true);
 	oya->setParty(party);
 	party->addToParty(oya, false);
+	silverSoldier->setParty(party);
+	party->addToParty(silverSoldier, false);
+	staticRec->setParty(party);
+	party->addToParty(staticRec, false);
 
 	vector<WorldObj*> enemyVec;
 	//osi::GameWindow::init();
@@ -800,15 +847,15 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 		Alex->updateCD();
 		silverSoldier->updateCD();
 		for (int i = 0; i < recVec.size(); i++) {
-			_QuadTree->insert(recVec[i]);	//insert all obj into tree
+			_QuadTree->Insert(recVec[i]);	//insert all obj into tree
 	
 		}
 		state = DialogueController::getState();
 
-		if (staticRec->destination != Vector2f(0, 0)) { //Hero has a destination
+	/*	if (staticRec->destination != Vector2f(0, 0)) { //Hero has a destination
 			if (staticRec->waypoint != Vector2f(0,0) && state == 0) { //Hero has a waypoint to the desination, and not in dialog
 				gameplay_functions->move_toward(staticRec); //Take a step towards the current waypoint
-			//	std::cout << "Request a step" << std::endl;
+			//	//std:://cout << "Request a step" << std::endl;
 			}
 			else if (state == 0)                //Hero needs waypoints to destination, and not in dialog
 			{
@@ -820,8 +867,8 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 		{
 			int r = rand() % 4;
 			ai->start = staticRec->getLoc();
-			//std::cout << "at " << ai->start.getXloc() << "," << ai->start.getYloc() << std::endl;
-			//std::cout << "picked " << r << std::endl;
+			////std:://cout << "at " << ai->start.getXloc() << "," << ai->start.getYloc() << std::endl;
+			////std:://cout << "picked " << r << std::endl;
 			switch (r) {
 			case 0:
 				
@@ -846,12 +893,16 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 				count = 0;
 				staticRec->setMode(WANDER);
 			}
-		}
+		}*/
+		combatControl->follow(oya, state);
+		combatControl->follow(silverSoldier, state);
+		combatControl->follow(staticRec, state);
+		//combatControl->fight(silverSoldier, state);
 
-
-		cout << "Alex's position is " << Alex->getLoc().getXloc() << ", " << Alex->getLoc().getYloc() << endl;
-		cout << "OS's position is " << silverSoldier->getLoc().getXloc() << ", " << silverSoldier->getLoc().getYloc() << endl;
-		cout << "OS's DESTINATION IS: " << silverSoldier->destination.getXloc() << ", " << silverSoldier->destination.getYloc() << endl;
+		/*
+		//cout << "Alex's position is " << Alex->getLoc().getXloc() << ", " << Alex->getLoc().getYloc() << endl;
+		//cout << "OS's position is " << silverSoldier->getLoc().getXloc() << ", " << silverSoldier->getLoc().getYloc() << endl;
+		//cout << "OS's DESTINATION IS: " << silverSoldier->destination.getXloc() << ", " << silverSoldier->destination.getYloc() << endl;
 
 		/* DEFINE COMBAT MOVEMENT AI HERE 
 		   At the start of each frame, we want to check for a given npc, whether there is hostile enemy on the map.
@@ -859,6 +910,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 		   to skills and cooldowns and what not,
 		   * WHEN NPC REACHES DESTINATION, destination is being automatically set to (0,0)!!! */
 		//attack mode
+		/*
 		enemyVec.clear();
 		enemyVec.push_back(Alex);
 		if (enemyVec.empty()) silverSoldier->setEvade(true);
@@ -866,7 +918,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 			//if discovered Alex, set silverSoldier combat mode to 0(attack).
 			if (silverSoldier->getCurrentEnemy() != nullptr) break;
 			if (it == Alex) {
-				cout << "*************************************FOUND ENEMY****************************************" << endl;
+				//cout << "*************************************FOUND ENEMY****************************************" << endl;
 				//silverSoldier->setMode(0);
 				OSAtkMode = true;
 				silverSoldier->setCurrentEnemy(it);
@@ -891,7 +943,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 
 		//if OS has an enemy, move to the enemy
 		if (silverSoldier->getCurrentEnemy() != nullptr && !silverSoldier->getEvade() ){//&& silverSoldier->destination != Vector2f(0,0)) {
-			cout << "*************************************************MOVING TO ENEMY******************************************" << endl;
+			//cout << "*************************************************MOVING TO ENEMY******************************************" << endl;
 			silverSoldier->waypoint = Vector2f(silverSoldier->getCurrentEnemy()->getX() + (silverSoldier->getCurrentEnemy()->getWidth() / 4), silverSoldier->getCurrentEnemy()->getY() + (silverSoldier->getCurrentEnemy()->getHeight()/4));
 			silverSoldier->destination = Vector2f(silverSoldier->getCurrentEnemy()->getX() + (silverSoldier->getCurrentEnemy()->getWidth() / 4), silverSoldier->getCurrentEnemy()->getY() + (silverSoldier->getCurrentEnemy()->getHeight()/4));
 
@@ -932,9 +984,9 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 			//npc is at enemy destination, attack.
 			if (silverSoldier->destination == silverSoldier->getLoc()) {
 				silverSoldier->face(silverSoldier->getCurrentEnemy());
-				cout << "COOL DOWN FOR ATTACK IS " << silverSoldier->getCool() << endl;
+				//cout << "COOL DOWN FOR ATTACK IS " << silverSoldier->getCool() << endl;
 				if (silverSoldier->getCool()) {
-					std::cout << "Pressed F" << std::endl;
+					//std:://cout << "Pressed F" << std::endl;
 					//gameplay_functions->special(silverSoldier, 0);
 					silverSoldier->meleeAttack();
 					gameplay_functions->melee(silverSoldier);
@@ -948,26 +1000,26 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 		if (silverSoldier->getCurrentEnemy() != nullptr && silverSoldier->getEvade() ){//&& silverSoldier->destination != Vector2f(0, 0)) {
 			//if OS is in evade mode, use the getEvadeRange method to find the waypoint and set it to destination
 			if (silverSoldier->destination == Vector2f(-1, -1)) {
-				cout << "****INSIDE THE EVADE MODE SETTER*****" << endl;
+				//cout << "****INSIDE THE EVADE MODE SETTER*****" << endl;
 				//silverSoldier->waypoint = silverSoldier->getEvadeRange(silverSoldier->getCurrentEnemy());
 				silverSoldier->destination = silverSoldier->getEvadeRange(silverSoldier->getCurrentEnemy());
-				cout << "shango waypoint is " << silverSoldier->waypoint.getXloc() << silverSoldier->waypoint.getYloc() << endl;
+				//cout << "shango waypoint is " << silverSoldier->waypoint.getXloc() << silverSoldier->waypoint.getYloc() << endl;
 			}
 			//if reached destination, strafe left or right
 			if (silverSoldier->getLoc() == silverSoldier->destination) {
-				cout << "******* INSIDE THE EVADE MODE STRAFE *******" << endl;
+				//cout << "******* INSIDE THE EVADE MODE STRAFE *******" << endl;
 				//silverSoldier->waypoint = silverSoldier->getStrafeLocation(silverSoldier->getCurrentEnemy());
 				silverSoldier->destination = silverSoldier->getEvadeRange(silverSoldier->getCurrentEnemy());
-				cout << "silverSoldier destination inside strafe function is " << silverSoldier->waypoint.getXloc() << ", " << silverSoldier->waypoint.getYloc() << endl;
+				//cout << "silverSoldier destination inside strafe function is " << silverSoldier->waypoint.getXloc() << ", " << silverSoldier->waypoint.getYloc() << endl;
 			}
 			/*if (silverSoldier->waypoint != Vector2f(0, 0) && state == 0) { //Hero has a waypoint to the desination, and not in dialog
 				gameplay_functions->move_toward(silverSoldier); //Take a step towards the current waypoint
-															  //	std::cout << "Request a step" << std::endl;
+															  //	//std:://cout << "Request a step" << std::endl;
 			}
 			else if (state == 0)                //Hero needs waypoints to destination, and not in dialog
 			{
 				gameplay_functions->get_path(silverSoldier); //Generate waypoints to destination
-			}/**/
+			}
 			//gameplay_functions->move_toward(silverSoldier);
 		}
 	//	ai->graph.insert(silverSoldier->destination);
@@ -975,7 +1027,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 		if (silverSoldier->destination != Vector2f(0, 0)) { //Hero has a destination
 			if (silverSoldier->waypoint != Vector2f(0, 0) && state == 0) { //Hero has a waypoint to the desination, and not in dialog
 				gameplay_functions->move_toward(silverSoldier); //Take a step towards the current waypoint
-															//	std::cout << "Request a step" << std::endl;
+															//	//std:://cout << "Request a step" << std::endl;
 			}
 			else if (state == 0)                //Hero needs waypoints to destination, and not in dialog
 			{
@@ -999,7 +1051,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 		//}
 
 	
-
+	*/
 
 
 		
@@ -1083,11 +1135,11 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 
 		//gameplay_functions->draw_frame(convoGui);
 		//run task buffer
-		//iController->InputCheck();
+		iController->InputCheck();
 		//temp_action->execute();
 
 		tBuffer->run();
-		//	cout << tBuffer->queue_buffer.size() << endl;
+		//	//cout << tBuffer->queue_buffer.size() << endl;
 		//tBuffer->empty();
 
 		/////////////////////////////////////////////////////////////////
@@ -1113,7 +1165,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 		if (delta_ticks > 0)
 			fps = CLOCKS_PER_SEC / delta_ticks;
 		if (DialogueController::getState() == 0) {
-			cout << "FPS: " << fps << endl;
+			//cout << "FPS: " << fps << endl;
 		}
 
 		frame_count++;
@@ -1215,7 +1267,7 @@ void ALEX_LOOP(QuadTree* _QuadTree) {
 		start_tick = clock();
 		_QuadTree->clear();
 		for (int i = 0; i < recVec.size(); i++) {
-			_QuadTree->insert(recVec[i]);	//insert all obj into tree
+			_QuadTree->Insert(recVec[i]);	//insert all obj into tree
 		}
 		//clock 
 		iController->InputCheck();
@@ -1231,7 +1283,7 @@ void ALEX_LOOP(QuadTree* _QuadTree) {
 		//run task buffer
 		//iController->InputCheck();
 		tBuffer->run();
-	//	cout << tBuffer->queue_buffer.size() << endl;
+	//	//cout << tBuffer->queue_buffer.size() << endl;
 		//tBuffer->empty();
 	
 		
@@ -1241,7 +1293,7 @@ void ALEX_LOOP(QuadTree* _QuadTree) {
 		delta_ticks = clock() - start_tick; //the time, in ms, that took to render the scene
 		if (delta_ticks > 0)
 		fps = CLOCKS_PER_SEC / delta_ticks;
-		cout << "FPS: "<<fps << endl;
+		//cout << "FPS: "<<fps << endl;
 	}
 	osi::GameWindow::terminate();
 }
@@ -1259,7 +1311,7 @@ void ERONS_LOOP(QuadTree* _QuadTree) {
 	//Player* Alex = new Player(SHANGO, Vector2f(4900.0, 3700.0), 40.0, 40.0);	//init player
 	Player* Alex = new Player(SHANGO, Vector2f(4900.0, 3700.0), 150.0, 150.0);	//init player
 
-																				//cout << "Alex's width and height is " << Alex->getWidth() << ", " << Alex->getHeight() << endl;
+																				////cout << "Alex's width and height is " << Alex->getWidth() << ", " << Alex->getHeight() << endl;
 
 	vector<WorldObj*> recVec;
 	vector<WorldObj*>* recVec_ptr = &recVec;
@@ -1638,10 +1690,10 @@ void ERONS_LOOP(QuadTree* _QuadTree) {
 	ai->graph.vertices = vertices;
 	ai->graph.obstacles = edges;
 	for (Vector2f vert : ai->graph.vertices) {
-		//std::cout << "X: " << vert.getXloc() << " Y: " << vert.getYloc() << std::endl;
+		////std:://cout << "X: " << vert.getXloc() << " Y: " << vert.getYloc() << std::endl;
 	}
 	for (auto edge : ai->graph.obstacles) {
-		//std::cout << "EDGE from " << edge.first.getXloc() << "," << edge.first.getYloc() << " to " << edge.second.getXloc() << "," << edge.second.getYloc() << std::endl;
+		////std:://cout << "EDGE from " << edge.first.getXloc() << "," << edge.first.getYloc() << " to " << edge.second.getXloc() << "," << edge.second.getYloc() << std::endl;
 	}
 
 	bool visible = true;
@@ -1666,10 +1718,10 @@ void ERONS_LOOP(QuadTree* _QuadTree) {
 	ai->graph.insert(Vector2f(4500.00, 4000.00));
 	ai->graph.insert(Vector2f(5650.00, 3700.00));
 	for (Vector2f vert : ai->graph.vertices) {
-		//std::cout << "X: " << vert.getXloc() << " Y: " << vert.getYloc() << std::endl;
+		////std:://cout << "X: " << vert.getXloc() << " Y: " << vert.getYloc() << std::endl;
 	}
 	for (auto edge : ai->graph.obstacles) {
-		//std::cout << "EDGE from " << edge.first.getXloc() << "," << edge.first.getYloc() << " to " << edge.second.getXloc() << "," << edge.second.getYloc() << std::endl;
+		////std:://cout << "EDGE from " << edge.first.getXloc() << "," << edge.first.getYloc() << " to " << edge.second.getXloc() << "," << edge.second.getYloc() << std::endl;
 	}
 
 	ai->graph._print();
@@ -1691,7 +1743,7 @@ void ERONS_LOOP(QuadTree* _QuadTree) {
 	poolAct->micro.push_back(mic);
 	poolAct->macro.push_back(mac);
 	poolAct->updateMiddle();
-	std::cout << poolAct->macro.back().getName() << endl;
+	//std:://cout << poolAct->macro.back().getName() << endl;
 	vector<Action> test = poolAct->getActions(staticRec, poolAct->macro.back());
 	for (int i = 0; i < test.size(); i++) {
 		int t = test[i].exeAction();
@@ -1719,7 +1771,7 @@ void ERONS_LOOP(QuadTree* _QuadTree) {
 		Alex->updateCD();
 		silverSoldier->updateCD();
 		for (int i = 0; i < recVec.size(); i++) {
-			_QuadTree->insert(recVec[i]);	//insert all obj into tree
+			_QuadTree->Insert(recVec[i]);	//insert all obj into tree
 
 		}
 		state = DialogueController::getState();
@@ -1727,7 +1779,7 @@ void ERONS_LOOP(QuadTree* _QuadTree) {
 		if (staticRec->destination != Vector2f(0, 0)) { //Hero has a destination
 			if (staticRec->waypoint != Vector2f(0, 0) && state == 0) { //Hero has a waypoint to the desination, and not in dialog
 				gameplay_functions->move_toward(staticRec); //Take a step towards the current waypoint
-															//	std::cout << "Request a step" << std::endl;
+															//	//std:://cout << "Request a step" << std::endl;
 			}
 			else if (state == 0)                //Hero needs waypoints to destination, and not in dialog
 			{
@@ -1739,8 +1791,8 @@ void ERONS_LOOP(QuadTree* _QuadTree) {
 		{
 			int r = rand() % 4;
 			ai->start = staticRec->getLoc();
-			//std::cout << "at " << ai->start.getXloc() << "," << ai->start.getYloc() << std::endl;
-			//std::cout << "picked " << r << std::endl;
+			////std:://cout << "at " << ai->start.getXloc() << "," << ai->start.getYloc() << std::endl;
+			////std:://cout << "picked " << r << std::endl;
 			switch (r) {
 			case 0:
 
@@ -1768,9 +1820,9 @@ void ERONS_LOOP(QuadTree* _QuadTree) {
 		}
 
 
-		cout << "Alex's position is " << Alex->getLoc().getXloc() << ", " << Alex->getLoc().getYloc() << endl;
-		cout << "OS's position is " << silverSoldier->getLoc().getXloc() << ", " << silverSoldier->getLoc().getYloc() << endl;
-		cout << "OS's DESTINATION IS: " << silverSoldier->destination.getXloc() << ", " << silverSoldier->destination.getYloc() << endl;
+		//cout << "Alex's position is " << Alex->getLoc().getXloc() << ", " << Alex->getLoc().getYloc() << endl;
+		//cout << "OS's position is " << silverSoldier->getLoc().getXloc() << ", " << silverSoldier->getLoc().getYloc() << endl;
+		//cout << "OS's DESTINATION IS: " << silverSoldier->destination.getXloc() << ", " << silverSoldier->destination.getYloc() << endl;
 
 		/* DEFINE COMBAT MOVEMENT AI HERE
 		At the start of each frame, we want to check for a given npc, whether there is hostile enemy on the map.
@@ -1785,7 +1837,7 @@ void ERONS_LOOP(QuadTree* _QuadTree) {
 			//if discovered Alex, set silverSoldier combat mode to 0(attack).
 			if (silverSoldier->getCurrentEnemy() != nullptr) break;
 			if (it == Alex) {
-				cout << "*************************************FOUND ENEMY****************************************" << endl;
+				//cout << "*************************************FOUND ENEMY****************************************" << endl;
 				//silverSoldier->setMode(0);
 				OSAtkMode = true;
 				silverSoldier->setCurrentEnemy(it);
@@ -1811,7 +1863,7 @@ void ERONS_LOOP(QuadTree* _QuadTree) {
 
 		//if OS has an enemy, move to the enemy
 		if (silverSoldier->getCurrentEnemy() != nullptr && !silverSoldier->getEvade()) {//&& silverSoldier->destination != Vector2f(0,0)) {
-			cout << "*************************************************MOVING TO ENEMY******************************************" << endl;
+			//cout << "*************************************************MOVING TO ENEMY******************************************" << endl;
 			silverSoldier->waypoint = Vector2f(silverSoldier->getCurrentEnemy()->getX() + (silverSoldier->getCurrentEnemy()->getWidth() / 4), silverSoldier->getCurrentEnemy()->getY() + (silverSoldier->getCurrentEnemy()->getHeight() / 4));
 			silverSoldier->destination = Vector2f(silverSoldier->getCurrentEnemy()->getX() + (silverSoldier->getCurrentEnemy()->getWidth() / 4), silverSoldier->getCurrentEnemy()->getY() + (silverSoldier->getCurrentEnemy()->getHeight() / 4));
 
@@ -1852,9 +1904,9 @@ void ERONS_LOOP(QuadTree* _QuadTree) {
 			//npc is at enemy destination, attack.
 			if (silverSoldier->destination == silverSoldier->getLoc()) {
 				silverSoldier->face(silverSoldier->getCurrentEnemy());
-				cout << "COOL DOWN FOR ATTACK IS " << silverSoldier->getCool() << endl;
+				//cout << "COOL DOWN FOR ATTACK IS " << silverSoldier->getCool() << endl;
 				if (silverSoldier->getCool()) {
-					std::cout << "Pressed F" << std::endl;
+					//std:://cout << "Pressed F" << std::endl;
 					//gameplay_functions->special(silverSoldier, 0);
 					silverSoldier->meleeAttack();
 					gameplay_functions->melee(silverSoldier);
@@ -1868,21 +1920,21 @@ void ERONS_LOOP(QuadTree* _QuadTree) {
 		if (silverSoldier->getCurrentEnemy() != nullptr && silverSoldier->getEvade()) {//&& silverSoldier->destination != Vector2f(0, 0)) {
 																				   //if OS is in evade mode, use the getEvadeRange method to find the waypoint and set it to destination
 			if (silverSoldier->destination == Vector2f(-1, -1)) {
-				cout << "****INSIDE THE EVADE MODE SETTER*****" << endl;
+				//cout << "****INSIDE THE EVADE MODE SETTER*****" << endl;
 				//silverSoldier->waypoint = silverSoldier->getEvadeRange(silverSoldier->getCurrentEnemy());
 				silverSoldier->destination = silverSoldier->getEvadeRange(silverSoldier->getCurrentEnemy());
-				cout << "shango waypoint is " << silverSoldier->waypoint.getXloc() << silverSoldier->waypoint.getYloc() << endl;
+				//cout << "shango waypoint is " << silverSoldier->waypoint.getXloc() << silverSoldier->waypoint.getYloc() << endl;
 			}
 			//if reached destination, strafe left or right
 			if (silverSoldier->getLoc() == silverSoldier->destination) {
-				cout << "******* INSIDE THE EVADE MODE STRAFE *******" << endl;
+				//cout << "******* INSIDE THE EVADE MODE STRAFE *******" << endl;
 				//silverSoldier->waypoint = silverSoldier->getStrafeLocation(silverSoldier->getCurrentEnemy());
 				silverSoldier->destination = silverSoldier->getEvadeRange(silverSoldier->getCurrentEnemy());
-				cout << "silverSoldier destination inside strafe function is " << silverSoldier->waypoint.getXloc() << ", " << silverSoldier->waypoint.getYloc() << endl;
+				//cout << "silverSoldier destination inside strafe function is " << silverSoldier->waypoint.getXloc() << ", " << silverSoldier->waypoint.getYloc() << endl;
 			}
 			/*if (silverSoldier->waypoint != Vector2f(0, 0) && state == 0) { //Hero has a waypoint to the desination, and not in dialog
 			gameplay_functions->move_toward(silverSoldier); //Take a step towards the current waypoint
-			//	std::cout << "Request a step" << std::endl;
+			//	//std:://cout << "Request a step" << std::endl;
 			}
 			else if (state == 0)                //Hero needs waypoints to destination, and not in dialog
 			{
@@ -1895,7 +1947,7 @@ void ERONS_LOOP(QuadTree* _QuadTree) {
 		if (silverSoldier->destination != Vector2f(0, 0)) { //Hero has a destination
 			if (silverSoldier->waypoint != Vector2f(0, 0) && state == 0) { //Hero has a waypoint to the desination, and not in dialog
 				gameplay_functions->move_toward(silverSoldier); //Take a step towards the current waypoint
-															  //	std::cout << "Request a step" << std::endl;
+															  //	//std:://cout << "Request a step" << std::endl;
 			}
 			else if (state == 0)                //Hero needs waypoints to destination, and not in dialog
 			{
@@ -1923,7 +1975,7 @@ void ERONS_LOOP(QuadTree* _QuadTree) {
 		//ActionExecFunctions::ActionExecMap[AiController->hero_planners[YEMOJA]->get_current_action()]
 		AiController->hero_planners[YEMOJA]->get_current_action()->execute();
 		tBuffer->run();
-		//	cout << tBuffer->queue_buffer.size() << endl;
+		//	//cout << tBuffer->queue_buffer.size() << endl;
 		//tBuffer->empty();
 
 		/////////////////////////////////////////////////////////////////
@@ -1948,7 +2000,7 @@ void ERONS_LOOP(QuadTree* _QuadTree) {
 		if (delta_ticks > 0)
 			fps = CLOCKS_PER_SEC / delta_ticks;
 		if (DialogueController::getState() == 0) {
-			//cout << "FPS: " << fps << endl;
+			////cout << "FPS: " << fps << endl;
 		}
 
 
@@ -1961,28 +2013,28 @@ void ERONS_LOOP(QuadTree* _QuadTree) {
 void Darion_Ian_Test() {
 	MemoryPool* hero_pool = create_pool(2048);
 	MemNode* head_ptr = init_pool(hero_pool, 32);
-	std::cout << std::endl;
+	//std:://cout << std::endl;
 
 	MemNode* m = head_ptr;
 
 	while (m != NULL) {
-		std::cout << "Availability:" << m->getAvailability() << std::endl;
-		std::cout << "Block Pointer:" << m->getBlockPointer() << std::endl;
+		//std:://cout << "Availability:" << m->getAvailability() << std::endl;
+		//std:://cout << "Block Pointer:" << m->getBlockPointer() << std::endl;
 		if (m->hasNext() != NULL)
-			std::cout << "Next Block:" << m->getNext()->getBlockPointer() << std::endl;
-		std::cout << "--------------------" << std::endl;
+			//std:://cout << "Next Block:" << m->getNext()->getBlockPointer() << std::endl;
+		//std:://cout << "--------------------" << std::endl;
 		m = m->getNext();
 	}
 
-	std::cout << hero_pool->num_of_blocks << " Blocks" << std::endl;
+	//std:://cout << hero_pool->num_of_blocks << " Blocks" << std::endl;
 	Warrior* myWarrior = new(find_available_block(head_ptr)) Warrior();
-	std::cout << "Address of myWarrior:" << myWarrior << std::endl;
-	std::cout << "Health:" << myWarrior->health << std::endl;
+	//std:://cout << "Address of myWarrior:" << myWarrior << std::endl;
+	//std:://cout << "Health:" << myWarrior->health << std::endl;
 
 	Warrior* war = new(find_available_block(head_ptr)) Warrior(775, false, 3.9f, 2.7f);
 	war->health = 69;
-	std::cout << "Address of war:" << war << std::endl;
-	std::cout << "Health:" << war->health << std::endl;
+	//std:://cout << "Address of war:" << war << std::endl;
+	//std:://cout << "Health:" << war->health << std::endl;
 
 	destroy_pool(hero_pool);
 	destroy_MemNode_list(head_ptr);
@@ -2022,7 +2074,7 @@ void ANDREWS_TEST() {
 	soundsystem.playSound(soundSample, false, channel, ispaused, 1); 	// Play the sound, with loop mode
 
 
-	cout << "Press return to quit." << endl;  // Do something meanwhile...
+	//cout << "Press return to quit." << endl;  // Do something meanwhile...
 	cin.get();
 
 	soundsystem.releaseSound(soundSample); // Release the sound
@@ -2080,8 +2132,8 @@ void ANDREWS_LOOP(QuadTree* _QuadTree) {
 	TestM->register_manager();
 	AudM->register_manager();
 
-	cout << endl;
-	cout << "STARTING PHYSICS TESTS" << endl;
+	//cout << endl;
+	//cout << "STARTING PHYSICS TESTS" << endl;
 	PHYSICS_TEST();
 
 	//std::unordered_map<std::string, Manager*> manager_table;
@@ -2098,7 +2150,7 @@ void ANDREWS_LOOP(QuadTree* _QuadTree) {
 	while (osi::GameWindow::isRunning()) {
 		_QuadTree->clear();
 		for (int i = 0; i < recVec.size(); i++) {
-			_QuadTree->insert(recVec[i]);	//insert all obj into tree
+			_QuadTree->Insert(recVec[i]);	//insert all obj into tree
 		}
 		//clock 
 		iController->InputCheck();
@@ -2121,17 +2173,17 @@ void ANDREWS_LOOP(QuadTree* _QuadTree) {
 void PHYSICS_TEST() {
 	PhysicsTestSuite* test = new PhysicsTestSuite();
 	if (test->test_movement()) {
-		cout << "MOVEMENT TEST SUCCEEDED" << endl;
+		//cout << "MOVEMENT TEST SUCCEEDED" << endl;
 	}
 	else {
-		cout << "MOVEMENT TEST FAILED" << endl;
+		//cout << "MOVEMENT TEST FAILED" << endl;
 	}
 
 	if (test->test_collision()) {
-		cout << "COLLISION TEST SUCCEEDED" << endl;
+		//cout << "COLLISION TEST SUCCEEDED" << endl;
 	}
 	else {
-		cout << "COLLISION TEST FAILED" << endl;
+		//cout << "COLLISION TEST FAILED" << endl;
 	}
 }
 

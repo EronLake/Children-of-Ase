@@ -20,8 +20,8 @@ public:
 	~QuadTree();
 	void clear();
 	void split();
-	int getIndex(WorldObj* myrec);
-	void insert(WorldObj* myrec);
+	vector<int> getIndexes(WorldObj* myrec);
+	void Insert(WorldObj* myrec);
 	vector<WorldObj*> retrieve(vector<WorldObj*> &listOfObj, WorldObj* myrec);
 };
 

@@ -310,6 +310,7 @@ std::string Postcondition::get_type()
 }
 
 
+
 //---------------------------------------------------------------------------------
 
 ////////////////////////////////////////////////////////////////////////////////////
@@ -353,6 +354,27 @@ void RelPost::apply_utility()
 	}
 }
 
+//Returns null plug string if the postcondition does not complete
+//any of the given preconditions
+//Returns the string key of the precondition if one is found
+std::string RelPost::fulfills_which(vector<std::string> preconds, Precond_map map)
+{
+	string pre_fulfilled = "\0"; 
+	for (auto precond_string : preconds) {
+		Preconditions* precond = map[precond_string].get();
+		if (precond->get_type() != "relationship") //Skip non-relation preconds
+		{
+			continue;
+		}
+		else
+		{
+			RelPrecon* rel_pre = dynamic_cast<RelPrecon*>(precond);
+		}
+		
+
+	}
+	return pre_fulfilled;
+}
 //---------------------------------------------------------------------------------
 
 

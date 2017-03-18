@@ -11,6 +11,7 @@ Attack::Attack()
 	speed = 0;
 	cooldown = 62;
 	pause = 62;
+	canCancel = true;
 }
 
 Attack::Attack(float x, float y, bool col) : WorldObj(x, y, col)
@@ -22,6 +23,7 @@ Attack::Attack(float x, float y, bool col) : WorldObj(x, y, col)
 	speed=0;
 	cooldown=62;
 	pause=62;
+	canCancel = true;
 }
 
  void Attack::Hit(LivingObj *target)
