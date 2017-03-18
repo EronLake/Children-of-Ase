@@ -1,5 +1,4 @@
 {
-  
    "JungleBotLeft" : {
       "bodyx1" : 100.0,
       "bodyx2" : -300.0,
@@ -911,17 +910,17 @@
       "y" : 135.0
    },
    "Jungle_Element_Num_69" : {
-      "bodyx1" : 1000,
-      "bodyx2" : 1000,
-      "bodyy1" : 1000,
-      "bodyy2" : 1000,
+      "bodyx1" : 0.0,
+      "bodyx2" : 0.0,
+      "bodyy1" : 0.0,
+      "bodyy2" : 0.0,
       "frame_num" : 1,
-      "hight" : 500,
+      "hight" : 500.0,
       "name" : "Jungle_Element_Num_69",
       "tex_file" : "Jungle_Plant3",
-      "width" : 500,
-      "x" : 147.0,
-      "y" : 134.0
+      "width" : 500.0,
+      "x" : 150.8273315429688,
+      "y" : 130.8106689453125
    },
    "Jungle_Element_Num_7" : {
       "bodyx1" : 1000,
@@ -2094,17 +2093,17 @@
       "y" : 151.9840545654297
    },
    "Jungle_Tree_Num_62" : {
-      "bodyx1" : 1000,
-      "bodyx2" : 1000,
-      "bodyy1" : 1000,
-      "bodyy2" : 1000,
+      "bodyx1" : 0.0,
+      "bodyx2" : 0.0,
+      "bodyy1" : 0.0,
+      "bodyy2" : 0.0,
       "frame_num" : 1,
-      "hight" : 500,
+      "hight" : 500.0,
       "name" : "Jungle_Tree_Num_62",
       "tex_file" : "Jungle_Tree_2",
-      "width" : 500,
-      "x" : 176.0,
-      "y" : 144.0
+      "width" : 500.0,
+      "x" : 177.1758270263672,
+      "y" : 146.0515747070313
    },
    "Jungle_Tree_Num_63" : {
       "bodyx1" : 1000.0,
@@ -2367,17 +2366,17 @@
       "y" : 176.0
    },
    "Jungle_Tree_Num_81" : {
-      "bodyx1" : 1000.0,
-      "bodyx2" : -3000.0,
-      "bodyy1" : 1000.0,
-      "bodyy2" : -3000.0,
+      "bodyx1" : 0.0,
+      "bodyx2" : 0.0,
+      "bodyy1" : 0.0,
+      "bodyy2" : 0.0,
       "frame_num" : 1,
       "hight" : 500.0,
       "name" : "Jungle_Tree_Num_81",
       "tex_file" : "Jungle_Tree_2",
       "width" : 500.0,
-      "x" : 168.3708648681641,
-      "y" : 151.0292053222656
+      "x" : 168.2950592041016,
+      "y" : 150.5137634277344
    },
    "Jungle_Tree_Num_82" : {
       "bodyx1" : 0.0,
@@ -2445,17 +2444,17 @@
       "y" : 149.7475280761719
    },
    "Jungle_Tree_Num_87" : {
-      "bodyx1" : -1000.0,
-      "bodyx2" : -1000.0,
-      "bodyy1" : -1000.0,
-      "bodyy2" : -1000.0,
+      "bodyx1" : 0.0,
+      "bodyx2" : 0.0,
+      "bodyy1" : 0.0,
+      "bodyy2" : 0.0,
       "frame_num" : 1,
       "hight" : 500.0,
       "name" : "Jungle_Tree_Num_87",
       "tex_file" : "Jungle_Tree_3",
       "width" : 500.0,
-      "x" : 146.9987335205078,
-      "y" : 132.6887817382813
+      "x" : 150.8860321044922,
+      "y" : 134.3875732421875
    },
    "Jungle_Tree_Num_88" : {
       "bodyx1" : 1000,
@@ -2614,17 +2613,17 @@
       "y" : 169.0
    },
    "Jungle_Tree_Num_99" : {
-      "bodyx1" : 1000,
-      "bodyx2" : 1000,
-      "bodyy1" : 1000,
-      "bodyy2" : 1000,
+      "bodyx1" : 0.0,
+      "bodyx2" : 0.0,
+      "bodyy1" : 0.0,
+      "bodyy2" : 0.0,
       "frame_num" : 1,
-      "hight" : 500,
+      "hight" : 500.0,
       "name" : "Jungle_Tree_Num_99",
       "tex_file" : "Jungle_Tree_1",
-      "width" : 500,
-      "x" : 152.0,
-      "y" : 133.0
+      "width" : 500.0,
+      "x" : 153.8546447753906,
+      "y" : 135.8841400146484
    }, //////////////////////////////Oasis Stuff///////////////////////
    "OasisHouse2" : {
       "bodyx1" : 0.0,
@@ -2635,9 +2634,9 @@
       "hight" : 500.0,
       "name" : "OasisHouse2",
       "tex_file" : "Oasis_House",
-      "width" : 500.0,
-      "x" : 84.22545623779297,
-      "y" : 65.83251190185547
+      "width" : 750.0,
+      "x" : 87.96243286132813,
+      "y" : 67.14375305175781
    },
    "OasisHouse3" : {
       "bodyx1" : 0.0,
@@ -2714,9 +2713,8 @@
       "name" : "Oasis_TownCenter",
       "tex_file" : "Oasis_Tower",
       "width" : 1000.0,
-      "x" : 91.12799835205078,
-      "y" : 70.44689941406250
-
+      "x" : 83.75436401367188,
+      "y" : 73.29331207275391
    },
    "VillageElder" : {
       "bodyx1" : -999.999511718750,
@@ -2799,15 +2797,15 @@
    "center" : {
       "bodyx1" : 0.0,
       "bodyx2" : 0.0,
-      "bodyy1" : 0.0,
-      "bodyy2" : 0.0,
+      "bodyy1" : -1350.0,
+      "bodyy2" : -100.0,
       "frame_num" : 1,
-      "hight" : 500.0,
+      "hight" : 1500.0,
       "name" : "center",
       "tex_file" : "Forest_Town_Center",
-      "width" : 500.0,
-      "x" : 61.76268005371094,
-      "y" : 40.07624053955078
+      "width" : 1000.0,
+      "x" : 73.49081420898438,
+      "y" : 52.98882293701172
    },
    "jim" : {
       "bodyx1" : 0,
@@ -2845,7 +2843,7 @@
       "name" : "mybrrl",
       "tex_file" : "Barrel.png",
       "width" : 500.0,
-      "x" : 95.99329376220703,
-      "y" : 58.64627456665039
+      "x" : 99.74749755859375,
+      "y" : 58.79998397827148
    }
 }

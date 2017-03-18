@@ -99,7 +99,7 @@ void WorldObj::face(WorldObj* other) {
 	}
 	setDirection(f);
 }
-
+/*
 //takes in a worldobj, returns a vector2f denoting where current obj is suppose to move to
 Vector2f WorldObj::getEvadeRange(WorldObj * _enemy)
 {
@@ -132,7 +132,7 @@ Vector2f WorldObj::getStrafeLocation(WorldObj * _enemy)
 
 	
 }
-
+*/
 
 void WorldObj::_print()
 {

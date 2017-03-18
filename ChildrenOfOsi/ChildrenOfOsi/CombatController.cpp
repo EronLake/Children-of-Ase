@@ -183,11 +183,11 @@ void CombatController::fight(Soldier* sold1, int state) {
 void CombatController::follow(Soldier* sold1, int state) {
 	Soldier* sold2 = sold1->getCurrentLeader();
 	if (sold2==nullptr)return;
-	sold1->waypoint = Vector2f(sold2->getX() + (sold2->getWidth() / 4), sold2->getY() + (sold2->getHeight() / 4));
-	sold1->destination = Vector2f(sold2->getX() + (sold2->getWidth() / 4), sold2->getY() + (sold2->getHeight() / 4));
+	sold1->waypoint = Vector2f(sold2->body[0].getX() + (sold2->body[0].getWidth() / 2), sold2->body[0].getY() + (sold2->body[0].getHeight() / 2));
+	sold1->destination = Vector2f(sold2->body[0].getX() + (sold2->body[0].getWidth() / 2), sold2->body[0].getY() + (sold2->body[0].getHeight() / 2));
 
-	//enemy is facing up
-	if (sold2->getDirection() == 2) {
+	/*//enemy is facing up
+	if (sold1->getCurrentEnemy()->getDirection() == 2) {
 
 		sold1->waypoint.shiftYloc(-100);
 		sold1->destination.shiftYloc(-100);
@@ -196,7 +196,7 @@ void CombatController::follow(Soldier* sold1, int state) {
 
 		//enemy is facing right
 	}
-	else if (sold2->getDirection() == 4) {
+	else if (sold1->getCurrentEnemy()->getDirection() == 4) {
 
 		sold1->waypoint.shiftXloc(60);
 		sold1->destination.shiftXloc(60);
@@ -204,18 +204,23 @@ void CombatController::follow(Soldier* sold1, int state) {
 		sold1->destination.shiftYloc(-30);
 	}
 	//enemy is facing left
-	else if (sold2->getDirection() == 6) {
+	else if (sold1->getCurrentEnemy()->getDirection() == 6) {
 		sold1->waypoint.shiftXloc(-100);
 		sold1->destination.shiftXloc(-100);
 		sold1->waypoint.shiftYloc(-30);
 		sold1->destination.shiftYloc(-30);
 	}
 	//enemy is facing down
-	else if (sold2->getDirection() == 8) {
+	else if (sold1->getCurrentEnemy()->getDirection() == 8) {
 		sold1->waypoint.shiftYloc(60);
 		sold1->destination.shiftYloc(60);
 		sold1->waypoint.shiftXloc(-30);
 		sold1->destination.shiftXloc(-30);
+	}*/
+	if (distBetween(sold1,sold2)<(sold1->body[0].getWidth()*3)) {
+		sold1->destination = Vector2f(0, 0);
+		sold1->waypoint = Vector2f(0, 0);
+		gameplay_functions->stop(sold1);
 	}
 	if (sold1->destination != Vector2f(0, 0)) { //Hero has a destination
 		if (sold1->waypoint != Vector2f(0, 0) && state == 0) { //Hero has a waypoint to the desination, and not in dialog
@@ -227,4 +232,11 @@ void CombatController::follow(Soldier* sold1, int state) {
 			gameplay_functions->get_path(sold1); //Generate waypoints to destination
 		}
 	}
+}
+
+float CombatController::distBetween(Soldier* sold1, Soldier* sold2) {
+	float a = (sold1->body[0].getX() + (sold1->body[0].getWidth() / 2) - sold2->body[0].getX() + (sold2->body[0].getWidth() / 2));
+	float b= (sold1->body[0].getY() + (sold1->body[0].getHeight() / 2) - sold2->body[0].getY() + (sold2->body[0].getHeight() / 2));
+	float c = sqrt(a*a + b*b);
+	return c;
 }
