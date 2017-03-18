@@ -155,20 +155,20 @@ void Planner::add_milestone(Action goal, Action milestone) {
 	milestones->at(goal).push_back(milestone);
 }
 
-void Planner::generate_milestones(Action state, Action goal) {
-	if (goal.preConditionsNeeded(evaluateHero, goal.getReceiver()).size() == 0)
+void Planner::generate_milestones(Action state, Action* goal) {
+	if (goal->preConditionsNeeded(evaluateHero, goal->getReceiver()).size() == 0)
 	{
-		if (goal.getUtility() > current_action_value)
+		if (goal->getUtility() > current_action_value)
 		{
 			current_end_state = state;
 			current_action = goal;
-			current_action_value = goal.getUtility();
+			current_action_value = goal->getUtility();
 		}
 	}
 	else
 	{
-		milestones->at(state).push_back(choose_next_step(goal, get_milestone_frontier()));
-		generate_milestones(state, milestones->at(state).back());
+		milestones->at(state).push_back(choose_next_step(*goal, get_milestone_frontier()));
+		generate_milestones(state, &milestones->at(state).back());
 	}
 }
 

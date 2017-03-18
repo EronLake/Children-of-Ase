@@ -32,7 +32,7 @@ void RenderHelper::initCamera(WorldObj * player)
 	camera->setLoc(Vector2f(camX, camY));
 	camera->setWidth(cameraSize.getXloc());
 	camera->setHeight(cameraSize.getYloc());
-	//cout << "Camera has coord " << camera->getX() << ", " << camera->getY() << " and width and height of " << camera->getWidth() << ", " << camera->getHeight() << endl;
+	////cout << "Camera has coord " << camera->getX() << ", " << camera->getY() << " and width and height of " << camera->getWidth() << ", " << camera->getHeight() << endl;
 
 
 }
@@ -59,7 +59,7 @@ int RenderHelper::draw_frame(WorldObj * obj)
 	sortVec();
 	for (int i = 0; i < objVec.size(); i++) {
 		LOG("BEFORE DRAWING**");
-		//cout << objVec[i]->getX() - camera->getX() << endl;
+		////cout << objVec[i]->getX() - camera->getX() << endl;
 		//LOG(objVec[i]->getX(), ", ", objVec[i]->getY());
 		objVec[i]->WorldObj::drawObj(camera->getX(), camera->getY());
 		//for (int j = 0; j < objVec[i]->body.size(); j++) {
@@ -80,7 +80,7 @@ int RenderHelper::drawDiaGui(WorldObj* obj)
 	obj->WorldObj::animateObj();
 	for (int i = 0; i < objVec.size(); i++) {
 		LOG("BEFORE DRAWING**");
-		//cout << objVec[i]->getX() - camera->getX() << endl;
+		////cout << objVec[i]->getX() - camera->getX() << endl;
 		//LOG(objVec[i]->getX(), ", ", objVec[i]->getY());
 		objVec[i]->WorldObj::drawObj(camera->getX(), camera->getY());
 		objVec[i]->WorldObj::animateObj();

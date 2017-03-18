@@ -18,7 +18,7 @@ public:
 	void fight(Soldier* sold1, int state);
 	void follow(Soldier* follower, int state);
 	void addtoTargets(Soldier* sold2) { enemyVec.push_back(sold2); };
-	float distBetween(Soldier* sold1, Soldier* sold2);
+	float dist_by_center(Soldier* sold1, Soldier* sold2);
 	void checkParties();
 private:
 	vector<Soldier*> soldiers;

@@ -24,7 +24,7 @@ public:
 	ActionPool* actionPool;
     int name;
 
-	int mem_counter;
+	int mem_counter = 0;
 	vector<Memory*> memories;
 	Memory* find_mem(std::string mem_name);
 

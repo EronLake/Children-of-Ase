@@ -1,6 +1,9 @@
 #include "stdafx.h"
 #include "Memory.h"
 
+Memory::Memory()
+{
+}
 
 Memory::Memory(int t, int frames, vector<NPC*> p, string cat, string cont, string where, int why, int when)
 {
@@ -23,9 +26,6 @@ Memory::Memory(int t, int frames, vector<NPC*> p, string cat, string cont, strin
 	when = when;
 	reason = "";
 	time = frames;
-
-
-
 }
 
 
@@ -33,9 +33,28 @@ Memory::~Memory()
 {
 }
 
-
-
-
+void Memory::set_all(int t, int frames, vector<NPC*> p, string cat, string cont, string where, int why, int when)
+{
+	type = t;
+	if (type == ACTION && p.size() != 3)
+	{
+		LOG("Error: Action memory must have 3 people {Doer, Reciever, Instigator}");
+		return;
+	}
+	else if (type == FACT && p.size() != 2)
+	{
+		LOG("Error: Fact memory must have 2 people {Who about, Info source}");
+		return;
+	}
+	people = p;
+	category = cat;
+	content = cont;
+	where = where;
+	why = why;
+	when = when;
+	reason = "";
+	time = frames;
+}
 
 void Memory::setType(int t) {
 	type = t;
