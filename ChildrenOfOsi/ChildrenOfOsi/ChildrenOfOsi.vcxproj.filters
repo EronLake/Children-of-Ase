@@ -205,6 +205,7 @@
     </ClCompile>
     <ClCompile Include="ConversationPoint.cpp" />
     <ClCompile Include="Tag.cpp" />
+    <ClCompile Include="PartyManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AIHelper.h">
@@ -429,6 +430,7 @@
     </ClInclude>
     <ClInclude Include="ConversationPoint.h" />
     <ClInclude Include="Tag.h" />
+    <ClInclude Include="PartyManager.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="audio_test.txt">
