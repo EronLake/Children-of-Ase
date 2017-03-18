@@ -208,7 +208,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	//Player* Alex = new Player(1000,600, true);	//init player
 	//WorldObj* Alex = new WorldObj(1000, 600, true);
 
-	ObjConfig::import_config(recVec_ptr, gameplay_functions, tBuffer);
+	//ObjConfig::import_config(recVec_ptr, gameplay_functions, tBuffer);
 	
 	
 	
@@ -305,7 +305,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	blank->setFile("Assets/Sprites/blank.png", 1);
 	border->setFile("Assets/Sprites/border.png", 1);
 	objTexture->setFile("Assets/Sprites/YemojasHouse.png",1);
-	Soldier* silverSoldier = new Soldier(4900, 3300, true);
+	Soldier* silverSoldier = new Soldier(4000, 3300, true);
 
 	playerTexture->setFile("Assets/Sprites/ShangoForwardIdle.png",22);
 	playerIdleTex->setFile("Assets/Sprites/ShangoForwardIdle.png",22);
@@ -699,8 +699,9 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	staticRec->setInteractable(true);
 	staticRec->setHealth(100);
 	*oya = *staticRec;
-	oya->setSpeed(5);
-	oya->offsetBody(0, 50, 50, 50, 50);
+	//oya->setSpeed(5);
+	oya->offsetBody(0, 25, 25, 25, 25);
+	staticRec->offsetBody(0, 25, 25, 25,25);
 	oya->shiftY(300);
 	
 	/*
@@ -817,12 +818,15 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	bool OSAtkMode = true;
 	short M = GetKeyState('M') >> 15;
 	Party* party = new Party();
+
+
 	Alex->setParty(party);
 	party->addToParty(Alex,true);
+	silverSoldier->setParty(party);
+	party->addToParty(silverSoldier, false);	
 	oya->setParty(party);
 	party->addToParty(oya, false);
-	silverSoldier->setParty(party);
-	party->addToParty(silverSoldier, false);
+	
 	staticRec->setParty(party);
 	party->addToParty(staticRec, false);
 	party->updateFollowers();
