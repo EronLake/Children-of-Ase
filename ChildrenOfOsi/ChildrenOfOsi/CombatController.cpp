@@ -181,11 +181,10 @@ void CombatController::fight(Soldier* sold1, int state) {
 }
 
 void CombatController::follow(Soldier* sold1, int state) {
-	Soldier* sold2 = sold1->getParty()->getLeader();
-	if (sold1 == sold2)return;
-	sold1->setCurrentEnemy(sold2);
-	sold1->waypoint = Vector2f(sold1->getCurrentEnemy()->body[0].getX() + (sold1->getCurrentEnemy()->body[0].getWidth() / 2), sold1->getCurrentEnemy()->body[0].getY() + (sold1->getCurrentEnemy()->body[0].getHeight() / 2));
-	sold1->destination = Vector2f(sold1->getCurrentEnemy()->body[0].getX() + (sold1->getCurrentEnemy()->body[0].getWidth() / 2), sold1->getCurrentEnemy()->body[0].getY() + (sold1->getCurrentEnemy()->body[0].getHeight() / 2));
+	Soldier* sold2 = sold1->getCurrentLeader();
+	if (sold2==nullptr)return;
+	sold1->waypoint = Vector2f(sold2->getX() + (sold2->getWidth() / 4), sold2->getY() + (sold2->getHeight() / 4));
+	sold1->destination = Vector2f(sold2->getX() + (sold2->getWidth() / 4), sold2->getY() + (sold2->getHeight() / 4));
 
 	/*//enemy is facing up
 	if (sold1->getCurrentEnemy()->getDirection() == 2) {
