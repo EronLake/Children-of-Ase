@@ -4,10 +4,10 @@
 #include <vector>
 
 #include "common.h"
-
-#include "Alliance.h"
 #include "Player.h"
 #include "Soldier.h"
+
+class Alliance;
 
 class Party
 {
@@ -25,6 +25,7 @@ class Party
   Party(Alliance *a, Soldier *leader);
   Party(Alliance *a, Soldier *leader, const vector<Soldier *>& members);
   ~Party() = default;
+  static vector<Party*> partiesWorld;
 
   Alliance * getAlliance() const { return this->faction; }
   Soldier * getLeader() const { return this->leader; }
@@ -47,13 +48,17 @@ class Party
   void findEnemy();
   void update();
 
+  void addToCurrentEnemies(Party* p) { currentEnemies.push_back(p); };
+  vector<Party*> getCurrentEnemies() { return currentEnemies; };
+
   private:
 
-  Alliance *faction;
+  Alliance* faction;
   vector<Soldier *> members;
   Soldier *leader;
 
   LivingObj *target;
   int mode;
+  vector<Party*> currentEnemies;
 };
 
