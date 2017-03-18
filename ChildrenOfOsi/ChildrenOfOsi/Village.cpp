@@ -6,7 +6,7 @@ vector<Village*> Village::villagesWorld;
 
 Village::Village()
 {
-	villagesWorld.push_back(this);
+	Village::villagesWorld.push_back(this);
 }
 
 Village::~Village()
