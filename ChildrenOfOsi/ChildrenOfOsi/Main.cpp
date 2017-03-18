@@ -818,16 +818,9 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	bool OSAtkMode = true;
 	short M = GetKeyState('M') >> 15;
 	Party* party = new Party();
-
-
-	Alex->setParty(party);
 	party->addToParty(Alex,true);
-	silverSoldier->setParty(party);
 	party->addToParty(silverSoldier, false);	
-	oya->setParty(party);
 	party->addToParty(oya, false);
-	
-	staticRec->setParty(party);
 	party->addToParty(staticRec, false);
 	party->updateFollowers();
 

@@ -84,17 +84,17 @@ bool Party::isEnemyOf(Party *p)
  */
 void Party::addToParty(Soldier* s, bool isLeader)
 {
-  if(s != nullptr) {
-	  if (isLeader || members.size() == 0) {
-		  members.insert(members.begin(),s);
-		  this->leader = s;
-		  s->setParty(this);
-	  }
-  }
-  else {
-	  this->members.push_back(s);
-	  s->setParty(this);
-  }
+	if (s != nullptr) {
+		if (isLeader || members.size() == 0) {
+			members.insert(members.begin(), s);
+			this->leader = s;
+			s->setParty(this);
+		}
+		else {
+			this->members.push_back(s);
+			s->setParty(this);
+		}
+	}
 }
 
 /**
