@@ -205,6 +205,12 @@
     </ClCompile>
     <ClCompile Include="ConversationPoint.cpp" />
     <ClCompile Include="Tag.cpp" />
+    <ClCompile Include="DialogueConfig.cpp">
+      <Filter>Dialogue</Filter>
+    </ClCompile>
+    <ClCompile Include="TagConfig.cpp">
+      <Filter>Dialogue</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AIHelper.h">
@@ -429,6 +435,12 @@
     </ClInclude>
     <ClInclude Include="ConversationPoint.h" />
     <ClInclude Include="Tag.h" />
+    <ClInclude Include="DialogueConfig.h">
+      <Filter>Dialogue</Filter>
+    </ClInclude>
+    <ClInclude Include="TagConfig.h">
+      <Filter>Dialogue</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Text Include="audio_test.txt">
@@ -533,6 +545,12 @@
     </None>
     <None Include="test.json">
       <Filter>Game Objects</Filter>
+    </None>
+    <None Include="Dialogue_config.json">
+      <Filter>Dialogue</Filter>
+    </None>
+    <None Include="Tag_config.json">
+      <Filter>Dialogue</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>

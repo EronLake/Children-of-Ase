@@ -47,6 +47,7 @@
 #include "DialogueController.h"
 #include "DialogueHelper.h"
 #include "DialougeTestSuite.h"
+#include "DialogueConfig.h"
 
 #include "AIManager.h"
 #include "AIController.h"
@@ -210,7 +211,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 
 	ObjConfig::import_config(recVec_ptr, gameplay_functions, tBuffer);
 	
-	
+	DialogueConfig::import_config(gameplay_functions, tBuffer);
 	
 	//WorldObj* barrel = new WorldObj(Vector2f(5200, 3900), 75, 75);
 	//Alex->name = SHANGO;
@@ -574,6 +575,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 
 	gameplay_functions->add_hero("Yemoja", 4600, 3600, true);
 	gameplay_functions->add_hero("Oya", 4400, 3600, true);
+	
 	//gameplay_functions->add_soldier("silverSoldier", 4900, 3300, true);
 
 	tBuffer->run();

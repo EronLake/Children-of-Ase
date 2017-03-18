@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "DialogueController.h"
 #include "CheckClass.h"
+#include "ConversationPoint.h"
 
 Player* DialogueController::player;
 WorldObj* DialogueController::other;

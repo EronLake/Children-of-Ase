@@ -179,6 +179,7 @@
     <ClInclude Include="Conditions.h" />
     <ClInclude Include="Containers.h" />
     <ClInclude Include="ConversationPoint.h" />
+    <ClInclude Include="DialogueConfig.h" />
     <ClInclude Include="DialogueController.h" />
     <ClInclude Include="DialogueGui.h" />
     <ClInclude Include="DialogueHelper.h" />
@@ -186,6 +187,7 @@
     <ClInclude Include="DummyController.h" />
     <ClInclude Include="Party.h" />
     <ClInclude Include="Tag.h" />
+    <ClInclude Include="TagConfig.h" />
     <ClInclude Include="Village.h" />
     <ClInclude Include="GameMap.h" />
     <ClInclude Include="GameWindow.h" />
@@ -256,6 +258,7 @@
     <ClCompile Include="Conditions.cpp" />
     <ClCompile Include="Containers.cpp" />
     <ClCompile Include="ConversationPoint.cpp" />
+    <ClCompile Include="DialogueConfig.cpp" />
     <ClCompile Include="DialogueController.cpp" />
     <ClCompile Include="DialogueGui.cpp" />
     <ClCompile Include="DialogueHelper.cpp" />
@@ -263,6 +266,7 @@
     <ClCompile Include="DummyController.cpp" />
     <ClCompile Include="Party.cpp" />
     <ClCompile Include="Tag.cpp" />
+    <ClCompile Include="TagConfig.cpp" />
     <ClCompile Include="Village.cpp" />
     <ClCompile Include="GameMap.cpp" />
     <ClCompile Include="GameWindow.cpp" />
@@ -319,6 +323,7 @@
   <ItemGroup>
     <None Include="AssetInfo.h" />
     <None Include="ClassDiagram.cd" />
+    <None Include="Dialogue_config.json" />
     <None Include="OpenGL Shaders\FontFragmentShader.frag.glsl" />
     <None Include="OpenGL Shaders\FontVertexShader.vert.glsl" />
     <None Include="OpenGL Shaders\StdFragmentShader.frag.glsl" />
@@ -326,6 +331,7 @@
     <None Include="config.json" />
     <None Include="script_templates.json" />
     <None Include="Shango_dialog.json" />
+    <None Include="Tag_config.json" />
     <None Include="test.json" />
     <None Include="Yemoja_dialog.json" />
   </ItemGroup>
