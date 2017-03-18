@@ -125,7 +125,7 @@ std::string DialogueHelper::gen_dialog(dialogue_point diog_pt, Hero* hero)
 	}
 	std::string sentence = convert_to_sentence(get_dialog(name, diog_pt));
 
-	std::cout << sentence << std::endl;
+	//std:://cout << sentence << std::endl;
 	return sentence;
 }
 
@@ -156,7 +156,7 @@ std::string DialogueHelper::gen_reply(dialogue_point diog_pt, Hero* hero)
 
 	std::string sentence = convert_to_sentence(get_dialog(name, diog_pt));
 
-	std::cout << sentence << std::endl;
+	//std:://cout << sentence << std::endl;
 	return sentence;
 }
 
@@ -171,7 +171,7 @@ dialogue_template DialogueHelper::get_template(dialogue_point diog_pt) {
 	
 	dialogue_template dtemp;
 
-	std::cout << diog_pt[1] + "_templates" << std::endl;
+	//std:://cout << diog_pt[1] + "_templates" << std::endl;
 	//get a random conversation template
 	int j = 0;
 	if (root[diog_pt[1] + "_templates"].size() > 1)
@@ -194,7 +194,7 @@ dialogue_template DialogueHelper::get_template(dialogue_point diog_pt) {
 	{
 		//ofs << "dialogue template: " << dtemp[i] << std::endl;
 		
-		//std::cout << dtemp[i] << std::endl;
+		////std:://cout << dtemp[i] << std::endl;
 	}
 	//ofs.close();
 	return dtemp;
@@ -211,7 +211,7 @@ dialogue_point DialogueHelper::get_dialog(std::string name, dialogue_point diog_
 
 	Json::Value root;
 	Json::Reader reader;
-	std::cout <<name + "_dialog.json" << std::endl;
+	//std:://cout <<name + "_dialog.json" << std::endl;
 	std::string dialogue_filename = name + "_dialog.json";
 
 	std::ifstream file(dialogue_filename);
@@ -248,7 +248,7 @@ dialogue_point DialogueHelper::get_dialog(std::string name, dialogue_point diog_
 	//ofs.open("dialog_template_output.txt", std::ofstream::out | std::ofstream::app);
 	for (int i = 0; i < dpoint.size(); i++){
 		//ofs << "dialogue point: " << dpoint[i] << std::endl;
-		//std::cout << "dialogue point: "<< dpoint[i] << std::endl;
+		////std:://cout << "dialogue point: "<< dpoint[i] << std::endl;
 	}
 	//ofs.close();
 	return dpoint;

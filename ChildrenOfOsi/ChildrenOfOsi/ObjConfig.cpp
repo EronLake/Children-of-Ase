@@ -185,9 +185,6 @@ void ObjConfig::make_stuff(vector<WorldObj*>* recVec, ChildrenOfOsi* gameplay_fu
 		}
 	}
 
-
-
-
 }
 
 
@@ -198,11 +195,11 @@ void ObjConfig::set_world_obj(vector<WorldObj*>* recVec, ChildrenOfOsi* gameplay
 
 	LOG(Containers::texture_table[tex_file]);
 	if (Containers::texture_table[tex_file]) {
-		std::cout << tex_file << "Already in Table /////////////////////////////" << endl;
+		//std::cout << tex_file << "Already in Table /////////////////////////////" << endl;
 	}
 	else
 	{
-		std::cout << tex_file << "Not in Table /////////////////////////////" << endl;
+		//std::cout << tex_file << "Not in Table /////////////////////////////" << endl;
 		gameplay_func->add_texture(tex_file, 0, 0, 0);
 
 		//set file takes up memory
@@ -229,9 +226,9 @@ void ObjConfig::set_world_obj(vector<WorldObj*>* recVec, ChildrenOfOsi* gameplay
 	Containers::worldObj_table[name]->sprite.setTexture(Containers::texture_table[tex_file]);
 	Containers::worldObj_table[name]->setInteractable(false);
 
-	//Containers::worldObj_table[name]->offsetBody(0, 0, 0, 0, 0);
+	Containers::worldObj_table[name]->offsetBody(0, bodyx1, bodyx2, bodyy1, bodyy2);
 
 	recVec->push_back(Containers::worldObj_table[name]);
 
-
 }
+

@@ -40,5 +40,7 @@ public:
 	MemNode* make_Available(MemNode* head_ptr, MemoryPool* p, std::string key);
 	void* find_available_block(MemNode* head_ptr, std::string str);
 
+	void fill_mem_pool(MemNode* head_ptr, int hero_name);
+
 };
 

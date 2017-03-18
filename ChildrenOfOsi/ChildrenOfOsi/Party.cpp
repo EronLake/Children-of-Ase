@@ -2,16 +2,18 @@
 
 #include "Party.h"
 
+vector<Party*> Party::partiesWorld;
+
 /**
  * Creates a new party with no alliegances, no leader, and no members.
  */
-Party::Party(): faction(nullptr), leader(nullptr), target(nullptr), mode(Party::MODE_IDLE) {}
+Party::Party() : faction(nullptr), leader(nullptr), target(nullptr), mode(Party::MODE_IDLE) { Party::partiesWorld.push_back(this); }
 
 /**
  * Creates a new party with alliegance to the given faction, but no members nor
  * any leader.
  */
-Party::Party(Alliance *a): faction(a), leader(nullptr), target(nullptr), mode(Party::MODE_IDLE) {}
+Party::Party(Alliance *a): faction(a), leader(nullptr), target(nullptr), mode(Party::MODE_IDLE) { Party::partiesWorld.push_back(this); }
 
 /**
  * Creates a new party with the given leader, as a part of no faction.
@@ -20,6 +22,7 @@ Party::Party(Soldier *leader) : faction(nullptr), leader(leader), target(nullptr
 {
   this->addToParty(leader, true);
   this->setMode(Party::MODE_IDLE);
+  partiesWorld.push_back(this);
 }
 
 /**
@@ -30,6 +33,7 @@ Party::Party(Alliance *a, Soldier *leader): faction(a), leader(leader), target(n
 {
   this->addToParty(leader, true);
   this->setMode(Party::MODE_IDLE);
+  partiesWorld.push_back(this);
 }
 
 /**
@@ -44,6 +48,7 @@ Party::Party(Alliance *a, Soldier *leader, const vector<Soldier *>& members): fa
   for(auto& member : members) {
     this->addToParty(member, false);
   }
+  partiesWorld.push_back(this);
 }
 
 /**
@@ -84,12 +89,17 @@ bool Party::isEnemyOf(Party *p)
  */
 void Party::addToParty(Soldier* s, bool isLeader)
 {
-  if(s != nullptr) {
-    this->members.push_back(s);
-    s->setParty(this);
-    if(isLeader || members.size() == 1)
-      this->leader = s;
-  }
+	if (s != nullptr) {
+		if (isLeader || members.size() == 0) {
+			members.insert(members.begin(), s);
+			this->leader = s;
+			s->setParty(this);
+		}
+		else {
+			this->members.push_back(s);
+			s->setParty(this);
+		}
+	}
 }
 
 /**
@@ -180,6 +190,16 @@ void Party::setMode(int m)
   }
 }
 
+void Party::updateFollowers() {
+	Soldier* prev = nullptr;
+	for (auto i = members.rbegin(); i != members.rend(); ++i) {
+		if (prev != nullptr) {
+			prev->setCurrentLeader(*i);
+		}
+		prev = *i;
+	}
+}
+
 void Party::findEnemy()
 {
 
@@ -187,5 +207,4 @@ void Party::findEnemy()
 
 void Party::update()
 {
-
 }

@@ -28,7 +28,7 @@ void MessageLog::logMessage(Task* task_passed)
 					":" + task_passed->status;
 
 	log_file << "MESSAGE-LOG:" << message << std::endl;
-	//std::cout << "MESSAGE-LOG:" << message << std::endl;
+	////std:://cout << "MESSAGE-LOG:" << message << std::endl;
 }
 
 //------------------------------------------------------

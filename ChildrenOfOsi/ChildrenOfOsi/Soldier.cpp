@@ -15,13 +15,8 @@ aggroRange(Soldier::DEFAULT_AGGRO_RANGE),
 pursuitRange(Soldier::DEFAULT_PURSUIT_RANGE),
 cdTime(0), swingLeft(true)
 {
-  /*key = "Soldier" + std::to_string(getID()) + "_0";
-  cdTime = 0;
-  ase = 0;
-  maxAse = 0;
-  stamina = 100;
-  maxStamina = 100;
-  swingLeft = true;*/
+  evasionBound = new Rectangle();
+  swingLeft = true;
   setType(WorldObj::TYPE_SOLDIER);
 }
 
@@ -33,13 +28,8 @@ aggroRange(Soldier::DEFAULT_AGGRO_RANGE),
 pursuitRange(Soldier::DEFAULT_PURSUIT_RANGE),
 cdTime(0), swingLeft(true)
 {
-  /*key = "Soldier" + std::to_string(getID()) + "_0";
-  cdTime = 0;
-  ase = 0;
-  maxAse = 0;
-  stamina = 100;
-  maxStamina = 100;
-  swingLeft = true;*/
+  swingLeft = true;
+  evasionBound = new Rectangle();
   setType(WorldObj::TYPE_SOLDIER);
 }
 
@@ -97,7 +87,7 @@ void Soldier::newAttack(int i, Attack* a)
   p->setPause(attackTypes[i]->getPause());
   p->setKeep(false);
   cooldownMap[attackTypes[i]] = attackTypes[i]->getCoolDown();
-  cdTime = attackTypes[i]->getCoolDown();
+  cdTime = melee->getCoolDown();
   stamina -= attackTypes[i]->getStaminaCost();
   ase -= attackTypes[i]->getAseCost();
   instances++;
@@ -334,5 +324,46 @@ int Soldier::getAttackIndex(Attack* atk)
 
 bool Soldier::getCombo()
 {
-  return (cdTime > 0 && cdTime < 15);
+  return (cdTime > 0 && cdTime < 5);
+}
+
+
+bool Soldier::targetIsWithinRange(Rectangle* _bound) {
+
+	return (combatMoveDestination.getXloc() > _bound->getX()
+		&& combatMoveDestination.getXloc() < (_bound->getX() + _bound->getWidth())
+		&& combatMoveDestination.getYloc() > _bound->getY()
+		&& combatMoveDestination.getYloc() < (_bound->getY() + _bound->getHeight()));
+}
+
+Vector2f Soldier::getEvadeRange(Soldier * _enemy)
+{
+	//gen the rectangle bound to move
+	float leftBound = _enemy->getX() - _enemy->getEvasionRadius();
+	evasionBound = new Rectangle(Vector2f((_enemy->getX() - _enemy->getEvasionRadius()), (_enemy->getY() - _enemy->getEvasionRadius())), 2 * _enemy->getEvasionRadius(), 2 * _enemy->getEvasionRadius());
+	if (targetIsWithinRange(evasionBound)) {
+		cout << "COMBAT DESTINATION FROM EVADERANGE IS " << combatMoveDestination.getXloc() << ", " << combatMoveDestination.getYloc() << endl;
+		return combatMoveDestination;
+	}
+	float XCoord = rand() % (int)evasionBound->getWidth() + (int)evasionBound->getX();
+	float YCoord = rand() % (int)evasionBound->getHeight() + (int)evasionBound->getY();
+	combatMoveDestination = Vector2f(XCoord, YCoord);
+
+	cout << "COMBAT DESTINATION FROM EVADERANGE IS " << combatMoveDestination.getXloc() << ", " << combatMoveDestination.getYloc() << endl;
+	return combatMoveDestination;
+}
+
+Vector2f Soldier::getStrafeLocation(Soldier * _enemy)
+{
+	float XCoord;
+	if (this->getX() < ((evasionBound->getX() + evasionBound->getWidth()) / 2)) {
+		//XCoord = rand() % 50 + ((int)evasionBound->getX()+(int)evasionBound->getWidth() - 50);
+		XCoord = rand() % (int)evasionBound->getWidth() + (int)evasionBound->getX();
+	}
+	else {
+		XCoord = rand() % 50 + ((int)evasionBound->getX());
+	}
+	return Vector2f(XCoord, combatMoveDestination.getYloc());
+
+
 }

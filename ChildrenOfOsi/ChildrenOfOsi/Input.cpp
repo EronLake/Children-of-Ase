@@ -121,12 +121,12 @@ void Input::InputCheck()
 		}
 
 		if (E) {
-			std::cout << "Pressed E" << std::endl;
+			//std:://cout << "Pressed E" << std::endl;
 			gameplay_functions->talk(player);
 		}
 		if ((W||A||S||D) && F) {
 			if (t->getCool()) {
-				std::cout << "Pressed Moving F" << std::endl;
+				//std:://cout << "Pressed Moving F" << std::endl;
 				t->flipSwing();
 				t->meleeAttack();
 				gameplay_functions->melee(t);
@@ -135,16 +135,16 @@ void Input::InputCheck()
 		 else if (F) {
 			if (t) {
 					if (t->getCool()) {
-						std::cout << "Pressed F" << std::endl;
+						//std:://cout << "Pressed F" << std::endl;
 						t->meleeAttack();
 						gameplay_functions->melee(t);
 					}
 					else if (t->getCombo()) {
-						std::cout << "COMBO" << std::endl;
+						//std:://cout << "COMBO" << std::endl;
 						t->sprite.unlockAnimation();
 						t->resetCD();
 						if (t->getCool()) {
-							std::cout << "Pressed F" << std::endl;
+							//std:://cout << "Pressed F" << std::endl;
 							t->flipSwing();
 							t->meleeAttack();
 							gameplay_functions->melee(t);
@@ -157,7 +157,7 @@ void Input::InputCheck()
 		else if (R && SHIFT) {
 			if (t) {
 				if (t->getCool(1)) {
-					std::cout << "Pressed Shift+R" << std::endl;
+					//std:://cout << "Pressed Shift+R" << std::endl;
 					gameplay_functions->special(t, 1);
 					gameplay_functions->melee(t);
 				}
@@ -165,7 +165,7 @@ void Input::InputCheck()
 		} else if (R) {
 				if (t) {
 					if (t->getCool(0)) {
-						std::cout << "Pressed R" << std::endl;
+						//std:://cout << "Pressed R" << std::endl;
 						gameplay_functions->special(t,0);
 						gameplay_functions->melee(t);
 					}
@@ -173,7 +173,7 @@ void Input::InputCheck()
 		} else if (T) {
 				if (t) {
 					if (t->getCool(2)) {
-						std::cout << "Pressed T" << std::endl;
+						//std:://cout << "Pressed T" << std::endl;
 						t->meleeAttack();
 						gameplay_functions->melee(t);
 						t->resetCD(2);
@@ -185,7 +185,7 @@ void Input::InputCheck()
 		float firstOld = 0;
 		float secondOld = 0;
 		if (P) {
-			std::cout << player->getX() << " " << player->getY() << std::endl;
+			//std:://cout << player->getX() << " " << player->getY() << std::endl;
 			std::ofstream rivFile;
 			rivFile.open("rivLines.txt", std::ios_base::app);
 			rivFile << firstOld << " " << secondOld << ", ";
@@ -209,14 +209,14 @@ void Input::InputCheck()
 		std::string image_name;
 		std::string obj_name;
 
-		std::cout << "Pressed Enter" << std::endl;
-		std::cout << "INPUT FILE NAME " << std::endl;
-		std::cout << "///////////////////////////////" << std::endl;
+		//std:://cout << "Pressed Enter" << std::endl;
+		//std:://cout << "INPUT FILE NAME " << std::endl;
+		//std:://cout << "///////////////////////////////" << std::endl;
 		std::cin >> image_name;
-		std::cout << "INPUT OBJECT NAME " << std::endl;
-		std::cout << "///////////////////////////////" << std::endl;
+		//std:://cout << "INPUT OBJECT NAME " << std::endl;
+		//std:://cout << "///////////////////////////////" << std::endl;
 		std::cin >> obj_name;
-		std::cout << image_name << ": " << player->getX() << ":" << player->getY() << std::endl;
+		//std:://cout << image_name << ": " << player->getX() << ":" << player->getY() << std::endl;
 
 
 		Json::Value root;
@@ -270,26 +270,26 @@ void Input::InputCheck()
 			std::string obj_name;
 			int frame_num;
 
-			std::cout << "Pressed Enter" << std::endl;
-			std::cout << "INPUT FILE NAME " << std::endl;
-			std::cout << "///////////////////////////////" << std::endl;
+			//std:://cout << "Pressed Enter" << std::endl;
+			//std:://cout << "INPUT FILE NAME " << std::endl;
+			//std:://cout << "///////////////////////////////" << std::endl;
 			std::cin >> image_name;
-			std::cout << "INPUT FRAME NUMBER(PROBABLY 1) " << std::endl;
-			std::cout << "///////////////////////////////" << std::endl;
+			//std:://cout << "INPUT FRAME NUMBER(PROBABLY 1) " << std::endl;
+			//std:://cout << "///////////////////////////////" << std::endl;
 			std::cin >> frame_num;
-			std::cout << image_name << ": " << player->getX() << ":" << player->getY() << std::endl;
-			std::cout << "INPUT OBJECT NAME " << std::endl;
-			std::cout << "///////////////////////////////" << std::endl;
+			//std:://cout << image_name << ": " << player->getX() << ":" << player->getY() << std::endl;
+			//std:://cout << "INPUT OBJECT NAME " << std::endl;
+			//std:://cout << "///////////////////////////////" << std::endl;
 			std::cin >> obj_name;
-			std::cout << image_name << ": " << player->getX() << ":" << player->getY() << std::endl;
+			//std:://cout << image_name << ": " << player->getX() << ":" << player->getY() << std::endl;
 
 
 			if (Containers::texture_table[image_name]) {
-				cout << image_name << "Already in Table /////////////////////////////" << endl;
+				//cout << image_name << "Already in Table /////////////////////////////" << endl;
 			}
 			else
 			{
-				cout << image_name << "Not in Table /////////////////////////////" << endl;
+				//cout << image_name << "Not in Table /////////////////////////////" << endl;
 				gameplay_functions->add_texture(image_name, 0, 0, 0);
 
 				//set file takes up memory
@@ -350,9 +350,9 @@ void Input::InputCheck()
 			/*POINT p;
 			if (ScreenToClient(window, &p))
 			{
-			cout << "////////////////////////" << endl;
-			cout << p.x << p.y << endl;
-			cout << "////////////////////////" << endl;
+			//cout << "////////////////////////" << endl;
+			//cout << p.x << p.y << endl;
+			//cout << "////////////////////////" << endl;
 			}*/
 
 			double xpos;
@@ -362,11 +362,11 @@ void Input::InputCheck()
 			double mouseX = rHelper->camera->getX() + xpos * osi::GameWindow::WINDOW_WIDTH_DP / 1300;
 			double mouseY = rHelper->camera->getY() + ypos * osi::GameWindow::WINDOW_HEIGHT_DP / 700;
 
-			std::cout << "////////////////////////" << endl;
-			//std::cout << xpos << ":" << ypos << endl;
-			std::cout << "X: " << xpos << endl;
-			std::cout << "Y: " << ypos << endl;
-			std::cout << "////////////////////////" << endl;
+			//std:://cout << "////////////////////////" << endl;
+			////std:://cout << xpos << ":" << ypos << endl;
+			//std:://cout << "X: " << xpos << endl;
+			//std:://cout << "Y: " << ypos << endl;
+			//std:://cout << "////////////////////////" << endl;
 
 			bool xCollide;
 			bool yCollide;
@@ -381,9 +381,9 @@ void Input::InputCheck()
 				if (xCollide && yCollide)
 				{
 					collide_with = itr->first;
-					std::cout << "////////////////////////" << endl;
-					std::cout << "COLLIDED WITH: " << collide_with << endl;
-					std::cout << "////////////////////////" << endl;
+					//std:://cout << "////////////////////////" << endl;
+					//std:://cout << "COLLIDED WITH: " << collide_with << endl;
+					//std:://cout << "////////////////////////" << endl;
 
 					//float diffX = Containers::worldObj_table[collide_with]->body[i].getX() - Containers::worldObj_table[collide_with]->getX();
 					//float diffY = Containers::worldObj_table[collide_with]->body[i].getY() - Containers::worldObj_table[collide_with]->getY();
@@ -408,16 +408,16 @@ void Input::InputCheck()
 
 				if (L)
 				{
-					std::cout << "////////////////////////" << endl;
-					std::cout << "ENTER NAME OF THE VARIABLE YOU WOULD LIKE TO CHANGE: ";
+					//std:://cout << "////////////////////////" << endl;
+					//std:://cout << "ENTER NAME OF THE VARIABLE YOU WOULD LIKE TO CHANGE: ";
 
 					string variable_for_change;
 					cin >> variable_for_change;
 
 					if (variable_for_change == "width")
 					{
-						std::cout << "////////////////////////" << endl;
-						std::cout << "ENTER WIDTH AS FLOAT: ";
+						//std:://cout << "////////////////////////" << endl;
+						//std:://cout << "ENTER WIDTH AS FLOAT: ";
 
 						float value_to_change_to;
 						cin >> value_to_change_to;
@@ -426,8 +426,8 @@ void Input::InputCheck()
 					}
 					else if (variable_for_change == "height")
 					{
-						std::cout << "////////////////////////" << endl;
-						std::cout << "ENTER HEIGHT AS FLOAT: ";
+						//std:://cout << "////////////////////////" << endl;
+						//std:://cout << "ENTER HEIGHT AS FLOAT: ";
 
 						float value_to_change_to;
 						cin >> value_to_change_to;
@@ -437,8 +437,8 @@ void Input::InputCheck()
 
 					if (variable_for_change == "size")
 					{
-						std::cout << "////////////////////////" << endl;
-						std::cout << "ENTER SIZE AS FLOAT: ";
+						//std:://cout << "////////////////////////" << endl;
+						//std:://cout << "ENTER SIZE AS FLOAT: ";
 
 						float value_to_change_to;
 						cin >> value_to_change_to;
@@ -448,8 +448,8 @@ void Input::InputCheck()
 					}
 					else if (variable_for_change == "xloc")
 					{
-						std::cout << "////////////////////////" << endl;
-						std::cout << "ENTER X LOC AS FLOAT: ";
+						//std:://cout << "////////////////////////" << endl;
+						//std:://cout << "ENTER X LOC AS FLOAT: ";
 
 						float value_to_change_to;
 						cin >> value_to_change_to;
@@ -458,8 +458,8 @@ void Input::InputCheck()
 					}
 					else if (variable_for_change == "yloc")
 					{
-						std::cout << "////////////////////////" << endl;
-						std::cout << "ENTER Y LOC AS FLOAT: ";
+						//std:://cout << "////////////////////////" << endl;
+						//std:://cout << "ENTER Y LOC AS FLOAT: ";
 
 						float value_to_change_to;
 						cin >> value_to_change_to;
@@ -469,28 +469,28 @@ void Input::InputCheck()
 					}
 					else if (variable_for_change == "offset")
 					{
-						std::cout << "////////////////////////" << endl;
-						std::cout << "ENTER BODY NUMBER AS INT(0 if only one body): ";
+						//std:://cout << "////////////////////////" << endl;
+						//std:://cout << "ENTER BODY NUMBER AS INT(0 if only one body): ";
 						cin >> body_number;
 
-						std::cout << "ENTER LEFT LOC AS FLOAT: ";
+						//std:://cout << "ENTER LEFT LOC AS FLOAT: ";
 						cin >> left;
 
-						std::cout << "ENTER RIGHT LOC AS FLOAT: ";
+						//std:://cout << "ENTER RIGHT LOC AS FLOAT: ";
 						cin >> right;
 
-						std::cout << "ENTER TOP LOC AS FLOAT: ";
+						//std:://cout << "ENTER TOP LOC AS FLOAT: ";
 						cin >> top;
 
-						std::cout << "ENTER BOTTOM LOC AS FLOAT: ";
+						//std:://cout << "ENTER BOTTOM LOC AS FLOAT: ";
 						cin >> bottom;
 
 						Containers::worldObj_table[collide_with]->offsetBody(body_number, left, right, top, bottom);
 
-						std::cout << "///////////////////////////////////" << endl;
-						std::cout << "body X is " << Containers::worldObj_table[collide_with]->body[body_number].getX() << " and Y is " << Containers::worldObj_table[collide_with]->body[body_number].getY() << endl;
-						std::cout << "body X is " << Containers::worldObj_table[collide_with]->body[body_number].getX() << " and Y is " << Containers::worldObj_table[collide_with]->body[body_number].getY() << endl;
-						std::cout << "///////////////////////////////////" << endl;
+						//std:://cout << "///////////////////////////////////" << endl;
+						//std:://cout << "body X is " << Containers::worldObj_table[collide_with]->body[body_number].getX() << " and Y is " << Containers::worldObj_table[collide_with]->body[body_number].getY() << endl;
+						//std:://cout << "body X is " << Containers::worldObj_table[collide_with]->body[body_number].getX() << " and Y is " << Containers::worldObj_table[collide_with]->body[body_number].getY() << endl;
+						//std:://cout << "///////////////////////////////////" << endl;
 
 					}
 				}
@@ -577,7 +577,7 @@ void Input::InputCheck()
 				if (tmp > 0) {
 					DialogueController::setOptionsIndex(--tmp);
 					disable = true;
-					std::cout << "OptionsIndex: " << tmp << std::endl;
+					//std:://cout << "OptionsIndex: " << tmp << std::endl;
 					switch (DialogueController::getOptionsIndex()) {
 					case 0: gameplay_functions->setSwordGlow(player); break;
 					case 1: gameplay_functions->setHeartGlow(player); break;
@@ -591,7 +591,7 @@ void Input::InputCheck()
 				if (tmp < DialogueController::getOSize() - 1) {
 					DialogueController::setOptionsIndex(++tmp);
 					disable = true;
-					std::cout << "OptionsIndex: " << tmp << std::endl;
+					//std:://cout << "OptionsIndex: " << tmp << std::endl;
 					switch (DialogueController::getOptionsIndex()) {
 					case 0: gameplay_functions->setSwordGlow(player); break;
 					case 1: gameplay_functions->setHeartGlow(player); break;
@@ -606,26 +606,26 @@ void Input::InputCheck()
 					if (tmp < (DialogueController::getOptions().size() - 1)) {
 						DialogueController::setSelect(++tmp);
 						disable = true;
-						std::cout << "Index: " << tmp << std::endl;
+						//std:://cout << "Index: " << tmp << std::endl;
 					}
 					if (tmp > (DialogueController::getOptions().size() - 1)) {
 						tmp = 0;
 						DialogueController::setSelect(tmp);
 						disable = true;
-						std::cout << "Index: " << tmp << std::endl;
+						//std:://cout << "Index: " << tmp << std::endl;
 					}
 				}
 				if (State == 2) {
 					if (tmp < (DialogueController::getReplyOptions().size() - 1)) {
 						DialogueController::setSelect(++tmp);
 						disable = true;
-						std::cout << "Index: " << tmp << std::endl;
+						//std:://cout << "Index: " << tmp << std::endl;
 					}
 					if (tmp > (DialogueController::getReplyOptions().size() - 1)) {
 						tmp = 0;
 						DialogueController::setSelect(tmp);
 						disable = true;
-						std::cout << "Index: " << tmp << std::endl;
+						//std:://cout << "Index: " << tmp << std::endl;
 					}
 				}
 			}
@@ -634,11 +634,11 @@ void Input::InputCheck()
 				if (tmp > 0) {
 					DialogueController::setSelect(--tmp);
 					disable = true;
-					std::cout << "Index: " << tmp << std::endl;
+					//std:://cout << "Index: " << tmp << std::endl;
 				}
 			}
 			if (ENTER) {
-				std::cout << "ENTER" << std::endl;
+				//std:://cout << "ENTER" << std::endl;
 				if (DialogueController::getState() == 1) {
 					disable = true;
 					DialogueController::PlayerConversationPoint();

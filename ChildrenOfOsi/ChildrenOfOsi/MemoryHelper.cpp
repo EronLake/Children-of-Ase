@@ -35,7 +35,7 @@ int MemoryHelper::store_hero(std::string key, float x, float y, bool col) {
 	}
 	Hero* h = new(find_available_block(memManager::hero_head, key)) Hero(name,x, y, col);
 
-	std::cout << h;
+	//std:://cout << h;
 	Containers::add_hero(key,h);
 	return 0;
 }
@@ -44,11 +44,11 @@ int MemoryHelper::store_soldier(std::string key, float x, float y, bool col) {
 	Soldier* s = new(find_available_block(memManager::soldier_head, key)) Soldier(x, y, col);
 	Containers::add_soldier(key, s);
 
-	std::cout << "soldier created" << std::endl;
-	std::cout << "soldier Address: " << s << std::endl;
-	std::cout << "soldier xpos: " << s->getX() << std::endl;
-	std::cout << "soldier ypos: " << s->getY() << std::endl;
-	std::cout << "soldier col: " << s->getCollision() << std::endl;
+	//std:://cout << "soldier created" << std::endl;
+	//std:://cout << "soldier Address: " << s << std::endl;
+	//std:://cout << "soldier xpos: " << s->getX() << std::endl;
+	//std:://cout << "soldier ypos: " << s->getY() << std::endl;
+	//std:://cout << "soldier col: " << s->getCollision() << std::endl;
 	return 0;
 }
 
@@ -109,43 +109,59 @@ int MemoryHelper::store_memory(std::string key, int hero_name, int t, int frames
 	Memory* m;
 	
 	if (hero_name = OYA)
-	{
+	{	
+		Containers::oya_memory_table[key]->set_all(t, frames, p, cat, cont, where, why, when);
+		return 0;
+		/*
 		Memory* m = new(find_available_block(memManager::oya_memory_head, key)) Memory(t, frames, p, cat, cont, where, why, when);
 		if (m == NULL) return -1;
 		Containers::add_memory(key, hero_name, m);
 		return 0;
+		*/
 	}
 	else if (hero_name = YEMOJA)
 	{
+		Containers::yemoja_memory_table[key]->set_all(t, frames, p, cat, cont, where, why, when);
+		return 0;
+		/*
 		Memory* m = new(find_available_block(memManager::yemoja_memory_head, key)) Memory(t, frames, p, cat, cont, where, why, when);
 		if (m == NULL) return -1;
 		Containers::add_memory(key, hero_name, m);
 		return 0;
-
+		*/
 	}
 	else if (hero_name = OSHOSI)
 	{
+		Containers::oshosi_memory_table[key]->set_all(t, frames, p, cat, cont, where, why, when);
+		return 0;
+		/*
 		Memory* m = new(find_available_block(memManager::oshosi_memory_head, key)) Memory(t, frames, p, cat, cont, where, why, when);
 		if (m == NULL) return -1;
 		Containers::add_memory(key, hero_name, m);
 		return 0;
-
+		*/
 	}
 	else if (hero_name = OGUN)
 	{
+		Containers::ogun_memory_table[key]->set_all(t, frames, p, cat, cont, where, why, when);
+		return 0;
+		/*
 		Memory* m = new(find_available_block(memManager::ogun_memory_head, key)) Memory(t, frames, p, cat, cont, where, why, when);
 		if (m == NULL) return -1;
 		Containers::add_memory(key, hero_name, m);
 		return 0;
-
+		*/
 	}
 	else if (hero_name = SHANGO)
 	{
+		Containers::shango_memory_table[key]->set_all(t, frames, p, cat, cont, where, why, when);
+		return 0;
+		/*
 		Memory* m = new(find_available_block(memManager::shango_memory_head, key)) Memory(t, frames, p, cat, cont, where, why, when);
 		if (m == NULL) return -1;
 		Containers::add_memory(key, hero_name, m);
 		return 0;
-
+		*/
 	}
 	
 }
@@ -311,6 +327,22 @@ MemNode* MemoryHelper::init_pool(MemoryPool *p, size_t bsize) {
 	}
 	LOG("pool initialized");
 	return head;
+}
+
+
+void MemoryHelper::fill_mem_pool(MemNode* head_ptr, int hero_name) {
+	int mem_counter = 0;
+	if (head_ptr == NULL)
+		return;
+	MemNode* mnode = head_ptr;
+	while (mnode != NULL) {
+		Memory* m = new(mnode->getBlockPointer()) Memory();
+		if (m == NULL) { LOG("did not work");  return; }
+		Containers::add_memory(std::to_string(mem_counter), hero_name, m);
+		mem_counter++;
+		mnode = mnode->getNext();
+	}
+	return;
 }
 
 

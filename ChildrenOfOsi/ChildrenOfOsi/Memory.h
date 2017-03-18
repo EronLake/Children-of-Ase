@@ -20,8 +20,11 @@ private:
 	int time;            //Memory formation timestamp: # frames since start of game
 
 public:
+	Memory();
 	Memory(int t, int frames, vector<NPC*> p, string cat="",string cont="",string where="",int why=-1, int when=-1);
 	~Memory();
+
+	void set_all(int t, int frames, vector<NPC*> p, string cat = "", string cont = "", string where = "", int why = -1, int when = -1);
 
 	void setType(int t);
 	int getType();
