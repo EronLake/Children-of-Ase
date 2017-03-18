@@ -4,11 +4,13 @@ std::vector<Alliance*> Alliance::Alliances;
 
 Alliance::Alliance()
 {
+	Alliance::Alliances.push_back(this);
 }
 
 Alliance::Alliance(Village* v)
 {
 	allies.push_back(v);
+	Alliance::Alliances.push_back(this);
 }
 
 Alliance::~Alliance()

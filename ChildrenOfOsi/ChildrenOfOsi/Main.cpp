@@ -57,6 +57,7 @@
 //class ActionHelper;
 #include "Line.h"
 #include "ActionExecFunctions.h"
+#include "Alliance.h"
 
 using namespace std;
 
@@ -873,6 +874,19 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	bool OSAtkMode = true;
 	short M = GetKeyState('M') >> 15;
 	Party* party = new Party();
+	Party* party2 = new Party();
+	party2->addToParty(silverSoldier, true);
+	Party* party3 = new Party();
+	party3->addToParty(silverSoldier2, true);
+	Village* v1 = new Village();
+	Village* v2 = new Village();
+	v1->addToParties(party2);
+	v2->addToParties(party3);
+	Alliance* a1 = new Alliance(v1);
+	Alliance* a2 = new Alliance(v2);
+	War* war = new War();
+	war->setWarParties(v1,v2);
+	Alliance::updateEnemies();
 
 	//party->addToParty(silverSoldier, false);
 	
@@ -947,6 +961,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 				staticRec->setMode(WANDER);
 			}
 		}*/
+		combatControl->checkParties();
 		combatControl->follow(oya, state);
 		//combatControl->follow(silverSoldier, state);
 		combatControl->follow(staticRec, state);

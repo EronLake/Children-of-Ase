@@ -7,13 +7,13 @@ vector<Party*> Party::partiesWorld;
 /**
  * Creates a new party with no alliegances, no leader, and no members.
  */
-Party::Party() : faction(nullptr), leader(nullptr), target(nullptr), mode(Party::MODE_IDLE) { partiesWorld.push_back(this); }
+Party::Party() : faction(nullptr), leader(nullptr), target(nullptr), mode(Party::MODE_IDLE) { Party::partiesWorld.push_back(this); }
 
 /**
  * Creates a new party with alliegance to the given faction, but no members nor
  * any leader.
  */
-Party::Party(Alliance *a): faction(a), leader(nullptr), target(nullptr), mode(Party::MODE_IDLE) { partiesWorld.push_back(this); }
+Party::Party(Alliance *a): faction(a), leader(nullptr), target(nullptr), mode(Party::MODE_IDLE) { Party::partiesWorld.push_back(this); }
 
 /**
  * Creates a new party with the given leader, as a part of no faction.
