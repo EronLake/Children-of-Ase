@@ -306,6 +306,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	border->setFile("Assets/Sprites/border.png", 1);
 	objTexture->setFile("Assets/Sprites/YemojasHouse.png",1);
 	Soldier* silverSoldier = new Soldier(4000, 3300, true);
+	Soldier* silverSoldier2 = new Soldier(4300, 3300, true);
 
 	playerTexture->setFile("Assets/Sprites/ShangoForwardIdle.png",22);
 	playerIdleTex->setFile("Assets/Sprites/ShangoForwardIdle.png",22);
@@ -601,6 +602,8 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 
 	silverSoldier->setWidth(150);
 	silverSoldier->setHeight(150);
+	silverSoldier2->setWidth(150);
+	silverSoldier2->setHeight(150);
 
 	staticRec->sprite.setTexture(yemojaTexture);
 	staticRec->sprite.setIdleTexture(yemojaIdleTex);
@@ -644,7 +647,35 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	silverSoldier->setInteractable(true);
 	silverSoldier->setName("silverSoldier");
 
+	silverSoldier2->sprite.setTexture(silverSoldierTexture);
+	silverSoldier2->sprite.setIdleTexture(silverSoldierIdleTex);
+	silverSoldier2->sprite.up = ss_upRunTex;
+	silverSoldier2->sprite.down = ss_downRunTex;
+	silverSoldier2->sprite.left = ss_leftRunTex;
+	silverSoldier2->sprite.right = ss_rightRunTex;
+
+	silverSoldier2->sprite.id_up = ss_upIdleTex;
+	silverSoldier2->sprite.id_left = ss_leftIdleTex;
+	silverSoldier2->sprite.id_right = ss_rightIdleTex;
+	silverSoldier2->sprite.id_down = ss_downIdleTex;
+
+	silverSoldier2->sprite.atk_up = ss_upAtkTex;
+	silverSoldier2->sprite.atk_down = ss_downAtkTex;
+	silverSoldier2->sprite.atk_left = ss_leftAtkTex;
+	silverSoldier2->sprite.atk_right = ss_rightAtkTex;
+
+	silverSoldier2->sprite.hurt_up = ss_upHurtTex;
+	silverSoldier2->sprite.hurt_down = ss_downHurtTex;
+	silverSoldier2->sprite.hurt_left = ss_leftHurtTex;
+	silverSoldier2->sprite.hurt_right = ss_rightHurtTex;
+
+
+	silverSoldier2->offsetBody(0, 60, 60, 75, 50);
+	silverSoldier2->setInteractable(true);
+	silverSoldier2->setName("silverSoldier");
+
 	gameplay_functions->add_Attack(silverSoldier->getKey(), silverSoldier->body[0].getX(), silverSoldier->body[0].getY(), true, 10);
+	gameplay_functions->add_Attack(silverSoldier2->getKey(), silverSoldier2->body[0].getX(), silverSoldier2->body[0].getY(), true, 10);
 	tBuffer->run();
 
 
@@ -661,10 +692,25 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 
 	silverSoldier->addAttackType(rockThrow);
 	silverSoldier->melee->sprite.setTexture(border);
+
+	silverSoldier2->melee = Containers::Attack_table[silverSoldier2->getKey()];
+	silverSoldier2->melee->setDmg(10);
+	silverSoldier2->melee->setSpeed(5);
+	silverSoldier2->melee->setBaseDir(4);
+	silverSoldier2->melee->setCoolDown(100);
+	silverSoldier2->melee->setPause(-1);
+	silverSoldier2->melee->setDestroy(false);
+	silverSoldier2->melee->setKeep(true);
+	silverSoldier2->melee->setWidth(50);
+	silverSoldier2->melee->setHeight(50);
+
+	silverSoldier2->addAttackType(rockThrow);
+	silverSoldier2->melee->sprite.setTexture(border);
 	//silverSoldier->addAttackType(spin);
 
-	combatControl->addtoTargets(Alex);
-	//combatControl->addtoTargets(silverSoldier);
+	//combatControl->addtoTargets(Alex);
+	combatControl->addtoTargets(silverSoldier);
+	combatControl->addtoTargets(silverSoldier2);
 
 	//VisibilityGraph graph;
 	ai->graph.vertices = vertices;
@@ -726,6 +772,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	*/
 	recVec.push_back(staticRec);
 	recVec.push_back(silverSoldier);
+	recVec.push_back(silverSoldier2);
 	recVec.push_back(oya);
 	//recVec.push_back(barrel);
 	//recVec.push_back(tree);;
@@ -819,8 +866,10 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	poolAct->macro.back().exeAction();
 
 	Vector2f silverSoldierInitialLoc = silverSoldier->getLoc();
+	Vector2f silverSoldier2InitialLoc = silverSoldier2->getLoc();
 
 	silverSoldier->setEvade(false);
+	silverSoldier2->setEvade(false);
 	bool OSAtkMode = true;
 	short M = GetKeyState('M') >> 15;
 	Party* party = new Party();
@@ -849,6 +898,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 		_QuadTree->clear();
 		Alex->updateCD();
 		silverSoldier->updateCD();
+		silverSoldier2->updateCD();
 		for (int i = 0; i < recVec.size(); i++) {
 			_QuadTree->Insert(recVec[i]);	//insert all obj into tree
 	
@@ -901,6 +951,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 		//combatControl->follow(silverSoldier, state);
 		combatControl->follow(staticRec, state);
 		combatControl->fight(silverSoldier, state);
+		combatControl->fight(silverSoldier2, state);
 
 		/*
 		//cout << "Alex's position is " << Alex->getLoc().getXloc() << ", " << Alex->getLoc().getYloc() << endl;
