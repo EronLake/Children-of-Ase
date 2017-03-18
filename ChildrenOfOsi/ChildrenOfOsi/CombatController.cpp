@@ -269,7 +269,7 @@ void CombatController::checkParties() {
 			for (auto a = partiesA.begin(); a != partiesA.end(); ++a) {
 				if ((*a)->getMode()==1 || (*a)->getMode() == 2) {
 					for (auto b = partiesB.begin(); b != partiesB.end(); ++b) {
-						if (distBetween((*a)->getLeader(), (*b)->getLeader()) < 1000) {
+						if (dist_by_center((*a)->getLeader(), (*b)->getLeader()) < 1000) {
 							(*a)->addToCurrentEnemies(*b);
 							(*a)->setMode(1);
 							(*b)->addToCurrentEnemies(*a);
