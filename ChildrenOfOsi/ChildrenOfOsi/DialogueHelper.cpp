@@ -37,6 +37,14 @@ DialogueHelper::DialogueHelper()
 	possible_reply_pts[3].push_back({ "name","introduction" });
 	possible_reply_pts[3].push_back({ "reason","response_reason" });
 	possible_reply_pts[3].push_back({ "origin","response_origin" });
+	/*for (auto itor = Containers::conv_point_table.begin(); itor != Containers::conv_point_table.end(); ++itor) {
+		if (itor->second->dpoint[0].compare("c") == 0) {
+			possible_conv_pts[3].push_back(itor->second->dpoint);
+		}
+		else
+			possible_reply_pts[3].push_back(itor->second->dpoint);
+
+	}*/
 
 }
 

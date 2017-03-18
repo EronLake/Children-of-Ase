@@ -4,7 +4,7 @@
 class Tag
 {
 public:
-	std::vector<ConversationPoint*> tags;
+	std::vector<ConversationPoint*> tagPointer;
 	Relationship* multipliers;
 	Tag();
 	~Tag();
