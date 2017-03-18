@@ -84,9 +84,9 @@ void WorldObj::setDirWithBase(int od, bool update)
 
 void WorldObj::face(WorldObj* other) {
 	int f = 6;
-	if (getX() > other->getX()) {
-		if (getY() > other->getY()) {
-			if (getX() > other->getX() + other->body[0].getWidth()) {
+	if (body[0].getX() > other->body[0].getX()) {
+		if (body[0].getY() > other->body[0].getY()) {
+			if (body[0].getX() > other->body[0].getX() + other->body[0].getWidth()) {
 				f = 4;
 			}
 			else {
