@@ -28,8 +28,8 @@ void WorldObj::shiftX(float dist)
 	for (int i = 0; i < body.size(); i++) {
 		body[i].setX(body[i].getX() + dist);
 	}
-	std::cout << name<<": Body X: " << body[0].getX() << " X: "<<loc.getXloc() << std::endl;
-	std::cout << "X Offset" << body[0].getX()-loc.getXloc() << std::endl;
+	//std:://cout << name<<": Body X: " << body[0].getX() << " X: "<<loc.getXloc() << std::endl;
+	//std:://cout << "X Offset" << body[0].getX()-loc.getXloc() << std::endl;
 }
 
 void WorldObj::shiftY(float dist)
@@ -38,8 +38,8 @@ void WorldObj::shiftY(float dist)
 	for (int i = 0; i < body.size(); i++) {
 		body[i].setY(body[i].getY()+dist);
 	}
-	std::cout << name << ": Body Y: " << body[0].getY() << " Y: " << loc.getYloc() << std::endl;
-	std::cout << "Y Offset" << body[0].getY() - loc.getYloc() << std::endl;
+	//std:://cout << name << ": Body Y: " << body[0].getY() << " Y: " << loc.getYloc() << std::endl;
+	//std:://cout << "Y Offset" << body[0].getY() - loc.getYloc() << std::endl;
 }
 
 void WorldObj::drawObj(float _x, float _y)
@@ -99,15 +99,47 @@ void WorldObj::face(WorldObj* other) {
 	}
 	setDirection(f);
 }
-
+/*
 //takes in a worldobj, returns a vector2f denoting where current obj is suppose to move to
+Vector2f WorldObj::getEvadeRange(WorldObj * _enemy)
+{
+	//gen the rectangle bound to move
+	float leftBound = _enemy->getX() - _enemy->getEvasionRadius();
+	evasionBound = new Rectangle(Vector2f((_enemy->getX() - _enemy->getEvasionRadius()), (_enemy->getY() - _enemy->getEvasionRadius())), 2 *_enemy->getEvasionRadius(), 2 * _enemy->getEvasionRadius());
+	if (targetIsWithinRange(evasionBound)) {
+		//cout << "COMBAT DESTINATION FROM EVADERANGE IS " << combatMoveDestination.getXloc() << ", " << combatMoveDestination.getYloc() << endl;
+		return combatMoveDestination;
+	}
+	float XCoord = rand() % (int)evasionBound->getWidth() + (int)evasionBound->getX();
+	float YCoord = rand() % (int)evasionBound->getHeight() + (int)evasionBound->getY();
+	combatMoveDestination = Vector2f(XCoord, YCoord);
+
+	//cout << "COMBAT DESTINATION FROM EVADERANGE IS " << combatMoveDestination.getXloc() << ", " << combatMoveDestination.getYloc() << endl;
+	return combatMoveDestination;
+}
+
+Vector2f WorldObj::getStrafeLocation(WorldObj * _enemy)
+{
+	float XCoord;
+	if (this->getX() < ((evasionBound->getX() + evasionBound->getWidth()) / 2)) {
+		//XCoord = rand() % 50 + ((int)evasionBound->getX()+(int)evasionBound->getWidth() - 50);
+		XCoord = rand() % (int)evasionBound->getWidth() + (int)evasionBound->getX();
+	}
+	else {
+		XCoord = rand() % 50 + ((int)evasionBound->getX());
+	}
+	return Vector2f(XCoord, combatMoveDestination.getYloc());
+
+	
+}
+*/
 
 void WorldObj::_print()
 {
-  std::cout << "Object Name" << getName() << std::endl;
-  std::cout << "X Location" << getX() << std::endl;
-  std::cout << "Y Location" << getY() << std::endl;
-  std::cout << "Rotation Vector" << getX() << std::endl;
-  std::cout << "Width" << getY() << std::endl;
-  std::cout << "Height" << getX() << std::endl;
+  //std:://cout << "Object Name" << getName() << std::endl;
+  //std:://cout << "X Location" << getX() << std::endl;
+  //std:://cout << "Y Location" << getY() << std::endl;
+  //std:://cout << "Rotation Vector" << getX() << std::endl;
+  //std:://cout << "Width" << getY() << std::endl;
+  //std:://cout << "Height" << getX() << std::endl;
 }

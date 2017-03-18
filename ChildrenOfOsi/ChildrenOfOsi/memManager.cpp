@@ -39,22 +39,27 @@ memManager::memManager(MessageLog* _mLog, TaskBuffer* _tBuffer)
 	texture_head = memHelper->init_pool(texture_pool, sizeof(Texture));
 
 	oya_memory_pool = memHelper->create_pool(sizeof(Memory) * 40);
-	oya_memory_head = memHelper->init_pool(texture_pool, sizeof(Memory));
+	oya_memory_head = memHelper->init_pool(oya_memory_pool, sizeof(Memory));
+	memHelper->fill_mem_pool(oya_memory_head, OYA);
 
 	yemoja_memory_pool = memHelper->create_pool(sizeof(Memory) * 40);
-	yemoja_memory_head = memHelper->init_pool(texture_pool, sizeof(Memory));
+	yemoja_memory_head = memHelper->init_pool(yemoja_memory_pool, sizeof(Memory));
+	memHelper->fill_mem_pool(yemoja_memory_head, YEMOJA);
 
 	oshosi_memory_pool = memHelper->create_pool(sizeof(Memory) * 40);
-	oshosi_memory_head = memHelper->init_pool(texture_pool, sizeof(Memory));
+	oshosi_memory_head = memHelper->init_pool(oshosi_memory_pool, sizeof(Memory));
+	memHelper->fill_mem_pool(oshosi_memory_head, OSHOSI);
 
 	ogun_memory_pool = memHelper->create_pool(sizeof(Memory) * 40);
-	ogun_memory_head = memHelper->init_pool(texture_pool, sizeof(Memory));
+	ogun_memory_head = memHelper->init_pool(ogun_memory_pool, sizeof(Memory));
+	memHelper->fill_mem_pool(ogun_memory_head, OGUN);
 
 	shango_memory_pool = memHelper->create_pool(sizeof(Memory) * 40);
-	shango_memory_head = memHelper->init_pool(texture_pool, sizeof(Memory));
+	shango_memory_head = memHelper->init_pool(shango_memory_pool, sizeof(Memory));
+	memHelper->fill_mem_pool(shango_memory_head, SHANGO);
 
 	action_pool = memHelper->create_pool(sizeof(Action) * 200);
-	action_head = memHelper->init_pool(texture_pool, sizeof(Action));
+	action_head = memHelper->init_pool(action_pool, sizeof(Action));
 
 	tag_pool = memHelper->create_pool(sizeof(Tag) * 32);
 	tag_head = memHelper->init_pool(tag_pool, sizeof(Tag) * 2);

@@ -59,19 +59,19 @@ bool PhysicsTestSuite::test_movement() {
 	//up is negative y, down is positive y
 	if (x->getY() > .5) {
 		//fail if move down
-		cout << endl;
-		cout << "Current Location" << endl;
+		//cout << endl;
+		//cout << "Current Location" << endl;
 		x->_print();
-		cout << "Starting Location = (.5,.5)" << endl;
+		//cout << "Starting Location = (.5,.5)" << endl;
 	
 		up = false;
 	}
 	else {
 		//succeed
-		cout << endl;
-		cout << "Current Location" << endl;
+		//cout << endl;
+		//cout << "Current Location" << endl;
 		x->_print();
-		cout << "Starting Location = (.5,.5)" << endl;
+		//cout << "Starting Location = (.5,.5)" << endl;
 		up = true;
 	}
 
@@ -82,19 +82,19 @@ bool PhysicsTestSuite::test_movement() {
 	movetests->move_down(x);
 	if (x->getY() < .5) {
 		//fail if move up
-		cout << endl;
-		cout << "Current Location" << endl;
+		//cout << endl;
+		//cout << "Current Location" << endl;
 		x->_print();
-		cout << "Starting Location = (.5,.5)" << endl;
+		//cout << "Starting Location = (.5,.5)" << endl;
 
 		down = false;
 	}
 	else {
 		//succeed
-		cout << endl;
-		cout << "Current Location" << endl;
+		//cout << endl;
+		//cout << "Current Location" << endl;
 		x->_print();
-		cout << "Starting Location = (.5,.5)" << endl;
+		//cout << "Starting Location = (.5,.5)" << endl;
 		down = true;
 	}
 
@@ -104,20 +104,20 @@ bool PhysicsTestSuite::test_movement() {
 	x->setY(.5);
 	movetests->move_left(x);
 	if (x->getX() > .5) {
-		cout << endl;
+		//cout << endl;
 		//fail if move right
-		cout << "Current Location" << endl;
+		//cout << "Current Location" << endl;
 		x->_print();
-		cout << "Starting Location = (.5,.5)" << endl;
+		//cout << "Starting Location = (.5,.5)" << endl;
 
 		left = false;
 	}
 	else {
 		//succeed
-		cout << endl;
-		cout << "Current Location" << endl;
+		//cout << endl;
+		//cout << "Current Location" << endl;
 		x->_print();
-		cout << "Starting Location = (.5,.5)" << endl;
+		//cout << "Starting Location = (.5,.5)" << endl;
 		left = true;
 	}
 
@@ -128,19 +128,19 @@ bool PhysicsTestSuite::test_movement() {
 	movetests->move_right(x);
 	if (x->getY() < .5) {
 		//fail if move down
-		cout << endl;
-		cout << "Current Location" << endl;
+		//cout << endl;
+		//cout << "Current Location" << endl;
 		x->_print();
-		cout << "Starting Location = (.5,.5)" << endl;
+		//cout << "Starting Location = (.5,.5)" << endl;
 
 		right = false;
 	}
 	else {
 		//succeed
-		cout << endl;
-		cout << "Current Location" << endl;
+		//cout << endl;
+		//cout << "Current Location" << endl;
 		x->_print();
-		cout << "Starting Location = (.5,.5)" << endl;
+		//cout << "Starting Location = (.5,.5)" << endl;
 		right = true;
 	}
 	if (up && down && left && right) {
@@ -170,17 +170,17 @@ bool PhysicsTestSuite::test_collision() {
 	y->setY(0);
 	result = movetests->move_up(x);
 	if (result) {
-		cout << endl;
-		cout << "Current Location" << endl;
+		//cout << endl;
+		//cout << "Current Location" << endl;
 		x->_print();
-		cout << "Starting Location = (.5,.5)" << endl;
+		//cout << "Starting Location = (.5,.5)" << endl;
 		up = false;
 	}
 	else {
-		cout << endl;
-		cout << "Current Location" << endl;
+		//cout << endl;
+		//cout << "Current Location" << endl;
 		x->_print();
-		cout << "Starting Location = (.5,.5)" << endl;
+		//cout << "Starting Location = (.5,.5)" << endl;
 		up = true;
 	}
 
@@ -193,17 +193,17 @@ bool PhysicsTestSuite::test_collision() {
 	y->setY(1);
 	result = movetests->move_down(x);
 	if (result) {
-		cout << endl;
-		cout << "Current Location" << endl;
+		//cout << endl;
+		//cout << "Current Location" << endl;
 		x->_print();
-		cout << "Starting Location = (.5,.5)" << endl;
+		//cout << "Starting Location = (.5,.5)" << endl;
 		down = false;
 	}
 	else {
-		cout << endl;
-		cout << "Current Location" << endl;
+		//cout << endl;
+		//cout << "Current Location" << endl;
 		x->_print();
-		cout << "Starting Location = (.5,.5)" << endl;
+		//cout << "Starting Location = (.5,.5)" << endl;
 		down = true;
 	}
 
@@ -216,17 +216,17 @@ bool PhysicsTestSuite::test_collision() {
 	y->setY(.5);
 	result = movetests->move_left(x);
 	if (result) {
-		cout << endl;
-		cout << "Current Location" << endl;
+		//cout << endl;
+		//cout << "Current Location" << endl;
 		x->_print();
-		cout << "Starting Location = (.5,.5)" << endl;
+		//cout << "Starting Location = (.5,.5)" << endl;
 		left = false;
 	}
 	else {
-		cout << endl;
-		cout << "Current Location" << endl;
+		//cout << endl;
+		//cout << "Current Location" << endl;
 		x->_print();
-		cout << "Starting Location = (.5,.5)" << endl;
+		//cout << "Starting Location = (.5,.5)" << endl;
 		left = true;
 	}
 
@@ -239,17 +239,17 @@ bool PhysicsTestSuite::test_collision() {
 	y->setY(.5);
 	result = movetests->move_right(x);
 	if (result) {
-		cout << endl;
-		cout << "Current Location" << endl;
+		//cout << endl;
+		//cout << "Current Location" << endl;
 		x->_print();
-		cout << "Starting Location = (.5,.5)" << endl;
+		//cout << "Starting Location = (.5,.5)" << endl;
 		right = false;
 	}
 	else {
-		cout << endl;
-		cout << "Current Location" << endl;
+		//cout << endl;
+		//cout << "Current Location" << endl;
 		x->_print();
-		cout << "Starting Location = (.5,.5)" << endl;
+		//cout << "Starting Location = (.5,.5)" << endl;
 		right = true;
 	}
 
