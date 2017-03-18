@@ -208,7 +208,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	//Player* Alex = new Player(1000,600, true);	//init player
 	//WorldObj* Alex = new WorldObj(1000, 600, true);
 
-	//ObjConfig::import_config(recVec_ptr, gameplay_functions, tBuffer);
+	ObjConfig::import_config(recVec_ptr, gameplay_functions, tBuffer);
 	
 	
 	
@@ -640,7 +640,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	silverSoldier->sprite.hurt_right = ss_rightHurtTex;
 
 
-	silverSoldier->offsetBody(0, 50, 50, 50, 50);
+	silverSoldier->offsetBody(0, 60, 60, 75, 50);
 	silverSoldier->setInteractable(true);
 	silverSoldier->setName("silverSoldier");
 
@@ -700,8 +700,8 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	staticRec->setHealth(100);
 	*oya = *staticRec;
 	//oya->setSpeed(5);
-	oya->offsetBody(0, 25, 25, 25, 25);
-	staticRec->offsetBody(0, 25, 25, 25,25);
+	oya->offsetBody(0, 35, 35, 65, 15);
+	staticRec->offsetBody(0, 35, 35, 65, 15);
 	oya->shiftY(300);
 	
 	/*
@@ -818,10 +818,15 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	bool OSAtkMode = true;
 	short M = GetKeyState('M') >> 15;
 	Party* party = new Party();
+
+	party->addToParty(silverSoldier, false);
+	
 	party->addToParty(Alex,true);
-	party->addToParty(silverSoldier, false);	
+		
 	party->addToParty(oya, false);
+	
 	party->addToParty(staticRec, false);
+	
 	party->updateFollowers();
 
 	vector<WorldObj*> enemyVec;
