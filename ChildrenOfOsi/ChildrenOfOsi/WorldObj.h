@@ -16,19 +16,19 @@ class WorldObj
   WorldObj():
     ID(idNum++), loc(0, 0), collision(false), type(0)
   {
-	  this->body.push_back({ {0.0F, 0.0F}, 1.0F, 1.0F }); evasionBound = new Rectangle(); direction = 2;
+	  this->body.push_back({ {0.0F, 0.0F}, 1.0F, 1.0F }); direction = 2;
   };
 
   WorldObj(Vector2f p_topLeft, float p_width, float p_height):
     ID(idNum++), loc(p_topLeft), width(p_width), height(p_height), collision(false), type(0)
   {
-	  this->body.push_back({ loc, p_width, p_height }); evasionBound = new Rectangle(); direction = 2;
+	  this->body.push_back({ loc, p_width, p_height }); direction = 2;
   }
 
   WorldObj(float x, float y, bool col):
     ID(idNum++), loc({x, y}), collision(col), type(0)
   {
-	  this->body.push_back({ loc, 1.0F, 1.0F }); evasionBound = new Rectangle(); direction = 2;
+	  this->body.push_back({ loc, 1.0F, 1.0F }); direction = 2;
   }
 
   virtual ~WorldObj() = default;
@@ -53,12 +53,6 @@ class WorldObj
   int getDirection() { return this->direction; };
   bool getCollision() { return this->collision; };
   bool getInteractable() { return this->interactable; };
-
-  // Combat AI information getters
-  int getEvasionRadius() { return this->evasionRadius; };
-  Vector2f getEvadeRange(WorldObj* _enemy);
-  Vector2f getCombatMoveDestination() { return this->combatMoveDestination; };
-  Vector2f getStrafeLocation(WorldObj* _enemy);
 
   int getBaseDir() const { return baseDir; };
 
@@ -89,9 +83,6 @@ class WorldObj
   void offsetBody(int i, float x1, float x2, float y1, float y2);
   void drawObj(float _x, float _y);
   void animateObj() { this->sprite.animate(); };
-
-  // Combat AI information setters
-  void setEvasionRadius(int _radius) { this->evasionRadius = _radius; }
 
   void setBaseDir(int d) { this->baseDir = d; };
   void setDirWithBase(int od, bool update);
@@ -134,14 +125,7 @@ class WorldObj
   int direction;
   bool collision;
   bool interactable;
-
-  int evasionRadius = 225;
-  Vector2f combatMoveDestination;
-  Rectangle* evasionBound;
-
   int baseDir;
-
-  bool targetIsWithinRange(Rectangle* _bound);
 };
 
 

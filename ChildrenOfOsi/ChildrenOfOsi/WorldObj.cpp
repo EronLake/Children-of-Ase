@@ -55,14 +55,6 @@ void WorldObj::offsetBody(int i, float x1, float x2, float y1, float y2) {
 
 }
 
-bool WorldObj::targetIsWithinRange(Rectangle* _bound) {
-
-	return (combatMoveDestination.getXloc() > _bound->getX()
-		&& combatMoveDestination.getXloc() < (_bound->getX() + _bound->getWidth())
-		&& combatMoveDestination.getYloc() > _bound->getY()
-		&& combatMoveDestination.getYloc() < (_bound->getY() + _bound->getHeight()));
-}
-
 void WorldObj::setDirWithBase(int od, bool update)
 {
 	if (update)baseDir = direction;
@@ -140,6 +132,7 @@ Vector2f WorldObj::getStrafeLocation(WorldObj * _enemy)
 
 	
 }
+
 
 void WorldObj::_print()
 {

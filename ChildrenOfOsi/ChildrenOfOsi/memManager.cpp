@@ -81,8 +81,8 @@ memManager::memManager(MessageLog* _mLog, TaskBuffer* _tBuffer)
 	task_map3["Add_Memory"] = &MemoryHelper::store_memory;
 	//task_map["Add_Action"] = &MemoryHelper::store_action;
 	task_map["Del_Attack"] = &MemoryHelper::del_Attack;
-	//task_map["Add_Tag"] = &MemoryHelper::store_tag;
-	//task_map["Add_Conv_Point"] = &MemoryHelper::store_conv_point;
+	task_map["Add_Tag"] = &MemoryHelper::store_tag;
+	task_map["Add_Conv_Point"] = &MemoryHelper::store_conv_point;
 
 	LOG("memManager Object Constructed");
 	

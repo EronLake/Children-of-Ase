@@ -32,8 +32,6 @@ public:
 	void moveDown();
 	void setMode(int m);
 	int getMode();
-	WorldObj* getCurrentEnemy();
-	void setCurrentEnemy(WorldObj* p_enemy);
 
 
 	Vector2f destination;
