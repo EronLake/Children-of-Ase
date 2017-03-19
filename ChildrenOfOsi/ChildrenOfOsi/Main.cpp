@@ -214,7 +214,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	ObjConfig::import_config(recVec_ptr, gameplay_functions, tBuffer);
 	
 	DialogueConfig::import_config(gameplay_functions, tBuffer);
-	
+	DialogueController::getDialogueHelper()->fill_conversations();
 	//WorldObj* barrel = new WorldObj(Vector2f(5200, 3900), 75, 75);
 	//Alex->name = SHANGO;
 	gameplay_functions->add_texture("map1_1", 0, 0, 0);
@@ -942,6 +942,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	int wait_time = fs*3; //always wait 3 seconds
 	int count = 0;
 	int state = 0;
+
 	while (osi::GameWindow::isRunning()) {
 		start_tick = clock();
 		_QuadTree->clear();
@@ -953,6 +954,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	
 		}
 		state = DialogueController::getState();
+		std::cout << "X: " << Alex->getX() << "Y: " << Alex->getY() << std::endl;
 
 	/*	if (staticRec->destination != Vector2f(0, 0)) { //Hero has a destination
 			if (staticRec->waypoint != Vector2f(0,0) && state == 0) { //Hero has a waypoint to the desination, and not in dialog
