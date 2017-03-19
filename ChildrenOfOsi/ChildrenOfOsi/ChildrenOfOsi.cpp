@@ -72,7 +72,7 @@ void ChildrenOfOsi::stop(WorldObj* player) {
 ////////////////////////////////////////////////////
 
 void ChildrenOfOsi::move_toward(WorldObj* obj) {
-	//std:://cout << obj->getName() << "MOVING TOWARD" << std::endl;
+	//std::////cout << obj->getName() << "MOVING TOWARD" << std::endl;
 	createTask("Move", "AI", obj);
 }
 void ChildrenOfOsi::get_path(WorldObj* obj) {
@@ -176,8 +176,8 @@ void ChildrenOfOsi::add_memory(std::string key, int hero_name, int t, int frames
 	createTaskAddMem("Add_Memory", "MODIFY_POOL", key, hero_name, t, frames, p, cat, cont, where, why, when);
 }
 
-void ChildrenOfOsi::add_action(std::string key, float x = 0, float y = 0, bool col = 0) {
-	createTaskWithParams("Add_Action", "MODIFY_POOL", key, x, y, col);
+void ChildrenOfOsi::add_action(std::string key, int utility, int why, Hero* owner, Hero* receiver, Hero* doer, std::string exe_name) {
+	createTaskAddAct("Add_Action", "MODIFY_POOL", key, utility, why, owner, receiver, doer, exe_name);
 }
 
 void ChildrenOfOsi::add_tag(std::string key) {
@@ -238,6 +238,16 @@ void ChildrenOfOsi::createTaskAddMem(std::string task_name, std::string type, st
 	//maybe just pass in the string craeated
 	std::string task_status = "CREATED";
 	Task* new_task = new Task(task_name, task_status, type, key, hero_name, t, frames, p, cat, cont, where, why,when);
+	tBuffer->push(new_task);
+	mLog->logMessage(new_task);
+}
+
+void ChildrenOfOsi::createTaskAddAct(std::string task_name, std::string type, std::string key, int utility, int why,
+										Hero* owner, Hero* receiver, Hero* doer, std::string exe_name)
+{
+	//maybe just pass in the string craeated
+	std::string task_status = "CREATED";
+	Task* new_task = new Task(task_name, task_status, type, key, utility, why, owner, receiver, doer, exe_name);
 	tBuffer->push(new_task);
 	mLog->logMessage(new_task);
 }

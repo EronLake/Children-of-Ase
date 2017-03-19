@@ -115,6 +115,31 @@ Task::Task(std::string _name, std::string _status, std::string _type, std::strin
 	LOG("Task Object W/WOBJ&MEM Constructed");
 }
 
+Task::Task(std::string _name, std::string _status, std::string _type, std::string _key, int _utility, int _why, Hero* _owner, 
+	Hero* _receiver, Hero* _doer, std::string _exe_name)
+{
+	name = _name;
+	type = _type;
+
+	status = _status;
+
+	key = _key;
+
+	std::string key;
+	float arg1 = 0.0;
+	float arg2 = 0.0;
+	bool arg3 = false;
+	int arg4 = _utility;
+	int why = _why;
+
+	std::string cat = _exe_name;
+	Hero* owner = NULL;
+	Hero* receiver = NULL;
+	Hero* doer = NULL;
+
+	LOG("Task Object W/WOBJ&ACT Constructed");
+}
+
 /*Task::Task(std::string _name, std::string _status, std::string _type, WorldObj* _objToUpdate, float x, float y, bool col, int d) {
 	name = _name;
 	type = _type;
@@ -164,6 +189,9 @@ Task* Task::clone_task()
 	duplicate_task->where = where; 
 	duplicate_task->why = why; 
 	duplicate_task->when = when;
+	duplicate_task->owner = owner;
+	duplicate_task->receiver = receiver;
+	duplicate_task->doer = doer;
 
 	return duplicate_task;
 }

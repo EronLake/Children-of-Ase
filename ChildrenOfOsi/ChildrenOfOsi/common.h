@@ -40,7 +40,7 @@ static int frame_count = 0;
 #define DEBUG 0
 
 #if DEBUG 
-#define LOG(input) //std:://cout << "LOG:" << input << std::endl
+#define LOG(input) //std::////cout << "LOG:" << input << std::endl
 #else 
 #define LOG(input) 
 

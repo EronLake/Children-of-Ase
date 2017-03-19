@@ -35,7 +35,7 @@ int MemoryHelper::store_hero(std::string key, float x, float y, bool col) {
 	}
 	Hero* h = new(find_available_block(memManager::hero_head, key)) Hero(name,x, y, col);
 
-	//std:://cout << h;
+	//std::////cout << h;
 	Containers::add_hero(key,h);
 	return 0;
 }
@@ -44,11 +44,11 @@ int MemoryHelper::store_soldier(std::string key, float x, float y, bool col) {
 	Soldier* s = new(find_available_block(memManager::soldier_head, key)) Soldier(x, y, col);
 	Containers::add_soldier(key, s);
 
-	//std:://cout << "soldier created" << std::endl;
-	//std:://cout << "soldier Address: " << s << std::endl;
-	//std:://cout << "soldier xpos: " << s->getX() << std::endl;
-	//std:://cout << "soldier ypos: " << s->getY() << std::endl;
-	//std:://cout << "soldier col: " << s->getCollision() << std::endl;
+	//std::////cout << "soldier created" << std::endl;
+	//std::////cout << "soldier Address: " << s << std::endl;
+	//std::////cout << "soldier xpos: " << s->getX() << std::endl;
+	//std::////cout << "soldier ypos: " << s->getY() << std::endl;
+	//std::////cout << "soldier col: " << s->getCollision() << std::endl;
 	return 0;
 }
 
@@ -166,10 +166,8 @@ int MemoryHelper::store_memory(std::string key, int hero_name, int t, int frames
 	
 }
 
-int MemoryHelper::store_action(std::string key) {
-	LOG(key);
-	LOG(memManager::texture_head);
-	Action* a = new(find_available_block(memManager::action_head, key)) Action();
+int MemoryHelper::store_action(std::string key, int utility, int why, Hero* owner, Hero* receiver, Hero* doer, std::string exe_name) {
+	Action* a = new(find_available_block(memManager::action_head, key)) Action(owner, receiver, doer, utility, why, key, exe_name);
 	if (a == NULL) return -1;
 	
 	/*

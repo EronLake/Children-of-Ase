@@ -5,6 +5,7 @@
 
 #include "ActionPool.h"
 
+
 typedef unordered_map<int, Action> StateList;
 typedef unordered_map<Action, vector<Action>> MilestoneList;
 

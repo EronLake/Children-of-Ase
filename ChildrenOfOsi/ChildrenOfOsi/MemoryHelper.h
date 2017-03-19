@@ -21,8 +21,9 @@ public:
 	int store_texture(std::string key, float x, float y, bool col);
 	int del_Attack(std::string key, float x, float y, bool col);
 
-	int store_memory(std::string key, int hero_name, int t, int frames, vector<NPC*> p, string cat = "", string cont = "", string where = "", int why = -1, int when = -1);
-	int store_action(std::string key);
+	int store_memory(std::string key, int hero_name, int t, int frames, vector<NPC*> p, string cat = "", string cont = "", 
+					std::string where = "", int why = -1, int when = -1);
+	int store_action(std::string key, int utility, int why, Hero* owner, Hero* receiver, Hero* doer, std::string exe_name);
 
 	int MemoryHelper::store_tag(std::string key, float x, float y, bool col);
 	int MemoryHelper::store_conv_point(std::string key, float x, float y, bool col);

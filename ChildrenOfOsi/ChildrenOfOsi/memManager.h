@@ -20,13 +20,16 @@ private:
 	typedef int (MemoryHelper::*fn_ptr)(std::string,float, float, bool);
 	typedef int (MemoryHelper::*fn_ptr2)(WorldObj* obj, int num);
 	typedef int (MemoryHelper::*fn_ptr3)(std::string key, int hero_name, int mem_type, int frames, vector<NPC*> people, string cat, string cont, string where, int why, int when);
+	typedef int (MemoryHelper::*fn_ptr4)(std::string key, int utility, int why, Hero* owner, Hero* receiver, Hero* doer, std::string exe_name);
 	typedef std::map<std::string, fn_ptr> functionMapper;
 	typedef std::map<std::string, fn_ptr2> function2Mapper;
 	typedef std::map<std::string, fn_ptr3> HeroMemfunctionMapper;
+	typedef std::map<std::string, fn_ptr4> HeroActfunctionMapper;
 
 	functionMapper task_map;
 	function2Mapper task_map2;
 	HeroMemfunctionMapper task_map3;
+	HeroActfunctionMapper task_map4;
 	MemoryHelper* memHelper;
 
 public:	

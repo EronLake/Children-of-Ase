@@ -79,7 +79,8 @@ memManager::memManager(MessageLog* _mLog, TaskBuffer* _tBuffer)
 	task_map["Add_Texture"] = &MemoryHelper::store_texture;
 	//adds a hero memory so uses a different function ptr map
 	task_map3["Add_Memory"] = &MemoryHelper::store_memory;
-	//task_map["Add_Action"] = &MemoryHelper::store_action;
+	//adds a hero memory so uses a different function ptr map
+	task_map4["Add_Action"] = &MemoryHelper::store_action;
 	task_map["Del_Attack"] = &MemoryHelper::del_Attack;
 	task_map["Add_Tag"] = &MemoryHelper::store_tag;
 	task_map["Add_Conv_Point"] = &MemoryHelper::store_conv_point;
@@ -158,12 +159,13 @@ void memManager::execute_task(Task* current_task)
 	float xpos = current_task->arg1;
 	float ypos = current_task->arg2;
 	bool coll = current_task->arg3;
-	//also used fot the hero_number
+	//also used fot the hero_number and action utility
 	int num = current_task->arg4;
 
 	int mem_type = current_task->mem_type;
 	int frames = current_task->frames;
 	vector<NPC*> people = current_task->people;
+	//cat also being used as exec_name
 	std::string cat = current_task->cat;
 	std::string cont = current_task->cont;
 	std::string where = current_task->where;
@@ -171,10 +173,15 @@ void memManager::execute_task(Task* current_task)
 	int when = current_task->when;
 //	int d = current_task->arg4;
 
+	Hero* owner = current_task->owner;
+	Hero* receiver = current_task->receiver;
+	Hero* doer = current_task->doer;
+
 	auto it = task_map.find(current_task->name);
 	auto it2 = task_map2.find(current_task->name);
 	auto it3 = task_map3.find(current_task->name);
-	if (it == task_map.end() && it2 == task_map2.end() && it3 == task_map3.end()) {
+	auto it4 = task_map4.find(current_task->name);
+	if (it == task_map.end() && it2 == task_map2.end() && it3 == task_map3.end() && it4 == task_map4.end()) {
 		result = 1;
 		LOG("Error: Task '" << current_task->name << "' does not exist.");
 	}
@@ -186,6 +193,10 @@ void memManager::execute_task(Task* current_task)
 		//check if adding a memory
 		else if (people.size() == 0) {
 			result = (memHelper->*(it2->second))(obj, num);
+		}
+		else if(owner)
+		{
+			result = (memHelper->*(it4->second))(key,num,why,owner,receiver, doer, cat);
 		}
 		else {
 			result = (memHelper->*(it3->second))(key, num, mem_type,frames, people,cat,cont, where, why, when);
