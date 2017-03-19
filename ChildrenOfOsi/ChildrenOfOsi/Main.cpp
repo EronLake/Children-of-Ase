@@ -715,6 +715,8 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	silverSoldier->melee->setKeep(true);
 	silverSoldier->melee->setWidth(50);
 	silverSoldier->melee->setHeight(50);
+	silverSoldier->melee->setStaminaCost(90);
+	silverSoldier->setHealth(1000);
 
 	silverSoldier->addAttackType(rockThrow);
 	silverSoldier->melee->sprite.setTexture(border);
@@ -729,14 +731,16 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	silverSoldier2->melee->setKeep(true);
 	silverSoldier2->melee->setWidth(50);
 	silverSoldier2->melee->setHeight(50);
+	silverSoldier2->melee->setStaminaCost(90);
+	silverSoldier2->setHealth(1000);
 
 	silverSoldier2->addAttackType(rockThrow);
 	silverSoldier2->melee->sprite.setTexture(border);
 	//silverSoldier->addAttackType(spin);
 
 	//combatControl->addtoTargets(Alex);
-	combatControl->addtoTargets(silverSoldier);
-	combatControl->addtoTargets(silverSoldier2);
+	//combatControl->addtoTargets(silverSoldier);
+	//combatControl->addtoTargets(silverSoldier2);
 
 	//VisibilityGraph graph;
 	ai->graph.vertices = vertices;
@@ -893,7 +897,6 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 
 	Vector2f silverSoldierInitialLoc = silverSoldier->getLoc();
 	Vector2f silverSoldier2InitialLoc = silverSoldier2->getLoc();
-
 	silverSoldier->setEvade(false);
 	silverSoldier2->setEvade(false);
 	bool OSAtkMode = true;
