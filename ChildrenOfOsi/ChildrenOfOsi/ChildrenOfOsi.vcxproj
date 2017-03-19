@@ -326,6 +326,7 @@
     <None Include="AssetInfo.h" />
     <None Include="ClassDiagram.cd" />
     <None Include="Dialogue_config.json" />
+    <None Include="oasis_config.json" />
     <None Include="OpenGL Shaders\FontFragmentShader.frag.glsl" />
     <None Include="OpenGL Shaders\FontVertexShader.vert.glsl" />
     <None Include="OpenGL Shaders\StdFragmentShader.frag.glsl" />

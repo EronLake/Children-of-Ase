@@ -554,6 +554,9 @@
     <None Include="Tag_config.json">
       <Filter>Dialogue</Filter>
     </None>
+    <None Include="oasis_config.json">
+      <Filter>Game Objects</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="ChildrenOfOsi1.rc" />

@@ -5,6 +5,7 @@
 bool MakeForest = true;
 bool PlacePlant = false;
 bool rand_gen = false;
+bool Jungle_Config = false;
 float topLeftx;
 float topLefty;
 float topRightx;
@@ -13,6 +14,7 @@ float botLeftx;
 float botLefty;
 float botRightx;
 float botRighty;
+string WhichJson;
 
 
 ObjConfig::ObjConfig()
@@ -27,6 +29,13 @@ ObjConfig::~ObjConfig()
 
 void ObjConfig::import_config(vector<WorldObj*>* recVec, ChildrenOfOsi* gameplay_func, TaskBuffer* tBuffer)
 {
+	if (Jungle_Config) {
+		WhichJson = "config.json";
+	}
+	else {
+		WhichJson = "oasis_config.json";
+	}
+
 	int numberOfWorldObj = 0;
 
 	if (rand_gen) {
@@ -37,7 +46,8 @@ void ObjConfig::import_config(vector<WorldObj*>* recVec, ChildrenOfOsi* gameplay
 		Json::Reader reader;
 
 
-		std::ifstream file("config.json");
+		std::ifstream file(WhichJson);
+		
 		file >> root;
 		
 		for (auto itr = root.begin(); itr != root.end(); itr++)
@@ -64,7 +74,7 @@ void ObjConfig::make_stuff(vector<WorldObj*>* recVec, ChildrenOfOsi* gameplay_fu
 	Json::Reader reader;
 
 
-	std::ifstream file("config.json");
+	std::ifstream file(WhichJson);
 	file >> root;
 
 	for (auto itr = root.begin(); itr != root.end(); itr++)
@@ -107,7 +117,7 @@ void ObjConfig::make_stuff(vector<WorldObj*>* recVec, ChildrenOfOsi* gameplay_fu
 
 		Json::Value root;
 		Json::Reader reader;
-		std::ifstream in_file("config.json");
+		std::ifstream in_file(WhichJson);
 		in_file >> root;
 		in_file.close();
 
@@ -198,7 +208,7 @@ void ObjConfig::make_stuff(vector<WorldObj*>* recVec, ChildrenOfOsi* gameplay_fu
 			}
 
 			std::ofstream file;
-			file.open("config.json");
+			file.open(WhichJson);
 
 			//populate 'value_obj' with the objects, arrays etc.
 			Json::Value new_obj = {};

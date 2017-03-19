@@ -1,0 +1,16 @@
+{
+
+  "Jungle_Tree_1" : {
+      "bodyx1" : 180.0,
+      "bodyx2" : 190.0,
+      "bodyy1" : 350.0,
+      "bodyy2" : 95.0,
+      "frame_num" : 1,
+      "hight" : 500.0,
+      "name" : "Jungle_Tree_1",
+      "tex_file" : "Jungle_Tree_5",
+      "width" : 500.0,
+      "x" : 123.4269104003906,
+      "y" : 146.9314575195313
+   }
+}
