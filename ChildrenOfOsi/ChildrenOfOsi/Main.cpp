@@ -212,6 +212,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	ObjConfig::import_config(recVec_ptr, gameplay_functions, tBuffer);
 	
 	DialogueConfig::import_config(gameplay_functions, tBuffer);
+	DialogueController::getDialogueHelper()->fill_conversations();
 	
 	//WorldObj* barrel = new WorldObj(Vector2f(5200, 3900), 75, 75);
 	//Alex->name = SHANGO;
