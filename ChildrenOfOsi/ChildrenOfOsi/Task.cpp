@@ -128,6 +128,16 @@ Task::Task(std::string _name, std::string _status, std::string _type, std::strin
 
 }
 
+Task::Task(std::string _name, std::string _status, std::string _type, std::vector<std::string> _topicVec, std::string _key)
+{
+	name = _name;
+	type = _type;
+	status = _status;
+	my_key = _key;
+	topicVec = _topicVec;
+
+}
+
 /*Task::Task(std::string _name, std::string _status, std::string _type, WorldObj* _objToUpdate, float x, float y, bool col, int d) {
 	name = _name;
 	type = _type;
@@ -180,6 +190,7 @@ Task* Task::clone_task()
 	duplicate_task->topic = topic;
 	duplicate_task->temp = temp;
 	duplicate_task->my_key = my_key;
+	duplicate_task->topicVec = topicVec;
 
 	return duplicate_task;
 }

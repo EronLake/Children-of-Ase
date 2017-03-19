@@ -17,18 +17,30 @@ class WorldObj
     ID(idNum++), loc(0, 0), collision(false), type(0)
   {
 	  this->body.push_back({ {0.0F, 0.0F}, 1.0F, 1.0F }); direction = 2;
+	  offset_x1 = 0.0;
+	  offset_x2 = 0.0;
+	  offset_y1 = 0.0;
+	  offset_y2 = 0.0;
   };
 
   WorldObj(Vector2f p_topLeft, float p_width, float p_height):
     ID(idNum++), loc(p_topLeft), width(p_width), height(p_height), collision(false), type(0)
   {
 	  this->body.push_back({ loc, p_width, p_height }); direction = 2;
+	  offset_x1 = 0.0;
+	  offset_x2 = 0.0;
+	  offset_y1 = 0.0;
+	  offset_y2 = 0.0;
   }
 
   WorldObj(float x, float y, bool col):
     ID(idNum++), loc({x, y}), collision(col), type(0)
   {
 	  this->body.push_back({ loc, 1.0F, 1.0F }); direction = 2;
+	  offset_x1 = 0.0;
+	  offset_x2 = 0.0;
+	  offset_y1 = 0.0;
+	  offset_y2 = 0.0;
   }
 
   virtual ~WorldObj() = default;
@@ -93,6 +105,10 @@ class WorldObj
 
   Sprite sprite;
   vector<Rectangle> body;
+  float offset_x1 = 0.0;
+  float offset_x2 = 0.0;
+  float offset_y1 = 0.0;
+  float offset_y2 = 0.0;
 
   protected:
 

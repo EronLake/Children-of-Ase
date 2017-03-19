@@ -14,7 +14,7 @@ public:
 	std::string status;
 	std::string type;
 	std::string key;
-
+	std::vector<std::string> topicVec;
 	std::string topic;
 	std::string temp;
 	std::string my_key;
@@ -45,6 +45,7 @@ public:
 	Task(std::string name, std::string status, std::string _type, std::string key,int hero_name, int mem_type, int frames, 
 			vector<NPC*> p, std::string cat, std::string cont, std::string where, int why, int when);
 	Task(std::string _name, std::string _status, std::string _type, std::string topic, std::string temp, std::string key);
+	Task(std::string _name, std::string _status, std::string _type, std::vector<std::string> topicVec, std::string key);
 	//Task(std::string name, std::string status, std::string _type, WorldObj* _objToUpdate, std::string key,float x, float y, bool col, int d);
 	~Task();
 

@@ -5,7 +5,7 @@
 
 #include "ActionPool.h"
 
-typedef unordered_map<int, Action> StateList;
+typedef unordered_map<int, Action> EndStateList;
 typedef unordered_map<Action, vector<Action>> MilestoneList;
 
 namespace std {
@@ -28,7 +28,7 @@ public:
 
 	Action choose_next_step(Action goal, vector<Action> goals);
 
-	StateList* get_end_state_map() { return end_states; }
+	EndStateList* get_end_state_map() { return end_states; }
 	vector<Action> get_end_states();
 	MilestoneList* get_milestone_map() { return milestones; }
 	//vector<Action> get_milestones_for_goal(Action goal);
@@ -47,7 +47,7 @@ private:
 	Hero* evaluateHero;
 
 	//Map of hero numbers to the Action representing the desired end state with that hero
-	StateList* end_states;
+	EndStateList* end_states;
 	//Map of end state Actions to the Action path (last element in path is the next milestone to complete)
 	MilestoneList* milestones;
 
