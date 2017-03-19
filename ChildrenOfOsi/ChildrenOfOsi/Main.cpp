@@ -324,6 +324,9 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	Texture* border = new Texture();
 
 	Texture* fire = new Texture();
+	Texture* fireUp = new Texture();
+	Texture* fireDown = new Texture();
+	Texture* fireLeft = new Texture();
 
 
 
@@ -408,7 +411,10 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 
 	pierTex->setFile("Assets/Sprites/pier.png", 1);
 
-	fire->setFile("Assets/Sprites/fireballsprite1.jpg", 10);
+	fire->setFile("Assets/Sprites/FireBallTMP.png", 3);
+	fireUp->setFile("Assets/Sprites/FireBallTMPUp.png", 3);
+	fireDown->setFile("Assets/Sprites/FireBallTMPDown.png", 3);
+	fireLeft->setFile("Assets/Sprites/FireBallTMPLeft.png", 3);
 	/* SET UP SPRITE CHANGE, MIGHT NEED A SINGLETON?*/
 
 
@@ -472,6 +478,11 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	rockThrow->setCoolDown(120);
 	rockThrow->setPause(24);
 	rockThrow->sprite.setTexture(rockTex);
+	rockThrow->sprite.up = rockTex;
+	rockThrow->sprite.left = rockTex;
+	rockThrow->sprite.right = rockTex;
+	rockThrow->sprite.down = rockTex;
+	rockThrow->setCanCancel(false);
 	Alex->addAttackType(rockThrow);
 
 	Attack* fireball = new Attack();
@@ -481,7 +492,11 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	fireball->setDuration(100);
 	fireball->setCoolDown(240);
 	fireball->setPause(24);
-	fireball->sprite.setTexture(fire);
+	fireball->sprite.up=fireUp;
+	fireball->sprite.left = fireLeft;
+	fireball->sprite.right = fire;
+	fireball->sprite.down = fireDown;
+	fireball->setCanCancel(false);
 	Alex->addAttackType(fireball);
 
 	//Alex->melee->sprite.setTexture(blank);
