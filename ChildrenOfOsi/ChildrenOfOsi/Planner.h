@@ -43,6 +43,8 @@ public:
 
 	int value_of(Action* action);
 
+	bool give_as_quest = false;
+
 private:
 	Hero* evaluateHero;
 
@@ -52,7 +54,7 @@ private:
 	MilestoneList* milestones;
 
 	Action current_end_state;
-	Action* current_action = NULL;
+	Action* current_action = nullptr;
 	int current_action_value;
 
 	int heuristic(Action step, vector <std::shared_ptr<Preconditions>> priority_preconds, vector<Action> goals);

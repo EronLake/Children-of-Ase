@@ -27,7 +27,7 @@ public:
 	static void setSelect(int i) { select = i; };
 	static int getSelect() { return select; };
 	static void setPlayer(Player* p);
-	static void startConversation(WorldObj* n,bool playerTalk);
+	static void startConversation(WorldObj* n, bool playerTalk);
 	static WorldObj* getOther();
 	static int getState();
 	static void exitDialogue();
