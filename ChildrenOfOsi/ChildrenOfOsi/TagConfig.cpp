@@ -44,7 +44,7 @@ void TagConfig::import_config(ChildrenOfOsi* gameplay_func, TaskBuffer* tBuffer)
 	set_tag(gameplay_func, tBuffer, (*itor)["name"].asString(), topicVec);
 	x++;
     }
-	std::cout << "done" << endl;
+	////std::cout<< "done" << endl;
 
 
 

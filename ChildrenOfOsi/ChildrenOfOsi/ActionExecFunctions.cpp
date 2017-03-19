@@ -19,24 +19,24 @@ ActionExecFunctions::~ActionExecFunctions()
 };
 
 void ActionExecFunctions::execute_train(Action* train) {
-	//cout << "++++++++++++++++PLEASE BE FIGHTING++++++++++++++++" << endl;
+	////cout << "++++++++++++++++PLEASE BE FIGHTING++++++++++++++++" << endl;
 	
 	switch (train->checkpoint) {
 	case 0: //Pick training location, create memory, increment checkpoint
-		//cout << "---------------------CASE 0---------------------" << endl;
+		////cout << "---------------------CASE 0---------------------" << endl;
 		train->getDoer()->destination = { 1000,1000 }; //should select from set of pre-defined, stored in Hero, or village?
 		ActionHelper::create_memory(train, train->getDoer());
 		train->checkpoint++;
 		break;
 	case 1: //If destination is reached, start a timer and move to next checkpoint
-		//cout << "---------------------CASE 1---------------------" << endl;
+		////cout << "---------------------CASE 1---------------------" << endl;
 		if (train->getDoer()->destination == Vector2f(0, 0)) {
 			ActionHelper::set_timer(train, 3600);  //Wait 1 minute (60 frames times 60 seconds)
 			train->checkpoint++;
 		}
 		break;
 	case 2: //If timer is complete, set village as destination, apply postconds, update memory
-		//cout << "---------------------CASE 2---------------------" << endl;
+		////cout << "---------------------CASE 2---------------------" << endl;
 		if (ActionHelper::retrieve_time(train) == 0) {
 			Memory* doer_mem = train->getDoer()->find_mem(train->getName() + std::to_string(train->time_stamp));
 			//Memory* receiver_mem = fight->getReceiver()->find_mem(fight->getName() + std::to_string(fight->time_stamp));

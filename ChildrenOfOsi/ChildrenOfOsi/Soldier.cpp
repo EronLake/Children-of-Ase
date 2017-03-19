@@ -343,14 +343,14 @@ Vector2f Soldier::getEvadeRange(Soldier * _enemy)
 	float leftBound = _enemy->getX() - _enemy->getEvasionRadius();
 	evasionBound = new Rectangle(Vector2f((_enemy->getX() - _enemy->getEvasionRadius()), (_enemy->getY() - _enemy->getEvasionRadius())), 2 * _enemy->getEvasionRadius(), 2 * _enemy->getEvasionRadius());
 	if (targetIsWithinRange(evasionBound)) {
-		cout << "COMBAT DESTINATION FROM EVADERANGE IS " << combatMoveDestination.getXloc() << ", " << combatMoveDestination.getYloc() << endl;
+		//cout << "COMBAT DESTINATION FROM EVADERANGE IS " << combatMoveDestination.getXloc() << ", " << combatMoveDestination.getYloc() << endl;
 		return combatMoveDestination;
 	}
 	float XCoord = rand() % (int)evasionBound->getWidth() + (int)evasionBound->getX();
 	float YCoord = rand() % (int)evasionBound->getHeight() + (int)evasionBound->getY();
 	combatMoveDestination = Vector2f(XCoord, YCoord);
 
-	cout << "COMBAT DESTINATION FROM EVADERANGE IS " << combatMoveDestination.getXloc() << ", " << combatMoveDestination.getYloc() << endl;
+	//cout << "COMBAT DESTINATION FROM EVADERANGE IS " << combatMoveDestination.getXloc() << ", " << combatMoveDestination.getYloc() << endl;
 	return combatMoveDestination;
 }
 

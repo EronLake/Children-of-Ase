@@ -110,12 +110,12 @@ void Party::addToParty(Soldier* s, bool isLeader)
 void Party::removeSoldier(Soldier* s)
 {
 
-  cout << "SIZE OF THE PARTY IS ********** " << members.size() << endl;
+  //cout << "SIZE OF THE PARTY IS ********** " << members.size() << endl;
   members.erase(std::remove(members.begin(), members.end(), s), members.end());
-  cout << "SUCCESFULLY GOTTEN PAST THE REMOVE SOLDIER STATEMENT*************************" << endl;
+  //cout << "SUCCESFULLY GOTTEN PAST THE REMOVE SOLDIER STATEMENT*************************" << endl;
   
   //for enemy soldier's party, we need to remove s's party from their list of party if its emptys
-  //cout << "Enemy's enemy: " << s->getCurrentEnemy()->getCurrentEnemy() << endl;
+  ////cout << "Enemy's enemy: " << s->getCurrentEnemy()->getCurrentEnemy() << endl;
 
   if(s->getCurrentEnemy() != nullptr) {
     s->getCurrentEnemy()->setCurrentEnemy(nullptr);

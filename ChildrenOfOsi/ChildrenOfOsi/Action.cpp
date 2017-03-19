@@ -86,7 +86,7 @@ vector<std::string> Action::preConditionsNeeded(Hero* o, Hero* h) {
 			}
 		}
 	}
-	//std:://cout << "HERE 2.5" << endl;*/
+	////std:://cout << "HERE 2.5" << endl;*/
 	return needs;
 }
 

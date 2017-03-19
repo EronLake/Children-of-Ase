@@ -37,7 +37,7 @@ void DialogueConfig::import_config(ChildrenOfOsi* gameplay_func, TaskBuffer* tBu
 		for (auto itor = root["reply_points"].begin(); itor != root["reply_points"].end(); ++itor) {
 			set_conv_point(gameplay_func, tBuffer, (*itor)["topic"].asString(), (*itor)["template"].asString(), (*itor)["name"].asString());
 		}
-		std::cout << "done" << endl;
+		////std::cout<< "done" << endl;
 	
 
 
@@ -47,7 +47,7 @@ void DialogueConfig::import_config(ChildrenOfOsi* gameplay_func, TaskBuffer* tBu
 void DialogueConfig::set_conv_point(ChildrenOfOsi* gameplay_func, TaskBuffer* tBuffer, std::string topic, std::string temp, std::string name)
 {
 
-	//std::cout << tex_file << "Not in Table /////////////////////////////" << endl;
+	//////std::cout<< tex_file << "Not in Table /////////////////////////////" << endl;
 	gameplay_func->add_conv_point(topic, temp, name);
 	tBuffer->run();
 	std::ofstream ofs;
