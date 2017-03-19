@@ -66,13 +66,13 @@ void DummyController::execute_task(Task* current_task)
 //////////////////////////////////////
 int DummyController::move_up()
 {
-	//std:://cout << "PhyM:Move Up" << std::endl;
+	//std::////cout << "PhyM:Move Up" << std::endl;
 	return 0;
 }
 
 int DummyController::move_down()
 {
-	//std:://cout << "PhyM:Move Down" << std::endl;
+	//std::////cout << "PhyM:Move Down" << std::endl;
 	return 1;
 }
 //////////////////////////////////////

@@ -149,9 +149,6 @@
     <ClCompile Include="Memory.cpp">
       <Filter>AI</Filter>
     </ClCompile>
-    <ClCompile Include="Planner.cpp">
-      <Filter>AI</Filter>
-    </ClCompile>
     <ClCompile Include="Personality.cpp">
       <Filter>AI</Filter>
     </ClCompile>
@@ -204,14 +201,13 @@
       <Filter>AI\Actions</Filter>
     </ClCompile>
     <ClCompile Include="ConversationPoint.cpp" />
-    <ClCompile Include="PartyManager.cpp" />
-    <ClCompile Include="DialogueConfig.cpp">
-      <Filter>Dialogue</Filter>
-    </ClCompile>
-    <ClCompile Include="TagConfig.cpp">
-      <Filter>Dialogue</Filter>
-    </ClCompile>
     <ClCompile Include="Tag.cpp" />
+    <ClCompile Include="Planner.cpp">
+      <Filter>AI\Actions</Filter>
+    </ClCompile>
+    <ClCompile Include="ActionConfig.cpp">
+      <Filter>AI\Actions</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AIHelper.h">
@@ -377,9 +373,6 @@
     <ClInclude Include="Memory.h">
       <Filter>AI</Filter>
     </ClInclude>
-    <ClInclude Include="Planner.h">
-      <Filter>AI</Filter>
-    </ClInclude>
     <ClInclude Include="Personality.h">
       <Filter>AI</Filter>
     </ClInclude>
@@ -435,14 +428,13 @@
       <Filter>AI\Actions</Filter>
     </ClInclude>
     <ClInclude Include="ConversationPoint.h" />
-    <ClInclude Include="PartyManager.h" />
-    <ClInclude Include="DialogueConfig.h">
-      <Filter>Dialogue</Filter>
-    </ClInclude>
-    <ClInclude Include="TagConfig.h">
-      <Filter>Dialogue</Filter>
-    </ClInclude>
     <ClInclude Include="Tag.h" />
+    <ClInclude Include="Planner.h">
+      <Filter>AI\Actions</Filter>
+    </ClInclude>
+    <ClInclude Include="ActionConfig.h">
+      <Filter>AI\Actions</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Text Include="audio_test.txt">
@@ -548,11 +540,8 @@
     <None Include="test.json">
       <Filter>Game Objects</Filter>
     </None>
-    <None Include="Dialogue_config.json">
-      <Filter>Dialogue</Filter>
-    </None>
-    <None Include="Tag_config.json">
-      <Filter>Dialogue</Filter>
+    <None Include="action_config.json">
+      <Filter>AI\Actions</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>

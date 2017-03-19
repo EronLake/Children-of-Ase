@@ -908,7 +908,7 @@ bool MemoryTestSuite::store_hero_test()
 	bool pass = true;
 	MemoryHelper* test_memory_helper = new MemoryHelper();
 
-	//std:://cout << "------------------------"<< test_memory_helper->store_hero("test_obj", 1, 2, true);
+	//std::////cout << "------------------------"<< test_memory_helper->store_hero("test_obj", 1, 2, true);
 
 
 	if (Containers::hero_table.count("test_obj") != 1 ||

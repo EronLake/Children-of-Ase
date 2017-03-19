@@ -6,6 +6,7 @@
 #include "ActionPool.h"
 
 typedef unordered_map<int, Action> EndStateList;
+
 typedef unordered_map<Action, vector<Action>> MilestoneList;
 
 namespace std {

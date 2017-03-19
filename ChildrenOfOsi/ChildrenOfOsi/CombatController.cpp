@@ -41,7 +41,7 @@ void CombatController::fight(Soldier* sold1, int state) {
 			//if discovered Alex, set silverSoldier combat mode to 0(attack).
 			if (sold1->getCurrentEnemy() != nullptr) break;
 			if (it != sold1) {
-				//cout << "*************************************FOUND ENEMY****************************************" << endl;
+				////cout << "*************************************FOUND ENEMY****************************************" << endl;
 				//silverSoldier->setMode(0);
 				sold1->setEvade(false);
 				sold1->setCurrentEnemy(it);
@@ -49,7 +49,7 @@ void CombatController::fight(Soldier* sold1, int state) {
 			}
 		}*/
 		if (sold1->getCurrentEnemy() != nullptr) {
-			if (sold1->getStamina()>sold1->melee->getStaminaCost()) {
+			if (sold1->getStamina()>60) {
 				sold1->setEvade(false);
 			}
 			else if (sold1->destination == sold1->getLoc() || sold1->destination == Vector2f(0, 0)) {
@@ -68,7 +68,7 @@ void CombatController::fight(Soldier* sold1, int state) {
 
 		}
 
-		//if OS has an enemy, move to the enemy
+		// If Soldier has an enemy, move to the enemy and not in evade mode
 		if (sold1->getCurrentEnemy() != nullptr && !sold1->getEvade()) {//&& silverSoldier->destination != Vector2f(0,0)) {
 		//	std::cout << "*************************************************MOVING TO ENEMY******************************************" << endl;
 
@@ -76,7 +76,7 @@ void CombatController::fight(Soldier* sold1, int state) {
 			sold1->destination = Vector2f(sold1->getCurrentEnemy()->getX() /*+ (sold1->getCurrentEnemy()->getWidth() / 4)*/, sold1->getCurrentEnemy()->getY() /*+ (sold1->getCurrentEnemy()->getHeight() / 4)*/);
 
 			Soldier* sold2 = sold1->getCurrentEnemy();
-		//	std::cout << dist_by_center(sold1, sold2) << std::endl;
+			//std::cout << dist_by_center(sold1, sold2) << std::endl;
 
 			if (dist_by_center(sold1, sold2) < (sold1->body[0].getWidth() / 2 + sold1->melee->getHeight())) {
 				sold1->destination = Vector2f(0, 0);
@@ -84,10 +84,11 @@ void CombatController::fight(Soldier* sold1, int state) {
 				//gameplay_functions->stop(sold1);
 				sold1->face(sold2);
 				if (sold1->getCool()) {
-					std::cout << "Pressed F" << std::endl;
+					//std::cout << "Pressed F" << std::endl;
 					//gameplay_functions->special(silverSoldier, 0);
 					sold1->meleeAttack();
 					gameplay_functions->melee(sold1);
+					// Why are we setting currentEnemy to nullptr here?
 					sold1->setCurrentEnemy(nullptr);
 				}
 			}
@@ -151,9 +152,9 @@ void CombatController::fight(Soldier* sold1, int state) {
 					//npc is at enemy destination, attack.
 					if (sold1->destination == sold1->getLoc()) {
 						sold1->face(sold1->getCurrentEnemy());
-						//cout << "COOL DOWN FOR ATTACK IS " << sold1->getCool() << endl;
+						////cout << "COOL DOWN FOR ATTACK IS " << sold1->getCool() << endl;
 						if (sold1->getCool()) {
-							//std:://cout << "Pressed F" << std::endl;
+							//std::////cout << "Pressed F" << std::endl;
 							//gameplay_functions->special(silverSoldier, 0);
 							sold1->meleeAttack();
 							gameplay_functions->melee(sold1);
@@ -165,24 +166,24 @@ void CombatController::fight(Soldier* sold1, int state) {
 			*/
 		}
 
-		////evade mode
+		// Evade mode
 		if (sold1->getCurrentEnemy() != nullptr && sold1->getEvade()) {//&& silverSoldier->destination != Vector2f(0, 0)) {
 																	   //if OS is in evade mode, use the getEvadeRange method to find the waypoint and set it to destination
 			if (sold1->destination == Vector2f(-1, -1)) {
-				//cout << "****INSIDE THE EVADE MODE SETTER*****" << endl;
+				////cout << "****INSIDE THE EVADE MODE SETTER*****" << endl;
 				//silverSoldier->waypoint = silverSoldier->getEvadeRange(silverSoldier->getCurrentEnemy());
 				sold1->destination = sold1->getEvadeRange(sold1->getCurrentEnemy());
-				//cout << "shango waypoint is " << sold1->waypoint.getXloc() << sold1->waypoint.getYloc() << endl;
+				////cout << "shango waypoint is " << sold1->waypoint.getXloc() << sold1->waypoint.getYloc() << endl;
 			}
 			//if reached destination, strafe left or right
 			if (sold1->getLoc() == sold1->destination) {
-				//cout << "******* INSIDE THE EVADE MODE STRAFE *******" << endl;
+				////cout << "******* INSIDE THE EVADE MODE STRAFE *******" << endl;
 				//silverSoldier->waypoint = silverSoldier->getStrafeLocation(silverSoldier->getCurrentEnemy());
 				sold1->destination = sold1->getEvadeRange(sold1->getCurrentEnemy());
 			}
 			/*if (silverSoldier->waypoint != Vector2f(0, 0) && state == 0) { //Hero has a waypoint to the desination, and not in dialog
 			gameplay_functions->move_toward(silverSoldier); //Take a step towards the current waypoint
-			//	//std:://cout << "Request a step" << std::endl;
+			//	//std::////cout << "Request a step" << std::endl;
 			}
 			else if (state == 0)                //Hero needs waypoints to destination, and not in dialog
 			{
@@ -195,7 +196,7 @@ void CombatController::fight(Soldier* sold1, int state) {
 		if (sold1->destination != Vector2f(0, 0)) { //Hero has a destination
 			if (sold1->waypoint != Vector2f(0, 0) && state == 0) { //Hero has a waypoint to the desination, and not in dialog
 				gameplay_functions->move_toward(sold1); //Take a step towards the current waypoint
-														//	//std:://cout << "Request a step" << std::endl;
+														//	//std::////cout << "Request a step" << std::endl;
 			}
 			else if (state == 0)                //Hero needs waypoints to destination, and not in dialog
 			{
@@ -254,7 +255,7 @@ void CombatController::follow(Soldier* sold1, int state) {
 	if (sold1->destination != Vector2f(0, 0)) { //Hero has a destination
 		if (sold1->waypoint != Vector2f(0, 0) && state == 0) { //Hero has a waypoint to the desination, and not in dialog
 			gameplay_functions->move_toward(sold1); //Take a step towards the current waypoint
-													//	//std:://cout << "Request a step" << std::endl;
+													//	//std::////cout << "Request a step" << std::endl;
 		}
 		else if (state == 0)                //Hero needs waypoints to destination, and not in dialog
 		{
@@ -264,6 +265,7 @@ void CombatController::follow(Soldier* sold1, int state) {
 }
 
 float CombatController::dist_by_center(Soldier* sold1, Soldier* sold2) {
+
 	//std::cout << "Soldier: " <<
  // cout << "* * * * * * * * * * Soldier1 physics body length: " << sold1->body.size() << " * * * * * * * * * *" << endl;
 //  cout << "* * * * * * * * * * Address of Soldier 2: " << sold2 << endl;
@@ -283,18 +285,20 @@ void CombatController::checkParties() {
 			for (auto a = partiesA.begin(); a != partiesA.end(); ++a) {
 				if ((*a)->getMode()!=1 && (*a)->getMode() != 2) {
 					for (auto b = partiesB.begin(); b != partiesB.end(); ++b) {
-						if (dist_by_center((*a)->getLeader(), (*b)->getLeader()) < 1000) {
-							(*a)->addToCurrentEnemies(*b);
-							(*a)->setMode(1);
-							vector<Soldier*> mema = (*a)->getMembers();
-							for (auto am = mema.begin(); am != mema.end(); ++am) {
-								(*am)->setInCombat(true);
-							}
-							(*b)->addToCurrentEnemies(*a);
-							(*b)->setMode(1);
-							vector<Soldier*> memb = (*b)->getMembers();
-							for (auto bm = memb.begin(); bm != memb.end(); ++bm) {
-								(*bm)->setInCombat(true);
+						if ((*a)->getLeader() != nullptr && (*b)->getLeader() != nullptr) {
+							if (dist_by_center((*a)->getLeader(), (*b)->getLeader()) < 1000) {
+								(*a)->addToCurrentEnemies(*b);
+								(*a)->setMode(1);
+								vector<Soldier*> mema = (*a)->getMembers();
+								for (auto am = mema.begin(); am != mema.end(); ++am) {
+									(*am)->setInCombat(true);
+								}
+								(*b)->addToCurrentEnemies(*a);
+								(*b)->setMode(1);
+								vector<Soldier*> memb = (*b)->getMembers();
+								for (auto bm = memb.begin(); bm != memb.end(); ++bm) {
+									(*bm)->setInCombat(true);
+								}
 							}
 						}
 					}

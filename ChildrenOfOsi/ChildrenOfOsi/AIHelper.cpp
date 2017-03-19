@@ -26,11 +26,11 @@ AIHelper::~AIHelper()
 
 void VisibilityGraph::_print() {
 	for (Vector2f vert : vertices) {
-		//std:://cout << "{{" << vert.getXloc() << "," << vert.getYloc() << "}, {";
+		//std::////cout << "{{" << vert.getXloc() << "," << vert.getYloc() << "}, {";
 		for (Vector2f neighb : neighbors(vert)) {
-			//std:://cout << "{" << neighb.getXloc() << "," << neighb.getYloc() << "} ";
+			//std::////cout << "{" << neighb.getXloc() << "," << neighb.getYloc() << "} ";
 		}
-		//std:://cout << "}}," << std::endl;
+		//std::////cout << "}}," << std::endl;
 	}
 }
 
@@ -102,12 +102,12 @@ vector<Vector2f> AIHelper::get_path(NPC* obj)
 	vector<Vector2f> path;
 	Vector2f current = obj->destination;
 	//path.push_back(current);
-	////std:://cout << "Push to path" << std::endl;
-	////std:://cout << "X: " << current.getXloc() << " Y: " << current.getYloc() << std::endl;
+	////std::////cout << "Push to path" << std::endl;
+	////std::////cout << "X: " << current.getXloc() << " Y: " << current.getYloc() << std::endl;
 	while (!(current == start)) {
 		path.push_back(current);
-		//std:://cout << "Push to path" << std::endl;
-		//std:://cout << "X: " << current.getXloc() << " Y: " << current.getYloc() << std::endl;
+		//std::////cout << "Push to path" << std::endl;
+		//std::////cout << "X: " << current.getXloc() << " Y: " << current.getYloc() << std::endl;
 		current = came_from[current];
 	}
 	//std::reverse(path.begin(), path.end());
@@ -138,19 +138,19 @@ int AIHelper::astar_search(WorldObj* obj)// VisibilityGraph graph, Vector2f star
 		while (!frontier.empty()) {
 			Vector2f current = frontier.top().second;
 			frontier.pop();
-			//std:://cout << "Popping" << std::endl;
+			//std::////cout << "Popping" << std::endl;
 			if (current == npc->destination) {
-				//std:://cout << "Found a path" << std::endl;
+				//std::////cout << "Found a path" << std::endl;
 				path_exists = true;
 				//for (auto vert : came_from) {
-				//	//std:://cout << "X: " << vert.getXloc() << " Y: " << vert.getYloc() << std::endl;
+				//	//std::////cout << "X: " << vert.getXloc() << " Y: " << vert.getYloc() << std::endl;
 				//}
 				break;
 			}
-			//std:://cout << "X: " << current.getXloc() << " Y: " << current.getYloc() << std::endl;
-			//std:://cout << "Expand the neighbors!" << std::endl;
+			//std::////cout << "X: " << current.getXloc() << " Y: " << current.getYloc() << std::endl;
+			//std::////cout << "Expand the neighbors!" << std::endl;
 			for (Vector2f next : graph.neighbors(current)) {
-				//std:://cout << "X: " << next.getXloc() << " Y: " << next.getYloc() << std::endl;
+				//std::////cout << "X: " << next.getXloc() << " Y: " << next.getYloc() << std::endl;
 				double cost = cost_so_far[current] + graph.cost(current, next);
 				if (!cost_so_far.count(next) || cost < cost_so_far[next]) {
 					cost_so_far[next] = cost;
@@ -169,9 +169,9 @@ int AIHelper::astar_search(WorldObj* obj)// VisibilityGraph graph, Vector2f star
 			came_from.clear();
 			cost_so_far.clear();
 		}
-		//	//std:://cout << "Done" << std::endl;
+		//	//std::////cout << "Done" << std::endl;
 		for (int i = 0; i < came_from.size(); i++) {
-			//		//std:://cout << "X: " << came_from[i].getXloc() << " Y: " << came_from[i].getYloc() << std::endl;
+			//		//std::////cout << "X: " << came_from[i].getXloc() << " Y: " << came_from[i].getYloc() << std::endl;
 		}
 	}
 	return 0;
@@ -180,7 +180,7 @@ int AIHelper::astar_search(WorldObj* obj)// VisibilityGraph graph, Vector2f star
 
 int AIHelper::plan_step(WorldObj* obj) {
 	int result;
-	////std:://cout << "take a step" << std::endl;
+	////std::////cout << "take a step" << std::endl;
 
 	NPC* npc;
 	if (obj->getType() >= 3) {
@@ -221,11 +221,11 @@ int AIHelper::plan_step(WorldObj* obj) {
 	//	float ySpeed = slope*xSpeed;
 		npc->setDiagXSpeed(xSpeed);
 		npc->setDiagYSpeed(ySpeed);
-		////std:://cout << diffX << " and " << diffY << std::endl;
+		////std::////cout << diffX << " and " << diffY << std::endl;
 
 
 
-		////std:://cout << "new " << diffX << " and " << diffY << std::endl;
+		////std::////cout << "new " << diffX << " and " << diffY << std::endl;
 
 		//diagXSpeed = npc->getDiagXSpeed();
 		//diagYSpeed = npc->getDiagYSpeed();
@@ -267,11 +267,11 @@ int AIHelper::plan_step(WorldObj* obj) {
 			}
 			else  //Waypoint is close enough to stop
 			{
-				////std:://cout << "Reached waypoint" << std::endl;
+				////std::////cout << "Reached waypoint" << std::endl;
 				manager->createTaskWithObj("Stop", "MOVE", obj);
 				npc->setLoc(npc->waypoint);
 				if (npc->waypoints.size() == 0) { //This was the final waypoint, destination reached
-					//std:://cout << npc->getName() << ": Last waypoint" << std::endl;
+					//std::////cout << npc->getName() << ": Last waypoint" << std::endl;
 					npc->destination = Vector2f(0, 0); //"nullify" destination
 					npc->waypoint = Vector2f(0, 0); //"nullify" waypoint
 					npc->setMode(WAIT);

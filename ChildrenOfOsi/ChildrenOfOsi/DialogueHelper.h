@@ -32,6 +32,7 @@ public:
 	dialogue_template get_template(dialogue_point diog_pt);
 	dialogue_point get_dialog(std::string name, dialogue_point diog_pt);
 	std::string convert_to_sentence(dialogue_point dialog_pt);
+	void fill_conversations();
 
 };
 

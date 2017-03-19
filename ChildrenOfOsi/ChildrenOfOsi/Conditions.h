@@ -21,36 +21,32 @@ public:
 class RelPrecon : public Preconditions
 {
 private:
-	Hero* curr_hero;
-	Hero* other_hero;
 	std::string rel_type;
 	std::string rel_bound;
 	int desired_rel_val;
 
 public:
-	RelPrecon(Hero* curr_hero, Hero* other_hero, std::string rel_type, std::string rel_bound, int desired_rel_val);
+	RelPrecon(std::string rel_type, std::string rel_bound, int desired_rel_val);
 	~RelPrecon();
 
 	//Require particular relationship towards a hero
-	virtual float get_cost() final;
+	virtual float get_cost(Hero* curr_hero, Hero* other_hero) final;
 };
 
 class RelEstimPrerec : Preconditions
 {
 private:
-	Hero* curr_hero;
-	Hero* other_hero;
 	std::string rel_type;
 	std::string rel_bound;
 	int desired_rel_val;
 
 public:
 	
-	RelEstimPrerec(Hero* curr_hero, Hero* other_hero, std::string rel_type, std::string rel_bound, int desired_rel_val);
+	RelEstimPrerec(std::string rel_type, std::string rel_bound, int desired_rel_val);
 	~RelEstimPrerec();
 
 	//Require particular assumption of hero relationship towards sel
-	float get_cost() final;
+	virtual float get_cost(Hero* curr_hero, Hero* other_hero) final;
 
 };
 
@@ -71,27 +67,25 @@ public:
 class MemoryNumPrerec : Preconditions
 {
 private:
-	std::vector<Memory>* memories;
 	int rec_num_of_mem;
 public:
-	MemoryNumPrerec(std::vector<Memory>* memories, int rec_num_of_mem);
+	MemoryNumPrerec(int rec_num_of_mem);
 	~MemoryNumPrerec();
 
 	//Memories is not empty
-	float get_cost();//Hero* curr_hero could also just pass in the hero
+	float get_cost(std::vector<Memory>* memories);//Hero* curr_hero could also just pass in the hero
 };
 
 class MemPrerec : Preconditions
 {
 private:
-	std::vector<Memory>* memories;
 	std::string rec_mem;
 public:
-	MemPrerec(std::vector<Memory>* memories, std::string rec_mem);
+	MemPrerec(std::string rec_mem);
 	~MemPrerec();
 
 	//Having particular memory
-	virtual float get_cost() final;//Hero* curr_hero could also just pass in the hero
+	virtual float get_cost(std::vector<Memory>* memories) final;//Hero* curr_hero could also just pass in the hero
 };
 
 
@@ -124,7 +118,10 @@ public:
 	~Postcondition();
 
 	virtual float get_utility();
+	virtual float get_utility(Hero* curr_hero, Hero* other_hero);
+	
 	void apply_utility();
+	void apply_utility(Hero* curr_hero, Hero* other_hero);
 	std::string get_type();
 	
 
@@ -134,40 +131,36 @@ public:
 class RelPost : Postcondition
 {
 private:
-	Hero* curr_hero;
-	Hero* other_hero;
 	std::string rel_type;
 	int utility;
 
 public:
 
-	RelPost(Hero* _curr_hero, Hero* _other_hero, std::string rel_type, int rel_val);
+	RelPost(std::string rel_type, int rel_val);
 	~RelPost();
 
 	//Require particular assumption of hero relationship towards sel
-	float get_utility() final;
-	void apply_utility();
-	typedef unordered_map<std::string, std::shared_ptr<Preconditions>> Precond_map;
-	std::string fulfills_which(vector<std::string> preconds, Precond_map map);
+	virtual float get_utility(Hero* curr_hero, Hero* other_hero) final;
+	virtual void apply_utility(Hero* curr_hero, Hero* other_hero) final;
+	typedef vector<std::shared_ptr<Preconditions>> Precond_vec;
+	std::string fulfills_which(vector<std::string> preconds, Precond_vec vec);
 };
 
 
 class RelEstimPost : Postcondition
 {
 private:
-	Hero* curr_hero;
-	Hero* other_hero;
 	std::string rel_type;
 	int utility;
 
 public:
 
-	RelEstimPost(Hero* _curr_hero, Hero* _other_hero, std::string rel_type, int rel_val);
+	RelEstimPost(std::string rel_type, int rel_val);
 	~RelEstimPost();
 
 	//Require particular assumption of hero relationship towards sel
-	float get_utility() final;
-	void apply_utility();
+	virtual float get_utility(Hero* curr_hero, Hero* other_hero) final;
+	virtual void apply_utility(Hero* curr_hero, Hero* other_hero) final;
 
 };
 
@@ -180,9 +173,9 @@ private:
 	int utility;
 public:
 	//Comparing village states
-	StatePost(int _utility);
+	StatePost(int utility);
 	~StatePost();
-	float get_utility() final;
-	void apply_utility();
+	virtual float get_utility() final;
+	virtual void apply_utility() final;
 
 };

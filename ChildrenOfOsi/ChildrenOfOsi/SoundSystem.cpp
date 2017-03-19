@@ -69,7 +69,7 @@ FMOD_RESULT result;
 		if (sound != sounds.end()) return; //Sound already loaded
 
 		result = m_pSystem->createSound(pFile.c_str(), FMOD_DEFAULT, 0, pSound);//fmod createSound takes (const char *name_or_data, FMOD_MODE mode, FMOD_CREATESOUNDEXINFO *exinfo, FMOD::Sound **sound)
-		//cout << FMOD_ErrorString(result) << endl;
+		////cout << FMOD_ErrorString(result) << endl;
 
 		if (pSound) {
 			sounds[pFile] = *pSound;
@@ -95,7 +95,7 @@ FMOD_RESULT result;
 		if (bLoop){
 		channel->setLoopCount(-1);
 		}
-		//cout << FMOD_ErrorString(result) << endl;
+		////cout << FMOD_ErrorString(result) << endl;
 	};
 	void SoundSystem::playMusic(SoundClass pSound, bool bLoop, FMOD::Channel*& channel, bool ispaused, float volume)
 	{
@@ -116,7 +116,7 @@ FMOD_RESULT result;
 		if (bLoop) {
 			channel->setLoopCount(-1);
 		}
-		//cout << FMOD_ErrorString(result) << endl;
+		////cout << FMOD_ErrorString(result) << endl;
 	};
 	void SoundSystem::playAmbient(SoundClass pSound, bool bLoop, FMOD::Channel*& channel, bool ispaused, float volume)
 	{
@@ -137,7 +137,7 @@ FMOD_RESULT result;
 		if (bLoop) {
 			channel->setLoopCount(-1);
 		}
-		//cout << FMOD_ErrorString(result) << endl;
+		////cout << FMOD_ErrorString(result) << endl;
 	};
 	void SoundSystem::releaseSound(SoundClass pSound)
 	{
@@ -173,7 +173,7 @@ FMOD_RESULT result;
 		// Play the sound, with loop mode
 
 
-		////cout << "Press return to quit." << endl;  // Do something meanwhile...
+		//////cout << "Press return to quit." << endl;  // Do something meanwhile...
 		//cin.get();
 
 		//releaseSound(sounds[name]); 
@@ -241,7 +241,7 @@ FMOD_RESULT result;
 		playSound(sounds[name], false, chnls[1], ispaused,1.5); 	// Play the sound, with loop mode
 
 
-															////cout << "Press return to quit." << endl;  // Do something meanwhile...
+															//////cout << "Press return to quit." << endl;  // Do something meanwhile...
 															//cin.get();
 
 															//releaseSound(sounds[name]); 
@@ -275,7 +275,7 @@ FMOD_RESULT result;
 // Play the sound, with loop mode
 
 
-															////cout << "Press return to quit." << endl;  // Do something meanwhile...
+															//////cout << "Press return to quit." << endl;  // Do something meanwhile...
 															//cin.get();
 
 															//releaseSound(sounds[name]); 
@@ -295,7 +295,7 @@ FMOD_RESULT result;
 
 		}
 		
-																////cout << "Press return to quit." << endl;  // Do something meanwhile...
+																//////cout << "Press return to quit." << endl;  // Do something meanwhile...
 																//cin.get();
 
 																//releaseSound(sounds[name]); 
