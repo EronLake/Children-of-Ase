@@ -1,13 +1,13 @@
-#include "stdafx.h"
+/*#include "stdafx.h"
 #include "GameMap.h"
 
 
 GameMap::GameMap()
 {
-	mapTopLeft = new Rectangle(Vector2f(0.0, 0.0), 10000.0, 10000.0);
-	mapTopRight = new Rectangle(Vector2f(10000.0, 0.0), 10000.0, 10000.0);
-	mapBottomLeft = new Rectangle(Vector2f(0.0, 10000.0), 10000.0, 10000.0);
-	mapBottomRight = new Rectangle(Vector2f(10000.0, 10000.0), 10000.0, 10000.0);
+	mapTopLeft = new Rectangle(Vector2f(0.0, 0.0), 5000.0, 20000.0);
+	mapTopRight = new Rectangle(Vector2f(20000.0, 0.0), 20000.0, 20000.0);
+	mapBottomLeft = new Rectangle(Vector2f(0.0, 20000.0), 20000.0, 20000.0);
+	mapBottomRight = new Rectangle(Vector2f(20000.0, 20000.0), 20000.0, 20000.0);
 	//river = new Rectangle(Vector2f(0.0, 0.0), 10000.0, 10000.0);
 	//alllocate mem for texture
 	topLeftTex = new Texture();
@@ -24,10 +24,10 @@ GameMap::~GameMap()
 
 void GameMap::loadTexture()
 {
-	topLeftTex->setFile("Assets/Sprites/MapTopLeft.png", 1);
-	topRightTex->setFile("Assets/Sprites/MapTopRight.png", 1);
-	bottomLeftTex->setFile("Assets/Sprites/MapBottomLeft.png", 1);
-	bottomRightTex->setFile("Assets/Sprites/MapBottomRight.png", 1);
+	topLeftTex->setFile("Assets/Sprites/smap1_1.png", 1);
+	topRightTex->setFile("Assets/Sprites/smap1_2.png", 1);
+	bottomLeftTex->setFile("Assets/Sprites/smap2_1.png", 1);
+	bottomRightTex->setFile("Assets/Sprites/smap2_2.png", 1);
 	//riverTex->setFile("River.png");
 }
 
@@ -52,12 +52,12 @@ void GameMap::drawMap(float _x, float _y)
 
 }
 
-
+*/
 
 
 
 /////////////////////////////////NewMapMode/////////////////
-/*
+
 #include "stdafx.h"
 #include "GameMap.h"
 
@@ -68,45 +68,27 @@ GameMap::GameMap()
 	map1_1 = new Rectangle(Vector2f(0.0, 0.0), 5000.0, 5000.0);
 	map1_2 = new Rectangle(Vector2f(5000.0, 0.0), 5000.0, 5000.0);
 	map1_3 = new Rectangle(Vector2f(10000.0, 0.0), 5000.0, 5000.0);
-	map1_4 = new Rectangle(Vector2f(15000.0, 0.0), 5000.0, 5000.0);
-
+	map1_4 = new Rectangle(Vector2f(15000.0, 0.0), 5000.0, 5000.0);	
+	
 	map2_1 = new Rectangle(Vector2f(0.0, 5000.0), 5000.0, 5000.0);
 	map2_2 = new Rectangle(Vector2f(5000.0, 5000.0), 5000.0, 5000.0);
 	map2_3 = new Rectangle(Vector2f(10000.0, 5000.0), 5000.0, 5000.0);
 	map2_4 = new Rectangle(Vector2f(15000.0, 5000.0), 5000.0, 5000.0);
 
-	map3_1 = new Rectangle(Vector2f(0.0, 10000), 5000.0, 5000.0);
-	map3_2 = new Rectangle(Vector2f(5000.0, 10000), 5000.0, 5000.0);
-	map3_3 = new Rectangle(Vector2f(10000.0, 10000), 5000.0, 5000.0);
-	map3_4 = new Rectangle(Vector2f(15000.0, 10000), 5000.0, 5000.0);
+	map3_1 = new Rectangle(Vector2f(0.0, 10000.0), 5000.0, 5000.0);
+	map3_2 = new Rectangle(Vector2f(5000.0, 10000.0), 5000.0, 5000.0);
+	map3_3 = new Rectangle(Vector2f(10000.0, 10000.0), 5000.0, 5000.0);
+	map3_4 = new Rectangle(Vector2f(15000.0, 10000.0), 5000.0, 5000.0);
 
 	map4_1 = new Rectangle(Vector2f(0.0, 15000), 5000.0, 5000.0);
 	map4_2 = new Rectangle(Vector2f(5000.0, 15000), 5000.0, 5000.0);
-	map4_3 = new Rectangle(Vector2f(10000.0, 15000), 5000.0, 5000.0);
-	map4_4 = new Rectangle(Vector2f(15000.0, 15000), 5000.0, 5000.0);
+	map4_3 = new Rectangle(Vector2f(10000.0, 15000.0), 5000.0, 5000.0);
+	map4_4 = new Rectangle(Vector2f(15000.0, 15000.0), 5000.0, 5000.0);
 
 
 	//river = new Rectangle(Vector2f(0.0, 0.0), 10000.0, 10000.0);
 	//alllocate mem for texture
-	map1_1tex = new Texture();
-	map1_2tex = new Texture();
-	map1_3tex = new Texture();
-	map1_4tex = new Texture();
 
-	map2_1tex = new Texture();
-	map2_2tex = new Texture();
-	map2_3tex = new Texture();
-	map2_4tex = new Texture();
-
-	map3_1tex = new Texture();
-	map3_2tex = new Texture();
-	map3_3tex = new Texture();
-	map3_4tex = new Texture();
-
-	map4_1tex = new Texture();
-	map4_2tex = new Texture();
-	map4_3tex = new Texture();
-	map4_4tex = new Texture();
 
 	//riverTex = new Texture();
 }
@@ -116,33 +98,57 @@ GameMap::~GameMap()
 {
 }
 
+void GameMap::setTextures() {
+	map1_1tex = Containers::texture_table["map1_1"];
+	map1_2tex = Containers::texture_table["map1_2"];
+	map1_3tex = Containers::texture_table["map1_3"];
+	map1_4tex = Containers::texture_table["map1_4"];
+
+	map2_1tex = Containers::texture_table["map2_1"];
+	map2_2tex = Containers::texture_table["map2_2"];
+	map2_3tex = Containers::texture_table["map2_3"];
+	map2_4tex = Containers::texture_table["map2_4"];
+
+	map3_1tex = Containers::texture_table["map3_1"];
+	map3_2tex = Containers::texture_table["map3_2"];
+	map3_3tex = Containers::texture_table["map3_3"];
+	map3_4tex = Containers::texture_table["map3_4"];
+
+	map4_1tex = Containers::texture_table["map4_1"];
+	map4_2tex = Containers::texture_table["map4_2"];
+	map4_3tex = Containers::texture_table["map4_3"];
+	map4_4tex = Containers::texture_table["map4_4"];
+}
+
 void GameMap::loadTexture()
 {
-	map1_1tex->setFile("Assets/Sprites/map1_1.png", 1);
-	map1_2tex->setFile("Assets/Sprites/map1_2.png", 1);
-	map1_3tex->setFile("Assets/Sprites/map1_3.png", 1);
-	map1_4tex->setFile("Assets/Sprites/map1_4.png", 1);
+	map1_1tex->setFile("Assets/Sprites/smap1_1.png", 1);
+	map1_2tex->setFile("Assets/Sprites/smap1_2.png", 1);
+	map1_3tex->setFile("Assets/Sprites/smap1_3.png", 1);
+	map1_4tex->setFile("Assets/Sprites/smap1_4.png", 1);
 
-	map2_1tex->setFile("Assets/Sprites/map2_1.png", 1);
-	map2_2tex->setFile("Assets/Sprites/map2_2.png", 1);
-	map2_3tex->setFile("Assets/Sprites/map2_3.png", 1);
-	map2_4tex->setFile("Assets/Sprites/map2_4.png", 1);
+	map2_1tex->setFile("Assets/Sprites/smap2_1.png", 1);
+	map2_2tex->setFile("Assets/Sprites/smap2_2.png", 1);
+	map2_3tex->setFile("Assets/Sprites/smap2_3.png", 1);
+	map2_4tex->setFile("Assets/Sprites/smap2_4.png", 1);
 
-	map3_1tex->setFile("Assets/Sprites/map3_1.png", 1);
-	map3_2tex->setFile("Assets/Sprites/map3_2.png", 1);
-	map3_3tex->setFile("Assets/Sprites/map3_3.png", 1);
-	map3_4tex->setFile("Assets/Sprites/map3_4.png", 1);
+	map3_1tex->setFile("Assets/Sprites/smap3_1.png", 1);
+	map3_2tex->setFile("Assets/Sprites/smap3_2.png", 1);
+	map3_3tex->setFile("Assets/Sprites/smap3_3.png", 1);
+	map3_4tex->setFile("Assets/Sprites/smap3_4.png", 1);
 
-	map4_1tex->setFile("Assets/Sprites/map4_1.png", 1);
-	map4_2tex->setFile("Assets/Sprites/map4_2.png", 1);
-	map4_3tex->setFile("Assets/Sprites/map4_3.png", 1);
-	map4_4tex->setFile("Assets/Sprites/map4_4.png", 1);
+	map4_1tex->setFile("Assets/Sprites/smap4_1.png", 1);
+	map4_2tex->setFile("Assets/Sprites/smap4_2.png", 1);
+	map4_3tex->setFile("Assets/Sprites/smap4_3.png", 1);
+	map4_4tex->setFile("Assets/Sprites/smap4_4.png", 1);
 	//riverTex->setFile("River.png");
 }
 
 void GameMap::setSprite()
 {
 	map1_1->sprite.setTexture(map1_1tex);
+	//std::cout << map1_1tex->
+//	map1_1tex->setFile("Assets/Sprites/map1_2.png", 1);
 	map1_2->sprite.setTexture(map1_2tex);
 	map1_3->sprite.setTexture(map1_3tex);
 	map1_4->sprite.setTexture(map1_4tex);
@@ -193,7 +199,7 @@ void GameMap::drawMap(float _x, float _y)
 
 	
 
-}*/
+}
 
 
 

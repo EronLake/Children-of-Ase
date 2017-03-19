@@ -16,8 +16,8 @@ RenderHelper::RenderHelper(QuadTree * QT)
 	convoGui->loadTexture();
 	convoGui->setSprite();
 	gmap = new GameMap();
-	gmap->loadTexture();
-	gmap->setSprite();
+//	gmap->loadTexture();
+//	gmap->setSprite();
 }
 
 RenderHelper::~RenderHelper()
@@ -35,6 +35,15 @@ void RenderHelper::initCamera(WorldObj * player)
 	////cout << "Camera has coord " << camera->getX() << ", " << camera->getY() << " and width and height of " << camera->getWidth() << ", " << camera->getHeight() << endl;
 
 
+}
+
+int RenderHelper::init_map(WorldObj* obj)
+{
+	gmap->setTextures();
+	gmap->loadTexture();
+	gmap->setSprite();
+
+	return 0;
 }
 
 // Don't need to pass in obj to draw frame, but will pass in to keep consistent style in map and pass in player to get camera coord.
