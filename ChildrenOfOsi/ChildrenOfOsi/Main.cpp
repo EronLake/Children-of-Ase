@@ -51,6 +51,7 @@
 
 #include "AIManager.h"
 #include "AIController.h"
+#include "PartyManager.h"
 
 #include "ObjConfig.h"
 #include "ActionPool.h"
@@ -175,6 +176,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 
 	DummyController* DumM = new DummyController(mLog, tBuffer);
 	PhysicsManager* PhysM = new PhysicsManager(mLog, tBuffer, _QuadTree);
+	PartyManager* PartyM = new PartyManager(gameplay_functions, Alex);
 	
 	memManager* memM = new memManager(mLog, tBuffer);
 	TestManager* TestM = new TestManager(mLog, tBuffer);
@@ -212,7 +214,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	ObjConfig::import_config(recVec_ptr, gameplay_functions, tBuffer);
 	
 	DialogueConfig::import_config(gameplay_functions, tBuffer);
-	
+	DialogueController::getDialogueHelper()->fill_conversations();
 	//WorldObj* barrel = new WorldObj(Vector2f(5200, 3900), 75, 75);
 	//Alex->name = SHANGO;
 	gameplay_functions->add_texture("map1_1", 0, 0, 0);
@@ -1005,10 +1007,13 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	bool OSAtkMode = true;
 	short M = GetKeyState('M') >> 15;
 	Party* party = new Party();
+	PartyM->addToPartyList(party);
 	Party* party2 = new Party();
+	PartyM->addToPartyList(party2);
 	party2->addToParty(silverSoldier, true);
 	Party* party3 = new Party();
 	Party* party4 = new Party();
+	PartyM->addToPartyList(party3);
 	party3->addToParty(silverSoldier2, true);
 	Village* v1 = new Village();
 	Village* v2 = new Village();
@@ -1106,12 +1111,14 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 			}
 		}*/
 		combatControl->checkParties();
-		combatControl->follow(oya, state);
+		//combatControl->follow(oya, state);
 		//combatControl->follow(silverSoldier, state);
 		combatControl->follow(staticRec, state);
-		if (silverSoldier != nullptr)combatControl->fight(silverSoldier, state);
-		if (silverSoldier2 != nullptr)combatControl->fight(silverSoldier2, state);
 		if (blueSoldier != nullptr)combatControl->fight(blueSoldier, state);
+		//combatControl->follow(staticRec, state);
+		combatControl->fight(silverSoldier, state);
+		combatControl->fight(silverSoldier2, state);
+		PartyM->updateSoliderStatus();
 
 		/*
 		//cout << "Alex's position is " << Alex->getLoc().getXloc() << ", " << Alex->getLoc().getYloc() << endl;
