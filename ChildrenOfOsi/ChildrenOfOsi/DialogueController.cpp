@@ -23,6 +23,7 @@ bool init_conv = false;
 
 DialogueController::DialogueController()
 {
+
 }
 
 
@@ -194,4 +195,9 @@ void DialogueController::exitDialogue()
 		init_conv = true;
 	else
 	    init_conv = false;
+}
+
+DialogueHelper* DialogueController::getDialogueHelper()
+{
+	return &dialogue;
 }

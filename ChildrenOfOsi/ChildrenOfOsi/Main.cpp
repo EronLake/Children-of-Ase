@@ -150,6 +150,7 @@ int main() {
 
 void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 {
+
 	Rectangle::tex->setFile("Assets/Sprites/betterborder.png", 1);
 	
 	//Player* Alex = new Player(SHANGO, Vector2f(4900.0, 3700.0), 40.0, 40.0);	//init player
@@ -168,9 +169,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	RenderManager* RenM = new RenderManager(mLog, tBuffer, _QuadTree);
 
 	ChildrenOfOsi* gameplay_functions = new ChildrenOfOsi(mLog, tBuffer);
-
-  
-
+	//DialogueConfig::import_config(gameplay_functions, tBuffer);
 	
 	//create Managers and add to Manager table
 
@@ -204,15 +203,13 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 //	Hero* alex = Containers::hero_table["Shango"];
 //	Player* Alex = dynamic_cast<Player*>(alex);
     Input* iController = new Input(gameplay_functions, Alex, RenM->renderHelper, tBuffer, recVec_ptr);
-
 	//DialogueGui* convoGui = new DialogueGui();
-
 	//Player* Alex = new Player(1000,600, true);	//init player
 	//WorldObj* Alex = new WorldObj(1000, 600, true);
 
 	//ObjConfig::import_config(recVec_ptr, gameplay_functions, tBuffer);
-	
 	DialogueConfig::import_config(gameplay_functions, tBuffer);
+	DialogueController::getDialogueHelper()->fill_conversations();
 	
 	//WorldObj* barrel = new WorldObj(Vector2f(5200, 3900), 75, 75);
 	//Alex->name = SHANGO;
