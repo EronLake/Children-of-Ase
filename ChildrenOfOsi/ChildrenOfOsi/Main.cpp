@@ -51,6 +51,7 @@
 
 #include "AIManager.h"
 #include "AIController.h"
+#include "PartyManager.h"
 
 #include "ObjConfig.h"
 #include "ActionPool.h"
@@ -175,6 +176,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 
 	DummyController* DumM = new DummyController(mLog, tBuffer);
 	PhysicsManager* PhysM = new PhysicsManager(mLog, tBuffer, _QuadTree);
+	PartyManager* PartyM = new PartyManager(gameplay_functions);
 	
 	memManager* memM = new memManager(mLog, tBuffer);
 	TestManager* TestM = new TestManager(mLog, tBuffer);
@@ -718,7 +720,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	silverSoldier->melee->setWidth(50);
 	silverSoldier->melee->setHeight(50);
 	silverSoldier->melee->setStaminaCost(90);
-	silverSoldier->setHealth(1000);
+	silverSoldier->setHealth(50);
 
 	silverSoldier->addAttackType(rockThrow);
 	silverSoldier->melee->sprite.setTexture(border);
@@ -734,7 +736,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	silverSoldier2->melee->setWidth(50);
 	silverSoldier2->melee->setHeight(50);
 	silverSoldier2->melee->setStaminaCost(90);
-	silverSoldier2->setHealth(1000);
+	silverSoldier2->setHealth(50);
 
 	silverSoldier2->addAttackType(rockThrow);
 	silverSoldier2->melee->sprite.setTexture(border);
@@ -904,9 +906,12 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	bool OSAtkMode = true;
 	short M = GetKeyState('M') >> 15;
 	Party* party = new Party();
+	PartyM->addToPartyList(party);
 	Party* party2 = new Party();
+	PartyM->addToPartyList(party2);
 	party2->addToParty(silverSoldier, true);
 	Party* party3 = new Party();
+	PartyM->addToPartyList(party3);
 	party3->addToParty(silverSoldier2, true);
 	Village* v1 = new Village();
 	Village* v2 = new Village();
@@ -997,6 +1002,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 		combatControl->follow(staticRec, state);
 		combatControl->fight(silverSoldier, state);
 		combatControl->fight(silverSoldier2, state);
+		PartyM->updateSoliderStatus();
 
 		/*
 		//cout << "Alex's position is " << Alex->getLoc().getXloc() << ", " << Alex->getLoc().getYloc() << endl;

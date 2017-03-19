@@ -23,7 +23,7 @@ class Soldier: public NPC
 
   int getInstances() { return instances; };
 
-  Party * getParty() { return party; };
+  Party* getParty() { return party; };
   bool getInCombat() { return inCombat; };
   bool getEvade() { return evade; };
   bool getHold() { return holdPos; };
