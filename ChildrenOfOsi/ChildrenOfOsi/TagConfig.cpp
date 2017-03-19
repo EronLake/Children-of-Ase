@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "TagConfig.h"
+#include "Containers.h"
 
 
 TagConfig::TagConfig()
@@ -18,12 +19,31 @@ void TagConfig::import_config(ChildrenOfOsi* gameplay_func, TaskBuffer* tBuffer)
 	Json::Reader reader;
 
 
-	std::ifstream file("Dialogue_config.json");
+	std::ifstream file("Tag_config.json");
 	file >> root;
-	for (auto itr = root.begin(); itr != root.end(); itr++)
-	{
-		set_tag(gameplay_func, tBuffer, (*itr)["name"].asString());
-	}
+	int x = 1;
+	std::string tempStr = "Tag_";
+	std::string tmpTag = "topic_";
+	std::vector<std::string> topicVec;
+	for (auto itor = root["Tag"].begin(); itor != root["Tag"].end(); itor++){
+		int y = 1;
+		std::string tmpStr_1 = tempStr;
+		int temp_x = x;
+		std::string tmpStr_2 = std::to_string(temp_x);
+		std::string tmpStr_3 = tmpStr_1 + tmpStr_2;
+		for (auto itor = root[tmpStr_3]["topics"].begin(); itor != root[tmpStr_3]["topics"].end(); itor++)
+		{
+			std::string tmpTag_1 = tmpTag;
+			int temp_y = y;
+			std::string tmpTag_2 = std::to_string(temp_y);
+			std::string tmpTag_3 = tmpTag_1 + tmpTag_2;
+			topicVec.push_back((*itor)[tmpTag_3].asString());
+			y++;
+		}
+		
+	set_tag(gameplay_func, tBuffer, (*itor)["name"].asString(), topicVec);
+	x++;
+    }
 	std::cout << "done" << endl;
 
 
@@ -31,16 +51,15 @@ void TagConfig::import_config(ChildrenOfOsi* gameplay_func, TaskBuffer* tBuffer)
 
 }
 
-void TagConfig::set_tag(ChildrenOfOsi* gameplay_func, TaskBuffer* tBuffer, std::string name)
+void TagConfig::set_tag(ChildrenOfOsi* gameplay_func, TaskBuffer* tBuffer, std::string name, std::vector<std::string> topicVec)
 {
 
-		//gameplay_func->add_tag(name);
+		gameplay_func->add_tag(topicVec, name);
 
 		//set file takes up memory
 		tBuffer->run();
 		//Containers::texture_table[tex_file]->setFile("Assets/Sprites/" + tex_file + ".png", frame_num);
-
-
+	
 	/* For Spencer
 	if (tex_file == "){
 	gameplay_func->add_worldObj(name, 100 * x, 100 * y, true);
