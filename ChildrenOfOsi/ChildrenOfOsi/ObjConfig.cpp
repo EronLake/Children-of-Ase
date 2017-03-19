@@ -2,7 +2,7 @@
 #include "ObjConfig.h"
 #include <ctime>
 
-bool MakeForest = false;
+bool MakeForest = true;
 bool PlacePlant = false;
 bool rand_gen = false;
 float topLeftx;
@@ -13,7 +13,7 @@ float botLeftx;
 float botLefty;
 float botRightx;
 float botRighty;
-float whynot;
+
 
 ObjConfig::ObjConfig()
 {
@@ -39,6 +39,7 @@ void ObjConfig::import_config(vector<WorldObj*>* recVec, ChildrenOfOsi* gameplay
 
 		std::ifstream file("config.json");
 		file >> root;
+		
 		for (auto itr = root.begin(); itr != root.end(); itr++)
 		{
 			set_world_obj(recVec, gameplay_func, tBuffer, (*itr)["x"].asFloat(), (*itr)["y"].asFloat(),
@@ -47,6 +48,7 @@ void ObjConfig::import_config(vector<WorldObj*>* recVec, ChildrenOfOsi* gameplay
 				(*itr)["frame_num"].asInt(),
 				(*itr)["bodyx1"].asFloat(), (*itr)["bodyx2"].asFloat(),
 				(*itr)["bodyy1"].asFloat(), (*itr)["bodyy2"].asFloat());
+			
 		}
 		std::cout << "done" << endl;
 	}
@@ -138,7 +140,7 @@ void ObjConfig::make_stuff(vector<WorldObj*>* recVec, ChildrenOfOsi* gameplay_fu
 					"Jungle_scrub4"
 				};
 				WhichSprite = PlantSprites[rand() % 12];
-				set_world_obj(recVec, gameplay_func, tBuffer, randomX, randomY, 50, 50, TreeName.str(), WhichSprite, 1, 1000, 1000, 1000, 1000);
+				set_world_obj(recVec, gameplay_func, tBuffer, randomX, randomY, 50, 50, TreeName.str(), WhichSprite, 1, 500, 500, 500, 500);
 
 			}
 			else {
@@ -150,7 +152,7 @@ void ObjConfig::make_stuff(vector<WorldObj*>* recVec, ChildrenOfOsi* gameplay_fu
 					"Jungle_Tree_4",
 					"Jungle_Tree_5" };
 				WhichSprite = TreeSprites[rand() % 5];
-				set_world_obj(recVec, gameplay_func, tBuffer, randomX, randomY, 500.0, 500.0, TreeName.str(), WhichSprite, 1, 1000, 1000, 1000, 1000);
+				set_world_obj(recVec, gameplay_func, tBuffer, randomX, randomY, 500.0, 500.0, TreeName.str(), WhichSprite, 1, 20, 20, 20, 20);
 			}
 
 
@@ -195,11 +197,11 @@ void ObjConfig::set_world_obj(vector<WorldObj*>* recVec, ChildrenOfOsi* gameplay
 
 	LOG(Containers::texture_table[tex_file]);
 	if (Containers::texture_table[tex_file]) {
-		//std::cout << tex_file << "Already in Table /////////////////////////////" << endl;
+		std::cout << tex_file << "Already in Table /////////////////////////////" << endl;
 	}
 	else
 	{
-		//std::cout << tex_file << "Not in Table /////////////////////////////" << endl;
+		std::cout << tex_file << "Not in Table /////////////////////////////" << endl;
 		gameplay_func->add_texture(tex_file, 0, 0, 0);
 
 		//set file takes up memory
@@ -208,13 +210,7 @@ void ObjConfig::set_world_obj(vector<WorldObj*>* recVec, ChildrenOfOsi* gameplay
 
 	}
 
-	/* For Spencer
-	if (tex_file == "){
-	gameplay_func->add_worldObj(name, 100 * x, 100 * y, true);
-	gameplay_func->add_worldObj(name, 100 * x, 100 * y, true);
-	gameplay_func->add_worldObj(name, 100 * x, 100 * y, true);
-	}
-	*/
+
 
 	gameplay_func->add_worldObj(name, 100 * x, 100 * y, true);
 

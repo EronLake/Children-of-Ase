@@ -1,4 +1,4 @@
-#pragma once
+/*#pragma once
 #include "common.h"
 #include "Rectangle.h"
 #include "GameWindow.h"
@@ -25,19 +25,21 @@ private:
 	Texture* bottomRightTex;
 	//Texture* riverTex;
 
+};
 
-
-/*
+*/
 #pragma once
 #include "common.h"
 #include "Rectangle.h"
 #include "GameWindow.h"
+#include "Containers.h"
 
 class GameMap
 {
 public:
 	GameMap();
 	~GameMap();
+	void setTextures();
 	void loadTexture();
 	void setSprite();
 	void drawMap(float _x, float _y);
@@ -86,6 +88,5 @@ private:
 	Texture* map4_4tex;
 
 	//Texture* riverTex;
-};*/
-
 };
+

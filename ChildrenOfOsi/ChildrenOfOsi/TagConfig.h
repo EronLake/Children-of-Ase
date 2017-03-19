@@ -14,7 +14,7 @@ public:
 	~TagConfig();
 
 	static void import_config(ChildrenOfOsi* gameplay_func, TaskBuffer* tBuffer);
-	static void set_tag(ChildrenOfOsi* gameplay_func, TaskBuffer* tBuffer, std::string name);
+	static void set_tag(ChildrenOfOsi* gameplay_func, TaskBuffer* tBuffer, std::string name, std::vector<std::string> topicVec);
 
 };
 

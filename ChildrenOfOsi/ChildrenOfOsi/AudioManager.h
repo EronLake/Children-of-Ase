@@ -12,12 +12,15 @@ class AudioManager : public Manager
 {
 private:
 	SoundSystem* soundHelper;
-	typedef int (SoundSystem::*fn_sound_ptr)();
-	typedef int (SoundSystem::*fn_ptr)(std::string name);
-	typedef std::map<std::string, fn_ptr> functionMapper;
-	typedef std::map<std::string, fn_sound_ptr> soundMapper;
-	soundMapper sound_map;
-	functionMapper function_map;
+	typedef int (SoundSystem::*fn_ptr_0)();
+	typedef int (SoundSystem::*fn_ptr_1)(std::string name);
+	typedef int (SoundSystem::*fn_ptr_2)(char* from, char* to);
+	typedef std::map<std::string, fn_ptr_0> zeroparamMapper;
+	typedef std::map<std::string, fn_ptr_1> oneparamMapper;
+	typedef std::map<std::string, fn_ptr_2> twoparamMapper;
+	zeroparamMapper map0;
+	oneparamMapper map1;
+	twoparamMapper map2;
 
 public:
 	AudioManager(MessageLog* _mLog, TaskBuffer* _tBuffer);

@@ -8,10 +8,13 @@ RenderManager::RenderManager(MessageLog * _mLog, TaskBuffer * _tBuffer) : Manage
 	LOG("RenderManager W/QT Object Constructed");
 }
 
-RenderManager::RenderManager(MessageLog * _mLog, TaskBuffer * _tBuffer, QuadTree * _renderQuadTree) : Manager(_mLog, _tBuffer)
+RenderManager::RenderManager(MessageLog * _mLog, TaskBuffer * _tBuffer, QuadTree * _renderQuadTree, ChildrenOfOsi* game_f) : Manager(_mLog, _tBuffer)
 {
 	LOG("RenderingManager W/QT Object Constructed");
+	
+
 	renderHelper = new RenderHelper(_renderQuadTree);
+	task_map["Init_Map"] = &RenderHelper::init_map;
 	task_map["Draw_Frame"] = &RenderHelper::draw_frame;
 	task_map["Move_Up"] = &RenderHelper::sprite_up;
 	task_map["Move_Up_Right"] = &RenderHelper::sprite_right;
@@ -30,6 +33,9 @@ RenderManager::RenderManager(MessageLog * _mLog, TaskBuffer * _tBuffer, QuadTree
 	task_map["GHeart"] = &RenderHelper::setHeartGlow;
 	task_map["GFace"] = &RenderHelper::setFaceGlow;
 	task_map["GQuestion"] = &RenderHelper::setQuestionGlow;
+	
+
+	
 
 }
 

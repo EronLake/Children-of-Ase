@@ -62,6 +62,8 @@
 
 using namespace std;
 
+
+
 Texture* Rectangle::tex = new Texture();
 //void testQuadTree();
 //bool checkCollision(WorldObj *recA, WorldObj *recB);	//given two bounding boxes, check if they collide
@@ -150,7 +152,6 @@ int main() {
 
 void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 {
-
 	Rectangle::tex->setFile("Assets/Sprites/betterborder.png", 1);
 	
 	//Player* Alex = new Player(SHANGO, Vector2f(4900.0, 3700.0), 40.0, 40.0);	//init player
@@ -166,10 +167,9 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	TaskBuffer* tBuffer = new TaskBuffer(mLog);
 
 	//need this here for map editor
-	RenderManager* RenM = new RenderManager(mLog, tBuffer, _QuadTree);
-
 	ChildrenOfOsi* gameplay_functions = new ChildrenOfOsi(mLog, tBuffer);
-	//DialogueConfig::import_config(gameplay_functions, tBuffer);
+
+	RenderManager* RenM = new RenderManager(mLog, tBuffer, _QuadTree, gameplay_functions);
 	
 	//create Managers and add to Manager table
 
@@ -203,17 +203,43 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 //	Hero* alex = Containers::hero_table["Shango"];
 //	Player* Alex = dynamic_cast<Player*>(alex);
     Input* iController = new Input(gameplay_functions, Alex, RenM->renderHelper, tBuffer, recVec_ptr);
+
 	//DialogueGui* convoGui = new DialogueGui();
+
 	//Player* Alex = new Player(1000,600, true);	//init player
 	//WorldObj* Alex = new WorldObj(1000, 600, true);
 
-	//ObjConfig::import_config(recVec_ptr, gameplay_functions, tBuffer);
+	ObjConfig::import_config(recVec_ptr, gameplay_functions, tBuffer);
+	
 	DialogueConfig::import_config(gameplay_functions, tBuffer);
-	DialogueController::getDialogueHelper()->fill_conversations();
 	
 	//WorldObj* barrel = new WorldObj(Vector2f(5200, 3900), 75, 75);
 	//Alex->name = SHANGO;
-	
+	gameplay_functions->add_texture("map1_1", 0, 0, 0);
+	gameplay_functions->add_texture("map1_2", 0, 0, 0);
+	gameplay_functions->add_texture("map1_3", 0, 0, 0);
+	gameplay_functions->add_texture("map1_4", 0, 0, 0);
+
+	gameplay_functions->add_texture("map2_1", 0, 0, 0);
+	gameplay_functions->add_texture("map2_2", 0, 0, 0);
+	gameplay_functions->add_texture("map2_3", 0, 0, 0);
+	gameplay_functions->add_texture("map2_4", 0, 0, 0);
+
+	gameplay_functions->add_texture("map3_1", 0, 0, 0);
+	gameplay_functions->add_texture("map3_2", 0, 0, 0);
+	gameplay_functions->add_texture("map3_3", 0, 0, 0);
+	gameplay_functions->add_texture("map3_4", 0, 0, 0);
+
+	gameplay_functions->add_texture("map4_1", 0, 0, 0);
+	gameplay_functions->add_texture("map4_2", 0, 0, 0);
+	gameplay_functions->add_texture("map4_3", 0, 0, 0);
+	gameplay_functions->add_texture("map4_4", 0, 0, 0);
+
+	tBuffer->run();
+
+	gameplay_functions->init_map(Alex);
+
+	tBuffer->run();
 
     Texture* objTexture = new Texture();
 
@@ -646,6 +672,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	silverSoldier->offsetBody(0, 60, 60, 75, 50);
 	silverSoldier->setInteractable(true);
 	silverSoldier->setName("silverSoldier");
+  // silverSoldier->setHealth(50);
 
 	silverSoldier2->sprite.setTexture(silverSoldierTexture);
 	silverSoldier2->sprite.setIdleTexture(silverSoldierIdleTex);
@@ -673,6 +700,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	silverSoldier2->offsetBody(0, 60, 60, 75, 50);
 	silverSoldier2->setInteractable(true);
 	silverSoldier2->setName("silverSoldier");
+  // silverSoldier2->setHealth(50);
 
 	gameplay_functions->add_Attack(silverSoldier->getKey(), silverSoldier->body[0].getX(), silverSoldier->body[0].getY(), true, 10);
 	gameplay_functions->add_Attack(silverSoldier2->getKey(), silverSoldier2->body[0].getX(), silverSoldier2->body[0].getY(), true, 10);
@@ -689,6 +717,8 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	silverSoldier->melee->setKeep(true);
 	silverSoldier->melee->setWidth(50);
 	silverSoldier->melee->setHeight(50);
+	silverSoldier->melee->setStaminaCost(90);
+	silverSoldier->setHealth(1000);
 
 	silverSoldier->addAttackType(rockThrow);
 	silverSoldier->melee->sprite.setTexture(border);
@@ -703,14 +733,16 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	silverSoldier2->melee->setKeep(true);
 	silverSoldier2->melee->setWidth(50);
 	silverSoldier2->melee->setHeight(50);
+	silverSoldier2->melee->setStaminaCost(90);
+	silverSoldier2->setHealth(1000);
 
 	silverSoldier2->addAttackType(rockThrow);
 	silverSoldier2->melee->sprite.setTexture(border);
 	//silverSoldier->addAttackType(spin);
 
 	//combatControl->addtoTargets(Alex);
-	combatControl->addtoTargets(silverSoldier);
-	combatControl->addtoTargets(silverSoldier2);
+	//combatControl->addtoTargets(silverSoldier);
+	//combatControl->addtoTargets(silverSoldier2);
 
 	//VisibilityGraph graph;
 	ai->graph.vertices = vertices;
@@ -867,7 +899,6 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 
 	Vector2f silverSoldierInitialLoc = silverSoldier->getLoc();
 	Vector2f silverSoldier2InitialLoc = silverSoldier2->getLoc();
-
 	silverSoldier->setEvade(false);
 	silverSoldier2->setEvade(false);
 	bool OSAtkMode = true;
@@ -902,10 +933,11 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	LOG("PAST WINDOW INIT ***********************");
 	clock_t start_tick, current_ticks, delta_ticks;
 	clock_t fps = 0;
-	int fs = 24;
+	int fs = 120;
 	int wait_time = fs*3; //always wait 3 seconds
 	int count = 0;
 	int state = 0;
+
 	while (osi::GameWindow::isRunning()) {
 		start_tick = clock();
 		_QuadTree->clear();
@@ -917,6 +949,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	
 		}
 		state = DialogueController::getState();
+		std::cout << "X: " << Alex->getX() << "Y: " << Alex->getY() << std::endl;
 
 	/*	if (staticRec->destination != Vector2f(0, 0)) { //Hero has a destination
 			if (staticRec->waypoint != Vector2f(0,0) && state == 0) { //Hero has a waypoint to the desination, and not in dialog
@@ -1295,11 +1328,11 @@ void ALEX_LOOP(QuadTree* _QuadTree) {
 	//psuedo Gameloop
 	MessageLog* mLog = new MessageLog();
 	TaskBuffer* tBuffer = new TaskBuffer(mLog);
-
-	//need this for map editor
-	RenderManager* RenM = new RenderManager(mLog, tBuffer, _QuadTree);
-
 	ChildrenOfOsi* gameplay_functions = new ChildrenOfOsi(mLog, tBuffer);
+	//need this for map editor
+	RenderManager* RenM = new RenderManager(mLog, tBuffer, _QuadTree, gameplay_functions);
+
+	
 	Input* iController = new Input(gameplay_functions, Alex, RenM->renderHelper, tBuffer, &recVec);
 	//create Managers and add to Manager table
 
@@ -1389,9 +1422,10 @@ void ERONS_LOOP(QuadTree* _QuadTree) {
 	TaskBuffer* tBuffer = new TaskBuffer(mLog);
 
 	//need this here for map editor
-	RenderManager* RenM = new RenderManager(mLog, tBuffer, _QuadTree);
-
 	ChildrenOfOsi* gameplay_functions = new ChildrenOfOsi(mLog, tBuffer);
+	RenderManager* RenM = new RenderManager(mLog, tBuffer, _QuadTree, gameplay_functions);
+
+	
 	Input* iController = new Input(gameplay_functions, Alex, RenM->renderHelper, tBuffer, recVec_ptr);
 	//create Managers and add to Manager table
 
@@ -2184,9 +2218,10 @@ void ANDREWS_LOOP(QuadTree* _QuadTree) {
 	TaskBuffer* tBuffer = new TaskBuffer(mLog);
 
 	//need this here for map editor
-	RenderManager* RenM = new RenderManager(mLog, tBuffer, _QuadTree);
-
 	ChildrenOfOsi* gameplay_functions = new ChildrenOfOsi(mLog, tBuffer);
+	RenderManager* RenM = new RenderManager(mLog, tBuffer, _QuadTree, gameplay_functions);
+
+	
 	Input* iController = new Input(gameplay_functions, Alex, RenM->renderHelper, tBuffer, &recVec);
 	//create Managers and add to Manager table
 

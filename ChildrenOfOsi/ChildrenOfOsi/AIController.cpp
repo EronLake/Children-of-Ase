@@ -70,7 +70,7 @@ void AIController::init_plans() {
 		}
 
 		// Go through each ideal end state and generate a milestone
-		StateList* end_states = planner->get_end_state_map();
+		EndStateList* end_states = planner->get_end_state_map();
 		goals = planner->get_end_states();
 		for (auto iter : *end_states)
 		{
@@ -132,7 +132,7 @@ void AIController::execute() {
 		Action* curr_action = planner->get_current_action();
 		Action* curr_goal = &planner->get_current_end_state();
 
-		StateList* end_states = planner->get_end_state_map();
+		EndStateList* end_states = planner->get_end_state_map();
 		MilestoneList* milestones = planner->get_milestone_map();
 
 		//std:://cout << "Executing action " << curr_action->name << std::endl;

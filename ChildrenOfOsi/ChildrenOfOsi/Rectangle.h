@@ -1,6 +1,6 @@
 #pragma once
 
-//#include "common.h"
+#include "common.h"
 #include "stdafx.h"
 #include "Vector2f.h"
 #include "Sprite.h"
@@ -22,7 +22,7 @@ public:
 	Rectangle() { sprite.setTexture(tex); }
 	~Rectangle() {}
 	Sprite sprite;
-	static Texture* tex;
+    static Texture* tex;
 	float getX() { return topLeft.getXloc(); }
 	float getY() { return topLeft.getYloc(); }
 	float getWidth() { return width; }

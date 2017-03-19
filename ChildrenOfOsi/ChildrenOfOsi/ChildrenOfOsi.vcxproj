@@ -186,6 +186,7 @@
     <ClInclude Include="DialougeTestSuite.h" />
     <ClInclude Include="DummyController.h" />
     <ClInclude Include="Party.h" />
+    <ClInclude Include="PartyManager.h" />
     <ClInclude Include="Tag.h" />
     <ClInclude Include="TagConfig.h" />
     <ClInclude Include="Village.h" />
@@ -265,6 +266,7 @@
     <ClCompile Include="DialougeTestSuite.cpp" />
     <ClCompile Include="DummyController.cpp" />
     <ClCompile Include="Party.cpp" />
+    <ClCompile Include="PartyManager.cpp" />
     <ClCompile Include="Tag.cpp" />
     <ClCompile Include="TagConfig.cpp" />
     <ClCompile Include="Village.cpp" />
