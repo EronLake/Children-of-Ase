@@ -2,10 +2,12 @@
 #include "common.h"
 #include "Hero.h"
 #include "json.h"
+#include "ConversationPoint.h"
 
 
 typedef std::vector<std::string> dialogue_point;
 typedef std::vector<std::string> dialogue_template;
+
 
 class DialogueHelper
 {

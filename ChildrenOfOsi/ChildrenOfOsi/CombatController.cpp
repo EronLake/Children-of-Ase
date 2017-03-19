@@ -48,21 +48,24 @@ void CombatController::fight(Soldier* sold1, int state) {
 				break;
 			}
 		}*/
+		if (sold1->getCurrentEnemy() != nullptr) {
+			if (sold1->getCool()) {
+				sold1->setEvade(false);
+			}
+			else if (sold1->destination == sold1->getLoc() || sold1->destination == Vector2f(0, 0)) {
+				sold1->setEvade(true);
+				//silverSoldier->waypoint = Vector2f(-1, -1);
+				float x = rand() % 300 + 100;
+				int x2 = rand() % 2;
+				float y = rand() % 300 + 100;
+				int y2 = rand() % 2;
+				if (x2 == 0)x = -x;
+				if (y2 == 0)y = -y;
+				cout << "GEY Y () RETURNS ******* " << (sold1->getCurrentEnemy()) << endl;
+				sold1->destination = Vector2f(sold1->getCurrentEnemy()->getX() + x, sold1->getCurrentEnemy()->getY() + y);
+				sold1->waypoint = Vector2f(sold1->getCurrentEnemy()->getX() + x, sold1->getCurrentEnemy()->getY() + y);
+			}
 
-		if (sold1->getCool()) {
-			sold1->setEvade(false);
-		}
-		else if (sold1->destination == sold1->getLoc() || sold1->destination == Vector2f(0, 0)) {
-			sold1->setEvade(true);
-			//silverSoldier->waypoint = Vector2f(-1, -1);
-			float x = rand() % 300 + 100;
-			int x2 = rand() % 2;
-			float y = rand() % 300 + 100;
-			int y2 = rand() % 2;
-			if (x2 == 0)x = -x;
-			if (y2 == 0)y = -y;
-			sold1->destination = Vector2f(sold1->getCurrentEnemy()->getX() + x, sold1->getCurrentEnemy()->getY() + y);
-			sold1->waypoint = Vector2f(sold1->getCurrentEnemy()->getX() + x, sold1->getCurrentEnemy()->getY() + y);
 		}
 
 		//if OS has an enemy, move to the enemy

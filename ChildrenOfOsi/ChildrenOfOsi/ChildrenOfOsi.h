@@ -52,8 +52,8 @@ public:
 	void add_texture(std::string key, float x, float y, bool col);
 	void add_memory(std::string key, int hero_name, int t, int frames, vector<NPC*> p, string cat, string cont, string where, int why, int when);
 	void add_action(std::string key, float x, float y, bool col);
-	void add_tag(std::string key);
-	void add_conv_point(std::string key);
+	void add_tag(std::string topic,std::string temp,std::string key);
+	void add_conv_point(std::string topic,std::string temp,std::string name);
 
 	//functions for audio
 	void play_sound(string name);
@@ -62,7 +62,7 @@ public:
 	void createTaskWithNum(std::string task_name, std::string type, WorldObj * objToUpdate,int num);
 	void ChildrenOfOsi::createTaskWithParams(std::string task_name, std::string type, std::string key, float x, float y, bool col);
 	void ChildrenOfOsi::createTaskAddMem(std::string task_name, std::string type, std::string key, int hero_name, int t, int frames, vector<NPC*> p, string cat, string cont, string where, int why, int when);
-	void ChildrenOfOsi::createTaskNoObj(std::string task_name, std::string type, std::string key);
+	void ChildrenOfOsi::createTaskNoObj(std::string task_name, std::string type, std::string topic, std::string temp, std::string key);
 	//void ChildrenOfOsi::createTaskForAttack(std::string task_name, std::string type, float x, float y, bool col, int d);
 
 };

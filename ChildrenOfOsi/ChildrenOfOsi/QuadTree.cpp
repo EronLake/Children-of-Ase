@@ -11,6 +11,9 @@ QuadTree::QuadTree(unsigned int p_treelv, WorldObj * p_bounds)
 
 QuadTree::~QuadTree()
 {
+	for (int i = 0; i < nodes.size(); i++) {
+		delete(nodes[i]);
+	}
 }
 
 void QuadTree::clear()
@@ -166,6 +169,9 @@ void QuadTree::Insert(WorldObj * myrec)
 	{
 		if (nodes[0] == nullptr)
 		{
+			//for (int i = 0; i < 100; i++) {
+			//	std::cout << "THE LEVEL OF THE TREE IS " << treelv << endl;
+			//}
 			split();
 		}
 

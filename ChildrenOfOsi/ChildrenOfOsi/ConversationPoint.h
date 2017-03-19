@@ -10,10 +10,20 @@ public:
 	Personality* multipliers;
 	Relationship* rel_multipliers;
 	typedef std::vector<std::string> dialogue_point;
+	dialogue_point dpoint;
 	std::unordered_map<std::string, std::shared_ptr<Postcondition>> succ_postconds;
 	std::unordered_map<std::string, std::shared_ptr<Postcondition>> fail_postconds;
 
+	std::string get_topic();
+	std::string get_temp();
+	std::string get_name();
+	void set_topic(std::string val);
+	void set_temp(std::string val);
+	void set_name(std::string val);
 private:
+	std::string topic;
+	std::string temp;
+	std::string my_name;
 	
 };
 

@@ -66,6 +66,7 @@ int RenderHelper::draw_frame(WorldObj * obj)
 		osi::GameWindow::drawSprite(obj->body[i].getX()-camera->getX(), obj->body[i].getY()-camera->getY(), obj->body[i].getWidth(), obj->body[i].getHeight(), obj->getSprite());
 	}*/
 	sortVec();
+	//cout << "******************************************SIZE OF THE OBJVEC TO RENDER IS " << objVec.size() << endl;
 	for (int i = 0; i < objVec.size(); i++) {
 		LOG("BEFORE DRAWING**");
 		////cout << objVec[i]->getX() - camera->getX() << endl;
