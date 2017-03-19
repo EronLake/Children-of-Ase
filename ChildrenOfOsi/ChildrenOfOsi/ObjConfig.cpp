@@ -27,7 +27,7 @@ ObjConfig::~ObjConfig()
 
 void ObjConfig::import_config(vector<WorldObj*>* recVec, ChildrenOfOsi* gameplay_func, TaskBuffer* tBuffer)
 {
-
+	int numberOfWorldObj = 0;
 
 	if (rand_gen) {
 		make_stuff(recVec, gameplay_func, tBuffer);
@@ -48,9 +48,10 @@ void ObjConfig::import_config(vector<WorldObj*>* recVec, ChildrenOfOsi* gameplay
 				(*itr)["frame_num"].asInt(),
 				(*itr)["bodyx1"].asFloat(), (*itr)["bodyx2"].asFloat(),
 				(*itr)["bodyy1"].asFloat(), (*itr)["bodyy2"].asFloat());
-			
+			numberOfWorldObj++;
 		}
 		std::cout << "done" << endl;
+		std::cout << "Number of World Objs "<< numberOfWorldObj << endl;
 	}
 
 
@@ -115,9 +116,13 @@ void ObjConfig::make_stuff(vector<WorldObj*>* recVec, ChildrenOfOsi* gameplay_fu
 		int XDistancs = abs(topLeftx - topRightx);
 		int YDistancs = abs(topLefty - botLefty);
 		srand(time(0));
-		for (int i = 1; i < 100; i++) {
+		for (int i = 100; i < 250; i++) {
 			float randomX;
 			float randomY;
+			int offsetLeft;
+			int offsetRight;
+			int offsetTop;
+			int offsetBot;
 
 			randomX = rand() % XDistancs + topLeftx;
 			randomY = rand() % YDistancs + topLefty;
@@ -151,15 +156,46 @@ void ObjConfig::make_stuff(vector<WorldObj*>* recVec, ChildrenOfOsi* gameplay_fu
 					"Jungle_Tree_3",
 					"Jungle_Tree_4",
 					"Jungle_Tree_5" };
-				WhichSprite = TreeSprites[rand() % 5];
-				set_world_obj(recVec, gameplay_func, tBuffer, randomX, randomY, 500.0, 500.0, TreeName.str(), WhichSprite, 1, 20, 20, 20, 20);
+				int random = rand() % 5;
+				WhichSprite = TreeSprites[random];
+				switch (random) {
+				case 0: 
+					offsetLeft = 180;
+					offsetRight = 180;
+					offsetTop = 350;
+					offsetBot = 95;
+					
+					break;
+				case 1:
+					offsetLeft = 210;
+					offsetRight = 200;
+					offsetTop = 420;
+					offsetBot = 50;
+						
+					break;
+				case 2:
+					offsetLeft = 205;
+					offsetRight = 225;
+					offsetTop = 430;
+					offsetBot = 30;
+					break;
+				case 3:
+					offsetLeft = 205;
+					offsetRight = 225;
+					offsetTop = 430;
+					offsetBot = 30; 
+					break;
+				case 4:
+					offsetLeft = 180;
+					offsetRight = 180;
+					offsetTop = 350;
+					offsetBot = 95;
+					break;
+				}
+				set_world_obj(recVec, gameplay_func, tBuffer, randomX, randomY, 500.0, 500.0, TreeName.str(), WhichSprite, 1, offsetLeft, offsetRight, offsetTop, offsetBot);
+
+
 			}
-
-
-
-
-
-
 
 			std::ofstream file;
 			file.open("config.json");
@@ -171,7 +207,7 @@ void ObjConfig::make_stuff(vector<WorldObj*>* recVec, ChildrenOfOsi* gameplay_fu
 			new_obj["hight"] = 500; new_obj["width"] = 500;
 			new_obj["frame_num"] = 1;
 			new_obj["name"] = TreeName.str(); new_obj["tex_file"] = WhichSprite;
-			new_obj["bodyx1"] = 1000; new_obj["bodyx2"] = 1000; new_obj["bodyy1"] = 1000; new_obj["bodyy2"] = 1000;
+			new_obj["bodyx1"] = offsetLeft; new_obj["bodyx2"] = offsetRight; new_obj["bodyy1"] = offsetTop; new_obj["bodyy2"] = offsetBot;
 
 			root[TreeName.str()] = new_obj;
 
