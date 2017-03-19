@@ -51,6 +51,7 @@
 
 #include "AIManager.h"
 #include "AIController.h"
+#include "PartyManager.h"
 
 #include "ObjConfig.h"
 #include "ActionPool.h"
@@ -175,6 +176,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 
 	DummyController* DumM = new DummyController(mLog, tBuffer);
 	PhysicsManager* PhysM = new PhysicsManager(mLog, tBuffer, _QuadTree);
+	PartyManager* PartyM = new PartyManager(gameplay_functions, Alex);
 	
 	memManager* memM = new memManager(mLog, tBuffer);
 	TestManager* TestM = new TestManager(mLog, tBuffer);
@@ -212,7 +214,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	ObjConfig::import_config(recVec_ptr, gameplay_functions, tBuffer);
 	
 	DialogueConfig::import_config(gameplay_functions, tBuffer);
-	
+	DialogueController::getDialogueHelper()->fill_conversations();
 	//WorldObj* barrel = new WorldObj(Vector2f(5200, 3900), 75, 75);
 	//Alex->name = SHANGO;
 	gameplay_functions->add_texture("map1_1", 0, 0, 0);
@@ -672,6 +674,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	silverSoldier->offsetBody(0, 60, 60, 75, 50);
 	silverSoldier->setInteractable(true);
 	silverSoldier->setName("silverSoldier");
+  // silverSoldier->setHealth(50);
 
 	silverSoldier2->sprite.setTexture(silverSoldierTexture);
 	silverSoldier2->sprite.setIdleTexture(silverSoldierIdleTex);
@@ -699,6 +702,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	silverSoldier2->offsetBody(0, 60, 60, 75, 50);
 	silverSoldier2->setInteractable(true);
 	silverSoldier2->setName("silverSoldier");
+  // silverSoldier2->setHealth(50);
 
 	gameplay_functions->add_Attack(silverSoldier->getKey(), silverSoldier->body[0].getX(), silverSoldier->body[0].getY(), true, 10);
 	gameplay_functions->add_Attack(silverSoldier2->getKey(), silverSoldier2->body[0].getX(), silverSoldier2->body[0].getY(), true, 10);
@@ -716,7 +720,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	silverSoldier->melee->setWidth(50);
 	silverSoldier->melee->setHeight(50);
 	silverSoldier->melee->setStaminaCost(90);
-	silverSoldier->setHealth(1000);
+	silverSoldier->setHealth(30);
 
 	silverSoldier->addAttackType(rockThrow);
 	silverSoldier->melee->sprite.setTexture(border);
@@ -732,7 +736,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	silverSoldier2->melee->setWidth(50);
 	silverSoldier2->melee->setHeight(50);
 	silverSoldier2->melee->setStaminaCost(90);
-	silverSoldier2->setHealth(1000);
+	silverSoldier2->setHealth(30);
 
 	silverSoldier2->addAttackType(rockThrow);
 	silverSoldier2->melee->sprite.setTexture(border);
@@ -902,9 +906,12 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	bool OSAtkMode = true;
 	short M = GetKeyState('M') >> 15;
 	Party* party = new Party();
+	PartyM->addToPartyList(party);
 	Party* party2 = new Party();
+	PartyM->addToPartyList(party2);
 	party2->addToParty(silverSoldier, true);
 	Party* party3 = new Party();
+	PartyM->addToPartyList(party3);
 	party3->addToParty(silverSoldier2, true);
 	Village* v1 = new Village();
 	Village* v2 = new Village();
@@ -935,6 +942,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	int wait_time = fs*3; //always wait 3 seconds
 	int count = 0;
 	int state = 0;
+
 	while (osi::GameWindow::isRunning()) {
 		start_tick = clock();
 		_QuadTree->clear();
@@ -946,6 +954,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	
 		}
 		state = DialogueController::getState();
+		std::cout << "X: " << Alex->getX() << "Y: " << Alex->getY() << std::endl;
 
 	/*	if (staticRec->destination != Vector2f(0, 0)) { //Hero has a destination
 			if (staticRec->waypoint != Vector2f(0,0) && state == 0) { //Hero has a waypoint to the desination, and not in dialog
@@ -990,11 +999,12 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 			}
 		}*/
 		combatControl->checkParties();
-		combatControl->follow(oya, state);
+		//combatControl->follow(oya, state);
 		//combatControl->follow(silverSoldier, state);
-		combatControl->follow(staticRec, state);
+		//combatControl->follow(staticRec, state);
 		combatControl->fight(silverSoldier, state);
 		combatControl->fight(silverSoldier2, state);
+		PartyM->updateSoliderStatus();
 
 		/*
 		//cout << "Alex's position is " << Alex->getLoc().getXloc() << ", " << Alex->getLoc().getYloc() << endl;

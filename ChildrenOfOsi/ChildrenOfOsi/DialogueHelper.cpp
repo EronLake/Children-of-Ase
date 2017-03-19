@@ -16,35 +16,33 @@ DialogueHelper dialogue;
 DialogueHelper::DialogueHelper()
 {
 	srand(time(0)); //ensure good variation of random numbers when using rand()
-	//possible_conv_pts[0].push_back({ "placeholder","placeholder" });
+		//possible_conv_pts[0].push_back({ "placeholder","placeholder" });
 	//possible_conv_pts[1].push_back({ "placeholder","placeholder" });
 	//possible_conv_pts[2].push_back({ "placeholder","placeholder" });
-	for (int i = 0; i < 4; i++) 
+	/*for (int i = 0; i < 4; i++) 
 	{
 		possible_conv_pts.push_back({});
 	}
 	for (int i = 0; i < 4; i++) 
 	{
 		possible_reply_pts.push_back({});
-	}
-
-	possible_conv_pts[3].push_back({ "name","question_name" });
-	possible_conv_pts[3].push_back({ "reason","question_reason" });
-	possible_conv_pts[3].push_back({ "origin","question_origin" });
-	//possible_conv_pts[3].push_back({ "greeting","greeting" });
-
-	possible_reply_pts[3].push_back({ "denied","question_denied" });
-	possible_reply_pts[3].push_back({ "name","introduction" });
-	possible_reply_pts[3].push_back({ "reason","response_reason" });
-	possible_reply_pts[3].push_back({ "origin","response_origin" });
-	/*for (auto itor = Containers::conv_point_table.begin(); itor != Containers::conv_point_table.end(); ++itor) {
-		if (itor->second->dpoint[0].compare("c") == 0) {
-			possible_conv_pts[3].push_back(itor->second->dpoint);
-		}
-		else
-			possible_reply_pts[3].push_back(itor->second->dpoint);
-
 	}*/
+
+	//possible_conv_pts[3].push_back({ "name","question_name" });
+	//possible_conv_pts[3].push_back({ "reason","question_reason" });
+	//possible_conv_pts[3].push_back({ "origin","question_origin" });
+	////possible_conv_pts[3].push_back({ "greeting","greeting" });
+
+	//possible_reply_pts[3].push_back({ "denied","question_denied" });
+	//possible_reply_pts[3].push_back({ "name","introduction" });
+	//possible_reply_pts[3].push_back({ "reason","response_reason" });
+	//possible_reply_pts[3].push_back({ "origin","response_origin" });
+	
+	std::ofstream ofs;
+	ofs.open("dialog_template_output.txt", std::ofstream::out | std::ofstream::app);
+	ofs << "container size: " << Containers::conv_point_table.size() << std::endl;
+	ofs.close();
+
 
 }
 
@@ -266,5 +264,33 @@ std::string DialogueHelper::convert_to_sentence(dialogue_point dialog_pt)
 		sentence += tmp;
 	}
 	return sentence;
+}
+
+void DialogueHelper::fill_conversations() {
+	std::ofstream ofs;
+	ofs.open("dialog_template_output.txt", std::ofstream::out | std::ofstream::app);
+	ofs << "size_fill: " << Containers::conv_point_table.size() << std::endl;
+	for (int i = 0; i < 4; i++)
+	{
+		possible_conv_pts.push_back({});
+	}
+	for (int i = 0; i < 4; i++)
+	{
+		possible_reply_pts.push_back({});
+	}
+	//ofs.close();
+	for (auto itor = Containers::conv_point_table.begin(); itor != Containers::conv_point_table.end(); ++itor) {
+		if (itor->second->get_name().at(0) == 'c') {
+			ofs << "conv_point" << std::endl;
+			possible_conv_pts[3].push_back(itor->second->dpoint);//itor->second->dpoint);
+		}
+		else {
+			ofs << "rep_point" << std::endl;
+			possible_reply_pts[3].push_back(itor->second->dpoint);//itor->second->dpoint);
+		}
+		ofs << "dpoint: " << itor->second->dpoint[0] << itor->second->dpoint[1] << std::endl;
+	}
+
+	ofs.close();
 }
 

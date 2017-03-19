@@ -109,30 +109,75 @@ void Party::addToParty(Soldier* s, bool isLeader)
  */
 void Party::removeSoldier(Soldier* s)
 {
+	// First find the solider in the members list
+	vector<Soldier*>::iterator s_itor = find(members.begin(), members.end(), s);
+	// If can't find Solder s, simply return
+	if (s_itor == members.end()) {
+		return;
+	}
+	// Get the enemy's party
+	auto tempP = s->getCurrentEnemy()->getParty();
+	// Set the enemy's party mode to be Idle so that every soldier in that party is now Idle. We might want each member of a party to have different enemies later.
+	// The optimal way is to say: for each soldier, if its enemy is soldier s, set its state to Idle.
+	tempP->setMode(Party::MODE_IDLE);
 
-	cout << "SIZE OF THE PARTY IS ********** " << members.size() << endl;
-	members.erase(std::remove(members.begin(), members.end(), s), members.end());
-	cout << "SUCCESFULLY GOTTEN PAST THE REMOVE SOLDIER STATEMENT*************************" << endl;
-	if 
-		(members.empty()) leader = nullptr;
-	else
-		if (s == leader) {
+	// Update Solder s
+	s->setCurrentEnemy(nullptr);
+	s->setInCombat(false);
+	
+
+	// Check whether Soldier s is the leader; handle the removal accordingly
+	if (s == leader) {
+		leader = nullptr;
+		members.erase(std::remove(members.begin(), members.end(), s), members.end());
+		// Check if member list is empty
+		if (!members.empty()) {
 			leader = *(members.begin());
 		}
-	//for enemy soldier's party, we need to remove s's party from their list of party if its emptys
-	if (s->getCurrentEnemy() != nullptr) {
-		s->getCurrentEnemy()->setCurrentEnemy(nullptr);
 	}
-	s->setCurrentEnemy(nullptr);
+	else {
+		members.erase(std::remove(members.begin(), members.end(), s), members.end());
+	}
 
+	// Update Soldier s's party status
+	s->setParty(nullptr);
+	s->setCurrentLeader(nullptr);
 	
+
+
+
+	//cout << "SIZE OF THE PARTY IS ********** " << members.size() << endl;
+	//members.erase(std::remove(members.begin(), members.end(), s), members.end());
+	//cout << "SUCCESFULLY GOTTEN PAST THE REMOVE SOLDIER STATEMENT*************************" << endl;
+
+	//for enemy soldier's party, we need to remove s's party from their list of party if its emptys
+	//cout << "Enemy's enemy: " << s->getCurrentEnemy()->getCurrentEnemy() << endl;
+
+	//if (s->getCurrentEnemy() != nullptr) {
+	//	s->getCurrentEnemy()->setCurrentEnemy(nullptr);
+	//	s->getCurrentEnemy()->setInCombat(false);
+	//	s->getCurrentEnemy()->setEvade(false);
+	//	s->getCurrentEnemy()->setHold(false);
+	//}
+	//s->setCurrentEnemy(nullptr);
+
+	//if (members.empty()) {
+	//	//s->getCurrentEnemy()->getParty()->setMode(Party::MODE_IDLE);
+	//	leader = nullptr;
+	//}
+	//else
+	//	if (s == leader) {
+	//		leader = *(members.begin());
+	//	}
+
+
 	/*for(auto& i = this->members.begin(); i != this->members.end(); ++i) {
 	  if(*i == s) {
-		this->members.erase(i);
-		s->setParty(nullptr);
-		if(leader == s) {
-		  leader = *members.begin();
-		}
+	  this->members.erase(i);
+	  s->setParty(nullptr);
+	  if(leader == s) {
+		leader = *members.begin();
+	  }
 	  }
 	}*/
 }
@@ -207,7 +252,8 @@ void Party::setMode(int m)
 	}
 }
 
-void Party::updateFollowers() {
+void Party::updateFollowers()
+{
 	Soldier* prev = nullptr;
 	for (auto i = members.rbegin(); i != members.rend(); ++i) {
 		if (prev != nullptr) {
@@ -223,5 +269,4 @@ void Party::findEnemy()
 }
 
 void Party::update()
-{
-}
+{}

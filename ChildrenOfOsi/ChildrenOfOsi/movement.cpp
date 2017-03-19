@@ -389,15 +389,15 @@ int Movement::attack(WorldObj* obj) {
 							//std:://cout << "Player hit " << liv->getName() << std::endl;
 							a->second->Hit(liv);
 							//liv has no hp
-							if (liv->getHealth() <= 0) {
-								cout << "THE SOLDIER HAS JUST DIED!!!!!!!!!!!!!!!!!!!!!*************************" << endl;
-								//live is at least a solider
-								if (liv->getType() > 2) {
-									Soldier* temp = CheckClass::isSoldier(liv);
-									(temp)->getParty()->removeSoldier(temp);
-									
-								}
-							}
+							//if (liv->getHealth() <= 0) {
+							//	cout << "THE SOLDIER HAS JUST DIED!!!!!!!!!!!!!!!!!!!!!*************************" << endl;
+							//	//live is at least a solider
+							//	if (liv->getType() > 2) {
+							//		Soldier* temp = CheckClass::isSoldier(liv);
+							//		(temp)->getParty()->removeSoldier(temp);
+							//		
+							//	}
+							//}
 							if (a->second->getDestroy())a->second->setDuration(0);
 							liv->sprite.unlockAnimation();
 							manager->createTaskWithObj("Hurt", "DRAW", liv);

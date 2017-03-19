@@ -8,12 +8,13 @@ AudioManager::AudioManager(MessageLog* _mLog, TaskBuffer* _tBuffer)
 {
 	LOG("AudioManager Object Constructed");
 	soundHelper = new SoundSystem();
-	sound_map["Play"] = &SoundSystem::playSong1;
-	sound_map["Bump"] = &SoundSystem::playBump;
-	sound_map["Walk"] = &SoundSystem::playWalk;
-	sound_map["Sixers"] = &SoundSystem::playSixers;
-	function_map["Pause"] = &SoundSystem::pauseSound;
-	function_map["Unpause"] = &SoundSystem::unpauseSound;
+	map0["Play"] = &SoundSystem::playSong1;
+	map0["Bump"] = &SoundSystem::playBump;
+	map0["Walk"] = &SoundSystem::playWalk;
+	map0["Sixers"] = &SoundSystem::playSixers;
+	map1["Pause"] = &SoundSystem::pauseSound;
+	map1["Unpause"] = &SoundSystem::unpauseSound;
+	map2["Change"] = &SoundSystem::changeSoundSource;
 }
 
 
@@ -30,20 +31,27 @@ void AudioManager::register_manager()
 void AudioManager::execute_task(Task* current_task)
 {
 	int result;
-	auto it = sound_map.find(current_task->name);
-	auto it2 = function_map.find(current_task->name);
-	if (it == sound_map.end()&& it2 == function_map.end()) {
+	auto it0 = map0.find(current_task->name);
+	auto it1 = map1.find(current_task->name);
+	auto it2 = map2.find(current_task->name);
+	if (it0 == map0.end()&& it1 == map1.end() && it2 == map2.end()) {
 		result = 1;
 		LOG("Error: Task '" << current_task->name << "' does not exist.");
 	}
-	else {
-		if (current_task->name == "Pause" || current_task->name == "Unpause") {
-			result = (soundHelper->*(it2->second))("walk_loop.wav");
+	else if(it0 == map0.end() && it2 == map2.end()) {
+
+			result = (soundHelper->*(it1->second))(current_task->source);
 			
-		}
-		else {
-			result = (soundHelper->*(it->second))();
-		}
+		
+		
+	}
+	else if (it0 == map0.end() && it1 == map1.end()) {
+
+		result = (soundHelper->*(it2->second))(current_task->source, current_task->target);
+
+	}
+	else {
+		result = (soundHelper->*(it0->second))();
 	}
 
 	if (result == 0) {
