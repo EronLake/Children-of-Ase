@@ -309,7 +309,7 @@ void Input::InputCheck()
 
 			Containers::worldObj_table[obj_name]->sprite.setTexture(Containers::texture_table[image_name]);
 			Containers::worldObj_table[obj_name]->setInteractable(false);
-			Containers::worldObj_table[obj_name]->offsetBody(0, 100, 100, 100, 100);
+			Containers::worldObj_table[obj_name]->offsetBody(0, 0, 0, 0, 0);
 
 			recVec->push_back(Containers::worldObj_table[obj_name]);
 
@@ -410,16 +410,16 @@ void Input::InputCheck()
 
 				if (L)
 				{
-					//std::cout << "////////////////////////" << endl;
-					//std::cout << "ENTER NAME OF THE VARIABLE YOU WOULD LIKE TO CHANGE: ";
+					std::cout << "////////////////////////" << endl;
+					std::cout << "ENTER NAME OF THE VARIABLE YOU WOULD LIKE TO CHANGE: ";
 
 					string variable_for_change;
 					cin >> variable_for_change;
 
 					if (variable_for_change == "width")
 					{
-						//std::cout << "////////////////////////" << endl;
-						//std::cout << "ENTER WIDTH AS FLOAT: ";
+						std::cout << "////////////////////////" << endl;
+						std::cout << "ENTER WIDTH AS FLOAT: ";
 
 						float value_to_change_to;
 						cin >> value_to_change_to;
@@ -428,8 +428,8 @@ void Input::InputCheck()
 					}
 					else if (variable_for_change == "height")
 					{
-						//std::cout << "////////////////////////" << endl;
-						//std::cout << "ENTER HEIGHT AS FLOAT: ";
+						std::cout << "////////////////////////" << endl;
+						std::cout << "ENTER HEIGHT AS FLOAT: ";
 
 						float value_to_change_to;
 						cin >> value_to_change_to;
@@ -439,8 +439,8 @@ void Input::InputCheck()
 
 					if (variable_for_change == "size")
 					{
-						//std::cout << "////////////////////////" << endl;
-						//std::cout << "ENTER SIZE AS FLOAT: ";
+						std::cout << "////////////////////////" << endl;
+						std::cout << "ENTER SIZE AS FLOAT: ";
 
 						float value_to_change_to;
 						cin >> value_to_change_to;
@@ -450,8 +450,8 @@ void Input::InputCheck()
 					}
 					else if (variable_for_change == "xloc")
 					{
-						//std::cout << "////////////////////////" << endl;
-						//std::cout << "ENTER X LOC AS FLOAT: ";
+						std::cout << "////////////////////////" << endl;
+						std::cout << "ENTER X LOC AS FLOAT: ";
 
 						float value_to_change_to;
 						cin >> value_to_change_to;
@@ -460,8 +460,8 @@ void Input::InputCheck()
 					}
 					else if (variable_for_change == "yloc")
 					{
-						//std::cout << "////////////////////////" << endl;
-						//std::cout << "ENTER Y LOC AS FLOAT: ";
+						std::cout << "////////////////////////" << endl;
+						std::cout << "ENTER Y LOC AS FLOAT: ";
 
 						float value_to_change_to;
 						cin >> value_to_change_to;
@@ -488,7 +488,7 @@ void Input::InputCheck()
 						cin >> bottom;
 
 						Containers::worldObj_table[collide_with]->offsetBody(body_number, left, right, top, bottom);
-
+				
 						//std::cout << "///////////////////////////////////" << endl;
 						//std::cout << "body X is " << Containers::worldObj_table[collide_with]->body[body_number].getX() << " and Y is " << Containers::worldObj_table[collide_with]->body[body_number].getY() << endl;
 						//std::cout << "body X is " << Containers::worldObj_table[collide_with]->body[body_number].getX() << " and Y is " << Containers::worldObj_table[collide_with]->body[body_number].getY() << endl;
@@ -522,17 +522,13 @@ void Input::InputCheck()
 				tex_file = tex_file.substr(0, tex_file.size() - 4); //shaves off tail
 				new_obj["tex_file"] = tex_file;
 
-				new_obj["bodyx1"] = (Containers::worldObj_table[collide_with]->body[body_number].ge);
+				new_obj["bodyx1"] = (Containers::worldObj_table[collide_with]->offset_x1);
 				
-				new_obj["bodyx2"] = ((Containers::worldObj_table[collide_with]->body[body_number].getX() + Containers::worldObj_table[collide_with]->body[body_number].getWidth()) -
-									(Containers::worldObj_table[collide_with]->getLoc().getXloc() + Containers::worldObj_table[collide_with]->getWidth()));
-					
+				new_obj["bodyx2"] = (Containers::worldObj_table[collide_with]->offset_x2);
 
-				new_obj["bodyy1"] = (Containers::worldObj_table[collide_with]->getLoc().getYloc() -
-									Containers::worldObj_table[collide_with]->body[body_number].getY());
+				new_obj["bodyy1"] = (Containers::worldObj_table[collide_with]->offset_y1);
 
-				new_obj["bodyy2"] = ((Containers::worldObj_table[collide_with]->body[body_number].getY() + Containers::worldObj_table[collide_with]->body[body_number].getHeight()) -
-									(Containers::worldObj_table[collide_with]->getLoc().getYloc() + Containers::worldObj_table[collide_with]->getHeight()));
+				new_obj["bodyy2"] = (Containers::worldObj_table[collide_with]->offset_y2);
 									
 
 				root[collide_with] = new_obj;
@@ -541,6 +537,8 @@ void Input::InputCheck()
 				file << styledWriter.write(root);
 
 				file.close();
+
+
 
 			}
 		}
