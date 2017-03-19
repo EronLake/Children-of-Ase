@@ -18,7 +18,8 @@ public:
 	float arg2 = 0.0;
 	bool arg3 = false;
 	int arg4 = 0;
-
+	char* source = nullptr;
+	char* target = nullptr;
 	int mem_type = 0;
 	int frames = 0; 
 	vector<NPC*> people; 
@@ -30,7 +31,7 @@ public:
 
 	short timestamp;
 
-	Task(std::string name, std::string status, std::string _type);
+	Task(std::string name, std::string status, std::string _type, char* _source = nullptr, char* _target = nullptr);
 	Task(std::string name, std::string status, std::string _type, WorldObj* _objToUpdate);
 	Task(std::string name, std::string status, std::string _type, WorldObj* _objToUpdate, int num);
 	Task(std::string _name, std::string _status, std::string _type, std::string key, float x, float y, bool col);
@@ -41,6 +42,7 @@ public:
 	Task(std::string name, std::string status, std::string _type, std::string key,int hero_name, int mem_type, int frames, 
 			vector<NPC*> p, std::string cat, std::string cont, std::string where, int why, int when);
 	//Task(std::string name, std::string status, std::string _type, WorldObj* _objToUpdate, std::string key,float x, float y, bool col, int d);
+	
 	~Task();
 
 	void updateStatus(std::string new_status);
