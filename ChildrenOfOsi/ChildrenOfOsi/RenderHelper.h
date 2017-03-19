@@ -7,13 +7,13 @@
 #include "Containers.h"
 #include "CheckClass.h"
 
-
 class RenderHelper
 {
 public:
 	RenderHelper(QuadTree* QT);
 	~RenderHelper();
 	void initCamera(WorldObj* player);
+	int init_map(WorldObj* obj);
 	int draw_frame(WorldObj* obj);
 	int sprite_up(WorldObj* obj);
 	int sprite_down(WorldObj* obj);

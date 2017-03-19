@@ -39,6 +39,7 @@ public:
 	//functions for rendering
 	void draw_frame(WorldObj* player);
 	void drawDiaGui(WorldObj* player);
+	void init_map(WorldObj* obj);
 
 	//functions for creating objects in memory
 	void add_hero(std::string key, float x, float y, bool col);

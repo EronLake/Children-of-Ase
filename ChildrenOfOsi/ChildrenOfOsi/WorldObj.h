@@ -93,6 +93,10 @@ class WorldObj
 
   Sprite sprite;
   vector<Rectangle> body;
+  float offset_x1;
+  float offset_x2;
+  float offset_y1;
+  float offset_y2;
 
   protected:
 

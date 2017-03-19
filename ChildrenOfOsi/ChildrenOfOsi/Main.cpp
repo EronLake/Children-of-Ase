@@ -62,6 +62,8 @@
 
 using namespace std;
 
+
+
 Texture* Rectangle::tex = new Texture();
 //void testQuadTree();
 //bool checkCollision(WorldObj *recA, WorldObj *recB);	//given two bounding boxes, check if they collide
@@ -165,12 +167,9 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	TaskBuffer* tBuffer = new TaskBuffer(mLog);
 
 	//need this here for map editor
-	RenderManager* RenM = new RenderManager(mLog, tBuffer, _QuadTree);
-
 	ChildrenOfOsi* gameplay_functions = new ChildrenOfOsi(mLog, tBuffer);
 
-  
-
+	RenderManager* RenM = new RenderManager(mLog, tBuffer, _QuadTree, gameplay_functions);
 	
 	//create Managers and add to Manager table
 
@@ -216,7 +215,31 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	
 	//WorldObj* barrel = new WorldObj(Vector2f(5200, 3900), 75, 75);
 	//Alex->name = SHANGO;
-	
+	gameplay_functions->add_texture("map1_1", 0, 0, 0);
+	gameplay_functions->add_texture("map1_2", 0, 0, 0);
+	gameplay_functions->add_texture("map1_3", 0, 0, 0);
+	gameplay_functions->add_texture("map1_4", 0, 0, 0);
+
+	gameplay_functions->add_texture("map2_1", 0, 0, 0);
+	gameplay_functions->add_texture("map2_2", 0, 0, 0);
+	gameplay_functions->add_texture("map2_3", 0, 0, 0);
+	gameplay_functions->add_texture("map2_4", 0, 0, 0);
+
+	gameplay_functions->add_texture("map3_1", 0, 0, 0);
+	gameplay_functions->add_texture("map3_2", 0, 0, 0);
+	gameplay_functions->add_texture("map3_3", 0, 0, 0);
+	gameplay_functions->add_texture("map3_4", 0, 0, 0);
+
+	gameplay_functions->add_texture("map4_1", 0, 0, 0);
+	gameplay_functions->add_texture("map4_2", 0, 0, 0);
+	gameplay_functions->add_texture("map4_3", 0, 0, 0);
+	gameplay_functions->add_texture("map4_4", 0, 0, 0);
+
+	tBuffer->run();
+
+	gameplay_functions->init_map(Alex);
+
+	tBuffer->run();
 
     Texture* objTexture = new Texture();
 
@@ -905,7 +928,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	LOG("PAST WINDOW INIT ***********************");
 	clock_t start_tick, current_ticks, delta_ticks;
 	clock_t fps = 0;
-	int fs = 24;
+	int fs = 120;
 	int wait_time = fs*3; //always wait 3 seconds
 	int count = 0;
 	int state = 0;
@@ -1298,11 +1321,11 @@ void ALEX_LOOP(QuadTree* _QuadTree) {
 	//psuedo Gameloop
 	MessageLog* mLog = new MessageLog();
 	TaskBuffer* tBuffer = new TaskBuffer(mLog);
-
-	//need this for map editor
-	RenderManager* RenM = new RenderManager(mLog, tBuffer, _QuadTree);
-
 	ChildrenOfOsi* gameplay_functions = new ChildrenOfOsi(mLog, tBuffer);
+	//need this for map editor
+	RenderManager* RenM = new RenderManager(mLog, tBuffer, _QuadTree, gameplay_functions);
+
+	
 	Input* iController = new Input(gameplay_functions, Alex, RenM->renderHelper, tBuffer, &recVec);
 	//create Managers and add to Manager table
 
@@ -1392,9 +1415,10 @@ void ERONS_LOOP(QuadTree* _QuadTree) {
 	TaskBuffer* tBuffer = new TaskBuffer(mLog);
 
 	//need this here for map editor
-	RenderManager* RenM = new RenderManager(mLog, tBuffer, _QuadTree);
-
 	ChildrenOfOsi* gameplay_functions = new ChildrenOfOsi(mLog, tBuffer);
+	RenderManager* RenM = new RenderManager(mLog, tBuffer, _QuadTree, gameplay_functions);
+
+	
 	Input* iController = new Input(gameplay_functions, Alex, RenM->renderHelper, tBuffer, recVec_ptr);
 	//create Managers and add to Manager table
 
@@ -2187,9 +2211,10 @@ void ANDREWS_LOOP(QuadTree* _QuadTree) {
 	TaskBuffer* tBuffer = new TaskBuffer(mLog);
 
 	//need this here for map editor
-	RenderManager* RenM = new RenderManager(mLog, tBuffer, _QuadTree);
-
 	ChildrenOfOsi* gameplay_functions = new ChildrenOfOsi(mLog, tBuffer);
+	RenderManager* RenM = new RenderManager(mLog, tBuffer, _QuadTree, gameplay_functions);
+
+	
 	Input* iController = new Input(gameplay_functions, Alex, RenM->renderHelper, tBuffer, &recVec);
 	//create Managers and add to Manager table
 
