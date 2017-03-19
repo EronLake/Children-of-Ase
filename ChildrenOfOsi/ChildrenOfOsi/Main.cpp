@@ -59,6 +59,7 @@
 #include "Line.h"
 #include "ActionExecFunctions.h"
 #include "Alliance.h"
+#include "PartyManager.h"
 
 using namespace std;
 
@@ -175,7 +176,8 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 
 	DummyController* DumM = new DummyController(mLog, tBuffer);
 	PhysicsManager* PhysM = new PhysicsManager(mLog, tBuffer, _QuadTree);
-	
+
+	PartyManager* partyM = new PartyManager(gameplay_functions, Alex);
 	memManager* memM = new memManager(mLog, tBuffer);
 	TestManager* TestM = new TestManager(mLog, tBuffer);
 	AudioManager* AudM = new AudioManager(mLog, tBuffer);
@@ -718,7 +720,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	silverSoldier->melee->setWidth(50);
 	silverSoldier->melee->setHeight(50);
 	silverSoldier->melee->setStaminaCost(90);
-	silverSoldier->setHealth(1000);
+	silverSoldier->setHealth(30);
 
 	silverSoldier->addAttackType(rockThrow);
 	silverSoldier->melee->sprite.setTexture(border);
@@ -734,7 +736,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	silverSoldier2->melee->setWidth(50);
 	silverSoldier2->melee->setHeight(50);
 	silverSoldier2->melee->setStaminaCost(90);
-	silverSoldier2->setHealth(1000);
+	silverSoldier2->setHealth(30);
 
 	silverSoldier2->addAttackType(rockThrow);
 	silverSoldier2->melee->sprite.setTexture(border);
@@ -908,6 +910,9 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	party2->addToParty(silverSoldier, true);
 	Party* party3 = new Party();
 	party3->addToParty(silverSoldier2, true);
+	partyM->addToPartyList(party);
+	partyM->addToPartyList(party2);
+	partyM->addToPartyList(party3);
 	Village* v1 = new Village();
 	Village* v2 = new Village();
 	v1->addToParties(party2);
@@ -999,6 +1004,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 		combatControl->follow(staticRec, state);
 		combatControl->fight(silverSoldier, state);
 		combatControl->fight(silverSoldier2, state);
+		partyM->updateSoliderStatus();
 
 		/*
 		//cout << "Alex's position is " << Alex->getLoc().getXloc() << ", " << Alex->getLoc().getYloc() << endl;
