@@ -51,7 +51,6 @@
 
 #include "AIManager.h"
 #include "AIController.h"
-#include "PartyManager.h"
 
 #include "ObjConfig.h"
 #include "ActionPool.h"
@@ -108,9 +107,9 @@ int main() {
 		//while (1) {
 		//	
 		//	Alex->getEvadeRange(Daniel);
-		//	////cout << "COMBAT RANGE WITH GETTER IS " << Alex->getCombatMoveDestination().getXloc() << ", " << Alex->getCombatMoveDestination().getYloc() << endl;
-		//	//////cout << "Alex's target location is: " << Alex->getEvadeRange(Daniel).getXloc() << ", " << Alex->getEvadeRange(Daniel).getYloc() << endl;
-		//	//////cout << "Alex's target location is COMBAT: " << Alex->getCombatMoveDestination().getXloc() << ", " << Alex->getCombatMoveDestination().getYloc() << endl;
+		//	//cout << "COMBAT RANGE WITH GETTER IS " << Alex->getCombatMoveDestination().getXloc() << ", " << Alex->getCombatMoveDestination().getYloc() << endl;
+		//	////cout << "Alex's target location is: " << Alex->getEvadeRange(Daniel).getXloc() << ", " << Alex->getEvadeRange(Daniel).getYloc() << endl;
+		//	////cout << "Alex's target location is COMBAT: " << Alex->getCombatMoveDestination().getXloc() << ", " << Alex->getCombatMoveDestination().getYloc() << endl;
 		//}
 		osi::GameWindow::init();
 		////pauses the program for viewing
@@ -158,7 +157,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	//Player* Alex = new Player(SHANGO, Vector2f(4900.0, 3700.0), 40.0, 40.0);	//init player
 	Player* Alex = new Player(SHANGO, Vector2f(4900.0, 3700.0), 150.0, 150.0);	//init player
 
-	//////cout << "Alex's width and height is " << Alex->getWidth() << ", " << Alex->getHeight() << endl;
+	////cout << "Alex's width and height is " << Alex->getWidth() << ", " << Alex->getHeight() << endl;
 
 	vector<WorldObj*> recVec;
 	vector<WorldObj*>* recVec_ptr = &recVec;
@@ -176,7 +175,6 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 
 	DummyController* DumM = new DummyController(mLog, tBuffer);
 	PhysicsManager* PhysM = new PhysicsManager(mLog, tBuffer, _QuadTree);
-	PartyManager* PartyM = new PartyManager(gameplay_functions, Alex);
 	
 	memManager* memM = new memManager(mLog, tBuffer);
 	TestManager* TestM = new TestManager(mLog, tBuffer);
@@ -204,7 +202,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 //	tBuffer->run();
 //	Hero* alex = Containers::hero_table["Shango"];
 //	Player* Alex = dynamic_cast<Player*>(alex);
-    Input* iController = new Input(gameplay_functions, Alex, RenM->renderHelper, tBuffer, recVec_ptr);
+    Input* iController = new Input(gameplay_functions, Alex, RenM->renderHelper, tBuffer, recVec_ptr, AiController);
 
 	//DialogueGui* convoGui = new DialogueGui();
 
@@ -214,7 +212,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	ObjConfig::import_config(recVec_ptr, gameplay_functions, tBuffer);
 	
 	DialogueConfig::import_config(gameplay_functions, tBuffer);
-	DialogueController::getDialogueHelper()->fill_conversations();
+	
 	//WorldObj* barrel = new WorldObj(Vector2f(5200, 3900), 75, 75);
 	//Alex->name = SHANGO;
 	gameplay_functions->add_texture("map1_1", 0, 0, 0);
@@ -283,8 +281,6 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 
 	Texture* silverSoldierTexture = new Texture();
 	Texture* silverSoldierIdleTex = new Texture();
-	Texture* blueSoldierTexture = new Texture();
-	Texture* blueSoldierIdleTex = new Texture();
 
 	Texture* ss_upRunTex = new Texture();
 	Texture* ss_downRunTex = new Texture();
@@ -311,31 +307,6 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	Texture* ss_leftLungeTex = new Texture();
 	Texture* ss_rightLungeTex = new Texture();
 
-	Texture* bs_upRunTex = new Texture();
-	Texture* bs_downRunTex = new Texture();
-	Texture* bs_leftRunTex = new Texture();
-	Texture* bs_rightRunTex = new Texture();
-	Texture* bs_upIdleTex = new Texture();
-	Texture* bs_downIdleTex = new Texture();
-	Texture* bs_leftIdleTex = new Texture();
-	Texture* bs_rightIdleTex = new Texture();
-	Texture* bs_upAtkTex = new Texture();
-	Texture* bs_downAtkTex = new Texture();
-	Texture* bs_leftAtkTex = new Texture();
-	Texture* bs_rightAtkTex = new Texture();
-	Texture* bs_upHurtTex = new Texture();
-	Texture* bs_downHurtTex = new Texture();
-	Texture* bs_leftHurtTex = new Texture();
-	Texture* bs_rightHurtTex = new Texture();
-	Texture* bs_upWalkTex = new Texture();
-	Texture* bs_downWalkTex = new Texture();
-	Texture* bs_leftWalkTex = new Texture();
-	Texture* bs_rightWalkTex = new Texture();
-	Texture* bs_upLungeTex = new Texture();
-	Texture* bs_downLungeTex = new Texture();
-	Texture* bs_leftLungeTex = new Texture();
-	Texture* bs_rightLungeTex = new Texture();
-
 
 
 	Texture* treeTex = new Texture();
@@ -359,9 +330,8 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	blank->setFile("Assets/Sprites/blank.png", 1);
 	border->setFile("Assets/Sprites/border.png", 1);
 	objTexture->setFile("Assets/Sprites/YemojasHouse.png",1);
-	Soldier* silverSoldier = new Soldier(4900, 3400, true);
-	Soldier* silverSoldier2 = new Soldier(4600, 3400, true);
-	Soldier* blueSoldier = new Soldier(5000, 5000, true);
+	Soldier* silverSoldier = new Soldier(4000, 3300, true);
+	Soldier* silverSoldier2 = new Soldier(4300, 3300, true);
 
 	playerTexture->setFile("Assets/Sprites/ShangoForwardIdle.png",22);
 	playerIdleTex->setFile("Assets/Sprites/ShangoForwardIdle.png",22);
@@ -400,60 +370,33 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	h_leftIdleTex->setFile("Assets/Sprites/YemojaLeftIdle.png", 1);
 	h_rightIdleTex->setFile("Assets/Sprites/YemojaRightIdle.png", 1);
 
-	silverSoldierTexture->setFile("Assets/Sprites/BlueSoldierForwardIdle.png", 22);
-	silverSoldierIdleTex->setFile("Assets/Sprites/BlueSoldierForwardIdle.png", 22);
-	blueSoldierTexture->setFile("Assets/Sprites/SilverSoldierForwardIdle.png", 22);
-	blueSoldierIdleTex->setFile("Assets/Sprites/SilverSoldierForwardIdle.png", 22);
+	silverSoldierTexture->setFile("Assets/Sprites/SilverSoldierForwardIdle.png", 22);
+	silverSoldierIdleTex->setFile("Assets/Sprites/SilverSoldierForwardIdle.png", 22);
 
-	ss_upRunTex->setFile("Assets/Sprites/BlueSoldierBackSprint.png", 16);
-	ss_downRunTex->setFile("Assets/Sprites/BlueSoldierForwardSprint.png", 16);
-	ss_leftRunTex->setFile("Assets/Sprites/BlueSoldierLeftSprint.png", 16);
-	ss_rightRunTex->setFile("Assets/Sprites/BlueSoldierRightSprint.png", 16);
-	ss_upIdleTex->setFile("Assets/Sprites/BlueSoldierBackIdle.png", 22);
-	ss_downIdleTex->setFile("Assets/Sprites/BlueSoldierForwardIdle.png", 22);
-	ss_leftIdleTex->setFile("Assets/Sprites/BlueSoldierLeftIdle.png", 22);
-	ss_rightIdleTex->setFile("Assets/Sprites/BlueSoldierRightIdle.png", 22);
-	ss_upAtkTex->setFile("Assets/Sprites/BlueSoldierBackSwing.png", 13);
-	ss_downAtkTex->setFile("Assets/Sprites/BlueSoldierForwardSwing.png", 13);
-	ss_leftAtkTex->setFile("Assets/Sprites/BlueSoldierLeftSwing.png", 13);
-	ss_rightAtkTex->setFile("Assets/Sprites/BlueSoldierRightSwing.png", 13);
-	ss_upHurtTex->setFile("Assets/Sprites/BlueSoldierBackRecoil.png", 18);
-	ss_downHurtTex->setFile("Assets/Sprites/BlueSoldierForwardRecoil.png", 18);
-	ss_leftHurtTex->setFile("Assets/Sprites/BlueSoldierLeftRecoil.png", 18);
-	ss_rightHurtTex->setFile("Assets/Sprites/BlueSoldierRightRecoil.png", 18);
-	ss_upWalkTex->setFile("Assets/Sprites/BlueSoldierBackWalk.png", 32);
-	ss_downWalkTex->setFile("Assets/Sprites/BlueSoldierForwardWalk.png", 32);
-	ss_leftWalkTex->setFile("Assets/Sprites/BlueSoldierLeftWalk.png", 32);
-	ss_rightWalkTex->setFile("Assets/Sprites/BlueSoldierRightWalk.png", 32);
-	ss_upLungeTex->setFile("Assets/Sprites/BlueSoldierBackLunge.png", 7);
-	ss_downLungeTex->setFile("Assets/Sprites/BlueSoldierForwardLunge.png", 7);
-	ss_leftLungeTex->setFile("Assets/Sprites/BlueSoldierLeftLunge.png", 7);
-	ss_rightLungeTex->setFile("Assets/Sprites/BlueSoldierRightLunge.png", 7);
-
-	bs_upRunTex->setFile("Assets/Sprites/SilverSoldierBackSprint.png", 16);
-	bs_downRunTex->setFile("Assets/Sprites/SilverSoldierForwardSprint.png", 16);
-	bs_leftRunTex->setFile("Assets/Sprites/SilverSoldierLeftSprint.png", 16);
-	bs_rightRunTex->setFile("Assets/Sprites/SilverSoldierRightSprint.png", 16);
-	bs_upIdleTex->setFile("Assets/Sprites/SilverSoldierBackIdle.png", 22);
-	bs_downIdleTex->setFile("Assets/Sprites/SilverSoldierForwardIdle.png", 22);
-	bs_leftIdleTex->setFile("Assets/Sprites/SilverSoldierLeftIdle.png", 22);
-	bs_rightIdleTex->setFile("Assets/Sprites/SilverSoldierRightIdle.png", 22);
-	bs_upAtkTex->setFile("Assets/Sprites/SilverSoldierBackSwing.png", 24);
-	bs_downAtkTex->setFile("Assets/Sprites/SilverSoldierForwardSwing.png", 24);
-	bs_leftAtkTex->setFile("Assets/Sprites/SilverSoldierLeftSwing.png", 24);
-	bs_rightAtkTex->setFile("Assets/Sprites/SilverSoldierRightSwing.png", 24);
-	bs_upHurtTex->setFile("Assets/Sprites/SilverSoldierBackRecoil.png", 18);
-	bs_downHurtTex->setFile("Assets/Sprites/SilverSoldierForwardRecoil.png", 18);
-	bs_leftHurtTex->setFile("Assets/Sprites/SilverSoldierLeftRecoil.png", 18);
-	bs_rightHurtTex->setFile("Assets/Sprites/SilverSoldierRightRecoil.png", 18);
-	bs_upWalkTex->setFile("Assets/Sprites/SilverSoldierBackWalk.png", 32);
-	bs_downWalkTex->setFile("Assets/Sprites/SilverSoldierForwardWalk.png", 32);
-	bs_leftWalkTex->setFile("Assets/Sprites/SilverSoldierLeftWalk.png", 32);
-	bs_rightWalkTex->setFile("Assets/Sprites/SilverSoldierRightWalk.png", 32);
-	bs_upLungeTex->setFile("Assets/Sprites/SilverSoldierBackLunge.png", 7);
-	bs_downLungeTex->setFile("Assets/Sprites/SilverSoldierForwardLunge.png", 7);
-	bs_leftLungeTex->setFile("Assets/Sprites/SilverSoldierLeftLunge.png", 7);
-	bs_rightLungeTex->setFile("Assets/Sprites/SilverSoldierRightLunge.png", 7);
+	ss_upRunTex->setFile("Assets/Sprites/SilverSoldierBackSprint.png", 16);
+	ss_downRunTex->setFile("Assets/Sprites/SilverSoldierForwardSprint.png", 16);
+	ss_leftRunTex->setFile("Assets/Sprites/SilverSoldierLeftSprint.png", 16);
+	ss_rightRunTex->setFile("Assets/Sprites/SilverSoldierRightSprint.png", 16);
+	ss_upIdleTex->setFile("Assets/Sprites/SilverSoldierBackIdle.png", 22);
+	ss_downIdleTex->setFile("Assets/Sprites/SilverSoldierForwardIdle.png", 22);
+	ss_leftIdleTex->setFile("Assets/Sprites/SilverSoldierLeftIdle.png", 22);
+	ss_rightIdleTex->setFile("Assets/Sprites/SilverSoldierRightIdle.png", 22);
+	ss_upAtkTex->setFile("Assets/Sprites/SilverSoldierBackSwing.png", 24);
+	ss_downAtkTex->setFile("Assets/Sprites/SilverSoldierForwardSwing.png", 24);
+	ss_leftAtkTex->setFile("Assets/Sprites/SilverSoldierLeftSwing.png", 24);
+	ss_rightAtkTex->setFile("Assets/Sprites/SilverSoldierRightSwing.png", 24);
+	ss_upHurtTex->setFile("Assets/Sprites/SilverSoldierBackRecoil.png", 18);
+	ss_downHurtTex->setFile("Assets/Sprites/SilverSoldierForwardRecoil.png", 18);
+	ss_leftHurtTex->setFile("Assets/Sprites/SilverSoldierLeftRecoil.png", 18);
+	ss_rightHurtTex->setFile("Assets/Sprites/SilverSoldierRightRecoil.png", 18);
+	ss_upWalkTex->setFile("Assets/Sprites/SilverSoldierBackWalk.png", 32);
+	ss_downWalkTex->setFile("Assets/Sprites/SilverSoldierForwardWalk.png", 32);
+	ss_leftWalkTex->setFile("Assets/Sprites/SilverSoldierLeftWalk.png", 32);
+	ss_rightWalkTex->setFile("Assets/Sprites/SilverSoldierRightWalk.png", 32);
+	ss_upLungeTex->setFile("Assets/Sprites/SilverSoldierBackLunge.png", 7);
+	ss_downLungeTex->setFile("Assets/Sprites/SilverSoldierForwardLunge.png", 7);
+	ss_leftLungeTex->setFile("Assets/Sprites/SilverSoldierLeftLunge.png", 7);
+	ss_rightLungeTex->setFile("Assets/Sprites/SilverSoldierRightLunge.png", 7);
 
 	treeTex->setFile("Assets/Sprites/tree.png", 1);
 	treeTex1->setFile("Assets/Sprites/tree1.png", 1);
@@ -464,7 +407,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 
 	pierTex->setFile("Assets/Sprites/pier.png", 1);
 
-	fire->setFile("Assets/Sprites/FireBall.png", 8);
+	fire->setFile("Assets/Sprites/fireballsprite1.jpg", 10);
 	/* SET UP SPRITE CHANGE, MIGHT NEED A SINGLETON?*/
 
 
@@ -687,8 +630,6 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	silverSoldier->setHeight(150);
 	silverSoldier2->setWidth(150);
 	silverSoldier2->setHeight(150);
-	blueSoldier->setWidth(150);
-	blueSoldier->setHeight(150);
 
 	staticRec->sprite.setTexture(yemojaTexture);
 	staticRec->sprite.setIdleTexture(yemojaIdleTex);
@@ -727,36 +668,10 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	silverSoldier->sprite.hurt_left = ss_leftHurtTex;
 	silverSoldier->sprite.hurt_right = ss_rightHurtTex;
 
-	blueSoldier->sprite.setTexture(blueSoldierTexture);
-	blueSoldier->sprite.setIdleTexture(blueSoldierIdleTex);
-	blueSoldier->sprite.up = bs_upRunTex;
-	blueSoldier->sprite.down = bs_downRunTex;
-	blueSoldier->sprite.left = bs_leftRunTex;
-	blueSoldier->sprite.right = bs_rightRunTex;
-
-	blueSoldier->sprite.id_up = bs_upIdleTex;
-	blueSoldier->sprite.id_left = bs_leftIdleTex;
-	blueSoldier->sprite.id_right = bs_rightIdleTex;
-	blueSoldier->sprite.id_down = bs_downIdleTex;
-
-	blueSoldier->sprite.atk_up = bs_upAtkTex;
-	blueSoldier->sprite.atk_down = bs_downAtkTex;
-	blueSoldier->sprite.atk_left = bs_leftAtkTex;
-	blueSoldier->sprite.atk_right = bs_rightAtkTex;
-
-	blueSoldier->sprite.hurt_up = bs_upHurtTex;
-	blueSoldier->sprite.hurt_down = bs_downHurtTex;
-	blueSoldier->sprite.hurt_left = bs_leftHurtTex;
-	blueSoldier->sprite.hurt_right = bs_rightHurtTex;
-
 
 	silverSoldier->offsetBody(0, 60, 60, 75, 50);
 	silverSoldier->setInteractable(true);
 	silverSoldier->setName("silverSoldier");
-
-	blueSoldier->offsetBody(0, 60, 60, 75, 50);
-	blueSoldier->setInteractable(true);
-	blueSoldier->setName("blueSoldier");
   // silverSoldier->setHealth(50);
 
 	silverSoldier2->sprite.setTexture(silverSoldierTexture);
@@ -789,7 +704,6 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 
 	gameplay_functions->add_Attack(silverSoldier->getKey(), silverSoldier->body[0].getX(), silverSoldier->body[0].getY(), true, 10);
 	gameplay_functions->add_Attack(silverSoldier2->getKey(), silverSoldier2->body[0].getX(), silverSoldier2->body[0].getY(), true, 10);
-	gameplay_functions->add_Attack(blueSoldier->getKey(), blueSoldier->body[0].getX(), blueSoldier->body[0].getY(), true, 10);
 	tBuffer->run();
 
 
@@ -797,15 +711,14 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	silverSoldier->melee->setDmg(10);
 	silverSoldier->melee->setSpeed(5);
 	silverSoldier->melee->setBaseDir(4);
-	silverSoldier->melee->setCoolDown(15);
+	silverSoldier->melee->setCoolDown(100);
 	silverSoldier->melee->setPause(-1);
 	silverSoldier->melee->setDestroy(false);
 	silverSoldier->melee->setKeep(true);
 	silverSoldier->melee->setWidth(50);
 	silverSoldier->melee->setHeight(50);
-	silverSoldier->melee->setStaminaCost(40);
-	silverSoldier->setMaxStamina(200);
-	silverSoldier->setHealth(100);
+	silverSoldier->melee->setStaminaCost(90);
+	silverSoldier->setHealth(1000);
 
 	silverSoldier->addAttackType(rockThrow);
 	silverSoldier->melee->sprite.setTexture(border);
@@ -814,34 +727,17 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	silverSoldier2->melee->setDmg(10);
 	silverSoldier2->melee->setSpeed(5);
 	silverSoldier2->melee->setBaseDir(4);
-	silverSoldier2->melee->setCoolDown(15);
+	silverSoldier2->melee->setCoolDown(100);
 	silverSoldier2->melee->setPause(-1);
 	silverSoldier2->melee->setDestroy(false);
 	silverSoldier2->melee->setKeep(true);
 	silverSoldier2->melee->setWidth(50);
 	silverSoldier2->melee->setHeight(50);
-	silverSoldier2->melee->setStaminaCost(40);
-	silverSoldier2->setHealth(40);
-	silverSoldier2->setMaxStamina(200);
+	silverSoldier2->melee->setStaminaCost(90);
+	silverSoldier2->setHealth(1000);
 
 	silverSoldier2->addAttackType(rockThrow);
 	silverSoldier2->melee->sprite.setTexture(border);
-
-	blueSoldier->melee = Containers::Attack_table[blueSoldier->getKey()];
-	blueSoldier->melee->setDmg(10);
-	blueSoldier->melee->setSpeed(5);
-	blueSoldier->melee->setBaseDir(4);
-	blueSoldier->melee->setCoolDown(15);
-	blueSoldier->melee->setPause(-1);
-	blueSoldier->melee->setDestroy(false);
-	blueSoldier->melee->setKeep(true);
-	blueSoldier->melee->setWidth(50);
-	blueSoldier->melee->setHeight(50);
-	blueSoldier->melee->setStaminaCost(40);
-	blueSoldier->setHealth(100);
-
-	blueSoldier->addAttackType(rockThrow);
-	blueSoldier->melee->sprite.setTexture(border);
 	//silverSoldier->addAttackType(spin);
 
 	//combatControl->addtoTargets(Alex);
@@ -852,10 +748,10 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	ai->graph.vertices = vertices;
 	ai->graph.obstacles = edges;
 	for (Vector2f vert : ai->graph.vertices) {
-		////std::////cout << "X: " << vert.getXloc() << " Y: " << vert.getYloc() << std::endl;
+		////std:://cout << "X: " << vert.getXloc() << " Y: " << vert.getYloc() << std::endl;
 	}
 	for (auto edge : ai->graph.obstacles) {
-		////std::////cout << "EDGE from " << edge.first.getXloc() << "," << edge.first.getYloc() << " to " << edge.second.getXloc() << "," << edge.second.getYloc() << std::endl;
+		////std:://cout << "EDGE from " << edge.first.getXloc() << "," << edge.first.getYloc() << " to " << edge.second.getXloc() << "," << edge.second.getYloc() << std::endl;
 	}
 
 	bool visible = true;
@@ -909,7 +805,6 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	recVec.push_back(staticRec);
 	recVec.push_back(silverSoldier);
 	recVec.push_back(silverSoldier2);
-	recVec.push_back(blueSoldier);
 	recVec.push_back(oya);
 	//recVec.push_back(barrel);
 	//recVec.push_back(tree);;
@@ -952,10 +847,10 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	ai->graph.insert(Vector2f(4500.00, 4000.00));
 	ai->graph.insert(Vector2f(5650.00, 3700.00));
 	for (Vector2f vert : ai->graph.vertices) {
-		////std::////cout << "X: " << vert.getXloc() << " Y: " << vert.getYloc() << std::endl;
+		////std:://cout << "X: " << vert.getXloc() << " Y: " << vert.getYloc() << std::endl;
 	}
 	for (auto edge : ai->graph.obstacles) {
-		////std::////cout << "EDGE from " << edge.first.getXloc() << "," << edge.first.getYloc() << " to " << edge.second.getXloc() << "," << edge.second.getYloc() << std::endl;
+		////std:://cout << "EDGE from " << edge.first.getXloc() << "," << edge.first.getYloc() << " to " << edge.second.getXloc() << "," << edge.second.getYloc() << std::endl;
 	}
 
 	ai->graph._print();
@@ -967,7 +862,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 
 
 	//for (Vector2f next : path) {
-	//	//std::////cout << "X: " << next.getXloc() << " Y: " << next.getYloc() << std::endl;
+	//	//std:://cout << "X: " << next.getXloc() << " Y: " << next.getYloc() << std::endl;
 	//}
 
 	//std::unordered_map<std::string, Manager*> manager_table;
@@ -995,7 +890,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	poolAct->micro.push_back(mic);
 	poolAct->macro.push_back(mac);
 	poolAct->updateMiddle();
-	//std::////cout << poolAct->macro.back().getName() << endl;
+	//std:://cout << poolAct->macro.back().getName() << endl;
 	vector<Action> test = poolAct->getActions(staticRec, poolAct->macro.back());
 	for (int i = 0; i < test.size(); i++) {
 		int t = test[i].exeAction();
@@ -1009,26 +904,19 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	bool OSAtkMode = true;
 	short M = GetKeyState('M') >> 15;
 	Party* party = new Party();
-	PartyM->addToPartyList(party);
 	Party* party2 = new Party();
-	PartyM->addToPartyList(party2);
 	party2->addToParty(silverSoldier, true);
 	Party* party3 = new Party();
-	Party* party4 = new Party();
-	PartyM->addToPartyList(party3);
 	party3->addToParty(silverSoldier2, true);
 	Village* v1 = new Village();
 	Village* v2 = new Village();
-	Village* v3 = new Village();
-	Village* v4 = new Village();
 	v1->addToParties(party2);
 	v2->addToParties(party3);
-	v3->addToParties(party);
 	Alliance* a1 = new Alliance(v1);
 	Alliance* a2 = new Alliance(v2);
-	Alliance* a3 = new Alliance(v3);
 	War* war = new War();
 	war->setWarParties(v1,v2);
+	Alliance::updateEnemies();
 
 	//party->addToParty(silverSoldier, false);
 	
@@ -1040,18 +928,11 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	
 	party->updateFollowers();
 
-	party4->addToParty(blueSoldier,true);
-	v4->addToParties(party4);
-	War* war2 = new War();
-	war2->setWarParties(v3, v4);
-	Alliance::updateEnemies();
-
 	vector<WorldObj*> enemyVec;
 	//osi::GameWindow::init();
 	LOG("PAST WINDOW INIT ***********************");
 	clock_t start_tick, current_ticks, delta_ticks;
 	clock_t fps = 0;
-
 	int fs = 120;
 	int wait_time = fs*3; //always wait 3 seconds
 	int count = 0;
@@ -1061,9 +942,8 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 		start_tick = clock();
 		_QuadTree->clear();
 		Alex->updateCD();
-		if (silverSoldier!=nullptr)silverSoldier->updateCD();
-		if(blueSoldier != nullptr)blueSoldier->updateCD();
-		if (silverSoldier2 != nullptr)silverSoldier2->updateCD();
+		silverSoldier->updateCD();
+		silverSoldier2->updateCD();
 		for (int i = 0; i < recVec.size(); i++) {
 			_QuadTree->Insert(recVec[i]);	//insert all obj into tree
 	
@@ -1074,7 +954,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	/*	if (staticRec->destination != Vector2f(0, 0)) { //Hero has a destination
 			if (staticRec->waypoint != Vector2f(0,0) && state == 0) { //Hero has a waypoint to the desination, and not in dialog
 				gameplay_functions->move_toward(staticRec); //Take a step towards the current waypoint
-			//	//std::////cout << "Request a step" << std::endl;
+			//	//std:://cout << "Request a step" << std::endl;
 			}
 			else if (state == 0)                //Hero needs waypoints to destination, and not in dialog
 			{
@@ -1086,8 +966,8 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 		{
 			int r = rand() % 4;
 			ai->start = staticRec->getLoc();
-			////std::////cout << "at " << ai->start.getXloc() << "," << ai->start.getYloc() << std::endl;
-			////std::////cout << "picked " << r << std::endl;
+			////std:://cout << "at " << ai->start.getXloc() << "," << ai->start.getYloc() << std::endl;
+			////std:://cout << "picked " << r << std::endl;
 			switch (r) {
 			case 0:
 				
@@ -1114,19 +994,16 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 			}
 		}*/
 		combatControl->checkParties();
-		//combatControl->follow(oya, state);
+		combatControl->follow(oya, state);
 		//combatControl->follow(silverSoldier, state);
 		combatControl->follow(staticRec, state);
-		if (blueSoldier != nullptr)combatControl->fight(blueSoldier, state);
-		//combatControl->follow(staticRec, state);
 		combatControl->fight(silverSoldier, state);
 		combatControl->fight(silverSoldier2, state);
-		PartyM->updateSoliderStatus();
 
 		/*
-		////cout << "Alex's position is " << Alex->getLoc().getXloc() << ", " << Alex->getLoc().getYloc() << endl;
-		////cout << "OS's position is " << silverSoldier->getLoc().getXloc() << ", " << silverSoldier->getLoc().getYloc() << endl;
-		////cout << "OS's DESTINATION IS: " << silverSoldier->destination.getXloc() << ", " << silverSoldier->destination.getYloc() << endl;
+		//cout << "Alex's position is " << Alex->getLoc().getXloc() << ", " << Alex->getLoc().getYloc() << endl;
+		//cout << "OS's position is " << silverSoldier->getLoc().getXloc() << ", " << silverSoldier->getLoc().getYloc() << endl;
+		//cout << "OS's DESTINATION IS: " << silverSoldier->destination.getXloc() << ", " << silverSoldier->destination.getYloc() << endl;
 
 		/* DEFINE COMBAT MOVEMENT AI HERE 
 		   At the start of each frame, we want to check for a given npc, whether there is hostile enemy on the map.
@@ -1142,7 +1019,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 			//if discovered Alex, set silverSoldier combat mode to 0(attack).
 			if (silverSoldier->getCurrentEnemy() != nullptr) break;
 			if (it == Alex) {
-				////cout << "*************************************FOUND ENEMY****************************************" << endl;
+				//cout << "*************************************FOUND ENEMY****************************************" << endl;
 				//silverSoldier->setMode(0);
 				OSAtkMode = true;
 				silverSoldier->setCurrentEnemy(it);
@@ -1167,7 +1044,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 
 		//if OS has an enemy, move to the enemy
 		if (silverSoldier->getCurrentEnemy() != nullptr && !silverSoldier->getEvade() ){//&& silverSoldier->destination != Vector2f(0,0)) {
-			////cout << "*************************************************MOVING TO ENEMY******************************************" << endl;
+			//cout << "*************************************************MOVING TO ENEMY******************************************" << endl;
 			silverSoldier->waypoint = Vector2f(silverSoldier->getCurrentEnemy()->getX() + (silverSoldier->getCurrentEnemy()->getWidth() / 4), silverSoldier->getCurrentEnemy()->getY() + (silverSoldier->getCurrentEnemy()->getHeight()/4));
 			silverSoldier->destination = Vector2f(silverSoldier->getCurrentEnemy()->getX() + (silverSoldier->getCurrentEnemy()->getWidth() / 4), silverSoldier->getCurrentEnemy()->getY() + (silverSoldier->getCurrentEnemy()->getHeight()/4));
 
@@ -1208,9 +1085,9 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 			//npc is at enemy destination, attack.
 			if (silverSoldier->destination == silverSoldier->getLoc()) {
 				silverSoldier->face(silverSoldier->getCurrentEnemy());
-				////cout << "COOL DOWN FOR ATTACK IS " << silverSoldier->getCool() << endl;
+				//cout << "COOL DOWN FOR ATTACK IS " << silverSoldier->getCool() << endl;
 				if (silverSoldier->getCool()) {
-					//std::////cout << "Pressed F" << std::endl;
+					//std:://cout << "Pressed F" << std::endl;
 					//gameplay_functions->special(silverSoldier, 0);
 					silverSoldier->meleeAttack();
 					gameplay_functions->melee(silverSoldier);
@@ -1224,21 +1101,21 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 		if (silverSoldier->getCurrentEnemy() != nullptr && silverSoldier->getEvade() ){//&& silverSoldier->destination != Vector2f(0, 0)) {
 			//if OS is in evade mode, use the getEvadeRange method to find the waypoint and set it to destination
 			if (silverSoldier->destination == Vector2f(-1, -1)) {
-				////cout << "****INSIDE THE EVADE MODE SETTER*****" << endl;
+				//cout << "****INSIDE THE EVADE MODE SETTER*****" << endl;
 				//silverSoldier->waypoint = silverSoldier->getEvadeRange(silverSoldier->getCurrentEnemy());
 				silverSoldier->destination = silverSoldier->getEvadeRange(silverSoldier->getCurrentEnemy());
-				////cout << "shango waypoint is " << silverSoldier->waypoint.getXloc() << silverSoldier->waypoint.getYloc() << endl;
+				//cout << "shango waypoint is " << silverSoldier->waypoint.getXloc() << silverSoldier->waypoint.getYloc() << endl;
 			}
 			//if reached destination, strafe left or right
 			if (silverSoldier->getLoc() == silverSoldier->destination) {
-				////cout << "******* INSIDE THE EVADE MODE STRAFE *******" << endl;
+				//cout << "******* INSIDE THE EVADE MODE STRAFE *******" << endl;
 				//silverSoldier->waypoint = silverSoldier->getStrafeLocation(silverSoldier->getCurrentEnemy());
 				silverSoldier->destination = silverSoldier->getEvadeRange(silverSoldier->getCurrentEnemy());
-				////cout << "silverSoldier destination inside strafe function is " << silverSoldier->waypoint.getXloc() << ", " << silverSoldier->waypoint.getYloc() << endl;
+				//cout << "silverSoldier destination inside strafe function is " << silverSoldier->waypoint.getXloc() << ", " << silverSoldier->waypoint.getYloc() << endl;
 			}
 			/*if (silverSoldier->waypoint != Vector2f(0, 0) && state == 0) { //Hero has a waypoint to the desination, and not in dialog
 				gameplay_functions->move_toward(silverSoldier); //Take a step towards the current waypoint
-															  //	//std::////cout << "Request a step" << std::endl;
+															  //	//std:://cout << "Request a step" << std::endl;
 			}
 			else if (state == 0)                //Hero needs waypoints to destination, and not in dialog
 			{
@@ -1251,7 +1128,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 		if (silverSoldier->destination != Vector2f(0, 0)) { //Hero has a destination
 			if (silverSoldier->waypoint != Vector2f(0, 0) && state == 0) { //Hero has a waypoint to the desination, and not in dialog
 				gameplay_functions->move_toward(silverSoldier); //Take a step towards the current waypoint
-															//	//std::////cout << "Request a step" << std::endl;
+															//	//std:://cout << "Request a step" << std::endl;
 			}
 			else if (state == 0)                //Hero needs waypoints to destination, and not in dialog
 			{
@@ -1363,7 +1240,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 		//temp_action->execute();
 
 		tBuffer->run();
-		//	////cout << tBuffer->queue_buffer.size() << endl;
+		//	//cout << tBuffer->queue_buffer.size() << endl;
 		//tBuffer->empty();
 
 		/////////////////////////////////////////////////////////////////
@@ -1389,7 +1266,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 		if (delta_ticks > 0)
 			fps = CLOCKS_PER_SEC / delta_ticks;
 		if (DialogueController::getState() == 0) {
-			//cout << "FPS: " << fps << endl;
+			cout << "FPS: " << fps << endl;
 		}
 
 		frame_count++;
@@ -1455,8 +1332,8 @@ void ALEX_LOOP(QuadTree* _QuadTree) {
 	//need this for map editor
 	RenderManager* RenM = new RenderManager(mLog, tBuffer, _QuadTree, gameplay_functions);
 
-	
-	Input* iController = new Input(gameplay_functions, Alex, RenM->renderHelper, tBuffer, &recVec);
+	AIController* ai = new AIController();
+	Input* iController = new Input(gameplay_functions, Alex, RenM->renderHelper, tBuffer, &recVec, ai);
 	//create Managers and add to Manager table
 
 	DummyController* DumM = new DummyController(mLog, tBuffer);
@@ -1507,7 +1384,7 @@ void ALEX_LOOP(QuadTree* _QuadTree) {
 		//run task buffer
 		//iController->InputCheck();
 		tBuffer->run();
-	//	////cout << tBuffer->queue_buffer.size() << endl;
+	//	//cout << tBuffer->queue_buffer.size() << endl;
 		//tBuffer->empty();
 	
 		
@@ -1517,7 +1394,7 @@ void ALEX_LOOP(QuadTree* _QuadTree) {
 		delta_ticks = clock() - start_tick; //the time, in ms, that took to render the scene
 		if (delta_ticks > 0)
 		fps = CLOCKS_PER_SEC / delta_ticks;
-		////cout << "FPS: "<<fps << endl;
+		//cout << "FPS: "<<fps << endl;
 	}
 	osi::GameWindow::terminate();
 }
@@ -1535,7 +1412,7 @@ void ERONS_LOOP(QuadTree* _QuadTree) {
 	//Player* Alex = new Player(SHANGO, Vector2f(4900.0, 3700.0), 40.0, 40.0);	//init player
 	Player* Alex = new Player(SHANGO, Vector2f(4900.0, 3700.0), 150.0, 150.0);	//init player
 
-																				//////cout << "Alex's width and height is " << Alex->getWidth() << ", " << Alex->getHeight() << endl;
+																				////cout << "Alex's width and height is " << Alex->getWidth() << ", " << Alex->getHeight() << endl;
 
 	vector<WorldObj*> recVec;
 	vector<WorldObj*>* recVec_ptr = &recVec;
@@ -1549,7 +1426,7 @@ void ERONS_LOOP(QuadTree* _QuadTree) {
 	RenderManager* RenM = new RenderManager(mLog, tBuffer, _QuadTree, gameplay_functions);
 
 	
-	Input* iController = new Input(gameplay_functions, Alex, RenM->renderHelper, tBuffer, recVec_ptr);
+	
 	//create Managers and add to Manager table
 
 	DummyController* DumM = new DummyController(mLog, tBuffer);
@@ -1566,7 +1443,7 @@ void ERONS_LOOP(QuadTree* _QuadTree) {
 	ActionHelper::gameplay_func = gameplay_functions;
 
 	CombatController* combatControl = new CombatController(gameplay_functions);
-
+	Input* iController = new Input(gameplay_functions, Alex, RenM->renderHelper, tBuffer, recVec_ptr, AiController);
 	//the order defines what order the managers the tasks will be sent to
 	DumM->register_manager();
 	PhysM->register_manager();
@@ -1841,8 +1718,6 @@ void ERONS_LOOP(QuadTree* _QuadTree) {
 
 	AiController->hero_planners[YEMOJA]->set_current_action(test_fight);
 
-	//current_end_state
-
 	staticRec->setWidth(100);
 	staticRec->setHeight(100);
 	staticRec->name = YEMOJA;
@@ -1917,10 +1792,10 @@ void ERONS_LOOP(QuadTree* _QuadTree) {
 	ai->graph.vertices = vertices;
 	ai->graph.obstacles = edges;
 	for (Vector2f vert : ai->graph.vertices) {
-		////std::////cout << "X: " << vert.getXloc() << " Y: " << vert.getYloc() << std::endl;
+		////std:://cout << "X: " << vert.getXloc() << " Y: " << vert.getYloc() << std::endl;
 	}
 	for (auto edge : ai->graph.obstacles) {
-		////std::////cout << "EDGE from " << edge.first.getXloc() << "," << edge.first.getYloc() << " to " << edge.second.getXloc() << "," << edge.second.getYloc() << std::endl;
+		////std:://cout << "EDGE from " << edge.first.getXloc() << "," << edge.first.getYloc() << " to " << edge.second.getXloc() << "," << edge.second.getYloc() << std::endl;
 	}
 
 	bool visible = true;
@@ -1945,10 +1820,10 @@ void ERONS_LOOP(QuadTree* _QuadTree) {
 	ai->graph.insert(Vector2f(4500.00, 4000.00));
 	ai->graph.insert(Vector2f(5650.00, 3700.00));
 	for (Vector2f vert : ai->graph.vertices) {
-		////std::////cout << "X: " << vert.getXloc() << " Y: " << vert.getYloc() << std::endl;
+		////std:://cout << "X: " << vert.getXloc() << " Y: " << vert.getYloc() << std::endl;
 	}
 	for (auto edge : ai->graph.obstacles) {
-		////std::////cout << "EDGE from " << edge.first.getXloc() << "," << edge.first.getYloc() << " to " << edge.second.getXloc() << "," << edge.second.getYloc() << std::endl;
+		////std:://cout << "EDGE from " << edge.first.getXloc() << "," << edge.first.getYloc() << " to " << edge.second.getXloc() << "," << edge.second.getYloc() << std::endl;
 	}
 
 	ai->graph._print();
@@ -1970,7 +1845,7 @@ void ERONS_LOOP(QuadTree* _QuadTree) {
 	poolAct->micro.push_back(mic);
 	poolAct->macro.push_back(mac);
 	poolAct->updateMiddle();
-	//std::////cout << poolAct->macro.back().getName() << endl;
+	//std:://cout << poolAct->macro.back().getName() << endl;
 	vector<Action> test = poolAct->getActions(staticRec, poolAct->macro.back());
 	for (int i = 0; i < test.size(); i++) {
 		int t = test[i].exeAction();
@@ -2006,7 +1881,7 @@ void ERONS_LOOP(QuadTree* _QuadTree) {
 		if (staticRec->destination != Vector2f(0, 0)) { //Hero has a destination
 			if (staticRec->waypoint != Vector2f(0, 0) && state == 0) { //Hero has a waypoint to the desination, and not in dialog
 				gameplay_functions->move_toward(staticRec); //Take a step towards the current waypoint
-															//	//std::////cout << "Request a step" << std::endl;
+															//	//std:://cout << "Request a step" << std::endl;
 			}
 			else if (state == 0)                //Hero needs waypoints to destination, and not in dialog
 			{
@@ -2018,8 +1893,8 @@ void ERONS_LOOP(QuadTree* _QuadTree) {
 		{
 			int r = rand() % 4;
 			ai->start = staticRec->getLoc();
-			////std::////cout << "at " << ai->start.getXloc() << "," << ai->start.getYloc() << std::endl;
-			////std::////cout << "picked " << r << std::endl;
+			////std:://cout << "at " << ai->start.getXloc() << "," << ai->start.getYloc() << std::endl;
+			////std:://cout << "picked " << r << std::endl;
 			switch (r) {
 			case 0:
 
@@ -2047,9 +1922,9 @@ void ERONS_LOOP(QuadTree* _QuadTree) {
 		}
 
 
-		////cout << "Alex's position is " << Alex->getLoc().getXloc() << ", " << Alex->getLoc().getYloc() << endl;
-		////cout << "OS's position is " << silverSoldier->getLoc().getXloc() << ", " << silverSoldier->getLoc().getYloc() << endl;
-		////cout << "OS's DESTINATION IS: " << silverSoldier->destination.getXloc() << ", " << silverSoldier->destination.getYloc() << endl;
+		//cout << "Alex's position is " << Alex->getLoc().getXloc() << ", " << Alex->getLoc().getYloc() << endl;
+		//cout << "OS's position is " << silverSoldier->getLoc().getXloc() << ", " << silverSoldier->getLoc().getYloc() << endl;
+		//cout << "OS's DESTINATION IS: " << silverSoldier->destination.getXloc() << ", " << silverSoldier->destination.getYloc() << endl;
 
 		/* DEFINE COMBAT MOVEMENT AI HERE
 		At the start of each frame, we want to check for a given npc, whether there is hostile enemy on the map.
@@ -2064,7 +1939,7 @@ void ERONS_LOOP(QuadTree* _QuadTree) {
 		//	//if discovered Alex, set silverSoldier combat mode to 0(attack).
 		//	if (silverSoldier->getCurrentEnemy() != nullptr) break;
 		//	if (it == Alex) {
-		//		//cout << "*************************************FOUND ENEMY****************************************" << endl;
+		//		cout << "*************************************FOUND ENEMY****************************************" << endl;
 		//		//silverSoldier->setMode(0);
 		//		OSAtkMode = true;
 		//		silverSoldier->setCurrentEnemy(it);
@@ -2091,7 +1966,7 @@ void ERONS_LOOP(QuadTree* _QuadTree) {
 
 		////if OS has an enemy, move to the enemy
 		//if (silverSoldier->getCurrentEnemy() != nullptr && !silverSoldier->getEvade()) {//&& silverSoldier->destination != Vector2f(0,0)) {
-		//	//cout << "*************************************************MOVING TO ENEMY******************************************" << endl;
+		//	cout << "*************************************************MOVING TO ENEMY******************************************" << endl;
 		//	silverSoldier->waypoint = Vector2f(silverSoldier->getCurrentEnemy()->getX() + (silverSoldier->getCurrentEnemy()->getWidth() / 4), silverSoldier->getCurrentEnemy()->getY() + (silverSoldier->getCurrentEnemy()->getHeight() / 4));
 		//	silverSoldier->destination = Vector2f(silverSoldier->getCurrentEnemy()->getX() + (silverSoldier->getCurrentEnemy()->getWidth() / 4), silverSoldier->getCurrentEnemy()->getY() + (silverSoldier->getCurrentEnemy()->getHeight() / 4));
 
@@ -2134,9 +2009,9 @@ void ERONS_LOOP(QuadTree* _QuadTree) {
 		//	//npc is at enemy destination, attack.
 		//	if (silverSoldier->destination == silverSoldier->getLoc()) {
 		//		silverSoldier->face(silverSoldier->getCurrentEnemy());
-		//		//cout << "COOL DOWN FOR ATTACK IS " << silverSoldier->getCool() << endl;
+		//		cout << "COOL DOWN FOR ATTACK IS " << silverSoldier->getCool() << endl;
 		//		if (silverSoldier->getCool()) {
-		//			std:://cout << "Pressed F" << std::endl;
+		//			std::cout << "Pressed F" << std::endl;
 		//			//gameplay_functions->special(silverSoldier, 0);
 		//			silverSoldier->meleeAttack();
 		//			gameplay_functions->melee(silverSoldier);
@@ -2151,21 +2026,21 @@ void ERONS_LOOP(QuadTree* _QuadTree) {
 		//if (silverSoldier->getCurrentEnemy() != nullptr && silverSoldier->getEvade()) {//&& silverSoldier->destination != Vector2f(0, 0)) {
 		//																		   //if OS is in evade mode, use the getEvadeRange method to find the waypoint and set it to destination
 		//	if (silverSoldier->destination == Vector2f(-1, -1)) {
-		//		//cout << "****INSIDE THE EVADE MODE SETTER*****" << endl;
+		//		cout << "****INSIDE THE EVADE MODE SETTER*****" << endl;
 		//		//silverSoldier->waypoint = silverSoldier->getEvadeRange(silverSoldier->getCurrentEnemy());
 		//		silverSoldier->destination = silverSoldier->getEvadeRange(silverSoldier->getCurrentEnemy());
-		//		//cout << "shango waypoint is " << silverSoldier->waypoint.getXloc() << silverSoldier->waypoint.getYloc() << endl;
+		//		cout << "shango waypoint is " << silverSoldier->waypoint.getXloc() << silverSoldier->waypoint.getYloc() << endl;
 		//	}
 		//	//if reached destination, strafe left or right
 		//	if (silverSoldier->getLoc() == silverSoldier->destination) {
-		//		//cout << "******* INSIDE THE EVADE MODE STRAFE *******" << endl;
+		//		cout << "******* INSIDE THE EVADE MODE STRAFE *******" << endl;
 		//		//silverSoldier->waypoint = silverSoldier->getStrafeLocation(silverSoldier->getCurrentEnemy());
 		//		silverSoldier->destination = silverSoldier->getEvadeRange(silverSoldier->getCurrentEnemy());
-		//		//cout << "silverSoldier destination inside strafe function is " << silverSoldier->waypoint.getXloc() << ", " << silverSoldier->waypoint.getYloc() << endl;
+		//		cout << "silverSoldier destination inside strafe function is " << silverSoldier->waypoint.getXloc() << ", " << silverSoldier->waypoint.getYloc() << endl;
 		//	}
 		//	/*if (silverSoldier->waypoint != Vector2f(0, 0) && state == 0) { //Hero has a waypoint to the desination, and not in dialog
 		//	gameplay_functions->move_toward(silverSoldier); //Take a step towards the current waypoint
-		//	//	std:://cout << "Request a step" << std::endl;
+		//	//	std::cout << "Request a step" << std::endl;
 		//	}
 		//	else if (state == 0)                //Hero needs waypoints to destination, and not in dialog
 		//	{
@@ -2178,7 +2053,7 @@ void ERONS_LOOP(QuadTree* _QuadTree) {
 		//if (silverSoldier->destination != Vector2f(0, 0)) { //Hero has a destination
 		//	if (silverSoldier->waypoint != Vector2f(0, 0) && state == 0) { //Hero has a waypoint to the desination, and not in dialog
 		//		gameplay_functions->move_toward(silverSoldier); //Take a step towards the current waypoint
-		//													  //	std:://cout << "Request a step" << std::endl;
+		//													  //	std::cout << "Request a step" << std::endl;
 		//	}
 		//	else if (state == 0)                //Hero needs waypoints to destination, and not in dialog
 		//	{
@@ -2207,7 +2082,7 @@ void ERONS_LOOP(QuadTree* _QuadTree) {
 		//ActionExecFunctions::ActionExecMap[AiController->hero_planners[YEMOJA]->get_current_action()]
 		AiController->hero_planners[YEMOJA]->get_current_action()->execute();
 		tBuffer->run();
-		//	////cout << tBuffer->queue_buffer.size() << endl;
+		//	//cout << tBuffer->queue_buffer.size() << endl;
 		//tBuffer->empty();
 
 		/////////////////////////////////////////////////////////////////
@@ -2232,7 +2107,7 @@ void ERONS_LOOP(QuadTree* _QuadTree) {
 		if (delta_ticks > 0)
 			fps = CLOCKS_PER_SEC / delta_ticks;
 		if (DialogueController::getState() == 0) {
-			//////cout << "FPS: " << fps << endl;
+			////cout << "FPS: " << fps << endl;
 		}
 
 
@@ -2245,28 +2120,28 @@ void ERONS_LOOP(QuadTree* _QuadTree) {
 void Darion_Ian_Test() {
 	MemoryPool* hero_pool = create_pool(2048);
 	MemNode* head_ptr = init_pool(hero_pool, 32);
-	//std::////cout << std::endl;
+	//std:://cout << std::endl;
 
 	MemNode* m = head_ptr;
 
 	while (m != NULL) {
-		//std::////cout << "Availability:" << m->getAvailability() << std::endl;
-		//std::////cout << "Block Pointer:" << m->getBlockPointer() << std::endl;
+		//std:://cout << "Availability:" << m->getAvailability() << std::endl;
+		//std:://cout << "Block Pointer:" << m->getBlockPointer() << std::endl;
 		if (m->hasNext() != NULL)
-			//std::////cout << "Next Block:" << m->getNext()->getBlockPointer() << std::endl;
-		//std::////cout << "--------------------" << std::endl;
+			//std:://cout << "Next Block:" << m->getNext()->getBlockPointer() << std::endl;
+		//std:://cout << "--------------------" << std::endl;
 		m = m->getNext();
 	}
 
-	//std::////cout << hero_pool->num_of_blocks << " Blocks" << std::endl;
+	//std:://cout << hero_pool->num_of_blocks << " Blocks" << std::endl;
 	Warrior* myWarrior = new(find_available_block(head_ptr)) Warrior();
-	//std::////cout << "Address of myWarrior:" << myWarrior << std::endl;
-	//std::////cout << "Health:" << myWarrior->health << std::endl;
+	//std:://cout << "Address of myWarrior:" << myWarrior << std::endl;
+	//std:://cout << "Health:" << myWarrior->health << std::endl;
 
 	Warrior* war = new(find_available_block(head_ptr)) Warrior(775, false, 3.9f, 2.7f);
 	war->health = 69;
-	//std::////cout << "Address of war:" << war << std::endl;
-	//std::////cout << "Health:" << war->health << std::endl;
+	//std:://cout << "Address of war:" << war << std::endl;
+	//std:://cout << "Health:" << war->health << std::endl;
 
 	destroy_pool(hero_pool);
 	destroy_MemNode_list(head_ptr);
@@ -2306,7 +2181,7 @@ void ANDREWS_TEST() {
 	soundsystem.playSound(soundSample, false, channel, ispaused, 1); 	// Play the sound, with loop mode
 
 
-	////cout << "Press return to quit." << endl;  // Do something meanwhile...
+	//cout << "Press return to quit." << endl;  // Do something meanwhile...
 	cin.get();
 
 	soundsystem.releaseSound(soundSample); // Release the sound
@@ -2345,9 +2220,9 @@ void ANDREWS_LOOP(QuadTree* _QuadTree) {
 	//need this here for map editor
 	ChildrenOfOsi* gameplay_functions = new ChildrenOfOsi(mLog, tBuffer);
 	RenderManager* RenM = new RenderManager(mLog, tBuffer, _QuadTree, gameplay_functions);
-
+	AIController* ai = new AIController();
 	
-	Input* iController = new Input(gameplay_functions, Alex, RenM->renderHelper, tBuffer, &recVec);
+	Input* iController = new Input(gameplay_functions, Alex, RenM->renderHelper, tBuffer, &recVec, ai);
 	//create Managers and add to Manager table
 
 	DummyController* DumM = new DummyController(mLog, tBuffer);
@@ -2365,8 +2240,8 @@ void ANDREWS_LOOP(QuadTree* _QuadTree) {
 	TestM->register_manager();
 	AudM->register_manager();
 
-	////cout << endl;
-	////cout << "STARTING PHYSICS TESTS" << endl;
+	//cout << endl;
+	//cout << "STARTING PHYSICS TESTS" << endl;
 	PHYSICS_TEST();
 
 	//std::unordered_map<std::string, Manager*> manager_table;
@@ -2406,17 +2281,17 @@ void ANDREWS_LOOP(QuadTree* _QuadTree) {
 void PHYSICS_TEST() {
 	PhysicsTestSuite* test = new PhysicsTestSuite();
 	if (test->test_movement()) {
-		////cout << "MOVEMENT TEST SUCCEEDED" << endl;
+		//cout << "MOVEMENT TEST SUCCEEDED" << endl;
 	}
 	else {
-		////cout << "MOVEMENT TEST FAILED" << endl;
+		//cout << "MOVEMENT TEST FAILED" << endl;
 	}
 
 	if (test->test_collision()) {
-		////cout << "COLLISION TEST SUCCEEDED" << endl;
+		//cout << "COLLISION TEST SUCCEEDED" << endl;
 	}
 	else {
-		////cout << "COLLISION TEST FAILED" << endl;
+		//cout << "COLLISION TEST FAILED" << endl;
 	}
 }
 
