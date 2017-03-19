@@ -176,7 +176,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 
 	DummyController* DumM = new DummyController(mLog, tBuffer);
 	PhysicsManager* PhysM = new PhysicsManager(mLog, tBuffer, _QuadTree);
-	PartyManager* PartyM = new PartyManager(gameplay_functions);
+	PartyManager* PartyM = new PartyManager(gameplay_functions, Alex);
 	
 	memManager* memM = new memManager(mLog, tBuffer);
 	TestManager* TestM = new TestManager(mLog, tBuffer);
@@ -720,7 +720,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	silverSoldier->melee->setWidth(50);
 	silverSoldier->melee->setHeight(50);
 	silverSoldier->melee->setStaminaCost(90);
-	silverSoldier->setHealth(50);
+	silverSoldier->setHealth(30);
 
 	silverSoldier->addAttackType(rockThrow);
 	silverSoldier->melee->sprite.setTexture(border);
@@ -736,7 +736,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	silverSoldier2->melee->setWidth(50);
 	silverSoldier2->melee->setHeight(50);
 	silverSoldier2->melee->setStaminaCost(90);
-	silverSoldier2->setHealth(50);
+	silverSoldier2->setHealth(30);
 
 	silverSoldier2->addAttackType(rockThrow);
 	silverSoldier2->melee->sprite.setTexture(border);
@@ -999,9 +999,9 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 			}
 		}*/
 		combatControl->checkParties();
-		combatControl->follow(oya, state);
+		//combatControl->follow(oya, state);
 		//combatControl->follow(silverSoldier, state);
-		combatControl->follow(staticRec, state);
+		//combatControl->follow(staticRec, state);
 		combatControl->fight(silverSoldier, state);
 		combatControl->fight(silverSoldier2, state);
 		PartyM->updateSoliderStatus();

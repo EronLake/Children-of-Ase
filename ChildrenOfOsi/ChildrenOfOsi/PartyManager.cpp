@@ -3,9 +3,10 @@
 
 
 
-PartyManager::PartyManager(ChildrenOfOsi* p_gameplay_func)
+PartyManager::PartyManager(ChildrenOfOsi* p_gameplay_func, WorldObj* p_player)
 {
 	gameplay_func = p_gameplay_func;
+	player = p_player;
 }
 
 
@@ -25,7 +26,8 @@ void PartyManager::updateSoliderStatus()
 				(*itj)->getParty()->removeSoldier(*itj);
 			}
 			if ((*itj)->getInCombat() == false) {
-				//gameplay_func->stop(*itj);
+				if ((*itj) == player) break;
+				gameplay_func->stop(*itj);
 			}
 		}
 		

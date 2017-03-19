@@ -6,7 +6,7 @@
 class PartyManager
 {
 public:
-	PartyManager(ChildrenOfOsi* p_gameplay_func);
+	PartyManager(ChildrenOfOsi* p_gameplay_func, WorldObj* p_player);
 	~PartyManager();
 
 	void updateSoliderStatus();
@@ -15,6 +15,7 @@ public:
 private:
 	vector<Party*> partyList;
 	ChildrenOfOsi* gameplay_func;
+	WorldObj* player;
 
 };
 
