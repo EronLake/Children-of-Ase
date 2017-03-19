@@ -21,3 +21,30 @@ void ConversationPoint::setMultipliers(int a, int k, int h, int p, int r, int e,
 	multipliers->setExtroversion(e);
 	multipliers->setGreed(g);
 };
+
+std::string ConversationPoint::get_topic() {
+	return topic;
+}
+
+std::string ConversationPoint::get_temp() {
+	return temp;
+}
+
+std::string ConversationPoint::get_name() {
+	return my_name;
+}
+
+void ConversationPoint::set_topic(std::string val) {
+	topic = val;
+}
+
+void ConversationPoint::set_temp(std::string val) {
+	temp = val;
+}
+
+void ConversationPoint::set_name(std::string val) {
+	my_name = val;
+}
+
+
+

@@ -7,7 +7,7 @@ vector<Party*> Party::partiesWorld;
 /**
  * Creates a new party with no alliegances, no leader, and no members.
  */
-Party::Party() : faction(nullptr), leader(nullptr), target(nullptr), mode(Party::MODE_IDLE) { Party::partiesWorld.push_back(this); }
+Party::Party(): faction(nullptr), leader(nullptr), target(nullptr), mode(Party::MODE_IDLE) { Party::partiesWorld.push_back(this); }
 
 /**
  * Creates a new party with alliegance to the given faction, but no members nor
@@ -89,17 +89,17 @@ bool Party::isEnemyOf(Party *p)
  */
 void Party::addToParty(Soldier* s, bool isLeader)
 {
-	if (s != nullptr) {
-		if (isLeader || members.size() == 0) {
-			members.insert(members.begin(), s);
-			this->leader = s;
-			s->setParty(this);
-		}
-		else {
-			this->members.push_back(s);
-			s->setParty(this);
-		}
-	}
+  if(s != nullptr) {
+    if(isLeader || members.size() == 0) {
+      members.insert(members.begin(), s);
+      this->leader = s;
+      s->setParty(this);
+    }
+    else {
+      this->members.push_back(s);
+      s->setParty(this);
+    }
+  }
 }
 
 /**
@@ -109,15 +109,41 @@ void Party::addToParty(Soldier* s, bool isLeader)
  */
 void Party::removeSoldier(Soldier* s)
 {
-  for(auto& i = this->members.begin(); i != this->members.end(); ++i) {
-    if(*i == s) {
-      this->members.erase(i);
-      s->setParty(nullptr);
-      if(leader == s) {
-        leader = *members.begin();
-      }
-    }
+
+  cout << "SIZE OF THE PARTY IS ********** " << members.size() << endl;
+  members.erase(std::remove(members.begin(), members.end(), s), members.end());
+  cout << "SUCCESFULLY GOTTEN PAST THE REMOVE SOLDIER STATEMENT*************************" << endl;
+  
+  //for enemy soldier's party, we need to remove s's party from their list of party if its emptys
+  //cout << "Enemy's enemy: " << s->getCurrentEnemy()->getCurrentEnemy() << endl;
+
+  if(s->getCurrentEnemy() != nullptr) {
+    s->getCurrentEnemy()->setCurrentEnemy(nullptr);
+    s->getCurrentEnemy()->setInCombat(false);
+    s->getCurrentEnemy()->setEvade(false);
+    s->getCurrentEnemy()->setHold(false);
   }
+  s->setCurrentEnemy(nullptr);
+
+  if(members.empty()) {
+    //s->getCurrentEnemy()->getParty()->setMode(Party::MODE_IDLE);
+    leader = nullptr;
+  }
+  else
+    if(s == leader) {
+      leader = *(members.begin());
+    }
+
+
+  /*for(auto& i = this->members.begin(); i != this->members.end(); ++i) {
+    if(*i == s) {
+    this->members.erase(i);
+    s->setParty(nullptr);
+    if(leader == s) {
+      leader = *members.begin();
+    }
+    }
+  }*/
 }
 
 /**
@@ -190,14 +216,15 @@ void Party::setMode(int m)
   }
 }
 
-void Party::updateFollowers() {
-	Soldier* prev = nullptr;
-	for (auto i = members.rbegin(); i != members.rend(); ++i) {
-		if (prev != nullptr) {
-			prev->setCurrentLeader(*i);
-		}
-		prev = *i;
-	}
+void Party::updateFollowers()
+{
+  Soldier* prev = nullptr;
+  for(auto i = members.rbegin(); i != members.rend(); ++i) {
+    if(prev != nullptr) {
+      prev->setCurrentLeader(*i);
+    }
+    prev = *i;
+  }
 }
 
 void Party::findEnemy()
@@ -206,5 +233,4 @@ void Party::findEnemy()
 }
 
 void Party::update()
-{
-}
+{}
