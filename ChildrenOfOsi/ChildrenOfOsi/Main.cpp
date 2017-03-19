@@ -210,7 +210,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	//Player* Alex = new Player(1000,600, true);	//init player
 	//WorldObj* Alex = new WorldObj(1000, 600, true);
 
-	//ObjConfig::import_config(recVec_ptr, gameplay_functions, tBuffer);
+	ObjConfig::import_config(recVec_ptr, gameplay_functions, tBuffer);
 	
 	DialogueConfig::import_config(gameplay_functions, tBuffer);
 	

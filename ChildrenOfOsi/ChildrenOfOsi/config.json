@@ -1,3 +1,56 @@
-{
+{//SETUP///
 
+   "JungleBotLeft" : {
+      "bodyx1" : 100.0,
+      "bodyx2" : 100.0,
+      "bodyy1" : 100.0,
+      "bodyy2" : 100.0,
+      "frame_num" : 1,
+      "hight" : 500.0,
+      "name" : "JungleBotLeft",
+      "tex_file" : "Jungle_Pot",
+      "width" : 500.0,
+      "x" : 133.3125152587891,
+      "y" : 180.4985504150391
+   },
+   "JungleBotRight" : {
+      "bodyx1" : -100.0,
+      "bodyx2" : -100.0,
+      "bodyy1" : -100.0,
+      "bodyy2" : -100.0,
+      "frame_num" : 1,
+      "hight" : 500.0,
+      "name" : "JungleBotRight",
+      "tex_file" : "Jungle_Basket",
+      "width" : 500.0,
+      "x" : 180.7728576660156,
+      "y" : 181.3826904296875
+   },
+   "JungleTopLeft" : {
+      "bodyx1" : -100.0,
+      "bodyx2" : -100.0,
+      "bodyy1" : -100.0,
+      "bodyy2" : -100.0,
+      "frame_num" : 1,
+      "hight" : 500.0,
+      "name" : "JungleTopLeft",
+      "tex_file" : "Jungle_Flower1",
+      "width" : 500.0,
+      "x" : 133.1372985839844,
+      "y" : 133.2097778320313
+   },
+   "JungleTopRight" : {
+      "bodyx1" : -100.0,
+      "bodyx2" : -100.0,
+      "bodyy1" : -100.0,
+      "bodyy2" : -100.0,
+      "frame_num" : 1,
+      "hight" : 500.0,
+      "name" : "JungleTopRight",
+      "tex_file" : "Jungle_Flower2",
+      "width" : 500.0,
+      "x" : 180.9977111816406,
+      "y" : 133.2322692871094
+   } ///Setup Ends//
+   
 }
