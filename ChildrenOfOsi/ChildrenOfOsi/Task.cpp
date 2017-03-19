@@ -2,7 +2,7 @@
 #include "Task.h"
 
 
-Task::Task(std::string _name, std::string _status, std::string _type)
+Task::Task(std::string _name, std::string _status, std::string _type, char* _source, char* _target)
 {
 	name = _name;
 	type = _type;
@@ -11,6 +11,9 @@ Task::Task(std::string _name, std::string _status, std::string _type)
 	//object
 
 	status = _status;
+
+	source = _source; //optional arguments for audio
+	target = _target;
 	LOG("Task Objected Constructed");
 }
 
@@ -26,6 +29,7 @@ Task::Task(std::string _name, std::string _status, std::string _type, WorldObj *
 	}
 	LOG("Task Object W/WOBJ Constructed");
 }
+
 
 Task::Task(std::string _name, std::string _status, std::string _type, WorldObj * _objToUpdate, int num)
 {
@@ -115,13 +119,10 @@ Task::Task(std::string _name, std::string _status, std::string _type, std::strin
 	LOG("Task Object W/WOBJ&MEM Constructed");
 }
 
-Task::Task(std::string _name, std::string _status, std::string _type, std::string _key, int _utility, int _why, Hero* _owner, 
+
+Task::Task(std::string _name, std::string _status, std::string _type, std::string _key, int _utility, int _why, Hero* _owner,
 	Hero* _receiver, Hero* _doer, std::string _exe_name)
 {
-	name = _name;
-	type = _type;
-
-	status = _status;
 
 	key = _key;
 
@@ -138,6 +139,29 @@ Task::Task(std::string _name, std::string _status, std::string _type, std::strin
 	Hero* doer = NULL;
 
 	LOG("Task Object W/WOBJ&ACT Constructed");
+}
+
+Task::Task(std::string _name, std::string _status, std::string _type, std::string _topic, std::string _temp, std::string _key)
+{
+	name = _name;
+	type = _type;
+
+	status = _status;
+
+	my_key = _key;
+	topic = _topic;
+	temp = _temp;
+
+}
+
+Task::Task(std::string _name, std::string _status, std::string _type, std::vector<std::string> _topicVec, std::string _key)
+{
+	name = _name;
+	type = _type;
+	status = _status;
+	my_key = _key;
+	topicVec = _topicVec;
+
 }
 
 /*Task::Task(std::string _name, std::string _status, std::string _type, WorldObj* _objToUpdate, float x, float y, bool col, int d) {
@@ -192,7 +216,13 @@ Task* Task::clone_task()
 	duplicate_task->owner = owner;
 	duplicate_task->receiver = receiver;
 	duplicate_task->doer = doer;
-
+	duplicate_task->topic = topic;
+	duplicate_task->temp = temp;
+	duplicate_task->my_key = my_key;
+	duplicate_task->topicVec = topicVec;
+	duplicate_task->source = source;
+	duplicate_task->target = target;
+		
 	return duplicate_task;
 }
 

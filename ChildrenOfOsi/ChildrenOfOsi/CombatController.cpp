@@ -48,24 +48,27 @@ void CombatController::fight(Soldier* sold1, int state) {
 				break;
 			}
 		}*/
+		if (sold1->getCurrentEnemy() != nullptr) {
+			if (sold1->getStamina()>sold1->melee->getStaminaCost()) {
+				sold1->setEvade(false);
+			}
+			else if (sold1->destination == sold1->getLoc() || sold1->destination == Vector2f(0, 0)) {
+				sold1->setEvade(true);
+				//silverSoldier->waypoint = Vector2f(-1, -1);
+				float x = rand() % 300 + 100;
+				int x2 = rand() % 2;
+				float y = rand() % 300 + 100;
+				int y2 = rand() % 2;
+				if (x2 == 0)x = -x;
+				if (y2 == 0)y = -y;
+				cout << "GEY Y () RETURNS ******* " << (sold1->getCurrentEnemy()) << endl;
+				sold1->destination = Vector2f(sold1->getCurrentEnemy()->getX() + x, sold1->getCurrentEnemy()->getY() + y);
+				sold1->waypoint = Vector2f(sold1->getCurrentEnemy()->getX() + x, sold1->getCurrentEnemy()->getY() + y);
+			}
 
-		if (sold1->getCool()) {
-			sold1->setEvade(false);
-		}
-		else if (sold1->destination == sold1->getLoc() || sold1->destination == Vector2f(0, 0)) {
-			sold1->setEvade(true);
-			//silverSoldier->waypoint = Vector2f(-1, -1);
-			float x = rand() % 300 + 100;
-			int x2 = rand() % 2;
-			float y = rand() % 300 + 100;
-			int y2 = rand() % 2;
-			if (x2 == 0)x = -x;
-			if (y2 == 0)y = -y;
-			sold1->destination = Vector2f(sold1->getCurrentEnemy()->getX() + x, sold1->getCurrentEnemy()->getY() + y);
-			sold1->waypoint = Vector2f(sold1->getCurrentEnemy()->getX() + x, sold1->getCurrentEnemy()->getY() + y);
 		}
 
-		//if OS has an enemy, move to the enemy
+		// If Soldier has an enemy, move to the enemy and not in evade mode
 		if (sold1->getCurrentEnemy() != nullptr && !sold1->getEvade()) {//&& silverSoldier->destination != Vector2f(0,0)) {
 			//std::cout << "*************************************************MOVING TO ENEMY******************************************" << endl;
 
@@ -85,6 +88,7 @@ void CombatController::fight(Soldier* sold1, int state) {
 					//gameplay_functions->special(silverSoldier, 0);
 					sold1->meleeAttack();
 					gameplay_functions->melee(sold1);
+					// Why are we setting currentEnemy to nullptr here?
 					sold1->setCurrentEnemy(nullptr);
 				}
 			}
@@ -162,7 +166,7 @@ void CombatController::fight(Soldier* sold1, int state) {
 			*/
 		}
 
-		////evade mode
+		// Evade mode
 		if (sold1->getCurrentEnemy() != nullptr && sold1->getEvade()) {//&& silverSoldier->destination != Vector2f(0, 0)) {
 																	   //if OS is in evade mode, use the getEvadeRange method to find the waypoint and set it to destination
 			if (sold1->destination == Vector2f(-1, -1)) {
@@ -261,7 +265,12 @@ void CombatController::follow(Soldier* sold1, int state) {
 }
 
 float CombatController::dist_by_center(Soldier* sold1, Soldier* sold2) {
-	//std:://cout << "Soldier: " <<
+
+	//std::cout << "Soldier: " <<
+  cout << "* * * * * * * * * * Soldier1 physics body length: " << sold1->body.size() << " * * * * * * * * * *" << endl;
+  cout << "* * * * * * * * * * Address of Soldier 2: " << sold2 << endl;
+  cout << "* * * * * * * * * * Soldier2 physics body length: " << sold2->body.size() << " * * * * * * * * * *" << endl;
+
 	float a = ((sold1->body[0].getX() + (sold1->body[0].getWidth() / 2)) - (sold2->body[0].getX() + (sold2->body[0].getWidth() / 2)));
 	float b= ((sold1->body[0].getY() + (sold1->body[0].getHeight() / 2)) - (sold2->body[0].getY() + (sold2->body[0].getHeight() / 2)));
 	float c = sqrt(a*a + b*b);
@@ -277,18 +286,20 @@ void CombatController::checkParties() {
 			for (auto a = partiesA.begin(); a != partiesA.end(); ++a) {
 				if ((*a)->getMode()!=1 && (*a)->getMode() != 2) {
 					for (auto b = partiesB.begin(); b != partiesB.end(); ++b) {
-						if (dist_by_center((*a)->getLeader(), (*b)->getLeader()) < 1000) {
-							(*a)->addToCurrentEnemies(*b);
-							(*a)->setMode(1);
-							vector<Soldier*> mema = (*a)->getMembers();
-							for (auto am = mema.begin(); am != mema.end(); ++am) {
-								(*am)->setInCombat(true);
-							}
-							(*b)->addToCurrentEnemies(*a);
-							(*b)->setMode(1);
-							vector<Soldier*> memb = (*b)->getMembers();
-							for (auto bm = memb.begin(); bm != memb.end(); ++bm) {
-								(*bm)->setInCombat(true);
+						if ((*a)->getLeader() != nullptr && (*b)->getLeader() != nullptr) {
+							if (dist_by_center((*a)->getLeader(), (*b)->getLeader()) < 1000) {
+								(*a)->addToCurrentEnemies(*b);
+								(*a)->setMode(1);
+								vector<Soldier*> mema = (*a)->getMembers();
+								for (auto am = mema.begin(); am != mema.end(); ++am) {
+									(*am)->setInCombat(true);
+								}
+								(*b)->addToCurrentEnemies(*a);
+								(*b)->setMode(1);
+								vector<Soldier*> memb = (*b)->getMembers();
+								for (auto bm = memb.begin(); bm != memb.end(); ++bm) {
+									(*bm)->setInCombat(true);
+								}
 							}
 						}
 					}

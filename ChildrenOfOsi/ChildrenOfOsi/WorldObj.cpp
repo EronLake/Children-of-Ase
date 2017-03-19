@@ -48,6 +48,10 @@ void WorldObj::drawObj(float _x, float _y)
 }
 
 void WorldObj::offsetBody(int i, float x1, float x2, float y1, float y2) {
+	offset_x1 += x1;
+	offset_x2 += x2;
+	offset_y1 += y1;
+	offset_y2 += y2;
 	body[i].setX(body[i].getX()+x1);
 	body[i].setY(body[i].getY() + y1);
 	body[i].setWidth(body[i].getWidth() - (x1+x2));

@@ -53,6 +53,9 @@ int Planner::heuristic(Action step, vector<std::shared_ptr<Preconditions>> prior
 void Planner::choose_end_with(int hero) {
 	switch (hero) {
 	case YEMOJA:
+
+	//	end_states[YEMOJA] = ActionPool
+		// me = evaluateHero
 		//evaluate relationship
 		// end_states[YEMOJA] = picked_state
 		// insert the endstate into milestones, with empty milestone vector
@@ -73,7 +76,7 @@ Action Planner::choose_next_step(Action goal, vector<Action> goals) {
 	int best_value = 0;
 
 	vector<std::shared_ptr<Preconditions>> priority_preconds = prioritize_preconditions(goal);
-	vector<Action> possible_steps = evaluateHero->actionPool->getActions(evaluateHero, goal);
+	vector<Action> possible_steps = evaluateHero->actionPool->getActions(goal.getReceiver(), goal);
 
 	for (Action step : possible_steps) {
 		int step_value = heuristic(step, priority_preconds, goals);

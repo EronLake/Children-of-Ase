@@ -32,10 +32,12 @@ public:
 	void releaseSound(SoundClass pSound);
 	int SoundSystem::pauseSound(std::string name);
 	int SoundSystem::unpauseSound(std::string name);
+	int SoundSystem::stopSound(std::string name);
 	//void playSoundObject(SoundObject sound);
-	//void changeSoundSource(SoundObject sound, const char* name);
+	int changeSoundSource(char* from, char* to);
 	
 	int playSong1();
+	int playSong2();
 	int playBump();
 	int playWalk();
 	int playSixers();
