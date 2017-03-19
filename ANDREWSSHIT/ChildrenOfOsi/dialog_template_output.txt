@@ -1,0 +1,823 @@
+store_check: 0552D9FCkey_check: conversation_point
+name: 0552D9FC
+store_check: 0552DB74key_check: conversation_point_2
+name: 0552DB74
+store_check: 0552DCECkey_check: conversation_point_3
+name: 0552DCEC
+store_check: 0552DE64key_check: reply_point
+name: 0552DE64
+store_check: 0552DFDCkey_check: reply_point_2
+name: 0552DFDC
+store_check: 0552E154key_check: reply_point_3
+name: 0552E154
+store_check: 0552E2CCkey_check: reply_point_4
+name: 0552E2CC
+store_check: 030078ECkey_check: conversation_point
+name: 030078EC
+store_check: 03007A64key_check: conversation_point_2
+name: 03007A64
+store_check: 03007BDCkey_check: conversation_point_3
+name: 03007BDC
+store_check: 03007D54key_check: reply_point
+name: 03007D54
+store_check: 03007ECCkey_check: reply_point_2
+name: 03007ECC
+store_check: 03008044key_check: reply_point_3
+name: 03008044
+store_check: 030081BCkey_check: reply_point_4
+name: 030081BC
+store_check: 034E78ECkey_check: conversation_point
+name: 034E78EC
+store_check: 034E7A64key_check: conversation_point_2
+name: 034E7A64
+store_check: 034E7BDCkey_check: conversation_point_3
+name: 034E7BDC
+store_check: 034E7D54key_check: reply_point
+name: 034E7D54
+store_check: 034E7ECCkey_check: reply_point_2
+name: 034E7ECC
+store_check: 034E8044key_check: reply_point_3
+name: 034E8044
+store_check: 034E81BCkey_check: reply_point_4
+name: 034E81BC
+store_check: 032978ECkey_check: conversation_point
+name: 032978EC
+store_check: 03297A64key_check: conversation_point_2
+name: 03297A64
+store_check: 03297BDCkey_check: conversation_point_3
+name: 03297BDC
+store_check: 03297D54key_check: reply_point
+name: 03297D54
+store_check: 03297ECCkey_check: reply_point_2
+name: 03297ECC
+store_check: 03298044key_check: reply_point_3
+name: 03298044
+store_check: 032981BCkey_check: reply_point_4
+name: 032981BC
+store_check: 03649A2Ckey_check: conversation_point
+name: 03649A2C
+store_check: 03649BA4key_check: conversation_point_2
+name: 03649BA4
+store_check: 03649D1Ckey_check: conversation_point_3
+name: 03649D1C
+store_check: 03649E94key_check: reply_point
+name: 03649E94
+store_check: 0364A00Ckey_check: reply_point_2
+name: 0364A00C
+store_check: 0364A184key_check: reply_point_3
+name: 0364A184
+store_check: 0364A2FCkey_check: reply_point_4
+name: 0364A2FC
+store_check: 034A9A2Ckey_check: conversation_point
+name: 034A9A2C
+store_check: 034A9BA4key_check: conversation_point_2
+name: 034A9BA4
+store_check: 034A9D1Ckey_check: conversation_point_3
+name: 034A9D1C
+store_check: 034A9E94key_check: reply_point
+name: 034A9E94
+store_check: 034AA00Ckey_check: reply_point_2
+name: 034AA00C
+store_check: 034AA184key_check: reply_point_3
+name: 034AA184
+store_check: 034AA2FCkey_check: reply_point_4
+name: 034AA2FC
+store_check: 035D78ECkey_check: conversation_point
+name: 035D78EC
+store_check: 035D7A64key_check: conversation_point_2
+name: 035D7A64
+store_check: 035D7BDCkey_check: conversation_point_3
+name: 035D7BDC
+store_check: 035D7D54key_check: reply_point
+name: 035D7D54
+store_check: 035D7ECCkey_check: reply_point_2
+name: 035D7ECC
+store_check: 035D8044key_check: reply_point_3
+name: 035D8044
+store_check: 035D81BCkey_check: reply_point_4
+name: 035D81BC
+store_check: 03099A2Ckey_check: conversation_point
+name: 03099A2C
+store_check: 03099BA4key_check: conversation_point_2
+name: 03099BA4
+store_check: 03099D1Ckey_check: conversation_point_3
+name: 03099D1C
+store_check: 03099E94key_check: reply_point
+name: 03099E94
+store_check: 0309A00Ckey_check: reply_point_2
+name: 0309A00C
+store_check: 0309A184key_check: reply_point_3
+name: 0309A184
+store_check: 0309A2FCkey_check: reply_point_4
+name: 0309A2FC
+store_check: 054D1634key_check: conversation_point
+name: 054D1634
+store_check: 054D17ACkey_check: conversation_point_2
+name: 054D17AC
+store_check: 054D1924key_check: conversation_point_3
+name: 054D1924
+store_check: 054D1A9Ckey_check: reply_point
+name: 054D1A9C
+store_check: 054D1C14key_check: reply_point_2
+name: 054D1C14
+store_check: 054D1D8Ckey_check: reply_point_3
+name: 054D1D8C
+store_check: 054D1F04key_check: reply_point_4
+name: 054D1F04
+store_check: 034E78ECkey_check: conversation_point
+name: 034E78EC
+store_check: 034E7A64key_check: conversation_point_2
+name: 034E7A64
+store_check: 034E7BDCkey_check: conversation_point_3
+name: 034E7BDC
+store_check: 034E7D54key_check: reply_point
+name: 034E7D54
+store_check: 034E7ECCkey_check: reply_point_2
+name: 034E7ECC
+store_check: 034E8044key_check: reply_point_3
+name: 034E8044
+store_check: 034E81BCkey_check: reply_point_4
+name: 034E81BC
+store_check: 034278ECkey_check: conversation_point
+name: 034278EC
+store_check: 03427A64key_check: conversation_point_2
+name: 03427A64
+store_check: 03427BDCkey_check: conversation_point_3
+name: 03427BDC
+store_check: 03427D54key_check: reply_point
+name: 03427D54
+store_check: 03427ECCkey_check: reply_point_2
+name: 03427ECC
+store_check: 03428044key_check: reply_point_3
+name: 03428044
+store_check: 034281BCkey_check: reply_point_4
+name: 034281BC
+store_check: 035C78ECkey_check: conversation_point
+name: 035C78EC
+store_check: 035C7A64key_check: conversation_point_2
+name: 035C7A64
+store_check: 035C7BDCkey_check: conversation_point_3
+name: 035C7BDC
+store_check: 035C7D54key_check: reply_point
+name: 035C7D54
+store_check: 035C7ECCkey_check: reply_point_2
+name: 035C7ECC
+store_check: 035C8044key_check: reply_point_3
+name: 035C8044
+store_check: 035C81BCkey_check: reply_point_4
+name: 035C81BC
+store_check: 032C78ECkey_check: conversation_point
+name: 032C78EC
+store_check: 032C7A64key_check: conversation_point_2
+name: 032C7A64
+store_check: 032C7BDCkey_check: conversation_point_3
+name: 032C7BDC
+store_check: 032C7D54key_check: reply_point
+name: 032C7D54
+store_check: 032C7ECCkey_check: reply_point_2
+name: 032C7ECC
+store_check: 032C8044key_check: reply_point_3
+name: 032C8044
+store_check: 032C81BCkey_check: reply_point_4
+name: 032C81BC
+store_check: 03565624key_check: conversation_point
+name: 03565624
+store_check: 0356579Ckey_check: conversation_point_2
+name: 0356579C
+store_check: 03565914key_check: conversation_point_3
+name: 03565914
+store_check: 03565A8Ckey_check: reply_point
+name: 03565A8C
+store_check: 03565C04key_check: reply_point_2
+name: 03565C04
+store_check: 03565D7Ckey_check: reply_point_3
+name: 03565D7C
+store_check: 03565EF4key_check: reply_point_4
+name: 03565EF4
+store_check: 035EB46Ckey_check: conversation_point
+name: 035EB46C
+store_check: 035EB5E4key_check: conversation_point_2
+name: 035EB5E4
+store_check: 035EB75Ckey_check: conversation_point_3
+name: 035EB75C
+store_check: 035EB8D4key_check: reply_point
+name: 035EB8D4
+store_check: 035EBA4Ckey_check: reply_point_2
+name: 035EBA4C
+store_check: 035EBBC4key_check: reply_point_3
+name: 035EBBC4
+store_check: 035EBD3Ckey_check: reply_point_4
+name: 035EBD3C
+store_check: 034178ECkey_check: conversation_point
+name: 034178EC
+store_check: 03417A64key_check: conversation_point_2
+name: 03417A64
+store_check: 03417BDCkey_check: conversation_point_3
+name: 03417BDC
+store_check: 03417D54key_check: reply_point
+name: 03417D54
+store_check: 03417ECCkey_check: reply_point_2
+name: 03417ECC
+store_check: 03418044key_check: reply_point_3
+name: 03418044
+store_check: 034181BCkey_check: reply_point_4
+name: 034181BC
+store_check: 035878ECkey_check: conversation_point
+name: 035878EC
+store_check: 03587A64key_check: conversation_point_2
+name: 03587A64
+store_check: 03587BDCkey_check: conversation_point_3
+name: 03587BDC
+store_check: 03587D54key_check: reply_point
+name: 03587D54
+store_check: 03587ECCkey_check: reply_point_2
+name: 03587ECC
+store_check: 03588044key_check: reply_point_3
+name: 03588044
+store_check: 035881BCkey_check: reply_point_4
+name: 035881BC
+store_check: 033078ECkey_check: conversation_point
+name: 033078EC
+store_check: 03307A64key_check: conversation_point_2
+name: 03307A64
+store_check: 03307BDCkey_check: conversation_point_3
+name: 03307BDC
+store_check: 03307D54key_check: reply_point
+name: 03307D54
+store_check: 03307ECCkey_check: reply_point_2
+name: 03307ECC
+store_check: 03308044key_check: reply_point_3
+name: 03308044
+store_check: 033081BCkey_check: reply_point_4
+name: 033081BC
+store_check: 0338DA74key_check: conversation_point
+name: 0338DA74
+store_check: 0338DBECkey_check: conversation_point_2
+name: 0338DBEC
+store_check: 0338DD64key_check: conversation_point_3
+name: 0338DD64
+store_check: 0338DEDCkey_check: reply_point
+name: 0338DEDC
+store_check: 0338E054key_check: reply_point_2
+name: 0338E054
+store_check: 0338E1CCkey_check: reply_point_3
+name: 0338E1CC
+store_check: 0338E344key_check: reply_point_4
+name: 0338E344
+store_check: 037478ECkey_check: conversation_point
+name: 037478EC
+store_check: 03747A64key_check: conversation_point_2
+name: 03747A64
+store_check: 03747BDCkey_check: conversation_point_3
+name: 03747BDC
+store_check: 03747D54key_check: reply_point
+name: 03747D54
+store_check: 03747ECCkey_check: reply_point_2
+name: 03747ECC
+store_check: 03748044key_check: reply_point_3
+name: 03748044
+store_check: 037481BCkey_check: reply_point_4
+name: 037481BC
+store_check: 034F78ECkey_check: conversation_point
+name: 034F78EC
+store_check: 034F7A64key_check: conversation_point_2
+name: 034F7A64
+store_check: 034F7BDCkey_check: conversation_point_3
+name: 034F7BDC
+store_check: 034F7D54key_check: reply_point
+name: 034F7D54
+store_check: 034F7ECCkey_check: reply_point_2
+name: 034F7ECC
+store_check: 034F8044key_check: reply_point_3
+name: 034F8044
+store_check: 034F81BCkey_check: reply_point_4
+name: 034F81BC
+store_check: 035278ECkey_check: conversation_point
+name: 035278EC
+store_check: 03527A64key_check: conversation_point_2
+name: 03527A64
+store_check: 03527BDCkey_check: conversation_point_3
+name: 03527BDC
+store_check: 03527D54key_check: reply_point
+name: 03527D54
+store_check: 03527ECCkey_check: reply_point_2
+name: 03527ECC
+store_check: 03528044key_check: reply_point_3
+name: 03528044
+store_check: 035281BCkey_check: reply_point_4
+name: 035281BC
+store_check: 0550609Ckey_check: conversation_point
+name: 0550609C
+store_check: 05506214key_check: conversation_point_2
+name: 05506214
+store_check: 0550638Ckey_check: conversation_point_3
+name: 0550638C
+store_check: 05506504key_check: reply_point
+name: 05506504
+store_check: 0550667Ckey_check: reply_point_2
+name: 0550667C
+store_check: 055067F4key_check: reply_point_3
+name: 055067F4
+store_check: 0550696Ckey_check: reply_point_4
+name: 0550696C
+store_check: 053FC9FCkey_check: conversation_point
+name: 053FC9FC
+store_check: 053FCB74key_check: conversation_point_2
+name: 053FCB74
+store_check: 053FCCECkey_check: conversation_point_3
+name: 053FCCEC
+store_check: 053FCE64key_check: reply_point
+name: 053FCE64
+store_check: 053FCFDCkey_check: reply_point_2
+name: 053FCFDC
+store_check: 053FD154key_check: reply_point_3
+name: 053FD154
+store_check: 053FD2CCkey_check: reply_point_4
+name: 053FD2CC
+store_check: 035FB36Ckey_check: conversation_point
+name: 035FB36C
+store_check: 035FB4E4key_check: conversation_point_2
+name: 035FB4E4
+store_check: 035FB65Ckey_check: conversation_point_3
+name: 035FB65C
+store_check: 035FB7D4key_check: reply_point
+name: 035FB7D4
+store_check: 035FB94Ckey_check: reply_point_2
+name: 035FB94C
+store_check: 035FBAC4key_check: reply_point_3
+name: 035FBAC4
+store_check: 035FBC3Ckey_check: reply_point_4
+name: 035FBC3C
+store_check: 034578ECkey_check: conversation_point
+name: 034578EC
+store_check: 03457A64key_check: conversation_point_2
+name: 03457A64
+store_check: 03457BDCkey_check: conversation_point_3
+name: 03457BDC
+store_check: 03457D54key_check: reply_point
+name: 03457D54
+store_check: 03457ECCkey_check: reply_point_2
+name: 03457ECC
+store_check: 03458044key_check: reply_point_3
+name: 03458044
+store_check: 034581BCkey_check: reply_point_4
+name: 034581BC
+store_check: 031F78ECkey_check: conversation_point
+name: 031F78EC
+store_check: 031F7A64key_check: conversation_point_2
+name: 031F7A64
+store_check: 031F7BDCkey_check: conversation_point_3
+name: 031F7BDC
+store_check: 031F7D54key_check: reply_point
+name: 031F7D54
+store_check: 031F7ECCkey_check: reply_point_2
+name: 031F7ECC
+store_check: 031F8044key_check: reply_point_3
+name: 031F8044
+store_check: 031F81BCkey_check: reply_point_4
+name: 031F81BC
+store_check: 0333B46Ckey_check: conversation_point
+name: 0333B46C
+store_check: 0333B5E4key_check: conversation_point_2
+name: 0333B5E4
+store_check: 0333B75Ckey_check: conversation_point_3
+name: 0333B75C
+store_check: 0333B8D4key_check: reply_point
+name: 0333B8D4
+store_check: 0333BA4Ckey_check: reply_point_2
+name: 0333BA4C
+store_check: 0333BBC4key_check: reply_point_3
+name: 0333BBC4
+store_check: 0333BD3Ckey_check: reply_point_4
+name: 0333BD3C
+store_check: 032278ECkey_check: conversation_point
+name: 032278EC
+store_check: 03227A64key_check: conversation_point_2
+name: 03227A64
+store_check: 03227BDCkey_check: conversation_point_3
+name: 03227BDC
+store_check: 03227D54key_check: reply_point
+name: 03227D54
+store_check: 03227ECCkey_check: reply_point_2
+name: 03227ECC
+store_check: 03228044key_check: reply_point_3
+name: 03228044
+store_check: 032281BCkey_check: reply_point_4
+name: 032281BC
+store_check: 035478ECkey_check: conversation_point
+name: 035478EC
+store_check: 03547A64key_check: conversation_point_2
+name: 03547A64
+store_check: 03547BDCkey_check: conversation_point_3
+name: 03547BDC
+store_check: 03547D54key_check: reply_point
+name: 03547D54
+store_check: 03547ECCkey_check: reply_point_2
+name: 03547ECC
+store_check: 03548044key_check: reply_point_3
+name: 03548044
+store_check: 035481BCkey_check: reply_point_4
+name: 035481BC
+store_check: 032E78ECkey_check: conversation_point
+name: 032E78EC
+store_check: 032E7A64key_check: conversation_point_2
+name: 032E7A64
+store_check: 032E7BDCkey_check: conversation_point_3
+name: 032E7BDC
+store_check: 032E7D54key_check: reply_point
+name: 032E7D54
+store_check: 032E7ECCkey_check: reply_point_2
+name: 032E7ECC
+store_check: 032E8044key_check: reply_point_3
+name: 032E8044
+store_check: 032E81BCkey_check: reply_point_4
+name: 032E81BC
+store_check: 052F243Ckey_check: conversation_point
+name: 052F243C
+store_check: 052F25B4key_check: conversation_point_2
+name: 052F25B4
+store_check: 052F272Ckey_check: conversation_point_3
+name: 052F272C
+store_check: 052F28A4key_check: reply_point
+name: 052F28A4
+store_check: 052F2A1Ckey_check: reply_point_2
+name: 052F2A1C
+store_check: 052F2B94key_check: reply_point_3
+name: 052F2B94
+store_check: 052F2D0Ckey_check: reply_point_4
+name: 052F2D0C
+store_check: 033F78ECkey_check: conversation_point
+name: 033F78EC
+store_check: 033F7A64key_check: conversation_point_2
+name: 033F7A64
+store_check: 033F7BDCkey_check: conversation_point_3
+name: 033F7BDC
+store_check: 033F7D54key_check: reply_point
+name: 033F7D54
+store_check: 033F7ECCkey_check: reply_point_2
+name: 033F7ECC
+store_check: 033F8044key_check: reply_point_3
+name: 033F8044
+store_check: 033F81BCkey_check: reply_point_4
+name: 033F81BC
+store_check: 031C78ECkey_check: conversation_point
+name: 031C78EC
+store_check: 031C7A64key_check: conversation_point_2
+name: 031C7A64
+store_check: 031C7BDCkey_check: conversation_point_3
+name: 031C7BDC
+store_check: 031C7D54key_check: reply_point
+name: 031C7D54
+store_check: 031C7ECCkey_check: reply_point_2
+name: 031C7ECC
+store_check: 031C8044key_check: reply_point_3
+name: 031C8044
+store_check: 031C81BCkey_check: reply_point_4
+name: 031C81BC
+store_check: 037678ECkey_check: conversation_point
+name: 037678EC
+store_check: 03767A64key_check: conversation_point_2
+name: 03767A64
+store_check: 03767BDCkey_check: conversation_point_3
+name: 03767BDC
+store_check: 03767D54key_check: reply_point
+name: 03767D54
+store_check: 03767ECCkey_check: reply_point_2
+name: 03767ECC
+store_check: 03768044key_check: reply_point_3
+name: 03768044
+store_check: 037681BCkey_check: reply_point_4
+name: 037681BC
+store_check: 034278ECkey_check: conversation_point
+name: 034278EC
+store_check: 03427A64key_check: conversation_point_2
+name: 03427A64
+store_check: 03427BDCkey_check: conversation_point_3
+name: 03427BDC
+store_check: 03427D54key_check: reply_point
+name: 03427D54
+store_check: 03427ECCkey_check: reply_point_2
+name: 03427ECC
+store_check: 03428044key_check: reply_point_3
+name: 03428044
+store_check: 034281BCkey_check: reply_point_4
+name: 034281BC
+store_check: 036578ECkey_check: conversation_point
+name: 036578EC
+store_check: 03657A64key_check: conversation_point_2
+name: 03657A64
+store_check: 03657BDCkey_check: conversation_point_3
+name: 03657BDC
+store_check: 03657D54key_check: reply_point
+name: 03657D54
+store_check: 03657ECCkey_check: reply_point_2
+name: 03657ECC
+store_check: 03658044key_check: reply_point_3
+name: 03658044
+store_check: 036581BCkey_check: reply_point_4
+name: 036581BC
+store_check: 0530C9FCkey_check: conversation_point
+name: 0530C9FC
+store_check: 0530CB74key_check: conversation_point_2
+name: 0530CB74
+store_check: 0530CCECkey_check: conversation_point_3
+name: 0530CCEC
+store_check: 0530CE64key_check: reply_point
+name: 0530CE64
+store_check: 0530CFDCkey_check: reply_point_2
+name: 0530CFDC
+store_check: 0530D154key_check: reply_point_3
+name: 0530D154
+store_check: 0530D2CCkey_check: reply_point_4
+name: 0530D2CC
+store_check: 0310B57Ckey_check: conversation_point
+name: 0310B57C
+store_check: 0310B6F4key_check: conversation_point_2
+name: 0310B6F4
+store_check: 0310B86Ckey_check: conversation_point_3
+name: 0310B86C
+store_check: 0310B9E4key_check: reply_point
+name: 0310B9E4
+store_check: 0310BB5Ckey_check: reply_point_2
+name: 0310BB5C
+store_check: 0310BCD4key_check: reply_point_3
+name: 0310BCD4
+store_check: 0310BE4Ckey_check: reply_point_4
+name: 0310BE4C
+store_check: 037FB57Ckey_check: conversation_point
+name: 037FB57C
+store_check: 037FB6F4key_check: conversation_point_2
+name: 037FB6F4
+store_check: 037FB86Ckey_check: conversation_point_3
+name: 037FB86C
+store_check: 037FB9E4key_check: reply_point
+name: 037FB9E4
+store_check: 037FBB5Ckey_check: reply_point_2
+name: 037FBB5C
+store_check: 037FBCD4key_check: reply_point_3
+name: 037FBCD4
+store_check: 037FBE4Ckey_check: reply_point_4
+name: 037FBE4C
+store_check: 035FB57Ckey_check: conversation_point
+name: 035FB57C
+store_check: 035FB6F4key_check: conversation_point_2
+name: 035FB6F4
+store_check: 035FB86Ckey_check: conversation_point_3
+name: 035FB86C
+store_check: 035FB9E4key_check: reply_point
+name: 035FB9E4
+store_check: 035FBB5Ckey_check: reply_point_2
+name: 035FBB5C
+store_check: 035FBCD4key_check: reply_point_3
+name: 035FBCD4
+store_check: 035FBE4Ckey_check: reply_point_4
+name: 035FBE4C
+store_check: 0535C13Ckey_check: conversation_point
+name: 0535C13C
+store_check: 0535C2B4key_check: conversation_point_2
+name: 0535C2B4
+store_check: 0535C42Ckey_check: conversation_point_3
+name: 0535C42C
+store_check: 0535C5A4key_check: reply_point
+name: 0535C5A4
+store_check: 0535C71Ckey_check: reply_point_2
+name: 0535C71C
+store_check: 0535C894key_check: reply_point_3
+name: 0535C894
+store_check: 0535CA0Ckey_check: reply_point_4
+name: 0535CA0C
+store_check: 0342B57Ckey_check: conversation_point
+name: 0342B57C
+store_check: 0342B6F4key_check: conversation_point_2
+name: 0342B6F4
+store_check: 0342B86Ckey_check: conversation_point_3
+name: 0342B86C
+store_check: 0342B9E4key_check: reply_point
+name: 0342B9E4
+store_check: 0342BB5Ckey_check: reply_point_2
+name: 0342BB5C
+store_check: 0342BCD4key_check: reply_point_3
+name: 0342BCD4
+store_check: 0342BE4Ckey_check: reply_point_4
+name: 0342BE4C
+store_check: 0323B57Ckey_check: conversation_point
+name: 0323B57C
+store_check: 0323B6F4key_check: conversation_point_2
+name: 0323B6F4
+store_check: 0323B86Ckey_check: conversation_point_3
+name: 0323B86C
+store_check: 0323B9E4key_check: reply_point
+name: 0323B9E4
+store_check: 0323BB5Ckey_check: reply_point_2
+name: 0323BB5C
+store_check: 0323BCD4key_check: reply_point_3
+name: 0323BCD4
+store_check: 0323BE4Ckey_check: reply_point_4
+name: 0323BE4C
+store_check: 0328B57Ckey_check: conversation_point
+name: 0328B57C
+store_check: 0328B6F4key_check: conversation_point_2
+name: 0328B6F4
+store_check: 0328B86Ckey_check: conversation_point_3
+name: 0328B86C
+store_check: 0328B9E4key_check: reply_point
+name: 0328B9E4
+store_check: 0328BB5Ckey_check: reply_point_2
+name: 0328BB5C
+store_check: 0328BCD4key_check: reply_point_3
+name: 0328BCD4
+store_check: 0328BE4Ckey_check: reply_point_4
+name: 0328BE4C
+store_check: 0329B57Ckey_check: conversation_point
+name: 0329B57C
+store_check: 0329B6F4key_check: conversation_point_2
+name: 0329B6F4
+store_check: 0329B86Ckey_check: conversation_point_3
+name: 0329B86C
+store_check: 0329B9E4key_check: reply_point
+name: 0329B9E4
+store_check: 0329BB5Ckey_check: reply_point_2
+name: 0329BB5C
+store_check: 0329BCD4key_check: reply_point_3
+name: 0329BCD4
+store_check: 0329BE4Ckey_check: reply_point_4
+name: 0329BE4C
+store_check: 0381B57Ckey_check: conversation_point
+name: 0381B57C
+store_check: 0381B6F4key_check: conversation_point_2
+name: 0381B6F4
+store_check: 0381B86Ckey_check: conversation_point_3
+name: 0381B86C
+store_check: 0381B9E4key_check: reply_point
+name: 0381B9E4
+store_check: 0381BB5Ckey_check: reply_point_2
+name: 0381BB5C
+store_check: 0381BCD4key_check: reply_point_3
+name: 0381BCD4
+store_check: 0381BE4Ckey_check: reply_point_4
+name: 0381BE4C
+store_check: 035AB57Ckey_check: conversation_point
+name: 035AB57C
+store_check: 035AB6F4key_check: conversation_point_2
+name: 035AB6F4
+store_check: 035AB86Ckey_check: conversation_point_3
+name: 035AB86C
+store_check: 035AB9E4key_check: reply_point
+name: 035AB9E4
+store_check: 035ABB5Ckey_check: reply_point_2
+name: 035ABB5C
+store_check: 035ABCD4key_check: reply_point_3
+name: 035ABCD4
+store_check: 035ABE4Ckey_check: reply_point_4
+name: 035ABE4C
+store_check: 052FB03Ckey_check: conversation_point
+name: 052FB03C
+store_check: 052FB1B4key_check: conversation_point_2
+name: 052FB1B4
+store_check: 052FB32Ckey_check: conversation_point_3
+name: 052FB32C
+store_check: 052FB4A4key_check: reply_point
+name: 052FB4A4
+store_check: 052FB61Ckey_check: reply_point_2
+name: 052FB61C
+store_check: 052FB794key_check: reply_point_3
+name: 052FB794
+store_check: 052FB90Ckey_check: reply_point_4
+name: 052FB90C
+store_check: 0361D4A4key_check: conversation_point
+name: 0361D4A4
+store_check: 0361D61Ckey_check: conversation_point_2
+name: 0361D61C
+store_check: 0361D794key_check: conversation_point_3
+name: 0361D794
+store_check: 0361D90Ckey_check: reply_point
+name: 0361D90C
+store_check: 0361DA84key_check: reply_point_2
+name: 0361DA84
+store_check: 0361DBFCkey_check: reply_point_3
+name: 0361DBFC
+store_check: 0361DD74key_check: reply_point_4
+name: 0361DD74
+store_check: 0344B2C4key_check: conversation_point
+name: 0344B2C4
+store_check: 0344B43Ckey_check: conversation_point_2
+name: 0344B43C
+store_check: 0344B5B4key_check: conversation_point_3
+name: 0344B5B4
+store_check: 0344B72Ckey_check: reply_point
+name: 0344B72C
+store_check: 0344B8A4key_check: reply_point_2
+name: 0344B8A4
+store_check: 0344BA1Ckey_check: reply_point_3
+name: 0344BA1C
+store_check: 0344BB94key_check: reply_point_4
+name: 0344BB94
+store_check: 0366B57Ckey_check: conversation_point
+name: 0366B57C
+store_check: 0366B6F4key_check: conversation_point_2
+name: 0366B6F4
+store_check: 0366B86Ckey_check: conversation_point_3
+name: 0366B86C
+store_check: 0366B9E4key_check: reply_point
+name: 0366B9E4
+store_check: 0366BB5Ckey_check: reply_point_2
+name: 0366BB5C
+store_check: 0366BCD4key_check: reply_point_3
+name: 0366BCD4
+store_check: 0366BE4Ckey_check: reply_point_4
+name: 0366BE4C
+store_check: 03689F34key_check: conversation_point
+name: 03689F34
+store_check: 0368A0ACkey_check: conversation_point_2
+name: 0368A0AC
+store_check: 0368A224key_check: conversation_point_3
+name: 0368A224
+store_check: 0368A39Ckey_check: reply_point
+name: 0368A39C
+store_check: 0368A514key_check: reply_point_2
+name: 0368A514
+store_check: 0368A68Ckey_check: reply_point_3
+name: 0368A68C
+store_check: 0368A804key_check: reply_point_4
+name: 0368A804
+store_check: 0378B57Ckey_check: conversation_point
+name: 0378B57C
+store_check: 0378B6F4key_check: conversation_point_2
+name: 0378B6F4
+store_check: 0378B86Ckey_check: conversation_point_3
+name: 0378B86C
+store_check: 0378B9E4key_check: reply_point
+name: 0378B9E4
+store_check: 0378BB5Ckey_check: reply_point_2
+name: 0378BB5C
+store_check: 0378BCD4key_check: reply_point_3
+name: 0378BCD4
+store_check: 0378BE4Ckey_check: reply_point_4
+name: 0378BE4C
+store_check: 0329B36Ckey_check: conversation_point
+name: 0329B36C
+store_check: 0329B4E4key_check: conversation_point_2
+name: 0329B4E4
+store_check: 0329B65Ckey_check: conversation_point_3
+name: 0329B65C
+store_check: 0329B7D4key_check: reply_point
+name: 0329B7D4
+store_check: 0329B94Ckey_check: reply_point_2
+name: 0329B94C
+store_check: 0329BAC4key_check: reply_point_3
+name: 0329BAC4
+store_check: 0329BC3Ckey_check: reply_point_4
+name: 0329BC3C
+store_check: 036E5624key_check: conversation_point
+name: 036E5624
+store_check: 036E579Ckey_check: conversation_point_2
+name: 036E579C
+store_check: 036E5914key_check: conversation_point_3
+name: 036E5914
+store_check: 036E5A8Ckey_check: reply_point
+name: 036E5A8C
+store_check: 036E5C04key_check: reply_point_2
+name: 036E5C04
+store_check: 036E5D7Ckey_check: reply_point_3
+name: 036E5D7C
+store_check: 036E5EF4key_check: reply_point_4
+name: 036E5EF4
+store_check: 032B78ECkey_check: conversation_point
+name: 032B78EC
+store_check: 032B7A64key_check: conversation_point_2
+name: 032B7A64
+store_check: 032B7BDCkey_check: conversation_point_3
+name: 032B7BDC
+store_check: 032B7D54key_check: reply_point
+name: 032B7D54
+store_check: 032B7ECCkey_check: reply_point_2
+name: 032B7ECC
+store_check: 032B8044key_check: reply_point_3
+name: 032B8044
+store_check: 032B81BCkey_check: reply_point_4
+name: 032B81BC
+store_check: 031878ECkey_check: conversation_point
+name: 031878EC
+store_check: 03187A64key_check: conversation_point_2
+name: 03187A64
+store_check: 03187BDCkey_check: conversation_point_3
+name: 03187BDC
+store_check: 03187D54key_check: reply_point
+name: 03187D54
+store_check: 03187ECCkey_check: reply_point_2
+name: 03187ECC
+store_check: 03188044key_check: reply_point_3
+name: 03188044
+store_check: 031881BCkey_check: reply_point_4
+name: 031881BC
+dp: What do the residents of this village know you as
+dp: I am known as Yemoja
+dp: What do people call you
+dp: My name is Shango
+dp: I am curious as to why there is a desolate village such as this all the way out here
+dp: I am curious as to what you call yourself
+dp: I am known as Yemoja
+dp: It is not often we find ourselves having visitors in this village, and it is even rarer that we know nothing about our guests
+dp: Which village do you come from 
+dp: stranger
+dp: I come from far away.
