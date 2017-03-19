@@ -10,7 +10,7 @@ using namespace std;
 Soldier::Soldier(float x, float y, bool col): NPC(x, y, col),
 key(string("Soldier") + std::to_string(getID()) + "_0"), party(nullptr), instances(0),
 inCombat(false), evade(false), holdPos(false), patrol(false),
-stamina(100), maxStamina(100), ase(100), maxAse(100),
+stamina(100), maxStamina(100), ase(0), maxAse(0),
 aggroRange(Soldier::DEFAULT_AGGRO_RANGE),
 pursuitRange(Soldier::DEFAULT_PURSUIT_RANGE),
 cdTime(0), swingLeft(true)
@@ -23,7 +23,7 @@ cdTime(0), swingLeft(true)
 Soldier::Soldier(Vector2f p_topLeft, float p_width, float p_height): NPC(p_topLeft, p_width, p_height),
 key(string("Soldier") + std::to_string(getID()) + "_0"), party(nullptr), instances(0),
 inCombat(false), evade(false), holdPos(false), patrol(false),
-stamina(100), maxStamina(100), ase(100), maxAse(100),
+stamina(100), maxStamina(100), ase(0), maxAse(0),
 aggroRange(Soldier::DEFAULT_AGGRO_RANGE),
 pursuitRange(Soldier::DEFAULT_PURSUIT_RANGE),
 cdTime(0), swingLeft(true)
@@ -136,6 +136,7 @@ void Soldier::meleeAttack()
   melee->setDirWithBase(d, false);
   melee->setX(x);
   melee->setY(y);
+  stamina -= melee->getStaminaCost();
   currentAttacks.push_back(melee);
   cdTime = melee->getCoolDown();
 }
