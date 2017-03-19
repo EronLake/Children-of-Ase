@@ -464,7 +464,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 
 	pierTex->setFile("Assets/Sprites/pier.png", 1);
 
-	fire->setFile("Assets/Sprites/fireballsprite1.jpg", 10);
+	fire->setFile("Assets/Sprites/FireBall.png", 8);
 	/* SET UP SPRITE CHANGE, MIGHT NEED A SINGLETON?*/
 
 
@@ -797,13 +797,14 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	silverSoldier->melee->setDmg(10);
 	silverSoldier->melee->setSpeed(5);
 	silverSoldier->melee->setBaseDir(4);
-	silverSoldier->melee->setCoolDown(100);
+	silverSoldier->melee->setCoolDown(15);
 	silverSoldier->melee->setPause(-1);
 	silverSoldier->melee->setDestroy(false);
 	silverSoldier->melee->setKeep(true);
 	silverSoldier->melee->setWidth(50);
 	silverSoldier->melee->setHeight(50);
-	silverSoldier->melee->setStaminaCost(70);
+	silverSoldier->melee->setStaminaCost(40);
+	silverSoldier->setMaxStamina(200);
 	silverSoldier->setHealth(100);
 
 	silverSoldier->addAttackType(rockThrow);
@@ -813,14 +814,15 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	silverSoldier2->melee->setDmg(10);
 	silverSoldier2->melee->setSpeed(5);
 	silverSoldier2->melee->setBaseDir(4);
-	silverSoldier2->melee->setCoolDown(100);
+	silverSoldier2->melee->setCoolDown(15);
 	silverSoldier2->melee->setPause(-1);
 	silverSoldier2->melee->setDestroy(false);
 	silverSoldier2->melee->setKeep(true);
 	silverSoldier2->melee->setWidth(50);
 	silverSoldier2->melee->setHeight(50);
-	silverSoldier2->melee->setStaminaCost(70);
+	silverSoldier2->melee->setStaminaCost(40);
 	silverSoldier2->setHealth(40);
+	silverSoldier2->setMaxStamina(200);
 
 	silverSoldier2->addAttackType(rockThrow);
 	silverSoldier2->melee->sprite.setTexture(border);
@@ -829,13 +831,13 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	blueSoldier->melee->setDmg(10);
 	blueSoldier->melee->setSpeed(5);
 	blueSoldier->melee->setBaseDir(4);
-	blueSoldier->melee->setCoolDown(100);
+	blueSoldier->melee->setCoolDown(15);
 	blueSoldier->melee->setPause(-1);
 	blueSoldier->melee->setDestroy(false);
 	blueSoldier->melee->setKeep(true);
 	blueSoldier->melee->setWidth(50);
 	blueSoldier->melee->setHeight(50);
-	blueSoldier->melee->setStaminaCost(70);
+	blueSoldier->melee->setStaminaCost(40);
 	blueSoldier->setHealth(100);
 
 	blueSoldier->addAttackType(rockThrow);
