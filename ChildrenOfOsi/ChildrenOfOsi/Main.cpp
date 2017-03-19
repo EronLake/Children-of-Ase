@@ -649,6 +649,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	silverSoldier->offsetBody(0, 60, 60, 75, 50);
 	silverSoldier->setInteractable(true);
 	silverSoldier->setName("silverSoldier");
+  // silverSoldier->setHealth(50);
 
 	silverSoldier2->sprite.setTexture(silverSoldierTexture);
 	silverSoldier2->sprite.setIdleTexture(silverSoldierIdleTex);
@@ -676,6 +677,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	silverSoldier2->offsetBody(0, 60, 60, 75, 50);
 	silverSoldier2->setInteractable(true);
 	silverSoldier2->setName("silverSoldier");
+  // silverSoldier2->setHealth(50);
 
 	gameplay_functions->add_Attack(silverSoldier->getKey(), silverSoldier->body[0].getX(), silverSoldier->body[0].getY(), true, 10);
 	gameplay_functions->add_Attack(silverSoldier2->getKey(), silverSoldier2->body[0].getX(), silverSoldier2->body[0].getY(), true, 10);

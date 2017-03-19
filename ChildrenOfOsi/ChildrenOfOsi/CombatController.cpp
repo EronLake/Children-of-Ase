@@ -265,6 +265,9 @@ void CombatController::follow(Soldier* sold1, int state) {
 
 float CombatController::dist_by_center(Soldier* sold1, Soldier* sold2) {
 	//std::cout << "Soldier: " <<
+  cout << "* * * * * * * * * * Soldier1 physics body length: " << sold1->body.size() << " * * * * * * * * * *" << endl;
+  cout << "* * * * * * * * * * Address of Soldier 2: " << sold2 << endl;
+  cout << "* * * * * * * * * * Soldier2 physics body length: " << sold2->body.size() << " * * * * * * * * * *" << endl;
 	float a = ((sold1->body[0].getX() + (sold1->body[0].getWidth() / 2)) - (sold2->body[0].getX() + (sold2->body[0].getWidth() / 2)));
 	float b= ((sold1->body[0].getY() + (sold1->body[0].getHeight() / 2)) - (sold2->body[0].getY() + (sold2->body[0].getHeight() / 2)));
 	float c = sqrt(a*a + b*b);
