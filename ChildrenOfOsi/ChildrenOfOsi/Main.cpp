@@ -356,6 +356,16 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	Texture* fireDown = new Texture();
 	Texture* fireLeft = new Texture();
 
+	Texture* firebreatheRight = new Texture();
+	Texture* firebreatheUp = new Texture();
+	Texture* firebreatheDown = new Texture();
+	Texture* firebreatheLeft = new Texture();
+
+	Texture* spinRight = new Texture();
+	Texture* spinUp = new Texture();
+	Texture* spinDown = new Texture();
+	Texture* spinLeft = new Texture();
+
 
 
 	//load sprite from a configuration file?
@@ -380,10 +390,10 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	downIdleTex->setFile("Assets/Sprites/ShangoForwardIdle.png",22);
 	leftIdleTex->setFile("Assets/Sprites/ShangoLeftIdle.png",22);
 	rightIdleTex->setFile("Assets/Sprites/ShangoRightIdle.png",22);
-	upAtkTex->setFile("Assets/Sprites/ShangoBackSwing.png", 24);
-	downAtkTex->setFile("Assets/Sprites/ShangoForwardSwing.png", 24);
-	leftAtkTex->setFile("Assets/Sprites/ShangoLeftSwingEffect.png", 24);
-	rightAtkTex->setFile("Assets/Sprites/ShangoRightSwingEffect.png", 24);
+	upAtkTex->setFile("Assets/Sprites/ShangoBackSwing.png", 13);
+	downAtkTex->setFile("Assets/Sprites/ShangoForwardSwing.png", 13);
+	leftAtkTex->setFile("Assets/Sprites/ShangoLeftSwing.png", 13);
+	rightAtkTex->setFile("Assets/Sprites/ShangoRightSwing.png", 13);
 	upAtk2Tex->setFile("Assets/Sprites/ShangoBackLunge.png", 7);
 	downAtk2Tex->setFile("Assets/Sprites/ShangoForwardLunge.png", 7);
 	leftAtk2Tex->setFile("Assets/Sprites/ShangoLeftLunge.png", 7);
@@ -474,6 +484,16 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	fireUp->setFile("Assets/Sprites/FireBallTMPUp.png", 3);
 	fireDown->setFile("Assets/Sprites/FireBallTMPDown.png", 3);
 	fireLeft->setFile("Assets/Sprites/FireBallTMPLeft.png", 3);
+
+	firebreatheRight->setFile("Assets/Sprites/ShangoRightBreath.png", 14);
+	firebreatheUp->setFile("Assets/Sprites/ShangoBackBreath.png", 14);
+	firebreatheDown->setFile("Assets/Sprites/ShangoForwardBreath.png", 14);
+	firebreatheLeft->setFile("Assets/Sprites/ShangoLeftBreath.png", 14);
+
+	spinRight->setFile("Assets/Sprites/ShangoRightBreath.png", 22);
+	spinUp->setFile("Assets/Sprites/ShangoBackBreath.png", 22);
+	spinDown->setFile("Assets/Sprites/ShangoForwardBreath.png", 22);
+	spinLeft->setFile("Assets/Sprites/ShangoLeftBreath.png", 22);
 	/* SET UP SPRITE CHANGE, MIGHT NEED A SINGLETON?*/
 
 
