@@ -116,10 +116,13 @@ void Party::removeSoldier(Soldier* s)
 		return;
 	}
 	// Get the enemy's party
-	auto tempP = s->getCurrentEnemy()->getParty();
-	// Set the enemy's party mode to be Idle so that every soldier in that party is now Idle. We might want each member of a party to have different enemies later.
-	// The optimal way is to say: for each soldier, if its enemy is soldier s, set its state to Idle.
-	tempP->setMode(Party::MODE_IDLE);
+
+	if (s->getCurrentEnemy()->getParty() != nullptr) {
+		// Set the enemy's party mode to be Idle so that every soldier in that party is now Idle. We might want each member of a party to have different enemies later.
+		// The optimal way is to say: for each soldier, if its enemy is soldier s, set its state to Idle.
+		auto tempP = s->getCurrentEnemy()->getParty();
+		tempP->setMode(Party::MODE_IDLE);
+	}
 
 	// Update Solder s
 	s->setCurrentEnemy(nullptr);

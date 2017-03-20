@@ -1,0 +1,158 @@
+{
+    "Greeting": {
+        "1": "I am gonna tear you limb from limb",
+        "2": "I don't have anything to say to you"
+    },
+
+    "Farewell": {
+        "1": "Please just leave already"
+    },
+
+    "Extra_Dialogue": {
+        "1": "Leave at once"
+    },
+
+    "Introduction": {
+        "1": "I am known as a strong soldier in these parts"
+    },
+
+	"Refute_Question": {
+		"1": "I do not see any reason why I should tell you that",
+		"2": "I'm not telling"
+	},
+
+	"Name_1": {
+		"1": "SilverSoldier"
+	},
+
+	"Ask_Name": {
+		"1": "Guess I will ask your name before I do away with you"
+	},
+
+	"Ask_Reason": {
+		"1": "Why are you here"
+	},
+
+	"Ask_Origin": {
+		"1": "What hole did you crawl out of "
+	},
+
+	"Friend_Reason": {
+		"1": "I am here to keep out scoundrels like you"
+	},
+
+	"Bad_Reason": {
+		"1": "..."
+	},
+
+	"Response_Origin": {
+		"1": "I am from a better place than you",
+		"2": "I come from everywhere"
+	},
+
+	"Identifier": {
+		"1": "stranger",
+		"2": "traveler"
+	},
+
+	"Response_Name": {
+		"1": "Well met"
+	},
+
+	"Name_2": {
+		"1": "SilverSoldier"
+	},
+
+	"Good_Intentions": {
+		"1": "I hope we get along",
+		"2": "You should introduce yourself to the people of the village"
+	},
+
+	"Village_1": {
+		"1": "Oasis Village"
+	},
+
+	"Village_Response": {
+		"1": "You are in our",
+		"2": "This is our"
+	},
+
+	"Familiar_Greet": {
+		"1": "Good to see you",
+		"2": "I hope life is treating you well",
+		"3": "It seems we cross paths yet again"
+	},
+
+	"Question_Denied": {
+		"1": "I see you don't want to cooperate",
+		"2": "I feel like it would be in both our interests if you would tell me",
+		"3": "I must ask you to reconsider answering me"
+	},
+
+	"action_boast": {
+		"1": "I am the best!"
+	},
+
+	"action_intimidate": {
+		"1": "You can't beat me!"
+	},
+
+	"request_spar": {
+		"1": "I see you don't want to cooperate",
+		"2": "I feel like it would be in both our interests if you would tell me",
+		"3": "I must ask you to reconsider answering me"
+	},
+
+	"response_boast": {
+		"1": "Ha, that's nothing."
+	},
+
+	"response_intimidate": {
+		"1": "You don't scare me."
+	},
+
+	"response_spar": {
+		"1": "I see you don't want to cooperate"
+	},
+
+	"action_compliment": {
+		"1": "You are one strong person."
+	},
+
+	"action_bribe": {
+		"1": "I can get you something good if you leave now."
+	},
+
+	"action_grovel": {
+		"1": "Please take my valuables, just don't kill me!"
+	},
+
+	"response_compliment": {
+		"1": "You're too much."
+	},
+
+	"response_bribe": {
+		"1": "Hmm...."
+	},
+
+	"response_grovel": {
+		"1": "uh....."
+	},
+
+	"question_alliance": {
+		"1": "Never ally with the other villages."
+	},
+
+	"response_alliance": {
+		"1": "Meh."
+	},
+
+		"response_experience": {
+		"1": "I ranked in the top of my soldier squad."
+	},
+
+	
+		"question_experience": {
+		"1": "What have you done?"
+	}
+}

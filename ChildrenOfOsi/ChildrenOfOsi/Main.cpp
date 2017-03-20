@@ -68,6 +68,14 @@ using namespace std;
 
 
 Texture* Rectangle::tex = new Texture();
+Texture* Rectangle::texUP = new Texture();
+Texture* Rectangle::texDOWN = new Texture();
+Texture* Rectangle::texLEFT = new Texture();
+Texture* Rectangle::texRIGHT = new Texture();
+Texture* Rectangle::texAtkUP = new Texture();
+Texture* Rectangle::texAtkDOWN = new Texture();
+Texture* Rectangle::texAtkLEFT = new Texture();
+Texture* Rectangle::texAtkRIGHT = new Texture();
 //void testQuadTree();
 //bool checkCollision(WorldObj *recA, WorldObj *recB);	//given two bounding boxes, check if they collide
 //bool coordOverlap(int value, int min, int max) { return (value >= min) && (value <= max); }		//helper func for checkCollision
@@ -155,20 +163,22 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 {
 	Rectangle::tex->setFile("Assets/Sprites/betterborder.png", 1);
 	
-	Player* Alex = new Player(SHANGO, Vector2f(4900.0, 3700.0), 150.0, 150.0);	//init player
-	//Player* Alex = new Player(SHANGO, Vector2f(4494.0, 15006.0), 150.0, 150.0);	//init player
-
-	//////cout << "Alex's width and height is " << Alex->getWidth() << ", " << Alex->getHeight() << endl;
 
 	vector<WorldObj*> recVec;
 	vector<WorldObj*>* recVec_ptr = &recVec;
-
+	vector<Hero*> heroes;
 	//psuedo Gameloop
 	MessageLog* mLog = new MessageLog();
 	TaskBuffer* tBuffer = new TaskBuffer(mLog);
 
 	//need this here for map editor
 	ChildrenOfOsi* gameplay_functions = new ChildrenOfOsi(mLog, tBuffer);
+
+	//Player* Alex = new Player(SHANGO, Vector2f(4900.0, 3700.0), 40.0, 40.0);	//init player
+	Player* Alex = new Player(SHANGO, Vector2f(4900.0, 3700.0), 150.0, 150.0);	//init player
+
+	////cout << "Alex's width and height is " << Alex->getWidth() << ", " << Alex->getHeight() << endl;
+
 
 	RenderManager* RenM = new RenderManager(mLog, tBuffer, _QuadTree, gameplay_functions);
 	
@@ -204,8 +214,34 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 //	tBuffer->run();
 //	Hero* alex = Containers::hero_table["Shango"];
 //	Player* Alex = dynamic_cast<Player*>(alex);
-    Input* iController = new Input(gameplay_functions, Alex, RenM->renderHelper, tBuffer, recVec_ptr, AiController);
+	bool switch_music = false;
+	bool in_village = false;
 
+
+	Region* Ogun = new Region("Ogun", "RegionThemes/OgunRegion.flac", "nothing");
+	Region* Desert = new Region("Desert", "RegionThemes/DesertRegion.flac", "nothing");
+	Region* Mountain = new Region("Desert", "RegionThemes/MountainRegion.flac", "nothing");
+	Region* Jungle = new Region("Desert", "RegionThemes/JungleRegion.flac", "nothing");
+
+	Region current_region = *Desert;
+	Region next_region = *Desert;
+
+    Input* iController = new Input(gameplay_functions, Alex, RenM->renderHelper, tBuffer, recVec_ptr, AiController);
+	
+	
+	gameplay_functions->add_hero("Yemoja", 4600, 3600, true);
+	gameplay_functions->add_hero("Oya", 4400, 3600, true);
+	tBuffer->run();
+
+	Hero* staticRec = Containers::hero_table["Yemoja"];
+	heroes.push_back(staticRec);
+	Hero* oya = Containers::hero_table["Oya"];
+	heroes.push_back(oya);
+
+	staticRec->name = YEMOJA;
+	oya->name = OYA;
+
+	DialogueController::setAI(AiController);
 	//DialogueGui* convoGui = new DialogueGui();
 
 	//Player* Alex = new Player(1000,600, true);	//init player
@@ -367,6 +403,12 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	Texture* spinLeft = new Texture();
 
 
+	Texture* sparkRight = new Texture();
+	Texture* sparkUp = new Texture();
+	Texture* sparkDown = new Texture();
+	Texture* sparkLeft = new Texture();
+
+
 
 	//load sprite from a configuration file?
 	blank->setFile("Assets/Sprites/blank.png", 1);
@@ -494,6 +536,16 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	spinUp->setFile("Assets/Sprites/ShangoBackSpin.png", 22);
 	spinDown->setFile("Assets/Sprites/ShangoForwardSpin.png", 22);
 	spinLeft->setFile("Assets/Sprites/ShangoLeftSpin.png", 22);
+
+	Rectangle::texRIGHT->setFile("Assets/Sprites/LeftRecoilSpark.png", 18);
+	Rectangle::texLEFT->setFile("Assets/Sprites/RightRecoilSpark.png", 18);
+	Rectangle::texUP->setFile("Assets/Sprites/ForwardRecoilSpark.png", 18);
+	Rectangle::texDOWN->setFile("Assets/Sprites/BackRecoilSpark.png", 18);
+
+	Rectangle::texAtkRIGHT->setFile("Assets/Sprites/LeftRecoilSpark.png", 18);
+	Rectangle::texAtkLEFT->setFile("Assets/Sprites/RightRecoilSpark.png", 18);
+	Rectangle::texAtkUP->setFile("Assets/Sprites/ForwardRecoilSpark.png", 18);
+	Rectangle::texAtkDOWN->setFile("Assets/Sprites/BackRecoilSpark.png", 18);
 	/* SET UP SPRITE CHANGE, MIGHT NEED A SINGLETON?*/
 
 
@@ -594,12 +646,12 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	//vector<WorldObj*> recVec;
 	Attack* spin = new Attack();
 	spin->setDmg(7);
-	spin->setSpeed(15);
+	spin->setSpeed(18);
 	spin->setDestroy(false);
 	spin->setDuration(7);
-	spin->setBaseDir(6);
+	spin->setBaseDir(4);
 	spin->setCoolDown(100);
-	spin->setPause(48);
+	spin->setPause(18);
 	spin->setTurn(true);
 	spin->sprite.setTexture(border);
 	Alex->addAttackType(spin);
@@ -608,9 +660,9 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	spin2->setSpeed(15);
 	spin2->setDestroy(false);
 	spin2->setDuration(7);
-	spin2->setBaseDir(6);
+	spin2->setBaseDir(4);
 	spin2->setCoolDown(0);
-	spin2->setPause(53);
+	spin2->setPause(23);
 	spin2->setTurn(true);
 	spin2->sprite.setTexture(border);
 	Alex->addAttackType(spin2);
@@ -619,9 +671,9 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	spin3->setSpeed(15);
 	spin3->setDestroy(false);
 	spin3->setDuration(7);
-	spin3->setBaseDir(6);
+	spin3->setBaseDir(4);
 	spin3->setCoolDown(0);
-	spin3->setPause(58);
+	spin3->setPause(28);
 	spin3->setTurn(true);
 	spin3->sprite.setTexture(border);
 	Alex->addAttackType(spin3);
@@ -630,9 +682,9 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	spin4->setSpeed(15);
 	spin4->setDestroy(false);
 	spin4->setDuration(7);
-	spin4->setBaseDir(6);
+	spin4->setBaseDir(4);
 	spin4->setCoolDown(0);
-	spin4->setPause(63);
+	spin4->setPause(33);
 	spin4->setTurn(true);
 	spin4->sprite.setTexture(border);
 	Alex->addAttackType(spin4);
@@ -702,15 +754,13 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	//gameplay_functions->add_worldObj("barrel1", 5200, 3900, true);
 	//tBuffer->run();
 
-	gameplay_functions->add_hero("Yemoja", 4600, 3600, true);
-	gameplay_functions->add_hero("Oya", 4400, 3600, true);
+
 	
 	//gameplay_functions->add_soldier("silverSoldier", 4900, 3300, true);
 
-	tBuffer->run();
+	//tBuffer->run();
 	
-	Hero* staticRec = Containers::hero_table["Yemoja"];
-	Hero* oya = Containers::hero_table["Oya"];
+
 	//Containers::soldier_table["silverSoldier"];
 	//WorldObj* barrel = Containers::worldObj_table["barrel1"];
 //    Containers::texture_table["barrelTex"]->setFile("Assets/Sprites/Barrel.png", 1);
@@ -1044,7 +1094,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	ActionConfig::import_config(gameplay_functions, tBuffer, staticRec,
 		oya);
 
-	Planner* YemojaPlanner = new Planner();
+	Planner* YemojaPlanner = new Planner(staticRec);
 	AiController->hero_planners[YEMOJA] = YemojaPlanner;
 	Action* test_train = new Action(staticRec, oya, staticRec, 10, 1, "train", "execute_train");
 	AiController->hero_planners[YEMOJA]->set_current_action(test_train);
@@ -1070,7 +1120,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	recVec.push_back(blueSoldier2);
 	recVec.push_back(blueSoldier3);
 	recVec.push_back(silverSoldier2);
-	recVec.push_back(oya);
+	//recVec.push_back(oya);
 	//recVec.push_back(barrel);
 	//recVec.push_back(tree);;
 	//recVec.push_back(tree1);
@@ -1230,18 +1280,15 @@ party->addToParty(Alex, true);
 int wait_time = fs * 3; //always wait 3 seconds	
 	int count = 0;
 	int state = 0;
+	bool start = true;
 
-bool switch_music = false;
-bool in_village = false;
-
-Region* Ogun = new Region("Ogun", "Children of Osi Sketch 2.mp3", "nothing");
-Region* Desert = new Region("Desert", "oasis.wav", "nothing");
-Region* Mountain = new Region("Desert", "76.wav", "nothing");
-Region* Jungle = new Region("Desert", "jungle.wav", "nothing");
-
-Region current_region = *Desert;
-Region next_region = *Desert;
 	while (osi::GameWindow::isRunning()) {
+		if (start) {
+			gameplay_functions->play_sound("Play");
+			//gameplay_functions->play_sound("Walk");
+			//gameplay_functions->pause_unpause("Pause", "walk_loop.wav");
+			start = !start;
+		}
 		start_tick = clock();
 		_QuadTree->clear();
 		Alex->updateCD();
@@ -1260,6 +1307,7 @@ Region next_region = *Desert;
 		if (Alex->getY() < 3523.33) {
 			if(current_region == *Desert)
 			next_region = *Ogun;
+			
 		}
 		else {
 			if (current_region == *Ogun) {
@@ -1313,6 +1361,7 @@ Region next_region = *Desert;
 		}
 		else {
 			gameplay_functions->change_song("Change", current_region.getRTheme(), next_region.getRTheme());
+			//iController->current_region = current_region;
 			current_region = next_region;
 
 			//current_region->getRTheme(), next_region->getRTheme()
@@ -1323,9 +1372,9 @@ Region next_region = *Desert;
 
 
 
-		std::cout << "X: " << Alex->getX() << " Y: " << Alex->getY() << std::endl;
-		std::cout << "CR: " << current_region.name << " NR: " << next_region.name<< std::endl;
-		std::cout << "CA: " << current_region.getRTheme() << " NA: " << next_region.getRTheme() << std::endl;
+		//std::cout << "X: " << Alex->getX() << " Y: " << Alex->getY() << std::endl;
+		//std::cout << "CR: " << current_region.name << " NR: " << next_region.name<< std::endl;
+		//std::cout << "CA: " << current_region.getRTheme() << " NA: " << next_region.getRTheme() << std::endl;
 
 	/*	if (staticRec->destination != Vector2f(0, 0)) { //Hero has a destination
 			if (staticRec->waypoint != Vector2f(0,0) && state == 0) { //Hero has a waypoint to the desination, and not in dialog
@@ -2505,6 +2554,11 @@ void ERONS_LOOP(QuadTree* _QuadTree) {
 
 
 	}
+	for (auto iter : AudM->soundHelper->sounds) {
+		AudM->soundHelper->releaseSound(iter.second);
+	}
+	AudM->soundHelper->m_pSystem->release();
+	
 	osi::GameWindow::terminate();
 
 	

@@ -29,9 +29,10 @@ Input::Input(ChildrenOfOsi* _gameplay_functions, WorldObj * _player, RenderHelpe
 	recVec = _recVec;
 	ai = ai_c;
 
-	gameplay_functions->play_sound("Play");
-
-	gameplay_functions->play_sound("Walk");
+	//gameplay_functions->play_sound("Play");
+	//gameplay_functions->createTaskForAudio("PlaySound", "SOUND", "SFX/swing.wav");
+	//gameplay_functions->play_sound("Walk");
+	//gameplay_functions->pause_unpause("Pause", "walk_loop.wav");
 	//gameplay_functions->play_sound("Pause");
 	//gameplay_functions->play_sound("Sixers");
 	player = _player;
@@ -77,7 +78,7 @@ void Input::InputCheck()
 		}
 		if (W)                //Moving up
 		{
-			//gameplay_functions->play_sound("Unpause");
+			//gameplay_functions->pause_unpause("Unpause","walk_loop.wav");
 			
 			if (A) {          //Moving up and left
 				gameplay_functions->move_up_left(player);   
@@ -91,7 +92,7 @@ void Input::InputCheck()
 		}
 		else if (S)          //Moving down
 		{ 
-			//gameplay_functions->play_sound("Unpause");
+			//gameplay_functions->pause_unpause("Unpause", "walk_loop.wav");
 			if (A) {         //Moving down and left
 				gameplay_functions->move_down_left(player);
 			}
@@ -104,16 +105,16 @@ void Input::InputCheck()
 			} 
 		}
 		else if (A) {      //Only moving left
-			//gameplay_functions->play_sound("Unpause");
+			//gameplay_functions->pause_unpause("Unpause", "walk_loop.wav");
 			gameplay_functions->move_left(player);
 		}
 		else if (D)        //Only moving right
 		{
-			//gameplay_functions->play_sound("Unpause");
+			//gameplay_functions->pause_unpause("Unpause", "walk_loop.wav");
 			gameplay_functions->move_right(player);
 		}
 		else {
-			//gameplay_functions->play_sound("Pause");
+			//gameplay_functions->pause_unpause("Pause", "walk_loop.wav");
 		}
 
 		if (!(W || A || S || D))  // No movement keys pressed
@@ -275,18 +276,18 @@ void Input::InputCheck()
 			int offsety;
 
 
-			//std::cout << "Pressed Enter" << std::endl;
-			//std::cout << "INPUT FILE NAME " << std::endl;
-			//std::cout << "///////////////////////////////" << std::endl;
+			std::cout << "Pressed Enter" << std::endl;
+			std::cout << "INPUT FILE NAME " << std::endl;
+			std::cout << "///////////////////////////////" << std::endl;
 			std::cin >> image_name;
-			//std::cout << "INPUT FRAME NUMBER(PROBABLY 1) " << std::endl;
-			//std::cout << "///////////////////////////////" << std::endl;
+			std::cout << "INPUT FRAME NUMBER(PROBABLY 1) " << std::endl;
+			std::cout << "///////////////////////////////" << std::endl;
 			std::cin >> frame_num;
-			//std::cout << image_name << ": " << player->getX() << ":" << player->getY() << std::endl;
-			//std::cout << "INPUT OBJECT NAME " << std::endl;
-			//std::cout << "///////////////////////////////" << std::endl;
+			std::cout << image_name << ": " << player->getX() << ":" << player->getY() << std::endl;
+			std::cout << "INPUT OBJECT NAME " << std::endl;
+			std::cout << "///////////////////////////////" << std::endl;
 			std::cin >> obj_name;
-			//std::cout << image_name << ": " << player->getX() << ":" << player->getY() << std::endl;
+			std::cout << image_name << ": " << player->getX() << ":" << player->getY() << std::endl;
 
 			if (Containers::texture_table[image_name]) {
 				////cout << image_name << "Already in Table /////////////////////////////" << endl;
@@ -366,11 +367,11 @@ void Input::InputCheck()
 			double mouseX = rHelper->camera->getX() + xpos * osi::GameWindow::WINDOW_WIDTH_DP / 1300;
 			double mouseY = rHelper->camera->getY() + ypos * osi::GameWindow::WINDOW_HEIGHT_DP / 700;
 
-			////std::cout << "////////////////////////" << endl;
-			//////std::cout << xpos << ":" << ypos << endl;
-			////std::cout << "X: " << xpos << endl;
-			////std::cout << "Y: " << ypos << endl;
-			////std::cout << "////////////////////////" << endl;
+			std::cout << "////////////////////////" << endl;
+			std::cout << xpos << ":" << ypos << endl;
+			std::cout << "X: " << xpos << endl;
+			std::cout << "Y: " << ypos << endl;
+			std::cout << "////////////////////////" << endl;
 
 			bool xCollide;
 			bool yCollide;
@@ -385,9 +386,9 @@ void Input::InputCheck()
 				if (xCollide && yCollide)
 				{
 					collide_with = itr->first;
-					////std::cout << "////////////////////////" << endl;
-					////std::cout << "COLLIDED WITH: " << collide_with << endl;
-					////std::cout << "////////////////////////" << endl;
+					std::cout << "////////////////////////" << endl;
+					std::cout << "COLLIDED WITH: " << collide_with << endl;
+					std::cout << "////////////////////////" << endl;
 
 					//float diffX = Containers::worldObj_table[collide_with]->body[i].getX() - Containers::worldObj_table[collide_with]->getX();
 					//float diffY = Containers::worldObj_table[collide_with]->body[i].getY() - Containers::worldObj_table[collide_with]->getY();
@@ -412,16 +413,16 @@ void Input::InputCheck()
 
 				if (L)
 				{
-					//std::cout << "////////////////////////" << endl;
-					//std::cout << "ENTER NAME OF THE VARIABLE YOU WOULD LIKE TO CHANGE: ";
+					std::cout << "////////////////////////" << endl;
+					std::cout << "ENTER NAME OF THE VARIABLE YOU WOULD LIKE TO CHANGE: ";
 
 					string variable_for_change;
 					cin >> variable_for_change;
 
 					if (variable_for_change == "width")
 					{
-						//std::cout << "////////////////////////" << endl;
-						//std::cout << "ENTER WIDTH AS FLOAT: ";
+						std::cout << "////////////////////////" << endl;
+						std::cout << "ENTER WIDTH AS FLOAT: ";
 
 						float value_to_change_to;
 						cin >> value_to_change_to;
@@ -430,8 +431,8 @@ void Input::InputCheck()
 					}
 					else if (variable_for_change == "height")
 					{
-						//std::cout << "////////////////////////" << endl;
-						//std::cout << "ENTER HEIGHT AS FLOAT: ";
+						std::cout << "////////////////////////" << endl;
+						std::cout << "ENTER HEIGHT AS FLOAT: ";
 
 						float value_to_change_to;
 						cin >> value_to_change_to;
@@ -441,8 +442,8 @@ void Input::InputCheck()
 
 					if (variable_for_change == "size")
 					{
-						//std::cout << "////////////////////////" << endl;
-						//std::cout << "ENTER SIZE AS FLOAT: ";
+						std::cout << "////////////////////////" << endl;
+						std::cout << "ENTER SIZE AS FLOAT: ";
 
 						float value_to_change_to;
 						cin >> value_to_change_to;
@@ -452,8 +453,8 @@ void Input::InputCheck()
 					}
 					else if (variable_for_change == "xloc")
 					{
-						//std::cout << "////////////////////////" << endl;
-						//std::cout << "ENTER X LOC AS FLOAT: ";
+						std::cout << "////////////////////////" << endl;
+						std::cout << "ENTER X LOC AS FLOAT: ";
 
 						float value_to_change_to;
 						cin >> value_to_change_to;
@@ -462,8 +463,8 @@ void Input::InputCheck()
 					}
 					else if (variable_for_change == "yloc")
 					{
-						//std::cout << "////////////////////////" << endl;
-						//std::cout << "ENTER Y LOC AS FLOAT: ";
+						std::cout << "////////////////////////" << endl;
+						std::cout << "ENTER Y LOC AS FLOAT: ";
 
 						float value_to_change_to;
 						cin >> value_to_change_to;
@@ -473,28 +474,28 @@ void Input::InputCheck()
 					}
 					else if (variable_for_change == "offset")
 					{
-						//std::cout << "////////////////////////" << endl;
-						//std::cout << "ENTER BODY NUMBER AS INT(0 if only one body): ";
+						std::cout << "////////////////////////" << endl;
+						std::cout << "ENTER BODY NUMBER AS INT(0 if only one body): ";
 						cin >> body_number;
 
-						//std::cout << "ENTER LEFT LOC AS FLOAT: ";
+						std::cout << "ENTER LEFT LOC AS FLOAT: ";
 						cin >> left;
 
-						//std::cout << "ENTER RIGHT LOC AS FLOAT: ";
+						std::cout << "ENTER RIGHT LOC AS FLOAT: ";
 						cin >> right;
 
-						//std::cout << "ENTER TOP LOC AS FLOAT: ";
+						std::cout << "ENTER TOP LOC AS FLOAT: ";
 						cin >> top;
 
-						//std::cout << "ENTER BOTTOM LOC AS FLOAT: ";
+						std::cout << "ENTER BOTTOM LOC AS FLOAT: ";
 						cin >> bottom;
 
 						Containers::worldObj_table[collide_with]->offsetBody(body_number, left, right, top, bottom);
 				
-						////std::cout << "///////////////////////////////////" << endl;
-						////std::cout << "body X is " << Containers::worldObj_table[collide_with]->body[body_number].getX() << " and Y is " << Containers::worldObj_table[collide_with]->body[body_number].getY() << endl;
-						////std::cout << "body X is " << Containers::worldObj_table[collide_with]->body[body_number].getX() << " and Y is " << Containers::worldObj_table[collide_with]->body[body_number].getY() << endl;
-						////std::cout << "///////////////////////////////////" << endl;
+						std::cout << "///////////////////////////////////" << endl;
+						std::cout << "body X is " << Containers::worldObj_table[collide_with]->body[body_number].getX() << " and Y is " << Containers::worldObj_table[collide_with]->body[body_number].getY() << endl;
+						std::cout << "body X is " << Containers::worldObj_table[collide_with]->body[body_number].getX() << " and Y is " << Containers::worldObj_table[collide_with]->body[body_number].getY() << endl;
+						std::cout << "///////////////////////////////////" << endl;
 
 					}
 				}
@@ -549,17 +550,24 @@ void Input::InputCheck()
 
 	if (DialogueController::getState() > 0) {
 		if (Q) {
-			DialogueController::exitDialogue();
+			//DialogueController::exitDialogue();
 
 			WorldObj* other = DialogueController::getOther();
+			std::cout << "HERO: " << other->getName() << std::endl;
 			if (other->getType() == 5) {
+				std::cout << "Right type" << std::endl;
 				Hero* them = dynamic_cast<Hero*>(other);
 				Planner* planner = ai->hero_planners[them->name];
-				if (planner->give_as_quest)
+				//DialogueController::prompted_quest = true;
+				if (planner->give_as_quest && !DialogueController::accepted_quest)
 				{
-					//Action* quest = planner->get_current_action();
-
-					prompted_quest = true;
+					DialogueController::quest = planner->get_current_action();
+                    DialogueController::offerQuest_hack_();
+					DialogueController::prompted_quest = true;
+				}
+				else
+				{
+					DialogueController::exitDialogue();
 				}
 			}
 			else
@@ -567,8 +575,8 @@ void Input::InputCheck()
 				DialogueController::exitDialogue();
 			}
 		}
-		if (prompted_quest) {
-
+		if (DialogueController::prompted_quest) {
+			
 		}
 		if (H) {
 			DialogueController::setOptionsIndex(0);

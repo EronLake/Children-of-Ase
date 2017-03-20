@@ -5,7 +5,7 @@
 	},
 
 	"Extra_Dialogue": {
-		"1": "I come from far away.",
+		"1": "I come from far away",
 		"2": "I am curious as to why there is a desolate village such as this all the way out here",
 		"3": "The savannah was very harsh. I am surprised this village is as prosperous as it is"
 	},
@@ -69,9 +69,9 @@
 	},
 
 	"Response_Origin": {
-		"1": "I come from far away.",
+		"1": "I come from far away",
 		"2": "I hail from an unmarked village",
-		"3": "I come from a place that you won't find on any map."
+		"3": "I come from a place that you won't find on any map"
 	},
 
 	"Identifier": {
@@ -79,7 +79,7 @@
 	},
 
 	"Response_Name": {
-		"1": "It is an honor to be in you presence",
+		"1": "It is an honor to be in your presence",
 		"2": "It is truly a pleasure to meet you",
 		"3": "I have heard many great things about you"
 	},
@@ -110,13 +110,100 @@
 
 	"Question_Denied": {
 		"1": "I would rather not say",
-		"2": "I apoligize, but I would like to keep that to myself",
-		"3": "Maybe I will tell you in the future"
+		"2": "No comment",
+		"3": "..."
 	},
 
 	"Question_Denied_Old": {
 		"1": "I understand",
 		"2": "I hope you will reconsider",
 		"3": "Maybe you will tell me in the future"
-	}
+	},
+
+	"action_boast": {
+		"1": "I am so strong.",
+		"2": "I have many heroic feats under my belt."
+	},
+
+	"action_intimidate": {
+		"1": "I could take you down unarmed.",
+		"2": "Don't think you can get away from me."
+	},
+
+	"request_spar": {
+		"1": "I see you don't want to cooperate",
+		"2": "I feel like it would be in both our interests if you would tell me"
+	},
+
+	"response_boast": {
+		"1": "That's nothing.",
+		"2": "Impressive."
+	},
+
+	"response_intimidate": {
+		"1": "*Gulp*",
+		"2": "You don't scare me."
+	},
+
+	"response_spar": {
+		"1": "I see you don't want to cooperate",
+		"2": "I feel like it would be in both our interests if you would tell me",
+		"3": "I must ask you to reconsider answering me"
+	},
+
+	"action_compliment": {
+		"1": "I can tell you have trained alot.",
+		"2": "You seem like a smart person."
+	},
+
+	"action_bribe": {
+		"1": "Here, have some fruit.",
+		"2": "Could I interest you in something good?"
+	},
+
+	"action_grovel": {
+		"1": "I am not worthy. You are too great!"
+	},
+
+	"response_compliment": {
+		"1": "Flattery will get you nowhere.",
+		"2": "Aww shucks!"
+	},
+
+	"response_bribe": {
+		"1": "I accept your kind offer.",
+		"2": "Bribery won't work on me."
+	},
+
+	"response_grovel": {
+		"1": "Go on.",
+		"2": "Please don't degrade yourself."
+	},
+
+	"question_alliance": {
+		"1": "You should form an alliance with someone."
+	},
+
+	"response_alliance": {
+		"1": "I have no need for that.",
+		"2": "That's worth considering."
+	},
+
+		"response_experience": {
+		"1": "I once fought off several bandits.",
+		"2": "I once insulted Ogun and got away alive."
+	},
+
+
+  "question_experience": {
+    "1": "What are your accomplishments?"
+  },
+
+  "quest_accept": {
+    "1": "Yes I will see what I can do about the rebel scum"
+  },
+
+  "quest_deny": {
+    "1":  "That sounds dangerous. Maybe another time"
+  }
 }
