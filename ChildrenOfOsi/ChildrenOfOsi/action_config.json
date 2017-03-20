@@ -12,5 +12,19 @@
       "recklessness" :0,
       "extroversion" : 0,
       "greed" : 0
+   },
+   "fight_bandits" : {
+	  "name" : "fight_bandits",
+	  "type": "micro",
+      "utility" : 0.0,
+      "why" : 0.0,
+      "exe_name" : "execute_fight_bandits",
+      "aggression" : 0,
+      "kindness" : 0,
+      "honor" : 0,
+      "pride" : 0,
+      "recklessness" :0,
+      "extroversion" : 0,
+      "greed" : 0
    }
 }

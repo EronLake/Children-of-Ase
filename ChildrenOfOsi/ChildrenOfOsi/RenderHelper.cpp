@@ -17,6 +17,9 @@ RenderHelper::RenderHelper(QuadTree * QT)
 	convoGui = new DialogueGui();
 	convoGui->loadTexture();
 	convoGui->setSprite();
+	hud_ptr = new HUD();
+	hud_ptr->loadTexture();
+	hud_ptr->setSprite();
 	gmap = new GameMap();
 	//fullVec = tree->retrieve(fullVec, fullBound);
 	//	gmap->loadTexture();
@@ -67,10 +70,16 @@ int RenderHelper::draw_frame(WorldObj * obj)
 		fullVec = tree->retrieve(fullVec, fullBound);
 	}
 
-
+	
 	for (int i = 0; i < fullVec.size(); i++) {
 		WorldObj* tempObj = fullVec[i];
-		if (tempObj->getX() > obj->getX() - 1000 && tempObj->getX() < obj->getX() + 1000 && tempObj->getY() > obj->getY() - 800 && tempObj->getY() < obj->getY() + 800) objVec.push_back(tempObj);
+		if (tempObj->getX() > obj->getX() - 1000 && tempObj->getX() < obj->getX() + 1000 && tempObj->getY() > obj->getY() - 800 && tempObj->getY() < obj->getY() + 800) {
+				auto it = std::find(objVec.begin(), objVec.end(), tempObj);
+				if (it == objVec.end()) {
+					objVec.push_back(tempObj);
+				}
+		}	
+		
 	}
 
 	//cout << "SIZE OF THE RENDER OBJVEC IS RENDEREDNEREDNEREDNER *** " << objVec.size() << endl;
@@ -78,6 +87,16 @@ int RenderHelper::draw_frame(WorldObj * obj)
 	//obj->WorldObj::drawObj(camera->getX(), camera->getY());
 	//obj->WorldObj::animateObj();
 	objVec.push_back(obj);
+	//unordered_map<WorldObj*, int> tempmap;
+
+	//for (auto it = objVec.begin(); it != objVec.end(); it++) {
+	//	if (tempmap.find(*it) != tempmap.end()) {
+	//		cout << "WE HAVE REPEATED OBJ IN THE OBJVEC!!!!!!!!!!!!!!!!!!!!!**********************" << endl;
+	//	}
+	//	else {
+	//		tempmap[*it] = 1;
+	//	}
+	//}
 	//cout << "SIZE OF ATTACK TABLE IS " << Containers::Attack_table.size() << endl;
 	for (auto i = Containers::Attack_table.begin(); i != Containers::Attack_table.end(); ++i) {
 		if (i->second->getPause() == 0) {
@@ -102,6 +121,7 @@ int RenderHelper::draw_frame(WorldObj * obj)
 		objVec[i]->WorldObj::animateObj();
 	}
 	//convoGui->drawGui();
+	drawHUD(obj);
 	osi::GameWindow::refresh();
 	return 0;
 }
@@ -123,6 +143,13 @@ int RenderHelper::drawDiaGui(WorldObj* obj)
 	osi::GameWindow::refresh();
 	return 0;
 }
+
+int RenderHelper::drawHUD(WorldObj* obj)
+{
+	hud_ptr->drawHUD(obj);
+	return 0;
+}
+
 
 int RenderHelper::setSwordGlow(WorldObj * obj)
 {

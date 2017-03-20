@@ -247,10 +247,10 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	//Player* Alex = new Player(1000,600, true);	//init player
 	//WorldObj* Alex = new WorldObj(1000, 600, true);
 
-	ObjConfig::import_config(recVec_ptr, gameplay_functions, tBuffer);
+//	ObjConfig::import_config(recVec_ptr, gameplay_functions, tBuffer);
 	
-	DialogueConfig::import_config(gameplay_functions, tBuffer);
-	DialogueController::getDialogueHelper()->fill_conversations();
+//	DialogueConfig::import_config(gameplay_functions, tBuffer);
+//	DialogueController::getDialogueHelper()->fill_conversations();
 	
 	//WorldObj* barrel = new WorldObj(Vector2f(5200, 3900), 75, 75);
 	//Alex->name = SHANGO;
@@ -1228,9 +1228,6 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 
 	party3->addToParty(silverSoldier2, true);
 
-	partyM->addToPartyList(party);
-	partyM->addToPartyList(party2);
-	partyM->addToPartyList(party3);
 	//Village* vPlayer = new Village();
 	//Village* v1 = new Village();
 	//Village* v2 = new Village();
@@ -1262,7 +1259,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 
 	//party->addToParty(silverSoldier, false);
 	
-party->addToParty(Alex, true);
+	party->addToParty(Alex, true);
 		
 	party->addToParty(oya, false);
 	
@@ -1270,6 +1267,11 @@ party->addToParty(Alex, true);
 	
 	party->updateFollowers();
 	Alliance::updateEnemies();
+
+	partyM->addToPartyList(party);
+	partyM->addToPartyList(party2);
+	partyM->addToPartyList(party3);
+	partyM->addToPartyList(party4);
 
 	vector<WorldObj*> enemyVec;
 	//osi::GameWindow::init();
@@ -1436,12 +1438,15 @@ int wait_time = fs * 3; //always wait 3 seconds
 
 
 
+
 		combatControl->follow(blueSoldier, state);
 		combatControl->follow(blueSoldier2, state);
 		combatControl->follow(blueSoldier3, state);
-		combatControl->fight(blueSoldier, state);
-		combatControl->fight(blueSoldier2, state);
-		combatControl->fight(blueSoldier3, state);
+		//combatControl->fight(blueSoldier, state);
+		//combatControl->fight(blueSoldier2, state);
+		//combatControl->fight(blueSoldier3, state);
+
+		partyM->updateSoliderStatus();
 
 		/*
 		////cout << "Alex's position is " << Alex->getLoc().getXloc() << ", " << Alex->getLoc().getYloc() << endl;
@@ -1669,6 +1674,7 @@ int wait_time = fs * 3; //always wait 3 seconds
 		if (state == 0) {
 			//LOG("ERROR AFTER PRESSING Q TO QUIT THE DIALOGUE GUI");
 			gameplay_functions->draw_frame(Alex);
+			//gameplay_functions->drawHUD(Alex);
 			
 		}
 		else if (state > 0) {

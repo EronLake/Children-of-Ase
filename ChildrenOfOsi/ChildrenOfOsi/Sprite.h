@@ -14,7 +14,9 @@ class Sprite
   ~Sprite() = default;
 
   int getStart() { return this->start; };
+  void setStart(int start) { this->start = start; };
   int getStop() { return this->stop; };
+  void setStop(int stop) { this->stop = stop; };
   int getTop() { return this->top; };
   int getBottom() { return this->bottom; };
   Texture getTexture() { return *(this->tex); }

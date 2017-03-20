@@ -5,7 +5,8 @@ std::unordered_map<std::string, execute_ptr> ActionExecFunctions::ActionExecMap{
 	{ "execute_train",			&execute_train			},
 	{ "execute_train_with",		&execute_train_with		},
 	{ "execute_fight",			&execute_fight			},
-	{ "execute_form_alliance",	&execute_form_alliance	}
+	{ "execute_form_alliance",	&execute_form_alliance	},
+	{ "execute_fight_bandits",	&execute_fight_bandits	}
 };
 
 
@@ -17,6 +18,22 @@ ActionExecFunctions::ActionExecFunctions()
 ActionExecFunctions::~ActionExecFunctions()
 {
 };
+
+void ActionExecFunctions::execute_fight_bandits(Action* fight_bandits) {
+	if (/*the bandits->party.size() == 0*/false) {
+		fight_bandits->executed = true;
+	}
+}
+
+
+void ActionExecFunctions::execute_temp_allign(Action* fight_bandits) {
+	if (/*the bandits->party.size() == 0*/false) {
+		fight_bandits->executed = true;
+	}
+}
+
+
+
 
 void ActionExecFunctions::execute_train(Action* train) {
 	////cout << "++++++++++++++++PLEASE BE FIGHTING++++++++++++++++" << endl;

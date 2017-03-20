@@ -218,6 +218,9 @@
     <ClCompile Include="Region.cpp">
       <Filter>Audio</Filter>
     </ClCompile>
+    <ClCompile Include="HUD.cpp">
+      <Filter>Rendering</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AIHelper.h">
@@ -452,9 +455,15 @@
     <ClInclude Include="Region.h">
       <Filter>Audio</Filter>
     </ClInclude>
+<<<<<<< HEAD
+    <ClInclude Include="HUD.h">
+      <Filter>Rendering</Filter>
+    </ClInclude>
+=======
     <ClInclude Include="DialogueConfig.h" />
     <ClInclude Include="PartyManager.h" />
     <ClInclude Include="TagConfig.h" />
+>>>>>>> 3d45a39be873f23146788bb74897e8bfa7aab4f0
   </ItemGroup>
   <ItemGroup>
     <Text Include="audio_test.txt">
