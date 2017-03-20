@@ -23,6 +23,7 @@ void PartyManager::updateSoliderStatus()
 		for (auto itj = soldiers.begin(); itj != soldiers.end(); itj++) {
 			//for each soldier, check to see if its alive. If not, remove from party.
 			if ((*itj)->getHealth() <= 0) {
+				cout << "RIGHT BEFORE REMOVING THE NPC WITH LESS THAN 0 HP ******** " << endl;
 				(*itj)->getParty()->removeSoldier(*itj);
 			}
 			if ((*itj)->getInCombat() == false) {
