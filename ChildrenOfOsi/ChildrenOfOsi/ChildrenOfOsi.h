@@ -62,7 +62,7 @@ public:
 	void play_sound(string name);
 	void change_song(string name,char* from, char* to);
 	void pause_unpause(string name, char* source);
-	void creatTaskForAudio(std::string _name,  std::string _type, char* _source = nullptr, char* _target = nullptr);
+	void createTaskForAudio(std::string _name,  std::string _type, char* _source = nullptr, char* _target = nullptr);
 	void createTask(std::string task_name, std::string type, WorldObj * objToUpdate = NULL);
 	void createTaskWithNum(std::string task_name, std::string type, WorldObj * objToUpdate,int num);
 	void ChildrenOfOsi::createTaskWithParams(std::string task_name, std::string type, std::string key, float x, float y, bool col);

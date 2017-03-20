@@ -14,6 +14,7 @@ RenderManager::RenderManager(MessageLog * _mLog, TaskBuffer * _tBuffer, QuadTree
 	
 
 	renderHelper = new RenderHelper(_renderQuadTree);
+	renderHelper->manager = this;
 	task_map["Init_Map"] = &RenderHelper::init_map;
 	task_map["Draw_Frame"] = &RenderHelper::draw_frame;
 	task_map["Move_Up"] = &RenderHelper::sprite_up;

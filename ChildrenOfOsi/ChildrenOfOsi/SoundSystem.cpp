@@ -38,8 +38,10 @@ FMOD_RESULT result;
 		string mountain= "RegionThemes/MountainRegion.flac";
 		string ogun = "RegionThemes/OgunRegion.flac";
 
-		string bump = "bump_0.wav";
-		string walk = "walk_loop.wav";
+		string bump = "SFX/bump_0.wav";
+		string walk = "SFX/walk_loop.wav";
+		string swing= "SFX/swing.wav";
+		string hit = "SFX/hit.wav";
 		
 		
 		
@@ -51,6 +53,8 @@ FMOD_RESULT result;
 
 		SoundClass bumpAddress = nullptr;
 		SoundClass walkAddress = nullptr;
+		SoundClass swingAddress = nullptr;
+		SoundClass hitAddress = nullptr;
 		
 
 		this->createSound(&oasisAddress, oasis);
@@ -60,15 +64,19 @@ FMOD_RESULT result;
 
 		this->createSound(&bumpAddress, bump);
 		this->createSound(&walkAddress, walk);
+		this->createSound(&swingAddress, swing);
+		this->createSound(&hitAddress, hit);
 		
 
 		sounds[oasis] = oasisAddress;
 		sounds[jungle] = jungleAddress;
 		sounds[mountain] = mountainAddress;
 		sounds[ogun] = ogunAddress;
+
 		sounds[bump] = bumpAddress;
 		sounds[walk] = walkAddress;
-		
+		sounds[swing] = swingAddress;
+		sounds[hit] = hitAddress;
 
 	}
 
@@ -166,10 +174,12 @@ FMOD_RESULT result;
 		unsigned int time;
 
 		// Initialize our sound system
-		SoundSystem soundsystem;
+	
 		
 		type = foo::soundType::music;
-		name = "RegionThemes/DesertRegion.flac";
+		std::string _name;
+		_name = "RegionThemes/DesertRegion.flac";
+		name = _name.c_str();
 		channels[name] = &chnls[0];//assign the channel
 		
 		ispaused = true;
@@ -202,7 +212,7 @@ FMOD_RESULT result;
 		unsigned int time;
 
 		// Initialize our sound system
-		SoundSystem soundsystem;
+
 
 		type = foo::soundType::music;
 		name = "Children of Osi Sketch 2.mp3";
@@ -228,7 +238,7 @@ FMOD_RESULT result;
 		//releaseSound(sounds[name]); 
 		return 0;// Release the sound
 	};
-	int SoundSystem::playSong(const char* _name) {
+	int SoundSystem::playSong(std::string _name) {
 		foo::soundType type;
 		FMOD::Sound* soundSample;
 		const char* name;              //the variables required
@@ -238,10 +248,10 @@ FMOD_RESULT result;
 		unsigned int time;
 
 		// Initialize our sound system
-		SoundSystem soundsystem;
+
 
 		type = foo::soundType::music;
-		name = _name;
+		name = _name.c_str();
 		channels[name] = &chnls[0];//assign the channel
 
 		ispaused = true;
@@ -264,6 +274,42 @@ FMOD_RESULT result;
 		//releaseSound(sounds[name]); 
 		return 0;// Release the sound
 	}
+	int SoundSystem::playSound(std::string _name) {
+		foo::soundType type;
+		FMOD::Sound* soundSample;
+		const char* name;              //the variables required
+
+		chnls[1] = nullptr;
+		bool ispaused;
+		unsigned int time;
+
+		// Initialize our sound system
+
+
+		type = foo::soundType::music;
+		name = _name.c_str();
+		channels[name] = &chnls[1];//assign the channel
+
+		ispaused = false;
+
+		//this->createSound(&soundSample, name);// Create the sound
+		//soundSample->getLength(&time, FMOD_TIMEUNIT_PCM);// Find the length
+
+		//SoundObject* playable = new SoundObject("04.wav", &soundSample, type);
+		//object stuff
+
+
+		playSound(sounds[name], false, chnls[1], ispaused, 1.2);
+
+		// Play the sound, with loop mode
+
+
+		//////cout << "Press return to quit." << endl;  // Do something meanwhile...
+		//cin.get();
+
+		//releaseSound(sounds[name]); 
+		return 0;// Release the sound
+	}
 	int SoundSystem::playBump() {
 		foo::soundType type;
 		FMOD::Sound* soundSample;
@@ -273,7 +319,7 @@ FMOD_RESULT result;
 		unsigned int time;
 
 		// Initialize our sound system
-		SoundSystem soundsystem;
+	
 
 		type = foo::soundType::music;
 		name = "bump_0.wav";
@@ -306,10 +352,10 @@ FMOD_RESULT result;
 		unsigned int time;
 
 		// Initialize our sound system
-		SoundSystem soundsystem;
+
 
 		type = foo::soundType::music;
-		name = "walk_loop.wav";
+		name = "SFX/walk_loop.wav";
 		channels[name] = &chnls[2];//assign the channel
 		ispaused = true;
 
@@ -332,6 +378,7 @@ FMOD_RESULT result;
 	};
 	int SoundSystem::pauseSound(string name) {
 	            //the variables required
+
 		FMOD::Channel* channel;
 		if ((channels[name])) {
 			channel = *(channels[name]);
@@ -401,8 +448,8 @@ FMOD_RESULT result;
 	int SoundSystem::stopSound(string name)
 	{
 		FMOD::Channel* channel;
-		if ((channels[name])) {
-			channel = *(channels[name]);
+		if ((channels[name.c_str()])) {
+			channel = *(channels[name.c_str()]);
 			bool playing = true;
 			bool* isplaying = &playing;
 			channel->isPlaying(isplaying);

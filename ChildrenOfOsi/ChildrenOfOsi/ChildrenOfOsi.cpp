@@ -211,17 +211,17 @@ void ChildrenOfOsi::play_sound(string name) {
 	createTask(name, "SOUND");
 }
 void ChildrenOfOsi::change_song(string name, char* from, char* to) {
-	creatTaskForAudio(name, "SOUND", from, to);
+	createTaskForAudio(name, "SOUND", from, to);
 
 };
 void ChildrenOfOsi::pause_unpause(string name, char* source) {
-	creatTaskForAudio(name, "SOUND", source);
+	createTaskForAudio(name, "SOUND", source);
 
 };
 
 //----------------------------------------------------
 //----------------------------------------------------
-void ChildrenOfOsi::creatTaskForAudio(std::string _name, std::string _type, char* _source , char* _target) {
+void ChildrenOfOsi::createTaskForAudio(std::string _name, std::string _type, char* _source , char* _target) {
 	//maybe just pass in the string craeated
 	std::string task_status = "CREATED";
 	Task* new_task = new Task(_name, task_status, _type, _source, _target);

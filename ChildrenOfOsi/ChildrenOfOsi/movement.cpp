@@ -388,6 +388,7 @@ int Movement::attack(WorldObj* obj) {
 						if (collision(a->second, liv) && !a->second->beenHit(liv) && (a->second->getDuration()!=0)) {
 							//std::////cout << "Player hit " << liv->getName() << std::endl;
 							a->second->Hit(liv);
+							manager->createTaskForAudio("PlaySound","SOUND", "SFX/hit.wav");
 							cout << "THE TARGET'S HP IS NOW ******** " << liv->getHealth() << endl;
 							//liv has no hp
 							//if (liv->getHealth() <= 0) {
@@ -443,7 +444,9 @@ int Movement::meleeSwing(WorldObj* obj) {
 						if (liv) {
 							if (collision(d->melee, liv)) {
 								//std::////cout << "Player hit " << liv->getName() << std::endl;
+								
 								d->melee->Hit(liv);
+								
 								//std::////cout << liv->getName() << "'s health is now " << liv->getHealth() << std::endl;
 							}
 						}

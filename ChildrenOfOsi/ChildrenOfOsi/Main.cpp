@@ -524,8 +524,8 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 
 	Rectangle::texRIGHT->setFile("Assets/Sprites/LeftRecoilSpark.png", 18);
 	Rectangle::texLEFT->setFile("Assets/Sprites/RightRecoilSpark.png", 18);
-	Rectangle::texUP->setFile("Assets/Sprites/BackRecoilSpark.png", 18);
-	Rectangle::texDOWN->setFile("Assets/Sprites/ForwardRecoilSpark.png", 18);
+	Rectangle::texUP->setFile("Assets/Sprites/ForwardRecoilSpark.png", 18);
+	Rectangle::texDOWN->setFile("Assets/Sprites/BackRecoilSpark.png", 18);
 	/* SET UP SPRITE CHANGE, MIGHT NEED A SINGLETON?*/
 
 
@@ -626,12 +626,12 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	//vector<WorldObj*> recVec;
 	Attack* spin = new Attack();
 	spin->setDmg(7);
-	spin->setSpeed(15);
+	spin->setSpeed(18);
 	spin->setDestroy(false);
 	spin->setDuration(7);
-	spin->setBaseDir(6);
+	spin->setBaseDir(4);
 	spin->setCoolDown(100);
-	spin->setPause(48);
+	spin->setPause(18);
 	spin->setTurn(true);
 	spin->sprite.setTexture(border);
 	Alex->addAttackType(spin);
@@ -640,9 +640,9 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	spin2->setSpeed(15);
 	spin2->setDestroy(false);
 	spin2->setDuration(7);
-	spin2->setBaseDir(6);
+	spin2->setBaseDir(4);
 	spin2->setCoolDown(0);
-	spin2->setPause(53);
+	spin2->setPause(23);
 	spin2->setTurn(true);
 	spin2->sprite.setTexture(border);
 	Alex->addAttackType(spin2);
@@ -651,9 +651,9 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	spin3->setSpeed(15);
 	spin3->setDestroy(false);
 	spin3->setDuration(7);
-	spin3->setBaseDir(6);
+	spin3->setBaseDir(4);
 	spin3->setCoolDown(0);
-	spin3->setPause(58);
+	spin3->setPause(28);
 	spin3->setTurn(true);
 	spin3->sprite.setTexture(border);
 	Alex->addAttackType(spin3);
@@ -662,9 +662,9 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	spin4->setSpeed(15);
 	spin4->setDestroy(false);
 	spin4->setDuration(7);
-	spin4->setBaseDir(6);
+	spin4->setBaseDir(4);
 	spin4->setCoolDown(0);
-	spin4->setPause(63);
+	spin4->setPause(33);
 	spin4->setTurn(true);
 	spin4->sprite.setTexture(border);
 	Alex->addAttackType(spin4);
@@ -1267,8 +1267,8 @@ int wait_time = fs * 3; //always wait 3 seconds
 	while (osi::GameWindow::isRunning()) {
 		if (start) {
 			gameplay_functions->play_sound("Play");
-			gameplay_functions->play_sound("Walk");
-			gameplay_functions->pause_unpause("Pause", "walk_loop.wav");
+			//gameplay_functions->play_sound("Walk");
+			//gameplay_functions->pause_unpause("Pause", "walk_loop.wav");
 			start = !start;
 		}
 		start_tick = clock();

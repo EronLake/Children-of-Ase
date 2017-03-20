@@ -28,6 +28,8 @@ public:
 
 	void createTaskWithParams(std::string task_name, std::string type, std::string key, float x, float y, bool col);
 
+	void createTaskForAudio(std::string _name, std::string _type, char* _source = nullptr, char* _target = nullptr);
+
 	virtual void execute_task(Task* current_task);
 };
 
