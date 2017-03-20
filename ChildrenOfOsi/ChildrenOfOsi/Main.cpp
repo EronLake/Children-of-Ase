@@ -915,7 +915,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	blueSoldier->melee->setKeep(true);
 	blueSoldier->melee->setWidth(50);
 	blueSoldier->melee->setHeight(50);
-	blueSoldier->melee->setStaminaCost(90);
+	blueSoldier->melee->setStaminaCost(120);
 	blueSoldier->setHealth(100);
 	blueSoldier->setMaxStamina(300);
 	
@@ -932,7 +932,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	blueSoldier2->melee->setKeep(true);
 	blueSoldier2->melee->setWidth(50);
 	blueSoldier2->melee->setHeight(50);
-	blueSoldier2->melee->setStaminaCost(90);
+	blueSoldier2->melee->setStaminaCost(120);
 	blueSoldier2->setHealth(100);
 	blueSoldier2->setMaxStamina(300);
 
@@ -949,7 +949,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	blueSoldier3->melee->setKeep(true);
 	blueSoldier3->melee->setWidth(50);
 	blueSoldier3->melee->setHeight(50);
-	blueSoldier3->melee->setStaminaCost(90);
+	blueSoldier3->melee->setStaminaCost(120);
 	blueSoldier3->setHealth(100);
 	blueSoldier3->setMaxStamina(300);
 
@@ -1130,9 +1130,9 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	short M = GetKeyState('M') >> 15;
 	Party* party = new Party();
 	Party* party2 = new Party();
-	party2->addToParty(silverSoldier, true);
+	party->addToParty(silverSoldier, false);
 	Party* party3 = new Party();
-	party3->addToParty(silverSoldier2, true);
+	party->addToParty(silverSoldier2, false);
 	Party* party4= new Party();
 	Village* v1 = new Village();
 	Village* v2 = new Village();
@@ -1146,8 +1146,8 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	War* war = new War();
 	war->setWarParties(v1,v2);
 	party4->addToParty(blueSoldier, true);
-	party4->addToParty(blueSoldier2, true);
-	party4->addToParty(blueSoldier3, true);
+	party4->addToParty(blueSoldier2, false);
+	party4->addToParty(blueSoldier3, false);
 	party4->updateFollowers();
 	v4->addToParties(party4);
 	War* war2 = new War();
@@ -1316,6 +1316,8 @@ Region next_region = *Desert;
 		combatControl->follow(oya, state);
 		//combatControl->follow(silverSoldier, state);
 		combatControl->follow(staticRec, state);
+		combatControl->follow(silverSoldier, state);
+		combatControl->follow(silverSoldier2, state);
 		combatControl->fight(silverSoldier, state);
 		combatControl->fight(silverSoldier2, state);
 		combatControl->follow(blueSoldier, state);
