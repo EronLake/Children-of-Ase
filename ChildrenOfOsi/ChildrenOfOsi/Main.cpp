@@ -2535,6 +2535,11 @@ void ERONS_LOOP(QuadTree* _QuadTree) {
 
 
 	}
+	for (auto iter : AudM->soundHelper->sounds) {
+		AudM->soundHelper->releaseSound(iter.second);
+	}
+	AudM->soundHelper->m_pSystem->release();
+	
 	osi::GameWindow::terminate();
 
 	

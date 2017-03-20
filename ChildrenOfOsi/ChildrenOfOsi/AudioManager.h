@@ -11,7 +11,7 @@
 class AudioManager : public Manager
 {
 private:
-	SoundSystem* soundHelper;
+	
 	typedef int (SoundSystem::*fn_ptr_0)();
 	typedef int (SoundSystem::*fn_ptr_1)(std::string name);
 	typedef int (SoundSystem::*fn_ptr_2)(char* from, char* to);
@@ -25,6 +25,7 @@ private:
 public:
 	AudioManager(MessageLog* _mLog, TaskBuffer* _tBuffer);
 	~AudioManager();
+	SoundSystem* soundHelper;
 
 	virtual void register_manager() final;
 	virtual void execute_task(Task* current_task) final;
