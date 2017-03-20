@@ -2,9 +2,9 @@
 #include "ObjConfig.h"
 #include <ctime>
 
-bool MakeForest = true;
-bool PlacePlant = false;
-bool rand_gen = false;
+bool MakeForest = false;
+bool PlacePlant = true;
+bool rand_gen = true;
 bool Jungle_Config = true;
 float topLeftx;
 float topLefty;
@@ -126,7 +126,7 @@ void ObjConfig::make_stuff(vector<WorldObj*>* recVec, ChildrenOfOsi* gameplay_fu
 		int XDistancs = abs(topLeftx - topRightx);
 		int YDistancs = abs(topLefty - botLefty);
 		srand(time(0));
-		for (int i = 100; i < 250; i++) {
+		for (int i = 250; i < 350; i++) {
 			float randomX;
 			float randomY;
 			int offsetLeft;
@@ -151,11 +151,12 @@ void ObjConfig::make_stuff(vector<WorldObj*>* recVec, ChildrenOfOsi* gameplay_fu
 					"Jungle_Plant4",
 					"Jungle_scrub1",
 					"Jungle_scrub2",
-					"Jungle_scrub3",
+					"Jungle_scrub2",
+
 					"Jungle_scrub4"
 				};
 				WhichSprite = PlantSprites[rand() % 12];
-				set_world_obj(recVec, gameplay_func, tBuffer, randomX, randomY, 50, 50, TreeName.str(), WhichSprite, 1, 500, 500, 500, 500);
+				set_world_obj(recVec, gameplay_func, tBuffer, randomX, randomY, 50, 50, TreeName.str(), WhichSprite, 1, 0, 0, 0, 0);
 
 			}
 			else {

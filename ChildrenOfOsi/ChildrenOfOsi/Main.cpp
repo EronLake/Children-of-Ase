@@ -1396,16 +1396,15 @@ Region next_region = *Desert;
 
 		partyM->updateSoliderStatus();
 
-		combatControl->fight(blueSoldier, state);
 
 
 
 		combatControl->follow(blueSoldier, state);
 		combatControl->follow(blueSoldier2, state);
 		combatControl->follow(blueSoldier3, state);
-		combatControl->fight(blueSoldier, state);
-		combatControl->fight(blueSoldier2, state);
-		combatControl->fight(blueSoldier3, state);
+		//combatControl->fight(blueSoldier, state);
+		//combatControl->fight(blueSoldier2, state);
+		//combatControl->fight(blueSoldier3, state);
 
 		/*
 		////cout << "Alex's position is " << Alex->getLoc().getXloc() << ", " << Alex->getLoc().getYloc() << endl;
