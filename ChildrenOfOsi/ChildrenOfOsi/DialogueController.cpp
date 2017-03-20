@@ -87,7 +87,22 @@ void DialogueController::PlayerResponse()
 {
 	//std::////cout << "Select: " << select << endl;
 	dialogue_point choice = replyOptions[select];
+	if (prompted_quest)
+	{
+		if (select == 0)   // Player is accepting the quest
+		{
+			player->quest = quest;
+			Planner* planner = ai->hero_planners[CheckClass::isHero(other)->name];
+			planner->get_current_action()->executed = true;
+			prompted_quest = false;
+			accepted_quest = true;
+		}
+		else             // Player is denying the quest
+		{
 
+		}
+
+	}
 	std::string reply_pt_sentence = dialogue.gen_dialog(choice, player);
 	//draws reply
 	message = player->getName()+": "+reply_pt_sentence +"\n\n";

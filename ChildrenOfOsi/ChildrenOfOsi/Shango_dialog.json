@@ -194,8 +194,16 @@
 		"2": "I once insulted Ogun and got away alive."
 	},
 
-	
-		"question_experience": {
-		"1": "What are your accomplishments?"
-	}
+
+  "question_experience": {
+    "1": "What are your accomplishments?"
+  },
+
+  "quest_accept": {
+    "1": "Yes I will see what I can do about the rebel scum"
+  },
+
+  "quest_deny": {
+    "1":  "That sounds dangerous. Maybe another time"
+  }
 }

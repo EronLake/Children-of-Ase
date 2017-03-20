@@ -550,7 +550,7 @@ void Input::InputCheck()
 
 	if (DialogueController::getState() > 0) {
 		if (Q) {
-			DialogueController::exitDialogue();
+			//DialogueController::exitDialogue();
 
 			WorldObj* other = DialogueController::getOther();
 			std::cout << "HERO: " << other->getName() << std::endl;

@@ -1111,7 +1111,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	recVec.push_back(blueSoldier2);
 	recVec.push_back(blueSoldier3);
 	recVec.push_back(silverSoldier2);
-	recVec.push_back(oya);
+	//recVec.push_back(oya);
 	//recVec.push_back(barrel);
 	//recVec.push_back(tree);;
 	//recVec.push_back(tree1);

@@ -259,11 +259,29 @@
 			"1": "question_experience"
 		}
 	},
-		"I once fought off several bandits_templates": {
+  "I once fought off several bandits_templates": {
 
-		"1": {
-			"1": "response_experience"
-		}
-	}
+    "1": {
+      "1": "response_experience"
+    }
+  },
+   "give_quest_hack_templates": {
+    "1": {
+      "1": "give_quest_hack",
+      "2": "?"
+    }
+  },
+
+  "quest_accept_templates": {
+    "1": {
+      "1": "quest_accept"
+    }
+  },
+
+  "quest_deny_templates": {
+    "1": {
+      "1": "quest_deny"
+    }
+  }
 
 }

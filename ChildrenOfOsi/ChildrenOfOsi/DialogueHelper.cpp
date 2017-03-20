@@ -4,7 +4,7 @@
 
 Player* player;
 WorldObj* other;
-int state=0;
+int state = 0;
 //States:
 //0 is no conversation
 //1 is waiting for player input
@@ -16,27 +16,27 @@ DialogueHelper dialogue;
 DialogueHelper::DialogueHelper()
 {
 	srand(time(0)); //ensure good variation of random numbers when using rand()
-	//possible_conv_pts[0].push_back({ "placeholder","placeholder" });
-	//possible_conv_pts[1].push_back({ "placeholder","placeholder" });
-	//possible_conv_pts[2].push_back({ "placeholder","placeholder" });
-	/*for (int i = 0; i < 4; i++) 
-	{
-		possible_conv_pts.push_back({});
-	}
-	for (int i = 0; i < 4; i++) 
-	{
-		possible_reply_pts.push_back({});
-	}*/
+					//possible_conv_pts[0].push_back({ "placeholder","placeholder" });
+					//possible_conv_pts[1].push_back({ "placeholder","placeholder" });
+					//possible_conv_pts[2].push_back({ "placeholder","placeholder" });
+					/*for (int i = 0; i < 4; i++)
+					{
+					possible_conv_pts.push_back({});
+					}
+					for (int i = 0; i < 4; i++)
+					{
+					possible_reply_pts.push_back({});
+					}*/
 
-	//possible_conv_pts[3].push_back({ "name","question_name" });
-	//possible_conv_pts[3].push_back({ "reason","question_reason" });
-	//possible_conv_pts[3].push_back({ "origin","question_origin" });
-	////possible_conv_pts[3].push_back({ "greeting","greeting" });
+					//possible_conv_pts[3].push_back({ "name","question_name" });
+					//possible_conv_pts[3].push_back({ "reason","question_reason" });
+					//possible_conv_pts[3].push_back({ "origin","question_origin" });
+					////possible_conv_pts[3].push_back({ "greeting","greeting" });
 
-	//possible_reply_pts[3].push_back({ "denied","question_denied" });
-	//possible_reply_pts[3].push_back({ "name","introduction" });
-	//possible_reply_pts[3].push_back({ "reason","response_reason" });
-	//possible_reply_pts[3].push_back({ "origin","response_origin" });
+					//possible_reply_pts[3].push_back({ "denied","question_denied" });
+					//possible_reply_pts[3].push_back({ "name","introduction" });
+					//possible_reply_pts[3].push_back({ "reason","response_reason" });
+					//possible_reply_pts[3].push_back({ "origin","response_origin" });
 
 	std::ofstream ofs;
 	ofs.open("dialog_template_output.txt", std::ofstream::out | std::ofstream::app);
@@ -58,20 +58,20 @@ dialogue_point DialogueHelper::choose_conv_pt(dialogue_point point, int optn_inx
 	//ofs.open("dialog_template_output.txt", std::ofstream::out | std::ofstream::app);
 	int conv_pt_index;
 	/*if (optn_inx == 0) {
-		conv_pt_index = rand() % (strength_conv_pts[optn_inx].size());
-		return strength_conv_pts[optn_inx][conv_pt_index];
+	conv_pt_index = rand() % (strength_conv_pts[optn_inx].size());
+	return strength_conv_pts[optn_inx][conv_pt_index];
 	}
 	else if (optn_inx == 1) {
-		conv_pt_index = rand() % (affinity_conv_pts[optn_inx].size());
-		return affinity_conv_pts[optn_inx][conv_pt_index];
+	conv_pt_index = rand() % (affinity_conv_pts[optn_inx].size());
+	return affinity_conv_pts[optn_inx][conv_pt_index];
 	}
 	else if (optn_inx == 2) {
-		conv_pt_index = rand() % (notoriety_conv_pts[optn_inx].size());
-		return notoriety_conv_pts[optn_inx][conv_pt_index];
+	conv_pt_index = rand() % (notoriety_conv_pts[optn_inx].size());
+	return notoriety_conv_pts[optn_inx][conv_pt_index];
 	}
 	else {*/
-		conv_pt_index = rand() % (possible_conv_pts[optn_inx].size());
-		return possible_conv_pts[optn_inx][conv_pt_index];
+	conv_pt_index = rand() % (possible_conv_pts[optn_inx].size());
+	return possible_conv_pts[optn_inx][conv_pt_index];
 	//}
 	for (int i = 0; i < possible_conv_pts[optn_inx][conv_pt_index].size(); ++i) {
 		//ofs << "pcp: "<<possible_conv_pts[optn_inx][conv_pt_index][i] << " ";
@@ -87,13 +87,13 @@ dialogue_point DialogueHelper::choose_reply_pt(std::string point, int optn_inx)
 	//ofs.open("dialog_template_output.txt", std::ofstream::out | std::ofstream::app);
 	/*std::vector<vector<dialogue_point>> pts;
 	if (optn_inx == 0)
-		pts = strength_reply_pts;
+	pts = strength_reply_pts;
 	else if (optn_inx == 1)
-		pts = affinity_reply_pts;
+	pts = affinity_reply_pts;
 	else if (optn_inx == 2)
-		pts = notoriety_reply_pts;
+	pts = notoriety_reply_pts;
 	else
-		pts = possible_reply_pts;*/
+	pts = possible_reply_pts;*/
 
 	for (int i = 0; i < possible_reply_pts[optn_inx].size(); i++)
 	{
@@ -113,7 +113,7 @@ std::vector<std::vector<dialogue_point>> DialogueHelper::get_possible_conv_pts()
 	return possible_conv_pts;
 }
 
-std::vector<dialogue_point> DialogueHelper::get_possible_reply_pts(std:: string point, int opts_inx)
+std::vector<dialogue_point> DialogueHelper::get_possible_reply_pts(std::string point, int opts_inx)
 {
 	std::vector<dialogue_point> reply;
 	for (int i = 0; i < possible_reply_pts[opts_inx].size(); i++) {
@@ -168,7 +168,7 @@ std::string DialogueHelper::gen_dialog(dialogue_point diog_pt, Hero* hero)
 	std::string name = "";
 	std::ofstream ofs;
 	ofs.open("dialog_template_output.txt", std::ofstream::out | std::ofstream::app);
-	ofs << "type name: "<< typeid(hero).name() << std::endl;
+	ofs << "type name: " << typeid(hero).name() << std::endl;
 	ofs.close();
 	if (hero != nullptr) {
 		if (hero->name == SHANGO)
@@ -240,7 +240,7 @@ dialogue_template DialogueHelper::get_template(dialogue_point diog_pt) {
 	std::ifstream file("script_templates.json");
 	file >> root;
 
-	
+
 	dialogue_template dtemp;
 
 	//std::////cout << diog_pt[1] + "_templates" << std::endl;
@@ -265,7 +265,7 @@ dialogue_template DialogueHelper::get_template(dialogue_point diog_pt) {
 	for (int i = 0; i < dtemp.size(); i++)
 	{
 		//ofs << "dialogue template: " << dtemp[i] << std::endl;
-		
+
 		////std::////cout << dtemp[i] << std::endl;
 	}
 	//ofs.close();
@@ -278,7 +278,7 @@ dialogue_point DialogueHelper::get_dialog(std::string name, dialogue_point diog_
 	ofs.open("dialog_template_output.txt", std::ofstream::out | std::ofstream::app);
 	dialogue_template dtemp = get_template(diog_pt);
 	//for (int i = 0; i < dtemp.size(); ++i) {
-		//ofs << "template test: " << dtemp[i] << std::endl;
+	//ofs << "template test: " << dtemp[i] << std::endl;
 	//}
 	std::string my_name = name;
 	if (name != "Yemoja" && name != "Shango" && name != "Oshosi" && name != "Ogun" && name != "Oya")
@@ -292,19 +292,19 @@ dialogue_point DialogueHelper::get_dialog(std::string name, dialogue_point diog_
 	file >> root;
 
 	dialogue_point dpoint;
-	
+
 	//ofs.open("dialog_template_output.txt", std::ofstream::out | std::ofstream::app);
 	/*look up appropriate random phrases using dialogue template
 	if the string is punctuation then do not look it up and
 	instead push the string right away*/
 	int j = 0;
 	std::string tmp = "";
-	for (int i = 1; i <= dtemp.size(); i++ ) {
+	for (int i = 1; i <= dtemp.size(); i++) {
 		tmp = dtemp[i - 1];
-		if (tmp != "?" && tmp != "," && tmp != "." && 
+		if (tmp != "?" && tmp != "," && tmp != "." &&
 			tmp != "!" && tmp != "_") {
-			if(root[tmp].size() > 1)
-			    j = rand() % root[tmp].size() + 1;
+			if (root[tmp].size() > 1)
+				j = rand() % root[tmp].size() + 1;
 			else
 				j = 1;
 			//ofs << "j=: " << j << std::endl;
@@ -320,7 +320,7 @@ dialogue_point DialogueHelper::get_dialog(std::string name, dialogue_point diog_
 
 	}
 	//ofs.open("dialog_template_output.txt", std::ofstream::out | std::ofstream::app);
-	for (int i = 0; i < dpoint.size(); i++){
+	for (int i = 0; i < dpoint.size(); i++) {
 		//ofs << "dialogue point: " << dpoint[i] << std::endl;
 		////std::////cout << "dialogue point: "<< dpoint[i] << std::endl;
 	}
@@ -385,7 +385,7 @@ void DialogueHelper::fill_conversations() {
 			ofs << "conv_point" << std::endl;
 			possible_conv_pts[3].push_back(itor->second->dpoint);//itor->second->dpoint);
 		}
-		else if(itor->second->get_name().at(0) == 'r') {
+		else if (itor->second->get_name().at(0) == 'r') {
 			ofs << "rep_point" << std::endl;
 			if (itor->second->get_name().at(1) == 'd') {
 				possible_reply_pts[3].push_back(itor->second->dpoint);
@@ -394,7 +394,7 @@ void DialogueHelper::fill_conversations() {
 				possible_reply_pts[2].push_back(itor->second->dpoint);
 			}
 			else
-			    possible_reply_pts[3].push_back(itor->second->dpoint);//itor->second->dpoint);
+				possible_reply_pts[3].push_back(itor->second->dpoint);//itor->second->dpoint);
 		}
 		else if (itor->second->get_name().at(0) == 's' && itor->second->get_name().at(1) == 'c') {
 			possible_conv_pts[0].push_back(itor->second->dpoint);
@@ -419,4 +419,3 @@ void DialogueHelper::fill_conversations() {
 
 	ofs.close();
 }
-
