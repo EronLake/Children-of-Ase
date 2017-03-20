@@ -97,7 +97,7 @@ void Soldier::newAttack(int i, Attack* a)
   instances++;
   if(instances == 99)instances = 0;
   currentAttacks.push_back(p);
-  if(attackTypes[i]->getTurn())setDirWithBase(6, true);
+  if(attackTypes[i]->getTurn())setDirWithBase(4, true);
   //}
 }
 
