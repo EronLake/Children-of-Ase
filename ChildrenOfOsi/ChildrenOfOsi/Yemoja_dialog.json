@@ -279,8 +279,11 @@
 		"2": "I once prevented a war from breaking out."
 	},
 
-	
 		"question_experience": {
 		"1": "What are some of your past experiences?"
-	}
+	},
+
+  "give_quest_hack": {
+    "1": "Wait, don't leave just yet! There is a rogue squadron of rebels in a galaxy far away. Would you help me protect my people from them"
+  }
 }

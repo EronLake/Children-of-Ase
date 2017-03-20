@@ -15,7 +15,7 @@ public:
 	void updateTalk();
 	Rectangle talk;
 	float distance;
-
+	Action* quest;
 	int mem_counter;
 	vector<Memory*> memories;
 };

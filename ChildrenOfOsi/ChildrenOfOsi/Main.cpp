@@ -72,6 +72,10 @@ Texture* Rectangle::texUP = new Texture();
 Texture* Rectangle::texDOWN = new Texture();
 Texture* Rectangle::texLEFT = new Texture();
 Texture* Rectangle::texRIGHT = new Texture();
+Texture* Rectangle::texAtkUP = new Texture();
+Texture* Rectangle::texAtkDOWN = new Texture();
+Texture* Rectangle::texAtkLEFT = new Texture();
+Texture* Rectangle::texAtkRIGHT = new Texture();
 //void testQuadTree();
 //bool checkCollision(WorldObj *recA, WorldObj *recB);	//given two bounding boxes, check if they collide
 //bool coordOverlap(int value, int min, int max) { return (value >= min) && (value <= max); }		//helper func for checkCollision
@@ -159,20 +163,22 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 {
 	Rectangle::tex->setFile("Assets/Sprites/betterborder.png", 1);
 	
-	Player* Alex = new Player(SHANGO, Vector2f(4900.0, 3700.0), 150.0, 150.0);	//init player
-	//Player* Alex = new Player(SHANGO, Vector2f(4494.0, 15006.0), 150.0, 150.0);	//init player
-
-	//////cout << "Alex's width and height is " << Alex->getWidth() << ", " << Alex->getHeight() << endl;
 
 	vector<WorldObj*> recVec;
 	vector<WorldObj*>* recVec_ptr = &recVec;
-
+	vector<Hero*> heroes;
 	//psuedo Gameloop
 	MessageLog* mLog = new MessageLog();
 	TaskBuffer* tBuffer = new TaskBuffer(mLog);
 
 	//need this here for map editor
 	ChildrenOfOsi* gameplay_functions = new ChildrenOfOsi(mLog, tBuffer);
+
+	//Player* Alex = new Player(SHANGO, Vector2f(4900.0, 3700.0), 40.0, 40.0);	//init player
+	Player* Alex = new Player(SHANGO, Vector2f(4900.0, 3700.0), 150.0, 150.0);	//init player
+
+	////cout << "Alex's width and height is " << Alex->getWidth() << ", " << Alex->getHeight() << endl;
+
 
 	RenderManager* RenM = new RenderManager(mLog, tBuffer, _QuadTree, gameplay_functions);
 	
@@ -221,12 +227,21 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	Region next_region = *Desert;
 
     Input* iController = new Input(gameplay_functions, Alex, RenM->renderHelper, tBuffer, recVec_ptr, AiController);
-	//iController->current_region = current_region;
-	//iController->Desert = Desert;
-	//iController->Ogun = Ogun;
-	//iController->Mountain = Mountain;
-	//iController->Jungle = Jungle;
+	
+	
+	gameplay_functions->add_hero("Yemoja", 4600, 3600, true);
+	gameplay_functions->add_hero("Oya", 4400, 3600, true);
+	tBuffer->run();
 
+	Hero* staticRec = Containers::hero_table["Yemoja"];
+	heroes.push_back(staticRec);
+	Hero* oya = Containers::hero_table["Oya"];
+	heroes.push_back(oya);
+
+	staticRec->name = YEMOJA;
+	oya->name = OYA;
+
+	DialogueController::setAI(AiController);
 	//DialogueGui* convoGui = new DialogueGui();
 
 	//Player* Alex = new Player(1000,600, true);	//init player
@@ -393,6 +408,11 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	Texture* sparkDown = new Texture();
 	Texture* sparkLeft = new Texture();
 
+	Texture* YhurtRight = new Texture();
+	Texture* YhurtUp = new Texture();
+	Texture* YhurtDown = new Texture();
+	Texture* YhurtLeft = new Texture();
+
 
 
 	//load sprite from a configuration file?
@@ -431,17 +451,21 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	rightHurtTex->setFile("Assets/Sprites/ShangoRightRecoil.png", 18);
 
 
-	yemojaTexture->setFile("Assets/Sprites/YemojaFrontIdle.png", 1);
-	yemojaIdleTex->setFile("Assets/Sprites/YemojaFrontIdle.png", 1);
+	yemojaTexture->setFile("Assets/Sprites/YemojaForwardIdle.png", 22);
+	yemojaIdleTex->setFile("Assets/Sprites/YemojaForwardIdle.png", 22);
 
-	h_upRunTex->setFile("Assets/Sprites/YemojaBackSprite.png", 26);
-	h_downRunTex->setFile("Assets/Sprites/YemojaFrontSprite.png", 26);
-	h_leftRunTex->setFile("Assets/Sprites/YemojaLeftSprite.png", 26);
-	h_rightRunTex->setFile("Assets/Sprites/YemojaRightSprite.png", 26);
-	h_upIdleTex->setFile("Assets/Sprites/YemojaBackIdle.png", 1);
-	h_downIdleTex->setFile("Assets/Sprites/YemojaFrontIdle.png", 1);
-	h_leftIdleTex->setFile("Assets/Sprites/YemojaLeftIdle.png", 1);
-	h_rightIdleTex->setFile("Assets/Sprites/YemojaRightIdle.png", 1);
+	h_upRunTex->setFile("Assets/Sprites/YemojaBackSprint.png", 16);
+	h_downRunTex->setFile("Assets/Sprites/YemojaForwardSprint.png", 16);
+	h_leftRunTex->setFile("Assets/Sprites/YemojaLeftSprint.png", 16);
+	h_rightRunTex->setFile("Assets/Sprites/YemojaRightSprint.png", 16);
+	h_upIdleTex->setFile("Assets/Sprites/YemojaBackIdle.png", 22);
+	h_downIdleTex->setFile("Assets/Sprites/YemojaForwardIdle.png", 22);
+	h_leftIdleTex->setFile("Assets/Sprites/YemojaLeftIdle.png", 22);
+	h_rightIdleTex->setFile("Assets/Sprites/YemojaRightIdle.png", 22);
+	YhurtUp->setFile("Assets/Sprites/YemojaBackRecoil.png", 18);
+	YhurtDown->setFile("Assets/Sprites/YemojaForwardRecoil.png", 18);
+	YhurtLeft->setFile("Assets/Sprites/YemojaLeftRecoil.png", 18);
+	YhurtRight->setFile("Assets/Sprites/YemojaRightRecoil.png", 18);
 
 	silverSoldierTexture->setFile("Assets/Sprites/SilverSoldierForwardIdle.png", 22);
 	silverSoldierIdleTex->setFile("Assets/Sprites/SilverSoldierForwardIdle.png", 22);
@@ -526,6 +550,11 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	Rectangle::texLEFT->setFile("Assets/Sprites/RightRecoilSpark.png", 18);
 	Rectangle::texUP->setFile("Assets/Sprites/ForwardRecoilSpark.png", 18);
 	Rectangle::texDOWN->setFile("Assets/Sprites/BackRecoilSpark.png", 18);
+
+	Rectangle::texAtkRIGHT->setFile("Assets/Sprites/LeftRecoilSpark.png", 18);
+	Rectangle::texAtkLEFT->setFile("Assets/Sprites/RightRecoilSpark.png", 18);
+	Rectangle::texAtkUP->setFile("Assets/Sprites/ForwardRecoilSpark.png", 18);
+	Rectangle::texAtkDOWN->setFile("Assets/Sprites/BackRecoilSpark.png", 18);
 	/* SET UP SPRITE CHANGE, MIGHT NEED A SINGLETON?*/
 
 
@@ -734,15 +763,13 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	//gameplay_functions->add_worldObj("barrel1", 5200, 3900, true);
 	//tBuffer->run();
 
-	gameplay_functions->add_hero("Yemoja", 4600, 3600, true);
-	gameplay_functions->add_hero("Oya", 4400, 3600, true);
+
 	
 	//gameplay_functions->add_soldier("silverSoldier", 4900, 3300, true);
 
-	tBuffer->run();
+	//tBuffer->run();
 	
-	Hero* staticRec = Containers::hero_table["Yemoja"];
-	Hero* oya = Containers::hero_table["Oya"];
+
 	//Containers::soldier_table["silverSoldier"];
 	//WorldObj* barrel = Containers::worldObj_table["barrel1"];
 //    Containers::texture_table["barrelTex"]->setFile("Assets/Sprites/Barrel.png", 1);
@@ -755,8 +782,8 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 
 	
 
-	staticRec->setWidth(100);
-	staticRec->setHeight(100);
+	staticRec->setWidth(150);
+	staticRec->setHeight(150);
 	staticRec->name = YEMOJA;
 	//Hero* staticRec = new Hero(YEMOJA, Vector2f(4600, 3600), 100.0, 100.0);
 	///should actually use gameplay_functions->add_hero("Yemoja", 4600, 3600, true)
@@ -784,10 +811,10 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	staticRec->sprite.id_left = h_leftIdleTex;
 	staticRec->sprite.id_right = h_rightIdleTex;
 	staticRec->sprite.id_down = h_downIdleTex;
-	staticRec->sprite.hurt_up = upHurtTex;
-	staticRec->sprite.hurt_down = downHurtTex;
-	staticRec->sprite.hurt_left = leftHurtTex;
-	staticRec->sprite.hurt_right = rightHurtTex;
+	staticRec->sprite.hurt_up = YhurtUp;
+	staticRec->sprite.hurt_down = YhurtDown;
+	staticRec->sprite.hurt_left = YhurtLeft;
+	staticRec->sprite.hurt_right = YhurtRight;
 
 	blueSoldier->sprite.setTexture(blueSoldierTexture);
 	blueSoldier->sprite.setIdleTexture(blueSoldierIdleTex);
@@ -1076,7 +1103,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	ActionConfig::import_config(gameplay_functions, tBuffer, staticRec,
 		oya);
 
-	Planner* YemojaPlanner = new Planner();
+	Planner* YemojaPlanner = new Planner(staticRec);
 	AiController->hero_planners[YEMOJA] = YemojaPlanner;
 	Action* test_train = new Action(staticRec, oya, staticRec, 10, 1, "train", "execute_train");
 	AiController->hero_planners[YEMOJA]->set_current_action(test_train);
@@ -1102,7 +1129,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	recVec.push_back(blueSoldier2);
 	recVec.push_back(blueSoldier3);
 	recVec.push_back(silverSoldier2);
-	recVec.push_back(oya);
+	//recVec.push_back(oya);
 	//recVec.push_back(barrel);
 	//recVec.push_back(tree);;
 	//recVec.push_back(tree1);

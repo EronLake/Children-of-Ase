@@ -20,6 +20,10 @@ int DialogueController::optionsIndex=0;
 int DialogueController::select = 0;
 std::string DialogueController::replyString;
 //bool init_conv = false;
+bool DialogueController::accepted_quest = false;
+bool DialogueController::prompted_quest = true;
+AIController* DialogueController::ai = nullptr;
+Action* DialogueController::quest = nullptr;
 
 DialogueController::DialogueController()
 {
@@ -83,7 +87,22 @@ void DialogueController::PlayerResponse()
 {
 	//std::////cout << "Select: " << select << endl;
 	dialogue_point choice = replyOptions[select];
+	if (prompted_quest)
+	{
+		if (select == 0)   // Player is accepting the quest
+		{
+			player->quest = quest;
+			Planner* planner = ai->hero_planners[CheckClass::isHero(other)->name];
+			planner->get_current_action()->executed = true;
+			prompted_quest = false;
+			accepted_quest = true;
+		}
+		else             // Player is denying the quest
+		{
 
+		}
+
+	}
 	std::string reply_pt_sentence = dialogue.gen_dialog(choice, player);
 	//draws reply
 	message = player->getName()+": "+reply_pt_sentence +"\n\n";
@@ -218,4 +237,35 @@ void DialogueController::exitDialogue()
 DialogueHelper* DialogueController::getDialogueHelper()
 {
 	return &dialogue;
+}
+
+void DialogueController::offerQuest_hack_() {
+	dialogue_point line;
+	//line.push_back({ {}, {} });
+	line = { {} ,{ "give_quest_hack" } };
+	dialogue_point point = {  "", "give_quest_hack"  }; // = dialogue.choose_conv_pt(line, optionsIndex);
+	replyString = "You Suck";
+
+	point[1]="give_quest_hack";
+	point[0] = "quest";
+
+	Hero* temp_hero;
+	if (other->getType() >= 2) {
+		if (temp_hero = CheckClass::isHero(other))
+		{
+			perror("you cannot talk to this type of object");
+		}
+	}
+	else {
+		return;
+	}
+
+	std::string con_pt_sentence = dialogue.gen_dialog(point, temp_hero);
+	message = other->getName() + ": " + con_pt_sentence;
+	replyOptions = { {"quest_accept","quest_accept"},{"quest_deny","quest_deny"} };
+	// dialogue.get_possible_reply_pts(point[0]);
+	//vector<std::string> print = getReplyOptions();
+	select = 0;
+	state = 2; 
+	//PlayerResponse();
 }

@@ -550,28 +550,33 @@ void Input::InputCheck()
 
 	if (DialogueController::getState() > 0) {
 		if (Q) {
-			DialogueController::exitDialogue();
+			//DialogueController::exitDialogue();
 
 			WorldObj* other = DialogueController::getOther();
+			std::cout << "HERO: " << other->getName() << std::endl;
 			if (other->getType() == 5) {
+				std::cout << "Right type" << std::endl;
 				Hero* them = dynamic_cast<Hero*>(other);
 				Planner* planner = ai->hero_planners[them->name];
-				if (planner->give_as_quest)
+				//DialogueController::prompted_quest = true;
+				if (planner->give_as_quest && !DialogueController::accepted_quest)
 				{
-					//Action* quest = planner->get_current_action();
-
-					prompted_quest = true;
+					DialogueController::quest = planner->get_current_action();
+                    DialogueController::offerQuest_hack_();
+					DialogueController::prompted_quest = true;
 				}
 				else
+				{
 					DialogueController::exitDialogue();
+				}
 			}
 			else
 			{
 				DialogueController::exitDialogue();
 			}
 		}
-		if (prompted_quest) {
-
+		if (DialogueController::prompted_quest) {
+			
 		}
 		if (H) {
 			DialogueController::setOptionsIndex(0);
