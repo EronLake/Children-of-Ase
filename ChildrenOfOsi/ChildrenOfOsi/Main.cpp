@@ -55,6 +55,7 @@
 #include "ObjConfig.h"
 #include "ActionPool.h"
 #include "ActionHelper.h"
+#include "ActionConfig.h"
 //class ActionHelper;
 #include "Line.h"
 #include "ActionExecFunctions.h"
@@ -779,9 +780,14 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	staticRec->setHealth(100);
 	*oya = *staticRec;
 	//oya->setSpeed(5);
+	oya->setName("Oya");
+	oya->name = OYA;
 	oya->offsetBody(0, 35, 35, 65, 15);
 	staticRec->offsetBody(0, 35, 35, 65, 15);
 	oya->shiftY(300);
+
+	ActionConfig::import_config(gameplay_functions, tBuffer, staticRec,
+		oya);
 
 	Planner* YemojaPlanner = new Planner();
 	AiController->hero_planners[YEMOJA] = YemojaPlanner;
@@ -879,7 +885,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	staticRec->setMode(WANDER);
 
 	ActionPool* poolAct = new ActionPool(Alex);
-	Alex->actionPool = poolAct;
+	Alex->actionPool_map[1] = poolAct;
 	Action mic = Action();
 	//mic.preconds["affAbove"] = 50;
 	//mic.postconds["aff"] = 5;
@@ -888,15 +894,15 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 //	mac.postconds["aff"] = 5;
 	mac.setDoer(Alex);
 	mac.setReceiver(staticRec);
-	poolAct->micro.push_back(mic);
-	poolAct->macro.push_back(mac);
+	poolAct->micro.push_back(&mic);
+	poolAct->macro.push_back(&mac);
 	poolAct->updateMiddle();
 	//std:://cout << poolAct->macro.back().getName() << endl;
-	vector<Action> test = poolAct->getActions(staticRec, poolAct->macro.back());
+	vector<Action> test = poolAct->getActions(staticRec, *poolAct->macro.back());
 	for (int i = 0; i < test.size(); i++) {
 		int t = test[i].exeAction();
 	}
-	poolAct->macro.back().exeAction();
+	poolAct->macro.back()->exeAction();
 
 	Vector2f silverSoldierInitialLoc = silverSoldier->getLoc();
 	Vector2f silverSoldier2InitialLoc = silverSoldier2->getLoc();
@@ -1834,7 +1840,7 @@ void ERONS_LOOP(QuadTree* _QuadTree) {
 	staticRec->setMode(WANDER);
 
 	ActionPool* poolAct = new ActionPool(Alex);
-	Alex->actionPool = poolAct;
+	Alex->actionPool_map[1] = poolAct;
 	Action mic = Action();
 	//mic.preconds["affAbove"] = 50;
 	//mic.postconds["aff"] = 5;
@@ -1843,15 +1849,15 @@ void ERONS_LOOP(QuadTree* _QuadTree) {
 	//	mac.postconds["aff"] = 5;
 	mac.setDoer(Alex);
 	mac.setReceiver(staticRec);
-	poolAct->micro.push_back(mic);
-	poolAct->macro.push_back(mac);
+	poolAct->micro.push_back(&mic);
+	poolAct->macro.push_back(&mac);
 	poolAct->updateMiddle();
 	//std:://cout << poolAct->macro.back().getName() << endl;
-	vector<Action> test = poolAct->getActions(staticRec, poolAct->macro.back());
+	vector<Action> test = poolAct->getActions(staticRec, *poolAct->macro.back());
 	for (int i = 0; i < test.size(); i++) {
 		int t = test[i].exeAction();
 	}
-	poolAct->macro.back().exeAction();
+	poolAct->macro.back()->exeAction();
 
 	Vector2f silverSoldierInitialLoc = silverSoldier->getLoc();
 

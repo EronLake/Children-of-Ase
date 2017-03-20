@@ -13,53 +13,73 @@ ActionConfig::~ActionConfig()
 }
 
 
-void ActionConfig::import_config(vector<WorldObj*>* recVec, ChildrenOfOsi* gameplay_func, TaskBuffer* tBuffer)
+void ActionConfig::import_config(ChildrenOfOsi* gameplay_func, TaskBuffer* tBuffer, Hero* owner,
+									Hero* receiver)
 {
-
-	Json::Value root;
-	Json::Reader reader;
-
-
-	std::ifstream file("action_config.json");
-	file >> root;
-	for (auto itr = root.begin(); itr != root.end(); itr++)
+	//iterates through every player
+	for (auto itr = Containers::hero_table.begin(); itr != Containers::hero_table.end(); itr++)
 	{
-		set_action_obj(recVec, gameplay_func, tBuffer,
-			(*itr)["owner"].asInt(), (*itr)["receiver"].asInt(), (*itr)["doer"].asInt(),
-			(*itr)["utility"].asFloat(), (*itr)["why"].asFloat(),
-			(*itr)["name"].asString(), (*itr)["exe_name"].asString());
+		if (itr->second->name != owner->name)
+		{
+			Json::Value root;
+			Json::Reader reader;
 
+
+			std::ifstream file("action_config.json");
+			file >> root;
+			for (auto itr = root.begin(); itr != root.end(); itr++)
+			{
+				set_action_obj(gameplay_func, tBuffer, owner, receiver,
+					(*itr)["utility"].asFloat(), (*itr)["why"].asFloat(), (*itr)["type"].asString(),
+					(*itr)["name"].asString(), (*itr)["exe_name"].asString(),
+					(*itr)["aggression"].asInt(), (*itr)["kindness"].asInt(), (*itr)["honor"].asInt(),
+					(*itr)["pride"].asInt(), (*itr)["recklessness"].asInt(), (*itr)["extroversion"].asInt(), 
+					(*itr)["greed"].asInt());
+
+			}
+		}
 	}
-
 }
 
-
-
-
-
-void ActionConfig::set_action_obj(vector<WorldObj*>* recVec, ChildrenOfOsi* gameplay_func, TaskBuffer* tBuffer, int owner,
-									int receiver, int doer, float utility, float why, std::string name, std::string exe_name)
+void ActionConfig::set_action_obj(ChildrenOfOsi* gameplay_func, TaskBuffer* tBuffer, Hero* owner,
+									Hero* receiver, float utility, float why, std::string type, std::string name, std::string exe_name,
+									int a, int k, int h, int p, int r, int e, int g)
 {
-	//need to grab these from containers
-	Hero* owner_prt = NULL;
-	Hero* receiver_ptr = NULL;
-	Hero* doer_ptr = NULL;
 
-	gameplay_func->add_action(name, utility, why, owner_prt,receiver_ptr, doer_ptr, exe_name);
-	//gameplay_func->add_worldObj(name, 100 * x, 100 * y, true);
-	//Action(Hero* owner, Hero* receiver, Hero* doer, int utility, int why, std::string name, std::string _exe_name);
-
+	gameplay_func->add_action(name, utility, why, owner, receiver, owner, exe_name);
 	tBuffer->run();
 
-	//setMultipliers
+	Containers::action_table[name]->setMultipliers(a, k, h, p, r, e, g);
 
-	//vector<std::shared_ptr<Preconditions>> req_preconds;
-	//vector<vector<std::shared_ptr<Preconditions>>> op_preconds;
+	std::cout << std::to_string(Containers::action_table[name]->multipliers->getAggression()) << std::endl;
 
-	//vector<std::shared_ptr<Postcondition>> succ_postconds;
-	//vector<std::shared_ptr<Postcondition>> fail_postconds;
+	//for the add the action pointer to the current respective reiciver action pool
+	if (type == "micro") {
+		
+		//need to make a memory pool for this 
+		if (owner->actionPool_map[receiver->name] == nullptr)
+		{
+			owner->actionPool_map[receiver->name] = new ActionPool(owner);
+		}
+		
 
-	recVec->push_back(Containers::worldObj_table[name]);
+		//needs to differenciate from pos and neg
+		owner->actionPool_map[receiver->name]->micro.push_back(Containers::action_table[name]);
+	}
+	//then macro
+	else
+	{
+		//need to make a memory pool for this 
+		//need to make a memory pool for this 
+		if (owner->actionPool_map[receiver->name] = nullptr)
+		{
+			owner->actionPool_map[receiver->name] = new ActionPool(owner);
+		}
 
+		//needs to differenciate from pos and neg
+		owner->actionPool_map[receiver->name]->macro.push_back(Containers::action_table[name]);
+	}
+	
+	return;
 }
 
