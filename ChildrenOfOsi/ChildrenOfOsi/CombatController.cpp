@@ -210,6 +210,7 @@ void CombatController::fight(Soldier* sold1, int state) {
 }
 
 void CombatController::follow(Soldier* sold1, int state) {
+	if (sold1->getInCombat())return;
 	Soldier* sold2 = sold1->getCurrentLeader();
 	if (sold2==nullptr)return;
 	if (dist_by_center(sold1, sold2) > (sold1->body[0].getWidth() * 5)) {

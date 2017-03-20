@@ -1130,9 +1130,9 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	short M = GetKeyState('M') >> 15;
 	Party* party = new Party();
 	Party* party2 = new Party();
-	party->addToParty(silverSoldier, false);
+	party2->addToParty(silverSoldier, false);
 	Party* party3 = new Party();
-	party->addToParty(silverSoldier2, false);
+	party2->addToParty(silverSoldier2, false);
 	Party* party4= new Party();
 	Village* v1 = new Village();
 	Village* v2 = new Village();
