@@ -21,7 +21,7 @@ int DialogueController::select = 0;
 std::string DialogueController::replyString;
 //bool init_conv = false;
 bool DialogueController::accepted_quest = false;
-bool DialogueController::prompted_quest = true;
+bool DialogueController::prompted_quest = false;
 AIController* DialogueController::ai = nullptr;
 Action* DialogueController::quest = nullptr;
 

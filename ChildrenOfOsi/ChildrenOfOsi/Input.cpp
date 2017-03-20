@@ -674,6 +674,7 @@ void Input::InputCheck()
 				else if (DialogueController::getState() == 2) {
 					disable = true;
 					DialogueController::PlayerResponse();
+				//	DialogueController::prompted_quest = false;
 				}
 			}
 		}
