@@ -214,6 +214,10 @@ void ChildrenOfOsi::change_song(string name, char* from, char* to) {
 	creatTaskForAudio(name, "SOUND", from, to);
 
 };
+void ChildrenOfOsi::pause_unpause(string name, char* source) {
+	creatTaskForAudio(name, "SOUND", source);
+
+};
 
 //----------------------------------------------------
 //----------------------------------------------------

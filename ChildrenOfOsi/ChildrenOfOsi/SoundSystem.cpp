@@ -33,37 +33,42 @@ FMOD_RESULT result;
 		
 		// Initialize our Instance with 36 Channels
 		m_pSystem->init(36, FMOD_INIT_NORMAL, 0);
-		string oasis = "oasis.wav";
+		string oasis = "RegionThemes/DesertRegion.flac";
+		string jungle = "RegionThemes/JungleRegion.flac";
+		string mountain= "RegionThemes/MountainRegion.flac";
+		string ogun = "RegionThemes/OgunRegion.flac";
+
 		string bump = "bump_0.wav";
 		string walk = "walk_loop.wav";
-		string sixers = "76ersAnthem.mp3";
-		string sketch = "Children of Osi Sketch 2.mp3";
-		string s6 = "76.wav";
-		string jangle = "jungle.wav";
+		
+		
+		
 
 		SoundClass oasisAddress = nullptr;
+		SoundClass jungleAddress = nullptr;
+		SoundClass mountainAddress = nullptr;
+		SoundClass ogunAddress = nullptr;
+
 		SoundClass bumpAddress = nullptr;
 		SoundClass walkAddress = nullptr;
-		SoundClass sixAddress = nullptr;
-		SoundClass sketch2Address = nullptr;
-		SoundClass s6add = nullptr;
-		SoundClass jangleadd = nullptr;
+		
 
 		this->createSound(&oasisAddress, oasis);
+		this->createSound(&jungleAddress, jungle);
+		this->createSound(&mountainAddress, mountain);
+		this->createSound(&ogunAddress, ogun);
+
 		this->createSound(&bumpAddress, bump);
 		this->createSound(&walkAddress, walk);
-		this->createSound(&sixAddress, sixers);
-		this->createSound(&sketch2Address, sketch);
-		this->createSound(&s6add, s6);
-		this->createSound(&jangleadd, jangle);
+		
 
 		sounds[oasis] = oasisAddress;
+		sounds[jungle] = jungleAddress;
+		sounds[mountain] = mountainAddress;
+		sounds[ogun] = ogunAddress;
 		sounds[bump] = bumpAddress;
 		sounds[walk] = walkAddress;
-		sounds[sixers] = sixAddress;
-		sounds[sketch] = sketch2Address;
-		sounds[s6] = s6add;
-		sounds[jangle] = jangleadd;
+		
 
 	}
 
@@ -164,7 +169,7 @@ FMOD_RESULT result;
 		SoundSystem soundsystem;
 		
 		type = foo::soundType::music;
-		name = "oasis.wav";
+		name = "RegionThemes/DesertRegion.flac";
 		channels[name] = &chnls[0];//assign the channel
 		
 		ispaused = true;
@@ -315,7 +320,7 @@ FMOD_RESULT result;
 		//object stuff
 
 
-		playAmbient(sounds[name], true, chnls[2], ispaused,.6); 	
+		playAmbient(sounds[name], true, chnls[2], ispaused,.4); 	
 // Play the sound, with loop mode
 
 
