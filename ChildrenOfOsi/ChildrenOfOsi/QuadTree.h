@@ -9,7 +9,7 @@ class QuadTree
 {
 private:
 	unsigned int maxObj = 10;
-	unsigned int maxLevel = 5;
+	unsigned int maxLevel = 4;
 	unsigned int treelv;
 	WorldObj* bounds;
 	vector<WorldObj*> objs;
@@ -23,5 +23,6 @@ public:
 	vector<int> getIndexes(WorldObj* myrec);
 	void Insert(WorldObj* myrec);
 	vector<WorldObj*> retrieve(vector<WorldObj*> &listOfObj, WorldObj* myrec);
+	vector<WorldObj*> renderRetrieve(vector<WorldObj*> &listOfObj, WorldObj* myrec);
 };
 

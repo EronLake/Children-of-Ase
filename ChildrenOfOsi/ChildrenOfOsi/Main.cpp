@@ -138,8 +138,6 @@ int main() {
 		//ALEX_LOOP(collideTree);
 		//ANDREWS_LOOP(collideTree);
 
-		
-
 	                                   
 		//testQuadTree();
 		//ALEX_LOOP(collideTree);   
@@ -155,8 +153,8 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 {
 	Rectangle::tex->setFile("Assets/Sprites/betterborder.png", 1);
 	
-	//Player* Alex = new Player(SHANGO, Vector2f(4900.0, 3700.0), 40.0, 40.0);	//init player
-	Player* Alex = new Player(SHANGO, Vector2f(4900.0, 3700.0), 150.0, 150.0);	//init player
+	//Player* Alex = new Player(SHANGO, Vector2f(4900.0, 3700.0), 150.0, 150.0);	//init player
+	Player* Alex = new Player(SHANGO, Vector2f(4694.0, 17706.0), 150.0, 150.0);	//init player
 
 	////cout << "Alex's width and height is " << Alex->getWidth() << ", " << Alex->getHeight() << endl;
 
@@ -721,7 +719,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	silverSoldier->melee->setWidth(50);
 	silverSoldier->melee->setHeight(50);
 	silverSoldier->melee->setStaminaCost(90);
-	silverSoldier->setHealth(30);
+	silverSoldier->setHealth(70);
 
 	silverSoldier->addAttackType(rockThrow);
 	silverSoldier->melee->sprite.setTexture(border);
@@ -737,7 +735,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	silverSoldier2->melee->setWidth(50);
 	silverSoldier2->melee->setHeight(50);
 	silverSoldier2->melee->setStaminaCost(90);
-	silverSoldier2->setHealth(30);
+	silverSoldier2->setHealth(50);
 
 	silverSoldier2->addAttackType(rockThrow);
 	silverSoldier2->melee->sprite.setTexture(border);
@@ -778,12 +776,13 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 
 	staticRec->setName("Yemoja");
 	staticRec->setInteractable(true);
-	staticRec->setHealth(100);
+	staticRec->setHealth(35);
 	*oya = *staticRec;
 	//oya->setSpeed(5);
 	oya->offsetBody(0, 35, 35, 65, 15);
 	staticRec->offsetBody(0, 35, 35, 65, 15);
 	oya->shiftY(300);
+	oya->setHealth(50);
 
 	Planner* YemojaPlanner = new Planner();
 	AiController->hero_planners[YEMOJA] = YemojaPlanner;
@@ -907,6 +906,9 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	bool OSAtkMode = true;
 	short M = GetKeyState('M') >> 15;
 	Party* party = new Party();
+	//party->addToParty(Alex, true);
+	//party->addToParty(staticRec, true);
+	//party->addToParty(oya, true);
 	Party* party2 = new Party();
 	party2->addToParty(silverSoldier, true);
 	Party* party3 = new Party();
@@ -914,11 +916,14 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	partyM->addToPartyList(party);
 	partyM->addToPartyList(party2);
 	partyM->addToPartyList(party3);
+	Village* vPlayer = new Village();
 	Village* v1 = new Village();
 	Village* v2 = new Village();
+	vPlayer->addToParties(party);
 	v1->addToParties(party2);
 	v2->addToParties(party3);
 	Alliance* a1 = new Alliance(v1);
+	a1->addToAlliance(vPlayer);
 	Alliance* a2 = new Alliance(v2);
 	War* war = new War();
 	war->setWarParties(v1,v2);

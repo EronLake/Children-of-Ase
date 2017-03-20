@@ -549,6 +549,8 @@ void Input::InputCheck()
 
 	if (DialogueController::getState() > 0) {
 		if (Q) {
+			DialogueController::exitDialogue();
+
 			WorldObj* other = DialogueController::getOther();
 			if (other->getType() == 5) {
 				Hero* them = dynamic_cast<Hero*>(other);

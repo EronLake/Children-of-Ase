@@ -260,17 +260,17 @@
       "y" : 184.5629119873047
    },
    "Jungle_Element_Num_112" : {
-      "bodyx1" : 205,
-      "bodyx2" : 225,
-      "bodyy1" : 430,
-      "bodyy2" : 30,
+      "bodyx1" : 205.0,
+      "bodyx2" : 225.0,
+      "bodyy1" : 430.0,
+      "bodyy2" : 30.0,
       "frame_num" : 1,
-      "hight" : 500,
+      "hight" : 500.0,
       "name" : "Jungle_Element_Num_112",
       "tex_file" : "Jungle_Tree_4",
-      "width" : 500,
-      "x" : 76.0,
-      "y" : 181.0
+      "width" : 500.0,
+      "x" : 74.90411376953125,
+      "y" : 179.1386566162109
    },
    "Jungle_Element_Num_113" : {
       "bodyx1" : 205,
@@ -685,8 +685,8 @@
       "name" : "Jungle_Element_Num_141",
       "tex_file" : "Jungle_Tree_4",
       "width" : 500.0,
-      "x" : 53.83161926269531,
-      "y" : 185.7044067382813
+      "x" : 52.18323135375977,
+      "y" : 184.7137145996094
    },
    "Jungle_Element_Num_142" : {
       "bodyx1" : 180,
@@ -1287,17 +1287,17 @@
       "y" : 191.8135528564453
    },
    "Jungle_Element_Num_184" : {
-      "bodyx1" : 205,
-      "bodyx2" : 225,
-      "bodyy1" : 430,
-      "bodyy2" : 30,
+      "bodyx1" : 205.0,
+      "bodyx2" : 225.0,
+      "bodyy1" : 430.0,
+      "bodyy2" : 30.0,
       "frame_num" : 1,
-      "hight" : 500,
+      "hight" : 500.0,
       "name" : "Jungle_Element_Num_184",
       "tex_file" : "Jungle_Tree_3",
-      "width" : 500,
-      "x" : 47.0,
-      "y" : 174.0
+      "width" : 500.0,
+      "x" : 44.69584655761719,
+      "y" : 171.7274169921875
    },
    "Jungle_Element_Num_185" : {
       "bodyx1" : 180,
@@ -1391,17 +1391,17 @@
       "y" : 170.0
    },
    "Jungle_Element_Num_191" : {
-      "bodyx1" : 205,
-      "bodyx2" : 225,
-      "bodyy1" : 430,
-      "bodyy2" : 30,
+      "bodyx1" : 205.0,
+      "bodyx2" : 225.0,
+      "bodyy1" : 430.0,
+      "bodyy2" : 30.0,
       "frame_num" : 1,
-      "hight" : 500,
+      "hight" : 500.0,
       "name" : "Jungle_Element_Num_191",
       "tex_file" : "Jungle_Tree_4",
-      "width" : 500,
-      "x" : 55.0,
-      "y" : 176.0
+      "width" : 500.0,
+      "x" : 55.43000030517578,
+      "y" : 175.5065612792969
    },
    "Jungle_Element_Num_192" : {
       "bodyx1" : 205,
@@ -1452,8 +1452,8 @@
       "name" : "Jungle_Element_Num_195",
       "tex_file" : "Jungle_Tree_1",
       "width" : 500.0,
-      "x" : 43.59272384643555,
-      "y" : 176.1448669433594
+      "x" : 44.39569473266602,
+      "y" : 174.4288482666016
    },
    "Jungle_Element_Num_196" : {
       "bodyx1" : 180,
@@ -1703,17 +1703,17 @@
       "y" : 185.0
    },
    "Jungle_Element_Num_212" : {
-      "bodyx1" : 180,
-      "bodyx2" : 180,
-      "bodyy1" : 350,
-      "bodyy2" : 95,
+      "bodyx1" : 180.0,
+      "bodyx2" : 180.0,
+      "bodyy1" : 350.0,
+      "bodyy2" : 95.0,
       "frame_num" : 1,
-      "hight" : 500,
+      "hight" : 500.0,
       "name" : "Jungle_Element_Num_212",
       "tex_file" : "Jungle_Tree_5",
-      "width" : 500,
-      "x" : 47.0,
-      "y" : 173.0
+      "width" : 500.0,
+      "x" : 46.24922943115234,
+      "y" : 175.3931427001953
    },
    "Jungle_Element_Num_213" : {
       "bodyx1" : 205,
@@ -1868,8 +1868,8 @@
       "name" : "Jungle_Element_Num_223",
       "tex_file" : "Jungle_Tree_1",
       "width" : 500.0,
-      "x" : 47.01467132568359,
-      "y" : 180.5078582763672
+      "x" : 49.88722991943359,
+      "y" : 180.8534393310547
    },
    "Jungle_Element_Num_224" : {
       "bodyx1" : 205.0,
@@ -1898,17 +1898,17 @@
       "y" : 190.3856201171875
    },
    "Jungle_Element_Num_226" : {
-      "bodyx1" : 210,
-      "bodyx2" : 200,
-      "bodyy1" : 420,
-      "bodyy2" : 50,
+      "bodyx1" : 210.0,
+      "bodyx2" : 200.0,
+      "bodyy1" : 420.0,
+      "bodyy2" : 50.0,
       "frame_num" : 1,
-      "hight" : 500,
+      "hight" : 500.0,
       "name" : "Jungle_Element_Num_226",
       "tex_file" : "Jungle_Tree_2",
-      "width" : 500,
-      "x" : 56.0,
-      "y" : 181.0
+      "width" : 500.0,
+      "x" : 58.22472763061523,
+      "y" : 178.7237854003906
    },
    "Jungle_Element_Num_227" : {
       "bodyx1" : 180.0,
@@ -2037,8 +2037,8 @@
       "name" : "Jungle_Element_Num_235",
       "tex_file" : "Jungle_Tree_4",
       "width" : 500.0,
-      "x" : 56.43784713745117,
-      "y" : 188.7541656494141
+      "x" : 53.93661499023438,
+      "y" : 187.2191467285156
    },
    "Jungle_Element_Num_236" : {
       "bodyx1" : 210.0,
@@ -3313,6 +3313,5 @@
       "width" : 500.0,
       "x" : 123.4269104003906,
       "y" : 146.9314575195313
->>>>>>> 2410bd3dc543a8b97f55a83990082999a4738211
    }
 }

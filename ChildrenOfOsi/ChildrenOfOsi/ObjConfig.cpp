@@ -5,7 +5,7 @@
 bool MakeForest = true;
 bool PlacePlant = false;
 bool rand_gen = false;
-bool Jungle_Config = false;
+bool Jungle_Config = true;
 float topLeftx;
 float topLefty;
 float topRightx;

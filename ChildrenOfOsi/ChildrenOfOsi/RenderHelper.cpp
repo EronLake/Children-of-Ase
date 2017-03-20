@@ -10,8 +10,8 @@ RenderHelper::RenderHelper(QuadTree * QT)
 	camera = new WorldObj(0, 0, false);
 	cameraSize.setXloc(960);
 	cameraSize.setYloc(540);
-	mapSize.setXloc(10000);
-	mapSize.setYloc(10000);
+	mapSize.setXloc(20000);	//10000
+	mapSize.setYloc(20000);	//10000
 	convoGui = new DialogueGui();
 	convoGui->loadTexture();
 	convoGui->setSprite();
@@ -27,8 +27,8 @@ RenderHelper::~RenderHelper()
 void RenderHelper::initCamera(WorldObj * player)
 {
 	//if player is within the four corners of the screen, camera is just the four corner of the screen
-	float camX = player->getX() - (cameraSize.getXloc() / 2) + (player->getWidth() / 2);
-	float camY = player->getY() - (cameraSize.getYloc() / 2) + (player->getHeight() / 2);
+	float camX = player->getX() - (cameraSize.getXloc() / 2); //+ (player->getWidth() / 2);
+	float camY = player->getY() - (cameraSize.getYloc() / 2); //+ (player->getHeight() / 2);
 	camera->setLoc(Vector2f(camX, camY));
 	camera->setWidth(cameraSize.getXloc());
 	camera->setHeight(cameraSize.getYloc());
@@ -53,10 +53,12 @@ int RenderHelper::draw_frame(WorldObj * obj)
 	//pass in the camera bound for rendering instead of the object
 	objVec.clear();
 	objVec = tree->retrieve(objVec, camera);
+	//cout << "SIZE OF THE RENDER OBJVEC IS RENDEREDNEREDNEREDNER *** " << objVec.size() << endl;
 	gmap->drawMap(camera->getX(), camera->getY());
 	//obj->WorldObj::drawObj(camera->getX(), camera->getY());
 	//obj->WorldObj::animateObj();
 	objVec.push_back(obj);
+	//cout << "SIZE OF ATTACK TABLE IS " << Containers::Attack_table.size() << endl;
 	for (auto i = Containers::Attack_table.begin(); i != Containers::Attack_table.end();++i) {
 		if (i->second->getPause() == 0) {
 			objVec.push_back(i->second);
