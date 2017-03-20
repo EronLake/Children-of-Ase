@@ -18,7 +18,7 @@ RenderHelper::RenderHelper(QuadTree * QT)
 	convoGui->loadTexture();
 	convoGui->setSprite();
 	gmap = new GameMap();
-	fullVec = tree->retrieve(fullVec, fullBound);
+	//fullVec = tree->retrieve(fullVec, fullBound);
 	//	gmap->loadTexture();
 	//	gmap->setSprite();
 }
@@ -60,7 +60,7 @@ int RenderHelper::draw_frame(WorldObj * obj)
 	initCamera(obj);
 	//pass in the camera bound for rendering instead of the object
 	objVec.clear();
-	//fullVec.clear();
+	fullVec.clear();
 
 	//objVec = tree->retrieve(objVec, camera);
 	if (fullVec.empty()) {
