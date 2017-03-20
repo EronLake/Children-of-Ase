@@ -78,7 +78,8 @@ void Input::InputCheck()
 		if (W)                //Moving up
 		{
 			//gameplay_functions->play_sound("Unpause");
-			gameplay_functions->change_song("Change", "Children of Osi Sketch 2.mp3", "oasis.wav");
+			//gameplay_functions->change_song("Change", "Children of Osi Sketch 2.mp3", "oasis.wav");
+			//Andrew you are a fucking idoit. -Alessio
 			if (A) {          //Moving up and left
 				gameplay_functions->move_up_left(player);   
 			}
