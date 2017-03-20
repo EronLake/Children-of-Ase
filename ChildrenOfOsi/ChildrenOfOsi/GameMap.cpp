@@ -122,25 +122,25 @@ void GameMap::setTextures() {
 
 void GameMap::loadTexture()
 {
-	map1_1tex->setFile("Assets/Sprites/smap1_1.png", 1);
-	map1_2tex->setFile("Assets/Sprites/smap1_2.png", 1);
-	map1_3tex->setFile("Assets/Sprites/smap1_3.png", 1);
-	map1_4tex->setFile("Assets/Sprites/smap1_4.png", 1);
+	map1_1tex->setFile("Assets/Sprites/map1_1.png", 1);
+	map1_2tex->setFile("Assets/Sprites/map1_2.png", 1);
+	map1_3tex->setFile("Assets/Sprites/map1_3.png", 1);
+	map1_4tex->setFile("Assets/Sprites/map1_4.png", 1);
 
-	map2_1tex->setFile("Assets/Sprites/smap2_1.png", 1);
-	map2_2tex->setFile("Assets/Sprites/smap2_2.png", 1);
-	map2_3tex->setFile("Assets/Sprites/smap2_3.png", 1);
-	map2_4tex->setFile("Assets/Sprites/smap2_4.png", 1);
+	map2_1tex->setFile("Assets/Sprites/map2_1.png", 1);
+	map2_2tex->setFile("Assets/Sprites/map2_2.png", 1);
+	map2_3tex->setFile("Assets/Sprites/map2_3.png", 1);
+	map2_4tex->setFile("Assets/Sprites/map2_4.png", 1);
 
-	map3_1tex->setFile("Assets/Sprites/smap3_1.png", 1);
-	map3_2tex->setFile("Assets/Sprites/smap3_2.png", 1);
-	map3_3tex->setFile("Assets/Sprites/smap3_3.png", 1);
-	map3_4tex->setFile("Assets/Sprites/smap3_4.png", 1);
+	map3_1tex->setFile("Assets/Sprites/map3_1.png", 1);
+	map3_2tex->setFile("Assets/Sprites/map3_2.png", 1);
+	map3_3tex->setFile("Assets/Sprites/map3_3.png", 1);
+	map3_4tex->setFile("Assets/Sprites/map3_4.png", 1);
 
-	map4_1tex->setFile("Assets/Sprites/smap4_1.png", 1);
-	map4_2tex->setFile("Assets/Sprites/smap4_2.png", 1);
-	map4_3tex->setFile("Assets/Sprites/smap4_3.png", 1);
-	map4_4tex->setFile("Assets/Sprites/smap4_4.png", 1);
+	map4_1tex->setFile("Assets/Sprites/map4_1.png", 1);
+	map4_2tex->setFile("Assets/Sprites/map4_2.png", 1);
+	map4_3tex->setFile("Assets/Sprites/map4_3.png", 1);
+	map4_4tex->setFile("Assets/Sprites/map4_4.png", 1);
 	//riverTex->setFile("River.png");
 }
 

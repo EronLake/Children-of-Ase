@@ -564,6 +564,7 @@ void Input::InputCheck()
 			{
 				DialogueController::exitDialogue();
 			}
+			DialogueController::exitDialogue();
 		}
 		if (prompted_quest) {
 
