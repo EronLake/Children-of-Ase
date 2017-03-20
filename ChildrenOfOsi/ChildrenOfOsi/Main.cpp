@@ -364,7 +364,9 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	objTexture->setFile("Assets/Sprites/YemojasHouse.png",1);
 	Soldier* silverSoldier = new Soldier(4000, 3300, true);
 	Soldier* silverSoldier2 = new Soldier(4300, 3300, true);
-	Soldier* blueSoldier = new Soldier(6000, 6000, true);
+	Soldier* blueSoldier = new Soldier(5000, 5000, true);
+	Soldier* blueSoldier2 = new Soldier(5200, 5200, true);
+	Soldier* blueSoldier3 = new Soldier(5400, 5400, true);
 	Alex->setHealth(200);
 
 	playerTexture->setFile("Assets/Sprites/ShangoForwardIdle.png",22);
@@ -705,6 +707,10 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	silverSoldier2->setHeight(150);
 	blueSoldier->setWidth(150);
 	blueSoldier->setHeight(150);
+	blueSoldier2->setWidth(150);
+	blueSoldier2->setHeight(150);
+	blueSoldier3->setWidth(150);
+	blueSoldier3->setHeight(150);
 
 
 	staticRec->sprite.setTexture(yemojaTexture);
@@ -743,6 +749,50 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	blueSoldier->sprite.hurt_down = bs_downHurtTex;
 	blueSoldier->sprite.hurt_left = bs_leftHurtTex;
 	blueSoldier->sprite.hurt_right = bs_rightHurtTex;
+
+	blueSoldier2->sprite.setTexture(blueSoldierTexture);
+	blueSoldier2->sprite.setIdleTexture(blueSoldierIdleTex);
+	blueSoldier2->sprite.up = bs_upRunTex;
+	blueSoldier2->sprite.down = bs_downRunTex;
+	blueSoldier2->sprite.left = bs_leftRunTex;
+	blueSoldier2->sprite.right = bs_rightRunTex;
+
+	blueSoldier2->sprite.id_up = bs_upIdleTex;
+	blueSoldier2->sprite.id_left = bs_leftIdleTex;
+	blueSoldier2->sprite.id_right = bs_rightIdleTex;
+	blueSoldier2->sprite.id_down = bs_downIdleTex;
+
+	blueSoldier2->sprite.atk_up = bs_upAtkTex;
+	blueSoldier2->sprite.atk_down = bs_downAtkTex;
+	blueSoldier2->sprite.atk_left = bs_leftAtkTex;
+	blueSoldier2->sprite.atk_right = bs_rightAtkTex;
+
+	blueSoldier2->sprite.hurt_up = bs_upHurtTex;
+	blueSoldier2->sprite.hurt_down = bs_downHurtTex;
+	blueSoldier2->sprite.hurt_left = bs_leftHurtTex;
+	blueSoldier2->sprite.hurt_right = bs_rightHurtTex;
+
+	blueSoldier3->sprite.setTexture(blueSoldierTexture);
+	blueSoldier3->sprite.setIdleTexture(blueSoldierIdleTex);
+	blueSoldier3->sprite.up = bs_upRunTex;
+	blueSoldier3->sprite.down = bs_downRunTex;
+	blueSoldier3->sprite.left = bs_leftRunTex;
+	blueSoldier3->sprite.right = bs_rightRunTex;
+
+	blueSoldier3->sprite.id_up = bs_upIdleTex;
+	blueSoldier3->sprite.id_left = bs_leftIdleTex;
+	blueSoldier3->sprite.id_right = bs_rightIdleTex;
+	blueSoldier3->sprite.id_down = bs_downIdleTex;
+
+	blueSoldier3->sprite.atk_up = bs_upAtkTex;
+	blueSoldier3->sprite.atk_down = bs_downAtkTex;
+	blueSoldier3->sprite.atk_left = bs_leftAtkTex;
+	blueSoldier3->sprite.atk_right = bs_rightAtkTex;
+
+	blueSoldier3->sprite.hurt_up = bs_upHurtTex;
+	blueSoldier3->sprite.hurt_down = bs_downHurtTex;
+	blueSoldier3->sprite.hurt_left = bs_leftHurtTex;
+	blueSoldier3->sprite.hurt_right = bs_rightHurtTex;
 
 	silverSoldier->sprite.setTexture(silverSoldierTexture);
 	silverSoldier->sprite.setIdleTexture(silverSoldierIdleTex);
@@ -804,9 +854,19 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	blueSoldier->setInteractable(true);
 	blueSoldier->setName("blueSoldier");
 
+	blueSoldier2->offsetBody(0, 60, 60, 75, 50);
+	blueSoldier2->setInteractable(true);
+	blueSoldier2->setName("blueSoldier2");
+
+	blueSoldier3->offsetBody(0, 60, 60, 75, 50);
+	blueSoldier3->setInteractable(true);
+	blueSoldier3->setName("blueSoldier3");
+
 	gameplay_functions->add_Attack(silverSoldier->getKey(), silverSoldier->body[0].getX(), silverSoldier->body[0].getY(), true, 10);
 	gameplay_functions->add_Attack(silverSoldier2->getKey(), silverSoldier2->body[0].getX(), silverSoldier2->body[0].getY(), true, 10);
 	gameplay_functions->add_Attack(blueSoldier->getKey(), blueSoldier->body[0].getX(), blueSoldier->body[0].getY(), true, 10);
+	gameplay_functions->add_Attack(blueSoldier2->getKey(), blueSoldier2->body[0].getX(), blueSoldier2->body[0].getY(), true, 10);
+	gameplay_functions->add_Attack(blueSoldier3->getKey(), blueSoldier3->body[0].getX(), blueSoldier3->body[0].getY(), true, 10);
 	tBuffer->run();
 
 
@@ -861,6 +921,40 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	
 	blueSoldier->addAttackType(rockThrow);
 	blueSoldier->melee->sprite.setTexture(border);
+
+	blueSoldier2->melee = Containers::Attack_table[blueSoldier2->getKey()];
+	blueSoldier2->melee->setDmg(10);
+	blueSoldier2->melee->setSpeed(5);
+	blueSoldier2->melee->setBaseDir(4);
+	blueSoldier2->melee->setCoolDown(100);
+	blueSoldier2->melee->setPause(-1);
+	blueSoldier2->melee->setDestroy(false);
+	blueSoldier2->melee->setKeep(true);
+	blueSoldier2->melee->setWidth(50);
+	blueSoldier2->melee->setHeight(50);
+	blueSoldier2->melee->setStaminaCost(90);
+	blueSoldier2->setHealth(100);
+	blueSoldier2->setMaxStamina(300);
+
+	blueSoldier2->addAttackType(rockThrow);
+	blueSoldier2->melee->sprite.setTexture(border);
+
+	blueSoldier3->melee = Containers::Attack_table[blueSoldier3->getKey()];
+	blueSoldier3->melee->setDmg(10);
+	blueSoldier3->melee->setSpeed(5);
+	blueSoldier3->melee->setBaseDir(4);
+	blueSoldier3->melee->setCoolDown(100);
+	blueSoldier3->melee->setPause(-1);
+	blueSoldier3->melee->setDestroy(false);
+	blueSoldier3->melee->setKeep(true);
+	blueSoldier3->melee->setWidth(50);
+	blueSoldier3->melee->setHeight(50);
+	blueSoldier3->melee->setStaminaCost(90);
+	blueSoldier3->setHealth(100);
+	blueSoldier3->setMaxStamina(300);
+
+	blueSoldier3->addAttackType(rockThrow);
+	blueSoldier3->melee->sprite.setTexture(border);
 	//silverSoldier->addAttackType(spin);
 
 	//combatControl->addtoTargets(Alex);
@@ -933,6 +1027,8 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	recVec.push_back(staticRec);
 	recVec.push_back(silverSoldier);
 	recVec.push_back(blueSoldier);
+	recVec.push_back(blueSoldier2);
+	recVec.push_back(blueSoldier3);
 	recVec.push_back(silverSoldier2);
 	recVec.push_back(oya);
 	//recVec.push_back(barrel);
@@ -1050,6 +1146,9 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	War* war = new War();
 	war->setWarParties(v1,v2);
 	party4->addToParty(blueSoldier, true);
+	party4->addToParty(blueSoldier2, true);
+	party4->addToParty(blueSoldier3, true);
+	party4->updateFollowers();
 	v4->addToParties(party4);
 	War* war2 = new War();
 	war2->setWarParties(v3, v4);
@@ -1092,6 +1191,8 @@ Region next_region = *Desert;
 		silverSoldier->updateCD();
 		silverSoldier2->updateCD();
 		blueSoldier->updateCD();
+		blueSoldier2->updateCD();
+		blueSoldier3->updateCD();
 		for (int i = 0; i < recVec.size(); i++) {
 			_QuadTree->Insert(recVec[i]);	//insert all obj into tree
 	
@@ -1217,8 +1318,12 @@ Region next_region = *Desert;
 		combatControl->follow(staticRec, state);
 		combatControl->fight(silverSoldier, state);
 		combatControl->fight(silverSoldier2, state);
+		combatControl->follow(blueSoldier, state);
+		combatControl->follow(blueSoldier2, state);
+		combatControl->follow(blueSoldier3, state);
 		combatControl->fight(blueSoldier, state);
-
+		combatControl->fight(blueSoldier2, state);
+		combatControl->fight(blueSoldier3, state);
 		/*
 		////cout << "Alex's position is " << Alex->getLoc().getXloc() << ", " << Alex->getLoc().getYloc() << endl;
 		////cout << "OS's position is " << silverSoldier->getLoc().getXloc() << ", " << silverSoldier->getLoc().getYloc() << endl;
