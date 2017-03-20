@@ -51,6 +51,16 @@ class Sprite
   Texture *atk2_left;
   Texture *atk2_right;
 
+  Texture *spin_up;
+  Texture *spin_down;
+  Texture *spin_left;
+  Texture *spin_right;
+
+  Texture *breathe_up;
+  Texture *breathe_down;
+  Texture *breathe_left;
+  Texture *breathe_right;
+
   Texture *hurt_up;
   Texture *hurt_down;
   Texture *hurt_left;

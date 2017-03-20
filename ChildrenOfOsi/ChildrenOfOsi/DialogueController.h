@@ -3,6 +3,7 @@
 #include "common.h"
 #include "Player.h"
 #include "DialogueHelper.h"
+#include "Party.h"
 
 
 class DialogueController
