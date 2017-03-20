@@ -95,7 +95,9 @@ int RenderHelper::draw_frame(WorldObj * obj)
 		objVec[i]->WorldObj::drawObj(camera->getX(), camera->getY());
 		//for (int j = 0; j < objVec[i]->body.size(); j++) {
 		objVec[i]->body[0].drawObj(camera->getX(), camera->getY());
+		objVec[i]->effect.drawObj(camera->getX(), camera->getY());
 		//}
+		objVec[i]->effect.sprite.animate();
 		objVec[i]->WorldObj::animateObj();
 	}
 	//convoGui->drawGui();
@@ -274,23 +276,30 @@ int RenderHelper::sprite_hurt(WorldObj * obj)
 	int check = obj->getDirection();
 	obj->sprite.unlockAnimation();
 	obj->sprite.setTexture(obj->sprite.id_up);
+	obj->effect.sprite.unlockAnimation();
+	obj->effect.sprite.setTexture(obj->effect.sprite.id_up);
 	if (check == 8) {
 		obj->sprite.setTexture(obj->sprite.hurt_up);
 		obj->sprite.setIdleTexture(obj->sprite.id_up);
+		obj->effect.sprite.setTexture(obj->effect.sprite.hurt_up);
 	}
 	else 	if (check == 2) {
 		obj->sprite.setTexture(obj->sprite.hurt_down);
 		obj->sprite.setIdleTexture(obj->sprite.id_down);
+		obj->effect.sprite.setTexture(obj->effect.sprite.hurt_down);
 	}
 	else 	if (check == 6) {
 		obj->sprite.setTexture(obj->sprite.hurt_right);
 		obj->sprite.setIdleTexture(obj->sprite.id_right);
+		obj->effect.sprite.setTexture(obj->effect.sprite.hurt_right);
 	}
 	else	if (check == 4) {
 		obj->sprite.setTexture(obj->sprite.hurt_left);
 		obj->sprite.setIdleTexture(obj->sprite.id_left);
+		obj->effect.sprite.setTexture(obj->effect.sprite.hurt_left);
 	}
 	obj->sprite.lockAnimation();
+	obj->effect.sprite.lockAnimation();
 	return 0;
 }
 

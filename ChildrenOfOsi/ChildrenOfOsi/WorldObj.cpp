@@ -12,6 +12,7 @@ void WorldObj::setX(float x)
 		body[i].setX(x-(loc.getXloc()-body[i].getX()));
 	}
 	loc.setXloc(x);
+	effect.setX(x);
 }
 
 void WorldObj::setY(float y)
@@ -20,11 +21,13 @@ void WorldObj::setY(float y)
 		body[i].setY(y - (loc.getYloc() - body[i].getY()));
 	}
 	loc.setYloc(y);
+	effect.setY(y);
 }
 
 void WorldObj::shiftX(float dist)
 {
 	loc.shiftXloc(dist);
+	effect.setX(effect.getX() + dist);
 	for (int i = 0; i < body.size(); i++) {
 		body[i].setX(body[i].getX() + dist);
 	}
@@ -35,6 +38,7 @@ void WorldObj::shiftX(float dist)
 void WorldObj::shiftY(float dist)
 {
 	loc.shiftYloc(dist);
+	effect.setY(effect.getY()+dist);
 	for (int i = 0; i < body.size(); i++) {
 		body[i].setY(body[i].getY()+dist);
 	}
