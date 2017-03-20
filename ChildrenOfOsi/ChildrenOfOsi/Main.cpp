@@ -490,10 +490,10 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	firebreatheDown->setFile("Assets/Sprites/ShangoForwardBreath.png", 14);
 	firebreatheLeft->setFile("Assets/Sprites/ShangoLeftBreath.png", 14);
 
-	spinRight->setFile("Assets/Sprites/ShangoRightBreath.png", 22);
-	spinUp->setFile("Assets/Sprites/ShangoBackBreath.png", 22);
-	spinDown->setFile("Assets/Sprites/ShangoForwardBreath.png", 22);
-	spinLeft->setFile("Assets/Sprites/ShangoLeftBreath.png", 22);
+	spinRight->setFile("Assets/Sprites/ShangoRightSpin.png", 22);
+	spinUp->setFile("Assets/Sprites/ShangoBackSpin.png", 22);
+	spinDown->setFile("Assets/Sprites/ShangoForwardSpin.png", 22);
+	spinLeft->setFile("Assets/Sprites/ShangoLeftSpin.png", 22);
 	/* SET UP SPRITE CHANGE, MIGHT NEED A SINGLETON?*/
 
 
@@ -518,6 +518,15 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	Alex->sprite.atk2_down = downAtk2Tex;
 	Alex->sprite.atk2_left = leftAtk2Tex;
 	Alex->sprite.atk2_right = rightAtk2Tex;
+
+	Alex->sprite.spin_up = spinUp;
+	Alex->sprite.spin_down = spinDown;
+	Alex->sprite.spin_left = spinLeft;
+	Alex->sprite.spin_right = spinRight;
+	Alex->sprite.breathe_up = firebreatheUp;
+	Alex->sprite.breathe_down = firebreatheDown;
+	Alex->sprite.breathe_left = firebreatheLeft;
+	Alex->sprite.breathe_right = firebreatheRight;
 
 	Alex->sprite.hurt_up = upHurtTex;
 	Alex->sprite.hurt_down = downHurtTex;

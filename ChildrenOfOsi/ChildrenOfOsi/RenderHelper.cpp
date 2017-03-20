@@ -217,9 +217,63 @@ int RenderHelper::sprite_atk(WorldObj * o)
 	return 0;
 }
 
+int RenderHelper::sprite_spin_atk(WorldObj * o)
+{
+	if (o->getType() > 2) {
+		Soldier* obj = CheckClass::isSoldier(o);
+		int check = obj->getDirection();
+		if (check == 8) {
+			obj->sprite.setTexture(obj->sprite.spin_up);
+			obj->sprite.setIdleTexture(obj->sprite.id_up);
+		}
+		else 	if (check == 2) {
+			obj->sprite.setTexture(obj->sprite.spin_down);
+			obj->sprite.setIdleTexture(obj->sprite.id_down);
+		}
+		else 	if (check == 6) {
+			obj->sprite.setTexture(obj->sprite.spin_right);
+			obj->sprite.setIdleTexture(obj->sprite.id_right);
+		}
+		else	if (check == 4) {
+			obj->sprite.setTexture(obj->sprite.spin_left);
+			obj->sprite.setIdleTexture(obj->sprite.id_left);
+		}
+		obj->sprite.lockAnimation();
+	}
+	return 0;
+}
+
+int RenderHelper::sprite_fire_atk(WorldObj * o)
+{
+	if (o->getType() > 2) {
+		Soldier* obj = CheckClass::isSoldier(o);
+		int check = obj->getDirection();
+		if (check == 8) {
+			obj->sprite.setTexture(obj->sprite.breathe_up);
+			obj->sprite.setIdleTexture(obj->sprite.id_up);
+		}
+		else 	if (check == 2) {
+			obj->sprite.setTexture(obj->sprite.breathe_down);
+			obj->sprite.setIdleTexture(obj->sprite.id_down);
+		}
+		else 	if (check == 6) {
+			obj->sprite.setTexture(obj->sprite.breathe_right);
+			obj->sprite.setIdleTexture(obj->sprite.id_right);
+		}
+		else	if (check == 4) {
+			obj->sprite.setTexture(obj->sprite.breathe_left);
+			obj->sprite.setIdleTexture(obj->sprite.id_left);
+		}
+		obj->sprite.lockAnimation();
+	}
+	return 0;
+}
+
 int RenderHelper::sprite_hurt(WorldObj * obj)
 {
 	int check = obj->getDirection();
+	obj->sprite.unlockAnimation();
+	obj->sprite.setTexture(obj->sprite.id_up);
 	if (check == 8) {
 		obj->sprite.setTexture(obj->sprite.hurt_up);
 		obj->sprite.setIdleTexture(obj->sprite.id_up);

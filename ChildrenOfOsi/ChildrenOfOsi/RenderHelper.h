@@ -21,6 +21,8 @@ public:
 	int sprite_left(WorldObj* obj);
 	int sprite_right(WorldObj* obj);
 	int sprite_atk(WorldObj* obj);
+	int sprite_spin_atk(WorldObj* obj);
+	int sprite_fire_atk(WorldObj* obj);
 	int sprite_hurt(WorldObj* obj);
 	int sprite_idle(WorldObj* obj);
 	int sprite_update(WorldObj* obj);
