@@ -211,10 +211,10 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	//Player* Alex = new Player(1000,600, true);	//init player
 	//WorldObj* Alex = new WorldObj(1000, 600, true);
 
-	ObjConfig::import_config(recVec_ptr, gameplay_functions, tBuffer);
+//	ObjConfig::import_config(recVec_ptr, gameplay_functions, tBuffer);
 	
-	DialogueConfig::import_config(gameplay_functions, tBuffer);
-	DialogueController::getDialogueHelper()->fill_conversations();
+//	DialogueConfig::import_config(gameplay_functions, tBuffer);
+//	DialogueController::getDialogueHelper()->fill_conversations();
 	
 	//WorldObj* barrel = new WorldObj(Vector2f(5200, 3900), 75, 75);
 	//Alex->name = SHANGO;
@@ -1618,6 +1618,7 @@ Region next_region = *Desert;
 		if (state == 0) {
 			//LOG("ERROR AFTER PRESSING Q TO QUIT THE DIALOGUE GUI");
 			gameplay_functions->draw_frame(Alex);
+			//gameplay_functions->drawHUD(Alex);
 			
 		}
 		else if (state > 0) {

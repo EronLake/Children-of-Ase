@@ -6,6 +6,7 @@
 #include "GameMap.h"
 #include "Containers.h"
 #include "CheckClass.h"
+#include "HUD.h"
 
 class RenderHelper
 {
@@ -27,6 +28,7 @@ public:
 	int sprite_idle(WorldObj* obj);
 	int sprite_update(WorldObj* obj);
 	int drawDiaGui(WorldObj* obj);
+	int drawHUD(WorldObj* obj);
 	int setSwordGlow(WorldObj* obj);
 	int setHeartGlow(WorldObj* obj);
 	int setFaceGlow(WorldObj* obj);
@@ -40,6 +42,7 @@ public:
 private:
 	
 	DialogueGui* convoGui;
+	HUD* hud_ptr;
 	GameMap* gmap;
 	std::vector<WorldObj*> objVec;
 	std::vector<WorldObj*> fullVec;

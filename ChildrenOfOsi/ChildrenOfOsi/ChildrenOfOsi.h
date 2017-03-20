@@ -41,6 +41,7 @@ public:
 	//functions for rendering
 	void draw_frame(WorldObj* player);
 	void drawDiaGui(WorldObj* player);
+	void drawHUD(WorldObj* player);
 	void init_map(WorldObj* obj);
 
 	//functions for creating objects in memory

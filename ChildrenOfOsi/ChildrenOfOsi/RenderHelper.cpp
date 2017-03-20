@@ -16,6 +16,9 @@ RenderHelper::RenderHelper(QuadTree * QT)
 	convoGui = new DialogueGui();
 	convoGui->loadTexture();
 	convoGui->setSprite();
+	hud_ptr = new HUD();
+	hud_ptr->loadTexture();
+	hud_ptr->setSprite();
 	gmap = new GameMap();
 	fullVec = tree->retrieve(fullVec, fullBound);
 	//	gmap->loadTexture();
@@ -99,6 +102,7 @@ int RenderHelper::draw_frame(WorldObj * obj)
 		objVec[i]->WorldObj::animateObj();
 	}
 	//convoGui->drawGui();
+	drawHUD(obj);
 	osi::GameWindow::refresh();
 	return 0;
 }
@@ -120,6 +124,13 @@ int RenderHelper::drawDiaGui(WorldObj* obj)
 	osi::GameWindow::refresh();
 	return 0;
 }
+
+int RenderHelper::drawHUD(WorldObj* obj)
+{
+	hud_ptr->drawHUD(obj);
+	return 0;
+}
+
 
 int RenderHelper::setSwordGlow(WorldObj * obj)
 {

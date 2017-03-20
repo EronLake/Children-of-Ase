@@ -215,6 +215,9 @@
     <ClCompile Include="Region.cpp">
       <Filter>Audio</Filter>
     </ClCompile>
+    <ClCompile Include="HUD.cpp">
+      <Filter>Rendering</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AIHelper.h">
@@ -448,6 +451,9 @@
     <ClInclude Include="Tag.h" />
     <ClInclude Include="Region.h">
       <Filter>Audio</Filter>
+    </ClInclude>
+    <ClInclude Include="HUD.h">
+      <Filter>Rendering</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
