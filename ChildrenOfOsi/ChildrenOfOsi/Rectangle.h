@@ -18,11 +18,25 @@ public:
 		width = p_width;
 		height = p_height;
 		sprite.setTexture(tex);
+		sprite.id_up=tex;
+		sprite.unlockAnimation();
+		sprite.setIdleTexture(sprite.id_up);
+		sprite.hurt_up = texUP;
+		sprite.hurt_down = texDOWN;
+		sprite.hurt_right = texRIGHT;
+		sprite.hurt_left = texLEFT;
 	}
-	Rectangle() { sprite.setTexture(tex); }
+	Rectangle() { sprite.setTexture(tex); sprite.id_up = tex;sprite.unlockAnimation();
+	sprite.setIdleTexture(sprite.id_up);sprite.hurt_up = texUP;sprite.hurt_down = texDOWN;
+	sprite.hurt_right = texRIGHT;sprite.hurt_left = texLEFT;
+	}
 	~Rectangle() {}
 	Sprite sprite;
     static Texture* tex;
+	static Texture* texUP;
+	static Texture* texDOWN;
+	static Texture* texLEFT;
+	static Texture* texRIGHT;
 	float getX() { return topLeft.getXloc(); }
 	float getY() { return topLeft.getYloc(); }
 	float getWidth() { return width; }
