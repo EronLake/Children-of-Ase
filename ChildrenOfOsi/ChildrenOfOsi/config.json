@@ -62,8 +62,8 @@
       "name" : "Jungle_BIg_Tree",
       "tex_file" : "Forest_Town_Center",
       "width" : 600.0,
-      "x" : 55.80261611938477,
-      "y" : 36.18485641479492
+      "x" : 51.20648956298828,
+      "y" : 37.71633911132813
    },
    "Jungle_Element_Num_1" : {
       "bodyx1" : 205.0,
@@ -324,7 +324,6 @@
       "width" : 500.0,
       "x" : 110.6281051635742,
       "y" : 178.6986541748047
-
    },
    "Jungle_Element_Num_117" : {
       "bodyx1" : 180.0,
@@ -1484,17 +1483,17 @@
       "y" : 175.0
    },
    "Jungle_Element_Num_198" : {
-      "bodyx1" : 180,
-      "bodyx2" : 180,
-      "bodyy1" : 350,
-      "bodyy2" : 95,
+      "bodyx1" : 180.0,
+      "bodyx2" : 180.0,
+      "bodyy1" : 350.0,
+      "bodyy2" : 95.0,
       "frame_num" : 1,
-      "hight" : 500,
+      "hight" : 500.0,
       "name" : "Jungle_Element_Num_198",
       "tex_file" : "Jungle_Tree_1",
-      "width" : 500,
-      "x" : 60.0,
-      "y" : 183.0
+      "width" : 500.0,
+      "x" : 60.92366027832031,
+      "y" : 183.8332214355469
    },
    "Jungle_Element_Num_199" : {
       "bodyx1" : 210,
@@ -2952,135 +2951,6 @@
       "x" : 123.4139938354492,
       "y" : 148.3250732421875
    },
-   "new_oasis_shrub_1" : {
-      "bodyx1" : 0.0,
-      "bodyx2" : 0.0,
-      "bodyy1" : 0.0,
-      "bodyy2" : 0.0,
-      "frame_num" : 1,
-      "hight" : 100.0,
-      "name" : "new_oasis_shrub_1",
-      "tex_file" : "Oasis_Shrub_4",
-      "width" : 100.0,
-      "x" : 89.78695678710938,
-      "y" : 108.3774185180664
-   },
-   "new_oasis_shrub_4" : {
-      "bodyx1" : 0.0,
-      "bodyx2" : 0.0,
-      "bodyy1" : 0.0,
-      "bodyy2" : 0.0,
-      "frame_num" : 1,
-      "hight" : 100.0,
-      "name" : "new_oasis_shrub_4",
-      "tex_file" : "Oasis_Shrub_4",
-      "width" : 100.0,
-      "x" : 289.78695678710938,
-      "y" : 208.3774185180664
-   },
-   "new_oasis_shrub_4" : {
-      "bodyx1" : 0.0,
-      "bodyx2" : 0.0,
-      "bodyy1" : 0.0,
-      "bodyy2" : 0.0,
-      "frame_num" : 1,
-      "hight" : 100.0,
-      "name" : "new_oasis_shrub_4",
-      "tex_file" : "Oasis_Shrub_4",
-      "width" : 100.0,
-      "x" : 81.78695678710938,
-      "y" : 108.3774185180664
-   },
-   "new_oasis_shrub_4" : {
-      "bodyx1" : 0.0,
-      "bodyx2" : 0.0,
-      "bodyy1" : 0.0,
-      "bodyy2" : 0.0,
-      "frame_num" : 1,
-      "hight" : 100.0,
-      "name" : "new_oasis_shrub_4",
-      "tex_file" : "Oasis_Shrub_4",
-      "width" : 100.0,
-      "x" : 89.78695678710938,
-      "y" : 108.3774185180664
-   },
-   "new_oasis_tree_1" : {
-      "bodyx1" : 0,
-      "bodyx2" : 0,
-      "bodyy1" : 0,
-      "bodyy2" : 0,
-      "frame_num" : 1,
-      "hight" : 500,
-      "name" : "new_oasis_tree_1",
-      "tex_file" : "Oasis_Tree_new_1",
-      "width" : 500,
-      "x" : 37.0,
-      "y" : 111.0
-   },
-   "new_oasis_tree_2" : {
-      "bodyx1" : 100.0,
-      "bodyx2" : 100.0,
-      "bodyy1" : 250.0,
-      "bodyy2" : 10.0,
-      "frame_num" : 1,
-      "hight" : 500.0,
-      "name" : "new_oasis_tree_2",
-      "tex_file" : "Oasis_Tree_new_1",
-      "width" : 500.0,
-      "x" : 31.05276107788086,
-      "y" : 109.6521606445313
-   },
-   "new_oasis_tree_3" : {
-      "bodyx1" : 100.0,
-      "bodyx2" : 100.0,
-      "bodyy1" : 250.0,
-      "bodyy2" : 10.0,
-      "frame_num" : 1,
-      "hight" : 500.0,
-      "name" : "new_oasis_tree_3",
-      "tex_file" : "Oasis_Tree_new_1",
-      "width" : 500.0,
-      "x" : 75.51263427734375,
-      "y" : 100.0099639892578
-   },
-   "new_oasis_tree_4" : {
-      "bodyx1" : 0,
-      "bodyx2" : 0,
-      "bodyy1" : 0,
-      "bodyy2" : 0,
-      "frame_num" : 1,
-      "hight" : 500,
-      "name" : "new_oasis_tree_4",
-      "tex_file" : "Oasis_Tree_new_1",
-      "width" : 500,
-      "x" : 237.0,
-      "y" : 311.0
-   },
-   "new_oasis_tree_5" : {
-      "bodyx1" : 100.0,
-      "bodyx2" : 100.0,
-      "bodyy1" : 250.0,
-      "bodyy2" : 10.0,
-      "frame_num" : 1,
-      "hight" : 500.0,
-      "name" : "new_oasis_tree_5",
-      "tex_file" : "Oasis_Tree_new_1",
-      "width" : 500.0,
-      "x" : 231.0527610778809,
-      "y" : 159.6521606445313
-   },
-   "new_oasis_tree_6" : {
-      "bodyx1" : 100.0,
-      "bodyx2" : 100.0,
-      "bodyy1" : 250.0,
-      "bodyy2" : 10.0,
-      "frame_num" : 1,
-      "hight" : 500.0,
-      "name" : "new_oasis_tree_6",
-      "tex_file" : "Oasis_Tree_new_1",
-      "width" : 500.0,
-      "x" : 275.5126342773438,
-      "y" : 200.0099639892578
    "OH003" : {
       "bodyx1" : 0.0,
       "bodyx2" : 0.0,
@@ -3094,7 +2964,6 @@
       "x" : 55.63147354125977,
       "y" : 97.78797912597656
    },
-   
    "OH04" : {
       "bodyx1" : 0.0,
       "bodyx2" : 0.0,
@@ -3108,7 +2977,6 @@
       "x" : 55.62301635742188,
       "y" : 100.1838760375977
    },
-
    "OH10" : {
       "bodyx1" : 0.0,
       "bodyx2" : 0.0,
@@ -3123,7 +2991,7 @@
       "y" : 102.8935623168945
    },
    "OH11" : {
-     "bodyx1" : 0.0,
+      "bodyx1" : 0.0,
       "bodyx2" : 0.0,
       "bodyy1" : 100.0,
       "bodyy2" : 0.0,
@@ -3136,7 +3004,7 @@
       "y" : 102.8023834228516
    },
    "OH13" : {
-     "bodyx1" : 0.0,
+      "bodyx1" : 0.0,
       "bodyx2" : 0.0,
       "bodyy1" : 100.0,
       "bodyy2" : 0.0,
@@ -3149,7 +3017,7 @@
       "y" : 102.8189620971680
    },
    "OH14" : {
-     "bodyx1" : 0.0,
+      "bodyx1" : 0.0,
       "bodyx2" : 0.0,
       "bodyy1" : 100.0,
       "bodyy2" : 0.0,
@@ -3162,7 +3030,7 @@
       "y" : 95.27615356445313
    },
    "OH15" : {
-     "bodyx1" : 0.0,
+      "bodyx1" : 0.0,
       "bodyx2" : 0.0,
       "bodyy1" : 100.0,
       "bodyy2" : 0.0,
@@ -3249,9 +3117,112 @@
       "name" : "Oasis_Tower",
       "tex_file" : "Oasis_Tower",
       "width" : 500.0,
-      "x" : 47.28623962402344,
-      "y" : 97.01425933837891
->>>>>>> e1461d8821e83fd393bf2e8f7e6074eecfe69c3c
+      "x" : 47.48036575317383,
+      "y" : 96.56881713867188
+   },
+   "new_oasis_shrub_1" : {
+      "bodyx1" : 0.0,
+      "bodyx2" : 0.0,
+      "bodyy1" : 0.0,
+      "bodyy2" : 0.0,
+      "frame_num" : 1,
+      "hight" : 100.0,
+      "name" : "new_oasis_shrub_1",
+      "tex_file" : "Oasis_Shrub_4",
+      "width" : 100.0,
+      "x" : 89.78695678710938,
+      "y" : 108.3774185180664
+   },
+   "new_oasis_shrub_4" : {
+      "bodyx1" : 0.0,
+      "bodyx2" : 0.0,
+      "bodyy1" : 0.0,
+      "bodyy2" : 0.0,
+      "frame_num" : 1,
+      "hight" : 100.0,
+      "name" : "new_oasis_shrub_4",
+      "tex_file" : "Oasis_Shrub_4",
+      "width" : 100.0,
+      "x" : 289.7869567871094,
+      "y" : 208.3774185180664
+   },
+   "new_oasis_tree_1" : {
+      "bodyx1" : 0,
+      "bodyx2" : 0,
+      "bodyy1" : 0,
+      "bodyy2" : 0,
+      "frame_num" : 1,
+      "hight" : 500,
+      "name" : "new_oasis_tree_1",
+      "tex_file" : "Oasis_Tree_new_1",
+      "width" : 500,
+      "x" : 37.0,
+      "y" : 111.0
+   },
+   "new_oasis_tree_2" : {
+      "bodyx1" : 100.0,
+      "bodyx2" : 100.0,
+      "bodyy1" : 250.0,
+      "bodyy2" : 10.0,
+      "frame_num" : 1,
+      "hight" : 500.0,
+      "name" : "new_oasis_tree_2",
+      "tex_file" : "Oasis_Tree_new_1",
+      "width" : 500.0,
+      "x" : 31.05276107788086,
+      "y" : 109.6521606445313
+   },
+   "new_oasis_tree_3" : {
+      "bodyx1" : 100.0,
+      "bodyx2" : 100.0,
+      "bodyy1" : 250.0,
+      "bodyy2" : 10.0,
+      "frame_num" : 1,
+      "hight" : 500.0,
+      "name" : "new_oasis_tree_3",
+      "tex_file" : "Oasis_Tree_new_1",
+      "width" : 500.0,
+      "x" : 75.51263427734375,
+      "y" : 100.0099639892578
+   },
+   "new_oasis_tree_4" : {
+      "bodyx1" : 0,
+      "bodyx2" : 0,
+      "bodyy1" : 0,
+      "bodyy2" : 0,
+      "frame_num" : 1,
+      "hight" : 500,
+      "name" : "new_oasis_tree_4",
+      "tex_file" : "Oasis_Tree_new_1",
+      "width" : 500,
+      "x" : 237.0,
+      "y" : 311.0
+   },
+   "new_oasis_tree_5" : {
+      "bodyx1" : 100.0,
+      "bodyx2" : 100.0,
+      "bodyy1" : 250.0,
+      "bodyy2" : 10.0,
+      "frame_num" : 1,
+      "hight" : 500.0,
+      "name" : "new_oasis_tree_5",
+      "tex_file" : "Oasis_Tree_new_1",
+      "width" : 500.0,
+      "x" : 231.0527610778809,
+      "y" : 159.6521606445313
+   },
+   "new_oasis_tree_6" : {
+      "bodyx1" : 100.0,
+      "bodyx2" : 100.0,
+      "bodyy1" : 250.0,
+      "bodyy2" : 10.0,
+      "frame_num" : 1,
+      "hight" : 500.0,
+      "name" : "new_oasis_tree_6",
+      "tex_file" : "Oasis_Tree_new_1",
+      "width" : 500.0,
+      "x" : 275.5126342773438,
+      "y" : 200.0099639892578
    },
    "trans09" : {
       "bodyx1" : 0.0,
@@ -3393,8 +3364,8 @@
       "name" : "transJungle7",
       "tex_file" : "blank",
       "width" : 850.0,
-      "x" : 153.4033355712891,
-      "y" : 161.8431396484375
+      "x" : 151.1464233398438,
+      "y" : 162.9814147949219
    },
    "transObj12" : {
       "bodyx1" : 0.0,

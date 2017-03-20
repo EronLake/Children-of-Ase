@@ -109,16 +109,33 @@ int RenderHelper::draw_frame(WorldObj * obj)
 	sortVec();
 	////cout << "******************************************SIZE OF THE OBJVEC TO RENDER IS " << objVec.size() << endl;
 	for (int i = 0; i < objVec.size(); i++) {
-		LOG("BEFORE DRAWING**");
-		//////cout << objVec[i]->getX() - camera->getX() << endl;
-		//LOG(objVec[i]->getX(), ", ", objVec[i]->getY());
-		objVec[i]->WorldObj::drawObj(camera->getX(), camera->getY());
-		//for (int j = 0; j < objVec[i]->body.size(); j++) {
-		objVec[i]->body[0].drawObj(camera->getX(), camera->getY());
-		objVec[i]->effect.drawObj(camera->getX(), camera->getY());
-		//}
-		objVec[i]->effect.sprite.animate();
-		objVec[i]->WorldObj::animateObj();
+		
+		if (objVec[i]->getType() == 3) {
+			if (CheckClass::isSoldier(objVec[i])->getHealth() > 0) {
+				LOG("BEFORE DRAWING**");
+				//////cout << objVec[i]->getX() - camera->getX() << endl;
+				//LOG(objVec[i]->getX(), ", ", objVec[i]->getY());
+				objVec[i]->WorldObj::drawObj(camera->getX(), camera->getY());
+				//for (int j = 0; j < objVec[i]->body.size(); j++) {
+				objVec[i]->body[0].drawObj(camera->getX(), camera->getY());
+				objVec[i]->effect.drawObj(camera->getX(), camera->getY());
+				//}
+				objVec[i]->effect.sprite.animate();
+				objVec[i]->WorldObj::animateObj();
+			}
+		}
+		else {
+			LOG("BEFORE DRAWING**");
+			//////cout << objVec[i]->getX() - camera->getX() << endl;
+			//LOG(objVec[i]->getX(), ", ", objVec[i]->getY());
+			objVec[i]->WorldObj::drawObj(camera->getX(), camera->getY());
+			//for (int j = 0; j < objVec[i]->body.size(); j++) {
+			objVec[i]->body[0].drawObj(camera->getX(), camera->getY());
+			objVec[i]->effect.drawObj(camera->getX(), camera->getY());
+			//}
+			objVec[i]->effect.sprite.animate();
+			objVec[i]->WorldObj::animateObj();
+		}
 	}
 	//convoGui->drawGui();
 	drawHUD(obj);

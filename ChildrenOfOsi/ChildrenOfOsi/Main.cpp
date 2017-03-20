@@ -247,10 +247,10 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	//Player* Alex = new Player(1000,600, true);	//init player
 	//WorldObj* Alex = new WorldObj(1000, 600, true);
 
-//	ObjConfig::import_config(recVec_ptr, gameplay_functions, tBuffer);
+	ObjConfig::import_config(recVec_ptr, gameplay_functions, tBuffer);
 	
-//	DialogueConfig::import_config(gameplay_functions, tBuffer);
-//	DialogueController::getDialogueHelper()->fill_conversations();
+	DialogueConfig::import_config(gameplay_functions, tBuffer);
+	DialogueController::getDialogueHelper()->fill_conversations();
 	
 	//WorldObj* barrel = new WorldObj(Vector2f(5200, 3900), 75, 75);
 	//Alex->name = SHANGO;
@@ -1116,7 +1116,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	*/
 	recVec.push_back(staticRec);
 	//recVec.push_back(silverSoldier);
-	//recVec.push_back(blueSoldier);
+	recVec.push_back(blueSoldier);
 	recVec.push_back(blueSoldier2);
 	recVec.push_back(blueSoldier3);
 	//recVec.push_back(silverSoldier2);
@@ -1439,12 +1439,12 @@ int wait_time = fs * 3; //always wait 3 seconds
 
 
 
-		combatControl->follow(blueSoldier, state);
-		combatControl->follow(blueSoldier2, state);
-		combatControl->follow(blueSoldier3, state);
+		//combatControl->follow(blueSoldier, state);
+		//combatControl->follow(blueSoldier2, state);
+		//combatControl->follow(blueSoldier3, state);
 		//combatControl->fight(blueSoldier, state);
-		//combatControl->fight(blueSoldier2, state);
-		//combatControl->fight(blueSoldier3, state);
+		combatControl->fight(blueSoldier2, state);
+		combatControl->fight(blueSoldier3, state);
 
 		partyM->updateSoliderStatus();
 
