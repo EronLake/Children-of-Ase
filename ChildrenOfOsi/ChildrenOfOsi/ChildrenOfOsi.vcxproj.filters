@@ -208,6 +208,10 @@
     <ClCompile Include="ActionConfig.cpp">
       <Filter>AI\Actions</Filter>
     </ClCompile>
+    <ClCompile Include="Tag.cpp" />
+    <ClCompile Include="Region.cpp">
+      <Filter>Audio</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AIHelper.h">
@@ -434,6 +438,10 @@
     </ClInclude>
     <ClInclude Include="ActionConfig.h">
       <Filter>AI\Actions</Filter>
+    </ClInclude>
+    <ClInclude Include="Tag.h" />
+    <ClInclude Include="Region.h">
+      <Filter>Audio</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
