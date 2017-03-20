@@ -1219,9 +1219,6 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 
 	party3->addToParty(silverSoldier2, true);
 
-	partyM->addToPartyList(party);
-	partyM->addToPartyList(party2);
-	partyM->addToPartyList(party3);
 	//Village* vPlayer = new Village();
 	//Village* v1 = new Village();
 	//Village* v2 = new Village();
@@ -1253,7 +1250,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 
 	//party->addToParty(silverSoldier, false);
 	
-party->addToParty(Alex, true);
+	party->addToParty(Alex, true);
 		
 	party->addToParty(oya, false);
 	
@@ -1261,6 +1258,11 @@ party->addToParty(Alex, true);
 	
 	party->updateFollowers();
 	Alliance::updateEnemies();
+
+	partyM->addToPartyList(party);
+	partyM->addToPartyList(party2);
+	partyM->addToPartyList(party3);
+	partyM->addToPartyList(party4);
 
 	vector<WorldObj*> enemyVec;
 	//osi::GameWindow::init();
@@ -1418,9 +1420,6 @@ int wait_time = fs * 3; //always wait 3 seconds
 		combatControl->fight(silverSoldier, state);
 		combatControl->fight(silverSoldier2, state);
 
-
-		partyM->updateSoliderStatus();
-
 		combatControl->fight(blueSoldier, state);
 
 
@@ -1431,6 +1430,8 @@ int wait_time = fs * 3; //always wait 3 seconds
 		combatControl->fight(blueSoldier, state);
 		combatControl->fight(blueSoldier2, state);
 		combatControl->fight(blueSoldier3, state);
+
+		partyM->updateSoliderStatus();
 
 		/*
 		////cout << "Alex's position is " << Alex->getLoc().getXloc() << ", " << Alex->getLoc().getYloc() << endl;
