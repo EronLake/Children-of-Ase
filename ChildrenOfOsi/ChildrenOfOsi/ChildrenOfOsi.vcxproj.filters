@@ -208,6 +208,9 @@
     <ClCompile Include="ActionConfig.cpp">
       <Filter>AI\Actions</Filter>
     </ClCompile>
+    <ClCompile Include="DialogueConfig.cpp" />
+    <ClCompile Include="PartyManager.cpp" />
+    <ClCompile Include="TagConfig.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AIHelper.h">
@@ -435,6 +438,9 @@
     <ClInclude Include="ActionConfig.h">
       <Filter>AI\Actions</Filter>
     </ClInclude>
+    <ClInclude Include="DialogueConfig.h" />
+    <ClInclude Include="PartyManager.h" />
+    <ClInclude Include="TagConfig.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="audio_test.txt">
@@ -543,6 +549,10 @@
     <None Include="action_config.json">
       <Filter>AI\Actions</Filter>
     </None>
+    <None Include="Dialogue_config.json" />
+    <None Include="oasis_config.json" />
+    <None Include="Tag_config.json" />
+    <None Include="SilverSoldier_dialog.json" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="ChildrenOfOsi1.rc" />

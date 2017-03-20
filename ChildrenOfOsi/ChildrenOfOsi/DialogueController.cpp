@@ -19,7 +19,7 @@ std::string DialogueController::message;
 int DialogueController::optionsIndex=0;
 int DialogueController::select = 0;
 std::string DialogueController::replyString;
-bool init_conv = false;
+//bool init_conv = false;
 
 DialogueController::DialogueController()
 {
@@ -33,13 +33,25 @@ DialogueController::~DialogueController()
 
 void DialogueController::PlayerChoose()
 {
+	//if (optionsIndex > 3 || optionsIndex < 0)
+		//optionsIndex = 0;
+	//if(optionsIndex == 0)
+	  //  options = dialogue.get_strength_conv_pts(); //get_possible
+	//else if (optionsIndex == 1) {
+		//options = dialogue.get_affinity_conv_pts();
+	//}
+	//else if(optionsIndex == 2){
+		//options = dialogue.get_notoriety_conv_pts();
+	//}
+	//else
 	options = dialogue.get_possible_conv_pts();
 	//replyOptions = dialogue.get_possible_reply_pts();
 	state = 1;
-	if(!init_conv)
-	    optionsIndex = 0; //had at 3 for testing at one point
-	else
-		optionsIndex = 3;
+	//optionsIndex = 0;
+	//if(!init_conv)
+	   // optionsIndex = 0; //had at 3 for testing at one point
+	//else
+		//optionsIndex = 3;
 	//PlayerConversationPoint();
 	//give option to Alex
 }
@@ -77,19 +89,18 @@ void DialogueController::PlayerResponse()
 	message = player->getName()+": "+reply_pt_sentence +"\n\n";
 	//std::////cout << "PLAYER RESPONSE////////////////////////////////////" << std::endl;
 	//std::////cout << "Shango: " << getMessage() << std::endl;
-	init_conv = true;
+	//init_conv = true;
 	PlayerChoose();
 }
 
 void DialogueController::otherConversationPoint(dialogue_point line)
 {
-
 	dialogue_point point = dialogue.choose_conv_pt(line, optionsIndex);
 	replyString = point[0];
 
-	Hero* temp_hero;
+	Hero* temp_hero = nullptr;
 	if (other->getType() >= 2) {
-		if (temp_hero = CheckClass::isHero(other))
+		if (temp_hero = CheckClass::isHero(other))//added another equals was single equals before
 		{
 			perror("you cannot talk to this type of object");
 		}
@@ -105,7 +116,14 @@ void DialogueController::otherConversationPoint(dialogue_point line)
 	message = other->getName() + ": " + reply_pt_sentence + "\n" +con_pt_sentence;
 	//std::////cout << "HERO REPLY/COONVERSATION POINT////////////////////////////////////" << std::endl;
 	//std::////cout << other->getName() << ": "<< message << std::endl;
-	replyOptions = dialogue.get_possible_reply_pts(point[0]);
+	/*if(optionsIndex == 0)
+	    replyOptions = dialogue.get_strength_reply_pts(point[0]);
+	else if (optionsIndex == 1)
+		replyOptions = dialogue.get_affinity_reply_pts(point[0]);
+	else if (optionsIndex == 2)
+		replyOptions = dialogue.get_notoriety_reply_pts(point[0]);
+	else*/
+		replyOptions = dialogue.get_possible_reply_pts(point[0], optionsIndex);
 	vector<std::string> print = getReplyOptions();
 	for (int i = 0; i < print.size(); i++) {
 		//std::////cout << print[i] << std::endl;
@@ -191,10 +209,10 @@ void DialogueController::exitDialogue()
 {
 	other = nullptr;
 	state=0;
-	if (optionsIndex == 3)
-		init_conv = true;
-	else
-	    init_conv = false;
+	//if (optionsIndex == 3)
+		//init_conv = true;
+	//else
+	    //init_conv = false;
 }
 
 DialogueHelper* DialogueController::getDialogueHelper()

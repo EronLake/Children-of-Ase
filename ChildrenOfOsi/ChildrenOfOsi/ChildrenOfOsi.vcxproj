@@ -337,6 +337,7 @@
     <None Include="config.json" />
     <None Include="script_templates.json" />
     <None Include="Shango_dialog.json" />
+    <None Include="SilverSoldier_dialog.json" />
     <None Include="Tag_config.json" />
     <None Include="test.json" />
     <None Include="Yemoja_dialog.json" />

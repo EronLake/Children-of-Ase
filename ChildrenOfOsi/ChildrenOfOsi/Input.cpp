@@ -559,6 +559,8 @@ void Input::InputCheck()
 
 					prompted_quest = true;
 				}
+				else
+					DialogueController::exitDialogue();
 			}
 			else
 			{
