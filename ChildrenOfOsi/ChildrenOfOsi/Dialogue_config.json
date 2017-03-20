@@ -2,7 +2,7 @@
   "conversation_points": {
        "conversation_point" : {
 	      "name" : "conversation_point",
-          "topic" : "name",
+          "topic" : "I am curious as to what you call yourself.",
 	      "template" : "question_name",
 		  "honor" : 0,
 		  "pride": 0,
@@ -14,7 +14,7 @@
        },
        "conversation_point_2" : {
 	      "name" : "conversation_point_2",
-          "topic" : "reason",
+          "topic" : "Why do you choose to live here?",
 	      "template" : "question_reason",
 		  "honor" : 0,
 		  "pride": 0,
@@ -26,7 +26,7 @@
        },
        "conversation_point_3" : {
 	      "name" : "conversation_point_3",
-          "topic" : "origin",
+          "topic" : "What is your place of origin?",
 	      "template" : "question_origin",
 		  "honor" : 0,
 		  "pride": 0,
@@ -39,26 +39,91 @@
 	},
 
 	"reply_points": {
-       "reply_point": {
-	      "name" : "reply_point",
+       "rd_point": {
+	      "name" : "rd_point",
           "topic" : "denied",
-	      "template" :"question_denied"
+	      "template" :"I would rather not say"
        },
        "reply_point_2" : {
 	      "name" : "reply_point_2",
-          "topic" : "name",
-	      "template" : "introduction"
+          "topic" : "I am curious as to what you call yourself.",
+	      "template" : "My name is Shango"
        },
        "reply_point_3" : {
 	      "name" : "reply_point_3",
-          "topic" : "reason",
-	      "template" : "response_reason"
+          "topic" : "Why do you choose to live here?",
+	      "template" : "I am here to form a friendship with this village and its people"
        },
        "reply_point_4" : {
 	      "name" : "reply_point_4",
-          "topic" : "origin",
-	      "template" : "response_origin"
+          "topic" : "What is your place of origin?",
+	      "template" : "I come from a place that you won't find on any map"
         }
+	},
+
+	"strength_conversation_points": {
+       "conversation_point_1" : {
+	      "name" : "scp_2",
+          "topic" : "I am so strong.",
+	      "template" : "action_boast"
+       },
+       "conversation_point_2" : {
+	      "name" : "scp_3",
+          "topic" : "Don't think you can get away from me.",
+	      "template" : "action_intimidate"
+       }
+	},
+
+	"strength_reply_points": {
+       "reply_point_2" : {
+	      "name" : "srp_2",
+          "topic" : "I am so strong.",
+	      "template" : "Impressive"
+       },
+       "reply_point_3" : {
+	      "name" : "srp_3",
+          "topic" : "Don't think you can get away from me.",
+	      "template" : "You don't scare me"
+       }
+	},
+
+	"affinity_conversation_points": {
+       "conversation_point_1" : {
+	      "name" : "acp_1",
+          "topic" : "You seem like a smart person.",
+	      "template" : "action_compliment"
+       },
+	     "conversation_point_1" : {
+	      "name" : "acp_2",
+          "topic" : "You're great!",
+	      "template" : "action_compliment"
+       }
+	},
+	"affinity_reply_points": {
+       "conversation_point_1" : {
+	      "name" : "arp_1",
+          "topic" : "You seem like a smart person.",
+	      "template" : "Aww shucks!"
+       },
+	   "conversation_point_2" : {
+	      "name" : "arp_2",
+          "topic" : "You're great!",
+	      "template" : "Aww shucks!"
+       }
+	},
+	"notoriety_conversation_points": {
+       "ncp_1" : {
+	      "name" : "ncp_1",
+          "topic" : "Tell me about your past experiences",
+	      "template" : "question_experience"
+       }
+	},
+	"notoriety_reply_points": {
+       "nrp_1" : {
+	      "name" : "nrp_1",
+          "topic" : "Tell me about your past experiences",
+	      "template" : "I once fought off several bandits"
+       }
 	}
 }
  

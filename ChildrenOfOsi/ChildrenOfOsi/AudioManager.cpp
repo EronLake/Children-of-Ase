@@ -14,6 +14,7 @@ AudioManager::AudioManager(MessageLog* _mLog, TaskBuffer* _tBuffer)
 	map0["Sixers"] = &SoundSystem::playSixers;
 	map1["Pause"] = &SoundSystem::pauseSound;
 	map1["Unpause"] = &SoundSystem::unpauseSound;
+	map1["PlaySound"] = &SoundSystem::playSound;
 	map2["Change"] = &SoundSystem::changeSoundSource;
 }
 

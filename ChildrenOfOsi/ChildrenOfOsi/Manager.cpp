@@ -53,7 +53,13 @@ void Manager::createTaskWithParams(std::string task_name, std::string type, std:
 	tBuffer->push(new_task);
 	mLog->logMessage(new_task);
 }
-
+void Manager::createTaskForAudio(std::string _name, std::string _type, char* _source, char* _target) {
+	//maybe just pass in the string craeated
+	std::string task_status = "CREATED";
+	Task* new_task = new Task(_name, task_status, _type, _source, _target);
+	tBuffer->push(new_task);
+	mLog->logMessage(new_task);
+}
 void  Manager::execute_task(Task* current_task) 
 {
 	LOG("Execute Task");

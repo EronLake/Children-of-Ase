@@ -208,7 +208,24 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 //	tBuffer->run();
 //	Hero* alex = Containers::hero_table["Shango"];
 //	Player* Alex = dynamic_cast<Player*>(alex);
+	bool switch_music = false;
+	bool in_village = false;
+
+
+	Region* Ogun = new Region("Ogun", "RegionThemes/OgunRegion.flac", "nothing");
+	Region* Desert = new Region("Desert", "RegionThemes/DesertRegion.flac", "nothing");
+	Region* Mountain = new Region("Desert", "RegionThemes/MountainRegion.flac", "nothing");
+	Region* Jungle = new Region("Desert", "RegionThemes/JungleRegion.flac", "nothing");
+
+	Region current_region = *Desert;
+	Region next_region = *Desert;
+
     Input* iController = new Input(gameplay_functions, Alex, RenM->renderHelper, tBuffer, recVec_ptr, AiController);
+	//iController->current_region = current_region;
+	//iController->Desert = Desert;
+	//iController->Ogun = Ogun;
+	//iController->Mountain = Mountain;
+	//iController->Jungle = Jungle;
 
 	//DialogueGui* convoGui = new DialogueGui();
 
@@ -1245,18 +1262,15 @@ party->addToParty(Alex, true);
 int wait_time = fs * 3; //always wait 3 seconds	
 	int count = 0;
 	int state = 0;
+	bool start = true;
 
-bool switch_music = false;
-bool in_village = false;
-
-Region* Ogun = new Region("Ogun", "Children of Osi Sketch 2.mp3", "nothing");
-Region* Desert = new Region("Desert", "oasis.wav", "nothing");
-Region* Mountain = new Region("Desert", "76.wav", "nothing");
-Region* Jungle = new Region("Desert", "jungle.wav", "nothing");
-
-Region current_region = *Desert;
-Region next_region = *Desert;
 	while (osi::GameWindow::isRunning()) {
+		if (start) {
+			gameplay_functions->play_sound("Play");
+			//gameplay_functions->play_sound("Walk");
+			//gameplay_functions->pause_unpause("Pause", "walk_loop.wav");
+			start = !start;
+		}
 		start_tick = clock();
 		_QuadTree->clear();
 		Alex->updateCD();
@@ -1275,6 +1289,7 @@ Region next_region = *Desert;
 		if (Alex->getY() < 3523.33) {
 			if(current_region == *Desert)
 			next_region = *Ogun;
+			
 		}
 		else {
 			if (current_region == *Ogun) {
@@ -1328,6 +1343,7 @@ Region next_region = *Desert;
 		}
 		else {
 			gameplay_functions->change_song("Change", current_region.getRTheme(), next_region.getRTheme());
+			//iController->current_region = current_region;
 			current_region = next_region;
 
 			//current_region->getRTheme(), next_region->getRTheme()
@@ -1338,9 +1354,9 @@ Region next_region = *Desert;
 
 
 
-		std::cout << "X: " << Alex->getX() << " Y: " << Alex->getY() << std::endl;
-		std::cout << "CR: " << current_region.name << " NR: " << next_region.name<< std::endl;
-		std::cout << "CA: " << current_region.getRTheme() << " NA: " << next_region.getRTheme() << std::endl;
+		//std::cout << "X: " << Alex->getX() << " Y: " << Alex->getY() << std::endl;
+		//std::cout << "CR: " << current_region.name << " NR: " << next_region.name<< std::endl;
+		//std::cout << "CA: " << current_region.getRTheme() << " NA: " << next_region.getRTheme() << std::endl;
 
 	/*	if (staticRec->destination != Vector2f(0, 0)) { //Hero has a destination
 			if (staticRec->waypoint != Vector2f(0,0) && state == 0) { //Hero has a waypoint to the desination, and not in dialog
@@ -2518,6 +2534,11 @@ void ERONS_LOOP(QuadTree* _QuadTree) {
 
 
 	}
+	for (auto iter : AudM->soundHelper->sounds) {
+		AudM->soundHelper->releaseSound(iter.second);
+	}
+	AudM->soundHelper->m_pSystem->release();
+	
 	osi::GameWindow::terminate();
 
 	
