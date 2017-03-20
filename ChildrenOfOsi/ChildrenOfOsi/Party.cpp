@@ -7,13 +7,13 @@ vector<Party*> Party::partiesWorld;
 /**
  * Creates a new party with no alliegances, no leader, and no members.
  */
-Party::Party(): faction(nullptr), leader(nullptr), target(nullptr), mode(Party::MODE_IDLE) { Party::partiesWorld.push_back(this); }
+Party::Party() : faction(nullptr), leader(nullptr), target(nullptr), mode(Party::MODE_IDLE) { Party::partiesWorld.push_back(this); }
 
 /**
  * Creates a new party with alliegance to the given faction, but no members nor
  * any leader.
  */
-Party::Party(Alliance *a): faction(a), leader(nullptr), target(nullptr), mode(Party::MODE_IDLE) { Party::partiesWorld.push_back(this); }
+Party::Party(Alliance *a) : faction(a), leader(nullptr), target(nullptr), mode(Party::MODE_IDLE) { Party::partiesWorld.push_back(this); }
 
 /**
  * Creates a new party with the given leader, as a part of no faction.
@@ -29,7 +29,7 @@ Party::Party(Soldier *leader) : faction(nullptr), leader(leader), target(nullptr
  * Creates a new party as a part of the specified alliance and with the given
  * leader. The leader will be the only initial member of this party.
  */
-Party::Party(Alliance *a, Soldier *leader): faction(a), leader(leader), target(nullptr)
+Party::Party(Alliance *a, Soldier *leader) : faction(a), leader(leader), target(nullptr)
 {
   this->addToParty(leader, true);
   this->setMode(Party::MODE_IDLE);
@@ -41,11 +41,11 @@ Party::Party(Alliance *a, Soldier *leader): faction(a), leader(leader), target(n
  * leader and additional members. Note that if the vector of additional members
  * contains the leader, they will be added twice.
  */
-Party::Party(Alliance *a, Soldier *leader, const vector<Soldier *>& members): faction(a), leader(leader), target(nullptr)
+Party::Party(Alliance *a, Soldier *leader, const vector<Soldier *>& members) : faction(a), leader(leader), target(nullptr)
 {
   this->addToParty(leader, true);
   this->setMode(Party::MODE_IDLE);
-  for(auto& member : members) {
+	for (auto& member : members) {
     this->addToParty(member, false);
   }
   partiesWorld.push_back(this);
@@ -89,8 +89,8 @@ bool Party::isEnemyOf(Party *p)
  */
 void Party::addToParty(Soldier* s, bool isLeader)
 {
-  if(s != nullptr) {
-    if(isLeader || members.size() == 0) {
+	if (s != nullptr) {
+		if (isLeader || members.size() == 0) {
       members.insert(members.begin(), s);
       this->leader = s;
       s->setParty(this);
@@ -109,30 +109,66 @@ void Party::addToParty(Soldier* s, bool isLeader)
  */
 void Party::removeSoldier(Soldier* s)
 {
+	// First find the solider in the members list
+	vector<Soldier*>::iterator s_itor = find(members.begin(), members.end(), s);
+	// If can't find Solder s, simply return
+	if (s_itor == members.end()) {
+		return;
+	}
+	// Get the enemy's party
+	auto tempP = s->getCurrentEnemy()->getParty();
+	// Set the enemy's party mode to be Idle so that every soldier in that party is now Idle. We might want each member of a party to have different enemies later.
+	// The optimal way is to say: for each soldier, if its enemy is soldier s, set its state to Idle.
+	tempP->setMode(Party::MODE_IDLE);
 
-  //cout << "SIZE OF THE PARTY IS ********** " << members.size() << endl;
+	// Update Solder s
+	s->setCurrentEnemy(nullptr);
+	s->setInCombat(false);
+	
+
+	// Check whether Soldier s is the leader; handle the removal accordingly
+	if (s == leader) {
+		leader = nullptr;
   members.erase(std::remove(members.begin(), members.end(), s), members.end());
-  //cout << "SUCCESFULLY GOTTEN PAST THE REMOVE SOLDIER STATEMENT*************************" << endl;
+		// Check if member list is empty
+		if (!members.empty()) {
+			leader = *(members.begin());
+		}
+	}
+	else {
+		members.erase(std::remove(members.begin(), members.end(), s), members.end());
+	}
   
+	// Update Soldier s's party status
+	s->setParty(nullptr);
+	s->setCurrentLeader(nullptr);
+	
+
+
+
+	//cout << "SIZE OF THE PARTY IS ********** " << members.size() << endl;
+	//members.erase(std::remove(members.begin(), members.end(), s), members.end());
+	//cout << "SUCCESFULLY GOTTEN PAST THE REMOVE SOLDIER STATEMENT*************************" << endl;
+
   //for enemy soldier's party, we need to remove s's party from their list of party if its emptys
   ////cout << "Enemy's enemy: " << s->getCurrentEnemy()->getCurrentEnemy() << endl;
 
-  if(s->getCurrentEnemy() != nullptr) {
-    s->getCurrentEnemy()->setCurrentEnemy(nullptr);
-    s->getCurrentEnemy()->setInCombat(false);
-    s->getCurrentEnemy()->setEvade(false);
-    s->getCurrentEnemy()->setHold(false);
-  }
-  s->setCurrentEnemy(nullptr);
+	//if (s->getCurrentEnemy() != nullptr) {
+	//	s->getCurrentEnemy()->setCurrentEnemy(nullptr);
+	//	s->getCurrentEnemy()->setInCombat(false);
+	//	s->getCurrentEnemy()->setEvade(false);
+	//	s->getCurrentEnemy()->setHold(false);
+	//}
+	//s->setCurrentEnemy(nullptr);
 
-  if(members.empty()) {
-    //s->getCurrentEnemy()->getParty()->setMode(Party::MODE_IDLE);
-    leader = nullptr;
-  }
-  else
-    if(s == leader) {
-      leader = *(members.begin());
-    }
+	//if (members.empty()) {
+	//	//s->getCurrentEnemy()->getParty()->setMode(Party::MODE_IDLE);
+	//	leader = nullptr;
+	//}
+	//else
+	//	if (s == leader) {
+	//		leader = *(members.begin());
+	//	}
 
 
   /*for(auto& i = this->members.begin(); i != this->members.end(); ++i) {
@@ -162,8 +198,8 @@ void Party::clear()
  */
 void Party::setLeader(Soldier* s)
 {
-  for(auto i = members.begin(); i != members.end(); ++i) {
-    if(*i == s) {
+	for (auto i = members.begin(); i != members.end(); ++i) {
+		if (*i == s) {
       leader = s;
       break;
     }
@@ -179,36 +215,36 @@ void Party::setLeader(Soldier* s)
 void Party::setMode(int m)
 {
   this->mode = m;
-  if(mode == Party::MODE_IDLE) {
-    for(auto& member : this->members) {
+	if (mode == Party::MODE_IDLE) {
+		for (auto& member : this->members) {
       member->setInCombat(false);
       member->setEvade(false);
       member->setHold(false);
     }
   }
-  else if(mode == Party::MODE_ATTACK) {
-    for(auto& member : this->members) {
+	else if (mode == Party::MODE_ATTACK) {
+		for (auto& member : this->members) {
       member->setInCombat(true);
       member->setEvade(false);
       member->setHold(false);
     }
   }
-  else if(mode == Party::MODE_DEFEND) {
-    for(auto& member : this->members) {
+	else if (mode == Party::MODE_DEFEND) {
+		for (auto& member : this->members) {
       member->setInCombat(true);
       member->setHold(true);
       member->setEvade(false);
     }
   }
-  else if(mode == Party::MODE_PATROL) {
-    for(auto& member : this->members) {
+	else if (mode == Party::MODE_PATROL) {
+		for (auto& member : this->members) {
       member->setInCombat(false);
       member->setHold(false);
       member->setEvade(false);
     }
   }
-  else if(mode == Party::MODE_FLEE) {
-    for(auto& member : this->members) {
+	else if (mode == Party::MODE_FLEE) {
+		for (auto& member : this->members) {
       member->setInCombat(false);
       member->setHold(false);
       member->setEvade(true);
@@ -219,8 +255,8 @@ void Party::setMode(int m)
 void Party::updateFollowers()
 {
   Soldier* prev = nullptr;
-  for(auto i = members.rbegin(); i != members.rend(); ++i) {
-    if(prev != nullptr) {
+	for (auto i = members.rbegin(); i != members.rend(); ++i) {
+		if (prev != nullptr) {
       prev->setCurrentLeader(*i);
     }
     prev = *i;

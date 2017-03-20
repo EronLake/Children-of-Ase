@@ -203,7 +203,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 //	tBuffer->run();
 //	Hero* alex = Containers::hero_table["Shango"];
 //	Player* Alex = dynamic_cast<Player*>(alex);
-    Input* iController = new Input(gameplay_functions, Alex, RenM->renderHelper, tBuffer, recVec_ptr);
+    Input* iController = new Input(gameplay_functions, Alex, RenM->renderHelper, tBuffer, recVec_ptr, AiController);
 
 	//DialogueGui* convoGui = new DialogueGui();
 
@@ -213,6 +213,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	ObjConfig::import_config(recVec_ptr, gameplay_functions, tBuffer);
 	
 	DialogueConfig::import_config(gameplay_functions, tBuffer);
+	DialogueController::getDialogueHelper()->fill_conversations();
 	
 	//WorldObj* barrel = new WorldObj(Vector2f(5200, 3900), 75, 75);
 	//Alex->name = SHANGO;
@@ -282,6 +283,8 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 
 	Texture* silverSoldierTexture = new Texture();
 	Texture* silverSoldierIdleTex = new Texture();
+	Texture* blueSoldierTexture = new Texture();
+	Texture* blueSoldierIdleTex = new Texture();
 
 	Texture* ss_upRunTex = new Texture();
 	Texture* ss_downRunTex = new Texture();
@@ -308,6 +311,30 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	Texture* ss_leftLungeTex = new Texture();
 	Texture* ss_rightLungeTex = new Texture();
 
+	Texture* bs_upRunTex = new Texture();
+	Texture* bs_downRunTex = new Texture();
+	Texture* bs_leftRunTex = new Texture();
+	Texture* bs_rightRunTex = new Texture();
+	Texture* bs_upIdleTex = new Texture();
+	Texture* bs_downIdleTex = new Texture();
+	Texture* bs_leftIdleTex = new Texture();
+	Texture* bs_rightIdleTex = new Texture();
+	Texture* bs_upAtkTex = new Texture();
+	Texture* bs_downAtkTex = new Texture();
+	Texture* bs_leftAtkTex = new Texture();
+	Texture* bs_rightAtkTex = new Texture();
+	Texture* bs_upHurtTex = new Texture();
+	Texture* bs_downHurtTex = new Texture();
+	Texture* bs_leftHurtTex = new Texture();
+	Texture* bs_rightHurtTex = new Texture();
+	Texture* bs_upWalkTex = new Texture();
+	Texture* bs_downWalkTex = new Texture();
+	Texture* bs_leftWalkTex = new Texture();
+	Texture* bs_rightWalkTex = new Texture();
+	Texture* bs_upLungeTex = new Texture();
+	Texture* bs_downLungeTex = new Texture();
+	Texture* bs_leftLungeTex = new Texture();
+	Texture* bs_rightLungeTex = new Texture();
 
 
 	Texture* treeTex = new Texture();
@@ -324,6 +351,9 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	Texture* border = new Texture();
 
 	Texture* fire = new Texture();
+	Texture* fireUp = new Texture();
+	Texture* fireDown = new Texture();
+	Texture* fireLeft = new Texture();
 
 
 
@@ -333,6 +363,8 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	objTexture->setFile("Assets/Sprites/YemojasHouse.png",1);
 	Soldier* silverSoldier = new Soldier(4000, 3300, true);
 	Soldier* silverSoldier2 = new Soldier(4300, 3300, true);
+	Soldier* blueSoldier = new Soldier(6000, 6000, true);
+	Alex->setHealth(200);
 
 	playerTexture->setFile("Assets/Sprites/ShangoForwardIdle.png",22);
 	playerIdleTex->setFile("Assets/Sprites/ShangoForwardIdle.png",22);
@@ -373,6 +405,33 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 
 	silverSoldierTexture->setFile("Assets/Sprites/SilverSoldierForwardIdle.png", 22);
 	silverSoldierIdleTex->setFile("Assets/Sprites/SilverSoldierForwardIdle.png", 22);
+	blueSoldierTexture->setFile("Assets/Sprites/BlueSoldierForwardIdle.png", 22);
+	blueSoldierIdleTex->setFile("Assets/Sprites/BlueSoldierForwardIdle.png", 22);
+
+	bs_upRunTex->setFile("Assets/Sprites/BlueSoldierBackSprint.png", 16);
+	bs_downRunTex->setFile("Assets/Sprites/BlueSoldierForwardSprint.png", 16);
+	bs_leftRunTex->setFile("Assets/Sprites/BlueSoldierLeftSprint.png", 16);
+	bs_rightRunTex->setFile("Assets/Sprites/BlueSoldierRightSprint.png", 16);
+	bs_upIdleTex->setFile("Assets/Sprites/BlueSoldierBackIdle.png", 22);
+	bs_downIdleTex->setFile("Assets/Sprites/BlueSoldierForwardIdle.png", 22);
+	bs_leftIdleTex->setFile("Assets/Sprites/BlueSoldierLeftIdle.png", 22);
+	bs_rightIdleTex->setFile("Assets/Sprites/BlueSoldierRightIdle.png", 22);
+	bs_upAtkTex->setFile("Assets/Sprites/BlueSoldierBackSwing.png", 13);
+	bs_downAtkTex->setFile("Assets/Sprites/BlueSoldierForwardSwing.png", 13);
+	bs_leftAtkTex->setFile("Assets/Sprites/BlueSoldierLeftSwing.png", 13);
+	bs_rightAtkTex->setFile("Assets/Sprites/BlueSoldierRightSwing.png", 13);
+	bs_upHurtTex->setFile("Assets/Sprites/BlueSoldierBackRecoil.png", 18);
+	bs_downHurtTex->setFile("Assets/Sprites/BlueSoldierForwardRecoil.png", 18);
+	bs_leftHurtTex->setFile("Assets/Sprites/BlueSoldierLeftRecoil.png", 18);
+	bs_rightHurtTex->setFile("Assets/Sprites/BlueSoldierRightRecoil.png", 18);
+	bs_upWalkTex->setFile("Assets/Sprites/BlueSoldierBackWalk.png", 32);
+	bs_downWalkTex->setFile("Assets/Sprites/BlueSoldierForwardWalk.png", 32);
+	bs_leftWalkTex->setFile("Assets/Sprites/BlueSoldierLeftWalk.png", 32);
+	bs_rightWalkTex->setFile("Assets/Sprites/BlueSoldierRightWalk.png", 32);
+	bs_upLungeTex->setFile("Assets/Sprites/BlueSoldierBackLunge.png", 7);
+	bs_downLungeTex->setFile("Assets/Sprites/BlueSoldierForwardLunge.png", 7);
+	bs_leftLungeTex->setFile("Assets/Sprites/BlueSoldierLeftLunge.png", 7);
+	bs_rightLungeTex->setFile("Assets/Sprites/BlueSoldierRightLunge.png", 7);
 
 	ss_upRunTex->setFile("Assets/Sprites/SilverSoldierBackSprint.png", 16);
 	ss_downRunTex->setFile("Assets/Sprites/SilverSoldierForwardSprint.png", 16);
@@ -408,7 +467,10 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 
 	pierTex->setFile("Assets/Sprites/pier.png", 1);
 
-	fire->setFile("Assets/Sprites/fireballsprite1.jpg", 10);
+	fire->setFile("Assets/Sprites/FireBallTMP.png", 3);
+	fireUp->setFile("Assets/Sprites/FireBallTMPUp.png", 3);
+	fireDown->setFile("Assets/Sprites/FireBallTMPDown.png", 3);
+	fireLeft->setFile("Assets/Sprites/FireBallTMPLeft.png", 3);
 	/* SET UP SPRITE CHANGE, MIGHT NEED A SINGLETON?*/
 
 
@@ -472,6 +534,11 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	rockThrow->setCoolDown(120);
 	rockThrow->setPause(24);
 	rockThrow->sprite.setTexture(rockTex);
+	rockThrow->sprite.up = rockTex;
+	rockThrow->sprite.left = rockTex;
+	rockThrow->sprite.right = rockTex;
+	rockThrow->sprite.down = rockTex;
+	rockThrow->setCanCancel(false);
 	Alex->addAttackType(rockThrow);
 
 	Attack* fireball = new Attack();
@@ -481,7 +548,11 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	fireball->setDuration(100);
 	fireball->setCoolDown(240);
 	fireball->setPause(24);
-	fireball->sprite.setTexture(fire);
+	fireball->sprite.up=fireUp;
+	fireball->sprite.left = fireLeft;
+	fireball->sprite.right = fire;
+	fireball->sprite.down = fireDown;
+	fireball->setCanCancel(false);
 	Alex->addAttackType(fireball);
 
 	//Alex->melee->sprite.setTexture(blank);
@@ -631,6 +702,9 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	silverSoldier->setHeight(150);
 	silverSoldier2->setWidth(150);
 	silverSoldier2->setHeight(150);
+	blueSoldier->setWidth(150);
+	blueSoldier->setHeight(150);
+
 
 	staticRec->sprite.setTexture(yemojaTexture);
 	staticRec->sprite.setIdleTexture(yemojaIdleTex);
@@ -646,6 +720,28 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	staticRec->sprite.hurt_down = downHurtTex;
 	staticRec->sprite.hurt_left = leftHurtTex;
 	staticRec->sprite.hurt_right = rightHurtTex;
+
+	blueSoldier->sprite.setTexture(blueSoldierTexture);
+	blueSoldier->sprite.setIdleTexture(blueSoldierIdleTex);
+	blueSoldier->sprite.up = bs_upRunTex;
+	blueSoldier->sprite.down = bs_downRunTex;
+	blueSoldier->sprite.left = bs_leftRunTex;
+	blueSoldier->sprite.right = bs_rightRunTex;
+	
+	blueSoldier->sprite.id_up = bs_upIdleTex;
+	blueSoldier->sprite.id_left = bs_leftIdleTex;
+	blueSoldier->sprite.id_right = bs_rightIdleTex;
+	blueSoldier->sprite.id_down = bs_downIdleTex;
+	
+	blueSoldier->sprite.atk_up = bs_upAtkTex;
+	blueSoldier->sprite.atk_down = bs_downAtkTex;
+	blueSoldier->sprite.atk_left = bs_leftAtkTex;
+	blueSoldier->sprite.atk_right = bs_rightAtkTex;
+	
+	blueSoldier->sprite.hurt_up = bs_upHurtTex;
+	blueSoldier->sprite.hurt_down = bs_downHurtTex;
+	blueSoldier->sprite.hurt_left = bs_leftHurtTex;
+	blueSoldier->sprite.hurt_right = bs_rightHurtTex;
 
 	silverSoldier->sprite.setTexture(silverSoldierTexture);
 	silverSoldier->sprite.setIdleTexture(silverSoldierIdleTex);
@@ -703,8 +799,13 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	silverSoldier2->setName("silverSoldier");
   // silverSoldier2->setHealth(50);
 
+	blueSoldier->offsetBody(0, 60, 60, 75, 50);
+	blueSoldier->setInteractable(true);
+	blueSoldier->setName("blueSoldier");
+
 	gameplay_functions->add_Attack(silverSoldier->getKey(), silverSoldier->body[0].getX(), silverSoldier->body[0].getY(), true, 10);
 	gameplay_functions->add_Attack(silverSoldier2->getKey(), silverSoldier2->body[0].getX(), silverSoldier2->body[0].getY(), true, 10);
+	gameplay_functions->add_Attack(blueSoldier->getKey(), blueSoldier->body[0].getX(), blueSoldier->body[0].getY(), true, 10);
 	tBuffer->run();
 
 
@@ -718,7 +819,8 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	silverSoldier->melee->setKeep(true);
 	silverSoldier->melee->setWidth(50);
 	silverSoldier->melee->setHeight(50);
-	silverSoldier->melee->setStaminaCost(90);
+	silverSoldier->melee->setStaminaCost(120);
+	silverSoldier->setMaxStamina(300);
 	silverSoldier->setHealth(1000);
 
 	silverSoldier->addAttackType(rockThrow);
@@ -734,11 +836,30 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	silverSoldier2->melee->setKeep(true);
 	silverSoldier2->melee->setWidth(50);
 	silverSoldier2->melee->setHeight(50);
-	silverSoldier2->melee->setStaminaCost(90);
+	silverSoldier2->melee->setStaminaCost(120);
 	silverSoldier2->setHealth(1000);
+	silverSoldier2->setMaxStamina(300);
 
 	silverSoldier2->addAttackType(rockThrow);
 	silverSoldier2->melee->sprite.setTexture(border);
+
+
+	blueSoldier->melee = Containers::Attack_table[blueSoldier->getKey()];
+	blueSoldier->melee->setDmg(10);
+	blueSoldier->melee->setSpeed(5);
+	blueSoldier->melee->setBaseDir(4);
+	blueSoldier->melee->setCoolDown(100);
+	blueSoldier->melee->setPause(-1);
+	blueSoldier->melee->setDestroy(false);
+	blueSoldier->melee->setKeep(true);
+	blueSoldier->melee->setWidth(50);
+	blueSoldier->melee->setHeight(50);
+	blueSoldier->melee->setStaminaCost(90);
+	blueSoldier->setHealth(100);
+	blueSoldier->setMaxStamina(300);
+	
+	blueSoldier->addAttackType(rockThrow);
+	blueSoldier->melee->sprite.setTexture(border);
 	//silverSoldier->addAttackType(spin);
 
 	//combatControl->addtoTargets(Alex);
@@ -805,6 +926,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	*/
 	recVec.push_back(staticRec);
 	recVec.push_back(silverSoldier);
+	recVec.push_back(blueSoldier);
 	recVec.push_back(silverSoldier2);
 	recVec.push_back(oya);
 	//recVec.push_back(barrel);
@@ -893,51 +1015,59 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	poolAct->updateMiddle();
 	////std:://cout << poolAct->macro.back().getName() << endl;
 	vector<Action> test = poolAct->getActions(staticRec, poolAct->macro.back());
-for (int i = 0; i < test.size(); i++) {
-	int t = test[i].exeAction();
-}
-poolAct->macro.back().exeAction();
+	for (int i = 0; i < test.size(); i++) {
+		int t = test[i].exeAction();
+	}
+	poolAct->macro.back().exeAction();
 
-Vector2f silverSoldierInitialLoc = silverSoldier->getLoc();
-Vector2f silverSoldier2InitialLoc = silverSoldier2->getLoc();
-silverSoldier->setEvade(false);
-silverSoldier2->setEvade(false);
-bool OSAtkMode = true;
-short M = GetKeyState('M') >> 15;
-Party* party = new Party();
-Party* party2 = new Party();
-party2->addToParty(silverSoldier, true);
-Party* party3 = new Party();
-party3->addToParty(silverSoldier2, true);
-Village* v1 = new Village();
-Village* v2 = new Village();
-v1->addToParties(party2);
-v2->addToParties(party3);
-Alliance* a1 = new Alliance(v1);
-Alliance* a2 = new Alliance(v2);
-War* war = new War();
-war->setWarParties(v1, v2);
-Alliance::updateEnemies();
+	Vector2f silverSoldierInitialLoc = silverSoldier->getLoc();
+	Vector2f silverSoldier2InitialLoc = silverSoldier2->getLoc();
+	silverSoldier->setEvade(false);
+	silverSoldier2->setEvade(false);
+	bool OSAtkMode = true;
+	short M = GetKeyState('M') >> 15;
+	Party* party = new Party();
+	Party* party2 = new Party();
+	party2->addToParty(silverSoldier, true);
+	Party* party3 = new Party();
+	party3->addToParty(silverSoldier2, true);
+	Party* party4= new Party();
+	Village* v1 = new Village();
+	Village* v2 = new Village();
+	Village* v3 = new Village();
+	Village* v4 = new Village();
+	v1->addToParties(party2);
+	v2->addToParties(party3);
+	v3->addToParties(party);
+	Alliance* a1 = new Alliance(v1);
+	Alliance* a2 = new Alliance(v2);
+	War* war = new War();
+	war->setWarParties(v1,v2);
+	party4->addToParty(blueSoldier, true);
+	v4->addToParties(party4);
+	War* war2 = new War();
+	war2->setWarParties(v3, v4);
 
-//party->addToParty(silverSoldier, false);
-
+	//party->addToParty(silverSoldier, false);
+	
 party->addToParty(Alex, true);
+		
+	party->addToParty(oya, false);
+	
+	party->addToParty(staticRec, false);
+	
+	party->updateFollowers();
+	Alliance::updateEnemies();
 
-party->addToParty(oya, false);
-
-party->addToParty(staticRec, false);
-
-party->updateFollowers();
-
-vector<WorldObj*> enemyVec;
-//osi::GameWindow::init();
-LOG("PAST WINDOW INIT ***********************");
-clock_t start_tick, current_ticks, delta_ticks;
-clock_t fps = 0;
-int fs = 120;
+	vector<WorldObj*> enemyVec;
+	//osi::GameWindow::init();
+	LOG("PAST WINDOW INIT ***********************");
+	clock_t start_tick, current_ticks, delta_ticks;
+	clock_t fps = 0;
+	int fs = 120;
 int wait_time = fs * 3; //always wait 3 seconds	
-int count = 0;
-int state = 0;
+	int count = 0;
+	int state = 0;
 
 bool switch_music = false;
 bool in_village = false;
@@ -949,17 +1079,18 @@ Region* Jungle = new Region("Desert", "jungle.wav", "nothing");
 
 Region current_region = *Desert;
 Region next_region = *Desert;
-while (osi::GameWindow::isRunning()) {
-	start_tick = clock();
-	_QuadTree->clear();
-	Alex->updateCD();
-	silverSoldier->updateCD();
-	silverSoldier2->updateCD();
-	for (int i = 0; i < recVec.size(); i++) {
-		_QuadTree->Insert(recVec[i]);	//insert all obj into tree
-
-	}
-	state = DialogueController::getState();
+	while (osi::GameWindow::isRunning()) {
+		start_tick = clock();
+		_QuadTree->clear();
+		Alex->updateCD();
+		silverSoldier->updateCD();
+		silverSoldier2->updateCD();
+		blueSoldier->updateCD();
+		for (int i = 0; i < recVec.size(); i++) {
+			_QuadTree->Insert(recVec[i]);	//insert all obj into tree
+	
+		}
+		state = DialogueController::getState();
 
 	if (Alex->getX() > 5285.83 && Alex->getX() < 7079.86) { //Ogun Desert
 		if (Alex->getY() < 3523.33) {
@@ -1080,6 +1211,7 @@ while (osi::GameWindow::isRunning()) {
 		combatControl->follow(staticRec, state);
 		combatControl->fight(silverSoldier, state);
 		combatControl->fight(silverSoldier2, state);
+		combatControl->fight(blueSoldier, state);
 
 		/*
 		////cout << "Alex's position is " << Alex->getLoc().getXloc() << ", " << Alex->getLoc().getYloc() << endl;
@@ -1413,8 +1545,8 @@ void ALEX_LOOP(QuadTree* _QuadTree) {
 	//need this for map editor
 	RenderManager* RenM = new RenderManager(mLog, tBuffer, _QuadTree, gameplay_functions);
 
-	
-	Input* iController = new Input(gameplay_functions, Alex, RenM->renderHelper, tBuffer, &recVec);
+	AIController* ai = new AIController();
+	Input* iController = new Input(gameplay_functions, Alex, RenM->renderHelper, tBuffer, &recVec, ai);
 	//create Managers and add to Manager table
 
 	DummyController* DumM = new DummyController(mLog, tBuffer);
@@ -1507,7 +1639,7 @@ void ERONS_LOOP(QuadTree* _QuadTree) {
 	RenderManager* RenM = new RenderManager(mLog, tBuffer, _QuadTree, gameplay_functions);
 
 	
-	Input* iController = new Input(gameplay_functions, Alex, RenM->renderHelper, tBuffer, recVec_ptr);
+	
 	//create Managers and add to Manager table
 
 	DummyController* DumM = new DummyController(mLog, tBuffer);
@@ -1524,7 +1656,7 @@ void ERONS_LOOP(QuadTree* _QuadTree) {
 	ActionHelper::gameplay_func = gameplay_functions;
 
 	CombatController* combatControl = new CombatController(gameplay_functions);
-
+	Input* iController = new Input(gameplay_functions, Alex, RenM->renderHelper, tBuffer, recVec_ptr, AiController);
 	//the order defines what order the managers the tasks will be sent to
 	DumM->register_manager();
 	PhysM->register_manager();
@@ -2301,9 +2433,9 @@ void ANDREWS_LOOP(QuadTree* _QuadTree) {
 	//need this here for map editor
 	ChildrenOfOsi* gameplay_functions = new ChildrenOfOsi(mLog, tBuffer);
 	RenderManager* RenM = new RenderManager(mLog, tBuffer, _QuadTree, gameplay_functions);
-
+	AIController* ai = new AIController();
 	
-	Input* iController = new Input(gameplay_functions, Alex, RenM->renderHelper, tBuffer, &recVec);
+	Input* iController = new Input(gameplay_functions, Alex, RenM->renderHelper, tBuffer, &recVec, ai);
 	//create Managers and add to Manager table
 
 	DummyController* DumM = new DummyController(mLog, tBuffer);

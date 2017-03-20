@@ -55,21 +55,25 @@ void Soldier::newAttack(int i, Attack* a)
   int bd = attackTypes[i]->getBaseDir();
   if(d == 8) {
     y = y - (h);
+	if (!attackTypes[i]->getCanCancel())p->sprite.setTexture(p->sprite.up);
     if(bd == 4)x += (attackTypes[i]->getSpeed()*attackTypes[i]->getDuration() / 2);
     if(bd == 6)x -= (attackTypes[i]->getSpeed()*attackTypes[i]->getDuration() / 2);
   }
   else if(d == 2) {
     y = y + (h);
+	if (!attackTypes[i]->getCanCancel())p->sprite.setTexture(p->sprite.down);
     if(bd == 4)x -= (attackTypes[i]->getSpeed()*attackTypes[i]->getDuration() / 2);
     if(bd == 6)x += (attackTypes[i]->getSpeed()*attackTypes[i]->getDuration() / 2);
   }
   else if(d == 4) {
     x = x - (w);
+	if (!attackTypes[i]->getCanCancel())p->sprite.setTexture(p->sprite.left);
     if(bd == 4)y -= (attackTypes[i]->getSpeed()*attackTypes[i]->getDuration() / 2);
     if(bd == 6)y += (attackTypes[i]->getSpeed()*attackTypes[i]->getDuration() / 2);
   }
   else if(d == 6) {
     x = x + (w);
+	if (!attackTypes[i]->getCanCancel())p->sprite.setTexture(p->sprite.right);
     if(bd == 4)y += (attackTypes[i]->getSpeed()*attackTypes[i]->getDuration() / 2);
     if(bd == 6)y -= (attackTypes[i]->getSpeed()*attackTypes[i]->getDuration() / 2);
   }
@@ -111,7 +115,7 @@ void Soldier::meleeAttack()
   }
   else {
     melee->setBaseDir(4);
-    melee->setPause(24);
+    melee->setPause(5);
   }
   if(d == 8) {
     y = y - (melee->getHeight() / 1.2);
@@ -154,16 +158,6 @@ void Soldier::updateCD()
     }
   }
 
-  for(auto i = currentAttacks.begin(); i != currentAttacks.end(); ++i) {
-    if(*i == nullptr) {
-      currentAttacks.erase(i);
-    }
-    else {
-      if((*i)->getPause() == 0 && !(*i)->getCanCancel()) {
-        currentAttacks.erase(i);
-      }
-    }
-  }
 
   if(ase < maxAse)
     ++ase;

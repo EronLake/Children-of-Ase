@@ -50,8 +50,9 @@ public:
 	void add_worldObj(std::string key, float x, float y, bool col);
 	void add_npc(std::string key, float x, float y, bool col);
 	void add_texture(std::string key, float x, float y, bool col);
-	void add_memory(std::string key, int hero_name, int t, int frames, vector<NPC*> p, string cat, string cont, string where, int why, int when);
-	void add_action(std::string key, float x, float y, bool col);
+	void add_memory(std::string key, int hero_name, int t, int frames, vector<NPC*> p, string cat, string cont, string where,
+					int why, int when);
+	void add_action(std::string key, int utility, int why, Hero* owner, Hero* receiver, Hero* doer, std::string exe_name);
 	void add_tag(std::vector<std::string> topicVec,std::string key);
 	void add_conv_point(std::string topic,std::string temp,std::string name);
 
@@ -62,9 +63,13 @@ public:
 	void createTask(std::string task_name, std::string type, WorldObj * objToUpdate = NULL);
 	void createTaskWithNum(std::string task_name, std::string type, WorldObj * objToUpdate,int num);
 	void ChildrenOfOsi::createTaskWithParams(std::string task_name, std::string type, std::string key, float x, float y, bool col);
-	void ChildrenOfOsi::createTaskAddMem(std::string task_name, std::string type, std::string key, int hero_name, int t, int frames, vector<NPC*> p, string cat, string cont, string where, int why, int when);
+	void ChildrenOfOsi::createTaskAddMem(std::string task_name, std::string type, std::string key, int hero_name, int t, int frames, 
+											vector<NPC*> p, string cat, string cont, string where, int why, int when);
+	void ChildrenOfOsi::createTaskAddAct(std::string task_name, std::string type, std::string key, int utility, int why, 
+											Hero* owner, Hero* receiver, Hero* doer, std::string exe_name);
 	void ChildrenOfOsi::createTaskNoObj(std::string task_name, std::string type, std::string topic, std::string temp, std::string key);
 	void ChildrenOfOsi::createTaskTag(std::string task_name, std::string type, std::vector<std::string> topicVec, std::string key);
+
 	//void ChildrenOfOsi::createTaskForAttack(std::string task_name, std::string type, float x, float y, bool col, int d);
 
 };

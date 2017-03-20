@@ -114,7 +114,10 @@ void ActionExecFunctions::execute_train_with(Action* train_with) {
 
 	}
 }
+
+
 void ActionExecFunctions::execute_form_alliance(Action* form_alliance) {
+	/*
 	Hero* doer = form_alliance->getDoer();
 	Hero* responder = form_alliance->getReceiver();
 	switch (form_alliance->checkpoint) {
@@ -150,7 +153,10 @@ void ActionExecFunctions::execute_form_alliance(Action* form_alliance) {
 		}
 
 	}
+	*/
 }
+
+
 
 void ActionExecFunctions::execute_fight(Action* fight)
 {

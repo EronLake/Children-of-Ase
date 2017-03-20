@@ -28,8 +28,8 @@ void WorldObj::shiftX(float dist)
 	for (int i = 0; i < body.size(); i++) {
 		body[i].setX(body[i].getX() + dist);
 	}
-	////std:://cout << name<<": Body X: " << body[0].getX() << " X: "<<loc.getXloc() << std::endl;
-	////std:://cout << "X Offset" << body[0].getX()-loc.getXloc() << std::endl;
+	//std::////cout << name<<": Body X: " << body[0].getX() << " X: "<<loc.getXloc() << std::endl;
+	//std::////cout << "X Offset" << body[0].getX()-loc.getXloc() << std::endl;
 }
 
 void WorldObj::shiftY(float dist)
@@ -38,8 +38,8 @@ void WorldObj::shiftY(float dist)
 	for (int i = 0; i < body.size(); i++) {
 		body[i].setY(body[i].getY()+dist);
 	}
-	////std:://cout << name << ": Body Y: " << body[0].getY() << " Y: " << loc.getYloc() << std::endl;
-	////std:://cout << "Y Offset" << body[0].getY() - loc.getYloc() << std::endl;
+	//std::////cout << name << ": Body Y: " << body[0].getY() << " Y: " << loc.getYloc() << std::endl;
+	//std::////cout << "Y Offset" << body[0].getY() - loc.getYloc() << std::endl;
 }
 
 void WorldObj::drawObj(float _x, float _y)
@@ -140,10 +140,10 @@ Vector2f WorldObj::getStrafeLocation(WorldObj * _enemy)
 
 void WorldObj::_print()
 {
-  ////std:://cout << "Object Name" << getName() << std::endl;
-  ////std:://cout << "X Location" << getX() << std::endl;
-  ////std:://cout << "Y Location" << getY() << std::endl;
-  ////std:://cout << "Rotation Vector" << getX() << std::endl;
-  ////std:://cout << "Width" << getY() << std::endl;
-  ////std:://cout << "Height" << getX() << std::endl;
+  //std::////cout << "Object Name" << getName() << std::endl;
+  //std::////cout << "X Location" << getX() << std::endl;
+  //std::////cout << "Y Location" << getY() << std::endl;
+  //std::////cout << "Rotation Vector" << getX() << std::endl;
+  //std::////cout << "Width" << getY() << std::endl;
+  //std::////cout << "Height" << getX() << std::endl;
 }

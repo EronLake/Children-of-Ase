@@ -19,7 +19,7 @@ Input::Input(ChildrenOfOsi* _gameplay_functions, RenderHelper* _rHelper, TaskBuf
 	LOG("Input Objected Constructed");
 }
 
-Input::Input(ChildrenOfOsi* _gameplay_functions, WorldObj * _player, RenderHelper* _rHelper, TaskBuffer* _tBuffer, vector<WorldObj*>* _recVec)
+Input::Input(ChildrenOfOsi* _gameplay_functions, WorldObj * _player, RenderHelper* _rHelper, TaskBuffer* _tBuffer, vector<WorldObj*>* _recVec, AIController* ai_c)
 {
 	disable = false;
 	count = 0;
@@ -27,6 +27,7 @@ Input::Input(ChildrenOfOsi* _gameplay_functions, WorldObj * _player, RenderHelpe
 	rHelper = _rHelper;
 	tBuffer = _tBuffer;
 	recVec = _recVec;
+	ai = ai_c;
 
 	gameplay_functions->play_sound("Play");
 
@@ -548,7 +549,24 @@ void Input::InputCheck()
 
 	if (DialogueController::getState() > 0) {
 		if (Q) {
-			DialogueController::exitDialogue();
+			WorldObj* other = DialogueController::getOther();
+			if (other->getType() == 5) {
+				Hero* them = dynamic_cast<Hero*>(other);
+				Planner* planner = ai->hero_planners[them->name];
+				if (planner->give_as_quest)
+				{
+					//Action* quest = planner->get_current_action();
+
+					prompted_quest = true;
+				}
+			}
+			else
+			{
+				DialogueController::exitDialogue();
+			}
+		}
+		if (prompted_quest) {
+
 		}
 		if (H) {
 			DialogueController::setOptionsIndex(0);

@@ -1,6 +1,7 @@
 #include "Planner.h"
 
 
+
 Planner::Planner() {
 
 };
@@ -23,11 +24,11 @@ int Planner::cost(Action step) {
 int Planner::prereq_appeal(Action step, vector<std::shared_ptr<Preconditions>> priority_preconds) {
 	int appeal = 0;
 	//iterate through postconditions.
-	for (auto i = std::begin(priority_preconds); i != std::end(priority_preconds); i++) {
-		for (auto iter : step.succ_postconds) {
-			if (iter.second->get_type() == (*i)->get_type()) {
+	for (int i = 0; i < priority_preconds.size(); i++) {
+		for (int itr = 0; itr < step.succ_postconds.size(); itr++) {
+			if (step.succ_postconds[itr]->get_type() == priority_preconds[i]->get_type()) {
 				
-				appeal += iter.second->get_utility()*(i-priority_preconds.begin());
+				appeal += step.succ_postconds[itr]->get_utility()*(i+1);
 
 			}
 		}
@@ -102,8 +103,8 @@ int Planner::personality_appeal(Action* evaluateAction) {
 };
 vector<std::shared_ptr<Preconditions>> Planner::prioritize_preconditions(Action goal) {
 	vector<std::shared_ptr<Preconditions>> preconlist;
-	for (auto &iter : goal.preconds) {
-		preconlist.push_back(iter.second);
+	for (int i = 0; i < goal.req_preconds.size();i++) {
+		preconlist.push_back(goal.req_preconds[i]);
 	}
 	
 	//temporary

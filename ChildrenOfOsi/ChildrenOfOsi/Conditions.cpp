@@ -32,10 +32,8 @@ std::string Preconditions::get_type()
 //RELATIONSHIP PRECONDITIONS
 ////////////////////////////////////////////////////////////////////////////////////
 
-RelPrecon::RelPrecon(Hero* _curr_hero, Hero* _other_hero, std::string _rel_type, std::string _rel_bound, int _desired_rel_val)
+RelPrecon::RelPrecon(std::string _rel_type, std::string _rel_bound, int _desired_rel_val)
 {
-	curr_hero = _curr_hero;
-	other_hero = _other_hero;
 	rel_type = _rel_type;
 	rel_bound = _rel_bound;
 	desired_rel_val = _desired_rel_val;
@@ -51,7 +49,7 @@ RelPrecon::~RelPrecon()
 	LOG("Relprecon Object Destroyed");
 }
 
-float RelPrecon::get_cost()
+float RelPrecon::get_cost(Hero* curr_hero, Hero* other_hero)
 {
 	int current_rel;
 	if(rel_type == "Affinity")
@@ -84,10 +82,8 @@ float RelPrecon::get_cost()
 //RELATIONSHIP ASSUMPTION PRECONDITION
 ////////////////////////////////////////////////////////////////////////////////////
 
-RelEstimPrerec::RelEstimPrerec(Hero* _curr_hero, Hero* _other_hero, std::string _rel_type, std::string _rel_bound, int _desired_rel_val)
+RelEstimPrerec::RelEstimPrerec(std::string _rel_type, std::string _rel_bound, int _desired_rel_val)
 {
-	curr_hero = _curr_hero;
-	other_hero = _other_hero;
 	rel_type = _rel_type;
 	rel_bound = _rel_bound;
 	desired_rel_val = _desired_rel_val;
@@ -103,7 +99,7 @@ RelEstimPrerec::~RelEstimPrerec()
 	LOG("RelEstimPrerec Object Destroyed");
 }
 
-float RelEstimPrerec::get_cost()
+float RelEstimPrerec::get_cost(Hero* curr_hero, Hero* other_hero)
 {
 	int current_est;
 	if (rel_type == "Affinity")
@@ -172,9 +168,8 @@ float TimePrerec::get_cost()
 //MEMORY NUMBER PRECONDITION
 ////////////////////////////////////////////////////////////////////////////////////
 
-MemoryNumPrerec::MemoryNumPrerec(std::vector<Memory>* _memories, int _rec_num_of_mem)
+MemoryNumPrerec::MemoryNumPrerec(int _rec_num_of_mem)
 {
-	memories = _memories;
 	rec_num_of_mem = _rec_num_of_mem;
 
 	type = "memory_number";
@@ -188,7 +183,7 @@ MemoryNumPrerec::~MemoryNumPrerec()
 	LOG("MemoryNumPrerec Object Destroyed");
 }
 
-float MemoryNumPrerec::get_cost()
+float MemoryNumPrerec::get_cost(std::vector<Memory>* memories)
 {
 	float cost = 0.0;
 	float magnifier = 10.0;//this has to essentially the cost of an average memory
@@ -205,9 +200,8 @@ float MemoryNumPrerec::get_cost()
 ////////////////////////////////////////////////////////////////////////////////////
 //MEMORY PRECONDITION
 ////////////////////////////////////////////////////////////////////////////////////
-MemPrerec::MemPrerec(std::vector<Memory>* _memories, std::string _rec_mem)
+MemPrerec::MemPrerec(std::string _rec_mem)
 {
-	memories = _memories;
 	rec_mem = _rec_mem;
 
 	type = "memory";
@@ -221,7 +215,7 @@ MemPrerec::~MemPrerec()
 	LOG("particularMemPrerec Object Destroyed");
 }
 
-float MemPrerec::get_cost()
+float MemPrerec::get_cost(std::vector<Memory>* memories)
 {
 	float cost = 0.0;
 	float magnifier = 10.0;//this has to essentially the cost of an average memory
@@ -299,7 +293,18 @@ float Postcondition::get_utility()
 	return 0.0;
 }
 
+float Postcondition::get_utility(Hero* curr_hero, Hero* other_hero)
+{
+	LOG("virtual function");
+	return 0.0;
+}
+
 void Postcondition::apply_utility()
+{
+	LOG("virtual function");
+}
+
+void Postcondition::apply_utility(Hero* curr_hero, Hero* other_hero)
 {
 	LOG("virtual function");
 }
@@ -317,7 +322,7 @@ std::string Postcondition::get_type()
 //RELATIONSHIP POSTCONDITION
 ////////////////////////////////////////////////////////////////////////////////////
 
-RelPost::RelPost(Hero* _curr_hero, Hero* _other_hero, std::string _rel_type, int _utility)
+RelPost::RelPost(std::string _rel_type, int _utility)
 {
 	rel_type = _rel_type;
 	utility = _utility;
@@ -333,12 +338,12 @@ RelPost::~RelPost()
 	LOG("RelEstimPost Object Destroyed");
 }
 
-float RelPost::get_utility()
+float RelPost::get_utility(Hero* curr_hero, Hero* other_hero)
 {
 	return utility;
 }
 
-void RelPost::apply_utility()
+void RelPost::apply_utility(Hero* curr_hero, Hero* other_hero)
 {
 	if (rel_type == "Affinity")
 	{
@@ -357,10 +362,12 @@ void RelPost::apply_utility()
 //Returns null plug string if the postcondition does not complete
 //any of the given preconditions
 //Returns the string key of the precondition if one is found
-std::string RelPost::fulfills_which(vector<std::string> preconds, Precond_map map)
+std::string RelPost::fulfills_which(vector<std::string> preconds, Precond_vec vec)
 {
+	
 	string pre_fulfilled = "\0"; 
-	for (auto precond_string : preconds) {
+	/*
+	for (int precond_string = 0; precond_string < preconds.size(); precond_string++) {
 		Preconditions* precond = map[precond_string].get();
 		if (precond->get_type() != "relationship") //Skip non-relation preconds
 		{
@@ -373,6 +380,7 @@ std::string RelPost::fulfills_which(vector<std::string> preconds, Precond_map ma
 		
 
 	}
+	*/
 	return pre_fulfilled;
 }
 //---------------------------------------------------------------------------------
@@ -383,7 +391,7 @@ std::string RelPost::fulfills_which(vector<std::string> preconds, Precond_map ma
 //RELATIONSHIP ASSUMPTION POSTCONDITION
 ////////////////////////////////////////////////////////////////////////////////////
 
-RelEstimPost::RelEstimPost(Hero* _curr_hero, Hero* _other_hero, std::string _rel_type, int _utility)
+RelEstimPost::RelEstimPost( std::string _rel_type, int _utility)
 {
 	rel_type = _rel_type;
 	utility = _utility;
@@ -399,12 +407,12 @@ RelEstimPost::~RelEstimPost()
 	LOG("RelEstimPost Object Destroyed");
 }
 
-float RelEstimPost::get_utility()
+float RelEstimPost::get_utility(Hero* curr_hero, Hero* other_hero)
 {
 	return utility;
 }
 
-void RelEstimPost::apply_utility()
+void RelEstimPost::apply_utility(Hero* curr_hero, Hero* other_hero)
 {
 	if (rel_type == "Affinity")
 	{
@@ -423,7 +431,7 @@ void RelEstimPost::apply_utility()
 //---------------------------------------------------------------------------------
 
 ////////////////////////////////////////////////////////////////////////////////////
-//STATE PRECONDITION
+//STATE POSTCONDITION
 ////////////////////////////////////////////////////////////////////////////////////
 StatePost::StatePost(int _utility)
 {

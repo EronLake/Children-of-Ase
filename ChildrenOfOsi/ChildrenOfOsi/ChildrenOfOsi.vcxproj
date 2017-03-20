@@ -163,6 +163,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Action.h" />
+    <ClInclude Include="ActionConfig.h" />
     <ClInclude Include="ActionExecFunctions.h" />
     <ClInclude Include="ActionHelper.h" />
     <ClInclude Include="ActionPool.h" />
@@ -245,6 +246,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Action.cpp" />
+    <ClCompile Include="ActionConfig.cpp" />
     <ClCompile Include="ActionExecFunctions.cpp" />
     <ClCompile Include="ActionHelper.cpp" />
     <ClCompile Include="ActionPool.cpp" />
@@ -325,9 +327,11 @@
     <ClCompile Include="Wrapper.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="action_config.json" />
     <None Include="AssetInfo.h" />
     <None Include="ClassDiagram.cd" />
     <None Include="Dialogue_config.json" />
+    <None Include="oasis_config.json" />
     <None Include="OpenGL Shaders\FontFragmentShader.frag.glsl" />
     <None Include="OpenGL Shaders\FontVertexShader.vert.glsl" />
     <None Include="OpenGL Shaders\StdFragmentShader.frag.glsl" />

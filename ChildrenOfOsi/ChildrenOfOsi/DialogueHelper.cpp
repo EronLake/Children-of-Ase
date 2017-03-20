@@ -19,32 +19,30 @@ DialogueHelper::DialogueHelper()
 	//possible_conv_pts[0].push_back({ "placeholder","placeholder" });
 	//possible_conv_pts[1].push_back({ "placeholder","placeholder" });
 	//possible_conv_pts[2].push_back({ "placeholder","placeholder" });
-	for (int i = 0; i < 4; i++) 
+	/*for (int i = 0; i < 4; i++) 
 	{
 		possible_conv_pts.push_back({});
 	}
 	for (int i = 0; i < 4; i++) 
 	{
 		possible_reply_pts.push_back({});
-	}
-
-	possible_conv_pts[3].push_back({ "name","question_name" });
-	possible_conv_pts[3].push_back({ "reason","question_reason" });
-	possible_conv_pts[3].push_back({ "origin","question_origin" });
-	//possible_conv_pts[3].push_back({ "greeting","greeting" });
-
-	possible_reply_pts[3].push_back({ "denied","question_denied" });
-	possible_reply_pts[3].push_back({ "name","introduction" });
-	possible_reply_pts[3].push_back({ "reason","response_reason" });
-	possible_reply_pts[3].push_back({ "origin","response_origin" });
-	/*for (auto itor = Containers::conv_point_table.begin(); itor != Containers::conv_point_table.end(); ++itor) {
-		if (itor->second->dpoint[0].compare("c") == 0) {
-			possible_conv_pts[3].push_back(itor->second->dpoint);
-		}
-		else
-			possible_reply_pts[3].push_back(itor->second->dpoint);
-
 	}*/
+
+	//possible_conv_pts[3].push_back({ "name","question_name" });
+	//possible_conv_pts[3].push_back({ "reason","question_reason" });
+	//possible_conv_pts[3].push_back({ "origin","question_origin" });
+	////possible_conv_pts[3].push_back({ "greeting","greeting" });
+
+	//possible_reply_pts[3].push_back({ "denied","question_denied" });
+	//possible_reply_pts[3].push_back({ "name","introduction" });
+	//possible_reply_pts[3].push_back({ "reason","response_reason" });
+	//possible_reply_pts[3].push_back({ "origin","response_origin" });
+
+	std::ofstream ofs;
+	ofs.open("dialog_template_output.txt", std::ofstream::out | std::ofstream::app);
+	ofs << "container size: " << Containers::conv_point_table.size() << std::endl;
+	ofs.close();
+
 
 }
 
@@ -125,7 +123,7 @@ std::string DialogueHelper::gen_dialog(dialogue_point diog_pt, Hero* hero)
 	}
 	std::string sentence = convert_to_sentence(get_dialog(name, diog_pt));
 
-	////std:://cout << sentence << std::endl;
+	//std::////cout << sentence << std::endl;
 	return sentence;
 }
 
@@ -156,7 +154,7 @@ std::string DialogueHelper::gen_reply(dialogue_point diog_pt, Hero* hero)
 
 	std::string sentence = convert_to_sentence(get_dialog(name, diog_pt));
 
-	////std:://cout << sentence << std::endl;
+	//std::////cout << sentence << std::endl;
 	return sentence;
 }
 
@@ -171,7 +169,7 @@ dialogue_template DialogueHelper::get_template(dialogue_point diog_pt) {
 	
 	dialogue_template dtemp;
 
-	////std:://cout << diog_pt[1] + "_templates" << std::endl;
+	//std::////cout << diog_pt[1] + "_templates" << std::endl;
 	//get a random conversation template
 	int j = 0;
 	if (root[diog_pt[1] + "_templates"].size() > 1)
@@ -194,7 +192,7 @@ dialogue_template DialogueHelper::get_template(dialogue_point diog_pt) {
 	{
 		//ofs << "dialogue template: " << dtemp[i] << std::endl;
 		
-		//////std:://cout << dtemp[i] << std::endl;
+		////std::////cout << dtemp[i] << std::endl;
 	}
 	//ofs.close();
 	return dtemp;
@@ -211,7 +209,7 @@ dialogue_point DialogueHelper::get_dialog(std::string name, dialogue_point diog_
 
 	Json::Value root;
 	Json::Reader reader;
-	////std:://cout <<name + "_dialog.json" << std::endl;
+	//std::////cout <<name + "_dialog.json" << std::endl;
 	std::string dialogue_filename = name + "_dialog.json";
 
 	std::ifstream file(dialogue_filename);
@@ -248,7 +246,7 @@ dialogue_point DialogueHelper::get_dialog(std::string name, dialogue_point diog_
 	//ofs.open("dialog_template_output.txt", std::ofstream::out | std::ofstream::app);
 	for (int i = 0; i < dpoint.size(); i++){
 		//ofs << "dialogue point: " << dpoint[i] << std::endl;
-		//////std:://cout << "dialogue point: "<< dpoint[i] << std::endl;
+		////std::////cout << "dialogue point: "<< dpoint[i] << std::endl;
 	}
 	//ofs.close();
 	return dpoint;
@@ -266,5 +264,33 @@ std::string DialogueHelper::convert_to_sentence(dialogue_point dialog_pt)
 		sentence += tmp;
 	}
 	return sentence;
+}
+
+void DialogueHelper::fill_conversations() {
+	std::ofstream ofs;
+	ofs.open("dialog_template_output.txt", std::ofstream::out | std::ofstream::app);
+	ofs << "size_fill: " << Containers::conv_point_table.size() << std::endl;
+	for (int i = 0; i < 4; i++)
+	{
+		possible_conv_pts.push_back({});
+	}
+	for (int i = 0; i < 4; i++)
+	{
+		possible_reply_pts.push_back({});
+	}
+	//ofs.close();
+	for (auto itor = Containers::conv_point_table.begin(); itor != Containers::conv_point_table.end(); ++itor) {
+		if (itor->second->get_name().at(0) == 'c') {
+			ofs << "conv_point" << std::endl;
+			possible_conv_pts[3].push_back(itor->second->dpoint);//itor->second->dpoint);
+		}
+		else {
+			ofs << "rep_point" << std::endl;
+			possible_reply_pts[3].push_back(itor->second->dpoint);//itor->second->dpoint);
+		}
+		ofs << "dpoint: " << itor->second->dpoint[0] << itor->second->dpoint[1] << std::endl;
+	}
+
+	ofs.close();
 }
 

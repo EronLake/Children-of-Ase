@@ -15,11 +15,11 @@ public:
 	~Action();
 	
 
-	unordered_map<std::string, std::shared_ptr<Preconditions>> preconds;
+	vector<std::shared_ptr<Preconditions>> req_preconds;
+	vector<vector<std::shared_ptr<Preconditions>>> op_preconds;
 
-
-	unordered_map<std::string, std::shared_ptr<Postcondition>> succ_postconds;
-	unordered_map<std::string, std::shared_ptr<Postcondition>> fail_postconds;
+	vector<std::shared_ptr<Postcondition>> succ_postconds;
+	vector<std::shared_ptr<Postcondition>> fail_postconds;
 
 	void applyUtiliites(bool ifsucc);
 

@@ -24,6 +24,7 @@ vector<Action> ActionPool::getActions(Hero* h, Action macro)
 {
 	vector<Action*> points;
 	vector<Action> list;
+	
 	vector<std::string> needs = macro.preConditionsNeeded(doer,h);
 	for (int i = 0; i < needs.size(); i++) {
 		auto j = middleLink.find(needs[i]);
@@ -52,6 +53,7 @@ vector<Action*> ActionPool::addVec(vector<Action*> a, vector<Action*> b) {
 }
 
 void ActionPool::updateMiddle() {
+	/*
 	for (int i = 0; i < micro.size(); i++) {
 		for (auto it = micro[i].succ_postconds.begin(); it != micro[i].succ_postconds.end(); ++it) {
 			if (it->first.compare("aff") == 0) {
@@ -71,4 +73,5 @@ void ActionPool::updateMiddle() {
 			}
 		}
 	}
+	*/
 }
