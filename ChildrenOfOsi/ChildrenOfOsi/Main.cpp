@@ -408,6 +408,11 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	Texture* sparkDown = new Texture();
 	Texture* sparkLeft = new Texture();
 
+	Texture* YhurtRight = new Texture();
+	Texture* YhurtUp = new Texture();
+	Texture* YhurtDown = new Texture();
+	Texture* YhurtLeft = new Texture();
+
 
 
 	//load sprite from a configuration file?
@@ -446,17 +451,21 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	rightHurtTex->setFile("Assets/Sprites/ShangoRightRecoil.png", 18);
 
 
-	yemojaTexture->setFile("Assets/Sprites/YemojaFrontIdle.png", 1);
-	yemojaIdleTex->setFile("Assets/Sprites/YemojaFrontIdle.png", 1);
+	yemojaTexture->setFile("Assets/Sprites/YemojaForwardIdle.png", 22);
+	yemojaIdleTex->setFile("Assets/Sprites/YemojaForwardIdle.png", 22);
 
-	h_upRunTex->setFile("Assets/Sprites/YemojaBackSprite.png", 26);
-	h_downRunTex->setFile("Assets/Sprites/YemojaFrontSprite.png", 26);
-	h_leftRunTex->setFile("Assets/Sprites/YemojaLeftSprite.png", 26);
-	h_rightRunTex->setFile("Assets/Sprites/YemojaRightSprite.png", 26);
-	h_upIdleTex->setFile("Assets/Sprites/YemojaBackIdle.png", 1);
-	h_downIdleTex->setFile("Assets/Sprites/YemojaFrontIdle.png", 1);
-	h_leftIdleTex->setFile("Assets/Sprites/YemojaLeftIdle.png", 1);
-	h_rightIdleTex->setFile("Assets/Sprites/YemojaRightIdle.png", 1);
+	h_upRunTex->setFile("Assets/Sprites/YemojaBackSprint.png", 16);
+	h_downRunTex->setFile("Assets/Sprites/YemojaForwardSprint.png", 16);
+	h_leftRunTex->setFile("Assets/Sprites/YemojaLeftSprint.png", 16);
+	h_rightRunTex->setFile("Assets/Sprites/YemojaRightSprint.png", 16);
+	h_upIdleTex->setFile("Assets/Sprites/YemojaBackIdle.png", 22);
+	h_downIdleTex->setFile("Assets/Sprites/YemojaForwardIdle.png", 22);
+	h_leftIdleTex->setFile("Assets/Sprites/YemojaLeftIdle.png", 22);
+	h_rightIdleTex->setFile("Assets/Sprites/YemojaRightIdle.png", 22);
+	YhurtUp->setFile("Assets/Sprites/YemojaBackRecoil.png", 18);
+	YhurtDown->setFile("Assets/Sprites/YemojaForwardRecoil.png", 18);
+	YhurtLeft->setFile("Assets/Sprites/YemojaLeftRecoil.png", 18);
+	YhurtRight->setFile("Assets/Sprites/YemojaRightRecoil.png", 18);
 
 	silverSoldierTexture->setFile("Assets/Sprites/SilverSoldierForwardIdle.png", 22);
 	silverSoldierIdleTex->setFile("Assets/Sprites/SilverSoldierForwardIdle.png", 22);
@@ -773,8 +782,8 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 
 	
 
-	staticRec->setWidth(100);
-	staticRec->setHeight(100);
+	staticRec->setWidth(150);
+	staticRec->setHeight(150);
 	staticRec->name = YEMOJA;
 	//Hero* staticRec = new Hero(YEMOJA, Vector2f(4600, 3600), 100.0, 100.0);
 	///should actually use gameplay_functions->add_hero("Yemoja", 4600, 3600, true)
@@ -802,10 +811,10 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	staticRec->sprite.id_left = h_leftIdleTex;
 	staticRec->sprite.id_right = h_rightIdleTex;
 	staticRec->sprite.id_down = h_downIdleTex;
-	staticRec->sprite.hurt_up = upHurtTex;
-	staticRec->sprite.hurt_down = downHurtTex;
-	staticRec->sprite.hurt_left = leftHurtTex;
-	staticRec->sprite.hurt_right = rightHurtTex;
+	staticRec->sprite.hurt_up = YhurtUp;
+	staticRec->sprite.hurt_down = YhurtDown;
+	staticRec->sprite.hurt_left = YhurtLeft;
+	staticRec->sprite.hurt_right = YhurtRight;
 
 	blueSoldier->sprite.setTexture(blueSoldierTexture);
 	blueSoldier->sprite.setIdleTexture(blueSoldierIdleTex);
