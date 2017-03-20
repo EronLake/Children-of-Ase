@@ -198,6 +198,7 @@ int RenderHelper::sprite_atk(WorldObj * o)
 		if (check == 8) {
 			if (obj->getSwingLeft()) {
 				obj->sprite.setTexture(obj->sprite.atk_up);
+				//obj->effect.sprite.setTexture(obj->effect.sprite.atk_up);
 				manager->createTaskForAudio("PlaySound", "SOUND", "SFX/swing.wav");
 			}
 			else {
@@ -209,6 +210,7 @@ int RenderHelper::sprite_atk(WorldObj * o)
 		else 	if (check == 2) {
 			if (obj->getSwingLeft()) {
 				obj->sprite.setTexture(obj->sprite.atk_down);
+			//	obj->effect.sprite.setTexture(obj->effect.sprite.atk_down);
 				manager->createTaskForAudio("PlaySound", "SOUND", "SFX/swing.wav");
 			}
 			else {
@@ -222,6 +224,7 @@ int RenderHelper::sprite_atk(WorldObj * o)
 			if (obj->getSwingLeft()) {
 
 				obj->sprite.setTexture(obj->sprite.atk_right);
+				//obj->effect.sprite.setTexture(obj->effect.sprite.atk_right);
 				manager->createTaskForAudio("PlaySound", "SOUND", "SFX/swing.wav");
 			}
 			else {
@@ -233,6 +236,7 @@ int RenderHelper::sprite_atk(WorldObj * o)
 		else	if (check == 4) {
 			if (obj->getSwingLeft()) {
 				obj->sprite.setTexture(obj->sprite.atk_left);
+				//obj->effect.sprite.setTexture(obj->effect.sprite.atk_left);
 				manager->createTaskForAudio("PlaySound", "SOUND", "SFX/swing.wav");
 			}
 			else {
@@ -242,6 +246,7 @@ int RenderHelper::sprite_atk(WorldObj * o)
 			obj->sprite.setIdleTexture(obj->sprite.id_left);
 		}
 		obj->sprite.lockAnimation();
+		obj->effect.sprite.lockAnimation();
 	}
 	return 0;
 }
