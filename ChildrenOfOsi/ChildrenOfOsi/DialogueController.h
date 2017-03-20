@@ -3,7 +3,7 @@
 #include "common.h"
 #include "Player.h"
 #include "DialogueHelper.h"
-
+#include "AIController.h"
 
 class DialogueController
 {
@@ -31,7 +31,17 @@ public:
 	static WorldObj* getOther();
 	static int getState();
 	static void exitDialogue();
+	static void setAI(AIController* ai_c) { ai = ai_c; }
+	
+	static void offerQuest_hack_();
+
 	static DialogueHelper* getDialogueHelper();
+
+	static bool prompted_quest;
+	static bool accepted_quest;
+
+	static Action* quest;
+
 private:
 	static Player* player;
 	static WorldObj* other;
@@ -44,6 +54,7 @@ private:
 	//3 is npc conversation point
 	//4 is npc response
 	static DialogueHelper dialogue;
+	static AIController* ai;
 	static std::vector<std::vector<dialogue_point>> options;
 	static std::vector<dialogue_point> replyOptions;
 	static std::string message;

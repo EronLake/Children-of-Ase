@@ -114,9 +114,17 @@
 		"3": "Maybe I will tell you in the future"
 	},
 
-	"Question_Denied_Old": {
-		"1": "I understand",
-		"2": "I hope you will reconsider",
-		"3": "Maybe you will tell me in the future"
-	}
+  "Question_Denied_Old": {
+    "1": "I understand",
+    "2": "I hope you will reconsider",
+    "3": "Maybe you will tell me in the future"
+  },
+
+  "quest_accept": {
+    "1": "Yes I will see what I can do about the rebel scum"
+  },
+
+  "quest_deny": {
+    "1":  "That sounds dangerous. Maybe another time"
+  }
 }

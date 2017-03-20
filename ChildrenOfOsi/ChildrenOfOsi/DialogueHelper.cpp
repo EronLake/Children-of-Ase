@@ -278,6 +278,7 @@ void DialogueHelper::fill_conversations() {
 	{
 		possible_reply_pts.push_back({});
 	}
+	possible_reply_pts.push_back({});
 	//ofs.close();
 	for (auto itor = Containers::conv_point_table.begin(); itor != Containers::conv_point_table.end(); ++itor) {
 		if (itor->second->get_name().at(0) == 'c') {

@@ -146,17 +146,36 @@
 		}
 	},
 
-	"question_origin_templates": {
+  "question_origin_templates": {
 
-		"1": {
-			"1": "Ask_Origin" ,
-			"2":"Identifier",
-			"3": "?"
-		},
+    "1": {
+      "1": "Ask_Origin",
+      "2": "Identifier",
+      "3": "?"
+    },
 
-		"2": {
-			"1": "Ask_Origin" ,
-			"2": "?" 
-		}
-	}
+    "2": {
+      "1": "Ask_Origin",
+      "2": "?"
+    }
+  },
+
+  "give_quest_hack_templates": {
+    "1": {
+      "1": "Give_Quest_Hack",
+      "2": "?"
+    }
+  },
+
+  "quest_accept_templates": {
+    "1": {
+      "1": "quest_accept"
+    }
+  },
+
+  "quest_deny_templates": {
+    "1": {
+      "1": "quest_deny"
+    }
+  }
 }

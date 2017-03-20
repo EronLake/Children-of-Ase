@@ -204,9 +204,13 @@
 		"3": "It seems we cross paths yet again"
 	},
 
-	"Question_Denied": {
-		"1": "I see you don't want to cooperate",
-		"2": "I feel like it would be in both our interests if you would tell me",
-		"3": "I must ask you to reconsider answering me"
-	}
+  "Question_Denied": {
+    "1": "I see you don't want to cooperate",
+    "2": "I feel like it would be in both our interests if you would tell me",
+    "3": "I must ask you to reconsider answering me"
+  },
+
+  "Give_Quest_Hack": {
+    "1": "Wait, don't leave just yet! There is a rogue squadron of rebels in a galaxy far away. Would you help me protect my people from them"
+  }
 }

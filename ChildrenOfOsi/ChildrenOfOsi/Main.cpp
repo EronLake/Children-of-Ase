@@ -154,20 +154,22 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 {
 	Rectangle::tex->setFile("Assets/Sprites/betterborder.png", 1);
 	
-	//Player* Alex = new Player(SHANGO, Vector2f(4900.0, 3700.0), 40.0, 40.0);	//init player
-	Player* Alex = new Player(SHANGO, Vector2f(4900.0, 3700.0), 150.0, 150.0);	//init player
-
-	////cout << "Alex's width and height is " << Alex->getWidth() << ", " << Alex->getHeight() << endl;
 
 	vector<WorldObj*> recVec;
 	vector<WorldObj*>* recVec_ptr = &recVec;
-
+	vector<Hero*> heroes;
 	//psuedo Gameloop
 	MessageLog* mLog = new MessageLog();
 	TaskBuffer* tBuffer = new TaskBuffer(mLog);
 
 	//need this here for map editor
 	ChildrenOfOsi* gameplay_functions = new ChildrenOfOsi(mLog, tBuffer);
+
+	//Player* Alex = new Player(SHANGO, Vector2f(4900.0, 3700.0), 40.0, 40.0);	//init player
+	Player* Alex = new Player(SHANGO, Vector2f(4900.0, 3700.0), 150.0, 150.0);	//init player
+
+	////cout << "Alex's width and height is " << Alex->getWidth() << ", " << Alex->getHeight() << endl;
+
 
 	RenderManager* RenM = new RenderManager(mLog, tBuffer, _QuadTree, gameplay_functions);
 	
@@ -203,7 +205,21 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 //	Hero* alex = Containers::hero_table["Shango"];
 //	Player* Alex = dynamic_cast<Player*>(alex);
     Input* iController = new Input(gameplay_functions, Alex, RenM->renderHelper, tBuffer, recVec_ptr, AiController);
+	
+	
+	gameplay_functions->add_hero("Yemoja", 4600, 3600, true);
+	gameplay_functions->add_hero("Oya", 4400, 3600, true);
+	tBuffer->run();
 
+	Hero* staticRec = Containers::hero_table["Yemoja"];
+	heroes.push_back(staticRec);
+	Hero* oya = Containers::hero_table["Oya"];
+	heroes.push_back(oya);
+
+	staticRec->name = YEMOJA;
+	oya->name = OYA;
+
+	DialogueController::setAI(AiController);
 	//DialogueGui* convoGui = new DialogueGui();
 
 	//Player* Alex = new Player(1000,600, true);	//init player
@@ -669,15 +685,13 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	//gameplay_functions->add_worldObj("barrel1", 5200, 3900, true);
 	//tBuffer->run();
 
-	gameplay_functions->add_hero("Yemoja", 4600, 3600, true);
-	gameplay_functions->add_hero("Oya", 4400, 3600, true);
+
 	
 	//gameplay_functions->add_soldier("silverSoldier", 4900, 3300, true);
 
-	tBuffer->run();
+	//tBuffer->run();
 	
-	Hero* staticRec = Containers::hero_table["Yemoja"];
-	Hero* oya = Containers::hero_table["Oya"];
+
 	//Containers::soldier_table["silverSoldier"];
 	//WorldObj* barrel = Containers::worldObj_table["barrel1"];
 //    Containers::texture_table["barrelTex"]->setFile("Assets/Sprites/Barrel.png", 1);
@@ -903,7 +917,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	staticRec->offsetBody(0, 35, 35, 65, 15);
 	oya->shiftY(300);
 
-	Planner* YemojaPlanner = new Planner();
+	Planner* YemojaPlanner = new Planner(staticRec);
 	AiController->hero_planners[YEMOJA] = YemojaPlanner;
 	Action* test_train = new Action(staticRec, oya, staticRec, 10, 1, "train", "execute_train");
 	AiController->hero_planners[YEMOJA]->set_current_action(test_train);
