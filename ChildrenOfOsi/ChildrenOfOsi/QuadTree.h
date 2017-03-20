@@ -23,5 +23,6 @@ public:
 	vector<int> getIndexes(WorldObj* myrec);
 	void Insert(WorldObj* myrec);
 	vector<WorldObj*> retrieve(vector<WorldObj*> &listOfObj, WorldObj* myrec);
+	vector<WorldObj*> renderRetrieve(vector<WorldObj*> &listOfObj, WorldObj* myrec);
 };
 

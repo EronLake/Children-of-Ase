@@ -92,6 +92,16 @@ void ChildrenOfOsi::melee(WorldObj * player)
 	createTask("Melee", "INTERACT", player);
 }
 
+void ChildrenOfOsi::spin(WorldObj * player)
+{
+	createTask("Spin", "INTERACT", player);
+}
+
+void ChildrenOfOsi::fire(WorldObj * player)
+{
+	createTask("Fire", "INTERACT", player);
+}
+
 void ChildrenOfOsi::special(WorldObj * player, int num)
 {
 	createTaskWithNum("New_Attack", "MODIFY_POOL", player,num);

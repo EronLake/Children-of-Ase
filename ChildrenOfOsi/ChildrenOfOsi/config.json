@@ -273,17 +273,17 @@
       "y" : 184.5629119873047
    },
    "Jungle_Element_Num_112" : {
-      "bodyx1" : 205,
-      "bodyx2" : 225,
-      "bodyy1" : 430,
-      "bodyy2" : 30,
+      "bodyx1" : 205.0,
+      "bodyx2" : 225.0,
+      "bodyy1" : 430.0,
+      "bodyy2" : 30.0,
       "frame_num" : 1,
-      "hight" : 500,
+      "hight" : 500.0,
       "name" : "Jungle_Element_Num_112",
       "tex_file" : "Jungle_Tree_4",
-      "width" : 500,
-      "x" : 76.0,
-      "y" : 181.0
+      "width" : 500.0,
+      "x" : 74.90411376953125,
+      "y" : 179.1386566162109
    },
    "Jungle_Element_Num_113" : {
       "bodyx1" : 205,
@@ -624,17 +624,17 @@
       "y" : 175.0
    },
    "Jungle_Element_Num_137" : {
-      "bodyx1" : 180,
-      "bodyx2" : 180,
-      "bodyy1" : 350,
-      "bodyy2" : 95,
+      "bodyx1" : 180.0,
+      "bodyx2" : 180.0,
+      "bodyy1" : 350.0,
+      "bodyy2" : 95.0,
       "frame_num" : 1,
-      "hight" : 500,
+      "hight" : 500.0,
       "name" : "Jungle_Element_Num_137",
       "tex_file" : "Jungle_Tree_5",
-      "width" : 500,
-      "x" : 45.0,
-      "y" : 183.0
+      "width" : 500.0,
+      "x" : 44.48569488525391,
+      "y" : 182.0940093994141
    },
    "Jungle_Element_Num_138" : {
       "bodyx1" : 180,
@@ -698,8 +698,8 @@
       "name" : "Jungle_Element_Num_141",
       "tex_file" : "Jungle_Tree_4",
       "width" : 500.0,
-      "x" : 53.83161926269531,
-      "y" : 185.7044067382813
+      "x" : 51.13046264648438,
+      "y" : 183.8634338378906
    },
    "Jungle_Element_Num_142" : {
       "bodyx1" : 180.0,
@@ -932,8 +932,8 @@
       "name" : "Jungle_Element_Num_158",
       "tex_file" : "Jungle_Tree_3",
       "width" : 500.0,
-      "x" : 48.61369323730469,
-      "y" : 167.8185729980469
+      "x" : 48.28876876831055,
+      "y" : 168.7451324462891
    },
    "Jungle_Element_Num_159" : {
       "bodyx1" : 205,
@@ -997,8 +997,8 @@
       "name" : "Jungle_Element_Num_162",
       "tex_file" : "Jungle_Tree_4",
       "width" : 500.0,
-      "x" : 65.28635406494141,
-      "y" : 193.3182830810547
+      "x" : 63.79709625244141,
+      "y" : 195.1697692871094
    },
    "Jungle_Element_Num_163" : {
       "bodyx1" : 205,
@@ -1257,8 +1257,8 @@
       "name" : "Jungle_Element_Num_180",
       "tex_file" : "Jungle_Tree_5",
       "width" : 500.0,
-      "x" : 79.77269744873047,
-      "y" : 167.9061126708984
+      "x" : 83.44322967529297,
+      "y" : 167.8342590332031
    },
    "Jungle_Element_Num_181" : {
       "bodyx1" : 205.0,
@@ -1300,17 +1300,17 @@
       "y" : 191.8135528564453
    },
    "Jungle_Element_Num_184" : {
-      "bodyx1" : 205,
-      "bodyx2" : 225,
-      "bodyy1" : 430,
-      "bodyy2" : 30,
+      "bodyx1" : 205.0,
+      "bodyx2" : 225.0,
+      "bodyy1" : 430.0,
+      "bodyy2" : 30.0,
       "frame_num" : 1,
-      "hight" : 500,
+      "hight" : 500.0,
       "name" : "Jungle_Element_Num_184",
       "tex_file" : "Jungle_Tree_3",
-      "width" : 500,
-      "x" : 47.0,
-      "y" : 174.0
+      "width" : 500.0,
+      "x" : 44.77417373657227,
+      "y" : 169.4514312744141
    },
    "Jungle_Element_Num_185" : {
       "bodyx1" : 180,
@@ -1413,8 +1413,8 @@
       "name" : "Jungle_Element_Num_191",
       "tex_file" : "Jungle_Tree_4",
       "width" : 500.0,
-      "x" : 56.93199157714844,
-      "y" : 176.1633911132813
+      "x" : 55.43000030517578,
+      "y" : 175.5065612792969
    },
    "Jungle_Element_Num_192" : {
       "bodyx1" : 205,
@@ -1465,8 +1465,8 @@
       "name" : "Jungle_Element_Num_195",
       "tex_file" : "Jungle_Tree_1",
       "width" : 500.0,
-      "x" : 43.59272384643555,
-      "y" : 176.1448669433594
+      "x" : 43.45600128173828,
+      "y" : 174.6139984130859
    },
    "Jungle_Element_Num_196" : {
       "bodyx1" : 180,
@@ -1621,8 +1621,8 @@
       "name" : "Jungle_Element_Num_205",
       "tex_file" : "Jungle_Tree_2",
       "width" : 500.0,
-      "x" : 49.18615722656250,
-      "y" : 187.9287261962891
+      "x" : 50.48938369750977,
+      "y" : 187.3597106933594
    },
    "Jungle_Element_Num_206" : {
       "bodyx1" : 210,
@@ -1690,17 +1690,17 @@
       "y" : 148.8738708496094
    },
    "Jungle_Element_Num_210" : {
-      "bodyx1" : 180,
-      "bodyx2" : 180,
-      "bodyy1" : 350,
-      "bodyy2" : 95,
+      "bodyx1" : 180.0,
+      "bodyx2" : 180.0,
+      "bodyy1" : 350.0,
+      "bodyy2" : 95.0,
       "frame_num" : 1,
-      "hight" : 500,
+      "hight" : 500.0,
       "name" : "Jungle_Element_Num_210",
       "tex_file" : "Jungle_Tree_1",
-      "width" : 500,
-      "x" : 73.0,
-      "y" : 168.0
+      "width" : 500.0,
+      "x" : 70.71852874755859,
+      "y" : 167.4242553710938
    },
    "Jungle_Element_Num_211" : {
       "bodyx1" : 205,
@@ -1716,17 +1716,17 @@
       "y" : 185.0
    },
    "Jungle_Element_Num_212" : {
-      "bodyx1" : 180,
-      "bodyx2" : 180,
-      "bodyy1" : 350,
-      "bodyy2" : 95,
+      "bodyx1" : 180.0,
+      "bodyx2" : 180.0,
+      "bodyy1" : 350.0,
+      "bodyy2" : 95.0,
       "frame_num" : 1,
-      "hight" : 500,
+      "hight" : 500.0,
       "name" : "Jungle_Element_Num_212",
       "tex_file" : "Jungle_Tree_5",
-      "width" : 500,
-      "x" : 47.0,
-      "y" : 173.0
+      "width" : 500.0,
+      "x" : 43.14169311523438,
+      "y" : 176.3242797851563
    },
    "Jungle_Element_Num_213" : {
       "bodyx1" : 205.0,
@@ -1790,8 +1790,8 @@
       "name" : "Jungle_Element_Num_217",
       "tex_file" : "Jungle_Tree_5",
       "width" : 500.0,
-      "x" : 46.26646423339844,
-      "y" : 187.2752075195313
+      "x" : 44.78046417236328,
+      "y" : 186.2102966308594
    },
    "Jungle_Element_Num_218" : {
       "bodyx1" : 210,
@@ -1881,8 +1881,8 @@
       "name" : "Jungle_Element_Num_223",
       "tex_file" : "Jungle_Tree_1",
       "width" : 500.0,
-      "x" : 47.01467132568359,
-      "y" : 180.5078582763672
+      "x" : 49.37292480468750,
+      "y" : 178.6254272460938
    },
    "Jungle_Element_Num_224" : {
       "bodyx1" : 205.0,
@@ -1894,8 +1894,8 @@
       "name" : "Jungle_Element_Num_224",
       "tex_file" : "Jungle_Tree_4",
       "width" : 500.0,
-      "x" : 62.04243087768555,
-      "y" : 187.0722808837891
+      "x" : 60.88755798339844,
+      "y" : 185.5368957519531
    },
    "Jungle_Element_Num_225" : {
       "bodyx1" : 180.0,
@@ -1911,17 +1911,17 @@
       "y" : 190.3856201171875
    },
    "Jungle_Element_Num_226" : {
-      "bodyx1" : 210,
-      "bodyx2" : 200,
-      "bodyy1" : 420,
-      "bodyy2" : 50,
+      "bodyx1" : 210.0,
+      "bodyx2" : 200.0,
+      "bodyy1" : 420.0,
+      "bodyy2" : 50.0,
       "frame_num" : 1,
-      "hight" : 500,
+      "hight" : 500.0,
       "name" : "Jungle_Element_Num_226",
       "tex_file" : "Jungle_Tree_2",
-      "width" : 500,
-      "x" : 56.0,
-      "y" : 181.0
+      "width" : 500.0,
+      "x" : 57.14461517333984,
+      "y" : 176.50
    },
    "Jungle_Element_Num_227" : {
       "bodyx1" : 180.0,
@@ -2024,8 +2024,8 @@
       "name" : "Jungle_Element_Num_233",
       "tex_file" : "Jungle_Tree_4",
       "width" : 500.0,
-      "x" : 40.29918289184570,
-      "y" : 175.1111297607422
+      "x" : 38.43707656860352,
+      "y" : 175.6957244873047
    },
    "Jungle_Element_Num_234" : {
       "bodyx1" : 180,
@@ -2050,8 +2050,8 @@
       "name" : "Jungle_Element_Num_235",
       "tex_file" : "Jungle_Tree_4",
       "width" : 500.0,
-      "x" : 56.43784713745117,
-      "y" : 188.7541656494141
+      "x" : 53.46400070190430,
+      "y" : 186.0851440429688
    },
    "Jungle_Element_Num_236" : {
       "bodyx1" : 210.0,
@@ -2219,8 +2219,8 @@
       "name" : "Jungle_Element_Num_247",
       "tex_file" : "Jungle_Tree_3",
       "width" : 500.0,
-      "x" : 44.40697860717773,
-      "y" : 180.4329833984375
+      "x" : 45.6081542968750,
+      "y" : 179.3862915039063
    },
    "Jungle_Element_Num_248" : {
       "bodyx1" : 205.0,

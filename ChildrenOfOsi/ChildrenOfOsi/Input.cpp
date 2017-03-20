@@ -161,7 +161,7 @@ void Input::InputCheck()
 				if (t->getCool(1)) {
 					////std::cout << "Pressed Shift+R" << std::endl;
 					gameplay_functions->special(t, 1);
-					gameplay_functions->melee(t);
+					gameplay_functions->fire(t);
 				}
 			}
 		} else if (R) {
@@ -176,11 +176,11 @@ void Input::InputCheck()
 				if (t) {
 					if (t->getCool(2)) {
 						////std::cout << "Pressed T" << std::endl;
-						t->meleeAttack();
-						gameplay_functions->melee(t);
-						t->resetCD(2);
+						//t->meleeAttack();
+						//gameplay_functions->melee(t);
+						//t->resetCD(2);
 						gameplay_functions->special(t, 2);
-						gameplay_functions->melee(t);
+						gameplay_functions->spin(t);
 					}
 				}
 		}
@@ -549,6 +549,8 @@ void Input::InputCheck()
 
 	if (DialogueController::getState() > 0) {
 		if (Q) {
+			DialogueController::exitDialogue();
+
 			WorldObj* other = DialogueController::getOther();
 			if (other->getType() == 5) {
 				Hero* them = dynamic_cast<Hero*>(other);
