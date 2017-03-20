@@ -569,8 +569,6 @@ void Input::InputCheck()
 				{
 					DialogueController::exitDialogue();
 				}
-				else
-					DialogueController::exitDialogue();
 			}
 			else
 			{
