@@ -17,33 +17,24 @@ MemoryHelper::~MemoryHelper()
 
 int MemoryHelper::store_hero(std::string key, float x, float y, bool col) {
 	int name = 0;
-	if (key == "Yemoja" || key == "yemoja")
+	if (key == "Yemoja")
 	{
 		name = YEMOJA;
 	}
-	else if (key == "Oya" || key == "oya")
+	else if (key == "Oshosi")
 	{
 		name = OYA;
 	}
-	else if (key == "Oshosi" || key == "oshosi")
+	else if (key == "Yemoja")
 	{
 		name = OSHOSI;
 	}
-	else if (key == "Ogun" || key == "ogun")
+	else if (key == "Yemoja")
 	{
 		name = OGUN;
 	}
-	else if (key == "Shango" || key == "shango")
-	{
-		name = SHANGO;
-	}
-	else 
-	{
-		name = -1;
-	}
 	Hero* h = new(find_available_block(memManager::hero_head, key)) Hero(name,x, y, col);
 
-	//std::////cout << h;
 	Containers::add_hero(key,h);
 	return 0;
 }

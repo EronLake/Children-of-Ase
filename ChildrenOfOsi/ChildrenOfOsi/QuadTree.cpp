@@ -170,7 +170,7 @@ void QuadTree::Insert(WorldObj * myrec)
 		if (nodes[0] == nullptr)
 		{
 			//for (int i = 0; i < 100; i++) {
-			//	std::cout << "THE LEVEL OF THE TREE IS " << treelv << endl;
+			//	////std::cout<< "THE LEVEL OF THE TREE IS " << treelv << endl;
 			//}
 			split();
 		}
