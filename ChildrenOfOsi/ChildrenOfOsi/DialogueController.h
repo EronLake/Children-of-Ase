@@ -4,6 +4,7 @@
 #include "Player.h"
 #include "DialogueHelper.h"
 #include "AIController.h"
+#include "Party.h"
 
 class DialogueController
 {

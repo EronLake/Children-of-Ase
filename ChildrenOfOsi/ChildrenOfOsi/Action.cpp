@@ -34,11 +34,11 @@ void Action::applyUtiliites(bool ifsucc)
 			if (succ_postconds[i]->get_type() =="relationship")
 			{
 				succ_postconds[i]->apply_utility(doer,receiver);
-			}
+		}
 			else
 			{
 				succ_postconds[i]->apply_utility();
-			}
+	}
 			
 		}
 	}
@@ -51,7 +51,7 @@ void Action::applyUtiliites(bool ifsucc)
 				fail_postconds[i]->apply_utility(doer,receiver);
 			}
 			else 
-			{
+		{
 				fail_postconds[i]->apply_utility();
 			}
 			

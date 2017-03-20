@@ -123,20 +123,22 @@ Task::Task(std::string _name, std::string _status, std::string _type, std::strin
 Task::Task(std::string _name, std::string _status, std::string _type, std::string _key, int _utility, int _why, Hero* _owner,
 	Hero* _receiver, Hero* _doer, std::string _exe_name)
 {
+	name = _name;
+	type = _type;
+
+	status = _status;
 
 	key = _key;
+	arg1 = 0.0;
+	arg2 = 0.0;
+	arg3 = false;
+	arg4 = _utility;
+	why = _why;
 
-	std::string key;
-	float arg1 = 0.0;
-	float arg2 = 0.0;
-	bool arg3 = false;
-	int arg4 = _utility;
-	int why = _why;
-
-	std::string cat = _exe_name;
-	Hero* owner = NULL;
-	Hero* receiver = NULL;
-	Hero* doer = NULL;
+	cat = _exe_name;
+	owner = _owner;
+	receiver = _receiver;
+	doer = _owner;
 
 	LOG("Task Object W/WOBJ&ACT Constructed");
 }

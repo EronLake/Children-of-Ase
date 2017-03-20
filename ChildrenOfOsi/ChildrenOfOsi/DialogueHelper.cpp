@@ -16,7 +16,7 @@ DialogueHelper dialogue;
 DialogueHelper::DialogueHelper()
 {
 	srand(time(0)); //ensure good variation of random numbers when using rand()
-		//possible_conv_pts[0].push_back({ "placeholder","placeholder" });
+	//possible_conv_pts[0].push_back({ "placeholder","placeholder" });
 	//possible_conv_pts[1].push_back({ "placeholder","placeholder" });
 	//possible_conv_pts[2].push_back({ "placeholder","placeholder" });
 	/*for (int i = 0; i < 4; i++) 
@@ -37,7 +37,7 @@ DialogueHelper::DialogueHelper()
 	//possible_reply_pts[3].push_back({ "name","introduction" });
 	//possible_reply_pts[3].push_back({ "reason","response_reason" });
 	//possible_reply_pts[3].push_back({ "origin","response_origin" });
-	
+
 	std::ofstream ofs;
 	ofs.open("dialog_template_output.txt", std::ofstream::out | std::ofstream::app);
 	ofs << "container size: " << Containers::conv_point_table.size() << std::endl;

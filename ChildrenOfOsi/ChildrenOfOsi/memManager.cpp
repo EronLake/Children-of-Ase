@@ -190,14 +190,14 @@ void memManager::execute_task(Task* current_task)
 	}
 	else {
 		//check if updating an existing object
-		if (obj == nullptr && people.size() == 0) {
+		if (obj == nullptr && people.size() == 0 && owner == nullptr) {
 		   if(current_task->my_key.compare("") != 0)
 			   result = (memHelper->*(it->second))(my_key, xpos, ypos, coll);
 		   else
 		       result = (memHelper->*(it->second))(key, xpos, ypos, coll);
 		}
 		//check if adding a memory
-		else if (people.size() == 0) {
+		else if (people.size() == 0 && owner == nullptr) {
 			result = (memHelper->*(it2->second))(obj, num);
 		}
 		else if(owner)

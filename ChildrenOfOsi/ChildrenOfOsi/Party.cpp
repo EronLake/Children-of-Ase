@@ -20,9 +20,9 @@ Party::Party(Alliance *a) : faction(a), leader(nullptr), target(nullptr), mode(P
  */
 Party::Party(Soldier *leader) : faction(nullptr), leader(leader), target(nullptr)
 {
-	this->addToParty(leader, true);
-	this->setMode(Party::MODE_IDLE);
-	partiesWorld.push_back(this);
+  this->addToParty(leader, true);
+  this->setMode(Party::MODE_IDLE);
+  partiesWorld.push_back(this);
 }
 
 /**
@@ -31,9 +31,9 @@ Party::Party(Soldier *leader) : faction(nullptr), leader(leader), target(nullptr
  */
 Party::Party(Alliance *a, Soldier *leader) : faction(a), leader(leader), target(nullptr)
 {
-	this->addToParty(leader, true);
-	this->setMode(Party::MODE_IDLE);
-	partiesWorld.push_back(this);
+  this->addToParty(leader, true);
+  this->setMode(Party::MODE_IDLE);
+  partiesWorld.push_back(this);
 }
 
 /**
@@ -43,12 +43,12 @@ Party::Party(Alliance *a, Soldier *leader) : faction(a), leader(leader), target(
  */
 Party::Party(Alliance *a, Soldier *leader, const vector<Soldier *>& members) : faction(a), leader(leader), target(nullptr)
 {
-	this->addToParty(leader, true);
-	this->setMode(Party::MODE_IDLE);
+  this->addToParty(leader, true);
+  this->setMode(Party::MODE_IDLE);
 	for (auto& member : members) {
-		this->addToParty(member, false);
-	}
-	partiesWorld.push_back(this);
+    this->addToParty(member, false);
+  }
+  partiesWorld.push_back(this);
 }
 
 /**
@@ -56,7 +56,7 @@ Party::Party(Alliance *a, Soldier *leader, const vector<Soldier *>& members) : f
  */
 bool Party::isAllyOf(Soldier *s)
 {
-	return this->faction == s->getParty()->getAlliance();
+  return this->faction == s->getParty()->getAlliance();
 }
 
 /**
@@ -64,7 +64,7 @@ bool Party::isAllyOf(Soldier *s)
  */
 bool Party::isAllyOf(Party *p)
 {
-	return this->faction == p->faction;
+  return this->faction == p->faction;
 }
 
 /**
@@ -72,7 +72,7 @@ bool Party::isAllyOf(Party *p)
  */
 bool Party::isEnemyOf(Soldier *s)
 {
-	return this->faction != s->getParty()->getAlliance();
+  return this->faction != s->getParty()->getAlliance();
 }
 
 /**
@@ -80,7 +80,7 @@ bool Party::isEnemyOf(Soldier *s)
  */
 bool Party::isEnemyOf(Party *p)
 {
-	return this->faction != p->faction;
+  return this->faction != p->faction;
 }
 
 /**
@@ -91,15 +91,15 @@ void Party::addToParty(Soldier* s, bool isLeader)
 {
 	if (s != nullptr) {
 		if (isLeader || members.size() == 0) {
-			members.insert(members.begin(), s);
-			this->leader = s;
-			s->setParty(this);
-		}
-		else {
-			this->members.push_back(s);
-			s->setParty(this);
-		}
-	}
+      members.insert(members.begin(), s);
+      this->leader = s;
+      s->setParty(this);
+    }
+    else {
+      this->members.push_back(s);
+      s->setParty(this);
+    }
+  }
 }
 
 /**
@@ -129,7 +129,7 @@ void Party::removeSoldier(Soldier* s)
 	// Check whether Soldier s is the leader; handle the removal accordingly
 	if (s == leader) {
 		leader = nullptr;
-		members.erase(std::remove(members.begin(), members.end(), s), members.end());
+  members.erase(std::remove(members.begin(), members.end(), s), members.end());
 		// Check if member list is empty
 		if (!members.empty()) {
 			leader = *(members.begin());
@@ -138,20 +138,21 @@ void Party::removeSoldier(Soldier* s)
 	else {
 		members.erase(std::remove(members.begin(), members.end(), s), members.end());
 	}
-
+  
 	// Update Soldier s's party status
+	cout << "SIZE OF PARTY WITH OBJ REMOVED IS " << s->getParty()->getMembers().size() << endl;
 	s->setParty(nullptr);
 	s->setCurrentLeader(nullptr);
 	
-
+	
 
 
 	//cout << "SIZE OF THE PARTY IS ********** " << members.size() << endl;
 	//members.erase(std::remove(members.begin(), members.end(), s), members.end());
 	//cout << "SUCCESFULLY GOTTEN PAST THE REMOVE SOLDIER STATEMENT*************************" << endl;
 
-	//for enemy soldier's party, we need to remove s's party from their list of party if its emptys
-	//cout << "Enemy's enemy: " << s->getCurrentEnemy()->getCurrentEnemy() << endl;
+  //for enemy soldier's party, we need to remove s's party from their list of party if its emptys
+  ////cout << "Enemy's enemy: " << s->getCurrentEnemy()->getCurrentEnemy() << endl;
 
 	//if (s->getCurrentEnemy() != nullptr) {
 	//	s->getCurrentEnemy()->setCurrentEnemy(nullptr);
@@ -171,15 +172,15 @@ void Party::removeSoldier(Soldier* s)
 	//	}
 
 
-	/*for(auto& i = this->members.begin(); i != this->members.end(); ++i) {
-	  if(*i == s) {
-	  this->members.erase(i);
-	  s->setParty(nullptr);
-	  if(leader == s) {
-		leader = *members.begin();
-	  }
-	  }
-	}*/
+  /*for(auto& i = this->members.begin(); i != this->members.end(); ++i) {
+    if(*i == s) {
+    this->members.erase(i);
+    s->setParty(nullptr);
+    if(leader == s) {
+      leader = *members.begin();
+    }
+    }
+  }*/
 }
 
 /**
@@ -187,8 +188,8 @@ void Party::removeSoldier(Soldier* s)
  */
 void Party::clear()
 {
-	this->members.clear();
-	this->leader = nullptr;
+  this->members.clear();
+  this->leader = nullptr;
 }
 
 /**
@@ -200,10 +201,10 @@ void Party::setLeader(Soldier* s)
 {
 	for (auto i = members.begin(); i != members.end(); ++i) {
 		if (*i == s) {
-			leader = s;
-			break;
-		}
-	}
+      leader = s;
+      break;
+    }
+  }
 }
 
 /**
@@ -214,53 +215,53 @@ void Party::setLeader(Soldier* s)
  */
 void Party::setMode(int m)
 {
-	this->mode = m;
+  this->mode = m;
 	if (mode == Party::MODE_IDLE) {
 		for (auto& member : this->members) {
-			member->setInCombat(false);
-			member->setEvade(false);
-			member->setHold(false);
-		}
-	}
+      member->setInCombat(false);
+      member->setEvade(false);
+      member->setHold(false);
+    }
+  }
 	else if (mode == Party::MODE_ATTACK) {
 		for (auto& member : this->members) {
-			member->setInCombat(true);
-			member->setEvade(false);
-			member->setHold(false);
-		}
-	}
+      member->setInCombat(true);
+      member->setEvade(false);
+      member->setHold(false);
+    }
+  }
 	else if (mode == Party::MODE_DEFEND) {
 		for (auto& member : this->members) {
-			member->setInCombat(true);
-			member->setHold(true);
-			member->setEvade(false);
-		}
-	}
+      member->setInCombat(true);
+      member->setHold(true);
+      member->setEvade(false);
+    }
+  }
 	else if (mode == Party::MODE_PATROL) {
 		for (auto& member : this->members) {
-			member->setInCombat(false);
-			member->setHold(false);
-			member->setEvade(false);
-		}
-	}
+      member->setInCombat(false);
+      member->setHold(false);
+      member->setEvade(false);
+    }
+  }
 	else if (mode == Party::MODE_FLEE) {
 		for (auto& member : this->members) {
-			member->setInCombat(false);
-			member->setHold(false);
-			member->setEvade(true);
-		}
-	}
+      member->setInCombat(false);
+      member->setHold(false);
+      member->setEvade(true);
+    }
+  }
 }
 
 void Party::updateFollowers()
 {
-	Soldier* prev = nullptr;
+  Soldier* prev = nullptr;
 	for (auto i = members.rbegin(); i != members.rend(); ++i) {
 		if (prev != nullptr) {
-			prev->setCurrentLeader(*i);
-		}
-		prev = *i;
-	}
+      prev->setCurrentLeader(*i);
+    }
+    prev = *i;
+  }
 }
 
 void Party::findEnemy()
