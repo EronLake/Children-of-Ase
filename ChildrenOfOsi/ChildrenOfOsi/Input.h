@@ -9,6 +9,7 @@
 #include "AIController.h"
 
 
+
 class Input
 {
 private:
@@ -37,6 +38,12 @@ public:
 	Input(ChildrenOfOsi* _gameplay_functions, RenderHelper* _rHelper, TaskBuffer* _tBuffer, vector<WorldObj*>* _recVec);
 	Input(ChildrenOfOsi* _gameplay_functions, WorldObj * _player, RenderHelper* _rHelper, TaskBuffer* _tBuffer, vector<WorldObj*>* _recVec, AIController* ai);
 	~Input();
+	//Region* Desert;
+	//Region* Ogun;
+	//Region* Mountain;
+	//Region* Jungle;
+	//Region current_region;
+	//Region next_region;
 
 	void InputCheck();
 

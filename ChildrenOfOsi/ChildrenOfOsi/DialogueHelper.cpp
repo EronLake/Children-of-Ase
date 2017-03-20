@@ -56,7 +56,23 @@ dialogue_point DialogueHelper::choose_conv_pt(dialogue_point point, int optn_inx
 {
 	//std::ofstream ofs;
 	//ofs.open("dialog_template_output.txt", std::ofstream::out | std::ofstream::app);
-	int conv_pt_index = rand() % (possible_conv_pts[optn_inx].size());
+	int conv_pt_index;
+	/*if (optn_inx == 0) {
+		conv_pt_index = rand() % (strength_conv_pts[optn_inx].size());
+		return strength_conv_pts[optn_inx][conv_pt_index];
+	}
+	else if (optn_inx == 1) {
+		conv_pt_index = rand() % (affinity_conv_pts[optn_inx].size());
+		return affinity_conv_pts[optn_inx][conv_pt_index];
+	}
+	else if (optn_inx == 2) {
+		conv_pt_index = rand() % (notoriety_conv_pts[optn_inx].size());
+		return notoriety_conv_pts[optn_inx][conv_pt_index];
+	}
+	else {*/
+		conv_pt_index = rand() % (possible_conv_pts[optn_inx].size());
+		return possible_conv_pts[optn_inx][conv_pt_index];
+	//}
 	for (int i = 0; i < possible_conv_pts[optn_inx][conv_pt_index].size(); ++i) {
 		//ofs << "pcp: "<<possible_conv_pts[optn_inx][conv_pt_index][i] << " ";
 	}
@@ -69,6 +85,16 @@ dialogue_point DialogueHelper::choose_reply_pt(std::string point, int optn_inx)
 {
 	//std::ofstream ofs;
 	//ofs.open("dialog_template_output.txt", std::ofstream::out | std::ofstream::app);
+	/*std::vector<vector<dialogue_point>> pts;
+	if (optn_inx == 0)
+		pts = strength_reply_pts;
+	else if (optn_inx == 1)
+		pts = affinity_reply_pts;
+	else if (optn_inx == 2)
+		pts = notoriety_reply_pts;
+	else
+		pts = possible_reply_pts;*/
+
 	for (int i = 0; i < possible_reply_pts[optn_inx].size(); i++)
 	{
 		//ofs << "prp: " << possible_reply_pts[optn_inx][i][i] << " ";
@@ -87,12 +113,50 @@ std::vector<std::vector<dialogue_point>> DialogueHelper::get_possible_conv_pts()
 	return possible_conv_pts;
 }
 
-std::vector<dialogue_point> DialogueHelper::get_possible_reply_pts(std:: string point)
+std::vector<dialogue_point> DialogueHelper::get_possible_reply_pts(std:: string point, int opts_inx)
 {
 	std::vector<dialogue_point> reply;
-	for (int i = 0; i < possible_reply_pts[3].size(); i++) {
-		if (possible_reply_pts[3][i][0].compare("denied") == 0 || possible_reply_pts[3][i][0].compare(point) == 0) {
-			reply.push_back({ possible_reply_pts[3][i] });
+	for (int i = 0; i < possible_reply_pts[opts_inx].size(); i++) {
+		if (possible_reply_pts[opts_inx][i][0].compare("denied") == 0 || possible_reply_pts[opts_inx][i][0].compare(point) == 0) {
+			reply.push_back({ possible_reply_pts[opts_inx][i] });
+		}
+	}
+	return reply;
+}
+
+std::vector<std::vector<dialogue_point>> DialogueHelper::get_strength_conv_pts() {
+	return strength_conv_pts;
+}
+std::vector<dialogue_point> DialogueHelper::get_strength_reply_pts(std::string point)
+{
+	std::vector<dialogue_point> reply;
+	for (int i = 0; i < strength_reply_pts[0].size(); i++) {
+		if (strength_reply_pts[0][i][0].compare("denied") == 0 || strength_reply_pts[0][i][0].compare(point) == 0) {
+			reply.push_back({ strength_reply_pts[0][i] });
+		}
+	}
+	return reply;
+}
+std::vector<std::vector<dialogue_point>> DialogueHelper::get_affinity_conv_pts() {
+	return affinity_conv_pts;
+}
+std::vector<dialogue_point> DialogueHelper::get_affinity_reply_pts(std::string point) {
+	std::vector<dialogue_point> reply;
+	for (int i = 0; i < affinity_reply_pts[1].size(); i++) {
+		if (affinity_reply_pts[1][i][0].compare("denied") == 0 || affinity_reply_pts[1][i][0].compare(point) == 0) {
+			reply.push_back({ affinity_reply_pts[1][i] });
+		}
+	}
+	return reply;
+}
+std::vector<std::vector<dialogue_point>> DialogueHelper::get_notoriety_conv_pts() {
+	return notoriety_conv_pts;
+}
+std::vector<dialogue_point> DialogueHelper::get_notoriety_reply_pts(std::string point) {
+	std::vector<dialogue_point> reply;
+	for (int i = 0; i < notoriety_reply_pts[2].size(); i++) {
+		if (notoriety_reply_pts[2][i][0].compare("denied") == 0 || notoriety_reply_pts[2][i][0].compare(point) == 0) {
+			reply.push_back({ notoriety_reply_pts[2][i] });
 		}
 	}
 	return reply;
@@ -101,25 +165,35 @@ std::vector<dialogue_point> DialogueHelper::get_possible_reply_pts(std:: string 
 
 std::string DialogueHelper::gen_dialog(dialogue_point diog_pt, Hero* hero)
 {
-	std::string name;
-	if (hero->name == SHANGO)
-	{
-		name = "Shango";
-	}else if (hero->name == YEMOJA)
-	{
-		name = "Yemoja";
+	std::string name = "";
+	std::ofstream ofs;
+	ofs.open("dialog_template_output.txt", std::ofstream::out | std::ofstream::app);
+	ofs << "type name: "<< typeid(hero).name() << std::endl;
+	ofs.close();
+	if (hero != nullptr) {
+		if (hero->name == SHANGO)
+		{
+			name = "Shango";
+		}
+		else if (hero->name == YEMOJA)
+		{
+			name = "Yemoja";
+		}
+		else if (hero->name == OSHOSI)
+		{
+			name = "Oshosi";
+		}
+		else if (hero->name == OYA)
+		{
+			name = "Oya";
+		}
+		else if (hero->name == OGUN)
+		{
+			name = "Ogun";
+		}
 	}
-	else if (hero->name == OSHOSI)
-	{
-		name = "Oshosi";
-	}
-	else if (hero->name == OYA)
-	{
-		name = "Oya";
-	}
-	else if (hero->name == OGUN)
-	{
-		name = "Ogun";
+	else {
+		name = "SilverSoldier";
 	}
 	std::string sentence = convert_to_sentence(get_dialog(name, diog_pt));
 
@@ -206,11 +280,13 @@ dialogue_point DialogueHelper::get_dialog(std::string name, dialogue_point diog_
 	//for (int i = 0; i < dtemp.size(); ++i) {
 		//ofs << "template test: " << dtemp[i] << std::endl;
 	//}
-
+	std::string my_name = name;
+	if (name != "Yemoja" && name != "Shango" && name != "Oshosi" && name != "Ogun" && name != "Oya")
+		my_name = "SilverSoldier";
 	Json::Value root;
 	Json::Reader reader;
 	//std::////cout <<name + "_dialog.json" << std::endl;
-	std::string dialogue_filename = name + "_dialog.json";
+	std::string dialogue_filename = my_name + "_dialog.json";
 
 	std::ifstream file(dialogue_filename);
 	file >> root;
@@ -270,13 +346,37 @@ void DialogueHelper::fill_conversations() {
 	std::ofstream ofs;
 	ofs.open("dialog_template_output.txt", std::ofstream::out | std::ofstream::app);
 	ofs << "size_fill: " << Containers::conv_point_table.size() << std::endl;
-	for (int i = 0; i < 4; i++)
+	for (int i = 0; i < Containers::conv_point_table.size(); i++)
 	{
 		possible_conv_pts.push_back({});
 	}
-	for (int i = 0; i < 4; i++)
+	for (int i = 0; i < Containers::conv_point_table.size(); i++)
 	{
 		possible_reply_pts.push_back({});
+	}
+	for (int i = 0; i < Containers::conv_point_table.size(); i++)
+	{
+		affinity_conv_pts.push_back({});
+	}
+	for (int i = 0; i < Containers::conv_point_table.size(); i++)
+	{
+		affinity_reply_pts.push_back({});
+	}
+	for (int i = 0; i < Containers::conv_point_table.size(); i++)
+	{
+		strength_reply_pts.push_back({});
+	}
+	for (int i = 0; i < Containers::conv_point_table.size(); i++)
+	{
+		strength_conv_pts.push_back({});
+	}
+	for (int i = 0; i < Containers::conv_point_table.size(); i++)
+	{
+		notoriety_conv_pts.push_back({});
+	}
+	for (int i = 0; i < Containers::conv_point_table.size(); i++)
+	{
+		notoriety_reply_pts.push_back({});
 	}
 	possible_reply_pts.push_back({});
 	//ofs.close();
@@ -285,9 +385,34 @@ void DialogueHelper::fill_conversations() {
 			ofs << "conv_point" << std::endl;
 			possible_conv_pts[3].push_back(itor->second->dpoint);//itor->second->dpoint);
 		}
-		else {
+		else if(itor->second->get_name().at(0) == 'r') {
 			ofs << "rep_point" << std::endl;
-			possible_reply_pts[3].push_back(itor->second->dpoint);//itor->second->dpoint);
+			if (itor->second->get_name().at(1) == 'd') {
+				possible_reply_pts[3].push_back(itor->second->dpoint);
+				possible_reply_pts[0].push_back(itor->second->dpoint);
+				possible_reply_pts[1].push_back(itor->second->dpoint);
+				possible_reply_pts[2].push_back(itor->second->dpoint);
+			}
+			else
+			    possible_reply_pts[3].push_back(itor->second->dpoint);//itor->second->dpoint);
+		}
+		else if (itor->second->get_name().at(0) == 's' && itor->second->get_name().at(1) == 'c') {
+			possible_conv_pts[0].push_back(itor->second->dpoint);
+		}
+		else if (itor->second->get_name().at(0) == 's' && itor->second->get_name().at(1) == 'r') {
+			possible_reply_pts[0].push_back(itor->second->dpoint);
+		}
+		else if (itor->second->get_name().at(0) == 'a' && itor->second->get_name().at(1) == 'c') {
+			possible_conv_pts[1].push_back(itor->second->dpoint);
+		}
+		else if (itor->second->get_name().at(0) == 'a' && itor->second->get_name().at(1) == 'r') {
+			possible_reply_pts[1].push_back(itor->second->dpoint);
+		}
+		else if (itor->second->get_name().at(0) == 'n' && itor->second->get_name().at(1) == 'c') {
+			possible_conv_pts[2].push_back(itor->second->dpoint);
+		}
+		else {
+			possible_reply_pts[2].push_back(itor->second->dpoint);
 		}
 		ofs << "dpoint: " << itor->second->dpoint[0] << itor->second->dpoint[1] << std::endl;
 	}

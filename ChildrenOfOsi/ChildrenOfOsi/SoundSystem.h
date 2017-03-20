@@ -36,7 +36,8 @@ public:
 	//void playSoundObject(SoundObject sound);
 	int changeSoundSource(char* from, char* to);
 
-	int playSong(const char* _name);
+	int playSong(std::string _name);
+	int playSound(std::string _name);
 	int playSong1();
 	int playSong2();
 	int playBump();
