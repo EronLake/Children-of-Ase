@@ -73,7 +73,7 @@ int RenderHelper::draw_frame(WorldObj * obj)
 		if (tempObj->getX() > obj->getX() - 1000 && tempObj->getX() < obj->getX() + 1000 && tempObj->getY() > obj->getY() - 800 && tempObj->getY() < obj->getY() + 800) objVec.push_back(tempObj);
 	}
 
-	cout << "SIZE OF THE RENDER OBJVEC IS RENDEREDNEREDNEREDNER *** " << objVec.size() << endl;
+	//cout << "SIZE OF THE RENDER OBJVEC IS RENDEREDNEREDNEREDNER *** " << objVec.size() << endl;
 	gmap->drawMap(camera->getX(), camera->getY());
 	//obj->WorldObj::drawObj(camera->getX(), camera->getY());
 	//obj->WorldObj::animateObj();

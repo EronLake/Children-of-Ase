@@ -161,7 +161,7 @@ int main() {
 
 void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 {
-	Rectangle::tex->setFile("Assets/Sprites/betterborder.png", 1);
+	Rectangle::tex->setFile("Assets/Sprites/blank1.png", 1);
 	
 
 	vector<WorldObj*> recVec;
@@ -175,7 +175,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	ChildrenOfOsi* gameplay_functions = new ChildrenOfOsi(mLog, tBuffer);
 
 	//Player* Alex = new Player(SHANGO, Vector2f(4900.0, 3700.0), 40.0, 40.0);	//init player
-	Player* Alex = new Player(SHANGO, Vector2f(4900.0, 3700.0), 150.0, 150.0);	//init player
+	Player* Alex = new Player(SHANGO, Vector2f(6445.0, 10155.0), 150.0, 150.0);	//init player
 
 	////cout << "Alex's width and height is " << Alex->getWidth() << ", " << Alex->getHeight() << endl;
 
@@ -229,7 +229,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
     Input* iController = new Input(gameplay_functions, Alex, RenM->renderHelper, tBuffer, recVec_ptr, AiController);
 	
 	
-	gameplay_functions->add_hero("Yemoja", 4600, 3600, true);
+	gameplay_functions->add_hero("Yemoja", 6445.0, 10355.0, true);
 	gameplay_functions->add_hero("Oya", 4400, 3600, true);
 	tBuffer->run();
 
@@ -416,9 +416,9 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	objTexture->setFile("Assets/Sprites/YemojasHouse.png",1);
 	Soldier* silverSoldier = new Soldier(4000, 3300, true);
 	Soldier* silverSoldier2 = new Soldier(4300, 3300, true);
-	Soldier* blueSoldier = new Soldier(5000, 5000, true);
-	Soldier* blueSoldier2 = new Soldier(5200, 5200, true);
-	Soldier* blueSoldier3 = new Soldier(5400, 5400, true);
+	Soldier* blueSoldier = new Soldier(5630, 4000, true);
+	Soldier* blueSoldier2 = new Soldier(5830, 4000, true);
+	Soldier* blueSoldier3 = new Soldier(6030, 4000, true);
 	Alex->setHealth(200);
 
 	playerTexture->setFile("Assets/Sprites/ShangoForwardIdle.png",22);
@@ -996,7 +996,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 
 	blueSoldier->melee = Containers::Attack_table[blueSoldier->getKey()];
 	blueSoldier->melee->setDmg(10);
-	blueSoldier->melee->setSpeed(5);
+	blueSoldier->melee->setSpeed(1);
 	blueSoldier->melee->setBaseDir(4);
 	blueSoldier->melee->setCoolDown(100);
 	blueSoldier->melee->setPause(-1);
@@ -1013,7 +1013,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 
 	blueSoldier2->melee = Containers::Attack_table[blueSoldier2->getKey()];
 	blueSoldier2->melee->setDmg(10);
-	blueSoldier2->melee->setSpeed(5);
+	blueSoldier2->melee->setSpeed(1);
 	blueSoldier2->melee->setBaseDir(4);
 	blueSoldier2->melee->setCoolDown(100);
 	blueSoldier2->melee->setPause(-1);
@@ -1030,7 +1030,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 
 	blueSoldier3->melee = Containers::Attack_table[blueSoldier3->getKey()];
 	blueSoldier3->melee->setDmg(10);
-	blueSoldier3->melee->setSpeed(5);
+	blueSoldier3->melee->setSpeed(1);
 	blueSoldier3->melee->setBaseDir(4);
 	blueSoldier3->melee->setCoolDown(100);
 	blueSoldier3->melee->setPause(-1);
@@ -1115,11 +1115,11 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	//staticRec->goal.setYloc(1200);
 	*/
 	recVec.push_back(staticRec);
-	recVec.push_back(silverSoldier);
+	//recVec.push_back(silverSoldier);
 	recVec.push_back(blueSoldier);
 	recVec.push_back(blueSoldier2);
 	recVec.push_back(blueSoldier3);
-	recVec.push_back(silverSoldier2);
+	//recVec.push_back(silverSoldier2);
 	//recVec.push_back(oya);
 	//recVec.push_back(barrel);
 	//recVec.push_back(tree);;
@@ -1303,6 +1303,8 @@ int wait_time = fs * 3; //always wait 3 seconds
 		}
 		state = DialogueController::getState();
 
+		std::cout << "X: " << Alex->getX() << " Y: " << Alex->getY() << std::endl;
+
 	if (Alex->getX() > 5285.83 && Alex->getX() < 7079.86) { //Ogun Desert
 		if (Alex->getY() < 3523.33) {
 			if(current_region == *Desert)
@@ -1421,7 +1423,7 @@ int wait_time = fs * 3; //always wait 3 seconds
 		combatControl->checkParties();
 		combatControl->follow(oya, state);
 		//combatControl->follow(silverSoldier, state);
-		combatControl->follow(staticRec, state);
+		//combatControl->follow(staticRec, state);
 		combatControl->follow(silverSoldier, state);
 		combatControl->follow(silverSoldier2, state);
 		combatControl->fight(silverSoldier, state);
