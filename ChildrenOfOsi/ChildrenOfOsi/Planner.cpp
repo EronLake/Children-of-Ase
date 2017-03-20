@@ -10,6 +10,7 @@ Planner::~Planner() {
 };
 Planner::Planner(Hero* hero) {
 	evaluateHero = hero;
+	give_as_quest = true;
 	//actions = new ActionPool(evaluateHero);
 }
 

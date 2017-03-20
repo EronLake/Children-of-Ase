@@ -44,7 +44,7 @@ public:
 
 	int value_of(Action* action);
 
-	bool give_as_quest = false;
+	bool give_as_quest;
 
 private:
 	Hero* evaluateHero;

@@ -29,9 +29,10 @@ Input::Input(ChildrenOfOsi* _gameplay_functions, WorldObj * _player, RenderHelpe
 	recVec = _recVec;
 	ai = ai_c;
 
-	gameplay_functions->play_sound("Play");
-
-	gameplay_functions->play_sound("Walk");
+	//gameplay_functions->play_sound("Play");
+	//gameplay_functions->createTaskForAudio("PlaySound", "SOUND", "SFX/swing.wav");
+	//gameplay_functions->play_sound("Walk");
+	//gameplay_functions->pause_unpause("Pause", "walk_loop.wav");
 	//gameplay_functions->play_sound("Pause");
 	//gameplay_functions->play_sound("Sixers");
 	player = _player;
@@ -77,7 +78,7 @@ void Input::InputCheck()
 		}
 		if (W)                //Moving up
 		{
-			//gameplay_functions->play_sound("Unpause");
+			//gameplay_functions->pause_unpause("Unpause","walk_loop.wav");
 			
 			if (A) {          //Moving up and left
 				gameplay_functions->move_up_left(player);   
@@ -91,7 +92,7 @@ void Input::InputCheck()
 		}
 		else if (S)          //Moving down
 		{ 
-			//gameplay_functions->play_sound("Unpause");
+			//gameplay_functions->pause_unpause("Unpause", "walk_loop.wav");
 			if (A) {         //Moving down and left
 				gameplay_functions->move_down_left(player);
 			}
@@ -104,16 +105,16 @@ void Input::InputCheck()
 			} 
 		}
 		else if (A) {      //Only moving left
-			//gameplay_functions->play_sound("Unpause");
+			//gameplay_functions->pause_unpause("Unpause", "walk_loop.wav");
 			gameplay_functions->move_left(player);
 		}
 		else if (D)        //Only moving right
 		{
-			//gameplay_functions->play_sound("Unpause");
+			//gameplay_functions->pause_unpause("Unpause", "walk_loop.wav");
 			gameplay_functions->move_right(player);
 		}
 		else {
-			//gameplay_functions->play_sound("Pause");
+			//gameplay_functions->pause_unpause("Pause", "walk_loop.wav");
 		}
 
 		if (!(W || A || S || D))  // No movement keys pressed
@@ -552,14 +553,21 @@ void Input::InputCheck()
 			DialogueController::exitDialogue();
 
 			WorldObj* other = DialogueController::getOther();
+			std::cout << "HERO: " << other->getName() << std::endl;
 			if (other->getType() == 5) {
+				std::cout << "Right type" << std::endl;
 				Hero* them = dynamic_cast<Hero*>(other);
 				Planner* planner = ai->hero_planners[them->name];
-				if (planner->give_as_quest)
+				//DialogueController::prompted_quest = true;
+				if (planner->give_as_quest && !DialogueController::accepted_quest)
 				{
-					//Action* quest = planner->get_current_action();
-
-					prompted_quest = true;
+					DialogueController::quest = planner->get_current_action();
+                    DialogueController::offerQuest_hack_();
+					DialogueController::prompted_quest = true;
+				}
+				else
+				{
+					DialogueController::exitDialogue();
 				}
 			}
 			else
@@ -567,8 +575,8 @@ void Input::InputCheck()
 				DialogueController::exitDialogue();
 			}
 		}
-		if (prompted_quest) {
-
+		if (DialogueController::prompted_quest) {
+			
 		}
 		if (H) {
 			DialogueController::setOptionsIndex(0);

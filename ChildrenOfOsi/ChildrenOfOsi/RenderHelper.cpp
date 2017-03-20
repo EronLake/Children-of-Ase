@@ -2,6 +2,7 @@
 #include "RenderHelper.h"
 #include <algorithm>
 #include <vector> 
+#include "RenderManager.h"
 
 
 RenderHelper::RenderHelper(QuadTree * QT)
@@ -17,7 +18,7 @@ RenderHelper::RenderHelper(QuadTree * QT)
 	convoGui->loadTexture();
 	convoGui->setSprite();
 	gmap = new GameMap();
-	fullVec = tree->retrieve(fullVec, fullBound);
+	//fullVec = tree->retrieve(fullVec, fullBound);
 	//	gmap->loadTexture();
 	//	gmap->setSprite();
 }
@@ -59,7 +60,7 @@ int RenderHelper::draw_frame(WorldObj * obj)
 	initCamera(obj);
 	//pass in the camera bound for rendering instead of the object
 	objVec.clear();
-	//fullVec.clear();
+	fullVec.clear();
 
 	//objVec = tree->retrieve(objVec, camera);
 	if (fullVec.empty()) {
@@ -182,9 +183,11 @@ int RenderHelper::sprite_atk(WorldObj * o)
 			if (obj->getSwingLeft()) {
 				obj->sprite.setTexture(obj->sprite.atk_up);
 				obj->effect.sprite.setTexture(obj->effect.sprite.atk_up);
+				manager->createTaskForAudio("PlaySound", "SOUND", "SFX/swing.wav");
 			}
 			else {
 				obj->sprite.setTexture(obj->sprite.atk2_up);
+				manager->createTaskForAudio("PlaySound", "SOUND", "SFX/swing.wav");
 			}
 			obj->sprite.setIdleTexture(obj->sprite.id_up);
 		}
@@ -192,19 +195,25 @@ int RenderHelper::sprite_atk(WorldObj * o)
 			if (obj->getSwingLeft()) {
 				obj->sprite.setTexture(obj->sprite.atk_down);
 				obj->effect.sprite.setTexture(obj->effect.sprite.atk_down);
+				manager->createTaskForAudio("PlaySound", "SOUND", "SFX/swing.wav");
 			}
 			else {
 				obj->sprite.setTexture(obj->sprite.atk2_down);
+				manager->createTaskForAudio("PlaySound", "SOUND", "SFX/swing.wav");
 			}
 			obj->sprite.setIdleTexture(obj->sprite.id_down);
+
 		}
 		else 	if (check == 6) {
 			if (obj->getSwingLeft()) {
+
 				obj->sprite.setTexture(obj->sprite.atk_right);
 				obj->effect.sprite.setTexture(obj->effect.sprite.atk_right);
+				manager->createTaskForAudio("PlaySound", "SOUND", "SFX/swing.wav");
 			}
 			else {
 				obj->sprite.setTexture(obj->sprite.atk2_right);
+				manager->createTaskForAudio("PlaySound", "SOUND", "SFX/swing.wav");
 			}
 			obj->sprite.setIdleTexture(obj->sprite.id_right);
 		}
@@ -212,9 +221,11 @@ int RenderHelper::sprite_atk(WorldObj * o)
 			if (obj->getSwingLeft()) {
 				obj->sprite.setTexture(obj->sprite.atk_left);
 				obj->effect.sprite.setTexture(obj->effect.sprite.atk_left);
+				manager->createTaskForAudio("PlaySound", "SOUND", "SFX/swing.wav");
 			}
 			else {
 				obj->sprite.setTexture(obj->sprite.atk2_left);
+				manager->createTaskForAudio("PlaySound", "SOUND", "SFX/swing.wav");
 			}
 			obj->sprite.setIdleTexture(obj->sprite.id_left);
 		}

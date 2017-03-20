@@ -137,8 +137,8 @@
 	},
 
 	"Ask_Name": {
-		"1": "What do people call you",
-		"2": "What do you call yourself, friend"
+		"1": "What do people call you ",
+		"2": "What do you call yourself "
 	},
 
 	"Ask_Reason": {
@@ -208,5 +208,88 @@
 		"1": "I see you don't want to cooperate",
 		"2": "I feel like it would be in both our interests if you would tell me",
 		"3": "I must ask you to reconsider answering me"
+	},
+
+	"action_boast": {
+		"1": "I am told that I am beautiful.",
+		"2": "I have kept all of the villagers here safe."
+	},
+
+	"action_intimidate": {
+		"1": "If you stir up trouble in my village, you will regret it."
+	},
+
+	"request_spar": {
+		"1": "I see you don't want to cooperate",
+		"2": "I feel like it would be in both our interests if you would tell me"
+	},
+
+	"response_boast": {
+		"1": "Good for you.",
+		"2": "What an accomplishment."
+	},
+
+	"response_intimidate": {
+		"1": "I will stay out of your way.",
+		"2": "You cannot frighten me."
+	},
+
+	"response_spar": {
+		"1": "I see you don't want to cooperate",
+		"2": "I feel like it would be in both our interests if you would tell me"
+	},
+
+	"action_compliment": {
+		"1": "I can tell you are wise.",
+		"2": "You are looking nice."
+	},
+
+	"action_bribe": {
+		"1": "Please enjoy some of the delicious oasis water."
+	},
+
+	"action_grovel": {
+		"1": "Please, I beseech you. Tread carefully as you explore.",
+		"2": "I beg of you to not harm anyone here."
+	},
+
+	"response_compliment": {
+		"1":  "Thank you for your kind words."
+	},
+
+	"response_bribe": {
+		"1": "Bribery won't work on me."
+	},
+
+	"response_grovel": {
+		"1": "Please don't, I consider us equals."
+	},
+
+	"question_alliance": {
+		"1": "I think you should ally yourself with someone."
+	},
+
+	"response_alliance": {
+		"1": "I do not think that necessary at the moment.",
+		"2": "I will consider your suggestion."
+	},
+
+		"response_experience": {
+		"1": "I have protected this village for years.",
+		"2": "I once prevented a war from breaking out."
+	},
+
+	
+		"question_experience": {
+		"1": "What are some of your past experiences?"
 	}
+  "Question_Denied": {
+    "1": "I see you don't want to cooperate",
+    "2": "I feel like it would be in both our interests if you would tell me",
+    "3": "I must ask you to reconsider answering me"
+  },
+
+  "Give_Quest_Hack": {
+    "1": "Wait, don't leave just yet! There is a rogue squadron of rebels in a galaxy far away. Would you help me protect my people from them"
+  }
 }

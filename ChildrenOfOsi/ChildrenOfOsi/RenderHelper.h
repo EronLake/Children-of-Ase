@@ -7,6 +7,7 @@
 #include "Containers.h"
 #include "CheckClass.h"
 
+class RenderManager;
 class RenderHelper
 {
 public:
@@ -37,6 +38,7 @@ public:
 	//need this for map editor
 	WorldObj* camera;
 	WorldObj* fullBound;
+	RenderManager* manager;
 private:
 	
 	DialogueGui* convoGui;

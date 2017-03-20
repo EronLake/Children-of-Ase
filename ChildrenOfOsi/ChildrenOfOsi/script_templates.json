@@ -27,7 +27,7 @@
 		}
 	},
 
-	"introduction_templates": {
+	"My name is Shango_templates": {
 
 		"1": {
 			"1": "Introduction" ,
@@ -57,7 +57,7 @@
 		}
 	},
 
-	"response_origin_templates": {
+	"I come from a place that you won't find on any map_templates": {
 
 		"1": {
 			"1": "Response_Origin" ,
@@ -65,7 +65,7 @@
 		}
 	},
 
-	"response_reason_templates": {
+	"I am here to form a friendship with this village and its people_templates": {
 
 		"1": {
 			"1": "Friend_Reason" ,
@@ -111,7 +111,7 @@
 		}
 	},
 
-	"question_denied_templates": {
+	"I would rather not say_templates": {
 		"1": {
 			"1": "Question_Denied" ,
 			"2": "." 
@@ -146,17 +146,124 @@
 		}
 	},
 
-	"question_origin_templates": {
+  "question_origin_templates": {
 
 		"1": {
 			"1": "Ask_Origin" ,
 			"2":"Identifier",
 			"3": "?"
-		},
+		}
+	},
 
-		"2": {
-			"1": "Ask_Origin" ,
-			"2": "?" 
+	"action_boast_templates": {
+
+		"1": {
+			"1": "action_boast"
+		}
+	},
+
+	"action_intimidate_templates": {
+
+		"1": {
+			"1": "action_intimidate"
+		}
+	},
+
+	"request_spar_templates": {
+
+		"1": {
+			"1": "request_spar"
+		}
+	},
+
+	"Impressive_templates": {
+
+		"1": {
+			"1": "response_boast"
+		}
+	},
+
+	"You don't scare me_templates": {
+
+		"1": {
+			"1": "response_intimidate"
+		}
+	},
+
+	"response_spar_templates": {
+
+		"1": {
+			"1": "response_spar"
+		}
+	},
+
+	"action_compliment_templates": {
+
+		"1": {
+			"1": "action_compliment"
+		}
+	},
+
+	"action_bribe_templates": {
+
+		"1": {
+			"1": "action_bribe"
+		}
+	},
+
+	"action_grovel_templates": {
+
+		"1": {
+			"1": "action_grovel"
+		}
+	},
+
+	"Aww shucks!_templates": {
+
+		"1": {
+			"1": "response_compliment"
+		}
+	},
+
+	"response_bribe_templates": {
+
+		"1": {
+			"1": "response_bribe"
+		}
+	},
+
+	"response_grovel_templates": {
+
+		"1": {
+			"1": "response_grovel"
+		}
+	},
+
+	"suggest_alliance_templates": {
+
+		"1": {
+			"1": "question_alliance"
+		}
+	},
+
+	"response_alliance_templates": {
+
+		"1": {
+			"1": "response_alliance"
+		}
+	},
+
+		"question_experience_templates": {
+
+		"1": {
+			"1": "question_experience"
+		}
+	},
+		"I once fought off several bandits_templates": {
+
+		"1": {
+			"1": "response_experience"
 		}
 	}
+
 }

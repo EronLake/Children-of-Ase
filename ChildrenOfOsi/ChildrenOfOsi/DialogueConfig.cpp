@@ -30,7 +30,7 @@ void DialogueConfig::import_config(ChildrenOfOsi* gameplay_func, TaskBuffer* tBu
 		//std::ofstream ofs;
 		//ofs.open("dialog_template_output.txt", std::ofstream::out | std::ofstream::app);
 		std::vector<int> personality_mults;
-		bool personality_loop_control = true;
+		//bool personality_loop_control = true;
 		for (auto itor = root["conversation_points"].begin(); itor != root["conversation_points"].end(); ++itor) {
 			/*if (personality_loop_control) {
 				for (auto itor = root["conversation_points"].begin(); itor != root["conversation_points"].end(); ++itor) {
@@ -45,7 +45,7 @@ void DialogueConfig::import_config(ChildrenOfOsi* gameplay_func, TaskBuffer* tBu
 
 				}
 			}*/
-			personality_loop_control = false;
+			//personality_loop_control = false;
 			//ofs << "itor: " << (*itor)["name"].asString() << std::endl;
 			set_conv_point(gameplay_func, tBuffer, (*itor)["topic"].asString(), (*itor)["template"].asString(), (*itor)["name"].asString(), personality_mults);
 		}
@@ -53,7 +53,31 @@ void DialogueConfig::import_config(ChildrenOfOsi* gameplay_func, TaskBuffer* tBu
 		for (auto itor = root["reply_points"].begin(); itor != root["reply_points"].end(); ++itor) {
 			set_conv_point(gameplay_func, tBuffer, (*itor)["topic"].asString(), (*itor)["template"].asString(), (*itor)["name"].asString(), personality_mults);
 		}
-		////std::cout<< "done" << endl;
+		std::cout << "done" << endl;
+		for (auto itor = root["affinity_conversation_points"].begin(); itor != root["affinity_conversation_points"].end(); ++itor) {
+			set_conv_point(gameplay_func, tBuffer, (*itor)["topic"].asString(), (*itor)["template"].asString(), (*itor)["name"].asString(), personality_mults);
+		}
+
+		for (auto itor = root["affinity_reply_points"].begin(); itor != root["affinity_reply_points"].end(); ++itor) {
+			set_conv_point(gameplay_func, tBuffer, (*itor)["topic"].asString(), (*itor)["template"].asString(), (*itor)["name"].asString(), personality_mults);
+		}
+		for (auto itor = root["strength_conversation_points"].begin(); itor != root["strength_conversation_points"].end(); ++itor) {
+			set_conv_point(gameplay_func, tBuffer, (*itor)["topic"].asString(), (*itor)["template"].asString(), (*itor)["name"].asString(), personality_mults);
+		}
+
+		for (auto itor = root["strength_reply_points"].begin(); itor != root["strength_reply_points"].end(); ++itor) {
+			set_conv_point(gameplay_func, tBuffer, (*itor)["topic"].asString(), (*itor)["template"].asString(), (*itor)["name"].asString(), personality_mults);
+		}
+
+	
+
+		for (auto itor = root["notoriety_conversation_points"].begin(); itor != root["notoriety_conversation_points"].end(); ++itor) {
+			set_conv_point(gameplay_func, tBuffer, (*itor)["topic"].asString(), (*itor)["template"].asString(), (*itor)["name"].asString(), personality_mults);
+		}
+
+		for (auto itor = root["notoriety_reply_points"].begin(); itor != root["notoriety_reply_points"].end(); ++itor) {
+			set_conv_point(gameplay_func, tBuffer, (*itor)["topic"].asString(), (*itor)["template"].asString(), (*itor)["name"].asString(), personality_mults);
+		}
 	
 		std::ofstream ofs;
 		ofs.open("dialog_template_output.txt", std::ofstream::out | std::ofstream::app);
