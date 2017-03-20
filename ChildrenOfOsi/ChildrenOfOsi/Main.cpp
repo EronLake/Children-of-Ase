@@ -459,7 +459,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	h_leftRunTex->setFile("Assets/Sprites/YemojaLeftSprint.png", 16);
 	h_rightRunTex->setFile("Assets/Sprites/YemojaRightSprint.png", 16);
 	h_upIdleTex->setFile("Assets/Sprites/YemojaBackIdle.png", 22);
-	h_downIdleTex->setFile("Assets/Sprites/YemojaFrontIdle.png", 22);
+	h_downIdleTex->setFile("Assets/Sprites/YemojaForwardIdle.png", 22);
 	h_leftIdleTex->setFile("Assets/Sprites/YemojaLeftIdle.png", 22);
 	h_rightIdleTex->setFile("Assets/Sprites/YemojaRightIdle.png", 22);
 	YhurtUp->setFile("Assets/Sprites/YemojaBackRecoil.png", 18);
