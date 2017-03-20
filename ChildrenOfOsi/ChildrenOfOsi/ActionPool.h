@@ -6,8 +6,8 @@ class ActionPool
 public:
 	ActionPool(Hero* h);
 	~ActionPool();
-	vector<Action> micro;
-	vector<Action> macro;
+	vector<Action*> micro;
+	vector<Action*> macro;
 	unordered_map<std::string, vector<Action*>> middleLink;
 	vector<Action> getActions(Hero* h, Action macro);
 	void setDoer(Hero* o) { doer = o; };

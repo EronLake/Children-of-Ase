@@ -49,7 +49,7 @@ void CombatController::fight(Soldier* sold1, int state) {
 			}
 		}*/
 		if (sold1->getCurrentEnemy() != nullptr) {
-			if (sold1->getStamina()>60) {
+			if (sold1->getStamina()>120) {
 				sold1->setEvade(false);
 			}
 			else if (sold1->destination == sold1->getLoc() || sold1->destination == Vector2f(0, 0)) {
@@ -61,7 +61,7 @@ void CombatController::fight(Soldier* sold1, int state) {
 				int y2 = rand() % 2;
 				if (x2 == 0)x = -x;
 				if (y2 == 0)y = -y;
-				cout << "GEY Y () RETURNS ******* " << (sold1->getCurrentEnemy()) << endl;
+				//cout << "GEY Y () RETURNS ******* " << (sold1->getCurrentEnemy()) << endl;
 				sold1->destination = Vector2f(sold1->getCurrentEnemy()->getX() + x, sold1->getCurrentEnemy()->getY() + y);
 				sold1->waypoint = Vector2f(sold1->getCurrentEnemy()->getX() + x, sold1->getCurrentEnemy()->getY() + y);
 			}
@@ -286,19 +286,18 @@ void CombatController::checkParties() {
 				if ((*a)->getMode()!=1 && (*a)->getMode() != 2) {
 					for (auto b = partiesB.begin(); b != partiesB.end(); ++b) {
 						if ((*a)->getLeader() != nullptr && (*b)->getLeader() != nullptr) {
-							if (dist_by_center((*a)->getLeader(), (*b)->getLeader()) < 1000) {
-								(*a)->addToCurrentEnemies(*b);
-								(*a)->setMode(1);
-								vector<Soldier*> mema = (*a)->getMembers();
-								for (auto am = mema.begin(); am != mema.end(); ++am) {
-									(*am)->setInCombat(true);
-								}
-								(*b)->addToCurrentEnemies(*a);
-								(*b)->setMode(1);
-								vector<Soldier*> memb = (*b)->getMembers();
-								for (auto bm = memb.begin(); bm != memb.end(); ++bm) {
-									(*bm)->setInCombat(true);
-								}
+						if (dist_by_center((*a)->getLeader(), (*b)->getLeader()) < 1000) {
+							(*a)->addToCurrentEnemies(*b);
+							(*a)->setMode(1);
+							vector<Soldier*> mema = (*a)->getMembers();
+							for (auto am = mema.begin(); am != mema.end(); ++am) {
+								(*am)->setInCombat(true);
+							}
+							(*b)->addToCurrentEnemies(*a);
+							(*b)->setMode(1);
+							vector<Soldier*> memb = (*b)->getMembers();
+							for (auto bm = memb.begin(); bm != memb.end(); ++bm) {
+								(*bm)->setInCombat(true);
 							}
 						}
 					}
@@ -306,4 +305,5 @@ void CombatController::checkParties() {
 			}
 		}
 	}
+}
 }

@@ -13,6 +13,7 @@ public:
 	RenderHelper(QuadTree* QT);
 	~RenderHelper();
 	void initCamera(WorldObj* player);
+	void initCameraFull(WorldObj* player);
 	int init_map(WorldObj* obj);
 	int draw_frame(WorldObj* obj);
 	int sprite_up(WorldObj* obj);
@@ -33,11 +34,13 @@ public:
 	QuadTree* tree;
 	//need this for map editor
 	WorldObj* camera;
+	WorldObj* fullBound;
 private:
 	
 	DialogueGui* convoGui;
 	GameMap* gmap;
 	std::vector<WorldObj*> objVec;
+	std::vector<WorldObj*> fullVec;
 
 	//hold size of camera and map. first is width, second is height
 	Vector2f cameraSize;

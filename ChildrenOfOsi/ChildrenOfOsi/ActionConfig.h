@@ -5,6 +5,7 @@
 #include "MemoryHelper.h"
 #include "Containers.h"
 #include "ChildrenOfOsi.h"
+#include "Actionpool.h"
 
 class ActionConfig
 {
@@ -12,9 +13,11 @@ public:
 	ActionConfig();
 	~ActionConfig();
 
-	static void import_config(vector<WorldObj*>* recVec, ChildrenOfOsi* gameplay_func, TaskBuffer* tBuffer);
-	static void set_action_obj(vector<WorldObj*>* recVec, ChildrenOfOsi* gameplay_func, TaskBuffer* tBuffer, int owner,
-								int receiver, int doer, float utility, float why,std::string name, std::string exe_name);
+	static void import_config(ChildrenOfOsi* gameplay_func, TaskBuffer* tBuffer, Hero* owner,
+								Hero* receiver);
+	static void set_action_obj(ChildrenOfOsi* gameplay_func, TaskBuffer* tBuffer, Hero* owner,
+								Hero* receiver, float utility, float why, std::string type, std::string name, std::string exe_name,
+								int a, int k, int h, int p, int r, int e, int g);
 
 
 };

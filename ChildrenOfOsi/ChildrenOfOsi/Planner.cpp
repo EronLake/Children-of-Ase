@@ -76,7 +76,7 @@ Action Planner::choose_next_step(Action goal, vector<Action> goals) {
 	int best_value = 0;
 
 	vector<std::shared_ptr<Preconditions>> priority_preconds = prioritize_preconditions(goal);
-	vector<Action> possible_steps = evaluateHero->actionPool->getActions(goal.getReceiver(), goal);
+	vector<Action> possible_steps = evaluateHero->actionPool_map[goal.getReceiver()->name]->getActions(goal.getReceiver(), goal);
 
 	for (Action step : possible_steps) {
 		int step_value = heuristic(step, priority_preconds, goals);

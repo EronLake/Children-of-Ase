@@ -9,7 +9,7 @@ class QuadTree
 {
 private:
 	unsigned int maxObj = 10;
-	unsigned int maxLevel = 4;
+	unsigned int maxLevel = 5;
 	unsigned int treelv;
 	WorldObj* bounds;
 	vector<WorldObj*> objs;

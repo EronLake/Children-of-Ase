@@ -174,14 +174,14 @@ void ObjConfig::make_stuff(vector<WorldObj*>* recVec, ChildrenOfOsi* gameplay_fu
 					offsetRight = 180;
 					offsetTop = 350;
 					offsetBot = 95;
-					
+
 					break;
 				case 1:
 					offsetLeft = 210;
 					offsetRight = 200;
 					offsetTop = 420;
 					offsetBot = 50;
-						
+
 					break;
 				case 2:
 					offsetLeft = 205;

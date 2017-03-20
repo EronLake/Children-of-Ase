@@ -5,6 +5,7 @@
 #include "Personality.h"
 #include "Memory.h"
 
+
 class ActionPool;
 class Party;
 
@@ -21,7 +22,7 @@ public:
 	unordered_map<int, Relationship*> rel;
 	Personality* traits;
 	//Planner* planner;
-	ActionPool* actionPool;
+	std::unordered_map<int,ActionPool*> actionPool_map; //int is the receiver name
     int name;
 
 	int mem_counter = 0;
@@ -35,6 +36,8 @@ public:
 	bool incapacitated;
 
 	void addRelationship(int hero);
-	void Hero::setPersonality(int a, int k, int h, int p, int r, int e, int g);
+	void setPersonality(int a, int k, int h, int p, int r, int e, int g);
+	//now in the action config
+	//void init_act_pools(ChildrenOfOsi* gameplay_func, TaskBuffer* tBuffer);
 };
 
