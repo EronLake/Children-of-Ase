@@ -170,7 +170,7 @@ void QuadTree::Insert(WorldObj * myrec)
 		if (nodes[0] == nullptr)
 		{
 			//for (int i = 0; i < 100; i++) {
-			//	std::cout << "THE LEVEL OF THE TREE IS " << treelv << endl;
+			//	////std::cout<< "THE LEVEL OF THE TREE IS " << treelv << endl;
 			//}
 			split();
 		}
@@ -263,6 +263,22 @@ vector<WorldObj*> QuadTree::retrieve(vector<WorldObj*>& listOfObj, WorldObj * my
 	//																//objs.clear();
 	//return listOfObj;
 }
+
+vector<WorldObj*> QuadTree::renderRetrieve(vector<WorldObj*>& listOfObj, WorldObj * myrec)
+{
+	vector<int> indexes = getIndexes(myrec);
+	for (int i = 0; i < indexes.size(); i++) {
+		int index = indexes[i];
+		if (index != -1 && nodes[0] != nullptr) {
+			nodes[index]->retrieve(listOfObj, myrec);
+		}
+		listOfObj.insert(listOfObj.end(), objs.begin(), objs.end());
+	}
+	return listOfObj;
+
+}
+
+
 
 
 

@@ -16,6 +16,7 @@ class WorldObj
   WorldObj():
     ID(idNum++), loc(0, 0), collision(false), type(0)
   {
+	  this->effect=Rectangle ({ 0.0F, 0.0F }, 1.0F, 1.0F );
 	  this->body.push_back({ {0.0F, 0.0F}, 1.0F, 1.0F }); direction = 2;
 	  offset_x1 = 0.0;
 	  offset_x2 = 0.0;
@@ -26,6 +27,7 @@ class WorldObj
   WorldObj(Vector2f p_topLeft, float p_width, float p_height):
     ID(idNum++), loc(p_topLeft), width(p_width), height(p_height), collision(false), type(0)
   {
+	  this->effect = Rectangle(loc, p_width, p_height);
 	  this->body.push_back({ loc, p_width, p_height }); direction = 2;
 	  offset_x1 = 0.0;
 	  offset_x2 = 0.0;
@@ -36,6 +38,7 @@ class WorldObj
   WorldObj(float x, float y, bool col):
     ID(idNum++), loc({x, y}), collision(col), type(0)
   {
+	  this->effect = Rectangle(loc, 1.0F, 1.0F);
 	  this->body.push_back({ loc, 1.0F, 1.0F }); direction = 2;
 	  offset_x1 = 0.0;
 	  offset_x2 = 0.0;
@@ -79,8 +82,8 @@ class WorldObj
   void setRotY(float y) { this->rotation.setYloc(y); };
   void shiftRotX(float dist) { this->rotation.shiftXloc(dist); };
   void shiftRotY(float dist) { this->rotation.shiftYloc(dist); };
-  void setWidth(float w) { this->body[0].setWidth(this->width = w); };
-  void setHeight(float h) { this->body[0].setHeight(this->height = h); };
+  void setWidth(float w) { this->body[0].setWidth(this->width = w); this->effect.setWidth(w); };
+  void setHeight(float h) { this->body[0].setHeight(this->height = h); this->effect.setHeight(h);};
 
   // Higher-level setter methods
   void setID(int i) { ID=i; };
@@ -105,6 +108,7 @@ class WorldObj
 
   Sprite sprite;
   vector<Rectangle> body;
+  Rectangle effect;
   float offset_x1 = 0.0;
   float offset_x2 = 0.0;
   float offset_y1 = 0.0;

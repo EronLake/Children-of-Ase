@@ -81,3 +81,17 @@ void Hero::kill()
 	this->getParty()->removeSoldier(this);
 	this->setParty(NULL);
 }
+/*
+void Hero::init_act_pools(ChildrenOfOsi* gameplay_func, TaskBuffer* tBuffer)
+{
+	//iterates through every player
+	for (auto itr = Containers::hero_table.begin(); itr != Containers::hero_table.end(); itr++)
+	{
+		if (itr->second->name != name)
+		{
+			ActionConfig::import_config(gameplay_func, tBuffer, this, itr->second);
+		}
+	}
+	return;
+}
+*/

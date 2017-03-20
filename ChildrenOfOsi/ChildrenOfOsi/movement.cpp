@@ -26,7 +26,7 @@ int Movement::move_up(WorldObj* obj) {
 	obj->setDirection(8);
 	objVec.clear();
 	objVec = tree->retrieve(objVec, obj);
-	////cout << "SIZE OF OBJVEC IS ************************ " << objVec.size() << endl;
+	cout << "SIZE OF OBJVEC IS ************************ " << objVec.size() << endl;
 	int my_type = obj->getType();
 	NPC* npc;
 	if (my_type >= 2) {
@@ -388,6 +388,7 @@ int Movement::attack(WorldObj* obj) {
 						if (collision(a->second, liv) && !a->second->beenHit(liv) && (a->second->getDuration()!=0)) {
 							//std::////cout << "Player hit " << liv->getName() << std::endl;
 							a->second->Hit(liv);
+							cout << "THE TARGET'S HP IS NOW ******** " << liv->getHealth() << endl;
 							//liv has no hp
 							//if (liv->getHealth() <= 0) {
 							//	cout << "THE SOLDIER HAS JUST DIED!!!!!!!!!!!!!!!!!!!!!*************************" << endl;

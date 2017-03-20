@@ -8,16 +8,18 @@ RenderHelper::RenderHelper(QuadTree * QT)
 {
 	tree = QT;
 	camera = new WorldObj(0, 0, false);
+	fullBound = new WorldObj(Vector2f(0, 0), 20000, 20000);
 	cameraSize.setXloc(960);
 	cameraSize.setYloc(540);
-	mapSize.setXloc(10000);
-	mapSize.setYloc(10000);
+	mapSize.setXloc(20000);	//10000
+	mapSize.setYloc(20000);	//10000
 	convoGui = new DialogueGui();
 	convoGui->loadTexture();
 	convoGui->setSprite();
 	gmap = new GameMap();
-//	gmap->loadTexture();
-//	gmap->setSprite();
+	fullVec = tree->retrieve(fullVec, fullBound);
+	//	gmap->loadTexture();
+	//	gmap->setSprite();
 }
 
 RenderHelper::~RenderHelper()
@@ -27,13 +29,18 @@ RenderHelper::~RenderHelper()
 void RenderHelper::initCamera(WorldObj * player)
 {
 	//if player is within the four corners of the screen, camera is just the four corner of the screen
-	float camX = player->getX() - (cameraSize.getXloc() / 2) + (player->getWidth() / 2);
+	float camX = player->getX() - (cameraSize.getXloc() / 2) - (player->getWidth() / 2);
 	float camY = player->getY() - (cameraSize.getYloc() / 2) + (player->getHeight() / 2);
 	camera->setLoc(Vector2f(camX, camY));
-	camera->setWidth(cameraSize.getXloc());
-	camera->setHeight(cameraSize.getYloc());
+	camera->setWidth(cameraSize.getXloc() + 700);
+	camera->setHeight(cameraSize.getYloc() + 300);
 	//////cout << "Camera has coord " << camera->getX() << ", " << camera->getY() << " and width and height of " << camera->getWidth() << ", " << camera->getHeight() << endl;
 
+
+}
+
+void RenderHelper::initCameraFull(WorldObj * player)
+{
 
 }
 
@@ -52,12 +59,26 @@ int RenderHelper::draw_frame(WorldObj * obj)
 	initCamera(obj);
 	//pass in the camera bound for rendering instead of the object
 	objVec.clear();
-	objVec = tree->retrieve(objVec, camera);
+	//fullVec.clear();
+
+	//objVec = tree->retrieve(objVec, camera);
+	if (fullVec.empty()) {
+		fullVec = tree->retrieve(fullVec, fullBound);
+	}
+
+
+	for (int i = 0; i < fullVec.size(); i++) {
+		WorldObj* tempObj = fullVec[i];
+		if (tempObj->getX() > obj->getX() - 1000 && tempObj->getX() < obj->getX() + 1000 && tempObj->getY() > obj->getY() - 800 && tempObj->getY() < obj->getY() + 800) objVec.push_back(tempObj);
+	}
+
+	cout << "SIZE OF THE RENDER OBJVEC IS RENDEREDNEREDNEREDNER *** " << objVec.size() << endl;
 	gmap->drawMap(camera->getX(), camera->getY());
 	//obj->WorldObj::drawObj(camera->getX(), camera->getY());
 	//obj->WorldObj::animateObj();
 	objVec.push_back(obj);
-	for (auto i = Containers::Attack_table.begin(); i != Containers::Attack_table.end();++i) {
+	//cout << "SIZE OF ATTACK TABLE IS " << Containers::Attack_table.size() << endl;
+	for (auto i = Containers::Attack_table.begin(); i != Containers::Attack_table.end(); ++i) {
 		if (i->second->getPause() == 0) {
 			objVec.push_back(i->second);
 		}
@@ -66,15 +87,17 @@ int RenderHelper::draw_frame(WorldObj * obj)
 		osi::GameWindow::drawSprite(obj->body[i].getX()-camera->getX(), obj->body[i].getY()-camera->getY(), obj->body[i].getWidth(), obj->body[i].getHeight(), obj->getSprite());
 	}*/
 	sortVec();
-	//cout << "******************************************SIZE OF THE OBJVEC TO RENDER IS " << objVec.size() << endl;
+	////cout << "******************************************SIZE OF THE OBJVEC TO RENDER IS " << objVec.size() << endl;
 	for (int i = 0; i < objVec.size(); i++) {
 		LOG("BEFORE DRAWING**");
 		//////cout << objVec[i]->getX() - camera->getX() << endl;
 		//LOG(objVec[i]->getX(), ", ", objVec[i]->getY());
 		objVec[i]->WorldObj::drawObj(camera->getX(), camera->getY());
 		//for (int j = 0; j < objVec[i]->body.size(); j++) {
-			objVec[i]->body[0].drawObj(camera->getX(), camera->getY());
+		objVec[i]->body[0].drawObj(camera->getX(), camera->getY());
+		objVec[i]->effect.drawObj(camera->getX(), camera->getY());
 		//}
+		objVec[i]->effect.sprite.animate();
 		objVec[i]->WorldObj::animateObj();
 	}
 	//convoGui->drawGui();
@@ -158,7 +181,8 @@ int RenderHelper::sprite_atk(WorldObj * o)
 		if (check == 8) {
 			if (obj->getSwingLeft()) {
 				obj->sprite.setTexture(obj->sprite.atk_up);
-			}else {
+			}
+			else {
 				obj->sprite.setTexture(obj->sprite.atk2_up);
 			}
 			obj->sprite.setIdleTexture(obj->sprite.id_up);
@@ -195,32 +219,93 @@ int RenderHelper::sprite_atk(WorldObj * o)
 	return 0;
 }
 
+int RenderHelper::sprite_spin_atk(WorldObj * o)
+{
+	if (o->getType() > 2) {
+		Soldier* obj = CheckClass::isSoldier(o);
+		int check = obj->getDirection();
+		if (check == 8) {
+			obj->sprite.setTexture(obj->sprite.spin_up);
+			obj->sprite.setIdleTexture(obj->sprite.id_up);
+		}
+		else 	if (check == 2) {
+			obj->sprite.setTexture(obj->sprite.spin_down);
+			obj->sprite.setIdleTexture(obj->sprite.id_down);
+		}
+		else 	if (check == 6) {
+			obj->sprite.setTexture(obj->sprite.spin_right);
+			obj->sprite.setIdleTexture(obj->sprite.id_right);
+		}
+		else	if (check == 4) {
+			obj->sprite.setTexture(obj->sprite.spin_left);
+			obj->sprite.setIdleTexture(obj->sprite.id_left);
+		}
+		obj->sprite.lockAnimation();
+	}
+	return 0;
+}
+
+int RenderHelper::sprite_fire_atk(WorldObj * o)
+{
+	if (o->getType() > 2) {
+		Soldier* obj = CheckClass::isSoldier(o);
+		int check = obj->getDirection();
+		if (check == 8) {
+			obj->sprite.setTexture(obj->sprite.breathe_up);
+			obj->sprite.setIdleTexture(obj->sprite.id_up);
+		}
+		else 	if (check == 2) {
+			obj->sprite.setTexture(obj->sprite.breathe_down);
+			obj->sprite.setIdleTexture(obj->sprite.id_down);
+		}
+		else 	if (check == 6) {
+			obj->sprite.setTexture(obj->sprite.breathe_right);
+			obj->sprite.setIdleTexture(obj->sprite.id_right);
+		}
+		else	if (check == 4) {
+			obj->sprite.setTexture(obj->sprite.breathe_left);
+			obj->sprite.setIdleTexture(obj->sprite.id_left);
+		}
+		obj->sprite.lockAnimation();
+	}
+	return 0;
+}
+
 int RenderHelper::sprite_hurt(WorldObj * obj)
 {
 	int check = obj->getDirection();
+	obj->sprite.unlockAnimation();
+	obj->sprite.setTexture(obj->sprite.id_up);
+	obj->effect.sprite.unlockAnimation();
+	obj->effect.sprite.setTexture(obj->effect.sprite.id_up);
 	if (check == 8) {
 		obj->sprite.setTexture(obj->sprite.hurt_up);
 		obj->sprite.setIdleTexture(obj->sprite.id_up);
+		obj->effect.sprite.setTexture(obj->effect.sprite.hurt_up);
 	}
 	else 	if (check == 2) {
 		obj->sprite.setTexture(obj->sprite.hurt_down);
 		obj->sprite.setIdleTexture(obj->sprite.id_down);
+		obj->effect.sprite.setTexture(obj->effect.sprite.hurt_down);
 	}
 	else 	if (check == 6) {
 		obj->sprite.setTexture(obj->sprite.hurt_right);
 		obj->sprite.setIdleTexture(obj->sprite.id_right);
+		obj->effect.sprite.setTexture(obj->effect.sprite.hurt_right);
 	}
 	else	if (check == 4) {
 		obj->sprite.setTexture(obj->sprite.hurt_left);
 		obj->sprite.setIdleTexture(obj->sprite.id_left);
+		obj->effect.sprite.setTexture(obj->effect.sprite.hurt_left);
 	}
 	obj->sprite.lockAnimation();
+	obj->effect.sprite.lockAnimation();
 	return 0;
 }
 
 int RenderHelper::sprite_idle(WorldObj* obj) {
 	//if (!obj->sprite.isIdle()) {
-		obj->sprite.setTexture((obj->sprite.getIdleTexture()));
+	obj->sprite.setTexture((obj->sprite.getIdleTexture()));
 	//}
 	return 0;
 }
@@ -232,7 +317,7 @@ int RenderHelper::sprite_update(WorldObj * obj)
 
 void RenderHelper::sortVec()
 {
-	sort(objVec.begin(),objVec.end(), [](WorldObj* a, WorldObj* b){
+	sort(objVec.begin(), objVec.end(), [](WorldObj* a, WorldObj* b) {
 		return ((a->body[0].getY() + a->body[0].getHeight()) < (b->body[0].getY() + b->body[0].getHeight()));
 	});
 }

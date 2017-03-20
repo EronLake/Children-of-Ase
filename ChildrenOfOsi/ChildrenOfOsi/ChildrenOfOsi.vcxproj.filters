@@ -149,6 +149,9 @@
     <ClCompile Include="Memory.cpp">
       <Filter>AI</Filter>
     </ClCompile>
+    <ClCompile Include="Planner.cpp">
+      <Filter>AI</Filter>
+    </ClCompile>
     <ClCompile Include="Personality.cpp">
       <Filter>AI</Filter>
     </ClCompile>
@@ -201,16 +204,20 @@
       <Filter>AI\Actions</Filter>
     </ClCompile>
     <ClCompile Include="ConversationPoint.cpp" />
+    <ClCompile Include="DialogueConfig.cpp" />
+    <ClCompile Include="PartyManager.cpp" />
     <ClCompile Include="Tag.cpp" />
-    <ClCompile Include="Planner.cpp">
-      <Filter>AI\Actions</Filter>
-    </ClCompile>
+    <ClCompile Include="TagConfig.cpp" />
     <ClCompile Include="ActionConfig.cpp">
       <Filter>AI\Actions</Filter>
     </ClCompile>
     <ClCompile Include="DialogueConfig.cpp" />
     <ClCompile Include="PartyManager.cpp" />
     <ClCompile Include="TagConfig.cpp" />
+    <ClCompile Include="Tag.cpp" />
+    <ClCompile Include="Region.cpp">
+      <Filter>Audio</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AIHelper.h">
@@ -376,6 +383,9 @@
     <ClInclude Include="Memory.h">
       <Filter>AI</Filter>
     </ClInclude>
+    <ClInclude Include="Planner.h">
+      <Filter>AI</Filter>
+    </ClInclude>
     <ClInclude Include="Personality.h">
       <Filter>AI</Filter>
     </ClInclude>
@@ -431,12 +441,16 @@
       <Filter>AI\Actions</Filter>
     </ClInclude>
     <ClInclude Include="ConversationPoint.h" />
+    <ClInclude Include="DialogueConfig.h" />
+    <ClInclude Include="PartyManager.h" />
     <ClInclude Include="Tag.h" />
-    <ClInclude Include="Planner.h">
-      <Filter>AI\Actions</Filter>
-    </ClInclude>
+    <ClInclude Include="TagConfig.h" />
     <ClInclude Include="ActionConfig.h">
       <Filter>AI\Actions</Filter>
+    </ClInclude>
+    <ClInclude Include="Tag.h" />
+    <ClInclude Include="Region.h">
+      <Filter>Audio</Filter>
     </ClInclude>
     <ClInclude Include="DialogueConfig.h" />
     <ClInclude Include="PartyManager.h" />
@@ -464,9 +478,7 @@
     <Text Include="ReadMe.txt">
       <Filter>Misc</Filter>
     </Text>
-    <Text Include="dialog_template_output.txt">
-      <Filter>Dialogue</Filter>
-    </Text>
+    <Text Include="dialog_template_output.txt" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Task Manager">
@@ -546,6 +558,9 @@
     <None Include="test.json">
       <Filter>Game Objects</Filter>
     </None>
+    <None Include="Dialogue_config.json" />
+    <None Include="oasis_config.json" />
+    <None Include="Tag_config.json" />
     <None Include="action_config.json">
       <Filter>AI\Actions</Filter>
     </None>

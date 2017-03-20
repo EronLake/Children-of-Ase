@@ -1,15 +1,16 @@
 {
-   "OasisHouse2" : {
-      "bodyx1" : 0.0,
-      "bodyx2" : 0.0,
-      "bodyy1" : 0.0,
-      "bodyy2" : 0.0,
-      "frame_num" : 1,
-      "hight" : 500.0,
-      "name" : "OasisHouse2",
-      "tex_file" : "Oasis_House",
-      "width" : 750.0,
-      "x" : 87.96243286132813,
-      "y" : 67.14375305175781
+   "train" : {
+	  "name" : "train",
+	  "type": "micro",
+      "utility" : 0.0,
+      "why" : 0.0,
+      "exe_name" : "execute_train",
+      "aggression" : 0,
+      "kindness" : 0,
+      "honor" : 0,
+      "pride" : 0,
+      "recklessness" :0,
+      "extroversion" : 0,
+      "greed" : 0
    }
 }
