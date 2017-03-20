@@ -181,6 +181,7 @@ int RenderHelper::sprite_atk(WorldObj * o)
 		if (check == 8) {
 			if (obj->getSwingLeft()) {
 				obj->sprite.setTexture(obj->sprite.atk_up);
+				obj->effect.sprite.setTexture(obj->effect.sprite.atk_up);
 			}
 			else {
 				obj->sprite.setTexture(obj->sprite.atk2_up);
@@ -190,6 +191,7 @@ int RenderHelper::sprite_atk(WorldObj * o)
 		else 	if (check == 2) {
 			if (obj->getSwingLeft()) {
 				obj->sprite.setTexture(obj->sprite.atk_down);
+				obj->effect.sprite.setTexture(obj->effect.sprite.atk_down);
 			}
 			else {
 				obj->sprite.setTexture(obj->sprite.atk2_down);
@@ -199,6 +201,7 @@ int RenderHelper::sprite_atk(WorldObj * o)
 		else 	if (check == 6) {
 			if (obj->getSwingLeft()) {
 				obj->sprite.setTexture(obj->sprite.atk_right);
+				obj->effect.sprite.setTexture(obj->effect.sprite.atk_right);
 			}
 			else {
 				obj->sprite.setTexture(obj->sprite.atk2_right);
@@ -208,6 +211,7 @@ int RenderHelper::sprite_atk(WorldObj * o)
 		else	if (check == 4) {
 			if (obj->getSwingLeft()) {
 				obj->sprite.setTexture(obj->sprite.atk_left);
+				obj->effect.sprite.setTexture(obj->effect.sprite.atk_left);
 			}
 			else {
 				obj->sprite.setTexture(obj->sprite.atk2_left);
@@ -215,6 +219,7 @@ int RenderHelper::sprite_atk(WorldObj * o)
 			obj->sprite.setIdleTexture(obj->sprite.id_left);
 		}
 		obj->sprite.lockAnimation();
+		obj->effect.sprite.lockAnimation();
 	}
 	return 0;
 }

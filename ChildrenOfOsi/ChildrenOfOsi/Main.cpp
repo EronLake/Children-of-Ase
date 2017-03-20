@@ -72,6 +72,10 @@ Texture* Rectangle::texUP = new Texture();
 Texture* Rectangle::texDOWN = new Texture();
 Texture* Rectangle::texLEFT = new Texture();
 Texture* Rectangle::texRIGHT = new Texture();
+Texture* Rectangle::texAtkUP = new Texture();
+Texture* Rectangle::texAtkDOWN = new Texture();
+Texture* Rectangle::texAtkLEFT = new Texture();
+Texture* Rectangle::texAtkRIGHT = new Texture();
 //void testQuadTree();
 //bool checkCollision(WorldObj *recA, WorldObj *recB);	//given two bounding boxes, check if they collide
 //bool coordOverlap(int value, int min, int max) { return (value >= min) && (value <= max); }		//helper func for checkCollision
@@ -509,6 +513,11 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	Rectangle::texLEFT->setFile("Assets/Sprites/RightRecoilSpark.png", 18);
 	Rectangle::texUP->setFile("Assets/Sprites/ForwardRecoilSpark.png", 18);
 	Rectangle::texDOWN->setFile("Assets/Sprites/BackRecoilSpark.png", 18);
+
+	Rectangle::texAtkRIGHT->setFile("Assets/Sprites/LeftRecoilSpark.png", 18);
+	Rectangle::texAtkLEFT->setFile("Assets/Sprites/RightRecoilSpark.png", 18);
+	Rectangle::texAtkUP->setFile("Assets/Sprites/ForwardRecoilSpark.png", 18);
+	Rectangle::texAtkDOWN->setFile("Assets/Sprites/BackRecoilSpark.png", 18);
 	/* SET UP SPRITE CHANGE, MIGHT NEED A SINGLETON?*/
 
 
