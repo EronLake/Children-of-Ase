@@ -8,7 +8,6 @@ class DialogueGui
 {
 
 private:
-	//kinda ugly...
 	Rectangle* background;
 	Rectangle* swordIcon;
 	Rectangle* heartIcon;

@@ -39,7 +39,6 @@ DialogueGui::~DialogueGui()
 void DialogueGui::loadTexture()
 {
 	//setFile, load, setFrame
-	// read access violation here, some sort of nullptr
 	backgroundTex->setFile("DGBackground.png",1);
 	swordTex->setFile("DGSword.png",1);
 	swordGlowTex->setFile("DGGlowSword.png", 1);
@@ -118,7 +117,7 @@ void DialogueGui::drawGui()
 	osi::GameWindow::drawSprite(responseBox1->getX(), responseBox1->getY(), responseBox1->getWidth(), responseBox1->getHeight(), responseBox1->sprite);
 //	osi::GameWindow::drawSprite(responseBox2->getX(), responseBox2->getY(), responseBox2->getWidth(), responseBox2->getHeight(), responseBox2->sprite);
 	std::string message = DialogueController::getMessage();
-	//	//std::////cout << "Message: " << m << std::endl;
+
 	osi::GameWindow::createText(message, 266, 303, 600, 80, black);
 	std::vector<std::string> options;
 	if (DialogueController::getState() == 1) {
@@ -130,7 +129,7 @@ void DialogueGui::drawGui()
 			else {
 				osi::GameWindow::createText(options[i], 292, 390 + (18 * i), 544, 45, black);
 			}
-			//	//std::////cout << i << ": " << show[i] << std::endl;
+
 		}
 	}
 	if (DialogueController::getState() == 2) {
@@ -142,7 +141,7 @@ void DialogueGui::drawGui()
 			else {
 				osi::GameWindow::createText(options[i], 292, 390 + (18 * i), 544, 45, black);
 			}
-			//	//std::////cout << i<<": "<<show[i] << std::endl;
+
 		}
 	}
 }
