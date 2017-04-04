@@ -2912,19 +2912,6 @@
       "x" : 150.2760162353516,
       "y" : 151.3238983154297
    },
-   "Jungle_Element_Num_99" : {
-      "bodyx1" : 180.0,
-      "bodyx2" : 180.0,
-      "bodyy1" : 350.0,
-      "bodyy2" : 95.0,
-      "frame_num" : 1,
-      "hight" : 500.0,
-      "name" : "Jungle_Element_Num_99",
-      "tex_file" : "Jungle_Tree_1",
-      "width" : 500.0,
-      "x" : 166.8093566894531,
-      "y" : 159.3342132568359
-   },
    "Jungle_Left_Enter" : {
       "bodyx1" : 0.0,
       "bodyx2" : 0.0,
