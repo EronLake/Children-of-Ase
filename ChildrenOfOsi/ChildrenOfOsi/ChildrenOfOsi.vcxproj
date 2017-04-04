@@ -192,6 +192,7 @@
     <ClInclude Include="Region.h" />
     <ClInclude Include="Tag.h" />
     <ClInclude Include="TagConfig.h" />
+    <ClInclude Include="ThreadManager.h" />
     <ClInclude Include="Village.h" />
     <ClInclude Include="GameMap.h" />
     <ClInclude Include="GameWindow.h" />
@@ -275,6 +276,7 @@
     <ClCompile Include="Region.cpp" />
     <ClCompile Include="Tag.cpp" />
     <ClCompile Include="TagConfig.cpp" />
+    <ClCompile Include="ThreadManager.cpp" />
     <ClCompile Include="Village.cpp" />
     <ClCompile Include="GameMap.cpp" />
     <ClCompile Include="GameWindow.cpp" />
