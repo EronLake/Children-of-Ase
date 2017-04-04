@@ -123,26 +123,7 @@ vector<int> QuadTree::getIndexes(WorldObj * myrec)
 	}
 
 	return indexes;
-//
-	//bool fitTop = (myrec->getY() < horiMdPt && (myrec->getY() + myrec->getHeight()) < horiMdPt);
-	//bool fitBot = (myrec->getY() > horiMdPt);
-	//if (myrec->getX() < vertMdPt && (myrec->getX() + myrec->getWidth()) < vertMdPt) {		//fit in the left quadrants
-	//	if (fitTop) {
-	//		return 1;
-	//	}
-	//	else if (fitBot) {
-	//		return 2;
-	//	}
-	//}
-	//else if (myrec->getX() > vertMdPt) {	//fit in the right quadrants
-	//	if (fitTop) {
-	//		return 0;
-	//	}
-	//	else if (fitBot) {
-	//		return 3;
-	//	}
-	//}
-	//return -1;
+
 }
 
 
@@ -169,9 +150,10 @@ void QuadTree::Insert(WorldObj * myrec)
 	{
 		if (nodes[0] == nullptr)
 		{
-			//for (int i = 0; i < 100; i++) {
-			//	////std::cout<< "THE LEVEL OF THE TREE IS " << treelv << endl;
-			//}
+			/*		for (int i = 0; i < 100; i++) {
+					std::cout<< "THE LEVEL OF THE TREE IS " << treelv << endl;
+					cout << "GOING TO SPLIT!!!!!****** " << endl;
+					}*/
 			split();
 		}
 
@@ -195,53 +177,9 @@ void QuadTree::Insert(WorldObj * myrec)
 				}
 			}
 		}
-
-
-		/*for (auto it = objs.begin(); it != objs.end();) {
-			vector<int> indexes = getIndexes(*it);
-			for (int i = 0; i < indexes.size(); i++)
-			{
-				int index = indexes[i];
-				if (index != -1)
-				{
-					nodes[index]->Insert(*it);
-					objs.erase(it);
-				}
-				else
-				{
-					it++;
-				}
-			}
-		}*/
 	}
 }
 
-
-
-//	if (nodes[0] != nullptr) {			//first determine which node to add obj to
-//		int index = getIndexes(myrec);
-//		if (index != -1) {
-//			nodes[index]->Insert(myrec);
-//			return;
-//		}
-//	}
-//	objs.push_back(myrec);
-//	if (objs.size() > maxObj && treelv < maxLevel) {	//if the # of obj in node exceeds maxObj and if we can have more trees
-//		if (nodes[0] == nullptr) {
-//			split();
-//		}
-//		for (auto it = objs.begin(); it != objs.end();) {					//after split, add all valid obj to child node if possible, else add to parent node
-//			int index = getIndexes(*it);
-//			if (index != -1) {
-//				nodes[index]->Insert(*it);		//insert obj into child node, erase from parent list
-//				objs.erase(it);
-//			}
-//			else {
-//				it++;
-//			}
-//		}
-//	}
-//}
 
 
 vector<WorldObj*> QuadTree::retrieve(vector<WorldObj*>& listOfObj, WorldObj * myrec)

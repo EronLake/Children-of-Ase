@@ -26,6 +26,7 @@
 #include <sstream>
 #include <unordered_map>
 #include <queue>
+#include <mutex>
 
 #define SHANGO 1
 #define YEMOJA 2
