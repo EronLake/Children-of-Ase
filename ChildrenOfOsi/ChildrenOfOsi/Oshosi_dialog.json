@@ -12,27 +12,44 @@
 		"2": "I won't be so quick to speak with you again next time if you don't get stronger.",
 		"3": "Goodbye young warrior.",
 		"4": "I look forward to our next encounter.",
-		"5": "We should train again sometime my good friend. Until then."
+		"5": "We should train together sometime my good friend. Until then."
 	},
 
-	"Ask_About_Origin": {
-		"3": "I am a hero of the mountain village."
+	"Ask_Origin": {
+		"3": "Where are you from?"
+	},
+
+	"Response_Origin": {
+		"3": "I once lived in unmarked territory, but now I live on the mighty mountains."
 	},
 
 	"Ask_Name": {
+		"3": "Do you have a name?",
+		"4": "You seem talented! What's your name?"
+	},
+
+	"Response_Name": {
 		"3": "I am Oshosi.",
-		"4": "They call me Oshosi. I am a fearless hunter with an eye for talent and I can tell you aren't lacking in that area."
+		"4": "They call me Oshosi, the fearless hunter with an eye for talent. My eyes tell me you are a capable guy."
 	},
 
 	"Ask_About_Yemoja": {
+		"3": "What do you know of Yemoja?"
+	},
+
+	"Response_About_Yemoja": {
 		"1": "She is the weakling hero of the oasis village that only knows how to defend.",
 		"2": "She is so naive, but she has kept the oasis village safe.",
-		"3": "She is so naive, but she has kept the oasis village safe.",
+		"3": "She is an important person in the oasis village.",
 		"4": "Yemoja is the kind and caring hero of the oasis village.",
 		"5": "Yemoja is the beautiful oasis village hero whose defense is boundless."
 	},
 
 	"Ask_About_Ogun": {
+		"3": "Do you know anything about Ogun?"
+	},
+
+	"Response_About_Ogun": {
 		"1": "That man is as arrogant and ruthless as they come.",
 		"2": "His ego far outweighs his strength.",
 		"3": "He is the hero of the iron fortress to the north.",
@@ -41,62 +58,100 @@
 	},
 
 	"Ask_About_Oya": {
-		"1": "She knows nothing of the world and her jungle home ",
+		"3": "Oya. You know her?"
+	},
+
+	"Response_About_Oya": {
+		"1": "She knows nothing of the world since she stays cooped up in her unkempt jungle.",
 		"2": "She feins wisdom, but she is actually foolish.",
-		"3":
-		"4":
-		"5":
+		"3": "She is the protector of the jungle dwellers.",
+		"4": "She is a great asset to the jungle village because of her vast wisdom.",
+		"5": "She has valuable insights for almost everything that has occured in the regions and she is a force to be reckoned with.",
 	},
 
 	"Ask_About_Memories": {
-		"1": "Hello",
-		"2": "Greetings",
-		"3":
-		"4":
-		"5":
+		"1": "Placeholder",
+		"2": "Placeholder",
+		"3": "Placeholder",
+		"4": "Placeholder",
+		"5": "Placeholder"
+	},
+
+	"Response_About_Memories": {
+		"1": "Placeholder",
+		"2": "Placeholder",
+		"3": "Placeholder",
+		"4": "Placeholder",
+		"5": "Placeholder"
 	},
 
 	"Ask_About_Specific_Events": {
-		"1": "Hello",
-		"2": "Greetings",
-		"3":
-		"4":
-		"5":
+		"1": "Placeholder",
+		"2": "Placeholder",
+		"3": "Placeholder",
+		"4": "Placeholder",
+		"5": "Placeholder"
 	},
 
-	"Ask_About_Possible_Actions": {
-		"1": "Hello",
-		"2": "Greetings",
-		"3":
-		"4":
-		"5":
+	"Response_About_Specific_Events": {
+		"1": "Placeholder",
+		"2": "Placeholder",
+		"3": "Placeholder",
+		"4": "Placeholder",
+		"5": "Placeholder"
 	},
 
 	"Ask_About_Relationships": {
-		"1": "Hello",
-		"2": "Greetings",
-		"3":
-		"4":
-		"5":
+		"1": "Placeholder",
+		"2": "Placeholder",
+		"3": "Placeholder",
+		"4": "Placeholder",
+		"5": "Placeholder"
+	},
+
+	"Response_About_Relationships": {
+		"1": "Placeholder",
+		"2": "Placeholder",
+		"3": "Placeholder",
+		"4": "Placeholder",
+		"5": "Placeholder"
 	},
 
 	"Ask_To_Form_Alliance": {
-		"1": "Hello",
-		"2": "Greetings",
-		"3":
-		"4":
-		"5":
+		"2": "I hate to ask, but would you form an alliance with my village and I?",
+		"3": "How about forming an alliance with my village and I?",
+		"4": "You seem like you would be a strong ally. Want to team up?",
+		"5": "I have heard much of your strength and bravery. I would be honored if you would allow me to join your ranks."
+	},
+
+	"Response_To_Form_Alliance": {
+		"2": "I have no interest in teaming up with a greenhorn.",
+		"3": "I will consider your offer, but I cannot say for now.",
+		"4": "I would be glad to join you.",
+		"5": "Thought you would never ask. With our combined strength, we will be unstoppable!"
 	},
 
     "Move_To_Conquer": {
-		"1": "Hello",
-		"2": "Greetings",
+		"3": "You should try to conquer a surrounding village.",
+		"4": "Try your hand at conquering someone. It shouldn't be too hard for you.",
+		"5": "With your strength, you could conquer anyone! Go for it!"
+	},
+
+	"Move_To_Conquer_Response": {
+		"1": "I don't care what you think! Not gonna happen!",
+		"2": "I won't do it. I don't trust your advice.",
+		"3": "Hmm. I will think about it.",
+		"4": "You think so!? Well, I guess its worth a shot.",
+		"5": "Gotcha! I will take your advice to heart and get on that as soon as possible!"
+	},
+
+    "Move_To_Alliance": {
 		"3":
 		"4":
 		"5":
 	},
 
-    "Move_To_Alliance": {
+	"Move_To_Alliance_Response": {
 		"1": "Hello",
 		"2": "Greetings",
 		"3":
@@ -105,6 +160,12 @@
 	},
 
 	"Move_To_Revolt": {
+		"3":
+		"4":
+		"5":
+	},
+
+	"Move_To_Revolt_Response": {
 		"1": "Hello",
 		"2": "Greetings",
 		"3":
@@ -113,6 +174,12 @@
 	},
 
 	"Move_To_Destroy": {
+		"3":
+		"4":
+		"5":
+	},
+
+	"Move_To_Destroy_Response": {
 		"1": "Hello",
 		"2": "Greetings",
 		"3":
@@ -125,10 +192,24 @@
 		"2": "Greetings",
 		"3":
 		"4":
+	},
+
+	"Duel_Response": {
+		"1": "Hello",
+		"2": "Greetings",
+		"3":
+		"4":
 		"5":
 	},
 
 	"Spar": {
+		"2": "Greetings",
+		"3":
+		"4":
+		"5":
+	},
+
+	"Spar_Response": {
 		"1": "Hello",
 		"2": "Greetings",
 		"3":
@@ -137,6 +218,12 @@
 	},
 
 	"Bribe": {
+		"2": "Greetings",
+		"3":
+		"4":
+	},
+
+	"Bribe_Response": {
 		"1": "Hello",
 		"2": "Greetings",
 		"3":
@@ -145,6 +232,12 @@
 	},
 
 	"Ask_To_Join_Party": {
+		"3":
+		"4":
+		"5":
+	},
+
+	"Response_To_Join_Party": {
 		"1": "Hello",
 		"2": "Greetings",
 		"3":
@@ -153,6 +246,13 @@
 	},
 
 	"Compliment": {
+		"2": "Greetings",
+		"3":
+		"4":
+		"5":
+	},
+
+	"Compliment_Response": {
 		"1": "Hello",
 		"2": "Greetings",
 		"3":
@@ -161,6 +261,12 @@
 	},
 
 	"Grovel": {
+		"2": "Greetings",
+		"3":
+		"4":
+	},
+
+	"Grovel_Response": {
 		"1": "Hello",
 		"2": "Greetings",
 		"3":
@@ -169,6 +275,12 @@
 	},
 
 	"Move_To_Spy": {
+		"3":
+		"4":
+		"5":
+	},
+
+	"Move_To_Spy_Response": {
 		"1": "Hello",
 		"2": "Greetings",
 		"3":
@@ -177,6 +289,12 @@
 	},
 
 	"Move_To_Training": {
+		"3":
+		"4":
+		"5":
+	},
+
+	"Move_To_Training_Response": {
 		"1": "Hello",
 		"2": "Greetings",
 		"3":
@@ -184,7 +302,14 @@
 		"5":
 	},
 
+
 	"Request_Teaching": {
+		"4":
+		"5":
+	},
+
+	
+	"Request_Teaching_Response": {
 		"1": "Hello",
 		"2": "Greetings",
 		"3":
@@ -193,6 +318,11 @@
 	},
 
 	"Offer_Teaching": {
+		"4":
+		"5":
+	},
+
+	"Offer_Teaching_Response": {
 		"1": "Hello",
 		"2": "Greetings",
 		"3":
@@ -201,6 +331,12 @@
 	},
 
 	"Boast": {
+		"2": "Greetings",
+		"3":
+		"4":
+	},
+
+	"Boast_Response": {
 		"1": "Hello",
 		"2": "Greetings",
 		"3":
@@ -211,12 +347,22 @@
 	"Intimidate": {
 		"1": "Hello",
 		"2": "Greetings",
+	},
+
+    "Intimidate_Response": {
+		"1": "Hello",
+		"2": "Greetings",
 		"3":
 		"4":
 		"5":
 	},
 
 	"Insult": {
+		"1": "Hello",
+		"2": "Greetings",
+	},
+
+	"Insult_Response": {
 		"1": "Hello",
 		"2": "Greetings",
 		"3":
@@ -276,21 +422,9 @@
 		"3": "You should tread very carefully with your wordsfrom now on, friend"
 	},
 
-	"Response_Origin": {
-		"1": "So you are not from around here, interesting",
-		"2": "You have walked very far to get here then",
-		"3": "I'm suprised you have traveled so far"
-	},
-
 	"Identifier": {
 		"1": "Stranger",
 		"2": "Traveler"
-	},
-
-	"Response_Name": {
-		"1": "So you are known as",
-		"2": "Nice to meet you",
-		"3": "I am pleased to make your acquaintance"
 	},
 
 	"Name_2": {

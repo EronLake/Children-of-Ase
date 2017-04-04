@@ -339,6 +339,7 @@
     <None Include="OpenGL Shaders\StdFragmentShader.frag.glsl" />
     <None Include="OpenGL Shaders\StdVertexShader.vert.glsl" />
     <None Include="config.json" />
+    <None Include="Oshosi_dialog.json" />
     <None Include="script_templates.json" />
     <None Include="Shango_dialog.json" />
     <None Include="SilverSoldier_dialog.json" />
