@@ -239,7 +239,11 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	heroes.push_back(oya);
 
 	staticRec->name = YEMOJA;
+	staticRec->setWidth(150);
+	staticRec->setHeight(150);
 	oya->name = OYA;
+	oya->setWidth(150);
+	oya->setHeight(150);
 
 	DialogueController::setAI(AiController);
 	//DialogueGui* convoGui = new DialogueGui();
@@ -252,7 +256,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	DialogueConfig::import_config(gameplay_functions, tBuffer);
 	DialogueController::getDialogueHelper()->fill_conversations();
 	
-	//WorldObj* barrel = new WorldObj(Vector2f(5200, 3900), 75, 75);
+	WorldObj* barrel = new WorldObj(Vector2f(5200, 3900), 75, 75);
 	//Alex->name = SHANGO;
 	gameplay_functions->add_texture("map1_1", 0, 0, 0);
 	gameplay_functions->add_texture("map1_2", 0, 0, 0);
@@ -446,17 +450,17 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	rightHurtTex->setFile("Assets/Sprites/ShangoRightRecoil.png", 18);
 
 
-	yemojaTexture->setFile("Assets/Sprites/YemojaFrontIdle.png", 1);
-	yemojaIdleTex->setFile("Assets/Sprites/YemojaFrontIdle.png", 1);
+	yemojaTexture->setFile("Assets/Sprites/YemojaForwardIdle.png", 22);
+	yemojaIdleTex->setFile("Assets/Sprites/YemojaForwardIdle.png", 22);
 
-	h_upRunTex->setFile("Assets/Sprites/YemojaBackSprite.png", 26);
-	h_downRunTex->setFile("Assets/Sprites/YemojaFrontSprite.png", 26);
-	h_leftRunTex->setFile("Assets/Sprites/YemojaLeftSprite.png", 26);
-	h_rightRunTex->setFile("Assets/Sprites/YemojaRightSprite.png", 26);
-	h_upIdleTex->setFile("Assets/Sprites/YemojaBackIdle.png", 1);
-	h_downIdleTex->setFile("Assets/Sprites/YemojaFrontIdle.png", 1);
-	h_leftIdleTex->setFile("Assets/Sprites/YemojaLeftIdle.png", 1);
-	h_rightIdleTex->setFile("Assets/Sprites/YemojaRightIdle.png", 1);
+	h_upRunTex->setFile("Assets/Sprites/YemojaBackSprint.png", 26);
+	h_downRunTex->setFile("Assets/Sprites/YemojaFrontSprint.png", 26);
+	h_leftRunTex->setFile("Assets/Sprites/YemojaLeftSprint.png", 26);
+	h_rightRunTex->setFile("Assets/Sprites/YemojaRightSprint.png", 26);
+	h_upIdleTex->setFile("Assets/Sprites/YemojaBackIdle.png", 22);
+	h_downIdleTex->setFile("Assets/Sprites/YemojaForwardIdle.png", 22);
+	h_leftIdleTex->setFile("Assets/Sprites/YemojaLeftIdle.png", 22);
+	h_rightIdleTex->setFile("Assets/Sprites/YemojaRightIdle.png", 22);
 
 	silverSoldierTexture->setFile("Assets/Sprites/SilverSoldierForwardIdle.png", 22);
 	silverSoldierIdleTex->setFile("Assets/Sprites/SilverSoldierForwardIdle.png", 22);
@@ -773,8 +777,8 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 
 	
 
-	staticRec->setWidth(100);
-	staticRec->setHeight(100);
+	staticRec->setWidth(150);
+	staticRec->setHeight(150);
 	staticRec->name = YEMOJA;
 	//Hero* staticRec = new Hero(YEMOJA, Vector2f(4600, 3600), 100.0, 100.0);
 	///should actually use gameplay_functions->add_hero("Yemoja", 4600, 3600, true)
