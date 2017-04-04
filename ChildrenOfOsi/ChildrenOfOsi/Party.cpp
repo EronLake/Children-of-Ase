@@ -262,10 +262,8 @@ void Party::setMode(int m)
 void Party::updateFollowers()
 {
   Soldier* prev = nullptr;
-	for (auto i = members.rbegin(); i != members.rend(); ++i) {
-		if (prev != nullptr) {
-      prev->setCurrentLeader(*i);
-    }
+	for (auto i = members.begin(); i != members.end(); ++i) {
+    (*i)->setCurrentLeader(prev);
     prev = *i;
   }
 }

@@ -64,8 +64,9 @@ class Soldier: public NPC
   void setMaxStamina(int s) { this->maxStamina = s; };
   void setAse(int a) { this->ase = a; };
   void setMaxAse(int a) { this->maxAse = a; };
-  void flipSwing() { this->swingLeft = !swingLeft; };
+  void set_creator_of_melee() { this->melee->set_creator(this); };
 
+  void flipSwing() { this->swingLeft = !swingLeft; };
   void meleeAttack();
   void addAttackType(Attack* a);
   void newAttack(int i, Attack* a);

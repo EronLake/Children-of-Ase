@@ -30,6 +30,7 @@ class Attack: public WorldObj
   bool getCanCancel() { return this->canCancel; };
   vector<WorldObj*> getHits() { return this->hitObjs; };
   AttackTypes getAttackType() { return this->attackType; }
+  WorldObj* get_creator() { return creator; };
 
   void setDmg(int d) { this->dmg = d; };
   void setStaminaCost(int c) { this->staminaCost = c; };
@@ -39,6 +40,7 @@ class Attack: public WorldObj
   void setSpeed(float s) { this->speed = s; };
   void setDestroy(bool d) { this->destroyOnCollision = d; };
   void setAttackType(AttackTypes t) { this->attackType = t; }
+  void set_creator(WorldObj* o) { this->creator = o; };
 
   void setCoolDown(int c) { this->cooldown = c; };
   void setCanCancel(int c) { this->canCancel = c; };
@@ -54,7 +56,6 @@ class Attack: public WorldObj
 
   void Attack::setNextAttack(Attack* n) { next = n; };
   Attack* Attack::getNextAttack() { return next; };
-
 
   enum class AttackTypes: uint8_t
   {
@@ -76,6 +77,7 @@ class Attack: public WorldObj
   int pause;
   bool keep;
   vector<WorldObj*> hitObjs;
+  WorldObj* creator;
   Attack* next;
   bool turn;
   AttackTypes attackType;

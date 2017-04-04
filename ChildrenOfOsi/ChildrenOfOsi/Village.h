@@ -11,7 +11,6 @@ class Village
 public:
 	Village();
 	~Village();
-	Alliance* alliance;
 	vector<NPC*> members;
 	void setStatus(std::string s) { status = s; };
 	std::string getStatus() { return status; };
@@ -25,7 +24,11 @@ public:
 	bool isEnemyParty(Party* p);
 	void clearEnemyParties() { enemyParties.clear(); };
 	static vector<Village*> villagesWorld;
+	void set_alliance(Alliance* a) { alliance = a; };
+	Alliance* get_alliance() { return alliance; };
+
 private:
+	Alliance* alliance;
 	std::string status;
 	std::vector<Party*> parties;
 	std::vector<Party*> enemyParties;

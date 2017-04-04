@@ -41,7 +41,6 @@ void Soldier::addAttackType(Attack* a)
 
 void Soldier::newAttack(int i, Attack* a)
 {
-  //if(cooldownMap[attackTypes[i]] == 0 && stamina>=attackTypes[i]->getStaminaCost() && ase>=attackTypes[i]->getAseCost()) {
   Attack* p = a;
   *p = *attackTypes[i];
 
@@ -90,6 +89,7 @@ void Soldier::newAttack(int i, Attack* a)
   p->setDirWithBase(d, false);
   p->setPause(attackTypes[i]->getPause());
   p->setKeep(false);
+  p->set_creator(this);
   cooldownMap[attackTypes[i]] = attackTypes[i]->getCoolDown();
   cdTime = melee->getCoolDown();
   stamina -= attackTypes[i]->getStaminaCost();
@@ -98,7 +98,6 @@ void Soldier::newAttack(int i, Attack* a)
   if(instances == 99)instances = 0;
   currentAttacks.push_back(p);
   if(attackTypes[i]->getTurn())setDirWithBase(4, true);
-  //}
 }
 
 void Soldier::meleeAttack()
