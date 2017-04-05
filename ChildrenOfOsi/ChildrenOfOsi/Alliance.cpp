@@ -78,3 +78,22 @@ void Alliance::update_enemies() {
 		}
 	}
 }
+
+vector<NPC*> Alliance::get_alliance_members() {
+	vector<NPC*> tmp;
+	for (auto it = allies.begin(); it != allies.end(); ++it) {
+		vector<NPC*> tmp2= (*it)->get_members();
+		for (auto itor= tmp2.begin(); itor!=tmp2.end();++itor){
+			tmp.push_back(*itor);
+		}
+	}
+	return tmp;
+}
+
+bool Alliance::is_alliance_member(NPC* n) {
+	vector<NPC*> tmp=this->get_alliance_members();
+	for (auto it = tmp.begin(); it != tmp.end(); ++it) {
+		if (n == *it)return true;
+	}
+	return false;
+}

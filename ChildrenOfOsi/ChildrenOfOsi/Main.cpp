@@ -1223,8 +1223,8 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	Party* party2 = new Party();
 	Party* party3 = new Party();
 	party->addToParty(Alex, true);
-	//party->addToParty(silverSoldier, false);
-	//party->addToParty(silverSoldier2, false);
+	party->addToParty(silverSoldier, false);
+	party->addToParty(silverSoldier2, false);
 	party2->addToParty(blueSoldier, true);
 	party2->addToParty(blueSoldier2, false);
 	party2->addToParty(blueSoldier3, false);
@@ -1232,7 +1232,13 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	Village* v1 = new Village();
 	Village* v2 = new Village();
 	Village* v3 = new Village();
-
+	v1->add_member(Alex);
+	v1->add_member(silverSoldier);
+	v1->add_member(silverSoldier2);
+	v2->add_member(blueSoldier);
+	v2->add_member(blueSoldier2);
+	v2->add_member(blueSoldier3);
+	v3->add_member(staticRec);
 	v1->addToParties(party);
 	v2->addToParties(party2);
 	v3->addToParties(party3);
