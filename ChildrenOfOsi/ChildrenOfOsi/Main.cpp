@@ -474,7 +474,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	Soldier* blueSoldier3 = new Soldier(6030, 4000, true);
 	Alex->setHealth(200);
 
-	/*blank->setFile("Assets/Sprites/blank.png", 1);
+	blank->setFile("Assets/Sprites/blank.png", 1);
 	border->setFile("Assets/Sprites/border.png", 1);
 	objTexture->setFile("Assets/Sprites/YemojasHouse.png", 1);
 
@@ -599,7 +599,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	spinRight->setFile("Assets/Sprites/ShangoRightSpin.png", 22);
 	spinUp->setFile("Assets/Sprites/ShangoBackSpin.png", 22);
 	spinDown->setFile("Assets/Sprites/ShangoForwardSpin.png", 22);
-	spinLeft->setFile("Assets/Sprites/ShangoLeftSpin.png", 22);*/
+	spinLeft->setFile("Assets/Sprites/ShangoLeftSpin.png", 22);
 
 	for (int i = 0; i < 100; i++) {
 	cout << "AT THE THREAD INITIALIZTION CALL!!!****** " << endl;
@@ -612,31 +612,31 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 		We know all concurrent threads are being utilized when the counter we use while iterating through textureMap has a remainder of 0 when we take the modulo of num_of_threads.
 
 	*/
-	int textureMapCounter = 0;
-	for (const auto& it : textureMap) {
-		pair<Texture*, pair<string, int>>* temp_tuple = new pair<Texture*, pair<string, int>>(it.first, it.second);
-		cout << "WORKING ON " << temp_tuple->second.first << endl;
-		// If there are still less than "num_of_threads" in thread_Vec:
-		if (textureMapCounter % num_of_threads != 0) {
+	//int textureMapCounter = 0;
+	//for (const auto& it : textureMap) {
+	//	pair<Texture*, pair<string, int>>* temp_tuple = new pair<Texture*, pair<string, int>>(it.first, it.second);
+	//	cout << "WORKING ON " << temp_tuple->second.first << endl;
+	//	// If there are still less than "num_of_threads" in thread_Vec:
+	//	if (textureMapCounter % num_of_threads != 0) {
 
-			//std::thread temp_thread(set_file_with_thread, std::ref(temp_tuple));
-			thread_Vec.push_back(std::thread(set_file_with_thread, std::move(temp_tuple)));
-		}
-		else {
-			cout << "THE THREAD VEC HAS " << thread_Vec.size() << "THREADS" << endl;
-			for (auto& itr : thread_Vec) {
-				itr.join();
-			}
-			thread_Vec.clear();
-			thread_Vec.push_back(std::thread(set_file_with_thread, std::ref(temp_tuple)));
-		}
-		textureMapCounter++;
+	//		//std::thread temp_thread(set_file_with_thread, std::ref(temp_tuple));
+	//		thread_Vec.push_back(std::thread(set_file_with_thread, std::move(temp_tuple)));
+	//	}
+	//	else {
+	//		cout << "THE THREAD VEC HAS " << thread_Vec.size() << "THREADS" << endl;
+	//		for (auto& itr : thread_Vec) {
+	//			itr.join();
+	//		}
+	//		thread_Vec.clear();
+	//		thread_Vec.push_back(std::thread(set_file_with_thread, std::ref(temp_tuple)));
+	//	}
+	//	textureMapCounter++;
 
-	}
-	for (auto& it : thread_Vec) {
-		it.join();
-	}
-	thread_Vec.clear();
+	//}
+	//for (auto& it : thread_Vec) {
+	//	it.join();
+	//}
+	//thread_Vec.clear();
 
 	Rectangle::texRIGHT->setFile("Assets/Sprites/LeftRecoilSpark.png", 18);
 	Rectangle::texLEFT->setFile("Assets/Sprites/RightRecoilSpark.png", 18);
