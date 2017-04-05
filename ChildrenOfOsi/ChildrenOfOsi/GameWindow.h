@@ -32,6 +32,8 @@
 #include "Sprite.h"
 #include "TextObj.h"
 
+
+
 struct Glyph
 {
   GLuint textureId;   // ID handle for the texture

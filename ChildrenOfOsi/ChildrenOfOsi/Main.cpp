@@ -62,6 +62,7 @@
 #include "ActionExecFunctions.h"
 #include "Alliance.h"
 #include "PartyManager.h"
+//#include <boost/thread/thread.hpp>  //This is used for Ian's multithread section, but the user needs the boost compiled library installed on their computer
 
 using namespace std;
 
@@ -648,6 +649,27 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	//	it.join();
 	//}
 	//thread_Vec.clear();
+	 //windows handle
+
+//Ian's attempt at multithreading. Compiles in 22 seconds on school computer. Still has same issue with spritesheet sprites, where the red and black boxes appear.
+//Other sprites load in normally though
+//also needs the boost external dependency, so it might 
+	/*HDC hdc = wglGetCurrentDC();
+	HGLRC mainContext = wglGetCurrentContext();
+	HGLRC loaderContext = wglCreateContext(hdc);
+	wglShareLists(loaderContext, mainContext);
+	boost::thread([=]() {
+	wglMakeCurrent(hdc, loaderContext);
+	int textureMapCounter = 0;
+	for (const auto& it : textureMap) {
+		pair<Texture*, pair<string, int>>* temp_tuple = new pair<Texture*, pair<string, int>>(it.first, it.second);
+		cout << "WORKING ON " << temp_tuple->second.first << endl;
+		set_file_with_thread(temp_tuple);
+	}
+	wglMakeCurrent(nullptr, nullptr);
+	wglDeleteContext(loaderContext);
+	glFinish();
+	});*/
 
 	int textureMapCounter = 0;
 	for (const auto& it : textureMap) {
@@ -655,7 +677,6 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 		cout << "WORKING ON " << temp_tuple->second.first << endl;
 		set_file_with_thread(temp_tuple);
 	}
-
 	Alex->sprite.setTexture(playerTexture);
 	Alex->sprite.setIdleTexture(playerIdleTex);
 	Alex->sprite.up = upRunTex;
