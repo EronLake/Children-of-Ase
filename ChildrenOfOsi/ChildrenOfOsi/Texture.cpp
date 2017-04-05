@@ -27,6 +27,7 @@ void Texture::load()
 }
 
 void Texture::setFile(const std::string& fileName, int f) {
+	//std::cout << "WORKING WITH PATH " << fileName << std::endl;
 	this->imageFile = fileName; 
 	this->load();
 	this->setFrames(f);
