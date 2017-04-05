@@ -95,7 +95,7 @@ int main() {
 		WorldObj* screen = new WorldObj(Vector2f(0.0, 0.0), 20000U, 20000U);	//init screen
 
 		QuadTree* collideTree = new QuadTree(0, screen);
-		osi::GameWindow::init();		
+		GameWindow::init();		
 		GAMEPLAY_LOOP(collideTree);
 	return 0;
 }
@@ -1271,7 +1271,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	int state = 0;
 	bool start = true;
 
-	while (osi::GameWindow::isRunning()) {
+	while (GameWindow::isRunning()) {
 		if (start) {
 			gameplay_functions->play_sound("Play");
 			//gameplay_functions->play_sound("Walk");
@@ -1636,7 +1636,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 
 		frame_count++;
 	}
-	osi::GameWindow::terminate();
+	GameWindow::terminate();
 }
 
 

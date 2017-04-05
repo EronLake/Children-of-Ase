@@ -138,7 +138,7 @@ int RenderHelper::draw_frame(WorldObj * obj)
 	}
 	//convoGui->drawGui();
 	drawHUD(obj);
-	osi::GameWindow::refresh();
+	GameWindow::refresh();
 	return 0;
 }
 
@@ -156,7 +156,7 @@ int RenderHelper::drawDiaGui(WorldObj* obj)
 		objVec[i]->WorldObj::animateObj();
 	}
 	convoGui->drawGui();
-	osi::GameWindow::refresh();
+	GameWindow::refresh();
 	return 0;
 }
 

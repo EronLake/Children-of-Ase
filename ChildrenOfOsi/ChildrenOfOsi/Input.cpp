@@ -362,10 +362,10 @@ void Input::InputCheck()
 
 			double xpos;
 			double ypos;
-			glfwGetCursorPos(osi::GameWindow::window, &xpos, &ypos);
+			glfwGetCursorPos(GameWindow::window, &xpos, &ypos);
 
-			double mouseX = rHelper->camera->getX() + xpos * osi::GameWindow::WINDOW_WIDTH_DP / 1300;
-			double mouseY = rHelper->camera->getY() + ypos * osi::GameWindow::WINDOW_HEIGHT_DP / 700;
+			double mouseX = rHelper->camera->getX() + xpos * GameWindow::WINDOW_WIDTH_DP / 1300;
+			double mouseY = rHelper->camera->getY() + ypos * GameWindow::WINDOW_HEIGHT_DP / 700;
 
 			std::cout << "////////////////////////" << endl;
 			std::cout << xpos << ":" << ypos << endl;
