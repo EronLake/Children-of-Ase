@@ -367,22 +367,22 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	Texture* bs_downLungeTex = new Texture();
 	Texture* bs_leftLungeTex = new Texture();
 	Texture* bs_rightLungeTex = new Texture();
-	textureMap[bs_upRunTex] = pair<string, int>("Assets/Sprites/ShangoBackSprint.png", 16);
-	textureMap[bs_downRunTex] = pair<string, int>("Assets/Sprites/ShangoForwardSprint.png", 16);
-	textureMap[bs_leftRunTex] = pair<string, int>("Assets/Sprites/ShangoLeftSprint.png", 16);
-	textureMap[bs_rightRunTex] = pair<string, int>("Assets/Sprites/ShangoRightSprint.png", 16);
-	textureMap[bs_upIdleTex] = pair<string, int>("Assets/Sprites/ShangoBackIdle.png", 22);
-	textureMap[bs_downIdleTex] = pair<string, int>("Assets/Sprites/ShangoForwardIdle.png", 22);
-	textureMap[bs_leftIdleTex] = pair<string, int>("Assets/Sprites/ShangoLeftIdle.png", 22);
-	textureMap[bs_rightIdleTex] = pair<string, int>("Assets/Sprites/ShangoRightIdle.png", 22);
-	textureMap[bs_upAtkTex] = pair<string, int>("Assets/Sprites/ShangoBackSwing.png", 13);
-	textureMap[bs_downAtkTex] = pair<string, int>("Assets/Sprites/ShangoForwardSwing.png", 13);
-	textureMap[bs_leftAtkTex] = pair<string, int>("Assets/Sprites/ShangoLeftSwing.png", 13);
-	textureMap[bs_rightAtkTex] = pair<string, int>("Assets/Sprites/ShangoRightSwing.png", 13);
-	textureMap[bs_upHurtTex] = pair<string, int>("Assets/Sprites/ShangoBackRecoil.png", 18);
-	textureMap[bs_downHurtTex] = pair<string, int>("Assets/Sprites/ShangoForwardRecoil.png", 18);
-	textureMap[bs_leftHurtTex] = pair<string, int>("Assets/Sprites/ShangoLeftRecoil.png", 18);
-	textureMap[bs_rightHurtTex] = pair<string, int>("Assets/Sprites/ShangoRightRecoil.png", 18);
+	textureMap[bs_upRunTex] = pair<string, int>("Assets/Sprites/BlueSoldierBackSprint.png", 16);
+	textureMap[bs_downRunTex] = pair<string, int>("Assets/Sprites/BlueSoldierForwardSprint.png", 16);
+	textureMap[bs_leftRunTex] = pair<string, int>("Assets/Sprites/BlueSoldierLeftSprint.png", 16);
+	textureMap[bs_rightRunTex] = pair<string, int>("Assets/Sprites/BlueSoldierRightSprint.png", 16);
+	textureMap[bs_upIdleTex] = pair<string, int>("Assets/Sprites/BlueSoldierBackIdle.png", 22);
+	textureMap[bs_downIdleTex] = pair<string, int>("Assets/Sprites/BlueSoldierForwardIdle.png", 22);
+	textureMap[bs_leftIdleTex] = pair<string, int>("Assets/Sprites/BlueSoldierLeftIdle.png", 22);
+	textureMap[bs_rightIdleTex] = pair<string, int>("Assets/Sprites/BlueSoldierRightIdle.png", 22);
+	textureMap[bs_upAtkTex] = pair<string, int>("Assets/Sprites/BlueSoldierBackSwing.png", 13);
+	textureMap[bs_downAtkTex] = pair<string, int>("Assets/Sprites/BlueSoldierForwardSwing.png", 13);
+	textureMap[bs_leftAtkTex] = pair<string, int>("Assets/Sprites/BlueSoldierLeftSwing.png", 13);
+	textureMap[bs_rightAtkTex] = pair<string, int>("Assets/Sprites/BlueSoldierRightSwing.png", 13);
+	textureMap[bs_upHurtTex] = pair<string, int>("Assets/Sprites/BlueSoldierBackRecoil.png", 18);
+	textureMap[bs_downHurtTex] = pair<string, int>("Assets/Sprites/BlueSoldierForwardRecoil.png", 18);
+	textureMap[bs_leftHurtTex] = pair<string, int>("Assets/Sprites/BlueSoldierLeftRecoil.png", 18);
+	textureMap[bs_rightHurtTex] = pair<string, int>("Assets/Sprites/BlueSoldierRightRecoil.png", 18);
 	textureMap[bs_upWalkTex] = pair<string, int>("Assets/Sprites/BlueSoldierBackWalk.png", 32);
 	textureMap[bs_downWalkTex] = pair<string, int>("Assets/Sprites/BlueSoldierForwardWalk.png", 32);
 	textureMap[bs_leftWalkTex] = pair<string, int>("Assets/Sprites/BlueSoldierLeftWalk.png", 32);
@@ -444,6 +444,10 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	Texture* sparkUp = new Texture();
 	Texture* sparkDown = new Texture();
 	Texture* sparkLeft = new Texture();
+	textureMap[sparkRight] = pair<string, int>("Assets/Sprites/ShangoRightSpin.png", 22);
+	textureMap[sparkUp] = pair<string, int>("Assets/Sprites/ShangoBackSpin.png", 22);
+	textureMap[sparkDown] = pair<string, int>("Assets/Sprites/ShangoForwardSpin.png", 22);
+	textureMap[sparkLeft] = pair<string, int>("Assets/Sprites/ShangoLeftSpin.png", 22);
 
 	Texture* YhurtRight = new Texture();
 	Texture* YhurtUp = new Texture();
@@ -453,6 +457,14 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	Texture* YswingUp = new Texture();
 	Texture* YswingDown = new Texture();
 	Texture* YswingLeft = new Texture();
+	textureMap[YhurtRight] = pair<string, int>("Assets/Sprites/YemojaRightRecoil.png", 18);
+	textureMap[YhurtUp] = pair<string, int>("Assets/Sprites/YemojaBackRecoil.png", 18);
+	textureMap[YhurtDown] = pair<string, int>("Assets/Sprites/YemojaForwardRecoil.png", 18);
+	textureMap[YhurtLeft] = pair<string, int>("Assets/Sprites/YemojaLeftRecoil.png", 18);
+	textureMap[YswingRight] = pair<string, int>("Assets/Sprites/YemojaRightBreath.png", 14);
+	textureMap[YswingUp] = pair<string, int>("Assets/Sprites/YemojaBackBreath.png", 14);
+	textureMap[YswingDown] = pair<string, int>("Assets/Sprites/YemojaForwardBreath.png", 14);
+	textureMap[YswingLeft] = pair<string, int>("Assets/Sprites/YemojaLeftBreath.png", 14);
 	
 	//load sprite from a configuration file?
 	Soldier* silverSoldier = new Soldier(6745, 10355, true);
@@ -462,7 +474,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	Soldier* blueSoldier3 = new Soldier(6030, 4000, true);
 	Alex->setHealth(200);
 
-	blank->setFile("Assets/Sprites/blank.png", 1);
+	/*blank->setFile("Assets/Sprites/blank.png", 1);
 	border->setFile("Assets/Sprites/border.png", 1);
 	objTexture->setFile("Assets/Sprites/YemojasHouse.png", 1);
 
@@ -587,7 +599,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	spinRight->setFile("Assets/Sprites/ShangoRightSpin.png", 22);
 	spinUp->setFile("Assets/Sprites/ShangoBackSpin.png", 22);
 	spinDown->setFile("Assets/Sprites/ShangoForwardSpin.png", 22);
-	spinLeft->setFile("Assets/Sprites/ShangoLeftSpin.png", 22);
+	spinLeft->setFile("Assets/Sprites/ShangoLeftSpin.png", 22);*/
 
 	for (int i = 0; i < 100; i++) {
 	cout << "AT THE THREAD INITIALIZTION CALL!!!****** " << endl;
@@ -600,31 +612,31 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 		We know all concurrent threads are being utilized when the counter we use while iterating through textureMap has a remainder of 0 when we take the modulo of num_of_threads.
 
 	*/
-	//int textureMapCounter = 0;
-	//for (const auto& it : textureMap) {
-	//	pair<Texture*, pair<string, int>>* temp_tuple = new pair<Texture*, pair<string, int>>(it.first, it.second);
-	//	cout << "WORKING ON " << temp_tuple->second.first << endl;
-	//	// If there are still less than "num_of_threads" in thread_Vec:
-	//	if (textureMapCounter % num_of_threads != 0) {
+	int textureMapCounter = 0;
+	for (const auto& it : textureMap) {
+		pair<Texture*, pair<string, int>>* temp_tuple = new pair<Texture*, pair<string, int>>(it.first, it.second);
+		cout << "WORKING ON " << temp_tuple->second.first << endl;
+		// If there are still less than "num_of_threads" in thread_Vec:
+		if (textureMapCounter % num_of_threads != 0) {
 
-	//		//std::thread temp_thread(set_file_with_thread, std::ref(temp_tuple));
-	//		thread_Vec.push_back(std::thread(set_file_with_thread, std::move(temp_tuple)));
-	//	}
-	//	else {
-	//		cout << "THE THREAD VEC HAS " << thread_Vec.size() << "THREADS" << endl;
-	//		for (auto& itr : thread_Vec) {
-	//			itr.join();
-	//		}
-	//		thread_Vec.clear();
-	//		thread_Vec.push_back(std::thread(set_file_with_thread, std::ref(temp_tuple)));
-	//	}
-	//	textureMapCounter++;
+			//std::thread temp_thread(set_file_with_thread, std::ref(temp_tuple));
+			thread_Vec.push_back(std::thread(set_file_with_thread, std::move(temp_tuple)));
+		}
+		else {
+			cout << "THE THREAD VEC HAS " << thread_Vec.size() << "THREADS" << endl;
+			for (auto& itr : thread_Vec) {
+				itr.join();
+			}
+			thread_Vec.clear();
+			thread_Vec.push_back(std::thread(set_file_with_thread, std::ref(temp_tuple)));
+		}
+		textureMapCounter++;
 
-	//}
-	//for (auto& it : thread_Vec) {
-	//	it.join();
-	//}
-	//thread_Vec.clear();
+	}
+	for (auto& it : thread_Vec) {
+		it.join();
+	}
+	thread_Vec.clear();
 
 	Rectangle::texRIGHT->setFile("Assets/Sprites/LeftRecoilSpark.png", 18);
 	Rectangle::texLEFT->setFile("Assets/Sprites/RightRecoilSpark.png", 18);
