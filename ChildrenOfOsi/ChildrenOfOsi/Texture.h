@@ -12,6 +12,8 @@
 #include "GLEW\glew.h"
 #include "GLFW/glfw3.h"
 #include "SOIL/SOIL.h"
+#include <thread> 
+#include <mutex> 
 
 class Texture
 {

@@ -2,6 +2,7 @@
 #include "Texture.h"
 
 int Texture::textureSize=0;
+std::mutex mtx;
 
 /**
  * Loads in the image data corresponding to this texture's filename.
@@ -9,6 +10,7 @@ int Texture::textureSize=0;
 void Texture::load()
 {
 	Texture::textureSize++;
+	std::cout << "Texture Size: "<< Texture::textureSize<<std::endl;
     txId = Texture::textureSize;
 	glGenTextures(1, &txId);
 	glBindTexture(GL_TEXTURE_2D, txId);

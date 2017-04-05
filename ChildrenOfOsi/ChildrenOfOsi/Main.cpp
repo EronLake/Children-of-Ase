@@ -89,7 +89,8 @@ void GAMEPLAY_LOOP(QuadTree* _Quadtree);
 
 bool lineCollision(Line l1, Line l2);
 /// Helper function passed to thread to set file. Param is a tuple, first being the Texture* to work on, and second being the param needed to call setFile().
-void set_file_with_thread(std::pair<Texture*, pair<string, int>>* p_tuple) { std::lock_guard<std::mutex> guard(mu); p_tuple->first->setFile(p_tuple->second.first, p_tuple->second.second); }
+void set_file_with_thread(std::pair<Texture*, pair<string, int>>* p_tuple) {
+	std::lock_guard<std::mutex> guard(mu); p_tuple->first->setFile(p_tuple->second.first, p_tuple->second.second); }
 
 int main() {
 		WorldObj* screen = new WorldObj(Vector2f(0.0, 0.0), 20000U, 20000U);	//init screen
@@ -474,7 +475,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	Soldier* blueSoldier3 = new Soldier(6030, 4000, true);
 	Alex->setHealth(200);
 
-	blank->setFile("Assets/Sprites/blank.png", 1);
+	/*blank->setFile("Assets/Sprites/blank.png", 1);
 	border->setFile("Assets/Sprites/border.png", 1);
 	objTexture->setFile("Assets/Sprites/YemojasHouse.png", 1);
 
@@ -599,7 +600,17 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	spinRight->setFile("Assets/Sprites/ShangoRightSpin.png", 22);
 	spinUp->setFile("Assets/Sprites/ShangoBackSpin.png", 22);
 	spinDown->setFile("Assets/Sprites/ShangoForwardSpin.png", 22);
-	spinLeft->setFile("Assets/Sprites/ShangoLeftSpin.png", 22);
+	spinLeft->setFile("Assets/Sprites/ShangoLeftSpin.png", 22);*/
+
+	Rectangle::texRIGHT->setFile("Assets/Sprites/LeftRecoilSpark.png", 18);
+	Rectangle::texLEFT->setFile("Assets/Sprites/RightRecoilSpark.png", 18);
+	Rectangle::texUP->setFile("Assets/Sprites/ForwardRecoilSpark.png", 18);
+	Rectangle::texDOWN->setFile("Assets/Sprites/BackRecoilSpark.png", 18);
+
+	Rectangle::texAtkRIGHT->setFile("Assets/Sprites/LeftRecoilSpark.png", 18);
+	Rectangle::texAtkLEFT->setFile("Assets/Sprites/RightRecoilSpark.png", 18);
+	Rectangle::texAtkUP->setFile("Assets/Sprites/ForwardRecoilSpark.png", 18);
+	Rectangle::texAtkDOWN->setFile("Assets/Sprites/BackRecoilSpark.png", 18);
 
 	for (int i = 0; i < 100; i++) {
 	cout << "AT THE THREAD INITIALIZTION CALL!!!****** " << endl;
@@ -638,16 +649,13 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	//}
 	//thread_Vec.clear();
 
-	Rectangle::texRIGHT->setFile("Assets/Sprites/LeftRecoilSpark.png", 18);
-	Rectangle::texLEFT->setFile("Assets/Sprites/RightRecoilSpark.png", 18);
-	Rectangle::texUP->setFile("Assets/Sprites/ForwardRecoilSpark.png", 18);
-	Rectangle::texDOWN->setFile("Assets/Sprites/BackRecoilSpark.png", 18);
+	int textureMapCounter = 0;
+	for (const auto& it : textureMap) {
+		pair<Texture*, pair<string, int>>* temp_tuple = new pair<Texture*, pair<string, int>>(it.first, it.second);
+		cout << "WORKING ON " << temp_tuple->second.first << endl;
+		set_file_with_thread(temp_tuple);
+	}
 
-	Rectangle::texAtkRIGHT->setFile("Assets/Sprites/LeftRecoilSpark.png", 18);
-	Rectangle::texAtkLEFT->setFile("Assets/Sprites/RightRecoilSpark.png", 18);
-	Rectangle::texAtkUP->setFile("Assets/Sprites/ForwardRecoilSpark.png", 18);
-	Rectangle::texAtkDOWN->setFile("Assets/Sprites/BackRecoilSpark.png", 18);
-	
 	Alex->sprite.setTexture(playerTexture);
 	Alex->sprite.setIdleTexture(playerIdleTex);
 	Alex->sprite.up = upRunTex;
@@ -1160,7 +1168,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	oya->setName("Oya");
 	oya->name = OYA;
 	oya->offsetBody(0, 35, 35, 65, 15);
-	staticRec->offsetBody(0, 35, 35, 65, 15);
+	staticRec->offsetBody(0, 60, 60, 75, 50);
 	oya->shiftY(300);
 	oya->setHealth(50);
 

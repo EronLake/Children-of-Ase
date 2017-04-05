@@ -396,22 +396,23 @@ int Movement::attack(WorldObj* obj) {
 									for (auto itor = friends.begin(); itor != friends.end();++itor) {
 										if (from == (*itor))friendly = true;
 									}
-									if (!friendly) {
-										a->second->Hit(npc);
-										manager->createTaskForAudio("PlaySound", "SOUND", "SFX/hit.wav");
-										cout << "THE TARGET'S HP IS NOW ******** " << npc->getHealth() << endl;
-										if (a->second->getDestroy())a->second->setDuration(0);
-										npc->sprite.unlockAnimation();
-										manager->createTaskWithObj("Hurt", "DRAW", npc);
-										if (objVec[i]->getType() > 2) {
-											Soldier* s = CheckClass::isSoldier(npc);
-											if (s) {
-												vector<Attack*> delAtk = s->getCurrentAttacks();
-												for (int j = 0; j < delAtk.size(); j++) {
-													delAtk[j]->setDuration(0);
-												}
+									manager->createTaskForAudio("PlaySound", "SOUND", "SFX/hit.wav");
+									if (a->second->getDestroy())a->second->setDuration(0);
+									npc->sprite.unlockAnimation();
+									manager->createTaskWithObj("Hurt", "DRAW", npc);
+									if (objVec[i]->getType() > 2) {
+										Soldier* s = CheckClass::isSoldier(npc);
+										if (s) {
+											vector<Attack*> delAtk = s->getCurrentAttacks();
+											for (int j = 0; j < delAtk.size(); j++) {
+												delAtk[j]->setDuration(0);
 											}
 										}
+									}
+									if (!friendly) {
+										a->second->Hit(npc);
+										cout << "THE TARGET'S HP IS NOW ******** " << npc->getHealth() << endl;
+										manager->createTaskForAudio("PlaySound", "SOUND", "SFX/hit.wav");
 									} else {
 										a->second->addHit(npc);
 									}
