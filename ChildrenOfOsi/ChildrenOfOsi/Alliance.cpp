@@ -11,6 +11,7 @@ Alliance::Alliance(Village* v)
 {
 	allies.push_back(v);
 	Alliance::Alliances.push_back(this);
+	v->set_alliance(this);
 }
 
 Alliance::~Alliance()
@@ -61,7 +62,10 @@ void Alliance::update_enemies() {
 			(*itor)->allies[i]->clearEnemyParties();
 			std::vector<Village*> tmp = War::getWars((*itor)->allies[i]);
 			for (int j = 0; j < tmp.size(); j++) {
-				(*itor)->enemies.push_back(tmp[j]);
+				std::vector<Village*> tmp2 = tmp[j]->get_alliance()->get_alligned_villages();
+				for (int k = 0; k < tmp2.size();k++) {
+					(*itor)->enemies.push_back(tmp2[k]);
+				}
 			}
 		}
 		for (int i = 0; i < (*itor)->allies.size(); i++) {

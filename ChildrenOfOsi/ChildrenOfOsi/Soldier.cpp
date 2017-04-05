@@ -18,6 +18,8 @@ cdTime(0), swingLeft(true)
   evasionBound = new Rectangle();
   swingLeft = true;
   setType(WorldObj::TYPE_SOLDIER);
+  currentEnemy = nullptr;
+  currentLeader = nullptr;
 }
 
 Soldier::Soldier(Vector2f p_topLeft, float p_width, float p_height): NPC(p_topLeft, p_width, p_height),
@@ -31,6 +33,8 @@ cdTime(0), swingLeft(true)
   swingLeft = true;
   evasionBound = new Rectangle();
   setType(WorldObj::TYPE_SOLDIER);
+  currentEnemy = nullptr;
+  currentLeader = nullptr;
 }
 
 void Soldier::addAttackType(Attack* a)

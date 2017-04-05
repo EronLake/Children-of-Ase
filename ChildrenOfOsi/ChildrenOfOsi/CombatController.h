@@ -6,6 +6,7 @@
 #include "Containers.h"
 #include "Village.h"
 #include "War.h"
+#include "Alliance.h"
 
 class CombatController
 {

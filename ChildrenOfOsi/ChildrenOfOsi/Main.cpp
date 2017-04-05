@@ -444,6 +444,15 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	Texture* sparkUp = new Texture();
 	Texture* sparkDown = new Texture();
 	Texture* sparkLeft = new Texture();
+
+	Texture* YhurtRight = new Texture();
+	Texture* YhurtUp = new Texture();
+	Texture* YhurtDown = new Texture();
+	Texture* YhurtLeft = new Texture();
+	Texture* YswingRight = new Texture();
+	Texture* YswingUp = new Texture();
+	Texture* YswingDown = new Texture();
+	Texture* YswingLeft = new Texture();
 	
 	//load sprite from a configuration file?
 	blank->setFile("Assets/Sprites/blank.png", 1);
@@ -483,14 +492,22 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	yemojaTexture->setFile("Assets/Sprites/YemojaForwardIdle.png", 22);
 	yemojaIdleTex->setFile("Assets/Sprites/YemojaForwardIdle.png", 22);
 
-	h_upRunTex->setFile("Assets/Sprites/YemojaBackSprint.png", 26);
-	h_downRunTex->setFile("Assets/Sprites/YemojaFrontSprint.png", 26);
-	h_leftRunTex->setFile("Assets/Sprites/YemojaLeftSprint.png", 26);
-	h_rightRunTex->setFile("Assets/Sprites/YemojaRightSprint.png", 26);
+	h_upRunTex->setFile("Assets/Sprites/YemojaBackSprint.png", 16);
+	h_downRunTex->setFile("Assets/Sprites/YemojaFrontSprint.png", 16);
+	h_leftRunTex->setFile("Assets/Sprites/YemojaLeftSprint.png", 16);
+	h_rightRunTex->setFile("Assets/Sprites/YemojaRightSprint.png", 16);
 	h_upIdleTex->setFile("Assets/Sprites/YemojaBackIdle.png", 22);
 	h_downIdleTex->setFile("Assets/Sprites/YemojaForwardIdle.png", 22);
 	h_leftIdleTex->setFile("Assets/Sprites/YemojaLeftIdle.png", 22);
 	h_rightIdleTex->setFile("Assets/Sprites/YemojaRightIdle.png", 22);
+	YhurtUp->setFile("Assets/Sprites/YemojaBackRecoil.png", 18);
+	YhurtDown->setFile("Assets/Sprites/YemojaForwardRecoil.png", 18);
+	YhurtLeft->setFile("Assets/Sprites/YemojaLeftRecoil.png", 18);
+	YhurtRight->setFile("Assets/Sprites/YemojaRightRecoil.png", 18);
+	YswingUp->setFile("Assets/Sprites/YemojaBackBreath.png", 14);
+	YswingDown->setFile("Assets/Sprites/YemojaForwardBreath.png", 14);
+	YswingLeft->setFile("Assets/Sprites/YemojaLeftBreath.png", 14);
+	YswingRight->setFile("Assets/Sprites/YemojaRightBreath.png", 14);
 
 	silverSoldierTexture->setFile("Assets/Sprites/SilverSoldierForwardIdle.png", 22);
 	silverSoldierIdleTex->setFile("Assets/Sprites/SilverSoldierForwardIdle.png", 22);
@@ -834,10 +851,14 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	staticRec->sprite.id_left = h_leftIdleTex;
 	staticRec->sprite.id_right = h_rightIdleTex;
 	staticRec->sprite.id_down = h_downIdleTex;
-	staticRec->sprite.hurt_up = upHurtTex;
-	staticRec->sprite.hurt_down = downHurtTex;
-	staticRec->sprite.hurt_left = leftHurtTex;
-	staticRec->sprite.hurt_right = rightHurtTex;
+	staticRec->sprite.hurt_up = YhurtUp;
+	staticRec->sprite.hurt_down = YhurtDown;
+	staticRec->sprite.hurt_left = YhurtLeft;
+	staticRec->sprite.hurt_right = YhurtRight;
+	staticRec->sprite.atk_up = YswingUp;
+	staticRec->sprite.atk_down = YswingDown;
+	staticRec->sprite.atk_left = YswingLeft;
+	staticRec->sprite.atk_right = YswingRight;
 
 	blueSoldier->sprite.setTexture(blueSoldierTexture);
 	blueSoldier->sprite.setIdleTexture(blueSoldierIdleTex);
@@ -990,6 +1011,8 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	staticRec->set_creator_of_melee();
 	staticRec->melee->setStaminaCost(90);
 	staticRec->setHealth(300);
+	staticRec->setMaxStamina(300);
+	staticRec->melee->sprite.setTexture(border);
 
 
 	silverSoldier->melee = Containers::Attack_table[silverSoldier->getKey()];
@@ -1005,11 +1028,8 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	silverSoldier->set_creator_of_melee();
 	silverSoldier->melee->setStaminaCost(90);
 	silverSoldier->setHealth(100);
-
 	silverSoldier->melee->setStaminaCost(120);
 	silverSoldier->setMaxStamina(300);
-
-
 	silverSoldier->addAttackType(rockThrow);
 	silverSoldier->melee->sprite.setTexture(border);
 
@@ -1203,8 +1223,8 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	Party* party2 = new Party();
 	Party* party3 = new Party();
 	party->addToParty(Alex, true);
-	party->addToParty(silverSoldier, false);
-	party->addToParty(silverSoldier2, false);
+	//party->addToParty(silverSoldier, false);
+	//party->addToParty(silverSoldier2, false);
 	party2->addToParty(blueSoldier, true);
 	party2->addToParty(blueSoldier2, false);
 	party2->addToParty(blueSoldier3, false);
@@ -1238,7 +1258,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	clock_t start_tick, current_ticks, delta_ticks;
 	clock_t fps = 0;
 	int fs = 120;
-int wait_time = fs * 3; //always wait 3 seconds	
+    int wait_time = fs * 3; //always wait 3 seconds	
 	int count = 0;
 	int state = 0;
 	bool start = true;

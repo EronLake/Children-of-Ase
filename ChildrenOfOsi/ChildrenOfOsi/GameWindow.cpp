@@ -272,10 +272,6 @@ void osi::GameWindow::refresh()
   elementBufferObjectId.clear();
   textures.clear();
   numObjects = 0;
-
-  for (int i = 0; i < text.size(); ++i) {
-	  drawText(text[i].getText(), text[i].getFont(), text[i].getX(), text[i].getY(), text[i].getWidth(), text[i].getHeight(), text[i].getColor());
-  }
  // RenderText(*osi::GameWindow::s, "This is sample text", 25.0f, 25.0f, 1.0f, glm::vec3(0.5, 0.8f, 0.2f));
   text.clear();
 

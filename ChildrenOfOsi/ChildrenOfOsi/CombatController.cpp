@@ -13,24 +13,23 @@ CombatController::~CombatController()
 }
 
 void CombatController::fight(Soldier* sold1, int state) {
-		if (sold1->getCurrentEnemy() != nullptr) {
-			if (sold1->getStamina()>120) {
-				sold1->setEvade(false);
-			}
-			else if (sold1->destination == sold1->getLoc() || sold1->destination == Vector2f(0, 0)) {
-				sold1->setEvade(true);
-				float x = rand() % 300 + 100;
-				int x2 = rand() % 2;
-				float y = rand() % 300 + 100;
-				int y2 = rand() % 2;
-				if (x2 == 0)x = -x;
-				if (y2 == 0)y = -y;
-				sold1->destination = Vector2f(sold1->getCurrentEnemy()->getX() + x, sold1->getCurrentEnemy()->getY() + y);
-				sold1->waypoint = Vector2f(sold1->getCurrentEnemy()->getX() + x, sold1->getCurrentEnemy()->getY() + y);
-			}
+	if (sold1->getCurrentEnemy() != nullptr) {
+		if (sold1->getStamina() > 120) {
+			sold1->setEvade(false);
+		}
+		else if (sold1->destination == sold1->getLoc() || sold1->destination == Vector2f(0, 0)) {
+			sold1->setEvade(true);
+			float x = rand() % 300 + 100;
+			int x2 = rand() % 2;
+			float y = rand() % 300 + 100;
+			int y2 = rand() % 2;
+			if (x2 == 0)x = -x;
+			if (y2 == 0)y = -y;
+			sold1->destination = Vector2f(sold1->getCurrentEnemy()->getX() + x, sold1->getCurrentEnemy()->getY() + y);
+			sold1->waypoint = Vector2f(sold1->getCurrentEnemy()->getX() + x, sold1->getCurrentEnemy()->getY() + y);
 		}
 		// If Soldier has an enemy, move to the enemy and not in evade mode
-		if (sold1->getCurrentEnemy() != nullptr && !sold1->getEvade()) {
+		if (!sold1->getEvade()) {
 			sold1->waypoint = Vector2f(sold1->getCurrentEnemy()->getX(), sold1->getCurrentEnemy()->getY());
 			sold1->destination = Vector2f(sold1->getCurrentEnemy()->getX(), sold1->getCurrentEnemy()->getY());
 
@@ -44,11 +43,9 @@ void CombatController::fight(Soldier* sold1, int state) {
 					sold1->meleeAttack();
 					gameplay_functions->melee(sold1);
 				}
-			}			
-		}
-
-		// Evade mode
-		if (sold1->getCurrentEnemy() != nullptr && sold1->getEvade()) {
+			}
+		} // Evade mode
+		else {
 			if (sold1->destination == Vector2f(-1, -1)) {
 				sold1->destination = sold1->getEvadeRange(sold1->getCurrentEnemy());
 			}
@@ -57,6 +54,7 @@ void CombatController::fight(Soldier* sold1, int state) {
 			}
 		}
 		move_to_target(sold1, state);
+	}
 }
 
 void CombatController::follow(Soldier* sold1, int state) {
@@ -83,8 +81,9 @@ void CombatController::find_closest_enemy(Soldier* sold1, int state) {
 		for (auto it = tempEvil.begin(); it != tempEvil.end(); ++it) {
 			if (least_distance == -1 || dist_by_center(sold1, *it)<least_distance) {
 				least_distance = dist_by_center(sold1, *it);
-				if (least_distance<=1000)sold1->setCurrentEnemy(*it);
-				else sold1->setCurrentEnemy(nullptr);
+				if (least_distance <= 1000) {
+					sold1->setCurrentEnemy(*it);
+				} else sold1->setCurrentEnemy(nullptr);
 			}
 		}
 	}
@@ -96,10 +95,16 @@ void CombatController::update_soldier(Soldier* sold1, int state) {
 		if (sold1->getCurrentEnemy() == nullptr) {
 			find_closest_enemy(sold1, state);
 		} 
-		if (sold1->getCurrentEnemy() == nullptr) {
-			follow(sold1, state);
-		}
-		else fight(sold1, state);
+		if (sold1->getCurrentEnemy() != nullptr) {
+			if (dist_by_center(sold1, sold1->getCurrentEnemy()) > 1000) {
+				find_closest_enemy(sold1, state);
+				if (sold1->getCurrentEnemy() == nullptr) {
+					follow(sold1, state);
+				}
+				else fight(sold1, state);
+			}
+			else fight(sold1, state);
+		} else follow(sold1, state);
 	}
 	else {
 		follow(sold1, state);
@@ -127,7 +132,7 @@ float CombatController::dist_by_center(Soldier* sold1, Soldier* sold2) {
 
 void CombatController::checkParties() {
 	for (auto i = Village::villagesWorld.begin(); i != Village::villagesWorld.end(); ++i) {
-		vector<Village*> warVils = War::getWars(*i);
+		vector<Village*> warVils = (*i)->get_alliance()->get_enemy_villages();
 		for (auto j = warVils.begin(); j != warVils.end();++j) {
 			vector<Party*> partiesA=(*i)->getParties();
 			vector<Party*> partiesB= (*j)->getParties();

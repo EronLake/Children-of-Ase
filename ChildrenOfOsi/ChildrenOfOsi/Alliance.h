@@ -19,6 +19,7 @@ public:
 	void add_to_alliance(Village* p_factionToAdd);
 	void add_alliance_to_alliance(Alliance* p_allianceToAdd);
 	vector<Village*> get_alligned_villages(){ return allies; };
+	vector<Village*> get_enemy_villages() { return enemies; };
 	void remove_from_alliance(Village* p_factionToRemove);
 	static void remove_alliance(Alliance* p_allianceToRemove);
 	static void update_enemies();
