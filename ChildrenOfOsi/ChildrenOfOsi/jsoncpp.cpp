@@ -72,7 +72,7 @@ license you like.
 
 
 
-
+#include "stdafx.h"
 #include "json.h"
 
 
