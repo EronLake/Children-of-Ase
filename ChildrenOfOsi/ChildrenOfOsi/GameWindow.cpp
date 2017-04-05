@@ -254,7 +254,7 @@ void GameWindow::refresh()
   glClear(GL_COLOR_BUFFER_BIT);
   //RenderText(*osi::GameWindow::s, "This is sample text", 25.0f, 25.0f, 1.0f, glm::vec3(0.5, 0.8f, 0.2f));
   for(GLint i = 0; i < numObjects; ++i) {
-    glBindTexture(GL_TEXTURE_2D, Texture::textureId[textures[i] - 1]);
+    glBindTexture(GL_TEXTURE_2D, textures[i]);//Texture::textureId[textures[i] - 1]);
     glBindVertexArray(vertexArrayObjectId[i]);
     glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
     glDeleteVertexArrays(1, &vertexArrayObjectId[i]);
