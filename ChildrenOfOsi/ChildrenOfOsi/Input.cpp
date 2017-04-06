@@ -67,6 +67,8 @@ void Input::InputCheck()
 	short P = GetKeyState('P') >> 15;
 	short Z = GetKeyState('Z') >> 15;
 	short G = GetKeyState('G') >> 15;
+	short Y = GetKeyState('Y') >> 15;
+	short U = GetKeyState('U') >> 15;
 
 
 	if (DialogueController::getState() == 0) {
@@ -211,6 +213,12 @@ void Input::InputCheck()
 		if (G) {
 			t->getParty()->set_defend(t->getLoc());
 			t->getParty()->setMode(Party::MODE_DEFEND);
+		}
+		if (Y) {
+			t->getParty()->setMode(Party::MODE_ATTACK);
+		}
+		if (U) {
+			t->getParty()->setMode(Party::MODE_FLEE);
 		}
 		if (H) {
 			t->getParty()->set_home(t->getLoc());

@@ -247,6 +247,7 @@ void Party::setMode(int m)
 	else if (mode == Party::MODE_FLEE) {
 		for (auto& member : this->members) {
       member->setHold(false);
+	  member->setInCombat(false);
     }
   }
 }
