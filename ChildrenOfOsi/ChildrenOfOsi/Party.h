@@ -42,8 +42,18 @@ class Party
   void addToParty(Soldier *, bool);
   void removeSoldier(Soldier *);
   void clear();
-  void setMode(int);
+  void setMode(int i);
   void updateFollowers();
+  void set_home(Vector2f h) { home = h; };
+  void set_defend(Vector2f d) { defend = d; };
+  void add_patrol_loc(Vector2f p) { patrol_route.push_back(p); };
+  void clear_patrol_route() { patrol_route.clear(); };
+
+  Vector2f get_home() { return home; };
+  Vector2f get_defend() { return defend; };
+  Vector2f get_next_patrol_loc();
+  Vector2f get_current_patrol_loc() { return patrol_route[patrol_point]; };
+  vector<Vector2f> get_patrol_route() { return patrol_route; };
 
   void findEnemy();
   void update();
@@ -53,6 +63,10 @@ class Party
 
   private:
 
+  Vector2f home;
+  Vector2f defend;
+  vector<Vector2f> patrol_route;
+  int patrol_point;
   Alliance* faction;
   vector<Soldier *> members;
   Soldier *leader;

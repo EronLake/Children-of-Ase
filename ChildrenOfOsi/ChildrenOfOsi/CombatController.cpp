@@ -91,23 +91,30 @@ void CombatController::find_closest_enemy(Soldier* sold1, int state) {
 
 void CombatController::update_soldier(Soldier* sold1, int state) {
 	sold1->updateCD();
-	if (sold1->getInCombat()) {
-		if (sold1->getCurrentEnemy() == nullptr) {
-			find_closest_enemy(sold1, state);
-		} 
-		if (sold1->getCurrentEnemy() != nullptr) {
-			if (dist_by_center(sold1, sold1->getCurrentEnemy()) > 1000) {
+	if ((sold1->getParty()->getMode() == Party::MODE_DEFEND) && (dist_soldier_to_location(sold1, sold1->getParty()->get_defend())>500)) {
+		sold1->destination = sold1->getParty()->get_defend();
+		sold1->waypoint = sold1->getParty()->get_defend();
+		move_to_target(sold1, state);
+	} else {
+		if (sold1->getInCombat()) {
+			if (sold1->getCurrentEnemy() == nullptr) {
 				find_closest_enemy(sold1, state);
-				if (sold1->getCurrentEnemy() == nullptr) {
-					follow(sold1, state);
+			}
+			if (sold1->getCurrentEnemy() != nullptr) {
+				if (dist_by_center(sold1, sold1->getCurrentEnemy()) > 1000) {
+					find_closest_enemy(sold1, state);
+					if (sold1->getCurrentEnemy() == nullptr) {
+						follow(sold1, state);
+					}
+					else fight(sold1, state);
 				}
 				else fight(sold1, state);
 			}
-			else fight(sold1, state);
-		} else follow(sold1, state);
-	}
-	else {
-		follow(sold1, state);
+			else follow(sold1, state);
+		}
+		else {
+			follow(sold1, state);
+		}
 	}
 }
 
@@ -126,6 +133,13 @@ void CombatController::move_to_target(Soldier* sold1, int state) {
 float CombatController::dist_by_center(Soldier* sold1, Soldier* sold2) {
 	float a = ((sold1->body[0].getX() + (sold1->body[0].getWidth() / 2)) - (sold2->body[0].getX() + (sold2->body[0].getWidth() / 2)));
 	float b= ((sold1->body[0].getY() + (sold1->body[0].getHeight() / 2)) - (sold2->body[0].getY() + (sold2->body[0].getHeight() / 2)));
+	float c = sqrt(a*a + b*b);
+	return c;
+}
+
+float CombatController::dist_soldier_to_location(Soldier* sold1, Vector2f loc) {
+	float a = ((sold1->body[0].getX() + (sold1->body[0].getWidth() / 2)) - (loc.getXloc()));
+	float b = ((sold1->body[0].getY() + (sold1->body[0].getHeight() / 2)) - (loc.getYloc()));
 	float c = sqrt(a*a + b*b);
 	return c;
 }

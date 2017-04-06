@@ -224,37 +224,28 @@ void Party::setMode(int m)
   this->mode = m;
 	if (mode == Party::MODE_IDLE) {
 		for (auto& member : this->members) {
-      member->setInCombat(false);
-      member->setEvade(false);
       member->setHold(false);
     }
   }
 	else if (mode == Party::MODE_ATTACK) {
 		for (auto& member : this->members) {
-      member->setInCombat(true);
-      member->setEvade(false);
       member->setHold(false);
     }
   }
 	else if (mode == Party::MODE_DEFEND) {
 		for (auto& member : this->members) {
-      member->setInCombat(true);
       member->setHold(true);
-      member->setEvade(false);
     }
   }
 	else if (mode == Party::MODE_PATROL) {
 		for (auto& member : this->members) {
-      member->setInCombat(false);
-      member->setHold(false);
-      member->setEvade(false);
+			patrol_point = 0;
+			member->setHold(false);
     }
   }
 	else if (mode == Party::MODE_FLEE) {
 		for (auto& member : this->members) {
-      member->setInCombat(false);
       member->setHold(false);
-      member->setEvade(true);
     }
   }
 }
@@ -275,3 +266,7 @@ void Party::findEnemy()
 
 void Party::update()
 {}
+
+Vector2f Party::get_next_patrol_loc() {
+	return Vector2f(0,0);
+}

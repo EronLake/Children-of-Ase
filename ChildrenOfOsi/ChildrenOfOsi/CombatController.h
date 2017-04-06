@@ -22,6 +22,7 @@ public:
 	void move_to_target(Soldier* sold1, int state);
 	void addtoTargets(Soldier* sold2) { enemyVec.push_back(sold2); };
 	float dist_by_center(Soldier* sold1, Soldier* sold2);
+	float dist_soldier_to_location(Soldier* sold1, Vector2f loc);
 	void checkParties();
 private:
 	vector<Soldier*> soldiers;
