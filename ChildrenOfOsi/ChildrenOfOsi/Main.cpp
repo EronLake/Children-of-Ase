@@ -1275,6 +1275,9 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	Village* v1 = new Village();
 	Village* v2 = new Village();
 	Village* v3 = new Village();
+	v1->set_village_location({6045.0, 5155.0});
+	v2->set_village_location({6045.0, 15155.0 });
+	v3->set_village_location({6045.0, 10155.0 });
 	v1->add_member(Alex);
 	v1->add_member(silverSoldier);
 	v1->add_member(silverSoldier2);
@@ -1284,28 +1287,19 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	v3->add_member(staticRec);
 	v1->addToParties(party);
 	v2->addToParties(party2);
-	v3->addToParties(party3);
 	Alliance* a1 = new Alliance(v1);
 	Alliance* a2 = new Alliance(v2);
 	Alliance* a3 = new Alliance(v3);
 	a1->add_alliance_to_alliance(a3);
+	v1->addToParties(party3);
 	War* war = new War();
 	war->setWarParties(v1,v2);
-	
-	party->updateFollowers();
-	party2->updateFollowers();
-	party3->updateFollowers();
+	a1->remove_village_from_alliance(v3);
 	party2->add_patrol_loc(Alex->getLoc());
 	party2->setMode(Party::MODE_PATROL);
-	party3->add_patrol_loc({6845.0, 10355.0});
-	party3->add_patrol_loc({ 6345.0, 10355.0 });
-	party3->setMode(Party::MODE_PATROL);
-
-	Alliance::update_enemies();
 
 	partyM->addToPartyList(party);
 	partyM->addToPartyList(party2);
-	partyM->addToPartyList(party3);
 
 	//osi::GameWindow::init();
 	LOG("PAST WINDOW INIT ***********************");

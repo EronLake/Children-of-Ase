@@ -19,7 +19,7 @@ Alliance::~Alliance()
 	//force the destructor if there are no factions in the alliance(as result of merging to another alliance perhaps)
 }
 
-void Alliance::add_to_alliance(Village * p_faction)
+void Alliance::add_village_to_alliance(Village * p_faction)
 {
 	allies.push_back(p_faction);
 	std::vector<Village*> tmp = War::getWars(p_faction);
@@ -33,20 +33,45 @@ void Alliance::add_alliance_to_alliance(Alliance* p_alliance)
 {
 	vector<Village*> tmp = p_alliance->get_alligned_villages();
 	for (auto p_faction = tmp.begin(); p_faction != tmp.end(); ++p_faction) {
-		this->add_to_alliance(*p_faction);
+		this->add_village_to_alliance(*p_faction);
 	}
 	Alliance::remove_alliance(p_alliance);
 }
 
-void Alliance::remove_from_alliance(Village * p_factionToRemove)
+void Alliance::remove_village_from_alliance(Village * p_factionToRemove)
 {
 	allies.erase(std::remove(allies.begin(), allies.end(), p_factionToRemove), allies.end());
-	Alliance::Alliances.push_back(new Alliance(p_factionToRemove));
+	for (auto it = allies.begin(); it != allies.end(); ++it) {
+		if (p_factionToRemove == *it) {
+			allies.erase(it);
+		}
+		else {
+			vector<Party*> party = (*it)->getParties();
+			for (auto it2 = party.begin(); it2 != party.end();++it2) {
+				vector<Soldier*> soldiers = (*it2)->getMembers();
+				Party* p = new Party();
+				for (auto it3 = soldiers.begin(); it3 != soldiers.end(); ++it3) {
+					if ((*it3)->getVillage() == p_factionToRemove) {
+						p->addToParty(*it3,true);
+						(*it2)->removeSoldier(*it3);
+					}
+				}
+				if (p->getMembers().size() != 0) {
+					p->set_home((*it)->get_village_location());
+					p->setMode(Party::MODE_FLEE);
+					p_factionToRemove->addToParties(p);
+				}
+				if ((*it2)->getMembers().size() == 0) {
+					(*it)->remove_party(*it2);
+				}
+			}
+		}
+	}
+	new Alliance(p_factionToRemove);
 	if (allies.size() == 0) {
 		Alliance::remove_alliance(this);
-	} else {
-		update_enemies();
 	}
+	update_enemies();
 }
 
 void Alliance::remove_alliance(Alliance * p_alliance)

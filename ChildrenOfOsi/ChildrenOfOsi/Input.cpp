@@ -10,7 +10,6 @@
 
 Input::Input(ChildrenOfOsi* _gameplay_functions, RenderHelper* _rHelper, TaskBuffer* _tBuffer, vector<WorldObj*>* _recVec)
 {
-	disable = false;
 	count = 0;
 	gameplay_functions = _gameplay_functions;
 	rHelper = _rHelper;
@@ -21,7 +20,6 @@ Input::Input(ChildrenOfOsi* _gameplay_functions, RenderHelper* _rHelper, TaskBuf
 
 Input::Input(ChildrenOfOsi* _gameplay_functions, WorldObj * _player, RenderHelper* _rHelper, TaskBuffer* _tBuffer, vector<WorldObj*>* _recVec, AIController* ai_c)
 {
-	disable = false;
 	count = 0;
 	count2 = 0;
 	gameplay_functions = _gameplay_functions;
@@ -583,6 +581,22 @@ void Input::InputCheck()
 	}
 
 	if (DialogueController::getState() > 0) {
+		if (count < 0) {
+			count--;
+		}
+		if (SHIFT && Q && count==0) {
+			WorldObj* other = DialogueController::getOther();
+			if (other->getType() > 2) {
+				Soldier* follower = dynamic_cast<Soldier*>(other);
+				Player* t = CheckClass::isPlayer(player);
+				if (t->getParty()==follower->getParty()) {
+					t->getParty()->removeSoldier(follower);
+				} else if(t->getParty()->getAlliance() == follower->getParty()->getAlliance()){
+					t->getParty()->addToParty(follower,false);
+				}
+			}
+			count = 10;
+		}
 		if (Q) {
 			//DialogueController::exitDialogue();
 
@@ -628,17 +642,13 @@ void Input::InputCheck()
 			DialogueController::setOptionsIndex(3);
 			gameplay_functions->setQuestionGlow(player);
 		}
-		if (count == 10) {
-			disable = false;
-			count = 0;
-		}
-		if (!disable) {
+		if (count=0) {
 			int State = DialogueController::getState();
 			if (W && State == 1) {
 				int tmp = DialogueController::getOptionsIndex();
 				if (tmp > 0) {
 					DialogueController::setOptionsIndex(--tmp);
-					disable = true;
+					count = 10;
 					////std::cout << "OptionsIndex: " << tmp << std::endl;
 					switch (DialogueController::getOptionsIndex()) {
 					case 0: gameplay_functions->setSwordGlow(player); break;
@@ -652,7 +662,7 @@ void Input::InputCheck()
 				int tmp = DialogueController::getOptionsIndex();
 				if (tmp < DialogueController::getOSize() - 1) {
 					DialogueController::setOptionsIndex(++tmp);
-					disable = true;
+					count=10;
 					////std::cout << "OptionsIndex: " << tmp << std::endl;
 					switch (DialogueController::getOptionsIndex()) {
 					case 0: gameplay_functions->setSwordGlow(player); break;
@@ -667,26 +677,26 @@ void Input::InputCheck()
 				if (DialogueController::getState() == 1) {
 					if (tmp < (DialogueController::getOptions().size() - 1)) {
 						DialogueController::setSelect(++tmp);
-						disable = true;
+						count = 10;
 						////std::cout << "Index: " << tmp << std::endl;
 					}
 					if (tmp > (DialogueController::getOptions().size() - 1)) {
 						tmp = 0;
 						DialogueController::setSelect(tmp);
-						disable = true;
+						count = 10;
 						////std::cout << "Index: " << tmp << std::endl;
 					}
 				}
 				if (State == 2) {
 					if (tmp < (DialogueController::getReplyOptions().size() - 1)) {
 						DialogueController::setSelect(++tmp);
-						disable = true;
+						count = 10;
 						////std::cout << "Index: " << tmp << std::endl;
 					}
 					if (tmp > (DialogueController::getReplyOptions().size() - 1)) {
 						tmp = 0;
 						DialogueController::setSelect(tmp);
-						disable = true;
+						count = 10;
 						////std::cout << "Index: " << tmp << std::endl;
 					}
 				}
@@ -695,25 +705,22 @@ void Input::InputCheck()
 				int tmp = DialogueController::getSelect();
 				if (tmp > 0) {
 					DialogueController::setSelect(--tmp);
-					disable = true;
+					count = 10;
 					////std::cout << "Index: " << tmp << std::endl;
 				}
 			}
 			if (ENTER) {
 				////std::cout << "ENTER" << std::endl;
 				if (DialogueController::getState() == 1) {
-					disable = true;
+					count = 10;
 					DialogueController::PlayerConversationPoint();
 				}
 				else if (DialogueController::getState() == 2) {
-					disable = true;
+					count = 10;
 					DialogueController::PlayerResponse();
 				//	DialogueController::prompted_quest = false;
 				}
 			}
-		}
-		else {
-			count++;
 		}
 	}
 }

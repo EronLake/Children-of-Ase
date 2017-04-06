@@ -100,6 +100,7 @@ void Party::addToParty(Soldier* s, bool isLeader)
       s->setParty(this);
     }
   }
+	updateFollowers();
 }
 
 /**
@@ -212,6 +213,7 @@ void Party::setLeader(Soldier* s)
       break;
     }
   }
+	updateFollowers();
 }
 
 /**
