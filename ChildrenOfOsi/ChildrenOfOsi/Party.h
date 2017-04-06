@@ -51,8 +51,8 @@ class Party
 
   Vector2f get_home() { return home; };
   Vector2f get_defend() { return defend; };
-  Vector2f get_next_patrol_loc();
-  Vector2f get_current_patrol_loc() { return patrol_route[patrol_point]; };
+  Vector2f get_current_patrol_loc(Vector2f n);
+  float dist_location_to_location(Vector2f n, Vector2f loc);
   vector<Vector2f> get_patrol_route() { return patrol_route; };
 
   void findEnemy();

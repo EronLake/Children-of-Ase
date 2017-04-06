@@ -23,6 +23,7 @@ Input::Input(ChildrenOfOsi* _gameplay_functions, WorldObj * _player, RenderHelpe
 {
 	disable = false;
 	count = 0;
+	count2 = 0;
 	gameplay_functions = _gameplay_functions;
 	rHelper = _rHelper;
 	tBuffer = _tBuffer;
@@ -65,6 +66,7 @@ void Input::InputCheck()
 	short F = GetKeyState('F') >> 15;
 	short P = GetKeyState('P') >> 15;
 	short Z = GetKeyState('Z') >> 15;
+	short G = GetKeyState('G') >> 15;
 
 
 	if (DialogueController::getState() == 0) {
@@ -206,7 +208,31 @@ void Input::InputCheck()
 			rivFile << std::endl;
 			rivFile.close();
 		} 
-
+		if (G) {
+			t->getParty()->set_defend(t->getLoc());
+			t->getParty()->setMode(Party::MODE_DEFEND);
+		}
+		if (H) {
+			t->getParty()->set_home(t->getLoc());
+		}
+		if (L) {
+			t->getParty()->clear_patrol_route();
+		}
+		if (count2 > 0)count2--;
+		if (V && (count2==0)) {
+			t->getParty()->add_patrol_loc(t->getLoc());
+			count2 = 200;
+		}
+		if (J && (count2 == 0)) {
+			t->getParty()->setMode(Party::MODE_FLEE);
+			t->getParty()->removeSoldier(t);
+			count2 = 200;
+		}
+		if (K && (count2 == 0)) {
+			t->getParty()->setMode(Party::MODE_PATROL);
+			t->getParty()->removeSoldier(t);
+			count2 = 200;
+		}
 		/*
 		if (L) {
 		std::string image_name;

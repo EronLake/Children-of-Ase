@@ -29,6 +29,7 @@ private:
 	short F;
 	bool disable;
 	int count;
+	int count2;
 
 	bool prompted_quest = false;
 

@@ -59,7 +59,10 @@ void CombatController::fight(Soldier* sold1, int state) {
 
 void CombatController::follow(Soldier* sold1, int state) {
 	Soldier* sold2 = sold1->getCurrentLeader();
-	if (sold2==nullptr)return;
+	if (sold2 == nullptr) {
+		party_leader_update(sold1,state);
+		return;
+	}
 	if (dist_by_center(sold1, sold2) > (sold1->body[0].getWidth() * 5)) {
 		sold1->waypoint = Vector2f(sold2->body[0].getX(), sold2->body[0].getY());
 		sold1->destination = Vector2f(sold2->body[0].getX(), sold2->body[0].getY());
@@ -90,29 +93,41 @@ void CombatController::find_closest_enemy(Soldier* sold1, int state) {
 }
 
 void CombatController::update_soldier(Soldier* sold1, int state) {
+	///update cooldowns
 	sold1->updateCD();
-	if ((sold1->getParty()->getMode() == Party::MODE_DEFEND) && (dist_soldier_to_location(sold1, sold1->getParty()->get_defend())>500)) {
+	if (sold1->getParty() == nullptr || sold1->getParty() == NULL)return;
+	///check if the soldier is supposed to hold position and if they are more than 500 away from the point
+	if ((sold1->getHold()) && (dist_soldier_to_location(sold1, sold1->getParty()->get_defend())>500)) {
 		sold1->destination = sold1->getParty()->get_defend();
 		sold1->waypoint = sold1->getParty()->get_defend();
 		move_to_target(sold1, state);
 	} else {
-		if (sold1->getInCombat()) {
+		///check if the soldier is in combat and not 1000 away from the leader
+		if ((sold1->getInCombat()) && (dist_by_center(sold1,sold1->getCurrentLeader())<1000)) {
+			///if no enemy find the closest one
 			if (sold1->getCurrentEnemy() == nullptr) {
 				find_closest_enemy(sold1, state);
 			}
 			if (sold1->getCurrentEnemy() != nullptr) {
+				///if the current enemy is more than 1000 away, try to find another
 				if (dist_by_center(sold1, sold1->getCurrentEnemy()) > 1000) {
 					find_closest_enemy(sold1, state);
+					///follow the leader if none
 					if (sold1->getCurrentEnemy() == nullptr) {
 						follow(sold1, state);
 					}
-					else fight(sold1, state);
+					///fight if there is a valid enemy
+					else {
+						fight(sold1, state);
+					}
+				} else {
+					fight(sold1, state);
 				}
-				else fight(sold1, state);
+			} /// follow the leader if there is no valid enemy or not in combat
+			else { 
+				follow(sold1, state); 
 			}
-			else follow(sold1, state);
-		}
-		else {
+		} else {
 			follow(sold1, state);
 		}
 	}
@@ -131,6 +146,7 @@ void CombatController::move_to_target(Soldier* sold1, int state) {
 }
 
 float CombatController::dist_by_center(Soldier* sold1, Soldier* sold2) {
+	if (sold1==nullptr || sold2 == nullptr)return 0;
 	float a = ((sold1->body[0].getX() + (sold1->body[0].getWidth() / 2)) - (sold2->body[0].getX() + (sold2->body[0].getWidth() / 2)));
 	float b= ((sold1->body[0].getY() + (sold1->body[0].getHeight() / 2)) - (sold2->body[0].getY() + (sold2->body[0].getHeight() / 2)));
 	float c = sqrt(a*a + b*b);
@@ -174,4 +190,20 @@ void CombatController::checkParties() {
 		}
 	}
 }
+}
+
+void CombatController::party_leader_update(Soldier* sold1, int state) {
+	if (sold1->getParty()->getMode() == Party::MODE_PATROL) {
+		Vector2f next = sold1->getParty()->get_current_patrol_loc(sold1->getLoc());
+		sold1->destination = next;
+		sold1->waypoint = next;
+		move_to_target(sold1, state);
+	}
+	else if (sold1->getParty()->getMode() == Party::MODE_FLEE) {
+		Vector2f home = sold1->getParty()->get_home();
+		sold1->destination = home;
+		sold1->waypoint = home;
+		move_to_target(sold1, state);
+		if (sold1->destination == Vector2f(0, 0))sold1->getParty()->setMode(Party::MODE_IDLE);
+	}
 }

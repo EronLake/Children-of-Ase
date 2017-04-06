@@ -187,6 +187,7 @@ void Party::removeSoldier(Soldier* s)
     }
     }
   }*/
+	updateFollowers();
 }
 
 /**
@@ -267,6 +268,17 @@ void Party::findEnemy()
 void Party::update()
 {}
 
-Vector2f Party::get_next_patrol_loc() {
-	return Vector2f(0,0);
+Vector2f Party::get_current_patrol_loc(Vector2f n) {
+	if (dist_location_to_location(n, patrol_route[patrol_point]) < 10) {
+		patrol_point++;
+		if (patrol_point >= patrol_route.size())patrol_point = 0;
+	}
+	return patrol_route[patrol_point];
+}
+
+float Party::dist_location_to_location(Vector2f n, Vector2f loc) {
+	float a = (n.getXloc() - loc.getXloc());
+	float b = (n.getYloc() - loc.getYloc());
+	float c = sqrt(a*a + b*b);
+	return c;
 }
