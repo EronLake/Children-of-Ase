@@ -137,9 +137,11 @@ void CombatController::move_to_target(Soldier* sold1, int state) {
 	if (sold1->destination != Vector2f(0, 0)) { //Hero has a destination
 		if (sold1->waypoint != Vector2f(0, 0) && state == 0) { //Hero has a waypoint to the desination, and not in dialog
 			gameplay_functions->move_toward(sold1); //Take a step towards the current waypoint
+			std::cout << sold1->getID() << "MOVING TOWARDS " << sold1->waypoint.getXloc() << ", " << sold1->waypoint.getYloc() << std::endl;
 		}
 		else if (state == 0)                //Hero needs waypoints to destination, and not in dialog
 		{
+			std::cout << sold1->getID() << "WHERE AM I GOING" << std::endl;
 			gameplay_functions->get_path(sold1); //Generate waypoints to destination
 		}
 	}
