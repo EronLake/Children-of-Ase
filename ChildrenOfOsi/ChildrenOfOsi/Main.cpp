@@ -1285,12 +1285,12 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	v2->add_member(blueSoldier2);
 	v2->add_member(blueSoldier3);
 	v3->add_member(staticRec);
-	v1->addToParties(party);
-	v2->addToParties(party2);
 	Alliance* a1 = new Alliance(v1);
 	Alliance* a2 = new Alliance(v2);
 	Alliance* a3 = new Alliance(v3);
 	a1->add_alliance_to_alliance(a3);
+	v1->addToParties(party);
+	v2->addToParties(party2);
 	v1->addToParties(party3);
 	War* war = new War();
 	war->setWarParties(v1,v2);
@@ -1298,6 +1298,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	a1->add_alliance_to_alliance(v3->get_alliance());
 	party2->add_patrol_loc(blueSoldier->getLoc());
 	party2->setMode(Party::MODE_PATROL);
+	cout << Alex->getParty()->getAlliance()<< endl;
 
 	partyM->addToPartyList(party);
 	partyM->addToPartyList(party2);
