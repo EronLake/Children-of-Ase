@@ -233,11 +233,13 @@ void Input::InputCheck()
 		if (J && (count2 == 0)) {
 			t->getParty()->setMode(Party::MODE_FLEE);
 			t->getParty()->removeSoldier(t, true);
+			t->getVillage()->addToParties(t->getParty());
 			count2 = 200;
 		}
 		if (K && (count2 == 0)) {
 			t->getParty()->setMode(Party::MODE_PATROL);
 			t->getParty()->removeSoldier(t,true);
+			t->getVillage()->addToParties(t->getParty());
 			count2 = 200;
 		}
 		/*
@@ -589,7 +591,8 @@ void Input::InputCheck()
 			WorldObj* other = DialogueController::getOther();
 			if (other->getType() > 2) {
 				Soldier* follower = dynamic_cast<Soldier*>(other);
-				Player* t = CheckClass::isPlayer(player);
+				Player* t = dynamic_cast<Player*>(player);
+				cout << t->getParty()->getAlliance() << " = " << follower->getParty()->getAlliance() << endl;
 				if (t->getParty()==follower->getParty()) {
 					t->getParty()->removeSoldier(follower,true);
 					follower->getVillage()->addToParties(follower->getParty());

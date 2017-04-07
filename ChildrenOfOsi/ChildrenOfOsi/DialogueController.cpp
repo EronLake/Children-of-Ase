@@ -145,8 +145,6 @@ void DialogueController::setPlayer(Player* p)
 void DialogueController::startConversation(WorldObj* n, bool playerTalk)
 {
 	other = n;
-	if (n->getName() != "Yemoja")
-		return;
 	message = "You started talking to ";
 	message += n->getName();
 	if (playerTalk) {
