@@ -319,7 +319,9 @@ void GameWindow::setupWindow()
   glfwWindowHint(GLFW_RESIZABLE, GL_FALSE);
 
   GameWindow::primaryMonitor = glfwGetPrimaryMonitor();
-  GameWindow::window = glfwCreateWindow(1280, 720, "Children of Ase", /*GameWindow::primaryMonitor*/ nullptr, nullptr);
+  GameWindow::window = glfwCreateWindow(1280, 720, "Children of Ase",
+    (START_FULLSCREEN) ? GameWindow::primaryMonitor : nullptr,
+    nullptr);
   if(window == nullptr) {
     glfwTerminate();
     throw WindowingError("Failed to create window.");
