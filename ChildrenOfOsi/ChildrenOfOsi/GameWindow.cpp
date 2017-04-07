@@ -319,7 +319,7 @@ void GameWindow::setupWindow()
   glfwWindowHint(GLFW_RESIZABLE, GL_FALSE);
 
   GameWindow::primaryMonitor = glfwGetPrimaryMonitor();
-  GameWindow::window = glfwCreateWindow(1280, 720, "Children of Osi", /*GameWindow::primaryMonitor*/ nullptr, nullptr);
+  GameWindow::window = glfwCreateWindow(1280, 720, "Children of Ase", /*GameWindow::primaryMonitor*/ nullptr, nullptr);
   if(window == nullptr) {
     glfwTerminate();
     throw WindowingError("Failed to create window.");
@@ -342,15 +342,12 @@ void GameWindow::setupWindow()
     glViewport(0, 0, GameWindow::windowWidthPx, GameWindow::windowHeightPx);
   }
   else {
-    // If screen is wider than 16:9
-    if(aspectRatio > (16.0 / 9.0)) {
+    if(aspectRatio > (16.0 / 9.0)) { // If screen is wider than 16:9
       glfwGetFramebufferSize(window, &GameWindow::windowWidthPx, &GameWindow::windowHeightPx);
       GameWindow::windowWidthPx = static_cast<int>(floor(GameWindow::windowHeightPx * (16.0 / 9.0)));
       glViewport(0, 0, GameWindow::windowWidthPx, GameWindow::windowHeightPx);
     }
-
-    // If screen is narrower than 16:9
-    else {
+    else { // If screen is narrower than 16:9
       glfwGetFramebufferSize(window, &GameWindow::windowWidthPx, &GameWindow::windowHeightPx);
       GameWindow::windowHeightPx = static_cast<int>(floor(GameWindow::windowWidthPx * (9.0 / 16.0)));
       glViewport(0, 0, GameWindow::windowWidthPx, GameWindow::windowHeightPx);
