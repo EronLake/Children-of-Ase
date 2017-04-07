@@ -1277,7 +1277,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	Village* v3 = new Village();
 	v1->set_village_location({6045.0, 5155.0});
 	v2->set_village_location({6045.0, 15155.0 });
-	v3->set_village_location({6045.0, 10155.0 });
+	v3->set_village_location({6445.0, 10355.0 });
 	v1->add_member(Alex);
 	v1->add_member(silverSoldier);
 	v1->add_member(silverSoldier2);
@@ -1295,7 +1295,8 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	War* war = new War();
 	war->setWarParties(v1,v2);
 	a1->remove_village_from_alliance(v3);
-	party2->add_patrol_loc(Alex->getLoc());
+	a1->add_alliance_to_alliance(v3->get_alliance());
+	party2->add_patrol_loc(blueSoldier->getLoc());
 	party2->setMode(Party::MODE_PATROL);
 
 	partyM->addToPartyList(party);

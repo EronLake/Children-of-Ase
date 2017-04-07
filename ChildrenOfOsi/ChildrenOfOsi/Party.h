@@ -38,9 +38,9 @@ class Party
   bool isEnemyOf(Party *);
 
   void setAlliance(Alliance *a) { this->faction = a; }
-  void setLeader(Soldier *);
-  void addToParty(Soldier *, bool);
-  void removeSoldier(Soldier *);
+  void setLeader(Soldier* s);
+  void addToParty(Soldier* s, bool b);
+  void removeSoldier(Soldier* s, bool b);
   void clear();
   void setMode(int i);
   void updateFollowers();

@@ -190,7 +190,7 @@ void Soldier::defeat()
 //this removes the soldier from the party and sets its party to null
 void Soldier::defeat()
 {
-  this->getParty()->removeSoldier(this);
+  this->getParty()->removeSoldier(this, false);
   this->setParty(NULL);
 }
 

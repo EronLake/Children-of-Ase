@@ -11,6 +11,7 @@
 Input::Input(ChildrenOfOsi* _gameplay_functions, RenderHelper* _rHelper, TaskBuffer* _tBuffer, vector<WorldObj*>* _recVec)
 {
 	count = 0;
+	count2 = 0;
 	gameplay_functions = _gameplay_functions;
 	rHelper = _rHelper;
 	tBuffer = _tBuffer;
@@ -231,12 +232,12 @@ void Input::InputCheck()
 		}
 		if (J && (count2 == 0)) {
 			t->getParty()->setMode(Party::MODE_FLEE);
-			t->getParty()->removeSoldier(t);
+			t->getParty()->removeSoldier(t, true);
 			count2 = 200;
 		}
 		if (K && (count2 == 0)) {
 			t->getParty()->setMode(Party::MODE_PATROL);
-			t->getParty()->removeSoldier(t);
+			t->getParty()->removeSoldier(t,true);
 			count2 = 200;
 		}
 		/*
@@ -581,7 +582,7 @@ void Input::InputCheck()
 	}
 
 	if (DialogueController::getState() > 0) {
-		if (count < 0) {
+		if (count > 0) {
 			count--;
 		}
 		if (SHIFT && Q && count==0) {
@@ -590,8 +591,11 @@ void Input::InputCheck()
 				Soldier* follower = dynamic_cast<Soldier*>(other);
 				Player* t = CheckClass::isPlayer(player);
 				if (t->getParty()==follower->getParty()) {
-					t->getParty()->removeSoldier(follower);
+					t->getParty()->removeSoldier(follower,true);
+					follower->getVillage()->addToParties(follower->getParty());
 				} else if(t->getParty()->getAlliance() == follower->getParty()->getAlliance()){
+					if (follower->getParty()->getMembers().size()<=1)follower->getVillage()->remove_party(follower->getParty());
+					follower->getParty()->removeSoldier(follower, false);
 					t->getParty()->addToParty(follower,false);
 				}
 			}
@@ -642,7 +646,7 @@ void Input::InputCheck()
 			DialogueController::setOptionsIndex(3);
 			gameplay_functions->setQuestionGlow(player);
 		}
-		if (count=0) {
+		if (count==0) {
 			int State = DialogueController::getState();
 			if (W && State == 1) {
 				int tmp = DialogueController::getOptionsIndex();

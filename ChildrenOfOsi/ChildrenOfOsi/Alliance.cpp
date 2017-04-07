@@ -52,12 +52,12 @@ void Alliance::remove_village_from_alliance(Village * p_factionToRemove)
 				Party* p = new Party();
 				for (auto it3 = soldiers.begin(); it3 != soldiers.end(); ++it3) {
 					if ((*it3)->getVillage() == p_factionToRemove) {
+						(*it2)->removeSoldier(*it3, false);
 						p->addToParty(*it3,true);
-						(*it2)->removeSoldier(*it3);
 					}
 				}
 				if (p->getMembers().size() != 0) {
-					p->set_home((*it)->get_village_location());
+					p->set_home((p_factionToRemove)->get_village_location());
 					p->setMode(Party::MODE_FLEE);
 					p_factionToRemove->addToParties(p);
 				}

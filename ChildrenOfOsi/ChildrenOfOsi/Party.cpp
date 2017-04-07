@@ -108,7 +108,7 @@ void Party::addToParty(Soldier* s, bool isLeader)
  * soldier has duplicate references in this party, all such duplicates will be
  * removed as well.
  */
-void Party::removeSoldier(Soldier* s)
+void Party::removeSoldier(Soldier* s, bool b)
 {
 	//cout << ""
 	// First find the solider in the members list
@@ -148,10 +148,8 @@ void Party::removeSoldier(Soldier* s)
   
 	// Update Soldier s's party status
 	cout << "SIZE OF PARTY WITH OBJ REMOVED IS " << s->getParty()->getMembers().size() << endl;
-	s->setParty(nullptr);
-	s->setCurrentLeader(nullptr);
-	
-	
+	if (b)s->setParty(new Party());
+	updateFollowers();
 
 
 	//cout << "SIZE OF THE PARTY IS ********** " << members.size() << endl;
@@ -188,7 +186,6 @@ void Party::removeSoldier(Soldier* s)
     }
     }
   }*/
-	updateFollowers();
 }
 
 /**

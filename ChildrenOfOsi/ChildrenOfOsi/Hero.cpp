@@ -71,14 +71,14 @@ Memory* Hero::find_mem(std::string mem_name)
 //overloads a soldier function
 void Hero::defeat()
 {
-	this->getParty()->removeSoldier(this);
+	this->getParty()->removeSoldier(this,true);
 	incapacitated = true;
 }
 
 //overloads a soldier function
 void Hero::kill()
 {
-	this->getParty()->removeSoldier(this);
+	this->getParty()->removeSoldier(this,false);
 	this->setParty(NULL);
 }
 /*
