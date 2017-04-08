@@ -319,7 +319,8 @@ void GameWindow::setupWindow()
   glfwWindowHint(GLFW_RESIZABLE, GL_FALSE);
 
   GameWindow::primaryMonitor = glfwGetPrimaryMonitor();
-  GameWindow::window = glfwCreateWindow(1280, 720, "Children of Ase",
+  std::string windowTitle = std::string(u8"Children of \x00C0\x1E63\x1EB9");
+  GameWindow::window = glfwCreateWindow(1280, 720, windowTitle.c_str(),
     (START_FULLSCREEN) ? GameWindow::primaryMonitor : nullptr,
     nullptr);
   if(window == nullptr) {
