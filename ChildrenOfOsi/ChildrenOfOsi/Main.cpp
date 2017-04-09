@@ -1250,7 +1250,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	Alliance* a3 = new Alliance(v3);
 	v1->addToParties(party);
 	v2->addToParties(party2);
-	v1->addToParties(party3);
+	v3->addToParties(party3);
 	War* war = new War();
 	war->setWarParties(v1,v2);
 	a1->add_alliance_to_alliance(v3->get_alliance());

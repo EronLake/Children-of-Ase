@@ -93,6 +93,7 @@ void CombatController::find_closest_enemy(Soldier* sold1, int state) {
 }
 
 bool CombatController::find_closest_friend(Soldier* sold1, int state) {
+	if (sold1->getCurrentLeader() == nullptr)return false;
 	float least_distance = -1;
 	Soldier* fr= new Soldier();
 	vector<Soldier*> temp_good = sold1->getParty()->getMembers();
@@ -237,6 +238,11 @@ void CombatController::party_leader_update(Soldier* sold1, int state) {
 		sold1->destination = home;
 		sold1->waypoint = home;
 		move_to_target(sold1, state);
-		if (sold1->destination == Vector2f(0, 0))sold1->getParty()->setMode(Party::MODE_IDLE);
+		if (sold1->destination == Vector2f(0, 0)) {
+			sold1->getParty()->setMode(Party::MODE_IDLE);
+			if (home == sold1->getParty()->get_village()->get_village_location()) {
+				sold1->getParty()->get_village()->barracks.push_back(sold1->getParty());
+			}
+		}
 	}
 }

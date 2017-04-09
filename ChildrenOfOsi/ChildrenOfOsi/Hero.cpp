@@ -81,6 +81,14 @@ void Hero::kill()
 	this->getParty()->removeSoldier(this,false);
 	this->setParty(NULL);
 }
+
+vector<pair<Action*, int>> Hero::get_quests() {
+	vector<pair<Action*, int>> tmp;
+	for (auto it = quests.begin(); it != quests.end(); ++it) {
+		tmp.push_back({ it->first, it->second });
+	}
+	return tmp;
+}
 /*
 void Hero::init_act_pools(ChildrenOfOsi* gameplay_func, TaskBuffer* tBuffer)
 {

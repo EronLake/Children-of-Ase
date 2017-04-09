@@ -16,7 +16,8 @@ public:
 	Village* conquerer;
 	vector<Village*> conquered;
 	Hero* leader;
-	void addToParties(Party* p) { p->setAlliance(alliance); parties.push_back(p); };
+	void addToParties(Party* p) { p->setAlliance(alliance);
+	p->set_village(this); p->set_home(location); parties.push_back(p);};
 	void addToEnemyParties(Party* p) { enemy_parties.push_back(p); };
 	void remove_party(Party* p);
 	void remove_enemy_party(Party* p);
@@ -31,6 +32,7 @@ public:
 	void remove_member(NPC* n);
 	void set_village_location(Vector2f loc) { location = loc; };
 	Vector2f get_village_location() { return location; };
+	vector<Party*> barracks;
 
 private:
 	Alliance* alliance;

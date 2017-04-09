@@ -103,6 +103,14 @@ void Party::addToParty(Soldier* s, bool isLeader)
 	updateFollowers();
 }
 
+void Party::add_party_to_party(Party* s) {
+	vector<Soldier*> m=s->getMembers();
+	for (auto i = m.begin(); i != m.end(); ++i) {
+		s->removeSoldier(*i,false);
+		addToParty(*i,false);
+	}
+}
+
 /**
  * Removes the specified soldier from this party. If, for some reason, the
  * soldier has duplicate references in this party, all such duplicates will be
