@@ -409,9 +409,23 @@ int Movement::attack(WorldObj* obj) {
 											}
 										}
 									}
+
 									if (!friendly) {
 										a->second->Hit(npc);
 										cout << "THE TARGET'S HP IS NOW ******** " << npc->getHealth() << endl;
+
+                    // If target is dead, remove from village and targeting
+                    if(npc->getHealth() <= 0) {
+                      if(Soldier *sold = CheckClass::isSoldier(liv)) {
+                        if(sold->getVillage() != nullptr)
+                          sold->getVillage()->remove_member(sold);
+                        for(auto& query : Containers::soldier_table)
+                          if(query.second->getCurrentEnemy() == sold)
+                            query.second->setCurrentEnemy(nullptr);
+                        sold->defeat();
+                      }
+                    }
+
 										manager->createTaskForAudio("PlaySound", "SOUND", "SFX/hit.wav");
 									} else {
 										a->second->addHit(npc);
@@ -421,6 +435,19 @@ int Movement::attack(WorldObj* obj) {
 								a->second->Hit(liv);
 								manager->createTaskForAudio("PlaySound", "SOUND", "SFX/hit.wav");
 								cout << "THE TARGET'S HP IS NOW ******** " << liv->getHealth() << endl;
+
+                // If target is dead, remove from village and targeting
+                if(liv->getHealth() <= 0) {
+                  if(Soldier *sold = CheckClass::isSoldier(liv)) {
+                    if(sold->getVillage() != nullptr)
+                      sold->getVillage()->remove_member(sold);
+                    for(auto& query : Containers::soldier_table)
+                      if(query.second->getCurrentEnemy() == sold)
+                        query.second->setCurrentEnemy(nullptr);
+                    sold->defeat();
+                  }
+                }
+
 								if (a->second->getDestroy())a->second->setDuration(0);
 								liv->sprite.unlockAnimation();
 								manager->createTaskWithObj("Hurt", "DRAW", liv);
