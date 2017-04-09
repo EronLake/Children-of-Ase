@@ -63,6 +63,7 @@
 #include "Alliance.h"
 #include "PartyManager.h"
 //#include <boost/thread/thread.hpp>  //This is used for Ian's multithread section, but the user needs the boost compiled library installed on their computer
+# include "thread"
 
 using namespace std;
 
@@ -653,30 +654,32 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 
 //Ian's attempt at multithreading. Compiles in 22 seconds on school computer. Still has same issue with spritesheet sprites, where the red and black boxes appear.
 //Other sprites load in normally though
-//also needs the boost external dependency, so it might 
-	/*HDC hdc = wglGetCurrentDC();
-	HGLRC mainContext = wglGetCurrentContext();
-	HGLRC loaderContext = wglCreateContext(hdc);
-	wglShareLists(loaderContext, mainContext);
-	boost::thread([=]() {
-	wglMakeCurrent(hdc, loaderContext);
+//also needs the boost external dependency, so it might
+	
+	HDC hdc = wglGetCurrentDC();// Simply gets the device context, which is needed to initialize a GL context, not really used for anything else
+	HGLRC mainContext = wglGetCurrentContext();//Sets the default GL context to main
+	HGLRC loaderContext = wglCreateContext(hdc);//Creates the new GL context that we will use for loading
+	wglShareLists(mainContext, loaderContext);//Shares the information between the loading context and the main context
+	std::thread t([=]() {//makes the thread. [=] is a cpp Lambda representation
+	wglMakeCurrent(hdc, loaderContext);//Sets the current context to the loader context
 	int textureMapCounter = 0;
-	for (const auto& it : textureMap) {
+	for (const auto& it : textureMap) { //Alex's code that allows that calls setFile
 		pair<Texture*, pair<string, int>>* temp_tuple = new pair<Texture*, pair<string, int>>(it.first, it.second);
 		cout << "WORKING ON " << temp_tuple->second.first << endl;
 		set_file_with_thread(temp_tuple);
 	}
-	wglMakeCurrent(nullptr, nullptr);
-	wglDeleteContext(loaderContext);
-	glFinish();
-	});*/
+	wglMakeCurrent(nullptr, nullptr);//unassigns the current gl context
+	wglDeleteContext(loaderContext);//deletes the loading context now that it is not needed
+	glFinish(); //Forces all gl calls to be completed before execution
+	});
+	//t.join(); // Forces the thread, t, to fully load the project, which takes a  lot of time but looks nicer
 
-	int textureMapCounter = 0;
+	/*int textureMapCounter = 0;
 	for (const auto& it : textureMap) {
 		pair<Texture*, pair<string, int>>* temp_tuple = new pair<Texture*, pair<string, int>>(it.first, it.second);
 		cout << "WORKING ON " << temp_tuple->second.first << endl;
 		set_file_with_thread(temp_tuple);
-	}
+	}*/
 	Alex->sprite.setTexture(playerTexture);
 	Alex->sprite.setIdleTexture(playerIdleTex);
 	Alex->sprite.up = upRunTex;
