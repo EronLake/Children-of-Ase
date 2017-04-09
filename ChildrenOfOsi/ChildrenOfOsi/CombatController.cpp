@@ -63,7 +63,7 @@ void CombatController::follow(Soldier* sold1, int state) {
 		party_leader_update(sold1,state);
 		return;
 	}
-	if (dist_by_center(sold1, sold2) > (sold1->body[0].getWidth() * 5)) {
+	if (dist_by_center(sold1, sold2) > (sold1->body[0].getWidth() * 6)) {
 		sold1->waypoint = Vector2f(sold2->body[0].getX(), sold2->body[0].getY());
 		sold1->destination = Vector2f(sold2->body[0].getX(), sold2->body[0].getY());
 	}
