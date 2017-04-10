@@ -10,11 +10,11 @@ using namespace std;
 Hero::Hero()
 {
 	//initializes all 4 action pools for each hero
-	for (auto itr = Containers::hero_table.begin(); itr != Containers::hero_table.end(); itr++)
+	for (int i = 1; i <= 5; i++)
 	{
-		if (itr->second->name != this->name)
+		if (i != this->name)
 		{
-			this->actionPool_map[itr->second->name] = new ActionPool(this);
+			this->actionPool_map[i] = new ActionPool(this);
 		}
 	}
 }
@@ -32,9 +32,18 @@ Hero::Hero(int _name, float x, float y, bool col) :SplSoldier(x, y, col)
 	setType(5);
 	traits = new Personality();
 	//planner = new Planner(this);
+
+	//initializes all 4 action pools for each hero
+	for (int i = 1; i <= 5; i++)
+	{
+		if (i!= this->name)
+		{
+			this->actionPool_map[i] = new ActionPool(this);
+		}
+	}
 }
 
-}
+
 
 Hero::Hero(int _name, Vector2f p_topLeft, float p_width, float p_height):SplSoldier(p_topLeft,p_width,p_height)
 {
@@ -49,11 +58,11 @@ Hero::Hero(int _name, Vector2f p_topLeft, float p_width, float p_height):SplSold
 	setType(5);
 
 	//initializes all 4 action pools for each hero
-	for (auto itr = Containers::hero_table.begin(); itr != Containers::hero_table.end(); itr++)
+	for (int i = 1; i <= 5; i++)
 	{
-		if (itr->second->name != this->name)
+		if (i != this->name)
 		{
-			this->actionPool_map[itr->second->name] = new ActionPool(this);
+			this->actionPool_map[i] = new ActionPool(this);
 		}
 	}
 	traits = new Personality();
@@ -66,7 +75,7 @@ Hero::~Hero()
 	{
 		delete itr->second;
 	}
-}
+
 	delete(traits);
 	for (int i = 1; i < 6; i++) {
 		if (i != name)

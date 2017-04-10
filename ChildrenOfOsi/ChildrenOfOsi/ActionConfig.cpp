@@ -64,7 +64,7 @@ void ActionConfig::set_action_obj(ChildrenOfOsi* gameplay_func, TaskBuffer* tBuf
 		//needs to differenciate from pos and neg
 		owner->actionPool_map[receiver->name]->end_states.push_back(Containers::action_table[name]);
 	}
-	else if (type == "end_states")
+	else if (type == "end_state")
 	{
 		//needs to differenciate from pos and neg
 		owner->actionPool_map[receiver->name]->macro.push_back(Containers::action_table[name]);
