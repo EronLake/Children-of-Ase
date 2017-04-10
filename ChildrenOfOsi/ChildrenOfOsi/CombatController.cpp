@@ -220,24 +220,25 @@ float CombatController::dist(Vector2f start, Vector2f end) {
 void CombatController::checkParties() {
 	for (auto i = Village::villagesWorld.begin(); i != Village::villagesWorld.end(); ++i) {
 		vector<Village*> warVils = (*i)->get_alliance()->get_enemy_villages();
-		for (auto j = warVils.begin(); j != warVils.end();++j) {
-			vector<Party*> partiesA=(*i)->getParties();
-			vector<Party*> partiesB= (*j)->getParties();
+		for (auto j = warVils.begin(); j != warVils.end(); ++j) {
+			vector<Party*> partiesA = (*i)->getParties();
+			vector<Party*> partiesB = (*j)->getParties();
 			for (auto a = partiesA.begin(); a != partiesA.end(); ++a) {
-				if ((*a)->getMode()!=Party::MODE_FLEE && (*a)->getLeader()->getInCombat() != true) {
+				if ((*a)->getMode() != Party::MODE_FLEE && (*a)->getLeader()->getInCombat() != true) {
 					for (auto b = partiesB.begin(); b != partiesB.end(); ++b) {
 						if ((*a)->getLeader() != nullptr && (*b)->getLeader() != nullptr) {
-						if (dist_by_center((*a)->getLeader(), (*b)->getLeader()) < 1000) {
-							(*a)->addToCurrentEnemies(*b);
-							vector<Soldier*> mema = (*a)->getMembers();
-							for (auto am = mema.begin(); am != mema.end(); ++am) {
-								(*am)->setInCombat(true);
-							}
-							if ((*b)->getMode() != Party::MODE_FLEE) {
-								(*b)->addToCurrentEnemies(*a);
-								vector<Soldier*> memb = (*b)->getMembers();
-								for (auto bm = memb.begin(); bm != memb.end(); ++bm) {
-									(*bm)->setInCombat(true);
+							if (dist_by_center((*a)->getLeader(), (*b)->getLeader()) < 1000) {
+								(*a)->addToCurrentEnemies(*b);
+								vector<Soldier*> mema = (*a)->getMembers();
+								for (auto am = mema.begin(); am != mema.end(); ++am) {
+									(*am)->setInCombat(true);
+								}
+								if ((*b)->getMode() != Party::MODE_FLEE) {
+									(*b)->addToCurrentEnemies(*a);
+									vector<Soldier*> memb = (*b)->getMembers();
+									for (auto bm = memb.begin(); bm != memb.end(); ++bm) {
+										(*bm)->setInCombat(true);
+									}
 								}
 							}
 						}
@@ -246,7 +247,6 @@ void CombatController::checkParties() {
 			}
 		}
 	}
-}
 }
 
 void CombatController::party_leader_update(Soldier* sold1, int state) {

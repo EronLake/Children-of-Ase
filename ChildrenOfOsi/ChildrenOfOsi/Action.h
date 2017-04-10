@@ -40,6 +40,8 @@ public:
 	void setName(string n) { name = n; };
 	string getName() { return name; };
 
+
+
 	Personality* multipliers;
 	void setMultipliers(int a, int k, int h, int p, int r, int e, int g);
 

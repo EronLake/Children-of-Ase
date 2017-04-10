@@ -21,6 +21,7 @@ Hero::Hero(int _name, float x, float y, bool col) :SplSoldier(x, y, col)
 		if(i!=name)rel[i] = new Relationship();
 	}
 	setType(5);
+	traits = new Personality();
 	//planner = new Planner(this);
 }
 
@@ -35,18 +36,23 @@ Hero::Hero(int _name, Vector2f p_topLeft, float p_width, float p_height):SplSold
 		if (i != name)rel[i] = new Relationship();
 	}
 	setType(5);
+	traits = new Personality();
 }
 
 Hero::~Hero()
 {
+	delete(traits);
+	for (int i = 1; i < 6; i++) {
+		if (i != name)
+			delete(rel[i]);
+	}
 }
 
-void Hero::addRelationship(int hero) {
+/*void Hero::addRelationship(int hero) {
 	rel[hero] =new Relationship();
-};
+};*/
 
 void Hero::setPersonality(int a, int k, int h, int p, int r, int e, int g){
-	traits = new Personality();
 	traits->setAggression(a);
 	traits->setKindness(k);
 	traits->setHonor(h);

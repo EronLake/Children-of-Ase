@@ -18,11 +18,20 @@ Action::Action(Hero* _owner, Hero* _receiver, Hero* _doer, int _utility, int _wh
 	recieverName = receiver->name;
 	name = _name;
 	execute_ptr  = ActionExecFunctions::ActionExecMap[_exe_name];
+
+	multipliers = new Personality();
+	str_mult = new Personality();
+	aff_mult = new Personality();
+	noto_mult = new Personality();
 };
 
 
 Action::~Action()
 {
+	delete(multipliers);
+	delete(str_mult);
+	delete(aff_mult);
+	delete(noto_mult);
 };
 
 void Action::applyUtiliites(bool ifsucc)
@@ -160,7 +169,6 @@ int Action::exeAction() {
 }
 
 void Action::setMultipliers(int a, int k, int h, int p, int r, int e, int g) {
-	multipliers = new Personality();
 	multipliers->setAggression(a);
 	multipliers->setKindness(k);
 	multipliers->setHonor(h);
@@ -171,7 +179,6 @@ void Action::setMultipliers(int a, int k, int h, int p, int r, int e, int g) {
 };
 
 void Action::set_str_mult(int a, int k, int h, int p, int r, int e, int g) {
-	str_mult = new Personality();
 	str_mult->setAggression(a);
 	str_mult->setKindness(k);
 	str_mult->setHonor(h);
@@ -182,7 +189,6 @@ void Action::set_str_mult(int a, int k, int h, int p, int r, int e, int g) {
 };
 
 void Action::set_aff_mult(int a, int k, int h, int p, int r, int e, int g) {
-	aff_mult = new Personality();
 	aff_mult->setAggression(a);
 	aff_mult->setKindness(k);
 	aff_mult->setHonor(h);
@@ -193,7 +199,6 @@ void Action::set_aff_mult(int a, int k, int h, int p, int r, int e, int g) {
 };
 
 void Action::set_noto_mult(int a, int k, int h, int p, int r, int e, int g) {
-	noto_mult = new Personality();
 	noto_mult->setAggression(a);
 	noto_mult->setKindness(k);
 	noto_mult->setHonor(h);
