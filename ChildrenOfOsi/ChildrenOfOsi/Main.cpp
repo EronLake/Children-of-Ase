@@ -1168,15 +1168,32 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 
 	Planner* YemojaPlanner = new Planner(staticRec);
 	AiController->hero_planners[YEMOJA] = YemojaPlanner;
-	Action* test_train = new Action(staticRec, oya, staticRec, 10, 1, "train", "execute_train");
+	Action* test_ally = new Action(nullptr, nullptr, nullptr, 10, 1, "Alliance", "execute_train");
+	Action* test_train = new Action(nullptr, nullptr, nullptr, 10, 1, "Train", "execute_train");
 	
-	RelPrecon* prec = new RelPrecon("Strength", "upper", 80);
-	RelPost* post = new RelPost("Strength", 80);
+	RelPrecon* prec = new RelPrecon("Affinity", "lower", 60);
+	RelPost* post = new RelPost("Strength", 10);
+	RelPrecon* prec1 = new RelPrecon("Affinity", "lower", 30);
+	RelPost* post1 = new RelPost("Strength", 15);
+	RelPost* post2 = new RelPost("Affinity", 15);
 
-	test_train->req_preconds.push_back(std::make_shared<RelPrecon>(*prec));
-	test_train->succ_postconds.push_back(std::make_shared<RelPost>(*post));
+	test_ally->req_preconds.push_back(std::make_shared<RelPrecon>(*prec));
+	test_ally->succ_postconds.push_back(std::make_shared<RelPost>(*post));
 
-	AiController->hero_planners[YEMOJA]->set_current_action(test_train);
+	test_train->req_preconds.push_back(std::make_shared<RelPrecon>(*prec1));
+	test_train->succ_postconds.push_back(std::make_shared<RelPost>(*post1));
+	test_train->succ_postconds.push_back(std::make_shared<RelPost>(*post2));
+
+	ActionPool act_pool(Alex);
+	act_pool.macro.push_back(test_ally);
+	act_pool.micro.push_back(test_train);
+	act_pool.updateMiddle();
+	vector<Action> act=act_pool.getActions(staticRec,*test_ally);
+	for (auto i = act.begin(); i != act.end(); ++i) {
+		cout << i->getName() << endl;
+	}
+
+	//AiController->hero_planners[YEMOJA]->set_current_action(test_train);
 
 	AiController->generate_end_state(YEMOJA, OYA);
 

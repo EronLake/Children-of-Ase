@@ -48,7 +48,7 @@ static int frame_count = 0;
 //toggles debug longging statements 
 
 #define DEBUG 0
-#define MAP_EDITOR 1
+#define MAP_EDITOR 0
 #define START_FULLSCREEN false
 
 /*
