@@ -1,287 +1,498 @@
 {
-	"greeting_templates": {
-		"1": {
-			"1": "Greeting" ,
-			"2": "." ,
-			"3":"Extra_Dialogue",
-			"4": "."
-		},
+    "Greeting_Templates": {
+     "1": {
+        "1": "Greeting"
+	 }
+    },
 
-		"2": {
-			"1": "Greeting" ,
-			"2": "." 
-		}
+    "Farewell_Templates": {
+     "1": {
+        "1": "Farewell"
+	 }
+    },
+
+	"Ask_Name_Templates": {
+     "1": {
+        "1": "Ask_Name"
+	 }
 	},
 
-	"refute_question_templates": {
-
-		"1": {
-			"1": "Refute_Question" ,
-			"2": "." 
-		},
-
-		"2": {
-			"1": "Refute_Question" ,
-			"2":"Identifier",
-			"3": "."
-		}
+	"Response_Ask_Name_Templates": {
+     "1": {
+        "1": "Response_Ask_Name"
+	 }
 	},
 
-	"My name is Shango_templates": {
-
-		"1": {
-			"1": "Introduction" ,
-			"2": "."
-		},
-
-		"2": {
-			"1": "Introduction" ,
-			"2": ".",
-			"3": "Extra_Dialogue",
-			"4": "."
-		}
+	"Ask_Origin_Templates": {
+     "1": {
+        "1": "Ask_Origin"
+	 }
 	},
 
-	"response_name_templates": {
-
-		"1": {
-			"1": "Response_Name" ,
-			"2": ".",
-			"3": "Good_Intentions",
-			"4": "."
-		},
-
-		"2": {
-			"1": "Response_Name" ,
-			"2": "."
-		}
+	"Response_Ask_Origin_Templates": {
+     "1": {
+        "1": "Response_Ask_Origin"
+	 }
 	},
 
-	"I come from a place that you won't find on any map_templates": {
+	"Ask_About_Oshosi_Templates": {
+     "1": {
+        "1": "Ask_About_Oshosi"
+	 }
+    },
 
-		"1": {
-			"1": "Response_Origin" ,
-			"2": "." 
-		}
+	"Response_Ask_About_Oshosi_Templates": {
+     "1": {
+        "1": "Response_Ask_About_Oshosi"
+	 }
+    },
+
+    "Ask_About_Ogun_Templates": {
+     "1": {
+        "1": "Ask_About_Ogun"
+	 }
+    },
+
+	"Response_Ask_About_Ogun_Templates": {
+     "1": {
+        "1": "Response_Ask_About_Ogun"
+	 }
+    },
+
+	"Ask_About_Oya_Templates": {
+     "1": {
+        "1": "Ask_About_Oya"
+	 }
+    },
+
+	"Response_Ask_About_Oya_Templates": {
+     "1": {
+        "1": "Response_Ask_About_Oya"
+	 }
+    },
+
+	"Ask_Memories_Templates": {
+     "1": {
+        "1": "Ask_Memories"
+	 }
+    },
+
+	"Response_Ask_Memories_Templates": {
+     "1": {
+        "1": "Response_Ask_Memories"
+	 }
+    },
+
+	"Ask_Specific_Events_Templates": {
+     "1": {
+        "1": "Ask_Specific_Events"
+	 }
+    },
+
+	"Response_Ask_Specific_Events_Templates": {
+     "1": {
+        "1": "Response_Ask_Specific_Events"
+	 }
+    },
+
+	"Ask_About_Relationship_With_Oshosi_Templates": {
+     "1": {
+        "1": "Ask_About_Relationship_With_Oshosi"
+	 }
+    },
+
+	"Response_Ask_About_Relationship_With_Oshosi_Templates": {
+     "1": {
+        "1": "Response_Ask_About_Relationship_With_Oshosi"
+	 }
+    },
+
+	"Ask_About_Relationship_With_Ogun_Templates": {
+     "1": {
+        "1": "Ask_About_Relationship_With_Ogun"
+	 }
+    },
+
+	"Response_Ask_About_Relationship_With_Ogun_Templates": {
+     "1": {
+        "1": "Response_Ask_About_Relationship_With_Ogun"
+	 }
+    },
+
+	"Ask_About_Relationship_With_Oya_Templates": {
+     "1": {
+        "1": "Ask_About_Relationship_With_Oya"
+	 }
+    },
+
+	"Response_Ask_About_Relationship_With_Oya_Templates": {
+     "1": {
+        "1": "Response_Ask_About_Relationship_With_Oya"
+	 }
+    },
+
+	"Ask_To_Form_Alliance_Templates": {
+     "1": {
+        "1": "Ask_To_Form_Alliance"
+	 }
+    },
+
+	"Response_To_Ask_To_Form_Alliance_Templates": {
+     "1": {
+        "1": "Response_To_Ask_To_Form_Alliance"
+	 }
+    },
+
+	"Move_To_Conquer_Oshosi_Templates": {
+     "1": {
+        "1": "Move_To_Conquer_Oshosi"
+	 }
+    },
+
+	"Move_To_Conquer_Ogun_Templates": {
+     "1": {
+        "1": "Move_To_Conquer_Ogun"
+	 }
+    },
+
+	"Move_To_Conquer_Oya_Templates": {
+     "1": {
+        "1": "Move_To_Conquer_Oya"
+	 }
+    },
+
+	"Response_To_Move_To_Conquer_Oshosi_Templates": {
+     "1": {
+        "1": "Response_To_Move_To_Conquer_Oshosi"
+	 }
+    },
+	"Response_To_Move_To_Conquer_Ogun_Templates": {
+     "1": {
+        "1": "Response_To_Move_To_Conquer_Ogun"
+	 }
+    },
+	"Response_To_Move_To_Conquer_Oya_Templates": {
+     "1": {
+        "1": "Response_To_Move_To_Conquer_Oya"
+	 }
+    },
+
+	"Move_To_Alliance_Oshosi_Templates": {
+     "1": {
+        "1": "Move_To_Alliance_Oshosi"
+	 }
+    },
+
+	"Move_To_Alliance_Ogun_Templates": {
+     "1": {
+        "1": "Move_To_Alliance_Ogun"
+	 }
+    },
+
+	"Move_To_Alliance_Oya_Templates": {
+     "1": {
+        "1": "Move_To_Alliance_Oya"
+	 }
+    },
+
+	"Response_To_Move_To_Alliance_Oshosi_Templates": {
+     "1": {
+        "1": "Response_To_Move_To_Alliance_Oshosi"
+	 }
+    },
+
+	"Response_To_Move_To_Alliance_Ogun_Templates": {
+     "1": {
+        "1": "Response_To_Move_To_Alliance_Ogun"
+	 }
+    },
+
+	"Response_To_Move_To_Alliance_Oya_Templates": {
+     "1": {
+        "1": "Response_To_Move_To_Alliance_Oya"
+	 }
+    },
+
+	"Move_To_Revolt_Oshosi_Templates": {
+     "1": {
+        "1": "Move_To_Revolt_Oshosi"
+	 }
+    },
+
+	"Move_To_Revolt_Ogun_Templates": {
+     "1": {
+        "1": "Move_To_Revolt_Ogun"
+	 }
+    },
+
+	"Move_To_Revolt_Oya_Templates": {
+     "1": {
+        "1": "Move_To_Revolt_Oya"
+	 }
+    },
+
+	"Response_To_Move_To_Revolt_Oshosi_Templates": {
+     "1": {
+        "1": "Response_To_Move_To_Revolt_Oshosi"
+	 }
+    },
+	"Response_To_Move_To_Revolt_Ogun_Templates": {
+     "1": {
+        "1": "Response_To_Move_To_Revolt_Ogun"
+	 }
+    },
+	"Response_To_Move_To_Revolt_Oya_Templates": {
+     "1": {
+        "1": "Response_To_Move_To_Revolt_Oya"
+	 }
+    },
+
+	"Move_To_Destroy_Oshosi_Templates": {
+     "1": {
+        "1": "Move_To_Destroy_Oshosi"
+	 }
+    },
+
+	"Move_To_Destroy_Ogun_Templates": {
+     "1": {
+        "1": "Move_To_Destroy_Ogun"
+	 }
+    },
+
+    "Move_To_Destroy_Oya_Templates": {
+     "1": {
+        "1": "Move_To_Destroy_Oya"
+	 }
+    },
+
+    "Response_To_Move_To_Destroy_Oshosi_Templates": {
+     "1": {
+        "1": "Response_To_Move_To_Destroy_Oshosi"
+	 }
+    },
+	"Response_To_Move_To_Destroy_Ogun_Templates": {
+     "1": {
+        "1": "Response_To_Move_To_Destroy_Ogun"
+	 }
+    },
+	"Response_To_Move_To_Destroy_Oya_Templates": {
+     "1": {
+        "1": "Response_To_Move_To_Destroy_Oya"
+	 }
+    },
+
+	"Ask_To_Duel_Templates": {
+     "1": {
+        "1": "Ask_To_Duel"
+	 }
+    },
+
+	"Response_To_Ask_To_Duel_Templates": {
+     "1": {
+        "1": "Response_To_Ask_To_Duel"
+	 }
+    },
+
+	"Ask_To_Spar_Templates": {
+     "1": {
+        "1": "Ask_To_Spar"
+	 }
+    },
+
+	"Response_To_Ask_To_Spar_Templates": {
+     "1": {
+        "1": "Response_To_Ask_To_Spar"
+	 }
+    },
+
+	"Bribe_Templates": {
+     "1": {
+        "1": "Bribe"
+	 }
+    },
+
+	"Response_To_Bribe_Templates": {
+     "1": {
+        "1": "Response_To_Bribe"
+	 }
+    },
+
+	"Ask_To_Join_Party_Templates":{
+	 "1": {
+        "1": "Ask_To_Join_Party"
+	 }
 	},
 
-	"I am here to form a friendship with this village and its people_templates": {
-
-		"1": {
-			"1": "Friend_Reason" ,
-			"2": ".",
-			"3": "Good_Intentions",
-			"4": "."
-		},
-
-		"2": {
-			"1": "Friend_Reason" ,
-			"2": "."
-		}
+    "Response_To_Ask_To_Join_Party_Templates":{
+	 "1": {
+        "1": "Response_To_Ask_To_Join_Party"
+	 }
 	},
 
-	"bad_reason_templates": {
-
-		"1": {
-			"1": "Bad_Reason" ,
-			"2": "." 
-		}
+	"Recruit_For_Party_Templates":{
+	 "1": {
+        "1": "Recruit_For_Party"
+	 }
 	},
 
-	"village_response_templates": {
-
-		"1": {
-			"1": "Village_Response" ,
-			"2":"Village_1",
-			"3": "."
-		}
+    "Response_To_Recruit_For_Party_Templates":{
+	 "1": {
+        "1": "Response_To_Recruit_For_Party"
+	 }
 	},
 
-	"familiar_greet_templates": {
-		"1": {
-			"1": "Familiar_Greet" ,
-			"2": "." 
-		},
+	"Compliment_Templates": {
+	 "1": {
+        "1": "Compliment"
+	 }
+    },
 
-		"2": {
-			"1": "Familiar_Greet" ,
-			"2": ".",
-			"3": "Good_Intentions",
-			"4": "."
-		}
+	"Response_To_Compliment_Templates": {
+	 "1": {
+        "1": "Response_To_Compliment"
+	 }
+    },
+
+	"Grovel_Templates": {
+	 "1": {
+        "1": "Grovel"
+	 }
+    },
+
+	"Response_To_Grovel_Templates": {
+	 "1": {
+        "1": "Response_To_Grovel"
+	 }
+    },
+
+	"Move_To_Spy_Oshosi_Templates": {
+	 "1": {
+        "1": "Move_To_Spy_Oshosi"
+	 }
+    },
+
+	"Move_To_Spy_Ogun_Templates": {
+	 "1": {
+        "1": "Move_To_Spy_Ogun"
+	 }
+    },
+
+	"Move_To_Spy_Oya_Templates": {
+	 "1": {
+        "1": "Move_To_Spy_Oya"
+	 }
+    },
+
+	"Response_To_Move_To_Spy_Oshosi_Templates": {
+	 "1": {
+        "1": "Response_To_Move_To_Spy_Oshosi"
+	 }
+    },
+	"Response_To_Move_To_Spy_Ogun_Templates": {
+	 "1": {
+        "1": "Response_To_Move_To_Spy_Ogun"
+	 }
+    },
+	"Response_To_Move_To_Spy_Oya_Templates": {
+	 "1": {
+        "1": "Response_To_Move_To_Spy_Oya"
+	 }
+    },
+
+	"Move_To_Train_Templates": {
+	 "1": {
+        "1": "Move_To_Train"
+	 }
+    },
+
+	"Response_To_Move_To_Train_Templates": {
+	 "1": {
+        "1": "Response_To_Move_To_Train"
+	 }
+    },
+
+	"Ask_For_Teaching_Templates": {
+	 "1": {
+        "1": "Ask_For_Teaching"
+	 }
+    },
+
+	"Response_To_Ask_For_Teaching_Templates": {
+	 "1": {
+        "1": "Response_To_Ask_For_Teaching"
+	 }
+    },
+
+	"Offer_Teaching_Templates": {
+	 "1": {
+        "1": "Offer_Teaching"
+	 }
+    },
+
+	"Response_To_Offer_Teaching_Templates": {
+	 "1": {
+        "1": "Response_To_Offer_Teaching"
+	 }
+    },
+
+	"Boast_Templates": {
+	 "1": {
+        "1": "Boast"
+	 }
+    },
+
+    "Response_Boast_Templates": {
+	 "1": {
+        "1": "Response_Boast"
+	 }
+    },
+
+	"Intimidate_Templates": {
+	 "1": {
+        "1": "Intimidate"
+	 }
+    },
+
+	"Response_Intimidate_Templates": {
+	 "1": {
+        "1": "Response_Intimidate"
+	 }
+    },
+
+	"Insult_Templates": {
+	 "1": {
+        "1": "Insult"
+	 }
+    },
+
+	"Response_Insult_Templates": {
+	 "1": {
+        "1": "Response_Insult"
+	 }
+    },
+
+	"Decline_To_Answer_Templates": {
+     "1": {
+        "1": "Decline_To_Answer"
+	 }
 	},
 
-	"I would rather not say_templates": {
-		"1": {
-			"1": "Question_Denied" ,
-			"2": "." 
-		}
-
-	},
-
-	"question_name_templates": {
-	    "1": {
-			"1": "Ask_Name" ,
-			"2":"Identifier",
-			"3": "?"
-		},
-
-		"2": {
-			"1": "Ask_Name" ,
-			"2": "?" 
-		}
-	},
-
-	"question_reason_templates": {
-
-		"1": {
-			"1": "Ask_Reason" ,
-			"2": "Identifier",
-			"3": "?" 
-		},
-
-		"2": {
-			"1": "Ask_Reason" ,
-			"2": "?" 
-		}
-	},
-
-  "question_origin_templates": {
-
-		"1": {
-			"1": "Ask_Origin" ,
-			"2":"Identifier",
-			"3": "?"
-		}
-	},
-
-	"action_boast_templates": {
-
-		"1": {
-			"1": "action_boast"
-		}
-	},
-
-	"action_intimidate_templates": {
-
-		"1": {
-			"1": "action_intimidate"
-		}
-	},
-
-	"request_spar_templates": {
-
-		"1": {
-			"1": "request_spar"
-		}
-	},
-
-	"Impressive_templates": {
-
-		"1": {
-			"1": "response_boast"
-		}
-	},
-
-	"You don't scare me_templates": {
-
-		"1": {
-			"1": "response_intimidate"
-		}
-	},
-
-	"response_spar_templates": {
-
-		"1": {
-			"1": "response_spar"
-		}
-	},
-
-	"action_compliment_templates": {
-
-		"1": {
-			"1": "action_compliment"
-		}
-	},
-
-	"action_bribe_templates": {
-
-		"1": {
-			"1": "action_bribe"
-		}
-	},
-
-	"action_grovel_templates": {
-
-		"1": {
-			"1": "action_grovel"
-		}
-	},
-
-	"Aww shucks!_templates": {
-
-		"1": {
-			"1": "response_compliment"
-		}
-	},
-
-	"response_bribe_templates": {
-
-		"1": {
-			"1": "response_bribe"
-		}
-	},
-
-	"response_grovel_templates": {
-
-		"1": {
-			"1": "response_grovel"
-		}
-	},
-
-	"suggest_alliance_templates": {
-
-		"1": {
-			"1": "question_alliance"
-		}
-	},
-
-	"response_alliance_templates": {
-
-		"1": {
-			"1": "response_alliance"
-		}
-	},
-
-		"question_experience_templates": {
-
-		"1": {
-			"1": "question_experience"
-		}
-	},
-  "I once fought off several bandits_templates": {
-
-    "1": {
-      "1": "response_experience"
-    }
-  },
-   "give_quest_hack_templates": {
+   "give_quest_hack_Templates": {
     "1": {
       "1": "give_quest_hack",
       "2": "?"
     }
   },
 
-  "quest_accept_templates": {
+  "quest_accept_Templates": {
     "1": {
       "1": "quest_accept"
     }
   },
 
-  "quest_deny_templates": {
+  "quest_deny_Templates": {
     "1": {
       "1": "quest_deny"
     }
   }
-
 }

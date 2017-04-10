@@ -35,7 +35,11 @@ dialogue_point DialogueHelper::choose_reply_pt(std::string point, int optn_inx)
 {
 	for (int i = 0; i < possible_reply_pts[optn_inx].size(); i++)
 	{
-		if (possible_reply_pts[optn_inx][i][0] == point)
+		//if (possible_reply_pts[optn_inx][i][1].find(point, 0) != std::string::npos)
+		//{
+		//	return possible_reply_pts[optn_inx][i];
+		//}
+		if (possible_reply_pts[optn_inx][i][2] == point)
 		{
 			return possible_reply_pts[optn_inx][i];
 		}
@@ -53,7 +57,7 @@ std::vector<dialogue_point> DialogueHelper::get_possible_reply_pts(std::string p
 {
 	std::vector<dialogue_point> reply;
 	for (int i = 0; i < possible_reply_pts[opts_inx].size(); i++) {
-		if (possible_reply_pts[opts_inx][i][0].compare("denied") == 0 || possible_reply_pts[opts_inx][i][0].compare(point) == 0) {
+		if (possible_reply_pts[opts_inx][i][2].compare("Decline_To_Answer") == 0 || possible_reply_pts[opts_inx][i][2].compare(point) == 0) {
 			reply.push_back({ possible_reply_pts[opts_inx][i] });
 		}
 	}
@@ -63,10 +67,10 @@ std::vector<dialogue_point> DialogueHelper::get_possible_reply_pts(std::string p
 std::string DialogueHelper::gen_dialog(dialogue_point diog_pt, Hero* hero)
 {
 	std::string name = "";
-	std::ofstream ofs;
-	ofs.open("dialog_template_output.txt", std::ofstream::out | std::ofstream::app);
-	ofs << "type name: " << typeid(hero).name() << std::endl;
-	ofs.close();
+	//std::ofstream ofs;
+	//ofs.open("dialog_template_output.txt", std::ofstream::out | std::ofstream::app);
+	//ofs << "type name: " << typeid(hero).name() << std::endl;
+	//ofs.close();
 	if (hero != nullptr) {
 		if (hero->name == SHANGO)
 		{
@@ -139,15 +143,15 @@ dialogue_template DialogueHelper::get_template(dialogue_point diog_pt) {
 
 	//get a random conversation template
 	int j = 0;
-	if (root[diog_pt[1] + "_templates"].size() > 1)
-		j = rand() % root[diog_pt[1] + "_templates"].size() + 1;
+	if (root[diog_pt[1] + "_Templates"].size() > 1)
+		j = rand() % root[diog_pt[1] + "_Templates"].size() + 1;
 	else
 		j = 1;
 	/*populate a dialogue template using the contents
 	of the randomly obtained dialogue template*/
-	for (int i = 1; i <= root[diog_pt[1] + "_templates"]
+	for (int i = 1; i <= root[diog_pt[1] + "_Templates"]
 		[to_string(j)].size(); i++) {
-		dtemp.push_back(root[diog_pt[1] + "_templates"][to_string(j)]
+		dtemp.push_back(root[diog_pt[1] + "_Templates"][to_string(j)]
 			[to_string(i)].asString());
 	}
 
@@ -156,8 +160,8 @@ dialogue_template DialogueHelper::get_template(dialogue_point diog_pt) {
 }
 
 dialogue_point DialogueHelper::get_dialog(std::string name, dialogue_point diog_pt) {
-	std::ofstream ofs;
-	ofs.open("dialog_template_output.txt", std::ofstream::out | std::ofstream::app);
+	//std::ofstream ofs;
+	//ofs.open("dialog_template_output.txt", std::ofstream::out | std::ofstream::app);
 	dialogue_template dtemp = get_template(diog_pt);
 
 	std::string my_name = name;
@@ -200,8 +204,8 @@ dialogue_point DialogueHelper::get_dialog(std::string name, dialogue_point diog_
 					j = 1;
 				dpoint.push_back(root[tmp][to_string(j)]
 					.asString());
-				ofs << "dp: " << root[tmp][to_string(j)]
-					.asString() << std::endl;
+				//ofs << "dp: " << root[tmp][to_string(j)]
+					//.asString() << std::endl;
 			}
 			else {
 				dpoint.push_back(tmp);
@@ -211,7 +215,8 @@ dialogue_point DialogueHelper::get_dialog(std::string name, dialogue_point diog_
 		}
 	}
 	else {
-		dpoint.push_back(diog_pt[1]);
+		dpoint.push_back(root[diog_pt[1]][to_string(1)]
+			.asString());
 	}
 
 	return dpoint;
@@ -241,32 +246,32 @@ void DialogueHelper::fill_conversations() {
 		possible_reply_pts.push_back({});
 	}
 	for (auto itor = Containers::conv_point_table.begin(); itor != Containers::conv_point_table.end(); ++itor) {
-		if (itor->second->get_name().at(0) == 'c') {
+		if (itor->second->get_topic() == "qcp") {
 			possible_conv_pts[3].push_back(itor->second->dpoint);//itor->second->dpoint);
 		}
-		else if (itor->second->get_name().at(0) == 'r') {
-			if (itor->second->get_name().at(1) == 'd') {
+		else if (itor->second->get_topic() == "qrp") {
+			possible_reply_pts[3].push_back(itor->second->dpoint);//itor->second->dpoint);
+		}
+		else if (itor->second->get_topic() == "d") {
+			
 				possible_reply_pts[3].push_back(itor->second->dpoint);
 				possible_reply_pts[0].push_back(itor->second->dpoint);
 				possible_reply_pts[1].push_back(itor->second->dpoint);
 				possible_reply_pts[2].push_back(itor->second->dpoint);
-			}
-			else
-				possible_reply_pts[3].push_back(itor->second->dpoint);
 		}
-		else if (itor->second->get_name().at(0) == 's' && itor->second->get_name().at(1) == 'c') {
+		else if (itor->second->get_topic() == "scp") {
 			possible_conv_pts[0].push_back(itor->second->dpoint);
 		}
-		else if (itor->second->get_name().at(0) == 's' && itor->second->get_name().at(1) == 'r') {
+		else if (itor->second->get_topic() == "srp") {
 			possible_reply_pts[0].push_back(itor->second->dpoint);
 		}
-		else if (itor->second->get_name().at(0) == 'a' && itor->second->get_name().at(1) == 'c') {
+		else if (itor->second->get_topic() == "acp") {
 			possible_conv_pts[1].push_back(itor->second->dpoint);
 		}
-		else if (itor->second->get_name().at(0) == 'a' && itor->second->get_name().at(1) == 'r') {
+		else if (itor->second->get_topic() == "arp") {
 			possible_reply_pts[1].push_back(itor->second->dpoint);
 		}
-		else if (itor->second->get_name().at(0) == 'n' && itor->second->get_name().at(1) == 'c') {
+		else if (itor->second->get_topic() == "ncp") {
 			possible_conv_pts[2].push_back(itor->second->dpoint);
 		}
 		else {

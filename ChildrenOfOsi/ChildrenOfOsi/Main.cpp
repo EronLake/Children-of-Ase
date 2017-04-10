@@ -49,6 +49,7 @@
 #include "DialogueHelper.h"
 #include "DialougeTestSuite.h"
 #include "DialogueConfig.h"
+#include "TagConfig.h"
 
 #include "AIManager.h"
 #include "AIController.h"
@@ -185,6 +186,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	
 	DialogueConfig::import_config(gameplay_functions, tBuffer);
 	DialogueController::getDialogueHelper()->fill_conversations();
+	TagConfig::import_config(gameplay_functions, tBuffer);
 	
 	WorldObj* barrel = new WorldObj(Vector2f(5200, 3900), 75, 75);
 	//Alex->name = SHANGO;
