@@ -23,6 +23,7 @@ public:
 	Personality* traits;
 	//Planner* planner;
 	std::unordered_map<int,ActionPool*> actionPool_map; //int is the receiver name
+
     int name;
 
 	int mem_counter = 0;

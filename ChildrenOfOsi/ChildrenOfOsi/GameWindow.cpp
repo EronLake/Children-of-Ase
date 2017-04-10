@@ -114,6 +114,16 @@ void osi::GameWindow::drawSprite(float x, float y, float width, float height, Sp
 {
   glUseProgram(GameWindow::stdShaderProgramId);
 
+  //map_zoom zooms the screen out by the given amount 
+  //also specified to be different for the map editor mode
+
+  /////////////////////////////
+  x = x / map_zoom;
+  y = y / map_zoom;
+  width = width / map_zoom;
+  height = height / map_zoom;
+  /////////////////////////////
+
   glm::vec2 glCoordTL = GameWindow::dpCoordToGL(x, y);
   glm::vec2 glCoordBR = GameWindow::dpCoordToGL(x + width, y + height);
   float x1 = static_cast<float>(sp.getStart()) / static_cast<float>(sp.getTexture().getWidth());

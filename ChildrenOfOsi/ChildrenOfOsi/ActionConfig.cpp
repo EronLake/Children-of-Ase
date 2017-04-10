@@ -13,13 +13,12 @@ ActionConfig::~ActionConfig()
 }
 
 
-void ActionConfig::import_config(ChildrenOfOsi* gameplay_func, TaskBuffer* tBuffer, Hero* owner,
-									Hero* receiver)
+void ActionConfig::import_config(ChildrenOfOsi* gameplay_func, TaskBuffer* tBuffer, Hero* owner)
 {
 	//iterates through every player
-	for (auto itr = Containers::hero_table.begin(); itr != Containers::hero_table.end(); itr++)
+	for (auto i = Containers::hero_table.begin(); i != Containers::hero_table.end(); i++)
 	{
-		if (itr->second->name != owner->name)
+		if (i->second->name != owner->name)
 		{
 			Json::Value root;
 			Json::Reader reader;
@@ -29,7 +28,7 @@ void ActionConfig::import_config(ChildrenOfOsi* gameplay_func, TaskBuffer* tBuff
 			file >> root;
 			for (auto itr = root.begin(); itr != root.end(); itr++)
 			{
-				set_action_obj(gameplay_func, tBuffer, owner, receiver,
+				set_action_obj(gameplay_func, tBuffer, owner, i->second,
 					(*itr)["utility"].asFloat(), (*itr)["why"].asFloat(), (*itr)["type"].asString(),
 					(*itr)["name"].asString(), (*itr)["exe_name"].asString(),
 					(*itr)["aggression"].asInt(), (*itr)["kindness"].asInt(), (*itr)["honor"].asInt(),
