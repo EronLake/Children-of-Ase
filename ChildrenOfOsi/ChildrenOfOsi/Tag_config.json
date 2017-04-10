@@ -1,127 +1,143 @@
 {
     "Tag": {
         "Tag_1": {
-            "name": "Strength",
+            "name": "Info_About_Other_Heroes",
             "topics": {
-                "topic_1": "boast",
-                "topic_2": "duel",
-                "topic_3": "name"
+                "topic_1": "Ask_About_Oshosi",
+                "topic_2": "Ask_About_Ogun",
+                "topic_3": "Ask_About_Oya",
+				"topic_4": "Ask_About_Relationship_Oshosi",
+				"topic_5": "Ask_About_Relationship_Ogun",
+				"topic_6": "Ask_About_Relationship_Oya"
             }
         },
         "Tag_2": {
-            "name": "tag_2"
+            "name": "Getting_To_Know_Each_Other",
+			"topics": {
+                "topic_1": "Boast",
+                "topic_2": "Ask_Name",
+                "topic_3": "Ask_Origin"
+            }
         },
 
         "Tag_3": {
-            "name": "tag_3"
+            "name": "Recent_Memories",
+			"topics": {
+                "topic_1": "Ask_Memories"
+            }
         },
 
         "Tag_4": {
-            "name": "tag_4"
+            "name": "Talk_About_Event",
+			"topics": {
+                "topic_1": "Ask_Specific_Events"
+            }
         },
 
         "Tag_5": {
-            "name": "tag_5"
+            "name": "Ask_About_Alliance",
+			"topics": {
+                "topic_1": "Ask_To_Form_Alliance"
+            }
         },
 
         "Tag_6": {
-            "name": "tag_6"
+            "name": "Talk_About_Affinity",
+			"topics": {
+                "topic_1": "Ask_About_Relationship_With_Oshosi",
+				"topic_2": "Ask_About_Relationship_With_Ogun",
+				"topic_3": "Ask_About_Relationship_With_Oya",
+				"topic_4": "Move_To_Conquer_Oshosi",
+				"topic_5": "Move_To_Conquer_Ogun",
+				"topic_6": "Move_To_Conquer_Oya",
+				"topic_7": "Move_To_Alliance_Oshosi",
+				"topic_8": "Move_To_Alliance_Ogun",
+				"topic_9": "Move_To_Alliance_Oya",
+				"topic_10": "Move_To_Revolt_Oshosi",
+				"topic_11": "Move_To_Revolt_Ogun",
+				"topic_12": "Move_To_Revolt_Oya",
+				"topic_13": "Move_To_Destroy_Oshosi",
+				"topic_14": "Move_To_Destroy_Ogun",
+				"topic_15": "Move_To_Destroy_Oya",
+				"topic_16": "Bribe",
+				"topic_17": "Compliment",
+				"topic_18": "Grovel",
+				"topic_19": "Move_To_Spy_Oshosi",
+				"topic_20": "Move_To_Spy_Ogun",
+				"topic_21": "Move_To_Spy_Oya",
+				"topic_22": "Offer_Teaching",
+				"topic_23": "Insult"
+            }
         },
 
         "Tag_7": {
-            "name": "tag_7"
+            "name": "Talk_About_Notoriety",
+			"topics": {
+                "topic_1": "Ask_About_Relationship_With_Oshosi",
+				"topic_2": "Ask_About_Relationship_With_Ogun",
+				"topic_3": "Ask_About_Relationship_With_Oya",
+				"topic_4": "Ask_To_Form_Alliance",
+				"topic_5": "Move_To_Conquer_Oshosi",
+				"topic_6": "Move_To_Conquer_Ogun",
+				"topic_7": "Move_To_Conquer_Oya",
+				"topic_8": "Move_To_Alliance_Oshosi",
+				"topic_9": "Move_To_Alliance_Ogun",
+				"topic_10": "Move_To_Alliance_Oya",
+				"topic_11": "Move_To_Revolt_Oshosi",
+				"topic_12": "Move_To_Revolt_Ogun",
+				"topic_13": "Move_To_Revolt_Oya",
+				"topic_14": "Move_To_Destroy_Oshosi",
+				"topic_15": "Move_To_Destroy_Ogun",
+				"topic_16": "Move_To_Destroy_Oya",
+				"topic_17": "Ask_To_Join_Party",
+				"topic_18": "Move_To_Spy_Oshosi",
+				"topic_19": "Move_To_Spy_Ogun",
+				"topic_20": "Move_To_Spy_Oya",
+				"topic_21": "Move_To_Train",
+				"topic_22": "Ask_For_Teaching"
+            }
         },
 
         "Tag_8": {
-            "name": "tag_8"
+            "name": "Talk_About_Strength",
+			"topics": {
+                "topic_1": "Ask_About_Relationship_With_Oshosi",
+				"topic_2": "Ask_About_Relationship_With_Ogun",
+				"topic_3": "Ask_About_Relationship_With_Oya",
+				"topic_4": "Ask_To_Duel",
+				"topic_5": "Ask_To_Spar",
+				"topic_6": "Recruit_For_Party",
+				"topic_7": "Move_To_Train",
+				"topic_8": "Ask_For_Teaching",
+				"topic_9": "Offer_Teaching",
+				"topic_10": "Boast",
+				"topic_11": "Intimidate"
+            }
         },
 
         "Tag_9": {
-            "name": "tag_9"
-        },
-
-        "Tag_10": {
-            "name": "tag_10"
-        },
-
-        "Tag_11": {
-            "name": "tag_11"
-        },
-
-        "Tag_12": {
-            "name": "tag_12"
-        },
-
-        "Tag_13": {
-            "name": "tag_13"
-        },
-
-        "Tag_14": {
-            "name": "tag_14"
-        },
-
-        "Tag_15": {
-            "name": "tag_15"
-        },
-
-        "Tag_16": {
-            "name": "tag_16"
-        },
-
-        "Tag_17": {
-            "name": "tag_17"
-        },
-
-        "Tag_18": {
-            "name": "tag_18"
-        },
-
-        "Tag_19": {
-            "name": "tag_19"
-        },
-
-        "Tag_20": {
-            "name": "tag_20"
-        },
-
-        "Tag_21": {
-            "name": "tag_21"
-        },
-
-        "Tag_22": {
-            "name": "tag_22"
-        },
-
-        "Tag_23": {
-            "name": "tag_23"
-        },
-
-        "Tag_24": {
-            "name": "tag_24"
-        },
-
-        "Tag_25": {
-            "name": "tag_25"
-        },
-
-        "Tag_26": {
-            "name": "tag_26"
-        },
-
-        "Tag_27": {
-            "name": "tag_27"
-        },
-
-        "Tag_28": {
-            "name": "tag_28"
-        },
-
-        "Tag_29": {
-            "name": "tag_29"
-        },
-
-        "Tag_30": {
-            "name": "tag_30"
+            "name": "Talk_About_Action",
+			"topics": {
+                "topic_1": "Move_To_Conquer_Oshosi",
+				"topic_2": "Move_To_Conquer_Ogun",
+				"topic_3": "Move_To_Conquer_Oya",
+				"topic_4": "Move_To_Alliance_Oshosi",
+				"topic_5": "Move_To_Alliance_Ogun",
+				"topic_6": "Move_To_Alliance_Oya",
+				"topic_7": "Move_To_Revolt_Oshosi",
+				"topic_8": "Move_To_Revolt_Ogun",
+				"topic_9": "Move_To_Revolt_Oya",
+				"topic_10": "Move_To_Destroy_Oshosi",
+				"topic_11": "Move_To_Destroy_Ogun",
+				"topic_12": "Move_To_Destroy_Oya",
+				"topic_13": "Ask_To_Duel",
+				"topic_14": "Ask_To_Spar",
+				"topic_15": "Recruit_For_Party",
+				"topic_16": "Move_To_Spy_Oshosi",
+				"topic_17": "Move_To_Spy_Ogun",
+				"topic_18": "Move_To_Spy_Oya",
+				"topic_19": "Move_To_Train"
+            }
         }
     }
-    }
+}
