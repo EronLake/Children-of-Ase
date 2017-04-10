@@ -7,6 +7,7 @@
 #include "Containers.h"
 #include "CheckClass.h"
 #include "HUD.h"
+#include "common.h"
 
 class RenderManager;
 class RenderHelper

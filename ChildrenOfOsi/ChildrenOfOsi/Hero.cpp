@@ -2,12 +2,21 @@
 #include "Hero.h"
 #include "NPC.h"
 #include "Party.h"
+#include "ActionPool.h"
 
 using namespace std;
 
 
 Hero::Hero()
 {
+	//initializes all 4 action pools for each hero
+	for (int i = 1; i <= 5; i++)
+	{
+		if (i != this->name)
+		{
+			this->actionPool_map[i] = new ActionPool(this);
+		}
+	}
 }
 
 Hero::Hero(int _name, float x, float y, bool col) :SplSoldier(x, y, col)
@@ -21,8 +30,20 @@ Hero::Hero(int _name, float x, float y, bool col) :SplSoldier(x, y, col)
 		if(i!=name)rel[i] = new Relationship();
 	}
 	setType(5);
+	traits = new Personality();
 	//planner = new Planner(this);
+
+	//initializes all 4 action pools for each hero
+	for (int i = 1; i <= 5; i++)
+	{
+		if (i!= this->name)
+		{
+			this->actionPool_map[i] = new ActionPool(this);
+		}
+	}
 }
+
+
 
 Hero::Hero(int _name, Vector2f p_topLeft, float p_width, float p_height):SplSoldier(p_topLeft,p_width,p_height)
 {
@@ -35,18 +56,38 @@ Hero::Hero(int _name, Vector2f p_topLeft, float p_width, float p_height):SplSold
 		if (i != name)rel[i] = new Relationship();
 	}
 	setType(5);
+
+	//initializes all 4 action pools for each hero
+	for (int i = 1; i <= 5; i++)
+	{
+		if (i != this->name)
+		{
+			this->actionPool_map[i] = new ActionPool(this);
+		}
+	}
+	traits = new Personality();
 }
 
 Hero::~Hero()
 {
+	//initializes all 4 action pools for each hero
+	for (auto itr = this->actionPool_map.begin(); itr != this->actionPool_map.end(); itr++)
+	{
+		delete itr->second;
+	}
+
+	delete(traits);
+	for (int i = 1; i < 6; i++) {
+		if (i != name)
+			delete(rel[i]);
+	}
 }
 
-void Hero::addRelationship(int hero) {
+/*void Hero::addRelationship(int hero) {
 	rel[hero] =new Relationship();
-};
+};*/
 
 void Hero::setPersonality(int a, int k, int h, int p, int r, int e, int g){
-	traits = new Personality();
 	traits->setAggression(a);
 	traits->setKindness(k);
 	traits->setHonor(h);

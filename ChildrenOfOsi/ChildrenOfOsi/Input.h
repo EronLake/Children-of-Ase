@@ -35,6 +35,15 @@ private:
 
 	bool coordOverlap(int value, int min, int max) { return (value >= min) && (value <= max); }
 
+	//Map Editor Functions  
+	void add_object();
+	void edit_object();
+	void edit_field(std::string collide_with, int body_number, float left, float right, float top, float bottom);
+	void duplicate_object(std::string collide_with);
+	void delete_object(std::string collide_with);
+	double previous_x_mouse_pos = 0;
+	void interactive_resize(std::string collide_with, double mouseX);
+
 public:
 	Input(ChildrenOfOsi* _gameplay_functions, RenderHelper* _rHelper, TaskBuffer* _tBuffer, vector<WorldObj*>* _recVec);
 	Input(ChildrenOfOsi* _gameplay_functions, WorldObj * _player, RenderHelper* _rHelper, TaskBuffer* _tBuffer, vector<WorldObj*>* _recVec, AIController* ai);

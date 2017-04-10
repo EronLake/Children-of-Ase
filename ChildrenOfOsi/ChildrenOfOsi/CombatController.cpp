@@ -220,9 +220,9 @@ float CombatController::dist(Vector2f start, Vector2f end) {
 void CombatController::checkParties() {
 	for (auto i = Village::villagesWorld.begin(); i != Village::villagesWorld.end(); ++i) {
 		vector<Village*> warVils = (*i)->get_alliance()->get_enemy_villages();
-		for (auto j = warVils.begin(); j != warVils.end();++j) {
-			vector<Party*> partiesA=(*i)->getParties();
-			vector<Party*> partiesB= (*j)->getParties();
+		for (auto j = warVils.begin(); j != warVils.end(); ++j) {
+			vector<Party*> partiesA = (*i)->getParties();
+			vector<Party*> partiesB = (*j)->getParties();
 			for (auto a = partiesA.begin(); a != partiesA.end(); ++a) {
 				if ((*a)->getMembers().size() == 0) {
 					(*i)->remove_party((*a));
