@@ -384,6 +384,10 @@ void Input::edit_object() {
 	short J = GetKeyState('J') >> 15;
 	short H = GetKeyState('H') >> 15;
 
+	short O = GetKeyState('O') >> 15;
+	short I = GetKeyState('I') >> 15;
+	short P = GetKeyState('P') >> 15;
+
 	/*POINT p;
 	if (ScreenToClient(window, &p))
 	{
@@ -476,11 +480,11 @@ void Input::edit_object() {
 		{
 			edit_field(collide_with, body_number, left, right, top, bottom);
 		}
-		else if (K)
+		else if (I)
 		{
 			duplicate_object(collide_with);
 		}
-		else if (H)
+		else if (O)
 		{
 			interactive_resize(collide_with, mouseX);
 		}
@@ -524,7 +528,7 @@ void Input::edit_object() {
 
 		file.close();
 
-		if (J)
+		if (P)
 		{
 			delete_object(collide_with);
 		}

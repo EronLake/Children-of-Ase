@@ -37,7 +37,7 @@ public:
 	virtual float get_cost(Hero* curr_hero, Hero* other_hero) final;
 };
 
-class RelEstimPrerec : Preconditions
+class RelEstimPrerec : public Preconditions
 {
 private:
 	std::string rel_type;
@@ -56,7 +56,7 @@ public:
 
 };
 
-class TimePrerec : Preconditions
+class TimePrerec : public Preconditions
 {
 private:
 	int time_rec;
@@ -70,7 +70,7 @@ public:
 
 };
 
-class MemoryNumPrerec : Preconditions
+class MemoryNumPrerec : public Preconditions
 {
 private:
 	int rec_num_of_mem;
@@ -82,7 +82,7 @@ public:
 	float get_cost(std::vector<Memory*> memories);//Hero* curr_hero could also just pass in the hero
 };
 
-class MemPrerec : Preconditions
+class MemPrerec : public Preconditions
 {
 private:
 	std::string rec_mem;
@@ -96,7 +96,7 @@ public:
 };
 
 
-class StatePrerec : Preconditions
+class StatePrerec : public Preconditions
 {
 private:
 	/*state_manager st_man, 
@@ -137,7 +137,7 @@ public:
 };
 
 
-class RelPost : Postcondition
+class RelPost : public Postcondition
 {
 private:
 	std::string rel_type;
@@ -158,7 +158,7 @@ public:
 };
 
 
-class RelEstimPost : Postcondition
+class RelEstimPost : public Postcondition
 {
 private:
 	std::string rel_type;
@@ -177,7 +177,7 @@ public:
 
 };
 
-class StatePost : Postcondition
+class StatePost : public Postcondition
 {
 private:
 	/*state_manager st_man,

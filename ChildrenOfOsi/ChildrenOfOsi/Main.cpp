@@ -1142,6 +1142,17 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 
 	staticRec->setName("Yemoja");
 	staticRec->setInteractable(true);
+	//staticRec->setPersonality(30, 70, 80, 60, 30, 30, 50);
+
+	//staticRec->rel[OYA]->setAffinity(60);
+	//staticRec->rel[OYA]->setNotoriety(40);
+	//staticRec->rel[OYA]->setStrength(80);
+
+	//staticRec->rel[OYA]->setAffEstimate(60);
+	//staticRec->rel[OYA]->setNotorEstimate(70);
+	//staticRec->rel[OYA]->setStrEstimate(40);
+
+
 	*oya = *staticRec;
 	//oya->setSpeed(5);
 	oya->setName("Oya");
@@ -1156,7 +1167,16 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	Planner* YemojaPlanner = new Planner(staticRec);
 	AiController->hero_planners[YEMOJA] = YemojaPlanner;
 	Action* test_train = new Action(staticRec, oya, staticRec, 10, 1, "train", "execute_train");
+	
+	RelPrecon* prec = new RelPrecon("Strength", "upper", 80);
+	RelPost* post = new RelPost("Strength", 80);
+
+	test_train->req_preconds.push_back(std::make_shared<RelPrecon>(*prec));
+	test_train->succ_postconds.push_back(std::make_shared<RelPost>(*post));
+
 	AiController->hero_planners[YEMOJA]->set_current_action(test_train);
+
+	//AiController->generate_end_state(YEMOJA, OYA);
 
 
 	/*
