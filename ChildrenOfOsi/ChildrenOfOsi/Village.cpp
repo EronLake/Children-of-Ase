@@ -32,5 +32,6 @@ void Village::remove_enemy_party(Party* p)
 
 void Village::remove_member(NPC* n)
 {
-  this->members.erase(std::remove(this->members.begin(), this->members.end(), n));
+  if(!this->members.empty())
+    this->members.erase(std::remove(this->members.begin(), this->members.end(), n));
 }

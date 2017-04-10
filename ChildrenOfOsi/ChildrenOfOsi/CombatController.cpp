@@ -224,7 +224,7 @@ void CombatController::checkParties() {
 			vector<Party*> partiesA = (*i)->getParties();
 			vector<Party*> partiesB = (*j)->getParties();
 			for (auto a = partiesA.begin(); a != partiesA.end(); ++a) {
-				if ((*a)->getMode() != Party::MODE_FLEE && (*a)->getLeader()->getInCombat() != true) {
+				if ((*a)->getMode() != Party::MODE_FLEE && (*a)->getLeader() != nullptr && !(*a)->getLeader()->getInCombat()) {
 					for (auto b = partiesB.begin(); b != partiesB.end(); ++b) {
 						if ((*a)->getLeader() != nullptr && (*b)->getLeader() != nullptr) {
 							if (dist_by_center((*a)->getLeader(), (*b)->getLeader()) < 1000) {
