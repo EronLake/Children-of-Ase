@@ -103,6 +103,14 @@ void Party::addToParty(Soldier* s, bool isLeader)
 	updateFollowers();
 }
 
+void Party::add_party_to_party(Party* s) {
+	vector<Soldier*> m=s->getMembers();
+	for (auto i = m.begin(); i != m.end(); ++i) {
+		s->removeSoldier(*i,false);
+		addToParty(*i,false);
+	}
+}
+
 /**
  * Removes the specified soldier from this party. If, for some reason, the
  * soldier has duplicate references in this party, all such duplicates will be
@@ -254,10 +262,10 @@ void Party::setMode(int m)
 void Party::updateFollowers()
 {
   Soldier* prev = nullptr;
-	for (auto i = members.begin(); i != members.end(); ++i) {
-    (*i)->setCurrentLeader(prev);
-    prev = *i;
+	for (int i = members.size()-1; i > 0; i--) {
+		members[i]->setCurrentLeader(members[0]);//members[floor((i-1)/2)]);
   }
+	if (members.size()!=0)members[0]->setCurrentLeader(nullptr);
 }
 
 void Party::findEnemy()

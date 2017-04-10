@@ -64,7 +64,7 @@ void CombatController::follow(Soldier* sold1, int state) {
 		std::cout << sold1->getID()<<" update leader" << std::endl;
 		return;
 	}
-	if (dist_by_center(sold1, sold2) > (sold1->body[0].getWidth() * 5)) {
+	if (dist_by_center(sold1, sold2) > (sold1->body[0].getWidth() * 6)) {
 		sold1->waypoint = Vector2f(sold2->body[0].getX(), sold2->body[0].getY());
 		sold1->destination = Vector2f(sold2->body[0].getX(), sold2->body[0].getY());
 	}
@@ -88,7 +88,7 @@ void CombatController::find_closest_enemy(Soldier* sold1, int state) {
 		for (auto it = tempEvil.begin(); it != tempEvil.end(); ++it) {
 			if (least_distance == -1 || dist_by_center(sold1, *it)<least_distance) {
 				least_distance = dist_by_center(sold1, *it);
-				if (least_distance <= 1000) {
+				if (least_distance <= 600) {
 					sold1->setCurrentEnemy(*it);
 				} else sold1->setCurrentEnemy(nullptr);
 			}
@@ -96,43 +96,77 @@ void CombatController::find_closest_enemy(Soldier* sold1, int state) {
 	}
 }
 
+bool CombatController::find_closest_friend(Soldier* sold1, int state) {
+	if (sold1->getCurrentLeader() == nullptr)return false;
+	float least_distance = -1;
+	Soldier* fr= new Soldier();
+	vector<Soldier*> temp_good = sold1->getParty()->getMembers();
+	for (auto it = temp_good.begin(); it != temp_good.end(); ++it) {
+		if (sold1 != (*it)) {
+			if ((least_distance == -1 || dist_by_center(sold1, *it) < least_distance)) {
+				least_distance = dist_by_center(sold1, *it);
+				fr = (*it);
+			}
+		}
+	}
+	if (least_distance <= 30) {
+		int x = sold1->getX() - fr->getX();
+		int y = sold1->getY() - fr->getY();
+		Vector2f tmp(sold1->getX() + x, sold1->getY() + y);
+		sold1->destination = tmp;
+		sold1->waypoint = tmp;
+		return true;
+	} else {
+		return false;
+	}
+}
+
 void CombatController::update_soldier(Soldier* sold1, int state) {
 	///update cooldowns
 	sold1->updateCD();
 	if (sold1->getParty() == nullptr || sold1->getParty() == NULL)return;
-	///check if the soldier is supposed to hold position and if they are more than 500 away from the point
-	if ((sold1->getHold()) && (dist_soldier_to_location(sold1, sold1->getParty()->get_defend())>500)) {
-		sold1->destination = sold1->getParty()->get_defend();
-		sold1->waypoint = sold1->getParty()->get_defend();
+	if (find_closest_friend(sold1, state)) {
 		move_to_target(sold1, state);
-	} else{
-		///check if the soldier is in combat and not 1000 away from the leader
-		if ((sold1->getInCombat()) && (dist_by_center(sold1,sold1->getCurrentLeader())<1000)) {
-			///if no enemy find the closest one
-			if (sold1->getCurrentEnemy() == nullptr) {
-				find_closest_enemy(sold1, state);
-			}
-			if (sold1->getCurrentEnemy() != nullptr) {
-				///if the current enemy is more than 1000 away, try to find another
-				if (dist_by_center(sold1, sold1->getCurrentEnemy()) > 1000) {
+	}
+	else {
+		///check if the soldier is supposed to hold position and if they are more than 500 away from the point
+		if ((sold1->getHold()) && (dist_soldier_to_location(sold1, sold1->getParty()->get_defend()) > 400)) {
+			sold1->destination = sold1->getParty()->get_defend();
+			sold1->waypoint = sold1->getParty()->get_defend();
+			move_to_target(sold1, state);
+		}
+		else {
+			///check if the soldier is in combat and not 1000 away from the leader
+			cout << dist_by_center(sold1, sold1->getCurrentLeader()) << endl;
+			if ((sold1->getInCombat()) && (dist_by_center(sold1, sold1->getCurrentLeader()) < 600)) {
+				///if no enemy find the closest one
+				if (sold1->getCurrentEnemy() == nullptr) {
 					find_closest_enemy(sold1, state);
-					///follow the leader if none
-					if (sold1->getCurrentEnemy() == nullptr) {
-						follow(sold1, state);
+				}
+				if (sold1->getCurrentEnemy() != nullptr) {
+					///if the current enemy is more than 1000 away, try to find another
+					if (dist_by_center(sold1, sold1->getCurrentEnemy()) > 600) {
+						find_closest_enemy(sold1, state);
+						///follow the leader if none
+						if (sold1->getCurrentEnemy() == nullptr) {
+							follow(sold1, state);
+						}
+						///fight if there is a valid enemy
+						else {
+							fight(sold1, state);
+						}
 					}
-					///fight if there is a valid enemy
 					else {
 						fight(sold1, state);
 					}
-				} else {
-					fight(sold1, state);
+				} /// follow the leader if there is no valid enemy or not in combat
+				else {
+					follow(sold1, state);
 				}
-			} /// follow the leader if there is no valid enemy or not in combat
-			else { 
-				follow(sold1, state); 
 			}
-		} else {
-			follow(sold1, state);
+			else {
+				follow(sold1, state);
+			}
 		}
 	}
 }
@@ -229,6 +263,9 @@ void CombatController::party_leader_update(Soldier* sold1, int state) {
 		move_to_target(sold1, state);
 		if (sold1->destination == Vector2f(0, 0)) {
 			sold1->getParty()->setMode(Party::MODE_IDLE);
+			if (home == sold1->getParty()->get_village()->get_village_location()) {
+				sold1->getParty()->get_village()->barracks.push_back(sold1->getParty());
+			}
 			std::cout << sold1->getID() << " is idling now" << std::endl;
 		}
 	}

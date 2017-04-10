@@ -40,6 +40,7 @@ class Party
   void setAlliance(Alliance *a) { this->faction = a; }
   void setLeader(Soldier* s);
   void addToParty(Soldier* s, bool b);
+  void add_party_to_party(Party* s);
   void removeSoldier(Soldier* s, bool b);
   void clear();
   void setMode(int i);
@@ -48,6 +49,9 @@ class Party
   void set_defend(Vector2f d) { defend = d; };
   void add_patrol_loc(Vector2f p) { patrol_route.push_back(p); };
   void clear_patrol_route() { patrol_route.clear(); };
+  void set_village(Village* v) { owner = v; };
+
+  Village* get_village() { return owner; };
 
   Vector2f get_home() { return home; };
   Vector2f get_defend() { return defend; };
@@ -70,7 +74,7 @@ class Party
   Alliance* faction;
   vector<Soldier *> members;
   Soldier *leader;
-
+  Village* owner;
   LivingObj *target;
   int mode;
   vector<Party*> currentEnemies;

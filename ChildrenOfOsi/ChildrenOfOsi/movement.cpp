@@ -407,6 +407,8 @@ int Movement::attack(WorldObj* obj) {
 											for (int j = 0; j < delAtk.size(); j++) {
 												delAtk[j]->setDuration(0);
 											}
+											Soldier* s2 = CheckClass::isSoldier(a->second->get_creator());
+											if (!friendly)s->setCurrentEnemy(s2);
 										}
 									}
 									if (!friendly) {

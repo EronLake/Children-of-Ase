@@ -5,6 +5,7 @@
 #endif
 
 #include "stdafx.h"
+#include "common.h"
 
 #include <cmath>
 #include <cstdlib>

@@ -37,11 +37,12 @@
 static int frame_count = 0;
 //Texture* rect = new Texture();
 //toggles debug longging statements 
+
 #define DEBUG 0
+#define START_FULLSCREEN false
 
 #if DEBUG 
 #define LOG(input) //std::////cout << "LOG:" << input << std::endl
 #else 
 #define LOG(input) 
-
 #endif
