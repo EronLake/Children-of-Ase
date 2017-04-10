@@ -22,6 +22,8 @@ public:
 	unordered_map<int, Relationship*> rel;
 	Personality* traits;
 	//Planner* planner;
+
+	//used to hold the 4 planners for each of the other heroes
 	std::unordered_map<int,ActionPool*> actionPool_map; //int is the receiver name
 
     int name;
@@ -38,6 +40,15 @@ public:
 
 	void addRelationship(int hero);
 	void setPersonality(int a, int k, int h, int p, int r, int e, int g);
+
+	void add_quest(Action* a, int time) { quests[a]=time; };
+	void remove_quest(Action* a) { quests.erase(quests.find(a)); };
+
+    vector<pair<Action*,int>> get_quests();
+
+private:
+
+	std::unordered_map<Action*,int> quests;
 	//now in the action config
 	//void init_act_pools(ChildrenOfOsi* gameplay_func, TaskBuffer* tBuffer);
 };

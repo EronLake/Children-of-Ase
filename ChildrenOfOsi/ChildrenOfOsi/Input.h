@@ -7,6 +7,7 @@
 #include "RenderHelper.h"
 #include "Containers.h"
 #include "AIController.h"
+#include "Village.h"
 
 
 
@@ -27,8 +28,8 @@ private:
 	short Q;
 	short E;
 	short F;
-	bool disable;
 	int count;
+	int count2;
 
 	bool prompted_quest = false;
 

@@ -55,28 +55,20 @@ void ActionConfig::set_action_obj(ChildrenOfOsi* gameplay_func, TaskBuffer* tBuf
 	//for the add the action pointer to the current respective reiciver action pool
 	if (type == "micro") {
 		
-		//need to make a memory pool for this 
-		if (owner->actionPool_map[receiver->name] == nullptr)
-		{
-			owner->actionPool_map[receiver->name] = new ActionPool(owner);
-		}
-		
-
 		//needs to differenciate from pos and neg
 		owner->actionPool_map[receiver->name]->micro.push_back(Containers::action_table[name]);
 	}
 	//then macro
-	else
+	else if (type == "macro")
 	{
-		//need to make a memory pool for this 
-		//need to make a memory pool for this 
-		if (owner->actionPool_map[receiver->name] = nullptr)
-		{
-			owner->actionPool_map[receiver->name] = new ActionPool(owner);
-		}
-
+		//needs to differenciate from pos and neg
+		owner->actionPool_map[receiver->name]->end_states.push_back(Containers::action_table[name]);
+	}
+	else if (type == "end_states")
+	{
 		//needs to differenciate from pos and neg
 		owner->actionPool_map[receiver->name]->macro.push_back(Containers::action_table[name]);
+		owner->actionPool_map[receiver->name]->end_states.push_back(Containers::action_table[name]);
 	}
 	
 	return;

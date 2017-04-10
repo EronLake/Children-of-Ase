@@ -46,9 +46,10 @@ static int frame_count = 0;
 
 //Texture* rect = new Texture();
 //toggles debug longging statements 
+
 #define DEBUG 0
 #define MAP_EDITOR 0
-
+#define START_FULLSCREEN false
 
 /*
 this variable allows the game to zoom and out
@@ -62,10 +63,8 @@ also specified to zoom for the map editor mode
 
 #endif
 
-
 #if DEBUG 
 #define LOG(input) //std::////cout << "LOG:" << input << std::endl
 #else 
 #define LOG(input) 
-
 #endif

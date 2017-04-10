@@ -1,3 +1,4 @@
+#include "stdafx.h"
 #include "AIController.h"
 
 
@@ -107,23 +108,24 @@ void AIController::reevaluate_state(int me, int them) {
 	{
 		Planner* planner = iter->second;
 
-		Action state = planner->get_end_state_map()->at(them);  //Find the current end_state for them and store it
-		generate_end_state(me, them);                          //Generate a new end_state for them
+		Action* state = &planner->get_end_state_map()->at(them);  //Point to the current end_state for them 
+		planner->get_milestone_map()->erase(*state);           //Delete the old end_state entry in the milestone list
+		generate_end_state(me, them);                          //Generate a new end_state for them, which updates state pointer
 
 
-		planner->get_milestone_map()->erase(state);           //Delete the old end_state entry in the map
+		
 		//planner->get_milestone_map().at(state).clear();        //Clear the milestones leading to that end_state
 
 
-		Action milestone = planner->choose_next_step(state, planner->get_end_states()); //Get the first milestone
+		Action milestone = planner->choose_next_step(*state, planner->get_end_states()); //Get the first milestone
 
-		planner->add_milestone(state, milestone);                  //Add the first milestone to the action path
+		planner->add_milestone(*state, milestone);                  //Add the first milestone to the action path
 
-		planner->generate_milestones(state, &milestone);          //Generate the rest of the milestones for this state
+		planner->generate_milestones(*state, &milestone);          //Generate the rest of the milestones for this state
 	}
 	else
 	{
-		LOG("Error: No planner for hero no. " << me);
+		LOG("Error: No planner for hero #" << me);
 	}
 }
 

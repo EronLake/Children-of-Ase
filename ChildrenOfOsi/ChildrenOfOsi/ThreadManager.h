@@ -6,5 +6,6 @@ class ThreadManager
 public:
 	ThreadManager();
 	~ThreadManager();
+
 };
 

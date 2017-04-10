@@ -10,8 +10,8 @@
 
 Input::Input(ChildrenOfOsi* _gameplay_functions, RenderHelper* _rHelper, TaskBuffer* _tBuffer, vector<WorldObj*>* _recVec)
 {
-	disable = false;
 	count = 0;
+	count2 = 0;
 	gameplay_functions = _gameplay_functions;
 	rHelper = _rHelper;
 	tBuffer = _tBuffer;
@@ -21,8 +21,8 @@ Input::Input(ChildrenOfOsi* _gameplay_functions, RenderHelper* _rHelper, TaskBuf
 
 Input::Input(ChildrenOfOsi* _gameplay_functions, WorldObj * _player, RenderHelper* _rHelper, TaskBuffer* _tBuffer, vector<WorldObj*>* _recVec, AIController* ai_c)
 {
-	disable = false;
 	count = 0;
+	count2 = 0;
 	gameplay_functions = _gameplay_functions;
 	rHelper = _rHelper;
 	tBuffer = _tBuffer;
@@ -394,7 +394,7 @@ void Input::edit_object() {
 
 	double xpos;
 	double ypos;
-	glfwGetCursorPos(osi::GameWindow::window, &xpos, &ypos);
+	glfwGetCursorPos(GameWindow::window, &xpos, &ypos);
 
 	bool onscreen = true;
 	//checks if the mouse is off screen
@@ -408,8 +408,8 @@ void Input::edit_object() {
 	//this map_zoom is used to zoom out the game for map editor mode
 	int zoom = 4;
 
-	double mouseX = rHelper->camera->getX() + (xpos * map_zoom) * osi::GameWindow::WINDOW_WIDTH_DP / 1300;
-	double mouseY = rHelper->camera->getY() + (ypos * map_zoom) * osi::GameWindow::WINDOW_HEIGHT_DP / 700;
+	double mouseX = rHelper->camera->getX() + (xpos * map_zoom) * GameWindow::WINDOW_WIDTH_DP / 1300;
+	double mouseY = rHelper->camera->getY() + (ypos * map_zoom) * GameWindow::WINDOW_HEIGHT_DP / 700;
 	
 
 	std::cout << "////////////////////////" << endl;
@@ -551,6 +551,9 @@ void Input::InputCheck()
 	short F = GetKeyState('F') >> 15;
 	short P = GetKeyState('P') >> 15;
 	short Z = GetKeyState('Z') >> 15;
+	short G = GetKeyState('G') >> 15;
+	short Y = GetKeyState('Y') >> 15;
+	short U = GetKeyState('U') >> 15;
 
 
 	if (DialogueController::getState() == 0) {
@@ -695,7 +698,42 @@ void Input::InputCheck()
 			rivFile << std::endl;
 			rivFile << std::endl;
 			rivFile.close();
+
+		} 
+		if (G) {
+			t->getParty()->set_defend(t->getLoc());
+			t->getParty()->setMode(Party::MODE_DEFEND);
 		}
+		if (Y) {
+			t->getParty()->setMode(Party::MODE_ATTACK);
+		}
+		if (U) {
+			t->getParty()->setMode(Party::MODE_FLEE);
+		}
+		if (H) {
+			t->getParty()->set_home(t->getLoc());
+		}
+		if (L) {
+			t->getParty()->clear_patrol_route();
+		}
+		if (count2 > 0)count2--;
+		if (V && (count2==0)) {
+			t->getParty()->add_patrol_loc(t->getLoc());
+			count2 = 200;
+		}
+		if (J && (count2 == 0)) {
+			t->getParty()->setMode(Party::MODE_FLEE);
+			t->getParty()->removeSoldier(t, true);
+			t->getVillage()->addToParties(t->getParty());
+			count2 = 200;
+		}
+		if (K && (count2 == 0)) {
+			t->getParty()->setMode(Party::MODE_PATROL);
+			t->getParty()->removeSoldier(t,true);
+			t->getVillage()->addToParties(t->getParty());
+			count2 = 200;
+		}
+
 
 		//where the map editor is executed
 		////////////////////////////////////
@@ -715,6 +753,26 @@ void Input::InputCheck()
 	}
 
 	if (DialogueController::getState() > 0) {
+		if (count > 0) {
+			count--;
+		}
+		if (SHIFT && Q && count==0) {
+			WorldObj* other = DialogueController::getOther();
+			if (other->getType() > 2) {
+				Soldier* follower = dynamic_cast<Soldier*>(other);
+				Player* t = dynamic_cast<Player*>(player);
+				cout << t->getParty()->getAlliance() << " = " << follower->getParty()->getAlliance() << endl;
+				if (t->getParty()==follower->getParty()) {
+					t->getParty()->removeSoldier(follower,true);
+					follower->getVillage()->addToParties(follower->getParty());
+				} else if(t->getParty()->getAlliance() == follower->getParty()->getAlliance()){
+					if (follower->getParty()->getMembers().size()<=1)follower->getVillage()->remove_party(follower->getParty());
+					follower->getParty()->removeSoldier(follower, false);
+					t->getParty()->addToParty(follower,false);
+				}
+			}
+			count = 10;
+		}
 		if (Q) {
 			//DialogueController::exitDialogue();
 
@@ -760,17 +818,13 @@ void Input::InputCheck()
 			DialogueController::setOptionsIndex(3);
 			gameplay_functions->setQuestionGlow(player);
 		}
-		if (count == 10) {
-			disable = false;
-			count = 0;
-		}
-		if (!disable) {
+		if (count==0) {
 			int State = DialogueController::getState();
 			if (W && State == 1) {
 				int tmp = DialogueController::getOptionsIndex();
 				if (tmp > 0) {
 					DialogueController::setOptionsIndex(--tmp);
-					disable = true;
+					count = 10;
 					////std::cout << "OptionsIndex: " << tmp << std::endl;
 					switch (DialogueController::getOptionsIndex()) {
 					case 0: gameplay_functions->setSwordGlow(player); break;
@@ -784,7 +838,7 @@ void Input::InputCheck()
 				int tmp = DialogueController::getOptionsIndex();
 				if (tmp < DialogueController::getOSize() - 1) {
 					DialogueController::setOptionsIndex(++tmp);
-					disable = true;
+					count=10;
 					////std::cout << "OptionsIndex: " << tmp << std::endl;
 					switch (DialogueController::getOptionsIndex()) {
 					case 0: gameplay_functions->setSwordGlow(player); break;
@@ -799,26 +853,26 @@ void Input::InputCheck()
 				if (DialogueController::getState() == 1) {
 					if (tmp < (DialogueController::getOptions().size() - 1)) {
 						DialogueController::setSelect(++tmp);
-						disable = true;
+						count = 10;
 						////std::cout << "Index: " << tmp << std::endl;
 					}
 					if (tmp > (DialogueController::getOptions().size() - 1)) {
 						tmp = 0;
 						DialogueController::setSelect(tmp);
-						disable = true;
+						count = 10;
 						////std::cout << "Index: " << tmp << std::endl;
 					}
 				}
 				if (State == 2) {
 					if (tmp < (DialogueController::getReplyOptions().size() - 1)) {
 						DialogueController::setSelect(++tmp);
-						disable = true;
+						count = 10;
 						////std::cout << "Index: " << tmp << std::endl;
 					}
 					if (tmp > (DialogueController::getReplyOptions().size() - 1)) {
 						tmp = 0;
 						DialogueController::setSelect(tmp);
-						disable = true;
+						count = 10;
 						////std::cout << "Index: " << tmp << std::endl;
 					}
 				}
@@ -827,25 +881,22 @@ void Input::InputCheck()
 				int tmp = DialogueController::getSelect();
 				if (tmp > 0) {
 					DialogueController::setSelect(--tmp);
-					disable = true;
+					count = 10;
 					////std::cout << "Index: " << tmp << std::endl;
 				}
 			}
 			if (ENTER) {
 				////std::cout << "ENTER" << std::endl;
 				if (DialogueController::getState() == 1) {
-					disable = true;
+					count = 10;
 					DialogueController::PlayerConversationPoint();
 				}
 				else if (DialogueController::getState() == 2) {
-					disable = true;
+					count = 10;
 					DialogueController::PlayerResponse();
 				//	DialogueController::prompted_quest = false;
 				}
 			}
-		}
-		else {
-			count++;
 		}
 	}
 }

@@ -63,6 +63,6 @@ public:
 	void setSprite(Sprite s) { sprite = s; }
 	void drawObj(float _x, float _y)
 	{
-		osi::GameWindow::drawSprite(getX() - _x, getY() - _y, width, height, sprite);
+		GameWindow::drawSprite(getX() - _x, getY() - _y, width, height, sprite);
 	}
 };

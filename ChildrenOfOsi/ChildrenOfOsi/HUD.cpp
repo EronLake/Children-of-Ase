@@ -79,9 +79,9 @@ void HUD::drawHUD(WorldObj* obj)
 		damage_taken -= (200 - player->getHealth())* .5;
 	}
 
-	osi::GameWindow::drawSprite(hud_empty->getX(), hud_empty->getY(), hud_empty->getWidth(), hud_empty->getHeight(), hud_empty->sprite);
-	osi::GameWindow::drawSprite(hud_ase->getX(), hud_ase->getY(), hud_ase->getWidth(), hud_ase->getHeight(), hud_ase->sprite);
-	osi::GameWindow::drawSprite(hud_health->getX() - damage_taken, hud_health->getY(), hud_health->getWidth(), hud_health->getHeight(), hud_health->sprite);
-	osi::GameWindow::drawSprite(hud_portrait->getX(), hud_portrait->getY(), hud_portrait->getWidth(), hud_portrait->getHeight(), hud_portrait->sprite);
+	GameWindow::drawSprite(hud_empty->getX(), hud_empty->getY(), hud_empty->getWidth(), hud_empty->getHeight(), hud_empty->sprite);
+	GameWindow::drawSprite(hud_ase->getX(), hud_ase->getY(), hud_ase->getWidth(), hud_ase->getHeight(), hud_ase->sprite);
+	GameWindow::drawSprite(hud_health->getX() - damage_taken, hud_health->getY(), hud_health->getWidth(), hud_health->getHeight(), hud_health->sprite);
+	GameWindow::drawSprite(hud_portrait->getX(), hud_portrait->getY(), hud_portrait->getWidth(), hud_portrait->getHeight(), hud_portrait->sprite);
 
 }

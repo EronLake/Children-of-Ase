@@ -1,3 +1,4 @@
+#include "stdafx.h"
 #include "Planner.h"
 
 
@@ -51,25 +52,30 @@ int Planner::heuristic(Action step, vector<std::shared_ptr<Preconditions>> prior
 	return value;
 }
 
+/*
+* Calculates the best end state with the given hero out of the 3 possible states (Alliance,
+* Conquer, and Permanently Conquer)
+* Considers the appeal of that action according to your relationship with the receiver, and 
+* adjusts this upward or downward acccording to how that action (regardless of receiver) appeals
+* to your personality. The action with the highest value is picked.
+*/
 void Planner::choose_end_with(int hero) {
-	switch (hero) {
-	case YEMOJA:
-
-	//	end_states[YEMOJA] = ActionPool
-		// me = evaluateHero
-		//evaluate relationship
-		// end_states[YEMOJA] = picked_state
-		// insert the endstate into milestones, with empty milestone vector
-		break;
-	case OYA:
-		break;
-	case OSHOSI:
-		break;
-	case OGUN:
-		break;
-	case SHANGO:
-		break;
+	ActionPool* action_pool = evaluateHero->actionPool_map[hero];
+	Action* best_end_state = nullptr;
+	int value = 0;
+	int best_value = 0;
+	
+	for (auto state : action_pool->end_states) {
+		value = 0;
+		value += personality_appeal(state);
+		value += relationship_appeal(state);
+		if (value > best_value) {
+			best_value = value;
+			best_end_state = state;
+		}
 	}
+	this->end_states->at(hero) = *best_end_state;
+
 }
 
 Action Planner::choose_next_step(Action goal, vector<Action> goals) {
@@ -90,17 +96,34 @@ Action Planner::choose_next_step(Action goal, vector<Action> goals) {
 	best_step->setUtility(best_value);
 	return *best_step;
 }
-
+/*
+* Calcualtes the appeal of a given end_state based on your relationship with the receiver
+* Each relationship stat is weighted by a multiplier
+* 
+*/
+int Planner::relationship_appeal(Action* state) {
+	int appeal = 0;
+	int str_mult = *(evaluateHero->traits) * *(state->str_mult);
+	int aff_mult = *(evaluateHero->traits) * *(state->aff_mult);
+	int noto_mult = *(evaluateHero->traits) * *(state->noto_mult);
+	Relationship* my_rel = evaluateHero->rel[state->recieverName];
+	appeal += my_rel->getStrength() * str_mult;
+	appeal += my_rel->getAffinity() * aff_mult;
+	appeal += my_rel->getNotoriety() * noto_mult;
+	return appeal;
+}
 
 int Planner::personality_appeal(Action* evaluateAction) {
 	
-	return ((evaluateHero->traits->getHonor()*evaluateAction->multipliers->getHonor())+
+	return *(evaluateHero->traits) * *(evaluateAction->multipliers);
+
+	/*return ((evaluateHero->traits->getHonor()*evaluateAction->multipliers->getHonor())+
 		(evaluateHero->traits->getPride()*evaluateAction->multipliers->getPride())+
 		(evaluateHero->traits->getAggression()*evaluateAction->multipliers->getAggression())+
 		(evaluateHero->traits->getKindness()*evaluateAction->multipliers->getKindness())+
 		(evaluateHero->traits->getGreed()*evaluateAction->multipliers->getGreed())+
 		(evaluateHero->traits->getRecklessness()*evaluateAction->multipliers->getRecklessness())+
-		(evaluateHero->traits->getExtroversion()*evaluateAction->multipliers->getExtroversion()));
+		(evaluateHero->traits->getExtroversion()*evaluateAction->multipliers->getExtroversion()));*/
 };
 vector<std::shared_ptr<Preconditions>> Planner::prioritize_preconditions(Action goal) {
 	vector<std::shared_ptr<Preconditions>> preconlist;

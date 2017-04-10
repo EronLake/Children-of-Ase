@@ -43,6 +43,12 @@ public:
 	Personality* multipliers;
 	void setMultipliers(int a, int k, int h, int p, int r, int e, int g);
 
+	Personality* str_mult;
+	void set_str_mult(int a, int k, int h, int p, int r, int e, int g);
+	Personality* aff_mult;
+	void set_aff_mult(int a, int k, int h, int p, int r, int e, int g);
+	Personality* noto_mult;
+	void set_noto_mult(int a, int k, int h, int p, int r, int e, int g);
 	
 	bool operator==(const Action a) const;
 

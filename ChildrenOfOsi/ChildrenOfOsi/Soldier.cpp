@@ -18,6 +18,9 @@ cdTime(0), swingLeft(true)
   evasionBound = new Rectangle();
   swingLeft = true;
   setType(WorldObj::TYPE_SOLDIER);
+  currentEnemy = nullptr;
+  currentLeader = nullptr;
+  party = nullptr;
 }
 
 Soldier::Soldier(Vector2f p_topLeft, float p_width, float p_height): NPC(p_topLeft, p_width, p_height),
@@ -31,6 +34,9 @@ cdTime(0), swingLeft(true)
   swingLeft = true;
   evasionBound = new Rectangle();
   setType(WorldObj::TYPE_SOLDIER);
+  currentEnemy = nullptr;
+  currentLeader = nullptr;
+  party = nullptr;
 }
 
 void Soldier::addAttackType(Attack* a)
@@ -186,7 +192,7 @@ void Soldier::defeat()
 //this removes the soldier from the party and sets its party to null
 void Soldier::defeat()
 {
-  this->getParty()->removeSoldier(this);
+  this->getParty()->removeSoldier(this, false);
   this->setParty(NULL);
 }
 

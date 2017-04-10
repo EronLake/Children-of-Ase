@@ -48,7 +48,7 @@ void WorldObj::shiftY(float dist)
 
 void WorldObj::drawObj(float _x, float _y)
 {
-	osi::GameWindow::drawSprite(loc.getXloc()-_x, loc.getYloc()-_y, width, height, sprite);
+	GameWindow::drawSprite(loc.getXloc()-_x, loc.getYloc()-_y, width, height, sprite);
 }
 
 void WorldObj::offsetBody(int i, float x1, float x2, float y1, float y2) {

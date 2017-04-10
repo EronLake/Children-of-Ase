@@ -100,6 +100,15 @@ void Party::addToParty(Soldier* s, bool isLeader)
       s->setParty(this);
     }
   }
+	updateFollowers();
+}
+
+void Party::add_party_to_party(Party* s) {
+	vector<Soldier*> m=s->getMembers();
+	for (auto i = m.begin(); i != m.end(); ++i) {
+		s->removeSoldier(*i,false);
+		addToParty(*i,false);
+	}
 }
 
 /**
@@ -107,7 +116,7 @@ void Party::addToParty(Soldier* s, bool isLeader)
  * soldier has duplicate references in this party, all such duplicates will be
  * removed as well.
  */
-void Party::removeSoldier(Soldier* s)
+void Party::removeSoldier(Soldier* s, bool b)
 {
 	//cout << ""
 	// First find the solider in the members list
@@ -147,10 +156,8 @@ void Party::removeSoldier(Soldier* s)
   
 	// Update Soldier s's party status
 	cout << "SIZE OF PARTY WITH OBJ REMOVED IS " << s->getParty()->getMembers().size() << endl;
-	s->setParty(nullptr);
-	s->setCurrentLeader(nullptr);
-	
-	
+	if (b)s->setParty(new Party(s));
+	updateFollowers();
 
 
 	//cout << "SIZE OF THE PARTY IS ********** " << members.size() << endl;
@@ -211,6 +218,7 @@ void Party::setLeader(Soldier* s)
       break;
     }
   }
+	updateFollowers();
 }
 
 /**
@@ -224,37 +232,29 @@ void Party::setMode(int m)
   this->mode = m;
 	if (mode == Party::MODE_IDLE) {
 		for (auto& member : this->members) {
-      member->setInCombat(false);
-      member->setEvade(false);
       member->setHold(false);
     }
   }
 	else if (mode == Party::MODE_ATTACK) {
 		for (auto& member : this->members) {
-      member->setInCombat(true);
-      member->setEvade(false);
       member->setHold(false);
     }
   }
 	else if (mode == Party::MODE_DEFEND) {
 		for (auto& member : this->members) {
-      member->setInCombat(true);
       member->setHold(true);
-      member->setEvade(false);
     }
   }
 	else if (mode == Party::MODE_PATROL) {
 		for (auto& member : this->members) {
-      member->setInCombat(false);
-      member->setHold(false);
-      member->setEvade(false);
+			patrol_point = 0;
+			member->setHold(false);
     }
   }
 	else if (mode == Party::MODE_FLEE) {
 		for (auto& member : this->members) {
-      member->setInCombat(false);
       member->setHold(false);
-      member->setEvade(true);
+	  member->setInCombat(false);
     }
   }
 }
@@ -262,10 +262,10 @@ void Party::setMode(int m)
 void Party::updateFollowers()
 {
   Soldier* prev = nullptr;
-	for (auto i = members.begin(); i != members.end(); ++i) {
-    (*i)->setCurrentLeader(prev);
-    prev = *i;
+	for (int i = members.size()-1; i > 0; i--) {
+		members[i]->setCurrentLeader(members[0]);//members[floor((i-1)/2)]);
   }
+	if (members.size()!=0)members[0]->setCurrentLeader(nullptr);
 }
 
 void Party::findEnemy()
@@ -275,3 +275,18 @@ void Party::findEnemy()
 
 void Party::update()
 {}
+
+Vector2f Party::get_current_patrol_loc(Vector2f n) {
+	if (dist_location_to_location(n, patrol_route[patrol_point]) < 10) {
+		patrol_point++;
+		if (patrol_point >= patrol_route.size())patrol_point = 0;
+	}
+	return patrol_route[patrol_point];
+}
+
+float Party::dist_location_to_location(Vector2f n, Vector2f loc) {
+	float a = (n.getXloc() - loc.getXloc());
+	float b = (n.getYloc() - loc.getYloc());
+	float c = sqrt(a*a + b*b);
+	return c;
+}

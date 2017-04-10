@@ -2,12 +2,21 @@
 #include "Hero.h"
 #include "NPC.h"
 #include "Party.h"
+#include "ActionPool.h"
 
 using namespace std;
 
 
 Hero::Hero()
 {
+	//initializes all 4 action pools for each hero
+	for (auto itr = Containers::hero_table.begin(); itr != Containers::hero_table.end(); itr++)
+	{
+		if (itr->second->name != this->name)
+		{
+			this->actionPool_map[itr->second->name] = new ActionPool(this);
+		}
+	}
 }
 
 Hero::Hero(int _name, float x, float y, bool col) :SplSoldier(x, y, col)
@@ -21,7 +30,18 @@ Hero::Hero(int _name, float x, float y, bool col) :SplSoldier(x, y, col)
 		if(i!=name)rel[i] = new Relationship();
 	}
 	setType(5);
+
 	//planner = new Planner(this);
+
+	//initializes all 4 action pools for each hero
+	for (auto itr = Containers::hero_table.begin(); itr != Containers::hero_table.end(); itr++)
+	{
+		if (itr->second->name != this->name)
+		{
+			this->actionPool_map[itr->second->name] = new ActionPool(this);
+		}
+	}
+
 }
 
 Hero::Hero(int _name, Vector2f p_topLeft, float p_width, float p_height):SplSoldier(p_topLeft,p_width,p_height)
@@ -35,10 +55,24 @@ Hero::Hero(int _name, Vector2f p_topLeft, float p_width, float p_height):SplSold
 		if (i != name)rel[i] = new Relationship();
 	}
 	setType(5);
+
+	//initializes all 4 action pools for each hero
+	for (auto itr = Containers::hero_table.begin(); itr != Containers::hero_table.end(); itr++)
+	{
+		if (itr->second->name != this->name)
+		{
+			this->actionPool_map[itr->second->name] = new ActionPool(this);
+		}
+	}
 }
 
 Hero::~Hero()
 {
+	//initializes all 4 action pools for each hero
+	for (auto itr = this->actionPool_map.begin(); itr != this->actionPool_map.end(); itr++)
+	{
+		delete itr->second;
+	}
 }
 
 void Hero::addRelationship(int hero) {
@@ -71,15 +105,23 @@ Memory* Hero::find_mem(std::string mem_name)
 //overloads a soldier function
 void Hero::defeat()
 {
-	this->getParty()->removeSoldier(this);
+	this->getParty()->removeSoldier(this,true);
 	incapacitated = true;
 }
 
 //overloads a soldier function
 void Hero::kill()
 {
-	this->getParty()->removeSoldier(this);
+	this->getParty()->removeSoldier(this,false);
 	this->setParty(NULL);
+}
+
+vector<pair<Action*, int>> Hero::get_quests() {
+	vector<pair<Action*, int>> tmp;
+	for (auto it = quests.begin(); it != quests.end(); ++it) {
+		tmp.push_back({ it->first, it->second });
+	}
+	return tmp;
 }
 /*
 void Hero::init_act_pools(ChildrenOfOsi* gameplay_func, TaskBuffer* tBuffer)
