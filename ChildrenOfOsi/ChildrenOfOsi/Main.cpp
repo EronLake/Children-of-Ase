@@ -1068,7 +1068,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	blueSoldier->melee->setHeight(50);
 	blueSoldier->set_creator_of_melee();
 	blueSoldier->melee->setStaminaCost(120);
-	blueSoldier->setHealth(100);
+	blueSoldier->setHealth(10);
 	blueSoldier->setMaxStamina(300);
 	
 	blueSoldier->addAttackType(rockThrow);
@@ -1086,7 +1086,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	blueSoldier2->melee->setHeight(50);
 	blueSoldier2->set_creator_of_melee();
 	blueSoldier2->melee->setStaminaCost(120);
-	blueSoldier2->setHealth(100);
+	blueSoldier2->setHealth(10);
 	blueSoldier2->setMaxStamina(300);
 
 	blueSoldier2->addAttackType(rockThrow);
@@ -1104,7 +1104,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	blueSoldier3->melee->setHeight(50);
 	blueSoldier3->set_creator_of_melee();
 	blueSoldier3->melee->setStaminaCost(120);
-	blueSoldier3->setHealth(100);
+	blueSoldier3->setHealth(10);
 	blueSoldier3->setMaxStamina(300);
 
 	blueSoldier3->addAttackType(rockThrow);
