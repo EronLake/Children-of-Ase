@@ -1176,7 +1176,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 
 	AiController->hero_planners[YEMOJA]->set_current_action(test_train);
 
-	//AiController->generate_end_state(YEMOJA, OYA);
+	AiController->generate_end_state(YEMOJA, OYA);
 
 
 	/*
