@@ -224,10 +224,13 @@ void CombatController::checkParties() {
 			vector<Party*> partiesA=(*i)->getParties();
 			vector<Party*> partiesB= (*j)->getParties();
 			for (auto a = partiesA.begin(); a != partiesA.end(); ++a) {
-				if ((*a)->getMode()!=Party::MODE_FLEE && (*a)->getLeader()->getInCombat() != true) {
+				if ((*a)->getMembers().size() == 0) {
+					(*i)->remove_party((*a));
+				} else if ((*a)->getMode()!=Party::MODE_FLEE && (*a)->getLeader()->getInCombat() != true) {
 					for (auto b = partiesB.begin(); b != partiesB.end(); ++b) {
-						if ((*a)->getLeader() != nullptr && (*b)->getLeader() != nullptr) {
-						if (dist_by_center((*a)->getLeader(), (*b)->getLeader()) < 1000) {
+						if ((*b)->getMembers().size() == 0) {
+							(*j)->remove_party((*b));
+						} else if (dist_by_center((*a)->getLeader(), (*b)->getLeader()) < 1000) {
 							(*a)->addToCurrentEnemies(*b);
 							vector<Soldier*> mema = (*a)->getMembers();
 							for (auto am = mema.begin(); am != mema.end(); ++am) {
@@ -246,7 +249,6 @@ void CombatController::checkParties() {
 			}
 		}
 	}
-}
 }
 
 void CombatController::party_leader_update(Soldier* sold1, int state) {
