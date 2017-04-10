@@ -31,7 +31,7 @@ void Action::applyUtiliites(bool ifsucc)
 	{
 		for (int i = 0; i < succ_postconds.size(); i++)
 		{
-			if (succ_postconds[i]->get_type() =="relationship")
+			if (succ_postconds[i]->get_general_type() =="relationship")
 			{
 				succ_postconds[i]->apply_utility(doer,receiver);
 		}
@@ -46,7 +46,7 @@ void Action::applyUtiliites(bool ifsucc)
 	{
 		for (int i = 0; i < fail_postconds.size(); i++)
 		{
-			if (fail_postconds[i]->get_type() == "relationship")
+			if (fail_postconds[i]->get_general_type() == "relationship")
 			{
 				fail_postconds[i]->apply_utility(doer,receiver);
 			}
@@ -61,7 +61,38 @@ void Action::applyUtiliites(bool ifsucc)
 }
 
 vector<std::string> Action::preConditionsNeeded(Hero* o, Hero* h) {
-	vector<std::string> needs;/*
+	vector<std::string> needs;
+	for (auto it = req_preconds.begin(); it != req_preconds.end(); ++it) {
+		if ((*it)->get_general_type().compare("relationship")==0) {
+			RelPrecon* bullshit= dynamic_cast<RelPrecon*>((*it).get());
+			if (bullshit->get_cost(owner, receiver) > 0) {
+				needs.push_back((*it)->get_type());
+			}
+		}
+		else if ((*it)->get_general_type().compare("relationship_estimate") == 0) {
+			RelEstimPrerec* bullshit = dynamic_cast<RelEstimPrerec*>((*it).get());
+			if (bullshit->get_cost(owner, receiver) > 0) {
+				needs.push_back((*it)->get_type());
+			}
+		}
+		else if ((*it)->get_general_type().compare("time") == 0) {
+			TimePrerec* bullshit = dynamic_cast<TimePrerec*>((*it).get());
+			if (bullshit->get_cost() > 0)needs.push_back((*it)->get_type());
+		}
+		else if ((*it)->get_general_type().compare("memory_number") == 0) {
+			MemoryNumPrerec* bullshit = dynamic_cast<MemoryNumPrerec*>((*it).get());
+			if (bullshit->get_cost(owner->memories) > 0)needs.push_back((*it)->get_type());
+		}
+		else if ((*it)->get_general_type().compare("memory") == 0) {
+			MemPrerec* bullshit = dynamic_cast<MemPrerec*>((*it).get());
+			if (bullshit->get_cost(owner->memories) > 0)needs.push_back((*it)->get_type());
+		}
+		else if ((*it)->get_general_type().compare("state") == 0) {
+			StatePrerec* bullshit = dynamic_cast<StatePrerec*>((*it).get());
+			if (bullshit->get_cost() > 0)needs.push_back((*it)->get_type());
+		}
+	}
+	/*
 	owner = o;
 	int tmp;
 	for (auto i = preconds.begin(); i != preconds.end(); ++i) {
