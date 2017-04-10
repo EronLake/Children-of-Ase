@@ -139,6 +139,39 @@ void Action::setMultipliers(int a, int k, int h, int p, int r, int e, int g) {
 	multipliers->setGreed(g);
 };
 
+void Action::set_str_mult(int a, int k, int h, int p, int r, int e, int g) {
+	str_mult = new Personality();
+	str_mult->setAggression(a);
+	str_mult->setKindness(k);
+	str_mult->setHonor(h);
+	str_mult->setPride(p);
+	str_mult->setRecklessness(r);
+	str_mult->setExtroversion(e);
+	str_mult->setGreed(g);
+};
+
+void Action::set_aff_mult(int a, int k, int h, int p, int r, int e, int g) {
+	aff_mult = new Personality();
+	aff_mult->setAggression(a);
+	aff_mult->setKindness(k);
+	aff_mult->setHonor(h);
+	aff_mult->setPride(p);
+	aff_mult->setRecklessness(r);
+	aff_mult->setExtroversion(e);
+	aff_mult->setGreed(g);
+};
+
+void Action::set_noto_mult(int a, int k, int h, int p, int r, int e, int g) {
+	noto_mult = new Personality();
+	noto_mult->setAggression(a);
+	noto_mult->setKindness(k);
+	noto_mult->setHonor(h);
+	noto_mult->setPride(p);
+	noto_mult->setRecklessness(r);
+	noto_mult->setExtroversion(e);
+	noto_mult->setGreed(g);
+};
+
 bool Action::operator==(const Action a) const
 {
 	if (a.name == name && a.receiver == receiver && a.doer == doer) {
