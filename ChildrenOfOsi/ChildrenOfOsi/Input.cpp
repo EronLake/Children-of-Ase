@@ -871,7 +871,7 @@ void Input::InputCheck()
 						DialogueController::scroll_control++;
 						if (DialogueController::scroll_control >= DialogueController::getOptions().size())
 							DialogueController::scroll_control = DialogueController::getOptions().size() - 1;
-						disable = true;
+						count = 10;
 						////std::cout << "Index: " << tmp << std::endl;
 					}
 					if (tmp > (DialogueController::getOptions().size() - 1)) {
@@ -880,7 +880,7 @@ void Input::InputCheck()
 						//DialogueController::scroll_control++;
 						if (DialogueController::scroll_control < 0)
 							DialogueController::scroll_control = 0;
-						disable = true;
+						count = 10;
 						////std::cout << "Index: " << tmp << std::endl;
 					}
 				}
@@ -891,7 +891,7 @@ void Input::InputCheck()
 						if (DialogueController::scroll_control >= DialogueController::getReplyOptions().size())
 							DialogueController::scroll_control = DialogueController::getReplyOptions().size() - 1;
 
-						disable = true;
+						count = 10;
 						////std::cout << "Index: " << tmp << std::endl;
 					}
 					if (tmp > (DialogueController::getReplyOptions().size() - 1)) {
@@ -900,7 +900,7 @@ void Input::InputCheck()
 						//DialogueController::scroll_control++;
 						if (DialogueController::scroll_control < 0)
 							DialogueController::scroll_control = 0;
-						disable = true;
+						count = 10;
 						////std::cout << "Index: " << tmp << std::endl;
 					}
 				}
@@ -912,7 +912,8 @@ void Input::InputCheck()
 					DialogueController::scroll_control--;
 					if (DialogueController::scroll_control < 0)
 						DialogueController::scroll_control = 0;
-					disable = true;
+					//disable = true;
+					count = 10;
 					////std::cout << "Index: " << tmp << std::endl;
 				}
 			}

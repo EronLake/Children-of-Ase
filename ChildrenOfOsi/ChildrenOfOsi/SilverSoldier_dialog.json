@@ -21,9 +21,9 @@
 	},
 
 	"Response_Ask_Name": {
-		"1": "So you are known as",
-		"2": "Nice to meet you",
-		"3": "I am pleased to make your acquaintance"
+		"1": "My name is Yemoja",
+		"2": "Nice to meet you. I am Yemoja.",
+		"3": "I am pleased to make your acquaintance. People know me as Yemoja."
 	},
 
 	"Ask_Origin": {
@@ -31,9 +31,10 @@
 	},
 
 	"Response_Ask_Origin": {
-		"1": "So you are not from around here, interesting",
-		"2": "You have walked very far to get here then",
-		"3": "I'm suprised you have traveled so far"
+		"1": "Don't worry about it.",
+		"2": "I am from this village originally.",
+		"3": "I came from the village outskirts many years ago and have lived here ever since."
+		
 	},
 
 	"Ask_About_Oshosi": {
@@ -113,15 +114,15 @@
     },
 
 	"Ask_About_Relationship_With_Ogun": {
-        "1": "I cannot stand that Ogun resides so close to me. The fact that he exists makes me worry constantly for the safety of this village",
+        "1": "What do you feel about Ogun?"
+    },
+
+	"Response_Ask_About_Relationship_With_Ogun": {
+	    "1": "I cannot stand that Ogun resides so close to me. The fact that he exists makes me worry constantly for the safety of this village",
         "2": "Ogun is a nuisance. I hope he never discovers this village and harms its people",
         "3": "Ogun and I are content simply leaving eachother alone",
         "4": "Ogun is not simply all strength. I respect him for his cunning as well",
         "5": "I feel much more confident in the safety of this village knowing that Ogun and I are on such good terms"
-    },
-
-	"Response_Ask_About_Relationship_With_Ogun": {
-        "1": "What do you feel about Ogun"
     },
 
 	"Ask_About_Relationship_With_Oya": {
@@ -140,7 +141,7 @@
         "1": "How do you feel about forming and Alliance with me"
     },
 
-	"Response_Ask_To_Form_Alliance": {
+	"Response_To_Ask_To_Form_Alliance": {
         "1": "I honestly do not see how allying with you will help this village become any safer",
         "2": "I do not know you that well, but this one time I will go against my better judgement and accept this alliance with you",
         "3": "I think that forming an alliance with you is a situation that benefits the both of us. I accept",
@@ -165,7 +166,21 @@
         "3": "My friend, I believe now would be a perfect opportunity to conquer Oya and the jungle village"
     },
 
-	"Response_To_Move_To_Conquer": {
+	"Response_To_Move_To_Conquer_Oshosi": {
+        "1": "I was considering conquering but then you told me it was a good idea. Now I am not so sure ",
+        "2": "I really don't feel like you should be giving me advice on such an important matter",
+        "3": "I am not sure that conquest is the best idea for ensuring the safety of this village, but I will keep it in mind",
+        "4": "I think that moving to conquer is a risky move, but I am glad that you gave me this advice",
+        "5": "I respect your advice, and will definitely consider conquest as a powerful strategic move"
+    },
+	"Response_To_Move_To_Conquer_Ogun": {
+        "1": "I was considering conquering but then you told me it was a good idea. Now I am not so sure ",
+        "2": "I really don't feel like you should be giving me advice on such an important matter",
+        "3": "I am not sure that conquest is the best idea for ensuring the safety of this village, but I will keep it in mind",
+        "4": "I think that moving to conquer is a risky move, but I am glad that you gave me this advice",
+        "5": "I respect your advice, and will definitely consider conquest as a powerful strategic move"
+    },
+	"Response_To_Move_To_Conquer_Oya": {
         "1": "I was considering conquering but then you told me it was a good idea. Now I am not so sure ",
         "2": "I really don't feel like you should be giving me advice on such an important matter",
         "3": "I am not sure that conquest is the best idea for ensuring the safety of this village, but I will keep it in mind",
@@ -191,7 +206,21 @@
         "3": "My friend, I know that you are a strong ally. Why don't you share your strength with Oya and the jungle village"
     },
 
-	"Response_To_Move_To_Alliance": {
+	"Response_To_Move_To_Alliance_Oshosi": {
+        "1": "I absolutely refuse. The very idea of being in an alliance with that village disgusts me",
+        "2": "An alliance can possibly help ensure the safety of this village, so I will definitely consider it",
+        "3": "I will have to think deeply as to whether or not this alliance is a good idea",
+        "4": "An alliance can possibly help ensure the safety of this village, so I will definitely consider it",
+        "5": "Your advice always has my best interests in mind it seems, so I promise you I will deeply consider as alliance"
+    },
+	"Response_To_Move_To_Alliance_Ogun": {
+        "1": "I absolutely refuse. The very idea of being in an alliance with that village disgusts me",
+        "2": "An alliance can possibly help ensure the safety of this village, so I will definitely consider it",
+        "3": "I will have to think deeply as to whether or not this alliance is a good idea",
+        "4": "An alliance can possibly help ensure the safety of this village, so I will definitely consider it",
+        "5": "Your advice always has my best interests in mind it seems, so I promise you I will deeply consider as alliance"
+    },
+	"Response_To_Move_To_Alliance_Oya": {
         "1": "I absolutely refuse. The very idea of being in an alliance with that village disgusts me",
         "2": "An alliance can possibly help ensure the safety of this village, so I will definitely consider it",
         "3": "I will have to think deeply as to whether or not this alliance is a good idea",
@@ -217,7 +246,21 @@
 		"3": "I have known you for a long time. I know that you are not the type of person to sit down, give up, and let others walk all over you. You must break free from Oya"
     },
 
-	"Response_To_Move_To_Revolt": {
+	"Response_To_Move_To_Revolt_Oshosi": {
+        "1": "Do you honestly think I would take advice on such an important matter from someone like you",
+        "2": "I do not think I should be discussing this with someone like you",
+        "3": "It seems very risky to even be talking about this, but I cannot say that I haven't considered revolt",
+        "4": "I know it would help this village prosper if we were to revolt, but it just seems so dangerous. I will have to think about this",
+        "5": "I know you are right. This tyranny can last no longer. The only possible solution I can think of is revolt"
+    },
+	"Response_To_Move_To_Revolt_Ogun": {
+        "1": "Do you honestly think I would take advice on such an important matter from someone like you",
+        "2": "I do not think I should be discussing this with someone like you",
+        "3": "It seems very risky to even be talking about this, but I cannot say that I haven't considered revolt",
+        "4": "I know it would help this village prosper if we were to revolt, but it just seems so dangerous. I will have to think about this",
+        "5": "I know you are right. This tyranny can last no longer. The only possible solution I can think of is revolt"
+    },
+	"Response_To_Move_To_Revolt_Oya": {
         "1": "Do you honestly think I would take advice on such an important matter from someone like you",
         "2": "I do not think I should be discussing this with someone like you",
         "3": "It seems very risky to even be talking about this, but I cannot say that I haven't considered revolt",
@@ -243,7 +286,17 @@
         "3": "You know me, I am not usually one to support such violence, but I feel like the destruction of Oya and the jungle village should be one of your top priorities"
     },
 
-    "Response_To_Move_To_Destroy": {
+    "Response_To_Move_To_Destroy_Oshosi": {
+        "1": "It is possible that this village would be safer if that village was out of the picture entirely. But I know that it is risky",
+        "2": "Getting rid a village is no easy task, but I am not someone to back down from a challenge if the safety of this village is on the line",
+        "3": "I usually try to avoid such violence and destruction, but deep down I know that you are right. This is the only real way to keep this village safe"
+    },
+	"Response_To_Move_To_Destroy_Ogun": {
+        "1": "It is possible that this village would be safer if that village was out of the picture entirely. But I know that it is risky",
+        "2": "Getting rid a village is no easy task, but I am not someone to back down from a challenge if the safety of this village is on the line",
+        "3": "I usually try to avoid such violence and destruction, but deep down I know that you are right. This is the only real way to keep this village safe"
+    },
+	"Response_To_Move_To_Destroy_Oya": {
         "1": "It is possible that this village would be safer if that village was out of the picture entirely. But I know that it is risky",
         "2": "Getting rid a village is no easy task, but I am not someone to back down from a challenge if the safety of this village is on the line",
         "3": "I usually try to avoid such violence and destruction, but deep down I know that you are right. This is the only real way to keep this village safe"
@@ -271,7 +324,7 @@
         "4": "I would love to spar with you. Would you want to"
     },
 
-	"Response_Ask_To_Spar": {
+	"Response_To_Ask_To_Spar": {
         "1": "I do not see how sparring against you will result in anything but your hurt ego",
         "2": "If you want to spar me I hope that you are ready to lose",
         "3": "I suppose I could use some practice",
@@ -299,7 +352,7 @@
         "3": "Please, allow me to be in your company. I would be eternally grateful."
 	},
 
-    "Response_To_Ask__Join_Party":{
+    "Response_To_Ask_To_Join_Party":{
 	    "1": "I am not sure I am ready to accept more party members at this time.",
         "2": "You seem like a smart and capable person. You are in.",
         "3": "With you on my side, we will be able to protect hundreds of people. Welcome aboard."
@@ -363,7 +416,21 @@
         "3": "I can confidently say that spying on Oya and the jungle village should be one of your top priorities"
     },
 
-	"Response_To_Move_To_Spy": {
+	"Response_To_Move_To_Spy_Oshosi": {
+        "1": "Are you really suggesting this to me. For all I know that you're not a spy yourself trying to sabotage me",
+        "2": "I really do not think I want to take your advice on such a sensitive subject",
+        "3": "I cannot say that I have wondered about the inner workings of that village, I will have to consider it",
+        "4": "Do you think that getting inside information on that village would help keep this village safe? If so, I must consider spying",
+        "5": "I will do absolutely anything to esure the safety of this village, and if you think spying is the best way to do so than I will heavily consider it"
+    },
+	"Response_To_Move_To_Spy_Ogun": {
+        "1": "Are you really suggesting this to me. For all I know that you're not a spy yourself trying to sabotage me",
+        "2": "I really do not think I want to take your advice on such a sensitive subject",
+        "3": "I cannot say that I have wondered about the inner workings of that village, I will have to consider it",
+        "4": "Do you think that getting inside information on that village would help keep this village safe? If so, I must consider spying",
+        "5": "I will do absolutely anything to esure the safety of this village, and if you think spying is the best way to do so than I will heavily consider it"
+    },
+	"Response_To_Move_To_Spy_Oya": {
         "1": "Are you really suggesting this to me. For all I know that you're not a spy yourself trying to sabotage me",
         "2": "I really do not think I want to take your advice on such a sensitive subject",
         "3": "I cannot say that I have wondered about the inner workings of that village, I will have to consider it",
