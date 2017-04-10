@@ -148,6 +148,8 @@ public:
 	RelPost(std::string rel_type, int rel_val);
 	~RelPost();
 
+	std::string get_rel_type() { return rel_type; };
+
 	//Require particular assumption of hero relationship towards sel
 	virtual float get_utility(Hero* curr_hero, Hero* other_hero) final;
 	virtual void apply_utility(Hero* curr_hero, Hero* other_hero) final;
@@ -166,6 +168,8 @@ public:
 
 	RelEstimPost(std::string rel_type, int rel_val);
 	~RelEstimPost();
+
+	std::string get_rel_type() { return rel_type; };
 
 	//Require particular assumption of hero relationship towards sel
 	virtual float get_utility(Hero* curr_hero, Hero* other_hero) final;

@@ -95,11 +95,12 @@ void set_file_with_thread(std::pair<Texture*, pair<string, int>>* p_tuple) {
 	std::lock_guard<std::mutex> guard(mu); p_tuple->first->setFile(p_tuple->second.first, p_tuple->second.second); }
 
 int main() {
-		WorldObj* screen = new WorldObj(Vector2f(0.0, 0.0), 20000U, 20000U);	//init screen
+	WorldObj* screen = new WorldObj(Vector2f(0.0, 0.0), 20000U, 20000U);	//init screen
 
-		QuadTree* collideTree = new QuadTree(0, screen);
-		GameWindow::init();		
-		GAMEPLAY_LOOP(collideTree);
+	QuadTree* collideTree = new QuadTree(0, screen);
+	GameWindow::init();		
+	GAMEPLAY_LOOP(collideTree);
+
 	return 0;
 }
 
@@ -1150,8 +1151,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	oya->shiftY(300);
 	oya->setHealth(50);
 
-	ActionConfig::import_config(gameplay_functions, tBuffer, staticRec,
-		oya);
+	ActionConfig::import_config(gameplay_functions, tBuffer, staticRec);
 
 	Planner* YemojaPlanner = new Planner(staticRec);
 	AiController->hero_planners[YEMOJA] = YemojaPlanner;
