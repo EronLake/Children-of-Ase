@@ -27,8 +27,8 @@ vector<Action> ActionPool::getActions(Hero* h, Action macro)
 	
 	vector<std::string> needs = macro.preConditionsNeeded(doer,h);
 	for (int i = 0; i < needs.size(); i++) {
-		auto j = middleLink.find(needs[i]);
-		if (j != middleLink.end()) points=addVec(points,j->second);
+		auto j = actions_by_post.find(needs[i]);
+		if (j != actions_by_post.end()) points=addVec(points,j->second);
 	}
 	for (int p= 0; p < points.size(); p++) {
 		list.push_back(*points[p]);
@@ -55,17 +55,17 @@ vector<Action*> ActionPool::addVec(vector<Action*> a, vector<Action*> b) {
 void ActionPool::updateMiddle() {
 	for (int i = 0; i < macro.size(); i++) {
 		for (auto it = macro[i]->req_preconds.begin(); it != macro[i]->req_preconds.end(); ++it) {
-			middleLink[(*it)->get_type()];
+			actions_by_post[(*it)->get_type()];
 		}
 	}
 	for (int i = 0; i < micro.size(); i++) {
 		for (auto it = micro[i]->req_preconds.begin(); it != micro[i]->req_preconds.end(); ++it) {
-			middleLink[(*it)->get_type()];
+			actions_by_post[(*it)->get_type()];
 		}
 	}
 	for (int j = 0; j < micro.size(); j++) {
 		for (auto itor = micro[j]->succ_postconds.begin(); itor != micro[j]->succ_postconds.end(); ++itor) {
-			middleLink[(*itor)->get_type()].push_back(micro[j]);
+			actions_by_post[(*itor)->get_type()].push_back(micro[j]);
 		}
 	}
 }
