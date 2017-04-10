@@ -61,6 +61,7 @@ void CombatController::follow(Soldier* sold1, int state) {
 	Soldier* sold2 = sold1->getCurrentLeader();
 	if (sold2 == nullptr) {
 		party_leader_update(sold1,state);
+		std::cout << sold1->getID()<<" update leader" << std::endl;
 		return;
 	}
 	if (dist_by_center(sold1, sold2) > (sold1->body[0].getWidth() * 6)) {
@@ -70,8 +71,11 @@ void CombatController::follow(Soldier* sold1, int state) {
 	if (dist_by_center(sold1,sold2)<(sold1->body[0].getWidth()*3)) {
 		sold1->destination = Vector2f(0, 0);
 		sold1->waypoint = Vector2f(0, 0);
+		std::cout << sold1->getID() << " reached its leader, " << sold2->getID() << std::endl;
 		gameplay_functions->stop(sold1);
+		return;
 	}
+
 	move_to_target(sold1,state);
 }
 
@@ -93,6 +97,7 @@ void CombatController::find_closest_enemy(Soldier* sold1, int state) {
 }
 
 bool CombatController::find_closest_friend(Soldier* sold1, int state) {
+	if (sold1->getCurrentLeader() == nullptr)return false;
 	float least_distance = -1;
 	Soldier* fr= new Soldier();
 	vector<Soldier*> temp_good = sold1->getParty()->getMembers();
@@ -167,12 +172,24 @@ void CombatController::update_soldier(Soldier* sold1, int state) {
 }
 
 void CombatController::move_to_target(Soldier* sold1, int state) {
+
 	if (sold1->destination != Vector2f(0, 0)) { //Hero has a destination
 		if (sold1->waypoint != Vector2f(0, 0) && state == 0) { //Hero has a waypoint to the desination, and not in dialog
+			if (sold1->getHold()) {//getMode() == Party::MODE_DEFEND) {
+				if (dist(sold1->destination, sold1->getParty()->get_defend()) > 500) {
+					std::cout << "leader too far" << std::endl;
+					sold1->waypoint = sold1->getParty()->get_home();
+					sold1->destination = sold1->getParty()->get_home();
+					gameplay_functions->stop(sold1);
+					return;
+				}
+			}
 			gameplay_functions->move_toward(sold1); //Take a step towards the current waypoint
+			std::cout << sold1->getID() << " MOVING TOWARDS " << sold1->waypoint.getXloc() << ", " << sold1->waypoint.getYloc() << std::endl;
 		}
 		else if (state == 0)                //Hero needs waypoints to destination, and not in dialog
 		{
+			std::cout << sold1->getID() << " WHERE AM I GOING" << std::endl;
 			gameplay_functions->get_path(sold1); //Generate waypoints to destination
 		}
 	}
@@ -193,27 +210,35 @@ float CombatController::dist_soldier_to_location(Soldier* sold1, Vector2f loc) {
 	return c;
 }
 
+float CombatController::dist(Vector2f start, Vector2f end) {
+	float a = (start.getXloc() - end.getXloc());
+	float b = (start.getYloc() - end.getYloc());
+	float c = sqrt(a*a + b*b);
+	return c;
+}
+
 void CombatController::checkParties() {
 	for (auto i = Village::villagesWorld.begin(); i != Village::villagesWorld.end(); ++i) {
 		vector<Village*> warVils = (*i)->get_alliance()->get_enemy_villages();
-		for (auto j = warVils.begin(); j != warVils.end();++j) {
-			vector<Party*> partiesA=(*i)->getParties();
-			vector<Party*> partiesB= (*j)->getParties();
+		for (auto j = warVils.begin(); j != warVils.end(); ++j) {
+			vector<Party*> partiesA = (*i)->getParties();
+			vector<Party*> partiesB = (*j)->getParties();
 			for (auto a = partiesA.begin(); a != partiesA.end(); ++a) {
-				if ((*a)->getMode()!=Party::MODE_FLEE && (*a)->getLeader()->getInCombat() != true) {
+				if ((*a)->getMode() != Party::MODE_FLEE && (*a)->getLeader()->getInCombat() != true) {
 					for (auto b = partiesB.begin(); b != partiesB.end(); ++b) {
 						if ((*a)->getLeader() != nullptr && (*b)->getLeader() != nullptr) {
-						if (dist_by_center((*a)->getLeader(), (*b)->getLeader()) < 1000) {
-							(*a)->addToCurrentEnemies(*b);
-							vector<Soldier*> mema = (*a)->getMembers();
-							for (auto am = mema.begin(); am != mema.end(); ++am) {
-								(*am)->setInCombat(true);
-							}
-							if ((*b)->getMode() != Party::MODE_FLEE) {
-								(*b)->addToCurrentEnemies(*a);
-								vector<Soldier*> memb = (*b)->getMembers();
-								for (auto bm = memb.begin(); bm != memb.end(); ++bm) {
-									(*bm)->setInCombat(true);
+							if (dist_by_center((*a)->getLeader(), (*b)->getLeader()) < 1000) {
+								(*a)->addToCurrentEnemies(*b);
+								vector<Soldier*> mema = (*a)->getMembers();
+								for (auto am = mema.begin(); am != mema.end(); ++am) {
+									(*am)->setInCombat(true);
+								}
+								if ((*b)->getMode() != Party::MODE_FLEE) {
+									(*b)->addToCurrentEnemies(*a);
+									vector<Soldier*> memb = (*b)->getMembers();
+									for (auto bm = memb.begin(); bm != memb.end(); ++bm) {
+										(*bm)->setInCombat(true);
+									}
 								}
 							}
 						}
@@ -222,7 +247,6 @@ void CombatController::checkParties() {
 			}
 		}
 	}
-}
 }
 
 void CombatController::party_leader_update(Soldier* sold1, int state) {
@@ -237,6 +261,12 @@ void CombatController::party_leader_update(Soldier* sold1, int state) {
 		sold1->destination = home;
 		sold1->waypoint = home;
 		move_to_target(sold1, state);
-		if (sold1->destination == Vector2f(0, 0))sold1->getParty()->setMode(Party::MODE_IDLE);
+		if (sold1->destination == Vector2f(0, 0)) {
+			sold1->getParty()->setMode(Party::MODE_IDLE);
+			if (home == sold1->getParty()->get_village()->get_village_location()) {
+				sold1->getParty()->get_village()->barracks.push_back(sold1->getParty());
+			}
+			std::cout << sold1->getID() << " is idling now" << std::endl;
+		}
 	}
 }

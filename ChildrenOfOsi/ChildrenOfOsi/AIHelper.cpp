@@ -267,7 +267,7 @@ int AIHelper::plan_step(WorldObj* obj) {
 			}
 			else  //Waypoint is close enough to stop
 			{
-				////std::////cout << "Reached waypoint" << std::endl;
+				std::cout << npc->getID() << " Reached waypoint" << std::endl;
 				manager->createTaskWithObj("Stop", "MOVE", obj);
 				npc->setLoc(npc->waypoint);
 				if (npc->waypoints.size() == 0) { //This was the final waypoint, destination reached

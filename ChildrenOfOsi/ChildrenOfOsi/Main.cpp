@@ -63,6 +63,7 @@
 #include "Alliance.h"
 #include "PartyManager.h"
 //#include <boost/thread/thread.hpp>  //This is used for Ian's multithread section, but the user needs the boost compiled library installed on their computer
+# include "thread"
 
 using namespace std;
 
@@ -94,11 +95,12 @@ void set_file_with_thread(std::pair<Texture*, pair<string, int>>* p_tuple) {
 	std::lock_guard<std::mutex> guard(mu); p_tuple->first->setFile(p_tuple->second.first, p_tuple->second.second); }
 
 int main() {
-		WorldObj* screen = new WorldObj(Vector2f(0.0, 0.0), 20000U, 20000U);	//init screen
+	WorldObj* screen = new WorldObj(Vector2f(0.0, 0.0), 20000U, 20000U);	//init screen
 
-		QuadTree* collideTree = new QuadTree(0, screen);
-		GameWindow::init();		
-		GAMEPLAY_LOOP(collideTree);
+	QuadTree* collideTree = new QuadTree(0, screen);
+	GameWindow::init();		
+	GAMEPLAY_LOOP(collideTree);
+
 	return 0;
 }
 
@@ -651,30 +653,32 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 
 //Ian's attempt at multithreading. Compiles in 22 seconds on school computer. Still has same issue with spritesheet sprites, where the red and black boxes appear.
 //Other sprites load in normally though
-//also needs the boost external dependency, so it might 
-	/*HDC hdc = wglGetCurrentDC();
-	HGLRC mainContext = wglGetCurrentContext();
-	HGLRC loaderContext = wglCreateContext(hdc);
-	wglShareLists(loaderContext, mainContext);
-	boost::thread([=]() {
-	wglMakeCurrent(hdc, loaderContext);
+//also needs the boost external dependency, so it might
+	
+	HDC hdc = wglGetCurrentDC();// Simply gets the device context, which is needed to initialize a GL context, not really used for anything else
+	HGLRC mainContext = wglGetCurrentContext();//Sets the default GL context to main
+	HGLRC loaderContext = wglCreateContext(hdc);//Creates the new GL context that we will use for loading
+	wglShareLists(mainContext, loaderContext);//Shares the information between the loading context and the main context
+	std::thread t([=]() {//makes the thread. [=] is a cpp Lambda representation
+	wglMakeCurrent(hdc, loaderContext);//Sets the current context to the loader context
 	int textureMapCounter = 0;
-	for (const auto& it : textureMap) {
+	for (const auto& it : textureMap) { //Alex's code that allows that calls setFile
 		pair<Texture*, pair<string, int>>* temp_tuple = new pair<Texture*, pair<string, int>>(it.first, it.second);
 		cout << "WORKING ON " << temp_tuple->second.first << endl;
 		set_file_with_thread(temp_tuple);
 	}
-	wglMakeCurrent(nullptr, nullptr);
-	wglDeleteContext(loaderContext);
-	glFinish();
-	});*/
+	wglMakeCurrent(nullptr, nullptr);//unassigns the current gl context
+	wglDeleteContext(loaderContext);//deletes the loading context now that it is not needed
+	glFinish(); //Forces all gl calls to be completed before execution
+	});
+	//t.join(); // Forces the thread, t, to fully load the project, which takes a  lot of time but looks nicer
 
-	int textureMapCounter = 0;
+	/*int textureMapCounter = 0;
 	for (const auto& it : textureMap) {
 		pair<Texture*, pair<string, int>>* temp_tuple = new pair<Texture*, pair<string, int>>(it.first, it.second);
 		std::cout << "WORKING ON " << temp_tuple->second.first << endl;
 		set_file_with_thread(temp_tuple);
-	}
+	}*/
 	Alex->sprite.setTexture(playerTexture);
 	Alex->sprite.setIdleTexture(playerIdleTex);
 	Alex->sprite.up = upRunTex;
@@ -1147,8 +1151,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	oya->shiftY(300);
 	oya->setHealth(50);
 
-	ActionConfig::import_config(gameplay_functions, tBuffer, staticRec,
-		oya);
+	ActionConfig::import_config(gameplay_functions, tBuffer, staticRec);
 
 	Planner* YemojaPlanner = new Planner(staticRec);
 	AiController->hero_planners[YEMOJA] = YemojaPlanner;
@@ -1247,7 +1250,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	Alliance* a3 = new Alliance(v3);
 	v1->addToParties(party);
 	v2->addToParties(party2);
-	v1->addToParties(party3);
+	v3->addToParties(party3);
 	War* war = new War();
 	war->setWarParties(v1,v2);
 	a1->add_alliance_to_alliance(v3->get_alliance());
