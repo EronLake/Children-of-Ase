@@ -18,11 +18,20 @@ Action::Action(Hero* _owner, Hero* _receiver, Hero* _doer, int _utility, int _wh
 	recieverName = receiver->name;
 	name = _name;
 	execute_ptr  = ActionExecFunctions::ActionExecMap[_exe_name];
+
+	multipliers = new Personality();
+	str_mult = new Personality();
+	aff_mult = new Personality();
+	noto_mult = new Personality();
 };
 
 
 Action::~Action()
 {
+	delete(multipliers);
+	delete(str_mult);
+	delete(aff_mult);
+	delete(noto_mult);
 };
 
 void Action::applyUtiliites(bool ifsucc)
@@ -31,7 +40,7 @@ void Action::applyUtiliites(bool ifsucc)
 	{
 		for (int i = 0; i < succ_postconds.size(); i++)
 		{
-			if (succ_postconds[i]->get_type() =="relationship")
+			if (succ_postconds[i]->get_general_type() =="relationship")
 			{
 				succ_postconds[i]->apply_utility(doer,receiver);
 		}
@@ -46,7 +55,7 @@ void Action::applyUtiliites(bool ifsucc)
 	{
 		for (int i = 0; i < fail_postconds.size(); i++)
 		{
-			if (fail_postconds[i]->get_type() == "relationship")
+			if (fail_postconds[i]->get_general_type() == "relationship")
 			{
 				fail_postconds[i]->apply_utility(doer,receiver);
 			}
@@ -61,7 +70,38 @@ void Action::applyUtiliites(bool ifsucc)
 }
 
 vector<std::string> Action::preConditionsNeeded(Hero* o, Hero* h) {
-	vector<std::string> needs;/*
+	vector<std::string> needs;
+	for (auto it = req_preconds.begin(); it != req_preconds.end(); ++it) {
+		if ((*it)->get_general_type().compare("relationship")==0) {
+			RelPrecon* bullshit= dynamic_cast<RelPrecon*>((*it).get());
+			if (bullshit->get_cost(owner, receiver) > 0) {
+				needs.push_back((*it)->get_type());
+			}
+		}
+		else if ((*it)->get_general_type().compare("relationship_estimate") == 0) {
+			RelEstimPrerec* bullshit = dynamic_cast<RelEstimPrerec*>((*it).get());
+			if (bullshit->get_cost(owner, receiver) > 0) {
+				needs.push_back((*it)->get_type());
+			}
+		}
+		else if ((*it)->get_general_type().compare("time") == 0) {
+			TimePrerec* bullshit = dynamic_cast<TimePrerec*>((*it).get());
+			if (bullshit->get_cost() > 0)needs.push_back((*it)->get_type());
+		}
+		else if ((*it)->get_general_type().compare("memory_number") == 0) {
+			MemoryNumPrerec* bullshit = dynamic_cast<MemoryNumPrerec*>((*it).get());
+			if (bullshit->get_cost(owner->memories) > 0)needs.push_back((*it)->get_type());
+		}
+		else if ((*it)->get_general_type().compare("memory") == 0) {
+			MemPrerec* bullshit = dynamic_cast<MemPrerec*>((*it).get());
+			if (bullshit->get_cost(owner->memories) > 0)needs.push_back((*it)->get_type());
+		}
+		else if ((*it)->get_general_type().compare("state") == 0) {
+			StatePrerec* bullshit = dynamic_cast<StatePrerec*>((*it).get());
+			if (bullshit->get_cost() > 0)needs.push_back((*it)->get_type());
+		}
+	}
+	/*
 	owner = o;
 	int tmp;
 	for (auto i = preconds.begin(); i != preconds.end(); ++i) {
@@ -129,7 +169,6 @@ int Action::exeAction() {
 }
 
 void Action::setMultipliers(int a, int k, int h, int p, int r, int e, int g) {
-	multipliers = new Personality();
 	multipliers->setAggression(a);
 	multipliers->setKindness(k);
 	multipliers->setHonor(h);
@@ -137,6 +176,36 @@ void Action::setMultipliers(int a, int k, int h, int p, int r, int e, int g) {
 	multipliers->setRecklessness(r);
 	multipliers->setExtroversion(e);
 	multipliers->setGreed(g);
+};
+
+void Action::set_str_mult(int a, int k, int h, int p, int r, int e, int g) {
+	str_mult->setAggression(a);
+	str_mult->setKindness(k);
+	str_mult->setHonor(h);
+	str_mult->setPride(p);
+	str_mult->setRecklessness(r);
+	str_mult->setExtroversion(e);
+	str_mult->setGreed(g);
+};
+
+void Action::set_aff_mult(int a, int k, int h, int p, int r, int e, int g) {
+	aff_mult->setAggression(a);
+	aff_mult->setKindness(k);
+	aff_mult->setHonor(h);
+	aff_mult->setPride(p);
+	aff_mult->setRecklessness(r);
+	aff_mult->setExtroversion(e);
+	aff_mult->setGreed(g);
+};
+
+void Action::set_noto_mult(int a, int k, int h, int p, int r, int e, int g) {
+	noto_mult->setAggression(a);
+	noto_mult->setKindness(k);
+	noto_mult->setHonor(h);
+	noto_mult->setPride(p);
+	noto_mult->setRecklessness(r);
+	noto_mult->setExtroversion(e);
+	noto_mult->setGreed(g);
 };
 
 bool Action::operator==(const Action a) const

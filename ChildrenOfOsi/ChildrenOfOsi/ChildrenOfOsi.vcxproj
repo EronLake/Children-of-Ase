@@ -81,6 +81,8 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
+    <IncludePath>$(SolutionDir)\External Dependencies\GLEW\include;$(SolutionDir)\External Dependencies\GLFW\include;$(SolutionDir)\External Dependencies\SOIL\include;$(SolutionDir)\External Dependencies\FreeType\include;$(SolutionDir)\External Dependencies\FMOD\inc;$(SolutionDir)\External Dependencies\OpenGL Mathematics\include;$(IncludePath)</IncludePath>
+    <LibraryPath>$(SolutionDir)\External Dependencies\FMOD\lib;$(SolutionDir)\External Dependencies\GLEW\lib;$(SolutionDir)\External Dependencies\GLFW\lib;$(SolutionDir)\External Dependencies\FreeType\lib;$(SolutionDir)\External Dependencies\SOIL\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
@@ -92,13 +94,14 @@
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>$(ProjectDir)\jsoncpp\json\json.h</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\boost_1_63_0;$(ProjectDir)\jsoncpp\json\json.h</AdditionalIncludeDirectories>
       <AdditionalUsingDirectories>$(ProjectDir)\json\json.h</AdditionalUsingDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalDependencies>opengl32.lib;glew32s.lib;glfw3.lib;SOIL.lib;freetype271.lib;fmod_vc.lib;fmodL_vc.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>C:\boost_1_63_0\stage\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -132,6 +135,7 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>opengl32.lib;glew32s.lib;glfw3.lib;SOIL.lib;freetype271.lib;fmod_vc.lib;fmodL_vc.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">

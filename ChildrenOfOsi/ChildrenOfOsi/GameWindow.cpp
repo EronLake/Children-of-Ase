@@ -1,38 +1,38 @@
 #include "stdafx.h"
 #include "GameWindow.h"
 
-const std::string osi::GameWindow::STD_VERTEX_SHADER_PATH = "./OpenGL Shaders/StdVertexShader.vert.glsl";
-const std::string osi::GameWindow::STD_FRAGMENT_SHADER_PATH = "./OpenGL Shaders/StdFragmentShader.frag.glsl";
-const std::string osi::GameWindow::FONT_VERTEX_SHADER_PATH = "./OpenGL Shaders/FontVertexShader.vert.glsl";
-const std::string osi::GameWindow::FONT_FRAGMENT_SHADER_PATH = "./OpenGL Shaders/FontFragmentShader.frag.glsl";
+const std::string GameWindow::STD_VERTEX_SHADER_PATH = "./OpenGL Shaders/StdVertexShader.vert.glsl";
+const std::string GameWindow::STD_FRAGMENT_SHADER_PATH = "./OpenGL Shaders/StdFragmentShader.frag.glsl";
+const std::string GameWindow::FONT_VERTEX_SHADER_PATH = "./OpenGL Shaders/FontVertexShader.vert.glsl";
+const std::string GameWindow::FONT_FRAGMENT_SHADER_PATH = "./OpenGL Shaders/FontFragmentShader.frag.glsl";
 
-GLFWmonitor *osi::GameWindow::primaryMonitor = nullptr;
-GLFWwindow *osi::GameWindow::window = nullptr;
-int osi::GameWindow::monitorWidthPx = -1;
-int osi::GameWindow::monitorHeightPx = -1;
-int osi::GameWindow::windowWidthPx = -1;
-int osi::GameWindow::windowHeightPx = -1;
-double osi::GameWindow::dpScaleWidth = 1.0;
-double osi::GameWindow::dpScaleHeight = 1.0;
+GLFWmonitor *GameWindow::primaryMonitor = nullptr;
+GLFWwindow *GameWindow::window = nullptr;
+int GameWindow::monitorWidthPx = -1;
+int GameWindow::monitorHeightPx = -1;
+int GameWindow::windowWidthPx = -1;
+int GameWindow::windowHeightPx = -1;
+double GameWindow::dpScaleWidth = 1.0;
+double GameWindow::dpScaleHeight = 1.0;
 
-std::vector<GLuint> osi::GameWindow::vertexArrayObjectId;
-std::vector<GLuint> osi::GameWindow::vertexBufferObjectId;
-std::vector<GLuint> osi::GameWindow::elementBufferObjectId;
-std::vector<GLuint> osi::GameWindow::textures;
+std::vector<GLuint> GameWindow::vertexArrayObjectId;
+std::vector<GLuint> GameWindow::vertexBufferObjectId;
+std::vector<GLuint> GameWindow::elementBufferObjectId;
+std::vector<GLuint> GameWindow::textures;
 
-GLuint osi::GameWindow::fontVAO = 0;
-GLuint osi::GameWindow::fontVBO = 0;
+GLuint GameWindow::fontVAO = 0;
+GLuint GameWindow::fontVBO = 0;
 
-GLuint osi::GameWindow::stdShaderProgramId = 0;
-GLuint osi::GameWindow::fontShaderProgramId = 0;
+GLuint GameWindow::stdShaderProgramId = 0;
+GLuint GameWindow::fontShaderProgramId = 0;
 
-std::unordered_map<std::string, std::unordered_map<GLchar, osi::Glyph>> osi::GameWindow::fontCharacters;
+std::unordered_map<std::string, std::unordered_map<GLchar, Glyph>> GameWindow::fontCharacters;
 
-int osi::GameWindow::numObjects = 0;
+int GameWindow::numObjects = 0;
 
-Shader* osi::GameWindow::s;
+Shader* GameWindow::s;
 
-std::vector<TextObj> osi::GameWindow::text;
+std::vector<TextObj> GameWindow::text;
 
 struct Character
 {
@@ -51,7 +51,7 @@ GLuint VAO, VBO;
  *
  * Returns: Returns whether a window was opened
  */
-bool osi::GameWindow::init()
+bool GameWindow::init()
 {
   if(GameWindow::isActive())
     return false;
@@ -72,7 +72,7 @@ bool osi::GameWindow::init()
  *
  * Returns: Returns whether a window was indeed terminated
  */
-bool osi::GameWindow::terminate()
+bool GameWindow::terminate()
 {
   if(!GameWindow::isActive())
     return false;
@@ -110,9 +110,19 @@ bool osi::GameWindow::terminate()
  * Param height: The height of the sprite in device-independent pixels
  * Param sp: The sprite to be drawn
  */
-void osi::GameWindow::drawSprite(float x, float y, float width, float height, Sprite sp)
+void GameWindow::drawSprite(float x, float y, float width, float height, Sprite sp)
 {
   glUseProgram(GameWindow::stdShaderProgramId);
+
+  //map_zoom zooms the screen out by the given amount 
+  //also specified to be different for the map editor mode
+
+  /////////////////////////////
+  x = x / map_zoom;
+  y = y / map_zoom;
+  width = width / map_zoom;
+  height = height / map_zoom;
+  /////////////////////////////
 
   glm::vec2 glCoordTL = GameWindow::dpCoordToGL(x, y);
   glm::vec2 glCoordBR = GameWindow::dpCoordToGL(x + width, y + height);
@@ -178,7 +188,7 @@ void osi::GameWindow::drawSprite(float x, float y, float width, float height, Sp
  * available, then it will be truncated
  * Param color: The color in which to draw the text, as integers [0, 255]
  */
-void osi::GameWindow::drawText(const std::string& text, const std::string& fontName, float x, float y, float fieldWidth, float fieldHeight, glm::ivec3 color)
+void GameWindow::drawText(const std::string& text, const std::string& fontName, float x, float y, float fieldWidth, float fieldHeight, glm::ivec3 color)
 {
 	// Return immediately if arguments are invalid
   if(GameWindow::fontCharacters.find(fontName) == GameWindow::fontCharacters.end()) return;
@@ -246,7 +256,7 @@ void osi::GameWindow::drawText(const std::string& text, const std::string& fontN
 /**
  * Refreshes the game window, drawing the next frame.
  */
-void osi::GameWindow::refresh()
+void GameWindow::refresh()
 {
   glfwPollEvents();
 
@@ -254,7 +264,7 @@ void osi::GameWindow::refresh()
   glClear(GL_COLOR_BUFFER_BIT);
   //RenderText(*osi::GameWindow::s, "This is sample text", 25.0f, 25.0f, 1.0f, glm::vec3(0.5, 0.8f, 0.2f));
   for(GLint i = 0; i < numObjects; ++i) {
-    glBindTexture(GL_TEXTURE_2D, Texture::textureId[textures[i] - 1]);
+    glBindTexture(GL_TEXTURE_2D, textures[i]);//Texture::textureId[textures[i] - 1]);
     glBindVertexArray(vertexArrayObjectId[i]);
     glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
     glDeleteVertexArrays(1, &vertexArrayObjectId[i]);
@@ -272,10 +282,6 @@ void osi::GameWindow::refresh()
   elementBufferObjectId.clear();
   textures.clear();
   numObjects = 0;
-
-  for (int i = 0; i < text.size(); ++i) {
-	  drawText(text[i].getText(), text[i].getFont(), text[i].getX(), text[i].getY(), text[i].getWidth(), text[i].getHeight(), text[i].getColor());
-  }
  // RenderText(*osi::GameWindow::s, "This is sample text", 25.0f, 25.0f, 1.0f, glm::vec3(0.5, 0.8f, 0.2f));
   text.clear();
 
@@ -293,7 +299,7 @@ void osi::GameWindow::refresh()
  * Param y: The vertical Y coordinate
  * Return: Returns a vector, size 2, containing the transformed coordinates
  */
-glm::vec2 osi::GameWindow::dpCoordToGL(float x, float y)
+glm::vec2 GameWindow::dpCoordToGL(float x, float y)
 {
   GLfloat glX = (x - (0.5F * (WINDOW_WIDTH_DP - 1))) / (0.5F * (WINDOW_WIDTH_DP - 1));
   GLfloat glY = -((y - (0.5F * (WINDOW_HEIGHT_DP - 1))) / (0.5F * (WINDOW_HEIGHT_DP - 1)));
@@ -303,7 +309,7 @@ glm::vec2 osi::GameWindow::dpCoordToGL(float x, float y)
 /**
  * 
  */
-glm::vec2 osi::GameWindow::dpDimensionsToGL(float x, float y)
+glm::vec2 GameWindow::dpDimensionsToGL(float x, float y)
 {
   glm::vec2 asCoords = GameWindow::dpCoordToGL(x, y);
   return {asCoords.x + 1, asCoords.y + 1};
@@ -314,7 +320,7 @@ glm::vec2 osi::GameWindow::dpDimensionsToGL(float x, float y)
  * function include providing GLFW the necessary window hints; determining the
  * dimensions at which the window will display; and setting up GLEW.
  */
-void osi::GameWindow::setupWindow()
+void GameWindow::setupWindow()
 {
   glfwInit();
   glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
@@ -323,10 +329,12 @@ void osi::GameWindow::setupWindow()
   glfwWindowHint(GLFW_RESIZABLE, GL_FALSE);
 
   GameWindow::primaryMonitor = glfwGetPrimaryMonitor();
-  GameWindow::window = glfwCreateWindow(1280, 720, "Children of Osi", /*GameWindow::primaryMonitor*/ nullptr, nullptr);
+  GameWindow::window = glfwCreateWindow(1280, 720, "Children of Ase",
+    (START_FULLSCREEN) ? GameWindow::primaryMonitor : nullptr,
+    nullptr);
   if(window == nullptr) {
     glfwTerminate();
-    throw osi::WindowingError("Failed to create window.");
+    throw WindowingError("Failed to create window.");
   }
 
   glfwMakeContextCurrent(window);
@@ -334,7 +342,7 @@ void osi::GameWindow::setupWindow()
   glewExperimental = GL_TRUE;
   if(glewInit() != GLEW_OK) {
     glfwTerminate();
-    throw osi::WindowingError("Failed to initialize GLEW.");
+    throw WindowingError("Failed to initialize GLEW.");
   }
 
   GameWindow::monitorWidthPx = glfwGetVideoMode(GameWindow::primaryMonitor)->width;
@@ -346,15 +354,12 @@ void osi::GameWindow::setupWindow()
     glViewport(0, 0, GameWindow::windowWidthPx, GameWindow::windowHeightPx);
   }
   else {
-    // If screen is wider than 16:9
-    if(aspectRatio > (16.0 / 9.0)) {
+    if(aspectRatio > (16.0 / 9.0)) { // If screen is wider than 16:9
       glfwGetFramebufferSize(window, &GameWindow::windowWidthPx, &GameWindow::windowHeightPx);
       GameWindow::windowWidthPx = static_cast<int>(floor(GameWindow::windowHeightPx * (16.0 / 9.0)));
       glViewport(0, 0, GameWindow::windowWidthPx, GameWindow::windowHeightPx);
     }
-
-    // If screen is narrower than 16:9
-    else {
+    else { // If screen is narrower than 16:9
       glfwGetFramebufferSize(window, &GameWindow::windowWidthPx, &GameWindow::windowHeightPx);
       GameWindow::windowHeightPx = static_cast<int>(floor(GameWindow::windowWidthPx * (9.0 / 16.0)));
       glViewport(0, 0, GameWindow::windowWidthPx, GameWindow::windowHeightPx);
@@ -372,7 +377,7 @@ void osi::GameWindow::setupWindow()
  * Param fragmentShaderPath: The path to the fragment shader to be used
  * Return: Returns the shader program ID related to the given shaders
  */
-GLuint osi::GameWindow::setupShaders(const std::string& vertexShaderPath, const std::string& fragmentShaderPath)
+GLuint GameWindow::setupShaders(const std::string& vertexShaderPath, const std::string& fragmentShaderPath)
 {
   std::ifstream fileStream;
   GLchar *vertexShaderSource = nullptr;
@@ -495,7 +500,7 @@ GLuint osi::GameWindow::setupShaders(const std::string& vertexShaderPath, const 
  * unique string identifying the font in the map with be of form "name size",
  * where "name" is fontName and "size" is the string form of fontHeight.
  */
-void osi::GameWindow::setupFont(const std::string& fontName, unsigned int fontHeight)
+void GameWindow::setupFont(const std::string& fontName, unsigned int fontHeight)
 {
   glUseProgram(GameWindow::fontShaderProgramId);
   glm::mat4 projection = glm::ortho(0.0f, static_cast<GLfloat>(WINDOW_WIDTH_DP), 0.0f, static_cast<GLfloat>(WINDOW_HEIGHT_DP));
@@ -569,7 +574,7 @@ void osi::GameWindow::setupFont(const std::string& fontName, unsigned int fontHe
 	glBindVertexArray(0);
 }
 
-void osi::GameWindow::RenderText(std::string text, GLfloat x, GLfloat y, GLfloat scale, glm::vec3 color)
+void GameWindow::RenderText(std::string text, GLfloat x, GLfloat y, GLfloat scale, glm::vec3 color)
 {
 	y = WINDOW_HEIGHT_DP - y-18;
 	GLfloat lineStart = x;

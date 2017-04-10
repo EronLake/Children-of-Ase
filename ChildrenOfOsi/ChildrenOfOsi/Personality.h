@@ -19,6 +19,8 @@ public:
 	int getRecklessness() { return reck; };
 	int getExtroversion() { return extro; };
 	int getGreed() { return greed; };
+	int operator*(const Personality that) const;
+
 private:
 	int agg;
 	int kind;

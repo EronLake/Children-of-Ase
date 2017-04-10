@@ -1,3 +1,4 @@
+#include "stdafx.h"
 #include "Region.h"
 Region::Region(std::string _name, char* rtheme, char* vtheme) {
 	name = _name;

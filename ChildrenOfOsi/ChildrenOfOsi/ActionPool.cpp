@@ -7,12 +7,12 @@ ActionPool::ActionPool(Hero* h)
 	doer = h;
 	//micro.push_back({});
 	//macro.push_back({});
-	middleLink["affAbove"];
-	middleLink["affBelow"];
-	middleLink["notAbove"];
-	middleLink["notBelow"];
-	middleLink["strAbove"];
-	middleLink["strBelow"];
+	//middleLink["affAbove"];
+	//middleLink["affBelow"];
+	//middleLink["notAbove"];
+	//middleLink["notBelow"];
+	//middleLink["strAbove"];
+	//middleLink["strBelow"];
 }
 
 
@@ -27,8 +27,8 @@ vector<Action> ActionPool::getActions(Hero* h, Action macro)
 	
 	vector<std::string> needs = macro.preConditionsNeeded(doer,h);
 	for (int i = 0; i < needs.size(); i++) {
-		auto j = middleLink.find(needs[i]);
-		if (j != middleLink.end()) points=addVec(points,j->second);
+		auto j = actions_by_post.find(needs[i]);
+		if (j != actions_by_post.end()) points=addVec(points,j->second);
 	}
 	for (int p= 0; p < points.size(); p++) {
 		list.push_back(*points[p]);
@@ -53,25 +53,19 @@ vector<Action*> ActionPool::addVec(vector<Action*> a, vector<Action*> b) {
 }
 
 void ActionPool::updateMiddle() {
-	/*
-	for (int i = 0; i < micro.size(); i++) {
-		for (auto it = micro[i].succ_postconds.begin(); it != micro[i].succ_postconds.end(); ++it) {
-			if (it->first.compare("aff") == 0) {
-				if (it->second > 0) {
-					middleLink["affAbove"].push_back(&micro[i]);
-				} else middleLink["affBelow"].push_back(&micro[i]);
-			} else if (it->first.compare("not") == 0) {
-				if (it->second > 0) {
-					middleLink["notAbove"].push_back(&micro[i]);
-				}
-				else middleLink["notBelow"].push_back(&micro[i]);
-			} else if (it->first.compare("str") == 0) {
-				if (it->second > 0) {
-					middleLink["strAbove"].push_back(&micro[i]);
-				}
-				else middleLink["strBelow"].push_back(&micro[i]);
-			}
+	for (int i = 0; i < macro.size(); i++) {
+		for (auto it = macro[i]->req_preconds.begin(); it != macro[i]->req_preconds.end(); ++it) {
+			actions_by_post[(*it)->get_type()];
 		}
 	}
-	*/
+	for (int i = 0; i < micro.size(); i++) {
+		for (auto it = micro[i]->req_preconds.begin(); it != micro[i]->req_preconds.end(); ++it) {
+			actions_by_post[(*it)->get_type()];
+		}
+	}
+	for (int j = 0; j < micro.size(); j++) {
+		for (auto itor = micro[j]->succ_postconds.begin(); itor != micro[j]->succ_postconds.end(); ++itor) {
+			actions_by_post[(*itor)->get_type()].push_back(micro[j]);
+		}
+	}
 }

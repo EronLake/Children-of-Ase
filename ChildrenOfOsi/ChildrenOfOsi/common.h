@@ -34,14 +34,37 @@
 #define OSHOSI 4
 #define OGUN 5
 
+
+/*
+this variable is used to keep track of time (in frames)
+it is imcremented in the game loop
+*/
 static int frame_count = 0;
+
+
+//static double map_zoom = 1.5; //initialized in main
+
 //Texture* rect = new Texture();
 //toggles debug longging statements 
+
 #define DEBUG 0
+#define MAP_EDITOR 1
+#define START_FULLSCREEN false
+
+/*
+this variable allows the game to zoom and out
+this zooms is used in renderHelper.cpp GameWindow.cpp and Input.cpp
+also specified to zoom for the map editor mode
+*/
+#if MAP_EDITOR 
+#define map_zoom 4
+#else 
+#define map_zoom 1
+
+#endif
 
 #if DEBUG 
 #define LOG(input) //std::////cout << "LOG:" << input << std::endl
 #else 
 #define LOG(input) 
-
 #endif

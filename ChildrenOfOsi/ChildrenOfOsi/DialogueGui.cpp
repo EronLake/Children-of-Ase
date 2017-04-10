@@ -109,14 +109,14 @@ void DialogueGui::setQuestionGlow()
 
 void DialogueGui::drawGui()
 {
-	osi::GameWindow::drawSprite(background->getX(), background->getY(), background->getWidth(), background->getHeight(), background->sprite);
-	osi::GameWindow::drawSprite(swordIcon->getX(), swordIcon->getY(), swordIcon->getWidth(), swordIcon->getHeight(), swordIcon->sprite);
-	osi::GameWindow::drawSprite(heartIcon->getX(), heartIcon->getY(), heartIcon->getWidth(), heartIcon->getHeight(), heartIcon->sprite);
-	osi::GameWindow::drawSprite(faceIcon->getX(), faceIcon->getY(), faceIcon->getWidth(), faceIcon->getHeight(), faceIcon->sprite);
-	osi::GameWindow::drawSprite(questionIcon->getX(), questionIcon->getY(), questionIcon->getWidth(), questionIcon->getHeight(), questionIcon->sprite);
-	osi::GameWindow::drawSprite(dialogueBox->getX(), dialogueBox->getY(), dialogueBox->getWidth(), dialogueBox->getHeight(), dialogueBox->sprite);
-	osi::GameWindow::drawSprite(responseBox1->getX(), responseBox1->getY(), responseBox1->getWidth(), responseBox1->getHeight(), responseBox1->sprite);
-//	osi::GameWindow::drawSprite(responseBox2->getX(), responseBox2->getY(), responseBox2->getWidth(), responseBox2->getHeight(), responseBox2->sprite);
+	GameWindow::drawSprite(background->getX(), background->getY(), background->getWidth(), background->getHeight(), background->sprite);
+	GameWindow::drawSprite(swordIcon->getX(), swordIcon->getY(), swordIcon->getWidth(), swordIcon->getHeight(), swordIcon->sprite);
+	GameWindow::drawSprite(heartIcon->getX(), heartIcon->getY(), heartIcon->getWidth(), heartIcon->getHeight(), heartIcon->sprite);
+	GameWindow::drawSprite(faceIcon->getX(), faceIcon->getY(), faceIcon->getWidth(), faceIcon->getHeight(), faceIcon->sprite);
+	GameWindow::drawSprite(questionIcon->getX(), questionIcon->getY(), questionIcon->getWidth(), questionIcon->getHeight(), questionIcon->sprite);
+	GameWindow::drawSprite(dialogueBox->getX(), dialogueBox->getY(), dialogueBox->getWidth(), dialogueBox->getHeight(), dialogueBox->sprite);
+	GameWindow::drawSprite(responseBox1->getX(), responseBox1->getY(), responseBox1->getWidth(), responseBox1->getHeight(), responseBox1->sprite);
+  // GameWindow::drawSprite(responseBox2->getX(), responseBox2->getY(), responseBox2->getWidth(), responseBox2->getHeight(), responseBox2->sprite);
 	std::string message = DialogueController::getMessage();
 	int j = 0;
 	osi::GameWindow::createText(message, 266, 303, 600, 80, black);
@@ -131,10 +131,10 @@ void DialogueGui::drawGui()
 			if ( options.size() <= (DialogueController::scroll_control + i))
 				break;
 			if (DialogueController::getSelect() == i) {
-				osi::GameWindow::createText(options[DialogueController::scroll_control + i], 292, 390 + (18 * i), 544, 45, red);
+				GameWindow::createText(options[DialogueController::scroll_control + i], 292, 390 + (18 * i), 544, 45, red);
 			}
 			else {
-				osi::GameWindow::createText(options[DialogueController::scroll_control + i], 292, 390 + (18 * i), 544, 45, black);
+				GameWindow::createText(options[DialogueController::scroll_control + i], 292, 390 + (18 * i), 544, 45, black);
 			}
 
 		}
@@ -150,10 +150,10 @@ void DialogueGui::drawGui()
 			if (options.size() <= (DialogueController::scroll_control + i))
 				break;
 			if (DialogueController::getSelect() == i) {
-			osi::GameWindow::createText(options[DialogueController::scroll_control + i], 292, 390 + (18 * i), 544, 45, red);
+			GameWindow::createText(options[DialogueController::scroll_control + i], 292, 390 + (18 * i), 544, 45, red);
 			}
 			else {
-				osi::GameWindow::createText(options[DialogueController::scroll_control + i], 292, 390 + (18 * i), 544, 45, black);
+				GameWindow::createText(options[DialogueController::scroll_control + i], 292, 390 + (18 * i), 544, 45, black);
 			}
 
 		}

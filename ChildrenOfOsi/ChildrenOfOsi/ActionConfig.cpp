@@ -13,13 +13,12 @@ ActionConfig::~ActionConfig()
 }
 
 
-void ActionConfig::import_config(ChildrenOfOsi* gameplay_func, TaskBuffer* tBuffer, Hero* owner,
-									Hero* receiver)
+void ActionConfig::import_config(ChildrenOfOsi* gameplay_func, TaskBuffer* tBuffer, Hero* owner)
 {
 	//iterates through every player
-	for (auto itr = Containers::hero_table.begin(); itr != Containers::hero_table.end(); itr++)
+	for (auto i = Containers::hero_table.begin(); i != Containers::hero_table.end(); i++)
 	{
-		if (itr->second->name != owner->name)
+		if (i->second->name != owner->name)
 		{
 			Json::Value root;
 			Json::Reader reader;
@@ -29,7 +28,7 @@ void ActionConfig::import_config(ChildrenOfOsi* gameplay_func, TaskBuffer* tBuff
 			file >> root;
 			for (auto itr = root.begin(); itr != root.end(); itr++)
 			{
-				set_action_obj(gameplay_func, tBuffer, owner, receiver,
+				set_action_obj(gameplay_func, tBuffer, owner, i->second,
 					(*itr)["utility"].asFloat(), (*itr)["why"].asFloat(), (*itr)["type"].asString(),
 					(*itr)["name"].asString(), (*itr)["exe_name"].asString(),
 					(*itr)["aggression"].asInt(), (*itr)["kindness"].asInt(), (*itr)["honor"].asInt(),
@@ -56,28 +55,20 @@ void ActionConfig::set_action_obj(ChildrenOfOsi* gameplay_func, TaskBuffer* tBuf
 	//for the add the action pointer to the current respective reiciver action pool
 	if (type == "micro") {
 		
-		//need to make a memory pool for this 
-		if (owner->actionPool_map[receiver->name] == nullptr)
-		{
-			owner->actionPool_map[receiver->name] = new ActionPool(owner);
-		}
-		
-
 		//needs to differenciate from pos and neg
 		owner->actionPool_map[receiver->name]->micro.push_back(Containers::action_table[name]);
 	}
 	//then macro
-	else
+	else if (type == "macro")
 	{
-		//need to make a memory pool for this 
-		//need to make a memory pool for this 
-		if (owner->actionPool_map[receiver->name] = nullptr)
-		{
-			owner->actionPool_map[receiver->name] = new ActionPool(owner);
-		}
-
+		//needs to differenciate from pos and neg
+		owner->actionPool_map[receiver->name]->end_states.push_back(Containers::action_table[name]);
+	}
+	else if (type == "end_state")
+	{
 		//needs to differenciate from pos and neg
 		owner->actionPool_map[receiver->name]->macro.push_back(Containers::action_table[name]);
+		owner->actionPool_map[receiver->name]->end_states.push_back(Containers::action_table[name]);
 	}
 	
 	return;

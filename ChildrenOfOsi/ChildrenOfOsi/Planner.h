@@ -60,6 +60,7 @@ private:
 
 	int heuristic(Action step, vector <std::shared_ptr<Preconditions>> priority_preconds, vector<Action> goals);
 	
+	int relationship_appeal(Action* state);
 	int prereq_appeal(Action step, vector<std::shared_ptr<Preconditions>> priority_preconds);
 	int cost(Action step);
 

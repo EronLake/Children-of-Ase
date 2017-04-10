@@ -26,6 +26,11 @@ std::string Preconditions::get_type()
 {
 	return type;
 }
+
+std::string Preconditions::get_general_type()
+{
+	return general_type;
+}
 //---------------------------------------------------------------------------------
 
 ////////////////////////////////////////////////////////////////////////////////////
@@ -38,7 +43,8 @@ RelPrecon::RelPrecon(std::string _rel_type, std::string _rel_bound, int _desired
 	rel_bound = _rel_bound;
 	desired_rel_val = _desired_rel_val;
 
-	type = "relationship";
+	type = "relationship"+ rel_type+ rel_bound;
+	general_type = "relationship";
 
 	LOG("RelPrecon Object Constructed");
 }
@@ -88,7 +94,8 @@ RelEstimPrerec::RelEstimPrerec(std::string _rel_type, std::string _rel_bound, in
 	rel_bound = _rel_bound;
 	desired_rel_val = _desired_rel_val;
 
-	type = "relationship_estimate";
+	type = "relationship_estimate" + rel_type + rel_bound;
+	general_type = "relationship_estimate";
 
 	LOG("RelEstimPrerec Object Constructed");
 }
@@ -137,6 +144,7 @@ TimePrerec::TimePrerec(int _time_rec)
 	time_rec = _time_rec;
 
 	type = "time";
+	general_type= "time";
 
 	LOG("TimePrerec Object Constructed");
 }
@@ -173,6 +181,7 @@ MemoryNumPrerec::MemoryNumPrerec(int _rec_num_of_mem)
 	rec_num_of_mem = _rec_num_of_mem;
 
 	type = "memory_number";
+	general_type = "memory_number";
 
 	LOG("MemoryNumPrerec Object Constructed");
 }
@@ -183,14 +192,14 @@ MemoryNumPrerec::~MemoryNumPrerec()
 	LOG("MemoryNumPrerec Object Destroyed");
 }
 
-float MemoryNumPrerec::get_cost(std::vector<Memory>* memories)
+float MemoryNumPrerec::get_cost(std::vector<Memory*> memories)
 {
 	float cost = 0.0;
 	float magnifier = 10.0;//this has to essentially the cost of an average memory
 
-	if (memories->size() < rec_num_of_mem)
+	if (memories.size() < rec_num_of_mem)
 	{
-		cost = std::abs((int)(memories->size() - rec_num_of_mem))*magnifier;
+		cost = std::abs((int)(memories.size() - rec_num_of_mem))*magnifier;
 	}
 
 	return cost;
@@ -204,7 +213,8 @@ MemPrerec::MemPrerec(std::string _rec_mem)
 {
 	rec_mem = _rec_mem;
 
-	type = "memory";
+	type = "memory"+rec_mem;
+	general_type = "memory";
 
 	LOG("particularMemPrerec Object Constructed");
 }
@@ -215,14 +225,14 @@ MemPrerec::~MemPrerec()
 	LOG("particularMemPrerec Object Destroyed");
 }
 
-float MemPrerec::get_cost(std::vector<Memory>* memories)
+float MemPrerec::get_cost(std::vector<Memory*> memories)
 {
 	float cost = 0.0;
 	float magnifier = 10.0;//this has to essentially the cost of an average memory
 
-	for (int i = 0; i < memories->size(); i++)
+	for (int i = 0; i < memories.size(); i++)
 	{
-		if ((*memories)[i].getContent() == rec_mem)
+		if (memories[i]->getContent() == rec_mem)
 			return cost;
 	}
 	
@@ -242,6 +252,7 @@ StatePrerec::StatePrerec()
 	std::vectorr<relevant villages>*/
 
 	type = "state";
+	general_type = "state";
 
 	LOG("particularMemPrerec Object Constructed");
 }
@@ -314,6 +325,10 @@ std::string Postcondition::get_type()
 	return type;
 }
 
+std::string Postcondition::get_general_type()
+{
+	return general_type;
+}
 
 
 //---------------------------------------------------------------------------------
@@ -326,8 +341,16 @@ RelPost::RelPost(std::string _rel_type, int _utility)
 {
 	rel_type = _rel_type;
 	utility = _utility;
+	std::string bound;
+	if (utility > 0) {
+		bound = "upper";
+	}
+	else {
+		bound = "lower";
+	}
 
-	type = "relationship";
+	type = "relationship"+rel_type+bound;
+	general_type = "relationship";
 
 	LOG("RelEstimPost Object Constructed");
 }
@@ -362,6 +385,7 @@ void RelPost::apply_utility(Hero* curr_hero, Hero* other_hero)
 //Returns null plug string if the postcondition does not complete
 //any of the given preconditions
 //Returns the string key of the precondition if one is found
+
 std::string RelPost::fulfills_which(vector<std::string> preconds, Precond_vec vec)
 {
 	
@@ -383,6 +407,7 @@ std::string RelPost::fulfills_which(vector<std::string> preconds, Precond_vec ve
 	*/
 	return pre_fulfilled;
 }
+
 //---------------------------------------------------------------------------------
 
 
@@ -395,8 +420,16 @@ RelEstimPost::RelEstimPost( std::string _rel_type, int _utility)
 {
 	rel_type = _rel_type;
 	utility = _utility;
+	std::string bound;
+	if (utility > 0) {
+		bound = "upper";
+	}
+	else {
+		bound = "lower";
+	}
 
-	type = "relationship_estimate";
+	type = "relationship_estimate"+rel_type+bound;
+	general_type = "relationship_estimate";
 
 	LOG("RelEstimPost Object Constructed");
 }
@@ -441,6 +474,7 @@ StatePost::StatePost(int _utility)
 	utility = _utility;
 
 	type = "state";
+	general_type = "state";
 
 	LOG("StatePost Object Constructed");
 }
