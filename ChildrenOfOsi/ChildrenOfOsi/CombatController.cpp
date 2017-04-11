@@ -226,7 +226,7 @@ void CombatController::checkParties() {
 			for (auto a = partiesA.begin(); a != partiesA.end(); ++a) {
 				if ((*a)->getMembers().size() == 0) {
 					(*i)->remove_party((*a));
-				} else if ((*a)->getMode()!=Party::MODE_FLEE && (*a)->getLeader()->getInCombat() != true) {
+				} else if ((*a)->getMode() != Party::MODE_FLEE && !(*a)->getLeader()->getInCombat()) {
 					for (auto b = partiesB.begin(); b != partiesB.end(); ++b) {
 						if ((*b)->getMembers().size() == 0) {
 							(*j)->remove_party((*b));

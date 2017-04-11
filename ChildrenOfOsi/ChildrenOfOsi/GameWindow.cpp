@@ -307,15 +307,6 @@ glm::vec2 GameWindow::dpCoordToGL(float x, float y)
 }
 
 /**
- * 
- */
-glm::vec2 GameWindow::dpDimensionsToGL(float x, float y)
-{
-  glm::vec2 asCoords = GameWindow::dpCoordToGL(x, y);
-  return {asCoords.x + 1, asCoords.y + 1};
-}
-
-/**
  * Handles the setup of the window itself when initializing. The tasks of this
  * function include providing GLFW the necessary window hints; determining the
  * dimensions at which the window will display; and setting up GLEW.
@@ -329,24 +320,24 @@ void GameWindow::setupWindow()
   glfwWindowHint(GLFW_RESIZABLE, GL_FALSE);
 
   GameWindow::primaryMonitor = glfwGetPrimaryMonitor();
-  GameWindow::window = glfwCreateWindow(1280, 720, "Children of Ase",
-    (START_FULLSCREEN) ? GameWindow::primaryMonitor : nullptr,
-    nullptr);
+  GameWindow::monitorWidthPx = glfwGetVideoMode(GameWindow::primaryMonitor)->width;
+  GameWindow::monitorHeightPx = glfwGetVideoMode(GameWindow::primaryMonitor)->height;
+  GameWindow::window = glfwCreateWindow(1440, 810, u8"Children of \x00C0\x1E63\x1EB9",
+    (START_FULLSCREEN) ? GameWindow::primaryMonitor : nullptr, nullptr);
+
   if(window == nullptr) {
     glfwTerminate();
     throw WindowingError("Failed to create window.");
   }
 
   glfwMakeContextCurrent(window);
+  glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_HIDDEN);
 
   glewExperimental = GL_TRUE;
   if(glewInit() != GLEW_OK) {
     glfwTerminate();
     throw WindowingError("Failed to initialize GLEW.");
   }
-
-  GameWindow::monitorWidthPx = glfwGetVideoMode(GameWindow::primaryMonitor)->width;
-  GameWindow::monitorHeightPx = glfwGetVideoMode(GameWindow::primaryMonitor)->height;
 
   double aspectRatio = static_cast<double>(GameWindow::monitorWidthPx) / static_cast<double>(GameWindow::monitorHeightPx);
   if(aspectRatio == (16.0 / 9.0)) {
@@ -588,12 +579,12 @@ void GameWindow::RenderText(std::string text, GLfloat x, GLfloat y, GLfloat scal
 	std::string::const_iterator c;
 	for (c = text.begin(); c != text.end(); c++) {
 		Character ch = Characters[*c];
-		if (*c == '\n' || ((*c == ' ')&&(x>750)) || ((*c == '_') && (x>750))) {
+		if (*c == '\n' || ((*c == ' ')&&(x>750))) {
 			if (*c==' ' || *c=='_')y -= 18 * scale;
 			x = lineStart;
 			y -= (ch.Size.y + ch.Bearing.y) * scale;
 		}
-		if (*c == '_' || *c == ' ') {
+		if (*c == ' ') {
 			x+= (ch.Bearing.x * scale);
 			x += (ch.Advance >> 6) * scale;
 		} else if (*c != '\n') {

@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "HUD.h"
 
+bool HUD::show_active_quests=false;
 
 HUD::HUD()
 {
@@ -15,6 +16,7 @@ HUD::HUD()
 	hud_health_tex = new Texture();
 	hud_portrait_tex = new Texture();
 
+	black = glm::vec3(0, 0, 0);
 }
 
 
@@ -84,4 +86,12 @@ void HUD::drawHUD(WorldObj* obj)
 	GameWindow::drawSprite(hud_health->getX() - damage_taken, hud_health->getY(), hud_health->getWidth(), hud_health->getHeight(), hud_health->sprite);
 	GameWindow::drawSprite(hud_portrait->getX(), hud_portrait->getY(), hud_portrait->getWidth(), hud_portrait->getHeight(), hud_portrait->sprite);
 
+	if (HUD::show_active_quests) {
+		GameWindow::createText("Active Quests", 650, 99.5, 10, 80, black);
+		GameWindow::createText("___________", 650, 100, 10, 80, black);
+		vector<pair<Action*, int>> quests = player->get_quests();
+		for (int i = 0; i < quests.size(); i++) {
+			GameWindow::createText(quests[i].first->getName()+": "+ to_string(quests[i].second), 650, 117+(i*15), 10, 80, black);
+		}
+	}
 }

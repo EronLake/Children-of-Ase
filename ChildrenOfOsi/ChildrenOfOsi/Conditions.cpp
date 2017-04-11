@@ -343,10 +343,10 @@ RelPost::RelPost(std::string _rel_type, int _utility)
 	utility = _utility;
 	std::string bound;
 	if (utility > 0) {
-		bound = "upper";
+		bound = "lower";
 	}
 	else {
-		bound = "lower";
+		bound = "upper";
 	}
 
 	type = "relationship"+rel_type+bound;
@@ -422,10 +422,10 @@ RelEstimPost::RelEstimPost( std::string _rel_type, int _utility)
 	utility = _utility;
 	std::string bound;
 	if (utility > 0) {
-		bound = "upper";
+		bound = "lower";
 	}
 	else {
-		bound = "lower";
+		bound = "upper";
 	}
 
 	type = "relationship_estimate"+rel_type+bound;
