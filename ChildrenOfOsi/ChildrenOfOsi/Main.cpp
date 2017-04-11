@@ -286,7 +286,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	Texture* h_leftIdleTex = new Texture();
 	Texture* h_rightIdleTex = new Texture();
 	textureMap[h_upRunTex] = pair<string, int>("Assets/Sprites/YemojaBackSprint.png", 16);
-	textureMap[h_downRunTex] = pair<string, int>("Assets/Sprites/YemojaFrontSprint.png", 16);
+	textureMap[h_downRunTex] = pair<string, int>("Assets/Sprites/YemojaForwardSprint.png", 16);
 	textureMap[h_leftRunTex] = pair<string, int>("Assets/Sprites/YemojaLeftSprint.png", 16);
 	textureMap[h_rightRunTex] = pair<string, int>("Assets/Sprites/YemojaRightSprint.png", 16);
 	textureMap[h_upIdleTex] = pair<string, int>("Assets/Sprites/YemojaBackIdle.png", 22);
@@ -1300,8 +1300,11 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	War* war = new War();
 	war->setWarParties(v1,v2);
 	a1->add_alliance_to_alliance(v3->get_alliance());
-	party2->add_patrol_loc(blueSoldier->getLoc());
-	party2->setMode(Party::MODE_PATROL);
+	party2->set_defend(blueSoldier->getLoc());
+	party2->setMode(Party::MODE_DEFEND);
+	party3->add_patrol_loc(staticRec->getLoc());
+	party3->add_patrol_loc({ 6445.0, 9855.0 });
+	party3->setMode(Party::MODE_PATROL);
 	cout << Alex->getParty()->getAlliance()<< endl;
 
 	partyM->addToPartyList(party);
