@@ -200,8 +200,8 @@ void ChildrenOfOsi::add_action(std::string key, int utility, int why, Hero* owne
 	createTaskAddAct("Add_Action", "MODIFY_POOL", key, utility, why, owner, receiver, doer, exe_name);
 }
 
-void ChildrenOfOsi::add_tag(std::vector<std::string> topicVec, std::string key) {
-	createTaskTag("Add_Tag", "MODIFY_POOL", topicVec, key);
+void ChildrenOfOsi::add_tag(std::string key) {
+	createTaskTag("Add_Tag", "MODIFY_POOL",key);
 }
 
 void ChildrenOfOsi::add_conv_point(std::string topic, std::string temp, std::string key) {
@@ -295,11 +295,11 @@ void ChildrenOfOsi::createTaskNoObj(std::string task_name, std::string type, std
 	mLog->logMessage(new_task);
 }
 
-void ChildrenOfOsi::createTaskTag(std::string task_name, std::string type, std::vector<std::string> topicVec, std::string key)
+void ChildrenOfOsi::createTaskTag(std::string task_name, std::string type, std::string key)
 {
 	//maybe just pass in the string craeated
 	std::string task_status = "CREATED";
-	Task* new_task = new Task(task_name, task_status, type, topicVec, key);
+	Task* new_task = new Task(task_name, task_status, type,key);
 	tBuffer->push(new_task);
 	mLog->logMessage(new_task);
 }

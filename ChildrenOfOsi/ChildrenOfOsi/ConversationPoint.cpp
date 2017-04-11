@@ -10,6 +10,7 @@ ConversationPoint::ConversationPoint()
 ConversationPoint::~ConversationPoint()
 {
 	delete multipliers;
+	delete rel_multipliers;
 }
 
 void ConversationPoint::setMultipliers(int a, int k, int h, int p, int r, int e, int g) {

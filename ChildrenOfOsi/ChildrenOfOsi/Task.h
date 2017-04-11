@@ -53,8 +53,10 @@ public:
 	//for adding actions
 	Task(std::string name, std::string status, std::string _type, std::string key, int utility, int why, Hero* owner, Hero* receiver,
 		Hero* doer, std::string exe_name);
+	//for conversation points
 	Task(std::string _name, std::string _status, std::string _type, std::string topic, std::string temp, std::string key);
-	Task(std::string _name, std::string _status, std::string _type, std::vector<std::string> topicVec, std::string key);
+	//for tags
+	Task(std::string _name, std::string _status, std::string _type, std::string key);
 	//Task(std::string name, std::string status, std::string _type, WorldObj* _objToUpdate, std::string key,float x, float y, bool col, int d);
 	
 	~Task();
