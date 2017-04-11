@@ -69,7 +69,7 @@ void DialogueController::PlayerResponse()
 		{
 			player->quest = quest;
 			Planner* planner = ai->hero_planners[CheckClass::isHero(other)->name];
-			planner->get_current_action()->executed = true;
+			//planner->get_current_action()->executed = true;
 			prompted_quest = false;
 			accepted_quest = true;
 		}
