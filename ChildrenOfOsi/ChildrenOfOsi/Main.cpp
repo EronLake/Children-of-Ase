@@ -1168,7 +1168,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 
 	Planner* YemojaPlanner = new Planner(staticRec);
 	AiController->hero_planners[YEMOJA] = YemojaPlanner;
-	Action* test_ally = new Action(nullptr, nullptr, nullptr, 10, 1, "Alliance", "execute_train");
+	Action* test_ally = new Action(nullptr, nullptr, nullptr, 10, 1, "Create Alliance", "execute_train");
 	Action* test_train = new Action(nullptr, nullptr, nullptr, 10, 1, "Train", "execute_train");
 	
 	RelPrecon* prec = new RelPrecon("Affinity", "lower", 60);
@@ -1192,6 +1192,9 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	for (auto i = act.begin(); i != act.end(); ++i) {
 		cout << i->getName() << endl;
 	}
+
+	Alex->add_quest(test_ally,-1);
+	Alex->add_quest(test_train, -1);
 
 	//AiController->hero_planners[YEMOJA]->set_current_action(test_train);
 

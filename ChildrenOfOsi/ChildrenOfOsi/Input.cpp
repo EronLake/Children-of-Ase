@@ -558,6 +558,7 @@ void Input::InputCheck()
 	short G = GetKeyState('G') >> 15;
 	short Y = GetKeyState('Y') >> 15;
 	short U = GetKeyState('U') >> 15;
+	short M = GetKeyState('M') >> 15;
 
 
 	if (DialogueController::getState() == 0) {
@@ -736,6 +737,10 @@ void Input::InputCheck()
 			t->getParty()->removeSoldier(t,true);
 			t->getVillage()->addToParties(t->getParty());
 			count2 = 200;
+		}
+		if (M && (count2 == 0)) {
+			HUD::toggle_quests();
+			count2 = 20;
 		}
 
 
