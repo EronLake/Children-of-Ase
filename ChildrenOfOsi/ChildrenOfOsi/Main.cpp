@@ -64,7 +64,9 @@
 #include "Alliance.h"
 #include "PartyManager.h"
 //#include <boost/thread/thread.hpp>  //This is used for Ian's multithread section, but the user needs the boost compiled library installed on their computer
-# include "thread"
+#include "thread"
+
+#include "QuestManager.h"
 
 using namespace std;
 
@@ -143,6 +145,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	ActionHelper::ai = AiController;
 	ActionHelper::gameplay_func = gameplay_functions;
 	CombatController* combatControl = new CombatController(gameplay_functions);
+	QuestManager* questM = new QuestManager;
 
 	//the order defines what order the managers the tasks will be sent to
 	DumM->register_manager();
@@ -1193,8 +1196,9 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 		cout << i->getName() << endl;
 	}
 
-	Alex->add_quest(test_ally,-1);
-	Alex->add_quest(test_train, -1);
+	Alex->add_quest(test_ally,10);
+	Alex->add_quest(test_train, 2);
+	questM->heros.push_back(Alex);
 
 	//AiController->hero_planners[YEMOJA]->set_current_action(test_train);
 
@@ -1407,6 +1411,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 		combatControl->update_soldier(blueSoldier2, state);
 		combatControl->update_soldier(blueSoldier3, state);
 
+		questM->update();
 				
 		//ai->plan_step(staticRec);
 		//clock 

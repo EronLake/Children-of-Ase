@@ -222,6 +222,7 @@
       <Filter>Rendering</Filter>
     </ClCompile>
     <ClCompile Include="ThreadManager.cpp" />
+    <ClCompile Include="QuestManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AIHelper.h">
@@ -463,6 +464,7 @@
     <ClInclude Include="PartyManager.h" />
     <ClInclude Include="TagConfig.h" />
     <ClInclude Include="ThreadManager.h" />
+    <ClInclude Include="QuestManager.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="audio_test.txt">
