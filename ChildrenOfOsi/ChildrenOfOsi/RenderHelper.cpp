@@ -34,7 +34,7 @@ void RenderHelper::initCamera(WorldObj * player)
 {
 	//if player is within the four corners of the screen, camera is just the four corner of the screen
 
-	float camX = player->getX() - ((cameraSize.getXloc() / 2)*map_zoom) - (player->getWidth() / 2);
+	float camX = player->getX() - ((cameraSize.getXloc() / 2)*map_zoom) + (player->getWidth() / 2);
 	float camY = player->getY() - ((cameraSize.getYloc() / 2)*map_zoom) + (player->getHeight() / 2);
 	camera->setLoc(Vector2f(camX, camY));
 	camera->setWidth(cameraSize.getXloc() + 700);
@@ -73,7 +73,7 @@ int RenderHelper::draw_frame(WorldObj * obj)
 	
 	for (int i = 0; i < fullVec.size(); i++) {
 		WorldObj* tempObj = fullVec[i];
-		if (tempObj->getX() > obj->getX() - 1000 && tempObj->getX() < obj->getX() + 1000 && tempObj->getY() > obj->getY() - 800 && tempObj->getY() < obj->getY() + 800) {
+		if (tempObj->getX() > obj->getX() - (1000*map_zoom) && tempObj->getX() < obj->getX() + (1000*map_zoom) && tempObj->getY() > obj->getY() - (800*map_zoom) && tempObj->getY() < obj->getY() + (800*map_zoom)) {
 				auto it = std::find(objVec.begin(), objVec.end(), tempObj);
 				if (it == objVec.end()) {
 					objVec.push_back(tempObj);

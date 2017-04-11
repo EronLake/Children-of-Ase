@@ -64,7 +64,7 @@ memManager::memManager(MessageLog* _mLog, TaskBuffer* _tBuffer)
 	tag_pool = memHelper->create_pool(sizeof(Tag) * 32);
 	tag_head = memHelper->init_pool(tag_pool, sizeof(Tag) * 2);
 
-	conv_point_pool = memHelper->create_pool(sizeof(ConversationPoint) * 32);
+	conv_point_pool = memHelper->create_pool(sizeof(ConversationPoint) * 500);
 	conv_point_head = memHelper->init_pool(conv_point_pool, sizeof(ConversationPoint) * 2);
 
 

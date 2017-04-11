@@ -3,8 +3,8 @@
 
 
 
-Planner::Planner() {
-
+Planner::Planner()
+{
 };
 Planner::~Planner() {
 
@@ -74,8 +74,20 @@ void Planner::choose_end_with(int hero) {
 			best_end_state = state;
 		}
 	}
-	this->end_states->at(hero) = *best_end_state;
-
+	/*
+	if (this->end_states.find(hero) == this->end_states.end()) 
+	{
+		this->end_states.insert(std::make_pair(hero, *best_end_state));
+	}
+	else
+	{
+		this->end_states.at(hero) = *best_end_state;
+	}
+	*/
+	this->end_states[hero] = *best_end_state;
+	std::cout << "///////////////////////////////////////////////////////" << std::endl;
+	std::cout << "BEST END STATE: " << best_end_state->getName() << std::endl;
+	std::cout << "///////////////////////////////////////////////////////" << std::endl;
 }
 
 Action Planner::choose_next_step(Action goal, vector<Action> goals) {
@@ -146,7 +158,7 @@ vector<std::shared_ptr<Preconditions>> Planner::prioritize_preconditions(Action 
 //Returns a vector holding all 4 ideal end_states (as actions)
 vector<Action> Planner::get_end_states() {
 	vector<Action> states;
-	for (auto iter : *end_states)
+	for (auto iter : end_states)
 	{
 		states.push_back(iter.second);
 	}
@@ -162,7 +174,7 @@ vector<Action> Planner::get_end_states() {
 
 vector<Action> Planner::get_milestone_frontier() {
 	vector<Action> frontier;
-	for (auto iter : *milestones)
+	for (auto iter : milestones)
 	{
 		Action goal = iter.first;           //The goal associated with the milestone list
 		vector<Action> path = iter.second;  //The milestone list
@@ -180,7 +192,7 @@ vector<Action> Planner::get_milestone_frontier() {
 
 //Adds the milestone action to the Goal action's milestonelist
 void Planner::add_milestone(Action goal, Action milestone) {
-	milestones->at(goal).push_back(milestone);
+	milestones.at(goal).push_back(milestone);
 }
 
 void Planner::generate_milestones(Action state, Action* goal) {
@@ -195,8 +207,8 @@ void Planner::generate_milestones(Action state, Action* goal) {
 	}
 	else
 	{
-		milestones->at(state).push_back(choose_next_step(*goal, get_milestone_frontier()));
-		generate_milestones(state, &milestones->at(state).back());
+		milestones.at(state).push_back(choose_next_step(*goal, get_milestone_frontier()));
+		generate_milestones(state, &milestones.at(state).back());
 	}
 }
 

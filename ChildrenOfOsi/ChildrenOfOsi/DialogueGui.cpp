@@ -28,6 +28,7 @@ DialogueGui::DialogueGui()
 	responseBoxTex = new Texture();
 	black = glm::vec3(0, 0, 0);
 	red = glm::vec3(50, 0, 0);
+	DialogueController::set_scroll_control(0);
 
 }
 
@@ -117,29 +118,42 @@ void DialogueGui::drawGui()
 	GameWindow::drawSprite(responseBox1->getX(), responseBox1->getY(), responseBox1->getWidth(), responseBox1->getHeight(), responseBox1->sprite);
   // GameWindow::drawSprite(responseBox2->getX(), responseBox2->getY(), responseBox2->getWidth(), responseBox2->getHeight(), responseBox2->sprite);
 	std::string message = DialogueController::getMessage();
-
+	int j = 0;
 	GameWindow::createText(message, 266, 303, 600, 80, black);
 	std::vector<std::string> options;
 	if (DialogueController::getState() == 1) {
 		options = DialogueController::getOptions();
-		for (int i = 0; i < options.size(); i++) {
+		if (options.size() <= 4)
+			j = options.size();
+		else
+			j = 4;
+		for (int i = 0; i <= 4; i++) {
+			if ( options.size() <= (DialogueController::scroll_control + i))
+				break;
 			if (DialogueController::getSelect() == i) {
-				GameWindow::createText(options[i], 292, 390 + (18 * i), 544, 45, red);
+				GameWindow::createText(options[DialogueController::scroll_control + i], 292, 390 + (18 * i), 544, 45, red);
 			}
 			else {
-				GameWindow::createText(options[i], 292, 390 + (18 * i), 544, 45, black);
+				GameWindow::createText(options[DialogueController::scroll_control + i], 292, 390 + (18 * i), 544, 45, black);
 			}
 
 		}
 	}
 	if (DialogueController::getState() == 2) {
 		options = DialogueController::getReplyOptions();
-		for (int i = 0; i < options.size(); i++) {
+		//DialogueController::scroll_control = 0;
+		if (options.size() <= DialogueController::scroll_control)
+			j = options.size();
+		else
+			j = 4;
+		for (int i = 0; i <= 4; i++) {
+			if (options.size() <= (DialogueController::scroll_control + i))
+				break;
 			if (DialogueController::getSelect() == i) {
-				GameWindow::createText(options[i], 292, 390 + (18 * i), 544, 45, red);
+			GameWindow::createText(options[DialogueController::scroll_control + i], 292, 390 + (18 * i), 544, 45, red);
 			}
 			else {
-				GameWindow::createText(options[i], 292, 390 + (18 * i), 544, 45, black);
+				GameWindow::createText(options[DialogueController::scroll_control + i], 292, 390 + (18 * i), 544, 45, black);
 			}
 
 		}

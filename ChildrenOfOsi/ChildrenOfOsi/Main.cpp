@@ -49,6 +49,7 @@
 #include "DialogueHelper.h"
 #include "DialougeTestSuite.h"
 #include "DialogueConfig.h"
+#include "TagConfig.h"
 
 #include "AIManager.h"
 #include "AIController.h"
@@ -189,6 +190,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	
 	DialogueConfig::import_config(gameplay_functions, tBuffer);
 	DialogueController::getDialogueHelper()->fill_conversations();
+	TagConfig::import_config(gameplay_functions, tBuffer);
 	
 	WorldObj* barrel = new WorldObj(Vector2f(5200, 3900), 75, 75);
 	//Alex->name = SHANGO;
@@ -1069,7 +1071,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	blueSoldier->melee->setHeight(50);
 	blueSoldier->set_creator_of_melee();
 	blueSoldier->melee->setStaminaCost(120);
-	blueSoldier->setHealth(100);
+	blueSoldier->setHealth(10);
 	blueSoldier->setMaxStamina(300);
 	
 	blueSoldier->addAttackType(rockThrow);
@@ -1087,7 +1089,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	blueSoldier2->melee->setHeight(50);
 	blueSoldier2->set_creator_of_melee();
 	blueSoldier2->melee->setStaminaCost(120);
-	blueSoldier2->setHealth(100);
+	blueSoldier2->setHealth(10);
 	blueSoldier2->setMaxStamina(300);
 
 	blueSoldier2->addAttackType(rockThrow);
@@ -1105,7 +1107,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	blueSoldier3->melee->setHeight(50);
 	blueSoldier3->set_creator_of_melee();
 	blueSoldier3->melee->setStaminaCost(120);
-	blueSoldier3->setHealth(100);
+	blueSoldier3->setHealth(10);
 	blueSoldier3->setMaxStamina(300);
 
 	blueSoldier3->addAttackType(rockThrow);
@@ -1142,6 +1144,17 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 
 	staticRec->setName("Yemoja");
 	staticRec->setInteractable(true);
+	//staticRec->setPersonality(30, 70, 80, 60, 30, 30, 50);
+
+	//staticRec->rel[OYA]->setAffinity(60);
+	//staticRec->rel[OYA]->setNotoriety(40);
+	//staticRec->rel[OYA]->setStrength(80);
+
+	//staticRec->rel[OYA]->setAffEstimate(60);
+	//staticRec->rel[OYA]->setNotorEstimate(70);
+	//staticRec->rel[OYA]->setStrEstimate(40);
+
+
 	*oya = *staticRec;
 	//oya->setSpeed(5);
 	oya->setName("Oya");
@@ -1155,8 +1168,34 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 
 	Planner* YemojaPlanner = new Planner(staticRec);
 	AiController->hero_planners[YEMOJA] = YemojaPlanner;
-	Action* test_train = new Action(staticRec, oya, staticRec, 10, 1, "train", "execute_train");
-	AiController->hero_planners[YEMOJA]->set_current_action(test_train);
+	Action* test_ally = new Action(nullptr, nullptr, nullptr, 10, 1, "Alliance", "execute_train");
+	Action* test_train = new Action(nullptr, nullptr, nullptr, 10, 1, "Train", "execute_train");
+	
+	RelPrecon* prec = new RelPrecon("Affinity", "lower", 60);
+	RelPost* post = new RelPost("Strength", 10);
+	RelPrecon* prec1 = new RelPrecon("Affinity", "lower", 30);
+	RelPost* post1 = new RelPost("Strength", 15);
+	RelPost* post2 = new RelPost("Affinity", 15);
+
+	test_ally->req_preconds.push_back(std::make_shared<RelPrecon>(*prec));
+	test_ally->succ_postconds.push_back(std::make_shared<RelPost>(*post));
+
+	test_train->req_preconds.push_back(std::make_shared<RelPrecon>(*prec1));
+	test_train->succ_postconds.push_back(std::make_shared<RelPost>(*post1));
+	test_train->succ_postconds.push_back(std::make_shared<RelPost>(*post2));
+
+	ActionPool act_pool(Alex);
+	act_pool.macro.push_back(test_ally);
+	act_pool.micro.push_back(test_train);
+	act_pool.updateMiddle();
+	vector<Action> act=act_pool.getActions(staticRec,*test_ally);
+	for (auto i = act.begin(); i != act.end(); ++i) {
+		cout << i->getName() << endl;
+	}
+
+	//AiController->hero_planners[YEMOJA]->set_current_action(test_train);
+
+	AiController->generate_end_state(YEMOJA, OYA);
 
 
 	/*

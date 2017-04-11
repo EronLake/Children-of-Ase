@@ -13,7 +13,7 @@ public:
 	std::string get_name();
 	void set_name(std::string val);
 private:
-	std::vector<ConversationPoint*> pointVec;
+	std::vector<ConversationPoint*> conversation_point_pointer_vec;
 	std::string name;
 };
 

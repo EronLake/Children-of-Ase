@@ -38,7 +38,7 @@ public:
 
 	bool incapacitated;
 
-	void addRelationship(int hero);
+	//void addRelationship(int hero);
 	void setPersonality(int a, int k, int h, int p, int r, int e, int g);
 
 	void add_quest(Action* a, int time) { quests[a]=time; };

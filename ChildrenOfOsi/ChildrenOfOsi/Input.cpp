@@ -384,6 +384,10 @@ void Input::edit_object() {
 	short J = GetKeyState('J') >> 15;
 	short H = GetKeyState('H') >> 15;
 
+	short O = GetKeyState('O') >> 15;
+	short I = GetKeyState('I') >> 15;
+	short P = GetKeyState('P') >> 15;
+
 	/*POINT p;
 	if (ScreenToClient(window, &p))
 	{
@@ -476,11 +480,11 @@ void Input::edit_object() {
 		{
 			edit_field(collide_with, body_number, left, right, top, bottom);
 		}
-		else if (K)
+		else if (I)
 		{
 			duplicate_object(collide_with);
 		}
-		else if (H)
+		else if (O)
 		{
 			interactive_resize(collide_with, mouseX);
 		}
@@ -524,7 +528,7 @@ void Input::edit_object() {
 
 		file.close();
 
-		if (J)
+		if (P)
 		{
 			delete_object(collide_with);
 		}
@@ -821,6 +825,7 @@ void Input::InputCheck()
 		if (count==0) {
 			int State = DialogueController::getState();
 			if (W && State == 1) {
+				DialogueController::scroll_control = 0;
 				int tmp = DialogueController::getOptionsIndex();
 				if (tmp > 0) {
 					DialogueController::setOptionsIndex(--tmp);
@@ -833,8 +838,10 @@ void Input::InputCheck()
 					case 3: gameplay_functions->setQuestionGlow(player); break;
 					}
 				}
+			
 			}
 			if (S && State == 1) {
+				DialogueController::scroll_control = 0;
 				int tmp = DialogueController::getOptionsIndex();
 				if (tmp < DialogueController::getOSize() - 1) {
 					DialogueController::setOptionsIndex(++tmp);
@@ -847,31 +854,52 @@ void Input::InputCheck()
 					case 3: gameplay_functions->setQuestionGlow(player); break;
 					}
 				}
+				/*set optionsIndex to 3 if player hits 's' key while they are already
+				on the question mark icon because in this case optionsIndex would 
+				become greater than 3 and there are only options to 
+				display at indices 0,1,2,3*/
+				if (tmp > 3) {
+					DialogueController::setOptionsIndex(3);
+					gameplay_functions->setQuestionGlow(player);
+				}
 			}
 			if (D && State < 3) {
 				int tmp = DialogueController::getSelect();
 				if (DialogueController::getState() == 1) {
 					if (tmp < (DialogueController::getOptions().size() - 1)) {
-						DialogueController::setSelect(++tmp);
+						//DialogueController::setSelect(++tmp);
+						DialogueController::scroll_control++;
+						if (DialogueController::scroll_control >= DialogueController::getOptions().size())
+							DialogueController::scroll_control = DialogueController::getOptions().size() - 1;
 						count = 10;
 						////std::cout << "Index: " << tmp << std::endl;
 					}
 					if (tmp > (DialogueController::getOptions().size() - 1)) {
 						tmp = 0;
 						DialogueController::setSelect(tmp);
+						//DialogueController::scroll_control++;
+						if (DialogueController::scroll_control < 0)
+							DialogueController::scroll_control = 0;
 						count = 10;
 						////std::cout << "Index: " << tmp << std::endl;
 					}
 				}
 				if (State == 2) {
 					if (tmp < (DialogueController::getReplyOptions().size() - 1)) {
-						DialogueController::setSelect(++tmp);
+						//DialogueController::setSelect(++tmp);
+						DialogueController::scroll_control++;
+						if (DialogueController::scroll_control >= DialogueController::getReplyOptions().size())
+							DialogueController::scroll_control = DialogueController::getReplyOptions().size() - 1;
+
 						count = 10;
 						////std::cout << "Index: " << tmp << std::endl;
 					}
 					if (tmp > (DialogueController::getReplyOptions().size() - 1)) {
 						tmp = 0;
 						DialogueController::setSelect(tmp);
+						//DialogueController::scroll_control++;
+						if (DialogueController::scroll_control < 0)
+							DialogueController::scroll_control = 0;
 						count = 10;
 						////std::cout << "Index: " << tmp << std::endl;
 					}
@@ -879,8 +907,12 @@ void Input::InputCheck()
 			}
 			if (A && State < 3) {
 				int tmp = DialogueController::getSelect();
-				if (tmp > 0) {
-					DialogueController::setSelect(--tmp);
+				if (tmp > 0 || DialogueController::scroll_control > 0) {
+					//DialogueController::setSelect(--tmp);
+					DialogueController::scroll_control--;
+					if (DialogueController::scroll_control < 0)
+						DialogueController::scroll_control = 0;
+					//disable = true;
 					count = 10;
 					////std::cout << "Index: " << tmp << std::endl;
 				}

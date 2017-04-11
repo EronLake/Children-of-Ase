@@ -24,9 +24,11 @@ bool DialogueController::prompted_quest = false;
 AIController* DialogueController::ai = nullptr;
 Action* DialogueController::quest = nullptr;
 
+int DialogueController::scroll_control = 0;
+
 DialogueController::DialogueController()
 {
-
+	
 }
 
 
@@ -50,15 +52,16 @@ void DialogueController::PlayerConversationPoint()
 		}
 	}
 	vector<std::string> print = getOptions();
-	dialogue_point choice = options[optionsIndex][select];
+	dialogue_point choice = options[optionsIndex][select + DialogueController::scroll_control];
 	std::string conversation_pt_sentence = dialogue.gen_dialog(choice, player);
 	message += player->getName() + ": " + conversation_pt_sentence;
-	otherResponse(choice[0]);
+	otherResponse(choice[1]);
 }
 
 void DialogueController::PlayerResponse()
 {
-	dialogue_point choice = replyOptions[select];
+	//DialogueController::scroll_control = 0;
+	dialogue_point choice = replyOptions[select + DialogueController::scroll_control];
 	if (prompted_quest)
 	{
 		if (select == 0)   // Player is accepting the quest
@@ -84,7 +87,7 @@ void DialogueController::PlayerResponse()
 void DialogueController::otherConversationPoint(dialogue_point line)
 {
 	dialogue_point point = dialogue.choose_conv_pt(line, optionsIndex);
-	replyString = point[0];
+	replyString = point[1];
 
 	Hero* temp_hero = nullptr;
 	if (other->getType() >= 2) {
@@ -100,11 +103,12 @@ void DialogueController::otherConversationPoint(dialogue_point line)
 	std::string reply_pt_sentence = dialogue.gen_dialog(line, temp_hero);
 	std::string con_pt_sentence = dialogue.gen_dialog(point, temp_hero);
 	message = other->getName() + ": " + reply_pt_sentence + "\n" +con_pt_sentence;
-	replyOptions = dialogue.get_possible_reply_pts(point[0], optionsIndex);
+	replyOptions = dialogue.get_possible_reply_pts(point[1], optionsIndex);
 	vector<std::string> print = getReplyOptions();
 
 	select = 0;
 	state = 2; //had at 0 for testing a time
+	DialogueController::scroll_control = 0;
 }
 
 void DialogueController::otherResponse(std::string info)
@@ -118,10 +122,10 @@ void DialogueController::otherResponse(std::string info)
 vector<std::string> DialogueController::getOptions()
 {
 	vector<std::string> tmp;
-
+	
 	for (int i = 0; i < options[optionsIndex].size(); i++) 
 	{
-		tmp.push_back(options[optionsIndex][i][0]);
+		tmp.push_back(options[optionsIndex][i][1]);
 	}
 	return tmp;
 }
@@ -152,7 +156,7 @@ void DialogueController::startConversation(WorldObj* n, bool playerTalk)
 	}
 	else {
 		state = 3;
-		otherConversationPoint({"greeting","greeting" });
+		otherConversationPoint({"Greeting","Greeting" });
 	}
 }
 
@@ -170,6 +174,7 @@ void DialogueController::exitDialogue()
 {
 	other = nullptr;
 	state=0;
+	DialogueController::set_scroll_control(0);
 }
 
 DialogueHelper* DialogueController::getDialogueHelper()
@@ -202,4 +207,17 @@ void DialogueController::offerQuest_hack_() {
 	replyOptions = { {"quest_accept","quest_accept"},{"quest_deny","quest_deny"} };
 	select = 0;
 	state = 2; 
+}
+
+void DialogueController::set_scroll_control(int scroll_int) {
+	scroll_control = scroll_int;
+}
+
+std::string DialogueController::convert_option_to_phrase(std::string opt) {
+	dialogue_point dp;
+	dialogue_point return_val_vec;
+	dp.push_back("");
+	dp.push_back(opt);
+	return_val_vec = DialogueController::getDialogueHelper()->get_dialog("Shango", dp);
+	return return_val_vec[0];
 }

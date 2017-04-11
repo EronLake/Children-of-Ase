@@ -22,49 +22,104 @@ void DialogueConfig::import_config(ChildrenOfOsi* gameplay_func, TaskBuffer* tBu
 		std::ifstream file("Dialogue_config.json");
 		file >> root;
 		std::vector<int> personality_mults;
-		for (auto itor = root["conversation_points"].begin(); itor != root["conversation_points"].end(); ++itor) {
-				for (auto itor = root["conversation_points"].begin(); itor != root["conversation_points"].end(); ++itor) {
+		for (auto itor = root["Question_Conversation_Points"].begin(); itor != root["Question_Conversation_Points"].end(); ++itor) {
 
-					personality_mults.push_back((*itor)["honor"].asInt());
-					personality_mults.push_back((*itor)["pride"].asInt());
-					personality_mults.push_back((*itor)["aggression"].asInt());
-					personality_mults.push_back((*itor)["kindness"].asInt());
-					personality_mults.push_back((*itor)["extroversion"].asInt());
-					personality_mults.push_back((*itor)["greed"].asInt());
-					personality_mults.push_back((*itor)["recklessness"].asInt());
+			personality_mults.push_back((*itor)["honor"].asInt());
+			personality_mults.push_back((*itor)["pride"].asInt());
+			personality_mults.push_back((*itor)["aggression"].asInt());
+			personality_mults.push_back((*itor)["kindness"].asInt());
+			personality_mults.push_back((*itor)["extroversion"].asInt());
+			personality_mults.push_back((*itor)["greed"].asInt());
+			personality_mults.push_back((*itor)["recklessness"].asInt());
+			set_conv_point(gameplay_func, tBuffer, (*itor)["topic"].asString(), (*itor)["template"].asString(), (*itor)["name"].asString(), personality_mults, (*itor)["corresponding_conv_point"].asString());
+		}
+		personality_mults.clear();
 
-				}
-			set_conv_point(gameplay_func, tBuffer, (*itor)["topic"].asString(), (*itor)["template"].asString(), (*itor)["name"].asString(), personality_mults);
+		for (auto itor = root["Question_Reply_Points"].begin(); itor != root["Question_Reply_Points"].end(); ++itor) {
+			personality_mults.push_back((*itor)["honor"].asInt());
+			personality_mults.push_back((*itor)["pride"].asInt());
+			personality_mults.push_back((*itor)["aggression"].asInt());
+			personality_mults.push_back((*itor)["kindness"].asInt());
+			personality_mults.push_back((*itor)["extroversion"].asInt());
+			personality_mults.push_back((*itor)["greed"].asInt());
+			personality_mults.push_back((*itor)["recklessness"].asInt());
+			set_conv_point(gameplay_func, tBuffer, (*itor)["topic"].asString(), (*itor)["template"].asString(), (*itor)["name"].asString(), personality_mults, (*itor)["corresponding_conv_point"].asString());
 		}
-		for (auto itor = root["reply_points"].begin(); itor != root["reply_points"].end(); ++itor) {
-			set_conv_point(gameplay_func, tBuffer, (*itor)["topic"].asString(), (*itor)["template"].asString(), (*itor)["name"].asString(), personality_mults);
-		}
-		std::cout << "done" << endl;
-		for (auto itor = root["affinity_conversation_points"].begin(); itor != root["affinity_conversation_points"].end(); ++itor) {
-			set_conv_point(gameplay_func, tBuffer, (*itor)["topic"].asString(), (*itor)["template"].asString(), (*itor)["name"].asString(), personality_mults);
-		}
+		personality_mults.clear();
 
-		for (auto itor = root["affinity_reply_points"].begin(); itor != root["affinity_reply_points"].end(); ++itor) {
-			set_conv_point(gameplay_func, tBuffer, (*itor)["topic"].asString(), (*itor)["template"].asString(), (*itor)["name"].asString(), personality_mults);
+		for (auto itor = root["Affinity_Conversation_Points"].begin(); itor != root["Affinity_Conversation_Points"].end(); ++itor) {
+			personality_mults.push_back((*itor)["honor"].asInt());
+			personality_mults.push_back((*itor)["pride"].asInt());
+			personality_mults.push_back((*itor)["aggression"].asInt());
+			personality_mults.push_back((*itor)["kindness"].asInt());
+			personality_mults.push_back((*itor)["extroversion"].asInt());
+			personality_mults.push_back((*itor)["greed"].asInt());
+			personality_mults.push_back((*itor)["recklessness"].asInt());
+			set_conv_point(gameplay_func, tBuffer, (*itor)["topic"].asString(), (*itor)["template"].asString(), (*itor)["name"].asString(), personality_mults, (*itor)["corresponding_conv_point"].asString());
 		}
-		for (auto itor = root["strength_conversation_points"].begin(); itor != root["strength_conversation_points"].end(); ++itor) {
-			set_conv_point(gameplay_func, tBuffer, (*itor)["topic"].asString(), (*itor)["template"].asString(), (*itor)["name"].asString(), personality_mults);
-		}
+		personality_mults.clear();
 
-		for (auto itor = root["strength_reply_points"].begin(); itor != root["strength_reply_points"].end(); ++itor) {
-			set_conv_point(gameplay_func, tBuffer, (*itor)["topic"].asString(), (*itor)["template"].asString(), (*itor)["name"].asString(), personality_mults);
+		for (auto itor = root["Affinity_Reply_Points"].begin(); itor != root["Affinity_Reply_Points"].end(); ++itor) {
+			personality_mults.push_back((*itor)["honor"].asInt());
+			personality_mults.push_back((*itor)["pride"].asInt());
+			personality_mults.push_back((*itor)["aggression"].asInt());
+			personality_mults.push_back((*itor)["kindness"].asInt());
+			personality_mults.push_back((*itor)["extroversion"].asInt());
+			personality_mults.push_back((*itor)["greed"].asInt());
+			personality_mults.push_back((*itor)["recklessness"].asInt());
+			set_conv_point(gameplay_func, tBuffer, (*itor)["topic"].asString(), (*itor)["template"].asString(), (*itor)["name"].asString(), personality_mults, (*itor)["corresponding_conv_point"].asString());
 		}
+		personality_mults.clear();
 
-		for (auto itor = root["notoriety_conversation_points"].begin(); itor != root["notoriety_conversation_points"].end(); ++itor) {
-			set_conv_point(gameplay_func, tBuffer, (*itor)["topic"].asString(), (*itor)["template"].asString(), (*itor)["name"].asString(), personality_mults);
+		for (auto itor = root["Strength_Conversation_Points"].begin(); itor != root["Strength_Conversation_Points"].end(); ++itor) {
+			personality_mults.push_back((*itor)["honor"].asInt());
+			personality_mults.push_back((*itor)["pride"].asInt());
+			personality_mults.push_back((*itor)["aggression"].asInt());
+			personality_mults.push_back((*itor)["kindness"].asInt());
+			personality_mults.push_back((*itor)["extroversion"].asInt());
+			personality_mults.push_back((*itor)["greed"].asInt());
+			personality_mults.push_back((*itor)["recklessness"].asInt());
+			set_conv_point(gameplay_func, tBuffer, (*itor)["topic"].asString(), (*itor)["template"].asString(), (*itor)["name"].asString(), personality_mults, (*itor)["corresponding_conv_point"].asString());
 		}
+		personality_mults.clear();
 
-		for (auto itor = root["notoriety_reply_points"].begin(); itor != root["notoriety_reply_points"].end(); ++itor) {
-			set_conv_point(gameplay_func, tBuffer, (*itor)["topic"].asString(), (*itor)["template"].asString(), (*itor)["name"].asString(), personality_mults);
+		for (auto itor = root["Strength_Reply_Points"].begin(); itor != root["Strength_Reply_Points"].end(); ++itor) {
+			personality_mults.push_back((*itor)["honor"].asInt());
+			personality_mults.push_back((*itor)["pride"].asInt());
+			personality_mults.push_back((*itor)["aggression"].asInt());
+			personality_mults.push_back((*itor)["kindness"].asInt());
+			personality_mults.push_back((*itor)["extroversion"].asInt());
+			personality_mults.push_back((*itor)["greed"].asInt());
+			personality_mults.push_back((*itor)["recklessness"].asInt());
+			set_conv_point(gameplay_func, tBuffer, (*itor)["topic"].asString(), (*itor)["template"].asString(), (*itor)["name"].asString(), personality_mults, (*itor)["corresponding_conv_point"].asString());
+		}
+		personality_mults.clear();
+
+		for (auto itor = root["Notoriety_Conversation_Points"].begin(); itor != root["Notoriety_Conversation_Points"].end(); ++itor) {
+			personality_mults.push_back((*itor)["honor"].asInt());
+			personality_mults.push_back((*itor)["pride"].asInt());
+			personality_mults.push_back((*itor)["aggression"].asInt());
+			personality_mults.push_back((*itor)["kindness"].asInt());
+			personality_mults.push_back((*itor)["extroversion"].asInt());
+			personality_mults.push_back((*itor)["greed"].asInt());
+			personality_mults.push_back((*itor)["recklessness"].asInt());
+			set_conv_point(gameplay_func, tBuffer, (*itor)["topic"].asString(), (*itor)["template"].asString(), (*itor)["name"].asString(), personality_mults, (*itor)["corresponding_conv_point"].asString());
+		}
+		personality_mults.clear();
+
+		for (auto itor = root["Notoriety_Reply_Points"].begin(); itor != root["Notoriety_Reply_Points"].end(); ++itor) {
+			personality_mults.push_back((*itor)["honor"].asInt());
+			personality_mults.push_back((*itor)["pride"].asInt());
+			personality_mults.push_back((*itor)["aggression"].asInt());
+			personality_mults.push_back((*itor)["kindness"].asInt());
+			personality_mults.push_back((*itor)["extroversion"].asInt());
+			personality_mults.push_back((*itor)["greed"].asInt());
+			personality_mults.push_back((*itor)["recklessness"].asInt());
+			set_conv_point(gameplay_func, tBuffer, (*itor)["topic"].asString(), (*itor)["template"].asString(), (*itor)["name"].asString(), personality_mults, (*itor)["corresponding_conv_point"].asString());
 		}
 }
 
-void DialogueConfig::set_conv_point(ChildrenOfOsi* gameplay_func, TaskBuffer* tBuffer, std::string topic, std::string temp, std::string name, std::vector<int> personality_vals)
+void DialogueConfig::set_conv_point(ChildrenOfOsi* gameplay_func, TaskBuffer* tBuffer, std::string topic, std::string temp, std::string name, std::vector<int> personality_vals,std::string corresponding_conv_point)
 {
 	gameplay_func->add_conv_point(topic, temp, name);
 	tBuffer->run();
@@ -77,6 +132,16 @@ void DialogueConfig::set_conv_point(ChildrenOfOsi* gameplay_func, TaskBuffer* tB
 	Containers::conv_point_table[name]->set_temp(temp);
 	Containers::conv_point_table[name]->dpoint.push_back(topic);
 	Containers::conv_point_table[name]->dpoint.push_back(temp);
+	Containers::conv_point_table[name]->dpoint.push_back(corresponding_conv_point);
+	Containers::conv_point_table[name]->multipliers = new Personality();
+	
+	Containers::conv_point_table[name]->multipliers->setHonor(personality_vals[0]);
+	Containers::conv_point_table[name]->multipliers->setPride(personality_vals[1]);
+	Containers::conv_point_table[name]->multipliers->setAggression(personality_vals[2]);
+	Containers::conv_point_table[name]->multipliers->setKindness(personality_vals[3]);
+	Containers::conv_point_table[name]->multipliers->setExtroversion(personality_vals[4]);
+	Containers::conv_point_table[name]->multipliers->setGreed(personality_vals[5]);
+	Containers::conv_point_table[name]->multipliers->setRecklessness(personality_vals[6]);
 
 	tBuffer->run();
 }

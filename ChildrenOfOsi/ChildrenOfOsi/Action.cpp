@@ -15,7 +15,7 @@ Action::Action(Hero* _owner, Hero* _receiver, Hero* _doer, int _utility, int _wh
 	doer = _doer;
 	utility = _utility;
 	why = _why;
-	recieverName = receiver->name;
+	if (receiver!=nullptr)recieverName = receiver->name;
 	name = _name;
 	execute_ptr  = ActionExecFunctions::ActionExecMap[_exe_name];
 
@@ -74,13 +74,13 @@ vector<std::string> Action::preConditionsNeeded(Hero* o, Hero* h) {
 	for (auto it = req_preconds.begin(); it != req_preconds.end(); ++it) {
 		if ((*it)->get_general_type().compare("relationship")==0) {
 			RelPrecon* bullshit= dynamic_cast<RelPrecon*>((*it).get());
-			if (bullshit->get_cost(owner, receiver) > 0) {
+			if (bullshit->get_cost(o, h) > 0) {
 				needs.push_back((*it)->get_type());
 			}
 		}
 		else if ((*it)->get_general_type().compare("relationship_estimate") == 0) {
 			RelEstimPrerec* bullshit = dynamic_cast<RelEstimPrerec*>((*it).get());
-			if (bullshit->get_cost(owner, receiver) > 0) {
+			if (bullshit->get_cost(o, h) > 0) {
 				needs.push_back((*it)->get_type());
 			}
 		}
@@ -90,11 +90,11 @@ vector<std::string> Action::preConditionsNeeded(Hero* o, Hero* h) {
 		}
 		else if ((*it)->get_general_type().compare("memory_number") == 0) {
 			MemoryNumPrerec* bullshit = dynamic_cast<MemoryNumPrerec*>((*it).get());
-			if (bullshit->get_cost(owner->memories) > 0)needs.push_back((*it)->get_type());
+			if (bullshit->get_cost(o->memories) > 0)needs.push_back((*it)->get_type());
 		}
 		else if ((*it)->get_general_type().compare("memory") == 0) {
 			MemPrerec* bullshit = dynamic_cast<MemPrerec*>((*it).get());
-			if (bullshit->get_cost(owner->memories) > 0)needs.push_back((*it)->get_type());
+			if (bullshit->get_cost(o->memories) > 0)needs.push_back((*it)->get_type());
 		}
 		else if ((*it)->get_general_type().compare("state") == 0) {
 			StatePrerec* bullshit = dynamic_cast<StatePrerec*>((*it).get());

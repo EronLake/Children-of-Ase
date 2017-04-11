@@ -224,21 +224,23 @@ void CombatController::checkParties() {
 			vector<Party*> partiesA = (*i)->getParties();
 			vector<Party*> partiesB = (*j)->getParties();
 			for (auto a = partiesA.begin(); a != partiesA.end(); ++a) {
-				if ((*a)->getMode() != Party::MODE_FLEE && (*a)->getLeader() != nullptr && !(*a)->getLeader()->getInCombat()) {
+				if ((*a)->getMembers().size() == 0) {
+					(*i)->remove_party((*a));
+				} else if ((*a)->getMode() != Party::MODE_FLEE && !(*a)->getLeader()->getInCombat()) {
 					for (auto b = partiesB.begin(); b != partiesB.end(); ++b) {
-						if ((*a)->getLeader() != nullptr && (*b)->getLeader() != nullptr) {
-							if (dist_by_center((*a)->getLeader(), (*b)->getLeader()) < 1000) {
-								(*a)->addToCurrentEnemies(*b);
-								vector<Soldier*> mema = (*a)->getMembers();
-								for (auto am = mema.begin(); am != mema.end(); ++am) {
-									(*am)->setInCombat(true);
-								}
-								if ((*b)->getMode() != Party::MODE_FLEE) {
-									(*b)->addToCurrentEnemies(*a);
-									vector<Soldier*> memb = (*b)->getMembers();
-									for (auto bm = memb.begin(); bm != memb.end(); ++bm) {
-										(*bm)->setInCombat(true);
-									}
+						if ((*b)->getMembers().size() == 0) {
+							(*j)->remove_party((*b));
+						} else if (dist_by_center((*a)->getLeader(), (*b)->getLeader()) < 1000) {
+							(*a)->addToCurrentEnemies(*b);
+							vector<Soldier*> mema = (*a)->getMembers();
+							for (auto am = mema.begin(); am != mema.end(); ++am) {
+								(*am)->setInCombat(true);
+							}
+							if ((*b)->getMode() != Party::MODE_FLEE) {
+								(*b)->addToCurrentEnemies(*a);
+								vector<Soldier*> memb = (*b)->getMembers();
+								for (auto bm = memb.begin(); bm != memb.end(); ++bm) {
+									(*bm)->setInCombat(true);
 								}
 							}
 						}

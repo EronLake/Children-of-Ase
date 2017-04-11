@@ -11,6 +11,7 @@ public:
 	Relationship* rel_multipliers;
 	typedef std::vector<std::string> dialogue_point;
 	dialogue_point dpoint;
+	std::vector<Tag*> tag_pointer_vec;
 	std::unordered_map<std::string, std::shared_ptr<Postcondition>> succ_postconds;
 	std::unordered_map<std::string, std::shared_ptr<Postcondition>> fail_postconds;
 

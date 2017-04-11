@@ -157,7 +157,9 @@ void Party::removeSoldier(Soldier* s, bool b)
 	// Update Soldier s's party status
 	cout << "SIZE OF PARTY WITH OBJ REMOVED IS " << s->getParty()->getMembers().size() << endl;
 	if (b)s->setParty(new Party(s));
-	updateFollowers();
+	if (members.size() != 0) {
+		updateFollowers();
+	}
 
 
 	//cout << "SIZE OF THE PARTY IS ********** " << members.size() << endl;

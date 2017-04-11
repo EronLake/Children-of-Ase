@@ -343,10 +343,10 @@ RelPost::RelPost(std::string _rel_type, int _utility)
 	utility = _utility;
 	std::string bound;
 	if (utility > 0) {
-		bound = "upper";
+		bound = "lower";
 	}
 	else {
-		bound = "lower";
+		bound = "upper";
 	}
 
 	type = "relationship"+rel_type+bound;
@@ -385,6 +385,7 @@ void RelPost::apply_utility(Hero* curr_hero, Hero* other_hero)
 //Returns null plug string if the postcondition does not complete
 //any of the given preconditions
 //Returns the string key of the precondition if one is found
+
 std::string RelPost::fulfills_which(vector<std::string> preconds, Precond_vec vec)
 {
 	
@@ -406,6 +407,7 @@ std::string RelPost::fulfills_which(vector<std::string> preconds, Precond_vec ve
 	*/
 	return pre_fulfilled;
 }
+
 //---------------------------------------------------------------------------------
 
 
@@ -420,10 +422,10 @@ RelEstimPost::RelEstimPost( std::string _rel_type, int _utility)
 	utility = _utility;
 	std::string bound;
 	if (utility > 0) {
-		bound = "upper";
+		bound = "lower";
 	}
 	else {
-		bound = "lower";
+		bound = "upper";
 	}
 
 	type = "relationship_estimate"+rel_type+bound;
