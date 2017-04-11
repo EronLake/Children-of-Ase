@@ -307,15 +307,6 @@ glm::vec2 GameWindow::dpCoordToGL(float x, float y)
 }
 
 /**
- * 
- */
-glm::vec2 GameWindow::dpDimensionsToGL(float x, float y)
-{
-  glm::vec2 asCoords = GameWindow::dpCoordToGL(x, y);
-  return {asCoords.x + 1, asCoords.y + 1};
-}
-
-/**
  * Handles the setup of the window itself when initializing. The tasks of this
  * function include providing GLFW the necessary window hints; determining the
  * dimensions at which the window will display; and setting up GLEW.
@@ -329,25 +320,24 @@ void GameWindow::setupWindow()
   glfwWindowHint(GLFW_RESIZABLE, GL_FALSE);
 
   GameWindow::primaryMonitor = glfwGetPrimaryMonitor();
-  std::string windowTitle = std::string(u8"Children of \x00C0\x1E63\x1EB9");
-  GameWindow::window = glfwCreateWindow(1280, 720, windowTitle.c_str(),
-    (START_FULLSCREEN) ? GameWindow::primaryMonitor : nullptr,
-    nullptr);
+  GameWindow::monitorWidthPx = glfwGetVideoMode(GameWindow::primaryMonitor)->width;
+  GameWindow::monitorHeightPx = glfwGetVideoMode(GameWindow::primaryMonitor)->height;
+  GameWindow::window = glfwCreateWindow(1440, 810, u8"Children of \x00C0\x1E63\x1EB9",
+    (START_FULLSCREEN) ? GameWindow::primaryMonitor : nullptr, nullptr);
+
   if(window == nullptr) {
     glfwTerminate();
     throw WindowingError("Failed to create window.");
   }
 
   glfwMakeContextCurrent(window);
+  glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_HIDDEN);
 
   glewExperimental = GL_TRUE;
   if(glewInit() != GLEW_OK) {
     glfwTerminate();
     throw WindowingError("Failed to initialize GLEW.");
   }
-
-  GameWindow::monitorWidthPx = glfwGetVideoMode(GameWindow::primaryMonitor)->width;
-  GameWindow::monitorHeightPx = glfwGetVideoMode(GameWindow::primaryMonitor)->height;
 
   double aspectRatio = static_cast<double>(GameWindow::monitorWidthPx) / static_cast<double>(GameWindow::monitorHeightPx);
   if(aspectRatio == (16.0 / 9.0)) {
