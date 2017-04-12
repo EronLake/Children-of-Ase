@@ -21,10 +21,10 @@ public:
 	vector<std::shared_ptr<Postcondition>> succ_postconds;
 	vector<std::shared_ptr<Postcondition>> fail_postconds;
 
-	void applyUtiliites(bool ifsucc);
+	void apply_postconditions(bool ifsucc);
 
 	void setUtility(int u) { utility = u; };
-	int getUtility() { return utility; }; //NEED TO CHANGE SO THAT IT USESES THE SUCC_POST CONDITIONS
+	int getUtility() { return utility; }; 
 	void setReceiver(Hero* h) { receiver = h; recieverName = h->name; };
 	Hero* getReceiver() { return receiver; };
 
