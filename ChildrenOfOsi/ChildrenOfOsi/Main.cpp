@@ -1191,9 +1191,9 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	act_pool.macro.push_back(test_ally);
 	act_pool.micro.push_back(test_train);
 	act_pool.updateMiddle();
-	vector<Action> act=act_pool.getActions(staticRec,*test_ally);
-	for (auto i = act.begin(); i != act.end(); ++i) {
-		cout << i->getName() << endl;
+	vector<Action*> actions=act_pool.getActions(staticRec,test_ally);
+	for (auto action : actions) {
+		std::cout << action->getName() << std::endl;
 	}
 
 	Alex->add_quest(test_ally,10);
