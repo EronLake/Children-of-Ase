@@ -70,6 +70,8 @@ public:
 
 	bool executed = false;
 
+	bool optional_fufilled_check(Hero* o, Hero* h);
+
 private:
 	//std::string name;
 	int utility;
@@ -79,6 +81,7 @@ private:
 	Hero* receiver;
 	Hero* doer;
 
+	vector<std::string> add_no_repeats(vector<std::string> v,string s);
 	//std::vector<RelPrerec*> rel_prerec_list;
 	//std::vector<RelAssumpPrerec*> rel_assump_prerec_list;
 	//std::vector<TimePrerec*> time_prerec_list;

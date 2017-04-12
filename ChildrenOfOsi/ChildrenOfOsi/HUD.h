@@ -14,6 +14,7 @@ public:
 	void drawHUD(WorldObj* obj);
 	//void setTextures();
 	
+	static void toggle_quests() { show_active_quests = !show_active_quests; };
 
 private:
 	//kinda ugly...
@@ -27,6 +28,8 @@ private:
 	Texture* hud_health_tex;
 	Texture* hud_portrait_tex;
 
+	static bool show_active_quests;
+	glm::vec3 black;
 
 };
 

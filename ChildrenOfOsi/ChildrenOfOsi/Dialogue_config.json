@@ -10,7 +10,13 @@
 		  "kindness": 0,
 		  "greed": 0,
 		  "recklessness": 0,
-		  "extroversion": 0
+		  "extroversion": 0,
+		  "affinity": 50,
+		  "notoriety": 50,
+		  "strength": 50,
+		  "AffEstimate": 50,
+		  "NotorEstimate": 50,
+		  "StrEstimate": 50
     }
   },
 
@@ -25,7 +31,13 @@
 		  "kindness": 0,
 		  "greed": 0,
 		  "recklessness": 0,
-		  "extroversion": 0
+		  "extroversion": 0,
+		  "affinity": 50,
+		  "notoriety": 50,
+		  "strength": 50,
+		  "AffEstimate": 50,
+		  "NotorEstimate": 50,
+		  "StrEstimate": 50
     }
   },
 
@@ -40,7 +52,13 @@
 		  "kindness": 0,
 		  "greed": 0,
 		  "recklessness": 0,
-		  "extroversion": 0
+		  "extroversion": 0,
+		  "affinity": 50,
+		  "notoriety": 50,
+		  "strength": 50,
+		  "AffEstimate": 50,
+		  "NotorEstimate": 50,
+		  "StrEstimate": 50
        },
        "conversation_point_2" : {
 	      "name" : "Ask_Origin",
@@ -52,7 +70,13 @@
 		  "kindness": 0,
 		  "greed": 0,
 		  "recklessness": 0,
-		  "extroversion": 0
+		  "extroversion": 0,
+		  "affinity": 50,
+		  "notoriety": 50,
+		  "strength": 50,
+		  "AffEstimate": 50,
+		  "NotorEstimate": 50,
+		  "StrEstimate": 50
        },
        "conversation_point_3" : {
 	      "name" : "Ask_About_Oshosi",
@@ -64,7 +88,13 @@
 		  "kindness": 0,
 		  "greed": 0,
 		  "recklessness": 0,
-		  "extroversion": 0
+		  "extroversion": 0,
+		  "affinity": 50,
+		  "notoriety": 50,
+		  "strength": 50,
+		  "AffEstimate": 50,
+		  "NotorEstimate": 50,
+		  "StrEstimate": 50
         },
 		"conversation_point_4" : {
 	      "name" : "Ask_About_Ogun",
@@ -76,7 +106,13 @@
 		  "kindness": 0,
 		  "greed": 0,
 		  "recklessness": 0,
-		  "extroversion": 0
+		  "extroversion": 0,
+		  "affinity": 50,
+		  "notoriety": 50,
+		  "strength": 50,
+		  "AffEstimate": 50,
+		  "NotorEstimate": 50,
+		  "StrEstimate": 50
        },
 	   "conversation_point_5" : {
 	      "name" : "Ask_About_Oya",
@@ -88,7 +124,13 @@
 		  "kindness": 0,
 		  "greed": 0,
 		  "recklessness": 0,
-		  "extroversion": 0
+		  "extroversion": 0,
+		  "affinity": 50,
+		  "notoriety": 50,
+		  "strength": 50,
+		  "AffEstimate": 50,
+		  "NotorEstimate": 50,
+		  "StrEstimate": 50
        },
 	   "conversation_point_6" : {
 	      "name" : "Ask_Memories",
@@ -100,7 +142,13 @@
 		  "kindness": 0,
 		  "greed": 0,
 		  "recklessness": 0,
-		  "extroversion": 0
+		  "extroversion": 0,
+		  "affinity": 50,
+		  "notoriety": 50,
+		  "strength": 50,
+		  "AffEstimate": 50,
+		  "NotorEstimate": 50,
+		  "StrEstimate": 50
        },
 	   "conversation_point_7" : {
 	      "name" : "Ask_Specific_Events",
@@ -112,7 +160,13 @@
 		  "kindness": 0,
 		  "greed": 0,
 		  "recklessness": 0,
-		  "extroversion": 0
+		  "extroversion": 0,
+		  "affinity": 50,
+		  "notoriety": 50,
+		  "strength": 50,
+		  "AffEstimate": 50,
+		  "NotorEstimate": 50,
+		  "StrEstimate": 50
        },
 	   "conversation_point_8" : {
 	      "name" : "Ask_About_Relationship_With_Oshosi",
@@ -124,7 +178,13 @@
 		  "kindness": 0,
 		  "greed": 0,
 		  "recklessness": 0,
-		  "extroversion": 0
+		  "extroversion": 0,
+		  "affinity": 50,
+		  "notoriety": 50,
+		  "strength": 50,
+		  "AffEstimate": 50,
+		  "NotorEstimate": 50,
+		  "StrEstimate": 50
        },
 	   "conversation_point_9" : {
 	      "name" : "Ask_About_Relationship_With_Ogun",
@@ -136,7 +196,13 @@
 		  "kindness": 0,
 		  "greed": 0,
 		  "recklessness": 0,
-		  "extroversion": 0
+		  "extroversion": 0,
+		  "affinity": 50,
+		  "notoriety": 50,
+		  "strength": 50,
+		  "AffEstimate": 50,
+		  "NotorEstimate": 50,
+		  "StrEstimate": 50
        },
 	   "conversation_point_10" : {
 	      "name" : "Ask_About_Relationship_With_Oya",
@@ -148,7 +214,13 @@
 		  "kindness": 0,
 		  "greed": 0,
 		  "recklessness": 0,
-		  "extroversion": 0
+		  "extroversion": 0,
+		  "affinity": 50,
+		  "notoriety": 50,
+		  "strength": 50,
+		  "AffEstimate": 50,
+		  "NotorEstimate": 50,
+		  "StrEstimate": 50
        }
 	},
 
@@ -164,7 +236,13 @@
 		  "kindness": 0,
 		  "greed": 0,
 		  "recklessness": 0,
-		  "extroversion": 0
+		  "extroversion": 0,
+		  "affinity": 50,
+		  "notoriety": 50,
+		  "strength": 50,
+		  "AffEstimate": 50,
+		  "NotorEstimate": 50,
+		  "StrEstimate": 50
        },
        "reply_point_2" : {
 	      "name" : "Response_Ask_Name",
@@ -177,7 +255,13 @@
 		  "kindness": 0,
 		  "greed": 0,
 		  "recklessness": 0,
-		  "extroversion": 0
+		  "extroversion": 0,
+		  "affinity": 50,
+		  "notoriety": 50,
+		  "strength": 50,
+		  "AffEstimate": 50,
+		  "NotorEstimate": 50,
+		  "StrEstimate": 50
        },
        "reply_point_3" : {
 	      "name" : "Response_Ask_Origin",
@@ -190,7 +274,13 @@
 		  "kindness": 0,
 		  "greed": 0,
 		  "recklessness": 0,
-		  "extroversion": 0
+		  "extroversion": 0,
+		  "affinity": 50,
+		  "notoriety": 50,
+		  "strength": 50,
+		  "AffEstimate": 50,
+		  "NotorEstimate": 50,
+		  "StrEstimate": 50
        },
        "reply_point_4" : {
 	      "name" : "Response_Ask_About_Oshosi",
@@ -203,7 +293,13 @@
 		  "kindness": 0,
 		  "greed": 0,
 		  "recklessness": 0,
-		  "extroversion": 0
+		  "extroversion": 0,
+		  "affinity": 50,
+		  "notoriety": 50,
+		  "strength": 50,
+		  "AffEstimate": 50,
+		  "NotorEstimate": 50,
+		  "StrEstimate": 50
         },
 		"reply_point_5" : {
 	      "name" : "Response_Ask_About_Ogun",
@@ -216,7 +312,13 @@
 		  "kindness": 0,
 		  "greed": 0,
 		  "recklessness": 0,
-		  "extroversion": 0
+		  "extroversion": 0,
+		  "affinity": 50,
+		  "notoriety": 50,
+		  "strength": 50,
+		  "AffEstimate": 50,
+		  "NotorEstimate": 50,
+		  "StrEstimate": 50
        },
 	   "reply_point_6" : {
 	      "name" : "Response_Ask_About_Oya",
@@ -229,7 +331,13 @@
 		  "kindness": 0,
 		  "greed": 0,
 		  "recklessness": 0,
-		  "extroversion": 0
+		  "extroversion": 0,
+		  "affinity": 50,
+		  "notoriety": 50,
+		  "strength": 50,
+		  "AffEstimate": 50,
+		  "NotorEstimate": 50,
+		  "StrEstimate": 50
        },
 	   "reply_point_7" : {
 	      "name" : "Response_Ask_Memories",
@@ -242,7 +350,13 @@
 		  "kindness": 0,
 		  "greed": 0,
 		  "recklessness": 0,
-		  "extroversion": 0
+		  "extroversion": 0,
+		  "affinity": 50,
+		  "notoriety": 50,
+		  "strength": 50,
+		  "AffEstimate": 50,
+		  "NotorEstimate": 50,
+		  "StrEstimate": 50
        },
 	   "reply_point_8" : {
 	      "name" : "Response_Ask_Specific_Events",
@@ -255,7 +369,13 @@
 		  "kindness": 0,
 		  "greed": 0,
 		  "recklessness": 0,
-		  "extroversion": 0
+		  "extroversion": 0,
+		  "affinity": 50,
+		  "notoriety": 50,
+		  "strength": 50,
+		  "AffEstimate": 50,
+		  "NotorEstimate": 50,
+		  "StrEstimate": 50
        },
 	   "reply_point_9" : {
 	      "name" : "Response_Ask_About_Relationship_With_Oshosi",
@@ -268,7 +388,13 @@
 		  "kindness": 0,
 		  "greed": 0,
 		  "recklessness": 0,
-		  "extroversion": 0
+		  "extroversion": 0,
+		  "affinity": 50,
+		  "notoriety": 50,
+		  "strength": 50,
+		  "AffEstimate": 50,
+		  "NotorEstimate": 50,
+		  "StrEstimate": 50
        },
 	   "reply_point_10" : {
 	      "name" : "Response_Ask_About_Relationship_With_Ogun",
@@ -281,7 +407,13 @@
 		  "kindness": 0,
 		  "greed": 0,
 		  "recklessness": 0,
-		  "extroversion": 0
+		  "extroversion": 0,
+		  "affinity": 50,
+		  "notoriety": 50,
+		  "strength": 50,
+		  "AffEstimate": 50,
+		  "NotorEstimate": 50,
+		  "StrEstimate": 50
        },
 	   "reply_point_11" : {
 	      "name" : "Response_Ask_About_Relationship_With_Oya",
@@ -294,7 +426,13 @@
 		  "kindness": 0,
 		  "greed": 0,
 		  "recklessness": 0,
-		  "extroversion": 0
+		  "extroversion": 0,
+		  "affinity": 50,
+		  "notoriety": 50,
+		  "strength": 50,
+		  "AffEstimate": 50,
+		  "NotorEstimate": 50,
+		  "StrEstimate": 50
        }
 	},
 
@@ -309,7 +447,13 @@
 		  "kindness": 0,
 		  "greed": 0,
 		  "recklessness": 0,
-		  "extroversion": 0
+		  "extroversion": 0,
+		  "affinity": 50,
+		  "notoriety": 50,
+		  "strength": 50,
+		  "AffEstimate": 50,
+		  "NotorEstimate": 50,
+		  "StrEstimate": 50
      },
 	 "conversation_point_3" : {
 	      "name" : "Recruit_For_Party",
@@ -321,7 +465,13 @@
 		  "kindness": 0,
 		  "greed": 0,
 		  "recklessness": 0,
-		  "extroversion": 0
+		  "extroversion": 0,
+		  "affinity": 50,
+		  "notoriety": 50,
+		  "strength": 50,
+		  "AffEstimate": 50,
+		  "NotorEstimate": 50,
+		  "StrEstimate": 50
 
      },
 	 "conversation_point_4" : {
@@ -334,7 +484,13 @@
 		  "kindness": 0,
 		  "greed": 0,
 		  "recklessness": 0,
-		  "extroversion": 0
+		  "extroversion": 0,
+		  "affinity": 50,
+		  "notoriety": 50,
+		  "strength": 50,
+		  "AffEstimate": 50,
+		  "NotorEstimate": 50,
+		  "StrEstimate": 50
 
      },
 	 "conversation_point_5" : {
@@ -347,7 +503,13 @@
 		  "kindness": 0,
 		  "greed": 0,
 		  "recklessness": 0,
-		  "extroversion": 0
+		  "extroversion": 0,
+		  "affinity": 50,
+		  "notoriety": 50,
+		  "strength": 50,
+		  "AffEstimate": 50,
+		  "NotorEstimate": 50,
+		  "StrEstimate": 50
 
      },
 	 "conversation_point_6" : {
@@ -360,7 +522,13 @@
 		  "kindness": 0,
 		  "greed": 0,
 		  "recklessness": 0,
-		  "extroversion": 0
+		  "extroversion": 0,
+		  "affinity": 50,
+		  "notoriety": 50,
+		  "strength": 50,
+		  "AffEstimate": 50,
+		  "NotorEstimate": 50,
+		  "StrEstimate": 50
 
      }
 	},
@@ -377,7 +545,13 @@
 		  "kindness": 0,
 		  "greed": 0,
 		  "recklessness": 0,
-		  "extroversion": 0
+		  "extroversion": 0,
+		  "affinity": 50,
+		  "notoriety": 50,
+		  "strength": 50,
+		  "AffEstimate": 50,
+		  "NotorEstimate": 50,
+		  "StrEstimate": 50
      },
 	 "reply_point_3" : {
 	      "name" : "Response_To_Recruit_For_Party",
@@ -390,7 +564,13 @@
 		  "kindness": 0,
 		  "greed": 0,
 		  "recklessness": 0,
-		  "extroversion": 0
+		  "extroversion": 0,
+		  "affinity": 50,
+		  "notoriety": 50,
+		  "strength": 50,
+		  "AffEstimate": 50,
+		  "NotorEstimate": 50,
+		  "StrEstimate": 50
     },
 	"reply_point_4" : {
 	      "name" : "Response_To_Ask_For_Teaching",
@@ -403,7 +583,13 @@
 		  "kindness": 0,
 		  "greed": 0,
 		  "recklessness": 0,
-		  "extroversion": 0
+		  "extroversion": 0,
+		  "affinity": 50,
+		  "notoriety": 50,
+		  "strength": 50,
+		  "AffEstimate": 50,
+		  "NotorEstimate": 50,
+		  "StrEstimate": 50
     },
     "reply_point_5" : {
 	      "name" : "Response_Boast",
@@ -416,7 +602,13 @@
 		  "kindness": 0,
 		  "greed": 0,
 		  "recklessness": 0,
-		  "extroversion": 0
+		  "extroversion": 0,
+		  "affinity": 50,
+		  "notoriety": 50,
+		  "strength": 50,
+		  "AffEstimate": 50,
+		  "NotorEstimate": 50,
+		  "StrEstimate": 50
     },
 	"reply_point_6" : {
 	      "name" : "Response_Intimidate",
@@ -429,7 +621,13 @@
 		  "kindness": 0,
 		  "greed": 0,
 		  "recklessness": 0,
-		  "extroversion": 0
+		  "extroversion": 0,
+		  "affinity": 50,
+		  "notoriety": 50,
+		  "strength": 50,
+		  "AffEstimate": 50,
+		  "NotorEstimate": 50,
+		  "StrEstimate": 50
     }
 
   },
@@ -445,7 +643,13 @@
 		  "kindness": 0,
 		  "greed": 0,
 		  "recklessness": 0,
-		  "extroversion": 0
+		  "extroversion": 0,
+		  "affinity": 50,
+		  "notoriety": 50,
+		  "strength": 50,
+		  "AffEstimate": 50,
+		  "NotorEstimate": 50,
+		  "StrEstimate": 50
     },
 	"conversation_point_2" : {
 	      "name" : "Compliment",
@@ -457,7 +661,13 @@
 		  "kindness": 0,
 		  "greed": 0,
 		  "recklessness": 0,
-		  "extroversion": 0
+		  "extroversion": 0,
+		  "affinity": 50,
+		  "notoriety": 50,
+		  "strength": 50,
+		  "AffEstimate": 50,
+		  "NotorEstimate": 50,
+		  "StrEstimate": 50
 
     },
 	"conversation_point_3" : {
@@ -470,7 +680,13 @@
 		  "kindness": 0,
 		  "greed": 0,
 		  "recklessness": 0,
-		  "extroversion": 0
+		  "extroversion": 0,
+		  "affinity": 50,
+		  "notoriety": 50,
+		  "strength": 50,
+		  "AffEstimate": 50,
+		  "NotorEstimate": 50,
+		  "StrEstimate": 50
 
    },
    "conversation_point_4" : {
@@ -483,7 +699,13 @@
 		  "kindness": 0,
 		  "greed": 0,
 		  "recklessness": 0,
-		  "extroversion": 0
+		  "extroversion": 0,
+		  "affinity": 50,
+		  "notoriety": 50,
+		  "strength": 50,
+		  "AffEstimate": 50,
+		  "NotorEstimate": 50,
+		  "StrEstimate": 50
 
    },
    "conversation_point_5" : {
@@ -496,7 +718,13 @@
 		  "kindness": 0,
 		  "greed": 0,
 		  "recklessness": 0,
-		  "extroversion": 0
+		  "extroversion": 0,
+		  "affinity": 50,
+		  "notoriety": 50,
+		  "strength": 50,
+		  "AffEstimate": 50,
+		  "NotorEstimate": 50,
+		  "StrEstimate": 50
 
    }
   },
@@ -513,7 +741,13 @@
 		  "kindness": 0,
 		  "greed": 0,
 		  "recklessness": 0,
-		  "extroversion": 0
+		  "extroversion": 0,
+		  "affinity": 50,
+		  "notoriety": 50,
+		  "strength": 50,
+		  "AffEstimate": 50,
+		  "NotorEstimate": 50,
+		  "StrEstimate": 50
     },
 	"reply_point_2" : {
 	      "name" : "Response_To_Compliment",
@@ -526,7 +760,13 @@
 		  "kindness": 0,
 		  "greed": 0,
 		  "recklessness": 0,
-		  "extroversion": 0
+		  "extroversion": 0,
+		  "affinity": 50,
+		  "notoriety": 50,
+		  "strength": 50,
+		  "AffEstimate": 50,
+		  "NotorEstimate": 50,
+		  "StrEstimate": 50
     },
 	"reply_point_3" : {
 	      "name" : "Response_To_Grovel",
@@ -539,7 +779,13 @@
 		  "kindness": 0,
 		  "greed": 0,
 		  "recklessness": 0,
-		  "extroversion": 0
+		  "extroversion": 0,
+		  "affinity": 50,
+		  "notoriety": 50,
+		  "strength": 50,
+		  "AffEstimate": 50,
+		  "NotorEstimate": 50,
+		  "StrEstimate": 50
     },
 	"reply_point_4" : {
 	      "name" : "Response_To_Offer_Teaching",
@@ -552,7 +798,13 @@
 		  "kindness": 0,
 		  "greed": 0,
 		  "recklessness": 0,
-		  "extroversion": 0
+		  "extroversion": 0,
+		  "affinity": 50,
+		  "notoriety": 50,
+		  "strength": 50,
+		  "AffEstimate": 50,
+		  "NotorEstimate": 50,
+		  "StrEstimate": 50
     },
 	"reply_point_5" : {
 	      "name" : "Response_Insult",
@@ -565,7 +817,13 @@
 		  "kindness": 0,
 		  "greed": 0,
 		  "recklessness": 0,
-		  "extroversion": 0
+		  "extroversion": 0,
+		  "affinity": 50,
+		  "notoriety": 50,
+		  "strength": 50,
+		  "AffEstimate": 50,
+		  "NotorEstimate": 50,
+		  "StrEstimate": 50
     }
    },
 
@@ -580,7 +838,13 @@
 		  "kindness": 0,
 		  "greed": 0,
 		  "recklessness": 0,
-		  "extroversion": 0
+		  "extroversion": 0,
+		  "affinity": 50,
+		  "notoriety": 50,
+		  "strength": 50,
+		  "AffEstimate": 50,
+		  "NotorEstimate": 50,
+		  "StrEstimate": 50
     },
 	"conversation_point_2" : {
 	      "name" : "Move_To_Conquer_Ogun",
@@ -592,7 +856,13 @@
 		  "kindness": 0,
 		  "greed": 0,
 		  "recklessness": 0,
-		  "extroversion": 0
+		  "extroversion": 0,
+		  "affinity": 50,
+		  "notoriety": 50,
+		  "strength": 50,
+		  "AffEstimate": 50,
+		  "NotorEstimate": 50,
+		  "StrEstimate": 50
     },
 	"conversation_point_3" : {
 	      "name" : "Move_To_Conquer_Oya",
@@ -604,7 +874,13 @@
 		  "kindness": 0,
 		  "greed": 0,
 		  "recklessness": 0,
-		  "extroversion": 0
+		  "extroversion": 0,
+		  "affinity": 50,
+		  "notoriety": 50,
+		  "strength": 50,
+		  "AffEstimate": 50,
+		  "NotorEstimate": 50,
+		  "StrEstimate": 50
     },
     "conversation_point_4" : {
 	      "name" : "Move_To_Alliance_Oshosi",
@@ -616,7 +892,13 @@
 		  "kindness": 0,
 		  "greed": 0,
 		  "recklessness": 0,
-		  "extroversion": 0
+		  "extroversion": 0,
+		  "affinity": 50,
+		  "notoriety": 50,
+		  "strength": 50,
+		  "AffEstimate": 50,
+		  "NotorEstimate": 50,
+		  "StrEstimate": 50
     },
 	"conversation_point_5" : {
 	      "name" : "Move_To_Alliance_Ogun",
@@ -628,7 +910,13 @@
 		  "kindness": 0,
 		  "greed": 0,
 		  "recklessness": 0,
-		  "extroversion": 0
+		  "extroversion": 0,
+		  "affinity": 50,
+		  "notoriety": 50,
+		  "strength": 50,
+		  "AffEstimate": 50,
+		  "NotorEstimate": 50,
+		  "StrEstimate": 50
     },
 	"conversation_point_6" : {
 	      "name" : "Move_To_Alliance_Oya",
@@ -640,7 +928,13 @@
 		  "kindness": 0,
 		  "greed": 0,
 		  "recklessness": 0,
-		  "extroversion": 0
+		  "extroversion": 0,
+		  "affinity": 50,
+		  "notoriety": 50,
+		  "strength": 50,
+		  "AffEstimate": 50,
+		  "NotorEstimate": 50,
+		  "StrEstimate": 50
     },
 	"conversation_point_7" : {
 	      "name" : "Move_To_Revolt_Oshosi",
@@ -652,7 +946,13 @@
 		  "kindness": 0,
 		  "greed": 0,
 		  "recklessness": 0,
-		  "extroversion": 0
+		  "extroversion": 0,
+		  "affinity": 50,
+		  "notoriety": 50,
+		  "strength": 50,
+		  "AffEstimate": 50,
+		  "NotorEstimate": 50,
+		  "StrEstimate": 50
     },
 	"conversation_point_8" : {
 	      "name" : "Move_To_Revolt_Ogun",
@@ -664,7 +964,13 @@
 		  "kindness": 0,
 		  "greed": 0,
 		  "recklessness": 0,
-		  "extroversion": 0
+		  "extroversion": 0,
+		  "affinity": 50,
+		  "notoriety": 50,
+		  "strength": 50,
+		  "AffEstimate": 50,
+		  "NotorEstimate": 50,
+		  "StrEstimate": 50
     },
 	"conversation_point_9" : {
 	      "name" : "Move_To_Revolt_Oya",
@@ -676,7 +982,13 @@
 		  "kindness": 0,
 		  "greed": 0,
 		  "recklessness": 0,
-		  "extroversion": 0
+		  "extroversion": 0,
+		  "affinity": 50,
+		  "notoriety": 50,
+		  "strength": 50,
+		  "AffEstimate": 50,
+		  "NotorEstimate": 50,
+		  "StrEstimate": 50
     },
 	"conversation_point_10" : {
 	      "name" : "Move_To_Destroy_Oshosi",
@@ -688,7 +1000,13 @@
 		  "kindness": 0,
 		  "greed": 0,
 		  "recklessness": 0,
-		  "extroversion": 0
+		  "extroversion": 0,
+		  "affinity": 50,
+		  "notoriety": 50,
+		  "strength": 50,
+		  "AffEstimate": 50,
+		  "NotorEstimate": 50,
+		  "StrEstimate": 50
     },
 	"conversation_point_11" : {
 	      "name" : "Move_To_Destroy_Ogun",
@@ -700,7 +1018,13 @@
 		  "kindness": 0,
 		  "greed": 0,
 		  "recklessness": 0,
-		  "extroversion": 0
+		  "extroversion": 0,
+		  "affinity": 50,
+		  "notoriety": 50,
+		  "strength": 50,
+		  "AffEstimate": 50,
+		  "NotorEstimate": 50,
+		  "StrEstimate": 50
     },
 	"conversation_point_12" : {
 	      "name" : "Move_To_Destroy_Oya",
@@ -712,7 +1036,13 @@
 		  "kindness": 0,
 		  "greed": 0,
 		  "recklessness": 0,
-		  "extroversion": 0
+		  "extroversion": 0,
+		  "affinity": 50,
+		  "notoriety": 50,
+		  "strength": 50,
+		  "AffEstimate": 50,
+		  "NotorEstimate": 50,
+		  "StrEstimate": 50
     },
 	"conversation_point_13" : {
 	      "name" : "Ask_To_Duel",
@@ -724,7 +1054,13 @@
 		  "kindness": 0,
 		  "greed": 0,
 		  "recklessness": 0,
-		  "extroversion": 0
+		  "extroversion": 0,
+		  "affinity": 50,
+		  "notoriety": 50,
+		  "strength": 50,
+		  "AffEstimate": 50,
+		  "NotorEstimate": 50,
+		  "StrEstimate": 50
    },
    "conversation_point_14" : {
 	      "name" : "Ask_To_Join_Party",
@@ -736,7 +1072,13 @@
 		  "kindness": 0,
 		  "greed": 0,
 		  "recklessness": 0,
-		  "extroversion": 0
+		  "extroversion": 0,
+		  "affinity": 50,
+		  "notoriety": 50,
+		  "strength": 50,
+		  "AffEstimate": 50,
+		  "NotorEstimate": 50,
+		  "StrEstimate": 50
 
    },
    "conversation_point_15" : {
@@ -749,7 +1091,13 @@
 		  "kindness": 0,
 		  "greed": 0,
 		  "recklessness": 0,
-		  "extroversion": 0
+		  "extroversion": 0,
+		  "affinity": 50,
+		  "notoriety": 50,
+		  "strength": 50,
+		  "AffEstimate": 50,
+		  "NotorEstimate": 50,
+		  "StrEstimate": 50
 
    },
    "conversation_point_16" : {
@@ -762,7 +1110,13 @@
 		  "kindness": 0,
 		  "greed": 0,
 		  "recklessness": 0,
-		  "extroversion": 0
+		  "extroversion": 0,
+		  "affinity": 50,
+		  "notoriety": 50,
+		  "strength": 50,
+		  "AffEstimate": 50,
+		  "NotorEstimate": 50,
+		  "StrEstimate": 50
 
    },
    "conversation_point_17" : {
@@ -775,7 +1129,13 @@
 		  "kindness": 0,
 		  "greed": 0,
 		  "recklessness": 0,
-		  "extroversion": 0
+		  "extroversion": 0,
+		  "affinity": 50,
+		  "notoriety": 50,
+		  "strength": 50,
+		  "AffEstimate": 50,
+		  "NotorEstimate": 50,
+		  "StrEstimate": 50
 
    },
    "conversation_point_18" : {
@@ -788,7 +1148,32 @@
 		  "kindness": 0,
 		  "greed": 0,
 		  "recklessness": 0,
-		  "extroversion": 0
+		  "extroversion": 0,
+		  "affinity": 50,
+		  "notoriety": 50,
+		  "strength": 50,
+		  "AffEstimate": 50,
+		  "NotorEstimate": 50,
+		  "StrEstimate": 50
+
+   },
+   "conversation_point_19" : {
+	      "name" : "Ask_To_Form_Alliance",
+          "topic" : "ncp",
+	      "template" : "Ask_To_Form_Alliance",
+		  "honor" : 0,
+		  "pride": 0,
+		  "aggression": 0,
+		  "kindness": 0,
+		  "greed": 0,
+		  "recklessness": 0,
+		  "extroversion": 0,
+		  "affinity": 50,
+		  "notoriety": 50,
+		  "strength": 50,
+		  "AffEstimate": 50,
+		  "NotorEstimate": 50,
+		  "StrEstimate": 50
 
    }
    
@@ -806,7 +1191,13 @@
 		  "kindness": 0,
 		  "greed": 0,
 		  "recklessness": 0,
-		  "extroversion": 0
+		  "extroversion": 0,
+		  "affinity": 50,
+		  "notoriety": 50,
+		  "strength": 50,
+		  "AffEstimate": 50,
+		  "NotorEstimate": 50,
+		  "StrEstimate": 50
    },
    "reply_point_2" : {
 	      "name" : "Response_To_Move_To_Conquer_Oshosi",
@@ -819,7 +1210,13 @@
 		  "kindness": 0,
 		  "greed": 0,
 		  "recklessness": 0,
-		  "extroversion": 0
+		  "extroversion": 0,
+		  "affinity": 50,
+		  "notoriety": 50,
+		  "strength": 50,
+		  "AffEstimate": 50,
+		  "NotorEstimate": 50,
+		  "StrEstimate": 50
    },
    "reply_point_3" : {
 	      "name" : "Response_To_Move_To_Alliance_Oshosi",
@@ -832,7 +1229,13 @@
 		  "kindness": 0,
 		  "greed": 0,
 		  "recklessness": 0,
-		  "extroversion": 0
+		  "extroversion": 0,
+		  "affinity": 50,
+		  "notoriety": 50,
+		  "strength": 50,
+		  "AffEstimate": 50,
+		  "NotorEstimate": 50,
+		  "StrEstimate": 50
    },
    "reply_point_4" : {
 	      "name" : "Response_To_Move_To_Revolt_Oshosi",
@@ -845,7 +1248,13 @@
 		  "kindness": 0,
 		  "greed": 0,
 		  "recklessness": 0,
-		  "extroversion": 0
+		  "extroversion": 0,
+		  "affinity": 50,
+		  "notoriety": 50,
+		  "strength": 50,
+		  "AffEstimate": 50,
+		  "NotorEstimate": 50,
+		  "StrEstimate": 50
    },
    "reply_point_5" : {
 	      "name" : "Response_To_Ask_To_Duel",
@@ -858,7 +1267,13 @@
 		  "kindness": 0,
 		  "greed": 0,
 		  "recklessness": 0,
-		  "extroversion": 0
+		  "extroversion": 0,
+		  "affinity": 50,
+		  "notoriety": 50,
+		  "strength": 50,
+		  "AffEstimate": 50,
+		  "NotorEstimate": 50,
+		  "StrEstimate": 50
    },
    "reply_point_6" : {
 	      "name" : "Response_To_Move_To_Spy_Oshosi",
@@ -871,7 +1286,13 @@
 		  "kindness": 0,
 		  "greed": 0,
 		  "recklessness": 0,
-		  "extroversion": 0
+		  "extroversion": 0,
+		  "affinity": 50,
+		  "notoriety": 50,
+		  "strength": 50,
+		  "AffEstimate": 50,
+		  "NotorEstimate": 50,
+		  "StrEstimate": 50
    
    },
      "reply_point_7" : {
@@ -885,7 +1306,13 @@
 		  "kindness": 0,
 		  "greed": 0,
 		  "recklessness": 0,
-		  "extroversion": 0
+		  "extroversion": 0,
+		  "affinity": 50,
+		  "notoriety": 50,
+		  "strength": 50,
+		  "AffEstimate": 50,
+		  "NotorEstimate": 50,
+		  "StrEstimate": 50
    },
       "reply_point_8" : {
 	      "name" : "Response_To_Move_To_Conquer_Ogun",
@@ -898,7 +1325,13 @@
 		  "kindness": 0,
 		  "greed": 0,
 		  "recklessness": 0,
-		  "extroversion": 0
+		  "extroversion": 0,
+		  "affinity": 50,
+		  "notoriety": 50,
+		  "strength": 50,
+		  "AffEstimate": 50,
+		  "NotorEstimate": 50,
+		  "StrEstimate": 50
    },
    "reply_point_9" : {
 	      "name" : "Response_To_Move_To_Alliance_Ogun",
@@ -911,7 +1344,13 @@
 		  "kindness": 0,
 		  "greed": 0,
 		  "recklessness": 0,
-		  "extroversion": 0
+		  "extroversion": 0,
+		  "affinity": 50,
+		  "notoriety": 50,
+		  "strength": 50,
+		  "AffEstimate": 50,
+		  "NotorEstimate": 50,
+		  "StrEstimate": 50
    },
    "reply_point_10" : {
 	      "name" : "Response_To_Move_To_Alliance_Oya",
@@ -924,7 +1363,13 @@
 		  "kindness": 0,
 		  "greed": 0,
 		  "recklessness": 0,
-		  "extroversion": 0
+		  "extroversion": 0,
+		  "affinity": 50,
+		  "notoriety": 50,
+		  "strength": 50,
+		  "AffEstimate": 50,
+		  "NotorEstimate": 50,
+		  "StrEstimate": 50
    },
     "reply_point_11" : {
 	      "name" : "Response_To_Move_To_Revolt_Ogun",
@@ -937,7 +1382,13 @@
 		  "kindness": 0,
 		  "greed": 0,
 		  "recklessness": 0,
-		  "extroversion": 0
+		  "extroversion": 0,
+		  "affinity": 50,
+		  "notoriety": 50,
+		  "strength": 50,
+		  "AffEstimate": 50,
+		  "NotorEstimate": 50,
+		  "StrEstimate": 50
    },
     "reply_point_12" : {
 	      "name" : "Response_To_Move_To_Revolt_Oya",
@@ -950,7 +1401,13 @@
 		  "kindness": 0,
 		  "greed": 0,
 		  "recklessness": 0,
-		  "extroversion": 0
+		  "extroversion": 0,
+		  "affinity": 50,
+		  "notoriety": 50,
+		  "strength": 50,
+		  "AffEstimate": 50,
+		  "NotorEstimate": 50,
+		  "StrEstimate": 50
    },
    "reply_point_13" : {
 	      "name" : "Response_To_Move_To_Spy_Ogun",
@@ -963,7 +1420,13 @@
 		  "kindness": 0,
 		  "greed": 0,
 		  "recklessness": 0,
-		  "extroversion": 0
+		  "extroversion": 0,
+		  "affinity": 50,
+		  "notoriety": 50,
+		  "strength": 50,
+		  "AffEstimate": 50,
+		  "NotorEstimate": 50,
+		  "StrEstimate": 50
    },
    "reply_point_14" : {
 	      "name" : "Response_To_Move_To_Spy_Oya",
@@ -976,7 +1439,13 @@
 		  "kindness": 0,
 		  "greed": 0,
 		  "recklessness": 0,
-		  "extroversion": 0
+		  "extroversion": 0,
+		  "affinity": 50,
+		  "notoriety": 50,
+		  "strength": 50,
+		  "AffEstimate": 50,
+		  "NotorEstimate": 50,
+		  "StrEstimate": 50
    },
    "reply_point_15" : {
 	      "name" : "Response_To_Move_To_Destroy_Oshosi",
@@ -989,7 +1458,13 @@
 		  "kindness": 0,
 		  "greed": 0,
 		  "recklessness": 0,
-		  "extroversion": 0
+		  "extroversion": 0,
+		  "affinity": 50,
+		  "notoriety": 50,
+		  "strength": 50,
+		  "AffEstimate": 50,
+		  "NotorEstimate": 50,
+		  "StrEstimate": 50
    },
    "reply_point_16" : {
 	      "name" : "Response_To_Move_To_Destroy_Ogun",
@@ -1002,7 +1477,13 @@
 		  "kindness": 0,
 		  "greed": 0,
 		  "recklessness": 0,
-		  "extroversion": 0
+		  "extroversion": 0,
+		  "affinity": 50,
+		  "notoriety": 50,
+		  "strength": 50,
+		  "AffEstimate": 50,
+		  "NotorEstimate": 50,
+		  "StrEstimate": 50
    },
    "reply_point_17" : {
 	      "name" : "Response_To_Move_To_Destroy_Oya",
@@ -1015,7 +1496,13 @@
 		  "kindness": 0,
 		  "greed": 0,
 		  "recklessness": 0,
-		  "extroversion": 0
+		  "extroversion": 0,
+		  "affinity": 50,
+		  "notoriety": 50,
+		  "strength": 50,
+		  "AffEstimate": 50,
+		  "NotorEstimate": 50,
+		  "StrEstimate": 50
    },
    "reply_point_18" : {
 	      "name" : "Response_To_Ask_To_Join_Party",
@@ -1028,7 +1515,13 @@
 		  "kindness": 0,
 		  "greed": 0,
 		  "recklessness": 0,
-		  "extroversion": 0
+		  "extroversion": 0,
+		  "affinity": 50,
+		  "notoriety": 50,
+		  "strength": 50,
+		  "AffEstimate": 50,
+		  "NotorEstimate": 50,
+		  "StrEstimate": 50
    },
    "reply_point_19" : {
 	      "name" : "Response_To_Move_To_Train",
@@ -1041,7 +1534,13 @@
 		  "kindness": 0,
 		  "greed": 0,
 		  "recklessness": 0,
-		  "extroversion": 0
+		  "extroversion": 0,
+		  "affinity": 50,
+		  "notoriety": 50,
+		  "strength": 50,
+		  "AffEstimate": 50,
+		  "NotorEstimate": 50,
+		  "StrEstimate": 50
    }
   }
 

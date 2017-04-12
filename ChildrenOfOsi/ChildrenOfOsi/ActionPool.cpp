@@ -57,10 +57,20 @@ void ActionPool::updateMiddle() {
 		for (auto it = macro[i]->req_preconds.begin(); it != macro[i]->req_preconds.end(); ++it) {
 			actions_by_post[(*it)->get_type()];
 		}
+		for (auto it2 = macro[i]->op_preconds.begin(); it2 != macro[i]->op_preconds.end(); ++it2) {
+			for (auto it3 = (*it2).begin(); it3 != (*it2).end(); ++it3) {
+				actions_by_post[(*it3)->get_type()];
+			}
+		}
 	}
 	for (int i = 0; i < micro.size(); i++) {
 		for (auto it = micro[i]->req_preconds.begin(); it != micro[i]->req_preconds.end(); ++it) {
 			actions_by_post[(*it)->get_type()];
+		}
+		for (auto it2 = micro[i]->op_preconds.begin(); it2 != micro[i]->op_preconds.end(); ++it2) {
+			for (auto it3 = (*it2).begin(); it3 != (*it2).end(); ++it3) {
+				actions_by_post[(*it3)->get_type()];
+			}
 		}
 	}
 	for (int j = 0; j < micro.size(); j++) {

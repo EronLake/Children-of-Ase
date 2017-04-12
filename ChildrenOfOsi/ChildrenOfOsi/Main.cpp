@@ -64,7 +64,9 @@
 #include "Alliance.h"
 #include "PartyManager.h"
 //#include <boost/thread/thread.hpp>  //This is used for Ian's multithread section, but the user needs the boost compiled library installed on their computer
-# include "thread"
+#include "thread"
+
+#include "QuestManager.h"
 
 using namespace std;
 
@@ -143,6 +145,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	ActionHelper::ai = AiController;
 	ActionHelper::gameplay_func = gameplay_functions;
 	CombatController* combatControl = new CombatController(gameplay_functions);
+	QuestManager* questM = new QuestManager;
 
 	//the order defines what order the managers the tasks will be sent to
 	DumM->register_manager();
@@ -283,7 +286,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	Texture* h_leftIdleTex = new Texture();
 	Texture* h_rightIdleTex = new Texture();
 	textureMap[h_upRunTex] = pair<string, int>("Assets/Sprites/YemojaBackSprint.png", 16);
-	textureMap[h_downRunTex] = pair<string, int>("Assets/Sprites/YemojaFrontSprint.png", 16);
+	textureMap[h_downRunTex] = pair<string, int>("Assets/Sprites/YemojaForwardSprint.png", 16);
 	textureMap[h_leftRunTex] = pair<string, int>("Assets/Sprites/YemojaLeftSprint.png", 16);
 	textureMap[h_rightRunTex] = pair<string, int>("Assets/Sprites/YemojaRightSprint.png", 16);
 	textureMap[h_upIdleTex] = pair<string, int>("Assets/Sprites/YemojaBackIdle.png", 22);
@@ -1168,14 +1171,14 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 
 	Planner* YemojaPlanner = new Planner(staticRec);
 	AiController->hero_planners[YEMOJA] = YemojaPlanner;
-	Action* test_ally = new Action(nullptr, nullptr, nullptr, 10, 1, "Alliance", "execute_train");
+	Action* test_ally = new Action(nullptr, nullptr, nullptr, 10, 1, "Create Alliance", "execute_train");
 	Action* test_train = new Action(nullptr, nullptr, nullptr, 10, 1, "Train", "execute_train");
 	
-	RelPrecon* prec = new RelPrecon("Affinity", "lower", 60);
-	RelPost* post = new RelPost("Strength", 10);
-	RelPrecon* prec1 = new RelPrecon("Affinity", "lower", 30);
-	RelPost* post1 = new RelPost("Strength", 15);
-	RelPost* post2 = new RelPost("Affinity", 15);
+	RelPrecon* prec = new RelPrecon(Preconditions::AFF, 60);
+	RelPost* post = new RelPost(Postcondition::STR, 10);
+	RelPrecon* prec1 = new RelPrecon(Preconditions::AFF, 30);
+	RelPost* post1 = new RelPost(Postcondition::STR, 15);
+	RelPost* post2 = new RelPost(Postcondition::AFF, 15);
 
 	test_ally->req_preconds.push_back(std::make_shared<RelPrecon>(*prec));
 	test_ally->succ_postconds.push_back(std::make_shared<RelPost>(*post));
@@ -1192,6 +1195,10 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	for (auto i = act.begin(); i != act.end(); ++i) {
 		cout << i->getName() << endl;
 	}
+
+	Alex->add_quest(test_ally,10);
+	Alex->add_quest(test_train, 2);
+	questM->heros.push_back(Alex);
 
 	//AiController->hero_planners[YEMOJA]->set_current_action(test_train);
 
@@ -1293,8 +1300,11 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	War* war = new War();
 	war->setWarParties(v1,v2);
 	a1->add_alliance_to_alliance(v3->get_alliance());
-	party2->add_patrol_loc(blueSoldier->getLoc());
-	party2->setMode(Party::MODE_PATROL);
+	party2->set_defend(blueSoldier->getLoc());
+	party2->setMode(Party::MODE_DEFEND);
+	party3->add_patrol_loc(staticRec->getLoc());
+	party3->add_patrol_loc({ 6445.0, 9855.0 });
+	party3->setMode(Party::MODE_PATROL);
 	cout << Alex->getParty()->getAlliance()<< endl;
 
 	partyM->addToPartyList(party);
@@ -1404,6 +1414,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 		combatControl->update_soldier(blueSoldier2, state);
 		combatControl->update_soldier(blueSoldier3, state);
 
+		questM->update();
 				
 		//ai->plan_step(staticRec);
 		//clock 

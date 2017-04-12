@@ -1,11 +1,3 @@
-#ifndef START_FULLSCREEN
-#define START_FULLSCREEN false
-#endif
-
-#ifndef MOUSE_VISIBLE
-#define MOUSE_VISIBLE true
-#endif
-
 #include "stdafx.h"
 #include "GameWindow.h"
 
@@ -208,9 +200,9 @@ void GameWindow::drawText(const std::string& text, const std::string& fontName, 
   if(color.x < 0) color.x = 0; else if(color.x > 255) color.x = 255;
   if(color.y < 0) color.y = 0; else if(color.y > 255) color.y = 255;
   if(color.z < 0) color.z = 0; else if(color.z > 255) color.z = 255;
-  GLfloat colorRed = static_cast<float>(color.x) / 255.0F;
+  GLfloat colorRed   = static_cast<float>(color.x) / 255.0F;
   GLfloat colorGreen = static_cast<float>(color.y) / 255.0F;
-  GLfloat colorBlue = static_cast<float>(color.z) / 255.0F;
+  GLfloat colorBlue  = static_cast<float>(color.z) / 255.0F;
 
   glUseProgram(GameWindow::fontShaderProgramId);
   // GameWindow::fontShader.Use();
@@ -281,7 +273,7 @@ void GameWindow::refresh()
   }
 
   for(int i = 0; i < text.size(); ++i) {
-    RenderText(text[i].getText(), text[i].getX(), text[i].getY(), 1, text[i].getColor());
+    RenderText(text[i].getText(), text[i].getX(), text[i].getY(), text[i].getWidth(), text[i].getHeight(), 1, text[i].getColor());
   }
   //RenderText(*osi::GameWindow::s, "This is sample text", 25.0f, 25.0f, 1.0f, glm::vec3(0.5, 0.8f, 0.2f));
   glBindVertexArray(0);
@@ -315,10 +307,10 @@ glm::vec2 GameWindow::dpCoordToGL(float x, float y)
 }
 
 /**
- * Handles the setup of the window itself when initializing. The tasks of this
- * function include providing GLFW the necessary window hints; determining the
- * dimensions at which the window will display; and setting up GLEW.
- */
+* Handles the setup of the window itself when initializing. The tasks of this
+* function include providing GLFW the necessary window hints; determining the
+* dimensions at which the window will display; and setting up GLEW.
+*/
 void GameWindow::setupWindow()
 {
   glfwInit();
@@ -577,10 +569,11 @@ void GameWindow::setupFont(const std::string& fontName, unsigned int fontHeight)
   glBindVertexArray(0);
 }
 
-void GameWindow::RenderText(std::string text, GLfloat x, GLfloat y, GLfloat scale, glm::vec3 color)
+void GameWindow::RenderText(std::string text, GLfloat x, GLfloat y, GLfloat w, GLfloat h, GLfloat scale, glm::vec3 color)
 {
   y = WINDOW_HEIGHT_DP - y - 18;
   GLfloat lineStart = x;
+  w = w + x;
 
   glUseProgram(GameWindow::fontShaderProgramId);
   glUniform3f(glGetUniformLocation(fontShaderProgramId, "textColor"), color.x, color.y, color.z);
@@ -591,12 +584,12 @@ void GameWindow::RenderText(std::string text, GLfloat x, GLfloat y, GLfloat scal
   std::string::const_iterator c;
   for(c = text.begin(); c != text.end(); c++) {
     Character ch = Characters[*c];
-    if(*c == '\n' || ((*c == ' ') && (x > 750)) || ((*c == '_') && (x > 750))) {
+    if(*c == '\n' || ((*c == ' ') && (x > w))) {
       if(*c == ' ' || *c == '_')y -= 18 * scale;
       x = lineStart;
       y -= (ch.Size.y + ch.Bearing.y) * scale;
     }
-    if(*c == '_' || *c == ' ') {
+    if(*c == ' ') {
       x += (ch.Bearing.x * scale);
       x += (ch.Advance >> 6) * scale;
     }
@@ -633,11 +626,11 @@ void GameWindow::RenderText(std::string text, GLfloat x, GLfloat y, GLfloat scal
 }
 
 /**
- * Callback function for whenever the window is resized: ensures that the
- * viewport alwyas fills the window. 
- * 
- * Param window: the window being resized
- */
+* Callback function for whenever the window is resized: ensures that the
+* viewport alwyas fills the window.
+*
+* Param window: the window being resized
+*/
 void GameWindow::windowResizeCallback(GLFWwindow *window, int, int)
 {
   glfwGetFramebufferSize(window, &GameWindow::windowWidthPx, &GameWindow::windowHeightPx);

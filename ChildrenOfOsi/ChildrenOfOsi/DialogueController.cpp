@@ -2,6 +2,7 @@
 #include "DialogueController.h"
 #include "CheckClass.h"
 #include "ConversationPoint.h"
+#include "Tag.h"
 
 Player* DialogueController::player;
 WorldObj* DialogueController::other;
@@ -68,7 +69,7 @@ void DialogueController::PlayerResponse()
 		{
 			player->quest = quest;
 			Planner* planner = ai->hero_planners[CheckClass::isHero(other)->name];
-			planner->get_current_action()->executed = true;
+			//planner->get_current_action()->executed = true;
 			prompted_quest = false;
 			accepted_quest = true;
 		}
@@ -148,6 +149,20 @@ void DialogueController::setPlayer(Player* p)
 
 void DialogueController::startConversation(WorldObj* n, bool playerTalk)
 {
+	//prints to file to check for proper tag and conversation point associations
+	/*std::ofstream ofs;
+	ofs.open("dialog_template_output.txt", std::ofstream::out | std::ofstream::app);
+	for (auto itor = Containers::tag_table.begin(); itor != Containers::tag_table.end(); itor++) {
+		for (int i = 0; i < itor->second->get_conversation_pointer_vec().size(); i++) {
+			ofs << "Tag Name: " << itor->first << " Conversation Point Name: " << itor->second->conversation_point_pointer_vec[i]->get_name() << std::endl;
+		}
+	}
+	for (auto it = Containers::conv_point_table.begin(); it != Containers::conv_point_table.end(); it++) {
+		for (int i = 0; i < it->second->tag_pointer_vec.size(); i++) {
+			ofs << "Conversation Point Name: " << it->first << " Tag Name: " << it->second->tag_pointer_vec[i]->get_name() << std::endl;
+		}
+	}
+	ofs.close();*/
 	other = n;
 	message = "You started talking to ";
 	message += n->getName();

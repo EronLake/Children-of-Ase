@@ -68,7 +68,7 @@ struct GameWindow
   static void drawText(const std::string&, const std::string&, float, float, float, float, glm::ivec3);
   static void refresh();
 
-  static void RenderText(std::string text, GLfloat x, GLfloat y, GLfloat scale, glm::vec3 color);
+  static void RenderText(std::string text, GLfloat x, GLfloat y, GLfloat w, GLfloat h, GLfloat scale, glm::vec3 color);
 
   private:
 

@@ -10,29 +10,41 @@ class Preconditions
 {
 protected:
 	std::string type;
-	std::string general_type;
+	int general_type;
 public:
+	static constexpr int REL = 0;
+	static constexpr int REL_EST = 1;
+	static constexpr int TIME = 2;
+	static constexpr int MEM_NUM = 3;
+	static constexpr int MEM = 4;
+	static constexpr int STATE = 5;
+
+	static constexpr int STR = 6;
+	static constexpr int AFF = 7;
+	static constexpr int NOT = 8;
+	static constexpr int BSTR = 9;
+	static constexpr int BAFF = 10;
+	static constexpr int BNOT = 11;
+
 	Preconditions();
 	~Preconditions();
 	virtual float get_cost();
 	std::string get_type();
-	std::string get_general_type();
+	int get_general_type();
 
 };
 
 class RelPrecon : public Preconditions
 {
 private:
-	std::string rel_type;
-	std::string rel_bound;
+	int rel_type;
 	int desired_rel_val;
 
 public:
-	RelPrecon(std::string rel_type, std::string rel_bound, int desired_rel_val);
+	RelPrecon(int rel_type, int desired_rel_val);
 	~RelPrecon();
 
-	std::string get_rel_type() { return rel_type; };
-	std::string get_rel_bound() { return rel_bound; };
+	int get_rel_type() { return rel_type; };
 	//Require particular relationship towards a hero
 	virtual float get_cost(Hero* curr_hero, Hero* other_hero) final;
 };
@@ -40,17 +52,15 @@ public:
 class RelEstimPrerec : public Preconditions
 {
 private:
-	std::string rel_type;
-	std::string rel_bound;
+	int rel_type;
 	int desired_rel_val;
 
 public:
 	
-	RelEstimPrerec(std::string rel_type, std::string rel_bound, int desired_rel_val);
+	RelEstimPrerec(int rel_type, int desired_rel_val);
 	~RelEstimPrerec();
 
-	std::string get_rel_type() { return rel_type; };
-	std::string get_rel_bound() { return rel_bound; };
+	int get_rel_type() { return rel_type; };
 	//Require particular assumption of hero relationship towards sel
 	virtual float get_cost(Hero* curr_hero, Hero* other_hero) final;
 
@@ -118,9 +128,23 @@ class Postcondition
 {
 protected:
 	std::string type;
-	std::string general_type;
+	int general_type;
 
 public:
+	static constexpr int REL = 0;
+	static constexpr int REL_EST = 1;
+	static constexpr int TIME = 2;
+	static constexpr int MEM_NUM = 3;
+	static constexpr int MEM = 4;
+	static constexpr int STATE = 5;
+
+	static constexpr int STR = 6;
+	static constexpr int AFF = 7;
+	static constexpr int NOT = 8;
+	static constexpr int BSTR = 9;
+	static constexpr int BAFF = 10;
+	static constexpr int BNOT = 11;
+	
 	//Comparing village states
 	Postcondition();
 	~Postcondition();
@@ -131,7 +155,7 @@ public:
 	void apply_utility();
 	void apply_utility(Hero* curr_hero, Hero* other_hero);
 	std::string get_type();
-	std::string get_general_type();
+	int get_general_type();
 	
 
 };
@@ -140,15 +164,15 @@ public:
 class RelPost : public Postcondition
 {
 private:
-	std::string rel_type;
+	int rel_type;
 	int utility;
 
 public:
 
-	RelPost(std::string rel_type, int rel_val);
+	RelPost(int rel_type, int rel_val);
 	~RelPost();
 
-	std::string get_rel_type() { return rel_type; };
+	int get_rel_type() { return rel_type; };
 
 	//Require particular assumption of hero relationship towards sel
 	virtual float get_utility(Hero* curr_hero, Hero* other_hero) final;
@@ -161,15 +185,15 @@ public:
 class RelEstimPost : public Postcondition
 {
 private:
-	std::string rel_type;
+	int rel_type;
 	int utility;
 
 public:
 
-	RelEstimPost(std::string rel_type, int rel_val);
+	RelEstimPost(int rel_type, int rel_val);
 	~RelEstimPost();
 
-	std::string get_rel_type() { return rel_type; };
+	int get_rel_type() { return rel_type; };
 
 	//Require particular assumption of hero relationship towards sel
 	virtual float get_utility(Hero* curr_hero, Hero* other_hero) final;

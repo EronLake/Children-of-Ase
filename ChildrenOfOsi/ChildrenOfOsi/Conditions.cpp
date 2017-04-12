@@ -27,7 +27,7 @@ std::string Preconditions::get_type()
 	return type;
 }
 
-std::string Preconditions::get_general_type()
+int Preconditions::get_general_type()
 {
 	return general_type;
 }
@@ -37,14 +37,13 @@ std::string Preconditions::get_general_type()
 //RELATIONSHIP PRECONDITIONS
 ////////////////////////////////////////////////////////////////////////////////////
 
-RelPrecon::RelPrecon(std::string _rel_type, std::string _rel_bound, int _desired_rel_val)
+RelPrecon::RelPrecon(int _rel_type, int _desired_rel_val)
 {
 	rel_type = _rel_type;
-	rel_bound = _rel_bound;
 	desired_rel_val = _desired_rel_val;
 
-	type = "relationship"+ rel_type+ rel_bound;
-	general_type = "relationship";
+	type = "relationship_" + to_string(rel_type);
+	general_type = REL;
 
 	LOG("RelPrecon Object Constructed");
 }
@@ -58,26 +57,37 @@ RelPrecon::~RelPrecon()
 float RelPrecon::get_cost(Hero* curr_hero, Hero* other_hero)
 {
 	int current_rel;
-	if(rel_type == "Affinity")
+	float cost = 0.0;
+	if(rel_type == AFF)
 	{ 
 		current_rel = curr_hero->rel[other_hero->name]->getAffinity();
+		cost = desired_rel_val - current_rel;
 	} 
-	else if(rel_type == "Notoriety")
+	else if(rel_type == NOT)
 	{
 		current_rel = curr_hero->rel[other_hero->name]->getNotoriety();
+		cost = desired_rel_val - current_rel;
 	}
-	else if(rel_type == "Strength")
+	else if(rel_type == STR)
 	{
 		current_rel = curr_hero->rel[other_hero->name]->getStrength();
-	}
-
-	float cost = 0.0;
-
-	if (rel_bound == "lower" && desired_rel_val > current_rel ||
-		rel_bound == "upper" && desired_rel_val < current_rel)
+		cost = desired_rel_val - current_rel;
+	} else if (rel_type == BAFF)
 	{
-			cost = std::abs(desired_rel_val - current_rel);
+		current_rel = curr_hero->rel[other_hero->name]->getAffinity();
+		cost = current_rel - desired_rel_val;
 	}
+	else if (rel_type == BNOT)
+	{
+		current_rel = curr_hero->rel[other_hero->name]->getNotoriety();
+		cost = current_rel - desired_rel_val;
+	}
+	else if (rel_type == BSTR)
+	{
+		current_rel = curr_hero->rel[other_hero->name]->getStrength();
+		cost = current_rel - desired_rel_val;
+	}
+
 	
 	return cost;
 }
@@ -88,14 +98,13 @@ float RelPrecon::get_cost(Hero* curr_hero, Hero* other_hero)
 //RELATIONSHIP ASSUMPTION PRECONDITION
 ////////////////////////////////////////////////////////////////////////////////////
 
-RelEstimPrerec::RelEstimPrerec(std::string _rel_type, std::string _rel_bound, int _desired_rel_val)
+RelEstimPrerec::RelEstimPrerec(int _rel_type, int _desired_rel_val)
 {
 	rel_type = _rel_type;
-	rel_bound = _rel_bound;
 	desired_rel_val = _desired_rel_val;
 
-	type = "relationship_estimate" + rel_type + rel_bound;
-	general_type = "relationship_estimate";
+	type = "relationship_estimate_" + to_string(rel_type);
+	general_type = REL_EST;
 
 	LOG("RelEstimPrerec Object Constructed");
 }
@@ -108,27 +117,39 @@ RelEstimPrerec::~RelEstimPrerec()
 
 float RelEstimPrerec::get_cost(Hero* curr_hero, Hero* other_hero)
 {
-	int current_est;
-	if (rel_type == "Affinity")
-	{
-		current_est = curr_hero->rel[other_hero->name]->getAffEstimate();
-	}
-	else if (rel_type == "Notoriety")
-	{
-		current_est = curr_hero->rel[other_hero->name]->getNotorEstimate();
-	}
-	else if (rel_type == "Strength")
-	{
-		current_est = curr_hero->rel[other_hero->name]->getStrEstimate();
-	}
-
+	int current_rel;
 	float cost = 0.0;
-
-	if (rel_bound == "lower" && desired_rel_val > current_est ||
-		rel_bound == "upper" && desired_rel_val < current_est)
+	if (rel_type == AFF)
 	{
-		cost = std::abs(desired_rel_val - current_est);
+		current_rel = curr_hero->rel[other_hero->name]->getAffEstimate();
+		cost = desired_rel_val - current_rel;
 	}
+	else if (rel_type == NOT)
+	{
+		current_rel = curr_hero->rel[other_hero->name]->getNotorEstimate();
+		cost = desired_rel_val - current_rel;
+	}
+	else if (rel_type == STR)
+	{
+		current_rel = curr_hero->rel[other_hero->name]->getStrEstimate();
+		cost = desired_rel_val - current_rel;
+	}
+	else if (rel_type == BAFF)
+	{
+		current_rel = curr_hero->rel[other_hero->name]->getAffEstimate();
+		cost = current_rel - desired_rel_val;
+	}
+	else if (rel_type == BNOT)
+	{
+		current_rel = curr_hero->rel[other_hero->name]->getNotorEstimate();
+		cost = current_rel - desired_rel_val;
+	}
+	else if (rel_type == BSTR)
+	{
+		current_rel = curr_hero->rel[other_hero->name]->getStrEstimate();
+		cost = current_rel - desired_rel_val;
+	}
+
 
 	return cost;
 }
@@ -144,7 +165,7 @@ TimePrerec::TimePrerec(int _time_rec)
 	time_rec = _time_rec;
 
 	type = "time";
-	general_type= "time";
+	general_type= TIME;
 
 	LOG("TimePrerec Object Constructed");
 }
@@ -181,7 +202,7 @@ MemoryNumPrerec::MemoryNumPrerec(int _rec_num_of_mem)
 	rec_num_of_mem = _rec_num_of_mem;
 
 	type = "memory_number";
-	general_type = "memory_number";
+	general_type = MEM_NUM;
 
 	LOG("MemoryNumPrerec Object Constructed");
 }
@@ -213,8 +234,8 @@ MemPrerec::MemPrerec(std::string _rec_mem)
 {
 	rec_mem = _rec_mem;
 
-	type = "memory"+rec_mem;
-	general_type = "memory";
+	type = "memory_"+rec_mem;
+	general_type = MEM;
 
 	LOG("particularMemPrerec Object Constructed");
 }
@@ -252,7 +273,7 @@ StatePrerec::StatePrerec()
 	std::vectorr<relevant villages>*/
 
 	type = "state";
-	general_type = "state";
+	general_type = STATE;
 
 	LOG("particularMemPrerec Object Constructed");
 }
@@ -325,7 +346,7 @@ std::string Postcondition::get_type()
 	return type;
 }
 
-std::string Postcondition::get_general_type()
+int Postcondition::get_general_type()
 {
 	return general_type;
 }
@@ -337,20 +358,13 @@ std::string Postcondition::get_general_type()
 //RELATIONSHIP POSTCONDITION
 ////////////////////////////////////////////////////////////////////////////////////
 
-RelPost::RelPost(std::string _rel_type, int _utility)
+RelPost::RelPost(int _rel_type, int _utility)
 {
 	rel_type = _rel_type;
 	utility = _utility;
-	std::string bound;
-	if (utility > 0) {
-		bound = "lower";
-	}
-	else {
-		bound = "upper";
-	}
 
-	type = "relationship"+rel_type+bound;
-	general_type = "relationship";
+	type = "relationship_"+ to_string(rel_type);
+	general_type = REL;
 
 	LOG("RelEstimPost Object Constructed");
 }
@@ -368,17 +382,28 @@ float RelPost::get_utility(Hero* curr_hero, Hero* other_hero)
 
 void RelPost::apply_utility(Hero* curr_hero, Hero* other_hero)
 {
-	if (rel_type == "Affinity")
+	if (rel_type == AFF)
 	{
 		curr_hero->rel[other_hero->name]->addAffinity(utility);
 	}
-	else if (rel_type == "Notoriety")
+	else if (rel_type == NOT)
 	{
 		curr_hero->rel[other_hero->name]->addNotoriety(utility);
 	}
-	else if (rel_type == "Strength")
+	else if (rel_type == STR)
 	{
 		curr_hero->rel[other_hero->name]->addStrength(utility);
+	} else if (rel_type == BAFF)
+	{
+		curr_hero->rel[other_hero->name]->addAffinity(-utility);
+	}
+	else if (rel_type == BNOT)
+	{
+		curr_hero->rel[other_hero->name]->addNotoriety(-utility);
+	}
+	else if (rel_type == BSTR)
+	{
+		curr_hero->rel[other_hero->name]->addStrength(-utility);
 	}
 }
 
@@ -416,20 +441,13 @@ std::string RelPost::fulfills_which(vector<std::string> preconds, Precond_vec ve
 //RELATIONSHIP ASSUMPTION POSTCONDITION
 ////////////////////////////////////////////////////////////////////////////////////
 
-RelEstimPost::RelEstimPost( std::string _rel_type, int _utility)
+RelEstimPost::RelEstimPost( int _rel_type, int _utility)
 {
 	rel_type = _rel_type;
 	utility = _utility;
-	std::string bound;
-	if (utility > 0) {
-		bound = "lower";
-	}
-	else {
-		bound = "upper";
-	}
 
-	type = "relationship_estimate"+rel_type+bound;
-	general_type = "relationship_estimate";
+	type = "relationship_estimate_"+ to_string(rel_type);
+	general_type = REL_EST;
 
 	LOG("RelEstimPost Object Constructed");
 }
@@ -447,17 +465,28 @@ float RelEstimPost::get_utility(Hero* curr_hero, Hero* other_hero)
 
 void RelEstimPost::apply_utility(Hero* curr_hero, Hero* other_hero)
 {
-	if (rel_type == "Affinity")
+	if (rel_type == AFF)
 	{
 		curr_hero->rel[other_hero->name]->addAffEstimate(utility);
 	}
-	else if (rel_type == "Notoriety")
+	else if (rel_type == NOT)
 	{
 		curr_hero->rel[other_hero->name]->addNotorEstimate(utility);
 	}
-	else if (rel_type == "Strength")
+	else if (rel_type == STR)
 	{
 		curr_hero->rel[other_hero->name]->addStrEstimate(utility);
+	} else if (rel_type == BAFF)
+	{
+		curr_hero->rel[other_hero->name]->addAffEstimate(-utility);
+	}
+	else if (rel_type == BNOT)
+	{
+		curr_hero->rel[other_hero->name]->addNotorEstimate(-utility);
+	}
+	else if (rel_type == BSTR)
+	{
+		curr_hero->rel[other_hero->name]->addStrEstimate(-utility);
 	}
 }
 
@@ -474,7 +503,7 @@ StatePost::StatePost(int _utility)
 	utility = _utility;
 
 	type = "state";
-	general_type = "state";
+	general_type = STATE;
 
 	LOG("StatePost Object Constructed");
 }
