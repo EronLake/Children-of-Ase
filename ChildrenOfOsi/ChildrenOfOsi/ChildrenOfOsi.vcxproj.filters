@@ -223,6 +223,7 @@
     </ClCompile>
     <ClCompile Include="ThreadManager.cpp" />
     <ClCompile Include="QuestManager.cpp" />
+    <ClCompile Include="ConversationLogObj.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AIHelper.h">
@@ -465,6 +466,7 @@
     <ClInclude Include="TagConfig.h" />
     <ClInclude Include="ThreadManager.h" />
     <ClInclude Include="QuestManager.h" />
+    <ClInclude Include="ConversationLogObj.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="audio_test.txt">

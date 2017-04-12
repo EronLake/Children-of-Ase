@@ -3,6 +3,7 @@
 #include "CheckClass.h"
 #include "ConversationPoint.h"
 #include "Tag.h"
+#include "ConversationLogObj.h"
 
 Player* DialogueController::player;
 WorldObj* DialogueController::other;
@@ -26,6 +27,14 @@ AIController* DialogueController::ai = nullptr;
 Action* DialogueController::quest = nullptr;
 
 int DialogueController::scroll_control = 0;
+std::vector<ConversationLogObj*> conversation_log_obj_pointer_vec;
+
+//Hero to int associations
+// SHANGO 1
+// YEMOJA 2
+// OYA 3
+// OSHOSI 4
+// OGUN 5
 
 DialogueController::DialogueController()
 {
@@ -56,6 +65,15 @@ void DialogueController::PlayerConversationPoint()
 	dialogue_point choice = options[optionsIndex][select + DialogueController::scroll_control];
 	std::string conversation_pt_sentence = dialogue.gen_dialog(choice, player);
 	message += player->getName() + ": " + conversation_pt_sentence;
+	//////store player conversation point choice[1] here//////
+	ConversationLogObj* conv_log_obj = new ConversationLogObj();
+	Memory* mem = nullptr;
+	conv_log_obj->set_who(1);
+	conv_log_obj->set_conv_point(Containers::conv_point_table[choice[1]]);
+	conv_log_obj->update_number_of_times_said();
+	conv_log_obj->set_topic(1, mem);
+	conversation_log_obj_pointer_vec.push_back(conv_log_obj);
+	///////////////////////////////////////////////////////////
 	otherResponse(choice[1]);
 }
 
@@ -80,6 +98,15 @@ void DialogueController::PlayerResponse()
 
 	}
 	std::string reply_pt_sentence = dialogue.gen_dialog(choice, player);
+	//////store player reply choice[1] here//////
+	ConversationLogObj* conv_log_obj = new ConversationLogObj();
+	Memory* mem = nullptr;
+	conv_log_obj->set_who(1);
+	conv_log_obj->set_conv_point(Containers::conv_point_table[choice[1]]);
+	conv_log_obj->update_number_of_times_said();
+	conv_log_obj->set_topic(1, mem);
+	conversation_log_obj_pointer_vec.push_back(conv_log_obj);
+	/////////////////////////////////////////////
 	//draws reply
 	message = player->getName()+": "+reply_pt_sentence +"\n\n";
 	PlayerChoose();
@@ -103,12 +130,50 @@ void DialogueController::otherConversationPoint(dialogue_point line)
 
 	std::string reply_pt_sentence = dialogue.gen_dialog(line, temp_hero);
 	std::string con_pt_sentence = dialogue.gen_dialog(point, temp_hero);
+	//////store NPC reply point(line[1]) and conversation point here(point[1])//////
+	ConversationLogObj* conv_log_obj = new ConversationLogObj();
+	Memory* mem = nullptr;
+	std::string hero_name_str = other->getName();
+	int who_arg = 1;
+	if (hero_name_str == "Shango")
+	{
+		who_arg = 1;
+	}
+	else if (hero_name_str == "Yemoja")
+	{
+		who_arg = 2;
+	}
+	else if (hero_name_str == "Oshosi")
+	{
+		who_arg = 4;
+	}
+	else if (hero_name_str == "Oya")
+	{
+		who_arg = 3;
+	}
+	else if (hero_name_str == "Ogun")
+	{
+		who_arg = 5;
+	}
+	    //initialization of conversation log object for reply point
+	conv_log_obj->set_who(who_arg);
+	conv_log_obj->set_conv_point(Containers::conv_point_table[line[1]]);
+	conv_log_obj->update_number_of_times_said();
+	conv_log_obj->set_topic(1, mem);
+	conversation_log_obj_pointer_vec.push_back(conv_log_obj);
+	    //initialization of conversation log object for conversation point
+	conv_log_obj->set_who(who_arg);
+	conv_log_obj->set_conv_point(Containers::conv_point_table[point[1]]);
+	conv_log_obj->update_number_of_times_said();
+	conv_log_obj->set_topic(1, mem);
+	conversation_log_obj_pointer_vec.push_back(conv_log_obj);
+	///////////////////////////////////////////////////////////////////////////////
 	message = other->getName() + ": " + reply_pt_sentence + "\n" +con_pt_sentence;
 	replyOptions = dialogue.get_possible_reply_pts(point[1], optionsIndex);
 	vector<std::string> print = getReplyOptions();
 
 	select = 0;
-	state = 2; //had at 0 for testing a time
+	state = 2; //had at 0 for testing one time
 	DialogueController::scroll_control = 0;
 }
 
@@ -190,6 +255,22 @@ void DialogueController::exitDialogue()
 	other = nullptr;
 	state=0;
 	DialogueController::set_scroll_control(0);
+	//////code to clear conversation vector goes here//////
+	//std::ofstream ofs;
+	//ofs.open("dialog_template_output.txt", std::ofstream::out | std::ofstream::app);
+	
+	for (int i = 0; i < conversation_log_obj_pointer_vec.size(); i++) {
+		//ofs <<" conversation point name: " << conversation_log_obj_pointer_vec[i]->get_conv_point()->get_name() << " who: "<< conversation_log_obj_pointer_vec[i]->get_who()<< " topic: " << conversation_log_obj_pointer_vec[i]->get_topic()<< " Number of times said: " << conversation_log_obj_pointer_vec[i]->get_number_of_times_said() <<std::endl;
+		//delete memory allocated for instance of Memory class
+		//std::pair<int, Memory*> tmp_top;
+		//tmp_top = conversation_log_obj_pointer_vec[i]->get_topic();
+		//delete tmp_top.second;
+		//delete memory allocated for conversation log object
+		//delete conversation_log_obj_pointer_vec[i];
+	}
+	conversation_log_obj_pointer_vec.clear();
+	//ofs.close();
+	///////////////////////////////////////////////////////
 }
 
 DialogueHelper* DialogueController::getDialogueHelper()
