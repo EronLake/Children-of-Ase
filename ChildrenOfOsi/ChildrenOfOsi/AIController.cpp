@@ -174,16 +174,17 @@ bool AIController::give_as_quest(Action* action) {
 	Action* curr_goal = hero_planners[me->name]->get_current_end_state();
 	for (int postcond_key = 0; postcond_key < action->succ_postconds.size(); postcond_key++) {
 		Postcondition* post = action->succ_postconds[postcond_key].get();
-		if (post->get_general_type() != "relationship") //Skip if post_cond is not a RelPost
+		RelPost* rel_post;
+		if (rel_post = dynamic_cast<RelPost*>(post)) //Only execute if dynamic cast succeeds 
 		{
-			continue;
+			string pre_fulfilled = rel_post->fulfills_which(curr_goal->req_preconds, me->rel[them->getID()]);
+			if (pre_fulfilled == "\0")  //Skip if post_cond fulfills no pre-conditions
+			{
+				continue;
+			}
 		}
-		RelPost* post_cond = dynamic_cast<RelPost*>(post);
-		string pre_fulfilled = post_cond->fulfills_which(curr_goal->req_preconds, me->rel[them->getID()]);
-		if (pre_fulfilled == "\0")  //Skip if post_cond fulfills no pre-conditions
-		{         
-			continue;
-		}
+
+
 	}
 	return is_quest;
 }
