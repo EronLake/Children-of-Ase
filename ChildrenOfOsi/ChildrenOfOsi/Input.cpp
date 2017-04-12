@@ -218,6 +218,30 @@ void Input::edit_field(std::string collide_with, int body_number,float left, flo
 	}
 }
 
+void Input::add_point_to_file() {
+	double xpos;
+	double ypos;
+	glfwGetCursorPos(GameWindow::window, &xpos, &ypos);
+	cout << "XPOS AND YPOS ARE " << xpos << ", " << ypos << endl;
+	// add xpos and ypos to file
+	//std::ofstream rivOfs;
+	std::ofstream rivFile;
+	rivFile.open("rivLine.txt", std::ios_base::app);
+	rivFile << xpos << " " << ypos << " ";
+	rivFile.close();
+	oldPoint.first = xpos; oldPoint.second = ypos;
+	system("PAUSE");
+}
+
+void Input::skip_line() {
+	std::ofstream rivFile;
+	rivFile.open("rivLine.txt", std::ios_base::app);
+	rivFile << endl;
+	rivFile << oldPoint.first << " " << oldPoint.second << " ";
+	rivFile.close();
+	system("PAUSE");
+}
+
 void Input::duplicate_object(std::string collide_with) {
 	//this adds the object to the config file
 	Json::Value root;
@@ -685,26 +709,6 @@ void Input::InputCheck()
 		}
 		float firstOld = 0;
 		float secondOld = 0;
-		if (P) {
-			////std::cout << player->getX() << " " << player->getY() << std::endl;
-			std::ofstream rivFile;
-			rivFile.open("rivLines.txt", std::ios_base::app);
-			rivFile << firstOld << " " << secondOld << ", ";
-			rivFile << player->getX() << " " << player->getY() + player->getHeight() << std::endl;
-			firstOld = player->getX();
-			secondOld = player->getY() + player->getHeight();
-			rivFile.close();
-			//std::system("PAUSE");
-		}
-		if (Z) {
-			std::ofstream rivFile;
-			rivFile.open("rivLines.txt", std::ios_base::app);
-			rivFile << std::endl;
-			rivFile << std::endl;
-			rivFile << std::endl;
-			rivFile.close();
-
-		} 
 		if (G) {
 			t->getParty()->set_defend(t->getLoc());
 			t->getParty()->setMode(Party::MODE_DEFEND);
@@ -741,6 +745,12 @@ void Input::InputCheck()
 		if (M && (count2 == 0)) {
 			HUD::toggle_quests();
 			count2 = 20;
+		}
+		if (P && (GetKeyState(VK_LBUTTON) & 0x100) != 0) {
+			add_point_to_file();
+		}
+		if (Z) {
+			skip_line();
 		}
 
 

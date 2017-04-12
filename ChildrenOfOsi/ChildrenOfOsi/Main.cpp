@@ -68,6 +68,13 @@
 
 #include "QuestManager.h"
 
+#define _CRTDBG_MAP_ALLOC
+#include <crtdbg.h>
+#ifdef _DEBUG
+#define DEBUG_NEW new(_NORMAL_BLOCK, __FILE__, __LINE__)
+#define new DEBUG_NEW
+#endif
+
 using namespace std;
 
 
@@ -1319,8 +1326,18 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	int count = 0;
 	int state = 0;
 	bool start = true;
+	float shouldExit = -3000;
 
 	while (GameWindow::isRunning()) {
+		//shouldExit++;
+	/*	for (int i = 0; i < 10; i++) {
+			cout << "SHOULD EXIT IS " << shouldExit << endl;
+
+		}*/
+		if (shouldExit > 0) {
+			_CrtDumpMemoryLeaks();
+			return;
+		}
 		if (start) {
 			gameplay_functions->play_sound("Play");
 			//gameplay_functions->play_sound("Walk");
