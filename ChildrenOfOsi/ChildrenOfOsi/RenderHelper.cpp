@@ -37,8 +37,8 @@ void RenderHelper::initCamera(WorldObj * player)
 	float camX = player->getX() - ((cameraSize.getXloc() / 2)*map_zoom) + (player->getWidth() / 2);
 	float camY = player->getY() - ((cameraSize.getYloc() / 2)*map_zoom) + (player->getHeight() / 2);
 	camera->setLoc(Vector2f(camX, camY));
-	camera->setWidth(cameraSize.getXloc() + 700);
-	camera->setHeight(cameraSize.getYloc() + 300);
+	camera->setWidth(cameraSize.getXloc() + 480);	//700
+	camera->setHeight(cameraSize.getYloc() + 270);	//300
 	//cout << "Camera has coord " << camera->getX() << ", " << camera->getY() << " and width and height of " << camera->getWidth() << ", " << camera->getHeight() << endl;
 
 }

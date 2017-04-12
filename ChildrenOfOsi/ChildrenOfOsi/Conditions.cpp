@@ -411,10 +411,35 @@ void RelPost::apply_utility(Hero* curr_hero, Hero* other_hero)
 //any of the given preconditions
 //Returns the string key of the precondition if one is found
 
-std::string RelPost::fulfills_which(vector<std::string> preconds, Precond_vec vec)
+std::string RelPost::fulfills_which(Precond_vec preconds, Relationship* rel)
 {
 	
 	string pre_fulfilled = "\0"; 
+
+	for (auto precond : preconds) {
+		Preconditions* pre = precond.get();
+		RelPrecon* rel_pre;
+		if (rel_pre = dynamic_cast<RelPrecon*>(pre)) //Only execute if pre is a RelPrecon
+		{
+			switch (rel_pre->get_rel_type()) {
+			case STR:
+				break;
+			case BSTR:
+				break;
+			case AFF:
+				break;
+			case BAFF:
+				break;
+			case NOT:
+				break;
+			case BNOT:
+				break;
+			}
+		}
+		
+
+	}
+
 	/*
 	for (int precond_string = 0; precond_string < preconds.size(); precond_string++) {
 		Preconditions* precond = map[precond_string].get();

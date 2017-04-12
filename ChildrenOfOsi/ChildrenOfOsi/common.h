@@ -47,7 +47,7 @@ static int frame_count = 0;
 //Texture* rect = new Texture();
 //toggles debug longging statements 
 
-#define DEBUG 0
+#define DEBUG 1
 #define MAP_EDITOR 0
 #define START_FULLSCREEN false
 #define MOUSE_VISIBLE true
