@@ -218,29 +218,6 @@ void Input::edit_field(std::string collide_with, int body_number,float left, flo
 	}
 }
 
-void Input::add_point_to_file() {
-	double xpos;
-	double ypos;
-	glfwGetCursorPos(GameWindow::window, &xpos, &ypos);
-	cout << "XPOS AND YPOS ARE " << xpos << ", " << ypos << endl;
-	// add xpos and ypos to file
-	//std::ofstream rivOfs;
-	std::ofstream rivFile;
-	rivFile.open("rivLine.txt", std::ios_base::app);
-	rivFile << xpos << " " << ypos << " ";
-	rivFile.close();
-	oldPoint.first = xpos; oldPoint.second = ypos;
-	system("PAUSE");
-}
-
-void Input::skip_line() {
-	std::ofstream rivFile;
-	rivFile.open("rivLine.txt", std::ios_base::app);
-	rivFile << endl;
-	rivFile << oldPoint.first << " " << oldPoint.second << " ";
-	rivFile.close();
-	system("PAUSE");
-}
 
 void Input::duplicate_object(std::string collide_with) {
 	//this adds the object to the config file
@@ -559,6 +536,33 @@ void Input::edit_object() {
 	}
 }
 
+
+void Input::add_point_to_file() {
+	double xpos;
+	double ypos;
+	glfwGetCursorPos(GameWindow::window, &xpos, &ypos);
+	//cout << "XPOS AND YPOS ARE " << xpos << ", " << ypos << endl;
+
+	int mouseX = rHelper->camera->getX() + (xpos * map_zoom) * GameWindow::WINDOW_WIDTH_DP / 1300;
+	int mouseY = rHelper->camera->getY() + (ypos * map_zoom) * GameWindow::WINDOW_HEIGHT_DP / 700;
+
+	std::ofstream rivFile;
+	rivFile.open("rivLine.txt", std::ios_base::app);
+	rivFile << mouseX << " " << mouseY << " ";
+	rivFile.close();
+	oldPoint.first = mouseX; oldPoint.second = mouseY;
+	system("PAUSE");
+}
+
+void Input::skip_line() {
+	std::ofstream rivFile;
+	rivFile.open("rivLine.txt", std::ios_base::app);
+	rivFile << endl;
+	rivFile << oldPoint.first << " " << oldPoint.second << " ";
+	rivFile.close();
+	system("PAUSE");
+}
+
 void Input::InputCheck()
 {
 	short W = GetKeyState('W') >> 15;
@@ -745,6 +749,17 @@ void Input::InputCheck()
 		if (M && (count2 == 0)) {
 			HUD::toggle_quests();
 			count2 = 20;
+		}
+		if ((GetKeyState(VK_LBUTTON) & 0x100) != 0) {
+			double xpos;
+			double ypos;
+			glfwGetCursorPos(GameWindow::window, &xpos, &ypos);
+			double mouseX = rHelper->camera->getX() + (xpos * map_zoom) * GameWindow::WINDOW_WIDTH_DP / 1300;
+			double mouseY = rHelper->camera->getY() + (ypos * map_zoom) * GameWindow::WINDOW_HEIGHT_DP / 700;
+			for (int i = 0; i < 10; i++) {
+				cout << "XPOS AND YPOS ARE " << mouseX << ", " << mouseY << endl;
+			}
+
 		}
 		if (P && (GetKeyState(VK_LBUTTON) & 0x100) != 0) {
 			add_point_to_file();
