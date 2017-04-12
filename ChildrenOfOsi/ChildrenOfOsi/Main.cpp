@@ -68,6 +68,13 @@
 
 #include "QuestManager.h"
 
+#define _CRTDBG_MAP_ALLOC
+#include <crtdbg.h>
+#ifdef _DEBUG
+#define DEBUG_NEW new(_NORMAL_BLOCK, __FILE__, __LINE__)
+#define new DEBUG_NEW
+#endif
+
 using namespace std;
 
 
@@ -89,9 +96,6 @@ std::mutex mu;
 void FPS(bool b);
 void GAMEPLAY_LOOP(QuadTree* _Quadtree);
 
-//bool collide(WorldObj* recA, WorldObj* recB);
-//void Darion_Ian_Test();
-
 bool lineCollision(Line l1, Line l2);
 /// Helper function passed to thread to set file. Param is a tuple, first being the Texture* to work on, and second being the param needed to call setFile().
 void set_file_with_thread(std::pair<Texture*, pair<string, int>>* p_tuple) {
@@ -103,6 +107,7 @@ int main() {
 	QuadTree* collideTree = new QuadTree(0, screen);
 	GameWindow::init();		
 	GAMEPLAY_LOOP(collideTree);
+
 
 	return 0;
 }
@@ -1319,8 +1324,18 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	int count = 0;
 	int state = 0;
 	bool start = true;
+	float shouldExit = -3000;
 
 	while (GameWindow::isRunning()) {
+		//shouldExit++;
+	/*	for (int i = 0; i < 10; i++) {
+			cout << "SHOULD EXIT IS " << shouldExit << endl;
+
+		}*/
+		if (shouldExit > 0) {
+			_CrtDumpMemoryLeaks();
+			return;
+		}
 		if (start) {
 			gameplay_functions->play_sound("Play");
 			//gameplay_functions->play_sound("Walk");
