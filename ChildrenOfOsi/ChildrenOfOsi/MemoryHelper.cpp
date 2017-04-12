@@ -82,7 +82,7 @@ int MemoryHelper::new_Attack(WorldObj* s, int i) {
 		Attack* p = new(find_available_block(memManager::Attack_head, obj->getAtKey())) Attack(0, 0, true);
 		Containers::add_Attack(obj->getAtKey(), p);
 		obj->newAttack(i, p);
-		if (p->getNextAttack() != nullptr) {
+		if (p->getNextAttack() != nullptr && p->getNextAttack() != NULL) {
 			new_Attack(obj, obj->getAttackIndex(p->getNextAttack()));
 		}
 	}
