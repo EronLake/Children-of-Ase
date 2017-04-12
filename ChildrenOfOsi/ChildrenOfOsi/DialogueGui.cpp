@@ -119,7 +119,7 @@ void DialogueGui::drawGui()
   // GameWindow::drawSprite(responseBox2->getX(), responseBox2->getY(), responseBox2->getWidth(), responseBox2->getHeight(), responseBox2->sprite);
 	std::string message = DialogueController::getMessage();
 	int j = 0;
-	GameWindow::createText(message, 266, 303, 600, 80, black);
+	GameWindow::createText(message, 266, 303, 550, 80, black);
 	std::vector<std::string> options;
 	if (DialogueController::getState() == 1) {
 		options = DialogueController::getOptions();

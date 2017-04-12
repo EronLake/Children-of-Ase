@@ -273,7 +273,7 @@ void GameWindow::refresh()
   }
 
   for (int i = 0; i < text.size(); ++i) {
-	  RenderText(text[i].getText(), text[i].getX(), text[i].getY(), 1,text[i].getColor());
+	  RenderText(text[i].getText(), text[i].getX(), text[i].getY(), text[i].getWidth(), text[i].getHeight(), 1,text[i].getColor());
   }
   //RenderText(*osi::GameWindow::s, "This is sample text", 25.0f, 25.0f, 1.0f, glm::vec3(0.5, 0.8f, 0.2f));
   glBindVertexArray(0);
@@ -565,10 +565,11 @@ void GameWindow::setupFont(const std::string& fontName, unsigned int fontHeight)
 	glBindVertexArray(0);
 }
 
-void GameWindow::RenderText(std::string text, GLfloat x, GLfloat y, GLfloat scale, glm::vec3 color)
+void GameWindow::RenderText(std::string text, GLfloat x, GLfloat y, GLfloat w, GLfloat h, GLfloat scale, glm::vec3 color)
 {
 	y = WINDOW_HEIGHT_DP - y-18;
 	GLfloat lineStart = x;
+	w = w + x;
 
   glUseProgram(GameWindow::fontShaderProgramId);
 	glUniform3f(glGetUniformLocation(fontShaderProgramId, "textColor"), color.x, color.y, color.z);
@@ -579,7 +580,7 @@ void GameWindow::RenderText(std::string text, GLfloat x, GLfloat y, GLfloat scal
 	std::string::const_iterator c;
 	for (c = text.begin(); c != text.end(); c++) {
 		Character ch = Characters[*c];
-		if (*c == '\n' || ((*c == ' ')&&(x>750))) {
+		if (*c == '\n' || ((*c == ' ')&&(x>w))) {
 			if (*c==' ' || *c=='_')y -= 18 * scale;
 			x = lineStart;
 			y -= (ch.Size.y + ch.Bearing.y) * scale;

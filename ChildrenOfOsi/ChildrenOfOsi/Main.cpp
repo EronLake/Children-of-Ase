@@ -1174,11 +1174,11 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	Action* test_ally = new Action(nullptr, nullptr, nullptr, 10, 1, "Create Alliance", "execute_train");
 	Action* test_train = new Action(nullptr, nullptr, nullptr, 10, 1, "Train", "execute_train");
 	
-	RelPrecon* prec = new RelPrecon("Affinity", "lower", 60);
-	RelPost* post = new RelPost("Strength", 10);
-	RelPrecon* prec1 = new RelPrecon("Affinity", "lower", 30);
-	RelPost* post1 = new RelPost("Strength", 15);
-	RelPost* post2 = new RelPost("Affinity", 15);
+	RelPrecon* prec = new RelPrecon(Preconditions::AFF, 60);
+	RelPost* post = new RelPost(Postcondition::STR, 10);
+	RelPrecon* prec1 = new RelPrecon(Preconditions::AFF, 30);
+	RelPost* post1 = new RelPost(Postcondition::STR, 15);
+	RelPost* post2 = new RelPost(Postcondition::AFF, 15);
 
 	test_ally->req_preconds.push_back(std::make_shared<RelPrecon>(*prec));
 	test_ally->succ_postconds.push_back(std::make_shared<RelPost>(*post));
