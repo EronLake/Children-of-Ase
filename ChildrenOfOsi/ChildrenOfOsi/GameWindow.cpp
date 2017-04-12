@@ -632,7 +632,13 @@ void GameWindow::RenderText(std::string text, GLfloat x, GLfloat y, GLfloat scal
   glBindTexture(GL_TEXTURE_2D, 0);
 }
 
-void GameWindow::windowResizeCallback(GLFWwindow *window, int width, int height)
+/**
+ * Callback function for whenever the window is resized: ensures that the
+ * viewport alwyas fills the window. 
+ * 
+ * Param window: the window being resized
+ */
+void GameWindow::windowResizeCallback(GLFWwindow *window, int, int)
 {
   glfwGetFramebufferSize(window, &GameWindow::windowWidthPx, &GameWindow::windowHeightPx);
   glViewport(0, 0, GameWindow::windowWidthPx, GameWindow::windowHeightPx);

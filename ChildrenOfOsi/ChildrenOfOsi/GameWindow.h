@@ -109,7 +109,6 @@ struct GameWindow
   ~GameWindow() = delete;
 
   static glm::vec2 dpCoordToGL(float, float);
-  static glm::vec2 dpDimensionsToGL(float, float);
 
   static void setupWindow();
   static GLuint setupShaders(const std::string&, const std::string&);
