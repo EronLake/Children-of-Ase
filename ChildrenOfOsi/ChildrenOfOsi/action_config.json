@@ -11,7 +11,29 @@
     "pride": 0,
     "recklessness": 0,
     "extroversion": 0,
-    "greed": 0
+    "greed": 0,
+	"req_preconds": {
+		"1" : {
+			"general_type": "relationship",
+			"rel_type": "Strength",
+			"rel_bound": "upper",
+			"desired_rel_val": 80
+		}
+	},
+	"succ_postconds": {
+		"1" : {
+			"general_type": "relationship",
+			"rel_type": "Strength",
+			"utility": 5
+		}
+	},
+	"fail_postconds": {
+		"1" : {
+			"general_type": "relationship",
+			"rel_type": "Strength",
+			"utility": -2
+		}
+	}
   },
   "fight_bandits": {
     "name": "fight_bandits",

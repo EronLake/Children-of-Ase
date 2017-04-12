@@ -1173,8 +1173,8 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	RelPrecon* prec = new RelPrecon("Strength", "upper", 80);
 	RelPost* post = new RelPost("Strength", 80);
 
-	test_train->req_preconds.push_back(std::make_shared<RelPrecon>(*prec));
-	test_train->succ_postconds.push_back(std::make_shared<RelPost>(*post));
+	//test_train->req_preconds.push_back(std::make_shared<RelPrecon>(*prec));
+	//test_train->succ_postconds.push_back(std::make_shared<RelPost>(*post));
 
 	AiController->hero_planners[YEMOJA]->set_current_action(test_train);
 
