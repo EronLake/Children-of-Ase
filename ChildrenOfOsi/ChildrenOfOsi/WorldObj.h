@@ -22,6 +22,8 @@ class WorldObj
 	  offset_x2 = 0.0;
 	  offset_y1 = 0.0;
 	  offset_y2 = 0.0;
+	  width = 0;
+	  height = 0;
   };
 
   WorldObj(Vector2f p_topLeft, float p_width, float p_height):
@@ -44,6 +46,8 @@ class WorldObj
 	  offset_x2 = 0.0;
 	  offset_y1 = 0.0;
 	  offset_y2 = 0.0;
+	  width = 0;
+	  height = 0;
   }
 
   virtual ~WorldObj() = default;
