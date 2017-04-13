@@ -131,10 +131,10 @@ void DialogueGui::drawGui()
 			if ( options.size() <= (DialogueController::scroll_control + i))
 				break;
 			if (DialogueController::getSelect() == i) {
-				GameWindow::createText(options[DialogueController::scroll_control + i], 292, 390 + (18 * i), 544, 45, red);
+				GameWindow::createText(replace_str_char(options[DialogueController::scroll_control + i], "_", ' '), 292, 390 + (18 * i), 544, 45, red);
 			}
 			else {
-				GameWindow::createText(options[DialogueController::scroll_control + i], 292, 390 + (18 * i), 544, 45, black);
+				GameWindow::createText(replace_str_char(options[DialogueController::scroll_control + i], "_", ' '), 292, 390 + (18 * i), 544, 45, black);
 			}
 
 		}
@@ -150,12 +150,32 @@ void DialogueGui::drawGui()
 			if (options.size() <= (DialogueController::scroll_control + i))
 				break;
 			if (DialogueController::getSelect() == i) {
-			GameWindow::createText(options[DialogueController::scroll_control + i], 292, 390 + (18 * i), 544, 45, red);
+			GameWindow::createText(replace_str_char(options[DialogueController::scroll_control + i], "_",' '), 292, 390 + (18 * i), 544, 45, red);
 			}
 			else {
-				GameWindow::createText(options[DialogueController::scroll_control + i], 292, 390 + (18 * i), 544, 45, black);
+				GameWindow::createText(replace_str_char(options[DialogueController::scroll_control + i], "_", ' '), 292, 390 + (18 * i), 544, 45, black);
 			}
 
 		}
 	}
+}
+
+std::string DialogueGui::remove_chars_from_string(string &str, char* charsToRemove) {
+	for (unsigned int i = 0; i < strlen(charsToRemove); ++i) {
+		str.erase(remove(str.begin(), str.end(), charsToRemove[i]), str.end());
+	}
+	return str;
+}
+
+std::string DialogueGui::replace_str_char(string str, const string& replace, char ch) {
+
+	// set our locator equal to the first appearance of any character in replace
+	size_t found = str.find_first_of(replace);
+
+	while (found != string::npos) { // While our position in the sting is in range.
+		str[found] = ch; // Change the character at position.
+		found = str.find_first_of(replace, found + 1); // Relocate again.
+	}
+
+	return str; // return our new string.
 }

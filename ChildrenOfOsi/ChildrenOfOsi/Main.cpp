@@ -1152,15 +1152,23 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 
 	staticRec->setName("Yemoja");
 	staticRec->setInteractable(true);
-	//staticRec->setPersonality(30, 70, 80, 60, 30, 30, 50);
+	//staticRec->setPersonality(30, 70, 80, 60, 30, 30, 50);// uncommented this
+	
+	//staticRec->rel[OYA]->setAffinity(60);// uncommented this
+	//staticRec->rel[OYA]->setNotoriety(40);// uncommented this
+	//staticRec->rel[OYA]->setStrength(80);// uncommented this
 
-	//staticRec->rel[OYA]->setAffinity(60);
-	//staticRec->rel[OYA]->setNotoriety(40);
-	//staticRec->rel[OYA]->setStrength(80);
+	//staticRec->rel[SHANGO]->setAffinity(60);//added this
+	//staticRec->rel[SHANGO]->setNotoriety(40);//added this
+	//staticRec->rel[SHANGO]->setStrength(80);//added this
 
-	//staticRec->rel[OYA]->setAffEstimate(60);
-	//staticRec->rel[OYA]->setNotorEstimate(70);
-	//staticRec->rel[OYA]->setStrEstimate(40);
+	//staticRec->rel[OYA]->setAffEstimate(60);// uncommented this
+	//staticRec->rel[OYA]->setNotorEstimate(70);// uncommented this
+	//staticRec->rel[OYA]->setStrEstimate(40);// uncommented this
+
+	//staticRec->rel[SHANGO]->setAffEstimate(60);//added this
+	//staticRec->rel[SHANGO]->setNotorEstimate(70);//added this
+	//staticRec->rel[SHANGO]->setStrEstimate(40);//added this
 
 
 	*oya = *staticRec;
