@@ -1,18 +1,15 @@
 {
-    "Tag": {
-        "Tag_1": {
-            "name": "Info_About_Other_Heroes",
+        "Info_About_Other_Heroes": {
             "topics": {
                 "topic_1": "Ask_About_Oshosi",
                 "topic_2": "Ask_About_Ogun",
                 "topic_3": "Ask_About_Oya",
-				"topic_4": "Ask_About_Relationship_Oshosi",
-				"topic_5": "Ask_About_Relationship_Ogun",
-				"topic_6": "Ask_About_Relationship_Oya"
+				"topic_4": "Ask_About_Relationship_With_Oshosi",
+				"topic_5": "Ask_About_Relationship_With_Ogun",
+				"topic_6": "Ask_About_Relationship_With_Oya"
             }
         },
-        "Tag_2": {
-            "name": "Getting_To_Know_Each_Other",
+        "Getting_To_Know_Each_Other": {
 			"topics": {
                 "topic_1": "Boast",
                 "topic_2": "Ask_Name",
@@ -20,29 +17,25 @@
             }
         },
 
-        "Tag_3": {
-            "name": "Recent_Memories",
+        "Recent_Memories": {
 			"topics": {
                 "topic_1": "Ask_Memories"
             }
         },
 
-        "Tag_4": {
-            "name": "Talk_About_Event",
+        "Talk_About_Event": {
 			"topics": {
                 "topic_1": "Ask_Specific_Events"
             }
         },
 
-        "Tag_5": {
-            "name": "Ask_About_Alliance",
+        "Ask_About_Alliance": {
 			"topics": {
                 "topic_1": "Ask_To_Form_Alliance"
             }
         },
 
-        "Tag_6": {
-            "name": "Talk_About_Affinity",
+        "Talk_About_Affinity": {
 			"topics": {
                 "topic_1": "Ask_About_Relationship_With_Oshosi",
 				"topic_2": "Ask_About_Relationship_With_Ogun",
@@ -70,8 +63,7 @@
             }
         },
 
-        "Tag_7": {
-            "name": "Talk_About_Notoriety",
+        "Talk_About_Notoriety": {
 			"topics": {
                 "topic_1": "Ask_About_Relationship_With_Oshosi",
 				"topic_2": "Ask_About_Relationship_With_Ogun",
@@ -98,8 +90,7 @@
             }
         },
 
-        "Tag_8": {
-            "name": "Talk_About_Strength",
+        "Talk_About_Strength": {
 			"topics": {
                 "topic_1": "Ask_About_Relationship_With_Oshosi",
 				"topic_2": "Ask_About_Relationship_With_Ogun",
@@ -115,8 +106,7 @@
             }
         },
 
-        "Tag_9": {
-            "name": "Talk_About_Action",
+        "Talk_About_Action": {
 			"topics": {
                 "topic_1": "Move_To_Conquer_Oshosi",
 				"topic_2": "Move_To_Conquer_Ogun",
@@ -139,5 +129,5 @@
 				"topic_19": "Move_To_Train"
             }
         }
-    }
+    
 }

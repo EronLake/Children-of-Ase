@@ -21,15 +21,15 @@ int MemoryHelper::store_hero(std::string key, float x, float y, bool col) {
 	{
 		name = YEMOJA;
 	}
-	else if (key == "Oshosi")
+	else if (key == "Oya")
 	{
 		name = OYA;
 	}
-	else if (key == "Yemoja")
+	else if (key == "Oshosi")
 	{
 		name = OSHOSI;
 	}
-	else if (key == "Yemoja")
+	else if (key == "Ogun")
 	{
 		name = OGUN;
 	}
@@ -197,9 +197,11 @@ int MemoryHelper::store_conv_point(std::string key, float x, float y, bool col) 
 	
 	ConversationPoint* conv_point = new(find_available_block(memManager::conv_point_head, key)) ConversationPoint();
 	Containers::add_conv_point(key, conv_point);
+	//print addresses to file to check for proper storage
+	/*
 	ofs.open("dialog_template_output.txt", std::ofstream::out | std::ofstream::app);
 	ofs << "store_check: " << conv_point << "key_check: "<< key << std::endl;
-	ofs.close();
+	ofs.close();*/
 	return 0;
 }
 

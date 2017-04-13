@@ -411,10 +411,16 @@ int Movement::attack(WorldObj* obj) {
 											if (!friendly)s->setCurrentEnemy(s2);
 										}
 									}
+
 									if (!friendly) {
 										a->second->Hit(npc);
 										cout << "THE TARGET'S HP IS NOW ******** " << npc->getHealth() << endl;
 										manager->createTaskForAudio("PlaySound", "SOUND", "SFX/hit.wav");
+										// If target is dead, remove from village and targeting
+										if (npc->getHealth() <= 0) {
+											if (Soldier *sold = CheckClass::isSoldier(liv)) {
+											}
+										}
 									} else {
 										a->second->addHit(npc);
 									}
@@ -423,6 +429,10 @@ int Movement::attack(WorldObj* obj) {
 								a->second->Hit(liv);
 								manager->createTaskForAudio("PlaySound", "SOUND", "SFX/hit.wav");
 								cout << "THE TARGET'S HP IS NOW ******** " << liv->getHealth() << endl;
+								if (liv->getHealth() <= 0) {
+									if (Soldier *sold = CheckClass::isSoldier(liv)) {
+									}
+								}
 								if (a->second->getDestroy())a->second->setDuration(0);
 								liv->sprite.unlockAnimation();
 								manager->createTaskWithObj("Hurt", "DRAW", liv);

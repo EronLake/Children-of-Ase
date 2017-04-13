@@ -46,6 +46,8 @@ public:
 
     vector<pair<Action*,int>> get_quests();
 
+	void decrement_quest_time();
+
 private:
 
 	std::unordered_map<Action*,int> quests;

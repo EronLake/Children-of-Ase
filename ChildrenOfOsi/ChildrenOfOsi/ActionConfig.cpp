@@ -82,41 +82,37 @@ void ActionConfig::import_conditions(Json::Value::iterator itr, std::string name
 
 	for (auto it = (*itr)["req_preconds"].begin(); it != (*itr)["req_preconds"].end(); it++)
 	{
-		if ((*it)["general_type"] == "relationship")
+		if ((*it)["general_type"].asInt() == 0)
 		{
-			RelPrecon* temp_prec  = new RelPrecon(	(*it)["rel_type"].asString(), 
-													(*it)["rel_bound"].asString(), 
-													(*it)["desired_rel_val"].asInt());
+			RelPrecon* temp_prec  = new RelPrecon((*it)["rel_type"].asInt(), (*it)["desired_rel_val"].asInt());
 
 		Containers::action_table[name]->req_preconds.push_back(std::make_shared<RelPrecon>(*temp_prec));
 		}
-		else if ((*it)["general_type"] == "relationship_estimate")
+		else if ((*it)["general_type"].asInt() == 1)
 		{
-			RelEstimPrerec* temp_prec = new RelEstimPrerec(	(*it)["rel_type"].asString(),
-															(*it)["rel_bound"].asString(),
-															(*it)["desired_rel_val"].asInt());
+			RelEstimPrerec* temp_prec = new RelEstimPrerec((*it)["rel_type"].asInt(), (*it)["desired_rel_val"].asInt());
 
 			Containers::action_table[name]->req_preconds.push_back(std::make_shared<RelEstimPrerec>(*temp_prec));
 		}
-		else if ((*it)["general_type"] == "time")
+		else if ((*it)["general_type"].asInt() == 2)
 		{
 			TimePrerec* temp_prec = new TimePrerec((*it)["time_rec"].asInt());
 
 			Containers::action_table[name]->req_preconds.push_back(std::make_shared<TimePrerec>(*temp_prec));
 		}
-		else if ((*it)["general_type"] == "memory_number")
+		else if ((*it)["general_type"].asInt() == 3)
 		{
 			MemoryNumPrerec* temp_prec = new MemoryNumPrerec((*it)["rec_num_of_mem"].asInt());
 
 			Containers::action_table[name]->req_preconds.push_back(std::make_shared<MemoryNumPrerec>(*temp_prec));
 		}
-		else if ((*it)["general_type"] == "memory")
+		else if ((*it)["general_type"].asInt() == 4)
 		{
 			MemPrerec* temp_prec = new MemPrerec((*it)["rec_mem"].asString());
 
 			Containers::action_table[name]->req_preconds.push_back(std::make_shared<MemPrerec>(*temp_prec));
 		}
-		else if ((*it)["general_type"] == "state")
+		else if ((*it)["general_type"].asInt() == 5)
 		{
 			StatePrerec* temp_prec = new StatePrerec();
 
@@ -150,19 +146,19 @@ void ActionConfig::import_post_conditions(Json::Value::iterator itr, std::string
 
 	for (auto it = (*itr)[which_post].begin(); it != (*itr)[which_post].end(); it++)
 	{
-		if ((*it)["general_type"] == "relationship")
+		if ((*it)["general_type"].asInt() == 0)
 		{
-			RelPost* temp_post = new RelPost((*it)["rel_type"].asString(),(*it)["utility"].asInt());
+			RelPost* temp_post = new RelPost((*it)["rel_type"].asInt(),(*it)["utility"].asInt());
 
 			postconds->push_back(std::make_shared<RelPost>(*temp_post));
 		}
-		else if ((*it)["general_type"] == "relationship_estimate")
+		else if ((*it)["general_type"].asInt() == 1)
 		{
-			RelEstimPost* temp_post = new RelEstimPost((*it)["rel_type"].asString(), (*it)["utility"].asInt());
+			RelEstimPost* temp_post = new RelEstimPost((*it)["rel_type"].asInt(), (*it)["utility"].asInt());
 
 			postconds->push_back(std::make_shared<RelEstimPost>(*temp_post));
 		}
-		else if ((*it)["general_type"] == "state")
+		else if ((*it)["general_type"].asInt() == 5)
 		{
 			StatePost* temp_post = new StatePost((*it)["utility"].asInt());
 

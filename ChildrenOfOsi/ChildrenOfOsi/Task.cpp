@@ -156,13 +156,12 @@ Task::Task(std::string _name, std::string _status, std::string _type, std::strin
 
 }
 
-Task::Task(std::string _name, std::string _status, std::string _type, std::vector<std::string> _topicVec, std::string _key)
+Task::Task(std::string _name, std::string _status, std::string _type, std::string _key)
 {
 	name = _name;
 	type = _type;
 	status = _status;
 	my_key = _key;
-	topicVec = _topicVec;
 
 }
 

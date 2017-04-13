@@ -36,10 +36,10 @@ std::vector<TextObj> GameWindow::text;
 
 struct Character
 {
-	GLuint TextureID;   // ID handle of the glyph texture
-	glm::ivec2 Size;    // Size of glyph
-	glm::ivec2 Bearing;  // Offset from baseline to left/top of glyph
-	GLuint Advance;    // Horizontal offset to advance to next glyph
+  GLuint TextureID;   // ID handle of the glyph texture
+  glm::ivec2 Size;    // Size of glyph
+  glm::ivec2 Bearing;  // Offset from baseline to left/top of glyph
+  GLuint Advance;    // Horizontal offset to advance to next glyph
 };
 
 std::map<GLchar, Character> Characters;
@@ -164,7 +164,7 @@ void GameWindow::drawSprite(float x, float y, float width, float height, Sprite 
   glEnableVertexAttribArray(1);
   glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 8 * sizeof(GLfloat), (GLvoid *) (6 * sizeof(GLfloat)));
   glEnableVertexAttribArray(2);
-  
+
   glBindVertexArray(0);
 
   textures.push_back(sp.getTexture().getId());
@@ -190,7 +190,7 @@ void GameWindow::drawSprite(float x, float y, float width, float height, Sprite 
  */
 void GameWindow::drawText(const std::string& text, const std::string& fontName, float x, float y, float fieldWidth, float fieldHeight, glm::ivec3 color)
 {
-	// Return immediately if arguments are invalid
+  // Return immediately if arguments are invalid
   if(GameWindow::fontCharacters.find(fontName) == GameWindow::fontCharacters.end()) return;
   else if(fieldWidth <= 0.0F || fieldHeight <= 0.0F) return;
 
@@ -226,7 +226,7 @@ void GameWindow::drawText(const std::string& text, const std::string& fontName, 
 
     //std::////cout << "Glyph coordinates: (" << chX << ", " << chY << ")" << std::endl;
     //std::////cout << "Glyph dimensions: (" << chW << ", " << chH << ")" << std::endl;
-    
+
     GLfloat vertices[6][4] = {
       {chX,       chY + chH, 0.0F, 0.0F}, // Bottom left
       {chX,       chY,       0.0F, 1.0F}, // Top left
@@ -272,8 +272,8 @@ void GameWindow::refresh()
     glDeleteBuffers(1, &elementBufferObjectId[i]);
   }
 
-  for (int i = 0; i < text.size(); ++i) {
-	  RenderText(text[i].getText(), text[i].getX(), text[i].getY(), 1,text[i].getColor());
+  for(int i = 0; i < text.size(); ++i) {
+    RenderText(text[i].getText(), text[i].getX(), text[i].getY(), text[i].getWidth(), text[i].getHeight(), 1, text[i].getColor());
   }
   //RenderText(*osi::GameWindow::s, "This is sample text", 25.0f, 25.0f, 1.0f, glm::vec3(0.5, 0.8f, 0.2f));
   glBindVertexArray(0);
@@ -307,37 +307,35 @@ glm::vec2 GameWindow::dpCoordToGL(float x, float y)
 }
 
 /**
- * 
- */
-glm::vec2 GameWindow::dpDimensionsToGL(float x, float y)
-{
-  glm::vec2 asCoords = GameWindow::dpCoordToGL(x, y);
-  return {asCoords.x + 1, asCoords.y + 1};
-}
-
-/**
- * Handles the setup of the window itself when initializing. The tasks of this
- * function include providing GLFW the necessary window hints; determining the
- * dimensions at which the window will display; and setting up GLEW.
- */
+* Handles the setup of the window itself when initializing. The tasks of this
+* function include providing GLFW the necessary window hints; determining the
+* dimensions at which the window will display; and setting up GLEW.
+*/
 void GameWindow::setupWindow()
 {
   glfwInit();
   glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
   glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
   glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
-  glfwWindowHint(GLFW_RESIZABLE, GL_FALSE);
+  glfwWindowHint(GLFW_RESIZABLE, GL_TRUE);
 
   GameWindow::primaryMonitor = glfwGetPrimaryMonitor();
-  GameWindow::window = glfwCreateWindow(1280, 720, "Children of Ase",
-    (START_FULLSCREEN) ? GameWindow::primaryMonitor : nullptr,
-    nullptr);
+  GameWindow::monitorWidthPx = glfwGetVideoMode(GameWindow::primaryMonitor)->width;
+  GameWindow::monitorHeightPx = glfwGetVideoMode(GameWindow::primaryMonitor)->height;
+  GameWindow::window = glfwCreateWindow(GameWindow::DEFAULT_WINDOW_WIDTH, GameWindow::DEFAULT_WINDOW_HEIGHT,
+    u8"Children of \x00C0\x1E63\x1EB9",
+    (START_FULLSCREEN) ? GameWindow::primaryMonitor : nullptr, nullptr);
+
   if(window == nullptr) {
     glfwTerminate();
     throw WindowingError("Failed to create window.");
   }
 
   glfwMakeContextCurrent(window);
+  glfwSetWindowSizeLimits(window, 960, 540, GLFW_DONT_CARE, GLFW_DONT_CARE);
+  glfwSetWindowAspectRatio(window, 16, 9);
+  glfwSetWindowSizeCallback(window, windowResizeCallback);
+  glfwSetInputMode(window, GLFW_CURSOR, (MOUSE_VISIBLE) ? GLFW_CURSOR_NORMAL : GLFW_CURSOR_HIDDEN);
 
   glewExperimental = GL_TRUE;
   if(glewInit() != GLEW_OK) {
@@ -345,11 +343,8 @@ void GameWindow::setupWindow()
     throw WindowingError("Failed to initialize GLEW.");
   }
 
-  GameWindow::monitorWidthPx = glfwGetVideoMode(GameWindow::primaryMonitor)->width;
-  GameWindow::monitorHeightPx = glfwGetVideoMode(GameWindow::primaryMonitor)->height;
-
   double aspectRatio = static_cast<double>(GameWindow::monitorWidthPx) / static_cast<double>(GameWindow::monitorHeightPx);
-  if(aspectRatio == (16.0 / 9.0)) {
+  if(!START_FULLSCREEN || aspectRatio == (16.0 / 9.0)) {
     glfwGetFramebufferSize(window, &GameWindow::windowWidthPx, &GameWindow::windowHeightPx);
     glViewport(0, 0, GameWindow::windowWidthPx, GameWindow::windowHeightPx);
   }
@@ -504,41 +499,41 @@ void GameWindow::setupFont(const std::string& fontName, unsigned int fontHeight)
 {
   glUseProgram(GameWindow::fontShaderProgramId);
   glm::mat4 projection = glm::ortho(0.0f, static_cast<GLfloat>(WINDOW_WIDTH_DP), 0.0f, static_cast<GLfloat>(WINDOW_HEIGHT_DP));
-	glUniformMatrix4fv(glGetUniformLocation(fontShaderProgramId, "projection"), 1, GL_FALSE, glm::value_ptr(projection));
+  glUniformMatrix4fv(glGetUniformLocation(fontShaderProgramId, "projection"), 1, GL_FALSE, glm::value_ptr(projection));
 
-	FT_Library fontLib;
-	if (FT_Init_FreeType(&fontLib))
-		throw FontInitializationError("ERROR::FREETYPE: Could not initialize FreeType Library");
+  FT_Library fontLib;
+  if(FT_Init_FreeType(&fontLib))
+    throw FontInitializationError("ERROR::FREETYPE: Could not initialize FreeType Library");
 
-	FT_Face face;
-	if (FT_New_Face(fontLib, (osi::FONTS_PATH + fontName + ".ttf").c_str(), 0, &face))
+  FT_Face face;
+  if(FT_New_Face(fontLib, (osi::FONTS_PATH + fontName + ".ttf").c_str(), 0, &face))
     throw FontInitializationError("ERROR::FREETYPE: Failed to load font");
 
-	FT_Set_Pixel_Sizes(face, 0, 16);
+  FT_Set_Pixel_Sizes(face, 0, 16);
 
-	glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
+  glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
 
-	for (GLchar ch = '\x00'; ch >= '\x00' && ch <= '\x7F'; ++ch) {
-		if (FT_Load_Char(face, ch, FT_LOAD_RENDER)) {
-			throw FontInitializationError(std::string("ERROR::FREETYTPE: Failed to load glyph: '") + ch + "'");
-			continue;
-		}
+  for(GLchar ch = '\x00'; ch >= '\x00' && ch <= '\x7F'; ++ch) {
+    if(FT_Load_Char(face, ch, FT_LOAD_RENDER)) {
+      throw FontInitializationError(std::string("ERROR::FREETYTPE: Failed to load glyph: '") + ch + "'");
+      continue;
+    }
 
     GLuint textureId;
-		glGenTextures(1, &textureId);
-		glBindTexture(GL_TEXTURE_2D, textureId);
-		glTexImage2D(GL_TEXTURE_2D, 0, GL_RED,
-			face->glyph->bitmap.width, face->glyph->bitmap.rows,
-			0, GL_RED, GL_UNSIGNED_BYTE,
-			face->glyph->bitmap.buffer
-		);
+    glGenTextures(1, &textureId);
+    glBindTexture(GL_TEXTURE_2D, textureId);
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_RED,
+      face->glyph->bitmap.width, face->glyph->bitmap.rows,
+      0, GL_RED, GL_UNSIGNED_BYTE,
+      face->glyph->bitmap.buffer
+    );
 
     GLfloat borderColor[] = {0.0F, 0.0F, 0.0F, 0.0F};
     glTexParameterfv(GL_TEXTURE_2D, GL_TEXTURE_BORDER_COLOR, borderColor);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_BORDER);
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_BORDER);
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_BORDER);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 
     GameWindow::fontCharacters[fontName][ch] = {
       textureId,
@@ -548,82 +543,96 @@ void GameWindow::setupFont(const std::string& fontName, unsigned int fontHeight)
     };
 
     Character character = {
-			textureId,
-			glm::ivec2(face->glyph->bitmap.width, face->glyph->bitmap.rows),
-			glm::ivec2(face->glyph->bitmap_left, face->glyph->bitmap_top),
-			face->glyph->advance.x
-		};
-		Characters.insert(std::pair<GLchar, Character>(ch, character));
-	}
+      textureId,
+      glm::ivec2(face->glyph->bitmap.width, face->glyph->bitmap.rows),
+      glm::ivec2(face->glyph->bitmap_left, face->glyph->bitmap_top),
+      face->glyph->advance.x
+    };
+    Characters.insert(std::pair<GLchar, Character>(ch, character));
+  }
 
-	glBindTexture(GL_TEXTURE_2D, 0);
-	FT_Done_Face(face);
-	FT_Done_FreeType(fontLib);
+  glBindTexture(GL_TEXTURE_2D, 0);
+  FT_Done_Face(face);
+  FT_Done_FreeType(fontLib);
 
-	glGenVertexArrays(1, &VAO);
-	glGenBuffers(1, &VBO);
+  glGenVertexArrays(1, &VAO);
+  glGenBuffers(1, &VBO);
 
-	glBindVertexArray(VAO);
-	glBindBuffer(GL_ARRAY_BUFFER, VBO);
-	glBufferData(GL_ARRAY_BUFFER, sizeof(GLfloat) * 6 * 4, NULL, GL_DYNAMIC_DRAW);
+  glBindVertexArray(VAO);
+  glBindBuffer(GL_ARRAY_BUFFER, VBO);
+  glBufferData(GL_ARRAY_BUFFER, sizeof(GLfloat) * 6 * 4, NULL, GL_DYNAMIC_DRAW);
 
-	glEnableVertexAttribArray(0);
-	glVertexAttribPointer(0, 4, GL_FLOAT, GL_FALSE, 4 * sizeof(GLfloat), 0);
+  glEnableVertexAttribArray(0);
+  glVertexAttribPointer(0, 4, GL_FLOAT, GL_FALSE, 4 * sizeof(GLfloat), 0);
 
-	glBindBuffer(GL_ARRAY_BUFFER, 0);
-	glBindVertexArray(0);
+  glBindBuffer(GL_ARRAY_BUFFER, 0);
+  glBindVertexArray(0);
 }
 
-void GameWindow::RenderText(std::string text, GLfloat x, GLfloat y, GLfloat scale, glm::vec3 color)
+void GameWindow::RenderText(std::string text, GLfloat x, GLfloat y, GLfloat w, GLfloat h, GLfloat scale, glm::vec3 color)
 {
-	y = WINDOW_HEIGHT_DP - y-18;
-	GLfloat lineStart = x;
+  y = WINDOW_HEIGHT_DP - y - 18;
+  GLfloat lineStart = x;
+  w = w + x;
 
   glUseProgram(GameWindow::fontShaderProgramId);
-	glUniform3f(glGetUniformLocation(fontShaderProgramId, "textColor"), color.x, color.y, color.z);
-	glActiveTexture(GL_TEXTURE0);
-	glBindVertexArray(VAO);
+  glUniform3f(glGetUniformLocation(fontShaderProgramId, "textColor"), color.x, color.y, color.z);
+  glActiveTexture(GL_TEXTURE0);
+  glBindVertexArray(VAO);
 
-	// Iterate through all characters
-	std::string::const_iterator c;
-	for (c = text.begin(); c != text.end(); c++) {
-		Character ch = Characters[*c];
-		if (*c == '\n' || ((*c == ' ')&&(x>750)) || ((*c == '_') && (x>750))) {
-			if (*c==' ' || *c=='_')y -= 18 * scale;
-			x = lineStart;
-			y -= (ch.Size.y + ch.Bearing.y) * scale;
-		}
-		if (*c == '_' || *c == ' ') {
-			x+= (ch.Bearing.x * scale);
-			x += (ch.Advance >> 6) * scale;
-		} else if (*c != '\n') {
-			GLfloat xpos = x + ch.Bearing.x * scale;
-			GLfloat ypos = y - (ch.Size.y - ch.Bearing.y) * scale;
-			GLfloat w = ch.Size.x * scale;
-			GLfloat h = ch.Size.y * scale;
-			// Update VBO for each character
-			GLfloat vertices[6][4] = {
-				{ xpos,     ypos + h,   0.0, 0.0 },
-				{ xpos,     ypos,       0.0, 1.0 },
-				{ xpos + w, ypos,       1.0, 1.0 },
+  // Iterate through all characters
+  std::string::const_iterator c;
+  for(c = text.begin(); c != text.end(); c++) {
+    Character ch = Characters[*c];
+    if(*c == '\n' || ((*c == ' ') && (x > w))) {
+      if(*c == ' ' || *c == '_')y -= 18 * scale;
+      x = lineStart;
+      y -= (ch.Size.y + ch.Bearing.y) * scale;
+    }
+    if(*c == ' ') {
+      x += (ch.Bearing.x * scale);
+      x += (ch.Advance >> 6) * scale;
+    }
+    else if(*c != '\n') {
+      GLfloat xpos = x + ch.Bearing.x * scale;
+      GLfloat ypos = y - (ch.Size.y - ch.Bearing.y) * scale;
+      GLfloat w = ch.Size.x * scale;
+      GLfloat h = ch.Size.y * scale;
+      // Update VBO for each character
+      GLfloat vertices[6][4] = {
+        { xpos,     ypos + h,   0.0, 0.0 },
+        { xpos,     ypos,       0.0, 1.0 },
+        { xpos + w, ypos,       1.0, 1.0 },
 
-				{ xpos,     ypos + h,   0.0, 0.0 },
-				{ xpos + w, ypos,       1.0, 1.0 },
-				{ xpos + w, ypos + h,   1.0, 0.0 }
-			};
-			// Render glyph texture over quad
-			glBindTexture(GL_TEXTURE_2D, ch.TextureID);
-			// Update content of VBO memory
-			glBindBuffer(GL_ARRAY_BUFFER, VBO);
-			glBufferSubData(GL_ARRAY_BUFFER, 0, sizeof(vertices), vertices); // Be sure to use glBufferSubData and not glBufferData
+        { xpos,     ypos + h,   0.0, 0.0 },
+        { xpos + w, ypos,       1.0, 1.0 },
+        { xpos + w, ypos + h,   1.0, 0.0 }
+      };
+      // Render glyph texture over quad
+      glBindTexture(GL_TEXTURE_2D, ch.TextureID);
+      // Update content of VBO memory
+      glBindBuffer(GL_ARRAY_BUFFER, VBO);
+      glBufferSubData(GL_ARRAY_BUFFER, 0, sizeof(vertices), vertices); // Be sure to use glBufferSubData and not glBufferData
 
-			glBindBuffer(GL_ARRAY_BUFFER, 0);
-			// Render quad
-			glDrawArrays(GL_TRIANGLES, 0, 6);
-			// Now advance cursors for next glyph (note that advance is number of 1/64 pixels)
-			x += (ch.Advance >> 6) * scale; // Bitshift by 6 to get value in pixels (2^6 = 64 (divide amount of 1/64th pixels by 64 to get amount of pixels))
-		}
-	}
-	glBindVertexArray(0);
-	glBindTexture(GL_TEXTURE_2D, 0);
+      glBindBuffer(GL_ARRAY_BUFFER, 0);
+      // Render quad
+      glDrawArrays(GL_TRIANGLES, 0, 6);
+      // Now advance cursors for next glyph (note that advance is number of 1/64 pixels)
+      x += (ch.Advance >> 6) * scale; // Bitshift by 6 to get value in pixels (2^6 = 64 (divide amount of 1/64th pixels by 64 to get amount of pixels))
+    }
+  }
+  glBindVertexArray(0);
+  glBindTexture(GL_TEXTURE_2D, 0);
+}
+
+/**
+* Callback function for whenever the window is resized: ensures that the
+* viewport alwyas fills the window.
+*
+* Param window: the window being resized
+*/
+void GameWindow::windowResizeCallback(GLFWwindow *window, int, int)
+{
+  glfwGetFramebufferSize(window, &GameWindow::windowWidthPx, &GameWindow::windowHeightPx);
+  glViewport(0, 0, GameWindow::windowWidthPx, GameWindow::windowHeightPx);
 }

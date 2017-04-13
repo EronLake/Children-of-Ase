@@ -29,7 +29,7 @@ public:
 
 	Action choose_next_step(Action goal, vector<Action> goals);
 
-	EndStateList get_end_state_map() { return end_states; }
+	EndStateList* get_end_state_map() { return &end_states; }
 	vector<Action> get_end_states();
 	MilestoneList get_milestone_map() { return milestones; }
 	//vector<Action> get_milestones_for_goal(Action goal);

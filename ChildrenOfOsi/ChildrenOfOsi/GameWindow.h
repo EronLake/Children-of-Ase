@@ -68,9 +68,13 @@ struct GameWindow
   static void drawText(const std::string&, const std::string&, float, float, float, float, glm::ivec3);
   static void refresh();
 
-  static void RenderText(std::string text, GLfloat x, GLfloat y, GLfloat scale, glm::vec3 color);
+  static void RenderText(std::string text, GLfloat x, GLfloat y, GLfloat w, GLfloat h, GLfloat scale, glm::vec3 color);
 
   private:
+
+  static constexpr int DEFAULT_WINDOW_WIDTH = 1280;
+  static constexpr int DEFAULT_WINDOW_HEIGHT = 720;
+
   static const std::string STD_VERTEX_SHADER_PATH;
   static const std::string STD_FRAGMENT_SHADER_PATH;
   static const std::string FONT_VERTEX_SHADER_PATH;
@@ -105,11 +109,12 @@ struct GameWindow
   ~GameWindow() = delete;
 
   static glm::vec2 dpCoordToGL(float, float);
-  static glm::vec2 dpDimensionsToGL(float, float);
 
   static void setupWindow();
   static GLuint setupShaders(const std::string&, const std::string&);
   static void setupFont(const std::string&, unsigned int);
+
+  static void windowResizeCallback(GLFWwindow *, int, int);
 };
 
 class WindowingError: public std::runtime_error

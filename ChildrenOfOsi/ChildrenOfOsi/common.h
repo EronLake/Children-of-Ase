@@ -50,6 +50,7 @@ static int frame_count = 0;
 #define DEBUG 0
 #define MAP_EDITOR 0
 #define START_FULLSCREEN false
+#define MOUSE_VISIBLE true
 
 /*
 this variable allows the game to zoom and out
