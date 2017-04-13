@@ -73,70 +73,70 @@ vector<std::string> Action::preConditionsNeeded(Hero* o, Hero* h) {
 	vector<std::string> needs;
 	for (auto it = req_preconds.begin(); it != req_preconds.end(); ++it) {
 		if ((*it)->get_general_type()==Preconditions::REL) {
-			RelPrecon* bullshit= dynamic_cast<RelPrecon*>((*it).get());
-			if (bullshit->get_cost(o, h) > 0) {
+			RelPrecon* condition= dynamic_cast<RelPrecon*>((*it).get());
+			if (condition->get_cost(o, h) > 0) {
 				needs.push_back((*it)->get_type());
 			}
 		}
 		else if ((*it)->get_general_type() == Preconditions::REL_EST) {
-			RelEstimPrerec* bullshit = dynamic_cast<RelEstimPrerec*>((*it).get());
-			if (bullshit->get_cost(o, h) > 0) {
+			RelEstimPrerec* condition = dynamic_cast<RelEstimPrerec*>((*it).get());
+			if (condition->get_cost(o, h) > 0) {
 				needs.push_back((*it)->get_type());
 			}
 		}
 		else if ((*it)->get_general_type() == Preconditions::TIME) {
-			TimePrerec* bullshit = dynamic_cast<TimePrerec*>((*it).get());
-			if (bullshit->get_cost() > 0)needs.push_back((*it)->get_type());
+			TimePrerec* condition = dynamic_cast<TimePrerec*>((*it).get());
+			if (condition->get_cost() > 0)needs.push_back((*it)->get_type());
 		}
 		else if ((*it)->get_general_type() == Preconditions::MEM_NUM) {
-			MemoryNumPrerec* bullshit = dynamic_cast<MemoryNumPrerec*>((*it).get());
-			if (bullshit->get_cost(o->memories) > 0)needs.push_back((*it)->get_type());
+			MemoryNumPrerec* condition = dynamic_cast<MemoryNumPrerec*>((*it).get());
+			if (condition->get_cost(o->memories) > 0)needs.push_back((*it)->get_type());
 		}
 		else if ((*it)->get_general_type() == Preconditions::MEM) {
-			MemPrerec* bullshit = dynamic_cast<MemPrerec*>((*it).get());
-			if (bullshit->get_cost(o->memories) > 0)needs.push_back((*it)->get_type());
+			MemPrerec* condition = dynamic_cast<MemPrerec*>((*it).get());
+			if (condition->get_cost(o->memories) > 0)needs.push_back((*it)->get_type());
 		}
 		else if ((*it)->get_general_type() == Preconditions::STATE) {
-			StatePrerec* bullshit = dynamic_cast<StatePrerec*>((*it).get());
-			if (bullshit->get_cost() > 0)needs.push_back((*it)->get_type());
+			StatePrerec* condition = dynamic_cast<StatePrerec*>((*it).get());
+			if (condition->get_cost() > 0)needs.push_back((*it)->get_type());
 		}
 	}
 	if (!optional_fufilled_check(o,h)) {
 		for (auto itor = op_preconds.begin(); itor != op_preconds.end(); ++itor) {
 			for (auto it = (*itor).begin(); it != (*itor).end(); ++it) {
 				if ((*it)->get_general_type() == Preconditions::REL) {
-					RelPrecon* bullshit = dynamic_cast<RelPrecon*>((*it).get());
-					if (bullshit->get_cost(o, h) > 0) {
+					RelPrecon* condition = dynamic_cast<RelPrecon*>((*it).get());
+					if (condition->get_cost(o, h) > 0) {
 						needs = add_no_repeats(needs, (*it)->get_type());
 					}
 				}
 				else if ((*it)->get_general_type() == Preconditions::REL_EST) {
-					RelEstimPrerec* bullshit = dynamic_cast<RelEstimPrerec*>((*it).get());
-					if (bullshit->get_cost(o, h) > 0) {
+					RelEstimPrerec* condition = dynamic_cast<RelEstimPrerec*>((*it).get());
+					if (condition->get_cost(o, h) > 0) {
 						needs = add_no_repeats(needs, (*it)->get_type());
 					}
 				}
 				else if ((*it)->get_general_type() == Preconditions::TIME) {
-					TimePrerec* bullshit = dynamic_cast<TimePrerec*>((*it).get());
-					if (bullshit->get_cost() > 0) {
+					TimePrerec* condition = dynamic_cast<TimePrerec*>((*it).get());
+					if (condition->get_cost() > 0) {
 						needs = add_no_repeats(needs, (*it)->get_type());
 					}
 				}
 				else if ((*it)->get_general_type() == Preconditions::MEM_NUM) {
-					MemoryNumPrerec* bullshit = dynamic_cast<MemoryNumPrerec*>((*it).get());
-					if (bullshit->get_cost(o->memories) > 0) {
+					MemoryNumPrerec* condition = dynamic_cast<MemoryNumPrerec*>((*it).get());
+					if (condition->get_cost(o->memories) > 0) {
 						needs = add_no_repeats(needs, (*it)->get_type());
 					}
 				}
 				else if ((*it)->get_general_type() == Preconditions::MEM) {
-					MemPrerec* bullshit = dynamic_cast<MemPrerec*>((*it).get());
-					if (bullshit->get_cost(o->memories) > 0) {
+					MemPrerec* condition = dynamic_cast<MemPrerec*>((*it).get());
+					if (condition->get_cost(o->memories) > 0) {
 						needs = add_no_repeats(needs, (*it)->get_type());
 					}
 				}
 				else if ((*it)->get_general_type() == Preconditions::STATE) {
-					StatePrerec* bullshit = dynamic_cast<StatePrerec*>((*it).get());
-					if (bullshit->get_cost() > 0) {
+					StatePrerec* condition = dynamic_cast<StatePrerec*>((*it).get());
+					if (condition->get_cost() > 0) {
 						needs = add_no_repeats(needs, (*it)->get_type());
 					}
 				}
@@ -212,38 +212,38 @@ bool Action::optional_fufilled_check(Hero* o, Hero* h) {
 		bool one_fufilled = true;
 		for (auto it = (*itor).begin(); it != (*itor).end(); ++it) {
 			if ((*it)->get_general_type() == Preconditions::REL) {
-				RelPrecon* bullshit = dynamic_cast<RelPrecon*>((*it).get());
-				if (bullshit->get_cost(o, h) > 0) {
+				RelPrecon* condition = dynamic_cast<RelPrecon*>((*it).get());
+				if (condition->get_cost(o, h) > 0) {
 					one_fufilled = false;
 				}
 			}
 			else if ((*it)->get_general_type() == Preconditions::REL_EST) {
-				RelEstimPrerec* bullshit = dynamic_cast<RelEstimPrerec*>((*it).get());
-				if (bullshit->get_cost(o, h) > 0) {
+				RelEstimPrerec* condition = dynamic_cast<RelEstimPrerec*>((*it).get());
+				if (condition->get_cost(o, h) > 0) {
 					one_fufilled = false;
 				}
 			}
 			else if ((*it)->get_general_type() == Preconditions::TIME) {
-				TimePrerec* bullshit = dynamic_cast<TimePrerec*>((*it).get());
-				if (bullshit->get_cost() > 0) {
+				TimePrerec* condition = dynamic_cast<TimePrerec*>((*it).get());
+				if (condition->get_cost() > 0) {
 					one_fufilled = false;
 				}
 			}
 			else if ((*it)->get_general_type() == Preconditions::MEM_NUM) {
-				MemoryNumPrerec* bullshit = dynamic_cast<MemoryNumPrerec*>((*it).get());
-				if (bullshit->get_cost(o->memories) > 0) {
+				MemoryNumPrerec* condition = dynamic_cast<MemoryNumPrerec*>((*it).get());
+				if (condition->get_cost(o->memories) > 0) {
 					one_fufilled = false;
 				}
 			}
 			else if ((*it)->get_general_type() == Preconditions::MEM) {
-				MemPrerec* bullshit = dynamic_cast<MemPrerec*>((*it).get());
-				if (bullshit->get_cost(o->memories) > 0) {
+				MemPrerec* condition = dynamic_cast<MemPrerec*>((*it).get());
+				if (condition->get_cost(o->memories) > 0) {
 					one_fufilled = false;
 				}
 			}
 			else if ((*it)->get_general_type() == Preconditions::STATE) {
-				StatePrerec* bullshit = dynamic_cast<StatePrerec*>((*it).get());
-				if (bullshit->get_cost() > 0) {
+				StatePrerec* condition = dynamic_cast<StatePrerec*>((*it).get());
+				if (condition->get_cost() > 0) {
 					one_fufilled = false;
 				}
 			}

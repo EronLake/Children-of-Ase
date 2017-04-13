@@ -1345,7 +1345,11 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 		start_tick = clock();
 		_QuadTree->clear();
 		Alex->updateCD();
+		Alex->effect.sprite.animate();
+		Alex->WorldObj::animateObj();
 		for (int i = 0; i < recVec.size(); i++) {
+			recVec[i]->effect.sprite.animate();
+			recVec[i]->WorldObj::animateObj();
 			_QuadTree->Insert(recVec[i]);	//insert all obj into tree
 	
 		}
