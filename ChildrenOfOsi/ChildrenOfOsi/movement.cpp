@@ -420,10 +420,10 @@ int Movement::specialAttack(WorldObj* obj) {
 }
 
 int Movement::attack(WorldObj* obj) {
-	objVec.clear();
-	objVec = tree->retrieve(objVec, obj);
-	objVec.push_back(obj);
 	for (auto a = Containers::Attack_table.begin(); a !=Containers::Attack_table.end();++a) {
+		objVec.clear();
+		objVec = tree->retrieve(objVec, a->second);
+		objVec.push_back(obj);
 		////std::////cout << "Attack Exists" << std::endl;
 		if (a->second->getPause() == 0) {
 			a->second->move();
@@ -432,6 +432,7 @@ int Movement::attack(WorldObj* obj) {
 			//std::////cout << "Pause: " << a->second->getPause() << std::endl;
 		}
 		if (a->second->getPause() == 0) {
+			cout << "Attack compared to: " << objVec.size() << endl;
 			//std::////cout << "Attack Collidable" << std::endl;
 			for (int i = 0; i < objVec.size(); i++) {
 				if (objVec[i]->getType() > 0) {
