@@ -178,7 +178,7 @@ public:
 	virtual float get_utility(Hero* curr_hero, Hero* other_hero) final;
 	virtual void apply_utility(Hero* curr_hero, Hero* other_hero) final;
 	typedef vector<std::shared_ptr<Preconditions>> Precond_vec;
-	std::string fulfills_which(Precond_vec preconds, Relationship* rel);
+	RelPrecon* fulfills_which(Precond_vec preconds, Hero* me, Hero* them);
 };
 
 
