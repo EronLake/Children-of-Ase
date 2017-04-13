@@ -135,8 +135,8 @@ void AIController::execute() {
 		Action* curr_action = planner->get_current_action();
 		Action* curr_goal = planner->get_current_end_state();
 
-		EndStateList end_states = planner->get_end_state_map();
-		MilestoneList milestones = planner->get_milestone_map();
+		EndStateList* end_states = &planner->get_end_state_map();
+		MilestoneList* milestones = &planner->get_milestone_map();
 
 		//std::////cout << "Executing action " << curr_action->name << std::endl;
 
@@ -147,7 +147,7 @@ void AIController::execute() {
 		}
 		if (curr_action->executed) {
 
-			milestones.at(curr_goal).pop_back();              //Remove the curr_action from curr_goal's milestone list
+			milestones->at(curr_goal).pop_back();              //Remove the curr_action from curr_goal's milestone list
 
 			vector<Action*> frontier = planner->get_milestone_frontier();
 
@@ -166,9 +166,15 @@ void AIController::execute() {
 
 	}
 }
-
+/*
+* Decides if the Action's doer is at all willing to pass this action on as a quest
+* The action's Relationship postconditions are compared to the required Relationship preconditions
+* of the doer's current goal. If any postcondition fulfills a precondition, but fails to fulfill it
+* when the action is given as a quest (i.e. when utility is reduced by 20%), the function returns
+* false, otherwise it returns true
+*/
 bool AIController::give_as_quest(Action* action) {
-	bool is_quest = false;
+	bool is_quest = true;
 	Hero* me = action->getOwner();
 	Hero* them = action->getReceiver();
 	Action* curr_goal = hero_planners[me->name]->get_current_end_state();
@@ -177,14 +183,62 @@ bool AIController::give_as_quest(Action* action) {
 		RelPost* rel_post;
 		if (rel_post = dynamic_cast<RelPost*>(post)) //Only execute if dynamic cast succeeds 
 		{
-			string pre_fulfilled = rel_post->fulfills_which(curr_goal->req_preconds, me->rel[them->getID()]);
-			if (pre_fulfilled == "\0")  //Skip if post_cond fulfills no pre-conditions
+			RelPrecon* pre_fulfilled = rel_post->fulfills_which(curr_goal->req_preconds, me, them);
+			if (pre_fulfilled != nullptr)  //Found a precon that will be fulfilled as a non-quest
 			{
-				continue;
+				int util_as_quest = (rel_post->get_utility(me, them))*.80; //Owner's of quests only get 80% utility
+				if (util_as_quest < pre_fulfilled->get_cost(me, them)) //Precon no longer fulfilled as a quest
+				{
+					is_quest = false;
+				}
 			}
 		}
 
 
 	}
 	return is_quest;
+}
+
+/*
+* WARNING: Returns NULLPTR if no hero meets the base affinity req. Caller of function must handle this case
+* Considers Heroes (other than the receiver of action) with Affinity > 80, and picks the most
+* appealing one based on notoriety + (strength/2). 
+* Currently doesn't break ties (i.e. the first hero found takes priority)
+*/
+Hero* AIController::pick_quest_doer(Action* quest) {
+	int highest_appeal = 0;
+	Hero* doer = nullptr;
+	Hero* me = quest->getOwner();
+	Hero* them = quest->getReceiver(); //Have to know receiver so we don't assign quest to them
+	for (auto relation : me->rel) //Loop over the heroes in your relationship map
+	{
+		int doer_id = relation.first;
+		Relationship* our_rel = relation.second;
+		if (doer_id != them->name && our_rel->getAffinity() >= 80) //Hero is not receiver of action and meets affinity req
+		{
+			int hero_appeal = (our_rel->getNotoriety() + our_rel->getStrength() / 2);
+			if (hero_appeal > highest_appeal) 
+			{
+				doer = this->get_hero_object(doer_id);
+				highest_appeal = hero_appeal;
+			}
+		}
+	}
+	return doer;
+}
+
+/*
+* Used when someone (asker) requests a quest from a hero (doer) 
+*
+* Returns true if the asker meets minimum relationship requirements (all stats above 50)
+*/
+bool AIController::quest_response(Hero* doer, Hero* asker) {
+	bool response = false;
+	Relationship* our_rel = doer->rel[asker->name];
+	if (our_rel->getAffinity() > 50 && our_rel->getNotoriety() > 50 && our_rel->getStrength() > 50)
+	{
+		response = true;
+	}
+
+	return response;
 }

@@ -15,7 +15,10 @@ Village::Village()
 }
 
 Village::~Village()
-{}
+{
+  delete this->barracks;
+  delete this->defenders;
+}
 
 bool Village::isEnemyParty(Party* p)
 {
