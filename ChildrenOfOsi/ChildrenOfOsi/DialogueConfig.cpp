@@ -3,8 +3,10 @@
 #include "ConversationPoint.h"
 
 
+
 DialogueConfig::DialogueConfig()
 {
+
 }
 
 

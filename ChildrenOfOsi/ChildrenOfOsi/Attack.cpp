@@ -14,6 +14,8 @@ Attack::Attack()
 	canCancel = true;
 	aseCost=0;
 	staminaCost = 0;
+	next = nullptr;
+	turn = false;
 }
 
 Attack::Attack(float x, float y, bool col) : WorldObj(x, y, col)
@@ -28,6 +30,8 @@ Attack::Attack(float x, float y, bool col) : WorldObj(x, y, col)
 	canCancel = true;
 	aseCost = 0;
 	staminaCost = 0;
+	next = nullptr;
+	turn = false;
 }
 
  void Attack::Hit(LivingObj *target)

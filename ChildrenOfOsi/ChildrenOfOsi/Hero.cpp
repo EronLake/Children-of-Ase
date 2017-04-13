@@ -150,6 +150,8 @@ void Hero::decrement_quest_time() {
 		int s=it->second;
 		if (s > 0)it->second = --s;
 		if (s == 0) {
+			it->first->apply_postconditions(false);
+			quests.erase(it);
 		}
 	}
 }
