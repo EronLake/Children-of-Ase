@@ -65,7 +65,7 @@ also specified to zoom for the map editor mode
 #endif
 
 #if DEBUG 
-#define LOG(input) //std::////cout << "LOG:" << input << std::endl
+#define LOG(input) //std:://////cout << "LOG:" << input << std::endl
 #else 
 #define LOG(input) 
 #endif

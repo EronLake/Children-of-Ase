@@ -74,7 +74,7 @@ void HUD::drawHUD(WorldObj* obj)
 	if (damage_taken/1.9 > 140)
 	{
 		damage_taken += (200 - player->getHealth())* .4;
-		//std::cout << player->getHealth() << std::endl;
+		////std:://cout << player->getHealth() << std::endl;
 	}
 	if (damage_taken > player->getHealth() / 5) 
 	{ 

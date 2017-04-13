@@ -624,7 +624,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	Rectangle::texAtkDOWN->setFile("Assets/Sprites/BackRecoilSpark.png", 18);
 
 	for (int i = 0; i < 100; i++) {
-	std::cout << "AT THE THREAD INITIALIZTION CALL!!!****** " << endl;
+	//std:://cout << "AT THE THREAD INITIALIZTION CALL!!!****** " << endl;
 	}
 
 	/* 
@@ -637,7 +637,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	//int textureMapCounter = 0;
 	//for (const auto& it : textureMap) {
 	//	pair<Texture*, pair<string, int>>* temp_tuple = new pair<Texture*, pair<string, int>>(it.first, it.second);
-	//	cout << "WORKING ON " << temp_tuple->second.first << endl;
+	//	//cout << "WORKING ON " << temp_tuple->second.first << endl;
 	//	// If there are still less than "num_of_threads" in thread_Vec:
 	//	if (textureMapCounter % num_of_threads != 0) {
 
@@ -645,7 +645,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	//		thread_Vec.push_back(std::thread(set_file_with_thread, std::move(temp_tuple)));
 	//	}
 	//	else {
-	//		cout << "THE THREAD VEC HAS " << thread_Vec.size() << "THREADS" << endl;
+	//		//cout << "THE THREAD VEC HAS " << thread_Vec.size() << "THREADS" << endl;
 	//		for (auto& itr : thread_Vec) {
 	//			itr.join();
 	//		}
@@ -674,7 +674,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	int textureMapCounter = 0;
 	for (const auto& it : textureMap) { //Alex's code that allows that calls setFile
 		pair<Texture*, pair<string, int>>* temp_tuple = new pair<Texture*, pair<string, int>>(it.first, it.second);
-		cout << "WORKING ON " << temp_tuple->second.first << endl;
+		//cout << "WORKING ON " << temp_tuple->second.first << endl;
 		set_file_with_thread(temp_tuple);
 	}
 	wglMakeCurrent(nullptr, nullptr);//unassigns the current gl context
@@ -686,7 +686,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	/*int textureMapCounter = 0;
 	for (const auto& it : textureMap) {
 		pair<Texture*, pair<string, int>>* temp_tuple = new pair<Texture*, pair<string, int>>(it.first, it.second);
-		std::cout << "WORKING ON " << temp_tuple->second.first << endl;
+		//std:://cout << "WORKING ON " << temp_tuple->second.first << endl;
 		set_file_with_thread(temp_tuple);
 	}*/
 	Alex->sprite.setTexture(playerTexture);
@@ -1012,9 +1012,9 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	staticRec->melee->sprite.setTexture(border);
 
 	vector<Soldier*> silverSoldier;
-	int silverNum = 3;
+	int silverNum = 5;
 	for (int i = 0; i < silverNum; i++) {
-		silverSoldier.push_back(new Soldier(6745, 10355+(i*5), false));
+		silverSoldier.push_back(new Soldier(6745, 10355+(i*20), false));
 		gameplay_functions->add_Attack(silverSoldier[i]->getKey(), silverSoldier[i]->body[0].getX(), silverSoldier[i]->body[0].getY(), true, 10);
 	}
 	tBuffer->run();
@@ -1125,10 +1125,10 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	ai->graph.vertices = vertices;
 	ai->graph.obstacles = edges;
 	for (Vector2f vert : ai->graph.vertices) {
-		//////std:://cout << "X: " << vert.getXloc() << " Y: " << vert.getYloc() << std::endl;
+		//////std::////cout << "X: " << vert.getXloc() << " Y: " << vert.getYloc() << std::endl;
 	}
 	for (auto edge : ai->graph.obstacles) {
-		//////std:://cout << "EDGE from " << edge.first.getXloc() << "," << edge.first.getYloc() << " to " << edge.second.getXloc() << "," << edge.second.getYloc() << std::endl;
+		//////std::////cout << "EDGE from " << edge.first.getXloc() << "," << edge.first.getYloc() << " to " << edge.second.getXloc() << "," << edge.second.getYloc() << std::endl;
 	}
 
 	bool visible = true;
@@ -1198,7 +1198,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	act_pool.updateMiddle();
 	vector<Action*> actions=act_pool.getActions(staticRec,test_ally);
 	for (auto action : actions) {
-		std::cout << action->getName() << std::endl;
+		//std:://cout << action->getName() << std::endl;
 	}
 
 	Alex->add_quest(test_ally,10);
@@ -1255,16 +1255,16 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	ai->graph.insert(Vector2f(4500.00, 4000.00));
 	ai->graph.insert(Vector2f(5650.00, 3700.00));
 	for (Vector2f vert : ai->graph.vertices) {
-		//////std:://cout << "X: " << vert.getXloc() << " Y: " << vert.getYloc() << std::endl;
+		//////std::////cout << "X: " << vert.getXloc() << " Y: " << vert.getYloc() << std::endl;
 	}
 	for (auto edge : ai->graph.obstacles) {
-		//////std:://cout << "EDGE from " << edge.first.getXloc() << "," << edge.first.getYloc() << " to " << edge.second.getXloc() << "," << edge.second.getYloc() << std::endl;
+		//////std::////cout << "EDGE from " << edge.first.getXloc() << "," << edge.first.getYloc() << " to " << edge.second.getXloc() << "," << edge.second.getYloc() << std::endl;
 	}
 
 	ai->graph._print();
 
 	//for (Vector2f next : path) {
-	//	////std:://cout << "X: " << next.getXloc() << " Y: " << next.getYloc() << std::endl;
+	//	////std::////cout << "X: " << next.getXloc() << " Y: " << next.getYloc() << std::endl;
 	//}
 
 	ai->astar_search(staticRec);
@@ -1310,7 +1310,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	party3->add_patrol_loc(staticRec->getLoc());
 	party3->add_patrol_loc({ 6445.0, 9855.0 });
 	party3->setMode(Party::MODE_PATROL);
-	cout << Alex->getParty()->getAlliance()<< endl;
+	//cout << Alex->getParty()->getAlliance()<< endl;
 
 	partyM->addToPartyList(party);
 	partyM->addToPartyList(party2);
@@ -1329,7 +1329,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	while (GameWindow::isRunning()) {
 		//shouldExit++;
 	/*	for (int i = 0; i < 10; i++) {
-			cout << "SHOULD EXIT IS " << shouldExit << endl;
+			//cout << "SHOULD EXIT IS " << shouldExit << endl;
 
 		}*/
 		if (shouldExit > 0) {
@@ -1351,7 +1351,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 		}
 		state = DialogueController::getState();
 
-		std::cout << "X: " << Alex->getX() << " Y: " << Alex->getY() << std::endl;
+		////std:://cout << "X: " << Alex->getX() << " Y: " << Alex->getY() << std::endl;
 
 	if (Alex->getX() > 5285.83 && Alex->getX() < 7079.86) { //Ogun Desert
 		if (Alex->getY() < 3523.33) {
@@ -1516,7 +1516,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 		//temp_action->execute();
 
 		tBuffer->run();
-		//	////cout << tBuffer->queue_buffer.size() << endl;
+		//	//////cout << tBuffer->queue_buffer.size() << endl;
 		//tBuffer->empty();
 
 		/////////////////////////////////////////////////////////////////
@@ -1542,7 +1542,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 		if (delta_ticks > 0)
 			fps = CLOCKS_PER_SEC / delta_ticks;
 		if (DialogueController::getState() == 0) {
-			//cout << "FPS: " << fps << endl;
+			cout << "FPS: " << fps << endl;
 		}
 
 		frame_count++;

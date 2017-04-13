@@ -25,7 +25,7 @@ int Movement::move_up(WorldObj* obj) {
 	obj->setDirection(8);
 	objVec.clear();
 	objVec = tree->retrieve(objVec, obj);
-	//cout << "SIZE OF OBJVEC IS ************************ " << objVec.size() << endl;
+	////cout << "SIZE OF OBJVEC IS ************************ " << objVec.size() << endl;
 	int my_type = obj->getType();
 	NPC* npc;
 	if (my_type >= 2) {
@@ -50,7 +50,7 @@ int Movement::move_up(WorldObj* obj) {
 			if (lineCollision((rivObj->getLines())[i], temp)) {
 				//manager->createTask("Bump", "SOUND");
 				for (int j = 0; j < 10; j++) {
-					cout << "COLIISION WITH LINE " << rivObj->getLines()[i].getP1().getX() << ", " << rivObj->getLines()[i].getP1().getY() << ", " << rivObj->getLines()[i].getP2().getX() << ", " << rivObj->getLines()[i].getP1().getY() << endl;
+					//cout << "COLIISION WITH LINE " << rivObj->getLines()[i].getP1().getX() << ", " << rivObj->getLines()[i].getP1().getY() << ", " << rivObj->getLines()[i].getP2().getX() << ", " << rivObj->getLines()[i].getP1().getY() << endl;
 				}
 				LOG("failed to move up. collision.");
 				obj->shiftY(moveSpeed*speed_magnifier);
@@ -181,7 +181,7 @@ int Movement::move_down(WorldObj* obj) {
 			if (lineCollision((rivObj->getLines())[i], temp)) {
 				//manager->createTask("Bump", "SOUND");
 				for (int j = 0; j < 10; j++) {
-					cout << "COLIISION WITH LINE " << rivObj->getLines()[i].getP1().getX() << ", " << rivObj->getLines()[i].getP1().getY() << ", " << rivObj->getLines()[i].getP2().getX() << ", " << rivObj->getLines()[i].getP1().getY() << endl;
+					//cout << "COLIISION WITH LINE " << rivObj->getLines()[i].getP1().getX() << ", " << rivObj->getLines()[i].getP1().getY() << ", " << rivObj->getLines()[i].getP2().getX() << ", " << rivObj->getLines()[i].getP1().getY() << endl;
 				}
 				LOG("failed to move up. collision.");
 				obj->shiftY(-moveSpeed*speed_magnifier);
@@ -309,7 +309,7 @@ int Movement::move_left(WorldObj* obj) {
 			if (lineCollision((rivObj->getLines())[i], temp)) {
 				//manager->createTask("Bump", "SOUND");
 				for (int j = 0; j < 10; j++) {
-					cout << "COLIISION WITH LINE " << rivObj->getLines()[i].getP1().getX() << ", " << rivObj->getLines()[i].getP1().getY() << ", " << rivObj->getLines()[i].getP2().getX() << ", " << rivObj->getLines()[i].getP1().getY() << endl;
+					//cout << "COLIISION WITH LINE " << rivObj->getLines()[i].getP1().getX() << ", " << rivObj->getLines()[i].getP1().getY() << ", " << rivObj->getLines()[i].getP2().getX() << ", " << rivObj->getLines()[i].getP1().getY() << endl;
 				}
 				LOG("failed to move up. collision.");
 				obj->shiftX(moveSpeed*speed_magnifier);
@@ -352,7 +352,7 @@ int Movement::move_right(WorldObj* obj) {
 			if (lineCollision((rivObj->getLines())[i], temp)) {
 				//manager->createTask("Bump", "SOUND");
 				for (int j = 0; j < 10; j++) {
-					cout << "COLIISION WITH LINE " << rivObj->getLines()[i].getP1().getX() << ", " << rivObj->getLines()[i].getP1().getY() << ", " << rivObj->getLines()[i].getP2().getX() << ", " << rivObj->getLines()[i].getP1().getY() << endl;
+					//cout << "COLIISION WITH LINE " << rivObj->getLines()[i].getP1().getX() << ", " << rivObj->getLines()[i].getP1().getY() << ", " << rivObj->getLines()[i].getP2().getX() << ", " << rivObj->getLines()[i].getP1().getY() << endl;
 				}
 				LOG("failed to move up. collision.");
 				obj->shiftX(-moveSpeed*speed_magnifier);
@@ -371,7 +371,7 @@ int Movement::talk(WorldObj* obj) {
 		if (CheckClass::isPlayer(obj)) {
 			Player* d = dynamic_cast<Player*>(obj);
 			d->updateTalk();
-			//std::////cout << "Talking Width " << d->talk.getWidth() << std::endl;
+			//std:://////cout << "Talking Width " << d->talk.getWidth() << std::endl;
 			for (int i = 0; i < objVec.size(); i++) {
 				if (obj == objVec[i]) {
 					break;
@@ -393,7 +393,7 @@ int Movement::melee(WorldObj* obj) {
 		Soldier* d = CheckClass::isSoldier(obj);
 		if (d) {
 			//d->meleeAttack();
-			////std::////cout << "Attack Added" << std::endl;
+			////std:://////cout << "Attack Added" << std::endl;
 		}
 	}
 	return 0;
@@ -404,7 +404,7 @@ int Movement::specialAttack(WorldObj* obj) {
 		Soldier* a = CheckClass::isSoldier(obj);
 		if (a) {
 			//a->newAttack(a->triedAttack(), Containers::Attack_table[a->getAtKey()]);
-			//std::////cout << "Attack Added" << std::endl;
+			//std:://////cout << "Attack Added" << std::endl;
 		}
 	}
 	return 0;
@@ -415,21 +415,21 @@ int Movement::attack(WorldObj* obj) {
 	objVec = tree->retrieve(objVec, obj);
 	objVec.push_back(obj);
 	for (auto a = Containers::Attack_table.begin(); a !=Containers::Attack_table.end();++a) {
-		////std::////cout << "Attack Exists" << std::endl;
+		////std:://////cout << "Attack Exists" << std::endl;
 		if (a->second->getPause() == 0) {
 			a->second->move();
 		} else {
 			a->second->updatePause();
-			//std::////cout << "Pause: " << a->second->getPause() << std::endl;
+			//std:://////cout << "Pause: " << a->second->getPause() << std::endl;
 		}
 		if (a->second->getPause() == 0) {
-			//std::////cout << "Attack Collidable" << std::endl;
+			//std:://////cout << "Attack Collidable" << std::endl;
 			for (int i = 0; i < objVec.size(); i++) {
 				if (objVec[i]->getType() > 0) {
 					LivingObj* liv = CheckClass::isLiving(objVec[i]);
 					if (liv) {
 						if (collision(a->second, liv) && !a->second->beenHit(liv) && (a->second->getDuration()!=0)) {
-							//std::////cout << "Player hit " << liv->getName() << std::endl;
+							//std:://////cout << "Player hit " << liv->getName() << std::endl;
 							if (objVec[i]->getType() > 1) {
 								NPC* npc = CheckClass::isNPC(liv);
 								if (npc) {
@@ -457,7 +457,7 @@ int Movement::attack(WorldObj* obj) {
 
 									if (!friendly) {
 										a->second->Hit(npc);
-										cout << "THE TARGET'S HP IS NOW ******** " << npc->getHealth() << endl;
+										//cout << "THE TARGET'S HP IS NOW ******** " << npc->getHealth() << endl;
 										manager->createTaskForAudio("PlaySound", "SOUND", "SFX/hit.wav");
 										// If target is dead, remove from village and targeting
 										if (npc->getHealth() <= 0) {
@@ -476,7 +476,7 @@ int Movement::attack(WorldObj* obj) {
 							} else {
 								a->second->Hit(liv);
 								manager->createTaskForAudio("PlaySound", "SOUND", "SFX/hit.wav");
-								cout << "THE TARGET'S HP IS NOW ******** " << liv->getHealth() << endl;
+								//cout << "THE TARGET'S HP IS NOW ******** " << liv->getHealth() << endl;
 								if (liv->getHealth() <= 0) {
 									if (Soldier *sold = CheckClass::isSoldier(liv)) {
 
@@ -486,7 +486,7 @@ int Movement::attack(WorldObj* obj) {
 								liv->sprite.unlockAnimation();
 								manager->createTaskWithObj("Hurt", "DRAW", liv);
 							}
-							//std::////cout << liv->getName() << "'s health is now " << liv->getHealth() << std::endl;
+							//std:://////cout << liv->getName() << "'s health is now " << liv->getHealth() << std::endl;
 						}
 					}
 				}
@@ -517,11 +517,11 @@ int Movement::meleeSwing(WorldObj* obj) {
 						LivingObj* liv = CheckClass::isLiving(objVec[i]);
 						if (liv) {
 							if (collision(d->melee, liv)) {
-								//std::////cout << "Player hit " << liv->getName() << std::endl;
+								//std:://////cout << "Player hit " << liv->getName() << std::endl;
 								
 								d->melee->Hit(liv);
 								
-								//std::////cout << liv->getName() << "'s health is now " << liv->getHealth() << std::endl;
+								//std:://////cout << liv->getName() << "'s health is now " << liv->getHealth() << std::endl;
 							}
 						}
 					}
