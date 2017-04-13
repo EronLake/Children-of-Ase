@@ -1543,11 +1543,11 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 			Sleep((1000 / fs) - (clock() - start_tick));
 		}
 		delta_ticks = clock() - start_tick; //the time, in ms, that took to render the scene
-		if (delta_ticks > 0)
+		if (delta_ticks > 0) {
 			fps = CLOCKS_PER_SEC / delta_ticks;
-		if (DialogueController::getState() == 0) {
-			cout << "FPS: " << fps << endl;
 		}
+		HUD::FPS = fps;
+			//cout << "FPS: " << fps << endl;
 
 		frame_count++;
 	}
