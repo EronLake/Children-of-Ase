@@ -32,7 +32,13 @@ public:
 	void remove_member(NPC* n);
 	void set_village_location(Vector2f loc) { location = loc; };
 	Vector2f get_village_location() { return location; };
-	vector<Party*> barracks;
+	Party* barracks;
+	Party* defenders;
+
+	void add_to_village_health(int h) { health += h; };
+	int get_village_health() { return health; };
+
+	void conquer(Village* v) { conquered.push_back(v); v->conquerer = this; };
 
 private:
 	Alliance* alliance;
@@ -41,5 +47,6 @@ private:
 	std::vector<Party*> parties;
 	std::vector<Party*> enemy_parties;
 	Vector2f location;
+	int health;
 };
 

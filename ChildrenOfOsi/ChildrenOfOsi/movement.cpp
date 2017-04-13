@@ -51,6 +51,10 @@ int Movement::move_up(WorldObj* obj) {
 				//manager->createTask("Bump", "SOUND");
 				for (int j = 0; j < 10; j++) {
 					//cout << "COLIISION WITH LINE " << rivObj->getLines()[i].getP1().getX() << ", " << rivObj->getLines()[i].getP1().getY() << ", " << rivObj->getLines()[i].getP2().getX() << ", " << rivObj->getLines()[i].getP1().getY() << endl;
+					cout << "COLIISION WITH LINE " << rivObj->getLines()[i].getP1().getX() << ", " << rivObj->getLines()[i].getP1().getY() << ", " << rivObj->getLines()[i].getP2().getX() << ", " << rivObj->getLines()[i].getP2().getY() << endl;
+					cout << "my obj coord is " << obj->body[0].getBL().getXloc() << ", " << obj->body[0].getBL().getYloc() << ", " << obj->body[0].getBR().getXloc() << ", " << obj->body[0].getBR().getYloc() << endl;
+
+					// EVEN AFTER I FLIP THE LINES ACROSS THE Y AXIS, WHEN THE PLAYER MOVES DOWN, THE Y COORD IS INCREASING, SO IT"S AS IF HE IS GOING UP!!!
 				}
 				LOG("failed to move up. collision.");
 				obj->shiftY(moveSpeed*speed_magnifier);
@@ -181,7 +185,9 @@ int Movement::move_down(WorldObj* obj) {
 			if (lineCollision((rivObj->getLines())[i], temp)) {
 				//manager->createTask("Bump", "SOUND");
 				for (int j = 0; j < 10; j++) {
-					//cout << "COLIISION WITH LINE " << rivObj->getLines()[i].getP1().getX() << ", " << rivObj->getLines()[i].getP1().getY() << ", " << rivObj->getLines()[i].getP2().getX() << ", " << rivObj->getLines()[i].getP1().getY() << endl;
+					cout << "COLIISION WITH LINE " << rivObj->getLines()[i].getP1().getX() << ", " << rivObj->getLines()[i].getP1().getY() << ", " << rivObj->getLines()[i].getP2().getX() << ", " << rivObj->getLines()[i].getP2().getY() << endl;
+					cout << "my obj coord is " << obj->body[0].getBL().getXloc() << ", " << obj->body[0].getBL().getYloc() << ", " << obj->body[0].getBR().getXloc() << ", " << obj->body[0].getBR().getYloc() << endl;
+
 				}
 				LOG("failed to move up. collision.");
 				obj->shiftY(-moveSpeed*speed_magnifier);
@@ -309,7 +315,9 @@ int Movement::move_left(WorldObj* obj) {
 			if (lineCollision((rivObj->getLines())[i], temp)) {
 				//manager->createTask("Bump", "SOUND");
 				for (int j = 0; j < 10; j++) {
-					//cout << "COLIISION WITH LINE " << rivObj->getLines()[i].getP1().getX() << ", " << rivObj->getLines()[i].getP1().getY() << ", " << rivObj->getLines()[i].getP2().getX() << ", " << rivObj->getLines()[i].getP1().getY() << endl;
+					cout << "COLIISION WITH LINE " << rivObj->getLines()[i].getP1().getX() << ", " << rivObj->getLines()[i].getP1().getY() << ", " << rivObj->getLines()[i].getP2().getX() << ", " << rivObj->getLines()[i].getP2().getY() << endl;
+					cout << "my obj coord is " << obj->body[0].getBL().getXloc() << ", " << obj->body[0].getBL().getYloc() << ", " << obj->body[0].getBR().getXloc() << ", " << obj->body[0].getBR().getYloc() << endl;
+
 				}
 				LOG("failed to move up. collision.");
 				obj->shiftX(moveSpeed*speed_magnifier);
@@ -352,7 +360,9 @@ int Movement::move_right(WorldObj* obj) {
 			if (lineCollision((rivObj->getLines())[i], temp)) {
 				//manager->createTask("Bump", "SOUND");
 				for (int j = 0; j < 10; j++) {
-					//cout << "COLIISION WITH LINE " << rivObj->getLines()[i].getP1().getX() << ", " << rivObj->getLines()[i].getP1().getY() << ", " << rivObj->getLines()[i].getP2().getX() << ", " << rivObj->getLines()[i].getP1().getY() << endl;
+					cout << "COLIISION WITH LINE " << rivObj->getLines()[i].getP1().getX() << ", " << rivObj->getLines()[i].getP1().getY() << ", " << rivObj->getLines()[i].getP2().getX() << ", " << rivObj->getLines()[i].getP2().getY() << endl;
+					cout << "my obj coord is " << obj->body[0].getBL().getXloc() << ", " << obj->body[0].getBL().getYloc() << ", " << obj->body[0].getBR().getXloc() << ", " << obj->body[0].getBR().getYloc() << endl;
+
 				}
 				LOG("failed to move up. collision.");
 				obj->shiftX(-moveSpeed*speed_magnifier);
@@ -411,19 +421,20 @@ int Movement::specialAttack(WorldObj* obj) {
 }
 
 int Movement::attack(WorldObj* obj) {
-	objVec.clear();
-	objVec = tree->retrieve(objVec, obj);
-	objVec.push_back(obj);
 	for (auto a = Containers::Attack_table.begin(); a !=Containers::Attack_table.end();++a) {
-		////std:://////cout << "Attack Exists" << std::endl;
+		objVec.clear();
+		objVec = tree->retrieve(objVec, a->second);
+		objVec.push_back(obj);
+		////std::////cout << "Attack Exists" << std::endl;
 		if (a->second->getPause() == 0) {
 			a->second->move();
 		} else {
 			a->second->updatePause();
-			//std:://////cout << "Pause: " << a->second->getPause() << std::endl;
+			//std::////cout << "Pause: " << a->second->getPause() << std::endl;
 		}
 		if (a->second->getPause() == 0) {
-			//std:://////cout << "Attack Collidable" << std::endl;
+			cout << "Attack compared to: " << objVec.size() << endl;
+			//std::////cout << "Attack Collidable" << std::endl;
 			for (int i = 0; i < objVec.size(); i++) {
 				if (objVec[i]->getType() > 0) {
 					LivingObj* liv = CheckClass::isLiving(objVec[i]);
@@ -464,9 +475,7 @@ int Movement::attack(WorldObj* obj) {
 											if (Soldier *sold = CheckClass::isSoldier(liv)) {
                         // sold->playDeathAnimation();
                         sold->setLoc(sold->getVillage()->get_village_location());
-                        if(!sold->getVillage()->barracks.empty()) {
-                          sold->getVillage()->barracks[0]->addToParty(sold, false);
-                        }
+                        sold->getVillage()->barracks->addToParty(sold, false);
 											}
 										}
 									} else {

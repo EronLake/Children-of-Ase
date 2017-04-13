@@ -61,11 +61,11 @@ void ActionHelper::create_memory(Action* action, Hero* hero)
 	}
 }
 
-void ActionHelper::battle_sim(Action* battle)
+void ActionHelper::battle_sim(Action* battle, Party* p)
 {
 		//may we have offensive team attack first? Slightly randomized
 		Party* Attackers = battle->getDoer()->cur_party;
-		Party* Defenders = battle->getReceiver()->cur_party;
+		Party* Defenders = p;
 
 		vector<Soldier*> larger;
 		vector<Soldier*> smaller;
