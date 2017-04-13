@@ -47,6 +47,8 @@ public:
 	void setHeartGlow();
 	void setFaceGlow();
 	void setQuestionGlow();
+	std::string remove_chars_from_string(string &str, char* charsToRemove);
+	std::string replace_str_char(string str, const string& replace, char ch);
 	
 };
 
