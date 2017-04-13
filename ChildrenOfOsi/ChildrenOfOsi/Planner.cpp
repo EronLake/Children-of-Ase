@@ -85,9 +85,9 @@ void Planner::choose_end_with(int hero) {
 	}
 	*/
 	this->end_states[hero] = best_end_state;
-	std::cout << "///////////////////////////////////////////////////////" << std::endl;
-	std::cout << "BEST END STATE: " << best_end_state->getName() << std::endl;
-	std::cout << "///////////////////////////////////////////////////////" << std::endl;
+	//std:://cout << "///////////////////////////////////////////////////////" << std::endl;
+	//std:://cout << "BEST END STATE: " << best_end_state->getName() << std::endl;
+	//std:://cout << "///////////////////////////////////////////////////////" << std::endl;
 }
 
 Action* Planner::choose_next_step(Action* goal, vector<Action*> goals) {

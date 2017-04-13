@@ -39,7 +39,7 @@ void RenderHelper::initCamera(WorldObj * player)
 	camera->setLoc(Vector2f(camX, camY));
 	camera->setWidth(cameraSize.getXloc() + 480);	//700
 	camera->setHeight(cameraSize.getYloc() + 270);	//300
-	//cout << "Camera has coord " << camera->getX() << ", " << camera->getY() << " and width and height of " << camera->getWidth() << ", " << camera->getHeight() << endl;
+	////cout << "Camera has coord " << camera->getX() << ", " << camera->getY() << " and width and height of " << camera->getWidth() << ", " << camera->getHeight() << endl;
 
 }
 
@@ -82,7 +82,7 @@ int RenderHelper::draw_frame(WorldObj * obj)
 		
 	}
 
-	//cout << "SIZE OF THE RENDER OBJVEC IS RENDEREDNEREDNEREDNER *** " << objVec.size() << endl;
+	////cout << "SIZE OF THE RENDER OBJVEC IS RENDEREDNEREDNEREDNER *** " << objVec.size() << endl;
 	gmap->drawMap(camera->getX(), camera->getY());
 	//obj->WorldObj::drawObj(camera->getX(), camera->getY());
 	//obj->WorldObj::animateObj();
@@ -91,13 +91,13 @@ int RenderHelper::draw_frame(WorldObj * obj)
 
 	//for (auto it = objVec.begin(); it != objVec.end(); it++) {
 	//	if (tempmap.find(*it) != tempmap.end()) {
-	//		cout << "WE HAVE REPEATED OBJ IN THE OBJVEC!!!!!!!!!!!!!!!!!!!!!**********************" << endl;
+	//		//cout << "WE HAVE REPEATED OBJ IN THE OBJVEC!!!!!!!!!!!!!!!!!!!!!**********************" << endl;
 	//	}
 	//	else {
 	//		tempmap[*it] = 1;
 	//	}
 	//}
-	//cout << "SIZE OF ATTACK TABLE IS " << Containers::Attack_table.size() << endl;
+	////cout << "SIZE OF ATTACK TABLE IS " << Containers::Attack_table.size() << endl;
 	for (auto i = Containers::Attack_table.begin(); i != Containers::Attack_table.end(); ++i) {
 		if (i->second->getPause() == 0) {
 			objVec.push_back(i->second);
@@ -107,12 +107,11 @@ int RenderHelper::draw_frame(WorldObj * obj)
 		osi::GameWindow::drawSprite(obj->body[i].getX()-camera->getX(), obj->body[i].getY()-camera->getY(), obj->body[i].getWidth(), obj->body[i].getHeight(), obj->getSprite());
 	}*/
 	sortVec();
-	////cout << "******************************************SIZE OF THE OBJVEC TO RENDER IS " << objVec.size() << endl;
+	//////cout << "******************************************SIZE OF THE OBJVEC TO RENDER IS " << objVec.size() << endl;
 	for (int i = 0; i < objVec.size(); i++) {
 		
-		if (objVec[i]->getType() == 3) {
 			LOG("BEFORE DRAWING**");
-			//////cout << objVec[i]->getX() - camera->getX() << endl;
+			////////cout << objVec[i]->getX() - camera->getX() << endl;
 			//LOG(objVec[i]->getX(), ", ", objVec[i]->getY());
 			objVec[i]->WorldObj::drawObj(camera->getX(), camera->getY());
 			//for (int j = 0; j < objVec[i]->body.size(); j++) {
@@ -121,19 +120,6 @@ int RenderHelper::draw_frame(WorldObj * obj)
 			//}
 			objVec[i]->effect.sprite.animate();
 			objVec[i]->WorldObj::animateObj();
-		}
-		else {
-			LOG("BEFORE DRAWING**");
-			//////cout << objVec[i]->getX() - camera->getX() << endl;
-			//LOG(objVec[i]->getX(), ", ", objVec[i]->getY());
-			objVec[i]->WorldObj::drawObj(camera->getX(), camera->getY());
-			//for (int j = 0; j < objVec[i]->body.size(); j++) {
-			objVec[i]->body[0].drawObj(camera->getX(), camera->getY());
-			objVec[i]->effect.drawObj(camera->getX(), camera->getY());
-			//}
-			objVec[i]->effect.sprite.animate();
-			objVec[i]->WorldObj::animateObj();
-		}
 	}
 	//convoGui->drawGui();
 	drawHUD(obj);
@@ -149,7 +135,7 @@ int RenderHelper::drawDiaGui(WorldObj* obj)
 	obj->WorldObj::animateObj();
 	for (int i = 0; i < objVec.size(); i++) {
 		LOG("BEFORE DRAWING**");
-		//////cout << objVec[i]->getX() - camera->getX() << endl;
+		////////cout << objVec[i]->getX() - camera->getX() << endl;
 		//LOG(objVec[i]->getX(), ", ", objVec[i]->getY());
 		objVec[i]->WorldObj::drawObj(camera->getX(), camera->getY());
 		objVec[i]->WorldObj::animateObj();

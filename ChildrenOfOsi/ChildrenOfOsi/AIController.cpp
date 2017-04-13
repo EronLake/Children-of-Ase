@@ -130,7 +130,9 @@ void AIController::reevaluate_state(int me, int them) {
 }
 
 void AIController::execute() {
+	int action_wait_time = 7200;           //Wait time is approx. 2 minutes
 	for (auto iter : hero_planners) {
+		Hero* me = get_hero_object(iter.first);
 		Planner* planner = iter.second;
 		Action* curr_action = planner->get_current_action();
 		Action* curr_goal = planner->get_current_end_state();
@@ -138,10 +140,14 @@ void AIController::execute() {
 		EndStateList* end_states = &planner->get_end_state_map();
 		MilestoneList* milestones = &planner->get_milestone_map();
 
-		//std::////cout << "Executing action " << curr_action->name << std::endl;
+		//std:://////cout << "Executing action " << curr_action->name << std::endl;
 
 		//Call execute function pointer of the action itself
 		//if you are not planning to give it as a quest
+		if (me->update_action_timer() == 0)
+		{
+
+		}
 		if (!planner->give_as_quest) {
 			curr_action->execute();
 		}
@@ -150,15 +156,18 @@ void AIController::execute() {
 			milestones->at(curr_goal).pop_back();              //Remove the curr_action from curr_goal's milestone list
 
 			vector<Action*> frontier = planner->get_milestone_frontier();
-
+			Action* best_action = nullptr;
 			//Loop over all the next milestones to find the most valuable action, and set it to current action
-			int best = 0;
+			int best_utility = 0;
 			for (auto itor : frontier) {
-				if (itor->getUtility() > best) {
-					best = itor->getUtility();
-					planner->set_current_action(itor);
+				if (itor->getUtility() > best_utility) {
+					best_utility = itor->getUtility();
+					best_action = itor;
 				}
 			}
+			planner->set_current_action(best_action);          //Current action is set
+			me->init_action_timer(action_wait_time);    //Start a timer for approx. 2 minutes
+			//give_as_quest()
 		}
 		//planner->get_milestones_for_goal(curr_goal).pop_back();  
 

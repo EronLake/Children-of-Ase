@@ -72,7 +72,7 @@ void ChildrenOfOsi::stop(WorldObj* player) {
 ////////////////////////////////////////////////////
 
 void ChildrenOfOsi::move_toward(WorldObj* obj) {
-	//std::////cout << obj->getName() << "MOVING TOWARD" << std::endl;
+	//std:://////cout << obj->getName() << "MOVING TOWARD" << std::endl;
 	createTask("Move", "AI", obj);
 }
 void ChildrenOfOsi::get_path(WorldObj* obj) {

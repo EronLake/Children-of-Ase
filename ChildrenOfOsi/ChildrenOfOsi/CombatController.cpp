@@ -61,7 +61,7 @@ void CombatController::follow(Soldier* sold1, int state) {
 	Soldier* sold2 = sold1->getCurrentLeader();
 	if (sold2 == nullptr) {
 		party_leader_update(sold1,state);
-		std::cout << sold1->getID()<<" update leader" << std::endl;
+		////std:://cout << sold1->getID()<<" update leader" << std::endl;
 		return;
 	}
 	if (dist_by_center(sold1, sold2) > (sold1->body[0].getWidth() * 6)) {
@@ -71,7 +71,7 @@ void CombatController::follow(Soldier* sold1, int state) {
 	if (dist_by_center(sold1,sold2)<(sold1->body[0].getWidth()*3)) {
 		sold1->destination = Vector2f(0, 0);
 		sold1->waypoint = Vector2f(0, 0);
-		std::cout << sold1->getID() << " reached its leader, " << sold2->getID() << std::endl;
+////std:://cout << sold1->getID() << " reached its leader, " << sold2->getID() << std::endl;
 		gameplay_functions->stop(sold1);
 		return;
 	}
@@ -137,7 +137,7 @@ void CombatController::update_soldier(Soldier* sold1, int state) {
 		}
 		else {
 			///check if the soldier is in combat and not 1000 away from the leader
-			cout << dist_by_center(sold1, sold1->getCurrentLeader()) << endl;
+			//cout << dist_by_center(sold1, sold1->getCurrentLeader()) << endl;
 			if ((sold1->getInCombat()) && (dist_by_center(sold1, sold1->getCurrentLeader()) < 600)) {
 				///if no enemy find the closest one
 				if (sold1->getCurrentEnemy() == nullptr) {
@@ -177,7 +177,7 @@ void CombatController::move_to_target(Soldier* sold1, int state) {
 		if (sold1->waypoint != Vector2f(0, 0) && state == 0) { //Hero has a waypoint to the desination, and not in dialog
 			if (sold1->getHold()) {//getMode() == Party::MODE_DEFEND) {
 				if (dist(sold1->destination, sold1->getParty()->get_defend()) > 500) {
-					std::cout << "leader too far" << std::endl;
+			//		//std:://cout << "leader too far" << std::endl;
 					sold1->waypoint = sold1->getParty()->get_home();
 					sold1->destination = sold1->getParty()->get_home();
 					gameplay_functions->stop(sold1);
@@ -185,11 +185,11 @@ void CombatController::move_to_target(Soldier* sold1, int state) {
 				}
 			}
 			gameplay_functions->move_toward(sold1); //Take a step towards the current waypoint
-			std::cout << sold1->getID() << " MOVING TOWARDS " << sold1->waypoint.getXloc() << ", " << sold1->waypoint.getYloc() << std::endl;
+			////std:://cout << sold1->getID() << " MOVING TOWARDS " << sold1->waypoint.getXloc() << ", " << sold1->waypoint.getYloc() << std::endl;
 		}
 		else if (state == 0)                //Hero needs waypoints to destination, and not in dialog
 		{
-			std::cout << sold1->getID() << " WHERE AM I GOING" << std::endl;
+		//	//std:://cout << sold1->getID() << " WHERE AM I GOING" << std::endl;
 			gameplay_functions->get_path(sold1); //Generate waypoints to destination
 		}
 	}
@@ -272,7 +272,7 @@ void CombatController::party_leader_update(Soldier* sold1, int state) {
 			if (home == sold1->getParty()->get_village()->get_village_location()) {
 				sold1->getParty()->get_village()->barracks->add_party_to_party(sold1->getParty());
 			}
-			std::cout << sold1->getID() << " is idling now" << std::endl;
+			////std:://cout << sold1->getID() << " is idling now" << std::endl;
 		}
 	}
 }

@@ -145,12 +145,19 @@ void Hero::init_act_pools(ChildrenOfOsi* gameplay_func, TaskBuffer* tBuffer)
 }
 */
 
+int Hero::update_action_timer() {
+	if (action_timer > 0) {
+		action_timer--;
+	}
+	return action_timer;
+}
+
 void Hero::decrement_quest_time() {
 	for (auto it = quests.begin(); it != quests.end(); ++it) {
 		int s=it->second;
 		if (s > 0)it->second = --s;
 		if (s == 0) {
-			it->first->apply_postconditions(false);
+			//it->first->apply_postconditions(false);
 			quests.erase(it);
 		}
 	}
