@@ -20,20 +20,20 @@ ActionPool::~ActionPool()
 {
 }
 
-vector<Action> ActionPool::getActions(Hero* h, Action macro)
+vector<Action*> ActionPool::getActions(Hero* h, Action* macro)
 {
 	vector<Action*> points;
-	vector<Action> list;
+	vector<Action*> list;
 	
-	vector<std::string> needs = macro.preConditionsNeeded(doer,h);
+	vector<std::string> needs = macro->preConditionsNeeded(doer,h);
 	for (int i = 0; i < needs.size(); i++) {
 		auto j = actions_by_post.find(needs[i]);
 		if (j != actions_by_post.end()) points=addVec(points,j->second);
 	}
 	for (int p= 0; p < points.size(); p++) {
-		list.push_back(*points[p]);
-		list.back().setReceiver(h);
-		list.back().setDoer(doer);
+		list.push_back(points[p]);
+		list.back()->setReceiver(h);
+		list.back()->setDoer(doer);
 	}
 	return list;
 }

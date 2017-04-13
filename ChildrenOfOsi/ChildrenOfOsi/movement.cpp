@@ -11,8 +11,6 @@ Movement::Movement(QuadTree* QT) {
 	tree = QT;
 	rivObj = new RiverObj();
 	rivObj->initialize_lines();
-	
-
 }
 
 Movement::~Movement() {
@@ -47,16 +45,22 @@ int Movement::move_up(WorldObj* obj) {
 				break;
 			}
 		}
+		Line temp(Point(obj->body[0].getBL().getXloc(), obj->body[0].getBL().getYloc()), Point(obj->body[0].getBR().getXloc(), obj->body[0].getBR().getYloc()));
 		for (int i = 0; i < rivObj->getLines().size(); i++) {
-			if (lineCollision((rivObj->getLines())[i], (Line(Point(obj->getX(), obj->getY() + 50), Point(obj->getX() + obj->getWidth(), obj->getY() + 50))))) {
+			if (lineCollision((rivObj->getLines())[i], temp)) {
 				//manager->createTask("Bump", "SOUND");
+				for (int j = 0; j < 10; j++) {
+					cout << "COLIISION WITH LINE " << rivObj->getLines()[i].getP1().getX() << ", " << rivObj->getLines()[i].getP1().getY() << ", " << rivObj->getLines()[i].getP2().getX() << ", " << rivObj->getLines()[i].getP1().getY() << endl;
+				}
 				LOG("failed to move up. collision.");
 				obj->shiftY(moveSpeed*speed_magnifier);
 				break;
 			}
 		}
 	}
-	LOG("X: " << obj->getX() << " Y: " << obj->getY());
+	for (int i = 0; i < 10; i++) {
+		LOG("X: " << obj->getX() << " Y: " << obj->getY());
+	}
 	return 0;
 }
 int Movement::move_up_left(WorldObj* obj) {
@@ -167,6 +171,19 @@ int Movement::move_down(WorldObj* obj) {
 			if (collision(objVec[i], obj)) {
 				LOG("failed to move down. collision.");
 				//manager->createTask("Bump", "SOUND");
+				obj->shiftY(-moveSpeed*speed_magnifier);
+				break;
+			}
+		}
+		Line temp(Point(obj->body[0].getBL().getXloc(), obj->body[0].getBL().getYloc()), Point(obj->body[0].getBR().getXloc(), obj->body[0].getBR().getYloc()));
+
+		for (int i = 0; i < rivObj->getLines().size(); i++) {
+			if (lineCollision((rivObj->getLines())[i], temp)) {
+				//manager->createTask("Bump", "SOUND");
+				for (int j = 0; j < 10; j++) {
+					cout << "COLIISION WITH LINE " << rivObj->getLines()[i].getP1().getX() << ", " << rivObj->getLines()[i].getP1().getY() << ", " << rivObj->getLines()[i].getP2().getX() << ", " << rivObj->getLines()[i].getP1().getY() << endl;
+				}
+				LOG("failed to move up. collision.");
 				obj->shiftY(-moveSpeed*speed_magnifier);
 				break;
 			}
@@ -287,6 +304,18 @@ int Movement::move_left(WorldObj* obj) {
 				break;
 			}
 		}
+		Line temp(Point(obj->body[0].getBL().getXloc(), obj->body[0].getBL().getYloc()), Point(obj->body[0].getBR().getXloc(), obj->body[0].getBR().getYloc()));
+		for (int i = 0; i < rivObj->getLines().size(); i++) {
+			if (lineCollision((rivObj->getLines())[i], temp)) {
+				//manager->createTask("Bump", "SOUND");
+				for (int j = 0; j < 10; j++) {
+					cout << "COLIISION WITH LINE " << rivObj->getLines()[i].getP1().getX() << ", " << rivObj->getLines()[i].getP1().getY() << ", " << rivObj->getLines()[i].getP2().getX() << ", " << rivObj->getLines()[i].getP1().getY() << endl;
+				}
+				LOG("failed to move up. collision.");
+				obj->shiftX(moveSpeed*speed_magnifier);
+				break;
+			}
+		}
 	}
 	LOG("X: " << obj->getX() << " Y: " << obj->getY());
 	return 0;
@@ -313,6 +342,19 @@ int Movement::move_right(WorldObj* obj) {
 			if (collision(objVec[i], obj)) {
 				LOG("failed to move right. collision.");
 				//manager->createTask("Bump", "SOUND");
+				obj->shiftX(-moveSpeed*speed_magnifier);
+				break;
+			}
+		}
+		Line temp(Point(obj->body[0].getBL().getXloc(), obj->body[0].getBL().getYloc()), Point(obj->body[0].getBR().getXloc(), obj->body[0].getBR().getYloc()));
+
+		for (int i = 0; i < rivObj->getLines().size(); i++) {
+			if (lineCollision((rivObj->getLines())[i], temp)) {
+				//manager->createTask("Bump", "SOUND");
+				for (int j = 0; j < 10; j++) {
+					cout << "COLIISION WITH LINE " << rivObj->getLines()[i].getP1().getX() << ", " << rivObj->getLines()[i].getP1().getY() << ", " << rivObj->getLines()[i].getP2().getX() << ", " << rivObj->getLines()[i].getP1().getY() << endl;
+				}
+				LOG("failed to move up. collision.");
 				obj->shiftX(-moveSpeed*speed_magnifier);
 				break;
 			}

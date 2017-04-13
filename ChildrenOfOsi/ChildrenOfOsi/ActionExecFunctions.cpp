@@ -62,7 +62,7 @@ void ActionExecFunctions::execute_train(Action* train) {
 				perror("something is wrong with the current hero memory creation function");
 			}
 			train->getDoer()->destination = { 500,500 }; //Also predefined, maybe as "home_location" in hero
-			train->applyUtiliites(true);				 //Apply post-conditions
+			train->apply_postconditions(true);				 //Apply post-conditions
 			train->executed = true;
 			doer_mem->setCategory("success");			 //Call update_memory function
 			doer_mem->setReason("I am good at training");
@@ -121,7 +121,7 @@ void ActionExecFunctions::execute_train_with(Action* train_with) {
 				perror("something is wrong with the current hero memory creation function");
 			}
 			train_with->getDoer()->destination = { 500,500 }; //Also predefined, maybe as "home_location" in hero
-			train_with->applyUtiliites(true);				 //Apply post-conditions
+			train_with->apply_postconditions(true);				 //Apply post-conditions
 			train_with->executed = true;
 			doer_mem->setCategory("success");			 //Call update_memory function
 			doer_mem->setReason("I am good at training");
@@ -244,7 +244,7 @@ void ActionExecFunctions::execute_fight(Action* fight)
 		//check if the target's party is empty(may need to change this to account for hero death)
 		if (fight->getReceiver()->getParty()->getMembers().size() == 0) {
 			//Apply succ-post-conditions
-			fight->applyUtiliites(true);
+			fight->apply_postconditions(true);
 			//update_memory category as a success 
 			doer_mem->setCategory("success"); receiver_mem->setCategory("fail");
 			//update reason
@@ -254,7 +254,7 @@ void ActionExecFunctions::execute_fight(Action* fight)
 		else
 		{
 			//Apply fail-post-conditions
-			fight->applyUtiliites(false);
+			fight->apply_postconditions(false);
 			//update_memory as faiure
 			doer_mem->setCategory("fail"); receiver_mem->setCategory("success");
 			//update reason

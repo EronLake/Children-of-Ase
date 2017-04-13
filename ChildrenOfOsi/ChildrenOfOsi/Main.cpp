@@ -96,9 +96,6 @@ std::mutex mu;
 void FPS(bool b);
 void GAMEPLAY_LOOP(QuadTree* _Quadtree);
 
-//bool collide(WorldObj* recA, WorldObj* recB);
-//void Darion_Ian_Test();
-
 bool lineCollision(Line l1, Line l2);
 /// Helper function passed to thread to set file. Param is a tuple, first being the Texture* to work on, and second being the param needed to call setFile().
 void set_file_with_thread(std::pair<Texture*, pair<string, int>>* p_tuple) {
@@ -110,6 +107,7 @@ int main() {
 	QuadTree* collideTree = new QuadTree(0, screen);
 	GameWindow::init();		
 	GAMEPLAY_LOOP(collideTree);
+
 
 	return 0;
 }
@@ -1198,9 +1196,9 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	act_pool.macro.push_back(test_ally);
 	act_pool.micro.push_back(test_train);
 	act_pool.updateMiddle();
-	vector<Action> act=act_pool.getActions(staticRec,*test_ally);
-	for (auto i = act.begin(); i != act.end(); ++i) {
-		cout << i->getName() << endl;
+	vector<Action*> actions=act_pool.getActions(staticRec,test_ally);
+	for (auto action : actions) {
+		std::cout << action->getName() << std::endl;
 	}
 
 	Alex->add_quest(test_ally,10);
