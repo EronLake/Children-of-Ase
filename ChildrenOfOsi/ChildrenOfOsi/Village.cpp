@@ -7,10 +7,18 @@ vector<Village*> Village::villagesWorld;
 Village::Village()
 {
   Village::villagesWorld.push_back(this);
+  defenders = new Party();
+  barracks = new Party();
+  parties.push_back(defenders);
+  parties.push_back(barracks);
+  health = 100;
 }
 
 Village::~Village()
-{}
+{
+  delete this->barracks;
+  delete this->defenders;
+}
 
 bool Village::isEnemyParty(Party* p)
 {

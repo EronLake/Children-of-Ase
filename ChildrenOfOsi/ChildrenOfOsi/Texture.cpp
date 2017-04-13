@@ -10,7 +10,7 @@ std::mutex mtx;
 void Texture::load()
 {
 	Texture::textureSize++;
-	std::cout << "Texture Size: "<< Texture::textureSize<<std::endl;
+	//std:://cout << "Texture Size: "<< Texture::textureSize<<std::endl;
     txId = Texture::textureSize;
 	glGenTextures(1, &txId);
 	glBindTexture(GL_TEXTURE_2D, txId);
@@ -29,7 +29,7 @@ void Texture::load()
 }
 
 void Texture::setFile(const std::string& fileName, int f) {
-	//std::cout << "WORKING WITH PATH " << fileName << std::endl;
+	////std:://cout << "WORKING WITH PATH " << fileName << std::endl;
 	this->imageFile = fileName; 
 	this->load();
 	this->setFrames(f);

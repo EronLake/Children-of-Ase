@@ -147,7 +147,7 @@ void GameMap::loadTexture()
 void GameMap::setSprite()
 {
 	map1_1->sprite.setTexture(map1_1tex);
-	//////std::cout<< map1_1tex->
+	////////std:://cout<< map1_1tex->
 //	map1_1tex->setFile("Assets/Sprites/map1_2.png", 1);
 	map1_2->sprite.setTexture(map1_2tex);
 	map1_3->sprite.setTexture(map1_3tex);

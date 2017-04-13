@@ -232,7 +232,7 @@ void DialogueController::startConversation(WorldObj* n, bool playerTalk)
 	message = "You started talking to ";
 	message += n->getName();
 	if (playerTalk) {
-		PlayerChoose();
+ 		PlayerChoose();
 	}
 	else {
 		state = 3;
