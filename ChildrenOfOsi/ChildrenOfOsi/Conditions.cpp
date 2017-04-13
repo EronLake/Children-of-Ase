@@ -410,52 +410,26 @@ void RelPost::apply_utility(Hero* curr_hero, Hero* other_hero)
 //Returns null plug string if the postcondition does not complete
 //any of the given preconditions
 //Returns the string key of the precondition if one is found
-
-std::string RelPost::fulfills_which(Precond_vec preconds, Relationship* rel)
+//TODO: Make sure it only returns preconditions which aren't already fulfilled. 
+RelPrecon* RelPost::fulfills_which(Precond_vec preconds, Hero* me, Hero* them)
 {
 	
-	string pre_fulfilled = "\0"; 
+	RelPrecon* pre_fulfilled = nullptr; 
 
 	for (auto precond : preconds) {
 		Preconditions* pre = precond.get();
-		RelPrecon* rel_pre;
-		if (rel_pre = dynamic_cast<RelPrecon*>(pre)) //Only execute if pre is a RelPrecon
+		RelPrecon* rel_pre = dynamic_cast<RelPrecon*>(pre);
+		if ((rel_pre != nullptr) && rel_pre->get_rel_type() == this->get_rel_type()) //Only execute if pre is a RelPrecon, and matches the Posts's type
 		{
-			switch (rel_pre->get_rel_type()) {
-			case STR:
-				break;
-			case BSTR:
-				break;
-			case AFF:
-				break;
-			case BAFF:
-				break;
-			case NOT:
-				break;
-			case BNOT:
-				break;
+			int cost = rel_pre->get_cost(me, them);
+
+			if (this->get_utility(me, them) >= cost)
+			{
+				return rel_pre;
 			}
 		}
-		
-
 	}
-
-	/*
-	for (int precond_string = 0; precond_string < preconds.size(); precond_string++) {
-		Preconditions* precond = map[precond_string].get();
-		if (precond->get_type() != "relationship") //Skip non-relation preconds
-		{
-			continue;
-		}
-		else
-		{
-			RelPrecon* rel_pre = dynamic_cast<RelPrecon*>(precond);
-		}
-		
-
-	}
-	*/
-	return pre_fulfilled;
+	return nullptr;   //No precon will be fulfilled
 }
 
 //---------------------------------------------------------------------------------
