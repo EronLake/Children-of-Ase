@@ -225,11 +225,15 @@ void CombatController::checkParties() {
 			vector<Party*> partiesB = (*j)->getParties();
 			for (auto a = partiesA.begin(); a != partiesA.end(); ++a) {
 				if ((*a)->getMembers().size() == 0) {
-					(*i)->remove_party((*a));
+					if (((*i)->barracks != (*a)) || ((*i)->defenders != (*a))) {
+						(*i)->remove_party((*a));
+					}
 				} else if ((*a)->getMode() != Party::MODE_FLEE && !(*a)->getLeader()->getInCombat()) {
 					for (auto b = partiesB.begin(); b != partiesB.end(); ++b) {
-						if ((*b)->getMembers().size() == 0) {
-							(*j)->remove_party((*b));
+						if ((*b)->getMembers().size() == 0 ) {
+							if (((*j)->barracks != (*b)) || ((*j)->defenders != (*b))) {
+								(*j)->remove_party((*b));
+							}
 						} else if (dist_by_center((*a)->getLeader(), (*b)->getLeader()) < 1000) {
 							(*a)->addToCurrentEnemies(*b);
 							vector<Soldier*> mema = (*a)->getMembers();
@@ -266,7 +270,7 @@ void CombatController::party_leader_update(Soldier* sold1, int state) {
 		if (sold1->destination == Vector2f(0, 0)) {
 			sold1->getParty()->setMode(Party::MODE_IDLE);
 			if (home == sold1->getParty()->get_village()->get_village_location()) {
-				sold1->getParty()->get_village()->barracks.push_back(sold1->getParty());
+				sold1->getParty()->get_village()->barracks->add_party_to_party(sold1->getParty());
 			}
 			std::cout << sold1->getID() << " is idling now" << std::endl;
 		}
