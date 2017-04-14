@@ -36,6 +36,20 @@ std::vector<ConversationLogObj*> conversation_log_obj_pointer_vec;
 // OSHOSI 4
 // OGUN 5
 
+//Dummy vectors for Yemoja's and Shango's relationships and personalities
+
+/*index 0 = Affinity, index 1 = notoriety, index 2 = strength, index 3 = AffEstimate
+index 4 = NotorEstimate, index 5 = StrEstimate*/
+std::vector<int> yemoja_relationship_with_Shango = {60, 50, 50, 50, 50, 50};
+std::vector<int> yemoja_relationship_with_Oya = {70, 40, 80, 70, 40, 80 };
+std::vector<int> shango_relationship_with_yemoja = { 50, 50, 60, 50, 50, 60 };
+std::vector<int> shango_relationship_with_Oya = { 50, 50, 60, 50, 50, 60 };
+
+/*index 0 = honor, index 1 = pride, index 2 = aggression, index 3 = kindness
+index 4 = greed, index 5 = recklessness, index 6 = extroversion*/
+std::vector<int> yemoja_personality = {30, 70, 80, 60, 30, 30, 50};
+std::vector<int> shango_personality = {50, 50, 60, 60, 50, 60, 20};
+
 DialogueController::DialogueController()
 {
 	
