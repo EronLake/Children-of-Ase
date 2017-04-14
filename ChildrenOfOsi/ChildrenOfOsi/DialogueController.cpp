@@ -40,10 +40,10 @@ std::vector<ConversationLogObj*> conversation_log_obj_pointer_vec;
 
 /*index 0 = Affinity, index 1 = notoriety, index 2 = strength, index 3 = AffEstimate
 index 4 = NotorEstimate, index 5 = StrEstimate*/
-std::vector<int> yemoja_relationship_with_Shango = {60, 50, 50, 50, 50, 50};
-std::vector<int> yemoja_relationship_with_Oya = {70, 40, 80, 70, 40, 80 };
+std::vector<int> yemoja_relationship_with_shango = {60, 50, 50, 50, 50, 50};
+std::vector<int> yemoja_relationship_with_oya = {70, 40, 80, 70, 40, 80 };
 std::vector<int> shango_relationship_with_yemoja = { 50, 50, 60, 50, 50, 60 };
-std::vector<int> shango_relationship_with_Oya = { 50, 50, 60, 50, 50, 60 };
+std::vector<int> shango_relationship_with_oya = { 50, 50, 60, 50, 50, 60 };
 
 /*index 0 = honor, index 1 = pride, index 2 = aggression, index 3 = kindness
 index 4 = greed, index 5 = recklessness, index 6 = extroversion*/
@@ -77,7 +77,7 @@ void DialogueController::PlayerConversationPoint()
 	}
 	vector<std::string> print = getOptions();
 	dialogue_point choice = options[optionsIndex][select + DialogueController::scroll_control];
-	std::string conversation_pt_sentence = dialogue.gen_dialog(choice, player);
+	std::string conversation_pt_sentence = dialogue.gen_dialog(choice, player,1 ,1);
 	message += player->getName() + ": " + conversation_pt_sentence;
 	//////store player conversation point choice[1] here//////
 	ConversationLogObj* conv_log_obj = new ConversationLogObj();
@@ -85,7 +85,10 @@ void DialogueController::PlayerConversationPoint()
 	conv_log_obj->set_who(1);
 	conv_log_obj->set_conv_point(Containers::conv_point_table[choice[1]]);
 	conv_log_obj->update_number_of_times_said();
-	conv_log_obj->set_topic(1, mem);
+	if(choice[1].at(0) == 'M')
+	    conv_log_obj->set_topic(3, mem); //make the topic Oya if the player selected a move to action
+	else
+	    conv_log_obj->set_topic(1, mem);//otherwise make the topic Shango
 	conversation_log_obj_pointer_vec.push_back(conv_log_obj);
 	///////////////////////////////////////////////////////////
 	otherResponse(choice[1]);
@@ -111,17 +114,41 @@ void DialogueController::PlayerResponse()
 		}
 
 	}
-	std::string reply_pt_sentence = dialogue.gen_dialog(choice, player);
+	//calculation for shango's phrase selection based on relationship
+	int shango_relationship_phrase_picker = 1;
+	if (shango_relationship_with_yemoja[0] <= 20) {
+		shango_relationship_phrase_picker = 1;
+	}
+	else if (shango_relationship_with_yemoja[0] > 20 && shango_relationship_with_yemoja[0] < 40) {
+		shango_relationship_phrase_picker = 2;
+	}
+	else if (shango_relationship_with_yemoja[0] >= 40 && shango_relationship_with_yemoja[0] < 60) {
+		shango_relationship_phrase_picker = 3;
+	}
+	else if (shango_relationship_with_yemoja[0] >= 60 && shango_relationship_with_yemoja[0] < 80) {
+		shango_relationship_phrase_picker = 4;
+	}
+	else if (shango_relationship_with_yemoja[0] >= 80) {
+		shango_relationship_phrase_picker = 5;
+	}
+	std::string reply_pt_sentence = dialogue.gen_dialog(choice, player,1, shango_relationship_phrase_picker);
 	//////store player reply choice[1] here//////
 	ConversationLogObj* conv_log_obj = new ConversationLogObj();
 	Memory* mem = nullptr;
 	conv_log_obj->set_who(1);
 	conv_log_obj->set_conv_point(Containers::conv_point_table[choice[1]]);
 	conv_log_obj->update_number_of_times_said();
-	conv_log_obj->set_topic(1, mem);
+	if (choice[1].size() > 12) {
+		if (choice[1].at(12) == 'M')
+			conv_log_obj->set_topic(3, mem); //make the topic Oya if the player selected a move to action
+	}
+	else
+		conv_log_obj->set_topic(1, mem);//otherwise make the topic Shango
 	conversation_log_obj_pointer_vec.push_back(conv_log_obj);
 	/////////////////////////////////////////////
 	//draws reply
+	if (conv_log_obj->get_topic().first == 3)
+		reply_pt_sentence.insert(0, "Oya");
 	message = player->getName()+": "+reply_pt_sentence +"\n\n";
 	PlayerChoose();
 }
@@ -142,8 +169,26 @@ void DialogueController::otherConversationPoint(dialogue_point line)
 		return;
 	}
 
-	std::string reply_pt_sentence = dialogue.gen_dialog(line, temp_hero);
-	std::string con_pt_sentence = dialogue.gen_dialog(point, temp_hero);
+	//calculation for yemoja's phrase selection based on relationship
+	int relationship_phrase_picker = 1;
+	if (yemoja_relationship_with_shango[0] <= 20) {
+		relationship_phrase_picker = 1;
+	}
+	else if (yemoja_relationship_with_shango[0] > 20 && yemoja_relationship_with_shango[0] < 40) {
+		relationship_phrase_picker = 2;
+	}
+	else if (yemoja_relationship_with_shango[0] >= 40 && yemoja_relationship_with_shango[0] < 60) {
+		relationship_phrase_picker = 3;
+	}
+	else if (yemoja_relationship_with_shango[0] >= 60 && yemoja_relationship_with_shango[0] < 80) {
+		relationship_phrase_picker = 4;
+	}
+	else if (yemoja_relationship_with_shango[0] >= 80) {
+		relationship_phrase_picker = 5;
+	}
+
+	std::string reply_pt_sentence = dialogue.gen_dialog(line, temp_hero, relationship_phrase_picker, 1);
+	std::string con_pt_sentence = dialogue.gen_dialog(point, temp_hero, relationship_phrase_picker, 1);
 	//////store NPC reply point(line[1]) and conversation point here(point[1])//////
 	ConversationLogObj* conv_log_obj = new ConversationLogObj();
 	Memory* mem = nullptr;
@@ -173,13 +218,37 @@ void DialogueController::otherConversationPoint(dialogue_point line)
 	conv_log_obj->set_who(who_arg);
 	conv_log_obj->set_conv_point(Containers::conv_point_table[line[1]]);
 	conv_log_obj->update_number_of_times_said();
-	conv_log_obj->set_topic(1, mem);
+	if (line[1].size() > 12) {
+		if (line[1].at(12) == 'M') {
+			conv_log_obj->set_topic(3, mem); //make the topic Oya if the player selected a move to action
+			reply_pt_sentence.insert(0, "Oya");
+		}
+		else if (line[1].size() > 20) {
+			if (line[1].at(19) == 'S' || line[1].at(19) == 'A' || line[1].at(19) == 'N') {
+				conv_log_obj->set_topic(3, mem); //make the topic Oya if the player selected a move to action
+				reply_pt_sentence.insert(0, "Oya");
+			}
+		}
+	}
+	else
+		conv_log_obj->set_topic(1, mem);//otherwise make the topic Shango
 	conversation_log_obj_pointer_vec.push_back(conv_log_obj);
 	    //initialization of conversation log object for conversation point
 	conv_log_obj->set_who(who_arg);
 	conv_log_obj->set_conv_point(Containers::conv_point_table[point[1]]);
 	conv_log_obj->update_number_of_times_said();
-	conv_log_obj->set_topic(1, mem);
+	if (point[1].at(0) == 'M') {
+		conv_log_obj->set_topic(3, mem); //make the topic Oya if the player selected a move to action
+		con_pt_sentence.append(" Oya");
+	}
+	else if (point[1].size() > 12) {
+		if (point[1].at(10) == 'S' || point[1].at(10) == 'A' || point[1].at(10) == 'N') {
+			conv_log_obj->set_topic(3, mem); //make the topic Oya if the player selected a move to action
+			con_pt_sentence.append(" Oya");
+		}
+	}
+	else
+		conv_log_obj->set_topic(1, mem);//otherwise make the topic Shango
 	conversation_log_obj_pointer_vec.push_back(conv_log_obj);
 	///////////////////////////////////////////////////////////////////////////////
 	message = other->getName() + ": " + reply_pt_sentence + "\n" +con_pt_sentence;
@@ -312,7 +381,7 @@ void DialogueController::offerQuest_hack_() {
 		return;
 	}
 
-	std::string con_pt_sentence = dialogue.gen_dialog(point, temp_hero);
+	std::string con_pt_sentence = dialogue.gen_dialog(point, temp_hero, 1, 1);
 	message = other->getName() + ": " + con_pt_sentence;
 	replyOptions = { {"quest_accept","quest_accept"},{"quest_deny","quest_deny"} };
 	select = 0;
@@ -328,6 +397,6 @@ std::string DialogueController::convert_option_to_phrase(std::string opt) {
 	dialogue_point return_val_vec;
 	dp.push_back("");
 	dp.push_back(opt);
-	return_val_vec = DialogueController::getDialogueHelper()->get_dialog("Shango", dp);
+	return_val_vec = DialogueController::getDialogueHelper()->get_dialog("Shango", dp,1,1);
 	return return_val_vec[0];
 }

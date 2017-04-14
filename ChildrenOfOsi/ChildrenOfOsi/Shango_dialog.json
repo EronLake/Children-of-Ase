@@ -401,6 +401,22 @@
         "5": "What did I do to you to deserve that? I thought we were closer than that"
     },
 
+	"No_More_Phrases": {
+        "1": "I am at a loss for words of what to say next.",
+        "2": "I am at a loss for words of what to say next.",
+        "3": "I am at a loss for words of what to say next.",
+        "4": "I am at a loss for words of what to say next.",
+        "5": "I am at a loss for words of what to say next."
+    },
+
+	"Response_No_More_Phrases": {
+        "1": "...",
+        "2": "...",
+        "3": "...",
+        "4": "...",
+        "5": "..."
+    },
+
 	"Decline_To_Answer": {
 		"1": "I have nothing to say to that.",
         "2": "I don't know you well enough to reply.",

@@ -215,18 +215,6 @@
 	 }
     },
 
-	"Move_To_Spy_Templates": {
-	 "1": {
-        "1": "Move_To_Spy"
-	 }
-    },
-
-	"Response_To_Move_To_Spy_Templates": {
-	 "1": {
-        "1": "Response_To_Move_To_Spy"
-	 }
-    },
-
 	"Move_To_Train_Templates": {
 	 "1": {
         "1": "Move_To_Train"
@@ -296,6 +284,18 @@
 	"Response_Insult_Templates": {
 	 "1": {
         "1": "Response_Insult"
+	 }
+    },
+
+	"No_More_Phrases_Templates": {
+	 "1": {
+        "1": "No_More_Phrases"
+	 }
+    },
+
+	"Response_No_More_Phrases_Templates": {
+	 "1": {
+        "1": "Response_No_More_Phrases"
 	 }
     },
 

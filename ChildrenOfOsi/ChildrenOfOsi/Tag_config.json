@@ -29,7 +29,6 @@
 				"topic_16": "Bribe",
 				"topic_17": "Compliment",
 				"topic_18": "Grovel",
-				"topic_19": "Move_To_Spy",
 				"topic_22": "Offer_Teaching",
 				"topic_23": "Insult"
             }
@@ -43,7 +42,6 @@
 				"topic_11": "Move_To_Revolt",
 				"topic_14": "Move_To_Destroy",
 				"topic_17": "Ask_To_Join_Party",
-				"topic_18": "Move_To_Spy",
 				"topic_21": "Move_To_Train",
 				"topic_22": "Ask_For_Teaching"
             }
@@ -71,7 +69,6 @@
 				"topic_13": "Ask_To_Duel",
 				"topic_14": "Ask_To_Spar",
 				"topic_15": "Recruit_For_Party",
-				"topic_16": "Move_To_Spy",
 				"topic_19": "Move_To_Train"
             }
         }

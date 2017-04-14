@@ -27,11 +27,11 @@ public:
 	std::vector<std::vector<dialogue_point>> get_possible_conv_pts();
 	std::vector<dialogue_point> get_possible_reply_pts(std::string point, int opts_inx);
 
-	std::string gen_dialog(dialogue_point diog_pt, Hero* hero);
-	std::string gen_reply(dialogue_point diog_pt, Hero* hero);
+	std::string gen_dialog(dialogue_point diog_pt, Hero* hero, int relationship_int, int relationship_int_shango);
+	std::string gen_reply(dialogue_point diog_pt, Hero* hero, int relationship_int, int relationship_int_shango);
 
 	dialogue_template get_template(dialogue_point diog_pt);
-	dialogue_point get_dialog(std::string name, dialogue_point diog_pt);
+	dialogue_point get_dialog(std::string name, dialogue_point diog_pt, int relationship_int, int shango_phrase_picker);
 	std::string convert_to_sentence(dialogue_point dialog_pt);
 	void fill_conversations();
 

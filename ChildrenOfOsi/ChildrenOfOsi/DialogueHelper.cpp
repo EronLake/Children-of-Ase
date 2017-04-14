@@ -75,7 +75,10 @@ dialogue_point DialogueHelper::choose_conv_pt(std::vector<ConversationLogObj*> c
 	}
 	ofs.close();
 	//choose based on personality
-	conv_pt_index = rand() % (temp.size());
+	if (temp.size() > 0)
+		conv_pt_index = rand() % (temp.size());
+	else
+		return {"No_More_Phrases","No_More_Phrases"}; //gets json that npc says when they fail to find an appropriate thing to say
 	return temp[conv_pt_index]->dpoint;
 }
 
@@ -112,7 +115,7 @@ std::vector<dialogue_point> DialogueHelper::get_possible_reply_pts(std::string p
 	return reply;
 }
 
-std::string DialogueHelper::gen_dialog(dialogue_point diog_pt, Hero* hero)
+std::string DialogueHelper::gen_dialog(dialogue_point diog_pt, Hero* hero, int relationship_phrase_picker, int relationship_phrase_picker_shango)
 {
 	std::string name = "";
 	//std::ofstream ofs;
@@ -144,13 +147,13 @@ std::string DialogueHelper::gen_dialog(dialogue_point diog_pt, Hero* hero)
 	else {
 		name = "SilverSoldier";
 	}
-	std::string sentence = convert_to_sentence(get_dialog(name, diog_pt));
+	std::string sentence = convert_to_sentence(get_dialog(name, diog_pt, relationship_phrase_picker, relationship_phrase_picker_shango));
 
 	return sentence;
 }
 
 //poientially don't need this function
-std::string DialogueHelper::gen_reply(dialogue_point diog_pt, Hero* hero)
+std::string DialogueHelper::gen_reply(dialogue_point diog_pt, Hero* hero, int relationship_phrase_picker, int relationship_phrase_picker_shango)
 {
 	std::string name;
 	if (hero->name == SHANGO)
@@ -174,7 +177,7 @@ std::string DialogueHelper::gen_reply(dialogue_point diog_pt, Hero* hero)
 		name = "Ogun";
 	}
 
-	std::string sentence = convert_to_sentence(get_dialog(name, diog_pt));
+	std::string sentence = convert_to_sentence(get_dialog(name, diog_pt, relationship_phrase_picker, relationship_phrase_picker_shango));
 
 	return sentence;
 }
@@ -207,7 +210,7 @@ dialogue_template DialogueHelper::get_template(dialogue_point diog_pt) {
 
 }
 
-dialogue_point DialogueHelper::get_dialog(std::string name, dialogue_point diog_pt) {
+dialogue_point DialogueHelper::get_dialog(std::string name, dialogue_point diog_pt, int relationship_phrase_picker, int shango_phrase_picker) {
 	//std::ofstream ofs;
 	//ofs.open("dialog_template_output.txt", std::ofstream::out | std::ofstream::app);
 	dialogue_template dtemp = get_template(diog_pt);
@@ -239,17 +242,18 @@ dialogue_point DialogueHelper::get_dialog(std::string name, dialogue_point diog_
 	into this function is Shango. Make what appears on upper GUI window be what 
 	the player selected to say.*/
 	///////////////////////////////////
+	int j = 1;
 	if (name != "Shango") {
-		int j = 0;
+		j = relationship_phrase_picker;
 		std::string tmp = "";
 		for (int i = 1; i <= dtemp.size(); i++) {
 			tmp = dtemp[i - 1];
 			if (tmp != "?" && tmp != "," && tmp != "." &&
 				tmp != "!" && tmp != "_") {
-				if (root[tmp].size() > 1)
-					j = rand() % root[tmp].size() + 1;
-				else
-					j = 1;
+				//if (root[tmp].size() > 1)
+					//j = rand() % root[tmp].size() + 1;
+				//else
+					//j = 1;
 				dpoint.push_back(root[tmp][to_string(j)]
 					.asString());
 				//ofs << "dp: " << root[tmp][to_string(j)]
@@ -263,7 +267,8 @@ dialogue_point DialogueHelper::get_dialog(std::string name, dialogue_point diog_
 		}
 	}
 	else {
-		dpoint.push_back(root[diog_pt[1]][to_string(1)]
+		j = shango_phrase_picker;
+		dpoint.push_back(root[diog_pt[1]][to_string(j)]
 			.asString());
 	}
 
@@ -322,7 +327,7 @@ void DialogueHelper::fill_conversations() {
 		else if (itor->second->get_topic() == "acp") {
 			possible_conv_pts[1].push_back(itor->second->dpoint);
 		}
-		else if (itor->second->get_topic() == "arp") {
+		else if (itor->second->get_topic() == "arp" || itor->second->get_topic() == "nmp") {
 			possible_reply_pts[3].push_back(itor->second->dpoint);
 			possible_reply_pts[0].push_back(itor->second->dpoint);
 			possible_reply_pts[1].push_back(itor->second->dpoint);
