@@ -3,20 +3,23 @@
             "topics": {
                 "topic_1": "Ask_About_Strength",
                 "topic_2": "Ask_About_Affinity",
-                "topic_3": "Ask_About_Notoriety"
+              "topic_3": "Ask_About_Notoriety",
+              "topic_4": "Boast"
             }
         },
         "Getting_To_Know_Each_Other": {
 			"topics": {
                 "topic_1": "Boast",
                 "topic_2": "Ask_Name",
-                "topic_3": "Ask_Origin"
+        "topic_3": "Ask_Origin",
+        "topic_4": "Boast"
             }
         },
 
         "Ask_About_Alliance": {
 			"topics": {
-                "topic_1": "Ask_To_Form_Alliance"
+        "topic_1": "Ask_To_Form_Alliance",
+        "topic_2": "Boast"
             }
         },
 
@@ -31,7 +34,8 @@
 				"topic_18": "Grovel",
 				"topic_19": "Move_To_Spy",
 				"topic_22": "Offer_Teaching",
-				"topic_23": "Insult"
+        "topic_23": "Insult",
+        "topic_24": "Boast"
             }
         },
 
@@ -45,7 +49,8 @@
 				"topic_17": "Ask_To_Join_Party",
 				"topic_18": "Move_To_Spy",
 				"topic_21": "Move_To_Train",
-				"topic_22": "Ask_For_Teaching"
+        "topic_22": "Ask_For_Teaching",
+        "topic_23": "Boast"
             }
         },
 
@@ -58,7 +63,8 @@
 				"topic_8": "Ask_For_Teaching",
 				"topic_9": "Offer_Teaching",
 				"topic_10": "Boast",
-				"topic_11": "Intimidate"
+        "topic_11": "Intimidate",
+        "topic_12": "Boast"
             }
         },
 
@@ -72,7 +78,8 @@
 				"topic_14": "Ask_To_Spar",
 				"topic_15": "Recruit_For_Party",
 				"topic_16": "Move_To_Spy",
-				"topic_19": "Move_To_Train"
+        "topic_19": "Move_To_Train",
+        "topic_20": "Boast"
             }
         }
     
