@@ -456,9 +456,11 @@ int Movement::attack(WorldObj* obj) {
 										// If target is dead, remove from village and targeting
 										if (npc->getHealth() <= 0) {
 											if (Soldier *sold = CheckClass::isSoldier(liv)) {
-                        // sold->playDeathAnimation();
-                        sold->setLoc(sold->getVillage()->get_village_location());
-                        sold->getVillage()->barracks->addToParty(sold, false);
+											// sold->playDeathAnimation();
+											npc->sprite.unlockAnimation();
+											manager->createTaskWithObj("Hurt", "DRAW", npc);
+											sold->setLoc(sold->getVillage()->get_village_location());
+											sold->getVillage()->barracks->addToParty(sold, false);
 											}
 										}
 									} else {
@@ -471,7 +473,11 @@ int Movement::attack(WorldObj* obj) {
 								//cout << "THE TARGET'S HP IS NOW ******** " << liv->getHealth() << endl;
 								if (liv->getHealth() <= 0) {
 									if (Soldier *sold = CheckClass::isSoldier(liv)) {
-
+										// sold->playDeathAnimation();
+										liv->sprite.unlockAnimation();
+										manager->createTaskWithObj("Hurt", "DRAW", liv);
+										sold->setLoc(sold->getVillage()->get_village_location());
+										sold->getVillage()->barracks->addToParty(sold, false);
 									}
 								}
 								if (a->second->getDestroy())a->second->setDuration(0);
