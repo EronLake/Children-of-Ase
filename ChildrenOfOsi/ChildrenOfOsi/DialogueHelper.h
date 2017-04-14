@@ -4,6 +4,7 @@
 #include "json.h"
 #include "ConversationPoint.h"
 #include "ConversationLogObj.h"
+#include "Personality.h"
 
 
 typedef std::vector<std::string> dialogue_point;
@@ -21,7 +22,7 @@ public:
 	~DialogueHelper();
 
 	//functions where heroes make dialogue choices
-	dialogue_point choose_conv_pt(std::vector<ConversationLogObj*> conversation_log_obj_pointer_vec, int optn_inx);
+	dialogue_point choose_conv_pt(std::vector<ConversationLogObj*> conversation_log_obj_pointer_vec, std::vector<int> personality, std::vector<int> relationship);
 	dialogue_point choose_reply_pt(std::string point,int optn_inx);
 
 	std::vector<std::vector<dialogue_point>> get_possible_conv_pts();
@@ -34,6 +35,8 @@ public:
 	dialogue_point get_dialog(std::string name, dialogue_point diog_pt, int relationship_int, int shango_phrase_picker);
 	std::string convert_to_sentence(dialogue_point dialog_pt);
 	void fill_conversations();
+	int personality_appeal(ConversationPoint* point, vector<int> personality);
 
 };
+
 

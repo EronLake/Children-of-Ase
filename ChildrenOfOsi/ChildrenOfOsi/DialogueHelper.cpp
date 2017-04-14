@@ -2,6 +2,12 @@
 #include "DialogueHelper.h"
 #include "Player.h"
 #include "Tag.h"
+typedef std::pair<int, ConversationPoint*> appealPoint;
+template<>
+bool std::operator==(const appealPoint& p1, const appealPoint& p2) {
+		return p1.first == p2.first && p1.second == p2.second;
+	}
+
 
 
 Player* player;
@@ -24,11 +30,25 @@ DialogueHelper::DialogueHelper()
 DialogueHelper::~DialogueHelper()
 {
 }
+int DialogueHelper::personality_appeal(ConversationPoint* point, vector<int> personality) {
 
+	
+
+	return ((personality[0]*point->multipliers->getHonor())+
+	(personality[1] *point->multipliers->getPride())+
+	(personality[2] *point->multipliers->getAggression())+
+	(personality[3] *point->multipliers->getKindness())+
+	(personality[4] *point->multipliers->getGreed())+
+	(personality[5] *point->multipliers->getRecklessness())+
+	(personality[6] *point->multipliers->getExtroversion()));
+};
 //functions where heroes make dialogue choices
-dialogue_point DialogueHelper::choose_conv_pt(std::vector<ConversationLogObj*> conversation_log_obj_pointer_vec, int optn_inx)
-{	
-	std::vector<ConversationPoint*> temp;
+dialogue_point DialogueHelper::choose_conv_pt(std::vector<ConversationLogObj*> conversation_log_obj_pointer_vec, std::vector<int> personality, std::vector<int> relationship)
+{	/*index 0 = Affinity, index 1 = notoriety, index 2 = strength, index 3 = AffEstimateindex 4 = NotorEstimate, index 5 = StrEstimate*/
+
+	/*index 0 = honor, index 1 = pride, index 2 = aggression, index 3 = kindnessindex 4 = greed, index 5 = recklessness, index 6 = extroversion*/
+	vector<appealPoint> possible_replies;
+
 	int conv_pt_index;
 	
 	
@@ -41,12 +61,16 @@ dialogue_point DialogueHelper::choose_conv_pt(std::vector<ConversationLogObj*> c
 		//else {
 
 		// }
+		
 		for (auto j : (*i)->get_conv_point()->tag_pointer_vec) {
+			
 			for (auto k : j->conversation_point_pointer_vec) {
-				if (std::find(temp.begin(), temp.end(), k) != temp.end()) {
+				
+				if (std::find(possible_replies.begin(), possible_replies.end(), std::make_pair(0, k)) != possible_replies.end()) {
 				}
 				else {
-				temp.push_back(k);
+					if(relationship[0]>= k->rel_multipliers->getAffinity() && relationship[1] >= k->rel_multipliers->getNotoriety() && relationship[2] >= k->rel_multipliers->getStrength()){
+					possible_replies.push_back(std::make_pair(0,k));}
 				}
 			
 			
@@ -56,30 +80,55 @@ dialogue_point DialogueHelper::choose_conv_pt(std::vector<ConversationLogObj*> c
 	    }
 		
 	}
-	for (auto i = conversation_log_obj_pointer_vec.begin(); i != conversation_log_obj_pointer_vec.end(); ++i) {
-		auto it = std::find(temp.begin(), temp.end(), (*i)->get_conv_point());
-		if (it != temp.end() && (*i)->get_who() == 2) {
-			temp.erase(std::remove(temp.begin(), temp.end(), *it), temp.end());
+	/*for (auto i = conversation_log_obj_pointer_vec.begin(); i != conversation_log_obj_pointer_vec.end(); ++i) {
+		appealPoint tmp = std::make_pair(0, (*i)->get_conv_point());
+		auto it = std::find(possible_replies.begin(), possible_replies.end(), tmp);
+		if (it != possible_replies.end() && (*i)->get_who() == 2) {
+			possible_replies.erase(std::remove(possible_replies.begin(), possible_replies.end(), *it), possible_replies.end());
 		}
 		else {
 
 		}
-	}
+	}*/
 	//relationship filtering
+	
+	//choose based on personality
+	std::vector<std::pair<int, ConversationPoint*>>  temp;
+	dialogue_point def;
+	def.push_back("");
+	def.push_back("Goodbye");
+	
+	
+	if (possible_replies.size() != 0) {
+		conv_pt_index = rand() % (possible_replies.size());
+		}
+	int appeal;
+	for (auto itor = possible_replies.begin(); itor != possible_replies.end(); itor++) {
+			appeal = personality_appeal(itor->second, personality);
+				temp.push_back(make_pair(appeal, itor->second));
+	}
+	possible_replies = temp;
+	struct greatestAppeal {
+		inline bool operator()(std::pair<int, ConversationPoint*> appeal1, std::pair<int, ConversationPoint*> appeal2) {//is temporarily an action
+			return (appeal1.first > appeal2.first);
+		};
+	};
+
+	std::sort(possible_replies.begin(), possible_replies.end(), greatestAppeal());
 	std::ofstream ofs;
 	ofs.open("dialog_template_output.txt", std::ofstream::out | std::ofstream::trunc);
-	for (auto itor = temp.begin(); itor != temp.end(); itor++) {
+	for (auto itor = possible_replies.begin(); itor != possible_replies.end(); itor++) {
 	
-	ofs << "Conversation Point Name: " << (*itor)->get_name() << " Tag Name: " << std::endl;
+		ofs << "Conversation Point Name: " << itor->second->get_name() << " Appeal " << itor->first << std::endl;
 
 	}
 	ofs.close();
-	//choose based on personality
-	if (temp.size() > 0)
-		conv_pt_index = rand() % (temp.size());
-	else
-		return {"No_More_Phrases","No_More_Phrases"}; //gets json that npc says when they fail to find an appropriate thing to say
-	return temp[conv_pt_index]->dpoint;
+	if (possible_replies.size() != 0) {
+		return possible_replies[conv_pt_index].second->dpoint;
+	}
+	else {
+		return def;
+	}
 }
 
 dialogue_point DialogueHelper::choose_reply_pt(std::string point, int optn_inx)
