@@ -473,3 +473,59 @@ void ActionExecFunctions::execute_duel(Action* duel)
 	}
 
 }
+
+void ActionExecFunctions::execute_conversation(Action* conv)
+{
+	switch (conv->checkpoint) {
+	case 0: //Pick training location, create memory, increment checkpoint
+		ActionHelper::create_memory(conv, conv->getDoer());
+		conv->getDoer()->set_action_destination(&conv->getReceiver()->getVillage()->get_village_location());
+		conv->checkpoint++;
+		break;
+
+	case 1: //If destination is reached, start a timer and move to next checkpoint
+		if (conv->getDoer()->get_action_destination() == nullptr) {
+			ActionHelper::set_timer(conv, 60);  
+			conv->checkpoint++;
+		}
+		break;
+
+	case 2: //When greeting timer is complete, set train destination for both heros
+		if (ActionHelper::retrieve_time(conv) == 0) //Greeting timer complete
+		{
+			conv->getDoer()->set_action_destination(&conv->getReceiver()->getLoc());
+			conv->checkpoint++;
+		}
+		break;
+	case 3:  //When train destination is reached, start a time for 1 minute
+		if (conv->getDoer()->get_action_destination() == nullptr)
+		{
+			ActionHelper::set_timer(conv, 3600); //Wait 1 minute for training (60 frames times 60 seconds)
+			conv->checkpoint++;
+		}
+		break;
+	case 4: //If timer is complete, set village as destination, apply postconds, update memory
+		if (ActionHelper::retrieve_time(conv) == 0) {
+			Memory* doer_mem = conv->getDoer()->find_mem(conv->getName() + std::to_string(conv->time_stamp));
+			//Memory* receiver_mem = fight->getReceiver()->find_mem(fight->getName() + std::to_string(fight->time_stamp));
+			if (doer_mem == nullptr)
+			{
+				perror("something is wrong with the current hero memory creation function");
+			}
+			conv->getDoer()->set_action_destination(&conv->getDoer()->getVillage()->get_village_location()); //Also predefined, maybe as "home_location" in hero
+			if (ActionHelper::conversation(conv)) {
+				conv->apply_postconditions(true);				 //Apply post-conditions
+				doer_mem->setCategory("success");			 //Call update_memory function
+				doer_mem->setReason("The conversaton went well");
+			} else {
+				conv->apply_postconditions(false);				 //Apply post-conditions
+				doer_mem->setCategory("fail");			 //Call update_memory function
+				doer_mem->setReason("The conversaton didn't go well");
+			}
+			conv->executed = true;
+			doer_mem->setWhen(/*get global frame*/0);
+		}
+		break;
+
+	}
+}

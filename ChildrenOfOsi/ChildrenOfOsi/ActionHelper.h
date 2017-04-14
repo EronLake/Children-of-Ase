@@ -7,6 +7,7 @@
 #include "Containers.h"
 #include "Party.h"
 #include "Village.h"
+#include "DialogueController.h"
 
 class ActionHelper
 {
@@ -28,7 +29,8 @@ public:
 
 	static int retrieve_time(Action* action);
 	static void set_timer(Action* action, int wait_time);
-
+	
+	static bool conversation(Action* action);
 	//Check alliance acceptance 
 	//Go to location
 	

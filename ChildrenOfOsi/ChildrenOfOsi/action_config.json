@@ -1,6 +1,6 @@
 {
   "train": {
-    "name": "train",
+    "name": "Train",
     "type": "micro",
     "utility": 0.0,
     "why": 0.0,
@@ -14,7 +14,7 @@
     "greed": 0
   },
   "fight_bandits": {
-    "name": "fight_bandits",
+    "name": "Fight_Bandits",
     "type": "micro",
     "utility": 0.0,
     "why": 0.0,
@@ -28,7 +28,7 @@
     "greed": 0
   },
   "form_alliance": {
-    "name": "form_alliance",
+    "name": "Form_Alliance",
     "type": "end_state",
     "utility": 0.0,
     "why": 0.0,
@@ -42,7 +42,7 @@
     "greed": 1
   },
   "occupy": {
-    "name": "occupy",
+    "name": "Occupy",
     "type": "end_state",
     "utility": 0.0,
     "why": 0.0,
@@ -56,7 +56,7 @@
     "greed": 4
   },
     "conquer": {
-    "name": "conquer",
+    "name": "Conquer",
     "type": "end_state",
     "utility": 0.0,
     "why": 0.0,
