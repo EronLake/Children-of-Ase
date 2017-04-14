@@ -11,6 +11,7 @@ Movement::Movement(QuadTree* QT) {
 	tree = QT;
 	rivObj = new RiverObj();
 	rivObj->initialize_lines();
+	set_player_clone = false;
 }
 
 Movement::~Movement() {
@@ -33,6 +34,10 @@ int Movement::move_up(WorldObj* obj) {
 		{
 			float moveSpeed = npc->getSpeed();
 		}
+		if (!set_player_clone) {
+			player_clone = *obj;
+			set_player_clone = true;
+		}
 		obj->shiftY(-moveSpeed*speed_magnifier);
 		for (int i = 0; i < objVec.size(); i++) {
 			if (obj == objVec[i] || (my_type >= 2 && objVec[i]->getType() >= 2)) {
@@ -45,7 +50,7 @@ int Movement::move_up(WorldObj* obj) {
 				break;
 			}
 		}
-		Line temp(Point(obj->body[0].getBL().getXloc(), obj->body[0].getBL().getYloc()), Point(obj->body[0].getBR().getXloc(), obj->body[0].getBR().getYloc()));
+		Line temp(Point(obj->body[0].getBL().getXloc(), 20000-obj->body[0].getBL().getYloc()), Point(obj->body[0].getBR().getXloc(), 20000-obj->body[0].getBR().getYloc()));
 		for (int i = 0; i < rivObj->getLines().size(); i++) {
 			if (lineCollision((rivObj->getLines())[i], temp)) {
 				//manager->createTask("Bump", "SOUND");
@@ -179,7 +184,7 @@ int Movement::move_down(WorldObj* obj) {
 				break;
 			}
 		}
-		Line temp(Point(obj->body[0].getBL().getXloc(), obj->body[0].getBL().getYloc()), Point(obj->body[0].getBR().getXloc(), obj->body[0].getBR().getYloc()));
+		Line temp(Point(obj->body[0].getBL().getXloc(), 20000-obj->body[0].getBL().getYloc()), Point(obj->body[0].getBR().getXloc(), 20000-obj->body[0].getBR().getYloc()));
 
 		for (int i = 0; i < rivObj->getLines().size(); i++) {
 			if (lineCollision((rivObj->getLines())[i], temp)) {
@@ -310,13 +315,13 @@ int Movement::move_left(WorldObj* obj) {
 				break;
 			}
 		}
-		Line temp(Point(obj->body[0].getBL().getXloc(), obj->body[0].getBL().getYloc()), Point(obj->body[0].getBR().getXloc(), obj->body[0].getBR().getYloc()));
+		Line temp(Point(obj->body[0].getBL().getXloc(), 20000-obj->body[0].getBL().getYloc()), Point(obj->body[0].getBR().getXloc(), 20000-obj->body[0].getBR().getYloc()));
 		for (int i = 0; i < rivObj->getLines().size(); i++) {
 			if (lineCollision((rivObj->getLines())[i], temp)) {
 				//manager->createTask("Bump", "SOUND");
 				for (int j = 0; j < 10; j++) {
 					cout << "COLIISION WITH LINE " << rivObj->getLines()[i].getP1().getX() << ", " << rivObj->getLines()[i].getP1().getY() << ", " << rivObj->getLines()[i].getP2().getX() << ", " << rivObj->getLines()[i].getP2().getY() << endl;
-					cout << "my obj coord is " << obj->body[0].getBL().getXloc() << ", " << obj->body[0].getBL().getYloc() << ", " << obj->body[0].getBR().getXloc() << ", " << obj->body[0].getBR().getYloc() << endl;
+					cout << "my obj coord is " << obj->body[0].getBL().getXloc() << ", " << 20000-obj->body[0].getBL().getYloc() << ", " << obj->body[0].getBR().getXloc() << ", " << 20000-obj->body[0].getBR().getYloc() << endl;
 
 				}
 				LOG("failed to move up. collision.");
@@ -354,7 +359,7 @@ int Movement::move_right(WorldObj* obj) {
 				break;
 			}
 		}
-		Line temp(Point(obj->body[0].getBL().getXloc(), obj->body[0].getBL().getYloc()), Point(obj->body[0].getBR().getXloc(), obj->body[0].getBR().getYloc()));
+		Line temp(Point(obj->body[0].getBL().getXloc(), 20000-obj->body[0].getBL().getYloc()), Point(obj->body[0].getBR().getXloc(), 20000-obj->body[0].getBR().getYloc()));
 
 		for (int i = 0; i < rivObj->getLines().size(); i++) {
 			if (lineCollision((rivObj->getLines())[i], temp)) {
@@ -411,7 +416,7 @@ int Movement::attack(WorldObj* obj) {
 			//std::////cout << "Pause: " << a->second->getPause() << std::endl;
 		}
 		if (a->second->getPause() == 0) {
-			cout << "Attack compared to: " << objVec.size() << endl;
+			//cout << "Attack compared to: " << objVec.size() << endl;
 			//std::////cout << "Attack Collidable" << std::endl;
 			for (int i = 0; i < objVec.size(); i++) {
 				if (objVec[i]->getType() > 0) {

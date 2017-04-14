@@ -27,6 +27,7 @@ public:
 	float dist(Vector2f start, Vector2f end);
 	void checkParties();
 	void party_leader_update(Soldier* sold1, int state);
+	std::thread threaded_update_soldier(Soldier* s, int n);
 private:
 	vector<Soldier*> soldiers;
 	vector<Soldier*> enemyVec;

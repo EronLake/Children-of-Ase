@@ -39,6 +39,9 @@ public:
 	float diagXSpeed; 
 	float diagYSpeed;
 
+	WorldObj player_clone;
+	bool set_player_clone;
+
 private:
 	bool collision(WorldObj* recA, WorldObj* recB);
 	bool lineCollision(Line l1, Line l2);

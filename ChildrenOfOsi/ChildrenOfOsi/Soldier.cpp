@@ -116,11 +116,11 @@ void Soldier::meleeAttack()
   int d = getDirection();
   if(!swingLeft) {
     melee->setBaseDir(6);
-    melee->setPause(2);
+    melee->setPause(1);
   }
   else {
     melee->setBaseDir(4);
-    melee->setPause(9);
+    melee->setPause(4);
   }
   if(d == 8) {
     y = y - (melee->getHeight() / 1.2);
