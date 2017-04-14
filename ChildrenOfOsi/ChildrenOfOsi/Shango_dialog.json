@@ -1,18 +1,18 @@
 {
     "Greeting": {
-        "1": "Oh... it's you. Let's just get this over with",
-        "2": "I guess anyone nowadays thinks they can just walk in and talk to me",
-        "3": "Hello",
-        "4": "It is good to see you",
-        "5": "My friend, it is so good to see you. I hope you have been doing well"
+        "1": "Oh... it's you. Let's just get this over with.",
+        "2": "I guess anyone nowadays thinks they can just walk in and talk to me.",
+        "3": "Hello.",
+        "4": "It is good to see you.",
+        "5": "My friend, it is so good to see you. I hope you have been doing well."
     },
 
     "Farewell": {
-        "1": "Please just leave already",
+        "1": "Please just leave already.",
         "2": "*tch*",
-        "3": "Goodbye",
-        "4": "I hope to see you again soon",
-        "5": "Feel free to come talk to me anytime"
+        "3": "Goodbye.",
+        "4": "I hope to see you again soon.",
+        "5": "Feel free to come talk to me anytime."
     },
 
 	"Ask_Name": {
@@ -25,11 +25,11 @@
 	},
 
 	"Response_Ask_Name": {
-		"1": "My name is Yemoja",
-		"2": "Nice to meet you. I am Yemoja.",
-		"3": "I am pleased to make your acquaintance. People know me as Yemoja.",
-        "4": "I am pleased to make your acquaintance. People know me as Yemoja.",
-        "5": "I am pleased to make your acquaintance. People know me as Yemoja."
+		"1": "My name is Shango.",
+		"2": "They call me Shango.",
+		"3": "Shangos the name. This is my game.",
+        "4": "Shangos the name. This is my game.",
+        "5": "Shangos the name. This is my game."
 	},
 
 	"Ask_Origin": {
@@ -41,17 +41,16 @@
 	},
 
 	"Response_Ask_Origin": {
-		"1": "If you knew anything, it would be obvious that I am from the Oasis village.",
-		"2": "Are you joking? I am from the Oasis village.",
-		"3": "I came from the village outskirts many years ago and have lived here ever since.",
-		"4": "I came from the village outskirts many years ago and have lived here ever since.",
-        "5": "I came from the village outskirts many years ago and have lived here ever since."
-		
+	    "1": "I will leave that to your imagination.",
+		"2": "I come from far away.",
+		"3": "I come from a place that you won't find on any map.",
+		"4": "I come from a place that you won't find on any map.",
+		"5": "I come from a place that you won't find on any map."
 	},
 
 	"Ask_About_Strength": {
-        "1": "I know that someone like you probably knows nothing I already do not, but how strong is ",
-        "2": "I doubt you can enlighten me, but what do you know of the strength possesed by ",
+        "1": "How strong is ",
+        "2": "What can you tell me about the strength of  ",
         "3": "What do you know of the strength possesed by ",
         "4": "What do you know of the strength possesed by ",
         "5": "What do you know of the strength possesed by "
@@ -66,8 +65,8 @@
     },
 
     "Ask_About_Affinity": {
-        "1": "I know that someone like you probably knows nothing I already do not, but how likable is ",
-        "2": "I doubt you can enlighten me, but how friendly is ",
+        "1": "How likable is ",
+        "2": "How friendly is ",
         "3": "How much of an agreeable person is ",
         "4": "How much of an agreeable person is ",
         "5": "How much of an agreeable person is "
@@ -82,8 +81,8 @@
     },
 
 	"Ask_About_Notoriety": {
-        "1": "I know that someone like you probably knows nothing I already do not, but how well known is ",
-        "2": "Since you so decided to show up in my presence unnanounced, how about you make yourself useful? What is the level of renown of ",
+        "1": "How well known is ",
+        "2": "What level of renown has been achieved by  ",
         "3": "I am interested in people who have made names for themselves. How well do people know ",
         "4": "I am interested in people who have made names for themselves. How well do people know ",
         "5": "I am interested in people who have made names for themselves. How well do people know "
@@ -93,24 +92,24 @@
         "1": " is a nobody with very few accomplishments.",
         "2": " is an individual of little importance with only a few minor accomplishments.",
         "3": " is known as a capable person that has earned the favor of some.",
-        "4": " is known as a hero to their people and as a person of great strength and fortitude.",
+        "4": " is known as a champion of the people and as a person of great strength and fortitude.",
         "5": " is known far and wide as a hero amongst heroes and many people sing of their achievements."
     },
 
 	"Ask_To_Form_Alliance": {
-        "1": "How do you feel about forming and Alliance with me",
-		"2": "How do you feel about forming and Alliance with me",
-        "3": "How do you feel about forming and Alliance with me",
-        "4": "How do you feel about forming and Alliance with me",
-        "5": "How do you feel about forming and Alliance with me"
+        "1": "How do you feel about forming and Alliance with me?",
+		"2": "How do you feel about forming and Alliance with me?",
+        "3": "How do you feel about forming and Alliance with me?",
+        "4": "How do you feel about forming and Alliance with me?",
+        "5": "How do you feel about forming and Alliance with me?"
     },
 
 	"Response_To_Ask_To_Form_Alliance": {
-        "1": "I honestly do not see how allying with you will help this village become any safer",
-        "2": "I do not know you that well, but this one time I will go against my better judgement and accept this alliance with you",
-        "3": "I think that forming an alliance with you is a situation that benefits the both of us. I accept",
-        "4": "I am more than happy to ally with you. I know that you will help make this village safer",
-		"5": "I am more than happy to ally with you. I know that you will help make this village safer"
+        "1": "I honestly do not see how allying with you will help this village become any safer.",
+        "2": "I do not know you that well, but this one time I will go against my better judgement and accept this alliance with you.",
+        "3": "I think that forming an alliance with you is a situation that benefits the both of us. I accept.",
+        "4": "I am more than happy to ally with you. I know that you will help make this village safer.",
+		"5": "I am more than happy to ally with you. I know that you will help make this village safer."
     },
 
 	"Move_To_Conquer": {
@@ -122,11 +121,11 @@
     },
 
 	"Response_To_Move_To_Conquer": {
-        "1": " hmm.I was considering conquering them but then you told me it was a good idea. Now I am not so sure ",
-        "2": " ? Really? I don't feel like you should be giving me advice on such an important matter",
-        "3": " eh.I am not sure that conquest is the best idea for ensuring the safety of this village, but I will keep it in mind",
-        "4": " as a conquering target? I think that moving to conquer is a risky move, but I am glad that you gave me this advice",
-        "5": " hmm. I respect your advice, and will definitely consider conquest as a powerful strategic move"
+        "1": " hmm.I was considering conquering them but then you told me it was a good idea. Now I am not so sure. ",
+        "2": " ? Really? I don't feel like you should be giving me advice on such an important matter.",
+        "3": " eh.I am not sure that conquest is the best idea for ensuring the safety of this village, but I will keep it in mind.",
+        "4": " as a conquering target? I think that moving to conquer is a risky move, but I am glad that you gave me this advice.",
+        "5": " hmm. I respect your advice, and will definitely consider conquest as a powerful strategic move."
     },
 
 	"Move_To_Alliance": {
@@ -138,27 +137,27 @@
     },
 
 	"Response_To_Move_To_Alliance": {
-        "1": " !? I absolutely refuse. The very idea of being in an alliance with their village disgusts me",
-        "2": " as an ally? An alliance can possibly help ensure the safety of this village, so I will definitely consider it",
-        "3": " as an ally? I will have to think deeply as to whether or not an alliance with them would be a good idea",
-        "4": " as an ally? Your advice always has my best interests in mind it seems, so I promise you I will deeply consider an alliance with them",
-        "5": " as an ally? Your advice always has my best interests in mind it seems, so I promise you I will deeply consider an alliance with them"
+        "1": " !? I absolutely refuse. The very idea of being in an alliance with their village disgusts me.",
+        "2": " as an ally? An alliance can possibly help ensure the safety of this village, so I will definitely consider it.",
+        "3": " as an ally? I will have to think deeply as to whether or not an alliance with them would be a good idea.",
+        "4": " as an ally? Your advice always has my best interests in mind it seems, so I promise you I will deeply consider an alliance with them.",
+        "5": " as an ally? Your advice always has my best interests in mind it seems, so I promise you I will deeply consider an alliance with them."
     },
 
 	"Move_To_Revolt": {
         "1": "I think it would be in your best interests to revolt against ",
         "2": "I cannot stand see you under the oppression of another. You must break free of ",
-		"3": "I have known you for a long time. I know that you are not the type of person to sit down, give up, and let others walk all over you. You must break free from ",
-		"4": "I have known you for a long time. I know that you are not the type of person to sit down, give up, and let others walk all over you. You must break free from ",
-        "5": "I have known you for a long time. I know that you are not the type of person to sit down, give up, and let others walk all over you. You must break free from "
+		"3": "I know that you are not the type of person to sit down, give up, and let others walk all over you. You must break free from ",
+		"4": "I know that you are not the type of person to sit down, give up, and let others walk all over you. You must break free from ",
+        "5": "I know that you are not the type of person to sit down, give up, and let others walk all over you. You must break free from "
     },
 
 	"Response_To_Move_To_Revolt": {
-        "1": " has gone too far, but do you honestly think I would take advice on such an important matter from someone like you",
-        "2": " has gone too far, I do not think I should be discussing this with someone like you",
-        "3": " is not very tolerant and it seems very risky to even be talking about this, but I cannot say that I haven't considered revolt",
-        "4": " being gone would help this village prosper, but it just seems so dangerous. I will have to think about this",
-        "5": " will control my people no further! I know you are right. This tyranny can last no longer. The only possible solution I can think of is revolt"
+        "1": " has gone too far, but do you honestly think I would take advice on such an important matter from someone like you.",
+        "2": " has gone too far, I do not think I should be discussing this with someone like you.",
+        "3": " is not very tolerant and it seems very risky to even be talking about this, but I cannot say that I haven't considered revolt.",
+        "4": " being gone would help this village prosper, but it just seems so dangerous. I will have to think about this.",
+        "5": " will control my people no further! I know you are right. This tyranny can last no longer. The only possible solution I can think of is revolt."
     },
 
 	"Move_To_Destroy": {
@@ -170,59 +169,59 @@
     },
 
     "Response_To_Move_To_Destroy": {
-        "1": " !? You are suggesting I destroy them!? It is possible that this village would be safer if that village was out of the picture entirely. But I know that it is risky",
-        "2": " is not someone that will be easy to get rid of, but I am not someone to back down from a challenge if the safety of this village is on the line",
-        "3": " has to go. I usually try to avoid such violence and destruction, but deep down I know that you are right. This is the only real way to keep this village safe",
-		"4": " has to go. I usually try to avoid such violence and destruction, but deep down I know that you are right. This is the only real way to keep this village safe",
-        "5": " has to go. I usually try to avoid such violence and destruction, but deep down I know that you are right. This is the only real way to keep this village safe"
+        "1": " !? You are suggesting I destroy them!? It is possible that this village would be safer if that village was out of the picture entirely. But I know that it is risky.",
+        "2": " is not someone that will be easy to get rid of, but I am not someone to back down from a challenge if the safety of this village is on the line.",
+        "3": " has to go. I usually try to avoid such violence and destruction, but deep down I know that you are right. This is the only real way to keep this village safe.",
+		"4": " has to go. I usually try to avoid such violence and destruction, but deep down I know that you are right. This is the only real way to keep this village safe.",
+        "5": " has to go. I usually try to avoid such violence and destruction, but deep down I know that you are right. This is the only real way to keep this village safe."
     },
 
 	"Ask_To_Duel": {
-        "1": "I am looking for an easy fight to loosen up a bit. I suppose you will do",
-        "2": "Fight me. I doubt someone of your caliber could even keep up",
-        "3": "I am looking for a respectable fight. Are you prepared",
-        "4": "I cannot think of a better warrior to test my mettle against. Let's do this",
-		"5": "I cannot think of a better warrior to test my mettle against. Let's do this"
+        "1": "I am looking for an easy fight to loosen up a bit. I suppose you will do.",
+        "2": "Duel me. I doubt someone of your caliber could even keep up.",
+        "3": "I am looking for a respectable duel. Are you prepared.",
+        "4": "I cannot think of a better warrior to test my mettle against. I challenge you to a duel.",
+		"5": "I cannot think of a better warrior to test my mettle against. I challenge you to a duel."
     },
 
 	"Response_To_Ask_To_Duel": {
-        "1": "I hope you're prepared to lose",
-        "2": "Hahaha. You're confidence is indeed slightly amusing. However, I hope you know I will win",
-        "3": "I haven't fought in a bit. I guess I could use a good warm up. I hope you're ready",
-        "4": "Ah, it'll be fun to fight someone of your caliber",
-        "5": "Sigh. I do not really want to fight you. But, do not think I will hold back simply because we are friends"
+        "1": "I hope you're prepared to lose.",
+        "2": "Hahaha. You're confidence is indeed slightly amusing. However, I hope you know I will win.",
+        "3": "I haven't fought in a bit. I guess I could use a good warm up. I hope you're ready.",
+        "4": "Ah, it'll be fun to fight someone of your caliber.",
+        "5": "Sigh. I do not really want to fight you. But, do not think I will hold back simply because we are friends."
     },
 
 	"Ask_To_Spar": {
-        "1": "It won't help me improve my abilities much, but I think we should spar",
-        "2": "I am looking for a sparring partner. Do you want to",
-        "3": "I need some sparring practice. Would you consider sparring with me",
-        "4": "I would love to spar with you. Would you want to",
-		"5": "I would love to spar with you. Would you want to"
+        "1": "It won't help me improve my abilities much, but I think we should spar.",
+        "2": "I am looking for a sparring partner. Wanna spar?",
+        "3": "I need some sparring practice. Would you consider sparring with me?",
+        "4": "I would be grateful if you would spar with me.",
+		"5": "I would be grateful if you would spar with me."
     },
 
 	"Response_To_Ask_To_Spar": {
-        "1": "I do not see how sparring against you will result in anything but your hurt ego",
-        "2": "If you want to spar with me I hope that you are ready to lose",
-        "3": "I suppose I could use some practice",
-        "4": "A spar, huh? I suppose it really couldn't hurt to get some practice in with you",
-        "5": "Sure, it'll be fun to face such a worthy opponent"
+        "1": "I do not see how sparring against you will result in anything but your hurt ego.",
+        "2": "If you want to spar with me I hope that you are ready to lose.",
+        "3": "I suppose I could use some practice.",
+        "4": "A spar, huh? I suppose it really couldn't hurt to get some practice in with you.",
+        "5": "Sure, it'll be fun to face such a worthy opponent."
     },
 
 	"Bribe": {
-        "1": "I cannot believe I am asking you of all people, but would you accept this",
-        "2": "Would you be interested in this gift",
-        "3": "I decided to get this for you, hopefully you'll accept it",
-		"4": "I decided to get this for you, hopefully you'll accept it",
-        "5": "I decided to get this for you, hopefully you'll accept it"
+        "1": "I cannot believe I am asking you of all people, but would you accept this.",
+        "2": "Would you be interested in this gift.",
+        "3": "I decided to get this for you, hopefully you'll accept it.",
+		"4": "I decided to get this for you, hopefully you'll accept it.",
+        "5": "I decided to get this for you, hopefully you'll accept it."
     },
 
 	"Response_To_Bribe": {
-        "1": "Do you honesly think I would stoop to your level and accept a bribe",
-        "2": "I hope you think better of me than to think I would be swayed so easily by a bribe",
-        "3": "I suppose I could consider your offer",
-        "4": "I do not usually accept bribes, but I suppose I could make an exception for you",
-        "5": "I gladly accept"
+        "1": "Do you honesly think I would stoop to your level and accept a bribe.",
+        "2": "I hope you think better of me than to think I would be swayed so easily by a bribe.",
+        "3": "I suppose I could consider your offer.",
+        "4": "I do not usually accept bribes, but I suppose I could make an exception for you.",
+        "5": "I gladly accept."
     },
 
 	"Ask_To_Join_Party":{
@@ -258,35 +257,35 @@
 	},
 
 	"Compliment": {
-        "1": "I really do appreciate you",
-        "2": "I belive that you are a strong and wise individual",
-        "3": "I am glad to have met you. I truly believe knowing you has had a positive effect on me and this village",
-		"4": "I am glad to have met you. I truly believe knowing you has had a positive effect on me and this village",
-        "5": "I am glad to have met you. I truly believe knowing you has had a positive effect on me and this village"
+        "1": "I can tell that you have many great qualities.",
+        "2": "I belive that you are a strong and wise individual.",
+        "3": "I can tell that you have many great qualities.",
+		"4": "I am glad to have met you. I truly believe knowing you has had a positive effect on me and this village.",
+        "5": "I am glad to have met you. I truly believe knowing you has had a positive effect on me and this village."
     },
 
 	"Response_To_Compliment": {
-        "1": "That would actually be flattering if it wasn't coming from you",
-        "2": "Oh...thanks...I suppose",
-        "3": "Thank you",
-        "4": "It is not often people flatter me",
-        "5": "Thanks so much, and I could say the same about you"
+        "1": "That would actually be flattering if it wasn't coming from you.",
+        "2": "Oh...thanks...I suppose.",
+        "3": "Thank you.",
+        "4": "It is not often people flatter me.",
+        "5": "Thanks so much, and I could say the same about you."
     },
 
 	"Grovel": {
         "1": "I am reluctant to do this, but I suppose I must beg for your mercy.",
-        "2": "Please know that I truly meant no harm to you and accept my apology",
-        "3": "My friend, please know that I would never try to harm you. I truly meant no real harm",
-		"4": "My friend, please know that I would never try to harm you. I truly meant no real harm",
-        "5": "My friend, please know that I would never try to harm you. I truly meant no real harm"
+        "2": "Please know that I truly meant no harm to you and accept my apology.",
+        "3": "My friend, please know that I would never try to harm you. I truly meant no real harm.",
+		"4": "My friend, please know that I would never try to harm you. I truly meant no real harm.",
+        "5": "My friend, please know that I would never try to harm you. I truly meant no real harm."
     },
 
 	"Response_To_Grovel": {
-        "1": "Oh please get off your knees you're making an absolute fool of yourself",
-        "2": "*Sigh* I suppose I can overlook your actions this one time",
-        "3": "I accept your apology",
-        "4": "Please, get off of your knees you do not need to go that far simply to apolgize to me",
-        "5": "My friend I would accept an apology from you anytime"
+        "1": "Oh please get off your knees you're making an absolute fool of yourself.",
+        "2": "*Sigh* I suppose I can overlook your actions this one time.",
+        "3": "I accept your apology.",
+        "4": "Please, get off of your knees you do not need to go that far simply to apolgize to me.",
+        "5": "My friend I would accept an apology from you anytime."
     },
 
 	"Move_To_Train": {
@@ -298,91 +297,91 @@
     },
 
 	"Response_To_Move_To_Train": {
-        "1": " !? Train me? I believe I know when I should train the village and its soldiers. I do not need your advice",
-        "2": " !? Train me? Are you implying that this village is weak? I think I know how strong they are more than you do",
-        "3": " ? Train me? Hmm. It cannot hurt to always be a bit more prepared. I will consider it",
-        "4": " ? Train me? I do worry about whether we are prepared for an attack or not. I will definitely consider training",
-        "5": " ? Train me? I know you're right. This village is vunerable in its current state. I will definitely think about training in order to bolster our defenses"
+        "1": " !? Train me? I believe I know when I should train the village and its soldiers. I do not need your advice.",
+        "2": " !? Train me? Are you implying that this village is weak? I think I know how strong they are more than you do.",
+        "3": " ? Train me? Hmm. It cannot hurt to always be a bit more prepared. I will consider it.",
+        "4": " ? Train me? I do worry about whether we are prepared for an attack or not. I will definitely consider training.",
+        "5": " ? Train me? I know you're right. This village is vunerable in its current state. I will definitely think about training in order to bolster our defenses."
     },
 
 	"Ask_For_Teaching": {
-        "1": "I would like to be taught by you",
-        "2": "I know that you are both wise and strong, and would greatly appreciate it if you could share some of that strength and wisdom with me",
-		"3": "I know that you are both wise and strong, and would greatly appreciate it if you could share some of that strength and wisdom with me",
-        "4": "I know that you are both wise and strong, and would greatly appreciate it if you could share some of that strength and wisdom with me",
-        "5": "I know that you are both wise and strong, and would greatly appreciate it if you could share some of that strength and wisdom with me"
+        "1": "I would like to be taught by you.",
+        "2": "I know that you are both wise and strong, and would greatly appreciate it if you could share some of that strength and wisdom with me.",
+		"3": "I know that you are both wise and strong, and would greatly appreciate it if you could share some of that strength and wisdom with me.",
+        "4": "I know that you are both wise and strong, and would greatly appreciate it if you could share some of that strength and wisdom with me.",
+        "5": "I know that you are both wise and strong, and would greatly appreciate it if you could share some of that strength and wisdom with me."
     },
 
 	"Response_To_Ask_For_Teaching": {
-        "1": "I would rather burn this village to the ground with my own hands than teach someone like you",
-        "2": "I really would rather not",
-        "3": "I suppose teaching you wouldn't hurt",
-        "4": "Of course I would be fine teaching you",
-        "5": "I would love to teach you. I can probably learn some things myself by teaching you"
+        "1": "I would rather burn this village to the ground with my own hands than teach someone like you.",
+        "2": "I really would rather not.",
+        "3": "I suppose teaching you wouldn't hurt.",
+        "4": "Of course I would be fine teaching you.",
+        "5": "I would love to teach you. I can probably learn some things myself by teaching you."
     },
 
 	"Offer_Teaching": {
-        "1": "I wouldn't mind imparting some of my knowledge upon you if you are alright with it",
-        "2": "I believe I could teach you many things that would be of use to you",
-		"3": "I suppose teaching you wouldn't hurt",
+        "1": "I wouldn't mind imparting some of my knowledge upon you if you are alright with it.",
+        "2": "I believe I could teach you many things that would be of use to you.",
+		"3": "I suppose teaching you wouldn't hurt.",
         "4": "Please allow me to teach you. It would be mutually beneficial.",
-        "5": "I would love to teach you. I can probably learn some things myself by teaching you"
+        "5": "I would love to teach you. I can probably learn some things myself by teaching you."
     },
 
 	"Response_To_Offer_Teaching": {
-        "1": "Hahaha I honestly would rather be taught by a rat than the likes of you",
-        "2": "I doubt you could teach me anything",
-        "3": "Oh, I suppose being taught by you could not hurt",
-        "4": "I would be more than happy to accept your teaching",
-        "5": "I gladly accept your offer. I would love to be taught by someone like you"
+        "1": "Hahaha I honestly would rather be taught by a rat than the likes of you.",
+        "2": "I doubt you could teach me anything.",
+        "3": "Oh, I suppose being taught by you could not hurt.",
+        "4": "I would be more than happy to accept your teaching.",
+        "5": "I gladly accept your offer. I would love to be taught by someone like you."
     },
 
 	"Boast": {
-        "1": "I cannot say much about myself, but I sure know that I have no reason to worry about you",
-        "2": "I take pride with the lengths I go to in order to keep the oasis village safe",
-        "3": "I am pleased to be friends with a strong individual such as yourself, but I still think I can hold my own against you quite well",
-		"4": "I am pleased to be friends with a strong individual such as yourself, but I still think I can hold my own against you quite well",
-        "5": "I am pleased to be friends with a strong individual such as yourself, but I still think I can hold my own against you quite well"
+        "1": "I am the epitome of strength!",
+        "2": "I once took down several bandits unarmed.",
+        "3": "I once took down several bandits unarmed.",
+		"4": "I am pleased to be friends with a strong individual such as yourself, but I still think I can hold my own against you quite well.",
+        "5": "I am pleased to be friends with a strong individual such as yourself, but I still think I can hold my own against you quite well."
     },
 
     "Response_Boast": {
-        "1": "Oh wow that is pathetic",
-        "2": "I am sure you are talking yourself up",
-        "3": "I cannot decide as to whether I am impressed or unimpressed",
-        "4": "Oh wow I am impressed",
-        "5": "I already knew you were great, but not that great"
+        "1": "Oh wow that is pathetic!",
+        "2": "I am sure you are talking yourself up.",
+        "3": "I cannot decide as to whether I am impressed or unimpressed.",
+        "4": "Oh wow I am impressed.",
+        "5": "I already knew you were great, but not that great."
     },
 
 	"Intimidate": {
-        "1": "I am absolutely sick of you. If someone doesn't take you out soon I just might do it myself",
-        "2": "You seem good at making enemies, so if I were you I would watch my back",
-		"3": "You seem good at making enemies, so if I were you I would watch my back",
-        "4": "You seem good at making enemies, so if I were you I would watch my back",
-        "5": "You seem good at making enemies, so if I were you I would watch my back"
+        "1": "I am absolutely sick of you. If someone doesn't take you out soon I just might do it myself.",
+        "2": "You seem good at making enemies, so if I were you I would watch my back.",
+		"3": "You seem good at making enemies, so if I were you I would watch my back.",
+        "4": "You seem good at making enemies, so if I were you I would watch my back.",
+        "5": "You seem good at making enemies, so if I were you I would watch my back."
     },
 
 	"Response_Intimidate": {
-        "1": "Were you trying to scare me, because all you did is make me angry",
-        "2": "You better choose your future words very carefully",
-        "3": "Ah... I do not know if I offended you, but if you are mad at me just please leave the village out of it",
-        "4": "Have I done somehting to you? I thought we were on good terms ",
-        "5": "My friend I do not know if I have done anything to make you say that but I am truly sorry if I have"
+        "1": "Were you trying to scare me, because all you did is make me angry.",
+        "2": "You better choose your future words very carefully.",
+        "3": "Ah... I do not know if I offended you, but if you are mad at me just please leave the village out of it.",
+        "4": "Have I done somehting to you? I thought we were on good terms.",
+        "5": "My friend I do not know if I have done anything to make you say that but I am truly sorry if I have."
     },
 
 	"Insult": {
-        "1": "Your mother was a hamster and your father smelt of elderberries",
-        "2": "The fact that you even think you can call yourself a 'Hero' is an absolute joke",
-		"3": "The fact that you even think you can call yourself a 'Hero' is an absolute joke",
-        "4": "The fact that you even think you can call yourself a 'Hero' is an absolute joke",
-        "5": "The fact that you even think you can call yourself a 'Hero' is an absolute joke"
+        "1": "Your mother was a hamster and your father smelt of elderberries.",
+        "2": "The fact that you even think you can call yourself a 'Hero' is an absolute joke.",
+		"3": "The fact that you even think you can call yourself a 'Hero' is an absolute joke.",
+        "4": "The fact that you even think you can call yourself a 'Hero' is an absolute joke.",
+        "5": "The fact that you even think you can call yourself a 'Hero' is an absolute joke."
     },
 
 	"Response_Insult": {
-        "1": "Is that really the best insult you have? Pssh, pathetic",
-        "2": "I hope you know that you are playing with fire right now",
-        "3": "Oh... that was a pretty awful thing to say",
-        "4": "That actually stung quite a bit",
-        "5": "What did I do to you to deserve that? I thought we were closer than that"
+        "1": "Is that really the best insult you have? Pssh, pathetic.",
+        "2": "I hope you know that you are playing with fire right now.",
+        "3": "Oh... that was a pretty awful thing to say.",
+        "4": "That actually stung quite a bit.",
+        "5": "What did I do to you to deserve that? I thought we were closer than that."
     },
 
 	"No_More_Phrases": {

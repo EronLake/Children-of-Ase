@@ -224,7 +224,7 @@ void DialogueController::otherConversationPoint(dialogue_point line)
 			reply_pt_sentence.insert(0, "Oya");
 		}
 		else if (line[1].size() > 20) {
-			if (line[1].at(19) == 'S' || line[1].at(19) == 'A' || line[1].at(19) == 'N') {
+			if ((line[1].at(19) == 'S' || line[1].at(19) == 'A' || line[1].at(19) == 'N') && (line[1].at(13) != 'S')) {
 				conv_log_obj->set_topic(3, mem); //make the topic Oya if the player selected a move to action
 				reply_pt_sentence.insert(0, "Oya");
 			}
