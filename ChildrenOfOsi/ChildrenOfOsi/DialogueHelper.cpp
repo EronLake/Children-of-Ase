@@ -80,7 +80,7 @@ dialogue_point DialogueHelper::choose_conv_pt(std::vector<ConversationLogObj*> c
 	    }
 		
 	}
-	/*for (auto i = conversation_log_obj_pointer_vec.begin(); i != conversation_log_obj_pointer_vec.end(); ++i) {
+	for (auto i = conversation_log_obj_pointer_vec.begin(); i != conversation_log_obj_pointer_vec.end(); ++i) {
 		appealPoint tmp = std::make_pair(0, (*i)->get_conv_point());
 		auto it = std::find(possible_replies.begin(), possible_replies.end(), tmp);
 		if (it != possible_replies.end() && (*i)->get_who() == 2) {
@@ -89,7 +89,7 @@ dialogue_point DialogueHelper::choose_conv_pt(std::vector<ConversationLogObj*> c
 		else {
 
 		}
-	}*/
+	}
 	//relationship filtering
 	
 	//choose based on personality
@@ -124,10 +124,10 @@ dialogue_point DialogueHelper::choose_conv_pt(std::vector<ConversationLogObj*> c
 	}
 	ofs.close();
 	if (possible_replies.size() != 0) {
-		return possible_replies[conv_pt_index].second->dpoint;
+		return possible_replies[0].second->dpoint;
 	}
 	else {
-		return def;
+		return{ "No_More_Phrases","No_More_Phrases" };
 	}
 }
 
