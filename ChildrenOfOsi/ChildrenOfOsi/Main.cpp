@@ -1061,7 +1061,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	staticRec->melee->sprite.setTexture(Containers::texture_table["border"]);
 
 	vector<Soldier*> silverSoldier;
-	int silverNum = 4;
+	int silverNum = 40;
 	for (int i = 0; i < silverNum; i++) {
 		silverSoldier.push_back(new Soldier(6745, 10355+(i*20), false));
 		gameplay_functions->add_Attack(silverSoldier[i]->getKey(), silverSoldier[i]->body[0].getX(), silverSoldier[i]->body[0].getY(), true, 10);
@@ -1116,7 +1116,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	}
 
 	vector<Soldier*> blueSoldiers;
-	int blueNum = 5;
+	int blueNum = 40;
 	for (int i = 0; i < blueNum; i++) {
 		blueSoldiers.push_back(new Soldier(6030, 4000 + (i * 20), false));
 		gameplay_functions->add_Attack(blueSoldiers[i]->getKey(), blueSoldiers[i]->body[0].getX(), blueSoldiers[i]->body[0].getY(), true, 10);
