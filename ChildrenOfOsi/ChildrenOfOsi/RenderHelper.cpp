@@ -118,8 +118,8 @@ int RenderHelper::draw_frame(WorldObj * obj)
 			objVec[i]->body[0].drawObj(camera->getX(), camera->getY());
 			objVec[i]->effect.drawObj(camera->getX(), camera->getY());
 			//}
-			objVec[i]->effect.sprite.animate();
-			objVec[i]->WorldObj::animateObj();
+			//objVec[i]->effect.sprite.animate();
+			//objVec[i]->WorldObj::animateObj();
 	}
 	//convoGui->drawGui();
 	drawHUD(obj);
@@ -132,13 +132,13 @@ int RenderHelper::drawDiaGui(WorldObj* obj)
 {
 	gmap->drawMap(camera->getX(), camera->getY());
 	obj->WorldObj::drawObj(camera->getX(), camera->getY());
-	obj->WorldObj::animateObj();
+	//obj->WorldObj::animateObj();
 	for (int i = 0; i < objVec.size(); i++) {
 		LOG("BEFORE DRAWING**");
 		////////cout << objVec[i]->getX() - camera->getX() << endl;
 		//LOG(objVec[i]->getX(), ", ", objVec[i]->getY());
 		objVec[i]->WorldObj::drawObj(camera->getX(), camera->getY());
-		objVec[i]->WorldObj::animateObj();
+		//objVec[i]->WorldObj::animateObj();
 	}
 	convoGui->drawGui();
 	GameWindow::refresh();
