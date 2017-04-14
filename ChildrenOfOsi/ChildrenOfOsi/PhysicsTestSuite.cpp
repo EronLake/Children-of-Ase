@@ -44,7 +44,9 @@ bool PhysicsTestSuite::execute_tests() {
 bool PhysicsTestSuite::test_movement() {
 	WorldObj* screen = new WorldObj(Vector2f(0.0, 0.0), 960U, 540U);
 	QuadTree* t = new QuadTree(0, screen);
-	Movement* movetests = new Movement(t);
+	RiverObj* myriv = new RiverObj();
+	myriv->initialize_lines();
+	Movement* movetests = new Movement(t,myriv);
 
 	bool up = false;
 	bool down = false;
@@ -153,7 +155,8 @@ bool PhysicsTestSuite::test_movement() {
 bool PhysicsTestSuite::test_collision() {
 	WorldObj* screen = new WorldObj(Vector2f(0.0, 0.0), 960U, 540U);
 	QuadTree* t = new QuadTree(0, screen);
-	Movement* movetests = new Movement(t);
+	RiverObj* rivObj = new RiverObj();
+	Movement* movetests = new Movement(t,rivObj);
 	bool result;
 
 	bool up = false;

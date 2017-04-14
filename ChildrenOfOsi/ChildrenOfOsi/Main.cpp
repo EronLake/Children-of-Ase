@@ -78,7 +78,7 @@
 using namespace std;
 
 
-
+Texture* Point::tex = new Texture();
 Texture* Rectangle::tex = new Texture();
 Texture* Rectangle::texUP = new Texture();
 Texture* Rectangle::texDOWN = new Texture();
@@ -116,7 +116,10 @@ int main() {
 void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 {
 	Rectangle::tex->setFile("Assets/Sprites/blank1.png", 1);
+	Point::tex->setFile("Assets/Sprites/point.png", 1);
 	
+	RiverObj* rivObj = new RiverObj();
+	rivObj->initialize_lines();
 
 	vector<WorldObj*> recVec;
 	vector<WorldObj*>* recVec_ptr = &recVec;
@@ -137,9 +140,9 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 
 	Player* Alex = new Player(SHANGO, Vector2f(6445.0, 10155.0), 150.0, 150.0);	//init player
 
-	RenderManager* RenM = new RenderManager(mLog, tBuffer, _QuadTree, gameplay_functions);
+	RenderManager* RenM = new RenderManager(mLog, tBuffer, _QuadTree, gameplay_functions, rivObj);
 	DummyController* DumM = new DummyController(mLog, tBuffer);
-	PhysicsManager* PhysM = new PhysicsManager(mLog, tBuffer, _QuadTree);
+	PhysicsManager* PhysM = new PhysicsManager(mLog, tBuffer, _QuadTree, rivObj);
 	PartyManager* partyM = new PartyManager(gameplay_functions, Alex);
 	memManager* memM = new memManager(mLog, tBuffer);
 	TestManager* TestM = new TestManager(mLog, tBuffer);

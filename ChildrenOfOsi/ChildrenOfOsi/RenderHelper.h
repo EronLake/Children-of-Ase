@@ -8,12 +8,13 @@
 #include "CheckClass.h"
 #include "HUD.h"
 #include "common.h"
+#include "RiverObj.h"
 
 class RenderManager;
 class RenderHelper
 {
 public:
-	RenderHelper(QuadTree* QT);
+	RenderHelper(QuadTree* QT, RiverObj* _rivObj);
 	~RenderHelper();
 	void initCamera(WorldObj* player);
 	void initCameraFull(WorldObj* player);
@@ -47,6 +48,8 @@ private:
 	DialogueGui* convoGui;
 	HUD* hud_ptr;
 	GameMap* gmap;
+	RiverObj* rivObj;
+	
 	std::vector<WorldObj*> objVec;
 	std::vector<WorldObj*> fullVec;
 
