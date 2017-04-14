@@ -117,16 +117,16 @@
         "1": "I would like you to consider conquering ",
         "2": "I think it would be greatly beneficial to you if you gained control over ",
         "3": "My friend, I believe now would be a perfect opportunity to conquer ",
-		"4": "My friend, I believe now would be a perfect opportunity to conquer",
-		"5": "My friend, I believe now would be a perfect opportunity to conquer"
+		"4": "My friend, I believe now would be a perfect opportunity to conquer ",
+		"5": "My friend, I believe now would be a perfect opportunity to conquer "
     },
 
 	"Response_To_Move_To_Conquer": {
-        "1": "I was considering conquering but then you told me it was a good idea. Now I am not so sure ",
-        "2": "I really don't feel like you should be giving me advice on such an important matter",
-        "3": "I am not sure that conquest is the best idea for ensuring the safety of this village, but I will keep it in mind",
-        "4": "I think that moving to conquer is a risky move, but I am glad that you gave me this advice",
-        "5": "I respect your advice, and will definitely consider conquest as a powerful strategic move"
+        "1": " hmm.I was considering conquering them but then you told me it was a good idea. Now I am not so sure ",
+        "2": " ? Really? I don't feel like you should be giving me advice on such an important matter",
+        "3": " eh.I am not sure that conquest is the best idea for ensuring the safety of this village, but I will keep it in mind",
+        "4": " as a conquering target? I think that moving to conquer is a risky move, but I am glad that you gave me this advice",
+        "5": " hmm. I respect your advice, and will definitely consider conquest as a powerful strategic move"
     },
 
 	"Move_To_Alliance": {
@@ -138,11 +138,11 @@
     },
 
 	"Response_To_Move_To_Alliance": {
-        "1": "I absolutely refuse. The very idea of being in an alliance with that village disgusts me",
-        "2": "An alliance can possibly help ensure the safety of this village, so I will definitely consider it",
-        "3": "I will have to think deeply as to whether or not this alliance is a good idea",
-        "4": "An alliance can possibly help ensure the safety of this village, so I will definitely consider it",
-        "5": "Your advice always has my best interests in mind it seems, so I promise you I will deeply consider an alliance"
+        "1": " !? I absolutely refuse. The very idea of being in an alliance with their village disgusts me",
+        "2": " as an ally? An alliance can possibly help ensure the safety of this village, so I will definitely consider it",
+        "3": " as an ally? I will have to think deeply as to whether or not an alliance with them would be a good idea",
+        "4": " as an ally? Your advice always has my best interests in mind it seems, so I promise you I will deeply consider an alliance with them",
+        "5": " as an ally? Your advice always has my best interests in mind it seems, so I promise you I will deeply consider an alliance with them"
     },
 
 	"Move_To_Revolt": {
@@ -154,27 +154,27 @@
     },
 
 	"Response_To_Move_To_Revolt": {
-        "1": "Do you honestly think I would take advice on such an important matter from someone like you",
-        "2": "I do not think I should be discussing this with someone like you",
-        "3": "It seems very risky to even be talking about this, but I cannot say that I haven't considered revolt",
-        "4": "I know it would help this village prosper if we were to revolt, but it just seems so dangerous. I will have to think about this",
-        "5": "I know you are right. This tyranny can last no longer. The only possible solution I can think of is revolt"
+        "1": " has gone too far, but do you honestly think I would take advice on such an important matter from someone like you",
+        "2": " has gone too far, I do not think I should be discussing this with someone like you",
+        "3": " is not very tolerant and it seems very risky to even be talking about this, but I cannot say that I haven't considered revolt",
+        "4": " being gone would help this village prosper, but it just seems so dangerous. I will have to think about this",
+        "5": " will control my people no further! I know you are right. This tyranny can last no longer. The only possible solution I can think of is revolt"
     },
 
 	"Move_To_Destroy": {
         "1": "I feel like it would most certainly be in your best interests to destroy ",
         "2": "I feel like it is a good idea for you to destroy nuisances like ",
         "3": "You know me, I am not usually one to support such violence, but I feel like it should be one of your top priorities to destroy ",
-		"4": "You know me, I am not usually one to support such violence, but I feel like it should be one of your top priorities to destroy",
-        "5": "You know me, I am not usually one to support such violence, but I feel like it should be one of your top priorities to destroy"
+		"4": "You know me, I am not usually one to support such violence, but I feel like it should be one of your top priorities to destroy ",
+        "5": "You know me, I am not usually one to support such violence, but I feel like it should be one of your top priorities to destroy "
     },
 
     "Response_To_Move_To_Destroy": {
-        "1": "It is possible that this village would be safer if that village was out of the picture entirely. But I know that it is risky",
-        "2": "Getting rid a village is no easy task, but I am not someone to back down from a challenge if the safety of this village is on the line",
-        "3": "I usually try to avoid such violence and destruction, but deep down I know that you are right. This is the only real way to keep this village safe",
-		"4": "I usually try to avoid such violence and destruction, but deep down I know that you are right. This is the only real way to keep this village safe",
-        "5": "I usually try to avoid such violence and destruction, but deep down I know that you are right. This is the only real way to keep this village safe"
+        "1": " !? You are suggesting I destroy them!? It is possible that this village would be safer if that village was out of the picture entirely. But I know that it is risky",
+        "2": " is not someone that will be easy to get rid of, but I am not someone to back down from a challenge if the safety of this village is on the line",
+        "3": " has to go. I usually try to avoid such violence and destruction, but deep down I know that you are right. This is the only real way to keep this village safe",
+		"4": " has to go. I usually try to avoid such violence and destruction, but deep down I know that you are right. This is the only real way to keep this village safe",
+        "5": " has to go. I usually try to avoid such violence and destruction, but deep down I know that you are right. This is the only real way to keep this village safe"
     },
 
 	"Ask_To_Duel": {
@@ -289,40 +289,24 @@
         "5": "My friend I would accept an apology from you anytime"
     },
 
-	"Move_To_Spy": {
-        "1": "I believe it would be beneficial to you if you spied on ",
-        "2": "You need to consider spying to get some valuable information on ",
-        "3": "I can confidently say that it should be one of your top priorities to spy on ",
-		"4": "I can confidently say that it should be one of your top priorities to spy on ",
-        "5": "I can confidently say that it should be one of your top priorities to spy on "
-    },
-
-	"Response_To_Move_To_Spy": {
-        "1": "Are you really suggesting this to me. For all I know you could be a spy yourself trying to sabotage me",
-        "2": "I really do not think I want to take your advice on such a sensitive subject",
-        "3": "I cannot say that I have wondered about the inner workings of that village, I will have to consider it",
-        "4": "Do you think that getting inside information on that village would help keep this village safe? If so, I must consider spying",
-        "5": "I will do absolutely anything to ensure the safety of this village, and if you think spying is the best way to do so than I will heavily consider it"
-    },
-
 	"Move_To_Train": {
-        "1": "I belive that your village would be safer if you trained its troops",
-        "2": "I think that training should be a high priority for you. It would make your village safer",
-        "3": "You know that I value the safety of villages quite highly. I suggest that you bolster your defenses through training in order to be safe yourself",
-		"4": "You know that I value the safety of villages quite highly. I suggest that you bolster your defenses through training in order to be safe yourself",
-        "5": "You know that I value the safety of villages quite highly. I suggest that you bolster your defenses through training in order to be safe yourself"
+        "1": "I belive that your village would be safer if you trained its troops with ",
+        "2": "I think that it should be a high priority for you to train with ",
+        "3": "You know that I value the safety of villages quite highly. I suggest that you bolster your defenses through training with ",
+		"4": "You know that I value the safety of villages quite highly. I suggest that you bolster your defenses through training with ",
+        "5": "You know that I value the safety of villages quite highly. I suggest that you bolster your defenses through training with "
     },
 
 	"Response_To_Move_To_Train": {
-        "1": "I belive I know when I should train the village and its soldiers. I do not need your advice",
-        "2": "Are you implying that this village is weak? I think I know how strong they are more than you do",
-        "3": "Hmm. It cannot hurt to always be a bit more prepared. I will consider it",
-        "4": "I do worry about whether we are prepared for an attack or not. I will definitely consider training",
-        "5": "I know you're right. This village is vunerable in its current state. I will definitely think about training in order to bolster our defenses"
+        "1": " !? Train me? I believe I know when I should train the village and its soldiers. I do not need your advice",
+        "2": " !? Train me? Are you implying that this village is weak? I think I know how strong they are more than you do",
+        "3": " ? Train me? Hmm. It cannot hurt to always be a bit more prepared. I will consider it",
+        "4": " ? Train me? I do worry about whether we are prepared for an attack or not. I will definitely consider training",
+        "5": " ? Train me? I know you're right. This village is vunerable in its current state. I will definitely think about training in order to bolster our defenses"
     },
 
 	"Ask_For_Teaching": {
-        "1": "I would like to be taught by you if you do not mind",
+        "1": "I would like to be taught by you",
         "2": "I know that you are both wise and strong, and would greatly appreciate it if you could share some of that strength and wisdom with me",
 		"3": "I know that you are both wise and strong, and would greatly appreciate it if you could share some of that strength and wisdom with me",
         "4": "I know that you are both wise and strong, and would greatly appreciate it if you could share some of that strength and wisdom with me",
