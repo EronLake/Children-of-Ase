@@ -6,6 +6,7 @@
 #include "ChildrenOfOsi.h"
 #include "Containers.h"
 #include "Party.h"
+#include "Village.h"
 
 class ActionHelper
 {

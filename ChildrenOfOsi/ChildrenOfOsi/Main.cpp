@@ -1152,15 +1152,23 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 
 	staticRec->setName("Yemoja");
 	staticRec->setInteractable(true);
-	//staticRec->setPersonality(30, 70, 80, 60, 30, 30, 50);
+	//staticRec->setPersonality(30, 70, 80, 60, 30, 30, 50);// uncommented this
+	
+	//staticRec->rel[OYA]->setAffinity(60);// uncommented this
+	//staticRec->rel[OYA]->setNotoriety(40);// uncommented this
+	//staticRec->rel[OYA]->setStrength(80);// uncommented this
 
-	//staticRec->rel[OYA]->setAffinity(60);
-	//staticRec->rel[OYA]->setNotoriety(40);
-	//staticRec->rel[OYA]->setStrength(80);
+	//staticRec->rel[SHANGO]->setAffinity(60);//added this
+	//staticRec->rel[SHANGO]->setNotoriety(40);//added this
+	//staticRec->rel[SHANGO]->setStrength(80);//added this
 
-	//staticRec->rel[OYA]->setAffEstimate(60);
-	//staticRec->rel[OYA]->setNotorEstimate(70);
-	//staticRec->rel[OYA]->setStrEstimate(40);
+	//staticRec->rel[OYA]->setAffEstimate(60);// uncommented this
+	//staticRec->rel[OYA]->setNotorEstimate(70);// uncommented this
+	//staticRec->rel[OYA]->setStrEstimate(40);// uncommented this
+
+	//staticRec->rel[SHANGO]->setAffEstimate(60);//added this
+	//staticRec->rel[SHANGO]->setNotorEstimate(70);//added this
+	//staticRec->rel[SHANGO]->setStrEstimate(40);//added this
 
 
 	*oya = *staticRec;
@@ -1201,7 +1209,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 		//std:://cout << action->getName() << std::endl;
 	}
 
-	Alex->add_quest(test_ally,10);
+	Alex->add_quest(test_ally,8);
 	Alex->add_quest(test_train, 2);
 	questM->heros.push_back(Alex);
 
@@ -1345,7 +1353,11 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 		start_tick = clock();
 		_QuadTree->clear();
 		Alex->updateCD();
+		Alex->effect.sprite.animate();
+		Alex->WorldObj::animateObj();
 		for (int i = 0; i < recVec.size(); i++) {
+			recVec[i]->effect.sprite.animate();
+			recVec[i]->WorldObj::animateObj();
 			_QuadTree->Insert(recVec[i]);	//insert all obj into tree
 	
 		}
@@ -1539,11 +1551,11 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 			Sleep((1000 / fs) - (clock() - start_tick));
 		}
 		delta_ticks = clock() - start_tick; //the time, in ms, that took to render the scene
-		if (delta_ticks > 0)
+		if (delta_ticks > 0) {
 			fps = CLOCKS_PER_SEC / delta_ticks;
-		if (DialogueController::getState() == 0) {
-			cout << "FPS: " << fps << endl;
 		}
+		HUD::FPS = fps;
+			//cout << "FPS: " << fps << endl;
 
 		frame_count++;
 	}

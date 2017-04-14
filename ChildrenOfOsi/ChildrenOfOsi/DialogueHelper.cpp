@@ -1,6 +1,8 @@
 #include "stdafx.h"
 #include "DialogueHelper.h"
 #include "Player.h"
+#include "Tag.h"
+
 
 Player* player;
 WorldObj* other;
@@ -24,11 +26,24 @@ DialogueHelper::~DialogueHelper()
 }
 
 //functions where heroes make dialogue choices
-dialogue_point DialogueHelper::choose_conv_pt(dialogue_point point, int optn_inx)
-{
+dialogue_point DialogueHelper::choose_conv_pt(std::vector<ConversationLogObj*> conversation_log_obj_pointer_vec, int optn_inx)
+{	
+	std::vector<ConversationPoint*> temp;
 	int conv_pt_index;
 	conv_pt_index = rand() % (possible_conv_pts[optn_inx].size());
-	return possible_conv_pts[optn_inx][conv_pt_index];
+	
+
+	for (auto i = conversation_log_obj_pointer_vec.begin(); i != conversation_log_obj_pointer_vec.end(); ++i) {
+	for (auto j : (*i)->get_conv_point()->tag_pointer_vec) {
+		for (auto k : j->conversation_point_pointer_vec) {
+			temp.push_back(k);
+		}
+
+	}
+
+
+	}
+	return temp[conv_pt_index]->dpoint;
 }
 
 dialogue_point DialogueHelper::choose_reply_pt(std::string point, int optn_inx)

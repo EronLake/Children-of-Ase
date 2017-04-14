@@ -114,7 +114,7 @@ void DialogueController::PlayerResponse()
 
 void DialogueController::otherConversationPoint(dialogue_point line)
 {
-	dialogue_point point = dialogue.choose_conv_pt(line, optionsIndex);
+	dialogue_point point = dialogue.choose_conv_pt(conversation_log_obj_pointer_vec, optionsIndex);
 	replyString = point[1];
 
 	Hero* temp_hero = nullptr;
@@ -232,7 +232,7 @@ void DialogueController::startConversation(WorldObj* n, bool playerTalk)
 	message = "You started talking to ";
 	message += n->getName();
 	if (playerTalk) {
-		PlayerChoose();
+ 		PlayerChoose();
 	}
 	else {
 		state = 3;

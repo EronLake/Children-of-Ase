@@ -398,28 +398,6 @@ int Movement::talk(WorldObj* obj) {
 	return 0;
 }
 
-int Movement::melee(WorldObj* obj) {
-	if (obj->getType() >= 3) {
-		Soldier* d = CheckClass::isSoldier(obj);
-		if (d) {
-			//d->meleeAttack();
-			////std:://////cout << "Attack Added" << std::endl;
-		}
-	}
-	return 0;
-}
-
-int Movement::specialAttack(WorldObj* obj) {
-	if (obj->getType() >= 3) {
-		Soldier* a = CheckClass::isSoldier(obj);
-		if (a) {
-			//a->newAttack(a->triedAttack(), Containers::Attack_table[a->getAtKey()]);
-			//std:://////cout << "Attack Added" << std::endl;
-		}
-	}
-	return 0;
-}
-
 int Movement::attack(WorldObj* obj) {
 	for (auto a = Containers::Attack_table.begin(); a !=Containers::Attack_table.end();++a) {
 		objVec.clear();
@@ -513,33 +491,6 @@ int Movement::attack(WorldObj* obj) {
 	return 0;
 }
 
-int Movement::meleeSwing(WorldObj* obj) {
-	objVec.clear();
-	objVec = tree->retrieve(objVec, obj);
-	if (obj->getType() >= 3) {
-		Soldier* d = CheckClass::isSoldier(obj);
-		if (d) {
-			//d->meleeAttack();
-			for (int i = 0; i < objVec.size(); i++) {
-				if (obj != objVec[i]) {
-					if (objVec[i]->getType() >= 1) {
-						LivingObj* liv = CheckClass::isLiving(objVec[i]);
-						if (liv) {
-							if (collision(d->melee, liv)) {
-								//std:://////cout << "Player hit " << liv->getName() << std::endl;
-								
-								d->melee->Hit(liv);
-								
-								//std:://////cout << liv->getName() << "'s health is now " << liv->getHealth() << std::endl;
-							}
-						}
-					}
-				}
-			}
-		}
-	}
-	return 0;
-}
 
 /*int Movement::doNothing(WorldObj* obj) {
 	return 0;

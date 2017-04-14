@@ -5,6 +5,9 @@ std::unordered_map<std::string, execute_ptr> ActionExecFunctions::ActionExecMap{
 	{ "execute_train",			&execute_train			},
 	{ "execute_train_with",		&execute_train_with		},
 	{ "execute_fight",			&execute_fight			},
+	{ "execute_conquer",		&execute_conquer		},
+	{ "execute_duel",			&execute_duel			},
+	{ "execute_spar",			&execute_duel			},
 	{ "execute_form_alliance",	&execute_form_alliance	},
 	{ "execute_fight_bandits",	&execute_fight_bandits	}
 };
@@ -191,7 +194,7 @@ void ActionExecFunctions::execute_fight(Action* fight)
 
 	switch (fight->checkpoint) {
 	case 0: //Pick village location(location of fight target), create memory, increment checkpoint
-		fight->getDoer()->destination = { 1000,1000 }; //need to somehow retrieve location of target village
+		fight->getDoer()->destination = fight->getReceiver()->getVillage()->get_village_location(); //need to somehow retrieve location of target village
 		ActionHelper::create_memory(fight, fight->getDoer());
 		fight->checkpoint++;
 		break;
@@ -286,18 +289,6 @@ void ActionExecFunctions::execute_fight(Action* fight)
 
 void ActionExecFunctions::execute_conquer(Action* conq)
 {
-	/*	/Create Memory
-	/Locate hero (maybe start by going to heroes village)
-	/Travel to village
-	/check if there/reset desination and find target
-	/Engage in battle (talk first?)
-	If win - update with win post conditions
-	Else - update with lost post conditions
-	Update memory all participants with memory
-	Prompt for kill?
-	*/
-
-
 	switch (conq->checkpoint) {
 	case 0: //Pick village location(location of fight target), create memory, increment checkpoint
 		conq->getDoer()->destination = conq->getReceiver()->getVillage()->get_village_location(); //need to somehow retrieve location of target village
@@ -379,6 +370,103 @@ void ActionExecFunctions::execute_conquer(Action* conq)
 		//Mark action as executed?
 		conq->executed = true;
 
+		break;
+
+	}
+
+}
+
+void ActionExecFunctions::execute_duel(Action* duel)
+{
+	switch (duel->checkpoint) {
+	case 0: //Pick village location(location of fight target), create memory, increment checkpoint
+		duel->getDoer()->destination = duel->getReceiver()->getVillage()->get_village_location(); //need to somehow retrieve location of target village
+		ActionHelper::create_memory(duel, duel->getDoer());
+		duel->checkpoint++;
+		break;
+	case 1: //If destination is reached, check if hero is there start a timer and move if not, fight otherwise
+		if (duel->getDoer()->destination == Vector2f(0, 0))//needs to be changed to use party location right 
+		{
+			//if the target hero is in the village then begin the battle
+			if (duel->getDoer()->getLoc() == duel->getReceiver()->getLoc()) // need to change this so it checks if the party is close by
+			{
+				duel->checkpoint++;
+				ActionHelper::create_memory(duel, duel->getReceiver());
+			}
+			ActionHelper::set_timer(duel, 3600);  //Wait 1 minute (60 frames times 60 seconds) trying to find out the hero's location
+			duel->checkpoint++;
+		}
+		break;
+	case 2: //If timer is complete, set village as destination to the location of the target hero 
+		if (ActionHelper::retrieve_time(duel) == 0)
+		{
+			duel->getDoer()->destination = duel->getReceiver()->getLoc(); //go to the target hero's location
+			duel->checkpoint++;
+			ActionHelper::create_memory(duel, duel->getReceiver());
+		}
+		break;
+	case 3: //If both niether party is empty then contiue the fight 
+			//(may need to change this to account for hero death)
+		if (duel->getDoer()->destination == Vector2f(0, 0)) {
+			if (duel->getDoer()->getHealth() <= 0 || duel->getReceiver()->getHealth() <= 0)
+			{
+				duel->checkpoint++;
+			}
+			//do a single round of battle every 10 sec
+			if (ActionHelper::retrieve_time(duel) == 0)
+			{
+				ActionHelper::attack_helper(duel->getDoer(), duel->getReceiver());
+				ActionHelper::attack_helper(duel->getReceiver(), duel->getDoer());
+				ActionHelper::set_timer(duel, 600);
+			}
+		}
+
+		//NEED TO SOMEHOW ACCOUNT FOR IF A PLAYER GETS CLOSE
+
+		break;
+	case 4: //If win update apply win-post else apply loss-post and update memory
+			//create_memory(fight, fight->getOwner()); do we want to update the owner immeadiately?
+
+		Memory* doer_mem = duel->getDoer()->find_mem(duel->getName() + std::to_string(duel->time_stamp));
+		Memory* receiver_mem = duel->getReceiver()->find_mem(duel->getName() + std::to_string(duel->time_stamp));
+		if (doer_mem == nullptr || receiver_mem == nullptr)
+		{
+			perror("something is wrong with the current hero memory creation function");
+		}
+
+		//check if the target's party is empty(may need to change this to account for hero death)
+		if (duel->getReceiver()->getHealth() <= 0) {
+			//Apply succ-post-conditions
+			duel->apply_postconditions(true);
+			//update_memory category as a success 
+			doer_mem->setCategory("success"); receiver_mem->setCategory("fail");
+			//update reason
+			doer_mem->setReason("They couldn't handle me"); //need to create a reason function
+			receiver_mem->setReason("They attacked while my guard was down");
+		}
+		else
+		{
+			//Apply fail-post-conditions
+			duel->apply_postconditions(false);
+			//update_memory as faiure
+			doer_mem->setCategory("fail"); receiver_mem->setCategory("success");
+			//update reason
+			doer_mem->setReason("I was too weak");//need to create a reason function
+			receiver_mem->setReason("They were foolish to attack");
+		}
+		//update where
+		doer_mem->setWhere(std::to_string(duel->getDoer()->getLoc().xloc));
+		receiver_mem->setWhere(std::to_string(duel->getReceiver()->getLoc().xloc));
+		//update when
+		doer_mem->setWhen(frame_count);
+		receiver_mem->setWhen(frame_count);
+
+
+		//Mark action as executed?
+		duel->executed = true;
+
+		//create prompt for kill action
+		//(duel->getDoer(), duel->getReceiver());
 		break;
 
 	}
