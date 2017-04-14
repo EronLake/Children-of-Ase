@@ -153,12 +153,15 @@ int Hero::update_action_timer() {
 }
 
 void Hero::decrement_quest_time() {
-	for (auto it = quests.begin(); it != quests.end(); ++it) {
+	for (auto it = quests.begin(); it != quests.end();) {
 		int s=it->second;
 		if (s > 0)it->second = --s;
 		if (s == 0) {
 			//it->first->apply_postconditions(false);
-			quests.erase(it);
+			it=quests.erase(it);
+		}
+		else {
+			++it;
 		}
 	}
 }

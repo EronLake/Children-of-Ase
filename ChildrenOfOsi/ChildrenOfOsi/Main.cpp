@@ -115,7 +115,7 @@ int main() {
 
 void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 {
-	Rectangle::tex->setFile("Assets/Sprites/blank.png", 1);
+	Rectangle::tex->setFile("Assets/Sprites/blank1.png", 1);
 	
 
 	vector<WorldObj*> recVec;
@@ -1209,7 +1209,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 		//std:://cout << action->getName() << std::endl;
 	}
 
-	Alex->add_quest(test_ally,10);
+	Alex->add_quest(test_ally,8);
 	Alex->add_quest(test_train, 2);
 	questM->heros.push_back(Alex);
 

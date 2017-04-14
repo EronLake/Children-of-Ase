@@ -5,7 +5,9 @@ std::unordered_map<std::string, execute_ptr> ActionExecFunctions::ActionExecMap{
 	{ "execute_train",			&execute_train			},
 	{ "execute_train_with",		&execute_train_with		},
 	{ "execute_fight",			&execute_fight			},
-	{ "execute_conquer",		&execute_conquer },
+	{ "execute_conquer",		&execute_conquer		},
+	{ "execute_duel",			&execute_duel			},
+	{ "execute_spar",			&execute_duel			},
 	{ "execute_form_alliance",	&execute_form_alliance	},
 	{ "execute_fight_bandits",	&execute_fight_bandits	}
 };

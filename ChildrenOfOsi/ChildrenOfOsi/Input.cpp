@@ -587,7 +587,11 @@ void Input::InputCheck()
 	short Y = GetKeyState('Y') >> 15;
 	short U = GetKeyState('U') >> 15;
 	short M = GetKeyState('M') >> 15;
-
+	short SEMI = GetKeyState(';') >> 15;
+	short ONE = GetKeyState('1') >> 15;
+	short TWO = GetKeyState('2') >> 15;
+	short THREE = GetKeyState('3') >> 15;
+	short FOUR = GetKeyState('4') >> 15;
 
 	if (DialogueController::getState() == 0) {
 		Player* t = CheckClass::isPlayer(player);
@@ -650,7 +654,7 @@ void Input::InputCheck()
 			//////std:://cout << "Pressed E" << std::endl;
 			gameplay_functions->talk(player);
 		}
-		if ((W || A || S || D) && F) {
+		if ((W || A || S || D) && J) {
 			if (t->getCool()) {
 				//////std:://cout << "Pressed Moving F" << std::endl;
 				t->flipSwing();
@@ -658,7 +662,7 @@ void Input::InputCheck()
 				gameplay_functions->melee(t);
 			}
 		}
-		else if (F) {
+		else if (J) {
 			if (t) {
 				if (t->getCool()) {
 					//////std:://cout << "Pressed F" << std::endl;
@@ -681,7 +685,7 @@ void Input::InputCheck()
 				}
 			}
 		}
-		else if (R && SHIFT) {
+		else if (SEMI) {
 			if (t) {
 				if (t->getCool(1)) {
 					//////std:://cout << "Pressed Shift+R" << std::endl;
@@ -690,7 +694,7 @@ void Input::InputCheck()
 				}
 			}
 		}
-		else if (R) {
+		else if (K) {
 			if (t) {
 				if (t->getCool(0)) {
 					//////std:://cout << "Pressed R" << std::endl;
@@ -699,7 +703,7 @@ void Input::InputCheck()
 				}
 			}
 		}
-		else if (T) {
+		else if (L) {
 			if (t) {
 				if (t->getCool(2)) {
 					//////std:://cout << "Pressed T" << std::endl;
@@ -726,7 +730,7 @@ void Input::InputCheck()
 		if (H) {
 			t->getParty()->set_home(t->getLoc());
 		}
-		if (L) {
+		if (ONE) {
 			t->getParty()->clear_patrol_route();
 		}
 		if (count2 > 0)count2--;
@@ -734,13 +738,13 @@ void Input::InputCheck()
 			t->getParty()->add_patrol_loc(t->getLoc());
 			count2 = 200;
 		}
-		if (J && (count2 == 0)) {
+		if (TWO && (count2 == 0)) {
 			t->getParty()->setMode(Party::MODE_FLEE);
 			t->getParty()->removeSoldier(t, true);
 			t->getVillage()->addToParties(t->getParty());
 			count2 = 200;
 		}
-		if (K && (count2 == 0)) {
+		if (THREE && (count2 == 0)) {
 			t->getParty()->setMode(Party::MODE_PATROL);
 			t->getParty()->removeSoldier(t,true);
 			t->getVillage()->addToParties(t->getParty());
