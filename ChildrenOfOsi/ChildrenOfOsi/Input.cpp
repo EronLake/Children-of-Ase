@@ -573,27 +573,29 @@ void Input::InputCheck()
 	short T = GetKeyState('T') >> 15;
 	short E = GetKeyState('E') >> 15;
 	short Q = GetKeyState('Q') >> 15;
-	short H = GetKeyState('H') >> 15;
-	short J = GetKeyState('J') >> 15;
-	short K = GetKeyState('K') >> 15;
-	short L = GetKeyState('L') >> 15;
+	short H = GetKeyState('H') >> 15; //set home point
+	short J = GetKeyState('J') >> 15; // Base attack
+	short K = GetKeyState('K') >> 15; // Projectile
+	short L = GetKeyState('L') >> 15; // Spin attack
+	short SEMI = GetKeyState(';') >> 15; // Fire
 	short ENTER = GetKeyState(VK_RETURN) >> 15;
 	short SHIFT = GetKeyState(VK_LSHIFT) >> 15;
-	short V = GetKeyState('V') >> 15;
+	short V = GetKeyState('V') >> 15; //set patrol point
 	short F = GetKeyState('F') >> 15;
 	short P = GetKeyState('P') >> 15;
 	short Z = GetKeyState('Z') >> 15;
-	short G = GetKeyState('G') >> 15;
-	short Y = GetKeyState('Y') >> 15;
-	short U = GetKeyState('U') >> 15;
+	short G = GetKeyState('G') >> 15; //Put party in defense mode
+	short Y = GetKeyState('Y') >> 15; //Put party in attack mode
+	short U = GetKeyState('U') >> 15; //Puts party in flee mode
 	short M = GetKeyState('M') >> 15;
-	short SEMI = GetKeyState(';') >> 15;
-	short ONE = GetKeyState('1') >> 15;
-	short TWO = GetKeyState('2') >> 15;
-	short THREE = GetKeyState('3') >> 15;
-	short FOUR = GetKeyState('4') >> 15;
+	
+	short ONE = GetKeyState('1') >> 15;  //clear patrol points
+	short TWO = GetKeyState('2') >> 15; //Removes you from party and puts party in flee mode
+	short THREE = GetKeyState('3') >> 15; // Remove self from party and put party in patrol mode
+	short FOUR = GetKeyState('4') >> 15; // coming soon
 
 	if (DialogueController::getState() == 0) {
+		
 		Player* t = CheckClass::isPlayer(player);
 		gameplay_functions->combat(player);
 		if (SHIFT) {
@@ -654,9 +656,11 @@ void Input::InputCheck()
 			//////std:://cout << "Pressed E" << std::endl;
 			gameplay_functions->talk(player);
 		}
+		if(MAP_EDITOR == 0)
+		{
 		if ((W || A || S || D) && J) {
 			if (t->getCool()) {
-				//////std:://cout << "Pressed Moving F" << std::endl;
+				//////std:://cout << "Pressed Moving J" << std::endl;
 				t->flipSwing();
 				t->meleeAttack();
 				gameplay_functions->melee(t);
@@ -771,11 +775,11 @@ void Input::InputCheck()
 		if (Z) {
 			skip_line();
 		}
-
+		
 
 		//where the map editor is executed
 		////////////////////////////////////
-		if (MAP_EDITOR == 1) {
+		}else if (MAP_EDITOR == 1) {
 			if (L && (GetKeyState(VK_LBUTTON) & 0x100) == 0)
 			{
 				add_object();
@@ -840,19 +844,19 @@ void Input::InputCheck()
 		if (DialogueController::prompted_quest) {
 			
 		}
-		if (H) {
+		if (J) {
 			DialogueController::setOptionsIndex(0);
 			gameplay_functions->setSwordGlow(player);
 		}
-		if (J) {
+		if (K) {
 			DialogueController::setOptionsIndex(1);
 			gameplay_functions->setHeartGlow(player);
 		}
-		if (K) {
+		if (L) {
 			DialogueController::setOptionsIndex(2);
 			gameplay_functions->setFaceGlow(player);
 		}
-		if (L) {
+		if (SEMI) {
 			DialogueController::setOptionsIndex(3);
 			gameplay_functions->setQuestionGlow(player);
 		}
