@@ -130,11 +130,21 @@ void DialogueGui::drawGui()
 		for (int i = 0; i <= 4; i++) {
 			if ( options.size() <= (DialogueController::scroll_control + i))
 				break;
+			std::string option_str = replace_str_char(options[DialogueController::scroll_control + i], "_", ' ');
+			if (option_str.at(0) == 'M' || option_str.back() == 'h')
+				option_str += " Oya";
+			else if (option_str.size() > 10) {
+				if (option_str.at(10) == 'S' || option_str.at(10) == 'A' || option_str.at(10) == 'N') {
+					if( option_str.back() != 'n')
+						option_str += " Oya";
+				}
+					
+			}
 			if (DialogueController::getSelect() == i) {
-				GameWindow::createText(replace_str_char(options[DialogueController::scroll_control + i], "_", ' '), 292, 390 + (18 * i), 544, 45, red);
+				GameWindow::createText(option_str, 292, 390 + (18 * i), 544, 45, red);
 			}
 			else {
-				GameWindow::createText(replace_str_char(options[DialogueController::scroll_control + i], "_", ' '), 292, 390 + (18 * i), 544, 45, black);
+				GameWindow::createText(option_str, 292, 390 + (18 * i), 544, 45, black);
 			}
 
 		}
@@ -149,11 +159,20 @@ void DialogueGui::drawGui()
 		for (int i = 0; i <= 4; i++) {
 			if (options.size() <= (DialogueController::scroll_control + i))
 				break;
+			std::string option_str = replace_str_char(options[DialogueController::scroll_control + i], "_", ' ');
+			if (option_str.size() > 9 && option_str.size() < 15) {
+				if (option_str.at(9) == 'M' || option_str.back() == 'h' && option_str.back() != 'n')
+					option_str += " Oya";
+			}
+			else if (option_str.size() > 15) {
+				if ((option_str.at(15) == 'S' || option_str.at(15) == 'A') && option_str.back() != 'n')
+					option_str += " Oya";
+			}
 			if (DialogueController::getSelect() == i) {
-			GameWindow::createText(replace_str_char(options[DialogueController::scroll_control + i], "_",' '), 292, 390 + (18 * i), 544, 45, red);
+			GameWindow::createText(option_str, 292, 390 + (18 * i), 544, 45, red);
 			}
 			else {
-				GameWindow::createText(replace_str_char(options[DialogueController::scroll_control + i], "_", ' '), 292, 390 + (18 * i), 544, 45, black);
+				GameWindow::createText(option_str, 292, 390 + (18 * i), 544, 45, black);
 			}
 
 		}

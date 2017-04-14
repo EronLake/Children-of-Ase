@@ -87,7 +87,6 @@ void TagConfig::import_config(ChildrenOfOsi* gameplay_func, TaskBuffer* tBuffer)
 		conv_points.push_back((*itor)["topic_16"].asString());
 		conv_points.push_back((*itor)["topic_17"].asString());
 		conv_points.push_back((*itor)["topic_18"].asString());
-		conv_points.push_back((*itor)["topic_19"].asString());
 		conv_points.push_back((*itor)["topic_22"].asString());
 		conv_points.push_back((*itor)["topic_23"].asString());
 		set_tag(gameplay_func, tBuffer, "Talk_About_Affinity", conv_points);
@@ -101,7 +100,6 @@ void TagConfig::import_config(ChildrenOfOsi* gameplay_func, TaskBuffer* tBuffer)
 		conv_points.push_back((*itor)["topic_11"].asString());
 		conv_points.push_back((*itor)["topic_14"].asString());
 		conv_points.push_back((*itor)["topic_17"].asString());
-		conv_points.push_back((*itor)["topic_18"].asString());
 		conv_points.push_back((*itor)["topic_21"].asString());
 		conv_points.push_back((*itor)["topic_22"].asString());
 		set_tag(gameplay_func, tBuffer, "Talk_About_Notoriety", conv_points);
@@ -129,7 +127,6 @@ void TagConfig::import_config(ChildrenOfOsi* gameplay_func, TaskBuffer* tBuffer)
 		conv_points.push_back((*itor)["topic_13"].asString());
 		conv_points.push_back((*itor)["topic_14"].asString());
 		conv_points.push_back((*itor)["topic_15"].asString());
-		conv_points.push_back((*itor)["topic_16"].asString());
 		conv_points.push_back((*itor)["topic_19"].asString());
 		set_tag(gameplay_func, tBuffer, "Talk_About_Action", conv_points);
 	}

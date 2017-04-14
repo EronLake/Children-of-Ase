@@ -131,6 +131,25 @@
 		  "AffEstimate": 50,
 		  "NotorEstimate": 50,
 		  "StrEstimate": 50
+       },
+
+	   "conversation_point_6" : {
+	      "name" : "No_More_Phrases",
+          "topic" : "nmp",
+	      "template" : "No_More_Phrases",
+		  "honor" : 0,
+		  "pride": 0,
+		  "aggression": 0,
+		  "kindness": 0,
+		  "greed": 0,
+		  "recklessness": 0,
+		  "extroversion": 0,
+		  "affinity": 50,
+		  "notoriety": 50,
+		  "strength": 50,
+		  "AffEstimate": 50,
+		  "NotorEstimate": 50,
+		  "StrEstimate": 50
        }
 	 },
 
@@ -235,6 +254,26 @@
           "topic" : "qrp",
 	      "template" : "Response_Ask_About_Notoriety",
 		  "corresponding_conv_point": "Ask_About_Notoriety",
+		  "honor" : 0,
+		  "pride": 0,
+		  "aggression": 0,
+		  "kindness": 0,
+		  "greed": 0,
+		  "recklessness": 0,
+		  "extroversion": 0,
+		  "affinity": 50,
+		  "notoriety": 50,
+		  "strength": 50,
+		  "AffEstimate": 50,
+		  "NotorEstimate": 50,
+		  "StrEstimate": 50
+	  },
+
+	  "reply_point_7" : {
+	      "name" : "Response_No_More_Phrases",
+          "topic" : "nmp",
+	      "template" : "Response_No_More_Phrases",
+		  "corresponding_conv_point": "No_More_Phrases",
 		  "honor" : 0,
 		  "pride": 0,
 		  "aggression": 0,
@@ -756,25 +795,6 @@
 		  "StrEstimate": 50
 
    },
-   "conversation_point_15" : {
-	      "name" : "Move_To_Spy",
-          "topic" : "ncp",
-	      "template" : "Move_To_Spy",
-		  "honor" : 0,
-		  "pride": 0,
-		  "aggression": 0,
-		  "kindness": 0,
-		  "greed": 0,
-		  "recklessness": 0,
-		  "extroversion": 0,
-		  "affinity": 50,
-		  "notoriety": 50,
-		  "strength": 50,
-		  "AffEstimate": 50,
-		  "NotorEstimate": 50,
-		  "StrEstimate": 50
-
-   },
  
    "conversation_point_18" : {
 	      "name" : "Move_To_Train",
@@ -912,26 +932,6 @@
 		  "AffEstimate": 50,
 		  "NotorEstimate": 50,
 		  "StrEstimate": 50
-   },
-   "reply_point_6" : {
-	      "name" : "Response_To_Move_To_Spy",
-          "topic" : "nrp",
-	      "template" : "Response_To_Move_To_Spy",
-		  "corresponding_conv_point": "Move_To_Spy",
-		  "honor" : 0,
-		  "pride": 0,
-		  "aggression": 0,
-		  "kindness": 0,
-		  "greed": 0,
-		  "recklessness": 0,
-		  "extroversion": 0,
-		  "affinity": 50,
-		  "notoriety": 50,
-		  "strength": 50,
-		  "AffEstimate": 50,
-		  "NotorEstimate": 50,
-		  "StrEstimate": 50
-   
    },
 
    "reply_point_15" : {
