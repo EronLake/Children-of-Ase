@@ -68,6 +68,13 @@
 
 #include "QuestManager.h"
 
+#define _CRTDBG_MAP_ALLOC
+#include <crtdbg.h>
+#ifdef _DEBUG
+#define DEBUG_NEW new(_NORMAL_BLOCK, __FILE__, __LINE__)
+#define new DEBUG_NEW
+#endif
+
 using namespace std;
 
 
@@ -89,9 +96,6 @@ std::mutex mu;
 void FPS(bool b);
 void GAMEPLAY_LOOP(QuadTree* _Quadtree);
 
-//bool collide(WorldObj* recA, WorldObj* recB);
-//void Darion_Ian_Test();
-
 bool lineCollision(Line l1, Line l2);
 /// Helper function passed to thread to set file. Param is a tuple, first being the Texture* to work on, and second being the param needed to call setFile().
 void set_file_with_thread(std::pair<Texture*, pair<string, int>>* p_tuple) {
@@ -103,6 +107,7 @@ int main() {
 	QuadTree* collideTree = new QuadTree(0, screen);
 	GameWindow::init();		
 	GAMEPLAY_LOOP(collideTree);
+
 
 	return 0;
 }
@@ -1074,7 +1079,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	blueSoldier->melee->setHeight(50);
 	blueSoldier->set_creator_of_melee();
 	blueSoldier->melee->setStaminaCost(120);
-	blueSoldier->setHealth(10);
+	blueSoldier->setHealth(150);
 	blueSoldier->setMaxStamina(300);
 	
 	blueSoldier->addAttackType(rockThrow);
@@ -1092,7 +1097,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	blueSoldier2->melee->setHeight(50);
 	blueSoldier2->set_creator_of_melee();
 	blueSoldier2->melee->setStaminaCost(120);
-	blueSoldier2->setHealth(10);
+	blueSoldier2->setHealth(150);
 	blueSoldier2->setMaxStamina(300);
 
 	blueSoldier2->addAttackType(rockThrow);
@@ -1110,7 +1115,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	blueSoldier3->melee->setHeight(50);
 	blueSoldier3->set_creator_of_melee();
 	blueSoldier3->melee->setStaminaCost(120);
-	blueSoldier3->setHealth(10);
+	blueSoldier3->setHealth(150);
 	blueSoldier3->setMaxStamina(300);
 
 	blueSoldier3->addAttackType(rockThrow);
@@ -1194,9 +1199,9 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	act_pool.macro.push_back(test_ally);
 	act_pool.micro.push_back(test_train);
 	act_pool.updateMiddle();
-	vector<Action> act=act_pool.getActions(staticRec,*test_ally);
-	for (auto i = act.begin(); i != act.end(); ++i) {
-		cout << i->getName() << endl;
+	vector<Action*> actions=act_pool.getActions(staticRec,test_ally);
+	for (auto action : actions) {
+		std::cout << action->getName() << std::endl;
 	}
 
 	Alex->add_quest(test_ally,10);
@@ -1323,8 +1328,18 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	int count = 0;
 	int state = 0;
 	bool start = true;
+	float shouldExit = -3000;
 
 	while (GameWindow::isRunning()) {
+		//shouldExit++;
+	/*	for (int i = 0; i < 10; i++) {
+			cout << "SHOULD EXIT IS " << shouldExit << endl;
+
+		}*/
+		if (shouldExit > 0) {
+			_CrtDumpMemoryLeaks();
+			return;
+		}
 		if (start) {
 			gameplay_functions->play_sound("Play");
 			//gameplay_functions->play_sound("Walk");
@@ -1522,7 +1537,10 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 			}
 		}
 		//getting here-------------------------------------------------------------------------***********
-	//	AiController->execute();
+		//setting give as quest to false so that the excute runs
+		YemojaPlanner->give_as_quest = false;
+
+		AiController->execute();
 
 		if ((1000 / fs) > (clock() - start_tick)) { //delta_ticks) {www
 			Sleep((1000 / fs) - (clock() - start_tick));

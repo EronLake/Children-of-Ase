@@ -20,7 +20,7 @@ ActionExecFunctions::~ActionExecFunctions()
 };
 
 void ActionExecFunctions::execute_fight_bandits(Action* fight_bandits) {
-	if (/*the bandits->party.size() == 0*/false) {
+	if (/*the bandits->party.size() == 0*/true) {
 		fight_bandits->executed = true;
 	}
 }
@@ -40,13 +40,19 @@ void ActionExecFunctions::execute_train(Action* train) {
 	
 	switch (train->checkpoint) {
 	case 0: //Pick training location, create memory, increment checkpoint
-		////cout << "---------------------CASE 0---------------------" << endl;
+		cout << "---------------------CASE 0---------------------" << endl;
+		//std::cout << (train->getDoer()->destination).getXloc() << ":" << (train->getDoer()->destination).getXloc() << std::endl;
 		train->getDoer()->destination = { 1000,1000 }; //should select from set of pre-defined, stored in Hero, or village?
+		//std::cout << (train->getDoer()->destination).getXloc() << ":" << (train->getDoer()->destination).getXloc() << std::endl;
 		ActionHelper::create_memory(train, train->getDoer());
 		train->checkpoint++;
 		break;
 	case 1: //If destination is reached, start a timer and move to next checkpoint
-		////cout << "---------------------CASE 1---------------------" << endl;
+		std::cout << "---------------------CASE 1---------------------" << endl;
+
+		//THIS IS NOT WORKING BECAUSE THE HEROES DESTINATION KEEPS GETTING RESET BY SOME OTHER CODE
+
+		//std::cout << (train->getDoer()->destination).getXloc() << ":" << (train->getDoer()->destination).getXloc() << std::endl;
 		if (train->getDoer()->destination == Vector2f(0, 0)) {
 			ActionHelper::set_timer(train, 3600);  //Wait 1 minute (60 frames times 60 seconds)
 			train->checkpoint++;
@@ -62,7 +68,7 @@ void ActionExecFunctions::execute_train(Action* train) {
 				perror("something is wrong with the current hero memory creation function");
 			}
 			train->getDoer()->destination = { 500,500 }; //Also predefined, maybe as "home_location" in hero
-			train->applyUtiliites(true);				 //Apply post-conditions
+			train->apply_postconditions(true);				 //Apply post-conditions
 			train->executed = true;
 			doer_mem->setCategory("success");			 //Call update_memory function
 			doer_mem->setReason("I am good at training");
@@ -121,7 +127,7 @@ void ActionExecFunctions::execute_train_with(Action* train_with) {
 				perror("something is wrong with the current hero memory creation function");
 			}
 			train_with->getDoer()->destination = { 500,500 }; //Also predefined, maybe as "home_location" in hero
-			train_with->applyUtiliites(true);				 //Apply post-conditions
+			train_with->apply_postconditions(true);				 //Apply post-conditions
 			train_with->executed = true;
 			doer_mem->setCategory("success");			 //Call update_memory function
 			doer_mem->setReason("I am good at training");
@@ -244,7 +250,7 @@ void ActionExecFunctions::execute_fight(Action* fight)
 		//check if the target's party is empty(may need to change this to account for hero death)
 		if (fight->getReceiver()->getParty()->getMembers().size() == 0) {
 			//Apply succ-post-conditions
-			fight->applyUtiliites(true);
+			fight->apply_postconditions(true);
 			//update_memory category as a success 
 			doer_mem->setCategory("success"); receiver_mem->setCategory("fail");
 			//update reason
@@ -254,7 +260,7 @@ void ActionExecFunctions::execute_fight(Action* fight)
 		else
 		{
 			//Apply fail-post-conditions
-			fight->applyUtiliites(false);
+			fight->apply_postconditions(false);
 			//update_memory as faiure
 			doer_mem->setCategory("fail"); receiver_mem->setCategory("success");
 			//update reason

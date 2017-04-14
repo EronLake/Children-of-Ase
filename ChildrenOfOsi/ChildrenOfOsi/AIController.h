@@ -30,4 +30,8 @@ public:
 	void execute();
 
 	bool give_as_quest(Action* action);
+
+	bool quest_response(Hero* doer, Hero* asker);
+
+	Hero* pick_quest_doer(Action* quest);
 };

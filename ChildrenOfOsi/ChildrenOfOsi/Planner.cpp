@@ -18,19 +18,19 @@ Planner::Planner(Hero* hero) {
 
 
 
-int Planner::cost(Action step) {
+int Planner::cost(Action* step) {
 	int cost = 0;
 
 	return cost;
 }
-int Planner::prereq_appeal(Action step, vector<std::shared_ptr<Preconditions>> priority_preconds) {
+int Planner::prereq_appeal(Action* step, vector<std::shared_ptr<Preconditions>> priority_preconds) {
 	int appeal = 0;
 	//iterate through postconditions.
 	for (int i = 0; i < priority_preconds.size(); i++) {
-		for (int itr = 0; itr < step.succ_postconds.size(); itr++) {
-			if (step.succ_postconds[itr]->get_type() == priority_preconds[i]->get_type()) {
+		for (int itr = 0; itr < step->succ_postconds.size(); itr++) {
+			if (step->succ_postconds[itr]->get_type() == priority_preconds[i]->get_type()) {
 				
-				appeal += step.succ_postconds[itr]->get_utility()*(i+1);
+				appeal += step->succ_postconds[itr]->get_utility()*(i+1);
 
 			}
 		}
@@ -42,10 +42,10 @@ int Planner::prereq_appeal(Action step, vector<std::shared_ptr<Preconditions>> p
 	return appeal;
 }
 
-int Planner::heuristic(Action step, vector<std::shared_ptr<Preconditions>> priority_preconds, vector<Action> goals) {
+int Planner::heuristic(Action* step, vector<std::shared_ptr<Preconditions>> priority_preconds, vector<Action*> goals) {
 	int value = 0;
 
-	value += personality_appeal(&step);
+	value += personality_appeal(step);
 	value += prereq_appeal(step,priority_preconds);
 	value -= cost(step);
 
@@ -92,30 +92,38 @@ void Planner::choose_end_with(int hero) {
 			this->end_states.at(hero) = *best_end_state;
 		}
 		*/
-		this->end_states[hero] = *best_end_state;
+		this->end_states[hero] = best_end_state;
 		std::cout << "///////////////////////////////////////////////////////" << std::endl;
 		std::cout << "BEST END STATE: " << best_end_state->getName() << std::endl;
 		std::cout << "///////////////////////////////////////////////////////" << std::endl;
 	}
 }
 
-Action Planner::choose_next_step(Action goal, vector<Action> goals) {
+Action* Planner::choose_next_step(Action* goal, vector<Action*> goals) {
 	Action* best_step = nullptr;
 	int best_value = 0;
 
 	vector<std::shared_ptr<Preconditions>> priority_preconds = prioritize_preconditions(goal);
-	vector<Action> possible_steps = evaluateHero->actionPool_map[goal.getReceiver()->name]->getActions(goal.getReceiver(), goal);
+	vector<Action*> possible_steps = evaluateHero->actionPool_map[goal->getReceiver()->name]->getActions(goal->getReceiver(), goal);
 
-	for (Action step : possible_steps) {
+	for (Action* step : possible_steps) {
+		//if statement to initialize the best_value to be the first step
+		if (best_step == nullptr) { best_step = step; }
+
 		int step_value = heuristic(step, priority_preconds, goals);
 		if (step_value > best_value)
 		{
 			best_value = step_value;
-			best_step = &step;
+			best_step = step;
 		}
 	}
+
+
+	//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+	//I dont think we should have this line utilites of actions are not supposed to change
+	//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 	best_step->setUtility(best_value);
-	return *best_step;
+	return best_step;
 }
 /*
 * Calcualtes the appeal of a given end_state based on your relationship with the receiver
@@ -146,10 +154,10 @@ int Planner::personality_appeal(Action* evaluateAction) {
 		(evaluateHero->traits->getRecklessness()*evaluateAction->multipliers->getRecklessness())+
 		(evaluateHero->traits->getExtroversion()*evaluateAction->multipliers->getExtroversion()));*/
 };
-vector<std::shared_ptr<Preconditions>> Planner::prioritize_preconditions(Action goal) {
+vector<std::shared_ptr<Preconditions>> Planner::prioritize_preconditions(Action* goal) {
 	vector<std::shared_ptr<Preconditions>> preconlist;
-	for (int i = 0; i < goal.req_preconds.size();i++) {
-		preconlist.push_back(goal.req_preconds[i]);
+	for (int i = 0; i < goal->req_preconds.size();i++) {
+		preconlist.push_back(goal->req_preconds[i]);
 	}
 	
 	//temporary
@@ -161,13 +169,12 @@ vector<std::shared_ptr<Preconditions>> Planner::prioritize_preconditions(Action 
 	};
 
 	std::sort(preconlist.begin(), preconlist.end(), lesserCost());
-	std::cout << preconlist.size() << std::endl;
 	return preconlist;
 };		
 
 //Returns a vector holding all 4 ideal end_states (as actions)
-vector<Action> Planner::get_end_states() {
-	vector<Action> states;
+vector<Action*> Planner::get_end_states() {
+	vector<Action*> states;
 	for (auto iter : end_states)
 	//for (auto iter = end_states.begin(); iter != end_states.end();iter++)
 	{
@@ -183,12 +190,12 @@ vector<Action> Planner::get_end_states() {
 //	return milestones_for_goal;
 //}
 
-vector<Action> Planner::get_milestone_frontier() {
-	vector<Action> frontier;
+vector<Action*> Planner::get_milestone_frontier() {
+	vector<Action*> frontier;
 	for (auto iter : milestones)
 	{
-		Action goal = iter.first;           //The goal associated with the milestone list
-		vector<Action> path = iter.second;  //The milestone list
+		Action* goal = iter.first;           //The goal associated with the milestone list
+		vector<Action*> path = iter.second;  //The milestone list
 
 		if (path.size() == 0) {               //If there are no milestones yet
 			frontier.push_back(goal);       //Put the goal itself in the frontier
@@ -202,11 +209,11 @@ vector<Action> Planner::get_milestone_frontier() {
 }
 
 //Adds the milestone action to the Goal action's milestonelist
-void Planner::add_milestone(Action goal, Action milestone) {
-	milestones.at(goal).push_back(milestone);
+void Planner::add_milestone(Action* goal, Action* milestone) {
+	milestones[(goal)].push_back(milestone);
 }
 
-void Planner::generate_milestones(Action state, Action* goal) {
+void Planner::generate_milestones(Action* state, Action* goal) {
 	if (goal->preConditionsNeeded(evaluateHero, goal->getReceiver()).size() == 0)
 	{
 		if (goal->getUtility() > current_action_value)
@@ -218,8 +225,8 @@ void Planner::generate_milestones(Action state, Action* goal) {
 	}
 	else
 	{
-		milestones.at(state).push_back(choose_next_step(*goal, get_milestone_frontier()));
-		generate_milestones(state, &milestones.at(state).back());
+		milestones.at(state).push_back(choose_next_step(goal, get_milestone_frontier()));
+		generate_milestones(state, milestones.at(state).back());
 	}
 }
 
@@ -228,7 +235,7 @@ void Planner::generate_milestones(Action state, Action* goal) {
 int Planner::value_of(Action* action) {
 	int action_value;
 
-	action_value = heuristic(*action, prioritize_preconditions(current_end_state), get_end_states());
+	action_value = heuristic(action, prioritize_preconditions(current_end_state), get_end_states());
 
 	return action_value;
 }

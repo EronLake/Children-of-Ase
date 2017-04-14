@@ -20,6 +20,7 @@ private:
 	TaskBuffer* tBuffer;
 	vector<WorldObj*>* recVec;
 	AIController* ai;
+	pair<float, float> oldPoint;
 
 	short W;
 	short A;
@@ -43,6 +44,10 @@ private:
 	void delete_object(std::string collide_with);
 	double previous_x_mouse_pos = 0;
 	void interactive_resize(std::string collide_with, double mouseX);
+
+	//River/Mountain Point Tool
+	void add_point_to_file();
+	void skip_line();
 
 public:
 	Input(ChildrenOfOsi* _gameplay_functions, RenderHelper* _rHelper, TaskBuffer* _tBuffer, vector<WorldObj*>* _recVec);

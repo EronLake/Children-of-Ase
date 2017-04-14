@@ -38,24 +38,24 @@ void ActionHelper::create_memory(Action* action, Hero* hero)
 	gameplay_func->add_memory(key, hero->name, type, action->time_stamp, people, category,action->getName() + std::to_string(action->time_stamp), where, action->getWhy(), when);
 	hero->mem_counter++;
 
-	if (hero->name = OYA)
+	if (hero->name == OYA)
 	{
 		hero->memories.push_back(Containers::oya_memory_table[key]);
 		bool the_same_ptr = hero->memories[0] = Containers::oya_memory_table[key];
 	}
-	else if (hero->name = YEMOJA)
+	else if (hero->name == YEMOJA)
 	{
 		hero->memories.push_back(Containers::yemoja_memory_table[key]);
 	}
-	else if (hero->name = OSHOSI)
+	else if (hero->name == OSHOSI)
 	{
 		hero->memories.push_back(Containers::oshosi_memory_table[key]);
 	}
-	else if (hero->name = OGUN)
+	else if (hero->name == OGUN)
 	{
 		hero->memories.push_back(Containers::ogun_memory_table[key]);
 	}
-	else if (hero->name = SHANGO)
+	else if (hero->name == SHANGO)
 	{
 		hero->memories.push_back(Containers::shango_memory_table[key]);
 	}

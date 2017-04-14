@@ -37,6 +37,7 @@ void ActionConfig::import_config(ChildrenOfOsi* gameplay_func, TaskBuffer* tBuff
 
 				//this is where the helper func should be called
 				import_conditions(itr, (*itr)["name"].asString());
+				owner->actionPool_map[i->second->name]->updateMiddle();
 
 			}
 		}

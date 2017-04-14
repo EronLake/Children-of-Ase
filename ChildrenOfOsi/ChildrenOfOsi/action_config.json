@@ -48,11 +48,6 @@
     "extroversion": 0,
     "greed": 0,
 	"req_preconds": {
-		"1" : {
-			"general_type": 0,
-			"rel_type": 6,
-			"desired_rel_val": 80
-		}
 	},
 	"succ_postconds": {
 		"1" : {

@@ -37,8 +37,8 @@ void RenderHelper::initCamera(WorldObj * player)
 	float camX = player->getX() - ((cameraSize.getXloc() / 2)*map_zoom) + (player->getWidth() / 2);
 	float camY = player->getY() - ((cameraSize.getYloc() / 2)*map_zoom) + (player->getHeight() / 2);
 	camera->setLoc(Vector2f(camX, camY));
-	camera->setWidth(cameraSize.getXloc() + 700);
-	camera->setHeight(cameraSize.getYloc() + 300);
+	camera->setWidth(cameraSize.getXloc() + 480);	//700
+	camera->setHeight(cameraSize.getYloc() + 270);	//300
 	//cout << "Camera has coord " << camera->getX() << ", " << camera->getY() << " and width and height of " << camera->getWidth() << ", " << camera->getHeight() << endl;
 
 }
@@ -111,18 +111,16 @@ int RenderHelper::draw_frame(WorldObj * obj)
 	for (int i = 0; i < objVec.size(); i++) {
 		
 		if (objVec[i]->getType() == 3) {
-			if (CheckClass::isSoldier(objVec[i])->getHealth() > 0) {
-				LOG("BEFORE DRAWING**");
-				//////cout << objVec[i]->getX() - camera->getX() << endl;
-				//LOG(objVec[i]->getX(), ", ", objVec[i]->getY());
-				objVec[i]->WorldObj::drawObj(camera->getX(), camera->getY());
-				//for (int j = 0; j < objVec[i]->body.size(); j++) {
-				objVec[i]->body[0].drawObj(camera->getX(), camera->getY());
-				objVec[i]->effect.drawObj(camera->getX(), camera->getY());
-				//}
-				objVec[i]->effect.sprite.animate();
-				objVec[i]->WorldObj::animateObj();
-			}
+			LOG("BEFORE DRAWING**");
+			//////cout << objVec[i]->getX() - camera->getX() << endl;
+			//LOG(objVec[i]->getX(), ", ", objVec[i]->getY());
+			objVec[i]->WorldObj::drawObj(camera->getX(), camera->getY());
+			//for (int j = 0; j < objVec[i]->body.size(); j++) {
+			objVec[i]->body[0].drawObj(camera->getX(), camera->getY());
+			objVec[i]->effect.drawObj(camera->getX(), camera->getY());
+			//}
+			objVec[i]->effect.sprite.animate();
+			objVec[i]->WorldObj::animateObj();
 		}
 		else {
 			LOG("BEFORE DRAWING**");

@@ -1,6 +1,13 @@
 #include "stdafx.h"
 #include "QuadTree.h"
 
+#define _CRTDBG_MAP_ALLOC
+#include <crtdbg.h>
+#ifdef _DEBUG
+#define DEBUG_NEW new(_NORMAL_BLOCK, __FILE__, __LINE__)
+#define new DEBUG_NEW
+#endif
+
 
 QuadTree::QuadTree(unsigned int p_treelv, WorldObj * p_bounds)
 {
@@ -22,6 +29,7 @@ void QuadTree::clear()
 	for (decltype(nodes.size()) i = 0; i<nodes.size(); i++) {
 		if (nodes[i] != nullptr) {
 			nodes[i]->clear();
+			delete(nodes[i]);
 			nodes[i] = nullptr;
 		}
 	}
@@ -34,10 +42,6 @@ void QuadTree::split()
 	float x = bounds->getX();
 	float y = bounds->getY();
 
-	//nodes[0] = new QuadTree(treelv + 1, new WorldObj(x + swidth, y, true));//Vector2f((x + swidth),y), swidth, sheight));
-	//nodes[1] = new QuadTree(treelv + 1, new WorldObj(x, y, true));//Vector2f(x, y), swidth, sheight));
-	//nodes[2] = new QuadTree(treelv + 1, new WorldObj(x, y + sheight, true));//Vector2f(x, (y + sheight)), swidth, sheight));
-	//nodes[3] = new QuadTree(treelv + 1, new WorldObj(x + swidth, y + sheight, true));//Vector2f((x + swidth), (y+ sheight)), swidth, sheight));
 	nodes[0] = new QuadTree(treelv + 1, new WorldObj(Vector2f((x + swidth), y), swidth, sheight));
 	nodes[1] = new QuadTree(treelv + 1, new WorldObj(Vector2f(x, y), swidth, sheight));
 	nodes[2] = new QuadTree(treelv + 1, new WorldObj(Vector2f(x, (y + sheight)), swidth, sheight));

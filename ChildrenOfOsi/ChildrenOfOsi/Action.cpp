@@ -18,6 +18,7 @@ Action::Action(Hero* _owner, Hero* _receiver, Hero* _doer, int _utility, int _wh
 	if (receiver!=nullptr)recieverName = receiver->name;
 	name = _name;
 	execute_ptr  = ActionExecFunctions::ActionExecMap[_exe_name];
+	checkpoint = 0; //used for action execution
 
 	multipliers = new Personality();
 	str_mult = new Personality();
@@ -34,13 +35,13 @@ Action::~Action()
 	delete(noto_mult);
 };
 
-void Action::applyUtiliites(bool ifsucc)
+void Action::apply_postconditions(bool ifsucc)
 {
 	if (ifsucc == true) 
 	{
 		for (int i = 0; i < succ_postconds.size(); i++)
 		{
-			if (succ_postconds[i]->get_general_type() ==Postcondition::REL)
+			if (succ_postconds[i]->get_general_type() ==Postcondition::REL || succ_postconds[i]->get_general_type() == Postcondition::REL_EST)
 			{
 				succ_postconds[i]->apply_utility(doer,receiver);
 		}
@@ -55,7 +56,7 @@ void Action::applyUtiliites(bool ifsucc)
 	{
 		for (int i = 0; i < fail_postconds.size(); i++)
 		{
-			if (fail_postconds[i]->get_general_type() == Postcondition::REL)
+			if (fail_postconds[i]->get_general_type() == Postcondition::REL || fail_postconds[i]->get_general_type() == Postcondition::REL_EST)
 			{
 				fail_postconds[i]->apply_utility(doer,receiver);
 			}
@@ -74,8 +75,10 @@ vector<std::string> Action::preConditionsNeeded(Hero* o, Hero* h) {
 	for (auto it = req_preconds.begin(); it != req_preconds.end(); ++it) {
 		if ((*it)->get_general_type()==Preconditions::REL) {
 			RelPrecon* bullshit= dynamic_cast<RelPrecon*>((*it).get());
+			int temp = bullshit->get_cost(o, h);
 			if (bullshit->get_cost(o, h) > 0) {
-				needs.push_back((*it)->get_type());
+				std::string temp2 = (*it)->get_type();
+				needs.push_back(temp2);
 			}
 		}
 		else if ((*it)->get_general_type() == Preconditions::REL_EST) {
@@ -143,70 +146,11 @@ vector<std::string> Action::preConditionsNeeded(Hero* o, Hero* h) {
 			}
 		}
 	}
-	/*
-	owner = o;
-	int tmp;
-	for (auto i = preconds.begin(); i != preconds.end(); ++i) {
-		if (i->first.compare("affAbove") == 0) {
-			tmp = i->second - owner->rel[h->name]->getAffinity();
-			if (tmp>0) {
-				needs.push_back("affAbove");
-			}
-		}
-		else if (i->first.compare("affBelow") == 0) {
-			tmp = i->second - owner->rel[h->name]->getAffinity();
-			if (tmp<0) {
-				needs.push_back("affBelow");
-			}
-		}
-		else if (i->first.compare("notAbove") == 0) {
-			tmp = i->second - owner->rel[h->name]->getNotoriety();
-			if (tmp>0) {
-				needs.push_back("notAbove");
-			}
-		}
-		else if (i->first.compare("notBelow") == 0) {
-			tmp = i->second - owner->rel[h->name]->getNotoriety();
-			if (tmp<0) {
-				needs.push_back("notBelow");
-			}
-		}
-		else if (i->first.compare("strAbove") == 0) {
-			tmp = i->second - owner->rel[h->name]->getStrength();
-			if (tmp>0) {
-				needs.push_back("strAbove");
-			}
-		}
-		else if (i->first.compare("strBelow") == 0) {
-			tmp = i->second - owner->rel[h->name]->getStrength();
-			if (tmp<0) {
-				needs.push_back("strBelow");
-			}
-		}
-	}
 	//std::////cout << "HERE 2.5" << endl;*/
 	return needs;
 }
 
 int Action::exeAction() {
-	/*
-	vector<std::string> check = preConditionsNeeded(doer, receiver);
-	if (check.empty()) {
-		int tmp;
-		for (int i = 0; i < succ_postconds.size(); i++) {
-			if (succ_postconds[i]->rel_type == 0) {
-				//doer->rel[receiver->name]->addAffinity(i->second);
-			}
-			else if (i->first.compare("not") == 0) {
-				//doer->rel[receiver->name]->addNotoriety(i->second);
-			}
-			else if (i->first.compare("str") == 0) {
-				//doer->rel[receiver->name]->addStrength(i->second);
-			}
-		}
-		return 1;
-	}
-	*/
 	return 0;
 }
 

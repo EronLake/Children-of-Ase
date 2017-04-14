@@ -8,6 +8,7 @@ public:
 	RiverObj();
 	~RiverObj();
 	std::vector<Line> getLines();
+	void initialize_lines();
 	
 
 private:
