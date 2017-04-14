@@ -7,10 +7,10 @@
 
 
 
-Movement::Movement(QuadTree* QT) {
+Movement::Movement(QuadTree* QT, RiverObj* _rivObj) {
 	tree = QT;
-	rivObj = new RiverObj();
-	rivObj->initialize_lines();
+	rivObj = _rivObj;
+	//rivObj->initialize_lines();
 	set_player_clone = false;
 }
 

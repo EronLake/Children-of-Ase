@@ -1,6 +1,7 @@
 #pragma once
 #include "common.h"
 #include "Line.h"
+#include "Sprite.h"
 
 class RiverObj
 {
