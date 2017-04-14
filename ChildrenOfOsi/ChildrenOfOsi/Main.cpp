@@ -617,9 +617,6 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	textureMap[Containers::texture_table["YswingLeft"]] = pair<string, int>("Assets/Sprites/YemojaLeftBreath.png", 14);
 	
 	//load sprite from a configuration file?
-	Soldier* blueSoldier = new Soldier(5630, 4000, true);
-	Soldier* blueSoldier2 = new Soldier(5830, 4000, true);
-	Soldier* blueSoldier3 = new Soldier(6030, 4000, true);
 	Alex->setHealth(200);
 
 	/*blank->setFile("Assets/Sprites/blank.png", 1);
@@ -877,7 +874,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	Alex->melee->setDmg(10);
 	Alex->melee->setSpeed(5);
 	Alex->melee->setBaseDir(4);
-	Alex->melee->setCoolDown(37);
+	Alex->melee->setCoolDown(30);
 	Alex->melee->setPause(-1);
 	Alex->melee->setDestroy(false);
 	Alex->melee->setKeep(true);
@@ -905,7 +902,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	fireball->setSpeed(10);
 	fireball->setDestroy(true);
 	fireball->setDuration(100);
-	fireball->setCoolDown(240);
+	fireball->setCoolDown(180);
 	fireball->setPause(24);
 	fireball->sprite.up= Containers::texture_table["fireUp"];
 	fireball->sprite.left = Containers::texture_table["fireLeft"];
@@ -1024,13 +1021,6 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	staticRec->setHeight(150);
 	staticRec->name = YEMOJA;
 
-	blueSoldier->setWidth(150);
-	blueSoldier->setHeight(150);
-	blueSoldier2->setWidth(150);
-	blueSoldier2->setHeight(150);
-	blueSoldier3->setWidth(150);
-	blueSoldier3->setHeight(150);
-
 	staticRec->sprite.setTexture(yemojaTexture);
 	staticRec->sprite.setIdleTexture(yemojaIdleTex);
 	staticRec->sprite.up = Containers::texture_table["h_upRunTex"];
@@ -1050,88 +1040,8 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	staticRec->sprite.atk_left = Containers::texture_table["YswingLeft"];
 	staticRec->sprite.atk_right = Containers::texture_table["YswingRight"];
 
-	blueSoldier->sprite.setTexture(Containers::texture_table["blueSoldierTexture"]);
-	blueSoldier->sprite.setIdleTexture(Containers::texture_table["blueSoldierIdleTex"]);
-	blueSoldier->sprite.up = Containers::texture_table["bs_upRunTex"];
-	blueSoldier->sprite.down = Containers::texture_table["bs_downRunTex"];
-	blueSoldier->sprite.left = Containers::texture_table["bs_leftRunTex"];
-	blueSoldier->sprite.right = Containers::texture_table["bs_rightRunTex"];
 	
-	blueSoldier->sprite.id_up = Containers::texture_table["bs_upIdleTex"];
-	blueSoldier->sprite.id_left = Containers::texture_table["bs_leftIdleTex"];
-	blueSoldier->sprite.id_right = Containers::texture_table["bs_rightIdleTex"];
-	blueSoldier->sprite.id_down = Containers::texture_table["bs_downIdleTex"];
-	
-	blueSoldier->sprite.atk_up = Containers::texture_table["bs_upAtkTex"];
-	blueSoldier->sprite.atk_down = Containers::texture_table["bs_downAtkTex"];
-	blueSoldier->sprite.atk_left = Containers::texture_table["bs_leftAtkTex"];
-	blueSoldier->sprite.atk_right = Containers::texture_table["bs_rightAtkTex"];
-	
-	blueSoldier->sprite.hurt_up = Containers::texture_table["bs_upHurtTex"];
-	blueSoldier->sprite.hurt_down = Containers::texture_table["bs_downHurtTex"];
-	blueSoldier->sprite.hurt_left = Containers::texture_table["bs_leftHurtTex"];
-	blueSoldier->sprite.hurt_right = Containers::texture_table["bs_rightHurtTex"];
-
-	blueSoldier2->sprite.setTexture(Containers::texture_table["blueSoldierTexture"]);
-	blueSoldier2->sprite.setIdleTexture(Containers::texture_table["blueSoldierIdleTex"]);
-	blueSoldier2->sprite.up = Containers::texture_table["bs_upRunTex"];
-	blueSoldier2->sprite.down = Containers::texture_table["bs_downRunTex"];
-	blueSoldier2->sprite.left = Containers::texture_table["bs_leftRunTex"];
-	blueSoldier2->sprite.right = Containers::texture_table["bs_rightRunTex"];
-
-	blueSoldier2->sprite.id_up = Containers::texture_table["bs_upIdleTex"];
-	blueSoldier2->sprite.id_left = Containers::texture_table["bs_leftIdleTex"];
-	blueSoldier2->sprite.id_right = Containers::texture_table["bs_rightIdleTex"];
-	blueSoldier2->sprite.id_down = Containers::texture_table["bs_downIdleTex"];
-
-	blueSoldier2->sprite.atk_up = Containers::texture_table["bs_upAtkTex"];
-	blueSoldier2->sprite.atk_down = Containers::texture_table["bs_downAtkTex"];
-	blueSoldier2->sprite.atk_left = Containers::texture_table["bs_leftAtkTex"];
-	blueSoldier2->sprite.atk_right = Containers::texture_table["bs_rightAtkTex"];
-
-	blueSoldier2->sprite.hurt_up = Containers::texture_table["bs_upHurtTex"];
-	blueSoldier2->sprite.hurt_down = Containers::texture_table["bs_downHurtTex"];
-	blueSoldier2->sprite.hurt_left = Containers::texture_table["bs_leftHurtTex"];
-	blueSoldier2->sprite.hurt_right = Containers::texture_table["bs_rightHurtTex"];
-
-	blueSoldier3->sprite.setTexture(Containers::texture_table["blueSoldierTexture"]);
-	blueSoldier3->sprite.setIdleTexture(Containers::texture_table["blueSoldierIdleTex"]);
-	blueSoldier3->sprite.up = Containers::texture_table["bs_upRunTex"];
-	blueSoldier3->sprite.down = Containers::texture_table["bs_downRunTex"];
-	blueSoldier3->sprite.left = Containers::texture_table["bs_leftRunTex"];
-	blueSoldier3->sprite.right = Containers::texture_table["bs_rightRunTex"];
-
-	blueSoldier3->sprite.id_up = Containers::texture_table["bs_upIdleTex"];
-	blueSoldier3->sprite.id_left = Containers::texture_table["bs_leftIdleTex"];
-	blueSoldier3->sprite.id_right = Containers::texture_table["bs_rightIdleTex"];
-	blueSoldier3->sprite.id_down = Containers::texture_table["bs_downIdleTex"];
-
-	blueSoldier3->sprite.atk_up = Containers::texture_table["bs_upAtkTex"];
-	blueSoldier3->sprite.atk_down = Containers::texture_table["bs_downAtkTex"];
-	blueSoldier3->sprite.atk_left = Containers::texture_table["bs_leftAtkTex"];
-	blueSoldier3->sprite.atk_right = Containers::texture_table["bs_rightAtkTex"];
-
-	blueSoldier3->sprite.hurt_up = Containers::texture_table["bs_upHurtTex"];
-	blueSoldier3->sprite.hurt_down = Containers::texture_table["bs_downHurtTex"];
-	blueSoldier3->sprite.hurt_left = Containers::texture_table["bs_leftHurtTex"];
-	blueSoldier3->sprite.hurt_right = Containers::texture_table["bs_rightHurtTex"];
-
-	blueSoldier->offsetBody(0, 60, 60, 75, 50);
-	blueSoldier->setInteractable(true);
-	blueSoldier->setName("blueSoldier");
-
-	blueSoldier2->offsetBody(0, 60, 60, 75, 50);
-	blueSoldier2->setInteractable(true);
-	blueSoldier2->setName("blueSoldier2");
-
-	blueSoldier3->offsetBody(0, 60, 60, 75, 50);
-	blueSoldier3->setInteractable(true);
-	blueSoldier3->setName("blueSoldier3");
-
 	gameplay_functions->add_Attack(staticRec->getKey(), staticRec->body[0].getX(), staticRec->body[0].getY(), true, 10);
-	gameplay_functions->add_Attack(blueSoldier->getKey(), blueSoldier->body[0].getX(), blueSoldier->body[0].getY(), true, 10);
-	gameplay_functions->add_Attack(blueSoldier2->getKey(), blueSoldier2->body[0].getX(), blueSoldier2->body[0].getY(), true, 10);
-	gameplay_functions->add_Attack(blueSoldier3->getKey(), blueSoldier3->body[0].getX(), blueSoldier3->body[0].getY(), true, 10);
 	tBuffer->run();
 
 	staticRec->melee = Containers::Attack_table[staticRec->getKey()];
@@ -1151,7 +1061,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	staticRec->melee->sprite.setTexture(Containers::texture_table["border"]);
 
 	vector<Soldier*> silverSoldier;
-	int silverNum = 3;
+	int silverNum = 4;
 	for (int i = 0; i < silverNum; i++) {
 		silverSoldier.push_back(new Soldier(6745, 10355+(i*20), false));
 		gameplay_functions->add_Attack(silverSoldier[i]->getKey(), silverSoldier[i]->body[0].getX(), silverSoldier[i]->body[0].getY(), true, 10);
@@ -1189,7 +1099,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 		silverSoldier[i]->melee->setDmg(10);
 		silverSoldier[i]->melee->setSpeed(5);
 		silverSoldier[i]->melee->setBaseDir(4);
-		silverSoldier[i]->melee->setCoolDown(100);
+		silverSoldier[i]->melee->setCoolDown(60);
 		silverSoldier[i]->melee->setPause(-1);
 		silverSoldier[i]->melee->setDestroy(false);
 		silverSoldier[i]->melee->setKeep(true);
@@ -1205,60 +1115,60 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 		silverSoldier[i]->setSpeed(8);
 	}
 
+	vector<Soldier*> blueSoldiers;
+	int blueNum = 5;
+	for (int i = 0; i < blueNum; i++) {
+		blueSoldiers.push_back(new Soldier(6030, 4000 + (i * 20), false));
+		gameplay_functions->add_Attack(blueSoldiers[i]->getKey(), blueSoldiers[i]->body[0].getX(), blueSoldiers[i]->body[0].getY(), true, 10);
+	}
+	tBuffer->run();
+	for (int i = 0; i < blueNum; i++) {
+		blueSoldiers[i]->setWidth(150);
+		blueSoldiers[i]->setHeight(150);
+		blueSoldiers[i]->sprite.setTexture(Containers::texture_table["blueSoldierTexture"]);
+		blueSoldiers[i]->sprite.setIdleTexture(Containers::texture_table["blueSoldierIdleTex"]);
+		blueSoldiers[i]->sprite.up = Containers::texture_table["bs_upRunTex"];
+		blueSoldiers[i]->sprite.down = Containers::texture_table["bs_downRunTex"];
+		blueSoldiers[i]->sprite.left = Containers::texture_table["bs_leftRunTex"];
+		blueSoldiers[i]->sprite.right = Containers::texture_table["bs_rightRunTex"];
 
-	blueSoldier->melee = Containers::Attack_table[blueSoldier->getKey()];
-	blueSoldier->melee->setDmg(10);
-	blueSoldier->melee->setSpeed(1);
-	blueSoldier->melee->setBaseDir(4);
-	blueSoldier->melee->setCoolDown(100);
-	blueSoldier->melee->setPause(-1);
-	blueSoldier->melee->setDestroy(false);
-	blueSoldier->melee->setKeep(true);
-	blueSoldier->melee->setWidth(50);
-	blueSoldier->melee->setHeight(50);
-	blueSoldier->set_creator_of_melee();
-	blueSoldier->melee->setStaminaCost(120);
-	blueSoldier->setHealth(150);
-	blueSoldier->setMaxStamina(300);
-	
-	blueSoldier->addAttackType(rockThrow);
-	blueSoldier->melee->sprite.setTexture(Containers::texture_table["border"]);
+		blueSoldiers[i]->sprite.id_up = Containers::texture_table["bs_upIdleTex"];
+		blueSoldiers[i]->sprite.id_left = Containers::texture_table["bs_leftIdleTex"];
+		blueSoldiers[i]->sprite.id_right = Containers::texture_table["bs_rightIdleTex"];
+		blueSoldiers[i]->sprite.id_down = Containers::texture_table["bs_downIdleTex"];
 
-	blueSoldier2->melee = Containers::Attack_table[blueSoldier2->getKey()];
-	blueSoldier2->melee->setDmg(10);
-	blueSoldier2->melee->setSpeed(1);
-	blueSoldier2->melee->setBaseDir(4);
-	blueSoldier2->melee->setCoolDown(100);
-	blueSoldier2->melee->setPause(-1);
-	blueSoldier2->melee->setDestroy(false);
-	blueSoldier2->melee->setKeep(true);
-	blueSoldier2->melee->setWidth(50);
-	blueSoldier2->melee->setHeight(50);
-	blueSoldier2->set_creator_of_melee();
-	blueSoldier2->melee->setStaminaCost(120);
-	blueSoldier2->setHealth(150);
-	blueSoldier2->setMaxStamina(300);
+		blueSoldiers[i]->sprite.atk_up = Containers::texture_table["bs_upAtkTex"];
+		blueSoldiers[i]->sprite.atk_down = Containers::texture_table["bs_downAtkTex"];
+		blueSoldiers[i]->sprite.atk_left = Containers::texture_table["bs_leftAtkTex"];
+		blueSoldiers[i]->sprite.atk_right = Containers::texture_table["bs_rightAtkTex"];
 
-	blueSoldier2->addAttackType(rockThrow);
-	blueSoldier2->melee->sprite.setTexture(Containers::texture_table["border"]);
+		blueSoldiers[i]->sprite.hurt_up = Containers::texture_table["bs_upHurtTex"];
+		blueSoldiers[i]->sprite.hurt_down = Containers::texture_table["bs_downHurtTex"];
+		blueSoldiers[i]->sprite.hurt_left = Containers::texture_table["bs_leftHurtTex"];
+		blueSoldiers[i]->sprite.hurt_right = Containers::texture_table["bs_rightHurtTex"];
 
-	blueSoldier3->melee = Containers::Attack_table[blueSoldier3->getKey()];
-	blueSoldier3->melee->setDmg(10);
-	blueSoldier3->melee->setSpeed(1);
-	blueSoldier3->melee->setBaseDir(4);
-	blueSoldier3->melee->setCoolDown(100);
-	blueSoldier3->melee->setPause(-1);
-	blueSoldier3->melee->setDestroy(false);
-	blueSoldier3->melee->setKeep(true);
-	blueSoldier3->melee->setWidth(50);
-	blueSoldier3->melee->setHeight(50);
-	blueSoldier3->set_creator_of_melee();
-	blueSoldier3->melee->setStaminaCost(120);
-	blueSoldier3->setHealth(150);
-	blueSoldier3->setMaxStamina(300);
-
-	blueSoldier3->addAttackType(rockThrow);
-	blueSoldier3->melee->sprite.setTexture(Containers::texture_table["border"]);
+		blueSoldiers[i]->offsetBody(0, 60, 60, 75, 50);
+		blueSoldiers[i]->setInteractable(true);
+		blueSoldiers[i]->setName("blueSoldier");
+		blueSoldiers[i]->melee = Containers::Attack_table[blueSoldiers[i]->getKey()];
+		blueSoldiers[i]->melee->setDmg(10);
+		blueSoldiers[i]->melee->setSpeed(5);
+		blueSoldiers[i]->melee->setBaseDir(4);
+		blueSoldiers[i]->melee->setCoolDown(60);
+		blueSoldiers[i]->melee->setPause(-1);
+		blueSoldiers[i]->melee->setDestroy(false);
+		blueSoldiers[i]->melee->setKeep(true);
+		blueSoldiers[i]->melee->setWidth(50);
+		blueSoldiers[i]->melee->setHeight(50);
+		blueSoldiers[i]->set_creator_of_melee();
+		blueSoldiers[i]->melee->setStaminaCost(90);
+		blueSoldiers[i]->setHealth(100);
+		blueSoldiers[i]->melee->setStaminaCost(120);
+		blueSoldiers[i]->setMaxStamina(300);
+		blueSoldiers[i]->addAttackType(rockThrow);
+		blueSoldiers[i]->melee->sprite.setTexture(Containers::texture_table["border"]);
+		blueSoldiers[i]->setSpeed(8);
+	}
 
 	//VisibilityGraph graph;
 	ai->graph.vertices = vertices;
@@ -1375,9 +1285,9 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	for (int i = 0; i < silverSoldier.size();i++) {
 		recVec.push_back(silverSoldier[i]);
 	}
-	recVec.push_back(blueSoldier);
-	recVec.push_back(blueSoldier2);
-	recVec.push_back(blueSoldier3);
+	for (int i = 0; i < blueSoldiers.size(); i++) {
+		recVec.push_back(blueSoldiers[i]);
+	}
 	
 /*	VisibilityGraph graph{ {
 		{{1400.00,800.00}, {{1400.00, 900.00},{1200.00,800.00}}},
@@ -1425,9 +1335,9 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	for (int i = 0; i < silverSoldier.size(); i++) {
 		party->addToParty(silverSoldier[i], false);
 	}
-	party2->addToParty(blueSoldier, true);
-	party2->addToParty(blueSoldier2, false);
-	party2->addToParty(blueSoldier3, false);
+	for (int i = 0; i < blueSoldiers.size(); i++) {
+		party2->addToParty(blueSoldiers[i], false);
+	}
 	party3->addToParty(staticRec, true);
 	Village* v1 = new Village();
 	Village* v2 = new Village();
@@ -1439,9 +1349,9 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	for (int i = 0; i < silverSoldier.size(); i++) {
 		v1->add_member(silverSoldier[i]);
 	}
-	v2->add_member(blueSoldier);
-	v2->add_member(blueSoldier2);
-	v2->add_member(blueSoldier3);
+	for (int i = 0; i < blueSoldiers.size(); i++) {
+		v2->add_member(blueSoldiers[i]);
+	}
 	v3->add_member(staticRec);
 	Alliance* a1 = new Alliance(v1);
 	Alliance* a2 = new Alliance(v2);
@@ -1452,7 +1362,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	War* war = new War();
 	war->setWarParties(v1,v2);
 	a1->add_alliance_to_alliance(v3->get_alliance());
-	party2->set_defend(blueSoldier->getLoc());
+	if (blueSoldiers.size()>0)party2->set_defend(blueSoldiers[0]->getLoc());
 	party2->setMode(Party::MODE_DEFEND);
 	party3->add_patrol_loc(staticRec->getLoc());
 	party3->add_patrol_loc({ 6445.0, 9855.0 });
@@ -1472,6 +1382,15 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	int state = 0;
 	bool start = true;
 	float shouldExit = -3000;
+
+	vector<Soldier*> soldiers_list;
+	soldiers_list.push_back(staticRec);
+	for (int i = 0; i < blueSoldiers.size(); i++) {
+		soldiers_list.push_back(blueSoldiers[i]);
+	}
+	for (int i = 0; i < silverSoldier.size(); i++) {
+		soldiers_list.push_back(silverSoldier[i]);
+	}
 
 	while (GameWindow::isRunning()) {
 		//shouldExit++;
@@ -1572,13 +1491,34 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	}
 		partyM->updateSoliderStatus();
 		combatControl->checkParties();
-		combatControl->update_soldier(staticRec, state);
-		for (int i = 0; i < silverSoldier.size(); i++) {
-			combatControl->update_soldier(silverSoldier[i], state);
+		for (int i = 0; i < soldiers_list.size();i++) {
+			combatControl->update_soldier(soldiers_list[i], state);
 		}
-		combatControl->update_soldier(blueSoldier, state);
-		combatControl->update_soldier(blueSoldier2, state);
-		combatControl->update_soldier(blueSoldier3, state);
+
+		int soldier_counter = 0;
+		for (const auto& it : soldiers_list) {
+			//pair<Soldier*, int>* temp_tuple = new pair<Soldier*, int>(it, state);
+			//cout << "WORKING ON " << temp_tuple->second.first << endl;
+			// If there are still less than "num_of_threads" in thread_Vec:
+			if (soldier_counter % num_of_threads != 0) {
+
+				//std::thread temp_thread(set_file_with_thread, std::ref(temp_tuple));
+				thread_Vec.push_back(combatControl->threaded_update_soldier(it,state));
+			}
+			else {
+				//cout << "THE THREAD VEC HAS " << thread_Vec.size() << "THREADS" << endl;
+				for (auto& itr : thread_Vec) {
+					itr.join();
+				}
+				thread_Vec.clear();
+				thread_Vec.push_back(combatControl->threaded_update_soldier(it, state));
+			}
+			soldier_counter++;
+			}
+			for (auto& it : thread_Vec) {
+				it.join();
+			}
+			thread_Vec.clear();
 
 		questM->update();
 				

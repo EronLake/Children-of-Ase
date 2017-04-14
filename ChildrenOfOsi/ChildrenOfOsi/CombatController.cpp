@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "CombatController.h"
 
+std::mutex mux;
 
 CombatController::CombatController(ChildrenOfOsi* coo)
 {
@@ -41,6 +42,7 @@ void CombatController::fight(Soldier* sold1, int state) {
 				sold1->face(sold2);
 				if (sold1->getCool()) {
 					sold1->meleeAttack();
+					std::lock_guard<std::mutex> guard(mux);
 					gameplay_functions->melee(sold1);
 				}
 			}
@@ -53,6 +55,7 @@ void CombatController::fight(Soldier* sold1, int state) {
 				sold1->destination = sold1->getEvadeRange(sold1->getCurrentEnemy());
 			}
 		}
+		std::lock_guard<std::mutex> guard(mux);
 		move_to_target(sold1, state);
 	}
 }
@@ -60,6 +63,7 @@ void CombatController::fight(Soldier* sold1, int state) {
 void CombatController::follow(Soldier* sold1, int state) {
 	Soldier* sold2 = sold1->getCurrentLeader();
 	if (sold2 == nullptr) {
+		std::lock_guard<std::mutex> guard(mux);
 		party_leader_update(sold1,state);
 		////std:://cout << sold1->getID()<<" update leader" << std::endl;
 		return;
@@ -72,10 +76,11 @@ void CombatController::follow(Soldier* sold1, int state) {
 		sold1->destination = Vector2f(0, 0);
 		sold1->waypoint = Vector2f(0, 0);
 ////std:://cout << sold1->getID() << " reached its leader, " << sold2->getID() << std::endl;
+		std::lock_guard<std::mutex> guard(mux);
 		gameplay_functions->stop(sold1);
 		return;
 	}
-
+	std::lock_guard<std::mutex> guard(mux);
 	move_to_target(sold1,state);
 }
 
@@ -126,6 +131,7 @@ void CombatController::update_soldier(Soldier* sold1, int state) {
 	sold1->updateCD();
 	if (sold1->getParty() == nullptr || sold1->getParty() == NULL)return;
 	if (find_closest_friend(sold1, state)) {
+		std::lock_guard<std::mutex> guard(mux);
 		move_to_target(sold1, state);
 	}
 	else {
@@ -133,6 +139,7 @@ void CombatController::update_soldier(Soldier* sold1, int state) {
 		if ((sold1->getHold()) && (dist_soldier_to_location(sold1, sold1->getParty()->get_defend()) > 400)) {
 			sold1->destination = sold1->getParty()->get_defend();
 			sold1->waypoint = sold1->getParty()->get_defend();
+			std::lock_guard<std::mutex> guard(mux);
 			move_to_target(sold1, state);
 		}
 		else {
@@ -172,7 +179,6 @@ void CombatController::update_soldier(Soldier* sold1, int state) {
 }
 
 void CombatController::move_to_target(Soldier* sold1, int state) {
-
 	if (sold1->destination != Vector2f(0, 0)) { //Hero has a destination
 		if (sold1->waypoint != Vector2f(0, 0) && state == 0) { //Hero has a waypoint to the desination, and not in dialog
 			if (sold1->getHold()) {//getMode() == Party::MODE_DEFEND) {
@@ -275,4 +281,8 @@ void CombatController::party_leader_update(Soldier* sold1, int state) {
 			////std:://cout << sold1->getID() << " is idling now" << std::endl;
 		}
 	}
+}
+
+std::thread CombatController::threaded_update_soldier(Soldier* s, int n) {
+	return std::thread(&CombatController::update_soldier, this, s, n);
 }
