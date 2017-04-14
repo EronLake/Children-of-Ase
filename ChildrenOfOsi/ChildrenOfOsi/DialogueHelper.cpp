@@ -30,19 +30,52 @@ dialogue_point DialogueHelper::choose_conv_pt(std::vector<ConversationLogObj*> c
 {	
 	std::vector<ConversationPoint*> temp;
 	int conv_pt_index;
-	conv_pt_index = rand() % (possible_conv_pts[optn_inx].size());
+	
 	
 
 	for (auto i = conversation_log_obj_pointer_vec.begin(); i != conversation_log_obj_pointer_vec.end(); ++i) {
-	for (auto j : (*i)->get_conv_point()->tag_pointer_vec) {
-		for (auto k : j->conversation_point_pointer_vec) {
-			temp.push_back(k);
+		//auto it = std::find(temp.begin(), temp.end(), (*i)->get_conv_point());
+		//if (it != temp.end()) {
+		//	temp.erase(std::remove(temp.begin(), temp.end(), *it), temp.end());
+		//}
+		//else {
+
+		// }
+		for (auto j : (*i)->get_conv_point()->tag_pointer_vec) {
+			for (auto k : j->conversation_point_pointer_vec) {
+				if (std::find(temp.begin(), temp.end(), k) != temp.end()) {
+				}
+				else {
+				temp.push_back(k);
+				}
+			
+			
+		      }
+
+
+	    }
+		
+	}
+	for (auto i = conversation_log_obj_pointer_vec.begin(); i != conversation_log_obj_pointer_vec.end(); ++i) {
+		auto it = std::find(temp.begin(), temp.end(), (*i)->get_conv_point());
+		if (it != temp.end() && (*i)->get_who() == 2) {
+			temp.erase(std::remove(temp.begin(), temp.end(), *it), temp.end());
 		}
+		else {
+
+		}
+	}
+	//relationship filtering
+	std::ofstream ofs;
+	ofs.open("dialog_template_output.txt", std::ofstream::out | std::ofstream::trunc);
+	for (auto itor = temp.begin(); itor != temp.end(); itor++) {
+	
+	ofs << "Conversation Point Name: " << (*itor)->get_name() << " Tag Name: " << std::endl;
 
 	}
-
-
-	}
+	ofs.close();
+	//choose based on personality
+	conv_pt_index = rand() % (temp.size());
 	return temp[conv_pt_index]->dpoint;
 }
 
@@ -265,7 +298,10 @@ void DialogueHelper::fill_conversations() {
 			possible_conv_pts[3].push_back(itor->second->dpoint);//itor->second->dpoint);
 		}
 		else if (itor->second->get_topic() == "qrp") {
-			possible_reply_pts[3].push_back(itor->second->dpoint);//itor->second->dpoint);
+			possible_reply_pts[3].push_back(itor->second->dpoint);
+			possible_reply_pts[0].push_back(itor->second->dpoint);
+			possible_reply_pts[1].push_back(itor->second->dpoint);
+			possible_reply_pts[2].push_back(itor->second->dpoint);
 		}
 		else if (itor->second->get_topic() == "d") {
 			
@@ -278,18 +314,27 @@ void DialogueHelper::fill_conversations() {
 			possible_conv_pts[0].push_back(itor->second->dpoint);
 		}
 		else if (itor->second->get_topic() == "srp") {
+			possible_reply_pts[3].push_back(itor->second->dpoint);
 			possible_reply_pts[0].push_back(itor->second->dpoint);
+			possible_reply_pts[1].push_back(itor->second->dpoint);
+			possible_reply_pts[2].push_back(itor->second->dpoint);
 		}
 		else if (itor->second->get_topic() == "acp") {
 			possible_conv_pts[1].push_back(itor->second->dpoint);
 		}
 		else if (itor->second->get_topic() == "arp") {
+			possible_reply_pts[3].push_back(itor->second->dpoint);
+			possible_reply_pts[0].push_back(itor->second->dpoint);
 			possible_reply_pts[1].push_back(itor->second->dpoint);
+			possible_reply_pts[2].push_back(itor->second->dpoint);
 		}
 		else if (itor->second->get_topic() == "ncp") {
 			possible_conv_pts[2].push_back(itor->second->dpoint);
 		}
 		else {
+			possible_reply_pts[3].push_back(itor->second->dpoint);
+			possible_reply_pts[0].push_back(itor->second->dpoint);
+			possible_reply_pts[1].push_back(itor->second->dpoint);
 			possible_reply_pts[2].push_back(itor->second->dpoint);
 		}
 	}
