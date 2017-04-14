@@ -1491,9 +1491,9 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	}
 		partyM->updateSoliderStatus();
 		combatControl->checkParties();
-		for (int i = 0; i < soldiers_list.size();i++) {
+		/*for (int i = 0; i < soldiers_list.size();i++) {
 			combatControl->update_soldier(soldiers_list[i], state);
-		}
+		}*/
 
 		int soldier_counter = 0;
 		for (const auto& it : soldiers_list) {
