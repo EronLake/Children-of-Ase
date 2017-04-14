@@ -146,28 +146,29 @@ void AIController::execute() {
 		//if you are not planning to give it as a quest
 		if (me->update_action_timer() == 0)
 		{
-
-		}
-		if (!planner->give_as_quest) {
-			curr_action->execute();
-		}
-		if (curr_action->executed) {
-
-			milestones->at(curr_goal).pop_back();              //Remove the curr_action from curr_goal's milestone list
-
-			vector<Action*> frontier = planner->get_milestone_frontier();
-			Action* best_action = nullptr;
-			//Loop over all the next milestones to find the most valuable action, and set it to current action
-			int best_utility = 0;
-			for (auto itor : frontier) {
-				if (itor->getUtility() > best_utility) {
-					best_utility = itor->getUtility();
-					best_action = itor;
-				}
+			if (!planner->give_as_quest) {
+				curr_action->execute();
 			}
-			planner->set_current_action(best_action);          //Current action is set
-			me->init_action_timer(action_wait_time);    //Start a timer for approx. 2 minutes
-			//give_as_quest()
+			if (curr_action->executed) {
+
+				milestones->at(curr_goal).pop_back();              //Remove the curr_action from curr_goal's milestone list
+
+				vector<Action*> frontier = planner->get_milestone_frontier();
+				Action* best_action = nullptr;
+				//Loop over all the next milestones to find the most valuable action, and set it to current action
+				int best_utility = 0;
+				for (auto itor : frontier) {
+					if (itor->getUtility() > best_utility) {
+						best_utility = itor->getUtility();
+						best_action = itor;
+					}
+				}
+				planner->set_current_action(best_action);                   //Current action is set
+				me->init_action_timer(action_wait_time);                    //Start a timer for approx. 2 minutes
+				planner->give_as_quest = this->give_as_quest(best_action);  //Check and store in planner whether this is appropriate to give as a quest
+
+			}
+
 		}
 		//planner->get_milestones_for_goal(curr_goal).pop_back();  
 

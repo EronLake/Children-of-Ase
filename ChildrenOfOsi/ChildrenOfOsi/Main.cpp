@@ -115,7 +115,7 @@ int main() {
 
 void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 {
-	Rectangle::tex->setFile("Assets/Sprites/blank.png", 1);
+	Rectangle::tex->setFile("Assets/Sprites/blank1.png", 1);
 	
 
 	vector<WorldObj*> recVec;
