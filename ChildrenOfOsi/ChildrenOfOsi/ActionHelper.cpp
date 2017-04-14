@@ -118,6 +118,7 @@ void ActionHelper::attack_helper(Soldier* attacker, Soldier* defender)
 		damage += attacker->attackTypes[a]->getDmg();
 	}
 	damage += attacker->melee->getDmg();
+	damage += rand() % (damage * 2) - damage;
 	//take average of all attacks
 	damage = damage / attacker->attackTypes.size()+1;
 	//take off damage from the average of all their attacks AKA larger attack smaller
