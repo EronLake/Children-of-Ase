@@ -46,7 +46,7 @@
 	      "name" : "Ask_Name",
           "topic" : "qcp",
 	      "template" : "Ask_Name",
-		  "honor" : 0,
+		  "honor" : 8,
 		  "pride": 0,
 		  "aggression": 0,
 		  "kindness": 1,
