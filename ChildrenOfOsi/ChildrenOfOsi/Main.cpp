@@ -874,7 +874,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	Alex->melee->setDmg(10);
 	Alex->melee->setSpeed(5);
 	Alex->melee->setBaseDir(4);
-	Alex->melee->setCoolDown(30);
+	Alex->melee->setCoolDown(35);
 	Alex->melee->setPause(-1);
 	Alex->melee->setDestroy(false);
 	Alex->melee->setKeep(true);
@@ -1061,7 +1061,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	staticRec->melee->sprite.setTexture(Containers::texture_table["border"]);
 
 	vector<Soldier*> silverSoldier;
-	int silverNum = 40;
+	int silverNum = 4;
 	for (int i = 0; i < silverNum; i++) {
 		silverSoldier.push_back(new Soldier(6745, 10355+(i*20), false));
 		gameplay_functions->add_Attack(silverSoldier[i]->getKey(), silverSoldier[i]->body[0].getX(), silverSoldier[i]->body[0].getY(), true, 10);
@@ -1116,7 +1116,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	}
 
 	vector<Soldier*> blueSoldiers;
-	int blueNum = 40;
+	int blueNum = 4;
 	for (int i = 0; i < blueNum; i++) {
 		blueSoldiers.push_back(new Soldier(6030, 4000 + (i * 20), false));
 		gameplay_functions->add_Attack(blueSoldiers[i]->getKey(), blueSoldiers[i]->body[0].getX(), blueSoldiers[i]->body[0].getY(), true, 10);
@@ -1491,11 +1491,11 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	}
 		partyM->updateSoliderStatus();
 		combatControl->checkParties();
-		/*for (int i = 0; i < soldiers_list.size();i++) {
+		for (int i = 0; i < soldiers_list.size();i++) {
 			combatControl->update_soldier(soldiers_list[i], state);
-		}*/
+		}
 
-		int soldier_counter = 0;
+		/*int soldier_counter = 0;
 		for (const auto& it : soldiers_list) {
 			//pair<Soldier*, int>* temp_tuple = new pair<Soldier*, int>(it, state);
 			//cout << "WORKING ON " << temp_tuple->second.first << endl;
@@ -1519,7 +1519,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 				it.join();
 			}
 			thread_Vec.clear();
-
+			*/
 		questM->update();
 				
 		//ai->plan_step(staticRec);

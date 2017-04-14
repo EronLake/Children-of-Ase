@@ -120,7 +120,7 @@ void Soldier::meleeAttack()
   }
   else {
     melee->setBaseDir(4);
-    melee->setPause(4);
+    melee->setPause(8);
   }
   if(d == 8) {
     y = y - (melee->getHeight() / 1.2);
