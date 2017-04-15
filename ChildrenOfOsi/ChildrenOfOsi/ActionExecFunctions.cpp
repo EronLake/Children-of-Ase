@@ -9,7 +9,9 @@ std::unordered_map<std::string, execute_ptr> ActionExecFunctions::ActionExecMap{
 	{ "execute_duel",			&execute_duel			},
 	{ "execute_spar",			&execute_duel			},
 	{ "execute_form_alliance",	&execute_form_alliance	},
-	{ "execute_fight_bandits",	&execute_fight_bandits	}
+	{ "execute_fight_bandits",	&execute_fight_bandits	},
+	{ "execute_bribe",	        &execute_bribe          },
+	{ "execute_compliment",	    &execute_compliment     }
 };
 
 
