@@ -172,9 +172,9 @@
     "Response_To_Move_To_Destroy": {
         "1": " !? You are suggesting I destroy them!? It is possible that this village would be safer if that village was out of the picture entirely. But I know that it is risky.",
         "2": " is not someone that will be easy to get rid of, but I am not someone to back down from a challenge if the safety of this village is on the line.",
-        "3": " has to go. I usually try to avoid such violence and destruction, but deep down I know that you are right. This is the only real way to keep this village safe.",
-		"4": " has to go. I usually try to avoid such violence and destruction, but deep down I know that you are right. This is the only real way to keep this village safe.",
-        "5": " has to go. I usually try to avoid such violence and destruction, but deep down I know that you are right. This is the only real way to keep this village safe."
+        "3": " has to go. I usually try to avoid such violence and destruction, but deep down I know that you are right.",
+		"4": " has to go. I usually try to avoid such violence and destruction, but deep down I know that you are right.",
+        "5": " has to go. I usually try to avoid such violence and destruction, but deep down I know that you are right."
     },
 
 	"Ask_To_Duel": {
@@ -292,9 +292,9 @@
 	"Move_To_Train": {
         "1": "I belive that your village would be safer if you trained its troops with ",
         "2": "I think that it should be a high priority for you to train with ",
-        "3": "You know that I value the safety of villages quite highly. I suggest that you bolster your defenses through training with ",
-		"4": "You know that I value the safety of villages quite highly. I suggest that you bolster your defenses through training with ",
-        "5": "You know that I value the safety of villages quite highly. I suggest that you bolster your defenses through training with "
+        "3": "I suggest that you bolster your defenses through training with ",
+		"4": "I suggest that you bolster your defenses through training with ",
+        "5": "I suggest that you bolster your defenses through training with "
     },
 
 	"Response_To_Move_To_Train": {

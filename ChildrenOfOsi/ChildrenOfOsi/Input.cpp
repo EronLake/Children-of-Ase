@@ -968,6 +968,10 @@ void Input::InputCheck()
 					DialogueController::PlayerResponse();
 				//	DialogueController::prompted_quest = false;
 				}
+				else if (DialogueController::getState() == 5) {
+					count = 10;
+					DialogueController::PlayerConversationPoint();
+				}
 			}
 		}
 	}

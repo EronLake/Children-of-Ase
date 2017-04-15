@@ -177,6 +177,9 @@ void DialogueGui::drawGui()
 
 		}
 	}
+	if (DialogueController::getState() == 5) {
+		GameWindow::createText("Next", 292, 390 + (18 * 1), 544, 45, red);
+	}
 }
 
 std::string DialogueGui::remove_chars_from_string(string &str, char* charsToRemove) {

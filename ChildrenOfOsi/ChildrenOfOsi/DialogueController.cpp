@@ -14,6 +14,11 @@ int DialogueController::state = 0;
 //2 is waiting for player response
 //3 is npc conversation point
 //4 is npc response
+
+/*state 5 is used to show the player's conversation point and 
+to allow the player to choose when to allow the npc to reply*/
+//5 is waiting for player to select "Next" option
+
 DialogueHelper DialogueController::dialogue;
 std::vector<std::vector<dialogue_point>> DialogueController::options;
 std::vector<dialogue_point> DialogueController::replyOptions;
@@ -28,6 +33,7 @@ Action* DialogueController::quest = nullptr;
 
 int DialogueController::scroll_control = 0;
 std::vector<ConversationLogObj*> conversation_log_obj_pointer_vec;
+std::string player_conv_point_choice = "";
 
 //Hero to int associations
 // SHANGO 1
@@ -68,30 +74,38 @@ void DialogueController::PlayerChoose()
 
 void DialogueController::PlayerConversationPoint()
 {
-	state = 4;
-	while (options[optionsIndex].size() == 0) {
-		optionsIndex++;
-		if (optionsIndex >= options.size()) {
-			optionsIndex = 0;
+	dialogue_point choice;
+	if (player_conv_point_choice == "") {
+		while (options[optionsIndex].size() == 0) {
+			optionsIndex++;
+			if (optionsIndex >= options.size()) {
+				optionsIndex = 0;
+			}
 		}
+		vector<std::string> print = getOptions();
+		choice = options[optionsIndex][select + DialogueController::scroll_control];
+		std::string conversation_pt_sentence = dialogue.gen_dialog(choice, player, 1, 1);
+		message = player->getName() + ": " + conversation_pt_sentence;
+		//////store player conversation point choice[1] here//////
+		ConversationLogObj* conv_log_obj = new ConversationLogObj();
+		Memory* mem = nullptr;
+		conv_log_obj->set_who(1);
+		conv_log_obj->set_conv_point(Containers::conv_point_table[choice[1]]);
+		conv_log_obj->update_number_of_times_said();
+		if (choice[1].at(0) == 'M')
+			conv_log_obj->set_topic(3, mem); //make the topic Oya if the player selected a move to action
+		else
+			conv_log_obj->set_topic(1, mem);//otherwise make the topic Shango
+		conversation_log_obj_pointer_vec.push_back(conv_log_obj);
+		///////////////////////////////////////////////////////////
+		player_conv_point_choice = choice[1];
+		state = 5;
 	}
-	vector<std::string> print = getOptions();
-	dialogue_point choice = options[optionsIndex][select + DialogueController::scroll_control];
-	std::string conversation_pt_sentence = dialogue.gen_dialog(choice, player,1 ,1);
-	message += player->getName() + ": " + conversation_pt_sentence;
-	//////store player conversation point choice[1] here//////
-	ConversationLogObj* conv_log_obj = new ConversationLogObj();
-	Memory* mem = nullptr;
-	conv_log_obj->set_who(1);
-	conv_log_obj->set_conv_point(Containers::conv_point_table[choice[1]]);
-	conv_log_obj->update_number_of_times_said();
-	if(choice[1].at(0) == 'M')
-	    conv_log_obj->set_topic(3, mem); //make the topic Oya if the player selected a move to action
-	else
-	    conv_log_obj->set_topic(1, mem);//otherwise make the topic Shango
-	conversation_log_obj_pointer_vec.push_back(conv_log_obj);
-	///////////////////////////////////////////////////////////
-	otherResponse(choice[1]);
+	else {
+		state = 4;
+		otherResponse(player_conv_point_choice);
+		player_conv_point_choice = "";
+	}
 }
 
 void DialogueController::PlayerResponse()
