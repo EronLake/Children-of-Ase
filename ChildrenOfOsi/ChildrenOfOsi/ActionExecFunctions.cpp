@@ -516,11 +516,11 @@ void ActionExecFunctions::execute_conversation(Action* conv)
 			if (ActionHelper::conversation(conv)) {
 				conv->apply_postconditions(true);				 //Apply post-conditions
 				doer_mem->setCategory("success");			 //Call update_memory function
-				doer_mem->setReason("The conversaton went well");
+				doer_mem->setReason("The bribe went well");
 			} else {
 				conv->apply_postconditions(false);				 //Apply post-conditions
 				doer_mem->setCategory("fail");			 //Call update_memory function
-				doer_mem->setReason("The conversaton didn't go well");
+				doer_mem->setReason("The bribe didn't go well");
 			}
 			conv->executed = true;
 			doer_mem->setWhen(/*get global frame*/0);
@@ -581,3 +581,46 @@ void ActionExecFunctions::execute_bribe(Action* bribe)
 
 	}
 }
+
+void ActionExecFunctions::execute_compliment(Action* compliment)
+{
+	switch (compliment->checkpoint) {
+	case 0: //Determine the location that the compliment is happening
+		ActionHelper::create_memory(compliment, compliment->getDoer());
+		compliment->getDoer()->set_action_destination(&compliment->getReceiver()->getVillage()->get_village_location());
+		compliment->checkpoint++;
+		break;
+
+	case 1: //Create a greeting timer
+		if (compliment->getDoer()->get_action_destination() == nullptr) {
+			ActionHelper::set_timer(compliment, 60);
+			compliment->checkpoint++;
+		}
+		break;
+	case 2:
+		if (ActionHelper::retrieve_time(compliment) == 0) {//checks to see if greeting timer is done
+			Memory* doer_mem = compliment->getDoer()->find_mem(compliment->getName() + std::to_string(compliment->time_stamp));
+			//Memory* receiver_mem = fight->getReceiver()->find_mem(fight->getName() + std::to_string(fight->time_stamp));
+			if (doer_mem == nullptr)
+			{
+				perror("something is wrong with the current hero memory creation function");
+			}
+			compliment->getDoer()->set_action_destination(&compliment->getDoer()->getVillage()->get_village_location()); //Also predefined, maybe as "home_location" in hero
+			if (ActionHelper::conversation(compliment)) {
+				compliment->apply_postconditions(true);				 //Apply post-conditions
+				doer_mem->setCategory("success");			 //Call update_memory function
+				doer_mem->setReason("It looks like my compliment was received well");
+			}
+			else {
+				compliment->apply_postconditions(false);				 //Apply post-conditions
+				doer_mem->setCategory("fail");			 //Call update_memory function
+				doer_mem->setReason("They didn't accept my compliment well");
+			}
+			compliment->executed = true;
+			doer_mem->setWhen(/*get global frame*/0);
+		}
+		break;
+
+	}
+}
+
