@@ -10,34 +10,36 @@ class Sprite
   public:
 
   Sprite():
-    start(0), stop(0), top(0), bottom(0), index(0), tempTime(0), tex(nullptr),lock(false) {};
+    start(0), stop(0), top(0), bottom(0), index(0), tempTime(0), tex(nullptr), lock(false), dying(false) {};
   ~Sprite() = default;
 
   int getStart() { return this->start; };
-  void setStart(int start) { this->start = start; };
   int getStop() { return this->stop; };
-  void setStop(int stop) { this->stop = stop; };
   int getTop() { return this->top; };
   int getBottom() { return this->bottom; };
   Texture getTexture() { return *(this->tex); }
-  Texture* getIdleTexture() { return(this->idle); }
+  Texture* getIdleTexture() { return this->idle; }
   std::string getTexFile() { return this->tex->getFile(); }
-  bool isIdle() { return (this->idle == this->tex); }
 
+  bool isIdle() { return (this->idle == this->tex); }
+  bool getLock() { return this->lock || this->dying; };
+  bool getDying() { return this->dying; }
+
+  void setStart(int start) { this->start = start; };
+  void setStop(int stop) { this->stop = stop; };
   void setTexture(Texture *t);
-  void reset_texture();
   void setIdleTexture(Texture *t);
-  void animate();
-  //Texture *tex;
+  void reset_texture();
   
-  void lockAnimation() { lock = true; };
-  void unlockAnimation() { lock = false; };
-  bool getLock() { return lock; };
+  void animate();
+  void lockAnimation() { this->lock = true; };
+  void unlockAnimation() { this->lock = false; };
+  void lockIntoDeathAnimation() { this->dying = true; }
 
   Texture *id_up;
+  Texture *id_down;
   Texture *id_left;
   Texture *id_right;
-  Texture *id_down;
 
   Texture *up;
   Texture *down;
@@ -69,16 +71,15 @@ class Sprite
   Texture *hurt_left;
   Texture *hurt_right;
 
+  Texture *death;
+
   private:
 
   int start, stop;
   int top, bottom;
-
   Texture *tex;
   Texture *idle;
-
   int index, tempTime;
-
-  bool lock;
+  bool lock, dying;
 };
 

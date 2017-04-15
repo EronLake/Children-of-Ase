@@ -451,16 +451,18 @@ int Movement::attack(WorldObj* obj) {
 
 									if (!friendly) {
 										a->second->Hit(npc);
-										//cout << "THE TARGET'S HP IS NOW ******** " << npc->getHealth() << endl;
 										manager->createTaskForAudio("PlaySound", "SOUND", "SFX/hit.wav");
+                    LOG("LivingObj ::" << liv << ":: has been hit. LivingObj has " << liv->getHealth() << " health left.");
+
 										// If target is dead, remove from village and targeting
 										if (npc->getHealth() <= 0) {
 											if (Soldier *sold = CheckClass::isSoldier(liv)) {
-											// sold->playDeathAnimation();
-											npc->sprite.unlockAnimation();
-											manager->createTaskWithObj("Hurt", "DRAW", npc);
-											sold->setLoc(sold->getVillage()->get_village_location());
-											sold->getVillage()->barracks->addToParty(sold, false);
+                        sold->sprite.unlockAnimation();
+											  manager->createTaskWithObj("Hurt", "DRAW", npc);
+                        sold->sprite.lockIntoDeathAnimation();
+
+											  sold->setLoc(sold->getVillage()->get_village_location());
+											  sold->getVillage()->barracks->addToParty(sold, false);
 											}
 										}
 									} else {
@@ -470,12 +472,14 @@ int Movement::attack(WorldObj* obj) {
 							} else {
 								a->second->Hit(liv);
 								manager->createTaskForAudio("PlaySound", "SOUND", "SFX/hit.wav");
-								//cout << "THE TARGET'S HP IS NOW ******** " << liv->getHealth() << endl;
+                LOG("LivingObj ::" << liv << ":: has been hit. LivingObj has " << liv->getHealth() << " health left.");
+
 								if (liv->getHealth() <= 0) {
 									if (Soldier *sold = CheckClass::isSoldier(liv)) {
-										// sold->playDeathAnimation();
-										liv->sprite.unlockAnimation();
+                    sold->sprite.unlockAnimation();
 										manager->createTaskWithObj("Hurt", "DRAW", liv);
+                    sold->sprite.lockIntoDeathAnimation();
+                    
 										sold->setLoc(sold->getVillage()->get_village_location());
 										sold->getVillage()->barracks->addToParty(sold, false);
 									}
@@ -484,7 +488,6 @@ int Movement::attack(WorldObj* obj) {
 								liv->sprite.unlockAnimation();
 								manager->createTaskWithObj("Hurt", "DRAW", liv);
 							}
-							//std:://////cout << liv->getName() << "'s health is now " << liv->getHealth() << std::endl;
 						}
 					}
 				}
