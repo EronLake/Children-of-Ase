@@ -326,8 +326,10 @@ void DialogueController::startConversation(WorldObj* n, bool playerTalk)
 	}
 	ofs.close();*/
 	other = n;
-	message = "You started talking to ";
-	message += n->getName();
+	//message = "You started talking to ";
+	//message += n->getName();
+	Hero* temp_hero = CheckClass::isHero(other);
+	message = n->getName() + ": " + dialogue.gen_dialog({ "Greeting","Greeting"},temp_hero,3,1);
 	if (playerTalk) {
  		PlayerChoose();
 	}
