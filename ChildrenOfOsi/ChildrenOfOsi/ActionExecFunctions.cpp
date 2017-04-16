@@ -136,34 +136,26 @@ void ActionExecFunctions::execute_train_with(Action* train_with) {
 
 
 void ActionExecFunctions::execute_form_alliance(Action* form_alliance) {
-	/*
 	Hero* doer = form_alliance->getDoer();
 	Hero* responder = form_alliance->getReceiver();
 	switch (form_alliance->checkpoint) {
 	case 0:
 		ActionHelper::create_memory(form_alliance, doer);
 
-		form_alliance->getDoer()->destination = { 1000,1000 };
+		form_alliance->getDoer()->set_action_destination(&form_alliance->getReceiver()->getVillage()->get_village_location());
 		form_alliance->checkpoint++;
 		break;
 
 	case 1:
-		if (form_alliance->getDoer()->destination == Vector2f(0, 0)) {
+		if (form_alliance->getDoer()->get_action_destination() == nullptr) {
 			Planner* hero_planner = ActionHelper::ai->hero_planners[responder->name];
-			if (form_alliance->getName() == ((*hero_planner->get_end_state_map())[responder->name]).getName()) {
-				int temp = 0;
-				for (auto& iter : form_alliance->preconds) {
+			if (ActionHelper::hero_respond(form_alliance)) {
+			
 
-					temp += iter.second->get_cost();
-				}
-				if (temp != 0) {
 					//success
-					form_alliance->applyUtiliites(true);
+					form_alliance->apply_postconditions(true);
 					form_alliance->executed = true;
-				}
-				else {
-					//failed
-				}
+
 			}
 			else {
 				//update memory failed
@@ -172,7 +164,7 @@ void ActionExecFunctions::execute_form_alliance(Action* form_alliance) {
 		}
 
 	}
-	*/
+	
 }
 
 
