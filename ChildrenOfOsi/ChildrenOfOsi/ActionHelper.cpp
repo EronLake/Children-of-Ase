@@ -196,7 +196,7 @@ bool ActionHelper::conversation(Action* action) {
 
 	//conversation
 	dialogue_point point = { "Fake", "Response_" +action->getName()};
-	DialogueController::dialogue.gen_dialog(point,action->getReceiver(),1,1);
+	DialogueController::dialogue.gen_dialog(point,action->getReceiver());
 
 	int success_level = 0;
 	for (auto it = action->succ_postconds.begin(); it != action->succ_postconds.end(); ++it) {
