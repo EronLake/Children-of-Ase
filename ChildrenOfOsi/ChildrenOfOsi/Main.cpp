@@ -813,6 +813,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 		//cout << "WORKING ON " << temp_tuple->second.first << endl;
 		set_file_with_thread(temp_tuple);
 	}
+
 	wglMakeCurrent(nullptr, nullptr);//unassigns the current gl context
 	wglDeleteContext(loaderContext);//deletes the loading context now that it is not needed
 	glFinish(); //Forces all gl calls to be completed before execution
