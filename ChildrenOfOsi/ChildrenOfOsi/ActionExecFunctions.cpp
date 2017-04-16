@@ -9,7 +9,9 @@ std::unordered_map<std::string, execute_ptr> ActionExecFunctions::ActionExecMap{
 	{ "execute_duel",			&execute_duel			},
 	{ "execute_spar",			&execute_duel			},
 	{ "execute_form_alliance",	&execute_form_alliance	},
-	{ "execute_fight_bandits",	&execute_fight_bandits	}
+	{ "execute_fight_bandits",	&execute_fight_bandits	},
+	{ "execute_bribe",	        &execute_bribe          },
+	{ "execute_compliment",	    &execute_compliment     }
 };
 
 
@@ -508,11 +510,11 @@ void ActionExecFunctions::execute_conversation(Action* conv)
 			if (ActionHelper::conversation(conv)) {
 				conv->apply_postconditions(true);				 //Apply post-conditions
 				doer_mem->setCategory("success");			 //Call update_memory function
-				doer_mem->setReason("The conversaton went well");
+				doer_mem->setReason("The bribe went well");
 			} else {
 				conv->apply_postconditions(false);				 //Apply post-conditions
 				doer_mem->setCategory("fail");			 //Call update_memory function
-				doer_mem->setReason("The conversaton didn't go well");
+				doer_mem->setReason("The bribe didn't go well");
 			}
 			conv->executed = true;
 			doer_mem->setWhen(/*get global frame*/0);
@@ -521,3 +523,98 @@ void ActionExecFunctions::execute_conversation(Action* conv)
 
 	}
 }
+
+void ActionExecFunctions::execute_bribe(Action* bribe)
+{
+	int monopoly_money = 420;
+	switch (bribe->checkpoint) {
+	case 0: //Determine the location that the bribe is happening
+		ActionHelper::create_memory(bribe, bribe->getDoer());
+		bribe->getDoer()->set_action_destination(&bribe->getReceiver()->getVillage()->get_village_location());
+		bribe->checkpoint++;
+		break;
+
+	case 1: //Create a greeting timer
+		if (bribe->getDoer()->get_action_destination() == nullptr) {
+			ActionHelper::set_timer(bribe, 60);
+			bribe->checkpoint++;
+		}
+		break;
+
+	case 2: //Once the greeting timer is completed, take away money(placeholder) to simulate giving something for the bribe
+		if (ActionHelper::retrieve_time(bribe) == 0) //Greeting timer complete
+		{
+			//bribe->getDoer()->set_action_destination(&bribe->getReceiver()->getLoc());
+			monopoly_money = monopoly_money - 69;//Taking away money
+			bribe->checkpoint++;
+		}
+		break;
+	case 3: //If timer is complete, set village as destination, apply postconds, update memory
+		if (ActionHelper::retrieve_time(bribe) == 0) {
+			Memory* doer_mem = bribe->getDoer()->find_mem(bribe->getName() + std::to_string(bribe->time_stamp));
+			//Memory* receiver_mem = fight->getReceiver()->find_mem(fight->getName() + std::to_string(fight->time_stamp));
+			if (doer_mem == nullptr)
+			{
+				perror("something is wrong with the current hero memory creation function");
+			}
+			bribe->getDoer()->set_action_destination(&bribe->getDoer()->getVillage()->get_village_location()); //Also predefined, maybe as "home_location" in hero
+			if (ActionHelper::conversation(bribe)) {
+				bribe->apply_postconditions(true);				 //Apply post-conditions
+				doer_mem->setCategory("success");			 //Call update_memory function
+				doer_mem->setReason("The conversaton went well");
+			}
+			else {
+				bribe->apply_postconditions(false);				 //Apply post-conditions
+				doer_mem->setCategory("fail");			 //Call update_memory function
+				doer_mem->setReason("The conversaton didn't go well");
+			}
+			bribe->executed = true;
+			doer_mem->setWhen(/*get global frame*/0);
+		}
+		break;
+
+	}
+}
+
+void ActionExecFunctions::execute_compliment(Action* compliment)
+{
+	switch (compliment->checkpoint) {
+	case 0: //Determine the location that the compliment is happening
+		ActionHelper::create_memory(compliment, compliment->getDoer());
+		compliment->getDoer()->set_action_destination(&compliment->getReceiver()->getVillage()->get_village_location());
+		compliment->checkpoint++;
+		break;
+
+	case 1: //Create a greeting timer
+		if (compliment->getDoer()->get_action_destination() == nullptr) {
+			ActionHelper::set_timer(compliment, 60);
+			compliment->checkpoint++;
+		}
+		break;
+	case 2:
+		if (ActionHelper::retrieve_time(compliment) == 0) {//checks to see if greeting timer is done
+			Memory* doer_mem = compliment->getDoer()->find_mem(compliment->getName() + std::to_string(compliment->time_stamp));
+			//Memory* receiver_mem = fight->getReceiver()->find_mem(fight->getName() + std::to_string(fight->time_stamp));
+			if (doer_mem == nullptr)
+			{
+				perror("something is wrong with the current hero memory creation function");
+			}
+			compliment->getDoer()->set_action_destination(&compliment->getDoer()->getVillage()->get_village_location()); //Also predefined, maybe as "home_location" in hero
+			if (ActionHelper::conversation(compliment)) {
+				compliment->apply_postconditions(true);				 //Apply post-conditions
+				doer_mem->setCategory("success");			 //Call update_memory function
+				doer_mem->setReason("It looks like my compliment was received well");
+			}
+			else {
+				compliment->apply_postconditions(false);				 //Apply post-conditions
+				doer_mem->setCategory("fail");			 //Call update_memory function
+				doer_mem->setReason("They didn't accept my compliment well");
+			}
+			compliment->executed = true;
+			doer_mem->setWhen(/*get global frame*/0);
+		}
+		break;
+
+	}
+}
+

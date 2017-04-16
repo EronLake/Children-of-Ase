@@ -545,12 +545,16 @@ void Input::add_point_to_file() {
 
 	int mouseX = (rHelper->camera->getX() + (xpos * map_zoom) * GameWindow::WINDOW_WIDTH_DP / 1300);
 	int mouseY = 20000-(rHelper->camera->getY() + (ypos * map_zoom) * GameWindow::WINDOW_HEIGHT_DP / 700);
+	//int mouseX = rHelper->camera->getX() - (150.0 / 2) + ((rHelper->getCameraSize().getXloc() / 2)*map_zoom);
+	//int mouseY = rHelper->camera->getY() - (150.0 / 2) + ((rHelper->getCameraSize().getYloc() / 2)*map_zoom);
 
 	std::ofstream rivFile;
 	rivFile.open("rivLine.txt", std::ios_base::app);
 	rivFile << mouseX << " " << mouseY << " ";
 	rivFile.close();
 	oldPoint.first = mouseX; oldPoint.second = mouseY;
+	
+	rHelper->rivObj->initialize_lines();
 	system("PAUSE");
 }
 
@@ -776,6 +780,9 @@ void Input::InputCheck()
 		}
 		if (Z) {
 			skip_line();
+		}
+		if (SHIFT && Z) {
+			system("PAUSE");
 		}
 		
 
