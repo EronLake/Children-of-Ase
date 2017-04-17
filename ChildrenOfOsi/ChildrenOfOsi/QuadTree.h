@@ -11,12 +11,12 @@ private:
 	unsigned int maxObj = 10;
 	unsigned int maxLevel = 5;
 	unsigned int treelv;
-	WorldObj* bounds;
+	WorldObj bounds;
 	vector<WorldObj*> objs;
 	vector<QuadTree*> nodes;
 
 public:
-	QuadTree(unsigned int p_treelv, WorldObj* p_bounds);
+	QuadTree(unsigned int p_treelv, WorldObj p_bounds);
 	~QuadTree();
 	void clear();
 	void split();

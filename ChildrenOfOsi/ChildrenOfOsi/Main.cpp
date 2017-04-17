@@ -104,7 +104,7 @@ void set_file_with_thread(std::pair<Texture*, pair<string, int>>* p_tuple) {
 int main() {
 	WorldObj* screen = new WorldObj(Vector2f(0.0, 0.0), 20000U, 20000U);	//init screen
 
-	QuadTree* collideTree = new QuadTree(0, screen);
+	QuadTree* collideTree = new QuadTree(0, *screen);
 	GameWindow::init();		
 	GAMEPLAY_LOOP(collideTree);
 
@@ -1398,10 +1398,10 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 
 	while (GameWindow::isRunning()) {
 		//shouldExit++;
-	/*	for (int i = 0; i < 10; i++) {
-			//cout << "SHOULD EXIT IS " << shouldExit << endl;
+		//for (int i = 0; i < 10; i++) {
+		//	cout << "SHOULD EXIT IS " << shouldExit << endl;
 
-		}*/
+		//}
 		if (shouldExit > 0) {
 			_CrtDumpMemoryLeaks();
 			return;
