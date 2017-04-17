@@ -4,10 +4,12 @@
 
 Point::Point()
 {
+	sprite.setTexture(tex);
 }
 
 Point::Point(double p_x, double p_y)
 {
+	sprite.setTexture(tex);
 	xCoord = p_x;
 	yCoord = p_y;
 }

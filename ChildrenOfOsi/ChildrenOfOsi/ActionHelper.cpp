@@ -191,5 +191,62 @@ bool ActionHelper::hero_respond(Action* action) {
 	return interact;
 }
 
+bool ActionHelper::conversation(Action* action) {
+	Relationship before = *action->getDoer()->rel[action->getReceiver()->name];
+
+	//conversation
+	dialogue_point point = { "Fake", "Response_" +action->getName()};
+	DialogueController::dialogue.gen_dialog(point,action->getReceiver());
+
+	int success_level = 0;
+	for (auto it = action->succ_postconds.begin(); it != action->succ_postconds.end(); ++it) {
+		if ((*it)->get_general_type() == Postcondition::REL) {
+			RelPost* con = dynamic_cast<RelPost*>((*it).get());
+			switch (con->get_rel_type()) {
+			case Postcondition::AFF:
+				success_level += action->getDoer()->rel[action->getReceiver()->name]->getAffinity()-before.getAffinity();
+				break;
+			case Postcondition::NOT:
+				success_level += action->getDoer()->rel[action->getReceiver()->name]->getNotoriety() - before.getNotoriety();
+				break;
+			case Postcondition::STR:
+				success_level += action->getDoer()->rel[action->getReceiver()->name]->getStrength() - before.getStrength();
+				break;
+			case Postcondition::BAFF:
+				success_level += before.getAffinity()-action->getDoer()->rel[action->getReceiver()->name]->getAffinity();
+				break;
+			case Postcondition::BNOT:
+				success_level += before.getNotoriety() - action->getDoer()->rel[action->getReceiver()->name]->getNotoriety();
+				break;
+			case Postcondition::BSTR:
+				success_level += before.getStrength() - action->getDoer()->rel[action->getReceiver()->name]->getStrength();
+				break;
+			}
+		} else if ((*it)->get_general_type() == Postcondition::REL_EST) {
+			RelEstimPost* con = dynamic_cast<RelEstimPost*>((*it).get());
+			switch (con->get_rel_type()) {
+			case Postcondition::AFF:
+				success_level += action->getDoer()->rel[action->getReceiver()->name]->getAffEstimate() - before.getAffEstimate();
+				break;
+			case Postcondition::NOT:
+				success_level += action->getDoer()->rel[action->getReceiver()->name]->getNotorEstimate() - before.getNotorEstimate();
+				break;
+			case Postcondition::STR:
+				success_level += action->getDoer()->rel[action->getReceiver()->name]->getStrEstimate() - before.getStrEstimate();
+				break;
+			case Postcondition::BAFF:
+				success_level += before.getAffEstimate() - action->getDoer()->rel[action->getReceiver()->name]->getAffEstimate();
+				break;
+			case Postcondition::BNOT:
+				success_level += before.getNotorEstimate() - action->getDoer()->rel[action->getReceiver()->name]->getNotorEstimate();
+				break;
+			case Postcondition::BSTR:
+				success_level += before.getStrEstimate() - action->getDoer()->rel[action->getReceiver()->name]->getStrEstimate();
+				break;
+			}
+		}
+	}
+	return (success_level>0);
+}
 
 ChildrenOfOsi* ActionHelper::gameplay_func;

@@ -9,7 +9,7 @@
 #endif
 
 
-QuadTree::QuadTree(unsigned int p_treelv, WorldObj * p_bounds)
+QuadTree::QuadTree(unsigned int p_treelv, WorldObj p_bounds)
 {
 	treelv = p_treelv;
 	bounds = p_bounds;
@@ -37,15 +37,15 @@ void QuadTree::clear()
 
 void QuadTree::split()
 {
-	float swidth = bounds->getWidth() / 2;
-	float sheight = bounds->getHeight() / 2;
-	float x = bounds->getX();
-	float y = bounds->getY();
+	float swidth = bounds.getWidth() / 2;
+	float sheight = bounds.getHeight() / 2;
+	float x = bounds.getX();
+	float y = bounds.getY();
 
-	nodes[0] = new QuadTree(treelv + 1, new WorldObj(Vector2f((x + swidth), y), swidth, sheight));
-	nodes[1] = new QuadTree(treelv + 1, new WorldObj(Vector2f(x, y), swidth, sheight));
-	nodes[2] = new QuadTree(treelv + 1, new WorldObj(Vector2f(x, (y + sheight)), swidth, sheight));
-	nodes[3] = new QuadTree(treelv + 1, new WorldObj(Vector2f((x + swidth), (y + sheight)), swidth, sheight));
+	nodes[0] = new QuadTree(treelv + 1, WorldObj(Vector2f((x + swidth), y), swidth, sheight));
+	nodes[1] = new QuadTree(treelv + 1, WorldObj(Vector2f(x, y), swidth, sheight));
+	nodes[2] = new QuadTree(treelv + 1, WorldObj(Vector2f(x, (y + sheight)), swidth, sheight));
+	nodes[3] = new QuadTree(treelv + 1, WorldObj(Vector2f((x + swidth), (y + sheight)), swidth, sheight));
 }
 
 vector<int> QuadTree::getIndexes(WorldObj * myrec)
@@ -54,8 +54,8 @@ vector<int> QuadTree::getIndexes(WorldObj * myrec)
 	vector<int> indexes;
 
 	//set up mid hori and vertical line
-	double vertMdPt = bounds->getX() + (bounds->getWidth() / 2);
-	double horiMdPt = bounds->getY() + (bounds->getHeight() / 2);
+	double vertMdPt = bounds.getX() + (bounds.getWidth() / 2);
+	double horiMdPt = bounds.getY() + (bounds.getHeight() / 2);
 
 	//set up quadrant
 	bool topQuadrant = myrec->getY() >= horiMdPt;

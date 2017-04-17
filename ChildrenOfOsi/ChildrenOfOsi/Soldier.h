@@ -98,6 +98,9 @@ class Soldier: public NPC
   Soldier* getCurrentLeader() { return currentLeader; };
   void setCurrentLeader(Soldier* p_leader) { currentLeader = p_leader; };
 
+  void set_action_destination(Vector2f* v) { action_destination=v; };
+  Vector2f* get_action_destination() { return action_destination; };
+
   private:
 
   static constexpr std::size_t DEFAULT_AGGRO_RANGE = 200;
@@ -133,5 +136,7 @@ class Soldier: public NPC
 
   Soldier* currentEnemy;
   Soldier* currentLeader;
+
+  Vector2f* action_destination;
 };
 

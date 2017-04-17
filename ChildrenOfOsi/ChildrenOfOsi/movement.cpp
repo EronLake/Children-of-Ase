@@ -7,10 +7,10 @@
 
 
 
-Movement::Movement(QuadTree* QT) {
+Movement::Movement(QuadTree* QT, RiverObj* _rivObj) {
 	tree = QT;
-	rivObj = new RiverObj();
-	rivObj->initialize_lines();
+	rivObj = _rivObj;
+	//rivObj->initialize_lines();
 	set_player_clone = false;
 }
 
@@ -50,7 +50,7 @@ int Movement::move_up(WorldObj* obj) {
 				break;
 			}
 		}
-		Line temp(Point(obj->body[0].getBL().getXloc(), 20000-obj->body[0].getBL().getYloc()), Point(obj->body[0].getBR().getXloc(), 20000-obj->body[0].getBR().getYloc()));
+		Line temp(Point(obj->body[0].getX() + (obj->body[0].getWidth() / 2), 20000 - (obj->body[0].getY())), Point(obj->body[0].getX() + (obj->body[0].getWidth() / 2), 20000 - (obj->body[0].getY() + obj->body[0].getHeight())));
 		for (int i = 0; i < rivObj->getLines().size(); i++) {
 			if (lineCollision((rivObj->getLines())[i], temp)) {
 				//manager->createTask("Bump", "SOUND");
@@ -184,8 +184,7 @@ int Movement::move_down(WorldObj* obj) {
 				break;
 			}
 		}
-		Line temp(Point(obj->body[0].getBL().getXloc(), 20000-obj->body[0].getBL().getYloc()), Point(obj->body[0].getBR().getXloc(), 20000-obj->body[0].getBR().getYloc()));
-
+		Line temp(Point(obj->body[0].getX()+(obj->body[0].getWidth()/2), 20000 - (obj->body[0].getY())), Point(obj->body[0].getX() + (obj->body[0].getWidth() / 2), 20000 - (obj->body[0].getY() + obj->body[0].getHeight())));
 		for (int i = 0; i < rivObj->getLines().size(); i++) {
 			if (lineCollision((rivObj->getLines())[i], temp)) {
 				//manager->createTask("Bump", "SOUND");
@@ -315,7 +314,8 @@ int Movement::move_left(WorldObj* obj) {
 				break;
 			}
 		}
-		Line temp(Point(obj->body[0].getBL().getXloc(), 20000-obj->body[0].getBL().getYloc()), Point(obj->body[0].getBR().getXloc(), 20000-obj->body[0].getBR().getYloc()));
+		//obj->body[0].getBL().getXloc()
+		Line temp(Point(obj->body[0].getX(), 20000 - (obj->body[0].getY() + obj->body[0].getHeight())), Point(obj->body[0].getX() + obj->body[0].getWidth(), 20000 - (obj->body[0].getY() + obj->body[0].getHeight())));
 		for (int i = 0; i < rivObj->getLines().size(); i++) {
 			if (lineCollision((rivObj->getLines())[i], temp)) {
 				//manager->createTask("Bump", "SOUND");
@@ -359,8 +359,7 @@ int Movement::move_right(WorldObj* obj) {
 				break;
 			}
 		}
-		Line temp(Point(obj->body[0].getBL().getXloc(), 20000-obj->body[0].getBL().getYloc()), Point(obj->body[0].getBR().getXloc(), 20000-obj->body[0].getBR().getYloc()));
-
+		Line temp(Point(obj->body[0].getX(), 20000 - (obj->body[0].getY() + obj->body[0].getHeight())), Point(obj->body[0].getX() + obj->body[0].getWidth(), 20000 - (obj->body[0].getY() + obj->body[0].getHeight())));
 		for (int i = 0; i < rivObj->getLines().size(); i++) {
 			if (lineCollision((rivObj->getLines())[i], temp)) {
 				//manager->createTask("Bump", "SOUND");
@@ -456,9 +455,11 @@ int Movement::attack(WorldObj* obj) {
 										// If target is dead, remove from village and targeting
 										if (npc->getHealth() <= 0) {
 											if (Soldier *sold = CheckClass::isSoldier(liv)) {
-                        // sold->playDeathAnimation();
-                        sold->setLoc(sold->getVillage()->get_village_location());
-                        sold->getVillage()->barracks->addToParty(sold, false);
+											// sold->playDeathAnimation();
+											npc->sprite.unlockAnimation();
+											manager->createTaskWithObj("Hurt", "DRAW", npc);
+											sold->setLoc(sold->getVillage()->get_village_location());
+											sold->getVillage()->barracks->addToParty(sold, false);
 											}
 										}
 									} else {
@@ -471,7 +472,11 @@ int Movement::attack(WorldObj* obj) {
 								//cout << "THE TARGET'S HP IS NOW ******** " << liv->getHealth() << endl;
 								if (liv->getHealth() <= 0) {
 									if (Soldier *sold = CheckClass::isSoldier(liv)) {
-
+										// sold->playDeathAnimation();
+										liv->sprite.unlockAnimation();
+										manager->createTaskWithObj("Hurt", "DRAW", liv);
+										sold->setLoc(sold->getVillage()->get_village_location());
+										sold->getVillage()->barracks->addToParty(sold, false);
 									}
 								}
 								if (a->second->getDestroy())a->second->setDuration(0);

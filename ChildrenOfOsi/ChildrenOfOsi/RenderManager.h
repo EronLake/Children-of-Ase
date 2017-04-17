@@ -17,7 +17,7 @@ public:
 	RenderHelper* renderHelper;
 
 	RenderManager(MessageLog* _mLog, TaskBuffer* _tBuffer);
-	RenderManager(MessageLog* _mLog, TaskBuffer* _tBuffer, QuadTree* _renderQuadTree, ChildrenOfOsi* game_f);
+	RenderManager(MessageLog* _mLog, TaskBuffer* _tBuffer, QuadTree* _renderQuadTree, ChildrenOfOsi* game_f, RiverObj* _rivObj);
 	~RenderManager();
 
 	virtual void register_manager() final;

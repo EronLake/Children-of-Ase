@@ -5,9 +5,10 @@
 #include "RenderManager.h"
 
 
-RenderHelper::RenderHelper(QuadTree * QT)
+RenderHelper::RenderHelper(QuadTree * QT, RiverObj* _rivObj)
 {
 	tree = QT;
+	rivObj = _rivObj;
 	camera = new WorldObj(0, 0, false);
 	fullBound = new WorldObj(Vector2f(0, 0), 20000, 20000);
 	cameraSize.setXloc(960);
@@ -120,6 +121,13 @@ int RenderHelper::draw_frame(WorldObj * obj)
 			//}
 			//objVec[i]->effect.sprite.animate();
 			//objVec[i]->WorldObj::animateObj();
+	}
+	// draw the points
+	for (int i = 0; i < rivObj->getLines().size(); i++) {
+		//cout << "DRAWING POINTS" << endl;
+		rivObj->getLines()[i].getP1().drawObjRiv(camera->getX(), camera->getY());
+		rivObj->getLines()[i].getP2().drawObjRiv(camera->getX(), camera->getY());
+
 	}
 	//convoGui->drawGui();
 	drawHUD(obj);
