@@ -21,15 +21,15 @@ int MemoryHelper::store_hero(std::string key, float x, float y, bool col) {
 	{
 		name = YEMOJA;
 	}
-	else if (key == "Oshosi")
+	else if (key == "Oya")
 	{
 		name = OYA;
 	}
-	else if (key == "Yemoja")
+	else if (key == "Oshosi")
 	{
 		name = OSHOSI;
 	}
-	else if (key == "Yemoja")
+	else if (key == "Ogun")
 	{
 		name = OGUN;
 	}

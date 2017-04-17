@@ -60,34 +60,43 @@ int Planner::heuristic(Action* step, vector<std::shared_ptr<Preconditions>> prio
 * to your personality. The action with the highest value is picked.
 */
 void Planner::choose_end_with(int hero) {
-	ActionPool* action_pool = evaluateHero->actionPool_map[hero];
-	Action* best_end_state = nullptr;
-	int value = 0;
-	int best_value = 0;
-	
-	for (auto state : action_pool->end_states) {
-		value = 0;
-		value += personality_appeal(state);
-		value += relationship_appeal(state);
-		if (value > best_value) {
-			best_value = value;
-			best_end_state = state;
+
+	//this for loop had to be added so missing heroes wouldn't cause an error
+	bool if_should_choose = false;
+	for (auto itr = Containers::hero_table.begin(); itr != Containers::hero_table.end(); itr++) {
+		if (hero == itr->second->name) { if_should_choose = true; }
+	}
+	if (if_should_choose)
+	{
+		ActionPool* action_pool = evaluateHero->actionPool_map[hero];
+		Action* best_end_state = nullptr;
+		int value = 0;
+		int best_value = 0;
+
+		for (auto state : action_pool->end_states) {
+			value = 0;
+			value += personality_appeal(state);
+			value += relationship_appeal(state);
+			if (value > best_value) {
+				best_value = value;
+				best_end_state = state;
+			}
 		}
+		/*
+		if (this->end_states.find(hero) == this->end_states.end())
+		{
+			this->end_states.insert(std::make_pair(hero, *best_end_state));
+		}
+		else
+		{
+			this->end_states.at(hero) = *best_end_state;
+		}
+		*/
+		this->end_states[hero] = best_end_state;
+		std::cout << "///////////////////////////////////////////////////////" << std::endl;
+		std::cout << "BEST END STATE: " << best_end_state->getName() << std::endl;
+		std::cout << "///////////////////////////////////////////////////////" << std::endl;
 	}
-	/*
-	if (this->end_states.find(hero) == this->end_states.end()) 
-	{
-		this->end_states.insert(std::make_pair(hero, *best_end_state));
-	}
-	else
-	{
-		this->end_states.at(hero) = *best_end_state;
-	}
-	*/
-	this->end_states[hero] = best_end_state;
-	//std:://cout << "///////////////////////////////////////////////////////" << std::endl;
-	//std:://cout << "BEST END STATE: " << best_end_state->getName() << std::endl;
-	//std:://cout << "///////////////////////////////////////////////////////" << std::endl;
 }
 
 Action* Planner::choose_next_step(Action* goal, vector<Action*> goals) {
@@ -98,6 +107,9 @@ Action* Planner::choose_next_step(Action* goal, vector<Action*> goals) {
 	vector<Action*> possible_steps = evaluateHero->actionPool_map[goal->getReceiver()->name]->getActions(goal->getReceiver(), goal);
 
 	for (Action* step : possible_steps) {
+		//if statement to initialize the best_value to be the first step
+		if (best_step == nullptr) { best_step = step; }
+
 		int step_value = heuristic(step, priority_preconds, goals);
 		if (step_value > best_value)
 		{
@@ -105,6 +117,11 @@ Action* Planner::choose_next_step(Action* goal, vector<Action*> goals) {
 			best_step = step;
 		}
 	}
+
+
+	//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+	//I dont think we should have this line utilites of actions are not supposed to change
+	//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 	best_step->setUtility(best_value);
 	return best_step;
 }
@@ -159,6 +176,7 @@ vector<std::shared_ptr<Preconditions>> Planner::prioritize_preconditions(Action*
 vector<Action*> Planner::get_end_states() {
 	vector<Action*> states;
 	for (auto iter : end_states)
+	//for (auto iter = end_states.begin(); iter != end_states.end();iter++)
 	{
 		states.push_back(iter.second);
 	}
@@ -192,17 +210,26 @@ vector<Action*> Planner::get_milestone_frontier() {
 
 //Adds the milestone action to the Goal action's milestonelist
 void Planner::add_milestone(Action* goal, Action* milestone) {
-	milestones.at(goal).push_back(milestone);
+	milestones[(goal)].push_back(milestone);
 }
 
 void Planner::generate_milestones(Action* state, Action* goal) {
 	if (goal->preConditionsNeeded(evaluateHero, goal->getReceiver()).size() == 0)
 	{
-		if (goal->getUtility() > current_action_value)
+		int post_cond_utility = 0;
+		
+		for (auto post_cond : goal->succ_postconds) 
+		{
+			post_cond_utility += post_cond->get_utility(goal->getOwner(), goal->getReceiver());
+		}
+			
+		std::cout << post_cond_utility << std::endl;
+
+		if (post_cond_utility > current_action_value)
 		{
 			current_end_state = state;
 			current_action = goal;
-			current_action_value = goal->getUtility();
+			current_action_value = post_cond_utility;
 		}
 	}
 	else

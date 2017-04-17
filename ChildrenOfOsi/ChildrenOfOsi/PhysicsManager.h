@@ -17,7 +17,7 @@ private:
 
 public:
 	PhysicsManager(MessageLog* _mLog, TaskBuffer* _tBuffer);
-	PhysicsManager(MessageLog* _mLog, TaskBuffer* _tBuffer, QuadTree* _physicsQuadTree);
+	PhysicsManager(MessageLog* _mLog, TaskBuffer* _tBuffer, QuadTree* _physicsQuadTree, RiverObj* _rivObj);
 	~PhysicsManager();
 
 	virtual void register_manager() final;

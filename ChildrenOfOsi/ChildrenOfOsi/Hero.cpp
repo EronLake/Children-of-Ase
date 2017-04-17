@@ -17,6 +17,7 @@ Hero::Hero()
 			this->actionPool_map[i] = new ActionPool(this);
 		}
 	}
+	action_timer = 0; //initialized to one so the check doesn't go below 0
 }
 
 Hero::Hero(int _name, float x, float y, bool col) :SplSoldier(x, y, col)
@@ -41,6 +42,7 @@ Hero::Hero(int _name, float x, float y, bool col) :SplSoldier(x, y, col)
 			this->actionPool_map[i] = new ActionPool(this);
 		}
 	}
+	action_timer = 0; //initialized to one so the check doesn't go below 0
 }
 
 
@@ -66,6 +68,7 @@ Hero::Hero(int _name, Vector2f p_topLeft, float p_width, float p_height):SplSold
 		}
 	}
 	traits = new Personality();
+	action_timer = 0; //initialized to one so the check doesn't go below 0
 }
 
 Hero::~Hero()
@@ -81,6 +84,7 @@ Hero::~Hero()
 		if (i != name)
 			delete(rel[i]);
 	}
+	action_timer = 0; //initialized to one so the check doesn't go below 0
 }
 
 /*void Hero::addRelationship(int hero) {

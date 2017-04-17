@@ -112,9 +112,10 @@ void AIController::init_plans() {
 		}
 
 		// Go through each ideal end state and generate a milestone
-		EndStateList end_states = planner->get_end_state_map();
+		EndStateList* end_states = planner->get_end_state_map();
+
 		goals = planner->get_end_states();
-		for (auto iter : end_states)
+		for (auto iter : *end_states)
 		{
 			Action* goal = iter.second;
 			Action* milestone = planner->choose_next_step(goal, goals);
@@ -124,8 +125,8 @@ void AIController::init_plans() {
 
 		// For each end state, look at the milestone and generate a path 
 
-		MilestoneList milestones_by_goal = planner->get_milestone_map();
-		for (auto iter : milestones_by_goal)
+		MilestoneList* milestones_by_goal = planner->get_milestone_map();
+		for (auto iter : *milestones_by_goal)
 		{
 			vector<Action*> milestones = iter.second;
 			Action* state = iter.first;
@@ -164,38 +165,80 @@ void AIController::reevaluate_state(int me, int them) {
 }
 
 void AIController::execute() {
-	int action_wait_time = 7200;           //Wait time is approx. 2 minutes
-	for (int hero_id = 2; hero_id < 6; hero_id++) {
-		Hero* me = get_hero_object(hero_id);
-		Planner* planner = get_plan(hero_id);
+	int action_wait_time = 120; //2sec           //Wait time is approx. 2 minutes (7200)
+	
+	for (auto iter : hero_planners) {
+		Hero* me = get_hero_object(iter.first);
+		Planner* planner = iter.second;
 		Action* curr_action = planner->get_current_action();
 		Action* curr_goal = planner->get_current_end_state();
 
-		EndStateList* end_states = &planner->get_end_state_map();
-		MilestoneList* milestones = &planner->get_milestone_map();
+		EndStateList* end_states = planner->get_end_state_map();
+		MilestoneList* milestones = planner->get_milestone_map();
 
 		//std:://////cout << "Executing action " << curr_action->name << std::endl;
 
 		//Call execute function pointer of the action itself
 		//if you are not planning to give it as a quest
+
+		//if (me->get_action_timer() < 0)
+		//{
+
+		//}
+		//me->init_action_timer(action_wait_time);                    //Start a timer for approx. 2 minutes
+
+		std::cout << "before: " << me->update_action_timer() << endl;
 		if (me->update_action_timer() == 0)
 		{
-			if (!planner->give_as_quest) {
+			std::cout << "after: " << me->update_action_timer() << endl;
+			if (true) { //used to be : "!planner->give_as_quest"
+				std::cout << "execute" << endl;
 				curr_action->execute();
 			}
 			if (curr_action->executed) {
 
-				milestones->at(curr_goal).pop_back();              //Remove the curr_action from curr_goal's milestone list
+				// the issue here is that the key for the milestonees (curr_goal) exsits
+				//but the value does not exsit because it was popped after completion
+				//need to fix error where milestones are readded
+
+				//we may just want to push the goal onto the milestone list
+
+				//**ERONS FIX**
+				curr_action->executed = false; //resets the execuded so action can be executed again
+
+				if (milestones->at(curr_goal).size() > 0)
+				{
+
+					if (milestones->at(curr_goal).size() == 1 &&			//checks if the goal had been previously added to milestone list
+						milestones->at(curr_goal)[0] == curr_goal)
+					{
+						init_plans();
+					}
+					else
+					{
+						milestones->at(curr_goal).pop_back();              //Remove the curr_action from curr_goal's milestone list
+					}
+				}
+				else
+				{
+					milestones->at(curr_goal).push_back(curr_goal);
+				}
 
 				vector<Action*> frontier = planner->get_milestone_frontier();
 				Action* best_action = nullptr;
 				//Loop over all the next milestones to find the most valuable action, and set it to current action
 				int best_utility = 0;
 				for (auto itor : frontier) {
+					//initializes the best action
+					if(best_action == nullptr) {
+						best_action = itor;
+					}
+
 					if (itor->getUtility() > best_utility) {
 						best_utility = itor->getUtility();
 						best_action = itor;
 					}
+
 				}
 				planner->set_current_action(best_action);                   //Current action is set
 				me->init_action_timer(action_wait_time);                    //Start a timer for approx. 2 minutes

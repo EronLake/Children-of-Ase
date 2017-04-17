@@ -262,13 +262,22 @@ void CombatController::checkParties() {
 }
 
 void CombatController::party_leader_update(Soldier* sold1, int state) {
-	if (sold1->getParty()->getMode() == Party::MODE_PATROL) {
+	if (sold1->get_action_destination() != nullptr) {
+		if (Party::dist_location_to_location(sold1->getLoc(), *sold1->get_action_destination()) < 500) {
+			sold1->set_action_destination(nullptr);
+		}
+		else {
+			Vector2f quest = *sold1->get_action_destination();
+			sold1->destination = quest;
+			sold1->waypoint = quest;
+			move_to_target(sold1, state);
+		}
+	} else if (sold1->getParty()->getMode() == Party::MODE_PATROL) {
 		Vector2f next = sold1->getParty()->get_current_patrol_loc(sold1->getLoc());
 		sold1->destination = next;
 		sold1->waypoint = next;
 		move_to_target(sold1, state);
-	}
-	else if (sold1->getParty()->getMode() == Party::MODE_FLEE) {
+	} else if (sold1->getParty()->getMode() == Party::MODE_FLEE) {
 		Vector2f home = sold1->getParty()->get_home();
 		sold1->destination = home;
 		sold1->waypoint = home;

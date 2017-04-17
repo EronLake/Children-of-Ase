@@ -78,7 +78,7 @@
 using namespace std;
 
 
-
+Texture* Point::tex = new Texture();
 Texture* Rectangle::tex = new Texture();
 Texture* Rectangle::texUP = new Texture();
 Texture* Rectangle::texDOWN = new Texture();
@@ -104,7 +104,7 @@ void set_file_with_thread(std::pair<Texture*, pair<string, int>>* p_tuple) {
 int main() {
 	WorldObj* screen = new WorldObj(Vector2f(0.0, 0.0), 20000U, 20000U);	//init screen
 
-	QuadTree* collideTree = new QuadTree(0, screen);
+	QuadTree* collideTree = new QuadTree(0, *screen);
 	GameWindow::init();		
 	GAMEPLAY_LOOP(collideTree);
 
@@ -116,7 +116,10 @@ int main() {
 void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 {
 	Rectangle::tex->setFile("Assets/Sprites/blank1.png", 1);
+	Point::tex->setFile("Assets/Sprites/point.png", 1);
 	
+	RiverObj* rivObj = new RiverObj();
+	rivObj->initialize_lines();
 
 	vector<WorldObj*> recVec;
 	vector<WorldObj*>* recVec_ptr = &recVec;
@@ -137,9 +140,9 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 
 	Player* Alex = new Player(SHANGO, Vector2f(6445.0, 10155.0), 150.0, 150.0);	//init player
 
-	RenderManager* RenM = new RenderManager(mLog, tBuffer, _QuadTree, gameplay_functions);
+	RenderManager* RenM = new RenderManager(mLog, tBuffer, _QuadTree, gameplay_functions, rivObj);
 	DummyController* DumM = new DummyController(mLog, tBuffer);
-	PhysicsManager* PhysM = new PhysicsManager(mLog, tBuffer, _QuadTree);
+	PhysicsManager* PhysM = new PhysicsManager(mLog, tBuffer, _QuadTree, rivObj);
 	PartyManager* partyM = new PartyManager(gameplay_functions, Alex);
 	memManager* memM = new memManager(mLog, tBuffer);
 	TestManager* TestM = new TestManager(mLog, tBuffer);
@@ -810,6 +813,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 		//cout << "WORKING ON " << temp_tuple->second.first << endl;
 		set_file_with_thread(temp_tuple);
 	}
+
 	wglMakeCurrent(nullptr, nullptr);//unassigns the current gl context
 	wglDeleteContext(loaderContext);//deletes the loading context now that it is not needed
 	glFinish(); //Forces all gl calls to be completed before execution
@@ -1220,19 +1224,22 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	//staticRec->rel[SHANGO]->setStrEstimate(40);//added this
 
 
-	*oya = *staticRec;
+	//*oya = *staticRec;
 	//oya->setSpeed(5);
-	oya->setName("Oya");
-	oya->name = OYA;
+	//oya->setName("Oya");
+	//oya->name = OYA;
 	oya->offsetBody(0, 35, 35, 65, 15);
 	staticRec->offsetBody(0, 60, 60, 75, 50);
 	oya->shiftY(300);
 	oya->setHealth(50);
 
 	ActionConfig::import_config(gameplay_functions, tBuffer, staticRec);
+	ActionConfig::import_config(gameplay_functions, tBuffer, oya);
 
 	Planner* YemojaPlanner = new Planner(staticRec);
+	Planner* OyaPlanner = new Planner(oya);
 	AIController::set_plan(YEMOJA, YemojaPlanner);
+	AiController::set_plan(OYA, OyaPlanner);
 	Action* test_ally = new Action(nullptr, nullptr, nullptr, 10, 1, "Create Alliance", "execute_train");
 	Action* test_train = new Action(staticRec, oya, nullptr, 10, 1, "Train", "execute_train");
 	
@@ -1270,7 +1277,8 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	///////////////////////////////////////////////////////////////////////////////////////////
 	YemojaPlanner->set_current_action(test_train);
 
-	AIController::generate_end_state(YEMOJA, OYA);
+	//AiController->generate_end_state(YEMOJA, OYA);
+	AiController->init_plans();
 
 
 	/*
@@ -1400,10 +1408,10 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 
 	while (GameWindow::isRunning()) {
 		//shouldExit++;
-	/*	for (int i = 0; i < 10; i++) {
-			//cout << "SHOULD EXIT IS " << shouldExit << endl;
+		//for (int i = 0; i < 10; i++) {
+		//	cout << "SHOULD EXIT IS " << shouldExit << endl;
 
-		}*/
+		//}
 		if (shouldExit > 0) {
 			_CrtDumpMemoryLeaks();
 			return;
@@ -1630,7 +1638,10 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 			}
 		}
 		//getting here-------------------------------------------------------------------------***********
-	//	AiController->execute();
+		//setting give as quest to false so that the excute runs
+		YemojaPlanner->give_as_quest = false;
+
+		AiController->execute();
 
 		if ((1000 / fs) > (clock() - start_tick)) { //delta_ticks) {www
 			Sleep((1000 / fs) - (clock() - start_tick));

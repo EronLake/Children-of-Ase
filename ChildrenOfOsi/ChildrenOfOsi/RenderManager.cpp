@@ -8,12 +8,12 @@ RenderManager::RenderManager(MessageLog * _mLog, TaskBuffer * _tBuffer) : Manage
 	LOG("RenderManager W/QT Object Constructed");
 }
 
-RenderManager::RenderManager(MessageLog * _mLog, TaskBuffer * _tBuffer, QuadTree * _renderQuadTree, ChildrenOfOsi* game_f) : Manager(_mLog, _tBuffer)
+RenderManager::RenderManager(MessageLog * _mLog, TaskBuffer * _tBuffer, QuadTree * _renderQuadTree, ChildrenOfOsi* game_f, RiverObj* _rivObj) : Manager(_mLog, _tBuffer)
 {
 	LOG("RenderingManager W/QT Object Constructed");
 	
 
-	renderHelper = new RenderHelper(_renderQuadTree);
+	renderHelper = new RenderHelper(_renderQuadTree, _rivObj);
 	renderHelper->manager = this;
 	task_map["Init_Map"] = &RenderHelper::init_map;
 	task_map["Draw_Frame"] = &RenderHelper::draw_frame;

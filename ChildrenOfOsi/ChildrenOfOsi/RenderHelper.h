@@ -8,12 +8,13 @@
 #include "CheckClass.h"
 #include "HUD.h"
 #include "common.h"
+#include "RiverObj.h"
 
 class RenderManager;
 class RenderHelper
 {
 public:
-	RenderHelper(QuadTree* QT);
+	RenderHelper(QuadTree* QT, RiverObj* _rivObj);
 	~RenderHelper();
 	void initCamera(WorldObj* player);
 	void initCameraFull(WorldObj* player);
@@ -31,6 +32,7 @@ public:
 	int sprite_update(WorldObj* obj);
 	int drawDiaGui(WorldObj* obj);
 	int drawHUD(WorldObj* obj);
+	Vector2f getCameraSize() { return cameraSize; }
 	int setSwordGlow(WorldObj* obj);
 	int setHeartGlow(WorldObj* obj);
 	int setFaceGlow(WorldObj* obj);
@@ -42,11 +44,13 @@ public:
 	WorldObj* camera;
 	WorldObj* fullBound;
 	RenderManager* manager;
+	RiverObj* rivObj;
 private:
 	
 	DialogueGui* convoGui;
 	HUD* hud_ptr;
 	GameMap* gmap;
+	
 	std::vector<WorldObj*> objVec;
 	std::vector<WorldObj*> fullVec;
 

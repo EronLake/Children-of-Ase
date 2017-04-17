@@ -14,7 +14,7 @@ class PhysicsManager;
 
 class Movement {
 public:
-	Movement(QuadTree* QT);
+	Movement(QuadTree* QT, RiverObj* _rivObj);
 	~Movement();
 	//void playerAction(string task_name, WorldObj* player);
 	//static void initTree(WorldObj* screen);

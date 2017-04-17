@@ -16,7 +16,7 @@ Preconditions::~Preconditions()
 	LOG("Precondition Object Destroyed");
 }
 
-float Preconditions::get_cost()
+int Preconditions::get_cost()
 {
 	LOG("virtual function");
 	return 0.0;
@@ -54,38 +54,49 @@ RelPrecon::~RelPrecon()
 	LOG("Relprecon Object Destroyed");
 }
 
-float RelPrecon::get_cost(Hero* curr_hero, Hero* other_hero)
+int RelPrecon::get_cost(Hero* curr_hero, Hero* other_hero)
 {
-	int current_rel;
-	float cost = 0.0;
+	Relationship* cur_rel_map = nullptr;
+	int current_rel = 0;
+	int cost = 0;
 	if(rel_type == AFF)
 	{ 
 		current_rel = curr_hero->rel[other_hero->name]->getAffinity();
-		cost = desired_rel_val - current_rel;
+		cost = float(desired_rel_val) - float(current_rel);
 	} 
 	else if(rel_type == NOT)
 	{
 		current_rel = curr_hero->rel[other_hero->name]->getNotoriety();
-		cost = desired_rel_val - current_rel;
+		cost = float(desired_rel_val) - float(current_rel);
 	}
 	else if(rel_type == STR)
 	{
+		//for (auto i : curr_hero->rel) {
+		//	if (i.first == other_hero->name) { cur_rel_map = i.second; }
+		//}
+		//current_rel = cur_rel_map->getStrength();
+
 		current_rel = curr_hero->rel[other_hero->name]->getStrength();
 		cost = desired_rel_val - current_rel;
+		//int find = curr_hero->rel.find(other_hero->name)->second->getStrength();
+		//Relationship* temp_rel = curr_hero->rel[other_hero->name];
+		//int temp_str = temp_rel->getStrength();
+		//current_rel = curr_hero->rel[other_hero->name]->getStrength();
+		
 	} else if (rel_type == BAFF)
 	{
 		current_rel = curr_hero->rel[other_hero->name]->getAffinity();
-		cost = current_rel - desired_rel_val;
+		cost = float(current_rel) - float(desired_rel_val);
 	}
 	else if (rel_type == BNOT)
 	{
 		current_rel = curr_hero->rel[other_hero->name]->getNotoriety();
-		cost = current_rel - desired_rel_val;
+		cost = float(current_rel) - float(desired_rel_val);
 	}
 	else if (rel_type == BSTR)
 	{
 		current_rel = curr_hero->rel[other_hero->name]->getStrength();
-		cost = current_rel - desired_rel_val;
+		cost = float(current_rel) - float(desired_rel_val);
 	}
 
 	
@@ -115,10 +126,10 @@ RelEstimPrerec::~RelEstimPrerec()
 	LOG("RelEstimPrerec Object Destroyed");
 }
 
-float RelEstimPrerec::get_cost(Hero* curr_hero, Hero* other_hero)
+int RelEstimPrerec::get_cost(Hero* curr_hero, Hero* other_hero)
 {
 	int current_rel;
-	float cost = 0.0;
+	int cost = 0;
 	if (rel_type == AFF)
 	{
 		current_rel = curr_hero->rel[other_hero->name]->getAffEstimate();
@@ -127,27 +138,27 @@ float RelEstimPrerec::get_cost(Hero* curr_hero, Hero* other_hero)
 	else if (rel_type == NOT)
 	{
 		current_rel = curr_hero->rel[other_hero->name]->getNotorEstimate();
-		cost = desired_rel_val - current_rel;
+		cost = float(desired_rel_val) - float(current_rel);
 	}
 	else if (rel_type == STR)
 	{
 		current_rel = curr_hero->rel[other_hero->name]->getStrEstimate();
-		cost = desired_rel_val - current_rel;
+		cost = float(desired_rel_val) - float(current_rel);
 	}
 	else if (rel_type == BAFF)
 	{
 		current_rel = curr_hero->rel[other_hero->name]->getAffEstimate();
-		cost = current_rel - desired_rel_val;
+		cost = float(current_rel) - float(desired_rel_val);
 	}
 	else if (rel_type == BNOT)
 	{
 		current_rel = curr_hero->rel[other_hero->name]->getNotorEstimate();
-		cost = current_rel - desired_rel_val;
+		cost = float(current_rel) - float(desired_rel_val);
 	}
 	else if (rel_type == BSTR)
 	{
 		current_rel = curr_hero->rel[other_hero->name]->getStrEstimate();
-		cost = current_rel - desired_rel_val;
+		cost = float(current_rel) - float(desired_rel_val);
 	}
 
 
@@ -176,9 +187,9 @@ TimePrerec::~TimePrerec()
 	LOG("TimePrerec Object Destroyed");
 }
 
-float TimePrerec::get_cost()
+int TimePrerec::get_cost()
 {
-	float cost = 0.0;
+	int cost = 0.0;
 	float magnifier = 1.0;
 
 	/*
@@ -213,14 +224,14 @@ MemoryNumPrerec::~MemoryNumPrerec()
 	LOG("MemoryNumPrerec Object Destroyed");
 }
 
-float MemoryNumPrerec::get_cost(std::vector<Memory*> memories)
+int MemoryNumPrerec::get_cost(std::vector<Memory*> memories)
 {
-	float cost = 0.0;
+	int cost = 0.0;
 	float magnifier = 10.0;//this has to essentially the cost of an average memory
 
 	if (memories.size() < rec_num_of_mem)
 	{
-		cost = std::abs((int)(memories.size() - rec_num_of_mem))*magnifier;
+		cost = std::abs(((int)(memories.size()) - rec_num_of_mem))*magnifier;
 	}
 
 	return cost;
@@ -246,9 +257,9 @@ MemPrerec::~MemPrerec()
 	LOG("particularMemPrerec Object Destroyed");
 }
 
-float MemPrerec::get_cost(std::vector<Memory*> memories)
+int MemPrerec::get_cost(std::vector<Memory*> memories)
 {
-	float cost = 0.0;
+	int cost = 0.0;
 	float magnifier = 10.0;//this has to essentially the cost of an average memory
 
 	for (int i = 0; i < memories.size(); i++)
@@ -284,9 +295,9 @@ StatePrerec::~StatePrerec()
 	LOG("particularMemPrerec Object Destroyed");
 }
 
-float StatePrerec::get_cost()
+int StatePrerec::get_cost()
 {
-	float cost = 0.0;
+	int cost = 0;
 	float magnifier = 10.0;//this has to essentially the cost of an average state change
 
 	return cost;

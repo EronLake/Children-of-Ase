@@ -45,8 +45,7 @@ public:
 
 	static Action* quest;
 	static int scroll_control;
-
-private:
+//private:
 	static Player* player;
 	static WorldObj* other;
 	static int state;
