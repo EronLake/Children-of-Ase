@@ -35,99 +35,39 @@
 	 }
 	},
 
-	"Ask_About_Oshosi_Templates": {
+	"Ask_About_Strength_Templates": {
      "1": {
-        "1": "Ask_About_Oshosi"
+        "1": "Ask_About_Strength"
 	 }
     },
 
-	"Response_Ask_About_Oshosi_Templates": {
+	"Response_Ask_About_Strength_Templates": {
      "1": {
-        "1": "Response_Ask_About_Oshosi"
+        "1": "Response_Ask_About_Strength"
 	 }
     },
 
-    "Ask_About_Ogun_Templates": {
+    "Ask_About_Affinity_Templates": {
      "1": {
-        "1": "Ask_About_Ogun"
+        "1": "Ask_About_Affinity"
 	 }
     },
 
-	"Response_Ask_About_Ogun_Templates": {
+	"Response_Ask_About_Affinity_Templates": {
      "1": {
-        "1": "Response_Ask_About_Ogun"
+        "1": "Response_Ask_About_Affinity"
 	 }
     },
 
-	"Ask_About_Oya_Templates": {
+	"Ask_About_Notoriety_Templates": {
      "1": {
-        "1": "Ask_About_Oya"
+        "1": "Ask_About_Notoriety"
 	 }
     },
 
-	"Response_Ask_About_Oya_Templates": {
+	"Response_Ask_About_Notoriety_Templates": {
      "1": {
-        "1": "Response_Ask_About_Oya"
-	 }
-    },
-
-	"Ask_Memories_Templates": {
-     "1": {
-        "1": "Ask_Memories"
-	 }
-    },
-
-	"Response_Ask_Memories_Templates": {
-     "1": {
-        "1": "Response_Ask_Memories"
-	 }
-    },
-
-	"Ask_Specific_Events_Templates": {
-     "1": {
-        "1": "Ask_Specific_Events"
-	 }
-    },
-
-	"Response_Ask_Specific_Events_Templates": {
-     "1": {
-        "1": "Response_Ask_Specific_Events"
-	 }
-    },
-
-	"Ask_About_Relationship_With_Oshosi_Templates": {
-     "1": {
-        "1": "Ask_About_Relationship_With_Oshosi"
-	 }
-    },
-
-	"Response_Ask_About_Relationship_With_Oshosi_Templates": {
-     "1": {
-        "1": "Response_Ask_About_Relationship_With_Oshosi"
-	 }
-    },
-
-	"Ask_About_Relationship_With_Ogun_Templates": {
-     "1": {
-        "1": "Ask_About_Relationship_With_Ogun"
-	 }
-    },
-
-	"Response_Ask_About_Relationship_With_Ogun_Templates": {
-     "1": {
-        "1": "Response_Ask_About_Relationship_With_Ogun"
-	 }
-    },
-
-	"Ask_About_Relationship_With_Oya_Templates": {
-     "1": {
-        "1": "Ask_About_Relationship_With_Oya"
-	 }
-    },
-
-	"Response_Ask_About_Relationship_With_Oya_Templates": {
-     "1": {
-        "1": "Response_Ask_About_Relationship_With_Oya"
+        "1": "Response_Ask_About_Notoriety"
 	 }
     },
 
@@ -143,141 +83,51 @@
 	 }
     },
 
-	"Move_To_Conquer_Oshosi_Templates": {
+	"Move_To_Conquer_Templates": {
      "1": {
-        "1": "Move_To_Conquer_Oshosi"
+        "1": "Move_To_Conquer"
 	 }
     },
 
-	"Move_To_Conquer_Ogun_Templates": {
+	"Response_To_Move_To_Conquer_Templates": {
      "1": {
-        "1": "Move_To_Conquer_Ogun"
+        "1": "Response_To_Move_To_Conquer"
 	 }
     },
 
-	"Move_To_Conquer_Oya_Templates": {
+	"Move_To_Alliance_Templates": {
      "1": {
-        "1": "Move_To_Conquer_Oya"
+        "1": "Move_To_Alliance"
 	 }
     },
 
-	"Response_To_Move_To_Conquer_Oshosi_Templates": {
+	"Response_To_Move_To_Alliance_Templates": {
      "1": {
-        "1": "Response_To_Move_To_Conquer_Oshosi"
-	 }
-    },
-	"Response_To_Move_To_Conquer_Ogun_Templates": {
-     "1": {
-        "1": "Response_To_Move_To_Conquer_Ogun"
-	 }
-    },
-	"Response_To_Move_To_Conquer_Oya_Templates": {
-     "1": {
-        "1": "Response_To_Move_To_Conquer_Oya"
+        "1": "Response_To_Move_To_Alliance"
 	 }
     },
 
-	"Move_To_Alliance_Oshosi_Templates": {
+	"Move_To_Revolt_Templates": {
      "1": {
-        "1": "Move_To_Alliance_Oshosi"
+        "1": "Move_To_Revolt"
 	 }
     },
 
-	"Move_To_Alliance_Ogun_Templates": {
+	"Response_To_Move_To_Revolt_Templates": {
      "1": {
-        "1": "Move_To_Alliance_Ogun"
+        "1": "Response_To_Move_To_Revolt"
 	 }
     },
 
-	"Move_To_Alliance_Oya_Templates": {
+	"Move_To_Destroy_Templates": {
      "1": {
-        "1": "Move_To_Alliance_Oya"
+        "1": "Move_To_Destroy"
 	 }
     },
 
-	"Response_To_Move_To_Alliance_Oshosi_Templates": {
+    "Response_To_Move_To_Destroy_Templates": {
      "1": {
-        "1": "Response_To_Move_To_Alliance_Oshosi"
-	 }
-    },
-
-	"Response_To_Move_To_Alliance_Ogun_Templates": {
-     "1": {
-        "1": "Response_To_Move_To_Alliance_Ogun"
-	 }
-    },
-
-	"Response_To_Move_To_Alliance_Oya_Templates": {
-     "1": {
-        "1": "Response_To_Move_To_Alliance_Oya"
-	 }
-    },
-
-	"Move_To_Revolt_Oshosi_Templates": {
-     "1": {
-        "1": "Move_To_Revolt_Oshosi"
-	 }
-    },
-
-	"Move_To_Revolt_Ogun_Templates": {
-     "1": {
-        "1": "Move_To_Revolt_Ogun"
-	 }
-    },
-
-	"Move_To_Revolt_Oya_Templates": {
-     "1": {
-        "1": "Move_To_Revolt_Oya"
-	 }
-    },
-
-	"Response_To_Move_To_Revolt_Oshosi_Templates": {
-     "1": {
-        "1": "Response_To_Move_To_Revolt_Oshosi"
-	 }
-    },
-	"Response_To_Move_To_Revolt_Ogun_Templates": {
-     "1": {
-        "1": "Response_To_Move_To_Revolt_Ogun"
-	 }
-    },
-	"Response_To_Move_To_Revolt_Oya_Templates": {
-     "1": {
-        "1": "Response_To_Move_To_Revolt_Oya"
-	 }
-    },
-
-	"Move_To_Destroy_Oshosi_Templates": {
-     "1": {
-        "1": "Move_To_Destroy_Oshosi"
-	 }
-    },
-
-	"Move_To_Destroy_Ogun_Templates": {
-     "1": {
-        "1": "Move_To_Destroy_Ogun"
-	 }
-    },
-
-    "Move_To_Destroy_Oya_Templates": {
-     "1": {
-        "1": "Move_To_Destroy_Oya"
-	 }
-    },
-
-    "Response_To_Move_To_Destroy_Oshosi_Templates": {
-     "1": {
-        "1": "Response_To_Move_To_Destroy_Oshosi"
-	 }
-    },
-	"Response_To_Move_To_Destroy_Ogun_Templates": {
-     "1": {
-        "1": "Response_To_Move_To_Destroy_Ogun"
-	 }
-    },
-	"Response_To_Move_To_Destroy_Oya_Templates": {
-     "1": {
-        "1": "Response_To_Move_To_Destroy_Oya"
+        "1": "Response_To_Move_To_Destroy"
 	 }
     },
 
@@ -365,40 +215,6 @@
 	 }
     },
 
-	"Move_To_Spy_Oshosi_Templates": {
-	 "1": {
-        "1": "Move_To_Spy_Oshosi"
-	 }
-    },
-
-	"Move_To_Spy_Ogun_Templates": {
-	 "1": {
-        "1": "Move_To_Spy_Ogun"
-	 }
-    },
-
-	"Move_To_Spy_Oya_Templates": {
-	 "1": {
-        "1": "Move_To_Spy_Oya"
-	 }
-    },
-
-	"Response_To_Move_To_Spy_Oshosi_Templates": {
-	 "1": {
-        "1": "Response_To_Move_To_Spy_Oshosi"
-	 }
-    },
-	"Response_To_Move_To_Spy_Ogun_Templates": {
-	 "1": {
-        "1": "Response_To_Move_To_Spy_Ogun"
-	 }
-    },
-	"Response_To_Move_To_Spy_Oya_Templates": {
-	 "1": {
-        "1": "Response_To_Move_To_Spy_Oya"
-	 }
-    },
-
 	"Move_To_Train_Templates": {
 	 "1": {
         "1": "Move_To_Train"
@@ -468,6 +284,18 @@
 	"Response_Insult_Templates": {
 	 "1": {
         "1": "Response_Insult"
+	 }
+    },
+
+	"No_More_Phrases_Templates": {
+	 "1": {
+        "1": "No_More_Phrases"
+	 }
+    },
+
+	"Response_No_More_Phrases_Templates": {
+	 "1": {
+        "1": "Response_No_More_Phrases"
 	 }
     },
 

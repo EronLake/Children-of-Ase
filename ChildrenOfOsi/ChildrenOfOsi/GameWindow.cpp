@@ -224,8 +224,8 @@ void GameWindow::drawText(const std::string& text, const std::string& fontName, 
     GLfloat chW = 0.10F; /*dpDimensionsToGL(static_cast<GLfloat>(glyph.size.x), 0).x;*/
     GLfloat chH = 0.10F; /*dpDimensionsToGL(0, static_cast<GLfloat>(glyph.size.y)).y;*/
 
-    //std::////cout << "Glyph coordinates: (" << chX << ", " << chY << ")" << std::endl;
-    //std::////cout << "Glyph dimensions: (" << chW << ", " << chH << ")" << std::endl;
+    //std:://////cout << "Glyph coordinates: (" << chX << ", " << chY << ")" << std::endl;
+    //std:://////cout << "Glyph dimensions: (" << chW << ", " << chH << ")" << std::endl;
 
     GLfloat vertices[6][4] = {
       {chX,       chY + chH, 0.0F, 0.0F}, // Bottom left

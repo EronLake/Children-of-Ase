@@ -48,9 +48,16 @@ public:
 
 	void decrement_quest_time();
 
+	int get_action_timer() { return action_timer; }
+	int update_action_timer();
+	void init_action_timer(int wait_time) {action_timer = wait_time;}
+
 private:
 
 	std::unordered_map<Action*,int> quests;
+	
+	int action_timer;
+
 	//now in the action config
 	//void init_act_pools(ChildrenOfOsi* gameplay_func, TaskBuffer* tBuffer);
 };

@@ -15,6 +15,7 @@ float botLefty;
 float botRightx;
 float botRighty;
 string WhichJson;
+unordered_map<Texture*, pair<string, int>>* ObjConfig::textureMapConfig;
 
 
 ObjConfig::ObjConfig()
@@ -60,8 +61,8 @@ void ObjConfig::import_config(vector<WorldObj*>* recVec, ChildrenOfOsi* gameplay
 				(*itr)["bodyy1"].asFloat(), (*itr)["bodyy2"].asFloat());
 			numberOfWorldObj++;
 		}
-		std::cout << "done" << endl;
-		std::cout << "Number of World Objs "<< numberOfWorldObj << endl;
+		//std:://cout << "done" << endl;
+		//std:://cout << "Number of World Objs "<< numberOfWorldObj << endl;
 	}
 
 
@@ -112,7 +113,7 @@ void ObjConfig::make_stuff(vector<WorldObj*>* recVec, ChildrenOfOsi* gameplay_fu
 
 	}
 
-	//std::cout << "done" << endl;
+	////std:://cout << "done" << endl;
 	if (MakeForest || PlacePlant) {
 
 		Json::Value root;
@@ -122,7 +123,7 @@ void ObjConfig::make_stuff(vector<WorldObj*>* recVec, ChildrenOfOsi* gameplay_fu
 		in_file.close();
 
 
-		//std::cout << "Makeing Forest" << endl;
+		////std:://cout << "Makeing Forest" << endl;
 		int XDistancs = abs(topLeftx - topRightx);
 		int YDistancs = abs(topLefty - botLefty);
 		srand(time(0));
@@ -225,7 +226,7 @@ void ObjConfig::make_stuff(vector<WorldObj*>* recVec, ChildrenOfOsi* gameplay_fu
 			file << styledWriter.write(root);
 
 			file.close();
-			//std::cout << "Here" << endl;
+			////std:://cout << "Here" << endl;
 
 
 
@@ -244,17 +245,18 @@ void ObjConfig::set_world_obj(vector<WorldObj*>* recVec, ChildrenOfOsi* gameplay
 	LOG(Containers::texture_table[tex_file]);
 	if (Containers::texture_table[tex_file]) {
 
-		std::cout << tex_file << "Already in Table /////////////////////////////" << endl;
+		//std:://cout << tex_file << "Already in Table /////////////////////////////" << endl;
 	}
 	else
 	{
-		std::cout << tex_file << "Not in Table /////////////////////////////" << endl;
+		//std:://cout << tex_file << "Not in Table /////////////////////////////" << endl;
 
 		gameplay_func->add_texture(tex_file, 0, 0, 0);
 
 		//set file takes up memory
 		tBuffer->run();
-		Containers::texture_table[tex_file]->setFile("Assets/Sprites/" + tex_file + ".png", frame_num);
+		(*textureMapConfig)[Containers::texture_table[tex_file]]= pair<string, int>("Assets/Sprites/" + tex_file + ".png", frame_num);
+		//Containers::texture_table[tex_file]->setFile("Assets/Sprites/" + tex_file + ".png", frame_num);
 
 	}
 

@@ -118,7 +118,7 @@ void Party::add_party_to_party(Party* s) {
  */
 void Party::removeSoldier(Soldier* s, bool b)
 {
-	//cout << ""
+	////cout << ""
 	// First find the solider in the members list
 	vector<Soldier*>::iterator s_itor = find(members.begin(), members.end(), s);
 	// If can't find Solder s, simply return
@@ -155,19 +155,19 @@ void Party::removeSoldier(Soldier* s, bool b)
 	}
   
 	// Update Soldier s's party status
-	cout << "SIZE OF PARTY WITH OBJ REMOVED IS " << s->getParty()->getMembers().size() << endl;
+	//cout << "SIZE OF PARTY WITH OBJ REMOVED IS " << s->getParty()->getMembers().size() << endl;
 	if (b)s->setParty(new Party(s));
 	if (members.size() != 0) {
 		updateFollowers();
 	}
 
 
-	//cout << "SIZE OF THE PARTY IS ********** " << members.size() << endl;
+	////cout << "SIZE OF THE PARTY IS ********** " << members.size() << endl;
 	//members.erase(std::remove(members.begin(), members.end(), s), members.end());
-	//cout << "SUCCESFULLY GOTTEN PAST THE REMOVE SOLDIER STATEMENT*************************" << endl;
+	////cout << "SUCCESFULLY GOTTEN PAST THE REMOVE SOLDIER STATEMENT*************************" << endl;
 
   //for enemy soldier's party, we need to remove s's party from their list of party if its emptys
-  ////cout << "Enemy's enemy: " << s->getCurrentEnemy()->getCurrentEnemy() << endl;
+  //////cout << "Enemy's enemy: " << s->getCurrentEnemy()->getCurrentEnemy() << endl;
 
 	//if (s->getCurrentEnemy() != nullptr) {
 	//	s->getCurrentEnemy()->setCurrentEnemy(nullptr);

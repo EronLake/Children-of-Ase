@@ -1,6 +1,14 @@
 #include "stdafx.h"
 #include "DialogueHelper.h"
 #include "Player.h"
+#include "Tag.h"
+typedef std::pair<int, ConversationPoint*> appealPoint;
+template<>
+bool std::operator==(const appealPoint& p1, const appealPoint& p2) {
+		return p1.first == p2.first && p1.second == p2.second;
+	}
+
+
 
 Player* player;
 WorldObj* other;
@@ -22,13 +30,105 @@ DialogueHelper::DialogueHelper()
 DialogueHelper::~DialogueHelper()
 {
 }
+int DialogueHelper::personality_appeal(ConversationPoint* point, vector<int> personality) {
 
+	
+
+	return ((personality[0]*point->multipliers->getHonor())+
+	(personality[1] *point->multipliers->getPride())+
+	(personality[2] *point->multipliers->getAggression())+
+	(personality[3] *point->multipliers->getKindness())+
+	(personality[4] *point->multipliers->getGreed())+
+	(personality[5] *point->multipliers->getRecklessness())+
+	(personality[6] *point->multipliers->getExtroversion()));
+};
 //functions where heroes make dialogue choices
-dialogue_point DialogueHelper::choose_conv_pt(dialogue_point point, int optn_inx)
-{
+dialogue_point DialogueHelper::choose_conv_pt(std::vector<ConversationLogObj*> conversation_log_obj_pointer_vec, std::vector<int> personality, std::vector<int> relationship)
+{	/*index 0 = Affinity, index 1 = notoriety, index 2 = strength, index 3 = AffEstimateindex 4 = NotorEstimate, index 5 = StrEstimate*/
+
+	/*index 0 = honor, index 1 = pride, index 2 = aggression, index 3 = kindnessindex 4 = greed, index 5 = recklessness, index 6 = extroversion*/
+	vector<appealPoint> possible_replies;
+
 	int conv_pt_index;
-	conv_pt_index = rand() % (possible_conv_pts[optn_inx].size());
-	return possible_conv_pts[optn_inx][conv_pt_index];
+	
+	
+
+	for (auto i = conversation_log_obj_pointer_vec.begin(); i != conversation_log_obj_pointer_vec.end(); ++i) {
+		//auto it = std::find(temp.begin(), temp.end(), (*i)->get_conv_point());
+		//if (it != temp.end()) {
+		//	temp.erase(std::remove(temp.begin(), temp.end(), *it), temp.end());
+		//}
+		//else {
+
+		// }
+		
+		for (auto j : (*i)->get_conv_point()->tag_pointer_vec) {
+			
+			for (auto k : j->conversation_point_pointer_vec) {
+				
+				if (std::find(possible_replies.begin(), possible_replies.end(), std::make_pair(0, k)) != possible_replies.end()) {
+				}
+				else {
+					if(relationship[0]>= k->rel_multipliers->getAffinity() && relationship[1] >= k->rel_multipliers->getNotoriety() && relationship[2] >= k->rel_multipliers->getStrength()){
+					possible_replies.push_back(std::make_pair(0,k));}
+				}
+			
+			
+		      }
+
+
+	    }
+		
+	}
+	for (auto i = conversation_log_obj_pointer_vec.begin(); i != conversation_log_obj_pointer_vec.end(); ++i) {
+		appealPoint tmp = std::make_pair(0, (*i)->get_conv_point());
+		auto it = std::find(possible_replies.begin(), possible_replies.end(), tmp);
+		if (it != possible_replies.end() && (*i)->get_who() == 2) {
+			possible_replies.erase(std::remove(possible_replies.begin(), possible_replies.end(), *it), possible_replies.end());
+		}
+		else {
+
+		}
+	}
+	//relationship filtering
+	
+	//choose based on personality
+	std::vector<std::pair<int, ConversationPoint*>>  temp;
+	dialogue_point def;
+	def.push_back("");
+	def.push_back("Goodbye");
+	
+	
+	if (possible_replies.size() != 0) {
+		conv_pt_index = rand() % (possible_replies.size());
+		}
+	int appeal;
+	for (auto itor = possible_replies.begin(); itor != possible_replies.end(); itor++) {
+			appeal = personality_appeal(itor->second, personality);
+				temp.push_back(make_pair(appeal, itor->second));
+	}
+	possible_replies = temp;
+	struct greatestAppeal {
+		inline bool operator()(std::pair<int, ConversationPoint*> appeal1, std::pair<int, ConversationPoint*> appeal2) {//is temporarily an action
+			return (appeal1.first > appeal2.first);
+		};
+	};
+
+	std::sort(possible_replies.begin(), possible_replies.end(), greatestAppeal());
+	std::ofstream ofs;
+	ofs.open("dialog_template_output.txt", std::ofstream::out | std::ofstream::trunc);
+	for (auto itor = possible_replies.begin(); itor != possible_replies.end(); itor++) {
+	
+		ofs << "Conversation Point Name: " << itor->second->get_name() << " Appeal " << itor->first << std::endl;
+
+	}
+	ofs.close();
+	if (possible_replies.size() != 0) {
+		return possible_replies[0].second->dpoint;
+	}
+	else {
+		return{ "No_More_Phrases","No_More_Phrases" };
+	}
 }
 
 dialogue_point DialogueHelper::choose_reply_pt(std::string point, int optn_inx)
@@ -64,7 +164,7 @@ std::vector<dialogue_point> DialogueHelper::get_possible_reply_pts(std::string p
 	return reply;
 }
 
-std::string DialogueHelper::gen_dialog(dialogue_point diog_pt, Hero* hero)
+std::string DialogueHelper::gen_dialog(dialogue_point diog_pt, Hero* hero, int relationship_phrase_picker, int relationship_phrase_picker_shango)
 {
 	std::string name = "";
 	//std::ofstream ofs;
@@ -96,13 +196,13 @@ std::string DialogueHelper::gen_dialog(dialogue_point diog_pt, Hero* hero)
 	else {
 		name = "SilverSoldier";
 	}
-	std::string sentence = convert_to_sentence(get_dialog(name, diog_pt));
+	std::string sentence = convert_to_sentence(get_dialog(name, diog_pt, relationship_phrase_picker, relationship_phrase_picker_shango));
 
 	return sentence;
 }
 
 //poientially don't need this function
-std::string DialogueHelper::gen_reply(dialogue_point diog_pt, Hero* hero)
+std::string DialogueHelper::gen_reply(dialogue_point diog_pt, Hero* hero, int relationship_phrase_picker, int relationship_phrase_picker_shango)
 {
 	std::string name;
 	if (hero->name == SHANGO)
@@ -126,7 +226,7 @@ std::string DialogueHelper::gen_reply(dialogue_point diog_pt, Hero* hero)
 		name = "Ogun";
 	}
 
-	std::string sentence = convert_to_sentence(get_dialog(name, diog_pt));
+	std::string sentence = convert_to_sentence(get_dialog(name, diog_pt, relationship_phrase_picker, relationship_phrase_picker_shango));
 
 	return sentence;
 }
@@ -159,7 +259,7 @@ dialogue_template DialogueHelper::get_template(dialogue_point diog_pt) {
 
 }
 
-dialogue_point DialogueHelper::get_dialog(std::string name, dialogue_point diog_pt) {
+dialogue_point DialogueHelper::get_dialog(std::string name, dialogue_point diog_pt, int relationship_phrase_picker, int shango_phrase_picker) {
 	//std::ofstream ofs;
 	//ofs.open("dialog_template_output.txt", std::ofstream::out | std::ofstream::app);
 	dialogue_template dtemp = get_template(diog_pt);
@@ -191,17 +291,18 @@ dialogue_point DialogueHelper::get_dialog(std::string name, dialogue_point diog_
 	into this function is Shango. Make what appears on upper GUI window be what 
 	the player selected to say.*/
 	///////////////////////////////////
+	int j = 1;
 	if (name != "Shango") {
-		int j = 0;
+		j = relationship_phrase_picker;
 		std::string tmp = "";
 		for (int i = 1; i <= dtemp.size(); i++) {
 			tmp = dtemp[i - 1];
 			if (tmp != "?" && tmp != "," && tmp != "." &&
 				tmp != "!" && tmp != "_") {
-				if (root[tmp].size() > 1)
-					j = rand() % root[tmp].size() + 1;
-				else
-					j = 1;
+				//if (root[tmp].size() > 1)
+					//j = rand() % root[tmp].size() + 1;
+				//else
+					//j = 1;
 				dpoint.push_back(root[tmp][to_string(j)]
 					.asString());
 				//ofs << "dp: " << root[tmp][to_string(j)]
@@ -215,7 +316,8 @@ dialogue_point DialogueHelper::get_dialog(std::string name, dialogue_point diog_
 		}
 	}
 	else {
-		dpoint.push_back(root[diog_pt[1]][to_string(1)]
+		j = shango_phrase_picker;
+		dpoint.push_back(root[diog_pt[1]][to_string(j)]
 			.asString());
 	}
 
@@ -250,7 +352,10 @@ void DialogueHelper::fill_conversations() {
 			possible_conv_pts[3].push_back(itor->second->dpoint);//itor->second->dpoint);
 		}
 		else if (itor->second->get_topic() == "qrp") {
-			possible_reply_pts[3].push_back(itor->second->dpoint);//itor->second->dpoint);
+			possible_reply_pts[3].push_back(itor->second->dpoint);
+			possible_reply_pts[0].push_back(itor->second->dpoint);
+			possible_reply_pts[1].push_back(itor->second->dpoint);
+			possible_reply_pts[2].push_back(itor->second->dpoint);
 		}
 		else if (itor->second->get_topic() == "d") {
 			
@@ -263,18 +368,27 @@ void DialogueHelper::fill_conversations() {
 			possible_conv_pts[0].push_back(itor->second->dpoint);
 		}
 		else if (itor->second->get_topic() == "srp") {
+			possible_reply_pts[3].push_back(itor->second->dpoint);
 			possible_reply_pts[0].push_back(itor->second->dpoint);
+			possible_reply_pts[1].push_back(itor->second->dpoint);
+			possible_reply_pts[2].push_back(itor->second->dpoint);
 		}
 		else if (itor->second->get_topic() == "acp") {
 			possible_conv_pts[1].push_back(itor->second->dpoint);
 		}
-		else if (itor->second->get_topic() == "arp") {
+		else if (itor->second->get_topic() == "arp" || itor->second->get_topic() == "nmp") {
+			possible_reply_pts[3].push_back(itor->second->dpoint);
+			possible_reply_pts[0].push_back(itor->second->dpoint);
 			possible_reply_pts[1].push_back(itor->second->dpoint);
+			possible_reply_pts[2].push_back(itor->second->dpoint);
 		}
 		else if (itor->second->get_topic() == "ncp") {
 			possible_conv_pts[2].push_back(itor->second->dpoint);
 		}
 		else {
+			possible_reply_pts[3].push_back(itor->second->dpoint);
+			possible_reply_pts[0].push_back(itor->second->dpoint);
+			possible_reply_pts[1].push_back(itor->second->dpoint);
 			possible_reply_pts[2].push_back(itor->second->dpoint);
 		}
 	}

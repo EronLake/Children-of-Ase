@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "CombatController.h"
 
+std::mutex mux;
 
 CombatController::CombatController(ChildrenOfOsi* coo)
 {
@@ -41,6 +42,7 @@ void CombatController::fight(Soldier* sold1, int state) {
 				sold1->face(sold2);
 				if (sold1->getCool()) {
 					sold1->meleeAttack();
+					//std::lock_guard<std::mutex> guard(mux);
 					gameplay_functions->melee(sold1);
 				}
 			}
@@ -53,6 +55,7 @@ void CombatController::fight(Soldier* sold1, int state) {
 				sold1->destination = sold1->getEvadeRange(sold1->getCurrentEnemy());
 			}
 		}
+		//std::lock_guard<std::mutex> guard(mux);
 		move_to_target(sold1, state);
 	}
 }
@@ -60,8 +63,9 @@ void CombatController::fight(Soldier* sold1, int state) {
 void CombatController::follow(Soldier* sold1, int state) {
 	Soldier* sold2 = sold1->getCurrentLeader();
 	if (sold2 == nullptr) {
+		//std::lock_guard<std::mutex> guard(mux);
 		party_leader_update(sold1,state);
-		std::cout << sold1->getID()<<" update leader" << std::endl;
+		////std:://cout << sold1->getID()<<" update leader" << std::endl;
 		return;
 	}
 	if (dist_by_center(sold1, sold2) > (sold1->body[0].getWidth() * 6)) {
@@ -71,11 +75,12 @@ void CombatController::follow(Soldier* sold1, int state) {
 	if (dist_by_center(sold1,sold2)<(sold1->body[0].getWidth()*3)) {
 		sold1->destination = Vector2f(0, 0);
 		sold1->waypoint = Vector2f(0, 0);
-		std::cout << sold1->getID() << " reached its leader, " << sold2->getID() << std::endl;
+////std:://cout << sold1->getID() << " reached its leader, " << sold2->getID() << std::endl;
+	//	std::lock_guard<std::mutex> guard(mux);
 		gameplay_functions->stop(sold1);
 		return;
 	}
-
+	//std::lock_guard<std::mutex> guard(mux);
 	move_to_target(sold1,state);
 }
 
@@ -126,6 +131,7 @@ void CombatController::update_soldier(Soldier* sold1, int state) {
 	sold1->updateCD();
 	if (sold1->getParty() == nullptr || sold1->getParty() == NULL)return;
 	if (find_closest_friend(sold1, state)) {
+		//std::lock_guard<std::mutex> guard(mux);
 		move_to_target(sold1, state);
 	}
 	else {
@@ -133,11 +139,12 @@ void CombatController::update_soldier(Soldier* sold1, int state) {
 		if ((sold1->getHold()) && (dist_soldier_to_location(sold1, sold1->getParty()->get_defend()) > 400)) {
 			sold1->destination = sold1->getParty()->get_defend();
 			sold1->waypoint = sold1->getParty()->get_defend();
+		//	std::lock_guard<std::mutex> guard(mux);
 			move_to_target(sold1, state);
 		}
 		else {
 			///check if the soldier is in combat and not 1000 away from the leader
-			cout << dist_by_center(sold1, sold1->getCurrentLeader()) << endl;
+			//cout << dist_by_center(sold1, sold1->getCurrentLeader()) << endl;
 			if ((sold1->getInCombat()) && (dist_by_center(sold1, sold1->getCurrentLeader()) < 600)) {
 				///if no enemy find the closest one
 				if (sold1->getCurrentEnemy() == nullptr) {
@@ -172,12 +179,11 @@ void CombatController::update_soldier(Soldier* sold1, int state) {
 }
 
 void CombatController::move_to_target(Soldier* sold1, int state) {
-
 	if (sold1->destination != Vector2f(0, 0)) { //Hero has a destination
 		if (sold1->waypoint != Vector2f(0, 0) && state == 0) { //Hero has a waypoint to the desination, and not in dialog
 			if (sold1->getHold()) {//getMode() == Party::MODE_DEFEND) {
 				if (dist(sold1->destination, sold1->getParty()->get_defend()) > 500) {
-					std::cout << "leader too far" << std::endl;
+			//		//std:://cout << "leader too far" << std::endl;
 					sold1->waypoint = sold1->getParty()->get_home();
 					sold1->destination = sold1->getParty()->get_home();
 					gameplay_functions->stop(sold1);
@@ -185,11 +191,11 @@ void CombatController::move_to_target(Soldier* sold1, int state) {
 				}
 			}
 			gameplay_functions->move_toward(sold1); //Take a step towards the current waypoint
-			std::cout << sold1->getID() << " MOVING TOWARDS " << sold1->waypoint.getXloc() << ", " << sold1->waypoint.getYloc() << std::endl;
+			////std:://cout << sold1->getID() << " MOVING TOWARDS " << sold1->waypoint.getXloc() << ", " << sold1->waypoint.getYloc() << std::endl;
 		}
 		else if (state == 0)                //Hero needs waypoints to destination, and not in dialog
 		{
-			std::cout << sold1->getID() << " WHERE AM I GOING" << std::endl;
+		//	//std:://cout << sold1->getID() << " WHERE AM I GOING" << std::endl;
 			gameplay_functions->get_path(sold1); //Generate waypoints to destination
 		}
 	}
@@ -225,11 +231,15 @@ void CombatController::checkParties() {
 			vector<Party*> partiesB = (*j)->getParties();
 			for (auto a = partiesA.begin(); a != partiesA.end(); ++a) {
 				if ((*a)->getMembers().size() == 0) {
-					(*i)->remove_party((*a));
+					if (((*i)->barracks != (*a)) || ((*i)->defenders != (*a))) {
+						(*i)->remove_party((*a));
+					}
 				} else if ((*a)->getMode() != Party::MODE_FLEE && !(*a)->getLeader()->getInCombat()) {
 					for (auto b = partiesB.begin(); b != partiesB.end(); ++b) {
-						if ((*b)->getMembers().size() == 0) {
-							(*j)->remove_party((*b));
+						if ((*b)->getMembers().size() == 0 ) {
+							if (((*j)->barracks != (*b)) || ((*j)->defenders != (*b))) {
+								(*j)->remove_party((*b));
+							}
 						} else if (dist_by_center((*a)->getLeader(), (*b)->getLeader()) < 1000) {
 							(*a)->addToCurrentEnemies(*b);
 							vector<Soldier*> mema = (*a)->getMembers();
@@ -266,9 +276,13 @@ void CombatController::party_leader_update(Soldier* sold1, int state) {
 		if (sold1->destination == Vector2f(0, 0)) {
 			sold1->getParty()->setMode(Party::MODE_IDLE);
 			if (home == sold1->getParty()->get_village()->get_village_location()) {
-				sold1->getParty()->get_village()->barracks.push_back(sold1->getParty());
+				sold1->getParty()->get_village()->barracks->add_party_to_party(sold1->getParty());
 			}
-			std::cout << sold1->getID() << " is idling now" << std::endl;
+			////std:://cout << sold1->getID() << " is idling now" << std::endl;
 		}
 	}
+}
+
+std::thread CombatController::threaded_update_soldier(Soldier* s, int n) {
+	return std::thread(&CombatController::update_soldier, this, s, n);
 }

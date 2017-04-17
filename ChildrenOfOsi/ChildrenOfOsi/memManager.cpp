@@ -20,7 +20,7 @@ memManager::memManager(MessageLog* _mLog, TaskBuffer* _tBuffer)
 	livingObj_pool = memHelper->create_pool(sizeof(LivingObj) * 64);
 	livingObj_head = memHelper->init_pool(livingObj_pool, sizeof(LivingObj)*2);
 
-	Attack_pool = memHelper->create_pool(sizeof(Attack) * 256);
+	Attack_pool = memHelper->create_pool(sizeof(Attack) * 256 * 80);
 	Attack_head = memHelper->init_pool(Attack_pool, sizeof(Attack)*4);
 
 	soldier_pool = memHelper->create_pool(sizeof(Soldier) * 64);
@@ -35,7 +35,7 @@ memManager::memManager(MessageLog* _mLog, TaskBuffer* _tBuffer)
 	npc_pool = memHelper->create_pool(sizeof(NPC) * 64);
 	npc_head = memHelper->init_pool(npc_pool, sizeof(NPC)*2);
 
-	texture_pool = memHelper->create_pool(sizeof(Texture) * 128);
+	texture_pool = memHelper->create_pool(sizeof(Texture) * 300);
 	texture_head = memHelper->init_pool(texture_pool, sizeof(Texture));
 
 	oya_memory_pool = memHelper->create_pool(sizeof(Memory) * 40);

@@ -216,11 +216,20 @@ void Planner::add_milestone(Action* goal, Action* milestone) {
 void Planner::generate_milestones(Action* state, Action* goal) {
 	if (goal->preConditionsNeeded(evaluateHero, goal->getReceiver()).size() == 0)
 	{
-		if (goal->getUtility() > current_action_value)
+		int post_cond_utility = 0;
+		
+		for (auto post_cond : goal->succ_postconds) 
+		{
+			post_cond_utility += post_cond->get_utility(goal->getOwner(), goal->getReceiver());
+		}
+			
+		std::cout << post_cond_utility << std::endl;
+
+		if (post_cond_utility > current_action_value)
 		{
 			current_end_state = state;
 			current_action = goal;
-			current_action_value = goal->getUtility();
+			current_action_value = post_cond_utility;
 		}
 	}
 	else

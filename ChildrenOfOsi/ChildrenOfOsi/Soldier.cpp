@@ -116,11 +116,11 @@ void Soldier::meleeAttack()
   int d = getDirection();
   if(!swingLeft) {
     melee->setBaseDir(6);
-    melee->setPause(2);
+    melee->setPause(1);
   }
   else {
     melee->setBaseDir(4);
-    melee->setPause(9);
+    melee->setPause(8);
   }
   if(d == 8) {
     y = y - (melee->getHeight() / 1.2);
@@ -342,14 +342,14 @@ Vector2f Soldier::getEvadeRange(Soldier * _enemy)
 	float leftBound = _enemy->getX() - _enemy->getEvasionRadius();
 	evasionBound = new Rectangle(Vector2f((_enemy->getX() - _enemy->getEvasionRadius()), (_enemy->getY() - _enemy->getEvasionRadius())), 2 * _enemy->getEvasionRadius(), 2 * _enemy->getEvasionRadius());
 	if (targetIsWithinRange(evasionBound)) {
-		//cout << "COMBAT DESTINATION FROM EVADERANGE IS " << combatMoveDestination.getXloc() << ", " << combatMoveDestination.getYloc() << endl;
+		////cout << "COMBAT DESTINATION FROM EVADERANGE IS " << combatMoveDestination.getXloc() << ", " << combatMoveDestination.getYloc() << endl;
 		return combatMoveDestination;
 	}
 	float XCoord = rand() % (int)evasionBound->getWidth() + (int)evasionBound->getX();
 	float YCoord = rand() % (int)evasionBound->getHeight() + (int)evasionBound->getY();
 	combatMoveDestination = Vector2f(XCoord, YCoord);
 
-	//cout << "COMBAT DESTINATION FROM EVADERANGE IS " << combatMoveDestination.getXloc() << ", " << combatMoveDestination.getYloc() << endl;
+	////cout << "COMBAT DESTINATION FROM EVADERANGE IS " << combatMoveDestination.getXloc() << ", " << combatMoveDestination.getYloc() << endl;
 	return combatMoveDestination;
 }
 

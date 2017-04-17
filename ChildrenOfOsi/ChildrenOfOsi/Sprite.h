@@ -25,6 +25,7 @@ class Sprite
   bool isIdle() { return (this->idle == this->tex); }
 
   void setTexture(Texture *t);
+  void reset_texture();
   void setIdleTexture(Texture *t);
   void animate();
   //Texture *tex;

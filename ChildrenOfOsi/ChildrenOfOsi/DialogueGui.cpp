@@ -119,7 +119,7 @@ void DialogueGui::drawGui()
   // GameWindow::drawSprite(responseBox2->getX(), responseBox2->getY(), responseBox2->getWidth(), responseBox2->getHeight(), responseBox2->sprite);
 	std::string message = DialogueController::getMessage();
 	int j = 0;
-	GameWindow::createText(message, 266, 303, 550, 80, black);
+	GameWindow::createText(message, 266, 303, 500, 80, black);
 	std::vector<std::string> options;
 	if (DialogueController::getState() == 1) {
 		options = DialogueController::getOptions();
@@ -130,11 +130,21 @@ void DialogueGui::drawGui()
 		for (int i = 0; i <= 4; i++) {
 			if ( options.size() <= (DialogueController::scroll_control + i))
 				break;
+			std::string option_str = replace_str_char(options[DialogueController::scroll_control + i], "_", ' ');
+			if (option_str.at(0) == 'M' || option_str.back() == 'h')
+				option_str += " Oya";
+			else if (option_str.size() > 10) {
+				if (option_str.at(10) == 'S' || option_str.at(10) == 'A' || option_str.at(10) == 'N') {
+					if( option_str.back() != 'n')
+						option_str += " Oya";
+				}
+					
+			}
 			if (DialogueController::getSelect() == i) {
-				GameWindow::createText(options[DialogueController::scroll_control + i], 292, 390 + (18 * i), 544, 45, red);
+				GameWindow::createText(option_str, 292, 390 + (18 * i), 544, 45, red);
 			}
 			else {
-				GameWindow::createText(options[DialogueController::scroll_control + i], 292, 390 + (18 * i), 544, 45, black);
+				GameWindow::createText(option_str, 292, 390 + (18 * i), 544, 45, black);
 			}
 
 		}
@@ -149,13 +159,42 @@ void DialogueGui::drawGui()
 		for (int i = 0; i <= 4; i++) {
 			if (options.size() <= (DialogueController::scroll_control + i))
 				break;
+			std::string option_str = replace_str_char(options[DialogueController::scroll_control + i], "_", ' ');
+			if (option_str.size() > 9 && option_str.size() < 15) {
+				if (option_str.at(9) == 'M' || option_str.back() == 'h' && option_str.back() != 'n')
+					option_str += " Oya";
+			}
+			else if (option_str.size() > 15) {
+				if ((option_str.at(15) == 'S' || option_str.at(15) == 'A') && option_str.back() != 'n')
+					option_str += " Oya";
+			}
 			if (DialogueController::getSelect() == i) {
-			GameWindow::createText(options[DialogueController::scroll_control + i], 292, 390 + (18 * i), 544, 45, red);
+			GameWindow::createText(option_str, 292, 390 + (18 * i), 544, 45, red);
 			}
 			else {
-				GameWindow::createText(options[DialogueController::scroll_control + i], 292, 390 + (18 * i), 544, 45, black);
+				GameWindow::createText(option_str, 292, 390 + (18 * i), 544, 45, black);
 			}
 
 		}
 	}
+}
+
+std::string DialogueGui::remove_chars_from_string(string &str, char* charsToRemove) {
+	for (unsigned int i = 0; i < strlen(charsToRemove); ++i) {
+		str.erase(remove(str.begin(), str.end(), charsToRemove[i]), str.end());
+	}
+	return str;
+}
+
+std::string DialogueGui::replace_str_char(string str, const string& replace, char ch) {
+
+	// set our locator equal to the first appearance of any character in replace
+	size_t found = str.find_first_of(replace);
+
+	while (found != string::npos) { // While our position in the sting is in range.
+		str[found] = ch; // Change the character at position.
+		found = str.find_first_of(replace, found + 1); // Relocate again.
+	}
+
+	return str; // return our new string.
 }

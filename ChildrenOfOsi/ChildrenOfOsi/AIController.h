@@ -34,4 +34,5 @@ public:
 	bool quest_response(Hero* doer, Hero* asker);
 
 	Hero* pick_quest_doer(Action* quest);
+
 };

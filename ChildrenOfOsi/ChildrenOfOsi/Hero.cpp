@@ -17,6 +17,7 @@ Hero::Hero()
 			this->actionPool_map[i] = new ActionPool(this);
 		}
 	}
+	action_timer = 0; //initialized to one so the check doesn't go below 0
 }
 
 Hero::Hero(int _name, float x, float y, bool col) :SplSoldier(x, y, col)
@@ -41,6 +42,7 @@ Hero::Hero(int _name, float x, float y, bool col) :SplSoldier(x, y, col)
 			this->actionPool_map[i] = new ActionPool(this);
 		}
 	}
+	action_timer = 0; //initialized to one so the check doesn't go below 0
 }
 
 
@@ -66,6 +68,7 @@ Hero::Hero(int _name, Vector2f p_topLeft, float p_width, float p_height):SplSold
 		}
 	}
 	traits = new Personality();
+	action_timer = 0; //initialized to one so the check doesn't go below 0
 }
 
 Hero::~Hero()
@@ -81,6 +84,7 @@ Hero::~Hero()
 		if (i != name)
 			delete(rel[i]);
 	}
+	action_timer = 0; //initialized to one so the check doesn't go below 0
 }
 
 /*void Hero::addRelationship(int hero) {
@@ -145,13 +149,23 @@ void Hero::init_act_pools(ChildrenOfOsi* gameplay_func, TaskBuffer* tBuffer)
 }
 */
 
+int Hero::update_action_timer() {
+	if (action_timer > 0) {
+		action_timer--;
+	}
+	return action_timer;
+}
+
 void Hero::decrement_quest_time() {
-	for (auto it = quests.begin(); it != quests.end(); ++it) {
+	for (auto it = quests.begin(); it != quests.end();) {
 		int s=it->second;
 		if (s > 0)it->second = --s;
 		if (s == 0) {
-			it->first->apply_postconditions(false);
-			quests.erase(it);
+			//it->first->apply_postconditions(false);
+			it=quests.erase(it);
+		}
+		else {
+			++it;
 		}
 	}
 }

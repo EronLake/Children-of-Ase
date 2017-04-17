@@ -27,10 +27,7 @@ public:
 	int move_right(WorldObj* obj);
 //	int move_toward(WorldObj* obj);
 	int talk(WorldObj* obj);
-	int melee(WorldObj* obj);
-	int specialAttack(WorldObj* obj);
 	int attack(WorldObj* obj);
-	int meleeSwing(WorldObj* obj);
 	//void init_task_map();
     QuadTree* tree;
 	RiverObj* rivObj;
@@ -41,6 +38,9 @@ public:
 	float diagSpeed;
 	float diagXSpeed; 
 	float diagYSpeed;
+
+	WorldObj player_clone;
+	bool set_player_clone;
 
 private:
 	bool collision(WorldObj* recA, WorldObj* recB);

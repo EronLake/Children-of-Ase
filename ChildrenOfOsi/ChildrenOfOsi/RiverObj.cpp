@@ -26,9 +26,9 @@ void RiverObj::initialize_lines() {
 	}
 
 	for (int i = 0; i < lines.size(); i++) {
-		std::cout << lines[i].getP1().getX() << ", " <<  lines[i].getP1().getY() << ", " << lines[i].getP2().getX() << ", " << lines[i].getP2().getY() << std::endl;
+		//std:://cout << lines[i].getP1().getX() << ", " <<  lines[i].getP1().getY() << ", " << lines[i].getP2().getX() << ", " << lines[i].getP2().getY() << std::endl;
 	}
 
-	std::cout << "TOTAL SIZE OF THE LINES VECTOR IS " << lines.size() << std::endl;
+	//std:://cout << "TOTAL SIZE OF THE LINES VECTOR IS " << lines.size() << std::endl;
 	
 }

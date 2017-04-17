@@ -61,11 +61,11 @@ void ActionHelper::create_memory(Action* action, Hero* hero)
 	}
 }
 
-void ActionHelper::battle_sim(Action* battle)
+void ActionHelper::battle_sim(Action* battle, Party* p)
 {
 		//may we have offensive team attack first? Slightly randomized
 		Party* Attackers = battle->getDoer()->cur_party;
-		Party* Defenders = battle->getReceiver()->cur_party;
+		Party* Defenders = p;
 
 		vector<Soldier*> larger;
 		vector<Soldier*> smaller;
@@ -117,8 +117,10 @@ void ActionHelper::attack_helper(Soldier* attacker, Soldier* defender)
 	{
 		damage += attacker->attackTypes[a]->getDmg();
 	}
+	damage += attacker->melee->getDmg();
+	damage += rand() % (damage * 2) - damage;
 	//take average of all attacks
-	damage = damage / attacker->attackTypes.size();
+	damage = damage / attacker->attackTypes.size()+1;
 	//take off damage from the average of all their attacks AKA larger attack smaller
 	defender->addHealth(-damage);
 
@@ -127,12 +129,16 @@ void ActionHelper::attack_helper(Soldier* attacker, Soldier* defender)
 	{
 		//kill the soldier/incapacitate the Hero if they run out of health
 		defender->defeat();
+		if (defender->getType()<5) {
+			defender->setLoc(defender->getVillage()->get_village_location());
+			defender->getVillage()->barracks->addToParty(defender, false);
+		}
 	}
 }
 
 void ActionHelper::if_kill(Hero* Doer, Hero* Receiver)
 {
-	if (Doer->rel[Receiver->name]->getAffinity() < 20) {
+	if (Doer->rel[Receiver->name]->getAffinity() < 10) {
 		Receiver->kill();
 
 		//need to add the memory to memories

@@ -6,6 +6,7 @@
 #include "ChildrenOfOsi.h"
 #include "Containers.h"
 #include "Party.h"
+#include "Village.h"
 #include "ActionHelper.h"
 
 typedef void(*execute_ptr)(Action* cur_action);
@@ -19,6 +20,8 @@ public:
 	static void execute_train(Action* train);
 	static void execute_train_with(Action* train_with);
 	static void execute_fight(Action* fight);
+	static void execute_conquer(Action* conq);
+	static void execute_duel(Action* duel);
 	static void execute_form_alliance(Action* form_alliance);
 
 	//these are just for the release

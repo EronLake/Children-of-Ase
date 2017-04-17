@@ -54,7 +54,7 @@ void ActionConfig::set_action_obj(ChildrenOfOsi* gameplay_func, TaskBuffer* tBuf
 
 	Containers::action_table[name]->setMultipliers(a, k, h, p, r, e, g);
 
-	std::cout << std::to_string(Containers::action_table[name]->multipliers->getAggression()) << std::endl;
+	//std:://cout << std::to_string(Containers::action_table[name]->multipliers->getAggression()) << std::endl;
 
 	//for the add the action pointer to the current respective reiciver action pool
 	if (type == "micro") {

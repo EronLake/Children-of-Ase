@@ -6,6 +6,7 @@
 #include "ChildrenOfOsi.h"
 #include "Containers.h"
 #include "Party.h"
+#include "Village.h"
 
 class ActionHelper
 {
@@ -21,7 +22,7 @@ public:
 	//Create memory
 	static void create_memory(Action*, Hero* hero);
 
-	static void battle_sim(Action* train_with);
+	static void battle_sim(Action* train_with, Party* p);
 	static void attack_helper(Soldier* attacker, Soldier* defender);
 	static void if_kill(Hero* Doer, Hero* Receiver);
 
