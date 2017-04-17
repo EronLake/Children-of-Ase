@@ -32,7 +32,7 @@ public:
 	static WorldObj* getOther();
 	static int getState();
 	static void exitDialogue();
-	static void setAI(AIController* ai_c) { ai = ai_c; }
+//	static void setAI(AIController* ai_c) { ai = ai_c; }
 	static void set_scroll_control(int scroll_int);
 	
 	static void offerQuest_hack_();
@@ -58,7 +58,7 @@ private:
 	//3 is npc conversation point
 	//4 is npc response
 	static DialogueHelper dialogue;
-	static AIController* ai;
+//	static AIController* ai;
 	static std::vector<std::vector<dialogue_point>> options;
 	static std::vector<dialogue_point> replyOptions;
 	static std::string message;

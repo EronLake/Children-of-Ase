@@ -23,7 +23,7 @@ int DialogueController::select = 0;
 std::string DialogueController::replyString;
 bool DialogueController::accepted_quest = false;
 bool DialogueController::prompted_quest = false;
-AIController* DialogueController::ai = nullptr;
+//AIController* DialogueController::ai = nullptr;
 Action* DialogueController::quest = nullptr;
 
 int DialogueController::scroll_control = 0;
@@ -103,10 +103,11 @@ void DialogueController::PlayerResponse()
 		if (select == 0)   // Player is accepting the quest
 		{
 			player->quest = quest;
-			Planner* planner = ai->hero_planners[CheckClass::isHero(other)->name];
+			Planner* planner = AIController::get_plan(CheckClass::isHero(other)->name);
 			//planner->get_current_action()->executed = true;
 			prompted_quest = false;
 			accepted_quest = true;
+			player->add_quest(planner->get_current_action(), 2);
 		}
 		else             // Player is denying the quest
 		{

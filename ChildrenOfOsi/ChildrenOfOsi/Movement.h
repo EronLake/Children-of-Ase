@@ -8,6 +8,7 @@
 #include "DialogueController.h"
 #include "CombatController.h"
 #include "RiverObj.h"
+#include "AIController.h"
 
 class PhysicsManager;
 

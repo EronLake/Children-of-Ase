@@ -46,6 +46,8 @@ public:
 
 	bool give_as_quest;
 
+	vector<Action*> quests_given;
+
 private:
 	Hero* evaluateHero;
 

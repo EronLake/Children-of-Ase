@@ -42,7 +42,7 @@ public:
 	void setPersonality(int a, int k, int h, int p, int r, int e, int g);
 
 	void add_quest(Action* a, int time) { quests[a]=time; };
-	void remove_quest(Action* a) { quests.erase(quests.find(a)); };
+	void remove_quest(Action* a) { quests.erase(a); };
 
     vector<pair<Action*,int>> get_quests();
 

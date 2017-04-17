@@ -1,0 +1,4874 @@
+[33mcommit c02c97683ecbc164c25db5994662142de188adad[m
+Author: Justin Patrick Farris <jpfarris@crm.ucsc.edu>
+Date:   Wed Apr 12 21:57:24 2017 -0700
+
+    Quest-gving AI helper functions complete
+
+[33mcommit 57e13b175cba5deaa19f147f25593edbd5dbcec8[m
+Merge: 3004bd4 201a44c
+Author: Justin Patrick Farris <jpfarris@crm.ucsc.edu>
+Date:   Wed Apr 12 13:12:40 2017 -0700
+
+    Merge branch 'Alpha1' of https://github.com/EronLake/Children-of-Osi into Alpha1
+
+[33mcommit 3004bd438973edabf8c973f3ab61853526ce8e32[m
+Author: Justin Patrick Farris <jpfarris@crm.ucsc.edu>
+Date:   Wed Apr 12 13:12:35 2017 -0700
+
+    Quest-giving AI updates
+
+[33mcommit 201a44cd36566a46c4cdece10d115d1f6ab1b130[m
+Author: Alexander Ou <aou4@crm.ucsc.edu>
+Date:   Wed Apr 12 12:24:30 2017 -0700
+
+    accurate pts, improved collision, still buggy
+
+[33mcommit 31002d9a8bc6f5aefa59e4bf2fed0eca521f56c2[m
+Author: Alexander <alexander.ou@gmail.com>
+Date:   Wed Apr 12 02:10:37 2017 -0700
+
+    line tool done, collision buggy
+
+[33mcommit b35150afcbe382e8a7fefda9b4514c15611fcd1f[m
+Merge: a3436c2 c67618d
+Author: Daniel Hildebrandt <daniel.s.hildebrandt+git@gmail.com>
+Date:   Tue Apr 11 19:59:14 2017 -0700
+
+    Manual merge resolution for GameWindow.cpp.
+
+[33mcommit a3436c2319bed2436e71d1fc2e200aa9ff7c4090[m
+Author: Daniel Hildebrandt <daniel.s.hildebrandt+git@gmail.com>
+Date:   Tue Apr 11 19:28:02 2017 -0700
+
+    Trivial cleanup.
+
+[33mcommit 0f69e3e13770966d8ccb71a5616a0f307d3d1a72[m
+Author: Daniel Hildebrandt <daniel.s.hildebrandt+git@gmail.com>
+Date:   Tue Apr 11 19:18:00 2017 -0700
+
+    Non-fullscreen window is now resizeable. Cursor re-enabled by default, tied to macro in common.h.
+
+[33mcommit c89e66cfe0bfc4d10f55dad9fb56d2debc183d54[m
+Author: Justin Patrick Farris <jpfarris@crm.ucsc.edu>
+Date:   Tue Apr 11 18:05:44 2017 -0700
+
+    Quest-giving AI
+
+[33mcommit c67618d00d1db9b79e88b081d1f4c6dac375ea8b[m
+Author: acalba93 <acalba@ucsc.edu>
+Date:   Tue Apr 11 17:48:11 2017 -0700
+
+    Some Strings to Ints
+
+[33mcommit 454f0d6a99a3ea3177504ff9a1b7bc69ca877d14[m
+Author: acalba93 <acalba@ucsc.edu>
+Date:   Tue Apr 11 15:01:53 2017 -0700
+
+    optional conditions
+
+[33mcommit 5f4e82ea459c4f94c11b21b96288947380b46e0a[m
+Author: U-DESKTOP-IJO7N67\BlackMagicianDTT <dtoney@ucsc.edu>
+Date:   Tue Apr 11 13:49:08 2017 -0700
+
+    commented out planner->get_current_action()->executed = true; on line 72 of DialogueController.cpp because it was giving a nullptr exception upon accepting quest and a write access violation upon denying.
+
+[33mcommit 454dc86d22ed0639d4ac34248c40cb6f725b18ce[m
+Merge: fd13b0b d877f9d
+Author: U-DESKTOP-IJO7N67\BlackMagicianDTT <dtoney@ucsc.edu>
+Date:   Tue Apr 11 13:35:19 2017 -0700
+
+    Added relationship values to conversation points.
+
+[33mcommit fd13b0b80fc769f9976bd6639550df300a7c1c78[m
+Author: U-DESKTOP-IJO7N67\BlackMagicianDTT <dtoney@ucsc.edu>
+Date:   Tue Apr 11 13:28:01 2017 -0700
+
+    Added relationship values to conversation points.
+
+[33mcommit d877f9d9b4b63e86b011eac71bdf41e7b8043e8a[m
+Author: acalba93 <acalba@ucsc.edu>
+Date:   Tue Apr 11 12:42:38 2017 -0700
+
+    time for quests
+
+[33mcommit 39a560ed4141811acb1c0b10a433e93cc683b602[m
+Author: acalba93 <acalba@ucsc.edu>
+Date:   Tue Apr 11 10:45:55 2017 -0700
+
+    active quests
+
+[33mcommit 8fb1b8277c0be88240cb6929d207f5f1732a3662[m
+Merge: 775540f 080b0ec
+Author: Daniel Hildebrandt <daniel.s.hildebrandt+git@gmail.com>
+Date:   Mon Apr 10 18:18:02 2017 -0700
+
+    Merge conflict resolution in CombatController.cpp.
+
+[33mcommit 775540f792ff077c615072d6437efde6e0526b81[m
+Author: Daniel Hildebrandt <daniel.s.hildebrandt+git@gmail.com>
+Date:   Mon Apr 10 18:08:53 2017 -0700
+
+    Game is somewhat larger when windowed, and mouse is now hidden.
+
+[33mcommit 080b0ecc50f7c2399a4e132d25d9c62fd0decf49[m
+Author: acalba93 <acalba@ucsc.edu>
+Date:   Mon Apr 10 15:50:39 2017 -0700
+
+    fixed action pool stuff
+
+[33mcommit 2af59f607f2845904b49f94b76ab73d42cb61cd8[m
+Author: EronLake <ejlake@ucsc.edu>
+Date:   Mon Apr 10 15:34:24 2017 -0700
+
+    no changes to merge
+
+[33mcommit adbf0e02bc57f37c6db565e72ca3efff6866a531[m
+Merge: c8490c0 1b7d324
+Author: EronLake <ejlake@ucsc.edu>
+Date:   Mon Apr 10 15:31:55 2017 -0700
+
+    Merge branch 'Alpha1' of github.com:EronLake/Children-of-Ase into Alpha1
+
+[33mcommit c8490c031884688ffbf6ba04b42d6b0689945271[m
+Author: EronLake <ejlake@ucsc.edu>
+Date:   Mon Apr 10 15:31:33 2017 -0700
+
+    made some changes to action stuff
+
+[33mcommit 1b7d324140ab1aad3c2074052d692132cc9cad48[m
+Author: U-DESKTOP-IJO7N67\BlackMagicianDTT <dtoney@ucsc.edu>
+Date:   Mon Apr 10 14:55:28 2017 -0700
+
+    got rid of disable = true and put in count = 10.
+
+[33mcommit 5ca1059b0d218362e960a6a2ed34593ec7d78f54[m
+Merge: 9ef3595 a43b85b
+Author: Zirconia <dtoney@ucsc.edu>
+Date:   Mon Apr 10 14:33:13 2017 -0700
+
+    Added more dialog options, added scroll feature, refactored dialog helper, dialog controller and dialog related json files. Added tags.
+
+[33mcommit 9ef359527314531855ac5753773c9da180263c9a[m
+Author: U-DESKTOP-IJO7N67\BlackMagicianDTT <dtoney@ucsc.edu>
+Date:   Mon Apr 10 14:12:50 2017 -0700
+
+    Added more dialog options for player, added scroll feature, added tags, refactored dialog helper, controller, and dialog related json files.
+
+[33mcommit a43b85b11ecf8c7fc431d21a7a77a1d685461849[m
+Merge: bcfd7f1 da9b855
+Author: EronLake <ejlake@ucsc.edu>
+Date:   Mon Apr 10 14:06:22 2017 -0700
+
+    Merge branch 'Alpha1' of github.com:EronLake/Children-of-Ase into Alpha1
+
+[33mcommit bcfd7f1bc45416d3e24d8b72a391acc569a84277[m
+Author: EronLake <ejlake@ucsc.edu>
+Date:   Mon Apr 10 14:06:05 2017 -0700
+
+    fixed postcondition error
+
+[33mcommit 0bd658155b7f91bce40d371350a5ffe6466144c2[m
+Author: Daniel Hildebrandt <daniel.s.hildebrandt+git@gmail.com>
+Date:   Mon Apr 10 13:13:58 2017 -0700
+
+    No longer crashes when the last member of a party is slain. NPC's continue fighting with dead foes, even though they're not being rendered.
+
+[33mcommit da9b855ed6ca0dcb9d03e3ddc01a24489627c9ff[m
+Merge: e6dc2d6 2c2894f
+Author: acalba93 <acalba@ucsc.edu>
+Date:   Mon Apr 10 13:07:17 2017 -0700
+
+    Merge remote-tracking branch 'origin/Alpha1' into Alpha1
+    
+    # Conflicts:
+    #       ChildrenOfOsi/ChildrenOfOsi/CombatController.cpp
+
+[33mcommit e6dc2d66a0eab637d01120585d6b6dc7ca011366[m
+Author: acalba93 <acalba@ucsc.edu>
+Date:   Mon Apr 10 13:02:25 2017 -0700
+
+    stop crashing 2
+
+[33mcommit 96e5f49c8fbeadcbe168a00bd6d07dd4a29ec5e7[m
+Author: acalba93 <acalba@ucsc.edu>
+Date:   Mon Apr 10 13:02:02 2017 -0700
+
+    stop crashing
+
+[33mcommit e240d88fc7f97fe3714d90de674566ceb3db84b7[m
+Merge: 838c277 2c2894f
+Author: Daniel Hildebrandt <daniel.s.hildebrandt+git@gmail.com>
+Date:   Mon Apr 10 12:48:51 2017 -0700
+
+    Merge branch 'Alpha1' of https://github.com/EronLake/Children-of-Osi into Alpha1
+
+[33mcommit 2c2894faafd64c6d7b4fab1cf4392f23099b72e9[m
+Author: Justin Patrick Farris <jpfarris@crm.ucsc.edu>
+Date:   Sun Apr 9 22:49:57 2017 -0700
+
+    fixed runtime error (actions load properly)
+
+[33mcommit e5fba65af26e4b7c5dc7e79c1917256db6192960[m
+Merge: e2ceef8 9ae6ec6
+Author: Justin Patrick Farris <jpfarris@crm.ucsc.edu>
+Date:   Sun Apr 9 22:21:28 2017 -0700
+
+    Merge hero.cpp
+
+[33mcommit e2ceef80abcfce9df44af4de87893e4386021a1d[m
+Author: Justin Patrick Farris <jpfarris@crm.ucsc.edu>
+Date:   Sun Apr 9 22:20:08 2017 -0700
+
+    Added end_state actions and refined some memory usage
+
+[33mcommit 9ae6ec66e59c63e7a45a89d2fc2f4d6946b9c91d[m
+Merge: 4426ae6 58064d4
+Author: EronLake <ejlake@ucsc.edu>
+Date:   Sun Apr 9 22:14:26 2017 -0700
+
+    made edits to the actionConfig function and action pool initialization
+
+[33mcommit 4426ae6eaea663f135a6168b4752aa79da2317c1[m
+Author: EronLake <ejlake@ucsc.edu>
+Date:   Sun Apr 9 20:59:55 2017 -0700
+
+    finished the map editor improvements
+
+[33mcommit 58064d41dc06a505f9bf4055fcf67b94a6abfaef[m
+Author: acalba93 <acalba@ucsc.edu>
+Date:   Sun Apr 9 19:35:12 2017 -0700
+
+    renamed things
+
+[33mcommit 6d83b35f6c28b286ba0e2f216c3de9eaca471293[m
+Merge: da83c5d 20ad01e
+Author: Justin Patrick Farris <jpfarris@crm.ucsc.edu>
+Date:   Sun Apr 9 19:09:52 2017 -0700
+
+    Merge branch 'Alpha1' of https://github.com/EronLake/Children-of-Osi.git
+
+[33mcommit da83c5d6d1b02fb3cbdaf24af686b95a84d0c219[m
+Merge: 4d570f4 4011c67
+Author: Justin Patrick Farris <jpfarris@crm.ucsc.edu>
+Date:   Sun Apr 9 19:09:43 2017 -0700
+
+    Merge combat controller
+
+[33mcommit 20ad01e27ffe05435b1d4f7cddcee246ab7db341[m
+Author: acalba93 <acalba@ucsc.edu>
+Date:   Sun Apr 9 19:07:51 2017 -0700
+
+    Action Pool w/ conditions
+
+[33mcommit 4d570f425e5d5aae548983164d197a3c6253f549[m
+Author: Justin Patrick Farris <jpfarris@crm.ucsc.edu>
+Date:   Sun Apr 9 19:06:20 2017 -0700
+
+    Implement end_state selection algorithm
+
+[33mcommit 4011c67fda1a87c3695307f21fb1547fa69d38ff[m
+Author: acalba93 <acalba@ucsc.edu>
+Date:   Sat Apr 8 19:57:43 2017 -0700
+
+    fixed party stuff
+
+[33mcommit abeaca3eb9d393d99e9d14359480fb9a227c2c3a[m
+Merge: 1ebd86c 1a1bf3d
+Author: ichristn <ichristn@BAYONETTA>
+Date:   Sat Apr 8 19:17:27 2017 -0700
+
+    Merge branch 'Alpha1' of https://github.com/EronLake/Children-of-Ase into Alpha1
+    
+    Need to add multithreading to Main
+
+[33mcommit 1ebd86c6ae8c3a3f74a2543011c8e07af2a959d2[m
+Author: ichristn <ichristn@BAYONETTA>
+Date:   Sat Apr 8 19:16:29 2017 -0700
+
+    Got Multithreading to properly work. It might have some unforseen issues
+    since I have not tested it too much.
+
+[33mcommit 838c2775b6ac1661ba7e2ea74c4de6984e373a24[m
+Merge: d8cca9b 1a1bf3d
+Author: Daniel Hildebrandt <daniel.s.hildebrandt+git@gmail.com>
+Date:   Sat Apr 8 17:21:20 2017 -0700
+
+    Merge branch 'Alpha1' of https://github.com/EronLake/Children-of-Osi into Alpha1
+
+[33mcommit 1a1bf3d1d74a2088f04d0155fd14da8f24f1283f[m
+Author: acalba93 <acalba@ucsc.edu>
+Date:   Sat Apr 8 17:19:56 2017 -0700
+
+    party bunching less
+
+[33mcommit d8cca9b501988609aec9567f7cddcc5bdcb2cb46[m
+Author: Daniel Hildebrandt <daniel.s.hildebrandt+git@gmail.com>
+Date:   Sat Apr 8 17:06:46 2017 -0700
+
+    Combat and death work.
+
+[33mcommit a7945d412762d6f21652a5cd13b1540ffcf4b369[m
+Author: Daniel Hildebrandt <daniel.s.hildebrandt+git@gmail.com>
+Date:   Sat Apr 8 14:57:46 2017 -0700
+
+    Window title now uses proper accents.
+
+[33mcommit 6397343daa4b09101541fc1b1528f94112be262b[m
+Merge: ee46c4c 01576eb
+Author: Daniel Hildebrandt <daniel.s.hildebrandt+git@gmail.com>
+Date:   Fri Apr 7 13:22:36 2017 -0700
+
+    Merge branch 'Alpha1' of https://github.com/EronLake/Children-of-Osi into Alpha1
+
+[33mcommit ee46c4cc7f18821fd1073f40ce3ca8a22914edee[m
+Author: Daniel Hildebrandt <daniel.s.hildebrandt+git@gmail.com>
+Date:   Fri Apr 7 13:22:01 2017 -0700
+
+    Fullscreen is now linked to a macro in common.h, "START_FULLSCREEN". Value set to false for debugging.
+
+[33mcommit 4a8ef00d84c0099ad1b0251386a0e31bd2f3d202[m
+Author: Daniel Hildebrandt <daniel.s.hildebrandt+git@gmail.com>
+Date:   Fri Apr 7 01:27:08 2017 -0700
+
+    Changed the window title to "Children of Ase". Fullscreen is now confirmed as working.
+
+[33mcommit 01576ebb4a8a89a0a04890c26258a832a56028b2[m
+Author: acalba93 <acalba@ucsc.edu>
+Date:   Thu Apr 6 21:25:47 2017 -0700
+
+    less bunching
+
+[33mcommit 429e658b07fb332a92aa1838f47deee9010493bc[m
+Merge: 01f0a14 9ae4af6
+Author: Justin Patrick Farris <jpfarris@crm.ucsc.edu>
+Date:   Thu Apr 6 20:07:37 2017 -0700
+
+    Merge branch 'Alpha1' of https://github.com/EronLake/Children-of-Osi into Alpha1
+
+[33mcommit 01f0a143796811e53229e65abbb7a419a7c55439[m
+Author: Justin Patrick Farris <jpfarris@crm.ucsc.edu>
+Date:   Thu Apr 6 20:07:34 2017 -0700
+
+    Begin fixing soldier twitches
+
+[33mcommit 9ae4af6da456bbc45801a94af5a86ec9d97ed16f[m
+Author: acalba93 <acalba@ucsc.edu>
+Date:   Thu Apr 6 19:51:59 2017 -0700
+
+    For Justin From Github GUI
+
+[33mcommit b2f644b943ded8cb4e3522facffdac2938c9d6b0[m
+Author: acalba93 <acalba@ucsc.edu>
+Date:   Thu Apr 6 17:00:58 2017 -0700
+
+    stuff
+
+[33mcommit fa34d0f885aad6260d585b21edb772608e786ad3[m
+Author: acalba93 <acalba@ucsc.edu>
+Date:   Thu Apr 6 13:43:38 2017 -0700
+
+    party stuff
+
+[33mcommit db742653341599a220f308be18599b55d81afc69[m
+Author: acalba93 <acalba@ucsc.edu>
+Date:   Thu Apr 6 06:45:03 2017 -0700
+
+    More party features
+
+[33mcommit 5fefaaf06d701b465c2500fefd1bc4ceb790818e[m
+Author: acalba93 <acalba@ucsc.edu>
+Date:   Thu Apr 6 05:46:41 2017 -0700
+
+    lots of derpy party features
+
+[33mcommit 421865af8c3408ac920ac3ea4dc9c2c0864dfded[m
+Author: acalba93 <acalba@ucsc.edu>
+Date:   Wed Apr 5 17:51:14 2017 -0700
+
+    started party control
+
+[33mcommit 8d24fb930f5900099f578e97f219e2ee53e1dbde[m
+Author: ichristn <ichristn@BAYONETTA>
+Date:   Wed Apr 5 16:16:44 2017 -0700
+
+    Added my own version of multithreading to test if it would fix the rendering issues. It did not, but compiles in 22 seconds. It only screws up drawing sprites for spritesheets.
+
+[33mcommit 9b506d8708d80be8daf6902850a63aff969f5deb[m
+Author: acalba93 <acalba@ucsc.edu>
+Date:   Wed Apr 5 13:54:55 2017 -0700
+
+    here you go Ian
+
+[33mcommit f57060f2f6ed21320ba43c82d42cbc77e6d4919c[m
+Author: acalba93 <acalba@ucsc.edu>
+Date:   Wed Apr 5 09:55:06 2017 -0700
+
+    nvm
+
+[33mcommit de16b4c87a20f9e1cf08d9af989a6f6c05f47840[m
+Author: acalba93 <acalba@ucsc.edu>
+Date:   Wed Apr 5 09:48:04 2017 -0700
+
+    red things DONT REVERT
+
+[33mcommit f00fc15311cdcc1e18b033a7f24cd18c53e30d7c[m
+Author: acalba93 <acalba@ucsc.edu>
+Date:   Wed Apr 5 09:18:45 2017 -0700
+
+    less stupid texture id's
+
+[33mcommit 56f3db2869a9a2195d373dec7478110cb902e9e5[m
+Author: Daniel Hildebrandt <daniel.s.hildebrandt+git@gmail.com>
+Date:   Wed Apr 5 02:38:30 2017 -0700
+
+    Moved GameWindow into the global namespace.
+
+[33mcommit bb0c104e8fd16f36535dec344ed98e4a871ef30a[m
+Author: Alexander <alexander.ou@gmail.com>
+Date:   Wed Apr 5 01:26:33 2017 -0700
+
+    tried fixing texture loading. still showing gradient red boxes
+
+[33mcommit 05a905e02ffd0630204b3672c4ebff713476fa4c[m
+Merge: 33d7a02 57c1e4f
+Author: Andrew Patrick Barr <anpbarr@crm.ucsc.edu>
+Date:   Tue Apr 4 21:32:58 2017 -0700
+
+    Merge branch 'Alpha1' of https://github.com/EronLake/Children-of-Osi into Alpha1
+
+[33mcommit 33d7a02e24f402d647bbc40c63b323e8ee9be665[m
+Author: Andrew Patrick Barr <anpbarr@crm.ucsc.edu>
+Date:   Tue Apr 4 21:32:49 2017 -0700
+
+    Fixed linker errors and stdfx errors in release mode
+
+[33mcommit 57c1e4f90d2a5bd2242ba791691871e21232214b[m
+Author: acalba93 <acalba@ucsc.edu>
+Date:   Tue Apr 4 20:24:51 2017 -0700
+
+    friendly fire
+
+[33mcommit aad884d6c25c2795b85bbc3bbc78594a9a44d5b3[m
+Author: acalba93 <acalba@ucsc.edu>
+Date:   Tue Apr 4 17:21:57 2017 -0700
+
+    better combat and draws shango in center
+
+[33mcommit 73503e8346082e7d8dd730422f7fd4aee840e61a[m
+Author: acalba93 <acalba@ucsc.edu>
+Date:   Tue Apr 4 09:54:31 2017 -0700
+
+    bunch of stuff that doesn't work but still compiles and runs
+
+[33mcommit 8050f0599d2772ad64af86439327361e9c534cd4[m
+Author: acalba93 <acalba@ucsc.edu>
+Date:   Tue Apr 4 07:04:11 2017 -0700
+
+    filters are back
+
+[33mcommit a49ee7c22ceda54e1c2b47e54dbd53065e930d99[m
+Author: Alexander <alexander.ou@gmail.com>
+Date:   Mon Apr 3 23:49:06 2017 -0700
+
+    added multithreading for setting texture files. commented due to bad texture loading
+
+[33mcommit bfa2c94bfefa3c0c957c1646073a7e9b3f370232[m
+Author: Justin Patrick Farris <jpfarris@crm.ucsc.edu>
+Date:   Mon Apr 3 19:14:04 2017 -0700
+
+    Children of Ase, Version 1.0.0
+
+[33mcommit b53046b5d34f804424d351a48a04b7fa76b4dc18[m
+Merge: 815ba6b 6cbf83e
+Author: Justin Patrick Farris <jpfarris@crm.ucsc.edu>
+Date:   Mon Apr 3 19:08:40 2017 -0700
+
+    Merge objconfig changes
+
+[33mcommit 815ba6b4cd0e4f76c6d838fcd7fa7a6499a978e1[m
+Author: Justin Patrick Farris <jpfarris@crm.ucsc.edu>
+Date:   Mon Apr 3 19:07:28 2017 -0700
+
+    Demo Day plus some tweaks
+
+[33mcommit 6cbf83e464bda995f56c4b80925ab3fa8dffe734[m
+Author: U-DESKTOP-IJO7N67\BlackMagicianDTT <dtoney@ucsc.edu>
+Date:   Sun Apr 2 19:38:39 2017 -0700
+
+    Cleaned up dialogue debug code. Made it so Shango's phrases are not chosen randomly. Worked more on Oshosi dialogue.
+
+[33mcommit 45f1c396b46d785efba2b0597283c309141093c6[m
+Author: Justin Patrick Farris <jpfarris@crm.ucsc.edu>
+Date:   Mon Mar 20 13:44:37 2017 -0700
+
+    version for demo
+
+[33mcommit 9c753fb61ccfe956de9e9ef728fbd89d92321da8[m
+Merge: 4275aee c0aeb13
+Author: Justin Patrick Farris <jpfarris@crm.ucsc.edu>
+Date:   Mon Mar 20 12:44:31 2017 -0700
+
+    Merge branch 'Sprint2' of https://github.com/EronLake/Children-of-Osi into Sprint2
+
+[33mcommit 4275aee0f246e84a420f64485e5a5aeea45f069c[m
+Author: Justin Patrick Farris <jpfarris@crm.ucsc.edu>
+Date:   Mon Mar 20 12:44:23 2017 -0700
+
+    Fix my life please
+
+[33mcommit c0aeb138a143c4d319ac65d918eff3f675e829a0[m
+Merge: c1563a7 e1461d8
+Author: EronLake <ejlake@ucsc.edu>
+Date:   Mon Mar 20 12:34:46 2017 -0700
+
+    added HUD
+
+[33mcommit e1461d8821e83fd393bf2e8f7e6074eecfe69c3c[m
+Merge: b13e945 5d067a8
+Author: Spencer Smoot <spencer@spencersmoot.com>
+Date:   Mon Mar 20 12:30:24 2017 -0700
+
+    fixed conflicts
+
+[33mcommit c1563a719599c5e4d5e748862ccbbc1e69c07435[m
+Merge: daea987 3d45a39
+Author: EronLake <ejlake@ucsc.edu>
+Date:   Mon Mar 20 12:29:12 2017 -0700
+
+    added some shrubs
+
+[33mcommit b13e945c99c8a8a2905cabf119d9bd468320a7f2[m
+Merge: 3506c5a 9f99fce
+Author: Spencer Smoot <spencer@spencersmoot.com>
+Date:   Mon Mar 20 12:26:37 2017 -0700
+
+    fixed merge conflicts
+
+[33mcommit 5d067a8ebf93c5a91e69f5202e65b602f0a0aa8b[m
+Author: Andrew <anpbarr@ucsc.edu>
+Date:   Mon Mar 20 12:22:03 2017 -0700
+
+    merge
+
+[33mcommit dc1b1ce3c086c1d7f16ca2feb6a29a2840350f18[m
+Merge: 652bfea 899b5db
+Author: Andrew <anpbarr@ucsc.edu>
+Date:   Mon Mar 20 12:19:11 2017 -0700
+
+    Merge branch 'Sprint2' of https://github.com/EronLake/Children-of-Osi into Sprint2
+
+[33mcommit 899b5dbe2e3c1533bf816d0aa0d548d2a8a2fac0[m
+Merge: 1e8bee3 9f99fce
+Author: Justin Patrick Farris <jpfarris@crm.ucsc.edu>
+Date:   Mon Mar 20 12:18:16 2017 -0700
+
+    Merge branch 'Sprint2' of https://github.com/EronLake/Children-of-Osi into Sprint2
+
+[33mcommit 3506c5a01c771022d87d81e2629ce4628cac0d65[m
+Author: Spencer Smoot <spencer@spencersmoot.com>
+Date:   Mon Mar 20 12:18:14 2017 -0700
+
+    set offsets
+
+[33mcommit 1e8bee32dc9429046823cd5e605e8ed8120ab386[m
+Author: Justin Patrick Farris <jpfarris@crm.ucsc.edu>
+Date:   Mon Mar 20 12:17:43 2017 -0700
+
+    Corrected everyone's locations and made boxes blank
+
+[33mcommit 652bfea61d3c1608d755a33f3e8c13a29351f659[m
+Merge: 1cfc3b7 9f99fce
+Author: Andrew <anpbarr@ucsc.edu>
+Date:   Mon Mar 20 12:16:06 2017 -0700
+
+    Merge branch 'Sprint2' of https://github.com/EronLake/Children-of-Osi into Sprint2
+
+[33mcommit 7bde75924219fa1979288d48236e82156253dc9e[m
+Merge: 5dbcfc5 36252a9
+Author: Spencer Smoot <spencer@spencersmoot.com>
+Date:   Mon Mar 20 12:15:52 2017 -0700
+
+    created oasis village
+
+[33mcommit 1cfc3b73d2dc6b215490d9a7ec556140814ab6df[m
+Author: Andrew <anpbarr@ucsc.edu>
+Date:   Mon Mar 20 12:15:39 2017 -0700
+
+    fixed multiple rendering
+
+[33mcommit 9f99fce30e1fcb6548ae3cab2bf6efea8b653c6f[m
+Author: acalba93 <acalba@ucsc.edu>
+Date:   Mon Mar 20 12:03:48 2017 -0700
+
+    yemoja
+
+[33mcommit b1916ca804bebb9b006125a4075a9a64345813f6[m
+Author: acalba93 <acalba@ucsc.edu>
+Date:   Mon Mar 20 11:52:06 2017 -0700
+
+    yemoja sprites
+
+[33mcommit daea987c493c49c4f980863e3dedbc5209f80c53[m
+Author: EronLake <ejlake@ucsc.edu>
+Date:   Mon Mar 20 11:49:15 2017 -0700
+
+    added health bar
+
+[33mcommit 3d45a39be873f23146788bb74897e8bfa7aab4f0[m
+Merge: c2341a1 01ce905
+Author: Justin Patrick Farris <jpfarris@crm.ucsc.edu>
+Date:   Mon Mar 20 11:48:15 2017 -0700
+
+    Merge branch 'Sprint2' of https://github.com/EronLake/Children-of-Osi into Sprint2
+
+[33mcommit c2341a11c7c0727054a437682a864a4091c3e879[m
+Author: Justin Patrick Farris <jpfarris@crm.ucsc.edu>
+Date:   Mon Mar 20 11:48:12 2017 -0700
+
+    fixing the broken dialogue
+
+[33mcommit 01ce9053d638941fc744036b96a81f911ddcd3ac[m
+Merge: 0968842 53e3310
+Author: acalba93 <acalba@ucsc.edu>
+Date:   Mon Mar 20 11:11:13 2017 -0700
+
+    fixed merge
+
+[33mcommit 0968842112865e62b6fe5612cd710cf4461f23c7[m
+Author: acalba93 <acalba@ucsc.edu>
+Date:   Mon Mar 20 11:03:53 2017 -0700
+
+    slash
+
+[33mcommit 53e33104d01b2fefd82e9f39664bab5562d4e704[m
+Author: Justin Patrick Farris <jpfarris@crm.ucsc.edu>
+Date:   Mon Mar 20 10:46:44 2017 -0700
+
+    Fixed the bad merge
+
+[33mcommit 3ee791453ec65c988af019de5ca660d9a8774c13[m
+Merge: 9cd86f8 36252a9
+Author: Justin Patrick Farris <jpfarris@crm.ucsc.edu>
+Date:   Mon Mar 20 10:39:48 2017 -0700
+
+    One merge away from hurting someone.
+
+[33mcommit 9cd86f8d525bed7f9f5d39781ef1b1f6ad1b407c[m
+Author: Justin Patrick Farris <jpfarris@crm.ucsc.edu>
+Date:   Mon Mar 20 10:36:08 2017 -0700
+
+    Finish this merge for real now
+
+[33mcommit 1bcf1b4520b2bd1d439a628dfdda9b00ab1963c6[m
+Merge: e4dfda6 e3708ce
+Author: Justin Patrick Farris <jpfarris@crm.ucsc.edu>
+Date:   Mon Mar 20 10:34:29 2017 -0700
+
+    Mergin dat dialog
+
+[33mcommit 5dbcfc597f73f71e596d64266400c4f3dc73c522[m
+Author: Spencer Smoot <spencer@spencersmoot.com>
+Date:   Mon Mar 20 10:32:49 2017 -0700
+
+    Git add all
+
+[33mcommit bd41463291441e8ba51e69937a67a3d6c4aebf34[m
+Author: Spencer Smoot <spencer@spencersmoot.com>
+Date:   Mon Mar 20 10:27:59 2017 -0700
+
+    changes in the jungle
+
+[33mcommit 36252a90ccffdcd10fa9549a95722c79edd8515d[m
+Merge: 38c686a e3708ce
+Author: Alexander <alexander.ou@gmail.com>
+Date:   Mon Mar 20 10:27:35 2017 -0700
+
+    Merge branch 'Sprint2' of github.com:EronLake/Children-of-Osi into Sprint2
+
+[33mcommit 38c686ab4a9e7c68c446f0b651d4f6ca200e3622[m
+Author: Alexander <alexander.ou@gmail.com>
+Date:   Mon Mar 20 10:27:29 2017 -0700
+
+    small fix to qt
+
+[33mcommit e3708cee95a79113eb82889c928b67f29b25cba2[m
+Merge: 1df7691 b1db688
+Author: Zirconia <dtoney@ucsc.edu>
+Date:   Mon Mar 20 10:20:22 2017 -0700
+
+    Merge branch 'Sprint2' of https://github.com/EronLake/Children-of-Osi.git
+
+[33mcommit 1df769157836a0ee8db7d65aca8d975999014bf8[m
+Merge: 36f30c1 2623378
+Author: Zirconia <dtoney@ucsc.edu>
+Date:   Mon Mar 20 10:19:46 2017 -0700
+
+    Added more dialogue options
+
+[33mcommit b1db6880dd61b9cb45c6de07320b3fbb2dcd4547[m
+Author: Andrew <anpbarr@ucsc.edu>
+Date:   Mon Mar 20 10:07:05 2017 -0700
+
+    fixed audio leak
+
+[33mcommit e4dfda6093a6d7adf6154b94f792c1397211a5e4[m
+Merge: 4650af0 2623378
+Author: Justin Patrick Farris <jpfarris@crm.ucsc.edu>
+Date:   Mon Mar 20 09:43:58 2017 -0700
+
+    Merge branch 'Sprint2' of https://github.com/EronLake/Children-of-Osi.git
+
+[33mcommit afb2fecd13366b5f6858e977091aacddafa9b0f2[m
+Merge: 193f50a 2623378
+Author: Andrew <anpbarr@ucsc.edu>
+Date:   Mon Mar 20 09:43:05 2017 -0700
+
+    sfx for combat
+
+[33mcommit 36f30c19475e78f81fab3d47a4c43101104333ea[m
+Author: U-DESKTOP-IJO7N67\BlackMagicianDTT <dtoney@ucsc.edu>
+Date:   Mon Mar 20 09:38:03 2017 -0700
+
+    Added more dialogue options.
+
+[33mcommit 262337822048e32c50670870d90a7ac87614f061[m
+Merge: 6f3f629 d5d4d8d
+Author: Spencer Smoot <spencer@spencersmoot.com>
+Date:   Mon Mar 20 08:11:26 2017 -0700
+
+    Merge branch 'Sprint2' of https://github.com/EronLake/Children-of-Osi.git
+
+[33mcommit 6f3f6294ec8755768807665f20a8e4f2263dc34e[m
+Author: Spencer Smoot <spencer@spencersmoot.com>
+Date:   Mon Mar 20 08:11:14 2017 -0700
+
+    getting rid of stuff around spawn
+
+[33mcommit 193f50a6b93bea4107c145bda8437b19810cdecf[m
+Author: Andrew <anpbarr@ucsc.edu>
+Date:   Mon Mar 20 08:06:56 2017 -0700
+
+    normalized audio, fixed walk sound, music plays on render
+
+[33mcommit 4650af096fc3d3e3a3b291f44167c09d508d1e67[m
+Merge: 43e12a3 d5d4d8d
+Author: Justin Patrick Farris <jpfarris@crm.ucsc.edu>
+Date:   Mon Mar 20 08:06:42 2017 -0700
+
+    Merge branch 'Sprint2' of https://github.com/EronLake/Children-of-Osi.git
+
+[33mcommit 43e12a39593d4d5b71cf501804341390d6f8a536[m
+Merge: ba04e9b 9b1cce9
+Author: Justin Patrick Farris <jpfarris@crm.ucsc.edu>
+Date:   Mon Mar 20 08:06:31 2017 -0700
+
+    Merge all the things
+
+[33mcommit d5d4d8d14aacedb5e1f7680b58df767e7c8d477c[m
+Author: acalba93 <acalba@ucsc.edu>
+Date:   Mon Mar 20 07:52:09 2017 -0700
+
+    fix spin
+
+[33mcommit ba04e9bb9172302a31191363e6d0cdf6f03f6305[m
+Author: Justin Patrick Farris <jpfarris@crm.ucsc.edu>
+Date:   Mon Mar 20 07:51:28 2017 -0700
+
+    Quest-giving dialogue
+
+[33mcommit 9b1cce943b3ecb68627b04bc67483f21c9d74bcb[m
+Author: acalba93 <acalba@ucsc.edu>
+Date:   Mon Mar 20 06:22:47 2017 -0700
+
+    spark
+
+[33mcommit 8103e86b386b481049c5bdc2d44317739a735310[m
+Merge: 8e97d33 3d9b5eb
+Author: Spencer Smoot <spencer@spencersmoot.com>
+Date:   Mon Mar 20 05:54:43 2017 -0700
+
+    merging stuff
+
+[33mcommit 8e97d33d18cd4cb0e0f2836a7639dc906a16f66f[m
+Author: Spencer Smoot <spencer@spencersmoot.com>
+Date:   Mon Mar 20 05:50:29 2017 -0700
+
+    Pushing to stay safe
+
+[33mcommit e642ebb2081dd592018b24688ff4245babb54674[m
+Merge: 490afbf 3d9b5eb
+Author: EronLake <ejlake@ucsc.edu>
+Date:   Mon Mar 20 02:43:45 2017 -0700
+
+    Merge branch 'Sprint2' of github.com:EronLake/Children-of-Osi into Sprint2
+    getting spin attack
+
+[33mcommit 490afbf00889caed7ced235c049c7a6244c73d3f[m
+Author: EronLake <ejlake@ucsc.edu>
+Date:   Mon Mar 20 02:43:09 2017 -0700
+
+    created empty HUD class
+
+[33mcommit 3d9b5ebcb0297aae8c4215c84b0ee5f370785d41[m
+Author: acalba93 <acalba@ucsc.edu>
+Date:   Mon Mar 20 02:40:44 2017 -0700
+
+    amazing
+
+[33mcommit a050669e0ba7b71be0550bb1962d52ccef624c95[m
+Author: acalba93 <acalba@ucsc.edu>
+Date:   Mon Mar 20 01:50:30 2017 -0700
+
+    shango
+
+[33mcommit 4618f8f4c7a930fc08850220837606361da4cfa8[m
+Merge: bcd06dc 2794f55
+Author: Alexander <alexander.ou@gmail.com>
+Date:   Mon Mar 20 01:31:16 2017 -0700
+
+    merged conflict
+
+[33mcommit bcd06dc6d94580ae7bcccb5f74d5e925c2fd9853[m
+Merge: 18452f4 5dac655
+Author: Alexander <alexander.ou@gmail.com>
+Date:   Mon Mar 20 01:27:27 2017 -0700
+
+    improved rendering
+
+[33mcommit 2794f55e6f9d9462671dc5ab764804fb65eafd6d[m
+Author: acalba93 <acalba@ucsc.edu>
+Date:   Mon Mar 20 01:02:09 2017 -0700
+
+    setup for adding soldiers to quest
+
+[33mcommit 1379c96d7bc3a729d428c560fc02db40809a812d[m
+Author: acalba93 <acalba@ucsc.edu>
+Date:   Mon Mar 20 00:43:55 2017 -0700
+
+    swarm
+
+[33mcommit ae006047bcaba5d8263db6d8e2e68f6e2203ae62[m
+Author: acalba93 <acalba@ucsc.edu>
+Date:   Mon Mar 20 00:15:34 2017 -0700
+
+    banditos muy malos
+
+[33mcommit 18452f4bcd2ecaa918e18955f20d8e1cfbf354e4[m
+Author: Alexander <alexander.ou@gmail.com>
+Date:   Sun Mar 19 23:44:15 2017 -0700
+
+    small change to qt. still doesnt work 100% well
+
+[33mcommit 5dac655a9eef3575d70182f84408b6ca8a33cee4[m
+Author: acalba93 <acalba@ucsc.edu>
+Date:   Sun Mar 19 22:49:56 2017 -0700
+
+    line endings?
+
+[33mcommit ed36ba4a4d71c234b11de9fc1e4043c145ab54ab[m
+Author: Spencer Smoot <spencer@spencersmoot.com>
+Date:   Sun Mar 19 22:28:35 2017 -0700
+
+    better map stuff
+
+[33mcommit e1b0812c7ac09a8a00fdd452de25344a46631bfc[m
+Merge: 1692de2 cc55c96
+Author: EronLake <ejlake@ucsc.edu>
+Date:   Sun Mar 19 21:01:27 2017 -0700
+
+    fixed merge conflicts
+
+[33mcommit 1692de2923175d507ccf89821e496f8e3a317cfb[m
+Author: EronLake <ejlake@ucsc.edu>
+Date:   Sun Mar 19 20:46:28 2017 -0700
+
+    set up action config
+
+[33mcommit cc55c96fc1474a796515e207311ee1ea4bc9c7e7[m
+Merge: 69115f3 3f1db4a
+Author: Spencer Smoot <spencer@spencersmoot.com>
+Date:   Sun Mar 19 20:44:24 2017 -0700
+
+    merging stuffs
+
+[33mcommit 69115f30353238e20083bf68caaa01b1e4bc7527[m
+Author: Spencer Smoot <spencer@spencersmoot.com>
+Date:   Sun Mar 19 20:38:31 2017 -0700
+
+    changed the walking
+
+[33mcommit 3f1db4a92da15d2009cac971de37bcf87dbdd945[m
+Merge: 5a427e8 42d180d
+Author: Andrew <anpbarr@ucsc.edu>
+Date:   Sun Mar 19 19:53:03 2017 -0700
+
+    resolved merge bullshit
+
+[33mcommit 44f7ee6eb8afc23ab032e2859cab8dc9b97c6ec3[m
+Author: Spencer Smoot <spencer@spencersmoot.com>
+Date:   Sun Mar 19 18:18:07 2017 -0700
+
+    Changing the Map around. Jungle enabled.
+
+[33mcommit 42d180d4fff61c7f56cefdac8c3ccd8ffb13dfbd[m
+Merge: 7744116 4cb2b69
+Author: Justin Patrick Farris <jpfarris@crm.ucsc.edu>
+Date:   Sun Mar 19 18:16:12 2017 -0700
+
+    Merge branch 'Sprint2' of https://github.com/EronLake/Children-of-Osi into Sprint2
+
+[33mcommit 77441163f6d8abd0c87b4abbaa09c1bba9f16e9a[m
+Author: Justin Patrick Farris <jpfarris@crm.ucsc.edu>
+Date:   Sun Mar 19 18:16:07 2017 -0700
+
+    Sprites for blank object boxes
+
+[33mcommit 4cb2b698bf9e2ab6cc4ec54ffeed29a106fa502f[m
+Author: acalba93 <acalba@ucsc.edu>
+Date:   Sun Mar 19 17:20:26 2017 -0700
+
+    REDO
+
+[33mcommit 613f61e112a5833f0d14917d0ad947a22b90d770[m
+Author: acalba93 <acalba@ucsc.edu>
+Date:   Sun Mar 19 16:28:47 2017 -0700
+
+    fireball
+
+[33mcommit b9295651c687dec7256fa6bc0718f58014084329[m
+Merge: 75fe7df 847f142
+Author: Alexander <alexander.ou@gmail.com>
+Date:   Sun Mar 19 13:03:34 2017 -0700
+
+    Merge branch 'Sprint2' of github.com:EronLake/Children-of-Osi into Sprint2
+
+[33mcommit 75fe7df5d671c40446ef153d46fdd07f4c346b66[m
+Author: Alexander <alexander.ou@gmail.com>
+Date:   Sun Mar 19 13:03:28 2017 -0700
+
+    main changes
+
+[33mcommit 847f142e54bcd25e075df59bed181c4c676273fc[m
+Author: U-DESKTOP-IJO7N67\BlackMagicianDTT <dtoney@ucsc.edu>
+Date:   Sun Mar 19 13:02:32 2017 -0700
+
+    Fixed dialogue crash again.
+
+[33mcommit 5a427e85ed6af7100212a5994934c221c2eb0ae0[m
+Author: Andrew <anpbarr@ucsc.edu>
+Date:   Sun Mar 19 05:57:26 2017 -0700
+
+    Switching Music Between Regions Fully Implemented ;)
+
+[33mcommit 918eca374447de278682778edd15e2f195611470[m
+Author: Justin Patrick Farris <jpfarris@crm.ucsc.edu>
+Date:   Sun Mar 19 03:46:57 2017 -0700
+
+    Fix the stupid test loops' bad constructors
+
+[33mcommit e7d5a090e0e22b0f667105dbd7371bf7ede7b2dd[m
+Merge: 97429bc e78a68c
+Author: Justin Patrick Farris <jpfarris@crm.ucsc.edu>
+Date:   Sun Mar 19 03:41:31 2017 -0700
+
+    Fix merge conflicts
+
+[33mcommit 97429bc4acd5230cf764997d5cc4423afadf016d[m
+Author: Justin Patrick Farris <jpfarris@crm.ucsc.edu>
+Date:   Sun Mar 19 03:39:25 2017 -0700
+
+    State handling in input for quest-giving interruption
+
+[33mcommit e78a68ca82ae759a883672f597c12cbf19a9b2de[m
+Merge: d00f1dc 3647072
+Author: EronLake <ejlake@ucsc.edu>
+Date:   Sun Mar 19 03:35:34 2017 -0700
+
+    Merge branch 'Sprint2' of github.com:EronLake/Children-of-Osi into Sprint2
+    need to push
+
+[33mcommit d00f1dc59bf00493381f0de499c7f6d229b7946c[m
+Merge: 994d8cc 2410bd3
+Author: EronLake <ejlake@ucsc.edu>
+Date:   Sun Mar 19 03:35:26 2017 -0700
+
+    fixed merge conflicts
+
+[33mcommit 36470723bb74a3b61b42dbcd50d0da451ad3fe88[m
+Author: acalba93 <acalba@ucsc.edu>
+Date:   Sun Mar 19 03:28:44 2017 -0700
+
+    stamina and fireball
+
+[33mcommit 994d8cc43b82745ade2d2482e063f7582154f75d[m
+Author: EronLake <ejlake@ucsc.edu>
+Date:   Sun Mar 19 02:53:18 2017 -0700
+
+    added Action pool/config funcionally- need to intigrate conditions and action pool/planner
+
+[33mcommit 2410bd3dc543a8b97f55a83990082999a4738211[m
+Merge: aded567 0c327af
+Author: acalba93 <acalba@ucsc.edu>
+Date:   Sun Mar 19 02:49:35 2017 -0700
+
+    Merge branch 'Sprint2' of https://github.com/EronLake/Children-of-Osi.git
+
+[33mcommit aded567baf19bbe3c982034fee14b8be322efb41[m
+Author: acalba93 <acalba@ucsc.edu>
+Date:   Sun Mar 19 02:49:10 2017 -0700
+
+    Added Oasis config.
+
+[33mcommit 0c327af139999b12f8b366d1346786b9fd1fa507[m
+Merge: 02ec5c5 efe0a0d
+Author: acalba93 <acalba@ucsc.edu>
+Date:   Sun Mar 19 02:34:24 2017 -0700
+
+    Merge remote-tracking branch 'origin/Sprint2' into Sprint2
+    
+    # Conflicts:
+    #       ChildrenOfOsi/ChildrenOfOsi/Main.cpp
+
+[33mcommit efe0a0dd705865cae25e39d998ca838bac4087a5[m
+Merge: 86b2480 1c1211e
+Author: acalba93 <acalba@ucsc.edu>
+Date:   Sun Mar 19 02:24:19 2017 -0700
+
+    Merge branch 'Sprint2' of https://github.com/EronLake/Children-of-Osi.git
+
+[33mcommit 86b24807120da0411c4662ec775cf4665aa4b160[m
+Author: acalba93 <acalba@ucsc.edu>
+Date:   Sun Mar 19 02:24:02 2017 -0700
+
+    Lots of Objects in Config Needs Attention from Alex
+
+[33mcommit 02ec5c504f9797354da0696eaeb41646e30e72ce[m
+Author: acalba93 <acalba@ucsc.edu>
+Date:   Sun Mar 19 02:22:10 2017 -0700
+
+    sp2
+
+[33mcommit 103ac9d90e076c0916f67dd0198c7a8287e071b9[m
+Author: acalba93 <acalba@ucsc.edu>
+Date:   Sun Mar 19 02:21:52 2017 -0700
+
+    sprites
+
+[33mcommit 1c1211ec19c466368df570166464bea02bdbe382[m
+Author: Alexander <alexander.ou@gmail.com>
+Date:   Sun Mar 19 02:08:57 2017 -0700
+
+    soldier die fix merge
+
+[33mcommit 3731df401e8b72804ffd7579be62718dee588524[m
+Merge: 8fc74f1 80c16ca
+Author: Alexander <alexander.ou@gmail.com>
+Date:   Sun Mar 19 02:01:17 2017 -0700
+
+    Merge branch 'Sprint2' of github.com:EronLake/Children-of-Osi into Sprint2
+
+[33mcommit 8fc74f10eb51bf6fa901b89147c570c3fbc9a1c0[m
+Author: Alexander <alexander.ou@gmail.com>
+Date:   Sun Mar 19 02:00:42 2017 -0700
+
+    fixed combat behavior when soldiers die in battle
+
+[33mcommit 80c16caa93f87dddea82ea77ca7f4a0c95a74b4f[m
+Author: U-DESKTOP-IJO7N67\BlackMagicianDTT <dtoney@ucsc.edu>
+Date:   Sun Mar 19 01:19:33 2017 -0700
+
+    Fixed merge conflict. I hate having to make changes to main! This always happens grrrr.
+
+[33mcommit d51781ef78c134a7e960c2e73a56f1747e59d297[m
+Merge: 1709fe8 f1974c2
+Author: Zirconia <dtoney@ucsc.edu>
+Date:   Sun Mar 19 00:49:56 2017 -0700
+
+    add dialogue crap
+
+[33mcommit 1709fe8d55526fa8474acf3f8f5c2a980f9f7bc4[m
+Author: U-DESKTOP-IJO7N67\BlackMagicianDTT <dtoney@ucsc.edu>
+Date:   Sun Mar 19 00:41:49 2017 -0700
+
+    Dialogue GUI uses conversation points.
+
+[33mcommit f1974c23217c43fbddede667b508dfffec282d5c[m
+Merge: 4697863 d44d1fa
+Author: Andrew <anpbarr@ucsc.edu>
+Date:   Sat Mar 18 22:47:25 2017 -0700
+
+    Merge branch 'Sprint2' of https://github.com/EronLake/Children-of-Osi into Sprint2
+
+[33mcommit 46978632f0f7145d6a7e45c435ba63810868e1c4[m
+Author: Andrew <anpbarr@ucsc.edu>
+Date:   Sat Mar 18 22:46:53 2017 -0700
+
+    changed task,childrenofosi,soundsystem,audiomanager to handle dynamic audio tasks
+
+[33mcommit d44d1fa0a6518be3e0a52ab310d98348f456dba2[m
+Merge: 3776684 6d0cbed
+Author: Daniel Hildebrandt <daniel.s.hildebrandt+git@gmail.com>
+Date:   Sat Mar 18 21:44:14 2017 -0700
+
+    Merge branch 'Sprint2' of https://github.com/EronLake/Children-of-Osi into Sprint2
+
+[33mcommit 3776684cab9b45eb3939383e5e3b6f4ec3bd6d61[m
+Author: Daniel Hildebrandt <daniel.s.hildebrandt+git@gmail.com>
+Date:   Sat Mar 18 21:43:38 2017 -0700
+
+    Attempt at fixing combat.
+
+[33mcommit 6d0cbed54f6c9f875270c181a0c1ce2ff1f36cf4[m
+Author: acalba93 <acalba@ucsc.edu>
+Date:   Sat Mar 18 21:40:42 2017 -0700
+
+    Turnning off jungle generation
+
+[33mcommit 6307b263fa4b9b74342ea09ca1713ffb298381c0[m
+Merge: 769f0e9 17f280a
+Author: acalba93 <acalba@ucsc.edu>
+Date:   Sat Mar 18 21:36:00 2017 -0700
+
+    Merge branch 'Sprint2' of https://github.com/EronLake/Children-of-Osi.git
+
+[33mcommit 769f0e972d3ebf54da873e12098507590a13e84e[m
+Author: acalba93 <acalba@ucsc.edu>
+Date:   Sat Mar 18 21:30:02 2017 -0700
+
+    Getting offset to work.
+
+[33mcommit 17f280aea5b3e083b42ff40c7e94316fd0656697[m
+Merge: dc954aa 659227f
+Author: Ian Patrick Christner <ichristn@crm.ucsc.edu>
+Date:   Sat Mar 18 21:02:53 2017 -0700
+
+    Merge branch 'Sprint2' of https://github.com/EronLake/Children-of-Osi into Sprint2
+
+[33mcommit dc954aa47f19aca571175e8b8189aeca81c5dafb[m
+Author: Ian Patrick Christner <ichristn@crm.ucsc.edu>
+Date:   Sat Mar 18 21:00:00 2017 -0700
+
+    I added Tag funcionality.
+
+[33mcommit 659227f526d8ee30d71ca1e57e80a8f7a7db580b[m
+Author: acalba93 <acalba@ucsc.edu>
+Date:   Sat Mar 18 20:34:42 2017 -0700
+
+    stamina started
+
+[33mcommit d53106c28812c5c79969ddb286723cf112ca7afb[m
+Merge: 42cf3f5 7425c27
+Author: acalba93 <acalba@ucsc.edu>
+Date:   Sat Mar 18 20:00:40 2017 -0700
+
+    Merge branch 'Sprint2' of https://github.com/EronLake/Children-of-Osi into Sprint2
+    need justin's stuff
+
+[33mcommit 42cf3f5a8f8575b81412f6ece54336c62950cc2f[m
+Author: acalba93 <acalba@ucsc.edu>
+Date:   Sat Mar 18 20:00:35 2017 -0700
+
+    changed input so there is some output
+
+[33mcommit 7425c27be0ace0466a1b11fb41cc5ded9d7d7813[m
+Merge: bfdc05f 33f6c47
+Author: Justin Patrick Farris <jpfarris@crm.ucsc.edu>
+Date:   Sat Mar 18 19:50:44 2017 -0700
+
+    Merge branch 'Sprint2' of https://github.com/EronLake/Children-of-Osi into Sprint2
+
+[33mcommit bfdc05f461f0ec93661a906a72ac83e8d0deec2f[m
+Author: Justin Patrick Farris <jpfarris@crm.ucsc.edu>
+Date:   Sat Mar 18 19:50:39 2017 -0700
+
+    Fixed map images and incremented the body offsets
+
+[33mcommit 33f6c473d5e64add99c8c7f6f8bf00308febb03f[m
+Merge: 587d7e6 75f0176
+Author: Alexander Ou <aou4@crm.ucsc.edu>
+Date:   Sat Mar 18 16:04:04 2017 -0700
+
+    merge
+
+[33mcommit 587d7e62871986b047dd5f7fe82ef074fcd2e6a9[m
+Author: Alexander Ou <aou4@crm.ucsc.edu>
+Date:   Sat Mar 18 16:01:37 2017 -0700
+
+    remove soldiers from party after death
+
+[33mcommit 75f0176b0ba9f94f1a34c757a4e83d6c24e63ae5[m
+Merge: a87858d 98bfb8e
+Author: Zirconia <dtoney@ucsc.edu>
+Date:   Sat Mar 18 15:29:13 2017 -0700
+
+    Merge branch 'Sprint2' of https://github.com/EronLake/Children-of-Osi.git
+
+[33mcommit a87858daf2ada2a34c74af25735916b80ac22ecc[m
+Author: U-DESKTOP-IJO7N67\BlackMagicianDTT <dtoney@ucsc.edu>
+Date:   Sat Mar 18 15:27:52 2017 -0700
+
+    Added Conversation and Tag stuff.
+
+[33mcommit 98bfb8ed99d0e27fa59e46612c85d3771414e0e1[m
+Author: Alexander <alexander.ou@gmail.com>
+Date:   Sat Mar 18 12:59:00 2017 -0700
+
+    fixed mem leak for qt
+
+[33mcommit fd7945868367dfd448b6c02c189e3a9895239f2d[m
+Merge: 44b22bb 37e8fdd
+Author: Spencer <sssmoot@ucsc.edu>
+Date:   Sat Mar 18 11:59:40 2017 -0700
+
+    Merge branch 'Sprint2' of https://github.com/EronLake/Children-of-Osi.git
+
+[33mcommit 44b22bb6c77b96b0e40cd591ec99fba8e0f26a18[m
+Author: Spencer <sssmoot@ucsc.edu>
+Date:   Sat Mar 18 11:59:19 2017 -0700
+
+    Trying to change the map
+
+[33mcommit 37e8fdd36a2cf5916d6f7aa54e68a7c470309348[m
+Author: acalba93 <acalba@ucsc.edu>
+Date:   Sat Mar 18 11:12:32 2017 -0700
+
+    Jesus Shuttlesworth
+
+[33mcommit cde0c6e085c68665fac2a784f2b96aae67d05426[m
+Author: acalba93 <acalba@ucsc.edu>
+Date:   Sat Mar 18 06:09:47 2017 -0700
+
+    terminators
+
+[33mcommit 2c38f3ce0889d3ee2207991549e9aa55fe069208[m
+Merge: 02d2c21 f453176
+Author: Justin Patrick Farris <jpfarris@crm.ucsc.edu>
+Date:   Sat Mar 18 05:47:10 2017 -0700
+
+    Merge branch 'Sprint2' of https://github.com/EronLake/Children-of-Osi.git
+
+[33mcommit 02d2c2114c2a44af4b155f3d884ec08906df81b8[m
+Author: Justin Patrick Farris <jpfarris@crm.ucsc.edu>
+Date:   Sat Mar 18 05:46:58 2017 -0700
+
+    Fixed enemy facing when attacking
+
+[33mcommit f45317687b25e7eb5c85ed96065a09429f19462b[m
+Author: acalba93 <acalba@ucsc.edu>
+Date:   Sat Mar 18 05:41:28 2017 -0700
+
+    Merge remote-tracking branch 'origin/Sprint2' into Sprint2
+    
+    # Conflicts:
+    #       ChildrenOfOsi/ChildrenOfOsi/CombatController.h
+
+[33mcommit fcac64181d98e019463007a795cd44593c6b8edd[m
+Merge: e696dc3 82711be
+Author: acalba93 <acalba@ucsc.edu>
+Date:   Sat Mar 18 05:38:33 2017 -0700
+
+    how?
+
+[33mcommit e696dc3ee73468f8d4731a29bd9e8f6907a7c4ec[m
+Author: acalba93 <acalba@ucsc.edu>
+Date:   Sat Mar 18 05:25:04 2017 -0700
+
+    omg im going to die
+
+[33mcommit 82711be1c0edba3de341cb4f3befba0dcf606396[m
+Author: Justin Patrick Farris <jpfarris@crm.ucsc.edu>
+Date:   Sat Mar 18 05:19:55 2017 -0700
+
+    Following and fighting now working properly
+
+[33mcommit 70656e4bf9556b584009ee20c5c063ba959b973a[m
+Merge: c0d7642 385a245
+Author: Justin Patrick Farris <jpfarris@crm.ucsc.edu>
+Date:   Sat Mar 18 00:27:21 2017 -0700
+
+    Merge branch 'Sprint2' of https://github.com/EronLake/Children-of-Osi into Sprint2
+
+[33mcommit c0d7642240f40b85978e6e7f19601f2494b11fbe[m
+Author: Justin Patrick Farris <jpfarris@crm.ucsc.edu>
+Date:   Sat Mar 18 00:27:16 2017 -0700
+
+    Smaller bodies, brought config back
+
+[33mcommit 385a245e635bbc45406ee61f5b005efc7edf815e[m
+Merge: 46b778c 56a0da9
+Author: EronLake <ejlake@ucsc.edu>
+Date:   Fri Mar 17 23:56:05 2017 -0700
+
+    readty the add planner stuff
+
+[33mcommit 46b778c48c7356f167bde854a10746e588f8bbbb[m
+Merge: 7cebb76 808f723
+Author: EronLake <ejlake@ucsc.edu>
+Date:   Fri Mar 17 23:26:53 2017 -0700
+
+    merge conflicts not fixed
+
+[33mcommit 56a0da93e24103b7240dcc4b98fe8efaa229c78d[m
+Merge: c5692de 84616ee
+Author: Justin Patrick Farris <jpfarris@crm.ucsc.edu>
+Date:   Fri Mar 17 21:12:04 2017 -0700
+
+    Merge conflicts on addtoparty
+
+[33mcommit c5692de6036bd23b0c8c33116d2a75fc4003e2cf[m
+Author: Justin Patrick Farris <jpfarris@crm.ucsc.edu>
+Date:   Fri Mar 17 21:10:02 2017 -0700
+
+    I don't know anymore. Combat tweaks?
+
+[33mcommit 84616ee28e1d927c5c778c6de7731c5adf41c0ec[m
+Author: acalba93 <acalba@ucsc.edu>
+Date:   Fri Mar 17 21:01:13 2017 -0700
+
+    fixed bracket
+
+[33mcommit da7e7c0e6e41b1918659b636db2405177d5d9bc8[m
+Author: acalba93 <acalba@ucsc.edu>
+Date:   Fri Mar 17 20:53:55 2017 -0700
+
+    fix add to party
+
+[33mcommit ebf1ea814d8e744cbedf4bab5ef63de242c5fd4f[m
+Merge: 19fe069 808f723
+Author: Justin Patrick Farris <jpfarris@crm.ucsc.edu>
+Date:   Fri Mar 17 20:40:27 2017 -0700
+
+    Merge and combat tweaks
+
+[33mcommit 7cebb760c5086dc57c161d6ab655eaff5fe01431[m
+Merge: 3dc627c 91b426f
+Author: EronLake <ejlake@ucsc.edu>
+Date:   Fri Mar 17 19:04:24 2017 -0700
+
+    made no change\s
+
+[33mcommit 19fe069b367eea988091397b0d7556cd2e74ff93[m
+Author: Justin Patrick Farris <jpfarris@crm.ucsc.edu>
+Date:   Fri Mar 17 16:40:52 2017 -0700
+
+    Combat tweaks, config tweaks
+
+[33mcommit 808f7235d03dcec66184140c55e44d4069b0bc89[m
+Author: acalba93 <acalba@ucsc.edu>
+Date:   Fri Mar 17 16:35:36 2017 -0700
+
+    oops
+
+[33mcommit 68203d5e37059f784cd1ab4ce2861f3628cb655f[m
+Merge: 32683a8 bb8fda0
+Author: acalba93 <acalba@ucsc.edu>
+Date:   Fri Mar 17 16:32:53 2017 -0700
+
+    Merge remote-tracking branch 'origin/Sprint2' into Sprint2
+    
+    # Conflicts:
+    #       ChildrenOfOsi/ChildrenOfOsi/Party.cpp
+    #       ChildrenOfOsi/ChildrenOfOsi/Soldier.cpp
+
+[33mcommit 32683a8385c5509853a3e741147d7e4385634131[m
+Author: acalba93 <acalba@ucsc.edu>
+Date:   Fri Mar 17 16:27:18 2017 -0700
+
+    following
+
+[33mcommit bb8fda0d5b65e958a007481095c788f319d495e6[m
+Merge: 0c0b08d 86e9cc3
+Author: Daniel Hildebrandt <daniel.s.hildebrandt+git@gmail.com>
+Date:   Fri Mar 17 15:54:36 2017 -0700
+
+    Manual merge resolution.
+
+[33mcommit 0c0b08df6bd8e41c0ec42429e861feee8c20c86d[m
+Author: Daniel Hildebrandt <daniel.s.hildebrandt+git@gmail.com>
+Date:   Fri Mar 17 15:47:21 2017 -0700
+
+    Party system work.
+
+[33mcommit 86e9cc3ee391e1dba08d38b9b4f7422ad5fde468[m
+Author: Spencer Smoot <spencer@spencersmoot.com>
+Date:   Fri Mar 17 14:27:46 2017 -0700
+
+    I am Spencer now
+
+[33mcommit c0fecb9848b564a17800322551007facd9b7ace3[m
+Author: Justin Farris <jpfarris@ucsc.edu>
+Date:   Fri Mar 17 14:25:10 2017 -0700
+
+    Set up config for random placement
+
+[33mcommit 2eb758efe2d7454f680c178f133f989c731b9925[m
+Merge: 1c2947a 91b426f
+Author: Zirconia <dtoney@ucsc.edu>
+Date:   Fri Mar 17 12:03:05 2017 -0700
+
+    Merge branch 'Sprint2' of https://github.com/EronLake/Children-of-Osi.git
+
+[33mcommit 1c2947a33c4b32f1c52f3693d692a45f2e5c0ec0[m
+Author: U-DESKTOP-IJO7N67\BlackMagicianDTT <dtoney@ucsc.edu>
+Date:   Fri Mar 17 12:02:08 2017 -0700
+
+    Added tag and conversation point task map stuff.
+
+[33mcommit 3dc627c4a95a8391dc2f81b3b2bdae4508ac95ea[m
+Merge: e7611ef 892b79c
+Author: EronLake <ejlake@ucsc.edu>
+Date:   Fri Mar 17 11:33:03 2017 -0700
+
+    not many changes again
+
+[33mcommit 91b426f28cbcc168267101eeec33db2626eedb10[m
+Author: Alexander <alexander.ou@gmail.com>
+Date:   Fri Mar 17 03:01:32 2017 -0700
+
+    merged with working quadtree
+
+[33mcommit 2a3f0eda8dc4bb038985b895adee6ba52143102f[m
+Merge: df2e810 aeb7bb9
+Author: Alexander <alexander.ou@gmail.com>
+Date:   Fri Mar 17 02:58:50 2017 -0700
+
+    Merge branch 'Sprint2' of github.com:EronLake/Children-of-Osi into Sprint2
+
+[33mcommit df2e810501e8edcc8ad5654407785302118e9c99[m
+Author: Alexander <alexander.ou@gmail.com>
+Date:   Fri Mar 17 02:58:40 2017 -0700
+
+    quadtree working, gets correct possible objs
+
+[33mcommit e645a4691e2f1b2bdf2374a471e68bca86c890c4[m
+Author: Daniel Hildebrandt <daniel.s.hildebrandt+git@gmail.com>
+Date:   Fri Mar 17 02:41:05 2017 -0700
+
+    Added a concept of aggression and pursuit ranges to soldiers.
+
+[33mcommit aeb7bb9b079303b0f2aa4f1dd243ed5cdb128d25[m
+Author: acalba93 <acalba@ucsc.edu>
+Date:   Fri Mar 17 00:53:39 2017 -0700
+
+    friends
+
+[33mcommit 2aed6687a6ff50cfb80a5f45e59434139045b56c[m
+Merge: 88df5b1 90516ce
+Author: Zirconia <dtoney@ucsc.edu>
+Date:   Fri Mar 17 00:01:52 2017 -0700
+
+    Merge branch 'Sprint2' of https://github.com/EronLake/Children-of-Osi.git
+
+[33mcommit 88df5b108283b273f6edf30e4135409383820b6d[m
+Author: U-DESKTOP-IJO7N67\BlackMagicianDTT <dtoney@ucsc.edu>
+Date:   Fri Mar 17 00:01:01 2017 -0700
+
+    Dialog flow fixed and tags started.
+
+[33mcommit 90516cec5baba7d04fa8c1b9c9dc429094452eec[m
+Merge: aaca1a7 3cca283
+Author: Daniel Hildebrandt <daniel.s.hildebrandt+git@gmail.com>
+Date:   Thu Mar 16 22:54:01 2017 -0700
+
+    Merge branch 'Sprint2' of https://github.com/EronLake/Children-of-Osi into Sprint2
+
+[33mcommit aaca1a7fca8ccdc87f0684bad7dddb65113a3c06[m
+Author: Daniel Hildebrandt <daniel.s.hildebrandt+git@gmail.com>
+Date:   Thu Mar 16 22:53:55 2017 -0700
+
+    A bit of documentation and cleanup.
+
+[33mcommit 3cca283c10437eb51af56aedc44da6831ad92a7c[m
+Merge: 1e0b82c 930cb5b
+Author: acalba93 <acalba@ucsc.edu>
+Date:   Thu Mar 16 22:33:52 2017 -0700
+
+    Merge remote-tracking branch 'origin/Sprint2' into Sprint2
+    
+    # Conflicts:
+    #       ChildrenOfOsi/ChildrenOfOsi/Main.cpp
+    #       ChildrenOfOsi/ChildrenOfOsi/Soldier.cpp
+
+[33mcommit 930cb5bd74aeebf880f637d364953352bdabeffa[m
+Merge: 708d246 8fae0f7
+Author: Justin Farris <jpfarris@ucsc.edu>
+Date:   Thu Mar 16 22:25:34 2017 -0700
+
+    Merge branch 'Sprint2' of https://github.com/EronLake/Children-of-Osi into Sprint2
+
+[33mcommit 708d24663c9dc92cb5ad851802f356a33a795e99[m
+Author: Justin Farris <jpfarris@ucsc.edu>
+Date:   Thu Mar 16 22:25:29 2017 -0700
+
+    Debug bodies
+
+[33mcommit 1e0b82c278be456ff7a54d1d106cb85dbd47ba39[m
+Author: acalba93 <acalba@ucsc.edu>
+Date:   Thu Mar 16 22:23:41 2017 -0700
+
+    changes
+
+[33mcommit 8fae0f7d7f78b2b96c0fd695d394044ef128c38a[m
+Merge: 9a16443 46dd76b
+Author: Daniel Hildebrandt <daniel.s.hildebrandt+git@gmail.com>
+Date:   Thu Mar 16 21:46:32 2017 -0700
+
+    Manual merge resolution.
+
+[33mcommit 46dd76b935619dc9c61de3c884c121b12158c4e7[m
+Merge: b2225ad b66d334
+Author: Zirconia <dtoney@ucsc.edu>
+Date:   Thu Mar 16 19:33:56 2017 -0700
+
+    Merge branch 'Sprint2' of https://github.com/EronLake/Children-of-Osi.git
+
+[33mcommit b2225ad0a669fba57553630ce7ed3e43bd61e9de[m
+Author: U-DESKTOP-IJO7N67\BlackMagicianDTT <dtoney@ucsc.edu>
+Date:   Thu Mar 16 19:33:09 2017 -0700
+
+    cleaned up yemoja dialog.
+
+[33mcommit b66d334381884f59d5a4febdc74c5db0d7bd22ef[m
+Author: acalba93 <acalba@ucsc.edu>
+Date:   Thu Mar 16 19:24:07 2017 -0700
+
+    stupid shit
+
+[33mcommit f4abf43f5d53f19283ffc99475275a08a49e4b0c[m
+Author: Justin Farris <jpfarris@ucsc.edu>
+Date:   Thu Mar 16 18:56:16 2017 -0700
+
+    Did not push broken code. No way. Promise.
+
+[33mcommit 4f9d945e28b752bd15d14b94c291a8be99771e80[m
+Merge: 38db390 da3c50e
+Author: Justin Patrick Farris <jpfarris@crm.ucsc.edu>
+Date:   Thu Mar 16 18:42:48 2017 -0700
+
+    Merge branch 'Sprint2' of https://github.com/EronLake/Children-of-Osi into Sprint2
+
+[33mcommit 38db390def7cb95a313dcbbc3875afd13955a19a[m
+Author: Justin Patrick Farris <jpfarris@crm.ucsc.edu>
+Date:   Thu Mar 16 18:42:45 2017 -0700
+
+    Started on quest-giving, some combat tweaks
+
+[33mcommit da3c50e00ca2df4525b8af2e36bbba39613dceb2[m
+Author: U-DESKTOP-IJO7N67\BlackMagicianDTT <dtoney@ucsc.edu>
+Date:   Thu Mar 16 13:29:19 2017 -0700
+
+    More dialog tweaks.
+
+[33mcommit 780569de499bdaa1ed0a54faf9cf0bbe8e03224e[m
+Author: acalba93 <acalba@ucsc.edu>
+Date:   Wed Mar 15 23:16:08 2017 -0700
+
+    fixed stopping attacks and face function
+
+[33mcommit 854bd469bb76bd99c62cce304c777191f3287548[m
+Author: Justin Patrick Farris <jpfarris@crm.ucsc.edu>
+Date:   Wed Mar 15 21:23:12 2017 -0700
+
+    BOXES
+
+[33mcommit e7611efb253272db0e6530fbf452439aa8b43f4f[m
+Author: EronLake <ejlake@ucsc.edu>
+Date:   Wed Mar 15 20:53:36 2017 -0700
+
+    not may changes
+
+[33mcommit 892b79c9a5e6e286fc8ebb95327b038bc53a9f13[m
+Author: Justin Patrick Farris <jpfarris@crm.ucsc.edu>
+Date:   Wed Mar 15 19:05:55 2017 -0700
+
+    Fixed attack collision box bug
+
+[33mcommit 9a16443b2319bf29421f15e3ba43e4de406e78fd[m
+Author: Daniel Hildebrandt <daniel.s.hildebrandt+git@gmail.com>
+Date:   Wed Mar 15 15:48:17 2017 -0700
+
+    Added isAllyOf and isEnemyOf methods to Soldier class.
+
+[33mcommit 6ad439271e00d92fb46b1a04f65d8804ba89ba8d[m
+Merge: 9d69bec a5e5b0e
+Author: Daniel Hildebrandt <daniel.s.hildebrandt+git@gmail.com>
+Date:   Wed Mar 15 14:55:35 2017 -0700
+
+    Merge branch 'Sprint2' of https://github.com/EronLake/Children-of-Osi into Sprint2
+
+[33mcommit a5e5b0ec71c0f94ee5de035655863298569d33c3[m
+Author: acalba93 <acalba@ucsc.edu>
+Date:   Wed Mar 15 11:48:41 2017 -0700
+
+    fix
+
+[33mcommit 0b7bddc58e10f0177653690c1c9856464aee99b7[m
+Author: U-DESKTOP-IJO7N67\BlackMagicianDTT <dtoney@ucsc.edu>
+Date:   Wed Mar 15 09:20:28 2017 -0700
+
+    Tinkered with dialogue stuff.
+
+[33mcommit 9d69bec23b4b4aebfd71259b50d894d2d0b7a3c0[m
+Author: Daniel Hildebrandt <daniel.s.hildebrandt+git@gmail.com>
+Date:   Wed Mar 15 02:52:14 2017 -0700
+
+    Renamed Attack::getType -> Attack::getAttackType to avoid shadowing of WorldObj::getType.
+
+[33mcommit 6c8ff9b1e10b5f3daf2e1795f7f41a88dde660ec[m
+Author: Daniel Hildebrandt <daniel.s.hildebrandt+git@gmail.com>
+Date:   Wed Mar 15 01:24:48 2017 -0700
+
+    Hit a wall in implementing parties, but finished off attack choosing.
+
+[33mcommit 604087d3c1308c1ba7c11c819aa6dd8dadb20552[m
+Merge: 25282d1 67172c3
+Author: Zirconia <dtoney@ucsc.edu>
+Date:   Tue Mar 14 22:17:37 2017 -0700
+
+    Merge branch 'Sprint2' of https://github.com/EronLake/Children-of-Osi.git
+
+[33mcommit 25282d1381b179d478c0a8966dae491bd770f76e[m
+Author: U-DESKTOP-IJO7N67\BlackMagicianDTT <dtoney@ucsc.edu>
+Date:   Tue Mar 14 22:16:45 2017 -0700
+
+    Added Silver Soldier stuff.
+
+[33mcommit 67172c37783beeccc40c9ff11425295bb13b0dfa[m
+Author: acalba93 <acalba@ucsc.edu>
+Date:   Tue Mar 14 22:07:30 2017 -0700
+
+    spin and combo
+
+[33mcommit 1baaaf5f35df864d9ac5c4ad2fe51971f04438ca[m
+Author: acalba93 <acalba@ucsc.edu>
+Date:   Tue Mar 14 19:43:47 2017 -0700
+
+    spin is closer
+
+[33mcommit 256bcc770f09363ac8538f89aa1dca89d6d63e5e[m
+Author: acalba93 <acalba@ucsc.edu>
+Date:   Tue Mar 14 17:38:17 2017 -0700
+
+    start party
+
+[33mcommit 5ba7f289798f7da73045d5546b1fed14889549a8[m
+Merge: 3e8070a 437e973
+Author: EronLake <ejlake@ucsc.edu>
+Date:   Tue Mar 14 15:57:29 2017 -0700
+
+    Merge branch 'Sprint2' of github.com:EronLake/Children-of-Osi into Sprint2
+     getting upded code
+
+[33mcommit 3e8070af602f41132dc91176f7ad3831cf7fe383[m
+Author: EronLake <ejlake@ucsc.edu>
+Date:   Tue Mar 14 15:57:15 2017 -0700
+
+    getting GOAP stuff connected
+
+[33mcommit 437e97355accccfa630e337b2439747633c291db[m
+Author: acalba93 <acalba@ucsc.edu>
+Date:   Tue Mar 14 15:47:34 2017 -0700
+
+    text touch up
+
+[33mcommit 84966aa722b6fb0bb7867699015f36bd3337779a[m
+Author: Spencer <sssmoot@ucsc.edu>
+Date:   Tue Mar 14 15:18:39 2017 -0700
+
+    Filling out the Jungle SomeMore
+
+[33mcommit 8d2246bea4bfa020ee2ea590016e2bf4e300cd09[m
+Merge: 4e5a30c 980cc45
+Author: EronLake <ejlake@ucsc.edu>
+Date:   Tue Mar 14 15:09:06 2017 -0700
+
+    Merge branch 'Sprint2' of github.com:EronLake/Children-of-Osi into Sprint2
+    
+    need updated code
+
+[33mcommit 4e5a30cc9358c2209385d2294ad163d9f72a2df0[m
+Author: EronLake <ejlake@ucsc.edu>
+Date:   Tue Mar 14 15:08:57 2017 -0700
+
+    getting errors
+
+[33mcommit 980cc450396dc4693b3eacdb80378d33465ed9eb[m
+Author: Justin Patrick Farris <jpfarris@crm.ucsc.edu>
+Date:   Tue Mar 14 15:02:26 2017 -0700
+
+    call execute pointer from AIController
+
+[33mcommit b8f518d5a917a1c4d121142905232e82eec55b62[m
+Merge: 7f77029 a2aaa5d
+Author: Justin Patrick Farris <jpfarris@crm.ucsc.edu>
+Date:   Tue Mar 14 14:55:40 2017 -0700
+
+    Merge branch 'Sprint2' of https://github.com/EronLake/Children-of-Osi into Sprint2
+
+[33mcommit 7f77029e736444bed1de4094dc130b2f0634f558[m
+Author: Justin Patrick Farris <jpfarris@crm.ucsc.edu>
+Date:   Tue Mar 14 14:55:37 2017 -0700
+
+    Able to mark actions as executed
+
+[33mcommit a2aaa5d68c4cd554879450a9e4fede4c627ca1eb[m
+Author: EronLake <ejlake@ucsc.edu>
+Date:   Tue Mar 14 14:31:23 2017 -0700
+
+    ready GOAP stuff
+
+[33mcommit 48e5ed6ca9553c0f7d2e55f957e23c5310eb5f56[m
+Merge: 0947280 f4bc734
+Author: EronLake <ejlake@ucsc.edu>
+Date:   Tue Mar 14 13:33:54 2017 -0700
+
+    Merge branch 'Sprint2' of github.com:EronLake/Children-of-Osi into Sprint2
+    need more updated code
+
+[33mcommit 0947280dd7d026b9c93f6c72659ba13f1fca6cfa[m
+Author: EronLake <ejlake@ucsc.edu>
+Date:   Tue Mar 14 13:33:40 2017 -0700
+
+    started the test for action execution
+
+[33mcommit f4bc734ebb10418ac83061268631855c785f0e24[m
+Author: acalba93 <acalba@ucsc.edu>
+Date:   Tue Mar 14 13:10:19 2017 -0700
+
+    stuff
+
+[33mcommit 5021444441542fe9ae747cbc1378d2dbe5a456c9[m
+Author: Justin Patrick Farris <jpfarris@crm.ucsc.edu>
+Date:   Tue Mar 14 13:01:18 2017 -0700
+
+    Movement and collision tweaks
+
+[33mcommit 1eb1727fd346dea0a6a98b234122a9896f1ea186[m
+Merge: c5a511f 471e846
+Author: Justin Patrick Farris <jpfarris@crm.ucsc.edu>
+Date:   Tue Mar 14 10:48:38 2017 -0700
+
+    Merge branch 'Sprint2' of https://github.com/EronLake/Children-of-Osi into Sprint2
+
+[33mcommit 471e8462e67bc58bf8fe656611cebd883f95e7cb[m
+Author: Spencer <sssmoot@ucsc.edu>
+Date:   Tue Mar 14 10:44:05 2017 -0700
+
+    adding original botright map
+
+[33mcommit c5a511fa179302e5f3c66a4dabeeb460e6a7c8f5[m
+Merge: ca62a09 b32aa22
+Author: Justin Patrick Farris <jpfarris@crm.ucsc.edu>
+Date:   Tue Mar 14 10:22:53 2017 -0700
+
+    Merge branch 'Sprint2' of https://github.com/EronLake/Children-of-Osi into Sprint2
+
+[33mcommit ca62a092da684319e599e2d6d3dd2e669dd1bed7[m
+Author: Justin Patrick Farris <jpfarris@crm.ucsc.edu>
+Date:   Tue Mar 14 10:22:49 2017 -0700
+
+    fixed invalid comparator
+
+[33mcommit e8f8705cdd8f7946897f29cfd4610201ace993f5[m
+Author: Spencer <sssmoot@ucsc.edu>
+Date:   Tue Mar 14 10:15:42 2017 -0700
+
+    Forest Work
+    
+    Pushing what I have done for forest.
+
+[33mcommit b32aa224d6ed8b926e82d87a2609c170fdfea647[m
+Author: acalba93 <acalba@ucsc.edu>
+Date:   Tue Mar 14 03:43:51 2017 -0700
+
+    chaos and pikachu
+
+[33mcommit 044b7378d3c0b0131ca8d9cea4893fcb367a61b6[m
+Author: EronLake <ejlake@ucsc.edu>
+Date:   Tue Mar 14 01:41:11 2017 -0700
+
+    made some edits to the fight execution function
+
+[33mcommit 19ddd717b1195bb5b5e5bb2c747674f1284fd602[m
+Author: EronLake <ejlake@ucsc.edu>
+Date:   Tue Mar 14 01:33:34 2017 -0700
+
+    fixed merge conflicts
+
+[33mcommit d6dbac46bb818ef3bda1027b217013576c92ca38[m
+Merge: ee0c78d 84eeedb
+Author: EronLake <ejlake@ucsc.edu>
+Date:   Tue Mar 14 01:27:13 2017 -0700
+
+    Merge branch 'Sprint2' of github.com:EronLake/Children-of-Osi into Sprint2
+    updateing with the current brnach
+    :wq
+
+[33mcommit ee0c78d88e57b50be84d072ea09c802c7d096108[m
+Author: EronLake <ejlake@ucsc.edu>
+Date:   Tue Mar 14 01:27:02 2017 -0700
+
+    finished the execute fight function/created a separate file for the execute functions
+
+[33mcommit 84eeedb43251d4360ead012da59de41391a051fb[m
+Author: acalba93 <acalba@ucsc.edu>
+Date:   Tue Mar 14 01:05:36 2017 -0700
+
+    evade
+
+[33mcommit 32c5488effe1c84a67046a799e6898b8cf06970f[m
+Merge: 9c4e514 51c62eb
+Author: EronLake <ejlake@ucsc.edu>
+Date:   Mon Mar 13 18:15:26 2017 -0700
+
+    Merge branch 'Sprint2' of github.com:EronLake/Children-of-Osi into Sprint2
+    need to get a more updated version of the project
+
+[33mcommit 9c4e514122260bbc6eab0459f66969f696d5e69f[m
+Author: EronLake <ejlake@ucsc.edu>
+Date:   Mon Mar 13 18:15:18 2017 -0700
+
+    almost finished battle simulation
+
+[33mcommit 51c62eb2b60d18895159afba16e8226eebaeba97[m
+Merge: 2c9514d 82654bd
+Author: Andrew Patrick Barr <anpbarr@crm.ucsc.edu>
+Date:   Mon Mar 13 14:56:02 2017 -0700
+
+    Merge branch 'Sprint2' of https://github.com/EronLake/Children-of-Osi into Sprint2
+
+[33mcommit 2c9514dc3c09b517442028985bf92bf244839c8e[m
+Author: Andrew Patrick Barr <anpbarr@crm.ucsc.edu>
+Date:   Mon Mar 13 14:55:37 2017 -0700
+
+    updating form alliance
+
+[33mcommit 82654bdd9b682e7622d1d59dd588afbd4f597592[m
+Author: acalba93 <acalba@ucsc.edu>
+Date:   Mon Mar 13 14:30:15 2017 -0700
+
+    attack functionality
+
+[33mcommit f569a0710553a457cf4f130d23adea05ad724b42[m
+Merge: b0b5505 7c00fbd
+Author: EronLake <ejlake@ucsc.edu>
+Date:   Mon Mar 13 11:56:49 2017 -0700
+
+    Merge branch 'Sprint2' of github.com:EronLake/Children-of-Osi into Sprint2
+    really not sure
+
+[33mcommit b0b55058729c5fe9a9bb4502b0688b3a0af23948[m
+Author: EronLake <ejlake@ucsc.edu>
+Date:   Mon Mar 13 11:56:39 2017 -0700
+
+    added some comments for spencer
+
+[33mcommit 7c00fbdb691cc3b9ceb596860141d825ee455cd7[m
+Merge: de2aea5 730eefb
+Author: Alexander Ou <aou4@crm.ucsc.edu>
+Date:   Mon Mar 13 11:34:58 2017 -0700
+
+    Merge branch 'Sprint2' of https://github.com/EronLake/Children-of-Osi into Sprint2
+
+[33mcommit de2aea5c515c7f154ced0b0d3e7dd0fa239c6013[m
+Author: Alexander Ou <aou4@crm.ucsc.edu>
+Date:   Mon Mar 13 11:34:55 2017 -0700
+
+    evade mode still whack
+
+[33mcommit 730eefbd2aa661e763d8b4ff9fd818f30f16a5f8[m
+Merge: afc064b a09ef55
+Author: Daniel Hildebrandt <daniel.s.hildebrandt+git@gmail.com>
+Date:   Mon Mar 13 11:23:24 2017 -0700
+
+    Most of an implementation of the attack prioritisation hierarchy.
+
+[33mcommit a09ef5502365ec78b8131f8242ced04c1985f184[m
+Merge: ba8a1c9 70e30cd
+Author: EronLake <ejlake@ucsc.edu>
+Date:   Mon Mar 13 03:08:55 2017 -0700
+
+    Merge branch 'Sprint2' of github.com:EronLake/Children-of-Osi into Sprint2
+    I need to push my code
+
+[33mcommit ba8a1c9ed33da97e5883ed062f699e16520d188f[m
+Author: EronLake <ejlake@ucsc.edu>
+Date:   Mon Mar 13 03:08:42 2017 -0700
+
+    added memory pools/gameplay functions for hero memories, and finished create memory function
+
+[33mcommit 70e30cd65564bfb065900b717be37d493cd07767[m
+Author: acalba93 <acalba@ucsc.edu>
+Date:   Mon Mar 13 02:34:49 2017 -0700
+
+    fixed cooldown
+
+[33mcommit afc064b356ad0ac6d2b8e75e0840b7469a6868d7[m
+Merge: c935bf1 0a13a5b
+Author: Daniel Hildebrandt <daniel.s.hildebrandt+git@gmail.com>
+Date:   Mon Mar 13 02:24:55 2017 -0700
+
+    Merge resolution and cleanup.
+
+[33mcommit c935bf19234f306ed864eeb6f1e9e1c0848dfae7[m
+Author: Daniel Hildebrandt <daniel.s.hildebrandt+git@gmail.com>
+Date:   Mon Mar 13 01:53:07 2017 -0700
+
+    Started on attack type hierarchy.
+
+[33mcommit 0a13a5b38de2ee47e417dfafb2c9e7e9c172f025[m
+Author: acalba93 <acalba@ucsc.edu>
+Date:   Mon Mar 13 01:44:21 2017 -0700
+
+    test
+
+[33mcommit 851fbc8dad84e78a28afb81eaa37b1ee9f5ec328[m
+Merge: b0d75db 8baf7d4
+Author: Andrew Patrick Barr <anpbarr@crm.ucsc.edu>
+Date:   Mon Mar 13 01:42:14 2017 -0700
+
+    merge conflicts
+
+[33mcommit b0d75dbf0747e926eded96593ebe4f4a40825979[m
+Author: Andrew Patrick Barr <anpbarr@crm.ucsc.edu>
+Date:   Mon Mar 13 01:34:19 2017 -0700
+
+    form alliance fix
+
+[33mcommit e7c48b61472b70a0cf46ea0565c0552435588187[m
+Author: Andrew Patrick Barr <anpbarr@crm.ucsc.edu>
+Date:   Mon Mar 13 01:33:47 2017 -0700
+
+    form alliance
+
+[33mcommit 8baf7d4397ae4fb124ee17588e47ccd39c1d1592[m
+Merge: 146cfea cf0c6ea
+Author: Alexander <alexander.ou@gmail.com>
+Date:   Mon Mar 13 00:55:36 2017 -0700
+
+    atk mode movement ai in, evade cant test
+
+[33mcommit 146cfea617124240de5ade53b3b265f2c98f0a3d[m
+Author: Alexander <alexander.ou@gmail.com>
+Date:   Mon Mar 13 00:48:38 2017 -0700
+
+    atk mode combat movement done, evade mode written but can't test
+
+[33mcommit cf0c6eacd4fc9dc52cc1eebc12785ea22ee1ec9b[m
+Author: acalba93 <acalba@ucsc.edu>
+Date:   Mon Mar 13 00:03:33 2017 -0700
+
+    shang doesnt trap u
+
+[33mcommit 8c86845e5ecc706b0254898a572fe05ad3215c17[m
+Merge: 355f3fa a483d34
+Author: acalba93 <acalba@ucsc.edu>
+Date:   Mon Mar 13 00:01:52 2017 -0700
+
+    Merge remote-tracking branch 'origin/Sprint2' into Sprint2
+    
+    # Conflicts:
+    #       ChildrenOfOsi/ChildrenOfOsi/Main.cpp
+
+[33mcommit 355f3fa39f20cb7c1114fe978c1e940f7aaf3838[m
+Author: acalba93 <acalba@ucsc.edu>
+Date:   Sun Mar 12 21:43:37 2017 -0700
+
+    war
+
+[33mcommit a483d347b20605b2391c5b95678fc5ce279c0ed1[m
+Author: Daniel Hildebrandt <daniel.s.hildebrandt+git@gmail.com>
+Date:   Sun Mar 12 21:26:28 2017 -0700
+
+    Figured out the out-of-bounds issue.
+
+[33mcommit d69e7279b3a4707ce733ec64b5eba3f9433e40dc[m
+Author: Daniel Hildebrandt <daniel.s.hildebrandt+git@gmail.com>
+Date:   Sun Mar 12 20:52:48 2017 -0700
+
+    Small, strange issue with a mystery breakpoint in Rectangle.h.
+
+[33mcommit 38011b8d3201bcd02b22a0649f794b26c0dada6e[m
+Merge: 43b8115 2ea3e79
+Author: Daniel Hildebrandt <daniel.s.hildebrandt+git@gmail.com>
+Date:   Sun Mar 12 20:40:33 2017 -0700
+
+    Merge branch 'Sprint2' of https://github.com/EronLake/Children-of-Osi into Sprint2
+
+[33mcommit 43b8115551d2af37bb89dfdc2af6ed975516692d[m
+Author: Daniel Hildebrandt <daniel.s.hildebrandt+git@gmail.com>
+Date:   Sun Mar 12 20:39:29 2017 -0700
+
+    Fixed compilation errors.
+
+[33mcommit ca0e6f27515227fc4e2f172bc455638a2c6b5fbc[m
+Author: acalba93 <acalba@ucsc.edu>
+Date:   Sun Mar 12 19:45:01 2017 -0700
+
+    gave up on spin
+
+[33mcommit 95da7b47e201c5c271c5f754f36506209226549a[m
+Merge: e01341b 2ea3e79
+Author: Andrew Patrick Barr <anpbarr@crm.ucsc.edu>
+Date:   Sun Mar 12 19:43:30 2017 -0700
+
+    Merge branch 'Sprint2' of https://github.com/EronLake/Children-of-Osi into Sprint2
+
+[33mcommit e01341bb7bc765c734d5cd7fd14b2ad4e9fa7ede[m
+Author: Andrew Patrick Barr <anpbarr@crm.ucsc.edu>
+Date:   Sun Mar 12 19:43:27 2017 -0700
+
+    form alliance shell
+
+[33mcommit 2ea3e795227ff89d3f78ef178d43f83c946ba3f5[m
+Merge: b18f1df b7270ca
+Author: Justin Patrick Farris <jpfarris@crm.ucsc.edu>
+Date:   Sun Mar 12 19:32:04 2017 -0700
+
+    Merge branch 'Sprint2' of https://github.com/EronLake/Children-of-Osi into Sprint2
+
+[33mcommit b18f1dfdf57210dd59400690440ac2464fab78fe[m
+Author: Justin Patrick Farris <jpfarris@crm.ucsc.edu>
+Date:   Sun Mar 12 19:32:01 2017 -0700
+
+    Train execution
+
+[33mcommit b7270ca1b1d734068361c41caf315e3a65be5b56[m
+Merge: be53906 73024dd
+Author: Daniel Hildebrandt <daniel.s.hildebrandt+git@gmail.com>
+Date:   Sun Mar 12 19:15:25 2017 -0700
+
+    Resolution of merge conflicts.
+
+[33mcommit be539066e9f3542353f6941a488805449fcd9d0a[m
+Author: Daniel Hildebrandt <daniel.s.hildebrandt+git@gmail.com>
+Date:   Sun Mar 12 18:52:24 2017 -0700
+
+    WorldObj and Vector2f cleanup.
+
+[33mcommit 73024dd3025ec139d94ea7fbd4f2f8c87b5040fa[m
+Merge: 51a136e 789d7a0
+Author: Alexander <alexander.ou@gmail.com>
+Date:   Sun Mar 12 18:12:27 2017 -0700
+
+    Merge branch 'Sprint2' of github.com:EronLake/Children-of-Osi into Sprint2
+
+[33mcommit 51a136e86b575429f3b8250818eb9282c0cec571[m
+Author: Alexander <alexander.ou@gmail.com>
+Date:   Sun Mar 12 18:12:20 2017 -0700
+
+    gameplay combat ai setup
+
+[33mcommit 789d7a011c0985f91e99f66a6155d30d70874906[m
+Author: acalba93 <acalba@ucsc.edu>
+Date:   Sun Mar 12 18:02:21 2017 -0700
+
+    doubled memory
+
+[33mcommit 19bfcc37db1b098fd067028ccb7fde2f4b7d6731[m
+Merge: 4ec873d 7777904
+Author: Zirconia <dtoney@ucsc.edu>
+Date:   Sun Mar 12 17:18:41 2017 -0700
+
+    Merge branch 'Sprint2' of https://github.com/EronLake/Children-of-Osi.git
+
+[33mcommit 4ec873d06444604338db986e20f2c12709766213[m
+Author: U-DESKTOP-IJO7N67\BlackMagicianDTT <dtoney@ucsc.edu>
+Date:   Sun Mar 12 17:17:01 2017 -0700
+
+    Added new Yemoja dialog file.
+
+[33mcommit 77779043027611921af3d3e622fed161da9a18f3[m
+Author: Justin Patrick Farris <jpfarris@crm.ucsc.edu>
+Date:   Sun Mar 12 16:52:34 2017 -0700
+
+    Commented back out problem lines in action postconds
+
+[33mcommit ea421ddc27ea804c7bc599b882953851544ac497[m
+Merge: 15455ac 4e3d88d
+Author: Justin Patrick Farris <jpfarris@crm.ucsc.edu>
+Date:   Sun Mar 12 15:53:21 2017 -0700
+
+    Merge Doer/Reciever changes to actions with commented out lines in Action.cpp and Main.cpp
+
+[33mcommit 15455ace6dd6059ceb352057e7520502621bb5ad[m
+Author: Justin Patrick Farris <jpfarris@crm.ucsc.edu>
+Date:   Sun Mar 12 15:50:32 2017 -0700
+
+    Resolve linker errors between AIController and ActionHelper
+
+[33mcommit 4e3d88d1d035de1ff751d782d4072a21c9341623[m
+Author: acalba93 <acalba@ucsc.edu>
+Date:   Sun Mar 12 06:41:26 2017 -0700
+
+    memory is broken
+
+[33mcommit 5380528c4eeef63e70f3fca01e4ba8bd306c8417[m
+Author: acalba93 <acalba@ucsc.edu>
+Date:   Sun Mar 12 04:14:03 2017 -0700
+
+    Are you kidding me???  Melee bugged, for unimaginable reasons
+
+[33mcommit 1e92fd88d8a9be5b9907efebed71a1e3407cf96f[m
+Author: acalba93 <acalba@ucsc.edu>
+Date:   Sun Mar 12 00:39:11 2017 -0800
+
+    delete attack correctly
+
+[33mcommit b1959c7654bd5528884b931a402b0f0cb725813a[m
+Author: acalba93 <acalba@ucsc.edu>
+Date:   Sat Mar 11 23:59:08 2017 -0800
+
+    Lots of changes
+
+[33mcommit 54c2873ee87ea3b29e7ae6eba6103f835ca3f325[m
+Author: U-DESKTOP-IJO7N67\BlackMagicianDTT <dtoney@ucsc.edu>
+Date:   Sat Mar 11 22:59:06 2017 -0800
+
+    Another change to make_available().
+
+[33mcommit c74a591039671c3ed170b2c1f6a917d5e19621cd[m
+Author: U-DESKTOP-IJO7N67\BlackMagicianDTT <dtoney@ucsc.edu>
+Date:   Sat Mar 11 22:55:01 2017 -0800
+
+    Another change to make_available().
+
+[33mcommit 08c2baca2ea3b83a7ab2b8fb097f035e270dc832[m
+Merge: 8f544d8 bd6ac45
+Author: Zirconia <dtoney@ucsc.edu>
+Date:   Sat Mar 11 22:46:07 2017 -0800
+
+    Merge branch 'Sprint2' of https://github.com/EronLake/Children-of-Osi.git
+
+[33mcommit 8f544d88a07d81550f58796b778af45553410406[m
+Author: U-DESKTOP-IJO7N67\BlackMagicianDTT <dtoney@ucsc.edu>
+Date:   Sat Mar 11 22:42:57 2017 -0800
+
+    Changed memory pool's make available and find available block functions and added Oshosi dialog.
+
+[33mcommit bd6ac457e2666a91c5c7e5b62e6b7f72c81f8f48[m
+Merge: 52a46a0 814b967
+Author: Andrew Patrick Barr <anpbarr@crm.ucsc.edu>
+Date:   Sat Mar 11 20:36:24 2017 -0800
+
+    Merge branch 'Sprint2' of https://github.com/EronLake/Children-of-Osi into Sprint2
+
+[33mcommit 52a46a0c567288e4a9fd8da8cc8f8f922fe1f1df[m
+Author: Andrew Patrick Barr <anpbarr@crm.ucsc.edu>
+Date:   Sat Mar 11 20:36:18 2017 -0800
+
+     prereq appeal stuff
+
+[33mcommit d9aadb9e0f20243f9440cc4e6683036aac9e0828[m
+Merge: 123cea0 814b967
+Author: Justin Patrick Farris <jpfarris@crm.ucsc.edu>
+Date:   Sat Mar 11 18:40:18 2017 -0800
+
+    Merge branch 'Sprint2' of https://github.com/EronLake/Children-of-Osi into Sprint2
+
+[33mcommit 123cea0e980580ed3159b3ecbcfc3b570a4acb00[m
+Author: Justin Patrick Farris <jpfarris@crm.ucsc.edu>
+Date:   Sat Mar 11 18:40:14 2017 -0800
+
+    enabled enter key for dialog
+
+[33mcommit 814b967cbdbbeb58d7d4f60662e4ff6267a56f2e[m
+Merge: 71becbd 4caec8c
+Author: EronLake <ejlake@ucsc.edu>
+Date:   Sat Mar 11 18:36:55 2017 -0800
+
+    Merge branch 'Sprint2' of github.com:EronLake/Children-of-Osi into Sprint2
+
+[33mcommit 71becbdd3cd79231bf31fa58e0f23736ce745c08[m
+Author: EronLake <ejlake@ucsc.edu>
+Date:   Sat Mar 11 18:36:47 2017 -0800
+
+    added the aciton helper
+
+[33mcommit 4caec8ce9ff3e3ff0170d5476ee0ae847feda312[m
+Author: acalba93 <acalba@ucsc.edu>
+Date:   Sat Mar 11 18:36:07 2017 -0800
+
+    throw rocks (still has bug)
+
+[33mcommit 8076c119312769d7c91e51eae3eb28fb9929e77e[m
+Author: Alexander Ou <aou4@crm.ucsc.edu>
+Date:   Sat Mar 11 17:27:24 2017 -0800
+
+    movement ai gets destination
+
+[33mcommit f7307cf06dc33556ac5bada0143c4d00759ce503[m
+Author: Alexander Ou <aou4@crm.ucsc.edu>
+Date:   Sat Mar 11 15:33:15 2017 -0800
+
+    movement ai select destination
+
+[33mcommit b1c6dead8b2d51d78e85aa824065a5329b7b0466[m
+Merge: 9bb8e89 2270d3d
+Author: Daniel Hildebrandt <daniel.s.hildebrandt+git@gmail.com>
+Date:   Sat Mar 11 12:51:25 2017 -0800
+
+    Merge branch 'Sprint2' of https://github.com/EronLake/Children-of-Osi into Sprint2
+
+[33mcommit 9bb8e8908273657a26f9f8f197b22670784907c8[m
+Author: Daniel Hildebrandt <daniel.s.hildebrandt+git@gmail.com>
+Date:   Sat Mar 11 12:51:10 2017 -0800
+
+    Incrememntal text rendering cleanup.
+
+[33mcommit 2270d3debdd069d14ba72772c043ed7656579fdd[m
+Author: acalba93 <acalba@ucsc.edu>
+Date:   Fri Mar 10 19:41:44 2017 -0800
+
+    its not technically broken
+
+[33mcommit ab058a1580bfc50c4ae0d6b8d885171c1de310a9[m
+Merge: 568aa42 47e3b33
+Author: EronLake <ejlake@ucsc.edu>
+Date:   Fri Mar 10 18:11:28 2017 -0800
+
+    fixed merge conflicts
+
+[33mcommit 568aa4235f2c939b969002fadcbf6ca8ff662e79[m
+Author: EronLake <ejlake@ucsc.edu>
+Date:   Fri Mar 10 18:01:52 2017 -0800
+
+    added apply utility to post conditions
+
+[33mcommit 47e3b33a05dd2d12d66c44aa3a0c0873d756e6dd[m
+Author: acalba93 <acalba@ucsc.edu>
+Date:   Fri Mar 10 07:59:42 2017 -0800
+
+    Projectile is bugged. Idk y
+
+[33mcommit 56835aca5b46ed10e5c94f2593b968e57cfa2061[m
+Author: acalba93 <acalba@ucsc.edu>
+Date:   Fri Mar 10 07:14:57 2017 -0800
+
+    Mini Indiviual Game Jam
+
+[33mcommit 14b635e133055f2c064ec3a44e8ec753df6df462[m
+Author: acalba93 <acalba@ucsc.edu>
+Date:   Fri Mar 10 00:02:43 2017 -0800
+
+    Start on "faction" states and soldier states and parties
+
+[33mcommit 924cb8ee6d82a988ae76bd625c5fa34c1adfee56[m
+Author: acalba93 <acalba@ucsc.edu>
+Date:   Wed Mar 8 17:15:19 2017 -0800
+
+    attack update
+
+[33mcommit 32dac49358f73db0db786f074ef81189933bea83[m
+Merge: 526075a 8c7df7b
+Author: acalba93 <acalba@ucsc.edu>
+Date:   Wed Mar 8 02:51:23 2017 -0800
+
+    Merge remote-tracking branch 'origin/Sprint2' into Sprint2
+    
+    # Conflicts:
+    #       ChildrenOfOsi/ChildrenOfOsi/ChildrenOfOsi.vcxproj.filters
+    #       ChildrenOfOsi/ChildrenOfOsi/Movement.h
+
+[33mcommit 526075a884e3ffc8738a9a7af8ac5eceb92d9daf[m
+Author: acalba93 <acalba@ucsc.edu>
+Date:   Wed Mar 8 02:44:44 2017 -0800
+
+    Combat Control and Delayed Attack
+
+[33mcommit 8c7df7b8a8e82d221dc6c4f7b4c6ecbf0e6d4631[m
+Author: Alexander <alexander.ou@gmail.com>
+Date:   Wed Mar 8 01:30:59 2017 -0800
+
+    riv obj & collision in, but collision is REALLY crappy for now(don't try it!)
+
+[33mcommit f6fab8481e11781ade16beeb5edc2e5c8955caa4[m
+Merge: c12bc26 915d846
+Author: EronLake <ejlake@ucsc.edu>
+Date:   Tue Mar 7 16:05:31 2017 -0800
+
+    Merge branch 'Sprint2' of github.com:EronLake/Children-of-Osi into Sprint2
+
+[33mcommit c12bc26d39978bda88d22a7f6dfc199979ca6601[m
+Author: EronLake <ejlake@ucsc.edu>
+Date:   Tue Mar 7 16:03:37 2017 -0800
+
+    changed speed
+
+[33mcommit 915d8466bbbc6bc05ef37080651b3e44e9241c06[m
+Author: acalba93 <acalba@ucsc.edu>
+Date:   Tue Mar 7 16:03:31 2017 -0800
+
+    dialogue fix
+
+[33mcommit c0a662c6722a24e2723646c85bb6cd452d5b5394[m
+Merge: 36570b5 a1b73be
+Author: EronLake <ejlake@ucsc.edu>
+Date:   Tue Mar 7 15:59:37 2017 -0800
+
+    Merge branch 'Sprint2' of github.com:EronLake/Children-of-Osi into Sprint2
+
+[33mcommit 36570b5b3f0799662f7803682ee0316b7d4e0871[m
+Author: EronLake <ejlake@ucsc.edu>
+Date:   Tue Mar 7 15:59:25 2017 -0800
+
+    took out the black boxes and added new map
+
+[33mcommit a1b73bef3591287ba0d049374eb45b4265aa40e1[m
+Author: acalba93 <acalba@ucsc.edu>
+Date:   Tue Mar 7 15:33:44 2017 -0800
+
+    sketch2 and idles
+
+[33mcommit cfbd56dbc48f6072e8618a9f6a3ede7281822d61[m
+Merge: 170322c a2741f2
+Author: EronLake <ejlake@ucsc.edu>
+Date:   Tue Mar 7 15:25:49 2017 -0800
+
+    Merge branch 'Sprint2' of github.com:EronLake/Children-of-Osi into Sprint2
+
+[33mcommit 170322cb0dac7adfd4fcd08a95c306ebe06db952[m
+Merge: c34bafd 57a9ea8
+Author: EronLake <ejlake@ucsc.edu>
+Date:   Tue Mar 7 15:25:17 2017 -0800
+
+    conditions should be working with dummy utilites
+
+[33mcommit a2741f269fc793a344ef71955a196b855e7e11c3[m
+Merge: c4d5dbe 57a9ea8
+Author: Justin Patrick Farris <jpfarris@crm.ucsc.edu>
+Date:   Tue Mar 7 15:21:22 2017 -0800
+
+    Merge branch 'Sprint2' of https://github.com/EronLake/Children-of-Osi into Sprint2
+
+[33mcommit c34bafd1a2447d8bddec733e53ac08633690e4af[m
+Author: EronLake <ejlake@ucsc.edu>
+Date:   Tue Mar 7 14:27:26 2017 -0800
+
+    finished the preconditions
+
+[33mcommit 57a9ea8a8495bf7e4daac5e762e4fd2a4a6d87c7[m
+Merge: 478bea5 7fe543f
+Author: Spencer <sssmoot@ucsc.edu>
+Date:   Tue Mar 7 02:10:16 2017 -0800
+
+    Working on Designing jungle. Also changed naming conventions of assets
+
+[33mcommit 478bea5d0a835d6809a1b89506256ebb3ca5f319[m
+Author: Spencer <sssmoot@ucsc.edu>
+Date:   Tue Mar 7 02:03:40 2017 -0800
+
+    Working on Designing jungle. Also changed naming conventions of assets
+
+[33mcommit c4d5dbe52923e6f860f0e79c2284aaa253d096ca[m
+Merge: 5b09a95 7fe543f
+Author: Justin Patrick Farris <jpfarris@crm.ucsc.edu>
+Date:   Tue Mar 7 00:28:24 2017 -0800
+
+    Merge branch 'Sprint2' of https://github.com/EronLake/Children-of-Osi into Sprint2
+
+[33mcommit 7fe543f3ae5940342d4aab4d2557a32063d19440[m
+Author: acalba93 <acalba@ucsc.edu>
+Date:   Tue Mar 7 00:28:05 2017 -0800
+
+    destroy text files
+
+[33mcommit 5b09a951a4d8bea0982b4ab1929b04af20869674[m
+Author: Justin Patrick Farris <jpfarris@crm.ucsc.edu>
+Date:   Tue Mar 7 00:21:44 2017 -0800
+
+    Finished AI controller
+
+[33mcommit 79ae162c23af2cb9348b226c641ba01759828389[m
+Merge: f685dfc 2283a86
+Author: acalba93 <acalba@ucsc.edu>
+Date:   Tue Mar 7 00:14:29 2017 -0800
+
+    Merge remote-tracking branch 'origin/Sprint2' into Sprint2
+    
+    # Conflicts:
+    #       ChildrenOfOsi/ChildrenOfOsi/Main.cpp
+
+[33mcommit f685dfc18bd73089624e87effc7275ea1841ca19[m
+Author: acalba93 <acalba@ucsc.edu>
+Date:   Tue Mar 7 00:10:34 2017 -0800
+
+    TEXT IS WORKING I HAVE REDEEMED MYSELF AFTER NOT DOING A JSON FILE
+
+[33mcommit 2283a869162899e61f9cedea5672da72b0821ab4[m
+Merge: 0cf5ca0 3d4f6b7
+Author: Andrew <anpbarr@ucsc.edu>
+Date:   Mon Mar 6 23:27:47 2017 -0800
+
+    merge conflict
+
+[33mcommit 0cf5ca0a0446df0cff41a77c7eb4374077c27ace[m
+Author: Andrew <anpbarr@ucsc.edu>
+Date:   Mon Mar 6 23:20:44 2017 -0800
+
+     formulated preconditions as a map from string to shared_ptr
+
+[33mcommit 3d4f6b7a83e462fa6b86dc733654b77513bf3ea1[m
+Merge: e60d05c db5a669
+Author: Daniel Hildebrandt <daniel.s.hildebrandt+git@gmail.com>
+Date:   Mon Mar 6 20:05:13 2017 -0800
+
+    Merge branch 'Sprint2' of https://github.com/EronLake/Children-of-Osi into Sprint2
+
+[33mcommit e60d05c9861f09c42cd461712ca87b3484a23a40[m
+Author: Daniel Hildebrandt <daniel.s.hildebrandt+git@gmail.com>
+Date:   Mon Mar 6 20:05:06 2017 -0800
+
+    Reverted to fonts tutorial code.
+
+[33mcommit f1c0e6eedc27275d65961e096d7572eecbf77108[m
+Merge: 03d9d00 db5a669
+Author: Andrew <anpbarr@ucsc.edu>
+Date:   Mon Mar 6 19:16:15 2017 -0800
+
+    messageMerge branch 'Sprint2' of https://github.com/EronLake/Children-of-Osi into Sprint2
+
+[33mcommit 03d9d006da57d9b7d80ab345f058fe4e72ceee85[m
+Author: Andrew <anpbarr@ucsc.edu>
+Date:   Mon Mar 6 19:16:11 2017 -0800
+
+    removed extraneous stuff
+
+[33mcommit db5a669a2db19d5304211f7e5f776bd6c107a37b[m
+Merge: 7a0cc31 e8dfa85
+Author: EronLake <ejlake@ucsc.edu>
+Date:   Mon Mar 6 19:08:57 2017 -0800
+
+    Merge branch 'Sprint2' of github.com:EronLake/Children-of-Osi into Sprint2
+
+[33mcommit 7a0cc31c9c00dabfaa796e99b954871ba0ba4c15[m
+Author: EronLake <ejlake@ucsc.edu>
+Date:   Mon Mar 6 19:08:47 2017 -0800
+
+    Added functionality to conditions class
+
+[33mcommit 0c4f42c411d9550ea3990278816fea1b1d77395f[m
+Merge: 0991cf7 e8dfa85
+Author: Andrew <anpbarr@ucsc.edu>
+Date:   Mon Mar 6 17:34:40 2017 -0800
+
+    text files
+
+[33mcommit 0991cf7adb1810eeb86187addaf882a24a5a1cc8[m
+Merge: 3a68ac3 1225ada
+Author: Andrew <anpbarr@ucsc.edu>
+Date:   Mon Mar 6 17:33:52 2017 -0800
+
+    fixed conflict
+
+[33mcommit e8dfa8569c5f4bfa2f2dd5f51ee8d82390579432[m
+Merge: 7150d20 1225ada
+Author: Daniel Hildebrandt <daniel.s.hildebrandt+git@gmail.com>
+Date:   Mon Mar 6 17:28:58 2017 -0800
+
+    Merge branch 'Sprint2' of https://github.com/EronLake/Children-of-Osi into Sprint2
+
+[33mcommit 7150d20395c16214e9965e020c2feb09a1e8da6b[m
+Author: Daniel Hildebrandt <daniel.s.hildebrandt+git@gmail.com>
+Date:   Mon Mar 6 17:28:44 2017 -0800
+
+    To debug, indulged Alessio's superticion and started using Shader.h.
+
+[33mcommit 3a68ac3e48bd35094169b5f4775375400ccd4e57[m
+Author: Andrew <anpbarr@ucsc.edu>
+Date:   Mon Mar 6 17:25:59 2017 -0800
+
+    reformatted
+
+[33mcommit 1225adaf832d0a2a111b3647db6b58bd62d79940[m
+Merge: 2eb9b57 595c5b5
+Author: Justin Patrick Farris <jpfarris@crm.ucsc.edu>
+Date:   Mon Mar 6 16:48:17 2017 -0800
+
+    Merge branch 'Sprint2' of https://github.com/EronLake/Children-of-Osi into Sprint2
+
+[33mcommit 2eb9b57c33433b3ea228810a63681ac28f132851[m
+Author: Justin Patrick Farris <jpfarris@crm.ucsc.edu>
+Date:   Mon Mar 6 16:48:11 2017 -0800
+
+    AI Controller init's action plans
+
+[33mcommit 595c5b5dd043e8eca0b98142ebee62ceedea4fa0[m
+Merge: 6800b78 d1955c3
+Author: EronLake <ejlake@ucsc.edu>
+Date:   Mon Mar 6 13:41:50 2017 -0800
+
+    fixed merge conflicts
+
+[33mcommit 6800b78cd7e282bd9cac72935c8f2c00282c8162[m
+Author: EronLake <ejlake@ucsc.edu>
+Date:   Mon Mar 6 13:23:53 2017 -0800
+
+    demoed some stuff in the config
+
+[33mcommit d1955c3f3c9dd4727a10ffda986d1338819190c9[m
+Author: U-DESKTOP-IJO7N67\BlackMagicianDTT <dtoney@ucsc.edu>
+Date:   Mon Mar 6 12:09:19 2017 -0800
+
+    Added new Shango movement and attack sprites.
+
+[33mcommit 793ffafaa52e8ab87ac4c9b169178d907e633382[m
+Author: Justin Patrick Farris <jpfarris@crm.ucsc.edu>
+Date:   Mon Mar 6 10:10:27 2017 -0800
+
+    Fixed all merge conflicts, pushing AI Controller and Planner updates
+
+[33mcommit a68de9c82516a01407a373dbbfb72e6d77c4b3e4[m
+Merge: 2c2fc5b 9c7b863
+Author: Justin Patrick Farris <jpfarris@crm.ucsc.edu>
+Date:   Mon Mar 6 10:09:49 2017 -0800
+
+    Merge relationship class
+
+[33mcommit 2c2fc5bb9377865b4d49b958306ac2cda247ec3a[m
+Merge: 2a1567d 27ecd95
+Author: Justin Patrick Farris <jpfarris@crm.ucsc.edu>
+Date:   Mon Mar 6 10:03:22 2017 -0800
+
+    Merge of Planner AI
+
+[33mcommit 9c7b8630f1366273025004a9921fc92ddf193adf[m
+Author: acalba93 <acalba@ucsc.edu>
+Date:   Mon Mar 6 03:38:03 2017 -0800
+
+    I couldn't find the JSON file i was supposed to edit, I failed i am sorry :(
+
+[33mcommit 50e34ababad55272e7bbc82320d73bc362795068[m
+Merge: 6ed7055 27ecd95
+Author: EronLake <ejlake@ucsc.edu>
+Date:   Sun Mar 5 22:51:24 2017 -0800
+
+    Merge branch 'Sprint2' of github.com:EronLake/Children-of-Osi into Sprint2
+    
+    not really sure
+
+[33mcommit 6ed705515b1510472fd903d47a53ad0b18746a10[m
+Author: EronLake <ejlake@ucsc.edu>
+Date:   Sun Mar 5 22:51:17 2017 -0800
+
+    changed actions to incoperate the prerec objects
+
+[33mcommit 2a1567d5e6986737e8f7ef83343239d3b16efeaa[m
+Author: Justin Patrick Farris <jpfarris@crm.ucsc.edu>
+Date:   Sun Mar 5 22:50:47 2017 -0800
+
+    AI Controller skeleton, Planner class defined
+
+[33mcommit 27ecd95f80c1d4e423262363ea942e6c008a78dc[m
+Merge: a853d71 a38e4bb
+Author: Daniel Hildebrandt <daniel.s.hildebrandt+git@gmail.com>
+Date:   Sun Mar 5 22:20:41 2017 -0800
+
+    Merge branch 'Sprint2' of https://github.com/EronLake/Children-of-Osi into Sprint2
+
+[33mcommit a853d71ab6465662450e072821610962aaee6a92[m
+Author: Daniel Hildebrandt <daniel.s.hildebrandt+git@gmail.com>
+Date:   Sun Mar 5 22:18:39 2017 -0800
+
+    Intermediate commit: still debugging font drawing.
+
+[33mcommit a38e4bb3bb8db5c6bfab87c2618098e19ec3d85d[m
+Author: EronLake <ejlake@ucsc.edu>
+Date:   Sun Mar 5 20:59:53 2017 -0800
+
+    added Condition function outlines
+
+[33mcommit 430676315aadb1897d9e6af7f000cb17b46ae196[m
+Merge: 317be8d 6e6d9a3
+Author: EronLake <ejlake@ucsc.edu>
+Date:   Sun Mar 5 20:50:42 2017 -0800
+
+    Merge branch 'Sprint2' of github.com:EronLake/Children-of-Osi into Sprint2
+
+[33mcommit 317be8d4790aa3fd6256e3847dc12c971fc5eb84[m
+Author: EronLake <ejlake@ucsc.edu>
+Date:   Sun Mar 5 20:50:16 2017 -0800
+
+    readded the map editor
+
+[33mcommit 6e6d9a31243b57af1ea8a8c6b4c6f2e9270b06eb[m
+Author: Andrew <anpbarr@ucsc.edu>
+Date:   Sun Mar 5 20:32:19 2017 -0800
+
+    added temporary prioritize
+
+[33mcommit 392ac685f70857ae00b8831e55b2a98bef4d89d0[m
+Author: Andrew <anpbarr@ucsc.edu>
+Date:   Sun Mar 5 17:10:35 2017 -0800
+
+    planner
+
+[33mcommit 08ca33329cfecafbdaa3ee3099b7c3c6c142d758[m
+Author: Andrew <anpbarr@ucsc.edu>
+Date:   Sat Mar 4 12:23:34 2017 -0800
+
+     fixed EVERYTHING
+
+[33mcommit f89e2eb3d417a36bbb0994e5dc74adbb0507bb10[m
+Author: Justin <justin@dreamstartlabs.com>
+Date:   Sat Mar 4 07:19:08 2017 -0800
+
+    Blank controller, attempt at fixing build
+
+[33mcommit f82cc9c8a36b52dfc5b7de785071322ec3cf475d[m
+Author: Justin <justin@dreamstartlabs.com>
+Date:   Fri Mar 3 20:01:22 2017 -0800
+
+    connect hero and personality
+
+[33mcommit 509d00fb0c89229744794aea1dac62062baa4298[m
+Author: Andrew <anpbarr@ucsc.edu>
+Date:   Fri Mar 3 18:59:57 2017 -0800
+
+    fixed compile error
+
+[33mcommit fd9c5f90f93ad9a3e44b2f8376319d425db4a366[m
+Author: Andrew <anpbarr@ucsc.edu>
+Date:   Fri Mar 3 18:58:53 2017 -0800
+
+    added personality appeal functions and constructors
+
+[33mcommit c34a63ca39b5a8ee3b0a3778b0c8526398990e16[m
+Author: Andrew <anpbarr@ucsc.edu>
+Date:   Fri Mar 3 18:29:08 2017 -0800
+
+    setup for implementing goap
+
+[33mcommit 79b40fedb2ccaa857c61556c6135c0babb2cf4aa[m
+Merge: 7113ead 8f5b5ba
+Author: Andrew <anpbarr@ucsc.edu>
+Date:   Fri Mar 3 17:42:59 2017 -0800
+
+    ibecauseMerge branch 'Sprint2' of https://github.com/EronLake/Children-of-Osi into Sprint2
+
+[33mcommit 8f5b5ba0e5be5d9b0acef730b1cd046bc849d095[m
+Merge: bcd753c cda43b4
+Author: Justin Patrick Farris <jpfarris@crm.ucsc.edu>
+Date:   Fri Mar 3 16:34:54 2017 -0800
+
+    Merge branch 'Sprint2' of https://github.com/EronLake/Children-of-Osi into Sprint2
+
+[33mcommit bcd753c5ea8916ccf2ccc274f199944b6c273de5[m
+Author: Justin Patrick Farris <jpfarris@crm.ucsc.edu>
+Date:   Fri Mar 3 16:34:49 2017 -0800
+
+    create goap file
+
+[33mcommit 7113ead3a6352559242bcd0a78147985c2db806a[m
+Merge: 69a8daf cda43b4
+Author: Andrew <anpbarr@ucsc.edu>
+Date:   Fri Mar 3 12:06:32 2017 -0800
+
+     text files
+
+[33mcommit 69a8daf4b1456319e3b07bc9d24fb556e91a7e7d[m
+Author: Andrew <anpbarr@ucsc.edu>
+Date:   Fri Mar 3 12:05:03 2017 -0800
+
+    text file merge conflicts :(((
+
+[33mcommit cda43b48122ef247dbc3d5c789d19c2b595796ea[m
+Merge: 649f812 3c40ac0
+Author: Daniel Hildebrandt <daniel.s.hildebrandt+git@gmail.com>
+Date:   Thu Mar 2 17:26:28 2017 -0800
+
+    Merge branch 'Sprint2' of https://github.com/EronLake/Children-of-Osi into Sprint2
+
+[33mcommit 649f812d1c8266d7dddd95579e6e951e1008a6f7[m
+Author: Daniel Hildebrandt <daniel.s.hildebrandt+git@gmail.com>
+Date:   Thu Mar 2 17:26:14 2017 -0800
+
+    Flow of control now actually enters drawText, fixed an OpenGL state change that was causing sprites to be cut in twain.
+
+[33mcommit 3c40ac086132bfb234cf7e176c4291e1b77aff82[m
+Author: acalba93 <acalba@ucsc.edu>
+Date:   Wed Mar 1 16:33:19 2017 -0800
+
+    Personality
+
+[33mcommit 43199a1a72146819f7206b7b86109602756c6a4a[m
+Author: Justin Patrick Farris <jpfarris@crm.ucsc.edu>
+Date:   Wed Mar 1 13:24:40 2017 -0800
+
+    Fixed unsigned int comparison
+
+[33mcommit 47030e2d0cf5298151a8117c50cf218939aa119c[m
+Merge: 7341645 7cdcd34
+Author: Justin Patrick Farris <jpfarris@crm.ucsc.edu>
+Date:   Wed Mar 1 10:47:58 2017 -0800
+
+    Filters merge
+
+[33mcommit 73416450af4039bf2def890cc123e4547e5ed0e1[m
+Author: Justin Patrick Farris <jpfarris@crm.ucsc.edu>
+Date:   Wed Mar 1 10:46:27 2017 -0800
+
+    Memory class finished
+
+[33mcommit 7cdcd34b2dd6dcd917c65e38b66d408aeba258df[m
+Author: acalba93 <acalba@ucsc.edu>
+Date:   Wed Mar 1 06:59:22 2017 -0800
+
+    Fixed Execute action bugs, attack to dialogue sprite bug, and added sixers song
+
+[33mcommit cf17ce293296db4236b497317071b3c32918ec9b[m
+Merge: c6221c3 fd3270c
+Author: Daniel Hildebrandt <daniel.s.hildebrandt+git@gmail.com>
+Date:   Wed Mar 1 00:41:29 2017 -0800
+
+    Merge conflict resolution in GameWindow.h.
+
+[33mcommit c6221c37890b5e6e521a4f25fef3c53d28cf020d[m
+Author: Daniel Hildebrandt <daniel.s.hildebrandt+git@gmail.com>
+Date:   Wed Mar 1 00:36:39 2017 -0800
+
+    Implemented fullscreeb, disabled for easier debugging.
+
+[33mcommit fd3270cfe6b561e3e61d29083ff7043a617fa6c7[m
+Author: acalba93 <acalba@ucsc.edu>
+Date:   Tue Feb 28 22:22:21 2017 -0800
+
+    Attack animations and added some stuff Alex did
+
+[33mcommit 3e690df6fb8c962110bf752b12637ed5d510c7e7[m
+Author: acalba93 <acalba@ucsc.edu>
+Date:   Tue Feb 28 18:52:27 2017 -0800
+
+    Dialogue should be working but isn't
+
+[33mcommit 150ced2da6c6fb5a3754e963c9f888bc2faacd1f[m
+Author: acalba93 <acalba@ucsc.edu>
+Date:   Tue Feb 28 15:51:22 2017 -0800
+
+    texture changes
+
+[33mcommit 4bf1eee4af8ac5eb298aa596ee7b0a9f7863c884[m
+Author: acalba93 <acalba@ucsc.edu>
+Date:   Tue Feb 28 15:22:46 2017 -0800
+
+    added Alex's war and alliance
+
+[33mcommit 433d250a6d464642b2d64582993576ff95fb503b[m
+Author: acalba93 <acalba@ucsc.edu>
+Date:   Tue Feb 28 15:07:40 2017 -0800
+
+    Revert "hero relationships, alliance, war, and some work on dialoguegui text but not showing"
+    
+    This reverts commit d86e129ffb10111cf47c89e7719bf9d68578f03f.
+
+[33mcommit d86e129ffb10111cf47c89e7719bf9d68578f03f[m
+Author: Alexander <alexander.ou@gmail.com>
+Date:   Mon Feb 27 23:43:24 2017 -0800
+
+    hero relationships, alliance, war, and some work on dialoguegui text but not showing
+
+[33mcommit b1cdd4090495f4e58c7633d41fcd40ab45c1c928[m
+Author: acalba93 <acalba@ucsc.edu>
+Date:   Mon Feb 27 18:14:42 2017 -0800
+
+    More action stuff
+    
+    not quite working but compiles and runs fine
+
+[33mcommit 44df91934ed5cf7820efba1ce1c04ecc8e3f3b74[m
+Author: acalba93 <acalba@ucsc.edu>
+Date:   Mon Feb 27 14:43:07 2017 -0800
+
+    added some action and relationship stuff
+
+[33mcommit 57dc9d62016d27dce6dfc8dd5023feb4e3af103a[m
+Merge: bf07f3f 41b1e9b
+Author: Daniel Hildebrandt <daniel.s.hildebrandt+git@gmail.com>
+Date:   Sun Feb 26 21:49:42 2017 -0800
+
+    Merge branch 'Sprint2' of https://github.com/EronLake/Children-of-Osi into Sprint2
+
+[33mcommit bf07f3f5e34ccdabd0d5e1a1578c40a2c2e1be83[m
+Author: Daniel Hildebrandt <daniel.s.hildebrandt+git@gmail.com>
+Date:   Sun Feb 26 21:48:25 2017 -0800
+
+    font drawing seems ready for testing, need to figure out what to add to RenderHelper.
+
+[33mcommit d7a6c0614073cdc65d35876f83daa88e2e218806[m
+Merge: 60fceb6 41b1e9b
+Author: Andrew <anpbarr@ucsc.edu>
+Date:   Sun Feb 26 20:43:07 2017 -0800
+
+    so i can ullMerge branch 'Sprint2' of https://github.com/EronLake/Children-of-Osi into Sprint2
+
+[33mcommit 60fceb67610d447d7c3f2053cbc561d81ff06848[m
+Author: Andrew <anpbarr@ucsc.edu>
+Date:   Sun Feb 26 20:41:50 2017 -0800
+
+     so i can pull
+
+[33mcommit 41b1e9b7291a212371ec7e253a9abbcc36311f95[m
+Merge: e9f9dda 5ba264d
+Author: Zirconia <dtoney@ucsc.edu>
+Date:   Sun Feb 26 17:41:43 2017 -0800
+
+    Relationship stuff.
+
+[33mcommit 5ba264d7409b5bd8a43d6d93be5fbb4a6e429bc0[m
+Author: acalba93 <acalba@ucsc.edu>
+Date:   Sat Feb 25 18:37:52 2017 -0800
+
+    fixed ai
+
+[33mcommit 3c3f284157e48289df9b511c154beb75768f74b8[m
+Author: acalba93 <acalba@ucsc.edu>
+Date:   Sat Feb 25 17:07:58 2017 -0800
+
+    projectile to attack
+
+[33mcommit cd648eb541bf1acc73810aaf0f8255d87d1f2a87[m
+Author: EronLake <ejlake@ucsc.edu>
+Date:   Sat Feb 25 00:34:03 2017 -0800
+
+    fixed merge errors
+
+[33mcommit b93d09e81b8fcfdc65166b6b7042b9a9e97dc3ba[m
+Merge: 38fec17 9daca24
+Author: EronLake <ejlake@ucsc.edu>
+Date:   Sat Feb 25 00:27:30 2017 -0800
+
+    Merge branch 'Sprint2' of github.com:EronLake/Children-of-Osi into Sprint2
+
+[33mcommit 38fec17832895d2b19e71e002570e9dcdb6a9c6f[m
+Merge: d72fd27 ebaf0bf
+Author: EronLake <ejlake@ucsc.edu>
+Date:   Sat Feb 25 00:27:01 2017 -0800
+
+    got the mouse the be able to click and return world location(for map editor)
+
+[33mcommit 9daca24554a112ef7c5de824bcd8b62712f0272f[m
+Author: acalba93 <acalba@ucsc.edu>
+Date:   Fri Feb 24 20:00:32 2017 -0800
+
+    Basic Attacks
+
+[33mcommit 02ef3094d41d46492ef4ad50646a498472bd6b5f[m
+Author: acalba93 <acalba@ucsc.edu>
+Date:   Fri Feb 24 14:22:02 2017 -0800
+
+    added attack stuff
+    
+    added attack stuff
+
+[33mcommit d72fd276af501848a3c5588f567abd9856a69441[m
+Merge: 4c14243 7e92980
+Author: EronLake <ejlake@ucsc.edu>
+Date:   Fri Feb 24 14:00:35 2017 -0800
+
+    got the textures/objects loading from config with no wasted memory!
+
+[33mcommit ebaf0bf2f365eacdb1734def6eaacf9036777373[m
+Author: Justin Patrick Farris <jpfarris@crm.ucsc.edu>
+Date:   Fri Feb 24 05:25:29 2017 -0800
+
+    Fixing issues with pathfinding, more textures/sprites inserted
+
+[33mcommit 678bef5f68f8753e653353329c27e626a98b757f[m
+Merge: ac8fe5b cf5d964
+Author: Justin Patrick Farris <jpfarris@crm.ucsc.edu>
+Date:   Fri Feb 24 00:48:24 2017 -0800
+
+    Merge branch 'Sprint2' of https://github.com/EronLake/Children-of-Osi.git
+
+[33mcommit ac8fe5be39e62ede6e857e6bf0f84711b5706aee[m
+Author: Justin Patrick Farris <jpfarris@crm.ucsc.edu>
+Date:   Fri Feb 24 00:48:15 2017 -0800
+
+    AI cleanup & finetuning
+
+[33mcommit cf5d96452a46f2c7931f3240323ca73cd49bb1d1[m
+Author: Daniel Hildebrandt <daniel.s.hildebrandt+git@gmail.com>
+Date:   Thu Feb 23 23:41:37 2017 -0800
+
+    font shaders are compiling, and both they are the regular shaders now use the more generalised function.
+
+[33mcommit e22a56764a70d4f2d303ca69b51de00f60661539[m
+Author: Daniel Hildebrandt <daniel.s.hildebrandt+git@gmail.com>
+Date:   Wed Feb 22 23:18:17 2017 -0800
+
+    Wrote up a more generlised shader compilation method which can be used for both the standard and font shader code.
+
+[33mcommit e9f9ddad9405aa68e1454d6f49758aa396f0f46b[m
+Merge: 85906c6 7e92980
+Author: U-DESKTOP-IJO7N67\BlackMagicianDTT <dtoney@ucsc.edu>
+Date:   Wed Feb 22 18:54:27 2017 -0800
+
+    C
+    
+    D
+    D
+    D
+    added relationship codeMerge branch 'Sprint2' of https://github.com/EronLake/Children-of-Osi into Sprint2
+
+[33mcommit 85906c6540ec75029cefc409525d42c5922a3f24[m
+Author: U-DESKTOP-IJO7N67\BlackMagicianDTT <dtoney@ucsc.edu>
+Date:   Wed Feb 22 18:52:09 2017 -0800
+
+    Added relationship class.
+
+[33mcommit 4c1424367f68a3d3a4dd98801f498eed897c5ba1[m
+Author: EronLake <ejlake@ucsc.edu>
+Date:   Wed Feb 22 13:20:52 2017 -0800
+
+    trying to figure out the texture pool stuff
+
+[33mcommit 7e92980cf3adb592d14bc6d7740f0d263ecdaa16[m
+Author: Daniel Hildebrandt <daniel.s.hildebrandt+git@gmail.com>
+Date:   Wed Feb 22 03:39:52 2017 -0800
+
+    Fixed the infinite loop when loading fonts, started with the font shaders.
+
+[33mcommit 9a4815391ed150bc9a91801d2be962ece2fffca1[m
+Merge: 652b4c3 9c97d4b
+Author: Daniel Hildebrandt <daniel.s.hildebrandt+git@gmail.com>
+Date:   Tue Feb 21 17:54:45 2017 -0800
+
+    Manual merge of project files.
+
+[33mcommit 652b4c39afcfb59e336361ee0eac0ae6dca222e1[m
+Author: Daniel Hildebrandt <daniel.s.hildebrandt+git@gmail.com>
+Date:   Tue Feb 21 17:48:12 2017 -0800
+
+    Added font shaders. Getting inconsistent errors when loading font textures up.
+
+[33mcommit 9c97d4bb789add2d0eb817c6a0f6a639161f9b2c[m
+Author: acalba93 <acalba@ucsc.edu>
+Date:   Tue Feb 21 16:31:56 2017 -0800
+
+    fixed dialogue selection, drawing priority
+
+[33mcommit dd4ab83278a71048f0afdaeb41cbd82868671e81[m
+Merge: d57a5bb e7eac84
+Author: Justin Patrick Farris <jpfarris@crm.ucsc.edu>
+Date:   Tue Feb 21 15:08:16 2017 -0800
+
+    Fixed broken switch for dialog GUI
+
+[33mcommit d57a5bb09e035f7c6ba99a7486a740b67b4c1255[m
+Author: Justin Patrick Farris <jpfarris@crm.ucsc.edu>
+Date:   Tue Feb 21 13:42:30 2017 -0800
+
+    Characters navigate to position after running a star
+
+[33mcommit e7eac846b4d9c0e093b581e3090b5a6d68e6ea3c[m
+Author: acalba93 <acalba@ucsc.edu>
+Date:   Tue Feb 21 12:29:57 2017 -0800
+
+    Changed Stuff
+
+[33mcommit 40210061938057a471cb5cad4e62f35ebcbd38cd[m
+Merge: 7e3d4a3 cdcec39
+Author: EronLake <ejlake@ucsc.edu>
+Date:   Tue Feb 21 01:47:19 2017 -0800
+
+    fixed merge eroors
+
+[33mcommit 7e3d4a33046bf14ab0ea8d4869b0431530884257[m
+Author: EronLake <ejlake@ucsc.edu>
+Date:   Tue Feb 21 01:43:08 2017 -0800
+
+    added config file for world object placement
+
+[33mcommit cdcec399ea48cf878ea28ddd062823c0f94f92a8[m
+Author: acalba93 <acalba@ucsc.edu>
+Date:   Tue Feb 21 00:20:29 2017 -0800
+
+    dialogue is a little further
+
+[33mcommit 00306cac0c400d0413e8a2fc3e5410323414777c[m
+Merge: bfbd816 7eeecb1
+Author: Andrew <anpbarr@ucsc.edu>
+Date:   Mon Feb 20 20:53:34 2017 -0800
+
+    resolved text file merge conflicts
+
+[33mcommit bfbd81699c82f456f0d0a31efc859722efdcb45b[m
+Author: Andrew <anpbarr@ucsc.edu>
+Date:   Mon Feb 20 20:52:57 2017 -0800
+
+    Fixed SoundSystem.cpp to support pausing and implemented walk sound
+
+[33mcommit 7eeecb19eeb63f8757941e27b2805e4e2228fb30[m
+Author: EronLake <ejlake@ucsc.edu>
+Date:   Mon Feb 20 19:59:20 2017 -0800
+
+    got dialog working, still need gui hooked up
+
+[33mcommit e359bc455350c708169702ed3521ee856f341c23[m
+Merge: 8702400 6a5476d
+Author: Andrew <anpbarr@ucsc.edu>
+Date:   Mon Feb 20 18:46:49 2017 -0800
+
+    merging text files
+
+[33mcommit 87024006b8e697bdc738551bd83574275a171f31[m
+Author: Andrew <anpbarr@ucsc.edu>
+Date:   Mon Feb 20 18:46:08 2017 -0800
+
+    merging textfiles
+
+[33mcommit fc15d2a9e0f61fd9397dd933cc525af51d5e3612[m
+Merge: cda6691 6a5476d
+Author: Justin Patrick Farris <jpfarris@crm.ucsc.edu>
+Date:   Mon Feb 20 18:30:05 2017 -0800
+
+    Merge conflicts in main
+
+[33mcommit cda66916c6c241f5e56815c5f9c7ec53874b6a99[m
+Author: Justin Patrick Farris <jpfarris@crm.ucsc.edu>
+Date:   Mon Feb 20 18:27:27 2017 -0800
+
+    A star and game state graph
+
+[33mcommit 6a5476d65de33cb33d14950dd830f8acc2b3c8e0[m
+Author: acalba93 <acalba@ucsc.edu>
+Date:   Mon Feb 20 16:55:04 2017 -0800
+
+    dialogue is further
+
+[33mcommit 43dbbb68e1dbcf3e501df4af334c9a698d33ab2b[m
+Merge: 04e0ed5 fcf8eb8
+Author: EronLake <ejlake@ucsc.edu>
+Date:   Mon Feb 20 15:24:50 2017 -0800
+
+    fixed merge conflics
+
+[33mcommit 04e0ed522181bd38764bc38147722da4b3013479[m
+Merge: eea0323 e553f03
+Author: EronLake <ejlake@ucsc.edu>
+Date:   Mon Feb 20 15:20:17 2017 -0800
+
+    changed dialog helper to work with controller
+
+[33mcommit fcf8eb858d0f29bae0cf5d9c54bd9de6505661c6[m
+Merge: 8bef1c6 c6b48db
+Author: Alexander <alexander.ou@gmail.com>
+Date:   Mon Feb 20 13:49:14 2017 -0800
+
+    commented out font
+
+[33mcommit 8bef1c66b1959a46791c645903acdbd297f7e96c[m
+Author: Alexander <alexander.ou@gmail.com>
+Date:   Mon Feb 20 13:45:44 2017 -0800
+
+    commented out font stuff, causing mem access violation errors
+
+[33mcommit c6b48db57b3fadf898a5d1148ad4f381c94a952f[m
+Merge: 04597a5 e553f03
+Author: Andrew <anpbarr@ucsc.edu>
+Date:   Mon Feb 20 13:30:48 2017 -0800
+
+    Merge branch 'Sprint2' of https://github.com/EronLake/Children-of-Osi into Sprint2
+    because git
+
+[33mcommit eea0323ff4c1032f436cfac06c325a261f1904fe[m
+Merge: 1abfe67 595837c
+Author: EronLake <ejlake@ucsc.edu>
+Date:   Mon Feb 20 13:25:52 2017 -0800
+
+    fixed merge errors
+
+[33mcommit 04597a58bdb154b2b89612515f7ce0b7eb44dead[m
+Author: Andrew <anpbarr@ucsc.edu>
+Date:   Mon Feb 20 13:25:43 2017 -0800
+
+    just trying to push my stuff
+
+[33mcommit e553f0302af025fc64a8e02ff8f3c82233f24f6f[m
+Merge: 329673e 9a06c51
+Author: Daniel Hildebrandt <daniel.s.hildebrandt+git@gmail.com>
+Date:   Mon Feb 20 13:21:58 2017 -0800
+
+    Merge branch 'Sprint2' of https://github.com/EronLake/Children-of-Osi into Sprint2
+
+[33mcommit a5a7d2e10125ba2e81aa85a17485cab7198e2859[m
+Merge: 78cbde0 595837c
+Author: Andrew <anpbarr@ucsc.edu>
+Date:   Mon Feb 20 13:21:57 2017 -0800
+
+    fixed merge conflicts
+
+[33mcommit 329673ef5ff67349a8f9a58a31b58889b2863503[m
+Author: Daniel Hildebrandt <daniel.s.hildebrandt+git@gmail.com>
+Date:   Mon Feb 20 13:21:40 2017 -0800
+
+    Fixed the linker error with FreeType.
+
+[33mcommit 9a06c51cff797e98934fd35069b0ed0cf1c24374[m
+Author: acalba93 <acalba@ucsc.edu>
+Date:   Mon Feb 20 13:20:52 2017 -0800
+
+    small dialogue controller changes
+
+[33mcommit 78cbde0d1c5652825d0ab62edae61f25fcdbd640[m
+Author: Andrew <anpbarr@ucsc.edu>
+Date:   Mon Feb 20 13:15:38 2017 -0800
+
+    finished volume stuff
+
+[33mcommit 1abfe67d7810183904c7fe9863cefc99c1d88921[m
+Author: EronLake <ejlake@ucsc.edu>
+Date:   Mon Feb 20 12:48:19 2017 -0800
+
+    finished dialog helper functions
+
+[33mcommit 595837c96b755ec8b548852626103ce97abd512a[m
+Author: Daniel Hildebrandt <daniel.s.hildebrandt+git@gmail.com>
+Date:   Mon Feb 20 12:27:58 2017 -0800
+
+    Character data stored, but issue with linker error.
+
+[33mcommit 54a68b443359a9971628645e9de118dc55ee6b7c[m
+Author: Daniel Hildebrandt <daniel.s.hildebrandt+git@gmail.com>
+Date:   Sun Feb 19 01:52:23 2017 -0800
+
+    Added GLM library, further progress in drawing text.
+
+[33mcommit 150274221fdde62a7ee81160d737e3b40387674e[m
+Merge: 23467a1 9e956ad
+Author: Daniel Hildebrandt <daniel.s.hildebrandt+git@gmail.com>
+Date:   Sat Feb 18 23:45:04 2017 -0800
+
+    Merge branch 'Sprint2' of https://github.com/EronLake/Children-of-Osi into Sprint2
+
+[33mcommit 9e956adf618fc61932f745e2c470733b3058cb65[m
+Author: acalba93 <acalba@ucsc.edu>
+Date:   Sat Feb 18 20:11:10 2017 -0800
+
+    put loose files in filters
+
+[33mcommit 6038d06903dc4fbeaf9a475c4a4979d1f1daf581[m
+Author: acalba93 <acalba@ucsc.edu>
+Date:   Sat Feb 18 20:06:48 2017 -0800
+
+    quick dialogue controller changes
+
+[33mcommit 6162cfe76936745e9576802f938586ac2e1a6245[m
+Author: Alexander Ou <aou4@crm.ucsc.edu>
+Date:   Sat Feb 18 19:12:07 2017 -0800
+
+    dialogue glow working
+
+[33mcommit 5addabf648672432bc6fdecd3b396a785e1ccc61[m
+Merge: c1d7109 586f527
+Author: Alexander Ou <aou4@crm.ucsc.edu>
+Date:   Sat Feb 18 17:46:37 2017 -0800
+
+    dialogue glow
+
+[33mcommit c1d7109c5619a9d1d5fbcc8b4eee53c900007cb6[m
+Author: Alexander Ou <aou4@crm.ucsc.edu>
+Date:   Sat Feb 18 17:44:08 2017 -0800
+
+    dialoguegui glows
+
+[33mcommit 586f52722669ec40b4c30e9694afdd6dd0cd6473[m
+Merge: bb6c992 9e5ff65
+Author: Justin Patrick Farris <jpfarris@crm.ucsc.edu>
+Date:   Sat Feb 18 17:40:53 2017 -0800
+
+    Merge branch 'Sprint2' of https://github.com/EronLake/Children-of-Osi into Sprint2
+
+[33mcommit bb6c992871d98e3b4fa88e54f7834faba4c035d1[m
+Author: Justin Patrick Farris <jpfarris@crm.ucsc.edu>
+Date:   Sat Feb 18 17:40:50 2017 -0800
+
+    Idle sprites working correctly
+
+[33mcommit 9e5ff65b85bb3bfc488fcb441b110f22a2bf768b[m
+Author: acalba93 <acalba@ucsc.edu>
+Date:   Sat Feb 18 17:38:16 2017 -0800
+
+    update to dialogue controller
+
+[33mcommit 489f6a6a14ed5c67c548bf921e1b67469f3b4bb9[m
+Author: U-DESKTOP-IJO7N67\BlackMagicianDTT <dtoney@ucsc.edu>
+Date:   Sat Feb 18 17:22:29 2017 -0800
+
+    Added Shango json file.
+
+[33mcommit 1039b074fc664dc5e0f6c371d179c13612df7344[m
+Merge: 127adc7 83d2854
+Author: Zirconia <dtoney@ucsc.edu>
+Date:   Sat Feb 18 16:51:51 2017 -0800
+
+    ""
+
+[33mcommit 127adc70ca833930db9353f6ce1fb99e112e156f[m
+Author: U-DESKTOP-IJO7N67\BlackMagicianDTT <dtoney@ucsc.edu>
+Date:   Sat Feb 18 16:49:27 2017 -0800
+
+    commit test txt file changes grrr.
+
+[33mcommit 83d28547b1566f894c636631fb163d5e715399e8[m
+Merge: a1a20c2 0f3c7d7
+Author: Justin Patrick Farris <jpfarris@crm.ucsc.edu>
+Date:   Sat Feb 18 16:47:52 2017 -0800
+
+    txt file merge
+
+[33mcommit a1a20c2e0c55b5e93383b130102834f42c5d3dba[m
+Author: Justin Patrick Farris <jpfarris@crm.ucsc.edu>
+Date:   Sat Feb 18 16:46:04 2017 -0800
+
+    Fixed glitchy sprite switches for movement
+
+[33mcommit 23467a142d7a6deea86c3f596af8208142110318[m
+Merge: ba22b46 0f3c7d7
+Author: Daniel Hildebrandt <daniel.s.hildebrandt+git@gmail.com>
+Date:   Sat Feb 18 15:43:06 2017 -0800
+
+    Merge branch 'Sprint2' of https://github.com/EronLake/Children-of-Osi into Sprint2
+
+[33mcommit ba22b4682cf1a570cd8815642e7f1c68dfe0c52e[m
+Author: Daniel Hildebrandt <daniel.s.hildebrandt+git@gmail.com>
+Date:   Sat Feb 18 15:42:11 2017 -0800
+
+    Not sure why, but FreeType is no longer bringing up a linker error. Praise the sun! Some structural changes, now using release build of FT.
+
+[33mcommit 0f3c7d7ecd9216eab09d8c68f6e69247c820ee7b[m
+Merge: 3ee7aac 3fce550
+Author: EronLake <ejlake@ucsc.edu>
+Date:   Sat Feb 18 15:40:11 2017 -0800
+
+    fixed merge conflicts
+
+[33mcommit 3ee7aac20301069cb0bb40ac87dbb9fbcff91d88[m
+Merge: af8cf05 aca3080
+Author: EronLake <ejlake@ucsc.edu>
+Date:   Sat Feb 18 15:30:34 2017 -0800
+
+    added the hero name int Macros
+
+[33mcommit 3fce55038d3c11c0406a631f6909dc59420388ed[m
+Author: Alexander Ou <aou4@crm.ucsc.edu>
+Date:   Sat Feb 18 15:23:36 2017 -0800
+
+    map drawing
+
+[33mcommit 1fc2e5c8bba3a8d5e0b4d6b766ded3e69531533d[m
+Merge: db76ef4 f6be587
+Author: Zirconia <dtoney@ucsc.edu>
+Date:   Sat Feb 18 14:56:56 2017 -0800
+
+    Re-added json dialogue code.
+
+[33mcommit db76ef4a076bb411db2327ad664abd0a7a6abd28[m
+Author: U-DESKTOP-IJO7N67\BlackMagicianDTT <dtoney@ucsc.edu>
+Date:   Sat Feb 18 14:54:25 2017 -0800
+
+    Re-added json dialogue code.
+
+[33mcommit f6be5872944ae71c112ffee223ed61cb6c7fa45a[m
+Merge: 0a7cfcf 3e3640f
+Author: Alexander Ou <aou4@crm.ucsc.edu>
+Date:   Sat Feb 18 14:22:58 2017 -0800
+
+    Merge branch 'Sprint2' of github.com:EronLake/Children-of-Osi into Sprint2
+
+[33mcommit 0a7cfcf127557e9ab890f91bd12d0436b05becc0[m
+Author: Alexander Ou <aou4@crm.ucsc.edu>
+Date:   Sat Feb 18 14:22:40 2017 -0800
+
+    dialoguegui working with dialoguecontroller(state handling and interaction)
+
+[33mcommit 3e3640f8bc6261f59ec277edf900609b1781f54f[m
+Author: U-DESKTOP-IJO7N67\BlackMagicianDTT <dtoney@ucsc.edu>
+Date:   Sat Feb 18 13:39:42 2017 -0800
+
+    Re-installed jsoncpp library.
+
+[33mcommit 024e42a7cdc1538e6630c701faf24915d15d80e7[m
+Author: Alexander <alexander.ou@gmail.com>
+Date:   Sat Feb 18 11:37:50 2017 -0800
+
+    dialoguegui drawing
+
+[33mcommit af8cf059b53b87f72e7b0c3513c2bc87e854070e[m
+Author: EronLake <ejlake@ucsc.edu>
+Date:   Fri Feb 17 22:53:57 2017 -0800
+
+    added a name preameter to heroes
+
+[33mcommit aca30803ff5db5c9e1ba3cb89593355b14d444fe[m
+Author: acalba93 <acalba@ucsc.edu>
+Date:   Fri Feb 17 21:53:39 2017 -0800
+
+    Can start conversation
+    
+    also made skeleton of warpper class that will not be needed but maybe in
+    the fture but probably not
+
+[33mcommit 3b232aee1a09174fc21b8ce79a09f15be53d1ac9[m
+Merge: 2704d0e da30ee8
+Author: Alexander <alexander.ou@gmail.com>
+Date:   Fri Feb 17 19:34:24 2017 -0800
+
+    inheritance should work now, slight update to dialoguegui
+
+[33mcommit 2704d0e5480ce7c8fcc3d72d0303b69705c82570[m
+Author: Alexander <alexander.ou@gmail.com>
+Date:   Fri Feb 17 19:32:47 2017 -0800
+
+    inheritance should be fixed, slight update to dialoguegui
+
+[33mcommit da30ee8dc89a1cb874173ff4e70055fb93ea06d3[m
+Merge: ea5f73f 5b62488
+Author: U-DESKTOP-IJO7N67\BlackMagicianDTT <dtoney@ucsc.edu>
+Date:   Fri Feb 17 18:55:27 2017 -0800
+
+    Merge branch 'Sprint2' of https://github.com/EronLake/Children-of-Osi into Sprint2
+
+[33mcommit ea5f73f5f199ae2dad93ae466eab0ad7771c727b[m
+Author: U-DESKTOP-IJO7N67\BlackMagicianDTT <dtoney@ucsc.edu>
+Date:   Fri Feb 17 18:55:02 2017 -0800
+
+    Added json dialog code.
+
+[33mcommit 5b62488736691db49d04f4c3c050132dfc02f7f5[m
+Merge: 2f6ff07 2e97266
+Author: Andrew <anpbarr@ucsc.edu>
+Date:   Fri Feb 17 18:41:45 2017 -0800
+
+    resolved merge conflicts
+
+[33mcommit 2f6ff0794090b117f263e685967513c91d93edfd[m
+Author: Andrew <anpbarr@ucsc.edu>
+Date:   Fri Feb 17 18:40:18 2017 -0800
+
+    3 sounds at ounce
+
+[33mcommit 2e972661095fcb01db941fdacdfe4b875ad74d89[m
+Author: acalba93 <acalba@ucsc.edu>
+Date:   Fri Feb 17 18:00:37 2017 -0800
+
+    started on interaction stuff
+    
+    major problem discovered
+
+[33mcommit 1b619747b5609df6115aaba7d20f2edd3a715969[m
+Author: Andrew <anpbarr@ucsc.edu>
+Date:   Fri Feb 17 12:10:21 2017 -0800
+
+     added audio manager to gameplay loop
+
+[33mcommit 5a5c56e7425fc6884625354695d35f8b6bc57b61[m
+Author: Alexander Ou <aou4@crm.ucsc.edu>
+Date:   Fri Feb 17 11:45:31 2017 -0800
+
+    dialogueGui class
+
+[33mcommit dff639e42158953741e511f360000bc2a07fc5ff[m
+Author: acalba93 <acalba@ucsc.edu>
+Date:   Thu Feb 16 17:13:47 2017 -0800
+
+    same commit as before
+
+[33mcommit fc2136520093d74a6848b75d2d1c3b4df8d455c0[m
+Author: acalba93 <acalba@ucsc.edu>
+Date:   Thu Feb 16 17:13:01 2017 -0800
+
+    added rectangle to player for dialogue
+    
+    we shouldnt push broken code
+
+[33mcommit fd2bbf18d587a0bdc49ea860706c66935a2f0739[m
+Author: Daniel Hildebrandt <daniel.s.hildebrandt+git@gmail.com>
+Date:   Thu Feb 16 15:31:54 2017 -0800
+
+    Commented out the font bits until I get fix a linker error.
+
+[33mcommit db46ae2b159aa6f3d78e8b2d40a9166b174fe777[m
+Merge: 952ed72 7529c7b
+Author: Daniel Hildebrandt <daniel.s.hildebrandt+git@gmail.com>
+Date:   Thu Feb 16 02:36:22 2017 -0800
+
+    Merge branch 'Sprint2' of https://github.com/EronLake/Children-of-Osi into Sprint2
+
+[33mcommit 952ed72961a65a8952c485559b0506616cb8c053[m
+Author: Daniel Hildebrandt <daniel.s.hildebrandt+git@gmail.com>
+Date:   Thu Feb 16 02:36:00 2017 -0800
+
+    Started on fonts. some refinement needed at a later point.
+
+[33mcommit 7529c7be5b6f51f3144d7d7ea9781a3603d5c63f[m
+Author: EronLake <ejlake@ucsc.edu>
+Date:   Wed Feb 15 13:01:59 2017 -0800
+
+    fisnished tests for my dialoghelper functions
+
+[33mcommit e5fb62ef57e4846150800acb4a7d3bc55c8b7db1[m
+Author: EronLake <ejlake@ucsc.edu>
+Date:   Wed Feb 15 10:51:07 2017 -0800
+
+    made edits to dialogeHelper/added dialogueTestSuite
+
+[33mcommit d5201673cd24b1d9e13b8242377c983de40fa028[m
+Author: EronLake <ejlake@ucsc.edu>
+Date:   Tue Feb 14 23:57:39 2017 -0800
+
+    added some dialog functions. still needs to be hooked up
+
+[33mcommit 51c6eea78aaa0f41abc7c7acac1c89079fc59de3[m
+Merge: 6d7bb3c 27586d9
+Author: Justin Patrick Farris <jpfarris@crm.ucsc.edu>
+Date:   Tue Feb 14 16:11:19 2017 -0800
+
+    merge
+
+[33mcommit 6d7bb3c2c526fec2360471fc8c0cac84c0d416fb[m
+Author: Justin Patrick Farris <jpfarris@crm.ucsc.edu>
+Date:   Tue Feb 14 16:10:50 2017 -0800
+
+    Basic loop
+
+[33mcommit 27586d95ecaf6054786ce17497ba6693172ef765[m
+Author: Ian Christner <ianchristner@gmail.com>
+Date:   Tue Feb 14 16:06:43 2017 -0800
+
+    Made shango work and stuff. No idle animation though.
+
+[33mcommit 3d3bd82d3a8be4c73a7f4a3657db8747a92a2276[m
+Merge: b7dd881 d5be6fa
+Author: Justin Patrick Farris <jpfarris@crm.ucsc.edu>
+Date:   Tue Feb 14 15:32:10 2017 -0800
+
+    Txt loggers, watch your backs. I'm coming for you
+
+[33mcommit b7dd881240b1e6670c914867e913b09374987a6e[m
+Author: Justin Patrick Farris <jpfarris@crm.ucsc.edu>
+Date:   Tue Feb 14 15:30:07 2017 -0800
+
+    Set up for sprite switching
+
+[33mcommit d5be6fa0b22b3a796ef870bd308149f6bf04c6c9[m
+Author: Ian Christner <ianchristner@gmail.com>
+Date:   Tue Feb 14 15:24:10 2017 -0800
+
+    Added Shangos sprite. Trying to work out a way to make the sprite change as you change directions.
+
+[33mcommit d5643f17569b9506625da345846ebf624e76dee9[m
+Author: Ian Christner <ianchristner@gmail.com>
+Date:   Tue Feb 14 14:22:26 2017 -0800
+
+    Added a gameplay loop which essentially is a hijaacked Alex Loop
+
+[33mcommit 6cda7a9d921a3f92a9ae793417e3bd2e0d4f97a4[m
+Author: EronLake <ejlake@ucsc.edu>
+Date:   Mon Feb 13 16:27:18 2017 -0800
+
+    not sure why I cant push
+
+[33mcommit a5b9f64962e1f6f029d7d03173e26a9e4b67a700[m
+Author: EronLake <ejlake@ucsc.edu>
+Date:   Mon Feb 13 16:24:26 2017 -0800
+
+    second pull
+
+[33mcommit eae7c061508ca8d559403ec43689bbf7359e127f[m
+Merge: e71463b 1c599a2
+Author: EronLake <ejlake@ucsc.edu>
+Date:   Mon Feb 13 16:23:09 2017 -0800
+
+    Merge branch 'Sprint2' of github.com:EronLake/Children-of-Osi into Sprint2
+    
+    Second time pushing
+
+[33mcommit e71463b2d253d8d9fb8133a73a391eb3a762de20[m
+Merge: fb7a3a9 cc3dfed
+Author: EronLake <ejlake@ucsc.edu>
+Date:   Mon Feb 13 16:23:03 2017 -0800
+
+    fixed merge conflicts and attached memort test to test manager
+
+[33mcommit 1c599a2b4433146d3f12679077b2080a93ba6b27[m
+Author: acalba93 <acalba@ucsc.edu>
+Date:   Mon Feb 13 15:23:27 2017 -0800
+
+    skeleton of dialogue controller
+    
+    skeleton of dialogue controller
+
+[33mcommit fb7a3a932af883b42ad94e0f77ed377b28fe1f38[m
+Author: EronLake <ejlake@ucsc.edu>
+Date:   Mon Feb 13 15:14:23 2017 -0800
+
+    completed MemoryTestSuite
+
+[33mcommit cc3dfedfe6dfc4054c4ff6e8ecbb29c756c776fa[m
+Author: acalba93 <acalba@ucsc.edu>
+Date:   Mon Feb 13 13:57:04 2017 -0800
+
+    got rid of tests
+    
+    please stay gone txt files
+
+[33mcommit c78d05a171a0ae62a89a74b54134c7cdddb2ff63[m
+Author: acalba93 <acalba@ucsc.edu>
+Date:   Mon Feb 13 13:33:17 2017 -0800
+
+    added filters back
+    
+    Anyone who deletes these filters I will track down and then scold you.
+    Feel free to add/remove/change them though
+
+[33mcommit d137b44a71665b9abeea99f10a951d9e2c5af2f4[m
+Author: Daniel Hildebrandt <daniel.s.hildebrandt+git@gmail.com>
+Date:   Sun Feb 12 21:50:50 2017 -0800
+
+    More cleanup, preparation for drawing text. Adopted a more human-friendly documentation style. Research on FreeType is required.
+
+[33mcommit 5a1d24d38dd8b8bd8cb1a48cc6a48802faf4a0f4[m
+Author: U-DESKTOP-IJO7N67\BlackMagicianDTT <dtoney@ucsc.edu>
+Date:   Sat Feb 11 18:48:15 2017 -0800
+
+    Added audio unit test, task buffer unit test and physics unit test to test manager.
+
+[33mcommit 7b099d6d566e2c819ee6729473ca9d51e9bf63c7[m
+Author: U-DESKTOP-IJO7N67\BlackMagicianDTT <dtoney@ucsc.edu>
+Date:   Sat Feb 11 18:15:41 2017 -0800
+
+    Added audio test and task buffer tests to test manager.
+
+[33mcommit 17b36467af9bdf1e38683f5621622fe1dbebdf5d[m
+Merge: 946cd17 d83bcad
+Author: U-DESKTOP-IJO7N67\BlackMagicianDTT <dtoney@ucsc.edu>
+Date:   Sat Feb 11 17:42:18 2017 -0800
+
+    Merge branch 'Sprint2' of https://github.com/EronLake/Children-of-Osi into Sprint2
+
+[33mcommit d83bcad6118e60d973f02b4daab4dcd86fac9f84[m
+Merge: 041003d d41838d
+Author: Alexander Ou <aou4@crm.ucsc.edu>
+Date:   Sat Feb 11 17:25:50 2017 -0800
+
+    camera working still
+
+[33mcommit 041003d073b4abe487e7ac29ceae247430b75011[m
+Author: Alexander Ou <aou4@crm.ucsc.edu>
+Date:   Sat Feb 11 17:23:12 2017 -0800
+
+    camera working
+
+[33mcommit d41838d318fb2cb6acd4da1d949fefbcbcf13d1e[m
+Author: Justin Farris <jpfarris@ucsc.edu>
+Date:   Sat Feb 11 16:48:09 2017 -0800
+
+    Properly check for sound playing
+
+[33mcommit 946cd175d1494b8fe61ee5d59e6e4b268fcf8751[m
+Merge: 48abec1 d5c1f7e
+Author: Zirconia <dtoney@ucsc.edu>
+Date:   Sat Feb 11 16:02:57 2017 -0800
+
+    pulling
+
+[33mcommit 48abec14e4b47a893a32a24df866e29362ccd19f[m
+Author: U-DESKTOP-IJO7N67\BlackMagicianDTT <dtoney@ucsc.edu>
+Date:   Sat Feb 11 16:02:12 2017 -0800
+
+    uhg
+
+[33mcommit d5c1f7ec2270efa2b9da540c4e9c75e29d6d9b62[m
+Author: Justin Patrick Farris <jpfarris@crm.ucsc.edu>
+Date:   Fri Feb 10 19:48:57 2017 -0800
+
+    Framerate stabilization in ALEX_LOOP (rough)
+
+[33mcommit d85610e8596a882d43813784df4999c192245aea[m
+Merge: c28ccae 662a280
+Author: Justin Patrick Farris <jpfarris@crm.ucsc.edu>
+Date:   Fri Feb 10 19:40:23 2017 -0800
+
+    Merging main loop changes
+
+[33mcommit c28ccae2d0bc3e2417582b1effc6b9d3c1419c6e[m
+Author: Justin Patrick Farris <jpfarris@crm.ucsc.edu>
+Date:   Fri Feb 10 19:37:47 2017 -0800
+
+    Isolated slow-down problem to collision checks
+
+[33mcommit 662a2804b03b4af5630018943cf9455b0458dc5b[m
+Author: Alexander <alexander.ou@gmail.com>
+Date:   Fri Feb 10 19:33:40 2017 -0800
+
+    fixed slowed fps
+
+[33mcommit e16a5dddbf796f2556253e476934457becffee21[m
+Merge: a812667 6b39a40
+Author: Justin Patrick Farris <jpfarris@crm.ucsc.edu>
+Date:   Fri Feb 10 17:36:46 2017 -0800
+
+    MERGE
+
+[33mcommit a812667b0bd6c7db62e10daf9d4e0fd2b0f1c9f6[m
+Author: Justin Patrick Farris <jpfarris@crm.ucsc.edu>
+Date:   Fri Feb 10 17:33:22 2017 -0800
+
+    Disabled debug log and message log
+
+[33mcommit 6b39a40ad1aed2932d900202f1f418676dc6dbe5[m
+Merge: d2a48e6 cd17f8d
+Author: acalba93 <acalba@ucsc.edu>
+Date:   Fri Feb 10 17:15:52 2017 -0800
+
+    Merge remote-tracking branch 'origin/Sprint2' into Sprint2
+    
+    # Conflicts:
+    #       ChildrenOfOsi/ChildrenOfOsi/Main.cpp
+
+[33mcommit d2a48e6404938ae9f17ac7a928bcc08f60afeae9[m
+Author: acalba93 <acalba@ucsc.edu>
+Date:   Fri Feb 10 17:13:11 2017 -0800
+
+    fps counter
+
+[33mcommit cd17f8d7309ef0ebe9fc8a67415093f6ed8b796f[m
+Author: ichristn <ichristn@STARFOX>
+Date:   Fri Feb 10 15:03:53 2017 -0800
+
+    Fixed TaskBuffer test suite, now PASSES
+
+[33mcommit ac857847d3bc54fc3fc2a077403dcff564dbbea4[m
+Author: ichristn <ichristn@STARFOX>
+Date:   Fri Feb 10 13:17:47 2017 -0800
+
+    Edited some minor errors such as typos etc.
+
+[33mcommit 00940da654f60d9894bbdacaf596d372fa7d5311[m
+Merge: 9abb3fc b5b2e90
+Author: ichristn <ichristn@STARFOX>
+Date:   Fri Feb 10 13:14:56 2017 -0800
+
+    Merge branch 'Sprint2' of https://github.com/EronLake/Children-of-Osi.git
+
+[33mcommit 9abb3fceab0b1cdf67dac77304985c07930ab49e[m
+Author: ichristn <ichristn@STARFOX>
+Date:   Fri Feb 10 13:14:50 2017 -0800
+
+    Updated TaskBufferTestSuite in order to successfully construct and deconstruct. Also updated some improper tests.
+
+[33mcommit b5b2e9007ccc44221d89772b46c1c6de5c0febca[m
+Merge: b433060 063f042
+Author: Zirconia <dtoney@ucsc.edu>
+Date:   Fri Feb 10 12:51:19 2017 -0800
+
+    Added AI manager and AI helper skeletons.
+
+[33mcommit b4330607f9778f1467a900c735cc16b6b339f771[m
+Author: U-DESKTOP-IJO7N67\BlackMagicianDTT <dtoney@ucsc.edu>
+Date:   Fri Feb 10 12:49:20 2017 -0800
+
+    Added AI manager and AI helper skeletons.
+
+[33mcommit 063f042eb024ec9e51a3f3d4cf6e5eed8c96743b[m
+Author: acalba93 <acalba@ucsc.edu>
+Date:   Fri Feb 10 12:11:43 2017 -0800
+
+    Bullshit destroyed all txt files
+
+[33mcommit c7fe39f9cc850162d9a9d672b25a2fdc59bef413[m
+Author: acalba93 <acalba@ucsc.edu>
+Date:   Fri Feb 10 11:59:05 2017 -0800
+
+    ignore all txt files
+
+[33mcommit 3ecbd65ed95cfb42339d4600d65b74a7a53f6cad[m
+Author: acalba93 <acalba@ucsc.edu>
+Date:   Fri Feb 10 11:57:21 2017 -0800
+
+    "idk man"
+    
+    "idk man"
+
+[33mcommit 7a426fa2b15037574779f16399539decba2283ca[m
+Author: Alexander Ou <aou4@crm.ucsc.edu>
+Date:   Fri Feb 10 11:48:13 2017 -0800
+
+    added camera. doesnt work tho will need to debug
+
+[33mcommit fcbc03dfb3502b95d90809c410d58f2c3a6319de[m
+Merge: b965f08 bcb8ed5
+Author: Justin Patrick Farris <jpfarris@crm.ucsc.edu>
+Date:   Fri Feb 10 00:02:04 2017 -0800
+
+    Merge and .gitignore changes
+
+[33mcommit b965f088081de81292f204521cb0ad2f91428ac1[m
+Author: Justin Patrick Farris <jpfarris@crm.ucsc.edu>
+Date:   Thu Feb 9 23:55:17 2017 -0800
+
+    Finished audio test suite
+
+[33mcommit bcb8ed5b355cb7c74e3ed16e8ffa62746c6d8540[m
+Author: Daniel Hildebrandt <daniel.s.hildebrandt+git@gmail.com>
+Date:   Thu Feb 9 23:07:36 2017 -0800
+
+    Futher cleanup of rendering code, plus a little documentation.
+
+[33mcommit 2856668cc3a884e3e667d37fe3439bc2d0a04c50[m
+Author: Justin Patrick Farris <jpfarris@crm.ucsc.edu>
+Date:   Thu Feb 9 22:03:22 2017 -0800
+
+    Fixed audio - sounds no longer crashing the game
+
+[33mcommit ac8b2044925aee554fd7cadd34d45561906fa7b3[m
+Author: Andrew <anpbarr@ucsc.edu>
+Date:   Thu Feb 9 21:13:34 2017 -0800
+
+    added walking and wallbump SFX
+
+[33mcommit b596105fedcfc0c7d0a8a4ccdac2784437d33374[m
+Author: Andrew <anpbarr@ucsc.edu>
+Date:   Thu Feb 9 21:11:00 2017 -0800
+
+    added physics tests, added a print function in worldobj, and added my own loop in main
+
+[33mcommit c252b67e526aef80976fe63482457a1ed5a123da[m
+Merge: 3f89275 2f21538
+Author: Andrew <anpbarr@ucsc.edu>
+Date:   Thu Feb 9 20:59:20 2017 -0800
+
+    Merge branch 'Sprint2' of https://github.com/EronLake/Children-of-Osi into Sprint2
+    
+    didnt pull first# especially if it merges an updated upstream into a topic branch.
+
+[33mcommit 3f892759e9cc6d00f75485af79f94f4d9bf0e307[m
+Author: Andrew <anpbarr@ucsc.edu>
+Date:   Thu Feb 9 20:57:11 2017 -0800
+
+    made an ANDREWS_LOOP
+
+[33mcommit 44e4bb762523a45a75986991b91efc122b81785a[m
+Merge: 73a1651 2f21538
+Author: Justin Patrick Farris <jpfarris@crm.ucsc.edu>
+Date:   Thu Feb 9 19:08:58 2017 -0800
+
+    Messagelog conflicts
+
+[33mcommit 73a165102fc244d369bc212426a0bc979e1b2db1[m
+Author: Justin Patrick Farris <jpfarris@crm.ucsc.edu>
+Date:   Thu Feb 9 19:08:04 2017 -0800
+
+    Some audio manager organization
+
+[33mcommit 2f21538eeeb99a45b384cceec2883996587ba7db[m
+Merge: ee19b1a e432f15
+Author: Ian Christner <ianchristner@gmail.com>
+Date:   Thu Feb 9 18:41:12 2017 -0800
+
+    Fixed some merge errors that weren't letting me pull properly
+
+[33mcommit ee19b1a58cff8b45f44233923b3fca767a67aca6[m
+Author: Ian Christner <ianchristner@gmail.com>
+Date:   Thu Feb 9 18:38:19 2017 -0800
+
+    Completed the TaskBufferTestSuite.
+
+[33mcommit e432f15d695220bcc326281360a51cf902070e43[m
+Author: U-DESKTOP-IJO7N67\BlackMagicianDTT <dtoney@ucsc.edu>
+Date:   Thu Feb 9 17:14:05 2017 -0800
+
+    Added AIManager(basically just a physics manager clone.
+
+[33mcommit 47758f471ae16cac6b865a5cf6b7c998807a65c2[m
+Author: Ian Christner <ianchristner@gmail.com>
+Date:   Thu Feb 9 15:41:31 2017 -0800
+
+    Added Test Suites for Task Buffer
+
+[33mcommit 51390b52444ae252c7604d57fdd9df2a5c3321c9[m
+Merge: 1b64e75 01559d3
+Author: EronLake <ejlake@ucsc.edu>
+Date:   Thu Feb 9 13:39:48 2017 -0800
+
+    fixed merge conflicts
+
+[33mcommit 1b64e75d71816baefeeb002b8f977f52d9ad230e[m
+Author: EronLake <ejlake@ucsc.edu>
+Date:   Thu Feb 9 13:29:06 2017 -0800
+
+    added containers class and tests to memory manager
+
+[33mcommit 01559d3128ac04a654965cb931f423654eebbd17[m
+Author: Daniel Hildebrandt <daniel.s.hildebrandt+git@gmail.com>
+Date:   Thu Feb 9 11:49:39 2017 -0800
+
+    Cleaned up Texture class, added some convenient constructors.
+
+[33mcommit a52d69df4836e493ed66d229064f2e5d1efa11cc[m
+Author: U-DESKTOP-IJO7N67\BlackMagicianDTT <dtoney@ucsc.edu>
+Date:   Wed Feb 8 20:54:48 2017 -0800
+
+    added timestamp functionality and output files for test manager.
+
+[33mcommit 0f5da2a08169334051289ce46a5b46e23af6e2eb[m
+Author: acalba93 <acalba@ucsc.edu>
+Date:   Wed Feb 8 16:55:49 2017 -0800
+
+    turned debug off
+    
+    got rid of some junk
+
+[33mcommit 8ff295703d702a4c7d4f6d064b5519ef1e6dd83c[m
+Author: acalba93 <acalba@ucsc.edu>
+Date:   Wed Feb 8 16:41:09 2017 -0800
+
+    started to optimize openGL stuff
+    
+    started to optimize openGL stuff
+
+[33mcommit 5e6f7297de758e266266adfa42d2bb281454a27d[m
+Author: acalba93 <acalba@ucsc.edu>
+Date:   Wed Feb 8 15:27:22 2017 -0800
+
+    physics body fix
+    
+    physics body fix
+
+[33mcommit 84eab421e4a562950bf12f7f1d8818f5a3995218[m
+Author: Alexander Ou <aou4@crm.ucsc.edu>
+Date:   Wed Feb 8 14:45:10 2017 -0800
+
+    added some recs
+
+[33mcommit 5934b6214a1caa1c320121f2e0601adf9679a8a4[m
+Author: acalba93 <acalba@ucsc.edu>
+Date:   Wed Feb 8 14:29:30 2017 -0800
+
+    physics bodies plus sprite stuff
+    
+    physics bodies plus sprite stuff
+
+[33mcommit fbf7d50d5d8b9dbe58fcc509a09da3eb0fcd7342[m
+Author: Alexander Ou <aou4@crm.ucsc.edu>
+Date:   Wed Feb 8 11:50:13 2017 -0800
+
+    obj can move across screen but still has some errors going through the engine pipeline.
+
+[33mcommit 07712db552170bdede9877a570b5bc9c83d960e1[m
+Author: EronLake <ejlake@ucsc.edu>
+Date:   Wed Feb 8 10:47:31 2017 -0800
+
+    added a testSuites folder and memory test suite(stil needs to be filled out)
+
+[33mcommit b2ebd7008268813163aa0d18fe4e9f456c6816b4[m
+Author: EronLake <ejlake@ucsc.edu>
+Date:   Wed Feb 8 10:31:47 2017 -0800
+
+    fixed task constructor so the clone() works again
+
+[33mcommit f59ab240046c8caa5eef48fb51302e7512f14ddf[m
+Author: Alexander <alexander.ou@gmail.com>
+Date:   Wed Feb 8 01:44:09 2017 -0800
+
+    finished rendering manager. need to figure out how to dup task & pass them to manager correctly
+
+[33mcommit e10726f11f3d7de18cf5c1dceb3c957dffbdad0a[m
+Author: U-DESKTOP-IJO7N67\BlackMagicianDTT <dtoney@ucsc.edu>
+Date:   Tue Feb 7 22:47:13 2017 -0800
+
+    merge conflict fixes
+
+[33mcommit f173336cd7ce6f69b7df7e271557157f19d4e33d[m
+Merge: 6fbd76a 526461a
+Author: Zirconia <dtoney@ucsc.edu>
+Date:   Tue Feb 7 22:41:59 2017 -0800
+
+    Added code to fix pool pointer linker errors and added test manager code.
+
+[33mcommit 6fbd76a38be158749af5cda69101ac710d6adf2d[m
+Author: U-DESKTOP-IJO7N67\BlackMagicianDTT <dtoney@ucsc.edu>
+Date:   Tue Feb 7 22:38:58 2017 -0800
+
+    Added test manager code and code to fix pool linker errors.
+
+[33mcommit 526461ad3addedc6f4679766fe326beaadf4fd00[m
+Merge: 1ed25ff 9bdcd1c
+Author: Justin Patrick Farris <jpfarris@crm.ucsc.edu>
+Date:   Tue Feb 7 20:39:44 2017 -0800
+
+    Merge branch 'Sprint2' of https://github.com/EronLake/Children-of-Osi.git
+
+[33mcommit 1ed25ff478655336ac83c2ea7a4d6ba1a9eabb61[m
+Author: Justin Patrick Farris <jpfarris@crm.ucsc.edu>
+Date:   Tue Feb 7 20:39:35 2017 -0800
+
+    Running audio through task buffer
+
+[33mcommit 9bdcd1cca00d7de61ac33fa9a97e5369ebe27f36[m
+Author: acalba93 <acalba@ucsc.edu>
+Date:   Tue Feb 7 20:38:01 2017 -0800
+
+    animation stuff
+    
+    animation stuff
+
+[33mcommit b2ca74a37c20d2c6ce832f2358b134bf3495193b[m
+Merge: 0bf9729 3dbb102
+Author: Justin Patrick Farris <jpfarris@crm.ucsc.edu>
+Date:   Tue Feb 7 19:39:16 2017 -0800
+
+    Merging in Memory reorganization
+
+[33mcommit 0bf9729669fd2459539da7ee873546c53be7cfb3[m
+Author: Justin Patrick Farris <jpfarris@crm.ucsc.edu>
+Date:   Tue Feb 7 19:36:28 2017 -0800
+
+    First steps in creating Audio unit test
+
+[33mcommit 3dbb1027079d62673bdfed3feb553ffc79640432[m
+Merge: bcd176e 9e2d6a5
+Author: Eron Jason Lake <ejlake@crm.ucsc.edu>
+Date:   Tue Feb 7 19:36:04 2017 -0800
+
+    Merge branch 'Sprint2' of https://github.com/EronLake/Children-of-Osi into Sprint2
+    
+    I changed the memory manager organization
+
+[33mcommit bcd176ecd213bb8995054702cf5286fb7bc0ca60[m
+Author: Eron Jason Lake <ejlake@crm.ucsc.edu>
+Date:   Tue Feb 7 19:35:57 2017 -0800
+
+    reorganized memory manager anf helper classes
+
+[33mcommit 9e2d6a59e63811c5d7cf50143550cc1c46e7386e[m
+Author: acalba93 <acalba@ucsc.edu>
+Date:   Tue Feb 7 18:06:15 2017 -0800
+
+    fixed leaks and scrambled stuff
+    
+    fixed leaks and scrambled stuff
+
+[33mcommit f75d4ffdd2905a92fbaef23654a55f4d3f9ca9fd[m
+Merge: 1fd6db1 fa03735
+Author: Justin Patrick Farris <jpfarris@crm.ucsc.edu>
+Date:   Tue Feb 7 17:54:48 2017 -0800
+
+    Merge branch 'Sprint2' of https://github.com/EronLake/Children-of-Osi.git
+
+[33mcommit 1fd6db1b2c54221c060dec258be1bd6b49c4c918[m
+Author: Justin Patrick Farris <jpfarris@crm.ucsc.edu>
+Date:   Tue Feb 7 17:54:42 2017 -0800
+
+    Added project filters to organize code in Visual Studio
+
+[33mcommit fa03735ed344b4b07673585ad9b0dd434bd91a84[m
+Author: acalba93 <acalba@ucsc.edu>
+Date:   Tue Feb 7 15:48:58 2017 -0800
+
+    scrambled images
+
+[33mcommit a2b08349026816a4eee4caabc6eca4504e0a10f2[m
+Author: Justin Patrick Farris <jpfarris@crm.ucsc.edu>
+Date:   Mon Feb 6 21:29:51 2017 -0800
+
+    Task-to-function map set up for Memory manager
+
+[33mcommit 5f3acaa478b401d8d47fc8c79d40d5b7cd4cf883[m
+Author: acalba93 <acalba@ucsc.edu>
+Date:   Mon Feb 6 14:25:54 2017 -0800
+
+    fixed transparency and stretching
+    
+    fixed transparency and stretching
+
+[33mcommit 47f165db7818325335c09a80b89eb61b19d959c6[m
+Merge: 7df44a7 a2266db
+Author: acalba93 <acalba@ucsc.edu>
+Date:   Mon Feb 6 11:35:53 2017 -0800
+
+    Merge pull request #123 from EronLake/Sprint1
+    
+    Sprint1
+
+[33mcommit a2266db26fb6600acbd86d0ad758580905dfa84b[m
+Author: acalba93 <acalba@ucsc.edu>
+Date:   Mon Feb 6 11:34:28 2017 -0800
+
+    floats to ints
+    
+    floats to ints
+
+[33mcommit 0f6198c2253e219215bfc67151067c91d7d667ab[m
+Merge: af3c80b 9565729
+Author: Andrew <anpbarr@ucsc.edu>
+Date:   Sun Feb 5 03:03:58 2017 -0800
+
+    O
+    q
+    
+    ichanged audio manageri
+    q
+    changed audio managerMerge branch 'Sprint1' of https://github.com/EronLake/Children-of-Osi into Sprint1
+
+[33mcommit af3c80b4e40ab404d3949cdd819b12f52fa7b83b[m
+Author: Andrew <anpbarr@ucsc.edu>
+Date:   Sun Feb 5 03:01:55 2017 -0800
+
+    implemented Audio manager
+
+[33mcommit 9565729417064c0d5f9c7c450ea0af2e8ded9d6c[m
+Author: acalba93 <acalba@ucsc.edu>
+Date:   Sat Feb 4 22:09:52 2017 -0800
+
+    THINGS ARE GETTING DRAWN
+    
+    semi correctly. still need to work on transparent background
+
+[33mcommit c8adef202bffde94c76bd4323322c023041be020[m
+Merge: 800f799 a97d8e7
+Author: Zirconia <dtoney@ucsc.edu>
+Date:   Fri Feb 3 18:33:59 2017 -0800
+
+    Merge branch 'Sprint1' of https://github.com/EronLake/Children-of-Osi.git
+
+[33mcommit 800f79990a74f2c03198bf1047eb43c9365d07d6[m
+Author: U-DESKTOP-IJO7N67\BlackMagicianDTT <dtoney@ucsc.edu>
+Date:   Fri Feb 3 18:28:32 2017 -0800
+
+    Changed memory code to work with Osi class and added parameter passing functionality to task creation.
+
+[33mcommit a97d8e7452156453bc4073709ac3669b79771b78[m
+Author: acalba93 <acalba@ucsc.edu>
+Date:   Fri Feb 3 17:12:32 2017 -0800
+
+    temp
+    
+    sorta draws 2 things
+
+[33mcommit 87ed33c6f7bf18bff9cc79bd68fcd0ae8d7b336b[m
+Author: acalba93 <acalba@ucsc.edu>
+Date:   Fri Feb 3 16:52:45 2017 -0800
+
+    got further with rendering
+
+[33mcommit a7d8da4c48353c2f4a50c7094000e63fef45b8c3[m
+Author: acalba93 <acalba@ucsc.edu>
+Date:   Fri Feb 3 14:08:33 2017 -0800
+
+    fixed
+    
+    gl_Position
+
+[33mcommit 28ff8803f77dda98c406ecce1b7cd561bd95da09[m
+Author: acalba93 <acalba@ucsc.edu>
+Date:   Fri Feb 3 13:17:42 2017 -0800
+
+    bad push
+    
+    doesn't compile
+
+[33mcommit 11b2fe0332f670d45c9e70da7b53bb08a8b75948[m
+Author: U-DESKTOP-IJO7N67\BlackMagicianDTT <dtoney@ucsc.edu>
+Date:   Fri Feb 3 10:57:49 2017 -0800
+
+    commented out createTask line
+
+[33mcommit 2965c49cc980b1279192935a15c68b583c09baf4[m
+Merge: c3f35cf 253ad3c
+Author: Zirconia <dtoney@ucsc.edu>
+Date:   Fri Feb 3 10:52:49 2017 -0800
+
+    txt file conflict
+
+[33mcommit c3f35cfae06f4b84d42c42203dea9244b6c0c39f[m
+Author: U-DESKTOP-IJO7N67\BlackMagicianDTT <dtoney@ucsc.edu>
+Date:   Fri Feb 3 10:51:10 2017 -0800
+
+    stupid txt file
+
+[33mcommit 253ad3ca4df3a56d6b08c25cb04cf84799671769[m
+Author: Alexander <alexander.ou@gmail.com>
+Date:   Fri Feb 3 01:11:39 2017 -0800
+
+    very slight changes to audio, need design discussions before further changes
+
+[33mcommit 849e653238ae0a5daf91a800187dd7957f0cc3e5[m
+Author: Daniel Hildebrandt <daniel.s.hildebrandt+git@gmail.com>
+Date:   Thu Feb 2 18:19:16 2017 -0800
+
+    Forgot to push the changes needed in the fragment shader: here they are.
+
+[33mcommit 93372741c5d38a725ff602fab6d3aab7296b8eea[m
+Author: EronLake <ejlake@ucsc.edu>
+Date:   Thu Feb 2 15:22:53 2017 -0800
+
+    added the childrenOfOsi class, and made edits to createTask()
+
+[33mcommit 02809a5784b3068d61746356e032c68d4a0442d7[m
+Merge: 19da729 ed1f77d
+Author: Zirconia <dtoney@ucsc.edu>
+Date:   Wed Feb 1 21:32:13 2017 -0800
+
+    R key creates soldier
+
+[33mcommit 19da72917b5a5fdf9cbb2827bd7950395c79aee6[m
+Author: U-DESKTOP-IJO7N67\BlackMagicianDTT <dtoney@ucsc.edu>
+Date:   Wed Feb 1 21:29:04 2017 -0800
+
+    Pressing r key now creates a soldier.
+
+[33mcommit ed1f77d45aa01e57cf8607e8672ec68ae4dadfb1[m
+Author: Daniel Hildebrandt <daniel.s.hildebrandt+git@gmail.com>
+Date:   Wed Feb 1 18:04:46 2017 -0800
+
+    Rendering works as far as drawing the grey window background.
+
+[33mcommit 71485e5199830174cc13b4233993456a6c6d7671[m
+Author: Andrew <anpbarr@ucsc.edu>
+Date:   Wed Feb 1 16:23:15 2017 -0800
+
+    prototype for audio manager
+
+[33mcommit b7352d315e213fe2994544eaafb5452bb5a2a550[m
+Author: Justin Patrick Farris <jpfarris@crm.ucsc.edu>
+Date:   Tue Jan 31 20:08:58 2017 -0800
+
+    Added test for "fake task" checking
+
+[33mcommit 7b7f4f2d0b44ff08c45af4be7d84bf66cb0ae978[m
+Author: Justin Patrick Farris <jpfarris@crm.ucsc.edu>
+Date:   Tue Jan 31 20:07:59 2017 -0800
+
+    Successful mapping of task names to function pointers
+
+[33mcommit fc8ed92fcd25b2a18a803a644c7318f6a22d64d6[m
+Author: Ian Christner <ianchristner@gmail.com>
+Date:   Mon Jan 30 22:29:02 2017 -0800
+
+    Added placeholder comments where we will put functions
+
+[33mcommit 710b456a48b4353a18fb56859f54ce2904e8b7b7[m
+Merge: 2745925 ee04d6e
+Author: Zirconia <dtoney@ucsc.edu>
+Date:   Mon Jan 30 11:44:11 2017 -0800
+
+    Merge branch 'Sprint1' of https://github.com/EronLake/Children-of-Osi.git
+
+[33mcommit 274592593a2bde2cee5c9aa757a018b9c23f696b[m
+Author: Zirconia <dtoney@ucsc.edu>
+Date:   Mon Jan 30 11:42:02 2017 -0800
+
+    Placeholders for pool pointers
+
+[33mcommit ee04d6e99fd4e79c74e4c2dea639580f4d937837[m
+Merge: f3571c8 b3287e3
+Author: Justin Patrick Farris <jpfarris@crm.ucsc.edu>
+Date:   Sun Jan 29 20:28:32 2017 -0800
+
+    Merge branch 'Sprint1' of https://github.com/EronLake/Children-of-Osi.git
+
+[33mcommit f3571c8fef010b893120776fefcef9ba3eb72f3d[m
+Merge: a95460f 57410fc
+Author: Justin Patrick Farris <jpfarris@crm.ucsc.edu>
+Date:   Sun Jan 29 20:28:11 2017 -0800
+
+    fix the dumb Message log merge conflicts
+
+[33mcommit b3287e382f597902ac25360f174935fde7a77bd0[m
+Author: Andrew <anpbarr@ucsc.edu>
+Date:   Sun Jan 29 20:27:44 2017 -0800
+
+    added dlls to debug folder and changed gitignore
+
+[33mcommit a95460fd20f841ac3801a732e7d73e9d87558f1e[m
+Author: Justin Patrick Farris <jpfarris@crm.ucsc.edu>
+Date:   Sun Jan 29 20:26:34 2017 -0800
+
+    Placeholder input checks for on-the-fly memory management
+
+[33mcommit 57410fce897cbb5a8275faa33ff6fd8c5ef62221[m
+Merge: 3289560 d9fa970
+Author: Andrew <anpbarr@ucsc.edu>
+Date:   Sun Jan 29 20:04:24 2017 -0800
+
+    resolved merge conflicts
+
+[33mcommit 3289560748b6315bd559dc614af2779200cc8ce7[m
+Author: Andrew <anpbarr@ucsc.edu>
+Date:   Sun Jan 29 19:59:25 2017 -0800
+
+    necessary commit
+
+[33mcommit d9fa9708b1a1a7fabf804ed26a999018780de4b8[m
+Author: Andrew <anpbarr@ucsc.edu>
+Date:   Sun Jan 29 19:53:40 2017 -0800
+
+    External dependencies for fmod
+
+[33mcommit a46c43f5412521dd474c3db0dded148541dc6715[m
+Author: acalba93 <acalba@ucsc.edu>
+Date:   Sun Jan 29 18:20:10 2017 -0800
+
+    render without tree
+    
+    also made suggestion for quadtree
+
+[33mcommit 754206fe4ab03c12466c272f23d6d559be522b32[m
+Author: Justin Patrick Farris <jpfarris@crm.ucsc.edu>
+Date:   Sat Jan 28 18:40:06 2017 -0800
+
+    Cleaned up keyboard input, experiments with task map
+
+[33mcommit a3dcde70495638cee52a6d513364ebdc22b39438[m
+Author: U-DESKTOP-IJO7N67\BlackMagicianDTT <dtoney@ucsc.edu>
+Date:   Fri Jan 27 15:16:08 2017 -0800
+
+    Fixed undeclared identifier issues with pool code and added pool test function to main.
+
+[33mcommit 2bc60c929c102af230a15929861f851b8a410378[m
+Merge: 0f3e854 1a322b4
+Author: Zirconia <dtoney@ucsc.edu>
+Date:   Fri Jan 27 11:46:49 2017 -0800
+
+    Merge pull request #72 from EronLake/DarionIan
+    
+    Darion ian
+
+[33mcommit 1a322b4fcde6938ca5d9ac6b948db89227af01be[m
+Merge: e91f8ac 0f3e854
+Author: acalba93 <acalba@ucsc.edu>
+Date:   Fri Jan 27 10:30:04 2017 -0800
+
+    update from sprint1
+    
+    filters might screw it up
+
+[33mcommit 48553cca32bcf9dc907ab7339982bf575fb10132[m
+Merge: bc5f572 0f3e854
+Author: acalba93 <acalba@ucsc.edu>
+Date:   Fri Jan 27 09:56:02 2017 -0800
+
+    Merge remote-tracking branch 'refs/remotes/origin/Sprint1' into Andrew
+
+[33mcommit bc5f5720076d5631946ebac02e335b597ae89982[m
+Author: acalba93 <acalba@ucsc.edu>
+Date:   Fri Jan 27 09:54:31 2017 -0800
+
+    Added testmain to main and deleted testmain
+    
+    I was just trying to see if it could compile, but I didn't think there
+    was a reason not to save the changes.
+
+[33mcommit 0f3e8543cbaa3f306eb76884a992e7c7341087f1[m
+Author: acalba93 <acalba@ucsc.edu>
+Date:   Fri Jan 27 09:32:19 2017 -0800
+
+    Created a test function in main
+    
+    reduces clutter
+
+[33mcommit 0e5426b31f3e04a155c199396eae0b73826ee7b9[m
+Merge: 5aef951 c220f06
+Author: acalba93 <acalba@ucsc.edu>
+Date:   Fri Jan 27 09:13:09 2017 -0800
+
+    Merge pull request #71 from EronLake/daniel-sprites
+    
+    Daniel sprites
+
+[33mcommit 5aef9516bfc57f93d42ebd86737e2429d7439fa9[m
+Author: acalba93 <acalba@ucsc.edu>
+Date:   Fri Jan 27 08:56:50 2017 -0800
+
+    Created Basic Render Manager and Helper
+    
+    Still needs a good amount more stuff, just has a skeleton. Changed
+    movement.cpp to Movement.cpp, hopefully no issues
+
+[33mcommit 59da09b30491b511050472550bae9ba6d95dccbc[m
+Author: Alexander <alexander.ou@gmail.com>
+Date:   Thu Jan 26 21:31:29 2017 -0800
+
+    physics manager can collision and movement completely. can also pass in obj to update
+
+[33mcommit e91f8acc136b4e653e108d7635ba67993f941cd7[m
+Author: U-DESKTOP-IJO7N67\BlackMagicianDTT <dtoney@ucsc.edu>
+Date:   Thu Jan 26 19:13:04 2017 -0800
+
+    Edited memManager files to use pool functions.
+
+[33mcommit a4ebe00f22635850a0deb015c736d78761d487d9[m
+Author: Ian Christner <ianchristner@gmail.com>
+Date:   Thu Jan 26 17:38:32 2017 -0800
+
+    Added file
+
+[33mcommit 7092571474bcc28801f3bc50dbd1057b96a1b2c2[m
+Author: Ian Christner <ianchristner@gmail.com>
+Date:   Thu Jan 26 17:25:18 2017 -0800
+
+    Added class we will edit. memManager.cpp and memManager.h.
+
+[33mcommit 82f303f0187ede94cc0af4f82ee32db0a61ef6c2[m
+Author: darkapb <anpbarr@ucsc.edu>
+Date:   Thu Jan 26 16:55:55 2017 -0800
+
+    Working Sound Engine done without SoundObject Functionality
+
+[33mcommit 48e90f69d4302ea566bb1e6cd1854e610e081282[m
+Author: darkapb <anpbarr@ucsc.edu>
+Date:   Thu Jan 26 16:53:20 2017 -0800
+
+    Delete SoundSystem.cpp
+
+[33mcommit 42ca7dbae5ab033555023bb04c9a50f69d3bfa4a[m
+Author: darkapb <anpbarr@ucsc.edu>
+Date:   Thu Jan 26 16:53:10 2017 -0800
+
+    Delete SoundSystem.h
+
+[33mcommit b2c57d91934bad0eb005c578f8f09f1921eae39e[m
+Author: U-DESKTOP-IJO7N67\BlackMagicianDTT <dtoney@ucsc.edu>
+Date:   Thu Jan 26 16:50:09 2017 -0800
+
+    Added Pool.h and Pool.cpp and moved stuff from main into Pool.cpp.
+
+[33mcommit c220f06d8b8fb04052b9b5d07ecaedcea521c843[m
+Merge: 9a08f19 d6e04ca
+Author: Daniel Hildebrandt <daniel.s.hildebrandt+git@gmail.com>
+Date:   Wed Jan 25 17:45:37 2017 -0800
+
+    Fixed linker errors: merge branch Daniel into Sprint1.
+
+[33mcommit d6e04ca6bd3b13b7c6f91846a94b1850e30daf7f[m
+Author: Daniel Hildebrandt <daniel.s.hildebrandt+git@gmail.com>
+Date:   Wed Jan 25 17:25:34 2017 -0800
+
+    Finally fixed the linker errors: code compiles.
+
+[33mcommit 9a08f1924ae26f0f7de5e83dc7714d48e6bffdc1[m
+Author: acalba93 <acalba@ucsc.edu>
+Date:   Wed Jan 25 14:17:43 2017 -0800
+
+    protected back to private
+    
+    sprite is now public
+
+[33mcommit da01cd0b1c812dcdc1ab4d8bcc9f6193c5eefcfb[m
+Author: Ian Christner <ianchristner@gmail.com>
+Date:   Wed Jan 25 14:02:54 2017 -0800
+
+    Add files via upload
+
+[33mcommit 7df44a7389a31171ab1068c85f7a3774512caafc[m
+Merge: a2fecff 69382c2
+Author: EronLake <ejlake@ucsc.edu>
+Date:   Wed Jan 25 13:13:55 2017 -0800
+
+    fixed merge problems
+
+[33mcommit a2fecff76d4dcb6ce7a7494592b15e57b122e148[m
+Author: EronLake <ejlake@ucsc.edu>
+Date:   Wed Jan 25 13:09:44 2017 -0800
+
+    added some comments
+
+[33mcommit 69382c2c094ea577b2957b1fc0084a7d176f65cd[m
+Author: acalba93 <acalba@ucsc.edu>
+Date:   Wed Jan 25 13:04:27 2017 -0800
+
+    New 32 project
+    
+    Has the precompiled headers stuff again. it might be useful to keep
+
+[33mcommit 8030eb7a68f444a3e005cb899a651b05d69ecc8b[m
+Author: acalba93 <acalba@ucsc.edu>
+Date:   Wed Jan 25 12:10:51 2017 -0800
+
+    update reverted stuff
+    
+    revert had errors. we fixed them
+
+[33mcommit 99c6e1f03fd52f064ed4700b518811cc23b77dcb[m
+Author: acalba93 <acalba@ucsc.edu>
+Date:   Wed Jan 25 11:58:02 2017 -0800
+
+    trying to roll back
+
+[33mcommit 9148682897344dbf8d8df4a57bdf62a14fa849f3[m
+Merge: c45f663 3670ff4
+Author: EronLake <ejlake@ucsc.edu>
+Date:   Wed Jan 25 11:09:01 2017 -0800
+
+    added db file
+
+[33mcommit c45f663bc3c6423dd343b60078477275cce4606a[m
+Author: EronLake <ejlake@ucsc.edu>
+Date:   Wed Jan 25 11:05:47 2017 -0800
+
+    changed gitignore
+
+[33mcommit 3670ff42226fe3447139e60fd062e9eb2c09925c[m
+Author: Justin Patrick Farris <jpfarris@.ucsc.edu>
+Date:   Wed Jan 25 05:40:42 2017 -0800
+
+    Complete PhysicsManager tied to tBuffer and helper classes
+
+[33mcommit 668aa1ec2de08f16b6859fda59e62283306109fd[m
+Author: Justin Patrick Farris <jpfarris@.ucsc.edu>
+Date:   Wed Jan 25 04:34:50 2017 -0800
+
+    copying edits over from old repo clone
+
+[33mcommit cbd2df9714d15337f3d64981fabc9480987c3c05[m
+Author: EronLake <ejlake@ucsc.edu>
+Date:   Tue Jan 24 23:50:00 2017 -0800
+
+    fixed everything
+
+[33mcommit 2237b85e668d7337afa545f232582b26f5277b4b[m
+Merge: 95fa0c1 bba54d5
+Author: EronLake <ejlake@ucsc.edu>
+Date:   Tue Jan 24 22:33:40 2017 -0800
+
+    deleted a file to fix conflicts
+
+[33mcommit 95fa0c1876f9c160147f4a8d8c030682248ecae1[m
+Author: EronLake <ejlake@ucsc.edu>
+Date:   Tue Jan 24 22:22:28 2017 -0800
+
+    no new changes
+
+[33mcommit bba54d51590fd08af838832f22173c284eb35970[m
+Author: acalba93 <acalba@ucsc.edu>
+Date:   Tue Jan 24 21:06:29 2017 -0800
+
+    Updated gitignore
+    
+    Idk if it works but it seems to because i tested it real quickly
+
+[33mcommit fad9d9aeb594620443a6bc88a05dacbd7c4e6c5b[m
+Author: acalba93 <acalba@ucsc.edu>
+Date:   Tue Jan 24 20:33:19 2017 -0800
+
+    removed things?
+    
+    hope it works
+
+[33mcommit 57c4e6958ebba0624da5bc5220ea1e2c754ed2da[m
+Author: EronLake <ejlake@ucsc.edu>
+Date:   Tue Jan 24 19:59:16 2017 -0800
+
+    edited all the task buffer stuff
+
+[33mcommit 88711f10a3441af7344b0bcaf8730f9a19470e09[m
+Author: acalba93 <acalba@ucsc.edu>
+Date:   Tue Jan 24 15:10:03 2017 -0800
+
+    game object private variables to protected
+    
+    game object private variables to protected
+    commented out daniels code so it compiles
+
+[33mcommit f1ce4007ba8043fc0611dbdbd285a80254134c31[m
+Author: acalba93 <acalba@ucsc.edu>
+Date:   Mon Jan 23 17:25:44 2017 -0800
+
+    Check Class of Object
+    
+    using CheckClass functions
+
+[33mcommit 5360699e8b6187b376d3f35a45518d12c6ed4164[m
+Author: acalba93 <acalba@ucsc.edu>
+Date:   Mon Jan 23 15:09:11 2017 -0800
+
+    quick test for sprite
+    
+    objects definitly need to be cleaned up
+
+[33mcommit e837d56d39150b55faa2fae6f18bfefdf9859f49[m
+Author: acalba93 <acalba@ucsc.edu>
+Date:   Mon Jan 23 14:48:24 2017 -0800
+
+    finishing texture and sprite class
+    
+    finishing texture and sprite class
+
+[33mcommit 091d5ce89a3e0cdfa086bd2b1f9bbe3a79c92998[m
+Author: acalba93 <acalba@ucsc.edu>
+Date:   Mon Jan 23 13:30:20 2017 -0800
+
+    Added projectile class and game object filter
+    
+    Added projectile class and game object filter
+
+[33mcommit 86461d910b7b7263a529d5674d245fa3db382a4e[m
+Author: Daniel Hildebrandt <daniel.s.hildebrandt+git@gmail.com>
+Date:   Sat Jan 21 21:54:29 2017 -0800
+
+    Added GameWindow code. Needs testing, adjustment.
+
+[33mcommit 5bfc171f701c202b8a66f60fd8f37fcb078dfb08[m
+Author: Daniel Hildebrandt <daniel.s.hildebrandt+git@gmail.com>
+Date:   Sat Jan 21 21:53:42 2017 -0800
+
+    Another gitignore update.
+
+[33mcommit b7c2a56e742f000688b6b9ff28f4d7134360e2be[m
+Author: Daniel Hildebrandt <daniel.s.hildebrandt+git@gmail.com>
+Date:   Sat Jan 21 21:48:01 2017 -0800
+
+    Updated gitignore to reflect new, nested repository structure.
+
+[33mcommit ca47b9a30f2ea561c73d8d169c3ea65463b28244[m
+Author: U-DESKTOP-IJO7N67\BlackMagicianDTT <dtoney@ucsc.edu>
+Date:   Sat Jan 21 21:13:25 2017 -0800
+
+    moved mem files.
+
+[33mcommit b14960ce61ed13dcc3bef3dd580284f36222b07d[m
+Author: darkapb <anpbarr@ucsc.edu>
+Date:   Sat Jan 21 18:01:08 2017 -0800
+
+    Add files via upload
+    
+    How to read in and play a sound file(uncomment testmain)
+
+[33mcommit c113efe24926bcc5702a2d2316ecb50c6f533e2c[m
+Author: darkapb <anpbarr@ucsc.edu>
+Date:   Sat Jan 21 18:00:16 2017 -0800
+
+    Delete testmain.cpp
+
+[33mcommit 68d11569508b93ae1ec64422e5c93d6e8697f02e[m
+Author: darkapb <anpbarr@ucsc.edu>
+Date:   Sat Jan 21 18:00:07 2017 -0800
+
+    Delete SoundSystem.h
+
+[33mcommit 0b3ab41cc22d53363b0483a71d025a9a2fc91c12[m
+Author: darkapb <anpbarr@ucsc.edu>
+Date:   Sat Jan 21 17:59:57 2017 -0800
+
+    Delete SoundSystem.cpp
+
+[33mcommit 879af3a47643c7e5217b7bca552800a17f64e521[m
+Author: darkapb <anpbarr@ucsc.edu>
+Date:   Sat Jan 21 17:59:26 2017 -0800
+
+    Add files via upload
+    
+    How to read in a sound and play it(uncomment testmain)
+
+[33mcommit 86ef8c18816ddb22e49279b643df9fcfb149627b[m
+Author: acalba93 <acalba@ucsc.edu>
+Date:   Sat Jan 21 16:42:52 2017 -0800
+
+    changed rectangles to world objects
+    
+    which allows it to compile for some reason
+
+[33mcommit 7ca58dd0638ab77eb5470235f92e4cfefd832ab7[m
+Author: U-DESKTOP-IJO7N67\BlackMagicianDTT <dtoney@ucsc.edu>
+Date:   Sat Jan 21 16:09:29 2017 -0800
+
+    added more mem code.
+
+[33mcommit 0db59081f169f50c8992cabd74145b2c8055bfdb[m
+Author: U-DESKTOP-IJO7N67\BlackMagicianDTT <dtoney@ucsc.edu>
+Date:   Fri Jan 20 21:02:36 2017 -0800
+
+    Added memory code to master.
+
+[33mcommit 8eb68adea8cb3c619087dca2560a50e6e35f96ef[m
+Author: EronLake <ejlake@ucsc.edu>
+Date:   Fri Jan 20 13:46:05 2017 -0800
+
+    changed the run function to while loop
+
+[33mcommit 0af473f1ca79a304cc0a8ed8aafd3bdec692102a[m
+Author: EronLake <ejlake@ucsc.edu>
+Date:   Fri Jan 20 12:25:47 2017 -0800
+
+    pushed all of the task buffer/log stuff
+
+[33mcommit c0377eb067958b0496792d0743f7f3452b66deb2[m
+Author: Alexander <alexander.ou@gmail.com>
+Date:   Fri Jan 20 01:28:35 2017 -0800
+
+    added code to check collision for bounding boxes
+
+[33mcommit 993b1f9c4e72308ca9f7639d728b097e459aed19[m
+Author: U-DESKTOP-IJO7N67\BlackMagicianDTT <dtoney@ucsc.edu>
+Date:   Wed Jan 18 19:04:14 2017 -0800
+
+    Added memory code to master.
+
+[33mcommit fc9044024347150131a46b1349d0d133c6d35b35[m
+Merge: 80aaa10 83dbc61
+Author: acalba93 <acalba@ucsc.edu>
+Date:   Wed Jan 18 11:59:33 2017 -0800
+
+    Merge pull request #65 from EronLake/Engine_Skeleton
+    
+    Engine skeleton
+
+[33mcommit 80aaa10f4af4085e0416115e44d66849e889f8ab[m
+Author: acalba93 <acalba@ucsc.edu>
+Date:   Wed Jan 18 11:58:21 2017 -0800
+
+    im scared
+    
+    i don't like changing the master file
+
+[33mcommit 83dbc61d70f1433f57b13c8f771e828525696a3c[m
+Author: acalba93 <acalba@ucsc.edu>
+Date:   Tue Jan 17 20:19:53 2017 -0800
+
+    more sprite stuff and misc
+    
+    bunch of random stuff
+
+[33mcommit 7d1c76f459d9f480512a07ac5e2183aa3ce3d39a[m
+Author: acalba93 <acalba@ucsc.edu>
+Date:   Tue Jan 17 12:24:14 2017 -0800
+
+    started sprites and texture classes
+    
+    started sprites and texture classes
+
+[33mcommit ddbef9b0ed3706524b07b8dff1342e61be9c3542[m
+Author: Alexander <alexander.ou@gmail.com>
+Date:   Mon Jan 16 19:23:12 2017 -0800
+
+    tested tree with obs. works fine
+
+[33mcommit 5c988ae370a6b1b2d05857ef5a631a21ee82a011[m
+Author: acalba93 <acalba@ucsc.edu>
+Date:   Mon Jan 16 16:09:52 2017 -0800
+
+    simplified move
+    
+    simplified move for NPC and children
+
+[33mcommit e81510cce6d6529f3557a6c2cca5d689fed5149c[m
+Author: aou4 <aou4@STARFOX>
+Date:   Mon Jan 16 15:56:59 2017 -0800
+
+    see commit below
+
+[33mcommit bc7773d0b001844e02ae71b9b24a3207642e6e41[m
+Author: aou4 <aou4@STARFOX>
+Date:   Mon Jan 16 15:07:43 2017 -0800
+
+    reorganized project
+
+[33mcommit 91d93dc13ddc4f6567c85651fc4ed3a65cac8feb[m
+Author: aou4 <aou4@STARFOX>
+Date:   Mon Jan 16 15:02:43 2017 -0800
+
+    reorganized project
+
+[33mcommit ae1db786be73dfd5ca761a80702654003bf921fd[m
+Author: aou4 <aou4@STARFOX>
+Date:   Mon Jan 16 14:26:45 2017 -0800
+
+    test cleaning project
+
+[33mcommit 2557f91d98b1040f3508e4cba32609935912f3c5[m
+Author: Alexander Ou <aou4@crm.ucsc.edu>
+Date:   Mon Jan 16 14:19:41 2017 -0800
+
+    added movement, will try to clean up project
+
+[33mcommit d180cc80e27a6651f3ce3597a2888a7f7c5ebf4d[m
+Author: acalba93 <acalba@ucsc.edu>
+Date:   Mon Jan 16 13:38:51 2017 -0800
+
+    added speed
+    
+    added speed and get/set functions
+
+[33mcommit 88926bd5547263bbfee4ac8257f7a27f8fba444d[m
+Merge: 5af8d9a 16c3b01
+Author: acalba93 <acalba@ucsc.edu>
+Date:   Mon Jan 16 13:31:07 2017 -0800
+
+    Merge remote-tracking branch 'refs/remotes/origin/master' into Engine_Skeleton
+
+[33mcommit 5af8d9abc35070b1762a8f39e3cc5dfe06cb56e8[m
+Author: acalba93 <acalba@ucsc.edu>
+Date:   Mon Jan 16 13:17:41 2017 -0800
+
+    fixed compile
+    
+    player is now child of hero
+
+[33mcommit 5300b72e52d838b81557378dc0cf8189cfa33926[m
+Author: Justin Patrick Farris <jpfarris@crm.ucsc.edu>
+Date:   Mon Jan 16 12:00:58 2017 -0800
+
+    Transferring player movement to Engine branch
+
+[33mcommit 16c3b0169eb62062fce67b710ae6e720eee2bf3b[m
+Author: Daniel Hildebrandt <daniel.s.hildebrandt+git@gmail.com>
+Date:   Sun Jan 15 23:43:59 2017 -0800
+
+    Another small gitignore update.
+
+[33mcommit e346ed6901ce9ba9dbc2a8fbb83ea0b5cb7b3c9a[m
+Author: Daniel Hildebrandt <daniel.s.hildebrandt+git@gmail.com>
+Date:   Sun Jan 15 23:42:42 2017 -0800
+
+    Removed my GameWindow stubs: will add as part of engine branch
+
+[33mcommit a52874a27e7bd134453e7269db5bde08922b3458[m
+Author: Daniel Hildebrandt <daniel.s.hildebrandt+git@gmail.com>
+Date:   Sun Jan 15 23:32:54 2017 -0800
+
+    Actually removed those unnecessary files from the repo.
+
+[33mcommit e85852207ecc6cfeaac5f64d1d7765ccf844fd9b[m
+Author: Daniel Hildebrandt <daniel.s.hildebrandt+git@gmail.com>
+Date:   Sun Jan 15 23:29:15 2017 -0800
+
+    Updated gitignore to exclude some seemingly unnecessary files. Let me know if this breaks anything.
+
+[33mcommit 2f23337c66ebc9c82e4e7acd5e7e5459a481fd2a[m
+Author: Daniel Hildebrandt <daniel.s.hildebrandt+git@gmail.com>
+Date:   Sun Jan 15 17:47:30 2017 -0800
+
+    Removed Justin's testing file.
+
+[33mcommit e7f86dd1c66c5188d7575cc2fe6c16f10c7ddf3b[m
+Author: Daniel Hildebrandt <daniel.s.hildebrandt+git@gmail.com>
+Date:   Sun Jan 15 17:46:15 2017 -0800
+
+    Started a Visual Studio project with the earliest beginnings of my GameWindow class. Made in VS2015.
+
+[33mcommit bd2fa3ea51d04588bfa05b6179ee8e9373751aeb[m
+Author: Alexander <alexander.ou@gmail.com>
+Date:   Sun Jan 15 00:33:11 2017 -0800
+
+    merge qt into project, pseudo rec obj using vector2f
+
+[33mcommit 4feac811e3c8797a29deb14153f4965533352f40[m
+Author: acalba93 <acalba@ucsc.edu>
+Date:   Sat Jan 14 17:21:57 2017 -0800
+
+    smal misc changes
+    
+    added more vars and tried to det up looking for memory leaks
+
+[33mcommit e46cb37f94731cd4ec374e74e14e8cf1e8e4d859[m
+Author: acalba93 <acalba@ucsc.edu>
+Date:   Sat Jan 14 15:13:38 2017 -0800
+
+    fixed rotattion
+    
+    fixed rotation like location
+
+[33mcommit 18ec039051fba9cd0bc840021f571de270d549ea[m
+Author: acalba93 <acalba@ucsc.edu>
+Date:   Sat Jan 14 14:49:21 2017 -0800
+
+    fixed location and can now shift
+    
+    locations changes weren't set up right. now can shift location
+
+[33mcommit fd31dc6e7e5e903700bfd38273aa17a76b6b928e[m
+Author: acalba93 <acalba@ucsc.edu>
+Date:   Sat Jan 14 14:26:16 2017 -0800
+
+    Basic Attack Method and Place Holder Factions
+    
+    basic attack, basic faction stuff
+
+[33mcommit 3a46ddbd258d3084e59862af6c8c8a077807d1ed[m
+Author: acalba93 <acalba@ucsc.edu>
+Date:   Sat Jan 14 12:24:11 2017 -0800
+
+    Seperated classes into seperate files
+    
+    yay more files
+
+[33mcommit da902546744d98964d33939a9574a36cb040e8ba[m
+Author: acalba93 <acalba@ucsc.edu>
+Date:   Fri Jan 13 12:12:49 2017 -0800
+
+    more get/set and now player class
+    
+    more get/set and now player class. no get and set for affinity and
+    faction yet
+
+[33mcommit 0bad8398daf8dde3f735a676d818680c579de347[m
+Author: acalba93 <acalba@ucsc.edu>
+Date:   Fri Jan 13 11:43:42 2017 -0800
+
+    added vectors
+    
+    made a vectors class (Vector2f)
+
+[33mcommit 7fd65de737c87ec47d906c8d2990ed362832a342[m
+Author: acalba93 <acalba@ucsc.edu>
+Date:   Fri Jan 13 10:15:00 2017 -0800
+
+    starting set/get
+    
+    less parameters for constructors
+
+[33mcommit 5db6c6ed3d5fc9e702e60cf53869c238a4e21008[m
+Merge: 51efb45 d37604e
+Author: acalba93 <acalba@ucsc.edu>
+Date:   Thu Jan 12 15:15:56 2017 -0800
+
+    Merge remote-tracking branch 'refs/remotes/origin/master' into Engine_Skeleton
+
+[33mcommit 51efb4582cb195ca466ab66de454bac4ad37d66e[m
+Author: acalba93 <acalba@ucsc.edu>
+Date:   Wed Jan 11 21:20:30 2017 -0800
+
+    More Vars
+    
+    More variables to the skeleton
+
+[33mcommit d37604e8e5565304fdccfc521059dd542cda731a[m
+Author: Justin Farris <jpfarris@ucsc.edu>
+Date:   Wed Jan 11 21:19:14 2017 -0800
+
+    checking something bout zube
+
+[33mcommit ebf8eddc8229c17ff2ff5b409f533e44910eb6bd[m
+Merge: 11b3ed7 2ae3564
+Author: acalba93 <acalba@ucsc.edu>
+Date:   Wed Jan 11 20:18:29 2017 -0800
+
+    Merge remote-tracking branch 'refs/remotes/origin/master' into Engine_Skeleton
+
+[33mcommit 11b3ed7fdf27a0832795b2206e837424b32076ab[m
+Author: acalba93 <acalba@ucsc.edu>
+Date:   Wed Jan 11 20:16:49 2017 -0800
+
+    Added Objects
+    
+    Skeleton of objects and inheritance
+
+[33mcommit 2ae3564d7a8d197c5ca08c04c26a86e14586b24f[m
+Author: Spencer <sssmoot@ucsc.edu>
+Date:   Wed Jan 11 15:35:59 2017 -0800
+
+    Spencer Testing
+
+[33mcommit c60c459c438e488600ae6175519b4aad44833acd[m
+Author: EronLake <ejlake@ucsc.edu>
+Date:   Tue Jan 10 21:39:32 2017 -0800
+
+    branched Engine-Skeleton
+
+[33mcommit b79a2361d56026fe3aa8be42e8f70222c84eae79[m
+Author: EronLake <ejlake@ucsc.edu>
+Date:   Tue Jan 10 20:58:42 2017 -0800
+
+    Initial commit

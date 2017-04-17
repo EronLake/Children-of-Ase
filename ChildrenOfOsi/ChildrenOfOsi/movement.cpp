@@ -394,6 +394,21 @@ int Movement::talk(WorldObj* obj) {
 				if (objVec[i]->getInteractable()) {
 					if (interaction(d, objVec[i])) {
 						LOG("Player interacted with an object");
+						Hero* hero;
+						if (hero = CheckClass::isHero(objVec[i])) {
+							Planner* hero_plan = AIController::get_plan(hero->name);
+							if (hero_plan->give_as_quest)   //Make sure hero is willing to give up current action
+							{
+								if (d == AIController::pick_quest_doer(hero_plan->get_current_action())) //Hero's top pick for doer is Player
+								{
+									std::cout << hero->getName() << " wants to give Shango a '" << hero_plan->get_current_action()->getName() << "' quest." << endl;
+								}
+								else {
+									std::cout << hero->getName() << " doesn't want to give Shango their '" << hero_plan->get_current_action()->getName() << "' action." << endl;
+								}
+							//	continue;
+							}
+						}
 						DialogueController::startConversation(objVec[i], true);
 					}
 				}

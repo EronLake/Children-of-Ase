@@ -175,7 +175,7 @@ bool ActionHelper::hero_respond(Action* action) {
 	int doer = action->getDoer()->name;
 	int responder = action->getReceiver()->name;
 
-	Planner* hero_planner = ai->hero_planners[responder];
+	Planner* hero_planner = AIController::get_plan(responder);
 
 	int value = hero_planner->value_of(action);
 
