@@ -56,7 +56,9 @@ void AIController::set_plan(int id, Planner* plan) {
 
 void AIController::generate_end_state(int me, int them)
 {
-	//hero_planners[me]->choose_end_with(them);
+	if (!(me > 3 || them > 3)) {
+		get_plan(me)->choose_end_with(them);
+	}
 
 	/*switch (me) {
 	case YEMOJA:
@@ -95,13 +97,13 @@ Hero* AIController::get_hero_object(int h)
 }
 
 void AIController::init_plans() {
-	for (int me = 2; me < 6; me++) {
+	for (int me = 2; me < 4; me++) {
 		Hero* hero = get_hero_object(me);
 		Planner* planner = get_plan(me);
 
 		vector<Action*> goals;
 
-		for (int them = 1; them < 6; them++)   //Look at every other character...
+		for (int them = 1; them < 4; them++)   //Look at every other character...
 		{
 			if (them != me)                    //...that is not myself...
 			{
@@ -147,8 +149,8 @@ void AIController::reevaluate_state(int me, int them) {
 	Planner* planner = get_plan(me);
 
 
-	Action* state = planner->get_end_state_map().at(them);  //Point to the current end_state for them 
-	planner->get_milestone_map().erase(state);           //Delete the old end_state entry in the milestone list
+	Action* state = planner->get_end_state_map()->at(them);  //Point to the current end_state for them 
+	planner->get_milestone_map()->erase(state);           //Delete the old end_state entry in the milestone list
 	generate_end_state(me, them);                          //Generate a new end_state for them, which updates state pointer
 
 
@@ -166,10 +168,10 @@ void AIController::reevaluate_state(int me, int them) {
 
 void AIController::execute() {
 	int action_wait_time = 120; //2sec           //Wait time is approx. 2 minutes (7200)
-	
-	for (auto iter : hero_planners) {
-		Hero* me = get_hero_object(iter.first);
-		Planner* planner = iter.second;
+	for (int me = 2; me < 4; me++) {
+		Hero* hero = get_hero_object(me);
+		Planner* planner = get_plan(me);
+
 		Action* curr_action = planner->get_current_action();
 		Action* curr_goal = planner->get_current_end_state();
 
@@ -187,10 +189,10 @@ void AIController::execute() {
 		//}
 		//me->init_action_timer(action_wait_time);                    //Start a timer for approx. 2 minutes
 
-		std::cout << "before: " << me->update_action_timer() << endl;
-		if (me->update_action_timer() == 0)
+		std::cout << "before: " << hero->update_action_timer() << endl;
+		if (hero->update_action_timer() == 0)
 		{
-			std::cout << "after: " << me->update_action_timer() << endl;
+			std::cout << "after: " << hero->update_action_timer() << endl;
 			if (true) { //used to be : "!planner->give_as_quest"
 				std::cout << "execute" << endl;
 				curr_action->execute();
@@ -241,7 +243,7 @@ void AIController::execute() {
 
 				}
 				planner->set_current_action(best_action);                   //Current action is set
-				me->init_action_timer(action_wait_time);                    //Start a timer for approx. 2 minutes
+				hero->init_action_timer(action_wait_time);                    //Start a timer for approx. 2 minutes
 				planner->give_as_quest = give_as_quest(best_action);  //Check and store in planner whether this is appropriate to give as a quest
 
 			}

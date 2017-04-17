@@ -1239,7 +1239,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	Planner* YemojaPlanner = new Planner(staticRec);
 	Planner* OyaPlanner = new Planner(oya);
 	AIController::set_plan(YEMOJA, YemojaPlanner);
-	AiController::set_plan(OYA, OyaPlanner);
+	AIController::set_plan(OYA, OyaPlanner);
 	Action* test_ally = new Action(nullptr, nullptr, nullptr, 10, 1, "Create Alliance", "execute_train");
 	Action* test_train = new Action(staticRec, oya, nullptr, 10, 1, "Train", "execute_train");
 	
@@ -1278,7 +1278,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	YemojaPlanner->set_current_action(test_train);
 
 	//AiController->generate_end_state(YEMOJA, OYA);
-	AiController->init_plans();
+	AIController::init_plans();
 
 
 	/*
@@ -1641,7 +1641,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 		//setting give as quest to false so that the excute runs
 		YemojaPlanner->give_as_quest = false;
 
-		AiController->execute();
+		AIController::execute();
 
 		if ((1000 / fs) > (clock() - start_tick)) { //delta_ticks) {www
 			Sleep((1000 / fs) - (clock() - start_tick));

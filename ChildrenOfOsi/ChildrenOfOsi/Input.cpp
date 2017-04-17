@@ -829,7 +829,7 @@ void Input::InputCheck()
 			WorldObj* other = DialogueController::getOther();
 			//std:://cout << "HERO: " << other->getName() << std::endl;
 			if (other->getType() == 5) {
-				//std:://cout << "Right type" << std::endl;
+				std::cout << "Right type" << std::endl;
 				Hero* them = dynamic_cast<Hero*>(other);
 				Planner* planner = AIController::get_plan(them->name);
 				//DialogueController::prompted_quest = true;

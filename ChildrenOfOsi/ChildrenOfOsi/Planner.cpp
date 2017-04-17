@@ -64,6 +64,7 @@ void Planner::choose_end_with(int hero) {
 	//this for loop had to be added so missing heroes wouldn't cause an error
 	bool if_should_choose = false;
 	for (auto itr = Containers::hero_table.begin(); itr != Containers::hero_table.end(); itr++) {
+		if (itr->second == NULL) continue;
 		if (hero == itr->second->name) { if_should_choose = true; }
 	}
 	if (if_should_choose)
@@ -174,6 +175,7 @@ vector<std::shared_ptr<Preconditions>> Planner::prioritize_preconditions(Action*
 
 //Returns a vector holding all 4 ideal end_states (as actions)
 vector<Action*> Planner::get_end_states() {
+	//return &end_states;
 	vector<Action*> states;
 	for (auto iter : end_states)
 	//for (auto iter = end_states.begin(); iter != end_states.end();iter++)
