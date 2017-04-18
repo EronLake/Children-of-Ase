@@ -23,6 +23,9 @@ public:
 	static void execute_conquer(Action* conq);
 	static void execute_duel(Action* duel);
 	static void execute_form_alliance(Action* form_alliance);
+	static void execute_conversation(Action* conversation);
+	static void execute_bribe(Action* bribe);
+	static void execute_compliment(Action* compliment);
 
 	//these are just for the release
 	static void execute_fight_bandits(Action* fight_bandits);

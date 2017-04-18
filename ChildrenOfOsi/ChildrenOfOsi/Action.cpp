@@ -18,6 +18,7 @@ Action::Action(Hero* _owner, Hero* _receiver, Hero* _doer, int _utility, int _wh
 	if (receiver!=nullptr)recieverName = receiver->name;
 	name = _name;
 	execute_ptr  = ActionExecFunctions::ActionExecMap[_exe_name];
+	checkpoint = 0; //used for action execution
 
 	multipliers = new Personality();
 	str_mult = new Personality();
@@ -73,6 +74,11 @@ vector<std::string> Action::preConditionsNeeded(Hero* o, Hero* h) {
 	vector<std::string> needs;
 	for (auto it = req_preconds.begin(); it != req_preconds.end(); ++it) {
 		if ((*it)->get_general_type()==Preconditions::REL) {
+
+			//if (bullshit->get_cost(o, h) > 0) {
+			//	std::string temp2 = (*it)->get_type();
+				//needs.push_back(temp2);
+
 			RelPrecon* condition= dynamic_cast<RelPrecon*>((*it).get());
 			if (condition->get_cost(o, h) > 0) {
 				needs.push_back((*it)->get_type());

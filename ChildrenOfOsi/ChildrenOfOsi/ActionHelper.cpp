@@ -38,24 +38,24 @@ void ActionHelper::create_memory(Action* action, Hero* hero)
 	gameplay_func->add_memory(key, hero->name, type, action->time_stamp, people, category,action->getName() + std::to_string(action->time_stamp), where, action->getWhy(), when);
 	hero->mem_counter++;
 
-	if (hero->name = OYA)
+	if (hero->name == OYA)
 	{
 		hero->memories.push_back(Containers::oya_memory_table[key]);
 		bool the_same_ptr = hero->memories[0] = Containers::oya_memory_table[key];
 	}
-	else if (hero->name = YEMOJA)
+	else if (hero->name == YEMOJA)
 	{
 		hero->memories.push_back(Containers::yemoja_memory_table[key]);
 	}
-	else if (hero->name = OSHOSI)
+	else if (hero->name == OSHOSI)
 	{
 		hero->memories.push_back(Containers::oshosi_memory_table[key]);
 	}
-	else if (hero->name = OGUN)
+	else if (hero->name == OGUN)
 	{
 		hero->memories.push_back(Containers::ogun_memory_table[key]);
 	}
-	else if (hero->name = SHANGO)
+	else if (hero->name == SHANGO)
 	{
 		hero->memories.push_back(Containers::shango_memory_table[key]);
 	}
@@ -175,7 +175,7 @@ bool ActionHelper::hero_respond(Action* action) {
 	int doer = action->getDoer()->name;
 	int responder = action->getReceiver()->name;
 
-	Planner* hero_planner = ai->hero_planners[responder];
+	Planner* hero_planner = AIController::get_plan(responder);
 
 	int value = hero_planner->value_of(action);
 
@@ -191,5 +191,62 @@ bool ActionHelper::hero_respond(Action* action) {
 	return interact;
 }
 
+bool ActionHelper::conversation(Action* action) {
+	Relationship before = *action->getDoer()->rel[action->getReceiver()->name];
+
+	//conversation
+	dialogue_point point = { "Fake", "Response_" +action->getName()};
+	DialogueController::dialogue.gen_dialog(point,action->getReceiver());
+
+	int success_level = 0;
+	for (auto it = action->succ_postconds.begin(); it != action->succ_postconds.end(); ++it) {
+		if ((*it)->get_general_type() == Postcondition::REL) {
+			RelPost* con = dynamic_cast<RelPost*>((*it).get());
+			switch (con->get_rel_type()) {
+			case Postcondition::AFF:
+				success_level += action->getDoer()->rel[action->getReceiver()->name]->getAffinity()-before.getAffinity();
+				break;
+			case Postcondition::NOT:
+				success_level += action->getDoer()->rel[action->getReceiver()->name]->getNotoriety() - before.getNotoriety();
+				break;
+			case Postcondition::STR:
+				success_level += action->getDoer()->rel[action->getReceiver()->name]->getStrength() - before.getStrength();
+				break;
+			case Postcondition::BAFF:
+				success_level += before.getAffinity()-action->getDoer()->rel[action->getReceiver()->name]->getAffinity();
+				break;
+			case Postcondition::BNOT:
+				success_level += before.getNotoriety() - action->getDoer()->rel[action->getReceiver()->name]->getNotoriety();
+				break;
+			case Postcondition::BSTR:
+				success_level += before.getStrength() - action->getDoer()->rel[action->getReceiver()->name]->getStrength();
+				break;
+			}
+		} else if ((*it)->get_general_type() == Postcondition::REL_EST) {
+			RelEstimPost* con = dynamic_cast<RelEstimPost*>((*it).get());
+			switch (con->get_rel_type()) {
+			case Postcondition::AFF:
+				success_level += action->getDoer()->rel[action->getReceiver()->name]->getAffEstimate() - before.getAffEstimate();
+				break;
+			case Postcondition::NOT:
+				success_level += action->getDoer()->rel[action->getReceiver()->name]->getNotorEstimate() - before.getNotorEstimate();
+				break;
+			case Postcondition::STR:
+				success_level += action->getDoer()->rel[action->getReceiver()->name]->getStrEstimate() - before.getStrEstimate();
+				break;
+			case Postcondition::BAFF:
+				success_level += before.getAffEstimate() - action->getDoer()->rel[action->getReceiver()->name]->getAffEstimate();
+				break;
+			case Postcondition::BNOT:
+				success_level += before.getNotorEstimate() - action->getDoer()->rel[action->getReceiver()->name]->getNotorEstimate();
+				break;
+			case Postcondition::BSTR:
+				success_level += before.getStrEstimate() - action->getDoer()->rel[action->getReceiver()->name]->getStrEstimate();
+				break;
+			}
+		}
+	}
+	return (success_level>0);
+}
 
 ChildrenOfOsi* ActionHelper::gameplay_func;
