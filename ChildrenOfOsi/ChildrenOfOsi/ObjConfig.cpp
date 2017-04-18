@@ -16,7 +16,11 @@ float botRightx;
 float botRighty;
 string WhichJson;
 unordered_map<Texture*, pair<string, int>>* ObjConfig::textureMapConfig;
-
+vector<Texture*>* ObjConfig::standard_con;
+vector<Texture*>* ObjConfig::oasis_con;
+vector<Texture*>* ObjConfig::jungle_con;
+vector<Texture*>* ObjConfig::mountain_con;
+vector<Texture*>* ObjConfig::ogun_con;
 
 ObjConfig::ObjConfig()
 {
@@ -30,17 +34,20 @@ ObjConfig::~ObjConfig()
 
 void ObjConfig::import_config(vector<WorldObj*>* recVec, ChildrenOfOsi* gameplay_func, TaskBuffer* tBuffer)
 {
+	int region=0;
 	if (Jungle_Config) {
 		WhichJson = "config.json";
+		region = JUNGLE;
 	}
 	else {
 		WhichJson = "oasis_config.json";
+		region = OASIS;
 	}
 
 	int numberOfWorldObj = 0;
 
 	if (rand_gen) {
-		make_stuff(recVec, gameplay_func, tBuffer);
+		make_stuff(recVec, gameplay_func, tBuffer,region);
 	}
 	else {
 		Json::Value root;
@@ -58,7 +65,7 @@ void ObjConfig::import_config(vector<WorldObj*>* recVec, ChildrenOfOsi* gameplay
 				(*itr)["name"].asString(), (*itr)["tex_file"].asString(),
 				(*itr)["frame_num"].asInt(),
 				(*itr)["bodyx1"].asFloat(), (*itr)["bodyx2"].asFloat(),
-				(*itr)["bodyy1"].asFloat(), (*itr)["bodyy2"].asFloat());
+				(*itr)["bodyy1"].asFloat(), (*itr)["bodyy2"].asFloat(),region);
 			numberOfWorldObj++;
 		}
 		//std:://cout << "done" << endl;
@@ -69,7 +76,7 @@ void ObjConfig::import_config(vector<WorldObj*>* recVec, ChildrenOfOsi* gameplay
 
 }
 
-void ObjConfig::make_stuff(vector<WorldObj*>* recVec, ChildrenOfOsi* gameplay_func, TaskBuffer* tBuffer)
+void ObjConfig::make_stuff(vector<WorldObj*>* recVec, ChildrenOfOsi* gameplay_func, TaskBuffer* tBuffer, int region)
 {
 	Json::Value root;
 	Json::Reader reader;
@@ -108,7 +115,7 @@ void ObjConfig::make_stuff(vector<WorldObj*>* recVec, ChildrenOfOsi* gameplay_fu
 			(*itr)["name"].asString(), (*itr)["tex_file"].asString(),
 			(*itr)["frame_num"].asInt(),
 			(*itr)["bodyx1"].asFloat(), (*itr)["bodyx2"].asFloat(),
-			(*itr)["bodyy1"].asFloat(), (*itr)["bodyy2"].asFloat());
+			(*itr)["bodyy1"].asFloat(), (*itr)["bodyy2"].asFloat(), region);
 
 
 	}
@@ -156,7 +163,7 @@ void ObjConfig::make_stuff(vector<WorldObj*>* recVec, ChildrenOfOsi* gameplay_fu
 					"Jungle_Flower3",
 				};
 				WhichSprite = PlantSprites[rand() % 12];
-				set_world_obj(recVec, gameplay_func, tBuffer, randomX, randomY, 50, 50, TreeName.str(), WhichSprite, 1, 1, 1, 1, 1);
+				set_world_obj(recVec, gameplay_func, tBuffer, randomX, randomY, 50, 50, TreeName.str(), WhichSprite, 1, 1, 1, 1, 1,JUNGLE);
 
 			}
 			else {
@@ -203,7 +210,7 @@ void ObjConfig::make_stuff(vector<WorldObj*>* recVec, ChildrenOfOsi* gameplay_fu
 					offsetBot = 95;
 					break;
 				}
-				set_world_obj(recVec, gameplay_func, tBuffer, randomX, randomY, 500.0, 500.0, TreeName.str(), WhichSprite, 1, offsetLeft, offsetRight, offsetTop, offsetBot);
+				set_world_obj(recVec, gameplay_func, tBuffer, randomX, randomY, 500.0, 500.0, TreeName.str(), WhichSprite, 1, offsetLeft, offsetRight, offsetTop, offsetBot,JUNGLE);
 
 
 			}
@@ -239,7 +246,7 @@ void ObjConfig::make_stuff(vector<WorldObj*>* recVec, ChildrenOfOsi* gameplay_fu
 
 
 void ObjConfig::set_world_obj(vector<WorldObj*>* recVec, ChildrenOfOsi* gameplay_func, TaskBuffer* tBuffer, float x, float y, float width, float hight,
-	std::string name, std::string tex_file, int frame_num, float bodyx1, float bodyx2, float bodyy1, float bodyy2)
+	std::string name, std::string tex_file, int frame_num, float bodyx1, float bodyx2, float bodyy1, float bodyy2, int region)
 {
 
 	LOG(Containers::texture_table[tex_file]);
@@ -257,7 +264,23 @@ void ObjConfig::set_world_obj(vector<WorldObj*>* recVec, ChildrenOfOsi* gameplay
 		tBuffer->run();
 		(*textureMapConfig)[Containers::texture_table[tex_file]]= pair<string, int>("Assets/Sprites/" + tex_file + ".png", frame_num);
 		//Containers::texture_table[tex_file]->setFile("Assets/Sprites/" + tex_file + ".png", frame_num);
-
+		switch (region) {
+		case STANDARD:
+			(*standard_con).push_back(Containers::texture_table[tex_file]);
+			break;
+		case OASIS:
+			(*oasis_con).push_back(Containers::texture_table[tex_file]);
+			break;
+		case JUNGLE:
+			(*jungle_con).push_back(Containers::texture_table[tex_file]);
+			break;
+		case MOUNTAIN:
+			(*mountain_con).push_back(Containers::texture_table[tex_file]);
+			break;
+		case OGUNREG:
+			(*ogun_con).push_back(Containers::texture_table[tex_file]);
+			break;
+		}
 	}
 
 
