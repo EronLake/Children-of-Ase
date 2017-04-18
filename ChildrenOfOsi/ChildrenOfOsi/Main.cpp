@@ -477,30 +477,30 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	textureMap[Containers::texture_table["ss_downLungeTex"]] = pair<string, int>("Assets/Sprites/SilverSoldierForwardLunge.png", 7);
 	textureMap[Containers::texture_table["ss_leftLungeTex"]] = pair<string, int>("Assets/Sprites/SilverSoldierLeftLunge.png", 7);
 	textureMap[Containers::texture_table["ss_rightLungeTex"]] = pair<string, int>("Assets/Sprites/SilverSoldierRightLunge.png", 7);
-	standard.push_back(Containers::texture_table["ss_upRunTex"]);
-	standard.push_back(Containers::texture_table["ss_downRunTex"]);
-	standard.push_back(Containers::texture_table["ss_leftRunTex"]);
-	standard.push_back(Containers::texture_table["ss_rightRunTex"]);
-	standard.push_back(Containers::texture_table["ss_upIdleTex"]);
-	standard.push_back(Containers::texture_table["ss_downIdleTex"]);
-	standard.push_back(Containers::texture_table["ss_leftIdleTex"]);
-	standard.push_back(Containers::texture_table["ss_rightIdleTex"]);
-	standard.push_back(Containers::texture_table["ss_upAtkTex"]);
-	standard.push_back(Containers::texture_table["ss_downAtkTex"]);
-	standard.push_back(Containers::texture_table["ss_leftAtkTex"]);
-	standard.push_back(Containers::texture_table["ss_rightAtkTex"]);
-	standard.push_back(Containers::texture_table["ss_upHurtTex"]);
-	standard.push_back(Containers::texture_table["ss_downHurtTex"]);
-	standard.push_back(Containers::texture_table["ss_leftHurtTex"]);
-	standard.push_back(Containers::texture_table["ss_rightHurtTex"]);
-	standard.push_back(Containers::texture_table["ss_upWalkTex"]);
-	standard.push_back(Containers::texture_table["ss_downWalkTex"]);
-	standard.push_back(Containers::texture_table["ss_leftWalkTex"]);
-	standard.push_back(Containers::texture_table["ss_rightWalkTex"]);
-	standard.push_back(Containers::texture_table["ss_upLungeTex"]);
-	standard.push_back(Containers::texture_table["ss_downLungeTex"]);
-	standard.push_back(Containers::texture_table["ss_leftLungeTex"]);
-	standard.push_back(Containers::texture_table["ss_rightLungeTex"]);
+	mountain.push_back(Containers::texture_table["ss_upRunTex"]);
+	mountain.push_back(Containers::texture_table["ss_downRunTex"]);
+	mountain.push_back(Containers::texture_table["ss_leftRunTex"]);
+	mountain.push_back(Containers::texture_table["ss_rightRunTex"]);
+	mountain.push_back(Containers::texture_table["ss_upIdleTex"]);
+	mountain.push_back(Containers::texture_table["ss_downIdleTex"]);
+	mountain.push_back(Containers::texture_table["ss_leftIdleTex"]);
+	mountain.push_back(Containers::texture_table["ss_rightIdleTex"]);
+	mountain.push_back(Containers::texture_table["ss_upAtkTex"]);
+	mountain.push_back(Containers::texture_table["ss_downAtkTex"]);
+	mountain.push_back(Containers::texture_table["ss_leftAtkTex"]);
+	mountain.push_back(Containers::texture_table["ss_rightAtkTex"]);
+	mountain.push_back(Containers::texture_table["ss_upHurtTex"]);
+	mountain.push_back(Containers::texture_table["ss_downHurtTex"]);
+	mountain.push_back(Containers::texture_table["ss_leftHurtTex"]);
+	mountain.push_back(Containers::texture_table["ss_rightHurtTex"]);
+	mountain.push_back(Containers::texture_table["ss_upWalkTex"]);
+	mountain.push_back(Containers::texture_table["ss_downWalkTex"]);
+	mountain.push_back(Containers::texture_table["ss_leftWalkTex"]);
+	mountain.push_back(Containers::texture_table["ss_rightWalkTex"]);
+	mountain.push_back(Containers::texture_table["ss_upLungeTex"]);
+	mountain.push_back(Containers::texture_table["ss_downLungeTex"]);
+	mountain.push_back(Containers::texture_table["ss_leftLungeTex"]);
+	mountain.push_back(Containers::texture_table["ss_rightLungeTex"]);
 
 	gameplay_functions->add_texture("bs_upRunTex", 0, 0, 0);
 	gameplay_functions->add_texture("bs_downRunTex", 0, 0, 0);
@@ -927,10 +927,10 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	starting_location.push_back(mountain);
 	HDC hdc = wglGetCurrentDC();
 	HGLRC mainContext = wglGetCurrentContext();
-	HGLRC loaderContext2 = wglCreateContext(hdc);
-	wglShareLists(mainContext, loaderContext2);
-	std::thread t2([=]() {
-		wglMakeCurrent(hdc, loaderContext2);
+	HGLRC loaderContext0 = wglCreateContext(hdc);
+	wglShareLists(mainContext, loaderContext0);
+	std::thread t0([=]() {
+		wglMakeCurrent(hdc, loaderContext0);
 		int textureMapCounter = 0;
 		for (int i = 0; i < standard.size(); i++) {
 			set_file_with_thread(standard[i], &textureMap.find(standard[i])->second);
@@ -941,39 +941,45 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 			}
 		}*/
 		wglMakeCurrent(nullptr, nullptr);
-		wglDeleteContext(loaderContext2);
-		glFinish(); 
+		wglDeleteContext(loaderContext0);
 		for (auto it = recVec.begin(); it != recVec.end(); ++it) {
 			(*it)->sprite.reset_texture();
 		}
+		glFinish();
 	});
-	HGLRC loaderContext3 = wglCreateContext(hdc);
-	wglShareLists(mainContext, loaderContext3);
-	std::thread t3([=]() {
-		wglMakeCurrent(hdc, loaderContext3);
+	HGLRC loaderContext1 = wglCreateContext(hdc);
+	wglShareLists(mainContext, loaderContext1);
+	std::thread t1([=]() {
+		wglMakeCurrent(hdc, loaderContext1);
 		int textureMapCounter = 0;
 		for (int i = 0; i < (starting_location[0]).size(); i++) {
 		set_file_with_thread(starting_location[0].at(i), &textureMap.find(starting_location[0].at(i))->second);
+		}
+		for (auto it = recVec.begin(); it != recVec.end(); ++it) {
+			(*it)->sprite.reset_texture();
 		}
 		for (int i = 0; i < (starting_location[3]).size(); i++) {
 			set_file_with_thread(starting_location[3].at(i), &textureMap.find(starting_location[3].at(i))->second);
 		}
 		wglMakeCurrent(nullptr, nullptr);
-		wglDeleteContext(loaderContext3);
-		glFinish();
+		wglDeleteContext(loaderContext1);
 		for (auto it = recVec.begin(); it != recVec.end(); ++it) {
 			(*it)->sprite.reset_texture();
 		}
+		glFinish();
 	});
 	//HDC hdc = wglGetCurrentDC();// Simply gets the device context, which is needed to initialize a GL context, not really used for anything else
 	//HGLRC mainContext = wglGetCurrentContext();//Sets the default GL context to main
-	HGLRC loaderContext = wglCreateContext(hdc);//Creates the new GL context that we will use for loading
-	wglShareLists(mainContext, loaderContext);//Shares the information between the loading context and the main context
-	std::thread t([=]() {//makes the thread. [=] is a cpp Lambda representation
-	wglMakeCurrent(hdc, loaderContext);//Sets the current context to the loader context
+	HGLRC loaderContext2 = wglCreateContext(hdc);//Creates the new GL context that we will use for loading
+	wglShareLists(mainContext, loaderContext2);//Shares the information between the loading context and the main context
+	std::thread t2([=]() {//makes the thread. [=] is a cpp Lambda representation
+	wglMakeCurrent(hdc, loaderContext2);//Sets the current context to the loader context
 	int textureMapCounter = 0;
 	for (int i = 0; i < (starting_location[1]).size(); i++) {
 		set_file_with_thread(starting_location[1].at(i), &textureMap.find(starting_location[1].at(i))->second);
+	}
+	for (auto it = recVec.begin(); it != recVec.end(); ++it) {
+		(*it)->sprite.reset_texture();
 	}
 	for (int i = 0; i < (starting_location[2]).size(); i++) {
 		set_file_with_thread(starting_location[2].at(i), &textureMap.find(starting_location[2].at(i))->second);
@@ -984,11 +990,11 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 		}
 	}*/
 	wglMakeCurrent(nullptr, nullptr);//unassigns the current gl context
-	wglDeleteContext(loaderContext);//deletes the loading context now that it is not needed
-	glFinish(); //Forces all gl calls to be completed before execution
+	wglDeleteContext(loaderContext2);//deletes the loading context now that it is not needed
 	for (auto it = recVec.begin(); it != recVec.end(); ++it) {
 		(*it)->sprite.reset_texture();
 	}
+	glFinish(); //Forces all gl calls to be completed before execution
 	});
 	//t.join(); // Forces the thread, t, to fully load the project, which takes a  lot of time but looks nicer
 
