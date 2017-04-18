@@ -138,7 +138,7 @@ Task::Task(std::string _name, std::string _status, std::string _type, std::strin
 	cat = _exe_name;
 	owner = _owner;
 	receiver = _receiver;
-	doer = _owner;
+	doer = _doer;
 
 	LOG("Task Object W/WOBJ&ACT Constructed");
 }

@@ -19,7 +19,7 @@ Input::Input(ChildrenOfOsi* _gameplay_functions, RenderHelper* _rHelper, TaskBuf
 	LOG("Input Objected Constructed");
 }
 
-Input::Input(ChildrenOfOsi* _gameplay_functions, WorldObj * _player, RenderHelper* _rHelper, TaskBuffer* _tBuffer, vector<WorldObj*>* _recVec, AIController* ai_c)
+Input::Input(ChildrenOfOsi* _gameplay_functions, WorldObj * _player, RenderHelper* _rHelper, TaskBuffer* _tBuffer, vector<WorldObj*>* _recVec)
 {
 	count = 0;
 	count2 = 0;
@@ -27,7 +27,6 @@ Input::Input(ChildrenOfOsi* _gameplay_functions, WorldObj * _player, RenderHelpe
 	rHelper = _rHelper;
 	tBuffer = _tBuffer;
 	recVec = _recVec;
-	ai = ai_c;
 
 	//gameplay_functions->play_sound("Play");
 	//gameplay_functions->createTaskForAudio("PlaySound", "SOUND", "SFX/swing.wav");
@@ -545,12 +544,16 @@ void Input::add_point_to_file() {
 
 	int mouseX = (rHelper->camera->getX() + (xpos * map_zoom) * GameWindow::WINDOW_WIDTH_DP / 1300);
 	int mouseY = 20000-(rHelper->camera->getY() + (ypos * map_zoom) * GameWindow::WINDOW_HEIGHT_DP / 700);
+	//int mouseX = rHelper->camera->getX() - (150.0 / 2) + ((rHelper->getCameraSize().getXloc() / 2)*map_zoom);
+	//int mouseY = rHelper->camera->getY() - (150.0 / 2) + ((rHelper->getCameraSize().getYloc() / 2)*map_zoom);
 
 	std::ofstream rivFile;
 	rivFile.open("rivLine.txt", std::ios_base::app);
 	rivFile << mouseX << " " << mouseY << " ";
 	rivFile.close();
 	oldPoint.first = mouseX; oldPoint.second = mouseY;
+	
+	rHelper->rivObj->initialize_lines();
 	system("PAUSE");
 }
 
@@ -777,6 +780,9 @@ void Input::InputCheck()
 		if (Z) {
 			skip_line();
 		}
+		if (SHIFT && Z) {
+			system("PAUSE");
+		}
 		
 
 		//where the map editor is executed
@@ -823,10 +829,18 @@ void Input::InputCheck()
 			WorldObj* other = DialogueController::getOther();
 			//std:://cout << "HERO: " << other->getName() << std::endl;
 			if (other->getType() == 5) {
-				//std:://cout << "Right type" << std::endl;
+				std::cout << "Right type" << std::endl;
 				Hero* them = dynamic_cast<Hero*>(other);
-				Planner* planner = ai->hero_planners[them->name];
+				Planner* planner = AIController::get_plan(them->name);
 				//DialogueController::prompted_quest = true;
+				if (player == AIController::pick_quest_doer(planner->get_current_action()))
+				{
+					std::cout << "Post convo, " << them->getName() << "now wants to give Shango their '" << planner->get_current_action() << "' action" << std::endl;
+				}
+				else
+				{
+					std::cout << "Post convo, " << them->getName() << "still does not want to give Shango their '" << planner->get_current_action() << "' action" << std::endl;
+				}
 				if (planner->give_as_quest && !DialogueController::accepted_quest)
 				{
 					DialogueController::quest = planner->get_current_action();
@@ -843,8 +857,12 @@ void Input::InputCheck()
 				DialogueController::exitDialogue();
 			}
 		}
-		if (DialogueController::prompted_quest) {
-			
+		if (T) {
+			Hero* them = dynamic_cast<Hero*>(DialogueController::getOther());
+			if (them) {
+				Player* me = dynamic_cast<Player*>(player);
+				me->remove_quest(AIController::get_plan(them->name)->get_current_action());
+			}
 		}
 		if (J) {
 			DialogueController::setOptionsIndex(0);

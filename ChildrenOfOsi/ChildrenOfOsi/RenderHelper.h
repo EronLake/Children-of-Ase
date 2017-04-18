@@ -32,6 +32,7 @@ public:
 	int sprite_update(WorldObj* obj);
 	int drawDiaGui(WorldObj* obj);
 	int drawHUD(WorldObj* obj);
+	Vector2f getCameraSize() { return cameraSize; }
 	int setSwordGlow(WorldObj* obj);
 	int setHeartGlow(WorldObj* obj);
 	int setFaceGlow(WorldObj* obj);
@@ -43,12 +44,12 @@ public:
 	WorldObj* camera;
 	WorldObj* fullBound;
 	RenderManager* manager;
+	RiverObj* rivObj;
 private:
 	
 	DialogueGui* convoGui;
 	HUD* hud_ptr;
 	GameMap* gmap;
-	RiverObj* rivObj;
 	
 	std::vector<WorldObj*> objVec;
 	std::vector<WorldObj*> fullVec;

@@ -11,7 +11,28 @@
     "pride": 0,
     "recklessness": 0,
     "extroversion": 0,
-    "greed": 0
+    "greed": 0,
+	"req_preconds": {
+		"1" : {
+			"general_type": 0,
+			"rel_type": 6,
+			"desired_rel_val": 80
+		}
+	},
+	"succ_postconds": {
+		"1" : {
+			"general_type": 0,
+			"rel_type": 6,
+			"utility": 5
+		}
+	},
+	"fail_postconds": {
+		"1" : {
+			"general_type": 0,
+			"rel_type": 6,
+			"utility": -2
+		}
+	}
   },
   "fight_bandits": {
     "name": "Fight_Bandits",
@@ -25,7 +46,23 @@
     "pride": 0,
     "recklessness": 0,
     "extroversion": 0,
-    "greed": 0
+    "greed": 0,
+	"req_preconds": {
+	},
+	"succ_postconds": {
+		"1" : {
+			"general_type": 0,
+			"rel_type": 6,
+			"utility": 5
+		}
+	},
+	"fail_postconds": {
+		"1" : {
+			"general_type": 0,
+			"rel_type": 6,
+			"utility": -2
+		}
+	}
   },
   "form_alliance": {
     "name": "Form_Alliance",
@@ -39,7 +76,28 @@
     "pride": -2,
     "recklessness": -2,
     "extroversion": 7,
-    "greed": 1
+    "greed": 1,
+	"req_preconds": {
+		"1" : {
+			"general_type": 0,
+			"rel_type": 6,
+			"desired_rel_val": 80
+		}
+	},
+	"succ_postconds": {
+		"1" : {
+			"general_type": 0,
+			"rel_type": 6,
+			"utility": 5
+		}
+	},
+	"fail_postconds": {
+		"1" : {
+			"general_type": 0,
+			"rel_type": 6,
+			"utility": -2
+		}
+	}
   },
   "occupy": {
     "name": "Occupy",
@@ -53,7 +111,28 @@
     "pride": 2,
     "recklessness": 5,
     "extroversion": 2,
-    "greed": 4
+    "greed": 4,
+	"req_preconds": {
+		"1" : {
+			"general_type": 0,
+			"rel_type": 6,
+			"desired_rel_val": 80
+		}
+	},
+	"succ_postconds": {
+		"1" : {
+			"general_type": 0,
+			"rel_type": 6,
+			"utility": 5
+		}
+	},
+	"fail_postconds": {
+		"1" : {
+			"general_type": 0,
+			"rel_type": 6,
+			"utility": -2
+		}
+	}
   },
     "conquer": {
     "name": "Conquer",
@@ -67,6 +146,27 @@
     "pride": 4,
     "recklessness": 8,
     "extroversion": 0,
-    "greed": 3
+    "greed": 3,
+	"req_preconds": {
+		"1" : {
+			"general_type": 0,
+			"rel_type": 6,
+			"desired_rel_val": 80
+		}
+	},
+	"succ_postconds": {
+		"1" : {
+			"general_type": 0,
+			"rel_type": 6,
+			"utility": 5
+		}
+	},
+	"fail_postconds": {
+		"1" : {
+			"general_type": 0,
+			"rel_type": 6,
+			"utility": -2
+		}
+	}
   }
 }

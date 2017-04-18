@@ -124,7 +124,7 @@ int RenderHelper::draw_frame(WorldObj * obj)
 	}
 	// draw the points
 	for (int i = 0; i < rivObj->getLines().size(); i++) {
-		cout << "DRAWING POINTS" << endl;
+		//cout << "DRAWING POINTS" << endl;
 		rivObj->getLines()[i].getP1().drawObjRiv(camera->getX(), camera->getY());
 		rivObj->getLines()[i].getP2().drawObjRiv(camera->getX(), camera->getY());
 

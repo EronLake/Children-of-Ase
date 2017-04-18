@@ -104,7 +104,7 @@ void set_file_with_thread(Texture* t, const pair<string, int>* p_tuple) {
 int main() {
 	WorldObj* screen = new WorldObj(Vector2f(0.0, 0.0), 20000U, 20000U);	//init screen
 
-	QuadTree* collideTree = new QuadTree(0, screen);
+	QuadTree* collideTree = new QuadTree(0, *screen);
 	GameWindow::init();		
 	GAMEPLAY_LOOP(collideTree);
 
@@ -149,8 +149,8 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	AudioManager* AudM = new AudioManager(mLog, tBuffer);
 	AIHelper* ai = new AIHelper();
 	AIManager* AIM = new AIManager(mLog, tBuffer, ai);
-	AIController* AiController = new AIController();
-	ActionHelper::ai = AiController;
+	//AIController* AiController = new AIController();
+	//ActionHelper::ai = AiController;
 	ActionHelper::gameplay_func = gameplay_functions;
 	CombatController* combatControl = new CombatController(gameplay_functions);
 	QuestManager* questM = new QuestManager;
@@ -177,7 +177,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	Region current_region = *Desert;
 	Region next_region = *Desert;
 
-    Input* iController = new Input(gameplay_functions, Alex, RenM->renderHelper, tBuffer, recVec_ptr, AiController);
+    Input* iController = new Input(gameplay_functions, Alex, RenM->renderHelper, tBuffer, recVec_ptr);
 	
 	gameplay_functions->add_hero("Yemoja", 6445.0, 10355.0, true);
 	gameplay_functions->add_hero("Oya", 4400, 3600, true);
@@ -195,7 +195,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	oya->setWidth(150);
 	oya->setHeight(150);
 
-	DialogueController::setAI(AiController);
+	//DialogueController::setAI(AiController);
 
 	vector<Texture*> standard;
 	vector<Texture*> oasis;
@@ -1393,21 +1393,24 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	//staticRec->rel[SHANGO]->setStrEstimate(40);//added this
 
 
-	*oya = *staticRec;
+	//*oya = *staticRec;
 	//oya->setSpeed(5);
-	oya->setName("Oya");
-	oya->name = OYA;
+	//oya->setName("Oya");
+	//oya->name = OYA;
 	oya->offsetBody(0, 35, 35, 65, 15);
 	staticRec->offsetBody(0, 60, 60, 75, 50);
 	oya->shiftY(300);
 	oya->setHealth(50);
 
 	ActionConfig::import_config(gameplay_functions, tBuffer, staticRec);
+	ActionConfig::import_config(gameplay_functions, tBuffer, oya);
 
 	Planner* YemojaPlanner = new Planner(staticRec);
-	AiController->hero_planners[YEMOJA] = YemojaPlanner;
+	Planner* OyaPlanner = new Planner(oya);
+	AIController::set_plan(YEMOJA, YemojaPlanner);
+	AIController::set_plan(OYA, OyaPlanner);
 	Action* test_ally = new Action(nullptr, nullptr, nullptr, 10, 1, "Create Alliance", "execute_train");
-	Action* test_train = new Action(nullptr, nullptr, nullptr, 10, 1, "Train", "execute_train");
+	Action* test_train = new Action(staticRec, oya, nullptr, 10, 1, "Train", "execute_train");
 	
 	RelPrecon* prec = new RelPrecon(Preconditions::AFF, 60);
 	RelPost* post = new RelPost(Postcondition::STR, 10);
@@ -1432,12 +1435,19 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	}
 
 	Alex->add_quest(test_ally,8);
-	Alex->add_quest(test_train, 2);
+	//Alex->add_quest(test_train, 2);
 	questM->heros.push_back(Alex);
+	///////////////////////////////////////////////////////////////////////////////////////////
+	///////////////////////////////////////////////////////////////////////////////////////////
+	//////////////////                                                 ////////////////////////
+	//////////////////             INIT CALLS FOR QUESTS               ////////////////////////
+	//////////////////                                                 ////////////////////////
+	///////////////////////////////////////////////////////////////////////////////////////////
+	///////////////////////////////////////////////////////////////////////////////////////////
+	YemojaPlanner->set_current_action(test_train);
 
-	//AiController->hero_planners[YEMOJA]->set_current_action(test_train);
-
-	AiController->generate_end_state(YEMOJA, OYA);
+	//AiController->generate_end_state(YEMOJA, OYA);
+	AIController::init_plans();
 
 
 	/*
@@ -1567,10 +1577,10 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 
 	while (GameWindow::isRunning()) {
 		//shouldExit++;
-	/*	for (int i = 0; i < 10; i++) {
-			//cout << "SHOULD EXIT IS " << shouldExit << endl;
+		//for (int i = 0; i < 10; i++) {
+		//	cout << "SHOULD EXIT IS " << shouldExit << endl;
 
-		}*/
+		//}
 		if (shouldExit > 0) {
 			_CrtDumpMemoryLeaks();
 			return;
@@ -1792,12 +1802,15 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 
 			if (my_rel->isChanged()) {
 				//reevaluate goals for with_hero
-				AiController->reevaluate_state(YEMOJA, with_hero);
+				AIController::reevaluate_state(YEMOJA, with_hero);
 				my_rel->setChanged(false);
 			}
 		}
 		//getting here-------------------------------------------------------------------------***********
-	//	AiController->execute();
+		//setting give as quest to false so that the excute runs
+		YemojaPlanner->give_as_quest = false;
+
+		AIController::execute();
 
 		if ((1000 / fs) > (clock() - start_tick)) { //delta_ticks) {www
 			Sleep((1000 / fs) - (clock() - start_tick));
