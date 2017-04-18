@@ -457,12 +457,18 @@ int Movement::attack(WorldObj* obj) {
 										// If target is dead, remove from village and targeting
 										if (npc->getHealth() <= 0) {
 											if (Soldier *sold = CheckClass::isSoldier(liv)) {
-                        sold->sprite.unlockAnimation();
-											  manager->createTaskWithObj("Hurt", "DRAW", npc);
+                        if(sold->getDirection() == 8) // If facing up
+                          sold->sprite.setTexture(sold->sprite.death_up);
+                        else if(sold->getDirection() == 2) // If facing down
+                          sold->sprite.setTexture(sold->sprite.death_down);
+                        else if(sold->getDirection() == 4) // If facing left
+                          sold->sprite.setTexture(sold->sprite.death_left);
+                        else if(sold->getDirection() == 6) // If facing right
+                          sold->sprite.setTexture(sold->sprite.death_right);
                         sold->sprite.lockIntoDeathAnimation();
 
-											  sold->setLoc(sold->getVillage()->get_village_location());
-											  sold->getVillage()->barracks->addToParty(sold, false);
+											  // sold->setLoc(sold->getVillage()->get_village_location());
+											  // sold->getVillage()->barracks->addToParty(sold, false);
 											}
 										}
 									} else {
@@ -476,12 +482,18 @@ int Movement::attack(WorldObj* obj) {
 
 								if (liv->getHealth() <= 0) {
 									if (Soldier *sold = CheckClass::isSoldier(liv)) {
-                    sold->sprite.unlockAnimation();
-										manager->createTaskWithObj("Hurt", "DRAW", liv);
+                    if(sold->getDirection() == 8) // If facing up
+                      sold->sprite.setTexture(sold->sprite.death_up);
+                    else if(sold->getDirection() == 2) // If facing down
+                      sold->sprite.setTexture(sold->sprite.death_down);
+                    else if(sold->getDirection() == 4) // If facing left
+                      sold->sprite.setTexture(sold->sprite.death_left);
+                    else if(sold->getDirection() == 6) // If facing right
+                      sold->sprite.setTexture(sold->sprite.death_right);
                     sold->sprite.lockIntoDeathAnimation();
                     
-										sold->setLoc(sold->getVillage()->get_village_location());
-										sold->getVillage()->barracks->addToParty(sold, false);
+										// sold->setLoc(sold->getVillage()->get_village_location());
+										// sold->getVillage()->barracks->addToParty(sold, false);
 									}
 								}
 								if (a->second->getDestroy())a->second->setDuration(0);

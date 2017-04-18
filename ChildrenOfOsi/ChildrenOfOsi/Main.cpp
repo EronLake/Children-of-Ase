@@ -429,6 +429,10 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	textureMap[Containers::texture_table["ss_downLungeTex"]] = pair<string, int>("Assets/Sprites/SilverSoldierForwardLunge.png", 7);
 	textureMap[Containers::texture_table["ss_leftLungeTex"]] = pair<string, int>("Assets/Sprites/SilverSoldierLeftLunge.png", 7);
 	textureMap[Containers::texture_table["ss_rightLungeTex"]] = pair<string, int>("Assets/Sprites/SilverSoldierRightLunge.png", 7);
+  textureMap[Containers::texture_table["ss_upDeathTex"]] = pair<string, int>("Assets/Sprites/SilverSoldierRightRecoil.png", 18);
+  textureMap[Containers::texture_table["ss_downDeathTex"]] = pair<string, int>("Assets/Sprites/SilverSoldierRightRecoil.png", 18);
+  textureMap[Containers::texture_table["ss_leftDeathTex"]] = pair<string, int>("Assets/Sprites/SilverSoldierRightRecoil.png", 18);
+  textureMap[Containers::texture_table["ss_rightDeathTex"]] = pair<string, int>("Assets/Sprites/SilverSoldierRightRecoil.png", 18);
 
 	gameplay_functions->add_texture("bs_upRunTex", 0, 0, 0);
 	gameplay_functions->add_texture("bs_downRunTex", 0, 0, 0);
@@ -503,6 +507,10 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	textureMap[Containers::texture_table["bs_downLungeTex"]] = pair<string, int>("Assets/Sprites/BlueSoldierForwardLunge.png", 7);
 	textureMap[Containers::texture_table["bs_leftLungeTex"]] = pair<string, int>("Assets/Sprites/BlueSoldierLeftLunge.png", 7);
 	textureMap[Containers::texture_table["bs_rightLungeTex"]] = pair<string, int>("Assets/Sprites/BlueSoldierRightLunge.png", 7);
+  textureMap[Containers::texture_table["bs_upDeathTex"]] = pair<string, int>("Assets/Sprites/BlueSoldierUpRecoil.png", 18);
+  textureMap[Containers::texture_table["bs_downDeathTex"]] = pair<string, int>("Assets/Sprites/BlueSoldierDownRecoil.png", 18);
+  textureMap[Containers::texture_table["bs_leftDeathTex"]] = pair<string, int>("Assets/Sprites/BlueSoldierLeftRecoil.png", 18);
+  textureMap[Containers::texture_table["bs_rightDeathTex"]] = pair<string, int>("Assets/Sprites/BlueSoldierRightRecoil.png", 18);
 
 	gameplay_functions->add_texture("treeTex", 0, 0, 0);
 	gameplay_functions->add_texture("treeTex1", 0, 0, 0);
@@ -618,6 +626,10 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	textureMap[Containers::texture_table["YswingUp"]] = pair<string, int>("Assets/Sprites/YemojaBackBreath.png", 14);
 	textureMap[Containers::texture_table["YswingDown"]] = pair<string, int>("Assets/Sprites/YemojaForwardBreath.png", 14);
 	textureMap[Containers::texture_table["YswingLeft"]] = pair<string, int>("Assets/Sprites/YemojaLeftBreath.png", 14);
+  textureMap[Containers::texture_table["YdeathUp"]] = pair<string, int>("Assets/Sprites/YemojaBackRecoil.png", 18);
+  textureMap[Containers::texture_table["YdeathDown"]] = pair<string, int>("Assets/Sprites/YemojaForwardRecoil.png", 18);
+  textureMap[Containers::texture_table["YdeathLeft"]] = pair<string, int>("Assets/Sprites/YemojaLeftRecoil.png", 18);
+  textureMap[Containers::texture_table["YdeathRight"]] = pair<string, int>("Assets/Sprites/YemojaRightRecoil.png", 18);
 	
 	//load sprite from a configuration file?
 	Alex->setHealth(200);
@@ -1042,7 +1054,10 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	staticRec->sprite.atk_down = Containers::texture_table["YswingDown"];
 	staticRec->sprite.atk_left = Containers::texture_table["YswingLeft"];
 	staticRec->sprite.atk_right = Containers::texture_table["YswingRight"];
-
+  staticRec->sprite.death_up = Containers::texture_table["YdeathUp"];
+  staticRec->sprite.death_down = Containers::texture_table["YdeathDown"];
+  staticRec->sprite.death_left = Containers::texture_table["YdeathLeft"];
+  staticRec->sprite.death_right = Containers::texture_table["YdeathRight"];
 	
 	gameplay_functions->add_Attack(staticRec->getKey(), staticRec->body[0].getX(), staticRec->body[0].getY(), true, 10);
 	tBuffer->run();
@@ -1094,6 +1109,11 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 		silverSoldier[i]->sprite.hurt_down = Containers::texture_table["ss_downHurtTex"];
 		silverSoldier[i]->sprite.hurt_left = Containers::texture_table["ss_leftHurtTex"];
 		silverSoldier[i]->sprite.hurt_right = Containers::texture_table["ss_rightHurtTex"];
+
+    silverSoldier[i]->sprite.death_up = Containers::texture_table["ss_upDeathTex"];
+    silverSoldier[i]->sprite.death_down = Containers::texture_table["ss_downDeathTex"];
+    silverSoldier[i]->sprite.death_left = Containers::texture_table["ss_leftDeathTex"];
+    silverSoldier[i]->sprite.death_right = Containers::texture_table["ss_rightDeathTex"];
 
 		silverSoldier[i]->offsetBody(0, 60, 60, 75, 50);
 		silverSoldier[i]->setInteractable(true);
@@ -1149,6 +1169,11 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 		blueSoldiers[i]->sprite.hurt_down = Containers::texture_table["bs_downHurtTex"];
 		blueSoldiers[i]->sprite.hurt_left = Containers::texture_table["bs_leftHurtTex"];
 		blueSoldiers[i]->sprite.hurt_right = Containers::texture_table["bs_rightHurtTex"];
+
+    blueSoldiers[i]->sprite.death_up = Containers::texture_table["bs_upDeathTex"];
+    blueSoldiers[i]->sprite.death_down = Containers::texture_table["bs_downDeathTex"];
+    blueSoldiers[i]->sprite.death_left = Containers::texture_table["bs_leftDeathTex"];
+    blueSoldiers[i]->sprite.death_right = Containers::texture_table["bs_rightDeathTex"];
 
 		blueSoldiers[i]->offsetBody(0, 60, 60, 75, 50);
 		blueSoldiers[i]->setInteractable(true);

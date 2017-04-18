@@ -71,7 +71,10 @@ class Sprite
   Texture *hurt_left;
   Texture *hurt_right;
 
-  Texture *death;
+  Texture *death_up;
+  Texture *death_down;
+  Texture *death_left;
+  Texture *death_right;
 
   private:
 
