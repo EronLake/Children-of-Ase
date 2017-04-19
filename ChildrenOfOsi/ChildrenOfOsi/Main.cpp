@@ -1585,8 +1585,10 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	current_game_state = game_state::in_game;
 	while (GameWindow::isRunning()) {
 		while (current_game_state == game_state::main_menu) {
-			cout << "currently in the main menu" << endl;
-			iController->current_game_state = current_game_state;
+			//cout << "currently in the main menu" << endl;
+			cout << "game_state value is " << as_integer(current_game_state) << endl;
+			//iController->current_game_state = current_game_state;
+			cout << "controller state is " << as_integer(iController->current_game_state) << endl;
 			//cout << "input game state is " <<  << endl;
 			// draw main menu and unlock input to work with things in the main menu;
 			//gameplay_functions->draw_frame(main menu);
@@ -1595,7 +1597,14 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 			current_game_state = iController->current_game_state;
 		}
 		while (current_game_state == game_state::in_game) {
-			iController->current_game_state = current_game_state;
+			for (int i = 0; i < 10; i++) {
+				cout << "IN INGAME STATE" << endl;
+
+			}
+			if (iController->current_game_state != game_state::in_game) {
+				iController->current_game_state = current_game_state;
+			}
+			//iController->current_game_state = current_game_state;
 			//shouldExit++;
 			//for (int i = 0; i < 10; i++) {
 			//	cout << "SHOULD EXIT IS " << shouldExit << endl;
@@ -1742,11 +1751,13 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 			current_game_state = iController->current_game_state;
 		}
 		while (current_game_state == game_state::pause_menu) {
-			iController->current_game_state = current_game_state;
+			cout << "IN PAUSE MENU STATE" << endl;
+			//iController->current_game_state = current_game_state;
 			//draw the pause menu
 			//gameplay_functions->draw_frame(pause menu);
 			//check input
 			iController->InputCheck();
+			cout << "ICONTROLLER STATE IS " << as_integer(iController->current_game_state) << endl;
 			current_game_state = iController->current_game_state;
 		}
 	}

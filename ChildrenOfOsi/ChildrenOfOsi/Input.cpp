@@ -611,7 +611,7 @@ void Input::InputCheck()
 		if (P) {
 			// assuming menu only has start option, so move in game
 			for (int i = 0; i < 10; i++) {
-				cout << "enter pressed while in main menu input select" << endl;
+				cout << "P pressed while in main menu input select" << endl;
 			}
 			current_game_state = game_state::in_game;
 		}
@@ -805,7 +805,9 @@ void Input::InputCheck()
 				}
 				if (ESC) {
 					if (current_game_state == game_state::in_game) {
+						cout << "running escape input" << endl;
 						current_game_state = game_state::pause_menu;
+						return;
 					}
 				}
 
@@ -1022,6 +1024,13 @@ void Input::InputCheck()
 	}
 	if (current_game_state == game_state::pause_menu) {
 		// pressing esc to unpause
+		cout << "IN PUT CONTROL IS IN PAUSE STATE" << endl;
+		if (Z) {
+			for (int i = 0; i < 10; i++) cout << "I HAVE JUST PRESSED ESCAPE" << endl;
+			if (current_game_state == game_state::pause_menu) {
+				current_game_state = game_state::in_game;
+			}
+		}
 	}
 }
 
