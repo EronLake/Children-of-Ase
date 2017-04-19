@@ -150,7 +150,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	RenderManager* RenM = new RenderManager(mLog, tBuffer, _QuadTree, gameplay_functions, rivObj);
 	DummyController* DumM = new DummyController(mLog, tBuffer);
 	PhysicsManager* PhysM = new PhysicsManager(mLog, tBuffer, _QuadTree, rivObj);
-	PartyManager* partyM = new PartyManager(gameplay_functions, Alex);
+	//PartyManager* partyM = new PartyManager(gameplay_functions, Alex);
 	memManager* memM = new memManager(mLog, tBuffer);
 	TestManager* TestM = new TestManager(mLog, tBuffer);
 	AudioManager* AudM = new AudioManager(mLog, tBuffer);
@@ -352,8 +352,8 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	gameplay_functions->add_texture("yemojaTexture", 0, 0, 0);
 	gameplay_functions->add_texture("yemojaIdleTex", 0, 0, 0);
 	tBuffer->run();
-	Texture* yemojaTexture = new Texture();
-	Texture* yemojaIdleTex = new Texture();
+	//Texture* yemojaTexture = new Texture();
+	//Texture* yemojaIdleTex = new Texture();
 	textureMap[Containers::texture_table["yemojaTexture"]] = pair<string, int>("Assets/Sprites/YemojaForwardIdle.png", 22);
 	textureMap[Containers::texture_table["yemojaIdleTex"]] = pair<string, int>("Assets/Sprites/YemojaForwardIdle.png", 22);
 	oasis.push_back(Containers::texture_table["yemojaTexture"]);
@@ -955,9 +955,56 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	//thread_Vec.clear();
 	 //windows handle
 
-//Ian's attempt at multithreading. Compiles in 22 seconds on school computer. Still has same issue with spritesheet sprites, where the red and black boxes appear.
-//Other sprites load in normally though
-//also needs the boost external dependency, so it might
+	vector<WorldObj*> vec;
+	//vec.push_back(&Alex->melee);
+
+	for (int i = 1; i < 6; i++) {
+		if (i > 4) {
+			WorldObj* obj = new WorldObj(Vector2f(4100, 3550), 500, 333);
+
+			obj->sprite.setTexture(Containers::texture_table["objTexture"]);
+			obj->setInteractable(true);
+			std::string building = "Building ";
+			obj->setName(building += std::to_string(i));
+			//objs->offsetBody(0, 50, 50, 50, 50);
+			obj->offsetBody(0, 25, 50, 25, 25);
+			vec.push_back(obj);
+			continue;
+		}
+
+		WorldObj* objs = new WorldObj(Vector2f(220 + 50 * i, 300 * (i * 2)), 600.0, 400.0);
+		objs->sprite.setTexture(Containers::texture_table["objTexture"]);
+		objs->setInteractable(true);
+		std::string building = "Building ";
+		objs->setName(building += std::to_string(i));
+		//objs->offsetBody(0, 50, 50, 50, 50);
+		objs->offsetBody(0, 110, 150, 120, 60);
+		recVec.push_back(objs);
+
+	}
+
+	vector<Soldier*> silverSoldier;
+	int silverNum = 4;
+	for (int i = 0; i < silverNum; i++) {
+		silverSoldier.push_back(new Soldier(6745, 10355 + (i * 20), false));
+		gameplay_functions->add_Attack(silverSoldier[i]->getKey(), silverSoldier[i]->body[0].getX(), silverSoldier[i]->body[0].getY(), true, 10);
+	}
+	tBuffer->run();
+	vector<Soldier*> blueSoldiers;
+	int blueNum = 4;
+	for (int i = 0; i < blueNum; i++) {
+		blueSoldiers.push_back(new Soldier(6030, 4000 + (i * 20), false));
+		gameplay_functions->add_Attack(blueSoldiers[i]->getKey(), blueSoldiers[i]->body[0].getX(), blueSoldiers[i]->body[0].getY(), true, 10);
+	}
+	tBuffer->run();
+	recVec.push_back(staticRec);
+	for (int i = 0; i < silverSoldier.size(); i++) {
+		recVec.push_back(silverSoldier[i]);
+	}
+	for (int i = 0; i < blueSoldiers.size(); i++) {
+		recVec.push_back(blueSoldiers[i]);
+	}
+
 	starting_location.push_back(oasis);
 	starting_location.push_back(ogun);
 	starting_location.push_back(jungle);
@@ -982,6 +1029,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 		for (auto it = recVec.begin(); it != recVec.end(); ++it) {
 			(*it)->sprite.reset_texture();
 		}
+		Alex->sprite.reset_texture();
 		glFinish();
 	});
 	HGLRC loaderContext1 = wglCreateContext(hdc);
@@ -1180,34 +1228,6 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	spin2->setNextAttack(spin3);
 	spin3->setNextAttack(spin4);
 
-	vector<WorldObj*> vec;
-	//vec.push_back(&Alex->melee);
-
-	for (int i = 1; i < 6; i++) {
-		if (i > 4) {
-			WorldObj* obj = new WorldObj(Vector2f(4100, 3550),500,333);
-		
-			obj->sprite.setTexture(Containers::texture_table["objTexture"]);
-			obj->setInteractable(true);
-			std::string building = "Building ";
-			obj->setName(building += std::to_string(i));
-			//objs->offsetBody(0, 50, 50, 50, 50);
-			obj->offsetBody(0, 25, 50, 25, 25);
-			vec.push_back(obj);
-			continue;
-		}
-
-		WorldObj* objs = new WorldObj(Vector2f(220+50 * i, 300 * (i*2)), 600.0, 400.0);
-		objs->sprite.setTexture(Containers::texture_table["objTexture"]);
-		objs->setInteractable(true);
-		std::string building="Building ";
-		objs->setName(building+= std::to_string(i));
-		//objs->offsetBody(0, 50, 50, 50, 50);
-		objs->offsetBody(0, 110, 150, 120, 60);
-		recVec.push_back(objs);
-		
-	}
-
 	vector<Vector2f> vertices;
 	vector<pair<Vector2f, Vector2f>> edges;
 	
@@ -1237,8 +1257,8 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	staticRec->setHeight(150);
 	staticRec->name = YEMOJA;
 
-	staticRec->sprite.setTexture(yemojaTexture);
-	staticRec->sprite.setIdleTexture(yemojaIdleTex);
+	staticRec->sprite.setTexture(Containers::texture_table["yemojaTexture"]);
+	staticRec->sprite.setIdleTexture(Containers::texture_table["yemojaIdleTex"]);
 	staticRec->sprite.up = Containers::texture_table["h_upRunTex"];
 	staticRec->sprite.down = Containers::texture_table["h_downRunTex"];
 	staticRec->sprite.left = Containers::texture_table["h_leftRunTex"];
@@ -1279,13 +1299,6 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	staticRec->setMaxStamina(300);
 	staticRec->melee->sprite.setTexture(Containers::texture_table["border"]);
 
-	vector<Soldier*> silverSoldier;
-	int silverNum = 4;
-	for (int i = 0; i < silverNum; i++) {
-		silverSoldier.push_back(new Soldier(6745, 10355+(i*20), false));
-		gameplay_functions->add_Attack(silverSoldier[i]->getKey(), silverSoldier[i]->body[0].getX(), silverSoldier[i]->body[0].getY(), true, 10);
-	}
-	tBuffer->run();
 	for (int i = 0; i < silverNum; i++) {
 		silverSoldier[i]->setWidth(150);
 		silverSoldier[i]->setHeight(150);
@@ -1339,13 +1352,6 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 		silverSoldier[i]->setSpeed(8);
 	}
 
-	vector<Soldier*> blueSoldiers;
-	int blueNum = 4;
-	for (int i = 0; i < blueNum; i++) {
-		blueSoldiers.push_back(new Soldier(6030, 4000 + (i * 20), false));
-		gameplay_functions->add_Attack(blueSoldiers[i]->getKey(), blueSoldiers[i]->body[0].getX(), blueSoldiers[i]->body[0].getY(), true, 10);
-	}
-	tBuffer->run();
 	for (int i = 0; i < blueNum; i++) {
 		blueSoldiers[i]->setWidth(150);
 		blueSoldiers[i]->setHeight(150);
@@ -1520,13 +1526,6 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	//staticRec->goal.setXloc(500);
 	//staticRec->goal.setYloc(1200);
 	*/
-	recVec.push_back(staticRec);
-	for (int i = 0; i < silverSoldier.size();i++) {
-		recVec.push_back(silverSoldier[i]);
-	}
-	for (int i = 0; i < blueSoldiers.size(); i++) {
-		recVec.push_back(blueSoldiers[i]);
-	}
 	
 /*	VisibilityGraph graph{ {
 		{{1400.00,800.00}, {{1400.00, 900.00},{1200.00,800.00}}},
@@ -1603,13 +1602,12 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	a1->add_alliance_to_alliance(v3->get_alliance());
 	if (blueSoldiers.size()>0)party2->set_defend(blueSoldiers[0]->getLoc());
 	party2->setMode(Party::MODE_DEFEND);
-	party3->add_patrol_loc(staticRec->getLoc());
-	party3->add_patrol_loc({ 6445.0, 9855.0 });
-	party3->setMode(Party::MODE_PATROL);
+	party3->set_defend(staticRec->getLoc());
+	party3->setMode(Party::MODE_DEFEND);
 	//cout << Alex->getParty()->getAlliance()<< endl;
 
-	partyM->addToPartyList(party);
-	partyM->addToPartyList(party2);
+	//partyM->addToPartyList(party);
+	//partyM->addToPartyList(party2);
 
 	//osi::GameWindow::init();
 	LOG("PAST WINDOW INIT ***********************");
@@ -1631,11 +1629,22 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 		soldiers_list.push_back(silverSoldier[i]);
 	}
 
+	/*std::thread AI([=]() {
+		while (GameWindow::isRunning()) {
+			combatControl->updateSoliderStatus();
+			combatControl->checkParties();
+			for (int i = 0; i < soldiers_list.size(); i++) {
+				combatControl->update_soldier(soldiers_list[i], state);
+			}
+		}
+	});*/
 	current_game_state = game_state::in_game;
 	while (GameWindow::isRunning()) {
 		while (current_game_state == game_state::main_menu) {
-			cout << "currently in the main menu" << endl;
-			iController->current_game_state = current_game_state;
+			//cout << "currently in the main menu" << endl;
+			cout << "game_state value is " << as_integer(current_game_state) << endl;
+			//iController->current_game_state = current_game_state;
+			cout << "controller state is " << as_integer(iController->current_game_state) << endl;
 			//cout << "input game state is " <<  << endl;
 			// draw main menu and unlock input to work with things in the main menu;
 			//gameplay_functions->draw_frame(main menu);
@@ -1644,7 +1653,14 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 			current_game_state = iController->current_game_state;
 		}
 		while (current_game_state == game_state::in_game) {
-			iController->current_game_state = current_game_state;
+			for (int i = 0; i < 10; i++) {
+				cout << "IN INGAME STATE" << endl;
+
+			}
+			if (iController->current_game_state != game_state::in_game) {
+				iController->current_game_state = current_game_state;
+			}
+			//iController->current_game_state = current_game_state;
 			//shouldExit++;
 			//for (int i = 0; i < 10; i++) {
 			//	cout << "SHOULD EXIT IS " << shouldExit << endl;
@@ -1734,11 +1750,19 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 				}
 
 			}
-			partyM->updateSoliderStatus();
+			/*combatControl->updateSoliderStatus();
 			combatControl->checkParties();
 			for (int i = 0; i < soldiers_list.size(); i++) {
 				combatControl->update_soldier(soldiers_list[i], state);
+			}*/
+
+			std::thread AI([=]() {
+			combatControl->updateSoliderStatus();
+			combatControl->checkParties();
+			for (int i = 0; i < soldiers_list.size(); i++) {
+			combatControl->update_soldier(soldiers_list[i], state);
 			}
+			});
 
 			questM->update();
 
@@ -1775,8 +1799,8 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 			YemojaPlanner->give_as_quest = false;
 
 			AIController::execute();
-
-			if ((1000 / fs) > (clock() - start_tick)) { //delta_ticks) {www
+			AI.join();
+			if ((1000 / fs) > (clock() - start_tick)) { //delta_ticks)
 				Sleep((1000 / fs) - (clock() - start_tick));
 			}
 			delta_ticks = clock() - start_tick; //the time, in ms, that took to render the scene
@@ -1791,11 +1815,13 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 			current_game_state = iController->current_game_state;
 		}
 		while (current_game_state == game_state::pause_menu) {
-			iController->current_game_state = current_game_state;
+			cout << "IN PAUSE MENU STATE" << endl;
+			//iController->current_game_state = current_game_state;
 			//draw the pause menu
 			//gameplay_functions->draw_frame(pause menu);
 			//check input
 			iController->InputCheck();
+			cout << "ICONTROLLER STATE IS " << as_integer(iController->current_game_state) << endl;
 			current_game_state = iController->current_game_state;
 		}
 	}
