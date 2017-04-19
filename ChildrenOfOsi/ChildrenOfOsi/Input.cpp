@@ -608,12 +608,11 @@ void Input::InputCheck()
 		if (S) {
 			// move selected option down
 		}
-		if (P) {
+		if (ENTER) {
 			// assuming menu only has start option, so move in game
-			for (int i = 0; i < 10; i++) {
-				cout << "P pressed while in main menu input select" << endl;
+			if (current_game_state == game_state::main_menu) {
+				current_game_state = game_state::in_game;
 			}
-			current_game_state = game_state::in_game;
 		}
 	}
 	if (current_game_state == game_state::in_game) {
@@ -1024,9 +1023,9 @@ void Input::InputCheck()
 	}
 	if (current_game_state == game_state::pause_menu) {
 		// pressing esc to unpause
-		cout << "IN PUT CONTROL IS IN PAUSE STATE" << endl;
-		if (Z) {
-			for (int i = 0; i < 10; i++) cout << "I HAVE JUST PRESSED ESCAPE" << endl;
+		//cout << "IN PUT CONTROL IS IN PAUSE STATE" << endl;
+		if (Q) {
+			//for (int i = 0; i < 10; i++) cout << "I HAVE JUST PRESSED Q" << endl;
 			if (current_game_state == game_state::pause_menu) {
 				current_game_state = game_state::in_game;
 			}
