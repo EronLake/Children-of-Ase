@@ -77,7 +77,6 @@
 
 using namespace std;
 
-
 Texture* Point::tex = new Texture();
 Texture* Rectangle::tex = new Texture();
 Texture* Rectangle::texUP = new Texture();
@@ -95,6 +94,13 @@ std::mutex mu;
 
 void FPS(bool b);
 void GAMEPLAY_LOOP(QuadTree* _Quadtree);
+void init_textures_shango(unordered_map<Texture*, pair<string, int>> &textureMap);
+void init_textures_yemoja(unordered_map<Texture*, pair<string, int>> &textureMap, vector<Texture *> &oasis);
+void init_textures_oya(unordered_map<Texture*, pair<string, int>> &textureMap, vector<Texture *> &jungle);
+void init_textures_oshoshi(unordered_map<Texture*, pair<string, int>> &textureMap, vector<Texture *> &mountain);
+void init_textures_ogun(unordered_map<Texture*, pair<string, int>> &textureMap, vector<Texture *> &ogun);
+void init_textures_blue_soldier(unordered_map<Texture*, pair<string, int>> &textureMap);
+void init_textures_silver_soldier(unordered_map<Texture*, pair<string, int>> &textureMap, vector<Texture *> &mountain);
 
 bool lineCollision(Line l1, Line l2);
 /// Helper function passed to thread to set file. Param is a tuple, first being the Texture* to work on, and second being the param needed to call setFile().
@@ -427,7 +433,12 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	gameplay_functions->add_texture("ss_upLungeTex", 0, 0, 0);
 	gameplay_functions->add_texture("ss_downLungeTex", 0, 0, 0);
 	gameplay_functions->add_texture("ss_leftLungeTex", 0, 0, 0);
-	gameplay_functions->add_texture("ss_rightLungeTex", 0, 0, 0);
+  gameplay_functions->add_texture("ss_rightLungeTex", 0, 0, 0);
+  gameplay_functions->add_texture("ss_upDeathTex", 0, 0, 0);
+  gameplay_functions->add_texture("ss_downDeathTex", 0, 0, 0);
+  gameplay_functions->add_texture("ss_leftDeathTex", 0, 0, 0);
+  gameplay_functions->add_texture("ss_rightDeathTex", 0, 0, 0);
+
 	tBuffer->run();
 	/*Texture* ss_upRunTex = new Texture();
 	Texture* ss_downRunTex = new Texture();
@@ -505,7 +516,11 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	mountain.push_back(Containers::texture_table["ss_upLungeTex"]);
 	mountain.push_back(Containers::texture_table["ss_downLungeTex"]);
 	mountain.push_back(Containers::texture_table["ss_leftLungeTex"]);
-	mountain.push_back(Containers::texture_table["ss_rightLungeTex"]);
+  mountain.push_back(Containers::texture_table["ss_rightLungeTex"]);
+  mountain.push_back(Containers::texture_table["ss_upDeathTex"]);
+  mountain.push_back(Containers::texture_table["ss_downDeathTex"]);
+  mountain.push_back(Containers::texture_table["ss_leftDeathTex"]);
+  mountain.push_back(Containers::texture_table["ss_rightDeathTex"]);
 
 	gameplay_functions->add_texture("bs_upRunTex", 0, 0, 0);
 	gameplay_functions->add_texture("bs_downRunTex", 0, 0, 0);
@@ -530,7 +545,11 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	gameplay_functions->add_texture("bs_upLungeTex", 0, 0, 0);
 	gameplay_functions->add_texture("bs_downLungeTex", 0, 0, 0);
 	gameplay_functions->add_texture("bs_leftLungeTex", 0, 0, 0);
-	gameplay_functions->add_texture("bs_rightLungeTex", 0, 0, 0);
+  gameplay_functions->add_texture("bs_rightLungeTex", 0, 0, 0);
+  gameplay_functions->add_texture("bs_upDeathTex", 0, 0, 0);
+  gameplay_functions->add_texture("bs_downDeathTex", 0, 0, 0);
+  gameplay_functions->add_texture("bs_leftDeathTex", 0, 0, 0);
+  gameplay_functions->add_texture("bs_rightDeathTex", 0, 0, 0);
 	tBuffer->run();
 	/*Texture* bs_upRunTex = new Texture();
 	Texture* bs_downRunTex = new Texture();
@@ -1885,5 +1904,40 @@ void FPS(bool b) {
 	}
 	time_t now; 
 	time(&now);
+
+}
+
+void init_textures_shango(unordered_map<Texture*, pair<string, int>> &textureMap)
+{
+
+}
+
+void init_textures_yemoja(unordered_map<Texture*, pair<string, int>> &textureMap, vector<Texture *> &oasis)
+{
+
+}
+
+void init_textures_oya(unordered_map<Texture*, pair<string, int>> &textureMap, vector<Texture *> &jungle)
+{
+
+}
+
+void init_textures_oshoshi(unordered_map<Texture*, pair<string, int>> &textureMap, vector<Texture *> &mountain)
+{
+
+}
+
+void init_textures_ogun(unordered_map<Texture*, pair<string, int>> &textureMap, vector<Texture *> &ogun)
+{
+
+}
+
+void init_textures_blue_soldier(unordered_map<Texture*, pair<string, int>> &textureMap)
+{
+
+}
+
+void init_textures_silver_soldier(unordered_map<Texture*, pair<string, int>> &textureMap, vector<Texture *> &mountain)
+{
 
 }
