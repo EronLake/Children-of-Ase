@@ -191,6 +191,7 @@
     <ClInclude Include="DialogueHelper.h" />
     <ClInclude Include="DialougeTestSuite.h" />
     <ClInclude Include="DummyController.h" />
+    <ClInclude Include="GameState.h" />
     <ClInclude Include="HUD.h" />
     <ClInclude Include="Party.h" />
     <ClInclude Include="PartyManager.h" />

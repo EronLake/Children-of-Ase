@@ -115,6 +115,7 @@ int main() {
 
 void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 {
+	game_state current_game_state = game_state::load_game;
 	Rectangle::tex->setFile("Assets/Sprites/blank1.png", 1);
 	Point::tex->setFile("Assets/Sprites/point.png", 1);
 	
@@ -345,8 +346,8 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	gameplay_functions->add_texture("yemojaTexture", 0, 0, 0);
 	gameplay_functions->add_texture("yemojaIdleTex", 0, 0, 0);
 	tBuffer->run();
-	Texture* yemojaTexture = new Texture();
-	Texture* yemojaIdleTex = new Texture();
+	//Texture* yemojaTexture = new Texture();
+	//Texture* yemojaIdleTex = new Texture();
 	textureMap[Containers::texture_table["yemojaTexture"]] = pair<string, int>("Assets/Sprites/YemojaForwardIdle.png", 22);
 	textureMap[Containers::texture_table["yemojaIdleTex"]] = pair<string, int>("Assets/Sprites/YemojaForwardIdle.png", 22);
 	oasis.push_back(Containers::texture_table["yemojaTexture"]);
@@ -918,9 +919,56 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	//thread_Vec.clear();
 	 //windows handle
 
-//Ian's attempt at multithreading. Compiles in 22 seconds on school computer. Still has same issue with spritesheet sprites, where the red and black boxes appear.
-//Other sprites load in normally though
-//also needs the boost external dependency, so it might
+	vector<WorldObj*> vec;
+	//vec.push_back(&Alex->melee);
+
+	for (int i = 1; i < 6; i++) {
+		if (i > 4) {
+			WorldObj* obj = new WorldObj(Vector2f(4100, 3550), 500, 333);
+
+			obj->sprite.setTexture(Containers::texture_table["objTexture"]);
+			obj->setInteractable(true);
+			std::string building = "Building ";
+			obj->setName(building += std::to_string(i));
+			//objs->offsetBody(0, 50, 50, 50, 50);
+			obj->offsetBody(0, 25, 50, 25, 25);
+			vec.push_back(obj);
+			continue;
+		}
+
+		WorldObj* objs = new WorldObj(Vector2f(220 + 50 * i, 300 * (i * 2)), 600.0, 400.0);
+		objs->sprite.setTexture(Containers::texture_table["objTexture"]);
+		objs->setInteractable(true);
+		std::string building = "Building ";
+		objs->setName(building += std::to_string(i));
+		//objs->offsetBody(0, 50, 50, 50, 50);
+		objs->offsetBody(0, 110, 150, 120, 60);
+		recVec.push_back(objs);
+
+	}
+
+	vector<Soldier*> silverSoldier;
+	int silverNum = 4;
+	for (int i = 0; i < silverNum; i++) {
+		silverSoldier.push_back(new Soldier(6745, 10355 + (i * 20), false));
+		gameplay_functions->add_Attack(silverSoldier[i]->getKey(), silverSoldier[i]->body[0].getX(), silverSoldier[i]->body[0].getY(), true, 10);
+	}
+	tBuffer->run();
+	vector<Soldier*> blueSoldiers;
+	int blueNum = 4;
+	for (int i = 0; i < blueNum; i++) {
+		blueSoldiers.push_back(new Soldier(6030, 4000 + (i * 20), false));
+		gameplay_functions->add_Attack(blueSoldiers[i]->getKey(), blueSoldiers[i]->body[0].getX(), blueSoldiers[i]->body[0].getY(), true, 10);
+	}
+	tBuffer->run();
+	recVec.push_back(staticRec);
+	for (int i = 0; i < silverSoldier.size(); i++) {
+		recVec.push_back(silverSoldier[i]);
+	}
+	for (int i = 0; i < blueSoldiers.size(); i++) {
+		recVec.push_back(blueSoldiers[i]);
+	}
+
 	starting_location.push_back(oasis);
 	starting_location.push_back(ogun);
 	starting_location.push_back(jungle);
@@ -945,6 +993,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 		for (auto it = recVec.begin(); it != recVec.end(); ++it) {
 			(*it)->sprite.reset_texture();
 		}
+		Alex->sprite.reset_texture();
 		glFinish();
 	});
 	HGLRC loaderContext1 = wglCreateContext(hdc);
@@ -1143,34 +1192,6 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	spin2->setNextAttack(spin3);
 	spin3->setNextAttack(spin4);
 
-	vector<WorldObj*> vec;
-	//vec.push_back(&Alex->melee);
-
-	for (int i = 1; i < 6; i++) {
-		if (i > 4) {
-			WorldObj* obj = new WorldObj(Vector2f(4100, 3550),500,333);
-		
-			obj->sprite.setTexture(Containers::texture_table["objTexture"]);
-			obj->setInteractable(true);
-			std::string building = "Building ";
-			obj->setName(building += std::to_string(i));
-			//objs->offsetBody(0, 50, 50, 50, 50);
-			obj->offsetBody(0, 25, 50, 25, 25);
-			vec.push_back(obj);
-			continue;
-		}
-
-		WorldObj* objs = new WorldObj(Vector2f(220+50 * i, 300 * (i*2)), 600.0, 400.0);
-		objs->sprite.setTexture(Containers::texture_table["objTexture"]);
-		objs->setInteractable(true);
-		std::string building="Building ";
-		objs->setName(building+= std::to_string(i));
-		//objs->offsetBody(0, 50, 50, 50, 50);
-		objs->offsetBody(0, 110, 150, 120, 60);
-		recVec.push_back(objs);
-		
-	}
-
 	vector<Vector2f> vertices;
 	vector<pair<Vector2f, Vector2f>> edges;
 	
@@ -1200,8 +1221,8 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	staticRec->setHeight(150);
 	staticRec->name = YEMOJA;
 
-	staticRec->sprite.setTexture(yemojaTexture);
-	staticRec->sprite.setIdleTexture(yemojaIdleTex);
+	staticRec->sprite.setTexture(Containers::texture_table["yemojaTexture"]);
+	staticRec->sprite.setIdleTexture(Containers::texture_table["yemojaIdleTex"]);
 	staticRec->sprite.up = Containers::texture_table["h_upRunTex"];
 	staticRec->sprite.down = Containers::texture_table["h_downRunTex"];
 	staticRec->sprite.left = Containers::texture_table["h_leftRunTex"];
@@ -1239,13 +1260,6 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	staticRec->setMaxStamina(300);
 	staticRec->melee->sprite.setTexture(Containers::texture_table["border"]);
 
-	vector<Soldier*> silverSoldier;
-	int silverNum = 4;
-	for (int i = 0; i < silverNum; i++) {
-		silverSoldier.push_back(new Soldier(6745, 10355+(i*20), false));
-		gameplay_functions->add_Attack(silverSoldier[i]->getKey(), silverSoldier[i]->body[0].getX(), silverSoldier[i]->body[0].getY(), true, 10);
-	}
-	tBuffer->run();
 	for (int i = 0; i < silverNum; i++) {
 		silverSoldier[i]->setWidth(150);
 		silverSoldier[i]->setHeight(150);
@@ -1294,13 +1308,6 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 		silverSoldier[i]->setSpeed(8);
 	}
 
-	vector<Soldier*> blueSoldiers;
-	int blueNum = 4;
-	for (int i = 0; i < blueNum; i++) {
-		blueSoldiers.push_back(new Soldier(6030, 4000 + (i * 20), false));
-		gameplay_functions->add_Attack(blueSoldiers[i]->getKey(), blueSoldiers[i]->body[0].getX(), blueSoldiers[i]->body[0].getY(), true, 10);
-	}
-	tBuffer->run();
 	for (int i = 0; i < blueNum; i++) {
 		blueSoldiers[i]->setWidth(150);
 		blueSoldiers[i]->setHeight(150);
@@ -1470,13 +1477,6 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	//staticRec->goal.setXloc(500);
 	//staticRec->goal.setYloc(1200);
 	*/
-	recVec.push_back(staticRec);
-	for (int i = 0; i < silverSoldier.size();i++) {
-		recVec.push_back(silverSoldier[i]);
-	}
-	for (int i = 0; i < blueSoldiers.size(); i++) {
-		recVec.push_back(blueSoldiers[i]);
-	}
 	
 /*	VisibilityGraph graph{ {
 		{{1400.00,800.00}, {{1400.00, 900.00},{1200.00,800.00}}},
@@ -1553,9 +1553,8 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	a1->add_alliance_to_alliance(v3->get_alliance());
 	if (blueSoldiers.size()>0)party2->set_defend(blueSoldiers[0]->getLoc());
 	party2->setMode(Party::MODE_DEFEND);
-	party3->add_patrol_loc(staticRec->getLoc());
-	party3->add_patrol_loc({ 6445.0, 9855.0 });
-	party3->setMode(Party::MODE_PATROL);
+	party3->set_defend(staticRec->getLoc());
+	party3->setMode(Party::MODE_DEFEND);
 	//cout << Alex->getParty()->getAlliance()<< endl;
 
 	//partyM->addToPartyList(party);
@@ -1590,237 +1589,192 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 			}
 		}
 	});*/
-
+	current_game_state = game_state::in_game;
 	while (GameWindow::isRunning()) {
-		//shouldExit++;
-		//for (int i = 0; i < 10; i++) {
-		//	cout << "SHOULD EXIT IS " << shouldExit << endl;
+		while (current_game_state == game_state::main_menu) {
+			//cout << "currently in the main menu" << endl;
+			cout << "game_state value is " << as_integer(current_game_state) << endl;
+			//iController->current_game_state = current_game_state;
+			cout << "controller state is " << as_integer(iController->current_game_state) << endl;
+			//cout << "input game state is " <<  << endl;
+			// draw main menu and unlock input to work with things in the main menu;
+			//gameplay_functions->draw_frame(main menu);
+			// let say i pressed enter(checked in input), I move into the game now
+			iController->InputCheck();
+			current_game_state = iController->current_game_state;
+		}
+		while (current_game_state == game_state::in_game) {
+			for (int i = 0; i < 10; i++) {
+				cout << "IN INGAME STATE" << endl;
 
-		//}
-		if (shouldExit > 0) {
-			_CrtDumpMemoryLeaks();
-			return;
-		}
-		if (start) {
-			gameplay_functions->play_sound("Play");
-			//gameplay_functions->play_sound("Walk");
-			//gameplay_functions->pause_unpause("Pause", "walk_loop.wav");
-			start = !start;
-		}
-		start_tick = clock();
-		_QuadTree->clear();
-		Alex->updateCD();
-		Alex->effect.sprite.animate();
-		Alex->WorldObj::animateObj();
-		for (int i = 0; i < recVec.size(); i++) {
-			recVec[i]->effect.sprite.animate();
-			recVec[i]->WorldObj::animateObj();
-			_QuadTree->Insert(recVec[i]);	//insert all obj into tree
-	
-		}
-		state = DialogueController::getState();
-
-		////std:://cout << "X: " << Alex->getX() << " Y: " << Alex->getY() << std::endl;
-
-	if (Alex->getX() > 5285.83 && Alex->getX() < 7079.86) { //Ogun Desert
-		if (Alex->getY() < 3523.33) {
-			if(current_region == *Desert)
-			next_region = *Ogun;
-			
-		}
-		else {
-			if (current_region == *Ogun) {
-			next_region = *Desert;
 			}
-		}
-	}
-	if (Alex->getX() > 10847.5 && Alex->getX() < 12395.5) {
-		if (Alex->getY() < 14441) {
-			if(current_region == *Jungle)
-			next_region = *Mountain;
-		}
-		else {
-			if (current_region == *Mountain) {
-			next_region = *Jungle;
+			if (iController->current_game_state != game_state::in_game) {
+				iController->current_game_state = current_game_state;
 			}
-		}
-	}
-	if (Alex->getX() > 13091 && Alex->getX() < 13825.9) {
-		if (Alex->getY() < 5132.23) {
-			
-			if (current_region == *Mountain) {
-				next_region = *Ogun;
+			//iController->current_game_state = current_game_state;
+			//shouldExit++;
+			//for (int i = 0; i < 10; i++) {
+			//	cout << "SHOULD EXIT IS " << shouldExit << endl;
+
+			//}
+			if (shouldExit > 0) {
+				_CrtDumpMemoryLeaks();
+				return;
 			}
-		}
-		else {
-			if (current_region == *Ogun)
-				next_region = *Mountain;
-		}
-	}
-	if (Alex->getX() > 3479.67 && Alex->getX() < 9446.06) {
-		if (Alex->getY() < 15980.7) {
-			if (current_region == *Jungle)
-				next_region = *Desert;
-		}
-		else {
-			if (current_region == *Desert) {
-				next_region = *Jungle;
+			if (start) {
+				gameplay_functions->play_sound("Play");
+				start = !start;
 			}
-		}
-	}
-	if (!(current_region == next_region)) {
-		switch_music = true;
-	}
-	
-	if (switch_music) {
-		if (in_village) {
-			gameplay_functions->change_song("Change", current_region.getRTheme(), next_region.getVTheme());
-			switch_music = false;
+			start_tick = clock();
+			_QuadTree->clear();
+			Alex->updateCD();
+			Alex->effect.sprite.animate();
+			Alex->WorldObj::animateObj();
+			for (int i = 0; i < recVec.size(); i++) {
+				recVec[i]->effect.sprite.animate();
+				recVec[i]->WorldObj::animateObj();
+				_QuadTree->Insert(recVec[i]);	//insert all obj into tree
 
-		}
-		else {
-			gameplay_functions->change_song("Change", current_region.getRTheme(), next_region.getRTheme());
-			//iController->current_region = current_region;
-			current_region = next_region;
+			}
+			state = DialogueController::getState();
 
-			//current_region->getRTheme(), next_region->getRTheme()
-			switch_music = false;
-		}
+			if (Alex->getX() > 5285.83 && Alex->getX() < 7079.86) { //Ogun Desert
+				if (Alex->getY() < 3523.33) {
+					if (current_region == *Desert)
+						next_region = *Ogun;
 
-	}
-		//partyM->updateSoliderStatus();
-		//combatControl->checkParties();
-		for (int i = 0; i < soldiers_list.size();i++) {
-			combatControl->update_soldier(soldiers_list[i], state);
-		}
+				}
+				else {
+					if (current_region == *Ogun) {
+						next_region = *Desert;
+					}
+				}
+			}
+			if (Alex->getX() > 10847.5 && Alex->getX() < 12395.5) {
+				if (Alex->getY() < 14441) {
+					if (current_region == *Jungle)
+						next_region = *Mountain;
+				}
+				else {
+					if (current_region == *Mountain) {
+						next_region = *Jungle;
+					}
+				}
+			}
+			if (Alex->getX() > 13091 && Alex->getX() < 13825.9) {
+				if (Alex->getY() < 5132.23) {
 
-	/*std::thread AI([=]() {
-			combatControl->updateSoliderStatus();
+					if (current_region == *Mountain) {
+						next_region = *Ogun;
+					}
+				}
+				else {
+					if (current_region == *Ogun)
+						next_region = *Mountain;
+				}
+			}
+			if (Alex->getX() > 3479.67 && Alex->getX() < 9446.06) {
+				if (Alex->getY() < 15980.7) {
+					if (current_region == *Jungle)
+						next_region = *Desert;
+				}
+				else {
+					if (current_region == *Desert) {
+						next_region = *Jungle;
+					}
+				}
+			}
+			if (!(current_region == next_region)) {
+				switch_music = true;
+			}
+
+			if (switch_music) {
+				if (in_village) {
+					gameplay_functions->change_song("Change", current_region.getRTheme(), next_region.getVTheme());
+					switch_music = false;
+
+				}
+				else {
+					gameplay_functions->change_song("Change", current_region.getRTheme(), next_region.getRTheme());
+					current_region = next_region;
+					switch_music = false;
+				}
+
+			}
+			/*combatControl->updateSoliderStatus();
 			combatControl->checkParties();
 			for (int i = 0; i < soldiers_list.size(); i++) {
 				combatControl->update_soldier(soldiers_list[i], state);
+			}*/
+
+			std::thread AI([=]() {
+			combatControl->updateSoliderStatus();
+			combatControl->checkParties();
+			for (int i = 0; i < soldiers_list.size(); i++) {
+			combatControl->update_soldier(soldiers_list[i], state);
 			}
-	});*/
-		questM->update();
-				
-		//ai->plan_step(staticRec);
-		//clock 
+			});
 
-		/*float diffX = staticRec->getX() - staticRec->goal.getXloc();
+			questM->update();
 
-		float diffY = staticRec->getY() - staticRec->goal.getYloc();
-		float slope = abs(diffY / diffX);
-
-		float diagSpeed = sqrt(staticRec->getSpeed()*staticRec->getSpeed() / (slope + 1));
-
-		staticRec->setDiagXSpeed(diagSpeed);
-		staticRec->setDiagYSpeed((slope*diagSpeed));
-
-
-		X: 1520 Y: 970
-		X: 1520 Y: 1230
-		X: 1450 Y: 1050
-		X: 1520 Y: 970
-		X: 1520 Y: 1230
-		X: 1450 Y: 1050
-
-		if (abs(diffX) < 6) diffX = 0;
-		if (abs(diffY) < 6) diffY = 0;
-		bool left = false;
-		bool up = false;
-		bool down = false;
-		bool right = false;
-
-		//gameplay_functions->move_toward(staticRec);
-
-		if (diffX < 0) right = true;
-		if (diffX > 0) left = true;
-		if (diffY < 0) down = true;
-		if (diffY > 0) up = true;
-		if (up) {
-			gameplay_functions->move_toward(staticRec);
-		//	if (right) gameplay_functions->move_up_right(staticRec);
-		//	else if (left) gameplay_functions->move_up_left(staticRec);
-			//else gameplay_functions->move_up(staticRec);
-		}
-		else if (down) {
-			gameplay_functions->move_toward(staticRec);
-			//if (right) gameplay_functions->move_down_right(staticRec);
-			//else if (left) gameplay_functions->move_down_left(staticRec);
-			//else gameplay_functions->move_down(staticRec);
-		}
-		else if (right) {
-			gameplay_functions->move_toward(staticRec);
-		//	gameplay_functions->move_right(staticRec);
-		}
-		else if (left) {
-			gameplay_functions->move_toward(staticRec);
-			//gameplay_functions->move_left(staticRec);
-		}
-		else {
-			gameplay_functions->stop(staticRec);
-		}*/
-		//iController->InputCheck();
-
-		//Alex->WorldObj::drawObj(0,0);
-		//for (int i = 0; i < recVec.size(); i++) {
-		//	recVec[i]->drawObj(0,0);
-		//}
-		//Alex->WorldObj::animateObj();
-		////Alex->WorldObj::shiftX(.5);
-		//osi::GameWindow::refresh();
-		//draw
-		if (state == 0) {
-			//LOG("ERROR AFTER PRESSING Q TO QUIT THE DIALOGUE GUI");
-			gameplay_functions->draw_frame(Alex);
-			//gameplay_functions->drawHUD(Alex);
-			
-		}
-		else if (state > 0) {
-			gameplay_functions->drawDiaGui(Alex);
-			gameplay_functions->stop(staticRec);
-		}
-		//convoGui->drawGui();
-
-		//gameplay_functions->draw_frame(convoGui);
-		//run task buffer
-		iController->InputCheck();
-		//temp_action->execute();
-
-		tBuffer->run();
-		//	//////cout << tBuffer->queue_buffer.size() << endl;
-		//tBuffer->empty();
-
-		/////////////////////////////////////////////////////////////////
-		/////////////////////////////////////////////////////////////////
-		/////////////////////////////////////////////////////////////////
-		for (auto iter : staticRec->rel) {
-			Relationship* my_rel = iter.second;
-			int with_hero = iter.first;
-
-			if (my_rel->isChanged()) {
-				//reevaluate goals for with_hero
-				AIController::reevaluate_state(YEMOJA, with_hero);
-				my_rel->setChanged(false);
+			//draw
+			if (state == 0) {
+				gameplay_functions->draw_frame(Alex);
 			}
-		}
-		//getting here-------------------------------------------------------------------------***********
-		//setting give as quest to false so that the excute runs
-		YemojaPlanner->give_as_quest = false;
+			//draw
+			else if (state > 0) {
+				gameplay_functions->drawDiaGui(Alex);
+				gameplay_functions->stop(staticRec);
+			}
 
-		AIController::execute();
+			//run task buffer
+			iController->InputCheck();
 
-		if ((1000 / fs) > (clock() - start_tick)) { //delta_ticks) {www
-			Sleep((1000 / fs) - (clock() - start_tick));
-		}
-		delta_ticks = clock() - start_tick; //the time, in ms, that took to render the scene
-		if (delta_ticks > 0) {
-			fps = CLOCKS_PER_SEC / delta_ticks;
-		}
-		HUD::FPS = fps;
+			tBuffer->run();
+
+			/////////////////////////////////////////////////////////////////
+			/////////////////////////////////////////////////////////////////
+			/////////////////////////////////////////////////////////////////
+			for (auto iter : staticRec->rel) {
+				Relationship* my_rel = iter.second;
+				int with_hero = iter.first;
+
+				if (my_rel->isChanged()) {
+					//reevaluate goals for with_hero
+					AIController::reevaluate_state(YEMOJA, with_hero);
+					my_rel->setChanged(false);
+				}
+			}
+			//getting here-------------------------------------------------------------------------***********
+			//setting give as quest to false so that the excute runs
+			YemojaPlanner->give_as_quest = false;
+
+			AIController::execute();
+			AI.join();
+			if ((1000 / fs) > (clock() - start_tick)) { //delta_ticks)
+				Sleep((1000 / fs) - (clock() - start_tick));
+			}
+			delta_ticks = clock() - start_tick; //the time, in ms, that took to render the scene
+			if (delta_ticks > 0) {
+				fps = CLOCKS_PER_SEC / delta_ticks;
+			}
+			HUD::FPS = fps;
 			//cout << "FPS: " << fps << endl;
-		//AI.join();
-		frame_count++;
+
+			frame_count++;
+
+			current_game_state = iController->current_game_state;
+		}
+		while (current_game_state == game_state::pause_menu) {
+			cout << "IN PAUSE MENU STATE" << endl;
+			//iController->current_game_state = current_game_state;
+			//draw the pause menu
+			//gameplay_functions->draw_frame(pause menu);
+			//check input
+			iController->InputCheck();
+			cout << "ICONTROLLER STATE IS " << as_integer(iController->current_game_state) << endl;
+			current_game_state = iController->current_game_state;
+		}
 	}
 	GameWindow::terminate();
 }

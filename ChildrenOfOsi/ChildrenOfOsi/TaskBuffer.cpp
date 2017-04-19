@@ -98,6 +98,7 @@ void TaskBuffer::push(Task* new_task)
 {
 	std::lock_guard<std::mutex> guard(mux_2);
 	queue_buffer.push(std::move(new_task));
+	mLog->logMessage(new_task);
 }
 //------------------------------------------------------
 
