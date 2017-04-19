@@ -8,6 +8,7 @@
 #include "Containers.h"
 #include "AIController.h"
 #include "Village.h"
+#include "GameState.h"
 
 
 
@@ -61,6 +62,8 @@ public:
 	//Region next_region;
 
 	void InputCheck();
+	game_state current_game_state;
+	
 
 };
 
