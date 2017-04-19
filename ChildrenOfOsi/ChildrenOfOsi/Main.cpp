@@ -143,7 +143,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	RenderManager* RenM = new RenderManager(mLog, tBuffer, _QuadTree, gameplay_functions, rivObj);
 	DummyController* DumM = new DummyController(mLog, tBuffer);
 	PhysicsManager* PhysM = new PhysicsManager(mLog, tBuffer, _QuadTree, rivObj);
-	PartyManager* partyM = new PartyManager(gameplay_functions, Alex);
+	//PartyManager* partyM = new PartyManager(gameplay_functions, Alex);
 	memManager* memM = new memManager(mLog, tBuffer);
 	TestManager* TestM = new TestManager(mLog, tBuffer);
 	AudioManager* AudM = new AudioManager(mLog, tBuffer);
@@ -1558,8 +1558,8 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	party3->setMode(Party::MODE_PATROL);
 	//cout << Alex->getParty()->getAlliance()<< endl;
 
-	partyM->addToPartyList(party);
-	partyM->addToPartyList(party2);
+	//partyM->addToPartyList(party);
+	//partyM->addToPartyList(party2);
 
 	//osi::GameWindow::init();
 	LOG("PAST WINDOW INIT ***********************");
@@ -1580,6 +1580,16 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	for (int i = 0; i < silverSoldier.size(); i++) {
 		soldiers_list.push_back(silverSoldier[i]);
 	}
+
+	/*std::thread AI([=]() {
+		while (GameWindow::isRunning()) {
+			combatControl->updateSoliderStatus();
+			combatControl->checkParties();
+			for (int i = 0; i < soldiers_list.size(); i++) {
+				combatControl->update_soldier(soldiers_list[i], state);
+			}
+		}
+	});*/
 
 	while (GameWindow::isRunning()) {
 		//shouldExit++;
@@ -1678,37 +1688,19 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 		}
 
 	}
-		partyM->updateSoliderStatus();
-		combatControl->checkParties();
+		//partyM->updateSoliderStatus();
+		//combatControl->checkParties();
 		for (int i = 0; i < soldiers_list.size();i++) {
 			combatControl->update_soldier(soldiers_list[i], state);
 		}
 
-		/*int soldier_counter = 0;
-		for (const auto& it : soldiers_list) {
-			//pair<Soldier*, int>* temp_tuple = new pair<Soldier*, int>(it, state);
-			//cout << "WORKING ON " << temp_tuple->second.first << endl;
-			// If there are still less than "num_of_threads" in thread_Vec:
-			if (soldier_counter % num_of_threads != 0) {
-
-				//std::thread temp_thread(set_file_with_thread, std::ref(temp_tuple));
-				thread_Vec.push_back(combatControl->threaded_update_soldier(it,state));
+	/*std::thread AI([=]() {
+			combatControl->updateSoliderStatus();
+			combatControl->checkParties();
+			for (int i = 0; i < soldiers_list.size(); i++) {
+				combatControl->update_soldier(soldiers_list[i], state);
 			}
-			else {
-				//cout << "THE THREAD VEC HAS " << thread_Vec.size() << "THREADS" << endl;
-				for (auto& itr : thread_Vec) {
-					itr.join();
-				}
-				thread_Vec.clear();
-				thread_Vec.push_back(combatControl->threaded_update_soldier(it, state));
-			}
-			soldier_counter++;
-			}
-			for (auto& it : thread_Vec) {
-				it.join();
-			}
-			thread_Vec.clear();
-			*/
+	});*/
 		questM->update();
 				
 		//ai->plan_step(staticRec);
@@ -1827,7 +1819,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 		}
 		HUD::FPS = fps;
 			//cout << "FPS: " << fps << endl;
-
+		//AI.join();
 		frame_count++;
 	}
 	GameWindow::terminate();

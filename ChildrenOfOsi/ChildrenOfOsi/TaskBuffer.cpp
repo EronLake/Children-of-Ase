@@ -1,5 +1,14 @@
 #include "stdafx.h"
 #include "TaskBuffer.h"
+#include <exception>
+struct empty_stack : std::exception
+{
+	const char* what() const throw() {
+		return "Empty Stack Exception";
+	}
+};
+
+std::mutex mux_2;
 
 //------------------------------------------------------
 TaskBuffer::TaskBuffer(MessageLog* _mLog)
@@ -87,7 +96,8 @@ void TaskBuffer::printBuffer()//////////////////////////NOT IMPLEMENTED
 //removes and returns top of the TaskBuffer
 void TaskBuffer::push(Task* new_task)
 {
-	queue_buffer.push(new_task);
+	std::lock_guard<std::mutex> guard(mux_2);
+	queue_buffer.push(std::move(new_task));
 }
 //------------------------------------------------------
 
@@ -95,7 +105,9 @@ void TaskBuffer::push(Task* new_task)
 //removes and returns top of the TaskBuffer
 Task* TaskBuffer::pop()
 {
-	Task* top_task = queue_buffer.top();
+	std::lock_guard<std::mutex> guard(mux_2);
+	if (queue_buffer.empty()) throw empty_stack();
+	Task* const top_task = std::move(queue_buffer.top());
 	queue_buffer.pop();
 	return top_task;
 }
@@ -103,8 +115,9 @@ Task* TaskBuffer::pop()
 
 //------------------------------------------------------
 //checks if the TaskBuffer is empty
-bool TaskBuffer::isEmpty()
+bool TaskBuffer::isEmpty() const
 {
+	std::lock_guard<std::mutex> guard(mux_2);
 	return queue_buffer.empty(); 
 }
 //------------------------------------------------------

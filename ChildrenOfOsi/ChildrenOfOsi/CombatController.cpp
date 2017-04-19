@@ -292,6 +292,28 @@ void CombatController::party_leader_update(Soldier* sold1, int state) {
 	}
 }
 
+void CombatController::updateSoliderStatus()
+{
+	//iterate through the list of party
+	for (auto it = Party::partiesWorld.begin(); it != Party::partiesWorld.end(); it++) {
+		//for current party, get list of member as a vector of soldier*. Maybe here I am getting a copy of members
+		vector<Soldier *> soldiers = (*it)->getMembers();
+		for (auto itj = soldiers.begin(); itj != soldiers.end(); itj++) {
+			//for each soldier, check to see if its alive. If not, remove from party.
+			if ((*itj)->getHealth() <= 0) {
+				//cout << "RIGHT BEFORE REMOVING THE NPC WITH LESS THAN 0 HP ******** " << endl;
+				(*itj)->getParty()->removeSoldier(*itj, false);
+			}
+			if ((*itj)->getInCombat() == false) {
+				if ((*itj)->getType()== 6) break;
+				gameplay_functions->stop(*itj);
+			}
+		}
+
+
+	}
+}
+
 std::thread CombatController::threaded_update_soldier(Soldier* s, int n) {
 	return std::thread(&CombatController::update_soldier, this, s, n);
 }

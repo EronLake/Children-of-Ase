@@ -20,7 +20,7 @@ public:
 	void run();
 	void assignTask(Task* current_task);
 	void printBuffer();//////////////////////////NOT IMPLEMENTED
-	bool isEmpty();
+	bool isEmpty() const;
 	void empty();
 	void push(Task* new_task);
 	Task* pop();
