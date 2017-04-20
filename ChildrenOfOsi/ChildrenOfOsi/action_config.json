@@ -19,14 +19,28 @@
 			"desired_rel_val": 80
 		}
 	},
-	"succ_postconds": {
+	"doer_succ_postconds": {
 		"1" : {
 			"general_type": 0,
 			"rel_type": 6,
 			"utility": 5
 		}
 	},
-	"fail_postconds": {
+	"doer_fail_postconds": {
+		"1" : {
+			"general_type": 0,
+			"rel_type": 6,
+			"utility": 5
+		}
+	},
+	"receiver_succ_postconds": {
+		"1" : {
+			"general_type": 0,
+			"rel_type": 6,
+			"utility": 5
+		}
+	},
+	"receiver_fail_postconds": {
 		"1" : {
 			"general_type": 0,
 			"rel_type": 6,
@@ -49,14 +63,28 @@
     "greed": 0,
 	"req_preconds": {
 	},
-	"succ_postconds": {
+	"doer_succ_postconds": {
 		"1" : {
 			"general_type": 0,
 			"rel_type": 6,
 			"utility": 5
 		}
 	},
-	"fail_postconds": {
+	"doer_fail_postconds": {
+		"1" : {
+			"general_type": 0,
+			"rel_type": 6,
+			"utility": 5
+		}
+	},
+	"receiver_succ_postconds": {
+		"1" : {
+			"general_type": 0,
+			"rel_type": 6,
+			"utility": 5
+		}
+	},
+	"receiver_fail_postconds": {
 		"1" : {
 			"general_type": 0,
 			"rel_type": 6,
@@ -84,14 +112,28 @@
 			"desired_rel_val": 80
 		}
 	},
-	"succ_postconds": {
+	"doer_succ_postconds": {
 		"1" : {
 			"general_type": 0,
 			"rel_type": 6,
 			"utility": 5
 		}
 	},
-	"fail_postconds": {
+	"doer_fail_postconds": {
+		"1" : {
+			"general_type": 0,
+			"rel_type": 6,
+			"utility": 5
+		}
+	},
+	"receiver_succ_postconds": {
+		"1" : {
+			"general_type": 0,
+			"rel_type": 6,
+			"utility": 5
+		}
+	},
+	"receiver_fail_postconds": {
 		"1" : {
 			"general_type": 0,
 			"rel_type": 6,
@@ -119,14 +161,28 @@
 			"desired_rel_val": 80
 		}
 	},
-	"succ_postconds": {
+	"doer_succ_postconds": {
 		"1" : {
 			"general_type": 0,
 			"rel_type": 6,
 			"utility": 5
 		}
 	},
-	"fail_postconds": {
+	"doer_fail_postconds": {
+		"1" : {
+			"general_type": 0,
+			"rel_type": 6,
+			"utility": 5
+		}
+	},
+	"receiver_succ_postconds": {
+		"1" : {
+			"general_type": 0,
+			"rel_type": 6,
+			"utility": 5
+		}
+	},
+	"receiver_fail_postconds": {
 		"1" : {
 			"general_type": 0,
 			"rel_type": 6,
@@ -154,14 +210,28 @@
 			"desired_rel_val": 80
 		}
 	},
-	"succ_postconds": {
+	"doer_succ_postconds": {
 		"1" : {
 			"general_type": 0,
 			"rel_type": 6,
 			"utility": 5
 		}
 	},
-	"fail_postconds": {
+	"doer_fail_postconds": {
+		"1" : {
+			"general_type": 0,
+			"rel_type": 6,
+			"utility": 5
+		}
+	},
+	"receiver_succ_postconds": {
+		"1" : {
+			"general_type": 0,
+			"rel_type": 6,
+			"utility": 5
+		}
+	},
+	"receiver_fail_postconds": {
 		"1" : {
 			"general_type": 0,
 			"rel_type": 6,

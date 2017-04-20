@@ -199,7 +199,7 @@ bool ActionHelper::conversation(Action* action) {
 	DialogueController::dialogue.gen_dialog(point,action->getReceiver());
 
 	int success_level = 0;
-	for (auto it = action->succ_postconds.begin(); it != action->succ_postconds.end(); ++it) {
+	for (auto it = action->doer_succ_postconds.begin(); it != action->doer_succ_postconds.end(); ++it) {
 		if ((*it)->get_general_type() == Postcondition::REL) {
 			RelPost* con = dynamic_cast<RelPost*>((*it).get());
 			switch (con->get_rel_type()) {

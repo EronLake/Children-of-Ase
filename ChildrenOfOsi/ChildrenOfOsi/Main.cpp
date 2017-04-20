@@ -1482,11 +1482,11 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	RelPost* post2 = new RelPost(Postcondition::AFF, 15);
 
 	test_ally->req_preconds.push_back(std::make_shared<RelPrecon>(*prec));
-	test_ally->succ_postconds.push_back(std::make_shared<RelPost>(*post));
+	test_ally->doer_succ_postconds.push_back(std::make_shared<RelPost>(*post));
 
 	test_train->req_preconds.push_back(std::make_shared<RelPrecon>(*prec1));
-	test_train->succ_postconds.push_back(std::make_shared<RelPost>(*post1));
-	test_train->succ_postconds.push_back(std::make_shared<RelPost>(*post2));
+	test_train->doer_succ_postconds.push_back(std::make_shared<RelPost>(*post1));
+	test_train->doer_succ_postconds.push_back(std::make_shared<RelPost>(*post2));
 
 	ActionPool act_pool(Alex);
 	act_pool.macro.push_back(test_ally);
