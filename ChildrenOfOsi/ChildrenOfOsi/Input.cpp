@@ -834,7 +834,7 @@ void Input::InputCheck()
 			}
 			if (SHIFT && Q && count == 0) {
 				WorldObj* other = DialogueController::getOther();
-				if (other->getType() > 2) {
+				if (other->getType() > WorldObj::TYPE_NPC) {
 					Soldier* follower = dynamic_cast<Soldier*>(other);
 					Player* t = dynamic_cast<Player*>(player);
 					//cout << t->getParty()->getAlliance() << " = " << follower->getParty()->getAlliance() << endl;
@@ -855,7 +855,7 @@ void Input::InputCheck()
 
 				WorldObj* other = DialogueController::getOther();
 				//std:://cout << "HERO: " << other->getName() << std::endl;
-				if (other->getType() == 5) {
+				if (other->getType() == WorldObj::TYPE_HERO) {
 					std::cout << "Right type" << std::endl;
 					Hero* them = dynamic_cast<Hero*>(other);
 					Planner* planner = AIController::get_plan(them->name);

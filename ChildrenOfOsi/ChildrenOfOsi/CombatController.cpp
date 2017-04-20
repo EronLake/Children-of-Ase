@@ -305,7 +305,7 @@ void CombatController::updateSoliderStatus()
 				(*itj)->getParty()->removeSoldier(*itj, false);
 			}
 			if ((*itj)->getInCombat() == false) {
-				if ((*itj)->getType()== 6) break;
+				if ((*itj)->getType()== WorldObj::TYPE_PLAYER) break;
 				gameplay_functions->stop(*itj);
 			}
 		}

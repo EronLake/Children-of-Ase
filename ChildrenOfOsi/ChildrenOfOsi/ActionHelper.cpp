@@ -129,7 +129,7 @@ void ActionHelper::attack_helper(Soldier* attacker, Soldier* defender)
 	{
 		//kill the soldier/incapacitate the Hero if they run out of health
 		defender->defeat();
-		if (defender->getType()<5) {
+		if (defender->getType()<WorldObj::TYPE_HERO) {
 			defender->setLoc(defender->getVillage()->get_village_location());
 			defender->getVillage()->barracks->addToParty(defender, false);
 		}

@@ -56,7 +56,7 @@ void HUD::setTextures()
 void HUD::drawHUD(WorldObj* obj)
 {
 	Player* player = nullptr;
-	if (obj->getType() == 6) {
+	if (obj->getType() == WorldObj::TYPE_PLAYER) {
 		player = dynamic_cast<Player*>(obj);
 	}
 	//this->start = tex->getFrameWidth() * index;

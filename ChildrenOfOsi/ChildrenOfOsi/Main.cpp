@@ -633,7 +633,6 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	ogun.push_back(Containers::texture_table["bs_rightLungeTex"]);
 
 	/*gameplay_functions->add_texture("treeTex", 0, 0, 0);
->>>>>>> 0dc3b080c9c29e8251222a7a8f8f698fbdca7420
 	gameplay_functions->add_texture("treeTex1", 0, 0, 0);
 	gameplay_functions->add_texture("treeTex2", 0, 0, 0);
 	tBuffer->run();
@@ -1130,7 +1129,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	Alex->setName("Shango");
 	Alex->setTalkDist(20);
 
-	Alex->setDirection(2);
+	Alex->setDirection(WorldObj::DIRECTION_DOWN);
 	gameplay_functions->add_Attack(Alex->getKey(), Alex->body[0].getX(), Alex->body[0].getY(), true, 10);
 
 	tBuffer->run();
@@ -1510,7 +1509,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	YemojaPlanner->set_current_action(test_train);
 
 	//AiController->generate_end_state(YEMOJA, OYA);
-	AIController::init_plans();
+	//AIController::init_plans();
 
 
 	/*
@@ -1893,7 +1892,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 			//setting give as quest to false so that the excute runs
 			YemojaPlanner->give_as_quest = false;
 
-			AIController::execute();
+			//AIController::execute();
 			AI.join();
 			if ((1000 / fs) > (clock() - start_tick)) { //delta_ticks)
 				Sleep((1000 / fs) - (clock() - start_tick));

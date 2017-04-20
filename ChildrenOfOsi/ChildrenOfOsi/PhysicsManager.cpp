@@ -51,7 +51,7 @@ void PhysicsManager::execute_task(Task* current_task)
 {
 	int result;
 	NPC* obj;
-	if (current_task->objToUpdate->getType() >= 3) {
+	if (current_task->objToUpdate->getType() >= WorldObj::TYPE_SOLDIER) {
 		if (!(obj = CheckClass::isNPC(current_task->objToUpdate))) {
 			result = 1;
 			LOG("Error: No movable object");

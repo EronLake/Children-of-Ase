@@ -139,7 +139,7 @@ void DialogueController::otherConversationPoint(dialogue_point line)
 	replyString = point[1];
 
 	Hero* temp_hero = nullptr;
-	if (other->getType() >= 2) {
+	if (other->getType() >= WorldObj::TYPE_NPC) {
 		if (temp_hero = CheckClass::isHero(other))//added another equals was single equals before
 		{
 			perror("you cannot talk to this type of object");
@@ -315,7 +315,7 @@ void DialogueController::offerQuest_hack_() {
 	point[0] = "quest";
 
 	Hero* temp_hero;
-	if (other->getType() >= 2) {
+	if (other->getType() >= WorldObj::TYPE_NPC) {
 		if (temp_hero = CheckClass::isHero(other))
 		{
 			perror("you cannot talk to this type of object");
