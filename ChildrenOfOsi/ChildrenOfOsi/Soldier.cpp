@@ -263,10 +263,10 @@ Attack * Soldier::nextAttack()
   }
 }
 
-bool Soldier::isAllyOf(Soldier *s) { return this->party->isAllyOf(s); }
+/*bool Soldier::isAllyOf(Soldier *s) { return this->party->isAllyOf(s); }
 bool Soldier::isAllyOf(Party *p) { return this->party->isAllyOf(p); }
 bool Soldier::isEnemyOf(Soldier *s) { return this->party->isEnemyOf(s); }
-bool Soldier::isEnemyOf(Party *p) { return this->party->isEnemyOf(p); }
+bool Soldier::isEnemyOf(Party *p) { return this->party->isEnemyOf(p); }*/
 
 /**
  * Return whether the given world object is within the range of this soldier's

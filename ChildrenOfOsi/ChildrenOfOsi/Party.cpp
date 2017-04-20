@@ -58,34 +58,34 @@ Party::Party(Alliance *a, Soldier *leader, const vector<Soldier *>& members) : f
 /**
  * Returns whether the given soldier is an ally of this party.
  */
-bool Party::isAllyOf(Soldier *s)
+/*bool Party::isAllyOf(Soldier *s)
 {
   return this->faction == s->getParty()->getAlliance();
-}
+}*/
 
 /**
  * Returns whether the given party is an ally of this one.
  */
-bool Party::isAllyOf(Party *p)
+/*bool Party::isAllyOf(Party *p)
 {
   return this->faction == p->faction;
-}
+}*/
 
 /**
  * Returns whether the given soldier is an enemy of this party.
  */
-bool Party::isEnemyOf(Soldier *s)
+/*bool Party::isEnemyOf(Soldier *s)
 {
   return this->faction != s->getParty()->getAlliance();
-}
+}*/
 
 /**
  * Returns whether the given party is an eney of this one.
  */
-bool Party::isEnemyOf(Party *p)
+/*bool Party::isEnemyOf(Party *p)
 {
   return this->faction != p->faction;
-}
+}*/
 
 /**
  * Adds the given solider to this party, and sets them as the new leader if
@@ -240,11 +240,13 @@ void Party::setMode(int m)
 		for (auto& member : this->members) {
       member->setHold(false);
     }
+		default_def_rad();
   }
 	else if (mode == Party::MODE_ATTACK) {
 		for (auto& member : this->members) {
       member->setHold(false);
     }
+		default_def_rad();
   }
 	else if (mode == Party::MODE_DEFEND) {
 		for (auto& member : this->members) {
@@ -256,12 +258,14 @@ void Party::setMode(int m)
 			patrol_point = 0;
 			member->setHold(false);
     }
+		default_def_rad();
   }
 	else if (mode == Party::MODE_FLEE) {
 		for (auto& member : this->members) {
       member->setHold(false);
 	  member->setInCombat(false);
     }
+		default_def_rad();
   }
 }
 
@@ -295,4 +299,8 @@ float Party::dist_location_to_location(Vector2f n, Vector2f loc) {
 	float b = (n.getYloc() - loc.getYloc());
 	float c = sqrt(a*a + b*b);
 	return c;
+}
+
+void Party::default_def_rad() {
+	defend_rad = (members.size()*50);
 }

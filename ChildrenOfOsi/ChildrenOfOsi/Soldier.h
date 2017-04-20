@@ -41,10 +41,10 @@ class Soldier: public NPC
   int getMaxAse() { return this->maxAse; }
   int getAttackIndex(Attack* atk);
 
-  bool isAllyOf(Soldier *);
+ /* bool isAllyOf(Soldier *);
   bool isAllyOf(Party *);
   bool isEnemyOf(Soldier  *);
-  bool isEnemyOf(Party *);
+  bool isEnemyOf(Party *);*/
 
   std::size_t getAggroRange() { return this->aggroRange; }
   std::size_t getPursuitRange() { return this->pursuitRange; }

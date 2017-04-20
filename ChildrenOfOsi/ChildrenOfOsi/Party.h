@@ -33,10 +33,10 @@ class Party
   vector<Soldier *>& getMembers() { return members; }
   int getMode() const { return this->mode; }
 
-  bool isAllyOf(Soldier *);
+  /*bool isAllyOf(Soldier *);
   bool isAllyOf(Party *);
   bool isEnemyOf(Soldier *);
-  bool isEnemyOf(Party *);
+  bool isEnemyOf(Party *);*/
 
   void setAlliance(Alliance *a) { this->faction = a; }
   void setLeader(Soldier* s);
@@ -69,10 +69,15 @@ class Party
   void set_perm(bool p) { perm=p; };
   bool get_perm() { return perm; };
 
+  void set_def_rad(int r) { defend_rad = r; };
+  int get_def_rad() { return defend_rad; };
+  void default_def_rad();
+
   private:
 
   Vector2f home;
   Vector2f defend;
+  int defend_rad;
   vector<Vector2f> patrol_route;
   int patrol_point;
   Alliance* faction;
