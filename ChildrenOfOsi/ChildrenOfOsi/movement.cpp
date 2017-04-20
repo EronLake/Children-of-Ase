@@ -21,8 +21,17 @@ Movement::~Movement() {
 //use speed variable instead of .1
 
 int Movement::move_up(WorldObj* obj) {
-	//get list to check collision with
-	if (obj->sprite.getLock())return 0;
+  if(obj->sprite.getLock()) {
+    if(Soldier *sold = CheckClass::isSoldier(obj)) {
+      if(sold->sprite.getDying() && sold->sprite.getStart() == 0 && sold->sprite.getStop() == sold->sprite.getTexture().getFrameWidth()) {
+        sold->setLoc(sold->getVillage()->get_village_location());
+        sold->getVillage()->barracks->addToParty(sold, false);
+      }
+    }
+
+    return 0;
+  }
+
 	obj->setDirection(8);
 	objVec.clear();
 	objVec = tree->retrieve(objVec, obj);
@@ -73,7 +82,17 @@ int Movement::move_up(WorldObj* obj) {
 	return 0;
 }
 int Movement::move_up_left(WorldObj* obj) {
-	if (obj->sprite.getLock())return 0;
+  if(obj->sprite.getLock()) {
+    if(Soldier *sold = CheckClass::isSoldier(obj)) {
+      if(sold->sprite.getDying() && sold->sprite.getStart() == 0 && sold->sprite.getStop() == sold->sprite.getTexture().getFrameWidth()) {
+        sold->setLoc(sold->getVillage()->get_village_location());
+        sold->getVillage()->barracks->addToParty(sold, false);
+      }
+    }
+
+    return 0;
+  }
+
 	obj->setDirection(4);
 	//get list to check collision with
 	objVec.clear();
@@ -116,7 +135,17 @@ int Movement::move_up_left(WorldObj* obj) {
 	return 0;
 }
 int Movement::move_up_right(WorldObj* obj) {
-	if (obj->sprite.getLock())return 0;
+  if(obj->sprite.getLock()) {
+    if(Soldier *sold = CheckClass::isSoldier(obj)) {
+      if(sold->sprite.getDying() && sold->sprite.getStart() == 0 && sold->sprite.getStop() == sold->sprite.getTexture().getFrameWidth()) {
+        sold->setLoc(sold->getVillage()->get_village_location());
+        sold->getVillage()->barracks->addToParty(sold, false);
+      }
+    }
+
+    return 0;
+  }
+
 	obj->setDirection(6);
 	//get list to check collision with
 	objVec.clear();
@@ -159,7 +188,17 @@ int Movement::move_up_right(WorldObj* obj) {
 	return 0;
 }
 int Movement::move_down(WorldObj* obj) {
-	if (obj->sprite.getLock())return 0;
+  if(obj->sprite.getLock()) {
+    if(Soldier *sold = CheckClass::isSoldier(obj)) {
+      if(sold->sprite.getDying() && sold->sprite.getStart() == 0 && sold->sprite.getStop() == sold->sprite.getTexture().getFrameWidth()) {
+        sold->setLoc(sold->getVillage()->get_village_location());
+        sold->getVillage()->barracks->addToParty(sold, false);
+      }
+    }
+
+    return 0;
+  }
+
 	obj->setDirection(2);
 	//get list to check collision with
 	objVec.clear();
@@ -203,7 +242,17 @@ int Movement::move_down(WorldObj* obj) {
 	return 0;
 }
 int Movement::move_down_left(WorldObj* obj) {
-	if (obj->sprite.getLock())return 0;
+  if(obj->sprite.getLock()) {
+    if(Soldier *sold = CheckClass::isSoldier(obj)) {
+      if(sold->sprite.getDying() && sold->sprite.getStart() == 0 && sold->sprite.getStop() == sold->sprite.getTexture().getFrameWidth()) {
+        sold->setLoc(sold->getVillage()->get_village_location());
+        sold->getVillage()->barracks->addToParty(sold, false);
+      }
+    }
+
+    return 0;
+  }
+
 	obj->setDirection(4);
 	//get list to check collision with
 	objVec.clear();
@@ -247,7 +296,17 @@ int Movement::move_down_left(WorldObj* obj) {
 	return 0;
 }
 int Movement::move_down_right(WorldObj* obj) {
-	if (obj->sprite.getLock())return 0;
+  if(obj->sprite.getLock()) {
+    if(Soldier *sold = CheckClass::isSoldier(obj)) {
+      if(sold->sprite.getDying() && sold->sprite.getStart() == 0 && sold->sprite.getStop() == sold->sprite.getTexture().getFrameWidth()) {
+        sold->setLoc(sold->getVillage()->get_village_location());
+        sold->getVillage()->barracks->addToParty(sold, false);
+      }
+    }
+
+    return 0;
+  }
+
 	obj->setDirection(6);
 	//get list to check collision with
 	objVec.clear();
@@ -290,7 +349,17 @@ int Movement::move_down_right(WorldObj* obj) {
 	return 0;
 }
 int Movement::move_left(WorldObj* obj) {
-	if (obj->sprite.getLock())return 0;
+  if(obj->sprite.getLock()) {
+    if(Soldier *sold = CheckClass::isSoldier(obj)) {
+      if(sold->sprite.getDying() && sold->sprite.getStart() == 0 && sold->sprite.getStop() == sold->sprite.getTexture().getFrameWidth()) {
+        sold->setLoc(sold->getVillage()->get_village_location());
+        sold->getVillage()->barracks->addToParty(sold, false);
+      }
+    }
+
+    return 0;
+  }
+
 	obj->setDirection(4);
 	//get list to check collision with
 	objVec.clear();
@@ -334,7 +403,17 @@ int Movement::move_left(WorldObj* obj) {
 	return 0;
 }
 int Movement::move_right(WorldObj* obj) {
-	if (obj->sprite.getLock())return 0;
+  if(obj->sprite.getLock()) {
+    if(Soldier *sold = CheckClass::isSoldier(obj)) {
+      if(sold->sprite.getDying() && sold->sprite.getStart() == 0 && sold->sprite.getStop() == sold->sprite.getTexture().getFrameWidth()) {
+        sold->setLoc(sold->getVillage()->get_village_location());
+        sold->getVillage()->barracks->addToParty(sold, false);
+      }
+    }
+
+    return 0;
+  }
+
 	obj->setDirection(6);
 	//get list to check collision with
 	objVec.clear();
@@ -465,16 +544,26 @@ int Movement::attack(WorldObj* obj) {
 
 									if (!friendly) {
 										a->second->Hit(npc);
-										//cout << "THE TARGET'S HP IS NOW ******** " << npc->getHealth() << endl;
 										manager->createTaskForAudio("PlaySound", "SOUND", "SFX/hit.wav");
+                    LOG("LivingObj ::" << liv << ":: has been hit. LivingObj has " << liv->getHealth() << " health left.");
+
 										// If target is dead, remove from village and targeting
 										if (npc->getHealth() <= 0) {
 											if (Soldier *sold = CheckClass::isSoldier(liv)) {
-											// sold->playDeathAnimation();
-											npc->sprite.unlockAnimation();
-											manager->createTaskWithObj("Hurt", "DRAW", npc);
-											sold->setLoc(sold->getVillage()->get_village_location());
-											sold->getVillage()->barracks->addToParty(sold, false);
+                        if(sold->getDirection() == 8) // If facing up
+                          sold->sprite.setTexture(sold->sprite.death_up);
+                        else if(sold->getDirection() == 2) // If facing down
+                          sold->sprite.setTexture(sold->sprite.death_down);
+                        else if(sold->getDirection() == 4) // If facing left
+                          sold->sprite.setTexture(sold->sprite.death_left);
+                        else if(sold->getDirection() == 6) // If facing right
+                          sold->sprite.setTexture(sold->sprite.death_right);
+                        sold->sprite.lockIntoDeathAnimation();
+
+                        if(sold->sprite.getDying() && sold->sprite.getStart() == 0 && sold->sprite.getStop() == sold->sprite.getTexture().getFrameWidth()) {
+                          sold->setLoc(sold->getVillage()->get_village_location());
+                          sold->getVillage()->barracks->addToParty(sold, false);
+                        }
 											}
 										}
 									} else {
@@ -484,21 +573,30 @@ int Movement::attack(WorldObj* obj) {
 							} else {
 								a->second->Hit(liv);
 								manager->createTaskForAudio("PlaySound", "SOUND", "SFX/hit.wav");
-								//cout << "THE TARGET'S HP IS NOW ******** " << liv->getHealth() << endl;
+                LOG("LivingObj ::" << liv << ":: has been hit. LivingObj has " << liv->getHealth() << " health left.");
+
 								if (liv->getHealth() <= 0) {
 									if (Soldier *sold = CheckClass::isSoldier(liv)) {
-										// sold->playDeathAnimation();
-										liv->sprite.unlockAnimation();
-										manager->createTaskWithObj("Hurt", "DRAW", liv);
-										sold->setLoc(sold->getVillage()->get_village_location());
-										sold->getVillage()->barracks->addToParty(sold, false);
+                    if(sold->getDirection() == 8) // If facing up
+                      sold->sprite.setTexture(sold->sprite.death_up);
+                    else if(sold->getDirection() == 2) // If facing down
+                      sold->sprite.setTexture(sold->sprite.death_down);
+                    else if(sold->getDirection() == 4) // If facing left
+                      sold->sprite.setTexture(sold->sprite.death_left);
+                    else if(sold->getDirection() == 6) // If facing right
+                      sold->sprite.setTexture(sold->sprite.death_right);
+                    sold->sprite.lockIntoDeathAnimation();
+                    
+                    if(sold->sprite.getDying() && sold->sprite.getStart() == 0 && sold->sprite.getStop() == sold->sprite.getTexture().getFrameWidth()) {
+                      sold->setLoc(sold->getVillage()->get_village_location());
+                      sold->getVillage()->barracks->addToParty(sold, false);
+                    }
 									}
 								}
 								if (a->second->getDestroy())a->second->setDuration(0);
 								liv->sprite.unlockAnimation();
 								manager->createTaskWithObj("Hurt", "DRAW", liv);
 							}
-							//std:://////cout << liv->getName() << "'s health is now " << liv->getHealth() << std::endl;
 						}
 					}
 				}

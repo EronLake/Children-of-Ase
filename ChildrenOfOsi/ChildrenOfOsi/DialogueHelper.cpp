@@ -451,11 +451,11 @@ int DialogueHelper::calc_text_choice_from_relationship(Hero* hero, std::pair<int
 	//base the npc reply on their relationship with the topic of the
 	//conversation(we don't use the stuff in the below if statement
 	//since we are using dummy vectors)
-	if (hero->name != topic.first &&
+	/*if (hero->name != topic.first &&
 		topic.first != 1) {
 		rel = hero->rel;
 		npc_relationship = rel[topic.first];//get npc's relationship with the topic of the conversation
-	}
+	}*/
 
 	/*Using dummy vectors for personalities and relationships for now 
 	but will need to eventually use the relationship values from the 

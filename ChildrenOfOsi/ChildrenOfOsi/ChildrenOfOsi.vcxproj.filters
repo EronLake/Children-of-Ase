@@ -467,6 +467,7 @@
     <ClInclude Include="ThreadManager.h" />
     <ClInclude Include="QuestManager.h" />
     <ClInclude Include="ConversationLogObj.h" />
+    <ClInclude Include="GameState.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="audio_test.txt">
