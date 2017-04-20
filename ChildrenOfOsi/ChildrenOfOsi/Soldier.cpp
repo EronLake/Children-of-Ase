@@ -194,8 +194,23 @@ void Soldier::defeat()
 //this removes the soldier from the party and sets its party to null
 void Soldier::defeat()
 {
-  this->getParty()->removeSoldier(this, false);
-  this->setParty(NULL);
+	if (!killable) {
+		incapacitated = true;
+	}
+	else {
+		kill();
+	}
+}
+
+void Soldier::capacitate()
+{
+	incapacitated = false;
+}
+
+void Soldier::kill()
+{
+	this->getParty()->removeSoldier(this, false);
+	Party::grave->addToParty(this,false);
 }
 
 /**

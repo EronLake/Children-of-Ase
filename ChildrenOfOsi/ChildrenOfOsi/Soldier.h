@@ -28,6 +28,7 @@ class Soldier: public NPC
   bool getEvade() { return evade; };
   bool getHold() { return holdPos; };
   bool getPatrol() { return patrol; };
+  bool is_killable() { return killable; };
   bool getSwingLeft() { return swingLeft; };
   bool getCombo();
 
@@ -57,6 +58,7 @@ class Soldier: public NPC
   void setEvade(bool e) { this->evade = e; };
   void setHold(bool h) { this->holdPos = h; };
   void setPatrol(bool p) { this->patrol = p; };
+  void set_killable(bool k) { this->killable = k; };
   void setAggroRange(std::size_t range) { this->aggroRange = min(range, this->pursuitRange); }
   void setPursuitRange(std::size_t range) { this->pursuitRange = max(range, this->aggroRange); }
 
@@ -76,8 +78,6 @@ class Soldier: public NPC
   void updateCD();
   void resetCD();
   void resetCD(int c);
-  
-  virtual void defeat();
 
   std::string getKey() { return key; };
   std::string getAtKey() { return atkey = "Soldier" + std::to_string(getID()) + "_" + std::to_string(attackTypes.size()) + "_" + std::to_string(instances); };
@@ -101,6 +101,10 @@ class Soldier: public NPC
   void set_action_destination(Vector2f* v) { action_destination=v; };
   Vector2f* get_action_destination() { return action_destination; };
 
+  virtual void defeat();
+  virtual void capacitate();
+  virtual void kill();
+
   private:
 
   static constexpr std::size_t DEFAULT_AGGRO_RANGE = 200;
@@ -113,6 +117,8 @@ class Soldier: public NPC
   bool evade;
   bool holdPos;
   bool patrol;
+  bool killable;
+  bool incapacitated;
   std::size_t aggroRange;
   std::size_t pursuitRange;
 

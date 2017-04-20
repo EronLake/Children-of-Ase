@@ -1567,6 +1567,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	// gameplay_functions->get_path(staticRec); //Generate the waypoints to the destination
 	staticRec->setMode(WANDER);
 	short M = GetKeyState('M') >> 15;
+	Party::grave->set_perm(true);
 	Party* party = new Party();
 	Party* party2 = new Party();
 	Party* party3 = new Party();

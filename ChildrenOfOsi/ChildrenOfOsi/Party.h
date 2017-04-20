@@ -26,6 +26,7 @@ class Party
   Party(Alliance *a, Soldier *leader, const vector<Soldier *>& members);
   ~Party() = default;
   static vector<Party*> partiesWorld;
+  static Party* grave;
 
   Alliance * getAlliance() const { return this->faction; }
   Soldier * getLeader() const { return this->leader; }
@@ -65,6 +66,9 @@ class Party
   void addToCurrentEnemies(Party* p) { currentEnemies.push_back(p); };
   vector<Party*> getCurrentEnemies() { return currentEnemies; };
 
+  void set_perm(bool p) { perm=p; };
+  bool get_perm() { return perm; };
+
   private:
 
   Vector2f home;
@@ -78,5 +82,6 @@ class Party
   LivingObj *target;
   int mode;
   vector<Party*> currentEnemies;
+  bool perm;
 };
 
