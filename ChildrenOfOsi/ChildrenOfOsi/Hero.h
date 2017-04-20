@@ -35,7 +35,7 @@ public:
 	Party* cur_party;
 	//void defeat();
 	//void capacitate();
-	void kill();
+	//void kill();
 
 	//void addRelationship(int hero);
 	void setPersonality(int a, int k, int h, int p, int r, int e, int g);

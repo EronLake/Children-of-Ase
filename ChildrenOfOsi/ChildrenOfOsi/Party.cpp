@@ -304,3 +304,22 @@ float Party::dist_location_to_location(Vector2f n, Vector2f loc) {
 void Party::default_def_rad() {
 	defend_rad = (members.size()*50);
 }
+
+void Party::down_member(Soldier* s) {
+	for (auto i = members.begin(); i != members.end(); ++i) {
+		if (*i == s) {
+			downed_members.push_back(s);
+			if (leader == s){
+				if (mode != MODE_DEFEND) {
+					set_defend(s->getLoc());
+					setMode(MODE_DEFEND);
+				}
+			}
+			break;
+		}
+	}
+}
+
+void Party::up_member(Soldier* s) {
+	downed_members.erase(std::remove(downed_members.begin(), downed_members.end(), s), downed_members.end());
+}

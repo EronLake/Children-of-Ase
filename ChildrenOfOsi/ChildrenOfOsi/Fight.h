@@ -19,12 +19,16 @@ public:
 	void add_to_attackers(Party* p);
 	void add_to_defenders(Party* p);
 	void update_fight();
+	bool check_for_winner();
+	bool is_over() { return over; };
 	static vector<Fight*> fights_world;
 	static void update_all_fights();
 	static void bring_out_your_dead();
+	Alliance* winner;
 private:
 	vector<vector<Party*>> attackers; //attack or defense only determines ability to flee, not sides
 	vector<vector<Party*>> defenders;
 	vector<Party*> downed;
+	bool over;
 };
 

@@ -198,6 +198,7 @@ void Soldier::defeat()
 {
 	if (!killable) {
 		incapacitated = true;
+		this->getParty()->down_member(this);
 	}
 	else {
 		kill();

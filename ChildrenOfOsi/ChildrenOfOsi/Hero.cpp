@@ -121,11 +121,11 @@ Memory* Hero::find_mem(std::string mem_name)
 }*/
 
 //overloads a soldier function
-void Hero::kill()
+/*void Hero::kill()
 {
 	this->getParty()->removeSoldier(this,false);
 	this->setParty(NULL);
-}
+}*/
 
 vector<pair<Action*, int>> Hero::get_quests() {
 	vector<pair<Action*, int>> tmp;

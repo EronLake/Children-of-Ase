@@ -8,6 +8,7 @@
 #include "Soldier.h"
 
 class Alliance;
+class Fight;
 
 class Party
 {
@@ -73,6 +74,13 @@ class Party
   int get_def_rad() { return defend_rad; };
   void default_def_rad();
 
+  vector<Soldier*> get_down_members() { return downed_members; };
+  void down_member(Soldier* s);
+  void up_member(Soldier* s);
+
+  void set_fight(Fight* f) { curr_fight = f; };
+  Fight* get_fight() { return curr_fight; };
+
   private:
 
   Vector2f home;
@@ -82,11 +90,13 @@ class Party
   int patrol_point;
   Alliance* faction;
   vector<Soldier *> members;
+  vector<Soldier *> downed_members;
   Soldier *leader;
   Village* owner;
   LivingObj *target;
   int mode;
   vector<Party*> currentEnemies;
   bool perm;
+  Fight* curr_fight;
 };
 
