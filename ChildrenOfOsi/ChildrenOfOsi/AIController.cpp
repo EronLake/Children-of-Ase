@@ -267,8 +267,8 @@ bool AIController::give_as_quest(Action* action) {
 	Hero* me = action->getOwner();
 	Hero* them = action->getReceiver();
 	Action* curr_goal = new Action();// hero_planners[me->name]->get_current_end_state();
-	for (int postcond_key = 0; postcond_key < action->succ_postconds.size(); postcond_key++) {
-		Postcondition* post = action->succ_postconds[postcond_key].get();
+	for (int postcond_key = 0; postcond_key < action->doer_succ_postconds.size(); postcond_key++) {
+		Postcondition* post = action->doer_succ_postconds[postcond_key].get();
 		RelPost* rel_post;
 		if (rel_post = dynamic_cast<RelPost*>(post)) //Only execute if dynamic cast succeeds 
 		{

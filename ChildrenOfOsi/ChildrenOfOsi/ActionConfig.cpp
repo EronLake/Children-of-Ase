@@ -121,8 +121,10 @@ void ActionConfig::import_conditions(Json::Value::iterator itr, std::string name
 		}
 	}
 
-	import_post_conditions(itr, name, "succ_postconds");
-	import_post_conditions(itr, name, "fail_postconds");
+	import_post_conditions(itr, name, "doer_succ_postconds");
+	import_post_conditions(itr, name, "doer_fail_postconds");
+	import_post_conditions(itr, name, "receiver_succ_postconds");
+	import_post_conditions(itr, name, "receiver_fail_postconds");
 	
 	/*
 	Containers::action_table[name]->op_preconds.push_back();
@@ -135,13 +137,21 @@ void ActionConfig::import_post_conditions(Json::Value::iterator itr, std::string
 
 	//assigns the postconditions to the appropieate map 
 	vector<std::shared_ptr<Postcondition>>* postconds;
-	if (which_post == "succ_postconds")
+	if (which_post == "doer_succ_postconds")
 	{
-		postconds = &Containers::action_table[name]->succ_postconds;
+		postconds = &Containers::action_table[name]->doer_succ_postconds;
 	} 
-	else //if (which_post == "fail_postconds")
+	else if (which_post == "doer_fail_postconds")
 	{
-		postconds = &Containers::action_table[name]->fail_postconds;
+		postconds = &Containers::action_table[name]->doer_fail_postconds;
+	}
+	else if (which_post == "receiver_succ_postconds")
+	{
+		postconds = &Containers::action_table[name]->receiver_succ_postconds;
+	}
+	else //if (which_post == "receiver_fail_postconds")
+	{
+		postconds = &Containers::action_table[name]->receiver_fail_postconds;
 	}
 
 
