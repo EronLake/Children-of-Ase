@@ -1377,10 +1377,10 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 		blueSoldiers[i]->sprite.hurt_left = Containers::texture_table["bs_leftHurtTex"];
 		blueSoldiers[i]->sprite.hurt_right = Containers::texture_table["bs_rightHurtTex"];
 
-		blueSoldiers[i]->sprite.death_up = Containers::texture_table["bs_upDeathTex"];
-		blueSoldiers[i]->sprite.death_down = Containers::texture_table["bs_downDeathTex"];
-		blueSoldiers[i]->sprite.death_left = Containers::texture_table["bs_leftDeathTex"];
-		blueSoldiers[i]->sprite.death_right = Containers::texture_table["bs_rightDeathTex"];
+		blueSoldiers[i]->sprite.death_up = Containers::texture_table["bs_upHurtTex"];
+		blueSoldiers[i]->sprite.death_down = Containers::texture_table["bs_downHurtTex"];
+		blueSoldiers[i]->sprite.death_left = Containers::texture_table["bs_leftHurtTex"];
+		blueSoldiers[i]->sprite.death_right = Containers::texture_table["bs_rightHurtTex"];
 
 		blueSoldiers[i]->offsetBody(0, 60, 60, 75, 50);
 		blueSoldiers[i]->setInteractable(true);
@@ -1397,7 +1397,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 		blueSoldiers[i]->melee->setHeight(50);
 		blueSoldiers[i]->set_creator_of_melee();
 		blueSoldiers[i]->melee->setStaminaCost(90);
-		blueSoldiers[i]->setHealth(100);
+		blueSoldiers[i]->setHealth(20);
 		blueSoldiers[i]->melee->setStaminaCost(120);
 		blueSoldiers[i]->setMaxStamina(300);
 		blueSoldiers[i]->addAttackType(rockThrow);
@@ -1851,8 +1851,9 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 			}*/
 
 			std::thread AI([=]() {
-				combatControl->updateSoliderStatus();
 				combatControl->checkParties();
+				Fight::bring_out_your_dead();
+				Fight::update_all_fights();
 				for (int i = 0; i < soldiers_list.size(); i++) {
 					combatControl->update_soldier(soldiers_list[i], state);
 				}

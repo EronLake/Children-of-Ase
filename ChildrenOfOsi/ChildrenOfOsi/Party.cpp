@@ -323,3 +323,11 @@ void Party::down_member(Soldier* s) {
 void Party::up_member(Soldier* s) {
 	downed_members.erase(std::remove(downed_members.begin(), downed_members.end(), s), downed_members.end());
 }
+
+void Party::set_in_combat(bool b) {
+	if (!b)currentEnemies.clear();
+	for (auto it = members.begin(); it != members.end(); ++it) {
+		(*it)->setInCombat(b);
+		if (!b)(*it)->setCurrentEnemy(nullptr);
+	}
+}

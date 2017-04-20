@@ -24,7 +24,9 @@ public:
 	static vector<Fight*> fights_world;
 	static void update_all_fights();
 	static void bring_out_your_dead();
-	Alliance* winner;
+	void end_combat();
+	void find_targets();
+
 private:
 	vector<vector<Party*>> attackers; //attack or defense only determines ability to flee, not sides
 	vector<vector<Party*>> defenders;

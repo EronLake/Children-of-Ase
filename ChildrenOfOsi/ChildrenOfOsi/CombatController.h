@@ -1,12 +1,8 @@
 #pragma once
-#include "Player.h"
-#include "Party.h"
 #include "Attack.h"
 #include "ChildrenOfOsi.h"
 #include "Containers.h"
-#include "Village.h"
-#include "War.h"
-#include "Alliance.h"
+#include "Fight.h"
 
 class CombatController
 {

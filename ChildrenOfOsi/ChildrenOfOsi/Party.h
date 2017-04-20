@@ -31,7 +31,7 @@ class Party
 
   Alliance * getAlliance() const { return this->faction; }
   Soldier * getLeader() const { return this->leader; }
-  vector<Soldier *>& getMembers() { return members; }
+  vector<Soldier *> getMembers() { return members; }
   int getMode() const { return this->mode; }
 
   /*bool isAllyOf(Soldier *);
@@ -80,6 +80,8 @@ class Party
 
   void set_fight(Fight* f) { curr_fight = f; };
   Fight* get_fight() { return curr_fight; };
+
+  void set_in_combat(bool b);
 
   private:
 

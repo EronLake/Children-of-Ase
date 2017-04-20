@@ -16,6 +16,10 @@ Fight::Fight(Party* a, Party* b)
 	defenders.push_back({b});
 	a->set_fight(this);
 	b->set_fight(this);
+	a->set_in_combat(true);
+	b->set_in_combat(true);
+	a->addToCurrentEnemies(b);
+	b->addToCurrentEnemies(a);
 	fights_world.push_back(this);
 }
 
@@ -97,6 +101,7 @@ void Fight::add_party(Party* p, bool atk) {
 		}
 	}
 	p->set_fight(this);
+	p->set_in_combat(true);
 }
 
 void Fight::add_to_attackers(Party* p) {
@@ -115,6 +120,7 @@ void Fight::add_to_attackers(Party* p) {
 	}
 	if (!added)attackers.push_back({p});
 	p->set_fight(this);
+	p->set_in_combat(true);
 }
 
 void Fight::add_to_defenders(Party* p) {
@@ -133,6 +139,7 @@ void Fight::add_to_defenders(Party* p) {
 	}
 	if (!added)defenders.push_back({ p });
 	p->set_fight(this);
+	p->set_in_combat(true);
 }
 
 void Fight::update_fight() {
@@ -196,7 +203,13 @@ bool Fight::check_for_winner() {
 				}
 			}
 		}
-		return (alliances.size()<=1);
+		if (alliances.size() <= 1) {
+			end_combat();
+			return true;
+		}
+		else {
+			return false;
+		}
 	}
 	else {
 		return false;
@@ -204,13 +217,54 @@ bool Fight::check_for_winner() {
 }
 
 void Fight::update_all_fights() {
-	for (auto it = fights_world.begin(); it != fights_world.end();) {
+	for (auto it = fights_world.begin(); it != fights_world.end();++it) {
 		if (!(*it)->is_over())(*it)->update_fight();
 	}
 }
 
 void Fight::bring_out_your_dead() {
-	for (auto it = Party::grave->getMembers().begin(); it != Party::grave->getMembers().end();) {
-
+	vector<Soldier*> zombies = Party::grave->getMembers();
+	for (auto it = zombies.begin(); it != zombies.end(); ++it) {
+		if (!(*it)->sprite.getLock()) {
+			(*it)->setLoc((*it)->getVillage()->get_village_location());
+			Party::grave->removeSoldier((*it),false);
+			(*it)->getVillage()->barracks->addToParty((*it),false);
+			(*it)->setHealth((*it)->get_max_health());
+			(*it)->setInCombat(false);
+		}
 	}
+}
+
+void Fight::end_combat() {
+	for (auto it = attackers.begin(); it != attackers.end(); ++it) {
+		for (auto itor = (*it).begin(); itor != (*it).end(); ++itor) {
+			(*itor)->set_in_combat(false);
+		}
+	}
+	for (auto it = defenders.begin(); it != defenders.end(); ++it) {
+		for (auto itor = (*it).begin(); itor != (*it).end(); ++itor) {
+			(*itor)->set_in_combat(false);
+		}
+	}
+	for (auto itor = downed.begin(); itor != downed.end(); ++itor) {
+		(*itor)->set_in_combat(false);
+	}
+}
+
+void Fight::find_targets() {
+	/*unordered_map<Alliance*, int> alliances;
+	for (auto it = attackers.begin(); it != attackers.end(); ++it) {
+		for (auto itor = (*it).begin(); itor != (*it).end(); ++itor) {
+			if ((*itor)->getMembers().size() > 0) {
+				alliances[(*itor)->getLeader()->getVillage()->get_alliance()] = 1;
+			}
+		}
+	}
+	for (auto it = defenders.begin(); it != defenders.end(); ++it) {
+		for (auto itor = (*it).begin(); itor != (*it).end(); ++itor) {
+			if ((*itor)->getMembers().size() > 0) {
+				alliances[(*itor)->getLeader()->getVillage()->get_alliance()] = 1;
+			}
+		}
+	}*/
 }

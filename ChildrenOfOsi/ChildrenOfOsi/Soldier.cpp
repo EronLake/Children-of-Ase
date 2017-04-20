@@ -22,6 +22,7 @@ cdTime(0), swingLeft(true)
   currentLeader = nullptr;
   party = nullptr;
   action_destination= nullptr;
+  killable = true;
 }
 
 Soldier::Soldier(Vector2f p_topLeft, float p_width, float p_height): NPC(p_topLeft, p_width, p_height),
@@ -39,6 +40,7 @@ cdTime(0), swingLeft(true)
   currentLeader = nullptr;
   party = nullptr;
   action_destination = nullptr;
+  killable = true;
 }
 
 void Soldier::addAttackType(Attack* a)
