@@ -14,7 +14,7 @@ public:
 	~DialogueConfig();
 
 	static void import_config(ChildrenOfOsi* gameplay_func, TaskBuffer* tBuffer);
-	static void set_conv_point(ChildrenOfOsi* gameplay_func, TaskBuffer* tBuffer, std::string topic, std::string temp, std::string name, std::vector<int> personality_vals,std::string corresponding_conv_point, std::vector<int> relationship_vals);
+	static void set_conv_point(ChildrenOfOsi* gameplay_func, TaskBuffer* tBuffer, std::string icon, std::string temp, std::string name, std::vector<int> personality_vals,std::string corresponding_conv_point, std::vector<int> relationship_vals, std::string topic);
 
 };
 
