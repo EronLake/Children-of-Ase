@@ -136,7 +136,7 @@ void CombatController::update_soldier(Soldier* sold1, int state) {
 	}
 	else {
 		///check if the soldier is supposed to hold position and if they are more than 500 away from the point
-		if ((sold1->getHold()) && (dist_soldier_to_location(sold1, sold1->getParty()->get_defend()) > 400)) {
+		if ((sold1->getHold()) && (dist_soldier_to_location(sold1, sold1->getParty()->get_defend()) > sold1->getParty()->get_def_rad())) {
 			sold1->destination = sold1->getParty()->get_defend();
 			sold1->waypoint = sold1->getParty()->get_defend();
 		//	std::lock_guard<std::mutex> guard(mux);
@@ -182,12 +182,14 @@ void CombatController::move_to_target(Soldier* sold1, int state) {
 	if (sold1->destination != Vector2f(0, 0)) { //Hero has a destination
 		if (sold1->waypoint != Vector2f(0, 0) && state == 0) { //Hero has a waypoint to the desination, and not in dialog
 			if (sold1->getHold()) {//getMode() == Party::MODE_DEFEND) {
-				if (dist(sold1->destination, sold1->getParty()->get_defend()) > 500) {
-			//		//std:://cout << "leader too far" << std::endl;
-					sold1->waypoint = sold1->getParty()->get_home();
-					sold1->destination = sold1->getParty()->get_home();
-					gameplay_functions->stop(sold1);
-					return;
+				if (!sold1->getInCombat()) {
+					if (dist(sold1->destination, sold1->getParty()->get_defend()) > sold1->getParty()->get_def_rad()) {
+						//		//std:://cout << "leader too far" << std::endl;
+						sold1->waypoint = sold1->getParty()->get_home();
+						sold1->destination = sold1->getParty()->get_home();
+						gameplay_functions->stop(sold1);
+						return;
+					}
 				}
 			}
 			gameplay_functions->move_toward(sold1); //Take a step towards the current waypoint
@@ -248,6 +250,7 @@ void CombatController::checkParties() {
 									(*b)->get_fight()->add_to_attackers((*a));
 								} else {
 									Fight* fight = new Fight();
+									fight->set_loc((*b)->getLeader()->getLoc());
 									fight->add_to_attackers((*a));
 									fight->add_to_attackers((*b));
 								}
@@ -257,6 +260,8 @@ void CombatController::checkParties() {
 				}
 			}
 		}
+		Fight::bring_out_your_dead();
+		Fight::update_all_fights();
 	}
 }
 

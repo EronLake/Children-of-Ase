@@ -326,6 +326,7 @@ void Party::up_member(Soldier* s) {
 
 void Party::set_in_combat(bool b) {
 	if (!b)currentEnemies.clear();
+	if (!b)curr_fight=nullptr;
 	for (auto it = members.begin(); it != members.end(); ++it) {
 		(*it)->setInCombat(b);
 		if (!b)(*it)->setCurrentEnemy(nullptr);

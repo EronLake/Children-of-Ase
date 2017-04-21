@@ -1852,8 +1852,6 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 
 			std::thread AI([=]() {
 				combatControl->checkParties();
-				Fight::bring_out_your_dead();
-				Fight::update_all_fights();
 				for (int i = 0; i < soldiers_list.size(); i++) {
 					combatControl->update_soldier(soldiers_list[i], state);
 				}
