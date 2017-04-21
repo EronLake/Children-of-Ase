@@ -24,11 +24,11 @@ public:
 
 	//functions where heroes make dialogue choices
 	dialogue_point choose_conv_pt(std::vector<ConversationLogObj*> conversation_log_obj_pointer_vec);
-	dialogue_point choose_reply_pt(std::string point,int optn_inx);
+	dialogue_point choose_reply_pt(std::string point,int optn_inx, std::vector<ConversationLogObj*> conversation_log_obj_pointer_vec);
 
 	std::vector<std::vector<dialogue_point>> get_possible_conv_pts();
 	std::vector<dialogue_point> get_possible_reply_pts(std::string point, int opts_inx);
-
+	std::vector<std::vector<dialogue_point>>& get_possible_conv_pts_ref();
 	std::string gen_dialog(dialogue_point diog_pt, Hero* hero);
 	std::string gen_reply(dialogue_point diog_pt, Hero* hero, int relationship_int, int relationship_int_shango);
 
@@ -39,7 +39,7 @@ public:
 	int personality_appeal(ConversationPoint* point, vector<int> personality);
 	int hero_name_to_int(std::string hero);
 	int calc_text_choice_from_relationship(Hero* hero, std::pair<int, Memory*> topic);
-
+	std::string int_to_hero_name(int hero);
 };
 
 
