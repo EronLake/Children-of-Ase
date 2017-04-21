@@ -52,7 +52,7 @@ int Fight::get_radius() {
 }
 
 void Fight::update_radius() {
-	int rad = get_radius();
+	rad = get_radius();
 	for (auto it = attackers.begin(); it != attackers.end(); ++it) {
 		for (auto itor = (*it).begin(); itor != (*it).end(); ++itor) {
 			(*itor)->set_defend(loc);
@@ -174,6 +174,13 @@ void Fight::update_fight() {
 				itor = (*it).erase(itor);
 				update_radius();
 				party_erased=true;
+			}else {
+				check_should_flee((*itor));
+				if ((*itor)->getMode() == Party::MODE_FLEE) {
+					itor = (*it).erase(itor);
+					update_radius();
+					party_erased = true;
+				}
 			}
 			if (!party_erased)++itor;
 		}
@@ -312,6 +319,28 @@ void Fight::help_find_targets(unordered_map<Alliance*, vector<Party*>> alliances
 					(*itor)->addToCurrentEnemies(enmys_party[j]);
 				}
 			}
+		}
+	}
+}
+
+void Fight::check_should_flee(Party* p) {
+	if (p->getLeader()->getType() == WorldObj::TYPE_PLAYER) {
+		if (Party::dist_location_to_location(p->getLeader()->getLoc(), loc) > (rad * 3)) {
+			p->setMode(Party::MODE_FLEE);
+		}
+	}
+	else {
+		vector<Party*> enemies = p->getCurrentEnemies();
+		int total_enemies = 0;
+		int total_sold = rad / 100;
+		for (auto it = enemies.begin(); it != enemies.end(); ++it) {
+			total_enemies += (*it)->getMembers().size();
+		}
+		int tmp= ((attackers.size() + defenders.size() - 1) / 2);
+		if (tmp < 1)tmp = 1;
+		total_enemies = total_enemies / tmp;
+		if (total_enemies > ((total_sold*2)/3)) {
+			p->setMode(Party::MODE_FLEE);
 		}
 	}
 }

@@ -292,9 +292,10 @@ void CombatController::party_leader_update(Soldier* sold1, int state) {
 		sold1->waypoint = home;
 		move_to_target(sold1, state);
 		if (sold1->destination == Vector2f(0, 0)) {
-			sold1->getParty()->setMode(Party::MODE_IDLE);
+			sold1->getParty()->setMode(Party::MODE_FLEE);
 			if (home == sold1->getParty()->get_village()->get_village_location()) {
-				sold1->getParty()->get_village()->barracks->add_party_to_party(sold1->getParty());
+				sold1->getParty()->removeSoldier(sold1,false);
+				sold1->getParty()->get_village()->barracks->addToParty(sold1,false);
 			}
 			////std:://cout << sold1->getID() << " is idling now" << std::endl;
 		}

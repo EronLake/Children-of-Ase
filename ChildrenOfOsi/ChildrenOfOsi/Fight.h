@@ -28,6 +28,7 @@ public:
 	void help_find_targets(unordered_map<Alliance*,vector<Party*>> m);
 	void set_loc(Vector2f v) { loc = v; };
 	Vector2f get_loc() { return loc; };
+	void check_should_flee(Party* p);
 
 private:
 	Vector2f loc;
@@ -35,5 +36,6 @@ private:
 	vector<vector<Party*>> defenders;
 	vector<Party*> downed;
 	bool over;
+	int rad;
 };
 
