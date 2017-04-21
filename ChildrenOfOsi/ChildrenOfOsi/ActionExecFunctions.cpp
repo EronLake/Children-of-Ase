@@ -42,7 +42,7 @@ void ActionExecFunctions::execute_temp_allign(Action* fight_bandits) {
 
 
 void ActionExecFunctions::execute_train(Action* train) {
-	cout << "++++++++++++++++PLEASE BE FIGHTING++++++++++++++++" << endl;
+	//cout << "++++++++++++++++PLEASE BE FIGHTING++++++++++++++++" << endl;
 	
 	switch (train->checkpoint) {
 	case 0: //Pick training location, create memory, increment checkpoint
@@ -54,7 +54,7 @@ void ActionExecFunctions::execute_train(Action* train) {
 		train->checkpoint++;
 		break;
 	case 1: //If destination is reached, start a timer and move to next checkpoint
-		std::cout << "---------------------CASE 1---------------------" << endl;
+	//	std::cout << "---------------------CASE 1---------------------" << endl;
 
 		//THIS IS NOT WORKING BECAUSE THE HEROES DESTINATION KEEPS GETTING RESET BY SOME OTHER CODE
 

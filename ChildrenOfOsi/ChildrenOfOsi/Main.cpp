@@ -1065,7 +1065,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	staticRec->melee->sprite.setTexture(Containers::texture_table["border"]);
 
 	vector<Soldier*> silverSoldier;
-	int silverNum = 4;
+	int silverNum = 30;
 	for (int i = 0; i < silverNum; i++) {
 		silverSoldier.push_back(new Soldier(6745, 10355+(i*20), false));
 		gameplay_functions->add_Attack(silverSoldier[i]->getKey(), silverSoldier[i]->body[0].getX(), silverSoldier[i]->body[0].getY(), true, 10);
@@ -1297,10 +1297,10 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	*/
 	recVec.push_back(staticRec);
 	for (int i = 0; i < silverSoldier.size();i++) {
-		recVec.push_back(silverSoldier[i]);
+		//recVec.push_back(silverSoldier[i]);
 	}
 	for (int i = 0; i < blueSoldiers.size(); i++) {
-		recVec.push_back(blueSoldiers[i]);
+		//recVec.push_back(blueSoldiers[i]);
 	}
 	
 /*	VisibilityGraph graph{ {
@@ -1396,9 +1396,11 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	int state = 0;
 	bool start = true;
 	float shouldExit = -3000;
+	int last_avg = 0;
+	int total_fps = 0;
 
 	vector<Soldier*> soldiers_list;
-	soldiers_list.push_back(staticRec);
+//	soldiers_list.push_back(staticRec);
 	for (int i = 0; i < blueSoldiers.size(); i++) {
 		soldiers_list.push_back(blueSoldiers[i]);
 	}
@@ -1641,7 +1643,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 		//setting give as quest to false so that the excute runs
 		YemojaPlanner->give_as_quest = false;
 
-		AIController::execute();
+		//AIController::execute();
 
 		if ((1000 / fs) > (clock() - start_tick)) { //delta_ticks) {www
 			Sleep((1000 / fs) - (clock() - start_tick));
@@ -1651,9 +1653,11 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 			fps = CLOCKS_PER_SEC / delta_ticks;
 		}
 		HUD::FPS = fps;
+		total_fps += fps;
 			//cout << "FPS: " << fps << endl;
 
 		frame_count++;
+		HUD::AVG = total_fps / frame_count;
 	}
 	GameWindow::terminate();
 }

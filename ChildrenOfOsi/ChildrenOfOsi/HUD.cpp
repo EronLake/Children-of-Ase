@@ -3,6 +3,7 @@
 
 bool HUD::show_active_quests=false;
 int HUD::FPS=0;
+int HUD::AVG = 0;
 
 HUD::HUD()
 {
@@ -87,7 +88,7 @@ void HUD::drawHUD(WorldObj* obj)
 	GameWindow::drawSprite(hud_health->getX() - damage_taken, hud_health->getY(), hud_health->getWidth(), hud_health->getHeight(), hud_health->sprite);
 	GameWindow::drawSprite(hud_portrait->getX(), hud_portrait->getY(), hud_portrait->getWidth(), hud_portrait->getHeight(), hud_portrait->sprite);
 	GameWindow::createText("FPS: "+to_string(FPS), 450, 20, 150, 80, black);
-
+	GameWindow::createText("AVG: " + to_string(AVG), 525, 20, 150, 80, black);
 	if (HUD::show_active_quests) {
 		GameWindow::createText("Active Quests", 50, 104.5, 150, 80, black);
 		GameWindow::createText("___________", 50, 105, 150, 80, black);

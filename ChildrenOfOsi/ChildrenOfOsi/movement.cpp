@@ -46,8 +46,12 @@ int Movement::move_up(WorldObj* obj) {
 			if (collision(objVec[i], obj)) {
 				//manager->createTask("Bump", "SOUND");
 				LOG("failed to move up. collision.");
+			//	cout << "COLLIDED ABOVE" << endl;
 				obj->shiftY(moveSpeed*speed_magnifier);
 				break;
+			}
+			else {
+				//cout << "no collision" << endl;
 			}
 		}
 		Line temp(Point(obj->body[0].getX() + (obj->body[0].getWidth() / 2), 20000 - (obj->body[0].getY())), Point(obj->body[0].getX() + (obj->body[0].getWidth() / 2), 20000 - (obj->body[0].getY() + obj->body[0].getHeight())));
@@ -179,9 +183,13 @@ int Movement::move_down(WorldObj* obj) {
 			}
 			if (collision(objVec[i], obj)) {
 				LOG("failed to move down. collision.");
+				//cout << "COLLIDED BELOW" << endl;
 				//manager->createTask("Bump", "SOUND");
 				obj->shiftY(-moveSpeed*speed_magnifier);
 				break;
+			}
+			else {
+				//cout << "no collision" << endl;
 			}
 		}
 		Line temp(Point(obj->body[0].getX()+(obj->body[0].getWidth()/2), 20000 - (obj->body[0].getY())), Point(obj->body[0].getX() + (obj->body[0].getWidth() / 2), 20000 - (obj->body[0].getY() + obj->body[0].getHeight())));
@@ -227,6 +235,8 @@ int Movement::move_down_left(WorldObj* obj) {
 				//manager->createTask("Bump", "SOUND");
 				obj->shiftY(-diagYSpeed*speed_magnifier);
 				break;
+			}			else {
+				//cout << "no collision" << endl;
 			}
 		}
 		obj->shiftX(-diagXSpeed*speed_magnifier);
@@ -268,6 +278,7 @@ int Movement::move_down_right(WorldObj* obj) {
 			}
 			if (collision(objVec[i], obj)) {
 				LOG("failed to move down. collision.");
+				//cout << "COLLIDED BELOW" << endl;
 				//manager->createTask("Bump", "SOUND");
 				obj->shiftY(-diagYSpeed*speed_magnifier);
 				break;
@@ -309,9 +320,13 @@ int Movement::move_left(WorldObj* obj) {
 			}
 			if (collision(objVec[i], obj)) {
 				LOG("failed to move left. collision.");
+			//	cout << "COLLIDED LEFT" << endl;
 				//manager->createTask("Bump", "SOUND");
 				obj->shiftX(moveSpeed*speed_magnifier);
 				break;
+			}
+			else {
+			//	cout << "no collision" << endl;
 			}
 		}
 		//obj->body[0].getBL().getXloc()
@@ -350,13 +365,19 @@ int Movement::move_right(WorldObj* obj) {
 		obj->shiftX(moveSpeed*speed_magnifier);
 		for (int i = 0; i < objVec.size(); i++) {
 			if (obj == objVec[i] || (my_type >= 2 && objVec[i]->getType() >= 2)) {
+				//cout << "Skip check for"<< objVec[i]->getID() << endl;
 				break;
+				
 			}
 			if (collision(objVec[i], obj)) {
 				LOG("failed to move right. collision.");
+				//cout << "COLLIDED RIGHT with" << objVec[i]->getID() << endl;
 				//manager->createTask("Bump", "SOUND");
 				obj->shiftX(-moveSpeed*speed_magnifier);
 				break;
+			}
+			else {
+				//cout << "no collision" << endl;
 			}
 		}
 		Line temp(Point(obj->body[0].getX(), 20000 - (obj->body[0].getY() + obj->body[0].getHeight())), Point(obj->body[0].getX() + obj->body[0].getWidth(), 20000 - (obj->body[0].getY() + obj->body[0].getHeight())));

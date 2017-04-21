@@ -189,12 +189,12 @@ void AIController::execute() {
 		//}
 		//me->init_action_timer(action_wait_time);                    //Start a timer for approx. 2 minutes
 
-		std::cout << "before: " << hero->update_action_timer() << endl;
+	//	std::cout << "before: " << hero->update_action_timer() << endl;
 		if (hero->update_action_timer() == 0)
 		{
-			std::cout << "after: " << hero->update_action_timer() << endl;
+		//	std::cout << "after: " << hero->update_action_timer() << endl;
 			if (true) { //used to be : "!planner->give_as_quest"
-				std::cout << "execute" << endl;
+			//	std::cout << "execute" << endl;
 				curr_action->execute();
 			}
 			if (curr_action->executed) {
