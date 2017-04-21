@@ -476,9 +476,15 @@ int Movement::attack(WorldObj* obj) {
 											}
 											if (!friendly) {
 												s->setCurrentEnemy(s2);
-												if (s2->getType() == WorldObj::TYPE_PLAYER) {
-													if ((!s->getInCombat()) || (!s2->getInCombat())) {
-														Fight* fight = new Fight(s->getParty(), s2->getParty());
+												if (s2->getType() == WorldObj::TYPE_PLAYER && s->getParty()->getMode()!=Party::MODE_FLEE) {
+													if ((!s->getInCombat()) && (!s2->getInCombat())) {
+														Fight* fight = new Fight(s->getParty(), s2->getParty(),false);
+													}
+													else if ((!s->getInCombat())) {
+														s2->getParty()->get_fight()->add_party(s->getParty(),true);
+													}
+													else if ((!s2->getInCombat())) {
+														s->getParty()->get_fight()->add_party(s2->getParty(), true);
 													}
 												}
 											}

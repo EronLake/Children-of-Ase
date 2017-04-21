@@ -104,7 +104,7 @@ void CombatController::find_closest_enemy(Soldier* sold1, int state) {
 bool CombatController::find_closest_friend(Soldier* sold1, int state) {
 	if (sold1->getCurrentLeader() == nullptr)return false;
 	float least_distance = 31;
-	Soldier* fr= new Soldier();
+	Soldier* fr= nullptr;
 	vector<Soldier*> temp_good = sold1->getParty()->getMembers();
 	for (auto it = temp_good.begin(); it != temp_good.end(); ++it) {
 		if (sold1 != (*it)) {
@@ -115,7 +115,7 @@ bool CombatController::find_closest_friend(Soldier* sold1, int state) {
 			}
 		}
 	}
-	if (least_distance <= 31) {
+	if (least_distance <= 31 && fr!=nullptr) {
 		int x = sold1->getX() - fr->getX();
 		int y = sold1->getY() - fr->getY();
 		Vector2f tmp(sold1->getX() + x, sold1->getY() + y);
@@ -131,7 +131,7 @@ void CombatController::update_soldier(Soldier* sold1, int state) {
 	///update cooldowns
 	sold1->updateCD();
 	if (sold1->getParty() == nullptr || sold1->getParty() == NULL)return;
-	if (true){//find_closest_friend(sold1, state)) {
+	if (find_closest_friend(sold1, state)) {
 		//std::lock_guard<std::mutex> guard(mux);
 		find_closest_friend(sold1, state);
 		move_to_target(sold1, state);
@@ -252,12 +252,9 @@ void CombatController::checkParties() {
 						} else if (dist_by_center((*a)->getLeader(), (*b)->getLeader()) < 1000) {
 							if ((*b)->getMode() != Party::MODE_FLEE) {
 								if ((*b)->getLeader()->getInCombat()) {
-									(*b)->get_fight()->add_to_attackers((*a));
+									(*b)->get_fight()->add_party((*a),true);
 								} else {
-									Fight* fight = new Fight();
-									fight->set_loc((*b)->getLeader()->getLoc());
-									fight->add_to_attackers((*a));
-									fight->add_to_attackers((*b));
+									Fight* fight = new Fight((*a), (*b), false);
 								}
 							}
 						}
