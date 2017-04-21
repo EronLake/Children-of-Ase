@@ -39,36 +39,68 @@ void Action::apply_postconditions(bool ifsucc)
 {
 	if (ifsucc == true) 
 	{
-		for (int i = 0; i < succ_postconds.size(); i++)
+		for (int i = 0; i < doer_succ_postconds.size(); i++)
 		{
-			if (succ_postconds[i]->get_general_type() ==Postcondition::REL || succ_postconds[i]->get_general_type() == Postcondition::REL_EST)
+			if (doer_succ_postconds[i]->get_general_type() ==Postcondition::REL || doer_succ_postconds[i]->get_general_type() == Postcondition::REL_EST)
 			{
-				succ_postconds[i]->apply_utility(doer,receiver);
+				doer_succ_postconds[i]->apply_utility(doer,receiver);
 		}
 			else
 			{
-				succ_postconds[i]->apply_utility();
-	}
-			
+				doer_succ_postconds[i]->apply_utility();
+			}	
 		}
 	}
 	else
 	{
-		for (int i = 0; i < fail_postconds.size(); i++)
+		for (int i = 0; i < doer_fail_postconds.size(); i++)
 		{
-			if (fail_postconds[i]->get_general_type() == Postcondition::REL || fail_postconds[i]->get_general_type() == Postcondition::REL_EST)
+			if (doer_fail_postconds[i]->get_general_type() == Postcondition::REL || doer_fail_postconds[i]->get_general_type() == Postcondition::REL_EST)
 			{
-				fail_postconds[i]->apply_utility(doer,receiver);
+				doer_fail_postconds[i]->apply_utility(doer,receiver);
 			}
 			else 
-		{
-				fail_postconds[i]->apply_utility();
+			{
+				doer_fail_postconds[i]->apply_utility();
 			}
-			
 		}
 	}
 	
 }
+
+void Action::apply_receiver_postconditions(bool ifsucc)
+{
+	if (ifsucc == true) 
+	{
+		for (int i = 0; i < receiver_succ_postconds.size(); i++)
+		{
+			if (receiver_succ_postconds[i]->get_general_type() ==Postcondition::REL || receiver_succ_postconds[i]->get_general_type() == Postcondition::REL_EST)
+			{
+				receiver_succ_postconds[i]->apply_utility(receiver, doer);
+		}
+			else
+			{
+				receiver_succ_postconds[i]->apply_utility();
+			}	
+		}
+	}
+	else
+	{
+		for (int i = 0; i < receiver_fail_postconds.size(); i++)
+		{
+			if (receiver_fail_postconds[i]->get_general_type() == Postcondition::REL || receiver_fail_postconds[i]->get_general_type() == Postcondition::REL_EST)
+			{
+				receiver_fail_postconds[i]->apply_utility(receiver,doer);
+			}
+			else 
+			{
+				receiver_fail_postconds[i]->apply_utility();
+			}
+		}
+	}
+	
+}
+
 
 vector<std::string> Action::preConditionsNeeded(Hero* o, Hero* h) {
 	vector<std::string> needs;

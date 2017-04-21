@@ -27,10 +27,10 @@ int Planner::prereq_appeal(Action* step, vector<std::shared_ptr<Preconditions>> 
 	int appeal = 0;
 	//iterate through postconditions.
 	for (int i = 0; i < priority_preconds.size(); i++) {
-		for (int itr = 0; itr < step->succ_postconds.size(); itr++) {
-			if (step->succ_postconds[itr]->get_type() == priority_preconds[i]->get_type()) {
+		for (int itr = 0; itr < step->doer_succ_postconds.size(); itr++) {
+			if (step->doer_succ_postconds[itr]->get_type() == priority_preconds[i]->get_type()) {
 				
-				appeal += step->succ_postconds[itr]->get_utility()*(i+1);
+				appeal += step->doer_succ_postconds[itr]->get_utility()*(i+1);
 
 			}
 		}
@@ -220,7 +220,7 @@ void Planner::generate_milestones(Action* state, Action* goal) {
 	{
 		int post_cond_utility = 0;
 		
-		for (auto post_cond : goal->succ_postconds) 
+		for (auto post_cond : goal->doer_succ_postconds)
 		{
 			post_cond_utility += post_cond->get_utility(goal->getOwner(), goal->getReceiver());
 		}

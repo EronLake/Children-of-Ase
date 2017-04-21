@@ -212,58 +212,59 @@ int RenderHelper::sprite_right(WorldObj* obj) {
 
 int RenderHelper::sprite_atk(WorldObj * o)
 {
-	if (o->getType() > 2) {
+	if (o->getType() >= WorldObj::TYPE_SOLDIER) {
 		Soldier* obj = CheckClass::isSoldier(o);
-		int check = obj->getDirection();
-		if (check == 8) {
-			if (obj->getSwingLeft()) {
-				obj->sprite.setTexture(obj->sprite.atk_up);
-				//obj->effect.sprite.setTexture(obj->effect.sprite.atk_up);
-				manager->createTaskForAudio("PlaySound", "SOUND", "SFX/swing.wav");
-			}
-			else {
-				obj->sprite.setTexture(obj->sprite.atk2_up);
-				manager->createTaskForAudio("PlaySound", "SOUND", "SFX/swing.wav");
-			}
-			obj->sprite.setIdleTexture(obj->sprite.id_up);
-		}
-		else 	if (check == 2) {
-			if (obj->getSwingLeft()) {
-				obj->sprite.setTexture(obj->sprite.atk_down);
-			//	obj->effect.sprite.setTexture(obj->effect.sprite.atk_down);
-				manager->createTaskForAudio("PlaySound", "SOUND", "SFX/swing.wav");
-			}
-			else {
-				obj->sprite.setTexture(obj->sprite.atk2_down);
-				manager->createTaskForAudio("PlaySound", "SOUND", "SFX/swing.wav");
-			}
-			obj->sprite.setIdleTexture(obj->sprite.id_down);
+		switch (obj->getDirection()) {
+		case WorldObj::DIRECTION_UP:
+				if (obj->getSwingLeft()) {
+					obj->sprite.setTexture(obj->sprite.atk_up);
+					//obj->effect.sprite.setTexture(obj->effect.sprite.atk_up);
+					manager->createTaskForAudio("PlaySound", "SOUND", "SFX/swing.wav");
+				}
+				else {
+					obj->sprite.setTexture(obj->sprite.atk2_up);
+					manager->createTaskForAudio("PlaySound", "SOUND", "SFX/swing.wav");
+				}
+				obj->sprite.setIdleTexture(obj->sprite.id_up);
+				break;
+		case WorldObj::DIRECTION_DOWN:
+				if (obj->getSwingLeft()) {
+					obj->sprite.setTexture(obj->sprite.atk_down);
+					//	obj->effect.sprite.setTexture(obj->effect.sprite.atk_down);
+					manager->createTaskForAudio("PlaySound", "SOUND", "SFX/swing.wav");
+				}
+				else {
+					obj->sprite.setTexture(obj->sprite.atk2_down);
+					manager->createTaskForAudio("PlaySound", "SOUND", "SFX/swing.wav");
+				}
+				obj->sprite.setIdleTexture(obj->sprite.id_down);
 
-		}
-		else 	if (check == 6) {
-			if (obj->getSwingLeft()) {
+				break;
+		case WorldObj::DIRECTION_RIGHT:
+				if (obj->getSwingLeft()) {
 
-				obj->sprite.setTexture(obj->sprite.atk_right);
-				//obj->effect.sprite.setTexture(obj->effect.sprite.atk_right);
-				manager->createTaskForAudio("PlaySound", "SOUND", "SFX/swing.wav");
-			}
-			else {
-				obj->sprite.setTexture(obj->sprite.atk2_right);
-				manager->createTaskForAudio("PlaySound", "SOUND", "SFX/swing.wav");
-			}
-			obj->sprite.setIdleTexture(obj->sprite.id_right);
-		}
-		else	if (check == 4) {
-			if (obj->getSwingLeft()) {
-				obj->sprite.setTexture(obj->sprite.atk_left);
-				//obj->effect.sprite.setTexture(obj->effect.sprite.atk_left);
-				manager->createTaskForAudio("PlaySound", "SOUND", "SFX/swing.wav");
-			}
-			else {
-				obj->sprite.setTexture(obj->sprite.atk2_left);
-				manager->createTaskForAudio("PlaySound", "SOUND", "SFX/swing.wav");
-			}
-			obj->sprite.setIdleTexture(obj->sprite.id_left);
+					obj->sprite.setTexture(obj->sprite.atk_right);
+					//obj->effect.sprite.setTexture(obj->effect.sprite.atk_right);
+					manager->createTaskForAudio("PlaySound", "SOUND", "SFX/swing.wav");
+				}
+				else {
+					obj->sprite.setTexture(obj->sprite.atk2_right);
+					manager->createTaskForAudio("PlaySound", "SOUND", "SFX/swing.wav");
+				}
+				obj->sprite.setIdleTexture(obj->sprite.id_right);
+				break;
+		case WorldObj::DIRECTION_LEFT:
+				if (obj->getSwingLeft()) {
+					obj->sprite.setTexture(obj->sprite.atk_left);
+					//obj->effect.sprite.setTexture(obj->effect.sprite.atk_left);
+					manager->createTaskForAudio("PlaySound", "SOUND", "SFX/swing.wav");
+				}
+				else {
+					obj->sprite.setTexture(obj->sprite.atk2_left);
+					manager->createTaskForAudio("PlaySound", "SOUND", "SFX/swing.wav");
+				}
+				obj->sprite.setIdleTexture(obj->sprite.id_left);
+				break;
 		}
 		obj->sprite.lockAnimation();
 		obj->effect.sprite.lockAnimation();
@@ -273,24 +274,25 @@ int RenderHelper::sprite_atk(WorldObj * o)
 
 int RenderHelper::sprite_spin_atk(WorldObj * o)
 {
-	if (o->getType() > 2) {
+	if (o->getType() >= WorldObj::TYPE_SOLDIER) {
 		Soldier* obj = CheckClass::isSoldier(o);
-		int check = obj->getDirection();
-		if (check == 8) {
-			obj->sprite.setTexture(obj->sprite.spin_up);
-			obj->sprite.setIdleTexture(obj->sprite.id_up);
-		}
-		else 	if (check == 2) {
-			obj->sprite.setTexture(obj->sprite.spin_down);
-			obj->sprite.setIdleTexture(obj->sprite.id_down);
-		}
-		else 	if (check == 6) {
-			obj->sprite.setTexture(obj->sprite.spin_right);
-			obj->sprite.setIdleTexture(obj->sprite.id_right);
-		}
-		else	if (check == 4) {
-			obj->sprite.setTexture(obj->sprite.spin_left);
-			obj->sprite.setIdleTexture(obj->sprite.id_left);
+		switch (obj->getDirection()) {
+		case WorldObj::DIRECTION_UP:
+				obj->sprite.setTexture(obj->sprite.spin_up);
+				obj->sprite.setIdleTexture(obj->sprite.id_up);
+				break;
+		case WorldObj::DIRECTION_DOWN:
+				obj->sprite.setTexture(obj->sprite.spin_down);
+				obj->sprite.setIdleTexture(obj->sprite.id_down);
+				break;
+		case WorldObj::DIRECTION_RIGHT:
+				obj->sprite.setTexture(obj->sprite.spin_right);
+				obj->sprite.setIdleTexture(obj->sprite.id_right);
+				break;
+		case WorldObj::DIRECTION_LEFT:
+				obj->sprite.setTexture(obj->sprite.spin_left);
+				obj->sprite.setIdleTexture(obj->sprite.id_left);
+				break;
 		}
 		obj->sprite.lockAnimation();
 	}
@@ -299,24 +301,25 @@ int RenderHelper::sprite_spin_atk(WorldObj * o)
 
 int RenderHelper::sprite_fire_atk(WorldObj * o)
 {
-	if (o->getType() > 2) {
+	if (o->getType() >= WorldObj::TYPE_SOLDIER) {
 		Soldier* obj = CheckClass::isSoldier(o);
-		int check = obj->getDirection();
-		if (check == 8) {
-			obj->sprite.setTexture(obj->sprite.breathe_up);
-			obj->sprite.setIdleTexture(obj->sprite.id_up);
-		}
-		else 	if (check == 2) {
-			obj->sprite.setTexture(obj->sprite.breathe_down);
-			obj->sprite.setIdleTexture(obj->sprite.id_down);
-		}
-		else 	if (check == 6) {
-			obj->sprite.setTexture(obj->sprite.breathe_right);
-			obj->sprite.setIdleTexture(obj->sprite.id_right);
-		}
-		else	if (check == 4) {
-			obj->sprite.setTexture(obj->sprite.breathe_left);
-			obj->sprite.setIdleTexture(obj->sprite.id_left);
+		switch (obj->getDirection()) {
+		case WorldObj::DIRECTION_UP:
+				obj->sprite.setTexture(obj->sprite.breathe_up);
+				obj->sprite.setIdleTexture(obj->sprite.id_up);
+				break;
+		case WorldObj::DIRECTION_DOWN:
+				obj->sprite.setTexture(obj->sprite.breathe_down);
+				obj->sprite.setIdleTexture(obj->sprite.id_down);
+				break;
+		case WorldObj::DIRECTION_RIGHT:
+				obj->sprite.setTexture(obj->sprite.breathe_right);
+				obj->sprite.setIdleTexture(obj->sprite.id_right);
+				break;
+		case WorldObj::DIRECTION_LEFT:
+				obj->sprite.setTexture(obj->sprite.breathe_left);
+				obj->sprite.setIdleTexture(obj->sprite.id_left);
+				break;
 		}
 		obj->sprite.lockAnimation();
 	}
@@ -325,32 +328,66 @@ int RenderHelper::sprite_fire_atk(WorldObj * o)
 
 int RenderHelper::sprite_hurt(WorldObj * obj)
 {
-	int check = obj->getDirection();
 	obj->sprite.unlockAnimation();
 	obj->sprite.setTexture(obj->sprite.id_up);
 	obj->effect.sprite.unlockAnimation();
 	obj->effect.sprite.setTexture(obj->effect.sprite.id_up);
-	if (check == 8) {
-		obj->sprite.setTexture(obj->sprite.hurt_up);
-		obj->sprite.setIdleTexture(obj->sprite.id_up);
-		obj->effect.sprite.setTexture(obj->effect.sprite.hurt_up);
-	}
-	else 	if (check == 2) {
-		obj->sprite.setTexture(obj->sprite.hurt_down);
-		obj->sprite.setIdleTexture(obj->sprite.id_down);
-		obj->effect.sprite.setTexture(obj->effect.sprite.hurt_down);
-	}
-	else 	if (check == 6) {
-		obj->sprite.setTexture(obj->sprite.hurt_right);
-		obj->sprite.setIdleTexture(obj->sprite.id_right);
-		obj->effect.sprite.setTexture(obj->effect.sprite.hurt_right);
-	}
-	else	if (check == 4) {
-		obj->sprite.setTexture(obj->sprite.hurt_left);
-		obj->sprite.setIdleTexture(obj->sprite.id_left);
-		obj->effect.sprite.setTexture(obj->effect.sprite.hurt_left);
+	switch (obj->getDirection()) {
+	case WorldObj::DIRECTION_UP:
+			obj->sprite.setTexture(obj->sprite.hurt_up);
+			obj->sprite.setIdleTexture(obj->sprite.id_up);
+			obj->effect.sprite.setTexture(obj->effect.sprite.hurt_up);
+			break;
+	case WorldObj::DIRECTION_DOWN:
+			obj->sprite.setTexture(obj->sprite.hurt_down);
+			obj->sprite.setIdleTexture(obj->sprite.id_down);
+			obj->effect.sprite.setTexture(obj->effect.sprite.hurt_down);
+			break;
+	case WorldObj::DIRECTION_RIGHT:
+			obj->sprite.setTexture(obj->sprite.hurt_right);
+			obj->sprite.setIdleTexture(obj->sprite.id_right);
+			obj->effect.sprite.setTexture(obj->effect.sprite.hurt_right);
+			break;
+	case WorldObj::DIRECTION_LEFT:
+			obj->sprite.setTexture(obj->sprite.hurt_left);
+			obj->sprite.setIdleTexture(obj->sprite.id_left);
+			obj->effect.sprite.setTexture(obj->effect.sprite.hurt_left);
+			break;
 	}
 	obj->sprite.lockAnimation();
+	obj->effect.sprite.lockAnimation();
+	return 0;
+}
+
+int RenderHelper::sprite_dead(WorldObj * obj)
+{
+	obj->sprite.unlockAnimation();
+	obj->sprite.setTexture(obj->sprite.id_up);
+	obj->effect.sprite.unlockAnimation();
+	obj->effect.sprite.setTexture(obj->effect.sprite.id_up);
+	switch (obj->getDirection()) {
+	case WorldObj::DIRECTION_UP:
+		obj->sprite.setTexture(obj->sprite.death_up);
+		obj->sprite.setIdleTexture(obj->sprite.id_up);
+		obj->effect.sprite.setTexture(obj->effect.sprite.hurt_up);
+		break;
+	case WorldObj::DIRECTION_DOWN:
+		obj->sprite.setTexture(obj->sprite.death_down);
+		obj->sprite.setIdleTexture(obj->sprite.id_down);
+		obj->effect.sprite.setTexture(obj->effect.sprite.hurt_down);
+		break;
+	case WorldObj::DIRECTION_RIGHT:
+		obj->sprite.setTexture(obj->sprite.death_right);
+		obj->sprite.setIdleTexture(obj->sprite.id_right);
+		obj->effect.sprite.setTexture(obj->effect.sprite.hurt_right);
+		break;
+	case WorldObj::DIRECTION_LEFT:
+		obj->sprite.setTexture(obj->sprite.death_left);
+		obj->sprite.setIdleTexture(obj->sprite.id_left);
+		obj->effect.sprite.setTexture(obj->effect.sprite.hurt_left);
+		break;
+	}
+	obj->sprite.lockIntoDeathAnimation();
 	obj->effect.sprite.lockAnimation();
 	return 0;
 }

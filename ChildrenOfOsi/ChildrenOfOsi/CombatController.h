@@ -1,12 +1,8 @@
 #pragma once
-#include "Player.h"
-#include "Party.h"
 #include "Attack.h"
 #include "ChildrenOfOsi.h"
 #include "Containers.h"
-#include "Village.h"
-#include "War.h"
-#include "Alliance.h"
+#include "Fight.h"
 
 class CombatController
 {
@@ -27,6 +23,7 @@ public:
 	float dist(Vector2f start, Vector2f end);
 	void checkParties();
 	void party_leader_update(Soldier* sold1, int state);
+	void updateSoliderStatus();
 	std::thread threaded_update_soldier(Soldier* s, int n);
 private:
 	vector<Soldier*> soldiers;

@@ -9,6 +9,8 @@ Village::Village()
   Village::villagesWorld.push_back(this);
   defenders = new Party();
   barracks = new Party();
+  defenders->set_perm(true);
+  barracks->set_perm(true);
   parties.push_back(defenders);
   parties.push_back(barracks);
   health = 100;

@@ -74,7 +74,7 @@ void ActionPool::updateMiddle() {
 		}
 	}
 	for (int j = 0; j < micro.size(); j++) {
-		for (auto itor = micro[j]->succ_postconds.begin(); itor != micro[j]->succ_postconds.end(); ++itor) {
+		for (auto itor = micro[j]->doer_succ_postconds.begin(); itor != micro[j]->doer_succ_postconds.end(); ++itor) {
 			actions_by_post[(*itor)->get_type()].push_back(micro[j]);
 		}
 	}

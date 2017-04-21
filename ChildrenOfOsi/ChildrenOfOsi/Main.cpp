@@ -77,7 +77,6 @@
 
 using namespace std;
 
-
 Texture* Point::tex = new Texture();
 Texture* Rectangle::tex = new Texture();
 Texture* Rectangle::texUP = new Texture();
@@ -95,17 +94,25 @@ std::mutex mu;
 
 void FPS(bool b);
 void GAMEPLAY_LOOP(QuadTree* _Quadtree);
+void init_textures_shango(unordered_map<Texture*, pair<string, int>> &textureMap);
+void init_textures_yemoja(unordered_map<Texture*, pair<string, int>> &textureMap, vector<Texture *> &oasis);
+void init_textures_oya(unordered_map<Texture*, pair<string, int>> &textureMap, vector<Texture *> &jungle);
+void init_textures_oshoshi(unordered_map<Texture*, pair<string, int>> &textureMap, vector<Texture *> &mountain);
+void init_textures_ogun(unordered_map<Texture*, pair<string, int>> &textureMap, vector<Texture *> &ogun);
+void init_textures_blue_soldier(unordered_map<Texture*, pair<string, int>> &textureMap);
+void init_textures_silver_soldier(unordered_map<Texture*, pair<string, int>> &textureMap, vector<Texture *> &mountain);
 
 bool lineCollision(Line l1, Line l2);
 /// Helper function passed to thread to set file. Param is a tuple, first being the Texture* to work on, and second being the param needed to call setFile().
 void set_file_with_thread(Texture* t, const pair<string, int>* p_tuple) {
-	std::lock_guard<std::mutex> guard(mu); t->setFile(p_tuple->first, p_tuple->second); }
+	std::lock_guard<std::mutex> guard(mu); t->setFile(p_tuple->first, p_tuple->second);
+}
 
 int main() {
 	WorldObj* screen = new WorldObj(Vector2f(0.0, 0.0), 20000U, 20000U);	//init screen
 
 	QuadTree* collideTree = new QuadTree(0, *screen);
-	GameWindow::init();		
+	GameWindow::init();
 	GAMEPLAY_LOOP(collideTree);
 
 
@@ -118,7 +125,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	game_state current_game_state = game_state::load_game;
 	Rectangle::tex->setFile("Assets/Sprites/blank1.png", 1);
 	Point::tex->setFile("Assets/Sprites/point.png", 1);
-	
+
 	RiverObj* rivObj = new RiverObj();
 	rivObj->initialize_lines();
 
@@ -144,7 +151,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	RenderManager* RenM = new RenderManager(mLog, tBuffer, _QuadTree, gameplay_functions, rivObj);
 	DummyController* DumM = new DummyController(mLog, tBuffer);
 	PhysicsManager* PhysM = new PhysicsManager(mLog, tBuffer, _QuadTree, rivObj);
-	PartyManager* partyM = new PartyManager(gameplay_functions, Alex);
+	//PartyManager* partyM = new PartyManager(gameplay_functions, Alex);
 	memManager* memM = new memManager(mLog, tBuffer);
 	TestManager* TestM = new TestManager(mLog, tBuffer);
 	AudioManager* AudM = new AudioManager(mLog, tBuffer);
@@ -160,12 +167,12 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	DumM->register_manager();
 	PhysM->register_manager();
 	memM->register_manager();
-	
+
 	AudM->register_manager();
 	//TestM->register_manager();
 	AIM->register_manager();
-    
- 	RenM->register_manager();
+
+	RenM->register_manager();
 	bool switch_music = false;
 	bool in_village = false;
 
@@ -178,8 +185,8 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	Region current_region = *Desert;
 	Region next_region = *Desert;
 
-    Input* iController = new Input(gameplay_functions, Alex, RenM->renderHelper, tBuffer, recVec_ptr);
-	
+	Input* iController = new Input(gameplay_functions, Alex, RenM->renderHelper, tBuffer, recVec_ptr);
+
 	gameplay_functions->add_hero("Yemoja", 6445.0, 10355.0, true);
 	gameplay_functions->add_hero("Oya", 4400, 3600, true);
 	tBuffer->run();
@@ -212,11 +219,11 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	ObjConfig::mountain_con = &mountain;
 	ObjConfig::ogun_con = &ogun;
 	ObjConfig::import_config(recVec_ptr, gameplay_functions, tBuffer);
-	
+
 	DialogueConfig::import_config(gameplay_functions, tBuffer);
 	DialogueController::getDialogueHelper()->fill_conversations();
 	TagConfig::import_config(gameplay_functions, tBuffer);
-	
+
 	WorldObj* barrel = new WorldObj(Vector2f(5200, 3900), 75, 75);
 	//Alex->name = SHANGO;
 	gameplay_functions->add_texture("map1_1", 0, 0, 0);
@@ -247,7 +254,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 
 	gameplay_functions->add_texture("objTexture", 0, 0, 0);
 	tBuffer->run();
-   // Texture* objTexture = new Texture();
+	// Texture* objTexture = new Texture();
 	textureMap[Containers::texture_table["objTexture"]] = pair<string, int>("Assets/Sprites/YemojasHouse.png", 1);
 	standard.push_back(Containers::texture_table["objTexture"]);
 
@@ -346,8 +353,8 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	gameplay_functions->add_texture("yemojaTexture", 0, 0, 0);
 	gameplay_functions->add_texture("yemojaIdleTex", 0, 0, 0);
 	tBuffer->run();
-	Texture* yemojaTexture = new Texture();
-	Texture* yemojaIdleTex = new Texture();
+	//Texture* yemojaTexture = new Texture();
+	//Texture* yemojaIdleTex = new Texture();
 	textureMap[Containers::texture_table["yemojaTexture"]] = pair<string, int>("Assets/Sprites/YemojaForwardIdle.png", 22);
 	textureMap[Containers::texture_table["yemojaIdleTex"]] = pair<string, int>("Assets/Sprites/YemojaForwardIdle.png", 22);
 	oasis.push_back(Containers::texture_table["yemojaTexture"]);
@@ -429,6 +436,11 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	gameplay_functions->add_texture("ss_downLungeTex", 0, 0, 0);
 	gameplay_functions->add_texture("ss_leftLungeTex", 0, 0, 0);
 	gameplay_functions->add_texture("ss_rightLungeTex", 0, 0, 0);
+	gameplay_functions->add_texture("ss_upDeathTex", 0, 0, 0);
+	gameplay_functions->add_texture("ss_downDeathTex", 0, 0, 0);
+	gameplay_functions->add_texture("ss_leftDeathTex", 0, 0, 0);
+	gameplay_functions->add_texture("ss_rightDeathTex", 0, 0, 0);
+
 	tBuffer->run();
 	/*Texture* ss_upRunTex = new Texture();
 	Texture* ss_downRunTex = new Texture();
@@ -478,6 +490,11 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	textureMap[Containers::texture_table["ss_downLungeTex"]] = pair<string, int>("Assets/Sprites/SilverSoldierForwardLunge.png", 7);
 	textureMap[Containers::texture_table["ss_leftLungeTex"]] = pair<string, int>("Assets/Sprites/SilverSoldierLeftLunge.png", 7);
 	textureMap[Containers::texture_table["ss_rightLungeTex"]] = pair<string, int>("Assets/Sprites/SilverSoldierRightLunge.png", 7);
+	textureMap[Containers::texture_table["ss_upDeathTex"]] = pair<string, int>("Assets/Sprites/SilverSoldierRightRecoil.png", 18);
+	textureMap[Containers::texture_table["ss_downDeathTex"]] = pair<string, int>("Assets/Sprites/SilverSoldierRightRecoil.png", 18);
+	textureMap[Containers::texture_table["ss_leftDeathTex"]] = pair<string, int>("Assets/Sprites/SilverSoldierRightRecoil.png", 18);
+	textureMap[Containers::texture_table["ss_rightDeathTex"]] = pair<string, int>("Assets/Sprites/SilverSoldierRightRecoil.png", 18);
+
 	mountain.push_back(Containers::texture_table["ss_upRunTex"]);
 	mountain.push_back(Containers::texture_table["ss_downRunTex"]);
 	mountain.push_back(Containers::texture_table["ss_leftRunTex"]);
@@ -502,6 +519,10 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	mountain.push_back(Containers::texture_table["ss_downLungeTex"]);
 	mountain.push_back(Containers::texture_table["ss_leftLungeTex"]);
 	mountain.push_back(Containers::texture_table["ss_rightLungeTex"]);
+	mountain.push_back(Containers::texture_table["ss_upDeathTex"]);
+	mountain.push_back(Containers::texture_table["ss_downDeathTex"]);
+	mountain.push_back(Containers::texture_table["ss_leftDeathTex"]);
+	mountain.push_back(Containers::texture_table["ss_rightDeathTex"]);
 
 	gameplay_functions->add_texture("bs_upRunTex", 0, 0, 0);
 	gameplay_functions->add_texture("bs_downRunTex", 0, 0, 0);
@@ -527,6 +548,10 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	gameplay_functions->add_texture("bs_downLungeTex", 0, 0, 0);
 	gameplay_functions->add_texture("bs_leftLungeTex", 0, 0, 0);
 	gameplay_functions->add_texture("bs_rightLungeTex", 0, 0, 0);
+	gameplay_functions->add_texture("bs_upDeathTex", 0, 0, 0);
+	gameplay_functions->add_texture("bs_downDeathTex", 0, 0, 0);
+	gameplay_functions->add_texture("bs_leftDeathTex", 0, 0, 0);
+	gameplay_functions->add_texture("bs_rightDeathTex", 0, 0, 0);
 	tBuffer->run();
 	/*Texture* bs_upRunTex = new Texture();
 	Texture* bs_downRunTex = new Texture();
@@ -576,6 +601,12 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	textureMap[Containers::texture_table["bs_downLungeTex"]] = pair<string, int>("Assets/Sprites/BlueSoldierForwardLunge.png", 7);
 	textureMap[Containers::texture_table["bs_leftLungeTex"]] = pair<string, int>("Assets/Sprites/BlueSoldierLeftLunge.png", 7);
 	textureMap[Containers::texture_table["bs_rightLungeTex"]] = pair<string, int>("Assets/Sprites/BlueSoldierRightLunge.png", 7);
+	textureMap[Containers::texture_table["bs_upDeathTex"]] = pair<string, int>("Assets/Sprites/BlueSoldierUpRecoil.png", 18);
+	textureMap[Containers::texture_table["bs_downDeathTex"]] = pair<string, int>("Assets/Sprites/BlueSoldierDownRecoil.png", 18);
+	textureMap[Containers::texture_table["bs_leftDeathTex"]] = pair<string, int>("Assets/Sprites/BlueSoldierLeftRecoil.png", 18);
+	textureMap[Containers::texture_table["bs_rightDeathTex"]] = pair<string, int>("Assets/Sprites/BlueSoldierRightRecoil.png", 18);
+
+	gameplay_functions->add_texture("treeTex", 0, 0, 0);
 	ogun.push_back(Containers::texture_table["bs_upRunTex"]);
 	ogun.push_back(Containers::texture_table["bs_downRunTex"]);
 	ogun.push_back(Containers::texture_table["bs_leftRunTex"]);
@@ -732,6 +763,11 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	textureMap[Containers::texture_table["YswingUp"]] = pair<string, int>("Assets/Sprites/YemojaBackBreath.png", 14);
 	textureMap[Containers::texture_table["YswingDown"]] = pair<string, int>("Assets/Sprites/YemojaForwardBreath.png", 14);
 	textureMap[Containers::texture_table["YswingLeft"]] = pair<string, int>("Assets/Sprites/YemojaLeftBreath.png", 14);
+	textureMap[Containers::texture_table["YdeathUp"]] = pair<string, int>("Assets/Sprites/YemojaBackRecoil.png", 18);
+	textureMap[Containers::texture_table["YdeathDown"]] = pair<string, int>("Assets/Sprites/YemojaForwardRecoil.png", 18);
+	textureMap[Containers::texture_table["YdeathLeft"]] = pair<string, int>("Assets/Sprites/YemojaLeftRecoil.png", 18);
+	textureMap[Containers::texture_table["YdeathRight"]] = pair<string, int>("Assets/Sprites/YemojaRightRecoil.png", 18);
+
 	oasis.push_back(Containers::texture_table["YhurtRight"]);
 	oasis.push_back(Containers::texture_table["YhurtUp"]);
 	oasis.push_back(Containers::texture_table["YhurtDown"]);
@@ -882,13 +918,13 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	Rectangle::texAtkDOWN->setFile("Assets/Sprites/BackRecoilSpark.png", 18);
 
 	for (int i = 0; i < 100; i++) {
-	//std:://cout << "AT THE THREAD INITIALIZTION CALL!!!****** " << endl;
+		//std:://cout << "AT THE THREAD INITIALIZTION CALL!!!****** " << endl;
 	}
 
-	/* 
+	/*
 		TRYING TO MULTITHREAD THE SETFILE METHODS ABOVE.
-		First, iterate through textureMap and for each texture, assign a new thread to set_file_with_thread(). 
-		When all available threads are working, call join() on all threads before continuing. 
+		First, iterate through textureMap and for each texture, assign a new thread to set_file_with_thread().
+		When all available threads are working, call join() on all threads before continuing.
 		We know all concurrent threads are being utilized when the counter we use while iterating through textureMap has a remainder of 0 when we take the modulo of num_of_threads.
 
 	*/
@@ -919,9 +955,56 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	//thread_Vec.clear();
 	 //windows handle
 
-//Ian's attempt at multithreading. Compiles in 22 seconds on school computer. Still has same issue with spritesheet sprites, where the red and black boxes appear.
-//Other sprites load in normally though
-//also needs the boost external dependency, so it might
+	vector<WorldObj*> vec;
+	//vec.push_back(&Alex->melee);
+
+	for (int i = 1; i < 6; i++) {
+		if (i > 4) {
+			WorldObj* obj = new WorldObj(Vector2f(4100, 3550), 500, 333);
+
+			obj->sprite.setTexture(Containers::texture_table["objTexture"]);
+			obj->setInteractable(true);
+			std::string building = "Building ";
+			obj->setName(building += std::to_string(i));
+			//objs->offsetBody(0, 50, 50, 50, 50);
+			obj->offsetBody(0, 25, 50, 25, 25);
+			vec.push_back(obj);
+			continue;
+		}
+
+		WorldObj* objs = new WorldObj(Vector2f(220 + 50 * i, 300 * (i * 2)), 600.0, 400.0);
+		objs->sprite.setTexture(Containers::texture_table["objTexture"]);
+		objs->setInteractable(true);
+		std::string building = "Building ";
+		objs->setName(building += std::to_string(i));
+		//objs->offsetBody(0, 50, 50, 50, 50);
+		objs->offsetBody(0, 110, 150, 120, 60);
+		recVec.push_back(objs);
+
+	}
+
+	vector<Soldier*> silverSoldier;
+	int silverNum = 4;
+	for (int i = 0; i < silverNum; i++) {
+		silverSoldier.push_back(new Soldier(6745, 10355 + (i * 20), false));
+		gameplay_functions->add_Attack(silverSoldier[i]->getKey(), silverSoldier[i]->body[0].getX(), silverSoldier[i]->body[0].getY(), true, 10);
+	}
+	tBuffer->run();
+	vector<Soldier*> blueSoldiers;
+	int blueNum = 4;
+	for (int i = 0; i < blueNum; i++) {
+		blueSoldiers.push_back(new Soldier(6030, 4000 + (i * 20), false));
+		gameplay_functions->add_Attack(blueSoldiers[i]->getKey(), blueSoldiers[i]->body[0].getX(), blueSoldiers[i]->body[0].getY(), true, 10);
+	}
+	tBuffer->run();
+	recVec.push_back(staticRec);
+	for (int i = 0; i < silverSoldier.size(); i++) {
+		recVec.push_back(silverSoldier[i]);
+	}
+	for (int i = 0; i < blueSoldiers.size(); i++) {
+		recVec.push_back(blueSoldiers[i]);
+	}
+
 	starting_location.push_back(oasis);
 	starting_location.push_back(ogun);
 	starting_location.push_back(jungle);
@@ -946,6 +1029,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 		for (auto it = recVec.begin(); it != recVec.end(); ++it) {
 			(*it)->sprite.reset_texture();
 		}
+		Alex->sprite.reset_texture();
 		glFinish();
 	});
 	HGLRC loaderContext1 = wglCreateContext(hdc);
@@ -954,7 +1038,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 		wglMakeCurrent(hdc, loaderContext1);
 		int textureMapCounter = 0;
 		for (int i = 0; i < (starting_location[0]).size(); i++) {
-		set_file_with_thread(starting_location[0].at(i), &textureMap.find(starting_location[0].at(i))->second);
+			set_file_with_thread(starting_location[0].at(i), &textureMap.find(starting_location[0].at(i))->second);
 		}
 		for (auto it = recVec.begin(); it != recVec.end(); ++it) {
 			(*it)->sprite.reset_texture();
@@ -974,28 +1058,28 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	HGLRC loaderContext2 = wglCreateContext(hdc);//Creates the new GL context that we will use for loading
 	wglShareLists(mainContext, loaderContext2);//Shares the information between the loading context and the main context
 	std::thread t2([=]() {//makes the thread. [=] is a cpp Lambda representation
-	wglMakeCurrent(hdc, loaderContext2);//Sets the current context to the loader context
-	int textureMapCounter = 0;
-	for (int i = 0; i < (starting_location[1]).size(); i++) {
-		set_file_with_thread(starting_location[1].at(i), &textureMap.find(starting_location[1].at(i))->second);
-	}
-	for (auto it = recVec.begin(); it != recVec.end(); ++it) {
-		(*it)->sprite.reset_texture();
-	}
-	for (int i = 0; i < (starting_location[2]).size(); i++) {
-		set_file_with_thread(starting_location[2].at(i), &textureMap.find(starting_location[2].at(i))->second);
-	}
-	/*for (auto it = ++starting_location.begin(); it != starting_location.end(); ++it) {
-		for (int i = 0; i < (*it).size(); i++) {
-			set_file_with_thread((*it)[i], &textureMap.find((*it)[i])->second);
+		wglMakeCurrent(hdc, loaderContext2);//Sets the current context to the loader context
+		int textureMapCounter = 0;
+		for (int i = 0; i < (starting_location[1]).size(); i++) {
+			set_file_with_thread(starting_location[1].at(i), &textureMap.find(starting_location[1].at(i))->second);
 		}
-	}*/
-	wglMakeCurrent(nullptr, nullptr);//unassigns the current gl context
-	wglDeleteContext(loaderContext2);//deletes the loading context now that it is not needed
-	for (auto it = recVec.begin(); it != recVec.end(); ++it) {
-		(*it)->sprite.reset_texture();
-	}
-	glFinish(); //Forces all gl calls to be completed before execution
+		for (auto it = recVec.begin(); it != recVec.end(); ++it) {
+			(*it)->sprite.reset_texture();
+		}
+		for (int i = 0; i < (starting_location[2]).size(); i++) {
+			set_file_with_thread(starting_location[2].at(i), &textureMap.find(starting_location[2].at(i))->second);
+		}
+		/*for (auto it = ++starting_location.begin(); it != starting_location.end(); ++it) {
+			for (int i = 0; i < (*it).size(); i++) {
+				set_file_with_thread((*it)[i], &textureMap.find((*it)[i])->second);
+			}
+		}*/
+		wglMakeCurrent(nullptr, nullptr);//unassigns the current gl context
+		wglDeleteContext(loaderContext2);//deletes the loading context now that it is not needed
+		for (auto it = recVec.begin(); it != recVec.end(); ++it) {
+			(*it)->sprite.reset_texture();
+		}
+		glFinish(); //Forces all gl calls to be completed before execution
 	});
 	//t.join(); // Forces the thread, t, to fully load the project, which takes a  lot of time but looks nicer
 
@@ -1045,8 +1129,8 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	Alex->setName("Shango");
 	Alex->setTalkDist(20);
 
-	Alex->setDirection(2);
-	gameplay_functions->add_Attack(Alex->getKey(), Alex->body[0].getX(), Alex->body[0].getY(),true,10);
+	Alex->setDirection(WorldObj::DIRECTION_DOWN);
+	gameplay_functions->add_Attack(Alex->getKey(), Alex->body[0].getX(), Alex->body[0].getY(), true, 10);
 
 	tBuffer->run();
 
@@ -1084,7 +1168,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	fireball->setDuration(100);
 	fireball->setCoolDown(180);
 	fireball->setPause(24);
-	fireball->sprite.up= Containers::texture_table["fireUp"];
+	fireball->sprite.up = Containers::texture_table["fireUp"];
 	fireball->sprite.left = Containers::texture_table["fireLeft"];
 	fireball->sprite.right = Containers::texture_table["fire"];
 	fireball->sprite.down = Containers::texture_table["fireDown"];
@@ -1144,37 +1228,9 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	spin2->setNextAttack(spin3);
 	spin3->setNextAttack(spin4);
 
-	vector<WorldObj*> vec;
-	//vec.push_back(&Alex->melee);
-
-	for (int i = 1; i < 6; i++) {
-		if (i > 4) {
-			WorldObj* obj = new WorldObj(Vector2f(4100, 3550),500,333);
-		
-			obj->sprite.setTexture(Containers::texture_table["objTexture"]);
-			obj->setInteractable(true);
-			std::string building = "Building ";
-			obj->setName(building += std::to_string(i));
-			//objs->offsetBody(0, 50, 50, 50, 50);
-			obj->offsetBody(0, 25, 50, 25, 25);
-			vec.push_back(obj);
-			continue;
-		}
-
-		WorldObj* objs = new WorldObj(Vector2f(220+50 * i, 300 * (i*2)), 600.0, 400.0);
-		objs->sprite.setTexture(Containers::texture_table["objTexture"]);
-		objs->setInteractable(true);
-		std::string building="Building ";
-		objs->setName(building+= std::to_string(i));
-		//objs->offsetBody(0, 50, 50, 50, 50);
-		objs->offsetBody(0, 110, 150, 120, 60);
-		recVec.push_back(objs);
-		
-	}
-
 	vector<Vector2f> vertices;
 	vector<pair<Vector2f, Vector2f>> edges;
-	
+
 	for (int i = 0; i < vec.size(); i++) {
 		WorldObj *obj = vec[i];
 		float w = obj->body[0].getWidth();
@@ -1196,13 +1252,13 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 		edges.push_back({ p2, p3 });
 		edges.push_back({ p1, p4 });
 	}
-	
+
 	staticRec->setWidth(150);
 	staticRec->setHeight(150);
 	staticRec->name = YEMOJA;
 
-	staticRec->sprite.setTexture(yemojaTexture);
-	staticRec->sprite.setIdleTexture(yemojaIdleTex);
+	staticRec->sprite.setTexture(Containers::texture_table["yemojaTexture"]);
+	staticRec->sprite.setIdleTexture(Containers::texture_table["yemojaIdleTex"]);
 	staticRec->sprite.up = Containers::texture_table["h_upRunTex"];
 	staticRec->sprite.down = Containers::texture_table["h_downRunTex"];
 	staticRec->sprite.left = Containers::texture_table["h_leftRunTex"];
@@ -1219,8 +1275,11 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	staticRec->sprite.atk_down = Containers::texture_table["YswingDown"];
 	staticRec->sprite.atk_left = Containers::texture_table["YswingLeft"];
 	staticRec->sprite.atk_right = Containers::texture_table["YswingRight"];
+	staticRec->sprite.death_up = Containers::texture_table["YdeathUp"];
+	staticRec->sprite.death_down = Containers::texture_table["YdeathDown"];
+	staticRec->sprite.death_left = Containers::texture_table["YdeathLeft"];
+	staticRec->sprite.death_right = Containers::texture_table["YdeathRight"];
 
-	
 	gameplay_functions->add_Attack(staticRec->getKey(), staticRec->body[0].getX(), staticRec->body[0].getY(), true, 10);
 	tBuffer->run();
 
@@ -1240,13 +1299,6 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	staticRec->setMaxStamina(300);
 	staticRec->melee->sprite.setTexture(Containers::texture_table["border"]);
 
-	vector<Soldier*> silverSoldier;
-	int silverNum = 4;
-	for (int i = 0; i < silverNum; i++) {
-		silverSoldier.push_back(new Soldier(6745, 10355+(i*20), false));
-		gameplay_functions->add_Attack(silverSoldier[i]->getKey(), silverSoldier[i]->body[0].getX(), silverSoldier[i]->body[0].getY(), true, 10);
-	}
-	tBuffer->run();
 	for (int i = 0; i < silverNum; i++) {
 		silverSoldier[i]->setWidth(150);
 		silverSoldier[i]->setHeight(150);
@@ -1272,6 +1324,11 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 		silverSoldier[i]->sprite.hurt_left = Containers::texture_table["ss_leftHurtTex"];
 		silverSoldier[i]->sprite.hurt_right = Containers::texture_table["ss_rightHurtTex"];
 
+		silverSoldier[i]->sprite.death_up = Containers::texture_table["ss_upDeathTex"];
+		silverSoldier[i]->sprite.death_down = Containers::texture_table["ss_downDeathTex"];
+		silverSoldier[i]->sprite.death_left = Containers::texture_table["ss_leftDeathTex"];
+		silverSoldier[i]->sprite.death_right = Containers::texture_table["ss_rightDeathTex"];
+
 		silverSoldier[i]->offsetBody(0, 60, 60, 75, 50);
 		silverSoldier[i]->setInteractable(true);
 		silverSoldier[i]->setName("silverSoldier");
@@ -1295,13 +1352,6 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 		silverSoldier[i]->setSpeed(8);
 	}
 
-	vector<Soldier*> blueSoldiers;
-	int blueNum = 4;
-	for (int i = 0; i < blueNum; i++) {
-		blueSoldiers.push_back(new Soldier(6030, 4000 + (i * 20), false));
-		gameplay_functions->add_Attack(blueSoldiers[i]->getKey(), blueSoldiers[i]->body[0].getX(), blueSoldiers[i]->body[0].getY(), true, 10);
-	}
-	tBuffer->run();
 	for (int i = 0; i < blueNum; i++) {
 		blueSoldiers[i]->setWidth(150);
 		blueSoldiers[i]->setHeight(150);
@@ -1327,6 +1377,11 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 		blueSoldiers[i]->sprite.hurt_left = Containers::texture_table["bs_leftHurtTex"];
 		blueSoldiers[i]->sprite.hurt_right = Containers::texture_table["bs_rightHurtTex"];
 
+		blueSoldiers[i]->sprite.death_up = Containers::texture_table["bs_upHurtTex"];
+		blueSoldiers[i]->sprite.death_down = Containers::texture_table["bs_downHurtTex"];
+		blueSoldiers[i]->sprite.death_left = Containers::texture_table["bs_leftHurtTex"];
+		blueSoldiers[i]->sprite.death_right = Containers::texture_table["bs_rightHurtTex"];
+
 		blueSoldiers[i]->offsetBody(0, 60, 60, 75, 50);
 		blueSoldiers[i]->setInteractable(true);
 		blueSoldiers[i]->setName("blueSoldier");
@@ -1342,7 +1397,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 		blueSoldiers[i]->melee->setHeight(50);
 		blueSoldiers[i]->set_creator_of_melee();
 		blueSoldiers[i]->melee->setStaminaCost(90);
-		blueSoldiers[i]->setHealth(100);
+		blueSoldiers[i]->setHealth(20);
 		blueSoldiers[i]->melee->setStaminaCost(120);
 		blueSoldiers[i]->setMaxStamina(300);
 		blueSoldiers[i]->addAttackType(rockThrow);
@@ -1382,7 +1437,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	staticRec->setName("Yemoja");
 	staticRec->setInteractable(true);
 	//staticRec->setPersonality(30, 70, 80, 60, 30, 30, 50);// uncommented this
-	
+
 	//staticRec->rel[OYA]->setAffinity(60);// uncommented this
 	//staticRec->rel[OYA]->setNotoriety(40);// uncommented this
 	//staticRec->rel[OYA]->setStrength(80);// uncommented this
@@ -1418,7 +1473,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	AIController::set_plan(OYA, OyaPlanner);
 	Action* test_ally = new Action(nullptr, nullptr, nullptr, 10, 1, "Create Alliance", "execute_train");
 	Action* test_train = new Action(staticRec, oya, nullptr, 10, 1, "Train", "execute_train");
-	
+
 	RelPrecon* prec = new RelPrecon(Preconditions::AFF, 60);
 	RelPost* post = new RelPost(Postcondition::STR, 10);
 	RelPrecon* prec1 = new RelPrecon(Preconditions::AFF, 30);
@@ -1426,22 +1481,22 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	RelPost* post2 = new RelPost(Postcondition::AFF, 15);
 
 	test_ally->req_preconds.push_back(std::make_shared<RelPrecon>(*prec));
-	test_ally->succ_postconds.push_back(std::make_shared<RelPost>(*post));
+	test_ally->doer_succ_postconds.push_back(std::make_shared<RelPost>(*post));
 
 	test_train->req_preconds.push_back(std::make_shared<RelPrecon>(*prec1));
-	test_train->succ_postconds.push_back(std::make_shared<RelPost>(*post1));
-	test_train->succ_postconds.push_back(std::make_shared<RelPost>(*post2));
+	test_train->doer_succ_postconds.push_back(std::make_shared<RelPost>(*post1));
+	test_train->doer_succ_postconds.push_back(std::make_shared<RelPost>(*post2));
 
 	ActionPool act_pool(Alex);
 	act_pool.macro.push_back(test_ally);
 	act_pool.micro.push_back(test_train);
 	act_pool.updateMiddle();
-	vector<Action*> actions=act_pool.getActions(staticRec,test_ally);
+	vector<Action*> actions = act_pool.getActions(staticRec, test_ally);
 	for (auto action : actions) {
 		//std:://cout << action->getName() << std::endl;
 	}
 
-	Alex->add_quest(test_ally,8);
+	Alex->add_quest(test_ally, 8);
 	//Alex->add_quest(test_train, 2);
 	questM->heros.push_back(Alex);
 	///////////////////////////////////////////////////////////////////////////////////////////
@@ -1454,7 +1509,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	YemojaPlanner->set_current_action(test_train);
 
 	//AiController->generate_end_state(YEMOJA, OYA);
-	AIController::init_plans();
+	//AIController::init_plans();
 
 
 	/*
@@ -1471,24 +1526,17 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	//staticRec->goal.setXloc(500);
 	//staticRec->goal.setYloc(1200);
 	*/
-	recVec.push_back(staticRec);
-	for (int i = 0; i < silverSoldier.size();i++) {
-		recVec.push_back(silverSoldier[i]);
-	}
-	for (int i = 0; i < blueSoldiers.size(); i++) {
-		recVec.push_back(blueSoldiers[i]);
-	}
-	
-/*	VisibilityGraph graph{ {
-		{{1400.00,800.00}, {{1400.00, 900.00},{1200.00,800.00}}},
-		{{1400.00,900.00}, {{1400.00,800.00},{1200.00,800.00},{1300.00,1000.00}}},
-		{{1200.00,800.00}, {{1400.00,800.00},{1400.00,900.00},{1100.00,900.00}}},
-		{{1300.00,1000.00}, {{1400.00,900.00},{1100.00,900.00},{1200.00,600.00}}},
-		{{1100.00,900.00}, {{1200.00,800.00},{1300.00,1000.00},{1200.00,600.00}}},
-		{{1200.00,600.00}, {{1100.00,900.00},{1300.00,1000.00}}}
-	} };
-	*/
-	//ai->graph = graph;
+
+	/*	VisibilityGraph graph{ {
+			{{1400.00,800.00}, {{1400.00, 900.00},{1200.00,800.00}}},
+			{{1400.00,900.00}, {{1400.00,800.00},{1200.00,800.00},{1300.00,1000.00}}},
+			{{1200.00,800.00}, {{1400.00,800.00},{1400.00,900.00},{1100.00,900.00}}},
+			{{1300.00,1000.00}, {{1400.00,900.00},{1100.00,900.00},{1200.00,600.00}}},
+			{{1100.00,900.00}, {{1200.00,800.00},{1300.00,1000.00},{1200.00,600.00}}},
+			{{1200.00,600.00}, {{1100.00,900.00},{1300.00,1000.00}}}
+		} };
+		*/
+		//ai->graph = graph;
 	ai->start = staticRec->getLoc();
 	ai->goal = { 1100.00,1100.00 };
 
@@ -1515,9 +1563,10 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	//}
 
 	ai->astar_search(staticRec);
-   // gameplay_functions->get_path(staticRec); //Generate the waypoints to the destination
+	// gameplay_functions->get_path(staticRec); //Generate the waypoints to the destination
 	staticRec->setMode(WANDER);
 	short M = GetKeyState('M') >> 15;
+	Party::grave->set_perm(true);
 	Party* party = new Party();
 	Party* party2 = new Party();
 	Party* party3 = new Party();
@@ -1532,9 +1581,9 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	Village* v1 = new Village();
 	Village* v2 = new Village();
 	Village* v3 = new Village();
-	v1->set_village_location({6045.0, 5155.0});
-	v2->set_village_location({6045.0, 15155.0 });
-	v3->set_village_location({6445.0, 10355.0 });
+	v1->set_village_location({ 6045.0, 5155.0 });
+	v2->set_village_location({ 6045.0, 15155.0 });
+	v3->set_village_location({ 6445.0, 10355.0 });
 	v1->add_member(Alex);
 	for (int i = 0; i < silverSoldier.size(); i++) {
 		v1->add_member(silverSoldier[i]);
@@ -1550,24 +1599,23 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	v2->addToParties(party2);
 	v3->addToParties(party3);
 	War* war = new War();
-	war->setWarParties(v1,v2);
+	war->setWarParties(v1, v2);
 	a1->add_alliance_to_alliance(v3->get_alliance());
-	if (blueSoldiers.size()>0)party2->set_defend(blueSoldiers[0]->getLoc());
+	if (blueSoldiers.size() > 0)party2->set_defend(blueSoldiers[0]->getLoc());
 	party2->setMode(Party::MODE_DEFEND);
-	party3->add_patrol_loc(staticRec->getLoc());
-	party3->add_patrol_loc({ 6445.0, 9855.0 });
-	party3->setMode(Party::MODE_PATROL);
+	party3->set_defend(staticRec->getLoc());
+	party3->setMode(Party::MODE_DEFEND);
 	//cout << Alex->getParty()->getAlliance()<< endl;
 
-	partyM->addToPartyList(party);
-	partyM->addToPartyList(party2);
+	//partyM->addToPartyList(party);
+	//partyM->addToPartyList(party2);
 
 	//osi::GameWindow::init();
 	LOG("PAST WINDOW INIT ***********************");
 	clock_t start_tick, current_ticks, delta_ticks;
 	clock_t fps = 0;
 	int fs = 120;
-    int wait_time = fs * 3; //always wait 3 seconds	
+	int wait_time = fs * 3; //always wait 3 seconds	
 	int count = 0;
 	int state = 0;
 	bool start = true;
@@ -1582,23 +1630,125 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 		soldiers_list.push_back(silverSoldier[i]);
 	}
 
-	current_game_state = game_state::in_game;
+	/*std::thread AI([=]() {
+		while (GameWindow::isRunning()) {
+			combatControl->updateSoliderStatus();
+			combatControl->checkParties();
+			for (int i = 0; i < soldiers_list.size(); i++) {
+				combatControl->update_soldier(soldiers_list[i], state);
+			}
+		}
+	});*/
+	current_game_state = game_state::main_menu;
 	while (GameWindow::isRunning()) {
 		while (current_game_state == game_state::main_menu) {
 			//cout << "currently in the main menu" << endl;
-			cout << "game_state value is " << as_integer(current_game_state) << endl;
-			//iController->current_game_state = current_game_state;
-			cout << "controller state is " << as_integer(iController->current_game_state) << endl;
-			//cout << "input game state is " <<  << endl;
-			// draw main menu and unlock input to work with things in the main menu;
-			//gameplay_functions->draw_frame(main menu);
-			// let say i pressed enter(checked in input), I move into the game now
+			for (int i = 0; i < 10; i++) {
+				cout << "Press Enter to start game" << endl;
+			}
+
+			if (iController->current_game_state != game_state::main_menu) {
+				iController->current_game_state = current_game_state;
+			}
+
+			if (shouldExit > 0) {
+				_CrtDumpMemoryLeaks();
+				return;
+			}
+			if (start) {
+				gameplay_functions->play_sound("Play");
+				start = !start;
+			}
+			start_tick = clock();
+
+			if (Alex->getX() > 5285.83 && Alex->getX() < 7079.86) { //Ogun Desert
+				if (Alex->getY() < 3523.33) {
+					if (current_region == *Desert)
+						next_region = *Ogun;
+
+				}
+				else {
+					if (current_region == *Ogun) {
+						next_region = *Desert;
+					}
+				}
+			}
+			if (Alex->getX() > 10847.5 && Alex->getX() < 12395.5) {
+				if (Alex->getY() < 14441) {
+					if (current_region == *Jungle)
+						next_region = *Mountain;
+				}
+				else {
+					if (current_region == *Mountain) {
+						next_region = *Jungle;
+					}
+				}
+			}
+			if (Alex->getX() > 13091 && Alex->getX() < 13825.9) {
+				if (Alex->getY() < 5132.23) {
+
+					if (current_region == *Mountain) {
+						next_region = *Ogun;
+					}
+				}
+				else {
+					if (current_region == *Ogun)
+						next_region = *Mountain;
+				}
+			}
+			if (Alex->getX() > 3479.67 && Alex->getX() < 9446.06) {
+				if (Alex->getY() < 15980.7) {
+					if (current_region == *Jungle)
+						next_region = *Desert;
+				}
+				else {
+					if (current_region == *Desert) {
+						next_region = *Jungle;
+					}
+				}
+			}
+			if (!(current_region == next_region)) {
+				switch_music = true;
+			}
+
+			if (switch_music) {
+				if (in_village) {
+					gameplay_functions->change_song("Change", current_region.getRTheme(), next_region.getVTheme());
+					switch_music = false;
+
+				}
+				else {
+					gameplay_functions->change_song("Change", current_region.getRTheme(), next_region.getRTheme());
+					current_region = next_region;
+					switch_music = false;
+				}
+
+			}
+
+			gameplay_functions->drawDiaGui(Alex);
+
+			//run task buffer
 			iController->InputCheck();
+
+			tBuffer->run();
+
+			if ((1000 / fs) > (clock() - start_tick)) { //delta_ticks)
+				Sleep((1000 / fs) - (clock() - start_tick));
+			}
+			delta_ticks = clock() - start_tick; //the time, in ms, that took to render the scene
+			if (delta_ticks > 0) {
+				fps = CLOCKS_PER_SEC / delta_ticks;
+			}
+			HUD::FPS = fps;
+			//cout << "FPS: " << fps << endl;
+
+			frame_count++;
+
 			current_game_state = iController->current_game_state;
 		}
 		while (current_game_state == game_state::in_game) {
 			for (int i = 0; i < 10; i++) {
-				cout << "IN INGAME STATE" << endl;
+				cout << "Press Escape to pause game" << endl;
 
 			}
 			if (iController->current_game_state != game_state::in_game) {
@@ -1694,11 +1844,20 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 				}
 
 			}
-			partyM->updateSoliderStatus();
+			/*combatControl->updateSoliderStatus();
 			combatControl->checkParties();
 			for (int i = 0; i < soldiers_list.size(); i++) {
 				combatControl->update_soldier(soldiers_list[i], state);
-			}
+			}*/
+
+			std::thread AI([=]() {
+				combatControl->checkParties();
+				Fight::bring_out_your_dead();
+				Fight::update_all_fights();
+				for (int i = 0; i < soldiers_list.size(); i++) {
+					combatControl->update_soldier(soldiers_list[i], state);
+				}
+			});
 
 			questM->update();
 
@@ -1734,9 +1893,9 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 			//setting give as quest to false so that the excute runs
 			YemojaPlanner->give_as_quest = false;
 
-			AIController::execute();
-
-			if ((1000 / fs) > (clock() - start_tick)) { //delta_ticks) {www
+			//AIController::execute();
+			AI.join();
+			if ((1000 / fs) > (clock() - start_tick)) { //delta_ticks)
 				Sleep((1000 / fs) - (clock() - start_tick));
 			}
 			delta_ticks = clock() - start_tick; //the time, in ms, that took to render the scene
@@ -1751,13 +1910,108 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 			current_game_state = iController->current_game_state;
 		}
 		while (current_game_state == game_state::pause_menu) {
-			cout << "IN PAUSE MENU STATE" << endl;
-			//iController->current_game_state = current_game_state;
-			//draw the pause menu
-			//gameplay_functions->draw_frame(pause menu);
-			//check input
+			for (int i = 0; i < 10; i++) {
+				cout << "Press Q to return to game" << endl;
+
+			}
+			if (iController->current_game_state != game_state::pause_menu) {
+				iController->current_game_state = current_game_state;
+			}
+
+			if (shouldExit > 0) {
+				_CrtDumpMemoryLeaks();
+				return;
+			}
+			if (start) {
+				gameplay_functions->play_sound("Play");
+				start = !start;
+			}
+			start_tick = clock();
+
+			if (Alex->getX() > 5285.83 && Alex->getX() < 7079.86) { //Ogun Desert
+				if (Alex->getY() < 3523.33) {
+					if (current_region == *Desert)
+						next_region = *Ogun;
+
+				}
+				else {
+					if (current_region == *Ogun) {
+						next_region = *Desert;
+					}
+				}
+			}
+			if (Alex->getX() > 10847.5 && Alex->getX() < 12395.5) {
+				if (Alex->getY() < 14441) {
+					if (current_region == *Jungle)
+						next_region = *Mountain;
+				}
+				else {
+					if (current_region == *Mountain) {
+						next_region = *Jungle;
+					}
+				}
+			}
+			if (Alex->getX() > 13091 && Alex->getX() < 13825.9) {
+				if (Alex->getY() < 5132.23) {
+
+					if (current_region == *Mountain) {
+						next_region = *Ogun;
+					}
+				}
+				else {
+					if (current_region == *Ogun)
+						next_region = *Mountain;
+				}
+			}
+			if (Alex->getX() > 3479.67 && Alex->getX() < 9446.06) {
+				if (Alex->getY() < 15980.7) {
+					if (current_region == *Jungle)
+						next_region = *Desert;
+				}
+				else {
+					if (current_region == *Desert) {
+						next_region = *Jungle;
+					}
+				}
+			}
+			if (!(current_region == next_region)) {
+				switch_music = true;
+			}
+
+			if (switch_music) {
+				if (in_village) {
+					gameplay_functions->change_song("Change", current_region.getRTheme(), next_region.getVTheme());
+					switch_music = false;
+
+				}
+				else {
+					gameplay_functions->change_song("Change", current_region.getRTheme(), next_region.getRTheme());
+					current_region = next_region;
+					switch_music = false;
+				}
+
+			}
+
+			//draw
+			gameplay_functions->drawDiaGui(Alex);
+
+			//run task buffer
 			iController->InputCheck();
-			cout << "ICONTROLLER STATE IS " << as_integer(iController->current_game_state) << endl;
+
+			tBuffer->run();
+
+			if ((1000 / fs) > (clock() - start_tick)) { //delta_ticks)
+				Sleep((1000 / fs) - (clock() - start_tick));
+			}
+			delta_ticks = clock() - start_tick; //the time, in ms, that took to render the scene
+			if (delta_ticks > 0) {
+				fps = CLOCKS_PER_SEC / delta_ticks;
+			}
+			HUD::FPS = fps;
+			//cout << "FPS: " << fps << endl;
+
+			frame_count++;
+
 			current_game_state = iController->current_game_state;
 		}
 	}
@@ -1768,15 +2022,15 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 bool lineCollision(Line l1, Line l2)
 {
 	float denom = ((l1.getP2().getX() - l1.getP1().getX()) * (l2.getP2().getY() - l2.getP1().getY())) - ((l1.getP2().getY() - l1.getP1().getY()) * (l2.getP2().getX() - l2.getP1().getX()));
-    float num1 = ((l1.getP1().getY() - l2.getP1().getY()) * (l2.getP2().getX() - l2.getP1().getX())) - ((l1.getP1().getX() - l2.getP1().getX()) * (l2.getP2().getY() - l2.getP1().getY()));
-    float num2 = ((l1.getP1().getY() - l2.getP1().getY()) * (l1.getP2().getX() - l1.getP1().getX())) - ((l1.getP1().getX() - l2.getP1().getX()) * (l1.getP2().getY() - l1.getP1().getY()));
+	float num1 = ((l1.getP1().getY() - l2.getP1().getY()) * (l2.getP2().getX() - l2.getP1().getX())) - ((l1.getP1().getX() - l2.getP1().getX()) * (l2.getP2().getY() - l2.getP1().getY()));
+	float num2 = ((l1.getP1().getY() - l2.getP1().getY()) * (l1.getP2().getX() - l1.getP1().getX())) - ((l1.getP1().getX() - l2.getP1().getX()) * (l1.getP2().getY() - l1.getP1().getY()));
 
-    if (denom == 0) return num1 == 0 && num2 == 0;
+	if (denom == 0) return num1 == 0 && num2 == 0;
 
-    float r = num1 / denom;
-    float s = num2 / denom;
+	float r = num1 / denom;
+	float s = num2 / denom;
 
-    return (r >= 0 && r <= 1) && (s >= 0 && s <= 1);
+	return (r >= 0 && r <= 1) && (s >= 0 && s <= 1);
 }
 
 void FPS(bool b) {
@@ -1784,7 +2038,42 @@ void FPS(bool b) {
 		time_t sec;
 		time(&sec);
 	}
-	time_t now; 
+	time_t now;
 	time(&now);
+
+}
+
+void init_textures_shango(unordered_map<Texture*, pair<string, int>> &textureMap)
+{
+
+}
+
+void init_textures_yemoja(unordered_map<Texture*, pair<string, int>> &textureMap, vector<Texture *> &oasis)
+{
+
+}
+
+void init_textures_oya(unordered_map<Texture*, pair<string, int>> &textureMap, vector<Texture *> &jungle)
+{
+
+}
+
+void init_textures_oshoshi(unordered_map<Texture*, pair<string, int>> &textureMap, vector<Texture *> &mountain)
+{
+
+}
+
+void init_textures_ogun(unordered_map<Texture*, pair<string, int>> &textureMap, vector<Texture *> &ogun)
+{
+
+}
+
+void init_textures_blue_soldier(unordered_map<Texture*, pair<string, int>> &textureMap)
+{
+
+}
+
+void init_textures_silver_soldier(unordered_map<Texture*, pair<string, int>> &textureMap, vector<Texture *> &mountain)
+{
 
 }

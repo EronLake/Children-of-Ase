@@ -121,8 +121,10 @@ void ActionConfig::import_conditions(Json::Value::iterator itr, std::string name
 		}
 	}
 
-	import_post_conditions(itr, name, "succ_postconds");
-	import_post_conditions(itr, name, "fail_postconds");
+	import_post_conditions(itr, name, "doer_succ_postconds");
+	import_post_conditions(itr, name, "doer_fail_postconds");
+	import_post_conditions(itr, name, "receiver_succ_postconds");
+	import_post_conditions(itr, name, "receiver_fail_postconds");
 	
 	/*
 	Containers::action_table[name]->op_preconds.push_back();
@@ -135,13 +137,21 @@ void ActionConfig::import_post_conditions(Json::Value::iterator itr, std::string
 
 	//assigns the postconditions to the appropieate map 
 	vector<std::shared_ptr<Postcondition>>* postconds;
-	if (which_post == "succ_postconds")
+	if (which_post == "doer_succ_postconds")
 	{
-		postconds = &Containers::action_table[name]->succ_postconds;
+		postconds = &Containers::action_table[name]->doer_succ_postconds;
 	} 
-	else //if (which_post == "fail_postconds")
+	else if (which_post == "doer_fail_postconds")
 	{
-		postconds = &Containers::action_table[name]->fail_postconds;
+		postconds = &Containers::action_table[name]->doer_fail_postconds;
+	}
+	else if (which_post == "receiver_succ_postconds")
+	{
+		postconds = &Containers::action_table[name]->receiver_succ_postconds;
+	}
+	else //if (which_post == "receiver_fail_postconds")
+	{
+		postconds = &Containers::action_table[name]->receiver_fail_postconds;
 	}
 
 
@@ -167,3 +177,98 @@ void ActionConfig::import_post_conditions(Json::Value::iterator itr, std::string
 		}
 	}
 }
+
+/*    "conquer": {
+"name": "Conquer",
+"type": "end_state",
+"utility": 0.0,
+"why": 0.0,
+"exe_name": "execute_conquer",
+"aggression": 9,
+"kindness": -8,
+"honor": -10,
+"pride": 4,
+"recklessness": 8,
+"extroversion": 0,
+"greed": 3,
+"req_preconds": {
+"1" : {
+"general_type": 0,
+"rel_type": 10,
+"desired_rel_val": 95
+},
+"2" : {
+"general_type": 0,
+"rel_type": 9,
+"desired_rel_val": 40
+},
+"3" : {
+"general_type": 0,
+"rel_type": 11,
+"desired_rel_val": 60
+}
+},
+"doer_succ_postconds": {
+"1" : {
+"general_type": 0,
+"rel_type": 6,
+"utility": -15
+},
+"2" : {
+"general_type": 0,
+"rel_type": 8,
+"utility": -25
+}
+},
+"doer_fail_postconds": {
+"1" : {
+"general_type": 0,
+"rel_type": 6,
+"utility": 10
+},
+"2" : {
+"general_type": 0,
+"rel_type": 7,
+"utility": -8
+},
+"3" : {
+"general_type": 0,
+"rel_type": 8,
+"utility": 5
+}
+},
+"receiver_succ_postconds": {
+"1" : {
+"general_type": 0,
+"rel_type": 6,
+"utility": 15
+},
+"2" : {
+"general_type": 0,
+"rel_type": 7,
+"utility": -15
+},
+"3" : {
+"general_type": 0,
+"rel_type": 8,
+"utility": 20
+}
+},
+"receiver_fail_postconds": {
+"1" : {
+"general_type": 0,
+"rel_type": 6,
+"utility": -20
+},
+"2" : {
+"general_type": 0,
+"rel_type": 7,
+"utility": -15
+},
+"3" : {
+"general_type": 0,
+"rel_type": 8,
+"utility": -20
+}
+}
+},*/
