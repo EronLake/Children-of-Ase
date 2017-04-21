@@ -1907,6 +1907,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 			//cout << "FPS: " << fps << endl;
 
 			frame_count++;
+			HUD::AVG = total_fps / frame_count;
 
 			current_game_state = iController->current_game_state;
 		}
