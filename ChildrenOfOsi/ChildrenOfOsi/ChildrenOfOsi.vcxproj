@@ -191,6 +191,8 @@
     <ClInclude Include="DialogueHelper.h" />
     <ClInclude Include="DialougeTestSuite.h" />
     <ClInclude Include="DummyController.h" />
+    <ClInclude Include="Fight.h" />
+    <ClInclude Include="GameState.h" />
     <ClInclude Include="HUD.h" />
     <ClInclude Include="Party.h" />
     <ClInclude Include="PartyManager.h" />
@@ -277,6 +279,7 @@
     <ClCompile Include="DialogueHelper.cpp" />
     <ClCompile Include="DialougeTestSuite.cpp" />
     <ClCompile Include="DummyController.cpp" />
+    <ClCompile Include="Fight.cpp" />
     <ClCompile Include="HUD.cpp" />
     <ClCompile Include="Party.cpp" />
     <ClCompile Include="PartyManager.cpp" />

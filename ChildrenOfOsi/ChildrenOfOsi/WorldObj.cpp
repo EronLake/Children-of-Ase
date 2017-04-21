@@ -66,43 +66,44 @@ void WorldObj::offsetBody(int i, float x1, float x2, float y1, float y2) {
 void WorldObj::setDirWithBase(int od, bool update)
 {
 	if (update)baseDir = direction;
-  if(od == 8) {
-    if(baseDir == 2) od = 2;
-    else if(baseDir == 4) od = 4;
-    else if(baseDir == 6) od = 6;
-  }
-  else if(od == 2) {
-    if(baseDir == 2) od = 8;
-    else if(baseDir == 4) od = 6;
-    else if(baseDir == 6) od = 4;
-  }
-  else if(od == 4) {
-    if(baseDir == 2) od = 6;
-    else if(baseDir == 4) od = 2;
-    else if(baseDir == 6) od = 8;
-  }
-  else if(od == 6) {
-    if(baseDir == 2) od = 4;
-    else if(baseDir == 4) od = 8;
-    else if(baseDir == 6) od = 2;
-  }
-
+	switch (od) {
+	case WorldObj::DIRECTION_UP:
+			if (baseDir == DIRECTION_DOWN) od = DIRECTION_DOWN;
+			else if (baseDir == DIRECTION_LEFT) od = DIRECTION_LEFT;
+			else if (baseDir == DIRECTION_RIGHT) od = DIRECTION_RIGHT;
+			break;
+	case WorldObj::DIRECTION_DOWN:
+			if (baseDir == DIRECTION_DOWN) od = DIRECTION_UP;
+			else if (baseDir == DIRECTION_LEFT) od = DIRECTION_RIGHT;
+			else if (baseDir == DIRECTION_RIGHT) od = DIRECTION_LEFT;
+			break;
+	case WorldObj::DIRECTION_LEFT:
+			if (baseDir == DIRECTION_DOWN) od = DIRECTION_RIGHT;
+			else if (baseDir == DIRECTION_LEFT) od = DIRECTION_DOWN;
+			else if (baseDir == DIRECTION_RIGHT) od = DIRECTION_UP;
+			break;
+	case WorldObj::DIRECTION_RIGHT:
+			if (baseDir == DIRECTION_DOWN) od = DIRECTION_LEFT;
+			else if (baseDir == DIRECTION_LEFT) od = DIRECTION_UP;
+			else if (baseDir == DIRECTION_RIGHT) od = DIRECTION_DOWN;
+			break;
+	}
   setDirection(od);
 }
 
 void WorldObj::face(WorldObj* other) {
-	int f = 6;
+	int f = WorldObj::DIRECTION_RIGHT;
 	if (body[0].getX() > other->body[0].getX()) {
 		if (body[0].getY() > other->body[0].getY()) {
 			if (body[0].getX() > other->body[0].getX() + other->body[0].getWidth()) {
-				f = 4;
+				f = WorldObj::DIRECTION_LEFT;
 			}
 			else {
-				f = 8;
+				f = WorldObj::DIRECTION_UP;
 			}
 		}
 		else {
-			f = 2;
+			f = WorldObj::DIRECTION_DOWN;
 		}
 	}
 	setDirection(f);

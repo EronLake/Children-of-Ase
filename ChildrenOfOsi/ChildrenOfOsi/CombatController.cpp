@@ -141,7 +141,7 @@ void CombatController::update_soldier(Soldier* sold1, int state) {
 	}
 	else {
 		///check if the soldier is supposed to hold position and if they are more than 500 away from the point
-		if ((sold1->getHold()) && (dist_soldier_to_location(sold1, sold1->getParty()->get_defend()) > 400)) {
+		if ((sold1->getHold()) && (dist_soldier_to_location(sold1, sold1->getParty()->get_defend()) > sold1->getParty()->get_def_rad())) {
 			sold1->destination = sold1->getParty()->get_defend();
 			sold1->waypoint = sold1->getParty()->get_defend();
 		//	std::lock_guard<std::mutex> guard(mux);
@@ -187,12 +187,14 @@ void CombatController::move_to_target(Soldier* sold1, int state) {
 	if (sold1->destination != Vector2f(0, 0)) { //Hero has a destination
 		if (sold1->waypoint != Vector2f(0, 0) && state == 0) { //Hero has a waypoint to the desination, and not in dialog
 			if (sold1->getHold()) {//getMode() == Party::MODE_DEFEND) {
-				if (dist(sold1->destination, sold1->getParty()->get_defend()) > 500) {
-			//		//std:://cout << "leader too far" << std::endl;
-					sold1->waypoint = sold1->getParty()->get_home();
-					sold1->destination = sold1->getParty()->get_home();
-					gameplay_functions->stop(sold1);
-					return;
+				if (!sold1->getInCombat()) {
+					if (dist(sold1->destination, sold1->getParty()->get_defend()) > sold1->getParty()->get_def_rad()) {
+						//		//std:://cout << "leader too far" << std::endl;
+						sold1->waypoint = sold1->getParty()->get_home();
+						sold1->destination = sold1->getParty()->get_home();
+						gameplay_functions->stop(sold1);
+						return;
+					}
 				}
 			}
 			gameplay_functions->move_toward(sold1); //Take a step towards the current waypoint
@@ -236,26 +238,26 @@ void CombatController::checkParties() {
 			vector<Party*> partiesB = (*j)->getParties();
 			for (auto a = partiesA.begin(); a != partiesA.end(); ++a) {
 				if ((*a)->getMembers().size() == 0) {
-					if (((*i)->barracks != (*a)) || ((*i)->defenders != (*a))) {
+					if (!(*a)->get_perm()) {
 						(*i)->remove_party((*a));
+						delete (*a);
 					}
 				} else if ((*a)->getMode() != Party::MODE_FLEE && !(*a)->getLeader()->getInCombat()) {
 					for (auto b = partiesB.begin(); b != partiesB.end(); ++b) {
 						if ((*b)->getMembers().size() == 0 ) {
-							if (((*j)->barracks != (*b)) || ((*j)->defenders != (*b))) {
+							if (!(*b)->get_perm()) {
 								(*j)->remove_party((*b));
+								delete (*b);
 							}
 						} else if (dist_by_center((*a)->getLeader(), (*b)->getLeader()) < 1000) {
-							(*a)->addToCurrentEnemies(*b);
-							vector<Soldier*> mema = (*a)->getMembers();
-							for (auto am = mema.begin(); am != mema.end(); ++am) {
-								(*am)->setInCombat(true);
-							}
 							if ((*b)->getMode() != Party::MODE_FLEE) {
-								(*b)->addToCurrentEnemies(*a);
-								vector<Soldier*> memb = (*b)->getMembers();
-								for (auto bm = memb.begin(); bm != memb.end(); ++bm) {
-									(*bm)->setInCombat(true);
+								if ((*b)->getLeader()->getInCombat()) {
+									(*b)->get_fight()->add_to_attackers((*a));
+								} else {
+									Fight* fight = new Fight();
+									fight->set_loc((*b)->getLeader()->getLoc());
+									fight->add_to_attackers((*a));
+									fight->add_to_attackers((*b));
 								}
 							}
 						}
@@ -264,6 +266,8 @@ void CombatController::checkParties() {
 			}
 		}
 	}
+	Fight::bring_out_your_dead();
+	Fight::update_all_fights();
 }
 
 void CombatController::party_leader_update(Soldier* sold1, int state) {
@@ -294,6 +298,28 @@ void CombatController::party_leader_update(Soldier* sold1, int state) {
 			}
 			////std:://cout << sold1->getID() << " is idling now" << std::endl;
 		}
+	}
+}
+
+void CombatController::updateSoliderStatus()
+{
+	//iterate through the list of party
+	for (auto it = Party::partiesWorld.begin(); it != Party::partiesWorld.end(); it++) {
+		//for current party, get list of member as a vector of soldier*. Maybe here I am getting a copy of members
+		vector<Soldier *> soldiers = (*it)->getMembers();
+		for (auto itj = soldiers.begin(); itj != soldiers.end(); itj++) {
+			//for each soldier, check to see if its alive. If not, remove from party.
+			if ((*itj)->getHealth() <= 0) {
+				//cout << "RIGHT BEFORE REMOVING THE NPC WITH LESS THAN 0 HP ******** " << endl;
+				(*itj)->getParty()->removeSoldier(*itj, false);
+			}
+			if ((*itj)->getInCombat() == false) {
+				if ((*itj)->getType()== WorldObj::TYPE_PLAYER) break;
+				gameplay_functions->stop(*itj);
+			}
+		}
+
+
 	}
 }
 

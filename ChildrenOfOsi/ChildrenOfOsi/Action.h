@@ -18,10 +18,15 @@ public:
 	vector<std::shared_ptr<Preconditions>> req_preconds;
 	vector<vector<std::shared_ptr<Preconditions>>> op_preconds;
 
-	vector<std::shared_ptr<Postcondition>> succ_postconds;
-	vector<std::shared_ptr<Postcondition>> fail_postconds;
+	vector<std::shared_ptr<Postcondition>> doer_succ_postconds;
+	vector<std::shared_ptr<Postcondition>> doer_fail_postconds;
+
+	//STILL NEED TO WRITE THE APPLY POSTCONDITIONS FUNCTION FOR THESE
+	vector<std::shared_ptr<Postcondition>> receiver_succ_postconds;
+	vector<std::shared_ptr<Postcondition>> receiver_fail_postconds;
 
 	void apply_postconditions(bool ifsucc);
+	void apply_receiver_postconditions(bool ifsucc);
 
 	void setUtility(int u) { utility = u; };
 	int getUtility() { return utility; }; 

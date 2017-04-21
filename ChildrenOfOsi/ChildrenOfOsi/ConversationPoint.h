@@ -15,16 +15,19 @@ public:
 	std::unordered_map<std::string, std::shared_ptr<Postcondition>> succ_postconds;
 	std::unordered_map<std::string, std::shared_ptr<Postcondition>> fail_postconds;
 
-	std::string get_topic();
+	std::string get_icon();
 	std::string get_temp();
 	std::string get_name();
-	void set_topic(std::string val);
+	std::string get_topic();
+	void set_icon(std::string val);
 	void set_temp(std::string val);
 	void set_name(std::string val);
+	void set_topic(std::string val);
 private:
-	std::string topic;
+	std::string icon;
 	std::string temp;
 	std::string my_name;
+	std::string topic;
 	
 };
 

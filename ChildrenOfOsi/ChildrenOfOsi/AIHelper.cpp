@@ -120,7 +120,7 @@ int AIHelper::astar_search(WorldObj* obj)// VisibilityGraph graph, Vector2f star
 {	
 	bool path_exists = false;
 	NPC* npc;
-	if (obj->getType() >= 3) {
+	if (obj->getType() >= WorldObj::TYPE_SOLDIER) {
 		if (!(npc = CheckClass::isNPC(obj))) {
 			LOG("Error: No movable object");
 			return 1;
@@ -184,7 +184,7 @@ int AIHelper::plan_step(WorldObj* obj) {
 	////std:://////cout << "take a step" << std::endl;
 
 	NPC* npc;
-	if (obj->getType() >= 3) {
+	if (obj->getType() >= WorldObj::TYPE_SOLDIER) {
 		if (!(npc = CheckClass::isNPC(obj))) {
 			LOG("AIHelper:plan_step: obj not movable");
 			return 1;

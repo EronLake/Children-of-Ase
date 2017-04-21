@@ -16,11 +16,11 @@ public:
 	static void PlayerConversationPoint();
 	static void PlayerResponse();
 	static void otherConversationPoint(dialogue_point line);
-	static void otherResponse(std::string info);
+	static void otherResponse(std::string info, std::string hero_topic);
 
-	static vector<std::string> getOptions();
+	static vector<std::vector<std::string>> getOptions();
 	static int getOSize() { return options.size(); };
-	static vector<std::string> getReplyOptions();
+	static vector<std::vector<std::string>> getReplyOptions();
 
 	static std::string getMessage() { return message; };
 	static void setOptionsIndex(int i) { optionsIndex = i; select = 0; };
@@ -39,6 +39,8 @@ public:
 
 	static DialogueHelper* getDialogueHelper();
 	static std::string convert_option_to_phrase(std::string opt);
+	static void add_hero_related_conv_points();
+	static void remove_hero_related_conv_points();
 
 	static bool prompted_quest;
 	static bool accepted_quest;
@@ -63,6 +65,6 @@ public:
 	static std::string message;
 	static int optionsIndex;
 	static int select;
-	
+	static std::vector<int> heroes_player_knows;
 };
 

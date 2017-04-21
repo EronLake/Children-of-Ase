@@ -53,18 +53,19 @@ Attack::Attack(float x, float y, bool col) : WorldObj(x, y, col)
  }
 
  void Attack::move() {
-	 int d = getDirection();
-	 if (d == 8) {
-		 shiftY(-speed);
-	 }
-	 else if (d == 2) {
-		 shiftY(speed);
-	 }
-	 else if (d == 4) {
-		 shiftX(-speed);
-	 }
-	 else if (d == 6) {
-		 shiftX(speed);
+	 switch (getDirection()) {
+	 case WorldObj::DIRECTION_UP:
+			 shiftY(-speed);
+			 break;
+	 case WorldObj::DIRECTION_DOWN:
+			 shiftY(speed);
+			 break;
+	 case WorldObj::DIRECTION_LEFT:
+			 shiftX(-speed);
+			 break;
+	 case WorldObj::DIRECTION_RIGHT:
+			 shiftX(speed);
+			 break;
 	 }
  }
 

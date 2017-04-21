@@ -5,34 +5,78 @@
     "utility": 0.0,
     "why": 0.0,
     "exe_name": "execute_train",
-    "aggression": 0,
+    "aggression": 3,
     "kindness": 0,
-    "honor": 0,
+    "honor": 4,
     "pride": 0,
-    "recklessness": 0,
-    "extroversion": 0,
+    "recklessness": -5,
+    "extroversion": 2,
     "greed": 0,
-	"req_preconds": {
-		"1" : {
-			"general_type": 0,
-			"rel_type": 6,
-			"desired_rel_val": 80
-		}
-	},
-	"succ_postconds": {
-		"1" : {
-			"general_type": 0,
-			"rel_type": 6,
-			"utility": 5
-		}
-	},
-	"fail_postconds": {
-		"1" : {
-			"general_type": 0,
-			"rel_type": 6,
-			"utility": -2
-		}
-	}
+    "req_preconds": {
+      "1": {
+        "general_type": 0,
+        "rel_type": 7,
+        "desired_rel_val": 65
+      }
+    },
+    "doer_succ_postconds": {
+      "1": {
+        "general_type": 0,
+        "rel_type": 6,
+        "utility": 5
+      },
+      "2": {
+        "general_type": 0,
+        "rel_type": 7,
+        "utility": 5
+      },
+      "doer_fail_postconds": {
+        "1": {
+          "general_type": 0,
+          "rel_type": 7,
+          "utility": -3
+        },
+        "2": {
+          "general_type": 0,
+          "rel_type": 8,
+          "utility": 3
+        }
+      },
+      "receiver_succ_postconds": {
+        "1": {
+          "general_type": 0,
+          "rel_type": 6,
+          "utility": 5
+        },
+        "2": {
+          "general_type": 0,
+          "rel_type": 7,
+          "utility": 5
+        },
+        "3": {
+          "general_type": 0,
+          "rel_type": 8,
+          "utility": 3
+        }
+      },
+      "receiver_fail_postconds": {
+        "1": {
+          "general_type": 0,
+          "rel_type": 7,
+          "utility": -3
+        },
+        "2": {
+          "general_type": 0,
+          "rel_type": 6,
+          "utility": -3
+        },
+        "3": {
+          "general_type": 0,
+          "rel_type": 8,
+          "utility": -3
+        }
+      }
+    }
   },
   "fight_bandits": {
     "name": "Fight_Bandits",
@@ -47,22 +91,36 @@
     "recklessness": 0,
     "extroversion": 0,
     "greed": 0,
-	"req_preconds": {
-	},
-	"succ_postconds": {
-		"1" : {
-			"general_type": 0,
-			"rel_type": 6,
-			"utility": 5
-		}
-	},
-	"fail_postconds": {
-		"1" : {
-			"general_type": 0,
-			"rel_type": 6,
-			"utility": -2
-		}
-	}
+    "req_preconds": {
+    },
+    "doer_succ_postconds": {
+      "1": {
+        "general_type": 0,
+        "rel_type": 6,
+        "utility": 5
+      }
+    },
+    "doer_fail_postconds": {
+      "1": {
+        "general_type": 0,
+        "rel_type": 6,
+        "utility": 5
+      }
+    },
+    "receiver_succ_postconds": {
+      "1": {
+        "general_type": 0,
+        "rel_type": 6,
+        "utility": 5
+      }
+    },
+    "receiver_fail_postconds": {
+      "1": {
+        "general_type": 0,
+        "rel_type": 6,
+        "utility": -2
+      }
+    }
   },
   "form_alliance": {
     "name": "Form_Alliance",
@@ -77,27 +135,81 @@
     "recklessness": -2,
     "extroversion": 7,
     "greed": 1,
-	"req_preconds": {
-		"1" : {
-			"general_type": 0,
-			"rel_type": 6,
-			"desired_rel_val": 80
-		}
-	},
-	"succ_postconds": {
-		"1" : {
-			"general_type": 0,
-			"rel_type": 6,
-			"utility": 5
-		}
-	},
-	"fail_postconds": {
-		"1" : {
-			"general_type": 0,
-			"rel_type": 6,
-			"utility": -2
-		}
-	}
+    "req_preconds": {
+      "1": {
+        "general_type": 0,
+        "rel_type": 7,
+        "desired_rel_val": 85
+      }
+    },
+    "doer_succ_postconds": {
+      "1": {
+        "general_type": 0,
+        "rel_type": 6,
+        "utility": 8
+      },
+      "2": {
+        "general_type": 0,
+        "rel_type": 7,
+        "utility": 5
+      },
+      "3": {
+        "general_type": 0,
+        "rel_type": 8,
+        "utility": 8
+      }
+    },
+    "doer_fail_postconds": {
+      "1": {
+        "general_type": 0,
+        "rel_type": 6,
+        "utility": 8
+      },
+      "2": {
+        "general_type": 0,
+        "rel_type": 7,
+        "utility": -4
+      },
+      "3": {
+        "general_type": 0,
+        "rel_type": 8,
+        "utility": 5
+      }
+    },
+    "receiver_succ_postconds": {
+      "1": {
+        "general_type": 0,
+        "rel_type": 6,
+        "utility": 8
+      },
+      "2": {
+        "general_type": 0,
+        "rel_type": 7,
+        "utility": 5
+      },
+      "3": {
+        "general_type": 0,
+        "rel_type": 8,
+        "utility": 8
+      }
+    },
+    "receiver_fail_postconds": {
+      "1": {
+        "general_type": 0,
+        "rel_type": 6,
+        "utility": -4
+      },
+      "2": {
+        "general_type": 0,
+        "rel_type": 7,
+        "utility": -4
+      },
+      "3": {
+        "general_type": 0,
+        "rel_type": 8,
+        "utility": -4
+      }
+    }
   },
   "occupy": {
     "name": "Occupy",
@@ -112,29 +224,88 @@
     "recklessness": 5,
     "extroversion": 2,
     "greed": 4,
-	"req_preconds": {
-		"1" : {
-			"general_type": 0,
-			"rel_type": 6,
-			"desired_rel_val": 80
-		}
-	},
-	"succ_postconds": {
-		"1" : {
-			"general_type": 0,
-			"rel_type": 6,
-			"utility": 5
-		}
-	},
-	"fail_postconds": {
-		"1" : {
-			"general_type": 0,
-			"rel_type": 6,
-			"utility": -2
-		}
-	}
+    "req_preconds": {
+      "1": {
+        "general_type": 0,
+        "rel_type": 10,
+        "desired_rel_val": 15
+      },
+      "2": {
+        "general_type": 0,
+        "rel_type": 9,
+        "desired_rel_val": 60
+      }
+    },
+    "doer_succ_postconds": {
+      "1": {
+        "general_type": 0,
+        "rel_type": 6,
+        "utility": -10
+      },
+      "2": {
+        "general_type": 0,
+        "rel_type": 7,
+        "utility": -4
+      },
+      "3": {
+        "general_type": 0,
+        "rel_type": 8,
+        "utility": -8
+      }
+    },
+    "doer_fail_postconds": {
+      "1": {
+        "general_type": 0,
+        "rel_type": 6,
+        "utility": 10
+      },
+      "2": {
+        "general_type": 0,
+        "rel_type": 7,
+        "utility": -6
+      },
+      "3": {
+        "general_type": 0,
+        "rel_type": 8,
+        "utility": 10
+      }
+    },
+    "receiver_succ_postconds": {
+      "1": {
+        "general_type": 0,
+        "rel_type": 6,
+        "utility": 15
+      },
+      "2": {
+        "general_type": 0,
+        "rel_type": 7,
+        "utility": -10
+      },
+      "3": {
+        "general_type": 0,
+        "rel_type": 8,
+        "utility": -10
+      }
+    },
+    "receiver_fail_postconds": {
+      "1": {
+        "general_type": 0,
+        "rel_type": 6,
+        "utility": -8
+      },
+      "2": {
+        "general_type": 0,
+        "rel_type": 7,
+        "utility": -8
+      },
+      "3": {
+        "general_type": 0,
+        "rel_type": 8,
+        "utility": -8
+      }
+    }
   },
-    "conquer": {
+  "conquer": {
     "name": "Conquer",
     "type": "end_state",
     "utility": 0.0,
@@ -147,26 +318,264 @@
     "recklessness": 8,
     "extroversion": 0,
     "greed": 3,
-	"req_preconds": {
-		"1" : {
-			"general_type": 0,
-			"rel_type": 6,
-			"desired_rel_val": 80
-		}
-	},
-	"succ_postconds": {
-		"1" : {
-			"general_type": 0,
-			"rel_type": 6,
-			"utility": 5
-		}
-	},
-	"fail_postconds": {
-		"1" : {
-			"general_type": 0,
-			"rel_type": 6,
-			"utility": -2
-		}
-	}
+    "req_preconds": {
+      "1": {
+        "general_type": 0,
+        "rel_type": 10,
+        "desired_rel_val": 95
+      },
+      "2": {
+        "general_type": 0,
+        "rel_type": 9,
+        "desired_rel_val": 40
+      },
+      "3": {
+        "general_type": 0,
+        "rel_type": 11,
+        "desired_rel_val": 60
+      }
+    },
+    "doer_succ_postconds": {
+      "1": {
+        "general_type": 0,
+        "rel_type": 6,
+        "utility": -15
+      },
+      "2": {
+        "general_type": 0,
+        "rel_type": 8,
+        "utility": -25
+      }
+    },
+    "doer_fail_postconds": {
+      "1": {
+        "general_type": 0,
+        "rel_type": 6,
+        "utility": 10
+      },
+      "2": {
+        "general_type": 0,
+        "rel_type": 7,
+        "utility": -8
+      },
+      "3": {
+        "general_type": 0,
+        "rel_type": 8,
+        "utility": 5
+      }
+    },
+    "receiver_succ_postconds": {
+      "1": {
+        "general_type": 0,
+        "rel_type": 6,
+        "utility": 15
+      },
+      "2": {
+        "general_type": 0,
+        "rel_type": 7,
+        "utility": -15
+      },
+      "3": {
+        "general_type": 0,
+        "rel_type": 8,
+        "utility": 20
+      }
+    },
+    "receiver_fail_postconds": {
+      "1": {
+        "general_type": 0,
+        "rel_type": 6,
+        "utility": -20
+      },
+      "2": {
+        "general_type": 0,
+        "rel_type": 7,
+        "utility": -15
+      },
+      "3": {
+        "general_type": 0,
+        "rel_type": 8,
+        "utility": -20
+      }
+    }
+  },
+  "duel": {
+    "name": "Duel",
+    "type": "micro",
+    "utility": 0.0,
+    "why": 0.0,
+    "exe_name": "execute_duel",
+    "aggression": 7,
+    "kindness": -4,
+    "honor": -1,
+    "pride": 3,
+    "recklessness": 6,
+    "extroversion": 2,
+    "greed": 1,
+    "req_preconds": {
+      "1": {
+        "general_type": 0,
+        "rel_type": 10,
+        "desired_rel_val": 30
+      },
+      "2": {
+        "general_type": 0,
+        "rel_type": 9,
+        "desired_rel_val": 60
+      }
+    },
+    "doer_succ_postconds": {
+      "1": {
+        "general_type": 0,
+        "rel_type": 6,
+        "utility": -5
+      },
+      "2": {
+        "general_type": 0,
+        "rel_type": 7,
+        "utility": -5
+      },
+      "3": {
+        "general_type": 0,
+        "rel_type": 8,
+        "utility": -8
+      }
+    },
+    "doer_fail_postconds": {
+      "1": {
+        "general_type": 0,
+        "rel_type": 6,
+        "utility": 10
+      },
+      "2": {
+        "general_type": 0,
+        "rel_type": 7,
+        "utility": -3
+      },
+      "3": {
+        "general_type": 0,
+        "rel_type": 8,
+        "utility": 8
+      }
+    },
+    "receiver_succ_postconds": {
+      "1": {
+        "general_type": 0,
+        "rel_type": 6,
+        "utility": 10
+      },
+      "2": {
+        "general_type": 0,
+        "rel_type": 7,
+        "utility": -8
+      },
+      "3": {
+        "general_type": 0,
+        "rel_type": 8,
+        "utility": 10
+      }
+    },
+    "receiver_fail_postconds": {
+      "1": {
+        "general_type": 0,
+        "rel_type": 6,
+        "utility": -10
+      },
+      "2": {
+        "general_type": 0,
+        "rel_type": 7,
+        "utility": -5
+      },
+      "3": {
+        "general_type": 0,
+        "rel_type": 8,
+        "utility": -10
+      }
+    }
+  },
+  "spar": {
+    "name": "Spar",
+    "type": "micro",
+    "utility": 0.0,
+    "why": 0.0,
+    "exe_name": "execute_spar",
+    "aggression": 4,
+    "kindness": 2,
+    "honor": 1,
+    "pride": -2,
+    "recklessness": 2,
+    "extroversion": 7,
+    "greed": 0,
+    "req_preconds": {
+      "1": {
+        "general_type": 0,
+        "rel_type": 10,
+        "desired_rel_val": 70
+      },
+      "2": {
+        "general_type": 0,
+        "rel_type": 6,
+        "desired_rel_val": 55
+      },
+      "3": {
+        "general_type": 0,
+        "rel_type": 11,
+        "desired_rel_val": 55
+      }
+    },
+    "doer_succ_postconds": {
+      "1": {
+        "general_type": 0,
+        "rel_type": 6,
+        "utility": 5
+      },
+      "2": {
+        "general_type": 0,
+        "rel_type": 7,
+        "utility": 5
+      }
+    },
+    "doer_fail_postconds": {
+      "1": {
+        "general_type": 0,
+        "rel_type": 7,
+        "utility": -5
+      }
+    },
+    "receiver_succ_postconds": {
+      "1": {
+        "general_type": 0,
+        "rel_type": 6,
+        "utility": 5
+      },
+      "2": {
+        "general_type": 0,
+        "rel_type": 7,
+        "utility": 5
+      },
+      "3": {
+        "general_type": 0,
+        "rel_type": 8,
+        "utility": 5
+      }
+    },
+    "receiver_fail_postconds": {
+      "1": {
+        "general_type": 0,
+        "rel_type": 6,
+        "utility": -5
+      },
+      "2": {
+        "general_type": 0,
+        "rel_type": 7,
+        "utility": -3
+      },
+      "3": {
+        "general_type": 0,
+        "rel_type": 8,
+        "utility": -5
+      }
+    }
   }
+
 }

@@ -129,7 +129,7 @@ void ActionHelper::attack_helper(Soldier* attacker, Soldier* defender)
 	{
 		//kill the soldier/incapacitate the Hero if they run out of health
 		defender->defeat();
-		if (defender->getType()<5) {
+		if (defender->getType()<WorldObj::TYPE_HERO) {
 			defender->setLoc(defender->getVillage()->get_village_location());
 			defender->getVillage()->barracks->addToParty(defender, false);
 		}
@@ -199,7 +199,7 @@ bool ActionHelper::conversation(Action* action) {
 	DialogueController::dialogue.gen_dialog(point,action->getReceiver());
 
 	int success_level = 0;
-	for (auto it = action->succ_postconds.begin(); it != action->succ_postconds.end(); ++it) {
+	for (auto it = action->doer_succ_postconds.begin(); it != action->doer_succ_postconds.end(); ++it) {
 		if ((*it)->get_general_type() == Postcondition::REL) {
 			RelPost* con = dynamic_cast<RelPost*>((*it).get());
 			switch (con->get_rel_type()) {

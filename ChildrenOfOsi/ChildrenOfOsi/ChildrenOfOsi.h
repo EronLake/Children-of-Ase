@@ -57,7 +57,7 @@ public:
 					int why, int when);
 	void add_action(std::string key, int utility, int why, Hero* owner, Hero* receiver, Hero* doer, std::string exe_name);
 	void add_tag(std::string key);
-	void add_conv_point(std::string topic,std::string temp,std::string name);
+	void add_conv_point(std::string icon,std::string temp,std::string name);
 
 	//functions for audio
 	void play_sound(string name);
