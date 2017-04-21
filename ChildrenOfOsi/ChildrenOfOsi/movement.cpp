@@ -21,17 +21,7 @@ Movement::~Movement() {
 //use speed variable instead of .1
 
 int Movement::move_up(WorldObj* obj) {
-  if(obj->sprite.getLock()) {
-    if(Soldier *sold = CheckClass::isSoldier(obj)) {
-      if(sold->sprite.getDying() && sold->sprite.getStart() == 0 && sold->sprite.getStop() == sold->sprite.getTexture().getFrameWidth()) {
-        sold->setLoc(sold->getVillage()->get_village_location());
-        sold->getVillage()->barracks->addToParty(sold, false);
-      }
-    }
-
-    return 0;
-  }
-
+	if (obj->sprite.getLock())return 0;
 	obj->setDirection(WorldObj::DIRECTION_UP);
 	objVec.clear();
 	objVec = tree->retrieve(objVec, obj);
@@ -82,17 +72,7 @@ int Movement::move_up(WorldObj* obj) {
 	return 0;
 }
 int Movement::move_up_left(WorldObj* obj) {
-  if(obj->sprite.getLock()) {
-    if(Soldier *sold = CheckClass::isSoldier(obj)) {
-      if(sold->sprite.getDying() && sold->sprite.getStart() == 0 && sold->sprite.getStop() == sold->sprite.getTexture().getFrameWidth()) {
-        sold->setLoc(sold->getVillage()->get_village_location());
-        sold->getVillage()->barracks->addToParty(sold, false);
-      }
-    }
-
-    return 0;
-  }
-
+	if (obj->sprite.getLock())return 0;
 	obj->setDirection(WorldObj::DIRECTION_LEFT);
 	//get list to check collision with
 	objVec.clear();
@@ -135,17 +115,7 @@ int Movement::move_up_left(WorldObj* obj) {
 	return 0;
 }
 int Movement::move_up_right(WorldObj* obj) {
-  if(obj->sprite.getLock()) {
-    if(Soldier *sold = CheckClass::isSoldier(obj)) {
-      if(sold->sprite.getDying() && sold->sprite.getStart() == 0 && sold->sprite.getStop() == sold->sprite.getTexture().getFrameWidth()) {
-        sold->setLoc(sold->getVillage()->get_village_location());
-        sold->getVillage()->barracks->addToParty(sold, false);
-      }
-    }
-
-    return 0;
-  }
-
+	if (obj->sprite.getLock())return 0;
 	obj->setDirection(WorldObj::DIRECTION_RIGHT);
 	//get list to check collision with
 	objVec.clear();
@@ -188,17 +158,7 @@ int Movement::move_up_right(WorldObj* obj) {
 	return 0;
 }
 int Movement::move_down(WorldObj* obj) {
-  if(obj->sprite.getLock()) {
-    if(Soldier *sold = CheckClass::isSoldier(obj)) {
-      if(sold->sprite.getDying() && sold->sprite.getStart() == 0 && sold->sprite.getStop() == sold->sprite.getTexture().getFrameWidth()) {
-        sold->setLoc(sold->getVillage()->get_village_location());
-        sold->getVillage()->barracks->addToParty(sold, false);
-      }
-    }
-
-    return 0;
-  }
-
+	if (obj->sprite.getLock())return 0;
 	obj->setDirection(WorldObj::DIRECTION_DOWN);
 	//get list to check collision with
 	objVec.clear();
@@ -242,17 +202,7 @@ int Movement::move_down(WorldObj* obj) {
 	return 0;
 }
 int Movement::move_down_left(WorldObj* obj) {
-  if(obj->sprite.getLock()) {
-    if(Soldier *sold = CheckClass::isSoldier(obj)) {
-      if(sold->sprite.getDying() && sold->sprite.getStart() == 0 && sold->sprite.getStop() == sold->sprite.getTexture().getFrameWidth()) {
-        sold->setLoc(sold->getVillage()->get_village_location());
-        sold->getVillage()->barracks->addToParty(sold, false);
-      }
-    }
-
-    return 0;
-  }
-
+	if (obj->sprite.getLock())return 0;
 	obj->setDirection(WorldObj::DIRECTION_LEFT);
 	//get list to check collision with
 	objVec.clear();
@@ -296,17 +246,7 @@ int Movement::move_down_left(WorldObj* obj) {
 	return 0;
 }
 int Movement::move_down_right(WorldObj* obj) {
-  if(obj->sprite.getLock()) {
-    if(Soldier *sold = CheckClass::isSoldier(obj)) {
-      if(sold->sprite.getDying() && sold->sprite.getStart() == 0 && sold->sprite.getStop() == sold->sprite.getTexture().getFrameWidth()) {
-        sold->setLoc(sold->getVillage()->get_village_location());
-        sold->getVillage()->barracks->addToParty(sold, false);
-      }
-    }
-
-    return 0;
-  }
-
+	if (obj->sprite.getLock())return 0;
 	obj->setDirection(WorldObj::DIRECTION_RIGHT);
 	//get list to check collision with
 	objVec.clear();
@@ -349,17 +289,7 @@ int Movement::move_down_right(WorldObj* obj) {
 	return 0;
 }
 int Movement::move_left(WorldObj* obj) {
-  if(obj->sprite.getLock()) {
-    if(Soldier *sold = CheckClass::isSoldier(obj)) {
-      if(sold->sprite.getDying() && sold->sprite.getStart() == 0 && sold->sprite.getStop() == sold->sprite.getTexture().getFrameWidth()) {
-        sold->setLoc(sold->getVillage()->get_village_location());
-        sold->getVillage()->barracks->addToParty(sold, false);
-      }
-    }
-
-    return 0;
-  }
-
+	if (obj->sprite.getLock())return 0;
 	obj->setDirection(WorldObj::DIRECTION_LEFT);
 	//get list to check collision with
 	objVec.clear();
@@ -403,17 +333,7 @@ int Movement::move_left(WorldObj* obj) {
 	return 0;
 }
 int Movement::move_right(WorldObj* obj) {
-  if(obj->sprite.getLock()) {
-    if(Soldier *sold = CheckClass::isSoldier(obj)) {
-      if(sold->sprite.getDying() && sold->sprite.getStart() == 0 && sold->sprite.getStop() == sold->sprite.getTexture().getFrameWidth()) {
-        sold->setLoc(sold->getVillage()->get_village_location());
-        sold->getVillage()->barracks->addToParty(sold, false);
-      }
-    }
-
-    return 0;
-  }
-
+	if (obj->sprite.getLock())return 0;
 	obj->setDirection(WorldObj::DIRECTION_RIGHT);
 	//get list to check collision with
 	objVec.clear();
