@@ -1299,8 +1299,6 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	staticRec->setMaxStamina(300);
 	staticRec->melee->sprite.setTexture(Containers::texture_table["border"]);
 
-	vector<Soldier*> silverSoldier;
-	int silverNum = 4;
 	for (int i = 0; i < silverNum; i++) {
 		silverSoldier[i]->setWidth(150);
 		silverSoldier[i]->setHeight(150);
