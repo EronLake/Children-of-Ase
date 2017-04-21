@@ -520,12 +520,8 @@ int Movement::attack(WorldObj* obj) {
 							if (objVec[i]->getType() > WorldObj::TYPE_LIVINGOBJ) {
 								NPC* npc = CheckClass::isNPC(liv);
 								if (npc) {
-									bool friendly=false;
-									vector<Village*> friends=npc->getVillage()->get_alliance()->get_alligned_villages();
-									Village* from = a->second->get_creator()->getVillage();
-									for (auto itor = friends.begin(); itor != friends.end();++itor) {
-										if (from == (*itor))friendly = true;
-									}
+									Soldier* s2 = CheckClass::isSoldier(a->second->get_creator());
+									bool friendly=(npc->getVillage()->get_alliance()== s2->getVillage()->get_alliance());
 									manager->createTaskForAudio("PlaySound", "SOUND", "SFX/hit.wav");
 									if (a->second->getDestroy())a->second->setDuration(0);
 									npc->sprite.unlockAnimation();
@@ -537,8 +533,14 @@ int Movement::attack(WorldObj* obj) {
 											for (int j = 0; j < delAtk.size(); j++) {
 												delAtk[j]->setDuration(0);
 											}
-											Soldier* s2 = CheckClass::isSoldier(a->second->get_creator());
-											if (!friendly)s->setCurrentEnemy(s2);
+											if (!friendly) {
+												s->setCurrentEnemy(s2);
+												if (s2->getType() == WorldObj::TYPE_PLAYER) {
+													if ((!s->getInCombat()) || (!s2->getInCombat())) {
+														Fight* fight = new Fight(s->getParty(),s2->getParty());
+													}
+												}
+											}
 										}
 									}
 

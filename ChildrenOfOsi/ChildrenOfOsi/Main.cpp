@@ -1600,7 +1600,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	v3->addToParties(party3);
 	War* war = new War();
 	war->setWarParties(v1, v2);
-	a1->add_alliance_to_alliance(v3->get_alliance());
+	//a1->add_alliance_to_alliance(v3->get_alliance());
 	if (blueSoldiers.size() > 0)party2->set_defend(blueSoldiers[0]->getLoc());
 	party2->setMode(Party::MODE_DEFEND);
 	party3->set_defend(staticRec->getLoc());
