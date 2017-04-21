@@ -537,7 +537,7 @@ int Movement::attack(WorldObj* obj) {
 												s->setCurrentEnemy(s2);
 												if (s2->getType() == WorldObj::TYPE_PLAYER) {
 													if ((!s->getInCombat()) || (!s2->getInCombat())) {
-														Fight* fight = new Fight(s->getParty(),s2->getParty());
+														Fight* fight = new Fight(s->getParty(), s2->getParty());
 													}
 												}
 											}
