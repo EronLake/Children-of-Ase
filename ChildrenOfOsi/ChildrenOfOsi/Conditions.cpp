@@ -19,7 +19,7 @@ Preconditions::~Preconditions()
 int Preconditions::get_cost()
 {
 	LOG("virtual function");
-	return 0.0;
+	return 0;
 }
 
 std::string Preconditions::get_type()
@@ -31,6 +31,13 @@ int Preconditions::get_general_type()
 {
 	return general_type;
 }
+
+int Preconditions::get_rel_type()
+{
+	LOG("virtual function");
+	return 0;
+}
+
 //---------------------------------------------------------------------------------
 
 ////////////////////////////////////////////////////////////////////////////////////
@@ -347,7 +354,7 @@ void Postcondition::apply_utility()
 	LOG("virtual function");
 }
 
-void Postcondition::apply_utility(Hero* curr_hero, Hero* other_hero)
+void Postcondition::apply_utility(Hero* curr_hero, Hero* other_hero, bool if_doer)
 {
 	LOG("virtual function");
 }
@@ -360,6 +367,12 @@ std::string Postcondition::get_type()
 int Postcondition::get_general_type()
 {
 	return general_type;
+}
+
+int Postcondition::get_rel_type()
+{
+	LOG("virtual function");
+	return 0;
 }
 
 
@@ -391,30 +404,85 @@ float RelPost::get_utility(Hero* curr_hero, Hero* other_hero)
 	return utility;
 }
 
-void RelPost::apply_utility(Hero* curr_hero, Hero* other_hero)
+/*
+applies the the utility of a post condition with two options:
+if the doer: applies postconditions to doer
+if the reciever: applies postconditions to reciver and the world
+*/
+void RelPost::apply_utility(Hero* curr_hero, Hero* other_hero, bool if_doer)
 {
-	if (rel_type == AFF)
-	{
-		curr_hero->rel[other_hero->name]->addAffinity(utility);
+	//checks if the apply is for the doer or reciever
+	if (if_doer == true) {
+
+		//applies relationship updates to the doer
+		if (rel_type == AFF)
+		{
+			curr_hero->rel[other_hero->name]->addAffinity(utility);
+		}
+		else if (rel_type == NOT)
+		{
+			curr_hero->rel[other_hero->name]->addNotoriety(utility);
+		}
+		else if (rel_type == STR)
+		{
+			curr_hero->rel[other_hero->name]->addStrength(utility);
+		}
+		else if (rel_type == BAFF)
+		{
+			curr_hero->rel[other_hero->name]->addAffinity(-utility);
+		}
+		else if (rel_type == BNOT)
+		{
+			curr_hero->rel[other_hero->name]->addNotoriety(-utility);
+		}
+		else if (rel_type == BSTR)
+		{
+			curr_hero->rel[other_hero->name]->addStrength(-utility);
+		}
 	}
-	else if (rel_type == NOT)
+	else 
 	{
-		curr_hero->rel[other_hero->name]->addNotoriety(utility);
-	}
-	else if (rel_type == STR)
-	{
-		curr_hero->rel[other_hero->name]->addStrength(utility);
-	} else if (rel_type == BAFF)
-	{
-		curr_hero->rel[other_hero->name]->addAffinity(-utility);
-	}
-	else if (rel_type == BNOT)
-	{
-		curr_hero->rel[other_hero->name]->addNotoriety(-utility);
-	}
-	else if (rel_type == BSTR)
-	{
-		curr_hero->rel[other_hero->name]->addStrength(-utility);
+		//applies relationship updates to the reciver
+		if (rel_type == AFF)
+		{
+			other_hero->rel[curr_hero->name]->addAffinity(utility);
+		}
+		else if (rel_type == NOT)
+		{
+			other_hero->rel[curr_hero->name]->addNotoriety(utility);
+		}
+		else if (rel_type == STR)
+		{
+			other_hero->rel[curr_hero->name]->addStrength(utility);
+		}
+		else if (rel_type == BAFF)
+		{
+			other_hero->rel[curr_hero->name]->addAffinity(-utility);
+		}
+		else if (rel_type == BNOT)
+		{
+			other_hero->rel[curr_hero->name]->addNotoriety(-utility);
+		}
+		else if (rel_type == BSTR)
+		{
+			other_hero->rel[curr_hero->name]->addStrength(-utility);
+		}
+
+		for (auto hero : Containers::hero_table) {
+			//check that the her is not the doer or reciever 
+			if (!(hero.second->name == curr_hero->name) && 
+				!(hero.second->name == other_hero->name)) {
+				std::cout << "need to finish";
+
+			}
+			//if rel_type =   get_general_type()
+			//get_rel_type() if NOT or BNOT STR or BSTR
+			
+			//apply 1/3 
+			//else use normal apply utiliy
+
+		}
+
 	}
 }
 
@@ -473,7 +541,7 @@ float RelEstimPost::get_utility(Hero* curr_hero, Hero* other_hero)
 	return utility;
 }
 
-void RelEstimPost::apply_utility(Hero* curr_hero, Hero* other_hero)
+void RelEstimPost::apply_utility(Hero* curr_hero, Hero* other_hero, bool if_doer)
 {
 	if (rel_type == AFF)
 	{

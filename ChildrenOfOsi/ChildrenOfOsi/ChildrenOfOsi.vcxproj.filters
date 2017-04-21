@@ -224,6 +224,7 @@
     <ClCompile Include="ThreadManager.cpp" />
     <ClCompile Include="QuestManager.cpp" />
     <ClCompile Include="ConversationLogObj.cpp" />
+    <ClCompile Include="PlayerActExecFunctions.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AIHelper.h">
@@ -468,6 +469,7 @@
     <ClInclude Include="QuestManager.h" />
     <ClInclude Include="ConversationLogObj.h" />
     <ClInclude Include="GameState.h" />
+    <ClInclude Include="PlayerActExecFunctions.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="audio_test.txt">
