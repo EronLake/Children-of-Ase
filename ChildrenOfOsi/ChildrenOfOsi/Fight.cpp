@@ -198,7 +198,7 @@ void Fight::update_fight() {
 			if (!party_erased)++itor;
 		}
 		if ((*it).size() == 0) {
-			it = attackers.erase(it);
+			it = defenders.erase(it);
 			ally_erased = true;
 		}
 		if (!ally_erased)++it;

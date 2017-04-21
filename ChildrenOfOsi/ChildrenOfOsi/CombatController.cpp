@@ -260,9 +260,9 @@ void CombatController::checkParties() {
 				}
 			}
 		}
-		Fight::bring_out_your_dead();
-		Fight::update_all_fights();
 	}
+	Fight::bring_out_your_dead();
+	Fight::update_all_fights();
 }
 
 void CombatController::party_leader_update(Soldier* sold1, int state) {

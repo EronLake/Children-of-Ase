@@ -1605,6 +1605,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	party2->setMode(Party::MODE_DEFEND);
 	party3->set_defend(staticRec->getLoc());
 	party3->setMode(Party::MODE_DEFEND);
+	Alliance::update_enemies();
 	//cout << Alex->getParty()->getAlliance()<< endl;
 
 	//partyM->addToPartyList(party);
