@@ -177,10 +177,15 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	bool in_village = false;
 
 
-	Region* Ogun = new Region("Ogun", "RegionThemes/OgunRegion.flac", "nothing");
-	Region* Desert = new Region("Desert", "RegionThemes/DesertRegion.flac", "nothing");
-	Region* Mountain = new Region("Desert", "RegionThemes/MountainRegion.flac", "nothing");
-	Region* Jungle = new Region("Desert", "RegionThemes/JungleRegion.flac", "nothing");
+	Region* Ogun = new Region("Ogun", "RegionThemes/OgunRegion.flac", "nothing", {1000,1000});
+	Region* Desert = new Region("Desert", "RegionThemes/DesertRegion.flac", "nothing", {5000,5000});
+	Region* Mountain = new Region("Desert", "RegionThemes/MountainRegion.flac", "nothing", {10000,1000});
+	Region* Jungle = new Region("Desert", "RegionThemes/JungleRegion.flac", "nothing", {5000,10000});
+	vector<Region*> regions_vec;
+	regions_vec.push_back(Ogun);
+	regions_vec.push_back(Desert);
+	regions_vec.push_back(Mountain);
+	regions_vec.push_back(Jungle);
 
 	Region current_region = *Desert;
 	Region next_region = *Desert;
@@ -1005,10 +1010,33 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 		recVec.push_back(blueSoldiers[i]);
 	}
 
-	starting_location.push_back(oasis);
-	starting_location.push_back(ogun);
-	starting_location.push_back(jungle);
-	starting_location.push_back(mountain);
+	int closest;
+	int least_dist;
+	int tmp;
+	while (regions_vec.size() > 0) {
+		closest = 0;
+		least_dist = 0;
+		for (int i = 0; i < regions_vec.size(); i++) {
+			tmp = Party::dist_location_to_location(Alex->getLoc(), regions_vec[i]->loc);
+			if (tmp < least_dist || least_dist == 0) {
+				closest = i;
+				least_dist = tmp;
+			}
+		}
+		if (regions_vec[closest] == Desert) {
+			starting_location.push_back(oasis);
+		}
+		else if (regions_vec[closest] == Mountain) {
+			starting_location.push_back(mountain);
+		}
+		else if (regions_vec[closest] == Jungle) {
+			starting_location.push_back(jungle);
+		}
+		else if (regions_vec[closest] == Ogun) {
+			starting_location.push_back(ogun);
+		}
+		regions_vec.erase(regions_vec.begin()+closest);
+	}
 	HDC hdc = wglGetCurrentDC();
 	HGLRC mainContext = wglGetCurrentContext();
 	HGLRC loaderContext0 = wglCreateContext(hdc);
@@ -1621,9 +1649,11 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	int state = 0;
 	bool start = true;
 	float shouldExit = -3000;
+	int last_avg = 0;
+	int total_fps = 0;
 
 	vector<Soldier*> soldiers_list;
-	soldiers_list.push_back(staticRec);
+//	soldiers_list.push_back(staticRec);
 	for (int i = 0; i < blueSoldiers.size(); i++) {
 		soldiers_list.push_back(blueSoldiers[i]);
 	}
@@ -1905,6 +1935,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 			//cout << "FPS: " << fps << endl;
 
 			frame_count++;
+			HUD::AVG = total_fps / frame_count;
 
 			current_game_state = iController->current_game_state;
 		}
@@ -1999,7 +2030,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 
 			tBuffer->run();
 
-			if ((1000 / fs) > (clock() - start_tick)) { //delta_ticks)
+			if ((1000 / fs) > (clock() - start_tick)) { //delta_ticks) {www
 				Sleep((1000 / fs) - (clock() - start_tick));
 			}
 			delta_ticks = clock() - start_tick; //the time, in ms, that took to render the scene
@@ -2007,9 +2038,11 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 				fps = CLOCKS_PER_SEC / delta_ticks;
 			}
 			HUD::FPS = fps;
+			total_fps += fps;
 			//cout << "FPS: " << fps << endl;
 
 			frame_count++;
+			HUD::AVG = total_fps / frame_count;
 
 			current_game_state = iController->current_game_state;
 		}

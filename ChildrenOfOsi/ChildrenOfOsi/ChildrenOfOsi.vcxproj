@@ -196,6 +196,7 @@
     <ClInclude Include="HUD.h" />
     <ClInclude Include="Party.h" />
     <ClInclude Include="PartyManager.h" />
+    <ClInclude Include="PlayerActExecFunctions.h" />
     <ClInclude Include="QuestManager.h" />
     <ClInclude Include="Region.h" />
     <ClInclude Include="Tag.h" />
@@ -283,6 +284,7 @@
     <ClCompile Include="HUD.cpp" />
     <ClCompile Include="Party.cpp" />
     <ClCompile Include="PartyManager.cpp" />
+    <ClCompile Include="PlayerActExecFunctions.cpp" />
     <ClCompile Include="QuestManager.cpp" />
     <ClCompile Include="Region.cpp" />
     <ClCompile Include="Tag.cpp" />

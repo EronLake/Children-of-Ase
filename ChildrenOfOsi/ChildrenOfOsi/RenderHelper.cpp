@@ -149,6 +149,7 @@ int RenderHelper::drawDiaGui(WorldObj* obj)
 		//objVec[i]->WorldObj::animateObj();
 	}
 	convoGui->drawGui();
+	drawHUD(obj);
 	GameWindow::refresh();
 	return 0;
 }

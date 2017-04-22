@@ -26,7 +26,6 @@ public:
 	vector<std::shared_ptr<Postcondition>> receiver_fail_postconds;
 
 	void apply_postconditions(bool ifsucc);
-	void apply_receiver_postconditions(bool ifsucc);
 
 	void setUtility(int u) { utility = u; };
 	int getUtility() { return utility; }; 

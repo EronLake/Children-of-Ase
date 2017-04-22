@@ -32,6 +32,10 @@ public:
 	std::string get_type();
 	int get_general_type();
 
+	//for relprecons 
+	virtual int get_rel_type();
+
+
 };
 
 class RelPrecon : public Preconditions
@@ -44,7 +48,7 @@ public:
 	RelPrecon(int rel_type, int desired_rel_val);
 	~RelPrecon();
 
-	int get_rel_type() { return rel_type; };
+	virtual int get_rel_type() final { return rel_type; };
 	//Require particular relationship towards a hero
 	virtual int get_cost(Hero* curr_hero, Hero* other_hero) final;
 };
@@ -153,9 +157,11 @@ public:
 	virtual float get_utility(Hero* curr_hero, Hero* other_hero);
 	
 	void apply_utility();
-	void apply_utility(Hero* curr_hero, Hero* other_hero);
+	void apply_utility(Hero* curr_hero, Hero* other_hero, bool if_doer);
 	std::string get_type();
 	int get_general_type();
+	//for relprecons 
+	virtual int get_rel_type(); 
 	
 
 };
@@ -176,7 +182,7 @@ public:
 
 	//Require particular assumption of hero relationship towards sel
 	virtual float get_utility(Hero* curr_hero, Hero* other_hero) final;
-	virtual void apply_utility(Hero* curr_hero, Hero* other_hero) final;
+	virtual void apply_utility(Hero* curr_hero, Hero* other_her, bool if_doer) final;
 	typedef vector<std::shared_ptr<Preconditions>> Precond_vec;
 	RelPrecon* fulfills_which(Precond_vec preconds, Hero* me, Hero* them);
 };
@@ -193,11 +199,11 @@ public:
 	RelEstimPost(int rel_type, int rel_val);
 	~RelEstimPost();
 
-	int get_rel_type() { return rel_type; };
+	virtual int get_rel_type() final { return rel_type; };
 
 	//Require particular assumption of hero relationship towards sel
 	virtual float get_utility(Hero* curr_hero, Hero* other_hero) final;
-	virtual void apply_utility(Hero* curr_hero, Hero* other_hero) final;
+	virtual void apply_utility(Hero* curr_hero, Hero* other_hero, bool if_doer) final;
 
 };
 
