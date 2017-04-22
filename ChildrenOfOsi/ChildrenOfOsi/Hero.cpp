@@ -18,6 +18,7 @@ Hero::Hero()
 		}
 	}
 	action_timer = 0; //initialized to one so the check doesn't go below 0
+	set_killable(false);
 }
 
 Hero::Hero(int _name, float x, float y, bool col) :SplSoldier(x, y, col)
@@ -43,6 +44,7 @@ Hero::Hero(int _name, float x, float y, bool col) :SplSoldier(x, y, col)
 		}
 	}
 	action_timer = 0; //initialized to one so the check doesn't go below 0
+	set_killable(false);
 }
 
 
@@ -69,6 +71,7 @@ Hero::Hero(int _name, Vector2f p_topLeft, float p_width, float p_height):SplSold
 	}
 	traits = new Personality();
 	action_timer = 0; //initialized to one so the check doesn't go below 0
+	set_killable(false);
 }
 
 Hero::~Hero()
@@ -114,18 +117,18 @@ Memory* Hero::find_mem(std::string mem_name)
 }
 
 //overloads a soldier function
-void Hero::defeat()
+/*void Hero::defeat()
 {
-	this->getParty()->removeSoldier(this,true);
+	//this->getParty()->removeSoldier(this,true);
 	incapacitated = true;
-}
+}*/
 
 //overloads a soldier function
-void Hero::kill()
+/*void Hero::kill()
 {
 	this->getParty()->removeSoldier(this,false);
 	this->setParty(NULL);
-}
+}*/
 
 vector<pair<Action*, int>> Hero::get_quests() {
 	vector<pair<Action*, int>> tmp;

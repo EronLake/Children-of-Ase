@@ -393,7 +393,23 @@
         "5": "I am at a loss for words of what to say next."
     },
 
+	"Already_Asked": {
+        "1": "You are quite the joker. Remember, you have already asked me that.",
+        "2": "You are quite the joker. Remember, you have already asked me that.",
+        "3": "You are quite the joker. Remember, you have already asked me that.",
+        "4": "You are quite the joker. Remember, you have already asked me that.",
+        "5": "You are quite the joker. Remember, you have already asked me that."
+    },
+
 	"Response_No_More_Phrases": {
+        "1": "...",
+        "2": "...",
+        "3": "...",
+        "4": "...",
+        "5": "..."
+    },
+
+	"Response_Already_Asked": {
         "1": "...",
         "2": "...",
         "3": "...",

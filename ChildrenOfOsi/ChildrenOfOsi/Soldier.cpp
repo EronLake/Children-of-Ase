@@ -22,6 +22,7 @@ cdTime(0), swingLeft(true)
   currentLeader = nullptr;
   party = nullptr;
   action_destination= nullptr;
+  killable = true;
 }
 
 Soldier::Soldier(Vector2f p_topLeft, float p_width, float p_height): NPC(p_topLeft, p_width, p_height),
@@ -39,6 +40,7 @@ cdTime(0), swingLeft(true)
   currentLeader = nullptr;
   party = nullptr;
   action_destination = nullptr;
+  killable = true;
 }
 
 void Soldier::addAttackType(Attack* a)
@@ -58,31 +60,32 @@ void Soldier::newAttack(int i, Attack* a)
   if(h == 0)h = body[0].getHeight();
   float x = body[0].getX();
   float y = body[0].getY();
-  int d = getDirection();
   int bd = attackTypes[i]->getBaseDir();
-  if(d == 8) {
-    y = y - (h);
-	if (!attackTypes[i]->getCanCancel())p->sprite.setTexture(p->sprite.up);
-    if(bd == 4)x += (attackTypes[i]->getSpeed()*attackTypes[i]->getDuration() / 2);
-    if(bd == 6)x -= (attackTypes[i]->getSpeed()*attackTypes[i]->getDuration() / 2);
-  }
-  else if(d == 2) {
-    y = y + (h);
-	if (!attackTypes[i]->getCanCancel())p->sprite.setTexture(p->sprite.down);
-    if(bd == 4)x -= (attackTypes[i]->getSpeed()*attackTypes[i]->getDuration() / 2);
-    if(bd == 6)x += (attackTypes[i]->getSpeed()*attackTypes[i]->getDuration() / 2);
-  }
-  else if(d == 4) {
-    x = x - (w);
-	if (!attackTypes[i]->getCanCancel())p->sprite.setTexture(p->sprite.left);
-    if(bd == 4)y -= (attackTypes[i]->getSpeed()*attackTypes[i]->getDuration() / 2);
-    if(bd == 6)y += (attackTypes[i]->getSpeed()*attackTypes[i]->getDuration() / 2);
-  }
-  else if(d == 6) {
-    x = x + (w);
-	if (!attackTypes[i]->getCanCancel())p->sprite.setTexture(p->sprite.right);
-    if(bd == 4)y += (attackTypes[i]->getSpeed()*attackTypes[i]->getDuration() / 2);
-    if(bd == 6)y -= (attackTypes[i]->getSpeed()*attackTypes[i]->getDuration() / 2);
+  switch (getDirection()) {
+  case WorldObj::DIRECTION_UP:
+		  y = y - (h);
+		  if (!attackTypes[i]->getCanCancel())p->sprite.setTexture(p->sprite.up);
+		  if (bd == 4)x += (attackTypes[i]->getSpeed()*attackTypes[i]->getDuration() / 2);
+		  if (bd == 6)x -= (attackTypes[i]->getSpeed()*attackTypes[i]->getDuration() / 2);
+		  break;
+  case WorldObj::DIRECTION_DOWN:
+		  y = y + (h);
+		  if (!attackTypes[i]->getCanCancel())p->sprite.setTexture(p->sprite.down);
+		  if (bd == 4)x -= (attackTypes[i]->getSpeed()*attackTypes[i]->getDuration() / 2);
+		  if (bd == 6)x += (attackTypes[i]->getSpeed()*attackTypes[i]->getDuration() / 2);
+		  break;
+  case WorldObj::DIRECTION_LEFT:
+		  x = x - (w);
+		  if (!attackTypes[i]->getCanCancel())p->sprite.setTexture(p->sprite.left);
+		  if (bd == 4)y -= (attackTypes[i]->getSpeed()*attackTypes[i]->getDuration() / 2);
+		  if (bd == 6)y += (attackTypes[i]->getSpeed()*attackTypes[i]->getDuration() / 2);
+		  break;
+  case WorldObj::DIRECTION_RIGHT:
+		  x = x + (w);
+		  if (!attackTypes[i]->getCanCancel())p->sprite.setTexture(p->sprite.right);
+		  if (bd == 4)y += (attackTypes[i]->getSpeed()*attackTypes[i]->getDuration() / 2);
+		  if (bd == 6)y -= (attackTypes[i]->getSpeed()*attackTypes[i]->getDuration() / 2);
+		  break;
   }
   p->setX(x);
   p->setY(y);
@@ -94,7 +97,7 @@ void Soldier::newAttack(int i, Attack* a)
   p->setSpeed(attackTypes[i]->getSpeed());
   p->setWidth(w);
   p->setHeight(h);
-  p->setDirWithBase(d, false);
+  p->setDirWithBase(getDirection(), false);
   p->setPause(attackTypes[i]->getPause());
   p->setKeep(false);
   p->set_creator(this);
@@ -115,7 +118,6 @@ void Soldier::meleeAttack()
   float y = body[0].getY();
   melee->setDuration(5);
   melee->setCanCancel(true);
-  int d = getDirection();
   if(!swingLeft) {
     melee->setBaseDir(6);
     melee->setPause(1);
@@ -124,27 +126,29 @@ void Soldier::meleeAttack()
     melee->setBaseDir(4);
     melee->setPause(8);
   }
-  if(d == 8) {
-    y = y - (melee->getHeight() / 1.2);
-    if(swingLeft) { x += (melee->getSpeed()*melee->getDuration() / 1.2); }
-    else { x -= (melee->getSpeed()*melee->getDuration() / 1.2); }
+  switch (getDirection()) {
+  case WorldObj::DIRECTION_UP:
+		  y = y - (melee->getHeight() / 1.2);
+		  if (swingLeft) { x += (melee->getSpeed()*melee->getDuration() / 1.2); }
+		  else { x -= (melee->getSpeed()*melee->getDuration() / 1.2); }
+		  break;
+  case WorldObj::DIRECTION_DOWN:
+		  y = y + (body[0].getHeight() / 1.2);
+		  if (swingLeft) { x -= (melee->getSpeed()*melee->getDuration() / 1.2); }
+		  else { x += (melee->getSpeed()*melee->getDuration() / 1.2); }
+		  break;
+  case WorldObj::DIRECTION_LEFT:
+		  x = x - (melee->getWidth() / 1.2);
+		  if (swingLeft) { y -= (melee->getSpeed()*melee->getDuration() / 1.2); }
+		  else { y += (melee->getSpeed()*melee->getDuration() / 1.2); }
+		  break;
+  case WorldObj::DIRECTION_RIGHT:
+		  x = x + (body[0].getWidth() / 1.2);
+		  if (swingLeft) { y += (melee->getSpeed()*melee->getDuration() / 1.2); }
+		  else { y -= (melee->getSpeed()*melee->getDuration() / 1.2); }
+		  break;
   }
-  else if(d == 2) {
-    y = y + (body[0].getHeight() / 1.2);
-    if(swingLeft) { x -= (melee->getSpeed()*melee->getDuration() / 1.2); }
-    else { x += (melee->getSpeed()*melee->getDuration() / 1.2); }
-  }
-  else if(d == 4) {
-    x = x - (melee->getWidth() / 1.2);
-    if(swingLeft) { y -= (melee->getSpeed()*melee->getDuration() / 1.2); }
-    else { y += (melee->getSpeed()*melee->getDuration() / 1.2); }
-  }
-  else if(d == 6) {
-    x = x + (body[0].getWidth() / 1.2);
-    if(swingLeft) { y += (melee->getSpeed()*melee->getDuration() / 1.2); }
-    else { y -= (melee->getSpeed()*melee->getDuration() / 1.2); }
-  }
-  melee->setDirWithBase(d, false);
+  melee->setDirWithBase(getDirection(), false);
   melee->setX(x);
   melee->setY(y);
   stamina -= melee->getStaminaCost();
@@ -194,8 +198,24 @@ void Soldier::defeat()
 //this removes the soldier from the party and sets its party to null
 void Soldier::defeat()
 {
-  this->getParty()->removeSoldier(this, false);
-  this->setParty(NULL);
+	if (!killable) {
+		incapacitated = true;
+		this->getParty()->down_member(this);
+	}
+	else {
+		kill();
+	}
+}
+
+void Soldier::capacitate()
+{
+	incapacitated = false;
+}
+
+void Soldier::kill()
+{
+	this->getParty()->removeSoldier(this, false);
+	Party::grave->addToParty(this,false);
 }
 
 /**
@@ -246,10 +266,10 @@ Attack * Soldier::nextAttack()
   }
 }
 
-bool Soldier::isAllyOf(Soldier *s) { return this->party->isAllyOf(s); }
+/*bool Soldier::isAllyOf(Soldier *s) { return this->party->isAllyOf(s); }
 bool Soldier::isAllyOf(Party *p) { return this->party->isAllyOf(p); }
 bool Soldier::isEnemyOf(Soldier *s) { return this->party->isEnemyOf(s); }
-bool Soldier::isEnemyOf(Party *p) { return this->party->isEnemyOf(p); }
+bool Soldier::isEnemyOf(Party *p) { return this->party->isEnemyOf(p); }*/
 
 /**
  * Return whether the given world object is within the range of this soldier's

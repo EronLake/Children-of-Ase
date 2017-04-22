@@ -77,7 +77,7 @@ int MemoryHelper::store_Attack(std::string key, float x, float y, bool col) {
 }
 
 int MemoryHelper::new_Attack(WorldObj* s, int i) {
-	if (s->getType() >= 3) {
+	if (s->getType() >= WorldObj::TYPE_SOLDIER) {
 		Soldier* obj = CheckClass::isSoldier(s);
 		Attack* p = new(find_available_block(memManager::Attack_head, obj->getAtKey())) Attack(0, 0, true);
 		Containers::add_Attack(obj->getAtKey(), p);

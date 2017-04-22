@@ -177,3 +177,98 @@ void ActionConfig::import_post_conditions(Json::Value::iterator itr, std::string
 		}
 	}
 }
+
+/*    "conquer": {
+"name": "Conquer",
+"type": "end_state",
+"utility": 0.0,
+"why": 0.0,
+"exe_name": "execute_conquer",
+"aggression": 9,
+"kindness": -8,
+"honor": -10,
+"pride": 4,
+"recklessness": 8,
+"extroversion": 0,
+"greed": 3,
+"req_preconds": {
+"1" : {
+"general_type": 0,
+"rel_type": 10,
+"desired_rel_val": 95
+},
+"2" : {
+"general_type": 0,
+"rel_type": 9,
+"desired_rel_val": 40
+},
+"3" : {
+"general_type": 0,
+"rel_type": 11,
+"desired_rel_val": 60
+}
+},
+"doer_succ_postconds": {
+"1" : {
+"general_type": 0,
+"rel_type": 6,
+"utility": -15
+},
+"2" : {
+"general_type": 0,
+"rel_type": 8,
+"utility": -25
+}
+},
+"doer_fail_postconds": {
+"1" : {
+"general_type": 0,
+"rel_type": 6,
+"utility": 10
+},
+"2" : {
+"general_type": 0,
+"rel_type": 7,
+"utility": -8
+},
+"3" : {
+"general_type": 0,
+"rel_type": 8,
+"utility": 5
+}
+},
+"receiver_succ_postconds": {
+"1" : {
+"general_type": 0,
+"rel_type": 6,
+"utility": 15
+},
+"2" : {
+"general_type": 0,
+"rel_type": 7,
+"utility": -15
+},
+"3" : {
+"general_type": 0,
+"rel_type": 8,
+"utility": 20
+}
+},
+"receiver_fail_postconds": {
+"1" : {
+"general_type": 0,
+"rel_type": 6,
+"utility": -20
+},
+"2" : {
+"general_type": 0,
+"rel_type": 7,
+"utility": -15
+},
+"3" : {
+"general_type": 0,
+"rel_type": 8,
+"utility": -20
+}
+}
+},*/

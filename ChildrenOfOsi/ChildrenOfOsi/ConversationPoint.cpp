@@ -24,8 +24,8 @@ void ConversationPoint::setMultipliers(int a, int k, int h, int p, int r, int e,
 	multipliers->setGreed(g);
 };
 
-std::string ConversationPoint::get_topic() {
-	return topic;
+std::string ConversationPoint::get_icon() {
+	return icon;
 }
 
 std::string ConversationPoint::get_temp() {
@@ -36,8 +36,12 @@ std::string ConversationPoint::get_name() {
 	return my_name;
 }
 
-void ConversationPoint::set_topic(std::string val) {
-	topic = val;
+std::string ConversationPoint::get_topic() {
+	return topic;
+}
+
+void ConversationPoint::set_icon(std::string val) {
+	icon = val;
 }
 
 void ConversationPoint::set_temp(std::string val) {
@@ -46,6 +50,10 @@ void ConversationPoint::set_temp(std::string val) {
 
 void ConversationPoint::set_name(std::string val) {
 	my_name = val;
+}
+
+void ConversationPoint::set_topic(std::string val) {
+	topic = val;
 }
 
 

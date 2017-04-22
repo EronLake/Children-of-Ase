@@ -120,7 +120,8 @@ void DialogueGui::drawGui()
 	std::string message = DialogueController::getMessage();
 	int j = 0;
 	GameWindow::createText(message, 266, 303, 500, 80, black);
-	std::vector<std::string> options;
+	std::vector<std::vector<std::string>> options;
+	//std::vector<std::vector<dialogue_point>> tmp_opts = DialogueController::getDialogueHelper()->get_possible_conv_pts();
 	if (DialogueController::getState() == 1) {
 		options = DialogueController::getOptions();
 		if (options.size() <= 4)
@@ -130,16 +131,9 @@ void DialogueGui::drawGui()
 		for (int i = 0; i <= 4; i++) {
 			if ( options.size() <= (DialogueController::scroll_control + i))
 				break;
-			std::string option_str = replace_str_char(options[DialogueController::scroll_control + i], "_", ' ');
-			if (option_str.at(0) == 'M' || option_str.back() == 'h')
-				option_str += " Oya";
-			else if (option_str.size() > 10) {
-				if (option_str.at(10) == 'S' || option_str.at(10) == 'A' || option_str.at(10) == 'N') {
-					if( option_str.back() != 'n')
-						option_str += " Oya";
-				}
-					
-			}
+			std::string option_str = replace_str_char(options[DialogueController::scroll_control + i][1], "_", ' ');
+			if (option_str.find("Move To") != string::npos || option_str.find("Ask About") != string::npos)
+				option_str += (" " + options[DialogueController::scroll_control + i][3]);
 			if (DialogueController::getSelect() == i) {
 				GameWindow::createText(option_str, 292, 390 + (18 * i), 544, 45, red);
 			}
@@ -159,14 +153,9 @@ void DialogueGui::drawGui()
 		for (int i = 0; i <= 4; i++) {
 			if (options.size() <= (DialogueController::scroll_control + i))
 				break;
-			std::string option_str = replace_str_char(options[DialogueController::scroll_control + i], "_", ' ');
-			if (option_str.size() > 9 && option_str.size() < 15) {
-				if (option_str.at(9) == 'M' || option_str.back() == 'h' && option_str.back() != 'n')
-					option_str += " Oya";
-			}
-			else if (option_str.size() > 15) {
-				if ((option_str.at(15) == 'S' || option_str.at(15) == 'A') && option_str.back() != 'n')
-					option_str += " Oya";
+			std::string option_str = replace_str_char(options[DialogueController::scroll_control + i][1], "_", ' ');
+			if (option_str.find("Move To") != string::npos || option_str.find("Ask About") != string::npos) {
+					option_str += (" " + options[DialogueController::scroll_control + i][3]);
 			}
 			if (DialogueController::getSelect() == i) {
 			GameWindow::createText(option_str, 292, 390 + (18 * i), 544, 45, red);

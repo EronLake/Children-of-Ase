@@ -3,17 +3,18 @@
 #include "Party.h"
 
 vector<Party*> Party::partiesWorld;
+Party* Party::grave=new Party();
 
 /**
  * Creates a new party with no alliegances, no leader, and no members.
  */
-Party::Party() : faction(nullptr), leader(nullptr), target(nullptr), mode(Party::MODE_IDLE) { Party::partiesWorld.push_back(this); }
+Party::Party() : faction(nullptr), leader(nullptr), target(nullptr), mode(Party::MODE_IDLE), perm(false) { Party::partiesWorld.push_back(this); }
 
 /**
  * Creates a new party with alliegance to the given faction, but no members nor
  * any leader.
  */
-Party::Party(Alliance *a) : faction(a), leader(nullptr), target(nullptr), mode(Party::MODE_IDLE) { Party::partiesWorld.push_back(this); }
+Party::Party(Alliance *a) : faction(a), leader(nullptr), target(nullptr), mode(Party::MODE_IDLE), perm(false) { Party::partiesWorld.push_back(this); }
 
 /**
  * Creates a new party with the given leader, as a part of no faction.
@@ -23,6 +24,7 @@ Party::Party(Soldier *leader) : faction(nullptr), leader(leader), target(nullptr
   this->addToParty(leader, true);
   this->setMode(Party::MODE_IDLE);
   partiesWorld.push_back(this);
+  perm = false;
 }
 
 /**
@@ -34,6 +36,7 @@ Party::Party(Alliance *a, Soldier *leader) : faction(a), leader(leader), target(
   this->addToParty(leader, true);
   this->setMode(Party::MODE_IDLE);
   partiesWorld.push_back(this);
+  perm = false;
 }
 
 /**
@@ -49,39 +52,40 @@ Party::Party(Alliance *a, Soldier *leader, const vector<Soldier *>& members) : f
     this->addToParty(member, false);
   }
   partiesWorld.push_back(this);
+  perm = false;
 }
 
 /**
  * Returns whether the given soldier is an ally of this party.
  */
-bool Party::isAllyOf(Soldier *s)
+/*bool Party::isAllyOf(Soldier *s)
 {
   return this->faction == s->getParty()->getAlliance();
-}
+}*/
 
 /**
  * Returns whether the given party is an ally of this one.
  */
-bool Party::isAllyOf(Party *p)
+/*bool Party::isAllyOf(Party *p)
 {
   return this->faction == p->faction;
-}
+}*/
 
 /**
  * Returns whether the given soldier is an enemy of this party.
  */
-bool Party::isEnemyOf(Soldier *s)
+/*bool Party::isEnemyOf(Soldier *s)
 {
   return this->faction != s->getParty()->getAlliance();
-}
+}*/
 
 /**
  * Returns whether the given party is an eney of this one.
  */
-bool Party::isEnemyOf(Party *p)
+/*bool Party::isEnemyOf(Party *p)
 {
   return this->faction != p->faction;
-}
+}*/
 
 /**
  * Adds the given solider to this party, and sets them as the new leader if
@@ -236,11 +240,13 @@ void Party::setMode(int m)
 		for (auto& member : this->members) {
       member->setHold(false);
     }
+		default_def_rad();
   }
 	else if (mode == Party::MODE_ATTACK) {
 		for (auto& member : this->members) {
       member->setHold(false);
     }
+		default_def_rad();
   }
 	else if (mode == Party::MODE_DEFEND) {
 		for (auto& member : this->members) {
@@ -252,12 +258,14 @@ void Party::setMode(int m)
 			patrol_point = 0;
 			member->setHold(false);
     }
+		default_def_rad();
   }
 	else if (mode == Party::MODE_FLEE) {
 		for (auto& member : this->members) {
       member->setHold(false);
 	  member->setInCombat(false);
     }
+		default_def_rad();
   }
 }
 
@@ -291,4 +299,35 @@ float Party::dist_location_to_location(Vector2f n, Vector2f loc) {
 	float b = (n.getYloc() - loc.getYloc());
 	float c = sqrt(a*a + b*b);
 	return c;
+}
+
+void Party::default_def_rad() {
+	defend_rad = (members.size()*50);
+}
+
+void Party::down_member(Soldier* s) {
+	for (auto i = members.begin(); i != members.end(); ++i) {
+		if (*i == s) {
+			downed_members.push_back(s);
+			if (leader == s){
+				if (mode != MODE_DEFEND) {
+					set_defend(s->getLoc());
+					setMode(MODE_DEFEND);
+				}
+			}
+			break;
+		}
+	}
+}
+
+void Party::up_member(Soldier* s) {
+	downed_members.erase(std::remove(downed_members.begin(), downed_members.end(), s), downed_members.end());
+}
+
+void Party::set_in_combat(bool b) {
+	if (!b)currentEnemies.clear();
+	for (auto it = members.begin(); it != members.end(); ++it) {
+		(*it)->setInCombat(b);
+		if (!b)(*it)->setCurrentEnemy(nullptr);
+	}
 }

@@ -69,12 +69,12 @@ int RelPrecon::get_cost(Hero* curr_hero, Hero* other_hero)
 	if(rel_type == AFF)
 	{ 
 		current_rel = curr_hero->rel[other_hero->name]->getAffinity();
-		cost = float(desired_rel_val) - float(current_rel);
+		cost = desired_rel_val - current_rel;
 	} 
 	else if(rel_type == NOT)
 	{
 		current_rel = curr_hero->rel[other_hero->name]->getNotoriety();
-		cost = float(desired_rel_val) - float(current_rel);
+		cost = desired_rel_val - current_rel;
 	}
 	else if(rel_type == STR)
 	{
@@ -93,17 +93,17 @@ int RelPrecon::get_cost(Hero* curr_hero, Hero* other_hero)
 	} else if (rel_type == BAFF)
 	{
 		current_rel = curr_hero->rel[other_hero->name]->getAffinity();
-		cost = float(current_rel) - float(desired_rel_val);
+		cost = current_rel - desired_rel_val;
 	}
 	else if (rel_type == BNOT)
 	{
 		current_rel = curr_hero->rel[other_hero->name]->getNotoriety();
-		cost = float(current_rel) - float(desired_rel_val);
+		cost = current_rel - desired_rel_val;
 	}
 	else if (rel_type == BSTR)
 	{
 		current_rel = curr_hero->rel[other_hero->name]->getStrength();
-		cost = float(current_rel) - float(desired_rel_val);
+		cost = current_rel - desired_rel_val;
 	}
 
 	
@@ -145,27 +145,27 @@ int RelEstimPrerec::get_cost(Hero* curr_hero, Hero* other_hero)
 	else if (rel_type == NOT)
 	{
 		current_rel = curr_hero->rel[other_hero->name]->getNotorEstimate();
-		cost = float(desired_rel_val) - float(current_rel);
+		cost = desired_rel_val - current_rel;
 	}
 	else if (rel_type == STR)
 	{
 		current_rel = curr_hero->rel[other_hero->name]->getStrEstimate();
-		cost = float(desired_rel_val) - float(current_rel);
+		cost = desired_rel_val - current_rel;
 	}
 	else if (rel_type == BAFF)
 	{
 		current_rel = curr_hero->rel[other_hero->name]->getAffEstimate();
-		cost = float(current_rel) - float(desired_rel_val);
+		cost = current_rel - desired_rel_val;
 	}
 	else if (rel_type == BNOT)
 	{
 		current_rel = curr_hero->rel[other_hero->name]->getNotorEstimate();
-		cost = float(current_rel) - float(desired_rel_val);
+		cost = current_rel - desired_rel_val;
 	}
 	else if (rel_type == BSTR)
 	{
 		current_rel = curr_hero->rel[other_hero->name]->getStrEstimate();
-		cost = float(current_rel) - float(desired_rel_val);
+		cost = current_rel - desired_rel_val;
 	}
 
 
@@ -469,20 +469,52 @@ void RelPost::apply_utility(Hero* curr_hero, Hero* other_hero, bool if_doer)
 		}
 
 		for (auto hero : Containers::hero_table) {
-			//check that the her is not the doer or reciever 
+			//check that the hero is not the doer or reciever 
 			if (!(hero.second->name == curr_hero->name) && 
 				!(hero.second->name == other_hero->name)) {
-				std::cout << "need to finish";
 
+				//applies relationship updates to other heroes
+				/*
+				for AFF:
+				uses the affinity of the reciever as a magnifier for the
+				affinity change EX - if you win a fight:
+				reciver: -5 (they like you less)
+				Hero who likes the reciver (60aff): ((60-50)/50)*util = 1/5*(-5) = -1
+				Hero who dislikes the reciver (40aff): ((40-50)/50)*util = (-1/5)*(-5) = 1
+				the second hero actually like you more becaues you beat their enemy
+				*/
+
+				//NOT and STR are 1/3 of reciver AFF is a unique equation
+				if (rel_type == AFF)
+				{
+					//get the affinity change using the relationship with reciver "other_hero"
+					int aff_change = ((hero.second->rel[other_hero->name]->getAffinity() - 50) / 50) * utility;
+					hero.second->rel[curr_hero->name]->addAffinity(aff_change);
+				}
+				else if (rel_type == NOT)
+				{
+					hero.second->rel[curr_hero->name]->addNotoriety(utility*(1/3));
+				}
+				else if (rel_type == STR)
+				{
+					hero.second->rel[curr_hero->name]->addStrength(utility*(1 / 3));
+				}
+				else if (rel_type == BAFF)
+				{
+					//get the affinity change using the relationship with reciver "other_hero"
+					int aff_change = ((hero.second->rel[other_hero->name]->getAffinity() - 50) / 50) * utility;
+					hero.second->rel[curr_hero->name]->addAffinity(-aff_change);
+				}
+				else if (rel_type == BNOT)
+				{
+					hero.second->rel[curr_hero->name]->addNotoriety(-utility*(1 / 3));
+				}
+				else if (rel_type == BSTR)
+				{
+					hero.second->rel[curr_hero->name]->addStrength(-utility*(1 / 3));
+				}
 			}
-			//if rel_type =   get_general_type()
-			//get_rel_type() if NOT or BNOT STR or BSTR
-			
-			//apply 1/3 
-			//else use normal apply utiliy
-
 		}
-
 	}
 }
 

@@ -231,26 +231,25 @@ void CombatController::checkParties() {
 			vector<Party*> partiesB = (*j)->getParties();
 			for (auto a = partiesA.begin(); a != partiesA.end(); ++a) {
 				if ((*a)->getMembers().size() == 0) {
-					if (((*i)->barracks != (*a)) || ((*i)->defenders != (*a))) {
+					if (!(*a)->get_perm()) {
 						(*i)->remove_party((*a));
+						delete (*a);
 					}
 				} else if ((*a)->getMode() != Party::MODE_FLEE && !(*a)->getLeader()->getInCombat()) {
 					for (auto b = partiesB.begin(); b != partiesB.end(); ++b) {
 						if ((*b)->getMembers().size() == 0 ) {
-							if (((*j)->barracks != (*b)) || ((*j)->defenders != (*b))) {
+							if (!(*b)->get_perm()) {
 								(*j)->remove_party((*b));
+								delete (*b);
 							}
 						} else if (dist_by_center((*a)->getLeader(), (*b)->getLeader()) < 1000) {
-							(*a)->addToCurrentEnemies(*b);
-							vector<Soldier*> mema = (*a)->getMembers();
-							for (auto am = mema.begin(); am != mema.end(); ++am) {
-								(*am)->setInCombat(true);
-							}
 							if ((*b)->getMode() != Party::MODE_FLEE) {
-								(*b)->addToCurrentEnemies(*a);
-								vector<Soldier*> memb = (*b)->getMembers();
-								for (auto bm = memb.begin(); bm != memb.end(); ++bm) {
-									(*bm)->setInCombat(true);
+								if ((*b)->getLeader()->getInCombat()) {
+									(*b)->get_fight()->add_to_attackers((*a));
+								} else {
+									Fight* fight = new Fight();
+									fight->add_to_attackers((*a));
+									fight->add_to_attackers((*b));
 								}
 							}
 						}
@@ -305,7 +304,7 @@ void CombatController::updateSoliderStatus()
 				(*itj)->getParty()->removeSoldier(*itj, false);
 			}
 			if ((*itj)->getInCombat() == false) {
-				if ((*itj)->getType()== 6) break;
+				if ((*itj)->getType()== WorldObj::TYPE_PLAYER) break;
 				gameplay_functions->stop(*itj);
 			}
 		}

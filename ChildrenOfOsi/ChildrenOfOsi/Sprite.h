@@ -33,8 +33,8 @@ class Sprite
   
   void animate();
   void lockAnimation() { this->lock = true; };
-  void unlockAnimation() { this->lock = false; };
-  void lockIntoDeathAnimation() { this->dying = true; }
+  void unlockAnimation() { if (!dying)this->lock = false; };
+  void lockIntoDeathAnimation() { this->dying = true; this->lock = true;}
 
   Texture *id_up;
   Texture *id_down;

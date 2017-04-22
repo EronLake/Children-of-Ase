@@ -59,6 +59,7 @@ void Sprite::animate()
       this->stop = this->tex->getFrameWidth();
       if(lock) {
         lock = false;
+		dying = false; //now just dead if previously dying
         setTexture(idle);
       }
     }

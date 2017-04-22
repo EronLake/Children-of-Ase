@@ -204,8 +204,8 @@ void ChildrenOfOsi::add_tag(std::string key) {
 	createTaskTag("Add_Tag", "MODIFY_POOL",key);
 }
 
-void ChildrenOfOsi::add_conv_point(std::string topic, std::string temp, std::string key) {
-	createTaskNoObj("Add_Conv_Point", "MODIFY_POOL",topic,temp, key);
+void ChildrenOfOsi::add_conv_point(std::string icon, std::string temp, std::string key) {
+	createTaskNoObj("Add_Conv_Point", "MODIFY_POOL",icon,temp, key);
 }
 
 
@@ -280,11 +280,12 @@ void ChildrenOfOsi::createTaskAddAct(std::string task_name, std::string type, st
 	tBuffer->push(new_task);
 }
 
-void ChildrenOfOsi::createTaskNoObj(std::string task_name, std::string type, std::string topic, std::string temp, std::string key)
+//used for conversation points
+void ChildrenOfOsi::createTaskNoObj(std::string task_name, std::string type, std::string icon, std::string temp, std::string key)
 {
 	//maybe just pass in the string craeated
 	std::string task_status = "CREATED";
-	Task* new_task = new Task(task_name, task_status, type, topic, temp, key);
+	Task* new_task = new Task(task_name, task_status, type, icon, temp, key);
 	tBuffer->push(new_task);
 }
 

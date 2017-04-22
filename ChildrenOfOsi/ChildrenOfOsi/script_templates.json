@@ -299,6 +299,18 @@
 	 }
     },
 
+	"Already_Asked_Templates": {
+	 "1": {
+        "1": "Already_Asked"
+	 }
+    },
+
+	"Response_Already_Asked_Templates": {
+	 "1": {
+        "1": "Response_Already_Asked"
+	 }
+    },
+
 	"Decline_To_Answer_Templates": {
      "1": {
         "1": "Decline_To_Answer"
