@@ -17,6 +17,8 @@ public:
 	static void toggle_quests() { show_active_quests = !show_active_quests; };
 
 	static int FPS;
+	static int AVG;
+
 private:
 	//kinda ugly...
 	Rectangle* hud_empty;

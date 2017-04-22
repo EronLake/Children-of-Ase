@@ -7,19 +7,37 @@ Fight::Fight()
 {
 	over = false;
 	fights_world.push_back(this);
+	sides = 0;
 }
 
-Fight::Fight(Party* a, Party* b)
+Fight::Fight(Party* a, Party* b, bool duel)
 {
 	over = false;
-	defenders.push_back({a});
-	defenders.push_back({b});
+	if (a->get_perm() || duel) {
+		defenders.push_back({ a });
+	}
+	else {
+		attackers.push_back({ a });
+	}
+	if (b->get_perm() || duel) {
+		defenders.push_back({ b });
+	}
+	else {
+		attackers.push_back({ b });
+	}
 	a->set_fight(this);
 	b->set_fight(this);
 	a->set_in_combat(true);
 	b->set_in_combat(true);
 	a->addToCurrentEnemies(b);
 	b->addToCurrentEnemies(a);
+	if (b->getMembers().size() > 0) {
+		loc = b->getLeader()->getLoc();
+		a->setMode(Party::MODE_DEFEND);
+		b->setMode(Party::MODE_DEFEND);
+		update_radius();
+	}
+	sides = 2;
 	fights_world.push_back(this);
 }
 
@@ -46,18 +64,21 @@ int Fight::get_radius() {
 }
 
 void Fight::update_radius() {
-	int rad = get_radius();
+	rad = get_radius();
 	for (auto it = attackers.begin(); it != attackers.end(); ++it) {
 		for (auto itor = (*it).begin(); itor != (*it).end(); ++itor) {
+			(*itor)->set_defend(loc);
 			(*itor)->set_def_rad(rad);
 		}
 	}
 	for (auto it = defenders.begin(); it != defenders.end(); ++it) {
 		for (auto itor = (*it).begin(); itor != (*it).end(); ++itor) {
+			(*itor)->set_defend(loc);
 			(*itor)->set_def_rad(rad);
 		}
 	}
 	for (auto itor = downed.begin(); itor != downed.end(); ++itor) {
+		(*itor)->set_defend(loc);
 		(*itor)->set_def_rad(rad);
 	}
 }
@@ -102,6 +123,9 @@ void Fight::add_party(Party* p, bool atk) {
 	}
 	p->set_fight(this);
 	p->set_in_combat(true);
+	p->setMode(Party::MODE_DEFEND);
+	update_radius();
+	find_targets();
 }
 
 void Fight::add_to_attackers(Party* p) {
@@ -121,6 +145,9 @@ void Fight::add_to_attackers(Party* p) {
 	if (!added)attackers.push_back({p});
 	p->set_fight(this);
 	p->set_in_combat(true);
+	p->setMode(Party::MODE_DEFEND);
+	update_radius();
+	find_targets();
 }
 
 void Fight::add_to_defenders(Party* p) {
@@ -140,6 +167,9 @@ void Fight::add_to_defenders(Party* p) {
 	if (!added)defenders.push_back({ p });
 	p->set_fight(this);
 	p->set_in_combat(true);
+	p->setMode(Party::MODE_DEFEND);
+	update_radius();
+	find_targets();
 }
 
 void Fight::update_fight() {
@@ -154,7 +184,15 @@ void Fight::update_fight() {
 					downed.push_back((*itor));
 				}
 				itor = (*it).erase(itor);
+				update_radius();
 				party_erased=true;
+			}else {
+				check_should_flee((*itor));
+				if ((*itor)->getMode() == Party::MODE_FLEE) {
+					itor = (*it).erase(itor);
+					update_radius();
+					party_erased = true;
+				}
 			}
 			if (!party_erased)++itor;
 		}
@@ -173,16 +211,22 @@ void Fight::update_fight() {
 					downed.push_back((*itor));
 				}
 				itor = (*it).erase(itor);
+				update_radius();
 				party_erased = true;
+			} else if ((*itor)->getLeader()->getType() == WorldObj::TYPE_PLAYER) {
+				if (Party::dist_location_to_location((*itor)->getLeader()->getLoc(), loc) > (rad * 3)) {
+					(*itor)->setMode(Party::MODE_FLEE);
+				}
 			}
 			if (!party_erased)++itor;
 		}
 		if ((*it).size() == 0) {
-			it = attackers.erase(it);
+			it = defenders.erase(it);
 			ally_erased = true;
 		}
 		if (!ally_erased)++it;
 	}
+	update_radius();
 	over = check_for_winner();
 }
 
@@ -251,20 +295,86 @@ void Fight::end_combat() {
 	}
 }
 
+//combines attack/defend/downed vectors into a map by alliance
 void Fight::find_targets() {
-	/*unordered_map<Alliance*, int> alliances;
+	unordered_map<Alliance*, vector<Party*>> alliances;
 	for (auto it = attackers.begin(); it != attackers.end(); ++it) {
 		for (auto itor = (*it).begin(); itor != (*it).end(); ++itor) {
 			if ((*itor)->getMembers().size() > 0) {
-				alliances[(*itor)->getLeader()->getVillage()->get_alliance()] = 1;
+				alliances[(*itor)->getLeader()->getVillage()->get_alliance()].push_back((*itor));
 			}
 		}
 	}
 	for (auto it = defenders.begin(); it != defenders.end(); ++it) {
 		for (auto itor = (*it).begin(); itor != (*it).end(); ++itor) {
 			if ((*itor)->getMembers().size() > 0) {
-				alliances[(*itor)->getLeader()->getVillage()->get_alliance()] = 1;
+				alliances[(*itor)->getLeader()->getVillage()->get_alliance()].push_back((*itor));
 			}
 		}
-	}*/
+	}
+	for (auto itor = downed.begin(); itor != downed.end(); ++itor) {
+		if ((*itor)->getMembers().size() > 0) {
+			alliances[(*itor)->getLeader()->getVillage()->get_alliance()].push_back((*itor));
+		}
+	}
+	sides = alliances.size();
+	help_find_targets(alliances);
+}
+
+//uses map to find enemies
+void Fight::help_find_targets(unordered_map<Alliance*, vector<Party*>> alliances){
+	vector<Alliance*> enmys;
+	vector<Party*> enmys_party;
+	vector<Party*> allies;
+	for (auto it = alliances.begin(); it != alliances.end(); ++it) {
+		allies = ((*it).second);
+		enmys = ((*it).first)->get_enemy_alliances();
+		for (int i = 0; i < enmys.size(); i++) {
+			enmys_party = alliances[enmys[i]];
+			for (auto itor = allies.begin(); itor != allies.end(); ++itor) {
+				(*itor)->clear_current_enemies();
+				for (int j = 0; j < enmys_party.size();j++) {
+					(*itor)->addToCurrentEnemies(enmys_party[j]);
+				}
+			}
+		}
+	}
+}
+
+void Fight::check_should_flee(Party* p) {
+	if (p->getLeader()->getType() == WorldObj::TYPE_PLAYER) {
+		if (Party::dist_location_to_location(p->getLeader()->getLoc(), loc) > (rad * 3)) {
+			p->setMode(Party::MODE_FLEE);
+		}
+	}
+	else if (p->getLeader()->getType() == WorldObj::TYPE_HERO) {
+		vector<Party*> enemies = p->getCurrentEnemies();
+		int total_enemies = 0;
+		int total_sold = rad / 100;
+		for (auto it = enemies.begin(); it != enemies.end(); ++it) {
+			total_enemies += (*it)->getMembers().size();
+		}
+		int tmp = sides - 1;
+		if (tmp < 1)tmp = 1;
+		total_sold = total_sold - total_enemies;
+		total_enemies = total_enemies / tmp;
+		if (total_enemies >= (total_sold * 3)) {
+			p->setMode(Party::MODE_FLEE);
+		}
+	}
+	else {
+		vector<Party*> enemies = p->getCurrentEnemies();
+		int total_enemies = 0;
+		int total_sold = rad / 100;
+		for (auto it = enemies.begin(); it != enemies.end(); ++it) {
+			total_enemies += (*it)->getMembers().size();
+		}
+		int tmp= sides-1;
+		if (tmp < 1)tmp = 1;
+		total_sold = total_sold-total_enemies;
+		total_enemies = total_enemies / tmp;
+		if (total_enemies >= (total_sold*2)) {
+			p->setMode(Party::MODE_FLEE);
+		}
+	}
 }

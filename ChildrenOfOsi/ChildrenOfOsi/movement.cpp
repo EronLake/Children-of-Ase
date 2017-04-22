@@ -21,17 +21,7 @@ Movement::~Movement() {
 //use speed variable instead of .1
 
 int Movement::move_up(WorldObj* obj) {
-  if(obj->sprite.getLock()) {
-    if(Soldier *sold = CheckClass::isSoldier(obj)) {
-      if(sold->sprite.getDying() && sold->sprite.getStart() == 0 && sold->sprite.getStop() == sold->sprite.getTexture().getFrameWidth()) {
-        sold->setLoc(sold->getVillage()->get_village_location());
-        sold->getVillage()->barracks->addToParty(sold, false);
-      }
-    }
-
-    return 0;
-  }
-
+	if (obj->sprite.getLock())return 0;
 	obj->setDirection(WorldObj::DIRECTION_UP);
 	objVec.clear();
 	objVec = tree->retrieve(objVec, obj);
@@ -55,8 +45,12 @@ int Movement::move_up(WorldObj* obj) {
 			if (collision(objVec[i], obj)) {
 				//manager->createTask("Bump", "SOUND");
 				LOG("failed to move up. collision.");
+			//	cout << "COLLIDED ABOVE" << endl;
 				obj->shiftY(moveSpeed*speed_magnifier);
 				break;
+			}
+			else {
+				//cout << "no collision" << endl;
 			}
 		}
 		Line temp(Point(obj->body[0].getX() + (obj->body[0].getWidth() / 2), 20000 - (obj->body[0].getY())), Point(obj->body[0].getX() + (obj->body[0].getWidth() / 2), 20000 - (obj->body[0].getY() + obj->body[0].getHeight())));
@@ -82,17 +76,7 @@ int Movement::move_up(WorldObj* obj) {
 	return 0;
 }
 int Movement::move_up_left(WorldObj* obj) {
-  if(obj->sprite.getLock()) {
-    if(Soldier *sold = CheckClass::isSoldier(obj)) {
-      if(sold->sprite.getDying() && sold->sprite.getStart() == 0 && sold->sprite.getStop() == sold->sprite.getTexture().getFrameWidth()) {
-        sold->setLoc(sold->getVillage()->get_village_location());
-        sold->getVillage()->barracks->addToParty(sold, false);
-      }
-    }
-
-    return 0;
-  }
-
+	if (obj->sprite.getLock())return 0;
 	obj->setDirection(WorldObj::DIRECTION_LEFT);
 	//get list to check collision with
 	objVec.clear();
@@ -135,17 +119,7 @@ int Movement::move_up_left(WorldObj* obj) {
 	return 0;
 }
 int Movement::move_up_right(WorldObj* obj) {
-  if(obj->sprite.getLock()) {
-    if(Soldier *sold = CheckClass::isSoldier(obj)) {
-      if(sold->sprite.getDying() && sold->sprite.getStart() == 0 && sold->sprite.getStop() == sold->sprite.getTexture().getFrameWidth()) {
-        sold->setLoc(sold->getVillage()->get_village_location());
-        sold->getVillage()->barracks->addToParty(sold, false);
-      }
-    }
-
-    return 0;
-  }
-
+	if (obj->sprite.getLock())return 0;
 	obj->setDirection(WorldObj::DIRECTION_RIGHT);
 	//get list to check collision with
 	objVec.clear();
@@ -188,17 +162,7 @@ int Movement::move_up_right(WorldObj* obj) {
 	return 0;
 }
 int Movement::move_down(WorldObj* obj) {
-  if(obj->sprite.getLock()) {
-    if(Soldier *sold = CheckClass::isSoldier(obj)) {
-      if(sold->sprite.getDying() && sold->sprite.getStart() == 0 && sold->sprite.getStop() == sold->sprite.getTexture().getFrameWidth()) {
-        sold->setLoc(sold->getVillage()->get_village_location());
-        sold->getVillage()->barracks->addToParty(sold, false);
-      }
-    }
-
-    return 0;
-  }
-
+	if (obj->sprite.getLock())return 0;
 	obj->setDirection(WorldObj::DIRECTION_DOWN);
 	//get list to check collision with
 	objVec.clear();
@@ -218,9 +182,13 @@ int Movement::move_down(WorldObj* obj) {
 			}
 			if (collision(objVec[i], obj)) {
 				LOG("failed to move down. collision.");
+				//cout << "COLLIDED BELOW" << endl;
 				//manager->createTask("Bump", "SOUND");
 				obj->shiftY(-moveSpeed*speed_magnifier);
 				break;
+			}
+			else {
+				//cout << "no collision" << endl;
 			}
 		}
 		Line temp(Point(obj->body[0].getX()+(obj->body[0].getWidth()/2), 20000 - (obj->body[0].getY())), Point(obj->body[0].getX() + (obj->body[0].getWidth() / 2), 20000 - (obj->body[0].getY() + obj->body[0].getHeight())));
@@ -242,17 +210,7 @@ int Movement::move_down(WorldObj* obj) {
 	return 0;
 }
 int Movement::move_down_left(WorldObj* obj) {
-  if(obj->sprite.getLock()) {
-    if(Soldier *sold = CheckClass::isSoldier(obj)) {
-      if(sold->sprite.getDying() && sold->sprite.getStart() == 0 && sold->sprite.getStop() == sold->sprite.getTexture().getFrameWidth()) {
-        sold->setLoc(sold->getVillage()->get_village_location());
-        sold->getVillage()->barracks->addToParty(sold, false);
-      }
-    }
-
-    return 0;
-  }
-
+	if (obj->sprite.getLock())return 0;
 	obj->setDirection(WorldObj::DIRECTION_LEFT);
 	//get list to check collision with
 	objVec.clear();
@@ -276,6 +234,8 @@ int Movement::move_down_left(WorldObj* obj) {
 				//manager->createTask("Bump", "SOUND");
 				obj->shiftY(-diagYSpeed*speed_magnifier);
 				break;
+			}			else {
+				//cout << "no collision" << endl;
 			}
 		}
 		obj->shiftX(-diagXSpeed*speed_magnifier);
@@ -296,17 +256,7 @@ int Movement::move_down_left(WorldObj* obj) {
 	return 0;
 }
 int Movement::move_down_right(WorldObj* obj) {
-  if(obj->sprite.getLock()) {
-    if(Soldier *sold = CheckClass::isSoldier(obj)) {
-      if(sold->sprite.getDying() && sold->sprite.getStart() == 0 && sold->sprite.getStop() == sold->sprite.getTexture().getFrameWidth()) {
-        sold->setLoc(sold->getVillage()->get_village_location());
-        sold->getVillage()->barracks->addToParty(sold, false);
-      }
-    }
-
-    return 0;
-  }
-
+	if (obj->sprite.getLock())return 0;
 	obj->setDirection(WorldObj::DIRECTION_RIGHT);
 	//get list to check collision with
 	objVec.clear();
@@ -327,6 +277,7 @@ int Movement::move_down_right(WorldObj* obj) {
 			}
 			if (collision(objVec[i], obj)) {
 				LOG("failed to move down. collision.");
+				//cout << "COLLIDED BELOW" << endl;
 				//manager->createTask("Bump", "SOUND");
 				obj->shiftY(-diagYSpeed*speed_magnifier);
 				break;
@@ -349,17 +300,7 @@ int Movement::move_down_right(WorldObj* obj) {
 	return 0;
 }
 int Movement::move_left(WorldObj* obj) {
-  if(obj->sprite.getLock()) {
-    if(Soldier *sold = CheckClass::isSoldier(obj)) {
-      if(sold->sprite.getDying() && sold->sprite.getStart() == 0 && sold->sprite.getStop() == sold->sprite.getTexture().getFrameWidth()) {
-        sold->setLoc(sold->getVillage()->get_village_location());
-        sold->getVillage()->barracks->addToParty(sold, false);
-      }
-    }
-
-    return 0;
-  }
-
+	if (obj->sprite.getLock())return 0;
 	obj->setDirection(WorldObj::DIRECTION_LEFT);
 	//get list to check collision with
 	objVec.clear();
@@ -378,9 +319,13 @@ int Movement::move_left(WorldObj* obj) {
 			}
 			if (collision(objVec[i], obj)) {
 				LOG("failed to move left. collision.");
+			//	cout << "COLLIDED LEFT" << endl;
 				//manager->createTask("Bump", "SOUND");
 				obj->shiftX(moveSpeed*speed_magnifier);
 				break;
+			}
+			else {
+			//	cout << "no collision" << endl;
 			}
 		}
 		//obj->body[0].getBL().getXloc()
@@ -403,17 +348,7 @@ int Movement::move_left(WorldObj* obj) {
 	return 0;
 }
 int Movement::move_right(WorldObj* obj) {
-  if(obj->sprite.getLock()) {
-    if(Soldier *sold = CheckClass::isSoldier(obj)) {
-      if(sold->sprite.getDying() && sold->sprite.getStart() == 0 && sold->sprite.getStop() == sold->sprite.getTexture().getFrameWidth()) {
-        sold->setLoc(sold->getVillage()->get_village_location());
-        sold->getVillage()->barracks->addToParty(sold, false);
-      }
-    }
-
-    return 0;
-  }
-
+	if (obj->sprite.getLock())return 0;
 	obj->setDirection(WorldObj::DIRECTION_RIGHT);
 	//get list to check collision with
 	objVec.clear();
@@ -429,13 +364,19 @@ int Movement::move_right(WorldObj* obj) {
 		obj->shiftX(moveSpeed*speed_magnifier);
 		for (int i = 0; i < objVec.size(); i++) {
 			if (obj == objVec[i] || (my_type >= 2 && objVec[i]->getType() >= WorldObj::TYPE_NPC)) {
+				//cout << "Skip check for"<< objVec[i]->getID() << endl;
 				break;
+				
 			}
 			if (collision(objVec[i], obj)) {
 				LOG("failed to move right. collision.");
+				//cout << "COLLIDED RIGHT with" << objVec[i]->getID() << endl;
 				//manager->createTask("Bump", "SOUND");
 				obj->shiftX(-moveSpeed*speed_magnifier);
 				break;
+			}
+			else {
+				//cout << "no collision" << endl;
 			}
 		}
 		Line temp(Point(obj->body[0].getX(), 20000 - (obj->body[0].getY() + obj->body[0].getHeight())), Point(obj->body[0].getX() + obj->body[0].getWidth(), 20000 - (obj->body[0].getY() + obj->body[0].getHeight())));
@@ -520,12 +461,8 @@ int Movement::attack(WorldObj* obj) {
 							if (objVec[i]->getType() > WorldObj::TYPE_LIVINGOBJ) {
 								NPC* npc = CheckClass::isNPC(liv);
 								if (npc) {
-									bool friendly=false;
-									vector<Village*> friends=npc->getVillage()->get_alliance()->get_alligned_villages();
-									Village* from = a->second->get_creator()->getVillage();
-									for (auto itor = friends.begin(); itor != friends.end();++itor) {
-										if (from == (*itor))friendly = true;
-									}
+									Soldier* s2 = CheckClass::isSoldier(a->second->get_creator());
+									bool friendly=(npc->getVillage()->get_alliance()== s2->getVillage()->get_alliance());
 									manager->createTaskForAudio("PlaySound", "SOUND", "SFX/hit.wav");
 									if (a->second->getDestroy())a->second->setDuration(0);
 									npc->sprite.unlockAnimation();
@@ -537,8 +474,20 @@ int Movement::attack(WorldObj* obj) {
 											for (int j = 0; j < delAtk.size(); j++) {
 												delAtk[j]->setDuration(0);
 											}
-											Soldier* s2 = CheckClass::isSoldier(a->second->get_creator());
-											if (!friendly)s->setCurrentEnemy(s2);
+											if (!friendly) {
+												s->setCurrentEnemy(s2);
+												if (s2->getType() == WorldObj::TYPE_PLAYER && s->getParty()->getMode()!=Party::MODE_FLEE) {
+													if ((!s->getInCombat()) && (!s2->getInCombat())) {
+														Fight* fight = new Fight(s->getParty(), s2->getParty(),false);
+													}
+													else if ((!s->getInCombat())) {
+														s2->getParty()->get_fight()->add_party(s->getParty(),true);
+													}
+													else if ((!s2->getInCombat())) {
+														s->getParty()->get_fight()->add_party(s2->getParty(), true);
+													}
+												}
+											}
 										}
 									}
 

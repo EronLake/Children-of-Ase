@@ -65,6 +65,7 @@ class Party
   void update();
 
   void addToCurrentEnemies(Party* p) { currentEnemies.push_back(p); };
+  void clear_current_enemies() { currentEnemies.clear(); };
   vector<Party*> getCurrentEnemies() { return currentEnemies; };
 
   void set_perm(bool p) { perm=p; };

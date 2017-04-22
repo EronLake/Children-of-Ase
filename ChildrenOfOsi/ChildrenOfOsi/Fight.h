@@ -10,11 +10,10 @@ class Fight
 {
 public:
 	Fight();
-	Fight(Party* a, Party* b);
+	Fight(Party* a, Party* b, bool duel);
 	~Fight();
 	int get_radius();
 	void update_radius();
-	Vector2f loc;
 	void add_party(Party* p, bool atk);
 	void add_to_attackers(Party* p);
 	void add_to_defenders(Party* p);
@@ -26,11 +25,18 @@ public:
 	static void bring_out_your_dead();
 	void end_combat();
 	void find_targets();
+	void help_find_targets(unordered_map<Alliance*,vector<Party*>> m);
+	void set_loc(Vector2f v) { loc = v; };
+	Vector2f get_loc() { return loc; };
+	void check_should_flee(Party* p);
 
 private:
+	Vector2f loc;
 	vector<vector<Party*>> attackers; //attack or defense only determines ability to flee, not sides
 	vector<vector<Party*>> defenders;
 	vector<Party*> downed;
 	bool over;
+	int rad;
+	int sides;
 };
 

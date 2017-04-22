@@ -236,36 +236,38 @@ void Party::setLeader(Soldier* s)
 void Party::setMode(int m)
 {
   this->mode = m;
-	if (mode == Party::MODE_IDLE) {
-		for (auto& member : this->members) {
-      member->setHold(false);
-    }
-		default_def_rad();
-  }
-	else if (mode == Party::MODE_ATTACK) {
-		for (auto& member : this->members) {
-      member->setHold(false);
-    }
-		default_def_rad();
-  }
-	else if (mode == Party::MODE_DEFEND) {
-		for (auto& member : this->members) {
-      member->setHold(true);
-    }
-  }
-	else if (mode == Party::MODE_PATROL) {
-		for (auto& member : this->members) {
-			patrol_point = 0;
-			member->setHold(false);
-    }
-		default_def_rad();
-  }
-	else if (mode == Party::MODE_FLEE) {
-		for (auto& member : this->members) {
-      member->setHold(false);
-	  member->setInCombat(false);
-    }
-		default_def_rad();
+  switch (m) {
+  case Party::MODE_IDLE: 
+		  for (auto& member : this->members) {
+			  member->setHold(false);
+		  }
+		  default_def_rad();
+		  break;
+  case Party::MODE_ATTACK:
+		  for (auto& member : this->members) {
+			  member->setHold(false);
+		  }
+		  default_def_rad();
+		  break;
+  case Party::MODE_DEFEND:
+		  for (auto& member : this->members) {
+			  member->setHold(true);
+		  }
+		  break;
+  case Party::MODE_PATROL:
+		  for (auto& member : this->members) {
+			  patrol_point = 0;
+			  member->setHold(false);
+		  }
+		  default_def_rad();
+		  break;
+  case Party::MODE_FLEE:
+		  for (auto& member : this->members) {
+			  member->setHold(false);
+			  member->setInCombat(false);
+		  }
+		  default_def_rad();
+		  break;
   }
 }
 
@@ -326,6 +328,7 @@ void Party::up_member(Soldier* s) {
 
 void Party::set_in_combat(bool b) {
 	if (!b)currentEnemies.clear();
+	if (!b)curr_fight=nullptr;
 	for (auto it = members.begin(); it != members.end(); ++it) {
 		(*it)->setInCombat(b);
 		if (!b)(*it)->setCurrentEnemy(nullptr);

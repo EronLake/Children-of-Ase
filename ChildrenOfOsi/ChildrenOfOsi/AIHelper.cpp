@@ -180,6 +180,7 @@ int AIHelper::astar_search(WorldObj* obj)// VisibilityGraph graph, Vector2f star
 
 int AIHelper::plan_step(WorldObj* obj) {
 	int result;
+	
 	////std:://////cout << "take a step" << std::endl;
 
 	NPC* npc;
