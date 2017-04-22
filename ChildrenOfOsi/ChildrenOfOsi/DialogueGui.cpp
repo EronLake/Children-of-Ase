@@ -28,7 +28,7 @@ DialogueGui::DialogueGui()
 	responseBoxTex = new Texture();
 	black = glm::vec3(0, 0, 0);
 	red = glm::vec3(50, 0, 0);
-	DialogueController::set_scroll_control(0);
+	DialogueController::scroll_control = 0;
 
 }
 
