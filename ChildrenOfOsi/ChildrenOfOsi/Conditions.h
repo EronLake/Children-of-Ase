@@ -156,8 +156,8 @@ public:
 	virtual float get_utility();
 	virtual float get_utility(Hero* curr_hero, Hero* other_hero);
 	
-	void apply_utility();
-	void apply_utility(Hero* curr_hero, Hero* other_hero, bool if_doer);
+	virtual void apply_utility();
+	virtual void apply_utility(Hero* curr_hero, Hero* other_hero, bool if_doer);
 	std::string get_type();
 	int get_general_type();
 	//for relprecons 
