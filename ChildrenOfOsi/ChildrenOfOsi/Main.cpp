@@ -1810,10 +1810,6 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 		while (current_game_state == game_state::in_game) {
 			for (int i = 0; i < 10; i++) {
 				//cout << "Press Escape to pause game" << endl;
-<<<<<<< HEAD
-
-=======
->>>>>>> origin/Alpha1
 			}
 			if (iController->current_game_state != game_state::in_game) {
 				iController->current_game_state = current_game_state;
