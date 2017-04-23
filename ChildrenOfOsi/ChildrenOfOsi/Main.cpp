@@ -1492,6 +1492,27 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	oya->shiftY(300);
 	oya->setHealth(50);
 
+	// SET UP RELATIONSHIP REFERENCE FOR YEMOJA 
+	std::unordered_map<int, Relationship*> yemojaRelRef;
+	yemojaRelRef[1] = new Relationship();
+	yemojaRelRef[2] = new Relationship();
+	yemojaRelRef[3] = new Relationship();
+
+	std::unordered_map<int, Relationship*> OyaRelRef;
+	OyaRelRef[1] = new Relationship();
+	OyaRelRef[2] = new Relationship();
+	OyaRelRef[3] = new Relationship();
+
+	std::unordered_map<int, Relationship*> shangoRel;
+	shangoRel[1] = new Relationship();
+	shangoRel[2] = new Relationship();
+	shangoRel[3] = new Relationship();
+
+	Alex->rel = shangoRel;
+
+	staticRec->rel = yemojaRelRef;
+	oya->rel = OyaRelRef;
+
 	ActionConfig::import_config(gameplay_functions, tBuffer, staticRec);
 	ActionConfig::import_config(gameplay_functions, tBuffer, oya);
 
@@ -1507,6 +1528,8 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	RelPrecon* prec1 = new RelPrecon(Preconditions::AFF, 30);
 	RelPost* post1 = new RelPost(Postcondition::STR, 15);
 	RelPost* post2 = new RelPost(Postcondition::AFF, 15);
+
+
 
 	test_ally->req_preconds.push_back(std::make_shared<RelPrecon>(*prec));
 	test_ally->doer_succ_postconds.push_back(std::make_shared<RelPost>(*post));
@@ -1525,8 +1548,10 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	}
 
 	Alex->add_quest(test_ally, 8);
+	staticRec->add_quest(test_train, 1);
 	//Alex->add_quest(test_train, 2);
 	questM->heros.push_back(Alex);
+	questM->heros.push_back(staticRec);
 	///////////////////////////////////////////////////////////////////////////////////////////
 	///////////////////////////////////////////////////////////////////////////////////////////
 	//////////////////                                                 ////////////////////////
@@ -1534,10 +1559,12 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	//////////////////                                                 ////////////////////////
 	///////////////////////////////////////////////////////////////////////////////////////////
 	///////////////////////////////////////////////////////////////////////////////////////////
+	
+	// THIS IS BEING RESET IN THE GAME LOOP. planner->get_current_action returns nullptr
 	YemojaPlanner->set_current_action(test_train);
 
-	//AiController->generate_end_state(YEMOJA, OYA);
-	//AIController::init_plans();
+	//AIController::generate_end_state(YEMOJA, OYA);
+	AIController::init_plans();
 
 
 	/*
@@ -1779,8 +1806,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 		}
 		while (current_game_state == game_state::in_game) {
 			for (int i = 0; i < 10; i++) {
-				cout << "Press Escape to pause game" << endl;
-
+				//cout << "Press Escape to pause game" << endl;
 			}
 			if (iController->current_game_state != game_state::in_game) {
 				iController->current_game_state = current_game_state;
@@ -1887,6 +1913,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 					combatControl->update_soldier(soldiers_list[i], state);
 				}
 			});
+			//YemojaPlanner->set_current_action(test_train);
 
 			questM->update();
 
@@ -1922,7 +1949,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 			//setting give as quest to false so that the excute runs
 			YemojaPlanner->give_as_quest = false;
 
-			//AIController::execute();
+			 AIController::execute();
 			AI.join();
 			if ((1000 / fs) > (clock() - start_tick)) { //delta_ticks)
 				Sleep((1000 / fs) - (clock() - start_tick));

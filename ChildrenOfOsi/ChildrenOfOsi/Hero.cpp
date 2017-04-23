@@ -17,6 +17,9 @@ Hero::Hero()
 			this->actionPool_map[i] = new ActionPool(this);
 		}
 	}
+	for (int i = 1; i < 6; i++) {
+		if (i != name)rel[i] = new Relationship();
+	}
 	action_timer = 0; //initialized to one so the check doesn't go below 0
 	set_killable(false);
 }

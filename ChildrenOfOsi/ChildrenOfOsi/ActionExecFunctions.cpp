@@ -54,19 +54,26 @@ void ActionExecFunctions::execute_train(Action* train) {
 		train->checkpoint++;
 		break;
 	case 1: //If destination is reached, start a timer and move to next checkpoint
-	//	std::cout << "---------------------CASE 1---------------------" << endl;
+	std::cout << "---------------------CASE 1---------------------" << endl;
+	cout << "dest is " << train->getDoer()->get_action_destination()->getXloc() << ", " << train->getDoer()->get_action_destination()->getYloc()<<  endl;
 
+	if (train->getDoer()->rel.empty()) {
+		cout << "the relationship map is empty" << endl;
+		}
+	if (train->getDoer()->rel[1] == nullptr) {
+		cout << train->getDoer()->name <<" the action relationship is a nullptr" << endl;
+	}
 		//THIS IS NOT WORKING BECAUSE THE HEROES DESTINATION KEEPS GETTING RESET BY SOME OTHER CODE
 
-		//std::cout << (train->getDoer()->destination).getXloc() << ":" << (train->getDoer()->destination).getXloc() << std::endl;
-
-		if (train->getDoer()->get_action_destination() == nullptr) {
-			ActionHelper::set_timer(train, 3600);  //Wait 1 minute (60 frames times 60 seconds)
+		//std::cout << (train->getDoer()->destination).getXloc() << ":" << (train->getDoer()->destination).getXloc() << std::endl
+		if (train->getDoer()->get_action_destination()->getXloc() != -1 && train->getDoer()->get_action_destination()->getYloc() != -1) {	//dont set it to nullptr, set it to -1
+			ActionHelper::set_timer(train, 60);  //Wait 1 minute (60 frames times 60 seconds) //make it wait 5 secs
 			train->checkpoint++;
 		}
 		break;
 	case 2: //If timer is complete, set village as destination, apply postconds, update memory
-		//////cout << "---------------------CASE 2---------------------" << endl;
+		cout << "---------------------CASE 2---------------------" << endl;
+		cout << "retrieve time is " << ActionHelper::retrieve_time(train) << endl;
 		if (ActionHelper::retrieve_time(train) == 0) {
 			Memory* doer_mem = train->getDoer()->find_mem(train->getName() + std::to_string(train->time_stamp));
 			//Memory* receiver_mem = fight->getReceiver()->find_mem(fight->getName() + std::to_string(fight->time_stamp));
@@ -75,8 +82,15 @@ void ActionExecFunctions::execute_train(Action* train) {
 				perror("something is wrong with the current hero memory creation function");
 			}
 			train->getDoer()->set_action_destination(&train->getDoer()->getVillage()->get_village_location()); //Also predefined, maybe as "home_location" in hero
+			//print stats before applying post cond 
+			cout << train->getDoer()->name << "'s str of Shgango BEFORE train is " << train->getDoer()->rel[1]->getStrength() << endl;
+			cout << train->getDoer()->name << "'s str of Yemoja BEFORE train is " << train->getDoer()->rel[2]->getStrength() << endl;	//pretty sure only this one will work
+			cout << train->getDoer()->name << "'s str of Oya BEFORE train is " << train->getDoer()->rel[3]->getStrength() << endl;
 			train->apply_postconditions(true);				 //Apply post-conditions
 			train->executed = true;
+			cout << train->getDoer()->name << "'s str of Shgango AFTER train is " << train->getDoer()->rel[1]->getStrength() << endl;
+			cout << train->getDoer()->name << "'s str of Yemoja AFTER train is " << train->getDoer()->rel[2]->getStrength() << endl;	//pretty sure only this one will work
+			cout << train->getDoer()->name << "'s str of Oya AFTER train is " << train->getDoer()->rel[3]->getStrength() << endl;
 			doer_mem->setCategory("success");			 //Call update_memory function
 			doer_mem->setReason("I am good at training");
 			doer_mem->setWhen(/*get global frame*/0);        
