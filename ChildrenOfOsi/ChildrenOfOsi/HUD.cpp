@@ -3,6 +3,7 @@
 
 bool HUD::show_active_quests=false;
 int HUD::FPS=0;
+int HUD::AVG = 0;
 
 HUD::HUD()
 {
@@ -69,30 +70,13 @@ void HUD::drawHUD(WorldObj* obj)
   hud_health->sprite.reset_texture();
   hud_health->sprite.setStop(healthbarWidth);
   hud_health->setWidth(HUD::HEALTHBAR_WIDTH * healthPercentage);
-  // hud_ase->sprite.reset_texture();
-  // hud_ase->sprite.setStop(asebarWidth);
-  // hud_ase->setWidth(HUD::ASEBAR_WIDTH * asePercentage);
-
-	// hud_health->sprite.setStart((player->getHealth()/2));
-	// hud_health->sprite.setStop(player->getHealth() *19/4);
-	
-	//hud_ase->sprite.setStop(player->getAse() * 2 - 5);
-	/*int damage_taken = (200 - player->getHealth())*1.9;
-
-	if (damage_taken/1.9 > 140)
-	{
-		damage_taken += (200 - player->getHealth())* .4;
-		////std:://cout << player->getHealth() << std::endl;
-	}
-  if(damage_taken > player->getHealth() / 5) {
-    damage_taken -= (200 - player->getHealth())* .5;
-  }*/
 
 	GameWindow::drawSprite(hud_empty->getX(), hud_empty->getY(), hud_empty->getWidth(), hud_empty->getHeight(), hud_empty->sprite);                // Health/ase bar background
   GameWindow::drawSprite(hud_health->getX(), hud_health->getY(), hud_health->getWidth(), hud_health->getHeight(), hud_health->sprite);           // Health bar fill
 	GameWindow::drawSprite(hud_ase->getX(), hud_ase->getY(), hud_ase->getWidth(), hud_ase->getHeight(), hud_ase->sprite);                          // Ase bar fill
 	GameWindow::drawSprite(hud_portrait->getX(), hud_portrait->getY(), hud_portrait->getWidth(), hud_portrait->getHeight(), hud_portrait->sprite); // Shango portrait
 	GameWindow::createText("FPS: " + to_string(FPS), 450, 20, 150, 80, black);                                                                     // FPS counter
+	GameWindow::createText("AVG: " + to_string(AVG), 525, 20, 150, 80, black);                                                                     // Average framerate
 
 	if (HUD::show_active_quests) {
 		GameWindow::createText("Active Quests", 50, 104.5, 150, 80, black);

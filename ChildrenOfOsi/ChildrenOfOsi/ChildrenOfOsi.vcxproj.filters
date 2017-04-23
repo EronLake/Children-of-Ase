@@ -224,6 +224,7 @@
     <ClCompile Include="ThreadManager.cpp" />
     <ClCompile Include="QuestManager.cpp" />
     <ClCompile Include="ConversationLogObj.cpp" />
+    <ClCompile Include="PlayerActExecFunctions.cpp" />
     <ClCompile Include="Fight.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -469,6 +470,7 @@
     <ClInclude Include="QuestManager.h" />
     <ClInclude Include="ConversationLogObj.h" />
     <ClInclude Include="GameState.h" />
+    <ClInclude Include="PlayerActExecFunctions.h" />
     <ClInclude Include="Fight.h" />
   </ItemGroup>
   <ItemGroup>

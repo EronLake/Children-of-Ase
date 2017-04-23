@@ -10,7 +10,7 @@ class Fight
 {
 public:
 	Fight();
-	Fight(Party* a, Party* b);
+	Fight(Party* a, Party* b, bool duel);
 	~Fight();
 	int get_radius();
 	void update_radius();
@@ -37,5 +37,6 @@ private:
 	vector<Party*> downed;
 	bool over;
 	int rad;
+	int sides;
 };
 

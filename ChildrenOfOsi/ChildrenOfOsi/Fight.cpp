@@ -7,13 +7,24 @@ Fight::Fight()
 {
 	over = false;
 	fights_world.push_back(this);
+	sides = 0;
 }
 
-Fight::Fight(Party* a, Party* b)
+Fight::Fight(Party* a, Party* b, bool duel)
 {
 	over = false;
-	defenders.push_back({a});
-	defenders.push_back({b});
+	if (a->get_perm() || duel) {
+		defenders.push_back({ a });
+	}
+	else {
+		attackers.push_back({ a });
+	}
+	if (b->get_perm() || duel) {
+		defenders.push_back({ b });
+	}
+	else {
+		attackers.push_back({ b });
+	}
 	a->set_fight(this);
 	b->set_fight(this);
 	a->set_in_combat(true);
@@ -26,6 +37,7 @@ Fight::Fight(Party* a, Party* b)
 		b->setMode(Party::MODE_DEFEND);
 		update_radius();
 	}
+	sides = 2;
 	fights_world.push_back(this);
 }
 
@@ -201,6 +213,10 @@ void Fight::update_fight() {
 				itor = (*it).erase(itor);
 				update_radius();
 				party_erased = true;
+			} else if ((*itor)->getLeader()->getType() == WorldObj::TYPE_PLAYER) {
+				if (Party::dist_location_to_location((*itor)->getLeader()->getLoc(), loc) > (rad * 3)) {
+					(*itor)->setMode(Party::MODE_FLEE);
+				}
 			}
 			if (!party_erased)++itor;
 		}
@@ -210,6 +226,7 @@ void Fight::update_fight() {
 		}
 		if (!ally_erased)++it;
 	}
+	update_radius();
 	over = check_for_winner();
 }
 
@@ -300,6 +317,7 @@ void Fight::find_targets() {
 			alliances[(*itor)->getLeader()->getVillage()->get_alliance()].push_back((*itor));
 		}
 	}
+	sides = alliances.size();
 	help_find_targets(alliances);
 }
 
@@ -329,6 +347,21 @@ void Fight::check_should_flee(Party* p) {
 			p->setMode(Party::MODE_FLEE);
 		}
 	}
+	else if (p->getLeader()->getType() == WorldObj::TYPE_HERO) {
+		vector<Party*> enemies = p->getCurrentEnemies();
+		int total_enemies = 0;
+		int total_sold = rad / 100;
+		for (auto it = enemies.begin(); it != enemies.end(); ++it) {
+			total_enemies += (*it)->getMembers().size();
+		}
+		int tmp = sides - 1;
+		if (tmp < 1)tmp = 1;
+		total_sold = total_sold - total_enemies;
+		total_enemies = total_enemies / tmp;
+		if (total_enemies >= (total_sold * 3)) {
+			p->setMode(Party::MODE_FLEE);
+		}
+	}
 	else {
 		vector<Party*> enemies = p->getCurrentEnemies();
 		int total_enemies = 0;
@@ -336,10 +369,11 @@ void Fight::check_should_flee(Party* p) {
 		for (auto it = enemies.begin(); it != enemies.end(); ++it) {
 			total_enemies += (*it)->getMembers().size();
 		}
-		int tmp= ((attackers.size() + defenders.size() - 1) / 2);
+		int tmp= sides-1;
 		if (tmp < 1)tmp = 1;
+		total_sold = total_sold-total_enemies;
 		total_enemies = total_enemies / tmp;
-		if (total_enemies > ((total_sold*2)/3)) {
+		if (total_enemies >= (total_sold*2)) {
 			p->setMode(Party::MODE_FLEE);
 		}
 	}

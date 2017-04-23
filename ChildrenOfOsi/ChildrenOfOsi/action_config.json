@@ -33,8 +33,8 @@
       "doer_fail_postconds": {
         "1": {
           "general_type": 0,
-          "rel_type": 7,
-          "utility": -3
+          "rel_type": 10,
+          "utility": 3
         },
         "2": {
           "general_type": 0,
@@ -62,18 +62,18 @@
       "receiver_fail_postconds": {
         "1": {
           "general_type": 0,
-          "rel_type": 7,
-          "utility": -3
+          "rel_type": 10,
+          "utility": 3
         },
         "2": {
           "general_type": 0,
-          "rel_type": 6,
-          "utility": -3
+          "rel_type": 9,
+          "utility": 3
         },
         "3": {
           "general_type": 0,
-          "rel_type": 8,
-          "utility": -3
+          "rel_type": 11,
+          "utility": 3
         }
       }
     }
@@ -118,7 +118,7 @@
       "1": {
         "general_type": 0,
         "rel_type": 6,
-        "utility": -2
+        "utility": 2
       }
     }
   },
@@ -167,8 +167,8 @@
       },
       "2": {
         "general_type": 0,
-        "rel_type": 7,
-        "utility": -4
+        "rel_type": 10,
+        "utility": 4
       },
       "3": {
         "general_type": 0,
@@ -196,18 +196,18 @@
     "receiver_fail_postconds": {
       "1": {
         "general_type": 0,
-        "rel_type": 6,
-        "utility": -4
+        "rel_type": 9,
+        "utility": 4
       },
       "2": {
         "general_type": 0,
-        "rel_type": 7,
-        "utility": -4
+        "rel_type": 10,
+        "utility": 4
       },
       "3": {
         "general_type": 0,
-        "rel_type": 8,
-        "utility": -4
+        "rel_type": 11,
+        "utility": 4
       }
     }
   },
@@ -239,18 +239,18 @@
     "doer_succ_postconds": {
       "1": {
         "general_type": 0,
-        "rel_type": 6,
-        "utility": -10
+        "rel_type": 9,
+        "utility": 10
       },
       "2": {
         "general_type": 0,
-        "rel_type": 7,
-        "utility": -4
+        "rel_type": 10,
+        "utility": 4
       },
       "3": {
         "general_type": 0,
-        "rel_type": 8,
-        "utility": -8
+        "rel_type": 11,
+        "utility": 8
       }
     },
     "doer_fail_postconds": {
@@ -261,8 +261,8 @@
       },
       "2": {
         "general_type": 0,
-        "rel_type": 7,
-        "utility": -6
+        "rel_type": 10,
+        "utility": 6
       },
       "3": {
         "general_type": 0,
@@ -278,30 +278,30 @@
       },
       "2": {
         "general_type": 0,
-        "rel_type": 7,
-        "utility": -10
+        "rel_type": 10,
+        "utility": 10
       },
       "3": {
         "general_type": 0,
-        "rel_type": 8,
-        "utility": -10
+        "rel_type": 11,
+        "utility": 10
       }
     },
     "receiver_fail_postconds": {
       "1": {
         "general_type": 0,
-        "rel_type": 6,
-        "utility": -8
+        "rel_type": 9,
+        "utility": 8
       },
       "2": {
         "general_type": 0,
-        "rel_type": 7,
-        "utility": -8
+        "rel_type": 10,
+        "utility": 8
       },
       "3": {
         "general_type": 0,
-        "rel_type": 8,
-        "utility": -8
+        "rel_type": 11,
+        "utility": 8
       }
     }
   },
@@ -338,13 +338,13 @@
     "doer_succ_postconds": {
       "1": {
         "general_type": 0,
-        "rel_type": 6,
-        "utility": -15
+        "rel_type": 9,
+        "utility": 15
       },
       "2": {
         "general_type": 0,
-        "rel_type": 8,
-        "utility": -25
+        "rel_type": 11,
+        "utility": 25
       }
     },
     "doer_fail_postconds": {
@@ -355,8 +355,8 @@
       },
       "2": {
         "general_type": 0,
-        "rel_type": 7,
-        "utility": -8
+        "rel_type": 10,
+        "utility": 8
       },
       "3": {
         "general_type": 0,
@@ -372,8 +372,8 @@
       },
       "2": {
         "general_type": 0,
-        "rel_type": 7,
-        "utility": -15
+        "rel_type": 10,
+        "utility": 15
       },
       "3": {
         "general_type": 0,
@@ -384,18 +384,18 @@
     "receiver_fail_postconds": {
       "1": {
         "general_type": 0,
-        "rel_type": 6,
-        "utility": -20
+        "rel_type": 9,
+        "utility": 20
       },
       "2": {
         "general_type": 0,
-        "rel_type": 7,
-        "utility": -15
+        "rel_type": 10,
+        "utility": 15
       },
       "3": {
         "general_type": 0,
-        "rel_type": 8,
-        "utility": -20
+        "rel_type": 11,
+        "utility": 20
       }
     }
   },
@@ -427,18 +427,18 @@
     "doer_succ_postconds": {
       "1": {
         "general_type": 0,
-        "rel_type": 6,
-        "utility": -5
+        "rel_type": 9,
+        "utility": 5
       },
       "2": {
         "general_type": 0,
-        "rel_type": 7,
-        "utility": -5
+        "rel_type": 10,
+        "utility": 5
       },
       "3": {
         "general_type": 0,
-        "rel_type": 8,
-        "utility": -8
+        "rel_type": 11,
+        "utility": 8
       }
     },
     "doer_fail_postconds": {
@@ -449,8 +449,8 @@
       },
       "2": {
         "general_type": 0,
-        "rel_type": 7,
-        "utility": -3
+        "rel_type": 10,
+        "utility": 3
       },
       "3": {
         "general_type": 0,
@@ -466,8 +466,8 @@
       },
       "2": {
         "general_type": 0,
-        "rel_type": 7,
-        "utility": -8
+        "rel_type": 10,
+        "utility": 8
       },
       "3": {
         "general_type": 0,
@@ -478,18 +478,18 @@
     "receiver_fail_postconds": {
       "1": {
         "general_type": 0,
-        "rel_type": 6,
-        "utility": -10
+        "rel_type": 9,
+        "utility": 10
       },
       "2": {
         "general_type": 0,
-        "rel_type": 7,
-        "utility": -5
+        "rel_type": 10,
+        "utility": 5
       },
       "3": {
         "general_type": 0,
-        "rel_type": 8,
-        "utility": -10
+        "rel_type": 11,
+        "utility": 10
       }
     }
   },
@@ -538,8 +538,8 @@
     "doer_fail_postconds": {
       "1": {
         "general_type": 0,
-        "rel_type": 7,
-        "utility": -5
+        "rel_type": 10,
+        "utility": 5
       }
     },
     "receiver_succ_postconds": {
@@ -562,18 +562,142 @@
     "receiver_fail_postconds": {
       "1": {
         "general_type": 0,
-        "rel_type": 6,
-        "utility": -5
+        "rel_type": 9,
+        "utility": 5
       },
       "2": {
         "general_type": 0,
-        "rel_type": 7,
-        "utility": -3
+        "rel_type": 10,
+        "utility": 3
       },
       "3": {
         "general_type": 0,
+        "rel_type": 11,
+        "utility": 5
+      }
+    }
+  },
+  "bribe": {
+    "name": "Bribe",
+    "type": "micro",
+    "utility": 0.0,
+    "why": 0.0,
+    "exe_name": "execute_bribe",
+    "aggression": 1,
+    "kindness": 0,
+    "honor": -5,
+    "pride": -2,
+    "recklessness": 5,
+    "extroversion": 4,
+    "greed": 5,
+    "req_preconds": {
+      // none?
+    },
+    "doer_succ_postconds": {
+      "1": {
+        "general_type": 0,
+        "rel_type": 7,
+        "utility": 5
+      }
+    },
+    "doer_fail_postconds": {
+      "1": {
+        "general_type": 0,
+        "rel_type": 10,
+        "utility": 5
+      }
+    },
+    "receiver_succ_postconds": {
+      "1": {
+        "general_type": 0,
+        "rel_type": 7,
+        "utility": 5
+      },
+      "2": {
+        "general_type": 0,
         "rel_type": 8,
-        "utility": -5
+        "utility": 5
+      }
+    },
+    "receiver_fail_postconds": {
+      "1": {
+        "general_type": 0,
+        "rel_type": 9,
+        "utility": 5
+      },
+      "2": {
+        "general_type": 0,
+        "rel_type": 10,
+        "utility": 5
+      },
+      "3": {
+        "general_type": 0,
+        "rel_type": 11,
+        "utility": 5
+      }
+    }
+  },
+  "compliment": {
+    "name": "Compliment",
+    "type": "micro",
+    "utility": 0.0,
+    "why": 0.0,
+    "exe_name": "execute_compliment",
+    "aggression": -1,
+    "kindness": 8,
+    "honor": 2,
+    "pride": -2,
+    "recklessness": 2,
+    "extroversion": 5,
+    "greed": 2,
+    "req_preconds": {
+      "1": {
+        "general_type": 0,
+        "rel_type": 7,
+        "desired_rel_val": 55
+      }
+    },
+    "doer_succ_postconds": {
+      "1": {
+        "general_type": 0,
+        "rel_type": 7,
+        "utility": 3
+      }
+    },
+    "doer_fail_postconds": {
+      "1": {
+        "general_type": 0,
+        "rel_type": 10,
+        "utility": 5
+      }
+    },
+    "receiver_succ_postconds": {
+      "1": {
+        "general_type": 0,
+        "rel_type": 7,
+        "utility": 5
+      },
+      "2": {
+        "general_type": 0,
+        "rel_type": 8,
+        "utility": 5
+      }
+    },
+    "receiver_fail_postconds": {
+      "1": {
+        "general_type": 0,
+        "rel_type": 9,
+        "utility": 5
+      },
+      "2": {
+        "general_type": 0,
+        "rel_type": 10,
+        "utility": 5
+      },
+      "3": {
+        "general_type": 0,
+        "rel_type": 11,
+        "utility": 5
       }
     }
   }
