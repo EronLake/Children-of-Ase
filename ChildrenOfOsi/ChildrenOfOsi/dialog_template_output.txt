@@ -1,5 +1,0 @@
-Conversation Point Name: Ask_About_Affinity Appeal 180
-Conversation Point Name: Boast Appeal 120
-Conversation Point Name: Ask_About_Strength Appeal 110
-Conversation Point Name: Ask_Origin Appeal 100
-Conversation Point Name: Recruit_For_Party Appeal 0

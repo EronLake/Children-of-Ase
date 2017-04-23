@@ -357,6 +357,7 @@ void Postcondition::apply_utility()
 void Postcondition::apply_utility(Hero* curr_hero, Hero* other_hero, bool if_doer)
 {
 	LOG("virtual function");
+	cout << "virtual function";
 }
 
 std::string Postcondition::get_type()
