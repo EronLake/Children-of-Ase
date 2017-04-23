@@ -410,6 +410,12 @@ std::string DialogueHelper::convert_to_sentence(dialogue_point dialog_pt)
 	return sentence;
 }
 
+/*Associates conversation and reply points with icons
+on the GUI. "qcp" = question conversation point, "qrp" = question reply point
+etc. Every reply point is associated with every icon because it is possible 
+for an npc to say conversation points to the player that are not part of the icon
+associated with the player's conversation point. The player needs to be able
+to reply to any conversation point regardless of what icon they are on.*/
 void DialogueHelper::fill_conversations() {
 	for (int i = 0; i < Containers::conv_point_table.size(); i++)
 	{
