@@ -94,13 +94,6 @@ std::mutex mu;
 
 void FPS(bool b);
 void GAMEPLAY_LOOP(QuadTree* _Quadtree);
-void init_textures_shango(unordered_map<Texture*, pair<string, int>> &textureMap);
-void init_textures_yemoja(unordered_map<Texture*, pair<string, int>> &textureMap, vector<Texture *> &oasis);
-void init_textures_oya(unordered_map<Texture*, pair<string, int>> &textureMap, vector<Texture *> &jungle);
-void init_textures_oshoshi(unordered_map<Texture*, pair<string, int>> &textureMap, vector<Texture *> &mountain);
-void init_textures_ogun(unordered_map<Texture*, pair<string, int>> &textureMap, vector<Texture *> &ogun);
-void init_textures_blue_soldier(unordered_map<Texture*, pair<string, int>> &textureMap);
-void init_textures_silver_soldier(unordered_map<Texture*, pair<string, int>> &textureMap, vector<Texture *> &mountain);
 
 bool lineCollision(Line l1, Line l2);
 /// Helper function passed to thread to set file. Param is a tuple, first being the Texture* to work on, and second being the param needed to call setFile().
@@ -2039,40 +2032,5 @@ void FPS(bool b) {
 	}
 	time_t now;
 	time(&now);
-
-}
-
-void init_textures_shango(unordered_map<Texture*, pair<string, int>> &textureMap)
-{
-
-}
-
-void init_textures_yemoja(unordered_map<Texture*, pair<string, int>> &textureMap, vector<Texture *> &oasis)
-{
-
-}
-
-void init_textures_oya(unordered_map<Texture*, pair<string, int>> &textureMap, vector<Texture *> &jungle)
-{
-
-}
-
-void init_textures_oshoshi(unordered_map<Texture*, pair<string, int>> &textureMap, vector<Texture *> &mountain)
-{
-
-}
-
-void init_textures_ogun(unordered_map<Texture*, pair<string, int>> &textureMap, vector<Texture *> &ogun)
-{
-
-}
-
-void init_textures_blue_soldier(unordered_map<Texture*, pair<string, int>> &textureMap)
-{
-
-}
-
-void init_textures_silver_soldier(unordered_map<Texture*, pair<string, int>> &textureMap, vector<Texture *> &mountain)
-{
 
 }
