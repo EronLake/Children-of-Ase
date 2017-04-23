@@ -8,6 +8,7 @@
 #include "Party.h"
 #include "Village.h"
 #include "ActionHelper.h"
+#include "Fight.h"
 
 typedef void(*execute_ptr)(Action* cur_action);
 
