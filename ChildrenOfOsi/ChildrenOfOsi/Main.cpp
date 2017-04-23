@@ -235,21 +235,31 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	gameplay_functions->add_texture("map1_2", 0, 0, 0);
 	gameplay_functions->add_texture("map1_3", 0, 0, 0);
 	gameplay_functions->add_texture("map1_4", 0, 0, 0);
+	gameplay_functions->add_texture("map1_5", 0, 0, 0);
 
 	gameplay_functions->add_texture("map2_1", 0, 0, 0);
 	gameplay_functions->add_texture("map2_2", 0, 0, 0);
 	gameplay_functions->add_texture("map2_3", 0, 0, 0);
 	gameplay_functions->add_texture("map2_4", 0, 0, 0);
+	gameplay_functions->add_texture("map2_5", 0, 0, 0);
 
 	gameplay_functions->add_texture("map3_1", 0, 0, 0);
 	gameplay_functions->add_texture("map3_2", 0, 0, 0);
 	gameplay_functions->add_texture("map3_3", 0, 0, 0);
 	gameplay_functions->add_texture("map3_4", 0, 0, 0);
+	gameplay_functions->add_texture("map3_5", 0, 0, 0);
 
 	gameplay_functions->add_texture("map4_1", 0, 0, 0);
 	gameplay_functions->add_texture("map4_2", 0, 0, 0);
 	gameplay_functions->add_texture("map4_3", 0, 0, 0);
 	gameplay_functions->add_texture("map4_4", 0, 0, 0);
+	gameplay_functions->add_texture("map4_5", 0, 0, 0);
+
+	gameplay_functions->add_texture("map5_1", 0, 0, 0);
+	gameplay_functions->add_texture("map5_2", 0, 0, 0);
+	gameplay_functions->add_texture("map5_3", 0, 0, 0);
+	gameplay_functions->add_texture("map5_4", 0, 0, 0);
+	gameplay_functions->add_texture("map5_5", 0, 0, 0);
 
 	tBuffer->run();
 
@@ -1779,7 +1789,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 		}
 		while (current_game_state == game_state::in_game) {
 			for (int i = 0; i < 10; i++) {
-				cout << "Press Escape to pause game" << endl;
+				//cout << "Press Escape to pause game" << endl;
 
 			}
 			if (iController->current_game_state != game_state::in_game) {
