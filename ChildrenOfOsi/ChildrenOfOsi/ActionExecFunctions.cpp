@@ -136,6 +136,7 @@ void ActionExecFunctions::execute_train_with(Action* train_with) {
 		{
 			ActionHelper::set_timer(train_with, 3600); //Wait 1 minute for training (60 frames times 60 seconds)
 			train_with->checkpoint++;
+			Fight* fight = new Fight(train_with->getDoer()->getParty(), train_with->getReceiver()->getParty(),true);
 		}
 		break;
 	case 4: //If timer is complete, set village as destination, apply postconds, update memory
@@ -146,6 +147,7 @@ void ActionExecFunctions::execute_train_with(Action* train_with) {
 			{
 				perror("something is wrong with the current hero memory creation function");
 			}
+			train_with->getDoer()->getParty()->get_fight()->end_combat();
 			train_with->getDoer()->set_action_destination(&train_with->getDoer()->getVillage()->get_village_location()); //Also predefined, maybe as "home_location" in hero
 			train_with->apply_postconditions(true);				 //Apply post-conditions
 			train_with->executed = true;
@@ -241,15 +243,15 @@ void ActionExecFunctions::execute_fight(Action* fight)
 	case 3: //If both niether party is empty then contiue the fight 
 			//(may need to change this to account for hero death)
 		if (fight->getDoer()->get_action_destination() == nullptr) {
-			if (fight->getDoer()->getParty()->getMembers().size() == 0 || fight->getReceiver()->getParty()->getMembers().size() == 0)
-			{
-				fight->checkpoint++;
-			}
 			//do a single round of battle every 10 sec
 			if (ActionHelper::retrieve_time(fight) == 0)
 			{
-				ActionHelper::battle_sim(fight,fight->getReceiver()->getParty());
-				ActionHelper::set_timer(fight, 600);
+				Fight* fight_obj = new Fight(fight->getDoer()->getParty(), fight->getReceiver()->getParty(), false);
+				//ActionHelper::set_timer(fight, 600);
+			}
+			if (fight->getDoer()->getParty()->get_fight()->is_over())
+			{
+				fight->checkpoint++;
 			}
 		}
 
@@ -267,7 +269,7 @@ void ActionExecFunctions::execute_fight(Action* fight)
 		}
 
 		//check if the target's party is empty(may need to change this to account for hero death)
-		if (fight->getReceiver()->getParty()->getMembers().size() == 0) {
+		if (fight->getReceiver()->getParty()->getMembers().size() == fight->getReceiver()->getParty()->get_down_members().size()) {
 			//Apply succ-post-conditions
 			fight->apply_postconditions(true);
 			//update_memory category as a success 
@@ -293,7 +295,7 @@ void ActionExecFunctions::execute_fight(Action* fight)
 		doer_mem->setWhen(frame_count);
 		receiver_mem->setWhen(frame_count);
 
-
+		fight->getDoer()->getParty()->get_fight()->end_combat();
 		//Mark action as executed?
 		fight->executed = true;
 
@@ -322,6 +324,7 @@ void ActionExecFunctions::execute_conquer(Action* conq)
 			conq->checkpoint++;
 			conq->getReceiver()->getVillage()->defenders->add_party_to_party(conq->getReceiver()->getVillage()->barracks);
 			ActionHelper::create_memory(conq, conq->getReceiver());
+			new Fight(conq->getDoer()->getParty(), conq->getReceiver()->getParty(), false);
 		}
 		break;
 	case 2: //If both niether party is empty then contiue the fight 
@@ -329,21 +332,23 @@ void ActionExecFunctions::execute_conquer(Action* conq)
 		if (conq->getDoer()->getParty()->getMembers().size() == 0)
 		{
 			conq->checkpoint++;
-		} else if (conq->getDoer()->getParty()->getMembers().size() == 0) {
+		} else if (conq->getReceiver()->getVillage()->defenders->getMembers().size() == 
+			conq->getReceiver()->getVillage()->defenders->get_down_members().size()) {
 			conq->getReceiver()->getVillage()->add_to_village_health(conq->getDoer()->getParty()->getMembers().size()*10);
 			if (conq->getReceiver()->getVillage()->get_village_health()<=0) {
 				conq->checkpoint++;
 			}else {
-				ActionHelper::set_timer(conq, 600);
+				//ActionHelper::set_timer(conq, 600);
+				conq->getDoer()->getParty()->get_fight()->not_over();
 				conq->getReceiver()->getVillage()->defenders->add_party_to_party(conq->getReceiver()->getVillage()->barracks);
 			}
 		}
 		//do a single round of battle every 10 sec
-		if (ActionHelper::retrieve_time(conq) == 0)
+		/*if (ActionHelper::retrieve_time(conq) == 0)
 		{
 			ActionHelper::battle_sim(conq, conq->getReceiver()->getVillage()->defenders);
 			ActionHelper::set_timer(conq, 600);
-		}
+		}*/
 
 		//NEED TO SOMEHOW ACCOUNT FOR IF A PLAYER GETS CLOSE
 
@@ -386,7 +391,7 @@ void ActionExecFunctions::execute_conquer(Action* conq)
 		doer_mem->setWhen(frame_count);
 		receiver_mem->setWhen(frame_count);
 
-
+		conq->getDoer()->getParty()->get_fight()->end_combat();
 		//Mark action as executed?
 		conq->executed = true;
 		conq->getDoer()->set_action_destination(&conq->getDoer()->getVillage()->get_village_location());
@@ -428,23 +433,18 @@ void ActionExecFunctions::execute_duel(Action* duel)
 	case 3: //If both niether party is empty then contiue the fight 
 			//(may need to change this to account for hero death)
 		if (Party::dist_location_to_location(duel->getDoer()->getLoc(), *duel->getDoer()->get_action_destination())<500) {
-			if (duel->getDoer()->getHealth() <= 0 || duel->getReceiver()->getHealth() <= 0)
-			{
-				duel->checkpoint++;
-			}
-			//do a single round of battle every 10 sec
-			if (ActionHelper::retrieve_time(duel) == 0)
-			{
-				ActionHelper::attack_helper(duel->getDoer(), duel->getReceiver());
-				ActionHelper::attack_helper(duel->getReceiver(), duel->getDoer());
-				ActionHelper::set_timer(duel, 600);
-			}
+			Fight* fight = new Fight(duel->getDoer()->getParty(), duel->getReceiver()->getParty(), true);
+			duel->checkpoint++;
 		}
-
 		//NEED TO SOMEHOW ACCOUNT FOR IF A PLAYER GETS CLOSE
-
 		break;
-	case 4: //If win update apply win-post else apply loss-post and update memory
+	case 4:
+		if (duel->getDoer()->getParty()->get_fight()->is_over())
+		{
+			duel->checkpoint++;
+		}
+		break;
+	case 5: //If win update apply win-post else apply loss-post and update memory
 			//create_memory(fight, fight->getOwner()); do we want to update the owner immeadiately?
 
 		Memory* doer_mem = duel->getDoer()->find_mem(duel->getName() + std::to_string(duel->time_stamp));
@@ -455,7 +455,7 @@ void ActionExecFunctions::execute_duel(Action* duel)
 		}
 
 		//check if the target's party is empty(may need to change this to account for hero death)
-		if (duel->getReceiver()->getHealth() <= 0) {
+		if (duel->getReceiver()->getParty()->getMembers().size() == duel->getReceiver()->getParty()->get_down_members().size()) {
 			//Apply succ-post-conditions
 			duel->apply_postconditions(true);
 			//update_memory category as a success 
@@ -481,7 +481,7 @@ void ActionExecFunctions::execute_duel(Action* duel)
 		doer_mem->setWhen(frame_count);
 		receiver_mem->setWhen(frame_count);
 
-
+		duel->getDoer()->getParty()->get_fight()->end_combat();
 		//Mark action as executed?
 		duel->executed = true;
 

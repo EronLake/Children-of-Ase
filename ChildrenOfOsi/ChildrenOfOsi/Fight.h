@@ -20,6 +20,7 @@ public:
 	void update_fight();
 	bool check_for_winner();
 	bool is_over() { return over; };
+	void not_over() { over=false; };
 	static vector<Fight*> fights_world;
 	static void update_all_fights();
 	static void bring_out_your_dead();

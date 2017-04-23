@@ -23,7 +23,7 @@
       <Filter>Memory</Filter>
     </ClCompile>
     <ClCompile Include="DummyController.cpp">
-      <Filter>Rendering\Task Manager</Filter>
+      <Filter>Task Manager</Filter>
     </ClCompile>
     <ClCompile Include="Hero.cpp">
       <Filter>Game Objects</Filter>
@@ -38,7 +38,7 @@
       <Filter>Game Objects</Filter>
     </ClCompile>
     <ClCompile Include="Manager.cpp">
-      <Filter>Rendering\Task Manager</Filter>
+      <Filter>Task Manager</Filter>
     </ClCompile>
     <ClCompile Include="memManager.cpp">
       <Filter>Memory</Filter>
@@ -65,7 +65,7 @@
       <Filter>Physics</Filter>
     </ClCompile>
     <ClCompile Include="MessageLog.cpp">
-      <Filter>Rendering\Task Manager</Filter>
+      <Filter>Task Manager</Filter>
     </ClCompile>
     <ClCompile Include="NPC.cpp">
       <Filter>Game Objects</Filter>
@@ -92,13 +92,13 @@
       <Filter>Game Objects</Filter>
     </ClCompile>
     <ClCompile Include="Task.cpp">
-      <Filter>Rendering\Task Manager</Filter>
+      <Filter>Task Manager</Filter>
     </ClCompile>
     <ClCompile Include="TaskBuffer.cpp">
-      <Filter>Rendering\Task Manager</Filter>
+      <Filter>Task Manager</Filter>
     </ClCompile>
     <ClCompile Include="TaskBufferTestSuite.cpp">
-      <Filter>Rendering\Task Manager</Filter>
+      <Filter>Task Manager</Filter>
     </ClCompile>
     <ClCompile Include="Texture.cpp">
       <Filter>Rendering</Filter>
@@ -250,7 +250,7 @@
       <Filter>Memory</Filter>
     </ClInclude>
     <ClInclude Include="DummyController.h">
-      <Filter>Rendering\Task Manager</Filter>
+      <Filter>Task Manager</Filter>
     </ClInclude>
     <ClInclude Include="Hero.h">
       <Filter>Game Objects</Filter>
@@ -265,7 +265,7 @@
       <Filter>Game Objects</Filter>
     </ClInclude>
     <ClInclude Include="Manager.h">
-      <Filter>Rendering\Task Manager</Filter>
+      <Filter>Task Manager</Filter>
     </ClInclude>
     <ClInclude Include="memManager.h">
       <Filter>Memory</Filter>
@@ -292,7 +292,7 @@
       <Filter>Physics</Filter>
     </ClInclude>
     <ClInclude Include="MessageLog.h">
-      <Filter>Rendering\Task Manager</Filter>
+      <Filter>Task Manager</Filter>
     </ClInclude>
     <ClInclude Include="NPC.h">
       <Filter>Game Objects</Filter>
@@ -322,16 +322,16 @@
       <Filter>Game Objects</Filter>
     </ClInclude>
     <ClInclude Include="Task.h">
-      <Filter>Rendering\Task Manager</Filter>
+      <Filter>Task Manager</Filter>
     </ClInclude>
     <ClInclude Include="targetver.h">
-      <Filter>Rendering\Task Manager</Filter>
+      <Filter>Task Manager</Filter>
     </ClInclude>
     <ClInclude Include="TaskBuffer.h">
-      <Filter>Rendering\Task Manager</Filter>
+      <Filter>Task Manager</Filter>
     </ClInclude>
     <ClInclude Include="TaskBufferTestSuite.h">
-      <Filter>Rendering\Task Manager</Filter>
+      <Filter>Task Manager</Filter>
     </ClInclude>
     <ClInclude Include="Texture.h">
       <Filter>Rendering</Filter>
@@ -484,13 +484,13 @@
       <Filter>Physics</Filter>
     </Text>
     <Text Include="message_log.txt">
-      <Filter>Rendering\Task Manager</Filter>
+      <Filter>Task Manager</Filter>
     </Text>
     <Text Include="render_test.txt">
       <Filter>Rendering</Filter>
     </Text>
     <Text Include="task_buffer_test.txt">
-      <Filter>Rendering\Task Manager</Filter>
+      <Filter>Task Manager</Filter>
     </Text>
     <Text Include="ReadMe.txt">
       <Filter>Misc</Filter>
@@ -537,7 +537,7 @@
     <Filter Include="AI\Relationships">
       <UniqueIdentifier>{208c7dff-11a9-46ae-8f1b-2153f54d6a2b}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Rendering\Task Manager">
+    <Filter Include="Task Manager">
       <UniqueIdentifier>{b652d4c4-522f-4787-bcb8-6a409450dac1}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
