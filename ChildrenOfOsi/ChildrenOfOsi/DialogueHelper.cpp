@@ -11,7 +11,7 @@ bool std::operator==(const appealPoint& p1, const appealPoint& p2) {
 
 
 Player* player;
-WorldObj* other;
+WorldObj* other; //the npc in conversation with the player
 int state = 0;
 //States:
 //0 is no conversation
@@ -57,6 +57,7 @@ DialogueHelper::DialogueHelper()
 DialogueHelper::~DialogueHelper()
 {
 }
+
 int DialogueHelper::personality_appeal(ConversationPoint* point, vector<int> personality) {
 
 	
@@ -69,7 +70,8 @@ int DialogueHelper::personality_appeal(ConversationPoint* point, vector<int> per
 	(personality[5] *point->multipliers->getRecklessness())+
 	(personality[6] *point->multipliers->getExtroversion()));
 };
-//functions where heroes make dialogue choices
+
+/*Runs the heuristic that npc's use to select a conversation point to say.*/
 dialogue_point DialogueHelper::choose_conv_pt(std::vector<ConversationLogObj*> conversation_log_obj_pointer_vec)
 {	/*index 0 = Affinity, index 1 = notoriety, index 2 = strength, index 3 = AffEstimateindex 4 = NotorEstimate, index 5 = StrEstimate*/
 
@@ -81,13 +83,20 @@ dialogue_point DialogueHelper::choose_conv_pt(std::vector<ConversationLogObj*> c
 	std::vector<int> personality = yemoja_personality;
 	std::vector<int> relationship = yemoja_relationship_with_shango;
 
+	if (conversation_log_obj_pointer_vec[conversation_log_obj_pointer_vec.size() - 1]->get_conv_point()->get_name() == "Ask_For_Quest") {
+		return{ "Offer_Quest", "Offer_Quest" };
+	}
+
 	//check if the player has already asked the npc this question
 	for (int i = 0; i < conversation_log_obj_pointer_vec.size() - 1; ++i) {
 		if (conversation_log_obj_pointer_vec[i]->get_conv_point() == NULL)
 			continue;
-		if ((conversation_log_obj_pointer_vec[i]->get_conv_point()->get_name() == conversation_log_obj_pointer_vec[conversation_log_obj_pointer_vec.size() - 1]->get_conv_point()->get_name()) &&
-			(conversation_log_obj_pointer_vec[conversation_log_obj_pointer_vec.size() - 1]->get_who() == conversation_log_obj_pointer_vec[i]->get_who()) && (conversation_log_obj_pointer_vec[conversation_log_obj_pointer_vec.size() - 1]->get_conv_point()->get_name().find("Ask",0) != string::npos))
-			return {"",""};
+		if ((conversation_log_obj_pointer_vec[i]->get_conv_point()->get_name() == conversation_log_obj_pointer_vec[conversation_log_obj_pointer_vec.size() - 1]->get_conv_point()->get_name()) 
+			&&
+			(conversation_log_obj_pointer_vec[conversation_log_obj_pointer_vec.size() - 1]->get_who() == conversation_log_obj_pointer_vec[i]->get_who()) 
+			&& 
+			(conversation_log_obj_pointer_vec[conversation_log_obj_pointer_vec.size() - 1]->get_conv_point()->get_name().find("Ask",0) != string::npos))
+			    return {"",""};
 	}
 
 	for (auto i = conversation_log_obj_pointer_vec.begin(); i != conversation_log_obj_pointer_vec.end(); ++i) {
@@ -168,6 +177,8 @@ dialogue_point DialogueHelper::choose_conv_pt(std::vector<ConversationLogObj*> c
 	}
 }
 
+/*Returns all of the possible reply points that an npc can say
+based on the player's conversation point.*/
 dialogue_point DialogueHelper::choose_reply_pt(std::string point, int optn_inx, std::vector<ConversationLogObj*> conversation_log_obj_pointer_vec)
 {
 	//check if the player has already asked the npc this question
@@ -175,8 +186,10 @@ dialogue_point DialogueHelper::choose_reply_pt(std::string point, int optn_inx, 
 		if (conversation_log_obj_pointer_vec[i]->get_conv_point() == NULL)
 			continue;
 		if ((conversation_log_obj_pointer_vec[i]->get_conv_point()->get_name() == conversation_log_obj_pointer_vec[conversation_log_obj_pointer_vec.size() - 1]->get_conv_point()->get_name()) &&
-			(conversation_log_obj_pointer_vec[conversation_log_obj_pointer_vec.size() - 1]->get_who() == conversation_log_obj_pointer_vec[i]->get_who()) && (conversation_log_obj_pointer_vec[conversation_log_obj_pointer_vec.size() - 1]->get_conv_point()->get_name().find("Ask", 0) != string::npos))
-			return{ "Already_Asked","Already_Asked" };
+			(conversation_log_obj_pointer_vec[conversation_log_obj_pointer_vec.size() - 1]->get_who() == conversation_log_obj_pointer_vec[i]->get_who()) && (conversation_log_obj_pointer_vec[conversation_log_obj_pointer_vec.size() - 1]->get_conv_point()->get_name().find("Ask", 0) != string::npos)){
+			if(conversation_log_obj_pointer_vec[conversation_log_obj_pointer_vec.size() - 1]->get_conv_point()->get_name().find("Ask_For_Quest", 0) == string::npos)
+			    return{ "Already_Asked","Already_Asked" };
+	     }
 	}
 
 	for (int i = 0; i < possible_reply_pts[optn_inx].size(); i++)
@@ -194,16 +207,20 @@ dialogue_point DialogueHelper::choose_reply_pt(std::string point, int optn_inx, 
 
 }
 
+/*Returns all of the possible conversation points that the player can say.*/
 std::vector<std::vector<dialogue_point>> DialogueHelper::get_possible_conv_pts()
 {
 	return possible_conv_pts;
 }
 
+/*Returns a reference to all of the possible conversation points that the 
+player can say.*/
 std::vector<std::vector<dialogue_point>>& DialogueHelper::get_possible_conv_pts_ref()
 {
 	return possible_conv_pts;
 }
 
+/**/
 std::vector<dialogue_point> DialogueHelper::get_possible_reply_pts(std::string point, int opts_inx)
 {
 	std::vector<dialogue_point> reply;

@@ -417,6 +417,46 @@
         "5": "..."
     },
 
+	"Response_Ask_For_Quest": {
+        "1": "Yes I do.",
+        "2": "Yes I do.",
+        "3": "Yes I do.",
+        "4": "Yes I do.",
+        "5": "Yes I do."
+    },
+
+	"Accept_Quest": {
+        "1": "Yes I do.",
+        "2": "Yes I do.",
+        "3": "Yes I do.",
+        "4": "Yes I do.",
+        "5": "Yes I do."
+    },
+
+	"Decline_Quest": {
+        "1": "Yes I do.",
+        "2": "Yes I do.",
+        "3": "Yes I do.",
+        "4": "Yes I do.",
+        "5": "Yes I do."
+    },
+
+	"Offer_Quest": {
+        "1": "Take care of the bandits up north please.",
+        "2": "Take care of the bandits up north please.",
+        "3": "Take care of the bandits up north please.",
+        "4": "Take care of the bandits up north please.",
+        "5": "Take care of the bandits up north please."
+    },
+
+	"Response_Turn_In_Quest": {
+        "1": "Thanks for helping me out.",
+        "2": "Thanks for helping me out.",
+        "3": "Thanks for helping me out.",
+        "4": "Thanks for helping me out.",
+        "5": "Thanks for helping me out."
+    },
+
 	"Decline_To_Answer": {
 		"1": "I have nothing to say to that.",
         "2": "I don't know you well enough to reply.",

@@ -4,7 +4,7 @@
 #include "Relationship.h"
 #include "Personality.h"
 #include "Memory.h"
-
+#include "ConversationLogObj.h"
 
 class ActionPool;
 class Party;
@@ -21,6 +21,7 @@ public:
 
 	unordered_map<int, Relationship*> rel;
 	Personality* traits;
+	//std::vector<ConversationLogObj*> conversation_log;
 	//Planner* planner;
 
 	//used to hold the 4 planners for each of the other heroes

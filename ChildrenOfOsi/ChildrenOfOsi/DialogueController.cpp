@@ -220,6 +220,14 @@ void DialogueController::otherConversationPoint(dialogue_point line)
 	if (point[0] != "No_More_Phrases" && point[0] != "Already_Asked" && point.size() >= 4)
 		point[3] = curr_hero_topic;
 
+	/*handles special case of quest conversation point by making
+	sure it's dialogue point will be the same size as the basic
+	conversation points like "Ask_Name" etc.*/
+	if (point[1].find("Quest") != string::npos) {
+		point.push_back("");
+		point.push_back("");
+	}
+	    
 	replyString = point[1];
 
 	Hero* temp_hero = nullptr;

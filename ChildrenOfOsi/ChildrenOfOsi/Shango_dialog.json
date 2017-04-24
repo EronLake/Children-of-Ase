@@ -416,6 +416,46 @@
         "5": "..."
     },
 
+	"Ask_For_Quest": {
+        "1": "You got a quest for me?",
+        "2": "You got a quest for me?",
+        "3": "You got a quest for me?",
+        "4": "You got a quest for me?",
+        "5": "You got a quest for me?"
+    },
+
+	"Response_Ask_For_Quest": {
+        "1": "Yes I do.",
+        "2": "Yes I do.",
+        "3": "Yes I do.",
+        "4": "Yes I do.",
+        "5": "Yes I do."
+    },
+
+	"Accept_Quest": {
+        "1": "I will take it.",
+        "2": "I will take it.",
+        "3": "I will take it.",
+        "4": "I will take it.",
+        "5": "I will take it."
+    },
+
+	"Decline_Quest": {
+        "1": "I will pass on that.",
+        "2": "I will pass on that.",
+        "3": "I will pass on that.",
+        "4": "I will pass on that.",
+        "5": "I will pass on that."
+    },
+
+	"Turn_In_Quest": {
+        "1": "I took care of what you requested.",
+        "2": "I took care of what you requested.",
+        "3": "I took care of what you requested.",
+        "4": "I took care of what you requested.",
+        "5": "I took care of what you requested."
+    },
+
 	"Decline_To_Answer": {
 		"1": "I have nothing to say to that.",
         "2": "I don't know you well enough to reply.",

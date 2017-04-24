@@ -311,6 +311,48 @@
 	 }
     },
 
+	"Ask_For_Quest_Templates": {
+	 "1": {
+        "1": "Ask_For_Quest"
+	 }
+    },
+
+	"Response_Ask_For_Quest_Templates": {
+	 "1": {
+        "1": "Response_Ask_For_Quest"
+	 }
+    },
+
+	"Accept_Quest_Templates": {
+	 "1": {
+        "1": "Accept_Quest"
+	 }
+    },
+
+	"Decline_Quest_Templates": {
+	 "1": {
+        "1": "Decline_Quest"
+	 }
+    },
+
+	"Offer_Quest_Templates": {
+	 "1": {
+        "1": "Offer_Quest"
+	 }
+    },
+
+	"Turn_In_Quest_Templates": {
+	 "1": {
+        "1": "Turn_In_Quest"
+	 }
+    },
+
+	"Response_Turn_In_Quest_Templates": {
+	 "1": {
+        "1": "Response_Turn_In_Quest"
+	 }
+    },
+
 	"Decline_To_Answer_Templates": {
      "1": {
         "1": "Decline_To_Answer"

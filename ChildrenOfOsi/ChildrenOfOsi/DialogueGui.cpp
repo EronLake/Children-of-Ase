@@ -1,6 +1,6 @@
 #include "stdafx.h"
 #include "DialogueGui.h"
-//#include "GameWindow.h"
+
 
 DialogueGui::DialogueGui()
 {
@@ -12,7 +12,6 @@ DialogueGui::DialogueGui()
 	questionIcon = new Rectangle(Vector2f(142, 439), 50, 47);
 	dialogueBox = new Rectangle(Vector2f(254, 303), 600, 80);
 	responseBox1 = new Rectangle(Vector2f(280, 390), 544, 90);
-	//responseBox2 = new Rectangle(Vector2f(280, 440), 544, 45);
 	portrait1 = new Rectangle(Vector2f(100, 70), 300, 400);
 	portrait2 = new Rectangle(Vector2f(700, 70), 300, 400);
 	backgroundTex = new Texture();
@@ -62,7 +61,6 @@ void DialogueGui::setSprite()
 	questionIcon->sprite.setTexture(questionTex);
 	dialogueBox->sprite.setTexture(dialogueBoxTex);
 	responseBox1->sprite.setTexture(responseBoxTex);
-	//responseBox2->sprite.setTexture(responseBoxTex);
 }
 
 void DialogueGui::setPortrait1(Sprite portrait1Sprite)
@@ -116,18 +114,14 @@ void DialogueGui::drawGui()
 	GameWindow::drawSprite(questionIcon->getX(), questionIcon->getY(), questionIcon->getWidth(), questionIcon->getHeight(), questionIcon->sprite);
 	GameWindow::drawSprite(dialogueBox->getX(), dialogueBox->getY(), dialogueBox->getWidth(), dialogueBox->getHeight(), dialogueBox->sprite);
 	GameWindow::drawSprite(responseBox1->getX(), responseBox1->getY(), responseBox1->getWidth(), responseBox1->getHeight(), responseBox1->sprite);
-  // GameWindow::drawSprite(responseBox2->getX(), responseBox2->getY(), responseBox2->getWidth(), responseBox2->getHeight(), responseBox2->sprite);
 	std::string message = DialogueController::getMessage();
-	int j = 0;
+
 	GameWindow::createText(message, 266, 303, 500, 80, black);
 	std::vector<std::vector<std::string>> options;
-	//std::vector<std::vector<dialogue_point>> tmp_opts = DialogueController::getDialogueHelper()->get_possible_conv_pts();
+	
 	if (DialogueController::getState() == 1) {
 		options = DialogueController::getOptions();
-		if (options.size() <= 4)
-			j = options.size();
-		else
-			j = 4;
+
 		for (int i = 0; i <= 4; i++) {
 			if ( options.size() <= (DialogueController::scroll_control + i))
 				break;
@@ -145,11 +139,7 @@ void DialogueGui::drawGui()
 	}
 	if (DialogueController::getState() == 2) {
 		options = DialogueController::getReplyOptions();
-		//DialogueController::scroll_control = 0;
-		if (options.size() <= DialogueController::scroll_control)
-			j = options.size();
-		else
-			j = 4;
+
 		for (int i = 0; i <= 4; i++) {
 			if (options.size() <= (DialogueController::scroll_control + i))
 				break;
