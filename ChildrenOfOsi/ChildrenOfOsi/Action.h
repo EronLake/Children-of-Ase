@@ -69,8 +69,8 @@ public:
 
 	int time_stamp; // don't initialize here (get initialized when the action begins/memory gets created)
 
-	void (*execute_ptr)(Action* cur_action);
-	void execute() { execute_ptr(this); };
+	void (*execute_ptr)(Action* cur_action);	//can someone please extain this?
+	void execute() { execute_ptr(this); };	//what does this mean? execute_ptr?
 
 	bool executed = false;
 

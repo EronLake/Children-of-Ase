@@ -248,7 +248,7 @@ bool Fight::check_for_winner() {
 			}
 		}
 		if (alliances.size() <= 1) {
-			end_combat();
+			//end_combat();
 			return true;
 		}
 		else {
@@ -293,6 +293,7 @@ void Fight::end_combat() {
 	for (auto itor = downed.begin(); itor != downed.end(); ++itor) {
 		(*itor)->set_in_combat(false);
 	}
+	over = true;
 }
 
 //combines attack/defend/downed vectors into a map by alliance

@@ -94,13 +94,6 @@ std::mutex mu;
 
 void FPS(bool b);
 void GAMEPLAY_LOOP(QuadTree* _Quadtree);
-void init_textures_shango(unordered_map<Texture*, pair<string, int>> &textureMap);
-void init_textures_yemoja(unordered_map<Texture*, pair<string, int>> &textureMap, vector<Texture *> &oasis);
-void init_textures_oya(unordered_map<Texture*, pair<string, int>> &textureMap, vector<Texture *> &jungle);
-void init_textures_oshoshi(unordered_map<Texture*, pair<string, int>> &textureMap, vector<Texture *> &mountain);
-void init_textures_ogun(unordered_map<Texture*, pair<string, int>> &textureMap, vector<Texture *> &ogun);
-void init_textures_blue_soldier(unordered_map<Texture*, pair<string, int>> &textureMap);
-void init_textures_silver_soldier(unordered_map<Texture*, pair<string, int>> &textureMap, vector<Texture *> &mountain);
 
 bool lineCollision(Line l1, Line l2);
 /// Helper function passed to thread to set file. Param is a tuple, first being the Texture* to work on, and second being the param needed to call setFile().
@@ -235,21 +228,31 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	gameplay_functions->add_texture("map1_2", 0, 0, 0);
 	gameplay_functions->add_texture("map1_3", 0, 0, 0);
 	gameplay_functions->add_texture("map1_4", 0, 0, 0);
+	gameplay_functions->add_texture("map1_5", 0, 0, 0);
 
 	gameplay_functions->add_texture("map2_1", 0, 0, 0);
 	gameplay_functions->add_texture("map2_2", 0, 0, 0);
 	gameplay_functions->add_texture("map2_3", 0, 0, 0);
 	gameplay_functions->add_texture("map2_4", 0, 0, 0);
+	gameplay_functions->add_texture("map2_5", 0, 0, 0);
 
 	gameplay_functions->add_texture("map3_1", 0, 0, 0);
 	gameplay_functions->add_texture("map3_2", 0, 0, 0);
 	gameplay_functions->add_texture("map3_3", 0, 0, 0);
 	gameplay_functions->add_texture("map3_4", 0, 0, 0);
+	gameplay_functions->add_texture("map3_5", 0, 0, 0);
 
 	gameplay_functions->add_texture("map4_1", 0, 0, 0);
 	gameplay_functions->add_texture("map4_2", 0, 0, 0);
 	gameplay_functions->add_texture("map4_3", 0, 0, 0);
 	gameplay_functions->add_texture("map4_4", 0, 0, 0);
+	gameplay_functions->add_texture("map4_5", 0, 0, 0);
+
+	gameplay_functions->add_texture("map5_1", 0, 0, 0);
+	gameplay_functions->add_texture("map5_2", 0, 0, 0);
+	gameplay_functions->add_texture("map5_3", 0, 0, 0);
+	gameplay_functions->add_texture("map5_4", 0, 0, 0);
+	gameplay_functions->add_texture("map5_5", 0, 0, 0);
 
 	tBuffer->run();
 
@@ -1492,6 +1495,27 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	oya->shiftY(300);
 	oya->setHealth(50);
 
+	// SET UP RELATIONSHIP REFERENCE FOR YEMOJA 
+	std::unordered_map<int, Relationship*> yemojaRelRef;
+	yemojaRelRef[1] = new Relationship();
+	yemojaRelRef[2] = new Relationship();
+	yemojaRelRef[3] = new Relationship();
+
+	std::unordered_map<int, Relationship*> OyaRelRef;
+	OyaRelRef[1] = new Relationship();
+	OyaRelRef[2] = new Relationship();
+	OyaRelRef[3] = new Relationship();
+
+	std::unordered_map<int, Relationship*> shangoRel;
+	shangoRel[1] = new Relationship();
+	shangoRel[2] = new Relationship();
+	shangoRel[3] = new Relationship();
+
+	Alex->rel = shangoRel;
+
+	staticRec->rel = yemojaRelRef;
+	oya->rel = OyaRelRef;
+
 	ActionConfig::import_config(gameplay_functions, tBuffer, staticRec);
 	ActionConfig::import_config(gameplay_functions, tBuffer, oya);
 
@@ -1507,6 +1531,8 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	RelPrecon* prec1 = new RelPrecon(Preconditions::AFF, 30);
 	RelPost* post1 = new RelPost(Postcondition::STR, 15);
 	RelPost* post2 = new RelPost(Postcondition::AFF, 15);
+
+
 
 	test_ally->req_preconds.push_back(std::make_shared<RelPrecon>(*prec));
 	test_ally->doer_succ_postconds.push_back(std::make_shared<RelPost>(*post));
@@ -1525,8 +1551,10 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	}
 
 	Alex->add_quest(test_ally, 8);
+	staticRec->add_quest(test_train, 1);
 	//Alex->add_quest(test_train, 2);
 	questM->heros.push_back(Alex);
+	questM->heros.push_back(staticRec);
 	///////////////////////////////////////////////////////////////////////////////////////////
 	///////////////////////////////////////////////////////////////////////////////////////////
 	//////////////////                                                 ////////////////////////
@@ -1534,10 +1562,12 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	//////////////////                                                 ////////////////////////
 	///////////////////////////////////////////////////////////////////////////////////////////
 	///////////////////////////////////////////////////////////////////////////////////////////
+	
+	// THIS IS BEING RESET IN THE GAME LOOP. planner->get_current_action returns nullptr
 	YemojaPlanner->set_current_action(test_train);
 
-	//AiController->generate_end_state(YEMOJA, OYA);
-	//AIController::init_plans();
+	//AIController::generate_end_state(YEMOJA, OYA);
+	AIController::init_plans();
 
 
 	/*
@@ -1779,8 +1809,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 		}
 		while (current_game_state == game_state::in_game) {
 			for (int i = 0; i < 10; i++) {
-				cout << "Press Escape to pause game" << endl;
-
+				//cout << "Press Escape to pause game" << endl;
 			}
 			if (iController->current_game_state != game_state::in_game) {
 				iController->current_game_state = current_game_state;
@@ -1887,6 +1916,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 					combatControl->update_soldier(soldiers_list[i], state);
 				}
 			});
+			//YemojaPlanner->set_current_action(test_train);
 
 			questM->update();
 
@@ -1922,7 +1952,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 			//setting give as quest to false so that the excute runs
 			YemojaPlanner->give_as_quest = false;
 
-			//AIController::execute();
+			// AIController::execute();
 			AI.join();
 			if ((1000 / fs) > (clock() - start_tick)) { //delta_ticks)
 				Sleep((1000 / fs) - (clock() - start_tick));
@@ -2072,40 +2102,5 @@ void FPS(bool b) {
 	}
 	time_t now;
 	time(&now);
-
-}
-
-void init_textures_shango(unordered_map<Texture*, pair<string, int>> &textureMap)
-{
-
-}
-
-void init_textures_yemoja(unordered_map<Texture*, pair<string, int>> &textureMap, vector<Texture *> &oasis)
-{
-
-}
-
-void init_textures_oya(unordered_map<Texture*, pair<string, int>> &textureMap, vector<Texture *> &jungle)
-{
-
-}
-
-void init_textures_oshoshi(unordered_map<Texture*, pair<string, int>> &textureMap, vector<Texture *> &mountain)
-{
-
-}
-
-void init_textures_ogun(unordered_map<Texture*, pair<string, int>> &textureMap, vector<Texture *> &ogun)
-{
-
-}
-
-void init_textures_blue_soldier(unordered_map<Texture*, pair<string, int>> &textureMap)
-{
-
-}
-
-void init_textures_silver_soldier(unordered_map<Texture*, pair<string, int>> &textureMap, vector<Texture *> &mountain)
-{
 
 }

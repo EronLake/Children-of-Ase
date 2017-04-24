@@ -172,6 +172,7 @@ void AIController::execute() {
 		Hero* hero = get_hero_object(me);
 		Planner* planner = get_plan(me);
 
+		// IN MAIN, DURING THE EXECUTION, WE DO NOT HAVE AN ACTION
 		Action* curr_action = planner->get_current_action();
 		Action* curr_goal = planner->get_current_end_state();
 
@@ -193,11 +194,17 @@ void AIController::execute() {
 		if (hero->update_action_timer() == 0)
 		{
 		//	std::cout << "after: " << hero->update_action_timer() << endl;
-			if (true) { //used to be : "!planner->give_as_quest"
+			if (curr_action != nullptr) { //used to be : "!planner->give_as_quest" //and then it was "true"
 			//	std::cout << "execute" << endl;
 				curr_action->execute();
+				cout << "hero number " << me << "'s current action has been executed" << endl;
 			}
-			if (curr_action->executed) {
+			else {
+				cout << "hero number "<< me << "'s CURRENT ACTION IS A NULLPTR!!!" << endl;
+			}
+			if (curr_action != nullptr && curr_action->executed) {	//need to check to make sure curr_action is not nullptr
+
+				//*Alex* I never get here. Set up incorrectly or action execute not working right?
 
 				// the issue here is that the key for the milestonees (curr_goal) exsits
 				//but the value does not exsit because it was popped after completion
@@ -246,6 +253,9 @@ void AIController::execute() {
 				hero->init_action_timer(action_wait_time);                    //Start a timer for approx. 2 minutes
 				planner->give_as_quest = give_as_quest(best_action);  //Check and store in planner whether this is appropriate to give as a quest
 
+			}
+			else {
+				cout << "hero number " << me << "'s action NOT FINISHED EXECUTING" << endl;
 			}
 
 		}
