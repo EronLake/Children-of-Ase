@@ -228,31 +228,21 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	gameplay_functions->add_texture("map1_2", 0, 0, 0);
 	gameplay_functions->add_texture("map1_3", 0, 0, 0);
 	gameplay_functions->add_texture("map1_4", 0, 0, 0);
-	gameplay_functions->add_texture("map1_5", 0, 0, 0);
 
 	gameplay_functions->add_texture("map2_1", 0, 0, 0);
 	gameplay_functions->add_texture("map2_2", 0, 0, 0);
 	gameplay_functions->add_texture("map2_3", 0, 0, 0);
 	gameplay_functions->add_texture("map2_4", 0, 0, 0);
-	gameplay_functions->add_texture("map2_5", 0, 0, 0);
 
 	gameplay_functions->add_texture("map3_1", 0, 0, 0);
 	gameplay_functions->add_texture("map3_2", 0, 0, 0);
 	gameplay_functions->add_texture("map3_3", 0, 0, 0);
 	gameplay_functions->add_texture("map3_4", 0, 0, 0);
-	gameplay_functions->add_texture("map3_5", 0, 0, 0);
 
 	gameplay_functions->add_texture("map4_1", 0, 0, 0);
 	gameplay_functions->add_texture("map4_2", 0, 0, 0);
 	gameplay_functions->add_texture("map4_3", 0, 0, 0);
 	gameplay_functions->add_texture("map4_4", 0, 0, 0);
-	gameplay_functions->add_texture("map4_5", 0, 0, 0);
-
-	gameplay_functions->add_texture("map5_1", 0, 0, 0);
-	gameplay_functions->add_texture("map5_2", 0, 0, 0);
-	gameplay_functions->add_texture("map5_3", 0, 0, 0);
-	gameplay_functions->add_texture("map5_4", 0, 0, 0);
-	gameplay_functions->add_texture("map5_5", 0, 0, 0);
 
 	tBuffer->run();
 
@@ -1952,7 +1942,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 			//setting give as quest to false so that the excute runs
 			YemojaPlanner->give_as_quest = false;
 
-			// AIController::execute();
+			 AIController::execute();
 			AI.join();
 			if ((1000 / fs) > (clock() - start_tick)) { //delta_ticks)
 				Sleep((1000 / fs) - (clock() - start_tick));
