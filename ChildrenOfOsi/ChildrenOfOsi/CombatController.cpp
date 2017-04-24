@@ -130,6 +130,7 @@ bool CombatController::find_closest_friend(Soldier* sold1, int state) {
 void CombatController::update_soldier(Soldier* sold1, int state) {
 	///update cooldowns
 	sold1->updateCD();
+	if (sold1->get_incapacitated())return;
 	if (sold1->getParty() == nullptr || sold1->getParty() == NULL)return;
 	if (find_closest_friend(sold1, state)) {
 		//std::lock_guard<std::mutex> guard(mux);

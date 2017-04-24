@@ -209,6 +209,8 @@ void Soldier::defeat()
 
 void Soldier::capacitate()
 {
+	this->setHealth(get_max_health()/2);
+	this->getParty()->up_member(this);
 	incapacitated = false;
 }
 

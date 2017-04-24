@@ -22,13 +22,17 @@ Movement::~Movement() {
 
 int Movement::move_up(WorldObj* obj) {
 	if (obj->sprite.getLock())return 0;
+	int my_type = obj->getType();
+	Soldier* sold;
+	if ((my_type >= WorldObj::TYPE_SOLDIER) && (sold = CheckClass::isSoldier(obj)) && (sold->get_incapacitated())) {
+		return 0;
+	}
 	obj->setDirection(WorldObj::DIRECTION_UP);
 	objVec.clear();
 	objVec = tree->retrieve(objVec, obj);
 	////cout << "SIZE OF OBJVEC IS ************************ " << objVec.size() << endl;
-	int my_type = obj->getType();
 	NPC* npc;
-	if (my_type >= 2) {
+	if (my_type >= WorldObj::TYPE_NPC) {
 		if (npc = CheckClass::isNPC(obj))
 		{
 			float moveSpeed = npc->getSpeed();
@@ -77,11 +81,15 @@ int Movement::move_up(WorldObj* obj) {
 }
 int Movement::move_up_left(WorldObj* obj) {
 	if (obj->sprite.getLock())return 0;
+	int my_type = obj->getType();
+	Soldier* sold;
+	if ((my_type >= WorldObj::TYPE_SOLDIER) && (sold = CheckClass::isSoldier(obj)) && (sold->get_incapacitated())) {
+		return 0;
+	}
 	obj->setDirection(WorldObj::DIRECTION_LEFT);
 	//get list to check collision with
 	objVec.clear();
 	objVec = tree->retrieve(objVec, obj);
-	int my_type = obj->getType();
 	NPC* npc;
 	if (my_type >= 2) {
 		if (npc = CheckClass::isNPC(obj))
@@ -120,11 +128,15 @@ int Movement::move_up_left(WorldObj* obj) {
 }
 int Movement::move_up_right(WorldObj* obj) {
 	if (obj->sprite.getLock())return 0;
+	int my_type = obj->getType();
+	Soldier* sold;
+	if ((my_type >= WorldObj::TYPE_SOLDIER) && (sold = CheckClass::isSoldier(obj)) && (sold->get_incapacitated())) {
+		return 0;
+	}
 	obj->setDirection(WorldObj::DIRECTION_RIGHT);
 	//get list to check collision with
 	objVec.clear();
 	objVec = tree->retrieve(objVec, obj);
-	int my_type = obj->getType();
 	NPC* npc;
 	if (my_type >= 2) {
 		if (npc = CheckClass::isNPC(obj))
@@ -163,11 +175,15 @@ int Movement::move_up_right(WorldObj* obj) {
 }
 int Movement::move_down(WorldObj* obj) {
 	if (obj->sprite.getLock())return 0;
+	int my_type = obj->getType();
+	Soldier* sold;
+	if ((my_type >= WorldObj::TYPE_SOLDIER) && (sold = CheckClass::isSoldier(obj)) && (sold->get_incapacitated())) {
+		return 0;
+	}
 	obj->setDirection(WorldObj::DIRECTION_DOWN);
 	//get list to check collision with
 	objVec.clear();
 	objVec = tree->retrieve(objVec, obj);
-	int my_type = obj->getType();
 	NPC* npc;
 	if (my_type >= 2) {
 		if (npc = CheckClass::isNPC(obj))
@@ -211,11 +227,15 @@ int Movement::move_down(WorldObj* obj) {
 }
 int Movement::move_down_left(WorldObj* obj) {
 	if (obj->sprite.getLock())return 0;
+	int my_type = obj->getType();
+	Soldier* sold;
+	if ((my_type >= WorldObj::TYPE_SOLDIER) && (sold = CheckClass::isSoldier(obj)) && (sold->get_incapacitated())) {
+		return 0;
+	}
 	obj->setDirection(WorldObj::DIRECTION_LEFT);
 	//get list to check collision with
 	objVec.clear();
 	objVec = tree->retrieve(objVec, obj);
-	int my_type = obj->getType();
 	NPC* npc;
 	if (my_type >= 2) {
 		if (npc = CheckClass::isNPC(obj))
@@ -257,11 +277,15 @@ int Movement::move_down_left(WorldObj* obj) {
 }
 int Movement::move_down_right(WorldObj* obj) {
 	if (obj->sprite.getLock())return 0;
+	int my_type = obj->getType();
+	Soldier* sold;
+	if ((my_type >= WorldObj::TYPE_SOLDIER) && (sold = CheckClass::isSoldier(obj)) && (sold->get_incapacitated())) {
+		return 0;
+	}
 	obj->setDirection(WorldObj::DIRECTION_RIGHT);
 	//get list to check collision with
 	objVec.clear();
 	objVec = tree->retrieve(objVec, obj);
-	int my_type = obj->getType();
 	NPC* npc;
 	if (my_type >= 2) {
 		if (npc = CheckClass::isNPC(obj))
@@ -301,11 +325,15 @@ int Movement::move_down_right(WorldObj* obj) {
 }
 int Movement::move_left(WorldObj* obj) {
 	if (obj->sprite.getLock())return 0;
+	int my_type = obj->getType();
+	Soldier* sold;
+	if ((my_type >= WorldObj::TYPE_SOLDIER) && (sold = CheckClass::isSoldier(obj)) && (sold->get_incapacitated())) {
+		return 0;
+	}
 	obj->setDirection(WorldObj::DIRECTION_LEFT);
 	//get list to check collision with
 	objVec.clear();
 	objVec = tree->retrieve(objVec, obj);
-	int my_type = obj->getType();
 	NPC* npc;
 	if (my_type >= 2) {
 		if (npc = CheckClass::isNPC(obj))
@@ -349,11 +377,15 @@ int Movement::move_left(WorldObj* obj) {
 }
 int Movement::move_right(WorldObj* obj) {
 	if (obj->sprite.getLock())return 0;
+	int my_type = obj->getType();
+	Soldier* sold;
+	if ((my_type >= WorldObj::TYPE_SOLDIER) && (sold = CheckClass::isSoldier(obj)) && (sold->get_incapacitated())) {
+		return 0;
+	}
 	obj->setDirection(WorldObj::DIRECTION_RIGHT);
 	//get list to check collision with
 	objVec.clear();
 	objVec = tree->retrieve(objVec, obj);
-	int my_type = obj->getType();
 	NPC* npc;
 	if (my_type >= 2) {
 		if (npc = CheckClass::isNPC(obj))
@@ -406,6 +438,8 @@ int Movement::talk(WorldObj* obj) {
 			Player* d = dynamic_cast<Player*>(obj);
 			d->updateTalk();
 			//std:://////cout << "Talking Width " << d->talk.getWidth() << std::endl;
+			WorldObj* ot = nullptr;
+			int dist = 1000;
 			for (int i = 0; i < objVec.size(); i++) {
 				if (obj == objVec[i]) {
 					break;
@@ -428,10 +462,13 @@ int Movement::talk(WorldObj* obj) {
 							//	continue;
 							}
 						}
-						DialogueController::startConversation(objVec[i], true);
+						if (dist > Party::dist_location_to_location(objVec[i]->getLoc(), obj->getLoc())) {
+							ot = objVec[i];
+						}
 					}
 				}
 			}
+			if (ot!=nullptr)DialogueController::startConversation(ot, true);
 		}
 	}
 	return 0;
