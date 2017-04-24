@@ -3312,8 +3312,8 @@
       "name" : "OasisHouse2",
       "tex_file" : "Oasis_House02",
       "width" : 300.0,
-      "x" : 56.20368957519531,
-      "y" : 97.68342590332031
+      "x" : 55.56075286865234,
+      "y" : 97.70798492431641
    },
    "OasisHouse24" : {
       "bodyx1" : 0.0,
@@ -3380,18 +3380,57 @@
       "x" : 31.05276107788086,
       "y" : 109.6521606445313
    },
-   "new_oasis_tree_3" : {
-      "bodyx1" : 100.0,
-      "bodyx2" : 100.0,
-      "bodyy1" : 250.0,
-      "bodyy2" : 10.0,
+   "new_oasis_tree_3-0" : {
+      "bodyx1" : 300.4307556152344,
+      "bodyx2" : 300.4307556152344,
+      "bodyy1" : 610.6581420898438,
+      "bodyy2" : 73.57327270507813,
+      "frame_num" : 1,
+      "hight" : 783.622558593750,
+      "name" : "new_oasis_tree_3-0",
+      "tex_file" : "Oasis_Tree_new_1",
+      "width" : 751.0768432617188,
+      "x" : 77.77615356445313,
+      "y" : 104.8892517089844
+   },
+   "new_oasis_tree_3-1" : {
+      "bodyx1" : 511.6508483886719,
+      "bodyx2" : 511.6508483886719,
+      "bodyy1" : 1023.013061523438,
+      "bodyy2" : 123.2545776367188,
+      "frame_num" : 1,
+      "hight" : 1341.89941406250,
+      "name" : "new_oasis_tree_3-1",
+      "tex_file" : "Oasis_Tree_new_1",
+      "width" : 1309.353759765625,
+      "x" : 86.51415252685547,
+      "y" : 93.26278686523438
+   },
+   "new_oasis_tree_3-3" : {
+      "bodyx1" : 200.0,
+      "bodyx2" : 200.0,
+      "bodyy1" : 415.0,
+      "bodyy2" : 50.0,
       "frame_num" : 1,
       "hight" : 532.5456542968750,
-      "name" : "new_oasis_tree_3",
+      "name" : "new_oasis_tree_3-3",
       "tex_file" : "Oasis_Tree_new_1",
       "width" : 500.0,
-      "x" : 69.38953399658203,
-      "y" : 99.05098724365234
+      "x" : 71.57460784912109,
+      "y" : 111.7420883178711
+   },
+   "new_oasis_tree_3-4" : {
+      "bodyx1" : 200.0,
+      "bodyx2" : 200.0,
+      "bodyy1" : 415.0,
+      "bodyy2" : 50.0,
+      "frame_num" : 1,
+      "hight" : 532.5456542968750,
+      "name" : "new_oasis_tree_3-4",
+      "tex_file" : "Oasis_Tree_new_1",
+      "width" : 500.0,
+      "x" : 82.63730621337891,
+      "y" : 113.1671371459961
    },
    "new_oasis_tree_4" : {
       "bodyx1" : 0,
