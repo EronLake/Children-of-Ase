@@ -18,6 +18,10 @@ public:
 								Hero* receiver, float utility, float why, std::string type, std::string name, std::string exe_name,
 								int a, int k, int h, int p, int r, int e, int g);
 
+	static void ActionConfig::import_conditions(Json::Value::iterator iter, std::string name);
+	//this is a helper function fot import conditions
+	static void import_post_conditions(Json::Value::iterator itr, std::string name, std::string which_post);
+
 
 };
 

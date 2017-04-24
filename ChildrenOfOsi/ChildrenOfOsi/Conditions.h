@@ -28,9 +28,13 @@ public:
 
 	Preconditions();
 	~Preconditions();
-	virtual float get_cost();
+	virtual int get_cost();
 	std::string get_type();
 	int get_general_type();
+
+	//for relprecons 
+	virtual int get_rel_type();
+
 
 };
 
@@ -44,9 +48,9 @@ public:
 	RelPrecon(int rel_type, int desired_rel_val);
 	~RelPrecon();
 
-	int get_rel_type() { return rel_type; };
+	virtual int get_rel_type() final { return rel_type; };
 	//Require particular relationship towards a hero
-	virtual float get_cost(Hero* curr_hero, Hero* other_hero) final;
+	virtual int get_cost(Hero* curr_hero, Hero* other_hero) final;
 };
 
 class RelEstimPrerec : public Preconditions
@@ -62,7 +66,7 @@ public:
 
 	int get_rel_type() { return rel_type; };
 	//Require particular assumption of hero relationship towards sel
-	virtual float get_cost(Hero* curr_hero, Hero* other_hero) final;
+	virtual int get_cost(Hero* curr_hero, Hero* other_hero) final;
 
 };
 
@@ -76,7 +80,7 @@ public:
 	~TimePrerec();
 
 	//Global Time restrictions
-	virtual float get_cost() final;//needs to access some type of global clock
+	virtual int get_cost() final;//needs to access some type of global clock
 
 };
 
@@ -89,7 +93,7 @@ public:
 	~MemoryNumPrerec();
 
 	//Memories is not empty
-	float get_cost(std::vector<Memory*> memories);//Hero* curr_hero could also just pass in the hero
+	int get_cost(std::vector<Memory*> memories);//Hero* curr_hero could also just pass in the hero
 };
 
 class MemPrerec : public Preconditions
@@ -102,7 +106,7 @@ public:
 
 	std::string get_rec_mem() { return rec_mem; };
 	//Having particular memory
-	virtual float get_cost(std::vector<Memory*> memories) final;//Hero* curr_hero could also just pass in the hero
+	virtual int get_cost(std::vector<Memory*> memories) final;//Hero* curr_hero could also just pass in the hero
 };
 
 
@@ -116,7 +120,7 @@ public:
 	//Comparing village states
 	StatePrerec();
 	~StatePrerec();
-	virtual float get_cost() final;
+	virtual int get_cost() final;
 };
 
 //BETRAYALS NEED TO BE ACCOUNTED FOR
@@ -152,10 +156,12 @@ public:
 	virtual float get_utility();
 	virtual float get_utility(Hero* curr_hero, Hero* other_hero);
 	
-	void apply_utility();
-	void apply_utility(Hero* curr_hero, Hero* other_hero);
+	virtual void apply_utility();
+	virtual void apply_utility(Hero* curr_hero, Hero* other_hero, bool if_doer);
 	std::string get_type();
 	int get_general_type();
+	//for relprecons 
+	virtual int get_rel_type(); 
 	
 
 };
@@ -176,7 +182,7 @@ public:
 
 	//Require particular assumption of hero relationship towards sel
 	virtual float get_utility(Hero* curr_hero, Hero* other_hero) final;
-	virtual void apply_utility(Hero* curr_hero, Hero* other_hero) final;
+	virtual void apply_utility(Hero* curr_hero, Hero* other_her, bool if_doer) final;
 	typedef vector<std::shared_ptr<Preconditions>> Precond_vec;
 	RelPrecon* fulfills_which(Precond_vec preconds, Hero* me, Hero* them);
 };
@@ -193,11 +199,11 @@ public:
 	RelEstimPost(int rel_type, int rel_val);
 	~RelEstimPost();
 
-	int get_rel_type() { return rel_type; };
+	virtual int get_rel_type() final { return rel_type; };
 
 	//Require particular assumption of hero relationship towards sel
 	virtual float get_utility(Hero* curr_hero, Hero* other_hero) final;
-	virtual void apply_utility(Hero* curr_hero, Hero* other_hero) final;
+	virtual void apply_utility(Hero* curr_hero, Hero* other_hero, bool if_doer) final;
 
 };
 

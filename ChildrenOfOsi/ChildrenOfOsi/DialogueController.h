@@ -16,11 +16,11 @@ public:
 	static void PlayerConversationPoint();
 	static void PlayerResponse();
 	static void otherConversationPoint(dialogue_point line);
-	static void otherResponse(std::string info);
+	static void otherResponse(std::string info, std::string hero_topic);
 
-	static vector<std::string> getOptions();
+	static vector<std::vector<std::string>> getOptions();
 	static int getOSize() { return options.size(); };
-	static vector<std::string> getReplyOptions();
+	static vector<std::vector<std::string>> getReplyOptions();
 
 	static std::string getMessage() { return message; };
 	static void setOptionsIndex(int i) { optionsIndex = i; select = 0; };
@@ -32,37 +32,38 @@ public:
 	static WorldObj* getOther();
 	static int getState();
 	static void exitDialogue();
-	static void setAI(AIController* ai_c) { ai = ai_c; }
-	static void set_scroll_control(int scroll_int);
 	
 	static void offerQuest_hack_();
 
 	static DialogueHelper* getDialogueHelper();
-	static std::string convert_option_to_phrase(std::string opt);
+	static void add_hero_related_conv_points();
+	static void remove_hero_related_conv_points();
 
 	static bool prompted_quest;
 	static bool accepted_quest;
 
 	static Action* quest;
 	static int scroll_control;
-//private:
+
 	static Player* player;
 	static WorldObj* other;
 	static int state;
 	static std::string replyString;
+
 	//States:
 	//0 is no conversation
 	//1 is waiting for player input
 	//2 is waiting for player response
 	//3 is npc conversation point
 	//4 is npc response
+
 	static DialogueHelper dialogue;
-	static AIController* ai;
+
 	static std::vector<std::vector<dialogue_point>> options;
 	static std::vector<dialogue_point> replyOptions;
 	static std::string message;
 	static int optionsIndex;
 	static int select;
-	
+	static std::vector<int> heroes_player_knows;
 };
 

@@ -38,24 +38,24 @@ void ActionHelper::create_memory(Action* action, Hero* hero)
 	gameplay_func->add_memory(key, hero->name, type, action->time_stamp, people, category,action->getName() + std::to_string(action->time_stamp), where, action->getWhy(), when);
 	hero->mem_counter++;
 
-	if (hero->name = OYA)
+	if (hero->name == OYA)
 	{
 		hero->memories.push_back(Containers::oya_memory_table[key]);
 		bool the_same_ptr = hero->memories[0] = Containers::oya_memory_table[key];
 	}
-	else if (hero->name = YEMOJA)
+	else if (hero->name == YEMOJA)
 	{
 		hero->memories.push_back(Containers::yemoja_memory_table[key]);
 	}
-	else if (hero->name = OSHOSI)
+	else if (hero->name == OSHOSI)
 	{
 		hero->memories.push_back(Containers::oshosi_memory_table[key]);
 	}
-	else if (hero->name = OGUN)
+	else if (hero->name == OGUN)
 	{
 		hero->memories.push_back(Containers::ogun_memory_table[key]);
 	}
-	else if (hero->name = SHANGO)
+	else if (hero->name == SHANGO)
 	{
 		hero->memories.push_back(Containers::shango_memory_table[key]);
 	}
@@ -129,7 +129,7 @@ void ActionHelper::attack_helper(Soldier* attacker, Soldier* defender)
 	{
 		//kill the soldier/incapacitate the Hero if they run out of health
 		defender->defeat();
-		if (defender->getType()<5) {
+		if (defender->getType()<WorldObj::TYPE_HERO) {
 			defender->setLoc(defender->getVillage()->get_village_location());
 			defender->getVillage()->barracks->addToParty(defender, false);
 		}
@@ -175,7 +175,7 @@ bool ActionHelper::hero_respond(Action* action) {
 	int doer = action->getDoer()->name;
 	int responder = action->getReceiver()->name;
 
-	Planner* hero_planner = ai->hero_planners[responder];
+	Planner* hero_planner = AIController::get_plan(responder);
 
 	int value = hero_planner->value_of(action);
 
@@ -196,10 +196,10 @@ bool ActionHelper::conversation(Action* action) {
 
 	//conversation
 	dialogue_point point = { "Fake", "Response_" +action->getName()};
-	DialogueController::dialogue.gen_dialog(point,action->getReceiver(),1,1);
+	DialogueController::dialogue.gen_dialog(point,action->getReceiver());
 
 	int success_level = 0;
-	for (auto it = action->succ_postconds.begin(); it != action->succ_postconds.end(); ++it) {
+	for (auto it = action->doer_succ_postconds.begin(); it != action->doer_succ_postconds.end(); ++it) {
 		if ((*it)->get_general_type() == Postcondition::REL) {
 			RelPost* con = dynamic_cast<RelPost*>((*it).get());
 			switch (con->get_rel_type()) {

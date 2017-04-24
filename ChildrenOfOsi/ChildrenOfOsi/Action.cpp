@@ -18,6 +18,7 @@ Action::Action(Hero* _owner, Hero* _receiver, Hero* _doer, int _utility, int _wh
 	if (receiver!=nullptr)recieverName = receiver->name;
 	name = _name;
 	execute_ptr  = ActionExecFunctions::ActionExecMap[_exe_name];
+	checkpoint = 0; //used for action execution
 
 	multipliers = new Personality();
 	str_mult = new Personality();
@@ -34,36 +35,51 @@ Action::~Action()
 	delete(noto_mult);
 };
 
+/*
+applies the post conditions (this affect the hero receiver and world)
+the the actual change in relationships are handled by the conditions'
+apply utility function
+*/
 void Action::apply_postconditions(bool ifsucc)
 {
-	if (ifsucc == true) 
+	//creates pointer to post
+	vector<std::shared_ptr<Postcondition>>* doer_postconds;
+	vector<std::shared_ptr<Postcondition>>* receiver_postconds;
+
+	//this decides based off the ifsucc flag is the succ or fail post conditions should be applied
+	if (ifsucc == true)
 	{
-		for (int i = 0; i < succ_postconds.size(); i++)
-		{
-			if (succ_postconds[i]->get_general_type() ==Postcondition::REL || succ_postconds[i]->get_general_type() == Postcondition::REL_EST)
-			{
-				succ_postconds[i]->apply_utility(doer,receiver);
-		}
-			else
-			{
-				succ_postconds[i]->apply_utility();
+		doer_postconds = &doer_succ_postconds;
+		receiver_postconds = &receiver_fail_postconds;
 	}
-			
-		}
+	else {
+		doer_postconds = &doer_fail_postconds;
+		receiver_postconds = &receiver_succ_postconds;
 	}
-	else
+
+	//applies all post conditions associated with the action to the doer
+	for (int i = 0; i < (*doer_postconds).size(); i++)
 	{
-		for (int i = 0; i < fail_postconds.size(); i++)
+		if ((*doer_postconds)[i]->get_general_type() == Postcondition::REL || (*doer_postconds)[i]->get_general_type() == Postcondition::REL_EST)
 		{
-			if (fail_postconds[i]->get_general_type() == Postcondition::REL || fail_postconds[i]->get_general_type() == Postcondition::REL_EST)
-			{
-				fail_postconds[i]->apply_utility(doer,receiver);
-			}
-			else 
+			(*doer_postconds)[i]->apply_utility(doer, receiver, true); //the true value says this is the doer
+		}
+		else
 		{
-				fail_postconds[i]->apply_utility();
-			}
-			
+			(*doer_postconds)[i]->apply_utility();
+		}
+	}
+
+	//applies all post conditions associated with the action to the reciever
+	for (int i = 0; i < (*receiver_postconds).size(); i++)
+	{
+		if ((*receiver_postconds)[i]->get_general_type() == Postcondition::REL || (*receiver_postconds)[i]->get_general_type() == Postcondition::REL_EST)
+		{
+			(*receiver_postconds)[i]->apply_utility(doer, receiver, false); //the false value says this is the reciver
+		}
+		else
+		{
+			(*receiver_postconds)[i]->apply_utility();
 		}
 	}
 	
@@ -73,6 +89,11 @@ vector<std::string> Action::preConditionsNeeded(Hero* o, Hero* h) {
 	vector<std::string> needs;
 	for (auto it = req_preconds.begin(); it != req_preconds.end(); ++it) {
 		if ((*it)->get_general_type()==Preconditions::REL) {
+
+			//if (bullshit->get_cost(o, h) > 0) {
+			//	std::string temp2 = (*it)->get_type();
+				//needs.push_back(temp2);
+
 			RelPrecon* condition= dynamic_cast<RelPrecon*>((*it).get());
 			if (condition->get_cost(o, h) > 0) {
 				needs.push_back((*it)->get_type());

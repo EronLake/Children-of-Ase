@@ -8,6 +8,7 @@
 #include "Containers.h"
 #include "AIController.h"
 #include "Village.h"
+#include "GameState.h"
 
 
 
@@ -51,7 +52,7 @@ private:
 
 public:
 	Input(ChildrenOfOsi* _gameplay_functions, RenderHelper* _rHelper, TaskBuffer* _tBuffer, vector<WorldObj*>* _recVec);
-	Input(ChildrenOfOsi* _gameplay_functions, WorldObj * _player, RenderHelper* _rHelper, TaskBuffer* _tBuffer, vector<WorldObj*>* _recVec, AIController* ai);
+	Input(ChildrenOfOsi* _gameplay_functions, WorldObj * _player, RenderHelper* _rHelper, TaskBuffer* _tBuffer, vector<WorldObj*>* _recVec);
 	~Input();
 	//Region* Desert;
 	//Region* Ogun;
@@ -61,6 +62,8 @@ public:
 	//Region next_region;
 
 	void InputCheck();
+	game_state current_game_state;
+	
 
 };
 

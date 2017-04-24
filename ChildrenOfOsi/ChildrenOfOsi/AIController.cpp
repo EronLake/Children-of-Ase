@@ -1,7 +1,10 @@
 #include "stdafx.h"
 #include "AIController.h"
 
-
+Planner* AIController::yemoja_planner = nullptr;
+Planner* AIController::oya_planner = nullptr;
+Planner* AIController::oshosi_planner = nullptr;
+Planner* AIController::ogun_planner = nullptr;
 
 AIController::AIController()
 {
@@ -14,9 +17,48 @@ AIController::~AIController()
 	LOG("AIController object destructed");
 }
 
+Planner* AIController::get_plan(int id) {
+	Planner* plan = nullptr;
+	switch (id)
+	{
+	case YEMOJA:
+		plan = yemoja_planner;
+		break;
+	case OYA:
+		plan = oya_planner;
+		break;
+	case OSHOSI:
+		plan = oshosi_planner;
+		break;
+	case OGUN:
+		plan = ogun_planner;
+		break;
+	}
+	return plan;
+}
+
+void AIController::set_plan(int id, Planner* plan) {
+	switch (id) {
+	case YEMOJA:
+		yemoja_planner = plan;
+		break;
+	case OYA:
+		 oya_planner = plan;
+		break;
+	case OSHOSI:
+		oshosi_planner = plan;
+		break;
+	case OGUN:
+		ogun_planner = plan;
+		break;
+	}
+}
+
 void AIController::generate_end_state(int me, int them)
 {
-	hero_planners[me]->choose_end_with(them);
+	if (!(me > 3 || them > 3)) {
+		get_plan(me)->choose_end_with(them);
+	}
 
 	/*switch (me) {
 	case YEMOJA:
@@ -55,13 +97,13 @@ Hero* AIController::get_hero_object(int h)
 }
 
 void AIController::init_plans() {
-	for (auto iter : hero_planners) {   //For each hero Planner
-		int me = iter.first;
+	for (int me = 2; me < 4; me++) {
 		Hero* hero = get_hero_object(me);
-		Planner* planner = iter.second;
+		Planner* planner = get_plan(me);
+
 		vector<Action*> goals;
 
-		for (int them = 1; them < 6; them++)   //Look at every other character...
+		for (int them = 1; them < 4; them++)   //Look at every other character...
 		{
 			if (them != me)                    //...that is not myself...
 			{
@@ -72,9 +114,10 @@ void AIController::init_plans() {
 		}
 
 		// Go through each ideal end state and generate a milestone
-		EndStateList end_states = planner->get_end_state_map();
+		EndStateList* end_states = planner->get_end_state_map();
+
 		goals = planner->get_end_states();
-		for (auto iter : end_states)
+		for (auto iter : *end_states)
 		{
 			Action* goal = iter.second;
 			Action* milestone = planner->choose_next_step(goal, goals);
@@ -84,8 +127,8 @@ void AIController::init_plans() {
 
 		// For each end state, look at the milestone and generate a path 
 
-		MilestoneList milestones_by_goal = planner->get_milestone_map();
-		for (auto iter : milestones_by_goal)
+		MilestoneList* milestones_by_goal = planner->get_milestone_map();
+		for (auto iter : *milestones_by_goal)
 		{
 			vector<Action*> milestones = iter.second;
 			Action* state = iter.first;
@@ -102,71 +145,117 @@ void AIController::init_plans() {
 }
 
 void AIController::reevaluate_state(int me, int them) {
-	auto iter = hero_planners.find(me);
 
-	if (iter != hero_planners.end())
-	{
-		Planner* planner = iter->second;
-
-		Action* state = planner->get_end_state_map().at(them);  //Point to the current end_state for them 
-		planner->get_milestone_map().erase(state);           //Delete the old end_state entry in the milestone list
-		generate_end_state(me, them);                          //Generate a new end_state for them, which updates state pointer
+	Planner* planner = get_plan(me);
 
 
-		
-		//planner->get_milestone_map().at(state).clear();        //Clear the milestones leading to that end_state
+	Action* state = planner->get_end_state_map()->at(them);  //Point to the current end_state for them 
+	planner->get_milestone_map()->erase(state);           //Delete the old end_state entry in the milestone list
+	generate_end_state(me, them);                          //Generate a new end_state for them, which updates state pointer
 
 
-		Action* milestone = planner->choose_next_step(state, planner->get_end_states()); //Get the first milestone
 
-		planner->add_milestone(state, milestone);                  //Add the first milestone to the action path
+	//planner->get_milestone_map().at(state).clear();        //Clear the milestones leading to that end_state
 
-		planner->generate_milestones(state, milestone);          //Generate the rest of the milestones for this state
-	}
-	else
-	{
-		LOG("Error: No planner for hero #" << me);
-	}
+
+	Action* milestone = planner->choose_next_step(state, planner->get_end_states()); //Get the first milestone
+
+	planner->add_milestone(state, milestone);                  //Add the first milestone to the action path
+
+	planner->generate_milestones(state, milestone);          //Generate the rest of the milestones for this state
+
 }
 
 void AIController::execute() {
-	int action_wait_time = 7200;           //Wait time is approx. 2 minutes
-	for (auto iter : hero_planners) {
-		Hero* me = get_hero_object(iter.first);
-		Planner* planner = iter.second;
+	int action_wait_time = 120; //2sec           //Wait time is approx. 2 minutes (7200)
+	for (int me = 2; me < 4; me++) {
+		Hero* hero = get_hero_object(me);
+		Planner* planner = get_plan(me);
+
+		// IN MAIN, DURING THE EXECUTION, WE DO NOT HAVE AN ACTION
 		Action* curr_action = planner->get_current_action();
 		Action* curr_goal = planner->get_current_end_state();
 
-		EndStateList* end_states = &planner->get_end_state_map();
-		MilestoneList* milestones = &planner->get_milestone_map();
+		EndStateList* end_states = planner->get_end_state_map();
+		MilestoneList* milestones = planner->get_milestone_map();
 
 		//std:://////cout << "Executing action " << curr_action->name << std::endl;
 
 		//Call execute function pointer of the action itself
 		//if you are not planning to give it as a quest
-		if (me->update_action_timer() == 0)
-		{
-			if (!planner->give_as_quest) {
-				curr_action->execute();
-			}
-			if (curr_action->executed) {
 
-				milestones->at(curr_goal).pop_back();              //Remove the curr_action from curr_goal's milestone list
+		//if (me->get_action_timer() < 0)
+		//{
+
+		//}
+		//me->init_action_timer(action_wait_time);                    //Start a timer for approx. 2 minutes
+
+	//	std::cout << "before: " << hero->update_action_timer() << endl;
+		if (hero->update_action_timer() == 0)
+		{
+		//	std::cout << "after: " << hero->update_action_timer() << endl;
+			if (curr_action != nullptr) { //used to be : "!planner->give_as_quest" //and then it was "true"
+			//	std::cout << "execute" << endl;
+				curr_action->execute();
+				cout << "hero number " << me << "'s current action has been executed" << endl;
+			}
+			else {
+				cout << "hero number "<< me << "'s CURRENT ACTION IS A NULLPTR!!!" << endl;
+			}
+			if (curr_action != nullptr && curr_action->executed) {	//need to check to make sure curr_action is not nullptr
+
+				//*Alex* I never get here. Set up incorrectly or action execute not working right?
+
+				// the issue here is that the key for the milestonees (curr_goal) exsits
+				//but the value does not exsit because it was popped after completion
+				//need to fix error where milestones are readded
+
+				//we may just want to push the goal onto the milestone list
+
+				//**ERONS FIX**
+				curr_action->executed = false; //resets the execuded so action can be executed again
+
+				if (milestones->at(curr_goal).size() > 0)
+				{
+
+					if (milestones->at(curr_goal).size() == 1 &&			//checks if the goal had been previously added to milestone list
+						milestones->at(curr_goal)[0] == curr_goal)
+					{
+						init_plans();
+					}
+					else
+					{
+						milestones->at(curr_goal).pop_back();              //Remove the curr_action from curr_goal's milestone list
+					}
+				}
+				else
+				{
+					milestones->at(curr_goal).push_back(curr_goal);
+				}
 
 				vector<Action*> frontier = planner->get_milestone_frontier();
 				Action* best_action = nullptr;
 				//Loop over all the next milestones to find the most valuable action, and set it to current action
 				int best_utility = 0;
 				for (auto itor : frontier) {
+					//initializes the best action
+					if(best_action == nullptr) {
+						best_action = itor;
+					}
+
 					if (itor->getUtility() > best_utility) {
 						best_utility = itor->getUtility();
 						best_action = itor;
 					}
+
 				}
 				planner->set_current_action(best_action);                   //Current action is set
-				me->init_action_timer(action_wait_time);                    //Start a timer for approx. 2 minutes
-				planner->give_as_quest = this->give_as_quest(best_action);  //Check and store in planner whether this is appropriate to give as a quest
+				hero->init_action_timer(action_wait_time);                    //Start a timer for approx. 2 minutes
+				planner->give_as_quest = give_as_quest(best_action);  //Check and store in planner whether this is appropriate to give as a quest
 
+			}
+			else {
+				cout << "hero number " << me << "'s action NOT FINISHED EXECUTING" << endl;
 			}
 
 		}
@@ -187,9 +276,9 @@ bool AIController::give_as_quest(Action* action) {
 	bool is_quest = true;
 	Hero* me = action->getOwner();
 	Hero* them = action->getReceiver();
-	Action* curr_goal = hero_planners[me->name]->get_current_end_state();
-	for (int postcond_key = 0; postcond_key < action->succ_postconds.size(); postcond_key++) {
-		Postcondition* post = action->succ_postconds[postcond_key].get();
+	Action* curr_goal = new Action();// hero_planners[me->name]->get_current_end_state();
+	for (int postcond_key = 0; postcond_key < action->doer_succ_postconds.size(); postcond_key++) {
+		Postcondition* post = action->doer_succ_postconds[postcond_key].get();
 		RelPost* rel_post;
 		if (rel_post = dynamic_cast<RelPost*>(post)) //Only execute if dynamic cast succeeds 
 		{
@@ -213,7 +302,7 @@ bool AIController::give_as_quest(Action* action) {
 * WARNING: Returns NULLPTR if no hero meets the base affinity req. Caller of function must handle this case
 * Considers Heroes (other than the receiver of action) with Affinity > 80, and picks the most
 * appealing one based on notoriety + (strength/2). 
-* Currently doesn't break ties (i.e. the first hero found takes priority)
+* Currently doesn't break ties (i.e. the one looked at earlier takes priority)
 */
 Hero* AIController::pick_quest_doer(Action* quest) {
 	int highest_appeal = 0;
@@ -229,7 +318,7 @@ Hero* AIController::pick_quest_doer(Action* quest) {
 			int hero_appeal = (our_rel->getNotoriety() + our_rel->getStrength() / 2);
 			if (hero_appeal > highest_appeal) 
 			{
-				doer = this->get_hero_object(doer_id);
+				doer = get_hero_object(doer_id);
 				highest_appeal = hero_appeal;
 			}
 		}

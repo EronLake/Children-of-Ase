@@ -8,6 +8,7 @@
 #include "Soldier.h"
 
 class Alliance;
+class Fight;
 
 class Party
 {
@@ -26,16 +27,17 @@ class Party
   Party(Alliance *a, Soldier *leader, const vector<Soldier *>& members);
   ~Party() = default;
   static vector<Party*> partiesWorld;
+  static Party* grave;
 
   Alliance * getAlliance() const { return this->faction; }
   Soldier * getLeader() const { return this->leader; }
-  vector<Soldier *>& getMembers() { return members; }
+  vector<Soldier *> getMembers() { return members; }
   int getMode() const { return this->mode; }
 
-  bool isAllyOf(Soldier *);
+  /*bool isAllyOf(Soldier *);
   bool isAllyOf(Party *);
   bool isEnemyOf(Soldier *);
-  bool isEnemyOf(Party *);
+  bool isEnemyOf(Party *);*/
 
   void setAlliance(Alliance *a) { this->faction = a; }
   void setLeader(Soldier* s);
@@ -63,20 +65,41 @@ class Party
   void update();
 
   void addToCurrentEnemies(Party* p) { currentEnemies.push_back(p); };
+  void clear_current_enemies() { currentEnemies.clear(); };
   vector<Party*> getCurrentEnemies() { return currentEnemies; };
+
+  void set_perm(bool p) { perm=p; };
+  bool get_perm() { return perm; };
+
+  void set_def_rad(int r) { defend_rad = r; };
+  int get_def_rad() { return defend_rad; };
+  void default_def_rad();
+
+  vector<Soldier*> get_down_members() { return downed_members; };
+  void down_member(Soldier* s);
+  void up_member(Soldier* s);
+
+  void set_fight(Fight* f) { curr_fight = f; };
+  Fight* get_fight() { return curr_fight; };
+
+  void set_in_combat(bool b);
 
   private:
 
   Vector2f home;
   Vector2f defend;
+  int defend_rad;
   vector<Vector2f> patrol_route;
   int patrol_point;
   Alliance* faction;
   vector<Soldier *> members;
+  vector<Soldier *> downed_members;
   Soldier *leader;
   Village* owner;
   LivingObj *target;
   int mode;
   vector<Party*> currentEnemies;
+  bool perm;
+  Fight* curr_fight;
 };
 

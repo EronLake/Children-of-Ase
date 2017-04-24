@@ -16,10 +16,11 @@ Input::Input(ChildrenOfOsi* _gameplay_functions, RenderHelper* _rHelper, TaskBuf
 	rHelper = _rHelper;
 	tBuffer = _tBuffer;
 	recVec = _recVec;
+	current_game_state = game_state::load_game;
 	LOG("Input Objected Constructed");
 }
 
-Input::Input(ChildrenOfOsi* _gameplay_functions, WorldObj * _player, RenderHelper* _rHelper, TaskBuffer* _tBuffer, vector<WorldObj*>* _recVec, AIController* ai_c)
+Input::Input(ChildrenOfOsi* _gameplay_functions, WorldObj * _player, RenderHelper* _rHelper, TaskBuffer* _tBuffer, vector<WorldObj*>* _recVec)
 {
 	count = 0;
 	count2 = 0;
@@ -27,7 +28,6 @@ Input::Input(ChildrenOfOsi* _gameplay_functions, WorldObj * _player, RenderHelpe
 	rHelper = _rHelper;
 	tBuffer = _tBuffer;
 	recVec = _recVec;
-	ai = ai_c;
 
 	//gameplay_functions->play_sound("Play");
 	//gameplay_functions->createTaskForAudio("PlaySound", "SOUND", "SFX/swing.wav");
@@ -36,6 +36,7 @@ Input::Input(ChildrenOfOsi* _gameplay_functions, WorldObj * _player, RenderHelpe
 	//gameplay_functions->play_sound("Pause");
 	//gameplay_functions->play_sound("Sixers");
 	player = _player;
+	current_game_state = game_state::load_game;
 	LOG("Input Object W/Player Constructed");
 }
 
@@ -130,7 +131,7 @@ void Input::add_object() {
 	system("PAUSE");
 }
 
-void Input::edit_field(std::string collide_with, int body_number,float left, float right, float top, float bottom) {
+void Input::edit_field(std::string collide_with, int body_number, float left, float right, float top, float bottom) {
 
 	std::cout << "////////////////////////" << endl;
 	std::cout << "ENTER NAME OF THE VARIABLE YOU WOULD LIKE TO CHANGE: ";
@@ -250,7 +251,7 @@ void Input::duplicate_object(std::string collide_with) {
 	int row_count = 1;
 	int column_count = 1;
 
-	for (int i = 0; i < dup_num; i++) 
+	for (int i = 0; i < dup_num; i++)
 	{
 
 		//populate 'value_obj' with the objects, arrays etc.
@@ -258,10 +259,10 @@ void Input::duplicate_object(std::string collide_with) {
 
 		std::string obj_name = collide_with + "-" + std::to_string(i);
 		//
-		new_obj["x"] = (Containers::worldObj_table[collide_with]->getX() / 100) + 
-				row_count*(Containers::worldObj_table[collide_with]->getWidth()/100 +1) + 5; //this is so it spaces it by the width
+		new_obj["x"] = (Containers::worldObj_table[collide_with]->getX() / 100) +
+			row_count*(Containers::worldObj_table[collide_with]->getWidth() / 100 + 1) + 5; //this is so it spaces it by the width
 		new_obj["y"] = (Containers::worldObj_table[collide_with]->getY() / 100) +
-				column_count*(Containers::worldObj_table[collide_with]->getHeight() / 100 + 1); //this is so it spaces it by the width;
+			column_count*(Containers::worldObj_table[collide_with]->getHeight() / 100 + 1); //this is so it spaces it by the width;
 		new_obj["hight"] = Containers::worldObj_table[collide_with]->getHeight();
 		new_obj["width"] = Containers::worldObj_table[collide_with]->getWidth();
 		new_obj["frame_num"] = Containers::worldObj_table[collide_with]->body.size();
@@ -289,17 +290,17 @@ void Input::duplicate_object(std::string collide_with) {
 		Containers::worldObj_table[obj_name]->setInteractable(false);
 
 
-		Containers::worldObj_table[obj_name]->setX(new_obj["x"].asFloat()*100);
-		Containers::worldObj_table[obj_name]->setY(new_obj["y"].asFloat()*100);
+		Containers::worldObj_table[obj_name]->setX(new_obj["x"].asFloat() * 100);
+		Containers::worldObj_table[obj_name]->setY(new_obj["y"].asFloat() * 100);
 		Containers::worldObj_table[obj_name]->setHeight(new_obj["hight"].asFloat());
 		Containers::worldObj_table[obj_name]->setWidth(new_obj["width"].asFloat());
 		//Containers::worldObj_table[obj_name]->frame number
 		Containers::worldObj_table[obj_name]->setName(obj_name);
 		Containers::worldObj_table[obj_name]->offsetBody(0, new_obj["bodyx1"].asFloat(),
-															new_obj["bodyx2"].asFloat(),
-															new_obj["bodyy1"].asFloat(),
-															new_obj["bodyy2"].asFloat());
-		
+			new_obj["bodyx2"].asFloat(),
+			new_obj["bodyy1"].asFloat(),
+			new_obj["bodyy2"].asFloat());
+
 		recVec->push_back(Containers::worldObj_table[obj_name]);
 		//cout << obj_name << endl;
 		//cout << Containers::worldObj_table[obj_name]->getHeight() << endl;
@@ -309,14 +310,14 @@ void Input::duplicate_object(std::string collide_with) {
 		if (row_count == row_size) {
 			row_count = 1;
 			column_count++;
-		} 
-		else 
+		}
+		else
 		{
 			row_count++;
 		}
 
-			
-		
+
+
 	}
 
 	Json::StyledWriter styledWriter;
@@ -326,7 +327,7 @@ void Input::duplicate_object(std::string collide_with) {
 }
 
 
-void Input::delete_object(std::string collide_with) 
+void Input::delete_object(std::string collide_with)
 {
 	//this adds the object to the config file
 	Json::Value root;
@@ -361,12 +362,10 @@ void Input::interactive_resize(std::string collide_with, double mouseX)
 	if (previous_x_mouse_pos != mouseX)
 	{
 		double value_to_change_to = mouseX - previous_x_mouse_pos;
-		cout << "/////////////////RESIZING////////////////////" << endl;
-		cout << value_to_change_to << endl;
-
-		if(std::abs(value_to_change_to) < 200 )
+		std::cout << "/////////////////RESIZING////////////////////" << endl;
+		if (std::abs(value_to_change_to) < 200)
 		{
-			cout << "/////////////////HERE////////////////////" << endl;
+			std::cout << "/////////////////HERE////////////////////" << endl;
 			//All of these 4 lines of code focus on getting ratios to make the offset proportional to the changed size
 			//**************NOTE******************
 			//IT WILL NOT UPDATE LIVE, BUT WHEN YOU RELOAD THE PROGRAM THE OFFSET WILL BE CORRECT
@@ -391,7 +390,7 @@ void Input::interactive_resize(std::string collide_with, double mouseX)
 
 		previous_x_mouse_pos = mouseX;
 	}
-	cout << "/////////////////RESIZING////////////////////" << endl;
+	std::cout << "/////////////////RESIZING////////////////////" << endl;
 }
 
 
@@ -435,7 +434,7 @@ void Input::edit_object() {
 
 	double mouseX = rHelper->camera->getX() + (xpos * map_zoom) * GameWindow::WINDOW_WIDTH_DP / 1300;
 	double mouseY = rHelper->camera->getY() + (ypos * map_zoom) * GameWindow::WINDOW_HEIGHT_DP / 700;
-	
+
 
 	std::cout << "////////////////////////" << endl;
 	std::cout << xpos << ":" << ypos << endl;
@@ -465,7 +464,7 @@ void Input::edit_object() {
 
 	if (collide_with != "" && onscreen)
 	{
-		if (!H) 
+		if (!H)
 		{
 			Containers::worldObj_table[collide_with]->setX(mouseX - (Containers::worldObj_table[collide_with]->getWidth()) / 2);
 			Containers::worldObj_table[collide_with]->setY(mouseY - (Containers::worldObj_table[collide_with]->getHeight()) / 2);
@@ -565,13 +564,17 @@ void Input::add_point_to_file() {
 	////cout << "XPOS AND YPOS ARE " << xpos << ", " << ypos << endl;
 
 	int mouseX = (rHelper->camera->getX() + (xpos * map_zoom) * GameWindow::WINDOW_WIDTH_DP / 1300);
-	int mouseY = 20000-(rHelper->camera->getY() + (ypos * map_zoom) * GameWindow::WINDOW_HEIGHT_DP / 700);
+	int mouseY = 20000 - (rHelper->camera->getY() + (ypos * map_zoom) * GameWindow::WINDOW_HEIGHT_DP / 700);
+	//int mouseX = rHelper->camera->getX() - (150.0 / 2) + ((rHelper->getCameraSize().getXloc() / 2)*map_zoom);
+	//int mouseY = rHelper->camera->getY() - (150.0 / 2) + ((rHelper->getCameraSize().getYloc() / 2)*map_zoom);
 
 	std::ofstream rivFile;
 	rivFile.open("rivLine.txt", std::ios_base::app);
 	rivFile << mouseX << " " << mouseY << " ";
 	rivFile.close();
 	oldPoint.first = mouseX; oldPoint.second = mouseY;
+
+	rHelper->rivObj->initialize_lines();
 	system("PAUSE");
 }
 
@@ -601,6 +604,7 @@ void Input::InputCheck()
 	short SEMI = GetKeyState(';') >> 15; // Fire
 	short ENTER = GetKeyState(VK_RETURN) >> 15;
 	short SHIFT = GetKeyState(VK_LSHIFT) >> 15;
+	short ESC = GetKeyState(VK_ESCAPE) >> 15;
 	short V = GetKeyState('V') >> 15; //set patrol point
 	short F = GetKeyState('F') >> 15;
 	short P = GetKeyState('P') >> 15;
@@ -609,390 +613,442 @@ void Input::InputCheck()
 	short Y = GetKeyState('Y') >> 15; //Put party in attack mode
 	short U = GetKeyState('U') >> 15; //Puts party in flee mode
 	short M = GetKeyState('M') >> 15;
-	
+
 	short ONE = GetKeyState('1') >> 15;  //clear patrol points
 	short TWO = GetKeyState('2') >> 15; //Removes you from party and puts party in flee mode
 	short THREE = GetKeyState('3') >> 15; // Remove self from party and put party in patrol mode
 	short FOUR = GetKeyState('4') >> 15; // coming soon
 
-	if (DialogueController::getState() == 0) {
-		
-		Player* t = CheckClass::isPlayer(player);
-		gameplay_functions->combat(player);
-		if (SHIFT) {
-			t->setSpeed(15);
-			if(MAP_EDITOR){ t->setSpeed(15*2); }
+	// main menu, only allow W and S to select menu options
+	if (current_game_state == game_state::main_menu) {
+		if (W) {
+			// move selected option up
 		}
-		else {
-			t->setSpeed(8);
+		if (S) {
+			// move selected option down
 		}
-		if (W)                //Moving up
-		{
-			//gameplay_functions->pause_unpause("Unpause","walk_loop.wav");
-
-			if (A) {          //Moving up and left
-				gameplay_functions->move_up_left(player);
+		if (ENTER) {
+			// assuming menu only has start option, so move in game
+			if (current_game_state == game_state::main_menu) {
+				current_game_state = game_state::in_game;
 			}
-			else if (D) {     //Moving up and right
-				gameplay_functions->move_up_right(player);
+		}
+	}
+	if (current_game_state == game_state::in_game) {
+		if (DialogueController::getState() == 0) {
+
+			Player* t = CheckClass::isPlayer(player);
+			gameplay_functions->combat(player);
+			if (SHIFT) {
+				t->setSpeed(15);
+				if (MAP_EDITOR) { t->setSpeed(15 * 2); }
 			}
 			else {
-				gameplay_functions->move_up(player);
+				t->setSpeed(8);
 			}
-		}
-		else if (S)          //Moving down
-		{
-			//gameplay_functions->pause_unpause("Unpause", "walk_loop.wav");
-			if (A) {         //Moving down and left
-				gameplay_functions->move_down_left(player);
-			}
-			else if (D) {    //Moving down and right
-				gameplay_functions->move_down_right(player);
+			if (W)                //Moving up
+			{
+				//gameplay_functions->pause_unpause("Unpause","walk_loop.wav");
 
-			}
-			else {
-				gameplay_functions->move_down(player);
-			}
-		}
-		else if (A) {      //Only moving left
-			//gameplay_functions->pause_unpause("Unpause", "walk_loop.wav");
-			gameplay_functions->move_left(player);
-		}
-		else if (D)        //Only moving right
-		{
-			//gameplay_functions->pause_unpause("Unpause", "walk_loop.wav");
-			gameplay_functions->move_right(player);
-		}
-		else {
-			//gameplay_functions->pause_unpause("Pause", "walk_loop.wav");
-		}
-
-		if (!(W || A || S || D))  // No movement keys pressed
-		{
-			//Set texture to idle
-			gameplay_functions->stop(player);
-		}
-
-		if (E) {
-			////std::cout << "Pressed E" << std::endl;
-			gameplay_functions->talk(player);
-		}
-		if(MAP_EDITOR == 0)
-		{
-		if ((W || A || S || D) && J) {
-			if (t->getCool()) {
-				////std::cout << "Pressed Moving J" << std::endl;
-				t->flipSwing();
-				t->meleeAttack();
-				gameplay_functions->melee(t);
-			}
-		}
-		else if (J) {
-			if (t) {
-				if (t->getCool()) {
-					////std::cout << "Pressed F" << std::endl;
-					t->meleeAttack();
-					gameplay_functions->melee(t);
+				if (A) {          //Moving up and left
+					gameplay_functions->move_up_left(player);
 				}
-				else if (t->getCombo()) {
-					////std::cout << "COMBO" << std::endl;
-					t->sprite.unlockAnimation();
-					t->resetCD();
+				else if (D) {     //Moving up and right
+					gameplay_functions->move_up_right(player);
+				}
+				else {
+					gameplay_functions->move_up(player);
+				}
+			}
+			else if (S)          //Moving down
+			{
+				//gameplay_functions->pause_unpause("Unpause", "walk_loop.wav");
+				if (A) {         //Moving down and left
+					gameplay_functions->move_down_left(player);
+				}
+				else if (D) {    //Moving down and right
+					gameplay_functions->move_down_right(player);
+
+				}
+				else {
+					gameplay_functions->move_down(player);
+				}
+			}
+			else if (A) {      //Only moving left
+							   //gameplay_functions->pause_unpause("Unpause", "walk_loop.wav");
+				gameplay_functions->move_left(player);
+			}
+			else if (D)        //Only moving right
+			{
+				//gameplay_functions->pause_unpause("Unpause", "walk_loop.wav");
+				gameplay_functions->move_right(player);
+			}
+			else {
+				//gameplay_functions->pause_unpause("Pause", "walk_loop.wav");
+			}
+
+			if (!(W || A || S || D))  // No movement keys pressed
+			{
+				//Set texture to idle
+				gameplay_functions->stop(player);
+			}
+
+			if (E) {
+				//////std:://cout << "Pressed E" << std::endl;
+				gameplay_functions->talk(player);
+			}
+			if (MAP_EDITOR == 0)
+			{
+				if ((W || A || S || D) && J) {
 					if (t->getCool()) {
-						////std::cout << "Pressed F" << std::endl;
+						//////std:://cout << "Pressed Moving J" << std::endl;
 						t->flipSwing();
 						t->meleeAttack();
 						gameplay_functions->melee(t);
 					}
-					else {
-						t->sprite.lockAnimation();
+				}
+				else if (J) {
+					if (t) {
+						if (t->getCool()) {
+							//////std:://cout << "Pressed F" << std::endl;
+							t->meleeAttack();
+							gameplay_functions->melee(t);
+						}
+						else if (t->getCombo()) {
+							//////std:://cout << "COMBO" << std::endl;
+							t->sprite.unlockAnimation();
+							t->resetCD();
+							if (t->getCool()) {
+								//////std:://cout << "Pressed F" << std::endl;
+								t->flipSwing();
+								t->meleeAttack();
+								gameplay_functions->melee(t);
+							}
+							else {
+								t->sprite.lockAnimation();
+							}
+						}
 					}
 				}
-			}
-		}
-		else if (R) {
-			if (t) {
-				if (t->getCool(1)) {
-					////std::cout << "Pressed Shift+R" << std::endl;
-					gameplay_functions->special(t, 1);
-					gameplay_functions->fire(t);
+				else if (R) {
+					if (t) {
+						if (t->getCool(1)) {
+							//////std:://cout << "Pressed Shift+R" << std::endl;
+							gameplay_functions->special(t, 1);
+							gameplay_functions->fire(t);
+						}
+					}
 				}
-			}
-		}
-		else if (K) {
-			if (t) {
-				if (t->getCool(0)) {
-					////std::cout << "Pressed R" << std::endl;
-					gameplay_functions->special(t, 0);
-					gameplay_functions->melee(t);
+				else if (K) {
+					if (t) {
+						if (t->getCool(0)) {
+							//////std:://cout << "Pressed R" << std::endl;
+							gameplay_functions->special(t, 0);
+							gameplay_functions->melee(t);
+						}
+					}
 				}
-			}
-		}
-		else if (L) {
-			if (t) {
-				if (t->getCool(2)) {
-					////std::cout << "Pressed T" << std::endl;
-					//t->meleeAttack();
-					//gameplay_functions->melee(t);
-					//t->resetCD(2);
-					gameplay_functions->special(t, 2);
-					gameplay_functions->spin(t);
+				else if (L) {
+					if (t) {
+						if (t->getCool(2)) {
+							//////std:://cout << "Pressed T" << std::endl;
+							//t->meleeAttack();
+							//gameplay_functions->melee(t);
+							//t->resetCD(2);
+							gameplay_functions->special(t, 2);
+							gameplay_functions->spin(t);
+						}
+					}
 				}
-			}
-		}
-		float firstOld = 0;
-		float secondOld = 0;
-		if (G) {
-			t->getParty()->set_defend(t->getLoc());
-			t->getParty()->setMode(Party::MODE_DEFEND);
-		}
-		if (Y) {
-			t->getParty()->setMode(Party::MODE_ATTACK);
-		}
-		if (U) {
-			t->getParty()->setMode(Party::MODE_FLEE);
-		}
-		if (H) {
-			t->getParty()->set_home(t->getLoc());
-		}
-		if (ONE) {
-			t->getParty()->clear_patrol_route();
-		}
-		if (count2 > 0)count2--;
-		if (V && (count2==0)) {
-			t->getParty()->add_patrol_loc(t->getLoc());
-			count2 = 200;
-		}
-		if (TWO && (count2 == 0)) {
-			t->getParty()->setMode(Party::MODE_FLEE);
-			t->getParty()->removeSoldier(t, true);
-			t->getVillage()->addToParties(t->getParty());
-			count2 = 200;
-		}
-		if (THREE && (count2 == 0)) {
-			t->getParty()->setMode(Party::MODE_PATROL);
-			t->getParty()->removeSoldier(t,true);
-			t->getVillage()->addToParties(t->getParty());
-			count2 = 200;
-		}
-		if (M && (count2 == 0)) {
-			HUD::toggle_quests();
-			count2 = 20;
-		}
-		if ((GetKeyState(VK_LBUTTON) & 0x100) != 0) {
-			double xpos;
-			double ypos;
-			glfwGetCursorPos(GameWindow::window, &xpos, &ypos);
-			double mouseX = rHelper->camera->getX() + (xpos * map_zoom) * GameWindow::WINDOW_WIDTH_DP / 1280;
-			double mouseY = 20000-(rHelper->camera->getY() + (ypos * map_zoom) * GameWindow::WINDOW_HEIGHT_DP / 720);
-			for (int i = 0; i < 10; i++) {
-				cout << "MOUSEX AND MOUSEY ARE " << mouseX << ", " << mouseY << endl;
-
-				cout << "XPOS AND YPOS ARE " << xpos << ", " << ypos << endl;
-			}
-
-		}
-		if (P && (GetKeyState(VK_LBUTTON) & 0x100) != 0) {
-			add_point_to_file();
-		}
-		if (Z) {
-			skip_line();
-		}
-		
-
-		//where the map editor is executed
-		////////////////////////////////////
-		}else if (MAP_EDITOR == 1) {
-			if (L && (GetKeyState(VK_LBUTTON) & 0x100) == 0)
-			{
-				add_object();
-			}
-
-			if ((GetKeyState(VK_LBUTTON) & 0x100) != 0)
-			{
-				edit_object();
-			}
-		}
-		////////////////////////////////////
-		
-	}
-
-	if (DialogueController::getState() > 0) {
-		if (count > 0) {
-			count--;
-		}
-		if (SHIFT && Q && count==0) {
-			WorldObj* other = DialogueController::getOther();
-			if (other->getType() > 2) {
-				Soldier* follower = dynamic_cast<Soldier*>(other);
-				Player* t = dynamic_cast<Player*>(player);
-				//cout << t->getParty()->getAlliance() << " = " << follower->getParty()->getAlliance() << endl;
-				if (t->getParty()==follower->getParty()) {
-					t->getParty()->removeSoldier(follower,true);
-					follower->getVillage()->addToParties(follower->getParty());
-				} else if(t->getParty()->getAlliance() == follower->getParty()->getAlliance()){
-					if (follower->getParty()->getMembers().size()<=1)follower->getVillage()->remove_party(follower->getParty());
-					follower->getParty()->removeSoldier(follower, false);
-					t->getParty()->addToParty(follower,false);
+				float firstOld = 0;
+				float secondOld = 0;
+				if (G) {
+					t->getParty()->set_defend(t->getLoc());
+					t->getParty()->setMode(Party::MODE_DEFEND);
 				}
-			}
-			count = 10;
-		}
-		if (Q) {
-			//DialogueController::exitDialogue();
+				if (Y) {
+					t->getParty()->setMode(Party::MODE_ATTACK);
+				}
+				if (U) {
+					t->getParty()->setMode(Party::MODE_FLEE);
+				}
+				if (H) {
+					t->getParty()->set_home(t->getLoc());
+				}
+				if (ONE) {
+					t->getParty()->clear_patrol_route();
+				}
+				if (count2 > 0)count2--;
+				if (V && (count2 == 0)) {
+					t->getParty()->add_patrol_loc(t->getLoc());
+					count2 = 200;
+				}
+				if (TWO && (count2 == 0)) {
+					t->getParty()->setMode(Party::MODE_FLEE);
+					t->getParty()->removeSoldier(t, true);
+					t->getVillage()->addToParties(t->getParty());
+					count2 = 200;
+				}
+				if (THREE && (count2 == 0)) {
+					t->getParty()->setMode(Party::MODE_PATROL);
+					t->getParty()->removeSoldier(t, true);
+					t->getVillage()->addToParties(t->getParty());
+					count2 = 200;
+				}
+				if (M && (count2 == 0)) {
+					HUD::toggle_quests();
+					count2 = 20;
+				}
+				if ((GetKeyState(VK_LBUTTON) & 0x100) != 0) {
+					double xpos;
+					double ypos;
+					glfwGetCursorPos(GameWindow::window, &xpos, &ypos);
+					double mouseX = rHelper->camera->getX() + (xpos * map_zoom) * GameWindow::WINDOW_WIDTH_DP / 1280;
+					double mouseY = 20000 - (rHelper->camera->getY() + (ypos * map_zoom) * GameWindow::WINDOW_HEIGHT_DP / 720);
+					for (int i = 0; i < 10; i++) {
+						cout << "MOUSEX AND MOUSEY ARE " << mouseX << ", " << mouseY << endl;
 
-			WorldObj* other = DialogueController::getOther();
-			std::cout << "HERO: " << other->getName() << std::endl;
-			if (other->getType() == 5) {
-				std::cout << "Right type" << std::endl;
-				Hero* them = dynamic_cast<Hero*>(other);
-				Planner* planner = ai->hero_planners[them->name];
-				//DialogueController::prompted_quest = true;
-				if (planner->give_as_quest && !DialogueController::accepted_quest)
+						cout << "XPOS AND YPOS ARE " << xpos << ", " << ypos << endl;
+					}
+
+				}
+				if (P && (GetKeyState(VK_LBUTTON) & 0x100) != 0) {
+					add_point_to_file();
+				}
+				if (Z) {
+					skip_line();
+				}
+				if (SHIFT && Z) {
+					system("PAUSE");
+				}
+				if (ESC) {
+					if (current_game_state == game_state::in_game) {
+						cout << "running escape input" << endl;
+						current_game_state = game_state::pause_menu;
+						return;
+					}
+				}
+
+
+				//where the map editor is executed
+				////////////////////////////////////
+			}
+			else if (MAP_EDITOR == 1) {
+				if (L && (GetKeyState(VK_LBUTTON) & 0x100) == 0)
 				{
-					DialogueController::quest = planner->get_current_action();
-                    DialogueController::offerQuest_hack_();
-					DialogueController::prompted_quest = true;
+					add_object();
+				}
+
+				if ((GetKeyState(VK_LBUTTON) & 0x100) != 0)
+				{
+					edit_object();
+				}
+			}
+			////////////////////////////////////
+
+		}
+		if (DialogueController::getState() > 0) {
+			if (count > 0) {
+				count--;
+			}
+			if (SHIFT && Q && count == 0) {
+				WorldObj* other = DialogueController::getOther();
+				if (other->getType() > WorldObj::TYPE_NPC) {
+					Soldier* follower = dynamic_cast<Soldier*>(other);
+					Player* t = dynamic_cast<Player*>(player);
+					//cout << t->getParty()->getAlliance() << " = " << follower->getParty()->getAlliance() << endl;
+					if (t->getParty() == follower->getParty()) {
+						t->getParty()->removeSoldier(follower, true);
+						follower->getVillage()->addToParties(follower->getParty());
+					}
+					else if (t->getParty()->getAlliance() == follower->getParty()->getAlliance()) {
+						if (follower->getParty()->getMembers().size() <= 1)follower->getVillage()->remove_party(follower->getParty());
+						follower->getParty()->removeSoldier(follower, false);
+						t->getParty()->addToParty(follower, false);
+					}
+				}
+				count = 10;
+			}
+			if (Q) {
+				//DialogueController::exitDialogue();
+
+				WorldObj* other = DialogueController::getOther();
+				//std:://cout << "HERO: " << other->getName() << std::endl;
+				if (other->getType() == WorldObj::TYPE_HERO) {
+					std::cout << "Right type" << std::endl;
+					Hero* them = dynamic_cast<Hero*>(other);
+					Planner* planner = AIController::get_plan(them->name);
+					//DialogueController::prompted_quest = true;
+					if (player == AIController::pick_quest_doer(planner->get_current_action()))
+					{
+						std::cout << "Post convo, " << them->getName() << "now wants to give Shango their '" << planner->get_current_action() << "' action" << std::endl;
+					}
+					else
+					{
+						std::cout << "Post convo, " << them->getName() << "still does not want to give Shango their '" << planner->get_current_action() << "' action" << std::endl;
+					}
+					if (planner->give_as_quest && !DialogueController::accepted_quest)
+					{
+						DialogueController::quest = planner->get_current_action();
+						DialogueController::offerQuest_hack_();
+						DialogueController::prompted_quest = true;
+					}
+					else
+					{
+						DialogueController::exitDialogue();
+					}
 				}
 				else
 				{
 					DialogueController::exitDialogue();
 				}
 			}
-			else
-			{
-				DialogueController::exitDialogue();
-			}
-		}
-		if (DialogueController::prompted_quest) {
-			
-		}
-		if (J) {
-			DialogueController::setOptionsIndex(0);
-			gameplay_functions->setSwordGlow(player);
-		}
-		if (K) {
-			DialogueController::setOptionsIndex(1);
-			gameplay_functions->setHeartGlow(player);
-		}
-		if (L) {
-			DialogueController::setOptionsIndex(2);
-			gameplay_functions->setFaceGlow(player);
-		}
-		if (SEMI) {
-			DialogueController::setOptionsIndex(3);
-			gameplay_functions->setQuestionGlow(player);
-		}
-		if (count==0) {
-			int State = DialogueController::getState();
-			if (W && State == 1) {
-				DialogueController::scroll_control = 0;
-				int tmp = DialogueController::getOptionsIndex();
-				if (tmp > 0) {
-					DialogueController::setOptionsIndex(--tmp);
-					count = 10;
-					////std::cout << "OptionsIndex: " << tmp << std::endl;
-					switch (DialogueController::getOptionsIndex()) {
-					case 0: gameplay_functions->setSwordGlow(player); break;
-					case 1: gameplay_functions->setHeartGlow(player); break;
-					case 2: gameplay_functions->setFaceGlow(player); break;
-					case 3: gameplay_functions->setQuestionGlow(player); break;
-					}
-				}
-			
-			}
-			if (S && State == 1) {
-				DialogueController::scroll_control = 0;
-				int tmp = DialogueController::getOptionsIndex();
-				if (tmp < DialogueController::getOSize() - 1) {
-					DialogueController::setOptionsIndex(++tmp);
-					count=10;
-					////std::cout << "OptionsIndex: " << tmp << std::endl;
-					switch (DialogueController::getOptionsIndex()) {
-					case 0: gameplay_functions->setSwordGlow(player); break;
-					case 1: gameplay_functions->setHeartGlow(player); break;
-					case 2: gameplay_functions->setFaceGlow(player); break;
-					case 3: gameplay_functions->setQuestionGlow(player); break;
-					}
-				}
-				/*set optionsIndex to 3 if player hits 's' key while they are already
-				on the question mark icon because in this case optionsIndex would 
-				become greater than 3 and there are only options to 
-				display at indices 0,1,2,3*/
-				if (tmp > 3) {
-					DialogueController::setOptionsIndex(3);
-					gameplay_functions->setQuestionGlow(player);
+			if (T) {
+				Hero* them = dynamic_cast<Hero*>(DialogueController::getOther());
+				if (them) {
+					Player* me = dynamic_cast<Player*>(player);
+					me->remove_quest(AIController::get_plan(them->name)->get_current_action());
 				}
 			}
-			if (D && State < 3) {
-				int tmp = DialogueController::getSelect();
-				if (DialogueController::getState() == 1) {
-					if (tmp < (DialogueController::getOptions().size() - 1)) {
-						//DialogueController::setSelect(++tmp);
-						DialogueController::scroll_control++;
-						if (DialogueController::scroll_control >= DialogueController::getOptions().size())
-							DialogueController::scroll_control = DialogueController::getOptions().size() - 1;
+			if (J) {
+				DialogueController::setOptionsIndex(0);
+				gameplay_functions->setSwordGlow(player);
+			}
+			if (K) {
+				DialogueController::setOptionsIndex(1);
+				gameplay_functions->setHeartGlow(player);
+			}
+			if (L) {
+				DialogueController::setOptionsIndex(2);
+				gameplay_functions->setFaceGlow(player);
+			}
+			if (SEMI) {
+				DialogueController::setOptionsIndex(3);
+				gameplay_functions->setQuestionGlow(player);
+			}
+			if (count == 0) {
+				int State = DialogueController::getState();
+				if (W && State == 1) {
+					DialogueController::scroll_control = 0;
+					int tmp = DialogueController::getOptionsIndex();
+					if (tmp > 0) {
+						DialogueController::setOptionsIndex(--tmp);
 						count = 10;
-						////std::cout << "Index: " << tmp << std::endl;
-					}
-					if (tmp > (DialogueController::getOptions().size() - 1)) {
-						tmp = 0;
-						DialogueController::setSelect(tmp);
-						//DialogueController::scroll_control++;
-						if (DialogueController::scroll_control < 0)
-							DialogueController::scroll_control = 0;
-						count = 10;
-						////std::cout << "Index: " << tmp << std::endl;
-					}
-				}
-				if (State == 2) {
-					if (tmp < (DialogueController::getReplyOptions().size() - 1)) {
-						//DialogueController::setSelect(++tmp);
-						DialogueController::scroll_control++;
-						if (DialogueController::scroll_control >= DialogueController::getReplyOptions().size())
-							DialogueController::scroll_control = DialogueController::getReplyOptions().size() - 1;
+						//////std:://cout << "OptionsIndex: " << tmp << std::endl;
+						switch (DialogueController::getOptionsIndex()) {
+						case 0: gameplay_functions->setSwordGlow(player); break;
+						case 1: gameplay_functions->setHeartGlow(player); break;
+						case 2: gameplay_functions->setFaceGlow(player); break;
+						case 3: gameplay_functions->setQuestionGlow(player); break;
+						}
 
-						count = 10;
-						////std::cout << "Index: " << tmp << std::endl;
 					}
-					if (tmp > (DialogueController::getReplyOptions().size() - 1)) {
-						tmp = 0;
-						DialogueController::setSelect(tmp);
-						//DialogueController::scroll_control++;
+
+				}
+				if (S && State == 1) {
+					DialogueController::scroll_control = 0;
+					int tmp = DialogueController::getOptionsIndex();
+					if (tmp < DialogueController::getOSize() - 1) {
+						DialogueController::setOptionsIndex(++tmp);
+						count = 10;
+						//////std:://cout << "OptionsIndex: " << tmp << std::endl;
+						switch (DialogueController::getOptionsIndex()) {
+						case 0: gameplay_functions->setSwordGlow(player); break;
+						case 1: gameplay_functions->setHeartGlow(player); break;
+						case 2: gameplay_functions->setFaceGlow(player); break;
+						case 3: gameplay_functions->setQuestionGlow(player); break;
+						}
+					}
+					/*set optionsIndex to 3 if player hits 's' key while they are already
+					on the question mark icon because in this case optionsIndex would
+					become greater than 3 and there are only options to
+					display at indices 0,1,2,3*/
+					if (tmp > 3) {
+						DialogueController::setOptionsIndex(3);
+						gameplay_functions->setQuestionGlow(player);
+					}
+				}
+				if (D && State < 3) {
+					int tmp = DialogueController::getSelect();
+					if (DialogueController::getState() == 1) {
+						if (tmp < (DialogueController::getOptions().size() - 1)) {
+							//DialogueController::setSelect(++tmp);
+							DialogueController::scroll_control++;
+							if (DialogueController::scroll_control >= DialogueController::getOptions().size())
+								DialogueController::scroll_control = DialogueController::getOptions().size() - 1;
+							count = 10;
+							//////std:://cout << "Index: " << tmp << std::endl;
+						}
+						if (tmp >(DialogueController::getOptions().size() - 1)) {
+							tmp = 0;
+							DialogueController::setSelect(tmp);
+							//DialogueController::scroll_control++;
+							if (DialogueController::scroll_control < 0)
+								DialogueController::scroll_control = 0;
+							count = 10;
+							//////std:://cout << "Index: " << tmp << std::endl;
+						}
+					}
+					if (State == 2) {
+						if (tmp < (DialogueController::getReplyOptions().size() - 1)) {
+							//DialogueController::setSelect(++tmp);
+							DialogueController::scroll_control++;
+							if (DialogueController::scroll_control >= DialogueController::getReplyOptions().size())
+								DialogueController::scroll_control = DialogueController::getReplyOptions().size() - 1;
+
+							count = 10;
+							//////std:://cout << "Index: " << tmp << std::endl;
+						}
+						if (tmp >(DialogueController::getReplyOptions().size() - 1)) {
+							tmp = 0;
+							DialogueController::setSelect(tmp);
+							//DialogueController::scroll_control++;
+							if (DialogueController::scroll_control < 0)
+								DialogueController::scroll_control = 0;
+							count = 10;
+							//////std:://cout << "Index: " << tmp << std::endl;
+						}
+					}
+				}
+				if (A && State < 3) {
+					int tmp = DialogueController::getSelect();
+					if (tmp > 0 || DialogueController::scroll_control > 0) {
+						//DialogueController::setSelect(--tmp);
+						DialogueController::scroll_control--;
 						if (DialogueController::scroll_control < 0)
 							DialogueController::scroll_control = 0;
+						//disable = true;
 						count = 10;
 						////std::cout << "Index: " << tmp << std::endl;
 					}
 				}
-			}
-			if (A && State < 3) {
-				int tmp = DialogueController::getSelect();
-				if (tmp > 0 || DialogueController::scroll_control > 0) {
-					//DialogueController::setSelect(--tmp);
-					DialogueController::scroll_control--;
-					if (DialogueController::scroll_control < 0)
-						DialogueController::scroll_control = 0;
-					//disable = true;
-					count = 10;
-					////std::cout << "Index: " << tmp << std::endl;
+				if (ENTER) {
+					//////std:://cout << "ENTER" << std::endl;
+					if (DialogueController::getState() == 1) {
+						count = 10;
+
+						DialogueController::PlayerConversationPoint();
+					}
+					else if (DialogueController::getState() == 2) {
+						count = 10;
+						DialogueController::PlayerResponse();
+						////std::cout << "Index: " << tmp << std::endl;
+					}
+					else if (DialogueController::getState() == 5) {
+						count = 10;
+						DialogueController::PlayerConversationPoint();
+					}
 				}
 			}
-			if (ENTER) {
-				////std::cout << "ENTER" << std::endl;
-				if (DialogueController::getState() == 1) {
-					count = 10;
-					DialogueController::PlayerConversationPoint();
-				}
-				else if (DialogueController::getState() == 2) {
-					count = 10;
-					DialogueController::PlayerResponse();
-				//	DialogueController::prompted_quest = false;
-				}
-				else if (DialogueController::getState() == 5) {
-					count = 10;
-					DialogueController::PlayerConversationPoint();
-				}
+		}
+	}
+	if (current_game_state == game_state::pause_menu) {
+		// pressing esc to unpause
+		//cout << "IN PUT CONTROL IS IN PAUSE STATE" << endl;
+		if (Q) {
+			//for (int i = 0; i < 10; i++) cout << "I HAVE JUST PRESSED Q" << endl;
+			if (current_game_state == game_state::pause_menu) {
+				current_game_state = game_state::in_game;
 			}
 		}
 	}

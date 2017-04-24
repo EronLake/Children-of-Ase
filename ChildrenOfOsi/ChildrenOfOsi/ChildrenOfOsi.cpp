@@ -204,8 +204,8 @@ void ChildrenOfOsi::add_tag(std::string key) {
 	createTaskTag("Add_Tag", "MODIFY_POOL",key);
 }
 
-void ChildrenOfOsi::add_conv_point(std::string topic, std::string temp, std::string key) {
-	createTaskNoObj("Add_Conv_Point", "MODIFY_POOL",topic,temp, key);
+void ChildrenOfOsi::add_conv_point(std::string icon, std::string temp, std::string key) {
+	createTaskNoObj("Add_Conv_Point", "MODIFY_POOL",icon,temp, key);
 }
 
 
@@ -231,7 +231,6 @@ void ChildrenOfOsi::createTaskForAudio(std::string _name, std::string _type, cha
 	std::string task_status = "CREATED";
 	Task* new_task = new Task(_name, task_status, _type, _source, _target);
 	tBuffer->push(new_task);
-	mLog->logMessage(new_task);
 }
 
 void ChildrenOfOsi::createTask(std::string task_name, std::string type, WorldObj * objToUpdate)
@@ -243,7 +242,6 @@ void ChildrenOfOsi::createTask(std::string task_name, std::string type, WorldObj
 	}
 	Task* new_task = new Task(task_name, task_status, type, objToUpdate);
 	tBuffer->push(new_task);
-	mLog->logMessage(new_task);
 }
 
 void ChildrenOfOsi::createTaskWithNum(std::string task_name, std::string type, WorldObj * objToUpdate,int num)
@@ -255,7 +253,6 @@ void ChildrenOfOsi::createTaskWithNum(std::string task_name, std::string type, W
 	}
 	Task* new_task = new Task(task_name, task_status, type, objToUpdate,num);
 	tBuffer->push(new_task);
-	mLog->logMessage(new_task);
 }
 
 void ChildrenOfOsi::createTaskWithParams(std::string task_name, std::string type, std::string key, float x, float y, bool col)
@@ -264,7 +261,6 @@ void ChildrenOfOsi::createTaskWithParams(std::string task_name, std::string type
 	std::string task_status = "CREATED";
 	Task* new_task = new Task(task_name, task_status, type, key, x, y, col);
 	tBuffer->push(new_task);
-	mLog->logMessage(new_task);
 }
 
 void ChildrenOfOsi::createTaskAddMem(std::string task_name, std::string type, std::string key, int hero_name, int t, int frames, vector<NPC*> p, string cat, string cont, string where, int why, int when)
@@ -273,7 +269,6 @@ void ChildrenOfOsi::createTaskAddMem(std::string task_name, std::string type, st
 	std::string task_status = "CREATED";
 	Task* new_task = new Task(task_name, task_status, type, key, hero_name, t, frames, p, cat, cont, where, why,when);
 	tBuffer->push(new_task);
-	mLog->logMessage(new_task);
 }
 
 void ChildrenOfOsi::createTaskAddAct(std::string task_name, std::string type, std::string key, int utility, int why,
@@ -283,16 +278,15 @@ void ChildrenOfOsi::createTaskAddAct(std::string task_name, std::string type, st
 	std::string task_status = "CREATED";
 	Task* new_task = new Task(task_name, task_status, type, key, utility, why, owner, receiver, doer, exe_name);
 	tBuffer->push(new_task);
-	mLog->logMessage(new_task);
 }
 
-void ChildrenOfOsi::createTaskNoObj(std::string task_name, std::string type, std::string topic, std::string temp, std::string key)
+//used for conversation points
+void ChildrenOfOsi::createTaskNoObj(std::string task_name, std::string type, std::string icon, std::string temp, std::string key)
 {
 	//maybe just pass in the string craeated
 	std::string task_status = "CREATED";
-	Task* new_task = new Task(task_name, task_status, type, topic, temp, key);
+	Task* new_task = new Task(task_name, task_status, type, icon, temp, key);
 	tBuffer->push(new_task);
-	mLog->logMessage(new_task);
 }
 
 void ChildrenOfOsi::createTaskTag(std::string task_name, std::string type, std::string key)
@@ -301,7 +295,6 @@ void ChildrenOfOsi::createTaskTag(std::string task_name, std::string type, std::
 	std::string task_status = "CREATED";
 	Task* new_task = new Task(task_name, task_status, type,key);
 	tBuffer->push(new_task);
-	mLog->logMessage(new_task);
 }
 
 /*void ChildrenOfOsi::createTaskForAttack(std::string task_name, std::string type, float x, float y, bool col, int d) {

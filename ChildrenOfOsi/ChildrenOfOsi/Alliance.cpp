@@ -104,6 +104,22 @@ void Alliance::update_enemies() {
 	}
 }
 
+vector<Alliance*> Alliance::get_enemy_alliances() {
+	vector<Alliance*> ret;
+	unordered_map<Alliance*, int> mkshft;
+	vector<Village*> enmys;
+	for (auto it = allies.begin(); it != allies.end();++it) {
+		enmys = War::getWars((*it));
+		for (auto itor = enmys.begin(); itor != enmys.end(); ++itor) {
+			mkshft[(*itor)->get_alliance()] = 1;
+		}
+	}
+	for (auto itr = mkshft.begin(); itr != mkshft.end(); ++itr) {
+		ret.push_back((*itr).first);
+	}
+	return ret;
+}
+
 vector<NPC*> Alliance::get_alliance_members() {
 	vector<NPC*> tmp;
 	for (auto it = allies.begin(); it != allies.end(); ++it) {

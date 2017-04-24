@@ -224,6 +224,8 @@
     <ClCompile Include="ThreadManager.cpp" />
     <ClCompile Include="QuestManager.cpp" />
     <ClCompile Include="ConversationLogObj.cpp" />
+    <ClCompile Include="PlayerActExecFunctions.cpp" />
+    <ClCompile Include="Fight.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AIHelper.h">
@@ -467,6 +469,9 @@
     <ClInclude Include="ThreadManager.h" />
     <ClInclude Include="QuestManager.h" />
     <ClInclude Include="ConversationLogObj.h" />
+    <ClInclude Include="GameState.h" />
+    <ClInclude Include="PlayerActExecFunctions.h" />
+    <ClInclude Include="Fight.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="audio_test.txt">
@@ -493,9 +498,6 @@
     <Text Include="dialog_template_output.txt" />
   </ItemGroup>
   <ItemGroup>
-    <Filter Include="Task Manager">
-      <UniqueIdentifier>{b652d4c4-522f-4787-bcb8-6a409450dac1}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Rendering">
       <UniqueIdentifier>{8fd12ca3-31b7-4d21-b496-de0df489926d}</UniqueIdentifier>
     </Filter>
@@ -534,6 +536,9 @@
     </Filter>
     <Filter Include="AI\Relationships">
       <UniqueIdentifier>{208c7dff-11a9-46ae-8f1b-2153f54d6a2b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Task Manager">
+      <UniqueIdentifier>{b652d4c4-522f-4787-bcb8-6a409450dac1}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

@@ -19,7 +19,34 @@ int state = 0;
 //2 is waiting for player response
 //3 is npc conversation point
 //4 is npc response
+//5 is waiting for player to select "Next" option
+
+/*state 5 is used to show the player's conversation point and
+to allow the player to choose when to allow the npc to reply*/
+
+//Hero to int associations
+// SHANGO 1
+// YEMOJA 2
+// OYA 3
+// OSHOSI 4
+// OGUN 5
+
+//Dummy vectors for Yemoja's and Shango's relationships and personalities
+
+/*index 0 = Affinity, index 1 = notoriety, index 2 = strength, index 3 = AffEstimate
+index 4 = NotorEstimate, index 5 = StrEstimate*/
+std::vector<int> yemoja_relationship_with_shango = { 60, 50, 50, 50, 50, 50 };
+std::vector<int> yemoja_relationship_with_oya = { 20, 40, 80, 70, 40, 80 };
+std::vector<int> shango_relationship_with_yemoja = { 50, 50, 60, 50, 50, 60 };
+std::vector<int> shango_relationship_with_oya = { 50, 50, 60, 50, 50, 60 };
+
+/*index 0 = honor, index 1 = pride, index 2 = aggression, index 3 = kindness
+index 4 = greed, index 5 = recklessness, index 6 = extroversion*/
+std::vector<int> yemoja_personality = { 30, 70, 80, 60, 30, 30, 50 };
+std::vector<int> shango_personality = { 50, 50, 60, 60, 50, 60, 20 };
+
 DialogueHelper dialogue;
+
 
 DialogueHelper::DialogueHelper()
 {
@@ -43,15 +70,25 @@ int DialogueHelper::personality_appeal(ConversationPoint* point, vector<int> per
 	(personality[6] *point->multipliers->getExtroversion()));
 };
 //functions where heroes make dialogue choices
-dialogue_point DialogueHelper::choose_conv_pt(std::vector<ConversationLogObj*> conversation_log_obj_pointer_vec, std::vector<int> personality, std::vector<int> relationship)
+dialogue_point DialogueHelper::choose_conv_pt(std::vector<ConversationLogObj*> conversation_log_obj_pointer_vec)
 {	/*index 0 = Affinity, index 1 = notoriety, index 2 = strength, index 3 = AffEstimateindex 4 = NotorEstimate, index 5 = StrEstimate*/
 
 	/*index 0 = honor, index 1 = pride, index 2 = aggression, index 3 = kindnessindex 4 = greed, index 5 = recklessness, index 6 = extroversion*/
 	vector<appealPoint> possible_replies;
 
 	int conv_pt_index;
-	
-	
+
+	std::vector<int> personality = yemoja_personality;
+	std::vector<int> relationship = yemoja_relationship_with_shango;
+
+	//check if the player has already asked the npc this question
+	for (int i = 0; i < conversation_log_obj_pointer_vec.size() - 1; ++i) {
+		if (conversation_log_obj_pointer_vec[i]->get_conv_point() == NULL)
+			continue;
+		if ((conversation_log_obj_pointer_vec[i]->get_conv_point()->get_name() == conversation_log_obj_pointer_vec[conversation_log_obj_pointer_vec.size() - 1]->get_conv_point()->get_name()) &&
+			(conversation_log_obj_pointer_vec[conversation_log_obj_pointer_vec.size() - 1]->get_who() == conversation_log_obj_pointer_vec[i]->get_who()) && (conversation_log_obj_pointer_vec[conversation_log_obj_pointer_vec.size() - 1]->get_conv_point()->get_name().find("Ask",0) != string::npos))
+			return {"",""};
+	}
 
 	for (auto i = conversation_log_obj_pointer_vec.begin(); i != conversation_log_obj_pointer_vec.end(); ++i) {
 		//auto it = std::find(temp.begin(), temp.end(), (*i)->get_conv_point());
@@ -131,8 +168,17 @@ dialogue_point DialogueHelper::choose_conv_pt(std::vector<ConversationLogObj*> c
 	}
 }
 
-dialogue_point DialogueHelper::choose_reply_pt(std::string point, int optn_inx)
+dialogue_point DialogueHelper::choose_reply_pt(std::string point, int optn_inx, std::vector<ConversationLogObj*> conversation_log_obj_pointer_vec)
 {
+	//check if the player has already asked the npc this question
+	for (int i = 0; i < conversation_log_obj_pointer_vec.size() - 1; ++i) {
+		if (conversation_log_obj_pointer_vec[i]->get_conv_point() == NULL)
+			continue;
+		if ((conversation_log_obj_pointer_vec[i]->get_conv_point()->get_name() == conversation_log_obj_pointer_vec[conversation_log_obj_pointer_vec.size() - 1]->get_conv_point()->get_name()) &&
+			(conversation_log_obj_pointer_vec[conversation_log_obj_pointer_vec.size() - 1]->get_who() == conversation_log_obj_pointer_vec[i]->get_who()) && (conversation_log_obj_pointer_vec[conversation_log_obj_pointer_vec.size() - 1]->get_conv_point()->get_name().find("Ask", 0) != string::npos))
+			return{ "Already_Asked","Already_Asked" };
+	}
+
 	for (int i = 0; i < possible_reply_pts[optn_inx].size(); i++)
 	{
 		//if (possible_reply_pts[optn_inx][i][1].find(point, 0) != std::string::npos)
@@ -153,6 +199,11 @@ std::vector<std::vector<dialogue_point>> DialogueHelper::get_possible_conv_pts()
 	return possible_conv_pts;
 }
 
+std::vector<std::vector<dialogue_point>>& DialogueHelper::get_possible_conv_pts_ref()
+{
+	return possible_conv_pts;
+}
+
 std::vector<dialogue_point> DialogueHelper::get_possible_reply_pts(std::string point, int opts_inx)
 {
 	std::vector<dialogue_point> reply;
@@ -164,7 +215,7 @@ std::vector<dialogue_point> DialogueHelper::get_possible_reply_pts(std::string p
 	return reply;
 }
 
-std::string DialogueHelper::gen_dialog(dialogue_point diog_pt, Hero* hero, int relationship_phrase_picker, int relationship_phrase_picker_shango)
+std::string DialogueHelper::gen_dialog(dialogue_point diog_pt, Hero* hero)
 {
 	std::string name = "";
 	//std::ofstream ofs;
@@ -196,7 +247,7 @@ std::string DialogueHelper::gen_dialog(dialogue_point diog_pt, Hero* hero, int r
 	else {
 		name = "SilverSoldier";
 	}
-	std::string sentence = convert_to_sentence(get_dialog(name, diog_pt, relationship_phrase_picker, relationship_phrase_picker_shango));
+	std::string sentence = convert_to_sentence(get_dialog(name, diog_pt,hero));
 
 	return sentence;
 }
@@ -226,7 +277,7 @@ std::string DialogueHelper::gen_reply(dialogue_point diog_pt, Hero* hero, int re
 		name = "Ogun";
 	}
 
-	std::string sentence = convert_to_sentence(get_dialog(name, diog_pt, relationship_phrase_picker, relationship_phrase_picker_shango));
+	std::string sentence = convert_to_sentence(get_dialog(name, diog_pt, hero));
 
 	return sentence;
 }
@@ -259,7 +310,7 @@ dialogue_template DialogueHelper::get_template(dialogue_point diog_pt) {
 
 }
 
-dialogue_point DialogueHelper::get_dialog(std::string name, dialogue_point diog_pt, int relationship_phrase_picker, int shango_phrase_picker) {
+dialogue_point DialogueHelper::get_dialog(std::string name, dialogue_point diog_pt, Hero* hero) {
 	//std::ofstream ofs;
 	//ofs.open("dialog_template_output.txt", std::ofstream::out | std::ofstream::app);
 	dialogue_template dtemp = get_template(diog_pt);
@@ -291,9 +342,31 @@ dialogue_point DialogueHelper::get_dialog(std::string name, dialogue_point diog_
 	into this function is Shango. Make what appears on upper GUI window be what 
 	the player selected to say.*/
 	///////////////////////////////////
-	int j = 1;
+	int j = 3;
+	////stand in stuff until I finish refining topic extraction////
+	std::pair<int, Memory*> topic;
+	topic.first = 1;
 	if (name != "Shango") {
-		j = relationship_phrase_picker;
+		if (diog_pt[1].size() > 12) {//choose phrase based on relationship with other hero
+			if (diog_pt[1].at(12) == 'M') {
+				topic.first = 3;
+				j = calc_text_choice_from_relationship(hero,topic);
+			}
+			else if (diog_pt[1].size() > 20) {
+				if ((diog_pt[1].at(19) == 'S' || diog_pt[1].at(19) == 'A' || diog_pt[1].at(19) == 'N') && (diog_pt[1].at(13) != 'S')) {
+					topic.first = 3;
+					j = calc_text_choice_from_relationship(hero,topic);
+				}
+			}
+		}
+		else {//choose phrase based on relationship with Shango
+			topic.first = 1;
+			j = calc_text_choice_from_relationship(hero,topic);
+		}
+	}
+	////////////////////////////////////////////////////////////////
+	
+	if (name != "Shango") {
 		std::string tmp = "";
 		for (int i = 1; i <= dtemp.size(); i++) {
 			tmp = dtemp[i - 1];
@@ -316,7 +389,6 @@ dialogue_point DialogueHelper::get_dialog(std::string name, dialogue_point diog_
 		}
 	}
 	else {
-		j = shango_phrase_picker;
 		dpoint.push_back(root[diog_pt[1]][to_string(j)]
 			.asString());
 	}
@@ -338,6 +410,12 @@ std::string DialogueHelper::convert_to_sentence(dialogue_point dialog_pt)
 	return sentence;
 }
 
+/*Associates conversation and reply points with icons
+on the GUI. "qcp" = question conversation point, "qrp" = question reply point
+etc. Every reply point is associated with every icon because it is possible 
+for an npc to say conversation points to the player that are not part of the icon
+associated with the player's conversation point. The player needs to be able
+to reply to any conversation point regardless of what icon they are on.*/
 void DialogueHelper::fill_conversations() {
 	for (int i = 0; i < Containers::conv_point_table.size(); i++)
 	{
@@ -348,41 +426,41 @@ void DialogueHelper::fill_conversations() {
 		possible_reply_pts.push_back({});
 	}
 	for (auto itor = Containers::conv_point_table.begin(); itor != Containers::conv_point_table.end(); ++itor) {
-		if (itor->second->get_topic() == "qcp") {
+		if (itor->second->get_icon() == "qcp" && itor->second->get_name().find("Ask_About",0) == string::npos) {
 			possible_conv_pts[3].push_back(itor->second->dpoint);//itor->second->dpoint);
 		}
-		else if (itor->second->get_topic() == "qrp") {
+		else if (itor->second->get_icon() == "qrp") {
 			possible_reply_pts[3].push_back(itor->second->dpoint);
 			possible_reply_pts[0].push_back(itor->second->dpoint);
 			possible_reply_pts[1].push_back(itor->second->dpoint);
 			possible_reply_pts[2].push_back(itor->second->dpoint);
 		}
-		else if (itor->second->get_topic() == "d") {
+		else if (itor->second->get_icon() == "d") {
 			
 				possible_reply_pts[3].push_back(itor->second->dpoint);
 				possible_reply_pts[0].push_back(itor->second->dpoint);
 				possible_reply_pts[1].push_back(itor->second->dpoint);
 				possible_reply_pts[2].push_back(itor->second->dpoint);
 		}
-		else if (itor->second->get_topic() == "scp") {
+		else if (itor->second->get_icon() == "scp") {
 			possible_conv_pts[0].push_back(itor->second->dpoint);
 		}
-		else if (itor->second->get_topic() == "srp") {
+		else if (itor->second->get_icon() == "srp") {
 			possible_reply_pts[3].push_back(itor->second->dpoint);
 			possible_reply_pts[0].push_back(itor->second->dpoint);
 			possible_reply_pts[1].push_back(itor->second->dpoint);
 			possible_reply_pts[2].push_back(itor->second->dpoint);
 		}
-		else if (itor->second->get_topic() == "acp") {
+		else if (itor->second->get_icon() == "acp") {
 			possible_conv_pts[1].push_back(itor->second->dpoint);
 		}
-		else if (itor->second->get_topic() == "arp" || itor->second->get_topic() == "nmp") {
+		else if (itor->second->get_icon() == "arp" || itor->second->get_topic() == "nmp") {
 			possible_reply_pts[3].push_back(itor->second->dpoint);
 			possible_reply_pts[0].push_back(itor->second->dpoint);
 			possible_reply_pts[1].push_back(itor->second->dpoint);
 			possible_reply_pts[2].push_back(itor->second->dpoint);
 		}
-		else if (itor->second->get_topic() == "ncp") {
+		else if (itor->second->get_icon() == "ncp" && itor->second->get_name().find("Move_To", 0) == string::npos) {
 			possible_conv_pts[2].push_back(itor->second->dpoint);
 		}
 		else {
@@ -392,4 +470,116 @@ void DialogueHelper::fill_conversations() {
 			possible_reply_pts[2].push_back(itor->second->dpoint);
 		}
 	}
+}
+
+int DialogueHelper::calc_text_choice_from_relationship(Hero* hero, std::pair<int,Memory*> topic) {
+
+	int phrase_picker = 1;
+	unordered_map<int, Relationship*> rel;
+	Relationship* npc_relationship;
+
+	//base the npc reply on their relationship with the topic of the
+	//conversation(we don't use the stuff in the below if statement
+	//since we are using dummy vectors)
+	/*if (hero->name != topic.first &&
+		topic.first != 1) {
+		rel = hero->rel;
+		npc_relationship = rel[topic.first];//get npc's relationship with the topic of the conversation
+	}*/
+
+	/*Using dummy vectors for personalities and relationships for now 
+	but will need to eventually use the relationship values from the 
+	npc that is talking to the player rather than assuming that the player 
+	is talking to Yemoja.
+	*/
+	if (topic.first == 1) {
+		if (yemoja_relationship_with_shango[0] <= 20) {
+			phrase_picker = 1;
+		}
+		else if (yemoja_relationship_with_shango[0] > 20 && yemoja_relationship_with_shango[0] < 40) {
+			phrase_picker = 2;
+		}
+		else if (yemoja_relationship_with_shango[0] >= 40 && yemoja_relationship_with_shango[0] < 60) {
+			phrase_picker = 3;
+		}
+		else if (yemoja_relationship_with_shango[0] >= 60 && yemoja_relationship_with_shango[0] < 80) {
+			phrase_picker = 4;
+		}
+		else if (yemoja_relationship_with_shango[0] >= 80) {
+			phrase_picker = 5;
+		}
+	}
+	//here the topic is Oya so have Yemoja respond based on her relationship with Oya
+	//rather than her relationship with Shango
+	else {
+		if (yemoja_relationship_with_oya[0] <= 20) {
+			phrase_picker = 1;
+		}
+		else if (yemoja_relationship_with_oya[0] > 20 && yemoja_relationship_with_oya[0] < 40) {
+			phrase_picker = 2;
+		}
+		else if (yemoja_relationship_with_oya[0] >= 40 && yemoja_relationship_with_oya[0] < 60) {
+			phrase_picker = 3;
+		}
+		else if (yemoja_relationship_with_oya[0] >= 60 && yemoja_relationship_with_oya[0] < 80) {
+			phrase_picker = 4;
+		}
+		else if (yemoja_relationship_with_oya[0] >= 80) {
+			phrase_picker = 5;
+		}
+	}
+
+	return phrase_picker;
+}
+
+int DialogueHelper::hero_name_to_int(std::string hero) {
+	int who_arg = 1;
+	if (hero == "Shango")
+	{
+		who_arg = 1;
+	}
+	else if (hero == "Yemoja")
+	{
+		who_arg = 2;
+	}
+	else if (hero == "Oshosi")
+	{
+		who_arg = 4;
+	}
+	else if (hero == "Oya")
+	{
+		who_arg = 3;
+	}
+	else if (hero == "Ogun")
+	{
+		who_arg = 5;
+	}
+
+	return who_arg;
+}
+
+std::string DialogueHelper::int_to_hero_name(int hero) {
+	std::string who_arg = "";
+	if (hero == 1)
+	{
+		who_arg = "Shango";
+	}
+	else if (hero == 2)
+	{
+		who_arg = "Yemoja";
+	}
+	else if (hero == 3)
+	{
+		who_arg = "Oya";
+	}
+	else if (hero == 4)
+	{
+		who_arg = "Oshosi";
+	}
+	else if (hero == 5)
+	{
+		who_arg = "Ogun";
+	}
+
+	return who_arg;
 }

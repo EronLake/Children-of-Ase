@@ -18,8 +18,12 @@ public:
 	vector<std::shared_ptr<Preconditions>> req_preconds;
 	vector<vector<std::shared_ptr<Preconditions>>> op_preconds;
 
-	vector<std::shared_ptr<Postcondition>> succ_postconds;
-	vector<std::shared_ptr<Postcondition>> fail_postconds;
+	vector<std::shared_ptr<Postcondition>> doer_succ_postconds;
+	vector<std::shared_ptr<Postcondition>> doer_fail_postconds;
+
+	//STILL NEED TO WRITE THE APPLY POSTCONDITIONS FUNCTION FOR THESE
+	vector<std::shared_ptr<Postcondition>> receiver_succ_postconds;
+	vector<std::shared_ptr<Postcondition>> receiver_fail_postconds;
 
 	void apply_postconditions(bool ifsucc);
 
@@ -65,8 +69,8 @@ public:
 
 	int time_stamp; // don't initialize here (get initialized when the action begins/memory gets created)
 
-	void (*execute_ptr)(Action* cur_action);
-	void execute() { execute_ptr(this); };
+	void (*execute_ptr)(Action* cur_action);	//can someone please extain this?
+	void execute() { execute_ptr(this); };	//what does this mean? execute_ptr?
 
 	bool executed = false;
 

@@ -25,7 +25,8 @@ ActionExecFunctions::~ActionExecFunctions()
 };
 
 void ActionExecFunctions::execute_fight_bandits(Action* fight_bandits) {
-	if (/*the bandits->party.size() == 0*/false) {
+	std::cout << "/////////////////////////fighting bandits///////////////////////" << std::endl;
+	if (/*the bandits->party.size() == 0*/true) {
 		fight_bandits->executed = true;
 	}
 }
@@ -41,24 +42,38 @@ void ActionExecFunctions::execute_temp_allign(Action* fight_bandits) {
 
 
 void ActionExecFunctions::execute_train(Action* train) {
-	//////cout << "++++++++++++++++PLEASE BE FIGHTING++++++++++++++++" << endl;
+	//cout << "++++++++++++++++PLEASE BE FIGHTING++++++++++++++++" << endl;
 	
 	switch (train->checkpoint) {
 	case 0: //Pick training location, create memory, increment checkpoint
-		//////cout << "---------------------CASE 0---------------------" << endl;
+		std::cout << "---------------------CASE 0---------------------" << std::endl;
+		//std::cout << (train->getDoer()->destination).getXloc() << ":" << (train->getDoer()->destination).getXloc() << std::endl;
+
 		train->getDoer()->set_action_destination(&train->getDoer()->getVillage()->get_village_location()); //should select from set of pre-defined, stored in Hero, or village?
 		ActionHelper::create_memory(train, train->getDoer());
 		train->checkpoint++;
 		break;
 	case 1: //If destination is reached, start a timer and move to next checkpoint
-		//////cout << "---------------------CASE 1---------------------" << endl;
-		if (train->getDoer()->get_action_destination() == nullptr) {
-			ActionHelper::set_timer(train, 3600);  //Wait 1 minute (60 frames times 60 seconds)
+	std::cout << "---------------------CASE 1---------------------" << endl;
+	cout << "dest is " << train->getDoer()->get_action_destination()->getXloc() << ", " << train->getDoer()->get_action_destination()->getYloc()<<  endl;
+
+	if (train->getDoer()->rel.empty()) {
+		cout << "the relationship map is empty" << endl;
+		}
+	if (train->getDoer()->rel[1] == nullptr) {
+		cout << train->getDoer()->name <<" the action relationship is a nullptr" << endl;
+	}
+		//THIS IS NOT WORKING BECAUSE THE HEROES DESTINATION KEEPS GETTING RESET BY SOME OTHER CODE
+
+		//std::cout << (train->getDoer()->destination).getXloc() << ":" << (train->getDoer()->destination).getXloc() << std::endl
+		if (train->getDoer()->get_action_destination()->getXloc() != -1 && train->getDoer()->get_action_destination()->getYloc() != -1) {	//dont set it to nullptr, set it to -1
+			ActionHelper::set_timer(train, 60);  //Wait 1 minute (60 frames times 60 seconds) //make it wait 5 secs
 			train->checkpoint++;
 		}
 		break;
 	case 2: //If timer is complete, set village as destination, apply postconds, update memory
-		//////cout << "---------------------CASE 2---------------------" << endl;
+		cout << "---------------------CASE 2---------------------" << endl;
+		cout << "retrieve time is " << ActionHelper::retrieve_time(train) << endl;
 		if (ActionHelper::retrieve_time(train) == 0) {
 			Memory* doer_mem = train->getDoer()->find_mem(train->getName() + std::to_string(train->time_stamp));
 			//Memory* receiver_mem = fight->getReceiver()->find_mem(fight->getName() + std::to_string(fight->time_stamp));
@@ -67,8 +82,15 @@ void ActionExecFunctions::execute_train(Action* train) {
 				perror("something is wrong with the current hero memory creation function");
 			}
 			train->getDoer()->set_action_destination(&train->getDoer()->getVillage()->get_village_location()); //Also predefined, maybe as "home_location" in hero
+			//print stats before applying post cond 
+			cout << train->getDoer()->name << "'s str of Shgango BEFORE train is " << train->getDoer()->rel[1]->getStrength() << endl;
+			cout << train->getDoer()->name << "'s str of Yemoja BEFORE train is " << train->getDoer()->rel[2]->getStrength() << endl;	//pretty sure only this one will work
+			cout << train->getDoer()->name << "'s str of Oya BEFORE train is " << train->getDoer()->rel[3]->getStrength() << endl;
 			train->apply_postconditions(true);				 //Apply post-conditions
 			train->executed = true;
+			cout << train->getDoer()->name << "'s str of Shgango AFTER train is " << train->getDoer()->rel[1]->getStrength() << endl;
+			cout << train->getDoer()->name << "'s str of Yemoja AFTER train is " << train->getDoer()->rel[2]->getStrength() << endl;	//pretty sure only this one will work
+			cout << train->getDoer()->name << "'s str of Oya AFTER train is " << train->getDoer()->rel[3]->getStrength() << endl;
 			doer_mem->setCategory("success");			 //Call update_memory function
 			doer_mem->setReason("I am good at training");
 			doer_mem->setWhen(/*get global frame*/0);        
@@ -114,6 +136,7 @@ void ActionExecFunctions::execute_train_with(Action* train_with) {
 		{
 			ActionHelper::set_timer(train_with, 3600); //Wait 1 minute for training (60 frames times 60 seconds)
 			train_with->checkpoint++;
+			Fight* fight = new Fight(train_with->getDoer()->getParty(), train_with->getReceiver()->getParty(),true);
 		}
 		break;
 	case 4: //If timer is complete, set village as destination, apply postconds, update memory
@@ -124,6 +147,7 @@ void ActionExecFunctions::execute_train_with(Action* train_with) {
 			{
 				perror("something is wrong with the current hero memory creation function");
 			}
+			train_with->getDoer()->getParty()->get_fight()->end_combat();
 			train_with->getDoer()->set_action_destination(&train_with->getDoer()->getVillage()->get_village_location()); //Also predefined, maybe as "home_location" in hero
 			train_with->apply_postconditions(true);				 //Apply post-conditions
 			train_with->executed = true;
@@ -138,6 +162,8 @@ void ActionExecFunctions::execute_train_with(Action* train_with) {
 
 
 void ActionExecFunctions::execute_form_alliance(Action* form_alliance) {
+	form_alliance->executed = true;
+	std::cout << "/////////////////////////execute_form_alliance///////////////////////" << std::endl;
 	/*
 	Hero* doer = form_alliance->getDoer();
 	Hero* responder = form_alliance->getReceiver();
@@ -145,27 +171,20 @@ void ActionExecFunctions::execute_form_alliance(Action* form_alliance) {
 	case 0:
 		ActionHelper::create_memory(form_alliance, doer);
 
-		form_alliance->getDoer()->destination = { 1000,1000 };
+		form_alliance->getDoer()->set_action_destination(&form_alliance->getReceiver()->getVillage()->get_village_location());
 		form_alliance->checkpoint++;
 		break;
 
 	case 1:
-		if (form_alliance->getDoer()->destination == Vector2f(0, 0)) {
+		if (form_alliance->getDoer()->get_action_destination() == nullptr) {
 			Planner* hero_planner = ActionHelper::ai->hero_planners[responder->name];
-			if (form_alliance->getName() == ((*hero_planner->get_end_state_map())[responder->name]).getName()) {
-				int temp = 0;
-				for (auto& iter : form_alliance->preconds) {
+			if (ActionHelper::hero_respond(form_alliance)) {
+			
 
-					temp += iter.second->get_cost();
-				}
-				if (temp != 0) {
 					//success
-					form_alliance->applyUtiliites(true);
+					form_alliance->apply_postconditions(true);
 					form_alliance->executed = true;
-				}
-				else {
-					//failed
-				}
+
 			}
 			else {
 				//update memory failed
@@ -175,13 +194,14 @@ void ActionExecFunctions::execute_form_alliance(Action* form_alliance) {
 
 	}
 	*/
+	
 }
 
 
 
 void ActionExecFunctions::execute_fight(Action* fight)
 {
-	/*	/Create Memory
+	/*Create Memory
 	/Locate hero (maybe start by going to heroes village)
 	/Travel to village
 	/check if there/reset desination and find target
@@ -223,15 +243,15 @@ void ActionExecFunctions::execute_fight(Action* fight)
 	case 3: //If both niether party is empty then contiue the fight 
 			//(may need to change this to account for hero death)
 		if (fight->getDoer()->get_action_destination() == nullptr) {
-			if (fight->getDoer()->getParty()->getMembers().size() == 0 || fight->getReceiver()->getParty()->getMembers().size() == 0)
-			{
-				fight->checkpoint++;
-			}
 			//do a single round of battle every 10 sec
 			if (ActionHelper::retrieve_time(fight) == 0)
 			{
-				ActionHelper::battle_sim(fight,fight->getReceiver()->getParty());
-				ActionHelper::set_timer(fight, 600);
+				Fight* fight_obj = new Fight(fight->getDoer()->getParty(), fight->getReceiver()->getParty(), false);
+				//ActionHelper::set_timer(fight, 600);
+			}
+			if (fight->getDoer()->getParty()->get_fight()->is_over())
+			{
+				fight->checkpoint++;
 			}
 		}
 
@@ -249,7 +269,7 @@ void ActionExecFunctions::execute_fight(Action* fight)
 		}
 
 		//check if the target's party is empty(may need to change this to account for hero death)
-		if (fight->getReceiver()->getParty()->getMembers().size() == 0) {
+		if (fight->getReceiver()->getParty()->getMembers().size() == fight->getReceiver()->getParty()->get_down_members().size()) {
 			//Apply succ-post-conditions
 			fight->apply_postconditions(true);
 			//update_memory category as a success 
@@ -275,7 +295,7 @@ void ActionExecFunctions::execute_fight(Action* fight)
 		doer_mem->setWhen(frame_count);
 		receiver_mem->setWhen(frame_count);
 
-
+		fight->getDoer()->getParty()->get_fight()->end_combat();
 		//Mark action as executed?
 		fight->executed = true;
 
@@ -304,6 +324,7 @@ void ActionExecFunctions::execute_conquer(Action* conq)
 			conq->checkpoint++;
 			conq->getReceiver()->getVillage()->defenders->add_party_to_party(conq->getReceiver()->getVillage()->barracks);
 			ActionHelper::create_memory(conq, conq->getReceiver());
+			new Fight(conq->getDoer()->getParty(), conq->getReceiver()->getParty(), false);
 		}
 		break;
 	case 2: //If both niether party is empty then contiue the fight 
@@ -311,21 +332,23 @@ void ActionExecFunctions::execute_conquer(Action* conq)
 		if (conq->getDoer()->getParty()->getMembers().size() == 0)
 		{
 			conq->checkpoint++;
-		} else if (conq->getDoer()->getParty()->getMembers().size() == 0) {
+		} else if (conq->getReceiver()->getVillage()->defenders->getMembers().size() == 
+			conq->getReceiver()->getVillage()->defenders->get_down_members().size()) {
 			conq->getReceiver()->getVillage()->add_to_village_health(conq->getDoer()->getParty()->getMembers().size()*10);
 			if (conq->getReceiver()->getVillage()->get_village_health()<=0) {
 				conq->checkpoint++;
 			}else {
-				ActionHelper::set_timer(conq, 600);
+				//ActionHelper::set_timer(conq, 600);
+				conq->getDoer()->getParty()->get_fight()->not_over();
 				conq->getReceiver()->getVillage()->defenders->add_party_to_party(conq->getReceiver()->getVillage()->barracks);
 			}
 		}
 		//do a single round of battle every 10 sec
-		if (ActionHelper::retrieve_time(conq) == 0)
+		/*if (ActionHelper::retrieve_time(conq) == 0)
 		{
 			ActionHelper::battle_sim(conq, conq->getReceiver()->getVillage()->defenders);
 			ActionHelper::set_timer(conq, 600);
-		}
+		}*/
 
 		//NEED TO SOMEHOW ACCOUNT FOR IF A PLAYER GETS CLOSE
 
@@ -368,7 +391,7 @@ void ActionExecFunctions::execute_conquer(Action* conq)
 		doer_mem->setWhen(frame_count);
 		receiver_mem->setWhen(frame_count);
 
-
+		conq->getDoer()->getParty()->get_fight()->end_combat();
 		//Mark action as executed?
 		conq->executed = true;
 		conq->getDoer()->set_action_destination(&conq->getDoer()->getVillage()->get_village_location());
@@ -410,23 +433,18 @@ void ActionExecFunctions::execute_duel(Action* duel)
 	case 3: //If both niether party is empty then contiue the fight 
 			//(may need to change this to account for hero death)
 		if (Party::dist_location_to_location(duel->getDoer()->getLoc(), *duel->getDoer()->get_action_destination())<500) {
-			if (duel->getDoer()->getHealth() <= 0 || duel->getReceiver()->getHealth() <= 0)
-			{
-				duel->checkpoint++;
-			}
-			//do a single round of battle every 10 sec
-			if (ActionHelper::retrieve_time(duel) == 0)
-			{
-				ActionHelper::attack_helper(duel->getDoer(), duel->getReceiver());
-				ActionHelper::attack_helper(duel->getReceiver(), duel->getDoer());
-				ActionHelper::set_timer(duel, 600);
-			}
+			Fight* fight = new Fight(duel->getDoer()->getParty(), duel->getReceiver()->getParty(), true);
+			duel->checkpoint++;
 		}
-
 		//NEED TO SOMEHOW ACCOUNT FOR IF A PLAYER GETS CLOSE
-
 		break;
-	case 4: //If win update apply win-post else apply loss-post and update memory
+	case 4:
+		if (duel->getDoer()->getParty()->get_fight()->is_over())
+		{
+			duel->checkpoint++;
+		}
+		break;
+	case 5: //If win update apply win-post else apply loss-post and update memory
 			//create_memory(fight, fight->getOwner()); do we want to update the owner immeadiately?
 
 		Memory* doer_mem = duel->getDoer()->find_mem(duel->getName() + std::to_string(duel->time_stamp));
@@ -437,7 +455,7 @@ void ActionExecFunctions::execute_duel(Action* duel)
 		}
 
 		//check if the target's party is empty(may need to change this to account for hero death)
-		if (duel->getReceiver()->getHealth() <= 0) {
+		if (duel->getReceiver()->getParty()->getMembers().size() == duel->getReceiver()->getParty()->get_down_members().size()) {
 			//Apply succ-post-conditions
 			duel->apply_postconditions(true);
 			//update_memory category as a success 
@@ -463,7 +481,7 @@ void ActionExecFunctions::execute_duel(Action* duel)
 		doer_mem->setWhen(frame_count);
 		receiver_mem->setWhen(frame_count);
 
-
+		duel->getDoer()->getParty()->get_fight()->end_combat();
 		//Mark action as executed?
 		duel->executed = true;
 

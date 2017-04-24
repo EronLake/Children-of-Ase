@@ -21,15 +21,15 @@ int MemoryHelper::store_hero(std::string key, float x, float y, bool col) {
 	{
 		name = YEMOJA;
 	}
-	else if (key == "Oshosi")
+	else if (key == "Oya")
 	{
 		name = OYA;
 	}
-	else if (key == "Yemoja")
+	else if (key == "Oshosi")
 	{
 		name = OSHOSI;
 	}
-	else if (key == "Yemoja")
+	else if (key == "Ogun")
 	{
 		name = OGUN;
 	}
@@ -77,7 +77,7 @@ int MemoryHelper::store_Attack(std::string key, float x, float y, bool col) {
 }
 
 int MemoryHelper::new_Attack(WorldObj* s, int i) {
-	if (s->getType() >= 3) {
+	if (s->getType() >= WorldObj::TYPE_SOLDIER) {
 		Soldier* obj = CheckClass::isSoldier(s);
 		Attack* p = new(find_available_block(memManager::Attack_head, obj->getAtKey())) Attack(0, 0, true);
 		Containers::add_Attack(obj->getAtKey(), p);
@@ -107,7 +107,7 @@ int MemoryHelper::store_texture(std::string key, float x, float y, bool col) {
 int MemoryHelper::store_memory(std::string key, int hero_name, int t, int frames, vector<NPC*> p, string cat, string cont, string where, int why, int when) {
 	Memory* m;
 	
-	if (hero_name = OYA)
+	if (hero_name == OYA)
 	{	
 		Containers::oya_memory_table[key]->set_all(t, frames, p, cat, cont, where, why, when);
 		return 0;
@@ -118,7 +118,7 @@ int MemoryHelper::store_memory(std::string key, int hero_name, int t, int frames
 		return 0;
 		*/
 	}
-	else if (hero_name = YEMOJA)
+	else if (hero_name == YEMOJA)
 	{
 		Containers::yemoja_memory_table[key]->set_all(t, frames, p, cat, cont, where, why, when);
 		return 0;
@@ -129,7 +129,7 @@ int MemoryHelper::store_memory(std::string key, int hero_name, int t, int frames
 		return 0;
 		*/
 	}
-	else if (hero_name = OSHOSI)
+	else if (hero_name == OSHOSI)
 	{
 		Containers::oshosi_memory_table[key]->set_all(t, frames, p, cat, cont, where, why, when);
 		return 0;
@@ -140,7 +140,7 @@ int MemoryHelper::store_memory(std::string key, int hero_name, int t, int frames
 		return 0;
 		*/
 	}
-	else if (hero_name = OGUN)
+	else if (hero_name == OGUN)
 	{
 		Containers::ogun_memory_table[key]->set_all(t, frames, p, cat, cont, where, why, when);
 		return 0;
@@ -151,7 +151,7 @@ int MemoryHelper::store_memory(std::string key, int hero_name, int t, int frames
 		return 0;
 		*/
 	}
-	else if (hero_name = SHANGO)
+	else if (hero_name == SHANGO)
 	{
 		Containers::shango_memory_table[key]->set_all(t, frames, p, cat, cont, where, why, when);
 		return 0;

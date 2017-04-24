@@ -50,23 +50,23 @@ void Containers::add_texture(std::string key, Texture* value)
 
 void Containers::add_memory(std::string key, int hero_name, Memory* value)
 {
-	if (hero_name = OYA)
+	if (hero_name == OYA)
 	{
 		oya_memory_table[key] = value;
 	}
-	else if (hero_name = YEMOJA)
+	else if (hero_name == YEMOJA)
 	{
 		yemoja_memory_table[key] = value;
 	}
-	else if (hero_name = OSHOSI)
+	else if (hero_name == OSHOSI)
 	{
 		oshosi_memory_table[key] = value;
 	}
-	else if (hero_name = OGUN)
+	else if (hero_name == OGUN)
 	{
 		ogun_memory_table[key] = value;
 	}
-	else if (hero_name = SHANGO)
+	else if (hero_name == SHANGO)
 	{
 		shango_memory_table[key] = value;
 	}

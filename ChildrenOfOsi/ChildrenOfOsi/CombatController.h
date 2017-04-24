@@ -1,12 +1,8 @@
 #pragma once
-#include "Player.h"
-#include "Party.h"
 #include "Attack.h"
 #include "ChildrenOfOsi.h"
 #include "Containers.h"
-#include "Village.h"
-#include "War.h"
-#include "Alliance.h"
+#include "Fight.h"
 
 class CombatController
 {
@@ -22,11 +18,12 @@ public:
 	bool find_closest_friend(Soldier* sold1, int state);
 	void move_to_target(Soldier* sold1, int state);
 	void addtoTargets(Soldier* sold2) { enemyVec.push_back(sold2); };
-	float dist_by_center(Soldier* sold1, Soldier* sold2);
-	float dist_soldier_to_location(Soldier* sold1, Vector2f loc);
-	float dist(Vector2f start, Vector2f end);
+	static float dist_by_center(Soldier* sold1, Soldier* sold2);
+	static float dist_soldier_to_location(Soldier* sold1, Vector2f loc);
+	static float dist(Vector2f start, Vector2f end);
 	void checkParties();
 	void party_leader_update(Soldier* sold1, int state);
+	void updateSoliderStatus();
 	std::thread threaded_update_soldier(Soldier* s, int n);
 private:
 	vector<Soldier*> soldiers;

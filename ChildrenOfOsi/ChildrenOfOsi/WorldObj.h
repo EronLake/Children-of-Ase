@@ -118,8 +118,6 @@ class WorldObj
   float offset_y1 = 0.0;
   float offset_y2 = 0.0;
 
-  protected:
-
   static constexpr int TYPE_ATTACK = -1;
   static constexpr int TYPE_WORLDOBJ = 0;
   static constexpr int TYPE_LIVINGOBJ = 1;
