@@ -228,21 +228,31 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	gameplay_functions->add_texture("map1_2", 0, 0, 0);
 	gameplay_functions->add_texture("map1_3", 0, 0, 0);
 	gameplay_functions->add_texture("map1_4", 0, 0, 0);
+	gameplay_functions->add_texture("map1_5", 0, 0, 0);
 
 	gameplay_functions->add_texture("map2_1", 0, 0, 0);
 	gameplay_functions->add_texture("map2_2", 0, 0, 0);
 	gameplay_functions->add_texture("map2_3", 0, 0, 0);
 	gameplay_functions->add_texture("map2_4", 0, 0, 0);
+	gameplay_functions->add_texture("map2_5", 0, 0, 0);
 
 	gameplay_functions->add_texture("map3_1", 0, 0, 0);
 	gameplay_functions->add_texture("map3_2", 0, 0, 0);
 	gameplay_functions->add_texture("map3_3", 0, 0, 0);
 	gameplay_functions->add_texture("map3_4", 0, 0, 0);
+	gameplay_functions->add_texture("map3_5", 0, 0, 0);
 
 	gameplay_functions->add_texture("map4_1", 0, 0, 0);
 	gameplay_functions->add_texture("map4_2", 0, 0, 0);
 	gameplay_functions->add_texture("map4_3", 0, 0, 0);
 	gameplay_functions->add_texture("map4_4", 0, 0, 0);
+	gameplay_functions->add_texture("map4_5", 0, 0, 0);
+
+	gameplay_functions->add_texture("map5_1", 0, 0, 0);
+	gameplay_functions->add_texture("map5_2", 0, 0, 0);
+	gameplay_functions->add_texture("map5_3", 0, 0, 0);
+	gameplay_functions->add_texture("map5_4", 0, 0, 0);
+	gameplay_functions->add_texture("map5_5", 0, 0, 0);
 
 	tBuffer->run();
 
@@ -1296,10 +1306,10 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	staticRec->sprite.atk_down = Containers::texture_table["YswingDown"];
 	staticRec->sprite.atk_left = Containers::texture_table["YswingLeft"];
 	staticRec->sprite.atk_right = Containers::texture_table["YswingRight"];
-	staticRec->sprite.death_up = Containers::texture_table["bs_upDeathTex"];
-	staticRec->sprite.death_down = Containers::texture_table["bs_upDeathTex"];
-	staticRec->sprite.death_left = Containers::texture_table["bs_upDeathTex"];
-	staticRec->sprite.death_right = Containers::texture_table["bs_upDeathTex"];
+	staticRec->sprite.death_up = Containers::texture_table["YdeathUp"];
+	staticRec->sprite.death_down = Containers::texture_table["YdeathDown"];
+	staticRec->sprite.death_left = Containers::texture_table["YdeathLeft"];
+	staticRec->sprite.death_right = Containers::texture_table["YdeathRight"];
 
 	gameplay_functions->add_Attack(staticRec->getKey(), staticRec->body[0].getX(), staticRec->body[0].getY(), true, 10);
 	tBuffer->run();
@@ -1673,7 +1683,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	int total_fps = 0;
 
 	vector<Soldier*> soldiers_list;
-	soldiers_list.push_back(staticRec);
+//	soldiers_list.push_back(staticRec);
 	for (int i = 0; i < blueSoldiers.size(); i++) {
 		soldiers_list.push_back(blueSoldiers[i]);
 	}
