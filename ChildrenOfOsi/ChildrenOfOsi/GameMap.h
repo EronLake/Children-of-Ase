@@ -33,6 +33,7 @@ private:
 #include "Rectangle.h"
 #include "GameWindow.h"
 #include "Containers.h"
+#include "Party.h"
 
 class GameMap
 {
