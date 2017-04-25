@@ -1,0 +1,2 @@
+Conversation Point Name: Recruit_For_Party Appeal 0
+Conversation Point Name: Move_To_Train Appeal 0

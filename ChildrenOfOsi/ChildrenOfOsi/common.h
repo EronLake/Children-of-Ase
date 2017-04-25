@@ -52,6 +52,8 @@ static int frame_count = 0;
 #define START_FULLSCREEN false
 #define MOUSE_VISIBLE true
 
+
+
 /*
 this variable allows the game to zoom and out
 this zooms is used in renderHelper.cpp GameWindow.cpp and Input.cpp

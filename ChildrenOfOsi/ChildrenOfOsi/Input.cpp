@@ -58,18 +58,18 @@ void Input::add_object() {
 	int offsety;
 
 
-	//std:://cout << "Pressed Enter" << std::endl;
-	//std:://cout << "INPUT FILE NAME " << std::endl;
-	//std:://cout << "///////////////////////////////" << std::endl;
+	std::cout << "Pressed Enter" << std::endl;
+	std::cout << "INPUT FILE NAME " << std::endl;
+	std::cout << "///////////////////////////////" << std::endl;
 	std::cin >> image_name;
-	//std:://cout << "INPUT FRAME NUMBER(PROBABLY 1) " << std::endl;
-	//std:://cout << "///////////////////////////////" << std::endl;
+	std::cout << "INPUT FRAME NUMBER(PROBABLY 1) " << std::endl;
+	std::cout << "///////////////////////////////" << std::endl;
 	std::cin >> frame_num;
-	//std:://cout << image_name << ": " << player->getX() << ":" << player->getY() << std::endl;
-	//std:://cout << "INPUT OBJECT NAME " << std::endl;
-	//std:://cout << "///////////////////////////////" << std::endl;
+	std::cout << image_name << ": " << player->getX() << ":" << player->getY() << std::endl;
+	std::cout << "INPUT OBJECT NAME " << std::endl;
+	std::cout << "///////////////////////////////" << std::endl;
 	std::cin >> obj_name;
-	//std:://cout << image_name << ": " << player->getX() << ":" << player->getY() << std::endl;
+	std::cout << image_name << ": " << player->getX() << ":" << player->getY() << std::endl;
 
 	if (Containers::texture_table[image_name]) {
 		//////cout << image_name << "Already in Table /////////////////////////////" << endl;
@@ -81,7 +81,7 @@ void Input::add_object() {
 
 		//set file takes up memory
 		tBuffer->run();
-		Containers::texture_table[image_name]->setFile("Assets/Sprites/" + image_name + ".png", frame_num);
+		Containers::texture_table[image_name]->setFile("Assets/Sprites/Enviorment" + image_name + ".png", frame_num);
 
 	}
 
@@ -133,16 +133,16 @@ void Input::add_object() {
 
 void Input::edit_field(std::string collide_with, int body_number, float left, float right, float top, float bottom) {
 
-	//std:://cout << "////////////////////////" << endl;
-	//std:://cout << "ENTER NAME OF THE VARIABLE YOU WOULD LIKE TO CHANGE: ";
+	std::cout << "////////////////////////" << endl;
+	std::cout << "ENTER NAME OF THE VARIABLE YOU WOULD LIKE TO CHANGE: ";
 
 	string variable_for_change;
 	cin >> variable_for_change;
 
 	if (variable_for_change == "width")
 	{
-		//std:://cout << "////////////////////////" << endl;
-		//std:://cout << "ENTER WIDTH AS FLOAT: ";
+		std::cout << "////////////////////////" << endl;
+		std::cout << "ENTER WIDTH AS FLOAT: ";
 
 		float value_to_change_to;
 		cin >> value_to_change_to;
@@ -151,8 +151,8 @@ void Input::edit_field(std::string collide_with, int body_number, float left, fl
 	}
 	else if (variable_for_change == "height")
 	{
-		//std:://cout << "////////////////////////" << endl;
-		//std:://cout << "ENTER HEIGHT AS FLOAT: ";
+		std::cout << "////////////////////////" << endl;
+		std::cout << "ENTER HEIGHT AS FLOAT: ";
 
 		float value_to_change_to;
 		cin >> value_to_change_to;
@@ -162,8 +162,8 @@ void Input::edit_field(std::string collide_with, int body_number, float left, fl
 
 	if (variable_for_change == "size")
 	{
-		//std:://cout << "////////////////////////" << endl;
-		//std:://cout << "ENTER SIZE AS FLOAT: ";
+		std::cout << "////////////////////////" << endl;
+		std::cout << "ENTER SIZE AS FLOAT: ";
 
 		float value_to_change_to;
 		cin >> value_to_change_to;
@@ -173,8 +173,8 @@ void Input::edit_field(std::string collide_with, int body_number, float left, fl
 	}
 	else if (variable_for_change == "xloc")
 	{
-		//std:://cout << "////////////////////////" << endl;
-		//std:://cout << "ENTER X LOC AS FLOAT: ";
+		std::cout << "////////////////////////" << endl;
+		std::cout << "ENTER X LOC AS FLOAT: ";
 
 		float value_to_change_to;
 		cin >> value_to_change_to;
@@ -183,8 +183,8 @@ void Input::edit_field(std::string collide_with, int body_number, float left, fl
 	}
 	else if (variable_for_change == "yloc")
 	{
-		//std:://cout << "////////////////////////" << endl;
-		//std:://cout << "ENTER Y LOC AS FLOAT: ";
+		std::cout << "////////////////////////" << endl;
+		std::cout << "ENTER Y LOC AS FLOAT: ";
 
 		float value_to_change_to;
 		cin >> value_to_change_to;
@@ -194,28 +194,28 @@ void Input::edit_field(std::string collide_with, int body_number, float left, fl
 	}
 	else if (variable_for_change == "offset")
 	{
-		//std:://cout << "////////////////////////" << endl;
-		//std:://cout << "ENTER BODY NUMBER AS INT(0 if only one body): ";
+		std::cout << "////////////////////////" << endl;
+		std::cout << "ENTER BODY NUMBER AS INT(0 if only one body): ";
 		cin >> body_number;
 
-		//std:://cout << "ENTER LEFT LOC AS FLOAT: ";
+		std::cout << "ENTER LEFT LOC AS FLOAT: ";
 		cin >> left;
 
-		//std:://cout << "ENTER RIGHT LOC AS FLOAT: ";
+		std::cout << "ENTER RIGHT LOC AS FLOAT: ";
 		cin >> right;
 
-		//std:://cout << "ENTER TOP LOC AS FLOAT: ";
+		std::cout << "ENTER TOP LOC AS FLOAT: ";
 		cin >> top;
 
-		//std:://cout << "ENTER BOTTOM LOC AS FLOAT: ";
+		std::cout << "ENTER BOTTOM LOC AS FLOAT: ";
 		cin >> bottom;
 
 		Containers::worldObj_table[collide_with]->offsetBody(body_number, left, right, top, bottom);
 
-		//std:://cout << "///////////////////////////////////" << endl;
-		//std:://cout << "body X is " << Containers::worldObj_table[collide_with]->body[body_number].getX() << " and Y is " << Containers::worldObj_table[collide_with]->body[body_number].getY() << endl;
-		//std:://cout << "body X is " << Containers::worldObj_table[collide_with]->body[body_number].getX() << " and Y is " << Containers::worldObj_table[collide_with]->body[body_number].getY() << endl;
-		//std:://cout << "///////////////////////////////////" << endl;
+		std::cout << "///////////////////////////////////" << endl;
+		std::cout << "body X is " << Containers::worldObj_table[collide_with]->body[body_number].getX() << " and Y is " << Containers::worldObj_table[collide_with]->body[body_number].getY() << endl;
+		std::cout << "body X is " << Containers::worldObj_table[collide_with]->body[body_number].getX() << " and Y is " << Containers::worldObj_table[collide_with]->body[body_number].getY() << endl;
+		std::cout << "///////////////////////////////////" << endl;
 	}
 }
 
@@ -236,16 +236,16 @@ void Input::duplicate_object(std::string collide_with) {
 	int row_size;
 	int if_rand;
 
-	//std:://cout << "////////////////////////" << endl;
-	//std:://cout << "HOW MANY DUPLICATES WOULD YOU LIKE TO MAKE: ";
+	std::cout << "////////////////////////" << endl;
+	std::cout << "HOW MANY DUPLICATES WOULD YOU LIKE TO MAKE: ";
 	cin >> dup_num;
 
-	//std:://cout << "////////////////////////" << endl;
-	//std:://cout << "HOW MANY OBJ PER ROW: ";
+	std::cout << "////////////////////////" << endl;
+	std::cout << "HOW MANY OBJ PER ROW: ";
 	cin >> row_size;
 
-	//std:://cout << "////////////////////////" << endl;
-	//std:://cout << "WOULD YOU LIKE TO RANDOMIZE(not working right now): ";
+	std::cout << "////////////////////////" << endl;
+	std::cout << "WOULD YOU LIKE TO RANDOMIZE(not working right now): ";
 	cin >> if_rand;
 
 	int row_count = 1;
@@ -408,7 +408,7 @@ void Input::edit_object() {
 		ypos < 0 || ypos > 700)
 	{
 		onscreen = false;
-		//std:://cout << "onscreen: " << onscreen << endl;
+		std::cout << "onscreen: " << onscreen << endl;
 	}
 
 	//this map_zoom is used to zoom out the game for map editor mode
@@ -418,11 +418,11 @@ void Input::edit_object() {
 	double mouseY = rHelper->camera->getY() + (ypos * map_zoom) * GameWindow::WINDOW_HEIGHT_DP / 700;
 
 
-	//std:://cout << "////////////////////////" << endl;
-	//std:://cout << xpos << ":" << ypos << endl;
-	//std:://cout << "X: " << xpos << endl;
-	//std:://cout << "Y: " << ypos << endl;
-	//std:://cout << "////////////////////////" << endl;
+	std::cout << "////////////////////////" << endl;
+	std::cout << xpos << ":" << ypos << endl;
+	std::cout << "X: " << xpos << endl;
+	std::cout << "Y: " << ypos << endl;
+	std::cout << "////////////////////////" << endl;
 
 	bool xCollide;
 	bool yCollide;
@@ -437,9 +437,9 @@ void Input::edit_object() {
 		if (xCollide && yCollide)
 		{
 			collide_with = itr->first;
-			//std:://cout << "////////////////////////" << endl;
-			//std:://cout << "COLLIDED WITH: " << collide_with << endl;
-			//std:://cout << "////////////////////////" << endl;
+			std::cout << "////////////////////////" << endl;
+			std::cout << "COLLIDED WITH: " << collide_with << endl;
+			std::cout << "////////////////////////" << endl;
 
 		}
 	}
@@ -458,18 +458,18 @@ void Input::edit_object() {
 		tex_file = tex_file.substr(0, tex_file.size() - 4); //shaves off tail
 
 		//prints out current info for what is being clicked 
-		//std:://cout << "HIGHT: " << Containers::worldObj_table[collide_with]->getHeight() << endl;
-		//std:://cout << "WIDTH: " << Containers::worldObj_table[collide_with]->getWidth() << endl;
-		//std:://cout << "X LOC: " << Containers::worldObj_table[collide_with]->getX() << endl;
-		//std:://cout << "Y LOC: " << Containers::worldObj_table[collide_with]->getY() << endl;
+		std::cout << "HIGHT: " << Containers::worldObj_table[collide_with]->getHeight() << endl;
+		std::cout << "WIDTH: " << Containers::worldObj_table[collide_with]->getWidth() << endl;
+		std::cout << "X LOC: " << Containers::worldObj_table[collide_with]->getX() << endl;
+		std::cout << "Y LOC: " << Containers::worldObj_table[collide_with]->getY() << endl;
 
-		//std:://cout << "BODY x1: " << Containers::worldObj_table[collide_with]->offset_x1 << endl;
-		//std:://cout << "BODY x2: " << Containers::worldObj_table[collide_with]->offset_x2 << endl;
-		//std:://cout << "BODY y1: " << Containers::worldObj_table[collide_with]->offset_y1 << endl;
-		//std:://cout << "BODY y2: " << Containers::worldObj_table[collide_with]->offset_y2 << endl;
+		std::cout << "BODY x1: " << Containers::worldObj_table[collide_with]->offset_x1 << endl;
+		std::cout << "BODY x2: " << Containers::worldObj_table[collide_with]->offset_x2 << endl;
+		std::cout << "BODY y1: " << Containers::worldObj_table[collide_with]->offset_y1 << endl;
+		std::cout << "BODY y2: " << Containers::worldObj_table[collide_with]->offset_y2 << endl;
 
 
-		//std:://cout << "TEXTURE: " << tex_file << endl;
+		std::cout << "TEXTURE: " << tex_file << endl;
 
 
 		int body_number = 0;

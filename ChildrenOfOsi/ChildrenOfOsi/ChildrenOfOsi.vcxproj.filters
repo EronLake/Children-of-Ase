@@ -586,6 +586,9 @@
     <None Include="Tag_config.json" />
     <None Include="SilverSoldier_dialog.json" />
     <None Include="Oshosi_dialog.json" />
+    <None Include="config_jungle.json">
+      <Filter>Game Objects</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="ChildrenOfOsi1.rc" />
