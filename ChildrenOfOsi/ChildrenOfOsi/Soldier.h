@@ -124,6 +124,7 @@ class Soldier: public NPC
   std::size_t pursuitRange;
 
   int cdTime;
+  int down_time;
   int stamina;
   int maxStamina;
   int ase;

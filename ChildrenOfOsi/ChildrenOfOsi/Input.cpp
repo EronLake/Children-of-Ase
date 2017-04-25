@@ -81,7 +81,7 @@ void Input::add_object() {
 
 		//set file takes up memory
 		tBuffer->run();
-		Containers::texture_table[image_name]->setFile("Assets/Sprites/" + image_name + ".png", frame_num);
+		Containers::texture_table[image_name]->setFile("Assets/Sprites/Enviorment" + image_name + ".png", frame_num);
 
 	}
 
@@ -245,7 +245,7 @@ void Input::duplicate_object(std::string collide_with) {
 	cin >> row_size;
 
 	std::cout << "////////////////////////" << endl;
-	std:cout << "WOULD YOU LIKE TO RANDOMIZE(not working right now): ";
+	std::cout << "WOULD YOU LIKE TO RANDOMIZE(not working right now): ";
 	cin >> if_rand;
 
 	int row_count = 1;
@@ -362,35 +362,17 @@ void Input::interactive_resize(std::string collide_with, double mouseX)
 	if (previous_x_mouse_pos != mouseX)
 	{
 		double value_to_change_to = mouseX - previous_x_mouse_pos;
-		std::cout << "/////////////////RESIZING////////////////////" << endl;
+		//cout << value_to_change_to << endl;
 		if (std::abs(value_to_change_to) < 200)
 		{
-			std::cout << "/////////////////HERE////////////////////" << endl;
-			//All of these 4 lines of code focus on getting ratios to make the offset proportional to the changed size
-			//**************NOTE******************
-			//IT WILL NOT UPDATE LIVE, BUT WHEN YOU RELOAD THE PROGRAM THE OFFSET WILL BE CORRECT
-			float x_offset1_ratio = (Containers::worldObj_table[collide_with]->offset_x1 / Containers::worldObj_table[collide_with]->getWidth());
-			float x_offset2_ratio = Containers::worldObj_table[collide_with]->offset_x2 / Containers::worldObj_table[collide_with]->getWidth();
-			float y_offset1_ratio = Containers::worldObj_table[collide_with]->offset_y1 / Containers::worldObj_table[collide_with]->getHeight();
-			float y_offset2_ratio = Containers::worldObj_table[collide_with]->offset_y2 / Containers::worldObj_table[collide_with]->getHeight();
-			//
 			Containers::worldObj_table[collide_with]->setWidth
 			(Containers::worldObj_table[collide_with]->getWidth() + value_to_change_to);
 			Containers::worldObj_table[collide_with]->setHeight
 			(Containers::worldObj_table[collide_with]->getHeight() + value_to_change_to);
-
-			
-
-			//THIS CODE USES THE RATIO TO PROPERLY CREATE THE NEW AND IMPROVED OFFSET
-			Containers::worldObj_table[collide_with]->offset_x1 = x_offset1_ratio * Containers::worldObj_table[collide_with]->getWidth();
-			Containers::worldObj_table[collide_with]->offset_x2 = x_offset2_ratio * Containers::worldObj_table[collide_with]->getWidth();
-			Containers::worldObj_table[collide_with]->offset_y1 = y_offset1_ratio * Containers::worldObj_table[collide_with]->getHeight();
-			Containers::worldObj_table[collide_with]->offset_y2 = y_offset2_ratio * Containers::worldObj_table[collide_with]->getHeight();
 		}
 
 		previous_x_mouse_pos = mouseX;
 	}
-	std::cout << "/////////////////RESIZING////////////////////" << endl;
 }
 
 
@@ -468,6 +450,8 @@ void Input::edit_object() {
 		{
 			Containers::worldObj_table[collide_with]->setX(mouseX - (Containers::worldObj_table[collide_with]->getWidth()) / 2);
 			Containers::worldObj_table[collide_with]->setY(mouseY - (Containers::worldObj_table[collide_with]->getHeight()) / 2);
+
+			previous_x_mouse_pos = 0;
 		}
 		string tex_file = Containers::worldObj_table[collide_with]->sprite.getTexture().getFile();
 		tex_file = tex_file.substr(15, tex_file.size()); //shaves off front
@@ -550,9 +534,6 @@ void Input::edit_object() {
 		{
 			delete_object(collide_with);
 		}
-	}
-	if (!onscreen) {
-		previous_x_mouse_pos = 0;
 	}
 }
 
@@ -941,7 +922,6 @@ void Input::InputCheck()
 						case 2: gameplay_functions->setFaceGlow(player); break;
 						case 3: gameplay_functions->setQuestionGlow(player); break;
 						}
-
 					}
 
 				}
@@ -1019,20 +999,19 @@ void Input::InputCheck()
 							DialogueController::scroll_control = 0;
 						//disable = true;
 						count = 10;
-						////std::cout << "Index: " << tmp << std::endl;
+						//////std:://cout << "Index: " << tmp << std::endl;
 					}
 				}
 				if (ENTER) {
 					//////std:://cout << "ENTER" << std::endl;
 					if (DialogueController::getState() == 1) {
 						count = 10;
-
 						DialogueController::PlayerConversationPoint();
 					}
 					else if (DialogueController::getState() == 2) {
 						count = 10;
 						DialogueController::PlayerResponse();
-						////std::cout << "Index: " << tmp << std::endl;
+						//	DialogueController::prompted_quest = false;
 					}
 					else if (DialogueController::getState() == 5) {
 						count = 10;

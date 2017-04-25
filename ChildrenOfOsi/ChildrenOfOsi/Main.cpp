@@ -139,8 +139,6 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	//need this here for map editor
 	ChildrenOfOsi* gameplay_functions = new ChildrenOfOsi(mLog, tBuffer);
 
-	Player* Alex = new Player(SHANGO, Vector2f(6445.0, 10155.0), 150.0, 150.0);	//init player
-
 	RenderManager* RenM = new RenderManager(mLog, tBuffer, _QuadTree, gameplay_functions, rivObj);
 	DummyController* DumM = new DummyController(mLog, tBuffer);
 	PhysicsManager* PhysM = new PhysicsManager(mLog, tBuffer, _QuadTree, rivObj);
@@ -168,6 +166,18 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	RenM->register_manager();
 	bool switch_music = false;
 	bool in_village = false;
+
+	gameplay_functions->add_hero("Shango", 6445, 10155, true);
+	tBuffer->run();
+
+	Player* Alex = dynamic_cast<Player*>(Containers::hero_table["Shango"]);
+
+	Alex->name = SHANGO;
+	Alex->setWidth(150);
+	Alex->setHeight(150);
+
+
+	// Player* Alex = new Player(SHANGO, Vector2f(6445.0, 10155.0), 150.0, 150.0);	//init player
 
 
 	Region* Ogun = new Region("Ogun", "RegionThemes/OgunRegion.flac", "nothing", {1000,1000});
@@ -1306,10 +1316,10 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	staticRec->sprite.atk_down = Containers::texture_table["YswingDown"];
 	staticRec->sprite.atk_left = Containers::texture_table["YswingLeft"];
 	staticRec->sprite.atk_right = Containers::texture_table["YswingRight"];
-	staticRec->sprite.death_up = Containers::texture_table["YdeathUp"];
-	staticRec->sprite.death_down = Containers::texture_table["YdeathDown"];
-	staticRec->sprite.death_left = Containers::texture_table["YdeathLeft"];
-	staticRec->sprite.death_right = Containers::texture_table["YdeathRight"];
+	staticRec->sprite.death_up = Containers::texture_table["bs_upHurtTex"];
+	staticRec->sprite.death_down = Containers::texture_table["bs_upHurtTex"];
+	staticRec->sprite.death_left = Containers::texture_table["bs_upHurtTex"];
+	staticRec->sprite.death_right = Containers::texture_table["bs_upHurtTex"];
 
 	gameplay_functions->add_Attack(staticRec->getKey(), staticRec->body[0].getX(), staticRec->body[0].getY(), true, 10);
 	tBuffer->run();
@@ -1326,7 +1336,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	staticRec->melee->setHeight(50);
 	staticRec->set_creator_of_melee();
 	staticRec->melee->setStaminaCost(90);
-	staticRec->setHealth(300);
+	staticRec->setHealth(100);
 	staticRec->setMaxStamina(300);
 	staticRec->melee->sprite.setTexture(Containers::texture_table["border"]);
 
@@ -1523,6 +1533,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	Planner* OyaPlanner = new Planner(oya);
 	AIController::set_plan(YEMOJA, YemojaPlanner);
 	AIController::set_plan(OYA, OyaPlanner);
+	/*
 	Action* test_ally = new Action(nullptr, nullptr, nullptr, 10, 1, "Create Alliance", "execute_train");
 	Action* test_train = new Action(staticRec, oya, nullptr, 10, 1, "Train", "execute_train");
 
@@ -1531,15 +1542,16 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	RelPrecon* prec1 = new RelPrecon(Preconditions::AFF, 30);
 	RelPost* post1 = new RelPost(Postcondition::STR, 15);
 	RelPost* post2 = new RelPost(Postcondition::AFF, 15);
+	*/
 
-
-
+	/*
 	test_ally->req_preconds.push_back(std::make_shared<RelPrecon>(*prec));
 	test_ally->doer_succ_postconds.push_back(std::make_shared<RelPost>(*post));
 
 	test_train->req_preconds.push_back(std::make_shared<RelPrecon>(*prec1));
 	test_train->doer_succ_postconds.push_back(std::make_shared<RelPost>(*post1));
 	test_train->doer_succ_postconds.push_back(std::make_shared<RelPost>(*post2));
+	
 
 	ActionPool act_pool(Alex);
 	act_pool.macro.push_back(test_ally);
@@ -1555,6 +1567,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	//Alex->add_quest(test_train, 2);
 	questM->heros.push_back(Alex);
 	questM->heros.push_back(staticRec);
+	
 	///////////////////////////////////////////////////////////////////////////////////////////
 	///////////////////////////////////////////////////////////////////////////////////////////
 	//////////////////                                                 ////////////////////////
@@ -1565,7 +1578,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	
 	// THIS IS BEING RESET IN THE GAME LOOP. planner->get_current_action returns nullptr
 	YemojaPlanner->set_current_action(test_train);
-
+	*/
 	//AIController::generate_end_state(YEMOJA, OYA);
 	AIController::init_plans();
 

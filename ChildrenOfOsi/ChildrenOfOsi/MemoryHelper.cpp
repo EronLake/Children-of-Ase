@@ -17,6 +17,17 @@ MemoryHelper::~MemoryHelper()
 
 int MemoryHelper::store_hero(std::string key, float x, float y, bool col) {
 	int name = 0;
+
+	//for the shango specifically a player pbject is stored in the hero container
+	if (key == "Shango")
+	{
+		name = SHANGO;
+		Player* p = new(find_available_block(memManager::hero_head, key)) Player(name, x, y, col);
+
+		Containers::add_hero(key, p);
+		return 0;
+	}
+
 	if (key == "Yemoja")
 	{
 		name = YEMOJA;

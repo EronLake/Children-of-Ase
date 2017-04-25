@@ -36,17 +36,17 @@ void ObjConfig::import_config(vector<WorldObj*>* recVec, ChildrenOfOsi* gameplay
 {
 	int region=0;
 	if (Jungle_Config) {
-		WhichJson = "config.json";
+		WhichJson = "config_jungle.json";
 		region = JUNGLE;
 	}
 	else {
-		WhichJson = "oasis_config.json";
+		WhichJson = "config_jungle.json";
 		region = OASIS;
 	}
 
 	int numberOfWorldObj = 0;
 
-	if (rand_gen) {
+	if (MakeForest) {
 		make_stuff(recVec, gameplay_func, tBuffer,region);
 	}
 	else {
@@ -78,6 +78,15 @@ void ObjConfig::import_config(vector<WorldObj*>* recVec, ChildrenOfOsi* gameplay
 
 void ObjConfig::make_stuff(vector<WorldObj*>* recVec, ChildrenOfOsi* gameplay_func, TaskBuffer* tBuffer, int region)
 {
+	
+	if (Jungle_Config) {
+		WhichJson = "config_jungle.json";
+		region = JUNGLE;
+	}
+	else {
+		WhichJson = "config_jungle.json";
+		region = OASIS;
+	}
 	Json::Value root;
 	Json::Reader reader;
 
@@ -90,21 +99,21 @@ void ObjConfig::make_stuff(vector<WorldObj*>* recVec, ChildrenOfOsi* gameplay_fu
 
 		if (MakeForest || PlacePlant) {
 
-			if ((*itr)["name"].asString() == "JungleTopLeft") {
+			if ((*itr)["name"].asString() == "TopLeft") {
 				topLeftx = (*itr)["x"].asFloat();
 				topLefty = (*itr)["y"].asFloat();
 
 			}
-			else if ((*itr)["name"].asString() == "JungleTopRight")
+			else if ((*itr)["name"].asString() == "TopRight")
 			{
 				topRightx = (*itr)["x"].asFloat();
 				topRighty = (*itr)["y"].asFloat();
 			}
-			else if ((*itr)["name"].asString() == "JungleBotLeft") {
+			else if ((*itr)["name"].asString() == "BotLeft") {
 				botLeftx = (*itr)["x"].asFloat();
 				botLefty = (*itr)["y"].asFloat();
 			}
-			else if ((*itr)["name"].asString() == "JungleBotRight") {
+			else if ((*itr)["name"].asString() == "BotRight") {
 				botRightx = (*itr)["x"].asFloat();
 				botRighty = (*itr)["y"].asFloat();
 			}
@@ -161,6 +170,11 @@ void ObjConfig::make_stuff(vector<WorldObj*>* recVec, ChildrenOfOsi* gameplay_fu
 					"Jungle_Flower1",
 					"Jungle_Flower2",
 					"Jungle_Flower3",
+					"Jungle_shrub1",
+					"Jungle_shrub2",
+					"Jungle_shrub3",
+					"Jungle_shrub4"
+
 				};
 				WhichSprite = PlantSprites[rand() % 12];
 				set_world_obj(recVec, gameplay_func, tBuffer, randomX, randomY, 50, 50, TreeName.str(), WhichSprite, 1, 1, 1, 1, 1,JUNGLE);
@@ -262,7 +276,7 @@ void ObjConfig::set_world_obj(vector<WorldObj*>* recVec, ChildrenOfOsi* gameplay
 
 		//set file takes up memory
 		tBuffer->run();
-		(*textureMapConfig)[Containers::texture_table[tex_file]]= pair<string, int>("Assets/Sprites/" + tex_file + ".png", frame_num);
+		(*textureMapConfig)[Containers::texture_table[tex_file]]= pair<string, int>("Assets/Sprites" + tex_file + ".png", frame_num);
 		//Containers::texture_table[tex_file]->setFile("Assets/Sprites/" + tex_file + ".png", frame_num);
 		switch (region) {
 		case STANDARD:

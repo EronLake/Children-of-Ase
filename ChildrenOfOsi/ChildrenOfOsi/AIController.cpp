@@ -80,6 +80,9 @@ Hero* AIController::get_hero_object(int h)
 {
 	Hero* hero = nullptr;
 	switch (h) {
+	case SHANGO:
+		hero = Containers::hero_table["Shango"];
+		break;
 	case YEMOJA:
 		hero = Containers::hero_table["Yemoja"];
 		break;
