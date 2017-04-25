@@ -519,9 +519,13 @@ int Movement::attack(WorldObj* obj) {
 													}
 													else if ((!s->getInCombat())) {
 														s2->getParty()->get_fight()->add_party(s->getParty(),true);
+														s2->getParty()->addToCurrentEnemies(s->getParty());
+														s->getParty()->addToCurrentEnemies(s2->getParty());
 													}
 													else if ((!s2->getInCombat())) {
 														s->getParty()->get_fight()->add_party(s2->getParty(), true);
+														s2->getParty()->addToCurrentEnemies(s->getParty());
+														s->getParty()->addToCurrentEnemies(s2->getParty());
 													}
 												}
 											}

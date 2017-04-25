@@ -1306,10 +1306,10 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	staticRec->sprite.atk_down = Containers::texture_table["YswingDown"];
 	staticRec->sprite.atk_left = Containers::texture_table["YswingLeft"];
 	staticRec->sprite.atk_right = Containers::texture_table["YswingRight"];
-	staticRec->sprite.death_up = Containers::texture_table["bs_upDeathTex"];
-	staticRec->sprite.death_down = Containers::texture_table["bs_upDeathTex"];
-	staticRec->sprite.death_left = Containers::texture_table["bs_upDeathTex"];
-	staticRec->sprite.death_right = Containers::texture_table["bs_upDeathTex"];
+	staticRec->sprite.death_up = Containers::texture_table["bs_upHurtTex"];
+	staticRec->sprite.death_down = Containers::texture_table["bs_upHurtTex"];
+	staticRec->sprite.death_left = Containers::texture_table["bs_upHurtTex"];
+	staticRec->sprite.death_right = Containers::texture_table["bs_upHurtTex"];
 
 	gameplay_functions->add_Attack(staticRec->getKey(), staticRec->body[0].getX(), staticRec->body[0].getY(), true, 10);
 	tBuffer->run();
@@ -1326,7 +1326,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	staticRec->melee->setHeight(50);
 	staticRec->set_creator_of_melee();
 	staticRec->melee->setStaminaCost(90);
-	staticRec->setHealth(300);
+	staticRec->setHealth(100);
 	staticRec->setMaxStamina(300);
 	staticRec->melee->sprite.setTexture(Containers::texture_table["border"]);
 
