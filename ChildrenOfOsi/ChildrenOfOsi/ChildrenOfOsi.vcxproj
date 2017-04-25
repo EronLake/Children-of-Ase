@@ -347,6 +347,7 @@
     <None Include="action_config.json" />
     <None Include="AssetInfo.h" />
     <None Include="ClassDiagram.cd" />
+    <None Include="config_jungle.json" />
     <None Include="Dialogue_config.json" />
     <None Include="oasis_config.json" />
     <None Include="OpenGL Shaders\FontFragmentShader.frag.glsl" />
@@ -368,4 +369,9 @@
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
+  <ProjectExtensions>
+    <VisualStudio>
+      <UserProperties config_3jungle_1json__JSONSchema="http://json.schemastore.org/config" />
+    </VisualStudio>
+  </ProjectExtensions>
 </Project>
