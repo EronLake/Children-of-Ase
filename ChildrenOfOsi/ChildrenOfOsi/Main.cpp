@@ -1306,10 +1306,10 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	staticRec->sprite.atk_down = Containers::texture_table["YswingDown"];
 	staticRec->sprite.atk_left = Containers::texture_table["YswingLeft"];
 	staticRec->sprite.atk_right = Containers::texture_table["YswingRight"];
-	staticRec->sprite.death_up = Containers::texture_table["YdeathUp"];
-	staticRec->sprite.death_down = Containers::texture_table["YdeathDown"];
-	staticRec->sprite.death_left = Containers::texture_table["YdeathLeft"];
-	staticRec->sprite.death_right = Containers::texture_table["YdeathRight"];
+	staticRec->sprite.death_up = Containers::texture_table["bs_upDeathTex"];
+	staticRec->sprite.death_down = Containers::texture_table["bs_upDeathTex"];
+	staticRec->sprite.death_left = Containers::texture_table["bs_upDeathTex"];
+	staticRec->sprite.death_right = Containers::texture_table["bs_upDeathTex"];
 
 	gameplay_functions->add_Attack(staticRec->getKey(), staticRec->body[0].getX(), staticRec->body[0].getY(), true, 10);
 	tBuffer->run();
@@ -1683,7 +1683,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	int total_fps = 0;
 
 	vector<Soldier*> soldiers_list;
-//	soldiers_list.push_back(staticRec);
+	soldiers_list.push_back(staticRec);
 	for (int i = 0; i < blueSoldiers.size(); i++) {
 		soldiers_list.push_back(blueSoldiers[i]);
 	}

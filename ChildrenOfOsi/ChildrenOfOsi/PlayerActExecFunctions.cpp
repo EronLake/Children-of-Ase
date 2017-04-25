@@ -1,7 +1,8 @@
+
 #include "stdafx.h"
 #include "PlayerActExecFunctions.h"
 
-
+/*
 PlayerActExecFunctions::PlayerActExecFunctions()
 {
 }
@@ -11,7 +12,7 @@ PlayerActExecFunctions::~PlayerActExecFunctions()
 {
 }
 
-/*
+
 void ActionExecFunctions::execute_train(Action* train) {
 
 	ActionHelper::create_memory(train, train->getDoer());

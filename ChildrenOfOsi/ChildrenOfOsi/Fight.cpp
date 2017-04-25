@@ -223,6 +223,8 @@ void Fight::update_fight() {
 		if ((*it).size() == 0) {
 			it = defenders.erase(it);
 			ally_erased = true;
+
+			find_targets();
 		}
 		if (!ally_erased)++it;
 	}
@@ -359,7 +361,7 @@ void Fight::check_should_flee(Party* p) {
 		if (tmp < 1)tmp = 1;
 		total_sold = total_sold - total_enemies;
 		total_enemies = total_enemies / tmp;
-		if (total_enemies >= (total_sold * 3)) {
+		if (total_enemies > (total_sold * 3)) {
 			p->setMode(Party::MODE_FLEE);
 		}
 	}
@@ -374,7 +376,8 @@ void Fight::check_should_flee(Party* p) {
 		if (tmp < 1)tmp = 1;
 		total_sold = total_sold-total_enemies;
 		total_enemies = total_enemies / tmp;
-		if (total_enemies >= (total_sold*2)) {
+
+		if (total_enemies > (total_sold*2)) {
 			p->setMode(Party::MODE_FLEE);
 		}
 	}
