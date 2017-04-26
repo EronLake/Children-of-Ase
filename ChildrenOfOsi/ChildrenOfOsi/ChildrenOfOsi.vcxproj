@@ -199,6 +199,7 @@
     <ClInclude Include="PlayerActExecFunctions.h" />
     <ClInclude Include="QuestManager.h" />
     <ClInclude Include="Region.h" />
+    <ClInclude Include="RegionState.h" />
     <ClInclude Include="Tag.h" />
     <ClInclude Include="TagConfig.h" />
     <ClInclude Include="ThreadManager.h" />
@@ -287,6 +288,7 @@
     <ClCompile Include="PlayerActExecFunctions.cpp" />
     <ClCompile Include="QuestManager.cpp" />
     <ClCompile Include="Region.cpp" />
+    <ClCompile Include="RegionState.cpp" />
     <ClCompile Include="Tag.cpp" />
     <ClCompile Include="TagConfig.cpp" />
     <ClCompile Include="ThreadManager.cpp" />

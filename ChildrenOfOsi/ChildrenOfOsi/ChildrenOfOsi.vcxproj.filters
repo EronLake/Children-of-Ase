@@ -228,6 +228,7 @@
     <ClCompile Include="PlayerActExecFunctions.cpp">
       <Filter>AI\Actions</Filter>
     </ClCompile>
+    <ClCompile Include="RegionState.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AIHelper.h">
@@ -476,6 +477,7 @@
     <ClInclude Include="PlayerActExecFunctions.h">
       <Filter>AI\Actions</Filter>
     </ClInclude>
+    <ClInclude Include="RegionState.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="audio_test.txt">

@@ -4,7 +4,7 @@
 #include "Movement.h"
 #include "PhysicsManager.h"
 #include "CheckClass.h"
-
+#include "RegionState.h"
 
 
 Movement::Movement(QuadTree* QT, RiverObj* _rivObj) {
@@ -468,6 +468,8 @@ int Movement::talk(WorldObj* obj) {
 					}
 				}
 			}
+			RegionState::switch_music = true;
+			RegionState::in_village = true;
 			if (ot!=nullptr)DialogueController::startConversation(ot, true);
 		}
 	}
