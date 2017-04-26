@@ -15,9 +15,10 @@ Action::Action(Hero* _owner, Hero* _receiver, Hero* _doer, int _utility, int _wh
 	doer = _doer;
 	utility = _utility;
 	why = _why;
-	if (receiver!=nullptr)recieverName = receiver->name;
+	if (receiver != nullptr)recieverName = receiver->name;
 	name = _name;
-	execute_ptr  = ActionExecFunctions::ActionExecMap[_exe_name];
+	exe_name = _exe_name;
+	execute_ptr = ActionExecFunctions::ActionExecMap[_exe_name];
 	checkpoint = 0; //used for action execution
 
 	multipliers = new Personality();
@@ -82,19 +83,19 @@ void Action::apply_postconditions(bool ifsucc)
 			(*receiver_postconds)[i]->apply_utility();
 		}
 	}
-	
+
 }
 
 vector<std::string> Action::preConditionsNeeded(Hero* o, Hero* h) {
 	vector<std::string> needs;
 	for (auto it = req_preconds.begin(); it != req_preconds.end(); ++it) {
-		if ((*it)->get_general_type()==Preconditions::REL) {
+		if ((*it)->get_general_type() == Preconditions::REL) {
 
 			//if (bullshit->get_cost(o, h) > 0) {
 			//	std::string temp2 = (*it)->get_type();
-				//needs.push_back(temp2);
+			//needs.push_back(temp2);
 
-			RelPrecon* condition= dynamic_cast<RelPrecon*>((*it).get());
+			RelPrecon* condition = dynamic_cast<RelPrecon*>((*it).get());
 			if (condition->get_cost(o, h) > 0) {
 				needs.push_back((*it)->get_type());
 			}
@@ -122,7 +123,7 @@ vector<std::string> Action::preConditionsNeeded(Hero* o, Hero* h) {
 			if (condition->get_cost() > 0)needs.push_back((*it)->get_type());
 		}
 	}
-	if (!optional_fufilled_check(o,h)) {
+	if (!optional_fufilled_check(o, h)) {
 		for (auto itor = op_preconds.begin(); itor != op_preconds.end(); ++itor) {
 			for (auto it = (*itor).begin(); it != (*itor).end(); ++it) {
 				if ((*it)->get_general_type() == Preconditions::REL) {
@@ -222,7 +223,7 @@ bool Action::operator==(const Action a) const
 
 vector<std::string> Action::add_no_repeats(vector<std::string> v, string s) {
 	for (auto it = v.begin(); it != v.end(); ++it) {
-		if ((*it).compare(s)==0)return v;
+		if ((*it).compare(s) == 0)return v;
 	}
 	v.push_back(s);
 	return v;

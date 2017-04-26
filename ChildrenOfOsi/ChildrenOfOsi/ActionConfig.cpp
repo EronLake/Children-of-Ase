@@ -28,15 +28,17 @@ void ActionConfig::import_config(ChildrenOfOsi* gameplay_func, TaskBuffer* tBuff
 			file >> root;
 			for (auto itr = root.begin(); itr != root.end(); itr++)
 			{
+				std::string name = (*itr)["name"].asString() + "_" + to_string(owner->name);
+
 				set_action_obj(gameplay_func, tBuffer, owner, i->second,
 					(*itr)["utility"].asFloat(), (*itr)["why"].asFloat(), (*itr)["type"].asString(),
-					(*itr)["name"].asString(), (*itr)["exe_name"].asString(),
+					name, (*itr)["exe_name"].asString(),
 					(*itr)["aggression"].asInt(), (*itr)["kindness"].asInt(), (*itr)["honor"].asInt(),
 					(*itr)["pride"].asInt(), (*itr)["recklessness"].asInt(), (*itr)["extroversion"].asInt(),
 					(*itr)["greed"].asInt());
 
 				//this is where the helper func should be called
-				import_conditions(itr, (*itr)["name"].asString());
+				import_conditions(itr, name);
 				owner->actionPool_map[i->second->name]->updateMiddle();
 
 			}
@@ -85,9 +87,9 @@ void ActionConfig::import_conditions(Json::Value::iterator itr, std::string name
 	{
 		if ((*it)["general_type"].asInt() == 0)
 		{
-			RelPrecon* temp_prec  = new RelPrecon((*it)["rel_type"].asInt(), (*it)["desired_rel_val"].asInt());
+			RelPrecon* temp_prec = new RelPrecon((*it)["rel_type"].asInt(), (*it)["desired_rel_val"].asInt());
 
-		Containers::action_table[name]->req_preconds.push_back(std::make_shared<RelPrecon>(*temp_prec));
+			Containers::action_table[name]->req_preconds.push_back(std::make_shared<RelPrecon>(*temp_prec));
 		}
 		else if ((*it)["general_type"].asInt() == 1)
 		{
@@ -125,7 +127,7 @@ void ActionConfig::import_conditions(Json::Value::iterator itr, std::string name
 	import_post_conditions(itr, name, "doer_fail_postconds");
 	import_post_conditions(itr, name, "receiver_succ_postconds");
 	import_post_conditions(itr, name, "receiver_fail_postconds");
-	
+
 	/*
 	Containers::action_table[name]->op_preconds.push_back();
 	*/
@@ -140,7 +142,7 @@ void ActionConfig::import_post_conditions(Json::Value::iterator itr, std::string
 	if (which_post == "doer_succ_postconds")
 	{
 		postconds = &Containers::action_table[name]->doer_succ_postconds;
-	} 
+	}
 	else if (which_post == "doer_fail_postconds")
 	{
 		postconds = &Containers::action_table[name]->doer_fail_postconds;
@@ -159,7 +161,7 @@ void ActionConfig::import_post_conditions(Json::Value::iterator itr, std::string
 	{
 		if ((*it)["general_type"].asInt() == 0)
 		{
-			RelPost* temp_post = new RelPost((*it)["rel_type"].asInt(),(*it)["utility"].asInt());
+			RelPost* temp_post = new RelPost((*it)["rel_type"].asInt(), (*it)["utility"].asInt());
 
 			postconds->push_back(std::make_shared<RelPost>(*temp_post));
 		}

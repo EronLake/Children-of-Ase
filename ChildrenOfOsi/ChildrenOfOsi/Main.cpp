@@ -29,7 +29,7 @@
 #include "CheckClass.h"
 #include "TaskBufferTestSuite.h"
 #include <Windows.h>
-#include "Region.h"
+#include "RegionState.h"
 //#include "DialogueGui.h"
 
 //#include "Pool.h"
@@ -139,8 +139,6 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	//need this here for map editor
 	ChildrenOfOsi* gameplay_functions = new ChildrenOfOsi(mLog, tBuffer);
 
-	Player* Alex = new Player(SHANGO, Vector2f(6445.0, 10155.0), 150.0, 150.0);	//init player
-
 	RenderManager* RenM = new RenderManager(mLog, tBuffer, _QuadTree, gameplay_functions, rivObj);
 	DummyController* DumM = new DummyController(mLog, tBuffer);
 	PhysicsManager* PhysM = new PhysicsManager(mLog, tBuffer, _QuadTree, rivObj);
@@ -169,19 +167,35 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	bool switch_music = false;
 	bool in_village = false;
 
+	gameplay_functions->add_hero("Shango", 6445, 10155, true);
+	tBuffer->run();
 
-	Region* Ogun = new Region("Ogun", "RegionThemes/OgunRegion.flac", "nothing", {1000,1000});
-	Region* Desert = new Region("Desert", "RegionThemes/DesertRegion.flac", "nothing", {5000,5000});
-	Region* Mountain = new Region("Desert", "RegionThemes/MountainRegion.flac", "nothing", {10000,1000});
-	Region* Jungle = new Region("Desert", "RegionThemes/JungleRegion.flac", "nothing", {5000,10000});
-	vector<Region*> regions_vec;
-	regions_vec.push_back(Ogun);
-	regions_vec.push_back(Desert);
-	regions_vec.push_back(Mountain);
-	regions_vec.push_back(Jungle);
+	Player* Alex = dynamic_cast<Player*>(Containers::hero_table["Shango"]);
 
+	Alex->name = SHANGO;
+	Alex->setWidth(150);
+	Alex->setHeight(150);
+
+
+	// Player* Alex = new Player(SHANGO, Vector2f(6445.0, 10155.0), 150.0, 150.0);	//init player
+
+
+	Region* Marsh = new Region("Marsh", "Music/RegionThemes/MarshRegion.flac", "Music/HeroThemes/ogun.flac", { 1000,1000 });
+	Region* Desert = new Region("Desert", "Music/RegionThemes/DesertRegion.flac", "Music/HeroThemes/oya.flac", { 5000,5000 });
+	Region* Mountain = new Region("Mountain", "Music/RegionThemes/MountainRegion.flac", "nothing", { 10000,1000 });
+	Region* Jungle = new Region("Jungle", "Music/RegionThemes/JungleRegion.flac", "Music/HeroThemes/oya.flac", { 5000,10000 });
+	
 	Region current_region = *Desert;
 	Region next_region = *Desert;
+
+	RegionState::regions.push_back(Marsh);
+	RegionState::regions.push_back(Desert);
+	RegionState::regions.push_back(Mountain);
+	RegionState::regions.push_back(Jungle);
+
+	RegionState::current_region = current_region;
+	RegionState::next_region = next_region;
+
 
 	Input* iController = new Input(gameplay_functions, Alex, RenM->renderHelper, tBuffer, recVec_ptr);
 
@@ -207,7 +221,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	vector<Texture*> oasis;
 	vector<Texture*> jungle;
 	vector<Texture*> mountain;
-	vector<Texture*> ogun;
+	vector<Texture*> marsh;
 	vector<vector<Texture*>> starting_location;
 	
 
@@ -216,7 +230,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	ObjConfig::oasis_con = &oasis;
 	ObjConfig::jungle_con = &jungle;
 	ObjConfig::mountain_con = &mountain;
-	ObjConfig::ogun_con = &ogun;
+	ObjConfig::marsh_con = &marsh;
 	ObjConfig::import_config(recVec_ptr, gameplay_functions, tBuffer);
 
 	DialogueConfig::import_config(gameplay_functions, tBuffer);
@@ -418,8 +432,8 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	textureMap[Containers::texture_table["blueSoldierIdleTex"]] = pair<string, int>("Assets/Sprites/BlueSoldierForwardIdle.png", 22);
 	standard.push_back(Containers::texture_table["silverSoldierTexture"]);
 	standard.push_back(Containers::texture_table["silverSoldierIdleTex"]);
-	ogun.push_back(Containers::texture_table["blueSoldierTexture"]);
-	ogun.push_back(Containers::texture_table["blueSoldierIdleTex"]);
+	marsh.push_back(Containers::texture_table["blueSoldierTexture"]);
+	marsh.push_back(Containers::texture_table["blueSoldierIdleTex"]);
 
 	gameplay_functions->add_texture("ss_upRunTex", 0, 0, 0);
 	gameplay_functions->add_texture("ss_downRunTex", 0, 0, 0);
@@ -616,30 +630,30 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	textureMap[Containers::texture_table["bs_rightDeathTex"]] = pair<string, int>("Assets/Sprites/BlueSoldierRightRecoil.png", 18);
 
 	gameplay_functions->add_texture("treeTex", 0, 0, 0);
-	ogun.push_back(Containers::texture_table["bs_upRunTex"]);
-	ogun.push_back(Containers::texture_table["bs_downRunTex"]);
-	ogun.push_back(Containers::texture_table["bs_leftRunTex"]);
-	ogun.push_back(Containers::texture_table["bs_rightRunTex"]);
-	ogun.push_back(Containers::texture_table["bs_upIdleTex"]);
-	ogun.push_back(Containers::texture_table["bs_downIdleTex"]);
-	ogun.push_back(Containers::texture_table["bs_leftIdleTex"]);
-	ogun.push_back(Containers::texture_table["bs_rightIdleTex"]);
-	ogun.push_back(Containers::texture_table["bs_upAtkTex"]);
-	ogun.push_back(Containers::texture_table["bs_downAtkTex"]);
-	ogun.push_back(Containers::texture_table["bs_leftAtkTex"]);
-	ogun.push_back(Containers::texture_table["bs_rightAtkTex"]);
-	ogun.push_back(Containers::texture_table["bs_upHurtTex"]);
-	ogun.push_back(Containers::texture_table["bs_downHurtTex"]);
-	ogun.push_back(Containers::texture_table["bs_leftHurtTex"]);
-	ogun.push_back(Containers::texture_table["bs_rightHurtTex"]);
-	ogun.push_back(Containers::texture_table["bs_upWalkTex"]);
-	ogun.push_back(Containers::texture_table["bs_downWalkTex"]);
-	ogun.push_back(Containers::texture_table["bs_leftWalkTex"]);
-	ogun.push_back(Containers::texture_table["bs_rightWalkTex"]);
-	ogun.push_back(Containers::texture_table["bs_upLungeTex"]);
-	ogun.push_back(Containers::texture_table["bs_downLungeTex"]);
-	ogun.push_back(Containers::texture_table["bs_leftLungeTex"]);
-	ogun.push_back(Containers::texture_table["bs_rightLungeTex"]);
+	marsh.push_back(Containers::texture_table["bs_upRunTex"]);
+	marsh.push_back(Containers::texture_table["bs_downRunTex"]);
+	marsh.push_back(Containers::texture_table["bs_leftRunTex"]);
+	marsh.push_back(Containers::texture_table["bs_rightRunTex"]);
+	marsh.push_back(Containers::texture_table["bs_upIdleTex"]);
+	marsh.push_back(Containers::texture_table["bs_downIdleTex"]);
+	marsh.push_back(Containers::texture_table["bs_leftIdleTex"]);
+	marsh.push_back(Containers::texture_table["bs_rightIdleTex"]);
+	marsh.push_back(Containers::texture_table["bs_upAtkTex"]);
+	marsh.push_back(Containers::texture_table["bs_downAtkTex"]);
+	marsh.push_back(Containers::texture_table["bs_leftAtkTex"]);
+	marsh.push_back(Containers::texture_table["bs_rightAtkTex"]);
+	marsh.push_back(Containers::texture_table["bs_upHurtTex"]);
+	marsh.push_back(Containers::texture_table["bs_downHurtTex"]);
+	marsh.push_back(Containers::texture_table["bs_leftHurtTex"]);
+	marsh.push_back(Containers::texture_table["bs_rightHurtTex"]);
+	marsh.push_back(Containers::texture_table["bs_upWalkTex"]);
+	marsh.push_back(Containers::texture_table["bs_downWalkTex"]);
+	marsh.push_back(Containers::texture_table["bs_leftWalkTex"]);
+	marsh.push_back(Containers::texture_table["bs_rightWalkTex"]);
+	marsh.push_back(Containers::texture_table["bs_upLungeTex"]);
+	marsh.push_back(Containers::texture_table["bs_downLungeTex"]);
+	marsh.push_back(Containers::texture_table["bs_leftLungeTex"]);
+	marsh.push_back(Containers::texture_table["bs_rightLungeTex"]);
 
 	/*gameplay_functions->add_texture("treeTex", 0, 0, 0);
 	gameplay_functions->add_texture("treeTex1", 0, 0, 0);
@@ -1007,6 +1021,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	}
 	tBuffer->run();
 	recVec.push_back(staticRec);
+	recVec.push_back(oya);
 	for (int i = 0; i < silverSoldier.size(); i++) {
 		recVec.push_back(silverSoldier[i]);
 	}
@@ -1017,29 +1032,29 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	int closest;
 	int least_dist;
 	int tmp;
-	while (regions_vec.size() > 0) {
+	while (RegionState::regions.size() > 0) {
 		closest = 0;
 		least_dist = 0;
-		for (int i = 0; i < regions_vec.size(); i++) {
-			tmp = Party::dist_location_to_location(Alex->getLoc(), regions_vec[i]->loc);
+		for (int i = 0; i < RegionState::regions.size(); i++) {
+			tmp = Party::dist_location_to_location(Alex->getLoc(), RegionState::regions[i]->loc);
 			if (tmp < least_dist || least_dist == 0) {
 				closest = i;
 				least_dist = tmp;
 			}
 		}
-		if (regions_vec[closest] == Desert) {
+		if (RegionState::regions[closest] == Desert) {
 			starting_location.push_back(oasis);
 		}
-		else if (regions_vec[closest] == Mountain) {
+		else if (RegionState::regions[closest] == Mountain) {
 			starting_location.push_back(mountain);
 		}
-		else if (regions_vec[closest] == Jungle) {
+		else if (RegionState::regions[closest] == Jungle) {
 			starting_location.push_back(jungle);
 		}
-		else if (regions_vec[closest] == Ogun) {
-			starting_location.push_back(ogun);
+		else if (RegionState::regions[closest] == Marsh) {
+			starting_location.push_back(marsh);
 		}
-		regions_vec.erase(regions_vec.begin()+closest);
+		RegionState::regions.erase(RegionState::regions.begin()+closest);
 	}
 	HDC hdc = wglGetCurrentDC();
 	HGLRC mainContext = wglGetCurrentContext();
@@ -1307,12 +1322,15 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	staticRec->sprite.atk_down = Containers::texture_table["YswingDown"];
 	staticRec->sprite.atk_left = Containers::texture_table["YswingLeft"];
 	staticRec->sprite.atk_right = Containers::texture_table["YswingRight"];
-	staticRec->sprite.death_up = Containers::texture_table["bs_upDeathTex"];
-	staticRec->sprite.death_down = Containers::texture_table["bs_upDeathTex"];
-	staticRec->sprite.death_left = Containers::texture_table["bs_upDeathTex"];
-	staticRec->sprite.death_right = Containers::texture_table["bs_upDeathTex"];
+	staticRec->sprite.death_up = Containers::texture_table["bs_upHurtTex"];
+	staticRec->sprite.death_down = Containers::texture_table["bs_upHurtTex"];
+	staticRec->sprite.death_left = Containers::texture_table["bs_upHurtTex"];
+	staticRec->sprite.death_right = Containers::texture_table["bs_upHurtTex"];
+
+	oya->sprite = staticRec->sprite;
 
 	gameplay_functions->add_Attack(staticRec->getKey(), staticRec->body[0].getX(), staticRec->body[0].getY(), true, 10);
+	gameplay_functions->add_Attack(oya->getKey(), oya->body[0].getX(), oya->body[0].getY(), true, 10);
 	tBuffer->run();
 
 	staticRec->melee = Containers::Attack_table[staticRec->getKey()];
@@ -1327,9 +1345,25 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	staticRec->melee->setHeight(50);
 	staticRec->set_creator_of_melee();
 	staticRec->melee->setStaminaCost(90);
-	staticRec->setHealth(300);
+	staticRec->setHealth(100);
 	staticRec->setMaxStamina(300);
 	staticRec->melee->sprite.setTexture(Containers::texture_table["border"]);
+
+	oya->melee = Containers::Attack_table[oya->getKey()];
+	oya->melee->setDmg(10);
+	oya->melee->setSpeed(5);
+	oya->melee->setBaseDir(4);
+	oya->melee->setCoolDown(100);
+	oya->melee->setPause(-1);
+	oya->melee->setDestroy(false);
+	oya->melee->setKeep(true);
+	oya->melee->setWidth(50);
+	oya->melee->setHeight(50);
+	oya->set_creator_of_melee();
+	oya->melee->setStaminaCost(90);
+	oya->setHealth(100);
+	oya->setMaxStamina(300);
+	oya->melee->sprite.setTexture(Containers::texture_table["border"]);
 
 	for (int i = 0; i < silverNum; i++) {
 		silverSoldier[i]->setWidth(150);
@@ -1524,6 +1558,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	Planner* OyaPlanner = new Planner(oya);
 	AIController::set_plan(YEMOJA, YemojaPlanner);
 	AIController::set_plan(OYA, OyaPlanner);
+	/*
 	Action* test_ally = new Action(nullptr, nullptr, nullptr, 10, 1, "Create Alliance", "execute_train");
 	Action* test_train = new Action(staticRec, oya, nullptr, 10, 1, "Train", "execute_train");
 
@@ -1532,15 +1567,16 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	RelPrecon* prec1 = new RelPrecon(Preconditions::AFF, 30);
 	RelPost* post1 = new RelPost(Postcondition::STR, 15);
 	RelPost* post2 = new RelPost(Postcondition::AFF, 15);
+	*/
 
-
-
+	/*
 	test_ally->req_preconds.push_back(std::make_shared<RelPrecon>(*prec));
 	test_ally->doer_succ_postconds.push_back(std::make_shared<RelPost>(*post));
 
 	test_train->req_preconds.push_back(std::make_shared<RelPrecon>(*prec1));
 	test_train->doer_succ_postconds.push_back(std::make_shared<RelPost>(*post1));
 	test_train->doer_succ_postconds.push_back(std::make_shared<RelPost>(*post2));
+	
 
 	ActionPool act_pool(Alex);
 	act_pool.macro.push_back(test_ally);
@@ -1556,6 +1592,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	//Alex->add_quest(test_train, 2);
 	questM->heros.push_back(Alex);
 	questM->heros.push_back(staticRec);
+	
 	///////////////////////////////////////////////////////////////////////////////////////////
 	///////////////////////////////////////////////////////////////////////////////////////////
 	//////////////////                                                 ////////////////////////
@@ -1566,7 +1603,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	
 	// THIS IS BEING RESET IN THE GAME LOOP. planner->get_current_action returns nullptr
 	YemojaPlanner->set_current_action(test_train);
-
+	*/
 	//AIController::generate_end_state(YEMOJA, OYA);
 	AIController::init_plans();
 
@@ -1629,6 +1666,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	Party* party = new Party();
 	Party* party2 = new Party();
 	Party* party3 = new Party();
+	Party* party4 = new Party();
 	party->addToParty(Alex, true);
 	for (int i = 0; i < silverSoldier.size(); i++) {
 		party->addToParty(silverSoldier[i], false);
@@ -1640,9 +1678,11 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	Village* v1 = new Village();
 	Village* v2 = new Village();
 	Village* v3 = new Village();
+	Village* v4 = new Village();
 	v1->set_village_location({ 6045.0, 5155.0 });
 	v2->set_village_location({ 6045.0, 15155.0 });
 	v3->set_village_location({ 6445.0, 10355.0 });
+	v4->set_village_location(oya->getLoc());
 	v1->add_member(Alex);
 	for (int i = 0; i < silverSoldier.size(); i++) {
 		v1->add_member(silverSoldier[i]);
@@ -1651,12 +1691,15 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 		v2->add_member(blueSoldiers[i]);
 	}
 	v3->add_member(staticRec);
+	v4->add_member(oya);
 	Alliance* a1 = new Alliance(v1);
 	Alliance* a2 = new Alliance(v2);
 	Alliance* a3 = new Alliance(v3);
+	Alliance* a4 = new Alliance(v4);
 	v1->addToParties(party);
 	v2->addToParties(party2);
 	v3->addToParties(party3);
+	v4->addToParties(party4);
 	War* war = new War();
 	war->setWarParties(v1, v2);
 	//a1->add_alliance_to_alliance(v3->get_alliance());
@@ -1685,6 +1728,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 
 	vector<Soldier*> soldiers_list;
 	soldiers_list.push_back(staticRec);
+	soldiers_list.push_back(oya);
 	for (int i = 0; i < blueSoldiers.size(); i++) {
 		soldiers_list.push_back(blueSoldiers[i]);
 	}
@@ -1725,67 +1769,72 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 
 			if (Alex->getX() > 5285.83 && Alex->getX() < 7079.86) { //Ogun Desert
 				if (Alex->getY() < 3523.33) {
-					if (current_region == *Desert)
-						next_region = *Ogun;
+					if (RegionState::current_region == *Desert)
+						RegionState::next_region = *Marsh;
 
 				}
 				else {
-					if (current_region == *Ogun) {
-						next_region = *Desert;
+					if (RegionState::current_region == *Marsh) {
+						RegionState::next_region = *Desert;
 					}
 				}
 			}
 			if (Alex->getX() > 10847.5 && Alex->getX() < 12395.5) {
 				if (Alex->getY() < 14441) {
-					if (current_region == *Jungle)
-						next_region = *Mountain;
+					if (RegionState::current_region == *Jungle)
+						RegionState::next_region = *Mountain;
 				}
 				else {
-					if (current_region == *Mountain) {
-						next_region = *Jungle;
+					if (RegionState::current_region == *Mountain) {
+						RegionState::next_region = *Jungle;
 					}
 				}
 			}
 			if (Alex->getX() > 13091 && Alex->getX() < 13825.9) {
 				if (Alex->getY() < 5132.23) {
 
-					if (current_region == *Mountain) {
-						next_region = *Ogun;
+					if (RegionState::current_region == *Mountain) {
+						RegionState::next_region = *Marsh;
 					}
 				}
 				else {
-					if (current_region == *Ogun)
-						next_region = *Mountain;
+					if (RegionState::current_region == *Marsh)
+						RegionState::next_region = *Mountain;
 				}
 			}
 			if (Alex->getX() > 3479.67 && Alex->getX() < 9446.06) {
 				if (Alex->getY() < 15980.7) {
-					if (current_region == *Jungle)
-						next_region = *Desert;
+					if (RegionState::current_region == *Jungle)
+						RegionState::next_region = *Desert;
 				}
 				else {
-					if (current_region == *Desert) {
-						next_region = *Jungle;
+					if (RegionState::current_region == *Desert) {
+						RegionState::next_region = *Jungle;
 					}
 				}
 			}
-			if (!(current_region == next_region)) {
-				switch_music = true;
+			if (!(RegionState::current_region == RegionState::next_region)) {
+				RegionState::switch_music = true;
 			}
 
-			if (switch_music) {
-				if (in_village) {
-					gameplay_functions->change_song("Change", current_region.getRTheme(), next_region.getVTheme());
-					switch_music = false;
+			if (RegionState::switch_music) {
+				if (RegionState::in_village) {
 
+					gameplay_functions->change_song("Change", RegionState::current_region.getRTheme(), RegionState::current_region.getVTheme());
+					RegionState::switch_music = false;
 				}
 				else {
-					gameplay_functions->change_song("Change", current_region.getRTheme(), next_region.getRTheme());
-					current_region = next_region;
-					switch_music = false;
+					gameplay_functions->change_song("Change", RegionState::current_region.getRTheme(), RegionState::next_region.getRTheme());
+					//iController->current_region = current_region;
+					RegionState::current_region = RegionState::next_region;
+
+					//current_region->getRTheme(), next_region->getRTheme()
+					RegionState::switch_music = false;
 				}
 
 			}
+
+
 
 			gameplay_functions->drawDiaGui(Alex);
 
@@ -1844,64 +1893,67 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 
 			if (Alex->getX() > 5285.83 && Alex->getX() < 7079.86) { //Ogun Desert
 				if (Alex->getY() < 3523.33) {
-					if (current_region == *Desert)
-						next_region = *Ogun;
+					if (RegionState::current_region == *Desert)
+						RegionState::next_region = *Marsh;
 
 				}
 				else {
-					if (current_region == *Ogun) {
-						next_region = *Desert;
+					if (RegionState::current_region == *Marsh) {
+						RegionState::next_region = *Desert;
 					}
 				}
 			}
 			if (Alex->getX() > 10847.5 && Alex->getX() < 12395.5) {
 				if (Alex->getY() < 14441) {
-					if (current_region == *Jungle)
-						next_region = *Mountain;
+					if (RegionState::current_region == *Jungle)
+						RegionState::next_region = *Mountain;
 				}
 				else {
-					if (current_region == *Mountain) {
-						next_region = *Jungle;
+					if (RegionState::current_region == *Mountain) {
+						RegionState::next_region = *Jungle;
 					}
 				}
 			}
 			if (Alex->getX() > 13091 && Alex->getX() < 13825.9) {
 				if (Alex->getY() < 5132.23) {
 
-					if (current_region == *Mountain) {
-						next_region = *Ogun;
+					if (RegionState::current_region == *Mountain) {
+						RegionState::next_region = *Marsh;
 					}
 				}
 				else {
-					if (current_region == *Ogun)
-						next_region = *Mountain;
+					if (RegionState::current_region == *Marsh)
+						RegionState::next_region = *Mountain;
 				}
 			}
 			if (Alex->getX() > 3479.67 && Alex->getX() < 9446.06) {
 				if (Alex->getY() < 15980.7) {
-					if (current_region == *Jungle)
-						next_region = *Desert;
+					if (RegionState::current_region == *Jungle)
+						RegionState::next_region = *Desert;
 				}
 				else {
-					if (current_region == *Desert) {
-						next_region = *Jungle;
+					if (RegionState::current_region == *Desert) {
+						RegionState::next_region = *Jungle;
 					}
 				}
 			}
-			if (!(current_region == next_region)) {
-				switch_music = true;
+			if (!(RegionState::current_region == RegionState::next_region)) {
+				RegionState::switch_music = true;
 			}
 
-			if (switch_music) {
-				if (in_village) {
-					gameplay_functions->change_song("Change", current_region.getRTheme(), next_region.getVTheme());
-					switch_music = false;
+			if (RegionState::switch_music) {
+				if (RegionState::in_village) {
 
+					gameplay_functions->change_song("Change", RegionState::current_region.getRTheme(), RegionState::current_region.getVTheme());
+					RegionState::switch_music = false;
 				}
 				else {
-					gameplay_functions->change_song("Change", current_region.getRTheme(), next_region.getRTheme());
-					current_region = next_region;
-					switch_music = false;
+					gameplay_functions->change_song("Change", RegionState::current_region.getRTheme(), RegionState::next_region.getRTheme());
+					//iController->current_region = current_region;
+					RegionState::current_region = RegionState::next_region;
+
+					//current_region->getRTheme(), next_region->getRTheme()
+					RegionState::switch_music = false;
 				}
 
 			}
@@ -1953,7 +2005,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 			//setting give as quest to false so that the excute runs
 			YemojaPlanner->give_as_quest = false;
 
-			// AIController::execute();
+			 AIController::execute();
 			AI.join();
 			if ((1000 / fs) > (clock() - start_tick)) { //delta_ticks)
 				Sleep((1000 / fs) - (clock() - start_tick));
@@ -1991,64 +2043,67 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 
 			if (Alex->getX() > 5285.83 && Alex->getX() < 7079.86) { //Ogun Desert
 				if (Alex->getY() < 3523.33) {
-					if (current_region == *Desert)
-						next_region = *Ogun;
+					if (RegionState::current_region == *Desert)
+						RegionState::next_region = *Marsh;
 
 				}
 				else {
-					if (current_region == *Ogun) {
-						next_region = *Desert;
+					if (RegionState::current_region == *Marsh) {
+						RegionState::next_region = *Desert;
 					}
 				}
 			}
 			if (Alex->getX() > 10847.5 && Alex->getX() < 12395.5) {
 				if (Alex->getY() < 14441) {
-					if (current_region == *Jungle)
-						next_region = *Mountain;
+					if (RegionState::current_region == *Jungle)
+						RegionState::next_region = *Mountain;
 				}
 				else {
-					if (current_region == *Mountain) {
-						next_region = *Jungle;
+					if (RegionState::current_region == *Mountain) {
+						RegionState::next_region = *Jungle;
 					}
 				}
 			}
 			if (Alex->getX() > 13091 && Alex->getX() < 13825.9) {
 				if (Alex->getY() < 5132.23) {
 
-					if (current_region == *Mountain) {
-						next_region = *Ogun;
+					if (RegionState::current_region == *Mountain) {
+						RegionState::next_region = *Marsh;
 					}
 				}
 				else {
-					if (current_region == *Ogun)
-						next_region = *Mountain;
+					if (RegionState::current_region == *Marsh)
+						RegionState::next_region = *Mountain;
 				}
 			}
 			if (Alex->getX() > 3479.67 && Alex->getX() < 9446.06) {
 				if (Alex->getY() < 15980.7) {
-					if (current_region == *Jungle)
-						next_region = *Desert;
+					if (RegionState::current_region == *Jungle)
+						RegionState::next_region = *Desert;
 				}
 				else {
-					if (current_region == *Desert) {
-						next_region = *Jungle;
+					if (RegionState::current_region == *Desert) {
+						RegionState::next_region = *Jungle;
 					}
 				}
 			}
-			if (!(current_region == next_region)) {
-				switch_music = true;
+			if (!(RegionState::current_region == RegionState::next_region)) {
+				RegionState::switch_music = true;
 			}
 
-			if (switch_music) {
-				if (in_village) {
-					gameplay_functions->change_song("Change", current_region.getRTheme(), next_region.getVTheme());
-					switch_music = false;
+			if (RegionState::switch_music) {
+				if (RegionState::in_village) {
 
+					gameplay_functions->change_song("Change", RegionState::current_region.getRTheme(), RegionState::current_region.getVTheme());
+					RegionState::switch_music = false;
 				}
 				else {
-					gameplay_functions->change_song("Change", current_region.getRTheme(), next_region.getRTheme());
-					current_region = next_region;
-					switch_music = false;
+					gameplay_functions->change_song("Change", RegionState::current_region.getRTheme(), RegionState::next_region.getRTheme());
+					//iController->current_region = current_region;
+					RegionState::current_region = RegionState::next_region;
+
+					//current_region->getRTheme(), next_region->getRTheme()
+					RegionState::switch_music = false;
 				}
 
 			}

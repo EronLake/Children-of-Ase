@@ -6,6 +6,7 @@
 #include "Attack.h"
 #include "CheckClass.h"
 #include "json.h"
+#include "RegionState.h"
 
 
 Input::Input(ChildrenOfOsi* _gameplay_functions, RenderHelper* _rHelper, TaskBuffer* _tBuffer, vector<WorldObj*>* _recVec)
@@ -876,11 +877,15 @@ void Input::InputCheck()
 					}
 					else
 					{
+						gameplay_functions->change_song("Change", RegionState::current_region.getRTheme(), RegionState::current_region.getRTheme());
+						RegionState::in_village = false;
 						DialogueController::exitDialogue();
 					}
 				}
 				else
 				{
+					gameplay_functions->change_song("Change", RegionState::current_region.getRTheme(), RegionState::current_region.getRTheme());
+					RegionState::in_village = false;
 					DialogueController::exitDialogue();
 				}
 			}
@@ -915,6 +920,7 @@ void Input::InputCheck()
 					if (tmp > 0) {
 						DialogueController::setOptionsIndex(--tmp);
 						count = 10;
+						gameplay_functions->createTaskForAudio("Play", "SFX/page.wav");
 						//////std:://cout << "OptionsIndex: " << tmp << std::endl;
 						switch (DialogueController::getOptionsIndex()) {
 						case 0: gameplay_functions->setSwordGlow(player); break;
@@ -931,6 +937,7 @@ void Input::InputCheck()
 					if (tmp < DialogueController::getOSize() - 1) {
 						DialogueController::setOptionsIndex(++tmp);
 						count = 10;
+						gameplay_functions->createTaskForAudio("Play", "SFX/page.wav");
 						//////std:://cout << "OptionsIndex: " << tmp << std::endl;
 						switch (DialogueController::getOptionsIndex()) {
 						case 0: gameplay_functions->setSwordGlow(player); break;
@@ -956,6 +963,7 @@ void Input::InputCheck()
 							DialogueController::scroll_control++;
 							if (DialogueController::scroll_control >= DialogueController::getOptions().size())
 								DialogueController::scroll_control = DialogueController::getOptions().size() - 1;
+							gameplay_functions->createTaskForAudio("Play", "SFX/down.wav");
 							count = 10;
 							//////std:://cout << "Index: " << tmp << std::endl;
 						}
@@ -975,6 +983,7 @@ void Input::InputCheck()
 							DialogueController::scroll_control++;
 							if (DialogueController::scroll_control >= DialogueController::getReplyOptions().size())
 								DialogueController::scroll_control = DialogueController::getReplyOptions().size() - 1;
+							gameplay_functions->createTaskForAudio("Play", "SFX/up.wav");
 
 							count = 10;
 							//////std:://cout << "Index: " << tmp << std::endl;

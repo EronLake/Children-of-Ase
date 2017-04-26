@@ -84,6 +84,7 @@ void Fight::update_radius() {
 }
 
 void Fight::add_party(Party* p, bool atk) {
+	over = false;
 	p->set_defend(loc);
 	p->setMode(Party::MODE_DEFEND);
 	bool added = false;
@@ -114,7 +115,7 @@ void Fight::add_party(Party* p, bool atk) {
 		}
 	}
 	if (!added) {
-		if (atk) {
+		if (atk && !p->get_perm()) {
 			attackers.push_back({ p });
 		}
 		else {
@@ -129,6 +130,7 @@ void Fight::add_party(Party* p, bool atk) {
 }
 
 void Fight::add_to_attackers(Party* p) {
+	over = false;
 	bool added = false;
 	for (auto it = attackers.begin(); it != attackers.end(); ++it) {
 		if ((*it).size() != 0) {
@@ -151,6 +153,7 @@ void Fight::add_to_attackers(Party* p) {
 }
 
 void Fight::add_to_defenders(Party* p) {
+	over = false;
 	bool added = false;
 	for (auto it = defenders.begin(); it != defenders.end(); ++it) {
 		if ((*it).size() != 0) {
@@ -175,6 +178,7 @@ void Fight::add_to_defenders(Party* p) {
 void Fight::update_fight() {
 	bool ally_erased;
 	bool party_erased;
+	Player* player = dynamic_cast<Player*>(Containers::hero_table["Shango"]);
 	for (auto it = attackers.begin(); it != attackers.end();) {
 		ally_erased = false;
 		for (auto itor = (*it).begin(); itor != (*it).end();) {
@@ -182,6 +186,10 @@ void Fight::update_fight() {
 			if ((*itor)->getMembers().size() == (*itor)->get_down_members().size()) {
 				if ((*itor)->get_down_members().size() > 0){
 					downed.push_back((*itor));
+				}
+				if (player->getParty() == (*itor)) {
+					if (player->getParty()->get_fight() == this);
+					PlayerActExecFunctions::execute_end(false);
 				}
 				itor = (*it).erase(itor);
 				update_radius();
@@ -199,16 +207,21 @@ void Fight::update_fight() {
 		if ((*it).size() == 0) {
 			it = attackers.erase(it);
 			ally_erased = true;
+			find_targets();
 		}
 		if (!ally_erased)++it;
 	}
-	for (auto it = defenders.begin(); it != defenders.end(); ++it) {
+	for (auto it = defenders.begin(); it != defenders.end();) {
 		ally_erased = false;
 		for (auto itor = (*it).begin(); itor != (*it).end();) {
 			party_erased = false;
 			if ((*itor)->getMembers().size() == (*itor)->get_down_members().size()) {
 				if ((*itor)->get_down_members().size() > 0) {
 					downed.push_back((*itor));
+				}
+				if (player->getParty() == (*itor)) {
+					if (player->getParty()->get_fight() == this);
+					PlayerActExecFunctions::execute_end(false);
 				}
 				itor = (*it).erase(itor);
 				update_radius();
@@ -230,6 +243,10 @@ void Fight::update_fight() {
 	}
 	update_radius();
 	over = check_for_winner();
+	if (over) {
+		if (player->getParty()->get_fight() == this);
+		PlayerActExecFunctions::execute_end(true);
+	}
 }
 
 bool Fight::check_for_winner() {

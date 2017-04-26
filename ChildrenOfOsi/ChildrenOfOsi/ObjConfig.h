@@ -22,7 +22,7 @@ public:
 	static vector<Texture*>* oasis_con;
 	static vector<Texture*>* jungle_con;
 	static vector<Texture*>* mountain_con;
-	static vector<Texture*>* ogun_con;
+	static vector<Texture*>* marsh_con;
 	static constexpr int STANDARD = 0;
 	static constexpr int OASIS = 1;
 	static constexpr int JUNGLE = 2;

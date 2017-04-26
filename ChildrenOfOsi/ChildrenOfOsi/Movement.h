@@ -9,6 +9,7 @@
 #include "CombatController.h"
 #include "RiverObj.h"
 #include "AIController.h"
+#include "PlayerActExecFunctions.h"
 
 class PhysicsManager;
 

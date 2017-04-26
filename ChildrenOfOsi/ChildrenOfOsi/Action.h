@@ -8,12 +8,12 @@ class ActionExecFunctions;
 
 class Action
 {
-	
+
 public:
 	Action();
-	Action(Hero* owner, Hero* receiver, Hero* doer, int utility,int why, std::string name, std::string _exe_name);
+	Action(Hero* owner, Hero* receiver, Hero* doer, int utility, int why, std::string name, std::string _exe_name);
 	~Action();
-	
+
 
 	vector<std::shared_ptr<Preconditions>> req_preconds;
 	vector<vector<std::shared_ptr<Preconditions>>> op_preconds;
@@ -28,7 +28,7 @@ public:
 	void apply_postconditions(bool ifsucc);
 
 	void setUtility(int u) { utility = u; };
-	int getUtility() { return utility; }; 
+	int getUtility() { return utility; };
 	void setReceiver(Hero* h) { receiver = h; recieverName = h->name; };
 	Hero* getReceiver() { return receiver; };
 
@@ -55,7 +55,7 @@ public:
 	void set_aff_mult(int a, int k, int h, int p, int r, int e, int g);
 	Personality* noto_mult;
 	void set_noto_mult(int a, int k, int h, int p, int r, int e, int g);
-	
+
 	bool operator==(const Action a) const;
 
 	void setWhy(int w) { why = w; };
@@ -69,8 +69,9 @@ public:
 
 	int time_stamp; // don't initialize here (get initialized when the action begins/memory gets created)
 
-	void (*execute_ptr)(Action* cur_action);	//can someone please extain this?
-	void execute() { execute_ptr(this); };	//what does this mean? execute_ptr?
+	std::string exe_name; //need to store this value so the player can copy actions from hero's action tables
+	void(*execute_ptr)(Action* cur_action);	//points to a function im ActionExcFunctions.cpp
+	void execute() { execute_ptr(this); };	//this cals the function that execute ptr points to
 
 	bool executed = false;
 
@@ -85,7 +86,7 @@ private:
 	Hero* receiver;
 	Hero* doer;
 
-	vector<std::string> add_no_repeats(vector<std::string> v,string s);
+	vector<std::string> add_no_repeats(vector<std::string> v, string s);
 	//std::vector<RelPrerec*> rel_prerec_list;
 	//std::vector<RelAssumpPrerec*> rel_assump_prerec_list;
 	//std::vector<TimePrerec*> time_prerec_list;

@@ -20,7 +20,7 @@ vector<Texture*>* ObjConfig::standard_con;
 vector<Texture*>* ObjConfig::oasis_con;
 vector<Texture*>* ObjConfig::jungle_con;
 vector<Texture*>* ObjConfig::mountain_con;
-vector<Texture*>* ObjConfig::ogun_con;
+vector<Texture*>* ObjConfig::marsh_con;
 
 ObjConfig::ObjConfig()
 {
@@ -292,7 +292,7 @@ void ObjConfig::set_world_obj(vector<WorldObj*>* recVec, ChildrenOfOsi* gameplay
 			(*mountain_con).push_back(Containers::texture_table[tex_file]);
 			break;
 		case OGUNREG:
-			(*ogun_con).push_back(Containers::texture_table[tex_file]);
+			(*marsh_con).push_back(Containers::texture_table[tex_file]);
 			break;
 		}
 	}
