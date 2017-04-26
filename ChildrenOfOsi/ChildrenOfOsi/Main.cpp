@@ -209,6 +209,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	vector<Texture*> mountain;
 	vector<Texture*> ogun;
 	vector<vector<Texture*>> starting_location;
+	
 
 	ObjConfig::textureMapConfig = &textureMap;
 	ObjConfig::standard_con = &standard;

@@ -99,21 +99,21 @@ void ObjConfig::make_stuff(vector<WorldObj*>* recVec, ChildrenOfOsi* gameplay_fu
 
 		if (MakeForest || PlacePlant) {
 
-			if ((*itr)["name"].asString() == "TopLeft") {
+			if ((*itr)["name"].asString() == "JungleTopLeft") {
 				topLeftx = (*itr)["x"].asFloat();
 				topLefty = (*itr)["y"].asFloat();
 
 			}
-			else if ((*itr)["name"].asString() == "TopRight")
+			else if ((*itr)["name"].asString() == "JungleTopRight")
 			{
 				topRightx = (*itr)["x"].asFloat();
 				topRighty = (*itr)["y"].asFloat();
 			}
-			else if ((*itr)["name"].asString() == "BotLeft") {
+			else if ((*itr)["name"].asString() == "JungleBotLeft") {
 				botLeftx = (*itr)["x"].asFloat();
 				botLefty = (*itr)["y"].asFloat();
 			}
-			else if ((*itr)["name"].asString() == "BotRight") {
+			else if ((*itr)["name"].asString() == "JungleBotRight") {
 				botRightx = (*itr)["x"].asFloat();
 				botRighty = (*itr)["y"].asFloat();
 			}
@@ -143,7 +143,7 @@ void ObjConfig::make_stuff(vector<WorldObj*>* recVec, ChildrenOfOsi* gameplay_fu
 		int XDistancs = abs(topLeftx - topRightx);
 		int YDistancs = abs(topLefty - botLefty);
 		srand(time(0));
-		for (int i = 250; i < 350; i++) {
+		for (int i = 101; i < 250; i++) {
 			float randomX;
 			float randomY;
 			int offsetLeft;
@@ -276,7 +276,7 @@ void ObjConfig::set_world_obj(vector<WorldObj*>* recVec, ChildrenOfOsi* gameplay
 
 		//set file takes up memory
 		tBuffer->run();
-		(*textureMapConfig)[Containers::texture_table[tex_file]]= pair<string, int>("Assets/Sprites" + tex_file + ".png", frame_num);
+		(*textureMapConfig)[Containers::texture_table[tex_file]]= pair<string, int>("Assets/Sprites/" + tex_file + ".png", frame_num);
 		//Containers::texture_table[tex_file]->setFile("Assets/Sprites/" + tex_file + ".png", frame_num);
 		switch (region) {
 		case STANDARD:
