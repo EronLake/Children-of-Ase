@@ -29,6 +29,10 @@ void PlayerActExecFunctions::execute_start(std::string act_name, Hero* receiver)
 	//for multipliers and preconditions it points the the references' actual objects
 	//sets multipliers to references multipliers
 	cur_action->multipliers = ref_action->multipliers;
+	cur_action->aff_mult = cur_action->aff_mult;
+	cur_action->str_mult = cur_action->str_mult;
+	cur_action->noto_mult = cur_action->noto_mult;
+
 	//sets preconditions to references preconditions
 	cur_action->req_preconds = ref_action->req_preconds;
 
@@ -36,7 +40,7 @@ void PlayerActExecFunctions::execute_start(std::string act_name, Hero* receiver)
 	cur_action->receiver_succ_postconds = ref_action->receiver_succ_postconds;
 
 	cur_action->doer_fail_postconds = ref_action->doer_fail_postconds;
-	cur_action->doer_succ_postconds = ref_action->doer_succ_postconds;
+	cur_action->receiver_fail_postconds = ref_action->receiver_fail_postconds;
 
 	//set to current action 
 	player->cur_action = cur_action;
@@ -46,7 +50,8 @@ void PlayerActExecFunctions::execute_start(std::string act_name, Hero* receiver)
 	//creates the memory for the reciever as well
 	ActionHelper::create_memory(cur_action, receiver);
 
-	if ((act_name == "occupy" || act_name == "conquer" || act_name == "duel" || act_name == "spar" ) &&
+	if ((act_name == "Occupy" || act_name == "Conquer" || act_name == "Duel" ||
+			act_name == "Spar" || act_name == "Fight") &&
 		((!player->getInCombat()) && (!player->getInCombat())))
 	{
 		//we need to create a fight here if their action is a violent action
@@ -67,8 +72,12 @@ void PlayerActExecFunctions::execute_end(bool if_succ) {
 
 	///FOR ALESSIO
 
-	//3. put call to end by fight conclusion 
-	//4. debug:
+	//if another soldier is starts the fight it would cause a problem (check if player is in a fight/has cur action)
+	//is called after warning hit
+	//is called when hero is incapacited
+
+	//NEED TO STILL DO MEMORIES
+	//STILL NEED TO DO QUEST CHECK
 	
 	///////////////////////////////////////////
 
@@ -118,6 +127,15 @@ void PlayerActExecFunctions::execute_end(bool if_succ) {
 	//dealocate memory for fight if there was a fight
 	if(player->getParty()->get_fight() != nullptr){ delete player->getParty()->get_fight(); }
 	//dealocate memory for action
+	
+	//for multipliers and preconditions it points the the references' actual objects
+	//sets multipliers to references multipliers
+	cur_action->multipliers = nullptr;
+	cur_action->aff_mult = nullptr;
+	cur_action->str_mult = nullptr;
+	cur_action->noto_mult = nullptr;
+	//sets preconditions to references preconditions
+
 	delete player->cur_action;
 }
 
