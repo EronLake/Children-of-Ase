@@ -33,50 +33,70 @@ FMOD_RESULT result;
 		
 		// Initialize our Instance with 36 Channels
 		m_pSystem->init(36, FMOD_INIT_NORMAL, 0);
-		string oasis = "RegionThemes/DesertRegion.flac";
-		string jungle = "RegionThemes/JungleRegion.flac";
-		string mountain= "RegionThemes/MountainRegion.flac";
-		string ogun = "RegionThemes/OgunRegion.flac";
+		string oasis = "Music/RegionThemes/DesertRegion.flac";
+		string jungle = "Music/RegionThemes/JungleRegion.flac";
+		string mountain = "Music/RegionThemes/MountainRegion.flac";
+		string marsh = "Music/RegionThemes/MarshRegion.flac";
+		string ogun = "Music/Music/HeroThemes/ogun.flac";
+		string oya = "Music/HeroThemes/oya.flac";
 
 		string bump = "SFX/bump_0.wav";
 		string walk = "SFX/walk_loop.wav";
-		string swing= "SFX/swing.wav";
+		string swing = "SFX/swing.wav";
 		string hit = "SFX/hit.wav";
-		
-		
-		
+		string up = "SFX/up.wav";
+		string down = "SFX/down.wav";
+		string page = "SFX/page.wav";
+
+
+
 
 		SoundClass oasisAddress = nullptr;
 		SoundClass jungleAddress = nullptr;
 		SoundClass mountainAddress = nullptr;
+		SoundClass marshAddress = nullptr;
 		SoundClass ogunAddress = nullptr;
+		SoundClass oyaAddress = nullptr;
 
 		SoundClass bumpAddress = nullptr;
 		SoundClass walkAddress = nullptr;
 		SoundClass swingAddress = nullptr;
 		SoundClass hitAddress = nullptr;
-		
+		SoundClass upAddress = nullptr;
+		SoundClass downAddress = nullptr;
+		SoundClass pageAddress = nullptr;
+
 
 		this->createSound(&oasisAddress, oasis);
 		this->createSound(&jungleAddress, jungle);
 		this->createSound(&mountainAddress, mountain);
+		this->createSound(&marshAddress, marsh);
 		this->createSound(&ogunAddress, ogun);
+		this->createSound(&oyaAddress, oya);
 
 		this->createSound(&bumpAddress, bump);
 		this->createSound(&walkAddress, walk);
 		this->createSound(&swingAddress, swing);
 		this->createSound(&hitAddress, hit);
-		
+		this->createSound(&upAddress, up);
+		this->createSound(&downAddress, down);
+		this->createSound(&pageAddress, page);
+
 
 		sounds[oasis] = oasisAddress;
 		sounds[jungle] = jungleAddress;
 		sounds[mountain] = mountainAddress;
+		sounds[marsh] = marshAddress;
 		sounds[ogun] = ogunAddress;
+		sounds[oya] = oyaAddress;
 
 		sounds[bump] = bumpAddress;
 		sounds[walk] = walkAddress;
 		sounds[swing] = swingAddress;
 		sounds[hit] = hitAddress;
+		sounds[up] = upAddress;
+		sounds[down] = downAddress;
+		sounds[page] = pageAddress;
 
 	}
 
@@ -178,7 +198,7 @@ FMOD_RESULT result;
 		
 		type = foo::soundType::music;
 		std::string _name;
-		_name = "RegionThemes/DesertRegion.flac";
+		_name = "Music/RegionThemes/DesertRegion.flac";
 		name = _name.c_str();
 		channels[name] = &chnls[0];//assign the channel
 		
