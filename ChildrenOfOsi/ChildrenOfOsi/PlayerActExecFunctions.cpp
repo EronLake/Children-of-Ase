@@ -46,7 +46,8 @@ void PlayerActExecFunctions::execute_start(std::string act_name, Hero* receiver)
 	//creates the memory for the reciever as well
 	ActionHelper::create_memory(cur_action, receiver);
 
-	if (act_name == "occupy" || act_name == "conquer" || act_name == "duel" || act_name == "spar")
+	if ((act_name == "occupy" || act_name == "conquer" || act_name == "duel" || act_name == "spar" ) &&
+		(!(player->getInCombat) && !(player->getInCombat)))
 	{
 		//we need to create a fight here if their action is a violent action
 		if (act_name == "duel") {
@@ -64,6 +65,27 @@ void PlayerActExecFunctions::execute_end(bool if_succ) {
 
 	std::cout << "------------EX_END-------------" << std::endl;
 
+	///FOR ALESSIO
+
+	//1. do this
+	//2. put call to start by player hit
+	//3. put call to end by fight conclusion 
+	//4. debug:
+	//5.	memories are being created
+	//6.	posconditions are being applied
+
+
+	///////////////////////////////////////////
+	//if act_name == concured && player->getParty()->get_fight()->if_over){
+		//if(recivers->get_village->gethealth > 0)
+			//new_wave
+			//return
+		//
+	//}
+	
+	///////////////////////////////////////////
+
+
 	Player* player = dynamic_cast<Player*>(Containers::hero_table["Shango"]);
 
 	Action* cur_action = player->cur_action;
@@ -78,20 +100,23 @@ void PlayerActExecFunctions::execute_end(bool if_succ) {
 	}
 	
 	//end the fight if a fight was involved
-	player->getParty()->get_fight()->end_combat();
-
+	if (!(player->getParty()->get_fight() == nullptr)) {
+		player->getParty()->get_fight()->end_combat();
+	}
+	
 	cur_action->apply_postconditions(if_succ);	//Apply post-conditions based off if it was succesful or not
 	cur_action->executed = true;
 	
 	//if the action was successful check if the action was in the active quests
 	if (if_succ) { check_quest(); }
 	
+	//reason sould be handled as a dialog response choice
 	if (if_succ){
 		doer_mem->setCategory("success");
-		//doer_mem->setReason("I am good at training"); //need to figure out how to generate this text
+		receiver_mem->setCategory("failure");
 	}else{ 
 		doer_mem->setCategory("failure");
-		//doer_mem->setReason("I am good at training"); //need to figure out how to generate this text
+		receiver_mem->setCategory("success");
 	}
 	doer_mem->setWhen(/*get global frame*/0);
 
