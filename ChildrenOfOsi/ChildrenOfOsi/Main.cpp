@@ -1016,6 +1016,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	}
 	tBuffer->run();
 	recVec.push_back(staticRec);
+	recVec.push_back(oya);
 	for (int i = 0; i < silverSoldier.size(); i++) {
 		recVec.push_back(silverSoldier[i]);
 	}
@@ -1321,7 +1322,10 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	staticRec->sprite.death_left = Containers::texture_table["bs_upHurtTex"];
 	staticRec->sprite.death_right = Containers::texture_table["bs_upHurtTex"];
 
+	oya->sprite = staticRec->sprite;
+
 	gameplay_functions->add_Attack(staticRec->getKey(), staticRec->body[0].getX(), staticRec->body[0].getY(), true, 10);
+	gameplay_functions->add_Attack(oya->getKey(), oya->body[0].getX(), oya->body[0].getY(), true, 10);
 	tBuffer->run();
 
 	staticRec->melee = Containers::Attack_table[staticRec->getKey()];
@@ -1339,6 +1343,22 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	staticRec->setHealth(100);
 	staticRec->setMaxStamina(300);
 	staticRec->melee->sprite.setTexture(Containers::texture_table["border"]);
+
+	oya->melee = Containers::Attack_table[oya->getKey()];
+	oya->melee->setDmg(10);
+	oya->melee->setSpeed(5);
+	oya->melee->setBaseDir(4);
+	oya->melee->setCoolDown(100);
+	oya->melee->setPause(-1);
+	oya->melee->setDestroy(false);
+	oya->melee->setKeep(true);
+	oya->melee->setWidth(50);
+	oya->melee->setHeight(50);
+	oya->set_creator_of_melee();
+	oya->melee->setStaminaCost(90);
+	oya->setHealth(100);
+	oya->setMaxStamina(300);
+	oya->melee->sprite.setTexture(Containers::texture_table["border"]);
 
 	for (int i = 0; i < silverNum; i++) {
 		silverSoldier[i]->setWidth(150);
@@ -1641,6 +1661,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	Party* party = new Party();
 	Party* party2 = new Party();
 	Party* party3 = new Party();
+	Party* party4 = new Party();
 	party->addToParty(Alex, true);
 	for (int i = 0; i < silverSoldier.size(); i++) {
 		party->addToParty(silverSoldier[i], false);
@@ -1652,9 +1673,11 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	Village* v1 = new Village();
 	Village* v2 = new Village();
 	Village* v3 = new Village();
+	Village* v4 = new Village();
 	v1->set_village_location({ 6045.0, 5155.0 });
 	v2->set_village_location({ 6045.0, 15155.0 });
 	v3->set_village_location({ 6445.0, 10355.0 });
+	v4->set_village_location(oya->getLoc());
 	v1->add_member(Alex);
 	for (int i = 0; i < silverSoldier.size(); i++) {
 		v1->add_member(silverSoldier[i]);
@@ -1663,12 +1686,15 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 		v2->add_member(blueSoldiers[i]);
 	}
 	v3->add_member(staticRec);
+	v4->add_member(oya);
 	Alliance* a1 = new Alliance(v1);
 	Alliance* a2 = new Alliance(v2);
 	Alliance* a3 = new Alliance(v3);
+	Alliance* a4 = new Alliance(v4);
 	v1->addToParties(party);
 	v2->addToParties(party2);
 	v3->addToParties(party3);
+	v4->addToParties(party4);
 	War* war = new War();
 	war->setWarParties(v1, v2);
 	//a1->add_alliance_to_alliance(v3->get_alliance());
@@ -1696,7 +1722,8 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	int total_fps = 0;
 
 	vector<Soldier*> soldiers_list;
-//	soldiers_list.push_back(staticRec);
+	soldiers_list.push_back(staticRec);
+	soldiers_list.push_back(oya);
 	for (int i = 0; i < blueSoldiers.size(); i++) {
 		soldiers_list.push_back(blueSoldiers[i]);
 	}

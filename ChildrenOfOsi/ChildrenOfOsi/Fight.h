@@ -5,6 +5,7 @@
 #include "Village.h"
 #include "Alliance.h"
 #include "War.h"
+#include "PlayerActExecFunctions.h"
 
 class Fight
 {

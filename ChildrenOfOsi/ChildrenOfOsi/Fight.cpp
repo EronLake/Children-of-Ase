@@ -178,6 +178,7 @@ void Fight::add_to_defenders(Party* p) {
 void Fight::update_fight() {
 	bool ally_erased;
 	bool party_erased;
+	Player* player = dynamic_cast<Player*>(Containers::hero_table["Shango"]);
 	for (auto it = attackers.begin(); it != attackers.end();) {
 		ally_erased = false;
 		for (auto itor = (*it).begin(); itor != (*it).end();) {
@@ -185,6 +186,10 @@ void Fight::update_fight() {
 			if ((*itor)->getMembers().size() == (*itor)->get_down_members().size()) {
 				if ((*itor)->get_down_members().size() > 0){
 					downed.push_back((*itor));
+				}
+				if (player->getParty() == (*itor)) {
+					if (player->getParty()->get_fight() == this);
+					PlayerActExecFunctions::execute_end(false);
 				}
 				itor = (*it).erase(itor);
 				update_radius();
@@ -214,6 +219,10 @@ void Fight::update_fight() {
 				if ((*itor)->get_down_members().size() > 0) {
 					downed.push_back((*itor));
 				}
+				if (player->getParty() == (*itor)) {
+					if (player->getParty()->get_fight() == this);
+					PlayerActExecFunctions::execute_end(false);
+				}
 				itor = (*it).erase(itor);
 				update_radius();
 				party_erased = true;
@@ -234,6 +243,10 @@ void Fight::update_fight() {
 	}
 	update_radius();
 	over = check_for_winner();
+	if (over) {
+		if (player->getParty()->get_fight() == this);
+		PlayerActExecFunctions::execute_end(true);
+	}
 }
 
 bool Fight::check_for_winner() {

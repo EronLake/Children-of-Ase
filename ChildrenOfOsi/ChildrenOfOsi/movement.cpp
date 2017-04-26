@@ -514,15 +514,20 @@ int Movement::attack(WorldObj* obj) {
 											if (!friendly) {
 												s->setCurrentEnemy(s2);
 												if (s2->getType() == WorldObj::TYPE_PLAYER && s->getParty()->getMode()!=Party::MODE_FLEE) {
+													Hero* hero = dynamic_cast<Hero*>(s);
 													if ((!s->getInCombat()) && (!s2->getInCombat())) {
-														Fight* fight = new Fight(s->getParty(), s2->getParty(),false);
+														if (hero) {
+															PlayerActExecFunctions::execute_start("fight", hero);
+														} else Fight* fight = new Fight(s->getParty(), s2->getParty(), false);
 													}
 													else if ((!s->getInCombat())) {
+														if (hero)PlayerActExecFunctions::execute_start("fight", hero);
 														s2->getParty()->get_fight()->add_party(s->getParty(),true);
 														s2->getParty()->addToCurrentEnemies(s->getParty());
 														s->getParty()->addToCurrentEnemies(s2->getParty());
 													}
 													else if ((!s2->getInCombat())) {
+														if (hero)PlayerActExecFunctions::execute_start("fight", hero);
 														s->getParty()->get_fight()->add_party(s2->getParty(), true);
 														s2->getParty()->addToCurrentEnemies(s->getParty());
 														s->getParty()->addToCurrentEnemies(s2->getParty());

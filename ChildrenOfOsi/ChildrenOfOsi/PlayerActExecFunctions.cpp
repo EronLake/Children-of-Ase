@@ -47,7 +47,7 @@ void PlayerActExecFunctions::execute_start(std::string act_name, Hero* receiver)
 	ActionHelper::create_memory(cur_action, receiver);
 
 	if ((act_name == "occupy" || act_name == "conquer" || act_name == "duel" || act_name == "spar" ) &&
-		(!(player->getInCombat) && !(player->getInCombat)))
+		((!player->getInCombat()) && (!player->getInCombat())))
 	{
 		//we need to create a fight here if their action is a violent action
 		if (act_name == "duel") {
@@ -67,21 +67,8 @@ void PlayerActExecFunctions::execute_end(bool if_succ) {
 
 	///FOR ALESSIO
 
-	//1. do this
-	//2. put call to start by player hit
 	//3. put call to end by fight conclusion 
 	//4. debug:
-	//5.	memories are being created
-	//6.	posconditions are being applied
-
-
-	///////////////////////////////////////////
-	//if act_name == concured && player->getParty()->get_fight()->if_over){
-		//if(recivers->get_village->gethealth > 0)
-			//new_wave
-			//return
-		//
-	//}
 	
 	///////////////////////////////////////////
 
@@ -89,6 +76,14 @@ void PlayerActExecFunctions::execute_end(bool if_succ) {
 	Player* player = dynamic_cast<Player*>(Containers::hero_table["Shango"]);
 
 	Action* cur_action = player->cur_action;
+
+	if (cur_action->name == "conquer" && player->getParty()->get_fight()->is_over()) {
+		if (cur_action->getReceiver()->getVillage()->get_village_health() > 0) {
+			cur_action->getReceiver()->getVillage()->defenders->add_party_to_party(cur_action->getReceiver()->getVillage()->barracks);
+			if (player->getParty()->get_fight()!=nullptr)player->getParty()->get_fight()->add_to_defenders(cur_action->getReceiver()->getVillage()->defenders);
+			return;
+		}
+	}
 
 	Memory* doer_mem = player->find_mem(cur_action->getName() + std::to_string(cur_action->time_stamp));
 	Memory* receiver_mem = cur_action->getReceiver()->find_mem(cur_action->getName() + 
