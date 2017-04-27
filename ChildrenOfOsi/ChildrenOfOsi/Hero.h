@@ -8,6 +8,7 @@
 
 class ActionPool;
 class Party;
+class ConversationLogObj;
 
 class Hero :
 	public SplSoldier
@@ -21,7 +22,7 @@ public:
 
 	unordered_map<int, Relationship*> rel;
 	Personality* traits;
-	//std::vector<ConversationLogObj*> conversation_log;
+	std::vector<ConversationLogObj*> conversation_log;
 	//Planner* planner;
 
 	//used to hold the 4 planners for each of the other heroes

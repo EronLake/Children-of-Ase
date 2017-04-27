@@ -8,7 +8,21 @@ bool std::operator==(const appealPoint& p1, const appealPoint& p2) {
 		return p1.first == p2.first && p1.second == p2.second;
 	}
 
+/*Used in an attempt to lessen the use of the
+hard coded indices for dialogue points as suggested
+at the dialog code review*/
+constexpr int NoTopic() { return -1; }
+constexpr int ConvPointName() { return 1; }
+constexpr int CorrespondingConvPt() { return 2; }
+constexpr int Topic() { return 3; }
 
+/*Used in an attempt to clarify what indices of the 
+possible reply and conversation point vectors represent
+which GUI icons*/
+constexpr int StrengthIcon() { return 0; }
+constexpr int AffinityIcon() { return 1; }
+constexpr int NotorietyIcon() { return 2; }
+constexpr int QuestionMarkIcon() { return 3; }
 
 Player* player;
 WorldObj* other; //the npc in conversation with the player
@@ -72,7 +86,7 @@ int DialogueHelper::personality_appeal(ConversationPoint* point, vector<int> per
 };
 
 /*Runs the heuristic that npc's use to select a conversation point to say.*/
-dialogue_point DialogueHelper::choose_conv_pt(std::vector<ConversationLogObj*> conversation_log_obj_pointer_vec)
+dialogue_point DialogueHelper::choose_conv_pt(std::vector<ConversationLogObj*> curr_conversation_log)
 {	/*index 0 = Affinity, index 1 = notoriety, index 2 = strength, index 3 = AffEstimateindex 4 = NotorEstimate, index 5 = StrEstimate*/
 
 	/*index 0 = honor, index 1 = pride, index 2 = aggression, index 3 = kindnessindex 4 = greed, index 5 = recklessness, index 6 = extroversion*/
@@ -83,23 +97,23 @@ dialogue_point DialogueHelper::choose_conv_pt(std::vector<ConversationLogObj*> c
 	std::vector<int> personality = yemoja_personality;
 	std::vector<int> relationship = yemoja_relationship_with_shango;
 
-	if (conversation_log_obj_pointer_vec[conversation_log_obj_pointer_vec.size() - 1]->get_conv_point()->get_name() == "Ask_For_Quest") {
+	if (curr_conversation_log[curr_conversation_log.size() - 1]->get_conv_point()->get_name() == "Ask_For_Quest") {
 		return{ "Offer_Quest", "Offer_Quest" };
 	}
 
 	//check if the player has already asked the npc this question
-	for (int i = 0; i < conversation_log_obj_pointer_vec.size() - 1; ++i) {
-		if (conversation_log_obj_pointer_vec[i]->get_conv_point() == NULL)
+	for (int i = 0; i < curr_conversation_log.size() - 1; ++i) {
+		if (curr_conversation_log[i]->get_conv_point() == NULL)
 			continue;
-		if ((conversation_log_obj_pointer_vec[i]->get_conv_point()->get_name() == conversation_log_obj_pointer_vec[conversation_log_obj_pointer_vec.size() - 1]->get_conv_point()->get_name()) 
+		if ((curr_conversation_log[i]->get_conv_point()->get_name() == curr_conversation_log[curr_conversation_log.size() - 1]->get_conv_point()->get_name()) 
 			&&
-			(conversation_log_obj_pointer_vec[conversation_log_obj_pointer_vec.size() - 1]->get_who() == conversation_log_obj_pointer_vec[i]->get_who()) 
+			(curr_conversation_log[curr_conversation_log.size() - 1]->get_who() == curr_conversation_log[i]->get_who()) 
 			&& 
-			(conversation_log_obj_pointer_vec[conversation_log_obj_pointer_vec.size() - 1]->get_conv_point()->get_name().find("Ask",0) != string::npos))
+			(curr_conversation_log[curr_conversation_log.size() - 1]->get_conv_point()->get_name().find("Ask",0) != string::npos))
 			    return {"",""};
 	}
 
-	for (auto i = conversation_log_obj_pointer_vec.begin(); i != conversation_log_obj_pointer_vec.end(); ++i) {
+	for (auto i = curr_conversation_log.begin(); i != curr_conversation_log.end(); ++i) {
 		//auto it = std::find(temp.begin(), temp.end(), (*i)->get_conv_point());
 		//if (it != temp.end()) {
 		//	temp.erase(std::remove(temp.begin(), temp.end(), *it), temp.end());
@@ -108,9 +122,9 @@ dialogue_point DialogueHelper::choose_conv_pt(std::vector<ConversationLogObj*> c
 
 		// }
 		
-		for (auto j : (*i)->get_conv_point()->tag_pointer_vec) {
+		for (auto j : (*i)->get_conv_point()->tag) {
 			
-			for (auto k : j->conversation_point_pointer_vec) {
+			for (auto k : j->conversation_point) {
 				
 				if (std::find(possible_replies.begin(), possible_replies.end(), std::make_pair(0, k)) != possible_replies.end()) {
 				}
@@ -126,7 +140,7 @@ dialogue_point DialogueHelper::choose_conv_pt(std::vector<ConversationLogObj*> c
 	    }
 		
 	}
-	for (auto i = conversation_log_obj_pointer_vec.begin(); i != conversation_log_obj_pointer_vec.end(); ++i) {
+	for (auto i = curr_conversation_log.begin(); i != curr_conversation_log.end(); ++i) {
 		appealPoint tmp = std::make_pair(0, (*i)->get_conv_point());
 		auto it = std::find(possible_replies.begin(), possible_replies.end(), tmp);
 		if (it != possible_replies.end() && (*i)->get_who() == 2) {
@@ -179,26 +193,22 @@ dialogue_point DialogueHelper::choose_conv_pt(std::vector<ConversationLogObj*> c
 
 /*Returns all of the possible reply points that an npc can say
 based on the player's conversation point.*/
-dialogue_point DialogueHelper::choose_reply_pt(std::string point, int optn_inx, std::vector<ConversationLogObj*> conversation_log_obj_pointer_vec)
+dialogue_point DialogueHelper::choose_reply_pt(std::string point, int optn_inx, std::vector<ConversationLogObj*> curr_conversation_log)
 {
 	//check if the player has already asked the npc this question
-	for (int i = 0; i < conversation_log_obj_pointer_vec.size() - 1; ++i) {
-		if (conversation_log_obj_pointer_vec[i]->get_conv_point() == NULL)
+	for (int i = 0; i < curr_conversation_log.size() - 1; ++i) {
+		if (curr_conversation_log[i]->get_conv_point() == NULL)
 			continue;
-		if ((conversation_log_obj_pointer_vec[i]->get_conv_point()->get_name() == conversation_log_obj_pointer_vec[conversation_log_obj_pointer_vec.size() - 1]->get_conv_point()->get_name()) &&
-			(conversation_log_obj_pointer_vec[conversation_log_obj_pointer_vec.size() - 1]->get_who() == conversation_log_obj_pointer_vec[i]->get_who()) && (conversation_log_obj_pointer_vec[conversation_log_obj_pointer_vec.size() - 1]->get_conv_point()->get_name().find("Ask", 0) != string::npos)){
-			if(conversation_log_obj_pointer_vec[conversation_log_obj_pointer_vec.size() - 1]->get_conv_point()->get_name().find("Ask_For_Quest", 0) == string::npos)
-			    return{ "Already_Asked","Already_Asked" };
+		if ((curr_conversation_log[i]->get_conv_point()->get_name() == curr_conversation_log[curr_conversation_log.size() - 1]->get_conv_point()->get_name()) &&
+			(curr_conversation_log[curr_conversation_log.size() - 1]->get_who() == curr_conversation_log[i]->get_who()) && (curr_conversation_log[curr_conversation_log.size() - 1]->get_conv_point()->get_name().find("Ask", 0) != string::npos)){
+			if(curr_conversation_log[curr_conversation_log.size() - 1]->get_conv_point()->get_name().find("Ask_For_Quest", 0) == string::npos)
+		        return{ "Already_Asked","Already_Asked" };
 	     }
 	}
 
 	for (int i = 0; i < possible_reply_pts[optn_inx].size(); i++)
 	{
-		//if (possible_reply_pts[optn_inx][i][1].find(point, 0) != std::string::npos)
-		//{
-		//	return possible_reply_pts[optn_inx][i];
-		//}
-		if (possible_reply_pts[optn_inx][i][2] == point)
+		if (possible_reply_pts[optn_inx][i][CorrespondingConvPt()] == point)
 		{
 			return possible_reply_pts[optn_inx][i];
 		}
@@ -225,7 +235,7 @@ std::vector<dialogue_point> DialogueHelper::get_possible_reply_pts(std::string p
 {
 	std::vector<dialogue_point> reply;
 	for (int i = 0; i < possible_reply_pts[opts_inx].size(); i++) {
-		if (possible_reply_pts[opts_inx][i][2].compare("Decline_To_Answer") == 0 || possible_reply_pts[opts_inx][i][2].compare(point) == 0) {
+		if (possible_reply_pts[opts_inx][i][CorrespondingConvPt()].compare("Decline_To_Answer") == 0 || possible_reply_pts[opts_inx][i][CorrespondingConvPt()].compare(point) == 0) {
 			reply.push_back({ possible_reply_pts[opts_inx][i] });
 		}
 	}
@@ -311,15 +321,15 @@ dialogue_template DialogueHelper::get_template(dialogue_point diog_pt) {
 
 	//get a random conversation template
 	int j = 0;
-	if (root[diog_pt[1] + "_Templates"].size() > 1)
-		j = rand() % root[diog_pt[1] + "_Templates"].size() + 1;
+	if (root[diog_pt[ConvPointName()] + "_Templates"].size() > 1)
+		j = rand() % root[diog_pt[ConvPointName()] + "_Templates"].size() + 1;
 	else
 		j = 1;
 	/*populate a dialogue template using the contents
 	of the randomly obtained dialogue template*/
-	for (int i = 1; i <= root[diog_pt[1] + "_Templates"]
+	for (int i = 1; i <= root[diog_pt[ConvPointName()] + "_Templates"]
 		[to_string(j)].size(); i++) {
-		dtemp.push_back(root[diog_pt[1] + "_Templates"][to_string(j)]
+		dtemp.push_back(root[diog_pt[ConvPointName()] + "_Templates"][to_string(j)]
 			[to_string(i)].asString());
 	}
 
@@ -350,39 +360,24 @@ dialogue_point DialogueHelper::get_dialog(std::string name, dialogue_point diog_
 
 	dialogue_point dpoint;
 	
-	/*look up appropriate random phrases using dialogue template
-	if the string is punctuation then do not look it up and
-	instead push the string right away*/
-
-	///////////////////////////////////
-	/*Do not use randomness to determine the dialogue_point if the name passed 
-	into this function is Shango. Make what appears on upper GUI window be what 
-	the player selected to say.*/
-	///////////////////////////////////
 	int j = 3;
-	////stand in stuff until I finish refining topic extraction////
+
 	std::pair<int, Memory*> topic;
-	topic.first = 1;
+	topic.first = SHANGO;
 	if (name != "Shango") {
-		if (diog_pt[1].size() > 12) {//choose phrase based on relationship with other hero
-			if (diog_pt[1].at(12) == 'M') {
-				topic.first = 3;
+		    //choose phrase based on relationship with topic of diog_pt
+			if (diog_pt[ConvPointName()].find("Advise To",0) != string::npos || diog_pt[ConvPointName()].find("Ask About", 0) != string::npos) {
+				topic.first = hero_name_to_int(diog_pt[Topic()]);
 				j = calc_text_choice_from_relationship(hero,topic);
 			}
-			else if (diog_pt[1].size() > 20) {
-				if ((diog_pt[1].at(19) == 'S' || diog_pt[1].at(19) == 'A' || diog_pt[1].at(19) == 'N') && (diog_pt[1].at(13) != 'S')) {
-					topic.first = 3;
-					j = calc_text_choice_from_relationship(hero,topic);
-				}
-			}
-		}
-		else {//choose phrase based on relationship with Shango
-			topic.first = 1;
-			j = calc_text_choice_from_relationship(hero,topic);
-		}
+			//choose phrase based on relationship with Shango
+		    else {
+			    topic.first = 1;
+			    j = calc_text_choice_from_relationship(hero,topic);
+		    }
 	}
-	////////////////////////////////////////////////////////////////
 	
+
 	if (name != "Shango") {
 		std::string tmp = "";
 		for (int i = 1; i <= dtemp.size(); i++) {
@@ -406,7 +401,7 @@ dialogue_point DialogueHelper::get_dialog(std::string name, dialogue_point diog_
 		}
 	}
 	else {
-		dpoint.push_back(root[diog_pt[1]][to_string(j)]
+		dpoint.push_back(root[diog_pt[ConvPointName()]][to_string(j)]
 			.asString());
 	}
 
@@ -443,48 +438,48 @@ void DialogueHelper::fill_conversations() {
 		possible_reply_pts.push_back({});
 	}
 	for (auto itor = Containers::conv_point_table.begin(); itor != Containers::conv_point_table.end(); ++itor) {
-		if (itor->second->get_icon() == "qcp" && itor->second->get_name().find("Ask_About",0) == string::npos) {
-			possible_conv_pts[3].push_back(itor->second->dpoint);//itor->second->dpoint);
+		if (itor->second->get_icon() == "qcp" && itor->second->get_name().find("Ask About",0) == string::npos) {
+			possible_conv_pts[QuestionMarkIcon()].push_back(itor->second->dpoint);
 		}
 		else if (itor->second->get_icon() == "qrp") {
-			possible_reply_pts[3].push_back(itor->second->dpoint);
-			possible_reply_pts[0].push_back(itor->second->dpoint);
-			possible_reply_pts[1].push_back(itor->second->dpoint);
-			possible_reply_pts[2].push_back(itor->second->dpoint);
+			possible_reply_pts[QuestionMarkIcon()].push_back(itor->second->dpoint);
+			possible_reply_pts[StrengthIcon()].push_back(itor->second->dpoint);
+			possible_reply_pts[AffinityIcon()].push_back(itor->second->dpoint);
+			possible_reply_pts[NotorietyIcon()].push_back(itor->second->dpoint);
 		}
 		else if (itor->second->get_icon() == "d") {
 			
-				possible_reply_pts[3].push_back(itor->second->dpoint);
-				possible_reply_pts[0].push_back(itor->second->dpoint);
-				possible_reply_pts[1].push_back(itor->second->dpoint);
-				possible_reply_pts[2].push_back(itor->second->dpoint);
+				possible_reply_pts[QuestionMarkIcon()].push_back(itor->second->dpoint);
+				possible_reply_pts[StrengthIcon()].push_back(itor->second->dpoint);
+				possible_reply_pts[AffinityIcon()].push_back(itor->second->dpoint);
+				possible_reply_pts[NotorietyIcon()].push_back(itor->second->dpoint);
 		}
 		else if (itor->second->get_icon() == "scp") {
-			possible_conv_pts[0].push_back(itor->second->dpoint);
+			possible_conv_pts[StrengthIcon()].push_back(itor->second->dpoint);
 		}
 		else if (itor->second->get_icon() == "srp") {
-			possible_reply_pts[3].push_back(itor->second->dpoint);
-			possible_reply_pts[0].push_back(itor->second->dpoint);
-			possible_reply_pts[1].push_back(itor->second->dpoint);
-			possible_reply_pts[2].push_back(itor->second->dpoint);
+			possible_reply_pts[QuestionMarkIcon()].push_back(itor->second->dpoint);
+			possible_reply_pts[StrengthIcon()].push_back(itor->second->dpoint);
+			possible_reply_pts[AffinityIcon()].push_back(itor->second->dpoint);
+			possible_reply_pts[NotorietyIcon()].push_back(itor->second->dpoint);
 		}
 		else if (itor->second->get_icon() == "acp") {
-			possible_conv_pts[1].push_back(itor->second->dpoint);
+			possible_conv_pts[AffinityIcon()].push_back(itor->second->dpoint);
 		}
 		else if (itor->second->get_icon() == "arp" || itor->second->get_topic() == "nmp") {
-			possible_reply_pts[3].push_back(itor->second->dpoint);
-			possible_reply_pts[0].push_back(itor->second->dpoint);
-			possible_reply_pts[1].push_back(itor->second->dpoint);
-			possible_reply_pts[2].push_back(itor->second->dpoint);
+			possible_reply_pts[QuestionMarkIcon()].push_back(itor->second->dpoint);
+			possible_reply_pts[StrengthIcon()].push_back(itor->second->dpoint);
+			possible_reply_pts[AffinityIcon()].push_back(itor->second->dpoint);
+			possible_reply_pts[NotorietyIcon()].push_back(itor->second->dpoint);
 		}
-		else if (itor->second->get_icon() == "ncp" && itor->second->get_name().find("Move_To", 0) == string::npos) {
-			possible_conv_pts[2].push_back(itor->second->dpoint);
+		else if (itor->second->get_icon() == "ncp" && itor->second->get_name().find("Advise To", 0) == string::npos) {
+			possible_conv_pts[NotorietyIcon()].push_back(itor->second->dpoint);
 		}
 		else {
-			possible_reply_pts[3].push_back(itor->second->dpoint);
-			possible_reply_pts[0].push_back(itor->second->dpoint);
-			possible_reply_pts[1].push_back(itor->second->dpoint);
-			possible_reply_pts[2].push_back(itor->second->dpoint);
+			possible_reply_pts[QuestionMarkIcon()].push_back(itor->second->dpoint);
+			possible_reply_pts[StrengthIcon()].push_back(itor->second->dpoint);
+			possible_reply_pts[AffinityIcon()].push_back(itor->second->dpoint);
+			possible_reply_pts[NotorietyIcon()].push_back(itor->second->dpoint);
 		}
 	}
 }

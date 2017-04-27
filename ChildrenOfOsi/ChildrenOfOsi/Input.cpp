@@ -1017,6 +1017,22 @@ void Input::InputCheck()
 						count = 10;
 						DialogueController::PlayerConversationPoint();
 					}
+					else if (DialogueController::getState() == 6) {
+						count = 10;
+						DialogueController::PlayerResponse();
+					}
+					else if (DialogueController::getState() == 7) {
+						count = 10;
+						DialogueController::exitDialogue();
+					}
+					else if (DialogueController::getState() == 8) {
+						count = 10;
+						DialogueController::otherResponse("","");
+					}
+					else if (DialogueController::getState() == 9) {
+						count = 10;
+						DialogueController::exitDialogue();
+					}
 				}
 			}
 		}

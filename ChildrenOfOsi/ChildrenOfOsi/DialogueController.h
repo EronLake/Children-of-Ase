@@ -38,6 +38,7 @@ public:
 	static DialogueHelper* getDialogueHelper();
 	static void add_hero_related_conv_points();
 	static void remove_hero_related_conv_points();
+	static void replace_all(std::string& str, const std::string& from, const std::string& to);
 
 	static bool prompted_quest;
 	static bool accepted_quest;

@@ -126,7 +126,7 @@ void DialogueGui::drawGui()
 			if ( options.size() <= (DialogueController::scroll_control + i))
 				break;
 			std::string option_str = replace_str_char(options[DialogueController::scroll_control + i][1], "_", ' ');
-			if (option_str.find("Move To") != string::npos || option_str.find("Ask About") != string::npos)
+			if (option_str.find("Advise To",0) != string::npos || option_str.find("Ask About",0) != string::npos)
 				option_str += (" " + options[DialogueController::scroll_control + i][3]);
 			if (DialogueController::getSelect() == i) {
 				GameWindow::createText(option_str, 292, 390 + (18 * i), 544, 45, red);
@@ -144,7 +144,7 @@ void DialogueGui::drawGui()
 			if (options.size() <= (DialogueController::scroll_control + i))
 				break;
 			std::string option_str = replace_str_char(options[DialogueController::scroll_control + i][1], "_", ' ');
-			if (option_str.find("Move To") != string::npos || option_str.find("Ask About") != string::npos) {
+			if (option_str.find("Advise To",0) != string::npos || option_str.find("Tell About",0) != string::npos) {
 					option_str += (" " + options[DialogueController::scroll_control + i][3]);
 			}
 			if (DialogueController::getSelect() == i) {
@@ -159,8 +159,22 @@ void DialogueGui::drawGui()
 	if (DialogueController::getState() == 5) {
 		GameWindow::createText("Next", 292, 390 + (18 * 1), 544, 45, red);
 	}
+	if (DialogueController::getState() == 6) {
+		GameWindow::createText("Next", 292, 390 + (18 * 1), 544, 45, red);
+	}
+	if (DialogueController::getState() == 7) {
+		GameWindow::createText("Exit", 292, 390 + (18 * 1), 544, 45, red);
+	}
+	if (DialogueController::getState() == 8) {
+		GameWindow::createText("Next", 292, 390 + (18 * 1), 544, 45, red);
+	}
+	if (DialogueController::getState() == 9) {
+		GameWindow::createText("Exit", 292, 390 + (18 * 1), 544, 45, red);
+	}
 }
 
+/*Removes all appearances of a specified char(charsToRemove) from a 
+specified string(str)*/
 std::string DialogueGui::remove_chars_from_string(string &str, char* charsToRemove) {
 	for (unsigned int i = 0; i < strlen(charsToRemove); ++i) {
 		str.erase(remove(str.begin(), str.end(), charsToRemove[i]), str.end());
@@ -168,6 +182,8 @@ std::string DialogueGui::remove_chars_from_string(string &str, char* charsToRemo
 	return str;
 }
 
+/*Replaces all appearances of a specified string(replace) with a
+specified char(ch)*/
 std::string DialogueGui::replace_str_char(string str, const string& replace, char ch) {
 
 	// set our locator equal to the first appearance of any character in replace
