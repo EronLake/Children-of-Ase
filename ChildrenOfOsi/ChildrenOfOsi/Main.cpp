@@ -1750,6 +1750,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 			//cout << "currently in the main menu" << endl;
 			for (int i = 0; i < 10; i++) {
 				cout << "Press Enter to start game" << endl;
+				cout << Containers::hero_table["Yemoja"]->rel[1]->getAffinity() << endl;
 			}
 
 			if (iController->current_game_state != game_state::main_menu) {

@@ -225,7 +225,7 @@ void DialogueConfig::set_conv_point(ChildrenOfOsi* gameplay_func, TaskBuffer* tB
 	Containers::conv_point_table[name]->dpoint.push_back(icon);
 	Containers::conv_point_table[name]->dpoint.push_back(temp);
 	Containers::conv_point_table[name]->dpoint.push_back(corresponding_conv_point);
-	if(name.find("Ask_About",0)!=string::npos || name.find("Move_To", 0) != string::npos)
+	if(name.find("Ask About",0)!=string::npos || name.find("Advise To", 0) != string::npos)
 	    Containers::conv_point_table[name]->dpoint.push_back(topic);
 	else {
 		Containers::conv_point_table[name]->dpoint.push_back("");
