@@ -12,8 +12,15 @@ public:
 	typedef std::vector<std::string> dialogue_point;
 	dialogue_point dpoint;
 	std::vector<Tag*> tag;
-	std::unordered_map<std::string, std::shared_ptr<Postcondition>> succ_postconds;
-	std::unordered_map<std::string, std::shared_ptr<Postcondition>> fail_postconds;
+
+	vector<std::shared_ptr<Preconditions>> req_preconds;
+	vector<vector<std::shared_ptr<Preconditions>>> op_preconds;
+
+	vector<std::shared_ptr<Postcondition>> doer_succ_postconds;
+	vector<std::shared_ptr<Postcondition>> doer_fail_postconds;
+
+	vector<std::shared_ptr<Postcondition>> receiver_succ_postconds;
+	vector<std::shared_ptr<Postcondition>> receiver_fail_postconds;
 
 	std::string get_icon();
 	std::string get_temp();

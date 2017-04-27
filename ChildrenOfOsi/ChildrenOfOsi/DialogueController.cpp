@@ -12,18 +12,18 @@ int DialogueController::state = 0;
 /*Used in an attempt to lessen the use of the
 hard coded indices for dialogue points as suggested
 at the dialog code review*/
-constexpr int NoTopic() { return -1; }
-constexpr int ConvPointName() { return 1; }
-constexpr int CorrespondingConvPt() { return 2; }
-constexpr int Topic() { return 3; }
+constexpr int NoTopic = -1;
+constexpr int ConvPointName = 1;
+constexpr int CorrespondingConvPt = 2;
+constexpr int Topic = 3;
 
 /*Used in an attempt to clarify what indices of the
 possible reply and conversation point vectors represent
 which GUI icons*/
-constexpr int StrengthIcon() { return 0; }
-constexpr int AffinityIcon() { return 1; }
-constexpr int NotorietyIcon() { return 2; }
-constexpr int QuestionMarkIcon() { return 3; }
+constexpr int StrengthIcon = 0;
+constexpr int AffinityIcon = 1;
+constexpr int NotorietyIcon = 2;
+constexpr int QuestionMarkIcon = 3;
 
 //States:
 //0 is no conversation
@@ -125,7 +125,7 @@ void DialogueController::PlayerConversationPoint()
 		point is hero-related, or adds an empty string if it is not. The value
 		at choice[Topic()] will be one of these depending on the conversation
 		point option selected.*/
-		replace_all(conversation_pt_sentence,"HERO",choice[Topic()]);
+		replace_all(conversation_pt_sentence,"HERO",choice[Topic]);
 
 		message = player->getName() + ": " + conversation_pt_sentence;
 
@@ -137,23 +137,23 @@ void DialogueController::PlayerConversationPoint()
 		Memory* mem = nullptr;
 
 		conv_log_obj->set_who(1);
-		conv_log_obj->set_conv_point(Containers::conv_point_table[choice[ConvPointName()]]);
+		conv_log_obj->set_conv_point(Containers::conv_point_table[choice[ConvPointName]]);
 		conv_log_obj->update_number_of_times_said();
 
 		/*set the topic for the log entry of the player's selection.
 		If player's selection has no topic, the topic is set to a value
 		that indicates that there is no topic asscoiated with their
 		conversation point.*/
-		if (choice[ConvPointName()].find("Advise To") != string::npos || choice[ConvPointName()].find("Ask About") != string::npos) {
-			conv_log_obj->set_topic(dialogue.hero_name_to_int(choice[Topic()]), mem);
-			curr_hero_topic = choice[Topic()];
+		if (choice[ConvPointName].find("Advise To") != string::npos || choice[ConvPointName].find("Ask About") != string::npos) {
+			conv_log_obj->set_topic(dialogue.hero_name_to_int(choice[Topic]), mem);
+			curr_hero_topic = choice[Topic];
 		}
 		else
-			conv_log_obj->set_topic(NoTopic(), mem);
+			conv_log_obj->set_topic(NoTopic, mem);
 
 		curr_conversation_log.push_back(conv_log_obj);//add entry to log
 		
-		player_conv_point_choice = choice[ConvPointName()];
+		player_conv_point_choice = choice[ConvPointName];
 		state = 5;
 	}
 	else {
@@ -200,30 +200,30 @@ void DialogueController::PlayerResponse()
 		Memory* mem = nullptr;
 
 		conv_log_obj->set_who(1);
-		conv_log_obj->set_conv_point(Containers::conv_point_table[choice[ConvPointName()]]);
+		conv_log_obj->set_conv_point(Containers::conv_point_table[choice[ConvPointName]]);
 		conv_log_obj->update_number_of_times_said();
 
 		/*set topic to appropriate hero if player is replying to hero-related
 		conversation point.*/
-		if (choice[ConvPointName()].find("Take Advice") != string::npos || choice[ConvPointName()].find("Tell About") != string::npos) {
-			conv_log_obj->set_topic(dialogue.hero_name_to_int(choice[Topic()]), mem);
+		if (choice[ConvPointName].find("Take Advice") != string::npos || choice[ConvPointName].find("Tell About") != string::npos) {
+			conv_log_obj->set_topic(dialogue.hero_name_to_int(choice[Topic]), mem);
 		}
 		else
-			conv_log_obj->set_topic(NoTopic(), mem);
+			conv_log_obj->set_topic(NoTopic, mem);
 
 		curr_conversation_log.push_back(conv_log_obj);
 
 		/*insert the topic at the beginning of the player's reply point sentence
 		if they are replying to a hero-related conversation point*/
-		if (conv_log_obj->get_topic().first != NoTopic() && (choice[ConvPointName()].find("Advise To") != string::npos || choice[ConvPointName()].find("Tell About") != string::npos))
-			replace_all(reply_pt_sentence, "HERO", choice[Topic()]);
+		if (conv_log_obj->get_topic().first != NoTopic && (choice[ConvPointName].find("Take Advice") != string::npos || choice[ConvPointName].find("Tell About") != string::npos))
+			replace_all(reply_pt_sentence,"HERO", choice[Topic]);
 
 		message = player->getName() + ": " + reply_pt_sentence + "\n\n";
 
 		/*If player replies accepting an alliance, duel or spar, enter
 		farewell state to force player to exit dialogue.*/
-		if (choice[ConvPointName()] == "Accept Alliance Offer" || choice[ConvPointName()] == "Accept Duel" || choice[ConvPointName()] == "Accept Spar Request") {
-			player_conv_point_choice = choice[ConvPointName()];
+		if (choice[ConvPointName] == "Accept Alliance Offer" || choice[ConvPointName] == "Accept Duel" || choice[ConvPointName] == "Accept Spar Request") {
+			player_conv_point_choice = choice[ConvPointName];
 			state = 6;
 		}
 		else
@@ -272,17 +272,17 @@ void DialogueController::otherConversationPoint(dialogue_point line)
 	a special case. Special case dialogue points are typically only
 	of size 2.*/
 	if (point[0] != "No_More_Phrases" && point[0] != "Already_Asked" && point.size() >= 4)
-		point[Topic()] = curr_hero_topic;
+		point[Topic] = curr_hero_topic;
 
 	/*handles special case of quest conversation point by making
 	sure it's dialogue point will be the same size as the basic
 	conversation points like "Ask_Name" etc.*/
-	if (point[ConvPointName()].find("Quest") != string::npos) {
+	if (point[ConvPointName].find("Quest") != string::npos) {
 		point.push_back("");
 		point.push_back("");
 	}
 	    
-	replyString = point[ConvPointName()];
+	replyString = point[ConvPointName];
 
 	Hero* temp_hero = nullptr;
 	if (other->getType() >= WorldObj::TYPE_NPC) {
@@ -301,23 +301,23 @@ void DialogueController::otherConversationPoint(dialogue_point line)
 	/*Stores the npc's conversation and reply points as entries in the
 	log for the current conversation. The reply point is line[ConvPointName()] and the
 	conversation point is point[ConvPointName()].*/
-    if(line[ConvPointName()] != "Already_Asked"){
+    if(line[ConvPointName] != "Already_Asked"){
 	    ConversationLogObj* conv_log_obj = new ConversationLogObj();
 	    Memory* mem = nullptr;
 
 	    //initialization of conversation log entry for reply point
 	    conv_log_obj->set_who(dialogue.hero_name_to_int(other->getName()));
-	    conv_log_obj->set_conv_point(Containers::conv_point_table[line[ConvPointName()]]);
+	    conv_log_obj->set_conv_point(Containers::conv_point_table[line[ConvPointName]]);
 	    conv_log_obj->update_number_of_times_said();
 
 		/*insert the topic at the beginning of the npc's reply point sentence
 		if they are replying to a hero-related conversation point.*/
-	    if (line[ConvPointName()].find("Take Advice") != string::npos || line[ConvPointName()].find("Tell About") != string::npos) {
-		    conv_log_obj->set_topic(dialogue.hero_name_to_int(line[Topic()]), mem); //make the topic Oya if the player selected a move to action
-		    replace_all(reply_pt_sentence,"HERO",line[Topic()]);
+	    if (line[ConvPointName].find("Take Advice") != string::npos || line[ConvPointName].find("Tell About") != string::npos) {
+		    conv_log_obj->set_topic(dialogue.hero_name_to_int(line[Topic]), mem); //make the topic Oya if the player selected a move to action
+		    replace_all(reply_pt_sentence,"HERO",line[Topic]);
 	    }
 	    else
-		    conv_log_obj->set_topic(NoTopic(), mem);
+		    conv_log_obj->set_topic(NoTopic, mem);
 
 	    curr_conversation_log.push_back(conv_log_obj);
 
@@ -326,23 +326,23 @@ void DialogueController::otherConversationPoint(dialogue_point line)
 		Memory* mem2 = nullptr;
 
 		conv_log_obj2->set_who(dialogue.hero_name_to_int(other->getName()));
-		conv_log_obj2->set_conv_point(Containers::conv_point_table[point[ConvPointName()]]);
+		conv_log_obj2->set_conv_point(Containers::conv_point_table[point[ConvPointName]]);
 		conv_log_obj2->update_number_of_times_said();
 
 		/*insert the topic at the end of the npc's conversation point sentence
 		if they are saying a hero-related conversation point.*/
-	    if (point[ConvPointName()].find("Advise To") != string::npos || point[ConvPointName()].find("Ask About") != string::npos){
-			conv_log_obj2->set_topic(dialogue.hero_name_to_int(point[Topic()]), mem2);
-		    replace_all(con_pt_sentence,"HERO",point[Topic()]);
+	    if (point[ConvPointName].find("Advise To") != string::npos || point[ConvPointName].find("Ask About") != string::npos){
+			conv_log_obj2->set_topic(dialogue.hero_name_to_int(point[Topic]), mem2);
+		    replace_all(con_pt_sentence,"HERO",point[Topic]);
 	    }
 	    else
-			conv_log_obj2->set_topic(NoTopic(), mem2);
+			conv_log_obj2->set_topic(NoTopic, mem2);
 
 	    curr_conversation_log.push_back(conv_log_obj2);
     }
 	
 	message = other->getName() + ": " + reply_pt_sentence + "\n" +con_pt_sentence;
-	replyOptions = dialogue.get_possible_reply_pts(point[ConvPointName()], optionsIndex);
+	replyOptions = dialogue.get_possible_reply_pts(point[ConvPointName], optionsIndex);
 	
 	select = 0;
 
@@ -350,7 +350,7 @@ void DialogueController::otherConversationPoint(dialogue_point line)
 	point, if the npc tells the player that they already asked them something,
 	or if an npc runs out of relevant conversation points to say.
 	*/
-	if (point[ConvPointName()] != "No_More_Phrases" && point[ConvPointName()] != "Already_Asked" && point[ConvPointName()] != "")
+	if (point[ConvPointName] != "No_More_Phrases" && point[ConvPointName] != "Already_Asked" && point[ConvPointName] != "")
 		state = 2;
 	else
 		state = 1;//skip player reply if npc cannot give a conversation point
@@ -377,13 +377,13 @@ void DialogueController::otherResponse(std::string info, std::string hero_topic)
 
 	if (state != 8) {
 		dialogue_point line = dialogue.choose_reply_pt(info, optionsIndex, curr_conversation_log);
-		replyString = line[ConvPointName()];
+		replyString = line[ConvPointName];
 
 		/*avoids setting a topic when npc replies with "You already asked me that"
 		 or if npc says any other special case reply. Special case replies are
 		 typically vectors with a size of only 2.*/
 		if (line.size() >= 4)
-			line[Topic()] = hero_topic;
+			line[Topic] = hero_topic;
 
 
 		if (replyString == "Accept Alliance Offer") {
@@ -448,7 +448,7 @@ vector<std::vector<std::string>> DialogueController::getReplyOptions()
 	vector<std::vector<std::string>> tmp;
 	for (int i = 0; i < replyOptions.size(); i++)
 	{
-		    replyOptions[i][Topic()] = curr_hero_topic;//sets the topic for reply
+		    replyOptions[i][Topic] = curr_hero_topic;//sets the topic for reply
 			tmp.push_back(replyOptions[i]);
 	}
 	return tmp;
@@ -539,7 +539,7 @@ void DialogueController::offerQuest_hack_() {
 	dialogue_point point = {  "", "give_quest_hack"  }; // = dialogue.choose_conv_pt(line, optionsIndex);
 	replyString = "You Suck";
 
-	point[ConvPointName()]="give_quest_hack";
+	point[ConvPointName]="give_quest_hack";
 	point[0] = "quest";
 
 	Hero* temp_hero;
@@ -573,11 +573,11 @@ void DialogueController::add_hero_related_conv_points() {
 	for (auto itor = Containers::conv_point_table.begin(); itor != Containers::conv_point_table.end(); ++itor) {
 		for (int j = 0; j < heroes_player_knows.size(); ++j) {
 			if (heroes_player_knows[j] != dialogue.hero_name_to_int(other->getName())) {
-				if (itor->second->get_topic() != "" && itor->second->get_name().find("Ask About",0) != string::npos && itor->second->dpoint[CorrespondingConvPt()] == "") {
+				if (itor->second->get_topic() != "" && itor->second->get_name().find("Ask About",0) != string::npos && itor->second->dpoint[CorrespondingConvPt] == "") {
 					tmp_dpoint = itor->second->dpoint;
-					tmp_dpoint[Topic()] = dialogue.int_to_hero_name(heroes_player_knows[j]);
-					options[QuestionMarkIcon()].push_back(tmp_dpoint);
-					dialogue.get_possible_conv_pts_ref()[QuestionMarkIcon()].push_back(tmp_dpoint);
+					tmp_dpoint[Topic] = dialogue.int_to_hero_name(heroes_player_knows[j]);
+					options[QuestionMarkIcon].push_back(tmp_dpoint);
+					dialogue.get_possible_conv_pts_ref()[QuestionMarkIcon].push_back(tmp_dpoint);
 				}
 			}
 		}
@@ -590,11 +590,11 @@ void DialogueController::add_hero_related_conv_points() {
 	for (auto itor = Containers::conv_point_table.begin(); itor != Containers::conv_point_table.end(); ++itor) {
 		for (int j = 0; j < heroes_player_knows.size(); ++j) {
 			if (heroes_player_knows[j] != dialogue.hero_name_to_int(other->getName())) {
-				if (itor->second->get_topic() != "" && itor->second->get_name().find("Advise To", 0) != string::npos && itor->second->dpoint[CorrespondingConvPt()] == "") {
+				if (itor->second->get_topic() != "" && itor->second->get_name().find("Advise To", 0) != string::npos && itor->second->dpoint[CorrespondingConvPt] == "") {
 					tmp_dpoint = itor->second->dpoint;
-					tmp_dpoint[Topic()] = dialogue.int_to_hero_name(heroes_player_knows[j]);
-					options[NotorietyIcon()].push_back(tmp_dpoint);
-					dialogue.get_possible_conv_pts_ref()[NotorietyIcon()].push_back(tmp_dpoint);
+					tmp_dpoint[Topic] = dialogue.int_to_hero_name(heroes_player_knows[j]);
+					options[NotorietyIcon].push_back(tmp_dpoint);
+					dialogue.get_possible_conv_pts_ref()[NotorietyIcon].push_back(tmp_dpoint);
 				}
 			}
 		}
@@ -607,9 +607,9 @@ options.*/
 void DialogueController::remove_hero_related_conv_points() {
 	/*removes hero-related conversation points that are associated with the
 	question mark icon from player's dialog options vector */
-	for (int i = 0; i < options[QuestionMarkIcon()].size();) {
-		if (options[QuestionMarkIcon()][i][ConvPointName()].find("Advise To", 0) != string::npos || options[QuestionMarkIcon()][i][ConvPointName()].find("Ask About", 0) != string::npos) {
-			options[QuestionMarkIcon()].erase(options[QuestionMarkIcon()].begin() + i);
+	for (int i = 0; i < options[QuestionMarkIcon].size();) {
+		if (options[QuestionMarkIcon][i][ConvPointName].find("Advise To", 0) != string::npos || options[QuestionMarkIcon][i][ConvPointName].find("Ask About", 0) != string::npos) {
+			options[QuestionMarkIcon].erase(options[QuestionMarkIcon].begin() + i);
 		}
 		else
 			++i;
@@ -617,9 +617,9 @@ void DialogueController::remove_hero_related_conv_points() {
 
 	/*removes hero-related conversation points from 3D vector of possible
 	conversation points that are associated with the question mark icon*/
-	for (int i = 0; i < dialogue.get_possible_conv_pts_ref()[QuestionMarkIcon()].size();) {
-		if (dialogue.get_possible_conv_pts_ref()[QuestionMarkIcon()][i][ConvPointName()].find("Advise To", 0) != string::npos || dialogue.get_possible_conv_pts_ref()[QuestionMarkIcon()][i][ConvPointName()].find("Ask About", 0) != string::npos) {
-			dialogue.get_possible_conv_pts_ref()[QuestionMarkIcon()].erase(dialogue.get_possible_conv_pts_ref()[QuestionMarkIcon()].begin() + i);
+	for (int i = 0; i < dialogue.get_possible_conv_pts_ref()[QuestionMarkIcon].size();) {
+		if (dialogue.get_possible_conv_pts_ref()[QuestionMarkIcon][i][ConvPointName].find("Advise To", 0) != string::npos || dialogue.get_possible_conv_pts_ref()[QuestionMarkIcon][i][ConvPointName].find("Ask About", 0) != string::npos) {
+			dialogue.get_possible_conv_pts_ref()[QuestionMarkIcon].erase(dialogue.get_possible_conv_pts_ref()[QuestionMarkIcon].begin() + i);
 		}
 		else
 			++i;
@@ -627,9 +627,9 @@ void DialogueController::remove_hero_related_conv_points() {
 
 	/*removes hero-related conversation points that are associated with the 
 	notoriety icon from player's dialog options vector */
-	for (int i = 0; i < options[NotorietyIcon()].size();) {
-		if (options[NotorietyIcon()][i][ConvPointName()].find("Advise To", 0) != string::npos || options[NotorietyIcon()][i][ConvPointName()].find("Ask About", 0) != string::npos) {
-			options[NotorietyIcon()].erase(options[NotorietyIcon()].begin() + i);
+	for (int i = 0; i < options[NotorietyIcon].size();) {
+		if (options[NotorietyIcon][i][ConvPointName].find("Advise To", 0) != string::npos || options[NotorietyIcon][i][ConvPointName].find("Ask About", 0) != string::npos) {
+			options[NotorietyIcon].erase(options[NotorietyIcon].begin() + i);
 		}
 		else
 			++i;
@@ -637,9 +637,9 @@ void DialogueController::remove_hero_related_conv_points() {
 
 	/*removes hero-related conversation points from 3D vector of possible 
 	conversation points that are associated with the notoriety icon*/
-	for (int i = 0; i < dialogue.get_possible_conv_pts_ref()[NotorietyIcon()].size();) {
-		if (dialogue.get_possible_conv_pts_ref()[NotorietyIcon()][i][ConvPointName()].find("Advise To", 0) != string::npos || dialogue.get_possible_conv_pts_ref()[NotorietyIcon()][i][ConvPointName()].find("Ask About", 0) != string::npos) {
-			dialogue.get_possible_conv_pts_ref()[NotorietyIcon()].erase(dialogue.get_possible_conv_pts_ref()[NotorietyIcon()].begin() + i);
+	for (int i = 0; i < dialogue.get_possible_conv_pts_ref()[NotorietyIcon].size();) {
+		if (dialogue.get_possible_conv_pts_ref()[NotorietyIcon][i][ConvPointName].find("Advise To", 0) != string::npos || dialogue.get_possible_conv_pts_ref()[NotorietyIcon][i][ConvPointName].find("Ask About", 0) != string::npos) {
+			dialogue.get_possible_conv_pts_ref()[NotorietyIcon].erase(dialogue.get_possible_conv_pts_ref()[NotorietyIcon].begin() + i);
 		}
 		else
 			++i;

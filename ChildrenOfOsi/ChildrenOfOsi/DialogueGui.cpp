@@ -144,7 +144,7 @@ void DialogueGui::drawGui()
 			if (options.size() <= (DialogueController::scroll_control + i))
 				break;
 			std::string option_str = replace_str_char(options[DialogueController::scroll_control + i][1], "_", ' ');
-			if (option_str.find("Advise To",0) != string::npos || option_str.find("Tell About",0) != string::npos) {
+			if (option_str.find("Take Advice",0) != string::npos || option_str.find("Tell About",0) != string::npos) {
 					option_str += (" " + options[DialogueController::scroll_control + i][3]);
 			}
 			if (DialogueController::getSelect() == i) {
