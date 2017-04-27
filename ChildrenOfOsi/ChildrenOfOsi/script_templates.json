@@ -17,9 +17,9 @@
 	 }
 	},
 
-	"Response_Ask_Name_Templates": {
+	"Tell Name_Templates": {
      "1": {
-        "1": "Response_Ask_Name"
+        "1": "Tell Name"
 	 }
 	},
 
@@ -29,45 +29,45 @@
 	 }
 	},
 
-	"Response_Ask_Origin_Templates": {
+	"Tell Origin_Templates": {
      "1": {
-        "1": "Response_Ask_Origin"
+        "1": "Tell Origin"
 	 }
 	},
 
-	"Ask_About_Strength_Templates": {
+	"Ask About Strength Of_Templates": {
      "1": {
-        "1": "Ask_About_Strength"
+        "1": "Ask About Strength Of"
 	 }
     },
 
-	"Response_Ask_About_Strength_Templates": {
+	"Tell About Strength Of_Templates": {
      "1": {
-        "1": "Response_Ask_About_Strength"
+        "1": "Tell About Strength Of"
 	 }
     },
 
-    "Ask_About_Affinity_Templates": {
+    "Ask About Affinity Of_Templates": {
      "1": {
-        "1": "Ask_About_Affinity"
+        "1": "Ask About Affinity Of"
 	 }
     },
 
-	"Response_Ask_About_Affinity_Templates": {
+	"Tell About Affinity Of_Templates": {
      "1": {
-        "1": "Response_Ask_About_Affinity"
+        "1": "Tell About Affinity Of"
 	 }
     },
 
-	"Ask_About_Notoriety_Templates": {
+	"Ask About Notoriety Of_Templates": {
      "1": {
-        "1": "Ask_About_Notoriety"
+        "1": "Ask About Notoriety Of"
 	 }
     },
 
-	"Response_Ask_About_Notoriety_Templates": {
+	"Tell About Notoriety Of_Templates": {
      "1": {
-        "1": "Response_Ask_About_Notoriety"
+        "1": "Tell About Notoriety Of"
 	 }
     },
 
@@ -77,57 +77,63 @@
 	 }
     },
 
-	"Response_To_Ask_To_Form_Alliance_Templates": {
+	"Accept Alliance Offer_Templates": {
      "1": {
-        "1": "Response_To_Ask_To_Form_Alliance"
+        "1": "Accept Alliance Offer"
 	 }
     },
 
-	"Move_To_Conquer_Templates": {
+	"Confirm Alliance_Templates": {
      "1": {
-        "1": "Move_To_Conquer"
+        "1": "Confirm Alliance"
 	 }
     },
 
-	"Response_To_Move_To_Conquer_Templates": {
+	"Advise To Conquer_Templates": {
      "1": {
-        "1": "Response_To_Move_To_Conquer"
+        "1": "Advise To Conquer"
 	 }
     },
 
-	"Move_To_Alliance_Templates": {
+	"Take Advice To Conquer_Templates": {
      "1": {
-        "1": "Move_To_Alliance"
+        "1": "Take Advice To Conquer"
 	 }
     },
 
-	"Response_To_Move_To_Alliance_Templates": {
+	"Advise To Ally With_Templates": {
      "1": {
-        "1": "Response_To_Move_To_Alliance"
+        "1": "Advise To Ally With"
 	 }
     },
 
-	"Move_To_Revolt_Templates": {
+	"Take Advice To Ally With_Templates": {
      "1": {
-        "1": "Move_To_Revolt"
+        "1": "Take Advice To Ally With"
 	 }
     },
 
-	"Response_To_Move_To_Revolt_Templates": {
+	"Advise To Revolt Against_Templates": {
      "1": {
-        "1": "Response_To_Move_To_Revolt"
+        "1": "Advise To Revolt"
 	 }
     },
 
-	"Move_To_Destroy_Templates": {
+	"Take Advice To Revolt Against_Templates": {
      "1": {
-        "1": "Move_To_Destroy"
+        "1": "Take Advice To Revolt Against"
 	 }
     },
 
-    "Response_To_Move_To_Destroy_Templates": {
+	"Advise To Destroy_Templates": {
      "1": {
-        "1": "Response_To_Move_To_Destroy"
+        "1": "Advise To Destroy"
+	 }
+    },
+
+    "Take Advice To Destroy_Templates": {
+     "1": {
+        "1": "Take Advice To Destroy"
 	 }
     },
 
@@ -137,9 +143,15 @@
 	 }
     },
 
-	"Response_To_Ask_To_Duel_Templates": {
+	"Accept Duel_Templates": {
      "1": {
-        "1": "Response_To_Ask_To_Duel"
+        "1": "Accept Duel"
+	 }
+    },
+
+	"Confirm Duel_Templates": {
+     "1": {
+        "1": "Confirm Duel"
 	 }
     },
 
@@ -149,9 +161,15 @@
 	 }
     },
 
-	"Response_To_Ask_To_Spar_Templates": {
+	"Accept Spar Request_Templates": {
      "1": {
-        "1": "Response_To_Ask_To_Spar"
+        "1": "Accept Spar Request"
+	 }
+    },
+
+	"Confirm Spar_Templates": {
+     "1": {
+        "1": "Confirm Spar"
 	 }
     },
 
@@ -161,9 +179,9 @@
 	 }
     },
 
-	"Response_To_Bribe_Templates": {
+	"Accept Bribe_Templates": {
      "1": {
-        "1": "Response_To_Bribe"
+        "1": "Accept Bribe"
 	 }
     },
 
@@ -173,9 +191,9 @@
 	 }
 	},
 
-    "Response_To_Ask_To_Join_Party_Templates":{
+    "Accept Into Party_Templates":{
 	 "1": {
-        "1": "Response_To_Ask_To_Join_Party"
+        "1": "Accept Into Party"
 	 }
 	},
 
@@ -185,9 +203,9 @@
 	 }
 	},
 
-    "Response_To_Recruit_For_Party_Templates":{
+    "Join Party_Templates":{
 	 "1": {
-        "1": "Response_To_Recruit_For_Party"
+        "1": "Join Party"
 	 }
 	},
 
@@ -197,9 +215,9 @@
 	 }
     },
 
-	"Response_To_Compliment_Templates": {
+	"Thank_Templates": {
 	 "1": {
-        "1": "Response_To_Compliment"
+        "1": "Thank"
 	 }
     },
 
@@ -209,21 +227,21 @@
 	 }
     },
 
-	"Response_To_Grovel_Templates": {
+	"Accept Plea_Templates": {
 	 "1": {
-        "1": "Response_To_Grovel"
+        "1": "Accept Plea"
 	 }
     },
 
-	"Move_To_Train_Templates": {
+	"Advise To Train With_Templates": {
 	 "1": {
-        "1": "Move_To_Train"
+        "1": "Advise To Train With"
 	 }
     },
 
-	"Response_To_Move_To_Train_Templates": {
+	"Take Advice To Train With_Templates": {
 	 "1": {
-        "1": "Response_To_Move_To_Train"
+        "1": "Take Advice To Train With"
 	 }
     },
 
@@ -233,9 +251,9 @@
 	 }
     },
 
-	"Response_To_Ask_For_Teaching_Templates": {
+	"Teach_Templates": {
 	 "1": {
-        "1": "Response_To_Ask_For_Teaching"
+        "1": "Teach"
 	 }
     },
 
@@ -245,9 +263,9 @@
 	 }
     },
 
-	"Response_To_Offer_Teaching_Templates": {
+	"Accept Teaching_Templates": {
 	 "1": {
-        "1": "Response_To_Offer_Teaching"
+        "1": "Accept Teaching"
 	 }
     },
 
@@ -257,9 +275,9 @@
 	 }
     },
 
-    "Response_Boast_Templates": {
+    "Congratulate_Templates": {
 	 "1": {
-        "1": "Response_Boast"
+        "1": "Congratulate"
 	 }
     },
 
@@ -269,9 +287,9 @@
 	 }
     },
 
-	"Response_Intimidate_Templates": {
+	"Talk Back_Templates": {
 	 "1": {
-        "1": "Response_Intimidate"
+        "1": "Talk Back"
 	 }
     },
 
@@ -281,9 +299,9 @@
 	 }
     },
 
-	"Response_Insult_Templates": {
+	"Defend Self_Templates": {
 	 "1": {
-        "1": "Response_Insult"
+        "1": "Defend Self"
 	 }
     },
 
@@ -308,6 +326,48 @@
 	"Response_Already_Asked_Templates": {
 	 "1": {
         "1": "Response_Already_Asked"
+	 }
+    },
+
+	"Ask_For_Quest_Templates": {
+	 "1": {
+        "1": "Ask_For_Quest"
+	 }
+    },
+
+	"Response_Ask_For_Quest_Templates": {
+	 "1": {
+        "1": "Response_Ask_For_Quest"
+	 }
+    },
+
+	"Accept_Quest_Templates": {
+	 "1": {
+        "1": "Accept_Quest"
+	 }
+    },
+
+	"Decline_Quest_Templates": {
+	 "1": {
+        "1": "Decline_Quest"
+	 }
+    },
+
+	"Offer_Quest_Templates": {
+	 "1": {
+        "1": "Offer_Quest"
+	 }
+    },
+
+	"Quest_Complete_Templates": {
+	 "1": {
+        "1": "Quest_Complete"
+	 }
+    },
+
+	"Quest_In_Progress_Templates": {
+	 "1": {
+        "1": "Quest_In_Progress"
 	 }
     },
 

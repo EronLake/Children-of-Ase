@@ -1,6 +1,6 @@
 #include "stdafx.h"
 #include "DialogueGui.h"
-//#include "GameWindow.h"
+
 
 DialogueGui::DialogueGui()
 {
@@ -12,7 +12,6 @@ DialogueGui::DialogueGui()
 	questionIcon = new Rectangle(Vector2f(142, 439), 50, 47);
 	dialogueBox = new Rectangle(Vector2f(254, 303), 600, 80);
 	responseBox1 = new Rectangle(Vector2f(280, 390), 544, 90);
-	//responseBox2 = new Rectangle(Vector2f(280, 440), 544, 45);
 	portrait1 = new Rectangle(Vector2f(100, 70), 300, 400);
 	portrait2 = new Rectangle(Vector2f(700, 70), 300, 400);
 	backgroundTex = new Texture();
@@ -62,7 +61,6 @@ void DialogueGui::setSprite()
 	questionIcon->sprite.setTexture(questionTex);
 	dialogueBox->sprite.setTexture(dialogueBoxTex);
 	responseBox1->sprite.setTexture(responseBoxTex);
-	//responseBox2->sprite.setTexture(responseBoxTex);
 }
 
 void DialogueGui::setPortrait1(Sprite portrait1Sprite)
@@ -116,23 +114,19 @@ void DialogueGui::drawGui()
 	GameWindow::drawSprite(questionIcon->getX(), questionIcon->getY(), questionIcon->getWidth(), questionIcon->getHeight(), questionIcon->sprite);
 	GameWindow::drawSprite(dialogueBox->getX(), dialogueBox->getY(), dialogueBox->getWidth(), dialogueBox->getHeight(), dialogueBox->sprite);
 	GameWindow::drawSprite(responseBox1->getX(), responseBox1->getY(), responseBox1->getWidth(), responseBox1->getHeight(), responseBox1->sprite);
-  // GameWindow::drawSprite(responseBox2->getX(), responseBox2->getY(), responseBox2->getWidth(), responseBox2->getHeight(), responseBox2->sprite);
 	std::string message = DialogueController::getMessage();
-	int j = 0;
+
 	GameWindow::createText(message, 266, 303, 500, 80, black);
 	std::vector<std::vector<std::string>> options;
-	//std::vector<std::vector<dialogue_point>> tmp_opts = DialogueController::getDialogueHelper()->get_possible_conv_pts();
+	
 	if (DialogueController::getState() == 1) {
 		options = DialogueController::getOptions();
-		if (options.size() <= 4)
-			j = options.size();
-		else
-			j = 4;
+
 		for (int i = 0; i <= 4; i++) {
 			if ( options.size() <= (DialogueController::scroll_control + i))
 				break;
 			std::string option_str = replace_str_char(options[DialogueController::scroll_control + i][1], "_", ' ');
-			if (option_str.find("Move To") != string::npos || option_str.find("Ask About") != string::npos)
+			if (option_str.find("Advise To",0) != string::npos || option_str.find("Ask About",0) != string::npos)
 				option_str += (" " + options[DialogueController::scroll_control + i][3]);
 			if (DialogueController::getSelect() == i) {
 				GameWindow::createText(option_str, 292, 390 + (18 * i), 544, 45, red);
@@ -145,16 +139,12 @@ void DialogueGui::drawGui()
 	}
 	if (DialogueController::getState() == 2) {
 		options = DialogueController::getReplyOptions();
-		//DialogueController::scroll_control = 0;
-		if (options.size() <= DialogueController::scroll_control)
-			j = options.size();
-		else
-			j = 4;
+
 		for (int i = 0; i <= 4; i++) {
 			if (options.size() <= (DialogueController::scroll_control + i))
 				break;
 			std::string option_str = replace_str_char(options[DialogueController::scroll_control + i][1], "_", ' ');
-			if (option_str.find("Move To") != string::npos || option_str.find("Ask About") != string::npos) {
+			if (option_str.find("Take Advice",0) != string::npos || option_str.find("Tell About",0) != string::npos) {
 					option_str += (" " + options[DialogueController::scroll_control + i][3]);
 			}
 			if (DialogueController::getSelect() == i) {
@@ -169,8 +159,22 @@ void DialogueGui::drawGui()
 	if (DialogueController::getState() == 5) {
 		GameWindow::createText("Next", 292, 390 + (18 * 1), 544, 45, red);
 	}
+	if (DialogueController::getState() == 6) {
+		GameWindow::createText("Next", 292, 390 + (18 * 1), 544, 45, red);
+	}
+	if (DialogueController::getState() == 7) {
+		GameWindow::createText("Exit", 292, 390 + (18 * 1), 544, 45, red);
+	}
+	if (DialogueController::getState() == 8) {
+		GameWindow::createText("Next", 292, 390 + (18 * 1), 544, 45, red);
+	}
+	if (DialogueController::getState() == 9) {
+		GameWindow::createText("Exit", 292, 390 + (18 * 1), 544, 45, red);
+	}
 }
 
+/*Removes all appearances of a specified char(charsToRemove) from a 
+specified string(str)*/
 std::string DialogueGui::remove_chars_from_string(string &str, char* charsToRemove) {
 	for (unsigned int i = 0; i < strlen(charsToRemove); ++i) {
 		str.erase(remove(str.begin(), str.end(), charsToRemove[i]), str.end());
@@ -178,6 +182,8 @@ std::string DialogueGui::remove_chars_from_string(string &str, char* charsToRemo
 	return str;
 }
 
+/*Replaces all appearances of a specified string(replace) with a
+specified char(ch)*/
 std::string DialogueGui::replace_str_char(string str, const string& replace, char ch) {
 
 	// set our locator equal to the first appearance of any character in replace

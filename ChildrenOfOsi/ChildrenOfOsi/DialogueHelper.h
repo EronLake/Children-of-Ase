@@ -23,8 +23,8 @@ public:
 	~DialogueHelper();
 
 	//functions where heroes make dialogue choices
-	dialogue_point choose_conv_pt(std::vector<ConversationLogObj*> conversation_log_obj_pointer_vec);
-	dialogue_point choose_reply_pt(std::string point,int optn_inx, std::vector<ConversationLogObj*> conversation_log_obj_pointer_vec);
+	dialogue_point choose_conv_pt(std::vector<ConversationLogObj*> curr_conversation_log);
+	dialogue_point choose_reply_pt(std::string point,int optn_inx, std::vector<ConversationLogObj*> curr_conversation_log);
 
 	std::vector<std::vector<dialogue_point>> get_possible_conv_pts();
 	std::vector<dialogue_point> get_possible_reply_pts(std::string point, int opts_inx);

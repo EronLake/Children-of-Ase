@@ -1,4 +1,2 @@
-Conversation Point Name: Ask_Name Appeal 350
-Conversation Point Name: Ask_Origin Appeal 100
-Conversation Point Name: Move_To_Train Appeal 0
+Conversation Point Name: Advise To Train With Appeal 0
 Conversation Point Name: Recruit_For_Party Appeal 0
