@@ -15,7 +15,7 @@ memManager::memManager(MessageLog* _mLog, TaskBuffer* _tBuffer)
 	memHelper = new MemoryHelper();
 
 	hero_pool = memHelper->create_pool(sizeof(Hero) * 32);
-	hero_head = memHelper->init_pool(hero_pool, sizeof(Hero)*2);
+	hero_head = memHelper->init_pool(hero_pool, sizeof(Hero)*4);
 
 	livingObj_pool = memHelper->create_pool(sizeof(LivingObj) * 64);
 	livingObj_head = memHelper->init_pool(livingObj_pool, sizeof(LivingObj)*2);

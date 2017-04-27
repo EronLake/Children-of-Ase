@@ -9,7 +9,22 @@ Player* DialogueController::player;
 WorldObj* DialogueController::other; //the npc speaking with the player
 int DialogueController::state = 0;
 
-constexpr int NoTopic() { return -1; }
+/*Used in an attempt to lessen the use of the
+hard coded indices for dialogue points as suggested
+at the dialog code review*/
+constexpr int NoTopic = -1;
+constexpr int ConvPointName = 1;
+constexpr int CorrespondingConvPt = 2;
+constexpr int Topic = 3;
+
+/*Used in an attempt to clarify what indices of the
+possible reply and conversation point vectors represent
+which GUI icons*/
+constexpr int StrengthIcon = 0;
+constexpr int AffinityIcon = 1;
+constexpr int NotorietyIcon = 2;
+constexpr int QuestionMarkIcon = 3;
+
 //States:
 //0 is no conversation
 //1 is waiting for player conversation point
@@ -43,9 +58,9 @@ Action* DialogueController::quest = nullptr;
 //used to decide index to begin iterating at for displaying dialog options
 int DialogueController::scroll_control = 0;
 
-/*conversation log that holds pointers to different entries for
+/*conversation log that holds pointers to different entries for the
 current conversation only*/
-std::vector<ConversationLogObj*> conversation_log_obj_pointer_vec;
+std::vector<ConversationLogObj*> curr_conversation_log;
 
 /*used for passing player's conversation point selection to 
 otherResponse() function when state is no longer 5 in 
@@ -78,7 +93,7 @@ void DialogueController::PlayerChoose()
 {
 	options = dialogue.get_possible_conv_pts();
 	if(first_call)
-		/*add "Ask_About" and "Move_To" conversation points to player's
+		/*add "Ask_About" and "Advise_To" conversation points to player's
 		dialog options*/
 	    add_hero_related_conv_points();
 	first_call = false;
@@ -108,13 +123,13 @@ void DialogueController::PlayerConversationPoint()
 
 		/*adds the hero's name to the end of the sentence if the conversation 
 		point is hero-related, or adds an empty string if it is not. The value
-		at choice[3] will be one of these depending on the conversation
+		at choice[Topic()] will be one of these depending on the conversation
 		point option selected.*/
-		conversation_pt_sentence += choice[3];
+		replace_all(conversation_pt_sentence,"HERO",choice[Topic]);
 
 		message = player->getName() + ": " + conversation_pt_sentence;
 
-		/*stores the player's conversation point(choice[1]) in a log entry
+		/*stores the player's conversation point(choice[ConvPointName()]) in a log entry
 		and that entry gets stored in the log for the current conversation. 
 		We use index 1 of choice because that is where the name of the 
 		conversation point is kept.*/
@@ -122,23 +137,23 @@ void DialogueController::PlayerConversationPoint()
 		Memory* mem = nullptr;
 
 		conv_log_obj->set_who(1);
-		conv_log_obj->set_conv_point(Containers::conv_point_table[choice[1]]);
+		conv_log_obj->set_conv_point(Containers::conv_point_table[choice[ConvPointName]]);
 		conv_log_obj->update_number_of_times_said();
 
 		/*set the topic for the log entry of the player's selection.
 		If player's selection has no topic, the topic is set to a value
 		that indicates that there is no topic asscoiated with their
 		conversation point.*/
-		if (choice[1].find("Move_To") != string::npos || choice[1].find("Ask_About") != string::npos) {
-			conv_log_obj->set_topic(dialogue.hero_name_to_int(choice[3]), mem);
-			curr_hero_topic = choice[3];
+		if (choice[ConvPointName].find("Advise To") != string::npos || choice[ConvPointName].find("Ask About") != string::npos) {
+			conv_log_obj->set_topic(dialogue.hero_name_to_int(choice[Topic]), mem);
+			curr_hero_topic = choice[Topic];
 		}
 		else
-			conv_log_obj->set_topic(NoTopic(), mem);
+			conv_log_obj->set_topic(NoTopic, mem);
 
-		conversation_log_obj_pointer_vec.push_back(conv_log_obj);//add entry to log
+		curr_conversation_log.push_back(conv_log_obj);//add entry to log
 		
-		player_conv_point_choice = choice[1];
+		player_conv_point_choice = choice[ConvPointName];
 		state = 5;
 	}
 	else {
@@ -153,57 +168,96 @@ the current conversation, creates a sentence that the player will say based
 on their reply option selection.*/
 void DialogueController::PlayerResponse()
 {
-	dialogue_point choice = replyOptions[select + DialogueController::scroll_control];
+	if (state != 6) {
+		dialogue_point choice = replyOptions[select + DialogueController::scroll_control];
 
-	/*quest dialog code that was done by Justin and Alessio. Is placeholder
-	and will be removed at some point.*/
-	if (prompted_quest)
-	{
-		if (select == 0)   // Player is accepting the quest
+		/*quest dialog code that was done by Justin and Alessio. Is placeholder
+		and will be removed at some point.*/
+		if (prompted_quest)
 		{
-			player->quest = quest;
-			Planner* planner = AIController::get_plan(CheckClass::isHero(other)->name);
-			//planner->get_current_action()->executed = true;
-			prompted_quest = false;
-			accepted_quest = true;
-			player->add_quest(planner->get_current_action(), 2);
-		}
-		else             // Player is denying the quest
-		{
+			if (select == 0)   // Player is accepting the quest
+			{
+				player->quest = quest;
+				Planner* planner = AIController::get_plan(CheckClass::isHero(other)->name);
+				//planner->get_current_action()->executed = true;
+				prompted_quest = false;
+				accepted_quest = true;
+				player->add_quest(planner->get_current_action(), 2);
+			}
+			else             // Player is denying the quest
+			{
+
+			}
 
 		}
 
+		//get a sentence to say based on player's reply option selection
+		std::string reply_pt_sentence = dialogue.gen_dialog(choice, player);
+
+		/*Creates log entry for player's reply point selection(choice[ConvPointName()])
+		and stores entry in log for current conversation.*/
+		ConversationLogObj* conv_log_obj = new ConversationLogObj();
+		Memory* mem = nullptr;
+
+		conv_log_obj->set_who(1);
+		conv_log_obj->set_conv_point(Containers::conv_point_table[choice[ConvPointName]]);
+		conv_log_obj->update_number_of_times_said();
+
+		/*set topic to appropriate hero if player is replying to hero-related
+		conversation point.*/
+		if (choice[ConvPointName].find("Take Advice") != string::npos || choice[ConvPointName].find("Tell About") != string::npos) {
+			conv_log_obj->set_topic(dialogue.hero_name_to_int(choice[Topic]), mem);
+		}
+		else
+			conv_log_obj->set_topic(NoTopic, mem);
+
+		curr_conversation_log.push_back(conv_log_obj);
+
+		/*insert the topic at the beginning of the player's reply point sentence
+		if they are replying to a hero-related conversation point*/
+		if (conv_log_obj->get_topic().first != NoTopic && (choice[ConvPointName].find("Take Advice") != string::npos || choice[ConvPointName].find("Tell About") != string::npos))
+			replace_all(reply_pt_sentence,"HERO", choice[Topic]);
+
+		message = player->getName() + ": " + reply_pt_sentence + "\n\n";
+
+		/*If player replies accepting an alliance, duel or spar, enter
+		farewell state to force player to exit dialogue.*/
+		if (choice[ConvPointName] == "Accept Alliance Offer" || choice[ConvPointName] == "Accept Duel" || choice[ConvPointName] == "Accept Spar Request") {
+			player_conv_point_choice = choice[ConvPointName];
+			state = 6;
+		}
+		else
+		    PlayerChoose();//start all over from player conversation point again
 	}
-	
-	//get a sentence to say based on player's reply option selection
-	std::string reply_pt_sentence = dialogue.gen_dialog(choice, player);
+	else {
+		Hero* temp_hero = nullptr;
+		if (other->getType() >= WorldObj::TYPE_NPC) {
+			if (temp_hero = CheckClass::isHero(other))//added another equals was single equals before
+			{
+				perror("you cannot talk to this type of object");
+			}
+		}
+		else {
+			return;
+		}
 
-	/*Creates log entry for player's reply point selection(choice[1])
-	and stores entry in log for current conversation.*/
-	ConversationLogObj* conv_log_obj = new ConversationLogObj();
-	Memory* mem = nullptr;
-
-	conv_log_obj->set_who(1);
-	conv_log_obj->set_conv_point(Containers::conv_point_table[choice[1]]);
-	conv_log_obj->update_number_of_times_said();
-
-	/*set topic to appropriate hero if player is replying to hero-related
-	conversation point.*/
-	if (choice[1].find("Move_To") != string::npos || choice[1].find("Ask_About") != string::npos) {
-			conv_log_obj->set_topic(dialogue.hero_name_to_int(choice[3]), mem);
+		if (player_conv_point_choice == "Accept Alliance Offer") {
+			dialogue_point diog_pt = {"Confirm Alliance","Confirm Alliance"};
+			std::string reply_pt_sentence = dialogue.gen_dialog(diog_pt, temp_hero);
+			message = other->getName() + ": " + reply_pt_sentence + "\n\n";
+		}
+		else if (player_conv_point_choice == "Accept Duel") {
+			dialogue_point diog_pt = { "Confirm Duel","Confirm Duel"};
+			std::string reply_pt_sentence = dialogue.gen_dialog(diog_pt, temp_hero);
+			message = other->getName() + ": " + reply_pt_sentence + "\n\n";
+		}
+		else if (player_conv_point_choice == "Accept Spar Request") {
+			dialogue_point diog_pt = {"Confirm Spar","Confirm Spar" };
+			std::string reply_pt_sentence = dialogue.gen_dialog(diog_pt, temp_hero);
+			message = other->getName() + ": " + reply_pt_sentence + "\n\n";
+		}
+		state = 7;
 	}
-	else
-		conv_log_obj->set_topic(NoTopic(), mem);
-
-	conversation_log_obj_pointer_vec.push_back(conv_log_obj);
-	
-	/*insert the topic at the beginning of the player's reply point sentence
-	if they are replying to a hero-related conversation point*/
-	if (conv_log_obj->get_topic().first != NoTopic() && (choice[1].find("Move_To") != string::npos || choice[1].find("Ask_About") != string::npos))
-		reply_pt_sentence.insert(0, choice[3]);
-
-	message = player->getName()+": "+reply_pt_sentence +"\n\n";
-	PlayerChoose();//start all over from player conversation point again
 }
 
 /*Calls functions from the DialogueHelper to handle generating the npc's
@@ -212,15 +266,23 @@ conversation and reply points and stores the entries in the log
 for the current conversation.*/
 void DialogueController::otherConversationPoint(dialogue_point line)
 {
-	dialogue_point point = dialogue.choose_conv_pt(conversation_log_obj_pointer_vec);
+	dialogue_point point = dialogue.choose_conv_pt(curr_conversation_log);
 
 	/*Only sets the topic of the npc's conversation point if it is not
 	a special case. Special case dialogue points are typically only
 	of size 2.*/
 	if (point[0] != "No_More_Phrases" && point[0] != "Already_Asked" && point.size() >= 4)
-		point[3] = curr_hero_topic;
+		point[Topic] = curr_hero_topic;
 
-	replyString = point[1];
+	/*handles special case of quest conversation point by making
+	sure it's dialogue point will be the same size as the basic
+	conversation points like "Ask_Name" etc.*/
+	if (point[ConvPointName].find("Quest") != string::npos) {
+		point.push_back("");
+		point.push_back("");
+	}
+	    
+	replyString = point[ConvPointName];
 
 	Hero* temp_hero = nullptr;
 	if (other->getType() >= WorldObj::TYPE_NPC) {
@@ -237,50 +299,50 @@ void DialogueController::otherConversationPoint(dialogue_point line)
 	std::string con_pt_sentence = dialogue.gen_dialog(point, temp_hero);
 
 	/*Stores the npc's conversation and reply points as entries in the
-	log for the current conversation. The reply point is line[1] and the
-	conversation point is point[1].*/
-    if(line[1] != "Already_Asked"){
+	log for the current conversation. The reply point is line[ConvPointName()] and the
+	conversation point is point[ConvPointName()].*/
+    if(line[ConvPointName] != "Already_Asked"){
 	    ConversationLogObj* conv_log_obj = new ConversationLogObj();
 	    Memory* mem = nullptr;
 
 	    //initialization of conversation log entry for reply point
 	    conv_log_obj->set_who(dialogue.hero_name_to_int(other->getName()));
-	    conv_log_obj->set_conv_point(Containers::conv_point_table[line[1]]);
+	    conv_log_obj->set_conv_point(Containers::conv_point_table[line[ConvPointName]]);
 	    conv_log_obj->update_number_of_times_said();
 
 		/*insert the topic at the beginning of the npc's reply point sentence
 		if they are replying to a hero-related conversation point.*/
-	    if (line[1].find("Move_To") != string::npos || line[1].find("Ask_About") != string::npos) {
-		    conv_log_obj->set_topic(dialogue.hero_name_to_int(line[3]), mem); //make the topic Oya if the player selected a move to action
-		    reply_pt_sentence.insert(0, line[3]);
+	    if (line[ConvPointName].find("Take Advice") != string::npos || line[ConvPointName].find("Tell About") != string::npos) {
+		    conv_log_obj->set_topic(dialogue.hero_name_to_int(line[Topic]), mem); //make the topic Oya if the player selected a move to action
+		    replace_all(reply_pt_sentence,"HERO",line[Topic]);
 	    }
 	    else
-		    conv_log_obj->set_topic(NoTopic(), mem);
+		    conv_log_obj->set_topic(NoTopic, mem);
 
-	    conversation_log_obj_pointer_vec.push_back(conv_log_obj);
+	    curr_conversation_log.push_back(conv_log_obj);
 
 	//initialization of conversation log entry for conversation point
 		ConversationLogObj* conv_log_obj2 = new ConversationLogObj();
 		Memory* mem2 = nullptr;
 
 		conv_log_obj2->set_who(dialogue.hero_name_to_int(other->getName()));
-		conv_log_obj2->set_conv_point(Containers::conv_point_table[point[1]]);
+		conv_log_obj2->set_conv_point(Containers::conv_point_table[point[ConvPointName]]);
 		conv_log_obj2->update_number_of_times_said();
 
 		/*insert the topic at the end of the npc's conversation point sentence
 		if they are saying a hero-related conversation point.*/
-	    if (point[1].find("Move_To") != string::npos || point[1].find("Ask_About") != string::npos){
-			conv_log_obj2->set_topic(dialogue.hero_name_to_int(point[3]), mem2);
-		    con_pt_sentence.append(point[3]);
+	    if (point[ConvPointName].find("Advise To") != string::npos || point[ConvPointName].find("Ask About") != string::npos){
+			conv_log_obj2->set_topic(dialogue.hero_name_to_int(point[Topic]), mem2);
+		    replace_all(con_pt_sentence,"HERO",point[Topic]);
 	    }
 	    else
-			conv_log_obj2->set_topic(NoTopic(), mem2);
+			conv_log_obj2->set_topic(NoTopic, mem2);
 
-	    conversation_log_obj_pointer_vec.push_back(conv_log_obj2);
+	    curr_conversation_log.push_back(conv_log_obj2);
     }
 	
 	message = other->getName() + ": " + reply_pt_sentence + "\n" +con_pt_sentence;
-	replyOptions = dialogue.get_possible_reply_pts(point[1], optionsIndex);
+	replyOptions = dialogue.get_possible_reply_pts(point[ConvPointName], optionsIndex);
 	
 	select = 0;
 
@@ -288,7 +350,7 @@ void DialogueController::otherConversationPoint(dialogue_point line)
 	point, if the npc tells the player that they already asked them something,
 	or if an npc runs out of relevant conversation points to say.
 	*/
-	if (point[1] != "No_More_Phrases" && point[1] != "Already_Asked" && point[1] != "")
+	if (point[ConvPointName] != "No_More_Phrases" && point[ConvPointName] != "Already_Asked" && point[ConvPointName] != "")
 		state = 2;
 	else
 		state = 1;//skip player reply if npc cannot give a conversation point
@@ -302,16 +364,69 @@ npc's conversation point and to display the npc's reply and conversation
 points.*/
 void DialogueController::otherResponse(std::string info, std::string hero_topic)
 {
-	dialogue_point line = dialogue.choose_reply_pt(info, optionsIndex,conversation_log_obj_pointer_vec);
+	Hero* temp_hero = nullptr;
+	if (other->getType() >= WorldObj::TYPE_NPC) {
+		if (temp_hero = CheckClass::isHero(other))
+		{
+			perror("you cannot talk to this type of object");
+		}
+	}
+	else {
+		return;
+	}
 
-	/*avoids setting a topic when npc replies with "You already asked me that"
-	 or if npc says any other special case reply. Special case replies are
-	 typically vectors with a size of only 2.*/
-	if(line.size() >= 4)
-	    line[3] = hero_topic;
+	if (state != 8) {
+		dialogue_point line = dialogue.choose_reply_pt(info, optionsIndex, curr_conversation_log);
+		replyString = line[ConvPointName];
 
-	state = 3;
-	otherConversationPoint(line);
+		/*avoids setting a topic when npc replies with "You already asked me that"
+		 or if npc says any other special case reply. Special case replies are
+		 typically vectors with a size of only 2.*/
+		if (line.size() >= 4)
+			line[Topic] = hero_topic;
+
+
+		if (replyString == "Accept Alliance Offer") {
+			dialogue_point diog_pt = { "Accept Alliance Offer","Accept Alliance Offer" };
+			std::string reply_pt_sentence = dialogue.gen_dialog(diog_pt, temp_hero);
+			message = other->getName() + ": " + reply_pt_sentence + "\n\n";
+			state = 8;
+		}
+		else if (replyString == "Accept Duel") {
+			dialogue_point diog_pt = { "Accept Duel","Accept Duel" };
+			std::string reply_pt_sentence = dialogue.gen_dialog(diog_pt, temp_hero);
+			message = other->getName() + ": " + reply_pt_sentence + "\n\n";
+			state = 8;
+		}
+		else if (replyString == "Accept Spar Request") {
+			dialogue_point diog_pt = { "Accept Spar Request","Accept Spar Request" };
+			std::string reply_pt_sentence = dialogue.gen_dialog(diog_pt, temp_hero);
+			message = other->getName() + ": " + reply_pt_sentence + "\n\n";
+			state = 8;
+		}
+		else {
+			state = 3;
+			otherConversationPoint(line);
+		}
+	}
+	else {
+		if (replyString == "Accept Alliance Offer") {
+			dialogue_point diog_pt = { "Confirm Alliance","Confirm Alliance" };
+			std::string reply_pt_sentence = dialogue.gen_dialog(diog_pt, temp_hero);
+			message = player->getName() + ": " + reply_pt_sentence + "\n\n";
+		}
+		else if (replyString == "Accept Duel") {
+			dialogue_point diog_pt = { "Confirm Duel","Confirm Duel" };
+			std::string reply_pt_sentence = dialogue.gen_dialog(diog_pt, temp_hero);
+			message = player->getName() + ": " + reply_pt_sentence + "\n\n";
+		}
+		else if (replyString == "Accept Spar Request") {
+			dialogue_point diog_pt = { "Confirm Spar","Confirm Spar" };
+			std::string reply_pt_sentence = dialogue.gen_dialog(diog_pt, temp_hero);
+			message = player->getName() + ": " + reply_pt_sentence + "\n\n";
+		}
+		state = 9;
+	}
 }
 
 /*Returns the player's conversation point dialogue options that 
@@ -333,7 +448,7 @@ vector<std::vector<std::string>> DialogueController::getReplyOptions()
 	vector<std::vector<std::string>> tmp;
 	for (int i = 0; i < replyOptions.size(); i++)
 	{
-		    replyOptions[i][3] = curr_hero_topic;//sets the topic for reply
+		    replyOptions[i][Topic] = curr_hero_topic;//sets the topic for reply
 			tmp.push_back(replyOptions[i]);
 	}
 	return tmp;
@@ -356,8 +471,16 @@ void DialogueController::startConversation(WorldObj* n, bool playerTalk)
 {
 	other = n;
 	Hero* temp_hero = CheckClass::isHero(other);
-	message = n->getName() + ": " + dialogue.gen_dialog({ "Greeting","Greeting"},temp_hero);
-	
+	std::string start_message = "";
+
+	/*Uncomment the code below when giving quest through dialog is implemented*/
+	//if(quest_in_progress)
+		//message = n->getName() + ": " + dialogue.gen_dialog({ "Quest_In_Progress","Quest_In_Progress" }, temp_hero);
+	//else if(quest_complete)
+	    //message = n->getName() + ": " + dialogue.gen_dialog({ "Quest_Complete","Quest_Complete"},temp_hero);
+	//else
+		message = n->getName() + ": " + dialogue.gen_dialog({ "Greeting","Greeting" }, temp_hero);
+
 	if (playerTalk) {
  		PlayerChoose();
 	}
@@ -386,15 +509,15 @@ void DialogueController::exitDialogue()
 	state=0;
 	DialogueController::scroll_control = 0;
 	
-	for (int i = 0; i < conversation_log_obj_pointer_vec.size(); i++) {
+	for (int i = 0; i < curr_conversation_log.size(); i++) {
 		
 		//delete memory allocated for instance of Memory class here
 		     //delete tmp_top.second;
 		//delete memory allocated for conversation log object here
-		    //delete conversation_log_obj_pointer_vec[i];
+		    delete curr_conversation_log[i];
 	}
 
-	conversation_log_obj_pointer_vec.clear();
+	curr_conversation_log.clear();
 
 	remove_hero_related_conv_points();
 	first_call = true;
@@ -416,7 +539,7 @@ void DialogueController::offerQuest_hack_() {
 	dialogue_point point = {  "", "give_quest_hack"  }; // = dialogue.choose_conv_pt(line, optionsIndex);
 	replyString = "You Suck";
 
-	point[1]="give_quest_hack";
+	point[ConvPointName]="give_quest_hack";
 	point[0] = "quest";
 
 	Hero* temp_hero;
@@ -450,11 +573,11 @@ void DialogueController::add_hero_related_conv_points() {
 	for (auto itor = Containers::conv_point_table.begin(); itor != Containers::conv_point_table.end(); ++itor) {
 		for (int j = 0; j < heroes_player_knows.size(); ++j) {
 			if (heroes_player_knows[j] != dialogue.hero_name_to_int(other->getName())) {
-				if (itor->second->get_topic() != "" && itor->second->get_name().find("Move_To",0) == string::npos && itor->second->dpoint[2] == "") {
+				if (itor->second->get_topic() != "" && itor->second->get_name().find("Ask About",0) != string::npos && itor->second->dpoint[CorrespondingConvPt] == "") {
 					tmp_dpoint = itor->second->dpoint;
-					tmp_dpoint[3] = dialogue.int_to_hero_name(heroes_player_knows[j]);
-					options[3].push_back(tmp_dpoint);
-					dialogue.get_possible_conv_pts_ref()[3].push_back(tmp_dpoint);
+					tmp_dpoint[Topic] = dialogue.int_to_hero_name(heroes_player_knows[j]);
+					options[QuestionMarkIcon].push_back(tmp_dpoint);
+					dialogue.get_possible_conv_pts_ref()[QuestionMarkIcon].push_back(tmp_dpoint);
 				}
 			}
 		}
@@ -467,11 +590,11 @@ void DialogueController::add_hero_related_conv_points() {
 	for (auto itor = Containers::conv_point_table.begin(); itor != Containers::conv_point_table.end(); ++itor) {
 		for (int j = 0; j < heroes_player_knows.size(); ++j) {
 			if (heroes_player_knows[j] != dialogue.hero_name_to_int(other->getName())) {
-				if (itor->second->get_topic() != "" && itor->second->get_name().find("Ask_About", 0) == string::npos && itor->second->dpoint[2] == "") {
+				if (itor->second->get_topic() != "" && itor->second->get_name().find("Advise To", 0) != string::npos && itor->second->dpoint[CorrespondingConvPt] == "") {
 					tmp_dpoint = itor->second->dpoint;
-					tmp_dpoint[3] = dialogue.int_to_hero_name(heroes_player_knows[j]);
-					options[2].push_back(tmp_dpoint);
-					dialogue.get_possible_conv_pts_ref()[2].push_back(tmp_dpoint);
+					tmp_dpoint[Topic] = dialogue.int_to_hero_name(heroes_player_knows[j]);
+					options[NotorietyIcon].push_back(tmp_dpoint);
+					dialogue.get_possible_conv_pts_ref()[NotorietyIcon].push_back(tmp_dpoint);
 				}
 			}
 		}
@@ -484,9 +607,9 @@ options.*/
 void DialogueController::remove_hero_related_conv_points() {
 	/*removes hero-related conversation points that are associated with the
 	question mark icon from player's dialog options vector */
-	for (int i = 0; i < options[3].size();) {
-		if (options[3][i][1].find("Move_To", 0) != string::npos || options[3][i][1].find("Ask_About", 0) != string::npos) {
-			options[3].erase(options[3].begin() + i);
+	for (int i = 0; i < options[QuestionMarkIcon].size();) {
+		if (options[QuestionMarkIcon][i][ConvPointName].find("Advise To", 0) != string::npos || options[QuestionMarkIcon][i][ConvPointName].find("Ask About", 0) != string::npos) {
+			options[QuestionMarkIcon].erase(options[QuestionMarkIcon].begin() + i);
 		}
 		else
 			++i;
@@ -494,9 +617,9 @@ void DialogueController::remove_hero_related_conv_points() {
 
 	/*removes hero-related conversation points from 3D vector of possible
 	conversation points that are associated with the question mark icon*/
-	for (int i = 0; i < dialogue.get_possible_conv_pts_ref()[3].size();) {
-		if (dialogue.get_possible_conv_pts_ref()[3][i][1].find("Move_To", 0) != string::npos || dialogue.get_possible_conv_pts_ref()[3][i][1].find("Ask_About", 0) != string::npos) {
-			dialogue.get_possible_conv_pts_ref()[3].erase(dialogue.get_possible_conv_pts_ref()[3].begin() + i);
+	for (int i = 0; i < dialogue.get_possible_conv_pts_ref()[QuestionMarkIcon].size();) {
+		if (dialogue.get_possible_conv_pts_ref()[QuestionMarkIcon][i][ConvPointName].find("Advise To", 0) != string::npos || dialogue.get_possible_conv_pts_ref()[QuestionMarkIcon][i][ConvPointName].find("Ask About", 0) != string::npos) {
+			dialogue.get_possible_conv_pts_ref()[QuestionMarkIcon].erase(dialogue.get_possible_conv_pts_ref()[QuestionMarkIcon].begin() + i);
 		}
 		else
 			++i;
@@ -504,9 +627,9 @@ void DialogueController::remove_hero_related_conv_points() {
 
 	/*removes hero-related conversation points that are associated with the 
 	notoriety icon from player's dialog options vector */
-	for (int i = 0; i < options[2].size();) {
-		if (options[2][i][1].find("Move_To", 0) != string::npos || options[2][i][1].find("Ask_About", 0) != string::npos) {
-			options[2].erase(options[2].begin() + i);
+	for (int i = 0; i < options[NotorietyIcon].size();) {
+		if (options[NotorietyIcon][i][ConvPointName].find("Advise To", 0) != string::npos || options[NotorietyIcon][i][ConvPointName].find("Ask About", 0) != string::npos) {
+			options[NotorietyIcon].erase(options[NotorietyIcon].begin() + i);
 		}
 		else
 			++i;
@@ -514,11 +637,37 @@ void DialogueController::remove_hero_related_conv_points() {
 
 	/*removes hero-related conversation points from 3D vector of possible 
 	conversation points that are associated with the notoriety icon*/
-	for (int i = 0; i < dialogue.get_possible_conv_pts_ref()[2].size();) {
-		if (dialogue.get_possible_conv_pts_ref()[2][i][1].find("Move_To", 0) != string::npos || dialogue.get_possible_conv_pts_ref()[2][i][1].find("Ask_About", 0) != string::npos) {
-			dialogue.get_possible_conv_pts_ref()[2].erase(dialogue.get_possible_conv_pts_ref()[2].begin() + i);
+	for (int i = 0; i < dialogue.get_possible_conv_pts_ref()[NotorietyIcon].size();) {
+		if (dialogue.get_possible_conv_pts_ref()[NotorietyIcon][i][ConvPointName].find("Advise To", 0) != string::npos || dialogue.get_possible_conv_pts_ref()[NotorietyIcon][i][ConvPointName].find("Ask About", 0) != string::npos) {
+			dialogue.get_possible_conv_pts_ref()[NotorietyIcon].erase(dialogue.get_possible_conv_pts_ref()[NotorietyIcon].begin() + i);
 		}
 		else
 			++i;
+	}
+}
+
+/*Updates the number_of_times_said field for the ConversationLogObj arg
+that is passed in and updates the number_of_times_said field for any
+ConversationLogObj in the conversation log vector that has a pointer
+to the same conversation point as the arg.*/
+/*void DialogueController::update_num_duplicate(ConversationLogObj* conv_log_entry) {
+	for (int i = 0; i < curr_conversation_log.size() - 1; ++i) {
+		if ((curr_conversation_log[i]->get_conv_point() == conv_log_entry->get_conv_point())
+			&& (curr_conversation_log[i]->get_topic() == conv_log_entry->get_topic())
+			&& (curr_conversation_log[i]->get_who() == conv_log_entry->get_who()))
+		{
+
+		}
+	}
+}*/
+
+/*Replaces all appearances of "from" in "str" with "to"*/
+void DialogueController::replace_all(std::string& str, const std::string& from, const std::string& to) {
+	if (from.empty())
+		return;
+	size_t start_pos = 0;
+	while ((start_pos = str.find(from, start_pos)) != std::string::npos) {
+		str.replace(start_pos, from.length(), to);
+		start_pos += to.length(); // In case 'to' contains 'from', like replacing 'x' with 'yx'
 	}
 }

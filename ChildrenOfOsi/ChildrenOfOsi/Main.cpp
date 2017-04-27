@@ -1559,7 +1559,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	Planner* OyaPlanner = new Planner(oya);
 	AIController::set_plan(YEMOJA, YemojaPlanner);
 	AIController::set_plan(OYA, OyaPlanner);
-	/*
+	
 	Action* test_ally = new Action(nullptr, nullptr, nullptr, 10, 1, "Create Alliance", "execute_train");
 	Action* test_train = new Action(staticRec, oya, nullptr, 10, 1, "Train", "execute_train");
 
@@ -1568,31 +1568,31 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	RelPrecon* prec1 = new RelPrecon(Preconditions::AFF, 30);
 	RelPost* post1 = new RelPost(Postcondition::STR, 15);
 	RelPost* post2 = new RelPost(Postcondition::AFF, 15);
-	*/
+	
 
 	/*
 	test_ally->req_preconds.push_back(std::make_shared<RelPrecon>(*prec));
 	test_ally->doer_succ_postconds.push_back(std::make_shared<RelPost>(*post));
-
+	*/
 	test_train->req_preconds.push_back(std::make_shared<RelPrecon>(*prec1));
 	test_train->doer_succ_postconds.push_back(std::make_shared<RelPost>(*post1));
 	test_train->doer_succ_postconds.push_back(std::make_shared<RelPost>(*post2));
 	
 
-	ActionPool act_pool(Alex);
-	act_pool.macro.push_back(test_ally);
-	act_pool.micro.push_back(test_train);
-	act_pool.updateMiddle();
-	vector<Action*> actions = act_pool.getActions(staticRec, test_ally);
-	for (auto action : actions) {
+	//ActionPool act_pool(Alex);
+	//act_pool.macro.push_back(test_ally);
+	//act_pool.micro.push_back(test_train);
+	//act_pool.updateMiddle();
+	//vector<Action*> actions = act_pool.getActions(staticRec, test_ally);
+	//for (auto action : actions) {
 		//std:://cout << action->getName() << std::endl;
-	}
+	//}
 
-	Alex->add_quest(test_ally, 8);
-	staticRec->add_quest(test_train, 1);
+	//Alex->add_quest(test_ally, 8);
+	//staticRec->add_quest(test_train, 1);
 	//Alex->add_quest(test_train, 2);
-	questM->heros.push_back(Alex);
-	questM->heros.push_back(staticRec);
+	//questM->heros.push_back(Alex);
+	//questM->heros.push_back(staticRec);
 	
 	///////////////////////////////////////////////////////////////////////////////////////////
 	///////////////////////////////////////////////////////////////////////////////////////////
@@ -1602,12 +1602,13 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	///////////////////////////////////////////////////////////////////////////////////////////
 	///////////////////////////////////////////////////////////////////////////////////////////
 	
-	// THIS IS BEING RESET IN THE GAME LOOP. planner->get_current_action returns nullptr
-	YemojaPlanner->set_current_action(test_train);
-	*/
-	//AIController::generate_end_state(YEMOJA, OYA);
+	// THIS IS BEING RESET IN THE GAME LOOP. planner->get_current_action returns nullptr*/
+	
+	
+	AIController::generate_end_state(YEMOJA, OYA);
 	AIController::init_plans();
-
+    test_train->setDoer(staticRec);
+	YemojaPlanner->set_current_action(test_train);
 
 	/*
 	WorldObj* tree = new WorldObj(Vector2f(4000, 2600), 800, 500);
@@ -1752,6 +1753,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 			//cout << "currently in the main menu" << endl;
 			for (int i = 0; i < 10; i++) {
 				cout << "Press Enter to start game" << endl;
+				cout << Containers::hero_table["Yemoja"]->rel[1]->getAffinity() << endl;
 			}
 
 			if (iController->current_game_state != game_state::main_menu) {

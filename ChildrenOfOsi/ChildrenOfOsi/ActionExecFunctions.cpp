@@ -50,6 +50,7 @@ void ActionExecFunctions::execute_train(Action* train) {
 		//std::cout << (train->getDoer()->destination).getXloc() << ":" << (train->getDoer()->destination).getXloc() << std::endl;
 
 		train->getDoer()->set_action_destination(&train->getDoer()->getVillage()->get_village_location()); //should select from set of pre-defined, stored in Hero, or village?
+		cout << "dest is " << train->getDoer()->get_action_destination()->getXloc() << ", " << train->getDoer()->get_action_destination()->getYloc() << endl;
 		ActionHelper::create_memory(train, train->getDoer());
 		train->checkpoint++;
 		break;
