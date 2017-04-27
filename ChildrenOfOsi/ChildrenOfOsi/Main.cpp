@@ -178,7 +178,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 
 
 	// Player* Alex = new Player(SHANGO, Vector2f(6445.0, 10155.0), 150.0, 150.0);	//init player
-
+	
 
 	Region* Marsh = new Region("Marsh", "Music/RegionThemes/MarshRegion.flac", "Music/HeroThemes/ogun.flac", { 1000,1000 });
 	Region* Desert = new Region("Desert", "Music/RegionThemes/DesertRegion.flac", "Music/HeroThemes/oya.flac", { 5000,5000 });
@@ -1079,6 +1079,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 		Alex->sprite.reset_texture();
 		glFinish();
 	});
+
 	HGLRC loaderContext1 = wglCreateContext(hdc);
 	wglShareLists(mainContext, loaderContext1);
 	std::thread t1([=]() {

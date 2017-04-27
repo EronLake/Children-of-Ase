@@ -143,7 +143,7 @@ void ObjConfig::make_stuff(vector<WorldObj*>* recVec, ChildrenOfOsi* gameplay_fu
 		int XDistancs = abs(topLeftx - topRightx);
 		int YDistancs = abs(topLefty - botLefty);
 		srand(time(0));
-		for (int i = 101; i < 250; i++) {
+		for (int i = 400; i < 600; i++) {
 			float randomX;
 			float randomY;
 			int offsetLeft;
@@ -158,26 +158,62 @@ void ObjConfig::make_stuff(vector<WorldObj*>* recVec, ChildrenOfOsi* gameplay_fu
 			string WhichSprite;
 			if (PlacePlant) {
 				string PlantSprites[]{
-					"Jungle_Bush",
-					"Jungle_Flower1",
-					"Jungle_Flower2",
-					"Jungle_Flower3",
-					"Jungle_Plant1",
-					"Jungle_Plant2",
-					"Jungle_Plant3",
-					"Jungle_Plant4",
-					"Jungle_Bush",
-					"Jungle_Flower1",
-					"Jungle_Flower2",
-					"Jungle_Flower3",
 					"Jungle_shrub1",
 					"Jungle_shrub2",
 					"Jungle_shrub3",
-					"Jungle_shrub4"
+					"Jungle_shrub4",
+					"Jungle_shrub5",
+					"Jungle_shrub6",
 
 				};
-				WhichSprite = PlantSprites[rand() % 12];
-				set_world_obj(recVec, gameplay_func, tBuffer, randomX, randomY, 50, 50, TreeName.str(), WhichSprite, 1, 1, 1, 1, 1,JUNGLE);
+				int random = rand() % 6;
+				WhichSprite = PlantSprites[random];
+				int randomShrubsize= rand() % (175 * 100 - 75 * 100 + 1) + 10 * 100;
+				randomShrubsize = randomShrubsize / 100;
+				int offestleft = randomShrubsize;
+				switch (random)
+				{
+				case 0:
+					offsetLeft = randomShrubsize*.2473;
+					offsetRight = randomShrubsize*.2448;
+					offsetTop = randomShrubsize*.5467;
+					offsetBot = randomShrubsize*.3125;
+					break;
+				case 1:
+					offsetLeft = randomShrubsize*.2473;
+					offsetRight = randomShrubsize*.2448;
+					offsetTop = randomShrubsize*.5467;
+					offsetBot = randomShrubsize*.3125;
+					break;
+				case 2:
+					offsetLeft = randomShrubsize*.2473;
+					offsetRight = randomShrubsize*.2448;
+					offsetTop = randomShrubsize*.5467;
+					offsetBot = randomShrubsize*.3125;
+					break;
+				case 3:
+					offsetLeft = randomShrubsize*.2875;
+					offsetRight = randomShrubsize*.2175;
+					offsetTop = randomShrubsize*.625;
+					offsetBot = randomShrubsize*.0875;
+					break;
+				case 4:
+					offsetLeft = randomShrubsize*.329;
+					offsetRight = randomShrubsize*.249;
+					offsetTop = randomShrubsize*.714;
+					offsetBot = randomShrubsize*.1;
+					break;
+				case 5:
+					offsetLeft = randomShrubsize*.3125;
+					offsetRight = randomShrubsize*.325;
+					offsetTop = randomShrubsize*.479;
+					offsetBot = randomShrubsize*.3375;
+					break;
+				}
+
+
+
+				set_world_obj(recVec, gameplay_func, tBuffer, randomX, randomY, randomShrubsize, randomShrubsize, TreeName.str(), WhichSprite, 1, offsetLeft, offsetRight, offsetTop, offsetBot, JUNGLE);
 
 			}
 			else {
@@ -256,6 +292,7 @@ void ObjConfig::make_stuff(vector<WorldObj*>* recVec, ChildrenOfOsi* gameplay_fu
 	}
 
 }
+
 
 
 
