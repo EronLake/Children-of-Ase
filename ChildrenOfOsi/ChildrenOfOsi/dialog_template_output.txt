@@ -1,2 +1,7 @@
+<<<<<<< HEAD
 Conversation Point Name: Boast Appeal 120
 Conversation Point Name: Ask_Origin Appeal 100
+=======
+Conversation Point Name: Advise To Train With Appeal 0
+Conversation Point Name: Recruit_For_Party Appeal 0
+>>>>>>> cc941e762f796b7dffe476a96380e5a2ab4f3441

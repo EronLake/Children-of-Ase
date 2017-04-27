@@ -40,6 +40,10 @@ std::string ConversationPoint::get_topic() {
 	return topic;
 }
 
+Action* ConversationPoint::get_action() {
+	return act;
+}
+
 void ConversationPoint::set_icon(std::string val) {
 	icon = val;
 }
@@ -54,6 +58,10 @@ void ConversationPoint::set_name(std::string val) {
 
 void ConversationPoint::set_topic(std::string val) {
 	topic = val;
+}
+
+void ConversationPoint::set_action(Action* action) {
+	act = action;
 }
 
 
