@@ -23,6 +23,8 @@ cdTime(0), swingLeft(true)
   party = nullptr;
   action_destination= nullptr;
   killable = true;
+  incapacitated = false;
+  down_time = 0;
 }
 
 Soldier::Soldier(Vector2f p_topLeft, float p_width, float p_height): NPC(p_topLeft, p_width, p_height),
@@ -41,6 +43,8 @@ cdTime(0), swingLeft(true)
   party = nullptr;
   action_destination = nullptr;
   killable = true;
+  incapacitated = false;
+  down_time = 0;
 }
 
 void Soldier::addAttackType(Attack* a)
@@ -168,6 +172,12 @@ void Soldier::updateCD()
       i->second--;
     }
   }
+  if (incapacitated) {
+	  if (down_time <= 0) {
+		  this->capacitate();
+	  }
+	  else down_time--;
+  }
 
 
   if(ase < maxAse)
@@ -199,8 +209,11 @@ void Soldier::defeat()
 void Soldier::defeat()
 {
 	if (!killable) {
-		incapacitated = true;
-		this->getParty()->down_member(this);
+		if (!incapacitated) {
+			down_time = 1800;
+			incapacitated = true;
+			this->getParty()->down_member(this);
+		}
 	}
 	else {
 		kill();
@@ -209,6 +222,8 @@ void Soldier::defeat()
 
 void Soldier::capacitate()
 {
+	this->setHealth(get_max_health()/2);
+	this->getParty()->up_member(this);
 	incapacitated = false;
 }
 

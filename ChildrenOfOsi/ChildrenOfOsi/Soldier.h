@@ -40,6 +40,7 @@ class Soldier: public NPC
   int getAse() { return this->ase; };
   int getMaxAse() { return this->maxAse; }
   int getAttackIndex(Attack* atk);
+  bool get_incapacitated() { return incapacitated; };
 
  /* bool isAllyOf(Soldier *);
   bool isAllyOf(Party *);
@@ -123,6 +124,7 @@ class Soldier: public NPC
   std::size_t pursuitRange;
 
   int cdTime;
+  int down_time;
   int stamina;
   int maxStamina;
   int ase;

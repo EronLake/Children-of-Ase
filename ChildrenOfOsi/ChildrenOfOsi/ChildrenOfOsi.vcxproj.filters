@@ -224,8 +224,11 @@
     <ClCompile Include="ThreadManager.cpp" />
     <ClCompile Include="QuestManager.cpp" />
     <ClCompile Include="ConversationLogObj.cpp" />
-    <ClCompile Include="PlayerActExecFunctions.cpp" />
     <ClCompile Include="Fight.cpp" />
+    <ClCompile Include="PlayerActExecFunctions.cpp">
+      <Filter>AI\Actions</Filter>
+    </ClCompile>
+    <ClCompile Include="RegionState.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AIHelper.h">
@@ -470,8 +473,11 @@
     <ClInclude Include="QuestManager.h" />
     <ClInclude Include="ConversationLogObj.h" />
     <ClInclude Include="GameState.h" />
-    <ClInclude Include="PlayerActExecFunctions.h" />
     <ClInclude Include="Fight.h" />
+    <ClInclude Include="PlayerActExecFunctions.h">
+      <Filter>AI\Actions</Filter>
+    </ClInclude>
+    <ClInclude Include="RegionState.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="audio_test.txt">
@@ -586,6 +592,9 @@
     <None Include="Tag_config.json" />
     <None Include="SilverSoldier_dialog.json" />
     <None Include="Oshosi_dialog.json" />
+    <None Include="config_jungle.json">
+      <Filter>Game Objects</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="ChildrenOfOsi1.rc" />

@@ -52,6 +52,8 @@ static int frame_count = 0;
 #define START_FULLSCREEN false
 #define MOUSE_VISIBLE true
 
+
+
 /*
 this variable allows the game to zoom and out
 this zooms is used in renderHelper.cpp GameWindow.cpp and Input.cpp
@@ -60,7 +62,7 @@ also specified to zoom for the map editor mode
 #if MAP_EDITOR 
 #define map_zoom 4
 #else 
-#define map_zoom 1
+#define map_zoom 1.3
 
 #endif
 

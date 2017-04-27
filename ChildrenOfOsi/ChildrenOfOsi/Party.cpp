@@ -265,6 +265,8 @@ void Party::setMode(int m)
 		  for (auto& member : this->members) {
 			  member->setHold(false);
 			  member->setInCombat(false);
+			  member->destination = member->getParty()->get_home();
+			  member->waypoint = member->getParty()->get_home();
 		  }
 		  default_def_rad();
 		  break;

@@ -130,6 +130,7 @@ bool CombatController::find_closest_friend(Soldier* sold1, int state) {
 void CombatController::update_soldier(Soldier* sold1, int state) {
 	///update cooldowns
 	sold1->updateCD();
+	if (sold1->get_incapacitated())return;
 	if (sold1->getParty() == nullptr || sold1->getParty() == NULL)return;
 	if (find_closest_friend(sold1, state)) {
 		//std::lock_guard<std::mutex> guard(mux);
@@ -190,8 +191,8 @@ void CombatController::move_to_target(Soldier* sold1, int state) {
 				if (!sold1->getInCombat()) {
 					if (dist(sold1->destination, sold1->getParty()->get_defend()) > sold1->getParty()->get_def_rad()) {
 						//		//std:://cout << "leader too far" << std::endl;
-						sold1->waypoint = sold1->getParty()->get_home();
-						sold1->destination = sold1->getParty()->get_home();
+						sold1->waypoint = sold1->getParty()->get_defend();
+						sold1->destination = sold1->getParty()->get_defend();
 						gameplay_functions->stop(sold1);
 						return;
 					}
@@ -284,18 +285,14 @@ void CombatController::party_leader_update(Soldier* sold1, int state) {
 		sold1->waypoint = next;
 		move_to_target(sold1, state);
 	} else if (sold1->getParty()->getMode() == Party::MODE_FLEE) {
-		Vector2f home = sold1->getParty()->get_home();
-		sold1->destination = home;
-		sold1->waypoint = home;
-		move_to_target(sold1, state);
-		if (sold1->destination == Vector2f(0, 0)) {
-			sold1->getParty()->setMode(Party::MODE_FLEE);
-			if (home == sold1->getParty()->get_village()->get_village_location()) {
-				sold1->getParty()->removeSoldier(sold1,false);
-				sold1->getParty()->get_village()->barracks->addToParty(sold1,false);
-			}
+		if (sold1->destination == Vector2f(0, 0) || sold1->destination == sold1->getVillage()->get_village_location()) {
+			sold1->getParty()->removeSoldier(sold1,false);
+			sold1->getVillage()->barracks->addToParty(sold1,false);
 			////std:://cout << sold1->getID() << " is idling now" << std::endl;
 		}
+		sold1->destination = sold1->getVillage()->get_village_location();
+		sold1->waypoint = sold1->getVillage()->get_village_location();
+		move_to_target(sold1, state);
 	}
 }
 
