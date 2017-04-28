@@ -210,7 +210,7 @@ void Soldier::defeat()
 {
 	if (!killable) {
 		if (!incapacitated) {
-			down_time = 1800;
+			down_time = 900;
 			incapacitated = true;
 			this->getParty()->down_member(this);
 		}

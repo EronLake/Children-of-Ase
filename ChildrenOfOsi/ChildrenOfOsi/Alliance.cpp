@@ -120,6 +120,16 @@ vector<Alliance*> Alliance::get_enemy_alliances() {
 	return ret;
 }
 
+vector<Hero*> Alliance::get_leaders() {
+	vector<Hero*> leads;
+	for (auto it = allies.begin(); it != allies.end(); ++it) {
+		Hero* ret = (*it)->leader;
+		if (ret->getType() == WorldObj::TYPE_PLAYER) return { ret };
+		leads.push_back(ret);
+	}
+	return leads;
+}
+
 vector<NPC*> Alliance::get_alliance_members() {
 	vector<NPC*> tmp;
 	for (auto it = allies.begin(); it != allies.end(); ++it) {
