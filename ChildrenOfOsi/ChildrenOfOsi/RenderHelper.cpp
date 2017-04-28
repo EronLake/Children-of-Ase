@@ -117,7 +117,8 @@ int RenderHelper::draw_frame(WorldObj * obj)
 		osi::GameWindow::drawSprite(obj->body[i].getX()-camera->getX(), obj->body[i].getY()-camera->getY(), obj->body[i].getWidth(), obj->body[i].getHeight(), obj->getSprite());
 	}*/
 	sortVec();
-	cout << "******************************************SIZE OF THE OBJVEC TO RENDER IS " << objVec.size() << endl;
+	//cout << "THE COORDINATES OF OBJ IS " << obj->getX() << ", " << obj->getY() << endl;
+	//cout << "******************************************SIZE OF THE OBJVEC TO RENDER IS " << objVec.size() << endl;
 	for (int i = 0; i < objVec.size(); i++) {
 		
 			LOG("BEFORE DRAWING**");
@@ -132,12 +133,12 @@ int RenderHelper::draw_frame(WorldObj * obj)
 			//objVec[i]->WorldObj::animateObj();
 	}
 	// draw the points
-	for (int i = 0; i < rivObj->getLines().size(); i++) {
-		//cout << "DRAWING POINTS" << endl;
-		rivObj->getLines()[i].getP1().drawObjRiv(camera->getX(), camera->getY());
-		rivObj->getLines()[i].getP2().drawObjRiv(camera->getX(), camera->getY());
+	//for (int i = 0; i < rivObj->getLines().size(); i++) {
+	//	//cout << "DRAWING POINTS" << endl;
+	//	rivObj->getLines()[i].getP1().drawObjRiv(camera->getX(), camera->getY());
+	//	rivObj->getLines()[i].getP2().drawObjRiv(camera->getX(), camera->getY());
 
-	}
+	//}
 	//convoGui->drawGui();
 	drawHUD(obj);
 	GameWindow::refresh();
