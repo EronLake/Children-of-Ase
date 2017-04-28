@@ -106,6 +106,9 @@ class Soldier: public NPC
   virtual void capacitate();
   virtual void kill();
 
+  int get_warning() { return warning; };
+  void start_warning() { warning=400; };
+
   private:
 
   static constexpr std::size_t DEFAULT_AGGRO_RANGE = 200;
@@ -125,6 +128,7 @@ class Soldier: public NPC
 
   int cdTime;
   int down_time;
+  int warning;
   int stamina;
   int maxStamina;
   int ase;
