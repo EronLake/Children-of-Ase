@@ -28,6 +28,7 @@ RenderManager::RenderManager(MessageLog * _mLog, TaskBuffer * _tBuffer, QuadTree
 	task_map["Stop"] = &RenderHelper::sprite_idle;
 	task_map["Sprite_Update"] = &RenderHelper::sprite_update;
 	task_map["Dialogue"] = &RenderHelper::drawDiaGui;
+	task_map["Tut"] = &RenderHelper::drawTut;
 	task_map["HUD"] = &RenderHelper::drawHUD;
 	task_map["Melee"] = &RenderHelper::sprite_atk;
 	task_map["Spin"] = &RenderHelper::sprite_spin_atk;

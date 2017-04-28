@@ -22,6 +22,8 @@ RenderHelper::RenderHelper(QuadTree * QT, RiverObj* _rivObj)
 	hud_ptr->loadTexture();
 	hud_ptr->setSprite();
 	gmap = new GameMap();
+	TutGui = new Rectangle(Vector2f(cameraSize.xloc / 4, cameraSize.yloc / 8), cameraSize.xloc/2, cameraSize.yloc/1.5);
+	initTutGui();
 	//fullVec = tree->retrieve(fullVec, fullBound);
 	//	gmap->loadTexture();
 	//	gmap->setSprite();
@@ -47,6 +49,13 @@ void RenderHelper::initCamera(WorldObj * player)
 void RenderHelper::initCameraFull(WorldObj * player)
 {
 
+}
+
+void RenderHelper::initTutGui()
+{
+	Texture* tutTex = new Texture();
+	tutTex->setFile("Assets/Sprites/Tutorial.png", 1);
+	TutGui->sprite.setTexture(tutTex);
 }
 
 int RenderHelper::init_map(WorldObj* obj)
@@ -108,7 +117,7 @@ int RenderHelper::draw_frame(WorldObj * obj)
 		osi::GameWindow::drawSprite(obj->body[i].getX()-camera->getX(), obj->body[i].getY()-camera->getY(), obj->body[i].getWidth(), obj->body[i].getHeight(), obj->getSprite());
 	}*/
 	sortVec();
-	//////cout << "******************************************SIZE OF THE OBJVEC TO RENDER IS " << objVec.size() << endl;
+	cout << "******************************************SIZE OF THE OBJVEC TO RENDER IS " << objVec.size() << endl;
 	for (int i = 0; i < objVec.size(); i++) {
 		
 			LOG("BEFORE DRAWING**");
@@ -154,9 +163,27 @@ int RenderHelper::drawDiaGui(WorldObj* obj)
 	return 0;
 }
 
+
 int RenderHelper::drawHUD(WorldObj* obj)
 {
 	hud_ptr->drawHUD(obj);
+	return 0;
+}
+
+int RenderHelper::drawTut(WorldObj * obj)
+{
+	//gmap->drawMap(camera->getX(), camera->getY());
+	//obj->WorldObj::drawObj(camera->getX(), camera->getY());
+	////obj->WorldObj::animateObj();
+	//for (int i = 0; i < objVec.size(); i++) {
+	//	LOG("BEFORE DRAWING**");
+	//	////////cout << objVec[i]->getX() - camera->getX() << endl;
+	//	//LOG(objVec[i]->getX(), ", ", objVec[i]->getY());
+	//	objVec[i]->WorldObj::drawObj(camera->getX(), camera->getY());
+	//	//objVec[i]->WorldObj::animateObj();
+	//}
+	TutGui->drawObj(camera->getX(), camera->getY());
+	GameWindow::refresh();
 	return 0;
 }
 

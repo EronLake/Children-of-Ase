@@ -1837,7 +1837,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 
 
 
-			gameplay_functions->drawDiaGui(Alex);
+			gameplay_functions->drawTut(Alex);
 
 			//run task buffer
 			iController->InputCheck();
