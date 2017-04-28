@@ -1,8 +1,8 @@
 #include "stdafx.h"
 #include "HUD.h"
 
-bool HUD::show_active_quests=false;
-int HUD::FPS=0;
+bool HUD::show_active_quests = false;
+int HUD::FPS = 0;
 int HUD::AVG = 0;
 
 HUD::HUD()
@@ -103,20 +103,21 @@ void HUD::drawHUD(WorldObj* obj)
 
   this->drawMainHUD(player);
   this->drawMinimap(player);
+  this->drawKeybindDisplay();
 
   // Framerate information for debugging
   GameWindow::createText("FPS: " + to_string(FPS), 450, 20, 150, 80, {0.0F, 0.0F, 0.0F});
-	GameWindow::createText("AVG: " + to_string(AVG), 525, 20, 150, 80, {0.0F, 0.0F, 0.0F});
+  GameWindow::createText("AVG: " + to_string(AVG), 525, 20, 150, 80, {0.0F, 0.0F, 0.0F});
 
   // Draw the listing of active quests
-	if (HUD::show_active_quests) {
-		GameWindow::createText("Active Quests", 50, 104.5, 150, 80, {0.0F, 0.0F, 0.0F});
-		GameWindow::createText("___________", 50, 105, 150, 80, {0.0F, 0.0F, 0.0F});
-		vector<pair<Action*, int>> quests = player->get_quests();
-		for (int i = 0; i < quests.size(); i++) {
-			GameWindow::createText(quests[i].first->getName()+": "+ to_string(quests[i].second), 50, 122+(i*15), 150, 80, {0.0F, 0.0F, 0.0F});
-		}
-	}
+  if(HUD::show_active_quests) {
+    GameWindow::createText("Active Quests", 50, 104.5, 150, 80, {0.0F, 0.0F, 0.0F});
+    GameWindow::createText("___________", 50, 105, 150, 80, {0.0F, 0.0F, 0.0F});
+    vector<pair<Action*, int>> quests = player->get_quests();
+    for(int i = 0; i < quests.size(); i++) {
+      GameWindow::createText(quests[i].first->getName() + ": " + to_string(quests[i].second), 50, 122 + (i * 15), 150, 80, {0.0F, 0.0F, 0.0F});
+    }
+  }
 }
 
 void HUD::drawMainHUD(Player *player)
@@ -142,23 +143,20 @@ void HUD::drawMainHUD(Player *player)
     this->healthbar_full_rect->getWidth(), this->healthbar_full_rect->getHeight(), this->healthbar_full_rect->getSprite());
 
   // Draw the ase flames
-  if(player->getAse() <= 0)
-    this->portrait_rect->sprite.setTexture(this->portrait_empty_tex);
-  else {
-    this->portrait_rect->sprite.setTexture(this->portrait_full_tex);
-    for(int i = 0; i < HUD::ASEFLAME_COUNT; ++i) {
-      if(i < filledSmallAseFlames)
-        GameWindow::drawSprite(HUD::ASEFLAME_X + (i * (HUD::ASEFLAME_WIDTH + HUD::ASEFLAME_MARGIN)), HUD::ASEFLAME_Y,
-          this->aseflame_full_rect->getWidth(), this->aseflame_full_rect->getHeight(),
-          this->aseflame_full_rect->getSprite());
-      else
-        GameWindow::drawSprite(HUD::ASEFLAME_X + (i * (HUD::ASEFLAME_WIDTH + HUD::ASEFLAME_MARGIN)), HUD::ASEFLAME_Y,
-          this->aseflame_empty_rect->getWidth(), this->aseflame_empty_rect->getHeight(),
-          this->aseflame_empty_rect->getSprite());
-    }
+  this->portrait_rect->sprite.setTexture((player->getAse() <= 0) ?
+    this->portrait_empty_tex : this->portrait_full_tex);
+  for(int i = 0; i < HUD::ASEFLAME_COUNT; ++i) {
+    if(i < filledSmallAseFlames)
+      GameWindow::drawSprite(HUD::ASEFLAME_X + (i * (HUD::ASEFLAME_WIDTH + HUD::ASEFLAME_MARGIN)), HUD::ASEFLAME_Y,
+        this->aseflame_full_rect->getWidth(), this->aseflame_full_rect->getHeight(),
+        this->aseflame_full_rect->getSprite());
+    else
+      GameWindow::drawSprite(HUD::ASEFLAME_X + (i * (HUD::ASEFLAME_WIDTH + HUD::ASEFLAME_MARGIN)), HUD::ASEFLAME_Y,
+        this->aseflame_empty_rect->getWidth(), this->aseflame_empty_rect->getHeight(),
+        this->aseflame_empty_rect->getSprite());
   }
 
-  // Draw the portrait of Shango
+// Draw the portrait of Shango
   GameWindow::drawSprite(this->portrait_rect->getX(), this->portrait_rect->getY(),
     this->portrait_rect->getWidth(), this->portrait_rect->getHeight(), this->portrait_rect->getSprite());
 }

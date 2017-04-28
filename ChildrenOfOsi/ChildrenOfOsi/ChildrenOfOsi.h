@@ -43,6 +43,7 @@ public:
 	void drawDiaGui(WorldObj* player);
 	void drawHUD(WorldObj* player);
 	void init_map(WorldObj* obj);
+	void drawTut(WorldObj* obj);
 
 	//functions for creating objects in memory
 	void add_hero(std::string key, float x, float y, bool col);
