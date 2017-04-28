@@ -445,7 +445,7 @@ void Input::edit_object() {
 		}
 	}
 
-	if (collide_with != "" && onscreen)
+	if (collide_with != "" && onscreen && collide_with != "Jungle_Village" && collide_with != "Oasis_Platform")
 	{
 		if (!H)
 		{
