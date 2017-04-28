@@ -163,6 +163,11 @@ void ChildrenOfOsi::drawTut(WorldObj * obj)
 	createTask("Tut", "DRAW", obj);
 }
 
+void ChildrenOfOsi::draw_logo(WorldObj * obj)
+{
+	createTask("Logo", "DRAW", obj);
+}
+
 ///////////////////////////////////////////////////
 ///////////////////////////////////////////////////
 

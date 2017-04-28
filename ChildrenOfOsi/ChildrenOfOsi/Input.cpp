@@ -1041,6 +1041,7 @@ void Input::InputCheck()
 					else if (DialogueController::getState() == 9) {
 						count = 10;
 						DialogueController::exitDialogue();
+						PlayerActExecFunctions::execute_dialog();
 					}
 				}
 			}

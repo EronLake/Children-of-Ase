@@ -33,7 +33,7 @@ Memory::~Memory()
 {
 }
 
-void Memory::set_all(int t, int frames, vector<NPC*> p, string cat, string cont, string where, int why, int when)
+void Memory::set_all(int t, int frames, vector<NPC*> p, string _cat, string _cont, string _where, int _why, int _when)
 {
 	type = t;
 	if (type == ACTION && p.size() != 3)
@@ -47,11 +47,11 @@ void Memory::set_all(int t, int frames, vector<NPC*> p, string cat, string cont,
 		return;
 	}
 	people = p;
-	category = cat;
-	content = cont;
-	where = where;
-	why = why;
-	when = when;
+	category = _cat;
+	content = _cont;
+	where = _where;
+	why = _why;
+	when = _when;
 	reason = "";
 	time = frames;
 }

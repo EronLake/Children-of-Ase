@@ -490,29 +490,29 @@ void RelPost::apply_utility(Hero* curr_hero, Hero* other_hero, bool if_doer)
 				{
 					//get the affinity change using the relationship with reciver "other_hero"
 					int aff_change = ((hero.second->rel[other_hero->name]->getAffinity() - 50) / 50) * utility;
-					hero.second->rel[curr_hero->name]->addAffinity(aff_change);
+					hero.second->rel[curr_hero->name]->addAffinity(std::ceil(aff_change));
 				}
 				else if (rel_type == NOT)
 				{
-					hero.second->rel[curr_hero->name]->addNotoriety(utility*(1/3));
+					hero.second->rel[curr_hero->name]->addNotoriety(std::ceil(utility/3));
 				}
 				else if (rel_type == STR)
 				{
-					hero.second->rel[curr_hero->name]->addStrength(utility*(1 / 3));
+					hero.second->rel[curr_hero->name]->addStrength(std::ceil(utility/3));
 				}
 				else if (rel_type == BAFF)
 				{
 					//get the affinity change using the relationship with reciver "other_hero"
 					int aff_change = ((hero.second->rel[other_hero->name]->getAffinity() - 50) / 50) * utility;
-					hero.second->rel[curr_hero->name]->addAffinity(-aff_change);
+					hero.second->rel[curr_hero->name]->addAffinity(std::ceil(-aff_change));
 				}
 				else if (rel_type == BNOT)
 				{
-					hero.second->rel[curr_hero->name]->addNotoriety(-utility*(1 / 3));
+					hero.second->rel[curr_hero->name]->addNotoriety(std::ceil(-utility/3));
 				}
 				else if (rel_type == BSTR)
 				{
-					hero.second->rel[curr_hero->name]->addStrength(-utility*(1 / 3));
+					hero.second->rel[curr_hero->name]->addStrength(std::ceil(-utility/3));
 				}
 			}
 		}

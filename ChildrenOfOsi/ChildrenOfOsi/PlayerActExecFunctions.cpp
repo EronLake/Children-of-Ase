@@ -29,6 +29,10 @@ void PlayerActExecFunctions::execute_start(std::string act_name, Hero* receiver)
 	//for multipliers and preconditions it points the the references' actual objects
 	//sets multipliers to references multipliers
 	cur_action->multipliers = ref_action->multipliers;
+	cur_action->aff_mult = cur_action->aff_mult;
+	cur_action->str_mult = cur_action->str_mult;
+	cur_action->noto_mult = cur_action->noto_mult;
+
 	//sets preconditions to references preconditions
 	cur_action->req_preconds = ref_action->req_preconds;
 
@@ -36,7 +40,7 @@ void PlayerActExecFunctions::execute_start(std::string act_name, Hero* receiver)
 	cur_action->receiver_succ_postconds = ref_action->receiver_succ_postconds;
 
 	cur_action->doer_fail_postconds = ref_action->doer_fail_postconds;
-	cur_action->doer_succ_postconds = ref_action->doer_succ_postconds;
+	cur_action->receiver_fail_postconds = ref_action->receiver_fail_postconds;
 
 	//set to current action 
 	player->cur_action = cur_action;
@@ -46,7 +50,7 @@ void PlayerActExecFunctions::execute_start(std::string act_name, Hero* receiver)
 	//creates the memory for the reciever as well
 	ActionHelper::create_memory(cur_action, receiver);
 
-	if ((act_name == "occupy" || act_name == "conquer" || act_name == "duel" || act_name == "spar" ) &&
+	if ((act_name == "Occupy" || act_name == "Fight") &&
 		((!player->getInCombat()) && (!player->getInCombat())))
 	{
 		//we need to create a fight here if their action is a violent action
@@ -57,6 +61,9 @@ void PlayerActExecFunctions::execute_start(std::string act_name, Hero* receiver)
 			Fight* fight_obj = new Fight(player->getParty(), receiver->getParty(), false);
 		}
 	}
+
+	//ADITIONAL FUNCTION act_name == "Conquer" || act_name == "Duel" ||act_name == "Spar" ||
+
 }
 
 
@@ -67,8 +74,12 @@ void PlayerActExecFunctions::execute_end(bool if_succ) {
 
 	///FOR ALESSIO
 
-	//3. put call to end by fight conclusion 
-	//4. debug:
+	//if another soldier is starts the fight it would cause a problem (check if player is in a fight/has cur action)
+	//is called after warning hit
+	//is called when hero is incapacited
+
+	//NEED TO STILL DO MEMORIES
+	//STILL NEED TO DO QUEST CHECK
 	
 	///////////////////////////////////////////
 
@@ -77,13 +88,28 @@ void PlayerActExecFunctions::execute_end(bool if_succ) {
 
 	Action* cur_action = player->cur_action;
 
-	if (cur_action->name == "conquer" && player->getParty()->get_fight()->is_over()) {
+	//these two lines strip the number off the end of the name 
+	std::string::size_type name_end = cur_action->getName().find_first_of('_');
+	std::string act_name = cur_action->getName().substr(0, name_end);
+
+	///////////////////////////////////////////////////////////////////////////////////
+	//special cases that need to be handled are in this gaurd (may want to make a helper function)
+
+	//NEEDS TO BE TESTED... should it check for Occupy?
+	if (act_name == "conquer" && player->getParty()->get_fight()->is_over()) {
 		if (cur_action->getReceiver()->getVillage()->get_village_health() > 0) {
 			cur_action->getReceiver()->getVillage()->defenders->add_party_to_party(cur_action->getReceiver()->getVillage()->barracks);
 			if (player->getParty()->get_fight()!=nullptr)player->getParty()->get_fight()->add_to_defenders(cur_action->getReceiver()->getVillage()->defenders);
 			return;
 		}
 	}
+
+	//NEEDS TO BE IMPLIMENTED
+	if (act_name == "Duel" || act_name == "Spar") {
+		LOG("print to the screen something that the person you were fighting would say then finish action");
+	}
+
+	///////////////////////////////////////////////////////////////////////////////////
 
 	Memory* doer_mem = player->find_mem(cur_action->getName() + std::to_string(cur_action->time_stamp));
 	Memory* receiver_mem = cur_action->getReceiver()->find_mem(cur_action->getName() + 
@@ -92,11 +118,6 @@ void PlayerActExecFunctions::execute_end(bool if_succ) {
 	if (doer_mem == nullptr)
 	{
 		perror("something is wrong with the current hero memory creation function");
-	}
-	
-	//end the fight if a fight was involved
-	if (!(player->getParty()->get_fight() == nullptr)) {
-		player->getParty()->get_fight()->end_combat();
 	}
 	
 	cur_action->apply_postconditions(if_succ);	//Apply post-conditions based off if it was succesful or not
@@ -115,10 +136,60 @@ void PlayerActExecFunctions::execute_end(bool if_succ) {
 	}
 	doer_mem->setWhen(/*get global frame*/0);
 
-	//dealocate memory for fight if there was a fight
-	if(player->getParty()->get_fight() != nullptr){ delete player->getParty()->get_fight(); }
+	/*
+	dealocate memory for fight if there was a fight
+	and end the fight if a fight was involved
+	*/
+	if (player->getInCombat()) {
+		player->getParty()->get_fight()->end_combat();
+		delete player->getParty()->get_fight(); 
+	}
+
 	//dealocate memory for action
+	
+	//for multipliers and preconditions it points the the references' actual objects
+	//sets multipliers to references multipliers
+	cur_action->multipliers = nullptr;
+	cur_action->aff_mult = nullptr;
+	cur_action->str_mult = nullptr;
+	cur_action->noto_mult = nullptr;
+	//sets preconditions to references preconditions
+
 	delete player->cur_action;
+}
+
+void PlayerActExecFunctions::execute_dialog()
+{
+	Player* player = dynamic_cast<Player*>(Containers::hero_table["Shango"]);
+
+	Action* cur_action = player->cur_action;
+
+	//these two lines strip the number off the end of the name 
+	std::string::size_type name_end = cur_action->getName().find_last_of('_');
+	std::string act_name = cur_action->getName().substr(0, name_end);
+
+	//Need TO ADD FUNCTION TO DO THIS
+	if (act_name == "Form_Alliance") {
+		LOG("PRINT FOLLOW ME TO SCREEN AND MOVE TO TRAIN LOCATION");
+	}
+
+	if ((act_name == "Duel" || act_name == "Spar" || act_name == "Train") &&
+		((!player->getInCombat()) && (!player->getInCombat())))
+	{
+		//we need to create a fight here if their action is a violent action
+		if (act_name == "Duel") {
+			Fight* fight_obj = new Fight(player->getParty(), cur_action->getReceiver()->getParty(), true);
+		}
+		else {
+			Fight* fight_obj = new Fight(player->getParty(), cur_action->getReceiver()->getParty(), false);
+		}
+	}
+
+	//Need TO ADD FUNCTION TO DO THIS - needs to be done here because you have to be outside dialog first
+	if (act_name == "Form_Alliance") {
+		LOG("PRINT FORM ALLIANCE TO THE SCREEN DO similar to a fairwell");
+		execute_end(true);
+	}
 }
 
 

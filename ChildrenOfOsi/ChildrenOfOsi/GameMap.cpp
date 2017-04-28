@@ -1,6 +1,7 @@
-/*#include "stdafx.h"
+#include "stdafx.h"
 #include "GameMap.h"
 
+/*
 
 GameMap::GameMap()
 {
@@ -42,10 +43,10 @@ void GameMap::setSprite()
 
 void GameMap::drawMap(float _x, float _y)
 {
-	osi::GameWindow::drawSprite(mapTopLeft->getX() - _x, mapTopLeft->getY() - _y, mapTopLeft->getWidth(), mapTopLeft->getHeight(), mapTopLeft->sprite);
-	osi::GameWindow::drawSprite(mapTopRight->getX() - _x, mapTopRight->getY() - _y, mapTopRight->getWidth(), mapTopRight->getHeight(), mapTopRight->sprite);
-	osi::GameWindow::drawSprite(mapBottomLeft->getX() - _x, mapBottomLeft->getY() - _y, mapBottomLeft->getWidth(), mapBottomLeft->getHeight(), mapBottomLeft->sprite);
-	osi::GameWindow::drawSprite(mapBottomRight->getX() - _x, mapBottomRight->getY() - _y, mapBottomRight->getWidth(), mapBottomRight->getHeight(), mapBottomRight->sprite);
+	GameWindow::drawSprite(mapTopLeft->getX() - _x, mapTopLeft->getY() - _y, mapTopLeft->getWidth(), mapTopLeft->getHeight(), mapTopLeft->sprite);
+	GameWindow::drawSprite(mapTopRight->getX() - _x, mapTopRight->getY() - _y, mapTopRight->getWidth(), mapTopRight->getHeight(), mapTopRight->sprite);
+	GameWindow::drawSprite(mapBottomLeft->getX() - _x, mapBottomLeft->getY() - _y, mapBottomLeft->getWidth(), mapBottomLeft->getHeight(), mapBottomLeft->sprite);
+	GameWindow::drawSprite(mapBottomRight->getX() - _x, mapBottomRight->getY() - _y, mapBottomRight->getWidth(), mapBottomRight->getHeight(), mapBottomRight->sprite);
 	//osi::GameWindow::drawSprite(river->getX() - _x, river->getY() - _y, river->getWidth(), river->getHeight(), river->sprite);
 
 
@@ -105,7 +106,6 @@ GameMap::GameMap()
 	//riverTex = new Texture();
 }
 
-
 GameMap::~GameMap()
 {
 }
@@ -144,35 +144,35 @@ void GameMap::setTextures() {
 
 void GameMap::loadTexture()
 {
-	map1_1tex->setFile("Assets/Sprites/map1_1.png", 1);
-	map1_2tex->setFile("Assets/Sprites/map1_2.png", 1);
-	map1_3tex->setFile("Assets/Sprites/map1_3.png", 1);
-	map1_4tex->setFile("Assets/Sprites/map1_4.png", 1);
-	map1_5tex->setFile("Assets/Sprites/map1_5.png", 1);
+	map1_1tex->setFile("Assets/Sprites/map1_1_4000.png", 1);
+	map1_2tex->setFile("Assets/Sprites/map1_2_4000.png", 1);
+	map1_3tex->setFile("Assets/Sprites/map1_3_4000.png", 1);
+	map1_4tex->setFile("Assets/Sprites/map1_4_4000.png", 1);
+	map1_5tex->setFile("Assets/Sprites/map1_5_4000.png", 1);
 
-	map2_1tex->setFile("Assets/Sprites/map2_1.png", 1);
-	map2_2tex->setFile("Assets/Sprites/map2_2.png", 1);
-	map2_3tex->setFile("Assets/Sprites/map2_3.png", 1);
-	map2_4tex->setFile("Assets/Sprites/map2_4.png", 1);
-	map2_5tex->setFile("Assets/Sprites/map2_5.png", 1);
+	map2_1tex->setFile("Assets/Sprites/map2_1_4000.png", 1);
+	map2_2tex->setFile("Assets/Sprites/map2_2_4000.png", 1);
+	map2_3tex->setFile("Assets/Sprites/map2_3_4000.png", 1);
+	map2_4tex->setFile("Assets/Sprites/map2_4_4000.png", 1);
+	map2_5tex->setFile("Assets/Sprites/map2_5_4000.png", 1);
 
-	map3_1tex->setFile("Assets/Sprites/map3_1.png", 1);
-	map3_2tex->setFile("Assets/Sprites/map3_2.png", 1);
-	map3_3tex->setFile("Assets/Sprites/map3_3.png", 1);
-	map3_4tex->setFile("Assets/Sprites/map3_4.png", 1);
-	map3_5tex->setFile("Assets/Sprites/map3_5.png", 1);
+	map3_1tex->setFile("Assets/Sprites/map3_1_4000.png", 1);
+	map3_2tex->setFile("Assets/Sprites/map3_2_4000.png", 1);
+	map3_3tex->setFile("Assets/Sprites/map3_3_4000.png", 1);
+	map3_4tex->setFile("Assets/Sprites/map3_4_4000.png", 1);
+	map3_5tex->setFile("Assets/Sprites/map3_5_4000.png", 1);
 
-	map4_1tex->setFile("Assets/Sprites/map4_1.png", 1);
-	map4_2tex->setFile("Assets/Sprites/map4_2.png", 1);
-	map4_3tex->setFile("Assets/Sprites/map4_3.png", 1);
-	map4_4tex->setFile("Assets/Sprites/map4_4.png", 1);
-	map4_5tex->setFile("Assets/Sprites/map4_5.png", 1);
+	map4_1tex->setFile("Assets/Sprites/map4_1_4000.png", 1);
+	map4_2tex->setFile("Assets/Sprites/map4_2_4000.png", 1);
+	map4_3tex->setFile("Assets/Sprites/map4_3_4000.png", 1);
+	map4_4tex->setFile("Assets/Sprites/map4_4_4000.png", 1);
+	map4_5tex->setFile("Assets/Sprites/map4_5_4000.png", 1);
 
-	map5_1tex->setFile("Assets/Sprites/map5_1.png", 1);
-	map5_2tex->setFile("Assets/Sprites/map5_2.png", 1);
-	map5_3tex->setFile("Assets/Sprites/map5_3.png", 1);
-	map5_4tex->setFile("Assets/Sprites/map5_4.png", 1);
-	map5_5tex->setFile("Assets/Sprites/map5_5.png", 1);
+	map5_1tex->setFile("Assets/Sprites/map5_1_4000.png", 1);
+	map5_2tex->setFile("Assets/Sprites/map5_2_4000.png", 1);
+	map5_3tex->setFile("Assets/Sprites/map5_3_4000.png", 1);
+	map5_4tex->setFile("Assets/Sprites/map5_4_4000.png", 1);
+	map5_5tex->setFile("Assets/Sprites/map5_5_4000.png", 1);
 	//riverTex->setFile("River.png");
 }
 
@@ -213,6 +213,7 @@ void GameMap::setSprite()
 
 void GameMap::drawMap(float _x, float _y)
 {
+	
 	if (Party::dist_location_to_location(map1_1->getLoc(), {_x,_y}) < 7500)GameWindow::drawSprite(map1_1->getX() - _x, map1_1->getY() - _y, map1_1->getWidth(), map1_1->getHeight(), map1_1->sprite);
 	if (Party::dist_location_to_location(map1_2->getLoc(), { _x,_y }) < 7500)GameWindow::drawSprite(map1_2->getX() - _x, map1_2->getY() - _y, map1_2->getWidth(), map1_2->getHeight(), map1_2->sprite);
 	if (Party::dist_location_to_location(map1_3->getLoc(), { _x,_y }) < 7500)GameWindow::drawSprite(map1_3->getX() - _x, map1_3->getY() - _y, map1_3->getWidth(), map1_3->getHeight(), map1_3->sprite);
@@ -243,7 +244,7 @@ void GameMap::drawMap(float _x, float _y)
 	if (Party::dist_location_to_location(map5_4->getLoc(), { _x,_y }) < 7500)GameWindow::drawSprite(map5_4->getX() - _x, map5_4->getY() - _y, map5_4->getWidth(), map5_4->getHeight(), map5_4->sprite);
 	if (Party::dist_location_to_location(map5_5->getLoc(), { _x,_y }) < 7500)GameWindow::drawSprite(map5_5->getX() - _x, map5_5->getY() - _y, map5_5->getWidth(), map5_5->getHeight(), map5_5->sprite);
 
-
+	
 	//GameWindow::drawSprite(river->getX() - _x, river->getY() - _y, river->getWidth(), river->getHeight(), river->sprite);
 
 	

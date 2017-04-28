@@ -23,7 +23,9 @@ RenderHelper::RenderHelper(QuadTree * QT, RiverObj* _rivObj)
 	hud_ptr->setSprite();
 	gmap = new GameMap();
 	TutGui = new Rectangle(Vector2f(cameraSize.xloc / 4, cameraSize.yloc / 8), cameraSize.xloc/2, cameraSize.yloc/1.5);
+	logo_gui = new Rectangle(Vector2f(cameraSize.xloc / 4, cameraSize.yloc / 8), cameraSize.xloc / 2, cameraSize.yloc / 1.5);	
 	initTutGui();
+	init_logo_gui();
 	//fullVec = tree->retrieve(fullVec, fullBound);
 	//	gmap->loadTexture();
 	//	gmap->setSprite();
@@ -56,6 +58,13 @@ void RenderHelper::initTutGui()
 	Texture* tutTex = new Texture();
 	tutTex->setFile("Assets/Sprites/Tutorial.png", 1);
 	TutGui->sprite.setTexture(tutTex);
+}
+
+void RenderHelper::init_logo_gui()
+{
+	Texture* logo_tex = new Texture();
+	logo_tex->setFile("Assets/Sprites/Logo.png", 1);
+	logo_gui->sprite.setTexture(logo_tex);
 }
 
 int RenderHelper::init_map(WorldObj* obj)
@@ -184,6 +193,13 @@ int RenderHelper::drawTut(WorldObj * obj)
 	//	//objVec[i]->WorldObj::animateObj();
 	//}
 	TutGui->drawObj(camera->getX(), camera->getY());
+	GameWindow::refresh();
+	return 0;
+}
+
+int RenderHelper::draw_logo(WorldObj * obj)
+{
+	logo_gui->drawObj(camera->getX(), camera->getY());
 	GameWindow::refresh();
 	return 0;
 }
