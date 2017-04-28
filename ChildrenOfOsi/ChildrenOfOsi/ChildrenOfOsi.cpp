@@ -147,6 +147,7 @@ void ChildrenOfOsi::drawDiaGui(WorldObj* player)
 	createTask("Dialogue", "DRAW", player);
 }
 
+
 void ChildrenOfOsi::drawHUD(WorldObj* player)
 {
 	createTask("HUD", "DRAW", player);
@@ -155,6 +156,16 @@ void ChildrenOfOsi::drawHUD(WorldObj* player)
 void ChildrenOfOsi::init_map(WorldObj* obj)
 {
 	createTask("Init_Map", "DRAW", obj);
+}
+
+void ChildrenOfOsi::drawTut(WorldObj * obj)
+{
+	createTask("Tut", "DRAW", obj);
+}
+
+void ChildrenOfOsi::draw_logo(WorldObj * obj)
+{
+	createTask("Logo", "DRAW", obj);
 }
 
 ///////////////////////////////////////////////////

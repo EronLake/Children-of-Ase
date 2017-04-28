@@ -47,6 +47,7 @@ public:
 private:
 	bool collision(WorldObj* recA, WorldObj* recB);
 	bool lineCollision(Line l1, Line l2);
+	bool shouldCheckLineCollision(Point target, Point dest1, Point dest2, int dist);
 	bool interaction(Player* recA, WorldObj* recB);
 	bool coordOverlap(float value, float min, float max) { return (value >= min) && (value <= max); }
 	//hold obj to check with. init before each move funcs call

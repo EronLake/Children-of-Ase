@@ -3,7 +3,7 @@
 
 std::unordered_map<std::string, execute_ptr> ActionExecFunctions::ActionExecMap{
 	{ "execute_train",			&execute_train			},
-	{ "execute_train_with",		&execute_train_with		},
+	{ "execute_train_with",		&execute_duel		    },
 	{ "execute_fight",			&execute_fight			},
 	{ "execute_conquer",		&execute_conquer		},
 	{ "execute_duel",			&execute_duel			},
@@ -43,7 +43,7 @@ void ActionExecFunctions::execute_temp_allign(Action* fight_bandits) {
 
 void ActionExecFunctions::execute_train(Action* train) {
 	//cout << "++++++++++++++++PLEASE BE FIGHTING++++++++++++++++" << endl;
-	
+	if (train->getDoer()->get_busy() == Hero::BUSY_REC)return;
 	switch (train->checkpoint) {
 	case 0: //Pick training location, create memory, increment checkpoint
 		std::cout << "---------------------CASE 0---------------------" << std::endl;
@@ -72,6 +72,7 @@ void ActionExecFunctions::execute_train(Action* train) {
 		if (train->getDoer()->get_action_destination().getXloc() != -1 && train->getDoer()->get_action_destination().getYloc() != -1) {	//dont set it to nullptr, set it to -1
 			ActionHelper::set_timer(train, 60);  //Wait 1 minute (60 frames times 60 seconds) //make it wait 5 secs
 			train->checkpoint++;
+			train->getDoer()->set_busy(Hero::BUSY_DOER);
 		}
 		break;
 	case 2: //If timer is complete, set village as destination, apply postconds, update memory
@@ -96,7 +97,9 @@ void ActionExecFunctions::execute_train(Action* train) {
 			cout << train->getDoer()->name << "'s str of Oya AFTER train is " << train->getDoer()->rel[3]->getStrength() << endl;
 			doer_mem->setCategory("success");			 //Call update_memory function
 			doer_mem->setReason("I am good at training");
-			doer_mem->setWhen(/*get global frame*/0);        
+			doer_mem->setWhen(/*get global frame*/0);    
+			train->getDoer()->set_busy(Hero::NOT_BUSY);
+			train->getReceiver()->set_busy(Hero::NOT_BUSY);
 		}
 		break;
 
@@ -104,6 +107,7 @@ void ActionExecFunctions::execute_train(Action* train) {
 }
 
 void ActionExecFunctions::execute_train_with(Action* train_with) {
+	if (train_with->getDoer()->get_busy() == Hero::BUSY_REC)return;
 	switch (train_with->checkpoint) {
 	case 0: //Pick training location, create memory, increment checkpoint
 		ActionHelper::create_memory(train_with, train_with->getDoer());
@@ -154,6 +158,8 @@ void ActionExecFunctions::execute_train_with(Action* train_with) {
 			train_with->getDoer()->set_action_destination(train_with->getDoer()->getVillage()->get_village_location()); //Also predefined, maybe as "home_location" in hero
 			train_with->apply_postconditions(true);				 //Apply post-conditions
 			train_with->executed = true;
+			train_with->getDoer()->set_busy(Hero::NOT_BUSY);
+			train_with->getReceiver()->set_busy(Hero::NOT_BUSY);
 			doer_mem->setCategory("success");			 //Call update_memory function
 			doer_mem->setReason("I am good at training");
 			doer_mem->setWhen(/*get global frame*/0);
@@ -165,38 +171,51 @@ void ActionExecFunctions::execute_train_with(Action* train_with) {
 
 
 void ActionExecFunctions::execute_form_alliance(Action* form_alliance) {
-	form_alliance->executed = true;
+	if (form_alliance->getDoer()->get_busy() == Hero::BUSY_REC)return;
 	std::cout << "/////////////////////////execute_form_alliance///////////////////////" << std::endl;
-	/*
+	
 	Hero* doer = form_alliance->getDoer();
 	Hero* responder = form_alliance->getReceiver();
 	switch (form_alliance->checkpoint) {
 	case 0:
 		ActionHelper::create_memory(form_alliance, doer);
 
-		form_alliance->getDoer()->set_action_destination(&form_alliance->getReceiver()->getVillage()->get_village_location());
+		form_alliance->getDoer()->set_action_destination(form_alliance->getReceiver()->getVillage()->get_village_location());
 		form_alliance->checkpoint++;
 		break;
 
 	case 1:
-		if (form_alliance->getDoer()->get_action_destination() == nullptr) {
-			Planner* hero_planner = ActionHelper::ai->hero_planners[responder->name];
+		if (form_alliance->getDoer()->get_action_destination() == Vector2f(NULL, NULL)) {
+			//Planner* hero_planner = ActionHelper::ai->get_plan(responder->name);
+			Memory* doer_mem = form_alliance->getDoer()->find_mem(form_alliance->getName() + std::to_string(form_alliance->time_stamp));
+			Memory* receiver_mem = form_alliance->getReceiver()->find_mem(form_alliance->getName() + std::to_string(form_alliance->time_stamp));
 			if (ActionHelper::hero_respond(form_alliance)) {
-			
-
-					//success
-					form_alliance->apply_postconditions(true);
-					form_alliance->executed = true;
+				form_alliance->apply_postconditions(true);
+				doer_mem->setCategory("success"); receiver_mem->setCategory("success");
+				doer_mem->setReason("We joined forces");
+				receiver_mem->setReason("We joined forces");
 
 			}
 			else {
-				//update memory failed
+				form_alliance->apply_postconditions(false);
+				doer_mem->setCategory("failure"); receiver_mem->setCategory("success");
+				doer_mem->setReason("They rejected our Alliance");
+				receiver_mem->setReason("We rejected their Alliance");
 			}
-
+			//update where
+			doer_mem->setWhere(std::to_string(form_alliance->getDoer()->getLoc().xloc));
+			receiver_mem->setWhere(std::to_string(form_alliance->getReceiver()->getLoc().xloc));
+			//update when
+			doer_mem->setWhen(frame_count);
+			receiver_mem->setWhen(frame_count);
+			form_alliance->getDoer()->set_busy(Hero::NOT_BUSY);
+			form_alliance->getReceiver()->set_busy(Hero::NOT_BUSY);
+			form_alliance->executed = true;
+			form_alliance->getDoer()->set_action_destination(form_alliance->getDoer()->getVillage()->get_village_location());
+			break;
 		}
 
 	}
-	*/
 	
 }
 
@@ -215,7 +234,7 @@ void ActionExecFunctions::execute_fight(Action* fight)
 	Prompt for kill?
 	*/
 
-
+	if (fight->getDoer()->get_busy() == Hero::BUSY_REC)return;
 	switch (fight->checkpoint) {
 	case 0: //Pick village location(location of fight target), create memory, increment checkpoint
 		fight->getDoer()->set_action_destination(fight->getReceiver()->getVillage()->get_village_location()); //need to somehow retrieve location of target village
@@ -226,12 +245,12 @@ void ActionExecFunctions::execute_fight(Action* fight)
 		if (fight->getDoer()->get_action_destination() == Vector2f(NULL, NULL))//needs to be changed to use party location right 
 		{
 			//if the target hero is in the village then begin the battle
-			if (fight->getDoer()->getLoc() == fight->getReceiver()->getLoc()) // need to change this so it checks if the party is close by
+			if (Party::dist_location_to_location(fight->getDoer()->getLoc(),fight->getReceiver()->getLoc())<100) // need to change this so it checks if the party is close by
 			{
 				fight->checkpoint++;
 				ActionHelper::create_memory(fight, fight->getReceiver());
 			}
-			ActionHelper::set_timer(fight, 3600);  //Wait 1 minute (60 frames times 60 seconds) trying to find out the hero's location
+			ActionHelper::set_timer(fight, 5);  //Wait 1 minute (60 frames times 60 seconds) trying to find out the hero's location
 			fight->checkpoint++;
 		}
 		break;
@@ -247,21 +266,24 @@ void ActionExecFunctions::execute_fight(Action* fight)
 			//(may need to change this to account for hero death)
 		if (fight->getDoer()->get_action_destination() == Vector2f(NULL, NULL)) {
 			//do a single round of battle every 10 sec
-			if (ActionHelper::retrieve_time(fight) == 0)
-			{
-				Fight* fight_obj = new Fight(fight->getDoer()->getParty(), fight->getReceiver()->getParty(), false);
-				//ActionHelper::set_timer(fight, 600);
-			}
-			if (fight->getDoer()->getParty()->get_fight()->is_over())
-			{
-				fight->checkpoint++;
-			}
+			Fight* fight_obj = new Fight(fight->getDoer()->getParty(), fight->getReceiver()->getParty(), false);
+			fight->getDoer()->set_busy(Hero::BUSY_DOER);
+			fight->getReceiver()->set_busy(Hero::BUSY_REC);
+			fight->checkpoint++;
 		}
 
 		//NEED TO SOMEHOW ACCOUNT FOR IF A PLAYER GETS CLOSE
 
 		break;
-	case 4: //If win update apply win-post else apply loss-post and update memory
+	case 4:
+		if (fight->getDoer()->getParty()->get_fight()==nullptr) {
+			fight->checkpoint++;
+		} else if (fight->getDoer()->getParty()->get_fight()->is_over())
+		{
+			fight->checkpoint++;
+		}
+		break;
+	case 5: //If win update apply win-post else apply loss-post and update memory
 			//create_memory(fight, fight->getOwner()); do we want to update the owner immeadiately?
 
 		Memory* doer_mem = fight->getDoer()->find_mem(fight->getName() + std::to_string(fight->time_stamp));
@@ -302,6 +324,9 @@ void ActionExecFunctions::execute_fight(Action* fight)
 		//Mark action as executed?
 		fight->executed = true;
 
+		fight->getDoer()->set_busy(Hero::NOT_BUSY);
+		fight->getReceiver()->set_busy(Hero::NOT_BUSY);
+
 		//create prompt for kill action
 		(fight->getDoer(), fight->getReceiver());
 		fight->getDoer()->set_action_destination(fight->getDoer()->getVillage()->get_village_location());
@@ -314,6 +339,7 @@ void ActionExecFunctions::execute_fight(Action* fight)
 
 void ActionExecFunctions::execute_conquer(Action* conq)
 {
+	if (conq->getDoer()->get_busy() == Hero::BUSY_REC)return;
 	switch (conq->checkpoint) {
 	case 0: //Pick village location(location of fight target), create memory, increment checkpoint
 		conq->getDoer()->set_action_destination(conq->getReceiver()->getVillage()->get_village_location()); //need to somehow retrieve location of target village
@@ -323,11 +349,14 @@ void ActionExecFunctions::execute_conquer(Action* conq)
 	case 1: //If destination is reached, check if hero is there start a timer and move if not, fight otherwise
 		if (conq->getDoer()->get_action_destination() == Vector2f(NULL, NULL))//needs to be changed to use party location right 
 		{
-			ActionHelper::set_timer(conq, 3600);  //Wait 1 minute (60 frames times 60 seconds) trying to find out the hero's location
+			//ActionHelper::set_timer(conq, 3600);  //Wait 1 minute (60 frames times 60 seconds) trying to find out the hero's location
 			conq->checkpoint++;
 			conq->getReceiver()->getVillage()->defenders->add_party_to_party(conq->getReceiver()->getVillage()->barracks);
 			ActionHelper::create_memory(conq, conq->getReceiver());
-			new Fight(conq->getDoer()->getParty(), conq->getReceiver()->getParty(), false);
+			new Fight(conq->getDoer()->getParty(), conq->getReceiver()->getVillage()->defenders, false);
+			conq->getReceiver()->getVillage()->set_village_health(100);
+			conq->getDoer()->set_busy(Hero::BUSY_DOER);
+			conq->getReceiver()->set_busy(Hero::BUSY_REC);
 		}
 		break;
 	case 2: //If both niether party is empty then contiue the fight 
@@ -337,7 +366,7 @@ void ActionExecFunctions::execute_conquer(Action* conq)
 			conq->checkpoint++;
 		} else if (conq->getReceiver()->getVillage()->defenders->getMembers().size() == 
 			conq->getReceiver()->getVillage()->defenders->get_down_members().size()) {
-			conq->getReceiver()->getVillage()->add_to_village_health(conq->getDoer()->getParty()->getMembers().size()*10);
+			conq->getReceiver()->getVillage()->add_to_village_health(conq->getDoer()->getParty()->getMembers().size()*(-10));
 			if (conq->getReceiver()->getVillage()->get_village_health()<=0) {
 				conq->checkpoint++;
 			}else {
@@ -397,6 +426,10 @@ void ActionExecFunctions::execute_conquer(Action* conq)
 		conq->getDoer()->getParty()->get_fight()->end_combat();
 		//Mark action as executed?
 		conq->executed = true;
+
+		conq->getDoer()->set_busy(Hero::NOT_BUSY);
+		conq->getReceiver()->set_busy(Hero::NOT_BUSY);
+
 		conq->getDoer()->set_action_destination(conq->getDoer()->getVillage()->get_village_location());
 		break;
 
@@ -406,6 +439,7 @@ void ActionExecFunctions::execute_conquer(Action* conq)
 
 void ActionExecFunctions::execute_duel(Action* duel)
 {
+	if (duel->getDoer()->get_busy() == Hero::BUSY_REC)return;
 	switch (duel->checkpoint) {
 	case 0: //Pick village location(location of fight target), create memory, increment checkpoint
 		duel->getDoer()->set_action_destination(duel->getReceiver()->getVillage()->get_village_location());
@@ -416,12 +450,12 @@ void ActionExecFunctions::execute_duel(Action* duel)
 		if (Party::dist_location_to_location(duel->getDoer()->getLoc(), duel->getDoer()->get_action_destination())<500)//needs to be changed to use party location right 
 		{
 			//if the target hero is in the village then begin the battle
-			if (duel->getDoer()->getLoc() == duel->getReceiver()->getLoc()) // need to change this so it checks if the party is close by
+			if (Party::dist_location_to_location(duel->getDoer()->getLoc(), duel->getReceiver()->getLoc())<100) // need to change this so it checks if the party is close by
 			{
 				duel->checkpoint++;
 				ActionHelper::create_memory(duel, duel->getReceiver());
 			}
-			ActionHelper::set_timer(duel, 3600);  //Wait 1 minute (60 frames times 60 seconds) trying to find out the hero's location
+			ActionHelper::set_timer(duel, 5);  //Wait 1 minute (60 frames times 60 seconds) trying to find out the hero's location
 			duel->checkpoint++;
 		}
 		break;
@@ -438,6 +472,8 @@ void ActionExecFunctions::execute_duel(Action* duel)
 		if (Party::dist_location_to_location(duel->getDoer()->getLoc(), duel->getDoer()->get_action_destination())<500) {
 			Fight* fight = new Fight(duel->getDoer()->getParty(), duel->getReceiver()->getParty(), true);
 			duel->checkpoint++;
+			duel->getDoer()->set_busy(Hero::BUSY_DOER);
+			duel->getReceiver()->set_busy(Hero::BUSY_REC);
 		}
 		//NEED TO SOMEHOW ACCOUNT FOR IF A PLAYER GETS CLOSE
 		break;
@@ -488,6 +524,8 @@ void ActionExecFunctions::execute_duel(Action* duel)
 		//Mark action as executed?
 		duel->executed = true;
 
+		duel->getDoer()->set_busy(Hero::NOT_BUSY);
+		duel->getReceiver()->set_busy(Hero::NOT_BUSY);
 		//create prompt for kill action
 		//(duel->getDoer(), duel->getReceiver());
 		duel->getDoer()->set_action_destination(duel->getDoer()->getVillage()->get_village_location());
@@ -499,6 +537,7 @@ void ActionExecFunctions::execute_duel(Action* duel)
 
 void ActionExecFunctions::execute_conversation(Action* conv)
 {
+	if (conv->getDoer()->get_busy() == Hero::BUSY_REC)return;
 	switch (conv->checkpoint) {
 	case 0: //Pick training location, create memory, increment checkpoint
 		ActionHelper::create_memory(conv, conv->getDoer());
@@ -525,12 +564,14 @@ void ActionExecFunctions::execute_conversation(Action* conv)
 		{
 			ActionHelper::set_timer(conv, 3600); //Wait 1 minute for training (60 frames times 60 seconds)
 			conv->checkpoint++;
+			conv->getDoer()->set_busy(Hero::BUSY_DOER);
+			conv->getReceiver()->set_busy(Hero::BUSY_REC);
 		}
 		break;
 	case 4: //If timer is complete, set village as destination, apply postconds, update memory
 		if (ActionHelper::retrieve_time(conv) == 0) {
 			Memory* doer_mem = conv->getDoer()->find_mem(conv->getName() + std::to_string(conv->time_stamp));
-			//Memory* receiver_mem = fight->getReceiver()->find_mem(fight->getName() + std::to_string(fight->time_stamp));
+			Memory* receiver_mem = conv->getReceiver()->find_mem(conv->getName() + std::to_string(conv->time_stamp));
 			if (doer_mem == nullptr)
 			{
 				perror("something is wrong with the current hero memory creation function");
@@ -539,14 +580,24 @@ void ActionExecFunctions::execute_conversation(Action* conv)
 			if (ActionHelper::conversation(conv)) {
 				conv->apply_postconditions(true);				 //Apply post-conditions
 				doer_mem->setCategory("success");			 //Call update_memory function
-				doer_mem->setReason("The bribe went well");
+				doer_mem->setReason("The coversation went well");
+				receiver_mem->setCategory("failure");
+				receiver_mem->setReason("The coversation went the way they wanted it to");
 			} else {
 				conv->apply_postconditions(false);				 //Apply post-conditions
 				doer_mem->setCategory("fail");			 //Call update_memory function
-				doer_mem->setReason("The bribe didn't go well");
+				doer_mem->setReason("The conversation didn't go well");
+				receiver_mem->setCategory("success");
+				receiver_mem->setReason("The conversation went the way I wanted it to");
 			}
+			conv->getDoer()->set_busy(Hero::NOT_BUSY);
+			conv->getReceiver()->set_busy(Hero::NOT_BUSY);
 			conv->executed = true;
-			doer_mem->setWhen(/*get global frame*/0);
+			doer_mem->setWhere(std::to_string(conv->getDoer()->getLoc().xloc));
+			receiver_mem->setWhere(std::to_string(conv->getReceiver()->getLoc().xloc));
+			//update when
+			doer_mem->setWhen(frame_count);
+			receiver_mem->setWhen(frame_count);
 		}
 		break;
 
@@ -555,58 +606,75 @@ void ActionExecFunctions::execute_conversation(Action* conv)
 
 void ActionExecFunctions::execute_bribe(Action* bribe)
 {
+	return;
+	if (bribe->getDoer()->get_busy() == Hero::BUSY_REC)return;
 	int monopoly_money = 420;
-	switch (bribe->checkpoint) {
-	case 0: //Determine the location that the bribe is happening
-		ActionHelper::create_memory(bribe, bribe->getDoer());
-		bribe->getDoer()->set_action_destination(bribe->getReceiver()->getVillage()->get_village_location());
-		bribe->checkpoint++;
-		break;
-
-	case 1: //Create a greeting timer
-		if (bribe->getDoer()->get_action_destination() == Vector2f(NULL, NULL)) {
-			ActionHelper::set_timer(bribe, 60);
+	if (!bribe->getDoer()->getInCombat()) {
+		switch (bribe->checkpoint) {
+		case 0: //Determine the location that the bribe is happening
+			ActionHelper::create_memory(bribe, bribe->getDoer());
+			bribe->getDoer()->set_action_destination(bribe->getReceiver()->getVillage()->get_village_location());
 			bribe->checkpoint++;
-		}
-		break;
+			break;
 
-	case 2: //Once the greeting timer is completed, take away money(placeholder) to simulate giving something for the bribe
-		if (ActionHelper::retrieve_time(bribe) == 0) //Greeting timer complete
-		{
-			//bribe->getDoer()->set_action_destination(&bribe->getReceiver()->getLoc());
-			monopoly_money = monopoly_money - 69;//Taking away money
-			bribe->checkpoint++;
-		}
-		break;
-	case 3: //If timer is complete, set village as destination, apply postconds, update memory
-		if (ActionHelper::retrieve_time(bribe) == 0) {
-			Memory* doer_mem = bribe->getDoer()->find_mem(bribe->getName() + std::to_string(bribe->time_stamp));
-			//Memory* receiver_mem = fight->getReceiver()->find_mem(fight->getName() + std::to_string(fight->time_stamp));
-			if (doer_mem == nullptr)
+		case 1: //Create a greeting timer
+			if (bribe->getDoer()->get_action_destination() == Vector2f(NULL, NULL)) {
+				ActionHelper::set_timer(bribe, 60);
+				bribe->getDoer()->set_busy(Hero::BUSY_DOER);
+				bribe->getReceiver()->set_busy(Hero::BUSY_REC);
+				bribe->checkpoint++;
+			}
+			break;
+
+		case 2: //Once the greeting timer is completed, take away money(placeholder) to simulate giving something for the bribe
+			if (ActionHelper::retrieve_time(bribe) == 0) //Greeting timer complete
 			{
-				perror("something is wrong with the current hero memory creation function");
+				//bribe->getDoer()->set_action_destination(&bribe->getReceiver()->getLoc());
+				monopoly_money = monopoly_money - 69;//Taking away money
+				bribe->checkpoint++;
 			}
-			bribe->getDoer()->set_action_destination(bribe->getDoer()->getVillage()->get_village_location()); //Also predefined, maybe as "home_location" in hero
-			if (ActionHelper::conversation(bribe)) {
-				bribe->apply_postconditions(true);				 //Apply post-conditions
-				doer_mem->setCategory("success");			 //Call update_memory function
-				doer_mem->setReason("The conversaton went well");
+			break;
+		case 3: //If timer is complete, set village as destination, apply postconds, update memory
+			if (ActionHelper::retrieve_time(bribe) == 0) {
+				Memory* doer_mem = bribe->getDoer()->find_mem(bribe->getName() + std::to_string(bribe->time_stamp));
+				Memory* receiver_mem = bribe->getReceiver()->find_mem(bribe->getName() + std::to_string(bribe->time_stamp));
+				if (doer_mem == nullptr)
+				{
+					perror("something is wrong with the current hero memory creation function");
+				}
+				bribe->getDoer()->set_action_destination(bribe->getDoer()->getVillage()->get_village_location()); //Also predefined, maybe as "home_location" in hero
+				if (monopoly_money>500) {
+					bribe->apply_postconditions(true);				 //Apply post-conditions
+					doer_mem->setCategory("success");			 //Call update_memory function
+					doer_mem->setReason("The bribe went well");
+					receiver_mem->setCategory("success");
+					receiver_mem->setReason("I took a bribe");
+				}
+				else {
+					bribe->apply_postconditions(false);				 //Apply post-conditions
+					doer_mem->setCategory("fail");			 //Call update_memory function
+					doer_mem->setReason("The bribe didn't go well");
+					receiver_mem->setCategory("success");
+					receiver_mem->setReason("I refused a bribe");
+				}
+				bribe->executed = true;
+				bribe->getDoer()->set_busy(Hero::NOT_BUSY);
+				bribe->getReceiver()->set_busy(Hero::NOT_BUSY);
+				doer_mem->setWhere(std::to_string(bribe->getDoer()->getLoc().xloc));
+				receiver_mem->setWhere(std::to_string(bribe->getReceiver()->getLoc().xloc));
+				//update when
+				doer_mem->setWhen(frame_count);
+				receiver_mem->setWhen(frame_count);
 			}
-			else {
-				bribe->apply_postconditions(false);				 //Apply post-conditions
-				doer_mem->setCategory("fail");			 //Call update_memory function
-				doer_mem->setReason("The conversaton didn't go well");
-			}
-			bribe->executed = true;
-			doer_mem->setWhen(/*get global frame*/0);
-		}
-		break;
+			break;
 
+		}
 	}
 }
 
 void ActionExecFunctions::execute_compliment(Action* compliment)
 {
+	if (compliment->getDoer()->get_busy() == Hero::BUSY_REC)return;
 	switch (compliment->checkpoint) {
 	case 0: //Determine the location that the compliment is happening
 		ActionHelper::create_memory(compliment, compliment->getDoer());
@@ -617,6 +685,8 @@ void ActionExecFunctions::execute_compliment(Action* compliment)
 	case 1: //Create a greeting timer
 		if (compliment->getDoer()->get_action_destination() == Vector2f(NULL, NULL)) {
 			ActionHelper::set_timer(compliment, 60);
+			compliment->getDoer()->set_busy(Hero::BUSY_DOER);
+			compliment->getReceiver()->set_busy(Hero::BUSY_REC);
 			compliment->checkpoint++;
 		}
 		break;
@@ -640,6 +710,8 @@ void ActionExecFunctions::execute_compliment(Action* compliment)
 				doer_mem->setReason("They didn't accept my compliment well");
 			}
 			compliment->executed = true;
+			compliment->getDoer()->set_busy(Hero::NOT_BUSY);
+			compliment->getReceiver()->set_busy(Hero::NOT_BUSY);
 			doer_mem->setWhen(/*get global frame*/0);
 		}
 		break;
