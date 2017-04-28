@@ -49,14 +49,16 @@ void ActionExecFunctions::execute_train(Action* train) {
 		std::cout << "---------------------CASE 0---------------------" << std::endl;
 		//std::cout << (train->getDoer()->destination).getXloc() << ":" << (train->getDoer()->destination).getXloc() << std::endl;
 
-		train->getDoer()->set_action_destination(&train->getDoer()->getVillage()->get_village_location()); //should select from set of pre-defined, stored in Hero, or village?
-		cout << "dest is " << train->getDoer()->get_action_destination()->getXloc() << ", " << train->getDoer()->get_action_destination()->getYloc() << endl;
+		train->getDoer()->set_action_destination(train->getDoer()->getVillage()->get_village_location()); //should select from set of pre-defined, stored in Hero, or village?
+		cout << "dest is " << train->getDoer()->get_action_destination().getXloc() << ", " << train->getDoer()->get_action_destination().getYloc() << endl;
 		ActionHelper::create_memory(train, train->getDoer());
+		cout << "after memory dest is " << train->getDoer()->get_action_destination().getXloc() << ", " << train->getDoer()->get_action_destination().getYloc() << endl;
 		train->checkpoint++;
 		break;
 	case 1: //If destination is reached, start a timer and move to next checkpoint
 	std::cout << "---------------------CASE 1---------------------" << endl;
-	cout << "dest is " << train->getDoer()->get_action_destination()->getXloc() << ", " << train->getDoer()->get_action_destination()->getYloc()<<  endl;
+	cout << "dest is " << train->getDoer()->getVillage()->get_village_location().getXloc() << ", " << train->getDoer()->getVillage()->get_village_location().getYloc() << endl;
+	cout << "dest is " << train->getDoer()->get_action_destination().getXloc() << ", " << train->getDoer()->get_action_destination().getYloc() << endl;
 
 	if (train->getDoer()->rel.empty()) {
 		cout << "the relationship map is empty" << endl;
@@ -67,7 +69,7 @@ void ActionExecFunctions::execute_train(Action* train) {
 		//THIS IS NOT WORKING BECAUSE THE HEROES DESTINATION KEEPS GETTING RESET BY SOME OTHER CODE
 
 		//std::cout << (train->getDoer()->destination).getXloc() << ":" << (train->getDoer()->destination).getXloc() << std::endl
-		if (train->getDoer()->get_action_destination()->getXloc() != -1 && train->getDoer()->get_action_destination()->getYloc() != -1) {	//dont set it to nullptr, set it to -1
+		if (train->getDoer()->get_action_destination().getXloc() != -1 && train->getDoer()->get_action_destination().getYloc() != -1) {	//dont set it to nullptr, set it to -1
 			ActionHelper::set_timer(train, 60);  //Wait 1 minute (60 frames times 60 seconds) //make it wait 5 secs
 			train->checkpoint++;
 		}
@@ -82,7 +84,7 @@ void ActionExecFunctions::execute_train(Action* train) {
 			{
 				perror("something is wrong with the current hero memory creation function");
 			}
-			train->getDoer()->set_action_destination(&train->getDoer()->getVillage()->get_village_location()); //Also predefined, maybe as "home_location" in hero
+			train->getDoer()->set_action_destination(train->getDoer()->getVillage()->get_village_location()); //Also predefined, maybe as "home_location" in hero
 			//print stats before applying post cond 
 			cout << train->getDoer()->name << "'s str of Shgango BEFORE train is " << train->getDoer()->rel[1]->getStrength() << endl;
 			cout << train->getDoer()->name << "'s str of Yemoja BEFORE train is " << train->getDoer()->rel[2]->getStrength() << endl;	//pretty sure only this one will work
@@ -107,7 +109,7 @@ void ActionExecFunctions::execute_train_with(Action* train_with) {
 		ActionHelper::create_memory(train_with, train_with->getDoer());
 		if (ActionHelper::hero_respond(train_with)) //Other hero agrees to train with you
 		{
-			train_with->getDoer()->set_action_destination(&train_with->getReceiver()->getVillage()->get_village_location());
+			train_with->getDoer()->set_action_destination(train_with->getReceiver()->getVillage()->get_village_location());
 			train_with->checkpoint++;
 		}
 		else
@@ -120,7 +122,7 @@ void ActionExecFunctions::execute_train_with(Action* train_with) {
 
 		break;
 	case 1: //If destination is reached, start a timer and move to next checkpoint
-		if (train_with->getDoer()->get_action_destination() == nullptr) {
+		if (train_with->getDoer()->get_action_destination() == Vector2f(NULL,NULL)) {
 			ActionHelper::set_timer(train_with, 1200);  //Wait 20 seconds for greetings (60 frames times 20 seconds)
 			train_with->checkpoint++;
 		}
@@ -128,12 +130,12 @@ void ActionExecFunctions::execute_train_with(Action* train_with) {
 	case 2: //When greeting timer is complete, set train destination for both heros
 		if (ActionHelper::retrieve_time(train_with) == 0) //Greeting timer complete
 		{
-			train_with->getDoer()->set_action_destination(&train_with->getReceiver()->getLoc());
+			train_with->getDoer()->set_action_destination(train_with->getReceiver()->getLoc());
 			train_with->checkpoint++;
 		}
 		break;
 	case 3:  //When train destination is reached, start a time for 1 minute
-		if (train_with->getDoer()->get_action_destination() == nullptr)
+		if (train_with->getDoer()->get_action_destination() == Vector2f(NULL, NULL))
 		{
 			ActionHelper::set_timer(train_with, 3600); //Wait 1 minute for training (60 frames times 60 seconds)
 			train_with->checkpoint++;
@@ -149,7 +151,7 @@ void ActionExecFunctions::execute_train_with(Action* train_with) {
 				perror("something is wrong with the current hero memory creation function");
 			}
 			train_with->getDoer()->getParty()->get_fight()->end_combat();
-			train_with->getDoer()->set_action_destination(&train_with->getDoer()->getVillage()->get_village_location()); //Also predefined, maybe as "home_location" in hero
+			train_with->getDoer()->set_action_destination(train_with->getDoer()->getVillage()->get_village_location()); //Also predefined, maybe as "home_location" in hero
 			train_with->apply_postconditions(true);				 //Apply post-conditions
 			train_with->executed = true;
 			doer_mem->setCategory("success");			 //Call update_memory function
@@ -216,12 +218,12 @@ void ActionExecFunctions::execute_fight(Action* fight)
 
 	switch (fight->checkpoint) {
 	case 0: //Pick village location(location of fight target), create memory, increment checkpoint
-		fight->getDoer()->set_action_destination(&fight->getReceiver()->getVillage()->get_village_location()); //need to somehow retrieve location of target village
+		fight->getDoer()->set_action_destination(fight->getReceiver()->getVillage()->get_village_location()); //need to somehow retrieve location of target village
 		ActionHelper::create_memory(fight, fight->getDoer());
 		fight->checkpoint++;
 		break;
 	case 1: //If destination is reached, check if hero is there start a timer and move if not, fight otherwise
-		if (fight->getDoer()->get_action_destination() == nullptr)//needs to be changed to use party location right 
+		if (fight->getDoer()->get_action_destination() == Vector2f(NULL, NULL))//needs to be changed to use party location right 
 		{
 			//if the target hero is in the village then begin the battle
 			if (fight->getDoer()->getLoc() == fight->getReceiver()->getLoc()) // need to change this so it checks if the party is close by
@@ -236,14 +238,14 @@ void ActionExecFunctions::execute_fight(Action* fight)
 	case 2: //If timer is complete, set village as destination to the location of the target hero 
 		if (ActionHelper::retrieve_time(fight) == 0)
 		{
-			fight->getDoer()->set_action_destination(&fight->getReceiver()->getLoc()); //go to the target hero's location
+			fight->getDoer()->set_action_destination(fight->getReceiver()->getLoc()); //go to the target hero's location
 			fight->checkpoint++;
 			ActionHelper::create_memory(fight, fight->getReceiver());
 		}
 		break;
 	case 3: //If both niether party is empty then contiue the fight 
 			//(may need to change this to account for hero death)
-		if (fight->getDoer()->get_action_destination() == nullptr) {
+		if (fight->getDoer()->get_action_destination() == Vector2f(NULL, NULL)) {
 			//do a single round of battle every 10 sec
 			if (ActionHelper::retrieve_time(fight) == 0)
 			{
@@ -302,7 +304,7 @@ void ActionExecFunctions::execute_fight(Action* fight)
 
 		//create prompt for kill action
 		(fight->getDoer(), fight->getReceiver());
-		fight->getDoer()->set_action_destination(&fight->getDoer()->getVillage()->get_village_location());
+		fight->getDoer()->set_action_destination(fight->getDoer()->getVillage()->get_village_location());
 		break;
 
 	}
@@ -314,12 +316,12 @@ void ActionExecFunctions::execute_conquer(Action* conq)
 {
 	switch (conq->checkpoint) {
 	case 0: //Pick village location(location of fight target), create memory, increment checkpoint
-		conq->getDoer()->set_action_destination(&conq->getReceiver()->getVillage()->get_village_location()); //need to somehow retrieve location of target village
+		conq->getDoer()->set_action_destination(conq->getReceiver()->getVillage()->get_village_location()); //need to somehow retrieve location of target village
 		ActionHelper::create_memory(conq, conq->getDoer());
 		conq->checkpoint++;
 		break;
 	case 1: //If destination is reached, check if hero is there start a timer and move if not, fight otherwise
-		if (conq->getDoer()->get_action_destination() == nullptr)//needs to be changed to use party location right 
+		if (conq->getDoer()->get_action_destination() == Vector2f(NULL, NULL))//needs to be changed to use party location right 
 		{
 			ActionHelper::set_timer(conq, 3600);  //Wait 1 minute (60 frames times 60 seconds) trying to find out the hero's location
 			conq->checkpoint++;
@@ -395,7 +397,7 @@ void ActionExecFunctions::execute_conquer(Action* conq)
 		conq->getDoer()->getParty()->get_fight()->end_combat();
 		//Mark action as executed?
 		conq->executed = true;
-		conq->getDoer()->set_action_destination(&conq->getDoer()->getVillage()->get_village_location());
+		conq->getDoer()->set_action_destination(conq->getDoer()->getVillage()->get_village_location());
 		break;
 
 	}
@@ -406,12 +408,12 @@ void ActionExecFunctions::execute_duel(Action* duel)
 {
 	switch (duel->checkpoint) {
 	case 0: //Pick village location(location of fight target), create memory, increment checkpoint
-		duel->getDoer()->set_action_destination(&duel->getReceiver()->getVillage()->get_village_location());
+		duel->getDoer()->set_action_destination(duel->getReceiver()->getVillage()->get_village_location());
 		ActionHelper::create_memory(duel, duel->getDoer());
 		duel->checkpoint++;
 		break;
 	case 1: //If destination is reached, check if hero is there start a timer and move if not, fight otherwise
-		if (Party::dist_location_to_location(duel->getDoer()->getLoc(), *duel->getDoer()->get_action_destination())<500)//needs to be changed to use party location right 
+		if (Party::dist_location_to_location(duel->getDoer()->getLoc(), duel->getDoer()->get_action_destination())<500)//needs to be changed to use party location right 
 		{
 			//if the target hero is in the village then begin the battle
 			if (duel->getDoer()->getLoc() == duel->getReceiver()->getLoc()) // need to change this so it checks if the party is close by
@@ -426,14 +428,14 @@ void ActionExecFunctions::execute_duel(Action* duel)
 	case 2: //If timer is complete, set village as destination to the location of the target hero 
 		if (ActionHelper::retrieve_time(duel) == 0)
 		{
-			duel->getDoer()->set_action_destination(&duel->getReceiver()->getLoc()); //go to the target hero's location
+			duel->getDoer()->set_action_destination(duel->getReceiver()->getLoc()); //go to the target hero's location
 			duel->checkpoint++;
 			ActionHelper::create_memory(duel, duel->getReceiver());
 		}
 		break;
 	case 3: //If both niether party is empty then contiue the fight 
 			//(may need to change this to account for hero death)
-		if (Party::dist_location_to_location(duel->getDoer()->getLoc(), *duel->getDoer()->get_action_destination())<500) {
+		if (Party::dist_location_to_location(duel->getDoer()->getLoc(), duel->getDoer()->get_action_destination())<500) {
 			Fight* fight = new Fight(duel->getDoer()->getParty(), duel->getReceiver()->getParty(), true);
 			duel->checkpoint++;
 		}
@@ -488,7 +490,7 @@ void ActionExecFunctions::execute_duel(Action* duel)
 
 		//create prompt for kill action
 		//(duel->getDoer(), duel->getReceiver());
-		duel->getDoer()->set_action_destination(&duel->getDoer()->getVillage()->get_village_location());
+		duel->getDoer()->set_action_destination(duel->getDoer()->getVillage()->get_village_location());
 		break;
 
 	}
@@ -500,12 +502,12 @@ void ActionExecFunctions::execute_conversation(Action* conv)
 	switch (conv->checkpoint) {
 	case 0: //Pick training location, create memory, increment checkpoint
 		ActionHelper::create_memory(conv, conv->getDoer());
-		conv->getDoer()->set_action_destination(&conv->getReceiver()->getVillage()->get_village_location());
+		conv->getDoer()->set_action_destination(conv->getReceiver()->getVillage()->get_village_location());
 		conv->checkpoint++;
 		break;
 
 	case 1: //If destination is reached, start a timer and move to next checkpoint
-		if (conv->getDoer()->get_action_destination() == nullptr) {
+		if (conv->getDoer()->get_action_destination() == Vector2f(NULL, NULL)) {
 			ActionHelper::set_timer(conv, 60);  
 			conv->checkpoint++;
 		}
@@ -514,12 +516,12 @@ void ActionExecFunctions::execute_conversation(Action* conv)
 	case 2: //When greeting timer is complete, set train destination for both heros
 		if (ActionHelper::retrieve_time(conv) == 0) //Greeting timer complete
 		{
-			conv->getDoer()->set_action_destination(&conv->getReceiver()->getLoc());
+			conv->getDoer()->set_action_destination(conv->getReceiver()->getLoc());
 			conv->checkpoint++;
 		}
 		break;
 	case 3:  //When train destination is reached, start a time for 1 minute
-		if (conv->getDoer()->get_action_destination() == nullptr)
+		if (conv->getDoer()->get_action_destination() == Vector2f(NULL, NULL))
 		{
 			ActionHelper::set_timer(conv, 3600); //Wait 1 minute for training (60 frames times 60 seconds)
 			conv->checkpoint++;
@@ -533,7 +535,7 @@ void ActionExecFunctions::execute_conversation(Action* conv)
 			{
 				perror("something is wrong with the current hero memory creation function");
 			}
-			conv->getDoer()->set_action_destination(&conv->getDoer()->getVillage()->get_village_location()); //Also predefined, maybe as "home_location" in hero
+			conv->getDoer()->set_action_destination(conv->getDoer()->getVillage()->get_village_location()); //Also predefined, maybe as "home_location" in hero
 			if (ActionHelper::conversation(conv)) {
 				conv->apply_postconditions(true);				 //Apply post-conditions
 				doer_mem->setCategory("success");			 //Call update_memory function
@@ -557,12 +559,12 @@ void ActionExecFunctions::execute_bribe(Action* bribe)
 	switch (bribe->checkpoint) {
 	case 0: //Determine the location that the bribe is happening
 		ActionHelper::create_memory(bribe, bribe->getDoer());
-		bribe->getDoer()->set_action_destination(&bribe->getReceiver()->getVillage()->get_village_location());
+		bribe->getDoer()->set_action_destination(bribe->getReceiver()->getVillage()->get_village_location());
 		bribe->checkpoint++;
 		break;
 
 	case 1: //Create a greeting timer
-		if (bribe->getDoer()->get_action_destination() == nullptr) {
+		if (bribe->getDoer()->get_action_destination() == Vector2f(NULL, NULL)) {
 			ActionHelper::set_timer(bribe, 60);
 			bribe->checkpoint++;
 		}
@@ -584,7 +586,7 @@ void ActionExecFunctions::execute_bribe(Action* bribe)
 			{
 				perror("something is wrong with the current hero memory creation function");
 			}
-			bribe->getDoer()->set_action_destination(&bribe->getDoer()->getVillage()->get_village_location()); //Also predefined, maybe as "home_location" in hero
+			bribe->getDoer()->set_action_destination(bribe->getDoer()->getVillage()->get_village_location()); //Also predefined, maybe as "home_location" in hero
 			if (ActionHelper::conversation(bribe)) {
 				bribe->apply_postconditions(true);				 //Apply post-conditions
 				doer_mem->setCategory("success");			 //Call update_memory function
@@ -608,12 +610,12 @@ void ActionExecFunctions::execute_compliment(Action* compliment)
 	switch (compliment->checkpoint) {
 	case 0: //Determine the location that the compliment is happening
 		ActionHelper::create_memory(compliment, compliment->getDoer());
-		compliment->getDoer()->set_action_destination(&compliment->getReceiver()->getVillage()->get_village_location());
+		compliment->getDoer()->set_action_destination(compliment->getReceiver()->getVillage()->get_village_location());
 		compliment->checkpoint++;
 		break;
 
 	case 1: //Create a greeting timer
-		if (compliment->getDoer()->get_action_destination() == nullptr) {
+		if (compliment->getDoer()->get_action_destination() == Vector2f(NULL, NULL)) {
 			ActionHelper::set_timer(compliment, 60);
 			compliment->checkpoint++;
 		}
@@ -626,7 +628,7 @@ void ActionExecFunctions::execute_compliment(Action* compliment)
 			{
 				perror("something is wrong with the current hero memory creation function");
 			}
-			compliment->getDoer()->set_action_destination(&compliment->getDoer()->getVillage()->get_village_location()); //Also predefined, maybe as "home_location" in hero
+			compliment->getDoer()->set_action_destination(compliment->getDoer()->getVillage()->get_village_location()); //Also predefined, maybe as "home_location" in hero
 			if (ActionHelper::conversation(compliment)) {
 				compliment->apply_postconditions(true);				 //Apply post-conditions
 				doer_mem->setCategory("success");			 //Call update_memory function

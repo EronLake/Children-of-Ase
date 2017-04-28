@@ -21,7 +21,7 @@ cdTime(0), swingLeft(true)
   currentEnemy = nullptr;
   currentLeader = nullptr;
   party = nullptr;
-  action_destination= nullptr;
+  action_destination = Vector2f(NULL, NULL);
   killable = true;
   incapacitated = false;
   down_time = 0;
@@ -41,7 +41,7 @@ cdTime(0), swingLeft(true)
   currentEnemy = nullptr;
   currentLeader = nullptr;
   party = nullptr;
-  action_destination = nullptr;
+  action_destination = Vector2f(NULL, NULL);
   killable = true;
   incapacitated = false;
   down_time = 0;

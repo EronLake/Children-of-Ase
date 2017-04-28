@@ -86,7 +86,7 @@ int DialogueHelper::personality_appeal(ConversationPoint* point, vector<int> per
 };
 
 /*Runs the heuristic that npc's use to select a conversation point to say.*/
-dialogue_point DialogueHelper::choose_conv_pt(std::vector<ConversationLogObj*> curr_conversation_log)
+dialogue_point DialogueHelper::choose_conv_pt(std::vector<ConversationLogObj*> curr_conversation_log, Hero* other)
 {	/*index 0 = Affinity, index 1 = notoriety, index 2 = strength, index 3 = AffEstimateindex 4 = NotorEstimate, index 5 = StrEstimate*/
 
 	/*index 0 = honor, index 1 = pride, index 2 = aggression, index 3 = kindnessindex 4 = greed, index 5 = recklessness, index 6 = extroversion*/
@@ -96,6 +96,33 @@ dialogue_point DialogueHelper::choose_conv_pt(std::vector<ConversationLogObj*> c
 
 	std::vector<int> personality = yemoja_personality;
 	std::vector<int> relationship = yemoja_relationship_with_shango;
+
+	/*Hero* temp_hero = nullptr;
+	if (other->getType() >= WorldObj::TYPE_NPC) {
+		if (temp_hero = CheckClass::isHero(other))//added another equals was single equals before
+		{
+			perror("you cannot talk to this type of object");
+		}
+	}*/
+
+	/*commented out code below that uses the real personalities and relationships
+	because it caused Yemoja to stop having conversation points to say.*/
+	/*Personality* per = other->traits;
+	personality.push_back(per->getHonor());
+	personality.push_back(per->getPride());
+	personality.push_back(per->getAggression());
+	personality.push_back(per->getKindness());
+	personality.push_back(per->getGreed());
+	personality.push_back(per->getRecklessness());
+	personality.push_back(per->getExtroversion());
+
+	Relationship* rel = other->rel[SHANGO];
+	relationship.push_back(rel->getAffinity());
+	relationship.push_back(rel->getNotoriety());
+	relationship.push_back(rel->getStrength());
+	relationship.push_back(rel->getAffEstimate());
+	relationship.push_back(rel->getNotorEstimate());
+	relationship.push_back(rel->getStrEstimate());*/
 
 	if (curr_conversation_log[curr_conversation_log.size() - 1]->get_conv_point()->get_name() == "Ask_For_Quest") {
 		return{ "Offer_Quest", "Offer_Quest" };
@@ -360,13 +387,14 @@ dialogue_point DialogueHelper::get_dialog(std::string name, dialogue_point diog_
 
 	dialogue_point dpoint;
 	
-	int j = 3;
+	int j = 3; //set phrase picker to "neutral" by default
 
 	std::pair<int, Memory*> topic;
 	topic.first = SHANGO;
 	if (name != "Shango") {
 		    //choose phrase based on relationship with topic of diog_pt
-			if (diog_pt[ConvPointName].find("Advise To",0) != string::npos || diog_pt[ConvPointName].find("Ask About", 0) != string::npos) {
+			if (diog_pt[ConvPointName].find("Advise To",0) != string::npos || diog_pt[ConvPointName].find("Ask About", 0) != string::npos
+				|| diog_pt[ConvPointName].find("Take Advice", 0) != string::npos || diog_pt[ConvPointName].find("Tell About", 0) != string::npos) {
 				topic.first = hero_name_to_int(diog_pt[Topic]);
 				j = calc_text_choice_from_relationship(hero,topic);
 			}
@@ -491,39 +519,35 @@ int DialogueHelper::calc_text_choice_from_relationship(Hero* hero, std::pair<int
 	Relationship* npc_relationship;
 
 	//base the npc reply on their relationship with the topic of the
-	//conversation(we don't use the stuff in the below if statement
-	//since we are using dummy vectors)
-	/*if (hero->name != topic.first &&
-		topic.first != 1) {
-		rel = hero->rel;
-		npc_relationship = rel[topic.first];//get npc's relationship with the topic of the conversation
-	}*/
+	//conversation
+	rel = hero->rel;
+	if (topic.first == -1)
+		topic.first = SHANGO;
+	npc_relationship = rel[topic.first];//get npc's relationship with the topic of the conversation point
 
-	/*Using dummy vectors for personalities and relationships for now 
-	but will need to eventually use the relationship values from the 
-	npc that is talking to the player rather than assuming that the player 
-	is talking to Yemoja.
+	/*chooses a number between 1 and 5 based on the npc's affinity for the topic
+	of their conversation or reply point. The chosen number is used to select a phrase
+	from the range hateful to loving.
 	*/
-	if (topic.first == 1) {
-		if (yemoja_relationship_with_shango[0] <= 20) {
+	if (npc_relationship->getAffinity() <= 20) {
 			phrase_picker = 1;
-		}
-		else if (yemoja_relationship_with_shango[0] > 20 && yemoja_relationship_with_shango[0] < 40) {
-			phrase_picker = 2;
-		}
-		else if (yemoja_relationship_with_shango[0] >= 40 && yemoja_relationship_with_shango[0] < 60) {
-			phrase_picker = 3;
-		}
-		else if (yemoja_relationship_with_shango[0] >= 60 && yemoja_relationship_with_shango[0] < 80) {
-			phrase_picker = 4;
-		}
-		else if (yemoja_relationship_with_shango[0] >= 80) {
-			phrase_picker = 5;
-		}
 	}
+	else if (npc_relationship->getAffinity() > 20 && npc_relationship->getAffinity() < 40) {
+			phrase_picker = 2;
+	}
+	else if (npc_relationship->getAffinity() >= 40 && npc_relationship->getAffinity() < 60) {
+			phrase_picker = 3;
+	}
+	else if (npc_relationship->getAffinity() >= 60 && npc_relationship->getAffinity() < 80) {
+			phrase_picker = 4;
+	}
+	else if (npc_relationship->getAffinity() >= 80) {
+			phrase_picker = 5;
+	}
+	//}
 	//here the topic is Oya so have Yemoja respond based on her relationship with Oya
 	//rather than her relationship with Shango
-	else {
+	/*else {
 		if (yemoja_relationship_with_oya[0] <= 20) {
 			phrase_picker = 1;
 		}
@@ -539,7 +563,7 @@ int DialogueHelper::calc_text_choice_from_relationship(Hero* hero, std::pair<int
 		else if (yemoja_relationship_with_oya[0] >= 80) {
 			phrase_picker = 5;
 		}
-	}
+	}*/
 
 	return phrase_picker;
 }
