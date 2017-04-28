@@ -135,7 +135,7 @@ dialogue_point DialogueHelper::choose_conv_pt(std::vector<ConversationLogObj*> c
 			if (p->quests_given.size() == 0) {
 				Planner* planner = AIController::get_plan(other->name);
 				DialogueHelper::quest = planner->get_current_action();
-				if (quest->name.find("Bribe", 0) != string::npos) {
+				if (true) {
 
 					return{ "Bribe Quest","Bribe Quest" };
 				}
@@ -420,7 +420,7 @@ dialogue_point DialogueHelper::get_dialog(std::string name, dialogue_point diog_
 
 	std::pair<int, Memory*> topic;
 	topic.first = SHANGO;
-	if (name != "Shango") {
+	if (name != "Shango" && name != "SilverSoldier") {
 		    //choose phrase based on relationship with topic of diog_pt
 			if (diog_pt[ConvPointName].find("Advise To",0) != string::npos || diog_pt[ConvPointName].find("Ask About", 0) != string::npos
 				|| diog_pt[ConvPointName].find("Take Advice", 0) != string::npos || diog_pt[ConvPointName].find("Tell About", 0) != string::npos) {

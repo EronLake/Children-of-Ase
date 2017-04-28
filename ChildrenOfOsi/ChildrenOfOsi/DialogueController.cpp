@@ -233,12 +233,14 @@ void DialogueController::PlayerResponse()
 
 		}
 		
-		Planner* planner = AIController::get_plan(CheckClass::isHero(other)->name);
-		if (choice[ConvPointName] == "Accept_Quest") {
-			DialogueController::quest = planner->get_current_action();
-			planner->quests_given.push_back(quest); //gives npc record of what they gave player
-			player->cur_action = quest; //gives player record of what they are doing
-			DialogueHelper::accepted_quest = true;
+		if (other->getName() != "silverSoldier") {
+			Planner* planner = AIController::get_plan(CheckClass::isHero(other)->name);
+			if (choice[ConvPointName] == "Accept_Quest") {
+				DialogueController::quest = planner->get_current_action();
+				planner->quests_given.push_back(quest); //gives npc record of what they gave player
+				player->cur_action = quest; //gives player record of what they are doing
+				DialogueHelper::accepted_quest = true;
+			}
 		}
 
 		//get a sentence to say based on player's reply option selection
@@ -610,12 +612,15 @@ void DialogueController::startConversation(WorldObj* n, bool playerTalk)
 	//else if(quest_complete)
 	    //message = n->getName() + ": " + dialogue.gen_dialog({ "Quest_Complete","Quest_Complete"},temp_hero);
 	//else
-
-	Planner* planner = AIController::get_plan(CheckClass::isHero(other)->name);
-	if(planner->quests_given.size() == 1)
-		message = n->getName() + ": " + dialogue.gen_dialog({ "Quest_In_Progress","Quest_In_Progress" }, temp_hero);
-	else if(planner->quests_given.size() > 1)
-		message = n->getName() + ": " + dialogue.gen_dialog({ "Quest_Complete","Quest_Complete" }, temp_hero);
+	if (other->getName() == "Yemoja") {
+		Planner* planner = AIController::get_plan(CheckClass::isHero(other)->name);
+		if (planner->quests_given.size() == 1)
+			message = n->getName() + ": " + dialogue.gen_dialog({ "Quest_In_Progress","Quest_In_Progress" }, temp_hero);
+		else if (planner->quests_given.size() > 1)
+			message = n->getName() + ": " + dialogue.gen_dialog({ "Quest_Complete","Quest_Complete" }, temp_hero);
+		else
+			message = n->getName() + ": " + dialogue.gen_dialog({ "Greeting","Greeting" }, temp_hero);
+	}
 	else
 		message = n->getName() + ": " + dialogue.gen_dialog({ "Greeting","Greeting" }, temp_hero);
 	if (playerTalk) {
@@ -642,22 +647,43 @@ hero-related conversation points from the 3D vector of possible conversation
 points and removes them from the options vector.*/
 void DialogueController::exitDialogue()
 {
-	Planner* planner = AIController::get_plan(CheckClass::isHero(other)->name);
-	if (planner->quests_given.size() == 0) {
-		dialogue.prompted_quest = true;
-		ConversationLogObj* conv_log_obj = new ConversationLogObj();
-		Memory* mem = nullptr;
+	if (other->getName() != "silverSoldier") {
+		Planner* planner = AIController::get_plan(CheckClass::isHero(other)->name);
+		if (planner->quests_given.size() == 0) {
+			dialogue.prompted_quest = true;
+			ConversationLogObj* conv_log_obj = new ConversationLogObj();
+			Memory* mem = nullptr;
 
-		conv_log_obj->set_who(1);
-		conv_log_obj->set_conv_point(Containers::conv_point_table["Ask_For_Quest"]);
-		conv_log_obj->update_number_of_times_said();
-		conv_log_obj->set_topic(NoTopic, mem);
+			conv_log_obj->set_who(1);
+			conv_log_obj->set_conv_point(Containers::conv_point_table["Ask_For_Quest"]);
+			conv_log_obj->update_number_of_times_said();
+			conv_log_obj->set_topic(NoTopic, mem);
 
-		curr_conversation_log.push_back(conv_log_obj);//add entry to log
-		player_conv_point_choice = "Ask_For_Quest";
-		otherResponse("Ask_For_Quest","Shango");
-		state = 2;
-		//planner->quests_given.push_back(planner->get_current_action());
+			curr_conversation_log.push_back(conv_log_obj);//add entry to log
+			player_conv_point_choice = "Ask_For_Quest";
+			otherResponse("Ask_For_Quest", "Shango");
+			state = 2;
+			//planner->quests_given.push_back(planner->get_current_action());
+		}
+		else {
+			other = nullptr;
+			state = 0;
+			DialogueController::scroll_control = 0;
+
+			for (int i = 0; i < curr_conversation_log.size(); i++) {
+
+				//delete memory allocated for instance of Memory class here
+				//delete tmp_top.second;
+				//delete memory allocated for conversation log object here
+				if (curr_conversation_log[i] != nullptr)
+					delete curr_conversation_log[i];
+			}
+
+			curr_conversation_log.clear();
+
+			remove_hero_related_conv_points();
+			first_call = true;
+		}
 	}
 	else {
 		other = nullptr;
