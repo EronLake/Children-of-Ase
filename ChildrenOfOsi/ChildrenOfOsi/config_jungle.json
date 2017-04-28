@@ -129,20 +129,19 @@
       "x" : 194.2048034667969,
       "y" : 239.894531250
    },
-  "BottomMapBorder-3-5": {
-    "bodyx1": 0.0,
-    "bodyx2": 0.0,
-    "bodyy1": 0.0,
-    "bodyy2": 0.0,
-    "frame_num": 1,
-    "hight": 2000.0,
-    "name": "BottomMapBorder-3-5",
-    "tex_file": "blank",
-    "width": 2000.0,
-    "x": 212.9851531982422,
-    "y": 238.7881622314453
-  },
-
+   "BottomMapBorder-3-5" : {
+      "bodyx1" : 0.0,
+      "bodyx2" : 0.0,
+      "bodyy1" : 0.0,
+      "bodyy2" : 0.0,
+      "frame_num" : 1,
+      "hight" : 2000.0,
+      "name" : "BottomMapBorder-3-5",
+      "tex_file" : "blank",
+      "width" : 2000.0,
+      "x" : 212.9851531982422,
+      "y" : 238.7881622314453
+   },
    "JungleBotLeft" : {
       "bodyx1" : 0.0,
       "bodyx2" : 0.0,
@@ -195,6 +194,84 @@
       "x" : 231.1613464355469,
       "y" : 162.9358062744141
    },
+   "JungleTree" : {
+      "bodyx1" : 0.0,
+      "bodyx2" : 0.0,
+      "bodyy1" : 0.0,
+      "bodyy2" : 0.0,
+      "frame_num" : 1,
+      "hight" : 500.0,
+      "name" : "JungleTree",
+      "tex_file" : "Jungle_tree_1",
+      "width" : 500.0,
+      "x" : 194.50,
+      "y" : 167.9792938232422
+   },
+   "JungleTree-0" : {
+      "bodyx1" : 0.0,
+      "bodyx2" : 0.0,
+      "bodyy1" : 0.0,
+      "bodyy2" : 0.0,
+      "frame_num" : 1,
+      "hight" : 500.0,
+      "name" : "JungleTree-0",
+      "tex_file" : "Jungle_tree_1",
+      "width" : 500.0,
+      "x" : 201.5500335693359,
+      "y" : 167.9518432617188
+   },
+   "JungleTree-1" : {
+      "bodyx1" : 0.0,
+      "bodyx2" : 0.0,
+      "bodyy1" : 0.0,
+      "bodyy2" : 0.0,
+      "frame_num" : 1,
+      "hight" : 500.0,
+      "name" : "JungleTree-1",
+      "tex_file" : "Jungle_tree_1",
+      "width" : 500.0,
+      "x" : 208.1961975097656,
+      "y" : 164.9586944580078
+   },
+   "JungleTree-2" : {
+      "bodyx1" : 0.0,
+      "bodyx2" : 0.0,
+      "bodyy1" : 0.0,
+      "bodyy2" : 0.0,
+      "frame_num" : 1,
+      "hight" : 500.0,
+      "name" : "JungleTree-2",
+      "tex_file" : "Jungle_tree_1",
+      "width" : 500.0,
+      "x" : 213.6312713623047,
+      "y" : 170.2969665527344
+   },
+   "JungleTree-3" : {
+      "bodyx1" : 0.0,
+      "bodyx2" : 0.0,
+      "bodyy1" : 0.0,
+      "bodyy2" : 0.0,
+      "frame_num" : 1,
+      "hight" : 500.0,
+      "name" : "JungleTree-3",
+      "tex_file" : "Jungle_tree_1",
+      "width" : 500.0,
+      "x" : 218.4943237304688,
+      "y" : 163.5704498291016
+   },
+   "JungleTree-4" : {
+      "bodyx1" : 0.0,
+      "bodyx2" : 0.0,
+      "bodyy1" : 0.0,
+      "bodyy2" : 0.0,
+      "frame_num" : 1,
+      "hight" : 500.0,
+      "name" : "JungleTree-4",
+      "tex_file" : "Jungle_tree_1",
+      "width" : 500.0,
+      "x" : 225.3417053222656,
+      "y" : 168.10644531250
+   },
    "Jungle_Element_Num_101" : {
       "bodyx1" : 205.0,
       "bodyx2" : 225.0,
@@ -207,19 +284,6 @@
       "width" : 500.0,
       "x" : 117.9671783447266,
       "y" : 211.5272979736328
-   },
-   "Jungle_Element_Num_104" : {
-      "bodyx1" : 210.0,
-      "bodyx2" : 200.0,
-      "bodyy1" : 420.0,
-      "bodyy2" : 50.0,
-      "frame_num" : 1,
-      "hight" : 500.0,
-      "name" : "Jungle_Element_Num_104",
-      "tex_file" : "Jungle_Tree_2",
-      "width" : 500.0,
-      "x" : 115.9959411621094,
-      "y" : 224.9551544189453
    },
    "Jungle_Element_Num_11" : {
       "bodyx1" : 180.0,
@@ -234,19 +298,6 @@
       "x" : 145.9015197753906,
       "y" : 189.5248107910156
    },
-   "Jungle_Element_Num_110" : {
-      "bodyx1" : 205.0,
-      "bodyx2" : 225.0,
-      "bodyy1" : 430.0,
-      "bodyy2" : 30.0,
-      "frame_num" : 1,
-      "hight" : 500.0,
-      "name" : "Jungle_Element_Num_110",
-      "tex_file" : "Jungle_Tree_4",
-      "width" : 500.0,
-      "x" : 112.5871276855469,
-      "y" : 234.8120727539063
-   },
    "Jungle_Element_Num_111" : {
       "bodyx1" : 180.0,
       "bodyx2" : 180.0,
@@ -259,19 +310,6 @@
       "width" : 500.0,
       "x" : 144.7469635009766,
       "y" : 205.6984252929688
-   },
-   "Jungle_Element_Num_113" : {
-      "bodyx1" : 180.0,
-      "bodyx2" : 180.0,
-      "bodyy1" : 350.0,
-      "bodyy2" : 95.0,
-      "frame_num" : 1,
-      "hight" : 500.0,
-      "name" : "Jungle_Element_Num_113",
-      "tex_file" : "Jungle_Tree_5",
-      "width" : 500.0,
-      "x" : 125.7144699096680,
-      "y" : 213.1143035888672
    },
    "Jungle_Element_Num_119" : {
       "bodyx1" : 205.0,
@@ -296,21 +334,8 @@
       "name" : "Jungle_Element_Num_126",
       "tex_file" : "Jungle_Tree_2",
       "width" : 500.0,
-      "x" : 136.9207611083984,
-      "y" : 208.4432373046875
-   },
-   "Jungle_Element_Num_133" : {
-      "bodyx1" : 210.0,
-      "bodyx2" : 200.0,
-      "bodyy1" : 420.0,
-      "bodyy2" : 50.0,
-      "frame_num" : 1,
-      "hight" : 500.0,
-      "name" : "Jungle_Element_Num_133",
-      "tex_file" : "Jungle_Tree_2",
-      "width" : 500.0,
-      "x" : 108.0972824096680,
-      "y" : 236.8177795410156
+      "x" : 143.5409698486328,
+      "y" : 217.4257049560547
    },
    "Jungle_Element_Num_136" : {
       "bodyx1" : 205.0,
@@ -351,19 +376,6 @@
       "x" : 137.0314941406250,
       "y" : 193.5219268798828
    },
-   "Jungle_Element_Num_145" : {
-      "bodyx1" : 180.0,
-      "bodyx2" : 180.0,
-      "bodyy1" : 350.0,
-      "bodyy2" : 95.0,
-      "frame_num" : 1,
-      "hight" : 500.0,
-      "name" : "Jungle_Element_Num_145",
-      "tex_file" : "Jungle_Tree_1",
-      "width" : 500.0,
-      "x" : 108.2864074707031,
-      "y" : 225.3562927246094
-   },
    "Jungle_Element_Num_146" : {
       "bodyx1" : 205.0,
       "bodyx2" : 225.0,
@@ -387,8 +399,8 @@
       "name" : "Jungle_Element_Num_150",
       "tex_file" : "Jungle_Tree_3",
       "width" : 500.0,
-      "x" : 137.36230468750,
-      "y" : 202.1588897705078
+      "x" : 132.4019470214844,
+      "y" : 203.4473114013672
    },
    "Jungle_Element_Num_159" : {
       "bodyx1" : 210.0,
@@ -426,8 +438,8 @@
       "name" : "Jungle_Element_Num_160",
       "tex_file" : "Jungle_Tree_4",
       "width" : 500.0,
-      "x" : 126.0938796997070,
-      "y" : 210.0407409667969
+      "x" : 125.8947448730469,
+      "y" : 212.5292510986328
    },
    "Jungle_Element_Num_162" : {
       "bodyx1" : 180.0,
@@ -465,8 +477,8 @@
       "name" : "Jungle_Element_Num_167",
       "tex_file" : "Jungle_Tree_2",
       "width" : 500.0,
-      "x" : 138.8112182617188,
-      "y" : 194.3141021728516
+      "x" : 138.2182769775391,
+      "y" : 196.9846649169922
    },
    "Jungle_Element_Num_168" : {
       "bodyx1" : 205.0,
@@ -504,8 +516,268 @@
       "name" : "Jungle_Element_Num_175",
       "tex_file" : "Jungle_Tree_3",
       "width" : 500.0,
-      "x" : 110.0508728027344,
-      "y" : 212.329589843750
+      "x" : 104.1442947387695,
+      "y" : 224.7205810546875
+   },
+   "Jungle_Element_Num_175-0" : {
+      "bodyx1" : 205.0,
+      "bodyx2" : 225.0,
+      "bodyy1" : 430.0,
+      "bodyy2" : 30.0,
+      "frame_num" : 1,
+      "hight" : 500.0,
+      "name" : "Jungle_Element_Num_175-0",
+      "tex_file" : "Jungle_Tree_3",
+      "width" : 500.0,
+      "x" : 111.6175231933594,
+      "y" : 223.9800262451172
+   },
+   "Jungle_Element_Num_175-1" : {
+      "bodyx1" : 205.0,
+      "bodyx2" : 225.0,
+      "bodyy1" : 430.0,
+      "bodyy2" : 30.0,
+      "frame_num" : 1,
+      "hight" : 500.0,
+      "name" : "Jungle_Element_Num_175-1",
+      "tex_file" : "Jungle_Tree_3",
+      "width" : 500.0,
+      "x" : 117.2889099121094,
+      "y" : 225.1217346191406
+   },
+   "Jungle_Element_Num_175-10" : {
+      "bodyx1" : 205.0,
+      "bodyx2" : 225.0,
+      "bodyy1" : 430.0,
+      "bodyy2" : 30.0,
+      "frame_num" : 1,
+      "hight" : 500.0,
+      "name" : "Jungle_Element_Num_175-10",
+      "tex_file" : "Jungle_Tree_3",
+      "width" : 500.0,
+      "x" : 117.0202026367188,
+      "y" : 234.8654174804688
+   },
+   "Jungle_Element_Num_175-11" : {
+      "bodyx1" : 205.0,
+      "bodyx2" : 225.0,
+      "bodyy1" : 430.0,
+      "bodyy2" : 30.0,
+      "frame_num" : 1,
+      "hight" : 500.0,
+      "name" : "Jungle_Element_Num_175-11",
+      "tex_file" : "Jungle_Tree_3",
+      "width" : 500.0,
+      "x" : 124.1253509521484,
+      "y" : 232.1036376953125
+   },
+   "Jungle_Element_Num_175-12" : {
+      "bodyx1" : 205.0,
+      "bodyx2" : 225.0,
+      "bodyy1" : 430.0,
+      "bodyy2" : 30.0,
+      "frame_num" : 1,
+      "hight" : 500.0,
+      "name" : "Jungle_Element_Num_175-12",
+      "tex_file" : "Jungle_Tree_3",
+      "width" : 500.0,
+      "x" : 132.2393035888672,
+      "y" : 229.0874786376953
+   },
+   "Jungle_Element_Num_175-13" : {
+      "bodyx1" : 205.0,
+      "bodyx2" : 225.0,
+      "bodyy1" : 430.0,
+      "bodyy2" : 30.0,
+      "frame_num" : 1,
+      "hight" : 500.0,
+      "name" : "Jungle_Element_Num_175-13",
+      "tex_file" : "Jungle_Tree_3",
+      "width" : 500.0,
+      "x" : 135.1359252929688,
+      "y" : 234.3640594482422
+   },
+   "Jungle_Element_Num_175-14" : {
+      "bodyx1" : 205.0,
+      "bodyx2" : 225.0,
+      "bodyy1" : 430.0,
+      "bodyy2" : 30.0,
+      "frame_num" : 1,
+      "hight" : 500.0,
+      "name" : "Jungle_Element_Num_175-14",
+      "tex_file" : "Jungle_Tree_3",
+      "width" : 500.0,
+      "x" : 140.0800323486328,
+      "y" : 230.5284729003906
+   },
+   "Jungle_Element_Num_175-15" : {
+      "bodyx1" : 205.0,
+      "bodyx2" : 225.0,
+      "bodyy1" : 430.0,
+      "bodyy2" : 30.0,
+      "frame_num" : 1,
+      "hight" : 500.0,
+      "name" : "Jungle_Element_Num_175-15",
+      "tex_file" : "Jungle_Tree_3",
+      "width" : 500.0,
+      "x" : 145.1421813964844,
+      "y" : 234.4782104492188
+   },
+   "Jungle_Element_Num_175-16" : {
+      "bodyx1" : 205.0,
+      "bodyx2" : 225.0,
+      "bodyy1" : 430.0,
+      "bodyy2" : 30.0,
+      "frame_num" : 1,
+      "hight" : 500.0,
+      "name" : "Jungle_Element_Num_175-16",
+      "tex_file" : "Jungle_Tree_3",
+      "width" : 500.0,
+      "x" : 146.1464843750,
+      "y" : 230.1273498535156
+   },
+   "Jungle_Element_Num_175-17" : {
+      "bodyx1" : 205.0,
+      "bodyx2" : 225.0,
+      "bodyy1" : 430.0,
+      "bodyy2" : 30.0,
+      "frame_num" : 1,
+      "hight" : 500.0,
+      "name" : "Jungle_Element_Num_175-17",
+      "tex_file" : "Jungle_Tree_3",
+      "width" : 500.0,
+      "x" : 150.0455627441406,
+      "y" : 233.8919067382813
+   },
+   "Jungle_Element_Num_175-18" : {
+      "bodyx1" : 205.0,
+      "bodyx2" : 225.0,
+      "bodyy1" : 430.0,
+      "bodyy2" : 30.0,
+      "frame_num" : 1,
+      "hight" : 500.0,
+      "name" : "Jungle_Element_Num_175-18",
+      "tex_file" : "Jungle_Tree_3",
+      "width" : 500.0,
+      "x" : 163.1442871093750,
+      "y" : 236.7205810546875
+   },
+   "Jungle_Element_Num_175-19" : {
+      "bodyx1" : 205.0,
+      "bodyx2" : 225.0,
+      "bodyy1" : 430.0,
+      "bodyy2" : 30.0,
+      "frame_num" : 1,
+      "hight" : 500.0,
+      "name" : "Jungle_Element_Num_175-19",
+      "tex_file" : "Jungle_Tree_3",
+      "width" : 500.0,
+      "x" : 169.1442871093750,
+      "y" : 236.7205810546875
+   },
+   "Jungle_Element_Num_175-2" : {
+      "bodyx1" : 205.0,
+      "bodyx2" : 225.0,
+      "bodyy1" : 430.0,
+      "bodyy2" : 30.0,
+      "frame_num" : 1,
+      "hight" : 500.0,
+      "name" : "Jungle_Element_Num_175-2",
+      "tex_file" : "Jungle_Tree_3",
+      "width" : 500.0,
+      "x" : 122.2513656616211,
+      "y" : 227.3125762939453
+   },
+   "Jungle_Element_Num_175-3" : {
+      "bodyx1" : 205.0,
+      "bodyx2" : 225.0,
+      "bodyy1" : 430.0,
+      "bodyy2" : 30.0,
+      "frame_num" : 1,
+      "hight" : 500.0,
+      "name" : "Jungle_Element_Num_175-3",
+      "tex_file" : "Jungle_Tree_3",
+      "width" : 500.0,
+      "x" : 127.0681457519531,
+      "y" : 221.4946136474609
+   },
+   "Jungle_Element_Num_175-4" : {
+      "bodyx1" : 205.0,
+      "bodyx2" : 225.0,
+      "bodyy1" : 430.0,
+      "bodyy2" : 30.0,
+      "frame_num" : 1,
+      "hight" : 500.0,
+      "name" : "Jungle_Element_Num_175-4",
+      "tex_file" : "Jungle_Tree_3",
+      "width" : 500.0,
+      "x" : 131.5579833984375,
+      "y" : 220.9083251953125
+   },
+   "Jungle_Element_Num_175-5" : {
+      "bodyx1" : 205.0,
+      "bodyx2" : 225.0,
+      "bodyy1" : 430.0,
+      "bodyy2" : 30.0,
+      "frame_num" : 1,
+      "hight" : 500.0,
+      "name" : "Jungle_Element_Num_175-5",
+      "tex_file" : "Jungle_Tree_3",
+      "width" : 500.0,
+      "x" : 136.3727569580078,
+      "y" : 221.5254669189453
+   },
+   "Jungle_Element_Num_175-6" : {
+      "bodyx1" : 205.0,
+      "bodyx2" : 225.0,
+      "bodyy1" : 430.0,
+      "bodyy2" : 30.0,
+      "frame_num" : 1,
+      "hight" : 500.0,
+      "name" : "Jungle_Element_Num_175-6",
+      "tex_file" : "Jungle_Tree_3",
+      "width" : 500.0,
+      "x" : 151.1442871093750,
+      "y" : 230.7205810546875
+   },
+   "Jungle_Element_Num_175-7" : {
+      "bodyx1" : 205.0,
+      "bodyx2" : 225.0,
+      "bodyy1" : 430.0,
+      "bodyy2" : 30.0,
+      "frame_num" : 1,
+      "hight" : 500.0,
+      "name" : "Jungle_Element_Num_175-7",
+      "tex_file" : "Jungle_Tree_3",
+      "width" : 500.0,
+      "x" : 157.1442871093750,
+      "y" : 230.7205810546875
+   },
+   "Jungle_Element_Num_175-8" : {
+      "bodyx1" : 205.0,
+      "bodyx2" : 225.0,
+      "bodyy1" : 430.0,
+      "bodyy2" : 30.0,
+      "frame_num" : 1,
+      "hight" : 500.0,
+      "name" : "Jungle_Element_Num_175-8",
+      "tex_file" : "Jungle_Tree_3",
+      "width" : 500.0,
+      "x" : 163.1442871093750,
+      "y" : 230.7205810546875
+   },
+   "Jungle_Element_Num_175-9" : {
+      "bodyx1" : 205.0,
+      "bodyx2" : 225.0,
+      "bodyy1" : 430.0,
+      "bodyy2" : 30.0,
+      "frame_num" : 1,
+      "hight" : 500.0,
+      "name" : "Jungle_Element_Num_175-9",
+      "tex_file" : "Jungle_Tree_3",
+      "width" : 500.0,
+      "x" : 169.1442871093750,
+      "y" : 230.7205810546875
    },
    "Jungle_Element_Num_176" : {
       "bodyx1" : 205.0,
@@ -608,8 +880,8 @@
       "name" : "Jungle_Element_Num_199",
       "tex_file" : "Jungle_Tree_4",
       "width" : 500.0,
-      "x" : 136.5467529296875,
-      "y" : 221.3338928222656
+      "x" : 135.5655975341797,
+      "y" : 218.4131317138672
    },
    "Jungle_Element_Num_20" : {
       "bodyx1" : 180.0,
@@ -803,8 +1075,8 @@
       "name" : "Jungle_Element_Num_213",
       "tex_file" : "Jungle_Tree_3",
       "width" : 500.0,
-      "x" : 173.6948394775391,
-      "y" : 178.0902099609375
+      "x" : 173.6191558837891,
+      "y" : 176.5710754394531
    },
    "Jungle_Element_Num_214" : {
       "bodyx1" : 205.0,
@@ -868,8 +1140,8 @@
       "name" : "Jungle_Element_Num_218",
       "tex_file" : "Jungle_Tree_3",
       "width" : 500.0,
-      "x" : 169.5660400390625,
-      "y" : 215.2533416748047
+      "x" : 166.2437896728516,
+      "y" : 211.8653564453125
    },
    "Jungle_Element_Num_219" : {
       "bodyx1" : 205.0,
@@ -998,8 +1270,8 @@
       "name" : "Jungle_Element_Num_228",
       "tex_file" : "Jungle_Tree_5",
       "width" : 500.0,
-      "x" : 169.4048004150391,
-      "y" : 218.4712677001953
+      "x" : 167.6349029541016,
+      "y" : 224.3876800537109
    },
    "Jungle_Element_Num_229" : {
       "bodyx1" : 205,
@@ -1093,17 +1365,17 @@
       "y" : 186.1326293945313
    },
    "Jungle_Element_Num_236" : {
-      "bodyx1" : 205,
-      "bodyx2" : 225,
-      "bodyy1" : 430,
-      "bodyy2" : 30,
+      "bodyx1" : 205.0,
+      "bodyx2" : 225.0,
+      "bodyy1" : 430.0,
+      "bodyy2" : 30.0,
       "frame_num" : 1,
-      "hight" : 500,
+      "hight" : 500.0,
       "name" : "Jungle_Element_Num_236",
       "tex_file" : "Jungle_Tree_4",
-      "width" : 500,
-      "x" : 168.0,
-      "y" : 227.0
+      "width" : 500.0,
+      "x" : 167.9598388671875,
+      "y" : 227.3499603271484
    },
    "Jungle_Element_Num_237" : {
       "bodyx1" : 205,
@@ -1391,21 +1663,19 @@
       "x" : 239.3611907958984,
       "y" : 211.2509307861328
    },
-
-  "Jungle_Element_Num_254-15": {
-    "bodyx1": 180.0,
-    "bodyx2": 180.0,
-    "bodyy1": 350.0,
-    "bodyy2": 95.0,
-    "frame_num": 1,
-    "hight": 500.0,
-    "name": "Jungle_Element_Num_254-15",
-    "tex_file": "Jungle_Tree_5",
-    "width": 500.0,
-    "x": 233.2413635253906,
-    "y": 217.2485961914063
-  },
-
+   "Jungle_Element_Num_254-15" : {
+      "bodyx1" : 180.0,
+      "bodyx2" : 180.0,
+      "bodyy1" : 350.0,
+      "bodyy2" : 95.0,
+      "frame_num" : 1,
+      "hight" : 500.0,
+      "name" : "Jungle_Element_Num_254-15",
+      "tex_file" : "Jungle_Tree_5",
+      "width" : 500.0,
+      "x" : 233.2413635253906,
+      "y" : 217.2485961914063
+   },
    "Jungle_Element_Num_254-2" : {
       "bodyx1" : 180.0,
       "bodyx2" : 180.0,
@@ -1563,17 +1833,17 @@
       "y" : 212.0
    },
    "Jungle_Element_Num_259" : {
-      "bodyx1" : 180,
-      "bodyx2" : 180,
-      "bodyy1" : 350,
-      "bodyy2" : 95,
+      "bodyx1" : 180.0,
+      "bodyx2" : 180.0,
+      "bodyy1" : 350.0,
+      "bodyy2" : 95.0,
       "frame_num" : 1,
-      "hight" : 500,
+      "hight" : 500.0,
       "name" : "Jungle_Element_Num_259",
       "tex_file" : "Jungle_Tree_5",
-      "width" : 500,
-      "x" : 174.0,
-      "y" : 219.0
+      "width" : 500.0,
+      "x" : 173.9561309814453,
+      "y" : 221.0550994873047
    },
    "Jungle_Element_Num_26" : {
       "bodyx1" : 210.0,
@@ -1871,8 +2141,8 @@
       "name" : "Jungle_Element_Num_28",
       "tex_file" : "Jungle_Tree_1",
       "width" : 500.0,
-      "x" : 127.8484268188477,
-      "y" : 195.2549438476563
+      "x" : 124.30566406250,
+      "y" : 199.0829467773438
    },
    "Jungle_Element_Num_280" : {
       "bodyx1" : 210,
@@ -2079,8 +2349,8 @@
       "name" : "Jungle_Element_Num_295",
       "tex_file" : "Jungle_Tree_3",
       "width" : 500.0,
-      "x" : 157.8220214843750,
-      "y" : 218.3838806152344
+      "x" : 157.8872222900391,
+      "y" : 214.7910919189453
    },
    "Jungle_Element_Num_296" : {
       "bodyx1" : 210.0,
@@ -2144,34 +2414,8 @@
       "name" : "Jungle_Element_Num_30",
       "tex_file" : "Jungle_Tree_3",
       "width" : 500.0,
-      "x" : 145.8138427734375,
-      "y" : 206.3809509277344
-   },
-   "Jungle_Element_Num_50" : {
-      "bodyx1" : 180.0,
-      "bodyx2" : 180.0,
-      "bodyy1" : 350.0,
-      "bodyy2" : 95.0,
-      "frame_num" : 1,
-      "hight" : 500.0,
-      "name" : "Jungle_Element_Num_50",
-      "tex_file" : "Jungle_Tree_1",
-      "width" : 500.0,
-      "x" : 125.2187576293945,
-      "y" : 212.9923858642578
-   },
-   "Jungle_Element_Num_55" : {
-      "bodyx1" : 180.0,
-      "bodyx2" : 180.0,
-      "bodyy1" : 350.0,
-      "bodyy2" : 95.0,
-      "frame_num" : 1,
-      "hight" : 500.0,
-      "name" : "Jungle_Element_Num_55",
-      "tex_file" : "Jungle_Tree_1",
-      "width" : 500.0,
-      "x" : 141.4716949462891,
-      "y" : 207.4300994873047
+      "x" : 139.7305145263672,
+      "y" : 217.9194183349609
    },
    "Jungle_Element_Num_56" : {
       "bodyx1" : 210.0,
@@ -2185,19 +2429,6 @@
       "width" : 500.0,
       "x" : 120.7029113769531,
       "y" : 206.0450592041016
-   },
-   "Jungle_Element_Num_57" : {
-      "bodyx1" : 205.0,
-      "bodyx2" : 225.0,
-      "bodyy1" : 430.0,
-      "bodyy2" : 30.0,
-      "frame_num" : 1,
-      "hight" : 500.0,
-      "name" : "Jungle_Element_Num_57",
-      "tex_file" : "Jungle_Tree_4",
-      "width" : 500.0,
-      "x" : 127.2309112548828,
-      "y" : 203.0827789306641
    },
    "Jungle_Element_Num_63" : {
       "bodyx1" : 205.0,
@@ -2238,19 +2469,6 @@
       "x" : 136.8569183349609,
       "y" : 203.5283813476563
    },
-   "Jungle_Element_Num_77" : {
-      "bodyx1" : 210.0,
-      "bodyx2" : 200.0,
-      "bodyy1" : 420.0,
-      "bodyy2" : 50.0,
-      "frame_num" : 1,
-      "hight" : 500.0,
-      "name" : "Jungle_Element_Num_77",
-      "tex_file" : "Jungle_Tree_2",
-      "width" : 500.0,
-      "x" : 134.0507659912109,
-      "y" : 207.5398101806641
-   },
    "Jungle_Element_Num_79" : {
       "bodyx1" : 205.0,
       "bodyx2" : 225.0,
@@ -2274,8 +2492,8 @@
       "name" : "Jungle_Element_Num_80",
       "tex_file" : "Jungle_Tree_3",
       "width" : 500.0,
-      "x" : 139.7785797119141,
-      "y" : 195.0030670166016
+      "x" : 127.9093551635742,
+      "y" : 196.2749633789063
    },
    "Jungle_Element_Num_84" : {
       "bodyx1" : 180.0,
@@ -2290,32 +2508,17 @@
       "x" : 110.2160949707031,
       "y" : 213.8244171142578
    },
-   "Jungle_Element_Num_90" : {
-      "bodyx1" : 205.0,
-      "bodyx2" : 225.0,
-      "bodyy1" : 430.0,
-      "bodyy2" : 30.0,
+   "Jungle_Element_Num_99" : {
+      "bodyx1" : 210.0,
+      "bodyx2" : 200.0,
+      "bodyy1" : 420.0,
+      "bodyy2" : 50.0,
       "frame_num" : 1,
       "hight" : 500.0,
-      "name" : "Jungle_Element_Num_90",
-      "tex_file" : "Jungle_Tree_4",
+      "name" : "Jungle_Element_Num_99",
+      "tex_file" : "Jungle_Tree_2",
       "width" : 500.0,
-      "x" : 129.7712249755859,
-      "y" : 206.4770660400391
-   },
-  "Jungle_Element_Num_99": {
-    "bodyx1": 210.0,
-    "bodyx2": 200.0,
-    "bodyy1": 420.0,
-    "bodyy2": 50.0,
-    "frame_num": 1,
-    "hight": 500.0,
-    "name": "Jungle_Element_Num_99",
-    "tex_file": "Jungle_Tree_2",
-    "width": 500.0,
-    "x": 119.8160934448242,
-    "y": 213.7935485839844
-  }
+      "x" : 119.8160934448242,
+      "y" : 213.7935485839844
+   }
 }
-
-

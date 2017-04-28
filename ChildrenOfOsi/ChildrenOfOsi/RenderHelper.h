@@ -18,6 +18,8 @@ public:
 	~RenderHelper();
 	void initCamera(WorldObj* player);
 	void initCameraFull(WorldObj* player);
+	void initTutGui();
+	void init_logo_gui();
 	int init_map(WorldObj* obj);
 	int draw_frame(WorldObj* obj);
 	int sprite_up(WorldObj* obj);
@@ -33,6 +35,8 @@ public:
 	int sprite_update(WorldObj* obj);
 	int drawDiaGui(WorldObj* obj);
 	int drawHUD(WorldObj* obj);
+	int drawTut(WorldObj* obj);
+	int draw_logo(WorldObj* obj);
 	Vector2f getCameraSize() { return cameraSize; }
 	int setSwordGlow(WorldObj* obj);
 	int setHeartGlow(WorldObj* obj);
@@ -49,6 +53,8 @@ public:
 private:
 	
 	DialogueGui* convoGui;
+	Rectangle* TutGui;
+	Rectangle* logo_gui;
 	HUD* hud_ptr;
 	GameMap* gmap;
 	

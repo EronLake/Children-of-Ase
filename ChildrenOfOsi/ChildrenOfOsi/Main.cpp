@@ -176,6 +176,9 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	Alex->setWidth(150);
 	Alex->setHeight(150);
 
+	//draws the logo on startup
+	gameplay_functions->draw_logo(Alex);
+	tBuffer->run();
 
 	// Player* Alex = new Player(SHANGO, Vector2f(6445.0, 10155.0), 150.0, 150.0);	//init player
 	
@@ -1841,7 +1844,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 
 
 
-			gameplay_functions->drawDiaGui(Alex);
+			gameplay_functions->drawTut(Alex);
 
 			//run task buffer
 			iController->InputCheck();

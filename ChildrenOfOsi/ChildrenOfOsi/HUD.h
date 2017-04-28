@@ -31,7 +31,7 @@ class HUD
   static constexpr float HEALTHBAR_WIDTH = 300.0F;
   static constexpr float HEALTHBAR_HEIGHT = 32.0F;
 
-  static constexpr float ASEFLAME_X = 160.0F;
+  static constexpr float ASEFLAME_X = 175.0F;
   static constexpr float ASEFLAME_Y = 100.0F;
   static constexpr float ASEFLAME_WIDTH = 20.0F;
   static constexpr float ASEFLAME_HEIGHT = 20.0F;
@@ -43,23 +43,23 @@ class HUD
   static constexpr float PORTRAIT_WIDTH = 150.0F;
   static constexpr float PORTRAIT_HEIGHT = 150.0F;
 
-  static constexpr float MINIMAP_X = 737.5;
-  static constexpr float MINIMAP_Y = 22.5F;
-  static constexpr float MINIMAP_WIDTH = 200.0F;
-  static constexpr float MINIMAP_HEIGHT = 200.0F;
-  static constexpr float MINIMAP_FRAME_X = 725.0F;
+  static constexpr float MINIMAP_X = 790.375F;
+  static constexpr float MINIMAP_Y = 19.625F;
+  static constexpr float MINIMAP_WIDTH = 150.0F;
+  static constexpr float MINIMAP_HEIGHT = 150.0F;
+  static constexpr float MINIMAP_FRAME_X = 780.75F;
   static constexpr float MINIMAP_FRAME_Y = 10.0F;
-  static constexpr float MINIMAP_FRAME_WIDTH = 225.0F;
-  static constexpr float MINIMAP_FRAME_HEIGHT = 225.0F;
-  static constexpr float MINIMAP_CURSOR_X = 733.5F;
-  static constexpr float MINIMAP_CURSOR_Y = 18.5F;
+  static constexpr float MINIMAP_FRAME_WIDTH = 169.25F;
+  static constexpr float MINIMAP_FRAME_HEIGHT = 169.25F;
+  static constexpr float MINIMAP_CURSOR_X = 786.375F;
+  static constexpr float MINIMAP_CURSOR_Y = 15.625F;
   static constexpr float MINIMAP_CURSOR_WIDTH = 8.0F;
   static constexpr float MINIMAP_CURSOR_HEIGHT = 8.0F;
 
-  static constexpr float KEYBIND_DISPLAY_X = 800.0F;
-  static constexpr float KEYBIND_DISPLAY_Y = 380.0F;
-  static constexpr float KEYBIND_DISPLAY_WIDTH = 150.0F;
-  static constexpr float KEYBIND_DISPLAY_HEIGHT = 150.0F;
+  static constexpr float KEYBIND_DISPLAY_X = 825.0F;
+  static constexpr float KEYBIND_DISPLAY_Y = 405.0F;
+  static constexpr float KEYBIND_DISPLAY_WIDTH = 125.0F;
+  static constexpr float KEYBIND_DISPLAY_HEIGHT = 125.0F;
 
   static bool show_active_quests;
 

@@ -62,7 +62,11 @@ also specified to zoom for the map editor mode
 #if MAP_EDITOR 
 #define map_zoom 4
 #else 
+
+#define map_zoom 1.0
+
 #define map_zoom 1
+
 
 #endif
 

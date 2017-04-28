@@ -165,7 +165,7 @@ void PlayerActExecFunctions::execute_dialog()
 	Action* cur_action = player->cur_action;
 
 	//these two lines strip the number off the end of the name 
-	std::string::size_type name_end = cur_action->getName().find_first_of('_');
+	std::string::size_type name_end = cur_action->getName().find_last_of('_');
 	std::string act_name = cur_action->getName().substr(0, name_end);
 
 	//Need TO ADD FUNCTION TO DO THIS
