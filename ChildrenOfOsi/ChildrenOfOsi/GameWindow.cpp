@@ -506,7 +506,7 @@ void GameWindow::setupFont(const std::string& fontName, unsigned int fontHeight)
     throw FontInitializationError("ERROR::FREETYPE: Could not initialize FreeType Library");
 
   FT_Face face;
-  if(FT_New_Face(fontLib, (osi::FONTS_PATH + fontName + ".ttf").c_str(), 0, &face))
+  if(FT_New_Face(fontLib, (FONTS_PATH + fontName + ".ttf").c_str(), 0, &face))
     throw FontInitializationError("ERROR::FREETYPE: Failed to load font");
 
   FT_Set_Pixel_Sizes(face, 0, 16);

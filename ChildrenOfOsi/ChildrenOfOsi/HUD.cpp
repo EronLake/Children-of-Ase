@@ -7,50 +7,89 @@ int HUD::AVG = 0;
 
 HUD::HUD()
 {
-	//init coord of all the icons
-  this->hud_empty = new Rectangle(Vector2f(10, 10), HUD::HUD_WIDTH, HUD::HUD_HEIGHT);
-  this->hud_health = new Rectangle(Vector2f(10, 10), HUD::HEALTHBAR_WIDTH, HUD::HEALTHBAR_WIDTH);
-  this->hud_ase = new Rectangle(Vector2f(10, 10), HUD::ASEBAR_WIDTH, HUD::ASEBAR_HEIGHT);
-  this->hud_portrait = new Rectangle(Vector2f(10, 10), HUD::HUD_WIDTH, HUD::HUD_HEIGHT);
+  this->healthbar_empty_rect = new Rectangle({HUD::HEALTHBAR_X, HUD::HEALTHBAR_Y}, HUD::HEALTHBAR_WIDTH, HUD::HEALTHBAR_HEIGHT);
+  this->healthbar_full_rect = new Rectangle({HUD::HEALTHBAR_X, HUD::HEALTHBAR_Y}, HUD::HEALTHBAR_WIDTH, HUD::HEALTHBAR_HEIGHT);
+  this->aseflame_empty_rect = new Rectangle({HUD::ASEFLAME_X, HUD::ASEFLAME_Y}, HUD::ASEFLAME_WIDTH, HUD::ASEFLAME_HEIGHT);
+  this->aseflame_full_rect = new Rectangle({HUD::ASEFLAME_X, HUD::ASEFLAME_Y}, HUD::ASEFLAME_WIDTH, HUD::ASEFLAME_HEIGHT);
+  this->portrait_background_rect = new Rectangle({HUD::PORTRAIT_X, HUD::PORTRAIT_Y}, HUD::PORTRAIT_WIDTH, HUD::PORTRAIT_HEIGHT);
+  this->portrait_rect = new Rectangle({HUD::PORTRAIT_X, HUD::PORTRAIT_Y}, HUD::PORTRAIT_WIDTH, HUD::PORTRAIT_HEIGHT);
 
-  this->hud_empty_tex = new Texture();
-  this->hud_ase_tex = new Texture();
-  this->hud_health_tex = new Texture();
-	this->hud_portrait_tex = new Texture();
+  this->minimap_rect = new Rectangle({HUD::MINIMAP_X, HUD::MINIMAP_Y}, HUD::MINIMAP_WIDTH, HUD::MINIMAP_HEIGHT);
+  this->minimap_frame_rect = new Rectangle({HUD::MINIMAP_FRAME_X, HUD::MINIMAP_FRAME_Y}, HUD::MINIMAP_FRAME_WIDTH, HUD::MINIMAP_FRAME_HEIGHT);
+  this->minimap_cursor_rect = new Rectangle({HUD::MINIMAP_CURSOR_X, HUD::MINIMAP_CURSOR_Y}, HUD::MINIMAP_CURSOR_WIDTH, HUD::MINIMAP_CURSOR_HEIGHT);
+  this->keybind_display_rect = new Rectangle({HUD::KEYBIND_DISPLAY_X, HUD::KEYBIND_DISPLAY_Y}, HUD::KEYBIND_DISPLAY_WIDTH, HUD::KEYBIND_DISPLAY_HEIGHT);
 
-  this->black = glm::vec3(0, 0, 0);
+  this->healthbar_empty_tex = new Texture();
+  this->healthbar_full_tex = new Texture();
+  this->aseflame_empty_tex = new Texture();
+  this->aseflame_full_tex = new Texture();
+  this->portrait_background_tex = new Texture();
+  this->portrait_empty_tex = new Texture();
+  this->portrait_full_tex = new Texture();
+
+  this->minimap_tex = new Texture();
+  this->minimap_frame_tex = new Texture();
+  this->minimap_cursor_tex = new Texture();
+  this->keybind_display_tex = new Texture();
 }
-
 
 HUD::~HUD()
 {
-  delete this->hud_empty;
-  delete this->hud_health;
-  delete this->hud_ase;
-  delete this->hud_portrait;
+  delete this->healthbar_empty_rect;
+  delete this->healthbar_full_rect;
+  delete this->aseflame_empty_rect;
+  delete this->aseflame_full_rect;
+  delete this->portrait_background_rect;
+  delete this->portrait_rect;
 
-  delete this->hud_empty_tex;
-  delete this->hud_health_tex;
-  delete this->hud_ase_tex;
-  delete this->hud_portrait_tex;
+  delete this->minimap_rect;
+  delete this->minimap_frame_rect;
+  delete this->minimap_cursor_rect;
+  delete this->keybind_display_rect;
+
+  delete this->healthbar_empty_tex;
+  delete this->healthbar_full_tex;
+  delete this->aseflame_empty_tex;
+  delete this->aseflame_full_tex;
+  delete this->portrait_background_tex;
+  delete this->portrait_empty_tex;
+  delete this->portrait_full_tex;
+
+  delete this->minimap_tex;
+  delete this->minimap_frame_tex;
+  delete this->minimap_cursor_tex;
+  delete this->keybind_display_tex;
 }
 
 void HUD::loadTexture()
 {
-	//setFile, load, setFrame
-	// read access violation here, some sort of nullptr
-	hud_empty_tex->setFile("Assets/Sprites/HUD_empty.png", 1);
-	hud_ase_tex->setFile("Assets/Sprites/HUD_ase.png", 1);
-	hud_health_tex->setFile("Assets/Sprites/HUD_health.png", 1);
-	hud_portrait_tex->setFile("Assets/Sprites/HUD_portrait.png", 1);
+  this->healthbar_empty_tex->setFile(SPRITES_PATH + "HUD_Healthbar_Empty.png", 1);
+  this->healthbar_full_tex->setFile(SPRITES_PATH + "HUD_Healthbar_Full.png", 1);
+  this->aseflame_empty_tex->setFile(SPRITES_PATH + "HUD_AseFlame_Empty.png", 1);
+  this->aseflame_full_tex->setFile(SPRITES_PATH + "HUD_AseFlame_Full.png", 1);
+  this->portrait_background_tex->setFile(SPRITES_PATH + "HUD_PortraitBase.png", 1);
+  this->portrait_empty_tex->setFile(SPRITES_PATH + "HUD_Portrait_Empty.png", 1);
+  this->portrait_full_tex->setFile(SPRITES_PATH + "HUD_Portrait_Full.png", 1);
+
+  this->minimap_tex->setFile(SPRITES_PATH + "HUD_Minimap.png", 1);
+  this->minimap_frame_tex->setFile(SPRITES_PATH + "HUD_Minimap_Frame.png", 1);
+  this->minimap_cursor_tex->setFile(SPRITES_PATH + "HUD_Minimap_Cursor.png", 1);
+  this->keybind_display_tex->setFile(SPRITES_PATH + "HUD_KeybindDisplay.png", 1);
 }
 
 void HUD::setSprite()
 {
-	hud_empty->sprite.setTexture(hud_empty_tex);
-	hud_ase->sprite.setTexture(hud_ase_tex);
-	hud_health->sprite.setTexture(hud_health_tex);
-	hud_portrait->sprite.setTexture(hud_portrait_tex);
+  this->healthbar_empty_rect->sprite.setTexture(this->healthbar_empty_tex);
+  this->healthbar_full_rect->sprite.setTexture(this->healthbar_full_tex);
+  this->aseflame_empty_rect->sprite.setTexture(this->aseflame_empty_tex);
+  this->aseflame_full_rect->sprite.setTexture(this->aseflame_full_tex);
+  this->portrait_background_rect->sprite.setTexture(this->portrait_background_tex);
+  this->portrait_rect->sprite.setTexture(this->portrait_full_tex);
+
+  this->minimap_rect->sprite.setTexture(this->minimap_tex);
+  this->minimap_frame_rect->sprite.setTexture(this->minimap_frame_tex);
+  this->minimap_cursor_rect->sprite.setTexture(this->minimap_cursor_tex);
+  this->keybind_display_rect->sprite.setTexture(this->keybind_display_tex);
 }
 
 void HUD::drawHUD(WorldObj* obj)
@@ -62,28 +101,80 @@ void HUD::drawHUD(WorldObj* obj)
     player = dynamic_cast<Player *>(obj);
   }
 
-  double healthPercentage = static_cast<double>(player->getHealth()) / static_cast<double>(player->get_max_health());
-  int healthbarWidth = static_cast<int>(ceil(hud_health->sprite.getTexture().getWidth() * healthPercentage));
-  double asePercentage = static_cast<double>(player->getAse()) / static_cast<double>(player->getMaxAse());
-  int asebarWidth = static_cast<int>(ceil(hud_ase->sprite.getTexture().getWidth() * asePercentage));
+  this->drawMainHUD(player);
+  this->drawMinimap(player);
 
-  hud_health->sprite.reset_texture();
-  hud_health->sprite.setStop(healthbarWidth);
-  hud_health->setWidth(HUD::HEALTHBAR_WIDTH * healthPercentage);
+  // Framerate information for debugging
+  GameWindow::createText("FPS: " + to_string(FPS), 450, 20, 150, 80, {0.0F, 0.0F, 0.0F});
+	GameWindow::createText("AVG: " + to_string(AVG), 525, 20, 150, 80, {0.0F, 0.0F, 0.0F});
 
-	GameWindow::drawSprite(hud_empty->getX(), hud_empty->getY(), hud_empty->getWidth(), hud_empty->getHeight(), hud_empty->sprite);                // Health/ase bar background
-  GameWindow::drawSprite(hud_health->getX(), hud_health->getY(), hud_health->getWidth(), hud_health->getHeight(), hud_health->sprite);           // Health bar fill
-	GameWindow::drawSprite(hud_ase->getX(), hud_ase->getY(), hud_ase->getWidth(), hud_ase->getHeight(), hud_ase->sprite);                          // Ase bar fill
-	GameWindow::drawSprite(hud_portrait->getX(), hud_portrait->getY(), hud_portrait->getWidth(), hud_portrait->getHeight(), hud_portrait->sprite); // Shango portrait
-	GameWindow::createText("FPS: " + to_string(FPS), 450, 20, 150, 80, black);                                                                     // FPS counter
-	GameWindow::createText("AVG: " + to_string(AVG), 525, 20, 150, 80, black);                                                                     // Average framerate
-
+  // Draw the listing of active quests
 	if (HUD::show_active_quests) {
-		GameWindow::createText("Active Quests", 50, 104.5, 150, 80, black);
-		GameWindow::createText("___________", 50, 105, 150, 80, black);
+		GameWindow::createText("Active Quests", 50, 104.5, 150, 80, {0.0F, 0.0F, 0.0F});
+		GameWindow::createText("___________", 50, 105, 150, 80, {0.0F, 0.0F, 0.0F});
 		vector<pair<Action*, int>> quests = player->get_quests();
 		for (int i = 0; i < quests.size(); i++) {
-			GameWindow::createText(quests[i].first->getName()+": "+ to_string(quests[i].second), 50, 122+(i*15), 150, 80, black);
+			GameWindow::createText(quests[i].first->getName()+": "+ to_string(quests[i].second), 50, 122+(i*15), 150, 80, {0.0F, 0.0F, 0.0F});
 		}
 	}
+}
+
+void HUD::drawMainHUD(Player *player)
+{
+  float healthPercentage = static_cast<double>(player->getHealth()) / static_cast<double>(player->get_max_health());
+  float asePercentage = static_cast<double>(player->getAse()) / static_cast<double>(player->getMaxAse());
+  int healthbarWidth = static_cast<int>(ceil(healthbar_full_rect->sprite.getTexture().getWidth() * healthPercentage));
+  int filledSmallAseFlames = static_cast<int>(ceil(asePercentage * HUD::ASEFLAME_COUNT));
+
+  // Set the healthbar to display a portion of its width according to remaining health
+  healthbar_full_rect->sprite.reset_texture();
+  healthbar_full_rect->sprite.setStop(healthbarWidth);
+  healthbar_full_rect->setWidth(HUD::HEALTHBAR_WIDTH * healthPercentage);
+
+  // Draw the background for the portrait of Shango
+  GameWindow::drawSprite(this->portrait_background_rect->getX(), this->portrait_background_rect->getY(),
+    this->portrait_background_rect->getWidth(), this->portrait_background_rect->getHeight(), this->portrait_background_rect->getSprite());
+
+  // Draw the healthbar
+  GameWindow::drawSprite(this->healthbar_empty_rect->getX(), this->healthbar_empty_rect->getY(),
+    this->healthbar_empty_rect->getWidth(), this->healthbar_empty_rect->getHeight(), this->healthbar_empty_rect->getSprite());
+  GameWindow::drawSprite(this->healthbar_full_rect->getX(), this->healthbar_full_rect->getY(),
+    this->healthbar_full_rect->getWidth(), this->healthbar_full_rect->getHeight(), this->healthbar_full_rect->getSprite());
+
+  // Draw the ase flames
+  if(player->getAse() <= 0)
+    this->portrait_rect->sprite.setTexture(this->portrait_empty_tex);
+  else {
+    this->portrait_rect->sprite.setTexture(this->portrait_full_tex);
+    for(int i = 0; i < HUD::ASEFLAME_COUNT; ++i) {
+      if(i < filledSmallAseFlames)
+        GameWindow::drawSprite(HUD::ASEFLAME_X + (i * (HUD::ASEFLAME_WIDTH + HUD::ASEFLAME_MARGIN)), HUD::ASEFLAME_Y,
+          this->aseflame_full_rect->getWidth(), this->aseflame_full_rect->getHeight(),
+          this->aseflame_full_rect->getSprite());
+      else
+        GameWindow::drawSprite(HUD::ASEFLAME_X + (i * (HUD::ASEFLAME_WIDTH + HUD::ASEFLAME_MARGIN)), HUD::ASEFLAME_Y,
+          this->aseflame_empty_rect->getWidth(), this->aseflame_empty_rect->getHeight(),
+          this->aseflame_empty_rect->getSprite());
+    }
+  }
+
+  // Draw the portrait of Shango
+  GameWindow::drawSprite(this->portrait_rect->getX(), this->portrait_rect->getY(),
+    this->portrait_rect->getWidth(), this->portrait_rect->getHeight(), this->portrait_rect->getSprite());
+}
+
+void HUD::drawMinimap(Player *player)
+{
+  GameWindow::drawSprite(this->minimap_rect->getX(), this->minimap_rect->getY(),
+    this->minimap_rect->getWidth(), this->minimap_rect->getHeight(), this->minimap_rect->getSprite());
+  GameWindow::drawSprite(this->minimap_frame_rect->getX(), this->minimap_frame_rect->getY(),
+    this->minimap_frame_rect->getWidth(), this->minimap_frame_rect->getHeight(), this->minimap_frame_rect->getSprite());
+  GameWindow::drawSprite(this->minimap_cursor_rect->getX(), this->minimap_cursor_rect->getY(),
+    this->minimap_cursor_rect->getWidth(), this->minimap_cursor_rect->getHeight(), this->minimap_cursor_rect->getSprite());
+}
+
+void HUD::drawKeybindDisplay()
+{
+  GameWindow::drawSprite(this->keybind_display_rect->getX(), this->keybind_display_rect->getY(),
+    this->keybind_display_rect->getWidth(), this->keybind_display_rect->getHeight(), this->keybind_display_rect->getSprite());
 }
