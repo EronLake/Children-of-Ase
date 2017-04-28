@@ -50,7 +50,9 @@ void PlayerActExecFunctions::execute_start(std::string act_name, Hero* receiver)
 	//creates the memory for the reciever as well
 	ActionHelper::create_memory(cur_action, receiver);
 
-	if ((act_name == "Occupy" || act_name == "Fight") &&
+	receiver->set_busy(Hero::BUSY_REC);
+
+	if ((act_name == "Occupy" || act_name == "Fight" || act_name == "Conquer") &&
 		((!player->getInCombat()) && (!player->getInCombat())))
 	{
 		//we need to create a fight here if their action is a violent action
@@ -97,9 +99,10 @@ void PlayerActExecFunctions::execute_end(bool if_succ) {
 
 	//NEEDS TO BE TESTED... should it check for Occupy?
 	if (act_name == "conquer" && player->getParty()->get_fight()->is_over()) {
+		cur_action->getReceiver()->getVillage()->add_to_village_health(cur_action->getDoer()->getParty()->getMembers().size()*(-10));
 		if (cur_action->getReceiver()->getVillage()->get_village_health() > 0) {
 			cur_action->getReceiver()->getVillage()->defenders->add_party_to_party(cur_action->getReceiver()->getVillage()->barracks);
-			if (player->getParty()->get_fight()!=nullptr)player->getParty()->get_fight()->add_to_defenders(cur_action->getReceiver()->getVillage()->defenders);
+			//if (player->getParty()->get_fight()!=nullptr)player->getParty()->get_fight()->add_to_defenders(cur_action->getReceiver()->getVillage()->defenders);
 			return;
 		}
 	}

@@ -244,8 +244,8 @@ void Fight::update_fight() {
 	update_radius();
 	over = check_for_winner();
 	if (over) {
-		if (player->getParty()->get_fight() == this) {
-			//PlayerActExecFunctions::execute_end(true);
+		if (player->getParty()->get_fight() == this && (player->cur_action!=nullptr || player->cur_action != NULL)) {
+			PlayerActExecFunctions::execute_end(true);
 		}
 	}
 }
