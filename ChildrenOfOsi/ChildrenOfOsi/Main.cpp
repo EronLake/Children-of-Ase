@@ -1201,11 +1201,11 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	rockThrow->setDuration(100);
 	rockThrow->setCoolDown(120);
 	rockThrow->setPause(13);
-	rockThrow->sprite.setTexture(Containers::texture_table["rockTex"]);
-	rockThrow->sprite.up = Containers::texture_table["rockTex"];
-	rockThrow->sprite.left = Containers::texture_table["rockTex"];
-	rockThrow->sprite.right = Containers::texture_table["rockTex"];
-	rockThrow->sprite.down = Containers::texture_table["rockTex"];
+	rockThrow->sprite.setTexture(Containers::texture_table["rockTex1"]);
+	rockThrow->sprite.up = Containers::texture_table["rockTex1"];
+	rockThrow->sprite.left = Containers::texture_table["rockTex1"];
+	rockThrow->sprite.right = Containers::texture_table["rockTex1"];
+	rockThrow->sprite.down = Containers::texture_table["rockTex1"];
 	rockThrow->setCanCancel(false);
 	Alex->addAttackType(rockThrow);
 
@@ -1855,7 +1855,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 			}
 			HUD::FPS = fps;
 			//cout << "FPS: " << fps << endl;
-
+			total_fps += fps;
 			frame_count++;
 
 			current_game_state = iController->current_game_state;
@@ -2007,9 +2007,11 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 			//getting here-------------------------------------------------------------------------***********
 			//setting give as quest to false so that the excute runs
 			YemojaPlanner->give_as_quest = false;
-
-			 AIController::execute();
+//			cout << " first dest is " << staticRec->get_action_destination()->getXloc() << ", " << staticRec->get_action_destination()->getYloc() << endl;
+			AIController::execute();
+//			cout << "after execute dest is " << staticRec->get_action_destination()->getXloc() << ", " << staticRec->get_action_destination()->getYloc() << endl;
 			AI.join();
+//			cout << "after thread join dest is " << staticRec->get_action_destination()->getXloc() << ", " << staticRec->get_action_destination()->getYloc() << endl;
 			if ((1000 / fs) > (clock() - start_tick)) { //delta_ticks)
 				Sleep((1000 / fs) - (clock() - start_tick));
 			}
@@ -2019,7 +2021,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 			}
 			HUD::FPS = fps;
 			//cout << "FPS: " << fps << endl;
-
+			total_fps += fps;
 			frame_count++;
 			HUD::AVG = total_fps / frame_count;
 
