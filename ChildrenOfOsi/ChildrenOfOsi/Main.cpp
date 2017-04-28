@@ -184,7 +184,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	
 
 	Region* Marsh = new Region("Marsh", "Music/RegionThemes/MarshRegion.flac", "Music/HeroThemes/ogun.flac", { 1000,1000 });
-	Region* Desert = new Region("Desert", "Music/RegionThemes/DesertRegion.flac", "Music/HeroThemes/oya.flac", { 5000,5000 });
+	Region* Desert = new Region("Desert", "Music/RegionThemes/MarshRegion.flac", "Music/HeroThemes/oya.flac", { 5000,5000 });
 	Region* Mountain = new Region("Mountain", "Music/RegionThemes/MountainRegion.flac", "nothing", { 10000,1000 });
 	Region* Jungle = new Region("Jungle", "Music/RegionThemes/JungleRegion.flac", "Music/HeroThemes/oya.flac", { 5000,10000 });
 	

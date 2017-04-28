@@ -198,7 +198,7 @@ FMOD_RESULT result;
 		
 		type = foo::soundType::music;
 		std::string _name;
-		_name = "Music/RegionThemes/DesertRegion.flac";
+		_name = "Music/RegionThemes/MarshRegion.flac";
 		name = _name.c_str();
 		channels[name] = &chnls[0];//assign the channel
 		
