@@ -350,6 +350,7 @@
     <None Include="AssetInfo.h" />
     <None Include="ClassDiagram.cd" />
     <None Include="config_jungle.json" />
+    <None Include="config_oasis.json" />
     <None Include="Dialogue_config.json" />
     <None Include="oasis_config.json" />
     <None Include="OpenGL Shaders\FontFragmentShader.frag.glsl" />
