@@ -359,6 +359,18 @@
 	 }
     },
 
+	"Bribe Quest_Templates": {
+	 "1": {
+        "1": "Bribe Quest"
+	 }
+    },
+
+	"No Quest_Templates": {
+	 "1": {
+        "1": "No Quest"
+	 }
+    },
+
 	"Quest_Complete_Templates": {
 	 "1": {
         "1": "Quest_Complete"

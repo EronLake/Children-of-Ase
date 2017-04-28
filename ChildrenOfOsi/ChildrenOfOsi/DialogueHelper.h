@@ -23,7 +23,7 @@ public:
 	~DialogueHelper();
 
 	//functions where heroes make dialogue choices
-	dialogue_point choose_conv_pt(std::vector<ConversationLogObj*> curr_conversation_log, Hero* other);
+	dialogue_point choose_conv_pt(std::vector<ConversationLogObj*> curr_conversation_log, Hero* other, Player* player);
 	dialogue_point choose_reply_pt(std::string point,int optn_inx, std::vector<ConversationLogObj*> curr_conversation_log);
 
 	std::vector<std::vector<dialogue_point>> get_possible_conv_pts();
@@ -40,6 +40,11 @@ public:
 	int hero_name_to_int(std::string hero);
 	int calc_text_choice_from_relationship(Hero* hero, std::pair<int, Memory*> topic);
 	std::string int_to_hero_name(int hero);
+
+	static bool prompted_quest;
+	static bool accepted_quest;
+
+	static Action* quest;
 };
 
 

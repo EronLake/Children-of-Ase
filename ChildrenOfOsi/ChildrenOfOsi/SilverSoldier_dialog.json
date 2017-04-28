@@ -442,11 +442,11 @@
     },
 
 	"Response_Ask_For_Quest": {
-        "1": "Yes I do.",
-        "2": "Yes I do.",
-        "3": "Yes I do.",
-        "4": "Yes I do.",
-        "5": "Yes I do."
+        "1": "Let me see...",
+        "2": "Let me see...",
+        "3": "Let me see...",
+        "4": "Let me see...",
+        "5": "Let me see..."
     },
 
 	"Accept_Quest": {
@@ -471,6 +471,22 @@
         "3": "Take care of the bandits up north please.",
         "4": "Take care of the bandits up north please.",
         "5": "Take care of the bandits up north please."
+    },
+
+	"Bribe Quest": {
+        "1": "I would like for you to bribe someone please.",
+        "2": "I would like for you to bribe someone please.",
+        "3": "I would like for you to bribe someone please.",
+        "4": "I would like for you to bribe someone please.",
+        "5": "I would like for you to bribe someone please."
+    },
+
+	"No Quest": {
+        "1": "No, I do not.",
+        "2": "No, I do not.",
+        "3": "No, I do not.",
+        "4": "No, I do not.",
+        "5": "No, I do not."
     },
 
 	"Quest_Complete": {
