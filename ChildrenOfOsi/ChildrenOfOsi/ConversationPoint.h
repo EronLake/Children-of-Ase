@@ -22,6 +22,8 @@ public:
 	vector<std::shared_ptr<Postcondition>> receiver_succ_postconds;
 	vector<std::shared_ptr<Postcondition>> receiver_fail_postconds;
 
+	void apply_postconditions(bool ifsucc, Hero* doer, Hero* receiver);
+
 	std::string get_icon();
 	std::string get_temp();
 	std::string get_name();
