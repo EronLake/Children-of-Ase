@@ -28,5 +28,6 @@ public:
 	static constexpr int JUNGLE = 2;
 	static constexpr int MOUNTAIN = 3;
 	static constexpr int OGUNREG = 4;
+	
 };
 

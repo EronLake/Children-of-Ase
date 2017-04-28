@@ -269,12 +269,12 @@ void CombatController::checkParties() {
 }
 
 void CombatController::party_leader_update(Soldier* sold1, int state) {
-	if (sold1->get_action_destination() != nullptr) {
-		if (Party::dist_location_to_location(sold1->getLoc(), *sold1->get_action_destination()) < 500) {
-			sold1->set_action_destination(nullptr);
+	if (sold1->get_action_destination() != Vector2f(NULL, NULL)) {
+		if (Party::dist_location_to_location(sold1->getLoc(), sold1->get_action_destination()) < 500) {
+			sold1->set_action_destination(Vector2f(NULL, NULL));
 		}
 		else {
-			Vector2f quest = *sold1->get_action_destination();
+			Vector2f quest = sold1->get_action_destination();
 			sold1->destination = quest;
 			sold1->waypoint = quest;
 			move_to_target(sold1, state);

@@ -29,5 +29,6 @@ void RiverObj::initialize_lines() {
 	}
 
 	//std:://cout << "TOTAL SIZE OF THE LINES VECTOR IS " << lines.size() << std::endl;
+	//lines.clear();
 	
 }

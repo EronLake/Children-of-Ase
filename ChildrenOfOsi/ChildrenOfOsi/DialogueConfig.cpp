@@ -46,6 +46,9 @@ void DialogueConfig::import_config(ChildrenOfOsi* gameplay_func, TaskBuffer* tBu
 			set_conv_point(gameplay_func, tBuffer, (*itor)["icon"].asString(), (*itor)["template"].asString(), (*itor)["name"].asString(), personality_mults, (*itor)["corresponding_conv_point"].asString(), relationship_vals, topic);
 			personality_mults.clear();
 			relationship_vals.clear();
+
+			//this is where the helper func should be called
+			import_conditions(itor, (*itor)["name"].asString());
 		}
 		personality_mults.clear();
 		relationship_vals.clear();
@@ -69,6 +72,8 @@ void DialogueConfig::import_config(ChildrenOfOsi* gameplay_func, TaskBuffer* tBu
 			set_conv_point(gameplay_func, tBuffer, (*itor)["icon"].asString(), (*itor)["template"].asString(), (*itor)["name"].asString(), personality_mults, (*itor)["corresponding_conv_point"].asString(), relationship_vals, topic);
 			personality_mults.clear();
 			relationship_vals.clear();
+
+			import_conditions(itor, (*itor)["name"].asString());
 		}
 		personality_mults.clear();
 		relationship_vals.clear();
@@ -92,6 +97,8 @@ void DialogueConfig::import_config(ChildrenOfOsi* gameplay_func, TaskBuffer* tBu
 			set_conv_point(gameplay_func, tBuffer, (*itor)["icon"].asString(), (*itor)["template"].asString(), (*itor)["name"].asString(), personality_mults, (*itor)["corresponding_conv_point"].asString(), relationship_vals, topic);
 			personality_mults.clear();
 			relationship_vals.clear();
+
+			import_conditions(itor, (*itor)["name"].asString());
 		}
 		personality_mults.clear();
 		relationship_vals.clear();
@@ -115,6 +122,8 @@ void DialogueConfig::import_config(ChildrenOfOsi* gameplay_func, TaskBuffer* tBu
 			set_conv_point(gameplay_func, tBuffer, (*itor)["icon"].asString(), (*itor)["template"].asString(), (*itor)["name"].asString(), personality_mults, (*itor)["corresponding_conv_point"].asString(), relationship_vals, topic);
 			personality_mults.clear();
 			relationship_vals.clear();
+
+			import_conditions(itor, (*itor)["name"].asString());
 		}
 		personality_mults.clear();
 		relationship_vals.clear();
@@ -138,6 +147,8 @@ void DialogueConfig::import_config(ChildrenOfOsi* gameplay_func, TaskBuffer* tBu
 			set_conv_point(gameplay_func, tBuffer, (*itor)["icon"].asString(), (*itor)["template"].asString(), (*itor)["name"].asString(), personality_mults, (*itor)["corresponding_conv_point"].asString(), relationship_vals, topic);
 			personality_mults.clear();
 			relationship_vals.clear();
+
+			import_conditions(itor, (*itor)["name"].asString());
 		}
 		personality_mults.clear();
 		relationship_vals.clear();
@@ -161,6 +172,8 @@ void DialogueConfig::import_config(ChildrenOfOsi* gameplay_func, TaskBuffer* tBu
 			set_conv_point(gameplay_func, tBuffer, (*itor)["icon"].asString(), (*itor)["template"].asString(), (*itor)["name"].asString(), personality_mults, (*itor)["corresponding_conv_point"].asString(), relationship_vals, topic);
 			personality_mults.clear();
 			relationship_vals.clear();
+
+			import_conditions(itor, (*itor)["name"].asString());
 		}
 		personality_mults.clear();
 		relationship_vals.clear();
@@ -184,6 +197,8 @@ void DialogueConfig::import_config(ChildrenOfOsi* gameplay_func, TaskBuffer* tBu
 			set_conv_point(gameplay_func, tBuffer, (*itor)["icon"].asString(), (*itor)["template"].asString(), (*itor)["name"].asString(), personality_mults, (*itor)["corresponding_conv_point"].asString(), relationship_vals, topic);
 			personality_mults.clear();
 			relationship_vals.clear();
+
+			import_conditions(itor, (*itor)["name"].asString());
 		}
 		personality_mults.clear();
 		relationship_vals.clear();
@@ -207,6 +222,8 @@ void DialogueConfig::import_config(ChildrenOfOsi* gameplay_func, TaskBuffer* tBu
 			set_conv_point(gameplay_func, tBuffer, (*itor)["icon"].asString(), (*itor)["template"].asString(), (*itor)["name"].asString(), personality_mults, (*itor)["corresponding_conv_point"].asString(), relationship_vals,topic);
 			personality_mults.clear();
 			relationship_vals.clear();
+
+			import_conditions(itor, (*itor)["name"].asString());
 		}
 }
 
@@ -251,4 +268,105 @@ void DialogueConfig::set_conv_point(ChildrenOfOsi* gameplay_func, TaskBuffer* tB
 	Containers::conv_point_table[name]->rel_multipliers->setStrEstimate(relationship_vals[5]);
 
 	tBuffer->run();
+}
+
+
+void DialogueConfig::import_conditions(Json::Value::iterator itr, std::string name)
+{
+
+	for (auto it = (*itr)["req_preconds"].begin(); it != (*itr)["req_preconds"].end(); it++)
+	{
+		if ((*it)["general_type"].asInt() == 0)
+		{
+			RelPrecon* temp_prec = new RelPrecon((*it)["rel_type"].asInt(), (*it)["desired_rel_val"].asInt());
+
+			Containers::conv_point_table[name]->req_preconds.push_back(std::make_shared<RelPrecon>(*temp_prec));
+		}
+		else if ((*it)["general_type"].asInt() == 1)
+		{
+			RelEstimPrerec* temp_prec = new RelEstimPrerec((*it)["rel_type"].asInt(), (*it)["desired_rel_val"].asInt());
+
+			Containers::conv_point_table[name]->req_preconds.push_back(std::make_shared<RelEstimPrerec>(*temp_prec));
+		}
+		else if ((*it)["general_type"].asInt() == 2)
+		{
+			TimePrerec* temp_prec = new TimePrerec((*it)["time_rec"].asInt());
+
+			Containers::conv_point_table[name]->req_preconds.push_back(std::make_shared<TimePrerec>(*temp_prec));
+		}
+		else if ((*it)["general_type"].asInt() == 3)
+		{
+			MemoryNumPrerec* temp_prec = new MemoryNumPrerec((*it)["rec_num_of_mem"].asInt());
+
+			Containers::conv_point_table[name]->req_preconds.push_back(std::make_shared<MemoryNumPrerec>(*temp_prec));
+		}
+		else if ((*it)["general_type"].asInt() == 4)
+		{
+			MemPrerec* temp_prec = new MemPrerec((*it)["rec_mem"].asString());
+
+			Containers::conv_point_table[name]->req_preconds.push_back(std::make_shared<MemPrerec>(*temp_prec));
+		}
+		else if ((*it)["general_type"].asInt() == 5)
+		{
+			StatePrerec* temp_prec = new StatePrerec();
+
+			Containers::conv_point_table[name]->req_preconds.push_back(std::make_shared<StatePrerec>(*temp_prec));
+		}
+	}
+
+	import_post_conditions(itr, name, "doer_succ_postconds");
+	import_post_conditions(itr, name, "doer_fail_postconds");
+	import_post_conditions(itr, name, "receiver_succ_postconds");
+	import_post_conditions(itr, name, "receiver_fail_postconds");
+
+	/*
+	Containers::action_table[name]->op_preconds.push_back();
+	*/
+}
+
+
+//this is a helper function for import conditions
+void DialogueConfig::import_post_conditions(Json::Value::iterator itr, std::string name, std::string which_post) {
+
+	//assigns the postconditions to the appropieate map 
+	vector<std::shared_ptr<Postcondition>>* postconds;
+	if (which_post == "doer_succ_postconds")
+	{
+		postconds = &Containers::conv_point_table[name]->doer_succ_postconds;
+	}
+	else if (which_post == "doer_fail_postconds")
+	{
+		postconds = &Containers::conv_point_table[name]->doer_fail_postconds;
+	}
+	else if (which_post == "receiver_succ_postconds")
+	{
+		postconds = &Containers::conv_point_table[name]->receiver_succ_postconds;
+	}
+	else //if (which_post == "receiver_fail_postconds")
+	{
+		postconds = &Containers::conv_point_table[name]->receiver_fail_postconds;
+	}
+
+
+	for (auto it = (*itr)[which_post].begin(); it != (*itr)[which_post].end(); it++)
+	{
+		if ((*it)["general_type"].asInt() == 0)
+		{
+			RelPost* temp_post = new RelPost((*it)["rel_type"].asInt(), (*it)["utility"].asInt());
+
+			postconds->push_back(std::make_shared<RelPost>(*temp_post));
+		}
+		else if ((*it)["general_type"].asInt() == 1)
+		{
+			RelEstimPost* temp_post = new RelEstimPost((*it)["rel_type"].asInt(), (*it)["utility"].asInt());
+
+			postconds->push_back(std::make_shared<RelEstimPost>(*temp_post));
+		}
+		else if ((*it)["general_type"].asInt() == 5)
+		{
+			StatePost* temp_post = new StatePost((*it)["utility"].asInt());
+
+			postconds->push_back(std::make_shared<StatePost>(*temp_post));
+		}
+	}
 }

@@ -200,10 +200,15 @@ void AIController::execute() {
 			if (curr_action != nullptr) { //used to be : "!planner->give_as_quest" //and then it was "true"
 			//	std::cout << "execute" << endl;
 				curr_action->execute();
-				cout << "hero number " << me << "'s current action has been executed" << endl;
+
+				//cout << "hero number " << me << "'s current action has been executed" << endl;
+
+				//cout << "hero number " << me << "'s current action has been executed" << endl;
+//				cout << "dest is " << hero->get_action_destination()->getXloc() << ", " << hero->get_action_destination()->getYloc() << endl;
+
 			}
 			else {
-				cout << "hero number "<< me << "'s CURRENT ACTION IS A NULLPTR!!!" << endl;
+				//cout << "hero number "<< me << "'s CURRENT ACTION IS A NULLPTR!!!" << endl;
 			}
 			if (curr_action != nullptr && curr_action->executed) {	//need to check to make sure curr_action is not nullptr
 
@@ -258,7 +263,7 @@ void AIController::execute() {
 
 			}
 			else {
-				cout << "hero number " << me << "'s action NOT FINISHED EXECUTING" << endl;
+				//cout << "hero number " << me << "'s action NOT FINISHED EXECUTING" << endl;
 			}
 
 		}
