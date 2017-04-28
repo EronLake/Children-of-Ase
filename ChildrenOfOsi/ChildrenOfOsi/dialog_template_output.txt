@@ -1,6 +1,2 @@
-<<<<<<< HEAD
-Conversation Point Name: Compliment Appeal 350
-=======
-Conversation Point Name: Advise To Train With Appeal 0
-Conversation Point Name: Recruit_For_Party Appeal 0
->>>>>>> origin/Alpha1
+Conversation Point Name: Boast Appeal 120
+Conversation Point Name: Ask_Origin Appeal 100
