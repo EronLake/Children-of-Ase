@@ -231,7 +231,7 @@ void ActionExecFunctions::execute_fight(Action* fight)
 				fight->checkpoint++;
 				ActionHelper::create_memory(fight, fight->getReceiver());
 			}
-			ActionHelper::set_timer(fight, 3600);  //Wait 1 minute (60 frames times 60 seconds) trying to find out the hero's location
+			ActionHelper::set_timer(fight, 5);  //Wait 1 minute (60 frames times 60 seconds) trying to find out the hero's location
 			fight->checkpoint++;
 		}
 		break;
@@ -252,16 +252,21 @@ void ActionExecFunctions::execute_fight(Action* fight)
 				Fight* fight_obj = new Fight(fight->getDoer()->getParty(), fight->getReceiver()->getParty(), false);
 				//ActionHelper::set_timer(fight, 600);
 			}
-			if (fight->getDoer()->getParty()->get_fight()->is_over())
-			{
-				fight->checkpoint++;
-			}
+			fight->checkpoint++;
 		}
 
 		//NEED TO SOMEHOW ACCOUNT FOR IF A PLAYER GETS CLOSE
 
 		break;
-	case 4: //If win update apply win-post else apply loss-post and update memory
+	case 4:
+		if (fight->getDoer()->getParty()->get_fight()==nullptr) {
+			fight->checkpoint++;
+		} else if (fight->getDoer()->getParty()->get_fight()->is_over())
+		{
+			fight->checkpoint++;
+		}
+		break;
+	case 5: //If win update apply win-post else apply loss-post and update memory
 			//create_memory(fight, fight->getOwner()); do we want to update the owner immeadiately?
 
 		Memory* doer_mem = fight->getDoer()->find_mem(fight->getName() + std::to_string(fight->time_stamp));
@@ -421,7 +426,7 @@ void ActionExecFunctions::execute_duel(Action* duel)
 				duel->checkpoint++;
 				ActionHelper::create_memory(duel, duel->getReceiver());
 			}
-			ActionHelper::set_timer(duel, 3600);  //Wait 1 minute (60 frames times 60 seconds) trying to find out the hero's location
+			ActionHelper::set_timer(duel, 5);  //Wait 1 minute (60 frames times 60 seconds) trying to find out the hero's location
 			duel->checkpoint++;
 		}
 		break;
@@ -556,52 +561,54 @@ void ActionExecFunctions::execute_conversation(Action* conv)
 void ActionExecFunctions::execute_bribe(Action* bribe)
 {
 	int monopoly_money = 420;
-	switch (bribe->checkpoint) {
-	case 0: //Determine the location that the bribe is happening
-		ActionHelper::create_memory(bribe, bribe->getDoer());
-		bribe->getDoer()->set_action_destination(bribe->getReceiver()->getVillage()->get_village_location());
-		bribe->checkpoint++;
-		break;
-
-	case 1: //Create a greeting timer
-		if (bribe->getDoer()->get_action_destination() == Vector2f(NULL, NULL)) {
-			ActionHelper::set_timer(bribe, 60);
+	if (!bribe->getDoer()->getInCombat()) {
+		switch (bribe->checkpoint) {
+		case 0: //Determine the location that the bribe is happening
+			ActionHelper::create_memory(bribe, bribe->getDoer());
+			bribe->getDoer()->set_action_destination(bribe->getReceiver()->getVillage()->get_village_location());
 			bribe->checkpoint++;
-		}
-		break;
+			break;
 
-	case 2: //Once the greeting timer is completed, take away money(placeholder) to simulate giving something for the bribe
-		if (ActionHelper::retrieve_time(bribe) == 0) //Greeting timer complete
-		{
-			//bribe->getDoer()->set_action_destination(&bribe->getReceiver()->getLoc());
-			monopoly_money = monopoly_money - 69;//Taking away money
-			bribe->checkpoint++;
-		}
-		break;
-	case 3: //If timer is complete, set village as destination, apply postconds, update memory
-		if (ActionHelper::retrieve_time(bribe) == 0) {
-			Memory* doer_mem = bribe->getDoer()->find_mem(bribe->getName() + std::to_string(bribe->time_stamp));
-			//Memory* receiver_mem = fight->getReceiver()->find_mem(fight->getName() + std::to_string(fight->time_stamp));
-			if (doer_mem == nullptr)
+		case 1: //Create a greeting timer
+			if (bribe->getDoer()->get_action_destination() == Vector2f(NULL, NULL)) {
+				ActionHelper::set_timer(bribe, 60);
+				bribe->checkpoint++;
+			}
+			break;
+
+		case 2: //Once the greeting timer is completed, take away money(placeholder) to simulate giving something for the bribe
+			if (ActionHelper::retrieve_time(bribe) == 0) //Greeting timer complete
 			{
-				perror("something is wrong with the current hero memory creation function");
+				//bribe->getDoer()->set_action_destination(&bribe->getReceiver()->getLoc());
+				monopoly_money = monopoly_money - 69;//Taking away money
+				bribe->checkpoint++;
 			}
-			bribe->getDoer()->set_action_destination(bribe->getDoer()->getVillage()->get_village_location()); //Also predefined, maybe as "home_location" in hero
-			if (ActionHelper::conversation(bribe)) {
-				bribe->apply_postconditions(true);				 //Apply post-conditions
-				doer_mem->setCategory("success");			 //Call update_memory function
-				doer_mem->setReason("The conversaton went well");
+			break;
+		case 3: //If timer is complete, set village as destination, apply postconds, update memory
+			if (ActionHelper::retrieve_time(bribe) == 0) {
+				Memory* doer_mem = bribe->getDoer()->find_mem(bribe->getName() + std::to_string(bribe->time_stamp));
+				//Memory* receiver_mem = fight->getReceiver()->find_mem(fight->getName() + std::to_string(fight->time_stamp));
+				if (doer_mem == nullptr)
+				{
+					perror("something is wrong with the current hero memory creation function");
+				}
+				bribe->getDoer()->set_action_destination(bribe->getDoer()->getVillage()->get_village_location()); //Also predefined, maybe as "home_location" in hero
+				if (ActionHelper::conversation(bribe)) {
+					bribe->apply_postconditions(true);				 //Apply post-conditions
+					doer_mem->setCategory("success");			 //Call update_memory function
+					doer_mem->setReason("The conversaton went well");
+				}
+				else {
+					bribe->apply_postconditions(false);				 //Apply post-conditions
+					doer_mem->setCategory("fail");			 //Call update_memory function
+					doer_mem->setReason("The conversaton didn't go well");
+				}
+				bribe->executed = true;
+				doer_mem->setWhen(/*get global frame*/0);
 			}
-			else {
-				bribe->apply_postconditions(false);				 //Apply post-conditions
-				doer_mem->setCategory("fail");			 //Call update_memory function
-				doer_mem->setReason("The conversaton didn't go well");
-			}
-			bribe->executed = true;
-			doer_mem->setWhen(/*get global frame*/0);
-		}
-		break;
+			break;
 
+		}
 	}
 }
 

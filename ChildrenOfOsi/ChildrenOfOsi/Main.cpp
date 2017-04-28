@@ -1340,10 +1340,10 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	tBuffer->run();
 
 	staticRec->melee = Containers::Attack_table[staticRec->getKey()];
-	staticRec->melee->setDmg(10);
+	staticRec->melee->setDmg(15);
 	staticRec->melee->setSpeed(5);
 	staticRec->melee->setBaseDir(4);
-	staticRec->melee->setCoolDown(100);
+	staticRec->melee->setCoolDown(60);
 	staticRec->melee->setPause(-1);
 	staticRec->melee->setDestroy(false);
 	staticRec->melee->setKeep(true);
@@ -1359,14 +1359,14 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	oya->melee->setDmg(10);
 	oya->melee->setSpeed(5);
 	oya->melee->setBaseDir(4);
-	oya->melee->setCoolDown(100);
+	oya->melee->setCoolDown(80);
 	oya->melee->setPause(-1);
 	oya->melee->setDestroy(false);
 	oya->melee->setKeep(true);
 	oya->melee->setWidth(50);
 	oya->melee->setHeight(50);
 	oya->set_creator_of_melee();
-	oya->melee->setStaminaCost(90);
+	oya->melee->setStaminaCost(120);
 	oya->setHealth(100);
 	oya->setMaxStamina(300);
 	oya->melee->sprite.setTexture(Containers::texture_table["border"]);
@@ -1682,6 +1682,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 		party2->addToParty(blueSoldiers[i], false);
 	}
 	party3->addToParty(staticRec, true);
+	party4->addToParty(oya, true);
 	Village* v1 = new Village();
 	Village* v2 = new Village();
 	Village* v3 = new Village();
@@ -1713,7 +1714,9 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	if (blueSoldiers.size() > 0)party2->set_defend(blueSoldiers[0]->getLoc());
 	party2->setMode(Party::MODE_DEFEND);
 	party3->set_defend(staticRec->getLoc());
-	party3->setMode(Party::MODE_DEFEND);
+	party3->setMode(Party::MODE_ATTACK);
+	party4->set_defend(oya->getLoc());
+	party4->setMode(Party::MODE_DEFEND);
 	Alliance::update_enemies();
 	//cout << Alex->getParty()->getAlliance()<< endl;
 
