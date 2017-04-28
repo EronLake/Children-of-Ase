@@ -17,7 +17,9 @@ public:
 	float distance;
 	Action* quest;
 	Action* cur_action;
-	int mem_counter;
-	vector<Memory*> memories;
+
+	//don't need these because they are inherated from hero
+	//int mem_counter;
+	//vector<Memory*> memories;
 };
 

@@ -176,6 +176,9 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	Alex->setWidth(150);
 	Alex->setHeight(150);
 
+	//draws the logo on startup
+	gameplay_functions->draw_logo(Alex);
+	tBuffer->run();
 
 	// Player* Alex = new Player(SHANGO, Vector2f(6445.0, 10155.0), 150.0, 150.0);	//init player
 	
@@ -239,6 +242,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 
 	WorldObj* barrel = new WorldObj(Vector2f(5200, 3900), 75, 75);
 	//Alex->name = SHANGO;
+	
 	gameplay_functions->add_texture("map1_1", 0, 0, 0);
 	gameplay_functions->add_texture("map1_2", 0, 0, 0);
 	gameplay_functions->add_texture("map1_3", 0, 0, 0);
@@ -274,6 +278,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	gameplay_functions->init_map(Alex);
 
 	tBuffer->run();
+	
 
 	gameplay_functions->add_texture("objTexture", 0, 0, 0);
 	tBuffer->run();

@@ -78,12 +78,12 @@
         }
      }
   },
-  "fight_bandits": {
-    "name": "Fight_Bandits",
+  "fight": {
+    "name": "Fight",
     "type": "micro",
     "utility": 0.0,
     "why": 0.0,
-    "exe_name": "execute_fight_bandits",
+    "exe_name": "execute_fight",
     "aggression": 0,
     "kindness": 0,
     "honor": 0,
@@ -118,7 +118,7 @@
       "1": {
         "general_type": 0,
         "rel_type": 6,
-        "utility": 2
+        "utility":10
       }
     }
   },

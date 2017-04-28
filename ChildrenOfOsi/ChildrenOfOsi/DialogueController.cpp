@@ -53,7 +53,11 @@ int DialogueController::select = 0;        //indicates the position of the optio
 
 bool DialogueController::accepted_quest = false;
 bool DialogueController::prompted_quest = false;
+
 Action* DialogueController::quest = nullptr;
+
+//used for hero actions
+bool DialogueController::accepted_action = false;
 
 //used to decide index to begin iterating at for displaying dialog options
 int DialogueController::scroll_control = 0;
@@ -424,21 +428,64 @@ void DialogueController::otherResponse(std::string info, std::string hero_topic)
 
 
 		if (replyString == "Accept Alliance Offer") {
-			dialogue_point diog_pt = { "Accept Alliance Offer","Accept Alliance Offer" };
-			std::string reply_pt_sentence = dialogue.gen_dialog(diog_pt, temp_hero);
-			message = other->getName() + ": " + reply_pt_sentence + "\n\n";
+			//calls action start if the question is asked at all
+			PlayerActExecFunctions::execute_start("Form_Alliance", temp_hero);
+
+			//check if I want to accept (seeting to fail for testing)
+			accepted_action = true; //should call a function
+
+			if (accepted_action) {
+				dialogue_point diog_pt = { "Accept Alliance Offer","Accept Alliance Offer" };
+				std::string reply_pt_sentence = dialogue.gen_dialog(diog_pt, temp_hero);
+				message = other->getName() + ": " + reply_pt_sentence + "\n\n";
+			} else{
+				/////////////need to be changed to correct calls/dialog if not accepted///////////////////
+				dialogue_point diog_pt = { "Accept Alliance Offer","Accept Alliance Offer" };
+				std::string reply_pt_sentence = dialogue.gen_dialog(diog_pt, temp_hero);
+				message = other->getName() + ": " + reply_pt_sentence + "\n\n";
+			}
+			
 			state = 8;
 		}
 		else if (replyString == "Accept Duel") {
-			dialogue_point diog_pt = { "Accept Duel","Accept Duel" };
-			std::string reply_pt_sentence = dialogue.gen_dialog(diog_pt, temp_hero);
-			message = other->getName() + ": " + reply_pt_sentence + "\n\n";
+			//calls action start if the question is asked at all
+			PlayerActExecFunctions::execute_start("Duel", temp_hero);
+
+			//check if I want to accept (seeting to fail for testing)
+			accepted_action = true; //should call a function
+
+			if (accepted_action) {
+				dialogue_point diog_pt = { "Accept Duel","Accept Duel" };
+				std::string reply_pt_sentence = dialogue.gen_dialog(diog_pt, temp_hero);
+				message = other->getName() + ": " + reply_pt_sentence + "\n\n";
+			}
+			else {
+				/////////////need to be changed to correct calls/dialog if not accepted///////////////////
+				dialogue_point diog_pt = { "Accept Duel","Accept Duel" };
+				std::string reply_pt_sentence = dialogue.gen_dialog(diog_pt, temp_hero);
+				message = other->getName() + ": " + reply_pt_sentence + "\n\n";
+			}
+
 			state = 8;
 		}
 		else if (replyString == "Accept Spar Request") {
-			dialogue_point diog_pt = { "Accept Spar Request","Accept Spar Request" };
-			std::string reply_pt_sentence = dialogue.gen_dialog(diog_pt, temp_hero);
-			message = other->getName() + ": " + reply_pt_sentence + "\n\n";
+			//calls action start if the question is asked at all
+			PlayerActExecFunctions::execute_start("Spar", temp_hero);
+
+			//check if I want to accept (seeting to fail for testing)
+			accepted_action = true; //should call a function
+
+			if (accepted_action) {
+				dialogue_point diog_pt = { "Accept Spar Request","Accept Spar Request" };
+				std::string reply_pt_sentence = dialogue.gen_dialog(diog_pt, temp_hero);
+				message = other->getName() + ": " + reply_pt_sentence + "\n\n";
+			}
+			else {
+				/////////////need to be changed to correct calls/dialog if not accepted///////////////////
+				dialogue_point diog_pt = { "Accept Spar Request","Accept Spar Request" };
+				std::string reply_pt_sentence = dialogue.gen_dialog(diog_pt, temp_hero);
+				message = other->getName() + ": " + reply_pt_sentence + "\n\n";
+			}
 			state = 8;
 		}
 		else {
@@ -448,19 +495,55 @@ void DialogueController::otherResponse(std::string info, std::string hero_topic)
 	}
 	else {
 		if (replyString == "Accept Alliance Offer") {
-			dialogue_point diog_pt = { "Confirm Alliance","Confirm Alliance" };
-			std::string reply_pt_sentence = dialogue.gen_dialog(diog_pt, temp_hero);
-			message = player->getName() + ": " + reply_pt_sentence + "\n\n";
+			//choose different dialog if they denied the action
+			if (accepted_action) {
+				dialogue_point diog_pt = { "Confirm Alliance","Confirm Alliance" };
+				std::string reply_pt_sentence = dialogue.gen_dialog(diog_pt, temp_hero);
+				message = player->getName() + ": " + reply_pt_sentence + "\n\n";
+			}
+			else {
+				/////////////need to be changed to correct calls/dialog if not accepted///////////////////
+				dialogue_point diog_pt = { "Accept Alliance Offer","Accept Alliance Offer" };
+				std::string reply_pt_sentence = dialogue.gen_dialog(diog_pt, temp_hero);
+				message = other->getName() + ": " + reply_pt_sentence + "\n\n";
+
+				//calls action end if the question is denied otherwise called on cmpletion of the action
+				PlayerActExecFunctions::execute_end(false);
+			}
 		}
 		else if (replyString == "Accept Duel") {
-			dialogue_point diog_pt = { "Confirm Duel","Confirm Duel" };
-			std::string reply_pt_sentence = dialogue.gen_dialog(diog_pt, temp_hero);
-			message = player->getName() + ": " + reply_pt_sentence + "\n\n";
+			//choose different dialog if they denied the action
+			if (accepted_action) {
+				dialogue_point diog_pt = { "Confirm Duel","Confirm Duel" };
+				std::string reply_pt_sentence = dialogue.gen_dialog(diog_pt, temp_hero);
+				message = player->getName() + ": " + reply_pt_sentence + "\n\n";
+			}
+			else {
+				/////////////need to be changed to correct calls/dialog if not accepted///////////////////
+				dialogue_point diog_pt = { "Confirm Duel","Confirm Duel" };
+				std::string reply_pt_sentence = dialogue.gen_dialog(diog_pt, temp_hero);
+				message = player->getName() + ": " + reply_pt_sentence + "\n\n";
+
+				//calls action end if the question is denied otherwise called on cmpletion of the action
+				PlayerActExecFunctions::execute_end(false);
+			}
 		}
 		else if (replyString == "Accept Spar Request") {
-			dialogue_point diog_pt = { "Confirm Spar","Confirm Spar" };
-			std::string reply_pt_sentence = dialogue.gen_dialog(diog_pt, temp_hero);
-			message = player->getName() + ": " + reply_pt_sentence + "\n\n";
+			//choose different dialog if they denied the action
+			if (accepted_action) {
+				dialogue_point diog_pt = { "Confirm Spar","Confirm Spar" };
+				std::string reply_pt_sentence = dialogue.gen_dialog(diog_pt, temp_hero);
+				message = player->getName() + ": " + reply_pt_sentence + "\n\n";
+			}
+			else {
+				/////////////need to be changed to correct calls/dialog if not accepted///////////////////
+				dialogue_point diog_pt = { "Confirm Spar","Confirm Spar" };
+				std::string reply_pt_sentence = dialogue.gen_dialog(diog_pt, temp_hero);
+				message = player->getName() + ": " + reply_pt_sentence + "\n\n";
+
+				//calls action end if the question is denied otherwise called on cmpletion of the action
+				PlayerActExecFunctions::execute_end(false);
+			}
 		}
 		state = 9;
 	}

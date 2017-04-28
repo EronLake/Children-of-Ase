@@ -5,6 +5,7 @@
 bool MakeForest =false;
 bool PlacePlant = false;
 bool rand_gen = false;
+bool PlaceOasisPlant=false;
 bool Jungle_Config = true;
 float topLeftx;
 float topLefty;
@@ -14,6 +15,7 @@ float botLeftx;
 float botLefty;
 float botRightx;
 float botRighty;
+
 string WhichJson;
 unordered_map<Texture*, pair<string, int>>* ObjConfig::textureMapConfig;
 vector<Texture*>* ObjConfig::standard_con;
@@ -46,7 +48,7 @@ void ObjConfig::import_config(vector<WorldObj*>* recVec, ChildrenOfOsi* gameplay
 
 	int numberOfWorldObj = 0;
 
-	if (MakeForest) {
+	if (MakeForest||PlacePlant||PlaceOasisPlant) {
 		make_stuff(recVec, gameplay_func, tBuffer,region);
 	}
 	else {
@@ -78,7 +80,7 @@ void ObjConfig::import_config(vector<WorldObj*>* recVec, ChildrenOfOsi* gameplay
 
 void ObjConfig::make_stuff(vector<WorldObj*>* recVec, ChildrenOfOsi* gameplay_func, TaskBuffer* tBuffer, int region)
 {
-	
+
 	if (Jungle_Config) {
 		WhichJson = "config.json";
 		region = JUNGLE;
@@ -97,7 +99,7 @@ void ObjConfig::make_stuff(vector<WorldObj*>* recVec, ChildrenOfOsi* gameplay_fu
 	for (auto itr = root.begin(); itr != root.end(); itr++)
 	{
 
-		if (MakeForest || PlacePlant) {
+		if (MakeForest || PlacePlant||PlaceOasisPlant) {
 
 			if ((*itr)["name"].asString() == "JungleTopLeft") {
 				topLeftx = (*itr)["x"].asFloat();
@@ -168,7 +170,7 @@ void ObjConfig::make_stuff(vector<WorldObj*>* recVec, ChildrenOfOsi* gameplay_fu
 				};
 				int random = rand() % 6;
 				WhichSprite = PlantSprites[random];
-				int randomShrubsize= rand() % (175 * 100 - 75 * 100 + 1) + 10 * 100;
+				int randomShrubsize = rand() % (175 * 100 - 75 * 100 + 1) + 10 * 100;
 				randomShrubsize = randomShrubsize / 100;
 				int offestleft = randomShrubsize;
 				switch (random)
@@ -240,12 +242,8 @@ void ObjConfig::make_stuff(vector<WorldObj*>* recVec, ChildrenOfOsi* gameplay_fu
 				file << styledWriter.write(root);
 
 				file.close();
-
-
-
-
 			}
-			else {
+			else if (MakeForest) {
 
 				string TreeSprites[] = {
 					"Jungle_Tree_1",
@@ -256,7 +254,7 @@ void ObjConfig::make_stuff(vector<WorldObj*>* recVec, ChildrenOfOsi* gameplay_fu
 				int random = rand() % 5;
 				WhichSprite = TreeSprites[random];
 				switch (random) {
-				case 0: 
+				case 0:
 					offsetLeft = 180;
 					offsetRight = 180;
 					offsetTop = 350;
@@ -280,7 +278,7 @@ void ObjConfig::make_stuff(vector<WorldObj*>* recVec, ChildrenOfOsi* gameplay_fu
 					offsetLeft = 205;
 					offsetRight = 225;
 					offsetTop = 430;
-					offsetBot = 30; 
+					offsetBot = 30;
 					break;
 				case 4:
 					offsetLeft = 180;
@@ -289,7 +287,7 @@ void ObjConfig::make_stuff(vector<WorldObj*>* recVec, ChildrenOfOsi* gameplay_fu
 					offsetBot = 95;
 					break;
 				}
-				set_world_obj(recVec, gameplay_func, tBuffer, randomX, randomY, 500.0, 500.0, TreeName.str(), WhichSprite, 1, offsetLeft, offsetRight, offsetTop, offsetBot,JUNGLE);
+				set_world_obj(recVec, gameplay_func, tBuffer, randomX, randomY, 500.0, 500.0, TreeName.str(), WhichSprite, 1, offsetLeft, offsetRight, offsetTop, offsetBot, JUNGLE);
 				std::ofstream file;
 				file.open(WhichJson);
 
@@ -310,15 +308,93 @@ void ObjConfig::make_stuff(vector<WorldObj*>* recVec, ChildrenOfOsi* gameplay_fu
 				file.close();
 
 			}
+		}
 
-			////std:://cout << "Here" << endl;
+	}
+	else {
+		Json::Value root;
+		Json::Reader reader;
+		std::ifstream in_file(WhichJson);
+		in_file >> root;
+		in_file.close();
 
+		std::cout << "Makeing Oasis" << endl;
+		int XDistancs = abs(topLeftx - topRightx);
+		int YDistancs = abs(topLefty - botLefty);
+		srand(time(0));
+		for (int i = 51; i < 80; i++) {
+			float randomX;
+			float randomY;
+			float offsetLeft;
+			float offsetRight;
+			float offsetTop;
+			float offsetBot;
 
+			randomX = rand() % XDistancs + topLeftx;
+			randomY = rand() % YDistancs + topLefty;
+			stringstream TreeName;
+			TreeName << "Oasis_Element_Num_" << i;
+			string WhichSprite;
 
+			if (PlaceOasisPlant) {
+				string PlantSprites[]{
+					"Oasis_Tree1",
+					"Oasis_Tree2",
+					"Oasis_Tree3"
 
+				};
+				int random = rand() % 3;
+				WhichSprite = PlantSprites[random];
+				int randomShrubsize = rand() % 100 + 500;
+				int offestleft = randomShrubsize;
+				switch (random)
+				{
+				case 0:
+					offsetLeft = randomShrubsize*.3375;
+					offsetRight = randomShrubsize*.3625;
+					offsetTop = randomShrubsize*.7675;
+					offsetBot = randomShrubsize*0.09;
+					set_world_obj(recVec, gameplay_func, tBuffer, randomX, randomY, randomShrubsize, randomShrubsize, TreeName.str(), WhichSprite, 1, offsetLeft, offsetRight, offsetTop, offsetBot, JUNGLE);
+
+					break;
+				case 1:
+					offsetLeft = randomShrubsize*.5375;
+					offsetRight = randomShrubsize*.3625;
+					offsetTop = randomShrubsize*.8687;
+					offsetBot = randomShrubsize*0.025;
+					set_world_obj(recVec, gameplay_func, tBuffer, randomX, randomY, randomShrubsize, randomShrubsize, TreeName.str(), WhichSprite, 1, offsetLeft, offsetRight, offsetTop, offsetBot, JUNGLE);
+
+					break;
+				case 2:
+					offsetLeft = randomShrubsize*.455;
+					offsetRight = randomShrubsize*.470;
+					offsetTop = randomShrubsize*.813;
+					offsetBot = randomShrubsize*.115;
+					set_world_obj(recVec, gameplay_func, tBuffer, randomX, randomY, randomShrubsize, randomShrubsize, TreeName.str(), WhichSprite, 1, offsetLeft, offsetRight, offsetTop, offsetBot, JUNGLE);
+
+					break;
+				}
+				std::ofstream file;
+				file.open(WhichJson);
+
+				//populate 'value_obj' with the objects, arrays etc.
+				Json::Value new_obj = {};
+
+				new_obj["x"] = floor(randomX); new_obj["y"] = floor(randomY);
+				new_obj["hight"] = randomShrubsize; new_obj["width"] = randomShrubsize;
+				new_obj["frame_num"] = 1;
+				new_obj["name"] = TreeName.str(); new_obj["tex_file"] = WhichSprite;
+				new_obj["bodyx1"] = offsetLeft; new_obj["bodyx2"] = offsetRight; new_obj["bodyy1"] = offsetTop; new_obj["bodyy2"] = offsetBot;
+
+				root[TreeName.str()] = new_obj;
+
+				Json::StyledWriter styledWriter;
+				file << styledWriter.write(root);
+
+				file.close();
+			}
 		}
 	}
-
 }
 
 

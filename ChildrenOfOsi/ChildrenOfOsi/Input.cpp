@@ -445,7 +445,7 @@ void Input::edit_object() {
 		}
 	}
 
-	if (collide_with != "" && onscreen)
+	if (collide_with != "" && onscreen && collide_with != "Jungle_Village" && collide_with != "Oasis_Platform")
 	{
 		if (!H)
 		{
@@ -1042,6 +1042,7 @@ void Input::InputCheck()
 					else if (DialogueController::getState() == 9) {
 						count = 10;
 						DialogueController::exitDialogue();
+						PlayerActExecFunctions::execute_dialog();
 					}
 				}
 			}

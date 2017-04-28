@@ -595,6 +595,9 @@
     <None Include="config_jungle.json">
       <Filter>Game Objects</Filter>
     </None>
+    <None Include="config_oasis.json">
+      <Filter>Game Objects</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="ChildrenOfOsi1.rc" />
