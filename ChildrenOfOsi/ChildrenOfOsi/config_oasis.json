@@ -1,57 +1,16 @@
-{
-  {
-   "JungleBotLeft" : {
-      "bodyx1" : 0,
-      "bodyx2" : 0,
-      "bodyy1" : 0,
-      "bodyy2" : 0,
-      "frame_num" : 1,
-      "hight" : 500,
-      "name" : "JungleBotLeft",
-      "tex_file" : "Jungle_Basket",
-      "width" : 500,
-      "x" : 13.0,
-      "y" : 98.0
-   },
-   "JungleBotRight" : {
-      "bodyx1" : 0.0,
-      "bodyx2" : 0.0,
-      "bodyy1" : 0.0,
-      "bodyy2" : 0.0,
-      "frame_num" : 1,
-      "hight" : 500.0,
-      "name" : "JungleBotRight",
-      "tex_file" : "Jungle_Basket",
-      "width" : 500.0,
-      "x" : 120.1134262084961,
-      "y" : 98.38352203369141
-   },
-   "JungleTopRight" : {
-      "bodyx1" : 0,
-      "bodyx2" : 0,
-      "bodyy1" : 0,
-      "bodyy2" : 0,
-      "frame_num" : 1,
-      "hight" : 500,
-      "name" : "JungleTopRight",
-      "tex_file" : "Jungle_Basket",
-      "width" : 500,
-      "x" : 121.0,
-      "y" : 81.0
-   },
-   "TopLeftJungle" : {
-      "bodyx1" : 0,
-      "bodyx2" : 0,
-      "bodyy1" : 0,
-      "bodyy2" : 0,
-      "frame_num" : 1,
-      "hight" : 500,
-      "name" : "TopLeftJungle",
-      "tex_file" : "Jungle_Basket",
-      "width" : 500,
-      "x" : 9.0,
-      "y" : 78.0
-   }
-}
 
+  {
+         "Oasis_Platform" : {
+      "bodyx1" : 4000,
+      "bodyx2" : 4000,
+      "bodyy1" : 4000,
+      "bodyy2" : 4000,
+      "frame_num" : 1,
+      "hight" : 4000.0,
+      "name" : "Oasis_Platform",
+      "tex_file" : "Oasis_Platform",
+      "width" : 4000.0,
+      "x" : 33.79774093627930,
+      "y" : 116.4775619506836
+   }
 }

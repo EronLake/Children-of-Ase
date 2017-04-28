@@ -36,6 +36,11 @@ ObjConfig::~ObjConfig()
 
 void ObjConfig::import_config(vector<WorldObj*>* recVec, ChildrenOfOsi* gameplay_func, TaskBuffer* tBuffer)
 {
+	string ConfigFiles[]{
+		"config_oasis.json",
+		"config_jungle.json"
+	};
+
 	int region=0;
 	if (Jungle_Config) {
 		WhichJson = "config.json";
@@ -52,6 +57,74 @@ void ObjConfig::import_config(vector<WorldObj*>* recVec, ChildrenOfOsi* gameplay
 		make_stuff(recVec, gameplay_func, tBuffer,region);
 	}
 	else {
+		if (LOAD_REGIONS == 0) {
+			WhichJson = "config.json";
+			Json::Value root;
+			Json::Reader reader;
+
+
+			std::ifstream file(WhichJson);
+
+			file >> root;
+
+			for (auto itr = root.begin(); itr != root.end(); itr++)
+			{
+				set_world_obj(recVec, gameplay_func, tBuffer, (*itr)["x"].asFloat(), (*itr)["y"].asFloat(),
+					(*itr)["width"].asFloat(), (*itr)["hight"].asFloat(),
+					(*itr)["name"].asString(), (*itr)["tex_file"].asString(),
+					(*itr)["frame_num"].asInt(),
+					(*itr)["bodyx1"].asFloat(), (*itr)["bodyx2"].asFloat(),
+					(*itr)["bodyy1"].asFloat(), (*itr)["bodyy2"].asFloat(), region);
+				numberOfWorldObj++;
+			}
+		}
+		else if (LOAD_REGIONS == 1) {
+			for (int i = 0; i < 2; i++) {
+				WhichJson = ConfigFiles[i];
+			Json::Value root;
+			Json::Reader reader;
+
+
+			std::ifstream file(WhichJson);
+
+			file >> root;
+
+			for (auto itr = root.begin(); itr != root.end(); itr++)
+			{
+				set_world_obj(recVec, gameplay_func, tBuffer, (*itr)["x"].asFloat(), (*itr)["y"].asFloat(),
+					(*itr)["width"].asFloat(), (*itr)["hight"].asFloat(),
+					(*itr)["name"].asString(), (*itr)["tex_file"].asString(),
+					(*itr)["frame_num"].asInt(),
+					(*itr)["bodyx1"].asFloat(), (*itr)["bodyx2"].asFloat(),
+					(*itr)["bodyy1"].asFloat(), (*itr)["bodyy2"].asFloat(), region);
+				numberOfWorldObj++;
+			}
+		}
+		}
+		else if (LOAD_REGIONS == 2) {
+			WhichJson = ConfigFiles[0];
+			Json::Value root;
+			Json::Reader reader;
+
+
+			std::ifstream file(WhichJson);
+
+			file >> root;
+
+			for (auto itr = root.begin(); itr != root.end(); itr++)
+			{
+				set_world_obj(recVec, gameplay_func, tBuffer, (*itr)["x"].asFloat(), (*itr)["y"].asFloat(),
+					(*itr)["width"].asFloat(), (*itr)["hight"].asFloat(),
+					(*itr)["name"].asString(), (*itr)["tex_file"].asString(),
+					(*itr)["frame_num"].asInt(),
+					(*itr)["bodyx1"].asFloat(), (*itr)["bodyx2"].asFloat(),
+					(*itr)["bodyy1"].asFloat(), (*itr)["bodyy2"].asFloat(), region);
+				numberOfWorldObj++;
+			}
+		}
+		else if(LOAD_REGIONS==3)
+		{
+			WhichJson = ConfigFiles[1];
 		Json::Value root;
 		Json::Reader reader;
 
@@ -70,8 +143,10 @@ void ObjConfig::import_config(vector<WorldObj*>* recVec, ChildrenOfOsi* gameplay
 				(*itr)["bodyy1"].asFloat(), (*itr)["bodyy2"].asFloat(),region);
 			numberOfWorldObj++;
 		}
-		//std:://cout << "done" << endl;
-		//std:://cout << "Number of World Objs "<< numberOfWorldObj << endl;
+		}
+
+		std::cout << "done" << endl;
+		std::cout << "Number of World Objs "<< numberOfWorldObj << endl;
 	}
 
 
