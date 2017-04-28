@@ -2,7 +2,7 @@
 #include "ObjConfig.h"
 #include <ctime>
 
-bool MakeForest = false;
+bool MakeForest =false;
 bool PlacePlant = false;
 bool rand_gen = false;
 bool Jungle_Config = true;
@@ -143,7 +143,7 @@ void ObjConfig::make_stuff(vector<WorldObj*>* recVec, ChildrenOfOsi* gameplay_fu
 		int XDistancs = abs(topLeftx - topRightx);
 		int YDistancs = abs(topLefty - botLefty);
 		srand(time(0));
-		for (int i = 400; i < 600; i++) {
+		for (int i = 5000; i < 5100; i++) {
 			float randomX;
 			float randomY;
 			int offsetLeft;
