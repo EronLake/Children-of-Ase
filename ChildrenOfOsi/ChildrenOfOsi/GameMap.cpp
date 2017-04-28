@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "GameMap.h"
 
+/*
 
 GameMap::GameMap()
 {
@@ -42,10 +43,10 @@ void GameMap::setSprite()
 
 void GameMap::drawMap(float _x, float _y)
 {
-	osi::GameWindow::drawSprite(mapTopLeft->getX() - _x, mapTopLeft->getY() - _y, mapTopLeft->getWidth(), mapTopLeft->getHeight(), mapTopLeft->sprite);
-	osi::GameWindow::drawSprite(mapTopRight->getX() - _x, mapTopRight->getY() - _y, mapTopRight->getWidth(), mapTopRight->getHeight(), mapTopRight->sprite);
-	osi::GameWindow::drawSprite(mapBottomLeft->getX() - _x, mapBottomLeft->getY() - _y, mapBottomLeft->getWidth(), mapBottomLeft->getHeight(), mapBottomLeft->sprite);
-	osi::GameWindow::drawSprite(mapBottomRight->getX() - _x, mapBottomRight->getY() - _y, mapBottomRight->getWidth(), mapBottomRight->getHeight(), mapBottomRight->sprite);
+	GameWindow::drawSprite(mapTopLeft->getX() - _x, mapTopLeft->getY() - _y, mapTopLeft->getWidth(), mapTopLeft->getHeight(), mapTopLeft->sprite);
+	GameWindow::drawSprite(mapTopRight->getX() - _x, mapTopRight->getY() - _y, mapTopRight->getWidth(), mapTopRight->getHeight(), mapTopRight->sprite);
+	GameWindow::drawSprite(mapBottomLeft->getX() - _x, mapBottomLeft->getY() - _y, mapBottomLeft->getWidth(), mapBottomLeft->getHeight(), mapBottomLeft->sprite);
+	GameWindow::drawSprite(mapBottomRight->getX() - _x, mapBottomRight->getY() - _y, mapBottomRight->getWidth(), mapBottomRight->getHeight(), mapBottomRight->sprite);
 	//osi::GameWindow::drawSprite(river->getX() - _x, river->getY() - _y, river->getWidth(), river->getHeight(), river->sprite);
 
 
@@ -104,7 +105,6 @@ GameMap::GameMap()
 
 	//riverTex = new Texture();
 }
-
 
 GameMap::~GameMap()
 {

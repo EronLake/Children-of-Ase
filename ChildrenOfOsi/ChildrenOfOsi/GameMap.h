@@ -26,8 +26,8 @@ private:
 	//Texture* riverTex;
 
 };
-
 */
+
 #pragma once
 #include "common.h"
 #include "Rectangle.h"
@@ -110,7 +110,16 @@ private:
 	Texture* map5_4tex;
 	Texture* map5_5tex;
 
+	Rectangle* mapTopLeft;
+	Rectangle* mapTopRight;
+	Rectangle* mapBottomLeft;
+	Rectangle* mapBottomRight;
+	//Rectangle* river;
 
+	Texture* topLeftTex;
+	Texture* topRightTex;
+	Texture* bottomLeftTex;
+	Texture* bottomRightTex;
 	//Texture* riverTex;
 };
 

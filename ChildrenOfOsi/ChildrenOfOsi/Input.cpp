@@ -82,7 +82,7 @@ void Input::add_object() {
 
 		//set file takes up memory
 		tBuffer->run();
-		Containers::texture_table[image_name]->setFile("Assets/Sprites/Enviorment" + image_name + ".png", frame_num);
+		Containers::texture_table[image_name]->setFile("Assets/Sprites/" + image_name + ".png", frame_num);
 
 	}
 
@@ -1041,6 +1041,7 @@ void Input::InputCheck()
 					else if (DialogueController::getState() == 9) {
 						count = 10;
 						DialogueController::exitDialogue();
+						PlayerActExecFunctions::execute_dialog();
 					}
 				}
 			}

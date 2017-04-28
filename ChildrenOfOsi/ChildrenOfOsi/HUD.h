@@ -1,8 +1,11 @@
 #pragma once
+
 #include "common.h"
-#include "Rectangle.h"
-#include "GameWindow.h"
+
+#include "AssetInfo.h"
 #include "DialogueController.h"
+#include "GameWindow.h"
+#include "Rectangle.h"
 
 class HUD
 {
@@ -23,25 +26,69 @@ class HUD
 
   private:
 
-  static constexpr float HUD_WIDTH = 400.0F;
-  static constexpr float HUD_HEIGHT = 400.0F;
-  static constexpr float HEALTHBAR_WIDTH = 400.0F;
-  static constexpr float HEALTHBAR_HEIGHT = 400.0F;
-  static constexpr float ASEBAR_WIDTH = 400.0F;
-  static constexpr float ASEBAR_HEIGHT = 400.0F;
+  static constexpr float HEALTHBAR_X = 125.0F;
+  static constexpr float HEALTHBAR_Y = 50.0F;
+  static constexpr float HEALTHBAR_WIDTH = 300.0F;
+  static constexpr float HEALTHBAR_HEIGHT = 32.0F;
+
+  static constexpr float ASEFLAME_X = 160.0F;
+  static constexpr float ASEFLAME_Y = 100.0F;
+  static constexpr float ASEFLAME_WIDTH = 20.0F;
+  static constexpr float ASEFLAME_HEIGHT = 20.0F;
+  static constexpr float ASEFLAME_MARGIN = 10.0F;
+  static constexpr int ASEFLAME_COUNT = 4;
+
+  static constexpr float PORTRAIT_X = 10.0F;
+  static constexpr float PORTRAIT_Y = 10.0F;
+  static constexpr float PORTRAIT_WIDTH = 150.0F;
+  static constexpr float PORTRAIT_HEIGHT = 150.0F;
+
+  static constexpr float MINIMAP_X = 737.5;
+  static constexpr float MINIMAP_Y = 22.5F;
+  static constexpr float MINIMAP_WIDTH = 200.0F;
+  static constexpr float MINIMAP_HEIGHT = 200.0F;
+  static constexpr float MINIMAP_FRAME_X = 725.0F;
+  static constexpr float MINIMAP_FRAME_Y = 10.0F;
+  static constexpr float MINIMAP_FRAME_WIDTH = 225.0F;
+  static constexpr float MINIMAP_FRAME_HEIGHT = 225.0F;
+  static constexpr float MINIMAP_CURSOR_X = 733.5F;
+  static constexpr float MINIMAP_CURSOR_Y = 18.5F;
+  static constexpr float MINIMAP_CURSOR_WIDTH = 8.0F;
+  static constexpr float MINIMAP_CURSOR_HEIGHT = 8.0F;
+
+  static constexpr float KEYBIND_DISPLAY_X = 800.0F;
+  static constexpr float KEYBIND_DISPLAY_Y = 380.0F;
+  static constexpr float KEYBIND_DISPLAY_WIDTH = 150.0F;
+  static constexpr float KEYBIND_DISPLAY_HEIGHT = 150.0F;
 
   static bool show_active_quests;
 
-  Rectangle* hud_empty;
-  Rectangle* hud_ase;
-  Rectangle* hud_health;
-  Rectangle* hud_portrait;
+  Rectangle *healthbar_empty_rect;
+  Rectangle *healthbar_full_rect;
+  Rectangle *aseflame_empty_rect;
+  Rectangle *aseflame_full_rect;
+  Rectangle *portrait_background_rect;
+  Rectangle *portrait_rect;
 
-  Texture* hud_empty_tex;
-  Texture* hud_ase_tex;
-  Texture* hud_health_tex;
-  Texture* hud_portrait_tex;
+  Rectangle *minimap_rect;
+  Rectangle *minimap_frame_rect;
+  Rectangle *minimap_cursor_rect;
+  Rectangle *keybind_display_rect;
 
-  glm::vec3 black;
+  Texture *healthbar_empty_tex;
+  Texture *healthbar_full_tex;
+  Texture *aseflame_empty_tex;
+  Texture *aseflame_full_tex;
+  Texture *portrait_background_tex;
+  Texture *portrait_full_tex;
+  Texture *portrait_empty_tex;
+
+  Texture *minimap_tex;
+  Texture *minimap_frame_tex;
+  Texture *minimap_cursor_tex;
+  Texture *keybind_display_tex;
+
+  void drawMainHUD(Player *player);
+  void drawMinimap(Player *player);
+  void drawKeybindDisplay();
 };
-

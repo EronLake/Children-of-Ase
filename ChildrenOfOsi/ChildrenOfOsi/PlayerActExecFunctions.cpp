@@ -88,13 +88,28 @@ void PlayerActExecFunctions::execute_end(bool if_succ) {
 
 	Action* cur_action = player->cur_action;
 
-	if (cur_action->name == "conquer" && player->getParty()->get_fight()->is_over()) {
+	//these two lines strip the number off the end of the name 
+	std::string::size_type name_end = cur_action->getName().find_first_of('_');
+	std::string act_name = cur_action->getName().substr(0, name_end);
+
+	///////////////////////////////////////////////////////////////////////////////////
+	//special cases that need to be handled are in this gaurd (may want to make a helper function)
+
+	//NEEDS TO BE TESTED... should it check for Occupy?
+	if (act_name == "conquer" && player->getParty()->get_fight()->is_over()) {
 		if (cur_action->getReceiver()->getVillage()->get_village_health() > 0) {
 			cur_action->getReceiver()->getVillage()->defenders->add_party_to_party(cur_action->getReceiver()->getVillage()->barracks);
 			if (player->getParty()->get_fight()!=nullptr)player->getParty()->get_fight()->add_to_defenders(cur_action->getReceiver()->getVillage()->defenders);
 			return;
 		}
 	}
+
+	//NEEDS TO BE IMPLIMENTED
+	if (act_name == "Duel" || act_name == "Spar") {
+		LOG("print to the screen something that the person you were fighting would say then finish action");
+	}
+
+	///////////////////////////////////////////////////////////////////////////////////
 
 	Memory* doer_mem = player->find_mem(cur_action->getName() + std::to_string(cur_action->time_stamp));
 	Memory* receiver_mem = cur_action->getReceiver()->find_mem(cur_action->getName() + 
@@ -104,11 +119,6 @@ void PlayerActExecFunctions::execute_end(bool if_succ) {
 	{
 		perror("something is wrong with the current hero memory creation function");
 	}
-	
-
-	////////////CAN WE PUT THIS AT THE END WITH THE DEALLOCATION///////////
-
-	
 	
 	cur_action->apply_postconditions(if_succ);	//Apply post-conditions based off if it was succesful or not
 	cur_action->executed = true;
@@ -147,26 +157,41 @@ void PlayerActExecFunctions::execute_end(bool if_succ) {
 
 	delete player->cur_action;
 }
-/*
+
 void PlayerActExecFunctions::execute_dialog()
 {
 	Player* player = dynamic_cast<Player*>(Containers::hero_table["Shango"]);
 
 	Action* cur_action = player->cur_action;
 
-	if ((act_name == "Occupy" || act_name == "Fight") &&
+	//these two lines strip the number off the end of the name 
+	std::string::size_type name_end = cur_action->getName().find_first_of('_');
+	std::string act_name = cur_action->getName().substr(0, name_end);
+
+	//Need TO ADD FUNCTION TO DO THIS
+	if (act_name == "Form_Alliance") {
+		LOG("PRINT FOLLOW ME TO SCREEN AND MOVE TO TRAIN LOCATION");
+	}
+
+	if ((act_name == "Duel" || act_name == "Spar" || act_name == "Train") &&
 		((!player->getInCombat()) && (!player->getInCombat())))
 	{
 		//we need to create a fight here if their action is a violent action
-		if (act_name == "duel") {
-			Fight* fight_obj = new Fight(player->getParty(), receiver->getParty(), true);
+		if (act_name == "Duel") {
+			Fight* fight_obj = new Fight(player->getParty(), cur_action->getReceiver()->getParty(), true);
 		}
 		else {
-			Fight* fight_obj = new Fight(player->getParty(), receiver->getParty(), false);
+			Fight* fight_obj = new Fight(player->getParty(), cur_action->getReceiver()->getParty(), false);
 		}
 	}
+
+	//Need TO ADD FUNCTION TO DO THIS - needs to be done here because you have to be outside dialog first
+	if (act_name == "Form_Alliance") {
+		LOG("PRINT FORM ALLIANCE TO THE SCREEN DO similar to a fairwell");
+		execute_end(true);
+	}
 }
-*/
+
 
 void PlayerActExecFunctions::check_quest() {
 

@@ -158,11 +158,46 @@ void DialogueController::PlayerConversationPoint()
 		curr_conversation_log.push_back(conv_log_obj);//add entry to log
 		
 		player_conv_point_choice = choice[ConvPointName];
+
+		Hero* temp_hero = nullptr;
+		if (other->getType() >= WorldObj::TYPE_NPC) {
+			if (temp_hero = CheckClass::isHero(other))//added another equals was single equals before
+			{
+				perror("you cannot talk to this type of object");
+			}
+		}
+		else {
+			return;
+		}
+
+		if (player_conv_point_choice == "Bribe") {
+			
+			Containers::conv_point_table[player_conv_point_choice]->apply_postconditions(true, player, temp_hero);
+		}
+		else if (player_conv_point_choice == "Compliment") {
+
+			Containers::conv_point_table[player_conv_point_choice]->apply_postconditions(true, player, temp_hero);
+		}
+		else if (player_conv_point_choice == "Grovel") {
+
+			Containers::conv_point_table[player_conv_point_choice]->apply_postconditions(true, player, temp_hero);
+		}
+
+		else if (player_conv_point_choice == "Insult") {
+
+			Containers::conv_point_table[player_conv_point_choice]->apply_postconditions(true, player, temp_hero);
+		}
+
+		else if (player_conv_point_choice == "Boast") {
+
+			Containers::conv_point_table[player_conv_point_choice]->apply_postconditions(true, player, temp_hero);
+		}
 		state = 5;
 	}
 	else {
 		state = 4;
 		otherResponse(player_conv_point_choice, curr_hero_topic);
+
 		player_conv_point_choice = "";
 	}
 }
@@ -270,7 +305,18 @@ conversation and reply points and stores the entries in the log
 for the current conversation.*/
 void DialogueController::otherConversationPoint(dialogue_point line)
 {
-	dialogue_point point = dialogue.choose_conv_pt(curr_conversation_log);
+	Hero* temp_hero = nullptr;
+	if (other->getType() >= WorldObj::TYPE_NPC) {
+		if (temp_hero = CheckClass::isHero(other))//added another equals was single equals before
+		{
+			perror("you cannot talk to this type of object");
+		}
+	}
+	else {
+		return;
+	}
+
+	dialogue_point point = dialogue.choose_conv_pt(curr_conversation_log, temp_hero);
 
 	/*Only sets the topic of the npc's conversation point if it is not
 	a special case. Special case dialogue points are typically only
@@ -288,16 +334,7 @@ void DialogueController::otherConversationPoint(dialogue_point line)
 	    
 	replyString = point[ConvPointName];
 
-	Hero* temp_hero = nullptr;
-	if (other->getType() >= WorldObj::TYPE_NPC) {
-		if (temp_hero = CheckClass::isHero(other))//added another equals was single equals before
-		{
-			perror("you cannot talk to this type of object");
-		}
-	}
-	else {
-		return;
-	}
+
 
 	std::string reply_pt_sentence = dialogue.gen_dialog(line, temp_hero);
 	std::string con_pt_sentence = dialogue.gen_dialog(point, temp_hero);
