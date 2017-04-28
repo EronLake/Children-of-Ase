@@ -1,4 +1,4 @@
-/*#include "stdafx.h"
+#include "stdafx.h"
 #include "GameMap.h"
 
 
@@ -213,7 +213,7 @@ void GameMap::setSprite()
 
 void GameMap::drawMap(float _x, float _y)
 {
-	/*
+	
 	if (Party::dist_location_to_location(map1_1->getLoc(), {_x,_y}) < 7500)GameWindow::drawSprite(map1_1->getX() - _x, map1_1->getY() - _y, map1_1->getWidth(), map1_1->getHeight(), map1_1->sprite);
 	if (Party::dist_location_to_location(map1_2->getLoc(), { _x,_y }) < 7500)GameWindow::drawSprite(map1_2->getX() - _x, map1_2->getY() - _y, map1_2->getWidth(), map1_2->getHeight(), map1_2->sprite);
 	if (Party::dist_location_to_location(map1_3->getLoc(), { _x,_y }) < 7500)GameWindow::drawSprite(map1_3->getX() - _x, map1_3->getY() - _y, map1_3->getWidth(), map1_3->getHeight(), map1_3->sprite);
@@ -244,7 +244,7 @@ void GameMap::drawMap(float _x, float _y)
 	if (Party::dist_location_to_location(map5_4->getLoc(), { _x,_y }) < 7500)GameWindow::drawSprite(map5_4->getX() - _x, map5_4->getY() - _y, map5_4->getWidth(), map5_4->getHeight(), map5_4->sprite);
 	if (Party::dist_location_to_location(map5_5->getLoc(), { _x,_y }) < 7500)GameWindow::drawSprite(map5_5->getX() - _x, map5_5->getY() - _y, map5_5->getWidth(), map5_5->getHeight(), map5_5->sprite);
 
-	*/
+	
 	//GameWindow::drawSprite(river->getX() - _x, river->getY() - _y, river->getWidth(), river->getHeight(), river->sprite);
 
 	

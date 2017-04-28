@@ -50,8 +50,7 @@ void PlayerActExecFunctions::execute_start(std::string act_name, Hero* receiver)
 	//creates the memory for the reciever as well
 	ActionHelper::create_memory(cur_action, receiver);
 
-	if ((act_name == "Occupy" || act_name == "Conquer" || act_name == "Duel" ||
-			act_name == "Spar" || act_name == "Fight") &&
+	if ((act_name == "Occupy" || act_name == "Fight") &&
 		((!player->getInCombat()) && (!player->getInCombat())))
 	{
 		//we need to create a fight here if their action is a violent action
@@ -62,6 +61,9 @@ void PlayerActExecFunctions::execute_start(std::string act_name, Hero* receiver)
 			Fight* fight_obj = new Fight(player->getParty(), receiver->getParty(), false);
 		}
 	}
+
+	//ADITIONAL FUNCTION act_name == "Conquer" || act_name == "Duel" ||act_name == "Spar" ||
+
 }
 
 
@@ -103,10 +105,10 @@ void PlayerActExecFunctions::execute_end(bool if_succ) {
 		perror("something is wrong with the current hero memory creation function");
 	}
 	
-	//end the fight if a fight was involved
-	if (!(player->getParty()->get_fight() == nullptr)) {
-		player->getParty()->get_fight()->end_combat();
-	}
+
+	////////////CAN WE PUT THIS AT THE END WITH THE DEALLOCATION///////////
+
+	
 	
 	cur_action->apply_postconditions(if_succ);	//Apply post-conditions based off if it was succesful or not
 	cur_action->executed = true;
@@ -124,8 +126,15 @@ void PlayerActExecFunctions::execute_end(bool if_succ) {
 	}
 	doer_mem->setWhen(/*get global frame*/0);
 
-	//dealocate memory for fight if there was a fight
-	if(player->getParty()->get_fight() != nullptr){ delete player->getParty()->get_fight(); }
+	/*
+	dealocate memory for fight if there was a fight
+	and end the fight if a fight was involved
+	*/
+	if (player->getInCombat()) {
+		player->getParty()->get_fight()->end_combat();
+		delete player->getParty()->get_fight(); 
+	}
+
 	//dealocate memory for action
 	
 	//for multipliers and preconditions it points the the references' actual objects
@@ -138,7 +147,26 @@ void PlayerActExecFunctions::execute_end(bool if_succ) {
 
 	delete player->cur_action;
 }
+/*
+void PlayerActExecFunctions::execute_dialog()
+{
+	Player* player = dynamic_cast<Player*>(Containers::hero_table["Shango"]);
 
+	Action* cur_action = player->cur_action;
+
+	if ((act_name == "Occupy" || act_name == "Fight") &&
+		((!player->getInCombat()) && (!player->getInCombat())))
+	{
+		//we need to create a fight here if their action is a violent action
+		if (act_name == "duel") {
+			Fight* fight_obj = new Fight(player->getParty(), receiver->getParty(), true);
+		}
+		else {
+			Fight* fight_obj = new Fight(player->getParty(), receiver->getParty(), false);
+		}
+	}
+}
+*/
 
 void PlayerActExecFunctions::check_quest() {
 

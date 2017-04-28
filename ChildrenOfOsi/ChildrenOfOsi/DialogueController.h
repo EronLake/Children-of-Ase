@@ -4,6 +4,7 @@
 #include "Player.h"
 #include "DialogueHelper.h"
 #include "AIController.h"
+#include "PlayerActExecFunctions.h"
 #include "Party.h"
 
 class DialogueController
@@ -42,6 +43,9 @@ public:
 
 	static bool prompted_quest;
 	static bool accepted_quest;
+	
+	//used for hero actions
+	static bool accepted_action;
 
 	static Action* quest;
 	static int scroll_control;
