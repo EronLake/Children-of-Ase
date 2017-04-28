@@ -12,8 +12,8 @@ public:
 	void set_tags_helper(ConversationPoint* conPoint);
 	std::string get_name();
 	void set_name(std::string val);
-	std::vector<ConversationPoint*> conversation_point_pointer_vec;
-	std::vector<ConversationPoint*> get_conversation_pointer_vec();
+	std::vector<ConversationPoint*> conversation_point;
+	std::vector<ConversationPoint*> get_conversation();
 	
 private:
 	std::string name;

@@ -17,6 +17,44 @@
 		  "AffEstimate": 10,
 		  "NotorEstimate": 10,
 		  "StrEstimate": 10
+    },
+
+	"conversation_point_2" : {
+	      "name" : "Quest_Complete",
+          "icon" : "gcp",
+	      "template" : "Quest_Complete",
+		  "honor" : 0,
+		  "pride": 0,
+		  "aggression": 0,
+		  "kindness": 0,
+		  "greed": 0,
+		  "recklessness": 0,
+		  "extroversion": 0,
+		  "affinity": 10,
+		  "notoriety": 10,
+		  "strength": 10,
+		  "AffEstimate": 10,
+		  "NotorEstimate": 10,
+		  "StrEstimate": 10
+    },
+
+	"conversation_point_3" : {
+	      "name" : "Quest_In_Progress",
+          "icon" : "gcp",
+	      "template" : "Quest_In_Progress",
+		  "honor" : 0,
+		  "pride": 0,
+		  "aggression": 0,
+		  "kindness": 0,
+		  "greed": 0,
+		  "recklessness": 0,
+		  "extroversion": 0,
+		  "affinity": 10,
+		  "notoriety": 10,
+		  "strength": 10,
+		  "AffEstimate": 10,
+		  "NotorEstimate": 10,
+		  "StrEstimate": 10
     }
   },
 
@@ -79,9 +117,9 @@
 		  "StrEstimate": 30
        },
        "conversation_point_3" : {
-	      "name" : "Ask_About_Strength",
+	      "name" : "Ask About Strength Of",
           "icon" : "qcp",
-	      "template" : "Ask_About_Strength",
+	      "template" : "Ask About Strength Of",
 		  "honor" : 1,
 		  "pride": 0,
 		  "aggression": 0,
@@ -97,9 +135,9 @@
 		  "StrEstimate": 50
         },
 		"conversation_point_4" : {
-	      "name" : "Ask_About_Affinity",
+	      "name" : "Ask About Affinity Of",
           "icon" : "qcp",
-	      "template" : "Ask_About_Affinity",
+	      "template" : "Ask About Affinity Of",
 		  "honor" : 0,
 		  "pride": 1,
 		  "aggression": 0,
@@ -115,9 +153,9 @@
 		  "StrEstimate": 50
        },
 	   "conversation_point_5" : {
-	      "name" : "Ask_About_Notoriety",
+	      "name" : "Ask About Notoriety Of",
           "icon" : "qcp",
-	      "template" : "Ask_About_Notoriety",
+	      "template" : "Ask About Notoriety Of",
 		  "honor" : 1,
 		  "pride": 1,
 		  "aggression": 0,
@@ -169,6 +207,44 @@
 		  "AffEstimate": 50,
 		  "NotorEstimate": 50,
 		  "StrEstimate": 50
+       },
+
+	    "conversation_point_8" : {
+	      "name" : "Ask_For_Quest",
+          "icon" : "qcp",
+	      "template" : "Ask_For_Quest",
+		  "honor" : 0,
+		  "pride": 0,
+		  "aggression": 0,
+		  "kindness": 0,
+		  "greed": 0,
+		  "recklessness": 0,
+		  "extroversion": 0,
+		  "affinity": 50,
+		  "notoriety": 50,
+		  "strength": 50,
+		  "AffEstimate": 50,
+		  "NotorEstimate": 50,
+		  "StrEstimate": 50
+       },
+
+	   "conversation_point_9" : {
+	      "name" : "Offer_Quest",
+          "icon" : "",
+	      "template" : "Offer_Quest",
+		  "honor" : 0,
+		  "pride": 0,
+		  "aggression": 0,
+		  "kindness": 0,
+		  "greed": 0,
+		  "recklessness": 0,
+		  "extroversion": 0,
+		  "affinity": 50,
+		  "notoriety": 50,
+		  "strength": 50,
+		  "AffEstimate": 50,
+		  "NotorEstimate": 50,
+		  "StrEstimate": 50
        }
 	 },
 
@@ -193,9 +269,9 @@
 		  "StrEstimate": 0
        },
        "reply_point_2" : {
-	      "name" : "Response_Ask_Name",
+	      "name" : "Tell Name",
           "icon" : "qrp",
-	      "template" : "Response_Ask_Name",
+	      "template" : "Tell Name",
 		  "corresponding_conv_point":"Ask_Name",
 		  "honor" : 0,
 		  "pride": 0,
@@ -212,9 +288,9 @@
 		  "StrEstimate": 50
        },
        "reply_point_3" : {
-	      "name" : "Response_Ask_Origin",
+	      "name" : "Tell Origin",
           "icon" : "qrp",
-	      "template" : "Response_Ask_Origin",
+	      "template" : "Tell Origin",
 		  "corresponding_conv_point": "Ask_Origin",
 		  "honor" : 0,
 		  "pride": 0,
@@ -231,10 +307,10 @@
 		  "StrEstimate": 50
        },
        "reply_point_4" : {
-	      "name" : "Response_Ask_About_Strength",
+	      "name" : "Tell About Strength Of",
           "icon" : "qrp",
-	      "template" : "Response_Ask_About_Strength",
-		  "corresponding_conv_point": "Ask_About_Strength",
+	      "template" : "Tell About Strength Of",
+		  "corresponding_conv_point": "Ask About Strength Of",
 		  "honor" : 0,
 		  "pride": 0,
 		  "aggression": 0,
@@ -250,10 +326,10 @@
 		  "StrEstimate": 50
         },
 		"reply_point_5" : {
-	      "name" : "Response_Ask_About_Affinity",
+	      "name" : "Tell About Affinity Of",
           "icon" : "qrp",
-	      "template" : "Response_Ask_About_Affinity",
-		  "corresponding_conv_point": "Ask_About_Affinity",
+	      "template" : "Tell About Affinity Of",
+		  "corresponding_conv_point": "Ask About Affinity Of",
 		  "honor" : 0,
 		  "pride": 0,
 		  "aggression": 0,
@@ -269,10 +345,10 @@
 		  "StrEstimate": 50
        },
 	   "reply_point_6" : {
-	      "name" : "Response_Ask_About_Notoriety",
+	      "name" : "Tell About Notoriety Of",
           "icon" : "qrp",
-	      "template" : "Response_Ask_About_Notoriety",
-		  "corresponding_conv_point": "Ask_About_Notoriety",
+	      "template" : "Tell About Notoriety Of",
+		  "corresponding_conv_point": "Ask About Notoriety Of",
 		  "honor" : 0,
 		  "pride": 0,
 		  "aggression": 0,
@@ -308,11 +384,71 @@
 		  "StrEstimate": 50
 	  },
 
-	  "reply_point_7" : {
+	  "reply_point_8" : {
 	      "name" : "Response_Already_Asked",
           "icon" : "aa",
 	      "template" : "Response_Already_Asked",
 		  "corresponding_conv_point": "Already_Asked",
+		  "honor" : 0,
+		  "pride": 0,
+		  "aggression": 0,
+		  "kindness": 0,
+		  "greed": 0,
+		  "recklessness": 0,
+		  "extroversion": 0,
+		  "affinity": 50,
+		  "notoriety": 50,
+		  "strength": 50,
+		  "AffEstimate": 50,
+		  "NotorEstimate": 50,
+		  "StrEstimate": 50
+	  },
+
+	  "reply_point_9" : {
+	      "name" : "Response_Ask_For_Quest",
+          "icon" : "qrp",
+	      "template" : "Response_Ask_For_Quest",
+		  "corresponding_conv_point": "Ask_For_Quest",
+		  "honor" : 0,
+		  "pride": 0,
+		  "aggression": 0,
+		  "kindness": 0,
+		  "greed": 0,
+		  "recklessness": 0,
+		  "extroversion": 0,
+		  "affinity": 50,
+		  "notoriety": 50,
+		  "strength": 50,
+		  "AffEstimate": 50,
+		  "NotorEstimate": 50,
+		  "StrEstimate": 50
+	  },
+
+	  "reply_point_10" : {
+	      "name" : "Accept_Quest",
+          "icon" : "qrp",
+	      "template" : "Accept_Quest",
+		  "corresponding_conv_point": "Offer_Quest",
+		  "honor" : 0,
+		  "pride": 0,
+		  "aggression": 0,
+		  "kindness": 0,
+		  "greed": 0,
+		  "recklessness": 0,
+		  "extroversion": 0,
+		  "affinity": 50,
+		  "notoriety": 50,
+		  "strength": 50,
+		  "AffEstimate": 50,
+		  "NotorEstimate": 50,
+		  "StrEstimate": 50
+	  },
+
+	  "reply_point_11" : {
+	      "name" : "Decline_Quest",
+          "icon" : "qrp",
+	      "template" : "Decline_Quest",
+		  "corresponding_conv_point": "Offer_Quest",
 		  "honor" : 0,
 		  "pride": 0,
 		  "aggression": 0,
@@ -428,9 +564,9 @@
 
 	"Strength_Reply_Points": {
 	 "reply_point_1" : {
-	      "name" : "Response_To_Ask_To_Spar",
+	      "name" : "Accept Spar Request",
           "icon" : "srp",
-	      "template" : "Response_To_Ask_To_Spar",
+	      "template" : "Accept Spar Request",
 		  "corresponding_conv_point": "Ask_To_Spar",
 		  "honor" : 0,
 		  "pride": 0,
@@ -447,9 +583,9 @@
 		  "StrEstimate": 50
      },
 	 "reply_point_3" : {
-	      "name" : "Response_To_Recruit_For_Party",
+	      "name" : "Join Party",
           "icon" : "srp",
-	      "template" : "Response_To_Recruit_For_Party",
+	      "template" : "Join Party",
 		  "corresponding_conv_point": "Recruit_For_Party",
 		  "honor" : 0,
 		  "pride": 0,
@@ -466,9 +602,9 @@
 		  "StrEstimate": 50
     },
 	"reply_point_4" : {
-	      "name" : "Response_To_Ask_For_Teaching",
+	      "name" : "Teach",
           "icon" : "srp",
-	      "template" : "Response_To_Ask_For_Teaching",
+	      "template" : "Teach",
 		  "corresponding_conv_point": "Ask_For_Teaching",
 		  "honor" : 0,
 		  "pride": 0,
@@ -485,9 +621,9 @@
 		  "StrEstimate": 50
     },
     "reply_point_5" : {
-	      "name" : "Response_Boast",
+	      "name" : "Congratulate",
           "icon" : "srp",
-	      "template" : "Response_Boast",
+	      "template" : "Congratulate",
 		  "corresponding_conv_point": "Boast",
 		  "honor" : 0,
 		  "pride": 0,
@@ -504,9 +640,9 @@
 		  "StrEstimate": 50
     },
 	"reply_point_6" : {
-	      "name" : "Response_Intimidate",
+	      "name" : "Talk Back",
           "icon" : "srp",
-	      "template" : "Response_Intimidate",
+	      "template" : "Talk Back",
 		  "corresponding_conv_point": "Intimidate",
 		  "honor" : 0,
 		  "pride": 0,
@@ -624,9 +760,9 @@
 
   "Affinity_Reply_Points": {
    "reply_point_1" : {
-	      "name" : "Response_To_Bribe",
+	      "name" : "Accept Bribe",
           "icon" : "arp",
-	      "template" : "Response_To_Bribe",
+	      "template" : "Accept Bribe",
 		  "corresponding_conv_point": "Bribe",
 		  "honor" : 0,
 		  "pride": 0,
@@ -643,9 +779,9 @@
 		  "StrEstimate": 50
     },
 	"reply_point_2" : {
-	      "name" : "Response_To_Compliment",
+	      "name" : "Thank",
           "icon" : "arp",
-	      "template" : "Response_To_Compliment",
+	      "template" : "Thank",
 		  "corresponding_conv_point": "Compliment",
 		  "honor" : 0,
 		  "pride": 0,
@@ -662,9 +798,9 @@
 		  "StrEstimate": 50
     },
 	"reply_point_3" : {
-	      "name" : "Response_To_Grovel",
+	      "name" : "Accept Plea",
           "icon" : "arp",
-	      "template" : "Response_To_Grovel",
+	      "template" : "Accept Plea",
 		  "corresponding_conv_point": "Grovel",
 		  "honor" : 0,
 		  "pride": 0,
@@ -681,9 +817,9 @@
 		  "StrEstimate": 50
     },
 	"reply_point_4" : {
-	      "name" : "Response_To_Offer_Teaching",
+	      "name" : "Accept Teaching",
           "icon" : "arp",
-	      "template" : "Response_To_Offer_Teaching",
+	      "template" : "Accept Teaching",
 		  "corresponding_conv_point": "Offer_Teaching",
 		  "honor" : 0,
 		  "pride": 0,
@@ -700,9 +836,9 @@
 		  "StrEstimate": 50
     },
 	"reply_point_5" : {
-	      "name" : "Response_Insult",
+	      "name" : "Defend Self",
           "icon" : "arp",
-	      "template" : "Response_Insult",
+	      "template" : "Defend Self",
 		  "corresponding_conv_point": "Insult",
 		  "honor" : 0,
 		  "pride": 0,
@@ -722,9 +858,9 @@
 
 	"Notoriety_Conversation_Points": {
 	 "conversation_point_1" : {
-	      "name" : "Move_To_Conquer",
+	      "name" : "Advise To Conquer",
           "icon" : "ncp",
-	      "template" : "Move_To_Conquer",
+	      "template" : "Advise To Conquer",
 		  "honor" : 0,
 		  "pride": 0,
 		  "aggression": 0,
@@ -741,9 +877,9 @@
     },
 
     "conversation_point_4" : {
-	      "name" : "Move_To_Alliance",
+	      "name" : "Advise To Ally With",
           "icon" : "ncp",
-	      "template" : "Move_To_Alliance",
+	      "template" : "Advise To Ally With",
 		  "honor" : 0,
 		  "pride": 0,
 		  "aggression": 0,
@@ -760,9 +896,9 @@
     },
 
 	"conversation_point_7" : {
-	      "name" : "Move_To_Revolt",
+	      "name" : "Advise To Revolt Against",
           "icon" : "ncp",
-	      "template" : "Move_To_Revolt",
+	      "template" : "Advise To Revolt Against",
 		  "honor" : 0,
 		  "pride": 0,
 		  "aggression": 0,
@@ -779,9 +915,9 @@
     },
 
 	"conversation_point_10" : {
-	      "name" : "Move_To_Destroy",
+	      "name" : "Advise To Destroy",
           "icon" : "ncp",
-	      "template" : "Move_To_Destroy",
+	      "template" : "Advise To Destroy",
 		  "honor" : 0,
 		  "pride": 0,
 		  "aggression": 0,
@@ -836,9 +972,9 @@
    },
  
    "conversation_point_18" : {
-	      "name" : "Move_To_Train",
+	      "name" : "Advise To Train With",
           "icon" : "ncp",
-	      "template" : "Move_To_Train",
+	      "template" : "Advise To Train With",
 		  "honor" : 0,
 		  "pride": 0,
 		  "aggression": 0,
@@ -878,9 +1014,9 @@
 	
   "Notoriety_Reply_Points": {
    "reply_point_1" : {
-	      "name" : "Response_To_Ask_To_Form_Alliance",
+	      "name" : "Accept Alliance Offer",
           "icon" : "nrp",
-	      "template" : "Response_To_Ask_To_Form_Alliance",
+	      "template" : "Accept Alliance Offer",
 		  "corresponding_conv_point": "Ask_To_Form_Alliance",
 		  "honor" : 0,
 		  "pride": 0,
@@ -897,10 +1033,10 @@
 		  "StrEstimate": 50
    },
    "reply_point_2" : {
-	      "name" : "Response_To_Move_To_Conquer",
+	      "name" : "Take Advice To Conquer",
           "icon" : "nrp",
-	      "template" : "Response_To_Move_To_Conquer",
-		  "corresponding_conv_point": "Move_To_Conquer",
+	      "template" : "Take Advice To Conquer",
+		  "corresponding_conv_point": "Advise To Conquer",
 		  "honor" : 0,
 		  "pride": 0,
 		  "aggression": 0,
@@ -916,10 +1052,10 @@
 		  "StrEstimate": 50
    },
    "reply_point_3" : {
-	      "name" : "Response_To_Move_To_Alliance",
+	      "name" : "Take Advice To Ally With",
           "icon" : "nrp",
-	      "template" : "Response_To_Move_To_Alliance",
-		  "corresponding_conv_point": "Move_To_Alliance",
+	      "template" : "Take Advice To Ally With",
+		  "corresponding_conv_point": "Advise To Ally With",
 		  "honor" : 0,
 		  "pride": 0,
 		  "aggression": 0,
@@ -935,10 +1071,10 @@
 		  "StrEstimate": 50
    },
    "reply_point_4" : {
-	      "name" : "Response_To_Move_To_Revolt",
+	      "name" : "Take Advice To Revolt Against",
           "icon" : "nrp",
-	      "template" : "Response_To_Move_To_Revolt",
-		  "corresponding_conv_point": "Move_To_Revolt",
+	      "template" : "Take Advice To Revolt Against",
+		  "corresponding_conv_point": "Advise To Revolt Against",
 		  "honor" : 0,
 		  "pride": 0,
 		  "aggression": 0,
@@ -954,9 +1090,9 @@
 		  "StrEstimate": 50
    },
    "reply_point_5" : {
-	      "name" : "Response_To_Ask_To_Duel",
+	      "name" : "Accept Duel",
           "icon" : "nrp",
-	      "template" : "Response_To_Ask_To_Duel",
+	      "template" : "Accept Duel",
 		  "corresponding_conv_point": "Ask_To_Duel",
 		  "honor" : 0,
 		  "pride": 0,
@@ -974,10 +1110,10 @@
    },
 
    "reply_point_15" : {
-	      "name" : "Response_To_Move_To_Destroy",
+	      "name" : "Take Advice To Destroy",
           "icon" : "nrp",
-	      "template" : "Response_To_Move_To_Destroy",
-		  "corresponding_conv_point": "Move_To_Destroy",
+	      "template" : "Take Advice To Destroy",
+		  "corresponding_conv_point": "Advise To Destroy",
 		  "honor" : 0,
 		  "pride": 0,
 		  "aggression": 0,
@@ -994,9 +1130,9 @@
    },
   
    "reply_point_18" : {
-	      "name" : "Response_To_Ask_To_Join_Party",
+	      "name" : "Accept Into Party",
           "icon" : "nrp",
-	      "template" : "Response_To_Ask_To_Join_Party",
+	      "template" : "Accept Into Party",
 		  "corresponding_conv_point": "Ask_To_Join_Party",
 		  "honor" : 0,
 		  "pride": 0,
@@ -1013,10 +1149,10 @@
 		  "StrEstimate": 50
    },
    "reply_point_19" : {
-	      "name" : "Response_To_Move_To_Train",
+	      "name" : "Take Advice To Train With",
           "icon" : "nrp",
-	      "template" : "Response_To_Move_To_Train",
-		  "corresponding_conv_point": "Move_To_Train",
+	      "template" : "Take Advice To Train With",
+		  "corresponding_conv_point": "Advise To Train With",
 		  "honor" : 0,
 		  "pride": 0,
 		  "aggression": 0,
