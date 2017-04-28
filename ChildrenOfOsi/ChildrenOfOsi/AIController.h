@@ -38,7 +38,7 @@ public:
 
 	static bool give_as_quest(Action* action);
 
-	static	bool quest_response(Hero* doer, Hero* asker);
+	static bool quest_response(Hero* doer, Hero* asker);
 
 	static Hero* pick_quest_doer(Action* quest);
 

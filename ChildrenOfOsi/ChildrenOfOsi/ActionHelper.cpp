@@ -175,15 +175,29 @@ bool ActionHelper::hero_respond(Action* action) {
 	int doer = action->getDoer()->name;
 	int responder = action->getReceiver()->name;
 
-	Planner* hero_planner = AIController::get_plan(responder);
+	vector<Hero*> leads = action->getReceiver()->getVillage()->get_alliance()->get_leaders();
+	int value = 0;
+	int cur_action_val = 0;
+	Planner* hero_planner;
 
-	int value = hero_planner->value_of(action);
+	if (action->getName().compare("Form Alliance") == 0) {
+		for (auto it = leads.begin(); it != leads.end(); ++it) {
+			hero_planner = AIController::get_plan((*it)->name);
+			value += hero_planner->value_of(action);
+			cur_action_val+=hero_planner->get_current_action_value();
+		}
+	}
+	else {
+		hero_planner = AIController::get_plan(responder);
+		value = hero_planner->value_of(action);
+		cur_action_val = hero_planner->get_current_action_value();
+	}
 
 	if (value < 0) {  //This action's cost outweights its benefit, no thanks
 		interact = false;
 	}
 	//The value of my current action is at least twice as big as this action's value. No thanks
-	else if (value < (hero_planner->get_current_action_value() - value)) 
+	else if (value < (cur_action_val - value))
 	{
 		interact = true;
 	}

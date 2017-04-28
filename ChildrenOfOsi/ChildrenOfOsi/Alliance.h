@@ -19,6 +19,7 @@ public:
 	void add_village_to_alliance(Village* p_factionToAdd);
 	void add_alliance_to_alliance(Alliance* p_allianceToAdd);
 	vector<Village*> get_alligned_villages(){ return allies; };
+	vector<Hero*> get_leaders();
 	vector<NPC*> get_alliance_members();
 	bool is_alliance_member(NPC* n);
 	vector<Village*> get_enemy_villages() { return enemies; };

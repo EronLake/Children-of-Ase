@@ -48,9 +48,10 @@ static int frame_count = 0;
 //toggles debug longging statements 
 
 #define DEBUG 1
-#define MAP_EDITOR 1
+#define MAP_EDITOR 0
 #define START_FULLSCREEN false
 #define MOUSE_VISIBLE true
+#define LOAD_REGIONS 0 //0==Load Config should be empty || 1==Load All || 2==Load Oasis || 3==Load Jungle
 
 
 
