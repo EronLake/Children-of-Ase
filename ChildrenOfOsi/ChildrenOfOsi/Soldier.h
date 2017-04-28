@@ -99,8 +99,8 @@ class Soldier: public NPC
   Soldier* getCurrentLeader() { return currentLeader; };
   void setCurrentLeader(Soldier* p_leader) { currentLeader = p_leader; };
 
-  void set_action_destination(Vector2f* v) { action_destination=v; };
-  Vector2f* get_action_destination() { return action_destination; };
+  void set_action_destination(Vector2f v) { action_destination=v; };
+  Vector2f get_action_destination() { return action_destination; };
 
   virtual void defeat();
   virtual void capacitate();
@@ -145,6 +145,6 @@ class Soldier: public NPC
   Soldier* currentEnemy;
   Soldier* currentLeader;
 
-  Vector2f* action_destination;
+  Vector2f action_destination;
 };
 

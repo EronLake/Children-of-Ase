@@ -71,7 +71,7 @@ public:
 
 	std::string exe_name; //need to store this value so the player can copy actions from hero's action tables
 	void(*execute_ptr)(Action* cur_action);	//points to a function im ActionExcFunctions.cpp
-	void execute() { execute_ptr(this); };	//this cals the function that execute ptr points to
+	void execute() { execute_ptr(this);};	//this cals the function that execute ptr points to
 
 	bool executed = false;
 

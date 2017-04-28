@@ -178,7 +178,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 
 
 	// Player* Alex = new Player(SHANGO, Vector2f(6445.0, 10155.0), 150.0, 150.0);	//init player
-
+	
 
 	Region* Marsh = new Region("Marsh", "Music/RegionThemes/MarshRegion.flac", "Music/HeroThemes/ogun.flac", { 1000,1000 });
 	Region* Desert = new Region("Desert", "Music/RegionThemes/DesertRegion.flac", "Music/HeroThemes/oya.flac", { 5000,5000 });
@@ -223,6 +223,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	vector<Texture*> mountain;
 	vector<Texture*> marsh;
 	vector<vector<Texture*>> starting_location;
+	
 
 	ObjConfig::textureMapConfig = &textureMap;
 	ObjConfig::standard_con = &standard;
@@ -1078,6 +1079,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 		Alex->sprite.reset_texture();
 		glFinish();
 	});
+
 	HGLRC loaderContext1 = wglCreateContext(hdc);
 	wglShareLists(mainContext, loaderContext1);
 	std::thread t1([=]() {
@@ -1199,11 +1201,11 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	rockThrow->setDuration(100);
 	rockThrow->setCoolDown(120);
 	rockThrow->setPause(13);
-	rockThrow->sprite.setTexture(Containers::texture_table["rockTex"]);
-	rockThrow->sprite.up = Containers::texture_table["rockTex"];
-	rockThrow->sprite.left = Containers::texture_table["rockTex"];
-	rockThrow->sprite.right = Containers::texture_table["rockTex"];
-	rockThrow->sprite.down = Containers::texture_table["rockTex"];
+	rockThrow->sprite.setTexture(Containers::texture_table["rockTex1"]);
+	rockThrow->sprite.up = Containers::texture_table["rockTex1"];
+	rockThrow->sprite.left = Containers::texture_table["rockTex1"];
+	rockThrow->sprite.right = Containers::texture_table["rockTex1"];
+	rockThrow->sprite.down = Containers::texture_table["rockTex1"];
 	rockThrow->setCanCancel(false);
 	Alex->addAttackType(rockThrow);
 
@@ -1557,7 +1559,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	Planner* OyaPlanner = new Planner(oya);
 	AIController::set_plan(YEMOJA, YemojaPlanner);
 	AIController::set_plan(OYA, OyaPlanner);
-	/*
+	
 	Action* test_ally = new Action(nullptr, nullptr, nullptr, 10, 1, "Create Alliance", "execute_train");
 	Action* test_train = new Action(staticRec, oya, nullptr, 10, 1, "Train", "execute_train");
 
@@ -1566,31 +1568,31 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	RelPrecon* prec1 = new RelPrecon(Preconditions::AFF, 30);
 	RelPost* post1 = new RelPost(Postcondition::STR, 15);
 	RelPost* post2 = new RelPost(Postcondition::AFF, 15);
-	*/
+	
 
 	/*
 	test_ally->req_preconds.push_back(std::make_shared<RelPrecon>(*prec));
 	test_ally->doer_succ_postconds.push_back(std::make_shared<RelPost>(*post));
-
+	*/
 	test_train->req_preconds.push_back(std::make_shared<RelPrecon>(*prec1));
 	test_train->doer_succ_postconds.push_back(std::make_shared<RelPost>(*post1));
 	test_train->doer_succ_postconds.push_back(std::make_shared<RelPost>(*post2));
 	
 
-	ActionPool act_pool(Alex);
-	act_pool.macro.push_back(test_ally);
-	act_pool.micro.push_back(test_train);
-	act_pool.updateMiddle();
-	vector<Action*> actions = act_pool.getActions(staticRec, test_ally);
-	for (auto action : actions) {
+	//ActionPool act_pool(Alex);
+	//act_pool.macro.push_back(test_ally);
+	//act_pool.micro.push_back(test_train);
+	//act_pool.updateMiddle();
+	//vector<Action*> actions = act_pool.getActions(staticRec, test_ally);
+	//for (auto action : actions) {
 		//std:://cout << action->getName() << std::endl;
-	}
+	//}
 
-	Alex->add_quest(test_ally, 8);
-	staticRec->add_quest(test_train, 1);
+	//Alex->add_quest(test_ally, 8);
+	//staticRec->add_quest(test_train, 1);
 	//Alex->add_quest(test_train, 2);
-	questM->heros.push_back(Alex);
-	questM->heros.push_back(staticRec);
+	//questM->heros.push_back(Alex);
+	//questM->heros.push_back(staticRec);
 	
 	///////////////////////////////////////////////////////////////////////////////////////////
 	///////////////////////////////////////////////////////////////////////////////////////////
@@ -1600,12 +1602,13 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	///////////////////////////////////////////////////////////////////////////////////////////
 	///////////////////////////////////////////////////////////////////////////////////////////
 	
-	// THIS IS BEING RESET IN THE GAME LOOP. planner->get_current_action returns nullptr
-	YemojaPlanner->set_current_action(test_train);
-	*/
-	//AIController::generate_end_state(YEMOJA, OYA);
+	// THIS IS BEING RESET IN THE GAME LOOP. planner->get_current_action returns nullptr*/
+	
+	
+	AIController::generate_end_state(YEMOJA, OYA);
 	AIController::init_plans();
-
+    test_train->setDoer(staticRec);
+	YemojaPlanner->set_current_action(test_train);
 
 	/*
 	WorldObj* tree = new WorldObj(Vector2f(4000, 2600), 800, 500);
@@ -1852,7 +1855,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 			}
 			HUD::FPS = fps;
 			//cout << "FPS: " << fps << endl;
-
+			total_fps += fps;
 			frame_count++;
 
 			current_game_state = iController->current_game_state;
@@ -2004,9 +2007,11 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 			//getting here-------------------------------------------------------------------------***********
 			//setting give as quest to false so that the excute runs
 			YemojaPlanner->give_as_quest = false;
-
-			 AIController::execute();
+//			cout << " first dest is " << staticRec->get_action_destination()->getXloc() << ", " << staticRec->get_action_destination()->getYloc() << endl;
+			AIController::execute();
+//			cout << "after execute dest is " << staticRec->get_action_destination()->getXloc() << ", " << staticRec->get_action_destination()->getYloc() << endl;
 			AI.join();
+//			cout << "after thread join dest is " << staticRec->get_action_destination()->getXloc() << ", " << staticRec->get_action_destination()->getYloc() << endl;
 			if ((1000 / fs) > (clock() - start_tick)) { //delta_ticks)
 				Sleep((1000 / fs) - (clock() - start_tick));
 			}
@@ -2016,7 +2021,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 			}
 			HUD::FPS = fps;
 			//cout << "FPS: " << fps << endl;
-
+			total_fps += fps;
 			frame_count++;
 			HUD::AVG = total_fps / frame_count;
 
