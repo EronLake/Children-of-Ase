@@ -126,7 +126,7 @@ void ActionExecFunctions::execute_train_with(Action* train_with) {
 
 		break;
 	case 1: //If destination is reached, start a timer and move to next checkpoint
-		if (train_with->getDoer()->get_action_destination() == Vector2f(NULL,NULL)) {
+		if (train_with->getDoer()->get_action_destination() == Vector2f(NULL,NULL) && (train_with->getReceiver()->get_busy() == Hero::NOT_BUSY)) {
 			ActionHelper::set_timer(train_with, 1200);  //Wait 20 seconds for greetings (60 frames times 20 seconds)
 			train_with->checkpoint++;
 		}
@@ -185,7 +185,7 @@ void ActionExecFunctions::execute_form_alliance(Action* form_alliance) {
 		break;
 
 	case 1:
-		if (form_alliance->getDoer()->get_action_destination() == Vector2f(NULL, NULL)) {
+		if (form_alliance->getDoer()->get_action_destination() == Vector2f(NULL, NULL) && (form_alliance->getReceiver()->get_busy() == Hero::NOT_BUSY)) {
 			//Planner* hero_planner = ActionHelper::ai->get_plan(responder->name);
 			Memory* doer_mem = form_alliance->getDoer()->find_mem(form_alliance->getName() + std::to_string(form_alliance->time_stamp));
 			Memory* receiver_mem = form_alliance->getReceiver()->find_mem(form_alliance->getName() + std::to_string(form_alliance->time_stamp));
@@ -264,7 +264,7 @@ void ActionExecFunctions::execute_fight(Action* fight)
 		break;
 	case 3: //If both niether party is empty then contiue the fight 
 			//(may need to change this to account for hero death)
-		if (fight->getDoer()->get_action_destination() == Vector2f(NULL, NULL)) {
+		if (fight->getDoer()->get_action_destination() == Vector2f(NULL, NULL) && (fight->getReceiver()->get_busy() == Hero::NOT_BUSY)) {
 			//do a single round of battle every 10 sec
 			Fight* fight_obj = new Fight(fight->getDoer()->getParty(), fight->getReceiver()->getParty(), false);
 			fight->getDoer()->set_busy(Hero::BUSY_DOER);
@@ -347,7 +347,7 @@ void ActionExecFunctions::execute_conquer(Action* conq)
 		conq->checkpoint++;
 		break;
 	case 1: //If destination is reached, check if hero is there start a timer and move if not, fight otherwise
-		if (conq->getDoer()->get_action_destination() == Vector2f(NULL, NULL))//needs to be changed to use party location right 
+		if (conq->getDoer()->get_action_destination() == Vector2f(NULL, NULL) && (conq->getReceiver()->get_busy() == Hero::NOT_BUSY))//needs to be changed to use party location right 
 		{
 			//ActionHelper::set_timer(conq, 3600);  //Wait 1 minute (60 frames times 60 seconds) trying to find out the hero's location
 			conq->checkpoint++;
@@ -469,7 +469,7 @@ void ActionExecFunctions::execute_duel(Action* duel)
 		break;
 	case 3: //If both niether party is empty then contiue the fight 
 			//(may need to change this to account for hero death)
-		if (Party::dist_location_to_location(duel->getDoer()->getLoc(), duel->getDoer()->get_action_destination())<500) {
+		if (Party::dist_location_to_location(duel->getDoer()->getLoc(), duel->getDoer()->get_action_destination())<500 && (duel->getReceiver()->get_busy() == Hero::NOT_BUSY)) {
 			Fight* fight = new Fight(duel->getDoer()->getParty(), duel->getReceiver()->getParty(), true);
 			duel->checkpoint++;
 			duel->getDoer()->set_busy(Hero::BUSY_DOER);
@@ -560,7 +560,7 @@ void ActionExecFunctions::execute_conversation(Action* conv)
 		}
 		break;
 	case 3:  //When train destination is reached, start a time for 1 minute
-		if (conv->getDoer()->get_action_destination() == Vector2f(NULL, NULL))
+		if (conv->getDoer()->get_action_destination() == Vector2f(NULL, NULL) && (conv->getReceiver()->get_busy() == Hero::NOT_BUSY))
 		{
 			ActionHelper::set_timer(conv, 3600); //Wait 1 minute for training (60 frames times 60 seconds)
 			conv->checkpoint++;
@@ -577,7 +577,8 @@ void ActionExecFunctions::execute_conversation(Action* conv)
 				perror("something is wrong with the current hero memory creation function");
 			}
 			conv->getDoer()->set_action_destination(conv->getDoer()->getVillage()->get_village_location()); //Also predefined, maybe as "home_location" in hero
-			if (ActionHelper::conversation(conv)) {
+			int chance=rand() % 2-1;
+			if (chance) {
 				conv->apply_postconditions(true);				 //Apply post-conditions
 				doer_mem->setCategory("success");			 //Call update_memory function
 				doer_mem->setReason("The coversation went well");
@@ -618,7 +619,7 @@ void ActionExecFunctions::execute_bribe(Action* bribe)
 			break;
 
 		case 1: //Create a greeting timer
-			if (bribe->getDoer()->get_action_destination() == Vector2f(NULL, NULL)) {
+			if (bribe->getDoer()->get_action_destination() == Vector2f(NULL, NULL) && (bribe->getReceiver()->get_busy() == Hero::NOT_BUSY)) {
 				ActionHelper::set_timer(bribe, 60);
 				bribe->getDoer()->set_busy(Hero::BUSY_DOER);
 				bribe->getReceiver()->set_busy(Hero::BUSY_REC);
@@ -643,7 +644,8 @@ void ActionExecFunctions::execute_bribe(Action* bribe)
 					perror("something is wrong with the current hero memory creation function");
 				}
 				bribe->getDoer()->set_action_destination(bribe->getDoer()->getVillage()->get_village_location()); //Also predefined, maybe as "home_location" in hero
-				if (monopoly_money>500) {
+				int chance = rand() % 2 - 1;
+				if (chance) {
 					bribe->apply_postconditions(true);				 //Apply post-conditions
 					doer_mem->setCategory("success");			 //Call update_memory function
 					doer_mem->setReason("The bribe went well");
