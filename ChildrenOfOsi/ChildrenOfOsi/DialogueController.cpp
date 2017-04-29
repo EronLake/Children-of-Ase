@@ -244,7 +244,8 @@ void DialogueController::PlayerResponse()
 		}
 		/*pushes quest onto npc's quests_given vector if the player accepts
 		their quest and sets player's current action to that quest*/
-		if (other->getName() != "silverSoldier") {
+		Hero* temp_hero;
+		if (temp_hero = CheckClass::isHero(other)) {
 			Planner* planner = AIController::get_plan(CheckClass::isHero(other)->name);
 			if (choice[ConvPointName] == "Accept_Quest") {
 				DialogueController::quest = planner->get_current_action();
@@ -357,8 +358,6 @@ void DialogueController::otherConversationPoint(dialogue_point line)
 	}
 	    
 	replyString = point[ConvPointName];
-
-
 
 	std::string reply_pt_sentence = dialogue.gen_dialog(line, temp_hero);
 	std::string con_pt_sentence = dialogue.gen_dialog(point, temp_hero);
@@ -640,7 +639,7 @@ void DialogueController::startConversation(WorldObj* n, bool playerTalk)
 	has taken or completed a quest from the npc*/
 	if (other->getName() == "Yemoja") {
 		Planner* planner = AIController::get_plan(CheckClass::isHero(other)->name);
-		if (planner->quests_given.size() == 1)
+		if (planner->quests_given.size() == 1)//Bad! Check boolean in Action object instead.
 			message = n->getName() + ": " + dialogue.gen_dialog({ "Quest_In_Progress","Quest_In_Progress" }, temp_hero);
 		else if (planner->quests_given.size() > 1)
 			message = n->getName() + ": " + dialogue.gen_dialog({ "Quest_Complete","Quest_Complete" }, temp_hero);
@@ -673,91 +672,10 @@ hero-related conversation points from the 3D vector of possible conversation
 points and removes them from the options vector.*/
 void DialogueController::exitDialogue()
 {
-	if (other->getName() != "silverSoldier") {//maybe check if "other" is a hero instead"
-		Planner* planner = AIController::get_plan(CheckClass::isHero(other)->name);
-		/////////////////////////////////////////////////////////////////////////
-		/*Stand in stuff for checking if NPC wants to give player quest when player
-		is about to exit conversation. Currently, NPC will always give player a quest
-		when they try to exit conversation if the player has not already accepted a quest.*/
-		/////////////////////////////////////////////////////////////////////////
-		if (dialogue.give_quest()) {
-			bool has_quest = false;
-			for (int i = 0; i < planner->quests_given.size(); ++i) {
-				if (planner->quests_given[i]->getDoer()->name == SHANGO)
-					has_quest = true;
-			}
-			if (planner->quests_given.size() > 0)//stand in Bad!
-				has_quest = true;//stand in Bad! dont wanna be checking the size of quest vector
-			if (!has_quest) {
-				/*pretend that player asked for quest for now since some other earlier code
-				assumes that the last thing in the conversation log vector will always be
-				what the player said. Need to change.*/
-				/*ConversationLogObj* conv_log_obj = new ConversationLogObj();
-				Memory* mem = nullptr;
-
-				conv_log_obj->set_who(1);
-				conv_log_obj->set_conv_point(Containers::conv_point_table["Ask_For_Quest"]);
-				conv_log_obj->update_number_of_times_said();
-				conv_log_obj->set_topic(NoTopic, mem);
-
-				curr_conversation_log.push_back(conv_log_obj);//add entry to log
-				player_conv_point_choice = "Ask_For_Quest";
-				otherResponse("Ask_For_Quest", "Shango");
-				*/
-				Hero* temp_hero;
-				if (other->getType() >= WorldObj::TYPE_NPC) {
-					if (temp_hero = CheckClass::isHero(other))
-					{
-						perror("you cannot talk to this type of object");
-					}
-				}
-				else {
-					return;
-				}
-
-				dialogue_point reply_diog_pt = { "Exit Quest","Exit Quest" };
-				dialogue_point con_diog_pt = { "Offer_Quest","Offer_Quest" };
-				std::string reply_pt_sentence = dialogue.gen_dialog(reply_diog_pt, temp_hero);
-				std::string con_pt_sentence = dialogue.gen_dialog(con_diog_pt, temp_hero);
-				Planner* planner = AIController::get_plan(CheckClass::isHero(other)->name);
-				DialogueController::quest = planner->get_current_action();
-				replace_all(con_pt_sentence, "HERO", dialogue.int_to_hero_name(quest->getReceiver()->name));//receiver or doer here? ask Justin
-
-				//these two lines strip the number off the end of the name 
-				std::string::size_type name_end = quest->name.find_last_of('_');
-				std::string act_name = quest->name.substr(0, name_end);
-
-				replace_all(con_pt_sentence, "ACTION", act_name);
-
-				message = other->getName() + ": " + reply_pt_sentence + "\n" + con_pt_sentence;
-				replyOptions = dialogue.get_possible_reply_pts("Offer_Quest", optionsIndex);
-
-				select = 0;
-				state = 2;
-				//planner->quests_given.push_back(planner->get_current_action());
-			}
-			else {/*does normal exitDialogue stuff if npc has already given player a quest*/
-				other = nullptr;
-				state = 0;
-				DialogueController::scroll_control = 0;
-
-				for (int i = 0; i < curr_conversation_log.size(); i++) {
-
-					//delete memory allocated for instance of Memory class here
-					//delete tmp_top.second;
-					//delete memory allocated for conversation log object here
-					if (curr_conversation_log[i] != nullptr)
-						delete curr_conversation_log[i];
-				}
-
-				curr_conversation_log.clear();
-
-				remove_hero_related_conv_points();
-				first_call = true;
-			}
-		}
-		/*does normal exitDialogue stuff if quest is not given*/
-		else {
+	Hero* temp_hero;
+	if (temp_hero = CheckClass::isHero(other)){//check if "other" is a hero before seeing if they can offer you a quest
+		if(offer_quest_on_exit(temp_hero) == false){
+			/*does normal exitDialogue stuff if quest is not given*/
 			other = nullptr;
 			state = 0;
 			DialogueController::scroll_control = 0;
@@ -777,8 +695,7 @@ void DialogueController::exitDialogue()
 			first_call = true;
 		}
 	}
-	/*does normal exitDialogue stuff if stand in function to check if npc wants
-	to give you a quest(give_quest()) returns false(it never does currently).*/
+	/*does normal exitDialogue stuff if "other" is not a hero*/
 	else {
 		other = nullptr;
 		state = 0;
@@ -947,4 +864,55 @@ void DialogueController::replace_all(std::string& str, const std::string& from, 
 		str.replace(start_pos, from.length(), to);
 		start_pos += to.length(); // In case 'to' contains 'from', like replacing 'x' with 'yx'
 	}
+}
+
+/*Called in exitDialogue() function. Returns true if the NPC offers the player
+a quest when they try to exit dialogue, but returns false if an NPC decides not
+to give the player a quest because they either don't want to or because the
+player is already working on a quest for that NPC.*/
+bool DialogueController::offer_quest_on_exit(Hero* temp_hero) {
+	Planner* planner = AIController::get_plan(CheckClass::isHero(other)->name);
+	/////////////////////////////////////////////////////////////////////////
+	/*Stand in stuff for checking if NPC wants to give player quest when player
+	is about to exit conversation. Currently, NPC will always give player a quest
+	when they try to exit conversation if the player has not already accepted a quest.*/
+	/////////////////////////////////////////////////////////////////////////
+	if (dialogue.give_quest()) {
+		bool has_quest = false;
+		for (int i = 0; i < planner->quests_given.size(); ++i) {
+			if (planner->quests_given[i]->getDoer()->name == SHANGO)
+				has_quest = true;
+		}
+		if (planner->quests_given.size() > 0)//stand in Bad!
+			has_quest = true;//stand in Bad! dont wanna be checking the size of quest vector
+		if (!has_quest) {
+
+			dialogue_point reply_diog_pt = { "Exit Quest","Exit Quest" };
+			dialogue_point con_diog_pt = { "Offer_Quest","Offer_Quest" };
+			std::string reply_pt_sentence = dialogue.gen_dialog(reply_diog_pt, temp_hero);
+			std::string con_pt_sentence = dialogue.gen_dialog(con_diog_pt, temp_hero);
+			Planner* planner = AIController::get_plan(CheckClass::isHero(other)->name);
+			DialogueController::quest = planner->get_current_action();
+			replace_all(con_pt_sentence, "HERO", dialogue.int_to_hero_name(quest->getReceiver()->name));//receiver or doer here? ask Justin
+
+																										//these two lines strip the number off the end of the name 
+			std::string::size_type name_end = quest->name.find_last_of('_');
+			std::string act_name = quest->name.substr(0, name_end);
+
+			replace_all(con_pt_sentence, "ACTION", act_name);
+
+			message = other->getName() + ": " + reply_pt_sentence + "\n" + con_pt_sentence;
+			replyOptions = dialogue.get_possible_reply_pts("Offer_Quest", optionsIndex);
+
+			select = 0;
+			state = 2;
+			//planner->quests_given.push_back(planner->get_current_action());
+
+			return true;
+		}
+		else
+			return false;//case where player is already doing quest for that NPC
+	}
+	else
+		return false;//case where NPC does not want to give player a quest
 }

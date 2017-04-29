@@ -413,7 +413,7 @@ dialogue_point DialogueHelper::get_dialog(std::string name, dialogue_point diog_
 
 	std::string my_name = name;
 	if (name != "Yemoja" && name != "Shango" && name != "Oshosi" && name != "Ogun" && name != "Oya")
-		my_name = "SilverSoldier";
+		my_name = "SilverSoldier"; //placeholder until there are jsons for other non-hero NPCs
 	//////////////////////////////////
 	/*add several else if statements here as more NPCs are added to the game in
 	order to handle different json files for every NPC. json files are opened on a
@@ -429,24 +429,23 @@ dialogue_point DialogueHelper::get_dialog(std::string name, dialogue_point diog_
 
 	dialogue_point dpoint;
 	
-	int j = 3; //set phrase picker to "neutral" by default
+	int phrase_picker = 3; //set phrase picker to "neutral" by default
 
 	std::pair<int, Memory*> topic;
 	topic.first = SHANGO;
 	if (name != "Shango" && name != "SilverSoldier") {
-		    //choose phrase based on relationship with topic of diog_pt
+		/////////*set phrase picker based on relationship with topic of diog_pt*//////
 			if (diog_pt[ConvPointName].find("Advise To",0) != string::npos || diog_pt[ConvPointName].find("Ask About", 0) != string::npos
 				|| diog_pt[ConvPointName].find("Take Advice", 0) != string::npos || diog_pt[ConvPointName].find("Tell About", 0) != string::npos) {
 				topic.first = hero_name_to_int(diog_pt[Topic]);
-				j = calc_text_choice_from_relationship(hero,topic);
+				phrase_picker = calc_text_choice_from_relationship(hero,topic);
 			}
 			//choose phrase based on relationship with Shango
 		    else {
 			    topic.first = 1;
-			    j = calc_text_choice_from_relationship(hero,topic);
+				phrase_picker = calc_text_choice_from_relationship(hero,topic);
 		    }
 	}
-	
 
 	if (name != "Shango") {
 		std::string tmp = "";
@@ -458,7 +457,7 @@ dialogue_point DialogueHelper::get_dialog(std::string name, dialogue_point diog_
 					//j = rand() % root[tmp].size() + 1;
 				//else
 					//j = 1;
-				dpoint.push_back(root[tmp][to_string(j)]
+				dpoint.push_back(root[tmp][to_string(phrase_picker)]
 					.asString());
 				//ofs << "dp: " << root[tmp][to_string(j)]
 					//.asString() << std::endl;
@@ -471,7 +470,7 @@ dialogue_point DialogueHelper::get_dialog(std::string name, dialogue_point diog_
 		}
 	}
 	else {
-		dpoint.push_back(root[diog_pt[ConvPointName]][to_string(j)]
+		dpoint.push_back(root[diog_pt[ConvPointName]][to_string(phrase_picker)]
 			.asString());
 	}
 
