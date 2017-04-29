@@ -34,12 +34,13 @@ class HUD
   static constexpr float HEALTHBAR_DECOR_SEGMENT_X = 106.0F;
   static constexpr float HEALTHBAR_DECOR_SEGMENT_Y = 41.0F;
   static constexpr float HEALTHBAR_DECOR_SEGMENT_WIDTH = 92.0F;
-  static constexpr float HEALTHBAR_DECOR_SEGMENT_HEIGHT = 60.0F;
-  static constexpr float HEALTHBAR_DECOR_TAIL_X = 0.0F;
-  static constexpr float HEALTHBAR_DECOR_TAIL_Y = 0.0F;
-  static constexpr float HEALTHBAR_DECOR_TAIL_WIDTH = 0.0F;
-  static constexpr float HEALTHBAR_DECOR_TAIL_HEIGHT = 60.0F;
-  static constexpr float HEALTHBAT_DECOR_PIECE_OVERLAP = 0.0F;
+  static constexpr float HEALTHBAR_DECOR_SEGMENT_HEIGHT = 50.0F;
+  static constexpr float HEALTHBAR_DECOR_TAIL_X = 362.5F;
+  static constexpr float HEALTHBAR_DECOR_TAIL_Y = 41.0F;
+  static constexpr float HEALTHBAR_DECOR_TAIL_WIDTH = 77.5F;
+  static constexpr float HEALTHBAR_DECOR_TAIL_HEIGHT = 50.0F;
+  static constexpr float HEALTHBAT_DECOR_PIECE_OVERLAP = 32.0F;
+  static constexpr int HEALTHBAR_DECOR_PIECE_COUNT = 4;
 
   static constexpr float ASEFLAME_X = 175.0F;
   static constexpr float ASEFLAME_Y = 100.0F;
@@ -65,6 +66,8 @@ class HUD
   static constexpr float MINIMAP_CURSOR_Y = 15.625F;
   static constexpr float MINIMAP_CURSOR_WIDTH = 8.0F;
   static constexpr float MINIMAP_CURSOR_HEIGHT = 8.0F;
+  static constexpr float MAP_WIDTH = 25000.0F;
+  static constexpr float MAP_HEIGHT = 25000.0F;
 
   static constexpr float KEYBIND_DISPLAY_X = 825.0F;
   static constexpr float KEYBIND_DISPLAY_Y = 405.0F;

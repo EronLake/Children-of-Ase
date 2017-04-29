@@ -154,9 +154,17 @@ void HUD::drawMainHUD(Player *player)
   GameWindow::drawSprite(this->healthbar_full_rect->getX(), this->healthbar_full_rect->getY(),
     this->healthbar_full_rect->getWidth(), this->healthbar_full_rect->getHeight(), this->healthbar_full_rect->getSprite());
 
-  // Draw the healthbar's decorative border
-  GameWindow::drawSprite(this->healthbar_decor_segment_rect->getX(), this->healthbar_decor_segment_rect->getY(),
-    this->healthbar_decor_segment_rect->getWidth(), this->healthbar_decor_segment_rect->getHeight(), this->healthbar_decor_segment_rect->getSprite());
+  // Draw the healthbar's decorative border segments
+  for(int i = 0; i < HUD::HEALTHBAR_DECOR_PIECE_COUNT; ++i) {
+    float segmentOffset = (i * HUD::HEALTHBAR_DECOR_SEGMENT_WIDTH) - ( i * HUD::HEALTHBAT_DECOR_PIECE_OVERLAP);
+    GameWindow::drawSprite(HUD::HEALTHBAR_DECOR_SEGMENT_X + segmentOffset, HUD::HEALTHBAR_DECOR_SEGMENT_Y,
+      this->healthbar_decor_segment_rect->getWidth(), this->healthbar_decor_segment_rect->getHeight(),
+      this->healthbar_decor_segment_rect->getSprite());
+  }
+
+  // Draw the helathbar border's tail end
+  GameWindow::drawSprite(this->healthbar_decor_tail_rect->getX(), this->healthbar_decor_tail_rect->getY(),
+    this->healthbar_decor_tail_rect->getWidth(), this->healthbar_decor_tail_rect->getHeight(), this->healthbar_decor_tail_rect->getSprite());
 
   // Draw the ase flames
   this->portrait_rect->sprite.setTexture((player->getAse() <= 0) ?
@@ -179,11 +187,21 @@ void HUD::drawMainHUD(Player *player)
 
 void HUD::drawMinimap(Player *player)
 {
+  Vector2f minimapCoordOffset;
+  
+  if(player->getX() < 0.0F) minimapCoordOffset.setXloc(0.0F);
+  else if(player->getX() > HUD::MAP_WIDTH) minimapCoordOffset.setXloc(HUD::MAP_WIDTH);
+  else minimapCoordOffset.setXloc(player->getX() / HUD::MAP_WIDTH * HUD::MINIMAP_WIDTH);
+
+  if(player->getY() < 0.0F) minimapCoordOffset.setYloc(0.0F);
+  else if(player->getY() > HUD::MAP_HEIGHT) minimapCoordOffset.setYloc(HUD::MAP_HEIGHT);
+  else minimapCoordOffset.setYloc(player->getY() / HUD::MAP_HEIGHT * HUD::MINIMAP_HEIGHT);
+
   GameWindow::drawSprite(this->minimap_rect->getX(), this->minimap_rect->getY(),
     this->minimap_rect->getWidth(), this->minimap_rect->getHeight(), this->minimap_rect->getSprite());
   GameWindow::drawSprite(this->minimap_frame_rect->getX(), this->minimap_frame_rect->getY(),
     this->minimap_frame_rect->getWidth(), this->minimap_frame_rect->getHeight(), this->minimap_frame_rect->getSprite());
-  GameWindow::drawSprite(this->minimap_cursor_rect->getX(), this->minimap_cursor_rect->getY(),
+  GameWindow::drawSprite(this->minimap_cursor_rect->getX() + minimapCoordOffset.getXloc(), this->minimap_cursor_rect->getY() + minimapCoordOffset.getYloc(),
     this->minimap_cursor_rect->getWidth(), this->minimap_cursor_rect->getHeight(), this->minimap_cursor_rect->getSprite());
 }
 
