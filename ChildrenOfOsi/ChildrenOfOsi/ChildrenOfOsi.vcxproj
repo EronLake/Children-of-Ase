@@ -210,7 +210,6 @@
     <ClInclude Include="Line.h" />
     <ClInclude Include="Point.h" />
     <ClInclude Include="RiverObj.h" />
-    <ClInclude Include="Shader.h" />
     <ClInclude Include="Personality.h" />
     <ClInclude Include="Planner.h" />
     <ClInclude Include="json-forwards.h" />

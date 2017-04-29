@@ -29,19 +29,8 @@
 #include FT_FREETYPE_H
 
 #include "AssetInfo.h"
-#include "Shader.h"
 #include "Sprite.h"
 #include "TextObj.h"
-
-
-
-struct Glyph
-{
-  GLuint textureId;   // ID handle for the texture
-  glm::ivec2 size;    // Dimensions of the glyph
-  glm::ivec2 bearing; // Offset from baseline to left, top of glyph
-  FT_Pos advance;     // Complete horizontal offset to next glyph
-};
 
 struct GameWindow
 {
@@ -50,7 +39,6 @@ struct GameWindow
   static constexpr unsigned int WINDOW_WIDTH_DP = 960U;
   static constexpr unsigned int WINDOW_HEIGHT_DP = 540U;
 
-  // Need this for map editor
   static GLFWwindow *window;
 
   static std::vector<TextObj> text;
@@ -65,10 +53,8 @@ struct GameWindow
 
   static void drawSprite(float, float, float, float, Sprite);
   static void createText(std::string t, float xCord, float yCord, float w, float h, glm::ivec3 c) { text.push_back(TextObj(t, xCord, yCord, w, h, c)); };
-  static void drawText(const std::string&, const std::string&, float, float, float, float, glm::ivec3);
+  static void RenderText(std::string& text, GLfloat x, GLfloat y, GLfloat w, GLfloat h, GLfloat scale, glm::vec3 color);
   static void refresh();
-
-  static void RenderText(std::string text, GLfloat x, GLfloat y, GLfloat w, GLfloat h, GLfloat scale, glm::vec3 color);
 
   private:
 
@@ -93,11 +79,8 @@ struct GameWindow
   static GLuint fontVAO;
   static GLuint fontVBO;
 
-  static Shader* s;
   static GLuint stdShaderProgramId;
   static GLuint fontShaderProgramId;
-
-  static std::unordered_map<std::string, std::unordered_map<GLchar, Glyph>> fontCharacters;
 
   static int numObjects;
 
