@@ -457,11 +457,11 @@
     },
 
 	"Accept_Quest": {
-        "1": "I will take it.",
-        "2": "I will take it.",
-        "3": "I will take it.",
-        "4": "I will take it.",
-        "5": "I will take it."
+        "1": "I will do it.",
+        "2": "I will do it.",
+        "3": "I will do it.",
+        "4": "I will do it.",
+        "5": "I will do it."
     },
 
 	"Decline_Quest": {
