@@ -249,7 +249,7 @@ void DialogueController::PlayerResponse()
 			if (choice[ConvPointName] == "Accept_Quest") {
 				DialogueController::quest = planner->get_current_action();
 				planner->quests_given.push_back(quest); //gives npc record of what they gave player
-				player->cur_action = quest; //gives player record of what they are doing
+				//player->cur_action = quest; //gives player record of what they are doing
 				DialogueHelper::accepted_quest = true;
 			}
 		}
@@ -400,6 +400,18 @@ void DialogueController::otherConversationPoint(dialogue_point line)
 			conv_log_obj2->set_topic(dialogue.hero_name_to_int(point[Topic]), mem2);
 		    replace_all(con_pt_sentence,"HERO",point[Topic]);
 	    }
+		else if (point[ConvPointName].find("Offer_Quest") != string::npos) {
+			Planner* planner = AIController::get_plan(CheckClass::isHero(other)->name);
+			DialogueController::quest = planner->get_current_action();
+			conv_log_obj2->set_topic(quest->getDoer()->name, mem2);
+			replace_all(con_pt_sentence, "HERO", dialogue.int_to_hero_name(quest->getReceiver()->name));//receiver or doer here? ask Justin
+
+			//these two lines strip the number off the end of the name 
+			std::string::size_type name_end = quest->name.find_last_of('_');
+			std::string act_name = quest->name.substr(0, name_end);
+
+			replace_all(con_pt_sentence, "ACTION", act_name);
+		}
 	    else
 			conv_log_obj2->set_topic(NoTopic, mem2);
 
@@ -661,7 +673,7 @@ hero-related conversation points from the 3D vector of possible conversation
 points and removes them from the options vector.*/
 void DialogueController::exitDialogue()
 {
-	if (other->getName() != "silverSoldier") {
+	if (other->getName() != "silverSoldier") {//maybe check if "other" is a hero instead"
 		Planner* planner = AIController::get_plan(CheckClass::isHero(other)->name);
 		/////////////////////////////////////////////////////////////////////////
 		/*Stand in stuff for checking if NPC wants to give player quest when player
@@ -677,8 +689,10 @@ void DialogueController::exitDialogue()
 			if (planner->quests_given.size() > 0)//stand in Bad!
 				has_quest = true;//stand in Bad! dont wanna be checking the size of quest vector
 			if (!has_quest) {
-				dialogue.prompted_quest = true;
-				ConversationLogObj* conv_log_obj = new ConversationLogObj();
+				/*pretend that player asked for quest for now since some other earlier code
+				assumes that the last thing in the conversation log vector will always be
+				what the player said. Need to change.*/
+				/*ConversationLogObj* conv_log_obj = new ConversationLogObj();
 				Memory* mem = nullptr;
 
 				conv_log_obj->set_who(1);
@@ -689,6 +703,36 @@ void DialogueController::exitDialogue()
 				curr_conversation_log.push_back(conv_log_obj);//add entry to log
 				player_conv_point_choice = "Ask_For_Quest";
 				otherResponse("Ask_For_Quest", "Shango");
+				*/
+				Hero* temp_hero;
+				if (other->getType() >= WorldObj::TYPE_NPC) {
+					if (temp_hero = CheckClass::isHero(other))
+					{
+						perror("you cannot talk to this type of object");
+					}
+				}
+				else {
+					return;
+				}
+
+				dialogue_point reply_diog_pt = { "Exit Quest","Exit Quest" };
+				dialogue_point con_diog_pt = { "Offer_Quest","Offer_Quest" };
+				std::string reply_pt_sentence = dialogue.gen_dialog(reply_diog_pt, temp_hero);
+				std::string con_pt_sentence = dialogue.gen_dialog(con_diog_pt, temp_hero);
+				Planner* planner = AIController::get_plan(CheckClass::isHero(other)->name);
+				DialogueController::quest = planner->get_current_action();
+				replace_all(con_pt_sentence, "HERO", dialogue.int_to_hero_name(quest->getReceiver()->name));//receiver or doer here? ask Justin
+
+				//these two lines strip the number off the end of the name 
+				std::string::size_type name_end = quest->name.find_last_of('_');
+				std::string act_name = quest->name.substr(0, name_end);
+
+				replace_all(con_pt_sentence, "ACTION", act_name);
+
+				message = other->getName() + ": " + reply_pt_sentence + "\n" + con_pt_sentence;
+				replyOptions = dialogue.get_possible_reply_pts("Offer_Quest", optionsIndex);
+
+				select = 0;
 				state = 2;
 				//planner->quests_given.push_back(planner->get_current_action());
 			}

@@ -148,7 +148,7 @@ dialogue_point DialogueHelper::choose_conv_pt(std::vector<ConversationLogObj*> c
 						//every quest will use the same conversation point
 						//and the actual text for the action and topic
 						//portions will be filled in based on the action object
-						return{ "Bribe Quest","Bribe Quest" };
+						return{ "Offer_Quest","Offer_Quest" };
 					}
 				}
 			}
