@@ -203,6 +203,7 @@
     <ClInclude Include="Tag.h" />
     <ClInclude Include="TagConfig.h" />
     <ClInclude Include="ThreadManager.h" />
+    <ClInclude Include="UniformGrid.h" />
     <ClInclude Include="Village.h" />
     <ClInclude Include="GameMap.h" />
     <ClInclude Include="GameWindow.h" />
@@ -292,6 +293,7 @@
     <ClCompile Include="Tag.cpp" />
     <ClCompile Include="TagConfig.cpp" />
     <ClCompile Include="ThreadManager.cpp" />
+    <ClCompile Include="UniformGrid.cpp" />
     <ClCompile Include="Village.cpp" />
     <ClCompile Include="GameMap.cpp" />
     <ClCompile Include="GameWindow.cpp" />

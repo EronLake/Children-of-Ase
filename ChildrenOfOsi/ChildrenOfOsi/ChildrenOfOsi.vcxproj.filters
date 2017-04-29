@@ -239,6 +239,9 @@
     <ClCompile Include="TagConfig.cpp">
       <Filter>Dialogue</Filter>
     </ClCompile>
+    <ClCompile Include="UniformGrid.cpp">
+      <Filter>Physics</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AIHelper.h">
@@ -497,6 +500,9 @@
     </ClInclude>
     <ClInclude Include="TagConfig.h">
       <Filter>Dialogue</Filter>
+    </ClInclude>
+    <ClInclude Include="UniformGrid.h">
+      <Filter>Physics</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
