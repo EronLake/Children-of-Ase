@@ -132,15 +132,28 @@ dialogue_point DialogueHelper::choose_conv_pt(std::vector<ConversationLogObj*> c
 	if (curr_conversation_log.size() > 0) {
 		if (curr_conversation_log[curr_conversation_log.size() - 1]->get_conv_point()->get_name() == "Ask_For_Quest") {
 			Planner* p = AIController::get_plan(other->name);
-			if (p->quests_given.size() == 0) {
-				Planner* planner = AIController::get_plan(other->name);
-				DialogueHelper::quest = planner->get_current_action();
-				if (true) {
 
-					return{ "Bribe Quest","Bribe Quest" };
+			///////////////////////////////////////////////////////
+			/*Stand in stuff to check whether or not NPC wants to give quest
+			to player when the player asks for one. NPC currently always
+			gives quest to player.*/
+			///////////////////////////////////////////////////////
+			if (give_quest()) {
+				if (p->quests_given.size() == 0) {
+					Planner* planner = AIController::get_plan(other->name);
+					DialogueHelper::quest = planner->get_current_action();
+					if (true) {
+						//replace the below return with a return of
+						//one all encompassing dialogue_point
+						//every quest will use the same conversation point
+						//and the actual text for the action and topic
+						//portions will be filled in based on the action object
+						return{ "Bribe Quest","Bribe Quest" };
+					}
 				}
 			}
-			return{ "No Quest","No Quest" };
+			else
+			    return{ "No Quest","No Quest" };
 			//return{ "Offer_Quest", "Offer_Quest" };
 		}
 	}
@@ -647,4 +660,9 @@ std::string DialogueHelper::int_to_hero_name(int hero) {
 	}
 
 	return who_arg;
+}
+
+bool DialogueHelper::give_quest() {
+	return true;
+
 }

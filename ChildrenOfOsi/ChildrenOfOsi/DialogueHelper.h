@@ -36,6 +36,7 @@ public:
 	dialogue_point get_dialog(std::string name, dialogue_point diog_pt, Hero* hero);
 	std::string convert_to_sentence(dialogue_point dialog_pt);
 	void fill_conversations();
+	bool give_quest();
 	int personality_appeal(ConversationPoint* point, vector<int> personality);
 	int hero_name_to_int(std::string hero);
 	int calc_text_choice_from_relationship(Hero* hero, std::pair<int, Memory*> topic);
