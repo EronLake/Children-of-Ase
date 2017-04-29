@@ -36,6 +36,7 @@ public:
 	Party* defenders;
 
 	void add_to_village_health(int h) { health += h; };
+	void set_village_health(int h) { health = h; };
 	int get_village_health() { return health; };
 
 	void conquer(Village* v) { conquered.push_back(v); v->conquerer = this; };

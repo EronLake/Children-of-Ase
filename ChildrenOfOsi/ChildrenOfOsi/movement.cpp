@@ -667,26 +667,41 @@ int Movement::attack(WorldObj* obj) {
 												delAtk[j]->setDuration(0);
 											}
 											if (!friendly) {
-												s->setCurrentEnemy(s2);
-												if (s2->getType() == WorldObj::TYPE_PLAYER && s->getParty()->getMode()!=Party::MODE_FLEE) {
-													Hero* hero = dynamic_cast<Hero*>(s);
-													if ((!s->getInCombat()) && (!s2->getInCombat())) {
-														if (hero) {
-															PlayerActExecFunctions::execute_start("Fight", hero);
-														} else Fight* fight = new Fight(s->getParty(), s2->getParty(), false);
+												if ((s2->getType() == WorldObj::TYPE_PLAYER) && (s->getParty()->getMode()!=Party::MODE_FLEE) && (!s->get_incapacitated())) {
+													if (s->get_warning() > 0) {
+														s->setCurrentEnemy(s2);
+														Hero* hero = dynamic_cast<Hero*>(s);
+														if ((!s->getInCombat()) && (!s2->getInCombat())) {
+															if (hero) {
+																if (Party::dist_location_to_location(s2->getLoc(), s2->getVillage()->get_village_location()) < 500) {
+																	PlayerActExecFunctions::execute_start("Conquer", hero);
+																}
+																else PlayerActExecFunctions::execute_start("Fight", hero);
+															}
+															else Fight* fight = new Fight(s->getParty(), s2->getParty(), false);
+														}
+														else if ((!s->getInCombat())) {
+															if (hero) {
+																if (Party::dist_location_to_location(s2->getLoc(), s2->getVillage()->get_village_location()) < 500) {
+																	PlayerActExecFunctions::execute_start("Conquer", hero);
+																}else PlayerActExecFunctions::execute_start("Fight", hero);
+															}
+															s2->getParty()->get_fight()->add_party(s->getParty(), true);
+															s2->getParty()->addToCurrentEnemies(s->getParty());
+															s->getParty()->addToCurrentEnemies(s2->getParty());
+														}
+														else if ((!s2->getInCombat())) {
+															if (hero) {
+																if (Party::dist_location_to_location(s2->getLoc(), s2->getVillage()->get_village_location()) < 500) {
+																	PlayerActExecFunctions::execute_start("Conquer", hero);
+																} else PlayerActExecFunctions::execute_start("Fight", hero);
+															}
+															s->getParty()->get_fight()->add_party(s2->getParty(), true);
+															s2->getParty()->addToCurrentEnemies(s->getParty());
+															s->getParty()->addToCurrentEnemies(s2->getParty());
+														}
 													}
-													else if ((!s->getInCombat())) {
-														if (hero)PlayerActExecFunctions::execute_start("Fight", hero);
-														s2->getParty()->get_fight()->add_party(s->getParty(),true);
-														s2->getParty()->addToCurrentEnemies(s->getParty());
-														s->getParty()->addToCurrentEnemies(s2->getParty());
-													}
-													else if ((!s2->getInCombat())) {
-														if (hero)PlayerActExecFunctions::execute_start("Fight", hero);
-														s->getParty()->get_fight()->add_party(s2->getParty(), true);
-														s2->getParty()->addToCurrentEnemies(s->getParty());
-														s->getParty()->addToCurrentEnemies(s2->getParty());
-													}
+													else s->start_warning();
 												}
 											}
 										}

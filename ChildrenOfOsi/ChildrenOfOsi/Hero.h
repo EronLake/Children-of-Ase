@@ -53,12 +53,20 @@ public:
 	int update_action_timer();
 	void init_action_timer(int wait_time) {action_timer = wait_time;}
 
+	int get_busy() { return busy; }
+	void set_busy(int b) { busy=b; }
+
+	static constexpr int NOT_BUSY = 0;
+	static constexpr int BUSY_DOER = 1;
+	static constexpr int BUSY_REC = 2;
+
 private:
 
 	std::unordered_map<Action*,int> quests;
 	
 	int action_timer;
 
+	int busy;
 	//now in the action config
 	//void init_act_pools(ChildrenOfOsi* gameplay_func, TaskBuffer* tBuffer);
 };

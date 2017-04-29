@@ -244,8 +244,9 @@ void Fight::update_fight() {
 	update_radius();
 	over = check_for_winner();
 	if (over) {
-		if (player->getParty()->get_fight() == this);
-		PlayerActExecFunctions::execute_end(true);
+		if (player->getParty()->get_fight() == this && (player->cur_action!=nullptr || player->cur_action != NULL)) {
+			PlayerActExecFunctions::execute_end(true);
+		}
 	}
 }
 
@@ -302,15 +303,18 @@ void Fight::end_combat() {
 	for (auto it = attackers.begin(); it != attackers.end(); ++it) {
 		for (auto itor = (*it).begin(); itor != (*it).end(); ++itor) {
 			(*itor)->set_in_combat(false);
+			(*itor)->setMode(Party::MODE_ATTACK);
 		}
 	}
 	for (auto it = defenders.begin(); it != defenders.end(); ++it) {
 		for (auto itor = (*it).begin(); itor != (*it).end(); ++itor) {
 			(*itor)->set_in_combat(false);
+			(*itor)->setMode(Party::MODE_ATTACK);
 		}
 	}
 	for (auto itor = downed.begin(); itor != downed.end(); ++itor) {
 		(*itor)->set_in_combat(false);
+		(*itor)->setMode(Party::MODE_ATTACK);
 	}
 	over = true;
 }

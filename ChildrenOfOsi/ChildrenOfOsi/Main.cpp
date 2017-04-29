@@ -184,7 +184,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	
 
 	Region* Marsh = new Region("Marsh", "Music/RegionThemes/MarshRegion.flac", "Music/HeroThemes/ogun.flac", { 1000,1000 });
-	Region* Desert = new Region("Desert", "Music/RegionThemes/DesertRegion.flac", "Music/HeroThemes/oya.flac", { 5000,5000 });
+	Region* Desert = new Region("Desert", "Music/RegionThemes/MarshRegion.flac", "Music/HeroThemes/oya.flac", { 5000,5000 });
 	Region* Mountain = new Region("Mountain", "Music/RegionThemes/MountainRegion.flac", "nothing", { 10000,1000 });
 	Region* Jungle = new Region("Jungle", "Music/RegionThemes/JungleRegion.flac", "Music/HeroThemes/oya.flac", { 5000,10000 });
 	
@@ -1340,10 +1340,10 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	tBuffer->run();
 
 	staticRec->melee = Containers::Attack_table[staticRec->getKey()];
-	staticRec->melee->setDmg(10);
+	staticRec->melee->setDmg(15);
 	staticRec->melee->setSpeed(5);
 	staticRec->melee->setBaseDir(4);
-	staticRec->melee->setCoolDown(100);
+	staticRec->melee->setCoolDown(60);
 	staticRec->melee->setPause(-1);
 	staticRec->melee->setDestroy(false);
 	staticRec->melee->setKeep(true);
@@ -1359,14 +1359,14 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	oya->melee->setDmg(10);
 	oya->melee->setSpeed(5);
 	oya->melee->setBaseDir(4);
-	oya->melee->setCoolDown(100);
+	oya->melee->setCoolDown(80);
 	oya->melee->setPause(-1);
 	oya->melee->setDestroy(false);
 	oya->melee->setKeep(true);
 	oya->melee->setWidth(50);
 	oya->melee->setHeight(50);
 	oya->set_creator_of_melee();
-	oya->melee->setStaminaCost(90);
+	oya->melee->setStaminaCost(120);
 	oya->setHealth(100);
 	oya->setMaxStamina(300);
 	oya->melee->sprite.setTexture(Containers::texture_table["border"]);
@@ -1566,7 +1566,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	AIController::set_plan(OYA, OyaPlanner);
 	
 	Action* test_ally = new Action(nullptr, nullptr, nullptr, 10, 1, "Create Alliance", "execute_train");
-	Action* test_train = new Action(staticRec, oya, nullptr, 10, 1, "Train", "execute_train");
+	Action* test_train = new Action(staticRec, oya, nullptr, 10, 1, "Conquer", "execute_conquer");
 
 	RelPrecon* prec = new RelPrecon(Preconditions::AFF, 60);
 	RelPost* post = new RelPost(Postcondition::STR, 10);
@@ -1673,7 +1673,6 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	Party* party = new Party();
 	Party* party2 = new Party();
 	Party* party3 = new Party();
-	Party* party4 = new Party();
 	party->addToParty(Alex, true);
 	for (int i = 0; i < silverSoldier.size(); i++) {
 		party->addToParty(silverSoldier[i], false);
@@ -1699,6 +1698,10 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	}
 	v3->add_member(staticRec);
 	v4->add_member(oya);
+	v1->leader = Alex;
+	v3->leader = staticRec;
+	v4->leader = oya;
+	v4->defenders->addToParty(oya, true);
 	Alliance* a1 = new Alliance(v1);
 	Alliance* a2 = new Alliance(v2);
 	Alliance* a3 = new Alliance(v3);
@@ -1706,14 +1709,14 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	v1->addToParties(party);
 	v2->addToParties(party2);
 	v3->addToParties(party3);
-	v4->addToParties(party4);
 	War* war = new War();
 	war->setWarParties(v1, v2);
 	//a1->add_alliance_to_alliance(v3->get_alliance());
 	if (blueSoldiers.size() > 0)party2->set_defend(blueSoldiers[0]->getLoc());
 	party2->setMode(Party::MODE_DEFEND);
 	party3->set_defend(staticRec->getLoc());
-	party3->setMode(Party::MODE_DEFEND);
+	party3->setMode(Party::MODE_ATTACK);
+
 	Alliance::update_enemies();
 	//cout << Alex->getParty()->getAlliance()<< endl;
 

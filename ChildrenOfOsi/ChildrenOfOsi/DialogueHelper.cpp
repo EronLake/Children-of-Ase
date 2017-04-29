@@ -2,6 +2,7 @@
 #include "DialogueHelper.h"
 #include "Player.h"
 #include "Tag.h"
+#include "AIController.h"
 typedef std::pair<int, ConversationPoint*> appealPoint;
 template<>
 bool std::operator==(const appealPoint& p1, const appealPoint& p2) {
@@ -61,6 +62,10 @@ std::vector<int> shango_personality = { 50, 50, 60, 60, 50, 60, 20 };
 
 DialogueHelper dialogue;
 
+bool DialogueHelper::accepted_quest = false;
+bool DialogueHelper::prompted_quest = false;
+Action* DialogueHelper::quest = nullptr;
+
 
 DialogueHelper::DialogueHelper()
 {
@@ -86,7 +91,7 @@ int DialogueHelper::personality_appeal(ConversationPoint* point, vector<int> per
 };
 
 /*Runs the heuristic that npc's use to select a conversation point to say.*/
-dialogue_point DialogueHelper::choose_conv_pt(std::vector<ConversationLogObj*> curr_conversation_log, Hero* other)
+dialogue_point DialogueHelper::choose_conv_pt(std::vector<ConversationLogObj*> curr_conversation_log, Hero* other,Player* player)
 {	/*index 0 = Affinity, index 1 = notoriety, index 2 = strength, index 3 = AffEstimateindex 4 = NotorEstimate, index 5 = StrEstimate*/
 
 	/*index 0 = honor, index 1 = pride, index 2 = aggression, index 3 = kindnessindex 4 = greed, index 5 = recklessness, index 6 = extroversion*/
@@ -124,20 +129,47 @@ dialogue_point DialogueHelper::choose_conv_pt(std::vector<ConversationLogObj*> c
 	relationship.push_back(rel->getNotorEstimate());
 	relationship.push_back(rel->getStrEstimate());*/
 
-	if (curr_conversation_log[curr_conversation_log.size() - 1]->get_conv_point()->get_name() == "Ask_For_Quest") {
-		return{ "Offer_Quest", "Offer_Quest" };
+	if (curr_conversation_log.size() > 0) {
+		if (curr_conversation_log[curr_conversation_log.size() - 1]->get_conv_point()->get_name() == "Ask_For_Quest") {
+			Planner* p = AIController::get_plan(other->name);
+
+			///////////////////////////////////////////////////////
+			/*Stand in stuff to check whether or not NPC wants to give quest
+			to player when the player asks for one. NPC currently always
+			gives quest to player.*/
+			///////////////////////////////////////////////////////
+			if (give_quest()) {
+				if (p->quests_given.size() == 0) {
+					Planner* planner = AIController::get_plan(other->name);
+					DialogueHelper::quest = planner->get_current_action();
+					if (true) {
+						//replace the below return with a return of
+						//one all encompassing dialogue_point
+						//every quest will use the same conversation point
+						//and the actual text for the action and topic
+						//portions will be filled in based on the action object
+						return{ "Bribe Quest","Bribe Quest" };
+					}
+				}
+			}
+			else
+			    return{ "No Quest","No Quest" };
+			//return{ "Offer_Quest", "Offer_Quest" };
+		}
 	}
 
 	//check if the player has already asked the npc this question
-	for (int i = 0; i < curr_conversation_log.size() - 1; ++i) {
-		if (curr_conversation_log[i]->get_conv_point() == NULL)
-			continue;
-		if ((curr_conversation_log[i]->get_conv_point()->get_name() == curr_conversation_log[curr_conversation_log.size() - 1]->get_conv_point()->get_name()) 
-			&&
-			(curr_conversation_log[curr_conversation_log.size() - 1]->get_who() == curr_conversation_log[i]->get_who()) 
-			&& 
-			(curr_conversation_log[curr_conversation_log.size() - 1]->get_conv_point()->get_name().find("Ask",0) != string::npos))
-			    return {"",""};
+	if (curr_conversation_log.size() > 0) {
+		for (int i = 0; i < curr_conversation_log.size() - 1; ++i) {
+			if (curr_conversation_log[i]->get_conv_point() == NULL)
+				continue;
+			if ((curr_conversation_log[i]->get_conv_point()->get_name() == curr_conversation_log[curr_conversation_log.size() - 1]->get_conv_point()->get_name())
+				&&
+				(curr_conversation_log[curr_conversation_log.size() - 1]->get_who() == curr_conversation_log[i]->get_who())
+				&&
+				(curr_conversation_log[curr_conversation_log.size() - 1]->get_conv_point()->get_name().find("Ask", 0) != string::npos))
+				return{ "","" };
+		}
 	}
 
 	for (auto i = curr_conversation_log.begin(); i != curr_conversation_log.end(); ++i) {
@@ -224,13 +256,17 @@ dialogue_point DialogueHelper::choose_reply_pt(std::string point, int optn_inx, 
 {
 	//check if the player has already asked the npc this question
 	for (int i = 0; i < curr_conversation_log.size() - 1; ++i) {
-		if (curr_conversation_log[i]->get_conv_point() == NULL)
-			continue;
-		if ((curr_conversation_log[i]->get_conv_point()->get_name() == curr_conversation_log[curr_conversation_log.size() - 1]->get_conv_point()->get_name()) &&
-			(curr_conversation_log[curr_conversation_log.size() - 1]->get_who() == curr_conversation_log[i]->get_who()) && (curr_conversation_log[curr_conversation_log.size() - 1]->get_conv_point()->get_name().find("Ask", 0) != string::npos)){
-			if(curr_conversation_log[curr_conversation_log.size() - 1]->get_conv_point()->get_name().find("Ask_For_Quest", 0) == string::npos)
-		        return{ "Already_Asked","Already_Asked" };
-	     }
+		if (curr_conversation_log.size() > 0) {
+			if (curr_conversation_log[i]->get_conv_point() == NULL)
+				continue;
+			if ((curr_conversation_log[i]->get_conv_point()->get_name() == curr_conversation_log[curr_conversation_log.size() - 1]->get_conv_point()->get_name()) &&
+				(curr_conversation_log[curr_conversation_log.size() - 1]->get_who() == curr_conversation_log[i]->get_who()) && (curr_conversation_log[curr_conversation_log.size() - 1]->get_conv_point()->get_name().find("Ask", 0) != string::npos)) {
+				if (curr_conversation_log[curr_conversation_log.size() - 1]->get_conv_point()->get_name().find("Ask_For_Quest", 0) == string::npos)
+					return{ "Already_Asked","Already_Asked" };
+			}
+		}
+		else
+			break;
 	}
 
 	for (int i = 0; i < possible_reply_pts[optn_inx].size(); i++)
@@ -262,9 +298,15 @@ std::vector<dialogue_point> DialogueHelper::get_possible_reply_pts(std::string p
 {
 	std::vector<dialogue_point> reply;
 	for (int i = 0; i < possible_reply_pts[opts_inx].size(); i++) {
-		if (possible_reply_pts[opts_inx][i][CorrespondingConvPt].compare("Decline_To_Answer") == 0 || possible_reply_pts[opts_inx][i][CorrespondingConvPt].compare(point) == 0) {
+		if ((possible_reply_pts[opts_inx][i][CorrespondingConvPt].compare("Decline_To_Answer") == 0 || possible_reply_pts[opts_inx][i][CorrespondingConvPt].compare(point) == 0)
+			&& point.find(" Quest", 0) == string::npos) {
 			reply.push_back({ possible_reply_pts[opts_inx][i] });
 		}
+	 
+	}
+	if (point.find(" Quest", 0) != string::npos) {
+		reply.push_back({ "Accept_Quest", "Accept_Quest","","" });
+		reply.push_back({ "Decline_Quest", "Decline_Quest","","" });
 	}
 	return reply;
 }
@@ -391,7 +433,7 @@ dialogue_point DialogueHelper::get_dialog(std::string name, dialogue_point diog_
 
 	std::pair<int, Memory*> topic;
 	topic.first = SHANGO;
-	if (name != "Shango") {
+	if (name != "Shango" && name != "SilverSoldier") {
 		    //choose phrase based on relationship with topic of diog_pt
 			if (diog_pt[ConvPointName].find("Advise To",0) != string::npos || diog_pt[ConvPointName].find("Ask About", 0) != string::npos
 				|| diog_pt[ConvPointName].find("Take Advice", 0) != string::npos || diog_pt[ConvPointName].find("Tell About", 0) != string::npos) {
@@ -618,4 +660,9 @@ std::string DialogueHelper::int_to_hero_name(int hero) {
 	}
 
 	return who_arg;
+}
+
+bool DialogueHelper::give_quest() {
+	return true;
+
 }

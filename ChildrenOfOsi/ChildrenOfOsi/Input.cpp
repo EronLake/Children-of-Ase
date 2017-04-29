@@ -445,7 +445,7 @@ void Input::edit_object() {
 		}
 	}
 
-	if (collide_with != "" && onscreen)
+	if (collide_with != "" && onscreen && collide_with != "Jungle_Village" && collide_with != "Oasis_Platform")
 	{
 		if (!H)
 		{
@@ -920,7 +920,7 @@ void Input::InputCheck()
 					if (tmp > 0) {
 						DialogueController::setOptionsIndex(--tmp);
 						count = 10;
-						gameplay_functions->createTaskForAudio("Play", "SFX/page.wav");
+						gameplay_functions->createTaskForAudio("PlaySound","SOUND", "SFX/page.wav");
 						//////std:://cout << "OptionsIndex: " << tmp << std::endl;
 						switch (DialogueController::getOptionsIndex()) {
 						case 0: gameplay_functions->setSwordGlow(player); break;
@@ -937,7 +937,7 @@ void Input::InputCheck()
 					if (tmp < DialogueController::getOSize() - 1) {
 						DialogueController::setOptionsIndex(++tmp);
 						count = 10;
-						gameplay_functions->createTaskForAudio("Play", "SFX/page.wav");
+						gameplay_functions->createTaskForAudio("PlaySound", "SOUND", "SFX/page.wav");
 						//////std:://cout << "OptionsIndex: " << tmp << std::endl;
 						switch (DialogueController::getOptionsIndex()) {
 						case 0: gameplay_functions->setSwordGlow(player); break;
@@ -963,7 +963,7 @@ void Input::InputCheck()
 							DialogueController::scroll_control++;
 							if (DialogueController::scroll_control >= DialogueController::getOptions().size())
 								DialogueController::scroll_control = DialogueController::getOptions().size() - 1;
-							gameplay_functions->createTaskForAudio("Play", "SFX/down.wav");
+							gameplay_functions->createTaskForAudio("PlaySound", "SOUND", "SFX/down.wav");
 							count = 10;
 							//////std:://cout << "Index: " << tmp << std::endl;
 						}
@@ -983,7 +983,7 @@ void Input::InputCheck()
 							DialogueController::scroll_control++;
 							if (DialogueController::scroll_control >= DialogueController::getReplyOptions().size())
 								DialogueController::scroll_control = DialogueController::getReplyOptions().size() - 1;
-							gameplay_functions->createTaskForAudio("Play", "SFX/up.wav");
+							
 
 							count = 10;
 							//////std:://cout << "Index: " << tmp << std::endl;
@@ -1003,6 +1003,7 @@ void Input::InputCheck()
 					int tmp = DialogueController::getSelect();
 					if (tmp > 0 || DialogueController::scroll_control > 0) {
 						//DialogueController::setSelect(--tmp);
+						gameplay_functions->createTaskForAudio("PlaySound","SOUND", "SFX/up.wav");
 						DialogueController::scroll_control--;
 						if (DialogueController::scroll_control < 0)
 							DialogueController::scroll_control = 0;
