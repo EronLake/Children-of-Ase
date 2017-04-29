@@ -31,6 +31,16 @@ class HUD
   static constexpr float HEALTHBAR_WIDTH = 300.0F;
   static constexpr float HEALTHBAR_HEIGHT = 32.0F;
 
+  static constexpr float HEALTHBAR_DECOR_SEGMENT_X = 106.0F;
+  static constexpr float HEALTHBAR_DECOR_SEGMENT_Y = 41.0F;
+  static constexpr float HEALTHBAR_DECOR_SEGMENT_WIDTH = 92.0F;
+  static constexpr float HEALTHBAR_DECOR_SEGMENT_HEIGHT = 60.0F;
+  static constexpr float HEALTHBAR_DECOR_TAIL_X = 0.0F;
+  static constexpr float HEALTHBAR_DECOR_TAIL_Y = 0.0F;
+  static constexpr float HEALTHBAR_DECOR_TAIL_WIDTH = 0.0F;
+  static constexpr float HEALTHBAR_DECOR_TAIL_HEIGHT = 60.0F;
+  static constexpr float HEALTHBAT_DECOR_PIECE_OVERLAP = 0.0F;
+
   static constexpr float ASEFLAME_X = 175.0F;
   static constexpr float ASEFLAME_Y = 100.0F;
   static constexpr float ASEFLAME_WIDTH = 20.0F;
@@ -65,6 +75,8 @@ class HUD
 
   Rectangle *healthbar_empty_rect;
   Rectangle *healthbar_full_rect;
+  Rectangle *healthbar_decor_segment_rect;
+  Rectangle *healthbar_decor_tail_rect;
   Rectangle *aseflame_empty_rect;
   Rectangle *aseflame_full_rect;
   Rectangle *portrait_background_rect;
@@ -77,6 +89,8 @@ class HUD
 
   Texture *healthbar_empty_tex;
   Texture *healthbar_full_tex;
+  Texture *healthbar_decor_segment_tex;
+  Texture *healthbar_decor_tail_tex;
   Texture *aseflame_empty_tex;
   Texture *aseflame_full_tex;
   Texture *portrait_background_tex;
