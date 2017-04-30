@@ -1908,8 +1908,10 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 			Alex->effect.sprite.animate();
 			Alex->WorldObj::animateObj();
 			for (int i = 0; i < recVec.size(); i++) {
-				recVec[i]->effect.sprite.animate();
-				recVec[i]->WorldObj::animateObj();
+				if (recVec[i]->getType() != WorldObj::TYPE_WORLDOBJ) {
+					recVec[i]->effect.sprite.animate();
+					recVec[i]->WorldObj::animateObj();
+				}
 				_QuadTree->Insert(recVec[i]);	//insert all obj into tree
 
 			}

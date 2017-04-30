@@ -26,11 +26,7 @@ GLuint GameWindow::fontVBO = 0;
 GLuint GameWindow::stdShaderProgramId = 0;
 GLuint GameWindow::fontShaderProgramId = 0;
 
-std::unordered_map<std::string, std::unordered_map<GLchar, Glyph>> GameWindow::fontCharacters;
-
 int GameWindow::numObjects = 0;
-
-Shader* GameWindow::s;
 
 std::vector<TextObj> GameWindow::text;
 
@@ -38,8 +34,8 @@ struct Character
 {
   GLuint TextureID;   // ID handle of the glyph texture
   glm::ivec2 Size;    // Size of glyph
-  glm::ivec2 Bearing;  // Offset from baseline to left/top of glyph
-  GLuint Advance;    // Horizontal offset to advance to next glyph
+  glm::ivec2 Bearing; // Offset from baseline to left/top of glyph
+  GLuint Advance;     // Horizontal offset to advance to next glyph
 };
 
 std::map<GLchar, Character> Characters;
@@ -171,83 +167,73 @@ void GameWindow::drawSprite(float x, float y, float width, float height, Sprite 
 }
 
 /**
- * Draws the specified text string, in the specified font and color, at the
- * given position and within the given bounds. If the font specified does not
- * exist, or either of the dimensions of the bounding box are non-positive,
- * no text will be drawn.
- *
- * Param text: The string of text to be drawn
- * Param fontName: The string key for the font to be used, of the form
- * "fontName fontSize", e.g. "Arial 48"
- * Param x: The horizontal X coordinate of the text region's top-left corner
- * Param y: The vertical Y coordinate of the text region's top-right corner
- * Param fieldWidth: The maximum width, in device-independent pixels, of any
- * line in the text region
- * Param fieldHeight: The maximum height, in device-inpedenant pixels, of the
- * written text; if the string provided would require more space to draw than is
- * available, then it will be truncated
- * Param color: The color in which to draw the text, as integers [0, 255]
+ * Draws the specified text string at the given coordinates, in the given color.
+ * 
+ * Param text: the string of text to drawn to the screen
+ * Param x: the horizontal x position of the text's top-left corner
+ * Param y: the vertical y positon of the text's top-left corner
+ * Param w: the width after which the text will wrap
+ * Param h: not used
+ * Param color: the color in which to draw the text
  */
-void GameWindow::drawText(const std::string& text, const std::string& fontName, float x, float y, float fieldWidth, float fieldHeight, glm::ivec3 color)
+void GameWindow::RenderText(std::string& text, GLfloat x, GLfloat y, GLfloat w, GLfloat h, GLfloat scale, glm::vec3 color)
 {
-  // Return immediately if arguments are invalid
-  if(GameWindow::fontCharacters.find(fontName) == GameWindow::fontCharacters.end()) return;
-  else if(fieldWidth <= 0.0F || fieldHeight <= 0.0F) return;
-
-  glm::vec2 textBoundsTL = GameWindow::dpCoordToGL(x, y);
-  glm::vec2 currentTextTL(textBoundsTL);
-
-  if(color.x < 0) color.x = 0; else if(color.x > 255) color.x = 255;
-  if(color.y < 0) color.y = 0; else if(color.y > 255) color.y = 255;
-  if(color.z < 0) color.z = 0; else if(color.z > 255) color.z = 255;
-  GLfloat colorRed   = static_cast<float>(color.x) / 255.0F;
-  GLfloat colorGreen = static_cast<float>(color.y) / 255.0F;
-  GLfloat colorBlue  = static_cast<float>(color.z) / 255.0F;
+  y = WINDOW_HEIGHT_DP - y - 18;
+  GLfloat lineStart = x;
+  w = w + x;
 
   glUseProgram(GameWindow::fontShaderProgramId);
-  // GameWindow::fontShader.Use();
-  glUniform3f(glGetUniformLocation(GameWindow::fontShaderProgramId, "textColor"), colorRed, colorGreen, colorBlue);
+  glUniform3f(glGetUniformLocation(fontShaderProgramId, "textColor"), color.x, color.y, color.z);
   glActiveTexture(GL_TEXTURE0);
-  glBindVertexArray(GameWindow::fontVAO);
+  glBindVertexArray(VAO);
 
-  glEnable(GL_CULL_FACE);
-  glEnable(GL_BLEND);
-  glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+  // Iterate through all characters
+  std::string::const_iterator c;
+  for(c = text.begin(); c != text.end(); c++) {
+    Character ch = Characters[*c];
 
-  for(auto& ch : text) {
-    if(ch < '\x00' || ch > '\x7F')
-      continue;
+    if(*c == '\n' || ((*c == ' ') && (x > w))) {
+      if(*c == ' ' || *c == '_')
+        y -= 18 * scale;
+      x = lineStart;
+      y -= (ch.Size.y + ch.Bearing.y) * scale;
+    }
 
-    Glyph glyph = fontCharacters[fontName][ch];
-    GLfloat chX = 0; /*currentTextTL.x + dpCoordToGL(glyph.bearing.x, 0).x;*/
-    GLfloat chY = 0; /*currentTextTL.y - dpCoordToGL(0, glyph.size.y - glyph.bearing.y).y;*/
-    GLfloat chW = 0.10F; /*dpDimensionsToGL(static_cast<GLfloat>(glyph.size.x), 0).x;*/
-    GLfloat chH = 0.10F; /*dpDimensionsToGL(0, static_cast<GLfloat>(glyph.size.y)).y;*/
+    if(*c == ' ') {
+      x += (ch.Bearing.x * scale);
+      x += (ch.Advance >> 6) * scale;
+    }
+    else if(*c != '\n') {
+      GLfloat xpos = x + ch.Bearing.x * scale;
+      GLfloat ypos = y - (ch.Size.y - ch.Bearing.y) * scale;
+      GLfloat w = ch.Size.x * scale;
+      GLfloat h = ch.Size.y * scale;
 
-    //std:://////cout << "Glyph coordinates: (" << chX << ", " << chY << ")" << std::endl;
-    //std:://////cout << "Glyph dimensions: (" << chW << ", " << chH << ")" << std::endl;
+      GLfloat vertices[6][4] = {
+        {xpos,     ypos + h, 0.0, 0.0},
+        {xpos,     ypos,     0.0, 1.0},
+        {xpos + w, ypos,     1.0, 1.0},
 
-    GLfloat vertices[6][4] = {
-      {chX,       chY + chH, 0.0F, 0.0F}, // Bottom left
-      {chX,       chY,       0.0F, 1.0F}, // Top left
-      {chX + chW, chY,       1.0F, 1.0F}, // Top right
+        {xpos,     ypos + h, 0.0, 0.0},
+        {xpos + w, ypos,     1.0, 1.0},
+        {xpos + w, ypos + h, 1.0, 0.0}
+      };
 
-      {chX,       chY + chH, 0.0F, 0.0F}, // Bottom left
-      {chX + chW,       chY, 1.0F, 1.0F}, // Top right
-      {chX + chW, chY + chH, 1.0F, 0.0F}, // Bottom right
-    };
+      // Render glyph texture over quad
+      glBindTexture(GL_TEXTURE_2D, ch.TextureID);
 
-    glBindTexture(GL_TEXTURE_2D, glyph.textureId);
-    glBindBuffer(GL_ARRAY_BUFFER, fontVBO);
-    glBufferSubData(GL_ARRAY_BUFFER, 0, sizeof(vertices), vertices);
-    glBindBuffer(GL_ARRAY_BUFFER, 0);
+      // Update contents of VBO memory
+      glBindBuffer(GL_ARRAY_BUFFER, VBO);
+      glBufferSubData(GL_ARRAY_BUFFER, 0, sizeof(vertices), vertices); // Be sure to use glBufferSubData and not glBufferData
+      glBindBuffer(GL_ARRAY_BUFFER, 0);
 
-    glDrawArrays(GL_TRIANGLES, 0, 6);
+      // Draw the character
+      glDrawArrays(GL_TRIANGLES, 0, 6);
 
-    currentTextTL.x += (glyph.advance >> 6);
+      // Now advance cursors for next glyph (note that advance is number of 1/64 pixels)
+      x += (ch.Advance >> 6) * scale; // Bitshift by 6 to get value in pixels (2^6 = 64 (divide amount of 1/64th pixels by 64 to get amount of pixels))
+    }
   }
-
-  glDisable(GL_CULL_FACE);
 
   glBindVertexArray(0);
   glBindTexture(GL_TEXTURE_2D, 0);
@@ -262,7 +248,7 @@ void GameWindow::refresh()
 
   glClearColor(0.5F, 0.5F, 0.5F, 1.0F);
   glClear(GL_COLOR_BUFFER_BIT);
-  //RenderText(*osi::GameWindow::s, "This is sample text", 25.0f, 25.0f, 1.0f, glm::vec3(0.5, 0.8f, 0.2f));
+
   for(GLint i = 0; i < numObjects; ++i) {
     glBindTexture(GL_TEXTURE_2D, textures[i]);//Texture::textureId[textures[i] - 1]);
     glBindVertexArray(vertexArrayObjectId[i]);
@@ -275,14 +261,13 @@ void GameWindow::refresh()
   for(int i = 0; i < text.size(); ++i) {
     RenderText(text[i].getText(), text[i].getX(), text[i].getY(), text[i].getWidth(), text[i].getHeight(), 1, text[i].getColor());
   }
-  //RenderText(*osi::GameWindow::s, "This is sample text", 25.0f, 25.0f, 1.0f, glm::vec3(0.5, 0.8f, 0.2f));
+
   glBindVertexArray(0);
   vertexArrayObjectId.clear();
   vertexBufferObjectId.clear();
   elementBufferObjectId.clear();
   textures.clear();
   numObjects = 0;
- // RenderText(*osi::GameWindow::s, "This is sample text", 25.0f, 25.0f, 1.0f, glm::vec3(0.5, 0.8f, 0.2f));
   text.clear();
 
   glfwSwapBuffers(GameWindow::window);
@@ -535,13 +520,6 @@ void GameWindow::setupFont(const std::string& fontName, unsigned int fontHeight)
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 
-    GameWindow::fontCharacters[fontName][ch] = {
-      textureId,
-      {face->glyph->bitmap.width, face->glyph->bitmap.rows},
-      {face->glyph->bitmap_left, face->glyph->bitmap_top},
-      face->glyph->advance.x
-    };
-
     Character character = {
       textureId,
       glm::ivec2(face->glyph->bitmap.width, face->glyph->bitmap.rows),
@@ -567,62 +545,6 @@ void GameWindow::setupFont(const std::string& fontName, unsigned int fontHeight)
 
   glBindBuffer(GL_ARRAY_BUFFER, 0);
   glBindVertexArray(0);
-}
-
-void GameWindow::RenderText(std::string text, GLfloat x, GLfloat y, GLfloat w, GLfloat h, GLfloat scale, glm::vec3 color)
-{
-  y = WINDOW_HEIGHT_DP - y - 18;
-  GLfloat lineStart = x;
-  w = w + x;
-
-  glUseProgram(GameWindow::fontShaderProgramId);
-  glUniform3f(glGetUniformLocation(fontShaderProgramId, "textColor"), color.x, color.y, color.z);
-  glActiveTexture(GL_TEXTURE0);
-  glBindVertexArray(VAO);
-
-  // Iterate through all characters
-  std::string::const_iterator c;
-  for(c = text.begin(); c != text.end(); c++) {
-    Character ch = Characters[*c];
-    if(*c == '\n' || ((*c == ' ') && (x > w))) {
-      if(*c == ' ' || *c == '_')y -= 18 * scale;
-      x = lineStart;
-      y -= (ch.Size.y + ch.Bearing.y) * scale;
-    }
-    if(*c == ' ') {
-      x += (ch.Bearing.x * scale);
-      x += (ch.Advance >> 6) * scale;
-    }
-    else if(*c != '\n') {
-      GLfloat xpos = x + ch.Bearing.x * scale;
-      GLfloat ypos = y - (ch.Size.y - ch.Bearing.y) * scale;
-      GLfloat w = ch.Size.x * scale;
-      GLfloat h = ch.Size.y * scale;
-      // Update VBO for each character
-      GLfloat vertices[6][4] = {
-        { xpos,     ypos + h,   0.0, 0.0 },
-        { xpos,     ypos,       0.0, 1.0 },
-        { xpos + w, ypos,       1.0, 1.0 },
-
-        { xpos,     ypos + h,   0.0, 0.0 },
-        { xpos + w, ypos,       1.0, 1.0 },
-        { xpos + w, ypos + h,   1.0, 0.0 }
-      };
-      // Render glyph texture over quad
-      glBindTexture(GL_TEXTURE_2D, ch.TextureID);
-      // Update content of VBO memory
-      glBindBuffer(GL_ARRAY_BUFFER, VBO);
-      glBufferSubData(GL_ARRAY_BUFFER, 0, sizeof(vertices), vertices); // Be sure to use glBufferSubData and not glBufferData
-
-      glBindBuffer(GL_ARRAY_BUFFER, 0);
-      // Render quad
-      glDrawArrays(GL_TRIANGLES, 0, 6);
-      // Now advance cursors for next glyph (note that advance is number of 1/64 pixels)
-      x += (ch.Advance >> 6) * scale; // Bitshift by 6 to get value in pixels (2^6 = 64 (divide amount of 1/64th pixels by 64 to get amount of pixels))
-    }
-  }
-  glBindVertexArray(0);
-  glBindTexture(GL_TEXTURE_2D, 0);
 }
 
 /**

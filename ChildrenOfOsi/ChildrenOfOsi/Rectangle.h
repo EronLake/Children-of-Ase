@@ -51,6 +51,7 @@ public:
 	float getWidth() { return width; }
 	float getHeight() { return height; }
 	Vector2f getLoc() { return topLeft; }
+	Vector2f get_mid_loc() { return {getX()+(width/2),getY()+(height / 2) }; }
 	Vector2f getBL() { return{ getX()-105, getY() + height + 5 }; }
 	Vector2f getTR() { return{ getX()+width+5, getY()-105 }; }
 	Vector2f getBR() { return{ getX()+width+5, getY() + height+5 }; }
