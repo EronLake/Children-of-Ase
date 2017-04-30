@@ -174,6 +174,9 @@ void DialogueController::PlayerConversationPoint()
 			Planner* planner = AIController::get_plan(CheckClass::isHero(other)->name);
 			if (planner->quests_given.size() > 0) {
 				planner->quests_given.push_back(planner->get_current_action());
+				Hero* shango = dynamic_cast<Hero*>(player);
+				int time_limit = 3600;                 //1 minute limit to complete quest for now
+				shango->add_quest(planner->get_current_action(), time_limit);
 			}
 			Containers::conv_point_table[player_conv_point_choice]->apply_postconditions(true, player, temp_hero);
 		}
@@ -187,7 +190,6 @@ void DialogueController::PlayerConversationPoint()
 		}
 
 		else if (player_conv_point_choice == "Insult") {
-
 			Containers::conv_point_table[player_conv_point_choice]->apply_postconditions(true, player, temp_hero);
 		}
 
