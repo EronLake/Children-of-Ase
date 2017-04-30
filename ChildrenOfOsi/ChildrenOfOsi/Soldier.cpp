@@ -26,6 +26,8 @@ cdTime(0), swingLeft(true)
   incapacitated = false;
   down_time = 0;
   warning = 0;
+  ase = 100;
+  maxAse = 100;
 }
 
 Soldier::Soldier(Vector2f p_topLeft, float p_width, float p_height): NPC(p_topLeft, p_width, p_height),
@@ -47,6 +49,8 @@ cdTime(0), swingLeft(true)
   incapacitated = false;
   down_time = 0;
   warning = 0;
+  ase = 100;
+  maxAse = 100;
 }
 
 void Soldier::addAttackType(Attack* a)

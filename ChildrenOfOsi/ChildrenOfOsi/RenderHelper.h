@@ -50,13 +50,14 @@ public:
 	WorldObj* fullBound;
 	RenderManager* manager;
 	RiverObj* rivObj;
+
+	static GameMap* gmap;
 private:
 	
 	DialogueGui* convoGui;
 	Rectangle* TutGui;
 	Rectangle* logo_gui;
 	HUD* hud_ptr;
-	GameMap* gmap;
 	
 	std::vector<WorldObj*> objVec;
 	std::vector<WorldObj*> fullVec;
