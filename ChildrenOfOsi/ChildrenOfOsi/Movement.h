@@ -10,12 +10,13 @@
 #include "RiverObj.h"
 #include "AIController.h"
 #include "PlayerActExecFunctions.h"
+#include "UniformGrid.h"
 
 class PhysicsManager;
 
 class Movement {
 public:
-	Movement(QuadTree* QT, RiverObj* _rivObj);
+	Movement(QuadTree* QT, UniformGrid* _UG, RiverObj* _rivObj);
 	~Movement();
 	//void playerAction(string task_name, WorldObj* player);
 	//static void initTree(WorldObj* screen);
@@ -32,6 +33,7 @@ public:
 	int attack(WorldObj* obj);
 	//void init_task_map();
     QuadTree* tree;
+	UniformGrid* grid;
 	RiverObj* rivObj;
 	PhysicsManager* manager;
 
@@ -52,4 +54,5 @@ private:
 	bool coordOverlap(float value, float min, float max) { return (value >= min) && (value <= max); }
 	//hold obj to check with. init before each move funcs call
 	std::vector<WorldObj*> objVec;
+	std::vector<Line*> lineVec;
 };

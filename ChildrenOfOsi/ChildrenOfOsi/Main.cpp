@@ -102,7 +102,7 @@ void set_file_with_thread(Texture* t, const pair<string, int>* p_tuple) {
 }
 
 int main() {
-	WorldObj* screen = new WorldObj(Vector2f(0.0, 0.0), 20000U, 20000U);	//init screen
+	WorldObj* screen = new WorldObj(Vector2f(0.0, 0.0), 25000U, 25000U);	//init screen
 
 	QuadTree* collideTree = new QuadTree(0, *screen);
 	GameWindow::init();
@@ -122,6 +122,9 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	RiverObj* rivObj = new RiverObj();
 	rivObj->initialize_lines();
 
+	UniformGrid* grid = new UniformGrid();
+	grid->insert_objs_to_grid(rivObj->getLines());
+	
 	vector<WorldObj*> recVec;
 	vector<WorldObj*>* recVec_ptr = &recVec;
 	vector<Hero*> heroes;
@@ -141,7 +144,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 
 	RenderManager* RenM = new RenderManager(mLog, tBuffer, _QuadTree, gameplay_functions, rivObj);
 	DummyController* DumM = new DummyController(mLog, tBuffer);
-	PhysicsManager* PhysM = new PhysicsManager(mLog, tBuffer, _QuadTree, rivObj);
+	PhysicsManager* PhysM = new PhysicsManager(mLog, tBuffer, _QuadTree, grid, rivObj);
 	//PartyManager* partyM = new PartyManager(gameplay_functions, Alex);
 	memManager* memM = new memManager(mLog, tBuffer);
 	TestManager* TestM = new TestManager(mLog, tBuffer);
@@ -1856,9 +1859,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 					RegionState::switch_music = false;
 				}
 
-			}
-
-
+			}   
 
 			gameplay_functions->drawTut(Alex);
 
@@ -1904,6 +1905,8 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 			}
 			start_tick = clock();
 			_QuadTree->clear();
+			grid->clear();
+			grid->insert_objs_to_grid(rivObj->getLines());
 			Alex->updateCD();
 			Alex->effect.sprite.animate();
 			Alex->WorldObj::animateObj();

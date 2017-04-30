@@ -31,5 +31,6 @@ void RiverObj::initialize_lines() {
 	if (!RIVER_COLLIDE) lines.clear();
 	//std:://cout << "TOTAL SIZE OF THE LINES VECTOR IS " << lines.size() << std::endl;
 	//lines.clear();
+	std::cout << "SIZE OF THE LINES IS " << lines.size() << std::endl;
 	
 }

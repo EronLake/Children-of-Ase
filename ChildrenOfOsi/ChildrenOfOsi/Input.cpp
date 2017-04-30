@@ -546,7 +546,7 @@ void Input::add_point_to_file() {
 	////cout << "XPOS AND YPOS ARE " << xpos << ", " << ypos << endl;
 
 	int mouseX = (rHelper->camera->getX() + (xpos * map_zoom) * GameWindow::WINDOW_WIDTH_DP / 1300);
-	int mouseY = 20000 - (rHelper->camera->getY() + (ypos * map_zoom) * GameWindow::WINDOW_HEIGHT_DP / 700);
+	int mouseY = 25000 - (rHelper->camera->getY() + (ypos * map_zoom) * GameWindow::WINDOW_HEIGHT_DP / 700);
 	//int mouseX = rHelper->camera->getX() - (150.0 / 2) + ((rHelper->getCameraSize().getXloc() / 2)*map_zoom);
 	//int mouseY = rHelper->camera->getY() - (150.0 / 2) + ((rHelper->getCameraSize().getYloc() / 2)*map_zoom);
 
@@ -786,7 +786,7 @@ void Input::InputCheck()
 					double ypos;
 					glfwGetCursorPos(GameWindow::window, &xpos, &ypos);
 					double mouseX = rHelper->camera->getX() + (xpos * map_zoom) * GameWindow::WINDOW_WIDTH_DP / 1280;
-					double mouseY = 20000 - (rHelper->camera->getY() + (ypos * map_zoom) * GameWindow::WINDOW_HEIGHT_DP / 720);
+					double mouseY = 25000 - (rHelper->camera->getY() + (ypos * map_zoom) * GameWindow::WINDOW_HEIGHT_DP / 720);
 					//for (int i = 0; i < 10; i++) {
 						cout << "MOUSEX AND MOUSEY ARE " << mouseX << ", " << mouseY << endl;
 

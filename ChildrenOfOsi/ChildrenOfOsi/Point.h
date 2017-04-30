@@ -26,7 +26,7 @@ public:
 		GameWindow::drawSprite(getX() - _x, getY() - _y, 50, 50, sprite);
 	}
 	void drawObjRiv(float _x, float _y) {
-		GameWindow::drawSprite(getX() - _x, (20000 - getY()) - _y, 20, 20, sprite);
+		GameWindow::drawSprite(getX() - _x, (25000 - getY()) - _y, 20, 20, sprite);
 	}
 
 private:
