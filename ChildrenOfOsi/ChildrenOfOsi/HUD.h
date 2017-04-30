@@ -31,6 +31,17 @@ class HUD
   static constexpr float HEALTHBAR_WIDTH = 300.0F;
   static constexpr float HEALTHBAR_HEIGHT = 32.0F;
 
+  static constexpr float HEALTHBAR_DECOR_SEGMENT_X = 106.0F;
+  static constexpr float HEALTHBAR_DECOR_SEGMENT_Y = 41.0F;
+  static constexpr float HEALTHBAR_DECOR_SEGMENT_WIDTH = 92.0F;
+  static constexpr float HEALTHBAR_DECOR_SEGMENT_HEIGHT = 50.0F;
+  static constexpr float HEALTHBAR_DECOR_TAIL_X = 362.5F;
+  static constexpr float HEALTHBAR_DECOR_TAIL_Y = 41.0F;
+  static constexpr float HEALTHBAR_DECOR_TAIL_WIDTH = 77.5F;
+  static constexpr float HEALTHBAR_DECOR_TAIL_HEIGHT = 50.0F;
+  static constexpr float HEALTHBAT_DECOR_PIECE_OVERLAP = 32.0F;
+  static constexpr int HEALTHBAR_DECOR_PIECE_COUNT = 4;
+
   static constexpr float ASEFLAME_X = 175.0F;
   static constexpr float ASEFLAME_Y = 100.0F;
   static constexpr float ASEFLAME_WIDTH = 20.0F;
@@ -55,6 +66,8 @@ class HUD
   static constexpr float MINIMAP_CURSOR_Y = 15.625F;
   static constexpr float MINIMAP_CURSOR_WIDTH = 8.0F;
   static constexpr float MINIMAP_CURSOR_HEIGHT = 8.0F;
+  static constexpr float MAP_WIDTH = 25000.0F;
+  static constexpr float MAP_HEIGHT = 25000.0F;
 
   static constexpr float KEYBIND_DISPLAY_X = 825.0F;
   static constexpr float KEYBIND_DISPLAY_Y = 405.0F;
@@ -65,6 +78,8 @@ class HUD
 
   Rectangle *healthbar_empty_rect;
   Rectangle *healthbar_full_rect;
+  Rectangle *healthbar_decor_segment_rect;
+  Rectangle *healthbar_decor_tail_rect;
   Rectangle *aseflame_empty_rect;
   Rectangle *aseflame_full_rect;
   Rectangle *portrait_background_rect;
@@ -77,6 +92,8 @@ class HUD
 
   Texture *healthbar_empty_tex;
   Texture *healthbar_full_tex;
+  Texture *healthbar_decor_segment_tex;
+  Texture *healthbar_decor_tail_tex;
   Texture *aseflame_empty_tex;
   Texture *aseflame_full_tex;
   Texture *portrait_background_tex;

@@ -359,12 +359,6 @@
 	 }
     },
 
-	"Bribe Quest_Templates": {
-	 "1": {
-        "1": "Bribe Quest"
-	 }
-    },
-
 	"No Quest_Templates": {
 	 "1": {
         "1": "No Quest"
@@ -380,6 +374,12 @@
 	"Quest_In_Progress_Templates": {
 	 "1": {
         "1": "Quest_In_Progress"
+	 }
+    },
+
+	"Exit Quest_Templates": {
+	 "1": {
+        "1": "Exit Quest"
 	 }
     },
 
