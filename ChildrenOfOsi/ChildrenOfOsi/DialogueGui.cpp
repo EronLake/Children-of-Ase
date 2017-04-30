@@ -171,6 +171,9 @@ void DialogueGui::drawGui()
 	if (DialogueController::getState() == 9) {
 		GameWindow::createText("Exit", 292, 390 + (18 * 1), 544, 45, red);
 	}
+	if (DialogueController::getState() == 10) {
+		GameWindow::createText("Next", 292, 390 + (18 * 1), 544, 45, red);
+	}
 }
 
 /*Removes all appearances of a specified char(charsToRemove) from a 

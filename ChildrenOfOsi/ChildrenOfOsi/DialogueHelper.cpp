@@ -132,31 +132,24 @@ dialogue_point DialogueHelper::choose_conv_pt(std::vector<ConversationLogObj*> c
 	if (curr_conversation_log.size() > 0) {
 		if (curr_conversation_log[curr_conversation_log.size() - 1]->get_conv_point()->get_name() == "Ask_For_Quest") {
 			Planner* p = AIController::get_plan(other->name);
-
+			dialogue_point diog_pt = { "No Quest","No Quest" };
 			///////////////////////////////////////////////////////
 			/*Stand in stuff to check whether or not NPC wants to give quest
 			to player when the player asks for one. NPC currently always
 			gives quest to player.*/
 			///////////////////////////////////////////////////////
-			if (give_quest()) {//do they wanna give it to you?
+			if (give_quest() && AIController::quest_response(other, player)) {//do they wanna give it to you?
 				DialogueHelper::quest = p->get_current_action();
-				bool has_quest = true;
+				bool has_quest = false;//initially assume player does not have quest from this NPC
 				for (int i = 0; i < p->quests_given.size(); ++i) {//did they already give you a quest that you are currently working on?
-					if (p->quests_given[i]->getDoer()->name == SHANGO && p->quests_given[i]->executed == true)
-						has_quest = false;
+					if (p->quests_given[i]->getDoer()->name == SHANGO && p->quests_given[i]->executed == false)
+						has_quest = true;
 				}
-				if (has_quest) {
-					
-					if (true) {
-						return{ "Offer_Quest","Offer_Quest" };
-					}
+				if (!has_quest) {
+					diog_pt = { "Offer_Quest","Offer_Quest" };
 				}
-				else
-					return{ "No Quest","No Quest" };
+				return diog_pt;
 			}
-			else
-			    return{ "No Quest","No Quest" };
-			//return{ "Offer_Quest", "Offer_Quest" };
 		}
 	}
 

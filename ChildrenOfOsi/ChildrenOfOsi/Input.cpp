@@ -853,6 +853,8 @@ void Input::InputCheck()
 			}
 			if (Q) {
 				//DialogueController::exitDialogue();
+				//DialogueController::state = 7;
+				DialogueController::create_farewell();
 
 				WorldObj* other = DialogueController::getOther();
 				//std:://cout << "HERO: " << other->getName() << std::endl;
@@ -1043,6 +1045,11 @@ void Input::InputCheck()
 						count = 10;
 						DialogueController::exitDialogue();
 						PlayerActExecFunctions::execute_dialog();
+					}
+					else if (DialogueController::getState() == 10) {
+						count = 10;
+						DialogueController::create_farewell();
+						DialogueController::state = 7;
 					}
 				}
 			}
