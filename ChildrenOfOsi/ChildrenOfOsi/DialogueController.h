@@ -55,6 +55,7 @@ public:
 	static WorldObj* other;
 	static int state;
 	static std::string replyString;
+	static bool quest_declined;
 
 	//States:
 	//0 is no conversation

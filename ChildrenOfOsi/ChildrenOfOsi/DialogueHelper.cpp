@@ -138,19 +138,21 @@ dialogue_point DialogueHelper::choose_conv_pt(std::vector<ConversationLogObj*> c
 			to player when the player asks for one. NPC currently always
 			gives quest to player.*/
 			///////////////////////////////////////////////////////
-			if (give_quest()) {
-				if (p->quests_given.size() == 0) {
-					Planner* planner = AIController::get_plan(other->name);
-					DialogueHelper::quest = planner->get_current_action();
+			if (give_quest()) {//do they wanna give it to you?
+				DialogueHelper::quest = p->get_current_action();
+				bool has_quest = true;
+				for (int i = 0; i < p->quests_given.size(); ++i) {//did they already give you a quest that you are currently working on?
+					if (p->quests_given[i]->getDoer()->name == SHANGO && p->quests_given[i]->executed == true)
+						has_quest = false;
+				}
+				if (has_quest) {
+					
 					if (true) {
-						//replace the below return with a return of
-						//one all encompassing dialogue_point
-						//every quest will use the same conversation point
-						//and the actual text for the action and topic
-						//portions will be filled in based on the action object
 						return{ "Offer_Quest","Offer_Quest" };
 					}
 				}
+				else
+					return{ "No Quest","No Quest" };
 			}
 			else
 			    return{ "No Quest","No Quest" };

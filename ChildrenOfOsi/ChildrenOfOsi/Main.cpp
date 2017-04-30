@@ -275,9 +275,19 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 
 	tBuffer->run();
 
-	gameplay_functions->init_map(Alex);
-
-	tBuffer->run();
+	HDC hdc = wglGetCurrentDC();
+	HGLRC mainContext = wglGetCurrentContext();
+	HGLRC loaderContextM = wglCreateContext(hdc);
+	wglShareLists(mainContext, loaderContextM);
+	std::thread tm([=]() {
+		wglMakeCurrent(hdc, loaderContextM);
+		RenderHelper::gmap->setTextures();
+		RenderHelper::gmap->loadTexture();
+		RenderHelper::gmap->setSprite();
+		wglMakeCurrent(nullptr, nullptr);
+		wglDeleteContext(loaderContextM);
+		glFinish();
+	});
 	
 
 	gameplay_functions->add_texture("objTexture", 0, 0, 0);
@@ -1061,8 +1071,8 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 		}
 		RegionState::regions.erase(RegionState::regions.begin()+closest);
 	}
-	HDC hdc = wglGetCurrentDC();
-	HGLRC mainContext = wglGetCurrentContext();
+	//HDC hdc = wglGetCurrentDC();
+	//HGLRC mainContext = wglGetCurrentContext();
 	HGLRC loaderContext0 = wglCreateContext(hdc);
 	wglShareLists(mainContext, loaderContext0);
 	std::thread t0([=]() {
@@ -1755,6 +1765,9 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 			}
 		}
 	});*/
+
+	tm.join();
+
 	current_game_state = game_state::main_menu;
 	while (GameWindow::isRunning()) {
 		while (current_game_state == game_state::main_menu) {
@@ -1824,8 +1837,10 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 			Alex->effect.sprite.animate();
 			Alex->WorldObj::animateObj();
 			for (int i = 0; i < recVec.size(); i++) {
-				recVec[i]->effect.sprite.animate();
-				recVec[i]->WorldObj::animateObj();
+				if (recVec[i]->getType() != WorldObj::TYPE_WORLDOBJ) {
+					recVec[i]->effect.sprite.animate();
+					recVec[i]->WorldObj::animateObj();
+				}
 				_QuadTree->Insert(recVec[i]);	//insert all obj into tree
 
 			}

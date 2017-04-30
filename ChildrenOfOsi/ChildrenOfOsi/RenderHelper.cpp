@@ -3,6 +3,7 @@
 #include <algorithm>
 #include <vector> 
 #include "RenderManager.h"
+GameMap* RenderHelper::gmap;
 
 
 RenderHelper::RenderHelper(QuadTree * QT, RiverObj* _rivObj)

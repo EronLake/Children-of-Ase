@@ -75,10 +75,12 @@ std::string player_conv_point_choice = "";
 std::string curr_hero_topic = "";
 
 //keep track of what heroes the player knows(2=Yemoja and 3=Oya)
-std::vector<int> DialogueController::heroes_player_knows = {2,3}; 
+std::vector<int> DialogueController::heroes_player_knows = {2,3};
 
 //keep add_hero_conv_points() function to one call per conversation
 bool first_call = true;
+
+bool DialogueController::quest_declined = false;
 
 DialogueController::DialogueController()
 {
@@ -175,16 +177,21 @@ void DialogueController::PlayerConversationPoint()
 	by doing any of these here, but this is probably not a good place.*/
 		if (player_conv_point_choice == "Bribe") {
 			Planner* planner = AIController::get_plan(CheckClass::isHero(other)->name);
+
+			if (planner->quests_given.size() > 0) {
+				planner->quests_given.push_back(planner->get_current_action());
+				Hero* shango = dynamic_cast<Hero*>(player);
+				int time_limit = 3600;                 //1 minute limit to complete quest for now
+				shango->add_quest(planner->get_current_action(), time_limit);
+			}
 			for (int i = 0; i < planner->quests_given.size(); ++i) {
 				if (planner->quests_given[i]->getDoer()->name == SHANGO &&
 					planner->get_current_action()->name.find("Bribe", 0) != string::npos) {
 					//set quest to complete here if it was a bribe one
+					planner->quests_given[i]->executed = false;
 				}
 
 			}
-			///if (planner->quests_given.size() > 0) {
-				///planner->quests_given.push_back(planner->get_current_action());
-			///}
 			Containers::conv_point_table[player_conv_point_choice]->apply_postconditions(true, player, temp_hero);
 		}
 		else if (player_conv_point_choice == "Compliment") {
@@ -197,7 +204,6 @@ void DialogueController::PlayerConversationPoint()
 		}
 
 		else if (player_conv_point_choice == "Insult") {
-
 			Containers::conv_point_table[player_conv_point_choice]->apply_postconditions(true, player, temp_hero);
 		}
 
@@ -248,11 +254,18 @@ void DialogueController::PlayerResponse()
 		if (temp_hero = CheckClass::isHero(other)) {
 			Planner* planner = AIController::get_plan(CheckClass::isHero(other)->name);
 			if (choice[ConvPointName] == "Accept_Quest") {
-				DialogueController::quest = planner->get_current_action();
+				//DialogueController::quest = planner->get_current_action();
+				quest->setDoer(player);
+				//quest->executed = true;
+				//player->quest = quest;
+				player->add_quest(quest, 2);
 				planner->quests_given.push_back(quest); //gives npc record of what they gave player
 				//player->cur_action = quest; //gives player record of what they are doing
-				DialogueHelper::accepted_quest = true;
 			}
+			if (choice[ConvPointName] == "Decline_Quest") {
+				quest_declined = true;
+			}
+
 		}
 
 		//get a sentence to say based on player's reply option selection
@@ -637,7 +650,7 @@ void DialogueController::startConversation(WorldObj* n, bool playerTalk)
 
 	/*handles what the greeting phrase should be based on whether or not the player
 	has taken or completed a quest from the npc*/
-	if (other->getName() == "Yemoja") {
+	if (temp_hero = CheckClass::isHero(other)) {
 		Planner* planner = AIController::get_plan(CheckClass::isHero(other)->name);
 		if (planner->quests_given.size() == 1)//Bad! Check boolean in Action object instead.
 			message = n->getName() + ": " + dialogue.gen_dialog({ "Quest_In_Progress","Quest_In_Progress" }, temp_hero);
@@ -674,26 +687,27 @@ void DialogueController::exitDialogue()
 {
 	Hero* temp_hero;
 	if (temp_hero = CheckClass::isHero(other)){//check if "other" is a hero before seeing if they can offer you a quest
-		if(offer_quest_on_exit(temp_hero) == false){
-			/*does normal exitDialogue stuff if quest is not given*/
-			other = nullptr;
-			state = 0;
-			DialogueController::scroll_control = 0;
+		if (offer_quest_on_exit(temp_hero) == false || quest_declined == true) {
+				/*does normal exitDialogue stuff if quest is not given or if player has denied quest offer*/
+				other = nullptr;
+				state = 0;
+				DialogueController::scroll_control = 0;
 
-			for (int i = 0; i < curr_conversation_log.size(); i++) {
+				for (int i = 0; i < curr_conversation_log.size(); i++) {
 
-				//delete memory allocated for instance of Memory class here
-				//delete tmp_top.second;
-				//delete memory allocated for conversation log object here
-				if (curr_conversation_log[i] != nullptr)
-					delete curr_conversation_log[i];
+					//delete memory allocated for instance of Memory class here
+					//delete tmp_top.second;
+					//delete memory allocated for conversation log object here
+					if (curr_conversation_log[i] != nullptr)
+						delete curr_conversation_log[i];
+				}
+
+				curr_conversation_log.clear();
+
+				remove_hero_related_conv_points();
+				first_call = true;
 			}
-
-			curr_conversation_log.clear();
-
-			remove_hero_related_conv_points();
-			first_call = true;
-		}
+		
 	}
 	/*does normal exitDialogue stuff if "other" is not a hero*/
 	else {
@@ -880,11 +894,11 @@ bool DialogueController::offer_quest_on_exit(Hero* temp_hero) {
 	if (dialogue.give_quest()) {
 		bool has_quest = false;
 		for (int i = 0; i < planner->quests_given.size(); ++i) {
-			if (planner->quests_given[i]->getDoer()->name == SHANGO)
+			if (planner->quests_given[i]->getDoer()->name == SHANGO && planner->quests_given[i]->executed == false)
 				has_quest = true;
 		}
-		if (planner->quests_given.size() > 0)//stand in Bad!
-			has_quest = true;//stand in Bad! dont wanna be checking the size of quest vector
+		//if (planner->quests_given.size() > 0)//stand in Bad!
+			//has_quest = true;//stand in Bad! dont wanna be checking the size of quest vector
 		if (!has_quest) {
 
 			dialogue_point reply_diog_pt = { "Exit Quest","Exit Quest" };

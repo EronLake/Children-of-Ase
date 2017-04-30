@@ -31,6 +31,7 @@ void Texture::load()
 void Texture::setFile(const std::string& fileName, int f) {
 	////std:://cout << "WORKING WITH PATH " << fileName << std::endl;
 	this->imageFile = fileName; 
+	std::lock_guard<std::mutex> guard(mtx);
 	this->load();
 	this->setFrames(f);
 }

@@ -1,32 +1,38 @@
+
 #include "Sprite.h"
+
+std::mutex mut;
 
 /**
  * Changes this sprite to wrap the texture specified.
  */
 void Sprite::setTexture(Texture *t)
 {
-  if(tex == t || lock) return;
-  tex = t;
-  index = 0;
-  start = 0;
-  stop = tex->getFrameWidth();
-  top = tex->getHeight();
-  bottom = 0;
-  tempTime = 0;
+	std::lock_guard<std::mutex> guard(mut);
+	if (tex == t || lock) return;
+	tex = t;
+	index = 0;
+	start = 0;
+	stop = tex->getFrameWidth();
+	top = tex->getHeight();
+	bottom = 0;
+	tempTime = 0;
 }
 
 void Sprite::reset_texture()
 {
-  index = 0;
-  start = 0;
-  stop = tex->getFrameWidth();
-  top = tex->getHeight();
-  bottom = 0;
-  tempTime = 0;
+	std::lock_guard<std::mutex> guard(mut);
+	index = 0;
+	start = 0;
+	stop = tex->getFrameWidth();
+	top = tex->getHeight();
+	bottom = 0;
+	tempTime = 0;
 }
 
 void Sprite::setIdleTexture(Texture *t)
 {
+	std::lock_guard<std::mutex> guard(mut);
   if(idle == t || lock)
     return;
   else {
@@ -45,6 +51,7 @@ void Sprite::setIdleTexture(Texture *t)
  */
 void Sprite::animate()
 {
+	//std::lock_guard<std::mutex> guard(mut);
   ++this->tempTime;
   if(this->tempTime == 2) {
     if(this->index < this->tex->getFrames() - 1) {
