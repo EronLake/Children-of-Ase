@@ -340,7 +340,7 @@ Hero* AIController::pick_quest_doer(Action* quest) {
 * Returns true if the asker meets minimum relationship requirements (all stats above 50)
 */
 bool AIController::quest_response(Hero* doer, Hero* asker) {
-	bool response = false;
+	bool response = true;//changed to true for testing purposes
 	Relationship* our_rel = doer->rel[asker->name];
 	if (our_rel->getAffinity() > 50 && our_rel->getNotoriety() > 50 && our_rel->getStrength() > 50)
 	{

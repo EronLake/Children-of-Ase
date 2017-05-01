@@ -102,7 +102,7 @@ void set_file_with_thread(Texture* t, const pair<string, int>* p_tuple) {
 }
 
 int main() {
-	WorldObj* screen = new WorldObj(Vector2f(0.0, 0.0), 20000U, 20000U);	//init screen
+	WorldObj* screen = new WorldObj(Vector2f(0.0, 0.0), 25000U, 25000U);	//init screen
 
 	QuadTree* collideTree = new QuadTree(0, *screen);
 	GameWindow::init();
@@ -122,8 +122,13 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	RiverObj* rivObj = new RiverObj();
 	rivObj->initialize_lines();
 
+	UniformGrid* grid = new UniformGrid();
+	grid->insert_objs_to_grid(rivObj->getLines());
+	
 	vector<WorldObj*> recVec;
+	vector<WorldObj*> movVec;
 	vector<WorldObj*>* recVec_ptr = &recVec;
+	vector<WorldObj*>* movVec_ptr = &movVec;
 	vector<Hero*> heroes;
 
 	/* MULTITHREADING SETUP */
@@ -141,7 +146,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 
 	RenderManager* RenM = new RenderManager(mLog, tBuffer, _QuadTree, gameplay_functions, rivObj);
 	DummyController* DumM = new DummyController(mLog, tBuffer);
-	PhysicsManager* PhysM = new PhysicsManager(mLog, tBuffer, _QuadTree, rivObj);
+	PhysicsManager* PhysM = new PhysicsManager(mLog, tBuffer, _QuadTree, grid, rivObj);
 	//PartyManager* partyM = new PartyManager(gameplay_functions, Alex);
 	memManager* memM = new memManager(mLog, tBuffer);
 	TestManager* TestM = new TestManager(mLog, tBuffer);
@@ -200,7 +205,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	RegionState::next_region = next_region;
 
 
-	Input* iController = new Input(gameplay_functions, Alex, RenM->renderHelper, tBuffer, recVec_ptr);
+	Input* iController = new Input(gameplay_functions, Alex, RenM->renderHelper, tBuffer, recVec_ptr, movVec_ptr);
 
 	gameplay_functions->add_hero("Yemoja", 6445.0, 10355.0, true);
 	gameplay_functions->add_hero("Oya", 4400, 3600, true);
@@ -1091,6 +1096,9 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 		for (auto it = recVec.begin(); it != recVec.end(); ++it) {
 			(*it)->sprite.reset_texture();
 		}
+		for (auto it = movVec.begin(); it != movVec.end(); ++it) {
+			(*it)->sprite.reset_texture();
+		}
 		Alex->sprite.reset_texture();
 		glFinish();
 	});
@@ -1106,12 +1114,18 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 		for (auto it = recVec.begin(); it != recVec.end(); ++it) {
 			(*it)->sprite.reset_texture();
 		}
+		for (auto it = movVec.begin(); it != movVec.end(); ++it) {
+			(*it)->sprite.reset_texture();
+		}
 		for (int i = 0; i < (starting_location[3]).size(); i++) {
 			set_file_with_thread(starting_location[3].at(i), &textureMap.find(starting_location[3].at(i))->second);
 		}
 		wglMakeCurrent(nullptr, nullptr);
 		wglDeleteContext(loaderContext1);
 		for (auto it = recVec.begin(); it != recVec.end(); ++it) {
+			(*it)->sprite.reset_texture();
+		}
+		for (auto it = movVec.begin(); it != movVec.end(); ++it) {
 			(*it)->sprite.reset_texture();
 		}
 		glFinish();
@@ -1129,6 +1143,9 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 		for (auto it = recVec.begin(); it != recVec.end(); ++it) {
 			(*it)->sprite.reset_texture();
 		}
+		for (auto it = movVec.begin(); it != movVec.end(); ++it) {
+			(*it)->sprite.reset_texture();
+		}
 		for (int i = 0; i < (starting_location[2]).size(); i++) {
 			set_file_with_thread(starting_location[2].at(i), &textureMap.find(starting_location[2].at(i))->second);
 		}
@@ -1140,6 +1157,9 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 		wglMakeCurrent(nullptr, nullptr);//unassigns the current gl context
 		wglDeleteContext(loaderContext2);//deletes the loading context now that it is not needed
 		for (auto it = recVec.begin(); it != recVec.end(); ++it) {
+			(*it)->sprite.reset_texture();
+		}
+		for (auto it = movVec.begin(); it != movVec.end(); ++it) {
 			(*it)->sprite.reset_texture();
 		}
 		glFinish(); //Forces all gl calls to be completed before execution
@@ -1789,6 +1809,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 			start_tick = clock();
 
 
+
 			gameplay_functions->drawTut(Alex);
 
 			//run task buffer
@@ -1833,6 +1854,8 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 			}
 			start_tick = clock();
 			_QuadTree->clear();
+			grid->clear();
+			grid->insert_objs_to_grid(rivObj->getLines());
 			Alex->updateCD();
 			Alex->effect.sprite.animate();
 			Alex->WorldObj::animateObj();

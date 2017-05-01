@@ -9,7 +9,7 @@
 #include "RegionState.h"
 
 
-Input::Input(ChildrenOfOsi* _gameplay_functions, RenderHelper* _rHelper, TaskBuffer* _tBuffer, vector<WorldObj*>* _recVec)
+Input::Input(ChildrenOfOsi* _gameplay_functions, RenderHelper* _rHelper, TaskBuffer* _tBuffer, vector<WorldObj*>* _recVec, vector<WorldObj*>* _movVec)
 {
 	count = 0;
 	count2 = 0;
@@ -17,11 +17,12 @@ Input::Input(ChildrenOfOsi* _gameplay_functions, RenderHelper* _rHelper, TaskBuf
 	rHelper = _rHelper;
 	tBuffer = _tBuffer;
 	recVec = _recVec;
+	movVec = _movVec;
 	current_game_state = game_state::load_game;
 	LOG("Input Objected Constructed");
 }
 
-Input::Input(ChildrenOfOsi* _gameplay_functions, WorldObj * _player, RenderHelper* _rHelper, TaskBuffer* _tBuffer, vector<WorldObj*>* _recVec)
+Input::Input(ChildrenOfOsi* _gameplay_functions, WorldObj * _player, RenderHelper* _rHelper, TaskBuffer* _tBuffer, vector<WorldObj*>* _recVec, vector<WorldObj*>* _movVec)
 {
 	count = 0;
 	count2 = 0;
@@ -29,7 +30,7 @@ Input::Input(ChildrenOfOsi* _gameplay_functions, WorldObj * _player, RenderHelpe
 	rHelper = _rHelper;
 	tBuffer = _tBuffer;
 	recVec = _recVec;
-
+	movVec = _movVec;
 	//gameplay_functions->play_sound("Play");
 	//gameplay_functions->createTaskForAudio("PlaySound", "SOUND", "SFX/swing.wav");
 	//gameplay_functions->play_sound("Walk");
@@ -546,7 +547,7 @@ void Input::add_point_to_file() {
 	////cout << "XPOS AND YPOS ARE " << xpos << ", " << ypos << endl;
 
 	int mouseX = (rHelper->camera->getX() + (xpos * map_zoom) * GameWindow::WINDOW_WIDTH_DP / 1300);
-	int mouseY = 20000 - (rHelper->camera->getY() + (ypos * map_zoom) * GameWindow::WINDOW_HEIGHT_DP / 700);
+	int mouseY = 25000 - (rHelper->camera->getY() + (ypos * map_zoom) * GameWindow::WINDOW_HEIGHT_DP / 700);
 	//int mouseX = rHelper->camera->getX() - (150.0 / 2) + ((rHelper->getCameraSize().getXloc() / 2)*map_zoom);
 	//int mouseY = rHelper->camera->getY() - (150.0 / 2) + ((rHelper->getCameraSize().getYloc() / 2)*map_zoom);
 
@@ -786,7 +787,7 @@ void Input::InputCheck()
 					double ypos;
 					glfwGetCursorPos(GameWindow::window, &xpos, &ypos);
 					double mouseX = rHelper->camera->getX() + (xpos * map_zoom) * GameWindow::WINDOW_WIDTH_DP / 1280;
-					double mouseY = 20000 - (rHelper->camera->getY() + (ypos * map_zoom) * GameWindow::WINDOW_HEIGHT_DP / 720);
+					double mouseY = 25000 - (rHelper->camera->getY() + (ypos * map_zoom) * GameWindow::WINDOW_HEIGHT_DP / 720);
 					//for (int i = 0; i < 10; i++) {
 						cout << "MOUSEX AND MOUSEY ARE " << mouseX << ", " << mouseY << endl;
 
@@ -853,6 +854,8 @@ void Input::InputCheck()
 			}
 			if (Q) {
 				//DialogueController::exitDialogue();
+				//DialogueController::state = 7;
+				DialogueController::create_farewell();
 
 				WorldObj* other = DialogueController::getOther();
 				//std:://cout << "HERO: " << other->getName() << std::endl;
@@ -1043,6 +1046,11 @@ void Input::InputCheck()
 						count = 10;
 						DialogueController::exitDialogue();
 						PlayerActExecFunctions::execute_dialog();
+					}
+					else if (DialogueController::getState() == 10) {
+						count = 10;
+						DialogueController::create_farewell();
+						DialogueController::state = 7;
 					}
 				}
 			}

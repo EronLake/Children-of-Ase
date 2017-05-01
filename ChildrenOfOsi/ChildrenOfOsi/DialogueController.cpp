@@ -146,6 +146,7 @@ void DialogueController::PlayerConversationPoint()
 		conv_log_obj->set_conv_point(Containers::conv_point_table[choice[ConvPointName]]);
 		conv_log_obj->update_number_of_times_said();
 
+	
 		/*set the topic for the log entry of the player's selection.
 		If player's selection has no topic, the topic is set to a value
 		that indicates that there is no topic asscoiated with their
@@ -171,6 +172,10 @@ void DialogueController::PlayerConversationPoint()
 		else {
 			return;
 		}
+		std::string tempin;
+		std::cout << "Shango's AFF, NOT, STR (respectively): " << temp_hero->rel[1]->getAffinity() << ", ";
+		std::cout << temp_hero->rel[1]->getNotoriety() << ", " << temp_hero->rel[1]->getStrength() << ", ";
+		std::cin >> tempin;
 
 	/*handles applying of post conditions for relationship related conversation
 	points. I also thought to incorporate checks for if a player completed an action
@@ -258,12 +263,14 @@ void DialogueController::PlayerResponse()
 				quest->setDoer(player);
 				//quest->executed = true;
 				//player->quest = quest;
-				player->add_quest(quest, 2);
+				int time_limit = 3600;
+				player->add_quest(quest, time_limit);
 				planner->quests_given.push_back(quest); //gives npc record of what they gave player
 				//player->cur_action = quest; //gives player record of what they are doing
 			}
 			if (choice[ConvPointName] == "Decline_Quest") {
 				quest_declined = true;
+				state = 10;
 			}
 
 		}
@@ -303,7 +310,7 @@ void DialogueController::PlayerResponse()
 			player_conv_point_choice = choice[ConvPointName];
 			state = 6;
 		}
-		else
+		else if(state != 10)//move to exit dialogue if player declined a quest
 		    PlayerChoose();//start all over from player conversation point again
 	}
 	else {
@@ -640,7 +647,8 @@ void DialogueController::startConversation(WorldObj* n, bool playerTalk)
 	other = n;
 	Hero* temp_hero = CheckClass::isHero(other);
 	std::string start_message = "";
-
+	std::cout << "Shango's AFF, NOT, STR (respectively): " << temp_hero->rel[1]->getAffinity() << ", ";
+	std::cout << temp_hero->rel[1]->getNotoriety() << ", " << temp_hero->rel[1]->getStrength() << ", ";
 	
 	//if(quest_in_progress)
 		//message = n->getName() + ": " + dialogue.gen_dialog({ "Quest_In_Progress","Quest_In_Progress" }, temp_hero);
@@ -685,43 +693,21 @@ hero-related conversation points from the 3D vector of possible conversation
 points and removes them from the options vector.*/
 void DialogueController::exitDialogue()
 {
-	Hero* temp_hero;
-	if (temp_hero = CheckClass::isHero(other)){//check if "other" is a hero before seeing if they can offer you a quest
-		if (offer_quest_on_exit(temp_hero) == false || quest_declined == true) {
-				/*does normal exitDialogue stuff if quest is not given or if player has denied quest offer*/
-				other = nullptr;
-				state = 0;
-				DialogueController::scroll_control = 0;
 
-				for (int i = 0; i < curr_conversation_log.size(); i++) {
-
-					//delete memory allocated for instance of Memory class here
-					//delete tmp_top.second;
-					//delete memory allocated for conversation log object here
-					if (curr_conversation_log[i] != nullptr)
-						delete curr_conversation_log[i];
-				}
-
-				curr_conversation_log.clear();
-
-				remove_hero_related_conv_points();
-				first_call = true;
-			}
-		
-	}
 	/*does normal exitDialogue stuff if "other" is not a hero*/
-	else {
+	if (state == 7 || state == 9) {
 		other = nullptr;
 		state = 0;
 		DialogueController::scroll_control = 0;
+		DialogueController::quest_declined = false;
 
 		for (int i = 0; i < curr_conversation_log.size(); i++) {
 
 			//delete memory allocated for instance of Memory class here
-				 //delete tmp_top.second;
+			//delete tmp_top.second;
 			//delete memory allocated for conversation log object here
-			if(curr_conversation_log[i] != nullptr)
-			   delete curr_conversation_log[i];
+			if (curr_conversation_log[i] != nullptr)
+				delete curr_conversation_log[i];
 		}
 
 		curr_conversation_log.clear();
@@ -729,6 +715,17 @@ void DialogueController::exitDialogue()
 		remove_hero_related_conv_points();
 		first_call = true;
 	}
+	else {
+		Hero* temp_hero;
+		if (temp_hero = CheckClass::isHero(other)) {//check if "other" is a hero before seeing if they can offer you a quest
+			if (offer_quest_on_exit(temp_hero) == false || quest_declined == true) {
+				/*does normal exitDialogue stuff if quest is not given or if player has denied quest offer*/
+				state = 7;
+			}
+
+		}
+	}
+	
 }
 
 /*Returns a pointer to the instance of the DialogueHelper class that
@@ -885,13 +882,14 @@ a quest when they try to exit dialogue, but returns false if an NPC decides not
 to give the player a quest because they either don't want to or because the
 player is already working on a quest for that NPC.*/
 bool DialogueController::offer_quest_on_exit(Hero* temp_hero) {
+	bool offered_quest = false;
 	Planner* planner = AIController::get_plan(CheckClass::isHero(other)->name);
 	/////////////////////////////////////////////////////////////////////////
 	/*Stand in stuff for checking if NPC wants to give player quest when player
 	is about to exit conversation. Currently, NPC will always give player a quest
 	when they try to exit conversation if the player has not already accepted a quest.*/
 	/////////////////////////////////////////////////////////////////////////
-	if (dialogue.give_quest()) {
+	if (dialogue.give_quest() && AIController::quest_response(temp_hero,player)) {
 		bool has_quest = false;
 		for (int i = 0; i < planner->quests_given.size(); ++i) {
 			if (planner->quests_given[i]->getDoer()->name == SHANGO && planner->quests_given[i]->executed == false)
@@ -899,7 +897,7 @@ bool DialogueController::offer_quest_on_exit(Hero* temp_hero) {
 		}
 		//if (planner->quests_given.size() > 0)//stand in Bad!
 			//has_quest = true;//stand in Bad! dont wanna be checking the size of quest vector
-		if (!has_quest) {
+		if (has_quest == false && quest_declined == false) {
 
 			dialogue_point reply_diog_pt = { "Exit Quest","Exit Quest" };
 			dialogue_point con_diog_pt = { "Offer_Quest","Offer_Quest" };
@@ -920,13 +918,17 @@ bool DialogueController::offer_quest_on_exit(Hero* temp_hero) {
 
 			select = 0;
 			state = 2;
+			offered_quest = true;
 			//planner->quests_given.push_back(planner->get_current_action());
-
-			return true;
 		}
-		else
-			return false;//case where player is already doing quest for that NPC
 	}
-	else
-		return false;//case where NPC does not want to give player a quest
+	return offered_quest;
+	
+}
+
+void DialogueController::create_farewell() {
+	dialogue_point diog_pt = { "Farewell","Farewell" };
+	Hero* temp_hero = CheckClass::isHero(DialogueController::other);
+	std::string farewell_sentence = DialogueController::getDialogueHelper()->gen_dialog(diog_pt, temp_hero);
+	DialogueController::message = DialogueController::other->getName() + ": " + farewell_sentence + "\n\n";
 }
