@@ -605,6 +605,8 @@ int Movement::talk(WorldObj* obj) {
 						LOG("Player interacted with an object");
 						Hero* hero;
 						if (hero = CheckClass::isHero(objVec[i])) {
+							RegionState::switch_music = true;
+							RegionState::in_village = true;
 							Planner* hero_plan = AIController::get_plan(hero->name);
 							if (hero_plan->give_as_quest)   //Make sure hero is willing to give up current action
 							{
@@ -624,8 +626,7 @@ int Movement::talk(WorldObj* obj) {
 					}
 				}
 			}
-			RegionState::switch_music = true;
-			RegionState::in_village = true;
+			
 			if (ot!=nullptr)DialogueController::startConversation(ot, true);
 		}
 	}
@@ -681,7 +682,7 @@ int Movement::attack(WorldObj* obj) {
 																}
 																else PlayerActExecFunctions::execute_start("Fight", hero);
 															}
-															else Fight* fight = new Fight(s->getParty(), s2->getParty(), false);
+															else Fight* fight = new Fight(s->getParty(), s2->getParty(), 0);
 														}
 														else if ((!s->getInCombat())) {
 															if (hero) {

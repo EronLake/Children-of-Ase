@@ -180,7 +180,7 @@ void Soldier::updateCD()
   }
   if (incapacitated) {
 	  if (down_time <= 0) {
-		  this->capacitate();
+		  this->capacitate(0);
 	  }
 	  else down_time--;
   }
@@ -218,22 +218,44 @@ void Soldier::defeat()
 void Soldier::defeat()
 {
 	if (!killable) {
-		if (!incapacitated) {
-			down_time = 900;
-			incapacitated = true;
-			this->getParty()->down_member(this);
-		}
+		incapacitate();
 	}
 	else {
 		kill();
 	}
 }
 
-void Soldier::capacitate()
+void Soldier::capacitate(int t)
 {
-	this->setHealth(get_max_health()/2);
-	this->getParty()->up_member(this);
+	int prev = 0;
+	if (!incapacitated)prev = this->getHealth();
+	switch (t) {
+	case 0:
+		this->setHealth(get_max_health()/ 4);
+		break;
+	case 1:
+		this->setHealth(get_max_health() / 2);
+		break;
+	case 2:
+		this->setHealth((get_max_health()*3) / 4);
+		break;
+	case 3:
+		this->setHealth(get_max_health());
+		break;
+	}
+	if (incapacitated) {
+		this->getParty()->up_member(this);
+	} else if (prev > this->getHealth())this->setHealth(prev);
 	incapacitated = false;
+}
+
+void Soldier::incapacitate()
+{
+	if (!incapacitated) {
+		down_time = 900;
+		incapacitated = true;
+		this->getParty()->down_member(this);
+	}
 }
 
 void Soldier::kill()
