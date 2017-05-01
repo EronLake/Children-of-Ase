@@ -143,8 +143,8 @@ int RenderHelper::draw_frame(WorldObj * obj)
 			//LOG(objVec[i]->getX(), ", ", objVec[i]->getY());
 			objVec[i]->WorldObj::drawObj(camera->getX(), camera->getY());
 			//for (int j = 0; j < objVec[i]->body.size(); j++) {
-		//	objVec[i]->body[0].drawObj(camera->getX(), camera->getY());
-		//	objVec[i]->effect.drawObj(camera->getX(), camera->getY());
+			objVec[i]->body[0].drawObj(camera->getX(), camera->getY());
+			objVec[i]->effect.drawObj(camera->getX(), camera->getY());
 			//}
 			//objVec[i]->effect.sprite.animate();
 			//objVec[i]->WorldObj::animateObj();
