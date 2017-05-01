@@ -118,9 +118,13 @@ void DialogueGui::drawGui()
 
 	GameWindow::createText(message, 266, 303, 500, 80, black);
 	std::vector<std::vector<std::string>> options;
-	
+	Hero* temp_hero = CheckClass::isHero(DialogueController::getOther());
+
 	if (DialogueController::getState() == 1) {
-		options = DialogueController::getOptions();
+		if (temp_hero)
+			options = DialogueController::getOptions();
+		else
+		    options = DialogueController::get_soldier_options();
 
 		for (int i = 0; i <= 4; i++) {
 			if ( options.size() <= (DialogueController::scroll_control + i))

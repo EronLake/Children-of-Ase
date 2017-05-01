@@ -43,6 +43,7 @@ DialogueHelper DialogueController::dialogue;
 /*holds the dialog options for the player's conversation and reply points
 that are displayed as text on the lower GUI window*/
 std::vector<std::vector<dialogue_point>> DialogueController::options;
+std::vector<std::vector<dialogue_point>> DialogueController::soldier_options;
 std::vector<dialogue_point> DialogueController::replyOptions;
 
 std::string DialogueController::message;   //text displayed on upper window of GUI
@@ -67,7 +68,8 @@ current conversation only*/
 std::vector<ConversationLogObj*> curr_conversation_log;
 
 /*used for passing player's conversation point selection to 
-otherResponse() function when state is no longer 5 in 
+
+esponse() function when state is no longer 5 in 
 PlayerConversationPoint() function*/
 std::string player_conv_point_choice = ""; 
 
@@ -108,6 +110,18 @@ void DialogueController::PlayerChoose()
 		}
 	}
 	first_call = false;
+	state = 1;
+}
+
+void DialogueController::player_choose_soldier()
+{
+	//options = dialogue.get_possible_conv_pts();
+	for (int i = 0; i < Containers::conv_point_table.size(); i++)
+	{
+	    soldier_options.push_back({});
+	}
+	soldier_options[StrengthIcon].push_back({"Recruit_For_Party","Recruit_For_Party","",""});
+	soldier_options[StrengthIcon].push_back({ "Remove_From_Party","Remove_From_Party","",""});
 	state = 1;
 }
 
@@ -221,6 +235,115 @@ void DialogueController::PlayerConversationPoint()
 	else {
 		state = 4;
 		otherResponse(player_conv_point_choice, curr_hero_topic);
+
+		player_conv_point_choice = "";
+	}
+}
+
+void DialogueController::player_conversation_point_soldier()
+{
+	dialogue_point choice;
+
+	/*prevents the player's selection of the "Next" option from being stored
+	in the log for the current conversation. Uses the fact that we know
+	that the player's conversation point choice will not be empty if
+	they have reached the state with the "Next" option.*/
+	if (player_conv_point_choice == "") {
+		//capture player's selection
+		choice = soldier_options[optionsIndex][select + DialogueController::scroll_control];
+
+		//get a sentence to say based on their option selection
+		std::string conversation_pt_sentence = dialogue.gen_dialog(choice, player);
+
+		/*adds the hero's name to the end of the sentence if the conversation
+		point is hero-related, or adds an empty string if it is not. The value
+		at choice[Topic()] will be one of these depending on the conversation
+		point option selected.*/
+		replace_all(conversation_pt_sentence, "HERO", choice[Topic]);
+
+		message = player->getName() + ": " + conversation_pt_sentence;
+
+		/*stores the player's conversation point(choice[ConvPointName()]) in a log entry
+		and that entry gets stored in the log for the current conversation.
+		We use index 1 of choice because that is where the name of the
+		conversation point is kept.*/
+		/*ConversationLogObj* conv_log_obj = new ConversationLogObj();
+		Memory* mem = nullptr;
+
+		conv_log_obj->set_who(1);
+		conv_log_obj->set_conv_point(Containers::conv_point_table[choice[ConvPointName]]);
+		conv_log_obj->update_number_of_times_said();
+
+		/*set the topic for the log entry of the player's selection.
+		If player's selection has no topic, the topic is set to a value
+		that indicates that there is no topic asscoiated with their
+		conversation point.
+		if (choice[ConvPointName].find("Advise To") != string::npos || choice[ConvPointName].find("Ask About") != string::npos) {
+			conv_log_obj->set_topic(dialogue.hero_name_to_int(choice[Topic]), mem);
+			curr_hero_topic = choice[Topic];
+		}
+		else
+			conv_log_obj->set_topic(NoTopic, mem);
+
+		curr_conversation_log.push_back(conv_log_obj);//add entry to log*/
+
+		player_conv_point_choice = choice[ConvPointName];
+
+		/*Hero* temp_hero = nullptr;
+		if (other->getType() >= WorldObj::TYPE_NPC) {
+			if (temp_hero = CheckClass::isHero(other))//added another equals was single equals before
+			{
+				perror("you cannot talk to this type of object");
+			}
+		}
+		else {
+			return;
+		}*/
+
+		/*handles applying of post conditions for relationship related conversation
+		points. I also thought to incorporate checks for if a player completed an action
+		by doing any of these here, but this is probably not a good place.*/
+		/*if (player_conv_point_choice == "Bribe") {
+			Planner* planner = AIController::get_plan(CheckClass::isHero(other)->name);
+
+			if (planner->quests_given.size() > 0) {
+				planner->quests_given.push_back(planner->get_current_action());
+				Hero* shango = dynamic_cast<Hero*>(player);
+				int time_limit = 3600;                 //1 minute limit to complete quest for now
+				shango->add_quest(planner->get_current_action(), time_limit);
+			}
+			for (int i = 0; i < planner->quests_given.size(); ++i) {
+				if (planner->quests_given[i]->getDoer()->name == SHANGO &&
+					planner->get_current_action()->name.find("Bribe", 0) != string::npos) {
+					//set quest to complete here if it was a bribe one
+					planner->quests_given[i]->executed = false;
+				}
+
+			}
+			Containers::conv_point_table[player_conv_point_choice]->apply_postconditions(true, player, temp_hero);
+		}
+		else if (player_conv_point_choice == "Compliment") {
+
+			Containers::conv_point_table[player_conv_point_choice]->apply_postconditions(true, player, temp_hero);
+		}
+		else if (player_conv_point_choice == "Grovel") {
+
+			Containers::conv_point_table[player_conv_point_choice]->apply_postconditions(true, player, temp_hero);
+		}
+
+		else if (player_conv_point_choice == "Insult") {
+			Containers::conv_point_table[player_conv_point_choice]->apply_postconditions(true, player, temp_hero);
+		}
+
+		else if (player_conv_point_choice == "Boast") {
+
+			Containers::conv_point_table[player_conv_point_choice]->apply_postconditions(true, player, temp_hero);
+		}*/
+		state = 5;
+	}
+	else {
+		state = 4;
+		other_response_soldier(player_conv_point_choice, curr_hero_topic);
 
 		player_conv_point_choice = "";
 	}
@@ -470,6 +593,128 @@ void DialogueController::otherConversationPoint(dialogue_point line)
 	DialogueController::scroll_control = 0;
 }
 
+void DialogueController::other_conversation_point_soldier(dialogue_point line)
+{
+	Hero* temp_hero = nullptr;
+	/*if (other->getType() >= WorldObj::TYPE_NPC) {
+		if (temp_hero = CheckClass::isHero(other))//added another equals was single equals before
+		{
+			perror("you cannot talk to this type of object");
+		}
+	}
+	else {
+		return;
+	}*/
+
+	dialogue_point point = dialogue.choose_conv_pt(curr_conversation_log, temp_hero, player);
+
+	/*Only sets the topic of the npc's conversation point if it is not
+	a special case. Special case dialogue points are typically only
+	of size 2.*/
+	if (point[0] != "No_More_Phrases" && point[0] != "Already_Asked" && point.size() >= 4)
+		point[Topic] = curr_hero_topic;
+
+	/*handles special case of quest conversation point by making
+	sure it's dialogue point will be the same size as the basic
+	conversation points like "Ask_Name" etc.*/
+	/*if (point[ConvPointName].find("Quest") != string::npos) {
+		point.push_back("");
+		point.push_back("");
+	}*/
+
+	replyString = point[ConvPointName];
+
+	std::string reply_pt_sentence = dialogue.gen_dialog(line, temp_hero);
+	std::string con_pt_sentence = dialogue.gen_dialog(point, temp_hero);
+
+	/*Stores the npc's conversation and reply points as entries in the
+	log for the current conversation. The reply point is line[ConvPointName()] and the
+	conversation point is point[ConvPointName()].*/
+	/* if (line[ConvPointName] != "Already_Asked") {
+		ConversationLogObj* conv_log_obj = new ConversationLogObj();
+		Memory* mem = nullptr;
+
+		//initialization of conversation log entry for reply point
+		conv_log_obj->set_who(dialogue.hero_name_to_int(other->getName()));
+		conv_log_obj->set_conv_point(Containers::conv_point_table[line[ConvPointName]]);
+		conv_log_obj->update_number_of_times_said();
+
+		/*insert the topic at the beginning of the npc's reply point sentence
+		if they are replying to a hero-related conversation point.*/
+		/*if (line[ConvPointName].find("Take Advice") != string::npos || line[ConvPointName].find("Tell About") != string::npos) {
+			conv_log_obj->set_topic(dialogue.hero_name_to_int(line[Topic]), mem); //make the topic Oya if the player selected a move to action
+			replace_all(reply_pt_sentence, "HERO", line[Topic]);
+		}
+		else
+			conv_log_obj->set_topic(NoTopic, mem);
+
+		curr_conversation_log.push_back(conv_log_obj);
+
+		//initialization of conversation log entry for conversation point
+		ConversationLogObj* conv_log_obj2 = new ConversationLogObj();
+		Memory* mem2 = nullptr;
+
+		conv_log_obj2->set_who(dialogue.hero_name_to_int(other->getName()));
+		conv_log_obj2->set_conv_point(Containers::conv_point_table[point[ConvPointName]]);
+		conv_log_obj2->update_number_of_times_said();
+
+		/*insert the topic at the end of the npc's conversation point sentence
+		if they are saying a hero-related conversation point.*/
+		//if (point[ConvPointName].find("Advise To") != string::npos || point[ConvPointName].find("Ask About") != string::npos) {
+		//	conv_log_obj2->set_topic(dialogue.hero_name_to_int(point[Topic]), mem2);
+		//	replace_all(con_pt_sentence, "HERO", point[Topic]);
+		//}
+		//else if (point[ConvPointName].find("Offer_Quest") != string::npos) {
+			//Planner* planner = AIController::get_plan(CheckClass::isHero(other)->name);
+			//DialogueController::quest = planner->get_current_action();
+			//conv_log_obj2->set_topic(quest->getReceiver()->name, mem2);
+
+			//these two lines strip the number off the end of the name 
+			//std::string::size_type name_end = quest->name.find_last_of('_');
+			//std::string act_name = quest->name.substr(0, name_end);
+
+			//std::string village = "'s village";
+			//std::string hero_name = dialogue.int_to_hero_name(quest->getReceiver()->name);
+			//if (act_name.find("Conquer") != string::npos || act_name.find("Occupy") != string::npos) {
+			//	replace_all(con_pt_sentence, "HERO", hero_name + village);
+			//}
+			//else
+				//replace_all(con_pt_sentence, "HERO", hero_name);//receiver or doer here? ask Justin
+
+
+			//std::string with = "";
+			//if (act_name.find("Train") != string::npos || act_name.find("Spar") != string::npos || act_name.find("Form_Alliance") != string::npos) {
+			//	with = " with ";
+			//	replace_all(con_pt_sentence, "ACTION", act_name + with);
+		//	}
+			//else
+			//	replace_all(con_pt_sentence, "ACTION", act_name + with);
+
+
+	//	}
+		//else
+		//	conv_log_obj2->set_topic(NoTopic, mem2);
+
+		//curr_conversation_log.push_back(conv_log_obj2);
+	//} 
+
+	message = other->getName() + ": " + reply_pt_sentence + "\n" + con_pt_sentence;
+	replyOptions = dialogue.get_possible_reply_pts(point[ConvPointName], optionsIndex);
+
+	select = 0;
+
+	/*skips the player's reply point if the npc does not say a conversation
+	point, if the npc tells the player that they already asked them something,
+	or if an npc runs out of relevant conversation points to say.
+	*/
+	//if (point[ConvPointName] != "No_More_Phrases" && point[ConvPointName] != "Already_Asked" && point[ConvPointName] != "" && point[ConvPointName] != "No Quest")
+		//state = 2;
+	//else
+		state = 1;//skip player reply if npc cannot give a conversation point
+
+	DialogueController::scroll_control = 0;
+}
+
 /*Handles the generation of the npc's reply point by calling functions from 
 DialogueHelper. Calls otherConversationPoint() function to generate the
 npc's conversation point and to display the npc's reply and conversation
@@ -620,6 +865,152 @@ void DialogueController::otherResponse(std::string info, std::string hero_topic)
 	}
 }
 
+/*Handles the generation of the npc's reply point by calling functions from
+DialogueHelper. Calls otherConversationPoint() function to generate the
+npc's conversation point and to display the npc's reply and conversation
+points.*/
+void DialogueController::other_response_soldier(std::string info, std::string hero_topic)
+{
+        Hero* temp_hero = CheckClass::isHero(other);
+	
+
+	//if (state != 8) {
+		dialogue_point line = dialogue.choose_reply_pt(info, optionsIndex, curr_conversation_log);
+		replyString = line[ConvPointName];
+
+		/*avoids setting a topic when npc replies with "You already asked me that"
+		or if npc says any other special case reply. Special case replies are
+		typically vectors with a size of only 2.*/
+		if (line.size() >= 4)
+			line[Topic] = hero_topic;
+
+
+		/*if (replyString == "Accept Alliance Offer") {
+			//calls action start if the question is asked at all
+			PlayerActExecFunctions::execute_start("Form_Alliance", temp_hero);
+
+			//check if I want to accept (seeting to fail for testing)
+			accepted_action = true; //should call a function
+
+			if (accepted_action) {
+				dialogue_point diog_pt = { "Accept Alliance Offer","Accept Alliance Offer" };
+				std::string reply_pt_sentence = dialogue.gen_dialog(diog_pt, temp_hero);
+				message = other->getName() + ": " + reply_pt_sentence + "\n\n";
+			}
+			else {
+				/////////////need to be changed to correct calls/dialog if not accepted///////////////////
+				dialogue_point diog_pt = { "Accept Alliance Offer","Accept Alliance Offer" };
+				std::string reply_pt_sentence = dialogue.gen_dialog(diog_pt, temp_hero);
+				message = other->getName() + ": " + reply_pt_sentence + "\n\n";
+			}
+
+			state = 8;*/
+		/*}
+		else if (replyString == "Accept Duel") {
+			//calls action start if the question is asked at all
+			PlayerActExecFunctions::execute_start("Duel", temp_hero);
+
+			//check if I want to accept (seeting to fail for testing)
+			accepted_action = true; //should call a function
+
+			if (accepted_action) {
+				dialogue_point diog_pt = { "Accept Duel","Accept Duel" };
+				std::string reply_pt_sentence = dialogue.gen_dialog(diog_pt, temp_hero);
+				message = other->getName() + ": " + reply_pt_sentence + "\n\n";
+			}
+			else {
+				/////////////need to be changed to correct calls/dialog if not accepted///////////////////
+				dialogue_point diog_pt = { "Accept Duel","Accept Duel" };
+				std::string reply_pt_sentence = dialogue.gen_dialog(diog_pt, temp_hero);
+				message = other->getName() + ": " + reply_pt_sentence + "\n\n";
+			}
+
+			state = 8;
+		}
+		else if (replyString == "Accept Spar Request") {
+			//calls action start if the question is asked at all
+			PlayerActExecFunctions::execute_start("Spar", temp_hero);
+
+			//check if I want to accept (seeting to fail for testing)
+			accepted_action = true; //should call a function
+
+			if (accepted_action) {
+				dialogue_point diog_pt = { "Accept Spar Request","Accept Spar Request" };
+				std::string reply_pt_sentence = dialogue.gen_dialog(diog_pt, temp_hero);
+				message = other->getName() + ": " + reply_pt_sentence + "\n\n";
+			}
+			else {
+				/////////////need to be changed to correct calls/dialog if not accepted///////////////////
+				dialogue_point diog_pt = { "Accept Spar Request","Accept Spar Request" };
+				std::string reply_pt_sentence = dialogue.gen_dialog(diog_pt, temp_hero);
+				message = other->getName() + ": " + reply_pt_sentence + "\n\n";
+			}
+			state = 8;
+		}*/
+		//else {
+		std::string reply_pt_sentence = dialogue.gen_dialog(line, temp_hero);
+		message = other->getName() + ": " + reply_pt_sentence + "\n\n";
+
+		state = 7;
+			//otherConversationPoint(line);
+		//}
+	/*}
+	else {
+		if (replyString == "Accept Alliance Offer") {
+			//choose different dialog if they denied the action
+			if (accepted_action) {
+				dialogue_point diog_pt = { "Confirm Alliance","Confirm Alliance" };
+				std::string reply_pt_sentence = dialogue.gen_dialog(diog_pt, temp_hero);
+				message = player->getName() + ": " + reply_pt_sentence + "\n\n";
+			}
+			else {
+				/////////////need to be changed to correct calls/dialog if not accepted///////////////////
+				dialogue_point diog_pt = { "Accept Alliance Offer","Accept Alliance Offer" };
+				std::string reply_pt_sentence = dialogue.gen_dialog(diog_pt, temp_hero);
+				message = other->getName() + ": " + reply_pt_sentence + "\n\n";
+
+				//calls action end if the question is denied otherwise called on cmpletion of the action
+				PlayerActExecFunctions::execute_end(false);
+			}
+		}
+		else if (replyString == "Accept Duel") {
+			//choose different dialog if they denied the action
+			if (accepted_action) {
+				dialogue_point diog_pt = { "Confirm Duel","Confirm Duel" };
+				std::string reply_pt_sentence = dialogue.gen_dialog(diog_pt, temp_hero);
+				message = player->getName() + ": " + reply_pt_sentence + "\n\n";
+			}
+			else {
+				/////////////need to be changed to correct calls/dialog if not accepted///////////////////
+				dialogue_point diog_pt = { "Confirm Duel","Confirm Duel" };
+				std::string reply_pt_sentence = dialogue.gen_dialog(diog_pt, temp_hero);
+				message = player->getName() + ": " + reply_pt_sentence + "\n\n";
+
+				//calls action end if the question is denied otherwise called on cmpletion of the action
+				PlayerActExecFunctions::execute_end(false);
+			}
+		}
+		else if (replyString == "Accept Spar Request") {
+			//choose different dialog if they denied the action
+			if (accepted_action) {
+				dialogue_point diog_pt = { "Confirm Spar","Confirm Spar" };
+				std::string reply_pt_sentence = dialogue.gen_dialog(diog_pt, temp_hero);
+				message = player->getName() + ": " + reply_pt_sentence + "\n\n";
+			}
+			else {
+				/////////////need to be changed to correct calls/dialog if not accepted///////////////////
+				dialogue_point diog_pt = { "Confirm Spar","Confirm Spar" };
+				std::string reply_pt_sentence = dialogue.gen_dialog(diog_pt, temp_hero);
+				message = player->getName() + ": " + reply_pt_sentence + "\n\n";
+
+				//calls action end if the question is denied otherwise called on cmpletion of the action
+				PlayerActExecFunctions::execute_end(false);
+			}
+		}
+		state = 9;
+	}*/
+}
+
 /*Returns the player's conversation point dialogue options that 
 correspond to the icon that they currently have selected.*/
 vector<std::vector<std::string>> DialogueController::getOptions()
@@ -629,6 +1020,17 @@ vector<std::vector<std::string>> DialogueController::getOptions()
 	for (int i = 0; i < options[optionsIndex].size(); i++) 
 	{
 		tmp.push_back(options[optionsIndex][i]);
+	}
+	return tmp;
+}
+
+vector<std::vector<std::string>> DialogueController::get_soldier_options()
+{
+	vector<std::vector<std::string>> tmp;
+
+	for (int i = 0; i < soldier_options[optionsIndex].size(); i++)
+	{
+		tmp.push_back(soldier_options[optionsIndex][i]);
 	}
 	return tmp;
 }
@@ -673,28 +1075,44 @@ void DialogueController::startConversation(WorldObj* n, bool playerTalk)
 
 	/*handles what the greeting phrase should be based on whether or not the player
 	has taken or completed a quest from the npc*/
-	if (temp_hero) {
-		Planner* planner = AIController::get_plan(CheckClass::isHero(other)->name);
-		bool player_doing_quest = false;
-		bool quest_complete = false;
-		for (int i = 0; i < planner->quests_given.size(); ++i) {
-			if (planner->quests_given[i]->getDoer()->name == SHANGO && planner->quests_given[i]->executed == false)
-				player_doing_quest = true;
-			if (planner->quests_given[i]->getDoer()->name == SHANGO && planner->quests_given[i]->executed == true)
-				quest_complete = true;
+		if (temp_hero) {
+			Planner* planner = AIController::get_plan(CheckClass::isHero(other)->name);
+			bool player_doing_quest = false;
+			bool quest_complete = false;
+			for (int i = 0; i < planner->quests_given.size(); ++i) {
+				if (planner->quests_given[i]->getDoer()->name == SHANGO && planner->quests_given[i]->executed == false)
+					player_doing_quest = true;
+				if (planner->quests_given[i]->getDoer()->name == SHANGO && planner->quests_given[i]->executed == true)
+					quest_complete = true;
+			}
+			if (player_doing_quest)//Bad! Check boolean in Action object instead.
+				message = n->getName() + ": " + dialogue.gen_dialog({ "Quest_In_Progress","Quest_In_Progress" }, temp_hero);
+			else if (quest_complete)//Bad! should not use size of quests given as check
+				message = n->getName() + ": " + dialogue.gen_dialog({ "Quest_Complete","Quest_Complete" }, temp_hero);
+			else
+				message = n->getName() + ": " + dialogue.gen_dialog({ "Greeting","Greeting" }, temp_hero);
 		}
-		if (player_doing_quest)//Bad! Check boolean in Action object instead.
-			message = n->getName() + ": " + dialogue.gen_dialog({ "Quest_In_Progress","Quest_In_Progress" }, temp_hero);
-		else if (quest_complete)//Bad! should not use size of quests given as check
-			message = n->getName() + ": " + dialogue.gen_dialog({ "Quest_Complete","Quest_Complete" }, temp_hero);
 		else
-			message = n->getName() + ": " + dialogue.gen_dialog({ "Greeting","Greeting" }, temp_hero);
-	}
-	else
-		message = n->getName() + ": " + dialogue.gen_dialog({ "Greeting","Greeting" }, temp_hero);
+		    message = n->getName() + ": " + dialogue.gen_dialog({ "Greeting","Greeting" }, temp_hero);
+		if (playerTalk && temp_hero) {
+			PlayerChoose();
+		}
+		else
+			player_choose_soldier();
+}
+
+void DialogueController::start_soldier_conversation(WorldObj* n, bool playerTalk)
+{
+	other = n;
+	//Hero* temp_hero = CheckClass::isHero(other);
+	std::string start_message = "";
+
+	Hero* temp_hero = CheckClass::isHero(other);
+	message = n->getName() + ": " + dialogue.gen_dialog({ "Greeting","Greeting" }, temp_hero);
 	if (playerTalk) {
- 		PlayerChoose();
+		PlayerChoose();
 	}
+
 }
 
 /*Returns pointer to the npc in the conversation.*/
@@ -734,6 +1152,8 @@ void DialogueController::exitDialogue()
 			remove_hero_related_conv_points();
 			//remove_ask_for_quest();
 		}
+		else
+			remove_soldier_opts();
 
 		other = nullptr;
 		state = 0;
@@ -746,10 +1166,12 @@ void DialogueController::exitDialogue()
 		state = 7;
 		if (temp_hero) {//check if "other" is a hero before seeing if they can offer you a quest
 			offer_quest_on_exit(temp_hero);
-				/*does normal exitDialogue stuff if quest is not given or if player has denied quest offer*/
-			if(quest_declined == true)
-		        state = 7;
+			/*does normal exitDialogue stuff if quest is not given or if player has denied quest offer*/
+			if (quest_declined == true)
+				state = 7;
 		}
+		else
+			remove_soldier_opts();
 	}
 	
 }
@@ -802,7 +1224,7 @@ void DialogueController::add_hero_related_conv_points() {
 	and to their 3D vector of possible conversation points for conversation points
 	associated with the question mark icon*/
 	for (auto itor = Containers::conv_point_table.begin(); itor != Containers::conv_point_table.end(); ++itor) {
-		if (itor->second->get_name().find("Ask_For_Quest", 0) != std::string::npos){
+		if (itor->second->get_name() == "Ask_For_Quest"){
 			tmp_dpoint = itor->second->dpoint;
 		    options[QuestionMarkIcon].push_back(tmp_dpoint);
 		    dialogue.get_possible_conv_pts_ref()[QuestionMarkIcon].push_back(tmp_dpoint);
@@ -1008,4 +1430,13 @@ void DialogueController::create_farewell() {
 	Hero* temp_hero = CheckClass::isHero(DialogueController::other);
 	std::string farewell_sentence = DialogueController::getDialogueHelper()->gen_dialog(diog_pt, temp_hero);
 	DialogueController::message = DialogueController::other->getName() + ": " + farewell_sentence + "\n\n";
+}
+
+/*removes soldier dialog options*/
+void DialogueController::remove_soldier_opts() {
+	//for (int i = 0; i < soldier_options[StrengthIcon].size(); i++)
+	//{
+		//soldier_options[StrengthIcon][i].erase();
+	//}
+	soldier_options.clear();
 }
