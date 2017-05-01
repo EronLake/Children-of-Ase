@@ -98,10 +98,15 @@ point*/
 void DialogueController::PlayerChoose()
 {
 	options = dialogue.get_possible_conv_pts();
-	if(first_call)
-		/*add "Ask_About" and "Advise_To" conversation points to player's
-		dialog options*/
-	    add_hero_related_conv_points();
+	if (first_call) {
+		/*add "Ask_About" and "Advise_To" and "Ask For Quest" conversation points to player's
+		dialog options if they are speaking to a hero*/
+		Hero* tmp_hero = CheckClass::isHero(other);
+		if (tmp_hero != nullptr) {
+			add_hero_related_conv_points();
+			//add_ask_for_quest();
+		}
+	}
 	first_call = false;
 	state = 1;
 }
@@ -422,14 +427,30 @@ void DialogueController::otherConversationPoint(dialogue_point line)
 		else if (point[ConvPointName].find("Offer_Quest") != string::npos) {
 			Planner* planner = AIController::get_plan(CheckClass::isHero(other)->name);
 			DialogueController::quest = planner->get_current_action();
-			conv_log_obj2->set_topic(quest->getDoer()->name, mem2);
-			replace_all(con_pt_sentence, "HERO", dialogue.int_to_hero_name(quest->getReceiver()->name));//receiver or doer here? ask Justin
+			conv_log_obj2->set_topic(quest->getReceiver()->name, mem2);
 
 			//these two lines strip the number off the end of the name 
 			std::string::size_type name_end = quest->name.find_last_of('_');
 			std::string act_name = quest->name.substr(0, name_end);
 
-			replace_all(con_pt_sentence, "ACTION", act_name);
+			std::string village = "'s village";
+			std::string hero_name = dialogue.int_to_hero_name(quest->getReceiver()->name);
+			if (act_name.find("Conquer") != string::npos || act_name.find("Occupy") != string::npos) {
+				replace_all(con_pt_sentence, "HERO", hero_name + village);
+			}
+			else
+			    replace_all(con_pt_sentence, "HERO", hero_name);//receiver or doer here? ask Justin
+
+
+			std::string with = "";
+			if (act_name.find("Train") != string::npos || act_name.find("Spar") != string::npos || act_name.find("Form_Alliance") != string::npos) {
+				with = " with ";
+				replace_all(con_pt_sentence, "ACTION", act_name + with);
+			}
+			else
+			    replace_all(con_pt_sentence, "ACTION", act_name + with);
+			
+
 		}
 	    else
 			conv_log_obj2->set_topic(NoTopic, mem2);
@@ -658,11 +679,19 @@ void DialogueController::startConversation(WorldObj* n, bool playerTalk)
 
 	/*handles what the greeting phrase should be based on whether or not the player
 	has taken or completed a quest from the npc*/
-	if (temp_hero = CheckClass::isHero(other)) {
+	if (temp_hero) {
 		Planner* planner = AIController::get_plan(CheckClass::isHero(other)->name);
-		if (planner->quests_given.size() == 1)//Bad! Check boolean in Action object instead.
+		bool player_doing_quest = false;
+		bool quest_complete = false;
+		for (int i = 0; i < planner->quests_given.size(); ++i) {
+			if (planner->quests_given[i]->getDoer()->name == SHANGO && planner->quests_given[i]->executed == false)
+				player_doing_quest = true;
+			if (planner->quests_given[i]->getDoer()->name == SHANGO && planner->quests_given[i]->executed == true)
+				quest_complete = true;
+		}
+		if (player_doing_quest)//Bad! Check boolean in Action object instead.
 			message = n->getName() + ": " + dialogue.gen_dialog({ "Quest_In_Progress","Quest_In_Progress" }, temp_hero);
-		else if (planner->quests_given.size() > 1)
+		else if (quest_complete)//Bad! should not use size of quests given as check
 			message = n->getName() + ": " + dialogue.gen_dialog({ "Quest_Complete","Quest_Complete" }, temp_hero);
 		else
 			message = n->getName() + ": " + dialogue.gen_dialog({ "Greeting","Greeting" }, temp_hero);
@@ -693,13 +722,9 @@ hero-related conversation points from the 3D vector of possible conversation
 points and removes them from the options vector.*/
 void DialogueController::exitDialogue()
 {
-
+	Hero* temp_hero = CheckClass::isHero(other);
 	/*does normal exitDialogue stuff if "other" is not a hero*/
 	if (state == 7 || state == 9) {
-		other = nullptr;
-		state = 0;
-		DialogueController::scroll_control = 0;
-		DialogueController::quest_declined = false;
 
 		for (int i = 0; i < curr_conversation_log.size(); i++) {
 
@@ -711,18 +736,25 @@ void DialogueController::exitDialogue()
 		}
 
 		curr_conversation_log.clear();
+		if (temp_hero) {
+			remove_hero_related_conv_points();
+			//remove_ask_for_quest();
+		}
 
-		remove_hero_related_conv_points();
+		other = nullptr;
+		state = 0;
+		DialogueController::scroll_control = 0;
+		DialogueController::quest_declined = false;
+
 		first_call = true;
 	}
 	else {
-		Hero* temp_hero;
-		if (temp_hero = CheckClass::isHero(other)) {//check if "other" is a hero before seeing if they can offer you a quest
-			if (offer_quest_on_exit(temp_hero) == false || quest_declined == true) {
+		state = 7;
+		if (temp_hero) {//check if "other" is a hero before seeing if they can offer you a quest
+			offer_quest_on_exit(temp_hero);
 				/*does normal exitDialogue stuff if quest is not given or if player has denied quest offer*/
-				state = 7;
-			}
-
+			if(quest_declined == true)
+		        state = 7;
 		}
 	}
 	
@@ -776,6 +808,11 @@ void DialogueController::add_hero_related_conv_points() {
 	and to their 3D vector of possible conversation points for conversation points
 	associated with the question mark icon*/
 	for (auto itor = Containers::conv_point_table.begin(); itor != Containers::conv_point_table.end(); ++itor) {
+		if (itor->second->get_name().find("Ask_For_Quest", 0) != std::string::npos){
+			tmp_dpoint = itor->second->dpoint;
+		    options[QuestionMarkIcon].push_back(tmp_dpoint);
+		    dialogue.get_possible_conv_pts_ref()[QuestionMarkIcon].push_back(tmp_dpoint);
+	    }
 		for (int j = 0; j < heroes_player_knows.size(); ++j) {
 			if (heroes_player_knows[j] != dialogue.hero_name_to_int(other->getName())) {
 				if (itor->second->get_topic() != "" && itor->second->get_name().find("Ask About",0) != string::npos && itor->second->dpoint[CorrespondingConvPt] == "") {
@@ -813,7 +850,9 @@ void DialogueController::remove_hero_related_conv_points() {
 	/*removes hero-related conversation points that are associated with the
 	question mark icon from player's dialog options vector */
 	for (int i = 0; i < options[QuestionMarkIcon].size();) {
-		if (options[QuestionMarkIcon][i][ConvPointName].find("Advise To", 0) != string::npos || options[QuestionMarkIcon][i][ConvPointName].find("Ask About", 0) != string::npos) {
+		if (options[QuestionMarkIcon][i][ConvPointName].find("Advise To", 0) != string::npos || options[QuestionMarkIcon][i][ConvPointName].find("Ask About", 0) != string::npos 
+			|| options[QuestionMarkIcon][i][ConvPointName].find("Ask_For_Quest", 0) != string::npos) {
+
 			options[QuestionMarkIcon].erase(options[QuestionMarkIcon].begin() + i);
 		}
 		else
@@ -823,7 +862,9 @@ void DialogueController::remove_hero_related_conv_points() {
 	/*removes hero-related conversation points from 3D vector of possible
 	conversation points that are associated with the question mark icon*/
 	for (int i = 0; i < dialogue.get_possible_conv_pts_ref()[QuestionMarkIcon].size();) {
-		if (dialogue.get_possible_conv_pts_ref()[QuestionMarkIcon][i][ConvPointName].find("Advise To", 0) != string::npos || dialogue.get_possible_conv_pts_ref()[QuestionMarkIcon][i][ConvPointName].find("Ask About", 0) != string::npos) {
+		if (dialogue.get_possible_conv_pts_ref()[QuestionMarkIcon][i][ConvPointName].find("Advise To", 0) != string::npos || dialogue.get_possible_conv_pts_ref()[QuestionMarkIcon][i][ConvPointName].find("Ask About", 0) != string::npos
+			|| dialogue.get_possible_conv_pts_ref()[QuestionMarkIcon][i][ConvPointName].find("Ask_For_Quest", 0) != string::npos) {
+
 			dialogue.get_possible_conv_pts_ref()[QuestionMarkIcon].erase(dialogue.get_possible_conv_pts_ref()[QuestionMarkIcon].begin() + i);
 		}
 		else
@@ -849,6 +890,47 @@ void DialogueController::remove_hero_related_conv_points() {
 		else
 			++i;
 	}
+}
+
+/*Removes Ask For Quest conversation point from player's dialog options.*/
+void DialogueController::remove_ask_for_quest() {
+	/*removes hero-related conversation points that are associated with the
+	question mark icon from player's dialog options vector */
+	for (int i = 0; i < options[QuestionMarkIcon].size();) {
+		if (options[QuestionMarkIcon][i][ConvPointName].find("Ask_For_Quest", 0) != std::string::npos) {
+			options[QuestionMarkIcon].erase(options[QuestionMarkIcon].begin() + i);
+		}
+		else
+			++i;
+	}
+
+	/*removes hero-related conversation points from 3D vector of possible
+	conversation points that are associated with the question mark icon*/
+	for (int i = 0; i < dialogue.get_possible_conv_pts_ref()[QuestionMarkIcon].size();) {
+		if (dialogue.get_possible_conv_pts_ref()[QuestionMarkIcon][i][ConvPointName].find("Ask_For_Quest", 0) != string::npos) {
+			dialogue.get_possible_conv_pts_ref()[QuestionMarkIcon].erase(dialogue.get_possible_conv_pts_ref()[QuestionMarkIcon].begin() + i);
+		}
+		else
+			++i;
+	}
+
+}
+
+/*Adds Ask For Quest conversation point to players dialog options.*/
+void DialogueController::add_ask_for_quest() {
+	options = dialogue.get_possible_conv_pts();
+	dialogue_point tmp_dpoint;
+
+	for (auto itor = Containers::conv_point_table.begin(); itor != Containers::conv_point_table.end(); ++itor) {
+	    if (itor->second->get_topic() != "" && itor->second->get_name().find("Ask_For_Quest", 0) != string::npos && itor->second->dpoint[CorrespondingConvPt] == "") {
+		    tmp_dpoint = itor->second->dpoint;
+			options[QuestionMarkIcon].push_back(tmp_dpoint);
+			dialogue.get_possible_conv_pts_ref()[QuestionMarkIcon].push_back(tmp_dpoint);
+		}
+
+	}
+	tmp_dpoint.clear();
+
 }
 
 /*Updates the number_of_times_said field for the ConversationLogObj arg
@@ -926,6 +1008,7 @@ bool DialogueController::offer_quest_on_exit(Hero* temp_hero) {
 	
 }
 
+/*changes message on upper GUI window to the NPC's farewell message*/
 void DialogueController::create_farewell() {
 	dialogue_point diog_pt = { "Farewell","Farewell" };
 	Hero* temp_hero = CheckClass::isHero(DialogueController::other);

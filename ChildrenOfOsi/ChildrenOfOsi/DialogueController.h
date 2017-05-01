@@ -42,6 +42,8 @@ public:
 	static void replace_all(std::string& str, const std::string& from, const std::string& to);
 	static bool offer_quest_on_exit(Hero* hero);
 	static void DialogueController::create_farewell();
+	static void DialogueController::remove_ask_for_quest();
+	static void DialogueController::add_ask_for_quest();
 
 	static bool prompted_quest;
 	static bool accepted_quest;
