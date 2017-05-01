@@ -126,7 +126,9 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	grid->insert_objs_to_grid(rivObj->getLines());
 	
 	vector<WorldObj*> recVec;
+	vector<WorldObj*> movVec;
 	vector<WorldObj*>* recVec_ptr = &recVec;
+	vector<WorldObj*>* movVec_ptr = &movVec;
 	vector<Hero*> heroes;
 
 	/* MULTITHREADING SETUP */
@@ -203,7 +205,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	RegionState::next_region = next_region;
 
 
-	Input* iController = new Input(gameplay_functions, Alex, RenM->renderHelper, tBuffer, recVec_ptr);
+	Input* iController = new Input(gameplay_functions, Alex, RenM->renderHelper, tBuffer, recVec_ptr, movVec_ptr);
 
 	gameplay_functions->add_hero("Yemoja", 6445.0, 10355.0, true);
 	gameplay_functions->add_hero("Oya", 4400, 3600, true);
@@ -1094,6 +1096,9 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 		for (auto it = recVec.begin(); it != recVec.end(); ++it) {
 			(*it)->sprite.reset_texture();
 		}
+		for (auto it = movVec.begin(); it != movVec.end(); ++it) {
+			(*it)->sprite.reset_texture();
+		}
 		Alex->sprite.reset_texture();
 		glFinish();
 	});
@@ -1109,12 +1114,18 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 		for (auto it = recVec.begin(); it != recVec.end(); ++it) {
 			(*it)->sprite.reset_texture();
 		}
+		for (auto it = movVec.begin(); it != movVec.end(); ++it) {
+			(*it)->sprite.reset_texture();
+		}
 		for (int i = 0; i < (starting_location[3]).size(); i++) {
 			set_file_with_thread(starting_location[3].at(i), &textureMap.find(starting_location[3].at(i))->second);
 		}
 		wglMakeCurrent(nullptr, nullptr);
 		wglDeleteContext(loaderContext1);
 		for (auto it = recVec.begin(); it != recVec.end(); ++it) {
+			(*it)->sprite.reset_texture();
+		}
+		for (auto it = movVec.begin(); it != movVec.end(); ++it) {
 			(*it)->sprite.reset_texture();
 		}
 		glFinish();
@@ -1132,6 +1143,9 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 		for (auto it = recVec.begin(); it != recVec.end(); ++it) {
 			(*it)->sprite.reset_texture();
 		}
+		for (auto it = movVec.begin(); it != movVec.end(); ++it) {
+			(*it)->sprite.reset_texture();
+		}
 		for (int i = 0; i < (starting_location[2]).size(); i++) {
 			set_file_with_thread(starting_location[2].at(i), &textureMap.find(starting_location[2].at(i))->second);
 		}
@@ -1143,6 +1157,9 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 		wglMakeCurrent(nullptr, nullptr);//unassigns the current gl context
 		wglDeleteContext(loaderContext2);//deletes the loading context now that it is not needed
 		for (auto it = recVec.begin(); it != recVec.end(); ++it) {
+			(*it)->sprite.reset_texture();
+		}
+		for (auto it = movVec.begin(); it != movVec.end(); ++it) {
 			(*it)->sprite.reset_texture();
 		}
 		glFinish(); //Forces all gl calls to be completed before execution

@@ -20,6 +20,7 @@ private:
 	RenderHelper* rHelper;
 	TaskBuffer* tBuffer;
 	vector<WorldObj*>* recVec;
+	vector<WorldObj*>* movVec;
 	AIController* ai;
 	pair<float, float> oldPoint;
 
@@ -51,8 +52,8 @@ private:
 	void skip_line();
 
 public:
-	Input(ChildrenOfOsi* _gameplay_functions, RenderHelper* _rHelper, TaskBuffer* _tBuffer, vector<WorldObj*>* _recVec);
-	Input(ChildrenOfOsi* _gameplay_functions, WorldObj * _player, RenderHelper* _rHelper, TaskBuffer* _tBuffer, vector<WorldObj*>* _recVec);
+	Input(ChildrenOfOsi* _gameplay_functions, RenderHelper* _rHelper, TaskBuffer* _tBuffer, vector<WorldObj*>* _recVec, vector<WorldObj*>* _movVec);
+	Input(ChildrenOfOsi* _gameplay_functions, WorldObj * _player, RenderHelper* _rHelper, TaskBuffer* _tBuffer, vector<WorldObj*>* _recVec, vector<WorldObj*>* _movVec);
 	~Input();
 	//Region* Desert;
 	//Region* Ogun;
