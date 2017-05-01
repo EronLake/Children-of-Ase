@@ -502,7 +502,7 @@ void DialogueHelper::fill_conversations() {
 		possible_reply_pts.push_back({});
 	}
 	for (auto itor = Containers::conv_point_table.begin(); itor != Containers::conv_point_table.end(); ++itor) {
-		if (itor->second->get_icon() == "qcp" && itor->second->get_name().find("Ask About",0) == string::npos) {
+		if (itor->second->get_icon() == "qcp" && itor->second->get_name().find("Ask About",0) == string::npos && itor->second->get_name().find("Ask_For_Quest", 0) == string::npos) {
 			possible_conv_pts[QuestionMarkIcon].push_back(itor->second->dpoint);
 		}
 		else if (itor->second->get_icon() == "qrp") {
