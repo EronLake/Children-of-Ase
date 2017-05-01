@@ -51,11 +51,11 @@ void Action::apply_postconditions(bool ifsucc)
 	if (ifsucc == true)
 	{
 		doer_postconds = &doer_succ_postconds;
-		receiver_postconds = &receiver_fail_postconds;
+		receiver_postconds = &receiver_succ_postconds;
 	}
 	else {
 		doer_postconds = &doer_fail_postconds;
-		receiver_postconds = &receiver_succ_postconds;
+		receiver_postconds = &receiver_fail_postconds;
 	}
 
 	//applies all post conditions associated with the action to the doer

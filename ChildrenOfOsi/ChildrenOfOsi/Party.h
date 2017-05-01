@@ -84,6 +84,9 @@ class Party
 
   void set_in_combat(bool b);
 
+  void set_killable(bool b);
+  void capacitate_all();
+
   private:
 
   Vector2f home;

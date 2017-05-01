@@ -336,3 +336,20 @@ void Party::set_in_combat(bool b) {
 		if (!b)(*it)->setCurrentEnemy(nullptr);
 	}
 }
+
+void Party::set_killable(bool b) {
+	for (auto it = members.begin(); it != members.end();++it) {
+		if (b) {
+			if ((*it)->getType()<WorldObj::TYPE_HERO)(*it)->set_killable(b);
+		}
+		else {
+			(*it)->set_killable(b);
+		}
+	}
+}
+
+void Party::capacitate_all() {
+	for (auto it = members.begin(); it != members.end(); ++it) {
+		if ((*it)->get_incapacitated())(*it)->capacitate();
+	}
+}

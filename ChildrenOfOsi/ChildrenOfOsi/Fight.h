@@ -11,7 +11,7 @@ class Fight
 {
 public:
 	Fight();
-	Fight(Party* a, Party* b, bool duel);
+	Fight(Party* a, Party* b, bool type);
 	~Fight();
 	int get_radius();
 	void update_radius();
@@ -40,5 +40,6 @@ private:
 	bool over;
 	int rad;
 	int sides;
+	bool duel;
 };
 

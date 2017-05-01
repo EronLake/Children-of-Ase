@@ -188,7 +188,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	// Player* Alex = new Player(SHANGO, Vector2f(6445.0, 10155.0), 150.0, 150.0);	//init player
 	
 
-	Region* Marsh = new Region("Marsh", "Music/RegionThemes/MarshRegion.flac", "Music/HeroThemes/ogun.flac", { 1000,1000 });
+	Region* Marsh = new Region("Marsh", "Music/RegionThemes/DesertRegion.flac", "Music/HeroThemes/ogun.flac", { 1000,1000 });
 	Region* Desert = new Region("Desert", "Music/RegionThemes/MarshRegion.flac", "Music/HeroThemes/oya.flac", { 5000,5000 });
 	Region* Mountain = new Region("Mountain", "Music/RegionThemes/MountainRegion.flac", "nothing", { 10000,1000 });
 	Region* Jungle = new Region("Jungle", "Music/RegionThemes/JungleRegion.flac", "Music/HeroThemes/oya.flac", { 5000,10000 });
@@ -1816,78 +1816,10 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 				_CrtDumpMemoryLeaks();
 				return;
 			}
-			if (start) {
-				gameplay_functions->play_sound("Play");
-				start = !start;
-			}
+			
 			start_tick = clock();
 
-			if (Alex->getX() > 5285.83 && Alex->getX() < 7079.86) { //Ogun Desert
-				if (Alex->getY() < 3523.33) {
-					if (RegionState::current_region == *Desert)
-						RegionState::next_region = *Marsh;
 
-				}
-				else {
-					if (RegionState::current_region == *Marsh) {
-						RegionState::next_region = *Desert;
-					}
-				}
-			}
-			if (Alex->getX() > 10847.5 && Alex->getX() < 12395.5) {
-				if (Alex->getY() < 14441) {
-					if (RegionState::current_region == *Jungle)
-						RegionState::next_region = *Mountain;
-				}
-				else {
-					if (RegionState::current_region == *Mountain) {
-						RegionState::next_region = *Jungle;
-					}
-				}
-			}
-			if (Alex->getX() > 13091 && Alex->getX() < 13825.9) {
-				if (Alex->getY() < 5132.23) {
-
-					if (RegionState::current_region == *Mountain) {
-						RegionState::next_region = *Marsh;
-					}
-				}
-				else {
-					if (RegionState::current_region == *Marsh)
-						RegionState::next_region = *Mountain;
-				}
-			}
-			if (Alex->getX() > 3479.67 && Alex->getX() < 9446.06) {
-				if (Alex->getY() < 15980.7) {
-					if (RegionState::current_region == *Jungle)
-						RegionState::next_region = *Desert;
-				}
-				else {
-					if (RegionState::current_region == *Desert) {
-						RegionState::next_region = *Jungle;
-					}
-				}
-			}
-			if (!(RegionState::current_region == RegionState::next_region)) {
-				RegionState::switch_music = true;
-			}
-
-			if (RegionState::switch_music) {
-				if (RegionState::in_village) {
-
-					gameplay_functions->change_song("Change", RegionState::current_region.getRTheme(), RegionState::current_region.getVTheme());
-					RegionState::switch_music = false;
-				}
-				else {
-					gameplay_functions->change_song("Change", RegionState::current_region.getRTheme(), RegionState::next_region.getRTheme());
-					//iController->current_region = current_region;
-					RegionState::current_region = RegionState::next_region;
-
-					//current_region->getRTheme(), next_region->getRTheme()
-					RegionState::switch_music = false;
-				}
-
-			}   
 
 			gameplay_functions->drawTut(Alex);
 
@@ -2108,78 +2040,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 				_CrtDumpMemoryLeaks();
 				return;
 			}
-			if (start) {
-				gameplay_functions->play_sound("Play");
-				start = !start;
-			}
 			start_tick = clock();
-
-			if (Alex->getX() > 5285.83 && Alex->getX() < 7079.86) { //Ogun Desert
-				if (Alex->getY() < 3523.33) {
-					if (RegionState::current_region == *Desert)
-						RegionState::next_region = *Marsh;
-
-				}
-				else {
-					if (RegionState::current_region == *Marsh) {
-						RegionState::next_region = *Desert;
-					}
-				}
-			}
-			if (Alex->getX() > 10847.5 && Alex->getX() < 12395.5) {
-				if (Alex->getY() < 14441) {
-					if (RegionState::current_region == *Jungle)
-						RegionState::next_region = *Mountain;
-				}
-				else {
-					if (RegionState::current_region == *Mountain) {
-						RegionState::next_region = *Jungle;
-					}
-				}
-			}
-			if (Alex->getX() > 13091 && Alex->getX() < 13825.9) {
-				if (Alex->getY() < 5132.23) {
-
-					if (RegionState::current_region == *Mountain) {
-						RegionState::next_region = *Marsh;
-					}
-				}
-				else {
-					if (RegionState::current_region == *Marsh)
-						RegionState::next_region = *Mountain;
-				}
-			}
-			if (Alex->getX() > 3479.67 && Alex->getX() < 9446.06) {
-				if (Alex->getY() < 15980.7) {
-					if (RegionState::current_region == *Jungle)
-						RegionState::next_region = *Desert;
-				}
-				else {
-					if (RegionState::current_region == *Desert) {
-						RegionState::next_region = *Jungle;
-					}
-				}
-			}
-			if (!(RegionState::current_region == RegionState::next_region)) {
-				RegionState::switch_music = true;
-			}
-
-			if (RegionState::switch_music) {
-				if (RegionState::in_village) {
-
-					gameplay_functions->change_song("Change", RegionState::current_region.getRTheme(), RegionState::current_region.getVTheme());
-					RegionState::switch_music = false;
-				}
-				else {
-					gameplay_functions->change_song("Change", RegionState::current_region.getRTheme(), RegionState::next_region.getRTheme());
-					//iController->current_region = current_region;
-					RegionState::current_region = RegionState::next_region;
-
-					//current_region->getRTheme(), next_region->getRTheme()
-					RegionState::switch_music = false;
-				}
-
-			}
 
 			//draw
 			gameplay_functions->drawDiaGui(Alex);
