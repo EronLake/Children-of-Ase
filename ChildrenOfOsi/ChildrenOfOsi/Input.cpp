@@ -446,7 +446,7 @@ void Input::edit_object() {
 		}
 	}
 
-	if (collide_with != "" && onscreen && collide_with != "Jungle_Village" && collide_with != "Oasis_Platform")
+	if (collide_with != "" && onscreen && collide_with != "JungleVillage" && collide_with != "Oasis_Platform")
 	{
 		if (!H)
 		{
@@ -546,8 +546,8 @@ void Input::add_point_to_file() {
 	glfwGetCursorPos(GameWindow::window, &xpos, &ypos);
 	////cout << "XPOS AND YPOS ARE " << xpos << ", " << ypos << endl;
 
-	int mouseX = (rHelper->camera->getX() + (xpos * map_zoom) * GameWindow::WINDOW_WIDTH_DP / 1300);
-	int mouseY = 25000 - (rHelper->camera->getY() + (ypos * map_zoom) * GameWindow::WINDOW_HEIGHT_DP / 700);
+	int mouseX = (rHelper->camera->getX() + (xpos * map_zoom) * GameWindow::WINDOW_WIDTH_DP / 1280);
+	int mouseY = 25000 - (rHelper->camera->getY() + (ypos * map_zoom) * GameWindow::WINDOW_HEIGHT_DP / 720);
 	//int mouseX = rHelper->camera->getX() - (150.0 / 2) + ((rHelper->getCameraSize().getXloc() / 2)*map_zoom);
 	//int mouseY = rHelper->camera->getY() - (150.0 / 2) + ((rHelper->getCameraSize().getYloc() / 2)*map_zoom);
 

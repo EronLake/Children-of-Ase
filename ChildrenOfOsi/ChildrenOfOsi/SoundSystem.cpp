@@ -211,7 +211,7 @@ FMOD_RESULT result;
 														 //object stuff
 
 
-		playMusic(sounds[name], true, chnls[0], ispaused,.6);
+		playMusic(sounds[name], true, chnls[0], ispaused,.8);
 		
 		// Play the sound, with loop mode
 
@@ -283,7 +283,7 @@ FMOD_RESULT result;
 		//object stuff
 
 
-		playMusic(sounds[name], true, chnls[0], ispaused, .6);
+		playMusic(sounds[name], true, chnls[0], ispaused, .8);
 
 		// Play the sound, with loop mode
 
@@ -319,7 +319,7 @@ FMOD_RESULT result;
 		//object stuff
 
 
-		playSound(sounds[name], false, chnls[1], ispaused, 1.2);
+		playSound(sounds[name], false, chnls[1], ispaused, 1);
 
 		// Play the sound, with loop mode
 

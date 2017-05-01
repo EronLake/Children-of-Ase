@@ -18,11 +18,13 @@ private:
 public:
 	QuadTree(unsigned int p_treelv, WorldObj p_bounds);
 	~QuadTree();
+	void clearMovable();
 	void clear();
 	void split();
 	vector<int> getIndexes(WorldObj* myrec);
 	void Insert(WorldObj* myrec);
 	vector<WorldObj*> retrieve(vector<WorldObj*> &listOfObj, WorldObj* myrec);
 	vector<WorldObj*> renderRetrieve(vector<WorldObj*> &listOfObj, WorldObj* myrec);
+	int treeSize();
 };
 

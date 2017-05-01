@@ -103,7 +103,8 @@ class Soldier: public NPC
   Vector2f get_action_destination() { return action_destination; };
 
   virtual void defeat();
-  virtual void capacitate();
+  virtual void capacitate(int t);
+  virtual void incapacitate();
   virtual void kill();
 
   int get_warning() { return warning; };
