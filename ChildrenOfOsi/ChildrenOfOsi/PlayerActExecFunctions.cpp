@@ -174,7 +174,7 @@ void PlayerActExecFunctions::execute_dialog()
 		((!player->getInCombat()) && (!player->getInCombat())))
 	{
 		//we need to create a fight here if their action is a violent action
-		if (act_name == "Duel") {
+		if (act_name == "Duel" || act_name == "Spar") {
 			Fight* fight_obj = new Fight(player->getParty(), cur_action->getReceiver()->getParty(), true);
 		}
 		else {
@@ -198,9 +198,9 @@ void PlayerActExecFunctions::check_quest() {
 
 	for (auto itr : player->get_quests())
 	{
-		if (player->cur_action->getName() == itr.first->getName())
+		if (player->cur_action == itr.first)
 		{
-			LOG("MARK QUEST AS COMPLETED")
+			player->cur_action->executed = true;
 		}
 	}
 

@@ -111,104 +111,110 @@ GameMap::~GameMap()
 }
 
 void GameMap::setTextures() {
-	map1_1tex = Containers::texture_table["map1_1"];
-	map1_2tex = Containers::texture_table["map1_2"];
-	map1_3tex = Containers::texture_table["map1_3"];
-	map1_4tex = Containers::texture_table["map1_4"];
-	map1_5tex = Containers::texture_table["map1_5"];
+	if (LOAD_MAP) {
+		map1_1tex = Containers::texture_table["map1_1"];
+		map1_2tex = Containers::texture_table["map1_2"];
+		map1_3tex = Containers::texture_table["map1_3"];
+		map1_4tex = Containers::texture_table["map1_4"];
+		map1_5tex = Containers::texture_table["map1_5"];
 
-	map2_1tex = Containers::texture_table["map2_1"];
-	map2_2tex = Containers::texture_table["map2_2"];
-	map2_3tex = Containers::texture_table["map2_3"];
-	map2_4tex = Containers::texture_table["map2_4"];
-	map2_5tex = Containers::texture_table["map2_5"];
+		map2_1tex = Containers::texture_table["map2_1"];
+		map2_2tex = Containers::texture_table["map2_2"];
+		map2_3tex = Containers::texture_table["map2_3"];
+		map2_4tex = Containers::texture_table["map2_4"];
+		map2_5tex = Containers::texture_table["map2_5"];
 
-	map3_1tex = Containers::texture_table["map3_1"];
-	map3_2tex = Containers::texture_table["map3_2"];
-	map3_3tex = Containers::texture_table["map3_3"];
-	map3_4tex = Containers::texture_table["map3_4"];
-	map3_5tex = Containers::texture_table["map3_5"];
+		map3_1tex = Containers::texture_table["map3_1"];
+		map3_2tex = Containers::texture_table["map3_2"];
+		map3_3tex = Containers::texture_table["map3_3"];
+		map3_4tex = Containers::texture_table["map3_4"];
+		map3_5tex = Containers::texture_table["map3_5"];
 
-	map4_1tex = Containers::texture_table["map4_1"];
-	map4_2tex = Containers::texture_table["map4_2"];
-	map4_3tex = Containers::texture_table["map4_3"];
-	map4_4tex = Containers::texture_table["map4_4"];
-	map4_5tex = Containers::texture_table["map4_5"];
+		map4_1tex = Containers::texture_table["map4_1"];
+		map4_2tex = Containers::texture_table["map4_2"];
+		map4_3tex = Containers::texture_table["map4_3"];
+		map4_4tex = Containers::texture_table["map4_4"];
+		map4_5tex = Containers::texture_table["map4_5"];
 
-	map5_1tex = Containers::texture_table["map5_1"];
-	map5_2tex = Containers::texture_table["map5_2"];
-	map5_3tex = Containers::texture_table["map5_3"];
-	map5_4tex = Containers::texture_table["map5_4"];
-	map5_5tex = Containers::texture_table["map5_5"];
+		map5_1tex = Containers::texture_table["map5_1"];
+		map5_2tex = Containers::texture_table["map5_2"];
+		map5_3tex = Containers::texture_table["map5_3"];
+		map5_4tex = Containers::texture_table["map5_4"];
+		map5_5tex = Containers::texture_table["map5_5"];
+	}
 }
 
 void GameMap::loadTexture()
 {
-	map1_1tex->setFile("Assets/Sprites/map1_1.png", 1);
-	map1_2tex->setFile("Assets/Sprites/map1_2.png", 1);
-	map1_3tex->setFile("Assets/Sprites/map1_3.png", 1);
-	map1_4tex->setFile("Assets/Sprites/map1_4.png", 1);
-	map1_5tex->setFile("Assets/Sprites/map1_5.png", 1);
+	if (LOAD_MAP) {
+		map1_1tex->setFile("Assets/Sprites/map1_1.png", 1);
+		map1_2tex->setFile("Assets/Sprites/map1_2.png", 1);
+		map1_3tex->setFile("Assets/Sprites/map1_3.png", 1);
+		map1_4tex->setFile("Assets/Sprites/map1_4.png", 1);
+		map1_5tex->setFile("Assets/Sprites/map1_5.png", 1);
 
-	map2_1tex->setFile("Assets/Sprites/map2_1.png", 1);
-	map2_2tex->setFile("Assets/Sprites/map2_2.png", 1);
-	map2_3tex->setFile("Assets/Sprites/map2_3.png", 1);
-	map2_4tex->setFile("Assets/Sprites/map2_4.png", 1);
-	map2_5tex->setFile("Assets/Sprites/map2_5.png", 1);
+		map2_1tex->setFile("Assets/Sprites/map2_1.png", 1);
+		map2_2tex->setFile("Assets/Sprites/map2_2.png", 1);
+		map2_3tex->setFile("Assets/Sprites/map2_3.png", 1);
+		map2_4tex->setFile("Assets/Sprites/map2_4.png", 1);
+		map2_5tex->setFile("Assets/Sprites/map2_5.png", 1);
 
-	map3_1tex->setFile("Assets/Sprites/map3_1.png", 1);
-	map3_2tex->setFile("Assets/Sprites/map3_2.png", 1);
-	map3_3tex->setFile("Assets/Sprites/map3_3.png", 1);
-	map3_4tex->setFile("Assets/Sprites/map3_4.png", 1);
-	map3_5tex->setFile("Assets/Sprites/map3_5.png", 1);
+		map3_1tex->setFile("Assets/Sprites/map3_1.png", 1);
+		map3_2tex->setFile("Assets/Sprites/map3_2.png", 1);
+		map3_3tex->setFile("Assets/Sprites/map3_3.png", 1);
+		map3_4tex->setFile("Assets/Sprites/map3_4.png", 1);
+		map3_5tex->setFile("Assets/Sprites/map3_5.png", 1);
 
-	map4_1tex->setFile("Assets/Sprites/map4_1.png", 1);
-	map4_2tex->setFile("Assets/Sprites/map4_2.png", 1);
-	map4_3tex->setFile("Assets/Sprites/map4_3.png", 1);
-	map4_4tex->setFile("Assets/Sprites/map4_4.png", 1);
-	map4_5tex->setFile("Assets/Sprites/map4_5.png", 1);
+		map4_1tex->setFile("Assets/Sprites/map4_1.png", 1);
+		map4_2tex->setFile("Assets/Sprites/map4_2.png", 1);
+		map4_3tex->setFile("Assets/Sprites/map4_3.png", 1);
+		map4_4tex->setFile("Assets/Sprites/map4_4.png", 1);
+		map4_5tex->setFile("Assets/Sprites/map4_5.png", 1);
 
-	map5_1tex->setFile("Assets/Sprites/map5_1.png", 1);
-	map5_2tex->setFile("Assets/Sprites/map5_2.png", 1);
-	map5_3tex->setFile("Assets/Sprites/map5_3.png", 1);
-	map5_4tex->setFile("Assets/Sprites/map5_4.png", 1);
-	map5_5tex->setFile("Assets/Sprites/map5_5.png", 1);
-	//riverTex->setFile("River.png");
+		map5_1tex->setFile("Assets/Sprites/map5_1.png", 1);
+		map5_2tex->setFile("Assets/Sprites/map5_2.png", 1);
+		map5_3tex->setFile("Assets/Sprites/map5_3.png", 1);
+		map5_4tex->setFile("Assets/Sprites/map5_4.png", 1);
+		map5_5tex->setFile("Assets/Sprites/map5_5.png", 1);
+		//riverTex->setFile("River.png");
+	}
 }
 
 void GameMap::setSprite()
 {
-	map1_1->sprite.setTexture(map1_1tex);
-	map1_2->sprite.setTexture(map1_2tex);
-	map1_3->sprite.setTexture(map1_3tex);
-	map1_4->sprite.setTexture(map1_4tex);
-	map1_5->sprite.setTexture(map1_5tex);
+	if (LOAD_MAP) {
+		map1_1->sprite.setTexture(map1_1tex);
+		map1_2->sprite.setTexture(map1_2tex);
+		map1_3->sprite.setTexture(map1_3tex);
+		map1_4->sprite.setTexture(map1_4tex);
+		map1_5->sprite.setTexture(map1_5tex);
 
-	map2_1->sprite.setTexture(map2_1tex);
-	map2_2->sprite.setTexture(map2_2tex);
-	map2_3->sprite.setTexture(map2_3tex);
-	map2_4->sprite.setTexture(map2_4tex);
-	map2_5->sprite.setTexture(map2_5tex);
+		map2_1->sprite.setTexture(map2_1tex);
+		map2_2->sprite.setTexture(map2_2tex);
+		map2_3->sprite.setTexture(map2_3tex);
+		map2_4->sprite.setTexture(map2_4tex);
+		map2_5->sprite.setTexture(map2_5tex);
 
-	map3_1->sprite.setTexture(map3_1tex);
-	map3_2->sprite.setTexture(map3_2tex);
-	map3_3->sprite.setTexture(map3_3tex);
-	map3_4->sprite.setTexture(map3_4tex);
-	map3_5->sprite.setTexture(map3_5tex);
+		map3_1->sprite.setTexture(map3_1tex);
+		map3_2->sprite.setTexture(map3_2tex);
+		map3_3->sprite.setTexture(map3_3tex);
+		map3_4->sprite.setTexture(map3_4tex);
+		map3_5->sprite.setTexture(map3_5tex);
 
-	map4_1->sprite.setTexture(map4_1tex);
-	map4_2->sprite.setTexture(map4_2tex);
-	map4_3->sprite.setTexture(map4_3tex);
-	map4_4->sprite.setTexture(map4_4tex);
-	map4_5->sprite.setTexture(map4_5tex);
+		map4_1->sprite.setTexture(map4_1tex);
+		map4_2->sprite.setTexture(map4_2tex);
+		map4_3->sprite.setTexture(map4_3tex);
+		map4_4->sprite.setTexture(map4_4tex);
+		map4_5->sprite.setTexture(map4_5tex);
 
-	map5_1->sprite.setTexture(map5_1tex);
-	map5_2->sprite.setTexture(map5_2tex);
-	map5_3->sprite.setTexture(map5_3tex);
-	map5_4->sprite.setTexture(map5_4tex);
-	map5_5->sprite.setTexture(map5_5tex);
+		map5_1->sprite.setTexture(map5_1tex);
+		map5_2->sprite.setTexture(map5_2tex);
+		map5_3->sprite.setTexture(map5_3tex);
+		map5_4->sprite.setTexture(map5_4tex);
+		map5_5->sprite.setTexture(map5_5tex);
 
-	//river->sprite.setTexture(riverTex);
+		//river->sprite.setTexture(riverTex);
+	}
 }
 
 void GameMap::drawMap(float _x, float _y)
