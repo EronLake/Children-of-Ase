@@ -31,7 +31,7 @@ int Movement::move_up(WorldObj* obj) {
 	obj->setDirection(WorldObj::DIRECTION_UP);
 	objVec.clear();
 	objVec = tree->retrieve(objVec, obj);
-	////cout << "SIZE OF OBJVEC IS ************************ " << objVec.size() << endl;
+	cout << "SIZE OF OBJVEC IS ************************ " << objVec.size() << endl;
 	NPC* npc;
 	if (my_type >= WorldObj::TYPE_NPC) {
 		if (npc = CheckClass::isNPC(obj))
