@@ -9,7 +9,7 @@
 #include "RegionState.h"
 
 
-Input::Input(ChildrenOfOsi* _gameplay_functions, RenderHelper* _rHelper, TaskBuffer* _tBuffer, vector<WorldObj*>* _recVec)
+Input::Input(ChildrenOfOsi* _gameplay_functions, RenderHelper* _rHelper, TaskBuffer* _tBuffer, vector<WorldObj*>* _recVec, vector<WorldObj*>* _movVec)
 {
 	count = 0;
 	count2 = 0;
@@ -17,11 +17,12 @@ Input::Input(ChildrenOfOsi* _gameplay_functions, RenderHelper* _rHelper, TaskBuf
 	rHelper = _rHelper;
 	tBuffer = _tBuffer;
 	recVec = _recVec;
+	movVec = _movVec;
 	current_game_state = game_state::load_game;
 	LOG("Input Objected Constructed");
 }
 
-Input::Input(ChildrenOfOsi* _gameplay_functions, WorldObj * _player, RenderHelper* _rHelper, TaskBuffer* _tBuffer, vector<WorldObj*>* _recVec)
+Input::Input(ChildrenOfOsi* _gameplay_functions, WorldObj * _player, RenderHelper* _rHelper, TaskBuffer* _tBuffer, vector<WorldObj*>* _recVec, vector<WorldObj*>* _movVec)
 {
 	count = 0;
 	count2 = 0;
@@ -29,7 +30,7 @@ Input::Input(ChildrenOfOsi* _gameplay_functions, WorldObj * _player, RenderHelpe
 	rHelper = _rHelper;
 	tBuffer = _tBuffer;
 	recVec = _recVec;
-
+	movVec = _movVec;
 	//gameplay_functions->play_sound("Play");
 	//gameplay_functions->createTaskForAudio("PlaySound", "SOUND", "SFX/swing.wav");
 	//gameplay_functions->play_sound("Walk");
