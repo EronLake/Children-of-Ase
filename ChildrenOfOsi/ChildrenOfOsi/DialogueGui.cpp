@@ -9,19 +9,25 @@ DialogueGui::DialogueGui()
   this->icon_heart_rect = new Rectangle({DialogueGui::ICON_HEART_X, DialogueGui::ICON_HEART_Y}, DialogueGui::ICON_WIDTH, DialogueGui::ICON_HEIGHT);
   this->icon_face_rect = new Rectangle({DialogueGui::ICON_FACE_X, DialogueGui::ICON_FACE_Y}, DialogueGui::ICON_WIDTH, DialogueGui::ICON_HEIGHT);
   this->icon_question_rect = new Rectangle({DialogueGui::ICON_QUESTION_X, DialogueGui::ICON_QUESTION_Y}, DialogueGui::ICON_WIDTH, DialogueGui::ICON_HEIGHT);
-  this->speaker_left_rect = new Rectangle({0, 0}, 0, 0);
-  this->speaker_right_rect = new Rectangle({0, 0}, 0, 0);
+  this->speaker_left_rect = new Rectangle({DialogueGui::SPEAKER_LEFT_X, DialogueGui::SPEAKER_LEFT_Y}, DialogueGui::SPEAKER_LEFT_WIDTH, DialogueGui::SPEAKER_LEFT_HEIGHT);
+  this->speaker_right_rect = new Rectangle({DialogueGui::SPEAKER_RIGHT_X, DialogueGui::SPEAKER_RIGHT_Y}, DialogueGui::SPEAKER_RIGHT_WIDTH, DialogueGui::SPEAKER_RIGHT_HEIGHT);
 
   this->background_tex = new Texture();
   this->header_tex = new Texture();
+
   this->icon_sword_tex = new Texture();
+  this->icon_sword_glow_tex = new Texture();
   this->icon_heart_tex = new Texture();
+  this->icon_heart_glow_tex = new Texture();
   this->icon_face_tex = new Texture();
+  this->icon_face_glow_tex = new Texture();
   this->icon_question_tex = new Texture();
+  this->icon_question_glow_tex = new Texture();
+
   this->speaker_left_tex = new Texture();
   this->speaker_right_tex = new Texture();
 
-  background = new Rectangle(Vector2f(70, 270), 820, 250);
+  /*background = new Rectangle(Vector2f(70, 270), 820, 250);
   swordIcon = new Rectangle(Vector2f(142, 302), 50, 47);
   heartIcon = new Rectangle(Vector2f(142, 349), 50, 47);
   faceIcon = new Rectangle(Vector2f(142, 394), 50, 47);
@@ -41,7 +47,7 @@ DialogueGui::DialogueGui()
   questionTex = new Texture();
   questionGlowTex = new Texture();
   dialogueBoxTex = new Texture();
-  responseBoxTex = new Texture();
+  responseBoxTex = new Texture();*/
 
   text_color_default = glm::vec3(0, 0, 0);
   text_color_selected = glm::vec3(50, 0, 0);
@@ -53,8 +59,19 @@ DialogueGui::~DialogueGui() {}
 
 void DialogueGui::loadTexture()
 {
-  //setFile, load, setFrame
-  backgroundTex->setFile("DGBackground.png", 1);
+  this->background_tex->setFile(SPRITES_PATH + "Dialogue_Background.png", 1);
+  this->header_tex->setFile(SPRITES_PATH + "Dialogue_Header.png", 1);
+
+  this->icon_sword_tex->setFile(SPRITES_PATH + "Dialogue_IconSword.png", 1);
+  this->icon_sword_glow_tex->setFile(SPRITES_PATH + "Dialogue_IconSword_Glow.png", 1);
+  this->icon_heart_tex->setFile(SPRITES_PATH + "Dialogue_IconHeart.png", 1);
+  this->icon_heart_glow_tex->setFile(SPRITES_PATH + "Dialogue_IconHeart_Glow.png", 1);
+  this->icon_face_tex->setFile(SPRITES_PATH + "Dialogue_IconFace.png", 1);
+  this->icon_face_glow_tex->setFile(SPRITES_PATH + "Dialogue_IconFace_Glow.png", 1);
+  this->icon_question_tex->setFile(SPRITES_PATH + "Dialogue_IconQuestion.png", 1);
+  this->icon_question_glow_tex->setFile(SPRITES_PATH + "Dialogue_IconQuestion_Glow.png", 1);
+
+  /*backgroundTex->setFile("DGBackground.png", 1);
   swordTex->setFile("DGSword.png", 1);
   swordGlowTex->setFile("DGGlowSword.png", 1);
   heartTex->setFile("DGHeart.png", 1);
@@ -64,73 +81,93 @@ void DialogueGui::loadTexture()
   questionTex->setFile("DGQuestion.png", 1);
   questionGlowTex->setFile("DGGlowQuestion.png", 1);
   dialogueBoxTex->setFile("DGDiaBox.png", 1);
-  responseBoxTex->setFile("DGResponseBox.png", 1);
+  responseBoxTex->setFile("DGResponseBox.png", 1);*/
 }
 
 void DialogueGui::setSprite()
 {
-  background->sprite.setTexture(backgroundTex);
+  this->background_rect->sprite.setTexture(this->background_tex);
+  this->header_rect->sprite.setTexture(this->header_tex);
+  this->setSwordGlow();
+
+  /*background->sprite.setTexture(backgroundTex);
   swordIcon->sprite.setTexture(swordGlowTex);
   heartIcon->sprite.setTexture(heartTex);
   faceIcon->sprite.setTexture(faceTex);
   questionIcon->sprite.setTexture(questionTex);
   dialogueBox->sprite.setTexture(dialogueBoxTex);
-  responseBox1->sprite.setTexture(responseBoxTex);
-}
-
-void DialogueGui::setPortrait1(Sprite portrait1Sprite)
-{
-  portrait1->sprite = portrait1Sprite;
-}
-
-void DialogueGui::setPortrait2(Sprite portrait2Sprite)
-{
-  portrait2->sprite = portrait2Sprite;
+  responseBox1->sprite.setTexture(responseBoxTex);*/
 }
 
 void DialogueGui::setSwordGlow()
 {
-  heartIcon->sprite.setTexture(heartTex);
-  faceIcon->sprite.setTexture(faceTex);
-  questionIcon->sprite.setTexture(questionTex);
-  swordIcon->sprite.setTexture(swordGlowTex);
+  this->icon_sword_rect->sprite.setTexture(this->icon_sword_glow_tex);
+  this->icon_heart_rect->sprite.setTexture(this->icon_heart_tex);
+  this->icon_face_rect->sprite.setTexture(this->icon_face_tex);
+  this->icon_question_rect->sprite.setTexture(this->icon_question_tex);
 }
 
 void DialogueGui::setHeartGlow()
 {
-  swordIcon->sprite.setTexture(swordTex);
-  faceIcon->sprite.setTexture(faceTex);
-  questionIcon->sprite.setTexture(questionTex);
-  heartIcon->sprite.setTexture(heartGlowTex);
+  this->icon_sword_rect->sprite.setTexture(this->icon_sword_tex);
+  this->icon_heart_rect->sprite.setTexture(this->icon_heart_glow_tex);
+  this->icon_face_rect->sprite.setTexture(this->icon_face_tex);
+  this->icon_question_rect->sprite.setTexture(this->icon_question_tex);
 }
 
 void DialogueGui::setFaceGlow()
 {
-  heartIcon->sprite.setTexture(heartTex);
-  swordIcon->sprite.setTexture(swordTex);
-  questionIcon->sprite.setTexture(questionTex);
-  faceIcon->sprite.setTexture(faceGlowTex);
+  this->icon_sword_rect->sprite.setTexture(this->icon_sword_tex);
+  this->icon_heart_rect->sprite.setTexture(this->icon_heart_tex);
+  this->icon_face_rect->sprite.setTexture(this->icon_face_glow_tex);
+  this->icon_question_rect->sprite.setTexture(this->icon_question_tex);
 }
 
 void DialogueGui::setQuestionGlow()
 {
-  heartIcon->sprite.setTexture(heartTex);
-  faceIcon->sprite.setTexture(faceTex);
-  swordIcon->sprite.setTexture(swordTex);
-  questionIcon->sprite.setTexture(questionGlowTex);
+  this->icon_sword_rect->sprite.setTexture(this->icon_sword_tex);
+  this->icon_heart_rect->sprite.setTexture(this->icon_heart_tex);
+  this->icon_face_rect->sprite.setTexture(this->icon_face_tex);
+  this->icon_question_rect->sprite.setTexture(this->icon_question_glow_tex);
+}
+
+void DialogueGui::setLeftSpeaker(Texture *speakerTexture)
+{
+  this->speaker_left_tex = speakerTexture;
+}
+
+void DialogueGui::setRightSpeaker(Texture *speakerTexture)
+{
+  this->speaker_right_tex = speakerTexture;
 }
 
 void DialogueGui::drawGui()
 {
-  GameWindow::drawSprite(background->getX(), background->getY(), background->getWidth(), background->getHeight(), background->sprite);
+  // Draw the dialogue background and icon header
+  GameWindow::drawSprite(this->background_rect->getX(), this->background_rect->getY(),
+    this->background_rect->getWidth(), this->background_rect->getHeight(), this->background_rect->getSprite());
+  GameWindow::drawSprite(this->header_rect->getX(), this->header_rect->getY(),
+    this->header_rect->getWidth(), this->header_rect->getHeight(), this->header_rect->getSprite());
+  
+  // Draw the four topic grouping icons
+  GameWindow::drawSprite(this->icon_sword_rect->getX(), this->icon_sword_rect->getY(),
+    this->icon_sword_rect->getWidth(), this->icon_sword_rect->getHeight(), this->icon_sword_rect->getSprite());
+  GameWindow::drawSprite(this->icon_heart_rect->getX(), this->icon_heart_rect->getY(),
+    this->icon_heart_rect->getWidth(), this->icon_heart_rect->getHeight(), this->icon_heart_rect->getSprite());
+  GameWindow::drawSprite(this->icon_face_rect->getX(), this->icon_face_rect->getY(),
+    this->icon_face_rect->getWidth(), this->icon_face_rect->getHeight(), this->icon_face_rect->getSprite());
+  GameWindow::drawSprite(this->icon_question_rect->getX(), this->icon_question_rect->getY(),
+    this->icon_question_rect->getWidth(), this->icon_question_rect->getHeight(), this->icon_question_rect->getSprite());
+
+  /*GameWindow::drawSprite(background->getX(), background->getY(), background->getWidth(), background->getHeight(), background->sprite);
   GameWindow::drawSprite(swordIcon->getX(), swordIcon->getY(), swordIcon->getWidth(), swordIcon->getHeight(), swordIcon->sprite);
   GameWindow::drawSprite(heartIcon->getX(), heartIcon->getY(), heartIcon->getWidth(), heartIcon->getHeight(), heartIcon->sprite);
   GameWindow::drawSprite(faceIcon->getX(), faceIcon->getY(), faceIcon->getWidth(), faceIcon->getHeight(), faceIcon->sprite);
   GameWindow::drawSprite(questionIcon->getX(), questionIcon->getY(), questionIcon->getWidth(), questionIcon->getHeight(), questionIcon->sprite);
   GameWindow::drawSprite(dialogueBox->getX(), dialogueBox->getY(), dialogueBox->getWidth(), dialogueBox->getHeight(), dialogueBox->sprite);
-  GameWindow::drawSprite(responseBox1->getX(), responseBox1->getY(), responseBox1->getWidth(), responseBox1->getHeight(), responseBox1->sprite);
-  std::string message = DialogueController::getMessage();
+  GameWindow::drawSprite(responseBox1->getX(), responseBox1->getY(), responseBox1->getWidth(), responseBox1->getHeight(), responseBox1->sprite);*/
 
+  std::string message = DialogueController::getMessage();
   GameWindow::createText(message, 266, 303, 500, 80, text_color_default);
   std::vector<std::vector<std::string>> options;
 

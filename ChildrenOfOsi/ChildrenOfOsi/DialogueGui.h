@@ -21,14 +21,14 @@ class DialogueGui
   static constexpr float HEADER_WIDTH = 250.0F;
   static constexpr float HEADER_HEIGHT = 75.0F;
 
-  static constexpr float ICON_SWORD_X = 0.0F;
-  static constexpr float ICON_SWORD_Y = 0.0F;
-  static constexpr float ICON_HEART_X = 0.0F;
-  static constexpr float ICON_HEART_Y = 0.0F;
-  static constexpr float ICON_FACE_X = 0.0F;
-  static constexpr float ICON_FACE_Y = 0.0F;
-  static constexpr float ICON_QUESTION_X = 0.0F;
-  static constexpr float ICON_QUESTION_Y = 0.0F;
+  static constexpr float ICON_SWORD_X = 367.5F;
+  static constexpr float ICON_SWORD_Y = 242.5F;
+  static constexpr float ICON_HEART_X = 392.5F;
+  static constexpr float ICON_HEART_Y = 242.5F;
+  static constexpr float ICON_FACE_X = 417.5F;
+  static constexpr float ICON_FACE_Y = 242.5F;
+  static constexpr float ICON_QUESTION_X = 442.5F;
+  static constexpr float ICON_QUESTION_Y = 242.5F;
   static constexpr float ICON_WIDTH = 30.0F;
   static constexpr float ICON_HEIGHT = 30.0F;
 
@@ -54,9 +54,13 @@ class DialogueGui
   Texture *background_tex;
   Texture *header_tex;
   Texture *icon_sword_tex;
+  Texture *icon_sword_glow_tex;
   Texture *icon_heart_tex;
+  Texture *icon_heart_glow_tex;
   Texture *icon_face_tex;
+  Texture *icon_face_glow_tex;
   Texture *icon_question_tex;
+  Texture *icon_question_glow_tex;
   Texture *speaker_left_tex;
   Texture *speaker_right_tex;
 
@@ -95,8 +99,8 @@ class DialogueGui
   void setSprite();
   void drawGui();
 
-  void setPortrait1(Sprite portrait1Sprite);
-  void setPortrait2(Sprite portrait2Sprite);
+  void setLeftSpeaker(Texture *speakerTexture);
+  void setRightSpeaker(Texture *speakerTexture);
 
   void setSwordGlow();
   void setHeartGlow();
