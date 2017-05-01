@@ -90,7 +90,12 @@ int RenderHelper::draw_frame(WorldObj * obj)
 		fullVec = tree->retrieve(fullVec, fullBound);
 	}
 
-	
+	//set<WorldObj*> s;
+	//unsigned size = fullVec.size();
+	//for (unsigned i = 0; i < size; ++i) s.insert(fullVec[i]);
+	//fullVec.assign(s.begin(), s.end());
+
+	cout << "size of fullvec is " << fullVec.size() << endl;
 	for (int i = 0; i < fullVec.size(); i++) {
 		WorldObj* tempObj = fullVec[i];
 		if (tempObj->getX() > obj->getX() - (1000*map_zoom) && tempObj->getX() < obj->getX() + (1000*map_zoom) && tempObj->getY() > obj->getY() - (800*map_zoom) && tempObj->getY() < obj->getY() + (800*map_zoom)) {
@@ -128,7 +133,7 @@ int RenderHelper::draw_frame(WorldObj * obj)
 	}*/
 	sortVec();
 	//cout << "THE COORDINATES OF OBJ IS " << obj->getX() << ", " << obj->getY() << endl;
-	//cout << "******************************************SIZE OF THE OBJVEC TO RENDER IS " << objVec.size() << endl;
+	cout << "******************************************SIZE OF THE OBJVEC TO RENDER IS " << objVec.size() << endl;
 	for (int i = 0; i < objVec.size(); i++) {
 		
 			LOG("BEFORE DRAWING**");

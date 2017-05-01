@@ -31,7 +31,7 @@ int Movement::move_up(WorldObj* obj) {
 	obj->setDirection(WorldObj::DIRECTION_UP);
 	objVec.clear();
 	objVec = tree->retrieve(objVec, obj);
-	////cout << "SIZE OF OBJVEC IS ************************ " << objVec.size() << endl;
+	//cout << "SIZE OF OBJVEC IS ************************ " << objVec.size() << endl;
 	NPC* npc;
 	if (my_type >= WorldObj::TYPE_NPC) {
 		if (npc = CheckClass::isNPC(obj))
@@ -509,7 +509,7 @@ int Movement::move_left(WorldObj* obj) {
 		}
 		//for left and right, use horizontal line for obj body
 		//obj->body[0].getBL().getXloc()
-		cout << "checking against " << rivObj->getLines().size() << " lines" << endl;
+		//cout << "checking against " << rivObj->getLines().size() << " lines" << endl;
 		Line temp(Point(obj->body[0].getX(), 25000 - (obj->body[0].getY() + obj->body[0].getHeight())), Point(obj->body[0].getX() + obj->body[0].getWidth(), 25000 - (obj->body[0].getY() + obj->body[0].getHeight())));
 		for (int i = 0; i < rivObj->getLines().size(); i++) {
 			//if (shouldCheckLineCollision(temp.getP1(), rivObj->getLines()[i].getP1(), rivObj->getLines()[i].getP2(), 200)) {

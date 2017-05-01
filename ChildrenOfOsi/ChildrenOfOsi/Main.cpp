@@ -1789,6 +1789,17 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	tm.join();
 
 	current_game_state = game_state::main_menu;
+
+	//insert all of the immovable objects into the quad tree
+	_QuadTree->clear();
+	cout << "tree size is  " << _QuadTree->treeSize() << endl;
+	for (int i = 0; i < recVec.size(); i++) {
+		_QuadTree->Insert(recVec[i]);	//insert all obj into tree
+	}
+
+	cout << "tree size is  " << _QuadTree->treeSize() << endl;
+	cout << "size of recvec is " << recVec.size() << endl;
+
 	while (GameWindow::isRunning()) {
 		while (current_game_state == game_state::main_menu) {
 			//cout << "currently in the main menu" << endl;
@@ -1853,7 +1864,8 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 				start = !start;
 			}
 			start_tick = clock();
-			_QuadTree->clear();
+			_QuadTree->clearMovable();
+			//_QuadTree->clear();
 			grid->clear();
 			grid->insert_objs_to_grid(rivObj->getLines());
 			Alex->updateCD();
@@ -1864,9 +1876,19 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 					recVec[i]->effect.sprite.animate();
 					recVec[i]->WorldObj::animateObj();
 				}
-				_QuadTree->Insert(recVec[i]);	//insert all obj into tree
-
+				//_QuadTree->Insert(recVec[i]);	//insert all obj into tree
 			}
+			for (int i = 0; i < movVec.size(); i++) {
+				cout << "movevec item type is " << movVec[i]->getType() << endl;
+				if (movVec[i]->getType() != WorldObj::TYPE_WORLDOBJ) {
+					movVec[i]->effect.sprite.animate();
+					movVec[i]->WorldObj::animateObj();
+				}
+				_QuadTree->Insert(movVec[i]);	//insert all obj into tree
+			}
+
+			cout << "inserted into tree " << movVec.size() << " movable objs" << endl;
+
 			state = DialogueController::getState();
 
 			if (Alex->getX() > 5285.83 && Alex->getX() < 7079.86) { //Ogun Desert
@@ -2001,6 +2023,9 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 			HUD::AVG = total_fps / frame_count;
 
 			current_game_state = iController->current_game_state;
+			//system("PAUSE");
+			
+
 		}
 		while (current_game_state == game_state::pause_menu) {
 			for (int i = 0; i < 10; i++) {

@@ -10,8 +10,9 @@ Fight::Fight()
 	sides = 0;
 }
 
-Fight::Fight(Party* a, Party* b, bool duel)
+Fight::Fight(Party* a, Party* b, bool type)
 {
+	duel = type;
 	over = false;
 	if (a->get_perm() || duel) {
 		defenders.push_back({ a });
@@ -36,6 +37,10 @@ Fight::Fight(Party* a, Party* b, bool duel)
 		a->setMode(Party::MODE_DEFEND);
 		b->setMode(Party::MODE_DEFEND);
 		update_radius();
+	}
+	if (duel) {
+		a->set_killable(false);
+		b->set_killable(false);
 	}
 	sides = 2;
 	fights_world.push_back(this);
@@ -125,6 +130,7 @@ void Fight::add_party(Party* p, bool atk) {
 	p->set_fight(this);
 	p->set_in_combat(true);
 	p->setMode(Party::MODE_DEFEND);
+	if (duel)p->set_killable(false);
 	update_radius();
 	find_targets();
 }
@@ -148,6 +154,7 @@ void Fight::add_to_attackers(Party* p) {
 	p->set_fight(this);
 	p->set_in_combat(true);
 	p->setMode(Party::MODE_DEFEND);
+	if (duel)p->set_killable(false);
 	update_radius();
 	find_targets();
 }
@@ -171,6 +178,7 @@ void Fight::add_to_defenders(Party* p) {
 	p->set_fight(this);
 	p->set_in_combat(true);
 	p->setMode(Party::MODE_DEFEND);
+	if (duel)p->set_killable(false);
 	update_radius();
 	find_targets();
 }
@@ -304,17 +312,23 @@ void Fight::end_combat() {
 		for (auto itor = (*it).begin(); itor != (*it).end(); ++itor) {
 			(*itor)->set_in_combat(false);
 			(*itor)->setMode(Party::MODE_ATTACK);
+			if (duel)(*itor)->capacitate_all();
+			if (duel)(*itor)->set_killable(true);
 		}
 	}
 	for (auto it = defenders.begin(); it != defenders.end(); ++it) {
 		for (auto itor = (*it).begin(); itor != (*it).end(); ++itor) {
 			(*itor)->set_in_combat(false);
 			(*itor)->setMode(Party::MODE_ATTACK);
+			if (duel)(*itor)->capacitate_all();
+			if (duel)(*itor)->set_killable(true);
 		}
 	}
 	for (auto itor = downed.begin(); itor != downed.end(); ++itor) {
 		(*itor)->set_in_combat(false);
 		(*itor)->setMode(Party::MODE_ATTACK);
+		if (duel)(*itor)->capacitate_all();
+		if (duel)(*itor)->set_killable(true);
 	}
 	over = true;
 }

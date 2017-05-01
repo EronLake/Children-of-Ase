@@ -970,7 +970,7 @@ bool DialogueController::offer_quest_on_exit(Hero* temp_hero) {
 	is about to exit conversation. Currently, NPC will always give player a quest
 	when they try to exit conversation if the player has not already accepted a quest.*/
 	/////////////////////////////////////////////////////////////////////////
-	if (dialogue.give_quest() && AIController::quest_response(temp_hero,player)) {
+	if (planner->give_as_quest && AIController::quest_response(temp_hero,player)) {
 		bool has_quest = false;
 		for (int i = 0; i < planner->quests_given.size(); ++i) {
 			if (planner->quests_given[i]->getDoer()->name == SHANGO && planner->quests_given[i]->executed == false)
