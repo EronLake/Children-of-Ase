@@ -172,7 +172,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	bool switch_music = false;
 	bool in_village = false;
 
-	gameplay_functions->add_hero("Shango", 6445, 10155, true);
+	gameplay_functions->add_hero("Shango", 6445, 10055, true);
 	tBuffer->run();
 
 	Player* Alex = dynamic_cast<Player*>(Containers::hero_table["Shango"]);

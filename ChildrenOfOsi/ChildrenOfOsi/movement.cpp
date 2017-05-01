@@ -682,7 +682,7 @@ int Movement::attack(WorldObj* obj) {
 																}
 																else PlayerActExecFunctions::execute_start("Fight", hero);
 															}
-															else Fight* fight = new Fight(s->getParty(), s2->getParty(), false);
+															else Fight* fight = new Fight(s->getParty(), s2->getParty(), 0);
 														}
 														else if ((!s->getInCombat())) {
 															if (hero) {
