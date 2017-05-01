@@ -153,6 +153,7 @@ vector<int> QuadTree::getIndexes(WorldObj * myrec)
 }
 
 
+// THIS IS INSERTING DUPLICATES INTO THE TREE
 void QuadTree::Insert(WorldObj * myrec)
 {
 	if (nodes[0] != nullptr)

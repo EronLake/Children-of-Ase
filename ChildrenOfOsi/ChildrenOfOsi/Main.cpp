@@ -1870,8 +1870,8 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 			else {
 				_QuadTree->clear();
 			}
-			grid->clear();
-			grid->insert_objs_to_grid(rivObj->getLines());
+			//grid->clear();
+			//grid->insert_objs_to_grid(rivObj->getLines());
 			Alex->updateCD();
 			Alex->effect.sprite.animate();
 			Alex->WorldObj::animateObj();
@@ -1911,7 +1911,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 					}
 					_QuadTree->Insert(movVec[i]);	//insert all obj into tree
 				}
-				cout << "inserted into tree " << movVec.size() << " movable objs" << endl;
+				//cout << "inserted into tree " << movVec.size() << " movable objs" << endl;
 			}
 
 			state = DialogueController::getState();
