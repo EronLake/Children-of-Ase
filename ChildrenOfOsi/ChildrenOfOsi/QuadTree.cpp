@@ -219,15 +219,15 @@ vector<WorldObj*> QuadTree::retrieve(vector<WorldObj*>& listOfObj, WorldObj * my
 		for (int i = 0; i < objs.size(); i++) {
 			if (std::find(listOfObj.begin(), listOfObj.end(), objs[i]) != listOfObj.end() == false) {
 				
-				if (objs[i]->getType() >= 2) {
-					if (objs[i]->getType() == 5) {
-						cout << "RETRIEVING A HERO" << endl;
-						system("PAUSE");
-					}
-					else {
-						cout << "retrieving npc" << endl;
-					}
-				}
+				//if (objs[i]->getType() >= 2) {
+				//	if (objs[i]->getType() == 5) {
+				//		cout << "RETRIEVING A HERO" << endl;
+				//		system("PAUSE");
+				//	}
+				//	else {
+				//		cout << "retrieving npc" << endl;
+				//	}
+				//}
 				listOfObj.push_back(objs[i]);
 			}
 		}
