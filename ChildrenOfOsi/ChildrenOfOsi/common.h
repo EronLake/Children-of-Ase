@@ -52,9 +52,8 @@ static int frame_count = 0;
 #define MAP_EDITOR 0
 #define START_FULLSCREEN false
 #define MOUSE_VISIBLE true
-#define LOAD_REGIONS 0 //0==Load Config should be empty || 1==Load All || 2==Load Oasis || 3==Load Jungle
+#define LOAD_REGIONS 1 //0==Load Config should be empty || 1==Load All || 2==Load Oasis || 3==Load Jungle
 #define RIVER_COLLIDE false
-
 
 /*
 this variable allows the game to zoom and out
