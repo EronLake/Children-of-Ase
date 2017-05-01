@@ -185,8 +185,8 @@ void DialogueController::PlayerConversationPoint()
 	/*handles applying of post conditions for relationship related conversation
 	points. I also thought to incorporate checks for if a player completed an action
 	by doing any of these here, but this is probably not a good place.*/
-		if (player_conv_point_choice == "Bribe") {
-			Planner* planner = AIController::get_plan(CheckClass::isHero(other)->name);
+		if (player_conv_point_choice == "Bribe"||player_conv_point_choice == "Compliment"|| player_conv_point_choice == "Grovel"|| player_conv_point_choice == "Insult"|| player_conv_point_choice == "Boast") {
+			/*Planner* planner = AIController::get_plan(CheckClass::isHero(other)->name);
 
 			if (planner->quests_given.size() > 0) {
 				planner->quests_given.push_back(planner->get_current_action());
@@ -196,30 +196,29 @@ void DialogueController::PlayerConversationPoint()
 			}
 			for (int i = 0; i < planner->quests_given.size(); ++i) {
 				if (planner->quests_given[i]->getDoer()->name == SHANGO &&
-					planner->get_current_action()->name.find("Bribe", 0) != string::npos) {
+					planner->get_current_action()->name.find(player_conv_point_choice, 0) != string::npos) {
 					//set quest to complete here if it was a bribe one
 					planner->quests_given[i]->executed = false;
 				}
 
+			}*/
+			accepted_action = true;
+			for (auto precond : Containers::conv_point_table[player_conv_point_choice]->req_preconds) {
+
+				if (precond->get_cost(player, temp_hero) == 0) {
+
+				}
+				else {
+					accepted_action = false;
+				}
 			}
-			Containers::conv_point_table[player_conv_point_choice]->apply_postconditions(true, player, temp_hero);
-		}
-		else if (player_conv_point_choice == "Compliment") {
-
-			Containers::conv_point_table[player_conv_point_choice]->apply_postconditions(true, player, temp_hero);
-		}
-		else if (player_conv_point_choice == "Grovel") {
-
-			Containers::conv_point_table[player_conv_point_choice]->apply_postconditions(true, player, temp_hero);
-		}
-
-		else if (player_conv_point_choice == "Insult") {
-			Containers::conv_point_table[player_conv_point_choice]->apply_postconditions(true, player, temp_hero);
-		}
-
-		else if (player_conv_point_choice == "Boast") {
-
-			Containers::conv_point_table[player_conv_point_choice]->apply_postconditions(true, player, temp_hero);
+			if (accepted_action) {
+				Containers::conv_point_table[player_conv_point_choice]->apply_postconditions(true, player, temp_hero);
+			}
+			else {
+				Containers::conv_point_table[player_conv_point_choice]->apply_postconditions(false, player, temp_hero);
+			}
+			
 		}
 		state = 5;
 	}
