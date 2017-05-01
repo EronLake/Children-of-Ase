@@ -1932,8 +1932,12 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 				start = !start;
 			}
 			start_tick = clock();
-			_QuadTree->clearMovable();
-			//_QuadTree->clear();
+			if (!MAP_EDITOR) {
+				_QuadTree->clearMovable();
+			}
+			else {
+				_QuadTree->clear();
+			}
 			grid->clear();
 			grid->insert_objs_to_grid(rivObj->getLines());
 			Alex->updateCD();
@@ -1944,10 +1948,10 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 					recVec[i]->effect.sprite.animate();
 					recVec[i]->WorldObj::animateObj();
 				}
-				//_QuadTree->Insert(recVec[i]);	//insert all obj into tree
+				if(MAP_EDITOR) _QuadTree->Insert(recVec[i]);	//insert all obj into tree
 			}
 			for (int i = 0; i < movVec.size(); i++) {
-				cout << "movevec item type is " << movVec[i]->getType() << endl;
+				//cout << "movevec item type is " << movVec[i]->getType() << endl;
 				if (movVec[i]->getType() != WorldObj::TYPE_WORLDOBJ) {
 					movVec[i]->effect.sprite.animate();
 					movVec[i]->WorldObj::animateObj();
