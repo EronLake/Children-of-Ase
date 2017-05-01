@@ -631,8 +631,8 @@
 		  "req_preconds": {
       "1": {
         "general_type": 0,
-        "rel_type": 7,
-        "desired_rel_val": 45
+        "rel_type": 6,
+        "desired_rel_val": 55
       }
     },
     "doer_succ_postconds": {
@@ -867,7 +867,7 @@
               "1": {
                 "general_type": 0,
                 "rel_type": 7,
-                "desired_rel_val": 55
+                "desired_rel_val": 50
               }
           },
           "doer_succ_postconds": {

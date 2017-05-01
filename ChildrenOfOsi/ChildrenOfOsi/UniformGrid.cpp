@@ -42,14 +42,17 @@ void UniformGrid::insert_objs_to_grid(std::vector<Line*> objs)
 		//if points belong to different rows and different columns
 		else if(j2 != j && k2 != k) grid[j2][k2].push_back(objs[i]);
 	}
-	//int count = 0;
-	//for (int i = 0; i < grid_size; i++) {
-	//	for (int j = 0; j < grid_size; j++) {
-	//		for (int k = 0; k < grid[i][j].size(); k++) {
-	//			count++;
-	//		}
-	//	}
-	//}
+
+	int count = 0;
+	for (int i = 0; i < grid_size; i++) {
+		for (int j = 0; j < grid_size; j++) {
+			for (int k = 0; k < grid[i][j].size(); k++) {
+				count++;
+			}
+		}
+	}
+
+
 	//std::cout << "There are " << count << " lines in the grid" << std::endl;
 }
 
