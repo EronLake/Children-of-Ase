@@ -8,7 +8,7 @@ std::mutex mut;
  */
 void Sprite::setTexture(Texture *t)
 {
-	std::lock_guard<std::mutex> guard(mut);
+	std::lock_guard<std::mutex> guard(*this->mut);
 	if (tex == t || lock) return;
 	tex = t;
 	index = 0;
@@ -21,7 +21,7 @@ void Sprite::setTexture(Texture *t)
 
 void Sprite::reset_texture()
 {
-	std::lock_guard<std::mutex> guard(mut);
+	std::lock_guard<std::mutex> guard(*this->mut);
 	index = 0;
 	start = 0;
 	stop = tex->getFrameWidth();
@@ -32,7 +32,7 @@ void Sprite::reset_texture()
 
 void Sprite::setIdleTexture(Texture *t)
 {
-	std::lock_guard<std::mutex> guard(mut);
+	std::lock_guard<std::mutex> guard(*this->mut);
   if(idle == t || lock)
     return;
   else {

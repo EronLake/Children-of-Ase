@@ -255,7 +255,7 @@ void CombatController::checkParties() {
 								if ((*b)->getLeader()->getInCombat()) {
 									(*b)->get_fight()->add_party((*a),true);
 								} else {
-									Fight* fight = new Fight((*a), (*b), false);
+									Fight* fight = new Fight((*a), (*b), 0);
 								}
 							}
 						}

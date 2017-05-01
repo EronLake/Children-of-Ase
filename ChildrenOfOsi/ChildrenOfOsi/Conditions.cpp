@@ -22,6 +22,11 @@ int Preconditions::get_cost()
 	LOG("virtual function");
 	return 0;
 }
+int Preconditions::get_cost(Hero* curr_hero, Hero* other_hero)
+{
+	LOG("virtual function");
+	return 0;
+}
 
 std::string Preconditions::get_type()
 {

@@ -35,6 +35,7 @@ public:
 	Preconditions();
 	~Preconditions();
 	virtual int get_cost();
+	virtual int get_cost(Hero* curr_hero, Hero* other_hero);
 	std::string get_type();
 	int get_general_type();
 

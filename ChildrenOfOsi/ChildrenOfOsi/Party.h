@@ -83,6 +83,10 @@ class Party
   Fight* get_fight() { return curr_fight; };
 
   void set_in_combat(bool b);
+  void set_in_duel();
+
+  void set_killable(bool b);
+  void capacitate_all(int t);
 
   private:
 

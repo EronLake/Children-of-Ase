@@ -90,9 +90,16 @@ int RenderHelper::draw_frame(WorldObj * obj)
 		fullVec = tree->retrieve(fullVec, fullBound);
 	}
 
-	
+	//set<WorldObj*> s;
+	//unsigned size = fullVec.size();
+	//for (unsigned i = 0; i < size; ++i) s.insert(fullVec[i]);
+	//fullVec.assign(s.begin(), s.end());
+
+	//cout << "size of fullvec is " << fullVec.size() << endl;
 	for (int i = 0; i < fullVec.size(); i++) {
 		WorldObj* tempObj = fullVec[i];
+
+		//1k pixels left and rigfht, 800 pixels up and down. OBJS WHOSE WIDTH AND HEIGHT ARE GREATER THAN 1-2k and 800-1.6k respectively DO NOT FUNCTION CORRECTLY
 		if (tempObj->getX() > obj->getX() - (1000*map_zoom) && tempObj->getX() < obj->getX() + (1000*map_zoom) && tempObj->getY() > obj->getY() - (800*map_zoom) && tempObj->getY() < obj->getY() + (800*map_zoom)) {
 				auto it = std::find(objVec.begin(), objVec.end(), tempObj);
 				if (it == objVec.end()) {

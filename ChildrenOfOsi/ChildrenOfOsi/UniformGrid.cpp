@@ -36,11 +36,39 @@ void UniformGrid::insert_objs_to_grid(std::vector<Line*> objs)
 		int k2 = ycoord2 / 200;
 
 		//if points belong to same column but different rows
-		if (j2 == j && k2 != k) grid[j2][k2].push_back(objs[i]);
+		if (j2 == j && k2 != k) {
+			while (k2 != k) {
+				grid[j2][k2].push_back(objs[i]);
+				(k2 > k) ? k2-- : k2++;
+			}
+		}
 		//if points belong to same row but different column
-		else if (j2 != j && k2 == k) grid[j2][k2].push_back(objs[i]);
+		else if (j2 != j && k2 == k) {
+			while (j2 != j) {
+				grid[j2][k2].push_back(objs[i]);
+				(j2 > j) ? j2-- : j2++;
+			}
+		}
 		//if points belong to different rows and different columns
-		else if(j2 != j && k2 != k) grid[j2][k2].push_back(objs[i]);
+		else if (j2 != j && k2 != k) {
+			int old_k2 = k2;
+			while (j2 != j) {
+				while (k2 != k) {
+					grid[j2][k2].push_back(objs[i]);
+					(k2 > k) ? k2-- : k2++;
+					if(k2 == k) grid[j2][k2].push_back(objs[i]);
+				}
+				k2 = old_k2;
+				(j2 > j) ? j2-- : j2++;
+				if (j2 == j) {
+					while (k2 != k) {
+						grid[j2][k2].push_back(objs[i]);
+						(k2 > k) ? k2-- : k2++;
+						if (k2 == k) grid[j2][k2].push_back(objs[i]);
+					}
+				}
+			}
+		}
 	}
 	int count = 0;
 	for (int i = 0; i < grid_size; i++) {
@@ -70,11 +98,32 @@ std::vector<Line*> UniformGrid::retrieve_objs_in_grid(std::vector<Line*>& listOf
 	int k2 = ycoord2 / 200;
 
 	//if points belong to same column but different rows
-	if (j2 == j && k2 != k) listOfObj.insert(listOfObj.end(), grid[j2][k2].begin(), grid[j2][k2].end());
+	if (j2 == j && k2 != k) {
+		//listOfObj.insert(listOfObj.end(), grid[j2][k2].begin(), grid[j2][k2].end());
+		for (int i = 0; i < grid[j2][k2].size(); i++) {
+			if (std::find(listOfObj.begin(), listOfObj.end(), grid[j2][k2][i]) != listOfObj.end() == false) {
+				listOfObj.push_back(grid[j2][k2][i]);
+			}
+		}
+	}
 	//if points belong to same row but different column
-	else if (j2 != j && k2 == k) listOfObj.insert(listOfObj.end(), grid[j2][k2].begin(), grid[j2][k2].end());
+	else if (j2 != j && k2 == k) {
+		//listOfObj.insert(listOfObj.end(), grid[j2][k2].begin(), grid[j2][k2].end());
+		for (int i = 0; i < grid[j2][k2].size(); i++) {
+			if (std::find(listOfObj.begin(), listOfObj.end(), grid[j2][k2][i]) != listOfObj.end() == false) {
+				listOfObj.push_back(grid[j2][k2][i]);
+			}
+		}
+	}
 	//if points belong to different rows and different columns
-	else if (j2 != j && k2 != k) listOfObj.insert(listOfObj.end(), grid[j2][k2].begin(), grid[j2][k2].end());
+	else if (j2 != j && k2 != k) {
+		//listOfObj.insert(listOfObj.end(), grid[j2][k2].begin(), grid[j2][k2].end());
+		for (int i = 0; i < grid[j2][k2].size(); i++) {
+			if (std::find(listOfObj.begin(), listOfObj.end(), grid[j2][k2][i]) != listOfObj.end() == false) {
+				listOfObj.push_back(grid[j2][k2][i]);
+			}
+		}
+	}
 
 	return listOfObj;
 }

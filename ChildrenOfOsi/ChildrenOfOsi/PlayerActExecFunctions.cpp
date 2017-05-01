@@ -53,10 +53,19 @@ void PlayerActExecFunctions::execute_start(std::string act_name, Hero* receiver)
 	receiver->set_busy(Hero::BUSY_REC);
 
 	if ((act_name == "Occupy" || act_name == "Fight" || act_name == "Conquer") &&
-		((!player->getInCombat()) && (!player->getInCombat())))
+		((!player->getInCombat()) && (!receiver->getInCombat())))
 	{
 		//we need to create a fight here if their action is a violent action
-		Fight* fight_obj = new Fight(player->getParty(), receiver->getParty(), false);
+		Fight* fight_obj = new Fight(player->getParty(), receiver->getParty(), 0);
+	/*} else if (act_name == "Duel") {
+		Fight* fight_obj = new Fight(player->getParty(), receiver->getParty(), 1);
+	}
+	else if (act_name == "Spar") {
+		Fight* fight_obj = new Fight(player->getParty(), receiver->getParty(), 2);
+	}
+	else if (act_name == "Train With") {
+		Fight* fight_obj = new Fight(player->getParty(), receiver->getParty(), 3);
+		*/
 	}
 
 	//ADITIONAL FUNCTION act_name == "Conquer" || act_name == "Duel" ||act_name == "Spar" ||
@@ -170,15 +179,16 @@ void PlayerActExecFunctions::execute_dialog()
 		LOG("PRINT FOLLOW ME TO SCREEN AND MOVE TO TRAIN LOCATION");
 	}
 
-	if ((act_name == "Duel" || act_name == "Spar" || act_name == "Train") &&
-		((!player->getInCombat()) && (!player->getInCombat())))
+	if (!player->getInCombat())
 	{
-		//we need to create a fight here if their action is a violent action
-		if (act_name == "Duel" || act_name == "Spar") {
-			Fight* fight_obj = new Fight(player->getParty(), cur_action->getReceiver()->getParty(), true);
+		if (act_name == "Duel") {
+			Fight* fight_obj = new Fight(player->getParty(), cur_action->getReceiver()->getParty(), 1);
 		}
-		else {
-			Fight* fight_obj = new Fight(player->getParty(), cur_action->getReceiver()->getParty(), false);
+		else if (act_name == "Spar") {
+			Fight* fight_obj = new Fight(player->getParty(), cur_action->getReceiver()->getParty(), 2);
+		}
+		else if (act_name == "Train With") {
+			Fight* fight_obj = new Fight(player->getParty(), cur_action->getReceiver()->getParty(), 3);
 		}
 	}
 

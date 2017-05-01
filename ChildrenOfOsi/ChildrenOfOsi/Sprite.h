@@ -10,7 +10,9 @@ class Sprite
   public:
 
   Sprite():
-    start(0), stop(0), top(0), bottom(0), index(0), tempTime(0), tex(nullptr), lock(false), dying(false) {};
+	  start(0), stop(0), top(0), bottom(0), index(0), tempTime(0), tex(nullptr), lock(false), dying(false) {
+	  mut = new std::mutex();
+  };
   ~Sprite() = default;
 
   int getStart() { return this->start; };
@@ -77,7 +79,8 @@ class Sprite
   Texture *death_right;
 
   private:
-
+  
+  std::mutex* mut;
   int start, stop;
   int top, bottom;
   Texture *tex;

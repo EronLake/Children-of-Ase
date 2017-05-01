@@ -143,7 +143,7 @@ void ActionExecFunctions::execute_train_with(Action* train_with) {
 		{
 			ActionHelper::set_timer(train_with, 3600); //Wait 1 minute for training (60 frames times 60 seconds)
 			train_with->checkpoint++;
-			Fight* fight = new Fight(train_with->getDoer()->getParty(), train_with->getReceiver()->getParty(),true);
+			Fight* fight = new Fight(train_with->getDoer()->getParty(), train_with->getReceiver()->getParty(),3);
 		}
 		break;
 	case 4: //If timer is complete, set village as destination, apply postconds, update memory
@@ -266,7 +266,7 @@ void ActionExecFunctions::execute_fight(Action* fight)
 			//(may need to change this to account for hero death)
 		if (fight->getDoer()->get_action_destination() == Vector2f(NULL, NULL) && (fight->getReceiver()->get_busy() == Hero::NOT_BUSY)) {
 			//do a single round of battle every 10 sec
-			Fight* fight_obj = new Fight(fight->getDoer()->getParty(), fight->getReceiver()->getParty(), false);
+			Fight* fight_obj = new Fight(fight->getDoer()->getParty(), fight->getReceiver()->getParty(), 0);
 			fight->getDoer()->set_busy(Hero::BUSY_DOER);
 			fight->getReceiver()->set_busy(Hero::BUSY_REC);
 			fight->checkpoint++;
@@ -353,7 +353,7 @@ void ActionExecFunctions::execute_conquer(Action* conq)
 			conq->checkpoint++;
 			conq->getReceiver()->getVillage()->defenders->add_party_to_party(conq->getReceiver()->getVillage()->barracks);
 			ActionHelper::create_memory(conq, conq->getReceiver());
-			new Fight(conq->getDoer()->getParty(), conq->getReceiver()->getVillage()->defenders, false);
+			new Fight(conq->getDoer()->getParty(), conq->getReceiver()->getVillage()->defenders, 0);
 			conq->getReceiver()->getVillage()->set_village_health(100);
 			conq->getDoer()->set_busy(Hero::BUSY_DOER);
 			conq->getReceiver()->set_busy(Hero::BUSY_REC);
@@ -470,7 +470,14 @@ void ActionExecFunctions::execute_duel(Action* duel)
 	case 3: //If both niether party is empty then contiue the fight 
 			//(may need to change this to account for hero death)
 		if (Party::dist_location_to_location(duel->getDoer()->getLoc(), duel->getDoer()->get_action_destination())<500 && (duel->getReceiver()->get_busy() == Hero::NOT_BUSY)) {
-			Fight* fight = new Fight(duel->getDoer()->getParty(), duel->getReceiver()->getParty(), true);
+			int type = Fight::TYPE_DUEL;
+			if (duel->name.compare("Spar") == 0) {
+				int type = Fight::TYPE_SPAR;
+			}else if (duel->name.compare("Train With") == 0) {
+				int type = Fight::TYPE_TRAIN;
+			}
+
+			Fight* fight = new Fight(duel->getDoer()->getParty(), duel->getReceiver()->getParty(), type);
 			duel->checkpoint++;
 			duel->getDoer()->set_busy(Hero::BUSY_DOER);
 			duel->getReceiver()->set_busy(Hero::BUSY_REC);
