@@ -66,13 +66,12 @@ int Movement::move_up(WorldObj* obj) {
 			//if (shouldCheckLineCollision(temp.getP1(), rivObj->getLines()[i].getP1(), rivObj->getLines()[i].getP2(), 200)) {
 				if (lineCollision((rivObj->getLines())[i], &temp)) {
 					//manager->createTask("Bump", "SOUND");
-					//for (int j = 0; j < 10; j++) {
-					//	//cout << "COLIISION WITH LINE " << rivObj->getLines()[i].getP1().getX() << ", " << rivObj->getLines()[i].getP1().getY() << ", " << rivObj->getLines()[i].getP2().getX() << ", " << rivObj->getLines()[i].getP1().getY() << endl;
-					//	cout << "COLIISION WITH LINE " << rivObj->getLines()[i].getP1().getX() << ", " << rivObj->getLines()[i].getP1().getY() << ", " << rivObj->getLines()[i].getP2().getX() << ", " << rivObj->getLines()[i].getP2().getY() << endl;
-					//	cout << "my obj coord is " << obj->body[0].getBL().getXloc() << ", " << obj->body[0].getBL().getYloc() << ", " << obj->body[0].getBR().getXloc() << ", " << obj->body[0].getBR().getYloc() << endl;
-
-					//	// EVEN AFTER I FLIP THE LINES ACROSS THE Y AXIS, WHEN THE PLAYER MOVES DOWN, THE Y COORD IS INCREASING, SO IT"S AS IF HE IS GOING UP!!!
-					//}
+					
+						//cout << "COLIISION WITH LINE " << rivObj->getLines()[i].getP1().getX() << ", " << rivObj->getLines()[i].getP1().getY() << ", " << rivObj->getLines()[i].getP2().getX() << ", " << rivObj->getLines()[i].getP1().getY() << endl;
+						cout << "COLIISION WITH LINE " << rivObj->getLines()[i]->getP1().getX() << ", " << rivObj->getLines()[i]->getP1().getY() << ", " << rivObj->getLines()[i]->getP2().getX() << ", " << rivObj->getLines()[i]->getP2().getY() << endl;
+						cout << "my obj coord is " << obj->body[0].getX() + (obj->body[0].getWidth() / 2) << ", " << 25000 - (obj->body[0].getY()) << ", " << obj->body[0].getX() + (obj->body[0].getWidth() / 2) << ", " << 25000 - (obj->body[0].getY() + obj->body[0].getHeight()) << endl;
+						// EVEN AFTER I FLIP THE LINES ACROSS THE Y AXIS, WHEN THE PLAYER MOVES DOWN, THE Y COORD IS INCREASING, SO IT"S AS IF HE IS GOING UP!!!
+					
 					LOG("failed to move up. collision.");
 					obj->shiftY(moveSpeed*speed_magnifier);
 					break;
@@ -606,6 +605,8 @@ int Movement::talk(WorldObj* obj) {
 						LOG("Player interacted with an object");
 						Hero* hero;
 						if (hero = CheckClass::isHero(objVec[i])) {
+							RegionState::switch_music = true;
+							RegionState::in_village = true;
 							Planner* hero_plan = AIController::get_plan(hero->name);
 							if (hero_plan->give_as_quest)   //Make sure hero is willing to give up current action
 							{
@@ -625,8 +626,7 @@ int Movement::talk(WorldObj* obj) {
 					}
 				}
 			}
-			RegionState::switch_music = true;
-			RegionState::in_village = true;
+			
 			if (ot!=nullptr)DialogueController::startConversation(ot, true);
 		}
 	}
@@ -682,7 +682,7 @@ int Movement::attack(WorldObj* obj) {
 																}
 																else PlayerActExecFunctions::execute_start("Fight", hero);
 															}
-															else Fight* fight = new Fight(s->getParty(), s2->getParty(), false);
+															else Fight* fight = new Fight(s->getParty(), s2->getParty(), 0);
 														}
 														else if ((!s->getInCombat())) {
 															if (hero) {

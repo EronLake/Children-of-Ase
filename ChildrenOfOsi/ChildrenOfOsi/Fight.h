@@ -11,7 +11,7 @@ class Fight
 {
 public:
 	Fight();
-	Fight(Party* a, Party* b, bool duel);
+	Fight(Party* a, Party* b, int tp);
 	~Fight();
 	int get_radius();
 	void update_radius();
@@ -32,6 +32,11 @@ public:
 	Vector2f get_loc() { return loc; };
 	void check_should_flee(Party* p);
 
+	static constexpr int TYPE_FIGHT = 0;
+	static constexpr int TYPE_DUEL = 1;
+	static constexpr int TYPE_SPAR = 2;
+	static constexpr int TYPE_TRAIN = 3;
+
 private:
 	Vector2f loc;
 	vector<vector<Party*>> attackers; //attack or defense only determines ability to flee, not sides
@@ -40,5 +45,6 @@ private:
 	bool over;
 	int rad;
 	int sides;
+	int type;
 };
 

@@ -10,16 +10,17 @@ Fight::Fight()
 	sides = 0;
 }
 
-Fight::Fight(Party* a, Party* b, bool duel)
+Fight::Fight(Party* a, Party* b, int tp)
 {
+	type = tp;
 	over = false;
-	if (a->get_perm() || duel) {
+	if (a->get_perm() || (type>0)) {
 		defenders.push_back({ a });
 	}
 	else {
 		attackers.push_back({ a });
 	}
-	if (b->get_perm() || duel) {
+	if (b->get_perm() || (type>0)) {
 		defenders.push_back({ b });
 	}
 	else {
@@ -27,8 +28,18 @@ Fight::Fight(Party* a, Party* b, bool duel)
 	}
 	a->set_fight(this);
 	b->set_fight(this);
-	a->set_in_combat(true);
-	b->set_in_combat(true);
+	if (type>0) {
+		a->set_killable(false);
+		b->set_killable(false);
+	}
+	if (type == 0 || type == 3) {
+		a->set_in_combat(true);
+		b->set_in_combat(true);
+	}
+	else {
+		a->set_in_duel();
+		b->set_in_duel();
+	}
 	a->addToCurrentEnemies(b);
 	b->addToCurrentEnemies(a);
 	if (b->getMembers().size() > 0) {
@@ -123,7 +134,13 @@ void Fight::add_party(Party* p, bool atk) {
 		}
 	}
 	p->set_fight(this);
-	p->set_in_combat(true);
+	if (type>0)p->set_killable(false);
+	if (type == 0 || type == 3) {
+		p->set_in_combat(true);
+	}
+	else {
+		p->set_in_duel();
+	}
 	p->setMode(Party::MODE_DEFEND);
 	update_radius();
 	find_targets();
@@ -146,7 +163,13 @@ void Fight::add_to_attackers(Party* p) {
 	}
 	if (!added)attackers.push_back({p});
 	p->set_fight(this);
-	p->set_in_combat(true);
+	if (type>0)p->set_killable(false);
+	if (type == 0 || type == 3) {
+		p->set_in_combat(true);
+	}
+	else {
+		p->set_in_duel();
+	}
 	p->setMode(Party::MODE_DEFEND);
 	update_radius();
 	find_targets();
@@ -169,7 +192,13 @@ void Fight::add_to_defenders(Party* p) {
 	}
 	if (!added)defenders.push_back({ p });
 	p->set_fight(this);
-	p->set_in_combat(true);
+	if (type>0)p->set_killable(false);
+	if (type == 0 || type == 3) {
+		p->set_in_combat(true);
+	}
+	else {
+		p->set_in_duel();
+	}
 	p->setMode(Party::MODE_DEFEND);
 	update_radius();
 	find_targets();
@@ -304,17 +333,23 @@ void Fight::end_combat() {
 		for (auto itor = (*it).begin(); itor != (*it).end(); ++itor) {
 			(*itor)->set_in_combat(false);
 			(*itor)->setMode(Party::MODE_ATTACK);
+			if ((type>0))(*itor)->capacitate_all(type);
+			if ((type>0))(*itor)->set_killable(true);
 		}
 	}
 	for (auto it = defenders.begin(); it != defenders.end(); ++it) {
 		for (auto itor = (*it).begin(); itor != (*it).end(); ++itor) {
 			(*itor)->set_in_combat(false);
 			(*itor)->setMode(Party::MODE_ATTACK);
+			if ((type>0))(*itor)->capacitate_all(type);
+			if ((type>0))(*itor)->set_killable(true);
 		}
 	}
 	for (auto itor = downed.begin(); itor != downed.end(); ++itor) {
 		(*itor)->set_in_combat(false);
 		(*itor)->setMode(Party::MODE_ATTACK);
+		if ((type>0))(*itor)->capacitate_all(type);
+		if ((type>0))(*itor)->set_killable(true);
 	}
 	over = true;
 }
