@@ -1040,13 +1040,13 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 		gameplay_functions->add_Attack(blueSoldiers[i]->getKey(), blueSoldiers[i]->body[0].getX(), blueSoldiers[i]->body[0].getY(), true, 10);
 	}
 	tBuffer->run();
-	movVec.push_back(staticRec);
-	movVec.push_back(oya);
+	recVec.push_back(staticRec);
+	recVec.push_back(oya);
 	for (int i = 0; i < silverSoldier.size(); i++) {
-		movVec.push_back(silverSoldier[i]);
+		recVec.push_back(silverSoldier[i]);
 	}
 	for (int i = 0; i < blueSoldiers.size(); i++) {
-		movVec.push_back(blueSoldiers[i]);
+		recVec.push_back(blueSoldiers[i]);
 	}
 
 	int closest;
