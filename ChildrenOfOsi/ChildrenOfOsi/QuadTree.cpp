@@ -23,6 +23,28 @@ QuadTree::~QuadTree()
 	}
 }
 
+void QuadTree::clearMovable()
+{
+	//remove all the movable objects from QT
+	for (int i = 0; i < objs.size(); i++) {
+		if (objs[i]->getType() >= 2) {
+			objs.erase(std::remove(objs.begin(), objs.end(), objs[i]), objs.end());
+		}
+	}
+	//objs.clear();
+	for (decltype(nodes.size()) i = 0; i<nodes.size(); i++) {
+		if (nodes[i] != nullptr) {
+			nodes[i]->clearMovable();
+			//if (nodes[i]->objs.empty()) {
+			//	delete(nodes[i]);
+			//	nodes[i] = nullptr;
+			//}
+			//delete(nodes[i]);
+			//nodes[i] = nullptr;
+		}
+	}
+}
+
 void QuadTree::clear()
 {
 	objs.clear();
@@ -194,7 +216,12 @@ vector<WorldObj*> QuadTree::retrieve(vector<WorldObj*>& listOfObj, WorldObj * my
 		if (index != -1 && nodes[0] != nullptr) {
 			nodes[index]->retrieve(listOfObj, myrec);
 		}
-		listOfObj.insert(listOfObj.end(), objs.begin(), objs.end());
+		for (int i = 0; i < objs.size(); i++) {
+			if (std::find(listOfObj.begin(), listOfObj.end(), objs[i]) != listOfObj.end() == false) {
+				listOfObj.push_back(objs[i]);
+			}
+		}
+		//listOfObj.insert(listOfObj.end(), objs.begin(), objs.end());
 	}
 	return listOfObj;
 	//int index = getIndexes(myrec);	//get index of obj
@@ -208,7 +235,7 @@ vector<WorldObj*> QuadTree::retrieve(vector<WorldObj*>& listOfObj, WorldObj * my
 
 vector<WorldObj*> QuadTree::renderRetrieve(vector<WorldObj*>& listOfObj, WorldObj * myrec)
 {
-	vector<int> indexes = getIndexes(myrec);
+	vector<int> indexes = { 0,1,2,3 };
 	for (int i = 0; i < indexes.size(); i++) {
 		int index = indexes[i];
 		if (index != -1 && nodes[0] != nullptr) {
@@ -218,6 +245,17 @@ vector<WorldObj*> QuadTree::renderRetrieve(vector<WorldObj*>& listOfObj, WorldOb
 	}
 	return listOfObj;
 
+}
+
+int QuadTree::treeSize()
+{
+	int count = objs.size();
+	for (decltype(nodes.size()) i = 0; i<nodes.size(); i++) {
+		if (nodes[i] != nullptr) {
+			count += nodes[i]->treeSize();
+		}
+	}
+	return count;
 }
 
 

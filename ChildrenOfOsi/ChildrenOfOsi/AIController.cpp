@@ -338,6 +338,7 @@ Hero* AIController::pick_quest_doer(Action* quest) {
 * Used when someone (asker) requests a quest from a hero (doer) 
 *
 * Returns true if the asker meets minimum relationship requirements (all stats above 50)
+* Returns false otherwise, and if the reciever of the doer's current action is the asker themself
 */
 bool AIController::quest_response(Hero* doer, Hero* asker) {
 	bool response = true;//changed to true for testing purposes
@@ -345,6 +346,10 @@ bool AIController::quest_response(Hero* doer, Hero* asker) {
 	if (our_rel->getAffinity() > 50 && our_rel->getNotoriety() > 50 && our_rel->getStrength() > 50)
 	{
 		response = true;
+	}
+	if (get_plan(doer->name)->get_current_action()->getReceiver() == asker) 
+	{
+		response = false;
 	}
 
 	return response;
