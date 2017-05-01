@@ -337,6 +337,18 @@ void Party::set_in_combat(bool b) {
 	}
 }
 
+void Party::set_in_duel() {
+	for (auto it = members.begin(); it != members.end(); ++it) {
+		if (leader != (*it)) {
+			(*it)->setInCombat(false);
+			(*it)->defeat();
+		}
+		else {
+			(*it)->setInCombat(true);
+		}
+	}
+}
+
 void Party::set_killable(bool b) {
 	for (auto it = members.begin(); it != members.end();++it) {
 		if (b) {
@@ -348,8 +360,8 @@ void Party::set_killable(bool b) {
 	}
 }
 
-void Party::capacitate_all() {
+void Party::capacitate_all(int t) {
 	for (auto it = members.begin(); it != members.end(); ++it) {
-		if ((*it)->get_incapacitated())(*it)->capacitate();
+		(*it)->capacitate(t);
 	}
 }

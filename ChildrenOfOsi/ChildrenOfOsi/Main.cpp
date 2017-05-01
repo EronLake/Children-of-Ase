@@ -172,7 +172,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	bool switch_music = false;
 	bool in_village = false;
 
-	gameplay_functions->add_hero("Shango", 6445, 10155, true);
+	gameplay_functions->add_hero("Shango", 6445, 10055, true);
 	tBuffer->run();
 
 	Player* Alex = dynamic_cast<Player*>(Containers::hero_table["Shango"]);
@@ -1040,13 +1040,13 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 		gameplay_functions->add_Attack(blueSoldiers[i]->getKey(), blueSoldiers[i]->body[0].getX(), blueSoldiers[i]->body[0].getY(), true, 10);
 	}
 	tBuffer->run();
-	recVec.push_back(staticRec);
-	recVec.push_back(oya);
+	movVec.push_back(staticRec);
+	movVec.push_back(oya);
 	for (int i = 0; i < silverSoldier.size(); i++) {
-		recVec.push_back(silverSoldier[i]);
+		movVec.push_back(silverSoldier[i]);
 	}
 	for (int i = 0; i < blueSoldiers.size(); i++) {
-		recVec.push_back(blueSoldiers[i]);
+		movVec.push_back(blueSoldiers[i]);
 	}
 
 	int closest;
@@ -1864,30 +1864,55 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 				start = !start;
 			}
 			start_tick = clock();
-			_QuadTree->clearMovable();
-			//_QuadTree->clear();
-			grid->clear();
-			grid->insert_objs_to_grid(rivObj->getLines());
+			if (!MAP_EDITOR) {
+				_QuadTree->clearMovable();
+			}
+			else {
+				_QuadTree->clear();
+			}
+			//grid->clear();
+			//grid->insert_objs_to_grid(rivObj->getLines());
 			Alex->updateCD();
 			Alex->effect.sprite.animate();
 			Alex->WorldObj::animateObj();
-			for (int i = 0; i < recVec.size(); i++) {
-				if (recVec[i]->getType() != WorldObj::TYPE_WORLDOBJ) {
-					recVec[i]->effect.sprite.animate();
-					recVec[i]->WorldObj::animateObj();
-				}
-				//_QuadTree->Insert(recVec[i]);	//insert all obj into tree
-			}
-			for (int i = 0; i < movVec.size(); i++) {
-				cout << "movevec item type is " << movVec[i]->getType() << endl;
-				if (movVec[i]->getType() != WorldObj::TYPE_WORLDOBJ) {
-					movVec[i]->effect.sprite.animate();
-					movVec[i]->WorldObj::animateObj();
-				}
-				_QuadTree->Insert(movVec[i]);	//insert all obj into tree
-			}
 
-			cout << "inserted into tree " << movVec.size() << " movable objs" << endl;
+			if (MAP_EDITOR) {
+				for (int i = 0; i < recVec.size(); i++) {
+					if (recVec[i]->getType() != WorldObj::TYPE_WORLDOBJ) {
+						recVec[i]->effect.sprite.animate();
+						recVec[i]->WorldObj::animateObj();
+					}
+					 _QuadTree->Insert(recVec[i]);	//insert all obj into tree
+				}
+
+				for (int i = 0; i < movVec.size(); i++) {
+					//cout << "movevec item type is " << movVec[i]->getType() << endl;
+					if (movVec[i]->getType() != WorldObj::TYPE_WORLDOBJ) {
+						movVec[i]->effect.sprite.animate();
+						movVec[i]->WorldObj::animateObj();
+					}
+					_QuadTree->Insert(movVec[i]);	//insert all obj into tree
+				}
+
+			}
+			else {
+				//for (int i = 0; i < recVec.size(); i++) {
+				//	if (recVec[i]->getType() != WorldObj::TYPE_WORLDOBJ) {
+				//		recVec[i]->effect.sprite.animate();
+				//		recVec[i]->WorldObj::animateObj();
+				//	}
+				//	//_QuadTree->Insert(recVec[i]);	//insert all obj into tree
+				//}
+				for (int i = 0; i < movVec.size(); i++) {
+					//cout << "movevec item type is " << movVec[i]->getType() << endl;
+					if (movVec[i]->getType() != WorldObj::TYPE_WORLDOBJ) {
+						movVec[i]->effect.sprite.animate();
+						movVec[i]->WorldObj::animateObj();
+					}
+					_QuadTree->Insert(movVec[i]);	//insert all obj into tree
+				}
+				//cout << "inserted into tree " << movVec.size() << " movable objs" << endl;
+			}
 
 			state = DialogueController::getState();
 
