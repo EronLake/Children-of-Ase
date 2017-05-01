@@ -54,12 +54,7 @@ void PlayerActExecFunctions::execute_start(std::string act_name, Hero* receiver)
 		((!player->getInCombat()) && (!player->getInCombat())))
 	{
 		//we need to create a fight here if their action is a violent action
-		if (act_name == "duel") {
-			Fight* fight_obj = new Fight(player->getParty(), receiver->getParty(), true);
-		}
-		else {
-			Fight* fight_obj = new Fight(player->getParty(), receiver->getParty(), false);
-		}
+		Fight* fight_obj = new Fight(player->getParty(), receiver->getParty(), false);
 	}
 
 	//ADITIONAL FUNCTION act_name == "Conquer" || act_name == "Duel" ||act_name == "Spar" ||
@@ -78,7 +73,6 @@ void PlayerActExecFunctions::execute_end(bool if_succ) {
 	//is called after warning hit
 	//is called when hero is incapacited
 
-	//NEED TO STILL DO MEMORIES
 	//STILL NEED TO DO QUEST CHECK
 	
 	///////////////////////////////////////////
@@ -96,7 +90,7 @@ void PlayerActExecFunctions::execute_end(bool if_succ) {
 	//special cases that need to be handled are in this gaurd (may want to make a helper function)
 
 	//NEEDS TO BE TESTED... should it check for Occupy?
-	if (act_name == "conquer" && player->getParty()->get_fight()->is_over()) {
+	if (act_name == "Occupy" && player->getParty()->get_fight()->is_over()) {
 		if (cur_action->getReceiver()->getVillage()->get_village_health() > 0) {
 			cur_action->getReceiver()->getVillage()->defenders->add_party_to_party(cur_action->getReceiver()->getVillage()->barracks);
 			if (player->getParty()->get_fight()!=nullptr)player->getParty()->get_fight()->add_to_defenders(cur_action->getReceiver()->getVillage()->defenders);
@@ -169,7 +163,7 @@ void PlayerActExecFunctions::execute_dialog()
 	std::string act_name = cur_action->getName().substr(0, name_end);
 
 	//Need TO ADD FUNCTION TO DO THIS
-	if (act_name == "Form_Alliance") {
+	if (act_name == "Train") {
 		LOG("PRINT FOLLOW ME TO SCREEN AND MOVE TO TRAIN LOCATION");
 	}
 

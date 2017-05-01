@@ -65,6 +65,10 @@ void Action::apply_postconditions(bool ifsucc)
 		{
 			(*doer_postconds)[i]->apply_utility(doer, receiver, true); //the true value says this is the doer
 		}
+		else if ((*doer_postconds)[i]->get_general_type() == Postcondition::STATE)
+		{
+			(*doer_postconds)[i]->apply_utility(doer, receiver); //same for doer and reciver
+		}
 		else
 		{
 			(*doer_postconds)[i]->apply_utility();
@@ -77,6 +81,10 @@ void Action::apply_postconditions(bool ifsucc)
 		if ((*receiver_postconds)[i]->get_general_type() == Postcondition::REL || (*receiver_postconds)[i]->get_general_type() == Postcondition::REL_EST)
 		{
 			(*receiver_postconds)[i]->apply_utility(doer, receiver, false); //the false value says this is the reciver
+		}
+		else if ((*doer_postconds)[i]->get_general_type() == Postcondition::STATE)
+		{
+			(*doer_postconds)[i]->apply_utility(doer, receiver); //same for doer and reciver
 		}
 		else
 		{

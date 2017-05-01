@@ -245,7 +245,7 @@ void Fight::update_fight() {
 	over = check_for_winner();
 	if (over) {
 		if (player->getParty()->get_fight() == this) {
-			//PlayerActExecFunctions::execute_end(true);
+			PlayerActExecFunctions::execute_end(true);
 		}
 	}
 }
