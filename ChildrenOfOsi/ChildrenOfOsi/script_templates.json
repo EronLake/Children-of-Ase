@@ -359,6 +359,12 @@
 	 }
     },
 
+	"No Quest_Templates": {
+	 "1": {
+        "1": "No Quest"
+	 }
+    },
+
 	"Quest_Complete_Templates": {
 	 "1": {
         "1": "Quest_Complete"
@@ -368,6 +374,12 @@
 	"Quest_In_Progress_Templates": {
 	 "1": {
         "1": "Quest_In_Progress"
+	 }
+    },
+
+	"Exit Quest_Templates": {
+	 "1": {
+        "1": "Exit Quest"
 	 }
     },
 

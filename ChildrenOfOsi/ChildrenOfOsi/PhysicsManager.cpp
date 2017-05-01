@@ -10,12 +10,12 @@ PhysicsManager::PhysicsManager(MessageLog* _mLog, TaskBuffer* _tBuffer)
 	LOG("PhysicsManager Object Constructed");
 }
 
-PhysicsManager::PhysicsManager(MessageLog * _mLog, TaskBuffer * _tBuffer, QuadTree * _physicsQuadTree, RiverObj* _rivObj)
+PhysicsManager::PhysicsManager(MessageLog * _mLog, TaskBuffer * _tBuffer, QuadTree * _physicsQuadTree, UniformGrid* _uniformGrid, RiverObj* _rivObj)
 	: Manager(_mLog, _tBuffer)
 {
 	LOG("PhysicsManager W/QT Object Constructed");
 	//init a movement obj 
-	moveHelper = new Movement(_physicsQuadTree, _rivObj);
+	moveHelper = new Movement(_physicsQuadTree, _uniformGrid, _rivObj);
 	moveHelper->manager = this;
 	
 

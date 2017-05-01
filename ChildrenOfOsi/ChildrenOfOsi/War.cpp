@@ -17,8 +17,8 @@ void War::setWarParties(Village * p_alliance1, Village * p_alliance2)
 	bool if_already_waring = false;
 	for (int i = 0; i < wars.size(); i++)
 	{
-		if (p_alliance1 == wars[i]->getWarParties().first && p_alliance1 == wars[i]->getWarParties().second ||
-			p_alliance2 == wars[i]->getWarParties().first && p_alliance2 == wars[i]->getWarParties().second)
+		if (p_alliance1 == wars[i]->getWarParties().first || p_alliance1 == wars[i]->getWarParties().second &&
+			p_alliance2 == wars[i]->getWarParties().first || p_alliance2 == wars[i]->getWarParties().second)
 		{
 			if_already_waring = true;
 		}

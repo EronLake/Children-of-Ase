@@ -442,11 +442,11 @@
     },
 
 	"Response_Ask_For_Quest": {
-        "1": "Yes I do.",
-        "2": "Yes I do.",
-        "3": "Yes I do.",
-        "4": "Yes I do.",
-        "5": "Yes I do."
+        "1": "Let me see...",
+        "2": "Let me see...",
+        "3": "Let me see...",
+        "4": "Let me see...",
+        "5": "Let me see..."
     },
 
 	"Accept_Quest": {
@@ -466,11 +466,19 @@
     },
 
 	"Offer_Quest": {
-        "1": "Take care of the bandits up north please.",
-        "2": "Take care of the bandits up north please.",
-        "3": "Take care of the bandits up north please.",
-        "4": "Take care of the bandits up north please.",
-        "5": "Take care of the bandits up north please."
+        "1": "I would like you to ACTION HERO.",
+        "2": "I would like you to ACTION HERO.",
+        "3": "I would like you to ACTION HERO.",
+        "4": "I would like you to ACTION HERO.",
+        "5": "I would like you to ACTION HERO."
+    },
+
+	"No Quest": {
+        "1": "No, I do not.",
+        "2": "No, I do not.",
+        "3": "No, I do not.",
+        "4": "No, I do not.",
+        "5": "No, I do not."
     },
 
 	"Quest_Complete": {
@@ -487,6 +495,14 @@
         "3": "I hope the quest I gave you is going smoothly.",
         "4": "I hope the quest I gave you is going smoothly.",
         "5": "I hope the quest I gave you is going smoothly."
+    },
+
+	"Exit Quest": {
+        "1": "Please wait. There is something I would like you to do for me.",
+        "2": "Please wait. There is something I would like you to do for me.",
+        "3": "Please wait. There is something I would like you to do for me.",
+        "4": "Please wait. There is something I would like you to do for me.",
+        "5": "Please wait. There is something I would like you to do for me."
     },
 
 	"Decline_To_Answer": {

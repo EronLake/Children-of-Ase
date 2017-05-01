@@ -46,7 +46,9 @@ bool PhysicsTestSuite::test_movement() {
 	QuadTree* t = new QuadTree(0, *screen);
 	RiverObj* myriv = new RiverObj();
 	myriv->initialize_lines();
-	Movement* movetests = new Movement(t,myriv);
+	std::vector<Line*> l;
+	UniformGrid* grid = new UniformGrid();
+	Movement* movetests = new Movement(t,grid,myriv);
 
 	bool up = false;
 	bool down = false;
@@ -156,7 +158,9 @@ bool PhysicsTestSuite::test_collision() {
 	WorldObj* screen = new WorldObj(Vector2f(0.0, 0.0), 960U, 540U);
 	QuadTree* t = new QuadTree(0, *screen);
 	RiverObj* rivObj = new RiverObj();
-	Movement* movetests = new Movement(t,rivObj);
+	std::vector<Line*> l;
+	UniformGrid* grid = new UniformGrid();
+	Movement* movetests = new Movement(t,grid,rivObj);
 	bool result;
 
 	bool up = false;

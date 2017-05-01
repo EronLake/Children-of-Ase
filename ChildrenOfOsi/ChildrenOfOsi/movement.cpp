@@ -7,9 +7,10 @@
 #include "RegionState.h"
 
 
-Movement::Movement(QuadTree* QT, RiverObj* _rivObj) {
+Movement::Movement(QuadTree* QT, UniformGrid* UG, RiverObj* _rivObj) {
 	tree = QT;
 	rivObj = _rivObj;
+	grid = UG;
 	//rivObj->initialize_lines();
 	set_player_clone = false;
 }
@@ -58,10 +59,12 @@ int Movement::move_up(WorldObj* obj) {
 			}
 		}
 		//for up and down, use vertical line in obj body
-		Line temp(Point(obj->body[0].getX() + (obj->body[0].getWidth() / 2), 20000 - (obj->body[0].getY())), Point(obj->body[0].getX() + (obj->body[0].getWidth() / 2), 20000 - (obj->body[0].getY() + obj->body[0].getHeight())));
+		Line temp(Point(obj->body[0].getX() + (obj->body[0].getWidth() / 2), 25000 - (obj->body[0].getY())), Point(obj->body[0].getX() + (obj->body[0].getWidth() / 2), 25000 - (obj->body[0].getY() + obj->body[0].getHeight())));
+		lineVec.clear();
+		lineVec = grid->retrieve_objs_in_grid(lineVec, &temp);
 		for (int i = 0; i < rivObj->getLines().size(); i++) {
 			//if (shouldCheckLineCollision(temp.getP1(), rivObj->getLines()[i].getP1(), rivObj->getLines()[i].getP2(), 200)) {
-				if (lineCollision((rivObj->getLines())[i], temp)) {
+				if (lineCollision((rivObj->getLines())[i], &temp)) {
 					//manager->createTask("Bump", "SOUND");
 					//for (int j = 0; j < 10; j++) {
 					//	//cout << "COLIISION WITH LINE " << rivObj->getLines()[i].getP1().getX() << ", " << rivObj->getLines()[i].getP1().getY() << ", " << rivObj->getLines()[i].getP2().getX() << ", " << rivObj->getLines()[i].getP1().getY() << endl;
@@ -100,8 +103,8 @@ int Movement::move_up_left(WorldObj* obj) {
 			float diagYSpeed = npc->getDiagYSpeed();
 			float diagXSpeed = npc->getDiagXSpeed();
 		}
-		Line tempHori(Point(obj->body[0].getX(), 20000 - (obj->body[0].getY() + obj->body[0].getHeight())), Point(obj->body[0].getX() + obj->body[0].getWidth(), 20000 - (obj->body[0].getY() + obj->body[0].getHeight())));
-		Line tempVert(Point(obj->body[0].getX() + (obj->body[0].getWidth() / 2), 20000 - (obj->body[0].getY())), Point(obj->body[0].getX() + (obj->body[0].getWidth() / 2), 20000 - (obj->body[0].getY() + obj->body[0].getHeight())));
+		Line tempHori(Point(obj->body[0].getX(), 25000 - (obj->body[0].getY() + obj->body[0].getHeight())), Point(obj->body[0].getX() + obj->body[0].getWidth(), 25000 - (obj->body[0].getY() + obj->body[0].getHeight())));
+		Line tempVert(Point(obj->body[0].getX() + (obj->body[0].getWidth() / 2), 25000 - (obj->body[0].getY())), Point(obj->body[0].getX() + (obj->body[0].getWidth() / 2), 25000 - (obj->body[0].getY() + obj->body[0].getHeight())));
 		obj->shiftY(-diagYSpeed*speed_magnifier);
 		for (int i = 0; i < objVec.size(); i++) {
 			if (obj == objVec[i] || (my_type >= 2 && objVec[i]->getType() >= WorldObj::TYPE_NPC)) {
@@ -116,7 +119,7 @@ int Movement::move_up_left(WorldObj* obj) {
 		}
 		for (int i = 0; i < rivObj->getLines().size(); i++) {
 			//if (shouldCheckLineCollision(tempVert.getP1(), rivObj->getLines()[i].getP1(), rivObj->getLines()[i].getP2(), 200)) {
-				if (lineCollision((rivObj->getLines())[i], tempVert)) {
+				if (lineCollision((rivObj->getLines())[i], &tempVert)) {
 					//manager->createTask("Bump", "SOUND");
 					//for (int j = 0; j < 10; j++) {
 					//	//cout << "COLIISION WITH LINE " << rivObj->getLines()[i].getP1().getX() << ", " << rivObj->getLines()[i].getP1().getY() << ", " << rivObj->getLines()[i].getP2().getX() << ", " << rivObj->getLines()[i].getP1().getY() << endl;
@@ -146,7 +149,7 @@ int Movement::move_up_left(WorldObj* obj) {
 		}
 		for (int i = 0; i < rivObj->getLines().size(); i++) {
 			//if (shouldCheckLineCollision(tempHori.getP1(), rivObj->getLines()[i].getP1(), rivObj->getLines()[i].getP2(), 200)) {
-				if (lineCollision((rivObj->getLines())[i], tempHori)) {
+				if (lineCollision((rivObj->getLines())[i], &tempHori)) {
 					//manager->createTask("Bump", "SOUND");
 					//for (int j = 0; j < 10; j++) {
 					//	//cout << "COLIISION WITH LINE " << rivObj->getLines()[i].getP1().getX() << ", " << rivObj->getLines()[i].getP1().getY() << ", " << rivObj->getLines()[i].getP2().getX() << ", " << rivObj->getLines()[i].getP1().getY() << endl;
@@ -183,8 +186,8 @@ int Movement::move_up_right(WorldObj* obj) {
 			float diagYSpeed = npc->getDiagYSpeed()*speed_magnifier;
 			float diagXSpeed = npc->getDiagXSpeed()*speed_magnifier;
 		}
-		Line tempHori(Point(obj->body[0].getX(), 20000 - (obj->body[0].getY() + obj->body[0].getHeight())), Point(obj->body[0].getX() + obj->body[0].getWidth(), 20000 - (obj->body[0].getY() + obj->body[0].getHeight())));
-		Line tempVert(Point(obj->body[0].getX() + (obj->body[0].getWidth() / 2), 20000 - (obj->body[0].getY())), Point(obj->body[0].getX() + (obj->body[0].getWidth() / 2), 20000 - (obj->body[0].getY() + obj->body[0].getHeight())));
+		Line tempHori(Point(obj->body[0].getX(), 25000 - (obj->body[0].getY() + obj->body[0].getHeight())), Point(obj->body[0].getX() + obj->body[0].getWidth(), 25000 - (obj->body[0].getY() + obj->body[0].getHeight())));
+		Line tempVert(Point(obj->body[0].getX() + (obj->body[0].getWidth() / 2), 25000 - (obj->body[0].getY())), Point(obj->body[0].getX() + (obj->body[0].getWidth() / 2), 25000 - (obj->body[0].getY() + obj->body[0].getHeight())));
 
 		obj->shiftY(-diagYSpeed*speed_magnifier);
 		for (int i = 0; i < objVec.size(); i++) {
@@ -200,7 +203,7 @@ int Movement::move_up_right(WorldObj* obj) {
 		}
 		for (int i = 0; i < rivObj->getLines().size(); i++) {
 			//if (shouldCheckLineCollision(tempVert.getP1(), rivObj->getLines()[i].getP1(), rivObj->getLines()[i].getP2(), 200)) {
-				if (lineCollision((rivObj->getLines())[i], tempVert)) {
+				if (lineCollision((rivObj->getLines())[i], &tempVert)) {
 					//manager->createTask("Bump", "SOUND");
 					//for (int j = 0; j < 10; j++) {
 					//	//cout << "COLIISION WITH LINE " << rivObj->getLines()[i].getP1().getX() << ", " << rivObj->getLines()[i].getP1().getY() << ", " << rivObj->getLines()[i].getP2().getX() << ", " << rivObj->getLines()[i].getP1().getY() << endl;
@@ -229,7 +232,7 @@ int Movement::move_up_right(WorldObj* obj) {
 		}
 		for (int i = 0; i < rivObj->getLines().size(); i++) {
 			//if (shouldCheckLineCollision(tempHori.getP1(), rivObj->getLines()[i].getP1(), rivObj->getLines()[i].getP2(), 200)) {
-				if (lineCollision((rivObj->getLines())[i], tempHori)) {
+				if (lineCollision((rivObj->getLines())[i], &tempHori)) {
 					//manager->createTask("Bump", "SOUND");
 					//for (int j = 0; j < 10; j++) {
 					//	//cout << "COLIISION WITH LINE " << rivObj->getLines()[i].getP1().getX() << ", " << rivObj->getLines()[i].getP1().getY() << ", " << rivObj->getLines()[i].getP2().getX() << ", " << rivObj->getLines()[i].getP1().getY() << endl;
@@ -282,10 +285,10 @@ int Movement::move_down(WorldObj* obj) {
 				//cout << "no collision" << endl;
 			}
 		}
-		Line temp(Point(obj->body[0].getX()+(obj->body[0].getWidth()/2), 20000 - (obj->body[0].getY())), Point(obj->body[0].getX() + (obj->body[0].getWidth() / 2), 20000 - (obj->body[0].getY() + obj->body[0].getHeight())));
+		Line temp(Point(obj->body[0].getX()+(obj->body[0].getWidth()/2), 25000 - (obj->body[0].getY())), Point(obj->body[0].getX() + (obj->body[0].getWidth() / 2), 25000 - (obj->body[0].getY() + obj->body[0].getHeight())));
 		for (int i = 0; i < rivObj->getLines().size(); i++) {
 			//if (shouldCheckLineCollision(temp.getP1(), rivObj->getLines()[i].getP1(), rivObj->getLines()[i].getP2(), 200)) {
-				if (lineCollision((rivObj->getLines())[i], temp)) {
+				if (lineCollision((rivObj->getLines())[i], &temp)) {
 					//manager->createTask("Bump", "SOUND");
 					/*for (int j = 0; j < 10; j++) {
 						cout << "COLIISION WITH LINE " << rivObj->getLines()[i].getP1().getX() << ", " << rivObj->getLines()[i].getP1().getY() << ", " << rivObj->getLines()[i].getP2().getX() << ", " << rivObj->getLines()[i].getP2().getY() << endl;
@@ -320,8 +323,8 @@ int Movement::move_down_left(WorldObj* obj) {
 			float diagYSpeed = npc->getDiagYSpeed();
 			float diagXSpeed = npc->getDiagXSpeed();
 		}
-		Line tempHori(Point(obj->body[0].getX(), 20000 - (obj->body[0].getY() + obj->body[0].getHeight())), Point(obj->body[0].getX() + obj->body[0].getWidth(), 20000 - (obj->body[0].getY() + obj->body[0].getHeight())));
-		Line tempVert(Point(obj->body[0].getX() + (obj->body[0].getWidth() / 2), 20000 - (obj->body[0].getY())), Point(obj->body[0].getX() + (obj->body[0].getWidth() / 2), 20000 - (obj->body[0].getY() + obj->body[0].getHeight())));
+		Line tempHori(Point(obj->body[0].getX(), 25000 - (obj->body[0].getY() + obj->body[0].getHeight())), Point(obj->body[0].getX() + obj->body[0].getWidth(), 25000 - (obj->body[0].getY() + obj->body[0].getHeight())));
+		Line tempVert(Point(obj->body[0].getX() + (obj->body[0].getWidth() / 2), 25000 - (obj->body[0].getY())), Point(obj->body[0].getX() + (obj->body[0].getWidth() / 2), 25000 - (obj->body[0].getY() + obj->body[0].getHeight())));
 		obj->shiftY(diagYSpeed*speed_magnifier);
 		for (int i = 0; i < objVec.size(); i++) {
 			if (obj == objVec[i] || (my_type >= 2 && objVec[i]->getType() >= WorldObj::TYPE_NPC)) {
@@ -338,7 +341,7 @@ int Movement::move_down_left(WorldObj* obj) {
 		}
 		for (int i = 0; i < rivObj->getLines().size(); i++) {
 			//if (shouldCheckLineCollision(tempVert.getP1(), rivObj->getLines()[i].getP1(), rivObj->getLines()[i].getP2(), 200)) {
-				if (lineCollision((rivObj->getLines())[i], tempVert)) {
+				if (lineCollision((rivObj->getLines())[i], &tempVert)) {
 					//manager->createTask("Bump", "SOUND");
 					//for (int j = 0; j < 10; j++) {
 					//	//cout << "COLIISION WITH LINE " << rivObj->getLines()[i].getP1().getX() << ", " << rivObj->getLines()[i].getP1().getY() << ", " << rivObj->getLines()[i].getP2().getX() << ", " << rivObj->getLines()[i].getP1().getY() << endl;
@@ -369,11 +372,11 @@ int Movement::move_down_left(WorldObj* obj) {
 		}
 		for (int i = 0; i < rivObj->getLines().size(); i++) {
 			//if (shouldCheckLineCollision(tempHori.getP1(), rivObj->getLines()[i].getP1(), rivObj->getLines()[i].getP2(), 200)) {
-				if (lineCollision((rivObj->getLines())[i], tempHori)) {
+				if (lineCollision((rivObj->getLines())[i], &tempHori)) {
 					//manager->createTask("Bump", "SOUND");
 					for (int j = 0; j < 10; j++) {
 						//cout << "COLIISION WITH LINE " << rivObj->getLines()[i].getP1().getX() << ", " << rivObj->getLines()[i].getP1().getY() << ", " << rivObj->getLines()[i].getP2().getX() << ", " << rivObj->getLines()[i].getP1().getY() << endl;
-						cout << "COLIISION WITH LINE " << rivObj->getLines()[i].getP1().getX() << ", " << rivObj->getLines()[i].getP1().getY() << ", " << rivObj->getLines()[i].getP2().getX() << ", " << rivObj->getLines()[i].getP2().getY() << endl;
+						cout << "COLIISION WITH LINE " << rivObj->getLines()[i]->getP1().getX() << ", " << rivObj->getLines()[i]->getP1().getY() << ", " << rivObj->getLines()[i]->getP2().getX() << ", " << rivObj->getLines()[i]->getP2().getY() << endl;
 						cout << "my obj coord is " << obj->body[0].getBL().getXloc() << ", " << obj->body[0].getBL().getYloc() << ", " << obj->body[0].getBR().getXloc() << ", " << obj->body[0].getBR().getYloc() << endl;
 
 						// EVEN AFTER I FLIP THE LINES ACROSS THE Y AXIS, WHEN THE PLAYER MOVES DOWN, THE Y COORD IS INCREASING, SO IT"S AS IF HE IS GOING UP!!!
@@ -406,8 +409,8 @@ int Movement::move_down_right(WorldObj* obj) {
 			float diagYSpeed = npc->getDiagYSpeed();
 			float diagXSpeed = npc->getDiagXSpeed();
 		}
-		Line tempHori(Point(obj->body[0].getX(), 20000 - (obj->body[0].getY() + obj->body[0].getHeight())), Point(obj->body[0].getX() + obj->body[0].getWidth(), 20000 - (obj->body[0].getY() + obj->body[0].getHeight())));
-		Line tempVert(Point(obj->body[0].getX() + (obj->body[0].getWidth() / 2), 20000 - (obj->body[0].getY())), Point(obj->body[0].getX() + (obj->body[0].getWidth() / 2), 20000 - (obj->body[0].getY() + obj->body[0].getHeight())));
+		Line tempHori(Point(obj->body[0].getX(), 25000 - (obj->body[0].getY() + obj->body[0].getHeight())), Point(obj->body[0].getX() + obj->body[0].getWidth(), 25000 - (obj->body[0].getY() + obj->body[0].getHeight())));
+		Line tempVert(Point(obj->body[0].getX() + (obj->body[0].getWidth() / 2), 25000 - (obj->body[0].getY())), Point(obj->body[0].getX() + (obj->body[0].getWidth() / 2), 25000 - (obj->body[0].getY() + obj->body[0].getHeight())));
 		obj->shiftY(diagYSpeed*speed_magnifier);
 		for (int i = 0; i < objVec.size(); i++) {
 			if (obj == objVec[i] || (my_type >= 2 && objVec[i]->getType() >= WorldObj::TYPE_NPC)) {
@@ -423,7 +426,7 @@ int Movement::move_down_right(WorldObj* obj) {
 		}
 		for (int i = 0; i < rivObj->getLines().size(); i++) {
 			//if (shouldCheckLineCollision(tempVert.getP1(), rivObj->getLines()[i].getP1(), rivObj->getLines()[i].getP2(), 200)) {
-				if (lineCollision((rivObj->getLines())[i], tempVert)) {
+				if (lineCollision((rivObj->getLines())[i], &tempVert)) {
 					//manager->createTask("Bump", "SOUND");
 					//for (int j = 0; j < 10; j++) {
 					//	//cout << "COLIISION WITH LINE " << rivObj->getLines()[i].getP1().getX() << ", " << rivObj->getLines()[i].getP1().getY() << ", " << rivObj->getLines()[i].getP2().getX() << ", " << rivObj->getLines()[i].getP1().getY() << endl;
@@ -452,7 +455,7 @@ int Movement::move_down_right(WorldObj* obj) {
 		}
 		for (int i = 0; i < rivObj->getLines().size(); i++) {
 			//if (shouldCheckLineCollision(tempHori.getP1(), rivObj->getLines()[i].getP1(), rivObj->getLines()[i].getP2(), 200)) {
-				if (lineCollision((rivObj->getLines())[i], tempHori)) {
+				if (lineCollision((rivObj->getLines())[i], &tempHori)) {
 					//manager->createTask("Bump", "SOUND");
 					//for (int j = 0; j < 10; j++) {
 					//	//cout << "COLIISION WITH LINE " << rivObj->getLines()[i].getP1().getX() << ", " << rivObj->getLines()[i].getP1().getY() << ", " << rivObj->getLines()[i].getP2().getX() << ", " << rivObj->getLines()[i].getP1().getY() << endl;
@@ -506,14 +509,15 @@ int Movement::move_left(WorldObj* obj) {
 		}
 		//for left and right, use horizontal line for obj body
 		//obj->body[0].getBL().getXloc()
-		Line temp(Point(obj->body[0].getX(), 20000 - (obj->body[0].getY() + obj->body[0].getHeight())), Point(obj->body[0].getX() + obj->body[0].getWidth(), 20000 - (obj->body[0].getY() + obj->body[0].getHeight())));
+		cout << "checking against " << rivObj->getLines().size() << " lines" << endl;
+		Line temp(Point(obj->body[0].getX(), 25000 - (obj->body[0].getY() + obj->body[0].getHeight())), Point(obj->body[0].getX() + obj->body[0].getWidth(), 25000 - (obj->body[0].getY() + obj->body[0].getHeight())));
 		for (int i = 0; i < rivObj->getLines().size(); i++) {
 			//if (shouldCheckLineCollision(temp.getP1(), rivObj->getLines()[i].getP1(), rivObj->getLines()[i].getP2(), 200)) {
-				if (lineCollision((rivObj->getLines())[i], temp)) {
+				if (lineCollision((rivObj->getLines())[i], &temp)) {
 					//manager->createTask("Bump", "SOUND");
 					/*for (int j = 0; j < 10; j++) {
 						cout << "COLIISION WITH LINE " << rivObj->getLines()[i].getP1().getX() << ", " << rivObj->getLines()[i].getP1().getY() << ", " << rivObj->getLines()[i].getP2().getX() << ", " << rivObj->getLines()[i].getP2().getY() << endl;
-						cout << "my obj coord is " << obj->body[0].getBL().getXloc() << ", " << 20000 - obj->body[0].getBL().getYloc() << ", " << obj->body[0].getBR().getXloc() << ", " << 20000 - obj->body[0].getBR().getYloc() << endl;
+						cout << "my obj coord is " << obj->body[0].getBL().getXloc() << ", " << 25000 - obj->body[0].getBL().getYloc() << ", " << obj->body[0].getBR().getXloc() << ", " << 25000 - obj->body[0].getBR().getYloc() << endl;
 
 					}*/
 					LOG("failed to move up. collision.");
@@ -562,13 +566,13 @@ int Movement::move_right(WorldObj* obj) {
 				//cout << "no collision" << endl;
 			}
 		}
-		Line temp(Point(obj->body[0].getX(), 20000 - (obj->body[0].getY() + obj->body[0].getHeight())), Point(obj->body[0].getX() + obj->body[0].getWidth(), 20000 - (obj->body[0].getY() + obj->body[0].getHeight())));
+		Line temp(Point(obj->body[0].getX(), 25000 - (obj->body[0].getY() + obj->body[0].getHeight())), Point(obj->body[0].getX() + obj->body[0].getWidth(), 25000 - (obj->body[0].getY() + obj->body[0].getHeight())));
 		for (int i = 0; i < rivObj->getLines().size(); i++) {
 			//if (shouldCheckLineCollision(temp.getP1(), rivObj->getLines()[i].getP1(), rivObj->getLines()[i].getP2(), 200)) {
-				if (lineCollision((rivObj->getLines())[i], temp)) {
+				if (lineCollision((rivObj->getLines())[i], &temp)) {
 					//manager->createTask("Bump", "SOUND");
 					for (int j = 0; j < 10; j++) {
-						cout << "COLIISION WITH LINE " << rivObj->getLines()[i].getP1().getX() << ", " << rivObj->getLines()[i].getP1().getY() << ", " << rivObj->getLines()[i].getP2().getX() << ", " << rivObj->getLines()[i].getP2().getY() << endl;
+						cout << "COLIISION WITH LINE " << rivObj->getLines()[i]->getP1().getX() << ", " << rivObj->getLines()[i]->getP1().getY() << ", " << rivObj->getLines()[i]->getP2().getX() << ", " << rivObj->getLines()[i]->getP2().getY() << endl;
 						cout << "my obj coord is " << obj->body[0].getBL().getXloc() << ", " << obj->body[0].getBL().getYloc() << ", " << obj->body[0].getBR().getXloc() << ", " << obj->body[0].getBR().getYloc() << endl;
 
 					}
@@ -673,18 +677,29 @@ int Movement::attack(WorldObj* obj) {
 														Hero* hero = dynamic_cast<Hero*>(s);
 														if ((!s->getInCombat()) && (!s2->getInCombat())) {
 															if (hero) {
-																PlayerActExecFunctions::execute_start("Fight", hero);
+																if (Party::dist_location_to_location(s2->getLoc(), s2->getVillage()->get_village_location()) < 500) {
+																	PlayerActExecFunctions::execute_start("Conquer", hero);
+																}
+																else PlayerActExecFunctions::execute_start("Fight", hero);
 															}
 															else Fight* fight = new Fight(s->getParty(), s2->getParty(), false);
 														}
 														else if ((!s->getInCombat())) {
-															if (hero)PlayerActExecFunctions::execute_start("Fight", hero);
+															if (hero) {
+																if (Party::dist_location_to_location(s2->getLoc(), s2->getVillage()->get_village_location()) < 500) {
+																	PlayerActExecFunctions::execute_start("Conquer", hero);
+																}else PlayerActExecFunctions::execute_start("Fight", hero);
+															}
 															s2->getParty()->get_fight()->add_party(s->getParty(), true);
 															s2->getParty()->addToCurrentEnemies(s->getParty());
 															s->getParty()->addToCurrentEnemies(s2->getParty());
 														}
 														else if ((!s2->getInCombat())) {
-															if (hero)PlayerActExecFunctions::execute_start("Fight", hero);
+															if (hero) {
+																if (Party::dist_location_to_location(s2->getLoc(), s2->getVillage()->get_village_location()) < 500) {
+																	PlayerActExecFunctions::execute_start("Conquer", hero);
+																} else PlayerActExecFunctions::execute_start("Fight", hero);
+															}
 															s->getParty()->get_fight()->add_party(s2->getParty(), true);
 															s2->getParty()->addToCurrentEnemies(s->getParty());
 															s->getParty()->addToCurrentEnemies(s2->getParty());
@@ -795,11 +810,11 @@ bool Movement::collision(WorldObj* recA, WorldObj* recB)
 	return false;
 }
 
-bool Movement::lineCollision(Line l1, Line l2)
+bool Movement::lineCollision(Line* l1, Line* l2)
 {
-	float denom = ((l1.getP2().getX() - l1.getP1().getX()) * (l2.getP2().getY() - l2.getP1().getY())) - ((l1.getP2().getY() - l1.getP1().getY()) * (l2.getP2().getX() - l2.getP1().getX()));
-	float num1 = ((l1.getP1().getY() - l2.getP1().getY()) * (l2.getP2().getX() - l2.getP1().getX())) - ((l1.getP1().getX() - l2.getP1().getX()) * (l2.getP2().getY() - l2.getP1().getY()));
-	float num2 = ((l1.getP1().getY() - l2.getP1().getY()) * (l1.getP2().getX() - l1.getP1().getX())) - ((l1.getP1().getX() - l2.getP1().getX()) * (l1.getP2().getY() - l1.getP1().getY()));
+	float denom = ((l1->getP2().getX() - l1->getP1().getX()) * (l2->getP2().getY() - l2->getP1().getY())) - ((l1->getP2().getY() - l1->getP1().getY()) * (l2->getP2().getX() - l2->getP1().getX()));
+	float num1 = ((l1->getP1().getY() - l2->getP1().getY()) * (l2->getP2().getX() - l2->getP1().getX())) - ((l1->getP1().getX() - l2->getP1().getX()) * (l2->getP2().getY() - l2->getP1().getY()));
+	float num2 = ((l1->getP1().getY() - l2->getP1().getY()) * (l1->getP2().getX() - l2->getP1().getX())) - ((l1->getP1().getX() - l2->getP1().getX()) * (l1->getP2().getY() - l1->getP1().getY()));
 
 	if (denom == 0) return num1 == 0 && num2 == 0;
 

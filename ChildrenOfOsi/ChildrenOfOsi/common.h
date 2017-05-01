@@ -53,7 +53,7 @@ static int frame_count = 0;
 #define MOUSE_VISIBLE true
 #define LOAD_REGIONS 0 //0==Load Config should be empty || 1==Load All || 2==Load Oasis || 3==Load Jungle
 #define LOAD_MAP 0
-
+#define RIVER_COLLIDE true
 
 
 /*

@@ -230,6 +230,7 @@
     <ClCompile Include="DialogueConfig.cpp">
       <Filter>Dialogue</Filter>
     </ClCompile>
+<<<<<<< HEAD
     <ClCompile Include="PartyManager.cpp">
       <Filter>AI\Relationships</Filter>
     </ClCompile>
@@ -239,12 +240,20 @@
     <ClCompile Include="QuestManager.cpp">
       <Filter>AI\Actions</Filter>
     </ClCompile>
+=======
+>>>>>>> f177f9439e952c425a6b5858609ff41b65a684a1
     <ClCompile Include="Tag.cpp">
       <Filter>Dialogue</Filter>
     </ClCompile>
     <ClCompile Include="TagConfig.cpp">
       <Filter>Dialogue</Filter>
     </ClCompile>
+<<<<<<< HEAD
+=======
+    <ClCompile Include="UniformGrid.cpp">
+      <Filter>Physics</Filter>
+    </ClCompile>
+>>>>>>> f177f9439e952c425a6b5858609ff41b65a684a1
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AIHelper.h">
@@ -419,9 +428,6 @@
     <ClInclude Include="AIController.h">
       <Filter>AI</Filter>
     </ClInclude>
-    <ClInclude Include="Shader.h">
-      <Filter>Rendering</Filter>
-    </ClInclude>
     <ClInclude Include="Line.h">
       <Filter>Physics</Filter>
     </ClInclude>
@@ -495,6 +501,7 @@
     <ClInclude Include="DialogueConfig.h">
       <Filter>Dialogue</Filter>
     </ClInclude>
+<<<<<<< HEAD
     <ClInclude Include="PartyManager.h">
       <Filter>AI\Relationships</Filter>
     </ClInclude>
@@ -504,12 +511,20 @@
     <ClInclude Include="QuestManager.h">
       <Filter>AI\Actions</Filter>
     </ClInclude>
+=======
+>>>>>>> f177f9439e952c425a6b5858609ff41b65a684a1
     <ClInclude Include="Tag.h">
       <Filter>Dialogue</Filter>
     </ClInclude>
     <ClInclude Include="TagConfig.h">
       <Filter>Dialogue</Filter>
     </ClInclude>
+<<<<<<< HEAD
+=======
+    <ClInclude Include="UniformGrid.h">
+      <Filter>Physics</Filter>
+    </ClInclude>
+>>>>>>> f177f9439e952c425a6b5858609ff41b65a684a1
   </ItemGroup>
   <ItemGroup>
     <Text Include="audio_test.txt">

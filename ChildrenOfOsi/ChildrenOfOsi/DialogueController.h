@@ -40,6 +40,10 @@ public:
 	static void add_hero_related_conv_points();
 	static void remove_hero_related_conv_points();
 	static void replace_all(std::string& str, const std::string& from, const std::string& to);
+	static bool offer_quest_on_exit(Hero* hero);
+	static void DialogueController::create_farewell();
+	static void DialogueController::remove_ask_for_quest();
+	static void DialogueController::add_ask_for_quest();
 
 	static bool prompted_quest;
 	static bool accepted_quest;
@@ -54,6 +58,7 @@ public:
 	static WorldObj* other;
 	static int state;
 	static std::string replyString;
+	static bool quest_declined;
 
 	//States:
 	//0 is no conversation

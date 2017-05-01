@@ -3,6 +3,7 @@
 #include <algorithm>
 #include <vector> 
 #include "RenderManager.h"
+GameMap* RenderHelper::gmap;
 
 
 RenderHelper::RenderHelper(QuadTree * QT, RiverObj* _rivObj)
@@ -10,11 +11,11 @@ RenderHelper::RenderHelper(QuadTree * QT, RiverObj* _rivObj)
 	tree = QT;
 	rivObj = _rivObj;
 	camera = new WorldObj(0, 0, false);
-	fullBound = new WorldObj(Vector2f(0, 0), 20000, 20000);
+	fullBound = new WorldObj(Vector2f(0, 0), 25000, 25000);
 	cameraSize.setXloc(960);
 	cameraSize.setYloc(540);
-	mapSize.setXloc(20000);	//10000
-	mapSize.setYloc(20000);	//10000
+	mapSize.setXloc(25000);	//10000
+	mapSize.setYloc(25000);	//10000
 	convoGui = new DialogueGui();
 	convoGui->loadTexture();
 	convoGui->setSprite();
@@ -142,12 +143,12 @@ int RenderHelper::draw_frame(WorldObj * obj)
 			//objVec[i]->WorldObj::animateObj();
 	}
 	// draw the points
-	//for (int i = 0; i < rivObj->getLines().size(); i++) {
-	//	//cout << "DRAWING POINTS" << endl;
-	//	rivObj->getLines()[i].getP1().drawObjRiv(camera->getX(), camera->getY());
-	//	rivObj->getLines()[i].getP2().drawObjRiv(camera->getX(), camera->getY());
+	for (int i = 0; i < rivObj->getLines().size(); i++) {
+		//cout << "DRAWING POINTS" << endl;
+		rivObj->getLines()[i]->getP1().drawObjRiv(camera->getX(), camera->getY());
+		rivObj->getLines()[i]->getP2().drawObjRiv(camera->getX(), camera->getY());
 
-	//}
+	}
 	//convoGui->drawGui();
 	drawHUD(obj);
 	GameWindow::refresh();

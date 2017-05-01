@@ -9,6 +9,8 @@ HUD::HUD()
 {
   this->healthbar_empty_rect = new Rectangle({HUD::HEALTHBAR_X, HUD::HEALTHBAR_Y}, HUD::HEALTHBAR_WIDTH, HUD::HEALTHBAR_HEIGHT);
   this->healthbar_full_rect = new Rectangle({HUD::HEALTHBAR_X, HUD::HEALTHBAR_Y}, HUD::HEALTHBAR_WIDTH, HUD::HEALTHBAR_HEIGHT);
+  this->healthbar_decor_segment_rect = new Rectangle({HUD::HEALTHBAR_DECOR_SEGMENT_X, HUD::HEALTHBAR_DECOR_SEGMENT_Y}, HUD::HEALTHBAR_DECOR_SEGMENT_WIDTH, HUD::HEALTHBAR_DECOR_SEGMENT_HEIGHT);
+  this->healthbar_decor_tail_rect = new Rectangle({HUD::HEALTHBAR_DECOR_TAIL_X, HUD::HEALTHBAR_DECOR_TAIL_Y}, HUD::HEALTHBAR_DECOR_TAIL_WIDTH, HUD::HEALTHBAR_DECOR_TAIL_HEIGHT);
   this->aseflame_empty_rect = new Rectangle({HUD::ASEFLAME_X, HUD::ASEFLAME_Y}, HUD::ASEFLAME_WIDTH, HUD::ASEFLAME_HEIGHT);
   this->aseflame_full_rect = new Rectangle({HUD::ASEFLAME_X, HUD::ASEFLAME_Y}, HUD::ASEFLAME_WIDTH, HUD::ASEFLAME_HEIGHT);
   this->portrait_background_rect = new Rectangle({HUD::PORTRAIT_X, HUD::PORTRAIT_Y}, HUD::PORTRAIT_WIDTH, HUD::PORTRAIT_HEIGHT);
@@ -21,6 +23,8 @@ HUD::HUD()
 
   this->healthbar_empty_tex = new Texture();
   this->healthbar_full_tex = new Texture();
+  this->healthbar_decor_segment_tex = new Texture();
+  this->healthbar_decor_tail_tex = new Texture();
   this->aseflame_empty_tex = new Texture();
   this->aseflame_full_tex = new Texture();
   this->portrait_background_tex = new Texture();
@@ -37,6 +41,8 @@ HUD::~HUD()
 {
   delete this->healthbar_empty_rect;
   delete this->healthbar_full_rect;
+  delete this->healthbar_decor_segment_rect;
+  delete this->healthbar_decor_tail_rect;
   delete this->aseflame_empty_rect;
   delete this->aseflame_full_rect;
   delete this->portrait_background_rect;
@@ -49,6 +55,8 @@ HUD::~HUD()
 
   delete this->healthbar_empty_tex;
   delete this->healthbar_full_tex;
+  delete this->healthbar_decor_segment_tex;
+  delete this->healthbar_decor_tail_tex;
   delete this->aseflame_empty_tex;
   delete this->aseflame_full_tex;
   delete this->portrait_background_tex;
@@ -65,6 +73,8 @@ void HUD::loadTexture()
 {
   this->healthbar_empty_tex->setFile(SPRITES_PATH + "HUD_Healthbar_Empty.png", 1);
   this->healthbar_full_tex->setFile(SPRITES_PATH + "HUD_Healthbar_Full.png", 1);
+  this->healthbar_decor_segment_tex->setFile(SPRITES_PATH + "HUD_HealthbarDecor_Segment.png", 1);
+  this->healthbar_decor_tail_tex->setFile(SPRITES_PATH + "HUD_HealthbarDecor_Tail.png", 1);
   this->aseflame_empty_tex->setFile(SPRITES_PATH + "HUD_AseFlame_Empty.png", 1);
   this->aseflame_full_tex->setFile(SPRITES_PATH + "HUD_AseFlame_Full.png", 1);
   this->portrait_background_tex->setFile(SPRITES_PATH + "HUD_PortraitBase.png", 1);
@@ -81,6 +91,8 @@ void HUD::setSprite()
 {
   this->healthbar_empty_rect->sprite.setTexture(this->healthbar_empty_tex);
   this->healthbar_full_rect->sprite.setTexture(this->healthbar_full_tex);
+  this->healthbar_decor_segment_rect->sprite.setTexture(this->healthbar_decor_segment_tex);
+  this->healthbar_decor_tail_rect->sprite.setTexture(this->healthbar_decor_tail_tex);
   this->aseflame_empty_rect->sprite.setTexture(this->aseflame_empty_tex);
   this->aseflame_full_rect->sprite.setTexture(this->aseflame_full_tex);
   this->portrait_background_rect->sprite.setTexture(this->portrait_background_tex);
@@ -142,6 +154,18 @@ void HUD::drawMainHUD(Player *player)
   GameWindow::drawSprite(this->healthbar_full_rect->getX(), this->healthbar_full_rect->getY(),
     this->healthbar_full_rect->getWidth(), this->healthbar_full_rect->getHeight(), this->healthbar_full_rect->getSprite());
 
+  // Draw the healthbar's decorative border segments
+  for(int i = 0; i < HUD::HEALTHBAR_DECOR_PIECE_COUNT; ++i) {
+    float segmentOffset = (i * HUD::HEALTHBAR_DECOR_SEGMENT_WIDTH) - ( i * HUD::HEALTHBAT_DECOR_PIECE_OVERLAP);
+    GameWindow::drawSprite(HUD::HEALTHBAR_DECOR_SEGMENT_X + segmentOffset, HUD::HEALTHBAR_DECOR_SEGMENT_Y,
+      this->healthbar_decor_segment_rect->getWidth(), this->healthbar_decor_segment_rect->getHeight(),
+      this->healthbar_decor_segment_rect->getSprite());
+  }
+
+  // Draw the helathbar border's tail end
+  GameWindow::drawSprite(this->healthbar_decor_tail_rect->getX(), this->healthbar_decor_tail_rect->getY(),
+    this->healthbar_decor_tail_rect->getWidth(), this->healthbar_decor_tail_rect->getHeight(), this->healthbar_decor_tail_rect->getSprite());
+
   // Draw the ase flames
   this->portrait_rect->sprite.setTexture((player->getAse() <= 0) ?
     this->portrait_empty_tex : this->portrait_full_tex);
@@ -163,11 +187,21 @@ void HUD::drawMainHUD(Player *player)
 
 void HUD::drawMinimap(Player *player)
 {
+  Vector2f minimapCoordOffset;
+  
+  if(player->getX() < 0.0F) minimapCoordOffset.setXloc(0.0F);
+  else if(player->getX() > HUD::MAP_WIDTH) minimapCoordOffset.setXloc(HUD::MAP_WIDTH);
+  else minimapCoordOffset.setXloc(player->getX() / HUD::MAP_WIDTH * HUD::MINIMAP_WIDTH);
+
+  if(player->getY() < 0.0F) minimapCoordOffset.setYloc(0.0F);
+  else if(player->getY() > HUD::MAP_HEIGHT) minimapCoordOffset.setYloc(HUD::MAP_HEIGHT);
+  else minimapCoordOffset.setYloc(player->getY() / HUD::MAP_HEIGHT * HUD::MINIMAP_HEIGHT);
+
   GameWindow::drawSprite(this->minimap_rect->getX(), this->minimap_rect->getY(),
     this->minimap_rect->getWidth(), this->minimap_rect->getHeight(), this->minimap_rect->getSprite());
   GameWindow::drawSprite(this->minimap_frame_rect->getX(), this->minimap_frame_rect->getY(),
     this->minimap_frame_rect->getWidth(), this->minimap_frame_rect->getHeight(), this->minimap_frame_rect->getSprite());
-  GameWindow::drawSprite(this->minimap_cursor_rect->getX(), this->minimap_cursor_rect->getY(),
+  GameWindow::drawSprite(this->minimap_cursor_rect->getX() + minimapCoordOffset.getXloc(), this->minimap_cursor_rect->getY() + minimapCoordOffset.getYloc(),
     this->minimap_cursor_rect->getWidth(), this->minimap_cursor_rect->getHeight(), this->minimap_cursor_rect->getSprite());
 }
 
