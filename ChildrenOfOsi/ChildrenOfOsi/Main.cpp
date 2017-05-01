@@ -249,7 +249,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	//Alex->name = SHANGO;
 	
 	//added so loading the map is optional
-	//if (LOAD_MAP) {
+	if (LOAD_MAP) {
 
 		gameplay_functions->add_texture("map1_1", 0, 0, 0);
 		gameplay_functions->add_texture("map1_2", 0, 0, 0);
@@ -286,7 +286,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 		gameplay_functions->init_map(Alex);
 
 		tBuffer->run();
-	//}
+	}
 
 	HDC hdc = wglGetCurrentDC();
 	HGLRC mainContext = wglGetCurrentContext();

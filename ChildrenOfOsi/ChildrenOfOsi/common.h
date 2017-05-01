@@ -51,7 +51,7 @@ static int frame_count = 0;
 #define MAP_EDITOR 0
 #define START_FULLSCREEN false
 #define MOUSE_VISIBLE true
-#define LOAD_REGIONS 0 //0==Load Config should be empty || 1==Load All || 2==Load Oasis || 3==Load Jungle
+#define LOAD_REGIONS 2 //0==Load Config should be empty || 1==Load All || 2==Load Oasis || 3==Load Jungle
 #define LOAD_MAP 0
 #define RIVER_COLLIDE true
 
@@ -62,7 +62,7 @@ this zooms is used in renderHelper.cpp GameWindow.cpp and Input.cpp
 also specified to zoom for the map editor mode
 */
 #if MAP_EDITOR 
-#define map_zoom 4
+#define map_zoom 2
 #else 
 
 #define map_zoom 1.0
