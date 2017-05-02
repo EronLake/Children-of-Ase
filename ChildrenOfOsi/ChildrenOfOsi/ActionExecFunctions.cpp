@@ -626,7 +626,7 @@ void ActionExecFunctions::execute_bribe(Action* bribe)
 			break;
 
 		case 1: //Create a greeting timer
-			//get busy and not busy are both not worrking 
+			//get destination and not busy are both not worrking 
 
 			if (bribe->getDoer()->get_action_destination() == Vector2f(NULL, NULL) && (bribe->getReceiver()->get_busy() == Hero::NOT_BUSY)) {
 				ActionHelper::set_timer(bribe, 60);
