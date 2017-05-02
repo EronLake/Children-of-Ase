@@ -272,7 +272,7 @@ dialogue_point DialogueHelper::choose_reply_pt(std::string point, int optn_inx, 
 
 	//checks NPC permanent conversation log to check what player has already asked
 	if (temp_hero) {
-		for (int i = 0; i < temp_hero->conversation_log.size(); ++i) {
+		for (int i = 0; i < temp_hero->conversation_log.size() - 1; ++i) {
 			if (temp_hero->conversation_log.size() > 0) {
 				if (temp_hero->conversation_log[i]->get_conv_point() == NULL)
 					continue;
@@ -656,7 +656,7 @@ void DialogueHelper::fill_conversations() {
 		else if (itor->second->get_icon() == "ncp" && itor->second->get_name().find("Advise To", 0) == string::npos) {
 			possible_conv_pts[NotorietyIcon].push_back(itor->second->dpoint);
 		}
-		else {
+		else if(itor->second->get_icon() == "nrp"){
 			possible_reply_pts[QuestionMarkIcon].push_back(itor->second->dpoint);
 			possible_reply_pts[StrengthIcon].push_back(itor->second->dpoint);
 			possible_reply_pts[AffinityIcon].push_back(itor->second->dpoint);

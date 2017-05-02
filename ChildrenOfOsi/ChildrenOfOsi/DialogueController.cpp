@@ -198,7 +198,11 @@ void DialogueController::PlayerConversationPoint()
 		curr_conversation_log.push_back(conv_log_obj);//add entry to log
 
 		//add conversation point to NPC's permanent conversation log storage
-		//add_to_perm_storage(conv_log_obj);
+		ConversationLogObj* perm_log_entry = new ConversationLogObj();
+		perm_log_entry->set_who(conv_log_obj->get_who());
+		perm_log_entry->set_topic(conv_log_obj->get_topic().first, conv_log_obj->get_topic().second);
+		perm_log_entry->set_conv_point(conv_log_obj->get_conv_point());
+		add_to_perm_storage(perm_log_entry);
 
 		//limit the number of conversation log entries for the current conversation
 		//to a maximum of 8
@@ -391,7 +395,7 @@ void DialogueController::PlayerResponse()
 
 		/*quest dialog code that was done by Justin and Alessio. Is placeholder
 		and will be removed at some point.*/
-		if (prompted_quest)
+		/*if (prompted_quest)
 		{
 			if (select == 0)   // Player is accepting the quest
 			{
@@ -407,7 +411,7 @@ void DialogueController::PlayerResponse()
 
 			}
 
-		}
+		}*/
 		/*pushes quest onto npc's quests_given vector if the player accepts
 		their quest and sets player's current action to that quest*/
 		Hero* temp_hero;
@@ -453,7 +457,11 @@ void DialogueController::PlayerResponse()
 		curr_conversation_log.push_back(conv_log_obj);
 
 		//add conversation point to NPC's permanent conversation log storage
-		//add_to_perm_storage(conv_log_obj);
+		ConversationLogObj* perm_log_entry = new ConversationLogObj();
+		perm_log_entry->set_who(conv_log_obj->get_who());
+		perm_log_entry->set_topic(conv_log_obj->get_topic().first, conv_log_obj->get_topic().second);
+		perm_log_entry->set_conv_point(conv_log_obj->get_conv_point());
+		add_to_perm_storage(perm_log_entry);
 
 		//limit the number of conversation log entries for the current conversation
 		//to a maximum of 8
@@ -571,7 +579,11 @@ void DialogueController::otherConversationPoint(dialogue_point line)
 	    curr_conversation_log.push_back(conv_log_obj);
 
 		//add conversation point to NPC's permanent conversation log storage
-		//add_to_perm_storage(conv_log_obj);
+		ConversationLogObj* perm_log_entry = new ConversationLogObj();
+		perm_log_entry->set_who(conv_log_obj->get_who());
+		perm_log_entry->set_topic(conv_log_obj->get_topic().first, conv_log_obj->get_topic().second);
+		perm_log_entry->set_conv_point(conv_log_obj->get_conv_point());
+		add_to_perm_storage(perm_log_entry);
 
 		//limit the number of conversation log entries for the current conversation
 		//to a maximum of 8
@@ -627,7 +639,11 @@ void DialogueController::otherConversationPoint(dialogue_point line)
 	    curr_conversation_log.push_back(conv_log_obj2);
 
 		//add conversation point to NPC's permanent conversation log storage
-		//add_to_perm_storage(conv_log_obj);
+		ConversationLogObj* perm_log_entry2 = new ConversationLogObj();
+		perm_log_entry2->set_who(conv_log_obj2->get_who());
+		perm_log_entry2->set_topic(conv_log_obj2->get_topic().first, conv_log_obj2->get_topic().second);
+		perm_log_entry2->set_conv_point(conv_log_obj2->get_conv_point());
+		add_to_perm_storage(perm_log_entry2);
 
 		//limit the number of conversation log entries for the current conversation
 		//to a maximum of 8
@@ -1349,6 +1365,8 @@ void DialogueController::add_hero_related_conv_points() {
 	/*Adds hero-related conversation points to player's vector of dialogue options
 	and to their 3D vector of possible conversation points for conversation points
 	associated with the notoriety icon*/
+	/*Uncomment below loop after Alpha Release*////////////////////////////////////
+	/*
 	for (auto itor = Containers::conv_point_table.begin(); itor != Containers::conv_point_table.end(); ++itor) {
 		for (int j = 0; j < heroes_player_knows.size(); ++j) {
 			if (heroes_player_knows[j] != dialogue.hero_name_to_int(other->getName())) {
@@ -1360,7 +1378,7 @@ void DialogueController::add_hero_related_conv_points() {
 				}
 			}
 		}
-	}
+	}*/
 }
 
 /*Removes hero-related conversation points from the 3D vector of possible
