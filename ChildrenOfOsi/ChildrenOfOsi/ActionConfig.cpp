@@ -173,7 +173,7 @@ void ActionConfig::import_post_conditions(Json::Value::iterator itr, std::string
 		}
 		else if ((*it)["general_type"].asInt() == 5)
 		{
-			StatePost* temp_post = new StatePost((*it)["utility"].asInt());
+			StatePost* temp_post = new StatePost((*it)["utility"].asInt(), (*it)["state_type"].asInt());
 
 			postconds->push_back(std::make_shared<StatePost>(*temp_post));
 		}

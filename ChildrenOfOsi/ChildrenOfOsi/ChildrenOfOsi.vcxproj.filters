@@ -203,18 +203,10 @@
     <ClCompile Include="ActionExecFunctions.cpp">
       <Filter>AI\Actions</Filter>
     </ClCompile>
-    <ClCompile Include="ConversationPoint.cpp" />
-    <ClCompile Include="DialogueConfig.cpp" />
-    <ClCompile Include="PartyManager.cpp" />
-    <ClCompile Include="Tag.cpp" />
-    <ClCompile Include="TagConfig.cpp" />
     <ClCompile Include="ActionConfig.cpp">
       <Filter>AI\Actions</Filter>
     </ClCompile>
-    <ClCompile Include="DialogueConfig.cpp" />
     <ClCompile Include="PartyManager.cpp" />
-    <ClCompile Include="TagConfig.cpp" />
-    <ClCompile Include="Tag.cpp" />
     <ClCompile Include="Region.cpp">
       <Filter>Audio</Filter>
     </ClCompile>
@@ -222,9 +214,6 @@
       <Filter>Rendering</Filter>
     </ClCompile>
     <ClCompile Include="ThreadManager.cpp" />
-    <ClCompile Include="QuestManager.cpp" />
-    <ClCompile Include="ConversationLogObj.cpp" />
-    <ClCompile Include="Fight.cpp" />
     <ClCompile Include="PlayerActExecFunctions.cpp">
       <Filter>AI\Actions</Filter>
     </ClCompile>
@@ -238,6 +227,15 @@
     <ClCompile Include="DialogueConfig.cpp">
       <Filter>Dialogue</Filter>
     </ClCompile>
+    <ClCompile Include="PartyManager.cpp">
+      <Filter>AI\Relationships</Filter>
+    </ClCompile>
+    <ClCompile Include="Fight.cpp">
+      <Filter>AI\Relationships</Filter>
+    </ClCompile>
+    <ClCompile Include="QuestManager.cpp">
+      <Filter>AI\Actions</Filter>
+    </ClCompile>
     <ClCompile Include="Tag.cpp">
       <Filter>Dialogue</Filter>
     </ClCompile>
@@ -246,6 +244,15 @@
     </ClCompile>
     <ClCompile Include="UniformGrid.cpp">
       <Filter>Physics</Filter>
+    </ClCompile>
+    <ClCompile Include="Tag.cpp">
+      <Filter>Dialogue</Filter>
+    </ClCompile>
+    <ClCompile Include="TagConfig.cpp">
+      <Filter>Dialogue</Filter>
+    </ClCompile>
+    <ClCompile Include="DialogueConfig.cpp">
+      <Filter>Dialogue</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -466,29 +473,18 @@
     <ClInclude Include="ActionExecFunctions.h">
       <Filter>AI\Actions</Filter>
     </ClInclude>
-    <ClInclude Include="ConversationPoint.h" />
-    <ClInclude Include="DialogueConfig.h" />
-    <ClInclude Include="PartyManager.h" />
-    <ClInclude Include="Tag.h" />
-    <ClInclude Include="TagConfig.h" />
     <ClInclude Include="ActionConfig.h">
       <Filter>AI\Actions</Filter>
     </ClInclude>
-    <ClInclude Include="Tag.h" />
     <ClInclude Include="Region.h">
       <Filter>Audio</Filter>
     </ClInclude>
     <ClInclude Include="HUD.h">
       <Filter>Rendering</Filter>
     </ClInclude>
-    <ClInclude Include="DialogueConfig.h" />
     <ClInclude Include="PartyManager.h" />
-    <ClInclude Include="TagConfig.h" />
     <ClInclude Include="ThreadManager.h" />
-    <ClInclude Include="QuestManager.h" />
-    <ClInclude Include="ConversationLogObj.h" />
     <ClInclude Include="GameState.h" />
-    <ClInclude Include="Fight.h" />
     <ClInclude Include="PlayerActExecFunctions.h">
       <Filter>AI\Actions</Filter>
     </ClInclude>
@@ -502,6 +498,15 @@
     <ClInclude Include="DialogueConfig.h">
       <Filter>Dialogue</Filter>
     </ClInclude>
+    <ClInclude Include="PartyManager.h">
+      <Filter>AI\Relationships</Filter>
+    </ClInclude>
+    <ClInclude Include="Fight.h">
+      <Filter>AI\Relationships</Filter>
+    </ClInclude>
+    <ClInclude Include="QuestManager.h">
+      <Filter>AI\Actions</Filter>
+    </ClInclude>
     <ClInclude Include="Tag.h">
       <Filter>Dialogue</Filter>
     </ClInclude>
@@ -510,6 +515,15 @@
     </ClInclude>
     <ClInclude Include="UniformGrid.h">
       <Filter>Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="Tag.h">
+      <Filter>Dialogue</Filter>
+    </ClInclude>
+    <ClInclude Include="TagConfig.h">
+      <Filter>Dialogue</Filter>
+    </ClInclude>
+    <ClInclude Include="DialogueConfig.h">
+      <Filter>Dialogue</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -534,7 +548,9 @@
     <Text Include="ReadMe.txt">
       <Filter>Misc</Filter>
     </Text>
-    <Text Include="dialog_template_output.txt" />
+    <Text Include="dialog_template_output.txt">
+      <Filter>Dialogue</Filter>
+    </Text>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Rendering">
@@ -614,15 +630,11 @@
     <None Include="test.json">
       <Filter>Game Objects</Filter>
     </None>
-    <None Include="Dialogue_config.json" />
     <None Include="oasis_config.json" />
-    <None Include="Tag_config.json" />
     <None Include="action_config.json">
       <Filter>AI\Actions</Filter>
     </None>
-    <None Include="Dialogue_config.json" />
     <None Include="oasis_config.json" />
-    <None Include="Tag_config.json" />
     <None Include="SilverSoldier_dialog.json" />
     <None Include="Oshosi_dialog.json" />
     <None Include="config_jungle.json">
@@ -630,6 +642,18 @@
     </None>
     <None Include="config_oasis.json">
       <Filter>Game Objects</Filter>
+    </None>
+    <None Include="Dialogue_config.json">
+      <Filter>Dialogue</Filter>
+    </None>
+    <None Include="Tag_config.json">
+      <Filter>Dialogue</Filter>
+    </None>
+    <None Include="Tag_config.json">
+      <Filter>Dialogue</Filter>
+    </None>
+    <None Include="Dialogue_config.json">
+      <Filter>Dialogue</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>

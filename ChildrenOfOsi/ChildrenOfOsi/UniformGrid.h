@@ -3,7 +3,7 @@
 #include "Line.h"
 
 
-const int grid_size = 125;
+const int grid_size = 20;	//each cell is 1250x1250
 
 class UniformGrid
 {

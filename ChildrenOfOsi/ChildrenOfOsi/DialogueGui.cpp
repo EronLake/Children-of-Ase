@@ -162,58 +162,11 @@ void DialogueGui::drawGui()
     this->icon_question_rect->getWidth(), this->icon_question_rect->getHeight(), this->icon_question_rect->getSprite());
 
   this->drawGuiText();
-
-  /*std::string message = DialogueController::getMessage();
-  GameWindow::createText(message, 266, 303, 500, 80, text_color_default);
-
-  std::vector<std::vector<std::string>> options;
-  if(DialogueController::getState() == 1) {
-    options = DialogueController::getOptions();
-    for(int i = 0; i <= 4; ++i) {
-      if(options.size() <= (DialogueController::scroll_control + i))
-        break;
-
-      std::string option_str = replace_str_char(options[DialogueController::scroll_control + i][1], "_", ' ');
-      if(option_str.find("Advise To", 0) != string::npos || option_str.find("Ask About", 0) != string::npos)
-        option_str += (" " + options[DialogueController::scroll_control + i][3]);
-
-      if(DialogueController::getSelect() == i)
-        GameWindow::createText(option_str, 292, 390 + (18 * i), 544, 45, text_color_selected);
-      else
-        GameWindow::createText(option_str, 292, 390 + (18 * i), 544, 45, text_color_default);
-    }
-  }
-  else if(DialogueController::getState() == 2) {
-    options = DialogueController::getReplyOptions();
-    for(int i = 0; i <= 4; ++i) {
-      if(options.size() <= (DialogueController::scroll_control + i))
-        break;
-
-      std::string option_str = replace_str_char(options[DialogueController::scroll_control + i][1], "_", ' ');
-      if(option_str.find("Take Advice", 0) != string::npos || option_str.find("Tell About", 0) != string::npos)
-        option_str += (" " + options[DialogueController::scroll_control + i][3]);
-
-      if(DialogueController::getSelect() == i)
-        GameWindow::createText(option_str, 292, 390 + (18 * i), 544, 45, text_color_selected);
-      else
-        GameWindow::createText(option_str, 292, 390 + (18 * i), 544, 45, text_color_default);
-
-    }
-  }
-  else if(DialogueController::getState() == 5)
-    GameWindow::createText("Next", 292, 390 + (18 * 1), 544, 45, text_color_selected);
-  else if(DialogueController::getState() == 6)
-    GameWindow::createText("Next", 292, 390 + (18 * 1), 544, 45, text_color_selected);
-  else if(DialogueController::getState() == 7)
-    GameWindow::createText("Exit", 292, 390 + (18 * 1), 544, 45, text_color_selected);
-  else if(DialogueController::getState() == 8)
-    GameWindow::createText("Next", 292, 390 + (18 * 1), 544, 45, text_color_selected);
-  else if(DialogueController::getState() == 9)
-    GameWindow::createText("Exit", 292, 390 + (18 * 1), 544, 45, text_color_selected);
-  else if(DialogueController::getState() == 10)
-    GameWindow::createText("Next", 292, 390 + (18 * 1), 544, 45, text_color_selected);*/
 }
 
+/**
+ * A helper function to handle drawing of the text of the dialogue UI.
+ */
 void DialogueGui::drawGuiText()
 {
   GameWindow::createText(DialogueController::getMessage(),
@@ -223,13 +176,16 @@ void DialogueGui::drawGuiText()
 
   switch(DialogueController::getState()) {
     case 1:
-      for(int i = 0; i <= 4; ++i) {
-        if(DialogueController::getOptions().size() <= (DialogueController::scroll_control + i))
-          break;
+      for(int i = 0; i <= 4; i++) {
+        if(((CheckClass::isHero(DialogueController::getOther())) ?
+          DialogueController::getOptions() : DialogueController::get_soldier_options()).size()
+          <= (DialogueController::scroll_control + i)) break;
 
-        std::string option_str = replace_str_char(DialogueController::getOptions()[DialogueController::scroll_control + i][1], "_", ' ');
+        std::string option_str = replace_str_char(((CheckClass::isHero(DialogueController::getOther())) ?
+          DialogueController::getOptions() : DialogueController::get_soldier_options())[DialogueController::scroll_control + i][1], "_", ' ');
         if(option_str.find("Advise To", 0) != string::npos || option_str.find("Ask About", 0) != string::npos)
-          option_str += (" " + DialogueController::getOptions()[DialogueController::scroll_control + i][3]);
+          option_str += (" " + ((CheckClass::isHero(DialogueController::getOther())) ?
+            DialogueController::getOptions() : DialogueController::get_soldier_options())[DialogueController::scroll_control + i][3]);
 
         GameWindow::createText(option_str,
           DialogueGui::OPTIONS_X, DialogueGui::OPTIONS_Y + (DialogueGui::LINE_SPACING * i),
@@ -255,22 +211,40 @@ void DialogueGui::drawGuiText()
 
       break;
     case 5:
-      GameWindow::createText("Next", 292, 390 + (18 * 1), 544, 45, text_color_selected);
+      GameWindow::createText("Next",
+        DialogueGui::OPTIONS_X, DialogueGui::OPTIONS_Y + (DialogueGui::LINE_SPACING * 1),
+        DialogueGui::OPTIONS_WIDTH, DialogueGui::OPTIONS_HEIGHT,
+        text_color_selected);
       break;
     case 6:
-      GameWindow::createText("Next", 292, 390 + (18 * 1), 544, 45, text_color_selected);
+      GameWindow::createText("Next",
+        DialogueGui::OPTIONS_X, DialogueGui::OPTIONS_Y + (DialogueGui::LINE_SPACING * 1),
+        DialogueGui::OPTIONS_WIDTH, DialogueGui::OPTIONS_HEIGHT,
+        text_color_selected);
       break;
     case 7:
-      GameWindow::createText("Exit", 292, 390 + (18 * 1), 544, 45, text_color_selected);
+      GameWindow::createText("Exit",
+        DialogueGui::OPTIONS_X, DialogueGui::OPTIONS_Y + (DialogueGui::LINE_SPACING * 1),
+        DialogueGui::OPTIONS_WIDTH, DialogueGui::OPTIONS_HEIGHT,
+        text_color_selected);
       break;
     case 8:
-      GameWindow::createText("Next", 292, 390 + (18 * 1), 544, 45, text_color_selected);
+      GameWindow::createText("Next",
+        DialogueGui::OPTIONS_X, DialogueGui::OPTIONS_Y + (DialogueGui::LINE_SPACING * 1),
+        DialogueGui::OPTIONS_WIDTH, DialogueGui::OPTIONS_HEIGHT,
+        text_color_selected);
       break;
     case 9:
-      GameWindow::createText("Exit", 292, 390 + (18 * 1), 544, 45, text_color_selected);
+      GameWindow::createText("Exit",
+        DialogueGui::OPTIONS_X, DialogueGui::OPTIONS_Y + (DialogueGui::LINE_SPACING * 1),
+        DialogueGui::OPTIONS_WIDTH, DialogueGui::OPTIONS_HEIGHT,
+        text_color_selected);
       break;
     case 10:
-      GameWindow::createText("Next", 292, 390 + (18 * 1), 544, 45, text_color_selected);
+      GameWindow::createText("Next",
+        DialogueGui::OPTIONS_X, DialogueGui::OPTIONS_Y + (DialogueGui::LINE_SPACING * 1),
+        DialogueGui::OPTIONS_WIDTH, DialogueGui::OPTIONS_HEIGHT,
+        text_color_selected);
       break;
   }
 }

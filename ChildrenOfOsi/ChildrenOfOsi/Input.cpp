@@ -936,18 +936,39 @@ void Input::InputCheck()
 				}
 				if (S && State == 1) {
 					DialogueController::scroll_control = 0;
+					Hero* temp_hero = CheckClass::isHero(DialogueController::getOther());
 					int tmp = DialogueController::getOptionsIndex();
-					if (tmp < DialogueController::getOSize() - 1) {
-						DialogueController::setOptionsIndex(++tmp);
-						count = 10;
-						gameplay_functions->createTaskForAudio("PlaySound", "SOUND", "SFX/page.wav");
-						//////std:://cout << "OptionsIndex: " << tmp << std::endl;
-						switch (DialogueController::getOptionsIndex()) {
-						case 0: gameplay_functions->setSwordGlow(player); break;
-						case 1: gameplay_functions->setHeartGlow(player); break;
-						case 2: gameplay_functions->setFaceGlow(player); break;
-						case 3: gameplay_functions->setQuestionGlow(player); break;
+					if (temp_hero) {
+						//int tmp = DialogueController::getOptionsIndex();
+						if (tmp < DialogueController::getOSize() - 1) {
+							DialogueController::setOptionsIndex(++tmp);
+							count = 10;
+							gameplay_functions->createTaskForAudio("PlaySound", "SOUND", "SFX/page.wav");
+							//////std:://cout << "OptionsIndex: " << tmp << std::endl;
+							switch (DialogueController::getOptionsIndex()) {
+							case 0: gameplay_functions->setSwordGlow(player); break;
+							case 1: gameplay_functions->setHeartGlow(player); break;
+							case 2: gameplay_functions->setFaceGlow(player); break;
+							case 3: gameplay_functions->setQuestionGlow(player); break;
+							}
+
 						}
+					}
+					else {
+						if (tmp < DialogueController::getOSize() - 1) {
+							DialogueController::setOptionsIndex(++tmp);
+							count = 10;
+							gameplay_functions->createTaskForAudio("PlaySound", "SOUND", "SFX/page.wav");
+							//////std:://cout << "OptionsIndex: " << tmp << std::endl;
+							switch (DialogueController::getOptionsIndex()) {
+							case 0: gameplay_functions->setSwordGlow(player); break;
+							case 1: gameplay_functions->setHeartGlow(player); break;
+							case 2: gameplay_functions->setFaceGlow(player); break;
+							case 3: gameplay_functions->setQuestionGlow(player); break;
+							}
+
+						}
+
 					}
 					/*set optionsIndex to 3 if player hits 's' key while they are already
 					on the question mark icon because in this case optionsIndex would
@@ -960,7 +981,8 @@ void Input::InputCheck()
 				}
 				if (D && State < 3) {
 					int tmp = DialogueController::getSelect();
-					if (DialogueController::getState() == 1) {
+					Hero* temp_hero = CheckClass::isHero(DialogueController::getOther());
+					if (DialogueController::getState() == 1 && temp_hero) {
 						if (tmp < (DialogueController::getOptions().size() - 1)) {
 							//DialogueController::setSelect(++tmp);
 							DialogueController::scroll_control++;
@@ -971,6 +993,26 @@ void Input::InputCheck()
 							//////std:://cout << "Index: " << tmp << std::endl;
 						}
 						if (tmp >(DialogueController::getOptions().size() - 1)) {
+							tmp = 0;
+							DialogueController::setSelect(tmp);
+							//DialogueController::scroll_control++;
+							if (DialogueController::scroll_control < 0)
+								DialogueController::scroll_control = 0;
+							count = 10;
+							//////std:://cout << "Index: " << tmp << std::endl;
+						}
+					}
+					else if (DialogueController::getState() == 1) {
+						if (tmp < (DialogueController::get_soldier_options().size() - 1)) {
+							//DialogueController::setSelect(++tmp);
+							DialogueController::scroll_control++;
+							if (DialogueController::scroll_control >= DialogueController::get_soldier_options().size())
+								DialogueController::scroll_control = DialogueController::get_soldier_options().size() - 1;
+							gameplay_functions->createTaskForAudio("PlaySound", "SOUND", "SFX/down.wav");
+							count = 10;
+							//////std:://cout << "Index: " << tmp << std::endl;
+						}
+						if (tmp >(DialogueController::get_soldier_options().size() - 1)) {
 							tmp = 0;
 							DialogueController::setSelect(tmp);
 							//DialogueController::scroll_control++;
@@ -1019,7 +1061,11 @@ void Input::InputCheck()
 					//////std:://cout << "ENTER" << std::endl;
 					if (DialogueController::getState() == 1) {
 						count = 10;
-						DialogueController::PlayerConversationPoint();
+						Hero* temp_hero;
+						if (temp_hero = CheckClass::isHero(DialogueController::getOther()))
+                            DialogueController::PlayerConversationPoint();
+						else if (DialogueController::optionsIndex == 0)
+							DialogueController::player_conversation_point_soldier();
 					}
 					else if (DialogueController::getState() == 2) {
 						count = 10;
@@ -1028,7 +1074,11 @@ void Input::InputCheck()
 					}
 					else if (DialogueController::getState() == 5) {
 						count = 10;
-						DialogueController::PlayerConversationPoint();
+						Hero* temp_hero;
+						if(temp_hero = CheckClass::isHero(DialogueController::getOther()))
+						    DialogueController::PlayerConversationPoint();
+						else
+							DialogueController::player_conversation_point_soldier();
 					}
 					else if (DialogueController::getState() == 6) {
 						count = 10;
@@ -1045,7 +1095,11 @@ void Input::InputCheck()
 					else if (DialogueController::getState() == 9) {
 						count = 10;
 						DialogueController::exitDialogue();
-						PlayerActExecFunctions::execute_dialog();
+						if (dynamic_cast<Player*>(Containers::hero_table["Shango"])->cur_action != nullptr) 
+						{
+							PlayerActExecFunctions::execute_dialog();
+						}
+						
 					}
 					else if (DialogueController::getState() == 10) {
 						count = 10;

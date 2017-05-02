@@ -44,6 +44,14 @@ public:
 	static void DialogueController::create_farewell();
 	static void DialogueController::remove_ask_for_quest();
 	static void DialogueController::add_ask_for_quest();
+	static void start_soldier_conversation(WorldObj* n, bool playerTalk);
+	static void player_choose_soldier();
+	static void player_conversation_point_soldier();
+	static void other_response_soldier(std::string info, std::string hero_topic);
+	static void other_conversation_point_soldier(dialogue_point line);
+	static vector<std::vector<std::string>> get_soldier_options();
+	static void DialogueController::remove_soldier_opts();
+	static void DialogueController::add_to_perm_storage(ConversationLogObj* log_entry);
 
 	static bool prompted_quest;
 	static bool accepted_quest;
@@ -70,6 +78,7 @@ public:
 	static DialogueHelper dialogue;
 
 	static std::vector<std::vector<dialogue_point>> options;
+	static std::vector<std::vector<dialogue_point>> soldier_options;
 	static std::vector<dialogue_point> replyOptions;
 	static std::string message;
 	static int optionsIndex;

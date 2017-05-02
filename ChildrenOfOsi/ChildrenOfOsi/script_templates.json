@@ -203,6 +203,24 @@
 	 }
 	},
 
+	"Remove_From_Party_Templates":{
+	 "1": {
+        "1": "Remove_From_Party"
+	 }
+	},
+
+	"Response_Remove_From_Party_Templates":{
+	 "1": {
+        "1": "Response_Remove_From_Party"
+	 }
+	},
+
+	"Response_Recruit_For_Party_Templates":{
+	 "1": {
+        "1": "Response_Recruit_For_Party"
+	 }
+	},
+
     "Join Party_Templates":{
 	 "1": {
         "1": "Join Party"

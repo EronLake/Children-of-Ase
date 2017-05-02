@@ -69,9 +69,9 @@ void RenderHelper::init_logo_gui()
 
 int RenderHelper::init_map(WorldObj* obj)
 {
-  gmap->setTextures();
-  gmap->loadTexture();
-  gmap->setSprite();
+	gmap->setTextures();
+	gmap->loadTexture({0,0});
+	gmap->setSprite();
 
   return 0;
 }
@@ -79,55 +79,86 @@ int RenderHelper::init_map(WorldObj* obj)
 // Don't need to pass in obj to draw frame, but will pass in to keep consistent style in map and pass in player to get camera coord.
 int RenderHelper::draw_frame(WorldObj * obj)
 {
-  initCamera(obj);
-  objVec.clear();
-  fullVec.clear();
+	initCamera(obj);
+	//pass in the camera bound for rendering instead of the object
+	objVec.clear();
+	fullVec.clear();
 
-  if(fullVec.empty()) {
-    fullVec = tree->retrieve(fullVec, fullBound);
-  }
+	//objVec = tree->retrieve(objVec, camera);
+	if (fullVec.empty()) {
+		fullVec = tree->retrieve(fullVec, fullBound);
+	}
 
-  for(int i = 0; i < fullVec.size(); i++) {
-    WorldObj* tempObj = fullVec[i];
+	//set<WorldObj*> s;
+	//unsigned size = fullVec.size();
+	//for (unsigned i = 0; i < size; ++i) s.insert(fullVec[i]);
+	//fullVec.assign(s.begin(), s.end());
 
-    //1k pixels left and rigfht, 800 pixels up and down. OBJS WHOSE WIDTH AND HEIGHT ARE GREATER THAN 1-2k and 800-1.6k respectively DO NOT FUNCTION CORRECTLY
-    if(tempObj->getX() > obj->getX() - (1000 * map_zoom) && tempObj->getX() < obj->getX() + (1000 * map_zoom) && tempObj->getY() > obj->getY() - (800 * map_zoom) && tempObj->getY() < obj->getY() + (800 * map_zoom)) {
-      auto it = std::find(objVec.begin(), objVec.end(), tempObj);
-      if(it == objVec.end()) {
-        objVec.push_back(tempObj);
-      }
-    }
-  }
+	//cout << "size of fullvec is " << fullVec.size() << endl;
+	for (int i = 0; i < fullVec.size(); i++) {
+		WorldObj* tempObj = fullVec[i];
 
-  gmap->drawMap(camera->getX(), camera->getY());
-  objVec.push_back(obj);
+		//1k pixels left and rigfht, 800 pixels up and down. OBJS WHOSE WIDTH AND HEIGHT ARE GREATER THAN 1-2k and 800-1.6k respectively DO NOT FUNCTION CORRECTLY
+		if (tempObj->getX() > obj->getX() - (1000*map_zoom) && tempObj->getX() < obj->getX() + (1000*map_zoom) && tempObj->getY() > obj->getY() - (800*map_zoom) && tempObj->getY() < obj->getY() + (800*map_zoom)) {
+				auto it = std::find(objVec.begin(), objVec.end(), tempObj);
+				if (it == objVec.end()) {
+					objVec.push_back(tempObj);
+				}
+		}	
+		
+	}
 
-  for(auto i = Containers::Attack_table.begin(); i != Containers::Attack_table.end(); ++i) {
-    if(i->second->getPause() == 0) {
-      objVec.push_back(i->second);
-    }
-  }
-  
-  sortVec();
+	////cout << "SIZE OF THE RENDER OBJVEC IS RENDEREDNEREDNEREDNER *** " << objVec.size() << endl;
+	gmap->drawMap(camera->getX(), camera->getY());
+	//obj->WorldObj::drawObj(camera->getX(), camera->getY());
+	//obj->WorldObj::animateObj();
+	objVec.push_back(obj);
+	//unordered_map<WorldObj*, int> tempmap;
 
-  for(int i = 0; i < objVec.size(); i++) {
+	//for (auto it = objVec.begin(); it != objVec.end(); it++) {
+	//	if (tempmap.find(*it) != tempmap.end()) {
+	//		//cout << "WE HAVE REPEATED OBJ IN THE OBJVEC!!!!!!!!!!!!!!!!!!!!!**********************" << endl;
+	//	}
+	//	else {
+	//		tempmap[*it] = 1;
+	//	}
+	//}
+	////cout << "SIZE OF ATTACK TABLE IS " << Containers::Attack_table.size() << endl;
+	for (auto i = Containers::Attack_table.begin(); i != Containers::Attack_table.end(); ++i) {
+		if (i->second->getPause() == 0) {
+			objVec.push_back(i->second);
+		}
+	}
+	/*for (int i = 0; i < obj->body.size(); i++) {
+		osi::GameWindow::drawSprite(obj->body[i].getX()-camera->getX(), obj->body[i].getY()-camera->getY(), obj->body[i].getWidth(), obj->body[i].getHeight(), obj->getSprite());
+	}*/
+	sortVec();
+	//cout << "THE COORDINATES OF OBJ IS " << obj->getX() << ", " << obj->getY() << endl;
+	//cout << "******************************************SIZE OF THE OBJVEC TO RENDER IS " << objVec.size() << endl;
+	for (int i = 0; i < objVec.size(); i++) {
+		
+			LOG("BEFORE DRAWING**");
+			////////cout << objVec[i]->getX() - camera->getX() << endl;
+			//LOG(objVec[i]->getX(), ", ", objVec[i]->getY());
+			objVec[i]->WorldObj::drawObj(camera->getX(), camera->getY());
+			//for (int j = 0; j < objVec[i]->body.size(); j++) {
+			objVec[i]->body[0].drawObj(camera->getX(), camera->getY());
+			objVec[i]->effect.drawObj(camera->getX(), camera->getY());
+			//}
+			//objVec[i]->effect.sprite.animate();
+			//objVec[i]->WorldObj::animateObj();
+	}
+	// draw the points
+	//for (int i = 0; i < rivObj->getLines().size(); i++) {
+	//	//cout << "DRAWING POINTS" << endl;
+	//	rivObj->getLines()[i]->getP1().drawObjRiv(camera->getX(), camera->getY());
+	//	rivObj->getLines()[i]->getP2().drawObjRiv(camera->getX(), camera->getY());
 
-    LOG("BEFORE DRAWING**");
-    objVec[i]->WorldObj::drawObj(camera->getX(), camera->getY());
-    objVec[i]->body[0].drawObj(camera->getX(), camera->getY());
-    objVec[i]->effect.drawObj(camera->getX(), camera->getY());
-  }
-
-  // Draw the river collision points
-  for(int i = 0; i < rivObj->getLines().size(); i++) {
-    rivObj->getLines()[i]->getP1().drawObjRiv(camera->getX(), camera->getY());
-    rivObj->getLines()[i]->getP2().drawObjRiv(camera->getX(), camera->getY());
-
-  }
-
-  drawHUD(obj);
-  GameWindow::refresh();
-  return 0;
+	//}
+	//convoGui->drawGui();
+	drawHUD(obj);
+	GameWindow::refresh();
+	return 0;
 }
 
 

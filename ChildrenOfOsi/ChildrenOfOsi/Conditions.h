@@ -2,9 +2,11 @@
 #include "Hero.h"
 #include "Memory.h"
 #include "common.h"
+//#include "Alliance.h"
+#include "War.h"
 //#include "ActionPool.h"
 
-
+class Alliance;
 
 class Preconditions
 {
@@ -26,6 +28,10 @@ public:
 	static constexpr int BAFF = 10;
 	static constexpr int BNOT = 11;
 
+	static constexpr int ALL = 6;
+	static constexpr int OCC = 7;
+	static constexpr int CON = 8;
+
 	Preconditions();
 	~Preconditions();
 	virtual int get_cost();
@@ -35,6 +41,8 @@ public:
 
 	//for relprecons 
 	virtual int get_rel_type();
+	//for state_precons 
+	virtual int get_state_type();
 
 
 };
@@ -149,6 +157,11 @@ public:
 	static constexpr int BSTR = 9;
 	static constexpr int BAFF = 10;
 	static constexpr int BNOT = 11;
+
+	static constexpr int ALL = 6;
+	static constexpr int OCC = 7;
+	static constexpr int CONF = 8;
+	static constexpr int CONV = 9;
 	
 	//Comparing village states
 	Postcondition();
@@ -156,13 +169,16 @@ public:
 
 	virtual float get_utility();
 	virtual float get_utility(Hero* curr_hero, Hero* other_hero);
-	
+
 	virtual void apply_utility();
 	virtual void apply_utility(Hero* curr_hero, Hero* other_hero, bool if_doer);
+	virtual void apply_utility(Hero* curr_hero, Hero* other_hero);
 	std::string get_type();
 	int get_general_type();
-	//for relprecons 
+	//for rel_postcons 
 	virtual int get_rel_type(); 
+	//for state_postcons 
+	virtual int get_state_type();
 	
 
 };
@@ -215,11 +231,14 @@ private:
 	std::string state,
 	std::vectorr<relevant villages>*/
 	int utility;
+	int state_type;
 public:
 	//Comparing village states
-	StatePost(int utility);
+	StatePost(int utility, int _state_type);
 	~StatePost();
+
+	virtual int get_state_type() final { return state_type; };
 	virtual float get_utility() final;
-	virtual void apply_utility() final;
+	virtual void apply_utility(Hero* curr_hero, Hero* other_hero) final;
 
 };

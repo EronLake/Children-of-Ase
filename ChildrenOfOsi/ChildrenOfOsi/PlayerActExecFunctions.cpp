@@ -57,7 +57,7 @@ void PlayerActExecFunctions::execute_start(std::string act_name, Hero* receiver)
 	{
 		//we need to create a fight here if their action is a violent action
 		Fight* fight_obj = new Fight(player->getParty(), receiver->getParty(), 0);
-	} else if (act_name == "Duel") {
+	/*} else if (act_name == "Duel") {
 		Fight* fight_obj = new Fight(player->getParty(), receiver->getParty(), 1);
 	}
 	else if (act_name == "Spar") {
@@ -65,6 +65,7 @@ void PlayerActExecFunctions::execute_start(std::string act_name, Hero* receiver)
 	}
 	else if (act_name == "Train With") {
 		Fight* fight_obj = new Fight(player->getParty(), receiver->getParty(), 3);
+		*/
 	}
 
 	//ADITIONAL FUNCTION act_name == "Conquer" || act_name == "Duel" ||act_name == "Spar" ||
@@ -83,7 +84,6 @@ void PlayerActExecFunctions::execute_end(bool if_succ) {
 	//is called after warning hit
 	//is called when hero is incapacited
 
-	//NEED TO STILL DO MEMORIES
 	//STILL NEED TO DO QUEST CHECK
 	
 	///////////////////////////////////////////
@@ -101,7 +101,7 @@ void PlayerActExecFunctions::execute_end(bool if_succ) {
 	//special cases that need to be handled are in this gaurd (may want to make a helper function)
 
 	//NEEDS TO BE TESTED... should it check for Occupy?
-	if (act_name == "conquer" && player->getParty()->get_fight()->is_over()) {
+	if (act_name == "Occupy" && player->getParty()->get_fight()->is_over()) {
 		cur_action->getReceiver()->getVillage()->add_to_village_health(cur_action->getDoer()->getParty()->getMembers().size()*(-10));
 		if (cur_action->getReceiver()->getVillage()->get_village_health() > 0) {
 			cur_action->getReceiver()->getVillage()->defenders->add_party_to_party(cur_action->getReceiver()->getVillage()->barracks);
@@ -162,6 +162,7 @@ void PlayerActExecFunctions::execute_end(bool if_succ) {
 	//sets preconditions to references preconditions
 
 	delete player->cur_action;
+	player->cur_action = nullptr;
 }
 
 void PlayerActExecFunctions::execute_dialog()
@@ -175,7 +176,7 @@ void PlayerActExecFunctions::execute_dialog()
 	std::string act_name = cur_action->getName().substr(0, name_end);
 
 	//Need TO ADD FUNCTION TO DO THIS
-	if (act_name == "Form_Alliance") {
+	if (act_name == "Train") {
 		LOG("PRINT FOLLOW ME TO SCREEN AND MOVE TO TRAIN LOCATION");
 	}
 
@@ -208,9 +209,9 @@ void PlayerActExecFunctions::check_quest() {
 
 	for (auto itr : player->get_quests())
 	{
-		if (player->cur_action->getName() == itr.first->getName())
+		if (player->cur_action == itr.first)
 		{
-			LOG("MARK QUEST AS COMPLETED")
+			player->cur_action->executed = true;
 		}
 	}
 
