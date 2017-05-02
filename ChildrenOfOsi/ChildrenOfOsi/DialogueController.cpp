@@ -217,26 +217,48 @@ void DialogueController::PlayerConversationPoint()
 		std::cout << temp_hero->rel[1]->getNotoriety() << ", " << temp_hero->rel[1]->getStrength() << ", ";
 		std::cin >> tempin;*/
 
-	     /*handles applying of post conditions for relationship related conversation
-	     points. I also thought to incorporate checks for if a player completed an action
-	     by doing any of these here, but this is probably not a good place.*/
-		if (player_conv_point_choice == "Bribe" || player_conv_point_choice == "Compliment" || player_conv_point_choice == "Grovel" || player_conv_point_choice == "Insult" || player_conv_point_choice == "Boast") {
-			
+		/*handles applying of post conditions for relationship related conversation
+		points. I also thought to incorporate checks for if a player completed an action
+		by doing any of these here, but this is probably not a good place.*/
+
+		//Eron's Change: checks if action_accepted for  spar, bribe, and form alliance but doesn't impliment post conditions for them
+		if (player_conv_point_choice == "Bribe"||player_conv_point_choice == "Compliment"|| player_conv_point_choice == "Grovel"||
+			player_conv_point_choice == "Insult"|| player_conv_point_choice == "Boast" || player_conv_point_choice == "Ask_To_Spar" ||
+			player_conv_point_choice == "Ask_To_Duel" || player_conv_point_choice == "Ask_To_Form_Alliance") {
+			/*Planner* planner = AIController::get_plan(CheckClass::isHero(other)->name);
+
+			if (planner->quests_given.size() > 0) {
+				planner->quests_given.push_back(planner->get_current_action());
+				Hero* shango = dynamic_cast<Hero*>(player);
+				int time_limit = 3600;                 //1 minute limit to complete quest for now
+				shango->add_quest(planner->get_current_action(), time_limit);
+			}
+			for (int i = 0; i < planner->quests_given.size(); ++i) {
+				if (planner->quests_given[i]->getDoer()->name == SHANGO &&
+					planner->get_current_action()->name.find(player_conv_point_choice, 0) != string::npos) {
+					//set quest to complete here if it was a bribe one
+					planner->quests_given[i]->executed = false;
+				}
+
+			}*/
 			accepted_action = true;
 			for (auto precond : Containers::conv_point_table[player_conv_point_choice]->req_preconds) {
 
 				if (precond->get_cost(player, temp_hero) == 0) {
-
 				}
 				else {
 					accepted_action = false;
 				}
 			}
-			if (accepted_action) {
-				Containers::conv_point_table[player_conv_point_choice]->apply_postconditions(true, player, temp_hero);
-			}
-			else {
-				Containers::conv_point_table[player_conv_point_choice]->apply_postconditions(false, player, temp_hero);
+			if (player_conv_point_choice == "Bribe" || player_conv_point_choice == "Compliment" || player_conv_point_choice == "Grovel" ||
+				player_conv_point_choice == "Insult" || player_conv_point_choice == "Boast") 
+			{
+				if (accepted_action) {
+					Containers::conv_point_table[player_conv_point_choice]->apply_postconditions(true, player, temp_hero);
+				}
+				else {
+					Containers::conv_point_table[player_conv_point_choice]->apply_postconditions(false, player, temp_hero);
+				}
 			}
 			
 		}
@@ -786,9 +808,7 @@ void DialogueController::otherResponse(std::string info, std::string hero_topic)
 			//calls action start if the question is asked at all
 			PlayerActExecFunctions::execute_start("Form_Alliance", temp_hero);
 
-			//check if I want to accept (seeting to fail for testing)
-			accepted_action = true; //should call a function
-
+			//check if I want to accept
 			if (accepted_action) {
 				dialogue_point diog_pt = { "Accept Alliance Offer","Accept Alliance Offer" };
 				std::string reply_pt_sentence = dialogue.gen_dialog(diog_pt, temp_hero);
@@ -806,9 +826,7 @@ void DialogueController::otherResponse(std::string info, std::string hero_topic)
 			//calls action start if the question is asked at all
 			PlayerActExecFunctions::execute_start("Duel", temp_hero);
 
-			//check if I want to accept (seeting to fail for testing)
-			accepted_action = true; //should call a function
-
+			//check if I want to accept
 			if (accepted_action) {
 				dialogue_point diog_pt = { "Accept Duel","Accept Duel" };
 				std::string reply_pt_sentence = dialogue.gen_dialog(diog_pt, temp_hero);
@@ -827,9 +845,7 @@ void DialogueController::otherResponse(std::string info, std::string hero_topic)
 			//calls action start if the question is asked at all
 			PlayerActExecFunctions::execute_start("Spar", temp_hero);
 
-			//check if I want to accept (seeting to fail for testing)
-			accepted_action = true; //should call a function
-
+			//check if I want to accept
 			if (accepted_action) {
 				dialogue_point diog_pt = { "Accept Spar Request","Accept Spar Request" };
 				std::string reply_pt_sentence = dialogue.gen_dialog(diog_pt, temp_hero);

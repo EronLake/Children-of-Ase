@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "Conditions.h"
+#include "Alliance.h"
 
 ////////////////////////////////////////////////////////////////////////////////////
 //PRECONDITIONS
@@ -38,6 +39,12 @@ int Preconditions::get_general_type()
 }
 
 int Preconditions::get_rel_type()
+{
+	LOG("virtual function");
+	return 0;
+}
+
+int Preconditions::get_state_type()
 {
 	LOG("virtual function");
 	return 0;
@@ -83,19 +90,10 @@ int RelPrecon::get_cost(Hero* curr_hero, Hero* other_hero)
 	}
 	else if(rel_type == STR)
 	{
-		//for (auto i : curr_hero->rel) {
-		//	if (i.first == other_hero->name) { cur_rel_map = i.second; }
-		//}
-		//current_rel = cur_rel_map->getStrength();
-
 		current_rel = curr_hero->rel[other_hero->name]->getStrength();
 		cost = desired_rel_val - current_rel;
-		//int find = curr_hero->rel.find(other_hero->name)->second->getStrength();
-		//Relationship* temp_rel = curr_hero->rel[other_hero->name];
-		//int temp_str = temp_rel->getStrength();
-		//current_rel = curr_hero->rel[other_hero->name]->getStrength();
-		
-	} else if (rel_type == BAFF)
+	} 
+	else if (rel_type == BAFF)
 	{
 		current_rel = curr_hero->rel[other_hero->name]->getAffinity();
 		cost = current_rel - desired_rel_val;
@@ -111,7 +109,7 @@ int RelPrecon::get_cost(Hero* curr_hero, Hero* other_hero)
 		cost = current_rel - desired_rel_val;
 	}
 
-	
+	if (cost < 0) { cost = 0; }
 	return cost;
 }
 
@@ -173,6 +171,7 @@ int RelEstimPrerec::get_cost(Hero* curr_hero, Hero* other_hero)
 		cost = current_rel - desired_rel_val;
 	}
 
+	if (cost < 0) { cost = 0; }
 
 	return cost;
 }
@@ -365,6 +364,12 @@ void Postcondition::apply_utility(Hero* curr_hero, Hero* other_hero, bool if_doe
 	cout << "virtual function";
 }
 
+void Postcondition::apply_utility(Hero* curr_hero, Hero* other_hero)
+{
+	LOG("virtual function");
+	cout << "virtual function";
+}
+
 std::string Postcondition::get_type()
 {
 	return type;
@@ -376,6 +381,12 @@ int Postcondition::get_general_type()
 }
 
 int Postcondition::get_rel_type()
+{
+	LOG("virtual function");
+	return 0;
+}
+
+int Postcondition::get_state_type()
 {
 	LOG("virtual function");
 	return 0;
@@ -417,6 +428,8 @@ if the reciever: applies postconditions to reciver and the world
 */
 void RelPost::apply_utility(Hero* curr_hero, Hero* other_hero, bool if_doer)
 {
+	//Eron Fix: need to make sure, rel can't go over 100
+
 	//checks if the apply is for the doer or reciever
 	if (if_doer == true) {
 
@@ -611,12 +624,13 @@ void RelEstimPost::apply_utility(Hero* curr_hero, Hero* other_hero, bool if_doer
 ////////////////////////////////////////////////////////////////////////////////////
 //STATE POSTCONDITION
 ////////////////////////////////////////////////////////////////////////////////////
-StatePost::StatePost(int _utility)
+StatePost::StatePost(int _utility, int _state_type)
 {
 	/*state_manager st_man,
 	std::string required state,
 	std::vectorr<relevant villages>*/
 	utility = _utility;
+	state_type = _state_type;
 
 	type = "state";
 	general_type = STATE;
@@ -635,7 +649,29 @@ float StatePost::get_utility()
 	return utility;
 }
 
-void StatePost::apply_utility()
+void StatePost::apply_utility(Hero* curr_hero, Hero* other_hero)
 {
-	LOG("Still needs to be implimented");
+	
+	if (state_type == ALL)
+	{
+		//curr_hero and other_hero are put in the same alliance
+		Alliance* curr_alliance = curr_hero->getVillage()->get_alliance();
+		Alliance* other_alliance = other_hero->getVillage()->get_alliance();
+		curr_alliance->add_alliance_to_alliance(other_alliance);
+	}
+	else if (state_type == OCC)
+	{
+		//curr_hero is set the conqurer of the other hero
+		curr_hero->getVillage()->conquer(other_hero->getVillage());
+		War::endWar(curr_hero->getVillage(), other_hero->getVillage());
+		std::cout << "OCC";
+	}
+	
+	else if (state_type == CONF)
+	{
+		War* new_war = new War();
+		new_war->setWarParties(curr_hero->getVillage(), other_hero->getVillage());
+		std::cout << "CONF";
+	}
+	
 }

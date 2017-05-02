@@ -163,6 +163,7 @@ void AIController::reevaluate_state(int me, int them) {
 
 	Action* milestone = planner->choose_next_step(state, planner->get_end_states()); //Get the first milestone
 
+	//Eron's Fix: if milestone = endstate fot them then don't cont
 	planner->add_milestone(state, milestone);                  //Add the first milestone to the action path
 
 	planner->generate_milestones(state, milestone);          //Generate the rest of the milestones for this state
