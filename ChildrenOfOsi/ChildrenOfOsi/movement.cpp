@@ -62,7 +62,7 @@ int Movement::move_up(WorldObj* obj) {
 		//cout << "obj body y is at " << obj->body[0].getY() << " and it's height is " << obj->body[0].getHeight() << endl;
 		lineVec.clear();
 		lineVec = grid->retrieve_objs_in_grid(lineVec, &temp);
-		cout << "SIZE OF LINEVEC IS " << lineVec.size() << endl;
+		//cout << "SIZE OF LINEVEC IS " << lineVec.size() << endl;
 		for (int i = 0; i < lineVec.size(); i++) {
 			//if (shouldCheckLineCollision(temp.getP1(), rivObj->getLines()[i].getP1(), rivObj->getLines()[i].getP2(), 200)) {
 				if (lineCollision(lineVec[i], &temp)) {
