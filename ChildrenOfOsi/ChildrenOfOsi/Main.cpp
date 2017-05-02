@@ -107,8 +107,6 @@ int main() {
 	QuadTree* collideTree = new QuadTree(0, *screen);
 	GameWindow::init();
 	GAMEPLAY_LOOP(collideTree);
-
-
 	return 0;
 }
 
@@ -210,6 +208,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	gameplay_functions->add_hero("Yemoja", 6445.0, 10355.0, true);
 	gameplay_functions->add_hero("Oya", 4400, 3600, true);
 	tBuffer->run();
+	
 
 	Hero* staticRec = Containers::hero_table["Yemoja"];
 	heroes.push_back(staticRec);
