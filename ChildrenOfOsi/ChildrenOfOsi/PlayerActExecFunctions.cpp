@@ -162,6 +162,7 @@ void PlayerActExecFunctions::execute_end(bool if_succ) {
 	//sets preconditions to references preconditions
 
 	delete player->cur_action;
+	player->cur_action = nullptr;
 }
 
 void PlayerActExecFunctions::execute_dialog()

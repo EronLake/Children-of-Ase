@@ -180,7 +180,7 @@ void DialogueController::PlayerConversationPoint()
 		std::string tempin;
 		std::cout << "Shango's AFF, NOT, STR (respectively): " << temp_hero->rel[1]->getAffinity() << ", ";
 		std::cout << temp_hero->rel[1]->getNotoriety() << ", " << temp_hero->rel[1]->getStrength() << ", ";
-		std::cin >> tempin;
+		//std::cin >> tempin;
 
 		/*handles applying of post conditions for relationship related conversation
 		points. I also thought to incorporate checks for if a player completed an action
@@ -210,7 +210,6 @@ void DialogueController::PlayerConversationPoint()
 			for (auto precond : Containers::conv_point_table[player_conv_point_choice]->req_preconds) {
 
 				if (precond->get_cost(player, temp_hero) == 0) {
-
 				}
 				else {
 					accepted_action = false;
@@ -514,9 +513,7 @@ void DialogueController::otherResponse(std::string info, std::string hero_topic)
 			//calls action start if the question is asked at all
 			PlayerActExecFunctions::execute_start("Form_Alliance", temp_hero);
 
-			//check if I want to accept (seeting to fail for testing)
-			accepted_action = true; //should call a function
-
+			//check if I want to accept
 			if (accepted_action) {
 				dialogue_point diog_pt = { "Accept Alliance Offer","Accept Alliance Offer" };
 				std::string reply_pt_sentence = dialogue.gen_dialog(diog_pt, temp_hero);
@@ -534,9 +531,7 @@ void DialogueController::otherResponse(std::string info, std::string hero_topic)
 			//calls action start if the question is asked at all
 			PlayerActExecFunctions::execute_start("Duel", temp_hero);
 
-			//check if I want to accept (seeting to fail for testing)
-			accepted_action = true; //should call a function
-
+			//check if I want to accept
 			if (accepted_action) {
 				dialogue_point diog_pt = { "Accept Duel","Accept Duel" };
 				std::string reply_pt_sentence = dialogue.gen_dialog(diog_pt, temp_hero);
@@ -555,9 +550,7 @@ void DialogueController::otherResponse(std::string info, std::string hero_topic)
 			//calls action start if the question is asked at all
 			PlayerActExecFunctions::execute_start("Spar", temp_hero);
 
-			//check if I want to accept (seeting to fail for testing)
-			accepted_action = true; //should call a function
-
+			//check if I want to accept
 			if (accepted_action) {
 				dialogue_point diog_pt = { "Accept Spar Request","Accept Spar Request" };
 				std::string reply_pt_sentence = dialogue.gen_dialog(diog_pt, temp_hero);

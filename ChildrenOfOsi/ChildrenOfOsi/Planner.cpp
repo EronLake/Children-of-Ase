@@ -78,7 +78,9 @@ void Planner::choose_end_with(int hero) {
 		for (auto state : action_pool->end_states) {
 			value = 0;
 			value += personality_appeal(state);
-			value += relationship_appeal(state);
+			
+			//Eron's Note: we haven't initialized the str,not,aff maginifiers so I took out the appeal
+			//value += relationship_appeal(state);
 			if (value > best_value) {
 				best_value = value;
 				best_end_state = state;
@@ -145,16 +147,30 @@ int Planner::relationship_appeal(Action* state) {
 }
 
 int Planner::personality_appeal(Action* evaluateAction) {
+	/*
+	int temp_1 = (evaluateHero->traits);
+	int temp_2 = *(evaluateAction->multipliers);
+	return *(evaluateHero->traits) * *(evaluateAction->multipliers);
+	*/
+
+	int getHonor = evaluateHero->traits->getHonor()*evaluateAction->multipliers->getHonor();
+	int getPride = evaluateHero->traits->getPride()*evaluateAction->multipliers->getPride();
+	int getAggression = evaluateHero->traits->getAggression()*evaluateAction->multipliers->getAggression();
+	int getKindness = evaluateHero->traits->getKindness()*evaluateAction->multipliers->getKindness();
+	int getGreed = evaluateHero->traits->getGreed()*evaluateAction->multipliers->getGreed();
+	int getRecklessness = evaluateHero->traits->getRecklessness()*evaluateAction->multipliers->getRecklessness();
+	int getExtroversion = evaluateHero->traits->getExtroversion()*evaluateAction->multipliers->getExtroversion();
 	
 	return *(evaluateHero->traits) * *(evaluateAction->multipliers);
-
-	/*return ((evaluateHero->traits->getHonor()*evaluateAction->multipliers->getHonor())+
+	/*
+	return ((evaluateHero->traits->getHonor()*evaluateAction->multipliers->getHonor())+
 		(evaluateHero->traits->getPride()*evaluateAction->multipliers->getPride())+
 		(evaluateHero->traits->getAggression()*evaluateAction->multipliers->getAggression())+
 		(evaluateHero->traits->getKindness()*evaluateAction->multipliers->getKindness())+
 		(evaluateHero->traits->getGreed()*evaluateAction->multipliers->getGreed())+
 		(evaluateHero->traits->getRecklessness()*evaluateAction->multipliers->getRecklessness())+
-		(evaluateHero->traits->getExtroversion()*evaluateAction->multipliers->getExtroversion()));*/
+		(evaluateHero->traits->getExtroversion()*evaluateAction->multipliers->getExtroversion()));
+		*/
 };
 vector<std::shared_ptr<Preconditions>> Planner::prioritize_preconditions(Action* goal) {
 	vector<std::shared_ptr<Preconditions>> preconlist;

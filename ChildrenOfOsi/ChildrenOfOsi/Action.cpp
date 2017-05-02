@@ -174,6 +174,8 @@ vector<std::string> Action::preConditionsNeeded(Hero* o, Hero* h) {
 		}
 	}
 	//std:://////cout << "HERE 2.5" << endl;*/
+
+	//shave off end number of needs?
 	return needs;
 }
 

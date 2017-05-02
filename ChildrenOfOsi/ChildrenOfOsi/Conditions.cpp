@@ -90,19 +90,10 @@ int RelPrecon::get_cost(Hero* curr_hero, Hero* other_hero)
 	}
 	else if(rel_type == STR)
 	{
-		//for (auto i : curr_hero->rel) {
-		//	if (i.first == other_hero->name) { cur_rel_map = i.second; }
-		//}
-		//current_rel = cur_rel_map->getStrength();
-
 		current_rel = curr_hero->rel[other_hero->name]->getStrength();
 		cost = desired_rel_val - current_rel;
-		//int find = curr_hero->rel.find(other_hero->name)->second->getStrength();
-		//Relationship* temp_rel = curr_hero->rel[other_hero->name];
-		//int temp_str = temp_rel->getStrength();
-		//current_rel = curr_hero->rel[other_hero->name]->getStrength();
-		
-	} else if (rel_type == BAFF)
+	} 
+	else if (rel_type == BAFF)
 	{
 		current_rel = curr_hero->rel[other_hero->name]->getAffinity();
 		cost = current_rel - desired_rel_val;
@@ -118,7 +109,7 @@ int RelPrecon::get_cost(Hero* curr_hero, Hero* other_hero)
 		cost = current_rel - desired_rel_val;
 	}
 
-	
+	if (cost < 0) { cost = 0; }
 	return cost;
 }
 
@@ -180,6 +171,7 @@ int RelEstimPrerec::get_cost(Hero* curr_hero, Hero* other_hero)
 		cost = current_rel - desired_rel_val;
 	}
 
+	if (cost < 0) { cost = 0; }
 
 	return cost;
 }
@@ -436,6 +428,8 @@ if the reciever: applies postconditions to reciver and the world
 */
 void RelPost::apply_utility(Hero* curr_hero, Hero* other_hero, bool if_doer)
 {
+	//Eron Fix: need to make sure, rel can't go over 100
+
 	//checks if the apply is for the doer or reciever
 	if (if_doer == true) {
 

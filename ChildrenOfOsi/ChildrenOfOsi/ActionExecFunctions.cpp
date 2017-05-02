@@ -614,7 +614,7 @@ void ActionExecFunctions::execute_conversation(Action* conv)
 
 void ActionExecFunctions::execute_bribe(Action* bribe)
 {
-	return;
+	//return;
 	if (bribe->getDoer()->get_busy() == Hero::BUSY_REC)return;
 	int monopoly_money = 420;
 	if (!bribe->getDoer()->getInCombat()) {
@@ -626,6 +626,8 @@ void ActionExecFunctions::execute_bribe(Action* bribe)
 			break;
 
 		case 1: //Create a greeting timer
+			//get busy and not busy are both not worrking 
+
 			if (bribe->getDoer()->get_action_destination() == Vector2f(NULL, NULL) && (bribe->getReceiver()->get_busy() == Hero::NOT_BUSY)) {
 				ActionHelper::set_timer(bribe, 60);
 				bribe->getDoer()->set_busy(Hero::BUSY_DOER);

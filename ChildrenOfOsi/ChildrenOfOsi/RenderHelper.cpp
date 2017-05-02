@@ -71,7 +71,7 @@ void RenderHelper::init_logo_gui()
 int RenderHelper::init_map(WorldObj* obj)
 {
 	gmap->setTextures();
-	gmap->loadTexture();
+	gmap->loadTexture({0,0});
 	gmap->setSprite();
 
 	return 0;

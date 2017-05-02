@@ -180,6 +180,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	Alex->name = SHANGO;
 	Alex->setWidth(150);
 	Alex->setHeight(150);
+	Alex->setPersonality(30, 70, 80, 60, 30, 30, 50);// uncommented this
 
 	//draws the logo on startup
 	gameplay_functions->draw_logo(Alex);
@@ -282,10 +283,8 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 		gameplay_functions->add_texture("map5_5", 0, 0, 0);
 
 		tBuffer->run();
-
-		gameplay_functions->init_map(Alex);
-
-		tBuffer->run();
+		RenderHelper::gmap->setTextures();
+		RenderHelper::gmap->setSprite();
 	}
 
 	HDC hdc = wglGetCurrentDC();
@@ -294,9 +293,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	wglShareLists(mainContext, loaderContextM);
 	std::thread tm([=]() {
 		wglMakeCurrent(hdc, loaderContextM);
-		RenderHelper::gmap->setTextures();
-		RenderHelper::gmap->loadTexture();
-		RenderHelper::gmap->setSprite();
+		RenderHelper::gmap->loadTexture(Alex->getLoc());
 		wglMakeCurrent(nullptr, nullptr);
 		wglDeleteContext(loaderContextM);
 		glFinish();
@@ -1048,13 +1045,13 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 		gameplay_functions->add_Attack(blueSoldiers[i]->getKey(), blueSoldiers[i]->body[0].getX(), blueSoldiers[i]->body[0].getY(), true, 10);
 	}
 	tBuffer->run();
-	recVec.push_back(staticRec);
-	recVec.push_back(oya);
+	movVec.push_back(staticRec);
+	movVec.push_back(oya);
 	for (int i = 0; i < silverSoldier.size(); i++) {
-		recVec.push_back(silverSoldier[i]);
+		movVec.push_back(silverSoldier[i]);
 	}
 	for (int i = 0; i < blueSoldiers.size(); i++) {
-		recVec.push_back(blueSoldiers[i]);
+		movVec.push_back(blueSoldiers[i]);
 	}
 
 	int closest;
@@ -1090,7 +1087,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	wglShareLists(mainContext, loaderContext0);
 	std::thread t0([=]() {
 		wglMakeCurrent(hdc, loaderContext0);
-		int textureMapCounter = 0;
+		//int textureMapCounter = 0;
 		for (int i = 0; i < standard.size(); i++) {
 			set_file_with_thread(standard[i], &textureMap.find(standard[i])->second);
 		}
@@ -1115,7 +1112,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	wglShareLists(mainContext, loaderContext1);
 	std::thread t1([=]() {
 		wglMakeCurrent(hdc, loaderContext1);
-		int textureMapCounter = 0;
+		//int textureMapCounter = 0;
 		for (int i = 0; i < (starting_location[0]).size(); i++) {
 			set_file_with_thread(starting_location[0].at(i), &textureMap.find(starting_location[0].at(i))->second);
 		}
@@ -1144,7 +1141,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	wglShareLists(mainContext, loaderContext2);//Shares the information between the loading context and the main context
 	std::thread t2([=]() {//makes the thread. [=] is a cpp Lambda representation
 		wglMakeCurrent(hdc, loaderContext2);//Sets the current context to the loader context
-		int textureMapCounter = 0;
+		//int textureMapCounter = 0;
 		for (int i = 0; i < (starting_location[1]).size(); i++) {
 			set_file_with_thread(starting_location[1].at(i), &textureMap.find(starting_location[1].at(i))->second);
 		}
@@ -1546,7 +1543,8 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 
 	staticRec->setName("Yemoja");
 	staticRec->setInteractable(true);
-	//staticRec->setPersonality(30, 70, 80, 60, 30, 30, 50);// uncommented this
+	staticRec->setPersonality(30, 70, 80, 60, 30, 30, 50);// uncommented this
+	oya->setPersonality(30, 70, 80, 60, 30, 30, 50);// uncommented this
 
 	//staticRec->rel[OYA]->setAffinity(60);// uncommented this
 	//staticRec->rel[OYA]->setNotoriety(40);// uncommented this
@@ -1602,7 +1600,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	Planner* OyaPlanner = new Planner(oya);
 	AIController::set_plan(YEMOJA, YemojaPlanner);
 	AIController::set_plan(OYA, OyaPlanner);
-	
+	/*
 	Action* test_ally = new Action(nullptr, nullptr, nullptr, 10, 1, "Create Alliance", "execute_train");
 	Action* test_train = new Action(staticRec, oya, nullptr, 10, 1, "Conquer", "execute_conquer");
 
@@ -1616,11 +1614,11 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	/*
 	test_ally->req_preconds.push_back(std::make_shared<RelPrecon>(*prec));
 	test_ally->doer_succ_postconds.push_back(std::make_shared<RelPost>(*post));
-	*/
+	
 	test_train->req_preconds.push_back(std::make_shared<RelPrecon>(*prec1));
 	test_train->doer_succ_postconds.push_back(std::make_shared<RelPost>(*post1));
 	test_train->doer_succ_postconds.push_back(std::make_shared<RelPost>(*post2));
-	
+	*/
 
 	//ActionPool act_pool(Alex);
 	//act_pool.macro.push_back(test_ally);
@@ -1650,8 +1648,8 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	
 	AIController::generate_end_state(YEMOJA, OYA);
 	AIController::init_plans();
-    test_train->setDoer(staticRec);
-	YemojaPlanner->set_current_action(test_train);
+   // test_train->setDoer(staticRec);
+	//YemojaPlanner->set_current_action(test_train);
 
 	/*
 	WorldObj* tree = new WorldObj(Vector2f(4000, 2600), 800, 500);
@@ -1794,7 +1792,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 		}
 	});*/
 
-	tm.join();
+	//tm.join();
 
 	current_game_state = game_state::main_menu;
 
@@ -1904,13 +1902,13 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 
 			}
 			else {
-				for (int i = 0; i < recVec.size(); i++) {
-					if (recVec[i]->getType() != WorldObj::TYPE_WORLDOBJ) {
-						recVec[i]->effect.sprite.animate();
-						recVec[i]->WorldObj::animateObj();
-					}
-					//_QuadTree->Insert(recVec[i]);	//insert all obj into tree
-				}
+				//for (int i = 0; i < recVec.size(); i++) {
+				//	if (recVec[i]->getType() != WorldObj::TYPE_WORLDOBJ) {
+				//		recVec[i]->effect.sprite.animate();
+				//		recVec[i]->WorldObj::animateObj();
+				//	}
+				//	//_QuadTree->Insert(recVec[i]);	//insert all obj into tree
+				//}
 				for (int i = 0; i < movVec.size(); i++) {
 					//cout << "movevec item type is " << movVec[i]->getType() << endl;
 					if (movVec[i]->getType() != WorldObj::TYPE_WORLDOBJ) {

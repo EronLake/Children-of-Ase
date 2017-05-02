@@ -1045,7 +1045,11 @@ void Input::InputCheck()
 					else if (DialogueController::getState() == 9) {
 						count = 10;
 						DialogueController::exitDialogue();
-						PlayerActExecFunctions::execute_dialog();
+						if (dynamic_cast<Player*>(Containers::hero_table["Shango"])->cur_action != nullptr) 
+						{
+							PlayerActExecFunctions::execute_dialog();
+						}
+						
 					}
 					else if (DialogueController::getState() == 10) {
 						count = 10;
