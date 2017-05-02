@@ -17,20 +17,32 @@ class DialogueGui
   static constexpr float BACKGROUND_HEIGHT = 225.0F;
 
   static constexpr float HEADER_X = 355.0F;
-  static constexpr float HEADER_Y = 220.0F;
+  static constexpr float HEADER_Y = 10.0F;
   static constexpr float HEADER_WIDTH = 250.0F;
   static constexpr float HEADER_HEIGHT = 75.0F;
 
-  static constexpr float ICON_SWORD_X = 367.5F;
-  static constexpr float ICON_SWORD_Y = 242.5F;
-  static constexpr float ICON_HEART_X = 392.5F;
-  static constexpr float ICON_HEART_Y = 242.5F;
-  static constexpr float ICON_FACE_X = 417.5F;
-  static constexpr float ICON_FACE_Y = 242.5F;
-  static constexpr float ICON_QUESTION_X = 442.5F;
-  static constexpr float ICON_QUESTION_Y = 242.5F;
+  static constexpr float ICON_SWORD_X = 397.5F;
+  static constexpr float ICON_SWORD_Y = 32.5F;
+  static constexpr float ICON_HEART_X = 442.5F;
+  static constexpr float ICON_HEART_Y = 32.5F;
+  static constexpr float ICON_FACE_X = 487.5F;
+  static constexpr float ICON_FACE_Y = 32.5F;
+  static constexpr float ICON_QUESTION_X = 532.5F;
+  static constexpr float ICON_QUESTION_Y = 32.5F;
   static constexpr float ICON_WIDTH = 30.0F;
   static constexpr float ICON_HEIGHT = 30.0F;
+
+  static constexpr float MESSAGE_X = 177.75F;
+  static constexpr float MESSAGE_Y = 327.75F;
+  static constexpr float MESSAGE_WIDTH = 605.0F;
+  static constexpr float MESSAGE_HEIGHT = -1.0F;
+
+  static constexpr float OPTIONS_X = 192.75F;
+  static constexpr float OPTIONS_Y = 411.25F;
+  static constexpr float OPTIONS_WIDTH = 575.0F;
+  static constexpr float OPTIONS_HEIGHT = -1.0F;
+
+  static constexpr int LINE_SPACING = 18;
 
   static constexpr float SPEAKER_LEFT_X = 0.0F;
   static constexpr float SPEAKER_LEFT_Y = 0.0F;
@@ -64,31 +76,17 @@ class DialogueGui
   Texture *speaker_left_tex;
   Texture *speaker_right_tex;
 
-  Rectangle* background;
-  Rectangle* swordIcon;
-  Rectangle* heartIcon;
-  Rectangle* faceIcon;
-  Rectangle* questionIcon;
   Rectangle* dialogueBox;
   Rectangle* responseBox1;
   Rectangle* responseBox2;
-  Rectangle* portrait1;
-  Rectangle* portrait2;
 
-  Texture* backgroundTex;
-  Texture* swordTex;
-  Texture* swordGlowTex;
-  Texture* heartTex;
-  Texture* heartGlowTex;
-  Texture* faceTex;
-  Texture* faceGlowTex;
-  Texture* questionTex;
-  Texture* questionGlowTex;
   Texture* dialogueBoxTex;
   Texture* responseBoxTex;
 
   glm::vec3 text_color_default;
   glm::vec3 text_color_selected;
+
+  void drawGuiText();
 
   public:
 
