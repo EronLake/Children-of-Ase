@@ -272,6 +272,22 @@
         "5": "You seem exceedingly smart and strong. I humbly ask you to join me."
 	},
 
+	"Response_Recruit_For_Party":{
+	    "1": "Not in a million years!",
+        "2": "No thanks.",
+        "3": "Sure. I will join you.",
+		"4": "Sure. I will join you.",
+        "5": "Sure. I will join you."
+	},
+
+	"Remove_From_Party":{
+	    "1": "Take a hike!",
+        "2": "Take a hike!",
+        "3": "Take a hike!",
+		"4": "Take a hike!",
+        "5": "Take a hike!"
+	},
+
     "Join Party":{
 	    "1": "I will consider your offer, but I cannot say at the moment.",
         "2": "I appreciate the offer and I gladly accept.",

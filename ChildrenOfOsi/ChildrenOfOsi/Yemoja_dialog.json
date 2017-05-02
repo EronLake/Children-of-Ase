@@ -1,7 +1,7 @@
 {
     "Greeting": {
         "1": "Oh... it's you. Let's just get this over with.",
-        "2": "I guess anyone nowadays thinks they can just walk in and talk to me.",
+        "2": "I guess anyone nowadays thinks they can just walk up and talk to me.",
         "3": "Hello.",
         "4": "It is good to see you.",
         "5": "My friend, it is so good to see you. I hope you have been doing well."
@@ -271,6 +271,14 @@
         "3": "You seem exceedingly smart and strong. I humbly ask you to join me.",
 		"4": "You seem exceedingly smart and strong. I humbly ask you to join me.",
         "5": "You seem exceedingly smart and strong. I humbly ask you to join me."
+	},
+
+	"Response_Recruit_For_Party":{
+	    "1": "Not in a million years!",
+        "2": "No thanks.",
+        "3": "Sure. I will join you.",
+		"4": "Sure. I will join you.",
+        "5": "Sure. I will join you."
 	},
 
     "Join Party":{

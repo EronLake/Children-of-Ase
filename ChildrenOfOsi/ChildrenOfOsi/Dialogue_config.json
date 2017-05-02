@@ -679,6 +679,26 @@
       }
     }
 
+     },
+
+	 "conversation_point_7" : {
+	      "name" : "Remove_From_Party",
+          "icon" : "scp",
+	      "template" : "Remove_From_Party",
+		  "honor" : 0,
+		  "pride": 0,
+		  "aggression": 0,
+		  "kindness": 0,
+		  "greed": 0,
+		  "recklessness": 0,
+		  "extroversion": 0,
+		  "affinity": 50,
+		  "notoriety": 50,
+		  "strength": 50,
+		  "AffEstimate": 50,
+		  "NotorEstimate": 50,
+		  "StrEstimate": 50
+
      }
 	},
 
@@ -764,6 +784,46 @@
           "icon" : "srp",
 	      "template" : "Talk Back",
 		  "corresponding_conv_point": "Intimidate",
+		  "honor" : 0,
+		  "pride": 0,
+		  "aggression": 0,
+		  "kindness": 0,
+		  "greed": 0,
+		  "recklessness": 0,
+		  "extroversion": 0,
+		  "affinity": 50,
+		  "notoriety": 50,
+		  "strength": 50,
+		  "AffEstimate": 50,
+		  "NotorEstimate": 50,
+		  "StrEstimate": 50
+    },
+
+	"reply_point_7" : {
+	      "name" : "Response_Remove_From_Party",
+          "icon" : "srp",
+	      "template" : "Response_Remove_From_Party",
+		  "corresponding_conv_point": "Remove_From_Party",
+		  "honor" : 0,
+		  "pride": 0,
+		  "aggression": 0,
+		  "kindness": 0,
+		  "greed": 0,
+		  "recklessness": 0,
+		  "extroversion": 0,
+		  "affinity": 50,
+		  "notoriety": 50,
+		  "strength": 50,
+		  "AffEstimate": 50,
+		  "NotorEstimate": 50,
+		  "StrEstimate": 50
+    },
+
+	"reply_point_8" : {
+	      "name" : "Response_Recruit_For_Party",
+          "icon" : "srp",
+	      "template" : "Response_Recruit_For_Party",
+		  "corresponding_conv_point": "Recruit_For_Party",
 		  "honor" : 0,
 		  "pride": 0,
 		  "aggression": 0,

@@ -278,6 +278,8 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	gameplay_functions->add_texture("map5_5", 0, 0, 0);
 
 	tBuffer->run();
+	RenderHelper::gmap->setTextures();
+	RenderHelper::gmap->setSprite();
 
 	HDC hdc = wglGetCurrentDC();
 	HGLRC mainContext = wglGetCurrentContext();
@@ -285,9 +287,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	wglShareLists(mainContext, loaderContextM);
 	std::thread tm([=]() {
 		wglMakeCurrent(hdc, loaderContextM);
-		RenderHelper::gmap->setTextures();
-		RenderHelper::gmap->loadTexture();
-		RenderHelper::gmap->setSprite();
+		RenderHelper::gmap->loadTexture(Alex->getLoc());
 		wglMakeCurrent(nullptr, nullptr);
 		wglDeleteContext(loaderContextM);
 		glFinish();
@@ -1081,7 +1081,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	wglShareLists(mainContext, loaderContext0);
 	std::thread t0([=]() {
 		wglMakeCurrent(hdc, loaderContext0);
-		int textureMapCounter = 0;
+		//int textureMapCounter = 0;
 		for (int i = 0; i < standard.size(); i++) {
 			set_file_with_thread(standard[i], &textureMap.find(standard[i])->second);
 		}
@@ -1106,7 +1106,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	wglShareLists(mainContext, loaderContext1);
 	std::thread t1([=]() {
 		wglMakeCurrent(hdc, loaderContext1);
-		int textureMapCounter = 0;
+		//int textureMapCounter = 0;
 		for (int i = 0; i < (starting_location[0]).size(); i++) {
 			set_file_with_thread(starting_location[0].at(i), &textureMap.find(starting_location[0].at(i))->second);
 		}
@@ -1135,7 +1135,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	wglShareLists(mainContext, loaderContext2);//Shares the information between the loading context and the main context
 	std::thread t2([=]() {//makes the thread. [=] is a cpp Lambda representation
 		wglMakeCurrent(hdc, loaderContext2);//Sets the current context to the loader context
-		int textureMapCounter = 0;
+		//int textureMapCounter = 0;
 		for (int i = 0; i < (starting_location[1]).size(); i++) {
 			set_file_with_thread(starting_location[1].at(i), &textureMap.find(starting_location[1].at(i))->second);
 		}
@@ -1785,7 +1785,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 		}
 	});*/
 
-	tm.join();
+	//tm.join();
 
 	current_game_state = game_state::main_menu;
 

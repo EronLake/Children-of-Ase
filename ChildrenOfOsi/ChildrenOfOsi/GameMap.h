@@ -41,7 +41,7 @@ public:
 	GameMap();
 	~GameMap();
 	void setTextures();
-	void loadTexture();
+	void loadTexture(Vector2f loc);
 	void setSprite();
 	void drawMap(float _x, float _y);
 	
@@ -121,5 +121,8 @@ private:
 	Texture* bottomLeftTex;
 	Texture* bottomRightTex;
 	//Texture* riverTex;
+
+	//vector<pair<Texture*, std::string>> tiles;
+	vector<pair<Rectangle*,std::string>> map_pieces;
 };
 
