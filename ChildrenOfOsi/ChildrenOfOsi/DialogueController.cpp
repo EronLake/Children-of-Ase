@@ -115,13 +115,31 @@ void DialogueController::PlayerChoose()
 
 void DialogueController::player_choose_soldier()
 {
+
+	Soldier* soldier;
+	soldier = dynamic_cast<Soldier*>(other);
+
+	//prevents player from entering dialog with enemy soldier
+    //since they can neither be recruited for player's party
+	//or be removed from the player's party
+	vector<Party*> player_curr_enemies = player->getParty()->getCurrentEnemies();
+	for (int i = 0; i < player_curr_enemies.size(); ++i) {
+		if (player_curr_enemies[i] == soldier->getParty()) {
+			state = 0;
+			return;
+		}
+	}
+
 	//options = dialogue.get_possible_conv_pts();
 	for (int i = 0; i < Containers::conv_point_table.size(); i++)
 	{
 	    soldier_options.push_back({});
 	}
-	soldier_options[StrengthIcon].push_back({"Recruit_For_Party","Recruit_For_Party","",""});
-	soldier_options[StrengthIcon].push_back({ "Remove_From_Party","Remove_From_Party","",""});
+	if(soldier->getCurrentLeader() == player)
+		soldier_options[StrengthIcon].push_back({ "Remove_From_Party","Remove_From_Party","","" });
+	else
+	    soldier_options[StrengthIcon].push_back({"Recruit_For_Party","Recruit_For_Party","",""});
+	
 	state = 1;
 }
 
@@ -952,6 +970,32 @@ void DialogueController::other_response_soldier(std::string info, std::string he
 			state = 8;
 		}*/
 		//else {
+		Soldier* soldier;
+		soldier = dynamic_cast<Soldier*>(other);
+
+		//currently adds an NPC to the player's party right away if
+		//the player asks them to join(NPC always says yes)
+		//eventually make it so NPC can refuse to join player's party
+		if (replyString == "Response_Recruit_For_Party") {
+			player->getVillage()->barracks->addToParty(soldier, false);
+			//soldier->getParty()->setAlliance(player->getParty()->getAlliance());
+			soldier->setCurrentLeader(player);
+			soldier->setParty(player->getParty());
+		}
+
+		//removes an NPC of the player's choosing from their party
+		if (replyString == "Response_Remove_From_Party") {
+			soldier->setCurrentLeader(soldier);
+			player->getParty()->removeSoldier(soldier, true);
+			//soldier->getParty()->removeSoldier(soldier, true);
+			//soldier->getParty()->setAlliance(player->getParty()->getAlliance());
+			//cout << soldier->getParty()->getAlliance();
+			//Party* p = nullptr;
+			//soldier->setParty(p);
+			//soldier->getParty()->setLeader(nullptr);
+			//std::cout << soldier->getCurrentLeader()->getName();
+		}
+
 		std::string reply_pt_sentence = dialogue.gen_dialog(line, temp_hero);
 		message = other->getName() + ": " + reply_pt_sentence + "\n\n";
 
@@ -1069,8 +1113,10 @@ void DialogueController::startConversation(WorldObj* n, bool playerTalk)
 	other = n;
 	Hero* temp_hero = CheckClass::isHero(other);
 	std::string start_message = "";
-	std::cout << "Shango's AFF, NOT, STR (respectively): " << temp_hero->rel[1]->getAffinity() << ", ";
-	std::cout << temp_hero->rel[1]->getNotoriety() << ", " << temp_hero->rel[1]->getStrength() << ", ";
+	if (temp_hero != nullptr) {
+		std::cout << "Shango's AFF, NOT, STR (respectively): " << temp_hero->rel[1]->getAffinity() << ", ";
+		std::cout << temp_hero->rel[1]->getNotoriety() << ", " << temp_hero->rel[1]->getStrength() << ", ";
+	}
 	
 	//if(quest_in_progress)
 		//message = n->getName() + ": " + dialogue.gen_dialog({ "Quest_In_Progress","Quest_In_Progress" }, temp_hero);
