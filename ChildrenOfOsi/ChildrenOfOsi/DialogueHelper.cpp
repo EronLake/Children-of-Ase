@@ -247,7 +247,7 @@ dialogue_point DialogueHelper::choose_conv_pt(std::vector<ConversationLogObj*> c
 
 /*Returns all of the possible reply points that an npc can say
 based on the player's conversation point.*/
-dialogue_point DialogueHelper::choose_reply_pt(std::string point, int optn_inx, std::vector<ConversationLogObj*> curr_conversation_log)
+dialogue_point DialogueHelper::choose_reply_pt(std::string point, int optn_inx, std::vector<ConversationLogObj*> curr_conversation_log,Hero* other)
 {
 
 	Hero* temp_hero = CheckClass::isHero(other);

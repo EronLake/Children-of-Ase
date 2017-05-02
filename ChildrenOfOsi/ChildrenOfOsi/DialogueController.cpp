@@ -198,7 +198,7 @@ void DialogueController::PlayerConversationPoint()
 		curr_conversation_log.push_back(conv_log_obj);//add entry to log
 
 		//add conversation point to NPC's permanent conversation log storage
-		add_to_perm_storage(conv_log_obj);
+		//add_to_perm_storage(conv_log_obj);
 
 		//limit the number of conversation log entries for the current conversation
 		//to a maximum of 8
@@ -208,41 +208,20 @@ void DialogueController::PlayerConversationPoint()
 		}
 		player_conv_point_choice = choice[ConvPointName];
 
-		Hero* temp_hero = nullptr;
-		if (other->getType() >= WorldObj::TYPE_NPC) {
-			if (temp_hero = CheckClass::isHero(other))//added another equals was single equals before
-			{
-				perror("you cannot talk to this type of object");
-			}
-		}
-		else {
-			return;
-		}
-		std::string tempin;
+		Hero* temp_hero = CheckClass::isHero(other);
+
+		/*Caused game to freeze whenever I tried talking to Yemoja! Be warned if uncommenting
+		the below*/
+		/*std::string tempin;
 		std::cout << "Shango's AFF, NOT, STR (respectively): " << temp_hero->rel[1]->getAffinity() << ", ";
 		std::cout << temp_hero->rel[1]->getNotoriety() << ", " << temp_hero->rel[1]->getStrength() << ", ";
-		std::cin >> tempin;
+		std::cin >> tempin;*/
 
-	/*handles applying of post conditions for relationship related conversation
-	points. I also thought to incorporate checks for if a player completed an action
-	by doing any of these here, but this is probably not a good place.*/
-		if (player_conv_point_choice == "Bribe"||player_conv_point_choice == "Compliment"|| player_conv_point_choice == "Grovel"|| player_conv_point_choice == "Insult"|| player_conv_point_choice == "Boast") {
-			/*Planner* planner = AIController::get_plan(CheckClass::isHero(other)->name);
-
-			if (planner->quests_given.size() > 0) {
-				planner->quests_given.push_back(planner->get_current_action());
-				Hero* shango = dynamic_cast<Hero*>(player);
-				int time_limit = 3600;                 //1 minute limit to complete quest for now
-				shango->add_quest(planner->get_current_action(), time_limit);
-			}
-			for (int i = 0; i < planner->quests_given.size(); ++i) {
-				if (planner->quests_given[i]->getDoer()->name == SHANGO &&
-					planner->get_current_action()->name.find(player_conv_point_choice, 0) != string::npos) {
-					//set quest to complete here if it was a bribe one
-					planner->quests_given[i]->executed = false;
-				}
-
-			}*/
+	     /*handles applying of post conditions for relationship related conversation
+	     points. I also thought to incorporate checks for if a player completed an action
+	     by doing any of these here, but this is probably not a good place.*/
+		if (player_conv_point_choice == "Bribe" || player_conv_point_choice == "Compliment" || player_conv_point_choice == "Grovel" || player_conv_point_choice == "Insult" || player_conv_point_choice == "Boast") {
+			
 			accepted_action = true;
 			for (auto precond : Containers::conv_point_table[player_conv_point_choice]->req_preconds) {
 
@@ -452,7 +431,7 @@ void DialogueController::PlayerResponse()
 		curr_conversation_log.push_back(conv_log_obj);
 
 		//add conversation point to NPC's permanent conversation log storage
-		add_to_perm_storage(conv_log_obj);
+		//add_to_perm_storage(conv_log_obj);
 
 		//limit the number of conversation log entries for the current conversation
 		//to a maximum of 8
@@ -570,7 +549,7 @@ void DialogueController::otherConversationPoint(dialogue_point line)
 	    curr_conversation_log.push_back(conv_log_obj);
 
 		//add conversation point to NPC's permanent conversation log storage
-		add_to_perm_storage(conv_log_obj);
+		//add_to_perm_storage(conv_log_obj);
 
 		//limit the number of conversation log entries for the current conversation
 		//to a maximum of 8
@@ -626,7 +605,7 @@ void DialogueController::otherConversationPoint(dialogue_point line)
 	    curr_conversation_log.push_back(conv_log_obj2);
 
 		//add conversation point to NPC's permanent conversation log storage
-		add_to_perm_storage(conv_log_obj);
+		//add_to_perm_storage(conv_log_obj);
 
 		//limit the number of conversation log entries for the current conversation
 		//to a maximum of 8
@@ -793,7 +772,7 @@ void DialogueController::otherResponse(std::string info, std::string hero_topic)
 	}
 
 	if (state != 8) {
-		dialogue_point line = dialogue.choose_reply_pt(info, optionsIndex, curr_conversation_log);
+		dialogue_point line = dialogue.choose_reply_pt(info, optionsIndex, curr_conversation_log,temp_hero);
 		replyString = line[ConvPointName];
 
 		/*avoids setting a topic when npc replies with "You already asked me that"
@@ -935,7 +914,7 @@ void DialogueController::other_response_soldier(std::string info, std::string he
 	
 
 	//if (state != 8) {
-		dialogue_point line = dialogue.choose_reply_pt(info, optionsIndex, curr_conversation_log);
+		dialogue_point line = dialogue.choose_reply_pt(info, optionsIndex, curr_conversation_log,temp_hero);
 		replyString = line[ConvPointName];
 
 		/*avoids setting a topic when npc replies with "You already asked me that"
