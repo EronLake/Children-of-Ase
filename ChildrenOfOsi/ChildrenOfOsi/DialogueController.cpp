@@ -196,7 +196,16 @@ void DialogueController::PlayerConversationPoint()
 			conv_log_obj->set_topic(NoTopic, mem);
 
 		curr_conversation_log.push_back(conv_log_obj);//add entry to log
-		
+
+		//add conversation point to NPC's permanent conversation log storage
+		add_to_perm_storage(conv_log_obj);
+
+		//limit the number of conversation log entries for the current conversation
+		//to a maximum of 8
+		if (curr_conversation_log.size() > 8) {
+			delete curr_conversation_log[0];
+			curr_conversation_log.erase(curr_conversation_log.begin());
+		}
 		player_conv_point_choice = choice[ConvPointName];
 
 		Hero* temp_hero = nullptr;
@@ -442,6 +451,16 @@ void DialogueController::PlayerResponse()
 
 		curr_conversation_log.push_back(conv_log_obj);
 
+		//add conversation point to NPC's permanent conversation log storage
+		add_to_perm_storage(conv_log_obj);
+
+		//limit the number of conversation log entries for the current conversation
+		//to a maximum of 8
+		if (curr_conversation_log.size() > 8) {
+			delete curr_conversation_log[0];
+			curr_conversation_log.erase(curr_conversation_log.begin());
+		}
+
 		/*insert the topic at the beginning of the player's reply point sentence
 		if they are replying to a hero-related conversation point*/
 		if (conv_log_obj->get_topic().first != NoTopic && (choice[ConvPointName].find("Take Advice") != string::npos || choice[ConvPointName].find("Tell About") != string::npos))
@@ -550,6 +569,15 @@ void DialogueController::otherConversationPoint(dialogue_point line)
 
 	    curr_conversation_log.push_back(conv_log_obj);
 
+		//add conversation point to NPC's permanent conversation log storage
+		add_to_perm_storage(conv_log_obj);
+
+		//limit the number of conversation log entries for the current conversation
+		//to a maximum of 8
+		if (curr_conversation_log.size() > 8) {
+			delete curr_conversation_log[0];
+			curr_conversation_log.erase(curr_conversation_log.begin());
+		}
 	//initialization of conversation log entry for conversation point
 		ConversationLogObj* conv_log_obj2 = new ConversationLogObj();
 		Memory* mem2 = nullptr;
@@ -596,6 +624,16 @@ void DialogueController::otherConversationPoint(dialogue_point line)
 			conv_log_obj2->set_topic(NoTopic, mem2);
 
 	    curr_conversation_log.push_back(conv_log_obj2);
+
+		//add conversation point to NPC's permanent conversation log storage
+		add_to_perm_storage(conv_log_obj);
+
+		//limit the number of conversation log entries for the current conversation
+		//to a maximum of 8
+		if (curr_conversation_log.size() > 8) {
+			delete curr_conversation_log[0];
+			curr_conversation_log.erase(curr_conversation_log.begin());
+		}
     }
 	
 	message = other->getName() + ": " + reply_pt_sentence + "\n" +con_pt_sentence;
@@ -779,7 +817,7 @@ void DialogueController::otherResponse(std::string info, std::string hero_topic)
 			} else{
 				/////////////need to be changed to correct calls/dialog if not accepted///////////////////
 				dialogue_point diog_pt = { "Accept Alliance Offer","Accept Alliance Offer" };
-				std::string reply_pt_sentence = dialogue.gen_dialog(diog_pt, temp_hero);
+				std::string reply_pt_sentence = dialogue.gen_dialog_negative(diog_pt, temp_hero);
 				message = other->getName() + ": " + reply_pt_sentence + "\n\n";
 			}
 			
@@ -800,7 +838,7 @@ void DialogueController::otherResponse(std::string info, std::string hero_topic)
 			else {
 				/////////////need to be changed to correct calls/dialog if not accepted///////////////////
 				dialogue_point diog_pt = { "Accept Duel","Accept Duel" };
-				std::string reply_pt_sentence = dialogue.gen_dialog(diog_pt, temp_hero);
+				std::string reply_pt_sentence = dialogue.gen_dialog_negative(diog_pt, temp_hero);
 				message = other->getName() + ": " + reply_pt_sentence + "\n\n";
 			}
 
@@ -821,7 +859,7 @@ void DialogueController::otherResponse(std::string info, std::string hero_topic)
 			else {
 				/////////////need to be changed to correct calls/dialog if not accepted///////////////////
 				dialogue_point diog_pt = { "Accept Spar Request","Accept Spar Request" };
-				std::string reply_pt_sentence = dialogue.gen_dialog(diog_pt, temp_hero);
+				std::string reply_pt_sentence = dialogue.gen_dialog_negative(diog_pt, temp_hero);
 				message = other->getName() + ": " + reply_pt_sentence + "\n\n";
 			}
 			state = 8;
@@ -842,7 +880,7 @@ void DialogueController::otherResponse(std::string info, std::string hero_topic)
 			else {
 				/////////////need to be changed to correct calls/dialog if not accepted///////////////////
 				dialogue_point diog_pt = { "Accept Alliance Offer","Accept Alliance Offer" };
-				std::string reply_pt_sentence = dialogue.gen_dialog(diog_pt, temp_hero);
+				std::string reply_pt_sentence = dialogue.gen_dialog_negative(diog_pt, temp_hero);
 				message = other->getName() + ": " + reply_pt_sentence + "\n\n";
 
 				//calls action end if the question is denied otherwise called on cmpletion of the action
@@ -859,7 +897,7 @@ void DialogueController::otherResponse(std::string info, std::string hero_topic)
 			else {
 				/////////////need to be changed to correct calls/dialog if not accepted///////////////////
 				dialogue_point diog_pt = { "Confirm Duel","Confirm Duel" };
-				std::string reply_pt_sentence = dialogue.gen_dialog(diog_pt, temp_hero);
+				std::string reply_pt_sentence = dialogue.gen_dialog_negative(diog_pt, temp_hero);
 				message = player->getName() + ": " + reply_pt_sentence + "\n\n";
 
 				//calls action end if the question is denied otherwise called on cmpletion of the action
@@ -876,7 +914,7 @@ void DialogueController::otherResponse(std::string info, std::string hero_topic)
 			else {
 				/////////////need to be changed to correct calls/dialog if not accepted///////////////////
 				dialogue_point diog_pt = { "Confirm Spar","Confirm Spar" };
-				std::string reply_pt_sentence = dialogue.gen_dialog(diog_pt, temp_hero);
+				std::string reply_pt_sentence = dialogue.gen_dialog_negative(diog_pt, temp_hero);
 				message = player->getName() + ": " + reply_pt_sentence + "\n\n";
 
 				//calls action end if the question is denied otherwise called on cmpletion of the action
@@ -1189,6 +1227,7 @@ void DialogueController::exitDialogue()
 	/*does normal exitDialogue stuff if "other" is not a hero*/
 	if (state == 7 || state == 9) {
 
+		//removes all conversation log entries from the log for the current conversation
 		for (int i = 0; i < curr_conversation_log.size(); i++) {
 
 			//delete memory allocated for instance of Memory class here
@@ -1197,8 +1236,27 @@ void DialogueController::exitDialogue()
 			if (curr_conversation_log[i] != nullptr)
 				delete curr_conversation_log[i];
 		}
-
 		curr_conversation_log.clear();
+
+		//removes unwanted conversation log entries from NPC's permanent storage
+		if (temp_hero) {
+			for (int i = 0; i < temp_hero->conversation_log.size(); ) {
+
+				//delete memory allocated for instance of Memory class here
+				//delete tmp_top.second;
+				//delete memory allocated for conversation log object here
+				if (temp_hero->conversation_log[i] != nullptr) {
+					if (temp_hero->conversation_log[i]->get_conv_point()->get_name() != "Ask_Name"
+						&& temp_hero->conversation_log[i]->get_conv_point()->get_name() != "Ask_Origin") {
+						delete temp_hero->conversation_log[i];
+						temp_hero->conversation_log.erase(temp_hero->conversation_log.begin() + i);
+					}
+					else
+						++i;
+				}
+			}
+		}
+
 		if (temp_hero) {
 			remove_hero_related_conv_points();
 			//remove_ask_for_quest();
@@ -1490,4 +1548,24 @@ void DialogueController::remove_soldier_opts() {
 		//soldier_options[StrengthIcon][i].erase();
 	//}
 	soldier_options.clear();
+}
+
+/*Adds a conversation log entry to an NPC's permanent conversation log if
+the NPC does not already have an entry identical to that one in their log.
+Otherwise, it does nothing.*/
+void DialogueController::add_to_perm_storage(ConversationLogObj* log_entry) {
+	Hero* temp_hero = CheckClass::isHero(other);
+	if (temp_hero != nullptr) {
+		if (temp_hero->conversation_log.size() > 0) {
+			for (int i = 0; i < temp_hero->conversation_log.size(); ++i) {
+				if (temp_hero->conversation_log[i]->get_conv_point() == log_entry->get_conv_point()
+					&& temp_hero->conversation_log[i]->get_who() == log_entry->get_who()
+					&& temp_hero->conversation_log[i]->get_topic() == log_entry->get_topic())
+					return;
+			}
+		}
+		temp_hero->conversation_log.push_back(log_entry);
+		
+	}
+
 }

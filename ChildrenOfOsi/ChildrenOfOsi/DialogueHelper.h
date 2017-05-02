@@ -34,6 +34,8 @@ public:
 
 	dialogue_template get_template(dialogue_point diog_pt);
 	dialogue_point get_dialog(std::string name, dialogue_point diog_pt, Hero* hero);
+	std::string DialogueHelper::gen_dialog_negative(dialogue_point diog_pt, Hero* hero);
+	dialogue_point get_dialog_negative(std::string name, dialogue_point diog_pt, Hero* hero);
 	std::string convert_to_sentence(dialogue_point dialog_pt);
 	void fill_conversations();
 	bool give_quest();
