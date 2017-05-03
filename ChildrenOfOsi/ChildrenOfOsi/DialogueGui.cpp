@@ -146,10 +146,10 @@ void DialogueGui::setRightSpeaker(Texture *speakerTexture)
 void DialogueGui::drawGui()
 {
   // Draw the dialogue background and icon header
-  GameWindow::drawSprite(this->background_rect->getX(), this->background_rect->getY(),
-    this->background_rect->getWidth(), this->background_rect->getHeight(), this->background_rect->getSprite());
   GameWindow::drawSprite(this->header_rect->getX(), this->header_rect->getY(),
     this->header_rect->getWidth(), this->header_rect->getHeight(), this->header_rect->getSprite());
+  GameWindow::drawSprite(this->background_rect->getX(), this->background_rect->getY(),
+    this->background_rect->getWidth(), this->background_rect->getHeight(), this->background_rect->getSprite());
 
   // Draw the four topic grouping icons
   GameWindow::drawSprite(this->icon_sword_rect->getX(), this->icon_sword_rect->getY(),
