@@ -938,7 +938,7 @@ void Input::InputCheck()
 			}
 			if (count == 0) {
 				int State = DialogueController::getState();
-				if (W && State == 1) {
+				if (A && State == 1) {
 					DialogueController::scroll_control = 0;
 					int tmp = DialogueController::getOptionsIndex();
 					if (tmp > 0) {
@@ -955,7 +955,7 @@ void Input::InputCheck()
 					}
 
 				}
-				if (S && State == 1) {
+				if (D && State == 1) {
 					DialogueController::scroll_control = 0;
 					Hero* temp_hero = CheckClass::isHero(DialogueController::getOther());
 					int tmp = DialogueController::getOptionsIndex();
@@ -1000,7 +1000,7 @@ void Input::InputCheck()
 						gameplay_functions->setQuestionGlow(player);
 					}
 				}
-				if (D && State < 3) {
+				if (S && State < 3) {
 					int tmp = DialogueController::getSelect();
 					Hero* temp_hero = CheckClass::isHero(DialogueController::getOther());
 					if (DialogueController::getState() == 1 && temp_hero) {
@@ -1065,7 +1065,7 @@ void Input::InputCheck()
 						}
 					}
 				}
-				if (A && State < 3) {
+				if (W && State < 3) {
 					int tmp = DialogueController::getSelect();
 					if (tmp > 0 || DialogueController::scroll_control > 0) {
 						//DialogueController::setSelect(--tmp);
