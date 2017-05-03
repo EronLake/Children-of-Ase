@@ -14,6 +14,7 @@ private:
 	WorldObj bounds;
 	vector<WorldObj*> objs;
 	vector<QuadTree*> nodes;
+	vector<QuadTree*> treeWithMovable;
 
 public:
 	QuadTree(unsigned int p_treelv, WorldObj p_bounds);

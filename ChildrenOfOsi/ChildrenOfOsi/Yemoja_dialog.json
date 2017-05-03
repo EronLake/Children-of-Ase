@@ -27,9 +27,9 @@
 	"Tell Name": {
 		"1": "My name is Yemoja.",
 		"2": "Nice to meet you. I am Yemoja.",
-		"3": "I am pleased to make your acquaintance. People know me as Yemoja.",
-        "4": "I am pleased to make your acquaintance. People know me as Yemoja.",
-        "5": "I am pleased to make your acquaintance. People know me as Yemoja."
+		"3": "I am pleased to make your acquaintance. People know me as Yemoja. My purpose is to protect this desert and its inhabitants with my life.",
+        "4": "I am pleased to make your acquaintance. People know me as Yemoja. My purpose is to protect this desert and its inhabitants with my life.",
+        "5": "I am pleased to make your acquaintance. People know me as Yemoja. My purpose is to protect this desert and its inhabitants with my life."
 	},
 
 	"Ask_Origin": {
@@ -196,9 +196,9 @@
 	"Accept Duel": {
         "1": "I hope you're prepared to lose.",
         "2": "Hahaha. You're confidence is indeed slightly amusing. However, I hope you know I will win.",
-        "3": "I haven't fought in a bit. I guess I could use a good warm up. I hope you're ready.",
-        "4": "Ah, it'll be fun to fight someone of your caliber.",
-        "5": "Sigh. I do not really want to fight you. But, do not think I will hold back simply because we are friends."
+        "3": "As the guardian of this village, I accept your challenge.",
+        "4": "As the guardian of this village, I accept your challenge.",
+        "5": "As the guardian of this village, I accept your challenge."
     },
 
 	"Confirm Duel": {
@@ -364,15 +364,15 @@
 	"Boast": {
         "1": "I am told that I am quite beautiful.",
         "2": "I take pride with the lengths I go to in order to keep the oasis village safe.",
-        "3": "I am pleased to be friends with a strong individual such as yourself, but I still think I can hold my own against you quite well.",
-		"4": "I am pleased to be friends with a strong individual such as yourself, but I still think I can hold my own against you quite well.",
-        "5": "I am pleased to be friends with a strong individual such as yourself, but I still think I can hold my own against you quite well."
+        "3": "This village, under my leadership, has never lost a single defensive battle.",
+		"4": "This village, under my leadership, has never lost a single defensive battle.",
+        "5": "This village, under my leadership, has never lost a single defensive battle."
     },
 
     "Congratulate": {
         "1": "Oh wow that is pathetic!",
         "2": "I am sure you are talking yourself up.",
-        "3": "I cannot decide as to whether I am impressed or unimpressed.",
+        "3": "That is impressive",
         "4": "Oh wow I am impressed.",
         "5": "I already knew you were great, but not that great."
     },
@@ -380,9 +380,9 @@
 	"Intimidate": {
         "1": "I am absolutely sick of you. If someone doesn't take you out soon I just might do it myself.",
         "2": "You seem good at making enemies, so if I were you I would watch my back.",
-		"3": "You seem good at making enemies, so if I were you I would watch my back.",
-        "4": "You seem good at making enemies, so if I were you I would watch my back.",
-        "5": "You seem good at making enemies, so if I were you I would watch my back."
+		"3": "If you ever pose a threat to the safety of my village, keep in mind that I will not hesitate to eradicate you.",
+        "4": "If you ever pose a threat to the safety of my village, keep in mind that I will not hesitate to eradicate you.",
+        "5": "If you ever pose a threat to the safety of my village, keep in mind that I will not hesitate to eradicate you."
     },
 
 	"Talk Back": {

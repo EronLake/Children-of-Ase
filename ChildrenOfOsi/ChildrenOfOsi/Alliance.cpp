@@ -33,7 +33,12 @@ void Alliance::add_alliance_to_alliance(Alliance* p_alliance)
 {
 	vector<Village*> tmp = p_alliance->get_alligned_villages();
 	for (auto p_faction = tmp.begin(); p_faction != tmp.end(); ++p_faction) {
-		this->add_village_to_alliance(*p_faction);
+		bool already_in_alliance = false;
+		for (auto ally_village = this->allies.begin(); ally_village != this->allies.end(); ++ally_village){
+			if (*ally_village == *p_faction) { already_in_alliance = true; }
+		}
+		
+		if (!already_in_alliance) { this->add_village_to_alliance(*p_faction); }
 	}
 	Alliance::remove_alliance(p_alliance);
 }

@@ -364,7 +364,7 @@ void DialogueConfig::import_post_conditions(Json::Value::iterator itr, std::stri
 		}
 		else if ((*it)["general_type"].asInt() == 5)
 		{
-			StatePost* temp_post = new StatePost((*it)["utility"].asInt());
+			StatePost* temp_post = new StatePost((*it)["state_type"].asInt(),(*it)["utility"].asInt());
 
 			postconds->push_back(std::make_shared<StatePost>(*temp_post));
 		}

@@ -108,8 +108,6 @@ int main() {
 	QuadTree* collideTree = new QuadTree(0, *screen);
 	GameWindow::init();
 	GAMEPLAY_LOOP(collideTree);
-
-
 	return 0;
 }
 
@@ -128,6 +126,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	
 	vector<WorldObj*> recVec;
 	vector<WorldObj*> movVec;
+	vector<WorldObj*>* largeStruct = new vector<WorldObj*>();
 	vector<WorldObj*>* recVec_ptr = &recVec;
 	vector<WorldObj*>* movVec_ptr = &movVec;
 	vector<Hero*> heroes;
@@ -145,7 +144,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	//need this here for map editor
 	ChildrenOfOsi* gameplay_functions = new ChildrenOfOsi(mLog, tBuffer);
 
-	RenderManager* RenM = new RenderManager(mLog, tBuffer, _QuadTree, gameplay_functions, rivObj);
+	RenderManager* RenM = new RenderManager(mLog, tBuffer, _QuadTree, gameplay_functions, rivObj, largeStruct);
 	DummyController* DumM = new DummyController(mLog, tBuffer);
 	PhysicsManager* PhysM = new PhysicsManager(mLog, tBuffer, _QuadTree, grid, rivObj);
 	//PartyManager* partyM = new PartyManager(gameplay_functions, Alex);
@@ -181,6 +180,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	Alex->name = SHANGO;
 	Alex->setWidth(150);
 	Alex->setHeight(150);
+	Alex->setPersonality(30, 70, 80, 60, 30, 30, 50);// uncommented this
 
 	//draws the logo on startup
 	gameplay_functions->draw_logo(Alex);
@@ -211,6 +211,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	gameplay_functions->add_hero("Yemoja", 6445.0, 10355.0, true);
 	gameplay_functions->add_hero("Oya", 4400, 3600, true);
 	tBuffer->run();
+	
 
 	Hero* staticRec = Containers::hero_table["Yemoja"];
 	heroes.push_back(staticRec);
@@ -233,7 +234,6 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	vector<Texture*> marsh;
 	vector<vector<Texture*>> starting_location;
 	
-
 	ObjConfig::textureMapConfig = &textureMap;
 	ObjConfig::standard_con = &standard;
 	ObjConfig::oasis_con = &oasis;
@@ -249,39 +249,43 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	WorldObj* barrel = new WorldObj(Vector2f(5200, 3900), 75, 75);
 	//Alex->name = SHANGO;
 	
-	gameplay_functions->add_texture("map1_1", 0, 0, 0);
-	gameplay_functions->add_texture("map1_2", 0, 0, 0);
-	gameplay_functions->add_texture("map1_3", 0, 0, 0);
-	gameplay_functions->add_texture("map1_4", 0, 0, 0);
-	gameplay_functions->add_texture("map1_5", 0, 0, 0);
+	//added so loading the map is optional
+	if (LOAD_MAP) {
 
-	gameplay_functions->add_texture("map2_1", 0, 0, 0);
-	gameplay_functions->add_texture("map2_2", 0, 0, 0);
-	gameplay_functions->add_texture("map2_3", 0, 0, 0);
-	gameplay_functions->add_texture("map2_4", 0, 0, 0);
-	gameplay_functions->add_texture("map2_5", 0, 0, 0);
+		gameplay_functions->add_texture("map1_1", 0, 0, 0);
+		gameplay_functions->add_texture("map1_2", 0, 0, 0);
+		gameplay_functions->add_texture("map1_3", 0, 0, 0);
+		gameplay_functions->add_texture("map1_4", 0, 0, 0);
+		gameplay_functions->add_texture("map1_5", 0, 0, 0);
 
-	gameplay_functions->add_texture("map3_1", 0, 0, 0);
-	gameplay_functions->add_texture("map3_2", 0, 0, 0);
-	gameplay_functions->add_texture("map3_3", 0, 0, 0);
-	gameplay_functions->add_texture("map3_4", 0, 0, 0);
-	gameplay_functions->add_texture("map3_5", 0, 0, 0);
+		gameplay_functions->add_texture("map2_1", 0, 0, 0);
+		gameplay_functions->add_texture("map2_2", 0, 0, 0);
+		gameplay_functions->add_texture("map2_3", 0, 0, 0);
+		gameplay_functions->add_texture("map2_4", 0, 0, 0);
+		gameplay_functions->add_texture("map2_5", 0, 0, 0);
 
-	gameplay_functions->add_texture("map4_1", 0, 0, 0);
-	gameplay_functions->add_texture("map4_2", 0, 0, 0);
-	gameplay_functions->add_texture("map4_3", 0, 0, 0);
-	gameplay_functions->add_texture("map4_4", 0, 0, 0);
-	gameplay_functions->add_texture("map4_5", 0, 0, 0);
+		gameplay_functions->add_texture("map3_1", 0, 0, 0);
+		gameplay_functions->add_texture("map3_2", 0, 0, 0);
+		gameplay_functions->add_texture("map3_3", 0, 0, 0);
+		gameplay_functions->add_texture("map3_4", 0, 0, 0);
+		gameplay_functions->add_texture("map3_5", 0, 0, 0);
 
-	gameplay_functions->add_texture("map5_1", 0, 0, 0);
-	gameplay_functions->add_texture("map5_2", 0, 0, 0);
-	gameplay_functions->add_texture("map5_3", 0, 0, 0);
-	gameplay_functions->add_texture("map5_4", 0, 0, 0);
-	gameplay_functions->add_texture("map5_5", 0, 0, 0);
+		gameplay_functions->add_texture("map4_1", 0, 0, 0);
+		gameplay_functions->add_texture("map4_2", 0, 0, 0);
+		gameplay_functions->add_texture("map4_3", 0, 0, 0);
+		gameplay_functions->add_texture("map4_4", 0, 0, 0);
+		gameplay_functions->add_texture("map4_5", 0, 0, 0);
 
-	tBuffer->run();
-	RenderHelper::gmap->setTextures();
-	RenderHelper::gmap->setSprite();
+		gameplay_functions->add_texture("map5_1", 0, 0, 0);
+		gameplay_functions->add_texture("map5_2", 0, 0, 0);
+		gameplay_functions->add_texture("map5_3", 0, 0, 0);
+		gameplay_functions->add_texture("map5_4", 0, 0, 0);
+		gameplay_functions->add_texture("map5_5", 0, 0, 0);
+
+		tBuffer->run();
+		RenderHelper::gmap->setTextures();
+		RenderHelper::gmap->setSprite();
+	}
 
 	HDC hdc = wglGetCurrentDC();
 	HGLRC mainContext = wglGetCurrentContext();
@@ -294,7 +298,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 		wglDeleteContext(loaderContextM);
 		glFinish();
 	});
-	
+
 
 	//gameplay_functions->add_texture("objTexture", 0, 0, 0);
 	//tBuffer->run();
@@ -1492,7 +1496,30 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 
 	staticRec->setName("Yemoja");
 	staticRec->setInteractable(true);
+	staticRec->setPersonality(30, 70, 80, 60, 30, 30, 50);// uncommented this
+	oya->setPersonality(30, 70, 80, 60, 30, 30, 50);// uncommented this
 
+	//staticRec->rel[OYA]->setAffinity(60);// uncommented this
+	//staticRec->rel[OYA]->setNotoriety(40);// uncommented this
+	//staticRec->rel[OYA]->setStrength(80);// uncommented this
+
+	//staticRec->rel[SHANGO]->setAffinity(60);//added this
+	//staticRec->rel[SHANGO]->setNotoriety(40);//added this
+	//staticRec->rel[SHANGO]->setStrength(80);//added this
+
+	//staticRec->rel[OYA]->setAffEstimate(60);// uncommented this
+	//staticRec->rel[OYA]->setNotorEstimate(70);// uncommented this
+	//staticRec->rel[OYA]->setStrEstimate(40);// uncommented this
+
+	//staticRec->rel[SHANGO]->setAffEstimate(60);//added this
+	//staticRec->rel[SHANGO]->setNotorEstimate(70);//added this
+	//staticRec->rel[SHANGO]->setStrEstimate(40);//added this
+
+
+	//*oya = *staticRec;
+	//oya->setSpeed(5);
+	oya->setName("Oya");
+	oya->name = OYA;
 	oya->offsetBody(0, 35, 35, 65, 15);
 	staticRec->offsetBody(0, 60, 60, 75, 50);
 	oya->shiftY(300);
@@ -1526,7 +1553,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	Planner* OyaPlanner = new Planner(oya);
 	AIController::set_plan(YEMOJA, YemojaPlanner);
 	AIController::set_plan(OYA, OyaPlanner);
-	
+	/*
 	Action* test_ally = new Action(nullptr, nullptr, nullptr, 10, 1, "Create Alliance", "execute_train");
 	Action* test_train = new Action(staticRec, oya, nullptr, 10, 1, "Conquer", "execute_conquer");
 
@@ -1540,7 +1567,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	/*
 	test_ally->req_preconds.push_back(std::make_shared<RelPrecon>(*prec));
 	test_ally->doer_succ_postconds.push_back(std::make_shared<RelPost>(*post));
-	*/
+	
 	test_train->req_preconds.push_back(std::make_shared<RelPrecon>(*prec1));
 	test_train->doer_succ_postconds.push_back(std::make_shared<RelPost>(*post1));
 	test_train->doer_succ_postconds.push_back(std::make_shared<RelPost>(*post2));
@@ -1558,8 +1585,8 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	
 	AIController::generate_end_state(YEMOJA, OYA);
 	AIController::init_plans();
-    test_train->setDoer(staticRec);
-	YemojaPlanner->set_current_action(test_train);
+   // test_train->setDoer(staticRec);
+	//YemojaPlanner->set_current_action(test_train);
 
 	/*	VisibilityGraph graph{ {
 			{{1400.00,800.00}, {{1400.00, 900.00},{1200.00,800.00}}},
@@ -1685,11 +1712,14 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	_QuadTree->clear();
 	cout << "tree size is  " << _QuadTree->treeSize() << endl;
 	for (int i = 0; i < recVec.size(); i++) {
+		if (recVec[i]->getName() == "Oasis_Platform" || recVec[i]->getName() == "JungleVillage") largeStruct->push_back(recVec[i]);
 		_QuadTree->Insert(recVec[i]);	//insert all obj into tree
 	}
 
 	cout << "tree size is  " << _QuadTree->treeSize() << endl;
 	cout << "size of recvec is " << recVec.size() << endl;
+	cout << "size of largestruct is " << largeStruct->size() << endl;
+	for (auto it : *largeStruct) cout << (it)->getName() << endl;
 
 	while (GameWindow::isRunning()) {
 		while (current_game_state == game_state::main_menu) {

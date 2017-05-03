@@ -35,6 +35,10 @@ vector<Action*> ActionPool::getActions(Hero* h, Action* macro)
 		list.back()->setReceiver(h);
 		list.back()->setDoer(doer);
 	}
+
+	//Eron's Fix: if the action has all preconditions met this passes the action back to be executed 
+	if (needs.size() == 0) { list.push_back(macro); }
+
 	return list;
 }
 

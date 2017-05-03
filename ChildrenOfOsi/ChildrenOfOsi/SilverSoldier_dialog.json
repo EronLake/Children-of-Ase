@@ -273,6 +273,14 @@
         "5": "You seem exceedingly smart and strong. I humbly ask you to join me."
 	},
 
+	"Response_Remove_From_Party":{
+	    "1": "I didn't like you anyway!",
+        "2": "I didn't like you anyway!",
+        "3": "I didn't like you anyway!",
+		"4": "I didn't like you anyway!",
+        "5": "I didn't like you anyway!"
+	},
+
     "Join Party":{
 	    "1": "I will consider your offer, but I cannot say at the moment.",
         "2": "I appreciate the offer and I gladly accept.",
@@ -296,6 +304,14 @@
         "4": "It is not often people flatter me.",
         "5": "Thanks so much, and I could say the same about you."
     },
+
+	"Response_Recruit_For_Party":{
+	    "1": "I will never join you, scum!",
+        "2": "We are too different. I won't join you.",
+        "3": "Sure. I will join you.",
+		"4": "Sure. I will join you.",
+        "5": "Sure. I will join you."
+	},
 
 	"Grovel": {
         "1": "I am reluctant to do this, but I suppose I must beg for your mercy.",

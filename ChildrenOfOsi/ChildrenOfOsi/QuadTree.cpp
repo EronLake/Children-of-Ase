@@ -43,6 +43,16 @@ void QuadTree::clearMovable()
 			//nodes[i] = nullptr;
 		}
 	}
+	//for (int i = 0; i < treeWithMovable.size(); i++) {
+	//	QuadTree* tree = treeWithMovable[i];
+	//	for (int i = 0; i < tree->objs.size(); i++) {
+	//		if (tree->objs[i]->getType() >= 2) {
+	//			tree->objs.erase(std::remove(tree->objs.begin(), tree->objs.end(), tree->objs[i]), tree->objs.end());
+	//		}
+	//	}
+	//}
+
+	//treeWithMovable.clear();
 }
 
 void QuadTree::clear()
@@ -171,6 +181,10 @@ void QuadTree::Insert(WorldObj * myrec)
 
 	}
 
+	//if the object to insert is movable
+	//if (myrec->getType() >= 2) {
+	//	treeWithMovable.push_back(this);
+	//}
 	objs.push_back(myrec);
 
 	if (objs.size() > maxObj && treelv < maxLevel)
