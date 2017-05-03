@@ -552,9 +552,10 @@ void Input::add_point_to_file(std::string file_name) {
 	//int mouseY = rHelper->camera->getY() - (150.0 / 2) + ((rHelper->getCameraSize().getYloc() / 2)*map_zoom);
 
 	std::ofstream rivFile;
-	rivFile.open("rivLine.txt", std::ios_base::app);
+	rivFile.open(file_name, std::ios_base::app);
 	rivFile << mouseX << " " << mouseY << " ";
 	rivFile.close();
+	rivFile.clear();
 	oldPoint.first = mouseX; oldPoint.second = mouseY;
 
 	rHelper->rivObj->initialize_lines();
@@ -567,6 +568,7 @@ void Input::skip_line(std::string file_name) {
 	rivFile << endl;
 	rivFile << oldPoint.first << " " << oldPoint.second << " ";
 	rivFile.close();
+	rivFile.clear();
 	system("PAUSE");
 }
 
@@ -800,15 +802,29 @@ void Input::InputCheck()
 					//}
 
 				}
+
+				/**********      river collision line config       *********/
 				if (P && (GetKeyState(VK_LBUTTON) & 0x100) != 0) {
 					add_point_to_file("rivLine.txt");
 				}
+			
 				if (Z) {
 					skip_line("rivLine.txt");
 				}
-				if (SHIFT && Z) {
-					system("PAUSE");
+
+				/*******************/
+
+				/**********      oasis collision line config       *********/ 
+				//if holding numpad 9 and left mouse
+				if ((GetKeyState(VK_NUMPAD9) & 0x100) != 0 && (GetKeyState(VK_LBUTTON) & 0x100) != 0) {
+					add_point_to_file("oasis.txt");
 				}
+				if ((GetKeyState(VK_NUMPAD8) & 0x100) != 0) {
+					skip_line("oasis.txt");
+				}
+
+				/*******************/
+
 				if (ESC) {
 					if (current_game_state == game_state::in_game) {
 						cout << "running escape input" << endl;
