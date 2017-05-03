@@ -115,7 +115,7 @@ int main() {
 void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 {
 	game_state current_game_state = game_state::load_game;
-	Rectangle::tex->setFile("Assets/Sprites/blank1.png", 1);
+	Rectangle::tex->setFile("Assets/Sprites/blankr.png", 1);
 	Point::tex->setFile("Assets/Sprites/point.png", 1);
 
 	RiverObj* rivObj = new RiverObj();
