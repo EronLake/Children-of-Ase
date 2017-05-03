@@ -162,8 +162,8 @@ int Movement::move_up_left(WorldObj* obj) {
 				//	// EVEN AFTER I FLIP THE LINES ACROSS THE Y AXIS, WHEN THE PLAYER MOVES DOWN, THE Y COORD IS INCREASING, SO IT"S AS IF HE IS GOING UP!!!
 				//}
 				LOG("failed to move up. collision.");
-				obj->shiftX(diagYSpeed*speed_magnifier * 2);
-				obj->shiftY(diagYSpeed*speed_magnifier * 2);
+				obj->shiftX(diagYSpeed*speed_magnifier * 2.5);
+				obj->shiftY(diagYSpeed*speed_magnifier * 2.5);
 				break;
 			}
 		}
@@ -249,8 +249,8 @@ int Movement::move_up_right(WorldObj* obj) {
 					//	// EVEN AFTER I FLIP THE LINES ACROSS THE Y AXIS, WHEN THE PLAYER MOVES DOWN, THE Y COORD IS INCREASING, SO IT"S AS IF HE IS GOING UP!!!
 					//}
 					LOG("failed to move up. collision.");
-					obj->shiftX(-diagYSpeed*speed_magnifier*2);
-					obj->shiftY(diagYSpeed*speed_magnifier * 2);
+					obj->shiftX(-diagYSpeed*speed_magnifier*2.5);
+					obj->shiftY(diagYSpeed*speed_magnifier*2.5);
 					break;
 				}
 		}
@@ -394,8 +394,8 @@ int Movement::move_down_left(WorldObj* obj) {
 				//	// EVEN AFTER I FLIP THE LINES ACROSS THE Y AXIS, WHEN THE PLAYER MOVES DOWN, THE Y COORD IS INCREASING, SO IT"S AS IF HE IS GOING UP!!!
 				//}
 				LOG("failed to move up. collision.");
-				obj->shiftX(diagXSpeed*speed_magnifier*2);
-				obj->shiftY(-diagYSpeed*speed_magnifier*2);
+				obj->shiftX(diagXSpeed*speed_magnifier*2.5);
+				obj->shiftY(-diagYSpeed*speed_magnifier*2.5);
 				break;
 			}
 		}
@@ -480,8 +480,8 @@ int Movement::move_down_right(WorldObj* obj) {
 				//	// EVEN AFTER I FLIP THE LINES ACROSS THE Y AXIS, WHEN THE PLAYER MOVES DOWN, THE Y COORD IS INCREASING, SO IT"S AS IF HE IS GOING UP!!!
 				//}
 				LOG("failed to move up. collision.");
-				obj->shiftX(-diagXSpeed*speed_magnifier*2);
-				obj->shiftY(-diagYSpeed*speed_magnifier*2);
+				obj->shiftX(-diagXSpeed*speed_magnifier*2.5);
+				obj->shiftY(-diagYSpeed*speed_magnifier*2.5);
 				break;
 			}
 		}
@@ -694,7 +694,7 @@ int Movement::attack(WorldObj* obj) {
 												if ((s2->getType() == WorldObj::TYPE_PLAYER) && (s->getParty()->getMode()!=Party::MODE_FLEE) && (!s->get_incapacitated())) {
 													if (s->get_warning() > 0) {
 														s->setCurrentEnemy(s2);
-														Hero* hero = dynamic_cast<Hero*>(s);
+														Hero* hero = dynamic_cast<Hero*>(s->getParty()->getLeader());
 														if ((!s->getInCombat()) && (!s2->getInCombat())) {
 															if (hero) {
 																if (Party::dist_location_to_location(s2->getLoc(), s2->getVillage()->get_village_location()) < 500) {

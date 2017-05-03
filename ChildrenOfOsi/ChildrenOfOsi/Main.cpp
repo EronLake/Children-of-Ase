@@ -115,7 +115,7 @@ int main() {
 void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 {
 	game_state current_game_state = game_state::load_game;
-	Rectangle::tex->setFile("Assets/Sprites/blank1.png", 1);
+	Rectangle::tex->setFile("Assets/Sprites/blankr.png", 1);
 	Point::tex->setFile("Assets/Sprites/point.png", 1);
 
 	RiverObj* rivObj = new RiverObj();
@@ -190,7 +190,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	
 
 
-	Region* Marsh = new Region("Marsh", "Music/RegionThemes/DesertRegion.flac", "Music/HeroThemes/ogun.flac", { 8000,2900 });
+	Region* Marsh = new Region("Marsh", "Music/RegionThemes/DesertRegion.flac", "Music/HeroThemes/oya.flac", { 8000,2900 });
 	Region* Desert = new Region("Desert", "Music/RegionThemes/MarshRegion.flac", "Music/HeroThemes/ogun.flac", { 5045,13465 });
 	Region* Mountain = new Region("Mountain", "Music/RegionThemes/MountainRegion.flac", "nothing", { 21000,4000 });
 	Region* Jungle = new Region("Jungle", "Music/RegionThemes/JungleRegion.flac", "Music/HeroThemes/oya.flac", { 17157,20960 });
@@ -210,7 +210,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 
 	Input* iController = new Input(gameplay_functions, Alex, RenM->renderHelper, tBuffer, recVec_ptr, movVec_ptr);
 
-	gameplay_functions->add_hero("Yemoja", 5045, 13465, true);
+	gameplay_functions->add_hero("Yemoja", 6445, 10055, true);
 	gameplay_functions->add_hero("Oya", 17157, 20960, true);
 	tBuffer->run();
 	
@@ -1009,16 +1009,16 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	//vec.push_back(&Alex->melee);
 
 	vector<Soldier*> silverSoldier;
-	int silverNum = 4;
+	int silverNum = 2;
 	for (int i = 0; i < silverNum; i++) {
-		silverSoldier.push_back(new Soldier(6745, 10355 + (i * 20), false));
+		silverSoldier.push_back(new Soldier(17157, 20960 + (i * 20), false));
 		gameplay_functions->add_Attack(silverSoldier[i]->getKey(), silverSoldier[i]->body[0].getX(), silverSoldier[i]->body[0].getY(), true, 10);
 	}
 	tBuffer->run();
 	vector<Soldier*> blueSoldiers;
-	int blueNum = 4;
+	int blueNum = 2;
 	for (int i = 0; i < blueNum; i++) {
-		blueSoldiers.push_back(new Soldier(6030, 4000 + (i * 20), false));
+		blueSoldiers.push_back(new Soldier(5045, 13465 + (i * 20), false));
 		gameplay_functions->add_Attack(blueSoldiers[i]->getKey(), blueSoldiers[i]->body[0].getX(), blueSoldiers[i]->body[0].getY(), true, 10);
 	}
 	tBuffer->run();
@@ -1068,12 +1068,12 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 		}
 		wglMakeCurrent(nullptr, nullptr);
 		wglDeleteContext(loaderContext0);
-		for (auto it = recVec.begin(); it != recVec.end(); ++it) {
+		/*for (auto it = recVec.begin(); it != recVec.end(); ++it) {
 			(*it)->sprite.reset_texture();
 		}
 		for (auto it = movVec.begin(); it != movVec.end(); ++it) {
 			(*it)->sprite.reset_texture();
-		}
+		}*/
 		Alex->sprite.reset_texture();
 		glFinish();
 	});
@@ -1182,6 +1182,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	Alex->melee->setSpeed(5);
 	Alex->melee->setBaseDir(4);
 	Alex->melee->setCoolDown(35);
+	Alex->melee->setStaminaCost(45);
 	Alex->melee->setPause(-1);
 	Alex->melee->setDestroy(false);
 	Alex->melee->setKeep(true);
@@ -1205,12 +1206,13 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	Alex->addAttackType(rockThrow);
 
 	Attack* fireball = new Attack();
-	fireball->setDmg(15);
-	fireball->setSpeed(10);
+	fireball->setDmg(20);
+	fireball->setSpeed(20);
 	fireball->setDestroy(true);
 	fireball->setDuration(100);
-	fireball->setCoolDown(180);
-	fireball->setPause(24);
+	fireball->setCoolDown(120);
+	fireball->setPause(16);
+	fireball->setAseCost(25);
 	fireball->sprite.up = Containers::texture_table["fireUp"];
 	fireball->sprite.left = Containers::texture_table["fireLeft"];
 	fireball->sprite.right = Containers::texture_table["fire"];
@@ -1224,13 +1226,14 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	DialogueController::setPlayer(Alex);
 	//vector<WorldObj*> recVec;
 	Attack* spin = new Attack();
-	spin->setDmg(7);
+	spin->setDmg(15);
 	spin->setSpeed(18);
 	spin->setDestroy(false);
 	spin->setDuration(7);
 	spin->setBaseDir(4);
 	spin->setCoolDown(100);
 	spin->setPause(18);
+	spin->setStaminaCost(30);
 	spin->setTurn(true);
 	spin->sprite.setTexture(Containers::texture_table["border"]);
 	Alex->addAttackType(spin);
@@ -1331,7 +1334,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 
 	staticRec->melee = Containers::Attack_table[staticRec->getKey()];
 	staticRec->melee->setDmg(15);
-	staticRec->melee->setSpeed(5);
+	staticRec->melee->setSpeed(8);
 	staticRec->melee->setBaseDir(4);
 	staticRec->melee->setCoolDown(60);
 	staticRec->melee->setPause(-1);
@@ -1341,15 +1344,15 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	staticRec->melee->setHeight(50);
 	staticRec->set_creator_of_melee();
 	staticRec->melee->setStaminaCost(90);
-	staticRec->setHealth(100);
+	staticRec->setHealth(140);
 	staticRec->setMaxStamina(300);
 	staticRec->melee->sprite.setTexture(Containers::texture_table["border"]);
 
 	oya->melee = Containers::Attack_table[oya->getKey()];
-	oya->melee->setDmg(10);
-	oya->melee->setSpeed(5);
+	oya->melee->setDmg(18);
+	oya->melee->setSpeed(7);
 	oya->melee->setBaseDir(4);
-	oya->melee->setCoolDown(80);
+	oya->melee->setCoolDown(70);
 	oya->melee->setPause(-1);
 	oya->melee->setDestroy(false);
 	oya->melee->setKeep(true);
@@ -1357,7 +1360,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	oya->melee->setHeight(50);
 	oya->set_creator_of_melee();
 	oya->melee->setStaminaCost(120);
-	oya->setHealth(100);
+	oya->setHealth(160);
 	oya->setMaxStamina(300);
 	oya->melee->sprite.setTexture(Containers::texture_table["border"]);
 
@@ -1395,7 +1398,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 		silverSoldier[i]->setInteractable(true);
 		silverSoldier[i]->setName("silverSoldier");
 		silverSoldier[i]->melee = Containers::Attack_table[silverSoldier[i]->getKey()];
-		silverSoldier[i]->melee->setDmg(10);
+		silverSoldier[i]->melee->setDmg(11);
 		silverSoldier[i]->melee->setSpeed(5);
 		silverSoldier[i]->melee->setBaseDir(4);
 		silverSoldier[i]->melee->setCoolDown(60);
@@ -1406,12 +1409,12 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 		silverSoldier[i]->melee->setHeight(50);
 		silverSoldier[i]->set_creator_of_melee();
 		silverSoldier[i]->melee->setStaminaCost(90);
-		silverSoldier[i]->setHealth(100);
+		silverSoldier[i]->setHealth(110);
 		silverSoldier[i]->melee->setStaminaCost(120);
 		silverSoldier[i]->setMaxStamina(300);
 		silverSoldier[i]->addAttackType(rockThrow);
 		silverSoldier[i]->melee->sprite.setTexture(Containers::texture_table["border"]);
-		silverSoldier[i]->setSpeed(8);
+		silverSoldier[i]->setSpeed(7);
 	}
 
 	for (int i = 0; i < blueNum; i++) {
@@ -1459,7 +1462,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 		blueSoldiers[i]->melee->setHeight(50);
 		blueSoldiers[i]->set_creator_of_melee();
 		blueSoldiers[i]->melee->setStaminaCost(90);
-		blueSoldiers[i]->setHealth(50);
+		blueSoldiers[i]->setHealth(90);
 		blueSoldiers[i]->melee->setStaminaCost(120);
 		blueSoldiers[i]->setMaxStamina(300);
 		blueSoldiers[i]->addAttackType(rockThrow);
@@ -1499,8 +1502,8 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 
 	staticRec->setName("Yemoja");
 	staticRec->setInteractable(true);
-	staticRec->setPersonality(30, 70, 80, 60, 30, 30, 50);// uncommented this
-	oya->setPersonality(30, 70, 80, 60, 30, 30, 50);// uncommented this
+	staticRec->setPersonality(30, 80, 80, 50, 50, 50, 80);// uncommented this
+	oya->setPersonality(80, 50, 80, 50, 80, 80, 50);// uncommented this
 
 	//staticRec->rel[OYA]->setAffinity(60);// uncommented this
 	//staticRec->rel[OYA]->setNotoriety(40);// uncommented this
@@ -1630,47 +1633,50 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	Party* party = new Party();
 	Party* party2 = new Party();
 	Party* party3 = new Party();
+	Party* party4 = new Party();
 	party->addToParty(Alex, true);
 	for (int i = 0; i < silverSoldier.size(); i++) {
-		party->addToParty(silverSoldier[i], false);
+		party4->addToParty(silverSoldier[i], false);
 	}
 	for (int i = 0; i < blueSoldiers.size(); i++) {
-		party2->addToParty(blueSoldiers[i], false);
+		party3->addToParty(blueSoldiers[i], false);
 	}
 	party3->addToParty(staticRec, true);
+	party4->addToParty(oya, true);
 	Village* v1 = new Village();
-	Village* v2 = new Village();
+	//Village* v2 = new Village();
 	Village* v3 = new Village();
 	Village* v4 = new Village();
 	v1->set_village_location(Alex->getLoc());
-	v2->set_village_location({ 6030, 4000 });
+	//v2->set_village_location({ 6030, 4000 });
 	v3->set_village_location(staticRec->getLoc());
 	v4->set_village_location(oya->getLoc());
 	v1->add_member(Alex);
 	for (int i = 0; i < silverSoldier.size(); i++) {
-		v1->add_member(silverSoldier[i]);
+		v4->add_member(silverSoldier[i]);
 	}
 	for (int i = 0; i < blueSoldiers.size(); i++) {
-		v2->add_member(blueSoldiers[i]);
+		v3->add_member(blueSoldiers[i]);
 	}
 	v3->add_member(staticRec);
 	v4->add_member(oya);
 	v1->leader = Alex;
 	v3->leader = staticRec;
 	v4->leader = oya;
-	v4->defenders->addToParty(oya, true);
+	//v4->defenders->addToParty(oya, true);
 	Alliance* a1 = new Alliance(v1);
-	Alliance* a2 = new Alliance(v2);
+	//Alliance* a2 = new Alliance(v2);
 	Alliance* a3 = new Alliance(v3);
 	Alliance* a4 = new Alliance(v4);
 	v1->addToParties(party);
-	v2->addToParties(party2);
+	//v2->addToParties(party2);
 	v3->addToParties(party3);
+	v4->addToParties(party4);
 	War* war = new War();
-	war->setWarParties(v1, v2);
+	//war->setWarParties(v1, v2);
 	//a1->add_alliance_to_alliance(v3->get_alliance());
-	if (blueSoldiers.size() > 0)party2->set_defend(blueSoldiers[0]->getLoc());
-	party2->setMode(Party::MODE_DEFEND);
+	//if (blueSoldiers.size() > 0)party2->set_defend(blueSoldiers[0]->getLoc());
+	//party2->setMode(Party::MODE_DEFEND);
 	party3->set_defend(staticRec->getLoc());
 	party3->setMode(Party::MODE_ATTACK);
 
@@ -1763,6 +1769,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 			//cout << "FPS: " << fps << endl;
 
 			current_game_state = iController->current_game_state;
+			//if(t0.joinable)t0.join();
 		}
 		while (current_game_state == game_state::in_game) {
 
@@ -1839,7 +1846,8 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 
 			state = DialogueController::getState();
 
-			if (Alex->getX() > 660 && Alex->getX() < 10847.5) { //Ogun Desert
+			//commented out for demo
+			/*if (Alex->getX() > 660 && Alex->getX() < 10847.5) { //Ogun Desert
 				if (Alex->getY() < 3523.33) {
 					if (RegionState::current_region == *Desert)
 						RegionState::next_region = *Marsh;
@@ -1876,6 +1884,31 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 			}
 			if (Alex->getX() > 3479.67 && Alex->getX() < 10847.5) {
 				if (Alex->getY() < 17000.7) {
+					if (RegionState::current_region == *Jungle)
+						RegionState::next_region = *Desert;
+				}
+				else {
+					if (RegionState::current_region == *Desert) {
+						RegionState::next_region = *Jungle;
+					}
+				}
+			}*/
+
+			//only 3 regions for demo
+			if (Alex->getX() > 660 && Alex->getX() < 25000 ){ //Ogun Desert
+				if (Alex->getY() < 3523.33) {
+					if (RegionState::current_region == *Desert)
+						RegionState::next_region = *Marsh;
+
+				}
+				else {
+					if (RegionState::current_region == *Marsh) {
+						RegionState::next_region = *Desert;
+					}
+				}
+			}
+			if (Alex->getX() > 600 && Alex->getX() < 25000) {
+				if (Alex->getY() < 20000.7) {
 					if (RegionState::current_region == *Jungle)
 						RegionState::next_region = *Desert;
 				}

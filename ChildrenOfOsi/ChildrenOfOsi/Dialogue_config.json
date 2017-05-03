@@ -570,7 +570,7 @@
 		  "greed": 0,
 		  "recklessness": 1,
 		  "extroversion": 1,
-		  "affinity": 60,
+		  "affinity": 50,
 		  "notoriety": 50,
 		  "strength": 50,
 		  "AffEstimate": 50,
@@ -580,14 +580,19 @@
       "1": {
         "general_type": 0,
         "rel_type": 8,
-        "desired_rel_val": 55
+        "desired_rel_val": 60
       }
     },
     "doer_succ_postconds": {
       "1": {
         "general_type": 0,
         "rel_type": 7,
-        "utility": 4
+        "utility": 5
+      },
+      "2": {
+        "general_type": 0,
+        "rel_type": 8,
+        "utility": 10
       }
     },
     "doer_fail_postconds": {
@@ -641,7 +646,7 @@
 		  "extroversion": 1,
 		  "affinity": 50,
 		  "notoriety": 50,
-		  "strength": 70,
+		  "strength": 50,
 		  "AffEstimate": 50,
 		  "NotorEstimate": 50,
 		  "StrEstimate": 50,
@@ -649,7 +654,7 @@
       "1": {
         "general_type": 0,
         "rel_type": 6,
-        "desired_rel_val": 55
+        "desired_rel_val": 50
       }
     },
     "doer_succ_postconds": {
@@ -1329,16 +1334,16 @@
 	      "name" : "Ask_To_Duel",
           "icon" : "ncp",
 	      "template" : "Ask_To_Duel",
-		  "honor" : 0,
-		  "pride": 0,
-		  "aggression": 0,
+		  "honor" : 1,
+		  "pride": 1,
+		  "aggression": 1,
 		  "kindness": 0,
 		  "greed": 0,
-		  "recklessness": 0,
-		  "extroversion": 0,
+		  "recklessness": 1,
+		  "extroversion": 1,
 		  "affinity": 50,
 		  "notoriety": 50,
-		  "strength": 60,
+		  "strength": 50,
 		  "AffEstimate": 50,
 		  "NotorEstimate": 50,
 		  "StrEstimate": 50,

@@ -57,7 +57,7 @@ void PlayerActExecFunctions::execute_start(std::string act_name, Hero* receiver)
 	{
 		//we need to create a fight here if their action is a violent action
 		Fight* fight_obj = new Fight(player->getParty(), receiver->getParty(), 0);
-	/*} else if (act_name == "Duel") {
+	} else if (act_name == "Duel") {
 		Fight* fight_obj = new Fight(player->getParty(), receiver->getParty(), 1);
 	}
 	else if (act_name == "Spar") {
@@ -65,7 +65,7 @@ void PlayerActExecFunctions::execute_start(std::string act_name, Hero* receiver)
 	}
 	else if (act_name == "Train With") {
 		Fight* fight_obj = new Fight(player->getParty(), receiver->getParty(), 3);
-		*/
+		
 	}
 
 	//ADITIONAL FUNCTION act_name == "Conquer" || act_name == "Duel" ||act_name == "Spar" ||
@@ -95,8 +95,8 @@ void PlayerActExecFunctions::execute_end(bool if_succ) {
 	//special cases that need to be handled are in this gaurd (may want to make a helper function)
 
 	//NEEDS TO BE TESTED... should it check for Occupy?
-	if (act_name == "Occupy" && player->getParty()->get_fight()->is_over()) {
-		cur_action->getReceiver()->getVillage()->add_to_village_health(cur_action->getDoer()->getParty()->getMembers().size()*(-10));
+	if (act_name == "Conquer" && player->getParty()->get_fight()->is_over()) {
+		cur_action->getReceiver()->getVillage()->add_to_village_health(cur_action->getDoer()->getParty()->getMembers().size()*(-25));
 		if (cur_action->getReceiver()->getVillage()->get_village_health() > 0) {
 			cur_action->getReceiver()->getVillage()->defenders->add_party_to_party(cur_action->getReceiver()->getVillage()->barracks);
 			//if (player->getParty()->get_fight()!=nullptr)player->getParty()->get_fight()->add_to_defenders(cur_action->getReceiver()->getVillage()->defenders);

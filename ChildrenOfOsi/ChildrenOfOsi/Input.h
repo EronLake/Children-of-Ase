@@ -48,8 +48,8 @@ private:
 	void interactive_resize(std::string collide_with, double mouseX);
 
 	//River/Mountain Point Tool
-	void add_point_to_file();
-	void skip_line();
+	void add_point_to_file(std::string file_name);
+	void skip_line(std::string file_name);
 
 public:
 	Input(ChildrenOfOsi* _gameplay_functions, RenderHelper* _rHelper, TaskBuffer* _tBuffer, vector<WorldObj*>* _recVec, vector<WorldObj*>* _movVec);

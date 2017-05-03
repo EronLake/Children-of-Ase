@@ -69,10 +69,10 @@ class HUD
   static constexpr float MAP_WIDTH = 25000.0F;
   static constexpr float MAP_HEIGHT = 25000.0F;
 
-  static constexpr float KEYBIND_DISPLAY_X = 825.0F;
-  static constexpr float KEYBIND_DISPLAY_Y = 405.0F;
-  static constexpr float KEYBIND_DISPLAY_WIDTH = 125.0F;
-  static constexpr float KEYBIND_DISPLAY_HEIGHT = 125.0F;
+  static constexpr float KEYBIND_DISPLAY_X = 775.0F;
+  static constexpr float KEYBIND_DISPLAY_Y = 355.0F;
+  static constexpr float KEYBIND_DISPLAY_WIDTH = 175.0F;
+  static constexpr float KEYBIND_DISPLAY_HEIGHT = 175.0F;
 
   static bool show_active_quests;
 
@@ -106,6 +106,6 @@ class HUD
   Texture *keybind_display_tex;
 
   void drawMainHUD(Player *player);
-  void drawMinimap(Player *player);
+  void drawMinimap(Player* player, Hero* yemoja, Hero* oya);
   void drawKeybindDisplay();
 };
