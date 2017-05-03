@@ -27,5 +27,8 @@ public:
 	void remove_village_from_alliance(Village* p_factionToRemove);
 	static void remove_alliance(Alliance* p_allianceToRemove);
 	static void update_enemies();
+	
+	//will be adapted for end state later
+	static int get_num_alliances() { return Alliances.size(); }
 };
 

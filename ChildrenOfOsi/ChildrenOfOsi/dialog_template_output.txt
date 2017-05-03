@@ -1,2 +1,1 @@
-Conversation Point Name: Ask_To_Duel Appeal 260
-Conversation Point Name: Intimidate Appeal -30
+

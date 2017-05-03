@@ -8,6 +8,8 @@
 #include "json.h"
 #include "RegionState.h"
 
+extern bool game_ended;
+
 
 Input::Input(ChildrenOfOsi* _gameplay_functions, RenderHelper* _rHelper, TaskBuffer* _tBuffer, vector<WorldObj*>* _recVec, vector<WorldObj*>* _movVec)
 {
@@ -605,6 +607,14 @@ void Input::InputCheck()
 	short THREE = GetKeyState('3') >> 15; // Remove self from party and put party in patrol mode
 	short FOUR = GetKeyState('4') >> 15; // coming soon
 
+	if (current_game_state == game_state::victory_menu) {
+		if (ENTER) {
+			// assuming menu only has start option, so move in game
+			if (current_game_state == game_state::victory_menu) {
+				game_ended = true;
+			}
+		}
+	}
 	// main menu, only allow W and S to select menu options
 	if (current_game_state == game_state::main_menu) {
 		if (W) {
@@ -617,6 +627,8 @@ void Input::InputCheck()
 			// assuming menu only has start option, so move in game
 			if (current_game_state == game_state::main_menu) {
 				current_game_state = game_state::in_game;
+				//current_game_state = game_state::victory_menu;
+				
 			}
 		}
 	}
