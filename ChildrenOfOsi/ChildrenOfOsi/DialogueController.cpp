@@ -1203,7 +1203,7 @@ void DialogueController::startConversation(WorldObj* n, bool playerTalk)
 			Planner* planner = AIController::get_plan(CheckClass::isHero(other)->name);
 			bool player_doing_quest = false;
 			bool quest_complete = false;
-			for (int i = 0; i < planner->quests_given.size();) {
+			for (int i = 0; i < planner->quests_given.size();++i) {
 				if (planner->quests_given[i]->getDoer()->name == SHANGO && planner->quests_given[i]->executed == false)
 					player_doing_quest = true;
 			}
