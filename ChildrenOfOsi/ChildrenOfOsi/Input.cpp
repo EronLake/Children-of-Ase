@@ -801,10 +801,10 @@ void Input::InputCheck()
 
 				}
 				if (P && (GetKeyState(VK_LBUTTON) & 0x100) != 0) {
-					add_point_to_file();
+					add_point_to_file("rivLine.txt");
 				}
 				if (Z) {
-					skip_line();
+					skip_line("rivLine.txt");
 				}
 				if (SHIFT && Z) {
 					system("PAUSE");
