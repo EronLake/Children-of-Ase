@@ -206,7 +206,7 @@ void CombatController::move_to_target(Soldier* sold1, int state) {
 		//	//std:://cout << sold1->getID() << " WHERE AM I GOING" << std::endl;
 			gameplay_functions->get_path(sold1); //Generate waypoints to destination
 		}
-	}
+	} else gameplay_functions->stop(sold1);
 }
 
 float CombatController::dist_by_center(Soldier* sold1, Soldier* sold2) {
@@ -283,6 +283,9 @@ void CombatController::party_leader_update(Soldier* sold1, int state) {
 	} else if (sold1->get_action_destination() != Vector2f(NULL, NULL)) {
 		if (Party::dist_location_to_location(sold1->getLoc(), sold1->get_action_destination()) < sold1->get_max_dist_act()) {
 			sold1->set_action_destination(Vector2f(NULL, NULL));
+			sold1->destination = Vector2f(NULL, NULL);
+			sold1->waypoint = Vector2f(NULL, NULL);
+			move_to_target(sold1, state);
 		}
 		else {
 			Vector2f quest = sold1->get_action_destination();
@@ -295,7 +298,11 @@ void CombatController::party_leader_update(Soldier* sold1, int state) {
 		sold1->destination = next;
 		sold1->waypoint = next;
 		move_to_target(sold1, state);
-	} 
+	} else {
+		sold1->destination = Vector2f(NULL, NULL);
+		sold1->waypoint = Vector2f(NULL, NULL);
+		move_to_target(sold1, state);
+	}
 }
 
 void CombatController::updateSoliderStatus()

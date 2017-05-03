@@ -189,10 +189,10 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	// Player* Alex = new Player(SHANGO, Vector2f(6445.0, 10155.0), 150.0, 150.0);	//init player
 	
 
-	Region* Marsh = new Region("Marsh", "Music/RegionThemes/DesertRegion.flac", "Music/HeroThemes/ogun.flac", { 1000,1000 });
-	Region* Desert = new Region("Desert", "Music/RegionThemes/MarshRegion.flac", "Music/HeroThemes/oya.flac", { 5000,5000 });
-	Region* Mountain = new Region("Mountain", "Music/RegionThemes/MountainRegion.flac", "nothing", { 10000,1000 });
-	Region* Jungle = new Region("Jungle", "Music/RegionThemes/JungleRegion.flac", "Music/HeroThemes/oya.flac", { 5000,10000 });
+	Region* Marsh = new Region("Marsh", "Music/RegionThemes/DesertRegion.flac", "Music/HeroThemes/ogun.flac", { 8000,22100 });
+	Region* Desert = new Region("Desert", "Music/RegionThemes/MarshRegion.flac", "Music/HeroThemes/oya.flac", { 5045,11535 });
+	Region* Mountain = new Region("Mountain", "Music/RegionThemes/MountainRegion.flac", "nothing", { 21000,21000 });
+	Region* Jungle = new Region("Jungle", "Music/RegionThemes/JungleRegion.flac", "Music/HeroThemes/oya.flac", { 17157,4040 });
 	
 	Region current_region = *Desert;
 	Region next_region = *Desert;
@@ -208,8 +208,8 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 
 	Input* iController = new Input(gameplay_functions, Alex, RenM->renderHelper, tBuffer, recVec_ptr, movVec_ptr);
 
-	gameplay_functions->add_hero("Yemoja", 6445.0, 10355.0, true);
-	gameplay_functions->add_hero("Oya", 7445, 10555, true);
+	gameplay_functions->add_hero("Yemoja", 5045, 11535, true);
+	gameplay_functions->add_hero("Oya", 17157, 4040, true);
 	tBuffer->run();
 	
 
@@ -1639,9 +1639,9 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	Village* v2 = new Village();
 	Village* v3 = new Village();
 	Village* v4 = new Village();
-	v1->set_village_location({ 6045.0, 5155.0 });
-	v2->set_village_location({ 6045.0, 15155.0 });
-	v3->set_village_location({ 6445.0, 10355.0 });
+	v1->set_village_location(Alex->getLoc());
+	v2->set_village_location({ 6030, 4000 });
+	v3->set_village_location(staticRec->getLoc());
 	v4->set_village_location(oya->getLoc());
 	v1->add_member(Alex);
 	for (int i = 0; i < silverSoldier.size(); i++) {

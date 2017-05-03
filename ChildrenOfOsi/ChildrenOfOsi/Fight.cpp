@@ -310,8 +310,15 @@ bool Fight::check_for_winner() {
 }
 
 void Fight::update_all_fights() {
-	for (auto it = fights_world.begin(); it != fights_world.end();++it) {
-		if (!(*it)->is_over())(*it)->update_fight();
+	for (auto it = fights_world.begin(); it != fights_world.end();) {
+		if (*it == nullptr || *it == NULL)
+		{
+			it=fights_world.erase(it);
+		}
+		else {
+			if (!(*it)->is_over())(*it)->update_fight();
+			++it;
+		}
 	}
 }
 
