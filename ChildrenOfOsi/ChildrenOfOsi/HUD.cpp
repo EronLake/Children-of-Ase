@@ -113,8 +113,10 @@ void HUD::drawHUD(WorldObj* obj)
     player = dynamic_cast<Player *>(obj);
   }
 
+  Hero* yemoja = Containers::hero_table["Yemoja"];
+  Hero* oya = Containers::hero_table["Oya"];
   this->drawMainHUD(player);
-  this->drawMinimap(player);
+  this->drawMinimap(player, yemoja, oya);
   this->drawKeybindDisplay();
 
   // Framerate information for debugging
@@ -123,11 +125,11 @@ void HUD::drawHUD(WorldObj* obj)
 
   // Draw the listing of active quests
   if(HUD::show_active_quests) {
-    GameWindow::createText("Active Quests", 50, 104.5, 150, 80, {0.0F, 0.0F, 0.0F});
-    GameWindow::createText("___________", 50, 105, 150, 80, {0.0F, 0.0F, 0.0F});
+    GameWindow::createText("ACTIVE QUESTS", 810, 180.5, 150, 80, {0.0F, 0.0F, 0.0F});
+    GameWindow::createText("_____________", 810, 180, 150, 80, {0.0F, 0.0F, 0.0F});
     vector<pair<Action*, int>> quests = player->get_quests();
     for(int i = 0; i < quests.size(); i++) {
-      GameWindow::createText(quests[i].first->getName() + ": " + to_string(quests[i].second), 50, 122 + (i * 15), 150, 80, {0.0F, 0.0F, 0.0F});
+      GameWindow::createText(quests[i].first->getName(), 810, 202 + (i * 15), 150, 80, {0.0F, 0.0F, 0.0F});
     }
   }
 }
@@ -185,17 +187,31 @@ void HUD::drawMainHUD(Player *player)
     this->portrait_rect->getWidth(), this->portrait_rect->getHeight(), this->portrait_rect->getSprite());
 }
 
-void HUD::drawMinimap(Player *player)
+void HUD::drawMinimap(Player *player,Hero* yemoja, Hero* oya)
 {
   Vector2f minimapCoordOffset;
+  Vector2f minimapCoordOffset1;
+  Vector2f minimapCoordOffset2;
+
+
   
   if(player->getX() < 0.0F) minimapCoordOffset.setXloc(0.0F);
   else if(player->getX() > HUD::MAP_WIDTH) minimapCoordOffset.setXloc(HUD::MAP_WIDTH);
-  else minimapCoordOffset.setXloc(player->getX() / HUD::MAP_WIDTH * HUD::MINIMAP_WIDTH);
+  else { 
+	  minimapCoordOffset.setXloc(player->getX() / HUD::MAP_WIDTH * HUD::MINIMAP_WIDTH);
+
+	  minimapCoordOffset1.setXloc(yemoja->getX() / HUD::MAP_WIDTH * HUD::MINIMAP_WIDTH);
+	  minimapCoordOffset2.setXloc(oya->getX() / HUD::MAP_WIDTH * HUD::MINIMAP_WIDTH);
+  }
 
   if(player->getY() < 0.0F) minimapCoordOffset.setYloc(0.0F);
   else if(player->getY() > HUD::MAP_HEIGHT) minimapCoordOffset.setYloc(HUD::MAP_HEIGHT);
-  else minimapCoordOffset.setYloc(player->getY() / HUD::MAP_HEIGHT * HUD::MINIMAP_HEIGHT);
+  else { 
+	  minimapCoordOffset.setYloc(player->getY() / HUD::MAP_HEIGHT * HUD::MINIMAP_HEIGHT);
+  
+	  minimapCoordOffset1.setYloc(yemoja->getY() / HUD::MAP_HEIGHT * HUD::MINIMAP_HEIGHT);
+	  minimapCoordOffset2.setYloc(oya->getY() / HUD::MAP_HEIGHT * HUD::MINIMAP_HEIGHT);
+  }
 
   GameWindow::drawSprite(this->minimap_rect->getX(), this->minimap_rect->getY(),
     this->minimap_rect->getWidth(), this->minimap_rect->getHeight(), this->minimap_rect->getSprite());
@@ -203,6 +219,11 @@ void HUD::drawMinimap(Player *player)
     this->minimap_frame_rect->getWidth(), this->minimap_frame_rect->getHeight(), this->minimap_frame_rect->getSprite());
   GameWindow::drawSprite(this->minimap_cursor_rect->getX() + minimapCoordOffset.getXloc(), this->minimap_cursor_rect->getY() + minimapCoordOffset.getYloc(),
     this->minimap_cursor_rect->getWidth(), this->minimap_cursor_rect->getHeight(), this->minimap_cursor_rect->getSprite());
+
+  GameWindow::drawSprite(this->minimap_cursor_rect->getX() + minimapCoordOffset1.getXloc(), this->minimap_cursor_rect->getY() + minimapCoordOffset1.getYloc(),
+	  this->minimap_cursor_rect->getWidth(), this->minimap_cursor_rect->getHeight(), this->minimap_cursor_rect->getSprite());
+  GameWindow::drawSprite(this->minimap_cursor_rect->getX() + minimapCoordOffset2.getXloc(), this->minimap_cursor_rect->getY() + minimapCoordOffset2.getYloc(),
+	  this->minimap_cursor_rect->getWidth(), this->minimap_cursor_rect->getHeight(), this->minimap_cursor_rect->getSprite());
 }
 
 void HUD::drawKeybindDisplay()

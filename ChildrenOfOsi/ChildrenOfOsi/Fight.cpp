@@ -95,6 +95,19 @@ void Fight::update_radius() {
 }
 
 void Fight::add_party(Party* p, bool atk) {
+	for (auto it = attackers.begin(); it != attackers.end(); ++it) {
+		for (auto itor = (*it).begin(); itor != (*it).end(); ++itor) {
+			if ((*itor) == p)return;
+		}
+	}
+	for (auto it = defenders.begin(); it != defenders.end(); ++it) {
+		for (auto itor = (*it).begin(); itor != (*it).end(); ++itor) {
+			if ((*itor) == p)return;
+		}
+	}
+	for (auto it = downed.begin(); it != downed.end(); ++it) {
+		if ((*it) == p)return;
+	}
 	over = false;
 	p->set_defend(loc);
 	p->setMode(Party::MODE_DEFEND);
@@ -147,6 +160,19 @@ void Fight::add_party(Party* p, bool atk) {
 }
 
 void Fight::add_to_attackers(Party* p) {
+	for (auto it = attackers.begin(); it != attackers.end(); ++it) {
+		for (auto itor = (*it).begin(); itor != (*it).end(); ++itor) {
+			if ((*itor) == p)return;
+		}
+	}
+	for (auto it = defenders.begin(); it != defenders.end(); ++it) {
+		for (auto itor = (*it).begin(); itor != (*it).end(); ++itor) {
+			if ((*itor) == p)return;
+		}
+	}
+	for (auto it = downed.begin(); it != downed.end(); ++it) {
+		if ((*it) == p)return;
+	}
 	over = false;
 	bool added = false;
 	for (auto it = attackers.begin(); it != attackers.end(); ++it) {
@@ -176,6 +202,19 @@ void Fight::add_to_attackers(Party* p) {
 }
 
 void Fight::add_to_defenders(Party* p) {
+	for (auto it = attackers.begin(); it != attackers.end(); ++it) {
+		for (auto itor = (*it).begin(); itor != (*it).end(); ++itor) {
+			if ((*itor) == p)return;
+		}
+	}
+	for (auto it = defenders.begin(); it != defenders.end(); ++it) {
+		for (auto itor = (*it).begin(); itor != (*it).end(); ++itor) {
+			if ((*itor) == p)return;
+		}
+	}
+	for (auto it = downed.begin(); it != downed.end(); ++it) {
+		if ((*it) == p)return;
+	}
 	over = false;
 	bool added = false;
 	for (auto it = defenders.begin(); it != defenders.end(); ++it) {
@@ -273,7 +312,7 @@ void Fight::update_fight() {
 	update_radius();
 	over = check_for_winner();
 	if (over) {
-		if (player->getParty()->get_fight() == this && player->cur_action!=nullptr && player->cur_action != NULL) {
+		if (player->getParty()->get_fight() == this && (player->cur_action!=nullptr && player->cur_action != NULL)) {
 			PlayerActExecFunctions::execute_end(true);
 		}
 	}
@@ -310,9 +349,15 @@ bool Fight::check_for_winner() {
 }
 
 void Fight::update_all_fights() {
-	for (auto it = fights_world.begin(); it != fights_world.end();++it) {
-		if (!(*it)->is_over())
-			(*it)->update_fight();
+	for (auto it = fights_world.begin(); it != fights_world.end();) {
+		if (*it == nullptr || *it == NULL)
+		{
+			it=fights_world.erase(it);
+		}
+		else {
+			if (!(*it)->is_over())(*it)->update_fight();
+			++it;
+		}
 	}
 }
 
@@ -320,11 +365,13 @@ void Fight::bring_out_your_dead() {
 	vector<Soldier*> zombies = Party::grave->getMembers();
 	for (auto it = zombies.begin(); it != zombies.end(); ++it) {
 		if (!(*it)->sprite.getLock()) {
-			(*it)->setLoc((*it)->getVillage()->get_village_location());
 			Party::grave->removeSoldier((*it),false);
-			(*it)->getVillage()->barracks->addToParty((*it),false);
-			(*it)->setHealth((*it)->get_max_health());
-			(*it)->setInCombat(false);
+			if ((*it)->getType() < WorldObj::TYPE_HERO) {
+				(*it)->getVillage()->barracks->addToParty((*it), false);
+				(*it)->setHealth((*it)->get_max_health());
+				(*it)->setInCombat(false);
+				(*it)->setLoc((*it)->getVillage()->get_village_location());
+			}
 		}
 	}
 }
@@ -418,7 +465,7 @@ void Fight::check_should_flee(Party* p) {
 		if (tmp < 1)tmp = 1;
 		total_sold = total_sold - total_enemies;
 		total_enemies = total_enemies / tmp;
-		if (total_enemies > (total_sold * 3)) {
+		if (total_enemies > (total_sold * 3) && ((p->getLeader()->getHealth()*4)<=p->getLeader()->get_max_health())) {
 			p->setMode(Party::MODE_FLEE);
 		}
 	}

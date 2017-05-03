@@ -46,9 +46,9 @@ void PlayerActExecFunctions::execute_start(std::string act_name, Hero* receiver)
 	player->cur_action = cur_action;
 
 	//create the memory based off of the newly created current action
-	ActionHelper::create_memory(cur_action, player);
+	//ActionHelper::create_memory(cur_action, player);
 	//creates the memory for the reciever as well
-	ActionHelper::create_memory(cur_action, receiver);
+	//ActionHelper::create_memory(cur_action, receiver);
 
 	receiver->set_busy(Hero::BUSY_REC);
 
@@ -57,7 +57,7 @@ void PlayerActExecFunctions::execute_start(std::string act_name, Hero* receiver)
 	{
 		//we need to create a fight here if their action is a violent action
 		Fight* fight_obj = new Fight(player->getParty(), receiver->getParty(), 0);
-	/*} else if (act_name == "Duel") {
+	} else if (act_name == "Duel") {
 		Fight* fight_obj = new Fight(player->getParty(), receiver->getParty(), 1);
 	}
 	else if (act_name == "Spar") {
@@ -65,7 +65,7 @@ void PlayerActExecFunctions::execute_start(std::string act_name, Hero* receiver)
 	}
 	else if (act_name == "Train With") {
 		Fight* fight_obj = new Fight(player->getParty(), receiver->getParty(), 3);
-		*/
+		
 	}
 
 	//ADITIONAL FUNCTION act_name == "Conquer" || act_name == "Duel" ||act_name == "Spar" ||
@@ -77,12 +77,6 @@ void PlayerActExecFunctions::execute_start(std::string act_name, Hero* receiver)
 void PlayerActExecFunctions::execute_end(bool if_succ) {
 
 	std::cout << "------------EX_END-------------" << std::endl;
-
-	///FOR ALESSIO
-
-	//if another soldier is starts the fight it would cause a problem (check if player is in a fight/has cur action)
-	//is called after warning hit
-	//is called when hero is incapacited
 
 	//STILL NEED TO DO QUEST CHECK
 	
@@ -101,8 +95,8 @@ void PlayerActExecFunctions::execute_end(bool if_succ) {
 	//special cases that need to be handled are in this gaurd (may want to make a helper function)
 
 	//NEEDS TO BE TESTED... should it check for Occupy?
-	if (act_name == "Occupy" && player->getParty()->get_fight()->is_over()) {
-		cur_action->getReceiver()->getVillage()->add_to_village_health(cur_action->getDoer()->getParty()->getMembers().size()*(-10));
+	if (act_name == "Conquer" && player->getParty()->get_fight()->is_over()) {
+		cur_action->getReceiver()->getVillage()->add_to_village_health(cur_action->getDoer()->getParty()->getMembers().size()*(-25));
 		if (cur_action->getReceiver()->getVillage()->get_village_health() > 0) {
 			cur_action->getReceiver()->getVillage()->defenders->add_party_to_party(cur_action->getReceiver()->getVillage()->barracks);
 			//if (player->getParty()->get_fight()!=nullptr)player->getParty()->get_fight()->add_to_defenders(cur_action->getReceiver()->getVillage()->defenders);
@@ -117,14 +111,16 @@ void PlayerActExecFunctions::execute_end(bool if_succ) {
 
 	///////////////////////////////////////////////////////////////////////////////////
 
-	Memory* doer_mem = player->find_mem(cur_action->getName() + "_" + std::to_string(cur_action->time_stamp));
-	Memory* receiver_mem = cur_action->getReceiver()->find_mem(cur_action->getName() + "_" +
-							std::to_string(cur_action->time_stamp));
 
-	if (doer_mem == nullptr)
-	{
-		perror("something is wrong with the current hero memory creation function");
-	}
+	//Memory* doer_mem = player->find_mem(cur_action->getName() + "_" + std::to_string(cur_action->time_stamp));
+	//Memory* receiver_mem = cur_action->getReceiver()->find_mem(cur_action->getName() + "_" +
+	//						std::to_string(cur_action->time_stamp));
+
+
+	//if (doer_mem == nullptr)
+	//{
+//		perror("something is wrong with the current hero memory creation function");
+	//}
 	
 	cur_action->apply_postconditions(if_succ);	//Apply post-conditions based off if it was succesful or not
 	cur_action->executed = true;
@@ -134,21 +130,22 @@ void PlayerActExecFunctions::execute_end(bool if_succ) {
 	
 	//reason sould be handled as a dialog response choice
 	if (if_succ){
-		doer_mem->setCategory("success");
-		receiver_mem->setCategory("failure");
+		//doer_mem->setCategory("success");
+		//receiver_mem->setCategory("failure");
 	}else{ 
-		doer_mem->setCategory("failure");
-		receiver_mem->setCategory("success");
+		//doer_mem->setCategory("failure");
+	//	receiver_mem->setCategory("success");
 	}
-	doer_mem->setWhen(/*get global frame*/0);
+//	doer_mem->setWhen(/*get global frame*/0);
 
 	/*
 	dealocate memory for fight if there was a fight
 	and end the fight if a fight was involved
 	*/
 	if (player->getInCombat()) {
+		Fight* tmp= player->getParty()->get_fight();
 		player->getParty()->get_fight()->end_combat();
-		delete player->getParty()->get_fight(); 
+		delete tmp; 
 	}
 
 	//dealocate memory for action

@@ -77,17 +77,17 @@ DialogueHelper::~DialogueHelper()
 {
 }
 
-int DialogueHelper::personality_appeal(ConversationPoint* point, vector<int> personality) {
+int DialogueHelper::personality_appeal(ConversationPoint* point, Personality* personality) {
 
 	
 
-	return ((personality[0]*point->multipliers->getHonor())+
-	(personality[1] *point->multipliers->getPride())+
-	(personality[2] *point->multipliers->getAggression())+
-	(personality[3] *point->multipliers->getKindness())+
-	(personality[4] *point->multipliers->getGreed())+
-	(personality[5] *point->multipliers->getRecklessness())+
-	(personality[6] *point->multipliers->getExtroversion()));
+	return ((personality->getHonor()*point->multipliers->getHonor())+
+	(personality->getPride() *point->multipliers->getPride())+
+	(personality->getAggression() *point->multipliers->getAggression())+
+	(personality->getKindness() *point->multipliers->getKindness())+
+	(personality->getGreed() *point->multipliers->getGreed())+
+	(personality->getRecklessness() *point->multipliers->getRecklessness())+
+	(personality->getExtroversion() *point->multipliers->getExtroversion()));
 };
 
 /*Runs the heuristic that npc's use to select a conversation point to say.*/
@@ -99,8 +99,11 @@ dialogue_point DialogueHelper::choose_conv_pt(std::vector<ConversationLogObj*> c
 
 	int conv_pt_index;
 
-	std::vector<int> personality = yemoja_personality;
-	std::vector<int> relationship = yemoja_relationship_with_shango;
+	//std::vector<int> personality = yemoja_personality;
+	//std::vector<int> relationship = yemoja_relationship_with_shango;
+	
+	Personality* personality = other->traits;
+	Relationship* relationship = other->rel[1];
 
 	/*Hero* temp_hero = nullptr;
 	if (other->getType() >= WorldObj::TYPE_NPC) {
@@ -183,7 +186,7 @@ dialogue_point DialogueHelper::choose_conv_pt(std::vector<ConversationLogObj*> c
 				if (std::find(possible_replies.begin(), possible_replies.end(), std::make_pair(0, k)) != possible_replies.end()) {
 				}
 				else {
-					if(relationship[0]>= k->rel_multipliers->getAffinity() && relationship[1] >= k->rel_multipliers->getNotoriety() && relationship[2] >= k->rel_multipliers->getStrength()){
+					if(relationship->getAffinity()>= k->rel_multipliers->getAffinity() && relationship->getNotoriety() >= k->rel_multipliers->getNotoriety() && relationship->getStrength() >= k->rel_multipliers->getStrength()){
 					possible_replies.push_back(std::make_pair(0,k));}
 				}
 			
@@ -553,7 +556,7 @@ dialogue_point DialogueHelper::get_dialog_negative(std::string name, dialogue_po
 	std::string my_name = name;
 	if (name != "Yemoja" && name != "Shango" && name != "Oshosi" && name != "Ogun" && name != "Oya")
 		my_name = "SilverSoldier"; //placeholder until there are jsons for other non-hero NPCs
-								   //////////////////////////////////
+									   //////////////////////////////////
 								   /*add several else if statements here as more NPCs are added to the game in
 								   order to handle different json files for every NPC. json files are opened on a
 								   name basis*/
