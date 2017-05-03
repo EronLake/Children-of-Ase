@@ -57,7 +57,7 @@ void PlayerActExecFunctions::execute_start(std::string act_name, Hero* receiver)
 	{
 		//we need to create a fight here if their action is a violent action
 		Fight* fight_obj = new Fight(player->getParty(), receiver->getParty(), 0);
-	/*} else if (act_name == "Duel") {
+	} else if (act_name == "Duel") {
 		Fight* fight_obj = new Fight(player->getParty(), receiver->getParty(), 1);
 	}
 	else if (act_name == "Spar") {
@@ -65,7 +65,7 @@ void PlayerActExecFunctions::execute_start(std::string act_name, Hero* receiver)
 	}
 	else if (act_name == "Train With") {
 		Fight* fight_obj = new Fight(player->getParty(), receiver->getParty(), 3);
-		*/
+		
 	}
 
 	//ADITIONAL FUNCTION act_name == "Conquer" || act_name == "Duel" ||act_name == "Spar" ||
