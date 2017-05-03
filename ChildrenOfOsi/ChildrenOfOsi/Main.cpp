@@ -189,7 +189,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	
 
 	Region* Marsh = new Region("Marsh", "Music/RegionThemes/DesertRegion.flac", "Music/HeroThemes/ogun.flac", { 1000,1000 });
-	Region* Desert = new Region("Desert", "Music/RegionThemes/MarshRegion.flac", "Music/HeroThemes/oya.flac", { 5000,5000 });
+	Region* Desert = new Region("Desert", "Music/RegionThemes/MarshRegion.flac", "Music/HeroThemes/ogun.flac", { 5000,5000 });
 	Region* Mountain = new Region("Mountain", "Music/RegionThemes/MountainRegion.flac", "nothing", { 10000,1000 });
 	Region* Jungle = new Region("Jungle", "Music/RegionThemes/JungleRegion.flac", "Music/HeroThemes/oya.flac", { 5000,10000 });
 	
@@ -1515,7 +1515,8 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	ai->graph.vertices = vertices;
 	ai->graph.obstacles = edges;
 	for (Vector2f vert : ai->graph.vertices) {
-		//////std::////cout << "X: " << vert.getXloc() << " Y: " << vert.getYloc() << std::endl;
+		
+		std::cout << "X: " << vert.getXloc() << " Y: " << vert.getYloc() << std::endl;
 	}
 	for (auto edge : ai->graph.obstacles) {
 		//////std::////cout << "EDGE from " << edge.first.getXloc() << "," << edge.first.getYloc() << " to " << edge.second.getXloc() << "," << edge.second.getYloc() << std::endl;
@@ -1924,7 +1925,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 
 			state = DialogueController::getState();
 
-			if (Alex->getX() > 5285.83 && Alex->getX() < 7079.86) { //Ogun Desert
+			if (Alex->getX() > 660 && Alex->getX() < 10847.5) { //Ogun Desert
 				if (Alex->getY() < 3523.33) {
 					if (RegionState::current_region == *Desert)
 						RegionState::next_region = *Marsh;
@@ -1947,7 +1948,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 					}
 				}
 			}
-			if (Alex->getX() > 13091 && Alex->getX() < 13825.9) {
+			if (Alex->getX() > 660 && Alex->getX() < 25000) {
 				if (Alex->getY() < 5132.23) {
 
 					if (RegionState::current_region == *Mountain) {
@@ -1959,8 +1960,8 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 						RegionState::next_region = *Mountain;
 				}
 			}
-			if (Alex->getX() > 3479.67 && Alex->getX() < 9446.06) {
-				if (Alex->getY() < 15980.7) {
+			if (Alex->getX() > 3479.67 && Alex->getX() < 10847.5) {
+				if (Alex->getY() < 17000.7) {
 					if (RegionState::current_region == *Jungle)
 						RegionState::next_region = *Desert;
 				}
