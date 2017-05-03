@@ -18,18 +18,18 @@
 	"Ask_Name": {
 		"1": "What do people call you?",
         "2": "What do people call you?", 
-		"3": "What do people call you?",
-		"4": "What do you call yourself, friend?",
-		"5": "What do you call yourself, friend?"
+		"3": "May I ask what your name is?",
+		"4": "May I ask what your name is?",
+		"5": "May I ask what your name is?"
 	
 	},
 
 	"Tell Name": {
 		"1": "My name is Shango.",
 		"2": "They call me Shango.",
-		"3": "Shangos the name. This is my game.",
-        "4": "Shangos the name. This is my game.",
-        "5": "Shangos the name. This is my game."
+		"3": "I go by Shango. It's nice to meet you.",
+        "4": "I go by Shango. It's nice to meet you.",
+        "5": "I go by Shango. It's nice to meet you."
 	},
 
 	"Ask_Origin": {
@@ -43,9 +43,9 @@
 	"Tell Origin": {
 	    "1": "I will leave that to your imagination.",
 		"2": "I come from far away.",
-		"3": "I come from a place that you won't find on any map.",
-		"4": "I come from a place that you won't find on any map.",
-		"5": "I come from a place that you won't find on any map."
+		"3": "I come from a place that you won't find on any map. I came to this land in order to fufill my destiny.",
+		"4": "I come from a place that you won't find on any map. I came to this land in order to fufill my destiny.",
+		"5": "I come from a place that you won't find on any map. I came to this land in order to fufill my destiny."
 	},
 
 	"Ask About Strength Of": {
@@ -187,9 +187,9 @@
 	"Ask_To_Duel": {
         "1": "I am looking for an easy fight to loosen up a bit. I suppose you will do.",
         "2": "Duel me. I doubt someone of your caliber could even keep up.",
-        "3": "I am looking for a respectable duel. Are you prepared.",
-        "4": "I cannot think of a better warrior to test my mettle against. I challenge you to a duel.",
-		"5": "I cannot think of a better warrior to test my mettle against. I challenge you to a duel."
+        "3": "I challenge you to a duel! Prove to me you deserve your title.",
+        "4": "I challenge you to a duel! Prove to me you deserve your title.",
+		"5": "I challenge you to a duel! Prove to me you deserve your title."
     },
 
 	"Accept Duel": {
@@ -243,9 +243,9 @@
 	"Accept Bribe": {
         "1": "Do you honesly think I would stoop to your level and accept a bribe.",
         "2": "I hope you think better of me than to think I would be swayed so easily by a bribe.",
-        "3": "I suppose I could consider your offer.",
+        "3": "I do not usually accept bribes, but I suppose I could make an exception for you.",
         "4": "I do not usually accept bribes, but I suppose I could make an exception for you.",
-        "5": "I gladly accept."
+        "5": "I do not usually accept bribes, but I suppose I could make an exception for you."
     },
 
 	"Ask_To_Join_Party":{
@@ -308,7 +308,7 @@
         "1": "That would actually be flattering if it wasn't coming from you.",
         "2": "Oh...thanks...I suppose.",
         "3": "Thank you.",
-        "4": "It is not often people flatter me.",
+        "4": "It is not often people flatter me. ",
         "5": "Thanks so much, and I could say the same about you."
     },
 
@@ -379,16 +379,16 @@
 	"Boast": {
         "1": "I am the epitome of strength!",
         "2": "I once took down several bandits unarmed.",
-        "3": "I once took down several bandits unarmed.",
-		"4": "I am pleased to be friends with a strong individual such as yourself, but I still think I can hold my own against you quite well.",
-        "5": "I am pleased to be friends with a strong individual such as yourself, but I still think I can hold my own against you quite well."
+        "3":"If you're ever in need of any extra fighting strength, my skill with a blade is peerless",
+		"4": "If you're ever in need of any extra fighting strength, my skill with a blade is peerless",
+        "5": "If you're ever in need of any extra fighting strength, my skill with a blade is peerless"
     },
 
     "Congratulate": {
         "1": "Oh wow that is pathetic!",
         "2": "I am sure you are talking yourself up.",
-        "3": "I cannot decide as to whether I am impressed or unimpressed.",
-        "4": "Oh wow I am impressed.",
+        "3": "Oh wow I am impressed.",
+        "4": "That's incredible!",
         "5": "I already knew you were great, but not that great."
     },
 

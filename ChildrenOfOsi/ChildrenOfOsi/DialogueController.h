@@ -68,6 +68,8 @@ public:
 	static std::string replyString;
 	static bool quest_declined;
 
+	static ConversationLogObj* entry;
+
 	//States:
 	//0 is no conversation
 	//1 is waiting for player input
