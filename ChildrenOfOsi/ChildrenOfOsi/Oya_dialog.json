@@ -1,26 +1,26 @@
 {
     "Greeting": {
         "1": "What could you possibly want with me!?",
-        "2": "I guess anyone nowadays thinks they can just walk up and talk to me.",
-        "3": "Hello.",
-        "4": "It is good to see you.",
-        "5": "My friend, it is so good to see you. I hope you have been doing well."
+        "2": "I am not fond of you, but I will listen to what you have to say.",
+        "3": "Greetings.",
+        "4": "Hello. How can I help you?",
+        "5": "Hey. I am always glad to share my knowledge with you."
     },
 
     "Farewell": {
-        "1": "Please just leave already.",
-        "2": "*tch*",
-        "3": "Goodbye.",
-        "4": "I hope to see you again soon.",
-        "5": "Feel free to come talk to me anytime."
+        "1": "Good riddance.",
+        "2": "Next time do not come to speak with me so suddenly.",
+        "3": "So long.",
+        "4": "Take care and farewell.",
+        "5": "I look forward to our next encounter."
     },
 
 	"Ask_Name": {
-		"1": "What do people call you?",
-        "2": "What do people call you?", 
-		"3": "What do people call you?",
-		"4": "What do you call yourself, friend?",
-		"5": "What do you call yourself, friend?"
+		"1": "What is your name?",
+        "2": "What is your name?", 
+		"3": "What is your name?",
+		"4": "What do people call a nice person like yourself?",
+		"5": "What do people call a nice person like yourself?"
 	
 	},
 
@@ -33,84 +33,84 @@
 	},
 
 	"Ask_Origin": {
-		"1": "Where are you from?",
-		"2": "Where are you from?",
-		"3": "Where are you from?",
-        "4": "Where are you from?",
-        "5": "Where are you from?"
+		"1": "Where did you come from?",
+		"2": "Where did you come from?",
+		"3": "Where did you come from?",
+        "4": "Where did you come from?",
+        "5": "Where did you come from?"
 	},
 
 	"Tell Origin": {
-		"1": "If you knew anything, it would be obvious that I am from the Oasis village.",
-		"2": "Are you joking? I am from the Oasis village.",
-		"3": "I came from the village outskirts many years ago and have lived here ever since.",
-		"4": "I came from the village outskirts many years ago and have lived here ever since.",
-        "5": "I came from the village outskirts many years ago and have lived here ever since."
+		"1": "It is none of your business!",
+		"2": "I don't want to tell you.",
+		"3": "I have lived in the jungle village for as long as I can remember.",
+		"4": "I have lived in the jungle village for as long as I can remember.",
+        "5": "I have lived in the jungle village for as long as I can remember."
 		
 	},
 
 	"Ask About Strength Of": {
-        "1": "I know that someone like you probably knows nothing I already do not, but how strong is HERO",
-        "2": "I doubt you can enlighten me, but what do you know of the strength possesed by HERO",
-        "3": "What do you know of the strength possesed by HERO",
-        "4": "What do you know of the strength possesed by HERO",
-        "5": "What do you know of the strength possesed by HERO"
+        "1": "Your opinion is not valuable, but let's here what you think of the strength possesed by HERO",
+        "2": "I doubt you could possibly have a view on this, but how do you view the strength of HERO",
+        "3": "What is your opinion on the strength of HERO",
+        "4": "What is your opinion on the strength of HERO",
+        "5": "What is your opinion on the strength of HERO"
     },
 
 	"Tell About Strength Of": {
-        "1": "HERO is a weakling that has no ability to defend themself or others.",
-        "2": "HERO is a weak person that can barely defend themself.",
-        "3": "HERO is a capable person who can defend themself and their people.",
-        "4": "HERO is a great individual with vast strength.",
-        "5": "HERO has enough strength to take down anyone, or to protect anybody."
+        "1": "HERO is frail and could not even win a duel against a kid.",
+        "2": "HERO is powerless and can barely defend themself.",
+        "3": "HERO is tough, but not tough enough to defend others.",
+        "4": "HERO is someone that rarely loses a fight.",
+        "5": "HERO is a force to be reckoned with and nearly unstoppable."
     },
 
     "Ask About Affinity Of": {
-        "1": "I know that someone like you probably knows nothing I already do not, but how likable is HERO",
-        "2": "I doubt you can enlighten me, but how friendly is HERO",
-        "3": "How much of an agreeable person is HERO",
-        "4": "How much of an agreeable person is HERO",
-        "5": "How much of an agreeable person is HERO"
+        "1": "Your opinion is not valuable, but let's here what you think of the likability of HERO",
+        "2": "I doubt you could possibly have a view on this, but how do you view the likability of HERO",
+        "3": "What is your opinion on the likability of HERO",
+        "4": "What is your opinion on the likability of HERO",
+        "5": "What is your opinion on the likability of HERO"
     },
 
 	"Tell About Affinity Of": {
-        "1": "HERO is that horrible person that is always up to no good.",
-        "2": "HERO is someone that has made too many enemies for themself.",
-        "3": "HERO is a person that is likable enough.",
-        "4": "HERO is someone that a multitude of people think well of. Myself included.",
-        "5": "HERO is someone that a multitude of people think well of. Myself included."
+        "1": "HERO is one of the worst people in my opinion.",
+        "2": "HERO is not the least bit likable.",
+        "3": "HERO is an agreeable person.",
+        "4": "HERO is a great individual.",
+        "5": "HERO is briliant. Their village is lucky to have them."
     },
 
 	"Ask About Notoriety Of": {
-        "1": "I know that someone like you probably knows nothing I already do not, but how well known is HERO",
-        "2": "Since you so decided to show up in my presence unnanounced, how about you make yourself useful? What is the level of renown of HERO",
-        "3": "I am interested in people who have made names for themselves. How well do people know HERO",
-        "4": "I am interested in people who have made names for themselves. How well do people know HERO",
-        "5": "I am interested in people who have made names for themselves. How well do people know HERO"
+        "1": "Your opinion is not valuable, but let's hear what you know of the achievements of HERO",
+        "2": "I doubt you could possibly have an opinion on this, but how do you think people view the accomplishments of HERO",
+        "3": "How well do you think people know HERO",
+        "4": "How well do you think people know HERO",
+        "5": "How well do you think people know HERO"
     },
 
 	"Tell About Notoriety Of": {
-        "1": "HERO is a nobody with very few accomplishments.",
-        "2": "HERO is an individual of little importance with only a few minor accomplishments.",
-        "3": "HERO is known as a capable person that has earned the favor of some.",
-        "4": "HERO is known as a champion of the people and as a person of great strength and fortitude.",
-        "5": "HERO is known far and wide as a hero amongst heroes and many people sing of their achievements."
+        "1": "HERO has virtually no accomplishments.",
+        "2": "HERO is not known by many outside of their village.",
+        "3": "HERO is known by the locals for their minor acts of community service.",
+        "4": "HERO is a household name. They are very famous.",
+        "5": "HERO has some of the greatest achievements of all!"
     },
 
 	"Ask_To_Form_Alliance": {
-        "1": "How do you feel about forming and Alliance with me?",
-		"2": "How do you feel about forming and Alliance with me?",
-        "3": "How do you feel about forming and Alliance with me?",
-        "4": "How do you feel about forming and Alliance with me?",
-        "5": "How do you feel about forming and Alliance with me?"
+        "1": "Would you like to form an alliance with me?",
+		"2": "Would you like to form an alliance with me?",
+        "3": "Would you like to form an alliance with me?",
+        "4": "Would you like to form an alliance with me?",
+        "5": "Would you like to form an alliance with me?"
     },
 
 	"Accept Alliance Offer": {
-        "1": "I honestly do not see how allying with you will help this village become any safer.",
-        "2": "I do not know you that well, but this one time I will go against my better judgement and accept this alliance with you.",
-        "3": "I think that forming an alliance with you is a situation that benefits the both of us. I accept.",
-        "4": "I am more than happy to ally with you. I know that you will help make this village safer.",
-		"5": "I am more than happy to ally with you. I know that you will help make this village safer."
+        "1": "I have no interest in allying with you ever!",
+        "2": "I will consider your offer, but I cannot give you an answer at present.",
+        "3": "Hmm. I will ally with you for now.",
+        "4": "I am humbled by your offer. I accept.",
+		"5": "Say no more. I look forward to working with someone brilliant like you."
     },
 
 	"Confirm Alliance": {
@@ -186,19 +186,19 @@
     },
 
 	"Ask_To_Duel": {
-        "1": "I am looking for an easy duel to loosen up a bit. Wanna go at it?",
-        "2": "Duel me. I doubt someone of your caliber could even keep up.",
-        "3": "I am looking for a respectable duel. Are you prepared.",
-        "4": "I cannot think of a better warrior to test my mettle against. I challenge you to a duel.",
-		"5": "I cannot think of a better warrior to test my mettle against. I challenge you to a duel."
+        "1": "I know I will win with ease, but... I challenge you to a duel.",
+        "2": "Let's pit your foolishness against my wisdom in a duel.",
+        "3": "I challenge you to a duel.",
+        "4": "I am seeking to hone my skills and I would like to do just that through a duel with you.",
+		"5": "I realize that you are formiddable, but I must face people like you to better myself. Would you duel me?"
     },
 
 	"Accept Duel": {
-        "1": "I hope you're prepared to lose.",
-        "2": "Hahaha. You're confidence is indeed slightly amusing. However, I hope you know I will win.",
-        "3": "I haven't fought in a bit. I guess I could use a good warm up. I hope you're ready.",
-        "4": "Ah, it'll be fun to fight someone of your caliber.",
-        "5": "Sigh. I do not really want to fight you. But, do not think I will hold back simply because we are friends."
+        "1": "No. I would never waste my time dueling you.",
+        "2": "Duel you? Ha ha. No.",
+        "3": "A duel? You seem serious about this. Alright then. I accept.",
+        "4": "Sure. My knowledge against yours. This will be interesting.",
+        "5": "Hmmm. You seem formiddable. Let's pit our great minds against one another with our lives on the line."
     },
 
 	"Confirm Duel": {
@@ -210,19 +210,19 @@
     },
 
 	"Ask_To_Spar": {
-        "1": "It won't help me improve my abilities much, but I think we should spar.",
-        "2": "I am looking for a sparring partner. Wanna spar?",
-        "3": "I need some sparring practice. Would you consider sparring with me?",
-        "4": "I would be grateful if you would spar with me.",
-		"5": "I would be grateful if you would spar with me."
+        "1": "I require a worthless opponent. Let's spar?",
+        "2": "I doubt sparring with you will benefit me, but how about it?",
+        "3": "Would you spar with me?",
+        "4": "Please spar with me so that we may both improve.",
+		"5": "Please allow me to see your greatness for myself through a spar."
     },
 
 	"Accept Spar Request": {
-        "1": "I do not see how sparring against you will result in anything but your hurt ego.",
-        "2": "If you want to spar with me I hope that you are ready to lose.",
-        "3": "I suppose I could use some practice.",
-        "4": "A spar, huh? I suppose it really couldn't hurt to get some practice in with you.",
-        "5": "Sure, it'll be fun to face such a worthy opponent."
+        "1": "No. I don't think sparring with you at your current level would be beneficial to me.",
+        "2": "I will not spar with you until I feel that you are both wise and strong enough.",
+        "3": "I am interested in testing your abilities. Sure. Let us spar.",
+        "4": "Spar? I think we can both benefit from a little spar. I will take you up on that.",
+        "5": "I have always wanted to spar with someone brilliant like you! Let's do this."
     },
 
 	"Confirm Spar": {
@@ -234,19 +234,19 @@
     },
 
 	"Bribe": {
-        "1": "I cannot believe I am asking you of all people, but would you accept this.",
-        "2": "Would you be interested in this gift.",
-        "3": "I decided to get this for you, hopefully you'll accept it.",
-		"4": "I decided to get this for you, hopefully you'll accept it.",
-        "5": "I decided to get this for you, hopefully you'll accept it."
+        "1": "I really did not want to offer this to you, but here.",
+        "2": "Would you be interested in this gift?",
+        "3": "Here is a little something from me. Please accept it. You deserve it.",
+		"4": "Here is a little something from me. Please accept it. You deserve it.",
+        "5": "Here is a little something from me. Please accept it. You deserve it."
     },
 
 	"Accept Bribe": {
-        "1": "Do you honesly think I would stoop to your level and accept a bribe.",
-        "2": "I hope you think better of me than to think I would be swayed so easily by a bribe.",
-        "3": "I suppose I could consider your offer.",
-        "4": "I do not usually accept bribes, but I suppose I could make an exception for you.",
-        "5": "I gladly accept."
+        "1": "I would rather ally with an enemy before taking a bribe from you!",
+        "2": "Are you actually trying to bribe me? Well, its not going to work.",
+        "3": "Hmm. I will take you up on that.",
+        "4": "If you are trying to get on my good side, then it worked.",
+        "5": "You are too kind. I will gladly accept your gift."
     },
 
 	"Ask_To_Join_Party":{
@@ -290,35 +290,35 @@
 	},
 
 	"Compliment": {
-        "1": "I can tell that you have many great qualities.",
-        "2": "I belive that you are a strong and wise individual.",
-        "3": "I can tell that you have many great qualities.",
-		"4": "I am glad to have met you. I truly believe knowing you has had a positive effect on me and this village.",
-        "5": "I am glad to have met you. I truly believe knowing you has had a positive effect on me and this village."
+        "1": "You seem like a capable person.",
+        "2": "You seem like a capable person.",
+        "3": "You seem like a capable person.",
+		"4": "Wisdom and strength are two words that I feel describe you perfectly.",
+        "5": "Everything about you, from your accomplishments to your very being is awe-inspiring."
     },
 
 	"Thank": {
-        "1": "That would actually be flattering if it wasn't coming from you.",
-        "2": "Oh...thanks...I suppose.",
-        "3": "Thank you.",
-        "4": "It is not often people flatter me.",
-        "5": "Thanks so much, and I could say the same about you."
+        "1": "Was that supposed to be a compliment? Well, I am not amused!",
+        "2": "Flattery will get you nowhere with me.",
+        "3": "Thanks.",
+        "4": "I appreciate your kind words. They have brightened my day.",
+        "5": "Hearing that from you really lifts my spirits. Many thanks."
     },
 
 	"Grovel": {
-        "1": "I am reluctant to do this, but I suppose I must beg for your mercy.",
-        "2": "Please know that I truly meant no harm to you and accept my apology.",
-        "3": "My friend, please know that I would never try to harm you. I truly meant no real harm.",
-		"4": "My friend, please know that I would never try to harm you. I truly meant no real harm.",
-        "5": "My friend, please know that I would never try to harm you. I truly meant no real harm."
+        "1": "I dont want to, but I will bow to you on my knees.",
+        "2": "Please allow me to clean your blade for you.",
+        "3": "I would be humbled if you would allow me to prostrate myself before you.",
+		"4": "I would be humbled if you would allow me to prostrate myself before you.",
+        "5": "I would be humbled if you would allow me to prostrate myself before you."
     },
 
 	"Accept Plea": {
-        "1": "Oh please get off your knees you're making an absolute fool of yourself.",
-        "2": "*Sigh* I suppose I can overlook your actions this one time.",
-        "3": "I accept your apology.",
-        "4": "Please, get off of your knees you do not need to go that far simply to apolgize to me.",
-        "5": "My friend I would accept an apology from you anytime."
+        "1": "You look even more unsightly than usual when you are groveling, but the ground sure does suit you.",
+        "2": "Grovel all you want. You won't get me to budge.",
+        "3": "Please get off of your knees. Do not shame yourself.",
+        "4": "I am humbled by the fact that you would prostrate yourself before me.",
+        "5": "You don't have to grovel. We are friends."
     },
 
 	"Advise To Train With": {
@@ -370,51 +370,51 @@
     },
 
 	"Boast": {
-        "1": "I am told that I am quite beautiful.",
-        "2": "I take pride with the lengths I go to in order to keep the oasis village safe.",
-        "3": "I am pleased to be friends with a strong individual such as yourself, but I still think I can hold my own against you quite well.",
-		"4": "I am pleased to be friends with a strong individual such as yourself, but I still think I can hold my own against you quite well.",
-        "5": "I am pleased to be friends with a strong individual such as yourself, but I still think I can hold my own against you quite well."
+        "1": "I am told that my wisdom is unrivaled.",
+        "2": "I have the strength and the wisdom to protect the whole jungle village.",
+        "3": "I am the wisest person around. Nobody can outwit me.",
+		"4": "I am the wisest person around. Nobody can outwit me.",
+        "5": "I am the wisest person around. Nobody can outwit me."
     },
 
     "Congratulate": {
-        "1": "Oh wow that is pathetic!",
-        "2": "I am sure you are talking yourself up.",
-        "3": "I cannot decide as to whether I am impressed or unimpressed.",
-        "4": "Oh wow I am impressed.",
-        "5": "I already knew you were great, but not that great."
+        "1": "That is pathetic.",
+        "2": "That's no accomplishment.",
+        "3": "Well done.",
+        "4": "That is an impressive feat.",
+        "5": "Wow, you are amazing! I am in awe at your brilliance."
     },
 
 	"Intimidate": {
-        "1": "I am absolutely sick of you. If someone doesn't take you out soon I just might do it myself.",
-        "2": "You seem good at making enemies, so if I were you I would watch my back.",
-		"3": "You seem good at making enemies, so if I were you I would watch my back.",
-        "4": "You seem good at making enemies, so if I were you I would watch my back.",
-        "5": "You seem good at making enemies, so if I were you I would watch my back."
+        "1": "You think you are wise, but you will get into trouble with me until you expand your knowledge.",
+        "2": "You should watch out. Many people including myself could take you out whenever we please.",
+		"3": "You should watch out. Many people including myself could take you out whenever we please.",
+        "4": "You should watch out. Many people including myself could take you out whenever we please.",
+        "5": "You should watch out. Many people including myself could take you out whenever we please."
     },
 
 	"Talk Back": {
-        "1": "Were you trying to scare me, because all you did is make me angry.",
-        "2": "You better choose your future words very carefully.",
-        "3": "Ah... I do not know if I offended you, but if you are mad at me just please leave the village out of it.",
-        "4": "Have I done somehting to you? I thought we were on good terms.",
-        "5": "My friend I do not know if I have done anything to make you say that but I am truly sorry if I have."
+        "1": "You could never scare me, dullard.",
+        "2": "You don't scare me.",
+        "3": "I will be more careful when I speak with you from now on.",
+        "4": "You don't have to tell me twice. I know that I cannot be careless around you.",
+        "5": "*Gulp* Yes. Yes. Whatever you say."
     },
 
 	"Insult": {
-        "1": "Your mother was a hamster and your father smelt of elderberries.",
-        "2": "The fact that you even think you can call yourself a 'Hero' is an absolute joke.",
-		"3": "The fact that you even think you can call yourself a 'Hero' is an absolute joke.",
-        "4": "The fact that you even think you can call yourself a 'Hero' is an absolute joke.",
-        "5": "The fact that you even think you can call yourself a 'Hero' is an absolute joke."
+        "1": "Your dullness amazes me.",
+        "2": "You are a third rate warrior, with a fourth rate weapon.",
+		"3": "You are a third rate warrior, with a fourth rate weapon.",
+        "4": "You are a third rate warrior, with a fourth rate weapon.",
+        "5": "You are a third rate warrior, with a fourth rate weapon."
     },
 
 	"Defend Self": {
-        "1": "Is that really the best insult you have? Pssh, pathetic.",
-        "2": "I hope you know that you are playing with fire right now.",
-        "3": "Oh... that was a pretty awful thing to say.",
-        "4": "That actually stung quite a bit.",
-        "5": "What did I do to you to deserve that? I thought we were closer than that."
+        "1": "Is that the best you got? Very ineffective.",
+        "2": "It is too early for you to think that your insults carry any weight.",
+        "3": "That's not a nice thing to say.",
+        "4": "Your words hurt me.",
+        "5": "I am surprised that such nasty words have passed your lips. I am shocked."
     },
 
 	"No_More_Phrases": {
