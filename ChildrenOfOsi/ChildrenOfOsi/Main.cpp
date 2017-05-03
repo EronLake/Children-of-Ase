@@ -190,7 +190,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	
 
 
-	Region* Marsh = new Region("Marsh", "Music/RegionThemes/DesertRegion.flac", "Music/HeroThemes/ogun.flac", { 8000,2900 });
+	Region* Marsh = new Region("Marsh", "Music/RegionThemes/DesertRegion.flac", "Music/HeroThemes/oya.flac", { 8000,2900 });
 	Region* Desert = new Region("Desert", "Music/RegionThemes/MarshRegion.flac", "Music/HeroThemes/ogun.flac", { 5045,13465 });
 	Region* Mountain = new Region("Mountain", "Music/RegionThemes/MountainRegion.flac", "nothing", { 21000,4000 });
 	Region* Jungle = new Region("Jungle", "Music/RegionThemes/JungleRegion.flac", "Music/HeroThemes/oya.flac", { 17157,20960 });
@@ -1847,7 +1847,8 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 
 			state = DialogueController::getState();
 
-			if (Alex->getX() > 660 && Alex->getX() < 10847.5) { //Ogun Desert
+			//commented out for demo
+			/*if (Alex->getX() > 660 && Alex->getX() < 10847.5) { //Ogun Desert
 				if (Alex->getY() < 3523.33) {
 					if (RegionState::current_region == *Desert)
 						RegionState::next_region = *Marsh;
@@ -1884,6 +1885,31 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 			}
 			if (Alex->getX() > 3479.67 && Alex->getX() < 10847.5) {
 				if (Alex->getY() < 17000.7) {
+					if (RegionState::current_region == *Jungle)
+						RegionState::next_region = *Desert;
+				}
+				else {
+					if (RegionState::current_region == *Desert) {
+						RegionState::next_region = *Jungle;
+					}
+				}
+			}*/
+
+			//only 3 regions for demo
+			if (Alex->getX() > 660 && Alex->getX() < 25000 ){ //Ogun Desert
+				if (Alex->getY() < 3523.33) {
+					if (RegionState::current_region == *Desert)
+						RegionState::next_region = *Marsh;
+
+				}
+				else {
+					if (RegionState::current_region == *Marsh) {
+						RegionState::next_region = *Desert;
+					}
+				}
+			}
+			if (Alex->getX() > 600 && Alex->getX() < 25000) {
+				if (Alex->getY() < 20000.7) {
 					if (RegionState::current_region == *Jungle)
 						RegionState::next_region = *Desert;
 				}
