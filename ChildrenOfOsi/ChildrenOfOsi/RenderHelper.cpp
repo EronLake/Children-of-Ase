@@ -6,10 +6,11 @@
 GameMap* RenderHelper::gmap;
 
 
-RenderHelper::RenderHelper(QuadTree * QT, RiverObj* _rivObj)
+RenderHelper::RenderHelper(QuadTree * QT, RiverObj* _rivObj, std::vector<WorldObj*>* _largeStruct)
 {
   tree = QT;
   rivObj = _rivObj;
+  largeStruct = _largeStruct;
   camera = new WorldObj(0, 0, false);
   fullBound = new WorldObj(Vector2f(0, 0), 25000, 25000);
   cameraSize.setXloc(960);
@@ -133,6 +134,13 @@ int RenderHelper::draw_frame(WorldObj * obj)
 		osi::GameWindow::drawSprite(obj->body[i].getX()-camera->getX(), obj->body[i].getY()-camera->getY(), obj->body[i].getWidth(), obj->body[i].getHeight(), obj->getSprite());
 	}*/
 	sortVec();
+	for (int i = 0; i < largeStruct->size(); i++) {
+		WorldObj* tempObj = (*largeStruct)[i];
+		//1k pixels left and rigfht, 800 pixels up and down. OBJS WHOSE WIDTH AND HEIGHT ARE GREATER THAN 1-2k and 800-1.6k respectively DO NOT FUNCTION CORRECTLY
+		if (tempObj->getX() > obj->getX() - (4000 * map_zoom) && tempObj->getX() < obj->getX() + (4000 * map_zoom) && tempObj->getY() > obj->getY() - (4000 * map_zoom) && tempObj->getY() < obj->getY() + (4000 * map_zoom)) {
+			objVec.insert(objVec.begin(), tempObj);
+		}
+	}
 	//cout << "THE COORDINATES OF OBJ IS " << obj->getX() << ", " << obj->getY() << endl;
 	//cout << "******************************************SIZE OF THE OBJVEC TO RENDER IS " << objVec.size() << endl;
 	for (int i = 0; i < objVec.size(); i++) {
