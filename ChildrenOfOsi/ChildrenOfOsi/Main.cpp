@@ -98,7 +98,8 @@ void GAMEPLAY_LOOP(QuadTree* _Quadtree);
 bool lineCollision(Line l1, Line l2);
 /// Helper function passed to thread to set file. Param is a tuple, first being the Texture* to work on, and second being the param needed to call setFile().
 void set_file_with_thread(Texture* t, const pair<string, int>* p_tuple) {
-	std::lock_guard<std::mutex> guard(mu); t->setFile(p_tuple->first, p_tuple->second);
+	//std::lock_guard<std::mutex> guard(mu); 
+	t->setFile(p_tuple->first, p_tuple->second);
 }
 
 int main() {
@@ -295,11 +296,11 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	});
 	
 
-	gameplay_functions->add_texture("objTexture", 0, 0, 0);
-	tBuffer->run();
+	//gameplay_functions->add_texture("objTexture", 0, 0, 0);
+	//tBuffer->run();
 	// Texture* objTexture = new Texture();
-	textureMap[Containers::texture_table["objTexture"]] = pair<string, int>("Assets/Sprites/YemojasHouse.png", 1);
-	standard.push_back(Containers::texture_table["objTexture"]);
+	//textureMap[Containers::texture_table["objTexture"]] = pair<string, int>("Assets/Sprites/YemojasHouse.png", 1);
+	//standard.push_back(Containers::texture_table["objTexture"]);
 
 	//Texture* playerTexture = new Texture();
 	//Texture* playerIdleTex = new Texture();
@@ -1001,31 +1002,6 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	vector<WorldObj*> vec;
 	//vec.push_back(&Alex->melee);
 
-	for (int i = 1; i < 6; i++) {
-		if (i > 4) {
-			WorldObj* obj = new WorldObj(Vector2f(4100, 3550), 500, 333);
-
-			obj->sprite.setTexture(Containers::texture_table["objTexture"]);
-			obj->setInteractable(true);
-			std::string building = "Building ";
-			obj->setName(building += std::to_string(i));
-			//objs->offsetBody(0, 50, 50, 50, 50);
-			obj->offsetBody(0, 25, 50, 25, 25);
-			vec.push_back(obj);
-			continue;
-		}
-
-		WorldObj* objs = new WorldObj(Vector2f(220 + 50 * i, 300 * (i * 2)), 600.0, 400.0);
-		objs->sprite.setTexture(Containers::texture_table["objTexture"]);
-		objs->setInteractable(true);
-		std::string building = "Building ";
-		objs->setName(building += std::to_string(i));
-		//objs->offsetBody(0, 50, 50, 50, 50);
-		objs->offsetBody(0, 110, 150, 120, 60);
-		recVec.push_back(objs);
-
-	}
-
 	vector<Soldier*> silverSoldier;
 	int silverNum = 4;
 	for (int i = 0; i < silverNum; i++) {
@@ -1076,21 +1052,14 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 		}
 		RegionState::regions.erase(RegionState::regions.begin()+closest);
 	}
-	//HDC hdc = wglGetCurrentDC();
-	//HGLRC mainContext = wglGetCurrentContext();
+
 	HGLRC loaderContext0 = wglCreateContext(hdc);
 	wglShareLists(mainContext, loaderContext0);
 	std::thread t0([=]() {
 		wglMakeCurrent(hdc, loaderContext0);
-		//int textureMapCounter = 0;
 		for (int i = 0; i < standard.size(); i++) {
 			set_file_with_thread(standard[i], &textureMap.find(standard[i])->second);
 		}
-		/*for (auto it = starting_location.begin(); it != starting_location.end(); ++it) {
-			for (int i = 0; i < (*it).size(); i++) {
-				set_file_with_thread((*it)[i], &textureMap.find((*it)[i])->second);
-			}
-		}*/
 		wglMakeCurrent(nullptr, nullptr);
 		wglDeleteContext(loaderContext0);
 		for (auto it = recVec.begin(); it != recVec.end(); ++it) {
@@ -1107,7 +1076,6 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	wglShareLists(mainContext, loaderContext1);
 	std::thread t1([=]() {
 		wglMakeCurrent(hdc, loaderContext1);
-		//int textureMapCounter = 0;
 		for (int i = 0; i < (starting_location[0]).size(); i++) {
 			set_file_with_thread(starting_location[0].at(i), &textureMap.find(starting_location[0].at(i))->second);
 		}
@@ -1130,13 +1098,11 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 		}
 		glFinish();
 	});
-	//HDC hdc = wglGetCurrentDC();// Simply gets the device context, which is needed to initialize a GL context, not really used for anything else
-	//HGLRC mainContext = wglGetCurrentContext();//Sets the default GL context to main
+
 	HGLRC loaderContext2 = wglCreateContext(hdc);//Creates the new GL context that we will use for loading
 	wglShareLists(mainContext, loaderContext2);//Shares the information between the loading context and the main context
 	std::thread t2([=]() {//makes the thread. [=] is a cpp Lambda representation
 		wglMakeCurrent(hdc, loaderContext2);//Sets the current context to the loader context
-		//int textureMapCounter = 0;
 		for (int i = 0; i < (starting_location[1]).size(); i++) {
 			set_file_with_thread(starting_location[1].at(i), &textureMap.find(starting_location[1].at(i))->second);
 		}
@@ -1149,11 +1115,6 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 		for (int i = 0; i < (starting_location[2]).size(); i++) {
 			set_file_with_thread(starting_location[2].at(i), &textureMap.find(starting_location[2].at(i))->second);
 		}
-		/*for (auto it = ++starting_location.begin(); it != starting_location.end(); ++it) {
-			for (int i = 0; i < (*it).size(); i++) {
-				set_file_with_thread((*it)[i], &textureMap.find((*it)[i])->second);
-			}
-		}*/
 		wglMakeCurrent(nullptr, nullptr);//unassigns the current gl context
 		wglDeleteContext(loaderContext2);//deletes the loading context now that it is not needed
 		for (auto it = recVec.begin(); it != recVec.end(); ++it) {
@@ -1164,14 +1125,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 		}
 		glFinish(); //Forces all gl calls to be completed before execution
 	});
-	//t.join(); // Forces the thread, t, to fully load the project, which takes a  lot of time but looks nicer
-
-	/*int textureMapCounter = 0;
-	for (const auto& it : textureMap) {
-		pair<Texture*, pair<string, int>>* temp_tuple = new pair<Texture*, pair<string, int>>(it.first, it.second);
-		//std:://cout << "WORKING ON " << temp_tuple->second.first << endl;
-		set_file_with_thread(temp_tuple);
-	}*/
+	
 	Alex->sprite.setTexture(Containers::texture_table["playerTexture"]);
 	Alex->sprite.setIdleTexture(Containers::texture_table["playerIdleTex"]);
 	Alex->sprite.up = Containers::texture_table["upRunTex"];
@@ -1538,29 +1492,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 
 	staticRec->setName("Yemoja");
 	staticRec->setInteractable(true);
-	//staticRec->setPersonality(30, 70, 80, 60, 30, 30, 50);// uncommented this
 
-	//staticRec->rel[OYA]->setAffinity(60);// uncommented this
-	//staticRec->rel[OYA]->setNotoriety(40);// uncommented this
-	//staticRec->rel[OYA]->setStrength(80);// uncommented this
-
-	//staticRec->rel[SHANGO]->setAffinity(60);//added this
-	//staticRec->rel[SHANGO]->setNotoriety(40);//added this
-	//staticRec->rel[SHANGO]->setStrength(80);//added this
-
-	//staticRec->rel[OYA]->setAffEstimate(60);// uncommented this
-	//staticRec->rel[OYA]->setNotorEstimate(70);// uncommented this
-	//staticRec->rel[OYA]->setStrEstimate(40);// uncommented this
-
-	//staticRec->rel[SHANGO]->setAffEstimate(60);//added this
-	//staticRec->rel[SHANGO]->setNotorEstimate(70);//added this
-	//staticRec->rel[SHANGO]->setStrEstimate(40);//added this
-
-
-	//*oya = *staticRec;
-	//oya->setSpeed(5);
-	//oya->setName("Oya");
-	//oya->name = OYA;
 	oya->offsetBody(0, 35, 35, 65, 15);
 	staticRec->offsetBody(0, 60, 60, 75, 50);
 	oya->shiftY(300);
@@ -1613,22 +1545,6 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	test_train->doer_succ_postconds.push_back(std::make_shared<RelPost>(*post1));
 	test_train->doer_succ_postconds.push_back(std::make_shared<RelPost>(*post2));
 	
-
-	//ActionPool act_pool(Alex);
-	//act_pool.macro.push_back(test_ally);
-	//act_pool.micro.push_back(test_train);
-	//act_pool.updateMiddle();
-	//vector<Action*> actions = act_pool.getActions(staticRec, test_ally);
-	//for (auto action : actions) {
-		//std:://cout << action->getName() << std::endl;
-	//}
-
-	//Alex->add_quest(test_ally, 8);
-	//staticRec->add_quest(test_train, 1);
-	//Alex->add_quest(test_train, 2);
-	//questM->heros.push_back(Alex);
-	//questM->heros.push_back(staticRec);
-	
 	///////////////////////////////////////////////////////////////////////////////////////////
 	///////////////////////////////////////////////////////////////////////////////////////////
 	//////////////////                                                 ////////////////////////
@@ -1644,21 +1560,6 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	AIController::init_plans();
     test_train->setDoer(staticRec);
 	YemojaPlanner->set_current_action(test_train);
-
-	/*
-	WorldObj* tree = new WorldObj(Vector2f(4000, 2600), 800, 500);
-	tree->sprite.setTexture(treeTex);
-	tree->offsetBody(0, 275, 375, 375, 75);
-	WorldObj* tree1 = new WorldObj(Vector2f(3300, 4600), 700, 600);
-	tree1->sprite.setTexture(treeTex1);
-	tree1->offsetBody(0, 275, 375, 375, 75);
-	WorldObj* tree2 = new WorldObj(Vector2f(4700, 4500), 700, 600);
-	tree2->sprite.setTexture(treeTex2);
-	tree2->offsetBody(0, 275, 375, 375, 75);
-	//WorldObj* tree1 = new WorldObj(Vector2f())
-	//staticRec->goal.setXloc(500);
-	//staticRec->goal.setYloc(1200);
-	*/
 
 	/*	VisibilityGraph graph{ {
 			{{1400.00,800.00}, {{1400.00, 900.00},{1200.00,800.00}}},
@@ -1690,10 +1591,6 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	}
 
 	ai->graph._print();
-
-	//for (Vector2f next : path) {
-	//	////std::////cout << "X: " << next.getXloc() << " Y: " << next.getYloc() << std::endl;
-	//}
 
 	ai->astar_search(staticRec);
 	// gameplay_functions->get_path(staticRec); //Generate the waypoints to the destination
@@ -1748,10 +1645,6 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	party3->setMode(Party::MODE_ATTACK);
 
 	Alliance::update_enemies();
-	//cout << Alex->getParty()->getAlliance()<< endl;
-
-	//partyM->addToPartyList(party);
-	//partyM->addToPartyList(party2);
 
 	//osi::GameWindow::init();
 	LOG("PAST WINDOW INIT ***********************");
@@ -1785,8 +1678,6 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 			}
 		}
 	});*/
-
-	//tm.join();
 
 	current_game_state = game_state::main_menu;
 
