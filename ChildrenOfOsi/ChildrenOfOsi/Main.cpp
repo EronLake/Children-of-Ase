@@ -158,7 +158,7 @@ int main() {
 void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 {
 	game_state current_game_state = game_state::load_game;
-	Rectangle::tex->setFile("Assets/Sprites/blank1.png", 1);
+	Rectangle::tex->setFile("Assets/Sprites/blankr.png", 1);
 	Point::tex->setFile("Assets/Sprites/point.png", 1);
 
 	RiverObj* rivObj = new RiverObj();
@@ -255,7 +255,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 
 	Input* iController = new Input(gameplay_functions, Alex, RenM->renderHelper, tBuffer, recVec_ptr, movVec_ptr);
 
-	gameplay_functions->add_hero("Yemoja", 5045, 13465, true);
+	gameplay_functions->add_hero("Yemoja", 6445, 10055, true);
 	gameplay_functions->add_hero("Oya", 17157, 20960, true);
 	tBuffer->run();
 	
@@ -1547,8 +1547,8 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 
 	staticRec->setName("Yemoja");
 	staticRec->setInteractable(true);
-	staticRec->setPersonality(30, 70, 80, 60, 30, 30, 50);// uncommented this
-	oya->setPersonality(30, 70, 80, 60, 30, 30, 50);// uncommented this
+	staticRec->setPersonality(30, 80, 80, 50, 50, 50, 80);// uncommented this
+	oya->setPersonality(80, 50, 80, 50, 80, 80, 50);// uncommented this
 
 	//staticRec->rel[OYA]->setAffinity(60);// uncommented this
 	//staticRec->rel[OYA]->setNotoriety(40);// uncommented this

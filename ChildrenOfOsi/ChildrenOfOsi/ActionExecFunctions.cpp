@@ -764,19 +764,29 @@ void ActionExecFunctions::execute_bribe(Action* bribe)
 	if (!bribe->getDoer()->getInCombat()) {
 		switch (bribe->checkpoint) {
 		case 0: //Determine the location that the bribe is happening
-			std::cout << bribe->getDoer()->getName() << " started bribe" << std::endl;
-			if (bribe->getDoer()->getParty()->get_perm()) {
-				Party* p = new Party();
-				p->add_party_to_party(bribe->getDoer()->getParty());
-				bribe->getDoer()->getVillage()->addToParties(p);
-			}
-			//ActionHelper::create_memory(bribe, bribe->getDoer());
-			bribe->getDoer()->set_action_destination(bribe->getReceiver()->getVillage()->get_village_location());
-			bribe->getDoer()->set_max_dist_act(30);
+			ActionHelper::set_timer(bribe, 3600);
+			bribe->getDoer()->set_busy(Hero::BUSY_DOER);
+			bribe->getReceiver()->set_busy(Hero::BUSY_REC);
 			bribe->checkpoint++;
 			break;
+		case 1: //Determine the location that the bribe is happening
+			if (ActionHelper::retrieve_time(bribe) == 0) {
+				std::cout << bribe->getDoer()->getName() << " started bribe" << std::endl;
+				if (bribe->getDoer()->getParty()->get_perm()) {
+					Party* p = new Party();
+					p->add_party_to_party(bribe->getDoer()->getParty());
+					bribe->getDoer()->getVillage()->addToParties(p);
+				}
 
-		case 1: //Create a greeting timer
+				//ActionHelper::create_memory(bribe, bribe->getDoer());
+
+				bribe->getDoer()->set_action_destination(bribe->getReceiver()->getVillage()->get_village_location());
+				bribe->getDoer()->set_max_dist_act(30);
+				bribe->checkpoint++;
+			}
+			break;
+
+		case 2: //Create a greeting timer
 			//get destination and not busy are both not worrking 
 			//std::cout << bribe->getDoer()->getName() << ": dest is: " << bribe->getDoer()->get_action_destination().getXloc() << "," << bribe->getDoer()->get_action_destination().getYloc() << "...busy is: " << bribe->getReceiver()->get_busy() << std::endl;
 			if (bribe->getDoer()->get_action_destination() == Vector2f(NULL, NULL) && (bribe->getReceiver()->get_busy() == Hero::NOT_BUSY)) {
@@ -787,7 +797,7 @@ void ActionExecFunctions::execute_bribe(Action* bribe)
 			}
 			break;
 
-		case 2: //Once the greeting timer is completed, take away money(placeholder) to simulate giving something for the bribe
+		case 3: //Once the greeting timer is completed, take away money(placeholder) to simulate giving something for the bribe
 			if (ActionHelper::retrieve_time(bribe) == 0) //Greeting timer complete
 			{
 				//bribe->getDoer()->set_action_destination(&bribe->getReceiver()->getLoc());
@@ -796,7 +806,7 @@ void ActionExecFunctions::execute_bribe(Action* bribe)
 				ActionHelper::create_memory(bribe, bribe->getReceiver());
 			}
 			break;
-		case 3: //If timer is complete, set village as destination, apply postconds, update memory
+		case 4: //If timer is complete, set village as destination, apply postconds, update memory
 			if (ActionHelper::retrieve_time(bribe) == 0) {
 
 				//Memory* doer_mem = bribe->getDoer()->find_mem(bribe->getName() + "_" + std::to_string(bribe->time_stamp));
@@ -835,7 +845,7 @@ void ActionExecFunctions::execute_bribe(Action* bribe)
 				//receiver_mem->setWhen(frame_count);
 			}
 			break;
-		case 4:
+		case 5:
 			if (bribe->getDoer()->get_action_destination() == Vector2f(NULL, NULL)) {
 				bribe->getDoer()->getParty()->setMode(Party::MODE_FLEE);
 				bribe->executed = true;
