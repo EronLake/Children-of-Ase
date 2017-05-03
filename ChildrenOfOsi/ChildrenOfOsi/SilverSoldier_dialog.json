@@ -306,8 +306,8 @@
     },
 
 	"Response_Recruit_For_Party":{
-	    "1": "Not in a million years!",
-        "2": "No thanks.",
+	    "1": "I will never join you, scum!",
+        "2": "We are too different. I won't join you.",
         "3": "Sure. I will join you.",
 		"4": "Sure. I will join you.",
         "5": "Sure. I will join you."

@@ -657,19 +657,24 @@ void DialogueController::otherConversationPoint(dialogue_point line)
 		}
     }
 	
-	message = other->getName() + ": " + reply_pt_sentence + "\n" +con_pt_sentence;
-	replyOptions = dialogue.get_possible_reply_pts(point[ConvPointName], optionsIndex);
-	
-	select = 0;
+
 
 	/*skips the player's reply point if the npc does not say a conversation 
 	point, if the npc tells the player that they already asked them something,
 	or if an npc runs out of relevant conversation points to say.
 	*/
-	if (point[ConvPointName] != "No_More_Phrases" && point[ConvPointName] != "Already_Asked" && point[ConvPointName] != "" && point[ConvPointName] != "No Quest")
+	if (point[ConvPointName] != "No_More_Phrases" && line[ConvPointName] != "Already_Asked" && point[ConvPointName] != "" && point[ConvPointName] != "No Quest") {
 		state = 2;
-	else
+		message = other->getName() + ": " + reply_pt_sentence + "\n" + con_pt_sentence;
+		replyOptions = dialogue.get_possible_reply_pts(point[ConvPointName], optionsIndex);
+
+		select = 0;
+	}
+	else {
+		message = other->getName() + ": " + reply_pt_sentence + "\n";
 		state = 1;//skip player reply if npc cannot give a conversation point
+	}
+		
 
 	DialogueController::scroll_control = 0;
 }
@@ -1026,20 +1031,29 @@ void DialogueController::other_response_soldier(std::string info, std::string he
 		Soldier* soldier;
 		soldier = dynamic_cast<Soldier*>(other);
 
+		std::string reply_pt_sentence = "";
+
 		//currently adds an NPC to the player's party right away if
 		//the player asks them to join(NPC always says yes)
 		//eventually make it so NPC can refuse to join player's party
 		if (replyString == "Response_Recruit_For_Party") {
-			player->getVillage()->barracks->addToParty(soldier, false);
-			//soldier->getParty()->setAlliance(player->getParty()->getAlliance());
-			soldier->setCurrentLeader(player);
-			soldier->setParty(player->getParty());
+			if (soldier->getVillage()->get_alliance() == player->getVillage()->get_alliance()) {
+				player->getVillage()->barracks->addToParty(soldier, false);
+				//soldier->getParty()->setAlliance(player->getParty()->getAlliance());
+				soldier->setCurrentLeader(player);
+				soldier->setParty(player->getParty());
+				reply_pt_sentence = dialogue.gen_dialog(line, temp_hero);
+			}
+			else { //they will say no if not part of same alliance as you
+				reply_pt_sentence = dialogue.gen_dialog_negative(line, temp_hero);
+			}
 		}
 
 		//removes an NPC of the player's choosing from their party
 		if (replyString == "Response_Remove_From_Party") {
 			soldier->setCurrentLeader(soldier);
 			player->getParty()->removeSoldier(soldier, true);
+			reply_pt_sentence = dialogue.gen_dialog(line, temp_hero);
 			//soldier->getParty()->removeSoldier(soldier, true);
 			//soldier->getParty()->setAlliance(player->getParty()->getAlliance());
 			//cout << soldier->getParty()->getAlliance();
@@ -1049,7 +1063,7 @@ void DialogueController::other_response_soldier(std::string info, std::string he
 			//std::cout << soldier->getCurrentLeader()->getName();
 		}
 
-		std::string reply_pt_sentence = dialogue.gen_dialog(line, temp_hero);
+		
 		message = other->getName() + ": " + reply_pt_sentence + "\n\n";
 
 		state = 7;
