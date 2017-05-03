@@ -2,10 +2,10 @@
 #include "ObjConfig.h"
 #include <ctime>
 
-bool MakeForest =false;
+bool MakeForest = false;
 bool PlacePlant = false;
 bool rand_gen = false;
-bool PlaceOasisPlant=false;
+bool PlaceOasisPlant = false;
 bool PlaceOasisShrub = false;
 bool Jungle_Config = true;
 float topLeftx;
@@ -42,7 +42,7 @@ void ObjConfig::import_config(vector<WorldObj*>* recVec, ChildrenOfOsi* gameplay
 		"config_jungle.json"
 	};
 
-	int region=0;
+	int region = 0;
 	if (Jungle_Config) {
 		WhichJson = "config.json";
 		region = JUNGLE;
@@ -54,8 +54,8 @@ void ObjConfig::import_config(vector<WorldObj*>* recVec, ChildrenOfOsi* gameplay
 
 	int numberOfWorldObj = 0;
 
-	if (MakeForest||PlacePlant||PlaceOasisPlant||PlaceOasisShrub) {
-		make_stuff(recVec, gameplay_func, tBuffer,region);
+	if (MakeForest || PlacePlant || PlaceOasisPlant || PlaceOasisShrub) {
+		make_stuff(recVec, gameplay_func, tBuffer, region);
 	}
 	else {
 		if (LOAD_REGIONS == 0) {
@@ -67,9 +67,9 @@ void ObjConfig::import_config(vector<WorldObj*>* recVec, ChildrenOfOsi* gameplay
 			std::ifstream file(WhichJson);
 
 			file >> root;
-
 			for (auto itr = root.begin(); itr != root.end(); itr++)
 			{
+
 				set_world_obj(recVec, gameplay_func, tBuffer, (*itr)["x"].asFloat(), (*itr)["y"].asFloat(),
 					(*itr)["width"].asFloat(), (*itr)["hight"].asFloat(),
 					(*itr)["name"].asString(), (*itr)["tex_file"].asString(),
@@ -82,25 +82,25 @@ void ObjConfig::import_config(vector<WorldObj*>* recVec, ChildrenOfOsi* gameplay
 		else if (LOAD_REGIONS == 1) {
 			for (int i = 0; i < 2; i++) {
 				WhichJson = ConfigFiles[i];
-			Json::Value root;
-			Json::Reader reader;
+				Json::Value root;
+				Json::Reader reader;
 
 
-			std::ifstream file(WhichJson);
+				std::ifstream file(WhichJson);
 
-			file >> root;
+				file >> root;
 
-			for (auto itr = root.begin(); itr != root.end(); itr++)
-			{
-				set_world_obj(recVec, gameplay_func, tBuffer, (*itr)["x"].asFloat(), (*itr)["y"].asFloat(),
-					(*itr)["width"].asFloat(), (*itr)["hight"].asFloat(),
-					(*itr)["name"].asString(), (*itr)["tex_file"].asString(),
-					(*itr)["frame_num"].asInt(),
-					(*itr)["bodyx1"].asFloat(), (*itr)["bodyx2"].asFloat(),
-					(*itr)["bodyy1"].asFloat(), (*itr)["bodyy2"].asFloat(), region);
-				numberOfWorldObj++;
+				for (auto itr = root.begin(); itr != root.end(); itr++)
+				{
+					set_world_obj(recVec, gameplay_func, tBuffer, (*itr)["x"].asFloat(), (*itr)["y"].asFloat(),
+						(*itr)["width"].asFloat(), (*itr)["hight"].asFloat(),
+						(*itr)["name"].asString(), (*itr)["tex_file"].asString(),
+						(*itr)["frame_num"].asInt(),
+						(*itr)["bodyx1"].asFloat(), (*itr)["bodyx2"].asFloat(),
+						(*itr)["bodyy1"].asFloat(), (*itr)["bodyy2"].asFloat(), region);
+					numberOfWorldObj++;
+				}
 			}
-		}
 		}
 		else if (LOAD_REGIONS == 2) {
 			WhichJson = ConfigFiles[0];
@@ -123,31 +123,31 @@ void ObjConfig::import_config(vector<WorldObj*>* recVec, ChildrenOfOsi* gameplay
 				numberOfWorldObj++;
 			}
 		}
-		else if(LOAD_REGIONS==3)
+		else if (LOAD_REGIONS == 3)
 		{
 			WhichJson = ConfigFiles[1];
-		Json::Value root;
-		Json::Reader reader;
+			Json::Value root;
+			Json::Reader reader;
 
 
-		std::ifstream file(WhichJson);
-		
-		file >> root;
-		
-		for (auto itr = root.begin(); itr != root.end(); itr++)
-		{
-			set_world_obj(recVec, gameplay_func, tBuffer, (*itr)["x"].asFloat(), (*itr)["y"].asFloat(),
-				(*itr)["width"].asFloat(), (*itr)["hight"].asFloat(),
-				(*itr)["name"].asString(), (*itr)["tex_file"].asString(),
-				(*itr)["frame_num"].asInt(),
-				(*itr)["bodyx1"].asFloat(), (*itr)["bodyx2"].asFloat(),
-				(*itr)["bodyy1"].asFloat(), (*itr)["bodyy2"].asFloat(),region);
-			numberOfWorldObj++;
-		}
+			std::ifstream file(WhichJson);
+
+			file >> root;
+
+			for (auto itr = root.begin(); itr != root.end(); itr++)
+			{
+				set_world_obj(recVec, gameplay_func, tBuffer, (*itr)["x"].asFloat(), (*itr)["y"].asFloat(),
+					(*itr)["width"].asFloat(), (*itr)["hight"].asFloat(),
+					(*itr)["name"].asString(), (*itr)["tex_file"].asString(),
+					(*itr)["frame_num"].asInt(),
+					(*itr)["bodyx1"].asFloat(), (*itr)["bodyx2"].asFloat(),
+					(*itr)["bodyy1"].asFloat(), (*itr)["bodyy2"].asFloat(), region);
+				numberOfWorldObj++;
+			}
 		}
 
 		std::cout << "done" << endl;
-		std::cout << "Number of World Objs "<< numberOfWorldObj << endl;
+		std::cout << "Number of World Objs " << numberOfWorldObj << endl;
 	}
 
 
@@ -175,7 +175,7 @@ void ObjConfig::make_stuff(vector<WorldObj*>* recVec, ChildrenOfOsi* gameplay_fu
 	for (auto itr = root.begin(); itr != root.end(); itr++)
 	{
 
-		if (MakeForest || PlacePlant||PlaceOasisPlant||PlaceOasisShrub) {
+		if (MakeForest || PlacePlant || PlaceOasisPlant || PlaceOasisShrub) {
 
 			if ((*itr)["name"].asString() == "JungleTopLeft") {
 				topLeftx = (*itr)["x"].asFloat();
@@ -489,7 +489,7 @@ void ObjConfig::make_stuff(vector<WorldObj*>* recVec, ChildrenOfOsi* gameplay_fu
 				int randomShrubsize = rand() % 10 + 60;
 				int offestleft = randomShrubsize;
 				set_world_obj(recVec, gameplay_func, tBuffer, randomX, randomY, 70, 70, TreeName.str(), WhichSprite, 1, 70, 70, 70, 70, JUNGLE);
-				
+
 				std::ofstream file;
 				file.open(WhichJson);
 
@@ -533,7 +533,7 @@ void ObjConfig::set_world_obj(vector<WorldObj*>* recVec, ChildrenOfOsi* gameplay
 
 		//set file takes up memory
 		tBuffer->run();
-		(*textureMapConfig)[Containers::texture_table[tex_file]]= pair<string, int>("Assets/Sprites/" + tex_file + ".png", frame_num);
+		(*textureMapConfig)[Containers::texture_table[tex_file]] = pair<string, int>("Assets/Sprites/" + tex_file + ".png", frame_num);
 		//Containers::texture_table[tex_file]->setFile("Assets/Sprites/" + tex_file + ".png", frame_num);
 		switch (region) {
 		case STANDARD:
