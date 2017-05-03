@@ -874,9 +874,9 @@ void Input::InputCheck()
 					}
 					if (planner->give_as_quest && !DialogueController::accepted_quest)
 					{
-						DialogueController::quest = planner->get_current_action();
-						DialogueController::offerQuest_hack_();
-						DialogueController::prompted_quest = true;
+						//DialogueController::quest = planner->get_current_action();
+						//DialogueController::offerQuest_hack_();
+						//DialogueController::prompted_quest = true;
 					}
 					else
 					{

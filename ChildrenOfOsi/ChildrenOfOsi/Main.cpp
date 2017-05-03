@@ -208,7 +208,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	Input* iController = new Input(gameplay_functions, Alex, RenM->renderHelper, tBuffer, recVec_ptr, movVec_ptr);
 
 	gameplay_functions->add_hero("Yemoja", 6445.0, 10355.0, true);
-	gameplay_functions->add_hero("Oya", 4400, 3600, true);
+	gameplay_functions->add_hero("Oya", 7445, 10555, true);
 	tBuffer->run();
 	
 
@@ -1599,7 +1599,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	Planner* OyaPlanner = new Planner(oya);
 	AIController::set_plan(YEMOJA, YemojaPlanner);
 	AIController::set_plan(OYA, OyaPlanner);
-	/*
+	
 	Action* test_ally = new Action(nullptr, nullptr, nullptr, 10, 1, "Create Alliance", "execute_train");
 	Action* test_train = new Action(staticRec, oya, nullptr, 10, 1, "Conquer", "execute_conquer");
 
@@ -1610,14 +1610,14 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	RelPost* post2 = new RelPost(Postcondition::AFF, 15);
 	
 
-	/*
+	
 	test_ally->req_preconds.push_back(std::make_shared<RelPrecon>(*prec));
 	test_ally->doer_succ_postconds.push_back(std::make_shared<RelPost>(*post));
 	
 	test_train->req_preconds.push_back(std::make_shared<RelPrecon>(*prec1));
 	test_train->doer_succ_postconds.push_back(std::make_shared<RelPost>(*post1));
 	test_train->doer_succ_postconds.push_back(std::make_shared<RelPost>(*post2));
-	*/
+	
 
 	//ActionPool act_pool(Alex);
 	//act_pool.macro.push_back(test_ally);
@@ -1845,12 +1845,11 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 			}
 			HUD::FPS = fps;
 			//cout << "FPS: " << fps << endl;
-			total_fps += fps;
-			frame_count++;
 
 			current_game_state = iController->current_game_state;
 		}
 		while (current_game_state == game_state::in_game) {
+
 			for (int i = 0; i < 10; i++) {
 				//cout << "Press Escape to pause game" << endl;
 			}
@@ -1996,14 +1995,14 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 				combatControl->update_soldier(soldiers_list[i], state);
 			}*/
 
-			std::thread AI([=]() {
-				combatControl->checkParties();
+		//	std::thread AI([=]() {
+				
+		//	});
+			//YemojaPlanner->set_current_action(test_train);
+			combatControl->checkParties();
 				for (int i = 0; i < soldiers_list.size(); i++) {
 					combatControl->update_soldier(soldiers_list[i], state);
 				}
-			});
-			//YemojaPlanner->set_current_action(test_train);
-
 			questM->update();
 
 			//draw
@@ -2040,7 +2039,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 //			cout << " first dest is " << staticRec->get_action_destination()->getXloc() << ", " << staticRec->get_action_destination()->getYloc() << endl;
 			AIController::execute();
 //			cout << "after execute dest is " << staticRec->get_action_destination()->getXloc() << ", " << staticRec->get_action_destination()->getYloc() << endl;
-			AI.join();
+			//AI.join();
 //			cout << "after thread join dest is " << staticRec->get_action_destination()->getXloc() << ", " << staticRec->get_action_destination()->getYloc() << endl;
 			if ((1000 / fs) > (clock() - start_tick)) { //delta_ticks)
 				Sleep((1000 / fs) - (clock() - start_tick));
@@ -2091,10 +2090,10 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 				fps = CLOCKS_PER_SEC / delta_ticks;
 			}
 			HUD::FPS = fps;
-			total_fps += fps;
+			//total_fps += fps;
 			//cout << "FPS: " << fps << endl;
 
-			frame_count++;
+			//frame_count++;
 			HUD::AVG = total_fps / frame_count;
 
 			current_game_state = iController->current_game_state;
