@@ -106,6 +106,9 @@ void HUD::setSprite()
 
 void HUD::drawHUD(WorldObj* obj)
 {
+  if(DialogueController::getState() != 0)
+    return;
+
   Player* player = nullptr;
   if(obj->getType() != WorldObj::TYPE_PLAYER)
     return;
@@ -125,11 +128,11 @@ void HUD::drawHUD(WorldObj* obj)
 
   // Draw the listing of active quests
   if(HUD::show_active_quests) {
-    GameWindow::createText("Active Quests", 50, 104.5, 150, 80, {0.0F, 0.0F, 0.0F});
-    GameWindow::createText("___________", 50, 105, 150, 80, {0.0F, 0.0F, 0.0F});
+    GameWindow::createText("ACTIVE QUESTS", 810, 180.5, 150, 80, {0.0F, 0.0F, 0.0F});
+    GameWindow::createText("_____________", 810, 180, 150, 80, {0.0F, 0.0F, 0.0F});
     vector<pair<Action*, int>> quests = player->get_quests();
     for(int i = 0; i < quests.size(); i++) {
-      GameWindow::createText(quests[i].first->getName() + ": " + to_string(quests[i].second), 50, 122 + (i * 15), 150, 80, {0.0F, 0.0F, 0.0F});
+      GameWindow::createText(quests[i].first->getName(), 810, 202 + (i * 15), 150, 80, {0.0F, 0.0F, 0.0F});
     }
   }
 }

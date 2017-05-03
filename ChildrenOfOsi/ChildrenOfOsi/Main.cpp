@@ -1769,7 +1769,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 			//cout << "FPS: " << fps << endl;
 
 			current_game_state = iController->current_game_state;
-			if(t0.joinable())t0.join();
+			//if(t0.joinable)t0.join();
 		}
 		while (current_game_state == game_state::in_game) {
 

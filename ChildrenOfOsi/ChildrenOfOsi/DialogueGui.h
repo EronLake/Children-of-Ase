@@ -16,25 +16,25 @@ class DialogueGui
   static constexpr float BACKGROUND_WIDTH = 640.0F;
   static constexpr float BACKGROUND_HEIGHT = 225.0F;
 
-  static constexpr float HEADER_X = 160.0F;
-  static constexpr float HEADER_Y = 225.0F;
+  static constexpr float HEADER_X = 169.0F;
+  static constexpr float HEADER_Y = 252.0F;
   static constexpr float HEADER_WIDTH = 250.0F;
   static constexpr float HEADER_HEIGHT = 75.0F;
 
-  static constexpr float ICON_SWORD_X = 202.5F;
-  static constexpr float ICON_SWORD_Y = 247.5F;
-  static constexpr float ICON_HEART_X = 247.5F;
-  static constexpr float ICON_HEART_Y = 247.5F;
-  static constexpr float ICON_FACE_X = 292.5F;
-  static constexpr float ICON_FACE_Y = 247.5F;
-  static constexpr float ICON_QUESTION_X = 337.5F;
-  static constexpr float ICON_QUESTION_Y = 247.5F;
+  static constexpr float ICON_SWORD_X = 211.5F;
+  static constexpr float ICON_SWORD_Y = 274.5F;
+  static constexpr float ICON_HEART_X = 256.5F;
+  static constexpr float ICON_HEART_Y = 274.5;
+  static constexpr float ICON_FACE_X = 301.5F;
+  static constexpr float ICON_FACE_Y = 274.5;
+  static constexpr float ICON_QUESTION_X = 346.5F;
+  static constexpr float ICON_QUESTION_Y = 274.5;
   static constexpr float ICON_WIDTH = 30.0F;
   static constexpr float ICON_HEIGHT = 30.0F;
 
   static constexpr float MESSAGE_X = 177.75F;
-  static constexpr float MESSAGE_Y = 327.75F;
-  static constexpr float MESSAGE_WIDTH = 605.0F;
+  static constexpr float MESSAGE_Y = 330.0F;
+  static constexpr float MESSAGE_WIDTH = 565.0F;
   static constexpr float MESSAGE_HEIGHT = -1.0F;
 
   static constexpr float OPTIONS_X = 192.75F;
