@@ -560,6 +560,7 @@ void ObjConfig::set_world_obj(vector<WorldObj*>* recVec, ChildrenOfOsi* gameplay
 
 	tBuffer->run();
 
+	Containers::worldObj_table[name]->setName(name);
 	Containers::worldObj_table[name]->setWidth(width);
 	Containers::worldObj_table[name]->setHeight(hight);
 
