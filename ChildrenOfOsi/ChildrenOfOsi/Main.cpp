@@ -1995,14 +1995,14 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 				combatControl->update_soldier(soldiers_list[i], state);
 			}*/
 
-			std::thread AI([=]() {
-				combatControl->checkParties();
+		//	std::thread AI([=]() {
+				
+		//	});
+			//YemojaPlanner->set_current_action(test_train);
+			combatControl->checkParties();
 				for (int i = 0; i < soldiers_list.size(); i++) {
 					combatControl->update_soldier(soldiers_list[i], state);
 				}
-			});
-			//YemojaPlanner->set_current_action(test_train);
-
 			questM->update();
 
 			//draw
@@ -2039,7 +2039,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 //			cout << " first dest is " << staticRec->get_action_destination()->getXloc() << ", " << staticRec->get_action_destination()->getYloc() << endl;
 			AIController::execute();
 //			cout << "after execute dest is " << staticRec->get_action_destination()->getXloc() << ", " << staticRec->get_action_destination()->getYloc() << endl;
-			AI.join();
+			//AI.join();
 //			cout << "after thread join dest is " << staticRec->get_action_destination()->getXloc() << ", " << staticRec->get_action_destination()->getYloc() << endl;
 			if ((1000 / fs) > (clock() - start_tick)) { //delta_ticks)
 				Sleep((1000 / fs) - (clock() - start_tick));

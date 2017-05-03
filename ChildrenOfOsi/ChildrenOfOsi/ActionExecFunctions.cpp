@@ -11,7 +11,9 @@ std::unordered_map<std::string, execute_ptr> ActionExecFunctions::ActionExecMap{
 	{ "execute_form_alliance",	&execute_form_alliance	},
 	{ "execute_fight_bandits",	&execute_fight_bandits	},
 	{ "execute_bribe",	        &execute_bribe          },
-	{ "execute_compliment",	    &execute_compliment     }
+	{ "execute_compliment",	    &execute_compliment     },
+	{ "execute_boast",          &execute_conversation   },
+	{ "execute_intimidate",     &execute_conversation   }
 };
 
 
@@ -79,12 +81,12 @@ void ActionExecFunctions::execute_train(Action* train) {
 		cout << "---------------------CASE 2---------------------" << endl;
 		cout << "retrieve time is " << ActionHelper::retrieve_time(train) << endl;
 		if (ActionHelper::retrieve_time(train) == 0) {
-			Memory* doer_mem = train->getDoer()->find_mem(train->getName() + std::to_string(train->time_stamp));
+	//		Memory* doer_mem = train->getDoer()->find_mem(train->getName() + std::to_string(train->time_stamp));
 			//Memory* receiver_mem = fight->getReceiver()->find_mem(fight->getName() + std::to_string(fight->time_stamp));
-			if (doer_mem == nullptr)
-			{
-				perror("something is wrong with the current hero memory creation function");
-			}
+	//		if (doer_mem == nullptr)
+	//		{
+	//			perror("something is wrong with the current hero memory creation function");
+	//		}
 			train->getDoer()->set_action_destination(train->getDoer()->getVillage()->get_village_location()); //Also predefined, maybe as "home_location" in hero
 			//print stats before applying post cond 
 			cout << train->getDoer()->name << "'s str of Shgango BEFORE train is " << train->getDoer()->rel[1]->getStrength() << endl;
@@ -95,9 +97,9 @@ void ActionExecFunctions::execute_train(Action* train) {
 			cout << train->getDoer()->name << "'s str of Shgango AFTER train is " << train->getDoer()->rel[1]->getStrength() << endl;
 			cout << train->getDoer()->name << "'s str of Yemoja AFTER train is " << train->getDoer()->rel[2]->getStrength() << endl;	//pretty sure only this one will work
 			cout << train->getDoer()->name << "'s str of Oya AFTER train is " << train->getDoer()->rel[3]->getStrength() << endl;
-			doer_mem->setCategory("success");			 //Call update_memory function
-			doer_mem->setReason("I am good at training");
-			doer_mem->setWhen(/*get global frame*/0);    
+	//		doer_mem->setCategory("success");			 //Call update_memory function
+	//		doer_mem->setReason("I am good at training");
+	//		doer_mem->setWhen(/*get global frame*/0);    
 			train->getDoer()->set_busy(Hero::NOT_BUSY);
 			train->getReceiver()->set_busy(Hero::NOT_BUSY);
 		}
@@ -118,10 +120,10 @@ void ActionExecFunctions::execute_train_with(Action* train_with) {
 		}
 		else
 		{
-			Memory* doer_mem = train_with->getDoer()->find_mem(train_with->getName() + std::to_string(train_with->time_stamp));
-			doer_mem->setCategory("fail");
-			doer_mem->setReason("they did not want to train with me");
-			doer_mem->setWhen(/*get global frame*/0); 
+	//		Memory* doer_mem = train_with->getDoer()->find_mem(train_with->getName() + std::to_string(train_with->time_stamp));
+	//		doer_mem->setCategory("fail");
+		//	doer_mem->setReason("they did not want to train with me");
+		//	doer_mem->setWhen(/*get global frame*/0); 
 		}
 
 		break;
@@ -148,21 +150,21 @@ void ActionExecFunctions::execute_train_with(Action* train_with) {
 		break;
 	case 4: //If timer is complete, set village as destination, apply postconds, update memory
 		if (ActionHelper::retrieve_time(train_with) == 0) {
-			Memory* doer_mem = train_with->getDoer()->find_mem(train_with->getName() + std::to_string(train_with->time_stamp));
+	//		Memory* doer_mem = train_with->getDoer()->find_mem(train_with->getName() + std::to_string(train_with->time_stamp));
 			//Memory* receiver_mem = fight->getReceiver()->find_mem(fight->getName() + std::to_string(fight->time_stamp));
-			if (doer_mem == nullptr)
-			{
-				perror("something is wrong with the current hero memory creation function");
-			}
+	//		if (doer_mem == nullptr)
+	//		{
+	//			perror("something is wrong with the current hero memory creation function");
+	//		}
 			train_with->getDoer()->getParty()->get_fight()->end_combat();
 			train_with->getDoer()->set_action_destination(train_with->getDoer()->getVillage()->get_village_location()); //Also predefined, maybe as "home_location" in hero
 			train_with->apply_postconditions(true);				 //Apply post-conditions
 			train_with->executed = true;
 			train_with->getDoer()->set_busy(Hero::NOT_BUSY);
 			train_with->getReceiver()->set_busy(Hero::NOT_BUSY);
-			doer_mem->setCategory("success");			 //Call update_memory function
-			doer_mem->setReason("I am good at training");
-			doer_mem->setWhen(/*get global frame*/0);
+	//		doer_mem->setCategory("success");			 //Call update_memory function
+	//		doer_mem->setReason("I am good at training");
+	//		doer_mem->setWhen(/*get global frame*/0);
 		}
 		break;
 
@@ -188,26 +190,26 @@ void ActionExecFunctions::execute_form_alliance(Action* form_alliance) {
 		if (form_alliance->getDoer()->get_action_destination() == Vector2f(NULL, NULL) && (form_alliance->getReceiver()->get_busy() == Hero::NOT_BUSY)) {
 			//Planner* hero_planner = ActionHelper::ai->get_plan(responder->name);
 			Memory* doer_mem = form_alliance->getDoer()->find_mem(form_alliance->getName() + std::to_string(form_alliance->time_stamp));
-			Memory* receiver_mem = form_alliance->getReceiver()->find_mem(form_alliance->getName() + std::to_string(form_alliance->time_stamp));
+			//Memory* receiver_mem = form_alliance->getReceiver()->find_mem(form_alliance->getName() + std::to_string(form_alliance->time_stamp));
 			if (ActionHelper::hero_respond(form_alliance)) {
 				form_alliance->apply_postconditions(true);
-				doer_mem->setCategory("success"); receiver_mem->setCategory("success");
-				doer_mem->setReason("We joined forces");
-				receiver_mem->setReason("We joined forces");
+	//			doer_mem->setCategory("success"); //receiver_mem->setCategory("success");
+	//			doer_mem->setReason("We joined forces");
+				//receiver_mem->setReason("We joined forces");
 
 			}
 			else {
 				form_alliance->apply_postconditions(false);
-				doer_mem->setCategory("failure"); receiver_mem->setCategory("success");
-				doer_mem->setReason("They rejected our Alliance");
-				receiver_mem->setReason("We rejected their Alliance");
+	//			doer_mem->setCategory("failure"); //receiver_mem->setCategory("success");
+	//			doer_mem->setReason("They rejected our Alliance");
+				//receiver_mem->setReason("We rejected their Alliance");
 			}
 			//update where
-			doer_mem->setWhere(std::to_string(form_alliance->getDoer()->getLoc().xloc));
-			receiver_mem->setWhere(std::to_string(form_alliance->getReceiver()->getLoc().xloc));
+	//		doer_mem->setWhere(std::to_string(form_alliance->getDoer()->getLoc().xloc));
+			///receiver_mem->setWhere(std::to_string(form_alliance->getReceiver()->getLoc().xloc));
 			//update when
-			doer_mem->setWhen(frame_count);
-			receiver_mem->setWhen(frame_count);
+	//		doer_mem->setWhen(frame_count);
+			//receiver_mem->setWhen(frame_count);
 			form_alliance->getDoer()->set_busy(Hero::NOT_BUSY);
 			form_alliance->getReceiver()->set_busy(Hero::NOT_BUSY);
 			form_alliance->executed = true;
@@ -287,38 +289,38 @@ void ActionExecFunctions::execute_fight(Action* fight)
 			//create_memory(fight, fight->getOwner()); do we want to update the owner immeadiately?
 
 		Memory* doer_mem = fight->getDoer()->find_mem(fight->getName() + std::to_string(fight->time_stamp));
-		Memory* receiver_mem = fight->getReceiver()->find_mem(fight->getName() + std::to_string(fight->time_stamp));
-		if (doer_mem == nullptr || receiver_mem == nullptr)
-		{
-			perror("something is wrong with the current hero memory creation function");
-		}
+		//Memory* receiver_mem = fight->getReceiver()->find_mem(fight->getName() + std::to_string(fight->time_stamp));
+	//	if (doer_mem == nullptr)//  || receiver_mem == nullptr)
+	//	{
+	//		perror("something is wrong with the current hero memory creation function");
+	//	}
 
 		//check if the target's party is empty(may need to change this to account for hero death)
 		if (fight->getReceiver()->getParty()->getMembers().size() == fight->getReceiver()->getParty()->get_down_members().size()) {
 			//Apply succ-post-conditions
 			fight->apply_postconditions(true);
 			//update_memory category as a success 
-			doer_mem->setCategory("success"); receiver_mem->setCategory("fail");
+	//		doer_mem->setCategory("success"); //receiver_mem->setCategory("fail");
 			//update reason
-			doer_mem->setReason("They couldn't handle me"); //need to create a reason function
-			receiver_mem->setReason("They attacked while my guard was down");
+	//		doer_mem->setReason("They couldn't handle me"); //need to create a reason function
+			//receiver_mem->setReason("They attacked while my guard was down");
 		}
 		else
 		{
 			//Apply fail-post-conditions
 			fight->apply_postconditions(false);
 			//update_memory as faiure
-			doer_mem->setCategory("fail"); receiver_mem->setCategory("success");
+	//		doer_mem->setCategory("fail");// receiver_mem->setCategory("success");
 			//update reason
-			doer_mem->setReason("I was too weak");//need to create a reason function
-			receiver_mem->setReason("They were foolish to attack");
+	//		doer_mem->setReason("I was too weak");//need to create a reason function
+			//receiver_mem->setReason("They were foolish to attack");
 		}
 		//update where
-		doer_mem->setWhere(std::to_string(fight->getDoer()->getLoc().xloc));
-		receiver_mem->setWhere(std::to_string(fight->getReceiver()->getLoc().xloc));
+	//	doer_mem->setWhere(std::to_string(fight->getDoer()->getLoc().xloc));
+		//receiver_mem->setWhere(std::to_string(fight->getReceiver()->getLoc().xloc));
 		//update when
-		doer_mem->setWhen(frame_count);
-		receiver_mem->setWhen(frame_count);
+	//	doer_mem->setWhen(frame_count);
+		//receiver_mem->setWhen(frame_count);
 
 		fight->getDoer()->getParty()->get_fight()->end_combat();
 		//Mark action as executed?
@@ -388,22 +390,22 @@ void ActionExecFunctions::execute_conquer(Action* conq)
 	case 3: //If win update apply win-post else apply loss-post and update memory
 			//create_memory(fight, fight->getOwner()); do we want to update the owner immeadiately?
 
-		Memory* doer_mem = conq->getDoer()->find_mem(conq->getName() + std::to_string(conq->time_stamp));
-		Memory* receiver_mem = conq->getReceiver()->find_mem(conq->getName() + std::to_string(conq->time_stamp));
-		if (doer_mem == nullptr || receiver_mem == nullptr)
-		{
-			perror("something is wrong with the current hero memory creation function");
-		}
+	//	Memory* doer_mem = conq->getDoer()->find_mem(conq->getName() + std::to_string(conq->time_stamp));
+		//Memory* receiver_mem = conq->getReceiver()->find_mem(conq->getName() + std::to_string(conq->time_stamp));
+	//	if (doer_mem == nullptr)// || receiver_mem == nullptr)
+	//	{
+	//		perror("something is wrong with the current hero memory creation function");
+	//	}
 
 		//check if the target's party is empty(may need to change this to account for hero death)
 		if (conq->getReceiver()->getVillage()->get_village_health() <= 0) {
 			//Apply succ-post-conditions
 			conq->apply_postconditions(true);
 			//update_memory category as a success 
-			doer_mem->setCategory("success"); receiver_mem->setCategory("fail");
+	//		doer_mem->setCategory("success"); //receiver_mem->setCategory("fail");
 			//update reason
-			doer_mem->setReason("They couldn't handle me"); //need to create a reason function
-			receiver_mem->setReason("They attacked while my guard was down");
+	//		doer_mem->setReason("They couldn't handle me"); //need to create a reason function
+			//receiver_mem->setReason("They attacked while my guard was down");
 			conq->getDoer()->getVillage()->conquer(conq->getReceiver()->getVillage());
 		}
 		else
@@ -411,17 +413,17 @@ void ActionExecFunctions::execute_conquer(Action* conq)
 			//Apply fail-post-conditions
 			conq->apply_postconditions(false);
 			//update_memory as faiure
-			doer_mem->setCategory("fail"); receiver_mem->setCategory("success");
+	//		doer_mem->setCategory("fail"); //receiver_mem->setCategory("success");
 			//update reason
-			doer_mem->setReason("I was too weak");//need to create a reason function
-			receiver_mem->setReason("They were foolish to attack");
+	//		doer_mem->setReason("I was too weak");//need to create a reason function
+			//receiver_mem->setReason("They were foolish to attack");
 		}
 		//update where
-		doer_mem->setWhere(std::to_string(conq->getDoer()->getLoc().xloc));
-		receiver_mem->setWhere(std::to_string(conq->getReceiver()->getLoc().xloc));
+	//	doer_mem->setWhere(std::to_string(conq->getDoer()->getLoc().xloc));
+		//receiver_mem->setWhere(std::to_string(conq->getReceiver()->getLoc().xloc));
 		//update when
-		doer_mem->setWhen(frame_count);
-		receiver_mem->setWhen(frame_count);
+	//	doer_mem->setWhen(frame_count);
+		//receiver_mem->setWhen(frame_count);
 
 		conq->getDoer()->getParty()->get_fight()->end_combat();
 		//Mark action as executed?
@@ -494,38 +496,38 @@ void ActionExecFunctions::execute_duel(Action* duel)
 			//create_memory(fight, fight->getOwner()); do we want to update the owner immeadiately?
 
 		Memory* doer_mem = duel->getDoer()->find_mem(duel->getName() + std::to_string(duel->time_stamp));
-		Memory* receiver_mem = duel->getReceiver()->find_mem(duel->getName() + std::to_string(duel->time_stamp));
-		if (doer_mem == nullptr || receiver_mem == nullptr)
-		{
-			perror("something is wrong with the current hero memory creation function");
-		}
+		//Memory* receiver_mem = duel->getReceiver()->find_mem(duel->getName() + std::to_string(duel->time_stamp));
+	//	if (doer_mem == nullptr)// || receiver_mem == nullptr)
+	//	{
+	//		perror("something is wrong with the current hero memory creation function");
+	//	}
 
 		//check if the target's party is empty(may need to change this to account for hero death)
 		if (duel->getReceiver()->getParty()->getMembers().size() == duel->getReceiver()->getParty()->get_down_members().size()) {
 			//Apply succ-post-conditions
 			duel->apply_postconditions(true);
 			//update_memory category as a success 
-			doer_mem->setCategory("success"); receiver_mem->setCategory("fail");
+	//		doer_mem->setCategory("success");// receiver_mem->setCategory("fail");
 			//update reason
-			doer_mem->setReason("They couldn't handle me"); //need to create a reason function
-			receiver_mem->setReason("They attacked while my guard was down");
+	//		doer_mem->setReason("They couldn't handle me"); //need to create a reason function
+			//receiver_mem->setReason("They attacked while my guard was down");
 		}
 		else
 		{
 			//Apply fail-post-conditions
 			duel->apply_postconditions(false);
 			//update_memory as faiure
-			doer_mem->setCategory("fail"); receiver_mem->setCategory("success");
+	//		doer_mem->setCategory("fail");// receiver_mem->setCategory("success");
 			//update reason
-			doer_mem->setReason("I was too weak");//need to create a reason function
-			receiver_mem->setReason("They were foolish to attack");
+	//		doer_mem->setReason("I was too weak");//need to create a reason function
+			//receiver_mem->setReason("They were foolish to attack");
 		}
 		//update where
-		doer_mem->setWhere(std::to_string(duel->getDoer()->getLoc().xloc));
-		receiver_mem->setWhere(std::to_string(duel->getReceiver()->getLoc().xloc));
+	//	doer_mem->setWhere(std::to_string(duel->getDoer()->getLoc().xloc));
+		//receiver_mem->setWhere(std::to_string(duel->getReceiver()->getLoc().xloc));
 		//update when
-		doer_mem->setWhen(frame_count);
-		receiver_mem->setWhen(frame_count);
+	//	doer_mem->setWhen(frame_count);
+		//receiver_mem->setWhen(frame_count);
 
 		duel->getDoer()->getParty()->get_fight()->end_combat();
 		//Mark action as executed?
@@ -577,35 +579,35 @@ void ActionExecFunctions::execute_conversation(Action* conv)
 		break;
 	case 4: //If timer is complete, set village as destination, apply postconds, update memory
 		if (ActionHelper::retrieve_time(conv) == 0) {
-			Memory* doer_mem = conv->getDoer()->find_mem(conv->getName() + std::to_string(conv->time_stamp));
-			Memory* receiver_mem = conv->getReceiver()->find_mem(conv->getName() + std::to_string(conv->time_stamp));
-			if (doer_mem == nullptr)
-			{
-				perror("something is wrong with the current hero memory creation function");
-			}
+		//	Memory* doer_mem = conv->getDoer()->find_mem(conv->getName() + std::to_string(conv->time_stamp));
+		//	Memory* receiver_mem = conv->getReceiver()->find_mem(conv->getName() + std::to_string(conv->time_stamp));
+		//	if (doer_mem == nullptr)
+		//	{
+		//		perror("something is wrong with the current hero memory creation function");
+		//	}
 			conv->getDoer()->set_action_destination(conv->getDoer()->getVillage()->get_village_location()); //Also predefined, maybe as "home_location" in hero
 			int chance=rand() % 2-1;
 			if (chance) {
 				conv->apply_postconditions(true);				 //Apply post-conditions
-				doer_mem->setCategory("success");			 //Call update_memory function
-				doer_mem->setReason("The coversation went well");
-				receiver_mem->setCategory("failure");
-				receiver_mem->setReason("The coversation went the way they wanted it to");
+		//		doer_mem->setCategory("success");			 //Call update_memory function
+		//		doer_mem->setReason("The coversation went well");
+				//receiver_mem->setCategory("failure");
+				//receiver_mem->setReason("The coversation went the way they wanted it to");
 			} else {
 				conv->apply_postconditions(false);				 //Apply post-conditions
-				doer_mem->setCategory("fail");			 //Call update_memory function
-				doer_mem->setReason("The conversation didn't go well");
-				receiver_mem->setCategory("success");
-				receiver_mem->setReason("The conversation went the way I wanted it to");
+		//		doer_mem->setCategory("fail");			 //Call update_memory function
+		//		doer_mem->setReason("The conversation didn't go well");
+				//receiver_mem->setCategory("success");
+			//	receiver_mem->setReason("The conversation went the way I wanted it to");
 			}
 			conv->getDoer()->set_busy(Hero::NOT_BUSY);
 			conv->getReceiver()->set_busy(Hero::NOT_BUSY);
 			conv->executed = true;
-			doer_mem->setWhere(std::to_string(conv->getDoer()->getLoc().xloc));
-			receiver_mem->setWhere(std::to_string(conv->getReceiver()->getLoc().xloc));
+		//	doer_mem->setWhere(std::to_string(conv->getDoer()->getLoc().xloc));
+		//	receiver_mem->setWhere(std::to_string(conv->getReceiver()->getLoc().xloc));
 			//update when
-			doer_mem->setWhen(frame_count);
-			receiver_mem->setWhen(frame_count);
+		//	doer_mem->setWhen(frame_count);
+			//receiver_mem->setWhen(frame_count);
 		}
 		break;
 
@@ -627,7 +629,7 @@ void ActionExecFunctions::execute_bribe(Action* bribe)
 
 		case 1: //Create a greeting timer
 			//get destination and not busy are both not worrking 
-
+			std::cout << bribe->getDoer()->getName() << ": dest is: " << bribe->getDoer()->get_action_destination().getXloc() << "," << bribe->getDoer()->get_action_destination().getYloc() << "...busy is: " << bribe->getReceiver()->get_busy() << std::endl;
 			if (bribe->getDoer()->get_action_destination() == Vector2f(NULL, NULL) && (bribe->getReceiver()->get_busy() == Hero::NOT_BUSY)) {
 				ActionHelper::set_timer(bribe, 60);
 				bribe->getDoer()->set_busy(Hero::BUSY_DOER);
@@ -647,35 +649,35 @@ void ActionExecFunctions::execute_bribe(Action* bribe)
 		case 3: //If timer is complete, set village as destination, apply postconds, update memory
 			if (ActionHelper::retrieve_time(bribe) == 0) {
 				Memory* doer_mem = bribe->getDoer()->find_mem(bribe->getName() + std::to_string(bribe->time_stamp));
-				Memory* receiver_mem = bribe->getReceiver()->find_mem(bribe->getName() + std::to_string(bribe->time_stamp));
-				if (doer_mem == nullptr)
-				{
-					perror("something is wrong with the current hero memory creation function");
-				}
+				//Memory* receiver_mem = bribe->getReceiver()->find_mem(bribe->getName() + std::to_string(bribe->time_stamp));
+		//		if (doer_mem == nullptr)
+		//		{
+		//			perror("something is wrong with the current hero memory creation function");
+		//		}
 				bribe->getDoer()->set_action_destination(bribe->getDoer()->getVillage()->get_village_location()); //Also predefined, maybe as "home_location" in hero
 				int chance = rand() % 2 - 1;
 				if (chance) {
 					bribe->apply_postconditions(true);				 //Apply post-conditions
-					doer_mem->setCategory("success");			 //Call update_memory function
-					doer_mem->setReason("The bribe went well");
-					receiver_mem->setCategory("success");
-					receiver_mem->setReason("I took a bribe");
+		//			doer_mem->setCategory("success");			 //Call update_memory function
+		//			doer_mem->setReason("The bribe went well");
+					//receiver_mem->setCategory("success");
+					//receiver_mem->setReason("I took a bribe");
 				}
 				else {
 					bribe->apply_postconditions(false);				 //Apply post-conditions
-					doer_mem->setCategory("fail");			 //Call update_memory function
-					doer_mem->setReason("The bribe didn't go well");
-					receiver_mem->setCategory("success");
-					receiver_mem->setReason("I refused a bribe");
+		//			doer_mem->setCategory("fail");			 //Call update_memory function
+		//			doer_mem->setReason("The bribe didn't go well");
+					//receiver_mem->setCategory("success");
+					//receiver_mem->setReason("I refused a bribe");
 				}
 				bribe->executed = true;
 				bribe->getDoer()->set_busy(Hero::NOT_BUSY);
 				bribe->getReceiver()->set_busy(Hero::NOT_BUSY);
-				doer_mem->setWhere(std::to_string(bribe->getDoer()->getLoc().xloc));
-				receiver_mem->setWhere(std::to_string(bribe->getReceiver()->getLoc().xloc));
+		//		doer_mem->setWhere(std::to_string(bribe->getDoer()->getLoc().xloc));
+				//receiver_mem->setWhere(std::to_string(bribe->getReceiver()->getLoc().xloc));
 				//update when
-				doer_mem->setWhen(frame_count);
-				receiver_mem->setWhen(frame_count);
+		//		doer_mem->setWhen(frame_count);
+				//receiver_mem->setWhen(frame_count);
 			}
 			break;
 
@@ -703,27 +705,27 @@ void ActionExecFunctions::execute_compliment(Action* compliment)
 		break;
 	case 2:
 		if (ActionHelper::retrieve_time(compliment) == 0) {//checks to see if greeting timer is done
-			Memory* doer_mem = compliment->getDoer()->find_mem(compliment->getName() + std::to_string(compliment->time_stamp));
+	//		Memory* doer_mem = compliment->getDoer()->find_mem(compliment->getName() + std::to_string(compliment->time_stamp));
 			//Memory* receiver_mem = fight->getReceiver()->find_mem(fight->getName() + std::to_string(fight->time_stamp));
-			if (doer_mem == nullptr)
-			{
-				perror("something is wrong with the current hero memory creation function");
-			}
+	//		if (doer_mem == nullptr)
+	//		{
+	//			perror("something is wrong with the current hero memory creation function");
+	//		}
 			compliment->getDoer()->set_action_destination(compliment->getDoer()->getVillage()->get_village_location()); //Also predefined, maybe as "home_location" in hero
 			if (ActionHelper::conversation(compliment)) {
 				compliment->apply_postconditions(true);				 //Apply post-conditions
-				doer_mem->setCategory("success");			 //Call update_memory function
-				doer_mem->setReason("It looks like my compliment was received well");
+	//			doer_mem->setCategory("success");			 //Call update_memory function
+	//			doer_mem->setReason("It looks like my compliment was received well");
 			}
 			else {
 				compliment->apply_postconditions(false);				 //Apply post-conditions
-				doer_mem->setCategory("fail");			 //Call update_memory function
-				doer_mem->setReason("They didn't accept my compliment well");
+	//			doer_mem->setCategory("fail");			 //Call update_memory function
+	//			doer_mem->setReason("They didn't accept my compliment well");
 			}
 			compliment->executed = true;
 			compliment->getDoer()->set_busy(Hero::NOT_BUSY);
 			compliment->getReceiver()->set_busy(Hero::NOT_BUSY);
-			doer_mem->setWhen(/*get global frame*/0);
+	//		doer_mem->setWhen(/*get global frame*/0);
 		}
 		break;
 
