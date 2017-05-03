@@ -95,8 +95,8 @@ void PlayerActExecFunctions::execute_end(bool if_succ) {
 	//special cases that need to be handled are in this gaurd (may want to make a helper function)
 
 	//NEEDS TO BE TESTED... should it check for Occupy?
-	if (act_name == "Occupy" && player->getParty()->get_fight()->is_over()) {
-		cur_action->getReceiver()->getVillage()->add_to_village_health(cur_action->getDoer()->getParty()->getMembers().size()*(-10));
+	if (act_name == "Conquer" && player->getParty()->get_fight()->is_over()) {
+		cur_action->getReceiver()->getVillage()->add_to_village_health(cur_action->getDoer()->getParty()->getMembers().size()*(-25));
 		if (cur_action->getReceiver()->getVillage()->get_village_health() > 0) {
 			cur_action->getReceiver()->getVillage()->defenders->add_party_to_party(cur_action->getReceiver()->getVillage()->barracks);
 			//if (player->getParty()->get_fight()!=nullptr)player->getParty()->get_fight()->add_to_defenders(cur_action->getReceiver()->getVillage()->defenders);

@@ -694,7 +694,7 @@ int Movement::attack(WorldObj* obj) {
 												if ((s2->getType() == WorldObj::TYPE_PLAYER) && (s->getParty()->getMode()!=Party::MODE_FLEE) && (!s->get_incapacitated())) {
 													if (s->get_warning() > 0) {
 														s->setCurrentEnemy(s2);
-														Hero* hero = dynamic_cast<Hero*>(s);
+														Hero* hero = dynamic_cast<Hero*>(s->getParty()->getLeader());
 														if ((!s->getInCombat()) && (!s2->getInCombat())) {
 															if (hero) {
 																if (Party::dist_location_to_location(s2->getLoc(), s2->getVillage()->get_village_location()) < 500) {

@@ -172,7 +172,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	bool switch_music = false;
 	bool in_village = false;
 
-	gameplay_functions->add_hero("Shango", 6445, 10055, true);
+	gameplay_functions->add_hero("Shango", 5045, 13465, true);
 	tBuffer->run();
 
 	Player* Alex = dynamic_cast<Player*>(Containers::hero_table["Shango"]);
@@ -1344,7 +1344,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	staticRec->melee->setHeight(50);
 	staticRec->set_creator_of_melee();
 	staticRec->melee->setStaminaCost(90);
-	staticRec->setHealth(140);
+	staticRec->setHealth(15);
 	staticRec->setMaxStamina(300);
 	staticRec->melee->sprite.setTexture(Containers::texture_table["border"]);
 
@@ -1462,7 +1462,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 		blueSoldiers[i]->melee->setHeight(50);
 		blueSoldiers[i]->set_creator_of_melee();
 		blueSoldiers[i]->melee->setStaminaCost(90);
-		blueSoldiers[i]->setHealth(90);
+		blueSoldiers[i]->setHealth(15);
 		blueSoldiers[i]->melee->setStaminaCost(120);
 		blueSoldiers[i]->setMaxStamina(300);
 		blueSoldiers[i]->addAttackType(rockThrow);
@@ -1769,7 +1769,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 			//cout << "FPS: " << fps << endl;
 
 			current_game_state = iController->current_game_state;
-			if(t0.joinable())t0.join();
+			//if(t0.joinable())t0.join();
 		}
 		while (current_game_state == game_state::in_game) {
 
