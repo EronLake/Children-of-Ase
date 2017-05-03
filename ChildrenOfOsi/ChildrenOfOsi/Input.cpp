@@ -857,7 +857,7 @@ void Input::InputCheck()
 				//DialogueController::state = 7;
 				DialogueController::create_farewell();
 
-				WorldObj* other = DialogueController::getOther();
+				/*WorldObj* other = DialogueController::getOther();
 				//std:://cout << "HERO: " << other->getName() << std::endl;
 				if (other->getType() == WorldObj::TYPE_HERO) {
 					std::cout << "Right type" << std::endl;
@@ -883,14 +883,14 @@ void Input::InputCheck()
 						gameplay_functions->change_song("Change", RegionState::current_region.getRTheme(), RegionState::current_region.getRTheme());
 						RegionState::in_village = false;
 						DialogueController::exitDialogue();
-					}
-				}
-				else
-				{
+					}*/
+				//}
+				//else
+				//{
 					gameplay_functions->change_song("Change", RegionState::current_region.getRTheme(), RegionState::current_region.getRTheme());
 					RegionState::in_village = false;
 					DialogueController::exitDialogue();
-				}
+				//}
 			}
 			if (T) {
 				Hero* them = dynamic_cast<Hero*>(DialogueController::getOther());

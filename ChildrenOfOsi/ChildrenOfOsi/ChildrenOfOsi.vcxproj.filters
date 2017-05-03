@@ -655,6 +655,9 @@
     <None Include="Dialogue_config.json">
       <Filter>Dialogue</Filter>
     </None>
+    <None Include="Oya_dialog.json">
+      <Filter>Dialogue</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="ChildrenOfOsi1.rc" />

@@ -204,6 +204,18 @@ dialogue_point DialogueHelper::choose_conv_pt(std::vector<ConversationLogObj*> c
 
 		}
 	}
+
+	//remove conversation points from possible replies if they are in the NPC's permanent conversation vec
+	for (auto i = other->conversation_log.begin(); i != other->conversation_log.end(); ++i) {
+		appealPoint tmp = std::make_pair(0, (*i)->get_conv_point());
+		auto it = std::find(possible_replies.begin(), possible_replies.end(), tmp);
+		if (it != possible_replies.end() && (*i)->get_who() == 2) {
+			possible_replies.erase(std::remove(possible_replies.begin(), possible_replies.end(), *it), possible_replies.end());
+		}
+		else {
+
+		}
+	}
 	//relationship filtering
 	
 	//choose based on personality
@@ -656,7 +668,7 @@ void DialogueHelper::fill_conversations() {
 		else if (itor->second->get_icon() == "ncp" && itor->second->get_name().find("Advise To", 0) == string::npos) {
 			possible_conv_pts[NotorietyIcon].push_back(itor->second->dpoint);
 		}
-		else {
+		else if(itor->second->get_icon() == "nrp"){
 			possible_reply_pts[QuestionMarkIcon].push_back(itor->second->dpoint);
 			possible_reply_pts[StrengthIcon].push_back(itor->second->dpoint);
 			possible_reply_pts[AffinityIcon].push_back(itor->second->dpoint);
