@@ -98,7 +98,8 @@ void GAMEPLAY_LOOP(QuadTree* _Quadtree);
 bool lineCollision(Line l1, Line l2);
 /// Helper function passed to thread to set file. Param is a tuple, first being the Texture* to work on, and second being the param needed to call setFile().
 void set_file_with_thread(Texture* t, const pair<string, int>* p_tuple) {
-	std::lock_guard<std::mutex> guard(mu); t->setFile(p_tuple->first, p_tuple->second);
+	//std::lock_guard<std::mutex> guard(mu); 
+	t->setFile(p_tuple->first, p_tuple->second);
 }
 
 int main() {
@@ -188,10 +189,12 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	// Player* Alex = new Player(SHANGO, Vector2f(6445.0, 10155.0), 150.0, 150.0);	//init player
 	
 
-	Region* Marsh = new Region("Marsh", "Music/RegionThemes/DesertRegion.flac", "Music/HeroThemes/ogun.flac", { 1000,1000 });
-	Region* Desert = new Region("Desert", "Music/RegionThemes/MarshRegion.flac", "Music/HeroThemes/oya.flac", { 5000,5000 });
-	Region* Mountain = new Region("Mountain", "Music/RegionThemes/MountainRegion.flac", "nothing", { 10000,1000 });
-	Region* Jungle = new Region("Jungle", "Music/RegionThemes/JungleRegion.flac", "Music/HeroThemes/oya.flac", { 5000,10000 });
+
+	Region* Marsh = new Region("Marsh", "Music/RegionThemes/DesertRegion.flac", "Music/HeroThemes/oya.flac", { 8000,2900 });
+	Region* Desert = new Region("Desert", "Music/RegionThemes/MarshRegion.flac", "Music/HeroThemes/ogun.flac", { 5045,13465 });
+	Region* Mountain = new Region("Mountain", "Music/RegionThemes/MountainRegion.flac", "nothing", { 21000,4000 });
+	Region* Jungle = new Region("Jungle", "Music/RegionThemes/JungleRegion.flac", "Music/HeroThemes/oya.flac", { 17157,20960 });
+
 	
 	Region current_region = *Desert;
 	Region next_region = *Desert;
@@ -207,8 +210,8 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 
 	Input* iController = new Input(gameplay_functions, Alex, RenM->renderHelper, tBuffer, recVec_ptr, movVec_ptr);
 
-	gameplay_functions->add_hero("Yemoja", 6445.0, 10355.0, true);
-	gameplay_functions->add_hero("Oya", 4400, 3600, true);
+	gameplay_functions->add_hero("Yemoja", 5045, 13465, true);
+	gameplay_functions->add_hero("Oya", 17157, 20960, true);
 	tBuffer->run();
 	
 
@@ -299,11 +302,11 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	});
 
 
-	gameplay_functions->add_texture("objTexture", 0, 0, 0);
-	tBuffer->run();
+	//gameplay_functions->add_texture("objTexture", 0, 0, 0);
+	//tBuffer->run();
 	// Texture* objTexture = new Texture();
-	textureMap[Containers::texture_table["objTexture"]] = pair<string, int>("Assets/Sprites/YemojasHouse.png", 1);
-	standard.push_back(Containers::texture_table["objTexture"]);
+	//textureMap[Containers::texture_table["objTexture"]] = pair<string, int>("Assets/Sprites/YemojasHouse.png", 1);
+	//standard.push_back(Containers::texture_table["objTexture"]);
 
 	//Texture* playerTexture = new Texture();
 	//Texture* playerIdleTex = new Texture();
@@ -1005,42 +1008,17 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	vector<WorldObj*> vec;
 	//vec.push_back(&Alex->melee);
 
-	for (int i = 1; i < 6; i++) {
-		if (i > 4) {
-			WorldObj* obj = new WorldObj(Vector2f(4100, 3550), 500, 333);
-
-			obj->sprite.setTexture(Containers::texture_table["objTexture"]);
-			obj->setInteractable(true);
-			std::string building = "Building ";
-			obj->setName(building += std::to_string(i));
-			//objs->offsetBody(0, 50, 50, 50, 50);
-			obj->offsetBody(0, 25, 50, 25, 25);
-			vec.push_back(obj);
-			continue;
-		}
-
-		WorldObj* objs = new WorldObj(Vector2f(220 + 50 * i, 300 * (i * 2)), 600.0, 400.0);
-		objs->sprite.setTexture(Containers::texture_table["objTexture"]);
-		objs->setInteractable(true);
-		std::string building = "Building ";
-		objs->setName(building += std::to_string(i));
-		//objs->offsetBody(0, 50, 50, 50, 50);
-		objs->offsetBody(0, 110, 150, 120, 60);
-		recVec.push_back(objs);
-
-	}
-
 	vector<Soldier*> silverSoldier;
-	int silverNum = 4;
+	int silverNum = 2;
 	for (int i = 0; i < silverNum; i++) {
-		silverSoldier.push_back(new Soldier(6745, 10355 + (i * 20), false));
+		silverSoldier.push_back(new Soldier(17157, 20960 + (i * 20), false));
 		gameplay_functions->add_Attack(silverSoldier[i]->getKey(), silverSoldier[i]->body[0].getX(), silverSoldier[i]->body[0].getY(), true, 10);
 	}
 	tBuffer->run();
 	vector<Soldier*> blueSoldiers;
-	int blueNum = 4;
+	int blueNum = 2;
 	for (int i = 0; i < blueNum; i++) {
-		blueSoldiers.push_back(new Soldier(6030, 4000 + (i * 20), false));
+		blueSoldiers.push_back(new Soldier(5045, 13465 + (i * 20), false));
 		gameplay_functions->add_Attack(blueSoldiers[i]->getKey(), blueSoldiers[i]->body[0].getX(), blueSoldiers[i]->body[0].getY(), true, 10);
 	}
 	tBuffer->run();
@@ -1080,29 +1058,22 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 		}
 		RegionState::regions.erase(RegionState::regions.begin()+closest);
 	}
-	//HDC hdc = wglGetCurrentDC();
-	//HGLRC mainContext = wglGetCurrentContext();
+
 	HGLRC loaderContext0 = wglCreateContext(hdc);
 	wglShareLists(mainContext, loaderContext0);
 	std::thread t0([=]() {
 		wglMakeCurrent(hdc, loaderContext0);
-		//int textureMapCounter = 0;
 		for (int i = 0; i < standard.size(); i++) {
 			set_file_with_thread(standard[i], &textureMap.find(standard[i])->second);
 		}
-		/*for (auto it = starting_location.begin(); it != starting_location.end(); ++it) {
-			for (int i = 0; i < (*it).size(); i++) {
-				set_file_with_thread((*it)[i], &textureMap.find((*it)[i])->second);
-			}
-		}*/
 		wglMakeCurrent(nullptr, nullptr);
 		wglDeleteContext(loaderContext0);
-		for (auto it = recVec.begin(); it != recVec.end(); ++it) {
+		/*for (auto it = recVec.begin(); it != recVec.end(); ++it) {
 			(*it)->sprite.reset_texture();
 		}
 		for (auto it = movVec.begin(); it != movVec.end(); ++it) {
 			(*it)->sprite.reset_texture();
-		}
+		}*/
 		Alex->sprite.reset_texture();
 		glFinish();
 	});
@@ -1111,7 +1082,6 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	wglShareLists(mainContext, loaderContext1);
 	std::thread t1([=]() {
 		wglMakeCurrent(hdc, loaderContext1);
-		//int textureMapCounter = 0;
 		for (int i = 0; i < (starting_location[0]).size(); i++) {
 			set_file_with_thread(starting_location[0].at(i), &textureMap.find(starting_location[0].at(i))->second);
 		}
@@ -1134,13 +1104,11 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 		}
 		glFinish();
 	});
-	//HDC hdc = wglGetCurrentDC();// Simply gets the device context, which is needed to initialize a GL context, not really used for anything else
-	//HGLRC mainContext = wglGetCurrentContext();//Sets the default GL context to main
+
 	HGLRC loaderContext2 = wglCreateContext(hdc);//Creates the new GL context that we will use for loading
 	wglShareLists(mainContext, loaderContext2);//Shares the information between the loading context and the main context
 	std::thread t2([=]() {//makes the thread. [=] is a cpp Lambda representation
 		wglMakeCurrent(hdc, loaderContext2);//Sets the current context to the loader context
-		//int textureMapCounter = 0;
 		for (int i = 0; i < (starting_location[1]).size(); i++) {
 			set_file_with_thread(starting_location[1].at(i), &textureMap.find(starting_location[1].at(i))->second);
 		}
@@ -1153,11 +1121,6 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 		for (int i = 0; i < (starting_location[2]).size(); i++) {
 			set_file_with_thread(starting_location[2].at(i), &textureMap.find(starting_location[2].at(i))->second);
 		}
-		/*for (auto it = ++starting_location.begin(); it != starting_location.end(); ++it) {
-			for (int i = 0; i < (*it).size(); i++) {
-				set_file_with_thread((*it)[i], &textureMap.find((*it)[i])->second);
-			}
-		}*/
 		wglMakeCurrent(nullptr, nullptr);//unassigns the current gl context
 		wglDeleteContext(loaderContext2);//deletes the loading context now that it is not needed
 		for (auto it = recVec.begin(); it != recVec.end(); ++it) {
@@ -1168,14 +1131,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 		}
 		glFinish(); //Forces all gl calls to be completed before execution
 	});
-	//t.join(); // Forces the thread, t, to fully load the project, which takes a  lot of time but looks nicer
-
-	/*int textureMapCounter = 0;
-	for (const auto& it : textureMap) {
-		pair<Texture*, pair<string, int>>* temp_tuple = new pair<Texture*, pair<string, int>>(it.first, it.second);
-		//std:://cout << "WORKING ON " << temp_tuple->second.first << endl;
-		set_file_with_thread(temp_tuple);
-	}*/
+	
 	Alex->sprite.setTexture(Containers::texture_table["playerTexture"]);
 	Alex->sprite.setIdleTexture(Containers::texture_table["playerIdleTex"]);
 	Alex->sprite.up = Containers::texture_table["upRunTex"];
@@ -1226,6 +1182,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	Alex->melee->setSpeed(5);
 	Alex->melee->setBaseDir(4);
 	Alex->melee->setCoolDown(35);
+	Alex->melee->setStaminaCost(45);
 	Alex->melee->setPause(-1);
 	Alex->melee->setDestroy(false);
 	Alex->melee->setKeep(true);
@@ -1249,12 +1206,13 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	Alex->addAttackType(rockThrow);
 
 	Attack* fireball = new Attack();
-	fireball->setDmg(15);
-	fireball->setSpeed(10);
+	fireball->setDmg(20);
+	fireball->setSpeed(20);
 	fireball->setDestroy(true);
 	fireball->setDuration(100);
-	fireball->setCoolDown(180);
-	fireball->setPause(24);
+	fireball->setCoolDown(120);
+	fireball->setPause(16);
+	fireball->setAseCost(25);
 	fireball->sprite.up = Containers::texture_table["fireUp"];
 	fireball->sprite.left = Containers::texture_table["fireLeft"];
 	fireball->sprite.right = Containers::texture_table["fire"];
@@ -1268,13 +1226,14 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	DialogueController::setPlayer(Alex);
 	//vector<WorldObj*> recVec;
 	Attack* spin = new Attack();
-	spin->setDmg(7);
+	spin->setDmg(15);
 	spin->setSpeed(18);
 	spin->setDestroy(false);
 	spin->setDuration(7);
 	spin->setBaseDir(4);
 	spin->setCoolDown(100);
 	spin->setPause(18);
+	spin->setStaminaCost(30);
 	spin->setTurn(true);
 	spin->sprite.setTexture(Containers::texture_table["border"]);
 	Alex->addAttackType(spin);
@@ -1375,7 +1334,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 
 	staticRec->melee = Containers::Attack_table[staticRec->getKey()];
 	staticRec->melee->setDmg(15);
-	staticRec->melee->setSpeed(5);
+	staticRec->melee->setSpeed(8);
 	staticRec->melee->setBaseDir(4);
 	staticRec->melee->setCoolDown(60);
 	staticRec->melee->setPause(-1);
@@ -1385,15 +1344,15 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	staticRec->melee->setHeight(50);
 	staticRec->set_creator_of_melee();
 	staticRec->melee->setStaminaCost(90);
-	staticRec->setHealth(100);
+	staticRec->setHealth(140);
 	staticRec->setMaxStamina(300);
 	staticRec->melee->sprite.setTexture(Containers::texture_table["border"]);
 
 	oya->melee = Containers::Attack_table[oya->getKey()];
-	oya->melee->setDmg(10);
-	oya->melee->setSpeed(5);
+	oya->melee->setDmg(18);
+	oya->melee->setSpeed(7);
 	oya->melee->setBaseDir(4);
-	oya->melee->setCoolDown(80);
+	oya->melee->setCoolDown(70);
 	oya->melee->setPause(-1);
 	oya->melee->setDestroy(false);
 	oya->melee->setKeep(true);
@@ -1401,7 +1360,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	oya->melee->setHeight(50);
 	oya->set_creator_of_melee();
 	oya->melee->setStaminaCost(120);
-	oya->setHealth(100);
+	oya->setHealth(160);
 	oya->setMaxStamina(300);
 	oya->melee->sprite.setTexture(Containers::texture_table["border"]);
 
@@ -1439,7 +1398,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 		silverSoldier[i]->setInteractable(true);
 		silverSoldier[i]->setName("silverSoldier");
 		silverSoldier[i]->melee = Containers::Attack_table[silverSoldier[i]->getKey()];
-		silverSoldier[i]->melee->setDmg(10);
+		silverSoldier[i]->melee->setDmg(11);
 		silverSoldier[i]->melee->setSpeed(5);
 		silverSoldier[i]->melee->setBaseDir(4);
 		silverSoldier[i]->melee->setCoolDown(60);
@@ -1450,12 +1409,12 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 		silverSoldier[i]->melee->setHeight(50);
 		silverSoldier[i]->set_creator_of_melee();
 		silverSoldier[i]->melee->setStaminaCost(90);
-		silverSoldier[i]->setHealth(100);
+		silverSoldier[i]->setHealth(110);
 		silverSoldier[i]->melee->setStaminaCost(120);
 		silverSoldier[i]->setMaxStamina(300);
 		silverSoldier[i]->addAttackType(rockThrow);
 		silverSoldier[i]->melee->sprite.setTexture(Containers::texture_table["border"]);
-		silverSoldier[i]->setSpeed(8);
+		silverSoldier[i]->setSpeed(7);
 	}
 
 	for (int i = 0; i < blueNum; i++) {
@@ -1503,7 +1462,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 		blueSoldiers[i]->melee->setHeight(50);
 		blueSoldiers[i]->set_creator_of_melee();
 		blueSoldiers[i]->melee->setStaminaCost(90);
-		blueSoldiers[i]->setHealth(50);
+		blueSoldiers[i]->setHealth(90);
 		blueSoldiers[i]->melee->setStaminaCost(120);
 		blueSoldiers[i]->setMaxStamina(300);
 		blueSoldiers[i]->addAttackType(rockThrow);
@@ -1515,7 +1474,8 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	ai->graph.vertices = vertices;
 	ai->graph.obstacles = edges;
 	for (Vector2f vert : ai->graph.vertices) {
-		//////std::////cout << "X: " << vert.getXloc() << " Y: " << vert.getYloc() << std::endl;
+		
+		std::cout << "X: " << vert.getXloc() << " Y: " << vert.getYloc() << std::endl;
 	}
 	for (auto edge : ai->graph.obstacles) {
 		//////std::////cout << "EDGE from " << edge.first.getXloc() << "," << edge.first.getYloc() << " to " << edge.second.getXloc() << "," << edge.second.getYloc() << std::endl;
@@ -1599,7 +1559,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	Planner* OyaPlanner = new Planner(oya);
 	AIController::set_plan(YEMOJA, YemojaPlanner);
 	AIController::set_plan(OYA, OyaPlanner);
-	/*
+	
 	Action* test_ally = new Action(nullptr, nullptr, nullptr, 10, 1, "Create Alliance", "execute_train");
 	Action* test_train = new Action(staticRec, oya, nullptr, 10, 1, "Conquer", "execute_conquer");
 
@@ -1610,29 +1570,13 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	RelPost* post2 = new RelPost(Postcondition::AFF, 15);
 	
 
-	/*
+	
 	test_ally->req_preconds.push_back(std::make_shared<RelPrecon>(*prec));
 	test_ally->doer_succ_postconds.push_back(std::make_shared<RelPost>(*post));
 	
 	test_train->req_preconds.push_back(std::make_shared<RelPrecon>(*prec1));
 	test_train->doer_succ_postconds.push_back(std::make_shared<RelPost>(*post1));
 	test_train->doer_succ_postconds.push_back(std::make_shared<RelPost>(*post2));
-	*/
-
-	//ActionPool act_pool(Alex);
-	//act_pool.macro.push_back(test_ally);
-	//act_pool.micro.push_back(test_train);
-	//act_pool.updateMiddle();
-	//vector<Action*> actions = act_pool.getActions(staticRec, test_ally);
-	//for (auto action : actions) {
-		//std:://cout << action->getName() << std::endl;
-	//}
-
-	//Alex->add_quest(test_ally, 8);
-	//staticRec->add_quest(test_train, 1);
-	//Alex->add_quest(test_train, 2);
-	//questM->heros.push_back(Alex);
-	//questM->heros.push_back(staticRec);
 	
 	///////////////////////////////////////////////////////////////////////////////////////////
 	///////////////////////////////////////////////////////////////////////////////////////////
@@ -1649,21 +1593,6 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	AIController::init_plans();
    // test_train->setDoer(staticRec);
 	//YemojaPlanner->set_current_action(test_train);
-
-	/*
-	WorldObj* tree = new WorldObj(Vector2f(4000, 2600), 800, 500);
-	tree->sprite.setTexture(treeTex);
-	tree->offsetBody(0, 275, 375, 375, 75);
-	WorldObj* tree1 = new WorldObj(Vector2f(3300, 4600), 700, 600);
-	tree1->sprite.setTexture(treeTex1);
-	tree1->offsetBody(0, 275, 375, 375, 75);
-	WorldObj* tree2 = new WorldObj(Vector2f(4700, 4500), 700, 600);
-	tree2->sprite.setTexture(treeTex2);
-	tree2->offsetBody(0, 275, 375, 375, 75);
-	//WorldObj* tree1 = new WorldObj(Vector2f())
-	//staticRec->goal.setXloc(500);
-	//staticRec->goal.setYloc(1200);
-	*/
 
 	/*	VisibilityGraph graph{ {
 			{{1400.00,800.00}, {{1400.00, 900.00},{1200.00,800.00}}},
@@ -1696,10 +1625,6 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 
 	ai->graph._print();
 
-	//for (Vector2f next : path) {
-	//	////std::////cout << "X: " << next.getXloc() << " Y: " << next.getYloc() << std::endl;
-	//}
-
 	ai->astar_search(staticRec);
 	// gameplay_functions->get_path(staticRec); //Generate the waypoints to the destination
 	staticRec->setMode(WANDER);
@@ -1708,55 +1633,54 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	Party* party = new Party();
 	Party* party2 = new Party();
 	Party* party3 = new Party();
+	Party* party4 = new Party();
 	party->addToParty(Alex, true);
 	for (int i = 0; i < silverSoldier.size(); i++) {
-		party->addToParty(silverSoldier[i], false);
+		party4->addToParty(silverSoldier[i], false);
 	}
 	for (int i = 0; i < blueSoldiers.size(); i++) {
-		party2->addToParty(blueSoldiers[i], false);
+		party3->addToParty(blueSoldiers[i], false);
 	}
 	party3->addToParty(staticRec, true);
+	party4->addToParty(oya, true);
 	Village* v1 = new Village();
-	Village* v2 = new Village();
+	//Village* v2 = new Village();
 	Village* v3 = new Village();
 	Village* v4 = new Village();
-	v1->set_village_location({ 6045.0, 5155.0 });
-	v2->set_village_location({ 6045.0, 15155.0 });
-	v3->set_village_location({ 6445.0, 10355.0 });
+	v1->set_village_location(Alex->getLoc());
+	//v2->set_village_location({ 6030, 4000 });
+	v3->set_village_location(staticRec->getLoc());
 	v4->set_village_location(oya->getLoc());
 	v1->add_member(Alex);
 	for (int i = 0; i < silverSoldier.size(); i++) {
-		v1->add_member(silverSoldier[i]);
+		v4->add_member(silverSoldier[i]);
 	}
 	for (int i = 0; i < blueSoldiers.size(); i++) {
-		v2->add_member(blueSoldiers[i]);
+		v3->add_member(blueSoldiers[i]);
 	}
 	v3->add_member(staticRec);
 	v4->add_member(oya);
 	v1->leader = Alex;
 	v3->leader = staticRec;
 	v4->leader = oya;
-	v4->defenders->addToParty(oya, true);
+	//v4->defenders->addToParty(oya, true);
 	Alliance* a1 = new Alliance(v1);
-	Alliance* a2 = new Alliance(v2);
+	//Alliance* a2 = new Alliance(v2);
 	Alliance* a3 = new Alliance(v3);
 	Alliance* a4 = new Alliance(v4);
 	v1->addToParties(party);
-	v2->addToParties(party2);
+	//v2->addToParties(party2);
 	v3->addToParties(party3);
+	v4->addToParties(party4);
 	War* war = new War();
-	war->setWarParties(v1, v2);
+	//war->setWarParties(v1, v2);
 	//a1->add_alliance_to_alliance(v3->get_alliance());
-	if (blueSoldiers.size() > 0)party2->set_defend(blueSoldiers[0]->getLoc());
-	party2->setMode(Party::MODE_DEFEND);
+	//if (blueSoldiers.size() > 0)party2->set_defend(blueSoldiers[0]->getLoc());
+	//party2->setMode(Party::MODE_DEFEND);
 	party3->set_defend(staticRec->getLoc());
 	party3->setMode(Party::MODE_ATTACK);
 
 	Alliance::update_enemies();
-	//cout << Alex->getParty()->getAlliance()<< endl;
-
-	//partyM->addToPartyList(party);
-	//partyM->addToPartyList(party2);
 
 	//osi::GameWindow::init();
 	LOG("PAST WINDOW INIT ***********************");
@@ -1791,8 +1715,6 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 		}
 	});*/
 
-	//tm.join();
-
 	current_game_state = game_state::main_menu;
 
 	//insert all of the immovable objects into the quad tree
@@ -1807,6 +1729,8 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	cout << "size of recvec is " << recVec.size() << endl;
 	cout << "size of largestruct is " << largeStruct->size() << endl;
 	for (auto it : *largeStruct) cout << (it)->getName() << endl;
+
+	t0.join();
 
 	while (GameWindow::isRunning()) {
 		while (current_game_state == game_state::main_menu) {
@@ -1845,12 +1769,11 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 			}
 			HUD::FPS = fps;
 			//cout << "FPS: " << fps << endl;
-			total_fps += fps;
-			frame_count++;
 
 			current_game_state = iController->current_game_state;
 		}
 		while (current_game_state == game_state::in_game) {
+
 			for (int i = 0; i < 10; i++) {
 				//cout << "Press Escape to pause game" << endl;
 			}
@@ -1924,7 +1847,8 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 
 			state = DialogueController::getState();
 
-			if (Alex->getX() > 5285.83 && Alex->getX() < 7079.86) { //Ogun Desert
+			//commented out for demo
+			/*if (Alex->getX() > 660 && Alex->getX() < 10847.5) { //Ogun Desert
 				if (Alex->getY() < 3523.33) {
 					if (RegionState::current_region == *Desert)
 						RegionState::next_region = *Marsh;
@@ -1947,7 +1871,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 					}
 				}
 			}
-			if (Alex->getX() > 13091 && Alex->getX() < 13825.9) {
+			if (Alex->getX() > 660 && Alex->getX() < 25000) {
 				if (Alex->getY() < 5132.23) {
 
 					if (RegionState::current_region == *Mountain) {
@@ -1959,8 +1883,33 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 						RegionState::next_region = *Mountain;
 				}
 			}
-			if (Alex->getX() > 3479.67 && Alex->getX() < 9446.06) {
-				if (Alex->getY() < 15980.7) {
+			if (Alex->getX() > 3479.67 && Alex->getX() < 10847.5) {
+				if (Alex->getY() < 17000.7) {
+					if (RegionState::current_region == *Jungle)
+						RegionState::next_region = *Desert;
+				}
+				else {
+					if (RegionState::current_region == *Desert) {
+						RegionState::next_region = *Jungle;
+					}
+				}
+			}*/
+
+			//only 3 regions for demo
+			if (Alex->getX() > 660 && Alex->getX() < 25000 ){ //Ogun Desert
+				if (Alex->getY() < 3523.33) {
+					if (RegionState::current_region == *Desert)
+						RegionState::next_region = *Marsh;
+
+				}
+				else {
+					if (RegionState::current_region == *Marsh) {
+						RegionState::next_region = *Desert;
+					}
+				}
+			}
+			if (Alex->getX() > 600 && Alex->getX() < 25000) {
+				if (Alex->getY() < 20000.7) {
 					if (RegionState::current_region == *Jungle)
 						RegionState::next_region = *Desert;
 				}
@@ -1996,14 +1945,14 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 				combatControl->update_soldier(soldiers_list[i], state);
 			}*/
 
-			std::thread AI([=]() {
-				combatControl->checkParties();
+		//	std::thread AI([=]() {
+				
+		//	});
+			//YemojaPlanner->set_current_action(test_train);
+			combatControl->checkParties();
 				for (int i = 0; i < soldiers_list.size(); i++) {
 					combatControl->update_soldier(soldiers_list[i], state);
 				}
-			});
-			//YemojaPlanner->set_current_action(test_train);
-
 			questM->update();
 
 			//draw
@@ -2040,7 +1989,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 //			cout << " first dest is " << staticRec->get_action_destination()->getXloc() << ", " << staticRec->get_action_destination()->getYloc() << endl;
 			AIController::execute();
 //			cout << "after execute dest is " << staticRec->get_action_destination()->getXloc() << ", " << staticRec->get_action_destination()->getYloc() << endl;
-			AI.join();
+			//AI.join();
 //			cout << "after thread join dest is " << staticRec->get_action_destination()->getXloc() << ", " << staticRec->get_action_destination()->getYloc() << endl;
 			if ((1000 / fs) > (clock() - start_tick)) { //delta_ticks)
 				Sleep((1000 / fs) - (clock() - start_tick));
@@ -2091,10 +2040,10 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 				fps = CLOCKS_PER_SEC / delta_ticks;
 			}
 			HUD::FPS = fps;
-			total_fps += fps;
+			//total_fps += fps;
 			//cout << "FPS: " << fps << endl;
 
-			frame_count++;
+			//frame_count++;
 			HUD::AVG = total_fps / frame_count;
 
 			current_game_state = iController->current_game_state;

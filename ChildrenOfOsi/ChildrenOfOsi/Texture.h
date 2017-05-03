@@ -12,6 +12,8 @@
 #include "GLEW\glew.h"
 #include "GLFW/glfw3.h"
 #include "SOIL/SOIL.h"
+#include <iostream>
+#include <chrono>
 #include <thread> 
 #include <mutex> 
 

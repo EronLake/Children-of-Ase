@@ -540,7 +540,7 @@ void Input::edit_object() {
 }
 
 
-void Input::add_point_to_file() {
+void Input::add_point_to_file(std::string file_name) {
 	double xpos;
 	double ypos;
 	glfwGetCursorPos(GameWindow::window, &xpos, &ypos);
@@ -561,9 +561,9 @@ void Input::add_point_to_file() {
 	system("PAUSE");
 }
 
-void Input::skip_line() {
+void Input::skip_line(std::string file_name) {
 	std::ofstream rivFile;
-	rivFile.open("rivLine.txt", std::ios_base::app);
+	rivFile.open(file_name, std::ios_base::app);
 	rivFile << endl;
 	rivFile << oldPoint.first << " " << oldPoint.second << " ";
 	rivFile.close();
@@ -581,6 +581,7 @@ void Input::InputCheck()
 	short E = GetKeyState('E') >> 15;
 	short Q = GetKeyState('Q') >> 15;
 	short H = GetKeyState('H') >> 15; //set home point
+	short I = GetKeyState('I') >> 15;
 	short J = GetKeyState('J') >> 15; // Base attack
 	short K = GetKeyState('K') >> 15; // Projectile
 	short L = GetKeyState('L') >> 15; // Spin attack
@@ -623,7 +624,10 @@ void Input::InputCheck()
 			Player* t = CheckClass::isPlayer(player);
 			gameplay_functions->combat(player);
 			if (SHIFT) {
-				t->setSpeed(15);
+				if (t->getStamina() > 0) {
+					t->setSpeed(10);
+					t->setStamina(t->getStamina()-1);
+				}
 				if (MAP_EDITOR) { t->setSpeed(15 * 2); }
 			}
 			else {
@@ -713,7 +717,7 @@ void Input::InputCheck()
 						}
 					}
 				}
-				else if (R) {
+				else if (K) {
 					if (t) {
 						if (t->getCool(1)) {
 							//////std:://cout << "Pressed Shift+R" << std::endl;
@@ -722,7 +726,7 @@ void Input::InputCheck()
 						}
 					}
 				}
-				else if (K) {
+				/*else if (K) {
 					if (t) {
 						if (t->getCool(0)) {
 							//////std:://cout << "Pressed R" << std::endl;
@@ -730,7 +734,7 @@ void Input::InputCheck()
 							gameplay_functions->melee(t);
 						}
 					}
-				}
+				}*/
 				else if (L) {
 					if (t) {
 						if (t->getCool(2)) {
@@ -745,19 +749,20 @@ void Input::InputCheck()
 				}
 				float firstOld = 0;
 				float secondOld = 0;
-				if (G) {
+				if (Y) {
 					t->getParty()->set_defend(t->getLoc());
 					t->getParty()->setMode(Party::MODE_DEFEND);
+					t->getParty()->removeSoldier(t, true);
 				}
-				if (Y) {
+				if (I) {
 					t->getParty()->setMode(Party::MODE_ATTACK);
 				}
 				if (U) {
 					t->getParty()->setMode(Party::MODE_FLEE);
 				}
-				if (H) {
+			/*	if (H) {
 					t->getParty()->set_home(t->getLoc());
-				}
+				}*/
 				if (ONE) {
 					t->getParty()->clear_patrol_route();
 				}
@@ -796,10 +801,10 @@ void Input::InputCheck()
 
 				}
 				if (P && (GetKeyState(VK_LBUTTON) & 0x100) != 0) {
-					add_point_to_file();
+					add_point_to_file("rivLine.txt");
 				}
 				if (Z) {
-					skip_line();
+					skip_line("rivLine.txt");
 				}
 				if (SHIFT && Z) {
 					system("PAUSE");
@@ -834,7 +839,7 @@ void Input::InputCheck()
 			if (count > 0) {
 				count--;
 			}
-			if (SHIFT && Q && count == 0) {
+			/*if (SHIFT && Q && count == 0) {
 				WorldObj* other = DialogueController::getOther();
 				if (other->getType() > WorldObj::TYPE_NPC) {
 					Soldier* follower = dynamic_cast<Soldier*>(other);
@@ -851,7 +856,7 @@ void Input::InputCheck()
 					}
 				}
 				count = 10;
-			}
+			}*/
 			if (Q) {
 				//DialogueController::exitDialogue();
 				//DialogueController::state = 7;
@@ -874,9 +879,9 @@ void Input::InputCheck()
 					}
 					if (planner->give_as_quest && !DialogueController::accepted_quest)
 					{
-						DialogueController::quest = planner->get_current_action();
-						DialogueController::offerQuest_hack_();
-						DialogueController::prompted_quest = true;
+						//DialogueController::quest = planner->get_current_action();
+						//DialogueController::offerQuest_hack_();
+						//DialogueController::prompted_quest = true;
 					}
 					else
 					{

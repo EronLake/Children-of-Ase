@@ -106,6 +106,6 @@ class HUD
   Texture *keybind_display_tex;
 
   void drawMainHUD(Player *player);
-  void drawMinimap(Player *player);
+  void drawMinimap(Player* player, Hero* yemoja, Hero* oya);
   void drawKeybindDisplay();
 };

@@ -49,6 +49,7 @@ Hero::Hero(int _name, float x, float y, bool col) :SplSoldier(x, y, col)
 	}
 	action_timer = 0; //initialized to one so the check doesn't go below 0
 	set_killable(false);
+	busy = NOT_BUSY;
 }
 
 

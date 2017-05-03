@@ -162,8 +162,8 @@ int Movement::move_up_left(WorldObj* obj) {
 				//	// EVEN AFTER I FLIP THE LINES ACROSS THE Y AXIS, WHEN THE PLAYER MOVES DOWN, THE Y COORD IS INCREASING, SO IT"S AS IF HE IS GOING UP!!!
 				//}
 				LOG("failed to move up. collision.");
-				obj->shiftX(diagYSpeed*speed_magnifier * 2);
-				obj->shiftY(diagYSpeed*speed_magnifier * 2);
+				obj->shiftX(diagYSpeed*speed_magnifier * 2.5);
+				obj->shiftY(diagYSpeed*speed_magnifier * 2.5);
 				break;
 			}
 		}
@@ -249,8 +249,8 @@ int Movement::move_up_right(WorldObj* obj) {
 					//	// EVEN AFTER I FLIP THE LINES ACROSS THE Y AXIS, WHEN THE PLAYER MOVES DOWN, THE Y COORD IS INCREASING, SO IT"S AS IF HE IS GOING UP!!!
 					//}
 					LOG("failed to move up. collision.");
-					obj->shiftX(-diagYSpeed*speed_magnifier*2);
-					obj->shiftY(diagYSpeed*speed_magnifier * 2);
+					obj->shiftX(-diagYSpeed*speed_magnifier*2.5);
+					obj->shiftY(diagYSpeed*speed_magnifier*2.5);
 					break;
 				}
 		}
@@ -394,8 +394,8 @@ int Movement::move_down_left(WorldObj* obj) {
 				//	// EVEN AFTER I FLIP THE LINES ACROSS THE Y AXIS, WHEN THE PLAYER MOVES DOWN, THE Y COORD IS INCREASING, SO IT"S AS IF HE IS GOING UP!!!
 				//}
 				LOG("failed to move up. collision.");
-				obj->shiftX(diagXSpeed*speed_magnifier*2);
-				obj->shiftY(-diagYSpeed*speed_magnifier*2);
+				obj->shiftX(diagXSpeed*speed_magnifier*2.5);
+				obj->shiftY(-diagYSpeed*speed_magnifier*2.5);
 				break;
 			}
 		}
@@ -480,8 +480,8 @@ int Movement::move_down_right(WorldObj* obj) {
 				//	// EVEN AFTER I FLIP THE LINES ACROSS THE Y AXIS, WHEN THE PLAYER MOVES DOWN, THE Y COORD IS INCREASING, SO IT"S AS IF HE IS GOING UP!!!
 				//}
 				LOG("failed to move up. collision.");
-				obj->shiftX(-diagXSpeed*speed_magnifier*2);
-				obj->shiftY(-diagYSpeed*speed_magnifier*2);
+				obj->shiftX(-diagXSpeed*speed_magnifier*2.5);
+				obj->shiftY(-diagYSpeed*speed_magnifier*2.5);
 				break;
 			}
 		}
@@ -783,6 +783,7 @@ bool Movement::collision(WorldObj* recA, WorldObj* recB)
 {
 	for (int i = 0; i < (*recA).body.size(); i++) {
 		for (int j = 0; j < (*recB).body.size(); j++) {
+
 			bool xCollide = coordOverlap(recA->body[i].getX(), recB->body[j].getX(), recB->body[j].getX() + recB->body[j].getWidth()) || coordOverlap(recB->body[j].getX(), recA->body[i].getX(), recA->body[i].getX() + recA->body[i].getWidth());
 			bool yCollide = coordOverlap(recA->body[i].getY(), recB->body[j].getY(), recB->body[j].getY() + recB->body[j].getHeight()) || coordOverlap(recB->body[j].getY(), recA->body[i].getY(), recA->body[i].getY() + recA->body[i].getHeight());
 			if (xCollide && yCollide)return true;
