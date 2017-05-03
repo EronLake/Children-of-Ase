@@ -106,6 +106,9 @@ void HUD::setSprite()
 
 void HUD::drawHUD(WorldObj* obj)
 {
+  if(DialogueController::getState() != 0)
+    return;
+
   Player* player = nullptr;
   if(obj->getType() != WorldObj::TYPE_PLAYER)
     return;
