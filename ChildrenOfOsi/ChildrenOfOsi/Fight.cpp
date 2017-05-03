@@ -273,7 +273,7 @@ void Fight::update_fight() {
 	update_radius();
 	over = check_for_winner();
 	if (over) {
-		if (player->getParty()->get_fight() == this && player->cur_action!=nullptr && player->cur_action != NULL) {
+		if (player->getParty()->get_fight() == this && (player->cur_action!=nullptr && player->cur_action != NULL)) {
 			PlayerActExecFunctions::execute_end(true);
 		}
 	}
@@ -310,9 +310,15 @@ bool Fight::check_for_winner() {
 }
 
 void Fight::update_all_fights() {
-	for (auto it = fights_world.begin(); it != fights_world.end();++it) {
-		if (!(*it)->is_over())
-			(*it)->update_fight();
+	for (auto it = fights_world.begin(); it != fights_world.end();) {
+		if (*it == nullptr || *it == NULL)
+		{
+			it=fights_world.erase(it);
+		}
+		else {
+			if (!(*it)->is_over())(*it)->update_fight();
+			++it;
+		}
 	}
 }
 
@@ -320,11 +326,13 @@ void Fight::bring_out_your_dead() {
 	vector<Soldier*> zombies = Party::grave->getMembers();
 	for (auto it = zombies.begin(); it != zombies.end(); ++it) {
 		if (!(*it)->sprite.getLock()) {
-			(*it)->setLoc((*it)->getVillage()->get_village_location());
 			Party::grave->removeSoldier((*it),false);
-			(*it)->getVillage()->barracks->addToParty((*it),false);
-			(*it)->setHealth((*it)->get_max_health());
-			(*it)->setInCombat(false);
+			if ((*it)->getType() < WorldObj::TYPE_HERO) {
+				(*it)->getVillage()->barracks->addToParty((*it), false);
+				(*it)->setHealth((*it)->get_max_health());
+				(*it)->setInCombat(false);
+				(*it)->setLoc((*it)->getVillage()->get_village_location());
+			}
 		}
 	}
 }
@@ -418,7 +426,7 @@ void Fight::check_should_flee(Party* p) {
 		if (tmp < 1)tmp = 1;
 		total_sold = total_sold - total_enemies;
 		total_enemies = total_enemies / tmp;
-		if (total_enemies > (total_sold * 3)) {
+		if (total_enemies > (total_sold * 3) && ((p->getLeader()->getHealth()*4)<=p->getLeader()->get_max_health())) {
 			p->setMode(Party::MODE_FLEE);
 		}
 	}

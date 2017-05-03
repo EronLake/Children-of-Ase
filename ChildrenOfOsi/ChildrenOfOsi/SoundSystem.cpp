@@ -37,7 +37,7 @@ FMOD_RESULT result;
 		string jungle = "Music/RegionThemes/JungleRegion.flac";
 		string mountain = "Music/RegionThemes/MountainRegion.flac";
 		string marsh = "Music/RegionThemes/MarshRegion.flac";
-		string ogun = "Music/Music/HeroThemes/ogun.flac";
+		string ogun = "Music/HeroThemes/ogun.flac";
 		string oya = "Music/HeroThemes/oya.flac";
 
 		string bump = "SFX/bump_0.wav";

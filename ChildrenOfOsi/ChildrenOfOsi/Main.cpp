@@ -189,10 +189,12 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	// Player* Alex = new Player(SHANGO, Vector2f(6445.0, 10155.0), 150.0, 150.0);	//init player
 	
 
-	Region* Marsh = new Region("Marsh", "Music/RegionThemes/DesertRegion.flac", "Music/HeroThemes/ogun.flac", { 11875,3333 });
-	Region* Desert = new Region("Desert", "Music/RegionThemes/MarshRegion.flac", "Music/HeroThemes/oya.flac", { 5933,12500 });
-	Region* Mountain = new Region("Mountain", "Music/RegionThemes/MountainRegion.flac", "nothing", { 18750,20833 });
-	Region* Jungle = new Region("Jungle", "Music/RegionThemes/JungleRegion.flac", "Music/HeroThemes/oya.flac", { 21083,4666 });
+
+	Region* Marsh = new Region("Marsh", "Music/RegionThemes/DesertRegion.flac", "Music/HeroThemes/ogun.flac", { 8000,2900 });
+	Region* Desert = new Region("Desert", "Music/RegionThemes/MarshRegion.flac", "Music/HeroThemes/ogun.flac", { 5045,13465 });
+	Region* Mountain = new Region("Mountain", "Music/RegionThemes/MountainRegion.flac", "nothing", { 21000,4000 });
+	Region* Jungle = new Region("Jungle", "Music/RegionThemes/JungleRegion.flac", "Music/HeroThemes/oya.flac", { 17157,20960 });
+
 	
 	Region current_region = *Desert;
 	Region next_region = *Desert;
@@ -208,8 +210,8 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 
 	Input* iController = new Input(gameplay_functions, Alex, RenM->renderHelper, tBuffer, recVec_ptr, movVec_ptr);
 
-	gameplay_functions->add_hero("Yemoja", 6445.0, 10355.0, true);
-	gameplay_functions->add_hero("Oya", 7445, 10555, true);
+	gameplay_functions->add_hero("Yemoja", 5045, 13465, true);
+	gameplay_functions->add_hero("Oya", 17157, 20960, true);
 	tBuffer->run();
 	
 
@@ -1469,7 +1471,8 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	ai->graph.vertices = vertices;
 	ai->graph.obstacles = edges;
 	for (Vector2f vert : ai->graph.vertices) {
-		//////std::////cout << "X: " << vert.getXloc() << " Y: " << vert.getYloc() << std::endl;
+		
+		std::cout << "X: " << vert.getXloc() << " Y: " << vert.getYloc() << std::endl;
 	}
 	for (auto edge : ai->graph.obstacles) {
 		//////std::////cout << "EDGE from " << edge.first.getXloc() << "," << edge.first.getYloc() << " to " << edge.second.getXloc() << "," << edge.second.getYloc() << std::endl;
@@ -1639,9 +1642,9 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	Village* v2 = new Village();
 	Village* v3 = new Village();
 	Village* v4 = new Village();
-	v1->set_village_location({ 6045.0, 5155.0 });
-	v2->set_village_location({ 6045.0, 15155.0 });
-	v3->set_village_location({ 6445.0, 10355.0 });
+	v1->set_village_location(Alex->getLoc());
+	v2->set_village_location({ 6030, 4000 });
+	v3->set_village_location(staticRec->getLoc());
 	v4->set_village_location(oya->getLoc());
 	v1->add_member(Alex);
 	for (int i = 0; i < silverSoldier.size(); i++) {
@@ -1836,7 +1839,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 
 			state = DialogueController::getState();
 
-			if (Alex->getX() > 5285.83 && Alex->getX() < 7079.86) { //Ogun Desert
+			if (Alex->getX() > 660 && Alex->getX() < 10847.5) { //Ogun Desert
 				if (Alex->getY() < 3523.33) {
 					if (RegionState::current_region == *Desert)
 						RegionState::next_region = *Marsh;
@@ -1859,7 +1862,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 					}
 				}
 			}
-			if (Alex->getX() > 13091 && Alex->getX() < 13825.9) {
+			if (Alex->getX() > 660 && Alex->getX() < 25000) {
 				if (Alex->getY() < 5132.23) {
 
 					if (RegionState::current_region == *Mountain) {
@@ -1871,8 +1874,8 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 						RegionState::next_region = *Mountain;
 				}
 			}
-			if (Alex->getX() > 3479.67 && Alex->getX() < 9446.06) {
-				if (Alex->getY() < 15980.7) {
+			if (Alex->getX() > 3479.67 && Alex->getX() < 10847.5) {
+				if (Alex->getY() < 17000.7) {
 					if (RegionState::current_region == *Jungle)
 						RegionState::next_region = *Desert;
 				}
