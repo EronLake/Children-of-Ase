@@ -1134,7 +1134,7 @@ void Input::InputCheck()
 	if (current_game_state == game_state::pause_menu) {
 		// pressing esc to unpause
 		//cout << "IN PUT CONTROL IS IN PAUSE STATE" << endl;
-		if (Q) {
+		if (ENTER) {
 			//for (int i = 0; i < 10; i++) cout << "I HAVE JUST PRESSED Q" << endl;
 			if (current_game_state == game_state::pause_menu) {
 				current_game_state = game_state::in_game;

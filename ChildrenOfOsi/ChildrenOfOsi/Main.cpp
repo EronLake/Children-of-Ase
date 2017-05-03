@@ -1730,6 +1730,8 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	cout << "size of largestruct is " << largeStruct->size() << endl;
 	for (auto it : *largeStruct) cout << (it)->getName() << endl;
 
+	t0.join();
+
 	while (GameWindow::isRunning()) {
 		while (current_game_state == game_state::main_menu) {
 			//cout << "currently in the main menu" << endl;
@@ -1769,7 +1771,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 			//cout << "FPS: " << fps << endl;
 
 			current_game_state = iController->current_game_state;
-			if(t0.joinable())t0.join();
+			//if(t0.joinable())t0.join();
 		}
 		while (current_game_state == game_state::in_game) {
 
@@ -2024,8 +2026,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 			start_tick = clock();
 
 			//draw
-			gameplay_functions->drawDiaGui(Alex);
-
+			gameplay_functions->drawTut(Alex);
 			//run task buffer
 			iController->InputCheck();
 
