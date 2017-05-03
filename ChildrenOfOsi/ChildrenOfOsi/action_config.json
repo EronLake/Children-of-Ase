@@ -84,13 +84,13 @@
     "utility": 0.0,
     "why": 0.0,
     "exe_name": "execute_fight",
-    "aggression": 0,
-    "kindness": 0,
-    "honor": 0,
-    "pride": 0,
-    "recklessness": 0,
-    "extroversion": 0,
-    "greed": 0,
+    "aggression": 10,
+    "kindness": -3,
+    "honor": 1,
+    "pride": 1,
+    "recklessness": 5,
+    "extroversion": 2,
+    "greed": 1,
     "req_preconds": {
     },
     "doer_succ_postconds": {
@@ -540,7 +540,7 @@
       "3": {
         "general_type": 0,
         "rel_type": 11,
-        "desired_rel_val": 55
+        "desired_rel_val": 75
       }
     },
     "doer_succ_postconds": {
@@ -749,8 +749,8 @@
 		"doer_succ_postconds": {
 		"1": {
 			"general_type": 0,
-				"rel_type" : 7,
-				"utility" : 4
+			"rel_type" : 7,
+			"utility" : 4
 		}
 	},
 		"doer_fail_postconds": {
@@ -827,7 +827,7 @@
 		"receiver_succ_postconds": {
 		"1": {
 			"general_type": 0,
-				"rel_type" : 7,
+				"rel_type" : 6,
 				"utility" : 5
 		},
 			"2" : {

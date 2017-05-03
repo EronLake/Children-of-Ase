@@ -291,7 +291,7 @@ void CombatController::party_leader_update(Soldier* sold1, int state) {
 			Vector2f quest = sold1->get_action_destination();
 			sold1->destination = quest;
 			sold1->waypoint = quest;
-			//move_to_target(sold1, state);
+			move_to_target(sold1, state);
 		}
 	} else if (sold1->getParty()->getMode() == Party::MODE_PATROL) {
 		Vector2f next = sold1->getParty()->get_current_patrol_loc(sold1->getLoc());
