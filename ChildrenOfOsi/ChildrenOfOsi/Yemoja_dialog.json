@@ -2,7 +2,7 @@
     "Greeting": {
         "1": "Oh... it's you. Let's just get this over with.",
         "2": "I guess anyone nowadays thinks they can just walk in and talk to me.",
-        "3": "Hello.",
+        "3": "Hello traveler",
         "4": "It is good to see you.",
         "5": "My friend, it is so good to see you. I hope you have been doing well."
     },
@@ -10,7 +10,7 @@
     "Farewell": {
         "1": "Please just leave already.",
         "2": "*tch*",
-        "3": "Goodbye.",
+        "3": "Until we meet again.",
         "4": "I hope to see you again soon.",
         "5": "Feel free to come talk to me anytime."
     },
@@ -106,8 +106,8 @@
     },
 
 	"Accept Alliance Offer": {
-        "1": "I honestly do not see how allying with you will help this village become any safer.",
-        "2": "I do not know you that well, but this one time I will go against my better judgement and accept this alliance with you.",
+        "1": "Why would I align with you of all people?",
+        "2": "I refuse.",
         "3": "I think that forming an alliance with you is a situation that benefits the both of us. I accept.",
         "4": "I am more than happy to ally with you. I know that you will help make this village safer.",
 		"5": "I am more than happy to ally with you. I know that you will help make this village safer."
@@ -194,8 +194,8 @@
     },
 
 	"Accept Duel": {
-        "1": "I hope you're prepared to lose.",
-        "2": "Hahaha. You're confidence is indeed slightly amusing. However, I hope you know I will win.",
+        "1": "I have no time for games. Go and find someone else to fight.",
+        "2": "I refuse. I see no point in fighting you now.",
         "3": "As the guardian of this village, I accept your challenge.",
         "4": "As the guardian of this village, I accept your challenge.",
         "5": "As the guardian of this village, I accept your challenge."
@@ -218,8 +218,8 @@
     },
 
 	"Accept Spar Request": {
-        "1": "I do not see how sparring against you will result in anything but your hurt ego.",
-        "2": "If you want to spar with me I hope that you are ready to lose.",
+        "1": "I refuse to spar with the likes of you.",
+        "2": "You are not yet worthy.",
         "3": "I suppose I could use some practice.",
         "4": "A spar, huh? I suppose it really couldn't hurt to get some practice in with you.",
         "5": "Sure, it'll be fun to face such a worthy opponent."
@@ -258,8 +258,8 @@
 	},
 
     "Accept Into Party":{
-	    "1": "I am not sure I am ready to accept more party members at this time.",
-        "2": "You seem like a smart and capable person. You are in.",
+	    "1": "I would rather group up with a toad.",
+        "2": "I would rather not.",
         "3": "With you on my side, we will be able to protect hundreds of people. Welcome aboard.",
 		"4": "With you on my side, we will be able to protect hundreds of people. Welcome aboard.",
         "5": "With you on my side, we will be able to protect hundreds of people. Welcome aboard."
@@ -290,8 +290,8 @@
     },
 
 	"Thank": {
-        "1": "That would actually be flattering if it wasn't coming from you.",
-        "2": "Oh...thanks...I suppose.",
+        "1": "Am I supposed to be flattered?",
+        "2": "If you say so.",
         "3": "Thank you.",
         "4": "It is not often people flatter me.",
         "5": "Thanks so much, and I could say the same about you."
@@ -307,7 +307,7 @@
 
 	"Accept Plea": {
         "1": "Oh please get off your knees you're making an absolute fool of yourself.",
-        "2": "*Sigh* I suppose I can overlook your actions this one time.",
+        "2": "I understand your situation, but it will take more than that to change my mind about you.",
         "3": "I accept your apology.",
         "4": "Please, get off of your knees you do not need to go that far simply to apolgize to me.",
         "5": "My friend I would accept an apology from you anytime."
