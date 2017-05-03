@@ -115,7 +115,7 @@ int main() {
 void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 {
 	game_state current_game_state = game_state::load_game;
-	Rectangle::tex->setFile("Assets/Sprites/blankr.png", 1);
+	Rectangle::tex->setFile("Assets/Sprites/blank1.png", 1);
 	Point::tex->setFile("Assets/Sprites/point.png", 1);
 
 	RiverObj* rivObj = new RiverObj();
@@ -1730,8 +1730,6 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	cout << "size of largestruct is " << largeStruct->size() << endl;
 	for (auto it : *largeStruct) cout << (it)->getName() << endl;
 
-	t0.join();
-
 	while (GameWindow::isRunning()) {
 		while (current_game_state == game_state::main_menu) {
 			//cout << "currently in the main menu" << endl;
@@ -1771,7 +1769,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 			//cout << "FPS: " << fps << endl;
 
 			current_game_state = iController->current_game_state;
-			//if(t0.joinable())t0.join();
+			//if(t0.joinable)t0.join();
 		}
 		while (current_game_state == game_state::in_game) {
 
@@ -2026,7 +2024,8 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 			start_tick = clock();
 
 			//draw
-			gameplay_functions->drawTut(Alex);
+			gameplay_functions->drawDiaGui(Alex);
+
 			//run task buffer
 			iController->InputCheck();
 
