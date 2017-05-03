@@ -183,7 +183,7 @@ void AIController::execute() {
 		EndStateList* end_states = planner->get_end_state_map();
 		MilestoneList* milestones = planner->get_milestone_map();
 
-		//std:://////cout << "Executing action " << curr_action->name << std::endl;
+		//std::cout << "Executing action " << curr_action->name << std::endl;
 
 		//Call execute function pointer of the action itself
 		//if you are not planning to give it as a quest
