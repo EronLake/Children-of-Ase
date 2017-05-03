@@ -1,3 +1,0 @@
-Conversation Point Name: Compliment Appeal 350
-Conversation Point Name: Boast Appeal 120
-Conversation Point Name: Ask_Origin Appeal 100

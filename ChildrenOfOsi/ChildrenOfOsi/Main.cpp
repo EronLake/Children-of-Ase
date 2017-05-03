@@ -1564,8 +1564,8 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 
 	//*oya = *staticRec;
 	//oya->setSpeed(5);
-	//oya->setName("Oya");
-	//oya->name = OYA;
+	oya->setName("Oya");
+	oya->name = OYA;
 	oya->offsetBody(0, 35, 35, 65, 15);
 	staticRec->offsetBody(0, 60, 60, 75, 50);
 	oya->shiftY(300);

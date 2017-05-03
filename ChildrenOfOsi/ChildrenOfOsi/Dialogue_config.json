@@ -523,7 +523,7 @@
      },
 	 "conversation_point_3" : {
 	      "name" : "Recruit_For_Party",
-          "icon" : "scp",
+          "icon" : "",
 	      "template" : "Recruit_For_Party",
 		  "honor" : 0,
 		  "pride": 0,
@@ -542,7 +542,7 @@
      },
 	 "conversation_point_4" : {
 	      "name" : "Ask_For_Teaching",
-          "icon" : "scp",
+          "icon" : "",
 	      "template" : "Ask_For_Teaching",
 		  "honor" : 0,
 		  "pride": 0,
@@ -700,7 +700,7 @@
 
 	 "conversation_point_7" : {
 	      "name" : "Remove_From_Party",
-          "icon" : "scp",
+          "icon" : "",
 	      "template" : "Remove_From_Party",
 		  "honor" : 0,
 		  "pride": 0,
@@ -760,7 +760,7 @@
     },
 	"reply_point_4" : {
 	      "name" : "Teach",
-          "icon" : "srp",
+          "icon" : "",
 	      "template" : "Teach",
 		  "corresponding_conv_point": "Ask_For_Teaching",
 		  "honor" : 0,
@@ -1131,7 +1131,7 @@
    },
    "conversation_point_5" : {
 	      "name" : "Offer_Teaching",
-          "icon" : "acp",
+          "icon" : "",
 	      "template" : "Offer_Teaching",
 		  "honor" : 0,
 		  "pride": 0,
@@ -1251,7 +1251,7 @@
 	"Notoriety_Conversation_Points": {
 	 "conversation_point_1" : {
 	      "name" : "Advise To Conquer",
-          "icon" : "ncp",
+          "icon" : "",
 	      "template" : "Advise To Conquer",
 		  "honor" : 0,
 		  "pride": 0,
@@ -1270,7 +1270,7 @@
 
     "conversation_point_4" : {
 	      "name" : "Advise To Ally With",
-          "icon" : "ncp",
+          "icon" : "",
 	      "template" : "Advise To Ally With",
 		  "honor" : 0,
 		  "pride": 0,
@@ -1289,7 +1289,7 @@
 
 	"conversation_point_7" : {
 	      "name" : "Advise To Revolt Against",
-          "icon" : "ncp",
+          "icon" : "",
 	      "template" : "Advise To Revolt Against",
 		  "honor" : 0,
 		  "pride": 0,
@@ -1308,7 +1308,7 @@
 
 	"conversation_point_10" : {
 	      "name" : "Advise To Destroy",
-          "icon" : "ncp",
+          "icon" : "",
 	      "template" : "Advise To Destroy",
 		  "honor" : 0,
 		  "pride": 0,
@@ -1357,7 +1357,7 @@
    },
    "conversation_point_14" : {
 	      "name" : "Ask_To_Join_Party",
-          "icon" : "ncp",
+          "icon" : "",
 	      "template" : "Ask_To_Join_Party",
 		  "honor" : 0,
 		  "pride": 0,
@@ -1377,7 +1377,7 @@
  
    "conversation_point_18" : {
 	      "name" : "Advise To Train With",
-          "icon" : "ncp",
+          "icon" : "",
 	      "template" : "Advise To Train With",
 		  "honor" : 0,
 		  "pride": 0,
