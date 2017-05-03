@@ -204,6 +204,18 @@ dialogue_point DialogueHelper::choose_conv_pt(std::vector<ConversationLogObj*> c
 
 		}
 	}
+
+	//remove conversation points from possible replies if they are in the NPC's permanent conversation vec
+	for (auto i = other->conversation_log.begin(); i != other->conversation_log.end(); ++i) {
+		appealPoint tmp = std::make_pair(0, (*i)->get_conv_point());
+		auto it = std::find(possible_replies.begin(), possible_replies.end(), tmp);
+		if (it != possible_replies.end() && (*i)->get_who() == 2) {
+			possible_replies.erase(std::remove(possible_replies.begin(), possible_replies.end(), *it), possible_replies.end());
+		}
+		else {
+
+		}
+	}
 	//relationship filtering
 	
 	//choose based on personality
@@ -272,7 +284,7 @@ dialogue_point DialogueHelper::choose_reply_pt(std::string point, int optn_inx, 
 
 	//checks NPC permanent conversation log to check what player has already asked
 	if (temp_hero) {
-		for (int i = 0; i < temp_hero->conversation_log.size() - 1; ++i) {
+		for (int i = 0; i < temp_hero->conversation_log.size(); ++i) {
 			if (temp_hero->conversation_log.size() > 0) {
 				if (temp_hero->conversation_log[i]->get_conv_point() == NULL)
 					continue;

@@ -84,6 +84,8 @@ bool first_call = true;
 
 bool DialogueController::quest_declined = false;
 
+ConversationLogObj* DialogueController::entry = nullptr;
+
 DialogueController::DialogueController()
 {
 	
@@ -202,7 +204,9 @@ void DialogueController::PlayerConversationPoint()
 		perm_log_entry->set_who(conv_log_obj->get_who());
 		perm_log_entry->set_topic(conv_log_obj->get_topic().first, conv_log_obj->get_topic().second);
 		perm_log_entry->set_conv_point(conv_log_obj->get_conv_point());
-		add_to_perm_storage(perm_log_entry);
+
+		entry = perm_log_entry;
+		
 
 		//limit the number of conversation log entries for the current conversation
 		//to a maximum of 8
@@ -271,7 +275,7 @@ void DialogueController::PlayerConversationPoint()
 	else {
 		state = 4;
 		otherResponse(player_conv_point_choice, curr_hero_topic);
-
+		add_to_perm_storage(entry);
 		player_conv_point_choice = "";
 	}
 }
@@ -541,7 +545,7 @@ void DialogueController::otherConversationPoint(dialogue_point line)
 	of size 2.*/
 	if (point[0] != "No_More_Phrases" && point[0] != "Already_Asked" && point.size() >= 4)
 		point[Topic] = curr_hero_topic;
-
+	
 	/*handles special case of quest conversation point by making
 	sure it's dialogue point will be the same size as the basic
 	conversation points like "Ask_Name" etc.*/
