@@ -110,6 +110,9 @@ class Soldier: public NPC
   int get_warning() { return warning; };
   void start_warning() { warning=400; };
 
+  float get_max_dist_act() { return max_dist_action; };
+  void set_max_dist_act(float f) { max_dist_action = f; };
+
   private:
 
   static constexpr std::size_t DEFAULT_AGGRO_RANGE = 200;
@@ -151,5 +154,6 @@ class Soldier: public NPC
   Soldier* currentLeader;
 
   Vector2f action_destination;
+  float max_dist_action;
 };
 

@@ -94,7 +94,7 @@ Party::Party(Alliance *a, Soldier *leader, const vector<Soldier *>& members) : f
 void Party::addToParty(Soldier* s, bool isLeader)
 {
 	if (s != nullptr) {
-		if (isLeader || members.size() == 0) {
+		if (isLeader || members.size() == 0 || leader->getType()<s->getType()) {
       members.insert(members.begin(), s);
       this->leader = s;
       s->setParty(this);

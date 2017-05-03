@@ -32,7 +32,7 @@ void Sprite::reset_texture()
 
 void Sprite::setIdleTexture(Texture *t)
 {
-	std::lock_guard<std::mutex> guard(*this->mut);
+//	std::lock_guard<std::mutex> guard(*this->mut);
   if(idle == t || lock)
     return;
   else {

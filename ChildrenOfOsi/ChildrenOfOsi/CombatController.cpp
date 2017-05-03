@@ -272,14 +272,16 @@ void CombatController::party_leader_update(Soldier* sold1, int state) {
 	if (sold1->getParty()->getMode() == Party::MODE_FLEE) {
 		if (sold1->destination == Vector2f(0, 0) || sold1->destination == sold1->getVillage()->get_village_location()) {
 			sold1->getParty()->removeSoldier(sold1, false);
-			sold1->getVillage()->barracks->addToParty(sold1, false);
+			if (sold1->getType() >= WorldObj::TYPE_HERO) {
+				sold1->getVillage()->defenders->addToParty(sold1, true);
+			} else sold1->getVillage()->barracks->addToParty(sold1, false);
 			////std:://cout << sold1->getID() << " is idling now" << std::endl;
 		}
 		sold1->destination = sold1->getVillage()->get_village_location();
 		sold1->waypoint = sold1->getVillage()->get_village_location();
 		move_to_target(sold1, state);
 	} else if (sold1->get_action_destination() != Vector2f(NULL, NULL)) {
-		if (Party::dist_location_to_location(sold1->getLoc(), sold1->get_action_destination()) < 50) {
+		if (Party::dist_location_to_location(sold1->getLoc(), sold1->get_action_destination()) < sold1->get_max_dist_act()) {
 			sold1->set_action_destination(Vector2f(NULL, NULL));
 		}
 		else {
