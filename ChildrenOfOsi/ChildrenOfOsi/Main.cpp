@@ -55,6 +55,8 @@
 #include "AIController.h"
 
 #include "ObjConfig.h"
+#include "HeroConfig.h"
+
 #include "ActionPool.h"
 #include "ActionHelper.h"
 #include "ActionConfig.h"
@@ -169,6 +171,8 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	RenM->register_manager();
 	bool switch_music = false;
 	bool in_village = false;
+
+	//HeroConfig::import_config(movVec_ptr, gameplay_functions, tBuffer);
 
 	gameplay_functions->add_hero("Shango", 6445, 10055, true);
 	tBuffer->run();

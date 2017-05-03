@@ -140,9 +140,6 @@
     <ClCompile Include="Wrapper.cpp">
       <Filter>Misc</Filter>
     </ClCompile>
-    <ClCompile Include="ObjConfig.cpp">
-      <Filter>Game Objects</Filter>
-    </ClCompile>
     <ClCompile Include="Attack.cpp">
       <Filter>Game Objects</Filter>
     </ClCompile>
@@ -253,6 +250,12 @@
     </ClCompile>
     <ClCompile Include="DialogueConfig.cpp">
       <Filter>Dialogue</Filter>
+    </ClCompile>
+    <ClCompile Include="HeroConfig.cpp">
+      <Filter>Game Objects\Configs</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjConfig.cpp">
+      <Filter>Game Objects\Configs</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -409,9 +412,6 @@
     <ClInclude Include="Wrapper.h">
       <Filter>Misc</Filter>
     </ClInclude>
-    <ClInclude Include="ObjConfig.h">
-      <Filter>Game Objects</Filter>
-    </ClInclude>
     <ClInclude Include="resource2.h" />
     <ClInclude Include="Attack.h">
       <Filter>Game Objects</Filter>
@@ -525,6 +525,12 @@
     <ClInclude Include="DialogueConfig.h">
       <Filter>Dialogue</Filter>
     </ClInclude>
+    <ClInclude Include="HeroConfig.h">
+      <Filter>Game Objects\Configs</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjConfig.h">
+      <Filter>Game Objects\Configs</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Text Include="audio_test.txt">
@@ -595,6 +601,9 @@
     <Filter Include="Task Manager">
       <UniqueIdentifier>{b652d4c4-522f-4787-bcb8-6a409450dac1}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Game Objects\Configs">
+      <UniqueIdentifier>{24270986-095c-4d33-8df6-05fcf8c02246}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram.cd">
@@ -624,9 +633,6 @@
     <None Include="OpenGL Shaders\StdVertexShader.vert.glsl">
       <Filter>Rendering\Shaders</Filter>
     </None>
-    <None Include="config.json">
-      <Filter>Game Objects</Filter>
-    </None>
     <None Include="test.json">
       <Filter>Game Objects</Filter>
     </None>
@@ -637,23 +643,29 @@
     <None Include="oasis_config.json" />
     <None Include="SilverSoldier_dialog.json" />
     <None Include="Oshosi_dialog.json" />
+    <None Include="Dialogue_config.json">
+      <Filter>Dialogue</Filter>
+    </None>
+    <None Include="Tag_config.json">
+      <Filter>Dialogue</Filter>
+    </None>
+    <None Include="Tag_config.json">
+      <Filter>Dialogue</Filter>
+    </None>
+    <None Include="Dialogue_config.json">
+      <Filter>Dialogue</Filter>
+    </None>
+    <None Include="config.json">
+      <Filter>Game Objects\Configs</Filter>
+    </None>
     <None Include="config_jungle.json">
-      <Filter>Game Objects</Filter>
+      <Filter>Game Objects\Configs</Filter>
     </None>
     <None Include="config_oasis.json">
-      <Filter>Game Objects</Filter>
+      <Filter>Game Objects\Configs</Filter>
     </None>
-    <None Include="Dialogue_config.json">
-      <Filter>Dialogue</Filter>
-    </None>
-    <None Include="Tag_config.json">
-      <Filter>Dialogue</Filter>
-    </None>
-    <None Include="Tag_config.json">
-      <Filter>Dialogue</Filter>
-    </None>
-    <None Include="Dialogue_config.json">
-      <Filter>Dialogue</Filter>
+    <None Include="hero_config.json">
+      <Filter>Game Objects\Configs</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>
