@@ -55,6 +55,8 @@
 #include "AIController.h"
 
 #include "ObjConfig.h"
+#include "HeroConfig.h"
+
 #include "ActionPool.h"
 #include "ActionHelper.h"
 #include "ActionConfig.h"
@@ -74,6 +76,13 @@
 #define DEBUG_NEW new(_NORMAL_BLOCK, __FILE__, __LINE__)
 #define new DEBUG_NEW
 #endif
+
+/*
+this variable is used to keep track of time (in frames)
+it is imcremented in the game loop
+*/
+extern int frame_count = 0;
+extern bool game_ended = false;
 
 using namespace std;
 
@@ -102,6 +111,40 @@ void set_file_with_thread(Texture* t, const pair<string, int>* p_tuple) {
 	t->setFile(p_tuple->first, p_tuple->second);
 }
 
+
+//Eron: needs to be moved to separate file
+void check_if_end_game() {
+	Village* player_vil = dynamic_cast<Player*>(Containers::hero_table["Shango"])->getVillage();
+	Village* yemoja_vil = dynamic_cast<Player*>(Containers::hero_table["Shango"])->getVillage();
+	Village* oya_vil = dynamic_cast<Player*>(Containers::hero_table["Shango"])->getVillage();
+
+	//checks if there is only one alliance left end the game (everyone is alligned)
+	if (player_vil->get_alliance()->get_num_alliances() == 1) 
+	{
+		game_ended = true;
+	}
+	
+	//checks if both heroes are conquered (the player conqured the world)
+	if (yemoja_vil->conquerer == player_vil && oya_vil->conquerer == player_vil) 
+	{
+		game_ended = true;
+	}
+
+	//checks if the hero is alligned with the conqurer (the player teamed up and conqurred the yemoja)
+	if (player_vil->get_alliance()->get_alligned_villages()[0] == oya_vil &&
+		(yemoja_vil->conquerer == player_vil || yemoja_vil->conquerer == oya_vil))
+	{
+		game_ended = true;
+	}
+
+	//checks if the hero is alligned with the conqurer (the player teamed up and conqurred the oya)
+	if (player_vil->get_alliance()->get_alligned_villages()[0] == yemoja_vil &&
+		(oya_vil->conquerer == player_vil || oya_vil->conquerer == yemoja_vil))
+	{
+		game_ended = true;
+	}
+}
+
 int main() {
 	WorldObj* screen = new WorldObj(Vector2f(0.0, 0.0), 25000U, 25000U);	//init screen
 
@@ -115,7 +158,7 @@ int main() {
 void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 {
 	game_state current_game_state = game_state::load_game;
-	Rectangle::tex->setFile("Assets/Sprites/blank1.png", 1);
+	Rectangle::tex->setFile("Assets/Sprites/blankr.png", 1);
 	Point::tex->setFile("Assets/Sprites/point.png", 1);
 
 	RiverObj* rivObj = new RiverObj();
@@ -172,6 +215,8 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	bool switch_music = false;
 	bool in_village = false;
 
+	//HeroConfig::import_config(movVec_ptr, gameplay_functions, tBuffer);
+
 	gameplay_functions->add_hero("Shango", 6445, 10055, true);
 	tBuffer->run();
 
@@ -210,7 +255,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 
 	Input* iController = new Input(gameplay_functions, Alex, RenM->renderHelper, tBuffer, recVec_ptr, movVec_ptr);
 
-	gameplay_functions->add_hero("Yemoja", 6445, 10055, true);
+	gameplay_functions->add_hero("Yemoja", 5045, 13465, true);
 	gameplay_functions->add_hero("Oya", 17157, 20960, true);
 	tBuffer->run();
 	
@@ -2003,6 +2048,9 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 			frame_count++;
 			HUD::AVG = total_fps / frame_count;
 
+			//Checks if game has reached final states
+			check_if_end_game();
+
 			current_game_state = iController->current_game_state;
 			//system("PAUSE");
 			
@@ -2024,7 +2072,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 			start_tick = clock();
 
 			//draw
-			gameplay_functions->drawDiaGui(Alex);
+			gameplay_functions->drawTut(Alex);
 
 			//run task buffer
 			iController->InputCheck();
@@ -2046,6 +2094,50 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 			HUD::AVG = total_fps / frame_count;
 
 			current_game_state = iController->current_game_state;
+		}
+		while (current_game_state == game_state::victory_menu) {
+
+			if (iController->current_game_state != game_state::victory_menu) {
+				iController->current_game_state = current_game_state;
+			}
+
+			if (shouldExit > 0) {
+				_CrtDumpMemoryLeaks();
+				return;
+			}
+			start_tick = clock();
+
+			//draw
+			gameplay_functions->drawTut(Alex);
+
+			//run task buffer
+			iController->InputCheck();
+
+			tBuffer->run();
+
+			if (game_ended) {
+				break;
+			}
+
+			if ((1000 / fs) > (clock() - start_tick)) { //delta_ticks) {www
+				Sleep((1000 / fs) - (clock() - start_tick));
+			}
+			delta_ticks = clock() - start_tick; //the time, in ms, that took to render the scene
+			if (delta_ticks > 0) {
+				fps = CLOCKS_PER_SEC / delta_ticks;
+			}
+			HUD::FPS = fps;
+			//total_fps += fps;
+			//cout << "FPS: " << fps << endl;
+
+			//frame_count++;
+			HUD::AVG = total_fps / frame_count;
+
+			current_game_state = iController->current_game_state;
+
+		}
+		if (game_ended) {
+			break;
 		}
 	}
 	GameWindow::terminate();
