@@ -137,7 +137,7 @@ int RenderHelper::draw_frame(WorldObj * obj)
 	for (int i = 0; i < largeStruct->size(); i++) {
 		WorldObj* tempObj = (*largeStruct)[i];
 		//1k pixels left and rigfht, 800 pixels up and down. OBJS WHOSE WIDTH AND HEIGHT ARE GREATER THAN 1-2k and 800-1.6k respectively DO NOT FUNCTION CORRECTLY
-		if (tempObj->getX() > obj->getX() - (4000 * map_zoom) && tempObj->getX() < obj->getX() + (4000 * map_zoom) && tempObj->getY() > obj->getY() - (4000 * map_zoom) && tempObj->getY() < obj->getY() + (4000 * map_zoom)) {
+		if (tempObj->getX() > obj->getX() - (6000 * map_zoom) && tempObj->getX() < obj->getX() + (6000 * map_zoom) && tempObj->getY() > obj->getY() - (6000 * map_zoom) && tempObj->getY() < obj->getY() + (6000 * map_zoom)) {
 			objVec.insert(objVec.begin(), tempObj);
 		}
 	}

@@ -540,7 +540,7 @@ void Input::edit_object() {
 }
 
 
-void Input::add_point_to_file() {
+void Input::add_point_to_file(std::string file_name) {
 	double xpos;
 	double ypos;
 	glfwGetCursorPos(GameWindow::window, &xpos, &ypos);
@@ -561,9 +561,9 @@ void Input::add_point_to_file() {
 	system("PAUSE");
 }
 
-void Input::skip_line() {
+void Input::skip_line(std::string file_name) {
 	std::ofstream rivFile;
-	rivFile.open("rivLine.txt", std::ios_base::app);
+	rivFile.open(file_name, std::ios_base::app);
 	rivFile << endl;
 	rivFile << oldPoint.first << " " << oldPoint.second << " ";
 	rivFile.close();
@@ -801,10 +801,10 @@ void Input::InputCheck()
 
 				}
 				if (P && (GetKeyState(VK_LBUTTON) & 0x100) != 0) {
-					add_point_to_file();
+					add_point_to_file("rivLine.txt");
 				}
 				if (Z) {
-					skip_line();
+					skip_line("rivLine.txt");
 				}
 				if (SHIFT && Z) {
 					system("PAUSE");
