@@ -33,8 +33,8 @@ class DialogueGui
   static constexpr float ICON_HEIGHT = 30.0F;
 
   static constexpr float MESSAGE_X = 177.75F;
-  static constexpr float MESSAGE_Y = 327.75F;
-  static constexpr float MESSAGE_WIDTH = 605.0F;
+  static constexpr float MESSAGE_Y = 330.0F;
+  static constexpr float MESSAGE_WIDTH = 565.0F;
   static constexpr float MESSAGE_HEIGHT = -1.0F;
 
   static constexpr float OPTIONS_X = 192.75F;

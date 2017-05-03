@@ -457,11 +457,11 @@
     },
 
 	"Ask_For_Quest": {
-        "1": "You got a quest for me?",
-        "2": "You got a quest for me?",
-        "3": "You got a quest for me?",
-        "4": "You got a quest for me?",
-        "5": "You got a quest for me?"
+        "1": "Is there anything I can do to make your life easier?",
+        "2": "Is there anything I can do to make your life easier?",
+        "3": "Is there anything I can do to make your life easier?",
+        "4": "Is there anything I can do to make your life easier?",
+        "5": "Is there anything I can do to make your life easier?"
     },
 
 	"Response_Ask_For_Quest": {
