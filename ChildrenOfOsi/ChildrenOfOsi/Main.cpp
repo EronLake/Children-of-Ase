@@ -1730,6 +1730,8 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	cout << "size of largestruct is " << largeStruct->size() << endl;
 	for (auto it : *largeStruct) cout << (it)->getName() << endl;
 
+	t0.join();
+
 	while (GameWindow::isRunning()) {
 		while (current_game_state == game_state::main_menu) {
 			//cout << "currently in the main menu" << endl;
