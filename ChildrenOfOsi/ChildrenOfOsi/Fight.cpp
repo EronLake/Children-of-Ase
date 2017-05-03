@@ -273,7 +273,7 @@ void Fight::update_fight() {
 	update_radius();
 	over = check_for_winner();
 	if (over) {
-		if (player->getParty()->get_fight() == this && (player->cur_action!=nullptr || player->cur_action != NULL)) {
+		if (player->getParty()->get_fight() == this && player->cur_action!=nullptr && player->cur_action != NULL) {
 			PlayerActExecFunctions::execute_end(true);
 		}
 	}
@@ -311,7 +311,8 @@ bool Fight::check_for_winner() {
 
 void Fight::update_all_fights() {
 	for (auto it = fights_world.begin(); it != fights_world.end();++it) {
-		if (!(*it)->is_over())(*it)->update_fight();
+		if (!(*it)->is_over())
+			(*it)->update_fight();
 	}
 }
 
