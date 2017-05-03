@@ -95,6 +95,19 @@ void Fight::update_radius() {
 }
 
 void Fight::add_party(Party* p, bool atk) {
+	for (auto it = attackers.begin(); it != attackers.end(); ++it) {
+		for (auto itor = (*it).begin(); itor != (*it).end(); ++itor) {
+			if ((*itor) == p)return;
+		}
+	}
+	for (auto it = defenders.begin(); it != defenders.end(); ++it) {
+		for (auto itor = (*it).begin(); itor != (*it).end(); ++itor) {
+			if ((*itor) == p)return;
+		}
+	}
+	for (auto it = downed.begin(); it != downed.end(); ++it) {
+		if ((*it) == p)return;
+	}
 	over = false;
 	p->set_defend(loc);
 	p->setMode(Party::MODE_DEFEND);
@@ -147,6 +160,19 @@ void Fight::add_party(Party* p, bool atk) {
 }
 
 void Fight::add_to_attackers(Party* p) {
+	for (auto it = attackers.begin(); it != attackers.end(); ++it) {
+		for (auto itor = (*it).begin(); itor != (*it).end(); ++itor) {
+			if ((*itor) == p)return;
+		}
+	}
+	for (auto it = defenders.begin(); it != defenders.end(); ++it) {
+		for (auto itor = (*it).begin(); itor != (*it).end(); ++itor) {
+			if ((*itor) == p)return;
+		}
+	}
+	for (auto it = downed.begin(); it != downed.end(); ++it) {
+		if ((*it) == p)return;
+	}
 	over = false;
 	bool added = false;
 	for (auto it = attackers.begin(); it != attackers.end(); ++it) {
@@ -176,6 +202,19 @@ void Fight::add_to_attackers(Party* p) {
 }
 
 void Fight::add_to_defenders(Party* p) {
+	for (auto it = attackers.begin(); it != attackers.end(); ++it) {
+		for (auto itor = (*it).begin(); itor != (*it).end(); ++itor) {
+			if ((*itor) == p)return;
+		}
+	}
+	for (auto it = defenders.begin(); it != defenders.end(); ++it) {
+		for (auto itor = (*it).begin(); itor != (*it).end(); ++itor) {
+			if ((*itor) == p)return;
+		}
+	}
+	for (auto it = downed.begin(); it != downed.end(); ++it) {
+		if ((*it) == p)return;
+	}
 	over = false;
 	bool added = false;
 	for (auto it = defenders.begin(); it != defenders.end(); ++it) {

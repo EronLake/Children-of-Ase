@@ -14,6 +14,7 @@ Player::Player(int name, float x, float y, bool col) :Hero(name, x, y, col)
 	NPC::setDiagXSpeed(sqrt((speed*speed) / 2));
 	NPC::setDiagYSpeed(sqrt((speed*speed) / 2));
 	setType(6);
+	cur_action = nullptr;
 }
 
 Player::Player(int name, Vector2f p_topLeft, float p_width, float p_height) :Hero(name, p_topLeft, p_width, p_height)
@@ -23,6 +24,7 @@ Player::Player(int name, Vector2f p_topLeft, float p_width, float p_height) :Her
 	NPC::setDiagXSpeed(sqrt((speed*speed) / 2));
 	NPC::setDiagYSpeed(sqrt((speed*speed) / 2));
 	setType(6);
+	cur_action = nullptr;
 }
 
 

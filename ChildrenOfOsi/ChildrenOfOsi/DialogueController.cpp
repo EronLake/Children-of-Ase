@@ -429,7 +429,7 @@ void DialogueController::PlayerResponse()
 				int time_limit = 3600;
 				player->add_quest(quest, time_limit);
 				planner->quests_given.push_back(quest); //gives npc record of what they gave player
-				//player->cur_action = quest; //gives player record of what they are doing
+				player->cur_action = quest; //gives player record of what they are doing
 			}
 			if (choice[ConvPointName] == "Decline_Quest") {
 				quest_declined = true;
@@ -1206,8 +1206,11 @@ void DialogueController::startConversation(WorldObj* n, bool playerTalk)
 			for (int i = 0; i < planner->quests_given.size();) {
 				if (planner->quests_given[i]->getDoer()->name == SHANGO && planner->quests_given[i]->executed == false)
 					player_doing_quest = true;
-				if (planner->quests_given[i]->getDoer()->name == SHANGO && planner->quests_given[i]->executed == true) {
+			}
+			for (int i = 0; i < player->quests_log.size();) {
+				if (player->quests_log[i] == player->cur_action) {
 					quest_complete = true;
+					player_doing_quest = false;
 					player->remove_quest(planner->quests_given[i]);
 				}
 				else
