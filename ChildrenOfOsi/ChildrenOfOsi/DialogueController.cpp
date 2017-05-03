@@ -838,11 +838,13 @@ void DialogueController::otherResponse(std::string info, std::string hero_topic)
 				dialogue_point diog_pt = { "Accept Alliance Offer","Accept Alliance Offer" };
 				std::string reply_pt_sentence = dialogue.gen_dialog(diog_pt, temp_hero);
 				message = other->getName() + ": " + reply_pt_sentence + "\n\n";
+				//state = 8;
 			} else{
 				/////////////need to be changed to correct calls/dialog if not accepted///////////////////
 				dialogue_point diog_pt = { "Accept Alliance Offer","Accept Alliance Offer" };
 				std::string reply_pt_sentence = dialogue.gen_dialog_negative(diog_pt, temp_hero);
 				message = other->getName() + ": " + reply_pt_sentence + "\n\n";
+				//state = 1;
 			}
 			
 			state = 8;
@@ -856,12 +858,14 @@ void DialogueController::otherResponse(std::string info, std::string hero_topic)
 				dialogue_point diog_pt = { "Accept Duel","Accept Duel" };
 				std::string reply_pt_sentence = dialogue.gen_dialog(diog_pt, temp_hero);
 				message = other->getName() + ": " + reply_pt_sentence + "\n\n";
+				//state = 8;
 			}
 			else {
 				/////////////need to be changed to correct calls/dialog if not accepted///////////////////
 				dialogue_point diog_pt = { "Accept Duel","Accept Duel" };
 				std::string reply_pt_sentence = dialogue.gen_dialog_negative(diog_pt, temp_hero);
 				message = other->getName() + ": " + reply_pt_sentence + "\n\n";
+				//state = 1;
 			}
 
 			state = 8;
@@ -875,12 +879,14 @@ void DialogueController::otherResponse(std::string info, std::string hero_topic)
 				dialogue_point diog_pt = { "Accept Spar Request","Accept Spar Request" };
 				std::string reply_pt_sentence = dialogue.gen_dialog(diog_pt, temp_hero);
 				message = other->getName() + ": " + reply_pt_sentence + "\n\n";
+				//state = 8;
 			}
 			else {
 				/////////////need to be changed to correct calls/dialog if not accepted///////////////////
 				dialogue_point diog_pt = { "Accept Spar Request","Accept Spar Request" };
 				std::string reply_pt_sentence = dialogue.gen_dialog_negative(diog_pt, temp_hero);
 				message = other->getName() + ": " + reply_pt_sentence + "\n\n";
+				//state = 1;
 			}
 			state = 8;
 		}
@@ -899,7 +905,7 @@ void DialogueController::otherResponse(std::string info, std::string hero_topic)
 			}
 			else {
 				/////////////need to be changed to correct calls/dialog if not accepted///////////////////
-				dialogue_point diog_pt = { "Accept Alliance Offer","Accept Alliance Offer" };
+				dialogue_point diog_pt = { "Confirm Alliance","Confirm Alliance" };
 				std::string reply_pt_sentence = dialogue.gen_dialog_negative(diog_pt, temp_hero);
 				message = other->getName() + ": " + reply_pt_sentence + "\n\n";
 
@@ -1197,11 +1203,15 @@ void DialogueController::startConversation(WorldObj* n, bool playerTalk)
 			Planner* planner = AIController::get_plan(CheckClass::isHero(other)->name);
 			bool player_doing_quest = false;
 			bool quest_complete = false;
-			for (int i = 0; i < planner->quests_given.size(); ++i) {
+			for (int i = 0; i < planner->quests_given.size();) {
 				if (planner->quests_given[i]->getDoer()->name == SHANGO && planner->quests_given[i]->executed == false)
 					player_doing_quest = true;
-				if (planner->quests_given[i]->getDoer()->name == SHANGO && planner->quests_given[i]->executed == true)
+				if (planner->quests_given[i]->getDoer()->name == SHANGO && planner->quests_given[i]->executed == true) {
 					quest_complete = true;
+					player->remove_quest(planner->quests_given[i]);
+				}
+				else
+					++i;
 			}
 			if (player_doing_quest)//Bad! Check boolean in Action object instead.
 				message = n->getName() + ": " + dialogue.gen_dialog({ "Quest_In_Progress","Quest_In_Progress" }, temp_hero);
