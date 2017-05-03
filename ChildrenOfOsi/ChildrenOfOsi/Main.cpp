@@ -125,6 +125,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	
 	vector<WorldObj*> recVec;
 	vector<WorldObj*> movVec;
+	vector<WorldObj*>* largeStruct = new vector<WorldObj*>();
 	vector<WorldObj*>* recVec_ptr = &recVec;
 	vector<WorldObj*>* movVec_ptr = &movVec;
 	vector<Hero*> heroes;
@@ -142,7 +143,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	//need this here for map editor
 	ChildrenOfOsi* gameplay_functions = new ChildrenOfOsi(mLog, tBuffer);
 
-	RenderManager* RenM = new RenderManager(mLog, tBuffer, _QuadTree, gameplay_functions, rivObj);
+	RenderManager* RenM = new RenderManager(mLog, tBuffer, _QuadTree, gameplay_functions, rivObj, largeStruct);
 	DummyController* DumM = new DummyController(mLog, tBuffer);
 	PhysicsManager* PhysM = new PhysicsManager(mLog, tBuffer, _QuadTree, grid, rivObj);
 	//PartyManager* partyM = new PartyManager(gameplay_functions, Alex);
@@ -232,7 +233,6 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	vector<Texture*> marsh;
 	vector<vector<Texture*>> starting_location;
 	
-
 	ObjConfig::textureMapConfig = &textureMap;
 	ObjConfig::standard_con = &standard;
 	ObjConfig::oasis_con = &oasis;
@@ -1799,11 +1799,14 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	_QuadTree->clear();
 	cout << "tree size is  " << _QuadTree->treeSize() << endl;
 	for (int i = 0; i < recVec.size(); i++) {
+		if (recVec[i]->getName() == "Oasis_Platform" || recVec[i]->getName() == "JungleVillage") largeStruct->push_back(recVec[i]);
 		_QuadTree->Insert(recVec[i]);	//insert all obj into tree
 	}
 
 	cout << "tree size is  " << _QuadTree->treeSize() << endl;
 	cout << "size of recvec is " << recVec.size() << endl;
+	cout << "size of largestruct is " << largeStruct->size() << endl;
+	for (auto it : *largeStruct) cout << (it)->getName() << endl;
 
 	while (GameWindow::isRunning()) {
 		while (current_game_state == game_state::main_menu) {

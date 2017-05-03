@@ -15,7 +15,7 @@ class RenderHelper
 {
   public:
 
-  RenderHelper(QuadTree* QT, RiverObj* _rivObj);
+  RenderHelper(QuadTree* QT, RiverObj* _rivObj, std::vector<WorldObj*>* _largeStruct);
   ~RenderHelper();
 
   void initCamera(WorldObj* player);
@@ -51,6 +51,7 @@ class RenderHelper
   WorldObj* fullBound;
   RenderManager* manager;
   RiverObj* rivObj;
+  std::vector<WorldObj*>* largeStruct;
 
   static GameMap* gmap;
 
