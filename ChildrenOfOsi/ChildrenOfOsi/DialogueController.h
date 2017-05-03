@@ -51,6 +51,7 @@ public:
 	static void other_conversation_point_soldier(dialogue_point line);
 	static vector<std::vector<std::string>> get_soldier_options();
 	static void DialogueController::remove_soldier_opts();
+	static void DialogueController::add_to_perm_storage(ConversationLogObj* log_entry);
 
 	static bool prompted_quest;
 	static bool accepted_quest;
@@ -66,6 +67,8 @@ public:
 	static int state;
 	static std::string replyString;
 	static bool quest_declined;
+
+	static ConversationLogObj* entry;
 
 	//States:
 	//0 is no conversation

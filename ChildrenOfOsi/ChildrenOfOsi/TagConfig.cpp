@@ -46,14 +46,14 @@ void TagConfig::import_config(ChildrenOfOsi* gameplay_func, TaskBuffer* tBuffer)
 	conv_points.clear();
 
 	for (auto itor = root["Talk_About_Affinity"].begin(); itor != root["Talk_About_Affinity"].end(); ++itor) {
-		conv_points.push_back((*itor)["conv_pt_1"].asString());
-		conv_points.push_back((*itor)["conv_pt_2"].asString());
-		conv_points.push_back((*itor)["conv_pt_3"].asString());
-		conv_points.push_back((*itor)["conv_pt_4"].asString());
+		//conv_points.push_back((*itor)["conv_pt_1"].asString());
+		//conv_points.push_back((*itor)["conv_pt_2"].asString());
+		//conv_points.push_back((*itor)["conv_pt_3"].asString());
+		//conv_points.push_back((*itor)["conv_pt_4"].asString());
 		conv_points.push_back((*itor)["conv_pt_5"].asString());
 		conv_points.push_back((*itor)["conv_pt_6"].asString());
 		conv_points.push_back((*itor)["conv_pt_7"].asString());
-		conv_points.push_back((*itor)["conv_pt_8"].asString());
+		//conv_points.push_back((*itor)["conv_pt_8"].asString());
 		conv_points.push_back((*itor)["conv_pt_9"].asString());
 		set_tag(gameplay_func, tBuffer, "Talk_About_Affinity", conv_points);
 	}
@@ -61,13 +61,13 @@ void TagConfig::import_config(ChildrenOfOsi* gameplay_func, TaskBuffer* tBuffer)
 
 	for (auto itor = root["Talk_About_Notoriety"].begin(); itor != root["Talk_About_Notoriety"].end(); ++itor) {
 		conv_points.push_back((*itor)["conv_pt_1"].asString());
-		conv_points.push_back((*itor)["conv_pt_2"].asString());
-		conv_points.push_back((*itor)["conv_pt_3"].asString());
-		conv_points.push_back((*itor)["conv_pt_4"].asString());
-		conv_points.push_back((*itor)["conv_pt_5"].asString());
-		conv_points.push_back((*itor)["conv_pt_6"].asString());
-		conv_points.push_back((*itor)["conv_pt_7"].asString());
-		conv_points.push_back((*itor)["conv_pt_8"].asString());
+		//conv_points.push_back((*itor)["conv_pt_2"].asString());
+		//conv_points.push_back((*itor)["conv_pt_3"].asString());
+		//conv_points.push_back((*itor)["conv_pt_4"].asString());
+		//conv_points.push_back((*itor)["conv_pt_5"].asString());
+		//conv_points.push_back((*itor)["conv_pt_6"].asString());
+		//conv_points.push_back((*itor)["conv_pt_7"].asString());
+		//conv_points.push_back((*itor)["conv_pt_8"].asString());
 		set_tag(gameplay_func, tBuffer, "Talk_About_Notoriety", conv_points);
 	}
 	conv_points.clear();
@@ -75,10 +75,10 @@ void TagConfig::import_config(ChildrenOfOsi* gameplay_func, TaskBuffer* tBuffer)
 	for (auto itor = root["Talk_About_Strength"].begin(); itor != root["Talk_About_Strength"].end(); ++itor) {
 		conv_points.push_back((*itor)["conv_pt_1"].asString());
 		conv_points.push_back((*itor)["conv_pt_2"].asString());
-		conv_points.push_back((*itor)["conv_pt_3"].asString());
-		conv_points.push_back((*itor)["conv_pt_4"].asString());
-		conv_points.push_back((*itor)["conv_pt_5"].asString());
-		conv_points.push_back((*itor)["conv_pt_6"].asString());
+		//conv_points.push_back((*itor)["conv_pt_3"].asString());
+		//conv_points.push_back((*itor)["conv_pt_4"].asString());
+		//conv_points.push_back((*itor)["conv_pt_5"].asString());
+		//conv_points.push_back((*itor)["conv_pt_6"].asString());
 		conv_points.push_back((*itor)["conv_pt_7"].asString());
 		conv_points.push_back((*itor)["conv_pt_8"].asString());
 		set_tag(gameplay_func, tBuffer, "Talk_About_Strength", conv_points);
@@ -86,14 +86,14 @@ void TagConfig::import_config(ChildrenOfOsi* gameplay_func, TaskBuffer* tBuffer)
 	conv_points.clear();
 
 	for (auto itor = root["Talk_About_Action"].begin(); itor != root["Talk_About_Action"].end(); ++itor) {
-		conv_points.push_back((*itor)["conv_pt_1"].asString());
-		conv_points.push_back((*itor)["conv_pt_2"].asString());
-		conv_points.push_back((*itor)["conv_pt_3"].asString());
-		conv_points.push_back((*itor)["conv_pt_4"].asString());
+		//conv_points.push_back((*itor)["conv_pt_1"].asString());
+		//conv_points.push_back((*itor)["conv_pt_2"].asString());
+		//conv_points.push_back((*itor)["conv_pt_3"].asString());
+		//conv_points.push_back((*itor)["conv_pt_4"].asString());
 		conv_points.push_back((*itor)["conv_pt_5"].asString());
 		conv_points.push_back((*itor)["conv_pt_6"].asString());
-		conv_points.push_back((*itor)["conv_pt_7"].asString());
-		conv_points.push_back((*itor)["conv_pt_8"].asString());
+		//conv_points.push_back((*itor)["conv_pt_7"].asString());
+		//conv_points.push_back((*itor)["conv_pt_8"].asString());
 		set_tag(gameplay_func, tBuffer, "Talk_About_Action", conv_points);
 	}
 	conv_points.clear();

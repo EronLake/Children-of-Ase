@@ -166,6 +166,7 @@ void AIController::reevaluate_state(int me, int them) {
 	//Eron's Fix: if milestone = endstate fot them then don't cont
 	planner->add_milestone(state, milestone);                  //Add the first milestone to the action path
 
+
 	planner->generate_milestones(state, milestone);          //Generate the rest of the milestones for this state
 
 }
@@ -183,7 +184,7 @@ void AIController::execute() {
 		EndStateList* end_states = planner->get_end_state_map();
 		MilestoneList* milestones = planner->get_milestone_map();
 
-		//std:://////cout << "Executing action " << curr_action->name << std::endl;
+		//std::cout << "Executing action " << curr_action->name << std::endl;
 
 		//Call execute function pointer of the action itself
 		//if you are not planning to give it as a quest

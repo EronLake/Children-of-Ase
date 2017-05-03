@@ -117,8 +117,8 @@ void PlayerActExecFunctions::execute_end(bool if_succ) {
 
 	///////////////////////////////////////////////////////////////////////////////////
 
-	Memory* doer_mem = player->find_mem(cur_action->getName() + std::to_string(cur_action->time_stamp));
-	Memory* receiver_mem = cur_action->getReceiver()->find_mem(cur_action->getName() + 
+	Memory* doer_mem = player->find_mem(cur_action->getName() + "_" + std::to_string(cur_action->time_stamp));
+	Memory* receiver_mem = cur_action->getReceiver()->find_mem(cur_action->getName() + "_" +
 							std::to_string(cur_action->time_stamp));
 
 	if (doer_mem == nullptr)

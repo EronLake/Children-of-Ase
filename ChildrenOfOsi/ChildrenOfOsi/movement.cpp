@@ -783,6 +783,7 @@ bool Movement::collision(WorldObj* recA, WorldObj* recB)
 {
 	for (int i = 0; i < (*recA).body.size(); i++) {
 		for (int j = 0; j < (*recB).body.size(); j++) {
+
 			bool xCollide = coordOverlap(recA->body[i].getX(), recB->body[j].getX(), recB->body[j].getX() + recB->body[j].getWidth()) || coordOverlap(recB->body[j].getX(), recA->body[i].getX(), recA->body[i].getX() + recA->body[i].getWidth());
 			bool yCollide = coordOverlap(recA->body[i].getY(), recB->body[j].getY(), recB->body[j].getY() + recB->body[j].getHeight()) || coordOverlap(recB->body[j].getY(), recA->body[i].getY(), recA->body[i].getY() + recA->body[i].getHeight());
 			if (xCollide && yCollide)return true;

@@ -204,6 +204,18 @@ dialogue_point DialogueHelper::choose_conv_pt(std::vector<ConversationLogObj*> c
 
 		}
 	}
+
+	//remove conversation points from possible replies if they are in the NPC's permanent conversation vec
+	for (auto i = other->conversation_log.begin(); i != other->conversation_log.end(); ++i) {
+		appealPoint tmp = std::make_pair(0, (*i)->get_conv_point());
+		auto it = std::find(possible_replies.begin(), possible_replies.end(), tmp);
+		if (it != possible_replies.end() && (*i)->get_who() == 2) {
+			possible_replies.erase(std::remove(possible_replies.begin(), possible_replies.end(), *it), possible_replies.end());
+		}
+		else {
+
+		}
+	}
 	//relationship filtering
 	
 	//choose based on personality
@@ -247,21 +259,44 @@ dialogue_point DialogueHelper::choose_conv_pt(std::vector<ConversationLogObj*> c
 
 /*Returns all of the possible reply points that an npc can say
 based on the player's conversation point.*/
-dialogue_point DialogueHelper::choose_reply_pt(std::string point, int optn_inx, std::vector<ConversationLogObj*> curr_conversation_log)
+dialogue_point DialogueHelper::choose_reply_pt(std::string point, int optn_inx, std::vector<ConversationLogObj*> curr_conversation_log,Hero* other)
 {
+
+	Hero* temp_hero = CheckClass::isHero(other);
+	ConversationLogObj* player_just_said = nullptr;
+	if(temp_hero)
+	    player_just_said = curr_conversation_log[curr_conversation_log.size() - 1];
+
 	//check if the player has already asked the npc this question
 	for (int i = 0; i < curr_conversation_log.size() - 1; ++i) {
 		if (curr_conversation_log.size() > 0) {
 			if (curr_conversation_log[i]->get_conv_point() == NULL)
 				continue;
-			if ((curr_conversation_log[i]->get_conv_point()->get_name() == curr_conversation_log[curr_conversation_log.size() - 1]->get_conv_point()->get_name()) &&
-				(curr_conversation_log[curr_conversation_log.size() - 1]->get_who() == curr_conversation_log[i]->get_who()) && (curr_conversation_log[curr_conversation_log.size() - 1]->get_conv_point()->get_name().find("Ask", 0) != string::npos)) {
-				if (curr_conversation_log[curr_conversation_log.size() - 1]->get_conv_point()->get_name().find("Ask_For_Quest", 0) == string::npos)
+			if ((curr_conversation_log[i]->get_conv_point()->get_name() == player_just_said->get_conv_point()->get_name()) &&
+				(player_just_said->get_who() == curr_conversation_log[i]->get_who()) && (player_just_said->get_conv_point()->get_name().find("Ask", 0) != string::npos)) {
+				if (player_just_said->get_conv_point()->get_name().find("Ask_For_Quest", 0) == string::npos)
 					return{ "Already_Asked","Already_Asked" };
 			}
 		}
 		else
 			break;
+	}
+
+	//checks NPC permanent conversation log to check what player has already asked
+	if (temp_hero) {
+		for (int i = 0; i < temp_hero->conversation_log.size(); ++i) {
+			if (temp_hero->conversation_log.size() > 0) {
+				if (temp_hero->conversation_log[i]->get_conv_point() == NULL)
+					continue;
+				if ((temp_hero->conversation_log[i]->get_conv_point()->get_name() == player_just_said->get_conv_point()->get_name()) &&
+					(player_just_said->get_who() == temp_hero->conversation_log[i]->get_who()) && (player_just_said->get_conv_point()->get_name().find("Ask", 0) != string::npos)) {
+					if (player_just_said->get_conv_point()->get_name().find("Ask_For_Quest", 0) == string::npos)
+						return{ "Already_Asked","Already_Asked" };
+				}
+			}
+			else
+				break;
+		}
 	}
 
 	for (int i = 0; i < possible_reply_pts[optn_inx].size(); i++)
@@ -339,6 +374,43 @@ std::string DialogueHelper::gen_dialog(dialogue_point diog_pt, Hero* hero)
 		name = "SilverSoldier";
 	}
 	std::string sentence = convert_to_sentence(get_dialog(name, diog_pt,hero));
+
+	return sentence;
+}
+
+std::string DialogueHelper::gen_dialog_negative(dialogue_point diog_pt, Hero* hero)
+{
+	std::string name = "";
+	//std::ofstream ofs;
+	//ofs.open("dialog_template_output.txt", std::ofstream::out | std::ofstream::app);
+	//ofs << "type name: " << typeid(hero).name() << std::endl;
+	//ofs.close();
+	if (hero != nullptr) {
+		if (hero->name == SHANGO)
+		{
+			name = "Shango";
+		}
+		else if (hero->name == YEMOJA)
+		{
+			name = "Yemoja";
+		}
+		else if (hero->name == OSHOSI)
+		{
+			name = "Oshosi";
+		}
+		else if (hero->name == OYA)
+		{
+			name = "Oya";
+		}
+		else if (hero->name == OGUN)
+		{
+			name = "Ogun";
+		}
+	}
+	else {
+		name = "SilverSoldier";
+	}
+	std::string sentence = convert_to_sentence(get_dialog_negative(name, diog_pt, hero));
 
 	return sentence;
 }
@@ -473,6 +545,63 @@ dialogue_point DialogueHelper::get_dialog(std::string name, dialogue_point diog_
 
 }
 
+dialogue_point DialogueHelper::get_dialog_negative(std::string name, dialogue_point diog_pt, Hero* hero) {
+	//std::ofstream ofs;
+	//ofs.open("dialog_template_output.txt", std::ofstream::out | std::ofstream::app);
+	dialogue_template dtemp = get_template(diog_pt);
+
+	std::string my_name = name;
+	if (name != "Yemoja" && name != "Shango" && name != "Oshosi" && name != "Ogun" && name != "Oya")
+		my_name = "SilverSoldier"; //placeholder until there are jsons for other non-hero NPCs
+								   //////////////////////////////////
+								   /*add several else if statements here as more NPCs are added to the game in
+								   order to handle different json files for every NPC. json files are opened on a
+								   name basis*/
+								   //////////////////////////////////
+
+	Json::Value root;
+
+	std::string dialogue_filename = my_name + "_dialog.json";
+
+	std::ifstream file(dialogue_filename);
+	file >> root;
+
+	dialogue_point dpoint;
+
+	//sets phrase_picker to either 1 or 2, which reflects a negative/hateful response
+	int phrase_picker = rand() % 2 + 1;
+
+	if (name != "Shango") {
+		std::string tmp = "";
+		for (int i = 1; i <= dtemp.size(); i++) {
+			tmp = dtemp[i - 1];
+			if (tmp != "?" && tmp != "," && tmp != "." &&
+				tmp != "!" && tmp != "_") {
+				//if (root[tmp].size() > 1)
+				//j = rand() % root[tmp].size() + 1;
+				//else
+				//j = 1;
+				dpoint.push_back(root[tmp][to_string(phrase_picker)]
+					.asString());
+				//ofs << "dp: " << root[tmp][to_string(j)]
+				//.asString() << std::endl;
+			}
+			else {
+				dpoint.push_back(tmp);
+
+			}
+
+		}
+	}
+	else {
+		dpoint.push_back(root[diog_pt[ConvPointName]][to_string(phrase_picker)]
+			.asString());
+	}
+
+	return dpoint;
+
+}
+
 std::string DialogueHelper::convert_to_sentence(dialogue_point dialog_pt)
 {
 	string sentence;
@@ -539,7 +668,7 @@ void DialogueHelper::fill_conversations() {
 		else if (itor->second->get_icon() == "ncp" && itor->second->get_name().find("Advise To", 0) == string::npos) {
 			possible_conv_pts[NotorietyIcon].push_back(itor->second->dpoint);
 		}
-		else {
+		else if(itor->second->get_icon() == "nrp"){
 			possible_reply_pts[QuestionMarkIcon].push_back(itor->second->dpoint);
 			possible_reply_pts[StrengthIcon].push_back(itor->second->dpoint);
 			possible_reply_pts[AffinityIcon].push_back(itor->second->dpoint);

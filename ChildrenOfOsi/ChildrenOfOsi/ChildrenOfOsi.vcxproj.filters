@@ -666,6 +666,8 @@
     </None>
     <None Include="hero_config.json">
       <Filter>Game Objects\Configs</Filter>
+    <None Include="Oya_dialog.json">
+      <Filter>Dialogue</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>

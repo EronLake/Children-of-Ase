@@ -84,6 +84,8 @@ bool first_call = true;
 
 bool DialogueController::quest_declined = false;
 
+ConversationLogObj* DialogueController::entry = nullptr;
+
 DialogueController::DialogueController()
 {
 	
@@ -196,23 +198,32 @@ void DialogueController::PlayerConversationPoint()
 			conv_log_obj->set_topic(NoTopic, mem);
 
 		curr_conversation_log.push_back(conv_log_obj);//add entry to log
+
+		//add conversation point to NPC's permanent conversation log storage
+		ConversationLogObj* perm_log_entry = new ConversationLogObj();
+		perm_log_entry->set_who(conv_log_obj->get_who());
+		perm_log_entry->set_topic(conv_log_obj->get_topic().first, conv_log_obj->get_topic().second);
+		perm_log_entry->set_conv_point(conv_log_obj->get_conv_point());
+
+		entry = perm_log_entry;
 		
+
+		//limit the number of conversation log entries for the current conversation
+		//to a maximum of 8
+		if (curr_conversation_log.size() > 8) {
+			delete curr_conversation_log[0];
+			curr_conversation_log.erase(curr_conversation_log.begin());
+		}
 		player_conv_point_choice = choice[ConvPointName];
 
-		Hero* temp_hero = nullptr;
-		if (other->getType() >= WorldObj::TYPE_NPC) {
-			if (temp_hero = CheckClass::isHero(other))//added another equals was single equals before
-			{
-				perror("you cannot talk to this type of object");
-			}
-		}
-		else {
-			return;
-		}
-		std::string tempin;
+		Hero* temp_hero = CheckClass::isHero(other);
+
+		/*Caused game to freeze whenever I tried talking to Yemoja! Be warned if uncommenting
+		the below*/
+		/*std::string tempin;
 		std::cout << "Shango's AFF, NOT, STR (respectively): " << temp_hero->rel[1]->getAffinity() << ", ";
 		std::cout << temp_hero->rel[1]->getNotoriety() << ", " << temp_hero->rel[1]->getStrength() << ", ";
-		//std::cin >> tempin;
+		std::cin >> tempin;*/
 
 		/*handles applying of post conditions for relationship related conversation
 		points. I also thought to incorporate checks for if a player completed an action
@@ -264,7 +275,7 @@ void DialogueController::PlayerConversationPoint()
 	else {
 		state = 4;
 		otherResponse(player_conv_point_choice, curr_hero_topic);
-
+		add_to_perm_storage(entry);
 		player_conv_point_choice = "";
 	}
 }
@@ -388,7 +399,7 @@ void DialogueController::PlayerResponse()
 
 		/*quest dialog code that was done by Justin and Alessio. Is placeholder
 		and will be removed at some point.*/
-		if (prompted_quest)
+		/*if (prompted_quest)
 		{
 			if (select == 0)   // Player is accepting the quest
 			{
@@ -404,7 +415,7 @@ void DialogueController::PlayerResponse()
 
 			}
 
-		}
+		}*/
 		/*pushes quest onto npc's quests_given vector if the player accepts
 		their quest and sets player's current action to that quest*/
 		Hero* temp_hero;
@@ -448,6 +459,20 @@ void DialogueController::PlayerResponse()
 			conv_log_obj->set_topic(NoTopic, mem);
 
 		curr_conversation_log.push_back(conv_log_obj);
+
+		//add conversation point to NPC's permanent conversation log storage
+		ConversationLogObj* perm_log_entry = new ConversationLogObj();
+		perm_log_entry->set_who(conv_log_obj->get_who());
+		perm_log_entry->set_topic(conv_log_obj->get_topic().first, conv_log_obj->get_topic().second);
+		perm_log_entry->set_conv_point(conv_log_obj->get_conv_point());
+		add_to_perm_storage(perm_log_entry);
+
+		//limit the number of conversation log entries for the current conversation
+		//to a maximum of 8
+		if (curr_conversation_log.size() > 8) {
+			delete curr_conversation_log[0];
+			curr_conversation_log.erase(curr_conversation_log.begin());
+		}
 
 		/*insert the topic at the beginning of the player's reply point sentence
 		if they are replying to a hero-related conversation point*/
@@ -520,7 +545,7 @@ void DialogueController::otherConversationPoint(dialogue_point line)
 	of size 2.*/
 	if (point[0] != "No_More_Phrases" && point[0] != "Already_Asked" && point.size() >= 4)
 		point[Topic] = curr_hero_topic;
-
+	
 	/*handles special case of quest conversation point by making
 	sure it's dialogue point will be the same size as the basic
 	conversation points like "Ask_Name" etc.*/
@@ -557,6 +582,19 @@ void DialogueController::otherConversationPoint(dialogue_point line)
 
 	    curr_conversation_log.push_back(conv_log_obj);
 
+		//add conversation point to NPC's permanent conversation log storage
+		ConversationLogObj* perm_log_entry = new ConversationLogObj();
+		perm_log_entry->set_who(conv_log_obj->get_who());
+		perm_log_entry->set_topic(conv_log_obj->get_topic().first, conv_log_obj->get_topic().second);
+		perm_log_entry->set_conv_point(conv_log_obj->get_conv_point());
+		add_to_perm_storage(perm_log_entry);
+
+		//limit the number of conversation log entries for the current conversation
+		//to a maximum of 8
+		if (curr_conversation_log.size() > 8) {
+			delete curr_conversation_log[0];
+			curr_conversation_log.erase(curr_conversation_log.begin());
+		}
 	//initialization of conversation log entry for conversation point
 		ConversationLogObj* conv_log_obj2 = new ConversationLogObj();
 		Memory* mem2 = nullptr;
@@ -603,21 +641,40 @@ void DialogueController::otherConversationPoint(dialogue_point line)
 			conv_log_obj2->set_topic(NoTopic, mem2);
 
 	    curr_conversation_log.push_back(conv_log_obj2);
+
+		//add conversation point to NPC's permanent conversation log storage
+		ConversationLogObj* perm_log_entry2 = new ConversationLogObj();
+		perm_log_entry2->set_who(conv_log_obj2->get_who());
+		perm_log_entry2->set_topic(conv_log_obj2->get_topic().first, conv_log_obj2->get_topic().second);
+		perm_log_entry2->set_conv_point(conv_log_obj2->get_conv_point());
+		add_to_perm_storage(perm_log_entry2);
+
+		//limit the number of conversation log entries for the current conversation
+		//to a maximum of 8
+		if (curr_conversation_log.size() > 8) {
+			delete curr_conversation_log[0];
+			curr_conversation_log.erase(curr_conversation_log.begin());
+		}
     }
 	
-	message = other->getName() + ": " + reply_pt_sentence + "\n" +con_pt_sentence;
-	replyOptions = dialogue.get_possible_reply_pts(point[ConvPointName], optionsIndex);
-	
-	select = 0;
+
 
 	/*skips the player's reply point if the npc does not say a conversation 
 	point, if the npc tells the player that they already asked them something,
 	or if an npc runs out of relevant conversation points to say.
 	*/
-	if (point[ConvPointName] != "No_More_Phrases" && point[ConvPointName] != "Already_Asked" && point[ConvPointName] != "" && point[ConvPointName] != "No Quest")
+	if (point[ConvPointName] != "No_More_Phrases" && line[ConvPointName] != "Already_Asked" && point[ConvPointName] != "" && point[ConvPointName] != "No Quest") {
 		state = 2;
-	else
+		message = other->getName() + ": " + reply_pt_sentence + "\n" + con_pt_sentence;
+		replyOptions = dialogue.get_possible_reply_pts(point[ConvPointName], optionsIndex);
+
+		select = 0;
+	}
+	else {
+		message = other->getName() + ": " + reply_pt_sentence + "\n";
 		state = 1;//skip player reply if npc cannot give a conversation point
+	}
+		
 
 	DialogueController::scroll_control = 0;
 }
@@ -762,7 +819,7 @@ void DialogueController::otherResponse(std::string info, std::string hero_topic)
 	}
 
 	if (state != 8) {
-		dialogue_point line = dialogue.choose_reply_pt(info, optionsIndex, curr_conversation_log);
+		dialogue_point line = dialogue.choose_reply_pt(info, optionsIndex, curr_conversation_log,temp_hero);
 		replyString = line[ConvPointName];
 
 		/*avoids setting a topic when npc replies with "You already asked me that"
@@ -784,7 +841,7 @@ void DialogueController::otherResponse(std::string info, std::string hero_topic)
 			} else{
 				/////////////need to be changed to correct calls/dialog if not accepted///////////////////
 				dialogue_point diog_pt = { "Accept Alliance Offer","Accept Alliance Offer" };
-				std::string reply_pt_sentence = dialogue.gen_dialog(diog_pt, temp_hero);
+				std::string reply_pt_sentence = dialogue.gen_dialog_negative(diog_pt, temp_hero);
 				message = other->getName() + ": " + reply_pt_sentence + "\n\n";
 			}
 			
@@ -803,7 +860,7 @@ void DialogueController::otherResponse(std::string info, std::string hero_topic)
 			else {
 				/////////////need to be changed to correct calls/dialog if not accepted///////////////////
 				dialogue_point diog_pt = { "Accept Duel","Accept Duel" };
-				std::string reply_pt_sentence = dialogue.gen_dialog(diog_pt, temp_hero);
+				std::string reply_pt_sentence = dialogue.gen_dialog_negative(diog_pt, temp_hero);
 				message = other->getName() + ": " + reply_pt_sentence + "\n\n";
 			}
 
@@ -822,7 +879,7 @@ void DialogueController::otherResponse(std::string info, std::string hero_topic)
 			else {
 				/////////////need to be changed to correct calls/dialog if not accepted///////////////////
 				dialogue_point diog_pt = { "Accept Spar Request","Accept Spar Request" };
-				std::string reply_pt_sentence = dialogue.gen_dialog(diog_pt, temp_hero);
+				std::string reply_pt_sentence = dialogue.gen_dialog_negative(diog_pt, temp_hero);
 				message = other->getName() + ": " + reply_pt_sentence + "\n\n";
 			}
 			state = 8;
@@ -843,7 +900,7 @@ void DialogueController::otherResponse(std::string info, std::string hero_topic)
 			else {
 				/////////////need to be changed to correct calls/dialog if not accepted///////////////////
 				dialogue_point diog_pt = { "Accept Alliance Offer","Accept Alliance Offer" };
-				std::string reply_pt_sentence = dialogue.gen_dialog(diog_pt, temp_hero);
+				std::string reply_pt_sentence = dialogue.gen_dialog_negative(diog_pt, temp_hero);
 				message = other->getName() + ": " + reply_pt_sentence + "\n\n";
 
 				//calls action end if the question is denied otherwise called on cmpletion of the action
@@ -860,7 +917,7 @@ void DialogueController::otherResponse(std::string info, std::string hero_topic)
 			else {
 				/////////////need to be changed to correct calls/dialog if not accepted///////////////////
 				dialogue_point diog_pt = { "Confirm Duel","Confirm Duel" };
-				std::string reply_pt_sentence = dialogue.gen_dialog(diog_pt, temp_hero);
+				std::string reply_pt_sentence = dialogue.gen_dialog_negative(diog_pt, temp_hero);
 				message = player->getName() + ": " + reply_pt_sentence + "\n\n";
 
 				//calls action end if the question is denied otherwise called on cmpletion of the action
@@ -877,7 +934,7 @@ void DialogueController::otherResponse(std::string info, std::string hero_topic)
 			else {
 				/////////////need to be changed to correct calls/dialog if not accepted///////////////////
 				dialogue_point diog_pt = { "Confirm Spar","Confirm Spar" };
-				std::string reply_pt_sentence = dialogue.gen_dialog(diog_pt, temp_hero);
+				std::string reply_pt_sentence = dialogue.gen_dialog_negative(diog_pt, temp_hero);
 				message = player->getName() + ": " + reply_pt_sentence + "\n\n";
 
 				//calls action end if the question is denied otherwise called on cmpletion of the action
@@ -898,7 +955,7 @@ void DialogueController::other_response_soldier(std::string info, std::string he
 	
 
 	//if (state != 8) {
-		dialogue_point line = dialogue.choose_reply_pt(info, optionsIndex, curr_conversation_log);
+		dialogue_point line = dialogue.choose_reply_pt(info, optionsIndex, curr_conversation_log,temp_hero);
 		replyString = line[ConvPointName];
 
 		/*avoids setting a topic when npc replies with "You already asked me that"
@@ -974,20 +1031,29 @@ void DialogueController::other_response_soldier(std::string info, std::string he
 		Soldier* soldier;
 		soldier = dynamic_cast<Soldier*>(other);
 
+		std::string reply_pt_sentence = "";
+
 		//currently adds an NPC to the player's party right away if
 		//the player asks them to join(NPC always says yes)
 		//eventually make it so NPC can refuse to join player's party
 		if (replyString == "Response_Recruit_For_Party") {
-			player->getVillage()->barracks->addToParty(soldier, false);
-			//soldier->getParty()->setAlliance(player->getParty()->getAlliance());
-			soldier->setCurrentLeader(player);
-			soldier->setParty(player->getParty());
+			if (soldier->getVillage()->get_alliance() == player->getVillage()->get_alliance()) {
+				player->getVillage()->barracks->addToParty(soldier, false);
+				//soldier->getParty()->setAlliance(player->getParty()->getAlliance());
+				soldier->setCurrentLeader(player);
+				soldier->setParty(player->getParty());
+				reply_pt_sentence = dialogue.gen_dialog(line, temp_hero);
+			}
+			else { //they will say no if not part of same alliance as you
+				reply_pt_sentence = dialogue.gen_dialog_negative(line, temp_hero);
+			}
 		}
 
 		//removes an NPC of the player's choosing from their party
 		if (replyString == "Response_Remove_From_Party") {
 			soldier->setCurrentLeader(soldier);
 			player->getParty()->removeSoldier(soldier, true);
+			reply_pt_sentence = dialogue.gen_dialog(line, temp_hero);
 			//soldier->getParty()->removeSoldier(soldier, true);
 			//soldier->getParty()->setAlliance(player->getParty()->getAlliance());
 			//cout << soldier->getParty()->getAlliance();
@@ -997,7 +1063,7 @@ void DialogueController::other_response_soldier(std::string info, std::string he
 			//std::cout << soldier->getCurrentLeader()->getName();
 		}
 
-		std::string reply_pt_sentence = dialogue.gen_dialog(line, temp_hero);
+		
 		message = other->getName() + ": " + reply_pt_sentence + "\n\n";
 
 		state = 7;
@@ -1190,6 +1256,7 @@ void DialogueController::exitDialogue()
 	/*does normal exitDialogue stuff if "other" is not a hero*/
 	if (state == 7 || state == 9) {
 
+		//removes all conversation log entries from the log for the current conversation
 		for (int i = 0; i < curr_conversation_log.size(); i++) {
 
 			//delete memory allocated for instance of Memory class here
@@ -1198,8 +1265,27 @@ void DialogueController::exitDialogue()
 			if (curr_conversation_log[i] != nullptr)
 				delete curr_conversation_log[i];
 		}
-
 		curr_conversation_log.clear();
+
+		//removes unwanted conversation log entries from NPC's permanent storage
+		if (temp_hero) {
+			for (int i = 0; i < temp_hero->conversation_log.size(); ) {
+
+				//delete memory allocated for instance of Memory class here
+				//delete tmp_top.second;
+				//delete memory allocated for conversation log object here
+				if (temp_hero->conversation_log[i] != nullptr) {
+					if (temp_hero->conversation_log[i]->get_conv_point()->get_name() != "Ask_Name"
+						&& temp_hero->conversation_log[i]->get_conv_point()->get_name() != "Ask_Origin") {
+						delete temp_hero->conversation_log[i];
+						temp_hero->conversation_log.erase(temp_hero->conversation_log.begin() + i);
+					}
+					else
+						++i;
+				}
+			}
+		}
+
 		if (temp_hero) {
 			remove_hero_related_conv_points();
 			//remove_ask_for_quest();
@@ -1297,6 +1383,8 @@ void DialogueController::add_hero_related_conv_points() {
 	/*Adds hero-related conversation points to player's vector of dialogue options
 	and to their 3D vector of possible conversation points for conversation points
 	associated with the notoriety icon*/
+	/*Uncomment below loop after Alpha Release*////////////////////////////////////
+	/*
 	for (auto itor = Containers::conv_point_table.begin(); itor != Containers::conv_point_table.end(); ++itor) {
 		for (int j = 0; j < heroes_player_knows.size(); ++j) {
 			if (heroes_player_knows[j] != dialogue.hero_name_to_int(other->getName())) {
@@ -1308,7 +1396,7 @@ void DialogueController::add_hero_related_conv_points() {
 				}
 			}
 		}
-	}
+	}*/
 }
 
 /*Removes hero-related conversation points from the 3D vector of possible
@@ -1491,4 +1579,24 @@ void DialogueController::remove_soldier_opts() {
 		//soldier_options[StrengthIcon][i].erase();
 	//}
 	soldier_options.clear();
+}
+
+/*Adds a conversation log entry to an NPC's permanent conversation log if
+the NPC does not already have an entry identical to that one in their log.
+Otherwise, it does nothing.*/
+void DialogueController::add_to_perm_storage(ConversationLogObj* log_entry) {
+	Hero* temp_hero = CheckClass::isHero(other);
+	if (temp_hero != nullptr) {
+		if (temp_hero->conversation_log.size() > 0) {
+			for (int i = 0; i < temp_hero->conversation_log.size(); ++i) {
+				if (temp_hero->conversation_log[i]->get_conv_point() == log_entry->get_conv_point()
+					&& temp_hero->conversation_log[i]->get_who() == log_entry->get_who()
+					&& temp_hero->conversation_log[i]->get_topic() == log_entry->get_topic())
+					return;
+			}
+		}
+		temp_hero->conversation_log.push_back(log_entry);
+		
+	}
+
 }

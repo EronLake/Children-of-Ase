@@ -77,6 +77,13 @@
 #define new DEBUG_NEW
 #endif
 
+/*
+this variable is used to keep track of time (in frames)
+it is imcremented in the game loop
+*/
+extern int frame_count = 0;
+extern bool game_ended = false;
+
 using namespace std;
 
 Texture* Point::tex = new Texture();
@@ -103,6 +110,40 @@ void set_file_with_thread(Texture* t, const pair<string, int>* p_tuple) {
 	std::lock_guard<std::mutex> guard(mu); t->setFile(p_tuple->first, p_tuple->second);
 }
 
+
+//Eron: needs to be moved to separate file
+void check_if_end_game() {
+	Village* player_vil = dynamic_cast<Player*>(Containers::hero_table["Shango"])->getVillage();
+	Village* yemoja_vil = dynamic_cast<Player*>(Containers::hero_table["Shango"])->getVillage();
+	Village* oya_vil = dynamic_cast<Player*>(Containers::hero_table["Shango"])->getVillage();
+
+	//checks if there is only one alliance left end the game (everyone is alligned)
+	if (player_vil->get_alliance()->get_num_alliances() == 1) 
+	{
+		game_ended = true;
+	}
+	
+	//checks if both heroes are conquered (the player conqured the world)
+	if (yemoja_vil->conquerer == player_vil && oya_vil->conquerer == player_vil) 
+	{
+		game_ended = true;
+	}
+
+	//checks if the hero is alligned with the conqurer (the player teamed up and conqurred the yemoja)
+	if (player_vil->get_alliance()->get_alligned_villages()[0] == oya_vil &&
+		(yemoja_vil->conquerer == player_vil || yemoja_vil->conquerer == oya_vil))
+	{
+		game_ended = true;
+	}
+
+	//checks if the hero is alligned with the conqurer (the player teamed up and conqurred the oya)
+	if (player_vil->get_alliance()->get_alligned_villages()[0] == yemoja_vil &&
+		(oya_vil->conquerer == player_vil || oya_vil->conquerer == yemoja_vil))
+	{
+		game_ended = true;
+	}
+}
+
 int main() {
 	WorldObj* screen = new WorldObj(Vector2f(0.0, 0.0), 25000U, 25000U);	//init screen
 
@@ -127,6 +168,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	
 	vector<WorldObj*> recVec;
 	vector<WorldObj*> movVec;
+	vector<WorldObj*>* largeStruct = new vector<WorldObj*>();
 	vector<WorldObj*>* recVec_ptr = &recVec;
 	vector<WorldObj*>* movVec_ptr = &movVec;
 	vector<Hero*> heroes;
@@ -144,7 +186,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	//need this here for map editor
 	ChildrenOfOsi* gameplay_functions = new ChildrenOfOsi(mLog, tBuffer);
 
-	RenderManager* RenM = new RenderManager(mLog, tBuffer, _QuadTree, gameplay_functions, rivObj);
+	RenderManager* RenM = new RenderManager(mLog, tBuffer, _QuadTree, gameplay_functions, rivObj, largeStruct);
 	DummyController* DumM = new DummyController(mLog, tBuffer);
 	PhysicsManager* PhysM = new PhysicsManager(mLog, tBuffer, _QuadTree, grid, rivObj);
 	//PartyManager* partyM = new PartyManager(gameplay_functions, Alex);
@@ -211,7 +253,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	Input* iController = new Input(gameplay_functions, Alex, RenM->renderHelper, tBuffer, recVec_ptr, movVec_ptr);
 
 	gameplay_functions->add_hero("Yemoja", 6445.0, 10355.0, true);
-	gameplay_functions->add_hero("Oya", 4400, 3600, true);
+	gameplay_functions->add_hero("Oya", 7445, 10555, true);
 	tBuffer->run();
 	
 
@@ -236,7 +278,6 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	vector<Texture*> marsh;
 	vector<vector<Texture*>> starting_location;
 	
-
 	ObjConfig::textureMapConfig = &textureMap;
 	ObjConfig::standard_con = &standard;
 	ObjConfig::oasis_con = &oasis;
@@ -1568,8 +1609,8 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 
 	//*oya = *staticRec;
 	//oya->setSpeed(5);
-	//oya->setName("Oya");
-	//oya->name = OYA;
+	oya->setName("Oya");
+	oya->name = OYA;
 	oya->offsetBody(0, 35, 35, 65, 15);
 	staticRec->offsetBody(0, 60, 60, 75, 50);
 	oya->shiftY(300);
@@ -1603,7 +1644,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	Planner* OyaPlanner = new Planner(oya);
 	AIController::set_plan(YEMOJA, YemojaPlanner);
 	AIController::set_plan(OYA, OyaPlanner);
-	/*
+	
 	Action* test_ally = new Action(nullptr, nullptr, nullptr, 10, 1, "Create Alliance", "execute_train");
 	Action* test_train = new Action(staticRec, oya, nullptr, 10, 1, "Conquer", "execute_conquer");
 
@@ -1614,14 +1655,14 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	RelPost* post2 = new RelPost(Postcondition::AFF, 15);
 	
 
-	/*
+	
 	test_ally->req_preconds.push_back(std::make_shared<RelPrecon>(*prec));
 	test_ally->doer_succ_postconds.push_back(std::make_shared<RelPost>(*post));
 	
 	test_train->req_preconds.push_back(std::make_shared<RelPrecon>(*prec1));
 	test_train->doer_succ_postconds.push_back(std::make_shared<RelPost>(*post1));
 	test_train->doer_succ_postconds.push_back(std::make_shared<RelPost>(*post2));
-	*/
+	
 
 	//ActionPool act_pool(Alex);
 	//act_pool.macro.push_back(test_ally);
@@ -1797,17 +1838,21 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 
 	//tm.join();
 
+
 	current_game_state = game_state::main_menu;
 
 	//insert all of the immovable objects into the quad tree
 	_QuadTree->clear();
 	cout << "tree size is  " << _QuadTree->treeSize() << endl;
 	for (int i = 0; i < recVec.size(); i++) {
+		if (recVec[i]->getName() == "Oasis_Platform" || recVec[i]->getName() == "JungleVillage") largeStruct->push_back(recVec[i]);
 		_QuadTree->Insert(recVec[i]);	//insert all obj into tree
 	}
 
 	cout << "tree size is  " << _QuadTree->treeSize() << endl;
 	cout << "size of recvec is " << recVec.size() << endl;
+	cout << "size of largestruct is " << largeStruct->size() << endl;
+	for (auto it : *largeStruct) cout << (it)->getName() << endl;
 
 	while (GameWindow::isRunning()) {
 		while (current_game_state == game_state::main_menu) {
@@ -1846,12 +1891,11 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 			}
 			HUD::FPS = fps;
 			//cout << "FPS: " << fps << endl;
-			total_fps += fps;
-			frame_count++;
 
 			current_game_state = iController->current_game_state;
 		}
 		while (current_game_state == game_state::in_game) {
+
 			for (int i = 0; i < 10; i++) {
 				//cout << "Press Escape to pause game" << endl;
 			}
@@ -1997,14 +2041,14 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 				combatControl->update_soldier(soldiers_list[i], state);
 			}*/
 
-			std::thread AI([=]() {
-				combatControl->checkParties();
+		//	std::thread AI([=]() {
+				
+		//	});
+			//YemojaPlanner->set_current_action(test_train);
+			combatControl->checkParties();
 				for (int i = 0; i < soldiers_list.size(); i++) {
 					combatControl->update_soldier(soldiers_list[i], state);
 				}
-			});
-			//YemojaPlanner->set_current_action(test_train);
-
 			questM->update();
 
 			//draw
@@ -2041,7 +2085,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 //			cout << " first dest is " << staticRec->get_action_destination()->getXloc() << ", " << staticRec->get_action_destination()->getYloc() << endl;
 			AIController::execute();
 //			cout << "after execute dest is " << staticRec->get_action_destination()->getXloc() << ", " << staticRec->get_action_destination()->getYloc() << endl;
-			AI.join();
+			//AI.join();
 //			cout << "after thread join dest is " << staticRec->get_action_destination()->getXloc() << ", " << staticRec->get_action_destination()->getYloc() << endl;
 			if ((1000 / fs) > (clock() - start_tick)) { //delta_ticks)
 				Sleep((1000 / fs) - (clock() - start_tick));
@@ -2055,6 +2099,9 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 			total_fps += fps;
 			frame_count++;
 			HUD::AVG = total_fps / frame_count;
+
+			//Checks if game has reached final states
+			check_if_end_game();
 
 			current_game_state = iController->current_game_state;
 			//system("PAUSE");
@@ -2077,7 +2124,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 			start_tick = clock();
 
 			//draw
-			gameplay_functions->drawDiaGui(Alex);
+			gameplay_functions->drawTut(Alex);
 
 			//run task buffer
 			iController->InputCheck();
@@ -2092,13 +2139,57 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 				fps = CLOCKS_PER_SEC / delta_ticks;
 			}
 			HUD::FPS = fps;
-			total_fps += fps;
+			//total_fps += fps;
 			//cout << "FPS: " << fps << endl;
 
-			frame_count++;
+			//frame_count++;
 			HUD::AVG = total_fps / frame_count;
 
 			current_game_state = iController->current_game_state;
+		}
+		while (current_game_state == game_state::victory_menu) {
+
+			if (iController->current_game_state != game_state::victory_menu) {
+				iController->current_game_state = current_game_state;
+			}
+
+			if (shouldExit > 0) {
+				_CrtDumpMemoryLeaks();
+				return;
+			}
+			start_tick = clock();
+
+			//draw
+			gameplay_functions->drawTut(Alex);
+
+			//run task buffer
+			iController->InputCheck();
+
+			tBuffer->run();
+
+			if (game_ended) {
+				break;
+			}
+
+			if ((1000 / fs) > (clock() - start_tick)) { //delta_ticks) {www
+				Sleep((1000 / fs) - (clock() - start_tick));
+			}
+			delta_ticks = clock() - start_tick; //the time, in ms, that took to render the scene
+			if (delta_ticks > 0) {
+				fps = CLOCKS_PER_SEC / delta_ticks;
+			}
+			HUD::FPS = fps;
+			//total_fps += fps;
+			//cout << "FPS: " << fps << endl;
+
+			//frame_count++;
+			HUD::AVG = total_fps / frame_count;
+
+			current_game_state = iController->current_game_state;
+
+		}
+		if (game_ended) {
+			break;
 		}
 	}
 	GameWindow::terminate();

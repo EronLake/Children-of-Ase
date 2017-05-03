@@ -13,59 +13,61 @@
 class RenderManager;
 class RenderHelper
 {
-public:
-	RenderHelper(QuadTree* QT, RiverObj* _rivObj);
-	~RenderHelper();
-	void initCamera(WorldObj* player);
-	void initCameraFull(WorldObj* player);
-	void initTutGui();
-	void init_logo_gui();
-	int init_map(WorldObj* obj);
-	int draw_frame(WorldObj* obj);
-	int sprite_up(WorldObj* obj);
-	int sprite_down(WorldObj* obj);
-	int sprite_left(WorldObj* obj);
-	int sprite_right(WorldObj* obj);
-	int sprite_atk(WorldObj* obj);
-	int sprite_spin_atk(WorldObj* obj);
-	int sprite_fire_atk(WorldObj* obj);
-	int sprite_hurt(WorldObj* obj);
-	int sprite_dead(WorldObj* obj);
-	int sprite_idle(WorldObj* obj);
-	int sprite_update(WorldObj* obj);
-	int drawDiaGui(WorldObj* obj);
-	int drawHUD(WorldObj* obj);
-	int drawTut(WorldObj* obj);
-	int draw_logo(WorldObj* obj);
-	Vector2f getCameraSize() { return cameraSize; }
-	int setSwordGlow(WorldObj* obj);
-	int setHeartGlow(WorldObj* obj);
-	int setFaceGlow(WorldObj* obj);
-	int setQuestionGlow(WorldObj* obj);
-	void sortVec();
-	bool compY(WorldObj* a, WorldObj* b);
-	QuadTree* tree;
-	//need this for map editor
-	WorldObj* camera;
-	WorldObj* fullBound;
-	RenderManager* manager;
-	RiverObj* rivObj;
+  public:
 
-	static GameMap* gmap;
-private:
-	
-	DialogueGui* convoGui;
-	Rectangle* TutGui;
-	Rectangle* logo_gui;
-	HUD* hud_ptr;
-	
-	std::vector<WorldObj*> objVec;
-	std::vector<WorldObj*> fullVec;
+  RenderHelper(QuadTree* QT, RiverObj* _rivObj, std::vector<WorldObj*>* _largeStruct);
+  ~RenderHelper();
 
-	//hold size of camera and map. first is width, second is height
-	Vector2f cameraSize;
-	Vector2f mapSize;
-	Vector2f CamOffset;
-	
+  void initCamera(WorldObj* player);
+  void initCameraFull(WorldObj* player);
+  void initTutGui();
+  void init_logo_gui();
+  int init_map(WorldObj* obj);
+  int draw_frame(WorldObj* obj);
+  int sprite_up(WorldObj* obj);
+  int sprite_down(WorldObj* obj);
+  int sprite_left(WorldObj* obj);
+  int sprite_right(WorldObj* obj);
+  int sprite_atk(WorldObj* obj);
+  int sprite_spin_atk(WorldObj* obj);
+  int sprite_fire_atk(WorldObj* obj);
+  int sprite_hurt(WorldObj* obj);
+  int sprite_dead(WorldObj* obj);
+  int sprite_idle(WorldObj* obj);
+  int sprite_update(WorldObj* obj);
+  int drawDiaGui(WorldObj* obj);
+  int drawHUD(WorldObj* obj);
+  int drawTut(WorldObj* obj);
+  int draw_logo(WorldObj* obj);
+  Vector2f getCameraSize() { return cameraSize; }
+  int setSwordGlow(WorldObj* obj);
+  int setHeartGlow(WorldObj* obj);
+  int setFaceGlow(WorldObj* obj);
+  int setQuestionGlow(WorldObj* obj);
+  void sortVec();
+  bool compY(WorldObj* a, WorldObj* b);
+  QuadTree* tree;
+  WorldObj* camera;
+  WorldObj* fullBound;
+  RenderManager* manager;
+  RiverObj* rivObj;
+  std::vector<WorldObj*>* largeStruct;
+
+  static GameMap* gmap;
+
+  private:
+
+  DialogueGui* convoGui;
+  Rectangle* TutGui;
+  Rectangle* logo_gui;
+  HUD* hud_ptr;
+
+  std::vector<WorldObj*> objVec;
+  std::vector<WorldObj*> fullVec;
+
+  Vector2f cameraSize;
+  Vector2f mapSize;
+  Vector2f CamOffset;
+
 };
 

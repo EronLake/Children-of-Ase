@@ -24,28 +24,28 @@
 
    "Talk_About_Affinity": {
      "conv_pts":{
-       "conv_pt_1": "Advise To Conquer",
-	   "conv_pt_2": "Advise To Ally With",
-	   "conv_pt_3": "Advise To Revolt Against",
-	   "conv_pt_4": "Advise To Destroy",
+       //"conv_pt_1": "Advise To Conquer",
+	   //"conv_pt_2": "Advise To Ally With",
+	   //"conv_pt_3": "Advise To Revolt Against",
+	   //"conv_pt_4": "Advise To Destroy",
 	   "conv_pt_5": "Bribe",
 	   "conv_pt_6": "Compliment",
 	   "conv_pt_7": "Grovel",
-	   "conv_pt_8": "Offer_Teaching",
+	   //"conv_pt_8": "Offer_Teaching",
        "conv_pt_9": "Insult"
 	 }
    },
 
    "Talk_About_Notoriety": {
      "conv_pts":{
-       "conv_pt_1": "Ask_To_Form_Alliance",
-	   "conv_pt_2": "Advise To Conquer",
-	   "conv_pt_3": "Advise To Ally With",
-	   "conv_pt_4": "Advise To Revolt Against",
-	   "conv_pt_5": "Advise To Destroy",
-	   "conv_pt_6": "Ask_To_Join_Party",
-	   "conv_pt_7": "Advise To Train With",
-       "conv_pt_8": "Ask_For_Teaching"
+       "conv_pt_1": "Ask_To_Form_Alliance"
+	   //"conv_pt_2": "Advise To Conquer",
+	   //"conv_pt_3": "Advise To Ally With",
+	   //"conv_pt_4": "Advise To Revolt Against",
+	   //"conv_pt_5": "Advise To Destroy",
+	   //"conv_pt_6": "Ask_To_Join_Party",
+	   //"conv_pt_7": "Advise To Train With",
+       //"conv_pt_8": "Ask_For_Teaching"
 	 }
    },
 
@@ -53,10 +53,10 @@
      "conv_pts":{
        "conv_pt_1": "Ask_To_Duel",
 	   "conv_pt_2": "Ask_To_Spar",
-	   "conv_pt_3": "Recruit_For_Party",
-	   "conv_pt_4": "Advise To Train With",
-	   "conv_pt_5": "Ask_For_Teaching",
-	   "conv_pt_6": "Offer_Teaching",
+	   //"conv_pt_3": "Recruit_For_Party",
+	   //"conv_pt_4": "Advise To Train With",
+	   //"conv_pt_5": "Ask_For_Teaching",
+	   //"conv_pt_6": "Offer_Teaching",
 	   "conv_pt_7": "Boast",
        "conv_pt_8": "Intimidate"   
 	 }
@@ -64,14 +64,14 @@
 
     "Talk_About_Action": {
 	 "conv_pts":{
-        "conv_pt_1": "Advise To Conquer",
-		"conv_pt_2": "Advise To Ally With",
-		"conv_pt_3": "Advise To Revolt Against",
-		"conv_pt_4": "Advise To Destroy",
+        //"conv_pt_1": "Advise To Conquer",
+		//"conv_pt_2": "Advise To Ally With",
+		//"conv_pt_3": "Advise To Revolt Against",
+		//"conv_pt_4": "Advise To Destroy",
 		"conv_pt_5": "Ask_To_Duel",
-		"conv_pt_6": "Ask_To_Spar",
-	    "conv_pt_7": "Recruit_For_Party",
-        "conv_pt_8": "Advise To Train With"
+		"conv_pt_6": "Ask_To_Spar"
+	    //"conv_pt_7": "Recruit_For_Party",
+        //"conv_pt_8": "Advise To Train With"
 	 }
     }
 }

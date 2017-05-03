@@ -35,14 +35,6 @@
 #define OSHOSI 4
 #define OGUN 5
 
-
-/*
-this variable is used to keep track of time (in frames)
-it is imcremented in the game loop
-*/
-static int frame_count = 0;
-
-
 //static double map_zoom = 1.5; //initialized in main
 
 //Texture* rect = new Texture();
@@ -53,7 +45,7 @@ static int frame_count = 0;
 #define START_FULLSCREEN false
 #define MOUSE_VISIBLE true
 #define LOAD_REGIONS 1 //0==Load Config should be empty || 1==Load All || 2==Load Oasis || 3==Load Jungle
-#define LOAD_MAP 0
+#define LOAD_MAP 1
 #define RIVER_COLLIDE 1
 
 /*
@@ -62,7 +54,7 @@ this zooms is used in renderHelper.cpp GameWindow.cpp and Input.cpp
 also specified to zoom for the map editor mode
 */
 #if MAP_EDITOR 
-#define map_zoom 3
+#define map_zoom 4
 #else 
 #define map_zoom 1
 

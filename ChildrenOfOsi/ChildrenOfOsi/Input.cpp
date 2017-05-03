@@ -8,6 +8,8 @@
 #include "json.h"
 #include "RegionState.h"
 
+extern bool game_ended;
+
 
 Input::Input(ChildrenOfOsi* _gameplay_functions, RenderHelper* _rHelper, TaskBuffer* _tBuffer, vector<WorldObj*>* _recVec, vector<WorldObj*>* _movVec)
 {
@@ -602,6 +604,14 @@ void Input::InputCheck()
 	short THREE = GetKeyState('3') >> 15; // Remove self from party and put party in patrol mode
 	short FOUR = GetKeyState('4') >> 15; // coming soon
 
+	if (current_game_state == game_state::victory_menu) {
+		if (ENTER) {
+			// assuming menu only has start option, so move in game
+			if (current_game_state == game_state::victory_menu) {
+				game_ended = true;
+			}
+		}
+	}
 	// main menu, only allow W and S to select menu options
 	if (current_game_state == game_state::main_menu) {
 		if (W) {
@@ -613,7 +623,9 @@ void Input::InputCheck()
 		if (ENTER) {
 			// assuming menu only has start option, so move in game
 			if (current_game_state == game_state::main_menu) {
-				current_game_state = game_state::in_game;
+				//current_game_state = game_state::in_game;
+				current_game_state = game_state::victory_menu;
+				
 			}
 		}
 	}
@@ -857,7 +869,7 @@ void Input::InputCheck()
 				//DialogueController::state = 7;
 				DialogueController::create_farewell();
 
-				WorldObj* other = DialogueController::getOther();
+				/*WorldObj* other = DialogueController::getOther();
 				//std:://cout << "HERO: " << other->getName() << std::endl;
 				if (other->getType() == WorldObj::TYPE_HERO) {
 					std::cout << "Right type" << std::endl;
@@ -874,23 +886,23 @@ void Input::InputCheck()
 					}
 					if (planner->give_as_quest && !DialogueController::accepted_quest)
 					{
-						DialogueController::quest = planner->get_current_action();
-						DialogueController::offerQuest_hack_();
-						DialogueController::prompted_quest = true;
+						//DialogueController::quest = planner->get_current_action();
+						//DialogueController::offerQuest_hack_();
+						//DialogueController::prompted_quest = true;
 					}
 					else
 					{
 						gameplay_functions->change_song("Change", RegionState::current_region.getRTheme(), RegionState::current_region.getRTheme());
 						RegionState::in_village = false;
 						DialogueController::exitDialogue();
-					}
-				}
-				else
-				{
+					}*/
+				//}
+				//else
+				//{
 					gameplay_functions->change_song("Change", RegionState::current_region.getRTheme(), RegionState::current_region.getRTheme());
 					RegionState::in_village = false;
 					DialogueController::exitDialogue();
-				}
+				//}
 			}
 			if (T) {
 				Hero* them = dynamic_cast<Hero*>(DialogueController::getOther());
