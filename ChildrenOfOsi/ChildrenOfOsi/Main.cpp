@@ -1727,7 +1727,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 		}
 	});*/
 
-	//t0.join();
+	t0.join();
 
 	current_game_state = game_state::main_menu;
 
