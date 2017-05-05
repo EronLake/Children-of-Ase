@@ -291,6 +291,7 @@
     <ClCompile Include="QuestManager.cpp" />
     <ClCompile Include="Region.cpp" />
     <ClCompile Include="RegionState.cpp" />
+    <ClCompile Include="GameState.cpp" />
     <ClCompile Include="Tag.cpp" />
     <ClCompile Include="TagConfig.cpp" />
     <ClCompile Include="ThreadManager.cpp" />

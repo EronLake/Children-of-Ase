@@ -110,23 +110,23 @@ GameMap::~GameMap()
 
 void GameMap::setTextures() {
 	if (LOAD_MAP) {
-		map1_1tex = Containers::texture_table["map1_1"];
-		map1_2tex = Containers::texture_table["map1_2"];
-		map1_3tex = Containers::texture_table["map1_3"];
-		map1_4tex = Containers::texture_table["map1_4"];
-		map1_5tex = Containers::texture_table["map1_5"];
+	//	map1_1tex = Containers::texture_table["map1_1"];
+	//	map1_2tex = Containers::texture_table["map1_2"];
+	//	map1_3tex = Containers::texture_table["map1_3"];
+	//	map1_4tex = Containers::texture_table["map1_4"];
+	//	map1_5tex = Containers::texture_table["map1_5"];
 
 		map2_1tex = Containers::texture_table["map2_1"];
 		map2_2tex = Containers::texture_table["map2_2"];
 		map2_3tex = Containers::texture_table["map2_3"];
-		map2_4tex = Containers::texture_table["map2_4"];
-		map2_5tex = Containers::texture_table["map2_5"];
+	//	map2_4tex = Containers::texture_table["map2_4"];
+	//	map2_5tex = Containers::texture_table["map2_5"];
 
 		map3_1tex = Containers::texture_table["map3_1"];
 		map3_2tex = Containers::texture_table["map3_2"];
 		map3_3tex = Containers::texture_table["map3_3"];
 		map3_4tex = Containers::texture_table["map3_4"];
-		map3_5tex = Containers::texture_table["map3_5"];
+	//	map3_5tex = Containers::texture_table["map3_5"];
 
 		map4_1tex = Containers::texture_table["map4_1"];
 		map4_2tex = Containers::texture_table["map4_2"];
@@ -200,7 +200,7 @@ void GameMap::loadTexture(Vector2f loc)
 void GameMap::setSprite()
 {
 	if (LOAD_MAP) {
-
+/*
 		map1_1->sprite.setTexture(map1_1tex);
 		map1_2->sprite.setTexture(map1_2tex);
 		map1_3->sprite.setTexture(map1_3tex);
@@ -211,28 +211,28 @@ void GameMap::setSprite()
 		map_pieces.push_back({ map1_3 ,"Assets/Sprites/map1_3.png" });
 		map_pieces.push_back({ map1_4 ,"Assets/Sprites/map1_4.png" });
 		map_pieces.push_back({ map1_5 ,"Assets/Sprites/map1_5.png" });
-
+*/
 		map2_1->sprite.setTexture(map2_1tex);
 		map2_2->sprite.setTexture(map2_2tex);
 		map2_3->sprite.setTexture(map2_3tex);
-		map2_4->sprite.setTexture(map2_4tex);
-		map2_5->sprite.setTexture(map2_5tex);
+	//	map2_4->sprite.setTexture(map2_4tex);
+	//	map2_5->sprite.setTexture(map2_5tex);
 		map_pieces.push_back({ map2_1 ,"Assets/Sprites/map2_1.png" });
 		map_pieces.push_back({ map2_2 ,"Assets/Sprites/map2_2.png" });
 		map_pieces.push_back({ map2_3 ,"Assets/Sprites/map2_3.png" });
-		map_pieces.push_back({ map2_4 ,"Assets/Sprites/map2_4.png" });
-		map_pieces.push_back({ map2_5 ,"Assets/Sprites/map2_5.png" });
+	//	map_pieces.push_back({ map2_4 ,"Assets/Sprites/map2_4.png" });
+	//	map_pieces.push_back({ map2_5 ,"Assets/Sprites/map2_5.png" });
 
 		map3_1->sprite.setTexture(map3_1tex);
 		map3_2->sprite.setTexture(map3_2tex);
 		map3_3->sprite.setTexture(map3_3tex);
 		map3_4->sprite.setTexture(map3_4tex);
-		map3_5->sprite.setTexture(map3_5tex);
+	//	map3_5->sprite.setTexture(map3_5tex);
 		map_pieces.push_back({ map3_1 ,"Assets/Sprites/map3_1.png" });
 		map_pieces.push_back({ map3_2 ,"Assets/Sprites/map3_2.png" });
 		map_pieces.push_back({ map3_3 ,"Assets/Sprites/map3_3.png" });
 		map_pieces.push_back({ map3_4 ,"Assets/Sprites/map3_4.png" });
-		map_pieces.push_back({ map3_5 ,"Assets/Sprites/map3_5.png" });
+	//	map_pieces.push_back({ map3_5 ,"Assets/Sprites/map3_5.png" });
 
 		map4_1->sprite.setTexture(map4_1tex);
 		map4_2->sprite.setTexture(map4_2tex);
@@ -264,11 +264,11 @@ void GameMap::drawMap(float _x, float _y)
 {
 	if (LOAD_MAP) {
 
-		if (Party::dist_location_to_location(map1_1->get_mid_loc(), { _x,_y }) < 5000)GameWindow::drawSprite(map1_1->getX() - _x, map1_1->getY() - _y, map1_1->getWidth(), map1_1->getHeight(), map1_1->sprite);
-		if (Party::dist_location_to_location(map1_2->get_mid_loc(), { _x,_y }) < 5000)GameWindow::drawSprite(map1_2->getX() - _x, map1_2->getY() - _y, map1_2->getWidth(), map1_2->getHeight(), map1_2->sprite);
-		if (Party::dist_location_to_location(map1_3->get_mid_loc(), { _x,_y }) < 5000)GameWindow::drawSprite(map1_3->getX() - _x, map1_3->getY() - _y, map1_3->getWidth(), map1_3->getHeight(), map1_3->sprite);
-		if (Party::dist_location_to_location(map1_4->get_mid_loc(), { _x,_y }) < 5000)GameWindow::drawSprite(map1_4->getX() - _x, map1_4->getY() - _y, map1_4->getWidth(), map1_4->getHeight(), map1_4->sprite);
-		if (Party::dist_location_to_location(map1_5->get_mid_loc(), { _x,_y }) < 5000)GameWindow::drawSprite(map1_5->getX() - _x, map1_5->getY() - _y, map1_5->getWidth(), map1_5->getHeight(), map1_5->sprite);
+	//	if (Party::dist_location_to_location(map1_1->get_mid_loc(), { _x,_y }) < 5000)GameWindow::drawSprite(map1_1->getX() - _x, map1_1->getY() - _y, map1_1->getWidth(), map1_1->getHeight(), map1_1->sprite);
+	//	if (Party::dist_location_to_location(map1_2->get_mid_loc(), { _x,_y }) < 5000)GameWindow::drawSprite(map1_2->getX() - _x, map1_2->getY() - _y, map1_2->getWidth(), map1_2->getHeight(), map1_2->sprite);
+	//	if (Party::dist_location_to_location(map1_3->get_mid_loc(), { _x,_y }) < 5000)GameWindow::drawSprite(map1_3->getX() - _x, map1_3->getY() - _y, map1_3->getWidth(), map1_3->getHeight(), map1_3->sprite);
+	//	if (Party::dist_location_to_location(map1_4->get_mid_loc(), { _x,_y }) < 5000)GameWindow::drawSprite(map1_4->getX() - _x, map1_4->getY() - _y, map1_4->getWidth(), map1_4->getHeight(), map1_4->sprite);
+	//	if (Party::dist_location_to_location(map1_5->get_mid_loc(), { _x,_y }) < 5000)GameWindow::drawSprite(map1_5->getX() - _x, map1_5->getY() - _y, map1_5->getWidth(), map1_5->getHeight(), map1_5->sprite);
 
 		if (Party::dist_location_to_location(map2_1->get_mid_loc(), { _x,_y }) < 5000)GameWindow::drawSprite(map2_1->getX() - _x, map2_1->getY() - _y, map2_1->getWidth(), map2_1->getHeight(), map2_1->sprite);
 		if (Party::dist_location_to_location(map2_2->get_mid_loc(), { _x,_y }) < 5000)GameWindow::drawSprite(map2_2->getX() - _x, map2_2->getY() - _y, map2_2->getWidth(), map2_2->getHeight(), map2_2->sprite);

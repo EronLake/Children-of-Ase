@@ -112,39 +112,6 @@ void set_file_with_thread(Texture* t, const pair<string, int>* p_tuple) {
 }
 
 
-//Eron: needs to be moved to separate file
-void check_if_end_game() {
-	Village* player_vil = dynamic_cast<Player*>(Containers::hero_table["Shango"])->getVillage();
-	Village* yemoja_vil = dynamic_cast<Player*>(Containers::hero_table["Shango"])->getVillage();
-	Village* oya_vil = dynamic_cast<Player*>(Containers::hero_table["Shango"])->getVillage();
-
-	//checks if there is only one alliance left end the game (everyone is alligned)
-	if (player_vil->get_alliance()->get_num_alliances() == 1) 
-	{
-		game_ended = true;
-	}
-	
-	//checks if both heroes are conquered (the player conqured the world)
-	if (yemoja_vil->conquerer == player_vil && oya_vil->conquerer == player_vil) 
-	{
-		game_ended = true;
-	}
-
-	//checks if the hero is alligned with the conqurer (the player teamed up and conqurred the yemoja)
-	if (player_vil->get_alliance()->get_alligned_villages()[0] == oya_vil &&
-		(yemoja_vil->conquerer == player_vil || yemoja_vil->conquerer == oya_vil))
-	{
-		game_ended = true;
-	}
-
-	//checks if the hero is alligned with the conqurer (the player teamed up and conqurred the oya)
-	if (player_vil->get_alliance()->get_alligned_villages()[0] == yemoja_vil &&
-		(oya_vil->conquerer == player_vil || oya_vil->conquerer == yemoja_vil))
-	{
-		game_ended = true;
-	}
-}
-
 int main() {
 	WorldObj* screen = new WorldObj(Vector2f(0.0, 0.0), 25000U, 25000U);	//init screen
 
@@ -255,7 +222,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 
 	Input* iController = new Input(gameplay_functions, Alex, RenM->renderHelper, tBuffer, recVec_ptr, movVec_ptr);
 
-	gameplay_functions->add_hero("Yemoja", 6445, 10055, true);
+	gameplay_functions->add_hero("Yemoja", 5045, 13465, true);
 	gameplay_functions->add_hero("Oya", 17157, 20960, true);
 	tBuffer->run();
 	
@@ -1223,7 +1190,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	tBuffer->run();
 
 	Alex->melee = Containers::Attack_table[Alex->getKey()];
-	Alex->melee->setDmg(10);
+	Alex->melee->setDmg(85);
 	Alex->melee->setSpeed(5);
 	Alex->melee->setBaseDir(4);
 	Alex->melee->setCoolDown(35);
@@ -1571,7 +1538,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	//oya->setSpeed(5);
 	oya->setName("Oya");
 	oya->name = OYA;
-	oya->offsetBody(0, 35, 35, 65, 15);
+	oya->offsetBody(0, 60, 60, 75, 50);
 	staticRec->offsetBody(0, 60, 60, 75, 50);
 	oya->shiftY(300);
 	oya->setHealth(50);
@@ -1759,6 +1726,8 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 			}
 		}
 	});*/
+
+	//t0.join();
 
 	current_game_state = game_state::main_menu;
 
@@ -2048,11 +2017,10 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 			frame_count++;
 			HUD::AVG = total_fps / frame_count;
 
-			//Checks if game has reached final states
-			check_if_end_game();
-
 			current_game_state = iController->current_game_state;
 			//system("PAUSE");
+			//Checks if game has reached final states
+			//GameState::check_if_end_game(&current_game_state);
 			
 
 		}

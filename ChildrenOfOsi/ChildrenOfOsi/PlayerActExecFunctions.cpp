@@ -14,6 +14,7 @@ PlayerActExecFunctions::~PlayerActExecFunctions()
 
 void PlayerActExecFunctions::execute_start(std::string act_name, Hero* receiver) {
 
+
 	std::cout << "------------EX_START-------------" << std::endl;
 
 	Player* player = dynamic_cast<Player*>(Containers::hero_table["Shango"]);
