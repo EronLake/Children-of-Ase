@@ -450,11 +450,11 @@
     },
 
 	"Response_Ask_For_Quest": {
-        "1": "Let me see...",
-        "2": "Let me see...",
-        "3": "Let me see...",
-        "4": "Let me see...",
-        "5": "Let me see..."
+        "1": "Well...",
+        "2": "Well...",
+        "3": "Well...",
+        "4": "Well...",
+        "5": "Well..."
     },
 
 	"Accept_Quest": {
@@ -482,11 +482,11 @@
     },
 
 	"No Quest": {
-        "1": "No, I do not.",
-        "2": "No, I do not.",
-        "3": "No, I do not.",
-        "4": "No, I do not.",
-        "5": "No, I do not."
+        "1": "No, not at the moment.",
+        "2": "No, not at the moment.",
+        "3": "No, not at the moment.",
+        "4": "No, not at the moment.",
+        "5": "No, not at the moment."
     },
 
 	"Quest_Complete": {

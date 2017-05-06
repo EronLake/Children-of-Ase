@@ -34,7 +34,6 @@ public:
 	static int getState();
 	static void exitDialogue();
 	
-	static void offerQuest_hack_();
 
 	static DialogueHelper* getDialogueHelper();
 	static void add_hero_related_conv_points();
@@ -42,8 +41,6 @@ public:
 	static void replace_all(std::string& str, const std::string& from, const std::string& to);
 	static bool offer_quest_on_exit(Hero* hero);
 	static void DialogueController::create_farewell();
-	static void DialogueController::remove_ask_for_quest();
-	static void DialogueController::add_ask_for_quest();
 	static void player_choose_soldier();
 	static void player_conversation_point_soldier();
 	static void other_response_soldier(std::string info, std::string hero_topic);
@@ -85,5 +82,6 @@ public:
 	static int optionsIndex;
 	static int select;
 	static std::vector<int> heroes_player_knows;
+	static std::vector<ConversationLogObj*> curr_conversation_log;
 };
 
