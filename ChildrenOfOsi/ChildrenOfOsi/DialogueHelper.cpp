@@ -121,12 +121,14 @@ dialogue_point DialogueHelper::choose_conv_pt(std::vector<ConversationLogObj*> c
 				if (!has_quest) {
 					diog_pt = { "Offer_Quest","Offer_Quest" };
 				}
-				return diog_pt;
+				//return diog_pt;
 			}
+			return diog_pt;
 		}
 	}
 
-	//check if the player has already asked the npc this question
+	//checks if the player has already asked the npc this question and interupts
+	//the heuristic if so
 	if (curr_conversation_log.size() > 0) {
 		for (int i = 0; i < curr_conversation_log.size() - 1; ++i) {
 			if (curr_conversation_log[i]->get_conv_point() == NULL)

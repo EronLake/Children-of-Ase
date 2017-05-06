@@ -568,6 +568,8 @@ void DialogueController::otherConversationPoint(dialogue_point line)
 			dialogue_point dp = { "No Quest","No Quest" };
 			con_pt_sentence = dialogue.gen_dialog(dp, temp_hero);
 		}
+		else
+			con_pt_sentence = "";
 		message = other->getName() + ": " + reply_pt_sentence + "\n" + con_pt_sentence;
 		state = 1;//skip player reply if npc cannot give a conversation point
 	}	
@@ -686,14 +688,14 @@ void DialogueController::otherResponse(std::string info, std::string hero_topic)
 			//choose different dialog if they denied the action
 			if (accepted_action) {
 				dialogue_point diog_pt = { "Confirm Alliance","Confirm Alliance" };
-				std::string reply_pt_sentence = dialogue.gen_dialog(diog_pt, temp_hero);
+				std::string reply_pt_sentence = dialogue.gen_dialog(diog_pt, player);
 				message = player->getName() + ": " + reply_pt_sentence + "\n\n";
 			}
 			else {
 				/////////////need to be changed to correct calls/dialog if not accepted///////////////////
 				dialogue_point diog_pt = { "Confirm Alliance","Confirm Alliance" };
-				std::string reply_pt_sentence = dialogue.gen_dialog_negative(diog_pt, temp_hero);
-				message = other->getName() + ": " + reply_pt_sentence + "\n\n";
+				std::string reply_pt_sentence = dialogue.gen_dialog_negative(diog_pt, player);
+				message = player->getName() + ": " + reply_pt_sentence + "\n\n";
 
 				//calls action end if the question is denied otherwise called on cmpletion of the action
 				PlayerActExecFunctions::execute_end(false);
@@ -703,13 +705,13 @@ void DialogueController::otherResponse(std::string info, std::string hero_topic)
 			//choose different dialog if they denied the action
 			if (accepted_action) {
 				dialogue_point diog_pt = { "Confirm Duel","Confirm Duel" };
-				std::string reply_pt_sentence = dialogue.gen_dialog(diog_pt, temp_hero);
+				std::string reply_pt_sentence = dialogue.gen_dialog(diog_pt, player);
 				message = player->getName() + ": " + reply_pt_sentence + "\n\n";
 			}
 			else {
 				/////////////need to be changed to correct calls/dialog if not accepted///////////////////
 				dialogue_point diog_pt = { "Confirm Duel","Confirm Duel" };
-				std::string reply_pt_sentence = dialogue.gen_dialog_negative(diog_pt, temp_hero);
+				std::string reply_pt_sentence = dialogue.gen_dialog_negative(diog_pt, player);
 				message = player->getName() + ": " + reply_pt_sentence + "\n\n";
 
 				//calls action end if the question is denied otherwise called on cmpletion of the action
@@ -720,13 +722,13 @@ void DialogueController::otherResponse(std::string info, std::string hero_topic)
 			//choose different dialog if they denied the action
 			if (accepted_action) {
 				dialogue_point diog_pt = { "Confirm Spar","Confirm Spar" };
-				std::string reply_pt_sentence = dialogue.gen_dialog(diog_pt, temp_hero);
+				std::string reply_pt_sentence = dialogue.gen_dialog(diog_pt, player);
 				message = player->getName() + ": " + reply_pt_sentence + "\n\n";
 			}
 			else {
 				/////////////need to be changed to correct calls/dialog if not accepted///////////////////
 				dialogue_point diog_pt = { "Confirm Spar","Confirm Spar" };
-				std::string reply_pt_sentence = dialogue.gen_dialog_negative(diog_pt, temp_hero);
+				std::string reply_pt_sentence = dialogue.gen_dialog_negative(diog_pt, player);
 				message = player->getName() + ": " + reply_pt_sentence + "\n\n";
 
 				//calls action end if the question is denied otherwise called on cmpletion of the action
@@ -915,7 +917,7 @@ void DialogueController::exitDialogue()
 		}
 		curr_conversation_log.clear();
 
-		//removes unwanted conversation log entries from NPC's permanent storage
+		//removes unwanted entries from NPC's permanent conversation log
 		if (temp_hero) {
 			for (int i = 0; i < temp_hero->conversation_log.size(); ) {
 				//delete memory allocated for instance of Memory class here
