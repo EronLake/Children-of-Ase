@@ -1190,7 +1190,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	tBuffer->run();
 
 	Alex->melee = Containers::Attack_table[Alex->getKey()];
-	Alex->melee->setDmg(85);
+	Alex->melee->setDmg(15);
 	Alex->melee->setSpeed(5);
 	Alex->melee->setBaseDir(4);
 	Alex->melee->setCoolDown(35);
