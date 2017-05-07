@@ -82,7 +82,7 @@ int DialogueController::scroll_control = 0;
 
 /*conversation log that holds pointers to different entries for the
 current conversation only*/
-std::vector<ConversationLogObj*> curr_conversation_log;
+std::vector<ConversationLogObj*> DialogueController::curr_conversation_log;
 
 /*used for passing player's conversation point selection to 
 otherResponse() function when state is no longer 5 in 
