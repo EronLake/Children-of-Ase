@@ -182,17 +182,18 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	bool switch_music = false;
 	bool in_village = false;
 
-	//HeroConfig::import_config(movVec_ptr, gameplay_functions, tBuffer);
+	HeroConfig::import_config(movVec_ptr, gameplay_functions, tBuffer);
+	Village::init_Villages();
 
 	gameplay_functions->add_hero("Shango", 6445, 10055, true);
 	tBuffer->run();
 
 	Player* Alex = dynamic_cast<Player*>(Containers::hero_table["Shango"]);
 
-	Alex->name = SHANGO;
-	Alex->setWidth(150);
-	Alex->setHeight(150);
-	Alex->setPersonality(30, 70, 80, 60, 30, 30, 50);// uncommented this
+	//Alex->name = SHANGO;
+	//Alex->setWidth(150);
+	//Alex->setHeight(150);
+	//Alex->setPersonality(30, 70, 80, 60, 30, 30, 50);// uncommented this
 
 	//draws the logo on startup
 	gameplay_functions->draw_logo(Alex);
@@ -207,7 +208,8 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	Region* Mountain = new Region("Mountain", "Music/RegionThemes/MountainRegion.flac", "nothing", { 21000,4000 });
 	Region* Jungle = new Region("Jungle", "Music/RegionThemes/JungleRegion.flac", "Music/HeroThemes/oya.flac", { 17157,20960 });
 
-	
+	vector<vector<Texture*>> starting_location;
+
 	Region current_region = *Desert;
 	Region next_region = *Desert;
 
@@ -222,39 +224,26 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 
 	Input* iController = new Input(gameplay_functions, Alex, RenM->renderHelper, tBuffer, recVec_ptr, movVec_ptr);
 
-	gameplay_functions->add_hero("Yemoja", 5045, 13465, true);
-	gameplay_functions->add_hero("Oya", 17157, 20960, true);
+
+	gameplay_functions->add_hero("Yemoja", 4000, 12000, true);//5045 old x 13465 old y
+	gameplay_functions->add_hero("Oya", 1400, 20960, true);//17157 old x
+
 	tBuffer->run();
 	
 
 	Hero* staticRec = Containers::hero_table["Yemoja"];
-	heroes.push_back(staticRec);
+	//heroes.push_back(staticRec);
 	Hero* oya = Containers::hero_table["Oya"];
-	heroes.push_back(oya);
+	//heroes.push_back(oya);
 
-	staticRec->name = YEMOJA;
-	staticRec->setWidth(150);
-	staticRec->setHeight(150);
-	oya->name = OYA;
-	oya->setWidth(150);
-	oya->setHeight(150);
+//	staticRec->name = YEMOJA;
+//	staticRec->setWidth(150);
+//	staticRec->setHeight(150);
+//	oya->name = OYA;
+//	oya->setWidth(150);
+//	oya->setHeight(150);
 
 	//DialogueController::setAI(AiController);
-
-	vector<Texture*> standard;
-	vector<Texture*> oasis;
-	vector<Texture*> jungle;
-	vector<Texture*> mountain;
-	vector<Texture*> marsh;
-	vector<vector<Texture*>> starting_location;
-	
-	ObjConfig::textureMapConfig = &textureMap;
-	ObjConfig::standard_con = &standard;
-	ObjConfig::oasis_con = &oasis;
-	ObjConfig::jungle_con = &jungle;
-	ObjConfig::mountain_con = &mountain;
-	ObjConfig::marsh_con = &marsh;
-	ObjConfig::import_config(recVec_ptr, gameplay_functions, tBuffer);
 
 	DialogueConfig::import_config(gameplay_functions, tBuffer);
 	DialogueController::getDialogueHelper()->fill_conversations();
@@ -327,8 +316,8 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	tBuffer->run();
 	textureMap[Containers::texture_table["playerTexture"]] = pair<string, int>("Assets/Sprites/ShangoForwardIdle.png", 22);
 	textureMap[Containers::texture_table["playerIdleTex"]] = pair<string, int>("Assets/Sprites/ShangoForwardIdle.png", 22);
-	standard.push_back(Containers::texture_table["playerTexture"]);
-	standard.push_back(Containers::texture_table["playerIdleTex"]);
+	ObjConfig::standard_con.push_back(Containers::texture_table["playerTexture"]);
+	ObjConfig::standard_con.push_back(Containers::texture_table["playerIdleTex"]);
 
 	gameplay_functions->add_texture("upRunTex", 0, 0, 0);
 	gameplay_functions->add_texture("downRunTex", 0, 0, 0);
@@ -391,26 +380,26 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	textureMap[Containers::texture_table["downHurtTex"]] = pair<string, int>("Assets/Sprites/ShangoForwardRecoil.png", 18);
 	textureMap[Containers::texture_table["leftHurtTex"]] = pair<string, int>("Assets/Sprites/ShangoLeftRecoil.png", 18);
 	textureMap[Containers::texture_table["rightHurtTex"]] = pair<string, int>("Assets/Sprites/ShangoRightRecoil.png", 18);
-	standard.push_back(Containers::texture_table["upRunTex"]);
-	standard.push_back(Containers::texture_table["downRunTex"]);
-	standard.push_back(Containers::texture_table["leftRunTex"]);
-	standard.push_back(Containers::texture_table["rightRunTex"]);
-	standard.push_back(Containers::texture_table["upIdleTex"]);
-	standard.push_back(Containers::texture_table["downIdleTex"]);
-	standard.push_back(Containers::texture_table["leftIdleTex"]);
-	standard.push_back(Containers::texture_table["rightIdleTex"]);
-	standard.push_back(Containers::texture_table["upAtkTex"]);
-	standard.push_back(Containers::texture_table["downAtkTex"]);
-	standard.push_back(Containers::texture_table["leftAtkTex"]);
-	standard.push_back(Containers::texture_table["rightAtkTex"]);
-	standard.push_back(Containers::texture_table["upAtk2Tex"]);
-	standard.push_back(Containers::texture_table["downAtk2Tex"]);
-	standard.push_back(Containers::texture_table["leftAtk2Tex"]);
-	standard.push_back(Containers::texture_table["rightAtk2Tex"]);
-	standard.push_back(Containers::texture_table["upHurtTex"]);
-	standard.push_back(Containers::texture_table["downHurtTex"]);
-	standard.push_back(Containers::texture_table["leftHurtTex"]);
-	standard.push_back(Containers::texture_table["rightHurtTex"]);
+	ObjConfig::standard_con.push_back(Containers::texture_table["upRunTex"]);
+	ObjConfig::standard_con.push_back(Containers::texture_table["downRunTex"]);
+	ObjConfig::standard_con.push_back(Containers::texture_table["leftRunTex"]);
+	ObjConfig::standard_con.push_back(Containers::texture_table["rightRunTex"]);
+	ObjConfig::standard_con.push_back(Containers::texture_table["upIdleTex"]);
+	ObjConfig::standard_con.push_back(Containers::texture_table["downIdleTex"]);
+	ObjConfig::standard_con.push_back(Containers::texture_table["leftIdleTex"]);
+	ObjConfig::standard_con.push_back(Containers::texture_table["rightIdleTex"]);
+	ObjConfig::standard_con.push_back(Containers::texture_table["upAtkTex"]);
+	ObjConfig::standard_con.push_back(Containers::texture_table["downAtkTex"]);
+	ObjConfig::standard_con.push_back(Containers::texture_table["leftAtkTex"]);
+	ObjConfig::standard_con.push_back(Containers::texture_table["rightAtkTex"]);
+	ObjConfig::standard_con.push_back(Containers::texture_table["upAtk2Tex"]);
+	ObjConfig::standard_con.push_back(Containers::texture_table["downAtk2Tex"]);
+	ObjConfig::standard_con.push_back(Containers::texture_table["leftAtk2Tex"]);
+	ObjConfig::standard_con.push_back(Containers::texture_table["rightAtk2Tex"]);
+	ObjConfig::standard_con.push_back(Containers::texture_table["upHurtTex"]);
+	ObjConfig::standard_con.push_back(Containers::texture_table["downHurtTex"]);
+	ObjConfig::standard_con.push_back(Containers::texture_table["leftHurtTex"]);
+	ObjConfig::standard_con.push_back(Containers::texture_table["rightHurtTex"]);
 
 	gameplay_functions->add_texture("yemojaTexture", 0, 0, 0);
 	gameplay_functions->add_texture("yemojaIdleTex", 0, 0, 0);
@@ -419,8 +408,8 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	//Texture* yemojaIdleTex = new Texture();
 	textureMap[Containers::texture_table["yemojaTexture"]] = pair<string, int>("Assets/Sprites/YemojaForwardIdle.png", 22);
 	textureMap[Containers::texture_table["yemojaIdleTex"]] = pair<string, int>("Assets/Sprites/YemojaForwardIdle.png", 22);
-	oasis.push_back(Containers::texture_table["yemojaTexture"]);
-	oasis.push_back(Containers::texture_table["yemojaIdleTex"]);
+	ObjConfig::oasis_con.push_back(Containers::texture_table["yemojaTexture"]);
+	ObjConfig::oasis_con.push_back(Containers::texture_table["yemojaIdleTex"]);
 
 	gameplay_functions->add_texture("h_upRunTex", 0, 0, 0);
 	gameplay_functions->add_texture("h_downRunTex", 0, 0, 0);
@@ -447,14 +436,14 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	textureMap[Containers::texture_table["h_downIdleTex"]] = pair<string, int>("Assets/Sprites/YemojaForwardIdle.png", 22);
 	textureMap[Containers::texture_table["h_leftIdleTex"]] = pair<string, int>("Assets/Sprites/YemojaLeftIdle.png", 22);
 	textureMap[Containers::texture_table["h_rightIdleTex"]] = pair<string, int>("Assets/Sprites/YemojaRightIdle.png", 22);
-	oasis.push_back(Containers::texture_table["h_upRunTex"]);
-	oasis.push_back(Containers::texture_table["h_downRunTex"]);
-	oasis.push_back(Containers::texture_table["h_leftRunTex"]);
-	oasis.push_back(Containers::texture_table["h_rightRunTex"]);
-	oasis.push_back(Containers::texture_table["h_upIdleTex"]);
-	oasis.push_back(Containers::texture_table["h_downIdleTex"]);
-	oasis.push_back(Containers::texture_table["h_leftIdleTex"]);
-	oasis.push_back(Containers::texture_table["h_rightIdleTex"]);
+	ObjConfig::oasis_con.push_back(Containers::texture_table["h_upRunTex"]);
+	ObjConfig::oasis_con.push_back(Containers::texture_table["h_downRunTex"]);
+	ObjConfig::oasis_con.push_back(Containers::texture_table["h_leftRunTex"]);
+	ObjConfig::oasis_con.push_back(Containers::texture_table["h_rightRunTex"]);
+	ObjConfig::oasis_con.push_back(Containers::texture_table["h_upIdleTex"]);
+	ObjConfig::oasis_con.push_back(Containers::texture_table["h_downIdleTex"]);
+	ObjConfig::oasis_con.push_back(Containers::texture_table["h_leftIdleTex"]);
+	ObjConfig::oasis_con.push_back(Containers::texture_table["h_rightIdleTex"]);
 
 	gameplay_functions->add_texture("silverSoldierTexture", 0, 0, 0);
 	gameplay_functions->add_texture("silverSoldierIdleTex", 0, 0, 0);
@@ -469,10 +458,10 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	textureMap[Containers::texture_table["silverSoldierIdleTex"]] = pair<string, int>("Assets/Sprites/SilverSoldierForwardIdle.png", 22);
 	textureMap[Containers::texture_table["blueSoldierTexture"]] = pair<string, int>("Assets/Sprites/BlueSoldierForwardIdle.png", 22);
 	textureMap[Containers::texture_table["blueSoldierIdleTex"]] = pair<string, int>("Assets/Sprites/BlueSoldierForwardIdle.png", 22);
-	standard.push_back(Containers::texture_table["silverSoldierTexture"]);
-	standard.push_back(Containers::texture_table["silverSoldierIdleTex"]);
-	marsh.push_back(Containers::texture_table["blueSoldierTexture"]);
-	marsh.push_back(Containers::texture_table["blueSoldierIdleTex"]);
+	ObjConfig::standard_con.push_back(Containers::texture_table["silverSoldierTexture"]);
+	ObjConfig::standard_con.push_back(Containers::texture_table["silverSoldierIdleTex"]);
+	ObjConfig::marsh_con.push_back(Containers::texture_table["blueSoldierTexture"]);
+	ObjConfig::marsh_con.push_back(Containers::texture_table["blueSoldierIdleTex"]);
 
 	gameplay_functions->add_texture("ss_upRunTex", 0, 0, 0);
 	gameplay_functions->add_texture("ss_downRunTex", 0, 0, 0);
@@ -557,34 +546,34 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	textureMap[Containers::texture_table["ss_leftDeathTex"]] = pair<string, int>("Assets/Sprites/SilverSoldierRightRecoil.png", 18);
 	textureMap[Containers::texture_table["ss_rightDeathTex"]] = pair<string, int>("Assets/Sprites/SilverSoldierRightRecoil.png", 18);
 
-	mountain.push_back(Containers::texture_table["ss_upRunTex"]);
-	mountain.push_back(Containers::texture_table["ss_downRunTex"]);
-	mountain.push_back(Containers::texture_table["ss_leftRunTex"]);
-	mountain.push_back(Containers::texture_table["ss_rightRunTex"]);
-	mountain.push_back(Containers::texture_table["ss_upIdleTex"]);
-	mountain.push_back(Containers::texture_table["ss_downIdleTex"]);
-	mountain.push_back(Containers::texture_table["ss_leftIdleTex"]);
-	mountain.push_back(Containers::texture_table["ss_rightIdleTex"]);
-	mountain.push_back(Containers::texture_table["ss_upAtkTex"]);
-	mountain.push_back(Containers::texture_table["ss_downAtkTex"]);
-	mountain.push_back(Containers::texture_table["ss_leftAtkTex"]);
-	mountain.push_back(Containers::texture_table["ss_rightAtkTex"]);
-	mountain.push_back(Containers::texture_table["ss_upHurtTex"]);
-	mountain.push_back(Containers::texture_table["ss_downHurtTex"]);
-	mountain.push_back(Containers::texture_table["ss_leftHurtTex"]);
-	mountain.push_back(Containers::texture_table["ss_rightHurtTex"]);
-	mountain.push_back(Containers::texture_table["ss_upWalkTex"]);
-	mountain.push_back(Containers::texture_table["ss_downWalkTex"]);
-	mountain.push_back(Containers::texture_table["ss_leftWalkTex"]);
-	mountain.push_back(Containers::texture_table["ss_rightWalkTex"]);
-	mountain.push_back(Containers::texture_table["ss_upLungeTex"]);
-	mountain.push_back(Containers::texture_table["ss_downLungeTex"]);
-	mountain.push_back(Containers::texture_table["ss_leftLungeTex"]);
-	mountain.push_back(Containers::texture_table["ss_rightLungeTex"]);
-	mountain.push_back(Containers::texture_table["ss_upDeathTex"]);
-	mountain.push_back(Containers::texture_table["ss_downDeathTex"]);
-	mountain.push_back(Containers::texture_table["ss_leftDeathTex"]);
-	mountain.push_back(Containers::texture_table["ss_rightDeathTex"]);
+	ObjConfig::mountain_con.push_back(Containers::texture_table["ss_upRunTex"]);
+	ObjConfig::mountain_con.push_back(Containers::texture_table["ss_downRunTex"]);
+	ObjConfig::mountain_con.push_back(Containers::texture_table["ss_leftRunTex"]);
+	ObjConfig::mountain_con.push_back(Containers::texture_table["ss_rightRunTex"]);
+	ObjConfig::mountain_con.push_back(Containers::texture_table["ss_upIdleTex"]);
+	ObjConfig::mountain_con.push_back(Containers::texture_table["ss_downIdleTex"]);
+	ObjConfig::mountain_con.push_back(Containers::texture_table["ss_leftIdleTex"]);
+	ObjConfig::mountain_con.push_back(Containers::texture_table["ss_rightIdleTex"]);
+	ObjConfig::mountain_con.push_back(Containers::texture_table["ss_upAtkTex"]);
+	ObjConfig::mountain_con.push_back(Containers::texture_table["ss_downAtkTex"]);
+	ObjConfig::mountain_con.push_back(Containers::texture_table["ss_leftAtkTex"]);
+	ObjConfig::mountain_con.push_back(Containers::texture_table["ss_rightAtkTex"]);
+	ObjConfig::mountain_con.push_back(Containers::texture_table["ss_upHurtTex"]);
+	ObjConfig::mountain_con.push_back(Containers::texture_table["ss_downHurtTex"]);
+	ObjConfig::mountain_con.push_back(Containers::texture_table["ss_leftHurtTex"]);
+	ObjConfig::mountain_con.push_back(Containers::texture_table["ss_rightHurtTex"]);
+	ObjConfig::mountain_con.push_back(Containers::texture_table["ss_upWalkTex"]);
+	ObjConfig::mountain_con.push_back(Containers::texture_table["ss_downWalkTex"]);
+	ObjConfig::mountain_con.push_back(Containers::texture_table["ss_leftWalkTex"]);
+	ObjConfig::mountain_con.push_back(Containers::texture_table["ss_rightWalkTex"]);
+	ObjConfig::mountain_con.push_back(Containers::texture_table["ss_upLungeTex"]);
+	ObjConfig::mountain_con.push_back(Containers::texture_table["ss_downLungeTex"]);
+	ObjConfig::mountain_con.push_back(Containers::texture_table["ss_leftLungeTex"]);
+	ObjConfig::mountain_con.push_back(Containers::texture_table["ss_rightLungeTex"]);
+	ObjConfig::mountain_con.push_back(Containers::texture_table["ss_upDeathTex"]);
+	ObjConfig::mountain_con.push_back(Containers::texture_table["ss_downDeathTex"]);
+	ObjConfig::mountain_con.push_back(Containers::texture_table["ss_leftDeathTex"]);
+	ObjConfig::mountain_con.push_back(Containers::texture_table["ss_rightDeathTex"]);
 
 	gameplay_functions->add_texture("bs_upRunTex", 0, 0, 0);
 	gameplay_functions->add_texture("bs_downRunTex", 0, 0, 0);
@@ -669,30 +658,30 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	textureMap[Containers::texture_table["bs_rightDeathTex"]] = pair<string, int>("Assets/Sprites/BlueSoldierRightRecoil.png", 18);
 
 	gameplay_functions->add_texture("treeTex", 0, 0, 0);
-	marsh.push_back(Containers::texture_table["bs_upRunTex"]);
-	marsh.push_back(Containers::texture_table["bs_downRunTex"]);
-	marsh.push_back(Containers::texture_table["bs_leftRunTex"]);
-	marsh.push_back(Containers::texture_table["bs_rightRunTex"]);
-	marsh.push_back(Containers::texture_table["bs_upIdleTex"]);
-	marsh.push_back(Containers::texture_table["bs_downIdleTex"]);
-	marsh.push_back(Containers::texture_table["bs_leftIdleTex"]);
-	marsh.push_back(Containers::texture_table["bs_rightIdleTex"]);
-	marsh.push_back(Containers::texture_table["bs_upAtkTex"]);
-	marsh.push_back(Containers::texture_table["bs_downAtkTex"]);
-	marsh.push_back(Containers::texture_table["bs_leftAtkTex"]);
-	marsh.push_back(Containers::texture_table["bs_rightAtkTex"]);
-	marsh.push_back(Containers::texture_table["bs_upHurtTex"]);
-	marsh.push_back(Containers::texture_table["bs_downHurtTex"]);
-	marsh.push_back(Containers::texture_table["bs_leftHurtTex"]);
-	marsh.push_back(Containers::texture_table["bs_rightHurtTex"]);
-	marsh.push_back(Containers::texture_table["bs_upWalkTex"]);
-	marsh.push_back(Containers::texture_table["bs_downWalkTex"]);
-	marsh.push_back(Containers::texture_table["bs_leftWalkTex"]);
-	marsh.push_back(Containers::texture_table["bs_rightWalkTex"]);
-	marsh.push_back(Containers::texture_table["bs_upLungeTex"]);
-	marsh.push_back(Containers::texture_table["bs_downLungeTex"]);
-	marsh.push_back(Containers::texture_table["bs_leftLungeTex"]);
-	marsh.push_back(Containers::texture_table["bs_rightLungeTex"]);
+	ObjConfig::marsh_con.push_back(Containers::texture_table["bs_upRunTex"]);
+	ObjConfig::marsh_con.push_back(Containers::texture_table["bs_downRunTex"]);
+	ObjConfig::marsh_con.push_back(Containers::texture_table["bs_leftRunTex"]);
+	ObjConfig::marsh_con.push_back(Containers::texture_table["bs_rightRunTex"]);
+	ObjConfig::marsh_con.push_back(Containers::texture_table["bs_upIdleTex"]);
+	ObjConfig::marsh_con.push_back(Containers::texture_table["bs_downIdleTex"]);
+	ObjConfig::marsh_con.push_back(Containers::texture_table["bs_leftIdleTex"]);
+	ObjConfig::marsh_con.push_back(Containers::texture_table["bs_rightIdleTex"]);
+	ObjConfig::marsh_con.push_back(Containers::texture_table["bs_upAtkTex"]);
+	ObjConfig::marsh_con.push_back(Containers::texture_table["bs_downAtkTex"]);
+	ObjConfig::marsh_con.push_back(Containers::texture_table["bs_leftAtkTex"]);
+	ObjConfig::marsh_con.push_back(Containers::texture_table["bs_rightAtkTex"]);
+	ObjConfig::marsh_con.push_back(Containers::texture_table["bs_upHurtTex"]);
+	ObjConfig::marsh_con.push_back(Containers::texture_table["bs_downHurtTex"]);
+	ObjConfig::marsh_con.push_back(Containers::texture_table["bs_leftHurtTex"]);
+	ObjConfig::marsh_con.push_back(Containers::texture_table["bs_rightHurtTex"]);
+	ObjConfig::marsh_con.push_back(Containers::texture_table["bs_upWalkTex"]);
+	ObjConfig::marsh_con.push_back(Containers::texture_table["bs_downWalkTex"]);
+	ObjConfig::marsh_con.push_back(Containers::texture_table["bs_leftWalkTex"]);
+	ObjConfig::marsh_con.push_back(Containers::texture_table["bs_rightWalkTex"]);
+	ObjConfig::marsh_con.push_back(Containers::texture_table["bs_upLungeTex"]);
+	ObjConfig::marsh_con.push_back(Containers::texture_table["bs_downLungeTex"]);
+	ObjConfig::marsh_con.push_back(Containers::texture_table["bs_leftLungeTex"]);
+	ObjConfig::marsh_con.push_back(Containers::texture_table["bs_rightLungeTex"]);
 
 	/*gameplay_functions->add_texture("treeTex", 0, 0, 0);
 	gameplay_functions->add_texture("treeTex1", 0, 0, 0);
@@ -713,8 +702,8 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	Texture* rockTex2 = new Texture();*/
 	textureMap[Containers::texture_table["rockTex1"]] = pair<string, int>("Assets/Sprites/rock_1.png", 1);
 	textureMap[Containers::texture_table["rockTex2"]] = pair<string, int>("Assets/Sprites/rock_2.png", 1);
-	standard.push_back(Containers::texture_table["rockTex1"]);
-	standard.push_back(Containers::texture_table["rockTex2"]);
+	ObjConfig::standard_con.push_back(Containers::texture_table["rockTex1"]);
+	ObjConfig::standard_con.push_back(Containers::texture_table["rockTex2"]);
 
 	/*gameplay_functions->add_texture("pierTex", 0, 0, 0);
 	tBuffer->run();
@@ -728,8 +717,8 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	//Texture* border = new Texture();
 	textureMap[Containers::texture_table["blank"]] = pair<string, int>("Assets/Sprites/blank.png", 1);
 	textureMap[Containers::texture_table["border"]] = pair<string, int>("Assets/Sprites/border.png", 1);
-	standard.push_back(Containers::texture_table["blank"]);
-	standard.push_back(Containers::texture_table["border"]);
+	ObjConfig::standard_con.push_back(Containers::texture_table["blank"]);
+	ObjConfig::standard_con.push_back(Containers::texture_table["border"]);
 
 	gameplay_functions->add_texture("fire", 0, 0, 0);
 	gameplay_functions->add_texture("fireUp", 0, 0, 0);
@@ -744,10 +733,10 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	textureMap[Containers::texture_table["fireUp"]] = pair<string, int>("Assets/Sprites/FireBallTMPUp.png", 3);
 	textureMap[Containers::texture_table["fireDown"]] = pair<string, int>("Assets/Sprites/FireBallTMPDown.png", 3);
 	textureMap[Containers::texture_table["fireLeft"]] = pair<string, int>("Assets/Sprites/FireBallTMPLeft.png", 3);
-	standard.push_back(Containers::texture_table["fire"]);
-	standard.push_back(Containers::texture_table["fireUp"]);
-	standard.push_back(Containers::texture_table["fireDown"]);
-	standard.push_back(Containers::texture_table["fireLeft"]);
+	ObjConfig::standard_con.push_back(Containers::texture_table["fire"]);
+	ObjConfig::standard_con.push_back(Containers::texture_table["fireUp"]);
+	ObjConfig::standard_con.push_back(Containers::texture_table["fireDown"]);
+	ObjConfig::standard_con.push_back(Containers::texture_table["fireLeft"]);
 
 	gameplay_functions->add_texture("firebreatheRight", 0, 0, 0);
 	gameplay_functions->add_texture("firebreatheUp", 0, 0, 0);
@@ -762,10 +751,10 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	textureMap[Containers::texture_table["firebreatheUp"]] = pair<string, int>("Assets/Sprites/ShangoBackBreath.png", 14);
 	textureMap[Containers::texture_table["firebreatheDown"]] = pair<string, int>("Assets/Sprites/ShangoForwardBreath.png", 14);
 	textureMap[Containers::texture_table["firebreatheLeft"]] = pair<string, int>("Assets/Sprites/ShangoLeftBreath.png", 14);
-	standard.push_back(Containers::texture_table["firebreatheRight"]);
-	standard.push_back(Containers::texture_table["firebreatheUp"]);
-	standard.push_back(Containers::texture_table["firebreatheDown"]);
-	standard.push_back(Containers::texture_table["firebreatheLeft"]);
+	ObjConfig::standard_con.push_back(Containers::texture_table["firebreatheRight"]);
+	ObjConfig::standard_con.push_back(Containers::texture_table["firebreatheUp"]);
+	ObjConfig::standard_con.push_back(Containers::texture_table["firebreatheDown"]);
+	ObjConfig::standard_con.push_back(Containers::texture_table["firebreatheLeft"]);
 
 	gameplay_functions->add_texture("spinRight", 0, 0, 0);
 	gameplay_functions->add_texture("spinUp", 0, 0, 0);
@@ -780,10 +769,10 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	textureMap[Containers::texture_table["spinUp"]] = pair<string, int>("Assets/Sprites/ShangoBackSpin.png", 22);
 	textureMap[Containers::texture_table["spinDown"]] = pair<string, int>("Assets/Sprites/ShangoForwardSpin.png", 22);
 	textureMap[Containers::texture_table["spinLeft"]] = pair<string, int>("Assets/Sprites/ShangoLeftSpin.png", 22);
-	standard.push_back(Containers::texture_table["spinRight"]);
-	standard.push_back(Containers::texture_table["spinUp"]);
-	standard.push_back(Containers::texture_table["spinDown"]);
-	standard.push_back(Containers::texture_table["spinLeft"]);
+	ObjConfig::standard_con.push_back(Containers::texture_table["spinRight"]);
+	ObjConfig::standard_con.push_back(Containers::texture_table["spinUp"]);
+	ObjConfig::standard_con.push_back(Containers::texture_table["spinDown"]);
+	ObjConfig::standard_con.push_back(Containers::texture_table["spinLeft"]);
 
 	/*gameplay_functions->add_texture("sparkRight", 0, 0, 0);
 	gameplay_functions->add_texture("sparkUp", 0, 0, 0);
@@ -830,17 +819,17 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	textureMap[Containers::texture_table["YdeathLeft"]] = pair<string, int>("Assets/Sprites/YemojaLeftRecoil.png", 18);
 	textureMap[Containers::texture_table["YdeathRight"]] = pair<string, int>("Assets/Sprites/YemojaRightRecoil.png", 18);
 
-	oasis.push_back(Containers::texture_table["YhurtRight"]);
-	oasis.push_back(Containers::texture_table["YhurtUp"]);
-	oasis.push_back(Containers::texture_table["YhurtDown"]);
-	oasis.push_back(Containers::texture_table["YhurtLeft"]);
-	oasis.push_back(Containers::texture_table["YswingRight"]);
-	oasis.push_back(Containers::texture_table["YswingUp"]);
-	oasis.push_back(Containers::texture_table["YswingDown"]);
-	oasis.push_back(Containers::texture_table["YswingLeft"]);
+	ObjConfig::oasis_con.push_back(Containers::texture_table["YhurtRight"]);
+	ObjConfig::oasis_con.push_back(Containers::texture_table["YhurtUp"]);
+	ObjConfig::oasis_con.push_back(Containers::texture_table["YhurtDown"]);
+	ObjConfig::oasis_con.push_back(Containers::texture_table["YhurtLeft"]);
+	ObjConfig::oasis_con.push_back(Containers::texture_table["YswingRight"]);
+	ObjConfig::oasis_con.push_back(Containers::texture_table["YswingUp"]);
+	ObjConfig::oasis_con.push_back(Containers::texture_table["YswingDown"]);
+	ObjConfig::oasis_con.push_back(Containers::texture_table["YswingLeft"]);
 
 	//load sprite from a configuration file?
-	Alex->setHealth(200);
+	//Alex->setHealth(200);
 
 	/*blank->setFile("Assets/Sprites/blank.png", 1);
 	border->setFile("Assets/Sprites/border.png", 1);
@@ -979,6 +968,9 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	Rectangle::texAtkUP->setFile("Assets/Sprites/ForwardRecoilSpark.png", 18);
 	Rectangle::texAtkDOWN->setFile("Assets/Sprites/BackRecoilSpark.png", 18);
 
+
+
+
 	for (int i = 0; i < 100; i++) {
 		//std:://cout << "AT THE THREAD INITIALIZTION CALL!!!****** " << endl;
 	}
@@ -1034,8 +1026,8 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 		gameplay_functions->add_Attack(blueSoldiers[i]->getKey(), blueSoldiers[i]->body[0].getX(), blueSoldiers[i]->body[0].getY(), true, 10);
 	}
 	tBuffer->run();
-	movVec.push_back(staticRec);
-	movVec.push_back(oya);
+	//movVec.push_back(staticRec);
+	//movVec.push_back(oya);
 	for (int i = 0; i < silverSoldier.size(); i++) {
 		movVec.push_back(silverSoldier[i]);
 	}
@@ -1057,93 +1049,20 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 			}
 		}
 		if (RegionState::regions[closest] == Desert) {
-			starting_location.push_back(oasis);
+			starting_location.push_back(ObjConfig::oasis_con);
 		}
 		else if (RegionState::regions[closest] == Mountain) {
-			starting_location.push_back(mountain);
+			starting_location.push_back(ObjConfig::mountain_con);
 		}
 		else if (RegionState::regions[closest] == Jungle) {
-			starting_location.push_back(jungle);
+			starting_location.push_back(ObjConfig::jungle_con);
 		}
 		else if (RegionState::regions[closest] == Marsh) {
-			starting_location.push_back(marsh);
+			starting_location.push_back(ObjConfig::marsh_con);
 		}
 		RegionState::regions.erase(RegionState::regions.begin()+closest);
 	}
 
-	HGLRC loaderContext0 = wglCreateContext(hdc);
-	wglShareLists(mainContext, loaderContext0);
-	std::thread t0([=]() {
-		wglMakeCurrent(hdc, loaderContext0);
-		for (int i = 0; i < standard.size(); i++) {
-			set_file_with_thread(standard[i], &textureMap.find(standard[i])->second);
-		}
-		wglMakeCurrent(nullptr, nullptr);
-		wglDeleteContext(loaderContext0);
-		/*for (auto it = recVec.begin(); it != recVec.end(); ++it) {
-			(*it)->sprite.reset_texture();
-		}
-		for (auto it = movVec.begin(); it != movVec.end(); ++it) {
-			(*it)->sprite.reset_texture();
-		}*/
-		Alex->sprite.reset_texture();
-		glFinish();
-	});
-
-	HGLRC loaderContext1 = wglCreateContext(hdc);
-	wglShareLists(mainContext, loaderContext1);
-	std::thread t1([=]() {
-		wglMakeCurrent(hdc, loaderContext1);
-		for (int i = 0; i < (starting_location[0]).size(); i++) {
-			set_file_with_thread(starting_location[0].at(i), &textureMap.find(starting_location[0].at(i))->second);
-		}
-		for (auto it = recVec.begin(); it != recVec.end(); ++it) {
-			(*it)->sprite.reset_texture();
-		}
-		for (auto it = movVec.begin(); it != movVec.end(); ++it) {
-			(*it)->sprite.reset_texture();
-		}
-		for (int i = 0; i < (starting_location[3]).size(); i++) {
-			set_file_with_thread(starting_location[3].at(i), &textureMap.find(starting_location[3].at(i))->second);
-		}
-		wglMakeCurrent(nullptr, nullptr);
-		wglDeleteContext(loaderContext1);
-		for (auto it = recVec.begin(); it != recVec.end(); ++it) {
-			(*it)->sprite.reset_texture();
-		}
-		for (auto it = movVec.begin(); it != movVec.end(); ++it) {
-			(*it)->sprite.reset_texture();
-		}
-		glFinish();
-	});
-
-	HGLRC loaderContext2 = wglCreateContext(hdc);//Creates the new GL context that we will use for loading
-	wglShareLists(mainContext, loaderContext2);//Shares the information between the loading context and the main context
-	std::thread t2([=]() {//makes the thread. [=] is a cpp Lambda representation
-		wglMakeCurrent(hdc, loaderContext2);//Sets the current context to the loader context
-		for (int i = 0; i < (starting_location[1]).size(); i++) {
-			set_file_with_thread(starting_location[1].at(i), &textureMap.find(starting_location[1].at(i))->second);
-		}
-		for (auto it = recVec.begin(); it != recVec.end(); ++it) {
-			(*it)->sprite.reset_texture();
-		}
-		for (auto it = movVec.begin(); it != movVec.end(); ++it) {
-			(*it)->sprite.reset_texture();
-		}
-		for (int i = 0; i < (starting_location[2]).size(); i++) {
-			set_file_with_thread(starting_location[2].at(i), &textureMap.find(starting_location[2].at(i))->second);
-		}
-		wglMakeCurrent(nullptr, nullptr);//unassigns the current gl context
-		wglDeleteContext(loaderContext2);//deletes the loading context now that it is not needed
-		for (auto it = recVec.begin(); it != recVec.end(); ++it) {
-			(*it)->sprite.reset_texture();
-		}
-		for (auto it = movVec.begin(); it != movVec.end(); ++it) {
-			(*it)->sprite.reset_texture();
-		}
-		glFinish(); //Forces all gl calls to be completed before execution
-	});
-	
 	Alex->sprite.setTexture(Containers::texture_table["playerTexture"]);
 	Alex->sprite.setIdleTexture(Containers::texture_table["playerIdleTex"]);
 	Alex->sprite.up = Containers::texture_table["upRunTex"];
@@ -1286,95 +1205,67 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	spin2->setNextAttack(spin3);
 	spin3->setNextAttack(spin4);
 
-	vector<Vector2f> vertices;
-	vector<pair<Vector2f, Vector2f>> edges;
 
-	for (int i = 0; i < vec.size(); i++) {
-		WorldObj *obj = vec[i];
-		float w = obj->body[0].getWidth();
-		float h = obj->body[0].getHeight();
-		Vector2f p1 = { obj->body[0].getX() - 105,obj->body[0].getY() - 105 };
-		Vector2f p2 = obj->body[0].getTR();
-		Vector2f p3 = obj->body[0].getBL();
-		Vector2f p4 = obj->body[0].getBR();
-		vertices.push_back(p1);
-		vertices.push_back(p2);
-		vertices.push_back(p3);
-		vertices.push_back(p4);
-		edges.push_back({ p1, p2 });
-		edges.push_back({ p1, p3 });
-		edges.push_back({ p2, p4 });
-		edges.push_back({ p3, p4 });
-		//Put edges in the hit box to prevent
-		//visibility lines through the diagonal
-		edges.push_back({ p2, p3 });
-		edges.push_back({ p1, p4 });
-	}
+	Containers::hero_table["Yemoja"]->sprite.setTexture(Containers::texture_table["yemojaTexture"]);
+	Containers::hero_table["Yemoja"]->sprite.setIdleTexture(Containers::texture_table["yemojaIdleTex"]);
+	Containers::hero_table["Yemoja"]->sprite.up = Containers::texture_table["h_upRunTex"];
+	Containers::hero_table["Yemoja"]->sprite.down = Containers::texture_table["h_downRunTex"];
+	Containers::hero_table["Yemoja"]->sprite.left = Containers::texture_table["h_leftRunTex"];
+	Containers::hero_table["Yemoja"]->sprite.right = Containers::texture_table["h_rightRunTex"];
+	Containers::hero_table["Yemoja"]->sprite.id_up = Containers::texture_table["h_upIdleTex"];
+	Containers::hero_table["Yemoja"]->sprite.id_left = Containers::texture_table["h_leftIdleTex"];
+	Containers::hero_table["Yemoja"]->sprite.id_right = Containers::texture_table["h_rightIdleTex"];
+	Containers::hero_table["Yemoja"]->sprite.id_down = Containers::texture_table["h_downIdleTex"];
+	Containers::hero_table["Yemoja"]->sprite.hurt_up = Containers::texture_table["YhurtUp"];
+	Containers::hero_table["Yemoja"]->sprite.hurt_down = Containers::texture_table["YhurtDown"];
+	Containers::hero_table["Yemoja"]->sprite.hurt_left = Containers::texture_table["YhurtLeft"];
+	Containers::hero_table["Yemoja"]->sprite.hurt_right = Containers::texture_table["YhurtRight"];
+	Containers::hero_table["Yemoja"]->sprite.atk_up = Containers::texture_table["YswingUp"];
+	Containers::hero_table["Yemoja"]->sprite.atk_down = Containers::texture_table["YswingDown"];
+	Containers::hero_table["Yemoja"]->sprite.atk_left = Containers::texture_table["YswingLeft"];
+	Containers::hero_table["Yemoja"]->sprite.atk_right = Containers::texture_table["YswingRight"];
+	Containers::hero_table["Yemoja"]->sprite.death_up = Containers::texture_table["bs_upHurtTex"];
+	Containers::hero_table["Yemoja"]->sprite.death_down = Containers::texture_table["bs_upHurtTex"];
+	Containers::hero_table["Yemoja"]->sprite.death_left = Containers::texture_table["bs_upHurtTex"];
+	Containers::hero_table["Yemoja"]->sprite.death_right = Containers::texture_table["bs_upHurtTex"];
 
-	staticRec->setWidth(150);
-	staticRec->setHeight(150);
-	staticRec->name = YEMOJA;
-
-	staticRec->sprite.setTexture(Containers::texture_table["yemojaTexture"]);
-	staticRec->sprite.setIdleTexture(Containers::texture_table["yemojaIdleTex"]);
-	staticRec->sprite.up = Containers::texture_table["h_upRunTex"];
-	staticRec->sprite.down = Containers::texture_table["h_downRunTex"];
-	staticRec->sprite.left = Containers::texture_table["h_leftRunTex"];
-	staticRec->sprite.right = Containers::texture_table["h_rightRunTex"];
-	staticRec->sprite.id_up = Containers::texture_table["h_upIdleTex"];
-	staticRec->sprite.id_left = Containers::texture_table["h_leftIdleTex"];
-	staticRec->sprite.id_right = Containers::texture_table["h_rightIdleTex"];
-	staticRec->sprite.id_down = Containers::texture_table["h_downIdleTex"];
-	staticRec->sprite.hurt_up = Containers::texture_table["YhurtUp"];
-	staticRec->sprite.hurt_down = Containers::texture_table["YhurtDown"];
-	staticRec->sprite.hurt_left = Containers::texture_table["YhurtLeft"];
-	staticRec->sprite.hurt_right = Containers::texture_table["YhurtRight"];
-	staticRec->sprite.atk_up = Containers::texture_table["YswingUp"];
-	staticRec->sprite.atk_down = Containers::texture_table["YswingDown"];
-	staticRec->sprite.atk_left = Containers::texture_table["YswingLeft"];
-	staticRec->sprite.atk_right = Containers::texture_table["YswingRight"];
-	staticRec->sprite.death_up = Containers::texture_table["bs_upHurtTex"];
-	staticRec->sprite.death_down = Containers::texture_table["bs_upHurtTex"];
-	staticRec->sprite.death_left = Containers::texture_table["bs_upHurtTex"];
-	staticRec->sprite.death_right = Containers::texture_table["bs_upHurtTex"];
-
-	oya->sprite = staticRec->sprite;
+	Containers::hero_table["Oya"]->sprite = staticRec->sprite;
 
 	gameplay_functions->add_Attack(staticRec->getKey(), staticRec->body[0].getX(), staticRec->body[0].getY(), true, 10);
 	gameplay_functions->add_Attack(oya->getKey(), oya->body[0].getX(), oya->body[0].getY(), true, 10);
 	tBuffer->run();
 
-	staticRec->melee = Containers::Attack_table[staticRec->getKey()];
-	staticRec->melee->setDmg(15);
-	staticRec->melee->setSpeed(8);
-	staticRec->melee->setBaseDir(4);
-	staticRec->melee->setCoolDown(60);
-	staticRec->melee->setPause(-1);
-	staticRec->melee->setDestroy(false);
-	staticRec->melee->setKeep(true);
-	staticRec->melee->setWidth(50);
-	staticRec->melee->setHeight(50);
-	staticRec->set_creator_of_melee();
-	staticRec->melee->setStaminaCost(90);
-	staticRec->setHealth(140);
-	staticRec->setMaxStamina(300);
-	staticRec->melee->sprite.setTexture(Containers::texture_table["border"]);
+	Containers::hero_table["Yemoja"]->melee = Containers::Attack_table[staticRec->getKey()];
+	Containers::hero_table["Yemoja"]->melee->setDmg(15);
+	Containers::hero_table["Yemoja"]->melee->setSpeed(8);
+	Containers::hero_table["Yemoja"]->melee->setBaseDir(4);
+	Containers::hero_table["Yemoja"]->melee->setCoolDown(60);
+	Containers::hero_table["Yemoja"]->melee->setPause(-1);
+	Containers::hero_table["Yemoja"]->melee->setDestroy(false);
+	Containers::hero_table["Yemoja"]->melee->setKeep(true);
+	Containers::hero_table["Yemoja"]->melee->setWidth(50);
+	Containers::hero_table["Yemoja"]->melee->setHeight(50);
+	Containers::hero_table["Yemoja"]->set_creator_of_melee();
+	Containers::hero_table["Yemoja"]->melee->setStaminaCost(90);
+	Containers::hero_table["Yemoja"]->setHealth(140);
+	Containers::hero_table["Yemoja"]->setMaxStamina(300);
+	Containers::hero_table["Yemoja"]->melee->sprite.setTexture(Containers::texture_table["border"]);
 
-	oya->melee = Containers::Attack_table[oya->getKey()];
-	oya->melee->setDmg(18);
-	oya->melee->setSpeed(7);
-	oya->melee->setBaseDir(4);
-	oya->melee->setCoolDown(70);
-	oya->melee->setPause(-1);
-	oya->melee->setDestroy(false);
-	oya->melee->setKeep(true);
-	oya->melee->setWidth(50);
-	oya->melee->setHeight(50);
-	oya->set_creator_of_melee();
-	oya->melee->setStaminaCost(120);
-	oya->setHealth(160);
-	oya->setMaxStamina(300);
-	oya->melee->sprite.setTexture(Containers::texture_table["border"]);
+	Containers::hero_table["Oya"]->melee = Containers::Attack_table[oya->getKey()];
+	Containers::hero_table["Oya"]->melee->setDmg(18);
+	Containers::hero_table["Oya"]->melee->setSpeed(7);
+	Containers::hero_table["Oya"]->melee->setBaseDir(4);
+	Containers::hero_table["Oya"]->melee->setCoolDown(70);
+	Containers::hero_table["Oya"]->melee->setPause(-1);
+	Containers::hero_table["Oya"]->melee->setDestroy(false);
+	Containers::hero_table["Oya"]->melee->setKeep(true);
+	Containers::hero_table["Oya"]->melee->setWidth(50);
+	Containers::hero_table["Oya"]->melee->setHeight(50);
+	Containers::hero_table["Oya"]->set_creator_of_melee();
+	Containers::hero_table["Oya"]->melee->setStaminaCost(120);
+	Containers::hero_table["Oya"]->setHealth(160);
+	Containers::hero_table["Oya"]->setMaxStamina(300);
+	Containers::hero_table["Oya"]->melee->sprite.setTexture(Containers::texture_table["border"]);
 
 	for (int i = 0; i < silverNum; i++) {
 		silverSoldier[i]->setWidth(150);
@@ -1482,6 +1373,113 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 		blueSoldiers[i]->setSpeed(8);
 	}
 
+
+	HGLRC loaderContext0 = wglCreateContext(hdc);
+	wglShareLists(mainContext, loaderContext0);
+	std::thread t0([=]() {
+		wglMakeCurrent(hdc, loaderContext0);
+		for (int i = 0; i < ObjConfig::standard_con.size(); i++) {
+			set_file_with_thread(ObjConfig::standard_con[i], &textureMap.find(ObjConfig::standard_con[i])->second);
+		}
+		wglMakeCurrent(nullptr, nullptr);
+		wglDeleteContext(loaderContext0);
+		/*for (auto it = recVec.begin(); it != recVec.end(); ++it) {
+			(*it)->sprite.reset_texture();
+		}
+		for (auto it = movVec.begin(); it != movVec.end(); ++it) {
+			(*it)->sprite.reset_texture();
+		}*/
+		Alex->sprite.reset_texture();
+		glFinish();
+	});
+
+	HGLRC loaderContext1 = wglCreateContext(hdc);
+	wglShareLists(mainContext, loaderContext1);
+	std::thread t1([=]() {
+		wglMakeCurrent(hdc, loaderContext1);
+		for (int i = 0; i < (starting_location[0]).size(); i++) {
+			set_file_with_thread(starting_location[0].at(i), &textureMap.find(starting_location[0].at(i))->second);
+		}
+		for (auto it = recVec.begin(); it != recVec.end(); ++it) {
+			(*it)->sprite.reset_texture();
+		}
+		for (auto it = movVec.begin(); it != movVec.end(); ++it) {
+			(*it)->sprite.reset_texture();
+		}
+		for (int i = 0; i < (starting_location[3]).size(); i++) {
+			set_file_with_thread(starting_location[3].at(i), &textureMap.find(starting_location[3].at(i))->second);
+		}
+		wglMakeCurrent(nullptr, nullptr);
+		wglDeleteContext(loaderContext1);
+		for (auto it = recVec.begin(); it != recVec.end(); ++it) {
+			(*it)->sprite.reset_texture();
+		}
+		for (auto it = movVec.begin(); it != movVec.end(); ++it) {
+			(*it)->sprite.reset_texture();
+		}
+		glFinish();
+	});
+
+	HGLRC loaderContext2 = wglCreateContext(hdc);//Creates the new GL context that we will use for loading
+	wglShareLists(mainContext, loaderContext2);//Shares the information between the loading context and the main context
+	std::thread t2([=]() {//makes the thread. [=] is a cpp Lambda representation
+		wglMakeCurrent(hdc, loaderContext2);//Sets the current context to the loader context
+		for (int i = 0; i < (starting_location[1]).size(); i++) {
+			set_file_with_thread(starting_location[1].at(i), &textureMap.find(starting_location[1].at(i))->second);
+		}
+		for (auto it = recVec.begin(); it != recVec.end(); ++it) {
+			(*it)->sprite.reset_texture();
+		}
+		for (auto it = movVec.begin(); it != movVec.end(); ++it) {
+			(*it)->sprite.reset_texture();
+		}
+		for (int i = 0; i < (starting_location[2]).size(); i++) {
+			set_file_with_thread(starting_location[2].at(i), &textureMap.find(starting_location[2].at(i))->second);
+		}
+		wglMakeCurrent(nullptr, nullptr);//unassigns the current gl context
+		wglDeleteContext(loaderContext2);//deletes the loading context now that it is not needed
+		for (auto it = recVec.begin(); it != recVec.end(); ++it) {
+			(*it)->sprite.reset_texture();
+		}
+		for (auto it = movVec.begin(); it != movVec.end(); ++it) {
+			(*it)->sprite.reset_texture();
+		}
+		glFinish(); //Forces all gl calls to be completed before execution
+	});
+	
+	
+
+	vector<Vector2f> vertices;
+	vector<pair<Vector2f, Vector2f>> edges;
+
+	for (int i = 0; i < vec.size(); i++) {
+		WorldObj *obj = vec[i];
+		float w = obj->body[0].getWidth();
+		float h = obj->body[0].getHeight();
+		Vector2f p1 = { obj->body[0].getX() - 105,obj->body[0].getY() - 105 };
+		Vector2f p2 = obj->body[0].getTR();
+		Vector2f p3 = obj->body[0].getBL();
+		Vector2f p4 = obj->body[0].getBR();
+		vertices.push_back(p1);
+		vertices.push_back(p2);
+		vertices.push_back(p3);
+		vertices.push_back(p4);
+		edges.push_back({ p1, p2 });
+		edges.push_back({ p1, p3 });
+		edges.push_back({ p2, p4 });
+		edges.push_back({ p3, p4 });
+		//Put edges in the hit box to prevent
+		//visibility lines through the diagonal
+		edges.push_back({ p2, p3 });
+		edges.push_back({ p1, p4 });
+	}
+
+//	staticRec->setWidth(150);
+//	staticRec->setHeight(150);
+//	staticRec->name = YEMOJA;
+
+	
+
 	//VisibilityGraph graph;
 	ai->graph.vertices = vertices;
 	ai->graph.obstacles = edges;
@@ -1511,7 +1509,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 			}
 		}
 	}*/
-
+	/*
 	staticRec->setName("Yemoja");
 	staticRec->setInteractable(true);
 	staticRec->setPersonality(30, 80, 80, 50, 50, 50, 80);// uncommented this
@@ -1601,8 +1599,13 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	// THIS IS BEING RESET IN THE GAME LOOP. planner->get_current_action returns nullptr*/
 	
 	
-	AIController::generate_end_state(YEMOJA, OYA);
+	//AIController::generate_end_state(YEMOJA, OYA);
+	
+
 	AIController::init_plans();
+
+	
+
    // test_train->setDoer(staticRec);
 	//YemojaPlanner->set_current_action(test_train);
 
@@ -1616,6 +1619,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 		} };
 		*/
 		//ai->graph = graph;
+	/*
 	ai->start = staticRec->getLoc();
 	ai->goal = { 1100.00,1100.00 };
 
@@ -1636,11 +1640,15 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	}
 
 	ai->graph._print();
-
+	
 	ai->astar_search(staticRec);
 	// gameplay_functions->get_path(staticRec); //Generate the waypoints to the destination
 	staticRec->setMode(WANDER);
+	*/
 	short M = GetKeyState('M') >> 15;
+
+	/////////////////////////////////////
+	/*
 	Party::grave->set_perm(true);
 	Party* party = new Party();
 	Party* party2 = new Party();
@@ -1693,6 +1701,8 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	party3->setMode(Party::MODE_ATTACK);
 
 	Alliance::update_enemies();
+	*/
+	////////////////////////////////////////////
 
 	//osi::GameWindow::init();
 	LOG("PAST WINDOW INIT ***********************");
@@ -1708,8 +1718,15 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	int total_fps = 0;
 
 	vector<Soldier*> soldiers_list;
-	soldiers_list.push_back(staticRec);
-	soldiers_list.push_back(oya);
+	for (auto itr : Containers::hero_table)
+	{
+		if (itr.second->name != SHANGO)
+		{
+			soldiers_list.push_back(itr.second);
+		}
+		
+	}
+	
 	for (int i = 0; i < blueSoldiers.size(); i++) {
 		soldiers_list.push_back(blueSoldiers[i]);
 	}
@@ -1974,8 +1991,12 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 			}
 			//draw
 			else if (state > 0) {
+				for (auto itr : Containers::hero_table)
+				{
+						gameplay_functions->stop(itr.second);
+				}
 				gameplay_functions->drawDiaGui(Alex);
-				gameplay_functions->stop(staticRec);
+				
 			}
 
 			//run task buffer
@@ -1986,19 +2007,25 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 			/////////////////////////////////////////////////////////////////
 			/////////////////////////////////////////////////////////////////
 			/////////////////////////////////////////////////////////////////
-			for (auto iter : staticRec->rel) {
-				Relationship* my_rel = iter.second;
-				int with_hero = iter.first;
+			for (auto itr : Containers::hero_table)
+			{
+				if (itr.second->name != SHANGO) 
+				{
+					for (auto iter : itr.second->rel) {
+						Relationship* my_rel = iter.second;
+						int with_hero = iter.first;
 
-				if (my_rel->isChanged()) {
-					//reevaluate goals for with_hero
-					AIController::reevaluate_state(YEMOJA, with_hero);
-					my_rel->setChanged(false);
+						if (my_rel->isChanged()) {
+							//reevaluate goals for with_hero
+							AIController::reevaluate_state(YEMOJA, with_hero);
+							my_rel->setChanged(false);
+						}
+					}
 				}
 			}
 			//getting here-------------------------------------------------------------------------***********
 			//setting give as quest to false so that the excute runs
-			YemojaPlanner->give_as_quest = false;
+			//YemojaPlanner->give_as_quest = false;
 //			cout << " first dest is " << staticRec->get_action_destination()->getXloc() << ", " << staticRec->get_action_destination()->getYloc() << endl;
 			AIController::execute();
 //			cout << "after execute dest is " << staticRec->get_action_destination()->getXloc() << ", " << staticRec->get_action_destination()->getYloc() << endl;

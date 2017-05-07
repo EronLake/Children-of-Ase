@@ -19,11 +19,11 @@ float botRighty;
 
 string WhichJson;
 unordered_map<Texture*, pair<string, int>>* ObjConfig::textureMapConfig;
-vector<Texture*>* ObjConfig::standard_con;
-vector<Texture*>* ObjConfig::oasis_con;
-vector<Texture*>* ObjConfig::jungle_con;
-vector<Texture*>* ObjConfig::mountain_con;
-vector<Texture*>* ObjConfig::marsh_con;
+vector<Texture*> ObjConfig::standard_con;
+vector<Texture*> ObjConfig::oasis_con;
+vector<Texture*> ObjConfig::jungle_con;
+vector<Texture*> ObjConfig::mountain_con;
+vector<Texture*> ObjConfig::marsh_con;
 
 ObjConfig::ObjConfig()
 {
@@ -537,19 +537,19 @@ void ObjConfig::set_world_obj(vector<WorldObj*>* recVec, ChildrenOfOsi* gameplay
 		//Containers::texture_table[tex_file]->setFile("Assets/Sprites/" + tex_file + ".png", frame_num);
 		switch (region) {
 		case STANDARD:
-			(*standard_con).push_back(Containers::texture_table[tex_file]);
+			(standard_con).push_back(Containers::texture_table[tex_file]);
 			break;
 		case OASIS:
-			(*oasis_con).push_back(Containers::texture_table[tex_file]);
+			(oasis_con).push_back(Containers::texture_table[tex_file]);
 			break;
 		case JUNGLE:
-			(*jungle_con).push_back(Containers::texture_table[tex_file]);
+			(jungle_con).push_back(Containers::texture_table[tex_file]);
 			break;
 		case MOUNTAIN:
-			(*mountain_con).push_back(Containers::texture_table[tex_file]);
+			(mountain_con).push_back(Containers::texture_table[tex_file]);
 			break;
 		case OGUNREG:
-			(*marsh_con).push_back(Containers::texture_table[tex_file]);
+			(marsh_con).push_back(Containers::texture_table[tex_file]);
 			break;
 		}
 	}

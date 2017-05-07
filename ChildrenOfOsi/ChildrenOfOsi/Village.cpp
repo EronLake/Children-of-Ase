@@ -1,5 +1,7 @@
 #include "stdafx.h"
 #include "Village.h"
+#include "Alliance.h"
+
 using namespace std;
 
 vector<Village*> Village::villagesWorld;
@@ -44,4 +46,47 @@ void Village::remove_member(NPC* n)
 {
   if(!this->members.empty())
     this->members.erase(std::remove(this->members.begin(), this->members.end(), n));
+}
+
+void Village::init_Villages()
+{
+	Party::grave->set_perm(true);
+
+	for (auto itr : Containers::hero_table)
+	{
+		Party* new_party = new Party();
+		//add hero to party
+
+		new_party->addToParty(itr.second, true);
+		itr.second->cur_party = new_party;
+
+
+		//NEED TO ACCESS SOLDIERS FROM CONTAINER BY NAME 
+		/*
+		for (int i = 0; i < silverSoldier.size(); i++) {
+		new_party->addToParty(silverSoldier[i], false);
+		}
+		*/
+
+		Village* new_village = new Village();
+
+		new_village->set_village_location(itr.second->getLoc());
+		new_village->add_member(itr.second);
+
+		//v2->set_village_location({ 6030, 4000 });
+
+		//NEED TO ACCESS SOLDIERS FROM CONTAINER BY NAME 
+		/*
+		for (int i = 0; i < blueSoldiers.size(); i++) {
+		new_village->add_member(blueSoldiers[i]);
+		}
+		*/
+
+		new_village->leader = itr.second;
+		Alliance* new_alliance = new Alliance(new_village);
+
+		new_village->addToParties(new_party);
+
+		Alliance::update_enemies();
+	}
 }

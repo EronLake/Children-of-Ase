@@ -53,7 +53,7 @@ void HeroConfig::set_hero(vector<WorldObj*>* movVec, ChildrenOfOsi* gameplay_fun
 	tBuffer->run();
 
 	Containers::hero_table[name]->name = hero_id;
-	//Containers::hero_table[name]->setName(name);
+	Containers::hero_table[name]->setName(name);
 	Containers::hero_table[name]->setWidth(width);
 	Containers::hero_table[name]->setHeight(hight);
 	Containers::hero_table[name]->offsetBody(0, bodyx1, bodyx2, bodyy1, bodyy2);
@@ -70,6 +70,26 @@ void HeroConfig::set_hero(vector<WorldObj*>* movVec, ChildrenOfOsi* gameplay_fun
 	//push to moveVec
 	movVec->push_back(Containers::hero_table[name]);
 
+	if (hero_id == SHANGO)
+	{
+
+	}
+	else if (hero_id == YEMOJA)
+	{
+
+	}
+	else if (hero_id == OYA)
+	{
+
+	}
+	else if (hero_id == OSHOSI)
+	{
+
+	}
+	else if (hero_id == OGUN)
+	{
+
+	}
 
 
 
