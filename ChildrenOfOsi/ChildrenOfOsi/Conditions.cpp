@@ -670,7 +670,7 @@ void StatePost::apply_utility(Hero* curr_hero, Hero* other_hero)
 	
 	else if (state_type == CONF)
 	{
-		War* new_war = new War(curr_hero->getVillage(), other_hero->getVillage());
+		new War(curr_hero->getVillage(), other_hero->getVillage());
 		std::cout << "CONF";
 	}
 	

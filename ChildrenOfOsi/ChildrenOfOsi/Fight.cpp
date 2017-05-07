@@ -294,8 +294,7 @@ void Fight::update_fight() {
 					downed.push_back((*itor));
 				}
 				if (player->getParty() == (*itor)) {
-					if (player->getParty()->get_fight() == this);
-					PlayerActExecFunctions::execute_end(false);
+					player_win = false;
 				}
 				itor = (*it).erase(itor);
 				update_radius();
@@ -303,6 +302,10 @@ void Fight::update_fight() {
 			} else if ((*itor)->getLeader()->getType() == WorldObj::TYPE_PLAYER) {
 				if (Party::dist_location_to_location((*itor)->getLeader()->getLoc(), loc) > (rad * 3)) {
 					(*itor)->setMode(Party::MODE_FLEE);
+					player_win = false;
+					itor = (*it).erase(itor);
+					update_radius();
+					party_erased = true;
 				}
 			}
 			if (!party_erased)++itor;
@@ -458,6 +461,7 @@ void Fight::check_should_flee(Party* p) {
 	if (p->getLeader()->getType() == WorldObj::TYPE_PLAYER) {
 		if (Party::dist_location_to_location(p->getLeader()->getLoc(), loc) > (rad)) {
 			p->setMode(Party::MODE_FLEE);
+			player_win = false;
 		}
 	}
 	else if (p->getLeader()->getType() == WorldObj::TYPE_HERO) {
