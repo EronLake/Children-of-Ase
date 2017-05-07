@@ -6,6 +6,7 @@
 #include "CheckClass.h"
 #include "RegionState.h"
 
+
 Movement::Movement(QuadTree* QT, UniformGrid* UG, RiverObj* _rivObj) {
 	tree = QT;
 	rivObj = _rivObj;
@@ -46,7 +47,8 @@ int Movement::move_up(WorldObj* obj) {
 			if (obj == objVec[i] || (my_type >= 2 && objVec[i]->getType() >= WorldObj::TYPE_NPC)) {
 				break;
 			}
-			if (collision(objVec[i], obj)) {
+			bool check = col_thread(objVec[i], obj);
+			if (check) {
 				//manager->createTask("Bump", "SOUND");
 				LOG("failed to move up. collision.");
 			//	cout << "COLLIDED ABOVE" << endl;
@@ -112,7 +114,8 @@ int Movement::move_up_left(WorldObj* obj) {
 			if (obj == objVec[i] || (my_type >= 2 && objVec[i]->getType() >= WorldObj::TYPE_NPC)) {
 				break;
 			}
-			if (collision(objVec[i], obj)) {
+			bool check = col_thread(objVec[i], obj);
+			if (check) {
 				//manager->createTask("Bump", "SOUND");
 				LOG("failed to move up. collision.");
 				obj->shiftY(diagYSpeed*speed_magnifier);
@@ -144,7 +147,8 @@ int Movement::move_up_left(WorldObj* obj) {
 			if (obj == objVec[i] || (my_type >= 2 && objVec[i]->getType() >= WorldObj::TYPE_NPC)) {
 				break;
 			}
-			if (collision(objVec[i], obj)) {
+			bool check = col_thread(objVec[i], obj);
+			if (check) {
 				//manager->createTask("Bump", "SOUND");
 				LOG("failed to move up. collision.");
 				obj->shiftX(diagXSpeed*speed_magnifier);
@@ -229,7 +233,8 @@ int Movement::move_up_right(WorldObj* obj) {
 			if (obj == objVec[i] || (my_type >= 2 && objVec[i]->getType() >= WorldObj::TYPE_NPC)) {
 				break;
 			}
-			if (collision(objVec[i], obj)) {
+			bool check = col_thread(objVec[i], obj);
+			if (check) {
 				//manager->createTask("Bump", "SOUND");
 				LOG("failed to move up. collision.");
 				obj->shiftX(-diagXSpeed*speed_magnifier);
@@ -281,7 +286,8 @@ int Movement::move_down(WorldObj* obj) {
 			if (obj == objVec[i] || (my_type >= 2 && objVec[i]->getType() >= WorldObj::TYPE_NPC)) {
 				break;
 			}
-			if (collision(objVec[i], obj)) {
+			bool check = col_thread(objVec[i], obj);
+			if (check) {
 				LOG("failed to move down. collision.");
 				//cout << "COLLIDED BELOW" << endl;
 				//manager->createTask("Bump", "SOUND");
@@ -341,7 +347,8 @@ int Movement::move_down_left(WorldObj* obj) {
 			if (obj == objVec[i] || (my_type >= 2 && objVec[i]->getType() >= WorldObj::TYPE_NPC)) {
 				break;
 			}
-			if (collision(objVec[i], obj)) {
+			bool check = col_thread(objVec[i], obj);
+			if (check) {
 				LOG("failed to move down. collision.");
 				//manager->createTask("Bump", "SOUND");
 				obj->shiftY(-diagYSpeed*speed_magnifier);
@@ -376,7 +383,8 @@ int Movement::move_down_left(WorldObj* obj) {
 			if (obj == objVec[i] || (my_type >= 2 && objVec[i]->getType() >= WorldObj::TYPE_NPC)) {
 				break;
 			}
-			if (collision(objVec[i], obj)) {
+			bool check = col_thread(objVec[i], obj);
+			if (check) {
 				LOG("failed to move down. collision.");
 				//manager->createTask("Bump", "SOUND");
 				obj->shiftX(diagXSpeed*speed_magnifier);
@@ -429,7 +437,8 @@ int Movement::move_down_right(WorldObj* obj) {
 			if (obj == objVec[i] || (my_type >= 2 && objVec[i]->getType() >= WorldObj::TYPE_NPC)) {
 				break;
 			}
-			if (collision(objVec[i], obj)) {
+			bool check = col_thread(objVec[i], obj);
+			if (check) {
 				LOG("failed to move down. collision.");
 				//cout << "COLLIDED BELOW" << endl;
 				//manager->createTask("Bump", "SOUND");
@@ -461,7 +470,8 @@ int Movement::move_down_right(WorldObj* obj) {
 			if (obj == objVec[i] || (my_type >= 2 && objVec[i]->getType() >= WorldObj::TYPE_NPC)) {
 				break;
 			}
-			if (collision(objVec[i], obj)) {
+			bool check = col_thread(objVec[i], obj);
+			if (check) {
 				LOG("failed to move down. collision.");
 				//manager->createTask("Bump", "SOUND");
 				obj->shiftX(-diagXSpeed*speed_magnifier);
@@ -511,7 +521,8 @@ int Movement::move_left(WorldObj* obj) {
 			if (obj == objVec[i] || (my_type >= 2 && objVec[i]->getType() >= WorldObj::TYPE_NPC)) {
 				break;
 			}
-			if (collision(objVec[i], obj)) {
+			bool check = col_thread(objVec[i], obj);
+			if (check) {
 				LOG("failed to move left. collision.");
 			//	cout << "COLLIDED LEFT" << endl;
 				//manager->createTask("Bump", "SOUND");
@@ -574,7 +585,8 @@ int Movement::move_right(WorldObj* obj) {
 				break;
 				
 			}
-			if (collision(objVec[i], obj)) {
+			bool check = col_thread(objVec[i], obj);
+			if (check) {
 				LOG("failed to move right. collision.");
 				//cout << "COLLIDED RIGHT with" << objVec[i]->getID() << endl;
 				//manager->createTask("Bump", "SOUND");
@@ -783,7 +795,7 @@ int Movement::attack(WorldObj* obj) {
 }
 
 bool Movement::collision(WorldObj* recA, WorldObj* recB)
-{
+{   
 	for (int i = 0; i < (*recA).body.size(); i++) {
 		for (int j = 0; j < (*recB).body.size(); j++) {
 
@@ -829,5 +841,13 @@ bool Movement::interaction(Player* recA, WorldObj* recB)
 			if (xCollide && yCollide)return true;
 	}
 	return false;
+}
+
+bool Movement::col_thread(WorldObj* recA, WorldObj* recB)
+{
+	//std::future<bool> future = std::async(std::launch::async, &Movement::collision, recA, recB);
+	auto future = std::async(std::launch::async, [this, recA, recB] { return collision(recA, recB); });
+	bool check = future.get();
+	return check;
 }
 

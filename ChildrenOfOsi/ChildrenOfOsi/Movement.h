@@ -12,6 +12,9 @@
 #include "PlayerActExecFunctions.h"
 #include "UniformGrid.h"
 
+#include <thread>
+#include <future>
+
 class PhysicsManager;
 
 class Movement {
@@ -31,6 +34,10 @@ public:
 //	int move_toward(WorldObj* obj);
 	int talk(WorldObj* obj);
 	int attack(WorldObj* obj);
+	bool collision(WorldObj* recA, WorldObj* recB);
+	bool col_thread(WorldObj* recA, WorldObj* recB);
+	
+	
 	//void init_task_map();
     QuadTree* tree;
 	UniformGrid* grid;
@@ -47,7 +54,8 @@ public:
 	bool set_player_clone;
 
 private:
-	bool collision(WorldObj* recA, WorldObj* recB);
+	
+
 	bool lineCollision(Line* l1, Line* l2);
 	bool shouldCheckLineCollision(Point target, Point dest1, Point dest2, int dist);
 	bool interaction(Player* recA, WorldObj* recB);
