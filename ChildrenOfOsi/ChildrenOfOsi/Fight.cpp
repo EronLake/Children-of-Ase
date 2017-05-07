@@ -8,10 +8,13 @@ Fight::Fight()
 	over = false;
 	fights_world.push_back(this);
 	sides = 0;
+	num_of_fighters=0;
+	player_win=true;
 }
 
 Fight::Fight(Party* a, Party* b, int tp)
 {
+	num_of_fighters=0;
 	type = tp;
 	over = false;
 	if (a->get_perm() || (type>0)) {
@@ -49,6 +52,7 @@ Fight::Fight(Party* a, Party* b, int tp)
 		update_radius();
 	}
 	sides = 2;
+	player_win = true;
 	fights_world.push_back(this);
 }
 
@@ -71,7 +75,8 @@ int Fight::get_radius() {
 	for (auto itor = downed.begin(); itor != downed.end(); ++itor) {
 		total_fighters += (*itor)->getMembers().size();
 	}
-	return (100 * total_fighters);
+	num_of_fighters = total_fighters;
+	return ((50 * total_fighters) + 750);
 }
 
 void Fight::update_radius() {
@@ -256,8 +261,9 @@ void Fight::update_fight() {
 					downed.push_back((*itor));
 				}
 				if (player->getParty() == (*itor)) {
-					if (player->getParty()->get_fight() == this);
-					PlayerActExecFunctions::execute_end(false);
+					if (player->getParty()->get_fight() == this) {
+						player_win = false;
+					}
 				}
 				itor = (*it).erase(itor);
 				update_radius();
@@ -313,7 +319,7 @@ void Fight::update_fight() {
 	over = check_for_winner();
 	if (over) {
 		if (player->getParty()->get_fight() == this && (player->cur_action!=nullptr && player->cur_action != NULL)) {
-			PlayerActExecFunctions::execute_end(true);
+			PlayerActExecFunctions::execute_end(player_win);
 		}
 	}
 }
@@ -450,14 +456,14 @@ void Fight::help_find_targets(unordered_map<Alliance*, vector<Party*>> alliances
 
 void Fight::check_should_flee(Party* p) {
 	if (p->getLeader()->getType() == WorldObj::TYPE_PLAYER) {
-		if (Party::dist_location_to_location(p->getLeader()->getLoc(), loc) > (rad * 3)) {
+		if (Party::dist_location_to_location(p->getLeader()->getLoc(), loc) > (rad)) {
 			p->setMode(Party::MODE_FLEE);
 		}
 	}
 	else if (p->getLeader()->getType() == WorldObj::TYPE_HERO) {
 		vector<Party*> enemies = p->getCurrentEnemies();
 		int total_enemies = 0;
-		int total_sold = rad / 100;
+		int total_sold = num_of_fighters;
 		for (auto it = enemies.begin(); it != enemies.end(); ++it) {
 			total_enemies += (*it)->getMembers().size();
 		}
@@ -472,7 +478,7 @@ void Fight::check_should_flee(Party* p) {
 	else {
 		vector<Party*> enemies = p->getCurrentEnemies();
 		int total_enemies = 0;
-		int total_sold = rad / 100;
+		int total_sold = num_of_fighters;
 		for (auto it = enemies.begin(); it != enemies.end(); ++it) {
 			total_enemies += (*it)->getMembers().size();
 		}

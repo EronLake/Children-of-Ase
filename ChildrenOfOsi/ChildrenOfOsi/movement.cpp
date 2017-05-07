@@ -712,7 +712,7 @@ int Movement::attack(WorldObj* obj) {
 														Hero* hero = dynamic_cast<Hero*>(s->getParty()->getLeader());
 														if ((!s->getInCombat()) && (!s2->getInCombat())) {
 															if (hero) {
-																if (Party::dist_location_to_location(s2->getLoc(), s2->getVillage()->get_village_location()) < 500) {
+																if (Party::dist_location_to_location(s->getLoc(), s->getVillage()->get_village_location()) < 1500) {
 																	PlayerActExecFunctions::execute_start("Conquer", hero);
 																}
 																else PlayerActExecFunctions::execute_start("Fight", hero);
@@ -721,7 +721,7 @@ int Movement::attack(WorldObj* obj) {
 														}
 														else if ((!s->getInCombat())) {
 															if (hero) {
-																if (Party::dist_location_to_location(s2->getLoc(), s2->getVillage()->get_village_location()) < 500) {
+																if (Party::dist_location_to_location(s->getLoc(), s->getVillage()->get_village_location()) < 1500) {
 																	PlayerActExecFunctions::execute_start("Conquer", hero);
 																}else PlayerActExecFunctions::execute_start("Fight", hero);
 															}
@@ -731,7 +731,7 @@ int Movement::attack(WorldObj* obj) {
 														}
 														else if ((!s2->getInCombat())) {
 															if (hero) {
-																if (Party::dist_location_to_location(s2->getLoc(), s2->getVillage()->get_village_location()) < 500) {
+																if (Party::dist_location_to_location(s->getLoc(), s->getVillage()->get_village_location()) < 1500) {
 																	PlayerActExecFunctions::execute_start("Conquer", hero);
 																} else PlayerActExecFunctions::execute_start("Fight", hero);
 															}
@@ -755,7 +755,7 @@ int Movement::attack(WorldObj* obj) {
 										if (npc->getHealth() <= 0) {
 											if (Soldier *sold = CheckClass::isSoldier(liv)) {
 												manager->createTaskWithObj("Dead", "DRAW", sold);
-												sold->defeat();
+												sold->defeat(900);
 											}
 										}
 									} else {
@@ -770,7 +770,7 @@ int Movement::attack(WorldObj* obj) {
 								if (liv->getHealth() <= 0) {
 									if (Soldier *sold = CheckClass::isSoldier(liv)) {
 										manager->createTaskWithObj("Dead", "DRAW", sold);
-										sold->defeat();
+										sold->defeat(900);
 									}
 								}
 								if (a->second->getDestroy())a->second->setDuration(0);
