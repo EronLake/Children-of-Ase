@@ -125,21 +125,21 @@ void check_if_end_game() {
 	}
 	
 	//checks if both heroes are conquered (the player conqured the world)
-	if (yemoja_vil->conquerer == player_vil && oya_vil->conquerer == player_vil) 
+	if (yemoja_vil->get_conquerer() == player_vil && oya_vil->get_conquerer() == player_vil)
 	{
 		game_ended = true;
 	}
 
 	//checks if the hero is alligned with the conqurer (the player teamed up and conqurred the yemoja)
 	if (player_vil->get_alliance()->get_alligned_villages()[0] == oya_vil &&
-		(yemoja_vil->conquerer == player_vil || yemoja_vil->conquerer == oya_vil))
+		(yemoja_vil->get_conquerer() == player_vil || yemoja_vil->get_conquerer() == oya_vil))
 	{
 		game_ended = true;
 	}
 
 	//checks if the hero is alligned with the conqurer (the player teamed up and conqurred the oya)
 	if (player_vil->get_alliance()->get_alligned_villages()[0] == yemoja_vil &&
-		(oya_vil->conquerer == player_vil || oya_vil->conquerer == yemoja_vil))
+		(oya_vil->get_conquerer() == player_vil || oya_vil->get_conquerer() == yemoja_vil))
 	{
 		game_ended = true;
 	}
@@ -255,7 +255,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 
 	Input* iController = new Input(gameplay_functions, Alex, RenM->renderHelper, tBuffer, recVec_ptr, movVec_ptr);
 
-	gameplay_functions->add_hero("Yemoja", 4000, 12000, true);//5045 old x 13465 old y
+	gameplay_functions->add_hero("Yemoja", 5045, 13465, true);//5045 old x 13465 old y
 	gameplay_functions->add_hero("Oya", 1400, 20960, true);//17157 old x
 	tBuffer->run();
 	
@@ -1717,7 +1717,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	//v2->addToParties(party2);
 	v3->addToParties(party3);
 	v4->addToParties(party4);
-	War* war = new War();
+	//War* war = new War();
 	//war->setWarParties(v1, v2);
 	//a1->add_alliance_to_alliance(v3->get_alliance());
 	//if (blueSoldiers.size() > 0)party2->set_defend(blueSoldiers[0]->getLoc());

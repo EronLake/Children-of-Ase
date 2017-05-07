@@ -68,7 +68,7 @@ void ActionHelper::create_memory(Action* action, Hero* hero)
 void ActionHelper::battle_sim(Action* battle, Party* p)
 {
 		//may we have offensive team attack first? Slightly randomized
-		Party* Attackers = battle->getDoer()->cur_party;
+		Party* Attackers = battle->getDoer()->getParty();
 		Party* Defenders = p;
 
 		vector<Soldier*> larger;
@@ -132,7 +132,7 @@ void ActionHelper::attack_helper(Soldier* attacker, Soldier* defender)
 	if (defender->getHealth() <= 0)
 	{
 		//kill the soldier/incapacitate the Hero if they run out of health
-		defender->defeat();
+		defender->defeat(900);
 		if (defender->getType()<WorldObj::TYPE_HERO) {
 			defender->setLoc(defender->getVillage()->get_village_location());
 			defender->getVillage()->barracks->addToParty(defender, false);

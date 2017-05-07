@@ -181,7 +181,7 @@ void Soldier::updateCD()
     }
   }
   if (incapacitated) {
-	  if (down_time <= 0) {
+	  if (down_time == 0) {
 		  this->capacitate(0);
 	  }
 	  else down_time--;
@@ -217,10 +217,10 @@ void Soldier::defeat()
 }*/
 
 //this removes the soldier from the party and sets its party to null
-void Soldier::defeat()
+void Soldier::defeat(int t)
 {
 	if (!killable) {
-		incapacitate();
+		incapacitate(t);
 	}
 	else {
 		kill();
@@ -251,10 +251,10 @@ void Soldier::capacitate(int t)
 	incapacitated = false;
 }
 
-void Soldier::incapacitate()
+void Soldier::incapacitate(int t)
 {
 	if (!incapacitated) {
-		down_time = 900;
+		down_time = t;
 		incapacitated = true;
 		this->getParty()->down_member(this);
 	}

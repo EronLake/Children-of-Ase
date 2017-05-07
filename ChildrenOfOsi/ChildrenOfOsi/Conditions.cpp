@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "Conditions.h"
 #include "Alliance.h"
+#include "War.h"
 
 ////////////////////////////////////////////////////////////////////////////////////
 //PRECONDITIONS
@@ -669,8 +670,7 @@ void StatePost::apply_utility(Hero* curr_hero, Hero* other_hero)
 	
 	else if (state_type == CONF)
 	{
-		War* new_war = new War();
-		new_war->setWarParties(curr_hero->getVillage(), other_hero->getVillage());
+		War* new_war = new War(curr_hero->getVillage(), other_hero->getVillage());
 		std::cout << "CONF";
 	}
 	

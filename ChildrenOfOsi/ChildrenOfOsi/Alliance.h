@@ -2,7 +2,7 @@
 
 #include "common.h"
 #include "Village.h"
-#include "War.h"
+//#include "War.h"
 #include "Party.h"
 
 class Alliance
@@ -10,6 +10,7 @@ class Alliance
 private:
 	std::vector<Village*> allies;
 	std::vector<Village*> enemies;
+	std::vector<Alliance*> enemy_alliances;
 	static std::vector<Alliance*>Alliances;
 
 public:
@@ -23,7 +24,7 @@ public:
 	vector<NPC*> get_alliance_members();
 	bool is_alliance_member(NPC* n);
 	vector<Village*> get_enemy_villages() { return enemies; };
-	vector<Alliance*> get_enemy_alliances();
+	vector<Alliance*> get_enemy_alliances() { return enemy_alliances; };
 	void remove_village_from_alliance(Village* p_factionToRemove);
 	static void remove_alliance(Alliance* p_allianceToRemove);
 	static void update_enemies();

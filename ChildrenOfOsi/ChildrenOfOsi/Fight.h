@@ -31,6 +31,8 @@ public:
 	void set_loc(Vector2f v) { loc = v; };
 	Vector2f get_loc() { return loc; };
 	void check_should_flee(Party* p);
+	int get_type() { return type; };
+	void set_plyr_win(bool b) { player_win = b; };
 
 	static constexpr int TYPE_FIGHT = 0;
 	static constexpr int TYPE_DUEL = 1;
@@ -46,5 +48,7 @@ private:
 	int rad;
 	int sides;
 	int type;
+	int num_of_fighters;
+	bool player_win;
 };
 
