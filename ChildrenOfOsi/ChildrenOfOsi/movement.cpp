@@ -58,22 +58,24 @@ int Movement::move_up(WorldObj* obj) {
 			}
 		}
 		//for up and down, use vertical line in obj body
-		Line temp(Point(obj->body[0].getX() + (obj->body[0].getWidth() / 2), 25000 - (obj->body[0].getY() + obj->body[0].getHeight())), Point(obj->body[0].getX() + (obj->body[0].getWidth() / 2), 25000 - (obj->body[0].getY() + obj->body[0].getHeight()-20)));
+		Line tempHori(Point(obj->body[0].getX(), 25000 - (obj->body[0].getY() + obj->body[0].getHeight())), Point(obj->body[0].getX() + obj->body[0].getWidth(), 25000 - (obj->body[0].getY() + obj->body[0].getHeight())));
+		Line tempVert(Point(obj->body[0].getX() + (obj->body[0].getWidth() / 2), 25000 - (obj->body[0].getY() + obj->body[0].getHeight())), Point(obj->body[0].getX() + (obj->body[0].getWidth() / 2), 25000 - (obj->body[0].getY() + obj->body[0].getHeight()-20)));
 		//cout << "obj body y is at " << obj->body[0].getY() << " and it's height is " << obj->body[0].getHeight() << endl;
 		lineVec.clear();
-		lineVec = grid->retrieve_objs_in_grid(lineVec, &temp);
+		lineVec = grid->retrieve_objs_in_grid(lineVec, &tempVert);
 		//cout << "SIZE OF LINEVEC IS " << lineVec.size() << endl;
 		for (int i = 0; i < lineVec.size(); i++) {
 			//if (shouldCheckLineCollision(temp.getP1(), rivObj->getLines()[i].getP1(), rivObj->getLines()[i].getP2(), 200)) {
-				if (lineCollision(lineVec[i], &temp)) {
+				if (lineCollision(lineVec[i], &tempVert) || lineCollision(lineVec[i], &tempHori)) {
 					//manager->createTask("Bump", "SOUND");
 
 						//cout << "COLIISION WITH LINE " << rivObj->getLines()[i].getP1().getX() << ", " << rivObj->getLines()[i].getP1().getY() << ", " << rivObj->getLines()[i].getP2().getX() << ", " << rivObj->getLines()[i].getP1().getY() << endl;
-						cout << "COLIISION WITH LINE " << lineVec[i]->getP1().getX() << ", " << lineVec[i]->getP1().getY() << ", " << lineVec[i]->getP2().getX() << ", " << lineVec[i]->getP2().getY() << endl;
-						cout << "my obj coord is " << temp.getP1().getX() << ", " << temp.getP1().getY() << ", " << temp.getP2().getX() << ", " << temp.getP2().getY() << endl;
+					/*	cout << "COLIISION WITH LINE " << lineVec[i]->getP1().getX() << ", " << lineVec[i]->getP1().getY() << ", " << lineVec[i]->getP2().getX() << ", " << lineVec[i]->getP2().getY() << endl;
+						cout << "my obj coord is " << temp.getP1().getX() << ", " << temp.getP1().getY() << ", " << temp.getP2().getX() << ", " << temp.getP2().getY() << endl;*/
 						// EVEN AFTER I FLIP THE LINES ACROSS THE Y AXIS, WHEN THE PLAYER MOVES DOWN, THE Y COORD IS INCREASING, SO IT"S AS IF HE IS GOING UP!!!
-					
+					cout << "collision" << endl;
 					LOG("failed to move up. collision.");
+					//obj->shiftY((moveSpeed*speed_magnifier));
 					obj->shiftY(moveSpeed*speed_magnifier);
 					break;
 				}
@@ -103,7 +105,7 @@ int Movement::move_up_left(WorldObj* obj) {
 			float diagYSpeed = npc->getDiagYSpeed();
 			float diagXSpeed = npc->getDiagXSpeed();
 		}
-		Line tempHori(Point(obj->body[0].getX() + 20, 25000 - (obj->body[0].getY() + obj->body[0].getHeight())), Point(obj->body[0].getX() + obj->body[0].getWidth(), 25000 - (obj->body[0].getY() + obj->body[0].getHeight())));
+		Line tempHori(Point(obj->body[0].getX(), 25000 - (obj->body[0].getY() + obj->body[0].getHeight())), Point(obj->body[0].getX() + 20, 25000 - (obj->body[0].getY() + obj->body[0].getHeight())));
 		Line tempVert(Point(obj->body[0].getX() + (obj->body[0].getWidth() / 2), 25000 - (obj->body[0].getY() + obj->body[0].getHeight())), Point(obj->body[0].getX() + (obj->body[0].getWidth() / 2), 25000 - (obj->body[0].getY() + obj->body[0].getHeight() - 20)));
 		obj->shiftY(-diagYSpeed*speed_magnifier);
 		for (int i = 0; i < objVec.size(); i++) {
@@ -117,25 +119,25 @@ int Movement::move_up_left(WorldObj* obj) {
 				break;
 			}
 		}
-		//lineVec.clear();
-		//lineVec = grid->retrieve_objs_in_grid(lineVec, &tempVert);
-		//for (int i = 0; i < lineVec.size(); i++) {
-		//	//if (shouldCheckLineCollision(tempVert.getP1(), rivObj->getLines()[i].getP1(), rivObj->getLines()[i].getP2(), 200)) {
-		//		if (lineCollision(lineVec[i], &tempVert)) {
-		//			//manager->createTask("Bump", "SOUND");
-		//			//for (int j = 0; j < 10; j++) {
-		//			//	//cout << "COLIISION WITH LINE " << rivObj->getLines()[i].getP1().getX() << ", " << rivObj->getLines()[i].getP1().getY() << ", " << rivObj->getLines()[i].getP2().getX() << ", " << rivObj->getLines()[i].getP1().getY() << endl;
-		//			//	cout << "COLIISION WITH LINE " << rivObj->getLines()[i].getP1().getX() << ", " << rivObj->getLines()[i].getP1().getY() << ", " << rivObj->getLines()[i].getP2().getX() << ", " << rivObj->getLines()[i].getP2().getY() << endl;
-		//			//	cout << "my obj coord is " << obj->body[0].getBL().getXloc() << ", " << obj->body[0].getBL().getYloc() << ", " << obj->body[0].getBR().getXloc() << ", " << obj->body[0].getBR().getYloc() << endl;
+		lineVec.clear();
+		lineVec = grid->retrieve_objs_in_grid(lineVec, &tempVert);
+		for (int i = 0; i < lineVec.size(); i++) {
+			//if (shouldCheckLineCollision(tempVert.getP1(), rivObj->getLines()[i].getP1(), rivObj->getLines()[i].getP2(), 200)) {
+				if (lineCollision(lineVec[i], &tempVert) || lineCollision(lineVec[i], &tempHori)) {
+					//manager->createTask("Bump", "SOUND");
+					//for (int j = 0; j < 10; j++) {
+					//	//cout << "COLIISION WITH LINE " << rivObj->getLines()[i].getP1().getX() << ", " << rivObj->getLines()[i].getP1().getY() << ", " << rivObj->getLines()[i].getP2().getX() << ", " << rivObj->getLines()[i].getP1().getY() << endl;
+					//	cout << "COLIISION WITH LINE " << rivObj->getLines()[i].getP1().getX() << ", " << rivObj->getLines()[i].getP1().getY() << ", " << rivObj->getLines()[i].getP2().getX() << ", " << rivObj->getLines()[i].getP2().getY() << endl;
+					//	cout << "my obj coord is " << obj->body[0].getBL().getXloc() << ", " << obj->body[0].getBL().getYloc() << ", " << obj->body[0].getBR().getXloc() << ", " << obj->body[0].getBR().getYloc() << endl;
 
-		//			//	// EVEN AFTER I FLIP THE LINES ACROSS THE Y AXIS, WHEN THE PLAYER MOVES DOWN, THE Y COORD IS INCREASING, SO IT"S AS IF HE IS GOING UP!!!
-		//			//}
-		//			LOG("failed to move up. collision.");
-		//			obj->shiftY(diagYSpeed*speed_magnifier*2);
-		//			break;
-		//		}
-		//	//}
-		//}
+					//	// EVEN AFTER I FLIP THE LINES ACROSS THE Y AXIS, WHEN THE PLAYER MOVES DOWN, THE Y COORD IS INCREASING, SO IT"S AS IF HE IS GOING UP!!!
+					//}
+					LOG("failed to move up. collision.");
+					obj->shiftY(diagYSpeed*speed_magnifier);
+					break;
+				}
+			//}
+		}
 
 		obj->shiftX(-diagXSpeed*speed_magnifier);
 		for (int i = 0; i < objVec.size(); i++) {
@@ -149,8 +151,8 @@ int Movement::move_up_left(WorldObj* obj) {
 				break;
 			}
 		}
-		lineVec.clear();
-		lineVec = grid->retrieve_objs_in_grid(lineVec, &tempHori);
+		//lineVec.clear();
+		//lineVec = grid->retrieve_objs_in_grid(lineVec, &tempHori);
 		for (int i = 0; i < lineVec.size(); i++) {
 			if (lineCollision(lineVec[i], &tempHori) || lineCollision(lineVec[i], &tempVert)) {
 				//manager->createTask("Bump", "SOUND");
@@ -162,8 +164,7 @@ int Movement::move_up_left(WorldObj* obj) {
 				//	// EVEN AFTER I FLIP THE LINES ACROSS THE Y AXIS, WHEN THE PLAYER MOVES DOWN, THE Y COORD IS INCREASING, SO IT"S AS IF HE IS GOING UP!!!
 				//}
 				LOG("failed to move up. collision.");
-				obj->shiftX(diagYSpeed*speed_magnifier * 2.5);
-				obj->shiftY(diagYSpeed*speed_magnifier * 2.5);
+				obj->shiftX(diagXSpeed*speed_magnifier);
 				break;
 			}
 		}
@@ -189,7 +190,7 @@ int Movement::move_up_right(WorldObj* obj) {
 			float diagYSpeed = npc->getDiagYSpeed()*speed_magnifier;
 			float diagXSpeed = npc->getDiagXSpeed()*speed_magnifier;
 		}
-		Line tempHori(Point(obj->body[0].getX(), 25000 - (obj->body[0].getY() + obj->body[0].getHeight())), Point(obj->body[0].getX() + obj->body[0].getWidth()-20, 25000 - (obj->body[0].getY() + obj->body[0].getHeight())));
+		Line tempHori(Point(obj->body[0].getX() + obj->body[0].getWidth() - 20, 25000 - (obj->body[0].getY() + obj->body[0].getHeight())), Point(obj->body[0].getX() + obj->body[0].getWidth(), 25000 - (obj->body[0].getY() + obj->body[0].getHeight())));
 		Line tempVert(Point(obj->body[0].getX() + (obj->body[0].getWidth() / 2), 25000 - (obj->body[0].getY() + obj->body[0].getHeight())), Point(obj->body[0].getX() + (obj->body[0].getWidth() / 2), 25000 - (obj->body[0].getY() + obj->body[0].getHeight() - 20)));
 
 		obj->shiftY(-diagYSpeed*speed_magnifier);
@@ -204,25 +205,25 @@ int Movement::move_up_right(WorldObj* obj) {
 				break;
 			}
 		}
-		//lineVec.clear();
-		//lineVec = grid->retrieve_objs_in_grid(lineVec, &tempVert);
-		//for (int i = 0; i < lineVec.size(); i++) {
-		//	//if (shouldCheckLineCollision(tempVert.getP1(), rivObj->getLines()[i].getP1(), rivObj->getLines()[i].getP2(), 200)) {
-		//		if (lineCollision(lineVec[i], &tempVert)) {
-		//			//manager->createTask("Bump", "SOUND");
-		//			//for (int j = 0; j < 10; j++) {
-		//			//	//cout << "COLIISION WITH LINE " << rivObj->getLines()[i].getP1().getX() << ", " << rivObj->getLines()[i].getP1().getY() << ", " << rivObj->getLines()[i].getP2().getX() << ", " << rivObj->getLines()[i].getP1().getY() << endl;
-		//			//	cout << "COLIISION WITH LINE " << rivObj->getLines()[i].getP1().getX() << ", " << rivObj->getLines()[i].getP1().getY() << ", " << rivObj->getLines()[i].getP2().getX() << ", " << rivObj->getLines()[i].getP2().getY() << endl;
-		//			//	cout << "my obj coord is " << obj->body[0].getBL().getXloc() << ", " << obj->body[0].getBL().getYloc() << ", " << obj->body[0].getBR().getXloc() << ", " << obj->body[0].getBR().getYloc() << endl;
+		lineVec.clear();
+		lineVec = grid->retrieve_objs_in_grid(lineVec, &tempVert);
+		for (int i = 0; i < lineVec.size(); i++) {
+			//if (shouldCheckLineCollision(tempVert.getP1(), rivObj->getLines()[i].getP1(), rivObj->getLines()[i].getP2(), 200)) {
+				if (lineCollision(lineVec[i], &tempVert) || lineCollision(lineVec[i], &tempHori)) {
+					//manager->createTask("Bump", "SOUND");
+					//for (int j = 0; j < 10; j++) {
+					//	//cout << "COLIISION WITH LINE " << rivObj->getLines()[i].getP1().getX() << ", " << rivObj->getLines()[i].getP1().getY() << ", " << rivObj->getLines()[i].getP2().getX() << ", " << rivObj->getLines()[i].getP1().getY() << endl;
+					//	cout << "COLIISION WITH LINE " << rivObj->getLines()[i].getP1().getX() << ", " << rivObj->getLines()[i].getP1().getY() << ", " << rivObj->getLines()[i].getP2().getX() << ", " << rivObj->getLines()[i].getP2().getY() << endl;
+					//	cout << "my obj coord is " << obj->body[0].getBL().getXloc() << ", " << obj->body[0].getBL().getYloc() << ", " << obj->body[0].getBR().getXloc() << ", " << obj->body[0].getBR().getYloc() << endl;
 
-		//			//	// EVEN AFTER I FLIP THE LINES ACROSS THE Y AXIS, WHEN THE PLAYER MOVES DOWN, THE Y COORD IS INCREASING, SO IT"S AS IF HE IS GOING UP!!!
-		//			//}
-		//			LOG("failed to move up. collision.");
-		//			obj->shiftY(diagYSpeed*speed_magnifier*2);
-		//			break;
-		//		}
-		//	//}
-		//}
+					//	// EVEN AFTER I FLIP THE LINES ACROSS THE Y AXIS, WHEN THE PLAYER MOVES DOWN, THE Y COORD IS INCREASING, SO IT"S AS IF HE IS GOING UP!!!
+					//}
+					LOG("failed to move up. collision.");
+					obj->shiftY(diagYSpeed*speed_magnifier);
+					break;
+				}
+			//}
+		}
 		obj->shiftX(diagXSpeed*speed_magnifier);
 		for (int i = 0; i < objVec.size(); i++) {
 			if (obj == objVec[i] || (my_type >= 2 && objVec[i]->getType() >= WorldObj::TYPE_NPC)) {
@@ -236,8 +237,8 @@ int Movement::move_up_right(WorldObj* obj) {
 			}
 		}
 
-		lineVec.clear();
-		lineVec = grid->retrieve_objs_in_grid(lineVec, &tempHori);
+		//lineVec.clear();
+		//lineVec = grid->retrieve_objs_in_grid(lineVec, &tempHori);
 		for (int i = 0; i < lineVec.size(); i++) {
 				if (lineCollision(lineVec[i], &tempHori) || lineCollision(lineVec[i], &tempVert)) {
 					//manager->createTask("Bump", "SOUND");
@@ -249,8 +250,7 @@ int Movement::move_up_right(WorldObj* obj) {
 					//	// EVEN AFTER I FLIP THE LINES ACROSS THE Y AXIS, WHEN THE PLAYER MOVES DOWN, THE Y COORD IS INCREASING, SO IT"S AS IF HE IS GOING UP!!!
 					//}
 					LOG("failed to move up. collision.");
-					obj->shiftX(-diagYSpeed*speed_magnifier*2.5);
-					obj->shiftY(diagYSpeed*speed_magnifier*2.5);
+					obj->shiftX(-diagXSpeed*speed_magnifier);
 					break;
 				}
 		}
@@ -292,18 +292,20 @@ int Movement::move_down(WorldObj* obj) {
 				//cout << "no collision" << endl;
 			}
 		}
-		Line temp(Point(obj->body[0].getX() + (obj->body[0].getWidth() / 2), 25000 - (obj->body[0].getY() + obj->body[0].getHeight())), Point(obj->body[0].getX() + (obj->body[0].getWidth() / 2), 25000 - (obj->body[0].getY() + obj->body[0].getHeight() - 20)));
+		Line tempVert(Point(obj->body[0].getX() + (obj->body[0].getWidth() / 2), 25000 - (obj->body[0].getY() + obj->body[0].getHeight())), Point(obj->body[0].getX() + (obj->body[0].getWidth() / 2), 25000 - (obj->body[0].getY() + obj->body[0].getHeight() - 20)));
+		Line tempHori(Point(obj->body[0].getX(), 25000 - (obj->body[0].getY() + obj->body[0].getHeight())), Point(obj->body[0].getX() + obj->body[0].getWidth(), 25000 - (obj->body[0].getY() + obj->body[0].getHeight())));
 		lineVec.clear();
-		lineVec = grid->retrieve_objs_in_grid(lineVec, &temp);
+		lineVec = grid->retrieve_objs_in_grid(lineVec, &tempVert);
 		for (int i = 0; i < lineVec.size(); i++) {
 			//if (shouldCheckLineCollision(temp.getP1(), rivObj->getLines()[i].getP1(), rivObj->getLines()[i].getP2(), 200)) {
-				if (lineCollision(lineVec[i], &temp)) {
+				if (lineCollision(lineVec[i], &tempVert) || lineCollision(lineVec[i], &tempHori)) {
 					//manager->createTask("Bump", "SOUND");
 					/*for (int j = 0; j < 10; j++) {
 						cout << "COLIISION WITH LINE " << rivObj->getLines()[i].getP1().getX() << ", " << rivObj->getLines()[i].getP1().getY() << ", " << rivObj->getLines()[i].getP2().getX() << ", " << rivObj->getLines()[i].getP2().getY() << endl;
 						cout << "my obj coord is " << obj->body[0].getBL().getXloc() << ", " << obj->body[0].getBL().getYloc() << ", " << obj->body[0].getBR().getXloc() << ", " << obj->body[0].getBR().getYloc() << endl;
 
 					}*/
+					cout << "collision" << endl;
 					LOG("failed to move up. collision.");
 					obj->shiftY(-moveSpeed*speed_magnifier);
 					break;
@@ -332,7 +334,7 @@ int Movement::move_down_left(WorldObj* obj) {
 			float diagYSpeed = npc->getDiagYSpeed();
 			float diagXSpeed = npc->getDiagXSpeed();
 		}
-		Line tempHori(Point(obj->body[0].getX(), 25000 - (obj->body[0].getY() + obj->body[0].getHeight())), Point(obj->body[0].getX() + obj->body[0].getWidth(), 25000 - (obj->body[0].getY() + obj->body[0].getHeight())));
+		Line tempHori(Point(obj->body[0].getX(), 25000 - (obj->body[0].getY() + obj->body[0].getHeight())), Point(obj->body[0].getX() + 20, 25000 - (obj->body[0].getY() + obj->body[0].getHeight())));
 		Line tempVert(Point(obj->body[0].getX() + (obj->body[0].getWidth() / 2), 25000 - (obj->body[0].getY() + obj->body[0].getHeight())), Point(obj->body[0].getX() + (obj->body[0].getWidth() / 2), 25000 - (obj->body[0].getY() + obj->body[0].getHeight() - 20)));
 		obj->shiftY(diagYSpeed*speed_magnifier);
 		for (int i = 0; i < objVec.size(); i++) {
@@ -348,25 +350,25 @@ int Movement::move_down_left(WorldObj* obj) {
 				//cout << "no collision" << endl;
 			}
 		}
-		//lineVec.clear();
-		//lineVec = grid->retrieve_objs_in_grid(lineVec, &tempVert);
-		//for (int i = 0; i < lineVec.size(); i++) {
-		//	//if (shouldCheckLineCollision(tempVert.getP1(), rivObj->getLines()[i].getP1(), rivObj->getLines()[i].getP2(), 200)) {
-		//		if (lineCollision(lineVec[i], &tempVert)) {
-		//			//manager->createTask("Bump", "SOUND");
-		//			//for (int j = 0; j < 10; j++) {
-		//			//	//cout << "COLIISION WITH LINE " << rivObj->getLines()[i].getP1().getX() << ", " << rivObj->getLines()[i].getP1().getY() << ", " << rivObj->getLines()[i].getP2().getX() << ", " << rivObj->getLines()[i].getP1().getY() << endl;
-		//			//	cout << "COLIISION WITH LINE " << rivObj->getLines()[i].getP1().getX() << ", " << rivObj->getLines()[i].getP1().getY() << ", " << rivObj->getLines()[i].getP2().getX() << ", " << rivObj->getLines()[i].getP2().getY() << endl;
-		//			//	cout << "my obj coord is " << obj->body[0].getBL().getXloc() << ", " << obj->body[0].getBL().getYloc() << ", " << obj->body[0].getBR().getXloc() << ", " << obj->body[0].getBR().getYloc() << endl;
+		lineVec.clear();
+		lineVec = grid->retrieve_objs_in_grid(lineVec, &tempVert);
+		for (int i = 0; i < lineVec.size(); i++) {
+			//if (shouldCheckLineCollision(tempVert.getP1(), rivObj->getLines()[i].getP1(), rivObj->getLines()[i].getP2(), 200)) {
+				if (lineCollision(lineVec[i], &tempVert) || lineCollision(lineVec[i], &tempHori)) {
+					//manager->createTask("Bump", "SOUND");
+					//for (int j = 0; j < 10; j++) {
+					//	//cout << "COLIISION WITH LINE " << rivObj->getLines()[i].getP1().getX() << ", " << rivObj->getLines()[i].getP1().getY() << ", " << rivObj->getLines()[i].getP2().getX() << ", " << rivObj->getLines()[i].getP1().getY() << endl;
+					//	cout << "COLIISION WITH LINE " << rivObj->getLines()[i].getP1().getX() << ", " << rivObj->getLines()[i].getP1().getY() << ", " << rivObj->getLines()[i].getP2().getX() << ", " << rivObj->getLines()[i].getP2().getY() << endl;
+					//	cout << "my obj coord is " << obj->body[0].getBL().getXloc() << ", " << obj->body[0].getBL().getYloc() << ", " << obj->body[0].getBR().getXloc() << ", " << obj->body[0].getBR().getYloc() << endl;
 
-		//			//	// EVEN AFTER I FLIP THE LINES ACROSS THE Y AXIS, WHEN THE PLAYER MOVES DOWN, THE Y COORD IS INCREASING, SO IT"S AS IF HE IS GOING UP!!!
-		//			//}
-		//			LOG("failed to move up. collision.");
-		//			obj->shiftY(-diagYSpeed*speed_magnifier*2);
-		//			break;
-		//		}
-		//	//}
-		//}
+					//	// EVEN AFTER I FLIP THE LINES ACROSS THE Y AXIS, WHEN THE PLAYER MOVES DOWN, THE Y COORD IS INCREASING, SO IT"S AS IF HE IS GOING UP!!!
+					//}
+					LOG("failed to move up. collision.");
+					obj->shiftY(-diagYSpeed*speed_magnifier);
+					break;
+				}
+			//}
+		}
 
 		obj->shiftX(-diagXSpeed*speed_magnifier);
 
@@ -381,8 +383,8 @@ int Movement::move_down_left(WorldObj* obj) {
 				break;
 			}
 		}
-		lineVec.clear();
-		lineVec = grid->retrieve_objs_in_grid(lineVec, &tempHori);
+		//lineVec.clear();
+		//lineVec = grid->retrieve_objs_in_grid(lineVec, &tempHori);
 		for (int i = 0; i < lineVec.size(); i++) {
 			if (lineCollision(lineVec[i], &tempHori) || lineCollision(lineVec[i], &tempVert)) {
 				//manager->createTask("Bump", "SOUND");
@@ -394,8 +396,7 @@ int Movement::move_down_left(WorldObj* obj) {
 				//	// EVEN AFTER I FLIP THE LINES ACROSS THE Y AXIS, WHEN THE PLAYER MOVES DOWN, THE Y COORD IS INCREASING, SO IT"S AS IF HE IS GOING UP!!!
 				//}
 				LOG("failed to move up. collision.");
-				obj->shiftX(diagXSpeed*speed_magnifier*2.5);
-				obj->shiftY(-diagYSpeed*speed_magnifier*2.5);
+				obj->shiftX(diagXSpeed*speed_magnifier);
 				break;
 			}
 		}
@@ -421,7 +422,7 @@ int Movement::move_down_right(WorldObj* obj) {
 			float diagYSpeed = npc->getDiagYSpeed();
 			float diagXSpeed = npc->getDiagXSpeed();
 		}
-		Line tempHori(Point(obj->body[0].getX(), 25000 - (obj->body[0].getY() + obj->body[0].getHeight())), Point(obj->body[0].getX() + obj->body[0].getWidth() - 20, 25000 - (obj->body[0].getY() + obj->body[0].getHeight())));
+		Line tempHori(Point(obj->body[0].getX() + obj->body[0].getWidth() - 20, 25000 - (obj->body[0].getY() + obj->body[0].getHeight())), Point(obj->body[0].getX() + obj->body[0].getWidth(), 25000 - (obj->body[0].getY() + obj->body[0].getHeight())));
 		Line tempVert(Point(obj->body[0].getX() + (obj->body[0].getWidth() / 2), 25000 - (obj->body[0].getY() + obj->body[0].getHeight())), Point(obj->body[0].getX() + (obj->body[0].getWidth() / 2), 25000 - (obj->body[0].getY() + obj->body[0].getHeight() - 20)));
 		obj->shiftY(diagYSpeed*speed_magnifier);
 		for (int i = 0; i < objVec.size(); i++) {
@@ -436,25 +437,25 @@ int Movement::move_down_right(WorldObj* obj) {
 				break;
 			}
 		}
-		//lineVec.clear();
-		//lineVec = grid->retrieve_objs_in_grid(lineVec, &tempVert);
-		//for (int i = 0; i < lineVec.size(); i++) {
-		//	//if (shouldCheckLineCollision(tempVert.getP1(), rivObj->getLines()[i].getP1(), rivObj->getLines()[i].getP2(), 200)) {
-		//		if (lineCollision(lineVec[i], &tempVert)) {
-		//			//manager->createTask("Bump", "SOUND");
-		//			//for (int j = 0; j < 10; j++) {
-		//			//	//cout << "COLIISION WITH LINE " << rivObj->getLines()[i].getP1().getX() << ", " << rivObj->getLines()[i].getP1().getY() << ", " << rivObj->getLines()[i].getP2().getX() << ", " << rivObj->getLines()[i].getP1().getY() << endl;
-		//			//	cout << "COLIISION WITH LINE " << rivObj->getLines()[i].getP1().getX() << ", " << rivObj->getLines()[i].getP1().getY() << ", " << rivObj->getLines()[i].getP2().getX() << ", " << rivObj->getLines()[i].getP2().getY() << endl;
-		//			//	cout << "my obj coord is " << obj->body[0].getBL().getXloc() << ", " << obj->body[0].getBL().getYloc() << ", " << obj->body[0].getBR().getXloc() << ", " << obj->body[0].getBR().getYloc() << endl;
+		lineVec.clear();
+		lineVec = grid->retrieve_objs_in_grid(lineVec, &tempVert);
+		for (int i = 0; i < lineVec.size(); i++) {
+			//if (shouldCheckLineCollision(tempVert.getP1(), rivObj->getLines()[i].getP1(), rivObj->getLines()[i].getP2(), 200)) {
+				if (lineCollision(lineVec[i], &tempVert) || lineCollision(lineVec[i], &tempHori)) {
+					//manager->createTask("Bump", "SOUND");
+					//for (int j = 0; j < 10; j++) {
+					//	//cout << "COLIISION WITH LINE " << rivObj->getLines()[i].getP1().getX() << ", " << rivObj->getLines()[i].getP1().getY() << ", " << rivObj->getLines()[i].getP2().getX() << ", " << rivObj->getLines()[i].getP1().getY() << endl;
+					//	cout << "COLIISION WITH LINE " << rivObj->getLines()[i].getP1().getX() << ", " << rivObj->getLines()[i].getP1().getY() << ", " << rivObj->getLines()[i].getP2().getX() << ", " << rivObj->getLines()[i].getP2().getY() << endl;
+					//	cout << "my obj coord is " << obj->body[0].getBL().getXloc() << ", " << obj->body[0].getBL().getYloc() << ", " << obj->body[0].getBR().getXloc() << ", " << obj->body[0].getBR().getYloc() << endl;
 
-		//			//	// EVEN AFTER I FLIP THE LINES ACROSS THE Y AXIS, WHEN THE PLAYER MOVES DOWN, THE Y COORD IS INCREASING, SO IT"S AS IF HE IS GOING UP!!!
-		//			//}
-		//			LOG("failed to move up. collision.");
-		//			obj->shiftY(-diagYSpeed*speed_magnifier*2);
-		//			break;
-		//		}
-		//	//}
-		//}
+					//	// EVEN AFTER I FLIP THE LINES ACROSS THE Y AXIS, WHEN THE PLAYER MOVES DOWN, THE Y COORD IS INCREASING, SO IT"S AS IF HE IS GOING UP!!!
+					//}
+					LOG("failed to move up. collision.");
+					obj->shiftY(-diagYSpeed*speed_magnifier);
+					break;
+				}
+			//}
+		}
 		obj->shiftX(diagXSpeed*speed_magnifier);
 		for (int i = 0; i < objVec.size(); i++) {
 			if (obj == objVec[i] || (my_type >= 2 && objVec[i]->getType() >= WorldObj::TYPE_NPC)) {
@@ -467,8 +468,8 @@ int Movement::move_down_right(WorldObj* obj) {
 				break;
 			}
 		}
-		lineVec.clear();
-		lineVec = grid->retrieve_objs_in_grid(lineVec, &tempHori);
+		//lineVec.clear();
+		//lineVec = grid->retrieve_objs_in_grid(lineVec, &tempHori);
 		for (int i = 0; i < lineVec.size(); i++) {
 			if (lineCollision(lineVec[i], &tempHori) || lineCollision(lineVec[i], &tempVert)) {
 				//manager->createTask("Bump", "SOUND");
@@ -480,8 +481,7 @@ int Movement::move_down_right(WorldObj* obj) {
 				//	// EVEN AFTER I FLIP THE LINES ACROSS THE Y AXIS, WHEN THE PLAYER MOVES DOWN, THE Y COORD IS INCREASING, SO IT"S AS IF HE IS GOING UP!!!
 				//}
 				LOG("failed to move up. collision.");
-				obj->shiftX(-diagXSpeed*speed_magnifier*2.5);
-				obj->shiftY(-diagYSpeed*speed_magnifier*2.5);
+				obj->shiftX(-diagXSpeed*speed_magnifier);
 				break;
 			}
 		}
@@ -525,18 +525,20 @@ int Movement::move_left(WorldObj* obj) {
 		//for left and right, use horizontal line for obj body
 		//obj->body[0].getBL().getXloc()
 		//cout << "checking against " << lineVec.size() << " lines" << endl;
-		Line temp(Point(obj->body[0].getX()+20, 25000 - (obj->body[0].getY() + obj->body[0].getHeight())), Point(obj->body[0].getX() + obj->body[0].getWidth(), 25000 - (obj->body[0].getY() + obj->body[0].getHeight())));
+		Line tempHori(Point(obj->body[0].getX(), 25000 - (obj->body[0].getY() + obj->body[0].getHeight())), Point(obj->body[0].getX() + 20, 25000 - (obj->body[0].getY() + obj->body[0].getHeight())));
+		Line tempVert(Point(obj->body[0].getX() + (obj->body[0].getWidth() / 2), 25000 - (obj->body[0].getY() + obj->body[0].getHeight())), Point(obj->body[0].getX() + (obj->body[0].getWidth() / 2), 25000 - (obj->body[0].getY() + obj->body[0].getHeight() - 20)));
 		lineVec.clear();
-		lineVec = grid->retrieve_objs_in_grid(lineVec, &temp);
+		lineVec = grid->retrieve_objs_in_grid(lineVec, &tempHori);
 		for (int i = 0; i < lineVec.size(); i++) {
 			//if (shouldCheckLineCollision(temp.getP1(), rivObj->getLines()[i].getP1(), rivObj->getLines()[i].getP2(), 200)) {
-				if (lineCollision(lineVec[i], &temp)) {
+				if (lineCollision(lineVec[i], &tempHori) || lineCollision(lineVec[i], &tempVert)) {
 					//manager->createTask("Bump", "SOUND");
 					/*for (int j = 0; j < 10; j++) {
 						cout << "COLIISION WITH LINE " << rivObj->getLines()[i].getP1().getX() << ", " << rivObj->getLines()[i].getP1().getY() << ", " << rivObj->getLines()[i].getP2().getX() << ", " << rivObj->getLines()[i].getP2().getY() << endl;
 						cout << "my obj coord is " << obj->body[0].getBL().getXloc() << ", " << 25000 - obj->body[0].getBL().getYloc() << ", " << obj->body[0].getBR().getXloc() << ", " << 25000 - obj->body[0].getBR().getYloc() << endl;
 
 					}*/
+					cout << "collision" << endl;
 					LOG("failed to move up. collision.");
 					obj->shiftX(moveSpeed*speed_magnifier);
 					break;
@@ -583,20 +585,21 @@ int Movement::move_right(WorldObj* obj) {
 				//cout << "no collision" << endl;
 			}
 		}
-		Line temp(Point(obj->body[0].getX(), 25000 - (obj->body[0].getY() + obj->body[0].getHeight())), Point(obj->body[0].getX() + obj->body[0].getWidth() - 20, 25000 - (obj->body[0].getY() + obj->body[0].getHeight())));
+		Line tempHori(Point(obj->body[0].getX()+ obj->body[0].getWidth() - 20, 25000 - (obj->body[0].getY() + obj->body[0].getHeight())), Point(obj->body[0].getX() + obj->body[0].getWidth(), 25000 - (obj->body[0].getY() + obj->body[0].getHeight())));
+		Line tempVert(Point(obj->body[0].getX() + (obj->body[0].getWidth() / 2), 25000 - (obj->body[0].getY() + obj->body[0].getHeight())), Point(obj->body[0].getX() + (obj->body[0].getWidth() / 2), 25000 - (obj->body[0].getY() + obj->body[0].getHeight() - 20)));
 		lineVec.clear();
-		lineVec = grid->retrieve_objs_in_grid(lineVec, &temp);
+		lineVec = grid->retrieve_objs_in_grid(lineVec, &tempHori);
 		for (int i = 0; i < lineVec.size(); i++) {
 			//if (shouldCheckLineCollision(temp.getP1(), rivObj->getLines()[i].getP1(), rivObj->getLines()[i].getP2(), 200)) {
-				if (lineCollision(lineVec[i], &temp)) {
+				if (lineCollision(lineVec[i], &tempHori) || lineCollision(lineVec[i], &tempVert)) {
 					//manager->createTask("Bump", "SOUND");
 					for (int j = 0; j < 10; j++) {
 						cout << "COLIISION WITH LINE " << rivObj->getLines()[i]->getP1().getX() << ", " << rivObj->getLines()[i]->getP1().getY() << ", " << rivObj->getLines()[i]->getP2().getX() << ", " << rivObj->getLines()[i]->getP2().getY() << endl;
 						cout << "my obj coord is " << obj->body[0].getBL().getXloc() << ", " << obj->body[0].getBL().getYloc() << ", " << obj->body[0].getBR().getXloc() << ", " << obj->body[0].getBR().getYloc() << endl;
-
 					}
+					cout << "collision" << endl;
 					LOG("failed to move up. collision.");
-					obj->shiftX(-moveSpeed*speed_magnifier);
+					obj->shiftX(-(moveSpeed*speed_magnifier));
 					break;
 				}
 			//}
