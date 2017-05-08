@@ -526,6 +526,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
   gameplay_functions->add_texture("Oya_DeathDownTex", 0, 0, 0);
   gameplay_functions->add_texture("Oya_DeathLeftTex", 0, 0, 0);
   gameplay_functions->add_texture("Oya_DeathRightTex", 0, 0, 0);
+  tBuffer->run();
 
   textureMap[Containers::texture_table["Oya_IdleUpTex"]] = {OYA_PATH + "Oya_Idle_N.png", 22};
   textureMap[Containers::texture_table["Oya_IdleDownTex"]] = {OYA_PATH + "Oya_Idle_S.png", 22};
