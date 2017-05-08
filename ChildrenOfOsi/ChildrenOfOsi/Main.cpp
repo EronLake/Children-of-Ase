@@ -112,6 +112,17 @@ void set_file_with_thread(Texture* t, const pair<string, int>* p_tuple) {
 	t->setFile(p_tuple->first, p_tuple->second);
 }
 
+int getFreeVideoMemory()
+{
+	int availableKB[4];
+	if(GLEW_NVX_gpu_memory_info)
+		glGetIntegerv(GL_GPU_MEMORY_INFO_CURRENT_AVAILABLE_VIDMEM_NVX,&availableKB[0]);
+	int temp=GLEW_ATI_meminfo;
+	if(GLEW_ATI_meminfo)
+		glGetIntegerv(GL_TEXTURE_FREE_MEMORY_ATI,availableKB);
+	return availableKB[0];
+}
+
 
 //Eron: needs to be moved to separate file
 void check_if_end_game() {
@@ -1555,6 +1566,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 			}
 			HUD::FPS = fps;
 			//cout << "FPS: " << fps << endl;
+			cout << "Memory Left: " << getFreeVideoMemory() << endl;
 
 			current_game_state = iController->current_game_state;
 			//if(t0.joinable)t0.join();
@@ -1741,6 +1753,8 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 					combatControl->update_soldier(soldiers_list[i], state);
 				}
 			questM->update();
+
+			cout <<"Memory Left: "<< getFreeVideoMemory() << endl;
 
 			//draw
 			if (state == 0) {
