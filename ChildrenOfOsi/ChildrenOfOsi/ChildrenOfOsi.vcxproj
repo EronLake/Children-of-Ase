@@ -185,6 +185,7 @@
     <ClInclude Include="Containers.h" />
     <ClInclude Include="ConversationLogObj.h" />
     <ClInclude Include="ConversationPoint.h" />
+    <ClInclude Include="ThreadManager.h" />
     <ClInclude Include="DialogueConfig.h" />
     <ClInclude Include="DialogueController.h" />
     <ClInclude Include="DialogueGui.h" />
@@ -203,7 +204,6 @@
     <ClInclude Include="RegionState.h" />
     <ClInclude Include="Tag.h" />
     <ClInclude Include="TagConfig.h" />
-    <ClInclude Include="ThreadManager.h" />
     <ClInclude Include="UniformGrid.h" />
     <ClInclude Include="Village.h" />
     <ClInclude Include="GameMap.h" />
@@ -293,7 +293,6 @@
     <ClCompile Include="RegionState.cpp" />
     <ClCompile Include="Tag.cpp" />
     <ClCompile Include="TagConfig.cpp" />
-    <ClCompile Include="ThreadManager.cpp" />
     <ClCompile Include="UniformGrid.cpp" />
     <ClCompile Include="Village.cpp" />
     <ClCompile Include="GameMap.cpp" />

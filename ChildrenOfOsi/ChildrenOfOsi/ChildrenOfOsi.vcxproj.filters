@@ -210,7 +210,6 @@
     <ClCompile Include="HUD.cpp">
       <Filter>Rendering</Filter>
     </ClCompile>
-    <ClCompile Include="ThreadManager.cpp" />
     <ClCompile Include="PlayerActExecFunctions.cpp">
       <Filter>AI\Actions</Filter>
     </ClCompile>
@@ -483,7 +482,6 @@
       <Filter>Rendering</Filter>
     </ClInclude>
     <ClInclude Include="PartyManager.h" />
-    <ClInclude Include="ThreadManager.h" />
     <ClInclude Include="GameState.h" />
     <ClInclude Include="PlayerActExecFunctions.h">
       <Filter>AI\Actions</Filter>
@@ -531,6 +529,7 @@
     <ClInclude Include="ObjConfig.h">
       <Filter>Game Objects\Configs</Filter>
     </ClInclude>
+    <ClInclude Include="ThreadManager.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="audio_test.txt">
@@ -667,6 +666,7 @@
     <None Include="hero_config.json">
       <Filter>Game Objects\Configs</Filter>
     </None>
+    <None Include="Oya_dialog.json" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="ChildrenOfOsi1.rc" />
