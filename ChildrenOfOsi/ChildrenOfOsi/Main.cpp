@@ -67,6 +67,7 @@
 #include "PartyManager.h"
 //#include <boost/thread/thread.hpp>  //This is used for Ian's multithread section, but the user needs the boost compiled library installed on their computer
 #include "thread"
+#include "threadManager.h"
 
 #include "QuestManager.h"
 
@@ -111,6 +112,17 @@ void set_file_with_thread(Texture* t, const pair<string, int>* p_tuple) {
 	t->setFile(p_tuple->first, p_tuple->second);
 }
 
+int getFreeVideoMemory()
+{
+	int availableKB[4];
+	if(GLEW_NVX_gpu_memory_info)
+		glGetIntegerv(GL_GPU_MEMORY_INFO_CURRENT_AVAILABLE_VIDMEM_NVX,&availableKB[0]);
+	int temp=GLEW_ATI_meminfo;
+	if(GLEW_ATI_meminfo)
+		glGetIntegerv(GL_TEXTURE_FREE_MEMORY_ATI,availableKB);
+	return availableKB[0];
+}
+
 
 //Eron: needs to be moved to separate file
 void check_if_end_game() {
@@ -145,12 +157,16 @@ void check_if_end_game() {
 	}
 }
 
+
+void test(int i) { for(int i=0;i<100;i++) cout << "hello this is the thread running" << endl; }
+
 int main() {
 	WorldObj* screen = new WorldObj(Vector2f(0.0, 0.0), 25000U, 25000U);	//init screen
 
 	QuadTree* collideTree = new QuadTree(0, *screen);
 	GameWindow::init();
 	GAMEPLAY_LOOP(collideTree);
+
 	return 0;
 }
 
@@ -158,6 +174,7 @@ int main() {
 void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 {
 	game_state current_game_state = game_state::load_game;
+	threadmanager::thread_pool pool(5);
 	Rectangle::tex->setFile("Assets/Sprites/blankr.png", 1);
 	Point::tex->setFile("Assets/Sprites/point.png", 1);
 
@@ -233,8 +250,6 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 
 	// Player* Alex = new Player(SHANGO, Vector2f(6445.0, 10155.0), 150.0, 150.0);	//init player
 	
-
-
 	Region* Marsh = new Region("Marsh", "Music/RegionThemes/DesertRegion.flac", "Music/HeroThemes/oya.flac", { 8000,2900 });
 	Region* Desert = new Region("Desert", "Music/RegionThemes/MarshRegion.flac", "Music/HeroThemes/ogun.flac", { 5045,13465 });
 	Region* Mountain = new Region("Mountain", "Music/RegionThemes/MountainRegion.flac", "nothing", { 21000,4000 });
@@ -1054,7 +1069,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 
 	Alex->melee = Containers::Attack_table[Alex->getKey()];
 	Alex->melee->setDmg(10);
-	Alex->melee->setSpeed(4);
+	Alex->melee->setSpeed(5);
 	Alex->melee->setBaseDir(4);
 	Alex->melee->setCoolDown(35);
 	Alex->melee->setStaminaCost(45);
@@ -1626,6 +1641,8 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	cout << "size of largestruct is " << largeStruct->size() << endl;
 	for (auto it : *largeStruct) cout << (it)->getName() << endl;
 
+	if (PRELOAD_TEX) t0.join();
+
 	while (GameWindow::isRunning()) {
 		while (current_game_state == game_state::main_menu) {
 			//cout << "currently in the main menu" << endl;
@@ -1663,6 +1680,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 			}
 			HUD::FPS = fps;
 			//cout << "FPS: " << fps << endl;
+			cout << "Memory Left: " << getFreeVideoMemory() << endl;
 
 			current_game_state = iController->current_game_state;
 			//if(t0.joinable)t0.join();
@@ -1850,6 +1868,8 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 				}
 			questM->update();
 
+			cout <<"Memory Left: "<< getFreeVideoMemory() << endl;
+
 			//draw
 			if (state == 0) {
 				gameplay_functions->draw_frame(Alex);
@@ -1863,6 +1883,21 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 			//run task buffer
 			iController->InputCheck();
 
+			//pool.push(test);
+			
+			cout << "size of buffer is " << tBuffer->queue_buffer.size() << " and physics buffer size is " << tBuffer->physics_buffer.size() << endl;
+
+			//cout << "shango's position BEFORE is at " << Alex->getX() << ", " << Alex->getY() << endl;
+			//iterate through physics_buffer
+			while(tBuffer->physics_buffer_isEmpty() == false) {
+				Task* curr_task = tBuffer->pop_physics();
+				cout << "num of idle threads is " << pool.n_idle() << endl;
+				pool.push([&,tBuffer,curr_task](int id){ tBuffer->assignTask(0,curr_task); });
+			}
+			tBuffer->physics_buffer_empty();
+			//pool.stop(true);
+			//cout << "DONE WITH PHYSICS TASKS" << endl;
+			//cout << "shango's position AFTER is at " << Alex->getX() << ", " << Alex->getY() << endl;
 			tBuffer->run();
 
 			/////////////////////////////////////////////////////////////////

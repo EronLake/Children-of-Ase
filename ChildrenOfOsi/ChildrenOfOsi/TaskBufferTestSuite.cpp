@@ -250,7 +250,7 @@ bool TaskBufferTestSuite::assignTask_test() //Not Super sure how to test this fu
 	Task* test_task = new Task(test_1, test_2, test_3);
 	MessageLog* ML = new MessageLog();
 	TaskBuffer* TB = new TaskBuffer(ML);
-	TB->assignTask(test_task);
+	TB->assignTask(0,test_task);
 	if (test_task->status == "WORKING")
 	{
 		pass = true;
