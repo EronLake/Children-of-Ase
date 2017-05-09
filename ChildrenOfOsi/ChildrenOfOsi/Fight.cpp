@@ -328,33 +328,29 @@ void Fight::update_fight() {
 }
 
 bool Fight::check_for_winner() {
-	if (attackers.size() <= 1 && defenders.size() <= 1) {
-		unordered_map<Alliance*,int> alliances;
-		for (auto it = attackers.begin(); it != attackers.end(); ++it) {
-			for (auto itor = (*it).begin(); itor != (*it).end(); ++itor) {
-				if ((*itor)->getMembers().size() > 0) {
-					alliances[(*itor)->getLeader()->getVillage()->get_alliance()]=1;
-				}
-			}
-		}
-		for (auto it = defenders.begin(); it != defenders.end(); ++it) {
-			for (auto itor = (*it).begin(); itor != (*it).end(); ++itor) {
-				if ((*itor)->getMembers().size() > 0) {
-					alliances[(*itor)->getLeader()->getVillage()->get_alliance()] = 1;
-				}
-			}
-		}
-		if (alliances.size() <= 1) {
-			//end_combat();
+	if (type > 0) {
+		if ((attackers.size() + defenders.size()) <= 1) {
 			return true;
 		}
-		else {
-			return false;
+		else return false;
+	}
+	unordered_map<Alliance*, int> alliances;
+	for (auto it = attackers.begin(); it != attackers.end(); ++it) {
+		if ((*it).size()>0)alliances[(*it)[0]->get_village()->get_alliance()]=1;
+	}
+	for (auto it = defenders.begin(); it != defenders.end(); ++it) {
+		if ((*it).size()>0)alliances[(*it)[0]->get_village()->get_alliance()]=1;
+	}
+	vector<Alliance*> enemy;
+	for (auto itor = alliances.begin(); itor != alliances.end(); ++itor) {
+		enemy = (*itor).first->get_enemy_alliances();
+		for (auto itor2 = enemy.begin(); itor2 != enemy.end(); ++itor) {
+			if (alliances.find((*itor2))!=alliances.end()) {
+				return false;
+			}
 		}
 	}
-	else {
-		return false;
-	}
+	return true;
 }
 
 void Fight::update_all_fights() {
