@@ -67,7 +67,10 @@ void PhysicsManager::execute_task(Task* current_task)
 				LOG("Error: Task '" << current_task->name << "' does not exist.");
 			}
 			else {
-				result = (moveHelper->*(it->second))(obj);
+				physics_buffer.push_back(std::pair<std::string, WorldObj*>(current_task->name, obj));
+				//result = (moveHelper->*(it->second))(obj);
+				cout << "pushed to physics buffer, size is " << physics_buffer.size() << endl;
+				result = 0;
 			}
 		}
 
@@ -82,4 +85,10 @@ void PhysicsManager::execute_task(Task* current_task)
 		current_task->updateStatus("FAILED");
 	}
 	this->send_result(current_task);
+}
+
+void PhysicsManager::process_task(int id, std::string func_name, WorldObj * obj)
+{
+	auto it = task_map.find(func_name);
+	(moveHelper->*(it->second))(obj);
 }

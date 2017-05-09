@@ -5,6 +5,7 @@
 #include "MessageLog.h"
 #include "Manager.h"
 #include "ThreadManager.h"
+//#include "PhysicsManager.h"
 
 //class Manager;
 
@@ -19,7 +20,8 @@ public:
 	TaskBuffer(MessageLog* _mLog);
 	~TaskBuffer();
 	void run();
-	void assignTask(int id, Task* current_task);
+	void pre_run();
+	void assignTask(bool for_prerun, Task* current_task);
 	void printBuffer();//////////////////////////NOT IMPLEMENTED
 	bool isEmpty() const;
 	bool physics_buffer_isEmpty() const;

@@ -1885,16 +1885,28 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 
 			//pool.push(test);
 			
-			cout << "size of buffer is " << tBuffer->queue_buffer.size() << " and physics buffer size is " << tBuffer->physics_buffer.size() << endl;
+			cout << "size of buffer is " << tBuffer->queue_buffer.size() << " and Tphysics buffer size is " << tBuffer->physics_buffer.size() << endl;
 
 			//cout << "shango's position BEFORE is at " << Alex->getX() << ", " << Alex->getY() << endl;
 			//iterate through physics_buffer
-			while(tBuffer->physics_buffer_isEmpty() == false) {
-				Task* curr_task = tBuffer->pop_physics();
-				cout << "num of idle threads is " << pool.n_idle() << endl;
-				pool.push([&,tBuffer,curr_task](int id){ tBuffer->assignTask(0,curr_task); });
-			}
+			//while(tBuffer->physics_buffer_isEmpty() == false) {
+			//	Task* curr_task = tBuffer->pop_physics();
+			//	pool.push([&,tBuffer,curr_task](int id){ tBuffer->assignTask(0,curr_task); });
+			//}
 			tBuffer->physics_buffer_empty();
+			tBuffer->pre_run();
+
+			cout << "physics buffer size is " << PhysM->physics_buffer.size() << endl;
+			//use threads to execute all of the physics manager's tasks
+			for (auto it = PhysM->physics_buffer.begin(); it != PhysM->physics_buffer.end();it++) {
+				cout << "num of idle threads is " << pool.n_idle() << endl;
+				//cout << "it first is " << it->first << " and it second is " << it->second->getID() << endl;
+				pool.push([&,it](int id) {cout << "it first is " << it->first << " and it second is " << it->second->getID() << endl; PhysM->process_task(0,it->first,it->second); });
+				//it = PhysM->physics_buffer.erase(it);
+			}
+			PhysM->physics_buffer.clear();
+
+
 			//pool.stop(true);
 			//cout << "DONE WITH PHYSICS TASKS" << endl;
 			//cout << "shango's position AFTER is at " << Alex->getX() << ", " << Alex->getY() << endl;

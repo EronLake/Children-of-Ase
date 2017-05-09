@@ -15,6 +15,7 @@ private:
 	vector<WorldObj*> objs;
 	vector<QuadTree*> nodes;
 	vector<QuadTree*> treeWithMovable;
+	std::mutex mux;
 
 public:
 	QuadTree(unsigned int p_treelv, WorldObj p_bounds);

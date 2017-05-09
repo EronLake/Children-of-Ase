@@ -1,6 +1,8 @@
 #include "stdafx.h"
 #include "TaskBuffer.h"
 #include <exception>
+#include "PhysicsManager.h"
+
 struct empty_stack : std::exception
 {
 	const char* what() const throw() {
@@ -34,15 +36,30 @@ void TaskBuffer::run()
 {
 	//LOG("TaskBuffer Running");
 	while (isEmpty() == false) {
+		cout << "queue_buffer is NOT EMPTY AND HAS SIZE " << queue_buffer.size() << endl;
+
 		Task* current_task = (pop());
-		assignTask(0, current_task);
+		assignTask(false, current_task);
 	}
 	//LOG("TaskBuffer Stoping");
 }
 
+void TaskBuffer::pre_run()
+{
+	physics_buffer.clear();
+	for (auto& it : queue_buffer) {
+		Task* cloned_task = it->clone_task();
+		physics_buffer.push_back(cloned_task);
+	}
+	for (auto it = physics_buffer.begin(); it != physics_buffer.end(); it++) {
+		if ((*it)->type == "MOVE" || (*it)->type == "INTERACT" || (*it)->type == "COMBAT")
+			assignTask(true, *it);
+	}
+}
+
 
 //------------------------------------------------------
-void TaskBuffer::assignTask(int id, Task* current_task)
+void TaskBuffer::assignTask(bool for_prerun, Task* current_task)
 {
 	//cout << "assign task is being called" << endl;
 	//will a manager ever create a task or simply pass one?
@@ -61,11 +78,17 @@ void TaskBuffer::assignTask(int id, Task* current_task)
 			mLog->logMessage(current_task);
 			for (auto itr = type_man_vec.begin(); itr != type_man_vec.end(); itr++)
 			{
+				PhysicsManager*	pm = dynamic_cast<PhysicsManager*>(*itr);
+				//if its NOT physics manager and its for prerun, skip it
+				if (!pm && for_prerun) continue;
+				//if its physics manager and its NOT for prerun, skip it
+				if (pm && !for_prerun) continue;
 				//clone task and send off to manager
 				LOG("TASK DUPLICATED");
 				Task* duplicate_task = current_task->clone_task();
 				LOG("PRIOR TO EXECUTING THE DUP TASK");
 				(*itr)->execute_task(duplicate_task);
+				if (for_prerun) return;
 			}
 			delete current_task;
 		}
