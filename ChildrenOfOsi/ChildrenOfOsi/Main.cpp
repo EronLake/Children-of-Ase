@@ -637,21 +637,8 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
   jungle.push_back(Containers::texture_table["Oya_DeathLeftTex"]);
   jungle.push_back(Containers::texture_table["Oya_DeathRightTex"]);
 
-	gameplay_functions->add_texture("silverSoldierTexture", 0, 0, 0);
-	gameplay_functions->add_texture("silverSoldierIdleTex", 0, 0, 0);
-	gameplay_functions->add_texture("blueSoldierTexture", 0, 0, 0);
-	gameplay_functions->add_texture("blueSoldierIdleTex", 0, 0, 0);
-	tBuffer->run();
-
-	textureMap[Containers::texture_table["silverSoldierTexture"]] = pair<string, int>("Assets/Sprites/SilverSoldierForwardIdle.png", 22);
-	textureMap[Containers::texture_table["silverSoldierIdleTex"]] = pair<string, int>("Assets/Sprites/SilverSoldierForwardIdle.png", 22);
-	textureMap[Containers::texture_table["blueSoldierTexture"]] = pair<string, int>("Assets/Sprites/BlueSoldierForwardIdle.png", 22);
-	textureMap[Containers::texture_table["blueSoldierIdleTex"]] = pair<string, int>("Assets/Sprites/BlueSoldierForwardIdle.png", 22);
-	standard.push_back(Containers::texture_table["silverSoldierTexture"]);
-	standard.push_back(Containers::texture_table["silverSoldierIdleTex"]);
-	marsh.push_back(Containers::texture_table["blueSoldierTexture"]);
-	marsh.push_back(Containers::texture_table["blueSoldierIdleTex"]);
-
+  gameplay_functions->add_texture("silverSoldierTexture", 0, 0, 0);
+  gameplay_functions->add_texture("silverSoldierIdleTex", 0, 0, 0);
 	gameplay_functions->add_texture("ss_upRunTex", 0, 0, 0);
 	gameplay_functions->add_texture("ss_downRunTex", 0, 0, 0);
 	gameplay_functions->add_texture("ss_leftRunTex", 0, 0, 0);
@@ -682,6 +669,8 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	gameplay_functions->add_texture("ss_rightDeathTex", 0, 0, 0);
 	tBuffer->run();
 
+  textureMap[Containers::texture_table["silverSoldierTexture"]] = {SOLDIER_JUNGLE_PATH + "SoldierJungle_Idle_S.png", 22};
+  textureMap[Containers::texture_table["silverSoldierIdleTex"]] = {SOLDIER_JUNGLE_PATH + "SoldierJungle_Idle_S.png", 22};
   textureMap[Containers::texture_table["ss_upIdleTex"]] = {SOLDIER_JUNGLE_PATH + "SoldierJungle_Idle_N.png", 22};
   textureMap[Containers::texture_table["ss_downIdleTex"]] = {SOLDIER_JUNGLE_PATH + "SoldierJungle_Idle_S.png", 22};
   textureMap[Containers::texture_table["ss_leftIdleTex"]] = {SOLDIER_JUNGLE_PATH + "SoldierJungle_Idle_W.png", 22};
@@ -739,7 +728,11 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	mountain.push_back(Containers::texture_table["ss_downDeathTex"]);
 	mountain.push_back(Containers::texture_table["ss_leftDeathTex"]);
 	mountain.push_back(Containers::texture_table["ss_rightDeathTex"]);
+  standard.push_back(Containers::texture_table["silverSoldierTexture"]);
+  standard.push_back(Containers::texture_table["silverSoldierIdleTex"]);
 
+  gameplay_functions->add_texture("blueSoldierTexture", 0, 0, 0);
+  gameplay_functions->add_texture("blueSoldierIdleTex", 0, 0, 0);
   gameplay_functions->add_texture("bs_upIdleTex", 0, 0, 0);
   gameplay_functions->add_texture("bs_downIdleTex", 0, 0, 0);
   gameplay_functions->add_texture("bs_leftIdleTex", 0, 0, 0);
@@ -770,6 +763,8 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	gameplay_functions->add_texture("bs_rightDeathTex", 0, 0, 0);
 	tBuffer->run();
 
+  textureMap[Containers::texture_table["blueSoldierTexture"]] = {SOLDIER_OASIS_PATH + "SoldierOasis_Idle_S.png", 22};
+  textureMap[Containers::texture_table["blueSoldierIdleTex"]] = {SOLDIER_OASIS_PATH + "SoldierOasis_Idle_S.png", 22};
   textureMap[Containers::texture_table["bs_upIdleTex"]] = {SOLDIER_OASIS_PATH + "SoldierOasis_Idle_N.png", 22};
   textureMap[Containers::texture_table["bs_downIdleTex"]] = {SOLDIER_OASIS_PATH + "SoldierOasis_Idle_S.png", 22};
   textureMap[Containers::texture_table["bs_leftIdleTex"]] = {SOLDIER_OASIS_PATH + "SoldierOasis_Idle_W.png", 22};
@@ -799,7 +794,8 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	textureMap[Containers::texture_table["bs_leftDeathTex"]] = {SOLDIER_OASIS_PATH + "SoldierOasis_Death_W.png", 24};
 	textureMap[Containers::texture_table["bs_rightDeathTex"]] = {SOLDIER_OASIS_PATH + "SoldierOasis_Death_E.png", 24};
 
-	gameplay_functions->add_texture("treeTex", 0, 0, 0);
+  marsh.push_back(Containers::texture_table["blueSoldierTexture"]);
+  marsh.push_back(Containers::texture_table["blueSoldierIdleTex"]);
 	marsh.push_back(Containers::texture_table["bs_upRunTex"]);
 	marsh.push_back(Containers::texture_table["bs_downRunTex"]);
 	marsh.push_back(Containers::texture_table["bs_leftRunTex"]);
@@ -825,6 +821,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	marsh.push_back(Containers::texture_table["bs_leftLungeTex"]);
 	marsh.push_back(Containers::texture_table["bs_rightLungeTex"]);
 
+  gameplay_functions->add_texture("treeTex", 0, 0, 0);
 	gameplay_functions->add_texture("rockTex1", 0, 0, 0);
 	gameplay_functions->add_texture("rockTex2", 0, 0, 0);
 	tBuffer->run();
