@@ -275,14 +275,14 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	tBuffer->run();
 	
 
-	Hero* staticRec = Containers::hero_table["Yemoja"];
-	heroes.push_back(staticRec);
+	Hero* yemoja = Containers::hero_table["Yemoja"];
+	heroes.push_back(yemoja);
 	Hero* oya = Containers::hero_table["Oya"];
 	heroes.push_back(oya);
 
-	staticRec->name = YEMOJA;
-	staticRec->setWidth(150);
-	staticRec->setHeight(150);
+	yemoja->name = YEMOJA;
+	yemoja->setWidth(150);
+	yemoja->setHeight(150);
 	oya->name = OYA;
 	oya->setWidth(150);
 	oya->setHeight(150);
@@ -436,8 +436,8 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	gameplay_functions->add_texture("yemojaIdleTex", 0, 0, 0);
 	tBuffer->run();
 
-  textureMap[Containers::texture_table["yemojaTexture"]] = pair<string, int>("Assets/Sprites/YemojaForwardIdle.png", 22);
-	textureMap[Containers::texture_table["yemojaIdleTex"]] = pair<string, int>("Assets/Sprites/YemojaForwardIdle.png", 22);
+  textureMap[Containers::texture_table["yemojaTexture"]] = {YEMOJA_PATH + "Yemoja_Idle_S.png", 22};
+	textureMap[Containers::texture_table["yemojaIdleTex"]] = {YEMOJA_PATH + "Yemoja_Idle_S.png", 22};
 	oasis.push_back(Containers::texture_table["yemojaTexture"]);
 	oasis.push_back(Containers::texture_table["yemojaIdleTex"]);
 
@@ -912,7 +912,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 		gameplay_functions->add_Attack(blueSoldiers[i]->getKey(), blueSoldiers[i]->body[0].getX(), blueSoldiers[i]->body[0].getY(), true, 10);
 	}
 	tBuffer->run();
-	movVec.push_back(staticRec);
+	movVec.push_back(yemoja);
 	movVec.push_back(oya);
 	for (int i = 0; i < silverSoldier.size(); i++) {
 		movVec.push_back(silverSoldier[i]);
@@ -1189,32 +1189,32 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 		edges.push_back({ p1, p4 });
 	}
 
-	staticRec->setWidth(150);
-	staticRec->setHeight(150);
-	staticRec->name = YEMOJA;
+	yemoja->setWidth(150);
+	yemoja->setHeight(150);
+	yemoja->name = YEMOJA;
 
-	staticRec->sprite.setTexture(Containers::texture_table["yemojaTexture"]);
-	staticRec->sprite.setIdleTexture(Containers::texture_table["yemojaIdleTex"]);
-  staticRec->sprite.id_up = Containers::texture_table["h_upIdleTex"];
-  staticRec->sprite.id_left = Containers::texture_table["h_leftIdleTex"];
-  staticRec->sprite.id_right = Containers::texture_table["h_rightIdleTex"];
-  staticRec->sprite.id_down = Containers::texture_table["h_downIdleTex"];
-	staticRec->sprite.up = Containers::texture_table["h_upWalkTex"];
-	staticRec->sprite.down = Containers::texture_table["h_downWalkTex"];
-	staticRec->sprite.left = Containers::texture_table["h_leftWalkTex"];
-	staticRec->sprite.right = Containers::texture_table["h_rightWalkTex"];
-	staticRec->sprite.hurt_up = Containers::texture_table["YhurtUp"];
-	staticRec->sprite.hurt_down = Containers::texture_table["YhurtDown"];
-	staticRec->sprite.hurt_left = Containers::texture_table["YhurtLeft"];
-	staticRec->sprite.hurt_right = Containers::texture_table["YhurtRight"];
-	staticRec->sprite.atk_up = Containers::texture_table["YswingUp"];
-	staticRec->sprite.atk_down = Containers::texture_table["YswingDown"];
-	staticRec->sprite.atk_left = Containers::texture_table["YswingLeft"];
-	staticRec->sprite.atk_right = Containers::texture_table["YswingRight"];
-	staticRec->sprite.death_up = Containers::texture_table["bs_upHurtTex"];
-	staticRec->sprite.death_down = Containers::texture_table["bs_upHurtTex"];
-	staticRec->sprite.death_left = Containers::texture_table["bs_upHurtTex"];
-	staticRec->sprite.death_right = Containers::texture_table["bs_upHurtTex"];
+	yemoja->sprite.setTexture(Containers::texture_table["h_downIdleTex"]);
+	yemoja->sprite.setIdleTexture(Containers::texture_table["h_downIdleTex"]);
+  yemoja->sprite.id_up = Containers::texture_table["h_upIdleTex"];
+  yemoja->sprite.id_down = Containers::texture_table["h_downIdleTex"];
+  yemoja->sprite.id_left = Containers::texture_table["h_leftIdleTex"];
+  yemoja->sprite.id_right = Containers::texture_table["h_rightIdleTex"];
+	yemoja->sprite.up = Containers::texture_table["h_upWalkTex"];
+	yemoja->sprite.down = Containers::texture_table["h_downWalkTex"];
+	yemoja->sprite.left = Containers::texture_table["h_leftWalkTex"];
+	yemoja->sprite.right = Containers::texture_table["h_rightWalkTex"];
+	yemoja->sprite.hurt_up = Containers::texture_table["YhurtUp"];
+	yemoja->sprite.hurt_down = Containers::texture_table["YhurtDown"];
+	yemoja->sprite.hurt_left = Containers::texture_table["YhurtLeft"];
+	yemoja->sprite.hurt_right = Containers::texture_table["YhurtRight"];
+	yemoja->sprite.atk_up = Containers::texture_table["YswingUp"];
+	yemoja->sprite.atk_down = Containers::texture_table["YswingDown"];
+	yemoja->sprite.atk_left = Containers::texture_table["YswingLeft"];
+	yemoja->sprite.atk_right = Containers::texture_table["YswingRight"];
+	yemoja->sprite.death_up = Containers::texture_table["YdeathUp"];
+	yemoja->sprite.death_down = Containers::texture_table["YdeathDown"];
+	yemoja->sprite.death_left = Containers::texture_table["YdeathLeft"];
+	yemoja->sprite.death_right = Containers::texture_table["YdeathRight"];
 
   oya->sprite.setTexture(Containers::texture_table["Oya_IdleDownTex"]);
   oya->sprite.setIdleTexture(Containers::texture_table["Oya_IdleDownTex"]);
@@ -1239,25 +1239,25 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
   oya->sprite.death_left = Containers::texture_table["Oya_DeathLeftTex"];
   oya->sprite.death_right = Containers::texture_table["Oya_DeathRightTex"];
 
-	gameplay_functions->add_Attack(staticRec->getKey(), staticRec->body[0].getX(), staticRec->body[0].getY(), true, 10);
+	gameplay_functions->add_Attack(yemoja->getKey(), yemoja->body[0].getX(), yemoja->body[0].getY(), true, 10);
 	gameplay_functions->add_Attack(oya->getKey(), oya->body[0].getX(), oya->body[0].getY(), true, 10);
 	tBuffer->run();
 
-	staticRec->melee = Containers::Attack_table[staticRec->getKey()];
-	staticRec->melee->setDmg(15);
-	staticRec->melee->setSpeed(8);
-	staticRec->melee->setBaseDir(4);
-	staticRec->melee->setCoolDown(60);
-	staticRec->melee->setPause(-1);
-	staticRec->melee->setDestroy(false);
-	staticRec->melee->setKeep(true);
-	staticRec->melee->setWidth(50);
-	staticRec->melee->setHeight(50);
-	staticRec->set_creator_of_melee();
-	staticRec->melee->setStaminaCost(90);
-	staticRec->setHealth(140);
-	staticRec->setMaxStamina(300);
-	staticRec->melee->sprite.setTexture(Containers::texture_table["border"]);
+	yemoja->melee = Containers::Attack_table[yemoja->getKey()];
+	yemoja->melee->setDmg(15);
+	yemoja->melee->setSpeed(8);
+	yemoja->melee->setBaseDir(4);
+	yemoja->melee->setCoolDown(60);
+	yemoja->melee->setPause(-1);
+	yemoja->melee->setDestroy(false);
+	yemoja->melee->setKeep(true);
+	yemoja->melee->setWidth(50);
+	yemoja->melee->setHeight(50);
+	yemoja->set_creator_of_melee();
+	yemoja->melee->setStaminaCost(90);
+	yemoja->setHealth(140);
+	yemoja->setMaxStamina(300);
+	yemoja->melee->sprite.setTexture(Containers::texture_table["border"]);
 
 	oya->melee = Containers::Attack_table[oya->getKey()];
 	oya->melee->setDmg(18);
@@ -1411,9 +1411,9 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 		}
 	}*/
 
-	staticRec->setName("Yemoja");
-	staticRec->setInteractable(true);
-	staticRec->setPersonality(30, 80, 80, 50, 50, 50, 80);// uncommented this
+	yemoja->setName("Yemoja");
+	yemoja->setInteractable(true);
+	yemoja->setPersonality(30, 80, 80, 50, 50, 50, 80);// uncommented this
 	oya->setPersonality(80, 50, 80, 50, 80, 80, 50);// uncommented this
 
 	//staticRec->rel[OYA]->setAffinity(60);// uncommented this
@@ -1438,7 +1438,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	oya->setName("Oya");
 	oya->name = OYA;
 	oya->offsetBody(0, 35, 35, 65, 15);
-	staticRec->offsetBody(0, 60, 60, 75, 50);
+	yemoja->offsetBody(0, 60, 60, 75, 50);
 	oya->shiftY(300);
 	oya->setHealth(50);
 
@@ -1460,19 +1460,19 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 
 	Alex->rel = shangoRel;
 
-	staticRec->rel = yemojaRelRef;
+	yemoja->rel = yemojaRelRef;
 	oya->rel = OyaRelRef;
 
-	ActionConfig::import_config(gameplay_functions, tBuffer, staticRec);
+	ActionConfig::import_config(gameplay_functions, tBuffer, yemoja);
 	ActionConfig::import_config(gameplay_functions, tBuffer, oya);
 
-	Planner* YemojaPlanner = new Planner(staticRec);
+	Planner* YemojaPlanner = new Planner(yemoja);
 	Planner* OyaPlanner = new Planner(oya);
 	AIController::set_plan(YEMOJA, YemojaPlanner);
 	AIController::set_plan(OYA, OyaPlanner);
 	
 	Action* test_ally = new Action(nullptr, nullptr, nullptr, 10, 1, "Create Alliance", "execute_train");
-	Action* test_train = new Action(staticRec, oya, nullptr, 10, 1, "Conquer", "execute_conquer");
+	Action* test_train = new Action(yemoja, oya, nullptr, 10, 1, "Conquer", "execute_conquer");
 
 	RelPrecon* prec = new RelPrecon(Preconditions::AFF, 60);
 	RelPost* post = new RelPost(Postcondition::STR, 10);
@@ -1515,14 +1515,14 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 		} };
 		*/
 		//ai->graph = graph;
-	ai->start = staticRec->getLoc();
+	ai->start = yemoja->getLoc();
 	ai->goal = { 1100.00,1100.00 };
 
 	ai->graph.insert(ai->start);
 	//ai->graph.insert(ai->goal);
 
-	staticRec->destination = { 4600.00,3600.00 };
-	ai->graph.insert(staticRec->destination);
+	yemoja->destination = { 4600.00,3600.00 };
+	ai->graph.insert(yemoja->destination);
 	ai->graph.insert(Vector2f(5000.00, 4100.00));
 	ai->graph.insert(Vector2f(4600.00, 3600.00));
 	ai->graph.insert(Vector2f(4500.00, 4000.00));
@@ -1536,9 +1536,9 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 
 	ai->graph._print();
 
-	ai->astar_search(staticRec);
+	ai->astar_search(yemoja);
 	// gameplay_functions->get_path(staticRec); //Generate the waypoints to the destination
-	staticRec->setMode(WANDER);
+	yemoja->setMode(WANDER);
 	short M = GetKeyState('M') >> 15;
 	Party::grave->set_perm(true);
 	Party* party = new Party();
@@ -1552,7 +1552,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	for (int i = 0; i < blueSoldiers.size(); i++) {
 		party3->addToParty(blueSoldiers[i], false);
 	}
-	party3->addToParty(staticRec, true);
+	party3->addToParty(yemoja, true);
 	party4->addToParty(oya, true);
 	Village* v1 = new Village();
 	//Village* v2 = new Village();
@@ -1560,7 +1560,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	Village* v4 = new Village();
 	v1->set_village_location(Alex->getLoc());
 	//v2->set_village_location({ 6030, 4000 });
-	v3->set_village_location(staticRec->getLoc());
+	v3->set_village_location(yemoja->getLoc());
 	v4->set_village_location(oya->getLoc());
 	v1->add_member(Alex);
 	for (int i = 0; i < silverSoldier.size(); i++) {
@@ -1569,10 +1569,10 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	for (int i = 0; i < blueSoldiers.size(); i++) {
 		v3->add_member(blueSoldiers[i]);
 	}
-	v3->add_member(staticRec);
+	v3->add_member(yemoja);
 	v4->add_member(oya);
 	v1->leader = Alex;
-	v3->leader = staticRec;
+	v3->leader = yemoja;
 	v4->leader = oya;
 	//v4->defenders->addToParty(oya, true);
 	Alliance* a1 = new Alliance(v1);
@@ -1606,7 +1606,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	int total_fps = 0;
 
 	vector<Soldier*> soldiers_list;
-	soldiers_list.push_back(staticRec);
+	soldiers_list.push_back(yemoja);
 	soldiers_list.push_back(oya);
 	for (int i = 0; i < blueSoldiers.size(); i++) {
 		soldiers_list.push_back(blueSoldiers[i]);
@@ -1876,7 +1876,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 			//draw
 			else if (state > 0) {
 				gameplay_functions->drawDiaGui(Alex);
-				gameplay_functions->stop(staticRec);
+				gameplay_functions->stop(yemoja);
 			}
 
 			//run task buffer
@@ -1902,7 +1902,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 			/////////////////////////////////////////////////////////////////
 			/////////////////////////////////////////////////////////////////
 			/////////////////////////////////////////////////////////////////
-			for (auto iter : staticRec->rel) {
+			for (auto iter : yemoja->rel) {
 				Relationship* my_rel = iter.second;
 				int with_hero = iter.first;
 
