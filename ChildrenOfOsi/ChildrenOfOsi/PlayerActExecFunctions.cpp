@@ -52,6 +52,10 @@ void PlayerActExecFunctions::execute_start(std::string act_name, Hero* receiver)
 
 	receiver->set_busy(Hero::BUSY_REC);
 
+	if (act_name == "Fight" && !War::at_war(player->getVillage(), receiver->getVillage())) {
+		new War(player->getVillage(), receiver->getVillage());
+	}
+
 	if ((act_name == "Occupy" || act_name == "Fight" || act_name == "Conquer") &&
 		((!player->getInCombat()) && (!receiver->getInCombat())))
 	{

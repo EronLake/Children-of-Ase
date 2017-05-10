@@ -1068,7 +1068,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	tBuffer->run();
 
 	Alex->melee = Containers::Attack_table[Alex->getKey()];
-	Alex->melee->setDmg(10);
+	Alex->melee->setDmg(40);
 	Alex->melee->setSpeed(5);
 	Alex->melee->setBaseDir(4);
 	Alex->melee->setCoolDown(35);
@@ -1542,7 +1542,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	short M = GetKeyState('M') >> 15;
 	Party::grave->set_perm(true);
 	Party* party = new Party();
-	Party* party2 = new Party();
+	//Party* party2 = new Party();
 	Party* party3 = new Party();
 	Party* party4 = new Party();
 	party->addToParty(Alex, true);
@@ -1574,6 +1574,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	v1->leader = Alex;
 	v3->leader = staticRec;
 	v4->leader = oya;
+	//v2->leader = oya;
 	//v4->defenders->addToParty(oya, true);
 	Alliance* a1 = new Alliance(v1);
 	//Alliance* a2 = new Alliance(v2);

@@ -35,6 +35,9 @@ Fight::Fight(Party* a, Party* b, int tp)
 		a->set_killable(false);
 		b->set_killable(false);
 	}
+	else if (!War::at_war(a->get_village(), b->get_village())){
+		new War(a->get_village(), b->get_village());
+	}
 	if (type == 0 || type == 3) {
 		a->set_in_combat(true);
 		b->set_in_combat(true);
@@ -119,12 +122,14 @@ void Fight::add_party(Party* p, bool atk) {
 	bool added = false;
 	for (auto it = attackers.begin(); it != attackers.end(); ++it) {
 		if ((*it).size() != 0) {
-			Soldier* lead = (*it)[0]->getLeader();
-			if (p->getMembers().size() != 0) {
-				Soldier* sofp = p->getLeader();
-				if (lead->getVillage()->get_alliance() == sofp->getVillage()->get_alliance()) {
-					(*it).push_back(p);
-					added = true;
+			if ((*it)[0]->getMembers().size()>0) {
+				Soldier* lead = (*it)[0]->getLeader();
+				if (p->getMembers().size() != 0) {
+					Soldier* sofp = p->getLeader();
+					if (lead->getVillage()->get_alliance() == sofp->getVillage()->get_alliance()) {
+						(*it).push_back(p);
+						added = true;
+					}
 				}
 			}
 		}
@@ -334,6 +339,9 @@ bool Fight::check_for_winner() {
 		}
 		else return false;
 	}
+	else if ((attackers.size() + defenders.size()) <= 1) {
+		return true;
+	}
 	unordered_map<Alliance*, int> alliances;
 	for (auto it = attackers.begin(); it != attackers.end(); ++it) {
 		if ((*it).size()>0)alliances[(*it)[0]->get_village()->get_alliance()]=1;
@@ -344,7 +352,7 @@ bool Fight::check_for_winner() {
 	vector<Alliance*> enemy;
 	for (auto itor = alliances.begin(); itor != alliances.end(); ++itor) {
 		enemy = (*itor).first->get_enemy_alliances();
-		for (auto itor2 = enemy.begin(); itor2 != enemy.end(); ++itor) {
+		for (auto itor2 = enemy.begin(); itor2 != enemy.end(); ++itor2) {
 			if (alliances.find((*itor2))!=alliances.end()) {
 				return false;
 			}
