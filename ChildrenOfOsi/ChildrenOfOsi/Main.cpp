@@ -235,19 +235,14 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	
 
 
-	Region* Marsh = new Region("Marsh", "Music/RegionThemes/DesertRegion.flac", "Music/HeroThemes/oya.flac", { 8000,2900 });
-	Region* Desert = new Region("Desert", "Music/RegionThemes/MarshRegion.flac", "Music/HeroThemes/ogun.flac", { 5045,13465 });
-	Region* Mountain = new Region("Mountain", "Music/RegionThemes/MountainRegion.flac", "nothing", { 21000,4000 });
-	Region* Jungle = new Region("Jungle", "Music/RegionThemes/JungleRegion.flac", "Music/HeroThemes/oya.flac", { 17157,20960 });
+
+	std::vector<Region*> reg = RegionState::regions;
+	
+	Region current_region = *RegionState::regions[RegionState::DESERT];
+	Region next_region = *RegionState::regions[RegionState::DESERT];
+
 
 	
-	Region current_region = *Desert;
-	Region next_region = *Desert;
-
-	RegionState::regions.push_back(Marsh);
-	RegionState::regions.push_back(Desert);
-	RegionState::regions.push_back(Mountain);
-	RegionState::regions.push_back(Jungle);
 
 	RegionState::current_region = current_region;
 	RegionState::next_region = next_region;
@@ -1079,29 +1074,29 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	int closest;
 	int least_dist;
 	int tmp;
-	while (RegionState::regions.size() > 0) {
+	while (reg.size() > 0) {
 		closest = 0;
 		least_dist = 0;
-		for (int i = 0; i < RegionState::regions.size(); i++) {
-			tmp = Party::dist_location_to_location(Alex->getLoc(), RegionState::regions[i]->loc);
+		for (int i = 0; i < reg.size(); i++) {
+			tmp = Party::dist_location_to_location(Alex->getLoc(), reg[i]->loc);
 			if (tmp < least_dist || least_dist == 0) {
 				closest = i;
 				least_dist = tmp;
 			}
 		}
-		if (RegionState::regions[closest] == Desert) {
+		if (reg[closest] == RegionState::regions[RegionState::DESERT]) {
 			starting_location.push_back(oasis);
 		}
-		else if (RegionState::regions[closest] == Mountain) {
+		else if (reg[closest] == RegionState::regions[RegionState::MOUNTAIN]) {
 			starting_location.push_back(mountain);
 		}
-		else if (RegionState::regions[closest] == Jungle) {
+		else if (reg[closest] == RegionState::regions[RegionState::JUNGLE]) {
 			starting_location.push_back(jungle);
 		}
-		else if (RegionState::regions[closest] == Marsh) {
+		else if (reg[closest] == RegionState::regions[RegionState::MARSH]) {
 			starting_location.push_back(marsh);
 		}
-		RegionState::regions.erase(RegionState::regions.begin()+closest);
+		reg.erase(reg.begin()+closest);
 	}
 
 	HGLRC loaderContext0 = wglCreateContext(hdc);
@@ -1835,8 +1830,102 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 				return;
 			}
 			if (start) {
-				gameplay_functions->play_sound("Play");
+				gameplay_functions->change_song("Change", nullptr, RegionState::next_region.getRTheme(),RegionState::soundType::region_music);
 				start = !start;
+			}
+			//Audio State code. might be moved into RegionState itself
+
+			//commented out for demo
+			/*if (Alex->getX() > 660 && Alex->getX() < 10847.5) { //Ogun Desert
+			if (Alex->getY() < 3523.33) {
+			if (RegionState::current_region == *Desert)
+			RegionState::next_region = *Marsh;
+
+			}
+			else {
+			if (RegionState::current_region == *Marsh) {
+			RegionState::next_region = *Desert;
+			}
+			}
+			}
+			if (Alex->getX() > 10847.5 && Alex->getX() < 12395.5) {
+			if (Alex->getY() < 14441) {
+			if (RegionState::current_region == *Jungle)
+			RegionState::next_region = *Mountain;
+			}
+			else {
+			if (RegionState::current_region == *Mountain) {
+			RegionState::next_region = *Jungle;
+			}
+			}
+			}
+			if (Alex->getX() > 660 && Alex->getX() < 25000) {
+			if (Alex->getY() < 5132.23) {
+
+			if (RegionState::current_region == *Mountain) {
+			RegionState::next_region = *Marsh;
+			}
+			}
+			else {
+			if (RegionState::current_region == *Marsh)
+			RegionState::next_region = *Mountain;
+			}
+			}
+			if (Alex->getX() > 3479.67 && Alex->getX() < 10847.5) {
+			if (Alex->getY() < 17000.7) {
+			if (RegionState::current_region == *Jungle)
+			RegionState::next_region = *Desert;
+			}
+			else {
+			if (RegionState::current_region == *Desert) {
+			RegionState::next_region = *Jungle;
+			}
+			}
+			}*/
+
+			//only 3 regions for demo
+			if (Alex->getX() > 660 && Alex->getX() < 25000) { //Ogun Desert
+				if (Alex->getY() < 3523.33) {
+					if (RegionState::current_region == *RegionState::regions[RegionState::DESERT])
+						RegionState::next_region = *RegionState::regions[RegionState::MARSH];
+
+				}
+				else {
+					if (RegionState::current_region == *RegionState::regions[RegionState::MARSH]) {
+						RegionState::next_region = *RegionState::regions[RegionState::DESERT];
+					}
+				}
+			}
+			if (Alex->getX() > 600 && Alex->getX() < 25000) {
+				if (Alex->getY() < 20000.7) {
+					if (RegionState::current_region == *RegionState::regions[RegionState::JUNGLE])
+						RegionState::next_region = *RegionState::regions[RegionState::DESERT];
+				}
+				else {
+					if (RegionState::current_region == *RegionState::regions[RegionState::DESERT]) {
+						RegionState::next_region = *RegionState::regions[RegionState::JUNGLE];
+					}
+				}
+			}
+			if (!(RegionState::current_region == RegionState::next_region)) {
+				RegionState::switch_music = true;
+			}
+
+			if (RegionState::switch_music) {
+				if (RegionState::in_village) {
+
+					gameplay_functions->change_song("Change", RegionState::current_region.getRTheme(), RegionState::current_region.getVTheme(), RegionState::soundType::theme_music);
+					RegionState::switch_music = false;
+				}
+				else {
+					gameplay_functions->change_song("Change", RegionState::current_region.getRTheme(), RegionState::next_region.getRTheme(), RegionState::soundType::region_music);
+					//iController->current_region = current_region;
+					RegionState::current_region = RegionState::next_region;
+
+					//current_region->getRTheme(), next_region->getRTheme()
+					RegionState::switch_music = false;
+				}
+
 			}
 			start_tick = clock();
 			if (!MAP_EDITOR) {
@@ -1891,98 +1980,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 
 			state = DialogueController::getState();
 
-			//commented out for demo
-			/*if (Alex->getX() > 660 && Alex->getX() < 10847.5) { //Ogun Desert
-				if (Alex->getY() < 3523.33) {
-					if (RegionState::current_region == *Desert)
-						RegionState::next_region = *Marsh;
-
-				}
-				else {
-					if (RegionState::current_region == *Marsh) {
-						RegionState::next_region = *Desert;
-					}
-				}
-			}
-			if (Alex->getX() > 10847.5 && Alex->getX() < 12395.5) {
-				if (Alex->getY() < 14441) {
-					if (RegionState::current_region == *Jungle)
-						RegionState::next_region = *Mountain;
-				}
-				else {
-					if (RegionState::current_region == *Mountain) {
-						RegionState::next_region = *Jungle;
-					}
-				}
-			}
-			if (Alex->getX() > 660 && Alex->getX() < 25000) {
-				if (Alex->getY() < 5132.23) {
-
-					if (RegionState::current_region == *Mountain) {
-						RegionState::next_region = *Marsh;
-					}
-				}
-				else {
-					if (RegionState::current_region == *Marsh)
-						RegionState::next_region = *Mountain;
-				}
-			}
-			if (Alex->getX() > 3479.67 && Alex->getX() < 10847.5) {
-				if (Alex->getY() < 17000.7) {
-					if (RegionState::current_region == *Jungle)
-						RegionState::next_region = *Desert;
-				}
-				else {
-					if (RegionState::current_region == *Desert) {
-						RegionState::next_region = *Jungle;
-					}
-				}
-			}*/
-
-			//only 3 regions for demo
-			if (Alex->getX() > 660 && Alex->getX() < 25000 ){ //Ogun Desert
-				if (Alex->getY() < 3523.33) {
-					if (RegionState::current_region == *Desert)
-						RegionState::next_region = *Marsh;
-
-				}
-				else {
-					if (RegionState::current_region == *Marsh) {
-						RegionState::next_region = *Desert;
-					}
-				}
-			}
-			if (Alex->getX() > 600 && Alex->getX() < 25000) {
-				if (Alex->getY() < 20000.7) {
-					if (RegionState::current_region == *Jungle)
-						RegionState::next_region = *Desert;
-				}
-				else {
-					if (RegionState::current_region == *Desert) {
-						RegionState::next_region = *Jungle;
-					}
-				}
-			}
-			if (!(RegionState::current_region == RegionState::next_region)) {
-				RegionState::switch_music = true;
-			}
-
-			if (RegionState::switch_music) {
-				if (RegionState::in_village) {
-
-					gameplay_functions->change_song("Change", RegionState::current_region.getRTheme(), RegionState::current_region.getVTheme());
-					RegionState::switch_music = false;
-				}
-				else {
-					gameplay_functions->change_song("Change", RegionState::current_region.getRTheme(), RegionState::next_region.getRTheme());
-					//iController->current_region = current_region;
-					RegionState::current_region = RegionState::next_region;
-
-					//current_region->getRTheme(), next_region->getRTheme()
-					RegionState::switch_music = false;
-				}
-
-			}
+			
 			/*combatControl->updateSoliderStatus();
 			combatControl->checkParties();
 			for (int i = 0; i < soldiers_list.size(); i++) {

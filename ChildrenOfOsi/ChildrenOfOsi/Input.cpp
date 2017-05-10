@@ -635,6 +635,8 @@ void Input::InputCheck()
 	if (current_game_state == game_state::in_game) {
 		if (DialogueController::getState() == 0) {
 
+			
+
 			Player* t = CheckClass::isPlayer(player);
 			gameplay_functions->combat(player);
 			if (SHIFT) {
@@ -920,8 +922,8 @@ void Input::InputCheck()
 				//}
 				//else
 				//{
-					gameplay_functions->change_song("Change", RegionState::current_region.getRTheme(), RegionState::current_region.getRTheme());
-					RegionState::in_village = false;
+					//gameplay_functions->change_song("Change", RegionState::current_region.getRTheme(), RegionState::current_region.getRTheme(),RegionState::soundType::region_music);
+					//RegionState::in_village = false;
 					DialogueController::exitDialogue();
 				//}
 			}
@@ -956,7 +958,7 @@ void Input::InputCheck()
 					if (tmp > 0) {
 						DialogueController::setOptionsIndex(--tmp);
 						count = 10;
-						gameplay_functions->createTaskForAudio("PlaySound","SOUND", "SFX/page.wav");
+						gameplay_functions->createTaskForAudio("PlaySound","SOUND", "SFX/page.wav", nullptr, RegionState::soundType::sfx);
 						//////std:://cout << "OptionsIndex: " << tmp << std::endl;
 						switch (DialogueController::getOptionsIndex()) {
 						case 0: gameplay_functions->setSwordGlow(player); break;
@@ -978,7 +980,7 @@ void Input::InputCheck()
 							DialogueController::setOptionsIndex(++tmp);
 							count = 10;
 							if (tmp <= DialogueController::getOSize() - 1)
-								gameplay_functions->createTaskForAudio("PlaySound", "SOUND", "SFX/page.wav");
+								gameplay_functions->createTaskForAudio("PlaySound", "SOUND", "SFX/page.wav", nullptr, RegionState::soundType::sfx);
 							//////std:://cout << "OptionsIndex: " << tmp << std::endl;
 							switch (DialogueController::getOptionsIndex()) {
 							case 0: gameplay_functions->setSwordGlow(player); break;
@@ -1024,7 +1026,7 @@ void Input::InputCheck()
 							if (DialogueController::scroll_control >= DialogueController::getOptions().size()) 
 								DialogueController::scroll_control = DialogueController::getOptions().size() - 1;
 							else
-								gameplay_functions->createTaskForAudio("PlaySound", "SOUND", "SFX/down.wav");
+								gameplay_functions->createTaskForAudio("PlaySound", "SOUND", "SFX/down.wav", nullptr, RegionState::soundType::sfx);
 						
 
 							count = 10;
@@ -1046,7 +1048,7 @@ void Input::InputCheck()
 							DialogueController::scroll_control++;
 							if (DialogueController::scroll_control >= DialogueController::get_soldier_options().size()) {
 								DialogueController::scroll_control = DialogueController::get_soldier_options().size() - 1;
-								gameplay_functions->createTaskForAudio("PlaySound", "SOUND", "SFX/down.wav");
+								gameplay_functions->createTaskForAudio("PlaySound", "SOUND", "SFX/down.wav", nullptr, RegionState::soundType::sfx);
 							}
 							count = 10;
 							//////std:://cout << "Index: " << tmp << std::endl;
@@ -1068,7 +1070,7 @@ void Input::InputCheck()
 							if (DialogueController::scroll_control >= DialogueController::getReplyOptions().size()) 
 							DialogueController::scroll_control = DialogueController::getReplyOptions().size() - 1;
 							else
-								gameplay_functions->createTaskForAudio("PlaySound", "SOUND", "SFX/down.wav");
+								gameplay_functions->createTaskForAudio("PlaySound", "SOUND", "SFX/down.wav", nullptr, RegionState::soundType::sfx);
 						
 							
 
@@ -1095,7 +1097,7 @@ void Input::InputCheck()
 						if (DialogueController::scroll_control < 0)
 							DialogueController::scroll_control = 0;
 						else
-							gameplay_functions->createTaskForAudio("PlaySound", "SOUND", "SFX/up.wav");
+							gameplay_functions->createTaskForAudio("PlaySound", "SOUND", "SFX/up.wav", nullptr, RegionState::soundType::sfx);
 						//disable = true;
 						count = 10;
 						//////std:://cout << "Index: " << tmp << std::endl;
@@ -1130,7 +1132,7 @@ void Input::InputCheck()
 					}
 					else if (DialogueController::getState() == 7) {
 						count = 10;
-						gameplay_functions->change_song("Change", RegionState::current_region.getRTheme(), RegionState::current_region.getRTheme());
+						gameplay_functions->change_song("Change", RegionState::current_region.getRTheme(), RegionState::current_region.getRTheme(), RegionState::soundType::region_music);
 						RegionState::in_village = false;
 						DialogueController::exitDialogue();
 					}
@@ -1140,7 +1142,7 @@ void Input::InputCheck()
 					}
 					else if (DialogueController::getState() == 9) {
 						count = 10;
-						gameplay_functions->change_song("Change", RegionState::current_region.getRTheme(), RegionState::current_region.getRTheme());
+						gameplay_functions->change_song("Change", RegionState::current_region.getRTheme(), RegionState::current_region.getRTheme(), RegionState::soundType::region_music);
 						RegionState::in_village = false;
 						DialogueController::exitDialogue();
 						if (dynamic_cast<Player*>(Containers::hero_table["Shango"])->cur_action != nullptr) 

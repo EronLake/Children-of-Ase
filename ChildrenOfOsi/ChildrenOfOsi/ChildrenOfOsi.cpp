@@ -226,22 +226,23 @@ void ChildrenOfOsi::add_conv_point(std::string icon, std::string temp, std::stri
 void ChildrenOfOsi::play_sound(string name) {
 	createTask(name, "SOUND");
 }
-void ChildrenOfOsi::change_song(string name, char* from, char* to) {
-	createTaskForAudio(name, "SOUND", from, to);
+void ChildrenOfOsi::change_song(string name, char* from, char* to, RegionState::soundType type) {
+	createTaskForAudio(name, "SOUND", from, to, type);
 
 };
 void ChildrenOfOsi::pause_unpause(string name, char* source) {
-	createTaskForAudio(name, "SOUND", source);
+	createTaskForAudio(name, "SOUND", source,nullptr,RegionState::soundType::null_type);
 
 };
 
 //----------------------------------------------------
 //----------------------------------------------------
-void ChildrenOfOsi::createTaskForAudio(std::string _name, std::string _type, char* _source , char* _target) {
+void ChildrenOfOsi::createTaskForAudio(std::string _name, std::string _type, char* _source, char* _target, RegionState::soundType _soundType) {
 	//maybe just pass in the string craeated
 	std::string task_status = "CREATED";
-	Task* new_task = new Task(_name, task_status, _type, _source, _target);
+	Task* new_task = new Task(_name, task_status, _type, _source, _target,_soundType);
 	tBuffer->push(new_task);
+	mLog->logMessage(new_task);
 }
 
 void ChildrenOfOsi::createTask(std::string task_name, std::string type, WorldObj * objToUpdate)
