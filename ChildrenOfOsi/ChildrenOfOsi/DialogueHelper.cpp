@@ -230,7 +230,9 @@ dialogue_point DialogueHelper::choose_conv_pt(std::vector<ConversationLogObj*> c
 }
 
 /*Returns all of the possible reply points that an npc can say
-based on the player's conversation point.*/
+based on the player's conversation point. Since conversation points
+between the player and soldiers do not get stored, the curr_conversation_log
+will have size 0 if player is talking to soldier.*/
 dialogue_point DialogueHelper::choose_reply_pt(std::string point, int optn_inx, std::vector<ConversationLogObj*> curr_conversation_log,Hero* other)
 {
 

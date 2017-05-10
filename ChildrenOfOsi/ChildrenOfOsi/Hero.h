@@ -7,7 +7,7 @@
 #include "ConversationLogObj.h"
 
 class ActionPool;
-class Party;
+//class Party;
 class ConversationLogObj;
 
 class Hero :
@@ -34,7 +34,7 @@ public:
 	vector<Memory*> memories;
 	Memory* find_mem(std::string mem_name);
 
-	Party* cur_party;
+	//Party* cur_party;
 	//void defeat();
 	//void capacitate();
 	//void kill();

@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "Alliance.h"
+#include "War.h"
 std::vector<Alliance*> Alliance::Alliances;
 
 Alliance::Alliance()
@@ -12,6 +13,7 @@ Alliance::Alliance(Village* v)
 	allies.push_back(v);
 	Alliance::Alliances.push_back(this);
 	v->set_alliance(this);
+	//update_enemies();
 }
 
 Alliance::~Alliance()
@@ -27,6 +29,7 @@ void Alliance::add_village_to_alliance(Village * p_faction)
 		enemies.push_back(tmp[j]);
 	}
 	p_faction->set_alliance(this);
+	update_enemies();
 }
 
 void Alliance::add_alliance_to_alliance(Alliance* p_alliance)
@@ -41,6 +44,7 @@ void Alliance::add_alliance_to_alliance(Alliance* p_alliance)
 		if (!already_in_alliance) { this->add_village_to_alliance(*p_faction); }
 	}
 	Alliance::remove_alliance(p_alliance);
+	update_enemies();
 }
 
 void Alliance::remove_village_from_alliance(Village * p_factionToRemove)
@@ -88,28 +92,31 @@ void Alliance::remove_alliance(Alliance * p_alliance)
 void Alliance::update_enemies() {
 	for (auto itor = Alliance::Alliances.begin(); itor != Alliance::Alliances.end(); ++itor) {
 		(*itor)->enemies.clear();
+		(*itor)->enemy_alliances.clear();
 		for (int i = 0; i < (*itor)->allies.size(); i++) {
-			(*itor)->allies[i]->clearEnemyParties();
 			std::vector<Village*> tmp = War::getWars((*itor)->allies[i]);
 			for (int j = 0; j < tmp.size(); j++) {
+				bool not_there = true;
+				std::vector<Alliance*> vnm = (*itor)->enemy_alliances;
+				for (auto it = vnm.begin(); it != vnm.end(); ++it) {
+					if ((*it) == tmp[j]->get_alliance())not_there = false;
+				}
+				if (not_there)(*itor)->enemy_alliances.push_back(tmp[j]->get_alliance());
 				std::vector<Village*> tmp2 = tmp[j]->get_alliance()->get_alligned_villages();
 				for (int k = 0; k < tmp2.size();k++) {
-					(*itor)->enemies.push_back(tmp2[k]);
-				}
-			}
-		}
-		for (int i = 0; i < (*itor)->allies.size(); i++) {
-			for (int j = 0; j < (*itor)->enemies.size(); j++) {
-				vector<Party*> eparts = (*itor)->enemies[j]->getParties();
-				for (int z = 0; z < eparts.size(); z++) {
-					(*itor)->allies[i]->addToEnemyParties(eparts[z]);
+					bool not_there2 = true;
+					std::vector<Village*> venm = (*itor)->enemies;
+					for (auto it = venm.begin(); it != venm.end(); ++it) {
+						if ((*it) == tmp2[k])not_there2 = false;
+					}
+					if (not_there2)(*itor)->enemies.push_back(tmp2[k]);
 				}
 			}
 		}
 	}
 }
 
-vector<Alliance*> Alliance::get_enemy_alliances() {
+/*vector<Alliance*> Alliance::get_enemy_alliances() {
 	vector<Alliance*> ret;
 	unordered_map<Alliance*, int> mkshft;
 	vector<Village*> enmys;
@@ -123,7 +130,7 @@ vector<Alliance*> Alliance::get_enemy_alliances() {
 		ret.push_back((*itr).first);
 	}
 	return ret;
-}
+}*/
 
 vector<Hero*> Alliance::get_leaders() {
 	vector<Hero*> leads;
@@ -147,9 +154,5 @@ vector<NPC*> Alliance::get_alliance_members() {
 }
 
 bool Alliance::is_alliance_member(NPC* n) {
-	vector<NPC*> tmp=this->get_alliance_members();
-	for (auto it = tmp.begin(); it != tmp.end(); ++it) {
-		if (n == *it)return true;
-	}
-	return false;
+	return(n->getVillage()->get_alliance() == this);
 }

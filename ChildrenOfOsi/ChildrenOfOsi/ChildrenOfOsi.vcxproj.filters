@@ -1,278 +1,674 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClCompile Include="Action.cpp" />
-    <ClCompile Include="ActionConfig.cpp" />
-    <ClCompile Include="ActionExecFunctions.cpp" />
-    <ClCompile Include="ActionHelper.cpp" />
-    <ClCompile Include="ActionPool.cpp" />
-    <ClCompile Include="AIController.cpp" />
-    <ClCompile Include="AIHelper.cpp" />
-    <ClCompile Include="AIManager.cpp" />
-    <ClCompile Include="Alliance.cpp" />
-    <ClCompile Include="AudioManager.cpp" />
-    <ClCompile Include="AudioTestSuite.cpp" />
-    <ClCompile Include="CheckClass.cpp" />
-    <ClCompile Include="ChildrenOfOsi.cpp" />
-    <ClCompile Include="CombatController.cpp" />
-    <ClCompile Include="Conditions.cpp" />
-    <ClCompile Include="Containers.cpp" />
-    <ClCompile Include="DummyController.cpp" />
-    <ClCompile Include="Fight.cpp" />
-    <ClCompile Include="HeroConfig.cpp" />
-    <ClCompile Include="HUD.cpp" />
-    <ClCompile Include="Party.cpp" />
-    <ClCompile Include="PartyManager.cpp" />
-    <ClCompile Include="PlayerActExecFunctions.cpp" />
-    <ClCompile Include="QuestManager.cpp" />
-    <ClCompile Include="Region.cpp" />
-    <ClCompile Include="RegionState.cpp" />
-    <ClCompile Include="ThreadManager.cpp" />
-    <ClCompile Include="UniformGrid.cpp" />
-    <ClCompile Include="Village.cpp" />
-    <ClCompile Include="GameMap.cpp" />
-    <ClCompile Include="GameWindow.cpp" />
-    <ClCompile Include="Line.cpp" />
-    <ClCompile Include="Personality.cpp" />
-    <ClCompile Include="Planner.cpp" />
-    <ClCompile Include="Hero.cpp" />
-    <ClCompile Include="Input.cpp" />
-    <ClCompile Include="jsoncpp.cpp" />
-    <ClCompile Include="LivingObj.cpp" />
-    <ClCompile Include="Main.cpp" />
-    <ClCompile Include="Manager.cpp" />
-    <ClCompile Include="memManager.cpp" />
-    <ClCompile Include="MemNode.cpp" />
-    <ClCompile Include="Memory.cpp" />
-    <ClCompile Include="MemoryHelper.cpp" />
-    <ClCompile Include="MemoryTestSuite.cpp" />
-    <ClCompile Include="MessageLog.cpp" />
-    <ClCompile Include="Movement.cpp" />
-    <ClCompile Include="NPC.cpp" />
-    <ClCompile Include="ObjConfig.cpp" />
-    <ClCompile Include="PhysicsManager.cpp" />
-    <ClCompile Include="PhysicsTestSuite.cpp" />
-    <ClCompile Include="Player.cpp" />
-    <ClCompile Include="MemoryPool.cpp" />
-    <ClCompile Include="Attack.cpp" />
-    <ClCompile Include="Point.cpp" />
-    <ClCompile Include="QuadTree.cpp" />
-    <ClCompile Include="RenderHelper.cpp" />
-    <ClCompile Include="RenderManager.cpp" />
-    <ClCompile Include="RiverObj.cpp" />
-    <ClCompile Include="Relationship.cpp" />
-    <ClCompile Include="TaskBufferTestSuite.cpp" />
-    <ClCompile Include="Task.cpp" />
-    <ClCompile Include="TaskBuffer.cpp" />
-    <ClCompile Include="TestManager.cpp" />
-    <ClCompile Include="TextObj.cpp" />
-    <ClCompile Include="Texture.cpp" />
-    <ClCompile Include="Vector2f.cpp" />
-    <ClCompile Include="War.cpp" />
-    <ClCompile Include="WorldObj.cpp" />
-    <ClCompile Include="Wrapper.cpp" />
-    <ClCompile Include="Soldier.cpp" />
-    <ClCompile Include="SoundSystem.cpp" />
-    <ClCompile Include="SplSoldier.cpp" />
-    <ClCompile Include="Sprite.cpp" />
-    <ClCompile Include="stdafx.cpp" />
-    <ClCompile Include="TagConfig.cpp">
-      <Filter>Dialog</Filter>
+    <ClCompile Include="AIHelper.cpp">
+      <Filter>AI</Filter>
     </ClCompile>
-    <ClCompile Include="Tag.cpp">
-      <Filter>Dialog</Filter>
+    <ClCompile Include="AudioManager.cpp">
+      <Filter>Audio</Filter>
     </ClCompile>
-    <ClCompile Include="DialougeTestSuite.cpp">
-      <Filter>Dialog</Filter>
+    <ClCompile Include="AudioTestSuite.cpp">
+      <Filter>Audio</Filter>
     </ClCompile>
-    <ClCompile Include="DialogueHelper.cpp">
-      <Filter>Dialog</Filter>
+    <ClCompile Include="AIManager.cpp">
+      <Filter>AI</Filter>
     </ClCompile>
-    <ClCompile Include="DialogueGui.cpp">
-      <Filter>Dialog</Filter>
+    <ClCompile Include="CheckClass.cpp">
+      <Filter>Game Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="ChildrenOfOsi.cpp">
+      <Filter>Input</Filter>
+    </ClCompile>
+    <ClCompile Include="Containers.cpp">
+      <Filter>Memory</Filter>
+    </ClCompile>
+    <ClCompile Include="DummyController.cpp">
+      <Filter>Task Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="Hero.cpp">
+      <Filter>Game Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="Input.cpp">
+      <Filter>Input</Filter>
+    </ClCompile>
+    <ClCompile Include="GameWindow.cpp">
+      <Filter>Rendering</Filter>
+    </ClCompile>
+    <ClCompile Include="LivingObj.cpp">
+      <Filter>Game Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="Manager.cpp">
+      <Filter>Task Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="memManager.cpp">
+      <Filter>Memory</Filter>
+    </ClCompile>
+    <ClCompile Include="MemNode.cpp">
+      <Filter>Memory</Filter>
+    </ClCompile>
+    <ClCompile Include="MemoryHelper.cpp">
+      <Filter>Memory</Filter>
+    </ClCompile>
+    <ClCompile Include="MemoryPool.cpp">
+      <Filter>Memory</Filter>
+    </ClCompile>
+    <ClCompile Include="MemoryTestSuite.cpp">
+      <Filter>Memory</Filter>
+    </ClCompile>
+    <ClCompile Include="Movement.cpp">
+      <Filter>Physics</Filter>
+    </ClCompile>
+    <ClCompile Include="PhysicsManager.cpp">
+      <Filter>Physics</Filter>
+    </ClCompile>
+    <ClCompile Include="PhysicsTestSuite.cpp">
+      <Filter>Physics</Filter>
+    </ClCompile>
+    <ClCompile Include="MessageLog.cpp">
+      <Filter>Task Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="NPC.cpp">
+      <Filter>Game Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="Player.cpp">
+      <Filter>Game Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="RenderHelper.cpp">
+      <Filter>Rendering</Filter>
+    </ClCompile>
+    <ClCompile Include="RenderManager.cpp">
+      <Filter>Rendering</Filter>
+    </ClCompile>
+    <ClCompile Include="QuadTree.cpp">
+      <Filter>Physics</Filter>
+    </ClCompile>
+    <ClCompile Include="Soldier.cpp">
+      <Filter>Game Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="SplSoldier.cpp">
+      <Filter>Game Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="Sprite.cpp">
+      <Filter>Game Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="Task.cpp">
+      <Filter>Task Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="TaskBuffer.cpp">
+      <Filter>Task Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="TaskBufferTestSuite.cpp">
+      <Filter>Task Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="Texture.cpp">
+      <Filter>Rendering</Filter>
+    </ClCompile>
+    <ClCompile Include="Vector2f.cpp">
+      <Filter>Physics</Filter>
+    </ClCompile>
+    <ClCompile Include="WorldObj.cpp">
+      <Filter>Game Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="SoundSystem.cpp">
+      <Filter>Audio</Filter>
+    </ClCompile>
+    <ClCompile Include="stdafx.cpp">
+      <Filter>Misc</Filter>
     </ClCompile>
     <ClCompile Include="DialogueController.cpp">
-      <Filter>Dialog</Filter>
+      <Filter>Dialogue</Filter>
     </ClCompile>
-    <ClCompile Include="DialogueConfig.cpp">
-      <Filter>Dialog</Filter>
+    <ClCompile Include="TestManager.cpp">
+      <Filter>Test</Filter>
+    </ClCompile>
+    <ClCompile Include="Main.cpp" />
+    <ClCompile Include="DialogueHelper.cpp">
+      <Filter>Dialogue</Filter>
+    </ClCompile>
+    <ClCompile Include="DialougeTestSuite.cpp">
+      <Filter>Dialogue</Filter>
+    </ClCompile>
+    <ClCompile Include="DialogueGui.cpp">
+      <Filter>Dialogue</Filter>
+    </ClCompile>
+    <ClCompile Include="GameMap.cpp">
+      <Filter>Game Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="jsoncpp.cpp">
+      <Filter>Dialogue</Filter>
+    </ClCompile>
+    <ClCompile Include="Wrapper.cpp">
+      <Filter>Misc</Filter>
+    </ClCompile>
+    <ClCompile Include="Attack.cpp">
+      <Filter>Game Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="Memory.cpp">
+      <Filter>AI</Filter>
+    </ClCompile>
+    <ClCompile Include="Planner.cpp">
+      <Filter>AI</Filter>
+    </ClCompile>
+    <ClCompile Include="Personality.cpp">
+      <Filter>AI</Filter>
+    </ClCompile>
+    <ClCompile Include="AIController.cpp">
+      <Filter>AI</Filter>
+    </ClCompile>
+    <ClCompile Include="Line.cpp">
+      <Filter>Physics</Filter>
+    </ClCompile>
+    <ClCompile Include="Point.cpp">
+      <Filter>Physics</Filter>
+    </ClCompile>
+    <ClCompile Include="RiverObj.cpp">
+      <Filter>Physics</Filter>
+    </ClCompile>
+    <ClCompile Include="Village.cpp">
+      <Filter>Game Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="Conditions.cpp">
+      <Filter>AI\Actions</Filter>
+    </ClCompile>
+    <ClCompile Include="Action.cpp">
+      <Filter>AI\Actions</Filter>
+    </ClCompile>
+    <ClCompile Include="ActionHelper.cpp">
+      <Filter>AI\Actions</Filter>
+    </ClCompile>
+    <ClCompile Include="ActionPool.cpp">
+      <Filter>AI\Actions</Filter>
+    </ClCompile>
+    <ClCompile Include="Alliance.cpp">
+      <Filter>AI\Relationships</Filter>
+    </ClCompile>
+    <ClCompile Include="Party.cpp">
+      <Filter>AI\Relationships</Filter>
+    </ClCompile>
+    <ClCompile Include="Relationship.cpp">
+      <Filter>AI\Relationships</Filter>
+    </ClCompile>
+    <ClCompile Include="War.cpp">
+      <Filter>AI\Relationships</Filter>
+    </ClCompile>
+    <ClCompile Include="TextObj.cpp">
+      <Filter>Dialogue</Filter>
+    </ClCompile>
+    <ClCompile Include="CombatController.cpp">
+      <Filter>AI</Filter>
+    </ClCompile>
+    <ClCompile Include="ActionExecFunctions.cpp">
+      <Filter>AI\Actions</Filter>
+    </ClCompile>
+    <ClCompile Include="ActionConfig.cpp">
+      <Filter>AI\Actions</Filter>
+    </ClCompile>
+    <ClCompile Include="PartyManager.cpp" />
+    <ClCompile Include="Region.cpp">
+      <Filter>Audio</Filter>
+    </ClCompile>
+    <ClCompile Include="HUD.cpp">
+      <Filter>Rendering</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerActExecFunctions.cpp">
+      <Filter>AI\Actions</Filter>
+    </ClCompile>
+    <ClCompile Include="RegionState.cpp" />
+    <ClCompile Include="ConversationLogObj.cpp">
+      <Filter>Dialogue</Filter>
     </ClCompile>
     <ClCompile Include="ConversationPoint.cpp">
-      <Filter>Dialog</Filter>
+      <Filter>Dialogue</Filter>
     </ClCompile>
-    <ClCompile Include="ConversationLogObj.cpp">
-      <Filter>Dialog</Filter>
+    <ClCompile Include="DialogueConfig.cpp">
+      <Filter>Dialogue</Filter>
+    </ClCompile>
+    <ClCompile Include="PartyManager.cpp">
+      <Filter>AI\Relationships</Filter>
+    </ClCompile>
+    <ClCompile Include="Fight.cpp">
+      <Filter>AI\Relationships</Filter>
+    </ClCompile>
+    <ClCompile Include="QuestManager.cpp">
+      <Filter>AI\Actions</Filter>
+    </ClCompile>
+    <ClCompile Include="Tag.cpp">
+      <Filter>Dialogue</Filter>
+    </ClCompile>
+    <ClCompile Include="TagConfig.cpp">
+      <Filter>Dialogue</Filter>
+    </ClCompile>
+    <ClCompile Include="UniformGrid.cpp">
+      <Filter>Physics</Filter>
+    </ClCompile>
+    <ClCompile Include="Tag.cpp">
+      <Filter>Dialogue</Filter>
+    </ClCompile>
+    <ClCompile Include="TagConfig.cpp">
+      <Filter>Dialogue</Filter>
+    </ClCompile>
+    <ClCompile Include="DialogueConfig.cpp">
+      <Filter>Dialogue</Filter>
+    </ClCompile>
+    <ClCompile Include="HeroConfig.cpp">
+      <Filter>Game Objects\Configs</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjConfig.cpp">
+      <Filter>Game Objects\Configs</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Action.h" />
-    <ClInclude Include="ActionConfig.h" />
-    <ClInclude Include="ActionExecFunctions.h" />
-    <ClInclude Include="ActionHelper.h" />
-    <ClInclude Include="ActionPool.h" />
-    <ClInclude Include="AIController.h" />
-    <ClInclude Include="AIHelper.h" />
-    <ClInclude Include="AIManager.h" />
-    <ClInclude Include="Alliance.h" />
-    <ClInclude Include="AudioManager.h" />
-    <ClInclude Include="AudioTestSuite.h" />
-    <ClInclude Include="CheckClass.h" />
-    <ClInclude Include="ChildrenOfOsi.h" />
-    <ClInclude Include="CombatController.h" />
-    <ClInclude Include="common.h" />
-    <ClInclude Include="Conditions.h" />
-    <ClInclude Include="Containers.h" />
-    <ClInclude Include="DummyController.h" />
-    <ClInclude Include="Fight.h" />
-    <ClInclude Include="GameState.h" />
-    <ClInclude Include="HeroConfig.h" />
-    <ClInclude Include="HUD.h" />
-    <ClInclude Include="Party.h" />
-    <ClInclude Include="PartyManager.h" />
-    <ClInclude Include="PlayerActExecFunctions.h" />
-    <ClInclude Include="QuestManager.h" />
-    <ClInclude Include="Region.h" />
-    <ClInclude Include="RegionState.h" />
-    <ClInclude Include="ThreadManager.h" />
-    <ClInclude Include="UniformGrid.h" />
-    <ClInclude Include="Village.h" />
-    <ClInclude Include="GameMap.h" />
-    <ClInclude Include="GameWindow.h" />
-    <ClInclude Include="Line.h" />
-    <ClInclude Include="Point.h" />
-    <ClInclude Include="RiverObj.h" />
-    <ClInclude Include="Personality.h" />
-    <ClInclude Include="Planner.h" />
-    <ClInclude Include="json-forwards.h" />
-    <ClInclude Include="json.h" />
-    <ClInclude Include="Memory.h" />
-    <ClInclude Include="ObjConfig.h" />
-    <ClInclude Include="PhysicsTestSuite.h" />
-    <ClInclude Include="Relationship.h" />
-    <ClInclude Include="resource2.h" />
-    <ClInclude Include="TaskBufferTestSuite.h" />
-    <ClInclude Include="Hero.h" />
-    <ClInclude Include="Input.h" />
-    <ClInclude Include="LivingObj.h" />
-    <ClInclude Include="Manager.h" />
-    <ClInclude Include="memManager.h" />
-    <ClInclude Include="MemNode.h" />
-    <ClInclude Include="MemoryHelper.h" />
-    <ClInclude Include="MemoryTestSuite.h" />
-    <ClInclude Include="MessageLog.h" />
-    <ClInclude Include="Movement.h" />
-    <ClInclude Include="NPC.h" />
-    <ClInclude Include="PhysicsManager.h" />
-    <ClInclude Include="Player.h" />
-    <ClInclude Include="MemoryPool.h" />
-    <ClInclude Include="Attack.h" />
-    <ClInclude Include="QuadTree.h" />
-    <ClInclude Include="Rectangle.h" />
-    <ClInclude Include="RenderHelper.h" />
-    <ClInclude Include="RenderManager.h" />
-    <ClInclude Include="resource.h" />
-    <ClInclude Include="targetver.h" />
-    <ClInclude Include="Task.h" />
-    <ClInclude Include="TaskBuffer.h" />
-    <ClInclude Include="TestManager.h" />
-    <ClInclude Include="TextObj.h" />
-    <ClInclude Include="Texture.h" />
-    <ClInclude Include="Vector2f.h" />
-    <ClInclude Include="War.h" />
-    <ClInclude Include="WorldObj.h" />
-    <ClInclude Include="Wrapper.h" />
-    <ClInclude Include="Soldier.h" />
-    <ClInclude Include="SoundSystem.h" />
-    <ClInclude Include="SplSoldier.h" />
-    <ClInclude Include="Sprite.h" />
-    <ClInclude Include="stdafx.h" />
-    <ClInclude Include="TagConfig.h">
-      <Filter>Dialog</Filter>
+    <ClInclude Include="AIHelper.h">
+      <Filter>AI</Filter>
     </ClInclude>
-    <ClInclude Include="Tag.h">
-      <Filter>Dialog</Filter>
+    <ClInclude Include="AudioManager.h">
+      <Filter>Audio</Filter>
     </ClInclude>
-    <ClInclude Include="DialougeTestSuite.h">
-      <Filter>Dialog</Filter>
+    <ClInclude Include="AIManager.h">
+      <Filter>AI</Filter>
     </ClInclude>
-    <ClInclude Include="DialogueHelper.h">
-      <Filter>Dialog</Filter>
+    <ClInclude Include="AudioTestSuite.h">
+      <Filter>Audio</Filter>
     </ClInclude>
-    <ClInclude Include="DialogueGui.h">
-      <Filter>Dialog</Filter>
+    <ClInclude Include="CheckClass.h">
+      <Filter>Game Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="ChildrenOfOsi.h">
+      <Filter>Input</Filter>
+    </ClInclude>
+    <ClInclude Include="Containers.h">
+      <Filter>Memory</Filter>
+    </ClInclude>
+    <ClInclude Include="DummyController.h">
+      <Filter>Task Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="Hero.h">
+      <Filter>Game Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="Input.h">
+      <Filter>Input</Filter>
+    </ClInclude>
+    <ClInclude Include="GameWindow.h">
+      <Filter>Rendering</Filter>
+    </ClInclude>
+    <ClInclude Include="LivingObj.h">
+      <Filter>Game Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="Manager.h">
+      <Filter>Task Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="memManager.h">
+      <Filter>Memory</Filter>
+    </ClInclude>
+    <ClInclude Include="MemNode.h">
+      <Filter>Memory</Filter>
+    </ClInclude>
+    <ClInclude Include="MemoryHelper.h">
+      <Filter>Memory</Filter>
+    </ClInclude>
+    <ClInclude Include="MemoryPool.h">
+      <Filter>Memory</Filter>
+    </ClInclude>
+    <ClInclude Include="MemoryTestSuite.h">
+      <Filter>Memory</Filter>
+    </ClInclude>
+    <ClInclude Include="Movement.h">
+      <Filter>Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="PhysicsManager.h">
+      <Filter>Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="PhysicsTestSuite.h">
+      <Filter>Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="MessageLog.h">
+      <Filter>Task Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="NPC.h">
+      <Filter>Game Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="Player.h">
+      <Filter>Game Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="RenderHelper.h">
+      <Filter>Rendering</Filter>
+    </ClInclude>
+    <ClInclude Include="RenderManager.h">
+      <Filter>Rendering</Filter>
+    </ClInclude>
+    <ClInclude Include="Rectangle.h">
+      <Filter>Game Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="QuadTree.h">
+      <Filter>Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="Soldier.h">
+      <Filter>Game Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="SplSoldier.h">
+      <Filter>Game Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="Sprite.h">
+      <Filter>Game Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="Task.h">
+      <Filter>Task Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="targetver.h">
+      <Filter>Task Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="TaskBuffer.h">
+      <Filter>Task Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="TaskBufferTestSuite.h">
+      <Filter>Task Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="Texture.h">
+      <Filter>Rendering</Filter>
+    </ClInclude>
+    <ClInclude Include="Vector2f.h">
+      <Filter>Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="WorldObj.h">
+      <Filter>Game Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="SoundSystem.h">
+      <Filter>Audio</Filter>
+    </ClInclude>
+    <ClInclude Include="common.h">
+      <Filter>Misc</Filter>
+    </ClInclude>
+    <ClInclude Include="resource.h">
+      <Filter>Misc</Filter>
+    </ClInclude>
+    <ClInclude Include="stdafx.h">
+      <Filter>Misc</Filter>
     </ClInclude>
     <ClInclude Include="DialogueController.h">
-      <Filter>Dialog</Filter>
+      <Filter>Dialogue</Filter>
     </ClInclude>
-    <ClInclude Include="DialogueConfig.h">
-      <Filter>Dialog</Filter>
+    <ClInclude Include="TestManager.h">
+      <Filter>Test</Filter>
+    </ClInclude>
+    <ClInclude Include="DialogueHelper.h">
+      <Filter>Dialogue</Filter>
+    </ClInclude>
+    <ClInclude Include="DialougeTestSuite.h">
+      <Filter>Dialogue</Filter>
+    </ClInclude>
+    <ClInclude Include="DialogueGui.h">
+      <Filter>Dialogue</Filter>
+    </ClInclude>
+    <ClInclude Include="GameMap.h">
+      <Filter>Game Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="json-forwards.h">
+      <Filter>Dialogue</Filter>
+    </ClInclude>
+    <ClInclude Include="json.h">
+      <Filter>Dialogue</Filter>
+    </ClInclude>
+    <ClInclude Include="Wrapper.h">
+      <Filter>Misc</Filter>
+    </ClInclude>
+    <ClInclude Include="resource2.h" />
+    <ClInclude Include="Attack.h">
+      <Filter>Game Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="Memory.h">
+      <Filter>AI</Filter>
+    </ClInclude>
+    <ClInclude Include="Planner.h">
+      <Filter>AI</Filter>
+    </ClInclude>
+    <ClInclude Include="Personality.h">
+      <Filter>AI</Filter>
+    </ClInclude>
+    <ClInclude Include="AIController.h">
+      <Filter>AI</Filter>
+    </ClInclude>
+    <ClInclude Include="Line.h">
+      <Filter>Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="Point.h">
+      <Filter>Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="RiverObj.h">
+      <Filter>Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="Village.h">
+      <Filter>Game Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="Conditions.h">
+      <Filter>AI\Actions</Filter>
+    </ClInclude>
+    <ClInclude Include="Action.h">
+      <Filter>AI\Actions</Filter>
+    </ClInclude>
+    <ClInclude Include="ActionHelper.h">
+      <Filter>AI\Actions</Filter>
+    </ClInclude>
+    <ClInclude Include="ActionPool.h">
+      <Filter>AI\Actions</Filter>
+    </ClInclude>
+    <ClInclude Include="Alliance.h">
+      <Filter>AI\Relationships</Filter>
+    </ClInclude>
+    <ClInclude Include="Party.h">
+      <Filter>AI\Relationships</Filter>
+    </ClInclude>
+    <ClInclude Include="Relationship.h">
+      <Filter>AI\Relationships</Filter>
+    </ClInclude>
+    <ClInclude Include="War.h">
+      <Filter>AI\Relationships</Filter>
+    </ClInclude>
+    <ClInclude Include="TextObj.h">
+      <Filter>Dialogue</Filter>
+    </ClInclude>
+    <ClInclude Include="CombatController.h">
+      <Filter>AI</Filter>
+    </ClInclude>
+    <ClInclude Include="ActionExecFunctions.h">
+      <Filter>AI\Actions</Filter>
+    </ClInclude>
+    <ClInclude Include="ActionConfig.h">
+      <Filter>AI\Actions</Filter>
+    </ClInclude>
+    <ClInclude Include="Region.h">
+      <Filter>Audio</Filter>
+    </ClInclude>
+    <ClInclude Include="HUD.h">
+      <Filter>Rendering</Filter>
+    </ClInclude>
+    <ClInclude Include="PartyManager.h" />
+    <ClInclude Include="GameState.h" />
+    <ClInclude Include="PlayerActExecFunctions.h">
+      <Filter>AI\Actions</Filter>
+    </ClInclude>
+    <ClInclude Include="RegionState.h" />
+    <ClInclude Include="ConversationLogObj.h">
+      <Filter>Dialogue</Filter>
     </ClInclude>
     <ClInclude Include="ConversationPoint.h">
-      <Filter>Dialog</Filter>
+      <Filter>Dialogue</Filter>
     </ClInclude>
-    <ClInclude Include="ConversationLogObj.h">
-      <Filter>Dialog</Filter>
+    <ClInclude Include="DialogueConfig.h">
+      <Filter>Dialogue</Filter>
     </ClInclude>
+    <ClInclude Include="PartyManager.h">
+      <Filter>AI\Relationships</Filter>
+    </ClInclude>
+    <ClInclude Include="Fight.h">
+      <Filter>AI\Relationships</Filter>
+    </ClInclude>
+    <ClInclude Include="QuestManager.h">
+      <Filter>AI\Actions</Filter>
+    </ClInclude>
+    <ClInclude Include="Tag.h">
+      <Filter>Dialogue</Filter>
+    </ClInclude>
+    <ClInclude Include="TagConfig.h">
+      <Filter>Dialogue</Filter>
+    </ClInclude>
+    <ClInclude Include="UniformGrid.h">
+      <Filter>Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="Tag.h">
+      <Filter>Dialogue</Filter>
+    </ClInclude>
+    <ClInclude Include="TagConfig.h">
+      <Filter>Dialogue</Filter>
+    </ClInclude>
+    <ClInclude Include="DialogueConfig.h">
+      <Filter>Dialogue</Filter>
+    </ClInclude>
+    <ClInclude Include="HeroConfig.h">
+      <Filter>Game Objects\Configs</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjConfig.h">
+      <Filter>Game Objects\Configs</Filter>
+    </ClInclude>
+    <ClInclude Include="ThreadManager.h" />
   </ItemGroup>
   <ItemGroup>
-    <ResourceCompile Include="ChildrenOfOsi1.rc" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="action_config.json" />
-    <None Include="AssetInfo.h" />
-    <None Include="ClassDiagram.cd" />
-    <None Include="config_jungle.json" />
-    <None Include="config_oasis.json" />
-    <None Include="hero_config.json" />
-    <None Include="oasis_config.json" />
-    <None Include="OpenGL Shaders\FontFragmentShader.frag.glsl" />
-    <None Include="OpenGL Shaders\FontVertexShader.vert.glsl" />
-    <None Include="config.json" />
-    <None Include="test.json" />
-    <None Include="Yemoja_dialog.json">
-      <Filter>Dialog</Filter>
-    </None>
-    <None Include="OpenGL Shaders\StdFragmentShader.frag.glsl" />
-    <None Include="OpenGL Shaders\StdVertexShader.vert.glsl">
-      <Filter>Dialog</Filter>
-    </None>
-    <None Include="Tag_config.json">
-      <Filter>Dialog</Filter>
-    </None>
-    <None Include="SilverSoldier_dialog.json">
-      <Filter>Dialog</Filter>
-    </None>
-    <None Include="Shango_dialog.json">
-      <Filter>Dialog</Filter>
-    </None>
-    <None Include="script_templates.json">
-      <Filter>Dialog</Filter>
-    </None>
-    <None Include="Oya_dialog.json">
-      <Filter>Dialog</Filter>
-    </None>
-    <None Include="Oshosi_dialog.json">
-      <Filter>Dialog</Filter>
-    </None>
-    <None Include="Dialogue_config.json">
-      <Filter>Dialog</Filter>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
-    <Text Include="audio_test.txt" />
-    <Text Include="memory_test.txt" />
-    <Text Include="message_log.txt" />
-    <Text Include="physics_test.txt" />
-    <Text Include="ReadMe.txt" />
-    <Text Include="render_test.txt" />
-    <Text Include="task_buffer_test.txt" />
+    <Text Include="audio_test.txt">
+      <Filter>Audio</Filter>
+    </Text>
+    <Text Include="memory_test.txt">
+      <Filter>Memory</Filter>
+    </Text>
+    <Text Include="physics_test.txt">
+      <Filter>Physics</Filter>
+    </Text>
+    <Text Include="message_log.txt">
+      <Filter>Task Manager</Filter>
+    </Text>
+    <Text Include="render_test.txt">
+      <Filter>Rendering</Filter>
+    </Text>
+    <Text Include="task_buffer_test.txt">
+      <Filter>Task Manager</Filter>
+    </Text>
+    <Text Include="ReadMe.txt">
+      <Filter>Misc</Filter>
+    </Text>
     <Text Include="dialog_template_output.txt">
-      <Filter>Dialog</Filter>
+      <Filter>Dialogue</Filter>
     </Text>
   </ItemGroup>
   <ItemGroup>
-    <Filter Include="Dialog">
-      <UniqueIdentifier>{50ae7ff8-675c-403e-821e-983a642ceef2}</UniqueIdentifier>
+    <Filter Include="Rendering">
+      <UniqueIdentifier>{8fd12ca3-31b7-4d21-b496-de0df489926d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Audio">
+      <UniqueIdentifier>{fcf2a215-44df-4ef2-bc75-00ae5ccc57c5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Physics">
+      <UniqueIdentifier>{6177734e-99ee-46b7-a873-608cea35423d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="AI">
+      <UniqueIdentifier>{adc2442d-8789-417a-927f-db119f95b9d0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Input">
+      <UniqueIdentifier>{83be8f18-3888-4c5f-9021-06757847841a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Memory">
+      <UniqueIdentifier>{342983fa-60ae-4af6-bce3-268f856afd96}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game Objects">
+      <UniqueIdentifier>{c8f5e7fe-4d48-45a6-a537-ec013cb87555}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Misc">
+      <UniqueIdentifier>{de6df43b-54b6-4728-b585-06d2c1d1050f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Dialogue">
+      <UniqueIdentifier>{4e78cd9b-909c-46c8-a324-86a4b6805108}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Test">
+      <UniqueIdentifier>{3d5edb63-77a0-4034-93a0-d37a5b407654}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Rendering\Shaders">
+      <UniqueIdentifier>{9833d3aa-a6f5-4851-b7ad-8e4fccde265b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="AI\Actions">
+      <UniqueIdentifier>{233db740-76de-4bf9-96f8-3990718645c7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="AI\Relationships">
+      <UniqueIdentifier>{208c7dff-11a9-46ae-8f1b-2153f54d6a2b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Task Manager">
+      <UniqueIdentifier>{b652d4c4-522f-4787-bcb8-6a409450dac1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game Objects\Configs">
+      <UniqueIdentifier>{24270986-095c-4d33-8df6-05fcf8c02246}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ClassDiagram.cd">
+      <Filter>Game Objects</Filter>
+    </None>
+    <None Include="AssetInfo.h">
+      <Filter>Rendering</Filter>
+    </None>
+    <None Include="Shango_dialog.json">
+      <Filter>Dialogue</Filter>
+    </None>
+    <None Include="Yemoja_dialog.json">
+      <Filter>Dialogue</Filter>
+    </None>
+    <None Include="script_templates.json">
+      <Filter>Dialogue</Filter>
+    </None>
+    <None Include="OpenGL Shaders\FontFragmentShader.frag.glsl">
+      <Filter>Rendering\Shaders</Filter>
+    </None>
+    <None Include="OpenGL Shaders\FontVertexShader.vert.glsl">
+      <Filter>Rendering\Shaders</Filter>
+    </None>
+    <None Include="OpenGL Shaders\StdFragmentShader.frag.glsl">
+      <Filter>Rendering\Shaders</Filter>
+    </None>
+    <None Include="OpenGL Shaders\StdVertexShader.vert.glsl">
+      <Filter>Rendering\Shaders</Filter>
+    </None>
+    <None Include="test.json">
+      <Filter>Game Objects</Filter>
+    </None>
+    <None Include="oasis_config.json" />
+    <None Include="action_config.json">
+      <Filter>AI\Actions</Filter>
+    </None>
+    <None Include="oasis_config.json" />
+    <None Include="SilverSoldier_dialog.json" />
+    <None Include="Oshosi_dialog.json" />
+    <None Include="Dialogue_config.json">
+      <Filter>Dialogue</Filter>
+    </None>
+    <None Include="Tag_config.json">
+      <Filter>Dialogue</Filter>
+    </None>
+    <None Include="Tag_config.json">
+      <Filter>Dialogue</Filter>
+    </None>
+    <None Include="Dialogue_config.json">
+      <Filter>Dialogue</Filter>
+    </None>
+    <None Include="config.json">
+      <Filter>Game Objects\Configs</Filter>
+    </None>
+    <None Include="config_jungle.json">
+      <Filter>Game Objects\Configs</Filter>
+    </None>
+    <None Include="config_oasis.json">
+      <Filter>Game Objects\Configs</Filter>
+    </None>
+    <None Include="hero_config.json">
+      <Filter>Game Objects\Configs</Filter>
+    </None>
+    <None Include="Oya_dialog.json" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="ChildrenOfOsi1.rc" />
   </ItemGroup>
 </Project>

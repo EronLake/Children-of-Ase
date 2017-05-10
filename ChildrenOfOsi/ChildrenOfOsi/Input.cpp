@@ -641,12 +641,13 @@ void Input::InputCheck()
 			gameplay_functions->combat(player);
 			if (SHIFT) {
 				if (t->getStamina() > 0) {
-					t->setSpeed(10);
+					t->setSpeed(20);
 					t->setStamina(t->getStamina()-1);
 				}
 				if (MAP_EDITOR) { t->setSpeed(15 * 2); }
 			}
 			else {
+				//???
 				t->setSpeed(8);
 			}
 			if (W)                //Moving up
