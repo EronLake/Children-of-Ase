@@ -641,8 +641,9 @@ int Movement::talk(WorldObj* obj) {
 						LOG("Player interacted with an object");
 						Hero* hero;
 						if (hero = CheckClass::isHero(objVec[i])) {
-							RegionState::switch_music = true;
 							RegionState::in_village = true;
+							RegionState::switch_music = true;
+
 							Planner* hero_plan = AIController::get_plan(hero->name);
 							if (hero_plan->give_as_quest)   //Make sure hero is willing to give up current action
 							{
@@ -695,7 +696,7 @@ int Movement::attack(WorldObj* obj) {
 								if (npc) {
 									Soldier* s2 = CheckClass::isSoldier(a->second->get_creator());
 									bool friendly=(npc->getVillage()->get_alliance()== s2->getVillage()->get_alliance());
-									manager->createTaskForAudio("PlaySound", "SOUND", "SFX/hit.wav");
+									manager->createTaskForAudio("PlaySound", "SOUND", "SFX/hit.wav",nullptr,RegionState::soundType::sfx);
 									if (a->second->getDestroy())a->second->setDuration(0);
 									npc->sprite.unlockAnimation();
 									manager->createTaskWithObj("Hurt", "DRAW", npc);
@@ -749,7 +750,7 @@ int Movement::attack(WorldObj* obj) {
 
 									if (!friendly) {
 										a->second->Hit(npc);
-										manager->createTaskForAudio("PlaySound", "SOUND", "SFX/hit.wav");
+										manager->createTaskForAudio("PlaySound", "SOUND", "SFX/hit.wav", nullptr, RegionState::soundType::sfx);
                     LOG("LivingObj ::" << liv << ":: has been hit. LivingObj has " << liv->getHealth() << " health left.");
 
 										// If target is dead, remove from village and targeting
@@ -765,7 +766,7 @@ int Movement::attack(WorldObj* obj) {
 								}
 							} else {
 								a->second->Hit(liv);
-								manager->createTaskForAudio("PlaySound", "SOUND", "SFX/hit.wav");
+								manager->createTaskForAudio("PlaySound", "SOUND", "SFX/hit.wav", nullptr, RegionState::soundType::sfx);
                 LOG("LivingObj ::" << liv << ":: has been hit. LivingObj has " << liv->getHealth() << " health left.");
 
 								if (liv->getHealth() <= 0) {
