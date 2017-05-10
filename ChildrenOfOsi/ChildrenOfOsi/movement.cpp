@@ -22,7 +22,7 @@ Movement::~Movement() {
 //use speed variable instead of .1
 
 int Movement::move_up(WorldObj* obj) {
-	cout << "RUNNING MOVE FUNC " << endl; return 1;
+	cout << "RUNNING MOVE FUNC " << endl;
 	//for (int i = 0; i < 10; i++) { cout << "MOVE UP IS BEING CALLED " << endl; }
 	if (obj->sprite.getLock())return 0;
 	int my_type = obj->getType();
@@ -92,7 +92,7 @@ int Movement::move_up(WorldObj* obj) {
 	return 0;
 }
 int Movement::move_up_left(WorldObj* obj) {
-	cout << "RUNNING MOVE FUNC " << endl; return 1;
+	cout << "RUNNING MOVE FUNC " << endl; 
 	if (obj->sprite.getLock())return 0;
 	int my_type = obj->getType();
 	Soldier* sold;
@@ -180,7 +180,7 @@ int Movement::move_up_left(WorldObj* obj) {
 	return 0;
 }
 int Movement::move_up_right(WorldObj* obj) {
-	cout << "RUNNING MOVE FUNC " << endl; return 1;
+	cout << "RUNNING MOVE FUNC " << endl;
 	if (obj->sprite.getLock())return 0;
 	int my_type = obj->getType();
 	Soldier* sold;
@@ -268,7 +268,7 @@ int Movement::move_up_right(WorldObj* obj) {
 	return 0;
 }
 int Movement::move_down(WorldObj* obj) {
-	cout << "RUNNING MOVE FUNC " << endl; return 1;
+	cout << "RUNNING MOVE FUNC " << endl;
 	if (obj->sprite.getLock())return 0;
 	int my_type = obj->getType();
 	Soldier* sold;
@@ -328,7 +328,7 @@ int Movement::move_down(WorldObj* obj) {
 	return 0;
 }
 int Movement::move_down_left(WorldObj* obj) {
-	cout << "RUNNING MOVE FUNC " << endl; return 1;
+	cout << "RUNNING MOVE FUNC " << endl;
 	if (obj->sprite.getLock())return 0;
 	int my_type = obj->getType();
 	Soldier* sold;
@@ -419,7 +419,7 @@ int Movement::move_down_left(WorldObj* obj) {
 	return 0;
 }
 int Movement::move_down_right(WorldObj* obj) {
-	cout << "RUNNING MOVE FUNC " << endl; return 1;
+	cout << "RUNNING MOVE FUNC " << endl;
 	if (obj->sprite.getLock())return 0;
 	int my_type = obj->getType();
 	Soldier* sold;
@@ -507,7 +507,7 @@ int Movement::move_down_right(WorldObj* obj) {
 	return 0;
 }
 int Movement::move_left(WorldObj* obj) {
-	cout << "RUNNING MOVE FUNC " << endl; return 1;
+	cout << "RUNNING MOVE FUNC " << endl;
 	if (obj->sprite.getLock())return 0;
 	int my_type = obj->getType();
 	Soldier* sold;
@@ -569,7 +569,7 @@ int Movement::move_left(WorldObj* obj) {
 	return 0;
 }
 int Movement::move_right(WorldObj* obj) {
-	cout << "RUNNING MOVE FUNC " << endl; return 1;
+	cout << "RUNNING MOVE FUNC " << endl;
 	if (obj->sprite.getLock())return 0;
 	int my_type = obj->getType();
 	Soldier* sold;
@@ -631,7 +631,7 @@ int Movement::move_right(WorldObj* obj) {
 }
 
 int Movement::talk(WorldObj* obj) {
-	cout << "RUNNING MOVE FUNC " << endl; return 1;
+	//cout << "RUNNING MOVE FUNC " << endl; return 1;
 	objVec.clear();
 	objVec = tree->retrieve(objVec, obj);
 	if (obj->getType() == WorldObj::TYPE_PLAYER) {
@@ -679,7 +679,7 @@ int Movement::talk(WorldObj* obj) {
 }
 
 int Movement::attack(WorldObj* obj) {
-	cout << "RUNNING ATTACK FUNC " << endl; return 1;
+	//cout << "RUNNING ATTACK FUNC " << endl; return 1;
 	for (auto a = Containers::Attack_table.begin(); a !=Containers::Attack_table.end();++a) {
 		objVec.clear();
 		objVec = tree->retrieve(objVec, a->second);
@@ -807,6 +807,7 @@ int Movement::attack(WorldObj* obj) {
 
 bool Movement::collision(WorldObj* recA, WorldObj* recB)
 {   
+	//if (recA == nullptr || recB == nullptr) cout << "RECS ARE NULL" << endl; return true;
 	for (int i = 0; i < (*recA).body.size(); i++) {
 		for (int j = 0; j < (*recB).body.size(); j++) {
 

@@ -899,7 +899,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	//vec.push_back(&Alex->melee);
 
 	vector<Soldier*> silverSoldier;
-	int silverNum = 2;
+	int silverNum = 50;
 	for (int i = 0; i < silverNum; i++) {
 		silverSoldier.push_back(new Soldier(17157, 20960 + (i * 20), false));
 		gameplay_functions->add_Attack(silverSoldier[i]->getKey(), silverSoldier[i]->body[0].getX(), silverSoldier[i]->body[0].getY(), true, 10);
@@ -1882,11 +1882,19 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 
 			//run task buffer
 			iController->InputCheck();
+			for (int i = 0; i < tBuffer->queue_buffer.size(); i++) {
+				cout << "task is of type " << tBuffer->queue_buffer[i]->type << endl;
+			}
 
 			//pool.push(test);
 			
 			cout << "size of buffer is " << tBuffer->queue_buffer.size() << " and Tphysics buffer size is " << tBuffer->physics_buffer.size() << endl;
 
+			/*******************************/
+			// THINGS WERENT ADDED TO PHYM PHYSICS MANAGER BECAUSE THEY WERE OF TYPE AI!!!!
+			///
+
+			
 			//cout << "shango's position BEFORE is at " << Alex->getX() << ", " << Alex->getY() << endl;
 			//iterate through physics_buffer
 			//while(tBuffer->physics_buffer_isEmpty() == false) {
@@ -1900,8 +1908,9 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 			//use threads to execute all of the physics manager's tasks
 			for (auto it = PhysM->physics_buffer.begin(); it != PhysM->physics_buffer.end();it++) {
 				cout << "num of idle threads is " << pool.n_idle() << endl;
+				std::pair<std::string, WorldObj*> temp = *it;
 				//cout << "it first is " << it->first << " and it second is " << it->second->getID() << endl;
-				pool.push([&,it](int id) {cout << "it first is " << it->first << " and it second is " << it->second->getID() << endl; PhysM->process_task(0,it->first,it->second); });
+				pool.push([&,PhysM, temp](int)->void {PhysM->process_task(temp); });//PhysM->process_task(0,it->first,it->second); });
 				//it = PhysM->physics_buffer.erase(it);
 			}
 			PhysM->physics_buffer.clear();
@@ -1910,7 +1919,10 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 			//pool.stop(true);
 			//cout << "DONE WITH PHYSICS TASKS" << endl;
 			//cout << "shango's position AFTER is at " << Alex->getX() << ", " << Alex->getY() << endl;
+	
 			tBuffer->run();
+
+			cout << "BOT size of buffer is " << tBuffer->queue_buffer.size() << " and Tphysics buffer size is " << tBuffer->physics_buffer.size() << endl;
 
 			/////////////////////////////////////////////////////////////////
 			/////////////////////////////////////////////////////////////////

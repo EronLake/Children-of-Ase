@@ -646,7 +646,7 @@ void Input::InputCheck()
 			}
 			else {
 				//???
-				t->setSpeed(8);
+				t->setSpeed(10);
 			}
 			if (W)                //Moving up
 			{

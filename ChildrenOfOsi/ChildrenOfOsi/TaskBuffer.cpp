@@ -36,7 +36,7 @@ void TaskBuffer::run()
 {
 	//LOG("TaskBuffer Running");
 	while (isEmpty() == false) {
-		cout << "queue_buffer is NOT EMPTY AND HAS SIZE " << queue_buffer.size() << endl;
+		//cout << "queue_buffer is NOT EMPTY AND HAS SIZE " << queue_buffer.size() << endl;
 
 		Task* current_task = (pop());
 		assignTask(false, current_task);
@@ -46,14 +46,18 @@ void TaskBuffer::run()
 
 void TaskBuffer::pre_run()
 {
+	int count = 0;
 	physics_buffer.clear();
 	for (auto& it : queue_buffer) {
 		Task* cloned_task = it->clone_task();
 		physics_buffer.push_back(cloned_task);
 	}
 	for (auto it = physics_buffer.begin(); it != physics_buffer.end(); it++) {
-		if ((*it)->type == "MOVE" || (*it)->type == "INTERACT" || (*it)->type == "COMBAT")
+		if ((*it)->type == "MOVE" || (*it)->type == "INTERACT" || (*it)->type == "COMBAT") {
+			count++;
+			cout << "this is the " << count << " task to be added" << endl;
 			assignTask(true, *it);
+		}
 	}
 }
 
@@ -80,15 +84,15 @@ void TaskBuffer::assignTask(bool for_prerun, Task* current_task)
 			{
 				PhysicsManager*	pm = dynamic_cast<PhysicsManager*>(*itr);
 				//if its NOT physics manager and its for prerun, skip it
-				if (!pm && for_prerun) continue;
+				if (pm == nullptr && for_prerun == true) continue;
 				//if its physics manager and its NOT for prerun, skip it
-				if (pm && !for_prerun) continue;
+				if (pm != nullptr && for_prerun == false) continue;
 				//clone task and send off to manager
 				LOG("TASK DUPLICATED");
 				Task* duplicate_task = current_task->clone_task();
 				LOG("PRIOR TO EXECUTING THE DUP TASK");
 				(*itr)->execute_task(duplicate_task);
-				if (for_prerun) return;
+				//if (for_prerun) return;
 			}
 			delete current_task;
 		}

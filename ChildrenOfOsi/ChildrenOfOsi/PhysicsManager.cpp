@@ -87,8 +87,8 @@ void PhysicsManager::execute_task(Task* current_task)
 	this->send_result(current_task);
 }
 
-void PhysicsManager::process_task(int id, std::string func_name, WorldObj * obj)
+void PhysicsManager::process_task(std::pair<std::string,WorldObj*> _pair)
 {
-	auto it = task_map.find(func_name);
-	(moveHelper->*(it->second))(obj);
+	auto it = task_map.find(_pair.first);
+	(moveHelper->*(it->second))(_pair.second);
 }

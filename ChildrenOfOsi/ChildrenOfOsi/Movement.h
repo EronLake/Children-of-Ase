@@ -44,7 +44,7 @@ public:
 	RiverObj* rivObj;
 	PhysicsManager* manager;
 
-	float speed_magnifier = 1.0f;
+	float speed_magnifier = 2.0f;
 	float moveSpeed;
 	float diagSpeed;
 	float diagXSpeed; 

@@ -22,7 +22,7 @@ public:
 
 	virtual void register_manager() final;
 	virtual void execute_task(Task* current_task) final;
-	void process_task(int id, std::string, WorldObj*);
+	void process_task(std::pair<std::string,WorldObj*> _pair);
 
 	std::deque<std::pair<std::string, WorldObj*>> physics_buffer;
 };
