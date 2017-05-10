@@ -363,20 +363,18 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 
 	gameplay_functions->add_texture("playerTexture", 0, 0, 0);
 	gameplay_functions->add_texture("playerIdleTex", 0, 0, 0);
-	tBuffer->run();
-	textureMap[Containers::texture_table["playerTexture"]] = pair<string, int>("Assets/Sprites/ShangoForwardIdle.png", 22);
-	textureMap[Containers::texture_table["playerIdleTex"]] = pair<string, int>("Assets/Sprites/ShangoForwardIdle.png", 22);
-	standard.push_back(Containers::texture_table["playerTexture"]);
-	standard.push_back(Containers::texture_table["playerIdleTex"]);
-
+  gameplay_functions->add_texture("upIdleTex", 0, 0, 0);
+  gameplay_functions->add_texture("downIdleTex", 0, 0, 0);
+  gameplay_functions->add_texture("leftIdleTex", 0, 0, 0);
+  gameplay_functions->add_texture("rightIdleTex", 0, 0, 0);
+  gameplay_functions->add_texture("upWalkTex", 0, 0, 0);
+  gameplay_functions->add_texture("downWalkTex", 0, 0, 0);
+  gameplay_functions->add_texture("leftWalkTex", 0, 0, 0);
+  gameplay_functions->add_texture("rightWalkTex", 0, 0, 0);
 	gameplay_functions->add_texture("upRunTex", 0, 0, 0);
 	gameplay_functions->add_texture("downRunTex", 0, 0, 0);
 	gameplay_functions->add_texture("leftRunTex", 0, 0, 0);
 	gameplay_functions->add_texture("rightRunTex", 0, 0, 0);
-	gameplay_functions->add_texture("upIdleTex", 0, 0, 0);
-	gameplay_functions->add_texture("downIdleTex", 0, 0, 0);
-	gameplay_functions->add_texture("leftIdleTex", 0, 0, 0);
-	gameplay_functions->add_texture("rightIdleTex", 0, 0, 0);
 	gameplay_functions->add_texture("upAtkTex", 0, 0, 0);
 	gameplay_functions->add_texture("downAtkTex", 0, 0, 0);
 	gameplay_functions->add_texture("leftAtkTex", 0, 0, 0);
@@ -385,40 +383,77 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	gameplay_functions->add_texture("downAtk2Tex", 0, 0, 0);
 	gameplay_functions->add_texture("leftAtk2Tex", 0, 0, 0);
 	gameplay_functions->add_texture("rightAtk2Tex", 0, 0, 0);
+  gameplay_functions->add_texture("spinRight", 0, 0, 0);
+  gameplay_functions->add_texture("spinUp", 0, 0, 0);
+  gameplay_functions->add_texture("spinDown", 0, 0, 0);
+  gameplay_functions->add_texture("spinLeft", 0, 0, 0);
+  gameplay_functions->add_texture("firebreatheRight", 0, 0, 0);
+  gameplay_functions->add_texture("firebreatheUp", 0, 0, 0);
+  gameplay_functions->add_texture("firebreatheDown", 0, 0, 0);
+  gameplay_functions->add_texture("firebreatheLeft", 0, 0, 0);
 	gameplay_functions->add_texture("upHurtTex", 0, 0, 0);
 	gameplay_functions->add_texture("downHurtTex", 0, 0, 0);
 	gameplay_functions->add_texture("leftHurtTex", 0, 0, 0);
-	gameplay_functions->add_texture("rightHurtTex", 0, 0, 0);
+  gameplay_functions->add_texture("rightHurtTex", 0, 0, 0);
+  gameplay_functions->add_texture("upDeathTex", 0, 0, 0);
+  gameplay_functions->add_texture("downDeathTex", 0, 0, 0);
+  gameplay_functions->add_texture("leftDeathTex", 0, 0, 0);
+  gameplay_functions->add_texture("rightDeathTex", 0, 0, 0);
 	tBuffer->run();
 
-	textureMap[Containers::texture_table["upRunTex"]] = pair<string, int>("Assets/Sprites/ShangoBackSprint.png", 16);
-	textureMap[Containers::texture_table["downRunTex"]] = pair<string, int>("Assets/Sprites/ShangoForwardSprint.png", 16);
-	textureMap[Containers::texture_table["leftRunTex"]] = pair<string, int>("Assets/Sprites/ShangoLeftSprint.png", 16);
-	textureMap[Containers::texture_table["rightRunTex"]] = pair<string, int>("Assets/Sprites/ShangoRightSprint.png", 16);
-	textureMap[Containers::texture_table["upIdleTex"]] = pair<string, int>("Assets/Sprites/ShangoBackIdle.png", 22);
-	textureMap[Containers::texture_table["downIdleTex"]] = pair<string, int>("Assets/Sprites/ShangoForwardIdle.png", 22);
-	textureMap[Containers::texture_table["leftIdleTex"]] = pair<string, int>("Assets/Sprites/ShangoLeftIdle.png", 22);
-	textureMap[Containers::texture_table["rightIdleTex"]] = pair<string, int>("Assets/Sprites/ShangoRightIdle.png", 22);
-	textureMap[Containers::texture_table["upAtkTex"]] = pair<string, int>("Assets/Sprites/ShangoBackSwing.png", 13);
-	textureMap[Containers::texture_table["downAtkTex"]] = pair<string, int>("Assets/Sprites/ShangoForwardSwing.png", 13);
-	textureMap[Containers::texture_table["leftAtkTex"]] = pair<string, int>("Assets/Sprites/ShangoLeftSwing.png", 13);
-	textureMap[Containers::texture_table["rightAtkTex"]] = pair<string, int>("Assets/Sprites/ShangoRightSwing.png", 13);
-	textureMap[Containers::texture_table["upAtk2Tex"]] = pair<string, int>("Assets/Sprites/ShangoBackLunge.png", 7);
-	textureMap[Containers::texture_table["downAtk2Tex"]] = pair<string, int>("Assets/Sprites/ShangoForwardLunge.png", 7);
-	textureMap[Containers::texture_table["leftAtk2Tex"]] = pair<string, int>("Assets/Sprites/ShangoLeftLunge.png", 7);
-	textureMap[Containers::texture_table["rightAtk2Tex"]] = pair<string, int>("Assets/Sprites/ShangoRightLunge.png", 7);
-	textureMap[Containers::texture_table["upHurtTex"]] = pair<string, int>("Assets/Sprites/ShangoBackRecoil.png", 18);
-	textureMap[Containers::texture_table["downHurtTex"]] = pair<string, int>("Assets/Sprites/ShangoForwardRecoil.png", 18);
-	textureMap[Containers::texture_table["leftHurtTex"]] = pair<string, int>("Assets/Sprites/ShangoLeftRecoil.png", 18);
-	textureMap[Containers::texture_table["rightHurtTex"]] = pair<string, int>("Assets/Sprites/ShangoRightRecoil.png", 18);
+  textureMap[Containers::texture_table["playerTexture"]] = {SHANGO_PATH + "Shango_Idle_S.png", 22};
+  textureMap[Containers::texture_table["playerIdleTex"]] = {SHANGO_PATH + "Shango_Idle_S.png", 22};
+  textureMap[Containers::texture_table["upIdleTex"]] = {SHANGO_PATH + "Shango_Idle_N.png", 22};
+  textureMap[Containers::texture_table["downIdleTex"]] = {SHANGO_PATH + "Shango_Idle_S.png", 22};
+  textureMap[Containers::texture_table["leftIdleTex"]] = {SHANGO_PATH + "Shango_Idle_W.png", 22};
+  textureMap[Containers::texture_table["rightIdleTex"]] = {SHANGO_PATH + "Shango_Idle_E.png", 22};
+  textureMap[Containers::texture_table["upWalkTex"]] = {SHANGO_PATH + "Shango_Walk_N.png", 32};
+  textureMap[Containers::texture_table["downWalkTex"]] = {SHANGO_PATH + "Shango_Walk_S.png", 32};
+  textureMap[Containers::texture_table["leftWalkTex"]] = {SHANGO_PATH + "Shango_Walk_E.png", 32};
+  textureMap[Containers::texture_table["rightWalkTex"]] = {SHANGO_PATH + "Shango_Walk_W.png", 32};
+	textureMap[Containers::texture_table["upRunTex"]] = {SHANGO_PATH + "Shango_Sprint_N.png", 16};
+	textureMap[Containers::texture_table["downRunTex"]] = {SHANGO_PATH + "Shango_Sprint_S.png", 16};
+	textureMap[Containers::texture_table["leftRunTex"]] = {SHANGO_PATH + "Shango_Sprint_W.png", 16};
+	textureMap[Containers::texture_table["rightRunTex"]] = {SHANGO_PATH + "Shango_Sprint_E.png", 16};
+	textureMap[Containers::texture_table["upAtkTex"]] = {SHANGO_PATH + "Shango_Attack_N.png", 3};
+	textureMap[Containers::texture_table["downAtkTex"]] = {SHANGO_PATH + "Shango_Attack_S.png", 3};
+	textureMap[Containers::texture_table["leftAtkTex"]] = {SHANGO_PATH + "Shango_Attack_W.png", 3};
+	textureMap[Containers::texture_table["rightAtkTex"]] = {SHANGO_PATH + "Shango_Attack_E.png", 3};
+	textureMap[Containers::texture_table["upAtk2Tex"]] = {SHANGO_PATH + "Shango_Attack_N.png", 3};
+	textureMap[Containers::texture_table["downAtk2Tex"]] = {SHANGO_PATH + "Shango_Attack_S.png", 3};
+	textureMap[Containers::texture_table["leftAtk2Tex"]] = {SHANGO_PATH + "Shango_Attack_W.png", 3};
+	textureMap[Containers::texture_table["rightAtk2Tex"]] = {SHANGO_PATH + "Shango_Attack_E.png", 3};
+  textureMap[Containers::texture_table["spinUp"]] = {SHANGO_PATH + "Shango_Spin_N.png", 8};
+  textureMap[Containers::texture_table["spinDown"]] = {SHANGO_PATH + "Shango_Spin_S.png", 8};
+  textureMap[Containers::texture_table["spinLeft"]] = {SHANGO_PATH + "Shango_Spin_W.png", 8};
+  textureMap[Containers::texture_table["spinRight"]] = {SHANGO_PATH + "Shango_Spin_E.png", 8};
+  textureMap[Containers::texture_table["firebreatheUp"]] = {SHANGO_PATH + "Shango_Breath_N.png", 8};
+  textureMap[Containers::texture_table["firebreatheDown"]] = {SHANGO_PATH + "Shango_Breath_S.png", 8};
+  textureMap[Containers::texture_table["firebreatheLeft"]] = {SHANGO_PATH + "Shango_Breath_W.png", 8};
+  textureMap[Containers::texture_table["firebreatheRight"]] = {SHANGO_PATH + "Shango_Breath_E.png", 8};
+	textureMap[Containers::texture_table["upHurtTex"]] = {SHANGO_PATH + "Shango_Recoil_N.png", 9};
+	textureMap[Containers::texture_table["downHurtTex"]] = {SHANGO_PATH + "Shango_Recoil_S.png", 9};
+	textureMap[Containers::texture_table["leftHurtTex"]] = {SHANGO_PATH + "Shango_Recoil_W.png", 9};
+	textureMap[Containers::texture_table["rightHurtTex"]] = {SHANGO_PATH + "Shango_Recoil_E.png", 9};
+  textureMap[Containers::texture_table["upDeathTex"]] = {SHANGO_PATH + "Shango_Death_N.png", 24};
+  textureMap[Containers::texture_table["downDeathTex"]] = {SHANGO_PATH + "Shango_Death_S.png", 24};
+  textureMap[Containers::texture_table["leftDeathTex"]] = {SHANGO_PATH + "Shango_Death_W.png", 24};
+  textureMap[Containers::texture_table["rightDeathTex"]] = {SHANGO_PATH + "Shango_Death_E.png", 24};
+
+  standard.push_back(Containers::texture_table["playerTexture"]);
+  standard.push_back(Containers::texture_table["playerIdleTex"]);
+  standard.push_back(Containers::texture_table["upIdleTex"]);
+  standard.push_back(Containers::texture_table["downIdleTex"]);
+  standard.push_back(Containers::texture_table["leftIdleTex"]);
+  standard.push_back(Containers::texture_table["rightIdleTex"]);
+  standard.push_back(Containers::texture_table["upWalkTex"]);
+  standard.push_back(Containers::texture_table["downWalkTex"]);
+  standard.push_back(Containers::texture_table["leftWalkTex"]);
+  standard.push_back(Containers::texture_table["rightWalkTex"]);
 	standard.push_back(Containers::texture_table["upRunTex"]);
 	standard.push_back(Containers::texture_table["downRunTex"]);
 	standard.push_back(Containers::texture_table["leftRunTex"]);
 	standard.push_back(Containers::texture_table["rightRunTex"]);
-	standard.push_back(Containers::texture_table["upIdleTex"]);
-	standard.push_back(Containers::texture_table["downIdleTex"]);
-	standard.push_back(Containers::texture_table["leftIdleTex"]);
-	standard.push_back(Containers::texture_table["rightIdleTex"]);
 	standard.push_back(Containers::texture_table["upAtkTex"]);
 	standard.push_back(Containers::texture_table["downAtkTex"]);
 	standard.push_back(Containers::texture_table["leftAtkTex"]);
@@ -427,20 +462,25 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	standard.push_back(Containers::texture_table["downAtk2Tex"]);
 	standard.push_back(Containers::texture_table["leftAtk2Tex"]);
 	standard.push_back(Containers::texture_table["rightAtk2Tex"]);
+  standard.push_back(Containers::texture_table["spinRight"]);
+  standard.push_back(Containers::texture_table["spinUp"]);
+  standard.push_back(Containers::texture_table["spinDown"]);
+  standard.push_back(Containers::texture_table["spinLeft"]);
+  standard.push_back(Containers::texture_table["firebreatheRight"]);
+  standard.push_back(Containers::texture_table["firebreatheUp"]);
+  standard.push_back(Containers::texture_table["firebreatheDown"]);
+  standard.push_back(Containers::texture_table["firebreatheLeft"]);
 	standard.push_back(Containers::texture_table["upHurtTex"]);
 	standard.push_back(Containers::texture_table["downHurtTex"]);
 	standard.push_back(Containers::texture_table["leftHurtTex"]);
-	standard.push_back(Containers::texture_table["rightHurtTex"]);
+  standard.push_back(Containers::texture_table["rightHurtTex"]);
+  standard.push_back(Containers::texture_table["upDeathTex"]);
+  standard.push_back(Containers::texture_table["downDeathTex"]);
+  standard.push_back(Containers::texture_table["leftDeathTex"]);
+  standard.push_back(Containers::texture_table["rightDeathTex"]);
 
 	gameplay_functions->add_texture("yemojaTexture", 0, 0, 0);
 	gameplay_functions->add_texture("yemojaIdleTex", 0, 0, 0);
-	tBuffer->run();
-
-  textureMap[Containers::texture_table["yemojaTexture"]] = {YEMOJA_PATH + "Yemoja_Idle_S.png", 22};
-	textureMap[Containers::texture_table["yemojaIdleTex"]] = {YEMOJA_PATH + "Yemoja_Idle_S.png", 22};
-	oasis.push_back(Containers::texture_table["yemojaTexture"]);
-	oasis.push_back(Containers::texture_table["yemojaIdleTex"]);
-
   gameplay_functions->add_texture("h_upIdleTex", 0, 0, 0);
   gameplay_functions->add_texture("h_downIdleTex", 0, 0, 0);
   gameplay_functions->add_texture("h_leftIdleTex", 0, 0, 0);
@@ -467,6 +507,8 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
   gameplay_functions->add_texture("YdeathRight", 0, 0, 0);
 	tBuffer->run();
 
+  textureMap[Containers::texture_table["yemojaTexture"]] = {YEMOJA_PATH + "Yemoja_Idle_S.png", 22};
+  textureMap[Containers::texture_table["yemojaIdleTex"]] = {YEMOJA_PATH + "Yemoja_Idle_S.png", 22};
   textureMap[Containers::texture_table["h_upIdleTex"]] = {YEMOJA_PATH + "Yemoja_Idle_N.png", 22};
   textureMap[Containers::texture_table["h_downIdleTex"]] = {YEMOJA_PATH + "Yemoja_Idle_S.png", 22};
   textureMap[Containers::texture_table["h_leftIdleTex"]] = {YEMOJA_PATH + "Yemoja_Idle_W.png", 22};
@@ -492,6 +534,8 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
   textureMap[Containers::texture_table["YdeathLeft"]] = {YEMOJA_PATH + "Yemoja_Death_W.png", 24};
   textureMap[Containers::texture_table["YdeathRight"]] = {YEMOJA_PATH + "Yemoja_Death_E.png", 24};
 
+  oasis.push_back(Containers::texture_table["yemojaTexture"]);
+  oasis.push_back(Containers::texture_table["yemojaIdleTex"]);
   oasis.push_back(Containers::texture_table["h_upIdleTex"]);
   oasis.push_back(Containers::texture_table["h_downIdleTex"]);
   oasis.push_back(Containers::texture_table["h_leftIdleTex"]);
@@ -814,36 +858,6 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	standard.push_back(Containers::texture_table["fireDown"]);
 	standard.push_back(Containers::texture_table["fireLeft"]);
 
-	gameplay_functions->add_texture("firebreatheRight", 0, 0, 0);
-	gameplay_functions->add_texture("firebreatheUp", 0, 0, 0);
-	gameplay_functions->add_texture("firebreatheDown", 0, 0, 0);
-	gameplay_functions->add_texture("firebreatheLeft", 0, 0, 0);
-	tBuffer->run();
-
-	textureMap[Containers::texture_table["firebreatheRight"]] = pair<string, int>("Assets/Sprites/ShangoRightBreath.png", 14);
-	textureMap[Containers::texture_table["firebreatheUp"]] = pair<string, int>("Assets/Sprites/ShangoBackBreath.png", 14);
-	textureMap[Containers::texture_table["firebreatheDown"]] = pair<string, int>("Assets/Sprites/ShangoForwardBreath.png", 14);
-	textureMap[Containers::texture_table["firebreatheLeft"]] = pair<string, int>("Assets/Sprites/ShangoLeftBreath.png", 14);
-	standard.push_back(Containers::texture_table["firebreatheRight"]);
-	standard.push_back(Containers::texture_table["firebreatheUp"]);
-	standard.push_back(Containers::texture_table["firebreatheDown"]);
-	standard.push_back(Containers::texture_table["firebreatheLeft"]);
-
-	gameplay_functions->add_texture("spinRight", 0, 0, 0);
-	gameplay_functions->add_texture("spinUp", 0, 0, 0);
-	gameplay_functions->add_texture("spinDown", 0, 0, 0);
-	gameplay_functions->add_texture("spinLeft", 0, 0, 0);
-	tBuffer->run();
-
-	textureMap[Containers::texture_table["spinRight"]] = pair<string, int>("Assets/Sprites/ShangoRightSpin.png", 22);
-	textureMap[Containers::texture_table["spinUp"]] = pair<string, int>("Assets/Sprites/ShangoBackSpin.png", 22);
-	textureMap[Containers::texture_table["spinDown"]] = pair<string, int>("Assets/Sprites/ShangoForwardSpin.png", 22);
-	textureMap[Containers::texture_table["spinLeft"]] = pair<string, int>("Assets/Sprites/ShangoLeftSpin.png", 22);
-	standard.push_back(Containers::texture_table["spinRight"]);
-	standard.push_back(Containers::texture_table["spinUp"]);
-	standard.push_back(Containers::texture_table["spinDown"]);
-	standard.push_back(Containers::texture_table["spinLeft"]);
-
 	//load sprite from a configuration file?
 	Alex->setHealth(200);
 
@@ -1024,15 +1038,16 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	
 	Alex->sprite.setTexture(Containers::texture_table["playerTexture"]);
 	Alex->sprite.setIdleTexture(Containers::texture_table["playerIdleTex"]);
+
+  Alex->sprite.id_up = Containers::texture_table["upIdleTex"];
+  Alex->sprite.id_left = Containers::texture_table["leftIdleTex"];
+  Alex->sprite.id_right = Containers::texture_table["rightIdleTex"];
+  Alex->sprite.id_down = Containers::texture_table["downIdleTex"];
+
 	Alex->sprite.up = Containers::texture_table["upRunTex"];
 	Alex->sprite.down = Containers::texture_table["downRunTex"];
 	Alex->sprite.left = Containers::texture_table["leftRunTex"];
 	Alex->sprite.right = Containers::texture_table["rightRunTex"];
-
-	Alex->sprite.id_up = Containers::texture_table["upIdleTex"];
-	Alex->sprite.id_left = Containers::texture_table["leftIdleTex"];
-	Alex->sprite.id_right = Containers::texture_table["rightIdleTex"];
-	Alex->sprite.id_down = Containers::texture_table["downIdleTex"];
 
 	Alex->sprite.atk_up = Containers::texture_table["upAtkTex"];
 	Alex->sprite.atk_down = Containers::texture_table["downAtkTex"];
@@ -1056,6 +1071,11 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	Alex->sprite.hurt_down = Containers::texture_table["downHurtTex"];
 	Alex->sprite.hurt_left = Containers::texture_table["leftHurtTex"];
 	Alex->sprite.hurt_right = Containers::texture_table["rightHurtTex"];
+
+  Alex->sprite.death_up = Containers::texture_table["upDeathTex"];
+  Alex->sprite.death_down = Containers::texture_table["downDeathTex"];
+  Alex->sprite.death_left = Containers::texture_table["leftDeathTex"];
+  Alex->sprite.death_right = Containers::texture_table["rightDeathTex"];
 
 	Alex->offsetBody(0, 50, 50, 50, 50);
 	Alex->setInteractable(true);
