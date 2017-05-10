@@ -6,6 +6,7 @@ War::War(Village* one, Village* two)
 {
 	this->setWarParties(one,two);
 	wars.push_back(this);
+	Alliance::update_enemies();
 }
 
 War::~War()
@@ -14,14 +15,12 @@ War::~War()
 
 void War::setWarParties(Village * p_alliance1, Village * p_alliance2)
 {
-	//checks if already in a war
-	if (!War::at_war(p_alliance1, p_alliance2)) {
-		warParties.first = p_alliance1;
-		warParties.second = p_alliance2;
+	warParties.first = p_alliance1;
+	warParties.second = p_alliance2;
+	if (p_alliance1->get_alliance() == p_alliance2->get_alliance()) {
+			p_alliance2->get_alliance()->remove_village_from_alliance(p_alliance1);
 	}
-	if (p_alliance1->get_alliance()==p_alliance2->get_alliance()) {
-		p_alliance2->get_alliance()->remove_village_from_alliance(p_alliance1);
-	}
+	Alliance::update_enemies();
 }
 
 std::pair<Village*, Village*> War::getWarParties()

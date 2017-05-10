@@ -13,7 +13,7 @@ Alliance::Alliance(Village* v)
 	allies.push_back(v);
 	Alliance::Alliances.push_back(this);
 	v->set_alliance(this);
-	update_enemies();
+	//update_enemies();
 }
 
 Alliance::~Alliance()
