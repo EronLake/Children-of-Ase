@@ -2,7 +2,7 @@
 #include "Task.h"
 
 
-Task::Task(std::string _name, std::string _status, std::string _type, char* _source, char* _target)
+Task::Task(std::string _name, std::string _status, std::string _type, char* _source, char* _target, RegionState::soundType _soundType)
 {
 	name = _name;
 	type = _type;
@@ -14,6 +14,8 @@ Task::Task(std::string _name, std::string _status, std::string _type, char* _sou
 
 	source = _source; //optional arguments for audio
 	target = _target;
+	soundType = _soundType;
+
 	LOG("Task Objected Constructed");
 }
 
@@ -223,6 +225,7 @@ Task* Task::clone_task()
 	duplicate_task->topicVec = topicVec;
 	duplicate_task->source = source;
 	duplicate_task->target = target;
+	duplicate_task->soundType = soundType;
 		
 	return duplicate_task;
 }

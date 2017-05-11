@@ -341,7 +341,7 @@ void Party::set_in_duel() {
 	for (auto it = members.begin(); it != members.end(); ++it) {
 		if (leader != (*it)) {
 			(*it)->setInCombat(false);
-			(*it)->defeat();
+			(*it)->defeat(3600);
 		}
 		else {
 			(*it)->setInCombat(true);

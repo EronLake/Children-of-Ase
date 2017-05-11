@@ -9,6 +9,7 @@ struct empty_stack : std::exception
 };
 
 std::mutex mux_2;
+std::mutex mux_3;
 
 //------------------------------------------------------
 TaskBuffer::TaskBuffer(MessageLog* _mLog)
@@ -34,15 +35,16 @@ void TaskBuffer::run()
 	//LOG("TaskBuffer Running");
 	while (isEmpty() == false) {
 		Task* current_task = (pop());
-		assignTask(current_task);
+		assignTask(0, current_task);
 	}
 	//LOG("TaskBuffer Stoping");
 }
 
 
 //------------------------------------------------------
-void TaskBuffer::assignTask(Task* current_task)
+void TaskBuffer::assignTask(int id, Task* current_task)
 {
+	//cout << "assign task is being called" << endl;
 	//will a manager ever create a task or simply pass one?
 	if (current_task->status == "CREATED" ||
 		current_task->status == "PASSED")
@@ -97,8 +99,15 @@ void TaskBuffer::printBuffer()//////////////////////////NOT IMPLEMENTED
 void TaskBuffer::push(Task* new_task)
 {
 	std::lock_guard<std::mutex> guard(mux_2);
-	queue_buffer.push(std::move(new_task));
+	queue_buffer.push_front(std::move(new_task));
 	mLog->logMessage(new_task);
+}
+void TaskBuffer::push_physics(Task * new_task)
+{
+	std::lock_guard<std::mutex> guard(mux_3);
+	physics_buffer.push_front(std::move(new_task));
+	mLog->logMessage(new_task);
+
 }
 //------------------------------------------------------
 
@@ -108,8 +117,16 @@ Task* TaskBuffer::pop()
 {
 	std::lock_guard<std::mutex> guard(mux_2);
 	if (queue_buffer.empty()) throw empty_stack();
-	Task* const top_task = std::move(queue_buffer.top());
-	queue_buffer.pop();
+	Task* const top_task = std::move(queue_buffer.front());
+	queue_buffer.pop_front();
+	return top_task;
+}
+Task * TaskBuffer::pop_physics()
+{
+	std::lock_guard<std::mutex> guard(mux_3);
+	if (physics_buffer.empty()) throw empty_stack();
+	Task* const top_task = std::move(physics_buffer.front());
+	physics_buffer.pop_front();
 	return top_task;
 }
 //------------------------------------------------------
@@ -121,6 +138,11 @@ bool TaskBuffer::isEmpty() const
 	std::lock_guard<std::mutex> guard(mux_2);
 	return queue_buffer.empty(); 
 }
+bool TaskBuffer::physics_buffer_isEmpty() const
+{
+	std::lock_guard<std::mutex> guard(mux_3);
+	return physics_buffer.empty();
+}
 //------------------------------------------------------
 
 //------------------------------------------------------
@@ -128,7 +150,14 @@ bool TaskBuffer::isEmpty() const
 void TaskBuffer::empty()
 {
 	if (!queue_buffer.empty()) {
-		queue_buffer = std::priority_queue<Task*>();
+		queue_buffer = std::deque<Task*>();
+	}
+}
+
+void TaskBuffer::physics_buffer_empty()
+{
+	if (!physics_buffer.empty()) {
+		physics_buffer = std::deque<Task*>();
 	}
 }
 

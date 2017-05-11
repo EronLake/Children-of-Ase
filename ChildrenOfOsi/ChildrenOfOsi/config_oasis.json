@@ -5,10 +5,10 @@
     "bodyy1": 4000.0,
     "bodyy2": 4000,
     "frame_num": 1,
-    "hight": 4000.0,
+    "hight": 1000.0,
     "name": "Oasis_Platform",
     "tex_file": "Oasis_Platform",
-    "width": 4000.0,
+    "width": 1000.0,
     "x": 34.68772888183594,
     "y": 115.1970977783203
   },

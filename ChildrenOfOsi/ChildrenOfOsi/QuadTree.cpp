@@ -231,21 +231,21 @@ vector<WorldObj*> QuadTree::retrieve(vector<WorldObj*>& listOfObj, WorldObj * my
 		if (index != -1 && nodes[0] != nullptr) {
 			nodes[index]->retrieve(listOfObj, myrec);
 		}
-		for (int i = 0; i < objs.size(); i++) {
-			if (std::find(listOfObj.begin(), listOfObj.end(), objs[i]) != listOfObj.end() == false) {
-				
-				//if (objs[i]->getType() >= 2) {
-				//	if (objs[i]->getType() == 5) {
-				//		cout << "RETRIEVING A HERO" << endl;
-				//		system("PAUSE");
-				//	}
-				//	else {
-				//		cout << "retrieving npc" << endl;
-				//	}
-				//}
-				listOfObj.push_back(objs[i]);
+			for (int i = 0; i < objs.size(); i++) {
+				if (std::find(listOfObj.begin(), listOfObj.end(), objs[i]) != listOfObj.end() == false) {
+
+					//if (objs[i]->getType() >= 2) {
+					//	if (objs[i]->getType() == 5) {
+					//		cout << "RETRIEVING A HERO" << endl;
+					//		system("PAUSE");
+					//	}
+					//	else {
+					//		cout << "retrieving npc" << endl;
+					//	}
+					//}
+					listOfObj.push_back(objs[i]);
+				}
 			}
-		}
 		//listOfObj.insert(listOfObj.end(), objs.begin(), objs.end());
 	}
 	return listOfObj;

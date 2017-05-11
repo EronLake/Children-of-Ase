@@ -22,23 +22,23 @@ Village::~Village()
   delete this->defenders;
 }
 
-bool Village::isEnemyParty(Party* p)
+/*bool Village::isEnemyParty(Party* p)
 {
   for(auto i = enemy_parties.begin(); i != enemy_parties.end(); ++i) {
     if(p == (*i))return true;
   }
   return false;
-}
+}*/
 
 void Village::remove_party(Party* p)
 {
   parties.erase(std::remove(parties.begin(), parties.end(), p), parties.end());
 }
 
-void Village::remove_enemy_party(Party* p)
+/*void Village::remove_enemy_party(Party* p)
 {
   enemy_parties.erase(std::remove(enemy_parties.begin(), enemy_parties.end(), p), enemy_parties.end());
-}
+}*/
 
 void Village::remove_member(NPC* n)
 {
