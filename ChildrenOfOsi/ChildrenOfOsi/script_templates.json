@@ -263,6 +263,30 @@
 	 }
     },
 
+	"Advise To Fight_Templates": {
+	 "1": {
+        "1": "Advise To Fight"
+	 }
+    },
+
+	"Take Advice To Fight_Templates": {
+	 "1": {
+        "1": "Take Advice To Fight"
+	 }
+    },
+
+	"Advise To Send Peace Offering To_Templates": {
+	 "1": {
+        "1": "Advise To Send Peace Offering To"
+	 }
+    },
+
+	"Take Advice To Send Peace Offering To_Templates": {
+	 "1": {
+        "1": "Take Advice To Send Peace Offering To"
+	 }
+    },
+
 	"Ask_For_Teaching_Templates": {
 	 "1": {
         "1": "Ask_For_Teaching"

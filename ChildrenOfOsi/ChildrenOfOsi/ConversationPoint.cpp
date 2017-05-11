@@ -40,6 +40,10 @@ std::string ConversationPoint::get_topic() {
 	return topic;
 }
 
+std::string ConversationPoint::get_is_selectable() {
+	return is_selectable;
+}
+
 Action* ConversationPoint::get_action() {
 	return act;
 }
@@ -58,6 +62,10 @@ void ConversationPoint::set_name(std::string val) {
 
 void ConversationPoint::set_topic(std::string val) {
 	topic = val;
+}
+
+void ConversationPoint::set_is_selectable(std::string val) {
+	is_selectable = val;
 }
 
 void ConversationPoint::set_action(Action* action) {

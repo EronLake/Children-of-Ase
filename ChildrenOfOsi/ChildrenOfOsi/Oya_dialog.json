@@ -337,6 +337,38 @@
         "5": "HERO? Train me? I know you're right. This village is vunerable in its current state. I will definitely think about training in order to bolster our defenses."
     },
 
+	"Advise To Fight": {
+        "1": "I believe it would be prudent of you to fight HERO.",
+        "2": "I think fighting with HERO could be beneficial to you.",
+        "3": "You should fight with HERO and rise to even greater heights in strength.",
+        "4": "You should fight with HERO and rise to even greater heights in strength.",
+        "5": "You should fight with HERO and rise to even greater heights in strength."
+    },
+
+	"Take Advice To Fight": {
+        "1": "You expect me to take advice from you? No thank you.",
+        "2": "I understand where you are coming from, but I cannot trust your advice at present.",
+        "3": "A fight with HERO? Well, the village would be safer if I improved my skills. I will take your advice.",
+        "4": "You are suggesting I fight with HERO? Hmm. I do value your opinion... I will take your advice.",
+        "5": "Your advice is a boon to me my friend. I will act on it right away."
+    },
+
+	"Advise To Send Peace Offering To": {
+        "1": "I believe it would be prudent of you to send a peace offering to HERO.",
+        "2": "You should send a peace offering to HERO in order to earn their favor.",
+        "3": "I would hate to see you get into trouble with HERO. You should try sending them a peace offering.",
+        "4": "I would hate to see you get into trouble with HERO. You should try sending them a peace offering.",
+        "5": "I would hate to see you get into trouble with HERO. You should try sending them a peace offering."
+    },
+
+	"Take Advice To Send Peace Offering To": {
+        "1": "My apologies, but I do not think your advice is worth acting on.",
+        "2": "Your advice is not bad, but I am not sure that you are trustworthy so I won't act on your word.",
+        "3": "Hmm. Your words seem to be free of ill intent. I will try taking your advice.",
+        "4": "As an advocate of peace and as your friend, I will take your advice.",
+        "5": "If you truly believe that a peace offering will lessen tensions between our villages then I will believe in you and send one."
+    },
+
 	"Ask_For_Teaching": {
         "1": "I would like to be taught by you.",
         "2": "I know that you are both wise and strong, and would greatly appreciate it if you could share some of that strength and wisdom with me.",

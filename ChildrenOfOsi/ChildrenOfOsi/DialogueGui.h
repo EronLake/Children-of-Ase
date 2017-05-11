@@ -44,15 +44,25 @@ class DialogueGui
 
   static constexpr int LINE_SPACING = 18;
 
-  static constexpr float SPEAKER_LEFT_X = 0.0F;
-  static constexpr float SPEAKER_LEFT_Y = 0.0F;
-  static constexpr float SPEAKER_LEFT_WIDTH = 0.0F;
-  static constexpr float SPEAKER_LEFT_HEIGHT = 0.0F;
+  static constexpr float SPEAKER_LEFT_X = 225.0F;
+  static constexpr float SPEAKER_LEFT_Y = 50.0F;
+  static constexpr float SPEAKER_LEFT_WIDTH = 200.0F;
+  static constexpr float SPEAKER_LEFT_HEIGHT = 200.0F;
 
-  static constexpr float SPEAKER_RIGHT_X = 0.0F;
-  static constexpr float SPEAKER_RIGHT_Y = 0.0F;
-  static constexpr float SPEAKER_RIGHT_WIDTH = 0.0F;
-  static constexpr float SPEAKER_RIGHT_HEIGHT = 0.0F;
+  static constexpr float SPEAKER_RIGHT_X = 575.0F;
+  static constexpr float SPEAKER_RIGHT_Y = 50.0F;
+  static constexpr float SPEAKER_RIGHT_WIDTH = 200.0F;
+  static constexpr float SPEAKER_RIGHT_HEIGHT = 200.0F;
+
+  //static constexpr float SPEAKER_LEFT_X = 410.0F;
+  //static constexpr float SPEAKER_LEFT_Y = 110.0F;
+  //static constexpr float SPEAKER_LEFT_WIDTH = 200.0F;
+  //static constexpr float SPEAKER_LEFT_HEIGHT = 200.0F;
+
+  //static constexpr float SPEAKER_RIGHT_X = 575.0F;
+  //static constexpr float SPEAKER_RIGHT_Y = 110.0F;
+  //static constexpr float SPEAKER_RIGHT_WIDTH = 200.0F;
+  //static constexpr float SPEAKER_RIGHT_HEIGHT = 200.0F;
 
   Rectangle *background_rect;
   Rectangle *header_rect;
@@ -73,18 +83,19 @@ class DialogueGui
   Texture *icon_face_glow_tex;
   Texture *icon_question_tex;
   Texture *icon_question_glow_tex;
-  Texture *speaker_left_tex;
-  Texture *speaker_right_tex;
+  Sprite *speaker_left_sprite;
+  Sprite *speaker_right_sprite;
 
-  Rectangle* dialogueBox;
-  Rectangle* responseBox1;
-  Rectangle* responseBox2;
+  Rectangle* dialogueBox;//remove
+  Rectangle* responseBox1;//remove
+  Rectangle* responseBox2;//remove
 
-  Texture* dialogueBoxTex;
-  Texture* responseBoxTex;
+  Texture* dialogueBoxTex;//remove
+  Texture* responseBoxTex;//remove
 
   glm::vec3 text_color_default;
   glm::vec3 text_color_selected;
+  glm::vec3 text_color_unselectable;
 
   void drawGuiText();
 
@@ -96,9 +107,10 @@ class DialogueGui
   void loadTexture();
   void setSprite();
   void drawGui();
+  void set_character_portrait_tex();
 
-  void setLeftSpeaker(Texture *speakerTexture);
-  void setRightSpeaker(Texture *speakerTexture);
+  void setLeftSpeaker(Sprite *speakerTexture);
+  void setRightSpeaker(Sprite *speakerTexture);
 
   void setSwordGlow();
   void setHeartGlow();
@@ -107,4 +119,18 @@ class DialogueGui
 
   std::string remove_chars_from_string(string &str, char* charsToRemove);
   std::string replace_str_char(string str, const string& replace, char ch);
+
+  
+  //Sprite *shango_sprite;
+  //Sprite *yemoja_sprite;
+  //Sprite *oya_sprite;
+  //Sprite *ogun_sprite;
+  //Sprite *oshosi_sprite;
+
+  //character portrait textures
+  Texture* shango_tex;
+  Texture* yemoja_tex;
+  Texture* oya_tex;
+  Texture* ogun_tex;
+  Texture* oshosi_tex;
 };
