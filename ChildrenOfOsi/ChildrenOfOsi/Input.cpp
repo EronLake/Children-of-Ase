@@ -1140,7 +1140,7 @@ void Input::InputCheck()
 						count = 10;
 						Hero* temp_hero = CheckClass::isHero(DialogueController::getOther());
 						if(temp_hero)
-						    gameplay_functions->change_song("Change", RegionState::current_region.getRTheme(), RegionState::current_region.getRTheme());
+						    gameplay_functions->change_song("Change", RegionState::current_region.getRTheme(), RegionState::current_region.getRTheme(), RegionState::soundType::region_music);
 						RegionState::in_village = false;
 						DialogueController::exitDialogue();
 					}
@@ -1152,7 +1152,7 @@ void Input::InputCheck()
 						count = 10;
 						Hero* temp_hero = CheckClass::isHero(DialogueController::getOther());
 						if (temp_hero)
-						    gameplay_functions->change_song("Change", RegionState::current_region.getRTheme(), RegionState::current_region.getRTheme());
+						    gameplay_functions->change_song("Change", RegionState::current_region.getRTheme(), RegionState::current_region.getRTheme(), RegionState::soundType::region_music);
 						RegionState::in_village = false;
 						DialogueController::exitDialogue();
 						if (dynamic_cast<Player*>(Containers::hero_table["Shango"])->cur_action != nullptr) 
