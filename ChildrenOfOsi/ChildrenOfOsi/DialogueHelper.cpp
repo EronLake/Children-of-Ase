@@ -98,16 +98,46 @@ dialogue_point DialogueHelper::choose_conv_pt(std::vector<ConversationLogObj*> c
 	vector<appealPoint> possible_replies;
 
 	int conv_pt_index;
+
+	//std::vector<int> personality = yemoja_personality;
+	//std::vector<int> relationship = yemoja_relationship_with_shango;
 	
 	Personality* personality = other->traits;
 	Relationship* relationship = other->rel[1];
+
+	/*Hero* temp_hero = nullptr;
+	if (other->getType() >= WorldObj::TYPE_NPC) {
+		if (temp_hero = CheckClass::isHero(other))//added another equals was single equals before
+		{
+			perror("you cannot talk to this type of object");
+		}
+	}*/
+
+	/*commented out code below that uses the real personalities and relationships
+	because it caused Yemoja to stop having conversation points to say.*/
+	/*Personality* per = other->traits;
+	personality.push_back(per->getHonor());
+	personality.push_back(per->getPride());
+	personality.push_back(per->getAggression());
+	personality.push_back(per->getKindness());
+	personality.push_back(per->getGreed());
+	personality.push_back(per->getRecklessness());
+	personality.push_back(per->getExtroversion());
+
+	Relationship* rel = other->rel[SHANGO];
+	relationship.push_back(rel->getAffinity());
+	relationship.push_back(rel->getNotoriety());
+	relationship.push_back(rel->getStrength());
+	relationship.push_back(rel->getAffEstimate());
+	relationship.push_back(rel->getNotorEstimate());
+	relationship.push_back(rel->getStrEstimate());*/
 
 	if (curr_conversation_log.size() > 0) {
 		if (curr_conversation_log[curr_conversation_log.size() - 1]->get_conv_point()->get_name() == "Ask_For_Quest") {
 			Planner* p = AIController::get_plan(other->name);
 			dialogue_point diog_pt = { "No Quest","No Quest" };
 			///////////////////////////////////////////////////////
-			/*Checks whether or not NPC wants to give quest
+			/*Stand in stuff to check whether or not NPC wants to give quest
 			to player when the player asks for one. NPC currently always
 			gives quest to player.*/
 			///////////////////////////////////////////////////////
@@ -121,14 +151,12 @@ dialogue_point DialogueHelper::choose_conv_pt(std::vector<ConversationLogObj*> c
 				if (!has_quest) {
 					diog_pt = { "Offer_Quest","Offer_Quest" };
 				}
-				//return diog_pt;
+				return diog_pt;
 			}
-			return diog_pt;
 		}
 	}
 
-	//checks if the player has already asked the npc this question and interupts
-	//the heuristic if so
+	//check if the player has already asked the npc this question
 	if (curr_conversation_log.size() > 0) {
 		for (int i = 0; i < curr_conversation_log.size() - 1; ++i) {
 			if (curr_conversation_log[i]->get_conv_point() == NULL)

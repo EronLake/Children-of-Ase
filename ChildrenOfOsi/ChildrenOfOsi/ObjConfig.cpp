@@ -18,7 +18,7 @@ float botRightx;
 float botRighty;
 
 string WhichJson;
-unordered_map<Texture*, pair<string, int>>* ObjConfig::textureMapConfig;
+unordered_map<Texture*, pair<string, int>> ObjConfig::textureMap;
 vector<Texture*> ObjConfig::standard_con;
 vector<Texture*> ObjConfig::oasis_con;
 vector<Texture*> ObjConfig::jungle_con;
@@ -533,7 +533,7 @@ void ObjConfig::set_world_obj(vector<WorldObj*>* recVec, ChildrenOfOsi* gameplay
 
 		//set file takes up memory
 		tBuffer->run();
-		(*textureMapConfig)[Containers::texture_table[tex_file]] = pair<string, int>("Assets/Sprites/" + tex_file + ".png", frame_num);
+		(textureMap)[Containers::texture_table[tex_file]] = pair<string, int>("Assets/Sprites/" + tex_file + ".png", frame_num);
 		//Containers::texture_table[tex_file]->setFile("Assets/Sprites/" + tex_file + ".png", frame_num);
 		switch (region) {
 		case STANDARD:

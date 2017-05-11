@@ -44,6 +44,7 @@ public:
 	static void DialogueController::create_farewell();
 	static void DialogueController::remove_ask_for_quest();
 	static void DialogueController::add_ask_for_quest();
+	static void start_soldier_conversation(WorldObj* n, bool playerTalk);
 	static void player_choose_soldier();
 	static void player_conversation_point_soldier();
 	static void other_response_soldier(std::string info, std::string hero_topic);

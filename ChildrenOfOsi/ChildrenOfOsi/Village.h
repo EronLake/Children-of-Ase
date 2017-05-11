@@ -41,7 +41,7 @@ public:
 
 	void conquer(Village* v) { conquered.push_back(v); v->conquerer = this; };
 
-	static void Village::init_Villages();
+	void static Village::init_villages();
 
 private:
 	Alliance* alliance;

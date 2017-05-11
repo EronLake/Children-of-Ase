@@ -34,7 +34,6 @@
     <ClCompile Include="QuestManager.cpp" />
     <ClCompile Include="Region.cpp" />
     <ClCompile Include="RegionState.cpp" />
-    <ClCompile Include="GameState.cpp" />
     <ClCompile Include="Tag.cpp" />
     <ClCompile Include="TagConfig.cpp" />
     <ClCompile Include="ThreadManager.cpp" />
@@ -86,7 +85,7 @@
     <ClCompile Include="War.cpp" />
     <ClCompile Include="WorldObj.cpp" />
     <ClCompile Include="Wrapper.cpp" />
-    <ClCompile Include="VillageConfig.cpp" />
+    <ClCompile Include="GameState.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Action.h" />
@@ -179,7 +178,6 @@
     <ClInclude Include="War.h" />
     <ClInclude Include="WorldObj.h" />
     <ClInclude Include="Wrapper.h" />
-    <ClInclude Include="VillageConfig.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="ChildrenOfOsi1.rc" />

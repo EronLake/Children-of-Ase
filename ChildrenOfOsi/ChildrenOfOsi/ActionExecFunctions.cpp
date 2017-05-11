@@ -764,7 +764,7 @@ void ActionExecFunctions::execute_bribe(Action* bribe)
 	if (!bribe->getDoer()->getInCombat()) {
 		switch (bribe->checkpoint) {
 		case 0: //Determine the location that the bribe is happening
-			ActionHelper::set_timer(bribe, 30);
+			ActionHelper::set_timer(bribe, 3600);
 			bribe->getDoer()->set_busy(Hero::BUSY_DOER);
 			bribe->getReceiver()->set_busy(Hero::BUSY_REC);
 			bribe->checkpoint++;

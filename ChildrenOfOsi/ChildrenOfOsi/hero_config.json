@@ -18,11 +18,56 @@
 		"pride": 60,
 		"recklessness": 30,
 		"extroversion": 30,
-		"greed": 50
+		"greed": 50,
+		"sprites": {
+			"setTexture": {"0":"ShangoForwardIdle", "1":22},
+			"setIdleTexture": {"0":"ShangoForwardIdle", "1":22},
+
+			"up": {"0":"ShangoBackSprint","1":16},
+			"down": {"0":"ShangoForwardSprint","1":16},
+			"left": {"0":"ShangoLeftSprint","1":16},
+			"right": {"0":"ShangoRightSprint","1":16},
+
+			"id_up": {"0":"ShangoBackIdle","1":22},
+			"id_left": {"0":"ShangoLeftIdle","1":22},
+			"id_right": {"0":"ShangoRightIdle","1":22},
+			"id_down": {"0":"ShangoForwardIdle","1":22},
+
+			"hurt_up": {"0":"ShangoBackRecoil","1":18},
+			"hurt_down": {"0":"ShangoForwardRecoil","1":18},
+			"hurt_left": {"0":"ShangoLeftRecoil","1":18},
+			"hurt_right": {"0":"ShangoRightRecoil","1":18},
+
+			"atk_up": {"0":"ShangoBackSwing","1":13},
+			"atk_down": {"0":"ShangoForwardSwing","1":13},
+			"atk_left": {"0":"ShangoLeftSwing","1":13},
+			"atk_right": {"0":"ShangoRightSwing","1":13},
+
+			"death_up": {"0":"ShangoBackRecoil","1":18},
+			"death_down": {"0":"ShangoForwardRecoil","1":18},
+			"death_left": {"0":"ShangoLeftRecoil","1":18},
+			"death_right": {"0":"ShangoRightRecoil","1":18},
+
+			"atk2_up": {"0":"ShangoBackLunge","1":7},
+			"atk2_down": {"0":"ShangoForwardLunge","1":7},
+			"atk2_left": {"0":"ShangoLeftLunge","1":7},
+			"atk2_right": {"0":"ShangoRightLunge","1":7},
+
+			"spin_up": {"0":"ShangoBackSpin","1":22},
+			"spin_down": {"0":"ShangoForwardSpin","1":22},
+			"spin_left": {"0":"ShangoLeftSpin","1":22},
+			"spin_right": {"0":"ShangoRightSpin","1":22},
+
+			"breathe_up": {"0":"ShangoBackBreath","1":14},
+			"breathe_down": {"0":"ShangoForwardBreath","1":14},
+			"breathe_left": {"0":"ShangoLeftBreath","1":14},
+			"breathe_right": {"0":"ShangoRightBreath","1":14}
+
+		}
 	},
 	"Yemoja" : {
-		"x" : 50.45,
-		"y" : 134.65,
+		"x" : 64.45,
+		"y" : 103.55,
 		"width" : 150,
 		"hight" : 150,
 		"name" : "Yemoja",
@@ -31,7 +76,7 @@
 		"bodyx2" : 50.0,
 		"bodyy1" : 50.0,
 		"bodyy2" : 50.0,
-		"health": 100,
+		"health": 500,
 		"max_stamina": 300,
 		"aggression": 30,
 		"kindness": 70,
@@ -39,11 +84,46 @@
 		"pride": 60,
 		"recklessness": 30,
 		"extroversion": 30,
-		"greed": 50
+		"greed": 50,
+		"sprites": {
+			"setTexture": {"0":"YemojaForwardIdle","1":22},
+			"setIdleTexture": {"0":"YemojaForwardIdle","1":22},
+
+			"up": {"0":"YemojaBackSprint","1":16},
+			"down": {"0":"YemojaForwardSprint","1":16},
+			"left": {"0":"YemojaLeftSprint","1":16},
+			"right": {"0":"YemojaRightSprint","1":16},
+
+			"id_up": {"0":"YemojaBackIdle","1":22},
+			"id_left": {"0":"YemojaForwardIdle","1":22},
+			"id_right": {"0":"YemojaLeftIdle","1":22},
+			"id_down": {"0":"YemojaRightIdle","1":22},
+
+			"hurt_up": {"0":"YemojaBackRecoil","1":18},
+			"hurt_down": {"0":"YemojaForwardRecoil","1":18},
+			"hurt_left": {"0":"YemojaLeftRecoil","1":18},
+			"hurt_right": {"0":"YemojaRightRecoil","1":18},
+
+			"atk_up": {"0":"ShangoBackSwing","1":13},
+			"atk_down": {"0":"ShangoForwardSwing","1":13},
+			"atk_left": {"0":"ShangoLeftSwing","1":13},
+			"atk_right": {"0":"ShangoRightSwing","1":13},
+
+			"death_up": {"0":"YemojaBackRecoil","1":18},
+			"death_down": {"0":"YemojaForwardRecoil","1":18},
+			"death_left": {"0":"YemojaLeftRecoil","1":18},
+			"death_right": {"0":"YemojaRightRecoil","1":18},
+
+			"breathe_up": {"0":"YemojaBackBreath","1":14},
+			"breathe_down": {"0":"YemojaForwardBreath","1":14},
+			"breathe_left": {"0":"YemojaLeftBreath","1":14},
+			"breathe_right": {"0":"YemojaRightBreath","1":14}
+
+		}
 	},
 	"Oya" : {
-		"x" : 171.57,
-		"y" : 209.60,
+		"x" : 44.00,
+		"y" : 36.00,
 		"width" : 150,
 		"hight" : 150,
 		"name" : "Oya",
@@ -60,6 +140,41 @@
 		"pride": 60,
 		"recklessness": 30,
 		"extroversion": 30,
-		"greed": 50
+		"greed": 50,
+		"sprites": {
+			"setTexture": {"0":"ShangoForwardIdle","1":22},
+			"setIdleTexture": {"0":"ShangoForwardIdle","1":22},
+
+			"up": {"0":"ShangoBackSprint","1":16},
+			"down": {"0":"ShangoForwardSprint","1":16},
+			"left": {"0":"ShangoLeftSprint","1":16},
+			"right": {"0":"ShangoRightSprint","1":16},
+
+			"id_up": {"0":"ShangoBackIdle","1":22},
+			"id_left": {"0":"ShangoForwardIdle","1":22},
+			"id_right": {"0":"ShangoLeftIdle","1":22},
+			"id_down": {"0":"ShangoRightIdle","1":22},
+
+			"hurt_up": {"0":"ShangoBackSwing","1":13},
+			"hurt_down": {"0":"ShangoForwardSwing","1":13},
+			"hurt_left": {"0":"ShangoLeftSwing","1":13},
+			"hurt_right": {"0":"ShangoRightSwing","1":13},
+
+			"atk_up": {"0":"ShangoBackSwing","1":13},
+			"atk_down": {"0":"ShangoForwardSwing","1":13},
+			"atk_left": {"0":"ShangoLeftSwing","1":13},
+			"atk_right": {"0":"ShangoRightSwing","1":13},
+
+			"death_up": {"0":"ShangoBackRecoil","1":18},
+			"death_down": {"0":"ShangoForwardRecoil","1":18},
+			"death_left": {"0":"ShangoLeftRecoil","1":18},
+			"death_right": {"0":"ShangoRightRecoil","1":18},
+
+			"spin_up": {"0":"ShangoBackSpin","1":22},
+			"spin_down": {"0":"ShangoForwardSpin","1":22},
+			"spin_left": {"0":"ShangoLeftSpin","1":22},
+			"spin_right": {"0":"ShangoRightSpin","1":22}
+
+		}
 	}
 }

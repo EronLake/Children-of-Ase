@@ -132,9 +132,7 @@ void HUD::drawHUD(WorldObj* obj)
     GameWindow::createText("_____________", 810, 180, 150, 80, {0.0F, 0.0F, 0.0F});
     vector<pair<Action*, int>> quests = player->get_quests();
     for(int i = 0; i < quests.size(); i++) {
-	   std::string::size_type name_end = quests[i].first->getName().find_last_of('_');
-	   std::string act_name = quests[i].first->getName().substr(0, name_end);
-       GameWindow::createText(act_name + ": " + to_string(quests[i].second), 810, 202 + (i * 15), 150, 80, {0.0F, 0.0F, 0.0F});//122 was original y
+      GameWindow::createText(quests[i].first->getName(), 810, 202 + (i * 15), 150, 80, {0.0F, 0.0F, 0.0F});
     }
   }
 }
