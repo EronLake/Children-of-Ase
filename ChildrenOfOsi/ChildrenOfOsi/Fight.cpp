@@ -102,7 +102,10 @@ void Fight::update_radius() {
 	}
 }
 
-void Fight::add_party(Party* p, bool atk) {
+void Fight::add_party(Party* a, Party* p, bool atk) {
+	if (!War::at_war(a->get_village(), p->get_village())) {
+		new War(a->get_village(), p->get_village());
+	}
 	for (auto it = attackers.begin(); it != attackers.end(); ++it) {
 		for (auto itor = (*it).begin(); itor != (*it).end(); ++itor) {
 			if ((*itor) == p)return;
@@ -169,7 +172,10 @@ void Fight::add_party(Party* p, bool atk) {
 	find_targets();
 }
 
-void Fight::add_to_attackers(Party* p) {
+void Fight::add_to_attackers(Party* a, Party* p) {
+	if (!War::at_war(a->get_village(), p->get_village())) {
+		new War(a->get_village(), p->get_village());
+	}
 	for (auto it = attackers.begin(); it != attackers.end(); ++it) {
 		for (auto itor = (*it).begin(); itor != (*it).end(); ++itor) {
 			if ((*itor) == p)return;
@@ -211,7 +217,10 @@ void Fight::add_to_attackers(Party* p) {
 	find_targets();
 }
 
-void Fight::add_to_defenders(Party* p) {
+void Fight::add_to_defenders(Party* a, Party* p) {
+	if (!War::at_war(a->get_village(), p->get_village())) {
+		new War(a->get_village(), p->get_village());
+	}
 	for (auto it = attackers.begin(); it != attackers.end(); ++it) {
 		for (auto itor = (*it).begin(); itor != (*it).end(); ++itor) {
 			if ((*itor) == p)return;
