@@ -256,6 +256,9 @@
     <ClCompile Include="ObjConfig.cpp">
       <Filter>Game Objects\Configs</Filter>
     </ClCompile>
+    <ClCompile Include="Tutorial.cpp">
+      <Filter>Misc</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AIHelper.h">
@@ -530,6 +533,9 @@
       <Filter>Game Objects\Configs</Filter>
     </ClInclude>
     <ClInclude Include="ThreadManager.h" />
+    <ClInclude Include="Tutorial.h">
+      <Filter>Misc</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Text Include="audio_test.txt">
@@ -549,9 +555,6 @@
     </Text>
     <Text Include="task_buffer_test.txt">
       <Filter>Task Manager</Filter>
-    </Text>
-    <Text Include="ReadMe.txt">
-      <Filter>Misc</Filter>
     </Text>
     <Text Include="dialog_template_output.txt">
       <Filter>Dialogue</Filter>
