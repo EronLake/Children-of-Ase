@@ -112,18 +112,6 @@ void set_file_with_thread(Texture* t, const pair<string, int>* p_tuple) {
 	t->setFile(p_tuple->first, p_tuple->second);
 }
 
-int getFreeVideoMemory()
-{
-	int availableKB[4];
-	if(GLEW_NVX_gpu_memory_info)
-		glGetIntegerv(GL_GPU_MEMORY_INFO_CURRENT_AVAILABLE_VIDMEM_NVX,&availableKB[0]);
-	int temp=GLEW_ATI_meminfo;
-	if(GLEW_ATI_meminfo)
-		glGetIntegerv(GL_TEXTURE_FREE_MEMORY_ATI,availableKB);
-	return availableKB[0];
-}
-
-
 //Eron: needs to be moved to separate file
 void check_if_end_game() {
 	Village* player_vil = dynamic_cast<Player*>(Containers::hero_table["Shango"])->getVillage();
@@ -234,7 +222,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 
 	//HeroConfig::import_config(movVec_ptr, gameplay_functions, tBuffer);
 
-	gameplay_functions->add_hero("Shango", 6445, 10055, true);
+	gameplay_functions->add_hero("Shango", 5045, 10465, true);
 	tBuffer->run();
 
 	Player* Alex = dynamic_cast<Player*>(Containers::hero_table["Shango"]);
@@ -267,7 +255,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	Input* iController = new Input(gameplay_functions, Alex, RenM->renderHelper, tBuffer, recVec_ptr, movVec_ptr);
 
 	gameplay_functions->add_hero("Yemoja", 5045, 13465, true);//5045 old x 13465 old y
-	gameplay_functions->add_hero("Oya", 1400, 20960, true);//17157 old x
+	gameplay_functions->add_hero("Oya", 17615, 21470, true);//17157 old x
 	tBuffer->run();
 	
 
@@ -908,7 +896,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	vector<Soldier*> silverSoldier;
 	int silverNum = 2;
 	for (int i = 0; i < silverNum; i++) {
-		silverSoldier.push_back(new Soldier(17157, 20960 + (i * 20), false));
+		silverSoldier.push_back(new Soldier(17615, 21480 + (i * 20), false));
 		gameplay_functions->add_Attack(silverSoldier[i]->getKey(), silverSoldier[i]->body[0].getX(), silverSoldier[i]->body[0].getY(), true, 10);
 	}
 	tBuffer->run();
@@ -933,10 +921,10 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	int tmp;
 	while (reg.size() > 0) {
 		closest = 0;
-		least_dist = 0;
+		least_dist = -1;
 		for (int i = 0; i < reg.size(); i++) {
 			tmp = Party::dist_location_to_location(Alex->getLoc(), reg[i]->loc);
-			if (tmp < least_dist || least_dist == 0) {
+			if (tmp < least_dist || least_dist == -1) {
 				closest = i;
 				least_dist = tmp;
 			}
@@ -1450,10 +1438,8 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	//oya->setSpeed(5);
 	oya->setName("Oya");
 	oya->name = OYA;
-	oya->offsetBody(0, 35, 35, 65, 15);
+	oya->offsetBody(0, 60, 60, 75, 50);
 	yemoja->offsetBody(0, 60, 60, 75, 50);
-	oya->shiftY(300);
-	oya->setHealth(50);
 
 	// SET UP RELATIONSHIP REFERENCE FOR YEMOJA 
 	std::unordered_map<int, Relationship*> yemojaRelRef;
@@ -1693,7 +1679,6 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 			}
 			HUD::FPS = fps;
 			//cout << "FPS: " << fps << endl;
-			cout << "Memory Left: " << getFreeVideoMemory() << endl;
 
 			current_game_state = iController->current_game_state;
 			//if(t0.joinable)t0.join();
@@ -1884,7 +1869,6 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 				}
 			questM->update();
 
-			cout <<"Memory Left: "<< getFreeVideoMemory() << endl;
 
 			//draw
 			if (state == 0) {
