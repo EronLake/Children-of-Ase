@@ -120,6 +120,38 @@
 		"5": "Let's get this paperwork out of the way then. Glad to have you aboard."
     },
 
+	"Confirm Ally": {
+        "1": "I wish you would trust me, but I guess it cannot be helped.",
+        "2": "I wish you would trust me, but I guess it cannot be helped.",
+        "3": "I assure you that you will be glad that you took my advice.",
+        "4": "I assure you that you will be glad that you took my advice.",
+		"5": "I assure you that you will be glad that you took my advice."
+    },
+
+	"Confirm Fight": {
+        "1": "I wish you would trust me, but I guess it cannot be helped.",
+        "2": "I wish you would trust me, but I guess it cannot be helped.",
+        "3": "I assure you that you will be glad that you took my advice.",
+        "4": "I assure you that you will be glad that you took my advice.",
+		"5": "I assure you that you will be glad that you took my advice."
+    },
+
+	"Confirm Conquer": {
+        "1": "I wish you would trust me, but I guess it cannot be helped.",
+        "2": "I wish you would trust me, but I guess it cannot be helped.",
+        "3": "I assure you that you will be glad that you took my advice.",
+        "4": "I assure you that you will be glad that you took my advice.",
+		"5": "I assure you that you will be glad that you took my advice."
+    },
+
+	"Confirm Peace": {
+        "1": "I wish you would trust me, but I guess it cannot be helped.",
+        "2": "I wish you would trust me, but I guess it cannot be helped.",
+        "3": "I assure you that you will be glad that you took my advice.",
+        "4": "I assure you that you will be glad that you took my advice.",
+		"5": "I assure you that you will be glad that you took my advice."
+    },
+
 	"Advise To Conquer": {
         "1": "I would like you to consider conquering HERO",
         "2": "I think it would be greatly beneficial to you if you gained control over HERO",
