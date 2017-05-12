@@ -1829,7 +1829,6 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 					}
 					_QuadTree->Insert(movVec[i]);	//insert all obj into tree
 				}
-
 			}
 			else {
 				//for (int i = 0; i < recVec.size(); i++) {
@@ -1889,12 +1888,12 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 
 			//cout << "shango's position BEFORE is at " << Alex->getX() << ", " << Alex->getY() << endl;
 			//iterate through physics_buffer
-			while(tBuffer->physics_buffer_isEmpty() == false) {
-				Task* curr_task = tBuffer->pop_physics();
-				cout << "num of idle threads is " << pool.n_idle() << endl;
-				pool.push([&,tBuffer,curr_task](int id){ tBuffer->assignTask(0,curr_task); });
-			}
-			tBuffer->physics_buffer_empty();
+			//while(tBuffer->physics_buffer_isEmpty() == false) {
+			//	Task* curr_task = tBuffer->pop_physics();
+			//	cout << "num of idle threads is " << pool.n_idle() << endl;
+			//	pool.push([&,tBuffer,curr_task](int id){ tBuffer->assignTask(0,curr_task); });
+			//}
+			//tBuffer->physics_buffer_empty();
 			//pool.stop(true);
 			//cout << "DONE WITH PHYSICS TASKS" << endl;
 			//cout << "shango's position AFTER is at " << Alex->getX() << ", " << Alex->getY() << endl;
