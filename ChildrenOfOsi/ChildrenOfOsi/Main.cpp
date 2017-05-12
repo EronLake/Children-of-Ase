@@ -1884,7 +1884,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 				}
 			questM->update();
 
-			cout <<"Memory Left: "<< getFreeVideoMemory() << endl;
+			//cout <<"Memory Left: "<< getFreeVideoMemory() << endl;
 
 			//draw
 			if (state == 0) {
