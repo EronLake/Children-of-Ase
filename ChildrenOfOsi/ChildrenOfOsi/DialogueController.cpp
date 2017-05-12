@@ -130,7 +130,10 @@ the conversation state to wait for the player to select a conversation
 point*/
 void DialogueController::PlayerChoose()
 {
-	
+	Hero* temp_hero = CheckClass::isHero(other);
+	if (temp_hero)
+		player->filter_move_to(temp_hero);
+
 	options = dialogue.get_possible_conv_pts();
 	if (first_call) {
 		/*add "Ask_About" and "Advise_To" and "Ask For Quest" conversation points to player's
