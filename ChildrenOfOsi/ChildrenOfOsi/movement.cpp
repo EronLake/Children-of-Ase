@@ -727,7 +727,7 @@ int Movement::attack(WorldObj* obj) {
 																	PlayerActExecFunctions::execute_start("Conquer", hero);
 																}else PlayerActExecFunctions::execute_start("Fight", hero);
 															}
-															s2->getParty()->get_fight()->add_party(s->getParty(), true);
+															s2->getParty()->get_fight()->add_party(s2->getParty(),s->getParty(), true);
 															s2->getParty()->addToCurrentEnemies(s->getParty());
 															s->getParty()->addToCurrentEnemies(s2->getParty());
 														}
@@ -737,7 +737,7 @@ int Movement::attack(WorldObj* obj) {
 																	PlayerActExecFunctions::execute_start("Conquer", hero);
 																} else PlayerActExecFunctions::execute_start("Fight", hero);
 															}
-															s->getParty()->get_fight()->add_party(s2->getParty(), true);
+															s->getParty()->get_fight()->add_party(s->getParty(), s2->getParty(), true);
 															s2->getParty()->addToCurrentEnemies(s->getParty());
 															s->getParty()->addToCurrentEnemies(s2->getParty());
 														}

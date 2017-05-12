@@ -49,6 +49,7 @@
 #define RIVER_COLLIDE 1
 #define PRELOAD_TEX 0
 #define THREAD_PHYSICS 1
+#define WRITE_TO_LOG 0
 
 /*
 this variable allows the game to zoom and out

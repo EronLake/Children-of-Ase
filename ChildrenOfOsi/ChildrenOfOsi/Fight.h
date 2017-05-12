@@ -15,9 +15,9 @@ public:
 	~Fight();
 	int get_radius();
 	void update_radius();
-	void add_party(Party* p, bool atk);
-	void add_to_attackers(Party* p);
-	void add_to_defenders(Party* p);
+	void add_party(Party* a, Party* p, bool atk);
+	void add_to_attackers(Party* a, Party* p);
+	void add_to_defenders(Party* a, Party* p);
 	void update_fight();
 	bool check_for_winner();
 	bool is_over() { return over; };
