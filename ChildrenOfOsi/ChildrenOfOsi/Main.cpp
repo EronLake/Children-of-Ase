@@ -174,7 +174,7 @@ int main() {
 void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 {
 	game_state current_game_state = game_state::load_game;
-	threadmanager::thread_pool pool(5);
+	threadmanager::thread_pool pool(4);
 	Rectangle::tex->setFile("Assets/Sprites/blankr.png", 1);
 	Point::tex->setFile("Assets/Sprites/point.png", 1);
 
@@ -1901,8 +1901,10 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 			//	Task* curr_task = tBuffer->pop_physics();
 			//	pool.push([&,tBuffer,curr_task](int id){ tBuffer->assignTask(0,curr_task); });
 			//}
-			tBuffer->physics_buffer_empty();
-			tBuffer->pre_run();
+			/*tBuffer->physics_buffer_empty();
+			tBuffer->pre_run();*/
+
+			tBuffer->run();
 
 			cout << "physics buffer size is " << PhysM->physics_buffer.size() << endl;
 			//use threads to execute all of the physics manager's tasks
@@ -1911,7 +1913,11 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 				std::pair<std::string, WorldObj*> temp = *it;
 				//cout << "it first is " << it->first << " and it second is " << it->second->getID() << endl;
 				pool.push([&,PhysM, temp](int)->void {PhysM->process_task(temp); });//PhysM->process_task(0,it->first,it->second); });
+				//pool.push(test);
 				//it = PhysM->physics_buffer.erase(it);
+			}
+			while (pool.n_idle() < 4) {
+
 			}
 			PhysM->physics_buffer.clear();
 

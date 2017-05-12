@@ -225,6 +225,10 @@ void QuadTree::Insert(WorldObj * myrec)
 
 vector<WorldObj*> QuadTree::retrieve(vector<WorldObj*>& listOfObj, WorldObj * myrec)
 {
+
+	for (int i = 0; i < objs.size(); i++) listOfObj.push_back(objs[i]);
+	return listOfObj;
+
 	std::lock_guard<std::mutex> guard(mux);
 	vector<int> indexes = getIndexes(myrec);
 	for (int i = 0; i < indexes.size(); i++) {

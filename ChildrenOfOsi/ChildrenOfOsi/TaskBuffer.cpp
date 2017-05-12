@@ -37,8 +37,11 @@ void TaskBuffer::run()
 	//LOG("TaskBuffer Running");
 	while (isEmpty() == false) {
 		//cout << "queue_buffer is NOT EMPTY AND HAS SIZE " << queue_buffer.size() << endl;
-
 		Task* current_task = (pop());
+		if (current_task->type == "MOVE" || current_task->type == "COMBAT" || current_task->type == "INTERACT") {
+			Task* cloned_task = current_task->clone_task();
+			assignTask(true, cloned_task);
+		}
 		assignTask(false, current_task);
 	}
 	//LOG("TaskBuffer Stoping");
@@ -83,6 +86,7 @@ void TaskBuffer::assignTask(bool for_prerun, Task* current_task)
 			for (auto itr = type_man_vec.begin(); itr != type_man_vec.end(); itr++)
 			{
 				PhysicsManager*	pm = dynamic_cast<PhysicsManager*>(*itr);
+				//if (pm==nullptr) return;
 				//if its NOT physics manager and its for prerun, skip it
 				if (pm == nullptr && for_prerun == true) continue;
 				//if its physics manager and its NOT for prerun, skip it

@@ -19,6 +19,7 @@ UniformGrid::~UniformGrid()
 
 void UniformGrid::insert_objs_to_grid(std::vector<Line*> objs)
 {
+
 	//iterate through the lines and find the right grid to insert it into
 	for (int i = 0; i < objs.size(); i++) {
 		//find which grid the first point of the line belongs to.
@@ -55,6 +56,7 @@ void UniformGrid::insert_objs_to_grid(std::vector<Line*> objs)
 
 std::vector<Line*> UniformGrid::retrieve_objs_in_grid(std::vector<Line*>& listOfObj, Line * obj)
 {
+	return listOfObj;
 	//first find the cell that the obj belongs to on the grid
 	int xcoord = obj->getP1().getX();
 	int j = xcoord / 1250;
