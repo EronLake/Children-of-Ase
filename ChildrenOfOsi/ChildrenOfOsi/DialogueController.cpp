@@ -4,6 +4,7 @@
 #include "ConversationPoint.h"
 #include "Tag.h"
 #include "ConversationLogObj.h"
+#include "ActionExecFunctions.h"
 
 Player* DialogueController::player;
 WorldObj* DialogueController::other; //the npc speaking with the player
@@ -847,6 +848,17 @@ void DialogueController::otherResponse(std::string info, std::string hero_topic)
 				dialogue_point diog_pt = { "Confirm Fight","Confirm Fight" };
 				std::string reply_pt_sentence = dialogue.gen_dialog(diog_pt, player);
 				message = player->getName() + ": " + reply_pt_sentence + "\n\n";
+
+				Planner* planner = AIController::get_plan(CheckClass::isHero(other)->name);
+				//ActionPool* hero_map;
+				//hero_map = temp_hero->actionPool_map[dialogue.hero_name_to_int(curr_hero_topic)];
+				int hero_num = dialogue.hero_name_to_int(curr_hero_topic);
+				std::string her_str = "Fight" + '_' + std::to_string(hero_num);
+				planner->set_current_action(Containers::action_table[her_str]);
+				planner->get_current_action()->setDoer(temp_hero);
+				planner->get_current_action()->setOwner(temp_hero);
+				ActionExecFunctions::execute_fight(planner->get_current_action());
+				
 			}
 			else {
 				/////////////need to be changed to correct calls/dialog if not accepted///////////////////
@@ -864,6 +876,16 @@ void DialogueController::otherResponse(std::string info, std::string hero_topic)
 				dialogue_point diog_pt = { "Confirm Conquer","Confirm Conquer" };
 				std::string reply_pt_sentence = dialogue.gen_dialog(diog_pt, player);
 				message = player->getName() + ": " + reply_pt_sentence + "\n\n";
+
+				Planner* planner = AIController::get_plan(CheckClass::isHero(other)->name);
+				//ActionPool* hero_map;
+				//hero_map = temp_hero->actionPool_map[dialogue.hero_name_to_int(curr_hero_topic)];
+				int hero_num = dialogue.hero_name_to_int(curr_hero_topic);
+				std::string her_str = "Conquer" + '_' + std::to_string(hero_num);
+				planner->set_current_action(Containers::action_table[her_str]);
+				planner->get_current_action()->setDoer(temp_hero);
+				planner->get_current_action()->setOwner(temp_hero);
+				ActionExecFunctions::execute_conquer(planner->get_current_action());
 			}
 			else {
 				/////////////need to be changed to correct calls/dialog if not accepted///////////////////
@@ -898,6 +920,16 @@ void DialogueController::otherResponse(std::string info, std::string hero_topic)
 				dialogue_point diog_pt = { "Confirm Ally","Confirm Ally" };
 				std::string reply_pt_sentence = dialogue.gen_dialog(diog_pt, player);
 				message = player->getName() + ": " + reply_pt_sentence + "\n\n";
+
+				Planner* planner = AIController::get_plan(CheckClass::isHero(other)->name);
+				//ActionPool* hero_map;
+				//hero_map = temp_hero->actionPool_map[dialogue.hero_name_to_int(curr_hero_topic)];
+				int hero_num = dialogue.hero_name_to_int(curr_hero_topic);
+				std::string her_str = "Form_Alliance" + '_' + std::to_string(hero_num);
+				planner->set_current_action(Containers::action_table[her_str]);
+				planner->get_current_action()->setDoer(temp_hero);
+				planner->get_current_action()->setOwner(temp_hero);
+				ActionExecFunctions::execute_form_alliance(planner->get_current_action());
 			}
 			else {
 				/////////////need to be changed to correct calls/dialog if not accepted///////////////////
