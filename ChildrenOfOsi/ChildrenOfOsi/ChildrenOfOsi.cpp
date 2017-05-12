@@ -253,8 +253,7 @@ void ChildrenOfOsi::createTask(std::string task_name, std::string type, WorldObj
 		LOG("childrenofosi createtask func, obj to update is a nullptr");
 	}
 	Task* new_task = new Task(task_name, task_status, type, objToUpdate);
-	if (new_task->type == "MOVE") tBuffer->push_physics(new_task);
-	else tBuffer->push(new_task);
+	 tBuffer->push(new_task);
 
 }
 
@@ -266,8 +265,7 @@ void ChildrenOfOsi::createTaskWithNum(std::string task_name, std::string type, W
 		LOG("childrenofosi createtask func, obj to update is a nullptr");
 	}
 	Task* new_task = new Task(task_name, task_status, type, objToUpdate,num);
-	if (new_task->type == "MOVE") tBuffer->push_physics(new_task);
-	else tBuffer->push(new_task);
+	tBuffer->push(new_task);
 }
 
 void ChildrenOfOsi::createTaskWithParams(std::string task_name, std::string type, std::string key, float x, float y, bool col)
@@ -275,8 +273,7 @@ void ChildrenOfOsi::createTaskWithParams(std::string task_name, std::string type
 	//maybe just pass in the string craeated
 	std::string task_status = "CREATED";
 	Task* new_task = new Task(task_name, task_status, type, key, x, y, col);
-	if (new_task->type == "MOVE") tBuffer->push_physics(new_task);
-	else tBuffer->push(new_task);
+	tBuffer->push(new_task);
 }
 
 void ChildrenOfOsi::createTaskAddMem(std::string task_name, std::string type, std::string key, int hero_name, int t, int frames, vector<NPC*> p, string cat, string cont, string where, int why, int when)
@@ -284,8 +281,7 @@ void ChildrenOfOsi::createTaskAddMem(std::string task_name, std::string type, st
 	//maybe just pass in the string craeated
 	std::string task_status = "CREATED";
 	Task* new_task = new Task(task_name, task_status, type, key, hero_name, t, frames, p, cat, cont, where, why,when);
-	if (new_task->type == "MOVE") tBuffer->push_physics(new_task);
-	else tBuffer->push(new_task);
+	tBuffer->push(new_task);
 }
 
 void ChildrenOfOsi::createTaskAddAct(std::string task_name, std::string type, std::string key, int utility, int why,
@@ -294,8 +290,7 @@ void ChildrenOfOsi::createTaskAddAct(std::string task_name, std::string type, st
 	//maybe just pass in the string craeated
 	std::string task_status = "CREATED";
 	Task* new_task = new Task(task_name, task_status, type, key, utility, why, owner, receiver, doer, exe_name);
-	if (new_task->type == "MOVE") tBuffer->push_physics(new_task);
-	else tBuffer->push(new_task);
+	tBuffer->push(new_task);
 }
 
 //used for conversation points
@@ -304,8 +299,7 @@ void ChildrenOfOsi::createTaskNoObj(std::string task_name, std::string type, std
 	//maybe just pass in the string craeated
 	std::string task_status = "CREATED";
 	Task* new_task = new Task(task_name, task_status, type, icon, temp, key);
-	if (new_task->type == "MOVE") tBuffer->push_physics(new_task);
-	else tBuffer->push(new_task);
+	tBuffer->push(new_task);
 }
 
 void ChildrenOfOsi::createTaskTag(std::string task_name, std::string type, std::string key)
@@ -313,8 +307,7 @@ void ChildrenOfOsi::createTaskTag(std::string task_name, std::string type, std::
 	//maybe just pass in the string craeated
 	std::string task_status = "CREATED";
 	Task* new_task = new Task(task_name, task_status, type,key);
-	if (new_task->type == "MOVE") tBuffer->push_physics(new_task);
-	else tBuffer->push(new_task);
+	tBuffer->push(new_task);
 }
 
 /*void ChildrenOfOsi::createTaskForAttack(std::string task_name, std::string type, float x, float y, bool col, int d) {
