@@ -267,7 +267,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	Input* iController = new Input(gameplay_functions, Alex, RenM->renderHelper, tBuffer, recVec_ptr, movVec_ptr);
 
 	gameplay_functions->add_hero("Yemoja", 5045, 13465, true);//5045 old x 13465 old y
-	gameplay_functions->add_hero("Oya", 1400, 20960, true);//17157 old x
+	gameplay_functions->add_hero("Oya", 17170, 20980, true);//17157 old x
 	tBuffer->run();
 	
 
