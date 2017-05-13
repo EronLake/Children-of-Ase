@@ -48,6 +48,7 @@ FMOD_RESULT result;
 		string up = "SFX/up.wav";
 		string down = "SFX/down.wav";
 		string page = "SFX/page.wav";
+		string talk = "SFX/talk.wav";
 
 
 
@@ -66,6 +67,7 @@ FMOD_RESULT result;
 		SoundClass upAddress = nullptr;
 		SoundClass downAddress = nullptr;
 		SoundClass pageAddress = nullptr;
+		SoundClass talkAddress = nullptr;
 
 
 		this->createSound(&oasisAddress, oasis);
@@ -82,7 +84,7 @@ FMOD_RESULT result;
 		this->createSound(&upAddress, up);
 		this->createSound(&downAddress, down);
 		this->createSound(&pageAddress, page);
-
+		this->createSound(&talkAddress, talk);
 
 		sounds[oasis] = oasisAddress;
 		sounds[jungle] = jungleAddress;
@@ -98,7 +100,7 @@ FMOD_RESULT result;
 		sounds[up] = upAddress;
 		sounds[down] = downAddress;
 		sounds[page] = pageAddress;
-
+		sounds[talk] = talkAddress;
 	}
 
 	SoundSystem::~SoundSystem() {

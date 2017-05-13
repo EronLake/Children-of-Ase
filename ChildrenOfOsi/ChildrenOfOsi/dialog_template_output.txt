@@ -1,3 +1,4 @@
-Conversation Point Name: Ask_To_Duel Appeal 260
+Conversation Point Name: Ask About Notoriety Of Appeal 260
+Conversation Point Name: Ask About Strength Of Appeal 180
+Conversation Point Name: Ask About Affinity Of Appeal 180
 Conversation Point Name: Boast Appeal 70
-Conversation Point Name: Intimidate Appeal -30
