@@ -45,6 +45,9 @@ public:
 	int value_of(Action* action);
 
 	bool give_as_quest;
+	void set_action_suggested(bool suggested);
+	bool get_action_suggested();
+
 
 	vector<Action*> quests_given;
 
@@ -68,6 +71,8 @@ private:
 
 	vector<std::shared_ptr<Preconditions>> prioritize_preconditions(Action* goal);
 	int personality_appeal(Action* evaluateAction);
+
+	bool action_suggested = false;
 
 
 };
