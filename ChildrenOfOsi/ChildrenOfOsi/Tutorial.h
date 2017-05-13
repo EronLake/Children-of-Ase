@@ -18,16 +18,27 @@ struct Tutorial
     NONE
   };
 
+  static void init();
+  static void reset();
+  static void destroy();
+
   static bool isAnyStageActive() { return Tutorial::currentStage != Tutorial::Stage::NONE; }
   static bool isStageActive(Stage stage) { return Tutorial::currentStage == stage; }
+  static bool isStageComplete(Stage stage);
+
   static void launchStage(Stage stage, Input &input, bool pause);
-  static void completeStage();
+  static void updateStage(Stage stage);
+  static void completeStage(Input &input);
   static void drawTutorial();
 
   private:
 
   static Stage currentStage;
   static bool isPaused;
+
+  static bool completedStageGameStart;
+  static bool completedStageDialogue;
+  static bool completedStageCombat;
 
   Tutorial() = delete;
   Tutorial(const Tutorial  &) = delete;
@@ -36,7 +47,7 @@ struct Tutorial
   Tutorial & operator=(const Tutorial &&) = delete;
   ~Tutorial() = delete;
 
-  static void handleStageGameStart();
-  static void handleStageDialogue();
-  static void handleStageCombat();
+  static void startStageGameStart();
+  static void startStageDialogue();
+  static void startStageCombat();
 };
