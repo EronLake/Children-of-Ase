@@ -67,7 +67,7 @@ bool Tutorial::isStageComplete(Stage stage)
 void Tutorial::launchStage(Stage stage, Input &input, bool pause)
 {
   if(stage == Tutorial::Stage::NONE) {
-    Tutorial::completeStage();
+    Tutorial::completeStage(input);
     return;
   }
 
