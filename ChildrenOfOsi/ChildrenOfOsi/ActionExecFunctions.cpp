@@ -362,6 +362,10 @@ void ActionExecFunctions::execute_fight(Action* fight)
 		if (fight->getReceiver()->getParty()->getMembers().size() == fight->getReceiver()->getParty()->get_down_members().size()) {
 			//Apply succ-post-conditions
 			fight->apply_postconditions(true);
+			//if planner->action_suggested then
+				//suggest_fight->apply_postconditions(true)
+				//planner->action_suggested = false;
+
 			//update_memory category as a success 
 			//doer_mem->setCategory("success"); //receiver_mem->setCategory("fail");
 			//update reason
@@ -372,6 +376,10 @@ void ActionExecFunctions::execute_fight(Action* fight)
 		{
 			//Apply fail-post-conditions
 			fight->apply_postconditions(false);
+			//if planner->action_suggested then
+				//fight->suggested->apply_postconditions(false)
+				//planner->action_suggested = false;
+
 			//update_memory as faiure
 			//doer_mem->setCategory("failure"); receiver_mem->setCategory("success");
 			//update reason

@@ -1110,6 +1110,7 @@ void Input::InputCheck()
 					}
 				}
 				if (ENTER) {
+					gameplay_functions->createTaskForAudio("PlaySound", "SOUND", "SFX/talk.wav", nullptr, RegionState::soundType::sfx);
 					//////std:://cout << "ENTER" << std::endl;
 					if (DialogueController::getState() == 1) {
 						count = 10;
