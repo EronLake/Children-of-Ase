@@ -671,12 +671,12 @@ void DialogueController::otherResponse(std::string info, std::string hero_topic)
 
 			//check if I want to accept
 			if (accepted_action) {
-				dialogue_point diog_pt = { "Accept Alliance Offer","Accept Alliance Offer" };
+				dialogue_point diog_pt = { "Accept Alliance Offer","Accept Alliance Offer","",curr_hero_topic,"1" };
 				std::string reply_pt_sentence = dialogue.gen_dialog(diog_pt, temp_hero);
 				message = other->getName() + ": " + reply_pt_sentence + "\n\n";
 			} else{
 				/////////////need to be changed to correct calls/dialog if not accepted///////////////////
-				dialogue_point diog_pt = { "Accept Alliance Offer","Accept Alliance Offer" };
+				dialogue_point diog_pt = { "Accept Alliance Offer","Accept Alliance Offer","",curr_hero_topic,"1"};
 				std::string reply_pt_sentence = dialogue.gen_dialog_negative(diog_pt, temp_hero);
 				message = other->getName() + ": " + reply_pt_sentence + "\n\n";
 			}
@@ -688,13 +688,13 @@ void DialogueController::otherResponse(std::string info, std::string hero_topic)
 
 			//check if I want to accept
 			if (accepted_action) {
-				dialogue_point diog_pt = { "Accept Duel","Accept Duel" };
+				dialogue_point diog_pt = { "Accept Duel","Accept Duel","",curr_hero_topic,"1" };
 				std::string reply_pt_sentence = dialogue.gen_dialog(diog_pt, temp_hero);
 				message = other->getName() + ": " + reply_pt_sentence + "\n\n";
 			}
 			else {
 				/////////////need to be changed to correct calls/dialog if not accepted///////////////////
-				dialogue_point diog_pt = { "Accept Duel","Accept Duel" };
+				dialogue_point diog_pt = { "Accept Duel","Accept Duel","",curr_hero_topic,"1" };
 				std::string reply_pt_sentence = dialogue.gen_dialog_negative(diog_pt, temp_hero);
 				message = other->getName() + ": " + reply_pt_sentence + "\n\n";
 			}
@@ -706,14 +706,14 @@ void DialogueController::otherResponse(std::string info, std::string hero_topic)
 
 			//check if I want to accept
 			if (accepted_action) {
-				dialogue_point diog_pt = { "Accept Spar Request","Accept Spar Request" };
+				dialogue_point diog_pt = { "Accept Spar Request","Accept Spar Request","",curr_hero_topic,"1" };
 				std::string reply_pt_sentence = dialogue.gen_dialog(diog_pt, temp_hero);
 				message = other->getName() + ": " + reply_pt_sentence + "\n\n";
 				//state = 8;
 			}
 			else {
 				/////////////need to be changed to correct calls/dialog if not accepted///////////////////
-				dialogue_point diog_pt = { "Accept Spar Request","Accept Spar Request" };
+				dialogue_point diog_pt = { "Accept Spar Request","Accept Spar Request","",curr_hero_topic,"1" };
 				std::string reply_pt_sentence = dialogue.gen_dialog_negative(diog_pt, temp_hero);
 				message = other->getName() + ": " + reply_pt_sentence + "\n\n";
 				//state = 1;
@@ -726,14 +726,14 @@ void DialogueController::otherResponse(std::string info, std::string hero_topic)
 
 			//check if I want to accept
 			if (accepted_action) {
-				dialogue_point diog_pt = { "Take Advice To Fight","Take Advice To Fight" };
+				dialogue_point diog_pt = { "Take Advice To Fight","Take Advice To Fight","",curr_hero_topic,"1" };
 				std::string reply_pt_sentence = dialogue.gen_dialog(diog_pt, temp_hero);
 				message = other->getName() + ": " + reply_pt_sentence + "\n\n";
 				//state = 8;
 			}
 			else {
 				/////////////need to be changed to correct calls/dialog if not accepted///////////////////
-				dialogue_point diog_pt = { "Take Advice To Fight","Take Advice To Fight" };
+				dialogue_point diog_pt = { "Take Advice To Fight","Take Advice To Fight","",curr_hero_topic,"1" };
 				std::string reply_pt_sentence = dialogue.gen_dialog_negative(diog_pt, temp_hero);
 				message = other->getName() + ": " + reply_pt_sentence + "\n\n";
 				//state = 1;
@@ -746,14 +746,14 @@ void DialogueController::otherResponse(std::string info, std::string hero_topic)
 
 			//check if I want to accept
 			if (accepted_action) {
-				dialogue_point diog_pt = { "Take Advice To Conquer","Take Advice To Conquer" };
+				dialogue_point diog_pt = { "Take Advice To Conquer","Take Advice To Conquer","",curr_hero_topic,"1" };
 				std::string reply_pt_sentence = dialogue.gen_dialog(diog_pt, temp_hero);
 				message = other->getName() + ": " + reply_pt_sentence + "\n\n";
 				//state = 8;
 			}
 			else {
 				/////////////need to be changed to correct calls/dialog if not accepted///////////////////
-				dialogue_point diog_pt = { "Take Advice To Conquer","Take Advice To Conquer" };
+				dialogue_point diog_pt = { "Take Advice To Conquer","Take Advice To Conquer","",curr_hero_topic,"1" };
 				std::string reply_pt_sentence = dialogue.gen_dialog_negative(diog_pt, temp_hero);
 				message = other->getName() + ": " + reply_pt_sentence + "\n\n";
 				//state = 1;
@@ -766,14 +766,14 @@ void DialogueController::otherResponse(std::string info, std::string hero_topic)
 
 			//check if I want to accept
 			if (accepted_action) {
-				dialogue_point diog_pt = { "Take Advice To Send Peace Offering To","Take Advice To Send Peace Offering To" };
+				dialogue_point diog_pt = { "Take Advice To Send Peace Offering To","Take Advice To Send Peace Offering To","",curr_hero_topic,"1" };
 				std::string reply_pt_sentence = dialogue.gen_dialog(diog_pt, temp_hero);
 				message = other->getName() + ": " + reply_pt_sentence + "\n\n";
 				//state = 8;
 			}
 			else {
 				/////////////need to be changed to correct calls/dialog if not accepted///////////////////
-				dialogue_point diog_pt = { "Take Advice To Send Peace Offering To","Take Advice To Send Peace Offering To" };
+				dialogue_point diog_pt = { "Take Advice To Send Peace Offering To","Take Advice To Send Peace Offering To","",curr_hero_topic,"1" };
 				std::string reply_pt_sentence = dialogue.gen_dialog_negative(diog_pt, temp_hero);
 				message = other->getName() + ": " + reply_pt_sentence + "\n\n";
 				//state = 1;
@@ -786,14 +786,14 @@ void DialogueController::otherResponse(std::string info, std::string hero_topic)
 
 			//check if I want to accept
 			if (accepted_action) {
-				dialogue_point diog_pt = { "Take Advice To Ally With","Take Advice To Ally With" };
+				dialogue_point diog_pt = { "Take Advice To Ally With","Take Advice To Ally With","",curr_hero_topic,"1" };
 				std::string reply_pt_sentence = dialogue.gen_dialog(diog_pt, temp_hero);
 				message = other->getName() + ": " + reply_pt_sentence + "\n\n";
 				//state = 8;
 			}
 			else {
 				/////////////need to be changed to correct calls/dialog if not accepted///////////////////
-				dialogue_point diog_pt = { "Take Advice To Ally With","Take Advice To Ally With" };
+				dialogue_point diog_pt = { "Take Advice To Ally With","Take Advice To Ally With","",curr_hero_topic,"1" };
 				std::string reply_pt_sentence = dialogue.gen_dialog_negative(diog_pt, temp_hero);
 				message = other->getName() + ": " + reply_pt_sentence + "\n\n";
 				//state = 1;
@@ -809,13 +809,13 @@ void DialogueController::otherResponse(std::string info, std::string hero_topic)
 		if (replyString == "Accept Alliance Offer") {
 			//choose different dialog if they denied the action
 			if (accepted_action) {
-				dialogue_point diog_pt = { "Confirm Alliance","Confirm Alliance" };
+				dialogue_point diog_pt = { "Confirm Alliance","Confirm Alliance","",curr_hero_topic,"1" };
 				std::string reply_pt_sentence = dialogue.gen_dialog(diog_pt, player);
 				message = player->getName() + ": " + reply_pt_sentence + "\n\n";
 			}
 			else {
 				/////////////need to be changed to correct calls/dialog if not accepted///////////////////
-				dialogue_point diog_pt = { "Confirm Alliance","Confirm Alliance" };
+				dialogue_point diog_pt = { "Confirm Alliance","Confirm Alliance","",curr_hero_topic,"1" };
 				std::string reply_pt_sentence = dialogue.gen_dialog_negative(diog_pt, player);
 				message = player->getName() + ": " + reply_pt_sentence + "\n\n";
 
@@ -826,13 +826,13 @@ void DialogueController::otherResponse(std::string info, std::string hero_topic)
 		else if (replyString == "Accept Duel") {
 			//choose different dialog if they denied the action
 			if (accepted_action) {
-				dialogue_point diog_pt = { "Confirm Duel","Confirm Duel" };
+				dialogue_point diog_pt = { "Confirm Duel","Confirm Duel","",curr_hero_topic,"1" };
 				std::string reply_pt_sentence = dialogue.gen_dialog(diog_pt, player);
 				message = player->getName() + ": " + reply_pt_sentence + "\n\n";
 			}
 			else {
 				/////////////need to be changed to correct calls/dialog if not accepted///////////////////
-				dialogue_point diog_pt = { "Confirm Duel","Confirm Duel" };
+				dialogue_point diog_pt = { "Confirm Duel","Confirm Duel","",curr_hero_topic,"1" };
 				std::string reply_pt_sentence = dialogue.gen_dialog_negative(diog_pt, player);
 				message = player->getName() + ": " + reply_pt_sentence + "\n\n";
 
@@ -843,13 +843,13 @@ void DialogueController::otherResponse(std::string info, std::string hero_topic)
 		else if (replyString == "Accept Spar Request") {
 			//choose different dialog if they denied the action
 			if (accepted_action) {
-				dialogue_point diog_pt = { "Confirm Spar","Confirm Spar" };
+				dialogue_point diog_pt = { "Confirm Spar","Confirm Spar","",curr_hero_topic,"1" };
 				std::string reply_pt_sentence = dialogue.gen_dialog(diog_pt, player);
 				message = player->getName() + ": " + reply_pt_sentence + "\n\n";
 			}
 			else {
 				/////////////need to be changed to correct calls/dialog if not accepted///////////////////
-				dialogue_point diog_pt = { "Confirm Spar","Confirm Spar" };
+				dialogue_point diog_pt = { "Confirm Spar","Confirm Spar","",curr_hero_topic,"1" };
 				std::string reply_pt_sentence = dialogue.gen_dialog_negative(diog_pt, player);
 				message = player->getName() + ": " + reply_pt_sentence + "\n\n";
 
@@ -860,7 +860,7 @@ void DialogueController::otherResponse(std::string info, std::string hero_topic)
 		else if (replyString == "Take Advice To Fight With") {
 			//choose different dialog if they denied the action
 			if (accepted_action) {
-				dialogue_point diog_pt = { "Confirm Fight","Confirm Fight" };
+				dialogue_point diog_pt = { "Confirm Fight","Confirm Fight","",curr_hero_topic,"1" };
 				std::string reply_pt_sentence = dialogue.gen_dialog(diog_pt, player);
 				message = player->getName() + ": " + reply_pt_sentence + "\n\n";
 
@@ -877,7 +877,7 @@ void DialogueController::otherResponse(std::string info, std::string hero_topic)
 			}
 			else {
 				/////////////need to be changed to correct calls/dialog if not accepted///////////////////
-				dialogue_point diog_pt = { "Confirm Fight","Confirm Fight" };
+				dialogue_point diog_pt = { "Confirm Fight","Confirm Fight","",curr_hero_topic,"1" };
 				std::string reply_pt_sentence = dialogue.gen_dialog_negative(diog_pt, player);
 				message = player->getName() + ": " + reply_pt_sentence + "\n\n";
 
@@ -888,7 +888,7 @@ void DialogueController::otherResponse(std::string info, std::string hero_topic)
 		else if (replyString == "Take Advice To Conquer") {
 			//choose different dialog if they denied the action
 			if (accepted_action) {
-				dialogue_point diog_pt = { "Confirm Conquer","Confirm Conquer" };
+				dialogue_point diog_pt = { "Confirm Conquer","Confirm Conquer","",curr_hero_topic,"1" };
 				std::string reply_pt_sentence = dialogue.gen_dialog(diog_pt, player);
 				message = player->getName() + ": " + reply_pt_sentence + "\n\n";
 
@@ -904,7 +904,7 @@ void DialogueController::otherResponse(std::string info, std::string hero_topic)
 			}
 			else {
 				/////////////need to be changed to correct calls/dialog if not accepted///////////////////
-				dialogue_point diog_pt = { "Confirm Conquer","Confirm Conquer" };
+				dialogue_point diog_pt = { "Confirm Conquer","Confirm Conquer","",curr_hero_topic,"1" };
 				std::string reply_pt_sentence = dialogue.gen_dialog_negative(diog_pt, player);
 				message = player->getName() + ": " + reply_pt_sentence + "\n\n";
 
@@ -915,13 +915,13 @@ void DialogueController::otherResponse(std::string info, std::string hero_topic)
 		else if (replyString == "Take Advice To Send Peace Offering To") {
 			//choose different dialog if they denied the action
 			if (accepted_action) {
-				dialogue_point diog_pt = { "Confirm Peace","Confirm Peace" };
+				dialogue_point diog_pt = { "Confirm Peace","Confirm Peace","",curr_hero_topic,"1" };
 				std::string reply_pt_sentence = dialogue.gen_dialog(diog_pt, player);
 				message = player->getName() + ": " + reply_pt_sentence + "\n\n";
 			}
 			else {
 				/////////////need to be changed to correct calls/dialog if not accepted///////////////////
-				dialogue_point diog_pt = { "Confirm Peace","Confirm peace" };
+				dialogue_point diog_pt = { "Confirm Peace","Confirm peace","",curr_hero_topic,"1" };
 				std::string reply_pt_sentence = dialogue.gen_dialog_negative(diog_pt, player);
 				message = player->getName() + ": " + reply_pt_sentence + "\n\n";
 
@@ -932,7 +932,7 @@ void DialogueController::otherResponse(std::string info, std::string hero_topic)
 		else if (replyString == "Take Advice To Ally With") {
 			//choose different dialog if they denied the action
 			if (accepted_action) {
-				dialogue_point diog_pt = { "Confirm Ally","Confirm Ally" };
+				dialogue_point diog_pt = { "Confirm Ally","Confirm Ally","",curr_hero_topic,"1" };
 				std::string reply_pt_sentence = dialogue.gen_dialog(diog_pt, player);
 				message = player->getName() + ": " + reply_pt_sentence + "\n\n";
 
@@ -948,7 +948,7 @@ void DialogueController::otherResponse(std::string info, std::string hero_topic)
 			}
 			else {
 				/////////////need to be changed to correct calls/dialog if not accepted///////////////////
-				dialogue_point diog_pt = { "Confirm Ally","Confirm Ally" };
+				dialogue_point diog_pt = { "Confirm Ally","Confirm Ally","",curr_hero_topic,"1" };
 				std::string reply_pt_sentence = dialogue.gen_dialog_negative(diog_pt, player);
 				message = player->getName() + ": " + reply_pt_sentence + "\n\n";
 
