@@ -209,11 +209,11 @@ FMOD_RESULT result;
 		unsigned int time;
 		if (type == RegionState::soundType::region_music) {
 			channels[name.c_str()] = &chnls[0];//assign the channel
-			playMusic(sounds[name], true, chnls[0], ispaused, .8,type);
+			playMusic(sounds[name], true, chnls[0], ispaused, .9,type);
 		}
 		else if (type == RegionState::soundType::theme_music) {
 			channels[name.c_str()] = &chnls[0];//assign the channel
-			playMusic(sounds[name], true, chnls[0], ispaused, .8,type);
+			playMusic(sounds[name], true, chnls[0], ispaused, .7,type);
 		}
 		else
 			return 1;
@@ -226,11 +226,11 @@ FMOD_RESULT result;
 		unsigned int time;
 		if (type == RegionState::soundType::sfx) {
 			channels[name.c_str()] = &chnls[channel];//assign the channel
-			playSound(sounds[name], false, chnls[channel], ispaused, .8);
+			playSound(sounds[name], false, chnls[channel], ispaused, .5);
 		}
 		else if (type == RegionState::soundType::ambient_sfx) {
 			channels[name.c_str()] = &chnls[channel];//assign the channel
-			playAmbient(sounds[name], false, chnls[channel], ispaused, .6);
+			playAmbient(sounds[name], false, chnls[channel], ispaused, .5);
 		}
 		else
 			return 1;
