@@ -891,7 +891,7 @@ void Input::InputCheck()
 			if (Q) {
 				//DialogueController::exitDialogue();
 				//DialogueController::state = 7;
-				DialogueController::create_farewell();
+				
 
 				/*WorldObj* other = DialogueController::getOther();
 				//std:://cout << "HERO: " << other->getName() << std::endl;
@@ -923,9 +923,13 @@ void Input::InputCheck()
 				//}
 				//else
 				//{
-					//gameplay_functions->change_song("Change", RegionState::current_region.getRTheme(), RegionState::current_region.getRTheme(),RegionState::soundType::region_music);
-					//RegionState::in_village = false;
-					DialogueController::exitDialogue();
+					if (!DialogueController::first_q_press) {
+						DialogueController::create_farewell();
+						//gameplay_functions->change_song("Change", RegionState::current_region.getRTheme(), RegionState::current_region.getRTheme());
+						RegionState::in_village = false;
+						DialogueController::first_q_press = true;
+						DialogueController::exitDialogue();
+					}
 				//}
 			}
 			if (T) {
@@ -1023,7 +1027,8 @@ void Input::InputCheck()
 					if (DialogueController::getState() == 1 && temp_hero) {
 						if (tmp < (DialogueController::getOptions().size() - 1)) {
 							//DialogueController::setSelect(++tmp);
-							DialogueController::scroll_control++;
+							DialogueController::move_to_selectable_down();
+							//DialogueController::scroll_control++;
 							if (DialogueController::scroll_control >= DialogueController::getOptions().size()) 
 								DialogueController::scroll_control = DialogueController::getOptions().size() - 1;
 							else
@@ -1093,8 +1098,8 @@ void Input::InputCheck()
 					int tmp = DialogueController::getSelect();
 					if (tmp > 0 || DialogueController::scroll_control > 0) {
 						//DialogueController::setSelect(--tmp);
-						
-						DialogueController::scroll_control--;
+						DialogueController::move_to_selectable_up();
+						//DialogueController::scroll_control--;
 						if (DialogueController::scroll_control < 0)
 							DialogueController::scroll_control = 0;
 						else
@@ -1134,7 +1139,9 @@ void Input::InputCheck()
 					}
 					else if (DialogueController::getState() == 7) {
 						count = 10;
-						gameplay_functions->change_song("Change", RegionState::current_region.getRTheme(), RegionState::current_region.getRTheme(), RegionState::soundType::region_music);
+						Hero* temp_hero = CheckClass::isHero(DialogueController::getOther());
+						if(temp_hero)
+						    gameplay_functions->change_song("Change", RegionState::current_region.getRTheme(), RegionState::current_region.getRTheme(), RegionState::soundType::region_music);
 						RegionState::in_village = false;
 						DialogueController::exitDialogue();
 					}
@@ -1144,7 +1151,9 @@ void Input::InputCheck()
 					}
 					else if (DialogueController::getState() == 9) {
 						count = 10;
-						gameplay_functions->change_song("Change", RegionState::current_region.getRTheme(), RegionState::current_region.getRTheme(), RegionState::soundType::region_music);
+						Hero* temp_hero = CheckClass::isHero(DialogueController::getOther());
+						if (temp_hero)
+						    gameplay_functions->change_song("Change", RegionState::current_region.getRTheme(), RegionState::current_region.getRTheme(), RegionState::soundType::region_music);
 						RegionState::in_village = false;
 						DialogueController::exitDialogue();
 						if (dynamic_cast<Player*>(Containers::hero_table["Shango"])->cur_action != nullptr) 

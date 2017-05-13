@@ -112,18 +112,6 @@ void set_file_with_thread(Texture* t, const pair<string, int>* p_tuple) {
 	t->setFile(p_tuple->first, p_tuple->second);
 }
 
-int getFreeVideoMemory()
-{
-	int availableKB[4];
-	if(GLEW_NVX_gpu_memory_info)
-		glGetIntegerv(GL_GPU_MEMORY_INFO_CURRENT_AVAILABLE_VIDMEM_NVX,&availableKB[0]);
-	int temp=GLEW_ATI_meminfo;
-	if(GLEW_ATI_meminfo)
-		glGetIntegerv(GL_TEXTURE_FREE_MEMORY_ATI,availableKB);
-	return availableKB[0];
-}
-
-
 //Eron: needs to be moved to separate file
 void check_if_end_game() {
 	Village* player_vil = dynamic_cast<Player*>(Containers::hero_table["Shango"])->getVillage();
@@ -234,7 +222,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 
 	//HeroConfig::import_config(movVec_ptr, gameplay_functions, tBuffer);
 
-	gameplay_functions->add_hero("Shango", 6445, 10055, true);
+	gameplay_functions->add_hero("Shango", 5045, 10465, true);
 	tBuffer->run();
 
 	Player* Alex = dynamic_cast<Player*>(Containers::hero_table["Shango"]);
@@ -267,7 +255,8 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	Input* iController = new Input(gameplay_functions, Alex, RenM->renderHelper, tBuffer, recVec_ptr, movVec_ptr);
 
 	gameplay_functions->add_hero("Yemoja", 5045, 13465, true);//5045 old x 13465 old y
-	gameplay_functions->add_hero("Oya", 1400, 20960, true);//17157 old x
+	gameplay_functions->add_hero("Oya", 17615, 21470, true);//17157 old x
+	//gameplay_functions->add_hero("Oya", 5045, 12465, true);
 	tBuffer->run();
 	
 
@@ -633,21 +622,8 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
   jungle.push_back(Containers::texture_table["Oya_DeathLeftTex"]);
   jungle.push_back(Containers::texture_table["Oya_DeathRightTex"]);
 
-	gameplay_functions->add_texture("silverSoldierTexture", 0, 0, 0);
-	gameplay_functions->add_texture("silverSoldierIdleTex", 0, 0, 0);
-	gameplay_functions->add_texture("blueSoldierTexture", 0, 0, 0);
-	gameplay_functions->add_texture("blueSoldierIdleTex", 0, 0, 0);
-	tBuffer->run();
-
-	textureMap[Containers::texture_table["silverSoldierTexture"]] = pair<string, int>("Assets/Sprites/SilverSoldierForwardIdle.png", 22);
-	textureMap[Containers::texture_table["silverSoldierIdleTex"]] = pair<string, int>("Assets/Sprites/SilverSoldierForwardIdle.png", 22);
-	textureMap[Containers::texture_table["blueSoldierTexture"]] = pair<string, int>("Assets/Sprites/BlueSoldierForwardIdle.png", 22);
-	textureMap[Containers::texture_table["blueSoldierIdleTex"]] = pair<string, int>("Assets/Sprites/BlueSoldierForwardIdle.png", 22);
-	standard.push_back(Containers::texture_table["silverSoldierTexture"]);
-	standard.push_back(Containers::texture_table["silverSoldierIdleTex"]);
-	marsh.push_back(Containers::texture_table["blueSoldierTexture"]);
-	marsh.push_back(Containers::texture_table["blueSoldierIdleTex"]);
-
+  gameplay_functions->add_texture("silverSoldierTexture", 0, 0, 0);
+  gameplay_functions->add_texture("silverSoldierIdleTex", 0, 0, 0);
 	gameplay_functions->add_texture("ss_upRunTex", 0, 0, 0);
 	gameplay_functions->add_texture("ss_downRunTex", 0, 0, 0);
 	gameplay_functions->add_texture("ss_leftRunTex", 0, 0, 0);
@@ -678,6 +654,8 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	gameplay_functions->add_texture("ss_rightDeathTex", 0, 0, 0);
 	tBuffer->run();
 
+  textureMap[Containers::texture_table["silverSoldierTexture"]] = {SOLDIER_JUNGLE_PATH + "SoldierJungle_Idle_S.png", 22};
+  textureMap[Containers::texture_table["silverSoldierIdleTex"]] = {SOLDIER_JUNGLE_PATH + "SoldierJungle_Idle_S.png", 22};
   textureMap[Containers::texture_table["ss_upIdleTex"]] = {SOLDIER_JUNGLE_PATH + "SoldierJungle_Idle_N.png", 22};
   textureMap[Containers::texture_table["ss_downIdleTex"]] = {SOLDIER_JUNGLE_PATH + "SoldierJungle_Idle_S.png", 22};
   textureMap[Containers::texture_table["ss_leftIdleTex"]] = {SOLDIER_JUNGLE_PATH + "SoldierJungle_Idle_W.png", 22};
@@ -735,7 +713,11 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	mountain.push_back(Containers::texture_table["ss_downDeathTex"]);
 	mountain.push_back(Containers::texture_table["ss_leftDeathTex"]);
 	mountain.push_back(Containers::texture_table["ss_rightDeathTex"]);
+  standard.push_back(Containers::texture_table["silverSoldierTexture"]);
+  standard.push_back(Containers::texture_table["silverSoldierIdleTex"]);
 
+  gameplay_functions->add_texture("blueSoldierTexture", 0, 0, 0);
+  gameplay_functions->add_texture("blueSoldierIdleTex", 0, 0, 0);
   gameplay_functions->add_texture("bs_upIdleTex", 0, 0, 0);
   gameplay_functions->add_texture("bs_downIdleTex", 0, 0, 0);
   gameplay_functions->add_texture("bs_leftIdleTex", 0, 0, 0);
@@ -766,6 +748,8 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	gameplay_functions->add_texture("bs_rightDeathTex", 0, 0, 0);
 	tBuffer->run();
 
+  textureMap[Containers::texture_table["blueSoldierTexture"]] = {SOLDIER_OASIS_PATH + "SoldierOasis_Idle_S.png", 22};
+  textureMap[Containers::texture_table["blueSoldierIdleTex"]] = {SOLDIER_OASIS_PATH + "SoldierOasis_Idle_S.png", 22};
   textureMap[Containers::texture_table["bs_upIdleTex"]] = {SOLDIER_OASIS_PATH + "SoldierOasis_Idle_N.png", 22};
   textureMap[Containers::texture_table["bs_downIdleTex"]] = {SOLDIER_OASIS_PATH + "SoldierOasis_Idle_S.png", 22};
   textureMap[Containers::texture_table["bs_leftIdleTex"]] = {SOLDIER_OASIS_PATH + "SoldierOasis_Idle_W.png", 22};
@@ -795,7 +779,8 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	textureMap[Containers::texture_table["bs_leftDeathTex"]] = {SOLDIER_OASIS_PATH + "SoldierOasis_Death_W.png", 24};
 	textureMap[Containers::texture_table["bs_rightDeathTex"]] = {SOLDIER_OASIS_PATH + "SoldierOasis_Death_E.png", 24};
 
-	gameplay_functions->add_texture("treeTex", 0, 0, 0);
+  marsh.push_back(Containers::texture_table["blueSoldierTexture"]);
+  marsh.push_back(Containers::texture_table["blueSoldierIdleTex"]);
 	marsh.push_back(Containers::texture_table["bs_upRunTex"]);
 	marsh.push_back(Containers::texture_table["bs_downRunTex"]);
 	marsh.push_back(Containers::texture_table["bs_leftRunTex"]);
@@ -821,6 +806,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	marsh.push_back(Containers::texture_table["bs_leftLungeTex"]);
 	marsh.push_back(Containers::texture_table["bs_rightLungeTex"]);
 
+  gameplay_functions->add_texture("treeTex", 0, 0, 0);
 	gameplay_functions->add_texture("rockTex1", 0, 0, 0);
 	gameplay_functions->add_texture("rockTex2", 0, 0, 0);
 	tBuffer->run();
@@ -911,7 +897,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	vector<Soldier*> silverSoldier;
 	int silverNum = 2;
 	for (int i = 0; i < silverNum; i++) {
-		silverSoldier.push_back(new Soldier(17157, 20960 + (i * 20), false));
+		silverSoldier.push_back(new Soldier(17615, 21480 + (i * 20), false));
 		gameplay_functions->add_Attack(silverSoldier[i]->getKey(), silverSoldier[i]->body[0].getX(), silverSoldier[i]->body[0].getY(), true, 10);
 	}
 	tBuffer->run();
@@ -936,10 +922,10 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	int tmp;
 	while (reg.size() > 0) {
 		closest = 0;
-		least_dist = 0;
+		least_dist = -1;
 		for (int i = 0; i < reg.size(); i++) {
 			tmp = Party::dist_location_to_location(Alex->getLoc(), reg[i]->loc);
-			if (tmp < least_dist || least_dist == 0) {
+			if (tmp < least_dist || least_dist == -1) {
 				closest = i;
 				least_dist = tmp;
 			}
@@ -1453,10 +1439,8 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	//oya->setSpeed(5);
 	oya->setName("Oya");
 	oya->name = OYA;
-	oya->offsetBody(0, 35, 35, 65, 15);
+	oya->offsetBody(0, 60, 60, 75, 50);
 	yemoja->offsetBody(0, 60, 60, 75, 50);
-	oya->shiftY(300);
-	oya->setHealth(50);
 
 	// SET UP RELATIONSHIP REFERENCE FOR YEMOJA 
 	std::unordered_map<int, Relationship*> yemojaRelRef;
@@ -1696,7 +1680,6 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 			}
 			HUD::FPS = fps;
 			//cout << "FPS: " << fps << endl;
-			cout << "Memory Left: " << getFreeVideoMemory() << endl;
 
 			current_game_state = iController->current_game_state;
 			//if(t0.joinable)t0.join();
@@ -1847,7 +1830,6 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 					}
 					_QuadTree->Insert(movVec[i]);	//insert all obj into tree
 				}
-
 			}
 			else {
 				//for (int i = 0; i < recVec.size(); i++) {
@@ -1887,7 +1869,6 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 				}
 			questM->update();
 
-			cout <<"Memory Left: "<< getFreeVideoMemory() << endl;
 
 			//draw
 			if (state == 0) {
@@ -1908,12 +1889,12 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 
 			//cout << "shango's position BEFORE is at " << Alex->getX() << ", " << Alex->getY() << endl;
 			//iterate through physics_buffer
-			while(tBuffer->physics_buffer_isEmpty() == false) {
-				Task* curr_task = tBuffer->pop_physics();
-				cout << "num of idle threads is " << pool.n_idle() << endl;
-				pool.push([&,tBuffer,curr_task](int id){ tBuffer->assignTask(0,curr_task); });
-			}
-			tBuffer->physics_buffer_empty();
+			//while(tBuffer->physics_buffer_isEmpty() == false) {
+			//	Task* curr_task = tBuffer->pop_physics();
+			//	cout << "num of idle threads is " << pool.n_idle() << endl;
+			//	pool.push([&,tBuffer,curr_task](int id){ tBuffer->assignTask(0,curr_task); });
+			//}
+			//tBuffer->physics_buffer_empty();
 			//pool.stop(true);
 			//cout << "DONE WITH PHYSICS TASKS" << endl;
 			//cout << "shango's position AFTER is at " << Alex->getX() << ", " << Alex->getY() << endl;

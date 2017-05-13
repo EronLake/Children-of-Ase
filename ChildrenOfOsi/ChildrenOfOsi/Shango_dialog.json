@@ -120,6 +120,38 @@
 		"5": "Let's get this paperwork out of the way then. Glad to have you aboard."
     },
 
+	"Confirm Ally": {
+        "1": "I wish you would trust me, but I guess it cannot be helped.",
+        "2": "I wish you would trust me, but I guess it cannot be helped.",
+        "3": "I assure you that you will be glad that you took my advice.",
+        "4": "I assure you that you will be glad that you took my advice.",
+		"5": "I assure you that you will be glad that you took my advice."
+    },
+
+	"Confirm Fight": {
+        "1": "I wish you would trust me, but I guess it cannot be helped.",
+        "2": "I wish you would trust me, but I guess it cannot be helped.",
+        "3": "I assure you that you will be glad that you took my advice.",
+        "4": "I assure you that you will be glad that you took my advice.",
+		"5": "I assure you that you will be glad that you took my advice."
+    },
+
+	"Confirm Conquer": {
+        "1": "I wish you would trust me, but I guess it cannot be helped.",
+        "2": "I wish you would trust me, but I guess it cannot be helped.",
+        "3": "I assure you that you will be glad that you took my advice.",
+        "4": "I assure you that you will be glad that you took my advice.",
+		"5": "I assure you that you will be glad that you took my advice."
+    },
+
+	"Confirm Peace": {
+        "1": "I wish you would trust me, but I guess it cannot be helped.",
+        "2": "I wish you would trust me, but I guess it cannot be helped.",
+        "3": "I assure you that you will be glad that you took my advice.",
+        "4": "I assure you that you will be glad that you took my advice.",
+		"5": "I assure you that you will be glad that you took my advice."
+    },
+
 	"Advise To Conquer": {
         "1": "I would like you to consider conquering HERO",
         "2": "I think it would be greatly beneficial to you if you gained control over HERO",
@@ -342,6 +374,38 @@
         "3": "HERO? Train me? Hmm. It cannot hurt to always be a bit more prepared. I will consider it.",
         "4": "HERO? Train me? I do worry about whether we are prepared for an attack or not. I will definitely consider training.",
         "5": "HERO? Train me? I know you're right. This village is vunerable in its current state. I will definitely think about training in order to bolster our defenses."
+    },
+
+	"Advise To Fight": {
+        "1": "Please hear me out. I think fighting HERO would be in your best interest.",
+        "2": "I have some advice that you may find useful. You may want to consider fighting HERO.",
+        "3": "If there is one thing that I know it's that alot can be learned from a good fight. You should try fighting HERO.",
+        "4": "If there is one thing that I know it's that alot can be learned from a good fight. You should try fighting HERO.",
+        "5": "If there is one thing that I know it's that alot can be learned from a good fight. You should try fighting HERO."
+    },
+
+	"Take Advice To Fight": {
+        "1": "A fight huh. I'll do it. I am always up for a fight.",
+        "2": "A fight huh. I'll do it. I am always up for a fight.",
+        "3": "A fight huh. I'll do it. I am always up for a fight.",
+        "4": "A fight huh. I'll do it. I am always up for a fight.",
+        "5": "A fight huh. I'll do it. I am always up for a fight."
+    },
+
+	"Advise To Send Peace Offering To": {
+        "1": "I believe it would be prudent of you to send a peace offering to HERO.",
+        "2": "You should send a peace offering to HERO in order to earn their favor.",
+        "3": "I would hate to see you get into trouble with HERO. You should try sending them a peace offering.",
+        "4": "I would hate to see you get into trouble with HERO. You should try sending them a peace offering.",
+        "5": "I would hate to see you get into trouble with HERO. You should try sending them a peace offering."
+    },
+
+	"Take Advice To Send Peace Offering To": {
+        "1": "Peace huh. Sounds attractive. I'm in. I'll do it.",
+        "2": "Peace huh. Sounds attractive. I'm in. I'll do it.",
+        "3": "Peace huh. Sounds attractive. I'm in. I'll do it.",
+        "4": "Peace huh. Sounds attractive. I'm in. I'll do it.",
+        "5": "Peace huh. Sounds attractive. I'm in. I'll do it."
     },
 
 	"Ask_For_Teaching": {

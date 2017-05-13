@@ -1270,7 +1270,62 @@
 		  "strength": 50,
 		  "AffEstimate": 50,
 		  "NotorEstimate": 50,
-		  "StrEstimate": 50
+		  "StrEstimate": 50,
+		 "req_preconds": {
+      "1": {
+        "general_type": 0,
+        "rel_type": 8,
+        "desired_rel_val": 60
+      }
+    },
+    "doer_succ_postconds": {
+      "1": {
+        "general_type": 0,
+        "rel_type": 7,
+        "utility": 5
+      },
+      "2": {
+        "general_type": 0,
+        "rel_type": 8,
+        "utility": 10
+      }
+    },
+    "doer_fail_postconds": {
+      "1": {
+        "general_type": 0,
+        "rel_type": 11,
+        "utility": 6
+      }
+    },
+    "receiver_succ_postconds": {
+      "1": {
+        "general_type": 0,
+        "rel_type": 4,
+        "utility": 8
+      },
+      "2": {
+        "general_type": 0,
+        "rel_type": 8,
+        "utility": 5
+      }
+    },
+    "receiver_fail_postconds": {
+      "1": {
+        "general_type": 0,
+        "rel_type": 9,
+        "utility": 5
+      },
+      "2": {
+        "general_type": 0,
+        "rel_type": 10,
+        "utility": 5
+      },
+      "3": {
+        "general_type": 0,
+        "rel_type": 11,
+        "utility": 5
+      }
+    }
     },
 
     "conversation_point_4" : {
@@ -1289,46 +1344,64 @@
 		  "strength": 50,
 		  "AffEstimate": 50,
 		  "NotorEstimate": 50,
-		  "StrEstimate": 50
+		  "StrEstimate": 50,
+		  "req_preconds": {
+      "1": {
+        "general_type": 0,
+        "rel_type": 8,
+        "desired_rel_val": 60
+      }
+    },
+    "doer_succ_postconds": {
+      "1": {
+        "general_type": 0,
+        "rel_type": 7,
+        "utility": 5
+      },
+      "2": {
+        "general_type": 0,
+        "rel_type": 8,
+        "utility": 10
+      }
+    },
+    "doer_fail_postconds": {
+      "1": {
+        "general_type": 0,
+        "rel_type": 11,
+        "utility": 6
+      }
+    },
+    "receiver_succ_postconds": {
+      "1": {
+        "general_type": 0,
+        "rel_type": 4,
+        "utility": 8
+      },
+      "2": {
+        "general_type": 0,
+        "rel_type": 8,
+        "utility": 5
+      }
+    },
+    "receiver_fail_postconds": {
+      "1": {
+        "general_type": 0,
+        "rel_type": 9,
+        "utility": 5
+      },
+      "2": {
+        "general_type": 0,
+        "rel_type": 10,
+        "utility": 5
+      },
+      "3": {
+        "general_type": 0,
+        "rel_type": 11,
+        "utility": 5
+      }
+    }
     },
 
-	"conversation_point_7" : {
-	      "name" : "Advise To Revolt Against",
-          "icon" : "",
-	      "template" : "Advise To Revolt Against",
-		  "honor" : 0,
-		  "pride": 0,
-		  "aggression": 0,
-		  "kindness": 0,
-		  "greed": 0,
-		  "recklessness": 0,
-		  "extroversion": 0,
-		  "affinity": 70,
-		  "notoriety": 50,
-		  "strength": 50,
-		  "AffEstimate": 50,
-		  "NotorEstimate": 50,
-		  "StrEstimate": 50
-    },
-
-	"conversation_point_10" : {
-	      "name" : "Advise To Destroy",
-          "icon" : "",
-	      "template" : "Advise To Destroy",
-		  "honor" : 0,
-		  "pride": 0,
-		  "aggression": 0,
-		  "kindness": 0,
-		  "greed": 0,
-		  "recklessness": 0,
-		  "extroversion": 0,
-		  "affinity": 70,
-		  "notoriety": 50,
-		  "strength": 50,
-		  "AffEstimate": 50,
-		  "NotorEstimate": 50,
-		  "StrEstimate": 50
-    },
 
 	"conversation_point_13" : {
 	      "name" : "Ask_To_Duel",
@@ -1380,25 +1453,6 @@
 
    },
  
-   "conversation_point_18" : {
-	      "name" : "Advise To Train With",
-          "icon" : "",
-	      "template" : "Advise To Train With",
-		  "honor" : 0,
-		  "pride": 0,
-		  "aggression": 0,
-		  "kindness": 0,
-		  "greed": 0,
-		  "recklessness": 0,
-		  "extroversion": 0,
-		  "affinity": 50,
-		  "notoriety": 50,
-		  "strength": 50,
-		  "AffEstimate": 50,
-		  "NotorEstimate": 50,
-		  "StrEstimate": 50
-
-   },
    "conversation_point_19" : {
 	      "name" : "Ask_To_Form_Alliance",
           "icon" : "ncp",
@@ -1423,7 +1477,155 @@
 				"desired_rel_val": 85
 			  }
 		  }
-   }
+   },
+   "conversation_point_20" : {
+	      "name" : "Advise To Fight",
+          "icon" : "ncp",
+	      "template" : "Advise To Fight",
+		  "honor" : 0,
+		  "pride": 0,
+		  "aggression": 0,
+		  "kindness": 0,
+		  "greed": 0,
+		  "recklessness": 0,
+		  "extroversion": 0,
+		  "affinity": 70,
+		  "notoriety": 50,
+		  "strength": 50,
+		  "AffEstimate": 50,
+		  "NotorEstimate": 50,
+		  "StrEstimate": 50,
+		  "req_preconds": {
+      "1": {
+        "general_type": 0,
+        "rel_type": 8,
+        "desired_rel_val": 60
+      }
+    },
+    "doer_succ_postconds": {
+      "1": {
+        "general_type": 0,
+        "rel_type": 7,
+        "utility": 5
+      },
+      "2": {
+        "general_type": 0,
+        "rel_type": 8,
+        "utility": 10
+      }
+    },
+    "doer_fail_postconds": {
+      "1": {
+        "general_type": 0,
+        "rel_type": 11,
+        "utility": 6
+      }
+    },
+    "receiver_succ_postconds": {
+      "1": {
+        "general_type": 0,
+        "rel_type": 4,
+        "utility": 8
+      },
+      "2": {
+        "general_type": 0,
+        "rel_type": 8,
+        "utility": 5
+      }
+    },
+    "receiver_fail_postconds": {
+      "1": {
+        "general_type": 0,
+        "rel_type": 9,
+        "utility": 5
+      },
+      "2": {
+        "general_type": 0,
+        "rel_type": 10,
+        "utility": 5
+      },
+      "3": {
+        "general_type": 0,
+        "rel_type": 11,
+        "utility": 5
+      }
+    }
+   },
+
+   "conversation_point_21" : {
+	      "name" : "Advise To Send Peace Offering To",
+          "icon" : "ncp",
+	      "template" : "Advise To Send Peace Offering To",
+		  "honor" : 0,
+		  "pride": 0,
+		  "aggression": 0,
+		  "kindness": 0,
+		  "greed": 0,
+		  "recklessness": 0,
+		  "extroversion": 0,
+		  "affinity": 70,
+		  "notoriety": 50,
+		  "strength": 50,
+		  "AffEstimate": 50,
+		  "NotorEstimate": 50,
+		  "StrEstimate": 50,
+		  "req_preconds": {
+      "1": {
+        "general_type": 0,
+        "rel_type": 8,
+        "desired_rel_val": 60
+      }
+    },
+    "doer_succ_postconds": {
+      "1": {
+        "general_type": 0,
+        "rel_type": 7,
+        "utility": 5
+      },
+      "2": {
+        "general_type": 0,
+        "rel_type": 8,
+        "utility": 10
+      }
+    },
+    "doer_fail_postconds": {
+      "1": {
+        "general_type": 0,
+        "rel_type": 11,
+        "utility": 6
+      }
+    },
+    "receiver_succ_postconds": {
+      "1": {
+        "general_type": 0,
+        "rel_type": 4,
+        "utility": 8
+      },
+      "2": {
+        "general_type": 0,
+        "rel_type": 8,
+        "utility": 5
+      }
+    },
+    "receiver_fail_postconds": {
+      "1": {
+        "general_type": 0,
+        "rel_type": 9,
+        "utility": 5
+      },
+      "2": {
+        "general_type": 0,
+        "rel_type": 10,
+        "utility": 5
+      },
+      "3": {
+        "general_type": 0,
+        "rel_type": 11,
+        "utility": 5
+      }
+    
+	}
+	}
   },
 	
   "Notoriety_Reply_Points": {
@@ -1463,7 +1665,62 @@
 		  "strength": 50,
 		  "AffEstimate": 50,
 		  "NotorEstimate": 50,
-		  "StrEstimate": 50
+		  "StrEstimate": 50,
+		  "req_preconds": {
+             "1": {
+               "general_type": 0,
+               "rel_type": 8,
+               "desired_rel_val": 60
+             }
+           },
+           "doer_succ_postconds": {
+             "1": {
+               "general_type": 0,
+               "rel_type": 7,
+               "utility": 5
+             },
+             "2": {
+               "general_type": 0,
+               "rel_type": 8,
+               "utility": 10
+             }
+           },
+           "doer_fail_postconds": {
+            "1": {
+              "general_type": 0,
+              "rel_type": 11,
+              "utility": 6
+            }
+          },
+          "receiver_succ_postconds": {
+            "1": {
+              "general_type": 0,
+              "rel_type": 4,
+              "utility": 8
+            },
+            "2": {
+              "general_type": 0,
+              "rel_type": 8,
+              "utility": 5
+            }
+          },
+          "receiver_fail_postconds": {
+            "1": {
+              "general_type": 0,
+              "rel_type": 9,
+              "utility": 5
+            },
+            "2": {
+              "general_type": 0,
+              "rel_type": 10,
+              "utility": 5
+            },
+            "3": {
+              "general_type": 0,
+              "rel_type": 11,
+              "utility": 5
+            }
+          }
    },
    "reply_point_3" : {
 	      "name" : "Take Advice To Ally With",
@@ -1483,51 +1740,13 @@
 		  "AffEstimate": 50,
 		  "NotorEstimate": 50,
 		  "StrEstimate": 50
-   },
-   "reply_point_4" : {
-	      "name" : "Take Advice To Revolt Against",
-          "icon" : "nrp",
-	      "template" : "Take Advice To Revolt Against",
-		  "corresponding_conv_point": "Advise To Revolt Against",
-		  "honor" : 0,
-		  "pride": 0,
-		  "aggression": 0,
-		  "kindness": 0,
-		  "greed": 0,
-		  "recklessness": 0,
-		  "extroversion": 0,
-		  "affinity": 50,
-		  "notoriety": 50,
-		  "strength": 50,
-		  "AffEstimate": 50,
-		  "NotorEstimate": 50,
-		  "StrEstimate": 50
+		  
    },
    "reply_point_5" : {
 	      "name" : "Accept Duel",
           "icon" : "nrp",
 	      "template" : "Accept Duel",
 		  "corresponding_conv_point": "Ask_To_Duel",
-		  "honor" : 0,
-		  "pride": 0,
-		  "aggression": 0,
-		  "kindness": 0,
-		  "greed": 0,
-		  "recklessness": 0,
-		  "extroversion": 0,
-		  "affinity": 50,
-		  "notoriety": 50,
-		  "strength": 50,
-		  "AffEstimate": 50,
-		  "NotorEstimate": 50,
-		  "StrEstimate": 50
-   },
-
-   "reply_point_15" : {
-	      "name" : "Take Advice To Destroy",
-          "icon" : "nrp",
-	      "template" : "Take Advice To Destroy",
-		  "corresponding_conv_point": "Advise To Destroy",
 		  "honor" : 0,
 		  "pride": 0,
 		  "aggression": 0,
@@ -1562,11 +1781,12 @@
 		  "NotorEstimate": 50,
 		  "StrEstimate": 50
    },
-   "reply_point_19" : {
-	      "name" : "Take Advice To Train With",
+
+   "reply_point_20" : {
+	      "name" : "Take Advice To Fight",
           "icon" : "nrp",
-	      "template" : "Take Advice To Train With",
-		  "corresponding_conv_point": "Advise To Train With",
+	      "template" : "Take Advice To Fight",
+		  "corresponding_conv_point": "Advise To Fight",
 		  "honor" : 0,
 		  "pride": 0,
 		  "aggression": 0,
@@ -1580,8 +1800,29 @@
 		  "AffEstimate": 50,
 		  "NotorEstimate": 50,
 		  "StrEstimate": 50
-   }
-  }
+		  
+   },
 
+   "reply_point_21" : {
+	      "name" : "Take Advice To Send Peace Offering To",
+          "icon" : "nrp",
+	      "template" : "Take Advice To Send Peace Offering To",
+		  "corresponding_conv_point": "Advise To Send Peace Offering To",
+		  "honor" : 0,
+		  "pride": 0,
+		  "aggression": 0,
+		  "kindness": 0,
+		  "greed": 0,
+		  "recklessness": 0,
+		  "extroversion": 0,
+		  "affinity": 50,
+		  "notoriety": 50,
+		  "strength": 50,
+		  "AffEstimate": 50,
+		  "NotorEstimate": 50,
+		  "StrEstimate": 50
+		  
+  }
+  }
 }
  
