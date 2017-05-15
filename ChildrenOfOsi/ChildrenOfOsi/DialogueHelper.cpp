@@ -167,7 +167,7 @@ dialogue_point DialogueHelper::choose_conv_pt(std::vector<ConversationLogObj*> c
 	for (auto i = curr_conversation_log.begin(); i != curr_conversation_log.end(); ++i) {
 		appealPoint tmp = std::make_pair(0, (*i)->get_conv_point());//to check against possible replies
 		auto it = std::find(possible_replies.begin(), possible_replies.end(), tmp);
-		if (it != possible_replies.end() && (*i)->get_who() == 2) {//if yemoja has said it
+		if (it != possible_replies.end() && (*i)->get_who() == other->name) {//if yemoja has said it
 				//remove it from the possible replies
 			possible_replies.erase(std::remove(possible_replies.begin(), possible_replies.end(), *it), possible_replies.end());
 		}
@@ -180,7 +180,7 @@ dialogue_point DialogueHelper::choose_conv_pt(std::vector<ConversationLogObj*> c
 	for (auto i = other->conversation_log.begin(); i != other->conversation_log.end(); ++i) {
 		appealPoint tmp = std::make_pair(0, (*i)->get_conv_point());
 		auto it = std::find(possible_replies.begin(), possible_replies.end(), tmp);
-		if (it != possible_replies.end() && (*i)->get_who() == 2) {
+		if (it != possible_replies.end() && (*i)->get_who() == other->name) {
 			possible_replies.erase(std::remove(possible_replies.begin(), possible_replies.end(), *it), possible_replies.end());
 		}
 		else {
@@ -238,7 +238,7 @@ dialogue_point DialogueHelper::choose_reply_pt(std::string point, int optn_inx, 
 
 	Hero* temp_hero = CheckClass::isHero(other);
 	ConversationLogObj* player_just_said = nullptr;
-	if(temp_hero)
+	if(temp_hero && curr_conversation_log.size() > 0)
 	    player_just_said = curr_conversation_log[curr_conversation_log.size() - 1];
 
 	//check if the player has already asked the npc this question
