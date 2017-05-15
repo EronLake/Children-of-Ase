@@ -5,6 +5,8 @@
 #include <cstdint>
 
 #include "Input.h"
+#include "Rectangle.h"
+#include "Texture.h"
 
 struct Tutorial
 {
@@ -22,6 +24,7 @@ struct Tutorial
   static void reset();
   static void destroy();
 
+  static Tutorial::Stage getCurrentStage() { return Tutorial::currentStage; }
   static bool isAnyStageActive() { return Tutorial::currentStage != Tutorial::Stage::NONE; }
   static bool isStageActive(Stage stage) { return Tutorial::currentStage == stage; }
   static bool isStageComplete(Stage stage);
@@ -33,6 +36,11 @@ struct Tutorial
 
   private:
 
+  static constexpr float GAME_START_POPUP_X = 0.0F;
+  static constexpr float GAME_START_POPUP_Y = 0.0F;
+  static constexpr float GAME_START_POPUP_WIDTH = 960.0F;
+  static constexpr float GAME_START_POPUP_HEIGHT = 540.0F;
+
   static Stage currentStage;
   static bool isPaused;
 
@@ -40,14 +48,14 @@ struct Tutorial
   static bool completedStageDialogue;
   static bool completedStageCombat;
 
+  // static Rectangle *stageGameStartPopupRect;
+  
+  static Texture *stageGameStartPopupTex;
+
   Tutorial() = delete;
   Tutorial(const Tutorial  &) = delete;
   Tutorial(const Tutorial &&) = delete;
   Tutorial   operator=(const Tutorial  &) = delete;
   Tutorial & operator=(const Tutorial &&) = delete;
   ~Tutorial() = delete;
-
-  static void startStageGameStart();
-  static void startStageDialogue();
-  static void startStageCombat();
 };

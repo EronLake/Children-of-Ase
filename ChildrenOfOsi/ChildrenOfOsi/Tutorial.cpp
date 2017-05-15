@@ -1,6 +1,8 @@
 #include "Tutorial.h"
 
+#include "AssetInfo.h"
 #include "GameState.h"
+#include "GameWindow.h"
 
 using namespace std;
 
@@ -11,12 +13,19 @@ bool Tutorial::completedStageGameStart = false;
 bool Tutorial::completedStageDialogue = false;
 bool Tutorial::completedStageCombat = false;
 
+// Rectangle *Tutorial::stageGameStartPopupRect = nullptr;
+
+Texture *Tutorial::stageGameStartPopupTex = nullptr;
+
 /**
  * Initializes the tutorial system.
  */
 void Tutorial::init()
 {
-
+  /*Tutorial::stageGameStartPopupRect = new Rectangle({Tutorial::GAME_START_POPUP_X, Tutorial::GAME_START_POPUP_Y}, Tutorial::GAME_START_POPUP_WIDTH, Tutorial::GAME_START_POPUP_HEIGHT);
+  Tutorial::stageGameStartPopupTex = new Texture();
+  Tutorial::stageGameStartPopupTex->setFile(SPRITES_PATH + "Tutorial_GameStartPopup.png", 1);
+  Tutorial::stageGameStartPopupRect->sprite.setTexture(Tutorial::stageGameStartPopupTex);*/
 }
 
 /**
@@ -38,7 +47,9 @@ void Tutorial::reset()
  */
 void Tutorial::destroy()
 {
+  // delete Tutorial::stageGameStartPopupRect;
 
+  delete Tutorial::stageGameStartPopupTex;
 }
 
 /**
@@ -73,18 +84,18 @@ void Tutorial::launchStage(Stage stage, Input &input, bool pause)
 
   Tutorial::currentStage = stage;
   Tutorial::isPaused = pause;
-  input.current_game_state = (pause) ?
-    game_state::pause_menu : game_state::in_game;
 
   switch(stage) {
     case Tutorial::Stage::GAME_START:
-      Tutorial::startStageGameStart();
+      input.current_game_state = game_state::main_menu;
       break;
     case Tutorial::Stage::DIALOGUE:
-      Tutorial::startStageDialogue();
+      input.current_game_state = (pause) ?
+        game_state::pause_menu : game_state::in_game;
       break;
     case Tutorial::Stage::COMBAT:
-      Tutorial::startStageCombat();
+      input.current_game_state = (pause) ?
+        game_state::pause_menu : game_state::in_game;
       break;
   }
 }
@@ -114,18 +125,6 @@ void Tutorial::updateStage(Stage stage)
  */
 void Tutorial::completeStage(Input &input)
 {
-  switch(Tutorial::currentStage) {
-    case Tutorial::Stage::GAME_START:
-
-      break;
-    case Tutorial::Stage::DIALOGUE:
-
-      break;
-    case Tutorial::Stage::COMBAT:
-
-      break;
-  }
-
   Tutorial::currentStage = Tutorial::Stage::NONE;
   Tutorial::isPaused = false;
   input.current_game_state = game_state::in_game;
@@ -136,29 +135,16 @@ void Tutorial::completeStage(Input &input)
  */
 void Tutorial::drawTutorial()
 {
+  switch(Tutorial::currentStage) {
+    case Tutorial::Stage::GAME_START:
+      /*GameWindow::drawSprite(Tutorial::stageGameStartPopupRect->getX(), Tutorial::stageGameStartPopupRect->getY(),
+        Tutorial::stageGameStartPopupRect->getWidth(), Tutorial::stageGameStartPopupRect->getHeight(), Tutorial::stageGameStartPopupRect->getSprite());*/
+      break;
+    case Tutorial::Stage::DIALOGUE:
 
-}
+      break;
+    case Tutorial::Stage::COMBAT:
 
-/**
- * 
- */
-void Tutorial::startStageGameStart()
-{
-
-}
-
-/**
- * 
- */
-void Tutorial::startStageDialogue()
-{
-
-}
-
-/**
- * 
- */
-void Tutorial::startStageCombat()
-{
-
+      break;
+  }
 }

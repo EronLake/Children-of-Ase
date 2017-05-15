@@ -30,6 +30,7 @@
 #include "TaskBufferTestSuite.h"
 #include <Windows.h>
 #include "RegionState.h"
+#include "Tutorial.h"
 //#include "DialogueGui.h"
 
 //#include "Pool.h"
@@ -153,7 +154,9 @@ int main() {
 
 	QuadTree* collideTree = new QuadTree(0, *screen);
 	GameWindow::init();
+  Tutorial::init();
 	GAMEPLAY_LOOP(collideTree);
+  Tutorial::destroy();
 
 	return 0;
 }
