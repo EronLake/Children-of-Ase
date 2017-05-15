@@ -50,7 +50,7 @@ void PlayerActExecFunctions::execute_start(std::string act_name, Hero* receiver)
 	//creates the memory for the reciever as well
 	//ActionHelper::create_memory(cur_action, receiver);
 
-	receiver->set_busy(Hero::BUSY_REC);
+	receiver->set_busy(Hero::BUSY_REC_FIGHT);
 
 	if (act_name == "Fight" && !War::at_war(player->getVillage(), receiver->getVillage())) {
 		new War(player->getVillage(), receiver->getVillage());
