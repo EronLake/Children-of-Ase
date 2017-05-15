@@ -7,6 +7,7 @@
 #include "CheckClass.h"
 #include "json.h"
 #include "RegionState.h"
+#include "Tutorial.h"
 
 extern bool game_ended;
 
@@ -624,12 +625,8 @@ void Input::InputCheck()
 			// move selected option down
 		}
 		if (ENTER) {
-			// assuming menu only has start option, so move in game
-			if (current_game_state == game_state::main_menu) {
-				current_game_state = game_state::in_game;
-				//current_game_state = game_state::victory_menu;
-				
-			}
+      Tutorial::completeStage(*this);
+      this->current_game_state = game_state::in_game;
 		}
 	}
 	if (current_game_state == game_state::in_game) {
