@@ -728,6 +728,7 @@ void DialogueController::otherResponse(std::string info, std::string hero_topic)
 			if (accepted_action) {
 				dialogue_point diog_pt = { "Take Advice To Fight","Take Advice To Fight","",curr_hero_topic,"1" };
 				std::string reply_pt_sentence = dialogue.gen_dialog(diog_pt, temp_hero);
+				replace_all(reply_pt_sentence,"HERO",curr_hero_topic);
 				message = other->getName() + ": " + reply_pt_sentence + "\n\n";
 				//state = 8;
 			}
@@ -735,6 +736,7 @@ void DialogueController::otherResponse(std::string info, std::string hero_topic)
 				/////////////need to be changed to correct calls/dialog if not accepted///////////////////
 				dialogue_point diog_pt = { "Take Advice To Fight","Take Advice To Fight","",curr_hero_topic,"1" };
 				std::string reply_pt_sentence = dialogue.gen_dialog_negative(diog_pt, temp_hero);
+				replace_all(reply_pt_sentence, "HERO", curr_hero_topic);
 				message = other->getName() + ": " + reply_pt_sentence + "\n\n";
 				//state = 1;
 			}
@@ -748,6 +750,7 @@ void DialogueController::otherResponse(std::string info, std::string hero_topic)
 			if (accepted_action) {
 				dialogue_point diog_pt = { "Take Advice To Conquer","Take Advice To Conquer","",curr_hero_topic,"1" };
 				std::string reply_pt_sentence = dialogue.gen_dialog(diog_pt, temp_hero);
+				replace_all(reply_pt_sentence, "HERO", curr_hero_topic);
 				message = other->getName() + ": " + reply_pt_sentence + "\n\n";
 				//state = 8;
 			}
@@ -755,6 +758,7 @@ void DialogueController::otherResponse(std::string info, std::string hero_topic)
 				/////////////need to be changed to correct calls/dialog if not accepted///////////////////
 				dialogue_point diog_pt = { "Take Advice To Conquer","Take Advice To Conquer","",curr_hero_topic,"1" };
 				std::string reply_pt_sentence = dialogue.gen_dialog_negative(diog_pt, temp_hero);
+				replace_all(reply_pt_sentence, "HERO", curr_hero_topic);
 				message = other->getName() + ": " + reply_pt_sentence + "\n\n";
 				//state = 1;
 			}
@@ -768,6 +772,7 @@ void DialogueController::otherResponse(std::string info, std::string hero_topic)
 			if (accepted_action) {
 				dialogue_point diog_pt = { "Take Advice To Send Peace Offering To","Take Advice To Send Peace Offering To","",curr_hero_topic,"1" };
 				std::string reply_pt_sentence = dialogue.gen_dialog(diog_pt, temp_hero);
+				replace_all(reply_pt_sentence, "HERO", curr_hero_topic);
 				message = other->getName() + ": " + reply_pt_sentence + "\n\n";
 				//state = 8;
 			}
@@ -775,6 +780,7 @@ void DialogueController::otherResponse(std::string info, std::string hero_topic)
 				/////////////need to be changed to correct calls/dialog if not accepted///////////////////
 				dialogue_point diog_pt = { "Take Advice To Send Peace Offering To","Take Advice To Send Peace Offering To","",curr_hero_topic,"1" };
 				std::string reply_pt_sentence = dialogue.gen_dialog_negative(diog_pt, temp_hero);
+				replace_all(reply_pt_sentence, "HERO", curr_hero_topic);
 				message = other->getName() + ": " + reply_pt_sentence + "\n\n";
 				//state = 1;
 			}
@@ -788,6 +794,7 @@ void DialogueController::otherResponse(std::string info, std::string hero_topic)
 			if (accepted_action) {
 				dialogue_point diog_pt = { "Take Advice To Ally With","Take Advice To Ally With","",curr_hero_topic,"1" };
 				std::string reply_pt_sentence = dialogue.gen_dialog(diog_pt, temp_hero);
+				replace_all(reply_pt_sentence, "HERO", curr_hero_topic);
 				message = other->getName() + ": " + reply_pt_sentence + "\n\n";
 				//state = 8;
 			}
@@ -795,6 +802,7 @@ void DialogueController::otherResponse(std::string info, std::string hero_topic)
 				/////////////need to be changed to correct calls/dialog if not accepted///////////////////
 				dialogue_point diog_pt = { "Take Advice To Ally With","Take Advice To Ally With","",curr_hero_topic,"1" };
 				std::string reply_pt_sentence = dialogue.gen_dialog_negative(diog_pt, temp_hero);
+				replace_all(reply_pt_sentence, "HERO", curr_hero_topic);
 				message = other->getName() + ": " + reply_pt_sentence + "\n\n";
 				//state = 1;
 			}
@@ -857,7 +865,7 @@ void DialogueController::otherResponse(std::string info, std::string hero_topic)
 				PlayerActExecFunctions::execute_end(false);
 			}
 		}
-		else if (replyString == "Take Advice To Fight With") {
+		else if (replyString == "Take Advice To Fight") {
 			//choose different dialog if they denied the action
 			if (accepted_action) {
 				dialogue_point diog_pt = { "Confirm Fight","Confirm Fight","",curr_hero_topic,"1" };
@@ -868,10 +876,13 @@ void DialogueController::otherResponse(std::string info, std::string hero_topic)
 				//ActionPool* hero_map;
 				//hero_map = temp_hero->actionPool_map[dialogue.hero_name_to_int(curr_hero_topic)];
 				int hero_num = dialogue.hero_name_to_int(curr_hero_topic);
-				std::string her_str = "Fight" + '_' + std::to_string(hero_num);
-				planner->set_current_action(Containers::action_table[her_str]);
+				std::string hero_id = std::to_string(hero_num);
+				std::string act_str = "Fight_" + hero_id;
+				planner->set_current_action(Containers::action_table[act_str]);
 				planner->get_current_action()->setDoer(temp_hero);
 				planner->get_current_action()->setOwner(temp_hero);
+				std::string my_hero = dialogue.int_to_hero_name(hero_num);
+				planner->get_current_action()->setReceiver(Containers::hero_table[my_hero]);
 				ActionExecFunctions::execute_fight(planner->get_current_action());
 				
 			}
@@ -896,10 +907,13 @@ void DialogueController::otherResponse(std::string info, std::string hero_topic)
 				//ActionPool* hero_map;
 				//hero_map = temp_hero->actionPool_map[dialogue.hero_name_to_int(curr_hero_topic)];
 				int hero_num = dialogue.hero_name_to_int(curr_hero_topic);
-				std::string her_str = "Conquer" + '_' + std::to_string(hero_num);
-				planner->set_current_action(Containers::action_table[her_str]);
+				std::string hero_id = std::to_string(hero_num);
+				std::string act_str = "Conquer_" + hero_id;
+				planner->set_current_action(Containers::action_table[act_str]);
 				planner->get_current_action()->setDoer(temp_hero);
 				planner->get_current_action()->setOwner(temp_hero);
+				std::string my_hero = dialogue.int_to_hero_name(hero_num);
+				planner->get_current_action()->setReceiver(Containers::hero_table[my_hero]);
 				ActionExecFunctions::execute_conquer(planner->get_current_action());
 			}
 			else {
@@ -940,10 +954,13 @@ void DialogueController::otherResponse(std::string info, std::string hero_topic)
 				//ActionPool* hero_map;
 				//hero_map = temp_hero->actionPool_map[dialogue.hero_name_to_int(curr_hero_topic)];
 				int hero_num = dialogue.hero_name_to_int(curr_hero_topic);
-				std::string her_str = "Form_Alliance" + '_' + std::to_string(hero_num);
-				planner->set_current_action(Containers::action_table[her_str]);
+				std::string hero_id = std::to_string(hero_num);
+				std::string act_str = "Form_Alliance_" + hero_id;
+				planner->set_current_action(Containers::action_table[act_str]);
 				planner->get_current_action()->setDoer(temp_hero);
 				planner->get_current_action()->setOwner(temp_hero);
+				std::string my_hero = dialogue.int_to_hero_name(hero_num);
+				planner->get_current_action()->setReceiver(Containers::hero_table[my_hero]);
 				ActionExecFunctions::execute_form_alliance(planner->get_current_action());
 			}
 			else {

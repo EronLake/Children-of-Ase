@@ -1665,62 +1665,8 @@
 		  "strength": 50,
 		  "AffEstimate": 50,
 		  "NotorEstimate": 50,
-		  "StrEstimate": 50,
-		  "req_preconds": {
-             "1": {
-               "general_type": 0,
-               "rel_type": 8,
-               "desired_rel_val": 60
-             }
-           },
-           "doer_succ_postconds": {
-             "1": {
-               "general_type": 0,
-               "rel_type": 7,
-               "utility": 5
-             },
-             "2": {
-               "general_type": 0,
-               "rel_type": 8,
-               "utility": 10
-             }
-           },
-           "doer_fail_postconds": {
-            "1": {
-              "general_type": 0,
-              "rel_type": 11,
-              "utility": 6
-            }
-          },
-          "receiver_succ_postconds": {
-            "1": {
-              "general_type": 0,
-              "rel_type": 4,
-              "utility": 8
-            },
-            "2": {
-              "general_type": 0,
-              "rel_type": 8,
-              "utility": 5
-            }
-          },
-          "receiver_fail_postconds": {
-            "1": {
-              "general_type": 0,
-              "rel_type": 9,
-              "utility": 5
-            },
-            "2": {
-              "general_type": 0,
-              "rel_type": 10,
-              "utility": 5
-            },
-            "3": {
-              "general_type": 0,
-              "rel_type": 11,
-              "utility": 5
-            }
-          }
+		  "StrEstimate": 50
+		  
    },
    "reply_point_3" : {
 	      "name" : "Take Advice To Ally With",
