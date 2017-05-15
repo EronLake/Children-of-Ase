@@ -1629,6 +1629,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 		}
 	});*/
 
+  Tutorial::launchStage(Tutorial::Stage::GAME_START, *iController, true);
 	current_game_state = game_state::main_menu;
 
 	//insert all of the immovable objects into the quad tree

@@ -48,7 +48,7 @@ struct Tutorial
   static bool completedStageDialogue;
   static bool completedStageCombat;
 
-  // static Rectangle *stageGameStartPopupRect;
+  static Sprite *stageGameStartPopupSprite;
   
   static Texture *stageGameStartPopupTex;
 
