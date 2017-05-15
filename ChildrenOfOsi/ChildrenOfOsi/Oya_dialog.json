@@ -458,11 +458,11 @@
     },
 
 	"Already_Asked": {
-        "1": "You are quite the joker. Remember, you have already asked me that.",
-        "2": "You are quite the joker. Remember, you have already asked me that.",
-        "3": "You are quite the joker. Remember, you have already asked me that.",
-        "4": "You are quite the joker. Remember, you have already asked me that.",
-        "5": "You are quite the joker. Remember, you have already asked me that."
+        "1": "Its not wise to ask people the same question over and over again.",
+        "2": "Its not wise to ask people the same question over and over again.",
+        "3": "Its not wise to ask people the same question over and over again.",
+        "4": "Its not wise to ask people the same question over and over again.",
+        "5": "Its not wise to ask people the same question over and over again."
     },
 
 	"Response_No_More_Phrases": {
