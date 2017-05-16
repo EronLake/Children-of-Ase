@@ -42,6 +42,7 @@ public:
 	static bool offer_quest_on_exit(Hero* hero);
 	static void DialogueController::create_farewell();
 	static void player_choose_soldier();
+	static void shrine_interact();
 	static void player_conversation_point_soldier();
 	static void other_response_soldier(std::string info, std::string hero_topic);
 	static void other_conversation_point_soldier(dialogue_point line);
@@ -93,6 +94,7 @@ public:
 	static bool quited_gui;
 	static bool first_q_press;
 	static bool took_advice;
+	static int shrine_talk_counter;
 
 };
 

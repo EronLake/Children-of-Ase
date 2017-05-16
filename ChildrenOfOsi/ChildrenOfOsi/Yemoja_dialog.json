@@ -529,6 +529,22 @@
         "5": "I hope the quest I gave you is going smoothly."
     },
 
+	"Terrible Advice": {
+        "1": "Following your advice proved detrimental to me. Next time I will think twice before acting on your suggestion.",
+        "2": "Following your advice proved detrimental to me. Next time I will think twice before acting on your suggestion.",
+        "3": "Following your advice proved detrimental to me. Next time I will think twice before acting on your suggestion.",
+        "4": "Following your advice proved detrimental to me. Next time I will think twice before acting on your suggestion.",
+        "5": "Following your advice proved detrimental to me. Next time I will think twice before acting on your suggestion."
+    },
+
+	"Good Advice": {
+        "1": "You really do give great advice. Many thanks.",
+        "2": "You really do give great advice. Many thanks.",
+        "3": "You really do give great advice. Many thanks.",
+        "4": "You really do give great advice. Many thanks.",
+        "5": "You really do give great advice. Many thanks."
+    },
+
 	"Exit Quest": {
         "1": "Please wait. There is something I would like you to do for me.",
         "2": "Please wait. There is something I would like you to do for me.",

@@ -64,6 +64,13 @@ public:
 	static constexpr int BUSY_TALK = 5;
 	static constexpr int BUSY_FIGHT = 6;
 
+	//for suggested actions(move tos)
+	static constexpr int NOT_SUGG_ACT = 0;
+	static constexpr int SUGG_ACT = 1;
+	static constexpr int FAIL_SUGG_ACT = 2;
+	static constexpr int SUCC_SUGG_ACT = 3;
+	int SUGG_ACT_STATUS;
+
 private:
 
 	std::unordered_map<Action*,int> quests;

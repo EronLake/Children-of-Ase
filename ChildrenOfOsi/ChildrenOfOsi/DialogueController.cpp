@@ -116,6 +116,8 @@ bool DialogueController::quited_gui = false;
 bool DialogueController::first_q_press = false;
 bool DialogueController::took_advice = false;
 
+int DialogueController::shrine_talk_counter = 0;
+
 DialogueController::DialogueController()
 {
 	srand(time(0));//seeds rand function to ensure good variety of random numbers
@@ -174,11 +176,44 @@ void DialogueController::player_choose_soldier()
 	//If the soldier the player is talking to is in the player's party, display
 	//option to remove them from party, else display option to recruit them for party
 	if(soldier->getCurrentLeader() == player)
-		soldier_options[StrengthIcon].push_back({ "Remove_From_Party","Remove_From_Party","","" });
+		soldier_options[StrengthIcon].push_back({ "Remove_From_Party","Remove_From_Party","","","1"});
 	else
-	    soldier_options[StrengthIcon].push_back({"Recruit_For_Party","Recruit_For_Party","",""});
+	    soldier_options[StrengthIcon].push_back({"Recruit_For_Party","Recruit_For_Party","","","1"});
 	
 	state = 1;
+}
+
+/*Is called instead of player_choose_soldier() and player_choose() functions if the player interacts with shrine.*/
+void DialogueController::shrine_interact()
+{
+	dialogue_point dpoint;
+	switch (shrine_talk_counter) {
+	case 0:
+		dpoint = {"Shrine Talk 1","Shrine Talk 1"};
+		break;
+	case 1:
+		dpoint = {"Shrine Talk 2","Shrine Talk 2"};
+		break;
+	case 2:
+		dpoint = {"Shrine Talk 3","Shrine Talk 3"};
+		break;
+	case 3:
+		dpoint = {"Shrine Talk 4","Shrine Talk 4"};
+		break;
+	}
+	
+	//checks if some stat is high enough to speak to shrine
+	//placeholder for now
+	bool some_check = false;
+	if (some_check == false)
+		dpoint = { "Shrine Not Worthy" ,"Shrine Not Worthy" };
+
+	std::string conversation_pt_sentence = dialogue.gen_dialog_shrine(dpoint, other);
+	message = other->getName() + ": " + conversation_pt_sentence;
+	if (shrine_talk_counter == 3 || dpoint[ConvPointName] == "Shrine Not Worthy")
+		state = 7;
+	else
+	    state = 11;
 }
 
 /*Identifies the player's conversation point selection, stores
@@ -496,8 +531,8 @@ void DialogueController::otherConversationPoint(dialogue_point line)
 	std::string con_pt_sentence = dialogue.gen_dialog(point, temp_hero);
 
 	/*Stores the npc's conversation and reply points as entries in the
-	log for the current conversation. The reply point is line[ConvPointName()] and the
-	conversation point is point[ConvPointName()].*/
+	log for the current conversation. The reply point is line[ConvPointName] and the
+	conversation point is point[ConvPointName].*/
     if(line[ConvPointName] != "Already_Asked"){
 	    ConversationLogObj* conv_log_obj = new ConversationLogObj();
 	    Memory* mem = nullptr;
@@ -876,7 +911,8 @@ void DialogueController::otherResponse(std::string info, std::string hero_topic)
 				//ActionPool* hero_map;
 				//hero_map = temp_hero->actionPool_map[dialogue.hero_name_to_int(curr_hero_topic)];
 				int hero_num = dialogue.hero_name_to_int(curr_hero_topic);
-				std::string hero_id = std::to_string(hero_num);
+				//std::string hero_id = std::to_string(hero_num);
+				std::string hero_id = std::to_string(temp_hero->name);
 				std::string act_str = "Fight_" + hero_id;
 				planner->set_current_action(Containers::action_table[act_str]);
 				planner->get_current_action()->setDoer(temp_hero);
@@ -906,7 +942,8 @@ void DialogueController::otherResponse(std::string info, std::string hero_topic)
 				Planner* planner = AIController::get_plan(CheckClass::isHero(other)->name);
 				//ActionPool* hero_map;
 				//hero_map = temp_hero->actionPool_map[dialogue.hero_name_to_int(curr_hero_topic)];
-				int hero_num = dialogue.hero_name_to_int(curr_hero_topic);
+				int hero_num = temp_hero->name;
+				//std::string hero_id = std::to_string(hero_num);
 				std::string hero_id = std::to_string(hero_num);
 				std::string act_str = "Conquer_" + hero_id;
 				planner->set_current_action(Containers::action_table[act_str]);
@@ -953,7 +990,7 @@ void DialogueController::otherResponse(std::string info, std::string hero_topic)
 				Planner* planner = AIController::get_plan(CheckClass::isHero(other)->name);
 				//ActionPool* hero_map;
 				//hero_map = temp_hero->actionPool_map[dialogue.hero_name_to_int(curr_hero_topic)];
-				int hero_num = dialogue.hero_name_to_int(curr_hero_topic);
+				int hero_num = temp_hero->name;
 				std::string hero_id = std::to_string(hero_num);
 				std::string act_str = "Form_Alliance_" + hero_id;
 				planner->set_current_action(Containers::action_table[act_str]);
@@ -1110,8 +1147,16 @@ void DialogueController::startConversation(WorldObj* n, bool playerTalk)
 				else
 					++i;
 			}
-			if (player_doing_quest)
+			if (player_doing_quest && temp_hero->SUGG_ACT_STATUS == 0)
 				message = n->getName() + ": " + dialogue.gen_dialog({ "Quest_In_Progress","Quest_In_Progress" }, temp_hero);
+			else if (temp_hero->SUGG_ACT_STATUS == 2) {
+				message = n->getName() + ": " + dialogue.gen_dialog({ "Terrible Advice","Terrible Advice" }, temp_hero);
+				temp_hero->SUGG_ACT_STATUS = 0;
+			}
+			else if (temp_hero->SUGG_ACT_STATUS == 3) {
+				message = n->getName() + ": " + dialogue.gen_dialog({ "Good Advice","Good Advice" }, temp_hero);
+				temp_hero->SUGG_ACT_STATUS = 0;
+			}
 			else if (quest_complete)
 				message = n->getName() + ": " + dialogue.gen_dialog({ "Quest_Complete","Quest_Complete" }, temp_hero);
 			else
@@ -1122,8 +1167,14 @@ void DialogueController::startConversation(WorldObj* n, bool playerTalk)
 		if (playerTalk && temp_hero) {
 			PlayerChoose();
 		}
-		else//call player_choose fucntion for soldiers instead if not talking to Hero
-			player_choose_soldier();
+		else {//call player_choose fucntion for soldiers instead if not talking to Hero
+			Soldier* soldier;
+			soldier = dynamic_cast<Soldier*>(other);
+			if (soldier)
+				player_choose_soldier();
+			else
+				shrine_interact();
+		}
 }
 
 /*Returns pointer to the npc in the conversation.*/
@@ -1182,9 +1233,11 @@ void DialogueController::exitDialogue()
 		if (temp_hero) {
 			remove_hero_related_conv_points();
 		}
-		else
-			remove_soldier_opts();
-
+		else {
+			Soldier* sold = dynamic_cast<Soldier*>(other);
+			if(sold)
+			    remove_soldier_opts();
+		}
 		other = nullptr;
 		state = 0;
 		DialogueController::scroll_control = 0;
@@ -1194,6 +1247,7 @@ void DialogueController::exitDialogue()
 		started_conv = false;
 		quited_gui = true;
 		first_q_press = false;
+		shrine_talk_counter = 0;
 	}
 	else {
 		state = 7;
@@ -1501,3 +1555,4 @@ bool DialogueController::check_advice_acceptance(Player* p, Hero* npc) {
 	}
 
 }
+

@@ -239,6 +239,17 @@ void ActionExecFunctions::execute_form_alliance(Action* form_alliance) {
 
 			if (ActionHelper::hero_respond(form_alliance)) {
 				form_alliance->apply_postconditions(true);
+
+				if (form_alliance->getDoer()->SUGG_ACT_STATUS == 1) {
+					//sets suggested action flag to success
+					form_alliance->getDoer()->SUGG_ACT_STATUS = 3;
+
+					//update notoriety/affinity/strength accordingly
+					form_alliance->getDoer()->rel[SHANGO]->setNotoriety(form_alliance->getDoer()->rel[SHANGO]->getNotoriety() + 7);
+					form_alliance->getDoer()->rel[SHANGO]->setAffinity(form_alliance->getDoer()->rel[SHANGO]->getAffinity() + 7);
+					form_alliance->getDoer()->rel[SHANGO]->setStrength(form_alliance->getDoer()->rel[SHANGO]->getStrength() + 7);
+				}
+
 				//doer_mem->setCategory("success"); receiver_mem->setCategory("success");
 				//doer_mem->setReason("We joined forces");
 				//receiver_mem->setReason("We joined forces");
@@ -246,6 +257,15 @@ void ActionExecFunctions::execute_form_alliance(Action* form_alliance) {
 			}
 			else {
 				form_alliance->apply_postconditions(false);
+
+				if (form_alliance->getDoer()->SUGG_ACT_STATUS == 1) {
+					//sets suggested action flag to failure
+					form_alliance->getDoer()->SUGG_ACT_STATUS = 2;
+
+					//update notoriety/affinity/strength accordingly
+					form_alliance->getDoer()->rel[SHANGO]->setNotoriety(form_alliance->getDoer()->rel[SHANGO]->getNotoriety() - 7);
+				}
+
 				//doer_mem->setCategory("failure"); receiver_mem->setCategory("success");
 				//doer_mem->setReason("They rejected our Alliance");
 				//receiver_mem->setReason("We rejected their Alliance");
@@ -364,6 +384,17 @@ void ActionExecFunctions::execute_fight(Action* fight)
 		if (fight->getReceiver()->getParty()->getMembers().size() == fight->getReceiver()->getParty()->get_down_members().size()) {
 			//Apply succ-post-conditions
 			fight->apply_postconditions(true);
+
+			if (fight->getDoer()->SUGG_ACT_STATUS == 1) {
+				//sets suggested action flag to success
+				fight->getDoer()->SUGG_ACT_STATUS = 3;
+
+				//update notoriety/affinity/strength accordingly
+				fight->getDoer()->rel[SHANGO]->setNotoriety(fight->getDoer()->rel[SHANGO]->getNotoriety() + 7);
+				fight->getDoer()->rel[SHANGO]->setAffinity(fight->getDoer()->rel[SHANGO]->getAffinity() + 7);
+				fight->getDoer()->rel[SHANGO]->setStrength(fight->getDoer()->rel[SHANGO]->getStrength() + 7);
+
+			}
 			//if planner->action_suggested then
 				//suggest_fight->apply_postconditions(true)
 				//planner->action_suggested = false;
@@ -378,6 +409,15 @@ void ActionExecFunctions::execute_fight(Action* fight)
 		{
 			//Apply fail-post-conditions
 			fight->apply_postconditions(false);
+
+			if (fight->getDoer()->SUGG_ACT_STATUS == 1) {
+				//sets suggested action flag to failure
+				fight->getDoer()->SUGG_ACT_STATUS = 2;
+
+				//update notoriety/affinity/strength accordingly
+				fight->getDoer()->rel[SHANGO]->setNotoriety(fight->getDoer()->rel[SHANGO]->getNotoriety() - 7);
+
+			}
 			//if planner->action_suggested then
 				//fight->suggested->apply_postconditions(false)
 				//planner->action_suggested = false;
@@ -498,6 +538,18 @@ void ActionExecFunctions::execute_conquer(Action* conq)
 		if (conq->getReceiver()->getVillage()->get_village_health() <= 0) {
 			//Apply succ-post-conditions
 			conq->apply_postconditions(true);
+
+			if (conq->getDoer()->SUGG_ACT_STATUS == 1) {
+				//sets suggested action flag to success
+				conq->getDoer()->SUGG_ACT_STATUS = 3;
+
+				//update notoriety/affinity/strength accordingly
+				conq->getDoer()->rel[SHANGO]->setNotoriety(conq->getDoer()->rel[SHANGO]->getNotoriety() + 7);
+				conq->getDoer()->rel[SHANGO]->setAffinity(conq->getDoer()->rel[SHANGO]->getAffinity() + 7);
+				conq->getDoer()->rel[SHANGO]->setStrength(conq->getDoer()->rel[SHANGO]->getStrength() + 7);
+
+			}
+
 			//update_memory category as a success 
 			//doer_mem->setCategory("success"); receiver_mem->setCategory("failure");
 			//update reason
@@ -509,6 +561,15 @@ void ActionExecFunctions::execute_conquer(Action* conq)
 		{
 			//Apply fail-post-conditions
 			conq->apply_postconditions(false);
+
+			if (conq->getDoer()->SUGG_ACT_STATUS == 1) {
+				//sets suggested action flag to failure
+				conq->getDoer()->SUGG_ACT_STATUS = 2;
+
+				//update notoriety/affinity/strength accordingly
+				conq->getDoer()->rel[SHANGO]->setNotoriety(conq->getDoer()->rel[SHANGO]->getNotoriety() - 7);
+
+			}
 			//update_memory as faiure
 			//doer_mem->setCategory("failure"); receiver_mem->setCategory("success");
 			//update reason

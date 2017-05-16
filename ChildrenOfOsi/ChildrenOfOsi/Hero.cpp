@@ -9,6 +9,8 @@ using namespace std;
 
 Hero::Hero()
 {
+	SUGG_ACT_STATUS = 0; //used when player suggests action to NPC
+
 	//initializes all 4 action pools for each hero
 	for (int i = 1; i <= 5; i++)
 	{
@@ -27,6 +29,8 @@ Hero::Hero()
 
 Hero::Hero(int _name, float x, float y, bool col) :SplSoldier(x, y, col)
 {
+	SUGG_ACT_STATUS = 0; //used when player suggests action to NPC
+
 	name = _name;
 	float speed = 6.0F;
 	NPC::setSpeed(speed);
@@ -56,6 +60,8 @@ Hero::Hero(int _name, float x, float y, bool col) :SplSoldier(x, y, col)
 
 Hero::Hero(int _name, Vector2f p_topLeft, float p_width, float p_height):SplSoldier(p_topLeft,p_width,p_height)
 {
+	SUGG_ACT_STATUS = 0; //used when player suggests action to NPC
+
 	name = _name;
 	float speed = 6.0F;
 	NPC::setSpeed(speed);

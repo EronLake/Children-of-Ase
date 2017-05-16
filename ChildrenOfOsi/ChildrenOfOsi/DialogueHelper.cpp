@@ -389,6 +389,14 @@ std::string DialogueHelper::gen_dialog_negative(dialogue_point diog_pt, Hero* he
 	return sentence;
 }
 
+std::string DialogueHelper::gen_dialog_shrine(dialogue_point diog_pt, WorldObj* shrine)
+{
+	std::string name = shrine->getName();
+	std::string sentence = convert_to_sentence(get_dialog_shrine(name, diog_pt));
+
+	return sentence;
+}
+
 //poientially don't need this function
 std::string DialogueHelper::gen_reply(dialogue_point diog_pt, Hero* hero, int relationship_phrase_picker, int relationship_phrase_picker_shango)
 {
@@ -559,6 +567,48 @@ dialogue_point DialogueHelper::get_dialog_negative(std::string name, dialogue_po
 					.asString());
 				//ofs << "dp: " << root[tmp][to_string(j)]
 				//.asString() << std::endl;
+			}
+			else {
+				dpoint.push_back(tmp);
+
+			}
+
+		}
+	}
+	else {
+		dpoint.push_back(root[diog_pt[ConvPointName]][to_string(phrase_picker)]
+			.asString());
+	}
+
+	return dpoint;
+
+}
+
+dialogue_point DialogueHelper::get_dialog_shrine(std::string name, dialogue_point diog_pt) {
+
+	dialogue_template dtemp = get_template(diog_pt);
+
+	std::string my_name = name;
+
+	Json::Value root;
+
+	std::string dialogue_filename = my_name + "_dialog.json";
+
+	std::ifstream file(dialogue_filename);
+	file >> root;
+
+	dialogue_point dpoint;
+
+	int phrase_picker = rand() % 5 + 1;//rand num between 1 and 5 inclusive
+
+	if (name != "Shango") {
+		std::string tmp = "";
+		for (int i = 1; i <= dtemp.size(); i++) {
+			tmp = dtemp[i - 1];
+			if (tmp != "?" && tmp != "," && tmp != "." &&
+				tmp != "!" && tmp != "_") {
+				dpoint.push_back(root[tmp][to_string(phrase_picker)]
+					.asString());
 			}
 			else {
 				dpoint.push_back(tmp);

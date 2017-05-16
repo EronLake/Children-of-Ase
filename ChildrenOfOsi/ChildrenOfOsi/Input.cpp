@@ -1114,8 +1114,11 @@ void Input::InputCheck()
 						Hero* temp_hero;
 						if (temp_hero = CheckClass::isHero(DialogueController::getOther()))
                             DialogueController::PlayerConversationPoint();
-						else if (DialogueController::optionsIndex == 0)
-							DialogueController::player_conversation_point_soldier();
+						else if (DialogueController::optionsIndex == 0) {
+							Soldier* sold = dynamic_cast<Soldier*>(DialogueController::getOther());
+							if(sold)
+							    DialogueController::player_conversation_point_soldier();
+						}
 					}
 					else if (DialogueController::getState() == 2) {
 						count = 10;
@@ -1163,6 +1166,14 @@ void Input::InputCheck()
 						count = 10;
 						DialogueController::create_farewell();
 						DialogueController::state = 7;
+					}
+					else if (DialogueController::getState() == 11) {
+						count = 10;
+						DialogueController::shrine_talk_counter++;
+						DialogueController::shrine_interact();
+						if (DialogueController::shrine_talk_counter == 3) {
+							DialogueController::state = 7;
+						}
 					}
 				}
 			}
