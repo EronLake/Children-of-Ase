@@ -13,7 +13,7 @@ bool Tutorial::completedStageGameStart = false;
 bool Tutorial::completedStageDialogue = false;
 bool Tutorial::completedStageCombat = false;
 
-// Rectangle *Tutorial::stageGameStartPopupRect = nullptr;
+Sprite *Tutorial::stageGameStartPopupSprite = nullptr;
 
 Texture *Tutorial::stageGameStartPopupTex = nullptr;
 
@@ -22,10 +22,10 @@ Texture *Tutorial::stageGameStartPopupTex = nullptr;
  */
 void Tutorial::init()
 {
-  /*Tutorial::stageGameStartPopupRect = new Rectangle({Tutorial::GAME_START_POPUP_X, Tutorial::GAME_START_POPUP_Y}, Tutorial::GAME_START_POPUP_WIDTH, Tutorial::GAME_START_POPUP_HEIGHT);
+  Tutorial::stageGameStartPopupSprite = new Sprite();
   Tutorial::stageGameStartPopupTex = new Texture();
   Tutorial::stageGameStartPopupTex->setFile(SPRITES_PATH + "Tutorial_GameStartPopup.png", 1);
-  Tutorial::stageGameStartPopupRect->sprite.setTexture(Tutorial::stageGameStartPopupTex);*/
+  Tutorial::stageGameStartPopupSprite->setTexture(Tutorial::stageGameStartPopupTex);
 }
 
 /**
@@ -47,7 +47,7 @@ void Tutorial::reset()
  */
 void Tutorial::destroy()
 {
-  // delete Tutorial::stageGameStartPopupRect;
+  delete Tutorial::stageGameStartPopupSprite;
 
   delete Tutorial::stageGameStartPopupTex;
 }
@@ -137,8 +137,8 @@ void Tutorial::drawTutorial()
 {
   switch(Tutorial::currentStage) {
     case Tutorial::Stage::GAME_START:
-      /*GameWindow::drawSprite(Tutorial::stageGameStartPopupRect->getX(), Tutorial::stageGameStartPopupRect->getY(),
-        Tutorial::stageGameStartPopupRect->getWidth(), Tutorial::stageGameStartPopupRect->getHeight(), Tutorial::stageGameStartPopupRect->getSprite());*/
+      GameWindow::drawSprite(Tutorial::GAME_START_POPUP_X, Tutorial::GAME_START_POPUP_Y,
+        Tutorial::GAME_START_POPUP_WIDTH, Tutorial::GAME_START_POPUP_HEIGHT, *Tutorial::stageGameStartPopupSprite);
       break;
     case Tutorial::Stage::DIALOGUE:
 

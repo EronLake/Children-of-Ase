@@ -617,19 +617,19 @@ void Input::InputCheck()
 		}
 	}
 	// main menu, only allow W and S to select menu options
-	if (current_game_state == game_state::main_menu) {
+	else if (current_game_state == game_state::main_menu) {
+    Tutorial::drawTutorial();
 		if (W) {
 			// move selected option up
 		}
-		if (S) {
+		else if (S) {
 			// move selected option down
 		}
-		if (ENTER) {
+		else if (ENTER) {
       Tutorial::completeStage(*this);
-      this->current_game_state = game_state::in_game;
 		}
 	}
-	if (current_game_state == game_state::in_game) {
+	else if (current_game_state == game_state::in_game) {
 		if (DialogueController::getState() == 0) {
 
 			
@@ -1179,7 +1179,7 @@ void Input::InputCheck()
 			}
 		}
 	}
-	if (current_game_state == game_state::pause_menu) {
+	else if (current_game_state == game_state::pause_menu) {
 		// pressing esc to unpause
 		//cout << "IN PUT CONTROL IS IN PAUSE STATE" << endl;
 		if (ENTER) {
