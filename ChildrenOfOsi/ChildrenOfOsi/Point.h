@@ -20,6 +20,7 @@ public:
 
 	Sprite sprite;
 	static Texture* tex;
+	std::pair<int, int> grid_location;
 
 	void drawObj(float _x, float _y)
 	{

@@ -9,13 +9,14 @@
 #include "HUD.h"
 #include "common.h"
 #include "RiverObj.h"
+#include "UniformGrid.h"
 
 class RenderManager;
 class RenderHelper
 {
   public:
 
-  RenderHelper(QuadTree* QT, RiverObj* _rivObj, std::vector<WorldObj*>* _largeStruct);
+  RenderHelper(QuadTree* QT, RiverObj* _rivObj, std::vector<WorldObj*>* _largeStruct, UniformGrid<WorldObj>* _worldobj_grid);
   ~RenderHelper();
 
   void initCamera(WorldObj* player);
@@ -52,6 +53,7 @@ class RenderHelper
   RenderManager* manager;
   RiverObj* rivObj;
   std::vector<WorldObj*>* largeStruct;
+  UniformGrid<WorldObj>* grid_game;
 
   static GameMap* gmap;
 

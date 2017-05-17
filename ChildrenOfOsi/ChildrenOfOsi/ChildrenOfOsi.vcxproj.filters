@@ -238,9 +238,6 @@
     <ClCompile Include="TagConfig.cpp">
       <Filter>Dialogue</Filter>
     </ClCompile>
-    <ClCompile Include="UniformGrid.cpp">
-      <Filter>Physics</Filter>
-    </ClCompile>
     <ClCompile Include="Tag.cpp">
       <Filter>Dialogue</Filter>
     </ClCompile>
