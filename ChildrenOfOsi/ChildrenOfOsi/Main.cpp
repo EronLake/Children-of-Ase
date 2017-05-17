@@ -259,7 +259,9 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 
 	Hero* yemoja = Containers::hero_table["Yemoja"];
 	heroes.push_back(yemoja);
+	yemoja->set_busy(0);//added for testing
 	Hero* oya = Containers::hero_table["Oya"];
+	oya->set_busy(0);//added for testing
 	heroes.push_back(oya);
 
 	vector<vector<Texture*>> starting_location;
@@ -720,7 +722,8 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	for (auto it : *largeStruct) cout << (it)->getName() << endl;
 
 	if (PRELOAD_TEX) t0.join();
-
+	oya->set_busy(0);
+	yemoja->set_busy(0);
 	while (GameWindow::isRunning()) {
 		while (current_game_state == game_state::main_menu) {
 			cout << "Current game state: main_menu" << endl;

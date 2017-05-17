@@ -59,7 +59,9 @@ void HeroConfig::set_hero(vector<WorldObj*>* movVec, ChildrenOfOsi* gameplay_fun
 
 	if (hero_id == SHANGO)
 	{
-		dynamic_cast<Player*>(Containers::hero_table[name])->setTalkDist(20);
+		Player* player = dynamic_cast<Player*>(Containers::hero_table[name]);
+		player->setTalkDist(20);
+		DialogueController::setPlayer(player);
 	}
 
 	Containers::hero_table[name]->name = hero_id;

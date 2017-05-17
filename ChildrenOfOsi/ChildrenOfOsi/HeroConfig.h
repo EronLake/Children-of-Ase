@@ -10,6 +10,7 @@
 #include "ObjConfig.h"
 #include "Texture.h"
 #include "AssetInfo.h"
+#include "DialogueController.h"
 
 class HeroConfig
 {

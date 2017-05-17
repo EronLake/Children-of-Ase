@@ -535,5 +535,45 @@
         "3": "Wait, don't leave just yet! There is a rogue squadron of rebels north of here. Would you help me protect my people from them",
 		"4": "Wait, don't leave just yet! There is a rogue squadron of rebels north of here. Would you help me protect my people from them",
         "5": "Wait, don't leave just yet! There is a rogue squadron of rebels north of here. Would you help me protect my people from them"
+   },
+
+   "Shrine Talk 1": {
+        "1": "1",
+		"2": "1",
+        "3": "1",
+		"4": "1",
+        "5": "1"
+   },
+
+   "Shrine Talk 2": {
+        "1": "2",
+		"2": "2",
+        "3": "2",
+		"4": "2",
+        "5": "2"
+   },
+
+   "Shrine Talk 3": {
+        "1": "3",
+		"2": "3",
+        "3": "3",
+		"4": "3",
+        "5": "3"
+   },
+
+   "Shrine Talk 4": {
+        "1": "4",
+		"2": "4",
+        "3": "4",
+		"4": "4",
+        "5": "4"
+   },
+
+   "Shrine Not Worthy": {
+        "1": "...",
+		"2": "...",
+        "3": "...",
+		"4": "...",
+        "5": "..."
    }
 }

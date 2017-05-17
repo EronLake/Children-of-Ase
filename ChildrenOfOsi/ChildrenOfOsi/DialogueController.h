@@ -95,5 +95,7 @@ public:
 	static bool first_q_press;
 	static bool took_advice;
 	static int shrine_talk_counter;
+	static bool first_buff;
 
 };
+
