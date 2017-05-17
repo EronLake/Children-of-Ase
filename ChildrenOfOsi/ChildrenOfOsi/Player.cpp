@@ -10,6 +10,9 @@ Player::Player()
 	this->move_to_flags.insert({ "Advise To Ally With", 0 });
 	this->move_to_flags.insert({ "Advise To Fight", 0 });
 	this->move_to_flags.insert({ "Advise To Send Peace Offering To", 0 });
+
+	can_spin = false;
+	can_fire = false;
 }
 
 Player::Player(int name, float x, float y, bool col) :Hero(name, x, y, col)
@@ -25,6 +28,9 @@ Player::Player(int name, float x, float y, bool col) :Hero(name, x, y, col)
 	this->move_to_flags.insert({ "Advise To Ally With", 0 });
 	this->move_to_flags.insert({ "Advise To Fight", 0 });
 	this->move_to_flags.insert({ "Advise To Send Peace Offering To", 0 });
+
+	can_spin=false;
+	can_fire=false;
 }
 
 Player::Player(int name, Vector2f p_topLeft, float p_width, float p_height) :Hero(name, p_topLeft, p_width, p_height)
@@ -40,6 +46,9 @@ Player::Player(int name, Vector2f p_topLeft, float p_width, float p_height) :Her
 	this->move_to_flags.insert({ "Advise To Ally With", 0 });
 	this->move_to_flags.insert({ "Advise To Fight", 0 });
 	this->move_to_flags.insert({ "Advise To Send Peace Offering To", 0 });
+
+	can_spin = false;
+	can_fire = false;
 }
 
 
