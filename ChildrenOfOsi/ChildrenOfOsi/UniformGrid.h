@@ -23,6 +23,7 @@ public:
 
 private:
 	std::vector<T*> grid[grid_size][grid_size];
+	int num_of_elements;
 };
 
 template <class T>
@@ -34,6 +35,7 @@ UniformGrid<T>::UniformGrid<T>()
 			grid[i][j].clear();
 		}
 	}
+	num_of_elements = 0;
 }
 
 template <class T>
@@ -56,6 +58,7 @@ void UniformGrid<T>::insert_worldobj_to_grid(std::vector<T*> objs)
 		objs[i]->grid_location.second = k;
 
 		grid[j][k].push_back(objs[i]);
+		num_of_elements++;
 	}
 }
 
@@ -75,16 +78,20 @@ void UniformGrid<T>::clear_and_reinsert(std::vector<T*> objs)
 		//if grid loc is incorrect, remove from current grid 
 		if (current_grid_j != j || current_grid_k != k) {
 			std::remove(grid[current_grid_j][current_grid_k].begin(), grid[current_grid_j][current_grid_k].end(), objs[i]);
+			num_of_elements--;
 		}
 
 		//add obj to new grid
 		grid[j][k].push_back(objs[i]);
+		num_of_elements++;
 	}
 }
 
 template <class T>
 std::vector<T*> UniformGrid<T>::retrieve_worldobj_in_grid(std::vector<T*> &listOfObj, T* obj)
 {
+
+	if (num_of_elements == 0) return listOfObj;
 
 	//first find the cell that the obj belongs to on the grid
 	int xcoord = obj->body[0].getX();
@@ -189,6 +196,7 @@ void UniformGrid<T>::insert_objs_to_grid(std::vector<T*> objs)
 		//temp->getP1()).grid_location.second = k;
 
 		grid[j][k].push_back(objs[i]);
+		num_of_elements++;
 
 		//find which grid the second point of the line belongs to
 		int xcoord2 = objs[i]->getP2().getX();
@@ -205,11 +213,20 @@ void UniformGrid<T>::insert_objs_to_grid(std::vector<T*> objs)
 		//temp->getP2().grid_location.second = k;
 
 		//if points belong to same column but different rows
-		if (j2 == j && k2 != k) grid[j2][k2].push_back(objs[i]);
+		if (j2 == j && k2 != k) {
+			grid[j2][k2].push_back(objs[i]);
+			num_of_elements++;
+		}
 		//if points belong to same row but different column
-		else if (j2 != j && k2 == k) grid[j2][k2].push_back(objs[i]);
+		else if (j2 != j && k2 == k) {
+			grid[j2][k2].push_back(objs[i]);
+			num_of_elements++;
+		}
 		//if points belong to different rows and different columns
-		else if (j2 != j && k2 != k) grid[j2][k2].push_back(objs[i]);
+		else if (j2 != j && k2 != k) {
+			grid[j2][k2].push_back(objs[i]);
+			num_of_elements;
+		}
 	}
 	int count = 0;
 	for (int i = 0; i < grid_size; i++) {
@@ -225,6 +242,7 @@ void UniformGrid<T>::insert_objs_to_grid(std::vector<T*> objs)
 template <class T>
 std::vector<T*> UniformGrid<T>::retrieve_objs_in_grid(std::vector<T*>& listOfObj, T * obj)
 {
+	if (num_of_elements == 0) return listOfObj;
 	//first find the cell that the obj belongs to on the grid
 	int xcoord = obj->getP1().getX();
 	int j = xcoord / 1250;
@@ -281,8 +299,10 @@ void UniformGrid<T>::clear()
 	for (int i = 0; i < grid_size; i++) {
 		for (int j = 0; j < grid_size; j++) {
 			grid[i][j].clear();
+			
 		}
 	}
+	num_of_elements = 0;
 }
 
 

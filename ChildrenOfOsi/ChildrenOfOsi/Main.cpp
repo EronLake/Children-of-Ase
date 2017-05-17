@@ -1487,7 +1487,6 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	RelPost* post1 = new RelPost(Postcondition::STR, 15);
 	RelPost* post2 = new RelPost(Postcondition::AFF, 15);
 	
-
 	
 	test_ally->req_preconds.push_back(std::make_shared<RelPrecon>(*prec));
 	test_ally->doer_succ_postconds.push_back(std::make_shared<RelPost>(*post));
@@ -1673,8 +1672,6 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 			
 			start_tick = clock();
 
-
-
 			gameplay_functions->drawTut(Alex);
 
 			//run task buffer
@@ -1814,7 +1811,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 			start_tick = clock();
 			if (!MAP_EDITOR) {
 				//_QuadTree->clearMovable();
-				grid_worldobj->clear_and_reinsert(movVec);
+				//grid_worldobj->clear_and_reinsert(movVec);
 				//vector<WorldObj*> temp = { Alex };
 				//grid_worldobj->clear_and_reinsert(temp);
 			}
