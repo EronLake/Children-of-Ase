@@ -7,6 +7,7 @@
 #include "CheckClass.h"
 #include "json.h"
 #include "RegionState.h"
+#include "Tutorial.h"
 
 extern bool game_ended;
 
@@ -615,28 +616,15 @@ void Input::InputCheck()
 			}
 		}
 	}
-	// main menu, only allow W and S to select menu options
-	if (current_game_state == game_state::main_menu) {
-		if (W) {
-			// move selected option up
-		}
-		if (S) {
-			// move selected option down
-		}
-		if (ENTER) {
-			// assuming menu only has start option, so move in game
-			if (current_game_state == game_state::main_menu) {
-				current_game_state = game_state::in_game;
-				//current_game_state = game_state::victory_menu;
-				
-			}
+	else if (current_game_state == game_state::main_menu) {
+    Tutorial::drawTutorial();
+    if (ENTER) {
+      Tutorial::completeStage(*this);
 		}
 	}
-	if (current_game_state == game_state::in_game) {
-		if (DialogueController::getState() == 0) {
-
-			
-
+	else if (current_game_state == game_state::in_game) {
+    Tutorial::drawTutorial();
+    if (DialogueController::getState() == 0) {
 			Player* t = CheckClass::isPlayer(player);
 			gameplay_functions->combat(player);
 			if (SHIFT) {
@@ -736,7 +724,7 @@ void Input::InputCheck()
 				}
 				else if (K) {
 					if (t) {
-						if (t->getCool(1)) {
+						if (t->can_fire && t->getCool(1)) {
 							//////std:://cout << "Pressed Shift+R" << std::endl;
 							gameplay_functions->special(t, Attack::FIREBALL);
 							gameplay_functions->fire(t);
@@ -754,7 +742,7 @@ void Input::InputCheck()
 				}*/
 				else if (L) {
 					if (t) {
-						if (t->getCool(2)) {
+						if (t->can_spin && t->getCool(2)) {
 							//////std:://cout << "Pressed T" << std::endl;
 							//t->meleeAttack();
 							//gameplay_functions->melee(t);
@@ -1117,14 +1105,18 @@ void Input::InputCheck()
 					}
 				}
 				if (ENTER) {
+					gameplay_functions->createTaskForAudio("PlaySound", "SOUND", "SFX/talk.wav", nullptr, RegionState::soundType::sfx);
 					//////std:://cout << "ENTER" << std::endl;
 					if (DialogueController::getState() == 1) {
 						count = 10;
 						Hero* temp_hero;
 						if (temp_hero = CheckClass::isHero(DialogueController::getOther()))
                             DialogueController::PlayerConversationPoint();
-						else if (DialogueController::optionsIndex == 0)
-							DialogueController::player_conversation_point_soldier();
+						else if (DialogueController::optionsIndex == 0) {
+							Soldier* sold = dynamic_cast<Soldier*>(DialogueController::getOther());
+							if(sold)
+							    DialogueController::player_conversation_point_soldier();
+						}
 					}
 					else if (DialogueController::getState() == 2) {
 						count = 10;
@@ -1177,18 +1169,24 @@ void Input::InputCheck()
 						DialogueController::create_farewell();
 						DialogueController::state = 7;
 					}
+					else if (DialogueController::getState() == 11) {
+						count = 10;
+						DialogueController::shrine_talk_counter++;
+						DialogueController::shrine_interact();
+						if (DialogueController::shrine_talk_counter == 3) {
+							DialogueController::state = 7;
+						}
+					}
 				}
 			}
 		}
 	}
-	if (current_game_state == game_state::pause_menu) {
-		// pressing esc to unpause
-		//cout << "IN PUT CONTROL IS IN PAUSE STATE" << endl;
+	else if (current_game_state == game_state::pause_menu) {
+    Tutorial::drawTutorial();
 		if (ENTER) {
-			//for (int i = 0; i < 10; i++) cout << "I HAVE JUST PRESSED Q" << endl;
-			if (current_game_state == game_state::pause_menu) {
-				current_game_state = game_state::in_game;
-			}
+      if(Tutorial::isStageActive(Tutorial::Stage::INTRO01) || Tutorial::isStageActive(Tutorial::Stage::INTRO02))
+        Tutorial::completeStage(*this);
+			current_game_state = game_state::in_game;
 		}
 	}
 }

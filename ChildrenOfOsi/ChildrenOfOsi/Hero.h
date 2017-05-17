@@ -57,8 +57,19 @@ public:
 	void set_busy(int b) { busy=b; }
 
 	static constexpr int NOT_BUSY = 0;
-	static constexpr int BUSY_DOER = 1;
-	static constexpr int BUSY_REC = 2;
+	static constexpr int BUSY_TRAVEL = 1;
+	static constexpr int BUSY_MARCH = 2;
+	static constexpr int BUSY_REC_TALK = 3;
+	static constexpr int BUSY_REC_FIGHT = 4;
+	static constexpr int BUSY_TALK = 5;
+	static constexpr int BUSY_FIGHT = 6;
+
+	//for suggested actions(move tos)
+	static constexpr int NOT_SUGG_ACT = 0;
+	static constexpr int SUGG_ACT = 1;
+	static constexpr int FAIL_SUGG_ACT = 2;
+	static constexpr int SUCC_SUGG_ACT = 3;
+	int SUGG_ACT_STATUS;
 
 private:
 

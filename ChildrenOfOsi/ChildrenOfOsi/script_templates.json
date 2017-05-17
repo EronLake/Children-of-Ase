@@ -173,6 +173,30 @@
 	 }
     },
 
+	"Confirm Ally_Templates": {
+     "1": {
+        "1": "Confirm Ally"
+	 }
+    },
+
+	"Confirm Fight_Templates": {
+     "1": {
+        "1": "Confirm Fight"
+	 }
+    },
+
+	"Confirm Peace_Templates": {
+     "1": {
+        "1": "Confirm Peace"
+	 }
+    },
+
+	"Confirm Conquer_Templates": {
+     "1": {
+        "1": "Confirm Conquer"
+	 }
+    },
+
 	"Bribe_Templates": {
      "1": {
         "1": "Bribe"

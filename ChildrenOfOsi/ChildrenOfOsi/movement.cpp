@@ -7,10 +7,11 @@
 #include "RegionState.h"
 
 
-Movement::Movement(QuadTree* QT, UniformGrid* UG, RiverObj* _rivObj) {
+Movement::Movement(QuadTree* QT, UniformGrid<Line>* UG, RiverObj* _rivObj, UniformGrid<WorldObj>* _worldobj_grid) {
 	tree = QT;
 	rivObj = _rivObj;
 	grid = UG;
+	world_grid = _worldobj_grid;
 	//rivObj->initialize_lines();
 	set_player_clone = false;
 }
@@ -31,7 +32,8 @@ int Movement::move_up(WorldObj* obj) {
 	}
 	obj->setDirection(WorldObj::DIRECTION_UP);
 	objVec.clear();
-	objVec = tree->retrieve(objVec, obj);
+	//objVec = tree->retrieve(objVec, obj);
+	objVec = world_grid->retrieve_worldobj_in_grid(objVec, obj);
 	//cout << "SIZE OF OBJVEC IS ************************ " << objVec.size() << endl;
 	NPC* npc;
 	if (my_type >= WorldObj::TYPE_NPC) {
@@ -100,7 +102,8 @@ int Movement::move_up_left(WorldObj* obj) {
 	obj->setDirection(WorldObj::DIRECTION_LEFT);
 	//get list to check collision with
 	objVec.clear();
-	objVec = tree->retrieve(objVec, obj);
+	//objVec = tree->retrieve(objVec, obj);
+	objVec = world_grid->retrieve_worldobj_in_grid(objVec, obj);
 	NPC* npc;
 	if (my_type >= 2) {
 		if (npc = CheckClass::isNPC(obj))
@@ -187,7 +190,8 @@ int Movement::move_up_right(WorldObj* obj) {
 	obj->setDirection(WorldObj::DIRECTION_RIGHT);
 	//get list to check collision with
 	objVec.clear();
-	objVec = tree->retrieve(objVec, obj);
+	//objVec = tree->retrieve(objVec, obj);
+	objVec = world_grid->retrieve_worldobj_in_grid(objVec, obj);
 	NPC* npc;
 	if (my_type >= 2) {
 		if (npc = CheckClass::isNPC(obj))
@@ -274,7 +278,8 @@ int Movement::move_down(WorldObj* obj) {
 	obj->setDirection(WorldObj::DIRECTION_DOWN);
 	//get list to check collision with
 	objVec.clear();
-	objVec = tree->retrieve(objVec, obj);
+	//objVec = tree->retrieve(objVec, obj);
+	objVec = world_grid->retrieve_worldobj_in_grid(objVec, obj);
 	NPC* npc;
 	if (my_type >= 2) {
 		if (npc = CheckClass::isNPC(obj))
@@ -333,7 +338,8 @@ int Movement::move_down_left(WorldObj* obj) {
 	obj->setDirection(WorldObj::DIRECTION_LEFT);
 	//get list to check collision with
 	objVec.clear();
-	objVec = tree->retrieve(objVec, obj);
+	//objVec = tree->retrieve(objVec, obj);
+	objVec = world_grid->retrieve_worldobj_in_grid(objVec, obj);
 	NPC* npc;
 	if (my_type >= 2) {
 		if (npc = CheckClass::isNPC(obj))
@@ -423,7 +429,8 @@ int Movement::move_down_right(WorldObj* obj) {
 	obj->setDirection(WorldObj::DIRECTION_RIGHT);
 	//get list to check collision with
 	objVec.clear();
-	objVec = tree->retrieve(objVec, obj);
+	//objVec = tree->retrieve(objVec, obj);
+	objVec = world_grid->retrieve_worldobj_in_grid(objVec, obj);
 	NPC* npc;
 	if (my_type >= 2) {
 		if (npc = CheckClass::isNPC(obj))
@@ -510,7 +517,8 @@ int Movement::move_left(WorldObj* obj) {
 	obj->setDirection(WorldObj::DIRECTION_LEFT);
 	//get list to check collision with
 	objVec.clear();
-	objVec = tree->retrieve(objVec, obj);
+	//objVec = tree->retrieve(objVec, obj);
+	objVec = world_grid->retrieve_worldobj_in_grid(objVec, obj);
 	NPC* npc;
 	if (my_type >= 2) {
 		if (npc = CheckClass::isNPC(obj))
@@ -571,7 +579,8 @@ int Movement::move_right(WorldObj* obj) {
 	obj->setDirection(WorldObj::DIRECTION_RIGHT);
 	//get list to check collision with
 	objVec.clear();
-	objVec = tree->retrieve(objVec, obj);
+	//objVec = tree->retrieve(objVec, obj);
+	objVec = world_grid->retrieve_worldobj_in_grid(objVec, obj);
 	NPC* npc;
 	if (my_type >= 2) {
 		if (npc = CheckClass::isNPC(obj))
@@ -624,7 +633,8 @@ int Movement::move_right(WorldObj* obj) {
 
 int Movement::talk(WorldObj* obj) {
 	objVec.clear();
-	objVec = tree->retrieve(objVec, obj);
+	//objVec = tree->retrieve(objVec, obj);
+	objVec = world_grid->retrieve_worldobj_in_grid(objVec, obj);
 	if (obj->getType() == WorldObj::TYPE_PLAYER) {
 		if (CheckClass::isPlayer(obj)) {
 			Player* d = dynamic_cast<Player*>(obj);
@@ -673,7 +683,8 @@ int Movement::talk(WorldObj* obj) {
 int Movement::attack(WorldObj* obj) {
 	for (auto a = Containers::Attack_table.begin(); a !=Containers::Attack_table.end();++a) {
 		objVec.clear();
-		objVec = tree->retrieve(objVec, a->second);
+		//objVec = tree->retrieve(objVec, a->second);
+		objVec = world_grid->retrieve_worldobj_in_grid(objVec, a->second);
 		objVec.push_back(obj);
 		////std::////cout << "Attack Exists" << std::endl;
 		if (a->second->getPause() == 0) {
@@ -727,7 +738,7 @@ int Movement::attack(WorldObj* obj) {
 																	PlayerActExecFunctions::execute_start("Conquer", hero);
 																}else PlayerActExecFunctions::execute_start("Fight", hero);
 															}
-															s2->getParty()->get_fight()->add_party(s->getParty(), true);
+															s2->getParty()->get_fight()->add_party(s2->getParty(),s->getParty(), true);
 															s2->getParty()->addToCurrentEnemies(s->getParty());
 															s->getParty()->addToCurrentEnemies(s2->getParty());
 														}
@@ -737,7 +748,7 @@ int Movement::attack(WorldObj* obj) {
 																	PlayerActExecFunctions::execute_start("Conquer", hero);
 																} else PlayerActExecFunctions::execute_start("Fight", hero);
 															}
-															s->getParty()->get_fight()->add_party(s2->getParty(), true);
+															s->getParty()->get_fight()->add_party(s->getParty(), s2->getParty(), true);
 															s2->getParty()->addToCurrentEnemies(s->getParty());
 															s->getParty()->addToCurrentEnemies(s2->getParty());
 														}

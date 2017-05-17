@@ -180,6 +180,15 @@ void DialogueGui::drawGui()
 {
   set_character_portrait_tex();
 
+  //Draws character portraits
+  GameWindow::drawSprite(this->speaker_left_rect->getX(), this->speaker_left_rect->getY(),
+	  this->speaker_left_rect->getWidth(), this->speaker_left_rect->getHeight(),
+	  this->speaker_left_rect->getSprite());
+
+  GameWindow::drawSprite(this->speaker_right_rect->getX(), this->speaker_right_rect->getY(),
+	  this->speaker_right_rect->getWidth(), this->speaker_right_rect->getHeight(),
+	  this->speaker_right_rect->getSprite());
+
   // Draw the dialogue background and icon header
   GameWindow::drawSprite(this->header_rect->getX(), this->header_rect->getY(),
     this->header_rect->getWidth(), this->header_rect->getHeight(), this->header_rect->getSprite());
@@ -196,14 +205,7 @@ void DialogueGui::drawGui()
   GameWindow::drawSprite(this->icon_question_rect->getX(), this->icon_question_rect->getY(),
     this->icon_question_rect->getWidth(), this->icon_question_rect->getHeight(), this->icon_question_rect->getSprite());
 
-  //Draws character portraits
-  GameWindow::drawSprite(this->speaker_left_rect->getX(), this->speaker_left_rect->getY(),
-		  this->speaker_left_rect->getWidth(), this->speaker_left_rect->getHeight(), 
-		  this->speaker_left_rect->getSprite());
 
-  GameWindow::drawSprite(this->speaker_right_rect->getX(), this->speaker_right_rect->getY(),
-		  this->speaker_right_rect->getWidth(), this->speaker_right_rect->getHeight(), 
-		  this->speaker_right_rect->getSprite());
   
   this->drawGuiText();
 }
@@ -299,6 +301,12 @@ void DialogueGui::drawGuiText()
         DialogueGui::OPTIONS_WIDTH, DialogueGui::OPTIONS_HEIGHT,
         text_color_selected);
       break;
+	case 11:
+		GameWindow::createText("Next",
+			DialogueGui::OPTIONS_X, DialogueGui::OPTIONS_Y + (DialogueGui::LINE_SPACING * 1),
+			DialogueGui::OPTIONS_WIDTH, DialogueGui::OPTIONS_HEIGHT,
+			text_color_selected);
+		break;
   }
 }
 

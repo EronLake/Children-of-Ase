@@ -41,10 +41,8 @@ public:
 	static void replace_all(std::string& str, const std::string& from, const std::string& to);
 	static bool offer_quest_on_exit(Hero* hero);
 	static void DialogueController::create_farewell();
-	static void DialogueController::remove_ask_for_quest();
-	static void DialogueController::add_ask_for_quest();
-	static void start_soldier_conversation(WorldObj* n, bool playerTalk);
 	static void player_choose_soldier();
+	static void shrine_interact();
 	static void player_conversation_point_soldier();
 	static void other_response_soldier(std::string info, std::string hero_topic);
 	static void other_conversation_point_soldier(dialogue_point line);
@@ -56,6 +54,7 @@ public:
 	static void DialogueController::set_selectable(bool is_selectable, std::string option_name, int icon);
 	static void DialogueController::add_dialog_option(std::string option_name, int icon);
 	static void DialogueController::remove_dialog_option(std::string option_name, int icon);
+	static bool DialogueController::check_advice_acceptance(Player* p, Hero* npc);
 
 	static bool prompted_quest;
 	static bool accepted_quest;
@@ -94,6 +93,7 @@ public:
 	static bool started_conv;
 	static bool quited_gui;
 	static bool first_q_press;
+	static bool took_advice;
+	static int shrine_talk_counter;
 
 };
-

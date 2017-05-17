@@ -192,7 +192,7 @@ dialogue_point DialogueHelper::choose_conv_pt(std::vector<ConversationLogObj*> c
 	for (auto i = curr_conversation_log.begin(); i != curr_conversation_log.end(); ++i) {
 		appealPoint tmp = std::make_pair(0, (*i)->get_conv_point());//to check against possible replies
 		auto it = std::find(possible_replies.begin(), possible_replies.end(), tmp);
-		if (it != possible_replies.end() && (*i)->get_who() == 2) {//if yemoja has said it
+		if (it != possible_replies.end() && (*i)->get_who() == other->name) {//if yemoja has said it
 				//remove it from the possible replies
 			possible_replies.erase(std::remove(possible_replies.begin(), possible_replies.end(), *it), possible_replies.end());
 		}
@@ -205,7 +205,7 @@ dialogue_point DialogueHelper::choose_conv_pt(std::vector<ConversationLogObj*> c
 	for (auto i = other->conversation_log.begin(); i != other->conversation_log.end(); ++i) {
 		appealPoint tmp = std::make_pair(0, (*i)->get_conv_point());
 		auto it = std::find(possible_replies.begin(), possible_replies.end(), tmp);
-		if (it != possible_replies.end() && (*i)->get_who() == 2) {
+		if (it != possible_replies.end() && (*i)->get_who() == other->name) {
 			possible_replies.erase(std::remove(possible_replies.begin(), possible_replies.end(), *it), possible_replies.end());
 		}
 		else {
@@ -263,7 +263,7 @@ dialogue_point DialogueHelper::choose_reply_pt(std::string point, int optn_inx, 
 
 	Hero* temp_hero = CheckClass::isHero(other);
 	ConversationLogObj* player_just_said = nullptr;
-	if(temp_hero)
+	if(temp_hero && curr_conversation_log.size() > 0)
 	    player_just_said = curr_conversation_log[curr_conversation_log.size() - 1];
 
 	//check if the player has already asked the npc this question
@@ -410,6 +410,14 @@ std::string DialogueHelper::gen_dialog_negative(dialogue_point diog_pt, Hero* he
 		name = "SilverSoldier";
 	}
 	std::string sentence = convert_to_sentence(get_dialog_negative(name, diog_pt, hero));
+
+	return sentence;
+}
+
+std::string DialogueHelper::gen_dialog_shrine(dialogue_point diog_pt, WorldObj* shrine)
+{
+	std::string name = shrine->getName();
+	std::string sentence = convert_to_sentence(get_dialog_shrine(name, diog_pt));
 
 	return sentence;
 }
@@ -584,6 +592,48 @@ dialogue_point DialogueHelper::get_dialog_negative(std::string name, dialogue_po
 					.asString());
 				//ofs << "dp: " << root[tmp][to_string(j)]
 				//.asString() << std::endl;
+			}
+			else {
+				dpoint.push_back(tmp);
+
+			}
+
+		}
+	}
+	else {
+		dpoint.push_back(root[diog_pt[ConvPointName]][to_string(phrase_picker)]
+			.asString());
+	}
+
+	return dpoint;
+
+}
+
+dialogue_point DialogueHelper::get_dialog_shrine(std::string name, dialogue_point diog_pt) {
+
+	dialogue_template dtemp = get_template(diog_pt);
+
+	std::string my_name = name;
+
+	Json::Value root;
+
+	std::string dialogue_filename = my_name + "_dialog.json";
+
+	std::ifstream file(dialogue_filename);
+	file >> root;
+
+	dialogue_point dpoint;
+
+	int phrase_picker = rand() % 5 + 1;//rand num between 1 and 5 inclusive
+
+	if (name != "Shango") {
+		std::string tmp = "";
+		for (int i = 1; i <= dtemp.size(); i++) {
+			tmp = dtemp[i - 1];
+			if (tmp != "?" && tmp != "," && tmp != "." &&
+				tmp != "!" && tmp != "_") {
+				dpoint.push_back(root[tmp][to_string(phrase_picker)]
+					.asString());
 			}
 			else {
 				dpoint.push_back(tmp);

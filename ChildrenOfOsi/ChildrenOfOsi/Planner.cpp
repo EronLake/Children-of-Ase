@@ -267,3 +267,9 @@ int Planner::value_of(Action* action) {
 
 	return action_value;
 }
+void Planner::set_action_suggested(bool suggested) {
+	action_suggested = suggested;
+};
+bool Planner::get_action_suggested() {
+	return action_suggested;
+};

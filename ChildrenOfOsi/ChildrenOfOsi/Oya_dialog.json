@@ -25,11 +25,11 @@
 	},
 
 	"Tell Name": {
-		"1": "My name is Yemoja.",
-		"2": "Nice to meet you. I am Yemoja.",
-		"3": "I am pleased to make your acquaintance. People know me as Yemoja.",
-        "4": "I am pleased to make your acquaintance. People know me as Yemoja.",
-        "5": "I am pleased to make your acquaintance. People know me as Yemoja."
+		"1": "My name is Oya.",
+		"2": "Nice to meet you. I am Oya.",
+		"3": "They call me Oya. I spend most of my days combing through the jungle to snuff out evil with my wisdom.",
+        "4": "They call me Oya. I spend most of my days combing through the jungle to snuff out evil with my wisdom.",
+        "5": "They call me Oya. I spend most of my days combing through the jungle to snuff out evil with my wisdom."
 	},
 
 	"Ask_Origin": {
@@ -458,11 +458,11 @@
     },
 
 	"Already_Asked": {
-        "1": "You are quite the joker. Remember, you have already asked me that.",
-        "2": "You are quite the joker. Remember, you have already asked me that.",
-        "3": "You are quite the joker. Remember, you have already asked me that.",
-        "4": "You are quite the joker. Remember, you have already asked me that.",
-        "5": "You are quite the joker. Remember, you have already asked me that."
+        "1": "Its not wise to ask people the same question over and over again.",
+        "2": "Its not wise to ask people the same question over and over again.",
+        "3": "Its not wise to ask people the same question over and over again.",
+        "4": "Its not wise to ask people the same question over and over again.",
+        "5": "Its not wise to ask people the same question over and over again."
     },
 
 	"Response_No_More_Phrases": {
@@ -535,6 +535,22 @@
         "3": "I hope the quest I gave you is going smoothly.",
         "4": "I hope the quest I gave you is going smoothly.",
         "5": "I hope the quest I gave you is going smoothly."
+    },
+
+	"Terrible Advice": {
+        "1": "Following your advice proved detrimental to me. Next time I will think twice before acting on your suggestion.",
+        "2": "Following your advice proved detrimental to me. Next time I will think twice before acting on your suggestion.",
+        "3": "Following your advice proved detrimental to me. Next time I will think twice before acting on your suggestion.",
+        "4": "Following your advice proved detrimental to me. Next time I will think twice before acting on your suggestion.",
+        "5": "Following your advice proved detrimental to me. Next time I will think twice before acting on your suggestion."
+    },
+
+	"Good Advice": {
+        "1": "You really do give great advice. Many thanks.",
+        "2": "You really do give great advice. Many thanks.",
+        "3": "You really do give great advice. Many thanks.",
+        "4": "You really do give great advice. Many thanks.",
+        "5": "You really do give great advice. Many thanks."
     },
 
 	"Exit Quest": {

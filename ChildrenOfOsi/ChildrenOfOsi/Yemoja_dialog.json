@@ -132,9 +132,9 @@
 	"Take Advice To Conquer": {
         "1": "HERO hmm.I was considering conquering them but then you told me it was a good idea. Now I am not so sure. ",
         "2": "HERO? Really? I don't feel like you should be giving me advice on such an important matter.",
-        "3": "HERO eh.I am not sure that conquest is the best idea for ensuring the safety of this village, but I will keep it in mind.",
-        "4": "HERO as a conquering target? I think that moving to conquer is a risky move, but I am glad that you gave me this advice.",
-        "5": "HERO hmm. I respect your advice, and will definitely consider conquest as a powerful strategic move."
+        "3": "HERO eh. I wasn't sure whether or not conquest was really required, but you're right. It's time to end this",
+        "4": "HERO as a conquering target? I think that moving to conquer is a risky move, but I'll trust your judgement this time.",
+        "5": "HERO hmm. I respect your advice, HERO's conquest is my top priority."
     },
 
 	"Advise To Ally With": {
@@ -148,8 +148,8 @@
 	"Take Advice To Ally With": {
         "1": "HERO!? I absolutely refuse. The very idea of being in an alliance with their village disgusts me.",
         "2": "HERO as an ally? An alliance can possibly help ensure the safety of this village, so I will definitely consider it.",
-        "3": "HERO as an ally? I will have to think deeply as to whether or not an alliance with them would be a good idea.",
-        "4": "HERO as an ally? Your advice always has my best interests in mind it seems, so I promise you I will deeply consider an alliance with them.",
+        "3": "HERO as an ally? Truly, that sounds like an interesting prospect. I'll give it a try.",
+        "4": "HERO as an ally? Alright, I trust your opinion on matters like this, so I'll give it a try.",
         "5": "HERO as an ally? Your advice always has my best interests in mind it seems, so I promise you I will deeply consider an alliance with them."
     },
 
@@ -180,9 +180,9 @@
     "Take Advice To Destroy": {
         "1": "HERO!? You are suggesting I destroy them!? It is possible that this village would be safer if that village was out of the picture entirely. But I know that it is risky.",
         "2": "HERO is not someone that will be easy to get rid of, but I am not someone to back down from a challenge if the safety of this village is on the line.",
-        "3": "HERO has to go. I usually try to avoid such violence and destruction, but deep down I know that you are right.",
-		"4": "HERO has to go. I usually try to avoid such violence and destruction, but deep down I know that you are right.",
-        "5": "HERO has to go. I usually try to avoid such violence and destruction, but deep down I know that you are right."
+        "3": "I guess you're right. HERO has to go. I usually try to avoid such violence and destruction, but I know this cannot be avoided.",
+		"4": "You're right. I was on the fence until now, but destruction is inevitable",
+        "5": "Your counsel is always well thought-out and in my best interest. I will conquer HERO."
     },
 
 	"Ask_To_Duel": {
@@ -324,9 +324,9 @@
 	"Take Advice To Train With": {
         "1": "HERO!? Train me? I believe I know when I should train the village and its soldiers. I do not need your advice.",
         "2": "HERO!? Train me? Are you implying that this village is weak? I think I know how strong they are more than you do.",
-        "3": "HERO? Train me? Hmm. It cannot hurt to always be a bit more prepared. I will consider it.",
-        "4": "HERO? Train me? I do worry about whether we are prepared for an attack or not. I will definitely consider training.",
-        "5": "HERO? Train me? I know you're right. This village is vunerable in its current state. I will definitely think about training in order to bolster our defenses."
+        "3": "HERO? Train me? Hmm. It cannot hurt to always be a bit more prepared. I will try it out.",
+        "4": "HERO? Train me? I do worry about whether we are prepared for an attack or not. Ok.",
+        "5": "HERO? Train me? I know you're right. This village is vulnerable in its current state. HERO's guidance will surely be useful."
     },
 
 	"Advise To Fight": {
@@ -527,6 +527,22 @@
         "3": "I hope the quest I gave you is going smoothly.",
         "4": "I hope the quest I gave you is going smoothly.",
         "5": "I hope the quest I gave you is going smoothly."
+    },
+
+	"Terrible Advice": {
+        "1": "Following your advice proved detrimental to me. Next time I will think twice before acting on your suggestion.",
+        "2": "Following your advice proved detrimental to me. Next time I will think twice before acting on your suggestion.",
+        "3": "Following your advice proved detrimental to me. Next time I will think twice before acting on your suggestion.",
+        "4": "Following your advice proved detrimental to me. Next time I will think twice before acting on your suggestion.",
+        "5": "Following your advice proved detrimental to me. Next time I will think twice before acting on your suggestion."
+    },
+
+	"Good Advice": {
+        "1": "You really do give great advice. Many thanks.",
+        "2": "You really do give great advice. Many thanks.",
+        "3": "You really do give great advice. Many thanks.",
+        "4": "You really do give great advice. Many thanks.",
+        "5": "You really do give great advice. Many thanks."
     },
 
 	"Exit Quest": {

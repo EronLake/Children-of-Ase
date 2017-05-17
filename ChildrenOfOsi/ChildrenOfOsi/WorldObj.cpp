@@ -8,6 +8,7 @@ int WorldObj::idNum = 0;
 
 void WorldObj::setX(float x)
 {
+	std::lock_guard<std::mutex> guard(*this->mew);
 	for (int i = 0; i < body.size(); i++) {
 		body[i].setX(x-(loc.getXloc()-body[i].getX()));
 	}
@@ -17,6 +18,7 @@ void WorldObj::setX(float x)
 
 void WorldObj::setY(float y)
 {
+	std::lock_guard<std::mutex> guard(*this->mew);
 	for (int i = 0; i < body.size(); i++) {
 		body[i].setY(y - (loc.getYloc() - body[i].getY()));
 	}
@@ -26,6 +28,7 @@ void WorldObj::setY(float y)
 
 void WorldObj::shiftX(float dist)
 {
+	std::lock_guard<std::mutex> guard(*this->mew);
 	loc.shiftXloc(dist);
 	effect.setX(effect.getX() + dist);
 	for (int i = 0; i < body.size(); i++) {
@@ -37,6 +40,7 @@ void WorldObj::shiftX(float dist)
 
 void WorldObj::shiftY(float dist)
 {
+	std::lock_guard<std::mutex> guard(*this->mew);
 	loc.shiftYloc(dist);
 	effect.setY(effect.getY()+dist);
 	for (int i = 0; i < body.size(); i++) {
@@ -52,6 +56,7 @@ void WorldObj::drawObj(float _x, float _y)
 }
 
 void WorldObj::offsetBody(int i, float x1, float x2, float y1, float y2) {
+	std::lock_guard<std::mutex> guard(*this->mew);
 	offset_x1 += x1;
 	offset_x2 += x2;
 	offset_y1 += y1;

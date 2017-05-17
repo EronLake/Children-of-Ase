@@ -161,7 +161,6 @@
     <Text Include="memory_test.txt" />
     <Text Include="message_log.txt" />
     <Text Include="physics_test.txt" />
-    <Text Include="ReadMe.txt" />
     <Text Include="render_test.txt" />
     <Text Include="task_buffer_test.txt" />
   </ItemGroup>
@@ -186,6 +185,7 @@
     <ClInclude Include="ConversationLogObj.h" />
     <ClInclude Include="ConversationPoint.h" />
     <ClInclude Include="SoldierConfig.h" />
+    <ClInclude Include="Tutorial.h" />
     <ClInclude Include="ThreadManager.h" />
     <ClInclude Include="DialogueConfig.h" />
     <ClInclude Include="DialogueController.h" />
@@ -296,7 +296,7 @@
     <ClCompile Include="SoldierConfig.cpp" />
     <ClCompile Include="Tag.cpp" />
     <ClCompile Include="TagConfig.cpp" />
-    <ClCompile Include="UniformGrid.cpp" />
+    <ClCompile Include="Tutorial.cpp" />
     <ClCompile Include="Village.cpp" />
     <ClCompile Include="GameMap.cpp" />
     <ClCompile Include="GameWindow.cpp" />
