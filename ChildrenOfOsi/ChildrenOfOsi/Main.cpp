@@ -172,8 +172,9 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	RiverObj* rivObj = new RiverObj();
 	rivObj->initialize_lines();
 
-	UniformGrid* grid = new UniformGrid();
-	grid->insert_objs_to_grid(rivObj->getLines());
+	UniformGrid<Line>* grid_line = new UniformGrid<Line>();
+	UniformGrid<WorldObj>* grid_worldobj = new UniformGrid<WorldObj>();
+	grid_line->insert_objs_to_grid(rivObj->getLines());
 	
 	vector<WorldObj*> recVec;
 	vector<WorldObj*> movVec;
@@ -195,9 +196,9 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	//need this here for map editor
 	ChildrenOfOsi* gameplay_functions = new ChildrenOfOsi(mLog, tBuffer);
 
-	RenderManager* RenM = new RenderManager(mLog, tBuffer, _QuadTree, gameplay_functions, rivObj, largeStruct);
+	RenderManager* RenM = new RenderManager(mLog, tBuffer, _QuadTree, gameplay_functions, rivObj, largeStruct, grid_worldobj);
 	DummyController* DumM = new DummyController(mLog, tBuffer);
-	PhysicsManager* PhysM = new PhysicsManager(mLog, tBuffer, _QuadTree, grid, rivObj);
+	PhysicsManager* PhysM = new PhysicsManager(mLog, tBuffer, _QuadTree, grid_line, rivObj, grid_worldobj);
 	//PartyManager* partyM = new PartyManager(gameplay_functions, Alex);
 	memManager* memM = new memManager(mLog, tBuffer);
 	TestManager* TestM = new TestManager(mLog, tBuffer);
@@ -1636,12 +1637,15 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	current_game_state = game_state::main_menu;
 
 	//insert all of the immovable objects into the quad tree
-	_QuadTree->clear();
-	cout << "tree size is  " << _QuadTree->treeSize() << endl;
+	//_QuadTree->clear();
+	//cout << "tree size is  " << _QuadTree->treeSize() << endl;
 	for (int i = 0; i < recVec.size(); i++) {
 		if (recVec[i]->getName() == "Oasis_Platform" || recVec[i]->getName() == "JungleVillage") largeStruct->push_back(recVec[i]);
-		_QuadTree->Insert(recVec[i]);	//insert all obj into tree
+		//_QuadTree->Insert(recVec[i]);	//insert all obj into tree
 	}
+
+	grid_worldobj->insert_worldobj_to_grid(recVec);
+	grid_worldobj->insert_worldobj_to_grid(movVec);
 
 	cout << "tree size is  " << _QuadTree->treeSize() << endl;
 	cout << "size of recvec is " << recVec.size() << endl;
@@ -1809,10 +1813,14 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 			}
 			start_tick = clock();
 			if (!MAP_EDITOR) {
-				_QuadTree->clearMovable();
+				//_QuadTree->clearMovable();
+				grid_worldobj->clear_and_reinsert(movVec);
+				//vector<WorldObj*> temp = { Alex };
+				//grid_worldobj->clear_and_reinsert(temp);
 			}
 			else {
-				_QuadTree->clear();
+				//_QuadTree->clear();
+				grid_worldobj->clear_and_reinsert(movVec);
 			}
 			//grid->clear();
 			//grid->insert_objs_to_grid(rivObj->getLines());
@@ -1826,7 +1834,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 						recVec[i]->effect.sprite.animate();
 						recVec[i]->WorldObj::animateObj();
 					}
-					 _QuadTree->Insert(recVec[i]);	//insert all obj into tree
+					// _QuadTree->Insert(recVec[i]);	//insert all obj into tree
 				}
 
 				for (int i = 0; i < movVec.size(); i++) {
@@ -1835,24 +1843,24 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 						movVec[i]->effect.sprite.animate();
 						movVec[i]->WorldObj::animateObj();
 					}
-					_QuadTree->Insert(movVec[i]);	//insert all obj into tree
+					//_QuadTree->Insert(movVec[i]);	//insert all obj into tree
 				}
 			}
 			else {
-				//for (int i = 0; i < recVec.size(); i++) {
-				//	if (recVec[i]->getType() != WorldObj::TYPE_WORLDOBJ) {
-				//		recVec[i]->effect.sprite.animate();
-				//		recVec[i]->WorldObj::animateObj();
-				//	}
-				//	//_QuadTree->Insert(recVec[i]);	//insert all obj into tree
-				//}
+				for (int i = 0; i < recVec.size(); i++) {
+					if (recVec[i]->getType() != WorldObj::TYPE_WORLDOBJ) {
+						recVec[i]->effect.sprite.animate();
+						recVec[i]->WorldObj::animateObj();
+					}
+					//_QuadTree->Insert(recVec[i]);	//insert all obj into tree
+				}
 				for (int i = 0; i < movVec.size(); i++) {
 					//cout << "movevec item type is " << movVec[i]->getType() << endl;
 					if (movVec[i]->getType() != WorldObj::TYPE_WORLDOBJ) {
 						movVec[i]->effect.sprite.animate();
 						movVec[i]->WorldObj::animateObj();
 					}
-					_QuadTree->Insert(movVec[i]);	//insert all obj into tree
+					//_QuadTree->Insert(movVec[i]);	//insert all obj into tree
 				}
 				//cout << "inserted into tree " << movVec.size() << " movable objs" << endl;
 			}
