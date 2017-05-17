@@ -330,6 +330,7 @@ void ActionExecFunctions::execute_fight(Action* fight)
 	*/
 	bool temp = fight->getDoer()->get_busy() == Hero::BUSY_REC_TALK || fight->getDoer()->get_busy() == Hero::BUSY_REC_FIGHT;
 	if (fight->getDoer()->get_busy() == Hero::BUSY_REC_TALK || fight->getDoer()->get_busy() == Hero::BUSY_REC_FIGHT)return;
+	Player* player = dynamic_cast<Player*>(Containers::hero_table["Shango"]);
 	switch (fight->checkpoint) {
 	case 0: //Pick village location(location of fight target), create memory, increment checkpoint
 		std::cout << fight->getDoer()->getName() << " started fight" << std::endl;
@@ -345,6 +346,11 @@ void ActionExecFunctions::execute_fight(Action* fight)
 		fight->getDoer()->set_busy(Hero::BUSY_MARCH);
 		break;
 	case 1: //If destination is reached, check if hero is there start a timer and move if not, fight otherwise
+		if (Party::dist_location_to_location(player->getLoc(), fight->getDoer()->getLoc()) < 500) {
+			fight->checkpoint = 7;
+			ActionHelper::set_timer(fight, 500);
+		}
+		
 		if (fight->getDoer()->get_action_destination() == Vector2f(NULL, NULL))//needs to be changed to use party location right 
 		{
 			//if the target hero is in the village then begin the battle
@@ -477,6 +483,23 @@ void ActionExecFunctions::execute_fight(Action* fight)
 			std::cout << fight->getDoer()->getName() << " finished fight" << std::endl;
 		}
 		break;
+	case 7:
+		if (ActionHelper::retrieve_time(fight) == 0) {
+			fight->checkpoint++;
+		}
+		break;
+	case 8:
+		if (fight->getDoer()->get_action_destination() == Vector2f(NULL, NULL))//needs to be changed to use party location right 
+		{
+			if (Party::dist_location_to_location(fight->getDoer()->getLoc(), fight->getReceiver()->getLoc())<100) // need to change this so it checks if the party is close by
+			{
+				fight->checkpoint=3;
+				return;
+			}
+			ActionHelper::set_timer(fight, 5); 
+			fight->checkpoint=2;
+		}
+		break;
 
 	}
 
@@ -486,6 +509,7 @@ void ActionExecFunctions::execute_fight(Action* fight)
 void ActionExecFunctions::execute_conquer(Action* conq)
 {
 	if (conq->getDoer()->get_busy() == Hero::BUSY_REC_TALK || conq->getDoer()->get_busy() == Hero::BUSY_REC_FIGHT)return;
+	Player* player = dynamic_cast<Player*>(Containers::hero_table["Shango"]);
 	switch (conq->checkpoint) {
 	case 0: //Pick village location(location of fight target), create memory, increment checkpoint
 		std::cout << conq->getDoer()->getName() << " started conquer" << std::endl;
@@ -501,6 +525,11 @@ void ActionExecFunctions::execute_conquer(Action* conq)
 		conq->getDoer()->set_busy(Hero::BUSY_MARCH);
 		break;
 	case 1: //If destination is reached, check if hero is there start a timer and move if not, fight otherwise
+		if (Party::dist_location_to_location(player->getLoc(), conq->getDoer()->getLoc()) < 500) {
+			conq->checkpoint = 5;
+			ActionHelper::set_timer(conq, 500);
+		}
+		
 		if (conq->getDoer()->get_action_destination() == Vector2f(NULL, NULL) && (conq->getReceiver()->get_busy() == Hero::NOT_BUSY))//needs to be changed to use party location right 
 		{
 			//ActionHelper::set_timer(conq, 3600);  //Wait 1 minute (60 frames times 60 seconds) trying to find out the hero's location
@@ -623,6 +652,23 @@ void ActionExecFunctions::execute_conquer(Action* conq)
 		}
 		break;
 
+	case 5:
+		if (ActionHelper::retrieve_time(conq) == 0) {
+			conq->checkpoint++;
+		}
+		break;
+	case 6:
+		if (conq->getDoer()->get_action_destination() == Vector2f(NULL, NULL))//needs to be changed to use party location right 
+		{
+			if (Party::dist_location_to_location(conq->getDoer()->getLoc(), conq->getReceiver()->getLoc())<100) // need to change this so it checks if the party is close by
+			{
+				conq->checkpoint = 3;
+				return;
+			}
+			ActionHelper::set_timer(conq, 5);
+			conq->checkpoint = 2;
+		}
+		break;
 	}
 
 }

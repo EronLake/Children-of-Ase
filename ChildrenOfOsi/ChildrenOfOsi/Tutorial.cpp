@@ -10,22 +10,45 @@ Tutorial::Stage Tutorial::currentStage = Tutorial::Stage::NONE;
 bool Tutorial::isPaused = false;
 
 bool Tutorial::completedStageGameStart = false;
+bool Tutorial::completedStageIntro01 = false;
+bool Tutorial::completedStageIntro02 = false;
 bool Tutorial::completedStageDialogue = false;
 bool Tutorial::completedStageCombat = false;
 
+Sprite *Tutorial::screenFadeFilterSprite = nullptr;
 Sprite *Tutorial::stageGameStartPopupSprite = nullptr;
+Sprite *Tutorial::stageIntro01PopupSprite = nullptr;
+Sprite *Tutorial::stageIntro02PopupSprite = nullptr;
 
+Texture *Tutorial::screenFaceFilterTex = nullptr;
 Texture *Tutorial::stageGameStartPopupTex = nullptr;
+Texture *Tutorial::stageIntro01PopupTex = nullptr;
+Texture *Tutorial::stageIntro02PopupTex = nullptr;
 
 /**
  * Initializes the tutorial system.
  */
 void Tutorial::init()
 {
+  Tutorial::screenFadeFilterSprite = new Sprite();
+  Tutorial::screenFaceFilterTex = new Texture();
+  Tutorial::screenFaceFilterTex->setFile(SPRITES_PATH + "Tutorial_ScreenFadeFilter.png", 1);
+  Tutorial::screenFadeFilterSprite->setTexture(Tutorial::screenFaceFilterTex);
+
   Tutorial::stageGameStartPopupSprite = new Sprite();
   Tutorial::stageGameStartPopupTex = new Texture();
   Tutorial::stageGameStartPopupTex->setFile(SPRITES_PATH + "Tutorial_GameStartPopup.png", 1);
   Tutorial::stageGameStartPopupSprite->setTexture(Tutorial::stageGameStartPopupTex);
+
+  Tutorial::stageIntro01PopupSprite = new Sprite();
+  Tutorial::stageIntro01PopupTex = new Texture();
+  Tutorial::stageIntro01PopupTex->setFile(SPRITES_PATH + "Tutorial_ScreenFadeFilter.png", 1);
+  Tutorial::stageIntro01PopupSprite->setTexture(Tutorial::stageIntro01PopupTex);
+
+  Tutorial::stageIntro02PopupSprite = new Sprite();
+  Tutorial::stageIntro02PopupTex = new Texture();
+  Tutorial::stageIntro02PopupTex->setFile(SPRITES_PATH + "Tutorial_ScreenFadeFilter.png", 1);
+  Tutorial::stageIntro02PopupSprite->setTexture(Tutorial::stageIntro02PopupTex);
 }
 
 /**
@@ -61,6 +84,10 @@ bool Tutorial::isStageComplete(Stage stage)
   switch(stage) {
     case Tutorial::Stage::GAME_START:
       return Tutorial::completedStageGameStart;
+    case Tutorial::Stage::INTRO01:
+      return Tutorial::completedStageIntro01;
+    case Tutorial::Stage::INTRO02:
+      return Tutorial::completedStageIntro02;
     case Tutorial::Stage::DIALOGUE:
       return  Tutorial::completedStageDialogue;
     case Tutorial::Stage::COMBAT:
@@ -72,12 +99,15 @@ bool Tutorial::isStageComplete(Stage stage)
 
 /**
  * Begins the specified tutorial stage, optionally pausing the game until it is
- * complete. If called with the NONE stage, this function will interpret that as
- * instructions to instead complete the current stage, if any.
+ * complete. If a stage is already active, this function will return without
+ * changing anything. If called with the NONE stage, this function will
+ * interpret that as instructions to instead complete the current stage, if any.
  */
 void Tutorial::launchStage(Stage stage, Input &input, bool pause)
 {
-  if(stage == Tutorial::Stage::NONE) {
+  if(Tutorial::currentStage != Tutorial::Stage::NONE)
+    return;
+  else if(stage == Tutorial::Stage::NONE) {
     Tutorial::completeStage(input);
     return;
   }
@@ -89,32 +119,12 @@ void Tutorial::launchStage(Stage stage, Input &input, bool pause)
     case Tutorial::Stage::GAME_START:
       input.current_game_state = game_state::main_menu;
       break;
+    case Tutorial::Stage::INTRO01:
+    case Tutorial::Stage::INTRO02:
     case Tutorial::Stage::DIALOGUE:
-      input.current_game_state = (pause) ?
-        game_state::pause_menu : game_state::in_game;
-      break;
     case Tutorial::Stage::COMBAT:
       input.current_game_state = (pause) ?
         game_state::pause_menu : game_state::in_game;
-      break;
-  }
-}
-
-/**
- * Checks whether the current stage, if any, has received the necessary input to
- * be completed.
- */
-void Tutorial::updateStage(Stage stage)
-{
-  switch(stage) {
-    case Tutorial::Stage::GAME_START:
-      
-      break;
-    case Tutorial::Stage::DIALOGUE:
-      
-      break;
-    case Tutorial::Stage::COMBAT:
-      
       break;
   }
 }
@@ -125,6 +135,24 @@ void Tutorial::updateStage(Stage stage)
  */
 void Tutorial::completeStage(Input &input)
 {
+  switch(Tutorial::currentStage) {
+    case Tutorial::Stage::GAME_START:
+      Tutorial::completedStageGameStart = true;
+      break;
+    case Tutorial::Stage::INTRO01:
+      Tutorial::completedStageIntro01 = true;
+      break;
+    case Tutorial::Stage::INTRO02:
+      Tutorial::completedStageIntro02 = true;
+      break;
+    case Tutorial::Stage::DIALOGUE:
+      Tutorial::completedStageDialogue = true;
+      break;
+    case Tutorial::Stage::COMBAT:
+      Tutorial::completedStageCombat = true;
+      break;
+  }
+
   Tutorial::currentStage = Tutorial::Stage::NONE;
   Tutorial::isPaused = false;
   input.current_game_state = game_state::in_game;
@@ -139,6 +167,14 @@ void Tutorial::drawTutorial()
     case Tutorial::Stage::GAME_START:
       GameWindow::drawSprite(Tutorial::GAME_START_POPUP_X, Tutorial::GAME_START_POPUP_Y,
         Tutorial::GAME_START_POPUP_WIDTH, Tutorial::GAME_START_POPUP_HEIGHT, *Tutorial::stageGameStartPopupSprite);
+      break;
+    case Tutorial::Stage::INTRO01:
+      GameWindow::drawSprite(Tutorial::SCREEN_FADE_FILTER_X, Tutorial::SCREEN_FADE_FILTER_Y,
+        Tutorial::SCREEN_FADE_FILTER_WIDTH, Tutorial::SCREEN_FADE_FILTER_HEIGHT, *Tutorial::screenFadeFilterSprite);
+      break;
+    case Tutorial::Stage::INTRO02:
+      GameWindow::drawSprite(Tutorial::SCREEN_FADE_FILTER_X, Tutorial::SCREEN_FADE_FILTER_Y,
+        Tutorial::SCREEN_FADE_FILTER_WIDTH, Tutorial::SCREEN_FADE_FILTER_HEIGHT, *Tutorial::screenFadeFilterSprite);
       break;
     case Tutorial::Stage::DIALOGUE:
 

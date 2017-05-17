@@ -4,6 +4,8 @@
 #include "Task.h"
 #include "MessageLog.h"
 
+class memManager;
+class MemoryHelper;
 
 class TaskBuffer;
 

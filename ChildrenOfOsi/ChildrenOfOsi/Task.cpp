@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "Task.h"
+#include "MemoryHelper.h"
 
 
 Task::Task(std::string _name, std::string _status, std::string _type, char* _source, char* _target, RegionState::soundType _soundType)
@@ -201,7 +202,9 @@ void Task::updateStatus(std::string new_status)
 Task* Task::clone_task()
 {
 	//duplicates all of the attibutes of original task
-	Task* duplicate_task = new Task(name,status,type);
+	//Task* duplicate_task = new Task(name,status,type);
+	Task* duplicate_task = new(MemoryHelper::s_find_available_block(memManager::task_head)) Task(name, status, type);
+
 	duplicate_task->key = key;
 	duplicate_task->arg1 = arg1;
 	duplicate_task->arg2 = arg2;

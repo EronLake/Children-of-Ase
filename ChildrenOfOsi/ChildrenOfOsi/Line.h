@@ -12,6 +12,7 @@ public:
 	void setP2(Point p_2);
 	Point getP1();
 	Point getP2();
+
 private:
 	Point p1;
 	Point p2;

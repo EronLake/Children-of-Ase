@@ -113,8 +113,8 @@
     },
 
 	"Confirm Alliance": {
-        "1": "Fine then. Nevermind.",
-        "2": "Fine then. Nevermind.",
+        "1": "Let's get this paperwork out of the way then. Glad to have you aboard.",
+        "2": "Let's get this paperwork out of the way then. Glad to have you aboard.",
         "3": "Let's get this paperwork out of the way then. Glad to have you aboard.",
         "4": "Let's get this paperwork out of the way then. Glad to have you aboard.",
 		"5": "Let's get this paperwork out of the way then. Glad to have you aboard."
@@ -233,8 +233,8 @@
     },
 
 	"Confirm Duel": {
-        "1": "Alright. Nevermind then.",
-        "2": "Alright. Nevermind then.",
+        "1": "Let us get this duel started then.",
+        "2": "Let us get this duel started then.",
         "3": "Let us get this duel started then.",
         "4": "Let us get this duel started then.",
         "5": "Let us get this duel started then."
@@ -257,8 +257,8 @@
     },
 
 	"Confirm Spar": {
-        "1": "Disappointing.... Well, sorry to bother you.",
-        "2": "Disappointing.... Well, sorry to bother you.",
+        "1": "Let us begin with this spar then. Don't hold back.",
+        "2": "Let us begin with this spar then. Don't hold back.",
         "3": "Let us begin with this spar then. Don't hold back.",
         "4": "Let us begin with this spar then. Don't hold back.",
         "5": "Let us begin with this spar then. Don't hold back."

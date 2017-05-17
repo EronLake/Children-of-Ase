@@ -184,6 +184,7 @@
     <ClInclude Include="Containers.h" />
     <ClInclude Include="ConversationLogObj.h" />
     <ClInclude Include="ConversationPoint.h" />
+    <ClInclude Include="SoldierConfig.h" />
     <ClInclude Include="Tutorial.h" />
     <ClInclude Include="ThreadManager.h" />
     <ClInclude Include="DialogueConfig.h" />
@@ -291,10 +292,11 @@
     <ClCompile Include="QuestManager.cpp" />
     <ClCompile Include="Region.cpp" />
     <ClCompile Include="RegionState.cpp" />
+    <ClCompile Include="GameState.cpp" />
+    <ClCompile Include="SoldierConfig.cpp" />
     <ClCompile Include="Tag.cpp" />
     <ClCompile Include="TagConfig.cpp" />
     <ClCompile Include="Tutorial.cpp" />
-    <ClCompile Include="UniformGrid.cpp" />
     <ClCompile Include="Village.cpp" />
     <ClCompile Include="GameMap.cpp" />
     <ClCompile Include="GameWindow.cpp" />
@@ -351,6 +353,7 @@
   <ItemGroup>
     <None Include="action_config.json" />
     <None Include="AssetInfo.h" />
+    <None Include="attack_config.json" />
     <None Include="ClassDiagram.cd" />
     <None Include="config_jungle.json" />
     <None Include="config_oasis.json" />
@@ -367,6 +370,7 @@
     <None Include="script_templates.json" />
     <None Include="Shango_dialog.json" />
     <None Include="SilverSoldier_dialog.json" />
+    <None Include="soldier_config.json" />
     <None Include="Tag_config.json" />
     <None Include="test.json" />
     <None Include="Yemoja_dialog.json" />

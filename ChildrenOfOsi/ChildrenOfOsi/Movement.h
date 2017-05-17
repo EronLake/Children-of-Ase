@@ -19,7 +19,7 @@ class PhysicsManager;
 
 class Movement {
 public:
-	Movement(QuadTree* QT, UniformGrid* _UG, RiverObj* _rivObj);
+	Movement(QuadTree* QT, UniformGrid<Line>* _UG, RiverObj* _rivObj, UniformGrid<WorldObj>* _worldobj_grid);
 	~Movement();
 	//void playerAction(string task_name, WorldObj* player);
 	//static void initTree(WorldObj* screen);
@@ -40,7 +40,8 @@ public:
 	
 	//void init_task_map();
     QuadTree* tree;
-	UniformGrid* grid;
+	UniformGrid<Line>* grid;
+	UniformGrid<WorldObj>* world_grid;
 	RiverObj* rivObj;
 	PhysicsManager* manager;
 

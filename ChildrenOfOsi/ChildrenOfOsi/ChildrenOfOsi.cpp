@@ -2,6 +2,7 @@
 #include "ChildrenOfOsi.h"
 #include "MemoryPool.h"
 #include "memManager.h"
+#include "MemoryHelper.h"
 
 ChildrenOfOsi::ChildrenOfOsi(MessageLog* _mLog, TaskBuffer* _tBuffer)
 {
@@ -240,7 +241,7 @@ void ChildrenOfOsi::pause_unpause(string name, char* source) {
 void ChildrenOfOsi::createTaskForAudio(std::string _name, std::string _type, char* _source, char* _target, RegionState::soundType _soundType) {
 	//maybe just pass in the string craeated
 	std::string task_status = "CREATED";
-	Task* new_task = new Task(_name, task_status, _type, _source, _target,_soundType);
+	Task* new_task = new(MemoryHelper::s_find_available_block(memManager::task_head)) Task(_name, task_status, _type, _source, _target,_soundType);
 	tBuffer->push(new_task);
 	mLog->logMessage(new_task);
 }
@@ -252,9 +253,9 @@ void ChildrenOfOsi::createTask(std::string task_name, std::string type, WorldObj
 	if (objToUpdate == nullptr) {
 		LOG("childrenofosi createtask func, obj to update is a nullptr");
 	}
-	Task* new_task = new Task(task_name, task_status, type, objToUpdate);
-	 tBuffer->push(new_task);
 
+	Task* new_task = new(MemoryHelper::s_find_available_block(memManager::task_head)) Task(task_name, task_status, type, objToUpdate);
+	tBuffer->push(new_task);
 }
 
 void ChildrenOfOsi::createTaskWithNum(std::string task_name, std::string type, WorldObj * objToUpdate,int num)
@@ -264,7 +265,7 @@ void ChildrenOfOsi::createTaskWithNum(std::string task_name, std::string type, W
 	if (objToUpdate == nullptr) {
 		LOG("childrenofosi createtask func, obj to update is a nullptr");
 	}
-	Task* new_task = new Task(task_name, task_status, type, objToUpdate,num);
+	Task* new_task = new(MemoryHelper::s_find_available_block(memManager::task_head)) Task(task_name, task_status, type, objToUpdate,num);
 	tBuffer->push(new_task);
 }
 
@@ -272,7 +273,7 @@ void ChildrenOfOsi::createTaskWithParams(std::string task_name, std::string type
 {
 	//maybe just pass in the string craeated
 	std::string task_status = "CREATED";
-	Task* new_task = new Task(task_name, task_status, type, key, x, y, col);
+	Task* new_task = new(MemoryHelper::s_find_available_block(memManager::task_head)) Task(task_name, task_status, type, key, x, y, col);
 	tBuffer->push(new_task);
 }
 
@@ -280,7 +281,7 @@ void ChildrenOfOsi::createTaskAddMem(std::string task_name, std::string type, st
 {
 	//maybe just pass in the string craeated
 	std::string task_status = "CREATED";
-	Task* new_task = new Task(task_name, task_status, type, key, hero_name, t, frames, p, cat, cont, where, why,when);
+	Task* new_task = new(MemoryHelper::s_find_available_block(memManager::task_head)) Task(task_name, task_status, type, key, hero_name, t, frames, p, cat, cont, where, why,when);
 	tBuffer->push(new_task);
 }
 
@@ -289,7 +290,7 @@ void ChildrenOfOsi::createTaskAddAct(std::string task_name, std::string type, st
 {
 	//maybe just pass in the string craeated
 	std::string task_status = "CREATED";
-	Task* new_task = new Task(task_name, task_status, type, key, utility, why, owner, receiver, doer, exe_name);
+	Task* new_task = new(MemoryHelper::s_find_available_block(memManager::task_head)) Task(task_name, task_status, type, key, utility, why, owner, receiver, doer, exe_name);
 	tBuffer->push(new_task);
 }
 
@@ -298,7 +299,7 @@ void ChildrenOfOsi::createTaskNoObj(std::string task_name, std::string type, std
 {
 	//maybe just pass in the string craeated
 	std::string task_status = "CREATED";
-	Task* new_task = new Task(task_name, task_status, type, icon, temp, key);
+	Task* new_task = new(MemoryHelper::s_find_available_block(memManager::task_head)) Task(task_name, task_status, type, icon, temp, key);
 	tBuffer->push(new_task);
 }
 
@@ -306,7 +307,7 @@ void ChildrenOfOsi::createTaskTag(std::string task_name, std::string type, std::
 {
 	//maybe just pass in the string craeated
 	std::string task_status = "CREATED";
-	Task* new_task = new Task(task_name, task_status, type,key);
+	Task* new_task = new(MemoryHelper::s_find_available_block(memManager::task_head)) Task(task_name, task_status, type,key);
 	tBuffer->push(new_task);
 }
 

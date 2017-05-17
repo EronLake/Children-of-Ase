@@ -14,6 +14,7 @@ PlayerActExecFunctions::~PlayerActExecFunctions()
 
 void PlayerActExecFunctions::execute_start(std::string act_name, Hero* receiver) {
 
+
 	std::cout << "------------EX_START-------------" << std::endl;
 
 	Player* player = dynamic_cast<Player*>(Containers::hero_table["Shango"]);
@@ -161,11 +162,8 @@ void PlayerActExecFunctions::execute_end(bool if_succ) {
 	cur_action->str_mult = nullptr;
 	cur_action->noto_mult = nullptr;
 	//sets preconditions to references preconditions
-	if (player->cur_action->getOwner() == player)
-	{
-		delete player->cur_action;
-	}
-	
+
+	delete player->cur_action;
 	player->cur_action = nullptr;
 }
 
@@ -216,10 +214,6 @@ void PlayerActExecFunctions::check_quest() {
 		if (player->cur_action == itr.first)
 		{
 			player->cur_action->executed = true;
-			Action* ref_action = Containers::action_table[player->cur_action->getName() + "_" + player->cur_action->getReceiver()->getName()];
-			Action* new_action = new Action(player, player->cur_action->getReceiver(), player, player->cur_action->getUtility(), player->cur_action->getWhy(),
-				ref_action->name, ref_action->exe_name);
-			player->quests_log.push_back(new_action);
 		}
 	}
 

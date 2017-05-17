@@ -67,7 +67,7 @@ void TaskBuffer::assignTask(int id, Task* current_task)
 				LOG("PRIOR TO EXECUTING THE DUP TASK");
 				(*itr)->execute_task(duplicate_task);
 			}
-			delete current_task;
+			//delete current_task;
 		}
 		else
 		{
@@ -79,7 +79,7 @@ void TaskBuffer::assignTask(int id, Task* current_task)
 	{
 		//confirm task was completed or failed in MessageLog
 		mLog->logMessage(current_task);
-		delete current_task;
+		//delete current_task;
 	}
 	else
 	{

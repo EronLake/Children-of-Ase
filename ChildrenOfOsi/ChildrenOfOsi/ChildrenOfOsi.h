@@ -5,6 +5,8 @@
 #include "MessageLog.h"
 #include "Player.h"
 
+class MemoryHelper;
+
 class ChildrenOfOsi
 {
 private:
