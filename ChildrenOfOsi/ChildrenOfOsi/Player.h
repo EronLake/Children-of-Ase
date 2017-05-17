@@ -21,6 +21,8 @@ public:
 	std::vector<Action*> quests_log;
 	std::vector<int> heroes_player_knows;
 	std::unordered_map<std::string,int> move_to_flags;
+	bool can_spin;
+	bool can_fire;
 	//don't need these because they are inherated from hero
 	//int mem_counter;
 	//vector<Memory*> memories;

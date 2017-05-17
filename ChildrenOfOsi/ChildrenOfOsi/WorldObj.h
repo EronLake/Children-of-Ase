@@ -24,6 +24,8 @@ class WorldObj
 	  offset_y2 = 0.0;
 	  width = 0;
 	  height = 0;
+	  grid_location.first = -1;
+	  grid_location.second = -1;
 	  mew = new std::mutex();
   };
 
@@ -36,6 +38,8 @@ class WorldObj
 	  offset_x2 = 0.0;
 	  offset_y1 = 0.0;
 	  offset_y2 = 0.0;
+	  grid_location.first = -1;
+	  grid_location.second = -1;
 	  mew = new std::mutex();
   }
 
@@ -50,6 +54,8 @@ class WorldObj
 	  offset_y2 = 0.0;
 	  width = 0;
 	  height = 0;
+	  grid_location.first = -1;
+	  grid_location.second = -1;
 	  mew = new std::mutex();
   }
 
@@ -113,6 +119,7 @@ class WorldObj
   // String conversion
   void _print();
 
+  std::pair<int, int> grid_location;
   Sprite sprite;
   vector<Rectangle> body;
   Rectangle effect;

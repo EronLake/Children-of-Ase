@@ -6,11 +6,12 @@
 GameMap* RenderHelper::gmap;
 
 
-RenderHelper::RenderHelper(QuadTree * QT, RiverObj* _rivObj, std::vector<WorldObj*>* _largeStruct)
+RenderHelper::RenderHelper(QuadTree * QT, RiverObj* _rivObj, std::vector<WorldObj*>* _largeStruct, UniformGrid<WorldObj>* _worldobj_grid)
 {
   tree = QT;
   rivObj = _rivObj;
   largeStruct = _largeStruct;
+  grid_game = _worldobj_grid;
   camera = new WorldObj(0, 0, false);
   fullBound = new WorldObj(Vector2f(0, 0), 25000, 25000);
   cameraSize.setXloc(960);
@@ -87,7 +88,8 @@ int RenderHelper::draw_frame(WorldObj * obj)
 
 	//objVec = tree->retrieve(objVec, camera);
 	if (fullVec.empty()) {
-		fullVec = tree->retrieve(fullVec, fullBound);
+		//fullVec = tree->retrieve(fullVec, fullBound);
+		fullVec = grid_game->retrieve_worldobj_in_grid(fullVec, obj);
 	}
 
 	//set<WorldObj*> s;
