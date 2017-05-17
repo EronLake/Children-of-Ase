@@ -225,7 +225,9 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 
 	//HeroConfig::import_config(movVec_ptr, gameplay_functions, tBuffer);
 
-	gameplay_functions->add_hero("Shango", 5045, 10465, true);
+	//gameplay_functions->add_hero("Shango", 5045, 10465, true);
+	gameplay_functions->add_hero("Shango", 17615, 21900, true);//used to start Shango near Oya for testing purposes
+
 	tBuffer->run();
 
 	Player* Alex = dynamic_cast<Player*>(Containers::hero_table["Shango"]);
@@ -257,18 +259,20 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 
 	Input* iController = new Input(gameplay_functions, Alex, RenM->renderHelper, tBuffer, recVec_ptr, movVec_ptr);
 
-	//gameplay_functions->add_hero("Yemoja", 5045, 13465, true);//5045 old x 13465 old y
-	//gameplay_functions->add_hero("Oya", 17615, 21470, true);//17157 old x 17615
+	gameplay_functions->add_hero("Yemoja", 5045, 13465, true);//5045 old x 13465 old y
+	gameplay_functions->add_hero("Oya", 17615, 21470, true);//17157 old x 17615
 
 	//puts Yemoja and Oya near each other for testing purposes
-	gameplay_functions->add_hero("Oya", 3000, 12465, true);
-	gameplay_functions->add_hero("Yemoja", 2500, 12465, true);
+	//gameplay_functions->add_hero("Oya", 3000, 12465, true);
+	//gameplay_functions->add_hero("Yemoja", 2500, 12465, true);
 	tBuffer->run();
 	
 
 	Hero* yemoja = Containers::hero_table["Yemoja"];
 	heroes.push_back(yemoja);
+	yemoja->set_busy(0);//added for testing
 	Hero* oya = Containers::hero_table["Oya"];
+	oya->set_busy(0);//added for testing
 	heroes.push_back(oya);
 
 	yemoja->name = YEMOJA;
@@ -1649,7 +1653,8 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	for (auto it : *largeStruct) cout << (it)->getName() << endl;
 
 	if (PRELOAD_TEX) t0.join();
-
+	oya->set_busy(0);
+	yemoja->set_busy(0);
 	while (GameWindow::isRunning()) {
 		while (current_game_state == game_state::main_menu) {
 			//cout << "currently in the main menu" << endl;

@@ -233,11 +233,29 @@ void ActionExecFunctions::execute_form_alliance(Action* form_alliance) {
 	case 1:
 		if (form_alliance->getDoer()->get_action_destination() == Vector2f(NULL, NULL) && (form_alliance->getReceiver()->get_busy() == Hero::NOT_BUSY)) {
 			//Planner* hero_planner = ActionHelper::ai->get_plan(responder->name);
+			if(form_alliance->getReceiver()->name == SHANGO)
+			{
+				form_alliance->apply_postconditions(true);
 
+				if (form_alliance->getDoer()->SUGG_ACT_STATUS == 1) {
+					//sets suggested action flag to success
+					form_alliance->getDoer()->SUGG_ACT_STATUS = 3;
+
+					//update notoriety/affinity/strength accordingly
+					form_alliance->getDoer()->rel[SHANGO]->setNotoriety(form_alliance->getDoer()->rel[SHANGO]->getNotoriety() + 7);
+					form_alliance->getDoer()->rel[SHANGO]->setAffinity(form_alliance->getDoer()->rel[SHANGO]->getAffinity() + 7);
+					form_alliance->getDoer()->rel[SHANGO]->setStrength(form_alliance->getDoer()->rel[SHANGO]->getStrength() + 7);
+				}
+
+				//doer_mem->setCategory("success"); receiver_mem->setCategory("success");
+				//doer_mem->setReason("We joined forces");
+				//receiver_mem->setReason("We joined forces");
+
+			}
 			//Memory* doer_mem = form_alliance->getDoer()->find_mem(form_alliance->getName() + "_" + std::to_string(form_alliance->time_stamp));
 			//Memory* receiver_mem = form_alliance->getReceiver()->find_mem(form_alliance->getName() + "_" + std::to_string(form_alliance->time_stamp));
 
-			if (ActionHelper::hero_respond(form_alliance)) {
+			else if (ActionHelper::hero_respond(form_alliance)) {
 				form_alliance->apply_postconditions(true);
 
 				if (form_alliance->getDoer()->SUGG_ACT_STATUS == 1) {
@@ -310,7 +328,7 @@ void ActionExecFunctions::execute_fight(Action* fight)
 	Update memory all participants with memory
 	Prompt for kill?
 	*/
-
+	bool temp = fight->getDoer()->get_busy() == Hero::BUSY_REC_TALK || fight->getDoer()->get_busy() == Hero::BUSY_REC_FIGHT;
 	if (fight->getDoer()->get_busy() == Hero::BUSY_REC_TALK || fight->getDoer()->get_busy() == Hero::BUSY_REC_FIGHT)return;
 	switch (fight->checkpoint) {
 	case 0: //Pick village location(location of fight target), create memory, increment checkpoint
@@ -840,7 +858,7 @@ void ActionExecFunctions::execute_bribe(Action* bribe)
 		case 0: //Determine the location that the bribe is happening
 			ActionHelper::set_timer(bribe, 3600);
 			bribe->getDoer()->set_busy(Hero::BUSY_TALK);
-			bribe->getReceiver()->set_busy(Hero::BUSY_REC_TALK);
+			//bribe->getReceiver()->set_busy(Hero::BUSY_REC_TALK);
 			bribe->checkpoint++;
 			break;
 		case 1: //Determine the location that the bribe is happening
