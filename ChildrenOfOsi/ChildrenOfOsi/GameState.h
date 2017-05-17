@@ -1,7 +1,7 @@
 #pragma once
 #include "common.h"
 
-enum class game_state {load_game,main_menu, pause_menu, in_game, victory_menu};
+enum class game_state {load_game,main_menu, pause_menu, tutorial_pause, in_game, victory_menu};
 
 template <typename Enumeration>
 auto as_integer(Enumeration const value)

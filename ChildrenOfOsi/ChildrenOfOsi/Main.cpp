@@ -1666,9 +1666,6 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 			}
 			
 			start_tick = clock();
-
-			gameplay_functions->drawTut(Alex);
-
 			iController->InputCheck();
 			tBuffer->run();
 
@@ -1684,6 +1681,9 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 
 			current_game_state = iController->current_game_state;
 			//if(t0.joinable)t0.join();
+
+      gameplay_functions->drawTut(Alex);
+      Tutorial::drawTutorial();
 		}
 		while (current_game_state == game_state::in_game) {
       cout << "Current game state: in_game" << endl;
@@ -1884,109 +1884,123 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 			else if (state > 0) {
 				gameplay_functions->drawDiaGui(Alex);
 				gameplay_functions->stop(yemoja);
-			}
+      }
 
-			//run task buffer
-			iController->InputCheck();
+      //run task buffer
+      iController->InputCheck();
 
-			//pool.push(test);
-			
-			cout << "size of buffer is " << tBuffer->queue_buffer.size() << " and physics buffer size is " << tBuffer->physics_buffer.size() << endl;
+      //pool.push(test);
 
-			//cout << "shango's position BEFORE is at " << Alex->getX() << ", " << Alex->getY() << endl;
-			//iterate through physics_buffer
-			//while(tBuffer->physics_buffer_isEmpty() == false) {
-			//	Task* curr_task = tBuffer->pop_physics();
-			//	cout << "num of idle threads is " << pool.n_idle() << endl;
-			//	pool.push([&,tBuffer,curr_task](int id){ tBuffer->assignTask(0,curr_task); });
-			//}
-			//tBuffer->physics_buffer_empty();
-			//pool.stop(true);
-			//cout << "DONE WITH PHYSICS TASKS" << endl;
-			//cout << "shango's position AFTER is at " << Alex->getX() << ", " << Alex->getY() << endl;
-			tBuffer->run();
+      cout << "size of buffer is " << tBuffer->queue_buffer.size() << " and physics buffer size is " << tBuffer->physics_buffer.size() << endl;
 
-			/////////////////////////////////////////////////////////////////
-			/////////////////////////////////////////////////////////////////
-			/////////////////////////////////////////////////////////////////
-			for (auto iter : yemoja->rel) {
-				Relationship* my_rel = iter.second;
-				int with_hero = iter.first;
+      //cout << "shango's position BEFORE is at " << Alex->getX() << ", " << Alex->getY() << endl;
+      //iterate through physics_buffer
+      //while(tBuffer->physics_buffer_isEmpty() == false) {
+      //	Task* curr_task = tBuffer->pop_physics();
+      //	cout << "num of idle threads is " << pool.n_idle() << endl;
+      //	pool.push([&,tBuffer,curr_task](int id){ tBuffer->assignTask(0,curr_task); });
+      //}
+      //tBuffer->physics_buffer_empty();
+      //pool.stop(true);
+      //cout << "DONE WITH PHYSICS TASKS" << endl;
+      //cout << "shango's position AFTER is at " << Alex->getX() << ", " << Alex->getY() << endl;
+      tBuffer->run();
 
-				if (my_rel->isChanged()) {
-					//reevaluate goals for with_hero
-					AIController::reevaluate_state(YEMOJA, with_hero);
-					my_rel->setChanged(false);
-				}
-			}
-			//getting here-------------------------------------------------------------------------***********
-			//setting give as quest to false so that the excute runs
-			YemojaPlanner->give_as_quest = false;
+      /////////////////////////////////////////////////////////////////
+      /////////////////////////////////////////////////////////////////
+      /////////////////////////////////////////////////////////////////
+      for(auto iter : yemoja->rel) {
+        Relationship* my_rel = iter.second;
+        int with_hero = iter.first;
+
+        if(my_rel->isChanged()) {
+          //reevaluate goals for with_hero
+          AIController::reevaluate_state(YEMOJA, with_hero);
+          my_rel->setChanged(false);
+        }
+      }
+      //getting here-------------------------------------------------------------------------***********
+      //setting give as quest to false so that the excute runs
+      YemojaPlanner->give_as_quest = false;
 //			cout << " first dest is " << staticRec->get_action_destination()->getXloc() << ", " << staticRec->get_action_destination()->getYloc() << endl;
-			AIController::execute();
+      AIController::execute();
 //			cout << "after execute dest is " << staticRec->get_action_destination()->getXloc() << ", " << staticRec->get_action_destination()->getYloc() << endl;
-			//AI.join();
+      //AI.join();
 //			cout << "after thread join dest is " << staticRec->get_action_destination()->getXloc() << ", " << staticRec->get_action_destination()->getYloc() << endl;
-			if ((1000 / fs) > (clock() - start_tick)) { //delta_ticks)
-				Sleep((1000 / fs) - (clock() - start_tick));
-			}
-			delta_ticks = clock() - start_tick; //the time, in ms, that took to render the scene
-			if (delta_ticks > 0) {
-				fps = CLOCKS_PER_SEC / delta_ticks;
-			}
-			HUD::FPS = fps;
-			//cout << "FPS: " << fps << endl;
-			total_fps += fps;
-			frame_count++;
-			HUD::AVG = total_fps / frame_count;
+      if((1000 / fs) > (clock() - start_tick)) { //delta_ticks)
+        Sleep((1000 / fs) - (clock() - start_tick));
+      }
+      delta_ticks = clock() - start_tick; //the time, in ms, that took to render the scene
+      if(delta_ticks > 0) {
+        fps = CLOCKS_PER_SEC / delta_ticks;
+      }
+      HUD::FPS = fps;
+      //cout << "FPS: " << fps << endl;
+      total_fps += fps;
+      frame_count++;
+      HUD::AVG = total_fps / frame_count;
 
-			//Checks if game has reached final states
-			check_if_end_game();
+      //Checks if game has reached final states
+      check_if_end_game();
 
-			current_game_state = iController->current_game_state;
-			//system("PAUSE");
-			
+      current_game_state = iController->current_game_state;
+      //system("PAUSE");
 
-		}
-		while (current_game_state == game_state::pause_menu) {
-			for (int i = 0; i < 10; i++) {
-				cout << "Press Q to return to game" << endl;
+      Tutorial::drawTutorial();
+    }
+    while(current_game_state == game_state::pause_menu) {
+      if(iController->current_game_state != game_state::pause_menu) {
+        iController->current_game_state = current_game_state;
+      }
 
-			}
-			if (iController->current_game_state != game_state::pause_menu) {
-				iController->current_game_state = current_game_state;
-			}
+      if(shouldExit > 0) {
+        _CrtDumpMemoryLeaks();
+        return;
+      }
 
-			if (shouldExit > 0) {
-				_CrtDumpMemoryLeaks();
-				return;
-			}
-			start_tick = clock();
+      start_tick = clock();
+      iController->InputCheck();
+      tBuffer->run();
 
-			//draw
-			gameplay_functions->drawTut(Alex);
+      if((1000 / fs) > (clock() - start_tick))
+        Sleep((1000 / fs) - (clock() - start_tick));
+      delta_ticks = clock() - start_tick; //the time, in ms, that took to render the scene
+      if(delta_ticks > 0)
+        fps = CLOCKS_PER_SEC / delta_ticks;
+      HUD::FPS = fps;
+      HUD::AVG = total_fps / frame_count;
 
-			//run task buffer
-			iController->InputCheck();
+      current_game_state = iController->current_game_state;
+      gameplay_functions->drawTut(Alex);
+      Tutorial::drawTutorial();
+    }
+    while(current_game_state == game_state::tutorial_pause) {
+      if(iController->current_game_state != game_state::pause_menu) {
+        iController->current_game_state = current_game_state;
+      }
 
-			tBuffer->run();
+      if(shouldExit > 0) {
+        _CrtDumpMemoryLeaks();
+        return;
+      }
 
-			if ((1000 / fs) > (clock() - start_tick)) { //delta_ticks) {www
-				Sleep((1000 / fs) - (clock() - start_tick));
-			}
-			delta_ticks = clock() - start_tick; //the time, in ms, that took to render the scene
-			if (delta_ticks > 0) {
-				fps = CLOCKS_PER_SEC / delta_ticks;
-			}
-			HUD::FPS = fps;
-			//total_fps += fps;
-			//cout << "FPS: " << fps << endl;
+      start_tick = clock();
+      iController->InputCheck();
+      tBuffer->run();
 
-			//frame_count++;
-			HUD::AVG = total_fps / frame_count;
+      if((1000 / fs) > (clock() - start_tick))
+        Sleep((1000 / fs) - (clock() - start_tick));
+      delta_ticks = clock() - start_tick; //the time, in ms, that took to render the scene
+      if(delta_ticks > 0)
+        fps = CLOCKS_PER_SEC / delta_ticks;
 
-			current_game_state = iController->current_game_state;
-		}
+      HUD::FPS = fps;
+      HUD::AVG = total_fps / frame_count;
+
+      current_game_state = iController->current_game_state;
+      gameplay_functions->drawTut(Alex);
+      Tutorial::drawTutorial();
+    }
 		while (current_game_state == game_state::victory_menu) {
 
 			if (iController->current_game_state != game_state::victory_menu) {

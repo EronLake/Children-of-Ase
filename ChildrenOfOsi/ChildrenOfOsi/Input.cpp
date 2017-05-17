@@ -608,22 +608,13 @@ void Input::InputCheck()
 	short THREE = GetKeyState('3') >> 15; // Remove self from party and put party in patrol mode
 	short FOUR = GetKeyState('4') >> 15; // coming soon
 
-	if (current_game_state == game_state::victory_menu) {
-		if (ENTER) {
-			// assuming menu only has start option, so move in game
-			if (current_game_state == game_state::victory_menu) {
-				game_ended = true;
-			}
-		}
-	}
-	else if (current_game_state == game_state::main_menu) {
-    Tutorial::drawTutorial();
+	
+	if (current_game_state == game_state::main_menu) {
     if (ENTER) {
       Tutorial::completeStage(*this);
 		}
 	}
 	else if (current_game_state == game_state::in_game) {
-    Tutorial::drawTutorial();
     if (DialogueController::getState() == 0) {
 			Player* t = CheckClass::isPlayer(player);
 			gameplay_functions->combat(player);
@@ -1171,13 +1162,24 @@ void Input::InputCheck()
 		}
 	}
 	else if (current_game_state == game_state::pause_menu) {
-    Tutorial::drawTutorial();
-		if (ENTER) {
-      if(Tutorial::isStageActive(Tutorial::Stage::INTRO01) || Tutorial::isStageActive(Tutorial::Stage::INTRO02))
-        Tutorial::completeStage(*this);
-			current_game_state = game_state::in_game;
-		}
+    if(ENTER) {
+      current_game_state = game_state::in_game;
+    }
 	}
+  else if(current_game_state == game_state::tutorial_pause) {
+    if(ENTER && Tutorial::isStageActive(Tutorial::Stage::INTRO01) || Tutorial::isStageActive(Tutorial::Stage::INTRO02)) {
+      Tutorial::completeStage(*this);
+      current_game_state = game_state::in_game;
+    }
+  }
+  else if(current_game_state == game_state::victory_menu) {
+    if(ENTER) {
+      // assuming menu only has start option, so move in game
+      if(current_game_state == game_state::victory_menu) {
+        game_ended = true;
+      }
+    }
+  }
 }
 
 

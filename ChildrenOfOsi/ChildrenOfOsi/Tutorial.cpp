@@ -124,7 +124,7 @@ void Tutorial::launchStage(Stage stage, Input &input, bool pause)
     case Tutorial::Stage::DIALOGUE:
     case Tutorial::Stage::COMBAT:
       input.current_game_state = (pause) ?
-        game_state::pause_menu : game_state::in_game;
+        game_state::tutorial_pause : game_state::in_game;
       break;
   }
 }
