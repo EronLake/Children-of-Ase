@@ -616,24 +616,15 @@ void Input::InputCheck()
 			}
 		}
 	}
-	// main menu, only allow W and S to select menu options
 	else if (current_game_state == game_state::main_menu) {
     Tutorial::drawTutorial();
-		if (W) {
-			// move selected option up
-		}
-		else if (S) {
-			// move selected option down
-		}
-		else if (ENTER) {
+    if (ENTER) {
       Tutorial::completeStage(*this);
 		}
 	}
 	else if (current_game_state == game_state::in_game) {
-		if (DialogueController::getState() == 0) {
-
-			
-
+    Tutorial::drawTutorial();
+    if (DialogueController::getState() == 0) {
 			Player* t = CheckClass::isPlayer(player);
 			gameplay_functions->combat(player);
 			if (SHIFT) {
@@ -1180,13 +1171,11 @@ void Input::InputCheck()
 		}
 	}
 	else if (current_game_state == game_state::pause_menu) {
-		// pressing esc to unpause
-		//cout << "IN PUT CONTROL IS IN PAUSE STATE" << endl;
+    Tutorial::drawTutorial();
 		if (ENTER) {
-			//for (int i = 0; i < 10; i++) cout << "I HAVE JUST PRESSED Q" << endl;
-			if (current_game_state == game_state::pause_menu) {
-				current_game_state = game_state::in_game;
-			}
+      if(Tutorial::isStageActive(Tutorial::Stage::INTRO01) || Tutorial::isStageActive(Tutorial::Stage::INTRO02))
+        Tutorial::completeStage(*this);
+			current_game_state = game_state::in_game;
 		}
 	}
 }

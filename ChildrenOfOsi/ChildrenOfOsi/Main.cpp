@@ -1652,12 +1652,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 
 	while (GameWindow::isRunning()) {
 		while (current_game_state == game_state::main_menu) {
-			//cout << "currently in the main menu" << endl;
-			for (int i = 0; i < 10; i++) {
-				cout << "Press Enter to start game" << endl;
-				cout << Containers::hero_table["Yemoja"]->rel[1]->getAffinity() << endl;
-			}
-
+			cout << "Current game state: main_menu" << endl;
 			if (iController->current_game_state != game_state::main_menu) {
 				iController->current_game_state = current_game_state;
 			}
@@ -1669,13 +1664,9 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 			
 			start_tick = clock();
 
-
-
 			gameplay_functions->drawTut(Alex);
 
-			//run task buffer
 			iController->InputCheck();
-
 			tBuffer->run();
 
 			if ((1000 / fs) > (clock() - start_tick)) { //delta_ticks)
@@ -1692,27 +1683,28 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 			//if(t0.joinable)t0.join();
 		}
 		while (current_game_state == game_state::in_game) {
-
-			for (int i = 0; i < 10; i++) {
-				//cout << "Press Escape to pause game" << endl;
-			}
+      cout << "Current game state: in_game" << endl;
 			if (iController->current_game_state != game_state::in_game) {
 				iController->current_game_state = current_game_state;
 			}
-			//iController->current_game_state = current_game_state;
-			//shouldExit++;
-			//for (int i = 0; i < 10; i++) {
-			//	cout << "SHOULD EXIT IS " << shouldExit << endl;
 
-			//}
 			if (shouldExit > 0) {
 				_CrtDumpMemoryLeaks();
 				return;
 			}
+
 			if (start) {
 				gameplay_functions->change_song("Change", nullptr, RegionState::next_region.getRTheme(),RegionState::soundType::region_music);
 				start = !start;
 			}
+
+      if(!Tutorial::isAnyStageActive()) {
+        if(!Tutorial::isStageComplete(Tutorial::Stage::INTRO01))
+          Tutorial::launchStage(Tutorial::Stage::INTRO01, *iController, true);
+        else if(!Tutorial::isStageComplete(Tutorial::Stage::INTRO02))
+          Tutorial::launchStage(Tutorial::Stage::INTRO02, *iController, true);
+      }
+
 			//Audio State code. might be moved into RegionState itself
 
 			//commented out for demo
