@@ -22,19 +22,19 @@ void GameState::check_if_end_game(game_state* current_game_state) {
 		*current_game_state = game_state::victory_menu;
 	}
 	//checks if both heroes are conquered (the player conqured the world)
-	else if (yemoja_vil->conquerer == player_vil && oya_vil->conquerer == player_vil)
+	else if (yemoja_vil->get_conquerer() == player_vil && oya_vil->get_conquerer() == player_vil)
 	{
 		*current_game_state = game_state::victory_menu;
 	}
 	//checks if the hero is alligned with the conqurer (the player teamed up and conqurred the yemoja)
 	else if (player_vil->get_alliance()->get_alligned_villages()[0] == oya_vil &&
-		(yemoja_vil->conquerer == player_vil || yemoja_vil->conquerer == oya_vil))
+		(yemoja_vil->get_conquerer() == player_vil || yemoja_vil->get_conquerer() == oya_vil))
 	{
 		*current_game_state = game_state::victory_menu;
 	}
 	//checks if the hero is alligned with the conqurer (the player teamed up and conqurred the oya)
 	else if (player_vil->get_alliance()->get_alligned_villages()[0] == yemoja_vil &&
-		(oya_vil->conquerer == player_vil || oya_vil->conquerer == yemoja_vil))
+		(oya_vil->get_conquerer() == player_vil || oya_vil->get_conquerer() == yemoja_vil))
 	{
 		*current_game_state = game_state::victory_menu;
 	}

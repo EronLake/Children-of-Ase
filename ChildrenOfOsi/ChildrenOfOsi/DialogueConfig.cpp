@@ -227,7 +227,8 @@ void DialogueConfig::import_config(ChildrenOfOsi* gameplay_func, TaskBuffer* tBu
 		}
 }
 
-void DialogueConfig::set_conv_point(ChildrenOfOsi* gameplay_func, TaskBuffer* tBuffer, std::string icon, std::string temp, std::string name, std::vector<int> personality_vals,std::string corresponding_conv_point, std::vector<int> relationship_vals, std::string topic)
+void DialogueConfig::set_conv_point(ChildrenOfOsi* gameplay_func, TaskBuffer* tBuffer, std::string icon, 
+	std::string temp, std::string name, std::vector<int> personality_vals,std::string corresponding_conv_point, std::vector<int> relationship_vals, std::string topic)
 {
 	gameplay_func->add_conv_point(icon, temp, name);
 	tBuffer->run();
@@ -248,6 +249,10 @@ void DialogueConfig::set_conv_point(ChildrenOfOsi* gameplay_func, TaskBuffer* tB
 		Containers::conv_point_table[name]->dpoint.push_back("");
 		Containers::conv_point_table[name]->set_topic("");
 	}
+	std::string is_selectable = "1";
+	Containers::conv_point_table[name]->dpoint.push_back(is_selectable);
+	Containers::conv_point_table[name]->set_is_selectable(is_selectable);
+
 	Containers::conv_point_table[name]->multipliers = new Personality();
 	
 	Containers::conv_point_table[name]->multipliers->setHonor(personality_vals[0]);

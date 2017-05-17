@@ -282,11 +282,11 @@ int RenderHelper::sprite_atk(WorldObj * o)
         if(obj->getSwingLeft()) {
           obj->sprite.setTexture(obj->sprite.atk_up);
           //obj->effect.sprite.setTexture(obj->effect.sprite.atk_up);
-          manager->createTaskForAudio("PlaySound", "SOUND", "SFX/swing.wav");
+          manager->createTaskForAudio("PlaySound", "SOUND", "SFX/swing.wav",nullptr, RegionState::soundType::sfx);
         }
         else {
           obj->sprite.setTexture(obj->sprite.atk2_up);
-          manager->createTaskForAudio("PlaySound", "SOUND", "SFX/swing.wav");
+          manager->createTaskForAudio("PlaySound", "SOUND", "SFX/swing.wav", nullptr, RegionState::soundType::sfx);
         }
         obj->sprite.setIdleTexture(obj->sprite.id_up);
         break;
@@ -294,11 +294,11 @@ int RenderHelper::sprite_atk(WorldObj * o)
         if(obj->getSwingLeft()) {
           obj->sprite.setTexture(obj->sprite.atk_down);
           //	obj->effect.sprite.setTexture(obj->effect.sprite.atk_down);
-          manager->createTaskForAudio("PlaySound", "SOUND", "SFX/swing.wav");
+          manager->createTaskForAudio("PlaySound", "SOUND", "SFX/swing.wav", nullptr, RegionState::soundType::sfx);
         }
         else {
           obj->sprite.setTexture(obj->sprite.atk2_down);
-          manager->createTaskForAudio("PlaySound", "SOUND", "SFX/swing.wav");
+          manager->createTaskForAudio("PlaySound", "SOUND", "SFX/swing.wav", nullptr, RegionState::soundType::sfx);
         }
         obj->sprite.setIdleTexture(obj->sprite.id_down);
 
@@ -308,11 +308,11 @@ int RenderHelper::sprite_atk(WorldObj * o)
 
           obj->sprite.setTexture(obj->sprite.atk_right);
           //obj->effect.sprite.setTexture(obj->effect.sprite.atk_right);
-          manager->createTaskForAudio("PlaySound", "SOUND", "SFX/swing.wav");
+          manager->createTaskForAudio("PlaySound", "SOUND", "SFX/swing.wav", nullptr, RegionState::soundType::sfx);
         }
         else {
           obj->sprite.setTexture(obj->sprite.atk2_right);
-          manager->createTaskForAudio("PlaySound", "SOUND", "SFX/swing.wav");
+          manager->createTaskForAudio("PlaySound", "SOUND", "SFX/swing.wav", nullptr, RegionState::soundType::sfx);
         }
         obj->sprite.setIdleTexture(obj->sprite.id_right);
         break;
@@ -320,11 +320,11 @@ int RenderHelper::sprite_atk(WorldObj * o)
         if(obj->getSwingLeft()) {
           obj->sprite.setTexture(obj->sprite.atk_left);
           //obj->effect.sprite.setTexture(obj->effect.sprite.atk_left);
-          manager->createTaskForAudio("PlaySound", "SOUND", "SFX/swing.wav");
+          manager->createTaskForAudio("PlaySound", "SOUND", "SFX/swing.wav", nullptr, RegionState::soundType::sfx);
         }
         else {
           obj->sprite.setTexture(obj->sprite.atk2_left);
-          manager->createTaskForAudio("PlaySound", "SOUND", "SFX/swing.wav");
+          manager->createTaskForAudio("PlaySound", "SOUND", "SFX/swing.wav", nullptr, RegionState::soundType::sfx);
         }
         obj->sprite.setIdleTexture(obj->sprite.id_left);
         break;

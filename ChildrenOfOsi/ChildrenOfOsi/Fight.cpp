@@ -8,10 +8,13 @@ Fight::Fight()
 	over = false;
 	fights_world.push_back(this);
 	sides = 0;
+	num_of_fighters=0;
+	player_win=true;
 }
 
 Fight::Fight(Party* a, Party* b, int tp)
 {
+	num_of_fighters=0;
 	type = tp;
 	over = false;
 	if (a->get_perm() || (type>0)) {
@@ -32,6 +35,9 @@ Fight::Fight(Party* a, Party* b, int tp)
 		a->set_killable(false);
 		b->set_killable(false);
 	}
+	else if (!War::at_war(a->get_village(), b->get_village())){
+		new War(a->get_village(), b->get_village());
+	}
 	if (type == 0 || type == 3) {
 		a->set_in_combat(true);
 		b->set_in_combat(true);
@@ -49,6 +55,7 @@ Fight::Fight(Party* a, Party* b, int tp)
 		update_radius();
 	}
 	sides = 2;
+	player_win = true;
 	fights_world.push_back(this);
 }
 
@@ -71,7 +78,8 @@ int Fight::get_radius() {
 	for (auto itor = downed.begin(); itor != downed.end(); ++itor) {
 		total_fighters += (*itor)->getMembers().size();
 	}
-	return (100 * total_fighters);
+	num_of_fighters = total_fighters;
+	return ((50 * total_fighters) + 750);
 }
 
 void Fight::update_radius() {
@@ -114,12 +122,14 @@ void Fight::add_party(Party* p, bool atk) {
 	bool added = false;
 	for (auto it = attackers.begin(); it != attackers.end(); ++it) {
 		if ((*it).size() != 0) {
-			Soldier* lead = (*it)[0]->getLeader();
-			if (p->getMembers().size() != 0) {
-				Soldier* sofp = p->getLeader();
-				if (lead->getVillage()->get_alliance() == sofp->getVillage()->get_alliance()) {
-					(*it).push_back(p);
-					added = true;
+			if ((*it)[0]->getMembers().size()>0) {
+				Soldier* lead = (*it)[0]->getLeader();
+				if (p->getMembers().size() != 0) {
+					Soldier* sofp = p->getLeader();
+					if (lead->getVillage()->get_alliance() == sofp->getVillage()->get_alliance()) {
+						(*it).push_back(p);
+						added = true;
+					}
 				}
 			}
 		}
@@ -256,8 +266,9 @@ void Fight::update_fight() {
 					downed.push_back((*itor));
 				}
 				if (player->getParty() == (*itor)) {
-					if (player->getParty()->get_fight() == this);
-					PlayerActExecFunctions::execute_end(false);
+					if (player->getParty()->get_fight() == this) {
+						player_win = false;
+					}
 				}
 				itor = (*it).erase(itor);
 				update_radius();
@@ -288,8 +299,7 @@ void Fight::update_fight() {
 					downed.push_back((*itor));
 				}
 				if (player->getParty() == (*itor)) {
-					if (player->getParty()->get_fight() == this);
-					PlayerActExecFunctions::execute_end(false);
+					player_win = false;
 				}
 				itor = (*it).erase(itor);
 				update_radius();
@@ -297,6 +307,10 @@ void Fight::update_fight() {
 			} else if ((*itor)->getLeader()->getType() == WorldObj::TYPE_PLAYER) {
 				if (Party::dist_location_to_location((*itor)->getLeader()->getLoc(), loc) > (rad * 3)) {
 					(*itor)->setMode(Party::MODE_FLEE);
+					player_win = false;
+					itor = (*it).erase(itor);
+					update_radius();
+					party_erased = true;
 				}
 			}
 			if (!party_erased)++itor;
@@ -313,39 +327,38 @@ void Fight::update_fight() {
 	over = check_for_winner();
 	if (over) {
 		if (player->getParty()->get_fight() == this && (player->cur_action!=nullptr && player->cur_action != NULL)) {
-			PlayerActExecFunctions::execute_end(true);
+			PlayerActExecFunctions::execute_end(player_win);
 		}
 	}
 }
 
 bool Fight::check_for_winner() {
-	if (attackers.size() <= 1 && defenders.size() <= 1) {
-		unordered_map<Alliance*,int> alliances;
-		for (auto it = attackers.begin(); it != attackers.end(); ++it) {
-			for (auto itor = (*it).begin(); itor != (*it).end(); ++itor) {
-				if ((*itor)->getMembers().size() > 0) {
-					alliances[(*itor)->getLeader()->getVillage()->get_alliance()]=1;
-				}
-			}
-		}
-		for (auto it = defenders.begin(); it != defenders.end(); ++it) {
-			for (auto itor = (*it).begin(); itor != (*it).end(); ++itor) {
-				if ((*itor)->getMembers().size() > 0) {
-					alliances[(*itor)->getLeader()->getVillage()->get_alliance()] = 1;
-				}
-			}
-		}
-		if (alliances.size() <= 1) {
-			//end_combat();
+	if (type > 0) {
+		if ((attackers.size() + defenders.size()) <= 1) {
 			return true;
 		}
-		else {
-			return false;
+		else return false;
+	}
+	else if ((attackers.size() + defenders.size()) <= 1) {
+		return true;
+	}
+	unordered_map<Alliance*, int> alliances;
+	for (auto it = attackers.begin(); it != attackers.end(); ++it) {
+		if ((*it).size()>0)alliances[(*it)[0]->get_village()->get_alliance()]=1;
+	}
+	for (auto it = defenders.begin(); it != defenders.end(); ++it) {
+		if ((*it).size()>0)alliances[(*it)[0]->get_village()->get_alliance()]=1;
+	}
+	vector<Alliance*> enemy;
+	for (auto itor = alliances.begin(); itor != alliances.end(); ++itor) {
+		enemy = (*itor).first->get_enemy_alliances();
+		for (auto itor2 = enemy.begin(); itor2 != enemy.end(); ++itor2) {
+			if (alliances.find((*itor2))!=alliances.end()) {
+				return false;
+			}
 		}
 	}
-	else {
-		return false;
-	}
+	return true;
 }
 
 void Fight::update_all_fights() {
@@ -450,14 +463,15 @@ void Fight::help_find_targets(unordered_map<Alliance*, vector<Party*>> alliances
 
 void Fight::check_should_flee(Party* p) {
 	if (p->getLeader()->getType() == WorldObj::TYPE_PLAYER) {
-		if (Party::dist_location_to_location(p->getLeader()->getLoc(), loc) > (rad * 3)) {
+		if (Party::dist_location_to_location(p->getLeader()->getLoc(), loc) > (rad)) {
 			p->setMode(Party::MODE_FLEE);
+			player_win = false;
 		}
 	}
 	else if (p->getLeader()->getType() == WorldObj::TYPE_HERO) {
 		vector<Party*> enemies = p->getCurrentEnemies();
 		int total_enemies = 0;
-		int total_sold = rad / 100;
+		int total_sold = num_of_fighters;
 		for (auto it = enemies.begin(); it != enemies.end(); ++it) {
 			total_enemies += (*it)->getMembers().size();
 		}
@@ -472,7 +486,7 @@ void Fight::check_should_flee(Party* p) {
 	else {
 		vector<Party*> enemies = p->getCurrentEnemies();
 		int total_enemies = 0;
-		int total_sold = rad / 100;
+		int total_sold = num_of_fighters;
 		for (auto it = enemies.begin(); it != enemies.end(); ++it) {
 			total_enemies += (*it)->getMembers().size();
 		}

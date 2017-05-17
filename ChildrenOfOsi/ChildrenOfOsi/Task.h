@@ -3,6 +3,15 @@
 #include "WorldObj.h"
 #include "NPC.h"
 #include "Hero.h"
+#include "RegionState.h"
+
+//#include "MemoryPool.h"
+//#include "MemoryHelper.h"
+
+class MemoryPool;
+class MemoryHelper;
+class MemNode;
+
 #pragma once
 
 class Task
@@ -25,6 +34,7 @@ public:
 	int arg4 = 0;
 	char* source = nullptr;
 	char* target = nullptr;
+	RegionState::soundType soundType = RegionState::soundType::null_type;
 	int mem_type = 0;
 	int frames = 0; 
 	vector<NPC*> people; 
@@ -40,7 +50,7 @@ public:
 
 	short timestamp;
 
-	Task(std::string name, std::string status, std::string _type, char* _source = nullptr, char* _target = nullptr);
+	Task(std::string name, std::string status, std::string _type, char* _source = nullptr, char* _target = nullptr, RegionState::soundType _soundType = RegionState::soundType::null_type);
 	Task(std::string name, std::string status, std::string _type, WorldObj* _objToUpdate);
 	Task(std::string name, std::string status, std::string _type, WorldObj* _objToUpdate, int num);
 	Task(std::string _name, std::string _status, std::string _type, std::string key, float x, float y, bool col);
@@ -63,6 +73,10 @@ public:
 
 	void updateStatus(std::string new_status);
 	Task* clone_task();
+
+private:
+	static MemoryPool* task_pool;
+	static MemNode* task_head;
 
 
 };

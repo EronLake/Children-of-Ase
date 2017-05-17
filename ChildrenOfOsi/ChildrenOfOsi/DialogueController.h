@@ -34,7 +34,6 @@ public:
 	static int getState();
 	static void exitDialogue();
 	
-	static void offerQuest_hack_();
 
 	static DialogueHelper* getDialogueHelper();
 	static void add_hero_related_conv_points();
@@ -52,6 +51,11 @@ public:
 	static vector<std::vector<std::string>> get_soldier_options();
 	static void DialogueController::remove_soldier_opts();
 	static void DialogueController::add_to_perm_storage(ConversationLogObj* log_entry);
+	static void DialogueController::move_to_selectable_down();
+	static void DialogueController::move_to_selectable_up();
+	static void DialogueController::set_selectable(bool is_selectable, std::string option_name, int icon);
+	static void DialogueController::add_dialog_option(std::string option_name, int icon);
+	static void DialogueController::remove_dialog_option(std::string option_name, int icon);
 
 	static bool prompted_quest;
 	static bool accepted_quest;
@@ -85,6 +89,11 @@ public:
 	static std::string message;
 	static int optionsIndex;
 	static int select;
-	static std::vector<int> heroes_player_knows;
+	//static std::vector<int> heroes_player_knows;
+	static std::vector<ConversationLogObj*> curr_conversation_log;
+	static bool started_conv;
+	static bool quited_gui;
+	static bool first_q_press;
+
 };
 

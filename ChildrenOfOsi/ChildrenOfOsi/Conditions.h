@@ -3,7 +3,7 @@
 #include "Memory.h"
 #include "common.h"
 //#include "Alliance.h"
-#include "War.h"
+//#include "War.h"
 //#include "ActionPool.h"
 
 class Alliance;

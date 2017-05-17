@@ -115,6 +115,11 @@
         "general_type": 0,
         "rel_type": 6,
         "utility": 5
+      },
+      "2": {
+        "general_type": 5,
+        "state_type": 8,
+        "utility": 10
       }
     },
     "receiver_succ_postconds": {
@@ -288,6 +293,11 @@
         "general_type": 0,
         "rel_type": 8,
         "utility": 10
+      },
+      "4": {
+        "general_type": 5,
+        "state_type": 8,
+        "utility": 10
       }
     },
     "receiver_succ_postconds": {
@@ -366,7 +376,7 @@
         "rel_type": 11,
         "utility": 25
       },
-	  "4": {
+      "4": {
         "general_type": 5,
         "state_type": 7,
         "utility": 10
@@ -387,6 +397,11 @@
         "general_type": 0,
         "rel_type": 8,
         "utility": 5
+      },
+      "4": {
+        "general_type": 5,
+        "state_type": 8,
+        "utility": 10
       }
     },
     "receiver_succ_postconds": {

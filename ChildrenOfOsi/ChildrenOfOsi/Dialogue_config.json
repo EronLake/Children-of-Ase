@@ -1423,6 +1423,57 @@
 				"desired_rel_val": 85
 			  }
 		  }
+   },
+   "conversation_point_20" : {
+	      "name" : "Advise To Fight",
+          "icon" : "ncp",
+	      "template" : "Advise To Fight",
+		  "honor" : 0,
+		  "pride": 0,
+		  "aggression": 0,
+		  "kindness": 0,
+		  "greed": 0,
+		  "recklessness": 0,
+		  "extroversion": 0,
+		  "affinity": 70,
+		  "notoriety": 50,
+		  "strength": 50,
+		  "AffEstimate": 50,
+		  "NotorEstimate": 50,
+		  "StrEstimate": 50,
+		  "req_preconds": {
+			"1": {
+				"general_type": 0,
+				"rel_type": 7,
+				"desired_rel_val": 85
+			  }
+		  }
+   },
+
+   "conversation_point_21" : {
+	      "name" : "Advise To Send Peace Offering To",
+          "icon" : "ncp",
+	      "template" : "Advise To Send Peace Offering To",
+		  "honor" : 0,
+		  "pride": 0,
+		  "aggression": 0,
+		  "kindness": 0,
+		  "greed": 0,
+		  "recklessness": 0,
+		  "extroversion": 0,
+		  "affinity": 70,
+		  "notoriety": 50,
+		  "strength": 50,
+		  "AffEstimate": 50,
+		  "NotorEstimate": 50,
+		  "StrEstimate": 50,
+		  "req_preconds": {
+			"1": {
+				"general_type": 0,
+				"rel_type": 7,
+				"desired_rel_val": 85
+			  }
+		  }
    }
   },
 	
@@ -1580,8 +1631,61 @@
 		  "AffEstimate": 50,
 		  "NotorEstimate": 50,
 		  "StrEstimate": 50
+   },
+
+   "reply_point_20" : {
+	      "name" : "Take Advice To Fight",
+          "icon" : "nrp",
+	      "template" : "Take Advice To Fight",
+		  "corresponding_conv_point": "Advise To Fight",
+		  "honor" : 0,
+		  "pride": 0,
+		  "aggression": 0,
+		  "kindness": 0,
+		  "greed": 0,
+		  "recklessness": 0,
+		  "extroversion": 0,
+		  "affinity": 50,
+		  "notoriety": 50,
+		  "strength": 50,
+		  "AffEstimate": 50,
+		  "NotorEstimate": 50,
+		  "StrEstimate": 50,
+		  "req_preconds": {
+			"1": {
+				"general_type": 0,
+				"rel_type": 7,
+				"desired_rel_val": 85
+			  }
+		  }
+   },
+
+   "reply_point_21" : {
+	      "name" : "Take Advice To Send Peace Offering To",
+          "icon" : "nrp",
+	      "template" : "Take Advice To Send Peace Offering To",
+		  "corresponding_conv_point": "Advise To Send Peace Offering To",
+		  "honor" : 0,
+		  "pride": 0,
+		  "aggression": 0,
+		  "kindness": 0,
+		  "greed": 0,
+		  "recklessness": 0,
+		  "extroversion": 0,
+		  "affinity": 50,
+		  "notoriety": 50,
+		  "strength": 50,
+		  "AffEstimate": 50,
+		  "NotorEstimate": 50,
+		  "StrEstimate": 50,
+		  "req_preconds": {
+			"1": {
+				"general_type": 0,
+				"rel_type": 7,
+				"desired_rel_val": 85
+			  }
+		  }
    }
   }
-
 }
  

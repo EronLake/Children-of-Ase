@@ -3,12 +3,13 @@
 std::vector<Region*> make_region_vector()
 {
 	std::vector<Region*> r;
-	RegionState::regions.push_back(new Region("Marsh", "Music/RegionThemes/MarshRegion.flac", "Music/HeroThemes/ogun.flac", { 1000, 1000}));
-	RegionState::regions.push_back(new Region("Mountain", "Music/RegionThemes/MountainRegion.flac", "nothing", { 5000,5000 }));
-	RegionState::regions.push_back(new Region("Jungle", "Music/RegionThemes/JungleRegion.flac", "Music/HeroThemes/oya.flac", { 10000,1000 }));
-	RegionState::regions.push_back(new Region("Desert", "Music/RegionThemes/DesertRegion.flac", "Music/HeroThemes/oya.flac", { 5000,10000 }));
+	r.push_back(new Region("Marsh", "Music/RegionThemes/DesertRegion.flac", "Music/HeroThemes/oya.flac", { 8000,2900 }));
+	r.push_back(new Region("Desert", "Music/RegionThemes/MarshRegion.flac", "Music/HeroThemes/ogun.flac", { 5045,13465 }));
+	r.push_back(new Region("Mountain", "Music/RegionThemes/MountainRegion.flac", "nothing", { 21000,4000 }));
+	r.push_back(new Region("Jungle", "Music/RegionThemes/JungleRegion.flac", "Music/HeroThemes/oya.flac", { 17157,20960 }));
 	return r;
 }
+
 
 bool RegionState::switch_music = false;
 bool RegionState::in_village = false;

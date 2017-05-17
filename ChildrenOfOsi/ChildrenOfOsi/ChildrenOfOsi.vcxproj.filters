@@ -34,9 +34,9 @@
     <ClCompile Include="QuestManager.cpp" />
     <ClCompile Include="Region.cpp" />
     <ClCompile Include="RegionState.cpp" />
+    <ClCompile Include="GameState.cpp" />
     <ClCompile Include="Tag.cpp" />
     <ClCompile Include="TagConfig.cpp" />
-    <ClCompile Include="ThreadManager.cpp" />
     <ClCompile Include="UniformGrid.cpp" />
     <ClCompile Include="Village.cpp" />
     <ClCompile Include="GameMap.cpp" />
@@ -85,7 +85,7 @@
     <ClCompile Include="War.cpp" />
     <ClCompile Include="WorldObj.cpp" />
     <ClCompile Include="Wrapper.cpp" />
-    <ClCompile Include="GameState.cpp" />
+    <ClCompile Include="SoldierConfig.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Action.h" />
@@ -107,6 +107,7 @@
     <ClInclude Include="Containers.h" />
     <ClInclude Include="ConversationLogObj.h" />
     <ClInclude Include="ConversationPoint.h" />
+    <ClInclude Include="ThreadManager.h" />
     <ClInclude Include="DialogueConfig.h" />
     <ClInclude Include="DialogueController.h" />
     <ClInclude Include="DialogueGui.h" />
@@ -125,7 +126,6 @@
     <ClInclude Include="RegionState.h" />
     <ClInclude Include="Tag.h" />
     <ClInclude Include="TagConfig.h" />
-    <ClInclude Include="ThreadManager.h" />
     <ClInclude Include="UniformGrid.h" />
     <ClInclude Include="Village.h" />
     <ClInclude Include="GameMap.h" />
@@ -178,6 +178,7 @@
     <ClInclude Include="War.h" />
     <ClInclude Include="WorldObj.h" />
     <ClInclude Include="Wrapper.h" />
+    <ClInclude Include="SoldierConfig.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="ChildrenOfOsi1.rc" />
@@ -204,6 +205,8 @@
     <None Include="Tag_config.json" />
     <None Include="test.json" />
     <None Include="Yemoja_dialog.json" />
+    <None Include="attack_config.json" />
+    <None Include="soldier_config.json" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="audio_test.txt" />

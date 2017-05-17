@@ -96,11 +96,6 @@ dialogue_point DialogueHelper::choose_conv_pt(std::vector<ConversationLogObj*> c
 
 	/*index 0 = honor, index 1 = pride, index 2 = aggression, index 3 = kindnessindex 4 = greed, index 5 = recklessness, index 6 = extroversion*/
 	vector<appealPoint> possible_replies;
-
-	int conv_pt_index;
-
-	//std::vector<int> personality = yemoja_personality;
-	//std::vector<int> relationship = yemoja_relationship_with_shango;
 	
 	Personality* personality = other->traits;
 	Relationship* relationship = other->rel[1];
@@ -169,25 +164,20 @@ dialogue_point DialogueHelper::choose_conv_pt(std::vector<ConversationLogObj*> c
 				return{ "","" };
 		}
 	}
-
+	//add related conversation points
+		//for every thing in current conversation
 	for (auto i = curr_conversation_log.begin(); i != curr_conversation_log.end(); ++i) {
-		//auto it = std::find(temp.begin(), temp.end(), (*i)->get_conv_point());
-		//if (it != temp.end()) {
-		//	temp.erase(std::remove(temp.begin(), temp.end(), *it), temp.end());
-		//}
-		//else {
-
-		// }
-		
-		for (auto j : (*i)->get_conv_point()->tag) {
-			
+			//for all related tags
+		for (auto j : (*i)->get_conv_point()->tag) {  
+				//for all conversation points related to each of those tags
 			for (auto k : j->conversation_point) {
-				
+					//only consider it if it is not already in the vector of possible replies	
 				if (std::find(possible_replies.begin(), possible_replies.end(), std::make_pair(0, k)) != possible_replies.end()) {
 				}
 				else {
+						//only add it in if it fuffills the prereqs. 
 					if(relationship->getAffinity()>= k->rel_multipliers->getAffinity() && relationship->getNotoriety() >= k->rel_multipliers->getNotoriety() && relationship->getStrength() >= k->rel_multipliers->getStrength()){
-					possible_replies.push_back(std::make_pair(0,k));}
+					possible_replies.push_back(std::make_pair(0,k));}//push it with a utility of 0 for now
 				}
 			
 			
@@ -197,10 +187,13 @@ dialogue_point DialogueHelper::choose_conv_pt(std::vector<ConversationLogObj*> c
 	    }
 		
 	}
+	//remove conversation points yemoja has already said in temp vector
+		//for everything in current conversation
 	for (auto i = curr_conversation_log.begin(); i != curr_conversation_log.end(); ++i) {
-		appealPoint tmp = std::make_pair(0, (*i)->get_conv_point());
+		appealPoint tmp = std::make_pair(0, (*i)->get_conv_point());//to check against possible replies
 		auto it = std::find(possible_replies.begin(), possible_replies.end(), tmp);
-		if (it != possible_replies.end() && (*i)->get_who() == 2) {
+		if (it != possible_replies.end() && (*i)->get_who() == 2) {//if yemoja has said it
+				//remove it from the possible replies
 			possible_replies.erase(std::remove(possible_replies.begin(), possible_replies.end(), *it), possible_replies.end());
 		}
 		else {
@@ -223,35 +216,36 @@ dialogue_point DialogueHelper::choose_conv_pt(std::vector<ConversationLogObj*> c
 	
 	//choose based on personality
 	std::vector<std::pair<int, ConversationPoint*>>  temp;
-	dialogue_point def;
-	def.push_back("");
-	def.push_back("Goodbye");
+
 	
-	
-	if (possible_replies.size() != 0) {
-		conv_pt_index = rand() % (possible_replies.size());
-		}
+
 	int appeal;
+	//prioritize, possible replies vector
+		//for every reply
 	for (auto itor = possible_replies.begin(); itor != possible_replies.end(); itor++) {
 			appeal = personality_appeal(itor->second, personality);
-				temp.push_back(make_pair(appeal, itor->second));
+				temp.push_back(make_pair(appeal, itor->second));//push onto temp vector with appeal
 	}
-	possible_replies = temp;
+	possible_replies = temp;//replace possible replies with temp
 	struct greatestAppeal {
 		inline bool operator()(std::pair<int, ConversationPoint*> appeal1, std::pair<int, ConversationPoint*> appeal2) {//is temporarily an action
 			return (appeal1.first > appeal2.first);
 		};
 	};
-
+	//sort possible replies by appeal
 	std::sort(possible_replies.begin(), possible_replies.end(), greatestAppeal());
-	std::ofstream ofs;
-	ofs.open("dialog_template_output.txt", std::ofstream::out | std::ofstream::trunc);
-	for (auto itor = possible_replies.begin(); itor != possible_replies.end(); itor++) {
-	
-		ofs << "Conversation Point Name: " << itor->second->get_name() << " Appeal " << itor->first << std::endl;
 
-	}
-	ofs.close();
+	//debug output
+		std::ofstream ofs;
+		ofs.open("dialog_template_output.txt", std::ofstream::out | std::ofstream::trunc);
+		for (auto itor = possible_replies.begin(); itor != possible_replies.end(); itor++) {
+	
+			ofs << "Conversation Point Name: " << itor->second->get_name() << " Appeal " << itor->first << std::endl;
+
+		}
+		ofs.close();
+	
+	//handle having nothing to say
 	if (possible_replies.size() != 0) {
 		return possible_replies[0].second->dpoint;
 	}
@@ -261,7 +255,9 @@ dialogue_point DialogueHelper::choose_conv_pt(std::vector<ConversationLogObj*> c
 }
 
 /*Returns all of the possible reply points that an npc can say
-based on the player's conversation point.*/
+based on the player's conversation point. Since conversation points
+between the player and soldiers do not get stored, the curr_conversation_log
+will have size 0 if player is talking to soldier.*/
 dialogue_point DialogueHelper::choose_reply_pt(std::string point, int optn_inx, std::vector<ConversationLogObj*> curr_conversation_log,Hero* other)
 {
 

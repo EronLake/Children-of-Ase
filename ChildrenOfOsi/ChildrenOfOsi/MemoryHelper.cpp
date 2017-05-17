@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "MemoryHelper.h"
 #include "Tag.h"
+#include "memManager.h"
 
 
 MemoryHelper::MemoryHelper()
@@ -88,13 +89,15 @@ int MemoryHelper::store_Attack(std::string key, float x, float y, bool col) {
 }
 
 int MemoryHelper::new_Attack(WorldObj* s, int i) {
-	if (s->getType() >= WorldObj::TYPE_SOLDIER) {
+		if (s->getType() >= WorldObj::TYPE_SOLDIER) {
 		Soldier* obj = CheckClass::isSoldier(s);
 		Attack* p = new(find_available_block(memManager::Attack_head, obj->getAtKey())) Attack(0, 0, true);
 		Containers::add_Attack(obj->getAtKey(), p);
 		obj->newAttack(i, p);
 		if (p->getNextAttack() != nullptr && p->getNextAttack() != NULL) {
-			new_Attack(obj, obj->getAttackIndex(p->getNextAttack()));
+			//Eron: changed to use attack name instead of index
+			new_Attack(obj, p->getNextAttack()->get_name());
+			//new_Attack(obj, obj->getAttackIndex(p->getNextAttack()));
 		}
 	}
 	return 0;
@@ -236,6 +239,30 @@ void* MemoryHelper::find_available_block(MemNode* head_ptr, std::string str) {
 	return NULL;
 }
 
+//static function that Task.cpp can use
+void* MemoryHelper::s_find_available_block(MemNode* head_ptr) {
+	//if (head_ptr == NULL)
+	//	return NULL;
+	MemNode* mnode = head_ptr;
+	while (mnode != NULL) {
+		if (mnode->getAvailability()) {
+			mnode->setAvailability(false);
+		//	mnode->setUniqueString(str);
+			std::memset(mnode->getBlockPointer(), NULL, memManager::task_pool->block_size);
+			return mnode->getBlockPointer();
+		}
+		if (mnode->hasNext()) {
+			mnode = mnode->getNext();
+		}else{
+			make_all_available(head_ptr);
+			mnode = head_ptr;
+		}
+	}
+	//mnode = s_init_pool(memManager::task_pool, memManager::task_pool->block_size);
+
+	//return s_find_available_block(mnode);
+}
+
 MemNode* MemoryHelper::make_Available(MemNode* head_ptr, MemoryPool* p, std::string key) {
 	//size_t count = 0;
 	MemNode* h = head_ptr;
@@ -258,6 +285,18 @@ MemNode* MemoryHelper::make_Available(MemNode* head_ptr, MemoryPool* p, std::str
 	}
 	//h->setAvailability(true);
 	return nullptr; //return nullptr if no object with the specified key is found
+}
+
+MemNode* MemoryHelper::make_all_available(MemNode* head_ptr) {
+	//sets the entire mem_pool to be available so wrap arround is possible
+	MemNode* h = memManager::task_head;
+	h->setAvailability(true);
+	while (h->hasNext()) 
+	{
+		h = h->getNext();
+		h->setAvailability(true);
+	}	
+	return memManager::task_head->getNext();
 }
 
 void MemoryHelper::destroy_MemNode_list(MemNode* head_ptr) {
@@ -301,6 +340,10 @@ size_t MemoryHelper::get_free_pool_size(MemoryPool* p) {
 	return p->end - p->next;
 }
 
+size_t MemoryHelper::s_get_free_pool_size(MemoryPool* p) {
+	return p->end - p->next;
+}
+
 
 /*Return Value: Returns a pointer to the head of a MemNode linked list.
 Arguments: Takes a pointer to the memory pool to initialize and the size in
@@ -339,6 +382,35 @@ MemNode* MemoryHelper::init_pool(MemoryPool *p, size_t bsize) {
 	return head;
 }
 
+
+MemNode* MemoryHelper::s_init_pool(MemoryPool *p, size_t bsize) {
+	p->block_size = bsize;
+	p->num_of_blocks = ((p->pool_size) / (p->block_size));
+	//if (s_get_free_pool_size(p) < bsize)
+	//	return NULL;
+	MemNode* tail;
+	MemNode* head = memManager::task_head;
+	void* memor = (void*)p->next;
+	head->setAvailability(true);
+	head->setBlockPointer(memor);
+	p->next += bsize;
+	tail = head;
+	//create the list of MemNodes
+	while (p->next != p->end) {
+		if (tail == NULL)
+		{
+			//p->next = head;
+			return head;
+		}
+		tail->setAvailability(true);
+		void* mem = (void*)p->next;
+		tail->setBlockPointer(mem);
+		tail = tail->getNext();
+		p->next += bsize;
+	}
+	LOG("pool initialized");
+	return head;
+}
 
 void MemoryHelper::fill_mem_pool(MemNode* head_ptr, int hero_name) {
 	int mem_counter = 0;

@@ -13,10 +13,15 @@ public:
 	~Player();
 	void setTalkDist(float dist);
 	void updateTalk();
+	void filter_move_to(Hero* npc);
 	Rectangle talk;
 	float distance;
 	Action* quest;
 	Action* cur_action;
+
+	std::vector<Action*> quests_log;
+	std::vector<int> heroes_player_knows;
+	std::unordered_map<std::string,int> move_to_flags;
 
 	//don't need these because they are inherated from hero
 	//int mem_counter;

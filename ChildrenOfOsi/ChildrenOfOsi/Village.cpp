@@ -24,23 +24,23 @@ Village::~Village()
   delete this->defenders;
 }
 
-bool Village::isEnemyParty(Party* p)
+/*bool Village::isEnemyParty(Party* p)
 {
   for(auto i = enemy_parties.begin(); i != enemy_parties.end(); ++i) {
     if(p == (*i))return true;
   }
   return false;
-}
+}*/
 
 void Village::remove_party(Party* p)
 {
   parties.erase(std::remove(parties.begin(), parties.end(), p), parties.end());
 }
 
-void Village::remove_enemy_party(Party* p)
+/*void Village::remove_enemy_party(Party* p)
 {
   enemy_parties.erase(std::remove(enemy_parties.begin(), enemy_parties.end(), p), enemy_parties.end());
-}
+}*/
 
 void Village::remove_member(NPC* n)
 {
@@ -52,29 +52,54 @@ void Village::init_villages()
 {
 	Party::grave->set_perm(true);
 	
+	
 	for (auto itr : Containers::hero_table)
 	{
+		std::string party_name;
+
+		if (itr.second->name == YEMOJA)
+		{
+			party_name = "Oasis";
+		}
+		else if (itr.second->name == OYA)
+		{
+			party_name = "Jungle";
+		}
+		else if (itr.second->name == OSHOSI)
+		{
+			party_name = "Mountain";
+		}
+		else //if (hero_id == OGUN)
+		{
+			party_name = "Ogun";
+		}
+
 		Party* new_party = new Party();
 		new_party->addToParty(itr.second, true);
 
-		//NEED TO ACCESS SOLDIERS FROM CONTAINER
-		/*
-		new_party->addToParty(Alex, true);
-		for (int i = 0; i < silverSoldier.size(); i++) {
-		new_party->addToParty(silverSoldier[i], false);
+		//adds soldiers to party
+		for (auto itor: Containers::soldier_table) 
+		{
+			if (itor.second->getName().find(party_name) != string::npos)
+			{
+				new_party->addToParty(itor.second, false);
+			}
+				
 		}
-		*/
 
 		Village* new_village = new Village();
 		new_village->set_village_location(itr.second->getLoc());
 		new_village->add_member(itr.second);
 
-		//NEED TO ACCESS SOLDIERS FROM CONTAINER
-		/*
-		for (int i = 0; i < silverSoldier.size(); i++) {
-		v4->add_member(silverSoldier[i]);
+		//adds soldiers to village
+		for (auto itor : Containers::soldier_table)
+		{
+			if (itor.second->getName().find(party_name) != string::npos)
+			{
+				new_village->add_member(itor.second);
+			}
+
 		}
-		*/
 
 		new_village->leader = itr.second;
 

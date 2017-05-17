@@ -16,6 +16,7 @@ constexpr int NoTopic = -1;
 constexpr int ConvPointName = 1;
 constexpr int CorrespondingConvPt = 2;
 constexpr int Topic = 3;
+constexpr int IsSelectable = 4;
 
 /*Used in an attempt to clarify what indices of the
 possible reply and conversation point vectors represent
@@ -65,7 +66,7 @@ int DialogueController::scroll_control = 0;
 
 /*conversation log that holds pointers to different entries for the
 current conversation only*/
-std::vector<ConversationLogObj*> curr_conversation_log;
+std::vector<ConversationLogObj*> DialogueController::curr_conversation_log;
 
 /*used for passing player's conversation point selection to 
 
@@ -76,8 +77,9 @@ std::string player_conv_point_choice = "";
 //keeps track of the topic of the current conversation cycle
 std::string curr_hero_topic = "";
 
-//keep track of what heroes the player knows(2=Yemoja and 3=Oya)
-std::vector<int> DialogueController::heroes_player_knows = {2,3};
+//keeps track of what heroes the player knows(2=Yemoja and 3=Oya)
+//Is placeholder that will eventually be gotten rid of
+//std::vector<int> DialogueController::heroes_player_knows = {2,3};
 
 //keep add_hero_conv_points() function to one call per conversation
 bool first_call = true;
@@ -85,6 +87,11 @@ bool first_call = true;
 bool DialogueController::quest_declined = false;
 
 ConversationLogObj* DialogueController::entry = nullptr;
+
+bool DialogueController::started_conv = false;
+bool DialogueController::quited_gui = false;
+
+bool DialogueController::first_q_press = false;
 
 DialogueController::DialogueController()
 {
@@ -101,6 +108,7 @@ the conversation state to wait for the player to select a conversation
 point*/
 void DialogueController::PlayerChoose()
 {
+	
 	options = dialogue.get_possible_conv_pts();
 	if (first_call) {
 		/*add "Ask_About" and "Advise_To" and "Ask For Quest" conversation points to player's
@@ -117,7 +125,7 @@ void DialogueController::PlayerChoose()
 
 void DialogueController::player_choose_soldier()
 {
-
+	
 	Soldier* soldier;
 	soldier = dynamic_cast<Soldier*>(other);
 
@@ -153,6 +161,7 @@ shifts the conversation to see the npc reply. Calls otherResponse() function
 to generate npc's reply point.*/
 void DialogueController::PlayerConversationPoint()
 {
+	
 	dialogue_point choice;
 
 	/*prevents the player's selection of the "Next" option from being stored
@@ -218,16 +227,8 @@ void DialogueController::PlayerConversationPoint()
 
 		Hero* temp_hero = CheckClass::isHero(other);
 
-		/*Caused game to freeze whenever I tried talking to Yemoja! Be warned if uncommenting
-		the below*/
-		/*std::string tempin;
-		std::cout << "Shango's AFF, NOT, STR (respectively): " << temp_hero->rel[1]->getAffinity() << ", ";
-		std::cout << temp_hero->rel[1]->getNotoriety() << ", " << temp_hero->rel[1]->getStrength() << ", ";
-		std::cin >> tempin;*/
-
-		/*handles applying of post conditions for relationship related conversation
-		points. I also thought to incorporate checks for if a player completed an action
-		by doing any of these here, but this is probably not a good place.*/
+		/*handles applying of post conditions for select conversation
+		points and checking of whether or not an action has been completed.*/
 
 		//Eron's Change: checks if action_accepted for  spar, bribe, and form alliance but doesn't impliment post conditions for them
 		if (player_conv_point_choice == "Bribe"||player_conv_point_choice == "Compliment"|| player_conv_point_choice == "Grovel"||
@@ -276,6 +277,17 @@ void DialogueController::PlayerConversationPoint()
 		state = 4;
 		otherResponse(player_conv_point_choice, curr_hero_topic);
 		add_to_perm_storage(entry);
+		//adds hero to player's vector of known heroes if player asks name
+		if (player_conv_point_choice == "Ask_Name") {
+			bool already_know = false;
+			for (int i = 0; i < player->heroes_player_knows.size(); ++i) {
+				if (dialogue.hero_name_to_int(DialogueController::getOther()->getName())
+					== player->heroes_player_knows[i])
+					already_know = true;
+			}
+			if(!already_know)
+			    player->heroes_player_knows.push_back(dialogue.hero_name_to_int(other->getName()));
+		}
 		player_conv_point_choice = "";
 	}
 }
@@ -1180,16 +1192,9 @@ void DialogueController::startConversation(WorldObj* n, bool playerTalk)
 	other = n;
 	Hero* temp_hero = CheckClass::isHero(other);
 	std::string start_message = "";
-	if (temp_hero != nullptr) {
-		std::cout << "Shango's AFF, NOT, STR (respectively): " << temp_hero->rel[1]->getAffinity() << ", ";
-		std::cout << temp_hero->rel[1]->getNotoriety() << ", " << temp_hero->rel[1]->getStrength() << ", ";
-	}
-	
-	//if(quest_in_progress)
-		//message = n->getName() + ": " + dialogue.gen_dialog({ "Quest_In_Progress","Quest_In_Progress" }, temp_hero);
-	//else if(quest_complete)
-	    //message = n->getName() + ": " + dialogue.gen_dialog({ "Quest_Complete","Quest_Complete"},temp_hero);
-	//else
+
+	if(temp_hero)
+	    player->filter_move_to(temp_hero);
 
 	/*handles what the greeting phrase should be based on whether or not the player
 	has taken or completed a quest from the npc*/
@@ -1299,6 +1304,9 @@ void DialogueController::exitDialogue()
 		DialogueController::quest_declined = false;
 
 		first_call = true;
+		started_conv = false;
+		quited_gui = true;
+		first_q_press = false;
 	}
 	else {
 		state = 7;
@@ -1321,9 +1329,11 @@ DialogueHelper* DialogueController::getDialogueHelper()
 	return &dialogue;
 }
 
+
 /*Code done by Justin and Alessio to force npc to offer the player a quest.
 if the player attempts to exit dialogue. Will probably be removed at 
 some point.*/
+/*
 void DialogueController::offerQuest_hack_() {
 	dialogue_point line;
 	line = { {} ,{ "give_quest_hack" } };
@@ -1351,6 +1361,8 @@ void DialogueController::offerQuest_hack_() {
 	state = 2; 
 }
 
+*/
+
 /*Adds hero-related conversation points to the 3D vector of possible
 conversation points and adds them to the vector of the player's dialog
 options.*/
@@ -1367,11 +1379,11 @@ void DialogueController::add_hero_related_conv_points() {
 		    options[QuestionMarkIcon].push_back(tmp_dpoint);
 		    dialogue.get_possible_conv_pts_ref()[QuestionMarkIcon].push_back(tmp_dpoint);
 	    }
-		for (int j = 0; j < heroes_player_knows.size(); ++j) {
-			if (heroes_player_knows[j] != dialogue.hero_name_to_int(other->getName())) {
+		for (int j = 0; j < player->heroes_player_knows.size(); ++j) {
+			if (player->heroes_player_knows[j] != dialogue.hero_name_to_int(other->getName())) {
 				if (itor->second->get_topic() != "" && itor->second->get_name().find("Ask About",0) != string::npos && itor->second->dpoint[CorrespondingConvPt] == "") {
 					tmp_dpoint = itor->second->dpoint;
-					tmp_dpoint[Topic] = dialogue.int_to_hero_name(heroes_player_knows[j]);
+					tmp_dpoint[Topic] = dialogue.int_to_hero_name(player->heroes_player_knows[j]);
 					options[QuestionMarkIcon].push_back(tmp_dpoint);
 					dialogue.get_possible_conv_pts_ref()[QuestionMarkIcon].push_back(tmp_dpoint);
 				}
@@ -1383,20 +1395,24 @@ void DialogueController::add_hero_related_conv_points() {
 	/*Adds hero-related conversation points to player's vector of dialogue options
 	and to their 3D vector of possible conversation points for conversation points
 	associated with the notoriety icon*/
-	/*Uncomment below loop after Alpha Release*////////////////////////////////////
-	/*
 	for (auto itor = Containers::conv_point_table.begin(); itor != Containers::conv_point_table.end(); ++itor) {
-		for (int j = 0; j < heroes_player_knows.size(); ++j) {
-			if (heroes_player_knows[j] != dialogue.hero_name_to_int(other->getName())) {
+		for (int j = 0; j < player->heroes_player_knows.size(); ++j) {
+			if (player->heroes_player_knows[j] != dialogue.hero_name_to_int(other->getName())) {
 				if (itor->second->get_topic() != "" && itor->second->get_name().find("Advise To", 0) != string::npos && itor->second->dpoint[CorrespondingConvPt] == "") {
-					tmp_dpoint = itor->second->dpoint;
-					tmp_dpoint[Topic] = dialogue.int_to_hero_name(heroes_player_knows[j]);
-					options[NotorietyIcon].push_back(tmp_dpoint);
-					dialogue.get_possible_conv_pts_ref()[NotorietyIcon].push_back(tmp_dpoint);
+						tmp_dpoint = itor->second->dpoint;
+						tmp_dpoint[Topic] = dialogue.int_to_hero_name(player->heroes_player_knows[j]);
+						if (player->move_to_flags.find(itor->second->get_name()) != player->move_to_flags.end()) {
+							if(player->move_to_flags[itor->second->get_name()] == 1)
+							    tmp_dpoint[IsSelectable] = "1";
+							else
+								tmp_dpoint[IsSelectable] = "0";
+						}
+						options[NotorietyIcon].push_back(tmp_dpoint);
+						dialogue.get_possible_conv_pts_ref()[NotorietyIcon].push_back(tmp_dpoint);
 				}
 			}
 		}
-	}*/
+	}
 }
 
 /*Removes hero-related conversation points from the 3D vector of possible
@@ -1599,4 +1615,83 @@ void DialogueController::add_to_perm_storage(ConversationLogObj* log_entry) {
 		
 	}
 
+}
+
+/*used to cause player to scroll to nearest selectable option when they 
+are scrolling down. unselectable options are skipped.*/
+void DialogueController::move_to_selectable_down() {
+	int scroll_counter = 0;
+	if (DialogueController::scroll_control == DialogueController::getOptions().size() - 1)
+		return;
+	for (int i = 0; i < DialogueController::getOptions().size() - 1; ++i) {
+		if (DialogueController::getOptions()[DialogueController::scroll_control + i + 1][4] == "1") {
+			scroll_counter++;
+			break;
+		}
+		else {
+			scroll_counter++;
+			if (i == DialogueController::getOptions().size() - 2)
+				scroll_counter = 0;
+		}
+	}
+	DialogueController::scroll_control += scroll_counter;
+}
+
+/*used to cause player to scroll to nearest selectable option when they
+are scrolling up. unselectable options are skipped.*/
+void DialogueController::move_to_selectable_up() {
+	int scroll_counter = 0;
+	if (DialogueController::scroll_control == 0)
+		return;
+	for (int i = 0; (DialogueController::scroll_control - i) >= 1; ++i) {
+		if (DialogueController::getOptions()[DialogueController::scroll_control - i - 1][4] == "1") {
+			scroll_counter++;
+			break;
+		}
+		else {
+			scroll_counter++;
+			if (DialogueController::scroll_control == 0)
+				scroll_counter = 0;
+		}
+	}
+	DialogueController::scroll_control -= scroll_counter;
+}
+
+/*sets a dialog option specified by the arguments to be either selectable or unselectable*/
+void DialogueController::set_selectable(bool is_selectable, std::string option_name, int icon) {
+	std::vector<std::vector<std::vector<std::string>>> tmp_conv_points;
+	tmp_conv_points = dialogue.get_possible_conv_pts();
+	for (int i = 0; i < tmp_conv_points.size(); ++i) {
+		if (tmp_conv_points[icon][i][ConvPointName] == option_name) {
+			if (is_selectable)
+				dialogue.get_possible_conv_pts_ref()[icon][i][IsSelectable] = "1";
+			else
+				dialogue.get_possible_conv_pts_ref()[icon][i][IsSelectable] = "0";
+		}
+	}
+	options = dialogue.get_possible_conv_pts();
+}
+
+/*adds a dialog option specified by the name of the option to add, and the
+icon that the option should go under*/
+void DialogueController::add_dialog_option(std::string option_name, int icon){
+	dialogue_point tmp_dpoint;
+	tmp_dpoint = Containers::conv_point_table[option_name]->dpoint;
+	dialogue.get_possible_conv_pts_ref()[icon].push_back(tmp_dpoint);
+	options = dialogue.get_possible_conv_pts();
+}
+
+/*removes a dialog option specified by the name of the option to remove, and the
+icon that the option is currently associated with*/
+void DialogueController::remove_dialog_option(std::string option_name, int icon){
+	std::vector<std::vector<std::vector<std::string>>> tmp_opts;
+	tmp_opts = dialogue.get_possible_conv_pts();
+	for (int i = 0; i < tmp_opts.size();) {
+		if (tmp_opts[icon][i][ConvPointName] == option_name)
+			dialogue.get_possible_conv_pts_ref()[icon].erase
+			(dialogue.get_possible_conv_pts_ref()[icon].begin() + i);
+		else
+			++i;
+	}
+	options = dialogue.get_possible_conv_pts();
 }

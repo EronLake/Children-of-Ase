@@ -9,6 +9,7 @@
 #include "ActionConfig.h"
 #include "ObjConfig.h"
 #include "Texture.h"
+#include "AssetInfo.h"
 
 class HeroConfig
 {
@@ -22,6 +23,7 @@ public:
 		int a, int k, int h, int p, int r, int e, int g);
 	static void init_hero_planner(ChildrenOfOsi* gameplay_func, TaskBuffer* tBuffer, std::string name, int hero_id);
 	static void init_sprites(ChildrenOfOsi* gameplay_func, TaskBuffer* tBuffer, unordered_map<Texture*, pair<string, int>>* textureMap, Json::Value::iterator itr, std::string name, int hero_id);
-	static void set_hero_sprites();
+	static void init_attacks(ChildrenOfOsi* gameplay_func, TaskBuffer* tBuffer, unordered_map<Texture*, pair<string, int>>* textureMap, Json::Value::iterator itr, std::string name, int hero_id);
+	//static void set_hero_sprites();
 };
 

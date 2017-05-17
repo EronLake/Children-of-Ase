@@ -13,17 +13,15 @@ public:
 	~Village();
 	void setStatus(std::string s) { status = s; };
 	std::string getStatus() { return status; };
-	Village* conquerer;
-	vector<Village*> conquered;
 	Hero* leader;
 	void addToParties(Party* p) { p->setAlliance(alliance);
 	p->set_village(this); p->set_home(location); parties.push_back(p);};
-	void addToEnemyParties(Party* p) { enemy_parties.push_back(p); };
+	//void addToEnemyParties(Party* p) { enemy_parties.push_back(p); };
 	void remove_party(Party* p);
-	void remove_enemy_party(Party* p);
+	//void remove_enemy_party(Party* p);
 	vector<Party*> getParties() { return parties; };
-	bool isEnemyParty(Party* p);
-	void clearEnemyParties() { enemy_parties.clear(); };
+	//bool isEnemyParty(Party* p);
+	//void clearEnemyParties() { enemy_parties.clear(); };
 	static vector<Village*> villagesWorld;
 	void set_alliance(Alliance* a) { alliance = a; };
 	Alliance* get_alliance() { return alliance; };
@@ -40,6 +38,9 @@ public:
 	int get_village_health() { return health; };
 
 	void conquer(Village* v) { conquered.push_back(v); v->conquerer = this; };
+	Village* get_conquerer() { return conquerer; };
+	vector<Village*> get_conquered() { return conquered; };
+
 
 	void static Village::init_villages();
 
@@ -47,9 +48,12 @@ private:
 	Alliance* alliance;
 	vector<NPC*> members;
 	std::string status;
+	Village* conquerer;
+	vector<Village*> conquered;
 	std::vector<Party*> parties;
-	std::vector<Party*> enemy_parties;
+	//std::vector<Party*> enemy_parties;
 	Vector2f location;
 	int health;
+	//vector<Village*> at_war;
 };
 

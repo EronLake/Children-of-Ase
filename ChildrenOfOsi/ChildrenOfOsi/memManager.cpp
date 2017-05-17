@@ -35,7 +35,7 @@ memManager::memManager(MessageLog* _mLog, TaskBuffer* _tBuffer)
 	npc_pool = memHelper->create_pool(sizeof(NPC) * 64);
 	npc_head = memHelper->init_pool(npc_pool, sizeof(NPC)*2);
 
-	texture_pool = memHelper->create_pool(sizeof(Texture) * 300);
+	texture_pool = memHelper->create_pool(sizeof(Texture) * 600);
 	texture_head = memHelper->init_pool(texture_pool, sizeof(Texture));
 
 	oya_memory_pool = memHelper->create_pool(sizeof(Memory) * 40);
@@ -66,6 +66,10 @@ memManager::memManager(MessageLog* _mLog, TaskBuffer* _tBuffer)
 
 	conv_point_pool = memHelper->create_pool(sizeof(ConversationPoint) * 192);
 	conv_point_head = memHelper->init_pool(conv_point_pool, sizeof(ConversationPoint) * 2);
+
+	//for the task buffer
+	task_pool = memHelper->create_pool(sizeof(Task) * 300);
+	task_head = memHelper->init_pool(task_pool, sizeof(Task)*2);
 
 
 	task_map["Add_Hero"] = &MemoryHelper::store_hero;
@@ -137,7 +141,10 @@ memManager::~memManager()
 	memHelper->destroy_pool(tag_pool);
 	memHelper->destroy_MemNode_list(tag_head);
 
-	memHelper->destroy_pool(conv_point_pool);
+	memHelper->destroy_pool(task_pool);
+	memHelper->destroy_MemNode_list(conv_point_head);
+
+	memHelper->destroy_pool(task_pool);
 	memHelper->destroy_MemNode_list(conv_point_head);
 
 	LOG("memManager Object Destroyed");
@@ -359,3 +366,6 @@ MemNode* memManager::tag_head = nullptr;
 
 MemoryPool* memManager::conv_point_pool = nullptr;
 MemNode* memManager::conv_point_head = nullptr;
+
+MemoryPool* memManager::task_pool = nullptr;
+MemNode* memManager::task_head = nullptr;

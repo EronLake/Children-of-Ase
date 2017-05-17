@@ -53,6 +53,10 @@ void PlayerActExecFunctions::execute_start(std::string act_name, Hero* receiver)
 
 	receiver->set_busy(Hero::BUSY_REC);
 
+	if (act_name == "Fight" && !War::at_war(player->getVillage(), receiver->getVillage())) {
+		new War(player->getVillage(), receiver->getVillage());
+	}
+
 	if ((act_name == "Occupy" || act_name == "Fight" || act_name == "Conquer") &&
 		((!player->getInCombat()) && (!receiver->getInCombat())))
 	{
@@ -96,7 +100,7 @@ void PlayerActExecFunctions::execute_end(bool if_succ) {
 	//special cases that need to be handled are in this gaurd (may want to make a helper function)
 
 	//NEEDS TO BE TESTED... should it check for Occupy?
-	if (act_name == "Conquer" && player->getParty()->get_fight()->is_over()) {
+	if (act_name == "Conquer" && player->getParty()->get_fight()->is_over() && if_succ) {
 		cur_action->getReceiver()->getVillage()->add_to_village_health(cur_action->getDoer()->getParty()->getMembers().size()*(-25));
 		if (cur_action->getReceiver()->getVillage()->get_village_health() > 0) {
 			cur_action->getReceiver()->getVillage()->defenders->add_party_to_party(cur_action->getReceiver()->getVillage()->barracks);
