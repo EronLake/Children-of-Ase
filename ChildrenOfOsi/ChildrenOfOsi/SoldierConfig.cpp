@@ -27,7 +27,7 @@ void SoldierConfig::import_config(vector<WorldObj*>* movVec, unordered_map<Textu
 			//creates a soldier name with the number attached at the end
 			std::string soldier_name = (*itr)["name"].asString() + "_" + std::to_string(sol_num);
 
-			set_soldier(movVec, gameplay_func, tBuffer, (*itr)["x"].asFloat() + sol_num*10, (*itr)["y"].asFloat(),
+			set_soldier(movVec, gameplay_func, tBuffer, (*itr)["x"].asFloat() + (sol_num+1)*5, (*itr)["y"].asFloat(),
 				(*itr)["width"].asFloat(), (*itr)["hight"].asFloat(),
 				soldier_name, 
 				(*itr)["bodyx1"].asFloat(), (*itr)["bodyx2"].asFloat(),

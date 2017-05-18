@@ -720,23 +720,27 @@ void DialogueController::otherConversationPoint(dialogue_point line)
 	
 
 
-	/*skips the player's reply point if the npc does not say a conversation 
+	/*skips the player's reply point if the npc does not say a conversation
 	point, if the npc tells the player that they already asked them something,
-	or if an npc runs out of relevant conversation points to say.
+	if an npc runs out of relevant conversation points to say, or if an NPC tells
+	the player that they do not have a quest for them.
 	*/
 	if (point[ConvPointName] != "No_More_Phrases" && line[ConvPointName] != "Already_Asked" && point[ConvPointName] != "" && point[ConvPointName] != "No Quest") {
 		state = 2;
 		message = other->getName() + ": " + reply_pt_sentence + "\n" + con_pt_sentence;
 		replyOptions = dialogue.get_possible_reply_pts(point[ConvPointName], optionsIndex);
-
-		select = 0;
 	}
 	else {
-		message = other->getName() + ": " + reply_pt_sentence + "\n";
+		if (point[ConvPointName] == "No Quest") {
+			dialogue_point dp = { "No Quest","No Quest" };
+			con_pt_sentence = dialogue.gen_dialog(dp, temp_hero);
+		}
+		else
+			con_pt_sentence = "";
+		message = other->getName() + ": " + reply_pt_sentence + "\n" + con_pt_sentence;
 		state = 1;//skip player reply if npc cannot give a conversation point
 	}
-		
-
+	select = 0;
 	DialogueController::scroll_control = 0;
 }
 

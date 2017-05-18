@@ -951,7 +951,7 @@ void Input::InputCheck()
 					if (tmp > 0) {
 						DialogueController::setOptionsIndex(--tmp);
 						count = 10;
-						gameplay_functions->createTaskForAudio("PlaySound","SOUND", "SFX/page.wav", nullptr, RegionState::soundType::sfx);
+						gameplay_functions->createTaskForAudio("PlaySound", "SOUND", "SFX/page.wav", nullptr, RegionState::soundType::sfx);
 						//////std:://cout << "OptionsIndex: " << tmp << std::endl;
 						switch (DialogueController::getOptionsIndex()) {
 						case 0: gameplay_functions->setSwordGlow(player); break;
@@ -969,12 +969,11 @@ void Input::InputCheck()
 					if (temp_hero) {
 						//int tmp = DialogueController::getOptionsIndex();
 						if (tmp < DialogueController::getOSize() - 1) {
+
 							DialogueController::setOptionsIndex(++tmp);
 							count = 10;
-
 							if (tmp <= DialogueController::getOSize() - 1)
 								gameplay_functions->createTaskForAudio("PlaySound", "SOUND", "SFX/page.wav", nullptr, RegionState::soundType::sfx);
-
 							//////std:://cout << "OptionsIndex: " << tmp << std::endl;
 							switch (DialogueController::getOptionsIndex()) {
 							case 0: gameplay_functions->setSwordGlow(player); break;
@@ -989,7 +988,6 @@ void Input::InputCheck()
 						if (tmp < DialogueController::getOSize() - 1) {
 							DialogueController::setOptionsIndex(++tmp);
 							count = 10;
-							gameplay_functions->createTaskForAudio("PlaySound", "SOUND", "SFX/page.wav", nullptr, RegionState::soundType::sfx);
 							//////std:://cout << "OptionsIndex: " << tmp << std::endl;
 							switch (DialogueController::getOptionsIndex()) {
 							case 0: gameplay_functions->setSwordGlow(player); break;
@@ -1009,6 +1007,7 @@ void Input::InputCheck()
 						DialogueController::setOptionsIndex(3);
 						gameplay_functions->setQuestionGlow(player);
 					}
+
 				}
 				if (S && State < 3) {
 					int tmp = DialogueController::getSelect();
@@ -1016,15 +1015,14 @@ void Input::InputCheck()
 					if (DialogueController::getState() == 1 && temp_hero) {
 						if (tmp < (DialogueController::getOptions().size() - 1)) {
 							//DialogueController::setSelect(++tmp);
-
 							DialogueController::move_to_selectable_down();
 							//DialogueController::scroll_control++;
-							if (DialogueController::scroll_control >= DialogueController::getOptions().size()) 
+							if (DialogueController::scroll_control >= DialogueController::getOptions().size())
 								DialogueController::scroll_control = DialogueController::getOptions().size() - 1;
 							else
-								//Eron: this was broken on pull
 								gameplay_functions->createTaskForAudio("PlaySound", "SOUND", "SFX/down.wav", nullptr, RegionState::soundType::sfx);
-						
+
+
 							count = 10;
 							//////std:://cout << "Index: " << tmp << std::endl;
 						}
@@ -1042,9 +1040,8 @@ void Input::InputCheck()
 						if (tmp < (DialogueController::get_soldier_options().size() - 1)) {
 							//DialogueController::setSelect(++tmp);
 							DialogueController::scroll_control++;
-							if (DialogueController::scroll_control >= DialogueController::get_soldier_options().size())
+							if (DialogueController::scroll_control >= DialogueController::get_soldier_options().size()) {
 								DialogueController::scroll_control = DialogueController::get_soldier_options().size() - 1;
-
 								gameplay_functions->createTaskForAudio("PlaySound", "SOUND", "SFX/down.wav", nullptr, RegionState::soundType::sfx);
 							}
 							count = 10;
@@ -1061,18 +1058,15 @@ void Input::InputCheck()
 						}
 					}
 					if (State == 2) {
-						//Eron:had to add this on pull
-						int tmp = DialogueController::getSelect();
-
 						if (tmp < (DialogueController::getReplyOptions().size() - 1)) {
 							//DialogueController::setSelect(++tmp);
 							DialogueController::scroll_control++;
-
-							if (DialogueController::scroll_control >= DialogueController::getReplyOptions().size()) 
-							DialogueController::scroll_control = DialogueController::getReplyOptions().size() - 1;
+							if (DialogueController::scroll_control >= DialogueController::getReplyOptions().size())
+								DialogueController::scroll_control = DialogueController::getReplyOptions().size() - 1;
 							else
 								gameplay_functions->createTaskForAudio("PlaySound", "SOUND", "SFX/down.wav", nullptr, RegionState::soundType::sfx);
-							
+
+
 
 							count = 10;
 							//////std:://cout << "Index: " << tmp << std::endl;
@@ -1087,6 +1081,7 @@ void Input::InputCheck()
 							//////std:://cout << "Index: " << tmp << std::endl;
 						}
 					}
+				}
 				if (W && State < 3) {
 					int tmp = DialogueController::getSelect();
 					if (tmp > 0 || DialogueController::scroll_control > 0) {
