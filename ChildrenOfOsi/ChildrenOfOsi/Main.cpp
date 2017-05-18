@@ -1019,7 +1019,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 			current_game_state = iController->current_game_state;
 			//system("PAUSE");
 			//Checks if game has reached final states
-			//GameState::check_if_end_game(&current_game_state);
+			GameState::check_if_end_game(&current_game_state);
 			
 
 		}
