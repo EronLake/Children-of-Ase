@@ -25,6 +25,7 @@ public:
 	void party_leader_update(Soldier* sold1, int state);
 	void updateSoliderStatus();
 	std::thread threaded_update_soldier(Soldier* s, int n);
+	bool shot_ligned_up(Vector2f atkr, Vector2f target);
 private:
 	vector<Soldier*> soldiers;
 	vector<Soldier*> enemyVec;
