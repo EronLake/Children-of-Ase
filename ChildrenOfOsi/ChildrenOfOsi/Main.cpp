@@ -737,9 +737,6 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 			}
 			
 			start_tick = clock();
-
-			gameplay_functions->drawTut(Alex);
-
 			iController->InputCheck();
 			tBuffer->run();
 
@@ -755,9 +752,12 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 
 			current_game_state = iController->current_game_state;
 			//if(t0.joinable)t0.join();
+
+      gameplay_functions->drawTut(Alex);
+      Tutorial::drawTutorial();
 		}
 		while (current_game_state == game_state::in_game) {
-      cout << "Current game state: in_game" << endl;
+     // cout << "Current game state: in_game" << endl;
 			if (iController->current_game_state != game_state::in_game) {
 				iController->current_game_state = current_game_state;
 			}
@@ -876,14 +876,17 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 			start_tick = clock();
 			if (!MAP_EDITOR) {
 				//_QuadTree->clearMovable();
-				//grid_worldobj->clear_and_reinsert(movVec);
+				grid_worldobj->clear_and_reinsert(movVec);
 				//vector<WorldObj*> temp = { Alex };
 				//grid_worldobj->clear_and_reinsert(temp);
 			}
 			else {
 				//_QuadTree->clear();
 				grid_worldobj->clear_and_reinsert(movVec);
+				//grid_worldobj->clear();
 			}
+			//grid_worldobj->insert_worldobj_to_grid(recVec);
+			//grid_worldobj->insert_worldobj_to_grid(movVec);
 			//grid->clear();
 			//grid->insert_objs_to_grid(rivObj->getLines());
 			Alex->updateCD();
@@ -900,6 +903,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 				}
 
 				for (int i = 0; i < movVec.size(); i++) {
+					cout << movVec[i]->getName() << endl;
 					//cout << "movevec item type is " << movVec[i]->getType() << endl;
 					if (movVec[i]->getType() != WorldObj::TYPE_WORLDOBJ) {
 						movVec[i]->effect.sprite.animate();
@@ -917,7 +921,8 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 					//_QuadTree->Insert(recVec[i]);	//insert all obj into tree
 				}
 				for (int i = 0; i < movVec.size(); i++) {
-					//cout << "movevec item type is " << movVec[i]->getType() << endl;
+					//if (movVec[i]->getName() == "Yemoja") cout << "Yemoja grid is "<< movVec[i]->grid_location.first << ", " << movVec[i]->grid_location.second << endl;
+					//if (movVec[i]->getName() == "Shango") cout << "Shango grid is " << movVec[i]->grid_location.first << ", " << movVec[i]->grid_location.second << endl;
 					if (movVec[i]->getType() != WorldObj::TYPE_WORLDOBJ) {
 						movVec[i]->effect.sprite.animate();
 						movVec[i]->WorldObj::animateObj();
@@ -951,6 +956,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 			//draw
 			if (state == 0) {
 				gameplay_functions->draw_frame(Alex);
+				//cout << "player grid loc is " << Alex->grid_location.first << ", " << Alex->grid_location.second << endl;
 			}
 			//draw
 			else if (state > 0) {
@@ -966,7 +972,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 
 			//pool.push(test);
 			
-			cout << "size of buffer is " << tBuffer->queue_buffer.size() << " and physics buffer size is " << tBuffer->physics_buffer.size() << endl;
+			//cout << "size of buffer is " << tBuffer->queue_buffer.size() << " and physics buffer size is " << tBuffer->physics_buffer.size() << endl;
 
 			//cout << "shango's position BEFORE is at " << Alex->getX() << ", " << Alex->getY() << endl;
 			//iterate through physics_buffer
@@ -998,11 +1004,13 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 			//getting here-------------------------------------------------------------------------***********
 			//setting give as quest to false so that the excute runs
 			//YemojaPlanner->give_as_quest = false;
-//			cout << " first dest is " << staticRec->get_action_destination()->getXloc() << ", " << staticRec->get_action_destination()->getYloc() << endl;
-			AIController::execute();
+
+      //			cout << " first dest is " << staticRec->get_action_destination()->getXloc() << ", " << staticRec->get_action_destination()->getYloc() << endl;
+      AIController::execute();
 //			cout << "after execute dest is " << staticRec->get_action_destination()->getXloc() << ", " << staticRec->get_action_destination()->getYloc() << endl;
-			//AI.join();
+      //AI.join();
 //			cout << "after thread join dest is " << staticRec->get_action_destination()->getXloc() << ", " << staticRec->get_action_destination()->getYloc() << endl;
+
 			if ((1000 / fs) > (clock() - start_tick)) { //delta_ticks)
 				Sleep((1000 / fs) - (clock() - start_tick));
 			}
@@ -1017,51 +1025,63 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 			HUD::AVG = total_fps / frame_count;
 
 			current_game_state = iController->current_game_state;
-			//system("PAUSE");
-			//Checks if game has reached final states
-			GameState::check_if_end_game(&current_game_state);
-			
 
+			GameState::check_if_end_game(&current_game_state);
+
+      Tutorial::drawTutorial();
 		}
 		while (current_game_state == game_state::pause_menu) {
-			for (int i = 0; i < 10; i++) {
-				cout << "Press Q to return to game" << endl;
-
-			}
 			if (iController->current_game_state != game_state::pause_menu) {
 				iController->current_game_state = current_game_state;
 			}
 
-			if (shouldExit > 0) {
-				_CrtDumpMemoryLeaks();
-				return;
-			}
-			start_tick = clock();
+      if(shouldExit > 0) {
+        _CrtDumpMemoryLeaks();
+        return;
+      }
 
-			//draw
-			gameplay_functions->drawTut(Alex);
+      start_tick = clock();
+      iController->InputCheck();
+      tBuffer->run();
 
-			//run task buffer
-			iController->InputCheck();
+      if((1000 / fs) > (clock() - start_tick))
+        Sleep((1000 / fs) - (clock() - start_tick));
+      delta_ticks = clock() - start_tick; //the time, in ms, that took to render the scene
+      if(delta_ticks > 0)
+        fps = CLOCKS_PER_SEC / delta_ticks;
+      HUD::FPS = fps;
+      HUD::AVG = total_fps / frame_count;
 
-			tBuffer->run();
+      current_game_state = iController->current_game_state;
+      gameplay_functions->drawTut(Alex);
+      Tutorial::drawTutorial();
+    }
+    while(current_game_state == game_state::tutorial_pause) {
+      if(iController->current_game_state != game_state::pause_menu) {
+        iController->current_game_state = current_game_state;
+      }
 
-			if ((1000 / fs) > (clock() - start_tick)) { //delta_ticks) {www
-				Sleep((1000 / fs) - (clock() - start_tick));
-			}
-			delta_ticks = clock() - start_tick; //the time, in ms, that took to render the scene
-			if (delta_ticks > 0) {
-				fps = CLOCKS_PER_SEC / delta_ticks;
-			}
-			HUD::FPS = fps;
-			//total_fps += fps;
-			//cout << "FPS: " << fps << endl;
+      if(shouldExit > 0) {
+        _CrtDumpMemoryLeaks();
+        return;
+      }
 
-			//frame_count++;
-			HUD::AVG = total_fps / frame_count;
+      start_tick = clock();
+      iController->InputCheck();
+      tBuffer->run();
 
-			current_game_state = iController->current_game_state;
-		}
+      if((1000 / fs) > (clock() - start_tick))
+        Sleep((1000 / fs) - (clock() - start_tick));
+      delta_ticks = clock() - start_tick; //the time, in ms, that took to render the scene
+      if(delta_ticks > 0)
+        fps = CLOCKS_PER_SEC / delta_ticks;
+      HUD::FPS = fps;
+      HUD::AVG = total_fps / frame_count;
+
+      current_game_state = iController->current_game_state;
+      gameplay_functions->drawTut(Alex);
+      Tutorial::drawTutorial();
+    }
 		while (current_game_state == game_state::victory_menu) {
 
 			if (iController->current_game_state != game_state::victory_menu) {
