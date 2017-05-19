@@ -16,8 +16,11 @@ void GameState::check_if_end_game(game_state* current_game_state) {
 	//bool temp = std::find(player_allies.begin(), player_allies.end(), yemoja_vil) != player_allies.end();
 	//bool temp2 = std::find(player_allies.begin(), player_allies.end(), oya_vil) != player_allies.end();
 
-	if (std::find(player_allies.begin(), player_allies.end(), yemoja_vil) != player_allies.end() && 
+	if (Alliance::get_num_alliances() == 1)
+		/*
+		std::find(player_allies.begin(), player_allies.end(), yemoja_vil) != player_allies.end() && 
 		std::find(player_allies.begin(), player_allies.end(), oya_vil) != player_allies.end())
+		*/
 	{
 		*current_game_state = game_state::victory_menu;
 	}

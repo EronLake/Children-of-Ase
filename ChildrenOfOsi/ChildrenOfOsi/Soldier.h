@@ -11,6 +11,7 @@ class Party;
 class Soldier: public NPC
 {
   public:
+  Party *party;
 
   Attack* melee;
   vector<Attack*> attackTypes;
@@ -118,7 +119,7 @@ class Soldier: public NPC
   static constexpr std::size_t DEFAULT_AGGRO_RANGE = 200;
   static constexpr std::size_t DEFAULT_PURSUIT_RANGE = 500;
 
-  Party *party;
+  //Party *party;
   int instances;
 
   bool inCombat;

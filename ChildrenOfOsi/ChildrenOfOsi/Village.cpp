@@ -106,6 +106,14 @@ void Village::init_villages()
 		Alliance* new_alliance = new Alliance(new_village);
 
 		new_village->addToParties(new_party);
+
+		//need to set the barracks and defenders owner of the village to the new village
+		new_village->defenders->set_village(new_village);
+		new_village->barracks->set_village(new_village);
+
+		new_village->defenders->setLeader(itr.second);
+		new_village->barracks->setLeader(itr.second);
+
 	}
 	Alliance::update_enemies();
 }
