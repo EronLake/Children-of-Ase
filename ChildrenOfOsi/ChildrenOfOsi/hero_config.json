@@ -1,7 +1,7 @@
 {
 	"Shango" : {
-		"x" : 54.45,
-		"y" : 150.55,
+		"x" : 64.45,
+		"y" : 100.55,
 		"width" : 150,
 		"hight" : 150,
 		"name" : "Shango",
@@ -291,10 +291,10 @@
 				"left": {"0":"FireBallTMPLeft", "1":3}
 			},
 			"set_name": 0,
-			"set_dmg": 40,
+			"set_dmg": 10,
 			"set_speed" : 5,
 			"set_base_dir" : 4,
-			"set_cool_down" : 35,
+			"set_cool_down" : 100,
 			"set_stamina_cost" : 45,
 			"set_pause" : -1,
 			"set_destroy" : false,
@@ -308,7 +308,7 @@
 		}
 	},
 	"Oya" : {
-		"x" : 176.15,
+		"x" : 176.05,
 		"y" : 230.70,
 		"width" : 150,
 		"hight" : 150,
@@ -384,10 +384,10 @@
 				"left": {"0":"FireBallTMPLeft", "1":3}
 			},
 			"set_name": 0,
-			"set_dmg": 40,
+			"set_dmg": 20,
 			"set_speed" : 5,
 			"set_base_dir" : 4,
-			"set_cool_down" : 35,
+			"set_cool_down" : 80,
 			"set_stamina_cost" : 45,
 			"set_pause" : -1,
 			"set_destroy" : false,
