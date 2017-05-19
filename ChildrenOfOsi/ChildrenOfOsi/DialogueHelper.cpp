@@ -146,8 +146,9 @@ dialogue_point DialogueHelper::choose_conv_pt(std::vector<ConversationLogObj*> c
 				if (!has_quest) {
 					diog_pt = { "Offer_Quest","Offer_Quest" };
 				}
-				return diog_pt;
+				
 			}
+			return diog_pt;
 		}
 	}
 

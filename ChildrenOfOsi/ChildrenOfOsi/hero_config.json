@@ -215,8 +215,8 @@
 	},
 
 	"Yemoja" : {
-		"x" : 64.45,
-		"y" : 103.55,
+		"x" : 50.45,
+		"y" : 134.65,
 		"width" : 150,
 		"hight" : 150,
 		"name" : "Yemoja",
@@ -225,7 +225,7 @@
 		"bodyx2" : 50.0,
 		"bodyy1" : 50.0,
 		"bodyy2" : 50.0,
-		"health": 150,
+		"health": 500,
 		"max_stamina": 300,
 		"aggression": 30,
 		"kindness": 70,
@@ -291,7 +291,7 @@
 				"left": {"0":"FireBallTMPLeft", "1":3}
 			},
 			"set_name": 0,
-			"set_dmg": 15,
+			"set_dmg": 10,
 			"set_speed" : 5,
 			"set_base_dir" : 4,
 			"set_cool_down" : 100,
@@ -308,8 +308,8 @@
 		}
 	},
 	"Oya" : {
-		"x" : 50.00,
-		"y" : 36.00,
+		"x" : 176.05,
+		"y" : 230.70,
 		"width" : 150,
 		"hight" : 150,
 		"name" : "Oya",

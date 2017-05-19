@@ -265,8 +265,13 @@ void Fight::add_to_defenders(Party* a, Party* p) {
 void Fight::update_fight() {
 	bool ally_erased;
 	bool party_erased;
+
 	Player* player = dynamic_cast<Player*>(Containers::hero_table["Shango"]);
 	for (auto it = attackers.begin(); it != attackers.end();) {
+		if ((*it)[0]->get_village()== NULL) {
+			std::cout << defenders.size();
+		}
+
 		ally_erased = false;
 		for (auto itor = (*it).begin(); itor != (*it).end();) {
 			party_erased = false;
@@ -300,6 +305,11 @@ void Fight::update_fight() {
 		if (!ally_erased)++it;
 	}
 	for (auto it = defenders.begin(); it != defenders.end();) {
+
+		if ((*it)[0]->get_village()== NULL) {
+			std::cout << defenders.size();
+		}
+
 		ally_erased = false;
 		for (auto itor = (*it).begin(); itor != (*it).end();) {
 			party_erased = false;
