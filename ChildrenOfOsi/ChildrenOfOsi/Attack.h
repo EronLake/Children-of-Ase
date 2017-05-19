@@ -12,10 +12,16 @@ class Attack: public WorldObj
 
   enum class AttackTypes: uint8_t;
 
+  static constexpr int MELEE = 0;
+  static constexpr int FIREBALL = 1;
+  static constexpr int SPIN = 2;
+
+
   Attack();
   Attack(float x, float y, bool col);// , int d);
   ~Attack() = default;
 
+  int get_name() { return this->name; };
   int getDmg() { return this->dmg; };
   int getDuration() { return this->duration; };
   float getSpeed() { return this->speed; };
@@ -32,6 +38,7 @@ class Attack: public WorldObj
   AttackTypes getAttackType() { return this->attackType; }
   NPC* get_creator() { return creator; };
 
+  void set_name(int n) { this->name = n; };
   void setDmg(int d) { this->dmg = d; };
   void setStaminaCost(int c) { this->staminaCost = c; };
   void setAseCost(int c) { this->aseCost = c; };
@@ -65,6 +72,9 @@ class Attack: public WorldObj
   };
 
   private:
+	
+  //Eron: added so that the attacks don't refrence by position in vector
+  int name;
 
   int dmg;
   int duration; // -1 will mean infinity

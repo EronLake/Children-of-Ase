@@ -64,63 +64,75 @@ void Soldier::addAttackType(Attack* a)
 void Soldier::newAttack(int i, Attack* a)
 {
   Attack* p = a;
-  *p = *attackTypes[i];
 
-  float w = attackTypes[i]->getWidth();
+  //Eron: add this to select the attack based off the name of the attack
+
+  int it = 0;
+  for (; it < attackTypes.size(); it++) 
+  {
+	  if (attackTypes[it]->get_name() == i) 
+	  {
+		  *p = *attackTypes[it];
+		  break;
+	  }	 
+  }
+  
+
+  float w = attackTypes[it]->getWidth();
   if(w == 0)w = body[0].getWidth();
-  float h = attackTypes[i]->getHeight();
+  float h = attackTypes[it]->getHeight();
   if(h == 0)h = body[0].getHeight();
   float x = body[0].getX();
   float y = body[0].getY();
-  int bd = attackTypes[i]->getBaseDir();
+  int bd = attackTypes[it]->getBaseDir();
   switch (getDirection()) {
   case WorldObj::DIRECTION_UP:
 		  y = y - (h);
-		  if (!attackTypes[i]->getCanCancel())p->sprite.setTexture(p->sprite.up);
-		  if (bd == 4)x += (attackTypes[i]->getSpeed()*attackTypes[i]->getDuration() / 2);
-		  if (bd == 6)x -= (attackTypes[i]->getSpeed()*attackTypes[i]->getDuration() / 2);
+		  if (!attackTypes[it]->getCanCancel())p->sprite.setTexture(p->sprite.up);
+		  if (bd == 4)x += (attackTypes[it]->getSpeed()*attackTypes[it]->getDuration() / 2);
+		  if (bd == 6)x -= (attackTypes[it]->getSpeed()*attackTypes[it]->getDuration() / 2);
 		  break;
   case WorldObj::DIRECTION_DOWN:
 		  y = y + (h);
-		  if (!attackTypes[i]->getCanCancel())p->sprite.setTexture(p->sprite.down);
-		  if (bd == 4)x -= (attackTypes[i]->getSpeed()*attackTypes[i]->getDuration() / 2);
-		  if (bd == 6)x += (attackTypes[i]->getSpeed()*attackTypes[i]->getDuration() / 2);
+		  if (!attackTypes[it]->getCanCancel())p->sprite.setTexture(p->sprite.down);
+		  if (bd == 4)x -= (attackTypes[it]->getSpeed()*attackTypes[it]->getDuration() / 2);
+		  if (bd == 6)x += (attackTypes[it]->getSpeed()*attackTypes[it]->getDuration() / 2);
 		  break;
   case WorldObj::DIRECTION_LEFT:
 		  x = x - (w);
-		  if (!attackTypes[i]->getCanCancel())p->sprite.setTexture(p->sprite.left);
-		  if (bd == 4)y -= (attackTypes[i]->getSpeed()*attackTypes[i]->getDuration() / 2);
-		  if (bd == 6)y += (attackTypes[i]->getSpeed()*attackTypes[i]->getDuration() / 2);
+		  if (!attackTypes[it]->getCanCancel())p->sprite.setTexture(p->sprite.left);
+		  if (bd == 4)y -= (attackTypes[it]->getSpeed()*attackTypes[it]->getDuration() / 2);
+		  if (bd == 6)y += (attackTypes[it]->getSpeed()*attackTypes[it]->getDuration() / 2);
 		  break;
   case WorldObj::DIRECTION_RIGHT:
 		  x = x + (w);
-		  if (!attackTypes[i]->getCanCancel())p->sprite.setTexture(p->sprite.right);
-		  if (bd == 4)y += (attackTypes[i]->getSpeed()*attackTypes[i]->getDuration() / 2);
-		  if (bd == 6)y -= (attackTypes[i]->getSpeed()*attackTypes[i]->getDuration() / 2);
+		  if (!attackTypes[it]->getCanCancel())p->sprite.setTexture(p->sprite.right);
+		  if (bd == 4)y += (attackTypes[it]->getSpeed()*attackTypes[it]->getDuration() / 2);
+		  if (bd == 6)y -= (attackTypes[it]->getSpeed()*attackTypes[it]->getDuration() / 2);
 		  break;
   }
   p->setX(x);
   p->setY(y);
   p->setCollision(true);
   p->addHit(this);
-  p->setDmg(attackTypes[i]->getDmg());
-  p->setDuration(attackTypes[i]->getDuration());
-  p->setDestroy(attackTypes[i]->getDestroy());
-  p->setSpeed(attackTypes[i]->getSpeed());
+  p->setDmg(attackTypes[it]->getDmg());
+  p->setDuration(attackTypes[it]->getDuration());
+  p->setDestroy(attackTypes[it]->getDestroy());
+  p->setSpeed(attackTypes[it]->getSpeed());
   p->setWidth(w);
   p->setHeight(h);
   p->setDirWithBase(getDirection(), false);
-  p->setPause(attackTypes[i]->getPause());
+  p->setPause(attackTypes[it]->getPause());
   p->setKeep(false);
   p->set_creator(this);
-  cooldownMap[attackTypes[i]] = attackTypes[i]->getCoolDown();
+  cooldownMap[attackTypes[it]] = attackTypes[it]->getCoolDown();
   cdTime = melee->getCoolDown();
-  stamina -= attackTypes[i]->getStaminaCost();
-  ase -= attackTypes[i]->getAseCost();
+  stamina -= attackTypes[it]->getStaminaCost();
+  ase -= attackTypes[it]->getAseCost();
   instances++;
   if(instances == 99)instances = 0;
   currentAttacks.push_back(p);
-  if(attackTypes[i]->getTurn())setDirWithBase(4, true);
+  if(attackTypes[it]->getTurn())setDirWithBase(4, true);
 }
 
 void Soldier::meleeAttack()

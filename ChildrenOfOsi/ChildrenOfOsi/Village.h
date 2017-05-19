@@ -42,6 +42,8 @@ public:
 	vector<Village*> get_conquered() { return conquered; };
 
 
+	void static Village::init_villages();
+
 private:
 	Alliance* alliance;
 	vector<NPC*> members;

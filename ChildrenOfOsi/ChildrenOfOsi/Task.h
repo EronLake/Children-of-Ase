@@ -4,6 +4,14 @@
 #include "NPC.h"
 #include "Hero.h"
 #include "RegionState.h"
+
+//#include "MemoryPool.h"
+//#include "MemoryHelper.h"
+
+class MemoryPool;
+class MemoryHelper;
+class MemNode;
+
 #pragma once
 
 class Task
@@ -65,6 +73,10 @@ public:
 
 	void updateStatus(std::string new_status);
 	Task* clone_task();
+
+private:
+	static MemoryPool* task_pool;
+	static MemNode* task_head;
 
 
 };

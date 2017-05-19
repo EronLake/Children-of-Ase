@@ -472,5 +472,35 @@
     "1": {
       "1": "quest_deny"
     }
+  },
+
+  "Shrine Talk 1_Templates": {
+    "1": {
+      "1": "Shrine Talk 1"
+    }
+  },
+
+  "Shrine Talk 2_Templates": {
+    "1": {
+      "1": "Shrine Talk 2"
+    }
+  },
+
+  "Shrine Talk 3_Templates": {
+    "1": {
+      "1": "Shrine Talk 3"
+    }
+  },
+
+  "Shrine Talk 4_Templates": {
+    "1": {
+      "1": "Shrine Talk 4"
+    }
+  },
+
+  "Shrine Not Worthy_Templates": {
+    "1": {
+      "1": "Shrine Not Worthy"
+    }
   }
 }

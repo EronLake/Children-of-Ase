@@ -9,3 +9,8 @@ auto as_integer(Enumeration const value)
 {
 	return static_cast<typename std::underlying_type<Enumeration>::type>(value);
 }
+
+class GameState {
+	public:
+		static void check_if_end_game(game_state* current_game_state);
+};

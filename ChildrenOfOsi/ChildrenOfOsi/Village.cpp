@@ -1,5 +1,7 @@
 #include "stdafx.h"
 #include "Village.h"
+#include "Alliance.h"
+
 using namespace std;
 
 vector<Village*> Village::villagesWorld;
@@ -44,4 +46,66 @@ void Village::remove_member(NPC* n)
 {
   if(!this->members.empty())
     this->members.erase(std::remove(this->members.begin(), this->members.end(), n));
+}
+
+void Village::init_villages()
+{
+	Party::grave->set_perm(true);
+	
+	
+	for (auto itr : Containers::hero_table)
+	{
+		std::string party_name;
+
+		if (itr.second->name == YEMOJA)
+		{
+			party_name = "Oasis";
+		}
+		else if (itr.second->name == OYA)
+		{
+			party_name = "Jungle";
+		}
+		else if (itr.second->name == OSHOSI)
+		{
+			party_name = "Mountain";
+		}
+		else //if (hero_id == OGUN)
+		{
+			party_name = "Ogun";
+		}
+
+		Party* new_party = new Party();
+		new_party->addToParty(itr.second, true);
+
+		//adds soldiers to party
+		for (auto itor: Containers::soldier_table) 
+		{
+			if (itor.second->getName().find(party_name) != string::npos)
+			{
+				new_party->addToParty(itor.second, false);
+			}
+				
+		}
+
+		Village* new_village = new Village();
+		new_village->set_village_location(itr.second->getLoc());
+		new_village->add_member(itr.second);
+
+		//adds soldiers to village
+		for (auto itor : Containers::soldier_table)
+		{
+			if (itor.second->getName().find(party_name) != string::npos)
+			{
+				new_village->add_member(itor.second);
+			}
+
+		}
+
+		new_village->leader = itr.second;
+
+		Alliance* new_alliance = new Alliance(new_village);
+
+		new_village->addToParties(new_party);
+	}
+	Alliance::update_enemies();
 }
