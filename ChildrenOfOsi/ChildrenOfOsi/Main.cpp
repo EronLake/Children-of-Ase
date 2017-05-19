@@ -1012,7 +1012,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 			//if(t0.joinable)t0.join();
 		}
 		while (current_game_state == game_state::in_game) {
-      cout << "Current game state: in_game" << endl;
+     // cout << "Current game state: in_game" << endl;
 			if (iController->current_game_state != game_state::in_game) {
 				iController->current_game_state = current_game_state;
 			}
@@ -1131,14 +1131,17 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 			start_tick = clock();
 			if (!MAP_EDITOR) {
 				//_QuadTree->clearMovable();
-				//grid_worldobj->clear_and_reinsert(movVec);
+				grid_worldobj->clear_and_reinsert(movVec);
 				//vector<WorldObj*> temp = { Alex };
 				//grid_worldobj->clear_and_reinsert(temp);
 			}
 			else {
 				//_QuadTree->clear();
 				grid_worldobj->clear_and_reinsert(movVec);
+				//grid_worldobj->clear();
 			}
+			//grid_worldobj->insert_worldobj_to_grid(recVec);
+			//grid_worldobj->insert_worldobj_to_grid(movVec);
 			//grid->clear();
 			//grid->insert_objs_to_grid(rivObj->getLines());
 			Alex->updateCD();
@@ -1155,6 +1158,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 				}
 
 				for (int i = 0; i < movVec.size(); i++) {
+					cout << movVec[i]->getName() << endl;
 					//cout << "movevec item type is " << movVec[i]->getType() << endl;
 					if (movVec[i]->getType() != WorldObj::TYPE_WORLDOBJ) {
 						movVec[i]->effect.sprite.animate();
@@ -1172,7 +1176,8 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 					//_QuadTree->Insert(recVec[i]);	//insert all obj into tree
 				}
 				for (int i = 0; i < movVec.size(); i++) {
-					//cout << "movevec item type is " << movVec[i]->getType() << endl;
+					//if (movVec[i]->getName() == "Yemoja") cout << "Yemoja grid is "<< movVec[i]->grid_location.first << ", " << movVec[i]->grid_location.second << endl;
+					//if (movVec[i]->getName() == "Shango") cout << "Shango grid is " << movVec[i]->grid_location.first << ", " << movVec[i]->grid_location.second << endl;
 					if (movVec[i]->getType() != WorldObj::TYPE_WORLDOBJ) {
 						movVec[i]->effect.sprite.animate();
 						movVec[i]->WorldObj::animateObj();
@@ -1206,6 +1211,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 			//draw
 			if (state == 0) {
 				gameplay_functions->draw_frame(Alex);
+				//cout << "player grid loc is " << Alex->grid_location.first << ", " << Alex->grid_location.second << endl;
 			}
 			//draw
 			else if (state > 0) {
@@ -1221,7 +1227,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 
 			//pool.push(test);
 			
-			cout << "size of buffer is " << tBuffer->queue_buffer.size() << " and physics buffer size is " << tBuffer->physics_buffer.size() << endl;
+			//cout << "size of buffer is " << tBuffer->queue_buffer.size() << " and physics buffer size is " << tBuffer->physics_buffer.size() << endl;
 
 			//cout << "shango's position BEFORE is at " << Alex->getX() << ", " << Alex->getY() << endl;
 			//iterate through physics_buffer

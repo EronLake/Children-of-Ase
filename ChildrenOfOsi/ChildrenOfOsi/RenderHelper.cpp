@@ -100,14 +100,15 @@ int RenderHelper::draw_frame(WorldObj * obj)
 	//cout << "size of fullvec is " << fullVec.size() << endl;
 	for (int i = 0; i < fullVec.size(); i++) {
 		WorldObj* tempObj = fullVec[i];
+		objVec.push_back(tempObj);
 
-		//1k pixels left and rigfht, 800 pixels up and down. OBJS WHOSE WIDTH AND HEIGHT ARE GREATER THAN 1-2k and 800-1.6k respectively DO NOT FUNCTION CORRECTLY
-		if (tempObj->getX() > obj->getX() - (1000*map_zoom) && tempObj->getX() < obj->getX() + (1000*map_zoom) && tempObj->getY() > obj->getY() - (800*map_zoom) && tempObj->getY() < obj->getY() + (800*map_zoom)) {
-				auto it = std::find(objVec.begin(), objVec.end(), tempObj);
-				if (it == objVec.end()) {
-					objVec.push_back(tempObj);
-				}
-		}	
+		////1k pixels left and rigfht, 800 pixels up and down. OBJS WHOSE WIDTH AND HEIGHT ARE GREATER THAN 1-2k and 800-1.6k respectively DO NOT FUNCTION CORRECTLY
+		//if (tempObj->getX() > obj->getX() - (1000*map_zoom) && tempObj->getX() < obj->getX() + (1000*map_zoom) && tempObj->getY() > obj->getY() - (800*map_zoom) && tempObj->getY() < obj->getY() + (800*map_zoom)) {
+		//		auto it = std::find(objVec.begin(), objVec.end(), tempObj);
+		//		if (it == objVec.end()) {
+		//			objVec.push_back(tempObj);
+		//		}
+		//}	
 		
 	}
 
@@ -145,6 +146,7 @@ int RenderHelper::draw_frame(WorldObj * obj)
 	}
 	//cout << "THE COORDINATES OF OBJ IS " << obj->getX() << ", " << obj->getY() << endl;
 	//cout << "******************************************SIZE OF THE OBJVEC TO RENDER IS " << objVec.size() << endl;
+	cout << "objvec size is " << objVec.size() << endl;
 	for (int i = 0; i < objVec.size(); i++) {
 		
 			LOG("BEFORE DRAWING**");
