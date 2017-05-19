@@ -34,6 +34,7 @@ private:
 	int count;
 	int count2;
 
+  bool locked = false;
 	bool prompted_quest = false;
 
 	bool coordOverlap(int value, int min, int max) { return (value >= min) && (value <= max); }

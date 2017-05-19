@@ -171,6 +171,14 @@ void Tutorial::drawTutorial()
     case Tutorial::Stage::INTRO01:
       GameWindow::drawSprite(Tutorial::SCREEN_FADE_FILTER_X, Tutorial::SCREEN_FADE_FILTER_Y,
         Tutorial::SCREEN_FADE_FILTER_WIDTH, Tutorial::SCREEN_FADE_FILTER_HEIGHT, *Tutorial::screenFadeFilterSprite);
+      GameWindow::RenderText(string("Welcome to Children of Ase, Shango. Your adventure in the world of Aye starts here.\n\n"
+        "As you go about your journey, you will meet heroes. Each of these heroes will be unique individuals, with their own personalities."
+        "They will remember their own actions, as well as their interactions with you.\n\n"
+        "While travelling throughout Aye, be sure to meet and speak with these heroes. They will provide you valuable information, "
+        "direction, and help. This is your journey: you decide what to do.\n\n\n"
+        "Whenever you are ready, press Enter to begin."),
+        30.0F, 15.0F, 900.0F, 510.0F, 1.0F,
+        {0xDC, 0xDC, 0xDC});
       break;
     case Tutorial::Stage::INTRO02:
       GameWindow::drawSprite(Tutorial::SCREEN_FADE_FILTER_X, Tutorial::SCREEN_FADE_FILTER_Y,

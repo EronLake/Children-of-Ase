@@ -608,10 +608,18 @@ void Input::InputCheck()
 	short THREE = GetKeyState('3') >> 15; // Remove self from party and put party in patrol mode
 	short FOUR = GetKeyState('4') >> 15; // coming soon
 
+  if(!W && !A && !S && !D && !Q && !E &&
+    !J && !K && !L && !SEMI && !F && !G && !H &&
+    !R && !T && !Y && !U && !P &&
+    !Z && !V && !M &&
+    !ONE && !TWO && !THREE && !FOUR &&
+    !ENTER && !SHIFT)
+    this->locked = false;
 	
 	if (current_game_state == game_state::main_menu) {
-    if (ENTER) {
+    if (!this->locked && ENTER) {
       Tutorial::completeStage(*this);
+      this->locked = true;
 		}
 	}
 	else if (current_game_state == game_state::in_game) {
@@ -1168,14 +1176,16 @@ void Input::InputCheck()
 		}
 	}
 	else if (current_game_state == game_state::pause_menu) {
-    if(ENTER) {
+    if(!this->locked && ENTER) {
       current_game_state = game_state::in_game;
+      this->locked = true;
     }
 	}
   else if(current_game_state == game_state::tutorial_pause) {
-    if(ENTER && Tutorial::isStageActive(Tutorial::Stage::INTRO01) || Tutorial::isStageActive(Tutorial::Stage::INTRO02)) {
+    if(!this->locked && ENTER && Tutorial::isStageActive(Tutorial::Stage::INTRO01) || Tutorial::isStageActive(Tutorial::Stage::INTRO02)) {
       Tutorial::completeStage(*this);
       current_game_state = game_state::in_game;
+      this->locked = true;
     }
   }
   else if(current_game_state == game_state::victory_menu) {
