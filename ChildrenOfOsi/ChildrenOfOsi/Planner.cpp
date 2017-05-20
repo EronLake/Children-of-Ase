@@ -122,11 +122,22 @@ Action* Planner::choose_next_step(Action* goal, vector<Action*> goals) {
 		}
 	}
 
+	/*
+	Eron: This whole thing (minus the thing under the !s is a hack to keep form alliance from 
+	happening twice, still need to do the same thing for conqure/just need to add the precondition
+	for not already being conqured)
+	*/
 
-	//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-	//I dont think we should have this line utilites of actions are not supposed to change
-	//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-	best_step->setUtility(best_value);
+	if (best_step != nullptr) {
+		//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+		//I dont think we should have this line utilites of actions are not supposed to change
+		//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+		best_step->setUtility(best_value);
+	}
+	else {
+		best_step = Containers::action_table["Train_" + std::to_string(evaluateHero->name)];
+	}
+	
 	return best_step;
 }
 /*

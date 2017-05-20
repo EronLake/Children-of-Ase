@@ -233,6 +233,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	HeroConfig::import_config(movVec_ptr, &ObjConfig::textureMap, gameplay_functions, tBuffer);
 	SoldierConfig::import_config(movVec_ptr, &ObjConfig::textureMap, gameplay_functions, tBuffer);
 	Village::init_villages();
+	AIController::init_plans();
 
 	Player* Alex = dynamic_cast<Player*>(Containers::hero_table["Shango"]);
 
@@ -918,14 +919,39 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 			/////////////////////////////////////////////////////////////////
 			/////////////////////////////////////////////////////////////////
 			/////////////////////////////////////////////////////////////////
+
 			for (auto iter : yemoja->rel) {
 				Relationship* my_rel = iter.second;
 				int with_hero = iter.first;
 
-				if (my_rel->isChanged()) {
+				if (my_rel->isChanged() > 15) {
 					//reevaluate goals for with_hero
-					AIController::reevaluate_state(YEMOJA, with_hero);
-					my_rel->setChanged(false);
+					//Eron: This is a temporary fix
+					///////////////////////////////////////////////////////
+					Hero* other_hero = nullptr;
+
+					for (auto itr : Containers::hero_table)
+					{
+						if (itr.second->name == with_hero)
+						{
+							other_hero = itr.second;
+						}
+					}
+
+					if (yemoja != nullptr && other_hero != nullptr)
+					{
+						Alliance* curr_alliance = yemoja->getVillage()->get_alliance();
+						Alliance* other_alliance = other_hero->getVillage()->get_alliance();
+
+						if (curr_alliance != other_alliance)
+						{
+							AIController::reevaluate_state(YEMOJA, with_hero);
+						}
+					}
+
+					///////////////////////////////////////////////////////
+					
+					my_rel->setChanged(0);
 				}
 			}
 			//getting here-------------------------------------------------------------------------***********
@@ -933,7 +959,12 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 			//YemojaPlanner->give_as_quest = false;
 
       //			cout << " first dest is " << staticRec->get_action_destination()->getXloc() << ", " << staticRec->get_action_destination()->getYloc() << endl;
-      AIController::execute();
+			
+			//doesn't call execute if in dialog
+			if (state <= 0)
+			{
+				AIController::execute();
+			}
 //			cout << "after execute dest is " << staticRec->get_action_destination()->getXloc() << ", " << staticRec->get_action_destination()->getYloc() << endl;
       //AI.join();
 //			cout << "after thread join dest is " << staticRec->get_action_destination()->getXloc() << ", " << staticRec->get_action_destination()->getYloc() << endl;

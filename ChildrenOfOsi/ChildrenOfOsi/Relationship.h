@@ -17,7 +17,7 @@ private:
 	int str_counter;
 	int str_max_change;
 
-	bool changed;
+	int changed;
 
 public:
 	Relationship();
@@ -32,8 +32,8 @@ public:
 	void setStrength(int s);
 	void addStrength(int s);
 	int getStrength();
-	bool isChanged() { return changed; };
-	void setChanged(bool c) { changed = c; };
+	int isChanged() { return changed; };
+	void setChanged(int c) { changed = c; };
 
 	
 	void setAffEstimate(int a) { affEstimate = a; };

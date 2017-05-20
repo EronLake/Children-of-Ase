@@ -155,6 +155,10 @@
         "general_type": 0,
         "rel_type": 7,
         "desired_rel_val": 85
+      },
+	  "2": {
+        "general_type": 5,
+        "state_type": 6
       }
     },
     "doer_succ_postconds": {

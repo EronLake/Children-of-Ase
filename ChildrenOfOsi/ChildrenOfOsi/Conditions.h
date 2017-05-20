@@ -125,11 +125,14 @@ private:
 	/*state_manager st_man, 
 	std::string required state, 
 	std::vectorr<relevant villages>*/
+	int state_type;
 public:
+
+	virtual int get_state_type() final { return state_type; };
 	//Comparing village states
-	StatePrerec();
+	StatePrerec(int state_type);
 	~StatePrerec();
-	virtual int get_cost() final;
+	virtual int get_cost(Hero* curr_hero, Hero* other_hero) final;
 };
 
 //BETRAYALS NEED TO BE ACCOUNTED FOR
@@ -238,7 +241,7 @@ public:
 	~StatePost();
 
 	virtual int get_state_type() final { return state_type; };
-	virtual float get_utility() final;
+	virtual float get_utility(Hero* curr_hero, Hero* other_hero) final;
 	virtual void apply_utility(Hero* curr_hero, Hero* other_hero) final;
 
 };

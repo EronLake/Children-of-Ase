@@ -128,7 +128,7 @@ vector<std::string> Action::preConditionsNeeded(Hero* o, Hero* h) {
 		}
 		else if ((*it)->get_general_type() == Preconditions::STATE) {
 			StatePrerec* condition = dynamic_cast<StatePrerec*>((*it).get());
-			if (condition->get_cost() > 0)needs.push_back((*it)->get_type());
+			if (condition->get_cost(o, h) > 0)needs.push_back((*it)->get_type());
 		}
 	}
 	if (!optional_fufilled_check(o, h)) {
@@ -166,7 +166,7 @@ vector<std::string> Action::preConditionsNeeded(Hero* o, Hero* h) {
 				}
 				else if ((*it)->get_general_type() == Preconditions::STATE) {
 					StatePrerec* condition = dynamic_cast<StatePrerec*>((*it).get());
-					if (condition->get_cost() > 0) {
+					if (condition->get_cost(o, h) > 0) {
 						needs = add_no_repeats(needs, (*it)->get_type());
 					}
 				}
@@ -275,7 +275,7 @@ bool Action::optional_fufilled_check(Hero* o, Hero* h) {
 			}
 			else if ((*it)->get_general_type() == Preconditions::STATE) {
 				StatePrerec* condition = dynamic_cast<StatePrerec*>((*it).get());
-				if (condition->get_cost() > 0) {
+				if (condition->get_cost(o, h) > 0) {
 					one_fufilled = false;
 				}
 			}

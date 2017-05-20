@@ -40,10 +40,42 @@ void CombatController::fight(Soldier* sold1, int state) {
 				sold1->destination = Vector2f(0, 0);
 				sold1->waypoint = Vector2f(0, 0);
 				sold1->face(sold2);
-				if (sold1->getCool()) {
+				bool attacked = false;
+				for (auto it = sold1->attackTypes.begin(); it != sold1->attackTypes.end();++it) {
+					if ((*it)->getCanCancel()) {
+						if (sold1->getCool((*it)->get_name())) {
+							switch ((*it)->get_name()) {
+							case Attack::SPIN:
+								gameplay_functions->special(sold1, Attack::SPIN);
+								gameplay_functions->spin(sold1);
+								break;
+							}
+							attacked = true;
+							break;
+						}
+					}
+				}
+				if (!attacked && sold1->getCool()) {
 					sold1->meleeAttack();
 					//std::lock_guard<std::mutex> guard(mux);
 					gameplay_functions->melee(sold1);
+				}
+			}
+			else {
+				for (auto it = sold1->attackTypes.begin(); it != sold1->attackTypes.end(); ++it) {
+					if (!(*it)->getCanCancel()) {
+						if (sold1->getCool((*it)->get_name())) {
+							if (shot_ligned_up(sold1->body[0].get_mid_loc(), sold2->body[0].get_mid_loc())) {
+								switch ((*it)->get_name()) {
+								case Attack::FIREBALL:
+									gameplay_functions->special(sold1, Attack::FIREBALL);
+									gameplay_functions->fire(sold1);
+									break;
+								}
+								break;
+							}
+						}
+					}
 				}
 			}
 		} // Evade mode
@@ -329,4 +361,17 @@ void CombatController::updateSoliderStatus()
 
 std::thread CombatController::threaded_update_soldier(Soldier* s, int n) {
 	return std::thread(&CombatController::update_soldier, this, s, n);
+}
+
+bool CombatController::shot_ligned_up(Vector2f atkr, Vector2f target) {
+	if (atkr.getXloc() <= (target.getXloc() + 50) && atkr.getXloc() >= (target.getXloc() - 50)) {
+		if ((atkr.getYloc() <= (target.getYloc() + 500) && atkr.getYloc() >= (target.getYloc() - 500))) {
+			return true;
+		}
+	} else if (atkr.getYloc() <= (target.getYloc() + 50) && atkr.getYloc() >= (target.getYloc() - 50)) {
+		if ((atkr.getXloc() <= (target.getXloc() + 500) && atkr.getXloc() >= (target.getXloc() - 500))) {
+			return true;
+		}
+	}
+	return false;
 }

@@ -44,8 +44,6 @@ void HeroConfig::import_config(vector<WorldObj*>* movVec, unordered_map<Texture*
 		init_attacks(gameplay_func, tBuffer, textureMap, itr, (*itr)["name"].asString(), (*itr)["hero_id"].asInt());
 	}
 
-	AIController::init_plans();
-
 }
 
 void HeroConfig::set_hero(vector<WorldObj*>* movVec, ChildrenOfOsi* gameplay_func, TaskBuffer* tBuffer, float x, float y, float width,
