@@ -3,6 +3,7 @@
 #include "Planner.h"
 #include "Containers.h"
 #include "ActionPool.h"
+#include "Village.h"
 
 class AIController {
 private:

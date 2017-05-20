@@ -644,7 +644,8 @@ int Movement::talk(WorldObj* obj) {
 			int dist = 1000;
 			for (int i = 0; i < objVec.size(); i++) {
 				if (obj == objVec[i]) {
-					break;
+					//break;
+					continue;
 				}
 				if (objVec[i]->getInteractable()) {
 					if (interaction(d, objVec[i])) {
@@ -653,7 +654,8 @@ int Movement::talk(WorldObj* obj) {
 						if (hero = CheckClass::isHero(objVec[i])) {
 							RegionState::in_village = true;
 							RegionState::switch_music = true;
-
+							
+							//Eron: this checks breaks on the planner because shango has no planner 
 							Planner* hero_plan = AIController::get_plan(hero->name);
 							if (hero_plan->give_as_quest)   //Make sure hero is willing to give up current action
 							{

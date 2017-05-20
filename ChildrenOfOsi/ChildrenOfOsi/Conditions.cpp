@@ -289,11 +289,10 @@ int MemPrerec::get_cost(std::vector<Memory*> memories)
 ////////////////////////////////////////////////////////////////////////////////////
 //STATE PRECONDITION
 ////////////////////////////////////////////////////////////////////////////////////
-StatePrerec::StatePrerec()
+StatePrerec::StatePrerec(int _state_type)
 {
-	/*state_manager st_man,
-	std::string required state,
-	std::vectorr<relevant villages>*/
+	state_type = _state_type;
+	type = "relationship_" + to_string(state_type);
 
 	type = "state";
 	general_type = STATE;
@@ -307,10 +306,22 @@ StatePrerec::~StatePrerec()
 	LOG("particularMemPrerec Object Destroyed");
 }
 
-int StatePrerec::get_cost()
+int StatePrerec::get_cost(Hero* curr_hero, Hero* other_hero)
 {
+
 	int cost = 0;
-	float magnifier = 10.0;//this has to essentially the cost of an average state change
+
+	if (state_type == ALL)
+	{
+		//curr_hero and other_hero are put in the same alliance
+		Alliance* curr_alliance = curr_hero->getVillage()->get_alliance();
+		Alliance* other_alliance = other_hero->getVillage()->get_alliance();
+		if (curr_alliance == other_alliance)
+		{
+			cost = 10.0;
+		}
+	}
+	//float magnifier = 10.0;//this has to essentially the cost of an average state change
 
 	return cost;
 }
@@ -645,8 +656,35 @@ StatePost::~StatePost()
 	LOG("StatePost Object Destroyed");
 }
 
-float StatePost::get_utility()
+float StatePost::get_utility(Hero* curr_hero, Hero* other_hero)
 {
+
+	if (state_type == ALL)
+	{
+		//curr_hero and other_hero are put in the same alliance
+		Alliance* curr_alliance = curr_hero->getVillage()->get_alliance();
+		Alliance* other_alliance = other_hero->getVillage()->get_alliance();
+		if (curr_alliance == other_alliance) 
+		{
+			return -21.0;
+		}
+	}
+	else if (state_type == OCC)
+	{
+		//curr_hero is set the conqurer of the other hero
+		curr_hero->getVillage()->conquer(other_hero->getVillage());
+		War::endWar(curr_hero->getVillage(), other_hero->getVillage());
+		std::cout << "OCC";
+	}
+
+	else if (state_type == CONF)
+	{
+		if (!War::at_war(curr_hero->getVillage(), other_hero->getVillage())) {
+			new War(curr_hero->getVillage(), other_hero->getVillage());
+		}
+		std::cout << "CONF";
+	}
+	
 	return utility;
 }
 

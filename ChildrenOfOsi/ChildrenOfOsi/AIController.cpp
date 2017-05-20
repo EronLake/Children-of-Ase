@@ -151,7 +151,6 @@ void AIController::reevaluate_state(int me, int them) {
 
 	Planner* planner = get_plan(me);
 
-
 	Action* state = planner->get_end_state_map()->at(them);  //Point to the current end_state for them 
 	planner->get_milestone_map()->erase(state);           //Delete the old end_state entry in the milestone list
 	generate_end_state(me, them);                          //Generate a new end_state for them, which updates state pointer
@@ -224,6 +223,7 @@ void AIController::execute() {
 
 				//**ERONS FIX**
 				curr_action->executed = false; //resets the execuded so action can be executed again
+				curr_action = nullptr;
 
 				if (milestones->at(curr_goal).size() > 0)
 				{
@@ -231,7 +231,47 @@ void AIController::execute() {
 					if (milestones->at(curr_goal).size() == 1 &&			//checks if the goal had been previously added to milestone list
 						milestones->at(curr_goal)[0] == curr_goal)
 					{
-						init_plans();
+						AIController::init_plans();
+						/*
+						for (auto curr_hero : Containers::hero_table)
+						{ 
+							if (curr_hero.second->name = SHANGO) continue;
+
+							for (auto iter : curr_hero.second->rel) {
+								Relationship* my_rel = iter.second;
+								int with_hero = iter.first;
+
+									//reevaluate goals for with_hero
+									//Eron: This is a temporary fix
+									///////////////////////////////////////////////////////
+									Hero* other_hero = nullptr;
+
+									for (auto itr : Containers::hero_table)
+									{
+										if (itr.second->name == with_hero)
+										{
+											other_hero = itr.second;
+										}
+									}
+
+									if (curr_hero.second != nullptr && other_hero != nullptr)
+									{
+										Alliance* curr_alliance = curr_hero.second->getVillage()->get_alliance();
+										Alliance* other_alliance = other_hero->getVillage()->get_alliance();
+
+										if (curr_alliance != other_alliance)
+										{
+											AIController::reevaluate_state(curr_hero.second->name, with_hero);
+										}
+									}
+
+									///////////////////////////////////////////////////////
+
+									my_rel->setChanged(0);
+								}
+								
+							}*/
+							
 					}
 					else
 					{
