@@ -32,11 +32,12 @@ LivingObj::~LivingObj()
 
 int LivingObj::getHealth()
 {
-	return health;
+	return (health/health_multiplier);
 }
 
 void LivingObj::setHealth(int h)
 {
+	h = (h * health_multiplier);
 	health = h;
 	if (h > max_health)max_health = h;
 }
@@ -53,6 +54,12 @@ void LivingObj::setAlive(bool v)
 
 void LivingObj::addHealth(int h)
 {
+	h = (h * health_multiplier);
 	health += h;
 	if (health > max_health)health = max_health;
+}
+
+void LivingObj::regenHealth()
+{
+	if (health < max_health && health>0)health++;
 }

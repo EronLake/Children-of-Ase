@@ -33,13 +33,16 @@ class Soldier: public NPC
   bool getSwingLeft() { return swingLeft; };
   bool getCombo();
 
+  static const int ase_multiplier=10;
+  static const int stamina_multiplier = 10;
+
   bool getCool();
   bool getCool(int c);
   int timeCD() { return this->cdTime; };
-  int getStamina() { return this->stamina; };
-  int getMaxStamina() { return this->maxStamina; }
-  int getAse() { return this->ase; };
-  int getMaxAse() { return this->maxAse; }
+  int getStamina() { return (this->stamina/ stamina_multiplier); };
+  int getMaxStamina() { return (this->maxStamina/ stamina_multiplier); }
+  int getAse() { return (this->ase/ ase_multiplier); };
+  int getMaxAse() { return (this->maxAse/ ase_multiplier); }
   int getAttackIndex(Attack* atk);
   bool get_incapacitated() { return incapacitated; };
 
@@ -64,10 +67,10 @@ class Soldier: public NPC
   void setAggroRange(std::size_t range) { this->aggroRange = min(range, this->pursuitRange); }
   void setPursuitRange(std::size_t range) { this->pursuitRange = max(range, this->aggroRange); }
 
-  void setStamina(int s) { this->stamina=s; };
-  void setMaxStamina(int s) { this->maxStamina = s; };
-  void setAse(int a) { this->ase = a; };
-  void setMaxAse(int a) { this->maxAse = a; };
+  void setStamina(int s) { this->stamina=(s*stamina_multiplier); };
+  void setMaxStamina(int s) { this->maxStamina = (s*stamina_multiplier); };
+  void setAse(int a) { this->ase = (a*ase_multiplier); };
+  void setMaxAse(int a) { this->maxAse = (a*ase_multiplier); };
   void set_creator_of_melee() { this->melee->set_creator(this); };
 
   void flipSwing() { this->swingLeft = !swingLeft; };
