@@ -374,7 +374,7 @@ void ActionExecFunctions::execute_fight(Action* fight)
 		break;
 	case 3: //If both niether party is empty then contiue the fight 
 			//(may need to change this to account for hero death)
-		if (fight->getDoer()->get_action_destination() == Vector2f(NULL, NULL) && (fight->getReceiver()->get_busy() == Hero::NOT_BUSY)) {
+		if (fight->getDoer()->get_action_destination() == Vector2f(NULL, NULL) /*&& (fight->getReceiver()->get_busy() == Hero::NOT_BUSY)*/) {
 			//do a single round of battle every 10 sec
 			Fight* fight_obj = new Fight(fight->getDoer()->getParty(), fight->getReceiver()->getParty(), 0);
 			fight->getDoer()->set_busy(Hero::BUSY_FIGHT);

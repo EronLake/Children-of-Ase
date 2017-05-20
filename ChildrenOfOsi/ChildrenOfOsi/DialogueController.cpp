@@ -1115,6 +1115,7 @@ void DialogueController::otherResponse(std::string info, std::string hero_topic)
 				std::string my_hero = dialogue.int_to_hero_name(hero_num);
 				planner->get_current_action()->setReceiver(Containers::hero_table[my_hero]);
 				ActionExecFunctions::execute_fight(planner->get_current_action());
+				temp_hero->SUGG_ACT_STATUS = temp_hero->SUGG_ACT;
 				
 			}
 			else {
@@ -1147,6 +1148,7 @@ void DialogueController::otherResponse(std::string info, std::string hero_topic)
 				std::string my_hero = dialogue.int_to_hero_name(hero_num);
 				planner->get_current_action()->setReceiver(Containers::hero_table[my_hero]);
 				ActionExecFunctions::execute_conquer(planner->get_current_action());
+				temp_hero->SUGG_ACT_STATUS = temp_hero->SUGG_ACT;
 			}
 			else {
 				/////////////need to be changed to correct calls/dialog if not accepted///////////////////
@@ -1194,6 +1196,7 @@ void DialogueController::otherResponse(std::string info, std::string hero_topic)
 				std::string my_hero = dialogue.int_to_hero_name(hero_num);
 				planner->get_current_action()->setReceiver(Containers::hero_table[my_hero]);
 				ActionExecFunctions::execute_form_alliance(planner->get_current_action());
+				temp_hero->SUGG_ACT_STATUS = temp_hero->SUGG_ACT;
 			}
 			else {
 				/////////////need to be changed to correct calls/dialog if not accepted///////////////////

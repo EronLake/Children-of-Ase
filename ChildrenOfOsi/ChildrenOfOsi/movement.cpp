@@ -644,7 +644,8 @@ int Movement::talk(WorldObj* obj) {
 			int dist = 1000;
 			for (int i = 0; i < objVec.size(); i++) {
 				if (obj == objVec[i]) {
-					break;
+					//break;
+					continue;
 				}
 				if (objVec[i]->getInteractable()) {
 					if (interaction(d, objVec[i])) {
