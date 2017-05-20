@@ -33,8 +33,8 @@ class Soldier: public NPC
   bool getSwingLeft() { return swingLeft; };
   bool getCombo();
 
-  static const int ase_multiplier=10;
-  static const int stamina_multiplier = 10;
+  static const int ase_multiplier=5;
+  static const int stamina_multiplier = 5;
 
   bool getCool();
   bool getCool(int c);
