@@ -700,8 +700,11 @@ void StatePost::apply_utility(Hero* curr_hero, Hero* other_hero)
 	}
 	else if (state_type == OCC)
 	{
+
+		Village* curr_village = curr_hero->getVillage();
+		Village* other_village = other_hero->getVillage();
 		//curr_hero is set the conqurer of the other hero
-		curr_hero->getVillage()->conquer(other_hero->getVillage());
+		curr_village->conquer(other_village);
 		War::endWar(curr_hero->getVillage(), other_hero->getVillage());
 		std::cout << "OCC";
 	}
