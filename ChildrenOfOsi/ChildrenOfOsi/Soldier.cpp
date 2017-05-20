@@ -391,6 +391,14 @@ bool Soldier::getCool()
 
 bool Soldier::getCool(int c)
 {
+	for (int it = 0; it < attackTypes.size(); it++)
+	{
+		if (attackTypes[it]->get_name() == c)
+		{
+			c=it;
+			break;
+		}
+	}
   return ((this->cdTime == 0) && (cooldownMap[attackTypes[c]] == 0)
     && (this->sprite.getLock() == false) && (stamina >= attackTypes[c]->getStaminaCost())
     && (ase >= attackTypes[c]->getAseCost()));

@@ -715,7 +715,7 @@ void Input::InputCheck()
 				}
 				else if (K) {
 					if (t) {
-						if (t->can_fire && t->getCool(1)) {
+						if (t->can_fire && t->getCool(Attack::FIREBALL)) {
 							//////std:://cout << "Pressed Shift+R" << std::endl;
 							gameplay_functions->special(t, Attack::FIREBALL);
 							gameplay_functions->fire(t);
@@ -733,7 +733,7 @@ void Input::InputCheck()
 				}*/
 				else if (L) {
 					if (t) {
-						if (t->can_spin && t->getCool(2)) {
+						if (t->can_spin && t->getCool(Attack::SPIN)) {
 							//////std:://cout << "Pressed T" << std::endl;
 							//t->meleeAttack();
 							//gameplay_functions->melee(t);

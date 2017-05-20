@@ -81,8 +81,8 @@
 			"set_height" : "cur_hero->body[0].getHeight()",
 			"set_duration" : 7,
 			"set_ase_cost" : 7,
-			"set_can_cancel" : false,
-			"set_turn" : true
+			"set_can_cancel" : true,
+			"set_turn" : false
 		}
 	},
 	"Jungle_Soldier" : {
@@ -168,8 +168,8 @@
 			"set_height" : "cur_hero->body[0].getHeight()",
 			"set_duration" : 7,
 			"set_ase_cost" : 7,
-			"set_can_cancel" : false,
-			"set_turn" : true
+			"set_can_cancel" : true,
+			"set_turn" : false
 		}
 	}
 }
