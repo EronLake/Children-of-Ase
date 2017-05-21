@@ -307,6 +307,7 @@ void ActionExecFunctions::execute_form_alliance(Action* form_alliance) {
 			//needs to be set to -1 for the next action to create a new time stamp
 			form_alliance->time_stamp = -1;
 			std::cout << form_alliance->getDoer()->getName() << " finished alliance" << std::endl;
+			form_alliance->checkpoint = 0;
 		}
 		break;
 
@@ -374,12 +375,15 @@ void ActionExecFunctions::execute_fight(Action* fight)
 		break;
 	case 3: //If both niether party is empty then contiue the fight 
 			//(may need to change this to account for hero death)
-		if (fight->getDoer()->get_action_destination() == Vector2f(NULL, NULL) && (fight->getReceiver()->get_busy() == Hero::NOT_BUSY)) {
+		if (fight->getDoer()->get_action_destination() == Vector2f(NULL, NULL) /*&& (fight->getReceiver()->get_busy() == Hero::NOT_BUSY)*/) {
 			//do a single round of battle every 10 sec
 			Fight* fight_obj = new Fight(fight->getDoer()->getParty(), fight->getReceiver()->getParty(), 0);
 			fight->getDoer()->set_busy(Hero::BUSY_FIGHT);
 			fight->getReceiver()->set_busy(Hero::BUSY_REC_FIGHT);
 			fight->checkpoint++;
+		}
+		else {
+			fight->getDoer()->set_action_destination(fight->getReceiver()->getLoc());
 		}
 
 		//NEED TO SOMEHOW ACCOUNT FOR IF A PLAYER GETS CLOSE
@@ -658,8 +662,14 @@ void ActionExecFunctions::execute_conquer(Action* conq)
 		}
 		break;
 	case 6:
-		if (conq->getDoer()->get_action_destination() == Vector2f(NULL, NULL))//needs to be changed to use party location right 
+		if (conq->getDoer()->get_action_destination() == Vector2f(NULL, NULL) && (conq->getReceiver()->get_busy() == Hero::NOT_BUSY))//needs to be changed to use party location right 
 		{
+			if (Party::dist_location_to_location(conq->getReceiver()->getVillage()->get_village_location(), conq->getReceiver()->getLoc()) < 1000)conq->getReceiver()->getVillage()->defenders->add_party_to_party(conq->getReceiver()->getVillage()->barracks);
+			//ActionHelper::create_memory(conq, conq->getReceiver());
+			new Fight(conq->getDoer()->getParty(), conq->getReceiver()->getVillage()->defenders, 0);
+			conq->getReceiver()->getVillage()->set_village_health(100);
+			conq->getDoer()->set_busy(Hero::BUSY_FIGHT);
+			conq->getReceiver()->set_busy(Hero::BUSY_REC_FIGHT);
 			if (Party::dist_location_to_location(conq->getDoer()->getLoc(), conq->getReceiver()->getLoc())<100) // need to change this so it checks if the party is close by
 			{
 				conq->checkpoint = 3;

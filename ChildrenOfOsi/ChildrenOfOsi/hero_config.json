@@ -1,7 +1,7 @@
 {
 	"Shango" : {
-		"x" : 54.45,
-		"y" : 150.55,
+		"x" : 64.45,
+		"y" : 100.55,
 		"width" : 150,
 		"hight" : 150,
 		"name" : "Shango",
@@ -10,7 +10,7 @@
 		"bodyx2" : 50.0,
 		"bodyy1" : 50.0,
 		"bodyy2" : 50.0,
-		"health": 200,
+		"health": 120,
 		"max_stamina": 300,
 		"aggression": 30,
 		"kindness": 70,
@@ -76,20 +76,20 @@
 				"left": {"0":"FireBallTMPLeft", "1":3}
 			},
 			"set_name": 0,
-			"set_dmg": 40,
+			"set_dmg": 25,
 			"set_speed" : 5,
 			"set_base_dir" : 4,
 			"set_cool_down" : 35,
-			"set_stamina_cost" : 45,
+			"set_stamina_cost" : 25,
 			"set_pause" : -1,
 			"set_destroy" : false,
 			"set_Keep" : true,
 			"set_width" : "cur_hero->body[0].getWidth()",
 			"set_height" : "cur_hero->body[0].getHeight()",
 			"set_duration" : 7,
-			"set_ase_cost" : 7,
-			"set_can_cancel" : false,
-			"set_turn" : true
+			"set_ase_cost" : 0,
+			"set_can_cancel" : true,
+			"set_turn" : false
 		},
 		"attacks": {
 			"fireball" : {
@@ -104,17 +104,17 @@
 					"set_dmg": 20,
 					"set_speed" : 20,
 					"set_base_dir" : 3,
-					"set_cool_down" : 120,
+					"set_cool_down" : 55,
 					"set_stamina_cost" : 30,
 					"set_pause" : 16,
 					"set_destroy" : true,
-					"set_Keep" : true,
+					"set_Keep" : false,
 					"set_width" : "cur_hero->body[0].getWidth()",
 					"set_height" : "cur_hero->body[0].getHeight()",
 					"set_duration" : 100,
-					"set_ase_cost" : 25,
+					"set_ase_cost" : 40,
 					"set_can_cancel" : false,
-					"set_turn" : true
+					"set_turn" : false
 				}
 			},
 			"spin" : {
@@ -129,16 +129,16 @@
 					"set_dmg": 15,
 					"set_speed" : 18,
 					"set_base_dir" : 4,
-					"set_cool_down" : 100,
-					"set_stamina_cost" : 30,
+					"set_cool_down" : 60,
+					"set_stamina_cost" : 10,
 					"set_pause" : 18,
 					"set_destroy" : false,
-					"set_Keep" : true,
+					"set_Keep" : false,
 					"set_width" : "cur_hero->body[0].getWidth()",
 					"set_height" : "cur_hero->body[0].getHeight()",
 					"set_duration" : 7,
 					"set_ase_cost" : 7,
-					"set_can_cancel" : false,
+					"set_can_cancel" : true,
 					"set_turn" : true
 				},
 				"2" : {
@@ -153,15 +153,15 @@
 					"set_speed" : 15,
 					"set_base_dir" : 4,
 					"set_cool_down" : 0,
-					"set_stamina_cost" : 30,
-					"set_pause" : 13,
+					"set_stamina_cost" : 10,
+					"set_pause" : 23,
 					"set_destroy" : false,
-					"set_Keep" : true,
+					"set_Keep" : false,
 					"set_width" : "cur_hero->body[0].getWidth()",
 					"set_height" : "cur_hero->body[0].getHeight()",
 					"set_duration" : 7,
 					"set_ase_cost" : 7,
-					"set_can_cancel" : false,
+					"set_can_cancel" : true,
 					"set_turn" : true
 				},
 				"3" : {
@@ -176,15 +176,15 @@
 					"set_speed" : 15,
 					"set_base_dir" : 4,
 					"set_cool_down" : 0,
-					"set_stamina_cost" : 30,
+					"set_stamina_cost" : 10,
 					"set_pause" : 28,
 					"set_destroy" : false,
-					"set_Keep" : true,
+					"set_Keep" : false,
 					"set_width" : "cur_hero->body[0].getWidth()",
 					"set_height" : "cur_hero->body[0].getHeight()",
 					"set_duration" : 7,
 					"set_ase_cost" : 7,
-					"set_can_cancel" : false,
+					"set_can_cancel" : true,
 					"set_turn" : true
 				},
 				"4" : {
@@ -199,117 +199,271 @@
 					"set_speed" : 15,
 					"set_base_dir" : 4,
 					"set_cool_down" : 0,
-					"set_stamina_cost" : 30,
+					"set_stamina_cost" : 10,
 					"set_pause" : 33,
 					"set_destroy" : false,
-					"set_Keep" : true,
+					"set_Keep" : false,
 					"set_width" : "cur_hero->body[0].getWidth()",
 					"set_height" : "cur_hero->body[0].getHeight()",
 					"set_duration" : 7,
 					"set_ase_cost" : 7,
-					"set_can_cancel" : false,
+					"set_can_cancel" : true,
 					"set_turn" : true
 				}
 			}
 		}
 	},
 
-	"Yemoja" : {
-		"x" : 50.45,
-		"y" : 134.65,
-		"width" : 150,
-		"hight" : 150,
-		"name" : "Yemoja",
-		"hero_id" : 2,
-		"bodyx1" : 50.0,
-		"bodyx2" : 50.0,
-		"bodyy1" : 50.0,
-		"bodyy2" : 50.0,
-		"health": 500,
-		"max_stamina": 300,
-		"aggression": 30,
-		"kindness": 70,
-		"honor": 80,
-		"pride": 60,
-		"recklessness": 30,
-		"extroversion": 30,
-		"greed": 50,
-		"sprites": {
-			"setTexture": {"0":"Yemoja_Idle_S", "1":22},
-			"setIdleTexture": {"0":"Yemoja_Idle_S", "1":22},
+  "Yemoja": {
+    "x": 50.45,
+    "y": 134.65,
+    "width": 150,
+    "hight": 150,
+    "name": "Yemoja",
+    "hero_id": 2,
+    "bodyx1": 50.0,
+    "bodyx2": 50.0,
+    "bodyy1": 50.0,
+    "bodyy2": 50.0,
+    "health": 100,
+    "max_stamina": 300,
+    "aggression": 30,
+    "kindness": 70,
+    "honor": 80,
+    "pride": 60,
+    "recklessness": 30,
+    "extroversion": 30,
+    "greed": 50,
+    "sprites": {
+      "setTexture": {
+        "0": "Yemoja_Idle_S",
+        "1": 22
+      },
+      "setIdleTexture": {
+        "0": "Yemoja_Idle_S",
+        "1": 22
+      },
 
-			"id_up": {"0":"Yemoja_Idle_N","1":22},
-			"id_down": {"0":"Yemoja_Idle_S","1":22},
-			"id_left": {"0":"Yemoja_Idle_W","1":22},
-			"id_right": {"0":"Yemoja_Idle_E","1":22},
+      "id_up": {
+        "0": "Yemoja_Idle_N",
+        "1": 22
+      },
+      "id_down": {
+        "0": "Yemoja_Idle_S",
+        "1": 22
+      },
+      "id_left": {
+        "0": "Yemoja_Idle_W",
+        "1": 22
+      },
+      "id_right": {
+        "0": "Yemoja_Idle_E",
+        "1": 22
+      },
 
-			"walk_up": {"0":"Yemoja_Walk_N","1":32},
-			"walk_down": {"0":"Yemoja_Walk_S","1":32},
-			"walk_left": {"0":"Yemoja_Walk_W","1":32},
-			"walk_right": {"0":"Yemoja_Walk_E","1":32},
+      "walk_up": {
+        "0": "Yemoja_Walk_N",
+        "1": 32
+      },
+      "walk_down": {
+        "0": "Yemoja_Walk_S",
+        "1": 32
+      },
+      "walk_left": {
+        "0": "Yemoja_Walk_W",
+        "1": 32
+      },
+      "walk_right": {
+        "0": "Yemoja_Walk_E",
+        "1": 32
+      },
 
-			"sprint_up": {"0":"Yemoja_Sprint_N","1":16},
-			"sprint_down": {"0":"Yemoja_Sprint_S","1":16},
-			"sprint_left": {"0":"Yemoja_Sprint_W","1":16},
-			"sprint_right": {"0":"Yemoja_Sprint_E","1":16},
+      "sprint_up": {
+        "0": "Yemoja_Sprint_N",
+        "1": 16
+      },
+      "sprint_down": {
+        "0": "Yemoja_Sprint_S",
+        "1": 16
+      },
+      "sprint_left": {
+        "0": "Yemoja_Sprint_W",
+        "1": 16
+      },
+      "sprint_right": {
+        "0": "Yemoja_Sprint_E",
+        "1": 16
+      },
 
-			"hurt_up": {"0":"Yemoja_Recoil_N","1":9},
-			"hurt_down": {"0":"Yemoja_Recoil_S","1":9},
-			"hurt_left": {"0":"Yemoja_Recoil_W","1":9},
-			"hurt_right": {"0":"Yemoja_Recoil_E","1":9},
+      "hurt_up": {
+        "0": "Yemoja_Recoil_N",
+        "1": 9
+      },
+      "hurt_down": {
+        "0": "Yemoja_Recoil_S",
+        "1": 9
+      },
+      "hurt_left": {
+        "0": "Yemoja_Recoil_W",
+        "1": 9
+      },
+      "hurt_right": {
+        "0": "Yemoja_Recoil_E",
+        "1": 9
+      },
 
-			"atk_up": {"0":"Yemoja_Attack_N","1":3},
-			"atk_down": {"0":"Yemoja_Attack_S","1":3},
-			"atk_left": {"0":"Yemoja_Attack_W","1":3},
-			"atk_right": {"0":"Yemoja_Attack_E","1":3},
+      "atk_up": {
+        "0": "Yemoja_Attack_N",
+        "1": 3
+      },
+      "atk_down": {
+        "0": "Yemoja_Attack_S",
+        "1": 3
+      },
+      "atk_left": {
+        "0": "Yemoja_Attack_W",
+        "1": 3
+      },
+      "atk_right": {
+        "0": "Yemoja_Attack_E",
+        "1": 3
+      },
 
-			"death_up": {"0":"Yemoja_Death_N","1":24},
-			"death_down": {"0":"Yemoja_Death_S","1":24},
-			"death_left": {"0":"Yemoja_Death_W","1":24},
-			"death_right": {"0":"Yemoja_Death_E","1":24},
+      "death_up": {
+        "0": "Yemoja_Death_N",
+        "1": 24
+      },
+      "death_down": {
+        "0": "Yemoja_Death_S",
+        "1": 24
+      },
+      "death_left": {
+        "0": "Yemoja_Death_W",
+        "1": 24
+      },
+      "death_right": {
+        "0": "Yemoja_Death_E",
+        "1": 24
+      },
 
-			"atk2_up": {"0":"Yemoja_Attack_N","1":3},
-			"atk2_down": {"0":"Yemoja_Attack_S","1":3},
-			"atk2_left": {"0":"Yemoja_Attack_W","1":3},
-			"atk2_right": {"0":"Yemoja_Attack_E","1":3},
+      "atk2_up": {
+        "0": "Yemoja_Attack_N",
+        "1": 3
+      },
+      "atk2_down": {
+        "0": "Yemoja_Attack_S",
+        "1": 3
+      },
+      "atk2_left": {
+        "0": "Yemoja_Attack_W",
+        "1": 3
+      },
+      "atk2_right": {
+        "0": "Yemoja_Attack_E",
+        "1": 3
+      },
 
-			"spin_up": {"0":"Yemoja_Spin_N","1":8},
-			"spin_down": {"0":"Yemoja_Spin_S","1":8},
-			"spin_left": {"0":"Yemoja_Spin_W","1":8},
-			"spin_right": {"0":"Yemoja_Spin_E","1":8},
+      "spin_up": {
+        "0": "Yemoja_Spin_N",
+        "1": 8
+      },
+      "spin_down": {
+        "0": "Yemoja_Spin_S",
+        "1": 8
+      },
+      "spin_left": {
+        "0": "Yemoja_Spin_W",
+        "1": 8
+      },
+      "spin_right": {
+        "0": "Yemoja_Spin_E",
+        "1": 8
+      },
 
-			"breathe_up": {"0":"Yemoja_Breath_N","1":8},
-			"breathe_down": {"0":"Yemoja_Breath_S","1":8},
-			"breathe_left": {"0":"Yemoja_Breath_W","1":8},
-			"breathe_right": {"0":"Yemoja_Breath_E","1":8}
-		},
-		"melee" : {
-			"sprites" : {
-				"right": {"0":"FireBallTMP", "1":3},
-				"up": {"0":"FireBallTMPUp", "1":3},
-				"down": {"0":"FireBallTMPDown", "1":3},
-				"left": {"0":"FireBallTMPLeft", "1":3}
-			},
-			"set_name": 0,
-			"set_dmg": 40,
+      "breathe_up": {
+        "0": "Yemoja_Breath_N",
+        "1": 8
+      },
+      "breathe_down": {
+        "0": "Yemoja_Breath_S",
+        "1": 8
+      },
+      "breathe_left": {
+        "0": "Yemoja_Breath_W",
+        "1": 8
+      },
+      "breathe_right": {
+        "0": "Yemoja_Breath_E",
+        "1": 8
+      }
+    },
+    "melee": {
+      "sprites": {
+        "right": {"0": "FireBallTMP","1": 3},
+        "up": {"0": "FireBallTMPUp","1": 3},
+        "down": {"0": "FireBallTMPDown","1": 3},
+        "left": {"0": "FireBallTMPLeft","1": 3}
+      },
+      "set_name": 0,
+			"set_dmg": 10,
 			"set_speed" : 5,
 			"set_base_dir" : 4,
 			"set_cool_down" : 35,
-			"set_stamina_cost" : 45,
+			"set_stamina_cost" : 30,
 			"set_pause" : -1,
 			"set_destroy" : false,
 			"set_Keep" : true,
 			"set_width" : "cur_hero->body[0].getWidth()",
 			"set_height" : "cur_hero->body[0].getHeight()",
 			"set_duration" : 7,
-			"set_ase_cost" : 7,
-			"set_can_cancel" : false,
-			"set_turn" : true
-		}
-	},
+			"set_ase_cost" : 0,
+			"set_can_cancel" : true,
+			"set_turn" : false
+    },
+    "attacks": {
+      "fireball": {
+        "1": {
+          "sprites": {
+            "right": {
+              "0": "FireBallTMP",
+              "1": 3
+            },
+            "up": {
+              "0": "FireBallTMPUp",
+              "1": 3
+            },
+            "down": {
+              "0": "FireBallTMPDown",
+              "1": 3
+            },
+            "left": {
+              "0": "FireBallTMPLeft",
+              "1": 3
+            }
+          },
+          "set_name": 1,
+          "set_dmg": 15,
+          "set_speed": 20,
+          "set_base_dir": 3,
+          "set_cool_down": 45,
+          "set_stamina_cost": 30,
+          "set_pause": 16,
+          "set_destroy": true,
+          "set_Keep": false,
+          "set_width": "cur_hero->body[0].getWidth()",
+          "set_height": "cur_hero->body[0].getHeight()",
+          "set_duration": 100,
+          "set_ase_cost": 25,
+          "set_can_cancel": false,
+          "set_turn": false
+        }
+      }
+    }
+  },
+
 	"Oya" : {
-		"x" : 176.15,
-		"y" : 230.70,
+		"x" : 60.45,
+		"y" : 134.65,
 		"width" : 150,
 		"hight" : 150,
 		"name" : "Oya",
@@ -384,10 +538,10 @@
 				"left": {"0":"FireBallTMPLeft", "1":3}
 			},
 			"set_name": 0,
-			"set_dmg": 40,
+			"set_dmg": 20,
 			"set_speed" : 5,
 			"set_base_dir" : 4,
-			"set_cool_down" : 35,
+			"set_cool_down" : 80,
 			"set_stamina_cost" : 45,
 			"set_pause" : -1,
 			"set_destroy" : false,
@@ -396,8 +550,8 @@
 			"set_height" : "cur_hero->body[0].getHeight()",
 			"set_duration" : 7,
 			"set_ase_cost" : 7,
-			"set_can_cancel" : false,
-			"set_turn" : true
+			"set_can_cancel" : true,
+			"set_turn" : false
 		}
 	}
 }

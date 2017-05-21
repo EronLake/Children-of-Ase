@@ -117,7 +117,7 @@ void ActionConfig::import_conditions(Json::Value::iterator itr, std::string name
 		}
 		else if ((*it)["general_type"].asInt() == 5)
 		{
-			StatePrerec* temp_prec = new StatePrerec();
+			StatePrerec* temp_prec = new StatePrerec((*it)["state_type"].asInt());
 
 			Containers::action_table[name]->req_preconds.push_back(std::make_shared<StatePrerec>(*temp_prec));
 		}

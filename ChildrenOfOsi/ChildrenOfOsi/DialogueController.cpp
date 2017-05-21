@@ -1115,6 +1115,7 @@ void DialogueController::otherResponse(std::string info, std::string hero_topic)
 				std::string my_hero = dialogue.int_to_hero_name(hero_num);
 				planner->get_current_action()->setReceiver(Containers::hero_table[my_hero]);
 				ActionExecFunctions::execute_fight(planner->get_current_action());
+				temp_hero->SUGG_ACT_STATUS = temp_hero->SUGG_ACT;
 				
 			}
 			else {
@@ -1137,9 +1138,9 @@ void DialogueController::otherResponse(std::string info, std::string hero_topic)
 				Planner* planner = AIController::get_plan(CheckClass::isHero(other)->name);
 				//ActionPool* hero_map;
 				//hero_map = temp_hero->actionPool_map[dialogue.hero_name_to_int(curr_hero_topic)];
-				int hero_num = temp_hero->name;
+				int hero_num = dialogue.hero_name_to_int(curr_hero_topic);
 				//std::string hero_id = std::to_string(hero_num);
-				std::string hero_id = std::to_string(hero_num);
+				std::string hero_id = std::to_string(temp_hero->name);
 				std::string act_str = "Conquer_" + hero_id;
 				planner->set_current_action(Containers::action_table[act_str]);
 				planner->get_current_action()->setDoer(temp_hero);
@@ -1147,6 +1148,7 @@ void DialogueController::otherResponse(std::string info, std::string hero_topic)
 				std::string my_hero = dialogue.int_to_hero_name(hero_num);
 				planner->get_current_action()->setReceiver(Containers::hero_table[my_hero]);
 				ActionExecFunctions::execute_conquer(planner->get_current_action());
+				temp_hero->SUGG_ACT_STATUS = temp_hero->SUGG_ACT;
 			}
 			else {
 				/////////////need to be changed to correct calls/dialog if not accepted///////////////////
@@ -1185,8 +1187,9 @@ void DialogueController::otherResponse(std::string info, std::string hero_topic)
 				Planner* planner = AIController::get_plan(CheckClass::isHero(other)->name);
 				//ActionPool* hero_map;
 				//hero_map = temp_hero->actionPool_map[dialogue.hero_name_to_int(curr_hero_topic)];
-				int hero_num = temp_hero->name;
-				std::string hero_id = std::to_string(hero_num);
+				int hero_num = dialogue.hero_name_to_int(curr_hero_topic);
+				//std::string hero_id = std::to_string(hero_num);
+				std::string hero_id = std::to_string(temp_hero->name);
 				std::string act_str = "Form_Alliance_" + hero_id;
 				planner->set_current_action(Containers::action_table[act_str]);
 				planner->get_current_action()->setDoer(temp_hero);
@@ -1194,6 +1197,7 @@ void DialogueController::otherResponse(std::string info, std::string hero_topic)
 				std::string my_hero = dialogue.int_to_hero_name(hero_num);
 				planner->get_current_action()->setReceiver(Containers::hero_table[my_hero]);
 				ActionExecFunctions::execute_form_alliance(planner->get_current_action());
+				temp_hero->SUGG_ACT_STATUS = temp_hero->SUGG_ACT;
 			}
 			else {
 				/////////////need to be changed to correct calls/dialog if not accepted///////////////////
@@ -1568,6 +1572,9 @@ void DialogueController::exitDialogue()
 
 		if (temp_hero) {
 			remove_hero_related_conv_points();
+			//temp_hero->rel[player->name]->addNotoriety(50);
+			//temp_hero->rel[player->name]->addStrength(50);
+			//temp_hero->rel[player->name]->addAffinity(50);
 			//remove_ask_for_quest();
 		}
 		else {

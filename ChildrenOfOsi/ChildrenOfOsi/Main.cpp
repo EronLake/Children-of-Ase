@@ -233,6 +233,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	HeroConfig::import_config(movVec_ptr, &ObjConfig::textureMap, gameplay_functions, tBuffer);
 	SoldierConfig::import_config(movVec_ptr, &ObjConfig::textureMap, gameplay_functions, tBuffer);
 	Village::init_villages();
+	AIController::init_plans();
 
 	Player* Alex = dynamic_cast<Player*>(Containers::hero_table["Shango"]);
 
@@ -506,205 +507,6 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 		edges.push_back({ p1, p4 });
 	}
 
-
-/*
-	yemoja->setWidth(150);
-	yemoja->setHeight(150);
-	yemoja->name = YEMOJA;
-
-	yemoja->sprite.setTexture(Containers::texture_table["h_downIdleTex"]);
-	yemoja->sprite.setIdleTexture(Containers::texture_table["h_downIdleTex"]);
-  yemoja->sprite.id_up = Containers::texture_table["h_upIdleTex"];
-  yemoja->sprite.id_down = Containers::texture_table["h_downIdleTex"];
-  yemoja->sprite.id_left = Containers::texture_table["h_leftIdleTex"];
-  yemoja->sprite.id_right = Containers::texture_table["h_rightIdleTex"];
-	yemoja->sprite.up = Containers::texture_table["h_upWalkTex"];
-	yemoja->sprite.down = Containers::texture_table["h_downWalkTex"];
-	yemoja->sprite.left = Containers::texture_table["h_leftWalkTex"];
-	yemoja->sprite.right = Containers::texture_table["h_rightWalkTex"];
-	yemoja->sprite.hurt_up = Containers::texture_table["YhurtUp"];
-	yemoja->sprite.hurt_down = Containers::texture_table["YhurtDown"];
-	yemoja->sprite.hurt_left = Containers::texture_table["YhurtLeft"];
-	yemoja->sprite.hurt_right = Containers::texture_table["YhurtRight"];
-	yemoja->sprite.atk_up = Containers::texture_table["YswingUp"];
-	yemoja->sprite.atk_down = Containers::texture_table["YswingDown"];
-	yemoja->sprite.atk_left = Containers::texture_table["YswingLeft"];
-	yemoja->sprite.atk_right = Containers::texture_table["YswingRight"];
-	yemoja->sprite.death_up = Containers::texture_table["YdeathUp"];
-	yemoja->sprite.death_down = Containers::texture_table["YdeathDown"];
-	yemoja->sprite.death_left = Containers::texture_table["YdeathLeft"];
-	yemoja->sprite.death_right = Containers::texture_table["YdeathRight"];
-
-  oya->sprite.setTexture(Containers::texture_table["Oya_IdleDownTex"]);
-  oya->sprite.setIdleTexture(Containers::texture_table["Oya_IdleDownTex"]);
-  oya->sprite.id_up = Containers::texture_table["Oya_IdleUpTex"];
-  oya->sprite.id_down = Containers::texture_table["Oya_IdleDownTex"];
-  oya->sprite.id_left = Containers::texture_table["Oya_IdleLeftTex"];
-  oya->sprite.id_right = Containers::texture_table["Oya_IdleRightTex"];
-  oya->sprite.up = Containers::texture_table["Oya_WalkUpTex"];
-  oya->sprite.down = Containers::texture_table["Oya_WalkDownTex"];
-  oya->sprite.left = Containers::texture_table["Oya_WalkLeftTex"];
-  oya->sprite.right = Containers::texture_table["Oya_WalkRightTex"];
-  oya->sprite.atk_up = Containers::texture_table["Oya_AttackUpTex"];
-  oya->sprite.atk_down = Containers::texture_table["Oya_AttackDownTex"];
-  oya->sprite.atk_left = Containers::texture_table["Oya_AttackLeftTex"];
-  oya->sprite.atk_right = Containers::texture_table["Oya_AttackRightTex"];
-  oya->sprite.hurt_up = Containers::texture_table["Oya_RecoilUpTex"];
-  oya->sprite.hurt_down = Containers::texture_table["Oya_RecoilDownTex"];
-  oya->sprite.hurt_left = Containers::texture_table["Oya_RecoilLeftTex"];
-  oya->sprite.hurt_right = Containers::texture_table["Oya_RecoilRightTex"];
-  oya->sprite.death_up = Containers::texture_table["Oya_DeathUpTex"];
-  oya->sprite.death_down = Containers::texture_table["Oya_DeathDownTex"];
-  oya->sprite.death_left = Containers::texture_table["Oya_DeathLeftTex"];
-  oya->sprite.death_right = Containers::texture_table["Oya_DeathRightTex"];
-
-	
-*/
-	/*
-	gameplay_functions->add_Attack(yemoja->getKey(), yemoja->body[0].getX(), yemoja->body[0].getY(), true, 10);
-	gameplay_functions->add_Attack(oya->getKey(), oya->body[0].getX(), oya->body[0].getY(), true, 10);
-	tBuffer->run();
-
-	yemoja->melee = Containers::Attack_table[yemoja->getKey()];
-	yemoja->melee->setDmg(15);
-	yemoja->melee->setSpeed(8);
-	yemoja->melee->setBaseDir(4);
-	yemoja->melee->setCoolDown(60);
-	yemoja->melee->setPause(-1);
-	yemoja->melee->setDestroy(false);
-	yemoja->melee->setKeep(true);
-	yemoja->melee->setWidth(50);
-	yemoja->melee->setHeight(50);
-	yemoja->set_creator_of_melee();
-	yemoja->melee->setStaminaCost(90);
-	yemoja->setHealth(140);
-	yemoja->setMaxStamina(300);
-	yemoja->melee->sprite.setTexture(Containers::texture_table["border"]);
-
-	oya->melee = Containers::Attack_table[oya->getKey()];
-	oya->melee->setDmg(18);
-	oya->melee->setSpeed(7);
-	oya->melee->setBaseDir(4);
-	oya->melee->setCoolDown(70);
-	oya->melee->setPause(-1);
-	oya->melee->setDestroy(false);
-	oya->melee->setKeep(true);
-	oya->melee->setWidth(50);
-	oya->melee->setHeight(50);
-	oya->set_creator_of_melee();
-	oya->melee->setStaminaCost(120);
-	oya->setHealth(160);
-	oya->setMaxStamina(300);
-	oya->melee->sprite.setTexture(Containers::texture_table["border"]);
-	*/
-
-	/*
-	for (int i = 0; i < silverNum; i++) {
-		silverSoldier[i]->setWidth(150);
-		silverSoldier[i]->setHeight(150);
-		silverSoldier[i]->sprite.setTexture(Containers::texture_table["silverSoldierTexture"]);
-		silverSoldier[i]->sprite.setIdleTexture(Containers::texture_table["silverSoldierIdleTex"]);
-		silverSoldier[i]->sprite.up = Containers::texture_table["ss_upRunTex"];
-		silverSoldier[i]->sprite.down = Containers::texture_table["ss_downRunTex"];
-		silverSoldier[i]->sprite.left = Containers::texture_table["ss_leftRunTex"];
-		silverSoldier[i]->sprite.right = Containers::texture_table["ss_rightRunTex"];
-
-		silverSoldier[i]->sprite.id_up = Containers::texture_table["ss_upIdleTex"];
-		silverSoldier[i]->sprite.id_left = Containers::texture_table["ss_leftIdleTex"];
-		silverSoldier[i]->sprite.id_right = Containers::texture_table["ss_rightIdleTex"];
-		silverSoldier[i]->sprite.id_down = Containers::texture_table["ss_downIdleTex"];
-
-		silverSoldier[i]->sprite.atk_up = Containers::texture_table["ss_upAtkTex"];
-		silverSoldier[i]->sprite.atk_down = Containers::texture_table["ss_downAtkTex"];
-		silverSoldier[i]->sprite.atk_left = Containers::texture_table["ss_leftAtkTex"];
-		silverSoldier[i]->sprite.atk_right = Containers::texture_table["ss_rightAtkTex"];
-
-		silverSoldier[i]->sprite.hurt_up = Containers::texture_table["ss_upHurtTex"];
-		silverSoldier[i]->sprite.hurt_down = Containers::texture_table["ss_downHurtTex"];
-		silverSoldier[i]->sprite.hurt_left = Containers::texture_table["ss_leftHurtTex"];
-		silverSoldier[i]->sprite.hurt_right = Containers::texture_table["ss_rightHurtTex"];
-
-		silverSoldier[i]->sprite.death_up = Containers::texture_table["ss_upDeathTex"];
-		silverSoldier[i]->sprite.death_down = Containers::texture_table["ss_downDeathTex"];
-		silverSoldier[i]->sprite.death_left = Containers::texture_table["ss_leftDeathTex"];
-		silverSoldier[i]->sprite.death_right = Containers::texture_table["ss_rightDeathTex"];
-
-		silverSoldier[i]->offsetBody(0, 60, 60, 75, 50);
-		silverSoldier[i]->setInteractable(true);
-		silverSoldier[i]->setName("silverSoldier");
-		silverSoldier[i]->melee = Containers::Attack_table[silverSoldier[i]->getKey()];
-		silverSoldier[i]->melee->setDmg(11);
-		silverSoldier[i]->melee->setSpeed(5);
-		silverSoldier[i]->melee->setBaseDir(4);
-		silverSoldier[i]->melee->setCoolDown(60);
-		silverSoldier[i]->melee->setPause(-1);
-		silverSoldier[i]->melee->setDestroy(false);
-		silverSoldier[i]->melee->setKeep(true);
-		silverSoldier[i]->melee->setWidth(50);
-		silverSoldier[i]->melee->setHeight(50);
-		silverSoldier[i]->set_creator_of_melee();
-		silverSoldier[i]->melee->setStaminaCost(90);
-		silverSoldier[i]->setHealth(110);
-		silverSoldier[i]->melee->setStaminaCost(120);
-		silverSoldier[i]->setMaxStamina(300);
-		//silverSoldier[i]->addAttackType(rockThrow);
-		silverSoldier[i]->melee->sprite.setTexture(Containers::texture_table["border"]);
-		silverSoldier[i]->setSpeed(7);
-	}
-
-	for (int i = 0; i < blueNum; i++) {
-		blueSoldiers[i]->setWidth(150);
-		blueSoldiers[i]->setHeight(150);
-		blueSoldiers[i]->sprite.setTexture(Containers::texture_table["blueSoldierTexture"]);
-		blueSoldiers[i]->sprite.setIdleTexture(Containers::texture_table["blueSoldierIdleTex"]);
-		blueSoldiers[i]->sprite.up = Containers::texture_table["bs_upRunTex"];
-		blueSoldiers[i]->sprite.down = Containers::texture_table["bs_downRunTex"];
-		blueSoldiers[i]->sprite.left = Containers::texture_table["bs_leftRunTex"];
-		blueSoldiers[i]->sprite.right = Containers::texture_table["bs_rightRunTex"];
-
-		blueSoldiers[i]->sprite.id_up = Containers::texture_table["bs_upIdleTex"];
-		blueSoldiers[i]->sprite.id_left = Containers::texture_table["bs_leftIdleTex"];
-		blueSoldiers[i]->sprite.id_right = Containers::texture_table["bs_rightIdleTex"];
-		blueSoldiers[i]->sprite.id_down = Containers::texture_table["bs_downIdleTex"];
-
-		blueSoldiers[i]->sprite.atk_up = Containers::texture_table["bs_upAtkTex"];
-		blueSoldiers[i]->sprite.atk_down = Containers::texture_table["bs_downAtkTex"];
-		blueSoldiers[i]->sprite.atk_left = Containers::texture_table["bs_leftAtkTex"];
-		blueSoldiers[i]->sprite.atk_right = Containers::texture_table["bs_rightAtkTex"];
-
-		blueSoldiers[i]->sprite.hurt_up = Containers::texture_table["bs_upHurtTex"];
-		blueSoldiers[i]->sprite.hurt_down = Containers::texture_table["bs_downHurtTex"];
-		blueSoldiers[i]->sprite.hurt_left = Containers::texture_table["bs_leftHurtTex"];
-		blueSoldiers[i]->sprite.hurt_right = Containers::texture_table["bs_rightHurtTex"];
-
-		blueSoldiers[i]->sprite.death_up = Containers::texture_table["bs_upHurtTex"];
-		blueSoldiers[i]->sprite.death_down = Containers::texture_table["bs_downHurtTex"];
-		blueSoldiers[i]->sprite.death_left = Containers::texture_table["bs_leftHurtTex"];
-		blueSoldiers[i]->sprite.death_right = Containers::texture_table["bs_rightHurtTex"];
-
-		blueSoldiers[i]->offsetBody(0, 60, 60, 75, 50);
-		blueSoldiers[i]->setInteractable(true);
-		blueSoldiers[i]->setName("blueSoldier");
-		blueSoldiers[i]->melee = Containers::Attack_table[blueSoldiers[i]->getKey()];
-		blueSoldiers[i]->melee->setDmg(10);
-		blueSoldiers[i]->melee->setSpeed(5);
-		blueSoldiers[i]->melee->setBaseDir(4);
-		blueSoldiers[i]->melee->setCoolDown(60);
-		blueSoldiers[i]->melee->setPause(-1);
-		blueSoldiers[i]->melee->setDestroy(false);
-		blueSoldiers[i]->melee->setKeep(true);
-		blueSoldiers[i]->melee->setWidth(50);
-		blueSoldiers[i]->melee->setHeight(50);
-		blueSoldiers[i]->set_creator_of_melee();
-		blueSoldiers[i]->melee->setStaminaCost(90);
-		blueSoldiers[i]->setHealth(90);
-		blueSoldiers[i]->melee->setStaminaCost(120);
-		blueSoldiers[i]->setMaxStamina(300);
-		//blueSoldiers[i]->addAttackType(rockThrow);
-		blueSoldiers[i]->melee->sprite.setTexture(Containers::texture_table["border"]);
-		blueSoldiers[i]->setSpeed(8);
-	}
-	*/
 	//VisibilityGraph graph;
 	ai->graph.vertices = vertices;
 	ai->graph.obstacles = edges;
@@ -865,62 +667,6 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 
 	yemoja->setMode(WANDER);
 	short M = GetKeyState('M') >> 15;
-/*
-	yemoja->setMode(WANDER);
-	short M = GetKeyState('M') >> 15;
-	Party::grave->set_perm(true);
-	Party* party = new Party();
-	//Party* party2 = new Party();
-	Party* party3 = new Party();
-	Party* party4 = new Party();
-	party->addToParty(Alex, true);
-	for (int i = 0; i < silverSoldier.size(); i++) {
-		party4->addToParty(silverSoldier[i], false);
-	}
-	for (int i = 0; i < blueSoldiers.size(); i++) {
-		party3->addToParty(blueSoldiers[i], false);
-	}
-	party3->addToParty(yemoja, true);
-	party4->addToParty(oya, true);
-	Village* v1 = new Village();
-	//Village* v2 = new Village();
-	Village* v3 = new Village();
-	Village* v4 = new Village();
-	v1->set_village_location(Alex->getLoc());
-	//v2->set_village_location({ 6030, 4000 });
-	v3->set_village_location(yemoja->getLoc());
-	v4->set_village_location(oya->getLoc());
-	v1->add_member(Alex);
-	for (int i = 0; i < silverSoldier.size(); i++) {
-		v4->add_member(silverSoldier[i]);
-	}
-	for (int i = 0; i < blueSoldiers.size(); i++) {
-		v3->add_member(blueSoldiers[i]);
-	}
-	v3->add_member(yemoja);
-	v4->add_member(oya);
-	v1->leader = Alex;
-	v3->leader = yemoja;
-	v4->leader = oya;
-	//v2->leader = oya;
-	//v4->defenders->addToParty(oya, true);
-	Alliance* a1 = new Alliance(v1);
-	//Alliance* a2 = new Alliance(v2);
-	Alliance* a3 = new Alliance(v3);
-	Alliance* a4 = new Alliance(v4);
-	v1->addToParties(party);
-	//v2->addToParties(party2);
-	v3->addToParties(party3);
-	v4->addToParties(party4);
-	//new War(v1,v2);
-	//a1->add_alliance_to_alliance(v3->get_alliance());
-	//if (blueSoldiers.size() > 0)party2->set_defend(blueSoldiers[0]->getLoc());
-	//party2->setMode(Party::MODE_DEFEND);
-	//party3->set_defend(staticRec->getLoc());
-	//party3->setMode(Party::MODE_ATTACK);
-
-	Alliance::update_enemies();
-*/
 
 	//osi::GameWindow::init();
 	LOG("PAST WINDOW INIT ***********************");
@@ -996,9 +742,6 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 			}
 			
 			start_tick = clock();
-
-			gameplay_functions->drawTut(Alex);
-
 			iController->InputCheck();
 			tBuffer->run();
 
@@ -1014,9 +757,12 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 
 			current_game_state = iController->current_game_state;
 			//if(t0.joinable)t0.join();
+
+      gameplay_functions->drawTut(Alex);
+      Tutorial::drawTutorial();
 		}
 		while (current_game_state == game_state::in_game) {
-      cout << "Current game state: in_game" << endl;
+     // cout << "Current game state: in_game" << endl;
 			if (iController->current_game_state != game_state::in_game) {
 				iController->current_game_state = current_game_state;
 			}
@@ -1135,14 +881,17 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 			start_tick = clock();
 			if (!MAP_EDITOR) {
 				//_QuadTree->clearMovable();
-				//grid_worldobj->clear_and_reinsert(movVec);
+				grid_worldobj->clear_and_reinsert(movVec);
 				//vector<WorldObj*> temp = { Alex };
 				//grid_worldobj->clear_and_reinsert(temp);
 			}
 			else {
 				//_QuadTree->clear();
 				grid_worldobj->clear_and_reinsert(movVec);
+				//grid_worldobj->clear();
 			}
+			//grid_worldobj->insert_worldobj_to_grid(recVec);
+			//grid_worldobj->insert_worldobj_to_grid(movVec);
 			//grid->clear();
 			//grid->insert_objs_to_grid(rivObj->getLines());
 			Alex->updateCD();
@@ -1159,6 +908,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 				}
 
 				for (int i = 0; i < movVec.size(); i++) {
+					cout << movVec[i]->getName() << endl;
 					//cout << "movevec item type is " << movVec[i]->getType() << endl;
 					if (movVec[i]->getType() != WorldObj::TYPE_WORLDOBJ) {
 						movVec[i]->effect.sprite.animate();
@@ -1176,7 +926,8 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 					//_QuadTree->Insert(recVec[i]);	//insert all obj into tree
 				}
 				for (int i = 0; i < movVec.size(); i++) {
-					//cout << "movevec item type is " << movVec[i]->getType() << endl;
+					//if (movVec[i]->getName() == "Yemoja") cout << "Yemoja grid is "<< movVec[i]->grid_location.first << ", " << movVec[i]->grid_location.second << endl;
+					//if (movVec[i]->getName() == "Shango") cout << "Shango grid is " << movVec[i]->grid_location.first << ", " << movVec[i]->grid_location.second << endl;
 					if (movVec[i]->getType() != WorldObj::TYPE_WORLDOBJ) {
 						movVec[i]->effect.sprite.animate();
 						movVec[i]->WorldObj::animateObj();
@@ -1210,6 +961,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 			//draw
 			if (state == 0) {
 				gameplay_functions->draw_frame(Alex);
+				//cout << "player grid loc is " << Alex->grid_location.first << ", " << Alex->grid_location.second << endl;
 			}
 			//draw
 			else if (state > 0) {
@@ -1225,7 +977,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 
 			//pool.push(test);
 			
-			cout << "size of buffer is " << tBuffer->queue_buffer.size() << " and physics buffer size is " << tBuffer->physics_buffer.size() << endl;
+			//cout << "size of buffer is " << tBuffer->queue_buffer.size() << " and physics buffer size is " << tBuffer->physics_buffer.size() << endl;
 
 			//cout << "shango's position BEFORE is at " << Alex->getX() << ", " << Alex->getY() << endl;
 			//iterate through physics_buffer
@@ -1244,24 +996,56 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 			/////////////////////////////////////////////////////////////////
 			/////////////////////////////////////////////////////////////////
 			/////////////////////////////////////////////////////////////////
+
 			for (auto iter : yemoja->rel) {
 				Relationship* my_rel = iter.second;
 				int with_hero = iter.first;
 
-				if (my_rel->isChanged()) {
+				if (my_rel->isChanged() > 15) {
 					//reevaluate goals for with_hero
-					AIController::reevaluate_state(YEMOJA, with_hero);
-					my_rel->setChanged(false);
+					//Eron: This is a temporary fix
+					///////////////////////////////////////////////////////
+					Hero* other_hero = nullptr;
+
+					for (auto itr : Containers::hero_table)
+					{
+						if (itr.second->name == with_hero)
+						{
+							other_hero = itr.second;
+						}
+					}
+
+					if (yemoja != nullptr && other_hero != nullptr)
+					{
+						Alliance* curr_alliance = yemoja->getVillage()->get_alliance();
+						Alliance* other_alliance = other_hero->getVillage()->get_alliance();
+
+						if (curr_alliance != other_alliance && yemoja->SUGG_ACT_STATUS != 1)
+						{
+							AIController::reevaluate_state(YEMOJA, with_hero);
+						}
+					}
+
+					///////////////////////////////////////////////////////
+					
+					my_rel->setChanged(0);
 				}
 			}
 			//getting here-------------------------------------------------------------------------***********
 			//setting give as quest to false so that the excute runs
 			//YemojaPlanner->give_as_quest = false;
-//			cout << " first dest is " << staticRec->get_action_destination()->getXloc() << ", " << staticRec->get_action_destination()->getYloc() << endl;
-			AIController::execute();
+
+      //			cout << " first dest is " << staticRec->get_action_destination()->getXloc() << ", " << staticRec->get_action_destination()->getYloc() << endl;
+			
+			//doesn't call execute if in dialog
+			if (state <= 0)
+			{
+				AIController::execute();
+			}
 //			cout << "after execute dest is " << staticRec->get_action_destination()->getXloc() << ", " << staticRec->get_action_destination()->getYloc() << endl;
-			//AI.join();
+      //AI.join();
 //			cout << "after thread join dest is " << staticRec->get_action_destination()->getXloc() << ", " << staticRec->get_action_destination()->getYloc() << endl;
+
 			if ((1000 / fs) > (clock() - start_tick)) { //delta_ticks)
 				Sleep((1000 / fs) - (clock() - start_tick));
 			}
@@ -1276,51 +1060,63 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 			HUD::AVG = total_fps / frame_count;
 
 			current_game_state = iController->current_game_state;
-			//system("PAUSE");
-			//Checks if game has reached final states
-			//GameState::check_if_end_game(&current_game_state);
-			
 
+			GameState::check_if_end_game(&current_game_state);
+
+      Tutorial::drawTutorial();
 		}
 		while (current_game_state == game_state::pause_menu) {
-			for (int i = 0; i < 10; i++) {
-				cout << "Press Q to return to game" << endl;
-
-			}
 			if (iController->current_game_state != game_state::pause_menu) {
 				iController->current_game_state = current_game_state;
 			}
 
-			if (shouldExit > 0) {
-				_CrtDumpMemoryLeaks();
-				return;
-			}
-			start_tick = clock();
+      if(shouldExit > 0) {
+        _CrtDumpMemoryLeaks();
+        return;
+      }
 
-			//draw
-			gameplay_functions->drawTut(Alex);
+      start_tick = clock();
+      iController->InputCheck();
+      tBuffer->run();
 
-			//run task buffer
-			iController->InputCheck();
+      if((1000 / fs) > (clock() - start_tick))
+        Sleep((1000 / fs) - (clock() - start_tick));
+      delta_ticks = clock() - start_tick; //the time, in ms, that took to render the scene
+      if(delta_ticks > 0)
+        fps = CLOCKS_PER_SEC / delta_ticks;
+      HUD::FPS = fps;
+      HUD::AVG = total_fps / frame_count;
 
-			tBuffer->run();
+      current_game_state = iController->current_game_state;
+      gameplay_functions->drawTut(Alex);
+      Tutorial::drawTutorial();
+    }
+    while(current_game_state == game_state::tutorial_pause) {
+      if(iController->current_game_state != game_state::pause_menu) {
+        iController->current_game_state = current_game_state;
+      }
 
-			if ((1000 / fs) > (clock() - start_tick)) { //delta_ticks) {www
-				Sleep((1000 / fs) - (clock() - start_tick));
-			}
-			delta_ticks = clock() - start_tick; //the time, in ms, that took to render the scene
-			if (delta_ticks > 0) {
-				fps = CLOCKS_PER_SEC / delta_ticks;
-			}
-			HUD::FPS = fps;
-			//total_fps += fps;
-			//cout << "FPS: " << fps << endl;
+      if(shouldExit > 0) {
+        _CrtDumpMemoryLeaks();
+        return;
+      }
 
-			//frame_count++;
-			HUD::AVG = total_fps / frame_count;
+      start_tick = clock();
+      iController->InputCheck();
+      tBuffer->run();
 
-			current_game_state = iController->current_game_state;
-		}
+      if((1000 / fs) > (clock() - start_tick))
+        Sleep((1000 / fs) - (clock() - start_tick));
+      delta_ticks = clock() - start_tick; //the time, in ms, that took to render the scene
+      if(delta_ticks > 0)
+        fps = CLOCKS_PER_SEC / delta_ticks;
+      HUD::FPS = fps;
+      HUD::AVG = total_fps / frame_count;
+
+      current_game_state = iController->current_game_state;
+      gameplay_functions->drawTut(Alex);
+      Tutorial::drawTutorial();
+    }
 		while (current_game_state == game_state::victory_menu) {
 
 			if (iController->current_game_state != game_state::victory_menu) {
