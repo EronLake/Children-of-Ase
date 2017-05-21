@@ -502,5 +502,17 @@
     "1": {
       "1": "Shrine Not Worthy"
     }
+  },
+
+   "Good Advice_Templates": {
+    "1": {
+      "1": "Good Advice"
+    }
+  },
+
+   "Terrible Advice_Templates": {
+    "1": {
+      "1": "Terrible Advice"
+    }
   }
 }

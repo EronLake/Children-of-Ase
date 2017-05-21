@@ -1016,7 +1016,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 						Alliance* curr_alliance = yemoja->getVillage()->get_alliance();
 						Alliance* other_alliance = other_hero->getVillage()->get_alliance();
 
-						if (curr_alliance != other_alliance)
+						if (curr_alliance != other_alliance && yemoja->SUGG_ACT_STATUS != 1)
 						{
 							AIController::reevaluate_state(YEMOJA, with_hero);
 						}
