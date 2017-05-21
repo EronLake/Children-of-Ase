@@ -720,7 +720,7 @@ void DialogueController::otherConversationPoint(dialogue_point line)
 	
 
 
-	/*skips the player's reply point if the npc does not say a conversation
+	/*skips the player's reply point if the npc does not say a conversationwwwwwwwwwwwwwwwwdwwwwwwwwwwwwwwssssssssssssssssssswdssssssssssssssssawasae
 	point, if the npc tells the player that they already asked them something,
 	if an npc runs out of relevant conversation points to say, or if an NPC tells
 	the player that they do not have a quest for them.
@@ -1448,9 +1448,9 @@ void DialogueController::startConversation(WorldObj* n, bool playerTalk)
 	if (temp_hero) {
 		player->filter_move_to(temp_hero);
 		//if (first_buff) {
-			temp_hero->rel[player->name]->addNotoriety(50);
-			temp_hero->rel[player->name]->addStrength(50);
-			temp_hero->rel[player->name]->addAffinity(50);
+			//temp_hero->rel[player->name]->addNotoriety(50);
+			//temp_hero->rel[player->name]->addStrength(50);
+			//temp_hero->rel[player->name]->addAffinity(50);
 		//}
 		//first_buff = false;
 	}

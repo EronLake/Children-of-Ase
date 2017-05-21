@@ -71,6 +71,13 @@ public:
 	static constexpr int SUCC_SUGG_ACT = 3;
 	int SUGG_ACT_STATUS;
 
+	static constexpr int NOT_QUEST = 0;
+	static constexpr int IN_PROGRESS = 1;
+	static constexpr int FAIL_QUEST = 2;
+	static constexpr int SUCC_QUEST = 3;
+	typedef std::unordered_map<int, int> status_map; // first part of pair is quest owner, second is quest status
+	status_map quest_status;
+
 private:
 
 	std::unordered_map<Action*,int> quests;
