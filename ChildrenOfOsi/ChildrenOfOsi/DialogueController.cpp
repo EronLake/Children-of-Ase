@@ -1479,13 +1479,13 @@ void DialogueController::startConversation(WorldObj* n, bool playerTalk)
 				}
 			}
 			if (quest_complete) {
-				if (player->quest_status[quest->getReceiver()->name] == 3) {
+				if (player->quest_status[the_quest->getReceiver()->name] == 3) {
 					message = n->getName() + ": " + dialogue.gen_dialog({ "Quest_Complete","Quest_Complete" }, temp_hero);
-					player->quest_status[quest->getReceiver()->name] == 0;
+					player->quest_status[the_quest->getReceiver()->name] == 0;
 				}
 				else if (player->quest_status[quest->getReceiver()->name] == 2) {
 					//message = n->getName() + ": " + dialogue.gen_dialog({ "Quest_Failed","Quest_Failed" }, temp_hero);
-					player->quest_status[quest->getReceiver()->name] == 0;
+					player->quest_status[the_quest->getReceiver()->name] == 0;
 				}
 			}
 			if (player_doing_quest && temp_hero->SUGG_ACT_STATUS == 0){
