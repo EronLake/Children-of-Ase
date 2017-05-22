@@ -683,6 +683,9 @@ void DialogueController::otherConversationPoint(dialogue_point line)
 
 			std::string village = "'s village";
 			std::string hero_name = dialogue.int_to_hero_name(quest->getReceiver()->name);
+
+			player->quest_status[quest->getReceiver()->name] = 1;// set shango to "doing quest"
+
 			if (act_name.find("Conquer") != string::npos || act_name.find("Occupy") != string::npos) {
 				replace_all(con_pt_sentence, "HERO", hero_name + village);
 			}
@@ -722,7 +725,7 @@ void DialogueController::otherConversationPoint(dialogue_point line)
 	
 
 
-	/*skips the player's reply point if the npc does not say a conversation
+	/*skips the player's reply point if the npc does not say a conversationwwwwwwwwwwwwwwwwdwwwwwwwwwwwwwwssssssssssssssssssswdssssssssssssssssawasae
 	point, if the npc tells the player that they already asked them something,
 	if an npc runs out of relevant conversation points to say, or if an NPC tells
 	the player that they do not have a quest for them.
@@ -1470,14 +1473,30 @@ void DialogueController::startConversation(WorldObj* n, bool playerTalk)
 			Planner* planner = AIController::get_plan(CheckClass::isHero(other)->name);
 			bool player_doing_quest = false;
 			bool quest_complete = false;
+			Action* the_quest = new Action;
 			for (int i = 0; i < planner->quests_given.size(); ++i) {
-				if (planner->quests_given[i]->getDoer()->name == SHANGO && planner->quests_given[i]->executed == false)
+				if (planner->quests_given[i]->getDoer()->name == SHANGO && planner->quests_given[i]->executed == false) {
 					player_doing_quest = true;
-				if (planner->quests_given[i]->getDoer()->name == SHANGO && planner->quests_given[i]->executed == true)
+					the_quest = planner->quests_given[i];
+				}
+				if (planner->quests_given[i]->getDoer()->name == SHANGO && planner->quests_given[i]->executed == true) {
 					quest_complete = true;
+					the_quest = planner->quests_given[i];
+				}
 			}
-			if (player_doing_quest && temp_hero->SUGG_ACT_STATUS == 0)
-				message = n->getName() + ": " + dialogue.gen_dialog({ "Quest_In_Progress","Quest_In_Progress" }, temp_hero);
+			if (quest_complete) {
+				if (player->quest_status[quest->getReceiver()->name] == 3) {
+					message = n->getName() + ": " + dialogue.gen_dialog({ "Quest_Complete","Quest_Complete" }, temp_hero);
+					player->quest_status[quest->getReceiver()->name] == 0;
+				}
+				else if (player->quest_status[quest->getReceiver()->name] == 2) {
+					//message = n->getName() + ": " + dialogue.gen_dialog({ "Quest_Failed","Quest_Failed" }, temp_hero);
+					player->quest_status[quest->getReceiver()->name] == 0;
+				}
+			}
+			if (player_doing_quest && temp_hero->SUGG_ACT_STATUS == 0){
+				message = n->getName() + ": " + dialogue.gen_dialog({ "Quest_In_Progress","Quest_In_Progress" }, temp_hero);	
+			}
 			else if (temp_hero->SUGG_ACT_STATUS == 2) {
 				message = n->getName() + ": " + dialogue.gen_dialog({ "Terrible Advice","Terrible Advice" }, temp_hero);
 				temp_hero->SUGG_ACT_STATUS = 0;
@@ -1486,14 +1505,6 @@ void DialogueController::startConversation(WorldObj* n, bool playerTalk)
 				message = n->getName() + ": " + dialogue.gen_dialog({ "Good Advice","Good Advice" }, temp_hero);
 				temp_hero->SUGG_ACT_STATUS = 0;
 			}
-			/////////////Change These Andrew////////////////////////////////////////////////////////////////////////////////////////
-			//used when player is talking to NPC for the first time after having been successful in completing that NPC's quest
-			else if (quest_complete)
-				message = n->getName() + ": " + dialogue.gen_dialog({ "Quest_Complete","Quest_Complete" }, temp_hero);
-			//used when player is talking to NPC for the first time after having failed in completing that NPC's quest
-			else if (quest_complete)
-				message = n->getName() + ": " + dialogue.gen_dialog({ "Quest_Failed","Quest_Failed" }, temp_hero);
-			///////////////////////////////////////////////////////////////////////////////////////////////////////////
 			else
 				message = n->getName() + ": " + dialogue.gen_dialog({ "Greeting","Greeting" }, temp_hero);
 		}
