@@ -132,14 +132,20 @@ void PlayerActExecFunctions::execute_end(bool if_succ) {
 	
 	//if the action was successful check if the action was in the active quests
 	if (if_succ) { check_quest(); }
-	
-	//reason sould be handled as a dialog response choice
-	if (if_succ){
-		//doer_mem->setCategory("success");
-		//receiver_mem->setCategory("failure");
-	}else{ 
-		//doer_mem->setCategory("failure");
-	//	receiver_mem->setCategory("success");
+	if (player->cur_action->executed) {
+
+
+		//reason sould be handled as a dialog response choice
+		if (if_succ) {
+			player->quest_status[cur_action->getReceiver()->name] = 3;// set shango to "succeeded quest"
+			//doer_mem->setCategory("success");
+			//receiver_mem->setCategory("failure");
+		}
+		else {
+			player->quest_status[cur_action->getReceiver()->name] = 2;// set shango to "failed quest"
+			//doer_mem->setCategory("failure");
+		//	receiver_mem->setCategory("success");
+		}
 	}
 //	doer_mem->setWhen(/*get global frame*/0);
 
