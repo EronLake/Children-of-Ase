@@ -437,6 +437,12 @@
 	 }
     },
 
+	"Quest_Failed_Templates": {
+	 "1": {
+        "1": "Quest_Failed"
+	 }
+    },
+
 	"Quest_In_Progress_Templates": {
 	 "1": {
         "1": "Quest_In_Progress"

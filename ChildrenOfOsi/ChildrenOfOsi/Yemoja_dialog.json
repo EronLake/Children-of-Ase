@@ -506,11 +506,11 @@
     },
 
 	"No Quest": {
-        "1": "No, I do not.",
-        "2": "No, I do not.",
-        "3": "No, I do not.",
-        "4": "No, I do not.",
-        "5": "No, I do not."
+        "1": "No, there is not.",
+        "2": "No, there is not.",
+        "3": "No, there is not.",
+        "4": "No, there is not.",
+        "5": "No, there is not."
     },
 
 	"Quest_Complete": {
@@ -519,6 +519,14 @@
         "3": "Thanks for completing my quest and helping me out.",
         "4": "Thanks for completing my quest and helping me out.",
         "5": "Thanks for completing my quest and helping me out."
+    },
+
+	"Quest_Failed": {
+        "1": "You failed me. I regret having entrusted you with that task.",
+        "2": "You failed me. I regret having entrusted you with that task.",
+        "3": "You failed me. I regret having entrusted you with that task.",
+        "4": "You failed me. I regret having entrusted you with that task.",
+        "5": "You failed me. I regret having entrusted you with that task."
     },
 
 	"Quest_In_Progress": {

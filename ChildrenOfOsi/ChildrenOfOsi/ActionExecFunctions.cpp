@@ -532,8 +532,9 @@ void ActionExecFunctions::execute_conquer(Action* conq)
 		if (Party::dist_location_to_location(player->getLoc(), conq->getDoer()->getLoc()) < 500) {
 			conq->checkpoint = 5;
 			ActionHelper::set_timer(conq, 500);
+			int tmper = conq->getReceiver()->get_busy();
+
 		}
-		
 		if (conq->getDoer()->get_action_destination() == Vector2f(NULL, NULL) && (conq->getReceiver()->get_busy() == Hero::NOT_BUSY))//needs to be changed to use party location right 
 		{
 			//ActionHelper::set_timer(conq, 3600);  //Wait 1 minute (60 frames times 60 seconds) trying to find out the hero's location
@@ -662,6 +663,7 @@ void ActionExecFunctions::execute_conquer(Action* conq)
 		}
 		break;
 	case 6:
+		//conq->getReceiver()->set_busy(0);
 		if (conq->getDoer()->get_action_destination() == Vector2f(NULL, NULL) && (conq->getReceiver()->get_busy() == Hero::NOT_BUSY))//needs to be changed to use party location right 
 		{
 			if (Party::dist_location_to_location(conq->getReceiver()->getVillage()->get_village_location(), conq->getReceiver()->getLoc()) < 1000)conq->getReceiver()->getVillage()->defenders->add_party_to_party(conq->getReceiver()->getVillage()->barracks);

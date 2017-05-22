@@ -299,7 +299,8 @@ void AIController::execute() {
 					}
 
 				}
-				planner->set_current_action(best_action);                   //Current action is set
+				if(planner->get_current_action()->getDoer()->SUGG_ACT_STATUS != 1)
+				    planner->set_current_action(best_action);                   //Current action is set
 				hero->init_action_timer(action_wait_time);                    //Start a timer for approx. 2 minutes
 				planner->give_as_quest = give_as_quest(best_action);  //Check and store in planner whether this is appropriate to give as a quest
 

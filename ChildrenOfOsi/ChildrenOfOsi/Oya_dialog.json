@@ -122,7 +122,7 @@
     },
 
 	"Advise To Conquer": {
-        "1": "I would like you to consider conquering HERO",
+        "1": "I would like you to consider conquering HERO's village.",
         "2": "I think it would be greatly beneficial to you if you gained control over HERO",
         "3": "My friend, I believe now would be a perfect opportunity to conquer HERO",
 		"4": "My friend, I believe now would be a perfect opportunity to conquer HERO",
@@ -130,11 +130,11 @@
     },
 
 	"Take Advice To Conquer": {
-        "1": "HERO hmm.I was considering conquering them but then you told me it was a good idea. Now I am not so sure. ",
-        "2": "HERO? Really? I don't feel like you should be giving me advice on such an important matter.",
-        "3": "HERO eh.I am not sure that conquest is the best idea for ensuring the safety of this village, but I will keep it in mind.",
-        "4": "HERO as a conquering target? I think that moving to conquer is a risky move, but I am glad that you gave me this advice.",
-        "5": "HERO hmm. I respect your advice, and will definitely consider conquest as a powerful strategic move."
+        "1": "HERO hmm. Trying to conquer their village sounds like a terrible idea. I will have no part in that.",
+        "2": "HERO? Really? No can do. I would much rather keep to my own village and not stir up trouble.",
+        "3": "While I do not know you very well, your suggestion has reaffirmed the action that I had already intended to take. So I will take your advice.",
+        "4": "HERO's village as a conquering target? Given that I know of your wisdom for myself, I will put my trust in you and take your advice.",
+        "5": "I highly respect and value your opinion and I will certainly act on your insightful advice."
     },
 
 	"Advise To Ally With": {
@@ -146,11 +146,11 @@
     },
 
 	"Take Advice To Ally With": {
-        "1": "HERO!? I absolutely refuse. The very idea of being in an alliance with their village disgusts me.",
-        "2": "HERO as an ally? An alliance can possibly help ensure the safety of this village, so I will definitely consider it.",
-        "3": "HERO as an ally? I will have to think deeply as to whether or not an alliance with them would be a good idea.",
-        "4": "HERO as an ally? Your advice always has my best interests in mind it seems, so I promise you I will deeply consider an alliance with them.",
-        "5": "HERO as an ally? Your advice always has my best interests in mind it seems, so I promise you I will deeply consider an alliance with them."
+        "1": "I can't trust you and I wouldn't ally with their village in a million years!",
+        "2": "I do not believe that it is time to consider HERO as a potential ally just yet. I won't be acting on your advice this time.",
+        "3": "An alliance with HERO and their village sounds feasible so I will go to them shortly and do as you suggest.",
+        "4": "You seem to be sincere about this and you do seem rather wise. Forming an alliance with them, couldn't hurt I suppose. I will attempt to make peace with them then.",
+        "5": "I know that I can always trust you to give the greatest advice and this time is no different. I will go attempt to ally with HERO right away."
     },
 
 	"Advise To Revolt Against": {
@@ -346,11 +346,11 @@
     },
 
 	"Take Advice To Fight": {
-        "1": "You expect me to take advice from you? No thank you.",
-        "2": "I understand where you are coming from, but I cannot trust your advice at present.",
-        "3": "A fight with HERO? Well, the village would be safer if I improved my skills. I will take your advice.",
-        "4": "You are suggesting I fight with HERO? Hmm. I do value your opinion... I will take your advice.",
-        "5": "Your advice is a boon to me my friend. I will act on it right away."
+        "1": "Getting into a fight with HERO sounds like an unwise course of action. Take your bad advice elsewhere because I have no intention of following it.",
+        "2": "I will not be taking your advice. You have yet to prove yourself to be wise.",
+        "3": "A fight with HERO? Maybe leaving the jungle once in awhile to sharpen my skills would be a good idea... I will go to fight HERO.",
+        "4": "I don't know what caused you to suggest that I fight HERO, but I will do it because I trust you.",
+        "5": "You are one of the most trustworthy people that I know and so I will act on your advice immediately."
     },
 
 	"Advise To Send Peace Offering To": {
@@ -527,6 +527,14 @@
         "3": "Thanks for completing my quest and helping me out.",
         "4": "Thanks for completing my quest and helping me out.",
         "5": "Thanks for completing my quest and helping me out."
+    },
+
+	"Quest_Failed": {
+        "1": "You failed me. I regret having entrusted you with that task.",
+        "2": "You failed me. I regret having entrusted you with that task.",
+        "3": "You failed me. I regret having entrusted you with that task.",
+        "4": "You failed me. I regret having entrusted you with that task.",
+        "5": "You failed me. I regret having entrusted you with that task."
     },
 
 	"Quest_In_Progress": {

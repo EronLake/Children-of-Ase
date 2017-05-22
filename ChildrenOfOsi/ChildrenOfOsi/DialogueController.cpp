@@ -284,6 +284,8 @@ void DialogueController::PlayerConversationPoint()
 				|| player_conv_point_choice == "Advise To Conquer" || player_conv_point_choice == "Advise To Send Peace Offering To" ||
 				player_conv_point_choice == "Advise To Ally With") {
 				accepted_action = check_advice_acceptance(player, temp_hero);
+				if (temp_hero->SUGG_ACT_STATUS == 1)
+					accepted_action = false;
 			}
 			for (auto precond : Containers::conv_point_table[player_conv_point_choice]->req_preconds) {
 				int temp1 = precond->get_cost(temp_hero, player);
@@ -933,7 +935,7 @@ void DialogueController::otherResponse(std::string info, std::string hero_topic)
 		}
 		else if (replyString == "Accept Spar Request") {
 			//calls action start if the question is asked at all
-			PlayerActExecFunctions::execute_start("Spar", temp_hero);
+			//PlayerActExecFunctions::execute_start("Spar", temp_hero);
 
 			//check if I want to accept
 			if (accepted_action) {
@@ -1084,6 +1086,7 @@ void DialogueController::otherResponse(std::string info, std::string hero_topic)
 				dialogue_point diog_pt = { "Confirm Spar","Confirm Spar","",curr_hero_topic,"1" };
 				std::string reply_pt_sentence = dialogue.gen_dialog(diog_pt, player);
 				message = player->getName() + ": " + reply_pt_sentence + "\n\n";
+				PlayerActExecFunctions::execute_start("Spar", temp_hero);
 			}
 			else {
 				/////////////need to be changed to correct calls/dialog if not accepted///////////////////
@@ -1092,7 +1095,7 @@ void DialogueController::otherResponse(std::string info, std::string hero_topic)
 				message = player->getName() + ": " + reply_pt_sentence + "\n\n";
 
 				//calls action end if the question is denied otherwise called on cmpletion of the action
-				PlayerActExecFunctions::execute_end(false);
+				//PlayerActExecFunctions::execute_end(false);
 			}
 		}
 		else if (replyString == "Take Advice To Fight") {
@@ -1114,6 +1117,7 @@ void DialogueController::otherResponse(std::string info, std::string hero_topic)
 				planner->get_current_action()->setOwner(temp_hero);
 				std::string my_hero = dialogue.int_to_hero_name(hero_num);
 				planner->get_current_action()->setReceiver(Containers::hero_table[my_hero]);
+				planner->get_current_action()->checkpoint = 0;
 				ActionExecFunctions::execute_fight(planner->get_current_action());
 				temp_hero->SUGG_ACT_STATUS = temp_hero->SUGG_ACT;
 				
@@ -1147,6 +1151,7 @@ void DialogueController::otherResponse(std::string info, std::string hero_topic)
 				planner->get_current_action()->setOwner(temp_hero);
 				std::string my_hero = dialogue.int_to_hero_name(hero_num);
 				planner->get_current_action()->setReceiver(Containers::hero_table[my_hero]);
+				planner->get_current_action()->checkpoint = 0;
 				ActionExecFunctions::execute_conquer(planner->get_current_action());
 				temp_hero->SUGG_ACT_STATUS = temp_hero->SUGG_ACT;
 			}
@@ -1196,6 +1201,7 @@ void DialogueController::otherResponse(std::string info, std::string hero_topic)
 				planner->get_current_action()->setOwner(temp_hero);
 				std::string my_hero = dialogue.int_to_hero_name(hero_num);
 				planner->get_current_action()->setReceiver(Containers::hero_table[my_hero]);
+				planner->get_current_action()->checkpoint = 0;
 				ActionExecFunctions::execute_form_alliance(planner->get_current_action());
 				temp_hero->SUGG_ACT_STATUS = temp_hero->SUGG_ACT;
 			}
@@ -1480,8 +1486,14 @@ void DialogueController::startConversation(WorldObj* n, bool playerTalk)
 				message = n->getName() + ": " + dialogue.gen_dialog({ "Good Advice","Good Advice" }, temp_hero);
 				temp_hero->SUGG_ACT_STATUS = 0;
 			}
+			/////////////Change These Andrew////////////////////////////////////////////////////////////////////////////////////////
+			//used when player is talking to NPC for the first time after having been successful in completing that NPC's quest
 			else if (quest_complete)
 				message = n->getName() + ": " + dialogue.gen_dialog({ "Quest_Complete","Quest_Complete" }, temp_hero);
+			//used when player is talking to NPC for the first time after having failed in completing that NPC's quest
+			else if (quest_complete)
+				message = n->getName() + ": " + dialogue.gen_dialog({ "Quest_Failed","Quest_Failed" }, temp_hero);
+			///////////////////////////////////////////////////////////////////////////////////////////////////////////
 			else
 				message = n->getName() + ": " + dialogue.gen_dialog({ "Greeting","Greeting" }, temp_hero);
 		}
