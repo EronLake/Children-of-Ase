@@ -1485,7 +1485,7 @@ void DialogueController::startConversation(WorldObj* n, bool playerTalk)
 				}
 			}
 			if (quest_complete) {
-				if (player->quest_status[quest->getReceiver()->name] == 3) {
+				if (player->quest_status[the_quest->getReceiver()->name] == 3) {
 					message = n->getName() + ": " + dialogue.gen_dialog({ "Quest_Complete","Quest_Complete" }, temp_hero);
 					player->quest_status[quest->getReceiver()->name] = 0;
 				}
