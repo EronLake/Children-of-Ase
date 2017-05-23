@@ -284,6 +284,8 @@ void DialogueController::PlayerConversationPoint()
 				|| player_conv_point_choice == "Advise To Conquer" || player_conv_point_choice == "Advise To Send Peace Offering To" ||
 				player_conv_point_choice == "Advise To Ally With") {
 				accepted_action = check_advice_acceptance(player, temp_hero);
+				if (temp_hero->SUGG_ACT_STATUS == 1)
+					accepted_action = false;
 			}
 			for (auto precond : Containers::conv_point_table[player_conv_point_choice]->req_preconds) {
 				int temp1 = precond->get_cost(temp_hero, player);
@@ -681,6 +683,9 @@ void DialogueController::otherConversationPoint(dialogue_point line)
 
 			std::string village = "'s village";
 			std::string hero_name = dialogue.int_to_hero_name(quest->getReceiver()->name);
+
+			player->quest_status[quest->getReceiver()->name] = 1;// set shango to "doing quest"
+
 			if (act_name.find("Conquer") != string::npos || act_name.find("Occupy") != string::npos) {
 				replace_all(con_pt_sentence, "HERO", hero_name + village);
 			}
@@ -720,7 +725,7 @@ void DialogueController::otherConversationPoint(dialogue_point line)
 	
 
 
-	/*skips the player's reply point if the npc does not say a conversation
+	/*skips the player's reply point if the npc does not say a conversationwwwwwwwwwwwwwwwwdwwwwwwwwwwwwwwssssssssssssssssssswdssssssssssssssssawasae
 	point, if the npc tells the player that they already asked them something,
 	if an npc runs out of relevant conversation points to say, or if an NPC tells
 	the player that they do not have a quest for them.
@@ -933,7 +938,7 @@ void DialogueController::otherResponse(std::string info, std::string hero_topic)
 		}
 		else if (replyString == "Accept Spar Request") {
 			//calls action start if the question is asked at all
-			PlayerActExecFunctions::execute_start("Spar", temp_hero);
+			//PlayerActExecFunctions::execute_start("Spar", temp_hero);
 
 			//check if I want to accept
 			if (accepted_action) {
@@ -1084,6 +1089,7 @@ void DialogueController::otherResponse(std::string info, std::string hero_topic)
 				dialogue_point diog_pt = { "Confirm Spar","Confirm Spar","",curr_hero_topic,"1" };
 				std::string reply_pt_sentence = dialogue.gen_dialog(diog_pt, player);
 				message = player->getName() + ": " + reply_pt_sentence + "\n\n";
+				PlayerActExecFunctions::execute_start("Spar", temp_hero);
 			}
 			else {
 				/////////////need to be changed to correct calls/dialog if not accepted///////////////////
@@ -1092,7 +1098,7 @@ void DialogueController::otherResponse(std::string info, std::string hero_topic)
 				message = player->getName() + ": " + reply_pt_sentence + "\n\n";
 
 				//calls action end if the question is denied otherwise called on cmpletion of the action
-				PlayerActExecFunctions::execute_end(false);
+				//PlayerActExecFunctions::execute_end(false);
 			}
 		}
 		else if (replyString == "Take Advice To Fight") {
@@ -1114,6 +1120,7 @@ void DialogueController::otherResponse(std::string info, std::string hero_topic)
 				planner->get_current_action()->setOwner(temp_hero);
 				std::string my_hero = dialogue.int_to_hero_name(hero_num);
 				planner->get_current_action()->setReceiver(Containers::hero_table[my_hero]);
+				planner->get_current_action()->checkpoint = 0;
 				ActionExecFunctions::execute_fight(planner->get_current_action());
 				temp_hero->SUGG_ACT_STATUS = temp_hero->SUGG_ACT;
 				
@@ -1138,15 +1145,16 @@ void DialogueController::otherResponse(std::string info, std::string hero_topic)
 				Planner* planner = AIController::get_plan(CheckClass::isHero(other)->name);
 				//ActionPool* hero_map;
 				//hero_map = temp_hero->actionPool_map[dialogue.hero_name_to_int(curr_hero_topic)];
-				int hero_num = temp_hero->name;
+				int hero_num = dialogue.hero_name_to_int(curr_hero_topic);
 				//std::string hero_id = std::to_string(hero_num);
-				std::string hero_id = std::to_string(hero_num);
+				std::string hero_id = std::to_string(temp_hero->name);
 				std::string act_str = "Conquer_" + hero_id;
 				planner->set_current_action(Containers::action_table[act_str]);
 				planner->get_current_action()->setDoer(temp_hero);
 				planner->get_current_action()->setOwner(temp_hero);
 				std::string my_hero = dialogue.int_to_hero_name(hero_num);
 				planner->get_current_action()->setReceiver(Containers::hero_table[my_hero]);
+				planner->get_current_action()->checkpoint = 0;
 				ActionExecFunctions::execute_conquer(planner->get_current_action());
 				temp_hero->SUGG_ACT_STATUS = temp_hero->SUGG_ACT;
 			}
@@ -1187,14 +1195,16 @@ void DialogueController::otherResponse(std::string info, std::string hero_topic)
 				Planner* planner = AIController::get_plan(CheckClass::isHero(other)->name);
 				//ActionPool* hero_map;
 				//hero_map = temp_hero->actionPool_map[dialogue.hero_name_to_int(curr_hero_topic)];
-				int hero_num = temp_hero->name;
-				std::string hero_id = std::to_string(hero_num);
+				int hero_num = dialogue.hero_name_to_int(curr_hero_topic);
+				//std::string hero_id = std::to_string(hero_num);
+				std::string hero_id = std::to_string(temp_hero->name);
 				std::string act_str = "Form_Alliance_" + hero_id;
 				planner->set_current_action(Containers::action_table[act_str]);
 				planner->get_current_action()->setDoer(temp_hero);
 				planner->get_current_action()->setOwner(temp_hero);
 				std::string my_hero = dialogue.int_to_hero_name(hero_num);
 				planner->get_current_action()->setReceiver(Containers::hero_table[my_hero]);
+				planner->get_current_action()->checkpoint = 0;
 				ActionExecFunctions::execute_form_alliance(planner->get_current_action());
 				temp_hero->SUGG_ACT_STATUS = temp_hero->SUGG_ACT;
 			}
@@ -1463,14 +1473,30 @@ void DialogueController::startConversation(WorldObj* n, bool playerTalk)
 			Planner* planner = AIController::get_plan(CheckClass::isHero(other)->name);
 			bool player_doing_quest = false;
 			bool quest_complete = false;
+			Action* the_quest = new Action;
 			for (int i = 0; i < planner->quests_given.size(); ++i) {
-				if (planner->quests_given[i]->getDoer()->name == SHANGO && planner->quests_given[i]->executed == false)
+				if (planner->quests_given[i]->getDoer()->name == SHANGO && planner->quests_given[i]->executed == false) {
 					player_doing_quest = true;
-				if (planner->quests_given[i]->getDoer()->name == SHANGO && planner->quests_given[i]->executed == true)
+					the_quest = planner->quests_given[i];
+				}
+				if (planner->quests_given[i]->getDoer()->name == SHANGO && planner->quests_given[i]->executed == true) {
 					quest_complete = true;
+					the_quest = planner->quests_given[i];
+				}
 			}
-			if (player_doing_quest && temp_hero->SUGG_ACT_STATUS == 0)
-				message = n->getName() + ": " + dialogue.gen_dialog({ "Quest_In_Progress","Quest_In_Progress" }, temp_hero);
+			if (quest_complete) {
+				if (player->quest_status[the_quest->getReceiver()->name] == 3) {
+					message = n->getName() + ": " + dialogue.gen_dialog({ "Quest_Complete","Quest_Complete" }, temp_hero);
+					player->quest_status[the_quest->getReceiver()->name] = 0;
+				}
+				else if (player->quest_status[the_quest->getReceiver()->name] == 2) {
+					message = n->getName() + ": " + dialogue.gen_dialog({ "Quest_Failed","Quest_Failed" }, temp_hero);
+					player->quest_status[the_quest->getReceiver()->name] = 0;
+				}
+			}
+			if (player_doing_quest && temp_hero->SUGG_ACT_STATUS == 0){
+				message = n->getName() + ": " + dialogue.gen_dialog({ "Quest_In_Progress","Quest_In_Progress" }, temp_hero);	
+			}
 			else if (temp_hero->SUGG_ACT_STATUS == 2) {
 				message = n->getName() + ": " + dialogue.gen_dialog({ "Terrible Advice","Terrible Advice" }, temp_hero);
 				temp_hero->SUGG_ACT_STATUS = 0;
@@ -1479,8 +1505,6 @@ void DialogueController::startConversation(WorldObj* n, bool playerTalk)
 				message = n->getName() + ": " + dialogue.gen_dialog({ "Good Advice","Good Advice" }, temp_hero);
 				temp_hero->SUGG_ACT_STATUS = 0;
 			}
-			else if (quest_complete)
-				message = n->getName() + ": " + dialogue.gen_dialog({ "Quest_Complete","Quest_Complete" }, temp_hero);
 			else
 				message = n->getName() + ": " + dialogue.gen_dialog({ "Greeting","Greeting" }, temp_hero);
 		}
@@ -1571,6 +1595,9 @@ void DialogueController::exitDialogue()
 
 		if (temp_hero) {
 			remove_hero_related_conv_points();
+			//temp_hero->rel[player->name]->addNotoriety(50);
+			//temp_hero->rel[player->name]->addStrength(50);
+			//temp_hero->rel[player->name]->addAffinity(50);
 			//remove_ask_for_quest();
 		}
 		else {

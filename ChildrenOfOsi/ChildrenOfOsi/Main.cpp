@@ -238,6 +238,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	Player* Alex = dynamic_cast<Player*>(Containers::hero_table["Shango"]);
 
 
+
 	//draws the logo on startup
 	gameplay_functions->draw_logo(Alex);
 	tBuffer->run();
@@ -264,6 +265,9 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	Hero* oya = Containers::hero_table["Oya"];
 	oya->set_busy(0);//added for testing
 	heroes.push_back(oya);
+
+	yemoja->rel[1]->addNotoriety(-50);
+	yemoja->rel[1]->addStrength(-50);
 
 	vector<vector<Texture*>> starting_location;
 	
@@ -943,7 +947,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 						Alliance* curr_alliance = yemoja->getVillage()->get_alliance();
 						Alliance* other_alliance = other_hero->getVillage()->get_alliance();
 
-						if (curr_alliance != other_alliance)
+						if (curr_alliance != other_alliance && yemoja->SUGG_ACT_STATUS != 1)
 						{
 							AIController::reevaluate_state(YEMOJA, with_hero);
 						}
