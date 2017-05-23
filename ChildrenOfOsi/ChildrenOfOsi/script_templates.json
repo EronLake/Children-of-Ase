@@ -311,15 +311,75 @@
 	 }
     },
 
-	"Ask_For_Teaching_Templates": {
+	"Request_Teaching_Templates": {
 	 "1": {
-        "1": "Ask_For_Teaching"
+        "1": "Request_Teaching"
 	 }
     },
 
 	"Teach_Templates": {
 	 "1": {
         "1": "Teach"
+	 }
+    },
+
+	"Confirm Teach_Templates": {
+	 "1": {
+        "1": "Confirm Teach"
+	 }
+    },
+
+	"Teach Fireball_Templates": {
+	 "1": {
+        "1": "Teach Fireball"
+	 }
+    },
+
+	"Teach Fireball 1_Templates": {
+	 "1": {
+        "1": "Teach Fireball 1"
+	 }
+    },
+
+	"Teach Fireball 2_Templates": {
+	 "1": {
+        "1": "Teach Fireball 2"
+	 }
+    },
+
+	"Teach Fireball 3_Templates": {
+	 "1": {
+        "1": "Teach Fireball 3"
+	 }
+    },
+
+	"Teach Spin_Templates": {
+	 "1": {
+        "1": "Teach Spin"
+	 }
+    },
+
+	"Teach Spin 1_Templates": {
+	 "1": {
+        "1": "Teach Spin 1"
+	 }
+    },
+
+	"Teach Spin 2_Templates": {
+	 "1": {
+        "1": "Teach Spin 2"
+	 }
+    },
+
+	"Teach Spin 3_Templates": {
+	 "1": {
+        "1": "Teach Spin 3"
+	 }
+    },
+
+    "Already Taught_Templates": {
+	 "1": {
+        "1": "Already Taught"
 	 }
     },
 

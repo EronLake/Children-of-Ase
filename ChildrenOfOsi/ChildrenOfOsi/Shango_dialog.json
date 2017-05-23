@@ -408,12 +408,12 @@
         "5": "Peace huh. Sounds attractive. I'm in. I'll do it."
     },
 
-	"Ask_For_Teaching": {
-        "1": "I would like to be taught by you.",
-        "2": "I know that you are both wise and strong, and would greatly appreciate it if you could share some of that strength and wisdom with me.",
-		"3": "I know that you are both wise and strong, and would greatly appreciate it if you could share some of that strength and wisdom with me.",
-        "4": "I know that you are both wise and strong, and would greatly appreciate it if you could share some of that strength and wisdom with me.",
-        "5": "I know that you are both wise and strong, and would greatly appreciate it if you could share some of that strength and wisdom with me."
+	"Request_Teaching": {
+        "1": "Would you please teach me one of your skills so that I can be better prepared for the challenges to come?",
+        "2": "Would you please teach me one of your skills so that I can be better prepared for the challenges to come?",
+		"3": "Would you please teach me one of your skills so that I can be better prepared for the challenges to come?",
+        "4": "Would you please teach me one of your skills so that I can be better prepared for the challenges to come?",
+        "5": "Would you please teach me one of your skills so that I can be better prepared for the challenges to come?"
     },
 
 	"Teach": {
@@ -422,6 +422,14 @@
         "3": "I suppose teaching you wouldn't hurt.",
         "4": "Of course I would be fine teaching you.",
         "5": "I would love to teach you. I can probably learn some things myself by teaching you."
+    },
+
+	"Confirm Teach": {
+        "1": "I really wanted to learn from you, but I guess I will give up for now then.",
+        "2": "I really wanted to learn from you, but I guess I will give up for now then.",
+        "3": "I really wanted to learn from you, but I guess I will give up for now then.",
+        "4": "I really wanted to learn from you, but I guess I will give up for now then.",
+        "5": "I really wanted to learn from you, but I guess I will give up for now then."
     },
 
 	"Offer_Teaching": {

@@ -541,9 +541,9 @@
 
      },
 	 "conversation_point_4" : {
-	      "name" : "Ask_For_Teaching",
-          "icon" : "",
-	      "template" : "Ask_For_Teaching",
+	      "name" : "Request_Teaching",
+          "icon" : "scp",
+	      "template" : "Request_Teaching",
 		  "honor" : 0,
 		  "pride": 0,
 		  "aggression": 0,
@@ -765,9 +765,9 @@
     },
 	"reply_point_4" : {
 	      "name" : "Teach",
-          "icon" : "",
+          "icon" : "srp",
 	      "template" : "Teach",
-		  "corresponding_conv_point": "Ask_For_Teaching",
+		  "corresponding_conv_point": "Request_Teaching",
 		  "honor" : 0,
 		  "pride": 0,
 		  "aggression": 0,

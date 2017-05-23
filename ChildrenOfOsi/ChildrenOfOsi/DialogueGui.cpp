@@ -307,6 +307,12 @@ void DialogueGui::drawGuiText()
 			DialogueGui::OPTIONS_WIDTH, DialogueGui::OPTIONS_HEIGHT,
 			text_color_selected);
 		break;
+	case 12:
+		GameWindow::createText("Next",
+			DialogueGui::OPTIONS_X, DialogueGui::OPTIONS_Y + (DialogueGui::LINE_SPACING * 1),
+			DialogueGui::OPTIONS_WIDTH, DialogueGui::OPTIONS_HEIGHT,
+			text_color_selected);
+		break;
   }
 }
 

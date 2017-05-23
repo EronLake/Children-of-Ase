@@ -1163,6 +1163,14 @@ void Input::InputCheck()
 							DialogueController::state = 7;
 						}
 					}
+					else if (DialogueController::getState() == 12) {
+						count = 10;
+						DialogueController::teach_move_counter++;
+						DialogueController::load_teach_dialog();
+						if (DialogueController::teach_move_counter == 3) {
+							DialogueController::state = 7;
+						}
+					}
 				}
 			}
 		}

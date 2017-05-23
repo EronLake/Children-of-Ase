@@ -96,6 +96,7 @@ bool DialogueController::first_q_press = false;
 bool DialogueController::took_advice = false;
 
 int DialogueController::shrine_talk_counter = 0;
+int DialogueController::teach_move_counter = 0;
 
 bool DialogueController::first_buff = true;
 
@@ -318,6 +319,18 @@ void DialogueController::PlayerConversationPoint()
 				}
 			}
 			
+		}
+		if (player_conv_point_choice == "Request_Teaching") {
+			if (temp_hero->rel[player->name]->getAffinity() >= 60 && temp_hero->rel[player->name]->getStrength() >= 50)
+				accepted_action = true;
+			else
+				accepted_action = false;
+			//handles the case where the player has already learned this hero's skill
+			//add more cases for more heros later
+			if (player->can_fire && temp_hero->name == YEMOJA)//case where player already learned Yemoja's move
+				accepted_action = false;
+			if(player->can_spin && temp_hero->name == OYA)//case where player already learned Oya's move
+				accepted_action = false;
 		}
 		state = 5;
 	}
@@ -888,7 +901,7 @@ void DialogueController::otherResponse(std::string info, std::string hero_topic)
 		return;
 	}
 
-	if (state != 8) {
+	if (state != 8 && state != 12) {
 		dialogue_point line = dialogue.choose_reply_pt(info, optionsIndex, curr_conversation_log,temp_hero);
 		replyString = line[ConvPointName];
 
@@ -1042,6 +1055,33 @@ void DialogueController::otherResponse(std::string info, std::string hero_topic)
 			}
 			state = 8;
 		}
+		else if (replyString == "Teach") {
+			//calls action start if the question is asked at all
+			//PlayerActExecFunctions::execute_start("Spar", temp_hero);
+
+			//check if I want to accept
+			if (accepted_action) {
+				dialogue_point diog_pt = { "Teach","Teach","",curr_hero_topic,"1" };
+				std::string reply_pt_sentence = dialogue.gen_dialog(diog_pt, temp_hero);
+				replace_all(reply_pt_sentence, "HERO", curr_hero_topic);
+				message = other->getName() + ": " + reply_pt_sentence + "\n\n";
+				//state = 12;
+				
+			}
+			else {
+				/////////////need to be changed to correct calls/dialog if not accepted///////////////////
+				dialogue_point diog_pt;
+				if((temp_hero->name == YEMOJA && player->can_fire) || (temp_hero->name == OYA && player->can_spin))
+					diog_pt = { "Already Taught","Already Taught","",curr_hero_topic,"1" };
+				else
+				    diog_pt = { "Teach","Teach","",curr_hero_topic,"1" };
+				std::string reply_pt_sentence = dialogue.gen_dialog_negative(diog_pt, temp_hero);
+				replace_all(reply_pt_sentence, "HERO", curr_hero_topic);
+				message = other->getName() + ": " + reply_pt_sentence + "\n\n";
+				//state = 8;
+			}
+			state = 8;
+		}
 		else {
 			state = 3;
 			otherConversationPoint(line);
@@ -1065,6 +1105,7 @@ void DialogueController::otherResponse(std::string info, std::string hero_topic)
 				//calls action end if the question is denied otherwise called on cmpletion of the action
 				PlayerActExecFunctions::execute_end(false);
 			}
+			state = 9;
 		}
 		else if (replyString == "Accept Duel") {
 			//choose different dialog if they denied the action
@@ -1082,6 +1123,7 @@ void DialogueController::otherResponse(std::string info, std::string hero_topic)
 				//calls action end if the question is denied otherwise called on cmpletion of the action
 				PlayerActExecFunctions::execute_end(false);
 			}
+			state = 9;
 		}
 		else if (replyString == "Accept Spar Request") {
 			//choose different dialog if they denied the action
@@ -1100,6 +1142,7 @@ void DialogueController::otherResponse(std::string info, std::string hero_topic)
 				//calls action end if the question is denied otherwise called on cmpletion of the action
 				//PlayerActExecFunctions::execute_end(false);
 			}
+			state = 9;
 		}
 		else if (replyString == "Take Advice To Fight") {
 			//choose different dialog if they denied the action
@@ -1134,6 +1177,7 @@ void DialogueController::otherResponse(std::string info, std::string hero_topic)
 				//calls action end if the question is denied otherwise called on cmpletion of the action
 				//PlayerActExecFunctions::execute_end(false);
 			}
+			state = 9;
 		}
 		else if (replyString == "Take Advice To Conquer") {
 			//choose different dialog if they denied the action
@@ -1167,6 +1211,7 @@ void DialogueController::otherResponse(std::string info, std::string hero_topic)
 				//calls action end if the question is denied otherwise called on cmpletion of the action
 				//PlayerActExecFunctions::execute_end(false);
 			}
+			state = 9;
 		}
 		else if (replyString == "Take Advice To Send Peace Offering To") {
 			//choose different dialog if they denied the action
@@ -1184,6 +1229,7 @@ void DialogueController::otherResponse(std::string info, std::string hero_topic)
 				//calls action end if the question is denied otherwise called on cmpletion of the action
 				//PlayerActExecFunctions::execute_end(false);
 			}
+			state = 9;
 		}
 		else if (replyString == "Take Advice To Ally With") {
 			//choose different dialog if they denied the action
@@ -1217,8 +1263,38 @@ void DialogueController::otherResponse(std::string info, std::string hero_topic)
 				//calls action end if the question is denied otherwise called on cmpletion of the action
 				//PlayerActExecFunctions::execute_end(false);
 			}
+			state = 9;
 		}
-		state = 9;
+		else if (replyString == "Teach") {
+			//calls action start if the question is asked at all
+			//PlayerActExecFunctions::execute_start("Spar", temp_hero);
+
+			//check if I want to accept
+			if (accepted_action) {
+				dialogue_point diog_pt;
+				if (temp_hero->name == YEMOJA){ //if Yemoja is doing the teaching
+					diog_pt = { "Teach Fireball","Teach Fireball","",curr_hero_topic,"1" };
+				    player->can_fire = true;//enable player to shoot fireball
+			    }
+				else if (temp_hero->name == OYA) {//if Oya is doing the teaching
+					diog_pt = { "Teach Spin","Teach Spin","",curr_hero_topic,"1" };
+					player->can_spin = true;//enable player to do spin slash
+				}	
+				std::string reply_pt_sentence = dialogue.gen_dialog(diog_pt, temp_hero);
+				replace_all(reply_pt_sentence, "HERO", curr_hero_topic);
+				message = other->getName() + ": " + reply_pt_sentence + "\n\n";
+				state = 12;
+			}
+			else {
+				/////////////need to be changed to correct calls/dialog if not accepted///////////////////
+				dialogue_point diog_pt = { "Confirm Teach","Confirm Teach","",curr_hero_topic,"1" };
+				std::string reply_pt_sentence = dialogue.gen_dialog_negative(diog_pt, player);
+				replace_all(reply_pt_sentence, "HERO", curr_hero_topic);
+				message = player->getName() + ": " + reply_pt_sentence + "\n\n";
+				state = 9;
+			}
+		}
+		//state = 9;
 	}
 }
 
@@ -1615,6 +1691,7 @@ void DialogueController::exitDialogue()
 		quited_gui = true;
 		first_q_press = false;
 		shrine_talk_counter = 0;
+		teach_move_counter = 0;
 	}
 	else {
 		state = 7;
@@ -2022,5 +2099,65 @@ bool DialogueController::check_advice_acceptance(Player* p, Hero* npc) {
 		return false;
 	}
 
+}
+
+/*Used for breaking up the dialog that a Hero says when teaching the player a skill into multiple different screens,
+forcing the player to select the "Next" option to view more text until eventually being forced to "EXIT".*/
+void DialogueController::load_teach_dialog()
+{
+	dialogue_point dpoint;
+	Hero* npc = CheckClass::isHero(other);
+	if (npc->name == YEMOJA) {
+		switch (teach_move_counter) {
+		case 1:
+			dpoint = { "Teach Fireball 1","Teach Fireball 1" };
+			break;
+		case 2:
+			dpoint = { "Teach Fireball 2","Teach Fireball 2" };
+			break;
+		case 3:
+			dpoint = { "Teach Fireball 3","Teach Fireball 3" };
+			break;
+		}
+
+	}
+	else if (npc->name == OYA) {
+		switch (teach_move_counter) {
+		case 1:
+			dpoint = { "Teach Spin 1","Teach Spin 1" };
+			break;
+		case 2:
+			dpoint = { "Teach Spin 2","Teach Spin 2" };
+			break;
+		case 3:
+			dpoint = { "Teach Spin 3","Teach Spin 3" };
+			break;
+		}
+	}
+	std::string conversation_pt_sentence = dialogue.gen_dialog(dpoint,npc);
+	message = other->getName() + ": " + conversation_pt_sentence;
+	if (teach_move_counter == 3)
+		state = 7;
+	else
+		state = 12;
+}
+
+void DialogueController::duel_pop_up(Action* act)
+{
+	other = act->getReceiver();
+	dialogue_point dpoint = {"Finish Duel","Finish Duel"};
+	std::string conversation_pt_sentence = dialogue.gen_dialog(dpoint, act->getReceiver());
+	message = act->getReceiver()->getName() + ": " + conversation_pt_sentence;
+	state = 7;
+
+}
+
+void DialogueController::spar_pop_up(Action* act)
+{
+	other = act->getReceiver();
+	dialogue_point dpoint = {"Finish Spar","Finish Spar"};
+	std::string conversation_pt_sentence = dialogue.gen_dialog(dpoint, act->getReceiver());
+	message = act->getReceiver()->getName() + ": " + conversation_pt_sentence;
+	state = 7;
 }
 
