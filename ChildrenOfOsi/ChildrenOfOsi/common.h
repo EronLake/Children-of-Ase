@@ -40,10 +40,10 @@
 //Texture* rect = new Texture();
 //toggles debug longging statements 
 
-#define DEBUG 0
+#define DEBUG 1
 #define MAP_EDITOR 0
-#define START_FULLSCREEN true
-#define MOUSE_VISIBLE false
+#define START_FULLSCREEN false
+#define MOUSE_VISIBLE true
 #define LOAD_REGIONS 1 //0==Load Config should be empty || 1==Load All || 2==Load Oasis || 3==Load Jungle
 #define LOAD_MAP 1
 #define RIVER_COLLIDE 0
