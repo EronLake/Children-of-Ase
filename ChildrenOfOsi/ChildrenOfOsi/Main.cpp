@@ -668,11 +668,10 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	yemoja->setMode(WANDER);
 	short M = GetKeyState('M') >> 15;
 
-	//osi::GameWindow::init();
 	LOG("PAST WINDOW INIT ***********************");
 	clock_t start_tick, current_ticks, delta_ticks;
 	clock_t fps = 0;
-	int fs = 120; //120
+	int fs = 65; //120
 	int wait_time = fs * 3; //always wait 3 seconds	
 	int count = 0;
 	int state = 0;
@@ -707,7 +706,6 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 
 */
   Tutorial::launchStage(Tutorial::Stage::GAME_START, *iController, true);
-
 	current_game_state = game_state::main_menu;
 
 	//insert all of the immovable objects into the quad tree
@@ -773,7 +771,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 			}
 
 			if (start) {
-				gameplay_functions->change_song("Change", nullptr, RegionState::next_region.getRTheme(),RegionState::soundType::region_music);
+				gameplay_functions->change_song("Change", nullptr, RegionState::next_region.getRTheme(), RegionState::soundType::region_music);
 				start = !start;
 			}
 
@@ -783,56 +781,6 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
         else if(!Tutorial::isStageComplete(Tutorial::Stage::INTRO02))
           Tutorial::launchStage(Tutorial::Stage::INTRO02, *iController, true);
       }
-
-			//Audio State code. might be moved into RegionState itself
-
-			//commented out for demo
-			/*if (Alex->getX() > 660 && Alex->getX() < 10847.5) { //Ogun Desert
-			if (Alex->getY() < 3523.33) {
-			if (RegionState::current_region == *Desert)
-			RegionState::next_region = *Marsh;
-
-			}
-			else {
-			if (RegionState::current_region == *Marsh) {
-			RegionState::next_region = *Desert;
-			}
-			}
-			}
-			if (Alex->getX() > 10847.5 && Alex->getX() < 12395.5) {
-			if (Alex->getY() < 14441) {
-			if (RegionState::current_region == *Jungle)
-			RegionState::next_region = *Mountain;
-			}
-			else {
-			if (RegionState::current_region == *Mountain) {
-			RegionState::next_region = *Jungle;
-			}
-			}
-			}
-			if (Alex->getX() > 660 && Alex->getX() < 25000) {
-			if (Alex->getY() < 5132.23) {
-
-			if (RegionState::current_region == *Mountain) {
-			RegionState::next_region = *Marsh;
-			}
-			}
-			else {
-			if (RegionState::current_region == *Marsh)
-			RegionState::next_region = *Mountain;
-			}
-			}
-			if (Alex->getX() > 3479.67 && Alex->getX() < 10847.5) {
-			if (Alex->getY() < 17000.7) {
-			if (RegionState::current_region == *Jungle)
-			RegionState::next_region = *Desert;
-			}
-			else {
-			if (RegionState::current_region == *Desert) {
-			RegionState::next_region = *Jungle;
-			}
-			}
-			}*/
 
 			//only 3 regions for demo
 			if (Alex->getX() > 660 && Alex->getX() < 25000) { //Ogun Desert
@@ -878,7 +826,9 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 				}
 
 			}
+
 			start_tick = clock();
+
 			if (!MAP_EDITOR) {
 				//_QuadTree->clearMovable();
 				grid_worldobj->clear_and_reinsert(movVec);
@@ -958,39 +908,16 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 			questM->update();
 
 
-			//draw
 			if (state == 0) {
 				gameplay_functions->draw_frame(Alex);
-				//cout << "player grid loc is " << Alex->grid_location.first << ", " << Alex->grid_location.second << endl;
 			}
-			//draw
 			else if (state > 0) {
 				for (auto itr : Containers::hero_table)
-				{
 					gameplay_functions->stop(itr.second);
-				}
 				gameplay_functions->drawDiaGui(Alex);
 			}
 
-			//run task buffer
 			iController->InputCheck();
-
-			//pool.push(test);
-			
-			//cout << "size of buffer is " << tBuffer->queue_buffer.size() << " and physics buffer size is " << tBuffer->physics_buffer.size() << endl;
-
-			//cout << "shango's position BEFORE is at " << Alex->getX() << ", " << Alex->getY() << endl;
-			//iterate through physics_buffer
-
-			//while(tBuffer->physics_buffer_isEmpty() == false) {
-			//	Task* curr_task = tBuffer->pop_physics();
-			//	cout << "num of idle threads is " << pool.n_idle() << endl;
-			//	pool.push([&,tBuffer,curr_task](int id){ tBuffer->assignTask(0,curr_task); });
-			//}
-			//tBuffer->physics_buffer_empty();
-			//pool.stop(true);
-			//cout << "DONE WITH PHYSICS TASKS" << endl;
-			//cout << "shango's position AFTER is at " << Alex->getX() << ", " << Alex->getY() << endl;
 			tBuffer->run();
 
 			/////////////////////////////////////////////////////////////////
@@ -1100,6 +1027,10 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
         _CrtDumpMemoryLeaks();
         return;
       }
+
+      for(auto itr : Containers::hero_table)
+        gameplay_functions->stop(itr.second);
+      gameplay_functions->draw_frame(Alex);
 
       start_tick = clock();
       iController->InputCheck();

@@ -123,8 +123,10 @@ void HUD::drawHUD(WorldObj* obj)
   this->drawKeybindDisplay();
 
   // Framerate information for debugging
-  GameWindow::createText("FPS: " + to_string(FPS), 450, 20, 150, 80, {0.0F, 0.0F, 0.0F});
-  GameWindow::createText("AVG: " + to_string(AVG), 525, 20, 150, 80, {0.0F, 0.0F, 0.0F});
+  if(DEBUG) {
+    GameWindow::createText("FPS: " + to_string(FPS), 450, 20, 150, 80, {0.0F, 0.0F, 0.0F});
+    GameWindow::createText("AVG: " + to_string(AVG), 525, 20, 150, 80, {0.0F, 0.0F, 0.0F});
+  }
 
   // Draw the listing of active quests
   if(HUD::show_active_quests) {
