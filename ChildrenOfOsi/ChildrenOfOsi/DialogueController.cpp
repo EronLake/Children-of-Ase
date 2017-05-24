@@ -120,6 +120,23 @@ void DialogueController::PlayerChoose()
 		player->filter_move_to(temp_hero);
 
 	options = dialogue.get_possible_conv_pts();
+	if (temp_hero) {
+		remove_dialog_option("Ask_To_Duel",NotorietyIcon);
+		remove_dialog_option("Ask_To_Spar", StrengthIcon);
+		add_dialog_option("Ask_To_Duel",NotorietyIcon);
+		add_dialog_option("Ask_To_Spar",StrengthIcon);
+
+		if(temp_hero->rel[player->name]->getAffinity() <= 30 && temp_hero->rel[player->name]->getStrength() <= 60)
+		    set_selectable(true, "Ask_To_Duel",NotorietyIcon);
+		else
+			set_selectable(false, "Ask_To_Duel", NotorietyIcon);
+
+		if(temp_hero->rel[player->name]->getStrength() >= 50 && temp_hero->rel[player->name]->getAffinity() <= 85 && temp_hero->rel[player->name]->getNotoriety() <= 75)
+			set_selectable(true, "Ask_To_Spar", StrengthIcon);
+		else
+			set_selectable(false, "Ask_To_Spar", StrengthIcon);
+	}
+
 	if (first_call) {
 		/*add "Ask_About" and "Advise_To" and "Ask For Quest" conversation points to player's
 		dialog options if they are speaking to a hero*/
@@ -2015,7 +2032,7 @@ void DialogueController::move_to_selectable_down() {
 		return;
 	for (int i = 0; i < DialogueController::getOptions().size() - 1; ++i) {
 		if (DialogueController::getOptions()[DialogueController::scroll_control + i ][4] == "1") {
-			if (i != 0 || DialogueController::getOptions().size() == 2) {
+			if (i != 0 || (DialogueController::getOptions().size() == 2 && DialogueController::getOptions()[1][4] == "1")) {
 				scroll_counter++;
 				break;
 			}
@@ -2053,7 +2070,7 @@ void DialogueController::move_to_selectable_up() {
 void DialogueController::set_selectable(bool is_selectable, std::string option_name, int icon) {
 	std::vector<std::vector<std::vector<std::string>>> tmp_conv_points;
 	tmp_conv_points = dialogue.get_possible_conv_pts();
-	for (int i = 0; i < tmp_conv_points.size(); ++i) {
+	for (int i = 0; i < tmp_conv_points[icon].size(); ++i) {
 		if (tmp_conv_points[icon][i][ConvPointName] == option_name) {
 			if (is_selectable)
 				dialogue.get_possible_conv_pts_ref()[icon][i][IsSelectable] = "1";
@@ -2078,10 +2095,12 @@ icon that the option is currently associated with*/
 void DialogueController::remove_dialog_option(std::string option_name, int icon){
 	std::vector<std::vector<std::vector<std::string>>> tmp_opts;
 	tmp_opts = dialogue.get_possible_conv_pts();
-	for (int i = 0; i < tmp_opts.size();) {
-		if (tmp_opts[icon][i][ConvPointName] == option_name)
+	for (int i = 0; i < tmp_opts[icon].size();) {
+		if (tmp_opts[icon][i][ConvPointName] == option_name) {
 			dialogue.get_possible_conv_pts_ref()[icon].erase
 			(dialogue.get_possible_conv_pts_ref()[icon].begin() + i);
+			break;
+		}
 		else
 			++i;
 	}
