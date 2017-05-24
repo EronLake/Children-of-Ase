@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "Input.h"
 #include <conio.h>
-#include <Windows.h>
+#include <Windows.h>_recVec
 #include "Soldier.h"
 #include "Attack.h"
 #include "CheckClass.h"
