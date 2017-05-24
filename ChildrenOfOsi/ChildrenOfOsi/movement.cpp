@@ -81,7 +81,7 @@ int Movement::move_up(WorldObj* obj) {
 					cout << "collision" << endl;
 					LOG("failed to move up. collision.");
 					//obj->shiftY((moveSpeed*speed_magnifier));
-					obj->shiftY(moveSpeed*speed_magnifier);
+					obj->shiftY(moveSpeed*speed_magnifier*5);
 					break;
 				}
 			//}
@@ -140,7 +140,7 @@ int Movement::move_up_left(WorldObj* obj) {
 					//	// EVEN AFTER I FLIP THE LINES ACROSS THE Y AXIS, WHEN THE PLAYER MOVES DOWN, THE Y COORD IS INCREASING, SO IT"S AS IF HE IS GOING UP!!!
 					//}
 					LOG("failed to move up. collision.");
-					obj->shiftY(diagYSpeed*speed_magnifier);
+					obj->shiftY(diagYSpeed*speed_magnifier*5);
 					break;
 				}
 			//}
@@ -172,7 +172,7 @@ int Movement::move_up_left(WorldObj* obj) {
 				//	// EVEN AFTER I FLIP THE LINES ACROSS THE Y AXIS, WHEN THE PLAYER MOVES DOWN, THE Y COORD IS INCREASING, SO IT"S AS IF HE IS GOING UP!!!
 				//}
 				LOG("failed to move up. collision.");
-				obj->shiftX(diagXSpeed*speed_magnifier);
+				obj->shiftX(diagXSpeed*speed_magnifier*5);
 				break;
 			}
 		}
@@ -228,7 +228,7 @@ int Movement::move_up_right(WorldObj* obj) {
 					//	// EVEN AFTER I FLIP THE LINES ACROSS THE Y AXIS, WHEN THE PLAYER MOVES DOWN, THE Y COORD IS INCREASING, SO IT"S AS IF HE IS GOING UP!!!
 					//}
 					LOG("failed to move up. collision.");
-					obj->shiftY(diagYSpeed*speed_magnifier);
+					obj->shiftY(diagYSpeed*speed_magnifier*5);
 					break;
 				}
 			//}
@@ -260,7 +260,7 @@ int Movement::move_up_right(WorldObj* obj) {
 					//	// EVEN AFTER I FLIP THE LINES ACROSS THE Y AXIS, WHEN THE PLAYER MOVES DOWN, THE Y COORD IS INCREASING, SO IT"S AS IF HE IS GOING UP!!!
 					//}
 					LOG("failed to move up. collision.");
-					obj->shiftX(-diagXSpeed*speed_magnifier);
+					obj->shiftX(-diagXSpeed*speed_magnifier*5);
 					break;
 				}
 		}
@@ -319,7 +319,7 @@ int Movement::move_down(WorldObj* obj) {
 					}*/
 					cout << "collision" << endl;
 					LOG("failed to move up. collision.");
-					obj->shiftY(-moveSpeed*speed_magnifier);
+					obj->shiftY(-moveSpeed*speed_magnifier*5);
 					break;
 				}
 			//}
@@ -378,7 +378,7 @@ int Movement::move_down_left(WorldObj* obj) {
 					//	// EVEN AFTER I FLIP THE LINES ACROSS THE Y AXIS, WHEN THE PLAYER MOVES DOWN, THE Y COORD IS INCREASING, SO IT"S AS IF HE IS GOING UP!!!
 					//}
 					LOG("failed to move up. collision.");
-					obj->shiftY(-diagYSpeed*speed_magnifier);
+					obj->shiftY(-diagYSpeed*speed_magnifier*5);
 					break;
 				}
 			//}
@@ -411,7 +411,7 @@ int Movement::move_down_left(WorldObj* obj) {
 				//	// EVEN AFTER I FLIP THE LINES ACROSS THE Y AXIS, WHEN THE PLAYER MOVES DOWN, THE Y COORD IS INCREASING, SO IT"S AS IF HE IS GOING UP!!!
 				//}
 				LOG("failed to move up. collision.");
-				obj->shiftX(diagXSpeed*speed_magnifier);
+				obj->shiftX(diagXSpeed*speed_magnifier*5);
 				break;
 			}
 		}
@@ -468,7 +468,7 @@ int Movement::move_down_right(WorldObj* obj) {
 					//	// EVEN AFTER I FLIP THE LINES ACROSS THE Y AXIS, WHEN THE PLAYER MOVES DOWN, THE Y COORD IS INCREASING, SO IT"S AS IF HE IS GOING UP!!!
 					//}
 					LOG("failed to move up. collision.");
-					obj->shiftY(-diagYSpeed*speed_magnifier);
+					obj->shiftY(-diagYSpeed*speed_magnifier*5);
 					break;
 				}
 			//}
@@ -499,7 +499,7 @@ int Movement::move_down_right(WorldObj* obj) {
 				//	// EVEN AFTER I FLIP THE LINES ACROSS THE Y AXIS, WHEN THE PLAYER MOVES DOWN, THE Y COORD IS INCREASING, SO IT"S AS IF HE IS GOING UP!!!
 				//}
 				LOG("failed to move up. collision.");
-				obj->shiftX(-diagXSpeed*speed_magnifier);
+				obj->shiftX(-diagXSpeed*speed_magnifier*5);
 				break;
 			}
 		}
@@ -560,7 +560,7 @@ int Movement::move_left(WorldObj* obj) {
 					}*/
 					cout << "collision" << endl;
 					LOG("failed to move up. collision.");
-					obj->shiftX(moveSpeed*speed_magnifier);
+					obj->shiftX(moveSpeed*speed_magnifier*5);
 					break;
 				}
 			//}
@@ -621,7 +621,7 @@ int Movement::move_right(WorldObj* obj) {
 					}
 					cout << "collision" << endl;
 					LOG("failed to move up. collision.");
-					obj->shiftX(-(moveSpeed*speed_magnifier));
+					obj->shiftX(-(moveSpeed*speed_magnifier)*5);
 					break;
 				}
 			//}
