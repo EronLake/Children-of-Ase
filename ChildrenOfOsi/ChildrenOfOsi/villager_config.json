@@ -1,0 +1,578 @@
+{
+	"Oasis_Man_1" : {
+		"x" : 50.45,
+		"y" : 134.65,
+		"width" : 150,
+		"hight" : 150,
+		"name" : "Oasis_Man_1",
+		"bodyx1" : 50.0,
+		"bodyx2" : 50.0,
+		"bodyy1" : 50.0,
+		"bodyy2" : 50.0,
+		"health": 80,
+		"sprites": {
+			"setTexture": {"0":"Shango_Idle_S", "1":22},
+			"setIdleTexture": {"0":"Shango_Idle_S", "1":22},
+
+			"id_up": {"0":"SoldierOasis_Idle_N","1":22},
+			"id_down": {"0":"Shango_Idle_S","1":22},
+			"id_left": {"0":"SoldierOasis_Idle_W","1":22},
+			"id_right": {"0":"SoldierOasis_Idle_E","1":22},
+
+			"walk_up": {"0":"SoldierOasis_Walk_N","1":32},
+			"walk_down": {"0":"SoldierOasis_Walk_S","1":32},
+			"walk_left": {"0":"SoldierOasis_Walk_W","1":32},
+			"walk_right": {"0":"SoldierOasis_Walk_E","1":32},
+
+			"sprint_up": {"0":"SoldierOasis_Sprint_N","1":16},
+			"sprint_down": {"0":"SoldierOasis_Sprint_S","1":16},
+			"sprint_left": {"0":"SoldierOasis_Sprint_W","1":16},
+			"sprint_right": {"0":"SoldierOasis_Sprint_E","1":16}
+		}
+	},
+	"Oasis_Man_2" : {
+		"x" : 60.45,
+		"y" : 134.65,
+		"width" : 150,
+		"hight" : 150,
+		"name" : "Oasis_Man_2",
+		"bodyx1" : 50.0,
+		"bodyx2" : 50.0,
+		"bodyy1" : 50.0,
+		"bodyy2" : 50.0,
+		"health": 80,
+		"max_stamina": 100,
+		"sprites": {
+			"setTexture": {"0":"Shango_Idle_S", "1":22},
+			"setIdleTexture": {"0":"Shango_Idle_S", "1":22},
+
+			"id_up": {"0":"SoldierOasis_Idle_N","1":22},
+			"id_down": {"0":"Shango_Idle_S","1":22},
+			"id_left": {"0":"SoldierOasis_Idle_W","1":22},
+			"id_right": {"0":"SoldierOasis_Idle_E","1":22},
+
+			"walk_up": {"0":"SoldierOasis_Walk_N","1":32},
+			"walk_down": {"0":"SoldierOasis_Walk_S","1":32},
+			"walk_left": {"0":"SoldierOasis_Walk_W","1":32},
+			"walk_right": {"0":"SoldierOasis_Walk_E","1":32},
+
+			"sprint_up": {"0":"SoldierOasis_Sprint_N","1":16},
+			"sprint_down": {"0":"SoldierOasis_Sprint_S","1":16},
+			"sprint_left": {"0":"SoldierOasis_Sprint_W","1":16},
+			"sprint_right": {"0":"SoldierOasis_Sprint_E","1":16}
+		}
+	},
+	
+	"Oasis_Man_3" : {
+		"x" : 70.45,
+		"y" : 134.65,
+		"width" : 150,
+		"hight" : 150,
+		"name" : "Oasis_Man_3",
+		"bodyx1" : 50.0,
+		"bodyx2" : 50.0,
+		"bodyy1" : 50.0,
+		"bodyy2" : 50.0,
+		"health": 80,
+		"sprites": {
+			"setTexture": {"0":"Shango_Idle_S", "1":22},
+			"setIdleTexture": {"0":"Shango_Idle_S", "1":22},
+
+			"id_up": {"0":"SoldierOasis_Idle_N","1":22},
+			"id_down": {"0":"Shango_Idle_S","1":22},
+			"id_left": {"0":"SoldierOasis_Idle_W","1":22},
+			"id_right": {"0":"SoldierOasis_Idle_E","1":22},
+
+			"walk_up": {"0":"SoldierOasis_Walk_N","1":32},
+			"walk_down": {"0":"SoldierOasis_Walk_S","1":32},
+			"walk_left": {"0":"SoldierOasis_Walk_W","1":32},
+			"walk_right": {"0":"SoldierOasis_Walk_E","1":32},
+
+			"sprint_up": {"0":"SoldierOasis_Sprint_N","1":16},
+			"sprint_down": {"0":"SoldierOasis_Sprint_S","1":16},
+			"sprint_left": {"0":"SoldierOasis_Sprint_W","1":16},
+			"sprint_right": {"0":"SoldierOasis_Sprint_E","1":16}
+		}
+	},
+	"Oasis_Woman_1" : {
+		"x" : 80.45,
+		"y" : 134.65,
+		"width" : 150,
+		"hight" : 150,
+		"name" : "Oasis_Woman_1",
+		"bodyx1" : 50.0,
+		"bodyx2" : 50.0,
+		"bodyy1" : 50.0,
+		"bodyy2" : 50.0,
+		"health": 80,
+		"sprites": {
+			"setTexture": {"0":"Shango_Idle_S", "1":22},
+			"setIdleTexture": {"0":"Shango_Idle_S", "1":22},
+
+			"id_up": {"0":"SoldierOasis_Idle_N","1":22},
+			"id_down": {"0":"Shango_Idle_S","1":22},
+			"id_left": {"0":"SoldierOasis_Idle_W","1":22},
+			"id_right": {"0":"SoldierOasis_Idle_E","1":22},
+
+			"walk_up": {"0":"SoldierOasis_Walk_N","1":32},
+			"walk_down": {"0":"SoldierOasis_Walk_S","1":32},
+			"walk_left": {"0":"SoldierOasis_Walk_W","1":32},
+			"walk_right": {"0":"SoldierOasis_Walk_E","1":32},
+
+			"sprint_up": {"0":"SoldierOasis_Sprint_N","1":16},
+			"sprint_down": {"0":"SoldierOasis_Sprint_S","1":16},
+			"sprint_left": {"0":"SoldierOasis_Sprint_W","1":16},
+			"sprint_right": {"0":"SoldierOasis_Sprint_E","1":16}
+		}
+	},
+	"Oasis_Woman_2" : {
+		"x" : 90.45,
+		"y" : 134.65,
+		"width" : 150,
+		"hight" : 150,
+		"name" : "Oasis_Woman_2",
+		"bodyx1" : 50.0,
+		"bodyx2" : 50.0,
+		"bodyy1" : 50.0,
+		"bodyy2" : 50.0,
+		"health": 80,
+		"sprites": {
+			"setTexture": {"0":"Shango_Idle_S", "1":22},
+			"setIdleTexture": {"0":"Shango_Idle_S", "1":22},
+
+			"id_up": {"0":"SoldierOasis_Idle_N","1":22},
+			"id_down": {"0":"Shango_Idle_S","1":22},
+			"id_left": {"0":"SoldierOasis_Idle_W","1":22},
+			"id_right": {"0":"SoldierOasis_Idle_E","1":22},
+
+			"walk_up": {"0":"SoldierOasis_Walk_N","1":32},
+			"walk_down": {"0":"SoldierOasis_Walk_S","1":32},
+			"walk_left": {"0":"SoldierOasis_Walk_W","1":32},
+			"walk_right": {"0":"SoldierOasis_Walk_E","1":32},
+
+			"sprint_up": {"0":"SoldierOasis_Sprint_N","1":16},
+			"sprint_down": {"0":"SoldierOasis_Sprint_S","1":16},
+			"sprint_left": {"0":"SoldierOasis_Sprint_W","1":16},
+			"sprint_right": {"0":"SoldierOasis_Sprint_E","1":16}
+		}
+	},
+	"Oasis_Woman_3" : {
+		"x" : 100.45,
+		"y" : 134.65,
+		"width" : 150,
+		"hight" : 150,
+		"name" : "Oasis_Woman_3",
+		"bodyx1" : 50.0,
+		"bodyx2" : 50.0,
+		"bodyy1" : 50.0,
+		"bodyy2" : 50.0,
+		"health": 80,
+		"sprites": {
+			"setTexture": {"0":"Shango_Idle_S", "1":22},
+			"setIdleTexture": {"0":"Shango_Idle_S", "1":22},
+
+			"id_up": {"0":"SoldierOasis_Idle_N","1":22},
+			"id_down": {"0":"Shango_Idle_S","1":22},
+			"id_left": {"0":"SoldierOasis_Idle_W","1":22},
+			"id_right": {"0":"SoldierOasis_Idle_E","1":22},
+
+			"walk_up": {"0":"SoldierOasis_Walk_N","1":32},
+			"walk_down": {"0":"SoldierOasis_Walk_S","1":32},
+			"walk_left": {"0":"SoldierOasis_Walk_W","1":32},
+			"walk_right": {"0":"SoldierOasis_Walk_E","1":32},
+
+			"sprint_up": {"0":"SoldierOasis_Sprint_N","1":16},
+			"sprint_down": {"0":"SoldierOasis_Sprint_S","1":16},
+			"sprint_left": {"0":"SoldierOasis_Sprint_W","1":16},
+			"sprint_right": {"0":"SoldierOasis_Sprint_E","1":16}
+		}
+	},
+	"Oasis_child_1" : {
+		"x" : 110.45,
+		"y" : 134.65,
+		"width" : 150,
+		"hight" : 150,
+		"name" : "Oasis_child_1",
+		"bodyx1" : 50.0,
+		"bodyx2" : 50.0,
+		"bodyy1" : 50.0,
+		"bodyy2" : 50.0,
+		"health": 80,
+		"sprites": {
+			"setTexture": {"0":"Shango_Idle_S", "1":22},
+			"setIdleTexture": {"0":"Shango_Idle_S", "1":22},
+
+			"id_up": {"0":"SoldierOasis_Idle_N","1":22},
+			"id_down": {"0":"Shango_Idle_S","1":22},
+			"id_left": {"0":"SoldierOasis_Idle_W","1":22},
+			"id_right": {"0":"SoldierOasis_Idle_E","1":22},
+
+			"walk_up": {"0":"SoldierOasis_Walk_N","1":32},
+			"walk_down": {"0":"SoldierOasis_Walk_S","1":32},
+			"walk_left": {"0":"SoldierOasis_Walk_W","1":32},
+			"walk_right": {"0":"SoldierOasis_Walk_E","1":32},
+
+			"sprint_up": {"0":"SoldierOasis_Sprint_N","1":16},
+			"sprint_down": {"0":"SoldierOasis_Sprint_S","1":16},
+			"sprint_left": {"0":"SoldierOasis_Sprint_W","1":16},
+			"sprint_right": {"0":"SoldierOasis_Sprint_E","1":16}
+		}
+	},
+	"Oasis_child_2" : {
+		"x" : 110.45,
+		"y" : 134.65,
+		"width" : 150,
+		"hight" : 150,
+		"name" : "Oasis_child_2",
+		"bodyx1" : 50.0,
+		"bodyx2" : 50.0,
+		"bodyy1" : 50.0,
+		"bodyy2" : 50.0,
+		"health": 80,
+		"sprites": {
+			"setTexture": {"0":"Shango_Idle_S", "1":22},
+			"setIdleTexture": {"0":"Shango_Idle_S", "1":22},
+
+			"id_up": {"0":"SoldierOasis_Idle_N","1":22},
+			"id_down": {"0":"Shango_Idle_S","1":22},
+			"id_left": {"0":"SoldierOasis_Idle_W","1":22},
+			"id_right": {"0":"SoldierOasis_Idle_E","1":22},
+
+			"walk_up": {"0":"SoldierOasis_Walk_N","1":32},
+			"walk_down": {"0":"SoldierOasis_Walk_S","1":32},
+			"walk_left": {"0":"SoldierOasis_Walk_W","1":32},
+			"walk_right": {"0":"SoldierOasis_Walk_E","1":32},
+
+			"sprint_up": {"0":"SoldierOasis_Sprint_N","1":16},
+			"sprint_down": {"0":"SoldierOasis_Sprint_S","1":16},
+			"sprint_left": {"0":"SoldierOasis_Sprint_W","1":16},
+			"sprint_right": {"0":"SoldierOasis_Sprint_E","1":16}
+		}
+	},
+	"Oasis_child_3" : {
+		"x" : 110.45,
+		"y" : 134.65,
+		"width" : 150,
+		"hight" : 150,
+		"name" : "Oasis_child_3",
+		"bodyx1" : 50.0,
+		"bodyx2" : 50.0,
+		"bodyy1" : 50.0,
+		"bodyy2" : 50.0,
+		"health": 80,
+		"sprites": {
+			"setTexture": {"0":"Shango_Idle_S", "1":22},
+			"setIdleTexture": {"0":"Shango_Idle_S", "1":22},
+
+			"id_up": {"0":"SoldierOasis_Idle_N","1":22},
+			"id_down": {"0":"Shango_Idle_S","1":22},
+			"id_left": {"0":"SoldierOasis_Idle_W","1":22},
+			"id_right": {"0":"SoldierOasis_Idle_E","1":22},
+
+			"walk_up": {"0":"SoldierOasis_Walk_N","1":32},
+			"walk_down": {"0":"SoldierOasis_Walk_S","1":32},
+			"walk_left": {"0":"SoldierOasis_Walk_W","1":32},
+			"walk_right": {"0":"SoldierOasis_Walk_E","1":32},
+
+			"sprint_up": {"0":"SoldierOasis_Sprint_N","1":16},
+			"sprint_down": {"0":"SoldierOasis_Sprint_S","1":16},
+			"sprint_left": {"0":"SoldierOasis_Sprint_W","1":16},
+			"sprint_right": {"0":"SoldierOasis_Sprint_E","1":16}
+		}
+	},
+	/*-------------------------------------------------------------------*/
+	/*--------------------       Jungle Villagers      ------------------*/
+	/*-------------------------------------------------------------------*/
+	
+
+	"Jungle_Man_1" : {
+		"soldier_number": 5,
+		"x" : 176.05,
+		"y" : 230.70,
+		"width" : 150,
+		"hight" : 150,
+		"name" : "Jungle_Man_1",
+		"hero_id" : 3,
+		"bodyx1" : 50.0,
+		"bodyx2" : 50.0,
+		"bodyy1" : 50.0,
+		"bodyy2" : 50.0,
+		"health": 80,
+		"sprites": {
+			"setTexture": {"0":"Shango_Idle_S", "1":22},
+			"setIdleTexture": {"0":"Shango_Idle_S", "1":22},
+
+			"id_up": {"0":"SoldierJungle_Idle_N","1":22},
+			"id_down": {"0":"Shango_Idle_S","1":22},
+			"id_left": {"0":"SoldierJungle_Idle_W","1":22},
+			"id_right": {"0":"SoldierJungle_Idle_E","1":22},
+
+			"walk_up": {"0":"SoldierJungle_Walk_N","1":32},
+			"walk_down": {"0":"SoldierJungle_Walk_S","1":32},
+			"walk_left": {"0":"SoldierJungle_Walk_W","1":32},
+			"walk_right": {"0":"SoldierJungle_Walk_E","1":32},
+
+			"sprint_up": {"0":"SoldierJungle_Sprint_N","1":16},
+			"sprint_down": {"0":"SoldierJungle_Sprint_S","1":16},
+			"sprint_left": {"0":"SoldierJungle_Sprint_W","1":16},
+			"sprint_right": {"0":"SoldierJungle_Sprint_E","1":16}
+		}
+	},
+	"Jungle_Man_2" : {
+		"x" : 186.05,
+		"y" : 230.70,
+		"width" : 150,
+		"hight" : 150,
+		"name" : "Jungle_Man_2",
+		"hero_id" : 3,
+		"bodyx1" : 50.0,
+		"bodyx2" : 50.0,
+		"bodyy1" : 50.0,
+		"bodyy2" : 50.0,
+		"health": 80,
+		"sprites": {
+			"setTexture": {"0":"Shango_Idle_S", "1":22},
+			"setIdleTexture": {"0":"Shango_Idle_S", "1":22},
+
+			"id_up": {"0":"SoldierJungle_Idle_N","1":22},
+			"id_down": {"0":"Shango_Idle_S","1":22},
+			"id_left": {"0":"SoldierJungle_Idle_W","1":22},
+			"id_right": {"0":"SoldierJungle_Idle_E","1":22},
+
+			"walk_up": {"0":"SoldierJungle_Walk_N","1":32},
+			"walk_down": {"0":"SoldierJungle_Walk_S","1":32},
+			"walk_left": {"0":"SoldierJungle_Walk_W","1":32},
+			"walk_right": {"0":"SoldierJungle_Walk_E","1":32},
+
+			"sprint_up": {"0":"SoldierJungle_Sprint_N","1":16},
+			"sprint_down": {"0":"SoldierJungle_Sprint_S","1":16},
+			"sprint_left": {"0":"SoldierJungle_Sprint_W","1":16},
+			"sprint_right": {"0":"SoldierJungle_Sprint_E","1":16}
+		}
+	},
+	"Jungle_Man_3" : {
+		"x" : 196.05,
+		"y" : 230.70,
+		"width" : 150,
+		"hight" : 150,
+		"name" : "Jungle_Man_3",
+		"hero_id" : 3,
+		"bodyx1" : 50.0,
+		"bodyx2" : 50.0,
+		"bodyy1" : 50.0,
+		"bodyy2" : 50.0,
+		"health": 80,
+		"sprites": {
+			"setTexture": {"0":"Shango_Idle_S", "1":22},
+			"setIdleTexture": {"0":"Shango_Idle_S", "1":22},
+
+			"id_up": {"0":"SoldierJungle_Idle_N","1":22},
+			"id_down": {"0":"Shango_Idle_S","1":22},
+			"id_left": {"0":"SoldierJungle_Idle_W","1":22},
+			"id_right": {"0":"SoldierJungle_Idle_E","1":22},
+
+			"walk_up": {"0":"SoldierJungle_Walk_N","1":32},
+			"walk_down": {"0":"SoldierJungle_Walk_S","1":32},
+			"walk_left": {"0":"SoldierJungle_Walk_W","1":32},
+			"walk_right": {"0":"SoldierJungle_Walk_E","1":32},
+
+			"sprint_up": {"0":"SoldierJungle_Sprint_N","1":16},
+			"sprint_down": {"0":"SoldierJungle_Sprint_S","1":16},
+			"sprint_left": {"0":"SoldierJungle_Sprint_W","1":16},
+			"sprint_right": {"0":"SoldierJungle_Sprint_E","1":16}
+		}
+	},
+	"Jungle_Woman_1" : {
+		"x" : 206.05,
+		"y" : 230.70,
+		"width" : 150,
+		"hight" : 150,
+		"name" : "Jungle_Woman_1",
+		"hero_id" : 3,
+		"bodyx1" : 50.0,
+		"bodyx2" : 50.0,
+		"bodyy1" : 50.0,
+		"bodyy2" : 50.0,
+		"health": 80,
+		"sprites": {
+			"setTexture": {"0":"Shango_Idle_S", "1":22},
+			"setIdleTexture": {"0":"Shango_Idle_S", "1":22},
+
+			"id_up": {"0":"SoldierJungle_Idle_N","1":22},
+			"id_down": {"0":"Shango_Idle_S","1":22},
+			"id_left": {"0":"SoldierJungle_Idle_W","1":22},
+			"id_right": {"0":"SoldierJungle_Idle_E","1":22},
+
+			"walk_up": {"0":"SoldierJungle_Walk_N","1":32},
+			"walk_down": {"0":"SoldierJungle_Walk_S","1":32},
+			"walk_left": {"0":"SoldierJungle_Walk_W","1":32},
+			"walk_right": {"0":"SoldierJungle_Walk_E","1":32},
+
+			"sprint_up": {"0":"SoldierJungle_Sprint_N","1":16},
+			"sprint_down": {"0":"SoldierJungle_Sprint_S","1":16},
+			"sprint_left": {"0":"SoldierJungle_Sprint_W","1":16},
+			"sprint_right": {"0":"SoldierJungle_Sprint_E","1":16}
+		}
+	},
+	"Jungle_Woman_2" : {
+		"x" : 216.05,
+		"y" : 230.70,
+		"width" : 150,
+		"hight" : 150,
+		"name" : "Jungle_Woman_2",
+		"hero_id" : 3,
+		"bodyx1" : 50.0,
+		"bodyx2" : 50.0,
+		"bodyy1" : 50.0,
+		"bodyy2" : 50.0,
+		"health": 80,
+		"sprites": {
+			"setTexture": {"0":"Shango_Idle_S", "1":22},
+			"setIdleTexture": {"0":"Shango_Idle_S", "1":22},
+
+			"id_up": {"0":"SoldierJungle_Idle_N","1":22},
+			"id_down": {"0":"Shango_Idle_S","1":22},
+			"id_left": {"0":"SoldierJungle_Idle_W","1":22},
+			"id_right": {"0":"SoldierJungle_Idle_E","1":22},
+
+			"walk_up": {"0":"SoldierJungle_Walk_N","1":32},
+			"walk_down": {"0":"SoldierJungle_Walk_S","1":32},
+			"walk_left": {"0":"SoldierJungle_Walk_W","1":32},
+			"walk_right": {"0":"SoldierJungle_Walk_E","1":32},
+
+			"sprint_up": {"0":"SoldierJungle_Sprint_N","1":16},
+			"sprint_down": {"0":"SoldierJungle_Sprint_S","1":16},
+			"sprint_left": {"0":"SoldierJungle_Sprint_W","1":16},
+			"sprint_right": {"0":"SoldierJungle_Sprint_E","1":16}
+		}
+	},
+	"Jungle_Woman_3" : {
+		"x" : 226.05,
+		"y" : 230.70,
+		"width" : 150,
+		"hight" : 150,
+		"name" : "Jungle_Woman_3",
+		"hero_id" : 3,
+		"bodyx1" : 50.0,
+		"bodyx2" : 50.0,
+		"bodyy1" : 50.0,
+		"bodyy2" : 50.0,
+		"health": 80,
+		"sprites": {
+			"setTexture": {"0":"Shango_Idle_S", "1":22},
+			"setIdleTexture": {"0":"Shango_Idle_S", "1":22},
+
+			"id_up": {"0":"SoldierJungle_Idle_N","1":22},
+			"id_down": {"0":"Shango_Idle_S","1":22},
+			"id_left": {"0":"SoldierJungle_Idle_W","1":22},
+			"id_right": {"0":"SoldierJungle_Idle_E","1":22},
+
+			"walk_up": {"0":"SoldierJungle_Walk_N","1":32},
+			"walk_down": {"0":"SoldierJungle_Walk_S","1":32},
+			"walk_left": {"0":"SoldierJungle_Walk_W","1":32},
+			"walk_right": {"0":"SoldierJungle_Walk_E","1":32},
+
+			"sprint_up": {"0":"SoldierJungle_Sprint_N","1":16},
+			"sprint_down": {"0":"SoldierJungle_Sprint_S","1":16},
+			"sprint_left": {"0":"SoldierJungle_Sprint_W","1":16},
+			"sprint_right": {"0":"SoldierJungle_Sprint_E","1":16}
+		}
+	},
+	"Jungle_child_1" : {
+		"x" : 236.05,
+		"y" : 230.70,
+		"width" : 150,
+		"hight" : 150,
+		"name" : "Jungle_child_1",
+		"hero_id" : 3,
+		"bodyx1" : 50.0,
+		"bodyx2" : 50.0,
+		"bodyy1" : 50.0,
+		"bodyy2" : 50.0,
+		"health": 80,
+		"sprites": {
+			"setTexture": {"0":"Shango_Idle_S", "1":22},
+			"setIdleTexture": {"0":"Shango_Idle_S", "1":22},
+
+			"id_up": {"0":"SoldierJungle_Idle_N","1":22},
+			"id_down": {"0":"Shango_Idle_S","1":22},
+			"id_left": {"0":"SoldierJungle_Idle_W","1":22},
+			"id_right": {"0":"SoldierJungle_Idle_E","1":22},
+
+			"walk_up": {"0":"SoldierJungle_Walk_N","1":32},
+			"walk_down": {"0":"SoldierJungle_Walk_S","1":32},
+			"walk_left": {"0":"SoldierJungle_Walk_W","1":32},
+			"walk_right": {"0":"SoldierJungle_Walk_E","1":32},
+
+			"sprint_up": {"0":"SoldierJungle_Sprint_N","1":16},
+			"sprint_down": {"0":"SoldierJungle_Sprint_S","1":16},
+			"sprint_left": {"0":"SoldierJungle_Sprint_W","1":16},
+			"sprint_right": {"0":"SoldierJungle_Sprint_E","1":16}
+		}
+	},
+	"Jungle_child_2" : {
+		"x" : 236.05,
+		"y" : 230.70,
+		"width" : 150,
+		"hight" : 150,
+		"name" : "Jungle_child_2",
+		"hero_id" : 3,
+		"bodyx1" : 50.0,
+		"bodyx2" : 50.0,
+		"bodyy1" : 50.0,
+		"bodyy2" : 50.0,
+		"health": 80,
+		"sprites": {
+			"setTexture": {"0":"Shango_Idle_S", "1":22},
+			"setIdleTexture": {"0":"Shango_Idle_S", "1":22},
+
+			"id_up": {"0":"SoldierJungle_Idle_N","1":22},
+			"id_down": {"0":"Shango_Idle_S","1":22},
+			"id_left": {"0":"SoldierJungle_Idle_W","1":22},
+			"id_right": {"0":"SoldierJungle_Idle_E","1":22},
+
+			"walk_up": {"0":"SoldierJungle_Walk_N","1":32},
+			"walk_down": {"0":"SoldierJungle_Walk_S","1":32},
+			"walk_left": {"0":"SoldierJungle_Walk_W","1":32},
+			"walk_right": {"0":"SoldierJungle_Walk_E","1":32},
+
+			"sprint_up": {"0":"SoldierJungle_Sprint_N","1":16},
+			"sprint_down": {"0":"SoldierJungle_Sprint_S","1":16},
+			"sprint_left": {"0":"SoldierJungle_Sprint_W","1":16},
+			"sprint_right": {"0":"SoldierJungle_Sprint_E","1":16}
+		}
+	},
+	"Jungle_child_3" : {
+		"x" : 236.05,
+		"y" : 230.70,
+		"width" : 150,
+		"hight" : 150,
+		"name" : "Jungle_child_3",
+		"hero_id" : 3,
+		"bodyx1" : 50.0,
+		"bodyx2" : 50.0,
+		"bodyy1" : 50.0,
+		"bodyy2" : 50.0,
+		"health": 80,
+		"sprites": {
+			"setTexture": {"0":"Shango_Idle_S", "1":22},
+			"setIdleTexture": {"0":"Shango_Idle_S", "1":22},
+
+			"id_up": {"0":"SoldierJungle_Idle_N","1":22},
+			"id_down": {"0":"Shango_Idle_S","1":22},
+			"id_left": {"0":"SoldierJungle_Idle_W","1":22},
+			"id_right": {"0":"SoldierJungle_Idle_E","1":22},
+
+			"walk_up": {"0":"SoldierJungle_Walk_N","1":32},
+			"walk_down": {"0":"SoldierJungle_Walk_S","1":32},
+			"walk_left": {"0":"SoldierJungle_Walk_W","1":32},
+			"walk_right": {"0":"SoldierJungle_Walk_E","1":32},
+
+			"sprint_up": {"0":"SoldierJungle_Sprint_N","1":16},
+			"sprint_down": {"0":"SoldierJungle_Sprint_S","1":16},
+			"sprint_left": {"0":"SoldierJungle_Sprint_W","1":16},
+			"sprint_right": {"0":"SoldierJungle_Sprint_E","1":16}
+		}
+	}
+
+}

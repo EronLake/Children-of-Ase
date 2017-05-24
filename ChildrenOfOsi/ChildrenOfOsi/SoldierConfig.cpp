@@ -27,7 +27,7 @@ void SoldierConfig::import_config(vector<WorldObj*>* movVec, unordered_map<Textu
 			//creates a soldier name with the number attached at the end
 			std::string soldier_name = (*itr)["name"].asString() + "_" + std::to_string(sol_num);
 
-			set_soldier(movVec, gameplay_func, tBuffer, (*itr)["x"].asFloat() + (sol_num+1)*5, (*itr)["y"].asFloat(),
+			set_soldier(movVec, gameplay_func, tBuffer, (*itr)["x"].asFloat() + (sol_num+1) * 2, (*itr)["y"].asFloat(),
 				(*itr)["width"].asFloat(), (*itr)["hight"].asFloat(),
 				soldier_name, 
 				(*itr)["bodyx1"].asFloat(), (*itr)["bodyx2"].asFloat(),
@@ -69,6 +69,8 @@ void SoldierConfig::set_soldier(vector<WorldObj*>* movVec, ChildrenOfOsi* gamepl
 
 	Containers::soldier_table[name]->setHealth(health);
 	Containers::soldier_table[name]->setMaxStamina(max_stamina);
+
+	Containers::npc_table[name]->set_npc_type(0);
 
 	//push to moveVec
 	movVec->push_back(Containers::soldier_table[name]);

@@ -77,6 +77,8 @@ void HeroConfig::set_hero(vector<WorldObj*>* movVec, ChildrenOfOsi* gameplay_fun
 	Containers::hero_table[name]->setHealth(health);
 	Containers::hero_table[name]->setMaxStamina(max_stamina);
 
+	Containers::npc_table[name]->set_npc_type(0);
+
 	//push to moveVec
 	movVec->push_back(Containers::hero_table[name]);
 }

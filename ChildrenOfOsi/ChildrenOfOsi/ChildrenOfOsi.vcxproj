@@ -176,6 +176,7 @@
     <ClInclude Include="Alliance.h" />
     <ClInclude Include="AudioManager.h" />
     <ClInclude Include="AudioTestSuite.h" />
+    <ClInclude Include="BabalawoConfig.h" />
     <ClInclude Include="CheckClass.h" />
     <ClInclude Include="ChildrenOfOsi.h" />
     <ClInclude Include="CombatController.h" />
@@ -184,6 +185,7 @@
     <ClInclude Include="Containers.h" />
     <ClInclude Include="ConversationLogObj.h" />
     <ClInclude Include="ConversationPoint.h" />
+    <ClInclude Include="ShrineConfig.h" />
     <ClInclude Include="SoldierConfig.h" />
     <ClInclude Include="Tutorial.h" />
     <ClInclude Include="ThreadManager.h" />
@@ -254,6 +256,7 @@
     <ClInclude Include="TextObj.h" />
     <ClInclude Include="Texture.h" />
     <ClInclude Include="Vector2f.h" />
+    <ClInclude Include="VillagerConfig.h" />
     <ClInclude Include="War.h" />
     <ClInclude Include="WorldObj.h" />
     <ClInclude Include="Wrapper.h" />
@@ -270,6 +273,7 @@
     <ClCompile Include="Alliance.cpp" />
     <ClCompile Include="AudioManager.cpp" />
     <ClCompile Include="AudioTestSuite.cpp" />
+    <ClCompile Include="BabalawoConfig.cpp" />
     <ClCompile Include="CheckClass.cpp" />
     <ClCompile Include="ChildrenOfOsi.cpp" />
     <ClCompile Include="CombatController.cpp" />
@@ -293,6 +297,7 @@
     <ClCompile Include="Region.cpp" />
     <ClCompile Include="RegionState.cpp" />
     <ClCompile Include="GameState.cpp" />
+    <ClCompile Include="ShrineConfig.cpp" />
     <ClCompile Include="SoldierConfig.cpp" />
     <ClCompile Include="Tag.cpp" />
     <ClCompile Include="TagConfig.cpp" />
@@ -346,6 +351,7 @@
     <ClCompile Include="TextObj.cpp" />
     <ClCompile Include="Texture.cpp" />
     <ClCompile Include="Vector2f.cpp" />
+    <ClCompile Include="VillagerConfig.cpp" />
     <ClCompile Include="War.cpp" />
     <ClCompile Include="WorldObj.cpp" />
     <ClCompile Include="Wrapper.cpp" />
@@ -354,6 +360,7 @@
     <None Include="action_config.json" />
     <None Include="AssetInfo.h" />
     <None Include="attack_config.json" />
+    <None Include="babalawo_config.json" />
     <None Include="ClassDiagram.cd" />
     <None Include="config_jungle.json" />
     <None Include="config_oasis.json" />
@@ -369,10 +376,12 @@
     <None Include="Oya_dialog.json" />
     <None Include="script_templates.json" />
     <None Include="Shango_dialog.json" />
+    <None Include="shrine_config.json" />
     <None Include="SilverSoldier_dialog.json" />
     <None Include="soldier_config.json" />
     <None Include="Tag_config.json" />
     <None Include="test.json" />
+    <None Include="villager_config.json" />
     <None Include="Yemoja_dialog.json" />
   </ItemGroup>
   <ItemGroup>
