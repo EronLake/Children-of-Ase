@@ -111,11 +111,11 @@ void PlayerActExecFunctions::execute_end(bool if_succ) {
 
 	//NEEDS TO BE IMPLIMENTED
 	if (act_name == "Duel") {
-		//DialogueController::duel_pop_up(cur_action);
+		DialogueController::duel_pop_up(cur_action);
 		LOG("print to the screen something that the person you were fighting would say then finish action");
 	}
 	else if (act_name == "Spar") {
-		//DialogueController::spar_pop_up(cur_action);
+		DialogueController::spar_pop_up(cur_action);
 	}
 
 	///////////////////////////////////////////////////////////////////////////////////

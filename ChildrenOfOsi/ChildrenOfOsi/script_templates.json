@@ -155,6 +155,12 @@
 	 }
     },
 
+	"Finish Duel_Templates": {
+     "1": {
+        "1": "Finish Duel"
+	 }
+    },
+
 	"Ask_To_Spar_Templates": {
      "1": {
         "1": "Ask_To_Spar"
@@ -173,6 +179,11 @@
 	 }
     },
 
+	"Finish Spar_Templates": {
+     "1": {
+        "1": "Finish Spar"
+	 }
+    },
 	"Confirm Ally_Templates": {
      "1": {
         "1": "Confirm Ally"
