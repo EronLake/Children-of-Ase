@@ -194,11 +194,11 @@
     },
 
 	"Accept Duel": {
-        "1": "I have no time for games. Go and find someone else to fight.",
-        "2": "I refuse. I see no point in fighting you now.",
-        "3": "As the guardian of this village, I accept your challenge.",
-        "4": "As the guardian of this village, I accept your challenge.",
-        "5": "As the guardian of this village, I accept your challenge."
+        "1": "As the guardian of this village, I accept your challenge.",
+        "2": "As the guardian of this village, I accept your challenge.",
+        "3": "I have no time for games. Go and find someone else to fight.",
+        "4": "I refuse. I see no point in fighting you now.",
+        "5": "I refuse. I see no point in fighting you now."
     },
 
 	"Confirm Duel": {
@@ -207,6 +207,14 @@
         "3": "Let us get this duel started then.",
         "4": "Let us get this duel started then.",
         "5": "Let us get this duel started then."
+    },
+
+	"Finish Duel": {
+        "1": "I hope you learned about what it means to challenge people to such serious matches.",
+        "2": "I hope you learned about what it means to challenge people to such serious matches.",
+        "3": "I hope you learned about what it means to challenge people to such serious matches.",
+        "4": "I hope you learned about what it means to challenge people to such serious matches.",
+        "5": "I hope you learned about what it means to challenge people to such serious matches."
     },
 
 	"Ask_To_Spar": {
@@ -231,6 +239,14 @@
         "3": "Let us begin with this spar then. Don't hold back.",
         "4": "Let us begin with this spar then. Don't hold back.",
         "5": "Let us begin with this spar then. Don't hold back."
+    },
+
+	"Finish Spar": {
+        "1": "I enjoyed sparring with you. I hope you were able to learn something by testing your skills against me.",
+        "2": "I enjoyed sparring with you. I hope you were able to learn something by testing your skills against me.",
+        "3": "I enjoyed sparring with you. I hope you were able to learn something by testing your skills against me.",
+        "4": "I enjoyed sparring with you. I hope you were able to learn something by testing your skills against me.",
+        "5": "I enjoyed sparring with you. I hope you were able to learn something by testing your skills against me."
     },
 
 	"Bribe": {

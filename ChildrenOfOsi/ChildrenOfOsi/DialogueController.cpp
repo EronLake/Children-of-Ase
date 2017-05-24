@@ -932,18 +932,18 @@ void DialogueController::otherResponse(std::string info, std::string hero_topic)
 		}
 		else if (replyString == "Accept Duel") {
 			//calls action start if the question is asked at all
-			PlayerActExecFunctions::execute_start("Duel", temp_hero);
+			//PlayerActExecFunctions::execute_start("Duel", temp_hero);
 
 			//check if I want to accept
 			if (accepted_action) {
 				dialogue_point diog_pt = { "Accept Duel","Accept Duel","",curr_hero_topic,"1" };
-				std::string reply_pt_sentence = dialogue.gen_dialog(diog_pt, temp_hero);
+				std::string reply_pt_sentence = dialogue.gen_dialog_negative(diog_pt, temp_hero);
 				message = other->getName() + ": " + reply_pt_sentence + "\n\n";
 			}
 			else {
 				/////////////need to be changed to correct calls/dialog if not accepted///////////////////
 				dialogue_point diog_pt = { "Accept Duel","Accept Duel","",curr_hero_topic,"1" };
-				std::string reply_pt_sentence = dialogue.gen_dialog_negative(diog_pt, temp_hero);
+				std::string reply_pt_sentence = dialogue.gen_dialog(diog_pt, temp_hero);
 				message = other->getName() + ": " + reply_pt_sentence + "\n\n";
 			}
 
@@ -1113,6 +1113,7 @@ void DialogueController::otherResponse(std::string info, std::string hero_topic)
 				dialogue_point diog_pt = { "Confirm Duel","Confirm Duel","",curr_hero_topic,"1" };
 				std::string reply_pt_sentence = dialogue.gen_dialog(diog_pt, player);
 				message = player->getName() + ": " + reply_pt_sentence + "\n\n";
+				PlayerActExecFunctions::execute_start("Duel", temp_hero);
 			}
 			else {
 				/////////////need to be changed to correct calls/dialog if not accepted///////////////////
@@ -1121,7 +1122,7 @@ void DialogueController::otherResponse(std::string info, std::string hero_topic)
 				message = player->getName() + ": " + reply_pt_sentence + "\n\n";
 
 				//calls action end if the question is denied otherwise called on cmpletion of the action
-				PlayerActExecFunctions::execute_end(false);
+				//PlayerActExecFunctions::execute_end(false);
 			}
 			state = 9;
 		}
@@ -1537,9 +1538,9 @@ void DialogueController::startConversation(WorldObj* n, bool playerTalk)
 	/*if (temp_hero) {
 		player->filter_move_to(temp_hero);
 		//if (first_buff) {
-			temp_hero->rel[player->name]->addNotoriety(50);
+			temp_hero->rel[player->name]->addNotoriety(25);
 			temp_hero->rel[player->name]->addStrength(50);
-			temp_hero->rel[player->name]->addAffinity(50);
+			temp_hero->rel[player->name]->addAffinity(20);
 		//}
 		//first_buff = false;
 	}*/
