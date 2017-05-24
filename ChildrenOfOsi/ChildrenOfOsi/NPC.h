@@ -44,7 +44,7 @@ public:
 private:
 	Village* village;
 	float speed;
-	float npc_type; //0 = Hero/Soldier, 1 = villager, 2 = babalaow,  3 = shrine
+	int npc_type = 0; //0 = Hero/Soldier, 1 = villager, 2 = babalaow,  3 = shrine
 	float diagSpeed;
 	float diagXSpeed;
 	float diagYSpeed;
