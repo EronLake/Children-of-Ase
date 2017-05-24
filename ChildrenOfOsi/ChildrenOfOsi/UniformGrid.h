@@ -57,6 +57,7 @@ void UniformGrid<T>::insert_worldobj_to_grid(std::vector<T*> objs)
 		objs[i]->grid_location.first = j;
 		objs[i]->grid_location.second = k;
 
+		cout << "j and k are " << j << ", " << k << endl;
 		grid[j][k].push_back(objs[i]);
 		num_of_elements++;
 	}
@@ -65,13 +66,10 @@ void UniformGrid<T>::insert_worldobj_to_grid(std::vector<T*> objs)
 template <class T>
 void UniformGrid<T>::clear_and_reinsert(std::vector<T*> objs)
 {
-	cout << "CLEAR AND REINSERT GRID" << endl;
 	for (int i = 0; i < objs.size(); i++) {
 		int current_grid_j = objs[i]->grid_location.first;
 		int current_grid_k = objs[i]->grid_location.second;
-		if (objs[i]->getName() == "Shango") {
-			cout << " current grid is " << current_grid_j << ", " << current_grid_k << endl;
-		}
+		//cout << "old j is " << current_grid_j << " and old k is " << current_grid_k << endl;
 
 		//first find the cell that the obj belongs to on the grid
 		int xcoord = objs[i]->body[0].getX();
@@ -79,25 +77,55 @@ void UniformGrid<T>::clear_and_reinsert(std::vector<T*> objs)
 		int ycoord = objs[i]->body[0].getY();
 		int k = ycoord / 1250;
 
-		if (objs[i]->getName() == "Shango") {
-			cout << " j and k is " << j << ", " << k << endl;
-		}
+		//cout << "curr j is " << j << " and curr k is " << k << endl;
+
 
 		//if grid loc is incorrect, remove from current grid 
 		if (current_grid_j != j || current_grid_k != k) {
-			std::remove(grid[current_grid_j][current_grid_k].begin(), grid[current_grid_j][current_grid_k].end(), objs[i]);
-			//add obj to new grid
+			//cout << "ABOUT TO REMOVE ITEM" << endl;
+			//int oldsize = grid[current_grid_j][current_grid_k].size();
+			//cout << "grid old size is " << grid[current_grid_j][current_grid_k].size() << endl;
+			//auto position = std::find(grid[current_grid_j][current_grid_k].begin(), grid[current_grid_j][current_grid_k].end(), objs[i]);
+			//if (position == grid[current_grid_j][current_grid_k].end()) {
+			//	cout << "COULDNT FIND THE ELEMENT" << endl;
+			//	cout << "element name is " << objs[i]->getName() << endl;
+			//	system("PAUSE");
+			//}
+			grid[current_grid_j][current_grid_k].erase(std::remove(grid[current_grid_j][current_grid_k].begin(), grid[current_grid_j][current_grid_k].end(), objs[i]), grid[current_grid_j][current_grid_k].end());
+			//int newsize = grid[current_grid_j][current_grid_k].size();
+			//cout << "grid new size is " << grid[current_grid_j][current_grid_k].size() << endl;
+			//if (oldsize == newsize) {
+			//	void _CrtDbgBreak(void);
+			//	//system("PAUSE");
+			//}
+			//cout << "old grid old size is " << grid[j][k].size() << endl;
 			grid[j][k].push_back(objs[i]);
 			objs[i]->grid_location.first = j;
 			objs[i]->grid_location.second = k;
+			//cout << "old grid new size is " << grid[j][k].size() << endl;
+
+			//num_of_elements--;
+		}
+
+		////add obj to new grid
+		//grid[j][k].push_back(objs[i]);
+		//num_of_elements++;
+	}
+
+	int count = 0;
+	for (int i = 0; i < grid_size; i++) {
+		for (int j = 0; j < grid_size; j++) {
+			for (int k = 0; k < grid[i][j].size(); k++) {
+				count++;
+			}
 		}
 	}
+	//std::cout << "There are " << count << " objs in the grid" << std::endl;
 }
 
 template <class T>
 std::vector<T*> UniformGrid<T>::retrieve_worldobj_in_grid(std::vector<T*> &listOfObj, T* obj)
 {
-	/* GRID LOCATION IS NOT BEING UPDATED PROPERLY*/
 
 	if (num_of_elements == 0) return listOfObj;
 
@@ -307,7 +335,7 @@ void UniformGrid<T>::clear()
 	for (int i = 0; i < grid_size; i++) {
 		for (int j = 0; j < grid_size; j++) {
 			grid[i][j].clear();
-			
+
 		}
 	}
 	num_of_elements = 0;
