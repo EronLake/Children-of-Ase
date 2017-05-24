@@ -55,6 +55,9 @@ public:
 	static void DialogueController::add_dialog_option(std::string option_name, int icon);
 	static void DialogueController::remove_dialog_option(std::string option_name, int icon);
 	static bool DialogueController::check_advice_acceptance(Player* p, Hero* npc);
+	static void DialogueController::load_teach_dialog();
+	static void DialogueController::duel_pop_up(Action* act);
+	static void DialogueController::spar_pop_up(Action* act);
 
 	static bool prompted_quest;
 	static bool accepted_quest;
@@ -95,6 +98,7 @@ public:
 	static bool first_q_press;
 	static bool took_advice;
 	static int shrine_talk_counter;
+	static int teach_move_counter;
 	static bool first_buff;
 
 };

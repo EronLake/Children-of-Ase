@@ -361,7 +361,7 @@
         "5": "If you truly believe that a peace offering will lessen tensions between our villages then I will believe in you and send one."
     },
 
-	"Ask_For_Teaching": {
+	"Request_Teaching": {
         "1": "I would like to be taught by you.",
         "2": "I know that you are both wise and strong, and would greatly appreciate it if you could share some of that strength and wisdom with me.",
 		"3": "I know that you are both wise and strong, and would greatly appreciate it if you could share some of that strength and wisdom with me.",
@@ -370,11 +370,51 @@
     },
 
 	"Teach": {
-        "1": "I would rather burn this village to the ground with my own hands than teach someone like you.",
-        "2": "I really would rather not.",
-        "3": "I suppose teaching you wouldn't hurt.",
-        "4": "Of course I would be fine teaching you.",
-        "5": "I would love to teach you. I can probably learn some things myself by teaching you."
+        "1": "I will not be teaching you a thing. You are nowhere near ready to learn from me yet.",
+        "2": "I will not teach you.",
+        "3": "I suppose teaching you wouldn't hurt. Let us begin this lesson.",
+        "4": "Hmm. You seem like you would make a good student. Very well then. I will teach you.",
+        "5": "Certainly. I would love to teach you. I feel that you would make great use of my skill."
+    },
+
+	"Teach Fireball": {
+        "1": "This is one of my offensive skills. I concentrate ase in my hands and manifest it in the form of water. Then, I fire it. ",
+        "2": "This is one of my offensive skills. I concentrate ase in my hands and manifest it in the form of water. Then, I fire it. ",
+        "3": "This is one of my offensive skills. I concentrate ase in my hands and manifest it in the form of water. Then, I fire it. ",
+        "4": "This is one of my offensive skills. I concentrate ase in my hands and manifest it in the form of water. Then, I fire it. ",
+        "5": "This is one of my offensive skills. I concentrate ase in my hands and manifest it in the form of water. Then, I fire it. "
+    },
+
+	"Teach Fireball 1": {
+        "1": "It will most likely manifest in a different form for you, however. Hold your hands out with your palms facing forward and focus your ase in them. Imagine your ase flowing outward towards a single target. ",
+        "2": "It will most likely manifest in a different form for you, however. Hold your hands out with your palms facing forward and focus your ase in them. Imagine your ase flowing outward towards a single target. ",
+        "3": "It will most likely manifest in a different form for you, however. Hold your hands out with your palms facing forward and focus your ase in them. Imagine your ase flowing outward towards a single target. ",
+        "4": "It will most likely manifest in a different form for you, however. Hold your hands out with your palms facing forward and focus your ase in them. Imagine your ase flowing outward towards a single target. ",
+        "5": "It will most likely manifest in a different form for you, however. Hold your hands out with your palms facing forward and focus your ase in them. Imagine your ase flowing outward towards a single target. "
+    },
+
+	"Teach Fireball 2": {
+        "1": "Yes, that's it. Right. You are doing great.... Now, take a deep breathe and... Excellent! ",
+        "2": "Yes, that's it. Right. You are doing great.... Now, take a deep breathe and... Excellent! ",
+        "3": "Yes, that's it. Right. You are doing great.... Now, take a deep breathe and... Excellent! ",
+        "4": "Yes, that's it. Right. You are doing great.... Now, take a deep breathe and... Excellent! ",
+        "5": "Yes, that's it. Right. You are doing great.... Now, take a deep breathe and... Excellent! "
+    },
+
+	"Teach Fireball 3": {
+        "1": "That concludes this lesson. Make sure to practice using your new skill. Press the 'K' key to use it. ",
+        "2": "That concludes this lesson. Make sure to practice using your new skill. Press the 'K' key to use it.",
+        "3": "That concludes this lesson. Make sure to practice using your new skill. Press the 'K' key to use it.",
+        "4": "That concludes this lesson. Make sure to practice using your new skill. Press the 'K' key to use it.",
+        "5": "That concludes this lesson. Make sure to practice using your new skill. Press the 'K' key to use it."
+    },
+
+	"Already Taught": {
+        "1": "I have nothing else to teach you at present.",
+        "2": "I have nothing else to teach you at present.",
+        "3": "I have nothing else to teach you at present.",
+        "4": "I have nothing else to teach you at present.",
+        "5": "I have nothing else to teach you at present."
     },
 
 	"Offer_Teaching": {

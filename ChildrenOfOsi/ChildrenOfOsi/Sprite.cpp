@@ -53,7 +53,7 @@ void Sprite::animate()
 {
 	//std::lock_guard<std::mutex> guard(mut);
   ++this->tempTime;
-  if(this->tempTime == 2) {
+  if(this->tempTime == 4) {
     if(this->index < this->tex->getFrames() - 1) {
       ++this->index;
       this->start = tex->getFrameWidth() * index;

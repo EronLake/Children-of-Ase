@@ -369,7 +369,7 @@
         "5": "If you truly believe that a peace offering will lessen tensions between our villages then I will believe in you and send one."
     },
 
-	"Ask_For_Teaching": {
+	"Request_Teaching": {
         "1": "I would like to be taught by you.",
         "2": "I know that you are both wise and strong, and would greatly appreciate it if you could share some of that strength and wisdom with me.",
 		"3": "I know that you are both wise and strong, and would greatly appreciate it if you could share some of that strength and wisdom with me.",
@@ -378,11 +378,51 @@
     },
 
 	"Teach": {
-        "1": "I would rather burn this village to the ground with my own hands than teach someone like you.",
-        "2": "I really would rather not.",
-        "3": "I suppose teaching you wouldn't hurt.",
-        "4": "Of course I would be fine teaching you.",
-        "5": "I would love to teach you. I can probably learn some things myself by teaching you."
+        "1": "I will not be teaching you a thing. You are nowhere near ready to learn from me yet.",
+        "2": "I will not teach you.",
+        "3": "I suppose teaching you wouldn't hurt. Let us begin this lesson.",
+        "4": "Hmm. You seem like you would make a good student. Very well then. I will teach you.",
+        "5": "Certainly. I would love to teach you. I feel that you would make great use of my skill."
+    },
+
+	"Teach Spin": {
+        "1": "I will teach you how to spin through the obstacles in your path like a tempest. ",
+        "2": "I will teach you how to spin through the obstacles in your path like a tempest. ",
+        "3": "I will teach you how to spin through the obstacles in your path like a tempest. ",
+        "4": "I will teach you how to spin through the obstacles in your path like a tempest. ",
+        "5": "I will teach you how to spin through the obstacles in your path like a tempest. "
+    },
+
+	"Teach Spin 1": {
+        "1": "Concentrate on your balance and hold your blade out taut. Yes, that's the way...",
+        "2": "Concentrate on your balance and hold your blade out taut. Yes, that's the way...",
+        "3": "Concentrate on your balance and hold your blade out taut. Yes, that's the way...",
+        "4": "Concentrate on your balance and hold your blade out taut. Yes, that's the way...",
+        "5": "Concentrate on your balance and hold your blade out taut. Yes, that's the way..."
+    },
+
+	"Teach Spin 2": {
+        "1": "Use one foot to pivot and the other to control your speed... Easy now, try to keep a steady swing. Great.",
+        "2": "Use one foot to pivot and the other to control your speed... Easy now, try to keep a steady swing. Great.",
+        "3": "Use one foot to pivot and the other to control your speed... Easy now, try to keep a steady swing. Great.",
+        "4": "Use one foot to pivot and the other to control your speed... Easy now, try to keep a steady swing. Great.",
+        "5": "Use one foot to pivot and the other to control your speed... Easy now, try to keep a steady swing. Great."
+    },
+
+	"Teach Spin 3": {
+        "1": "You have completed my lesson. Use your new skill wisely. Press the 'L' key to use it.",
+        "2": "You have completed my lesson. Use your new skill wisely. Press the 'L' key to use it.",
+        "3": "You have completed my lesson. Use your new skill wisely. Press the 'L' key to use it.",
+        "4": "You have completed my lesson. Use your new skill wisely. Press the 'L' key to use it.",
+        "5": "You have completed my lesson. Use your new skill wisely. Press the 'L' key to use it."
+    },
+
+	"Already Taught": {
+        "1": "I have nothing else to teach you at present.",
+        "2": "I have nothing else to teach you at present.",
+        "3": "I have nothing else to teach you at present.",
+        "4": "I have nothing else to teach you at present.",
+        "5": "I have nothing else to teach you at present."
     },
 
 	"Offer_Teaching": {
