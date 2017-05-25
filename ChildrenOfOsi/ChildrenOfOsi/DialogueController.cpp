@@ -1571,11 +1571,13 @@ void DialogueController::startConversation(WorldObj* n, bool playerTalk)
 			for (int i = 0; i < planner->quests_given.size(); ++i) {
 				if (planner->quests_given[i]->getDoer()->name == SHANGO && planner->quests_given[i]->executed == false) {
 					player_doing_quest = true;
-					the_quest = planner->quests_given[i];
+					//the_quest = planner->quests_given[i];
+					the_quest = player->cur_action;
 				}
 				if (planner->quests_given[i]->getDoer()->name == SHANGO && planner->quests_given[i]->executed == true) {
 					quest_complete = true;
-					the_quest = planner->quests_given[i];
+					//the_quest = planner->quests_given[i];
+					the_quest = player->cur_action;
 				}
 			}
 			if (quest_complete) {
@@ -2030,7 +2032,11 @@ void DialogueController::move_to_selectable_down() {
 	int scroll_counter = 0;
 	if (DialogueController::scroll_control == DialogueController::getOptions().size() - 1)
 		return;
-	for (int i = 0; i < DialogueController::getOptions().size() - 1; ++i) {
+	if (DialogueController::scroll_control == DialogueController::getOptions().size() - 2) {
+		if (DialogueController::getOptions()[DialogueController::scroll_control + 1][4] == "0")
+			return;
+	}
+	for (int i = 0; (DialogueController::scroll_control + i) < DialogueController::getOptions().size(); ++i) {
 		if (DialogueController::getOptions()[DialogueController::scroll_control + i ][4] == "1") {
 			if (i != 0 || (DialogueController::getOptions().size() == 2 && DialogueController::getOptions()[1][4] == "1")) {
 				scroll_counter++;

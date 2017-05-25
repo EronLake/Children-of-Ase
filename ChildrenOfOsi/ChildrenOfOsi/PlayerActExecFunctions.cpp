@@ -150,6 +150,16 @@ void PlayerActExecFunctions::execute_end(bool if_succ) {
 			//doer_mem->setCategory("failure");
 		//	receiver_mem->setCategory("success");
 		}
+
+		//sets the quest to executed for the owner of the quest
+		int my_hero = player->cur_action->getOwner()->name;
+		Planner* plan = AIController::get_plan(my_hero);
+		for (int i = 0; i < plan->quests_given.size(); ++i) {
+			if (plan->quests_given[i]->getDoer()->name == SHANGO && plan->quests_given[i]->getReceiver() == player->cur_action->getReceiver()
+				&& plan->quests_given[i]->getOwner() == player->cur_action->getOwner()) {
+				plan->quests_given[i]->executed = true;
+			}
+		}
 	}
 //	doer_mem->setWhen(/*get global frame*/0);
 
