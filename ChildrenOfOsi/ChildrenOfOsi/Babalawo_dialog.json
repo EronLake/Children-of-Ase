@@ -1,0 +1,52 @@
+{
+	"Oasis_Babalawo": {
+		"Response Ask For Divination": {
+			"1": "SoldierJungle_Idle_S",
+			"2": "SoldierJungle_Idle_S",
+			"3": "SoldierJungle_Idle_S",
+			"4": "SoldierOasis_Idle_S",
+			"5": "SoldierOasis_Idle_W"
+		},
+		"Response Ask For Advice": {
+			"1": "SoldierJungle_Idle_S",
+			"2": "SoldierJungle_Idle_S",
+			"3": "SoldierJungle_Idle_S",
+			"4": "SoldierOasis_Idle_S",
+			"5": "SoldierOasis_Idle_W"
+		}
+	},
+
+   "Jungle_Babalawo": {
+        "Response Ask For Divination": {
+			"1": "SoldierJungle_Idle_S",
+			"2": "SoldierJungle_Idle_S",
+			"3": "SoldierJungle_Idle_S",
+			"4": "SoldierOasis_Idle_S",
+			"5": "SoldierOasis_Idle_W"
+		},
+		"Response Ask For Advice": {
+			"1": "SoldierJungle_Idle_S",
+			"2": "SoldierJungle_Idle_S",
+			"3": "SoldierJungle_Idle_S",
+			"4": "SoldierOasis_Idle_S",
+			"5": "SoldierOasis_Idle_W"
+		}
+   },
+
+   "Mountain_Babalawo": {
+        "Response Ask For Divination": {
+			"1": "SoldierJungle_Idle_S",
+			"2": "SoldierJungle_Idle_S",
+			"3": "SoldierJungle_Idle_S",
+			"4": "SoldierOasis_Idle_S",
+			"5": "SoldierOasis_Idle_W"
+		},
+		"Response Ask For Advice": {
+			"1": "SoldierJungle_Idle_S",
+			"2": "SoldierJungle_Idle_S",
+			"3": "SoldierJungle_Idle_S",
+			"4": "SoldierOasis_Idle_S",
+			"5": "SoldierOasis_Idle_W"
+		}
+   }
+}

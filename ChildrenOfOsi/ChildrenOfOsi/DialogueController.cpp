@@ -1552,15 +1552,15 @@ void DialogueController::startConversation(WorldObj* n, bool playerTalk)
 	Hero* temp_hero = CheckClass::isHero(other);
 	std::string start_message = "";
 
-	/*if (temp_hero) {
+	if (temp_hero) {
 		player->filter_move_to(temp_hero);
 		//if (first_buff) {
-			temp_hero->rel[player->name]->addNotoriety(25);
+			temp_hero->rel[player->name]->addNotoriety(50);
 			temp_hero->rel[player->name]->addStrength(50);
-			temp_hero->rel[player->name]->addAffinity(20);
+			temp_hero->rel[player->name]->addAffinity(50);
 		//}
 		//first_buff = false;
-	}*/
+	}
 	/*handles what the greeting phrase should be based on whether or not the player
 	has taken or completed a quest from the npc*/
 		if (temp_hero) {
