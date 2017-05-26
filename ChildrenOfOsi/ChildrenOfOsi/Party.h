@@ -43,6 +43,7 @@ class Party
   void setLeader(Soldier* s);
   void addToParty(Soldier* s, bool b);
   void add_party_to_party(Party* s);
+  void form_attack_party(Party* s);
   void removeSoldier(Soldier* s, bool b);
   void clear();
   void setMode(int i);
@@ -70,6 +71,9 @@ class Party
 
   void set_perm(bool p) { perm=p; };
   bool get_perm() { return perm; };
+
+  void set_hide(bool p) { hidden = p; };
+  bool get_hide() { return hidden; };
 
   void set_def_rad(int r) { defend_rad = r; };
   int get_def_rad() { return defend_rad; };
@@ -104,6 +108,7 @@ class Party
   int mode;
   vector<Party*> currentEnemies;
   bool perm;
+  bool hidden;
   Fight* curr_fight;
 };
 

@@ -44,7 +44,7 @@ class Soldier: public NPC
   int getAse() { return (this->ase/ ase_multiplier); };
   int getMaxAse() { return (this->maxAse/ ase_multiplier); }
   int getAttackIndex(Attack* atk);
-  bool get_incapacitated() { return incapacitated; };
+  bool get_incapacitated();
 
  /* bool isAllyOf(Soldier *);
   bool isAllyOf(Party *);

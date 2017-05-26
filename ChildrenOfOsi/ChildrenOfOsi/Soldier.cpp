@@ -298,6 +298,12 @@ bool Soldier::hasAttacks()
   }
 }
 
+bool Soldier::get_incapacitated() {
+	if (party == nullptr || !party->get_hide()) {
+		return incapacitated;
+	}else return true;
+};
+
 /**
  * Returns the next attack which this soldier should perform at this time.
  * Summoning abilities always take precendence over anything else. After those,
