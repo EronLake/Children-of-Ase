@@ -23,7 +23,7 @@ void PlayerActExecFunctions::execute_start(std::string act_name, Hero* receiver)
 	
 	// import action based off of an already exting action of the reciver
 	Action* ref_action = Containers::action_table[act_name + "_" + std::to_string(receiver->name)];
-
+	
 	Action* cur_action = new Action(player, receiver, player, ref_action->getUtility(), ref_action->getWhy(),
 		ref_action->name, ref_action->exe_name);
 
@@ -44,8 +44,9 @@ void PlayerActExecFunctions::execute_start(std::string act_name, Hero* receiver)
 	cur_action->receiver_fail_postconds = ref_action->receiver_fail_postconds;
 
 	//set to current action 
-	player->cur_action = cur_action;
-
+	if (!player->cur_action) {
+		player->cur_action = cur_action;
+	}
 	//create the memory based off of the newly created current action
 	//ActionHelper::create_memory(cur_action, player);
 	//creates the memory for the reciever as well
@@ -141,12 +142,12 @@ void PlayerActExecFunctions::execute_end(bool if_succ) {
 
 		//reason sould be handled as a dialog response choice
 		if (if_succ) {
-			player->quest_status[cur_action->getReceiver()->name] = 3;// set shango to "succeeded quest"
+			player->quest_status[cur_action->getOwner()->name] = 3;// set shango to "succeeded quest"
 			//doer_mem->setCategory("success");
 			//receiver_mem->setCategory("failure");
 		}
 		else {
-			player->quest_status[cur_action->getReceiver()->name] = 2;// set shango to "failed quest"
+			player->quest_status[cur_action->getOwner()->name] = 2;// set shango to "failed quest"
 			//doer_mem->setCategory("failure");
 		//	receiver_mem->setCategory("success");
 		}
@@ -183,7 +184,7 @@ void PlayerActExecFunctions::execute_end(bool if_succ) {
 	cur_action->noto_mult = nullptr;
 	//sets preconditions to references preconditions
 
-	delete player->cur_action;
+	// delete player->cur_action;
 	player->cur_action = nullptr;
 }
 

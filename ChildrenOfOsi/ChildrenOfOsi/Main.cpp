@@ -1057,7 +1057,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 		while (current_game_state == game_state::victory_menu) {
 
 			if (iController->current_game_state != game_state::victory_menu) {
-				iController->current_game_state = current_game_state;
+				//iController->current_game_state = current_game_state;
 			}
 
 			if (shouldExit > 0) {
@@ -1067,7 +1067,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 			start_tick = clock();
 
 			//draw
-			gameplay_functions->drawTut(Alex);
+			//gameplay_functions->drawTut(Alex);
 
 			//run task buffer
 			iController->InputCheck();
