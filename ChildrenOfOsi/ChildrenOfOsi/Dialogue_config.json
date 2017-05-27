@@ -486,80 +486,7 @@
     },
 
 	"Strength_Conversation_Points": {
-	 "conversation_point_2" : {
-	      "name" : "Ask_To_Spar",
-          "icon" : "scp",
-	      "template" : "Ask_To_Spar",
-		  "honor" : 1,
-		  "pride": 1,
-		  "aggression": 1,
-		  "kindness": 0,
-		  "greed": -1,
-		  "recklessness": 1,
-		  "extroversion": 1,
-		  "affinity": 50,
-		  "notoriety": 60,
-		  "strength": 60,
-		  "AffEstimate": 50,
-		  "NotorEstimate": 50,
-		  "StrEstimate": 50,
-		  "req_preconds": {
-			  "1": {
-				"general_type": 0,
-				"rel_type": 10,
-				"desired_rel_val": 85
-			  },
-			  "2": {
-				"general_type": 0,
-				"rel_type": 6,
-				"desired_rel_val": 50
-			  },
-			  "3": {
-				"general_type": 0,
-				"rel_type": 11,
-				"desired_rel_val": 75
-			  }
-		}
-     },
-	 "conversation_point_3" : {
-	      "name" : "Recruit_For_Party",
-          "icon" : "",
-	      "template" : "Recruit_For_Party",
-		  "honor" : 0,
-		  "pride": 0,
-		  "aggression": 0,
-		  "kindness": 0,
-		  "greed": 0,
-		  "recklessness": 0,
-		  "extroversion": 0,
-		  "affinity": 50,
-		  "notoriety": 50,
-		  "strength": 50,
-		  "AffEstimate": 50,
-		  "NotorEstimate": 50,
-		  "StrEstimate": 50
-
-     },
-	 "conversation_point_4" : {
-	      "name" : "Request_Teaching",
-          "icon" : "scp",
-	      "template" : "Request_Teaching",
-		  "honor" : 0,
-		  "pride": 0,
-		  "aggression": 0,
-		  "kindness": 0,
-		  "greed": 0,
-		  "recklessness": 0,
-		  "extroversion": 0,
-		  "affinity": 70,
-		  "notoriety": 50,
-		  "strength": 50,
-		  "AffEstimate": 50,
-		  "NotorEstimate": 50,
-		  "StrEstimate": 50
-
-     },
-	 "conversation_point_5" : {
+	"conversation_point_5" : {
 	      "name" : "Boast",
           "icon" : "scp",
 	      "template" : "Boast",
@@ -633,6 +560,80 @@
     }
 
      },
+	 "conversation_point_2" : {
+	      "name" : "Ask_To_Spar",
+          "icon" : "scp",
+	      "template" : "Ask_To_Spar",
+		  "honor" : 1,
+		  "pride": 1,
+		  "aggression": 1,
+		  "kindness": 0,
+		  "greed": -1,
+		  "recklessness": 1,
+		  "extroversion": 1,
+		  "affinity": 50,
+		  "notoriety": 60,
+		  "strength": 60,
+		  "AffEstimate": 50,
+		  "NotorEstimate": 50,
+		  "StrEstimate": 50,
+		  "req_preconds": {
+			  "1": {
+				"general_type": 0,
+				"rel_type": 10,
+				"desired_rel_val": 85
+			  },
+			  "2": {
+				"general_type": 0,
+				"rel_type": 6,
+				"desired_rel_val": 50
+			  },
+			  "3": {
+				"general_type": 0,
+				"rel_type": 11,
+				"desired_rel_val": 75
+			  }
+		}
+     },
+	 "conversation_point_3" : {
+	      "name" : "Recruit_For_Party",
+          "icon" : "",
+	      "template" : "Recruit_For_Party",
+		  "honor" : 0,
+		  "pride": 0,
+		  "aggression": 0,
+		  "kindness": 0,
+		  "greed": 0,
+		  "recklessness": 0,
+		  "extroversion": 0,
+		  "affinity": 50,
+		  "notoriety": 50,
+		  "strength": 50,
+		  "AffEstimate": 50,
+		  "NotorEstimate": 50,
+		  "StrEstimate": 50
+
+     },
+	 "conversation_point_4" : {
+	      "name" : "Request_Teaching",
+          "icon" : "scp",
+	      "template" : "Request_Teaching",
+		  "honor" : 0,
+		  "pride": 0,
+		  "aggression": 0,
+		  "kindness": 0,
+		  "greed": 0,
+		  "recklessness": 0,
+		  "extroversion": 0,
+		  "affinity": 70,
+		  "notoriety": 50,
+		  "strength": 50,
+		  "AffEstimate": 50,
+		  "NotorEstimate": 50,
+		  "StrEstimate": 50
+
+     },
+	 
 	 "conversation_point_6" : {
 	      "name" : "Intimidate",
           "icon" : "scp",
@@ -721,6 +722,46 @@
 		  "NotorEstimate": 50,
 		  "StrEstimate": 50
 
+     },
+
+	 "conversation_point_8" : {
+	      "name" : "Ask For Divination",
+          "icon" : "",
+	      "template" : "Ask For Divination",
+		  "honor" : 0,
+		  "pride": 0,
+		  "aggression": 0,
+		  "kindness": 0,
+		  "greed": 0,
+		  "recklessness": 0,
+		  "extroversion": 0,
+		  "affinity": 50,
+		  "notoriety": 50,
+		  "strength": 50,
+		  "AffEstimate": 50,
+		  "NotorEstimate": 50,
+		  "StrEstimate": 50
+
+     },
+
+	 "conversation_point_9" : {
+	      "name" : "Inquire About Ifa",
+          "icon" : "",
+	      "template" : "Inquire About Ifa",
+		  "honor" : 0,
+		  "pride": 0,
+		  "aggression": 0,
+		  "kindness": 0,
+		  "greed": 0,
+		  "recklessness": 0,
+		  "extroversion": 0,
+		  "affinity": 50,
+		  "notoriety": 50,
+		  "strength": 50,
+		  "AffEstimate": 50,
+		  "NotorEstimate": 50,
+		  "StrEstimate": 50
+
      }
 	},
 
@@ -744,7 +785,7 @@
 		  "NotorEstimate": 50,
 		  "StrEstimate": 50
      },
-	 "reply_point_3" : {
+	 /*"reply_point_3" : {
 	      "name" : "Join Party",
           "icon" : "srp",
 	      "template" : "Join Party",
@@ -762,7 +803,7 @@
 		  "AffEstimate": 50,
 		  "NotorEstimate": 50,
 		  "StrEstimate": 50
-    },
+    },*/
 	"reply_point_4" : {
 	      "name" : "Teach",
           "icon" : "srp",
@@ -846,6 +887,46 @@
           "icon" : "srp",
 	      "template" : "Response_Recruit_For_Party",
 		  "corresponding_conv_point": "Recruit_For_Party",
+		  "honor" : 0,
+		  "pride": 0,
+		  "aggression": 0,
+		  "kindness": 0,
+		  "greed": 0,
+		  "recklessness": 0,
+		  "extroversion": 0,
+		  "affinity": 50,
+		  "notoriety": 50,
+		  "strength": 50,
+		  "AffEstimate": 50,
+		  "NotorEstimate": 50,
+		  "StrEstimate": 50
+    },
+
+	"reply_point_9" : {
+	      "name" : "Response Inquire About Ifa",
+          "icon" : "srp",
+	      "template" : "Response Inquire About Ifa",
+		  "corresponding_conv_point": "Inquire About Ifa",
+		  "honor" : 0,
+		  "pride": 0,
+		  "aggression": 0,
+		  "kindness": 0,
+		  "greed": 0,
+		  "recklessness": 0,
+		  "extroversion": 0,
+		  "affinity": 50,
+		  "notoriety": 50,
+		  "strength": 50,
+		  "AffEstimate": 50,
+		  "NotorEstimate": 50,
+		  "StrEstimate": 50
+    },
+
+	"reply_point_10" : {
+	      "name" : "Response Ask For Divination",
+          "icon" : "srp",
+	      "template" : "Response Ask For Divination",
+		  "corresponding_conv_point": "Ask For Divination",
 		  "honor" : 0,
 		  "pride": 0,
 		  "aggression": 0,

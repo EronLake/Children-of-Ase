@@ -15,7 +15,7 @@ std::unordered_map<std::string, execute_ptr> ActionExecFunctions::ActionExecMap{
 	{ "execute_bribe",	        &execute_bribe          },
 	{ "execute_compliment",	    &execute_conversation   },
 	{ "execute_boast",          &execute_conversation   },
-	{ "execute_grovel",          &execute_conversation },
+	{ "execute_grovel",         &execute_conversation   },
 	{ "execute_intimidate",     &execute_conversation   }
 };
 
@@ -340,6 +340,7 @@ void ActionExecFunctions::execute_fight(Action* fight)
 			p->add_party_to_party(fight->getDoer()->getParty());
 			fight->getDoer()->getVillage()->addToParties(p);
 		}
+		fight->getDoer()->getParty()->form_attack_party(fight->getDoer()->getVillage()->barracks);
 		fight->getDoer()->set_action_destination(fight->getReceiver()->getVillage()->get_village_location()); //need to somehow retrieve location of target village
 		fight->getDoer()->set_max_dist_act(500);
 		//ActionHelper::create_memory(fight, fight->getDoer());
@@ -522,6 +523,7 @@ void ActionExecFunctions::execute_conquer(Action* conq)
 			p->add_party_to_party(conq->getDoer()->getParty());
 			conq->getDoer()->getVillage()->addToParties(p);
 		}
+		conq->getDoer()->getParty()->add_party_to_party(conq->getDoer()->getVillage()->barracks);
 		conq->getDoer()->set_action_destination(conq->getReceiver()->getVillage()->get_village_location()); //need to somehow retrieve location of target village
 		conq->getDoer()->set_max_dist_act(500);
 		//ActionHelper::create_memory(conq, conq->getDoer());

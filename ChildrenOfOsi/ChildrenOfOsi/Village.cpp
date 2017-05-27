@@ -13,6 +13,7 @@ Village::Village()
   barracks = new Party();
   defenders->set_perm(true);
   barracks->set_perm(true);
+  barracks->set_hide(true);
   parties.push_back(defenders);
   parties.push_back(barracks);
   health = 100;
@@ -77,16 +78,6 @@ void Village::init_villages()
 		Party* new_party = new Party();
 		new_party->addToParty(itr.second, true);
 
-		//adds soldiers to party
-		for (auto itor: Containers::soldier_table) 
-		{
-			if (itor.second->getName().find(party_name) != string::npos)
-			{
-				new_party->addToParty(itor.second, false);
-			}
-				
-		}
-
 		Village* new_village = new Village();
 		new_village->set_village_location(itr.second->getLoc());
 		new_village->add_member(itr.second);
@@ -102,6 +93,16 @@ void Village::init_villages()
 		}
 
 		new_village->leader = itr.second;
+
+		//adds soldiers to party
+		for (auto itor : Containers::soldier_table)
+		{
+			if (itor.second->getName().find(party_name) != string::npos)
+			{
+				new_village->barracks->addToParty(itor.second, false);
+			}
+
+		}
 
 		Alliance* new_alliance = new Alliance(new_village);
 

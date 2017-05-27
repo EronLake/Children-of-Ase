@@ -58,6 +58,9 @@
 #include "ObjConfig.h"
 #include "HeroConfig.h"
 #include "SoldierConfig.h"
+#include "VillagerConfig.h"
+#include "BabalawoConfig.h"
+#include "ShrineConfig.h"
 
 #include "ActionPool.h"
 #include "ActionHelper.h"
@@ -232,6 +235,9 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 
 	HeroConfig::import_config(movVec_ptr, &ObjConfig::textureMap, gameplay_functions, tBuffer);
 	SoldierConfig::import_config(movVec_ptr, &ObjConfig::textureMap, gameplay_functions, tBuffer);
+	VillagerConfig::import_config(recVec_ptr, &ObjConfig::textureMap, gameplay_functions, tBuffer);
+	BabalawoConfig::import_config(recVec_ptr, &ObjConfig::textureMap, gameplay_functions, tBuffer);
+	ShrineConfig::import_config(recVec_ptr, &ObjConfig::textureMap, gameplay_functions, tBuffer);
 	Village::init_villages();
 	AIController::init_plans();
 
@@ -1036,7 +1042,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 		while (current_game_state == game_state::victory_menu) {
 
 			if (iController->current_game_state != game_state::victory_menu) {
-				iController->current_game_state = current_game_state;
+				//iController->current_game_state = current_game_state;
 			}
 
 			if (shouldExit > 0) {
@@ -1046,7 +1052,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 			start_tick = clock();
 
 			//draw
-			gameplay_functions->drawTut(Alex);
+			//gameplay_functions->drawTut(Alex);
 
 			//run task buffer
 			iController->InputCheck();

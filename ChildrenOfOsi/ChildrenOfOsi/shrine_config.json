@@ -1,0 +1,96 @@
+{
+	"Oasis_Shrine" : {
+		"x" : 50.45,
+		"y" : 74.65,
+		"width" : 150,
+		"hight" : 150,
+		"name" : "Oasis_Shrine",
+		"bodyx1" : 50.0,
+		"bodyx2" : 50.0,
+		"bodyy1" : 50.0,
+		"bodyy2" : 50.0,
+		"health": 80,
+		"sprites": {
+			"setTexture": {"0":"SoldierJungle_Idle_S", "1":22},
+			"setIdleTexture": {"0":"SoldierJungle_Idle_S", "1":22},
+
+			"id_up": {"0":"SoldierJungle_Idle_S","1":22},
+			"id_down": {"0":"SoldierOasis_Idle_S","1":22},
+			"id_left": {"0":"SoldierOasis_Idle_W","1":22},
+			"id_right": {"0":"SoldierOasis_Idle_E","1":22},
+
+			"walk_up": {"0":"SoldierOasis_Walk_N","1":32},
+			"walk_down": {"0":"SoldierOasis_Walk_S","1":32},
+			"walk_left": {"0":"SoldierOasis_Walk_W","1":32},
+			"walk_right": {"0":"SoldierOasis_Walk_E","1":32},
+
+			"sprint_up": {"0":"SoldierOasis_Sprint_N","1":16},
+			"sprint_down": {"0":"SoldierOasis_Sprint_S","1":16},
+			"sprint_left": {"0":"SoldierOasis_Sprint_W","1":16},
+			"sprint_right": {"0":"SoldierOasis_Sprint_E","1":16}
+		}
+	},
+	"Jungle_Shrine" : {
+		"x" : 60.45,
+		"y" : 74.65,
+		"width" : 150,
+		"hight" : 150,
+		"name" : "Oasis_Shrine",
+		"bodyx1" : 50.0,
+		"bodyx2" : 50.0,
+		"bodyy1" : 50.0,
+		"bodyy2" : 50.0,
+		"health": 80,
+		"sprites": {
+			"setTexture": {"0":"SoldierOasis_Idle_S", "1":22},
+			"setIdleTexture": {"0":"SoldierOasis_Idle_S", "1":22},
+
+			"id_up": {"0":"SoldierOasis_Idle_N","1":22},
+			"id_down": {"0":"SoldierOasis_Idle_S","1":22},
+			"id_left": {"0":"SoldierOasis_Idle_W","1":22},
+			"id_right": {"0":"SoldierOasis_Idle_E","1":22},
+
+			"walk_up": {"0":"SoldierOasis_Walk_N","1":32},
+			"walk_down": {"0":"SoldierOasis_Walk_S","1":32},
+			"walk_left": {"0":"SoldierOasis_Walk_W","1":32},
+			"walk_right": {"0":"SoldierOasis_Walk_E","1":32},
+
+			"sprint_up": {"0":"SoldierOasis_Sprint_N","1":16},
+			"sprint_down": {"0":"SoldierOasis_Sprint_S","1":16},
+			"sprint_left": {"0":"SoldierOasis_Sprint_W","1":16},
+			"sprint_right": {"0":"SoldierOasis_Sprint_E","1":16}
+		}
+	}/*,
+	"Mountain_Shrine" : {
+		"x" : 70.45,
+		"y" : 74.65,
+		"width" : 150,
+		"hight" : 150,
+		"name" : "Mountain_Shrine",
+		"bodyx1" : 50.0,
+		"bodyx2" : 50.0,
+		"bodyy1" : 50.0,
+		"bodyy2" : 50.0,
+		"health": 80,
+		"sprites": {
+			"setTexture": {"0":"SoldierOasis_Idle_S", "1":22},
+			"setIdleTexture": {"0":"SoldierOasis_Idle_S", "1":22},
+
+			"id_up": {"0":"SoldierOasis_Idle_N","1":22},
+			"id_down": {"0":"SoldierOasis_Idle_S","1":22},
+			"id_left": {"0":"SoldierOasis_Idle_W","1":22},
+			"id_right": {"0":"SoldierOasis_Idle_E","1":22},
+
+			"walk_up": {"0":"SoldierOasis_Walk_N","1":32},
+			"walk_down": {"0":"SoldierOasis_Walk_S","1":32},
+			"walk_left": {"0":"SoldierOasis_Walk_W","1":32},
+			"walk_right": {"0":"SoldierOasis_Walk_E","1":32},
+
+			"sprint_up": {"0":"SoldierOasis_Sprint_N","1":16},
+			"sprint_down": {"0":"SoldierOasis_Sprint_S","1":16},
+			"sprint_left": {"0":"SoldierOasis_Sprint_W","1":16},
+			"sprint_right": {"0":"SoldierOasis_Sprint_E","1":16}
+		}
+	}
+	*/
+}

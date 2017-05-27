@@ -113,8 +113,8 @@
     },
 
 	"Confirm Alliance": {
-        "1": "Let's get this paperwork out of the way then. Glad to have you aboard.",
-        "2": "Let's get this paperwork out of the way then. Glad to have you aboard.",
+        "1": "Aww man. Well ok.",
+        "2": "Aww man. Well ok.",
         "3": "Let's get this paperwork out of the way then. Glad to have you aboard.",
         "4": "Let's get this paperwork out of the way then. Glad to have you aboard.",
 		"5": "Let's get this paperwork out of the way then. Glad to have you aboard."
@@ -574,5 +574,22 @@
         "3": "Wait, don't leave just yet! There is a rogue squadron of rebels north of here. Would you help me protect my people from them",
 		"4": "Wait, don't leave just yet! There is a rogue squadron of rebels north of here. Would you help me protect my people from them",
         "5": "Wait, don't leave just yet! There is a rogue squadron of rebels north of here. Would you help me protect my people from them"
+   },
+
+   "Ask For Divination": {
+        "1": "Oh great babalawo, please perform a divination for me.",
+		"2": "Oh great babalawo, please perform a divination for me.",
+        "3": "Oh great babalawo, please perform a divination for me.",
+		"4": "Oh great babalawo, please perform a divination for me.",
+        "5": "Oh great babalawo, please perform a divination for me."
+   },
+
+   "Inquire About Ifa": {
+        "1": "Oh great babalawo, please tell me about Ifa.",
+		"2": "Oh great babalawo, please tell me about Ifa.",
+        "3": "Oh great babalawo, please tell me about Ifa.",
+		"4": "Oh great babalawo, please tell me about Ifa.",
+        "5": "Oh great babalawo, please tell me about Ifa."
    }
+
 }

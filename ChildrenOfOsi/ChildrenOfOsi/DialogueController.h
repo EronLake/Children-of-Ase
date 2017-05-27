@@ -42,12 +42,19 @@ public:
 	static bool offer_quest_on_exit(Hero* hero);
 	static void DialogueController::create_farewell();
 	static void player_choose_soldier();
+	static void player_choose_babalawo();
 	static void shrine_interact();
+	static void babalawo_interact();
+	static void villager_interact();
 	static void player_conversation_point_soldier();
+	static void player_conversation_point_babalawo();
 	static void other_response_soldier(std::string info, std::string hero_topic);
+	static void other_response_babalawo(std::string info, std::string hero_topic);
 	static void other_conversation_point_soldier(dialogue_point line);
 	static vector<std::vector<std::string>> get_soldier_options();
+	static vector<std::vector<std::string>> get_babalawo_options();
 	static void DialogueController::remove_soldier_opts();
+	static void DialogueController::remove_babalawo_opts();
 	static void DialogueController::add_to_perm_storage(ConversationLogObj* log_entry);
 	static void DialogueController::move_to_selectable_down();
 	static void DialogueController::move_to_selectable_up();
@@ -87,6 +94,7 @@ public:
 
 	static std::vector<std::vector<dialogue_point>> options;
 	static std::vector<std::vector<dialogue_point>> soldier_options;
+	static std::vector<std::vector<dialogue_point>> babalawo_options;
 	static std::vector<dialogue_point> replyOptions;
 	static std::string message;
 	static int optionsIndex;

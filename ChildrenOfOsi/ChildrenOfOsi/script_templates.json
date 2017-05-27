@@ -591,5 +591,137 @@
     "1": {
       "1": "Terrible Advice"
     }
+  },
+
+  "Response Inquire About Ifa_Templates": {
+    "1": {
+      "1": "Response Inquire About Ifa"
+    }
+  },
+
+  "Response Ask For Divination_Templates": {
+    "1": {
+      "1": "Response Ask For Divination"
+    }
+  },
+
+  "Ask For Divination_Templates": {
+    "1": {
+      "1": "Ask For Divination"
+    }
+  },
+
+  "Ask About Ifa_Templates": {
+    "1": {
+      "1": "Ask About Ifa"
+    }
+  },
+
+  "Oasis_Man_1_Templates": {
+    "1": {
+      "1": "Oasis_Man_1"
+    }
+  },
+
+  "Oasis_Man_2_Templates": {
+    "1": {
+      "1": "Oasis_Man_2"
+    }
+  },
+
+  "Oasis_Man_3_Templates": {
+    "1": {
+      "1": "Oasis_Man_3"
+    }
+  },
+
+  "Oasis_Woman_1_Templates": {
+    "1": {
+      "1": "Oasis_Woman_1"
+    }
+  },
+
+  "Oasis_Woman_2_Templates": {
+    "1": {
+      "1": "Oasis_Woman_2"
+    }
+  },
+
+  "Oasis_Woman_3_Templates": {
+    "1": {
+      "1": "Oasis_Woman_3"
+    }
+  },
+
+  "Oasis_child_1_Templates": {
+    "1": {
+      "1": "Oasis_child_1"
+    }
+  },
+
+  "Oasis_child_2_Templates": {
+    "1": {
+      "1": "Oasis_child_2"
+    }
+  },
+
+  "Oasis_child_3_Templates": {
+    "1": {
+      "1": "Oasis_child_3"
+    }
+  },
+
+  "Jungle_Man_1_Templates": {
+    "1": {
+      "1": "Jungle_Man_1"
+    }
+  },
+
+  "Jungle_Man_2_Templates": {
+    "1": {
+      "1": "Jungle_Man_2"
+    }
+  },
+
+  "Jungle_Man_3_Templates": {
+    "1": {
+      "1": "Jungle_Man_3"
+    }
+  },
+
+  "Jungle_Woman_1_Templates": {
+    "1": {
+      "1": "Jungle_Woman_1"
+    }
+  },
+
+  "Jungle_Woman_2_Templates": {
+    "1": {
+      "1": "Jungle_Woman_2"
+    }
+  },
+
+  "Jungle_Woman_3_Templates": {
+    "1": {
+      "1": "Jungle_Woman_3"
+    }
+  },
+
+  "Jungle_child_1_Templates": {
+    "1": {
+      "1": "Jungle_child_1"
+    }
+  },
+
+  "Jungle_child_2_Templates": {
+    "1": {
+      "1": "Jungle_child_2"
+    }
+  },
+
+  "Jungle_child_3_Templates": {
+    "1": {
+      "1": "Jungle_child_3"
+    }
   }
 }

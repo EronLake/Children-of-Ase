@@ -19,7 +19,7 @@ class Sprite
   int getStop() { return this->stop; };
   int getTop() { return this->top; };
   int getBottom() { return this->bottom; };
-  Texture getTexture() { return *(this->tex); }
+  Texture& getTexture() { return *(this->tex); }
   Texture* get_texture() { return (this->tex); }
   Texture* getIdleTexture() { return this->idle; }
   std::string getTexFile() { return this->tex->getFile(); }
