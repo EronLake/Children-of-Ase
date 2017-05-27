@@ -31,8 +31,8 @@ public:
 	std::vector<std::vector<dialogue_point>>& get_possible_conv_pts_ref();
 	std::string gen_dialog(dialogue_point diog_pt, Hero* hero);
 	std::string gen_dialog_shrine(dialogue_point diog_pt, WorldObj* shrine);
-	std::string gen_dialog_babalawo(dialogue_point diog_pt, WorldObj* shrine);
-	std::string gen_dialog_villager(dialogue_point diog_pt, WorldObj* shrine);
+	std::string gen_dialog_babalawo(dialogue_point diog_pt, WorldObj* babalawo);
+	std::string gen_dialog_villager(dialogue_point diog_pt, WorldObj* villager);
 
 	std::string gen_reply(dialogue_point diog_pt, Hero* hero, int relationship_int, int relationship_int_shango);
 

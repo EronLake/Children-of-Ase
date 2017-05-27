@@ -593,15 +593,27 @@
     }
   },
 
-  "Response Ask For Advice_Templates": {
+  "Response Inquire About Ifa_Templates": {
     "1": {
-      "1": "Response Ask For Advice"
+      "1": "Response Inquire About Ifa"
     }
   },
 
   "Response Ask For Divination_Templates": {
     "1": {
       "1": "Response Ask For Divination"
+    }
+  },
+
+  "Ask For Divination_Templates": {
+    "1": {
+      "1": "Ask For Divination"
+    }
+  },
+
+  "Ask About Ifa_Templates": {
+    "1": {
+      "1": "Ask About Ifa"
     }
   },
 

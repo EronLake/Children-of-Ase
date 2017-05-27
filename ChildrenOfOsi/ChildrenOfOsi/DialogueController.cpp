@@ -190,7 +190,7 @@ void DialogueController::player_choose_babalawo()
 		babalawo_options.push_back({});
 	}
 	babalawo_options[StrengthIcon].push_back({ "Ask For Divination","Ask For Divination","","","1" });
-    babalawo_options[StrengthIcon].push_back({ "Ask For Advice","Ask For Advice","","","1" });
+    babalawo_options[StrengthIcon].push_back({ "Inquire About Ifa","Inquire About Ifa","","","1" });
 
 	state = 1;
 }
@@ -214,11 +214,19 @@ void DialogueController::shrine_interact()
 		break;
 	}
 	
-	//checks if some stat is high enough to speak to shrine
-	//placeholder for now
-	bool some_check = false;
-	if (some_check == false)
-		dpoint = { "Shrine Not Worthy" ,"Shrine Not Worthy" };
+	//checks if some stat is high enough to speak to this particular shrine
+	if (other->getName().find("Oasis") != string::npos) {
+		if (Containers::hero_table["Yemoja"]->rel[SHANGO]->getAffinity() < 70)
+			dpoint = {"Shrine Not Worthy", "Shrine Not Worthy"};
+	}
+	else if ((other->getName().find("Jungle")) != string::npos) {
+		if (Containers::hero_table["Oya"]->rel[SHANGO]->getNotoriety() < 70)
+			dpoint = { "Shrine Not Worthy", "Shrine Not Worthy" };
+	}
+	else if ((other->getName().find("Mountain")) != string::npos) {
+		if (Containers::hero_table["Ogun"]->rel[SHANGO]->getStrength() < 70)
+			dpoint = { "Shrine Not Worthy", "Shrine Not Worthy" };
+	}
 
 	std::string conversation_pt_sentence = dialogue.gen_dialog_shrine(dpoint, other);
 	message = other->getName() + ": " + conversation_pt_sentence;
@@ -228,12 +236,12 @@ void DialogueController::shrine_interact()
 	    state = 11;
 }
 
-void DialogueController::babalawo_interact() {
-
-}
 
 void DialogueController::villager_interact() {
-
+	dialogue_point dpoint = { other->getName(), other->getName() };
+	std::string conversation_pt_sentence = dialogue.gen_dialog_villager(dpoint, other);
+	message = other->getName() + ": " + conversation_pt_sentence;
+	state = 7;
 }
 
 /*Identifies the player's conversation point selection, stores
@@ -1715,19 +1723,12 @@ void DialogueController::other_response_babalawo(std::string info, std::string h
 	//currently adds an NPC to the player's party right away if
 	//the player asks them to join(NPC always says yes)
 	//eventually make it so NPC can refuse to join player's party
-	if (replyString == "Response_Recruit_For_Party") {
-		
-	}
-
-	//removes an NPC of the player's choosing from their party
-	if (replyString == "Response_Remove_From_Party") {
-		
-	}
+	reply_pt_sentence = dialogue.gen_dialog_babalawo(line,other);
 
 
 	message = other->getName() + ": " + reply_pt_sentence + "\n\n";
 
-	state = 7;
+	state = 1;
 	//otherConversationPoint(line);
 	//}
 	/*}
@@ -1935,11 +1936,15 @@ void DialogueController::startConversation(WorldObj* n, bool playerTalk)
 				//and call appropriate function
 				NPC* thing;
 				thing = dynamic_cast<NPC*>(other);
-				if (other) {
-					/*if ()
-					else if ()
-					else
-						shrine_interact();*/
+				if (thing) {
+					if (other->getName().find("Babalawo") != string::npos) {//if player interacting with babalawo
+						player_choose_babalawo();
+						message = n->getName() + ": " + dialogue.gen_dialog_babalawo({ "Greeting","Greeting" }, other);
+					}
+					else if (other->getName().find("Shrine") != string::npos)//if player interacting with shrine
+						shrine_interact();
+					else//otherwise player is interacting with a villager
+						villager_interact();
 				}
 			}
 	
@@ -2048,6 +2053,9 @@ void DialogueController::exitDialogue()
 				state = 7;
 		}
 		else {
+			Soldier* my_sol = dynamic_cast<Soldier*>(other);
+			if(!my_sol)//make babalawo farewell appear on exit
+                message = other->getName() + ": " + dialogue.gen_dialog_babalawo({ "Farewell","Farewell" }, other);
 			remove_soldier_opts();
 			remove_babalawo_opts();
 		}
@@ -2363,23 +2371,51 @@ void DialogueController::add_to_perm_storage(ConversationLogObj* log_entry) {
 are scrolling down. unselectable options are skipped.*/
 void DialogueController::move_to_selectable_down() {
 	int scroll_counter = 0;
-	if (DialogueController::scroll_control == DialogueController::getOptions().size() - 1)
-		return;
-	if (DialogueController::scroll_control == DialogueController::getOptions().size() - 2) {
-		if (DialogueController::getOptions()[DialogueController::scroll_control + 1][4] == "0")
+	Hero* temp_hero = CheckClass::isHero(other);
+	if (temp_hero) {
+		if (DialogueController::scroll_control == DialogueController::getOptions().size() - 1)
 			return;
+		if (DialogueController::scroll_control == DialogueController::getOptions().size() - 2) {
+			if (DialogueController::getOptions()[DialogueController::scroll_control + 1][4] == "0")
+				return;
+		}
 	}
-	for (int i = 0; (DialogueController::scroll_control + i) < DialogueController::getOptions().size(); ++i) {
-		if (DialogueController::getOptions()[DialogueController::scroll_control + i ][4] == "1") {
-			if (i != 0 || (DialogueController::getOptions().size() == 2 && DialogueController::getOptions()[1][4] == "1")) {
+	else {//babalawo case
+		if (DialogueController::scroll_control == DialogueController::get_babalawo_options().size() - 1)
+			return;
+		if (DialogueController::scroll_control == DialogueController::get_babalawo_options().size() - 2) {
+			if (DialogueController::get_babalawo_options()[DialogueController::scroll_control + 1][4] == "0")
+				return;
+		}
+	}
+	if (temp_hero) {
+		for (int i = 0; (DialogueController::scroll_control + i) < DialogueController::getOptions().size(); ++i) {
+			if (DialogueController::getOptions()[DialogueController::scroll_control + i][4] == "1") {
+				if (i != 0 || (DialogueController::getOptions().size() == 2 && DialogueController::getOptions()[1][4] == "1")) {
+					scroll_counter++;
+					break;
+				}
+			}
+			else {
 				scroll_counter++;
-				break;
+				if (i == DialogueController::getOptions().size() - 2)
+					scroll_counter = 0;
 			}
 		}
-		else {
-			scroll_counter++;
-			if (i == DialogueController::getOptions().size() - 2) 
-				scroll_counter = 0;
+	}
+	else {//babalawo case
+		for (int i = 0; (DialogueController::scroll_control + i) < DialogueController::get_babalawo_options().size(); ++i) {
+			if (DialogueController::get_babalawo_options()[DialogueController::scroll_control + i][4] == "1") {
+				if (i != 0 || (DialogueController::get_babalawo_options().size() == 2 && DialogueController::get_babalawo_options()[1][4] == "1")) {
+					scroll_counter++;
+					break;
+				}
+			}
+			else {
+				scroll_counter++;
+				if (i == DialogueController::getOptions().size() - 2)
+					scroll_counter = 0;
+			}
 		}
 	}
 	DialogueController::scroll_control += scroll_counter;
@@ -2392,14 +2428,28 @@ void DialogueController::move_to_selectable_up() {
 	if (DialogueController::scroll_control == 0)
 		return;
 	for (int i = 0; (DialogueController::scroll_control - i) >= 1; ++i) {
-		if (DialogueController::getOptions()[DialogueController::scroll_control - i - 1][4] == "1") {
-			scroll_counter++;
-			break;
+		Hero* temp_hero = CheckClass::isHero(other);
+		if (temp_hero) {
+			if (DialogueController::getOptions()[DialogueController::scroll_control - i - 1][4] == "1") {
+				scroll_counter++;
+				break;
+			}
+			else {
+				scroll_counter++;
+				if (DialogueController::scroll_control == 0)
+					scroll_counter = 0;
+			}
 		}
-		else {
-			scroll_counter++;
-			if (DialogueController::scroll_control == 0)
-				scroll_counter = 0;
+		else {//babalawo case
+			if (DialogueController::get_babalawo_options()[DialogueController::scroll_control - i - 1][4] == "1") {
+				scroll_counter++;
+				break;
+			}
+			else {
+				scroll_counter++;
+				if (DialogueController::scroll_control == 0)
+					scroll_counter = 0;
+			}
 		}
 	}
 	DialogueController::scroll_control -= scroll_counter;

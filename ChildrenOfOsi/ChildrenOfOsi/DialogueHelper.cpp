@@ -733,7 +733,7 @@ dialogue_point DialogueHelper::get_dialog_villager(std::string name, dialogue_po
 			tmp = dtemp[i - 1];
 			if (tmp != "?" && tmp != "," && tmp != "." &&
 				tmp != "!" && tmp != "_") {
-				dpoint.push_back(root[name][tmp][to_string(phrase_picker)]
+				dpoint.push_back(root[tmp][to_string(phrase_picker)]
 					.asString());
 			}
 			else {
