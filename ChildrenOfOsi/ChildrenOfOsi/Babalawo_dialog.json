@@ -1,52 +1,100 @@
 {
 	"Oasis_Babalawo": {
 		"Response Ask For Divination": {
-			"1": "SoldierJungle_Idle_S",
-			"2": "SoldierJungle_Idle_S",
-			"3": "SoldierJungle_Idle_S",
-			"4": "SoldierOasis_Idle_S",
-			"5": "SoldierOasis_Idle_W"
+			"1": "I see, I see...",
+			"2": "I see, I see...",
+			"3": "I see, I see...",
+			"4": "I see, I see...",
+			"5": "I see, I see..."
 		},
-		"Response Ask For Advice": {
-			"1": "SoldierJungle_Idle_S",
-			"2": "SoldierJungle_Idle_S",
-			"3": "SoldierJungle_Idle_S",
-			"4": "SoldierOasis_Idle_S",
-			"5": "SoldierOasis_Idle_W"
-		}
+		"Response Inquire About Ifa": {
+			"1": "Well young one...",
+			"2": "Well young one...",
+			"3": "Well young one...",
+			"4": "Well young one...",
+			"5": "Well young one..."
+		},
+
+		"Greeting": {
+            "1": "Good day young one.",
+            "2": "Good day young one.",
+            "3": "Good day young one.",
+            "4": "Good day young one.",
+            "5": "Good day young one."
+        },
+
+		"Farewell": {
+            "1": "Until next time you seek my guidance, young one.",
+            "2": "Until next time you seek my guidance, young one.",
+            "3": "Until next time you seek my guidance, young one.",
+            "4": "Until next time you seek my guidance, young one.",
+            "5": "Until next time you seek my guidance, young one."
+        }
 	},
 
    "Jungle_Babalawo": {
         "Response Ask For Divination": {
-			"1": "SoldierJungle_Idle_S",
-			"2": "SoldierJungle_Idle_S",
-			"3": "SoldierJungle_Idle_S",
-			"4": "SoldierOasis_Idle_S",
-			"5": "SoldierOasis_Idle_W"
+			"1": "I see, I see...",
+			"2": "I see, I see...",
+			"3": "I see, I see...",
+			"4": "I see, I see...",
+			"5": "I see, I see..."
 		},
 		"Response Ask For Advice": {
-			"1": "SoldierJungle_Idle_S",
-			"2": "SoldierJungle_Idle_S",
-			"3": "SoldierJungle_Idle_S",
-			"4": "SoldierOasis_Idle_S",
-			"5": "SoldierOasis_Idle_W"
-		}
+			"1": "Well young one...",
+			"2": "Well young one...",
+			"3": "Well young one...",
+			"4": "Well young one...",
+			"5": "Well young one..."
+		},
+
+		"Greeting": {
+            "1": "Good day young one.",
+            "2": "Good day young one.",
+            "3": "Good day young one.",
+            "4": "Good day young one.",
+            "5": "Good day young one."
+        },
+
+		"Farewell": {
+            "1": "Until next time you seek my guidance, young one.",
+            "2": "Until next time you seek my guidance, young one.",
+            "3": "Until next time you seek my guidance, young one.",
+            "4": "Until next time you seek my guidance, young one.",
+            "5": "Until next time you seek my guidance, young one."
+        }
    },
 
    "Mountain_Babalawo": {
         "Response Ask For Divination": {
-			"1": "SoldierJungle_Idle_S",
-			"2": "SoldierJungle_Idle_S",
-			"3": "SoldierJungle_Idle_S",
-			"4": "SoldierOasis_Idle_S",
-			"5": "SoldierOasis_Idle_W"
+			"1": "I see, I see...",
+			"2": "I see, I see...",
+			"3": "I see, I see...",
+			"4": "I see, I see...",
+			"5": "I see, I see..."
 		},
 		"Response Ask For Advice": {
-			"1": "SoldierJungle_Idle_S",
-			"2": "SoldierJungle_Idle_S",
-			"3": "SoldierJungle_Idle_S",
-			"4": "SoldierOasis_Idle_S",
-			"5": "SoldierOasis_Idle_W"
-		}
+			"1": "Well young one...",
+			"2": "Well young one...",
+			"3": "Well young one...",
+			"4": "Well young one...",
+			"5": "Well young one..."
+		},
+
+		"Greeting": {
+            "1": "Good day young one.",
+            "2": "Good day young one.",
+            "3": "Good day young one.",
+            "4": "Good day young one.",
+            "5": "Good day young one."
+        },
+
+		"Farewell": {
+            "1": "Until next time you seek my guidance, young one.",
+            "2": "Until next time you seek my guidance, young one.",
+            "3": "Until next time you seek my guidance, young one.",
+            "4": "Until next time you seek my guidance, young one.",
+            "5": "Until next time you seek my guidance, young one."
+        }
    }
 }

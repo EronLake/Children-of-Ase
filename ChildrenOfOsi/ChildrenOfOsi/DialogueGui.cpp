@@ -223,12 +223,39 @@ void DialogueGui::drawGuiText()
   switch(DialogueController::getState()) {
     case 1:
       for(int i = 0; i <= 4; i++) {
-        if(((CheckClass::isHero(DialogueController::getOther())) ?
+        /*if(((CheckClass::isHero(DialogueController::getOther())) ?
           DialogueController::getOptions() : DialogueController::get_soldier_options()).size()
-          <= (DialogueController::scroll_control + i)) break;
+          <= (DialogueController::scroll_control + i)) break;*/
+	      if (CheckClass::isHero(DialogueController::getOther())){
+		      if(DialogueController::getOptions().size() <= (DialogueController::scroll_control + i))
+			    break;
+		  }
+		  else{
+		      Soldier* sol = dynamic_cast<Soldier*>(DialogueController::getOther());
+			  if(sol){
+			      if(DialogueController::get_soldier_options().size() <= (DialogueController::scroll_control + i))
+				      break;
+		      }   
+			  else { //babalawo case
+				  if (DialogueController::get_babalawo_options().size() <= (DialogueController::scroll_control + i))
+					  break;
+			  }
+		  }
 
-        std::string option_str = replace_str_char(((CheckClass::isHero(DialogueController::getOther())) ?
-          DialogueController::getOptions() : DialogueController::get_soldier_options())[DialogueController::scroll_control + i][1], "_", ' ');
+		  std::string option_str = "";
+		  if(CheckClass::isHero(DialogueController::getOther()))
+		     option_str = replace_str_char(DialogueController::getOptions()[DialogueController::scroll_control + i][1], "_", ' ');
+		  else{
+		     Soldier* s = dynamic_cast<Soldier*>(DialogueController::getOther());
+		     if(s)
+			     option_str = replace_str_char(DialogueController::get_soldier_options()[DialogueController::scroll_control + i][1], "_", ' ');
+			 else//babalawo case
+			     option_str = replace_str_char(DialogueController::get_babalawo_options()[DialogueController::scroll_control + i][1], "_", ' ');    
+			     
+		  }
+
+        /*std::string option_str = replace_str_char(((CheckClass::isHero(DialogueController::getOther())) ?
+          DialogueController::getOptions() : DialogueController::get_soldier_options())[DialogueController::scroll_control + i][1], "_", ' ');*/
         if(option_str.find("Advise To", 0) != string::npos || option_str.find("Ask About", 0) != string::npos)
           option_str += (" " + ((CheckClass::isHero(DialogueController::getOther())) ?
             DialogueController::getOptions() : DialogueController::get_soldier_options())[DialogueController::scroll_control + i][3]);
