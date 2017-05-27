@@ -730,7 +730,12 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	cout << "size of largestruct is " << largeStruct->size() << endl;
 	for (auto it : *largeStruct) cout << (it)->getName() << endl;
 
-	if (PRELOAD_TEX) t0.join();
+	if (PRELOAD_TEX) {
+		tm.join();
+		t0.join();
+		t1.join();
+		t2.join();
+	}
 	oya->set_busy(0);
 	yemoja->set_busy(0);
 	while (GameWindow::isRunning()) {
