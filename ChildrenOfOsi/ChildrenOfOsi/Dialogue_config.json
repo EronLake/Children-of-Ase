@@ -785,7 +785,7 @@
 		  "NotorEstimate": 50,
 		  "StrEstimate": 50
      },
-	 "reply_point_3" : {
+	 /*"reply_point_3" : {
 	      "name" : "Join Party",
           "icon" : "srp",
 	      "template" : "Join Party",
@@ -803,7 +803,7 @@
 		  "AffEstimate": 50,
 		  "NotorEstimate": 50,
 		  "StrEstimate": 50
-    },
+    },*/
 	"reply_point_4" : {
 	      "name" : "Teach",
           "icon" : "srp",
