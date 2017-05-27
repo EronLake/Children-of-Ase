@@ -47,7 +47,7 @@
 #define LOAD_REGIONS 1 //0==Load Config should be empty || 1==Load All || 2==Load Oasis || 3==Load Jungle
 #define LOAD_MAP 1
 #define RIVER_COLLIDE 0
-#define PRELOAD_TEX 0
+#define PRELOAD_TEX 1
 #define THREAD_PHYSICS 1
 #define WRITE_TO_LOG 0
 
