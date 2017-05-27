@@ -771,7 +771,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
       Tutorial::drawTutorial();
 		}
 		while (current_game_state == game_state::in_game) {
-     // cout << "Current game state: in_game" << endl;
+      cout << "Current game state: in_game" << endl;
 			if (iController->current_game_state != game_state::in_game) {
 				iController->current_game_state = current_game_state;
 			}
@@ -851,10 +851,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 				grid_worldobj->clear_and_reinsert(movVec);
 				//grid_worldobj->clear();
 			}
-			//grid_worldobj->insert_worldobj_to_grid(recVec);
-			//grid_worldobj->insert_worldobj_to_grid(movVec);
-			//grid->clear();
-			//grid->insert_objs_to_grid(rivObj->getLines());
+
 			Alex->updateCD();
 			Alex->effect.sprite.animate();
 			Alex->WorldObj::animateObj();
@@ -900,17 +897,6 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 
 			state = DialogueController::getState();
 
-			
-			/*combatControl->updateSoliderStatus();
-			combatControl->checkParties();
-			for (int i = 0; i < soldiers_list.size(); i++) {
-				combatControl->update_soldier(soldiers_list[i], state);
-			}*/
-
-		//	std::thread AI([=]() {
-				
-		//	});
-			//YemojaPlanner->set_current_action(test_train);
 			combatControl->checkParties();
 
 			for (int i = 0; i < soldiers_list.size(); i++) {
@@ -1030,7 +1016,8 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
       Tutorial::drawTutorial();
     }
     while(current_game_state == game_state::tutorial_pause) {
-      if(iController->current_game_state != game_state::pause_menu) {
+      cout << "Current game state: tutorial_pause" << endl;
+      if(iController->current_game_state != game_state::tutorial_pause) {
         iController->current_game_state = current_game_state;
       }
 
@@ -1039,9 +1026,9 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
         return;
       }
 
-      for(auto itr : Containers::hero_table)
-        gameplay_functions->stop(itr.second);
-      gameplay_functions->draw_frame(Alex);
+      // gameplay_functions->draw_frame(Alex);
+      gameplay_functions->drawTut(Alex);
+      // Tutorial::drawTutorial();
 
       start_tick = clock();
       iController->InputCheck();
@@ -1056,8 +1043,6 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
       HUD::AVG = total_fps / frame_count;
 
       current_game_state = iController->current_game_state;
-      gameplay_functions->drawTut(Alex);
-      Tutorial::drawTutorial();
     }
 		while (current_game_state == game_state::victory_menu) {
 

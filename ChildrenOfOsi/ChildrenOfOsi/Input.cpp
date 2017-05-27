@@ -619,7 +619,7 @@ void Input::InputCheck()
 	if (current_game_state == game_state::main_menu) {
     if (!this->locked && ENTER) {
       Tutorial::completeStage(*this);
-      // this->locked = true;
+      this->locked = true;
 		}
 	}
 	else if (current_game_state == game_state::in_game) {
@@ -1224,14 +1224,14 @@ void Input::InputCheck()
 	else if (current_game_state == game_state::pause_menu) {
     if(!this->locked && ENTER) {
       current_game_state = game_state::in_game;
-      // this->locked = true;
+      this->locked = true;
     }
 	}
   else if(current_game_state == game_state::tutorial_pause) {
     if(!this->locked && ENTER && Tutorial::isStageActive(Tutorial::Stage::INTRO01) || Tutorial::isStageActive(Tutorial::Stage::INTRO02)) {
       Tutorial::completeStage(*this);
       current_game_state = game_state::in_game;
-      // this->locked = true;
+      this->locked = true;
     }
   }
   else if(current_game_state == game_state::victory_menu) {
