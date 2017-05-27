@@ -15,7 +15,7 @@ std::unordered_map<std::string, execute_ptr> ActionExecFunctions::ActionExecMap{
 	{ "execute_bribe",	        &execute_bribe          },
 	{ "execute_compliment",	    &execute_conversation   },
 	{ "execute_boast",          &execute_conversation   },
-	{ "execute_grovel",          &execute_conversation },
+	{ "execute_grovel",         &execute_conversation   },
 	{ "execute_intimidate",     &execute_conversation   }
 };
 
