@@ -1,146 +1,146 @@
 {
 	"Oasis_Man_1": {
-		"1": "I am oasis man 1.",
-        "2": "I am oasis man 1.",
-        "3": "I am oasis man 1.",
-		"4": "I am oasis man 1.",
-        "5": "I am oasis man 1."
+		    "1": "I have heard in passing conversation that Yemoja doesn't mind an occasional compliment.",
+        "2": "I have heard in passing conversation that Yemoja doesn't mind an occasional compliment.",
+        "3": "I have heard in passing conversation that Yemoja doesn't mind an occasional compliment.",
+		    "4": "I have heard in passing conversation that Yemoja doesn't mind an occasional compliment.",
+        "5": "I have heard in passing conversation that Yemoja doesn't mind an occasional compliment."
 	},
 
    "Oasis_Man_2": {
-        "1": "I am oasis man 2.",
-		"2": "I am oasis man 2.",
-        "3": "I am oasis man 2.",
-		"4": "I am oasis man 2.",
-        "5": "I am oasis man 2."
+        "1": "Yemoja is the type of leader that will do whatever it takes for the safety of her village, including accepting bribes.",
+		    "2": "Yemoja is the type of leader that will do whatever it takes for the safety of her village, including accepting bribes.",
+        "3": "Yemoja is the type of leader that will do whatever it takes for the safety of her village, including accepting bribes.",
+		    "4": "Yemoja is the type of leader that will do whatever it takes for the safety of her village, including accepting bribes.",
+        "5": "Yemoja is the type of leader that will do whatever it takes for the safety of her village, including accepting bribes."
    },
 
    "Oasis_Man_3": {
-        "1": "I am oasis man 3.",
-		"2": "I am oasis man 3.",
-        "3": "I am oasis man 3.",
-		"4": "I am oasis man 3.",
-        "5": "I am oasis man 3."
+        "1": "Watch your mouth around Yemoja, she doesn't take too kindly to insults.",
+		    "2": "Watch your mouth around Yemoja, she doesn't take too kindly to insults.",
+        "3": "Watch your mouth around Yemoja, she doesn't take too kindly to insults.",
+		    "4": "Watch your mouth around Yemoja, she doesn't take too kindly to insults.",
+        "5": "Watch your mouth around Yemoja, she doesn't take too kindly to insults."
    },
 
    "Oasis_Woman_1": {
-        "1": "I am oasis woman 1.",
-		"2": "I am oasis woman 1.",
-        "3": "I am oasis woman 1.",
-		"4": "I am oasis woman 1.",
-        "5": "I am oasis woman 1."
+        "1": "I hear Yemoja soemtimes like being boasted to.",
+		    "2": "I hear Yemoja soemtimes like being boasted to.",
+        "3": "I hear Yemoja soemtimes like being boasted to.",
+		    "4": "I hear Yemoja soemtimes like being boasted to.",
+        "5": "I hear Yemoja soemtimes like being boasted to."
    },
 
    "Oasis_Woman_2": {
-        "1": "I am oasis woman 2.",
-		"2": "I am oasis woman 2.",
-        "3": "I am oasis woman 2.",
-		"4": "I am oasis woman 2.",
-        "5": "I am oasis woman 2."
+        "1": "I look up to Yemoja because she is a strong woman who is hard to intimidate.",
+		    "2": "I look up to Yemoja because she is a strong woman who is hard to intimidate.",
+        "3": "I look up to Yemoja because she is a strong woman who is hard to intimidate.",
+		    "4": "I look up to Yemoja because she is a strong woman who is hard to intimidate.",
+        "5": "I look up to Yemoja because she is a strong woman who is hard to intimidate."
    },
 
    "Oasis_Woman_3": {
-        "1": "I am oasis woman 3.",
-		"2": "I am oasis woman 3.",
-        "3": "I am oasis woman 3.",
-		"4": "I am oasis woman 3.",
-        "5": "I am oasis woman 3."
+        "1": "Although I have only talked to her on a few occasions myself, I find Yemoja to be quite kind.",
+		    "2": "Although I have only talked to her on a few occasions myself, I find Yemoja to be quite kind.",
+        "3": "Although I have only talked to her on a few occasions myself, I find Yemoja to be quite kind.",
+		    "4": "Although I have only talked to her on a few occasions myself, I find Yemoja to be quite kind.",
+        "5": "Although I have only talked to her on a few occasions myself, I find Yemoja to be quite kind."
    },
 
    "Oasis_child_1": {
-        "1": "I am oasis child 1.",
-		"2": "I am oasis child 1.",
-        "3": "I am oasis child 1.",
-		"4": "I am oasis child 1.",
-        "5": "I am oasis child 1."
+        "1": "One day I hope to be a strong warrior so I can help keep the village safe.",
+		    "2": "One day I hope to be a strong warrior so I can help keep the village safe.",
+        "3": "One day I hope to be a strong warrior so I can help keep the village safe.",
+		    "4": "One day I hope to be a strong warrior so I can help keep the village safe.",
+        "5": "One day I hope to be a strong warrior so I can help keep the village safe."
    },
 
    "Oasis_child_2": {
-        "1": "I am oasis child 2.",
-		"2": "I am oasis child 2.",
-        "3": "I am oasis child 2.",
-		"4": "I am oasis child 2.",
-        "5": "I am oasis child 2."
+        "1": "Have you talked to the village Babalawo?",
+		    "2": "Have you talked to the village Babalawo?",
+        "3": "Have you talked to the village Babalawo?",
+		    "4": "Have you talked to the village Babalawo?",
+        "5": "Have you talked to the village Babalawo?"
    },
 
    "Oasis_child_3": {
-        "1": "I am oasis child 3.",
-		"2": "I am oasis child 3.",
-        "3": "I am oasis child 3.",
-		"4": "I am oasis child 3.",
-        "5": "I am oasis child 3."
+        "1": "You should visit the village shrine.",
+		    "2": "You should visit the village shrine.",
+        "3": "You should visit the village shrine.",
+		    "4": "You should visit the village shrine.",
+        "5": "You should visit the village shrine."
    },
 
    "Jungle_Man_1": {
-        "1": "I am jungle man 1.",
-		"2": "I am jungle man 1.",
-        "3": "I am jungle man 1.",
-		"4": "I am jungle man 1.",
-        "5": "I am jungle man 1."
+        "1": "Oya usually doesn't mind a nice compliment.",
+		    "2": "Oya usually doesn't mind a nice compliment.",
+        "3": "Oya usually doesn't mind a nice compliment.",
+		    "4": "Oya usually doesn't mind a nice compliment.",
+        "5": "Oya usually doesn't mind a nice compliment."
    },
 
    "JUngle_Man_2": {
-        "1": "I am jungle man 2.",
-		"2": "I am jungle man 2.",
-        "3": "I am jungle man 2.",
-		"4": "I am jungle man 2.",
-        "5": "I am jungle man 2."
+        "1": "Oya is a proud woman who doesn't take kindly to insults",
+		    "2": "Oya is a proud woman who doesn't take kindly to insults",
+        "3": "Oya is a proud woman who doesn't take kindly to insults",
+		    "4": "Oya is a proud woman who doesn't take kindly to insults",
+        "5": "Oya is a proud woman who doesn't take kindly to insults"
    },
 
    "Jungle_Man_3": {
-        "1": "I am jungle man 3.",
-		"2": "I am jungle man 3.",
-        "3": "I am jungle man 3.",
-		"4": "I am jungle man 3.",
-        "5": "I am jungle man 3."
+        "1": "I hear that Oya isn't usually petty enough to accept a bribe.",
+		    "2": "I hear that Oya isn't usually petty enough to accept a bribe.",
+        "3": "I hear that Oya isn't usually petty enough to accept a bribe.",
+		    "4": "I hear that Oya isn't usually petty enough to accept a bribe.",
+        "5": "I hear that Oya isn't usually petty enough to accept a bribe."
    },
 
    "Jungle_Woman_1": {
-        "1": "I am jungle woman 1.",
-		"2": "I am jungle woman 1.",
-        "3": "I am jungle woman 1.",
-		"4": "I am jungle woman 1.",
-        "5": "I am jungle woman 1."
+        "1": "My pigheaded husband boasted about himself to Oya the other day, and suprisingly she seemed to really enjoy it.",
+		    "2": "My pigheaded husband boasted about himself to Oya the other day, and suprisingly she seemed to really enjoy it.",
+        "3": "My pigheaded husband boasted about himself to Oya the other day, and suprisingly she seemed to really enjoy it.",
+		    "4": "My pigheaded husband boasted about himself to Oya the other day, and suprisingly she seemed to really enjoy it.",
+        "5": "My pigheaded husband boasted about himself to Oya the other day, and suprisingly she seemed to really enjoy it."
    },
 
    "Jungle_Woman_2": {
-        "1": "I am jungle woman 2.",
-		"2": "I am jungle woman 2.",
-        "3": "I am jungle woman 2.",
-		"4": "I am jungle woman 2.",
-        "5": "I am jungle woman 2."
+        "1": "I look up to her wisdom but have heard that Oya can be easily intimidated.",
+		    "2": "I look up to her wisdom but have heard that Oya can be easily intimidated.",
+        "3": "I look up to her wisdom but have heard that Oya can be easily intimidated.",
+		    "4": "I look up to her wisdom but have heard that Oya can be easily intimidated.",
+        "5": "I look up to her wisdom but have heard that Oya can be easily intimidated."
    },
 
    "Jungle_Woman_3": {
-        "1": "I am jungle woman 3.",
-		"2": "I am jungle woman 3.",
-        "3": "I am jungle woman 3.",
-		"4": "I am jungle woman 3.",
-        "5": "I am jungle woman 3."
+        "1": "Oya takes a lot of pride in her Wisdom.",
+		    "2": "Oya takes a lot of pride in her Wisdom.",
+        "3": "Oya takes a lot of pride in her Wisdom.",
+		    "4": "Oya takes a lot of pride in her Wisdom.",
+        "5": "Oya takes a lot of pride in her Wisdom.."
    },
 
    "Jungle_child_1": {
-        "1": "I am jungle child 1.",
-		"2": "I am jungle child 1.",
-        "3": "I am jungle child 1.",
-		"4": "I am jungle child 1.",
-        "5": "I am jungle child 1."
+        "1": "Have ever been to the Oasis Village? I hear their leader is very protective.",
+		    "2": "Have ever been to the Oasis Village? I hear their leader is very protective.",
+        "3": "Have ever been to the Oasis Village? I hear their leader is very protective.",
+		    "4": "Have ever been to the Oasis Village? I hear their leader is very protective.",
+        "5": "Have ever been to the Oasis Village? I hear their leader is very protective."
    },
 
    "Jungle_child_2": {
-        "1": "I am jungle child 2.",
-		"2": "I am jungle child 2.",
-        "3": "I am jungle child 2.",
-		"4": "I am jungle child 2.",
-        "5": "I am jungle child 2."
+        "1": "I hope one day I grow up to be as wise as Oya.",
+		    "2": "I hope one day I grow up to be as wise as Oya.",
+        "3": "I hope one day I grow up to be as wise as Oya.",
+		    "4": "I hope one day I grow up to be as wise as Oya.",
+        "5": "I hope one day I grow up to be as wise as Oya."
    },
 
    "Jungle_child_3": {
-        "1": "I am jungle child 3.",
-		"2": "I am jungle child 3.",
-        "3": "I am jungle child 3.",
-		"4": "I am jungle child 3.",
-        "5": "I am jungle child 3."
+        "1": "You should talk to the village Babalawo",
+		    "2": "You should talk to the village Babalawo",
+        "3": "You should talk to the village Babalawo",
+		    "4": "You should talk to the village Babalawo",
+        "5": "You should talk to the village Babalawo"
    }
 
 
