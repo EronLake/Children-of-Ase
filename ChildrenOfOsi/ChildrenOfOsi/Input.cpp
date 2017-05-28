@@ -619,7 +619,7 @@ void Input::InputCheck()
 	if (current_game_state == game_state::main_menu) {
     if (!this->locked && ENTER) {
       Tutorial::completeStage(*this);
-      // this->locked = true;
+      this->locked = true;
 		}
 	}
 	else if (current_game_state == game_state::in_game) {
@@ -923,7 +923,7 @@ void Input::InputCheck()
 				//}
 				//else
 				//{
-					if (!DialogueController::first_q_press) {
+					if (!DialogueController::first_q_press && DialogueController::getState() == 1) {
 						DialogueController::create_farewell();
 						//gameplay_functions->change_song("Change", RegionState::current_region.getRTheme(), RegionState::current_region.getRTheme());
 						RegionState::in_village = false;
@@ -1024,6 +1024,7 @@ void Input::InputCheck()
 				if (S && State < 3) {
 					int tmp = DialogueController::getSelect();
 					Hero* temp_hero = CheckClass::isHero(DialogueController::getOther());
+					Soldier* my_soldier = dynamic_cast<Soldier*>(DialogueController::getOther());
 					if (DialogueController::getState() == 1 && temp_hero) {
 						if (tmp < (DialogueController::getOptions().size() - 1)) {
 							//DialogueController::setSelect(++tmp);
@@ -1047,7 +1048,7 @@ void Input::InputCheck()
 							//////std:://cout << "Index: " << tmp << std::endl;
 						}
 					}
-					else if (DialogueController::getState() == 1) {
+					else if (DialogueController::getState() == 1 && my_soldier) {
 						if (tmp < (DialogueController::get_soldier_options().size() - 1)) {
 							//DialogueController::setSelect(++tmp);
 							DialogueController::scroll_control++;
@@ -1065,6 +1066,27 @@ void Input::InputCheck()
 							if (DialogueController::scroll_control < 0)
 								DialogueController::scroll_control = 0;
 							count = 5;
+							//////std:://cout << "Index: " << tmp << std::endl;
+						}
+					}
+					else {
+						if (tmp < (DialogueController::get_babalawo_options().size() - 1)) {
+							//DialogueController::setSelect(++tmp);
+							DialogueController::scroll_control++;
+							if (DialogueController::scroll_control >= DialogueController::get_babalawo_options().size()) {
+								DialogueController::scroll_control = DialogueController::get_babalawo_options().size() - 1;
+								gameplay_functions->createTaskForAudio("PlaySound", "SOUND", "SFX/down.wav", nullptr, RegionState::soundType::sfx);
+							}
+							count = 10;
+							//////std:://cout << "Index: " << tmp << std::endl;
+						}
+						if (tmp >(DialogueController::get_babalawo_options().size() - 1)) {
+							tmp = 0;
+							DialogueController::setSelect(tmp);
+							//DialogueController::scroll_control++;
+							if (DialogueController::scroll_control < 0)
+								DialogueController::scroll_control = 0;
+							count = 10;
 							//////std:://cout << "Index: " << tmp << std::endl;
 						}
 					}
@@ -1122,6 +1144,13 @@ void Input::InputCheck()
 							Soldier* sold = dynamic_cast<Soldier*>(DialogueController::getOther());
 							if(sold)
 							    DialogueController::player_conversation_point_soldier();
+							else {
+								NPC* thing = dynamic_cast<NPC*>(DialogueController::getOther());
+								if (thing) {
+									if (DialogueController::getOther()->getName().find("Babalawo") != string::npos)//if player interacting with babalawo
+										DialogueController::player_conversation_point_babalawo();
+								}
+							}
 						}
 					}
 					else if (DialogueController::getState() == 2) {
@@ -1134,8 +1163,17 @@ void Input::InputCheck()
 						Hero* temp_hero;
 						if(temp_hero = CheckClass::isHero(DialogueController::getOther()))
 						    DialogueController::PlayerConversationPoint();
-						else
-							DialogueController::player_conversation_point_soldier();
+						else {
+							Soldier* sol = dynamic_cast<Soldier*>(DialogueController::getOther());
+							if(sol)
+							    DialogueController::player_conversation_point_soldier();
+							else {
+								NPC* thing = dynamic_cast<NPC*>(DialogueController::getOther());
+								if (thing) {
+									DialogueController::player_conversation_point_babalawo();
+								}
+							}
+						}
 					}
 					else if (DialogueController::getState() == 6) {
 						count = 5;
@@ -1198,14 +1236,14 @@ void Input::InputCheck()
 	else if (current_game_state == game_state::pause_menu) {
     if(!this->locked && ENTER) {
       current_game_state = game_state::in_game;
-      // this->locked = true;
+      this->locked = true;
     }
 	}
   else if(current_game_state == game_state::tutorial_pause) {
     if(!this->locked && ENTER && Tutorial::isStageActive(Tutorial::Stage::INTRO01) || Tutorial::isStageActive(Tutorial::Stage::INTRO02)) {
       Tutorial::completeStage(*this);
       current_game_state = game_state::in_game;
-      // this->locked = true;
+      this->locked = true;
     }
   }
   else if(current_game_state == game_state::victory_menu) {

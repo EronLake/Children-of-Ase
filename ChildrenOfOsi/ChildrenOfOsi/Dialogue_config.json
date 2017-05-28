@@ -722,6 +722,46 @@
 		  "NotorEstimate": 50,
 		  "StrEstimate": 50
 
+     },
+
+	 "conversation_point_8" : {
+	      "name" : "Ask For Divination",
+          "icon" : "",
+	      "template" : "Ask For Divination",
+		  "honor" : 0,
+		  "pride": 0,
+		  "aggression": 0,
+		  "kindness": 0,
+		  "greed": 0,
+		  "recklessness": 0,
+		  "extroversion": 0,
+		  "affinity": 50,
+		  "notoriety": 50,
+		  "strength": 50,
+		  "AffEstimate": 50,
+		  "NotorEstimate": 50,
+		  "StrEstimate": 50
+
+     },
+
+	 "conversation_point_9" : {
+	      "name" : "Inquire About Ifa",
+          "icon" : "",
+	      "template" : "Inquire About Ifa",
+		  "honor" : 0,
+		  "pride": 0,
+		  "aggression": 0,
+		  "kindness": 0,
+		  "greed": 0,
+		  "recklessness": 0,
+		  "extroversion": 0,
+		  "affinity": 50,
+		  "notoriety": 50,
+		  "strength": 50,
+		  "AffEstimate": 50,
+		  "NotorEstimate": 50,
+		  "StrEstimate": 50
+
      }
 	},
 
@@ -745,7 +785,7 @@
 		  "NotorEstimate": 50,
 		  "StrEstimate": 50
      },
-	 "reply_point_3" : {
+	 /*"reply_point_3" : {
 	      "name" : "Join Party",
           "icon" : "srp",
 	      "template" : "Join Party",
@@ -763,7 +803,7 @@
 		  "AffEstimate": 50,
 		  "NotorEstimate": 50,
 		  "StrEstimate": 50
-    },
+    },*/
 	"reply_point_4" : {
 	      "name" : "Teach",
           "icon" : "srp",
@@ -847,6 +887,46 @@
           "icon" : "srp",
 	      "template" : "Response_Recruit_For_Party",
 		  "corresponding_conv_point": "Recruit_For_Party",
+		  "honor" : 0,
+		  "pride": 0,
+		  "aggression": 0,
+		  "kindness": 0,
+		  "greed": 0,
+		  "recklessness": 0,
+		  "extroversion": 0,
+		  "affinity": 50,
+		  "notoriety": 50,
+		  "strength": 50,
+		  "AffEstimate": 50,
+		  "NotorEstimate": 50,
+		  "StrEstimate": 50
+    },
+
+	"reply_point_9" : {
+	      "name" : "Response Inquire About Ifa",
+          "icon" : "srp",
+	      "template" : "Response Inquire About Ifa",
+		  "corresponding_conv_point": "Inquire About Ifa",
+		  "honor" : 0,
+		  "pride": 0,
+		  "aggression": 0,
+		  "kindness": 0,
+		  "greed": 0,
+		  "recklessness": 0,
+		  "extroversion": 0,
+		  "affinity": 50,
+		  "notoriety": 50,
+		  "strength": 50,
+		  "AffEstimate": 50,
+		  "NotorEstimate": 50,
+		  "StrEstimate": 50
+    },
+
+	"reply_point_10" : {
+	      "name" : "Response Ask For Divination",
+          "icon" : "srp",
+	      "template" : "Response Ask For Divination",
+		  "corresponding_conv_point": "Ask For Divination",
 		  "honor" : 0,
 		  "pride": 0,
 		  "aggression": 0,

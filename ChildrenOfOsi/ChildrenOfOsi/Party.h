@@ -43,7 +43,7 @@ class Party
   void setLeader(Soldier* s);
   void addToParty(Soldier* s, bool b);
   void add_party_to_party(Party* s);
-  void form_attack_party(Party* s);
+  void form_attack_party(Party* s, bool combat);
   void removeSoldier(Soldier* s, bool b);
   void clear();
   void setMode(int i);
