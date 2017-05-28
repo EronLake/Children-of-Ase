@@ -650,9 +650,10 @@ void DialogueController::PlayerResponse()
 				//player->quest = quest;
 				int time_limit = 3600;
 				player->add_quest(quest, time_limit);
+				player->quests_log.push_back(quest);
 				planner->quests_given.push_back(quest); //gives npc record of what they gave player
 
-				player->cur_action = quest; //gives player record of what they are doing
+				//player->cur_action = quest; //gives player record of what they are doing
 				first_q_press = false;//make sure player can still quit GUI if they accepted a quest when they were about to exit already
 
 			}
@@ -1868,34 +1869,38 @@ void DialogueController::startConversation(WorldObj* n, bool playerTalk)
 			Planner* planner = AIController::get_plan(CheckClass::isHero(other)->name);
 			bool player_doing_quest = false;
 			bool quest_complete = false;
-			Action* the_quest = new Action;
+
 			for (int i = 0; i < planner->quests_given.size(); ++i) {
 				if (planner->quests_given[i]->getDoer()->name == SHANGO && planner->quests_given[i]->executed == false) {
 					player_doing_quest = true;
-					//the_quest = planner->quests_given[i];
-					the_quest = player->cur_action;
 				}
 				if (planner->quests_given[i]->getDoer()->name == SHANGO && planner->quests_given[i]->executed == true) {
 					quest_complete = true;
-					//the_quest = planner->quests_given[i];
-					the_quest = player->cur_action;
 				}
 			}
 			if (quest_complete) {
-				if (player->quest_status[temp_hero->name] == 3) {
+				if (player->quest_status[temp_hero->name] == Player::SUCC_QUEST) {
 					message = n->getName() + ": " + dialogue.gen_dialog({ "Quest_Complete","Quest_Complete" }, temp_hero);
-					player->quest_status[temp_hero->name] = 0;
+					player->quest_status[temp_hero->name] = Player::NOT_QUEST;
 					quest_complete = false;
 					for (int i = 0; i < planner->quests_given.size();) {
 						if (planner->quests_given[i]->getDoer()->name == SHANGO && planner->quests_given[i]->executed == true)
-							planner->quests_given.erase(planner->quests_given.begin() + i);
+							planner->quests_given.erase(planner->quests_given.begin() + i);//erase from npc's quests log
+						else
+							++i;
+					}
+					for (int i = 0; i < player->quests_log.size();) {
+						if (player->quests_log[i]->executed) {
+							player->remove_quest(player->quests_log[i]);//remove from "quests" map
+							player->quests_log.erase(player->quests_log.begin() + i);//erase from player's quests log
+						}
 						else
 							++i;
 					}
 				}
-				else if (player->quest_status[temp_hero->name] == 2) {
+				else if (player->quest_status[temp_hero->name] == Player::FAIL_QUEST) {
 					message = n->getName() + ": " + dialogue.gen_dialog({ "Quest_Failed","Quest_Failed" }, temp_hero);
-					player->quest_status[temp_hero->name] = 0;
+					player->quest_status[temp_hero->name] = Player::NOT_QUEST;
 					quest_complete = false;
 					for (int i = 0; i < planner->quests_given.size();) {
 						if (planner->quests_given[i]->getDoer()->name == SHANGO && planner->quests_given[i]->executed == true)
@@ -1903,6 +1908,15 @@ void DialogueController::startConversation(WorldObj* n, bool playerTalk)
 						else
 							++i;
 					}
+					for (int i = 0; i < player->quests_log.size();) {
+						if (player->quests_log[i]->executed) {
+							player->remove_quest(player->quests_log[i]);//remove from "quests" map
+							player->quests_log.erase(player->quests_log.begin() + i);//erase from player's quests log
+						}
+						else
+							++i;
+					}
+					
 				}
 			}
 			else if (player_doing_quest && temp_hero->SUGG_ACT_STATUS == 0){

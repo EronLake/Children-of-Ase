@@ -64,7 +64,7 @@ public:
 	void add_conv_point(std::string icon,std::string temp,std::string name);
 
 	//functions for audio
-	void play_sound(string name);
+	void play_sound(string name, char* source, RegionState::soundType type);
 	void change_song(string name,char* from, char* to, RegionState::soundType type);
 	void pause_unpause(string name, char* source);
 	void createTaskForAudio(std::string _name, std::string _type, char* _source, char* _target, RegionState::soundType _soundType);

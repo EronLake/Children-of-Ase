@@ -99,13 +99,13 @@ void ActionExecFunctions::execute_train(Action* train) {
 			train->getDoer()->set_action_destination(train->getDoer()->getVillage()->get_village_location()); //Also predefined, maybe as "home_location" in hero
 			train->getDoer()->set_max_dist_act(500);
 			//print stats before applying post cond 
-			cout << train->getDoer()->name << "'s str of Shgango BEFORE train is " << train->getDoer()->rel[1]->getStrength() << endl;
-			cout << train->getDoer()->name << "'s str of Yemoja BEFORE train is " << train->getDoer()->rel[2]->getStrength() << endl;	//pretty sure only this one will work
-			cout << train->getDoer()->name << "'s str of Oya BEFORE train is " << train->getDoer()->rel[3]->getStrength() << endl;
+			//cout << train->getDoer()->name << "'s str of Shgango BEFORE train is " << train->getDoer()->rel[1]->getStrength() << endl;
+			//cout << train->getDoer()->name << "'s str of Yemoja BEFORE train is " << train->getDoer()->rel[2]->getStrength() << endl;	//pretty sure only this one will work
+			//cout << train->getDoer()->name << "'s str of Oya BEFORE train is " << train->getDoer()->rel[3]->getStrength() << endl;
 			train->apply_postconditions(true);				 //Apply post-conditions
-			cout << train->getDoer()->name << "'s str of Shgango AFTER train is " << train->getDoer()->rel[1]->getStrength() << endl;
-			cout << train->getDoer()->name << "'s str of Yemoja AFTER train is " << train->getDoer()->rel[2]->getStrength() << endl;	//pretty sure only this one will work
-			cout << train->getDoer()->name << "'s str of Oya AFTER train is " << train->getDoer()->rel[3]->getStrength() << endl;
+			//cout << train->getDoer()->name << "'s str of Shgango AFTER train is " << train->getDoer()->rel[1]->getStrength() << endl;
+			//cout << train->getDoer()->name << "'s str of Yemoja AFTER train is " << train->getDoer()->rel[2]->getStrength() << endl;	//pretty sure only this one will work
+			//cout << train->getDoer()->name << "'s str of Oya AFTER train is " << train->getDoer()->rel[3]->getStrength() << endl;
 			//doer_mem->setCategory("success");			 //Call update_memory function
 			//doer_mem->setReason("I am good at training");
 			//doer_mem->setWhen(frame_count);    

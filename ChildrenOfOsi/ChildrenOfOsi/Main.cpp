@@ -266,9 +266,11 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	Input* iController = new Input(gameplay_functions, Alex, RenM->renderHelper, tBuffer, recVec_ptr, movVec_ptr);
 
 	Hero* yemoja = Containers::hero_table["Yemoja"];
+	yemoja->song = "Music/HeroThemes/oya.flac";
 	heroes.push_back(yemoja);
 	yemoja->set_busy(0);//added for testing
 	Hero* oya = Containers::hero_table["Oya"];
+	oya->song = "Music/HeroThemes/ogun.flac";
 	oya->set_busy(0);//added for testing
 	heroes.push_back(oya);
 
@@ -819,7 +821,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 			if (RegionState::switch_music) {
 				if (RegionState::in_village) {
 
-					gameplay_functions->change_song("Change", RegionState::current_region.getRTheme(), RegionState::current_region.getVTheme(), RegionState::soundType::theme_music);
+					gameplay_functions->change_song("Change", RegionState::current_region.getRTheme(), RegionState::current_hero->song, RegionState::soundType::theme_music);
 					RegionState::switch_music = false;
 				}
 				else {
@@ -853,7 +855,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 			Alex->updateCD();
 			Alex->effect.sprite.animate();
 			Alex->WorldObj::animateObj();
-
+			
 			if (MAP_EDITOR) {
 				for (int i = 0; i < recVec.size(); i++) {
 					if (recVec[i]->getType() != WorldObj::TYPE_WORLDOBJ) {
