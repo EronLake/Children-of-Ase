@@ -68,6 +68,19 @@ void WorldObj::offsetBody(int i, float x1, float x2, float y1, float y2) {
 
 }
 
+void WorldObj::offset_effect(int i, float x1, float x2, float y1, float y2) {
+	std::lock_guard<std::mutex> guard(*this->mew);
+	//offset_x1 -= x1;
+	//offset_x2 -= x2;
+	//offset_y1 -= y1;
+	//offset_y2 -= y2;
+	effect.setX(body[i].getX() - x1);
+	effect.setY(body[i].getY() - y1);
+	effect.setWidth(body[i].getWidth() + (x1 + x2));
+	effect.setHeight(body[i].getHeight() + (y1 + y2));
+
+}
+
 void WorldObj::setDirWithBase(int od, bool update)
 {
 	if (update)baseDir = direction;

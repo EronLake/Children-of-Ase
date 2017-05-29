@@ -362,6 +362,7 @@
     <None Include="attack_config.json" />
     <None Include="babalawo_config.json" />
     <None Include="ClassDiagram.cd" />
+    <None Include="common_config.json" />
     <None Include="config_jungle.json" />
     <None Include="config_oasis.json" />
     <None Include="Dialogue_config.json" />

@@ -1,5 +1,8 @@
 #include "stdafx.h"
 #include "Attack.h"
+#include "Soldier.h"
+#include "Party.h"
+#include "CheckClass.h"
 
 
 Attack::Attack()
@@ -39,7 +42,16 @@ Attack::Attack(float x, float y, bool col) : WorldObj(x, y, col)
 	 for (int i = 0; i < hitObjs.size(); i++) {
 		 if (target == hitObjs[i])return;
 	 }
-	 (*target).addHealth(-dmg);
+
+	 Soldier* attacker = dynamic_cast<Soldier*>(this->get_creator());
+	 if (CheckClass::isPlayer(attacker->getParty()->getLeader())) 
+	 {
+		 Player* player = dynamic_cast<Player*>(attacker->getParty()->getLeader());
+		 (*target).addHealth(-dmg + (player->ori/10));
+	 } else {
+		 (*target).addHealth(-dmg);
+	 }
+
 	 hitObjs.push_back(target);
 }
 

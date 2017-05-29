@@ -1,3 +1,4 @@
+#include "stdafx.h"
 #include "GameState.h"
 #include "Village.h"
 #include "Alliance.h"

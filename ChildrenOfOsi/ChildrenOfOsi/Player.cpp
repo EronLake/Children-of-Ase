@@ -96,3 +96,133 @@ void Player::filter_move_to(Hero* npc) {
 		}
 	}
 }
+
+void Player::activate_exalted_form()
+{
+
+	Json::Value root;
+	Json::Reader reader;
+
+
+	std::ifstream file("hero_config.json");
+
+	file >> root;
+
+	//these sprites all heroes have
+	auto sprites = root["Shango"]["sprites"];
+
+	//set the texture to the appropriate sprite 
+	Containers::hero_table["Shango"]->sprite.setTexture(Containers::texture_table[sprites["exalted_setTexture"]["0"].asString()]);
+	Containers::hero_table["Shango"]->sprite.setIdleTexture(Containers::texture_table[sprites["exalted_setIdleTexture"]["0"].asString()]);
+
+	Containers::hero_table["Shango"]->sprite.id_up = Containers::texture_table[sprites["exalted_id_up"]["0"].asString()];
+	Containers::hero_table["Shango"]->sprite.id_left = Containers::texture_table[sprites["exalted_id_left"]["0"].asString()];
+	Containers::hero_table["Shango"]->sprite.id_right = Containers::texture_table[sprites["exalted_id_right"]["0"].asString()];
+	Containers::hero_table["Shango"]->sprite.id_down = Containers::texture_table[sprites["exalted_id_down"]["0"].asString()];
+
+	//Containers::hero_table[name]->sprite.up = Containers::texture_table[sprites["exalted_walk_up"]["0"].asString()];
+	//Containers::hero_table[name]->sprite.down = Containers::texture_table[sprites["exalted_walk_down"]["0"].asString()];
+	//Containers::hero_table[name]->sprite.left = Containers::texture_table[sprites["exalted_walk_left"]["0"].asString()];
+	//Containers::hero_table[name]->sprite.right = Containers::texture_table[sprites["exalted_walk_right"]["0"].asString()];
+
+	Containers::hero_table["Shango"]->sprite.up = Containers::texture_table[sprites["exalted_sprint_up"]["0"].asString()];
+	Containers::hero_table["Shango"]->sprite.down = Containers::texture_table[sprites["exalted_sprint_down"]["0"].asString()];
+	Containers::hero_table["Shango"]->sprite.left = Containers::texture_table[sprites["exalted_sprint_left"]["0"].asString()];
+	Containers::hero_table["Shango"]->sprite.right = Containers::texture_table[sprites["exalted_sprint_right"]["0"].asString()];
+
+	Containers::hero_table["Shango"]->sprite.atk_up = Containers::texture_table[sprites["exalted_atk_up"]["0"].asString()];
+	Containers::hero_table["Shango"]->sprite.atk_down = Containers::texture_table[sprites["exalted_atk_down"]["0"].asString()];
+	Containers::hero_table["Shango"]->sprite.atk_left = Containers::texture_table[sprites["exalted_atk_left"]["0"].asString()];
+	Containers::hero_table["Shango"]->sprite.atk_right = Containers::texture_table[sprites["exalted_atk_right"]["0"].asString()];
+
+	Containers::hero_table["Shango"]->sprite.atk2_up = Containers::texture_table[sprites["exalted_atk2_up"]["0"].asString()];
+	Containers::hero_table["Shango"]->sprite.atk2_down = Containers::texture_table[sprites["exalted_atk2_down"]["0"].asString()];
+	Containers::hero_table["Shango"]->sprite.atk2_left = Containers::texture_table[sprites["exalted_atk2_left"]["0"].asString()];
+	Containers::hero_table["Shango"]->sprite.atk2_right = Containers::texture_table[sprites["exalted_atk2_right"]["0"].asString()];
+
+	Containers::hero_table["Shango"]->sprite.spin_up = Containers::texture_table[sprites["exalted_spin_up"]["0"].asString()];
+	Containers::hero_table["Shango"]->sprite.spin_down = Containers::texture_table[sprites["exalted_spin_down"]["0"].asString()];
+	Containers::hero_table["Shango"]->sprite.spin_left = Containers::texture_table[sprites["exalted_spin_left"]["0"].asString()];
+	Containers::hero_table["Shango"]->sprite.spin_right = Containers::texture_table[sprites["exalted_spin_right"]["0"].asString()];
+
+	Containers::hero_table["Shango"]->sprite.breathe_up = Containers::texture_table[sprites["exalted_breathe_up"]["0"].asString()];
+	Containers::hero_table["Shango"]->sprite.breathe_down = Containers::texture_table[sprites["exalted_breathe_down"]["0"].asString()];
+	Containers::hero_table["Shango"]->sprite.breathe_left = Containers::texture_table[sprites["exalted_breathe_left"]["0"].asString()];
+	Containers::hero_table["Shango"]->sprite.breathe_right = Containers::texture_table[sprites["exalted_breathe_right"]["0"].asString()];
+
+	Containers::hero_table["Shango"]->sprite.hurt_up = Containers::texture_table[sprites["exalted_hurt_up"]["0"].asString()];
+	Containers::hero_table["Shango"]->sprite.hurt_down = Containers::texture_table[sprites["exalted_hurt_down"]["0"].asString()];
+	Containers::hero_table["Shango"]->sprite.hurt_left = Containers::texture_table[sprites["exalted_hurt_left"]["0"].asString()];
+	Containers::hero_table["Shango"]->sprite.hurt_right = Containers::texture_table[sprites["exalted_hurt_right"]["0"].asString()];
+
+	Containers::hero_table["Shango"]->sprite.death_up = Containers::texture_table[sprites["exalted_death_up"]["0"].asString()];
+	Containers::hero_table["Shango"]->sprite.death_down = Containers::texture_table[sprites["exalted_death_down"]["0"].asString()];
+	Containers::hero_table["Shango"]->sprite.death_left = Containers::texture_table[sprites["exalted_death_left"]["0"].asString()];
+	Containers::hero_table["Shango"]->sprite.death_right = Containers::texture_table[sprites["exalted_death_right"]["0"].asString()];
+}
+
+
+void Player::deactivate_exalted_form()
+{
+
+	Json::Value root;
+	Json::Reader reader;
+
+
+	std::ifstream file("hero_config.json");
+
+	file >> root;
+
+	//these sprites all heroes have
+	auto sprites = root["Shango"]["sprites"];
+
+	//set the texture to the appropriate sprite 
+	Containers::hero_table["Shango"]->sprite.setTexture(Containers::texture_table[sprites["setTexture"]["0"].asString()]);
+	Containers::hero_table["Shango"]->sprite.setIdleTexture(Containers::texture_table[sprites["setIdleTexture"]["0"].asString()]);
+
+	Containers::hero_table["Shango"]->sprite.id_up = Containers::texture_table[sprites["id_up"]["0"].asString()];
+	Containers::hero_table["Shango"]->sprite.id_left = Containers::texture_table[sprites["id_left"]["0"].asString()];
+	Containers::hero_table["Shango"]->sprite.id_right = Containers::texture_table[sprites["id_right"]["0"].asString()];
+	Containers::hero_table["Shango"]->sprite.id_down = Containers::texture_table[sprites["id_down"]["0"].asString()];
+
+	//Containers::hero_table[name]->sprite.up = Containers::texture_table[sprites["walk_up"]["0"].asString()];
+	//Containers::hero_table[name]->sprite.down = Containers::texture_table[sprites["walk_down"]["0"].asString()];
+	//Containers::hero_table[name]->sprite.left = Containers::texture_table[sprites["walk_left"]["0"].asString()];
+	//Containers::hero_table[name]->sprite.right = Containers::texture_table[sprites["walk_right"]["0"].asString()];
+
+	Containers::hero_table["Shango"]->sprite.up = Containers::texture_table[sprites["sprint_up"]["0"].asString()];
+	Containers::hero_table["Shango"]->sprite.down = Containers::texture_table[sprites["sprint_down"]["0"].asString()];
+	Containers::hero_table["Shango"]->sprite.left = Containers::texture_table[sprites["sprint_left"]["0"].asString()];
+	Containers::hero_table["Shango"]->sprite.right = Containers::texture_table[sprites["sprint_right"]["0"].asString()];
+
+	Containers::hero_table["Shango"]->sprite.atk_up = Containers::texture_table[sprites["atk_up"]["0"].asString()];
+	Containers::hero_table["Shango"]->sprite.atk_down = Containers::texture_table[sprites["atk_down"]["0"].asString()];
+	Containers::hero_table["Shango"]->sprite.atk_left = Containers::texture_table[sprites["atk_left"]["0"].asString()];
+	Containers::hero_table["Shango"]->sprite.atk_right = Containers::texture_table[sprites["atk_right"]["0"].asString()];
+
+	Containers::hero_table["Shango"]->sprite.atk2_up = Containers::texture_table[sprites["atk2_up"]["0"].asString()];
+	Containers::hero_table["Shango"]->sprite.atk2_down = Containers::texture_table[sprites["atk2_down"]["0"].asString()];
+	Containers::hero_table["Shango"]->sprite.atk2_left = Containers::texture_table[sprites["atk2_left"]["0"].asString()];
+	Containers::hero_table["Shango"]->sprite.atk2_right = Containers::texture_table[sprites["atk2_right"]["0"].asString()];
+
+	Containers::hero_table["Shango"]->sprite.spin_up = Containers::texture_table[sprites["spin_up"]["0"].asString()];
+	Containers::hero_table["Shango"]->sprite.spin_down = Containers::texture_table[sprites["spin_down"]["0"].asString()];
+	Containers::hero_table["Shango"]->sprite.spin_left = Containers::texture_table[sprites["spin_left"]["0"].asString()];
+	Containers::hero_table["Shango"]->sprite.spin_right = Containers::texture_table[sprites["spin_right"]["0"].asString()];
+
+	Containers::hero_table["Shango"]->sprite.breathe_up = Containers::texture_table[sprites["breathe_up"]["0"].asString()];
+	Containers::hero_table["Shango"]->sprite.breathe_down = Containers::texture_table[sprites["breathe_down"]["0"].asString()];
+	Containers::hero_table["Shango"]->sprite.breathe_left = Containers::texture_table[sprites["breathe_left"]["0"].asString()];
+	Containers::hero_table["Shango"]->sprite.breathe_right = Containers::texture_table[sprites["breathe_right"]["0"].asString()];
+
+	Containers::hero_table["Shango"]->sprite.hurt_up = Containers::texture_table[sprites["hurt_up"]["0"].asString()];
+	Containers::hero_table["Shango"]->sprite.hurt_down = Containers::texture_table[sprites["hurt_down"]["0"].asString()];
+	Containers::hero_table["Shango"]->sprite.hurt_left = Containers::texture_table[sprites["hurt_left"]["0"].asString()];
+	Containers::hero_table["Shango"]->sprite.hurt_right = Containers::texture_table[sprites["hurt_right"]["0"].asString()];
+
+	Containers::hero_table["Shango"]->sprite.death_up = Containers::texture_table[sprites["death_up"]["0"].asString()];
+	Containers::hero_table["Shango"]->sprite.death_down = Containers::texture_table[sprites["death_down"]["0"].asString()];
+	Containers::hero_table["Shango"]->sprite.death_left = Containers::texture_table[sprites["death_left"]["0"].asString()];
+	Containers::hero_table["Shango"]->sprite.death_right = Containers::texture_table[sprites["death_right"]["0"].asString()];
+}
+

@@ -290,7 +290,9 @@ void DialogueController::PlayerConversationPoint()
 			}
 			for (auto precond : Containers::conv_point_table[player_conv_point_choice]->req_preconds) {
 				int temp1 = precond->get_cost(temp_hero, player);
-				if (precond->get_cost(temp_hero,player) == 0) {
+				//the ori stuff means that the higher the ori the more likely it is for the hero to respond
+				//positivly to what whatever it is you are saying
+				if (precond->get_cost(temp_hero,player) - (player->ori/ 10) <= 0) {
 					std::cout << "a string: " << precond->get_cost(temp_hero, player) << std::endl;
 				}
 				else {
@@ -321,7 +323,10 @@ void DialogueController::PlayerConversationPoint()
 			
 		}
 		if (player_conv_point_choice == "Request_Teaching") {
-			if (temp_hero->rel[player->name]->getAffinity() >= 60 && temp_hero->rel[player->name]->getStrength() >= 50)
+			//the ori variable is to increase the chance of teaching based on
+			//how high the ori is 
+			if (temp_hero->rel[player->name]->getAffinity() + (player->ori / 10) >= 60 && 
+				temp_hero->rel[player->name]->getStrength() + (player->ori / 10) >= 50)
 				accepted_action = true;
 			else
 				accepted_action = false;
@@ -2089,7 +2094,7 @@ void DialogueController::remove_dialog_option(std::string option_name, int icon)
 }
 
 bool DialogueController::check_advice_acceptance(Player* p, Hero* npc) {
-	int range_cap = 60 + (npc->rel[p->name]->getNotoriety() - 70);
+	int range_cap = 60 + (npc->rel[p->name]->getNotoriety() - 70) + p->ori/10;
 	int result = rand() % 101;//get random number between 0 and 100
 	if(result <= range_cap)
 	{

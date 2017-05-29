@@ -29,6 +29,52 @@
 #include <mutex>
 #include <set>
 
+#include "json.h"
+
+
+class Common {
+public:
+	int debug;
+	int map_editor;
+	bool start_fullscreen;
+	bool mouse_visible;
+	int load_regions;
+	int load_map;
+	int river_collide;
+	int preload_tex;
+	int thread_physics;
+	int write_to_log;
+
+	float map_zoom_in_editor;
+	float map_zoom_in_game;
+	
+	Common() {
+		Json::Value root;
+		Json::Reader reader;
+
+		std::ifstream file("common_config.json");
+
+		file >> root;
+
+		debug = root["debug"].asInt();
+		map_editor = root["map_editor"].asInt();
+		start_fullscreen = root["start_fullscreen"].asBool();
+		mouse_visible = root["mouse_visible"].asBool();
+		load_regions = root["load_regions"].asInt();
+		load_map = root["load_map"].asInt();
+		river_collide = root["river_collide"].asInt();
+		preload_tex = root["preload_tex"].asInt();
+		thread_physics = root["thread_physics"].asInt();
+		write_to_log = root["write_to_log"].asInt();
+
+		map_zoom_in_editor = root["map_zoom_in_editor"].asFloat();
+		map_zoom_in_game = root["map_zoom_in_game"].asFloat();
+	};
+};
+
+static Common* config = new Common();
+
+
 #define SHANGO 1
 #define YEMOJA 2
 #define OYA 3
@@ -40,16 +86,16 @@
 //Texture* rect = new Texture();
 //toggles debug longging statements 
 
-#define DEBUG 1
-#define MAP_EDITOR 0
-#define START_FULLSCREEN false
-#define MOUSE_VISIBLE true
-#define LOAD_REGIONS 1 //0==Load Config should be empty || 1==Load All || 2==Load Oasis || 3==Load Jungle
-#define LOAD_MAP 1
-#define RIVER_COLLIDE 1
-#define PRELOAD_TEX 1
-#define THREAD_PHYSICS 1
-#define WRITE_TO_LOG 0
+#define DEBUG 1 //cant use json
+#define MAP_EDITOR 0 //cant use json
+#define START_FULLSCREEN config->start_fullscreen
+#define MOUSE_VISIBLE config->mouse_visible
+#define LOAD_REGIONS config->load_regions //0==Load Config should be empty || 1==Load All || 2==Load Oasis || 3==Load Jungle
+#define LOAD_MAP config->load_map
+#define RIVER_COLLIDE config->river_collide
+#define PRELOAD_TEX config->preload_tex
+#define THREAD_PHYSICS config->thread_physics
+#define WRITE_TO_LOG config->write_to_log
 
 /*
 this variable allows the game to zoom and out

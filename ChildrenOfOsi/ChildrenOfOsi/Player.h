@@ -2,6 +2,8 @@
 #include "stdafx.h"
 #include "Hero.h"
 #include "Memory.h"
+#include "json.h"
+
 class Player :
 	public Hero
 {
@@ -33,6 +35,14 @@ public:
 
 	bool can_spin;
 	bool can_fire;
+
+	int ori = 30;
+	int can_activate_ex = 1;
+	int exalted_form = 0;
+
+	void activate_exalted_form();
+	void deactivate_exalted_form();
+
 	//don't need these because they are inherated from hero
 	//int mem_counter;
 	//vector<Memory*> memories;

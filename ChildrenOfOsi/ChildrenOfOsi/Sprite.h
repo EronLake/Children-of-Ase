@@ -79,6 +79,11 @@ class Sprite
   Texture *death_left;
   Texture *death_right;
 
+  Texture *talk;
+  Texture *hero_talk;
+
+  int index, tempTime;
+
   private:
   
   std::mutex* mut;
@@ -86,7 +91,7 @@ class Sprite
   int top, bottom;
   Texture *tex;
   Texture *idle;
-  int index, tempTime;
+  
   bool lock, dying;
 };
 

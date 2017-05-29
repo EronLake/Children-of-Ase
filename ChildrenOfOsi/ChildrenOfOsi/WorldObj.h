@@ -17,6 +17,7 @@ class WorldObj
     ID(idNum++), loc(0, 0), collision(false), type(0)
   {
 	  this->effect=Rectangle ({ 0.0F, 0.0F }, 1.0F, 1.0F );
+	  //offset_effect(0, 100, 100, 100, 100);
 	  this->body.push_back({ {0.0F, 0.0F}, 1.0F, 1.0F }); direction = 2;
 	  offset_x1 = 0.0;
 	  offset_x2 = 0.0;
@@ -33,6 +34,7 @@ class WorldObj
     ID(idNum++), loc(p_topLeft), width(p_width), height(p_height), collision(false), type(0)
   {
 	  this->effect = Rectangle(loc, p_width, p_height);
+	  //offset_effect(0, 100, 100, 100, 100);
 	  this->body.push_back({ loc, p_width, p_height }); direction = 2;
 	  offset_x1 = 0.0;
 	  offset_x2 = 0.0;
@@ -47,6 +49,7 @@ class WorldObj
     ID(idNum++), loc({x, y}), collision(col), type(0)
   {
 	  this->effect = Rectangle(loc, 1.0F, 1.0F);
+	  //offset_effect(0, 100, 100, 100, 100);
 	  this->body.push_back({ loc, 1.0F, 1.0F }); direction = 2;
 	  offset_x1 = 0.0;
 	  offset_x2 = 0.0;
@@ -109,6 +112,7 @@ class WorldObj
 
   // Higher-level setters cont.
   void offsetBody(int i, float x1, float x2, float y1, float y2);
+  void offset_effect(int i, float x1, float x2, float y1, float y2);
   void drawObj(float _x, float _y);
   void animateObj() { this->sprite.animate(); };
 

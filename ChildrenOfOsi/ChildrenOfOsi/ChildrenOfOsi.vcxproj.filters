@@ -705,6 +705,9 @@
     <None Include="shrine_config.json">
       <Filter>Game Objects\Configs</Filter>
     </None>
+    <None Include="common_config.json">
+      <Filter>Misc</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="ChildrenOfOsi1.rc" />

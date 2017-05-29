@@ -89,6 +89,13 @@ it is imcremented in the game loop
 */
 extern int frame_count = 0;
 extern bool game_ended = false;
+int ori_counter = 0;
+
+const extern int NOT_IN_RANGE = 0;
+const extern int READY_TO_START = 1;
+const extern int RUNNING = 2;
+int in_talk_range = NOT_IN_RANGE;// 0 = not in range, 1 = ready to start, 2 = running
+WorldObj* current_talker = nullptr;
 
 using namespace std;
 
@@ -102,6 +109,10 @@ Texture* Rectangle::texAtkUP = new Texture();
 Texture* Rectangle::texAtkDOWN = new Texture();
 Texture* Rectangle::texAtkLEFT = new Texture();
 Texture* Rectangle::texAtkRIGHT = new Texture();
+
+Texture* Rectangle::texTalk = new Texture();
+Texture* Rectangle::texHeroTalk = new Texture();
+
 std::mutex mu;
 //void testQuadTree();
 //bool checkCollision(WorldObj *recA, WorldObj *recB);	//given two bounding boxes, check if they collide
@@ -272,8 +283,8 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	oya->set_busy(0);//added for testing
 	heroes.push_back(oya);
 
-	yemoja->rel[1]->addNotoriety(-50);
-	yemoja->rel[1]->addStrength(-50);
+	//yemoja->rel[1]->addNotoriety(-50);
+	//yemoja->rel[1]->addStrength(-50);
 
 	vector<vector<Texture*>> starting_location;
 	
@@ -344,6 +355,9 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	Rectangle::texAtkLEFT->setFile("Assets/Sprites/RightRecoilSpark.png", 18);
 	Rectangle::texAtkUP->setFile("Assets/Sprites/ForwardRecoilSpark.png", 18);
 	Rectangle::texAtkDOWN->setFile("Assets/Sprites/BackRecoilSpark.png", 18);
+
+	Rectangle::texTalk->setFile("Assets/Sprites/BackRecoilSpark.png", 18);
+	Rectangle::texHeroTalk->setFile("Assets/Sprites/BackRecoilSpark.png", 18);
 
 	for (int i = 0; i < 100; i++) {
 		//std:://cout << "AT THE THREAD INITIALIZTION CALL!!!****** " << endl;
@@ -645,7 +659,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 			{{1200.00,600.00}, {{1100.00,900.00},{1300.00,1000.00}}}
 		} };
 		*/
-		//ai->graph = graph;
+		//ai->graph = graph;0
 
 	ai->start = yemoja->getLoc();
 	ai->goal = { 1100.00,1100.00 };
@@ -730,7 +744,11 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	cout << "size of largestruct is " << largeStruct->size() << endl;
 	for (auto it : *largeStruct) cout << (it)->getName() << endl;
 
-	if (PRELOAD_TEX) t0.join();
+	if (PRELOAD_TEX) {
+		t0.join();
+		t1.join();
+		t2.join();
+	}
 	oya->set_busy(0);
 	yemoja->set_busy(0);
 	while (GameWindow::isRunning()) {
@@ -780,6 +798,14 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 				gameplay_functions->change_song("Change", nullptr, RegionState::next_region.getRTheme(), RegionState::soundType::region_music);
 				start = !start;
 			}
+
+			//decrement ori 
+			if (frame_count - ori_counter >= 60 * 60 * .5) 
+			{
+				Alex->ori--;
+				ori_counter = frame_count;
+			}
+
 
       if(!Tutorial::isAnyStageActive()) {
         if(!Tutorial::isStageComplete(Tutorial::Stage::INTRO01))
@@ -892,6 +918,57 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 				}
 				//cout << "inserted into tree " << movVec.size() << " movable objs" << endl;
 			}
+
+			
+			//check if close enough to talk (needs to be moved to helper func)
+			//----------------------------------------------
+			//checks if the hero is in combat
+			if (state == 0 && Alex->getInCombat() == false) {
+				WorldObj* ot = nullptr;
+				int dist = 1000;
+				for (int i = 0; i < movVec.size(); i++) {
+					if (Alex == movVec[i]) {
+						//break;
+						continue;
+					}
+					if (movVec[i]->getInteractable()) {
+						Alex->updateTalk();
+						if (Movement::interaction(Alex, movVec[i])) {
+							if (in_talk_range == NOT_IN_RANGE) {
+								in_talk_range = READY_TO_START;
+							}
+							if (dist > Party::dist_location_to_location(movVec[i]->getLoc(), Alex->getLoc())) {
+								ot = movVec[i];
+								dist = Party::dist_location_to_location(movVec[i]->getLoc(), Alex->getLoc());
+							}
+						}
+					}
+				}
+				if (ot != nullptr) {
+					if (ot->effect.sprite.index == ot->effect.sprite.hurt_up->getFrames() - 1 ||
+						in_talk_range == READY_TO_START || (ot != current_talker && RUNNING))
+					{
+						if (ot->getType() == WorldObj::TYPE_SOLDIER) {
+							//checks if the npc is in combat
+							if (Alex->getInCombat() == false) {
+								gameplay_functions->draw_talk(ot);
+								in_talk_range = RUNNING;
+								current_talker = ot;
+							}
+						}
+						else {
+							gameplay_functions->draw_talk(ot);
+							in_talk_range = RUNNING;
+							current_talker = ot;
+						}
+					}
+				}
+				else {
+					in_talk_range = NOT_IN_RANGE;
+				}
+			}
+			//----------------------------------------------
+			
 
 			state = DialogueController::getState();
 

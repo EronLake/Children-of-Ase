@@ -35,6 +35,7 @@ class RenderHelper
   int sprite_hurt(WorldObj* obj);
   int sprite_dead(WorldObj* obj);
   int sprite_idle(WorldObj* obj);
+  int sprite_talk(WorldObj * obj); // so the talk icon apears
   int sprite_update(WorldObj* obj);
   int drawDiaGui(WorldObj* obj);
   int drawHUD(WorldObj* obj);

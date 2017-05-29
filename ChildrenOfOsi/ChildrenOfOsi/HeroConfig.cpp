@@ -67,6 +67,7 @@ void HeroConfig::set_hero(vector<WorldObj*>* movVec, ChildrenOfOsi* gameplay_fun
 	Containers::hero_table[name]->setWidth(width);
 	Containers::hero_table[name]->setHeight(hight);
 	Containers::hero_table[name]->offsetBody(0, bodyx1, bodyx2, bodyy1, bodyy2);
+	Containers::hero_table[name]->offset_effect(0, 100, 100, 100, 100);
 
 	//needs to be handled separately
 	//Containers::hero_table[name]->sprite.setTexture(Containers::texture_table[tex_file]);
