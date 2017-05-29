@@ -266,11 +266,11 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	Input* iController = new Input(gameplay_functions, Alex, RenM->renderHelper, tBuffer, recVec_ptr, movVec_ptr);
 
 	Hero* yemoja = Containers::hero_table["Yemoja"];
-	yemoja->song = "Music/HeroThemes/oya.flac";
+	yemoja->song = "Music/HeroThemes/Yemoja.flac";
 	heroes.push_back(yemoja);
 	yemoja->set_busy(0);//added for testing
 	Hero* oya = Containers::hero_table["Oya"];
-	oya->song = "Music/HeroThemes/ogun.flac";
+	oya->song = "Music/HeroThemes/Oya.flac";
 	oya->set_busy(0);//added for testing
 	heroes.push_back(oya);
 
