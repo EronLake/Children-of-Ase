@@ -65,6 +65,7 @@ public:
 	static void DialogueController::load_teach_dialog();
 	static void DialogueController::duel_pop_up(Action* act);
 	static void DialogueController::spar_pop_up(Action* act);
+	static std::string DialogueController::check_if_known(std::string rep_pt_str, std::string con_pt_str);
 
 	static bool prompted_quest;
 	static bool accepted_quest;
