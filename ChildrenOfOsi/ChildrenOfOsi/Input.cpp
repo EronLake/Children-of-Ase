@@ -1025,7 +1025,7 @@ void Input::InputCheck()
 					int tmp = DialogueController::getSelect();
 					Hero* temp_hero = CheckClass::isHero(DialogueController::getOther());
 					Soldier* my_soldier = dynamic_cast<Soldier*>(DialogueController::getOther());
-					if (DialogueController::getState() == 1 && temp_hero) {
+					if (DialogueController::getState() == 1 && temp_hero || DialogueController::getState() == 2 && temp_hero) {
 						if (tmp < (DialogueController::getOptions().size() - 1)) {
 							//DialogueController::setSelect(++tmp);
 							DialogueController::move_to_selectable_down();
