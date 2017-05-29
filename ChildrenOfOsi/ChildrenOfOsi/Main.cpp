@@ -853,6 +853,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 			Alex->updateCD();
 			Alex->effect.sprite.animate();
 			Alex->WorldObj::animateObj();
+			cout << "frame: " << Alex->getSprite().index << endl;
 
 			if (MAP_EDITOR) {
 				for (int i = 0; i < recVec.size(); i++) {

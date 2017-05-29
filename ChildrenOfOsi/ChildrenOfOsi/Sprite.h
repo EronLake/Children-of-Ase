@@ -15,6 +15,7 @@ class Sprite
   };
   ~Sprite() = default;
 
+  int index;
   int getStart() { return this->start; };
   int getStop() { return this->stop; };
   int getTop() { return this->top; };
@@ -86,7 +87,7 @@ class Sprite
   int top, bottom;
   Texture *tex;
   Texture *idle;
-  int index, tempTime;
+  int tempTime;
   bool lock, dying;
 };
 
