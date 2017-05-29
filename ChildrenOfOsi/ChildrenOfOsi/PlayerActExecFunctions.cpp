@@ -44,7 +44,15 @@ void PlayerActExecFunctions::execute_start(std::string act_name, Hero* receiver)
 	cur_action->receiver_fail_postconds = ref_action->receiver_fail_postconds;
 
 	//set to current action 
-	if (!player->cur_action) {
+	if (!player->quests_log.empty()) {
+		for (auto i : player->quests_log) {
+			if(i->getReceiver() == receiver && i->getName() == act_name + "_" + std::to_string(i->getOwner()->name))
+				player->cur_action = i;
+
+		}
+
+	}
+	else {
 		player->cur_action = cur_action;
 	}
 	//create the memory based off of the newly created current action
@@ -142,12 +150,26 @@ void PlayerActExecFunctions::execute_end(bool if_succ) {
 
 		//reason sould be handled as a dialog response choice
 		if (if_succ) {
-			player->quest_status[cur_action->getOwner()->name] = 3;// set shango to "succeeded quest"
+			if (!player->quests_log.empty()) {
+				for (auto i : player->quests_log) {
+					if (i->getReceiver() == cur_action->getReceiver() && i->getName() == cur_action->getName())
+						player->quest_status[i->getOwner()->name] = Player::SUCC_QUEST;// set shango to "succeeded quest"
+
+				}
+			}
+			
 			//doer_mem->setCategory("success");
 			//receiver_mem->setCategory("failure");
 		}
 		else {
-			player->quest_status[cur_action->getOwner()->name] = 2;// set shango to "failed quest"
+			if (!player->quests_log.empty()) {
+				for (auto i : player->quests_log) {
+					if (i->getReceiver() == cur_action->getReceiver() && i->getName() == cur_action->getName())
+						player->quest_status[i->getOwner()->name] = Player::FAIL_QUEST;// set shango to "failed quest"
+
+				}
+			}
+			
 			//doer_mem->setCategory("failure");
 		//	receiver_mem->setCategory("success");
 		}

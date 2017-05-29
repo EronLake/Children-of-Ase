@@ -652,6 +652,7 @@ int Movement::talk(WorldObj* obj) {
 						LOG("Player interacted with an object");
 						Hero* hero;
 						if (hero = CheckClass::isHero(objVec[i])) {
+							RegionState::current_hero = hero;
 							RegionState::in_village = true;
 							RegionState::switch_music = true;
 							

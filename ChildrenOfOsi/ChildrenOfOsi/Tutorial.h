@@ -49,13 +49,13 @@ struct Tutorial
 
   static constexpr float INTRO01_POPUP_X = 0.0F;
   static constexpr float INTRO01_POPUP_Y = 0.0F;
-  static constexpr float INTRO01_POPUP_WIDTH = 0.0F;
-  static constexpr float INTRO01_POPUP_HEIGHT = 0.0F;
+  static constexpr float INTRO01_POPUP_WIDTH = 960.0F;
+  static constexpr float INTRO01_POPUP_HEIGHT = 540.0F;
 
   static constexpr float INTRO02_POPUP_X = 0.0F;
   static constexpr float INTRO02_POPUP_Y = 0.0F;
-  static constexpr float INTRO02_POPUP_WIDTH = 0.0F;
-  static constexpr float INTRO02_POPUP_HEIGHT = 0.0F;
+  static constexpr float INTRO02_POPUP_WIDTH = 960.0F;
+  static constexpr float INTRO02_POPUP_HEIGHT = 540.0F;
 
   static Stage currentStage;
   static bool isPaused;

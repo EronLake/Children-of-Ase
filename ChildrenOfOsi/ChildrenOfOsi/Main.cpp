@@ -266,9 +266,11 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	Input* iController = new Input(gameplay_functions, Alex, RenM->renderHelper, tBuffer, recVec_ptr, movVec_ptr);
 
 	Hero* yemoja = Containers::hero_table["Yemoja"];
+	yemoja->song = "Music/HeroThemes/oya.flac";
 	heroes.push_back(yemoja);
 	yemoja->set_busy(0);//added for testing
 	Hero* oya = Containers::hero_table["Oya"];
+	oya->song = "Music/HeroThemes/ogun.flac";
 	oya->set_busy(0);//added for testing
 	heroes.push_back(oya);
 
@@ -730,7 +732,12 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	cout << "size of largestruct is " << largeStruct->size() << endl;
 	for (auto it : *largeStruct) cout << (it)->getName() << endl;
 
-	if (PRELOAD_TEX) t0.join();
+	if (PRELOAD_TEX) {
+		tm.join();
+		t0.join();
+		t1.join();
+		t2.join();
+	}
 	oya->set_busy(0);
 	yemoja->set_busy(0);
 	while (GameWindow::isRunning()) {
@@ -766,7 +773,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
       Tutorial::drawTutorial();
 		}
 		while (current_game_state == game_state::in_game) {
-     // cout << "Current game state: in_game" << endl;
+      cout << "Current game state: in_game" << endl;
 			if (iController->current_game_state != game_state::in_game) {
 				iController->current_game_state = current_game_state;
 			}
@@ -819,7 +826,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 			if (RegionState::switch_music) {
 				if (RegionState::in_village) {
 
-					gameplay_functions->change_song("Change", RegionState::current_region.getRTheme(), RegionState::current_region.getVTheme(), RegionState::soundType::theme_music);
+					gameplay_functions->change_song("Change", RegionState::current_region.getRTheme(), RegionState::current_hero->song, RegionState::soundType::theme_music);
 					RegionState::switch_music = false;
 				}
 				else {
@@ -846,15 +853,11 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 				grid_worldobj->clear_and_reinsert(movVec);
 				//grid_worldobj->clear();
 			}
-			//grid_worldobj->insert_worldobj_to_grid(recVec);
-			//grid_worldobj->insert_worldobj_to_grid(movVec);
-			//grid->clear();
-			//grid->insert_objs_to_grid(rivObj->getLines());
+
 			Alex->updateCD();
 			Alex->effect.sprite.animate();
 			Alex->WorldObj::animateObj();
-			cout << "frame: " << Alex->getSprite().index << endl;
-
+			
 			if (MAP_EDITOR) {
 				for (int i = 0; i < recVec.size(); i++) {
 					if (recVec[i]->getType() != WorldObj::TYPE_WORLDOBJ) {
@@ -896,17 +899,6 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 
 			state = DialogueController::getState();
 
-			
-			/*combatControl->updateSoliderStatus();
-			combatControl->checkParties();
-			for (int i = 0; i < soldiers_list.size(); i++) {
-				combatControl->update_soldier(soldiers_list[i], state);
-			}*/
-
-		//	std::thread AI([=]() {
-				
-		//	});
-			//YemojaPlanner->set_current_action(test_train);
 			combatControl->checkParties();
 
 			for (int i = 0; i < soldiers_list.size(); i++) {
@@ -1026,7 +1018,8 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
       Tutorial::drawTutorial();
     }
     while(current_game_state == game_state::tutorial_pause) {
-      if(iController->current_game_state != game_state::pause_menu) {
+      cout << "Current game state: tutorial_pause" << endl;
+      if(iController->current_game_state != game_state::tutorial_pause) {
         iController->current_game_state = current_game_state;
       }
 
@@ -1035,9 +1028,9 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
         return;
       }
 
-      for(auto itr : Containers::hero_table)
-        gameplay_functions->stop(itr.second);
-      gameplay_functions->draw_frame(Alex);
+      // gameplay_functions->draw_frame(Alex);
+      gameplay_functions->drawTut(Alex);
+      // Tutorial::drawTutorial();
 
       start_tick = clock();
       iController->InputCheck();
@@ -1052,8 +1045,6 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
       HUD::AVG = total_fps / frame_count;
 
       current_game_state = iController->current_game_state;
-      gameplay_functions->drawTut(Alex);
-      Tutorial::drawTutorial();
     }
 		while (current_game_state == game_state::victory_menu) {
 

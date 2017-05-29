@@ -1,6 +1,7 @@
 #pragma once
 #include "common.h"
 #include "Region.h"
+#include "Hero.h"
 
 class RegionState
 {
@@ -18,4 +19,5 @@ public:
 	static Region current_region;
 	static Region next_region;
 	static enum soundType { region_music, theme_music, sfx, ambient_sfx, null_type };
+	static Hero* current_hero;
 };

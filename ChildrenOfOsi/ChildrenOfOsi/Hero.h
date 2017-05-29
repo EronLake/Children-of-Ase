@@ -29,6 +29,7 @@ public:
 	std::unordered_map<int,ActionPool*> actionPool_map; //int is the receiver name
 
     int name;
+	char* song;
 
 	int mem_counter = 0;
 	vector<Memory*> memories;
