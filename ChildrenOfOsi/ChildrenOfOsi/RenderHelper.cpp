@@ -3,6 +3,8 @@
 #include <algorithm>
 #include <vector> 
 #include "RenderManager.h"
+#include "Tutorial.h"
+
 GameMap* RenderHelper::gmap;
 
 
@@ -199,19 +201,21 @@ int RenderHelper::drawHUD(WorldObj* obj)
   return 0;
 }
 
-int RenderHelper::drawTut(WorldObj * obj)
+int RenderHelper::drawTut(WorldObj *obj)
 {
-  //gmap->drawMap(camera->getX(), camera->getY());
-  //obj->WorldObj::drawObj(camera->getX(), camera->getY());
-  ////obj->WorldObj::animateObj();
-  //for (int i = 0; i < objVec.size(); i++) {
-  //	LOG("BEFORE DRAWING**");
-  //	////////cout << objVec[i]->getX() - camera->getX() << endl;
-  //	//LOG(objVec[i]->getX(), ", ", objVec[i]->getY());
-  //	objVec[i]->WorldObj::drawObj(camera->getX(), camera->getY());
-  //	//objVec[i]->WorldObj::animateObj();
-  //}
+  gmap->drawMap(camera->getX(), camera->getY());
+  obj->WorldObj::drawObj(camera->getX(), camera->getY());
+  obj->WorldObj::animateObj();
+
+  objVec = grid_game->retrieve_worldobj_in_grid(objVec, obj);
+  for (int i = 0; i < objVec.size(); ++i) {
+  	objVec[i]->WorldObj::drawObj(camera->getX(), camera->getY());
+  	objVec[i]->WorldObj::animateObj();
+  }
+
   TutGui->drawObj(camera->getX(), camera->getY());
+  Tutorial::drawTutorial();
+
   GameWindow::refresh();
   return 0;
 }

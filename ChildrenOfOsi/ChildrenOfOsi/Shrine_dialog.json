@@ -1,0 +1,124 @@
+{
+	"Oasis_Shrine": {
+		"Shrine Talk 1": {
+			"1": "SoldierJungle_Idle_S",
+			"2": "SoldierJungle_Idle_S",
+			"3": "SoldierJungle_Idle_S",
+			"4": "SoldierOasis_Idle_S",
+			"5": "SoldierOasis_Idle_W"
+		},
+		"Shrine Talk 2": {
+			"1": "SoldierJungle_Idle_S",
+			"2": "SoldierJungle_Idle_S",
+			"3": "SoldierJungle_Idle_S",
+			"4": "SoldierOasis_Idle_S",
+			"5": "SoldierOasis_Idle_W"
+		},
+
+		"Shrine Talk 3": {
+			"1": "SoldierJungle_Idle_S",
+			"2": "SoldierJungle_Idle_S",
+			"3": "SoldierJungle_Idle_S",
+			"4": "SoldierOasis_Idle_S",
+			"5": "SoldierOasis_Idle_W"
+		},
+
+		"Shrine Talk 4": {
+			"1": "SoldierJungle_Idle_S",
+			"2": "SoldierJungle_Idle_S",
+			"3": "SoldierJungle_Idle_S",
+			"4": "SoldierOasis_Idle_S",
+			"5": "SoldierOasis_Idle_W"
+		},
+
+		"Shrine Not Worthy": {
+			"1": "SoldierJungle_Idle_S",
+			"2": "SoldierJungle_Idle_S",
+			"3": "SoldierJungle_Idle_S",
+			"4": "SoldierOasis_Idle_S",
+			"5": "SoldierOasis_Idle_W"
+		}
+	},
+
+   "Jungle_Shrine": {
+        "Shrine Talk 1": {
+			"1": "SoldierJungle_Idle_S",
+			"2": "SoldierJungle_Idle_S",
+			"3": "SoldierJungle_Idle_S",
+			"4": "SoldierOasis_Idle_S",
+			"5": "SoldierOasis_Idle_W"
+		},
+		"Shrine Talk 2": {
+			"1": "SoldierJungle_Idle_S",
+			"2": "SoldierJungle_Idle_S",
+			"3": "SoldierJungle_Idle_S",
+			"4": "SoldierOasis_Idle_S",
+			"5": "SoldierOasis_Idle_W"
+		},
+
+		"Shrine Talk 3": {
+			"1": "SoldierJungle_Idle_S",
+			"2": "SoldierJungle_Idle_S",
+			"3": "SoldierJungle_Idle_S",
+			"4": "SoldierOasis_Idle_S",
+			"5": "SoldierOasis_Idle_W"
+		},
+
+		"Shrine Talk 4": {
+			"1": "SoldierJungle_Idle_S",
+			"2": "SoldierJungle_Idle_S",
+			"3": "SoldierJungle_Idle_S",
+			"4": "SoldierOasis_Idle_S",
+			"5": "SoldierOasis_Idle_W"
+		},
+
+		"Shrine Not Worthy": {
+			"1": "SoldierJungle_Idle_S",
+			"2": "SoldierJungle_Idle_S",
+			"3": "SoldierJungle_Idle_S",
+			"4": "SoldierOasis_Idle_S",
+			"5": "SoldierOasis_Idle_W"
+		}
+   },
+
+    "Mountain_Shrine": {
+        "Shrine Talk 1": {
+			"1": "SoldierJungle_Idle_S",
+			"2": "SoldierJungle_Idle_S",
+			"3": "SoldierJungle_Idle_S",
+			"4": "SoldierOasis_Idle_S",
+			"5": "SoldierOasis_Idle_W"
+		},
+		"Shrine Talk 2": {
+			"1": "SoldierJungle_Idle_S",
+			"2": "SoldierJungle_Idle_S",
+			"3": "SoldierJungle_Idle_S",
+			"4": "SoldierOasis_Idle_S",
+			"5": "SoldierOasis_Idle_W"
+		},
+
+		"Shrine Talk 3": {
+			"1": "SoldierJungle_Idle_S",
+			"2": "SoldierJungle_Idle_S",
+			"3": "SoldierJungle_Idle_S",
+			"4": "SoldierOasis_Idle_S",
+			"5": "SoldierOasis_Idle_W"
+		},
+
+		"Shrine Talk 4": {
+			"1": "SoldierJungle_Idle_S",
+			"2": "SoldierJungle_Idle_S",
+			"3": "SoldierJungle_Idle_S",
+			"4": "SoldierOasis_Idle_S",
+			"5": "SoldierOasis_Idle_W"
+		},
+
+		"Shrine Not Worthy": {
+			"1": "SoldierJungle_Idle_S",
+			"2": "SoldierJungle_Idle_S",
+			"3": "SoldierJungle_Idle_S",
+			"4": "SoldierOasis_Idle_S",
+			"5": "SoldierOasis_Idle_W"
+		}
+   }
+}

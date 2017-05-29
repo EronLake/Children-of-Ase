@@ -85,7 +85,7 @@ void SoldierConfig::init_sprites(ChildrenOfOsi* gameplay_func, TaskBuffer* tBuff
 	auto sprites = (*itr)["sprites"];
 
 	//sets the oppropreate reagion config so that load by region works properly
-	vector<Texture*>* region_con;
+	std::set<Texture*>* region_con;
 
 	std::string path;
 
@@ -129,7 +129,7 @@ void SoldierConfig::init_sprites(ChildrenOfOsi* gameplay_func, TaskBuffer* tBuff
 		//create textures for the soldiers 
 		(*textureMap)[Containers::texture_table[itor["0"].asString()]] = pair<string, int>(path + itor["0"].asString() + ".png", itor["1"].asInt()/*frame_num*/);
 		//push to appropreate region config
-		region_con->push_back(Containers::texture_table[itor["0"].asString()]);
+		region_con->insert(Containers::texture_table[itor["0"].asString()]);
 	}
 
 
@@ -193,7 +193,7 @@ void SoldierConfig::init_attacks(ChildrenOfOsi* gameplay_func, TaskBuffer* tBuff
 	Soldier* cur_soldier;
 
 	//sets the oppropreate reagion config so that load by region works properly
-	vector<Texture*>* region_con;
+	std::set<Texture*>* region_con;
 
 	std::string path;
 
@@ -239,7 +239,7 @@ void SoldierConfig::init_attacks(ChildrenOfOsi* gameplay_func, TaskBuffer* tBuff
 		//create textures for the soldiers
 		(*textureMap)[Containers::texture_table[itor["0"].asString()]] = pair<string, int>("Assets/Sprites/" + itor["0"].asString() + ".png", itor["1"].asInt()/*frame_num*/);
 		//push to appropreate region config
-		region_con->push_back(Containers::texture_table[itor["0"].asString()]);
+		region_con->insert(Containers::texture_table[itor["0"].asString()]);
 	}
 
 	//initialize melee attack
@@ -290,7 +290,7 @@ void SoldierConfig::init_attacks(ChildrenOfOsi* gameplay_func, TaskBuffer* tBuff
 				//create textures for the soldiers
 				(*textureMap)[Containers::texture_table[itr2["0"].asString()]] = pair<string, int>("Assets/Sprites/" + itr2["0"].asString() + ".png", itr2["1"].asInt()/*frame_num*/);
 				//push to appropreate region config
-				region_con->push_back(Containers::texture_table[itr2["0"].asString()]);
+				region_con->insert(Containers::texture_table[itr2["0"].asString()]);
 			}
 
 			Attack* new_attack = new Attack();

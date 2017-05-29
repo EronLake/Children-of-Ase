@@ -8,13 +8,13 @@ Party* Party::grave=new Party();
 /**
  * Creates a new party with no alliegances, no leader, and no members.
  */
-Party::Party() : faction(nullptr), leader(nullptr), target(nullptr), mode(Party::MODE_IDLE), perm(false) { Party::partiesWorld.push_back(this); }
+Party::Party() : faction(nullptr), leader(nullptr), target(nullptr), mode(Party::MODE_IDLE), perm(false), hidden(false) { Party::partiesWorld.push_back(this); }
 
 /**
  * Creates a new party with alliegance to the given faction, but no members nor
  * any leader.
  */
-Party::Party(Alliance *a) : faction(a), leader(nullptr), target(nullptr), mode(Party::MODE_IDLE), perm(false) { Party::partiesWorld.push_back(this); }
+Party::Party(Alliance *a) : faction(a), leader(nullptr), target(nullptr), mode(Party::MODE_IDLE), perm(false), hidden(false) { Party::partiesWorld.push_back(this); }
 
 /**
  * Creates a new party with the given leader, as a part of no faction.
@@ -25,6 +25,7 @@ Party::Party(Soldier *leader) : faction(nullptr), leader(leader), target(nullptr
   this->setMode(Party::MODE_IDLE);
   partiesWorld.push_back(this);
   perm = false;
+  hidden = false;
 }
 
 /**
@@ -112,6 +113,17 @@ void Party::add_party_to_party(Party* s) {
 	for (auto i = m.begin(); i != m.end(); ++i) {
 		s->removeSoldier(*i,false);
 		addToParty(*i,false);
+	}
+}
+
+void Party::form_attack_party(Party* s, bool combat) {
+	vector<Soldier*> m = s->getMembers();
+	int saved = rand() % (m.size()-1);
+	if (!combat)saved = saved / 3;
+	if (saved == -1)saved = 0;
+	for (auto i = m.begin(); i != (m.end()-saved); ++i) {
+		s->removeSoldier(*i, false);
+		addToParty(*i, false);
 	}
 }
 

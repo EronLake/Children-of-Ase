@@ -15,6 +15,7 @@ class Sprite
   };
   ~Sprite() = default;
 
+  int index;
   int getStart() { return this->start; };
   int getStop() { return this->stop; };
   int getTop() { return this->top; };
@@ -82,8 +83,6 @@ class Sprite
   Texture *talk;
   Texture *hero_talk;
 
-  int index, tempTime;
-
   private:
   
   std::mutex* mut;
@@ -91,7 +90,7 @@ class Sprite
   int top, bottom;
   Texture *tex;
   Texture *idle;
-  
+  int tempTime;
   bool lock, dying;
 };
 

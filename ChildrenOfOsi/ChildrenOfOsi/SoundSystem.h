@@ -17,16 +17,18 @@ public:
 
 	int nextChannelId;
 	int driverCount;
-	FMOD::Channel *chnls[32];
+	FMOD::Channel* chnls[36];
 	
 	typedef std::map<std::string, SoundClass> soundMap;
 	typedef std::map<std::string, FMOD::Channel**> channelMap;
 	//typedef map<int, FMOD::Channel*> channelMap;
 	soundMap sounds;
+	soundMap addresses;
 	channelMap channels;
 //	channelMap channels;
 
-	void createSound(SoundClass *pSound, std::string pFile);
+	void createMusic(SoundClass* const & pSound, string pFile);
+	void createSound(SoundClass* const & pSound, std::string pFile);
 	void playSound(SoundClass pSound, bool bLoop, FMOD::Channel*& channel, bool ispaused,float volume);
 	void playMusic(SoundClass pSound, bool bLoop, FMOD::Channel*& channel, bool ispaused, float volume, RegionState::soundType type);
 	void playAmbient(SoundClass pSound, bool bLoop, FMOD::Channel*& channel, bool ispaused, float volume);

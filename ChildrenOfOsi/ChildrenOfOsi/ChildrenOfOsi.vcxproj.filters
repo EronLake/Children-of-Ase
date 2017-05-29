@@ -213,7 +213,6 @@
     <ClCompile Include="PlayerActExecFunctions.cpp">
       <Filter>AI\Actions</Filter>
     </ClCompile>
-    <ClCompile Include="RegionState.cpp" />
     <ClCompile Include="ConversationLogObj.cpp">
       <Filter>Dialogue</Filter>
     </ClCompile>
@@ -269,6 +268,7 @@
     <ClCompile Include="ShrineConfig.cpp">
       <Filter>Game Objects\Configs</Filter>
     </ClCompile>
+    <ClCompile Include="RegionState.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AIHelper.h">
@@ -499,7 +499,6 @@
     <ClInclude Include="PlayerActExecFunctions.h">
       <Filter>AI\Actions</Filter>
     </ClInclude>
-    <ClInclude Include="RegionState.h" />
     <ClInclude Include="ConversationLogObj.h">
       <Filter>Dialogue</Filter>
     </ClInclude>
@@ -558,6 +557,7 @@
     <ClInclude Include="ShrineConfig.h">
       <Filter>Game Objects\Configs</Filter>
     </ClInclude>
+    <ClInclude Include="RegionState.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="audio_test.txt">
@@ -704,6 +704,15 @@
     </None>
     <None Include="shrine_config.json">
       <Filter>Game Objects\Configs</Filter>
+    </None>
+    <None Include="Villager_dialog.json">
+      <Filter>Dialogue</Filter>
+    </None>
+    <None Include="Shrine_dialog.json">
+      <Filter>Dialogue</Filter>
+    </None>
+    <None Include="Babalawo_dialog.json">
+      <Filter>Dialogue</Filter>
     </None>
     <None Include="common_config.json">
       <Filter>Misc</Filter>

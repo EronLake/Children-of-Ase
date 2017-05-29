@@ -226,8 +226,8 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 
 	ObjConfig::textureMap[Containers::texture_table["rockTex1"]] = pair<string, int>("Assets/Sprites/rock_1.png", 1);
 	ObjConfig::textureMap[Containers::texture_table["rockTex2"]] = pair<string, int>("Assets/Sprites/rock_2.png", 1);
-	ObjConfig::standard_con.push_back(Containers::texture_table["rockTex1"]);
-	ObjConfig::standard_con.push_back(Containers::texture_table["rockTex2"]);
+	ObjConfig::standard_con.insert(Containers::texture_table["rockTex1"]);
+	ObjConfig::standard_con.insert(Containers::texture_table["rockTex2"]);
 
 	gameplay_functions->add_texture("blank", 0, 0, 0);
 	gameplay_functions->add_texture("border", 0, 0, 0);
@@ -240,8 +240,8 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 
 	ObjConfig::textureMap[Containers::texture_table["blank"]] = pair<string, int>("Assets/Sprites/blank.png", 1);
 	ObjConfig::textureMap[Containers::texture_table["border"]] = pair<string, int>("Assets/Sprites/border.png", 1);
-	ObjConfig::standard_con.push_back(Containers::texture_table["blank"]);
-	ObjConfig::standard_con.push_back(Containers::texture_table["border"]);
+	ObjConfig::standard_con.insert(Containers::texture_table["blank"]);
+	ObjConfig::standard_con.insert(Containers::texture_table["border"]);
 
 
 	HeroConfig::import_config(movVec_ptr, &ObjConfig::textureMap, gameplay_functions, tBuffer);
@@ -277,16 +277,18 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	Input* iController = new Input(gameplay_functions, Alex, RenM->renderHelper, tBuffer, recVec_ptr, movVec_ptr);
 
 	Hero* yemoja = Containers::hero_table["Yemoja"];
+	yemoja->song = "Music/HeroThemes/Yemoja.flac";
 	heroes.push_back(yemoja);
 	yemoja->set_busy(0);//added for testing
 	Hero* oya = Containers::hero_table["Oya"];
+	oya->song = "Music/HeroThemes/Oya.flac";
 	oya->set_busy(0);//added for testing
 	heroes.push_back(oya);
 
 	//yemoja->rel[1]->addNotoriety(-50);
 	//yemoja->rel[1]->addStrength(-50);
 
-	vector<vector<Texture*>> starting_location;
+	vector<std::set<Texture*>> starting_location;
 	
 	ObjConfig::import_config(recVec_ptr, gameplay_functions, tBuffer);
 
@@ -431,8 +433,8 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	wglShareLists(mainContext, loaderContext0);
 	std::thread t0([=]() {
 		wglMakeCurrent(hdc, loaderContext0);
-		for (int i = 0; i < ObjConfig::standard_con.size(); i++) {
-			set_file_with_thread(ObjConfig::standard_con[i], &ObjConfig::textureMap.find(ObjConfig::standard_con[i])->second);
+		for (auto itr : ObjConfig::standard_con) {
+			set_file_with_thread(itr, &ObjConfig::textureMap.find(itr)->second);
 		}
 		wglMakeCurrent(nullptr, nullptr);
 		wglDeleteContext(loaderContext0);
@@ -450,8 +452,8 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	wglShareLists(mainContext, loaderContext1);
 	std::thread t1([=]() {
 		wglMakeCurrent(hdc, loaderContext1);
-		for (int i = 0; i < (starting_location[0]).size(); i++) {
-			set_file_with_thread(starting_location[0].at(i), &ObjConfig::textureMap.find(starting_location[0].at(i))->second);
+		for (auto itr :starting_location[0]) {
+			set_file_with_thread(itr, &ObjConfig::textureMap.find(itr)->second);
 		}
 		for (auto it = recVec.begin(); it != recVec.end(); ++it) {
 			(*it)->sprite.reset_texture();
@@ -459,8 +461,8 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 		for (auto it = movVec.begin(); it != movVec.end(); ++it) {
 			(*it)->sprite.reset_texture();
 		}
-		for (int i = 0; i < (starting_location[3]).size(); i++) {
-			set_file_with_thread(starting_location[3].at(i), &ObjConfig::textureMap.find(starting_location[3].at(i))->second);
+		for (auto itr : starting_location[3]) {
+			set_file_with_thread(itr, &ObjConfig::textureMap.find(itr)->second);
 		}
 		wglMakeCurrent(nullptr, nullptr);
 		wglDeleteContext(loaderContext1);
@@ -477,8 +479,8 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	wglShareLists(mainContext, loaderContext2);//Shares the information between the loading context and the main context
 	std::thread t2([=]() {//makes the thread. [=] is a cpp Lambda representation
 		wglMakeCurrent(hdc, loaderContext2);//Sets the current context to the loader context
-		for (int i = 0; i < (starting_location[1]).size(); i++) {
-			set_file_with_thread(starting_location[1].at(i), &ObjConfig::textureMap.find(starting_location[1].at(i))->second);
+		for (auto itr : starting_location[1]) {
+			set_file_with_thread(itr, &ObjConfig::textureMap.find(itr)->second);
 		}
 		for (auto it = recVec.begin(); it != recVec.end(); ++it) {
 			(*it)->sprite.reset_texture();
@@ -486,8 +488,8 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 		for (auto it = movVec.begin(); it != movVec.end(); ++it) {
 			(*it)->sprite.reset_texture();
 		}
-		for (int i = 0; i < (starting_location[2]).size(); i++) {
-			set_file_with_thread(starting_location[2].at(i), &ObjConfig::textureMap.find(starting_location[2].at(i))->second);
+		for (auto itr : starting_location[2]) {
+			set_file_with_thread(itr, &ObjConfig::textureMap.find(itr)->second);
 		}
 		wglMakeCurrent(nullptr, nullptr);//unassigns the current gl context
 		wglDeleteContext(loaderContext2);//deletes the loading context now that it is not needed
@@ -745,6 +747,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	for (auto it : *largeStruct) cout << (it)->getName() << endl;
 
 	if (PRELOAD_TEX) {
+		tm.join();
 		t0.join();
 		t1.join();
 		t2.join();
@@ -784,7 +787,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
       Tutorial::drawTutorial();
 		}
 		while (current_game_state == game_state::in_game) {
-     // cout << "Current game state: in_game" << endl;
+      cout << "Current game state: in_game" << endl;
 			if (iController->current_game_state != game_state::in_game) {
 				iController->current_game_state = current_game_state;
 			}
@@ -845,7 +848,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 			if (RegionState::switch_music) {
 				if (RegionState::in_village) {
 
-					gameplay_functions->change_song("Change", RegionState::current_region.getRTheme(), RegionState::current_region.getVTheme(), RegionState::soundType::theme_music);
+					gameplay_functions->change_song("Change", RegionState::current_region.getRTheme(), RegionState::current_hero->song, RegionState::soundType::theme_music);
 					RegionState::switch_music = false;
 				}
 				else {
@@ -872,14 +875,11 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 				grid_worldobj->clear_and_reinsert(movVec);
 				//grid_worldobj->clear();
 			}
-			//grid_worldobj->insert_worldobj_to_grid(recVec);
-			//grid_worldobj->insert_worldobj_to_grid(movVec);
-			//grid->clear();
-			//grid->insert_objs_to_grid(rivObj->getLines());
+
 			Alex->updateCD();
 			Alex->effect.sprite.animate();
 			Alex->WorldObj::animateObj();
-
+			
 			if (MAP_EDITOR) {
 				for (int i = 0; i < recVec.size(); i++) {
 					if (recVec[i]->getType() != WorldObj::TYPE_WORLDOBJ) {
@@ -972,17 +972,6 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 
 			state = DialogueController::getState();
 
-			
-			/*combatControl->updateSoliderStatus();
-			combatControl->checkParties();
-			for (int i = 0; i < soldiers_list.size(); i++) {
-				combatControl->update_soldier(soldiers_list[i], state);
-			}*/
-
-		//	std::thread AI([=]() {
-				
-		//	});
-			//YemojaPlanner->set_current_action(test_train);
 			combatControl->checkParties();
 
 			for (int i = 0; i < soldiers_list.size(); i++) {
@@ -1102,7 +1091,8 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
       Tutorial::drawTutorial();
     }
     while(current_game_state == game_state::tutorial_pause) {
-      if(iController->current_game_state != game_state::pause_menu) {
+      cout << "Current game state: tutorial_pause" << endl;
+      if(iController->current_game_state != game_state::tutorial_pause) {
         iController->current_game_state = current_game_state;
       }
 
@@ -1111,9 +1101,9 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
         return;
       }
 
-      for(auto itr : Containers::hero_table)
-        gameplay_functions->stop(itr.second);
-      gameplay_functions->draw_frame(Alex);
+      // gameplay_functions->draw_frame(Alex);
+      gameplay_functions->drawTut(Alex);
+      // Tutorial::drawTutorial();
 
       start_tick = clock();
       iController->InputCheck();
@@ -1128,13 +1118,11 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
       HUD::AVG = total_fps / frame_count;
 
       current_game_state = iController->current_game_state;
-      gameplay_functions->drawTut(Alex);
-      Tutorial::drawTutorial();
     }
 		while (current_game_state == game_state::victory_menu) {
 
 			if (iController->current_game_state != game_state::victory_menu) {
-				iController->current_game_state = current_game_state;
+				//iController->current_game_state = current_game_state;
 			}
 
 			if (shouldExit > 0) {
@@ -1144,7 +1132,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 			start_tick = clock();
 
 			//draw
-			gameplay_functions->drawTut(Alex);
+			//gameplay_functions->drawTut(Alex);
 
 			//run task buffer
 			iController->InputCheck();

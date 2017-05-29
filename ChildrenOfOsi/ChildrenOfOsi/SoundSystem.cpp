@@ -8,6 +8,8 @@ using namespace std;
 #include <map>
 #include <string>
 
+
+
 typedef FMOD::Sound* SoundClass;
 FMOD_RESULT result;
 
@@ -34,32 +36,52 @@ FMOD_RESULT result;
 		
 		// Initialize our Instance with 36 Channels
 		m_pSystem->init(36, FMOD_INIT_NORMAL, 0);
-		string oasis = "Music/RegionThemes/DesertRegion.flac";
-		string jungle = "Music/RegionThemes/JungleRegion.flac";
-		string mountain = "Music/RegionThemes/MountainRegion.flac";
-		string marsh = "Music/RegionThemes/MarshRegion.flac";
-		string ogun = "Music/HeroThemes/ogun.flac";
-		string oya = "Music/HeroThemes/oya.flac";
+
+		/*string Desert = "Music/RegionThemes/DesertRegion.flac";
+		string Jungle = "Music/RegionThemes/JungleRegion.flac";
+		string Mountain = "Music/RegionThemes/MountainRegion.flac";
+		string Marsh = "Music/RegionThemes/MarshRegion.flac";
+		string Yemoja = "Music/HeroThemes/Yemoja.flac";
+		string Oya = "Music/HeroThemes/Oya.flac";
+		string Ogun = "Music/HeroThemes/Ogun.flac";
+		string Oshosi = "Music/HeroThemes/Oshosi.flac";
+
+		SoundClass DesertAddress = nullptr;
+		SoundClass JungleAddress = nullptr;
+		SoundClass MountainAddress = nullptr;
+		SoundClass MarshAddress = nullptr;
+		SoundClass OgunAddress = nullptr;
+		SoundClass OyaAddress = nullptr;
+		SoundClass YemojaAddress = nullptr;
+		SoundClass OshosiAddress = nullptr;
+
+		this->createMusic(&DesertAddress, Desert);
+		this->createMusic(&JungleAddress, Jungle);
+		this->createMusic(&MountainAddress, Mountain);
+		this->createMusic(&MarshAddress, Marsh);
+		this->createMusic(&OgunAddress, Ogun);
+		this->createMusic(&OyaAddress, Oya);
+		this->createMusic(&YemojaAddress, Yemoja);
+		this->createMusic(&OshosiAddress, Oshosi);
+
+		sounds[Desert] = DesertAddress;
+		sounds[Jungle] = JungleAddress;
+		sounds[Mountain] = MountainAddress;
+		sounds[Marsh] = MarshAddress;
+		sounds[Yemoja] = YemojaAddress;
+		sounds[Ogun] = OgunAddress;
+		sounds[Oya] = OyaAddress;
+		sounds[Oshosi] = OshosiAddress;*/
 
 		string bump = "SFX/bump_0.wav";
-		string walk = "SFX/walk_loop.wav";
+		string walk = "SFX/walk_0.wav";
 		string swing = "SFX/swing.wav";
 		string hit = "SFX/hit.wav";
 		string up = "SFX/up.wav";
 		string down = "SFX/down.wav";
 		string page = "SFX/page.wav";
 		string talk = "SFX/talk.wav";
-
-
-
-
-		SoundClass oasisAddress = nullptr;
-		SoundClass jungleAddress = nullptr;
-		SoundClass mountainAddress = nullptr;
-		SoundClass marshAddress = nullptr;
-		SoundClass ogunAddress = nullptr;
-		SoundClass oyaAddress = nullptr;
-
+		
 		SoundClass bumpAddress = nullptr;
 		SoundClass walkAddress = nullptr;
 		SoundClass swingAddress = nullptr;
@@ -68,14 +90,6 @@ FMOD_RESULT result;
 		SoundClass downAddress = nullptr;
 		SoundClass pageAddress = nullptr;
 		SoundClass talkAddress = nullptr;
-
-
-		this->createSound(&oasisAddress, oasis);
-		this->createSound(&jungleAddress, jungle);
-		this->createSound(&mountainAddress, mountain);
-		this->createSound(&marshAddress, marsh);
-		this->createSound(&ogunAddress, ogun);
-		this->createSound(&oyaAddress, oya);
 
 		this->createSound(&bumpAddress, bump);
 		this->createSound(&walkAddress, walk);
@@ -86,12 +100,7 @@ FMOD_RESULT result;
 		this->createSound(&pageAddress, page);
 		this->createSound(&talkAddress, talk);
 
-		sounds[oasis] = oasisAddress;
-		sounds[jungle] = jungleAddress;
-		sounds[mountain] = mountainAddress;
-		sounds[marsh] = marshAddress;
-		sounds[ogun] = ogunAddress;
-		sounds[oya] = oyaAddress;
+		
 
 		sounds[bump] = bumpAddress;
 		sounds[walk] = walkAddress;
@@ -107,13 +116,28 @@ FMOD_RESULT result;
 		LOG("SoundSystem Destructed");
 	}
 
-	void SoundSystem::createSound(SoundClass *pSound, string pFile)
+	void SoundSystem::createMusic(SoundClass* const & pSound, string pFile)
+	{
+		auto sound = sounds.find(pFile);
+		if (sound != sounds.end()) {
+			if (sounds[pFile] != nullptr)
+				return;
+		}; //Sound already loaded
+
+		result = m_pSystem->createSound(pFile.c_str(), FMOD_CREATESTREAM|FMOD_LOWMEM, 0, pSound);//fmod createSound takes (const char *name_or_data, FMOD_MODE mode, FMOD_CREATESOUNDEXINFO *exinfo, FMOD::Sound **sound)
+		//////cout << FMOD_ErrorString(result) << endl;
+
+		if (pSound) {
+			sounds[pFile] = *pSound;
+		}
+	}
+	void SoundSystem::createSound(SoundClass* const & pSound, string pFile)
 	{
 		auto sound = sounds.find(pFile);
 		if (sound != sounds.end()) return; //Sound already loaded
 
-		result = m_pSystem->createSound(pFile.c_str(), FMOD_DEFAULT, 0, pSound);//fmod createSound takes (const char *name_or_data, FMOD_MODE mode, FMOD_CREATESOUNDEXINFO *exinfo, FMOD::Sound **sound)
-		//////cout << FMOD_ErrorString(result) << endl;
+		result = m_pSystem->createSound(pFile.c_str(), FMOD_DEFAULT | FMOD_LOWMEM, 0, pSound);//fmod createSound takes (const char *name_or_data, FMOD_MODE mode, FMOD_CREATESOUNDEXINFO *exinfo, FMOD::Sound **sound)
+																					 //////cout << FMOD_ErrorString(result) << endl;
 
 		if (pSound) {
 			sounds[pFile] = *pSound;
@@ -144,10 +168,10 @@ FMOD_RESULT result;
 	void SoundSystem::playMusic(SoundClass pSound, bool bLoop, FMOD::Channel*& channel, bool ispaused, float volume, RegionState::soundType type)
 	{
 		if (!bLoop)
-			pSound->setMode(FMOD_LOOP_OFF);
+			pSound->setMode(FMOD_LOOP_OFF| FMOD_CREATESTREAM | FMOD_LOWMEM);
 		else
 		{
-			pSound->setMode(FMOD_LOOP_NORMAL);
+			pSound->setMode(FMOD_LOOP_NORMAL| FMOD_CREATESTREAM | FMOD_LOWMEM);
 			pSound->setLoopCount(-1);
 		}
 			
@@ -199,21 +223,33 @@ FMOD_RESULT result;
 	void SoundSystem::releaseSound(SoundClass pSound)
 	{
 		pSound->release();
+		for (auto it : sounds) {
+			if (it.second == pSound) {
+				SoundClass new_sound = nullptr;
+				sounds[it.first] = new_sound;
+			}
+		}
 	};
 
 	
 	int SoundSystem::playSong(std::string name, RegionState::soundType type) {
-
-		chnls[0] = nullptr;
+		
+		
+		FMOD::Channel* channel = nullptr;
+		chnls[0] = channel;
 		bool ispaused = true;
 		unsigned int time;
 		if (type == RegionState::soundType::region_music) {
 			channels[name.c_str()] = &chnls[0];//assign the channel
-			playMusic(sounds[name], true, chnls[0], ispaused, .9,type);
+			SoundClass sound = nullptr;
+			this->createMusic(&sound, name);
+			playMusic(sounds[name], true, chnls[0], ispaused, 1,type);
 		}
 		else if (type == RegionState::soundType::theme_music) {
 			channels[name.c_str()] = &chnls[0];//assign the channel
-			playMusic(sounds[name], true, chnls[0], ispaused, .7,type);
+			SoundClass sound = nullptr;
+			this->createMusic(&sound, name);
+			playMusic(sounds[name], true, chnls[0], ispaused, .9,type);
 		}
 		else
 			return 1;
@@ -226,11 +262,11 @@ FMOD_RESULT result;
 		unsigned int time;
 		if (type == RegionState::soundType::sfx) {
 			channels[name.c_str()] = &chnls[channel];//assign the channel
-			playSound(sounds[name], false, chnls[channel], ispaused, .5);
+			playSound(sounds[name], false, chnls[channel], ispaused, .6);
 		}
 		else if (type == RegionState::soundType::ambient_sfx) {
 			channels[name.c_str()] = &chnls[channel];//assign the channel
-			playAmbient(sounds[name], false, chnls[channel], ispaused, .5);
+			playAmbient(sounds[name], false, chnls[channel], ispaused, .6);
 		}
 		else
 			return 1;
@@ -282,6 +318,7 @@ FMOD_RESULT result;
 		}
 		if (type == RegionState::soundType::region_music) {
 			int t = stopSound(from);
+			releaseSound(sounds[from]);
 			if (t ==  0) {
 				playSong(to, type);
 				return 0;
@@ -302,6 +339,7 @@ FMOD_RESULT result;
 				channel->isPlaying(isplaying);
 				if (*isplaying) {
 					channel->stop();
+					releaseSound(sounds[name]);
 					playSong(to, type);
 
 

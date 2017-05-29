@@ -229,8 +229,8 @@ void ChildrenOfOsi::add_conv_point(std::string icon, std::string temp, std::stri
 //////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////
 
-void ChildrenOfOsi::play_sound(string name) {
-	createTask(name, "SOUND");
+void ChildrenOfOsi::play_sound(string name, char* source, RegionState::soundType type) {
+	createTaskForAudio(name, "SOUND", source, nullptr, type);
 }
 void ChildrenOfOsi::change_song(string name, char* from, char* to, RegionState::soundType type) {
 	createTaskForAudio(name, "SOUND", from, to, type);

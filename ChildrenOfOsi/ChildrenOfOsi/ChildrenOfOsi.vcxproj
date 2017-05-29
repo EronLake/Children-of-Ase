@@ -361,6 +361,7 @@
     <None Include="AssetInfo.h" />
     <None Include="attack_config.json" />
     <None Include="babalawo_config.json" />
+    <None Include="Babalawo_dialog.json" />
     <None Include="ClassDiagram.cd" />
     <None Include="common_config.json" />
     <None Include="config_jungle.json" />
@@ -378,11 +379,13 @@
     <None Include="script_templates.json" />
     <None Include="Shango_dialog.json" />
     <None Include="shrine_config.json" />
+    <None Include="Shrine_dialog.json" />
     <None Include="SilverSoldier_dialog.json" />
     <None Include="soldier_config.json" />
     <None Include="Tag_config.json" />
     <None Include="test.json" />
     <None Include="villager_config.json" />
+    <None Include="Villager_dialog.json" />
     <None Include="Yemoja_dialog.json" />
   </ItemGroup>
   <ItemGroup>

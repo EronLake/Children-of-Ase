@@ -27,7 +27,7 @@ class WorldObj
 	  height = 0;
 	  grid_location.first = -1;
 	  grid_location.second = -1;
-	  mew = new std::mutex();
+	//  mew = new std::mutex();
   };
 
   WorldObj(Vector2f p_topLeft, float p_width, float p_height):
@@ -42,7 +42,7 @@ class WorldObj
 	  offset_y2 = 0.0;
 	  grid_location.first = -1;
 	  grid_location.second = -1;
-	  mew = new std::mutex();
+	  //mew = new std::mutex();
   }
 
   WorldObj(float x, float y, bool col):
@@ -59,7 +59,7 @@ class WorldObj
 	  height = 0;
 	  grid_location.first = -1;
 	  grid_location.second = -1;
-	  mew = new std::mutex();
+	  //mew = new std::mutex();
   }
 
   virtual ~WorldObj() = default;
@@ -98,8 +98,10 @@ class WorldObj
   void setRotY(float y) { this->rotation.setYloc(y); };
   void shiftRotX(float dist) { this->rotation.shiftXloc(dist); };
   void shiftRotY(float dist) { this->rotation.shiftYloc(dist); };
-  void setWidth(float w) { std::lock_guard<std::mutex> guard(*this->mew); this->body[0].setWidth(this->width = w); this->effect.setWidth(w); };
-  void setHeight(float h) { std::lock_guard<std::mutex> guard(*this->mew); this->body[0].setHeight(this->height = h); this->effect.setHeight(h);};
+  void setWidth(float w) { //std::lock_guard<std::mutex> guard(*this->mew); 
+	  this->body[0].setWidth(this->width = w); this->effect.setWidth(w); };
+  void setHeight(float h) { //std::lock_guard<std::mutex> guard(*this->mew);
+	  this->body[0].setHeight(this->height = h); this->effect.setHeight(h);};
 
   // Higher-level setter methods
   void setID(int i) { ID=i; };
@@ -148,7 +150,7 @@ class WorldObj
 
   private:
 
-  std::mutex* mew;
+ // std::mutex* mew;
   static int idNum;
 
   Vector2f loc;
