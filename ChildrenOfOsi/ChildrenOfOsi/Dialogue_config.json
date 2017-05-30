@@ -1635,7 +1635,7 @@
 
    "conversation_point_21" : {
 	      "name" : "Advise To Send Peace Offering To",
-          "icon" : "ncp",
+          "icon" : "",
 	      "template" : "Advise To Send Peace Offering To",
 		  "honor" : 0,
 		  "pride": 0,

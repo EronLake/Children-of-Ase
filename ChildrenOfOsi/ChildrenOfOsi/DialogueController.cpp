@@ -121,8 +121,11 @@ point*/
 void DialogueController::PlayerChoose()
 {
 	Hero* temp_hero = CheckClass::isHero(other);
-	if (temp_hero)
+	if (temp_hero) {
 		player->filter_move_to(temp_hero);
+		//set_selectable(false,"Bribe",AffinityIcon);
+		unselectable_to_bottom();
+	}
 
 	options = dialogue.get_possible_conv_pts();
 	if (temp_hero) {
@@ -1279,6 +1282,7 @@ void DialogueController::otherResponse(std::string info, std::string hero_topic)
 				std::string reply_pt_sentence = dialogue.gen_dialog(diog_pt, temp_hero);
 				replace_all(reply_pt_sentence, "HERO", curr_hero_topic);
 				message = check_if_known(reply_pt_sentence, "");
+				PlayerActExecFunctions::execute_end(true);
 			}
 			else {
 				/////////////need to be changed to correct calls/dialog if not accepted///////////////////
@@ -1286,6 +1290,7 @@ void DialogueController::otherResponse(std::string info, std::string hero_topic)
 				std::string reply_pt_sentence = dialogue.gen_dialog_negative(diog_pt, temp_hero);
 				replace_all(reply_pt_sentence, "HERO", curr_hero_topic);
 				message = check_if_known(reply_pt_sentence, "");
+				PlayerActExecFunctions::execute_end(false);
 			}
 			state = 3;
 			otherConversationPoint(line);
@@ -1301,6 +1306,7 @@ void DialogueController::otherResponse(std::string info, std::string hero_topic)
 				std::string reply_pt_sentence = dialogue.gen_dialog(diog_pt, temp_hero);
 				replace_all(reply_pt_sentence, "HERO", curr_hero_topic);
 				message = check_if_known(reply_pt_sentence, "");
+				PlayerActExecFunctions::execute_end(true);
 			}
 			else {
 				/////////////need to be changed to correct calls/dialog if not accepted///////////////////
@@ -1308,6 +1314,7 @@ void DialogueController::otherResponse(std::string info, std::string hero_topic)
 				std::string reply_pt_sentence = dialogue.gen_dialog_negative(diog_pt, temp_hero);
 				replace_all(reply_pt_sentence, "HERO", curr_hero_topic);
 				message = check_if_known(reply_pt_sentence, "");
+				PlayerActExecFunctions::execute_end(false);
 			}
 			state = 3;
 			otherConversationPoint(line);
@@ -1323,6 +1330,7 @@ void DialogueController::otherResponse(std::string info, std::string hero_topic)
 				std::string reply_pt_sentence = dialogue.gen_dialog(diog_pt, temp_hero);
 				replace_all(reply_pt_sentence, "HERO", curr_hero_topic);
 				message = check_if_known(reply_pt_sentence, "");
+				PlayerActExecFunctions::execute_end(true);
 			}
 			else {
 				/////////////need to be changed to correct calls/dialog if not accepted///////////////////
@@ -1330,6 +1338,7 @@ void DialogueController::otherResponse(std::string info, std::string hero_topic)
 				std::string reply_pt_sentence = dialogue.gen_dialog_negative(diog_pt, temp_hero);
 				replace_all(reply_pt_sentence, "HERO", curr_hero_topic);
 				message = check_if_known(reply_pt_sentence, "");
+				PlayerActExecFunctions::execute_end(true);
 			}
 			state = 3;
 			otherConversationPoint(line);
@@ -1344,6 +1353,7 @@ void DialogueController::otherResponse(std::string info, std::string hero_topic)
 				std::string reply_pt_sentence = dialogue.gen_dialog(diog_pt, temp_hero);
 				replace_all(reply_pt_sentence, "HERO", curr_hero_topic);
 				message = check_if_known(reply_pt_sentence, "");
+				PlayerActExecFunctions::execute_end(true);
 			}
 			else {
 				/////////////need to be changed to correct calls/dialog if not accepted///////////////////
@@ -1351,6 +1361,7 @@ void DialogueController::otherResponse(std::string info, std::string hero_topic)
 				std::string reply_pt_sentence = dialogue.gen_dialog_negative(diog_pt, temp_hero);
 				replace_all(reply_pt_sentence, "HERO", curr_hero_topic);
 				message = check_if_known(reply_pt_sentence, "");
+				PlayerActExecFunctions::execute_end(false);
 			}
 			state = 3;
 			otherConversationPoint(line);
@@ -1365,6 +1376,7 @@ void DialogueController::otherResponse(std::string info, std::string hero_topic)
 				std::string reply_pt_sentence = dialogue.gen_dialog(diog_pt, temp_hero);
 				replace_all(reply_pt_sentence, "HERO", curr_hero_topic);
 				message = check_if_known(reply_pt_sentence, "");
+				PlayerActExecFunctions::execute_end(true);
 			}
 			else {
 				/////////////need to be changed to correct calls/dialog if not accepted///////////////////
@@ -1372,6 +1384,7 @@ void DialogueController::otherResponse(std::string info, std::string hero_topic)
 				std::string reply_pt_sentence = dialogue.gen_dialog_negative(diog_pt, temp_hero);
 				replace_all(reply_pt_sentence, "HERO", curr_hero_topic);
 				message = check_if_known(reply_pt_sentence, "");
+				PlayerActExecFunctions::execute_end(false);
 			}
 			state = 3;
 			otherConversationPoint(line);
@@ -1386,6 +1399,7 @@ void DialogueController::otherResponse(std::string info, std::string hero_topic)
 				std::string reply_pt_sentence = dialogue.gen_dialog(diog_pt, temp_hero);
 				replace_all(reply_pt_sentence, "HERO", curr_hero_topic);
 				message = check_if_known(reply_pt_sentence, "");
+				PlayerActExecFunctions::execute_end(true);
 			}
 			else {
 				/////////////need to be changed to correct calls/dialog if not accepted///////////////////
@@ -1393,6 +1407,7 @@ void DialogueController::otherResponse(std::string info, std::string hero_topic)
 				std::string reply_pt_sentence = dialogue.gen_dialog_negative(diog_pt, temp_hero);
 				replace_all(reply_pt_sentence, "HERO", curr_hero_topic);
 				message = check_if_known(reply_pt_sentence, "");
+				PlayerActExecFunctions::execute_end(false);
 			}
 			state = 3;
 			otherConversationPoint(line);
@@ -2015,6 +2030,7 @@ void DialogueController::startConversation(WorldObj* n, bool playerTalk)
 
 	if (temp_hero) {
 		player->filter_move_to(temp_hero);
+		unselectable_to_bottom();
 		//if (first_buff) {
 			//temp_hero->rel[player->name]->addNotoriety(50);
 			//temp_hero->rel[player->name]->addStrength(50);
@@ -2573,14 +2589,14 @@ void DialogueController::move_to_selectable_down() {
 	if (temp_hero && state != 2) {
 		for (int i = 0; (DialogueController::scroll_control + i) < DialogueController::getOptions().size(); ++i) {
 			if (DialogueController::getOptions()[DialogueController::scroll_control + i][4] == "1") {
-				if (i != 0 || (DialogueController::getOptions().size() == 2 && DialogueController::getOptions()[1][4] == "1")) {
+				if ((i != 0) || (DialogueController::getOptions().size() == 2 && DialogueController::getOptions()[1][4] == "1")) {
 					scroll_counter++;
 					break;
 				}
 			}
 			else {
 				scroll_counter++;
-				if (i == DialogueController::getOptions().size() - 2)
+				if (i == DialogueController::getOptions().size() - 1)
 					scroll_counter = 0;
 			}
 		}
@@ -2595,7 +2611,7 @@ void DialogueController::move_to_selectable_down() {
 			}
 			else {
 				scroll_counter++;
-				if (i == DialogueController::getOptions().size() - 2)
+				if (i == DialogueController::getOptions().size() - 1)
 					scroll_counter = 0;
 			}
 		}
@@ -2931,4 +2947,21 @@ void DialogueController::apply_post_from_response(std::string rep_choice, Action
 			act->getDoer()->rel[SHANGO]->setNotoriety(act->getDoer()->rel[SHANGO]->getNotoriety() - 7);
 		}
 	}
+}
+
+/*Makes it so no unselectable options are the first option in the list for any icon*/
+void DialogueController::unselectable_to_bottom() {
+	for (int i = 0; i < dialogue.get_possible_conv_pts_ref().size(); ++i) {
+		for (int j = 0; j < dialogue.get_possible_conv_pts_ref()[i].size(); ++j) {
+			if (dialogue.get_possible_conv_pts_ref()[i][j][IsSelectable] == "0") {
+				dialogue_point dpoint = dialogue.get_possible_conv_pts_ref()[i][j];
+				dialogue.get_possible_conv_pts_ref()[i].erase(dialogue.get_possible_conv_pts_ref()[i].begin() + j);
+				dialogue.get_possible_conv_pts_ref()[i].push_back(dpoint);
+			}
+			else//dialog option at top of list is selectable so do nothing
+				break;
+		}
+		
+	}
+
 }
