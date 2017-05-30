@@ -67,7 +67,7 @@ void ShrineConfig::init_sprites(ChildrenOfOsi* gameplay_func, TaskBuffer* tBuffe
 	auto sprites = (*itr)["sprites"];
 
 	//sets the oppropreate reagion config so that load by region works properly
-	vector<Texture*>* region_con;
+	std::set<Texture*>* region_con;
 
 	std::string path;
 
@@ -108,10 +108,18 @@ void ShrineConfig::init_sprites(ChildrenOfOsi* gameplay_func, TaskBuffer* tBuffe
 	tBuffer->run();
 	for (auto itor : sprites)
 	{
-		//create textures for the soldiers 
-		(*textureMap)[Containers::texture_table[itor["0"].asString()]] = pair<string, int>(path + itor["0"].asString() + ".png", itor["1"].asInt()/*frame_num*/);
-		//push to appropreate region config
-		region_con->push_back(Containers::texture_table[itor["0"].asString()]);
+		//checks if the texture is already loaded
+		if (!Containers::texture_table[itor["0"].asString()])
+		{
+			//checks if the texture is already loaded
+			if (!Containers::texture_table[itor["0"].asString()])
+			{
+				//create textures for the soldiers 
+				(*textureMap)[Containers::texture_table[itor["0"].asString()]] = pair<string, int>(path + itor["0"].asString() + ".png", itor["1"].asInt()/*frame_num*/);
+				//push to appropreate region config
+				region_con->insert(Containers::texture_table[itor["0"].asString()]);
+			}
+		}
 	}
 
 

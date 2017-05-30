@@ -6,6 +6,10 @@
 
 #include "NPC.h"
 
+class Soldier;
+class Party;
+class CheckClass;
+
 class Attack: public WorldObj
 {
   public:

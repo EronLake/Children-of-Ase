@@ -67,6 +67,7 @@ void HeroConfig::set_hero(vector<WorldObj*>* movVec, ChildrenOfOsi* gameplay_fun
 	Containers::hero_table[name]->setWidth(width);
 	Containers::hero_table[name]->setHeight(hight);
 	Containers::hero_table[name]->offsetBody(0, bodyx1, bodyx2, bodyy1, bodyy2);
+	Containers::hero_table[name]->offset_effect(0, 100, 100, 100, 100);
 
 	//needs to be handled separately
 	//Containers::hero_table[name]->sprite.setTexture(Containers::texture_table[tex_file]);
@@ -91,7 +92,7 @@ void HeroConfig::init_sprites(ChildrenOfOsi* gameplay_func, TaskBuffer* tBuffer,
 	auto sprites = (*itr)["sprites"];
 
 	//sets the oppropreate reagion config so that load by region works properly
-	vector<Texture*>* region_con;
+	std::set<Texture*>* region_con;
 
 	std::string path;
 
@@ -138,7 +139,7 @@ void HeroConfig::init_sprites(ChildrenOfOsi* gameplay_func, TaskBuffer* tBuffer,
 		//create textures for the heroes 
 		(*textureMap)[Containers::texture_table[itor["0"].asString()]] = pair<string, int>(path + itor["0"].asString() + ".png", itor["1"].asInt()/*frame_num*/);
 		//push to appropreate region config
-		region_con->push_back(Containers::texture_table[itor["0"].asString()]);
+		region_con->insert(Containers::texture_table[itor["0"].asString()]);
 	}
 
 
@@ -201,7 +202,7 @@ void HeroConfig::init_attacks(ChildrenOfOsi* gameplay_func, TaskBuffer* tBuffer,
 	Hero* cur_hero;
 
 	//sets the oppropreate reagion config so that load by region works properly
-	vector<Texture*>* region_con;
+	std::set<Texture*>* region_con;
 
 	std::string path;
 
@@ -261,7 +262,7 @@ void HeroConfig::init_attacks(ChildrenOfOsi* gameplay_func, TaskBuffer* tBuffer,
 		//create textures for the heroes
 		(*textureMap)[Containers::texture_table[itor["0"].asString()]] = pair<string, int>("Assets/Sprites/" + itor["0"].asString() + ".png", itor["1"].asInt()/*frame_num*/);
 		//push to appropreate region config
-		region_con->push_back(Containers::texture_table[itor["0"].asString()]);
+		region_con->insert(Containers::texture_table[itor["0"].asString()]);
 	}
 
 	//initialize melee attack
@@ -309,10 +310,14 @@ void HeroConfig::init_attacks(ChildrenOfOsi* gameplay_func, TaskBuffer* tBuffer,
 
 			for (auto itr2 : (*itor)["sprites"])
 			{
-				//create textures for the heroes
-				(*textureMap)[Containers::texture_table[itr2["0"].asString()]] = pair<string, int>("Assets/Sprites/" + itr2["0"].asString() + ".png", itr2["1"].asInt()/*frame_num*/);
-				//push to appropreate region config
-				region_con->push_back(Containers::texture_table[itr2["0"].asString()]);
+				//checks if the texture is already loaded
+				if (!Containers::texture_table[itr2["0"].asString()])
+				{
+					//create textures for the heroes
+					(*textureMap)[Containers::texture_table[itr2["0"].asString()]] = pair<string, int>("Assets/Sprites/" + itr2["0"].asString() + ".png", itr2["1"].asInt()/*frame_num*/);
+					//push to appropreate region config
+					region_con->insert(Containers::texture_table[itr2["0"].asString()]);
+				}
 			}
 
 			//gameplay_func->add_Attack(attack.key().asString() + "_" + itor.key().asString() + cur_hero->getKey(), cur_hero->body[0].getX(), cur_hero->body[0].getY(), true, 10);

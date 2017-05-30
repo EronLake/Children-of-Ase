@@ -1,2 +1,622 @@
-﻿  ChildrenOfOsi.vcxproj -> C:\cygwin64\home\eronj\Children-of-Ase\ChildrenOfOsi\Release\ChildrenOfOsi.exe
+﻿  AIController.cpp
+c:\cygwin64\home\eronj\children-of-ase\childrenofosi\childrenofosi\Attack.h(57): warning C4800: 'int': forcing value to bool 'true' or 'false' (performance warning)
+AIController.cpp(331): warning C4018: '<': signed/unsigned mismatch
+AIController.cpp(339): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+  AIHelper.cpp
+c:\cygwin64\home\eronj\children-of-ase\childrenofosi\childrenofosi\Attack.h(57): warning C4800: 'int': forcing value to bool 'true' or 'false' (performance warning)
+c:\cygwin64\home\eronj\children-of-ase\childrenofosi\childrenofosi\RegionState.h(19): warning C4091: 'static ': ignored on left of 'RegionState::soundType' when no variable is declared
+AIHelper.cpp(57): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+AIHelper.cpp(173): warning C4018: '<': signed/unsigned mismatch
+AIHelper.cpp(182): warning C4101: 'result': unreferenced local variable
+  AIManager.cpp
+c:\cygwin64\home\eronj\children-of-ase\childrenofosi\childrenofosi\Attack.h(57): warning C4800: 'int': forcing value to bool 'true' or 'false' (performance warning)
+c:\cygwin64\home\eronj\children-of-ase\childrenofosi\childrenofosi\RegionState.h(19): warning C4091: 'static ': ignored on left of 'RegionState::soundType' when no variable is declared
+  Action.cpp
+c:\cygwin64\home\eronj\children-of-ase\childrenofosi\childrenofosi\Attack.h(57): warning C4800: 'int': forcing value to bool 'true' or 'false' (performance warning)
+c:\cygwin64\home\eronj\children-of-ase\childrenofosi\childrenofosi\RegionState.h(19): warning C4091: 'static ': ignored on left of 'RegionState::soundType' when no variable is declared
+Action.cpp(62): warning C4018: '<': signed/unsigned mismatch
+Action.cpp(79): warning C4018: '<': signed/unsigned mismatch
+  ActionConfig.cpp
+c:\cygwin64\home\eronj\children-of-ase\childrenofosi\childrenofosi\Attack.h(57): warning C4800: 'int': forcing value to bool 'true' or 'false' (performance warning)
+c:\cygwin64\home\eronj\children-of-ase\childrenofosi\childrenofosi\RegionState.h(19): warning C4091: 'static ': ignored on left of 'RegionState::soundType' when no variable is declared
+ActionConfig.cpp(54): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+  ActionExecFunctions.cpp
+c:\cygwin64\home\eronj\children-of-ase\childrenofosi\childrenofosi\Attack.h(57): warning C4800: 'int': forcing value to bool 'true' or 'false' (performance warning)
+c:\cygwin64\home\eronj\children-of-ase\childrenofosi\childrenofosi\RegionState.h(19): warning C4091: 'static ': ignored on left of 'RegionState::soundType' when no variable is declared
+  ActionHelper.cpp
+c:\cygwin64\home\eronj\children-of-ase\childrenofosi\childrenofosi\Attack.h(57): warning C4800: 'int': forcing value to bool 'true' or 'false' (performance warning)
+c:\cygwin64\home\eronj\children-of-ase\childrenofosi\childrenofosi\RegionState.h(19): warning C4091: 'static ': ignored on left of 'RegionState::soundType' when no variable is declared
+ActionHelper.cpp(86): warning C4018: '<': signed/unsigned mismatch
+ActionHelper.cpp(91): warning C4018: '<': signed/unsigned mismatch
+ActionHelper.cpp(102): warning C4018: '<': signed/unsigned mismatch
+ActionHelper.cpp(107): warning C4018: '<': signed/unsigned mismatch
+ActionHelper.cpp(120): warning C4018: '<': signed/unsigned mismatch
+  ActionPool.cpp
+c:\cygwin64\home\eronj\children-of-ase\childrenofosi\childrenofosi\Attack.h(57): warning C4800: 'int': forcing value to bool 'true' or 'false' (performance warning)
+ActionPool.cpp(29): warning C4018: '<': signed/unsigned mismatch
+ActionPool.cpp(33): warning C4018: '<': signed/unsigned mismatch
+ActionPool.cpp(47): warning C4018: '<': signed/unsigned mismatch
+ActionPool.cpp(49): warning C4018: '<': signed/unsigned mismatch
+ActionPool.cpp(60): warning C4018: '<': signed/unsigned mismatch
+ActionPool.cpp(70): warning C4018: '<': signed/unsigned mismatch
+ActionPool.cpp(80): warning C4018: '<': signed/unsigned mismatch
+  Alliance.cpp
+c:\cygwin64\home\eronj\children-of-ase\childrenofosi\childrenofosi\Attack.h(57): warning C4800: 'int': forcing value to bool 'true' or 'false' (performance warning)
+Alliance.cpp(28): warning C4018: '<': signed/unsigned mismatch
+Alliance.cpp(96): warning C4018: '<': signed/unsigned mismatch
+Alliance.cpp(98): warning C4018: '<': signed/unsigned mismatch
+Alliance.cpp(106): warning C4018: '<': signed/unsigned mismatch
+  Attack.cpp
+c:\cygwin64\home\eronj\children-of-ase\childrenofosi\childrenofosi\Attack.h(57): warning C4800: 'int': forcing value to bool 'true' or 'false' (performance warning)
+Attack.cpp(42): warning C4018: '<': signed/unsigned mismatch
+  AudioManager.cpp
+c:\cygwin64\home\eronj\children-of-ase\childrenofosi\childrenofosi\Attack.h(57): warning C4800: 'int': forcing value to bool 'true' or 'false' (performance warning)
+c:\cygwin64\home\eronj\children-of-ase\childrenofosi\childrenofosi\RegionState.h(19): warning C4091: 'static ': ignored on left of 'RegionState::soundType' when no variable is declared
+  BabalawoConfig.cpp
+c:\cygwin64\home\eronj\children-of-ase\childrenofosi\childrenofosi\Attack.h(57): warning C4800: 'int': forcing value to bool 'true' or 'false' (performance warning)
+c:\cygwin64\home\eronj\children-of-ase\childrenofosi\childrenofosi\RegionState.h(19): warning C4091: 'static ': ignored on left of 'RegionState::soundType' when no variable is declared
+  CheckClass.cpp
+c:\cygwin64\home\eronj\children-of-ase\childrenofosi\childrenofosi\Attack.h(57): warning C4800: 'int': forcing value to bool 'true' or 'false' (performance warning)
+  ChildrenOfOsi.cpp
+c:\cygwin64\home\eronj\children-of-ase\childrenofosi\childrenofosi\Attack.h(57): warning C4800: 'int': forcing value to bool 'true' or 'false' (performance warning)
+c:\cygwin64\home\eronj\children-of-ase\childrenofosi\childrenofosi\RegionState.h(19): warning C4091: 'static ': ignored on left of 'RegionState::soundType' when no variable is declared
+  CombatController.cpp
+c:\cygwin64\home\eronj\children-of-ase\childrenofosi\childrenofosi\Attack.h(57): warning C4800: 'int': forcing value to bool 'true' or 'false' (performance warning)
+c:\cygwin64\home\eronj\children-of-ase\childrenofosi\childrenofosi\RegionState.h(19): warning C4091: 'static ': ignored on left of 'RegionState::soundType' when no variable is declared
+CombatController.cpp(23): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
+CombatController.cpp(25): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
+CombatController.cpp(122): warning C4101: 'sold2': unreferenced local variable
+CombatController.cpp(151): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+CombatController.cpp(152): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+  Conditions.cpp
+c:\cygwin64\home\eronj\children-of-ase\childrenofosi\childrenofosi\Attack.h(57): warning C4800: 'int': forcing value to bool 'true' or 'false' (performance warning)
+Conditions.cpp(204): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+Conditions.cpp(241): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+Conditions.cpp(244): warning C4018: '<': signed/unsigned mismatch
+Conditions.cpp(246): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+Conditions.cpp(274): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+Conditions.cpp(277): warning C4018: '<': signed/unsigned mismatch
+Conditions.cpp(283): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
+Conditions.cpp(321): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
+Conditions.cpp(433): warning C4244: 'return': conversion from 'int' to 'float', possible loss of data
+Conditions.cpp(523): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+Conditions.cpp(527): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+Conditions.cpp(531): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+Conditions.cpp(537): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+Conditions.cpp(541): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+Conditions.cpp(545): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+Conditions.cpp(604): warning C4244: 'return': conversion from 'int' to 'float', possible loss of data
+Conditions.cpp(688): warning C4244: 'return': conversion from 'int' to 'float', possible loss of data
+  ConversationLogObj.cpp
+c:\cygwin64\home\eronj\children-of-ase\childrenofosi\childrenofosi\Attack.h(57): warning C4800: 'int': forcing value to bool 'true' or 'false' (performance warning)
+  ConversationPoint.cpp
+c:\cygwin64\home\eronj\children-of-ase\childrenofosi\childrenofosi\Attack.h(57): warning C4800: 'int': forcing value to bool 'true' or 'false' (performance warning)
+ConversationPoint.cpp(98): warning C4018: '<': signed/unsigned mismatch
+ConversationPoint.cpp(111): warning C4018: '<': signed/unsigned mismatch
+  DialogueConfig.cpp
+c:\cygwin64\home\eronj\children-of-ase\childrenofosi\childrenofosi\Attack.h(57): warning C4800: 'int': forcing value to bool 'true' or 'false' (performance warning)
+c:\cygwin64\home\eronj\children-of-ase\childrenofosi\childrenofosi\RegionState.h(19): warning C4091: 'static ': ignored on left of 'RegionState::soundType' when no variable is declared
+  DialogueController.cpp
+c:\cygwin64\home\eronj\children-of-ase\childrenofosi\childrenofosi\Attack.h(57): warning C4800: 'int': forcing value to bool 'true' or 'false' (performance warning)
+c:\cygwin64\home\eronj\children-of-ase\childrenofosi\childrenofosi\RegionState.h(19): warning C4091: 'static ': ignored on left of 'RegionState::soundType' when no variable is declared
+DialogueController.cpp(105): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+DialogueController.cpp(146): warning C4018: '<': signed/unsigned mismatch
+DialogueController.cpp(154): warning C4018: '<': signed/unsigned mismatch
+DialogueController.cpp(349): warning C4018: '<': signed/unsigned mismatch
+DialogueController.cpp(1494): warning C4018: '<': signed/unsigned mismatch
+DialogueController.cpp(1505): warning C4018: '<': signed/unsigned mismatch
+DialogueController.cpp(1516): warning C4018: '<': signed/unsigned mismatch
+DialogueController.cpp(1559): warning C4018: '<': signed/unsigned mismatch
+DialogueController.cpp(1649): warning C4018: '<': signed/unsigned mismatch
+DialogueController.cpp(1661): warning C4018: '<': signed/unsigned mismatch
+DialogueController.cpp(1773): warning C4018: '<': signed/unsigned mismatch
+DialogueController.cpp(1790): warning C4018: '<': signed/unsigned mismatch
+DialogueController.cpp(1815): warning C4018: '<': signed/unsigned mismatch
+DialogueController.cpp(1827): warning C4018: '<': signed/unsigned mismatch
+DialogueController.cpp(1839): warning C4018: '<': signed/unsigned mismatch
+DialogueController.cpp(1849): warning C4018: '<': signed/unsigned mismatch
+DialogueController.cpp(1943): warning C4018: '<': signed/unsigned mismatch
+DialogueController.cpp(2002): warning C4018: '<': signed/unsigned mismatch
+DialogueController.cpp(2021): warning C4018: '<': signed/unsigned mismatch
+DialogueController.cpp(2061): warning C4018: '<': signed/unsigned mismatch
+DialogueController.cpp(2086): warning C4018: '<': signed/unsigned mismatch
+  Compiling...
+  DialogueGui.cpp
+c:\cygwin64\home\eronj\children-of-ase\childrenofosi\childrenofosi\Attack.h(57): warning C4800: 'int': forcing value to bool 'true' or 'false' (performance warning)
+c:\cygwin64\home\eronj\children-of-ase\childrenofosi\childrenofosi\RegionState.h(19): warning C4091: 'static ': ignored on left of 'RegionState::soundType' when no variable is declared
+DialogueGui.cpp(228): warning C4018: '<=': signed/unsigned mismatch
+DialogueGui.cpp(254): warning C4018: '<=': signed/unsigned mismatch
+  DialogueHelper.cpp
+c:\cygwin64\home\eronj\children-of-ase\childrenofosi\childrenofosi\Attack.h(57): warning C4800: 'int': forcing value to bool 'true' or 'false' (performance warning)
+DialogueHelper.cpp(72): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+DialogueHelper.cpp(142): warning C4018: '<': signed/unsigned mismatch
+DialogueHelper.cpp(157): warning C4018: '<': signed/unsigned mismatch
+DialogueHelper.cpp(271): warning C4018: '<': signed/unsigned mismatch
+DialogueHelper.cpp(287): warning C4018: '<': signed/unsigned mismatch
+DialogueHelper.cpp(302): warning C4018: '<': signed/unsigned mismatch
+DialogueHelper.cpp(330): warning C4018: '<': signed/unsigned mismatch
+DialogueHelper.cpp(475): warning C4018: '<=': signed/unsigned mismatch
+DialogueHelper.cpp(527): warning C4018: '<=': signed/unsigned mismatch
+DialogueHelper.cpp(584): warning C4018: '<=': signed/unsigned mismatch
+DialogueHelper.cpp(632): warning C4018: '<=': signed/unsigned mismatch
+DialogueHelper.cpp(675): warning C4018: '<': signed/unsigned mismatch
+DialogueHelper.cpp(679): warning C4018: '<': signed/unsigned mismatch
+  DialougeTestSuite.cpp
+c:\cygwin64\home\eronj\children-of-ase\childrenofosi\childrenofosi\Attack.h(57): warning C4800: 'int': forcing value to bool 'true' or 'false' (performance warning)
+  DummyController.cpp
+c:\cygwin64\home\eronj\children-of-ase\childrenofosi\childrenofosi\Attack.h(57): warning C4800: 'int': forcing value to bool 'true' or 'false' (performance warning)
+c:\cygwin64\home\eronj\children-of-ase\childrenofosi\childrenofosi\RegionState.h(19): warning C4091: 'static ': ignored on left of 'RegionState::soundType' when no variable is declared
+  Fight.cpp
+c:\cygwin64\home\eronj\children-of-ase\childrenofosi\childrenofosi\Attack.h(57): warning C4800: 'int': forcing value to bool 'true' or 'false' (performance warning)
+c:\cygwin64\home\eronj\children-of-ase\childrenofosi\childrenofosi\RegionState.h(19): warning C4091: 'static ': ignored on left of 'RegionState::soundType' when no variable is declared
+Fight.cpp(471): warning C4018: '<': signed/unsigned mismatch
+Fight.cpp(475): warning C4018: '<': signed/unsigned mismatch
+  GameMap.cpp
+c:\cygwin64\home\eronj\children-of-ase\childrenofosi\childrenofosi\Attack.h(57): warning C4800: 'int': forcing value to bool 'true' or 'false' (performance warning)
+GameMap.cpp(155): warning C4018: '<': signed/unsigned mismatch
+GameMap.cpp(156): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+  GameState.cpp
+c:\cygwin64\home\eronj\children-of-ase\childrenofosi\childrenofosi\Attack.h(57): warning C4800: 'int': forcing value to bool 'true' or 'false' (performance warning)
+  HUD.cpp
+c:\cygwin64\home\eronj\children-of-ase\childrenofosi\childrenofosi\Attack.h(57): warning C4800: 'int': forcing value to bool 'true' or 'false' (performance warning)
+c:\cygwin64\home\eronj\children-of-ase\childrenofosi\childrenofosi\RegionState.h(19): warning C4091: 'static ': ignored on left of 'RegionState::soundType' when no variable is declared
+HUD.cpp(136): warning C4018: '<': signed/unsigned mismatch
+HUD.cpp(137): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+HUD.cpp(144): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+HUD.cpp(145): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+  Hero.cpp
+c:\cygwin64\home\eronj\children-of-ase\childrenofosi\childrenofosi\Attack.h(57): warning C4800: 'int': forcing value to bool 'true' or 'false' (performance warning)
+Hero.cpp(121): warning C4018: '<': signed/unsigned mismatch
+  HeroConfig.cpp
+c:\cygwin64\home\eronj\children-of-ase\childrenofosi\childrenofosi\Attack.h(57): warning C4800: 'int': forcing value to bool 'true' or 'false' (performance warning)
+c:\cygwin64\home\eronj\children-of-ase\childrenofosi\childrenofosi\RegionState.h(19): warning C4091: 'static ': ignored on left of 'RegionState::soundType' when no variable is declared
+HeroConfig.cpp(275): warning C4244: 'argument': conversion from 'Json::Value::Int' to 'float', possible loss of data
+HeroConfig.cpp(327): warning C4244: 'argument': conversion from 'Json::Value::Int' to 'float', possible loss of data
+HeroConfig.cpp(352): warning C4018: '<': signed/unsigned mismatch
+HeroConfig.cpp(354): warning C4018: '<': signed/unsigned mismatch
+  Input.cpp
+c:\cygwin64\home\eronj\children-of-ase\childrenofosi\childrenofosi\Attack.h(57): warning C4800: 'int': forcing value to bool 'true' or 'false' (performance warning)
+c:\cygwin64\home\eronj\children-of-ase\childrenofosi\childrenofosi\RegionState.h(19): warning C4091: 'static ': ignored on left of 'RegionState::soundType' when no variable is declared
+c:\cygwin64\home\eronj\children-of-ase\childrenofosi\childrenofosi\Point.h(27): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+c:\cygwin64\home\eronj\children-of-ase\childrenofosi\childrenofosi\Point.h(30): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+c:\cygwin64\home\eronj\children-of-ase\childrenofosi\childrenofosi\UniformGrid.h(30): warning C4812: obsolete declaration style: please use 'UniformGrid<T>::UniformGrid' instead
+c:\cygwin64\home\eronj\children-of-ase\childrenofosi\childrenofosi\UniformGrid.h(42): warning C4812: obsolete declaration style: please use 'UniformGrid<T>::~UniformGrid' instead
+Input.cpp(4): warning C4067: unexpected tokens following preprocessor directive - expected a newline
+C:\Program Files (x86)\Windows Kits\8.1\Include\shared\minwindef.h(130): warning C4005: 'APIENTRY': macro redefinition
+  C:\cygwin64\home\eronj\Children-of-Ase\ChildrenOfOsi\External Dependencies\GLFW\include\GLFW/glfw3.h(98): note: see previous definition of 'APIENTRY'
+Input.cpp(62): warning C4101: 'offsetleft': unreferenced local variable
+Input.cpp(63): warning C4101: 'offsety': unreferenced local variable
+Input.cpp(374): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+Input.cpp(376): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+Input.cpp(440): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+Input.cpp(440): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+Input.cpp(441): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+Input.cpp(441): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+Input.cpp(456): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+Input.cpp(457): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+Input.cpp(552): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+Input.cpp(553): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+Input.cpp(562): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+Input.cpp(1032): warning C4018: '<': signed/unsigned mismatch
+Input.cpp(1036): warning C4018: '>=': signed/unsigned mismatch
+Input.cpp(1045): warning C4018: '>': signed/unsigned mismatch
+Input.cpp(1056): warning C4018: '<': signed/unsigned mismatch
+Input.cpp(1059): warning C4018: '>=': signed/unsigned mismatch
+Input.cpp(1066): warning C4018: '>': signed/unsigned mismatch
+Input.cpp(1077): warning C4018: '<': signed/unsigned mismatch
+Input.cpp(1080): warning C4018: '>=': signed/unsigned mismatch
+Input.cpp(1090): warning C4018: '>': signed/unsigned mismatch
+  LivingObj.cpp
+  Main.cpp
+c:\cygwin64\home\eronj\children-of-ase\childrenofosi\childrenofosi\Attack.h(57): warning C4800: 'int': forcing value to bool 'true' or 'false' (performance warning)
+c:\cygwin64\home\eronj\children-of-ase\childrenofosi\childrenofosi\RegionState.h(19): warning C4091: 'static ': ignored on left of 'RegionState::soundType' when no variable is declared
+c:\cygwin64\home\eronj\children-of-ase\childrenofosi\childrenofosi\Point.h(27): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+c:\cygwin64\home\eronj\children-of-ase\childrenofosi\childrenofosi\Point.h(30): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+c:\cygwin64\home\eronj\children-of-ase\childrenofosi\childrenofosi\UniformGrid.h(30): warning C4812: obsolete declaration style: please use 'UniformGrid<T>::UniformGrid' instead
+c:\cygwin64\home\eronj\children-of-ase\childrenofosi\childrenofosi\UniformGrid.h(42): warning C4812: obsolete declaration style: please use 'UniformGrid<T>::~UniformGrid' instead
+C:\Program Files (x86)\Windows Kits\8.1\Include\shared\minwindef.h(130): warning C4005: 'APIENTRY': macro redefinition
+  C:\cygwin64\home\eronj\Children-of-Ase\ChildrenOfOsi\External Dependencies\GLFW\include\GLFW/glfw3.h(98): note: see previous definition of 'APIENTRY'
+Main.cpp(395): warning C4018: '<': signed/unsigned mismatch
+Main.cpp(396): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+Main.cpp(421): warning C4018: '<': signed/unsigned mismatch
+Main.cpp(440): warning C4018: '<': signed/unsigned mismatch
+Main.cpp(449): warning C4018: '<': signed/unsigned mismatch
+Main.cpp(467): warning C4018: '<': signed/unsigned mismatch
+Main.cpp(476): warning C4018: '<': signed/unsigned mismatch
+Main.cpp(495): warning C4018: '<': signed/unsigned mismatch
+Main.cpp(721): warning C4018: '<': signed/unsigned mismatch
+Main.cpp(871): warning C4018: '<': signed/unsigned mismatch
+Main.cpp(879): warning C4018: '<': signed/unsigned mismatch
+Main.cpp(890): warning C4018: '<': signed/unsigned mismatch
+Main.cpp(897): warning C4018: '<': signed/unsigned mismatch
+Main.cpp(924): warning C4018: '<': signed/unsigned mismatch
+Main.cpp(679): warning C4101: 'current_ticks': unreferenced local variable
+Main.cpp(1121): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+Main.cpp(1122): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+Main.cpp(1123): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+c:\cygwin64\home\eronj\children-of-ase\childrenofosi\childrenofosi\UniformGrid.h(30): warning C4812: obsolete declaration style: please use 'UniformGrid<WorldObj>::UniformGrid' instead
+  c:\cygwin64\home\eronj\children-of-ase\childrenofosi\childrenofosi\UniformGrid.h(31): note: while compiling class template member function 'UniformGrid<WorldObj>::UniformGrid(void)'
+  Main.cpp(160): note: see reference to function template instantiation 'UniformGrid<WorldObj>::UniformGrid(void)' being compiled
+  Main.cpp(160): note: see reference to class template instantiation 'UniformGrid<WorldObj>' being compiled
+c:\cygwin64\home\eronj\children-of-ase\childrenofosi\childrenofosi\UniformGrid.h(50): warning C4018: '<': signed/unsigned mismatch
+  c:\cygwin64\home\eronj\children-of-ase\childrenofosi\childrenofosi\UniformGrid.h(48): note: while compiling class template member function 'void UniformGrid<WorldObj>::insert_worldobj_to_grid(std::vector<WorldObj *,std::allocator<_Ty>>)'
+          with
+          [
+              _Ty=WorldObj *
+          ]
+  Main.cpp(726): note: see reference to function template instantiation 'void UniformGrid<WorldObj>::insert_worldobj_to_grid(std::vector<WorldObj *,std::allocator<_Ty>>)' being compiled
+          with
+          [
+              _Ty=WorldObj *
+          ]
+c:\cygwin64\home\eronj\children-of-ase\childrenofosi\childrenofosi\UniformGrid.h(52): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+c:\cygwin64\home\eronj\children-of-ase\childrenofosi\childrenofosi\UniformGrid.h(54): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+c:\cygwin64\home\eronj\children-of-ase\childrenofosi\childrenofosi\UniformGrid.h(69): warning C4018: '<': signed/unsigned mismatch
+  c:\cygwin64\home\eronj\children-of-ase\childrenofosi\childrenofosi\UniformGrid.h(68): note: while compiling class template member function 'void UniformGrid<WorldObj>::clear_and_reinsert(std::vector<WorldObj *,std::allocator<_Ty>>)'
+          with
+          [
+              _Ty=WorldObj *
+          ]
+  Main.cpp(853): note: see reference to function template instantiation 'void UniformGrid<WorldObj>::clear_and_reinsert(std::vector<WorldObj *,std::allocator<_Ty>>)' being compiled
+          with
+          [
+              _Ty=WorldObj *
+          ]
+c:\cygwin64\home\eronj\children-of-ase\childrenofosi\childrenofosi\UniformGrid.h(75): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+c:\cygwin64\home\eronj\children-of-ase\childrenofosi\childrenofosi\UniformGrid.h(77): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+c:\cygwin64\home\eronj\children-of-ase\childrenofosi\childrenofosi\UniformGrid.h(118): warning C4018: '<': signed/unsigned mismatch
+c:\cygwin64\home\eronj\children-of-ase\childrenofosi\childrenofosi\UniformGrid.h(30): warning C4812: obsolete declaration style: please use 'UniformGrid<Line>::UniformGrid' instead
+  c:\cygwin64\home\eronj\children-of-ase\childrenofosi\childrenofosi\UniformGrid.h(31): note: while compiling class template member function 'UniformGrid<Line>::UniformGrid(void)'
+  Main.cpp(159): note: see reference to function template instantiation 'UniformGrid<Line>::UniformGrid(void)' being compiled
+  Main.cpp(159): note: see reference to class template instantiation 'UniformGrid<Line>' being compiled
+c:\cygwin64\home\eronj\children-of-ase\childrenofosi\childrenofosi\UniformGrid.h(213): warning C4018: '<': signed/unsigned mismatch
+  c:\cygwin64\home\eronj\children-of-ase\childrenofosi\childrenofosi\UniformGrid.h(211): note: while compiling class template member function 'void UniformGrid<Line>::insert_objs_to_grid(std::vector<Line *,std::allocator<_Ty>>)'
+          with
+          [
+              _Ty=Line *
+          ]
+  Main.cpp(161): note: see reference to function template instantiation 'void UniformGrid<Line>::insert_objs_to_grid(std::vector<Line *,std::allocator<_Ty>>)' being compiled
+          with
+          [
+              _Ty=Line *
+          ]
+c:\cygwin64\home\eronj\children-of-ase\childrenofosi\childrenofosi\UniformGrid.h(215): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+c:\cygwin64\home\eronj\children-of-ase\childrenofosi\childrenofosi\UniformGrid.h(217): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+c:\cygwin64\home\eronj\children-of-ase\childrenofosi\childrenofosi\UniformGrid.h(238): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+c:\cygwin64\home\eronj\children-of-ase\childrenofosi\childrenofosi\UniformGrid.h(240): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+c:\cygwin64\home\eronj\children-of-ase\childrenofosi\childrenofosi\UniformGrid.h(270): warning C4018: '<': signed/unsigned mismatch
+  Manager.cpp
+c:\cygwin64\home\eronj\children-of-ase\childrenofosi\childrenofosi\Attack.h(57): warning C4800: 'int': forcing value to bool 'true' or 'false' (performance warning)
+c:\cygwin64\home\eronj\children-of-ase\childrenofosi\childrenofosi\RegionState.h(19): warning C4091: 'static ': ignored on left of 'RegionState::soundType' when no variable is declared
+  Memory.cpp
+  MemoryHelper.cpp
+c:\cygwin64\home\eronj\children-of-ase\childrenofosi\childrenofosi\Attack.h(57): warning C4800: 'int': forcing value to bool 'true' or 'false' (performance warning)
+c:\cygwin64\home\eronj\children-of-ase\childrenofosi\childrenofosi\RegionState.h(19): warning C4091: 'static ': ignored on left of 'RegionState::soundType' when no variable is declared
+MemoryHelper.cpp(122): warning C4101: 'm': unreferenced local variable
+  MemoryPool.cpp
+c:\cygwin64\home\eronj\children-of-ase\childrenofosi\childrenofosi\Attack.h(57): warning C4800: 'int': forcing value to bool 'true' or 'false' (performance warning)
+c:\cygwin64\home\eronj\children-of-ase\childrenofosi\childrenofosi\RegionState.h(19): warning C4091: 'static ': ignored on left of 'RegionState::soundType' when no variable is declared
+  MemoryTestSuite.cpp
+c:\cygwin64\home\eronj\children-of-ase\childrenofosi\childrenofosi\Attack.h(57): warning C4800: 'int': forcing value to bool 'true' or 'false' (performance warning)
+c:\cygwin64\home\eronj\children-of-ase\childrenofosi\childrenofosi\RegionState.h(19): warning C4091: 'static ': ignored on left of 'RegionState::soundType' when no variable is declared
+MemoryTestSuite.cpp(699): warning C4101: 'next': unreferenced local variable
+MemoryTestSuite.cpp(700): warning C4101: 'is_available': unreferenced local variable
+MemoryTestSuite.cpp(701): warning C4101: 'block_pointer': unreferenced local variable
+  MessageLog.cpp
+c:\cygwin64\home\eronj\children-of-ase\childrenofosi\childrenofosi\Attack.h(57): warning C4800: 'int': forcing value to bool 'true' or 'false' (performance warning)
+c:\cygwin64\home\eronj\children-of-ase\childrenofosi\childrenofosi\RegionState.h(19): warning C4091: 'static ': ignored on left of 'RegionState::soundType' when no variable is declared
+  Movement.cpp
+c:\cygwin64\home\eronj\children-of-ase\childrenofosi\childrenofosi\Attack.h(57): warning C4800: 'int': forcing value to bool 'true' or 'false' (performance warning)
+c:\cygwin64\home\eronj\children-of-ase\childrenofosi\childrenofosi\RegionState.h(19): warning C4091: 'static ': ignored on left of 'RegionState::soundType' when no variable is declared
+c:\cygwin64\home\eronj\children-of-ase\childrenofosi\childrenofosi\Point.h(27): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+c:\cygwin64\home\eronj\children-of-ase\childrenofosi\childrenofosi\Point.h(30): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+c:\cygwin64\home\eronj\children-of-ase\childrenofosi\childrenofosi\UniformGrid.h(30): warning C4812: obsolete declaration style: please use 'UniformGrid<T>::UniformGrid' instead
+c:\cygwin64\home\eronj\children-of-ase\childrenofosi\childrenofosi\UniformGrid.h(42): warning C4812: obsolete declaration style: please use 'UniformGrid<T>::~UniformGrid' instead
+Movement.cpp(49): warning C4018: '<': signed/unsigned mismatch
+Movement.cpp(72): warning C4018: '<': signed/unsigned mismatch
+Movement.cpp(117): warning C4018: '<': signed/unsigned mismatch
+Movement.cpp(131): warning C4018: '<': signed/unsigned mismatch
+Movement.cpp(150): warning C4018: '<': signed/unsigned mismatch
+Movement.cpp(164): warning C4018: '<': signed/unsigned mismatch
+Movement.cpp(206): warning C4018: '<': signed/unsigned mismatch
+Movement.cpp(219): warning C4018: '<': signed/unsigned mismatch
+Movement.cpp(237): warning C4018: '<': signed/unsigned mismatch
+Movement.cpp(252): warning C4018: '<': signed/unsigned mismatch
+Movement.cpp(291): warning C4018: '<': signed/unsigned mismatch
+Movement.cpp(311): warning C4018: '<': signed/unsigned mismatch
+Movement.cpp(353): warning C4018: '<': signed/unsigned mismatch
+Movement.cpp(369): warning C4018: '<': signed/unsigned mismatch
+Movement.cpp(389): warning C4018: '<': signed/unsigned mismatch
+Movement.cpp(403): warning C4018: '<': signed/unsigned mismatch
+Movement.cpp(444): warning C4018: '<': signed/unsigned mismatch
+Movement.cpp(459): warning C4018: '<': signed/unsigned mismatch
+Movement.cpp(477): warning C4018: '<': signed/unsigned mismatch
+Movement.cpp(491): warning C4018: '<': signed/unsigned mismatch
+Movement.cpp(529): warning C4018: '<': signed/unsigned mismatch
+Movement.cpp(552): warning C4018: '<': signed/unsigned mismatch
+Movement.cpp(592): warning C4018: '<': signed/unsigned mismatch
+Movement.cpp(614): warning C4018: '<': signed/unsigned mismatch
+Movement.cpp(645): warning C4018: '<': signed/unsigned mismatch
+Movement.cpp(701): warning C4018: '<': signed/unsigned mismatch
+Movement.cpp(720): warning C4018: '<': signed/unsigned mismatch
+Movement.cpp(814): warning C4018: '<': signed/unsigned mismatch
+Movement.cpp(815): warning C4018: '<': signed/unsigned mismatch
+Movement.cpp(828): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+Movement.cpp(829): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+Movement.cpp(830): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+Movement.cpp(844): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+Movement.cpp(846): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+Movement.cpp(853): warning C4018: '<': signed/unsigned mismatch
+c:\cygwin64\home\eronj\children-of-ase\childrenofosi\childrenofosi\UniformGrid.h(283): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+  c:\cygwin64\home\eronj\children-of-ase\childrenofosi\childrenofosi\UniformGrid.h(280): note: while compiling class template member function 'std::vector<Line *,std::allocator<_Ty>> UniformGrid<Line>::retrieve_objs_in_grid(std::vector<_Ty,std::allocator<_Ty>> &,T *)'
+          with
+          [
+              _Ty=Line *,
+              T=Line
+          ]
+  Movement.cpp(70): note: see reference to function template instantiation 'std::vector<Line *,std::allocator<_Ty>> UniformGrid<Line>::retrieve_objs_in_grid(std::vector<_Ty,std::allocator<_Ty>> &,T *)' being compiled
+          with
+          [
+              _Ty=Line *,
+              T=Line
+          ]
+  Movement.cpp(70): note: see reference to class template instantiation 'UniformGrid<Line>' being compiled
+c:\cygwin64\home\eronj\children-of-ase\childrenofosi\childrenofosi\UniformGrid.h(285): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+c:\cygwin64\home\eronj\children-of-ase\childrenofosi\childrenofosi\UniformGrid.h(293): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+c:\cygwin64\home\eronj\children-of-ase\childrenofosi\childrenofosi\UniformGrid.h(295): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+c:\cygwin64\home\eronj\children-of-ase\childrenofosi\childrenofosi\UniformGrid.h(133): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+  c:\cygwin64\home\eronj\children-of-ase\childrenofosi\childrenofosi\UniformGrid.h(128): note: while compiling class template member function 'std::vector<WorldObj *,std::allocator<_Ty>> UniformGrid<WorldObj>::retrieve_worldobj_in_grid(std::vector<_Ty,std::allocator<_Ty>> &,T *)'
+          with
+          [
+              _Ty=WorldObj *,
+              T=WorldObj
+          ]
+  Movement.cpp(36): note: see reference to function template instantiation 'std::vector<WorldObj *,std::allocator<_Ty>> UniformGrid<WorldObj>::retrieve_worldobj_in_grid(std::vector<_Ty,std::allocator<_Ty>> &,T *)' being compiled
+          with
+          [
+              _Ty=WorldObj *,
+              T=WorldObj
+          ]
+  Movement.cpp(36): note: see reference to class template instantiation 'UniformGrid<WorldObj>' being compiled
+c:\cygwin64\home\eronj\children-of-ase\childrenofosi\childrenofosi\UniformGrid.h(135): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+  Compiling...
+  NPC.cpp
+  ObjConfig.cpp
+c:\cygwin64\home\eronj\children-of-ase\childrenofosi\childrenofosi\Attack.h(57): warning C4800: 'int': forcing value to bool 'true' or 'false' (performance warning)
+c:\cygwin64\home\eronj\children-of-ase\childrenofosi\childrenofosi\RegionState.h(19): warning C4091: 'static ': ignored on left of 'RegionState::soundType' when no variable is declared
+ObjConfig.cpp(221): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+ObjConfig.cpp(222): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+ObjConfig.cpp(223): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+ObjConfig.cpp(255): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+ObjConfig.cpp(256): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+ObjConfig.cpp(257): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+ObjConfig.cpp(258): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+ObjConfig.cpp(259): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+ObjConfig.cpp(263): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+ObjConfig.cpp(264): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+ObjConfig.cpp(265): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+ObjConfig.cpp(266): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+ObjConfig.cpp(267): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+ObjConfig.cpp(271): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+ObjConfig.cpp(272): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+ObjConfig.cpp(273): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+ObjConfig.cpp(274): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+ObjConfig.cpp(275): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+ObjConfig.cpp(279): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+ObjConfig.cpp(280): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+ObjConfig.cpp(281): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+ObjConfig.cpp(282): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+ObjConfig.cpp(283): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+ObjConfig.cpp(287): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+ObjConfig.cpp(288): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+ObjConfig.cpp(289): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+ObjConfig.cpp(290): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+ObjConfig.cpp(291): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+ObjConfig.cpp(295): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+ObjConfig.cpp(296): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+ObjConfig.cpp(297): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+ObjConfig.cpp(298): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+ObjConfig.cpp(299): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+ObjConfig.cpp(398): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+ObjConfig.cpp(399): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+ObjConfig.cpp(400): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+ObjConfig.cpp(429): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+ObjConfig.cpp(430): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+ObjConfig.cpp(431): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+ObjConfig.cpp(432): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+ObjConfig.cpp(433): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+ObjConfig.cpp(437): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+ObjConfig.cpp(438): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+ObjConfig.cpp(439): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+ObjConfig.cpp(440): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+ObjConfig.cpp(441): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+ObjConfig.cpp(445): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+ObjConfig.cpp(446): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+ObjConfig.cpp(447): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+ObjConfig.cpp(448): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+ObjConfig.cpp(449): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+  Party.cpp
+c:\cygwin64\home\eronj\children-of-ase\childrenofosi\childrenofosi\Attack.h(57): warning C4800: 'int': forcing value to bool 'true' or 'false' (performance warning)
+Party.cpp(296): warning C4018: '>=': signed/unsigned mismatch
+  PartyManager.cpp
+c:\cygwin64\home\eronj\children-of-ase\childrenofosi\childrenofosi\Attack.h(57): warning C4800: 'int': forcing value to bool 'true' or 'false' (performance warning)
+c:\cygwin64\home\eronj\children-of-ase\childrenofosi\childrenofosi\RegionState.h(19): warning C4091: 'static ': ignored on left of 'RegionState::soundType' when no variable is declared
+  PhysicsManager.cpp
+c:\cygwin64\home\eronj\children-of-ase\childrenofosi\childrenofosi\Attack.h(57): warning C4800: 'int': forcing value to bool 'true' or 'false' (performance warning)
+c:\cygwin64\home\eronj\children-of-ase\childrenofosi\childrenofosi\RegionState.h(19): warning C4091: 'static ': ignored on left of 'RegionState::soundType' when no variable is declared
+c:\cygwin64\home\eronj\children-of-ase\childrenofosi\childrenofosi\Point.h(27): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+c:\cygwin64\home\eronj\children-of-ase\childrenofosi\childrenofosi\Point.h(30): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+c:\cygwin64\home\eronj\children-of-ase\childrenofosi\childrenofosi\UniformGrid.h(30): warning C4812: obsolete declaration style: please use 'UniformGrid<T>::UniformGrid' instead
+c:\cygwin64\home\eronj\children-of-ase\childrenofosi\childrenofosi\UniformGrid.h(42): warning C4812: obsolete declaration style: please use 'UniformGrid<T>::~UniformGrid' instead
+  PhysicsTestSuite.cpp
+c:\cygwin64\home\eronj\children-of-ase\childrenofosi\childrenofosi\Attack.h(57): warning C4800: 'int': forcing value to bool 'true' or 'false' (performance warning)
+c:\cygwin64\home\eronj\children-of-ase\childrenofosi\childrenofosi\RegionState.h(19): warning C4091: 'static ': ignored on left of 'RegionState::soundType' when no variable is declared
+c:\cygwin64\home\eronj\children-of-ase\childrenofosi\childrenofosi\Point.h(27): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+c:\cygwin64\home\eronj\children-of-ase\childrenofosi\childrenofosi\Point.h(30): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+c:\cygwin64\home\eronj\children-of-ase\childrenofosi\childrenofosi\UniformGrid.h(30): warning C4812: obsolete declaration style: please use 'UniformGrid<T>::UniformGrid' instead
+c:\cygwin64\home\eronj\children-of-ase\childrenofosi\childrenofosi\UniformGrid.h(42): warning C4812: obsolete declaration style: please use 'UniformGrid<T>::~UniformGrid' instead
+PhysicsTestSuite.cpp(180): warning C4800: 'int': forcing value to bool 'true' or 'false' (performance warning)
+PhysicsTestSuite.cpp(203): warning C4800: 'int': forcing value to bool 'true' or 'false' (performance warning)
+PhysicsTestSuite.cpp(226): warning C4800: 'int': forcing value to bool 'true' or 'false' (performance warning)
+PhysicsTestSuite.cpp(249): warning C4800: 'int': forcing value to bool 'true' or 'false' (performance warning)
+c:\cygwin64\home\eronj\children-of-ase\childrenofosi\childrenofosi\UniformGrid.h(30): warning C4812: obsolete declaration style: please use 'UniformGrid<Line>::UniformGrid' instead
+  c:\cygwin64\home\eronj\children-of-ase\childrenofosi\childrenofosi\UniformGrid.h(31): note: while compiling class template member function 'UniformGrid<Line>::UniformGrid(void)'
+  PhysicsTestSuite.cpp(50): note: see reference to function template instantiation 'UniformGrid<Line>::UniformGrid(void)' being compiled
+  PhysicsTestSuite.cpp(50): note: see reference to class template instantiation 'UniformGrid<Line>' being compiled
+c:\cygwin64\home\eronj\children-of-ase\childrenofosi\childrenofosi\UniformGrid.h(30): warning C4812: obsolete declaration style: please use 'UniformGrid<WorldObj>::UniformGrid' instead
+  c:\cygwin64\home\eronj\children-of-ase\childrenofosi\childrenofosi\UniformGrid.h(31): note: while compiling class template member function 'UniformGrid<WorldObj>::UniformGrid(void)'
+  PhysicsTestSuite.cpp(51): note: see reference to function template instantiation 'UniformGrid<WorldObj>::UniformGrid(void)' being compiled
+  PhysicsTestSuite.cpp(51): note: see reference to class template instantiation 'UniformGrid<WorldObj>' being compiled
+  Planner.cpp
+c:\cygwin64\home\eronj\children-of-ase\childrenofosi\childrenofosi\Attack.h(57): warning C4800: 'int': forcing value to bool 'true' or 'false' (performance warning)
+Planner.cpp(29): warning C4018: '<': signed/unsigned mismatch
+Planner.cpp(30): warning C4018: '<': signed/unsigned mismatch
+Planner.cpp(33): warning C4244: '+=': conversion from 'float' to 'int', possible loss of data
+Planner.cpp(188): warning C4018: '<': signed/unsigned mismatch
+Planner.cpp(253): warning C4244: '+=': conversion from 'float' to 'int', possible loss of data
+  Player.cpp
+c:\cygwin64\home\eronj\children-of-ase\childrenofosi\childrenofosi\Attack.h(57): warning C4800: 'int': forcing value to bool 'true' or 'false' (performance warning)
+  PlayerActExecFunctions.cpp
+c:\cygwin64\home\eronj\children-of-ase\childrenofosi\childrenofosi\Attack.h(57): warning C4800: 'int': forcing value to bool 'true' or 'false' (performance warning)
+c:\cygwin64\home\eronj\children-of-ase\childrenofosi\childrenofosi\RegionState.h(19): warning C4091: 'static ': ignored on left of 'RegionState::soundType' when no variable is declared
+  QuadTree.cpp
+QuadTree.cpp(21): warning C4018: '<': signed/unsigned mismatch
+QuadTree.cpp(29): warning C4018: '<': signed/unsigned mismatch
+QuadTree.cpp(172): warning C4018: '<': signed/unsigned mismatch
+QuadTree.cpp(203): warning C4018: '<': signed/unsigned mismatch
+QuadTree.cpp(207): warning C4018: '<': signed/unsigned mismatch
+QuadTree.cpp(229): warning C4018: '<': signed/unsigned mismatch
+QuadTree.cpp(234): warning C4018: '<': signed/unsigned mismatch
+QuadTree.cpp(264): warning C4018: '<': signed/unsigned mismatch
+  QuestManager.cpp
+c:\cygwin64\home\eronj\children-of-ase\childrenofosi\childrenofosi\Attack.h(57): warning C4800: 'int': forcing value to bool 'true' or 'false' (performance warning)
+  RenderHelper.cpp
+c:\cygwin64\home\eronj\children-of-ase\childrenofosi\childrenofosi\Attack.h(57): warning C4800: 'int': forcing value to bool 'true' or 'false' (performance warning)
+c:\cygwin64\home\eronj\children-of-ase\childrenofosi\childrenofosi\RegionState.h(19): warning C4091: 'static ': ignored on left of 'RegionState::soundType' when no variable is declared
+c:\cygwin64\home\eronj\children-of-ase\childrenofosi\childrenofosi\Point.h(27): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+c:\cygwin64\home\eronj\children-of-ase\childrenofosi\childrenofosi\Point.h(30): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+c:\cygwin64\home\eronj\children-of-ase\childrenofosi\childrenofosi\UniformGrid.h(30): warning C4812: obsolete declaration style: please use 'UniformGrid<T>::UniformGrid' instead
+c:\cygwin64\home\eronj\children-of-ase\childrenofosi\childrenofosi\UniformGrid.h(42): warning C4812: obsolete declaration style: please use 'UniformGrid<T>::~UniformGrid' instead
+RenderHelper.cpp(28): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+RenderHelper.cpp(29): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+RenderHelper.cpp(101): warning C4018: '<': signed/unsigned mismatch
+RenderHelper.cpp(140): warning C4018: '<': signed/unsigned mismatch
+RenderHelper.cpp(150): warning C4018: '<': signed/unsigned mismatch
+RenderHelper.cpp(182): warning C4018: '<': signed/unsigned mismatch
+c:\cygwin64\home\eronj\children-of-ase\childrenofosi\childrenofosi\UniformGrid.h(133): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+  c:\cygwin64\home\eronj\children-of-ase\childrenofosi\childrenofosi\UniformGrid.h(128): note: while compiling class template member function 'std::vector<WorldObj *,std::allocator<_Ty>> UniformGrid<WorldObj>::retrieve_worldobj_in_grid(std::vector<_Ty,std::allocator<_Ty>> &,T *)'
+          with
+          [
+              _Ty=WorldObj *,
+              T=WorldObj
+          ]
+  RenderHelper.cpp(92): note: see reference to function template instantiation 'std::vector<WorldObj *,std::allocator<_Ty>> UniformGrid<WorldObj>::retrieve_worldobj_in_grid(std::vector<_Ty,std::allocator<_Ty>> &,T *)' being compiled
+          with
+          [
+              _Ty=WorldObj *,
+              T=WorldObj
+          ]
+  RenderHelper.cpp(92): note: see reference to class template instantiation 'UniformGrid<WorldObj>' being compiled
+c:\cygwin64\home\eronj\children-of-ase\childrenofosi\childrenofosi\UniformGrid.h(135): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+  RenderManager.cpp
+c:\cygwin64\home\eronj\children-of-ase\childrenofosi\childrenofosi\Attack.h(57): warning C4800: 'int': forcing value to bool 'true' or 'false' (performance warning)
+c:\cygwin64\home\eronj\children-of-ase\childrenofosi\childrenofosi\RegionState.h(19): warning C4091: 'static ': ignored on left of 'RegionState::soundType' when no variable is declared
+c:\cygwin64\home\eronj\children-of-ase\childrenofosi\childrenofosi\Point.h(27): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+c:\cygwin64\home\eronj\children-of-ase\childrenofosi\childrenofosi\Point.h(30): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+c:\cygwin64\home\eronj\children-of-ase\childrenofosi\childrenofosi\UniformGrid.h(30): warning C4812: obsolete declaration style: please use 'UniformGrid<T>::UniformGrid' instead
+c:\cygwin64\home\eronj\children-of-ase\childrenofosi\childrenofosi\UniformGrid.h(42): warning C4812: obsolete declaration style: please use 'UniformGrid<T>::~UniformGrid' instead
+  ShrineConfig.cpp
+c:\cygwin64\home\eronj\children-of-ase\childrenofosi\childrenofosi\Attack.h(57): warning C4800: 'int': forcing value to bool 'true' or 'false' (performance warning)
+c:\cygwin64\home\eronj\children-of-ase\childrenofosi\childrenofosi\RegionState.h(19): warning C4091: 'static ': ignored on left of 'RegionState::soundType' when no variable is declared
+  Soldier.cpp
+c:\cygwin64\home\eronj\children-of-ase\childrenofosi\childrenofosi\Attack.h(57): warning C4800: 'int': forcing value to bool 'true' or 'false' (performance warning)
+Soldier.cpp(71): warning C4018: '<': signed/unsigned mismatch
+Soldier.cpp(155): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+Soldier.cpp(156): warning C4244: '+=': conversion from 'double' to 'float', possible loss of data
+Soldier.cpp(157): warning C4244: '-=': conversion from 'double' to 'float', possible loss of data
+Soldier.cpp(160): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+Soldier.cpp(161): warning C4244: '-=': conversion from 'double' to 'float', possible loss of data
+Soldier.cpp(162): warning C4244: '+=': conversion from 'double' to 'float', possible loss of data
+Soldier.cpp(165): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+Soldier.cpp(166): warning C4244: '-=': conversion from 'double' to 'float', possible loss of data
+Soldier.cpp(167): warning C4244: '+=': conversion from 'double' to 'float', possible loss of data
+Soldier.cpp(170): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+Soldier.cpp(171): warning C4244: '+=': conversion from 'double' to 'float', possible loss of data
+Soldier.cpp(172): warning C4244: '-=': conversion from 'double' to 'float', possible loss of data
+Soldier.cpp(398): warning C4018: '<': signed/unsigned mismatch
+Soldier.cpp(413): warning C4018: '<': signed/unsigned mismatch
+Soldier.cpp(437): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+Soldier.cpp(442): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
+Soldier.cpp(443): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
+Soldier.cpp(455): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+Soldier.cpp(458): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+  SoldierConfig.cpp
+c:\cygwin64\home\eronj\children-of-ase\childrenofosi\childrenofosi\Attack.h(57): warning C4800: 'int': forcing value to bool 'true' or 'false' (performance warning)
+c:\cygwin64\home\eronj\children-of-ase\childrenofosi\childrenofosi\RegionState.h(19): warning C4091: 'static ': ignored on left of 'RegionState::soundType' when no variable is declared
+SoldierConfig.cpp(253): warning C4244: 'argument': conversion from 'Json::Value::Int' to 'float', possible loss of data
+SoldierConfig.cpp(301): warning C4244: 'argument': conversion from 'Json::Value::Int' to 'float', possible loss of data
+SoldierConfig.cpp(326): warning C4018: '<': signed/unsigned mismatch
+SoldierConfig.cpp(328): warning C4018: '<': signed/unsigned mismatch
+  SplSoldier.cpp
+c:\cygwin64\home\eronj\children-of-ase\childrenofosi\childrenofosi\Attack.h(57): warning C4800: 'int': forcing value to bool 'true' or 'false' (performance warning)
+  Tag.cpp
+c:\cygwin64\home\eronj\children-of-ase\childrenofosi\childrenofosi\Attack.h(57): warning C4800: 'int': forcing value to bool 'true' or 'false' (performance warning)
+  TagConfig.cpp
+c:\cygwin64\home\eronj\children-of-ase\childrenofosi\childrenofosi\Attack.h(57): warning C4800: 'int': forcing value to bool 'true' or 'false' (performance warning)
+c:\cygwin64\home\eronj\children-of-ase\childrenofosi\childrenofosi\RegionState.h(19): warning C4091: 'static ': ignored on left of 'RegionState::soundType' when no variable is declared
+TagConfig.cpp(110): warning C4018: '<': signed/unsigned mismatch
+  Task.cpp
+c:\cygwin64\home\eronj\children-of-ase\childrenofosi\childrenofosi\Attack.h(57): warning C4800: 'int': forcing value to bool 'true' or 'false' (performance warning)
+c:\cygwin64\home\eronj\children-of-ase\childrenofosi\childrenofosi\RegionState.h(19): warning C4091: 'static ': ignored on left of 'RegionState::soundType' when no variable is declared
+  Compiling...
+  TaskBuffer.cpp
+c:\cygwin64\home\eronj\children-of-ase\childrenofosi\childrenofosi\Attack.h(57): warning C4800: 'int': forcing value to bool 'true' or 'false' (performance warning)
+c:\cygwin64\home\eronj\children-of-ase\childrenofosi\childrenofosi\RegionState.h(19): warning C4091: 'static ': ignored on left of 'RegionState::soundType' when no variable is declared
+  TaskBufferTestSuite.cpp
+c:\cygwin64\home\eronj\children-of-ase\childrenofosi\childrenofosi\Attack.h(57): warning C4800: 'int': forcing value to bool 'true' or 'false' (performance warning)
+c:\cygwin64\home\eronj\children-of-ase\childrenofosi\childrenofosi\RegionState.h(19): warning C4091: 'static ': ignored on left of 'RegionState::soundType' when no variable is declared
+  TestManager.cpp
+c:\cygwin64\home\eronj\children-of-ase\childrenofosi\childrenofosi\Attack.h(57): warning C4800: 'int': forcing value to bool 'true' or 'false' (performance warning)
+c:\cygwin64\home\eronj\children-of-ase\childrenofosi\childrenofosi\RegionState.h(19): warning C4091: 'static ': ignored on left of 'RegionState::soundType' when no variable is declared
+  Tutorial.cpp
+c:\cygwin64\home\eronj\children-of-ase\childrenofosi\childrenofosi\Attack.h(57): warning C4800: 'int': forcing value to bool 'true' or 'false' (performance warning)
+c:\cygwin64\home\eronj\children-of-ase\childrenofosi\childrenofosi\RegionState.h(19): warning C4091: 'static ': ignored on left of 'RegionState::soundType' when no variable is declared
+c:\cygwin64\home\eronj\children-of-ase\childrenofosi\childrenofosi\Point.h(27): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+c:\cygwin64\home\eronj\children-of-ase\childrenofosi\childrenofosi\Point.h(30): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+c:\cygwin64\home\eronj\children-of-ase\childrenofosi\childrenofosi\UniformGrid.h(30): warning C4812: obsolete declaration style: please use 'UniformGrid<T>::UniformGrid' instead
+c:\cygwin64\home\eronj\children-of-ase\childrenofosi\childrenofosi\UniformGrid.h(42): warning C4812: obsolete declaration style: please use 'UniformGrid<T>::~UniformGrid' instead
+  Village.cpp
+c:\cygwin64\home\eronj\children-of-ase\childrenofosi\childrenofosi\Attack.h(57): warning C4800: 'int': forcing value to bool 'true' or 'false' (performance warning)
+  VillagerConfig.cpp
+c:\cygwin64\home\eronj\children-of-ase\childrenofosi\childrenofosi\Attack.h(57): warning C4800: 'int': forcing value to bool 'true' or 'false' (performance warning)
+c:\cygwin64\home\eronj\children-of-ase\childrenofosi\childrenofosi\RegionState.h(19): warning C4091: 'static ': ignored on left of 'RegionState::soundType' when no variable is declared
+  War.cpp
+c:\cygwin64\home\eronj\children-of-ase\childrenofosi\childrenofosi\Attack.h(57): warning C4800: 'int': forcing value to bool 'true' or 'false' (performance warning)
+War.cpp(56): warning C4018: '<': signed/unsigned mismatch
+  WorldObj.cpp
+WorldObj.cpp(12): warning C4018: '<': signed/unsigned mismatch
+WorldObj.cpp(22): warning C4018: '<': signed/unsigned mismatch
+WorldObj.cpp(34): warning C4018: '<': signed/unsigned mismatch
+WorldObj.cpp(46): warning C4018: '<': signed/unsigned mismatch
+  Wrapper.cpp
+c:\cygwin64\home\eronj\children-of-ase\childrenofosi\childrenofosi\Attack.h(57): warning C4800: 'int': forcing value to bool 'true' or 'false' (performance warning)
+  memManager.cpp
+c:\cygwin64\home\eronj\children-of-ase\childrenofosi\childrenofosi\Attack.h(57): warning C4800: 'int': forcing value to bool 'true' or 'false' (performance warning)
+c:\cygwin64\home\eronj\children-of-ase\childrenofosi\childrenofosi\RegionState.h(19): warning C4091: 'static ': ignored on left of 'RegionState::soundType' when no variable is declared
+SOIL.lib(SOIL.obj) : warning LNK4075: ignoring '/EDITANDCONTINUE' due to '/OPT:ICF' specification
+LINK : warning LNK4098: defaultlib 'LIBCMT' conflicts with use of other libs; use /NODEFAULTLIB:library
+LINK : warning LNK4098: defaultlib 'MSVCRTD' conflicts with use of other libs; use /NODEFAULTLIB:library
+  Generating code
+c:\cygwin64\home\eronj\children-of-ase\childrenofosi\childrenofosi\memorytestsuite.cpp(518): warning C4715: 'MemoryTestSuite::add_livingObj_test': not all control paths return a value
+c:\cygwin64\home\eronj\children-of-ase\childrenofosi\childrenofosi\memorytestsuite.cpp(635): warning C4715: 'MemoryTestSuite::add_worldObj_test': not all control paths return a value
+  20 of 18996 functions ( 0.1%) were compiled, the rest were copied from previous compilation.
+    0 functions were new in current compilation
+    70 functions had inline decision re-evaluated but remain unchanged
+  Finished generating code
+glew32s.lib(glew.obj) : warning LNK4099: PDB 'vc120.pdb' was not found with 'glew32s.lib(glew.obj)' or at 'C:\cygwin64\home\eronj\Children-of-Ase\ChildrenOfOsi\Release\vc120.pdb'; linking object as if no debug info
+SOIL.lib(image_DXT.obj) : warning LNK4099: PDB 'SOIL.pdb' was not found with 'SOIL.lib(image_DXT.obj)' or at 'C:\cygwin64\home\eronj\Children-of-Ase\ChildrenOfOsi\Release\SOIL.pdb'; linking object as if no debug info
+SOIL.lib(image_helper.obj) : warning LNK4099: PDB 'SOIL.pdb' was not found with 'SOIL.lib(image_helper.obj)' or at 'C:\cygwin64\home\eronj\Children-of-Ase\ChildrenOfOsi\Release\SOIL.pdb'; linking object as if no debug info
+SOIL.lib(SOIL.obj) : warning LNK4099: PDB 'SOIL.pdb' was not found with 'SOIL.lib(SOIL.obj)' or at 'C:\cygwin64\home\eronj\Children-of-Ase\ChildrenOfOsi\Release\SOIL.pdb'; linking object as if no debug info
+SOIL.lib(stb_image_aug.obj) : warning LNK4099: PDB 'SOIL.pdb' was not found with 'SOIL.lib(stb_image_aug.obj)' or at 'C:\cygwin64\home\eronj\Children-of-Ase\ChildrenOfOsi\Release\SOIL.pdb'; linking object as if no debug info
+  ChildrenOfOsi.vcxproj -> C:\cygwin64\home\eronj\Children-of-Ase\ChildrenOfOsi\Release\ChildrenOfOsi.exe
   ChildrenOfOsi.vcxproj -> C:\cygwin64\home\eronj\Children-of-Ase\ChildrenOfOsi\Release\ChildrenOfOsi.pdb (Full PDB)

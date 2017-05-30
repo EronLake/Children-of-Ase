@@ -1,4 +1,6 @@
+#include "stdafx.h"
 #include "RegionState.h"
+
 
 std::vector<Region*> make_region_vector()
 {
@@ -8,7 +10,7 @@ std::vector<Region*> make_region_vector()
 	r.push_back(new Region("Mountain", "Music/RegionThemes/MountainRegion.flac", "nothing", { 21000,4000 }));
 	r.push_back(new Region("Jungle", "Music/RegionThemes/JungleRegion.flac", "Music/HeroThemes/oya.flac", { 17615, 21480 }));
 	return r;
-}
+};
 
 
 bool RegionState::switch_music = false;
@@ -22,4 +24,4 @@ RegionState::region_list RegionState::regions = make_region_vector();
 
 RegionState::RegionState() {
 	
-}
+};

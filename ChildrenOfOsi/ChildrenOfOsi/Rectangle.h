@@ -29,11 +29,14 @@ public:
 		sprite.atk_down = texAtkDOWN;
 		sprite.atk_right = texAtkRIGHT;
 		sprite.atk_left = texAtkLEFT;
+		sprite.talk = texTalk;
+		sprite.hero_talk = texHeroTalk;
 	}
 	Rectangle() { sprite.setTexture(tex); sprite.id_up = tex;sprite.unlockAnimation();
 	sprite.setIdleTexture(sprite.id_up);sprite.hurt_up = texUP;sprite.hurt_down = texDOWN;
 	sprite.hurt_right = texRIGHT;sprite.hurt_left = texLEFT; sprite.atk_up = texAtkUP;
 	sprite.atk_down = texAtkDOWN;sprite.atk_right = texAtkRIGHT;sprite.atk_left = texAtkLEFT;
+	sprite.talk = texTalk; sprite.hero_talk = texHeroTalk;
 	}
 	~Rectangle() {}
 	Sprite sprite;
@@ -46,6 +49,9 @@ public:
 	static Texture* texAtkDOWN;
 	static Texture* texAtkLEFT;
 	static Texture* texAtkRIGHT;
+	//used for talk bubbles
+	static Texture* texTalk;
+	static Texture* texHeroTalk;
 	float getX() { return topLeft.getXloc(); }
 	float getY() { return topLeft.getYloc(); }
 	float getWidth() { return width; }

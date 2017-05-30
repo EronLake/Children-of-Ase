@@ -711,6 +711,9 @@
     <None Include="Babalawo_dialog.json">
       <Filter>Dialogue</Filter>
     </None>
+    <None Include="common_config.json">
+      <Filter>Misc</Filter>
+    </None>
     <None Include="SilverSoldier_dialog.json">
       <Filter>Dialogue</Filter>
     </None>

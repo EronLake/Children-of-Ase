@@ -89,6 +89,13 @@ it is imcremented in the game loop
 */
 extern int frame_count = 0;
 extern bool game_ended = false;
+int ori_counter = 0;
+
+const extern int NOT_IN_RANGE = 0;
+const extern int READY_TO_START = 1;
+const extern int RUNNING = 2;
+int in_talk_range = NOT_IN_RANGE;// 0 = not in range, 1 = ready to start, 2 = running
+WorldObj* current_talker = nullptr;
 
 using namespace std;
 
@@ -102,6 +109,10 @@ Texture* Rectangle::texAtkUP = new Texture();
 Texture* Rectangle::texAtkDOWN = new Texture();
 Texture* Rectangle::texAtkLEFT = new Texture();
 Texture* Rectangle::texAtkRIGHT = new Texture();
+
+Texture* Rectangle::texTalk = new Texture();
+Texture* Rectangle::texHeroTalk = new Texture();
+
 std::mutex mu;
 //void testQuadTree();
 //bool checkCollision(WorldObj *recA, WorldObj *recB);	//given two bounding boxes, check if they collide
@@ -215,8 +226,8 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 
 	ObjConfig::textureMap[Containers::texture_table["rockTex1"]] = pair<string, int>("Assets/Sprites/rock_1.png", 1);
 	ObjConfig::textureMap[Containers::texture_table["rockTex2"]] = pair<string, int>("Assets/Sprites/rock_2.png", 1);
-	ObjConfig::standard_con.push_back(Containers::texture_table["rockTex1"]);
-	ObjConfig::standard_con.push_back(Containers::texture_table["rockTex2"]);
+	ObjConfig::standard_con.insert(Containers::texture_table["rockTex1"]);
+	ObjConfig::standard_con.insert(Containers::texture_table["rockTex2"]);
 
 	gameplay_functions->add_texture("blank", 0, 0, 0);
 	gameplay_functions->add_texture("border", 0, 0, 0);
@@ -229,8 +240,8 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 
 	ObjConfig::textureMap[Containers::texture_table["blank"]] = pair<string, int>("Assets/Sprites/blank.png", 1);
 	ObjConfig::textureMap[Containers::texture_table["border"]] = pair<string, int>("Assets/Sprites/border.png", 1);
-	ObjConfig::standard_con.push_back(Containers::texture_table["blank"]);
-	ObjConfig::standard_con.push_back(Containers::texture_table["border"]);
+	ObjConfig::standard_con.insert(Containers::texture_table["blank"]);
+	ObjConfig::standard_con.insert(Containers::texture_table["border"]);
 
 
 	HeroConfig::import_config(movVec_ptr, &ObjConfig::textureMap, gameplay_functions, tBuffer);
@@ -266,18 +277,18 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	Input* iController = new Input(gameplay_functions, Alex, RenM->renderHelper, tBuffer, recVec_ptr, movVec_ptr);
 
 	Hero* yemoja = Containers::hero_table["Yemoja"];
-	yemoja->song = "Music/HeroThemes/oya.flac";
+	yemoja->song = "Music/HeroThemes/Yemoja.flac";
 	heroes.push_back(yemoja);
 	yemoja->set_busy(0);//added for testing
 	Hero* oya = Containers::hero_table["Oya"];
-	oya->song = "Music/HeroThemes/ogun.flac";
+	oya->song = "Music/HeroThemes/Oya.flac";
 	oya->set_busy(0);//added for testing
 	heroes.push_back(oya);
 
-	yemoja->rel[1]->addNotoriety(-50);
-	yemoja->rel[1]->addStrength(-50);
+	//yemoja->rel[1]->addNotoriety(-50);
+	//yemoja->rel[1]->addStrength(-50);
 
-	vector<vector<Texture*>> starting_location;
+	vector<std::set<Texture*>> starting_location;
 	
 	ObjConfig::import_config(recVec_ptr, gameplay_functions, tBuffer);
 
@@ -346,6 +357,9 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	Rectangle::texAtkLEFT->setFile("Assets/Sprites/RightRecoilSpark.png", 18);
 	Rectangle::texAtkUP->setFile("Assets/Sprites/ForwardRecoilSpark.png", 18);
 	Rectangle::texAtkDOWN->setFile("Assets/Sprites/BackRecoilSpark.png", 18);
+
+	Rectangle::texTalk->setFile("Assets/Sprites/BackRecoilSpark.png", 18);
+	Rectangle::texHeroTalk->setFile("Assets/Sprites/BackRecoilSpark.png", 18);
 
 	for (int i = 0; i < 100; i++) {
 		//std:://cout << "AT THE THREAD INITIALIZTION CALL!!!****** " << endl;
@@ -419,8 +433,8 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	wglShareLists(mainContext, loaderContext0);
 	std::thread t0([=]() {
 		wglMakeCurrent(hdc, loaderContext0);
-		for (int i = 0; i < ObjConfig::standard_con.size(); i++) {
-			set_file_with_thread(ObjConfig::standard_con[i], &ObjConfig::textureMap.find(ObjConfig::standard_con[i])->second);
+		for (auto itr : ObjConfig::standard_con) {
+			set_file_with_thread(itr, &ObjConfig::textureMap.find(itr)->second);
 		}
 		wglMakeCurrent(nullptr, nullptr);
 		wglDeleteContext(loaderContext0);
@@ -438,8 +452,8 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	wglShareLists(mainContext, loaderContext1);
 	std::thread t1([=]() {
 		wglMakeCurrent(hdc, loaderContext1);
-		for (int i = 0; i < (starting_location[0]).size(); i++) {
-			set_file_with_thread(starting_location[0].at(i), &ObjConfig::textureMap.find(starting_location[0].at(i))->second);
+		for (auto itr :starting_location[0]) {
+			set_file_with_thread(itr, &ObjConfig::textureMap.find(itr)->second);
 		}
 		for (auto it = recVec.begin(); it != recVec.end(); ++it) {
 			(*it)->sprite.reset_texture();
@@ -447,8 +461,8 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 		for (auto it = movVec.begin(); it != movVec.end(); ++it) {
 			(*it)->sprite.reset_texture();
 		}
-		for (int i = 0; i < (starting_location[3]).size(); i++) {
-			set_file_with_thread(starting_location[3].at(i), &ObjConfig::textureMap.find(starting_location[3].at(i))->second);
+		for (auto itr : starting_location[3]) {
+			set_file_with_thread(itr, &ObjConfig::textureMap.find(itr)->second);
 		}
 		wglMakeCurrent(nullptr, nullptr);
 		wglDeleteContext(loaderContext1);
@@ -465,8 +479,8 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	wglShareLists(mainContext, loaderContext2);//Shares the information between the loading context and the main context
 	std::thread t2([=]() {//makes the thread. [=] is a cpp Lambda representation
 		wglMakeCurrent(hdc, loaderContext2);//Sets the current context to the loader context
-		for (int i = 0; i < (starting_location[1]).size(); i++) {
-			set_file_with_thread(starting_location[1].at(i), &ObjConfig::textureMap.find(starting_location[1].at(i))->second);
+		for (auto itr : starting_location[1]) {
+			set_file_with_thread(itr, &ObjConfig::textureMap.find(itr)->second);
 		}
 		for (auto it = recVec.begin(); it != recVec.end(); ++it) {
 			(*it)->sprite.reset_texture();
@@ -474,8 +488,8 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 		for (auto it = movVec.begin(); it != movVec.end(); ++it) {
 			(*it)->sprite.reset_texture();
 		}
-		for (int i = 0; i < (starting_location[2]).size(); i++) {
-			set_file_with_thread(starting_location[2].at(i), &ObjConfig::textureMap.find(starting_location[2].at(i))->second);
+		for (auto itr : starting_location[2]) {
+			set_file_with_thread(itr, &ObjConfig::textureMap.find(itr)->second);
 		}
 		wglMakeCurrent(nullptr, nullptr);//unassigns the current gl context
 		wglDeleteContext(loaderContext2);//deletes the loading context now that it is not needed
@@ -647,7 +661,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 			{{1200.00,600.00}, {{1100.00,900.00},{1300.00,1000.00}}}
 		} };
 		*/
-		//ai->graph = graph;
+		//ai->graph = graph;0
 
 	ai->start = yemoja->getLoc();
 	ai->goal = { 1100.00,1100.00 };
@@ -788,6 +802,14 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 				start = !start;
 			}
 
+			//decrement ori 
+			if (frame_count - ori_counter >= 60 * 60 * .5) 
+			{
+				Alex->ori--;
+				ori_counter = frame_count;
+			}
+
+
       if(!Tutorial::isAnyStageActive()) {
         if(!Tutorial::isStageComplete(Tutorial::Stage::INTRO01))
           Tutorial::launchStage(Tutorial::Stage::INTRO01, *iController, true);
@@ -896,6 +918,57 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 				}
 				//cout << "inserted into tree " << movVec.size() << " movable objs" << endl;
 			}
+
+			
+			//check if close enough to talk (needs to be moved to helper func)
+			//----------------------------------------------
+			//checks if the hero is in combat
+			if (state == 0 && Alex->getInCombat() == false) {
+				WorldObj* ot = nullptr;
+				int dist = 1000;
+				for (int i = 0; i < movVec.size(); i++) {
+					if (Alex == movVec[i]) {
+						//break;
+						continue;
+					}
+					if (movVec[i]->getInteractable()) {
+						Alex->updateTalk();
+						if (Movement::interaction(Alex, movVec[i])) {
+							if (in_talk_range == NOT_IN_RANGE) {
+								in_talk_range = READY_TO_START;
+							}
+							if (dist > Party::dist_location_to_location(movVec[i]->getLoc(), Alex->getLoc())) {
+								ot = movVec[i];
+								dist = Party::dist_location_to_location(movVec[i]->getLoc(), Alex->getLoc());
+							}
+						}
+					}
+				}
+				if (ot != nullptr) {
+					if (ot->effect.sprite.index == ot->effect.sprite.hurt_up->getFrames() - 1 ||
+						in_talk_range == READY_TO_START || (ot != current_talker && RUNNING))
+					{
+						if (ot->getType() == WorldObj::TYPE_SOLDIER) {
+							//checks if the npc is in combat
+							if (Alex->getInCombat() == false) {
+								gameplay_functions->draw_talk(ot);
+								in_talk_range = RUNNING;
+								current_talker = ot;
+							}
+						}
+						else {
+							gameplay_functions->draw_talk(ot);
+							in_talk_range = RUNNING;
+							current_talker = ot;
+						}
+					}
+				}
+				else {
+					in_talk_range = NOT_IN_RANGE;
+				}
+			}
+			//----------------------------------------------
+			
 
 			state = DialogueController::getState();
 

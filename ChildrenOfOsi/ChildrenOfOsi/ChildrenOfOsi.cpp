@@ -169,6 +169,11 @@ void ChildrenOfOsi::draw_logo(WorldObj * obj)
 	createTask("Logo", "DRAW", obj);
 }
 
+void ChildrenOfOsi::draw_talk(WorldObj * obj)
+{
+	createTask("Talk", "DRAW", obj);
+}
+
 ///////////////////////////////////////////////////
 ///////////////////////////////////////////////////
 

@@ -1,5 +1,5 @@
+#include "stdafx.h"
 #include "Tutorial.h"
-
 #include "AssetInfo.h"
 #include "GameState.h"
 #include "GameWindow.h"

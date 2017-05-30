@@ -672,6 +672,7 @@ int Movement::talk(WorldObj* obj) {
 						}
 						if (dist > Party::dist_location_to_location(objVec[i]->getLoc(), obj->getLoc())) {
 							ot = objVec[i];
+							dist = Party::dist_location_to_location(objVec[i]->getLoc(), obj->getLoc());
 						}
 					}
 				}
@@ -854,7 +855,9 @@ bool Movement::interaction(Player* recA, WorldObj* recB)
 	for (int j = 0; j < (*recB).body.size(); j++) {
 			bool xCollide = coordOverlap(recA->talk.getX(), recB->body[j].getX(), recB->body[j].getX() + recB->body[j].getWidth()) || coordOverlap(recB->body[j].getX(), recA->talk.getX(), recA->talk.getX() + recA->talk.getWidth());
 			bool yCollide = coordOverlap(recA->talk.getY(), recB->body[j].getY(), recB->body[j].getY() + recB->body[j].getHeight()) || coordOverlap(recB->body[j].getY(), recA->talk.getY(), recA->talk.getY() + recA->talk.getHeight());
-			if (xCollide && yCollide)return true;
+			if (xCollide && yCollide) {
+				return true;
+			}
 	}
 	return false;
 }

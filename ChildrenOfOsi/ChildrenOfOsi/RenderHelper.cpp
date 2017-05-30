@@ -476,6 +476,18 @@ int RenderHelper::sprite_update(WorldObj * obj)
   return 0;
 }
 
+int RenderHelper::sprite_talk(WorldObj * obj)
+{
+	obj->effect.sprite.unlockAnimation();
+	obj->effect.sprite.setTexture(obj->effect.sprite.id_up);
+
+	obj->effect.sprite.setTexture(obj->effect.sprite.talk);
+
+	obj->sprite.lockAnimation();
+	obj->effect.sprite.lockAnimation();
+	return 0;
+}
+
 void RenderHelper::sortVec()
 {
   sort(objVec.begin(), objVec.end(), [](WorldObj* a, WorldObj* b) {

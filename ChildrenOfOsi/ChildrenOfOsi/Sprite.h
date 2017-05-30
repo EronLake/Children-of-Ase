@@ -80,6 +80,9 @@ class Sprite
   Texture *death_left;
   Texture *death_right;
 
+  Texture *talk;
+  Texture *hero_talk;
+
   private:
   
   std::mutex* mut;

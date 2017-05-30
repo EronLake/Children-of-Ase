@@ -586,7 +586,7 @@ void Input::InputCheck()
 	short E = GetKeyState('E') >> 15;
 	short Q = GetKeyState('Q') >> 15;
 	short H = GetKeyState('H') >> 15; //set home point
-	short I = GetKeyState('I') >> 15;
+	short I = GetKeyState('I') >> 15; //sets exalted form, temporary location
 	short J = GetKeyState('J') >> 15; // Base attack
 	short K = GetKeyState('K') >> 15; // Projectile
 	short L = GetKeyState('L') >> 15; // Spin attack
@@ -611,7 +611,7 @@ void Input::InputCheck()
   if(!W && !A && !S && !D && !Q && !E &&
     !J && !K && !L && !SEMI && !F && !G && !H &&
     !R && !T && !Y && !U && !P &&
-    !Z && !V && !M &&
+    !Z && !V && !M && !I&&
     !ONE && !TWO && !THREE && !FOUR &&
     !ENTER && !SHIFT)
     this->locked = false;
@@ -709,6 +709,23 @@ void Input::InputCheck()
 						t->flipSwing();
 						t->meleeAttack();
 						gameplay_functions->melee(t);
+					}
+				}
+				else if (I) {
+					if (t->can_activate_ex == 1) {
+						if (t->exalted_form == 0) {
+							t->activate_exalted_form();
+							t->exalted_form = 1;
+						}
+						else if (t->exalted_form == 1) {
+							t->deactivate_exalted_form();
+							t->exalted_form = 0;
+						}
+					}
+
+					if (t->can_activate_ex == 0 && t->exalted_form == 1) {
+						t->deactivate_exalted_form();
+						t->exalted_form = 0;
 					}
 				}
 				else if (J) {
