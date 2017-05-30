@@ -13,4 +13,5 @@ auto as_integer(Enumeration const value)
 class GameState {
 	public:
 		static void check_if_end_game(game_state* current_game_state);
+		static void reset_game(game_state* current_game_state);
 };

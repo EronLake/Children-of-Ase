@@ -100,17 +100,20 @@ Hero* AIController::get_hero_object(int h)
 }
 
 void AIController::init_plans() {
-	for (int me = 2; me < 4; me++) {
-		Hero* hero = get_hero_object(me);
-		Planner* planner = get_plan(me);
+	for(auto me : Containers::hero_table){
+	//for (int me = 2; me < 4; me++) {
+		if (me.second->name == SHANGO) { continue; } //skip shango
+		Hero* hero = get_hero_object(me.second->name);
+		Planner* planner = get_plan(me.second->name);
 
 		vector<Action*> goals;
 
-		for (int them = 1; them < 4; them++)   //Look at every other character...
+		for (auto them : Containers::hero_table)	//Look at every other character...
+		//for (int them = 1; them < 4; them++)   
 		{
-			if (them != me)                    //...that is not myself...
+			if (them.second->name != me.second->name)                    //...that is not myself...
 			{
-				generate_end_state(me, them);  //...and pick my ideal state with them
+				generate_end_state(me.second->name, them.second->name);  //...and pick my ideal state with them
 
 			}
 
