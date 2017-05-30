@@ -48,7 +48,7 @@ private:
 	Alliance* alliance;
 	vector<NPC*> members;
 	std::string status;
-	Village* conquerer;
+	Village* conquerer = nullptr;
 	vector<Village*> conquered;
 	std::vector<Party*> parties;
 	//std::vector<Party*> enemy_parties;

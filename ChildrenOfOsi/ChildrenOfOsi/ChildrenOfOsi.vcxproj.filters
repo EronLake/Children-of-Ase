@@ -665,8 +665,6 @@
       <Filter>AI\Actions</Filter>
     </None>
     <None Include="oasis_config.json" />
-    <None Include="SilverSoldier_dialog.json" />
-    <None Include="Oshosi_dialog.json" />
     <None Include="Dialogue_config.json">
       <Filter>Dialogue</Filter>
     </None>
@@ -691,7 +689,6 @@
     <None Include="hero_config.json">
       <Filter>Game Objects\Configs</Filter>
     </None>
-    <None Include="Oya_dialog.json" />
     <None Include="attack_config.json" />
     <None Include="soldier_config.json">
       <Filter>Game Objects\Configs</Filter>
@@ -716,6 +713,18 @@
     </None>
     <None Include="common_config.json">
       <Filter>Misc</Filter>
+    </None>
+    <None Include="SilverSoldier_dialog.json">
+      <Filter>Dialogue</Filter>
+    </None>
+    <None Include="Oya_dialog.json">
+      <Filter>Dialogue</Filter>
+    </None>
+    <None Include="Oshosi_dialog.json">
+      <Filter>Dialogue</Filter>
+    </None>
+    <None Include="Ogun_dialog.json">
+      <Filter>Dialogue</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>

@@ -196,7 +196,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	//PartyManager* partyM = new PartyManager(gameplay_functions, Alex);
 	memManager* memM = new memManager(mLog, tBuffer);
 	TestManager* TestM = new TestManager(mLog, tBuffer);
-	AudioManager* AudM = new AudioManager(mLog, tBuffer);
+//	AudioManager* AudM = new AudioManager(mLog, tBuffer);
 	AIHelper* ai = new AIHelper();
 	AIManager* AIM = new AIManager(mLog, tBuffer, ai);
 	//AIController* AiController = new AIController();
@@ -210,7 +210,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	PhysM->register_manager();
 	memM->register_manager();
 
-	AudM->register_manager();
+	//AudM->register_manager();
 	//TestM->register_manager();
 	AIM->register_manager();
 
@@ -235,7 +235,6 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 =======
 	gameplay_functions->add_hero("Shango", 5045, 10465, true);
 */
-
 	tBuffer->run();
 
 	ObjConfig::textureMap[Containers::texture_table["blank"]] = pair<string, int>("Assets/Sprites/blank.png", 1);
@@ -284,9 +283,17 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	oya->song = "Music/HeroThemes/Oya.flac";
 	oya->set_busy(0);//added for testing
 	heroes.push_back(oya);
+	Hero* ogun = Containers::hero_table["Ogun"];
+	ogun->song = "Music/HeroThemes/Oya.flac";
+	ogun->set_busy(0);//added for testing
+	heroes.push_back(ogun);
 
-	//yemoja->rel[1]->addNotoriety(-50);
-	//yemoja->rel[1]->addStrength(-50);
+	//yemoja->rel[1]->addNotoriety(50);
+	///yemoja->rel[1]->addStrength(50);
+	//yemoja->rel[1]->addAffinity(50);
+	//oya->rel[1]->addNotoriety(50);
+	///oya->rel[1]->addStrength(50);
+	//oya->rel[1]->addAffinity(50);
 
 	vector<std::set<Texture*>> starting_location;
 	
@@ -358,8 +365,8 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	Rectangle::texAtkUP->setFile("Assets/Sprites/ForwardRecoilSpark.png", 18);
 	Rectangle::texAtkDOWN->setFile("Assets/Sprites/BackRecoilSpark.png", 18);
 
-	Rectangle::texTalk->setFile("Assets/Sprites/BackRecoilSpark.png", 18);
-	Rectangle::texHeroTalk->setFile("Assets/Sprites/BackRecoilSpark.png", 18);
+	Rectangle::texTalk->setFile("Assets/Sprites/Talk_Bubble.png", 7);
+	Rectangle::texHeroTalk->setFile("Assets/Sprites/Talk_Bubble.png", 7);
 
 	for (int i = 0; i < 100; i++) {
 		//std:://cout << "AT THE THREAD INITIALIZTION CALL!!!****** " << endl;
@@ -705,6 +712,8 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	vector<Soldier*> soldiers_list;
 	soldiers_list.push_back(yemoja);
 	soldiers_list.push_back(oya);
+	soldiers_list.push_back(ogun);
+
 	for (auto itr : Containers::soldier_table) {
 		soldiers_list.push_back(itr.second);
 	}
@@ -752,8 +761,8 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 		//t1.join();
 		//t2.join();
 	}
-	oya->set_busy(0);
-	yemoja->set_busy(0);
+	//oya->set_busy(0);
+	//yemoja->set_busy(0);
 	while (GameWindow::isRunning()) {
 		while (current_game_state == game_state::main_menu) {
 			cout << "Current game state: main_menu" << endl;
@@ -945,7 +954,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 					}
 				}
 				if (ot != nullptr) {
-					if (ot->effect.sprite.index == ot->effect.sprite.hurt_up->getFrames() - 1 ||
+					if (ot->effect.sprite.index == ot->effect.sprite.talk->getFrames() - 1 ||
 						in_talk_range == READY_TO_START || (ot != current_talker && RUNNING))
 					{
 						if (ot->getType() == WorldObj::TYPE_SOLDIER) {
@@ -996,38 +1005,43 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 			/////////////////////////////////////////////////////////////////
 			/////////////////////////////////////////////////////////////////
 
-			for (auto iter : yemoja->rel) {
-				Relationship* my_rel = iter.second;
-				int with_hero = iter.first;
+			for (auto itor : Containers::hero_table) {
+				if (itor.second->name != SHANGO)
+				{
+					for (auto iter : itor.second->rel) {
+						Relationship* my_rel = iter.second;
+						int with_hero = iter.first;
 
-				if (my_rel->isChanged() > 15) {
-					//reevaluate goals for with_hero
-					//Eron: This is a temporary fix
-					///////////////////////////////////////////////////////
-					Hero* other_hero = nullptr;
+						if (my_rel->isChanged() > 15) {
+							//reevaluate goals for with_hero
+							//Eron: This is a temporary fix
+							///////////////////////////////////////////////////////
+							Hero* other_hero = nullptr;
 
-					for (auto itr : Containers::hero_table)
-					{
-						if (itr.second->name == with_hero)
-						{
-							other_hero = itr.second;
+							for (auto itr : Containers::hero_table)
+							{
+								if (itr.second->name == with_hero)
+								{
+									other_hero = itr.second;
+								}
+							}
+
+							if (itor.second != nullptr && other_hero != nullptr)
+							{
+								Alliance* curr_alliance = itor.second->getVillage()->get_alliance();
+								Alliance* other_alliance = other_hero->getVillage()->get_alliance();
+
+								if (curr_alliance != other_alliance && itor.second->SUGG_ACT_STATUS != 1)
+								{
+									AIController::reevaluate_state(YEMOJA, with_hero);
+								}
+							}
+
+							///////////////////////////////////////////////////////
+
+							my_rel->setChanged(0);
 						}
 					}
-
-					if (yemoja != nullptr && other_hero != nullptr)
-					{
-						Alliance* curr_alliance = yemoja->getVillage()->get_alliance();
-						Alliance* other_alliance = other_hero->getVillage()->get_alliance();
-
-						if (curr_alliance != other_alliance && yemoja->SUGG_ACT_STATUS != 1)
-						{
-							AIController::reevaluate_state(YEMOJA, with_hero);
-						}
-					}
-
-					///////////////////////////////////////////////////////
-					
-					my_rel->setChanged(0);
 				}
 			}
 			//getting here-------------------------------------------------------------------------***********
