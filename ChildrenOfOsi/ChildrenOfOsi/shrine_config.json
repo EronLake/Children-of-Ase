@@ -2,8 +2,8 @@
 	"Oasis_Shrine" : {
 		"x" : 50.45,
 		"y" : 74.65,
-		"width" : 150,
-		"hight" : 150,
+		"width" : 300,
+		"hight" : 300,
 		"name" : "Oasis_Shrine",
 		"bodyx1" : 50.0,
 		"bodyx2" : 50.0,
@@ -23,8 +23,8 @@
 	"Jungle_Shrine" : {
 		"x" : 60.45,
 		"y" : 74.65,
-		"width" : 150,
-		"hight" : 150,
+		"width" : 300,
+		"hight" : 300,
 		"name" : "Jungle_Shrine",
 		"bodyx1" : 50.0,
 		"bodyx2" : 50.0,
@@ -44,8 +44,8 @@
 	"Mountain_Shrine" : {
 		"x" : 70.45,
 		"y" : 74.65,
-		"width" : 150,
-		"hight" : 150,
+		"width" : 300,
+		"hight" : 300,
 		"name" : "Mountain_Shrine",
 		"bodyx1" : 50.0,
 		"bodyx2" : 50.0,

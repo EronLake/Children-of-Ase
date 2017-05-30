@@ -31,5 +31,6 @@ public:
 	
 	//will be adapted for end state later
 	static int get_num_alliances() { return Alliances.size(); }
+	static std::vector<Alliance*> get_alliances() { return Alliances; }
 };
 

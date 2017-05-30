@@ -196,7 +196,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	//PartyManager* partyM = new PartyManager(gameplay_functions, Alex);
 	memManager* memM = new memManager(mLog, tBuffer);
 	TestManager* TestM = new TestManager(mLog, tBuffer);
-	AudioManager* AudM = new AudioManager(mLog, tBuffer);
+//	AudioManager* AudM = new AudioManager(mLog, tBuffer);
 	AIHelper* ai = new AIHelper();
 	AIManager* AIM = new AIManager(mLog, tBuffer, ai);
 	//AIController* AiController = new AIController();
@@ -210,7 +210,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	PhysM->register_manager();
 	memM->register_manager();
 
-	AudM->register_manager();
+	//AudM->register_manager();
 	//TestM->register_manager();
 	AIM->register_manager();
 
@@ -235,7 +235,6 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 =======
 	gameplay_functions->add_hero("Shango", 5045, 10465, true);
 */
-
 	tBuffer->run();
 
 	ObjConfig::textureMap[Containers::texture_table["blank"]] = pair<string, int>("Assets/Sprites/blank.png", 1);
@@ -289,8 +288,12 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	ogun->set_busy(0);//added for testing
 	heroes.push_back(ogun);
 
-	//yemoja->rel[1]->addNotoriety(-50);
-	//yemoja->rel[1]->addStrength(-50);
+	yemoja->rel[1]->addNotoriety(50);
+	yemoja->rel[1]->addStrength(50);
+	yemoja->rel[1]->addAffinity(50);
+	oya->rel[1]->addNotoriety(50);
+	oya->rel[1]->addStrength(50);
+	oya->rel[1]->addAffinity(50);
 
 	vector<std::set<Texture*>> starting_location;
 	

@@ -109,14 +109,10 @@ void VillagerConfig::init_sprites(ChildrenOfOsi* gameplay_func, TaskBuffer* tBuf
 	tBuffer->run();
 	for (auto itor : sprites)
 	{
-		//checks if the texture is already loaded
-		if (!Containers::texture_table[itor["0"].asString()])
-		{
-			//create textures for the soldiers 
-			(*textureMap)[Containers::texture_table[itor["0"].asString()]] = pair<string, int>(itor["0"].asString() + ".png", itor["1"].asInt()/*frame_num*/);
-			//push to appropreate region config
-			region_con->insert(Containers::texture_table[itor["0"].asString()]);
-		}
+		//create textures for the soldiers 
+		(*textureMap)[Containers::texture_table[itor["0"].asString()]] = pair<string, int>(SPRITES_PATH + itor["0"].asString() + ".png", itor["1"].asInt()/*frame_num*/);
+		//push to appropreate region config
+		region_con->insert(Containers::texture_table[itor["0"].asString()]);
 	}
 
 

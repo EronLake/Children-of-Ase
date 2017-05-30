@@ -16,7 +16,7 @@ Village::Village()
   barracks->set_hide(true);
   parties.push_back(defenders);
   parties.push_back(barracks);
-  health = 100;
+  health = 5;
 }
 
 Village::~Village()
