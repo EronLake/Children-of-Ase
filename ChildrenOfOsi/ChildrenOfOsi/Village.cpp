@@ -75,8 +75,8 @@ void Village::init_villages()
 			party_name = "Ogun";
 		}
 
-		Party* new_party = new Party();
-		new_party->addToParty(itr.second, true);
+	//	Party* new_party = new Party();
+	//	new_party->addToParty(itr.second, true);
 
 		Village* new_village = new Village();
 		new_village->set_village_location(itr.second->getLoc());
@@ -93,6 +93,7 @@ void Village::init_villages()
 		}
 
 		new_village->leader = itr.second;
+		new_village->defenders->addToParty(itr.second, true);
 
 		//adds soldiers to party
 		for (auto itor : Containers::soldier_table)
@@ -106,14 +107,14 @@ void Village::init_villages()
 
 		Alliance* new_alliance = new Alliance(new_village);
 
-		new_village->addToParties(new_party);
+		//new_village->addToParties(new_party);
 
 		//need to set the barracks and defenders owner of the village to the new village
 		new_village->defenders->set_village(new_village);
 		new_village->barracks->set_village(new_village);
 
 		new_village->defenders->setLeader(itr.second);
-		new_village->barracks->setLeader(itr.second);
+		//new_village->barracks->setLeader(itr.second);
 
 	}
 	Alliance::update_enemies();
