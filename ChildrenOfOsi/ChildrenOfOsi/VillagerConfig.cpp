@@ -47,6 +47,7 @@ void VillagerConfig::set_villager(vector<WorldObj*>* recVec_ptr, ChildrenOfOsi* 
 	Containers::npc_table[name]->setWidth(width);
 	Containers::npc_table[name]->setHeight(hight);
 	Containers::npc_table[name]->offsetBody(0, bodyx1, bodyx2, bodyy1, bodyy2);
+	Containers::npc_table[name]->offset_effect(0, 100, 100, 100, 100);
 
 	Containers::npc_table[name]->setInteractable(true);
 
@@ -76,22 +77,22 @@ void VillagerConfig::init_sprites(ChildrenOfOsi* gameplay_func, TaskBuffer* tBuf
 	if (name.find("Oasis_Villager") != string::npos)
 	{
 		region_con = &ObjConfig::oasis_con;
-		path = SOLDIER_OASIS_PATH;
+		//path = SOLDIER_OASIS_PATH;
 	}
 	else if (name.find("Jungle_Villager") != string::npos)
 	{
 		region_con = &ObjConfig::jungle_con;
-		path = SOLDIER_JUNGLE_PATH;
+		//path = SOLDIER_JUNGLE_PATH;
 	}
 	else if (name.find("Mountain_Villager") != string::npos)
 	{
 		region_con = &ObjConfig::mountain_con;
-		path = SOLDIER_MOUNTAIN_PATH;
+		//path = SOLDIER_MOUNTAIN_PATH;
 	}
 	else //if ogun soldier
 	{
 		region_con = &ObjConfig::marsh_con;
-		path = SOLDIER_OGUN_PATH;
+		//path = SOLDIER_OGUN_PATH;
 	}
 
 
@@ -112,7 +113,7 @@ void VillagerConfig::init_sprites(ChildrenOfOsi* gameplay_func, TaskBuffer* tBuf
 		if (!Containers::texture_table[itor["0"].asString()])
 		{
 			//create textures for the soldiers 
-			(*textureMap)[Containers::texture_table[itor["0"].asString()]] = pair<string, int>(path + itor["0"].asString() + ".png", itor["1"].asInt()/*frame_num*/);
+			(*textureMap)[Containers::texture_table[itor["0"].asString()]] = pair<string, int>(itor["0"].asString() + ".png", itor["1"].asInt()/*frame_num*/);
 			//push to appropreate region config
 			region_con->insert(Containers::texture_table[itor["0"].asString()]);
 		}
