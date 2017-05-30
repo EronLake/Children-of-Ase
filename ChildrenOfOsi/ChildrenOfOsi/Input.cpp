@@ -1025,7 +1025,7 @@ void Input::InputCheck()
 					int tmp = DialogueController::getSelect();
 					Hero* temp_hero = CheckClass::isHero(DialogueController::getOther());
 					Soldier* my_soldier = dynamic_cast<Soldier*>(DialogueController::getOther());
-					if (DialogueController::getState() == 1 && temp_hero || DialogueController::getState() == 2 && temp_hero) {
+					if (DialogueController::getState() == 1 && temp_hero /*|| DialogueController::getState() == 2 && temp_hero*/) {
 						if (tmp < (DialogueController::getOptions().size() - 1)) {
 							//DialogueController::setSelect(++tmp);
 							DialogueController::move_to_selectable_down();
@@ -1069,7 +1069,7 @@ void Input::InputCheck()
 							//////std:://cout << "Index: " << tmp << std::endl;
 						}
 					}
-					else {
+					else if(DialogueController::getState() == 1){//babalawo case
 						if (tmp < (DialogueController::get_babalawo_options().size() - 1)) {
 							//DialogueController::setSelect(++tmp);
 							DialogueController::scroll_control++;
@@ -1090,7 +1090,7 @@ void Input::InputCheck()
 							//////std:://cout << "Index: " << tmp << std::endl;
 						}
 					}
-					if (State == 2) {
+					if (DialogueController::getState() == 2) {
 						if (tmp < (DialogueController::getReplyOptions().size() - 1)) {
 							//DialogueController::setSelect(++tmp);
 							DialogueController::scroll_control++;

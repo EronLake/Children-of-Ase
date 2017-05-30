@@ -1,2 +1,0 @@
-Conversation Point Name: Ask_Origin Appeal 60
-Conversation Point Name: Boast Appeal 40

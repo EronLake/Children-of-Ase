@@ -390,6 +390,7 @@ void DialogueGui::set_character_portrait_tex() {
 		if (DialogueController::quited_gui == true) {
 			DialogueController::started_conv = false;
 			DialogueController::quited_gui = false;
+			setSwordGlow();
 		}
 	}
 }
