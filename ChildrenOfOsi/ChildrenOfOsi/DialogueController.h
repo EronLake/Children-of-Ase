@@ -65,7 +65,14 @@ public:
 	static void DialogueController::load_teach_dialog();
 	static void DialogueController::duel_pop_up(Action* act);
 	static void DialogueController::spar_pop_up(Action* act);
+	static void DialogueController::hero_act_alliance_pop_up(Action* act);
+	static void DialogueController::hero_act_bribe_pop_up(Action* act);
+	static void DialogueController::hero_act_compliment_pop_up(Action* act);
+	static void DialogueController::hero_act_boast_pop_up(Action* act);
+	static void DialogueController::hero_act_grovel_pop_up(Action* act);
+	static void DialogueController::hero_act_intimidate_pop_up(Action* act);
 	static std::string DialogueController::check_if_known(std::string rep_pt_str, std::string con_pt_str);
+	static void DialogueController::apply_post_from_response(std::string rep_choice, Action* act);
 
 	static bool prompted_quest;
 	static bool accepted_quest;
@@ -109,6 +116,8 @@ public:
 	static int shrine_talk_counter;
 	static int teach_move_counter;
 	static bool first_buff;
+	static bool is_hero_act;
+	static Action* hero_act_toward_player;
 
 };
 

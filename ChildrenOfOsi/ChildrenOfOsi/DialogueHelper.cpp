@@ -327,16 +327,17 @@ std::vector<std::vector<dialogue_point>>& DialogueHelper::get_possible_conv_pts_
 std::vector<dialogue_point> DialogueHelper::get_possible_reply_pts(std::string point, int opts_inx)
 {
 	std::vector<dialogue_point> reply;
+	reply.push_back({"Decline_To_Answer","Decline_To_Answer","","","1"});
 	for (int i = 0; i < possible_reply_pts[opts_inx].size(); i++) {
-		if ((possible_reply_pts[opts_inx][i][CorrespondingConvPt].compare("Decline_To_Answer") == 0 || possible_reply_pts[opts_inx][i][CorrespondingConvPt].compare(point) == 0)
+		if ((/*possible_reply_pts[opts_inx][i][CorrespondingConvPt].compare("Decline_To_Answer") == 0 ||*/ possible_reply_pts[opts_inx][i][CorrespondingConvPt].compare(point) == 0)
 			&& point.find(" Quest", 0) == string::npos) {
 			reply.push_back({ possible_reply_pts[opts_inx][i] });
 		}
 	 
 	}
 	if (point.find(" Quest", 0) != string::npos) {
-		reply.push_back({ "Accept_Quest", "Accept_Quest","","" });
-		reply.push_back({ "Decline_Quest", "Decline_Quest","","" });
+		reply.push_back({ "Accept_Quest", "Accept_Quest","","","1" });
+		reply.push_back({ "Decline_Quest", "Decline_Quest","","","1" });
 	}
 	return reply;
 }

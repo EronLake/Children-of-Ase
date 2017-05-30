@@ -101,6 +101,10 @@ int DialogueController::teach_move_counter = 0;
 
 bool DialogueController::first_buff = true;
 
+bool DialogueController::is_hero_act = false;
+
+Action* DialogueController::hero_act_toward_player = nullptr;
+
 DialogueController::DialogueController()
 {
 	srand(time(0));//seeds rand function to ensure good variety of random numbers
@@ -326,7 +330,7 @@ void DialogueController::PlayerConversationPoint()
 			player_conv_point_choice == "Insult"|| player_conv_point_choice == "Boast" || player_conv_point_choice == "Ask_To_Spar" ||
 			player_conv_point_choice == "Ask_To_Duel" || player_conv_point_choice == "Ask_To_Form_Alliance" || player_conv_point_choice == "Advise To Fight"
 			|| player_conv_point_choice == "Advise To Conquer" || player_conv_point_choice == "Advise To Send Peace Offering To" || 
-			player_conv_point_choice == "Advise To Ally With") {
+			player_conv_point_choice == "Advise To Ally With" || player_conv_point_choice == "Intimidate") {
 	
 			accepted_action = true;
 			if (player_conv_point_choice == "Advise To Fight"
@@ -359,7 +363,7 @@ void DialogueController::PlayerConversationPoint()
 			if (player_conv_point_choice == "Bribe" || player_conv_point_choice == "Compliment" || player_conv_point_choice == "Grovel" ||
 				player_conv_point_choice == "Insult" || player_conv_point_choice == "Boast" || player_conv_point_choice == "Advise To Fight"
 				|| player_conv_point_choice == "Advise To Conquer" || player_conv_point_choice == "Advise To Send Peace Offering To" ||
-				player_conv_point_choice == "Advise To Ally With")
+				player_conv_point_choice == "Advise To Ally With" || player_conv_point_choice == "Intimidate")
 			{
 				if (accepted_action) {
 					Containers::conv_point_table[player_conv_point_choice]->apply_postconditions(true, player, temp_hero);
@@ -725,9 +729,16 @@ void DialogueController::PlayerResponse()
 		if (choice[ConvPointName] == "Accept Alliance Offer" || choice[ConvPointName] == "Accept Duel" || choice[ConvPointName] == "Accept Spar Request") {
 			player_conv_point_choice = choice[ConvPointName];
 			state = 6;
+			if(is_hero_act)
+				apply_post_from_response(choice[ConvPointName], hero_act_toward_player);
 		}
-		else if(state != 10)//move to exit dialogue if player declined a quest
+		else if(state != 10 && is_hero_act == false)//move to exit dialogue if player declined a quest
 		    PlayerChoose();//start all over from player conversation point again
+		else if(is_hero_act) {
+			apply_post_from_response(choice[ConvPointName],hero_act_toward_player);
+			state = 7;
+		}
+
 	}
 	else {
 		Hero* temp_hero = nullptr;
@@ -745,16 +756,19 @@ void DialogueController::PlayerResponse()
 			dialogue_point diog_pt = {"Confirm Alliance","Confirm Alliance"};
 			std::string reply_pt_sentence = dialogue.gen_dialog(diog_pt, temp_hero);
 			message = check_if_known(reply_pt_sentence, "");
+			PlayerActExecFunctions::execute_start("Form_Alliance", temp_hero);
 		}
 		else if (player_conv_point_choice == "Accept Duel") {
 			dialogue_point diog_pt = { "Confirm Duel","Confirm Duel"};
 			std::string reply_pt_sentence = dialogue.gen_dialog(diog_pt, temp_hero);
 			message = check_if_known(reply_pt_sentence, "");
+			PlayerActExecFunctions::execute_start("Duel", temp_hero);
 		}
 		else if (player_conv_point_choice == "Accept Spar Request") {
 			dialogue_point diog_pt = {"Confirm Spar","Confirm Spar" };
 			std::string reply_pt_sentence = dialogue.gen_dialog(diog_pt, temp_hero);
 			message = check_if_known(reply_pt_sentence, "");
+			PlayerActExecFunctions::execute_start("Spar", temp_hero);
 		}
 		state = 7;
 	}
@@ -1253,6 +1267,135 @@ void DialogueController::otherResponse(std::string info, std::string hero_topic)
 				//state = 8;
 			}
 			state = 8;
+		}
+
+		else if (replyString == "Accept Bribe") {
+			//calls action start if the question is asked at all
+			PlayerActExecFunctions::execute_start("Bribe", temp_hero);
+
+			//check if I want to accept
+			if (accepted_action) {
+				dialogue_point diog_pt = { "Accept Bribe","Accept Bribe","",curr_hero_topic,"1" };
+				std::string reply_pt_sentence = dialogue.gen_dialog(diog_pt, temp_hero);
+				replace_all(reply_pt_sentence, "HERO", curr_hero_topic);
+				message = check_if_known(reply_pt_sentence, "");
+			}
+			else {
+				/////////////need to be changed to correct calls/dialog if not accepted///////////////////
+				dialogue_point diog_pt = { "Accept Bribe","Accept Bribe","",curr_hero_topic,"1" };
+				std::string reply_pt_sentence = dialogue.gen_dialog_negative(diog_pt, temp_hero);
+				replace_all(reply_pt_sentence, "HERO", curr_hero_topic);
+				message = check_if_known(reply_pt_sentence, "");
+			}
+			state = 3;
+			otherConversationPoint(line);
+		}
+
+		else if (replyString == "Defend Self") {
+			//calls action start if the question is asked at all
+			PlayerActExecFunctions::execute_start("Insult", temp_hero);
+
+			//check if I want to accept
+			if (accepted_action) {
+				dialogue_point diog_pt = { "Defend Self","Defend Self","",curr_hero_topic,"1" };
+				std::string reply_pt_sentence = dialogue.gen_dialog(diog_pt, temp_hero);
+				replace_all(reply_pt_sentence, "HERO", curr_hero_topic);
+				message = check_if_known(reply_pt_sentence, "");
+			}
+			else {
+				/////////////need to be changed to correct calls/dialog if not accepted///////////////////
+				dialogue_point diog_pt = { "Defend Self","Defend Self","",curr_hero_topic,"1" };
+				std::string reply_pt_sentence = dialogue.gen_dialog_negative(diog_pt, temp_hero);
+				replace_all(reply_pt_sentence, "HERO", curr_hero_topic);
+				message = check_if_known(reply_pt_sentence, "");
+			}
+			state = 3;
+			otherConversationPoint(line);
+		}
+
+		else if (replyString == "Thank") {
+			//calls action start if the question is asked at all
+			PlayerActExecFunctions::execute_start("Compliment", temp_hero);
+
+			//check if I want to accept
+			if (accepted_action) {
+				dialogue_point diog_pt = { "Thank","Thank","",curr_hero_topic,"1" };
+				std::string reply_pt_sentence = dialogue.gen_dialog(diog_pt, temp_hero);
+				replace_all(reply_pt_sentence, "HERO", curr_hero_topic);
+				message = check_if_known(reply_pt_sentence, "");
+			}
+			else {
+				/////////////need to be changed to correct calls/dialog if not accepted///////////////////
+				dialogue_point diog_pt = { "Thank","Thank","",curr_hero_topic,"1" };
+				std::string reply_pt_sentence = dialogue.gen_dialog_negative(diog_pt, temp_hero);
+				replace_all(reply_pt_sentence, "HERO", curr_hero_topic);
+				message = check_if_known(reply_pt_sentence, "");
+			}
+			state = 3;
+			otherConversationPoint(line);
+		}
+		else if (replyString == "Congratulate") {
+			//calls action start if the question is asked at all
+			PlayerActExecFunctions::execute_start("Boast", temp_hero);
+
+			//check if I want to accept
+			if (accepted_action) {
+				dialogue_point diog_pt = { "Congratulate","Congratulate","",curr_hero_topic,"1" };
+				std::string reply_pt_sentence = dialogue.gen_dialog(diog_pt, temp_hero);
+				replace_all(reply_pt_sentence, "HERO", curr_hero_topic);
+				message = check_if_known(reply_pt_sentence, "");
+			}
+			else {
+				/////////////need to be changed to correct calls/dialog if not accepted///////////////////
+				dialogue_point diog_pt = { "Congratulate","Congratulate","",curr_hero_topic,"1" };
+				std::string reply_pt_sentence = dialogue.gen_dialog_negative(diog_pt, temp_hero);
+				replace_all(reply_pt_sentence, "HERO", curr_hero_topic);
+				message = check_if_known(reply_pt_sentence, "");
+			}
+			state = 3;
+			otherConversationPoint(line);
+		}
+		else if (replyString == "Accept Plea") {
+			//calls action start if the question is asked at all
+			PlayerActExecFunctions::execute_start("Grovel", temp_hero);
+
+			//check if I want to accept
+			if (accepted_action) {
+				dialogue_point diog_pt = { "Accept Plea","Accept Plea","",curr_hero_topic,"1" };
+				std::string reply_pt_sentence = dialogue.gen_dialog(diog_pt, temp_hero);
+				replace_all(reply_pt_sentence, "HERO", curr_hero_topic);
+				message = check_if_known(reply_pt_sentence, "");
+			}
+			else {
+				/////////////need to be changed to correct calls/dialog if not accepted///////////////////
+				dialogue_point diog_pt = { "Accept Plea","Accept Plea","",curr_hero_topic,"1" };
+				std::string reply_pt_sentence = dialogue.gen_dialog_negative(diog_pt, temp_hero);
+				replace_all(reply_pt_sentence, "HERO", curr_hero_topic);
+				message = check_if_known(reply_pt_sentence, "");
+			}
+			state = 3;
+			otherConversationPoint(line);
+		}
+		else if (replyString == "Talk Back") {
+			//calls action start if the question is asked at all
+			PlayerActExecFunctions::execute_start("Intimidate", temp_hero);
+
+			//check if I want to accept
+			if (accepted_action) {
+				dialogue_point diog_pt = { "Intimidate","Intimidate","",curr_hero_topic,"1" };
+				std::string reply_pt_sentence = dialogue.gen_dialog(diog_pt, temp_hero);
+				replace_all(reply_pt_sentence, "HERO", curr_hero_topic);
+				message = check_if_known(reply_pt_sentence, "");
+			}
+			else {
+				/////////////need to be changed to correct calls/dialog if not accepted///////////////////
+				dialogue_point diog_pt = { "Intimidate","Intimidate","",curr_hero_topic,"1" };
+				std::string reply_pt_sentence = dialogue.gen_dialog_negative(diog_pt, temp_hero);
+				replace_all(reply_pt_sentence, "HERO", curr_hero_topic);
+				message = check_if_known(reply_pt_sentence, "");
+			}
+			state = 3;
+			otherConversationPoint(line);
 		}
 		else {
 			state = 3;
@@ -1868,13 +2011,14 @@ void DialogueController::startConversation(WorldObj* n, bool playerTalk)
 	other = n;
 	Hero* temp_hero = CheckClass::isHero(other);
 	std::string start_message = "";
+	optionsIndex = 0;
 
 	if (temp_hero) {
 		player->filter_move_to(temp_hero);
 		//if (first_buff) {
-			temp_hero->rel[player->name]->addNotoriety(50);
-			temp_hero->rel[player->name]->addStrength(50);
-			temp_hero->rel[player->name]->addAffinity(50);
+			//temp_hero->rel[player->name]->addNotoriety(50);
+			//temp_hero->rel[player->name]->addStrength(50);
+			//temp_hero->rel[player->name]->addAffinity(50);
 		//}
 		//first_buff = false;
 	}
@@ -2049,7 +2193,7 @@ void DialogueController::exitDialogue()
 			}
 		}
 
-		if (temp_hero) {
+		if (temp_hero && is_hero_act == false) {
 			remove_hero_related_conv_points();
 			//temp_hero->rel[player->name]->addNotoriety(50);
 			//temp_hero->rel[player->name]->addStrength(50);
@@ -2072,6 +2216,7 @@ void DialogueController::exitDialogue()
 		first_q_press = false;
 		shrine_talk_counter = 0;
 		teach_move_counter = 0;
+		is_hero_act = false;
 	}
 	else {
 		state = 7;
@@ -2405,7 +2550,7 @@ are scrolling down. unselectable options are skipped.*/
 void DialogueController::move_to_selectable_down() {
 	int scroll_counter = 0;
 	Hero* temp_hero = CheckClass::isHero(other);
-	if (temp_hero) {
+	if (temp_hero && DialogueController::getState() == 1) {
 		if (DialogueController::scroll_control == DialogueController::getOptions().size() - 1)
 			return;
 		if (DialogueController::scroll_control == DialogueController::getOptions().size() - 2) {
@@ -2413,7 +2558,7 @@ void DialogueController::move_to_selectable_down() {
 				return;
 		}
 	}
-	else {//babalawo case
+	else if(DialogueController::getState() == 1 && other->getName().find("Babalawo") != string::npos){//babalawo case
 		if (DialogueController::scroll_control == DialogueController::get_babalawo_options().size() - 1)
 			return;
 		if (DialogueController::scroll_control == DialogueController::get_babalawo_options().size() - 2) {
@@ -2421,7 +2566,11 @@ void DialogueController::move_to_selectable_down() {
 				return;
 		}
 	}
-	if (temp_hero) {
+	else if (state == 2) {
+		if (DialogueController::scroll_control == DialogueController::getReplyOptions().size() - 1)
+			return;
+	}
+	if (temp_hero && state != 2) {
 		for (int i = 0; (DialogueController::scroll_control + i) < DialogueController::getOptions().size(); ++i) {
 			if (DialogueController::getOptions()[DialogueController::scroll_control + i][4] == "1") {
 				if (i != 0 || (DialogueController::getOptions().size() == 2 && DialogueController::getOptions()[1][4] == "1")) {
@@ -2436,7 +2585,7 @@ void DialogueController::move_to_selectable_down() {
 			}
 		}
 	}
-	else {//babalawo case
+	else if(state != 2 && other->getName().find("Babalawo") != string::npos) {//babalawo case
 		for (int i = 0; (DialogueController::scroll_control + i) < DialogueController::get_babalawo_options().size(); ++i) {
 			if (DialogueController::get_babalawo_options()[DialogueController::scroll_control + i][4] == "1") {
 				if (i != 0 || (DialogueController::get_babalawo_options().size() == 2 && DialogueController::get_babalawo_options()[1][4] == "1")) {
@@ -2451,6 +2600,8 @@ void DialogueController::move_to_selectable_down() {
 			}
 		}
 	}
+	if (state == 2)
+		++scroll_counter;
 	DialogueController::scroll_control += scroll_counter;
 }
 
@@ -2460,31 +2611,35 @@ void DialogueController::move_to_selectable_up() {
 	int scroll_counter = 0;
 	if (DialogueController::scroll_control == 0)
 		return;
-	for (int i = 0; (DialogueController::scroll_control - i) >= 1; ++i) {
-		Hero* temp_hero = CheckClass::isHero(other);
-		if (temp_hero) {
-			if (DialogueController::getOptions()[DialogueController::scroll_control - i - 1][4] == "1") {
-				scroll_counter++;
-				break;
+	if (state != 2) {
+		for (int i = 0; (DialogueController::scroll_control - i) >= 1; ++i) {
+			Hero* temp_hero = CheckClass::isHero(other);
+			if (temp_hero) {
+				if (DialogueController::getOptions()[DialogueController::scroll_control - i - 1][4] == "1") {
+					scroll_counter++;
+					break;
+				}
+				else {
+					scroll_counter++;
+					if (DialogueController::scroll_control == 0)
+						scroll_counter = 0;
+				}
 			}
-			else {
-				scroll_counter++;
-				if (DialogueController::scroll_control == 0)
-					scroll_counter = 0;
-			}
-		}
-		else {//babalawo case
-			if (DialogueController::get_babalawo_options()[DialogueController::scroll_control - i - 1][4] == "1") {
-				scroll_counter++;
-				break;
-			}
-			else {
-				scroll_counter++;
-				if (DialogueController::scroll_control == 0)
-					scroll_counter = 0;
+			else {//babalawo case
+				if (DialogueController::get_babalawo_options()[DialogueController::scroll_control - i - 1][4] == "1") {
+					scroll_counter++;
+					break;
+				}
+				else {
+					scroll_counter++;
+					if (DialogueController::scroll_control == 0)
+						scroll_counter = 0;
+				}
 			}
 		}
 	}
+	else
+		++scroll_counter;
 	DialogueController::scroll_control -= scroll_counter;
 }
 
@@ -2603,6 +2758,132 @@ void DialogueController::spar_pop_up(Action* act)
 	state = 7;
 }
 
+void DialogueController::hero_act_alliance_pop_up(Action* act) {
+	other = act->getDoer();
+	dialogue_point dpoint = { "Ask_To_Form_Alliance","Ask_To_Form_Alliance" };
+	std::string conversation_pt_sentence = dialogue.gen_dialog(dpoint, act->getDoer());
+	bool known = false;
+	for (int i = 0; i < player->heroes_player_knows.size(); ++i) {
+		if (player->heroes_player_knows[i] == act->getDoer()->name) {
+			known = true;
+			break;
+		}
+	}
+	if (known)
+		message = act->getDoer()->getName() + ": " + conversation_pt_sentence;
+	else
+		message = check_if_known(conversation_pt_sentence, "");
+	replyOptions = dialogue.get_possible_reply_pts(dpoint[ConvPointName], optionsIndex);
+	is_hero_act = true;
+	hero_act_toward_player = act;
+	state = 2;
+}
+
+void DialogueController::hero_act_bribe_pop_up(Action* act) {
+	other = act->getDoer();
+	dialogue_point dpoint = { "Bribe","Bribe" };
+	std::string conversation_pt_sentence = dialogue.gen_dialog(dpoint, act->getDoer());
+	bool known = false;
+	for (int i = 0; i < player->heroes_player_knows.size(); ++i) {
+		if (player->heroes_player_knows[i] == act->getDoer()->name) {
+			known = true;
+			break;
+		}
+	}
+	if (known)
+		message = act->getDoer()->getName() + ": " + conversation_pt_sentence;
+	else
+		message = check_if_known(conversation_pt_sentence, "");
+	replyOptions = dialogue.get_possible_reply_pts(dpoint[ConvPointName], optionsIndex);
+	is_hero_act = true;
+	hero_act_toward_player = act;
+	state = 2;
+}
+
+void DialogueController::hero_act_compliment_pop_up(Action* act) {
+	other = act->getDoer();
+	dialogue_point dpoint = { "Compliment","Compliment" };
+	std::string conversation_pt_sentence = dialogue.gen_dialog(dpoint, act->getDoer());
+	bool known = false;
+	for (int i = 0; i < player->heroes_player_knows.size(); ++i) {
+		if (player->heroes_player_knows[i] == act->getDoer()->name) {
+			known = true;
+			break;
+		}
+	}
+	if (known)
+		message = act->getDoer()->getName() + ": " + conversation_pt_sentence;
+	else
+		message = check_if_known(conversation_pt_sentence, "");
+	replyOptions = dialogue.get_possible_reply_pts(dpoint[ConvPointName], optionsIndex);
+	is_hero_act = true;
+	hero_act_toward_player = act;
+	state = 2;
+}
+
+void DialogueController::hero_act_boast_pop_up(Action* act) {
+	other = act->getDoer();
+	dialogue_point dpoint = { "Boast","Boast" };
+	std::string conversation_pt_sentence = dialogue.gen_dialog(dpoint, act->getDoer());
+	bool known = false;
+	for (int i = 0; i < player->heroes_player_knows.size(); ++i) {
+		if (player->heroes_player_knows[i] == act->getDoer()->name) {
+			known = true;
+			break;
+		}
+	}
+	if (known)
+		message = act->getDoer()->getName() + ": " + conversation_pt_sentence;
+	else
+		message = check_if_known(conversation_pt_sentence, "");
+	replyOptions = dialogue.get_possible_reply_pts(dpoint[ConvPointName], optionsIndex);
+	is_hero_act = true;
+	hero_act_toward_player = act;
+	state = 2;
+}
+
+void DialogueController::hero_act_grovel_pop_up(Action* act) {
+	other = act->getDoer();
+	dialogue_point dpoint = { "Grovel","Grovel" };
+	std::string conversation_pt_sentence = dialogue.gen_dialog(dpoint, act->getDoer());
+	bool known = false;
+	for (int i = 0; i < player->heroes_player_knows.size(); ++i) {
+		if (player->heroes_player_knows[i] == act->getDoer()->name) {
+			known = true;
+			break;
+		}
+	}
+	if (known)
+		message = act->getDoer()->getName() + ": " + conversation_pt_sentence;
+	else
+		message = check_if_known(conversation_pt_sentence, "");
+	replyOptions = dialogue.get_possible_reply_pts(dpoint[ConvPointName], optionsIndex);
+	is_hero_act = true;
+	hero_act_toward_player = act;
+	state = 2;
+}
+
+void DialogueController::hero_act_intimidate_pop_up(Action* act) {
+	other = act->getDoer();
+	dialogue_point dpoint = { "Intimidate","Intimidate" };
+	std::string conversation_pt_sentence = dialogue.gen_dialog(dpoint, act->getDoer());
+	bool known = false;
+	for (int i = 0; i < player->heroes_player_knows.size(); ++i) {
+		if (player->heroes_player_knows[i] == act->getDoer()->name) {
+			known = true;
+			break;
+		}
+	}
+	if (known)
+		message = act->getDoer()->getName() + ": " + conversation_pt_sentence;
+	else
+		message = check_if_known(conversation_pt_sentence, "");
+	replyOptions = dialogue.get_possible_reply_pts(dpoint[ConvPointName], optionsIndex);
+	is_hero_act = true;
+	hero_act_toward_player = act;
+	state = 2;
+}
+
 std::string DialogueController::check_if_known(std::string rep_str,std::string con_str) {
 	Hero* temp_hero = CheckClass::isHero(other);
 	bool known = false;
@@ -2625,3 +2906,29 @@ std::string DialogueController::check_if_known(std::string rep_str,std::string c
 	return ret_str;
 }
 
+void DialogueController::apply_post_from_response(std::string rep_choice, Action* act) {
+	
+	if (rep_choice.find("Accept") != string::npos || DialogueController::scroll_control > 0) {
+		if (act->getDoer()->SUGG_ACT_STATUS == 1) {
+			//sets suggested action flag to success
+			act->getDoer()->SUGG_ACT_STATUS = 3;
+
+			//update notoriety/affinity/strength accordingly
+			act->getDoer()->rel[SHANGO]->setNotoriety(act->getDoer()->rel[SHANGO]->getNotoriety() + 7);
+			act->getDoer()->rel[SHANGO]->setAffinity(act->getDoer()->rel[SHANGO]->getAffinity() + 7);
+			act->getDoer()->rel[SHANGO]->setStrength(act->getDoer()->rel[SHANGO]->getStrength() + 7);
+		}
+		act->apply_postconditions(true);
+	}
+	else {
+		act->apply_postconditions(false);
+
+		if (act->getDoer()->SUGG_ACT_STATUS == 1) {
+			//sets suggested action flag to failure
+			act->getDoer()->SUGG_ACT_STATUS = 2;
+
+			//update notoriety/affinity/strength accordingly
+			act->getDoer()->rel[SHANGO]->setNotoriety(act->getDoer()->rel[SHANGO]->getNotoriety() - 7);
+		}
+	}
+}

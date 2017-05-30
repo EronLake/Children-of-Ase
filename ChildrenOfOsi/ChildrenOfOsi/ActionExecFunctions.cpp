@@ -236,7 +236,8 @@ void ActionExecFunctions::execute_form_alliance(Action* form_alliance) {
 			//Planner* hero_planner = ActionHelper::ai->get_plan(responder->name);
 			if(form_alliance->getReceiver()->name == SHANGO)
 			{
-				form_alliance->apply_postconditions(true);
+				DialogueController::hero_act_alliance_pop_up(form_alliance);
+				/*form_alliance->apply_postconditions(false);
 
 				if (form_alliance->getDoer()->SUGG_ACT_STATUS == 1) {
 					//sets suggested action flag to success
@@ -246,7 +247,7 @@ void ActionExecFunctions::execute_form_alliance(Action* form_alliance) {
 					form_alliance->getDoer()->rel[SHANGO]->setNotoriety(form_alliance->getDoer()->rel[SHANGO]->getNotoriety() + 7);
 					form_alliance->getDoer()->rel[SHANGO]->setAffinity(form_alliance->getDoer()->rel[SHANGO]->getAffinity() + 7);
 					form_alliance->getDoer()->rel[SHANGO]->setStrength(form_alliance->getDoer()->rel[SHANGO]->getStrength() + 7);
-				}
+				}*/
 
 				//doer_mem->setCategory("success"); receiver_mem->setCategory("success");
 				//doer_mem->setReason("We joined forces");
@@ -874,7 +875,22 @@ void ActionExecFunctions::execute_conversation(Action* conv)
 			//}
 			conv->getDoer()->set_action_destination(conv->getDoer()->getVillage()->get_village_location()); //Also predefined, maybe as "home_location" in hero
 			int chance=rand() % 2-1;
-			if (chance) {
+			if (conv->getReceiver()->name == SHANGO) {
+				if (conv->name.find("Compliment") != string::npos) {
+					DialogueController::hero_act_compliment_pop_up(conv);
+				}
+				else if (conv->name.find("Boast") != string::npos) {
+					DialogueController::hero_act_boast_pop_up(conv);
+				}
+				else if (conv->name.find("Grovel") != string::npos) {
+					DialogueController::hero_act_grovel_pop_up(conv);
+				}
+				else {//intimidate
+					DialogueController::hero_act_intimidate_pop_up(conv);
+
+				}
+			}
+			else if (chance) {
 				conv->apply_postconditions(true);				 //Apply post-conditions
 				//doer_mem->setCategory("success");			 //Call update_memory function
 				//doer_mem->setReason("The coversation went well");
@@ -973,7 +989,10 @@ void ActionExecFunctions::execute_bribe(Action* bribe)
 
 				bribe->getDoer()->set_action_destination(bribe->getDoer()->getVillage()->get_village_location()); //Also predefined, maybe as "home_location" in hero
 				int chance = rand() % 2 - 1;
-				if (chance) {
+				if (bribe->getReceiver()->name == SHANGO) {
+					DialogueController::hero_act_bribe_pop_up(bribe);
+				}
+				else if (chance) {
 					bribe->apply_postconditions(true);				 //Apply post-conditions
 					//doer_mem->setCategory("success");			 //Call update_memory function
 					//doer_mem->setReason("The bribe went well");
@@ -1040,7 +1059,10 @@ void ActionExecFunctions::execute_compliment(Action* compliment)
 			//	perror("something is wrong with the current hero memory creation function");
 			//}
 			compliment->getDoer()->set_action_destination(compliment->getDoer()->getVillage()->get_village_location()); //Also predefined, maybe as "home_location" in hero
-			if (ActionHelper::conversation(compliment)) {
+			if (compliment->getReceiver()->name == SHANGO) {
+				DialogueController::hero_act_compliment_pop_up(compliment);
+			}
+			else if (ActionHelper::conversation(compliment)) {
 				compliment->apply_postconditions(true);				 //Apply post-conditions
 				//doer_mem->setCategory("success");			 //Call update_memory function
 				//doer_mem->setReason("It looks like my compliment was received well");
