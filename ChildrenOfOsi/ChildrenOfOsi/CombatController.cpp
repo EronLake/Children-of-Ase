@@ -15,7 +15,7 @@ CombatController::~CombatController()
 
 void CombatController::fight(Soldier* sold1, int state) {
 	if (sold1->getCurrentEnemy() != nullptr) {
-		if (sold1->getStamina() > 120) {
+		if (sold1->getStamina() > sold1->melee->getStaminaCost()) {
 			sold1->setEvade(false);
 		}
 		else if (sold1->destination == sold1->getLoc() || sold1->destination == Vector2f(0, 0)) {
