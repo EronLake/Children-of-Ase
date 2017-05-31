@@ -70,9 +70,13 @@ void Village::init_villages()
 		{
 			party_name = "Mountain";
 		}
-		else //if (hero_id == OGUN)
+		else if (itr.second->name == OGUN)
 		{
 			party_name = "Ogun";
+		}
+		else //if (itr.second->name == SHANGO)
+		{
+			party_name = "Shango";
 		}
 
 		Party* new_party = new Party();

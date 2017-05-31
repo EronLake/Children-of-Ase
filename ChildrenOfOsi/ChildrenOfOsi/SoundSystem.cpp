@@ -35,7 +35,7 @@ FMOD_RESULT result;
 		}
 		
 		// Initialize our Instance with 36 Channels
-		m_pSystem->init(36, FMOD_INIT_NORMAL, 0);
+		m_pSystem->init(32, FMOD_INIT_NORMAL, 0);
 
 		/*string Desert = "Music/RegionThemes/DesertRegion.flac";
 		string Jungle = "Music/RegionThemes/JungleRegion.flac";
