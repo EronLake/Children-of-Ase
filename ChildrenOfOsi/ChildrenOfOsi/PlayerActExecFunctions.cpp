@@ -114,6 +114,8 @@ void PlayerActExecFunctions::execute_end(bool if_succ) {
 		if (cur_action->getReceiver()->getVillage()->get_village_health() > 0) {
 			cur_action->getReceiver()->getVillage()->defenders->add_party_to_party(cur_action->getReceiver()->getVillage()->barracks);
 			//if (player->getParty()->get_fight()!=nullptr)player->getParty()->get_fight()->add_to_defenders(cur_action->getReceiver()->getVillage()->defenders);
+			player->getParty()->get_fight()->remove_from_downed(cur_action->getReceiver()->getVillage()->defenders);
+			player->getParty()->get_fight()->add_to_defenders(player->getParty(),cur_action->getReceiver()->getVillage()->defenders);
 			return;
 		}
 	}

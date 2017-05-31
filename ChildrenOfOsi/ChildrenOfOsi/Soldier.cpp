@@ -299,9 +299,9 @@ bool Soldier::hasAttacks()
 }
 
 bool Soldier::get_incapacitated() {
-	if (party == nullptr || !party->get_hide()) {
-		return incapacitated;
-	}else return true;
+	if (party == nullptr || party->get_hide()) {
+		return true;
+	}else return incapacitated;
 };
 
 /**
