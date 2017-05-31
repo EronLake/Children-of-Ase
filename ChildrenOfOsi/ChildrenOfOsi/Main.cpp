@@ -756,10 +756,10 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	for (auto it : *largeStruct) cout << (it)->getName() << endl;
 
 	if (PRELOAD_TEX) {
-		tm.join();
+		//tm.join();
 		t0.join();
-		t1.join();
-		t2.join();
+		//t1.join();
+		//t2.join();
 	}
 	//oya->set_busy(0);
 	//yemoja->set_busy(0);
