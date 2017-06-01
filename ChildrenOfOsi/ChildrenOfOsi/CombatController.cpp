@@ -66,6 +66,7 @@ void CombatController::fight(Soldier* sold1, int state) {
 					if (!(*it)->getCanCancel()) {
 						if (sold1->getCool((*it)->get_name())) {
 							if (shot_ligned_up(sold1->body[0].get_mid_loc(), sold2->body[0].get_mid_loc())) {
+								sold1->face(sold2);
 								switch ((*it)->get_name()) {
 								case Attack::FIREBALL:
 									gameplay_functions->special(sold1, Attack::FIREBALL);
