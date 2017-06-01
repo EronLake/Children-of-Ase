@@ -215,6 +215,28 @@ void DialogueController::shrine_interact()
 		break;
 	case 3:
 		dpoint = {"Shrine Talk 4","Shrine Talk 4"};
+
+		//give shrine blessing
+		player->addHealth(300);//regenerate to full health
+		player->ori+= 30;//boost ori by 30
+		//Containers::hero_table["Shango"]->setAse;//regenerate to full ase
+
+		for (auto hero : Containers::hero_table) 
+		{
+			if (hero.second->name != SHANGO) {
+				if (other->getName().find("Oasis") != string::npos) {
+					hero.second->rel[SHANGO]->addAffinity(10);
+				}
+				else if ((other->getName().find("Jungle")) != string::npos) {
+					hero.second->rel[SHANGO]->addNotoriety(10);
+				}
+				else if ((other->getName().find("Mountain")) != string::npos) {
+					hero.second->rel[SHANGO]->addStrength(10);
+					player->can_activate_ex = 1;
+				}
+			}	
+		}
+		
 		break;
 	}
 	
@@ -378,7 +400,7 @@ void DialogueController::PlayerConversationPoint()
 			//the ori variable is to increase the chance of teaching based on
 			//how high the ori is 
 			if (temp_hero->rel[player->name]->getAffinity() + (player->ori / 10) >= 60 && 
-				temp_hero->rel[player->name]->getStrength() + (player->ori / 10) >= 50)
+				temp_hero->rel[player->name]->getStrength() + (player->ori / 10) >= 60)
 				accepted_action = true;
 			else
 				accepted_action = false;
@@ -1251,6 +1273,7 @@ void DialogueController::otherResponse(std::string info, std::string hero_topic)
 				std::string reply_pt_sentence = dialogue.gen_dialog(diog_pt, temp_hero);
 				replace_all(reply_pt_sentence, "HERO", curr_hero_topic);
 				message = check_if_known(reply_pt_sentence, "");
+				dynamic_cast<Hero*>(other)->rel[1]->addStrength(10);
 				//state = 12;
 				
 			}
