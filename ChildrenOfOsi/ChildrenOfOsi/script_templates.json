@@ -743,7 +743,7 @@
     }
   },
 
-   "Offer Praise_Templates": {
+   "Offer Praise In Response_Templates": {
     "1": {
       "1": "Offer Praise In Response"
     }
@@ -764,6 +764,30 @@
   "Offer Gift_Templates": {
     "1": {
       "1": "Offer Gift"
+    }
+  },
+
+  "Refuse_Templates": {
+    "1": {
+      "1": "Refuse"
+    }
+  },
+
+   "No Divination_Templates": {
+    "1": {
+      "1": "No Divination"
+    }
+  },
+
+   "Offer Praise_Templates": {
+    "1": {
+      "1": "Offer Praise"
+    }
+  },
+
+   "Accept Praise_Templates": {
+    "1": {
+      "1": "Accept Praise"
     }
   }
 }

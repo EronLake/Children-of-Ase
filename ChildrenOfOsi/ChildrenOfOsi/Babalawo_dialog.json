@@ -29,6 +29,14 @@
             "3": "Until next time you seek my guidance, young one.",
             "4": "Until next time you seek my guidance, young one.",
             "5": "Until next time you seek my guidance, young one."
+        },
+
+		"No Divination": {
+            "1": "I have nothing else to divine for you.",
+            "2": "I have nothing else to divine for you.",
+            "3": "I have nothing else to divine for you.",
+            "4": "I have nothing else to divine for you.",
+            "5": "I have nothing else to divine for you."
         }
 	},
 
@@ -40,7 +48,7 @@
 			"4": "I see, I see...",
 			"5": "I see, I see..."
 		},
-		"Response Ask For Advice": {
+		"Response Inquire About Ifa": {
 			"1": "Well young one...",
 			"2": "Well young one...",
 			"3": "Well young one...",
@@ -62,6 +70,14 @@
             "3": "Until next time you seek my guidance, young one.",
             "4": "Until next time you seek my guidance, young one.",
             "5": "Until next time you seek my guidance, young one."
+        },
+
+		"No Divination": {
+            "1": "I have nothing else to divine for you.",
+            "2": "I have nothing else to divine for you.",
+            "3": "I have nothing else to divine for you.",
+            "4": "I have nothing else to divine for you.",
+            "5": "I have nothing else to divine for you."
         }
    },
 
@@ -73,7 +89,7 @@
 			"4": "I see, I see...",
 			"5": "I see, I see..."
 		},
-		"Response Ask For Advice": {
+		"Response Inquire About Ifa": {
 			"1": "Well young one...",
 			"2": "Well young one...",
 			"3": "Well young one...",
@@ -95,6 +111,14 @@
             "3": "Until next time you seek my guidance, young one.",
             "4": "Until next time you seek my guidance, young one.",
             "5": "Until next time you seek my guidance, young one."
+        },
+
+		"No Divination": {
+            "1": "I have nothing else to divine for you.",
+            "2": "I have nothing else to divine for you.",
+            "3": "I have nothing else to divine for you.",
+            "4": "I have nothing else to divine for you.",
+            "5": "I have nothing else to divine for you."
         }
    }
 }

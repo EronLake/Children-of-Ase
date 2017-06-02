@@ -203,7 +203,7 @@ void AIController::execute() {
 		//	std::cout << "after: " << hero->update_action_timer() << endl;
 			if (curr_action != nullptr) { //used to be : "!planner->give_as_quest" //and then it was "true"
 			//	std::cout << "execute" << endl;
-				curr_action->execute();
+				if (hero->getParty()->getLeader()==hero)curr_action->execute();
 
 				//cout << "hero number " << me << "'s current action has been executed" << endl;
 
