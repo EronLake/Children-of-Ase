@@ -79,6 +79,10 @@ public:
 	typedef std::unordered_map<int, int> status_map; // first part of pair is quest owner, second is quest status
 	status_map quest_status;
 
+	
+	std::unordered_map<std::string, int> trait_vec;
+	int get_range_cap(Action* a);
+
 private:
 
 	std::unordered_map<Action*,int> quests;

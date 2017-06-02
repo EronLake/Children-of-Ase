@@ -73,6 +73,8 @@ public:
 	static void DialogueController::hero_act_intimidate_pop_up(Action* act);
 	static std::string DialogueController::check_if_known(std::string rep_pt_str, std::string con_pt_str);
 	static void DialogueController::apply_post_from_response(std::string rep_choice, Action* act);
+	static bool DialogueController::check_acceptance(Player* p, Hero* npc);
+	static void DialogueController::unselectable_to_bottom();
 
 	static bool prompted_quest;
 	static bool accepted_quest;
