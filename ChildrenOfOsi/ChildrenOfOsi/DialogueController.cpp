@@ -5,6 +5,7 @@
 #include "Tag.h"
 #include "ConversationLogObj.h"
 #include "ActionExecFunctions.h"
+#include "Tutorial.h"
 
 Player* DialogueController::player;
 WorldObj* DialogueController::other; //the npc speaking with the player
@@ -2014,18 +2015,17 @@ void DialogueController::startConversation(WorldObj* n, bool playerTalk)
 	std::string start_message = "";
 	optionsIndex = 0;
 
-	if (temp_hero) {
-		player->filter_move_to(temp_hero);
-		//if (first_buff) {
-			//temp_hero->rel[player->name]->addNotoriety(50);
-			//temp_hero->rel[player->name]->addStrength(50);
-			//temp_hero->rel[player->name]->addAffinity(50);
-		//}
-		//first_buff = false;
-	}
 	/*handles what the greeting phrase should be based on whether or not the player
 	has taken or completed a quest from the npc*/
 		if (temp_hero) {
+      player->filter_move_to(temp_hero);
+      /*if (first_buff) {
+      temp_hero->rel[player->name]->addNotoriety(50);
+      temp_hero->rel[player->name]->addStrength(50);
+      temp_hero->rel[player->name]->addAffinity(50);
+      }
+      first_buff = false;*/
+
 			Planner* planner = AIController::get_plan(CheckClass::isHero(other)->name);
 			bool player_doing_quest = false;
 			bool quest_complete = false;

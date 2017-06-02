@@ -42,12 +42,12 @@ void Tutorial::init()
 
   Tutorial::stageIntro01PopupSprite = new Sprite();
   Tutorial::stageIntro01PopupTex = new Texture();
-  Tutorial::stageIntro01PopupTex->setFile(SPRITES_PATH + "Tutorial_Intro01Popup", 1);
+  Tutorial::stageIntro01PopupTex->setFile(SPRITES_PATH + "Tutorial_Intro01Popup.png", 1);
   Tutorial::stageIntro01PopupSprite->setTexture(Tutorial::stageIntro01PopupTex);
 
   Tutorial::stageIntro02PopupSprite = new Sprite();
   Tutorial::stageIntro02PopupTex = new Texture();
-  Tutorial::stageIntro02PopupTex->setFile(SPRITES_PATH + "Tutorial_ScreenFadeFilter.png", 1);
+  Tutorial::stageIntro02PopupTex->setFile(SPRITES_PATH + "Tutorial_Intro02Popup.png", 1);
   Tutorial::stageIntro02PopupSprite->setTexture(Tutorial::stageIntro02PopupTex);
 }
 
@@ -171,18 +171,22 @@ void Tutorial::drawTutorial()
     case Tutorial::Stage::INTRO01:
       GameWindow::drawSprite(Tutorial::SCREEN_FADE_FILTER_X, Tutorial::SCREEN_FADE_FILTER_Y,
         Tutorial::SCREEN_FADE_FILTER_WIDTH, Tutorial::SCREEN_FADE_FILTER_HEIGHT, *Tutorial::screenFadeFilterSprite);
-      /*GameWindow::drawSprite(Tutorial::INTRO01_POPUP_X, Tutorial::INTRO01_POPUP_Y,
-        Tutorial::INTRO01_POPUP_WIDTH, Tutorial::INTRO01_POPUP_HEIGHT, *Tutorial::stageIntro01PopupSprite);*/
+      GameWindow::drawSprite(Tutorial::INTRO01_POPUP_X, Tutorial::INTRO01_POPUP_Y,
+        Tutorial::INTRO01_POPUP_WIDTH, Tutorial::INTRO01_POPUP_HEIGHT, *Tutorial::stageIntro01PopupSprite);
       break;
     case Tutorial::Stage::INTRO02:
       GameWindow::drawSprite(Tutorial::SCREEN_FADE_FILTER_X, Tutorial::SCREEN_FADE_FILTER_Y,
         Tutorial::SCREEN_FADE_FILTER_WIDTH, Tutorial::SCREEN_FADE_FILTER_HEIGHT, *Tutorial::screenFadeFilterSprite);
+      GameWindow::drawSprite(Tutorial::INTRO02_POPUP_X, Tutorial::INTRO02_POPUP_Y,
+        Tutorial::INTRO02_POPUP_WIDTH, Tutorial::INTRO02_POPUP_HEIGHT, *Tutorial::stageIntro02PopupSprite);
       break;
     case Tutorial::Stage::DIALOGUE:
-
+      GameWindow::drawSprite(Tutorial::SCREEN_FADE_FILTER_X, Tutorial::SCREEN_FADE_FILTER_Y,
+        Tutorial::SCREEN_FADE_FILTER_WIDTH, Tutorial::SCREEN_FADE_FILTER_HEIGHT, *Tutorial::screenFadeFilterSprite);
       break;
     case Tutorial::Stage::COMBAT:
-
+      GameWindow::drawSprite(Tutorial::SCREEN_FADE_FILTER_X, Tutorial::SCREEN_FADE_FILTER_Y,
+        Tutorial::SCREEN_FADE_FILTER_WIDTH, Tutorial::SCREEN_FADE_FILTER_HEIGHT, *Tutorial::screenFadeFilterSprite);
       break;
   }
 }
