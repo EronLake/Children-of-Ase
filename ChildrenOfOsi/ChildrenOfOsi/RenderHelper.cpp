@@ -150,7 +150,10 @@ int RenderHelper::draw_frame(WorldObj * obj)
 	//cout << "******************************************SIZE OF THE OBJVEC TO RENDER IS " << objVec.size() << endl;
 	cout << "objvec size is " << objVec.size() << endl;
 	for (int i = 0; i < objVec.size(); i++) {
-		
+		Soldier* temp = CheckClass::isSoldier(objVec[i]);
+		if (temp) {
+			if (temp->getParty()->get_hide()) continue;
+		}
 			LOG("BEFORE DRAWING**");
 			////////cout << objVec[i]->getX() - camera->getX() << endl;
 			//LOG(objVec[i]->getX(), ", ", objVec[i]->getY());
