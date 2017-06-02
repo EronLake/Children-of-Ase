@@ -1,35 +1,35 @@
 {
     "Greeting": {
-        "1": "Oh... it's you. Let's just get this over with.",
-        "2": "I guess anyone nowadays thinks they can just walk in and talk to me.",
-        "3": "Hello traveler",
-        "4": "It is good to see you.",
-        "5": "My friend, it is so good to see you. I hope you have been doing well."
+        "1": "Make your buisiness quick. I have no time for your games.",
+        "2": "What is it, outsider?.",
+        "3": "What do you want from me?",
+        "4": "You again huh?",
+        "5": "E ku abo, Shango. how have you been?."
     },
 
     "Farewell": {
-        "1": "Please just leave already.",
-        "2": "*tch*",
-        "3": "Until we meet again.",
-        "4": "I hope to see you again soon.",
-        "5": "Feel free to come talk to me anytime."
+        "1": "Get out of my sight.",
+        "2": "Finally.",
+        "3": "...",
+        "4": "Farewell",
+        "5": "Until we meet again."
     },
 
 	"Ask_Name": {
-		"1": "What do people call you?",
-        "2": "What do people call you?", 
-		"3": "What do people call you?",
-		"4": "What do you call yourself, friend?",
-		"5": "What do you call yourself, friend?"
+		"1": "What do you go by?",
+        "2": "What do you go by?", 
+		"3": "What do you go by?",
+		"4": "What do you go by?",
+		"5": "What do you go by?"
 	
 	},
 
 	"Tell Name": {
-		"1": "My name is Yemoja.",
-		"2": "Nice to meet you. I am Yemoja.",
-		"3": "I am pleased to make your acquaintance. People know me as Yemoja. My purpose is to protect this desert and its inhabitants with my life.",
-        "4": "I am pleased to make your acquaintance. People know me as Yemoja. My purpose is to protect this desert and its inhabitants with my life.",
-        "5": "I am pleased to make your acquaintance. People know me as Yemoja. My purpose is to protect this desert and its inhabitants with my life."
+		"1": "Ogun.",
+		"2": "I am Ogun.",
+		"3": "My name is Ogun.",
+        "4": "I go by Ogun.",
+        "5": "I go by Ogun."
 	},
 
 	"Ask_Origin": {
@@ -41,20 +41,20 @@
 	},
 
 	"Tell Origin": {
-		"1": "If you knew anything, it would be obvious that I am from the Oasis village.",
-		"2": "Are you joking? I am from the Oasis village.",
-		"3": "I came from the village outskirts many years ago and have lived here ever since.",
-		"4": "I came from the village outskirts many years ago and have lived here ever since.",
-        "5": "I came from the village outskirts many years ago and have lived here ever since."
+		"1": "I came to Aye from the spirit world in order to foster peace in the land.",
+		"2": "I came to Aye from the spirit world in order to foster peace in the land.",
+		"3": "I came to Aye from the spirit world in order to foster peace in the land.",
+		"4": "I came to Aye from the spirit world in order to foster peace in the land.",
+        "5": "I came to Aye from the spirit world in order to foster peace in the land."
 		
 	},
 
 	"Ask About Strength Of": {
-        "1": "I know that someone like you probably knows nothing I already do not, but how strong is HERO",
-        "2": "I doubt you can enlighten me, but what do you know of the strength possesed by HERO",
-        "3": "What do you know of the strength possesed by HERO",
-        "4": "What do you know of the strength possesed by HERO",
-        "5": "What do you know of the strength possesed by HERO"
+        "1": "How strong is HERO?",
+        "2": "How strong is HERO?",
+        "3": "How strong is HERO?",
+        "4": "How strong is HERO?",
+        "5": "How strong is HERO?"
     },
 
 	"Tell About Strength Of": {
@@ -106,19 +106,19 @@
     },
 
 	"Accept Alliance Offer": {
-        "1": "Why would I align with you of all people?",
-        "2": "I refuse.",
-        "3": "I think that forming an alliance with you is a situation that benefits the both of us. I accept.",
-        "4": "I am more than happy to ally with you. I know that you will help make this village safer.",
-		"5": "I am more than happy to ally with you. I know that you will help make this village safer."
+        "1": "Never.",
+        "2": "No.",
+        "3": "I suppose.",
+        "4": "That seems like a good idea for the both of us.",
+		"5": "Of course. With our might combined, we will surely prosper!"
     },
 
 	"Confirm Alliance": {
-        "1": "Let's get this paperwork out of the way then. Glad to have you aboard.",
-        "2": "Let's get this paperwork out of the way then. Glad to have you aboard.",
-        "3": "Let's get this paperwork out of the way then. Glad to have you aboard.",
-        "4": "Let's get this paperwork out of the way then. Glad to have you aboard.",
-		"5": "Let's get this paperwork out of the way then. Glad to have you aboard."
+        "1": "If you need my assistance, don't hesitate to ask.",
+        "2": "If you need my assistance, don't hesitate to ask.",
+        "3": "If you need my assistance, don't hesitate to ask.",
+        "4": "If you need my assistance, don't hesitate to ask.",
+		"5": "If you need my assistance, don't hesitate to ask."
     },
 
 	"Advise To Conquer": {
@@ -130,7 +130,7 @@
     },
 
 	"Take Advice To Conquer": {
-        "1": "HERO hmm.I was considering conquering them but then you told me it was a good idea. Now I am not so sure. ",
+        "1": "HERO hmm. I was considering conquering them but then you told me it was a good idea. Now I am not so sure. ",
         "2": "HERO? Really? I don't feel like you should be giving me advice on such an important matter.",
         "3": "HERO eh. I wasn't sure whether or not conquest was really required, but you're right. It's time to end this",
         "4": "HERO as a conquering target? I think that moving to conquer is a risky move, but I'll trust your judgement this time.",
@@ -450,51 +450,51 @@
     },
 
 	"Boast": {
-        "1": "I am told that I am quite beautiful.",
-        "2": "I take pride with the lengths I go to in order to keep the oasis village safe.",
-        "3": "This village, under my leadership, has never lost a single defensive battle.",
-		"4": "This village, under my leadership, has never lost a single defensive battle.",
-        "5": "This village, under my leadership, has never lost a single defensive battle."
+        "1": "If steel is required, my skill at a forge is unmatched.",
+        "2": "If steel is required, my skill at a forge is unmatched.",
+        "3": "If steel is required, my skill at a forge is unmatched.",
+		"4": "If steel is required, my skill at a forge is unmatched.",
+        "5": "If steel is required, my skill at a forge is unmatched."
     },
 
     "Congratulate": {
-        "1": "Oh wow that is pathetic!",
-        "2": "I am sure you are talking yourself up.",
-        "3": "That is impressive",
-        "4": "Oh wow I am impressed.",
-        "5": "I already knew you were great, but not that great."
+        "1": "Do you really expect me to believe you?",
+        "2": "Actions speak louder than words, outsider.",
+        "3": "Wow, I would have never thought.",
+        "4": "I'm quite impressed.",
+        "5": "Really? That's amazing. I'll keep that in mind."
     },
 
 	"Intimidate": {
-        "1": "I am absolutely sick of you. If someone doesn't take you out soon I just might do it myself.",
-        "2": "You seem good at making enemies, so if I were you I would watch my back.",
-		"3": "If you ever pose a threat to the safety of my village, keep in mind that I will not hesitate to eradicate you.",
-        "4": "If you ever pose a threat to the safety of my village, keep in mind that I will not hesitate to eradicate you.",
-        "5": "If you ever pose a threat to the safety of my village, keep in mind that I will not hesitate to eradicate you."
+        "1": "Know this, If you ever cross me, you won't live to see the light of day.",
+        "2": "Know this, If you ever cross me, you won't live to see the light of day.",
+		"3": "Know this, If you ever cross me, you won't live to see the light of day.",
+        "4": "Know this, If you ever cross me, you won't live to see the light of day.",
+        "5": "Know this, If you ever cross me, you won't live to see the light of day."
     },
 
 	"Talk Back": {
-        "1": "Were you trying to scare me, because all you did is make me angry.",
-        "2": "Your attempt at intimidation is paltry, at best. ",
-        "3": "Ah... I do not know if I offended you, but if you are mad at me just please leave the village out of it.",
-        "4": "Have I done somehting to you? I thought we were on good terms.",
-        "5": "My friend I do not know if I have done anything to make you say that but I am truly sorry if I have."
+        "1": "I hope you know, I take threats extremely seriously.",
+        "2": "It's a mistake to try and scare me.",
+        "3": "I'll be sure to keep that in mind.",
+        "4": "I'll be sure to keep that in mind.",
+        "5": "I'll be sure to keep that in mind."
     },
 
 	"Insult": {
-        "1": "Your mother was a hamster and your father smelt of elderberries.",
-        "2": "The fact that you even think you can call yourself a 'Hero' is an absolute joke.",
-		"3": "The fact that you even think you can call yourself a 'Hero' is an absolute joke.",
-        "4": "The fact that you even think you can call yourself a 'Hero' is an absolute joke.",
-        "5": "The fact that you even think you can call yourself a 'Hero' is an absolute joke."
+        "1": "I've hunted game more powerful than you.",
+        "2": "I've hunted game more powerful than you.",
+		"3": "I've hunted game more powerful than you.",
+        "4": "I've hunted game more powerful than you.",
+        "5": "I've hunted game more powerful than you."
     },
 
 	"Defend Self": {
-        "1": "Is that really the best insult you have? Pssh, pathetic.",
-        "2": "I hope you know that you are playing with fire right now.",
-        "3": "Oh... that was a pretty awful thing to say.",
-        "4": "That actually stung quite a bit.",
-        "5": "What did I do to you to deserve that? I thought we were closer than that."
+        "1": "Keep in mind, my patience is not endless.",
+        "2": "I'm not amused.",
+        "3": "Clever. That made me chuckle.",
+        "4": "HAHAHA! You've got quite the sharp tounge!",
+        "5": "HAHAHA! You've got quite the sharp tounge!"
     },
 
 	"No_More_Phrases": {
@@ -506,11 +506,11 @@
     },
 
 	"Already_Asked": {
-        "1": "You are quite the joker. Remember, you have already asked me that.",
-        "2": "You are quite the joker. Remember, you have already asked me that.",
-        "3": "You are quite the joker. Remember, you have already asked me that.",
-        "4": "You are quite the joker. Remember, you have already asked me that.",
-        "5": "You are quite the joker. Remember, you have already asked me that."
+        "1": "I do not repeat myself.",
+        "2": "I do not repeat myself.",
+        "3": "I do not repeat myself.",
+        "4": "I do not repeat myself.",
+        "5": "I do not repeat myself."
     },
 
 	"Response_No_More_Phrases": {
@@ -530,11 +530,11 @@
     },
 
 	"Response_Ask_For_Quest": {
-        "1": "Let me see...",
-        "2": "Let me see...",
-        "3": "Let me see...",
-        "4": "Let me see...",
-        "5": "Let me see..."
+        "1": "Hmm...",
+        "2": "Hmm...",
+        "3": "Hmm...",
+        "4": "Hmm...",
+        "5": "Hmm..."
     },
 
 	"Accept_Quest": {
@@ -554,67 +554,67 @@
     },
 
 	"Offer_Quest": {
-        "1": "I would like you to ACTION HERO.",
-        "2": "I would like you to ACTION HERO.",
-        "3": "I would like you to ACTION HERO.",
-        "4": "I would like you to ACTION HERO.",
-        "5": "I would like you to ACTION HERO."
+        "1": "Will you ACTION HERO for me?",
+        "2": "Will you ACTION HERO for me?",
+        "3": "Will you ACTION HERO for me?",
+        "4": "Will you ACTION HERO for me?",
+        "5": "Will you ACTION HERO for me?"
     },
 
 	"No Quest": {
-        "1": "No, there is not.",
-        "2": "No, there is not.",
-        "3": "No, there is not.",
-        "4": "No, there is not.",
-        "5": "No, there is not."
+        "1": "I have no task to offer you.",
+        "2": "I have no task to offer you.",
+        "3": "I have no task to offer you.",
+        "4": "I have no task to offer you.",
+        "5": "I have no task to offer you."
     },
 
 	"Quest_Complete": {
-        "1": "Thanks for completing my quest and helping me out.",
-        "2": "Thanks for completing my quest and helping me out.",
-        "3": "Thanks for completing my quest and helping me out.",
-        "4": "Thanks for completing my quest and helping me out.",
-        "5": "Thanks for completing my quest and helping me out."
+        "1": "Many thanks for your assistance with that quest.",
+        "2": "Many thanks for your assistance with that quest.",
+        "3": "Many thanks for your assistance with that quest.",
+        "4": "Many thanks for your assistance with that quest.",
+        "5": "Many thanks for your assistance with that quest."
     },
 
 	"Quest_Failed": {
-        "1": "You failed me. I regret having entrusted you with that task.",
-        "2": "You failed me. I regret having entrusted you with that task.",
-        "3": "You failed me. I regret having entrusted you with that task.",
-        "4": "You failed me. I regret having entrusted you with that task.",
-        "5": "You failed me. I regret having entrusted you with that task."
+        "1": "If you're going to fail, then why even bother asking to help?",
+        "2": "If you're going to fail, then why even bother asking to help?",
+        "3": "If you're going to fail, then why even bother asking to help?",
+        "4": "If you're going to fail, then why even bother asking to help?",
+        "5": "If you're going to fail, then why even bother asking to help?"
     },
 
 	"Quest_In_Progress": {
-        "1": "I hope the quest I gave you is going smoothly.",
-        "2": "I hope the quest I gave you is going smoothly.",
-        "3": "I hope the quest I gave you is going smoothly.",
-        "4": "I hope the quest I gave you is going smoothly.",
-        "5": "I hope the quest I gave you is going smoothly."
+        "1": "Did you finish that task I gave you?",
+        "2": "Did you finish that task I gave you?",
+        "3": "Did you finish that task I gave you?",
+        "4": "Did you finish that task I gave you?",
+        "5": "Did you finish that task I gave you?"
     },
 
 	"Terrible Advice": {
-        "1": "Following your advice proved detrimental to me. Next time I will think twice before acting on your suggestion.",
-        "2": "Following your advice proved detrimental to me. Next time I will think twice before acting on your suggestion.",
-        "3": "Following your advice proved detrimental to me. Next time I will think twice before acting on your suggestion.",
-        "4": "Following your advice proved detrimental to me. Next time I will think twice before acting on your suggestion.",
-        "5": "Following your advice proved detrimental to me. Next time I will think twice before acting on your suggestion."
+        "1": "Your advice was terrible. I honestly don't know why I trusted you so blindly.",
+        "2": "Your advice was terrible. I honestly don't know why I trusted you so blindly.",
+        "3": "Your advice was terrible. I honestly don't know why I trusted you so blindly.",
+        "4": "Your advice was terrible. I honestly don't know why I trusted you so blindly.",
+        "5": "Your advice was terrible. I honestly don't know why I trusted you so blindly."
     },
 
 	"Good Advice": {
-        "1": "You really do give great advice. Many thanks.",
-        "2": "You really do give great advice. Many thanks.",
-        "3": "You really do give great advice. Many thanks.",
-        "4": "You really do give great advice. Many thanks.",
-        "5": "You really do give great advice. Many thanks."
+        "1": "Your advice worked out in my favor. I appreciate it.",
+        "2": "Your advice worked out in my favor. I appreciate it.",
+        "3": "Your advice worked out in my favor. I appreciate it.",
+        "4": "Your advice worked out in my favor. I appreciate it.",
+        "5": "Your advice worked out in my favor. I appreciate it."
     },
 
 	"Exit Quest": {
-        "1": "Please wait. There is something I would like you to do for me.",
-        "2": "Please wait. There is something I would like you to do for me.",
-        "3": "Please wait. There is something I would like you to do for me.",
-        "4": "Please wait. There is something I would like you to do for me.",
-        "5": "Please wait. There is something I would like you to do for me."
+        "1": "Hold on. There is something I would like your help with.",
+        "2": "Hold on. There is something I would like your help with.",
+        "3": "Hold on. There is something I would like your help with.",
+        "4": "Hold on. There is something I would like your help with.",
+        "5": "Hold on. There is something I would like your help with."
     },
 
 	"Decline_To_Answer": {

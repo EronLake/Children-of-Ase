@@ -184,19 +184,28 @@ dialogue_point DialogueHelper::choose_conv_pt(std::vector<ConversationLogObj*> c
 		for (auto j : (*i)->get_conv_point()->tag) {  
 				//for all conversation points related to each of those tags
 			for (auto k : j->conversation_point) {
-					//only consider it if it is not already in the vector of possible replies	
+				//only consider it if it is not already in the vector of possible replies	
 				if (std::find(possible_replies.begin(), possible_replies.end(), std::make_pair(0, k)) != possible_replies.end()) {
 				}
 				else {
-						//only add it in if it fuffills the prereqs. 
-					//if(relationship->getAffinity()>= k->rel_multipliers->getAffinity() && relationship->getNotoriety() >= k->rel_multipliers->getNotoriety() && relationship->getStrength() >= k->rel_multipliers->getStrength()){
-					possible_replies.push_back(std::make_pair(0,k));
-				//}//push it with a utility of 0 for now
-				}
-			
-			
-		      }
+					//only add it in if it fuffills the prereqs. 
+				//if(relationship->getAffinity()>= k->rel_multipliers->getAffinity() && relationship->getNotoriety() >= k->rel_multipliers->getNotoriety() && relationship->getStrength() >= k->rel_multipliers->getStrength()){
+					bool allowed = true;
+					for (auto precond : Containers::conv_point_table[k->dpoint[1]]->req_preconds) {
+						int temp1 = precond->get_cost(player, other);
+						//the ori stuff means that the higher the ori the more likely it is for the hero to respond
+						//positivly to what whatever it is you are saying
+						if (precond->get_cost(player, other) != 0) {
+							allowed = false;
+						}
 
+						//}//push it with a utility of 0 for now
+					}
+					if (allowed == true)
+						possible_replies.push_back(std::make_pair(0, k));
+
+				}
+			}
 
 	    }
 		
