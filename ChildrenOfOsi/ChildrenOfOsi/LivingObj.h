@@ -10,7 +10,7 @@ public:
 	LivingObj(float x, float y, bool col);
 	LivingObj(Vector2f p_topLeft, float p_width, float p_height);
 	~LivingObj();
-	static const int health_multiplier = 30;
+	static const int health_multiplier = 60;
 	int getHealth();
 	void setHealth(int h);
 	bool getAlive();
