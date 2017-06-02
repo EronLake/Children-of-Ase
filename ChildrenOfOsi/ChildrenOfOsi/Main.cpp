@@ -778,8 +778,8 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	if (PRELOAD_TEX) {
 		tm.join();
 		t0.join();
-		t1.join();
-		t2.join();
+		//t1.join();
+		//t2.join();
 	}
 	//oya->set_busy(0);
 	//yemoja->set_busy(0);
@@ -820,6 +820,8 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 			if (iController->current_game_state != game_state::in_game) {
 				iController->current_game_state = current_game_state;
 			}
+
+			//rivObj->initialize_lines();
 
 			if (shouldExit > 0) {
 				_CrtDumpMemoryLeaks();
