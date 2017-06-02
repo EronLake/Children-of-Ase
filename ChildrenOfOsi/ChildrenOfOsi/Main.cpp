@@ -196,7 +196,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	//PartyManager* partyM = new PartyManager(gameplay_functions, Alex);
 	memManager* memM = new memManager(mLog, tBuffer);
 	TestManager* TestM = new TestManager(mLog, tBuffer);
-	//AudioManager* AudM = new AudioManager(mLog, tBuffer);
+	AudioManager* AudM = new AudioManager(mLog, tBuffer);
 	AIHelper* ai = new AIHelper();
 	AIManager* AIM = new AIManager(mLog, tBuffer, ai);
 	//AIController* AiController = new AIController();

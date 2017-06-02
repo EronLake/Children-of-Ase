@@ -519,3 +519,12 @@ void Fight::check_should_flee(Party* p) {
 		}
 	}
 }
+
+void Fight::remove_from_downed(Party* p) {
+	for (auto it = downed.begin(); it != downed.end();++it) {
+		if ((*it) == p) {
+			downed.erase(it);
+			return;
+		}
+	}
+}

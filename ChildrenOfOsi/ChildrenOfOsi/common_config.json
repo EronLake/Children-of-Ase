@@ -1,15 +1,15 @@
 {
-	"debug" : 1, /*not being used*/
-	"map_editor" : 0, /*not being used*/
-	"start_fullscreen" : false,
-	"mouse_visible" : true,
-	"load_regions" : 0, /*0==Load Config should be empty || 1==Load All || 2==Load Oasis || 3==Load Jungle*/
-	"load_map" : 0,
-	"river_collide" : 0,
-	"preload_tex" : 0,
-	"thread_physics" : 1,
-	"write_to_log" : 0,
+   "debug" : 1, /*not being used*/
+   "map_editor" : 0, /*not being used*/
+   "start_fullscreen" : false,
+   "mouse_visible" : true,
+   "load_regions" : 0, /*0==Load Config should be empty || 1==Load All || 2==Load Oasis || 3==Load Jungle*/
+   "load_map" : 0,
+   "river_collide" : 0,
+   "preload_tex" :0,
+   "thread_physics" : 1,
+   "write_to_log" : 0,
 
-	"map_zoom_in_editor" : 4, /*not being used*/
-	"map_zoom_in_game" : 1 /*not being used*/
+   "map_zoom_in_editor" : 4, /*not being used*/
+   "map_zoom_in_game" : 1 /*not being used*/
 }

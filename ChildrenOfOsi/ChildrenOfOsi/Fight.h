@@ -33,6 +33,7 @@ public:
 	void check_should_flee(Party* p);
 	int get_type() { return type; };
 	void set_plyr_win(bool b) { player_win = b; };
+	void remove_from_downed(Party* p);
 
 	static constexpr int TYPE_FIGHT = 0;
 	static constexpr int TYPE_DUEL = 1;
