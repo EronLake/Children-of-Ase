@@ -2075,6 +2075,11 @@ void DialogueController::startConversation(WorldObj* n, bool playerTalk)
 	optionsIndex = 0;
 
 	if (temp_hero) {
+
+		temp_hero->rel[player->name]->addNotoriety(50);
+		temp_hero->rel[player->name]->addStrength(50);
+		temp_hero->rel[player->name]->addAffinity(50);
+
 			remove_dialog_option("Ask_To_Duel", NotorietyIcon);
 			remove_dialog_option("Ask_To_Spar", StrengthIcon);
 			add_dialog_option("Ask_To_Duel", NotorietyIcon);
