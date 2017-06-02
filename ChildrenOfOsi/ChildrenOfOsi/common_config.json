@@ -8,8 +8,8 @@
 	"river_collide" : 1,
 	"preload_tex" : 1,
 	"thread_physics" : 1,
-	"write_to_log" : 0,
+  "write_to_log": 0,
 
-	"map_zoom_in_editor" : 4, /*not being used*/
-	"map_zoom_in_game" : 1 /*not being used*/
+   "map_zoom_in_editor" : 4, /*not being used*/
+   "map_zoom_in_game" : 1 /*not being used*/
 }

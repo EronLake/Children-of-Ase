@@ -2,6 +2,7 @@
 #include "HUD.h"
 
 bool HUD::show_active_quests = false;
+bool HUD::if_animating = false;
 int HUD::FPS = 0;
 int HUD::AVG = 0;
 
@@ -21,6 +22,9 @@ HUD::HUD()
   this->minimap_cursor_rect = new Rectangle({HUD::MINIMAP_CURSOR_X, HUD::MINIMAP_CURSOR_Y}, HUD::MINIMAP_CURSOR_WIDTH, HUD::MINIMAP_CURSOR_HEIGHT);
   this->keybind_display_rect = new Rectangle({HUD::KEYBIND_DISPLAY_X, HUD::KEYBIND_DISPLAY_Y}, HUD::KEYBIND_DISPLAY_WIDTH, HUD::KEYBIND_DISPLAY_HEIGHT);
 
+  this->ori_flame_rect = new Rectangle({ HUD::ORI_FLAME_X, HUD::ORI_FLAME_Y }, HUD::ORI_FLAME_WIDTH, HUD::ORI_FLAME_HEIGHT);
+  this->ori_crown_rect = new Rectangle({ HUD::ORI_CROWN_X, HUD::ORI_CROWN_Y }, HUD::ORI_CROWN_WIDTH, HUD::ORI_CROWN_HEIGHT);
+
   this->healthbar_empty_tex = new Texture();
   this->healthbar_full_tex = new Texture();
   this->healthbar_decor_segment_tex = new Texture();
@@ -35,6 +39,9 @@ HUD::HUD()
   this->minimap_frame_tex = new Texture();
   this->minimap_cursor_tex = new Texture();
   this->keybind_display_tex = new Texture();
+
+  this->ori_flame_tex = new Texture();
+  this->ori_crown_tex = new Texture();
 }
 
 HUD::~HUD()
@@ -53,6 +60,9 @@ HUD::~HUD()
   delete this->minimap_cursor_rect;
   delete this->keybind_display_rect;
 
+  delete this->ori_flame_rect;
+  delete this->ori_crown_rect;
+
   delete this->healthbar_empty_tex;
   delete this->healthbar_full_tex;
   delete this->healthbar_decor_segment_tex;
@@ -67,6 +77,9 @@ HUD::~HUD()
   delete this->minimap_frame_tex;
   delete this->minimap_cursor_tex;
   delete this->keybind_display_tex;
+
+  delete this->ori_flame_tex;
+  delete this->ori_crown_tex;
 }
 
 void HUD::loadTexture()
@@ -85,6 +98,9 @@ void HUD::loadTexture()
   this->minimap_frame_tex->setFile(SPRITES_PATH + "HUD_Minimap_Frame.png", 1);
   this->minimap_cursor_tex->setFile(SPRITES_PATH + "HUD_Minimap_Cursor.png", 1);
   this->keybind_display_tex->setFile(SPRITES_PATH + "HUD_KeybindDisplay.png", 1);
+
+  this->ori_flame_tex->setFile(SPRITES_PATH + "Ori_Flame.png", 4);
+  this->ori_crown_tex->setFile(SPRITES_PATH + "Ori_Crown.png", 1);
 }
 
 void HUD::setSprite()
@@ -102,6 +118,9 @@ void HUD::setSprite()
   this->minimap_frame_rect->sprite.setTexture(this->minimap_frame_tex);
   this->minimap_cursor_rect->sprite.setTexture(this->minimap_cursor_tex);
   this->keybind_display_rect->sprite.setTexture(this->keybind_display_tex);
+
+  this->ori_flame_rect->sprite.setTexture(this->ori_flame_tex);
+  this->ori_crown_rect->sprite.setTexture(this->ori_crown_tex);
 }
 
 void HUD::drawHUD(WorldObj* obj)
@@ -118,9 +137,12 @@ void HUD::drawHUD(WorldObj* obj)
 
   Hero* yemoja = Containers::hero_table["Yemoja"];
   Hero* oya = Containers::hero_table["Oya"];
+  Hero* ogun = Containers::hero_table["Ogun"];
+
   this->drawMainHUD(player);
-  this->drawMinimap(player, yemoja, oya);
+  this->drawMinimap(player, yemoja, oya, ogun);
   this->drawKeybindDisplay();
+  this->drawOri(player);
 
   // Framerate information for debugging
   if(DEBUG) {
@@ -192,11 +214,12 @@ void HUD::drawMainHUD(Player *player)
     this->portrait_rect->getWidth(), this->portrait_rect->getHeight(), this->portrait_rect->getSprite());
 }
 
-void HUD::drawMinimap(Player *player,Hero* yemoja, Hero* oya)
+void HUD::drawMinimap(Player *player,Hero* yemoja, Hero* oya, Hero* ogun)
 {
   Vector2f minimapCoordOffset;
   Vector2f minimapCoordOffset1;
   Vector2f minimapCoordOffset2;
+  Vector2f minimapCoordOffset3;
 
 
   
@@ -207,6 +230,7 @@ void HUD::drawMinimap(Player *player,Hero* yemoja, Hero* oya)
 
 	  minimapCoordOffset1.setXloc(yemoja->getX() / HUD::MAP_WIDTH * HUD::MINIMAP_WIDTH);
 	  minimapCoordOffset2.setXloc(oya->getX() / HUD::MAP_WIDTH * HUD::MINIMAP_WIDTH);
+	  minimapCoordOffset3.setXloc(ogun->getX() / HUD::MAP_WIDTH * HUD::MINIMAP_WIDTH);
   }
 
   if(player->getY() < 0.0F) minimapCoordOffset.setYloc(0.0F);
@@ -216,6 +240,7 @@ void HUD::drawMinimap(Player *player,Hero* yemoja, Hero* oya)
   
 	  minimapCoordOffset1.setYloc(yemoja->getY() / HUD::MAP_HEIGHT * HUD::MINIMAP_HEIGHT);
 	  minimapCoordOffset2.setYloc(oya->getY() / HUD::MAP_HEIGHT * HUD::MINIMAP_HEIGHT);
+	  minimapCoordOffset3.setYloc(ogun->getY() / HUD::MAP_HEIGHT * HUD::MINIMAP_HEIGHT);
   }
 
   GameWindow::drawSprite(this->minimap_rect->getX(), this->minimap_rect->getY(),
@@ -229,10 +254,35 @@ void HUD::drawMinimap(Player *player,Hero* yemoja, Hero* oya)
 	  this->minimap_cursor_rect->getWidth(), this->minimap_cursor_rect->getHeight(), this->minimap_cursor_rect->getSprite());
   GameWindow::drawSprite(this->minimap_cursor_rect->getX() + minimapCoordOffset2.getXloc(), this->minimap_cursor_rect->getY() + minimapCoordOffset2.getYloc(),
 	  this->minimap_cursor_rect->getWidth(), this->minimap_cursor_rect->getHeight(), this->minimap_cursor_rect->getSprite());
+  GameWindow::drawSprite(this->minimap_cursor_rect->getX() + minimapCoordOffset3.getXloc(), this->minimap_cursor_rect->getY() + minimapCoordOffset2.getYloc(),
+	  this->minimap_cursor_rect->getWidth(), this->minimap_cursor_rect->getHeight(), this->minimap_cursor_rect->getSprite());
 }
 
 void HUD::drawKeybindDisplay()
 {
   GameWindow::drawSprite(this->keybind_display_rect->getX(), this->keybind_display_rect->getY(),
     this->keybind_display_rect->getWidth(), this->keybind_display_rect->getHeight(), this->keybind_display_rect->getSprite());
+}
+
+void HUD::drawOri(Player* player)
+{
+	int ori_size;
+	if(player->ori < 100){
+		ori_size = player->ori;
+	}
+	else {
+		ori_size = 100;
+	}
+
+	int x_offset = this->ori_crown_rect->getWidth() / 2 - this->ori_flame_rect->getWidth() / 2;
+	int y_offset = this->ori_crown_rect->getHeight() - this->ori_flame_rect->getHeight();
+
+	GameWindow::drawSprite(this->ori_flame_rect->getX() + (x_offset - ori_size) - 20, this->ori_flame_rect->getY() + (y_offset - ori_size * 1.5),
+		this->ori_flame_rect->getWidth() + (ori_size * 2), this->ori_flame_rect->getHeight() + (ori_size * 2), 
+		this->ori_flame_rect->getSprite());
+
+		this->ori_flame_rect->get_sprite_ref()->animate();
+
+	GameWindow::drawSprite(this->ori_crown_rect->getX() + 40 - 20, this->ori_crown_rect->getY() + 100,
+		this->ori_crown_rect->getWidth() - 80, this->ori_crown_rect->getHeight() - 80, this->ori_crown_rect->getSprite());
 }

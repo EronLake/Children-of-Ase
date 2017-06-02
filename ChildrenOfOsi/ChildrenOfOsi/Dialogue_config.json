@@ -497,7 +497,80 @@
     },
 
 	"Strength_Conversation_Points": {
-	
+	"conversation_point_5" : {
+	      "name" : "Boast",
+          "icon" : "scp",
+	      "template" : "Boast",
+		  "honor" : -1,
+		  "pride": 1,
+		  "aggression": 0,
+		  "kindness": 0,
+		  "greed": 0,
+		  "recklessness": 1,
+		  "extroversion": 1,
+		  "affinity": 50,
+		  "notoriety": 50,
+		  "strength": 50,
+		  "AffEstimate": 50,
+		  "NotorEstimate": 50,
+		  "StrEstimate": 50,
+		  "req_preconds": {
+      "1": {
+        "general_type": 0,
+        "rel_type": 8,
+        "desired_rel_val": 60
+      }
+    },
+    "doer_succ_postconds": {
+      "1": {
+        "general_type": 0,
+        "rel_type": 6,
+        "utility": 5
+      },
+      "2": {
+        "general_type": 0,
+        "rel_type": 8,
+        "utility": 7
+      }
+    },
+    "doer_fail_postconds": {
+      "1": {
+        "general_type": 0,
+        "rel_type": 11,
+        "utility": 6
+      }
+    },
+    "receiver_succ_postconds": {
+      "1": {
+        "general_type": 0,
+        "rel_type": 6,
+        "utility": 8
+      },
+      "2": {
+        "general_type": 0,
+        "rel_type": 8,
+        "utility": 5
+      }
+    },
+    "receiver_fail_postconds": {
+      "1": {
+        "general_type": 0,
+        "rel_type": 9,
+        "utility": 1
+      },
+      "2": {
+        "general_type": 0,
+        "rel_type": 10,
+        "utility": 1
+      },
+      "3": {
+        "general_type": 0,
+        "rel_type": 11,
+        "utility": 1
+      }
+    }
+
+     },
 	 "conversation_point_2" : {
 	      "name" : "Ask_To_Spar",
           "icon" : "scp",
@@ -519,7 +592,7 @@
 			  "1": {
 				"general_type": 0,
 				"rel_type": 10,
-				"desired_rel_val": 85
+				"desired_rel_val": 90
 			  },
 			  "2": {
 				"general_type": 0,
@@ -529,7 +602,7 @@
 			  "3": {
 				"general_type": 0,
 				"rel_type": 11,
-				"desired_rel_val": 75
+				"desired_rel_val": 85
 			  }
 		}
      },
@@ -611,17 +684,22 @@
       }
     },
     "receiver_succ_postconds": {
-      "1": {
-        "general_type": 0,
-        "rel_type": 7,
-        "utility": 5
-      },
-      "2": {
-        "general_type": 0,
-        "rel_type": 8,
-        "utility": 5
-      }
-    },
+		"1": {
+			"general_type": 0,
+				"rel_type" : 10,
+				"utility" : 1
+		},
+		"2" : {
+			"general_type": 0,
+			"rel_type" : 6,
+			"utility" : 10
+		},
+		"3" : {
+			"general_type": 0,
+			"rel_type" : 8,
+			"utility" : 5
+		}
+	},
     "receiver_fail_postconds": {
       "1": {
         "general_type": 0,
@@ -871,9 +949,9 @@
     },
 
 	"reply_point_11" : {
-	      "name" : "Boast Back",
+	      "name" : "Boast In Response",
           "icon" : "srp",
-	      "template" : "Boast Back",
+	      "template" : "Boast In Response",
 		  "corresponding_conv_point": "",
 		  "hero_reply": "0",
 		  "honor" : 0,
@@ -892,9 +970,9 @@
     },
 
 	"reply_point_12" : {
-	      "name" : "Intimidate Back",
+	      "name" : "Intimidate In Response",
           "icon" : "srp",
-	      "template" : "Intimidate Back",
+	      "template" : "Intimidate In Response",
 		  "corresponding_conv_point": "",
 		  "hero_reply": "0",
 		  "honor" : 0,
@@ -913,9 +991,9 @@
     },
 
 	"reply_point_13" : {
-	      "name" : "Compliment Back",
+	      "name" : "Compliment In Response",
           "icon" : "srp",
-	      "template" : "Compliment Back",
+	      "template" : "Compliment In Response",
 		  "corresponding_conv_point": "",
 		  "hero_reply": "0",
 		  "honor" : 0,
@@ -933,9 +1011,9 @@
 		  "StrEstimate": 50
     },
 	"reply_point_14" : {
-	      "name" : "Insult Back",
+	      "name" : "Insult In Response",
           "icon" : "srp",
-	      "template" : "Insult Back",
+	      "template" : "Insult In Response",
 		  "corresponding_conv_point": "",
 		  "hero_reply": "0",
 		  "honor" : 0,
@@ -954,9 +1032,9 @@
     },
 
 	"reply_point_15" : {
-	      "name" : "Offer Praise Back",
+	      "name" : "Offer Praise In Response",
           "icon" : "srp",
-	      "template" : "Offer Praise Back",
+	      "template" : "Offer Praise In Response",
 		  "corresponding_conv_point": "",
 		  "hero_reply": "0",
 		  "honor" : 0,
@@ -1069,26 +1147,26 @@
               "1": {
                 "general_type": 0,
                 "rel_type": 7,
-                "utility": 3
+                "utility": 5
               }
           },
           "doer_fail_postconds": {
               "1": {
                 "general_type": 0,
                 "rel_type": 10,
-                "utility": 5
+                "utility": 1
               }
           },
           "receiver_succ_postconds": {
               "1": {
                 "general_type": 0,
                 "rel_type": 7,
-                "utility": 5
+                "utility": 8
               },
               "2": {
                 "general_type": 0,
                 "rel_type": 8,
-                "utility": 5
+                "utility": 3
               }
           },
           "receiver_fail_postconds": {

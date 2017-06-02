@@ -520,6 +520,10 @@ void ObjConfig::set_world_obj(vector<WorldObj*>* recVec, ChildrenOfOsi* gameplay
 	std::string name, std::string tex_file, int frame_num, float bodyx1, float bodyx2, float bodyy1, float bodyy2, int region)
 {
 
+	if (tex_file == "") {
+		int i = 1;
+	}
+
 	LOG(Containers::texture_table[tex_file]);
 	if (Containers::texture_table[tex_file]) {
 

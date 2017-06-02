@@ -7,6 +7,13 @@
 #include "ActionExecFunctions.h"
 #include "Tutorial.h"
 
+
+
+//to keep you from repeatedly talking to shrines 
+bool DialogueController::talked_to_shrine_o = false;
+bool DialogueController::talked_to_shrine_j = false;
+bool DialogueController::talked_to_shrine_m = false;
+
 Player* DialogueController::player;
 WorldObj* DialogueController::other; //the npc speaking with the player
 int DialogueController::state = 0;
@@ -228,6 +235,29 @@ void DialogueController::player_choose_babalawo()
 /*Is called instead of player_choose_soldier() and player_choose() functions if the player interacts with shrine.*/
 void DialogueController::shrine_interact()
 {
+	if (other->getName().find("Oasis") != string::npos) 
+	{
+		if (DialogueController::talked_to_shrine_o) 
+		{
+			state = 0;
+			return;
+		}
+	}else if (other->getName().find("Jungle") != string::npos)
+	{
+		if (DialogueController::talked_to_shrine_j)
+		{
+			state = 0;
+			return;
+		}
+	}else if (other->getName().find("Mountain") != string::npos)
+	{
+		if (DialogueController::talked_to_shrine_m)
+		{
+			state = 0;
+			return;
+		}
+	}
+
 	dialogue_point dpoint;
 	switch (shrine_talk_counter) {
 	case 0:
@@ -241,6 +271,32 @@ void DialogueController::shrine_interact()
 		break;
 	case 3:
 		dpoint = {"Shrine Talk 4","Shrine Talk 4"};
+
+		//give shrine blessing
+		player->addHealth(300);//regenerate to full health
+		player->ori+= 30;//boost ori by 30
+		//Containers::hero_table["Shango"]->setAse;//regenerate to full ase
+
+		for (auto hero : Containers::hero_table) 
+		{
+			if (hero.second->name != SHANGO) {
+				if (other->getName().find("Oasis") != string::npos) {
+					hero.second->rel[SHANGO]->addAffinity(10);
+					DialogueController::talked_to_shrine_o = true;
+
+				}
+				else if ((other->getName().find("Jungle")) != string::npos) {
+					hero.second->rel[SHANGO]->addNotoriety(10);
+					DialogueController::talked_to_shrine_j = true;
+				}
+				else if ((other->getName().find("Mountain")) != string::npos) {
+					hero.second->rel[SHANGO]->addStrength(10);
+					DialogueController::talked_to_shrine_m = true;
+					player->can_activate_ex = 1;
+				}
+			}	
+		}
+		
 		break;
 	}
 	
@@ -391,7 +447,8 @@ void DialogueController::PlayerConversationPoint()
 				|| player_conv_point_choice == "Advise To Conquer" || player_conv_point_choice == "Advise To Send Peace Offering To" ||
 				player_conv_point_choice == "Advise To Ally With" || player_conv_point_choice == "Intimidate")
 			{ 
-				//accepted_action = check_acceptance(player, temp_hero);
+				PlayerActExecFunctions::execute_start(player_conv_point_choice, temp_hero);
+				accepted_action = check_acceptance(player, temp_hero);
 				if (accepted_action) {
 					Containers::conv_point_table[player_conv_point_choice]->apply_postconditions(true, player, temp_hero);
 				}
@@ -405,7 +462,7 @@ void DialogueController::PlayerConversationPoint()
 			//the ori variable is to increase the chance of teaching based on
 			//how high the ori is 
 			if (temp_hero->rel[player->name]->getAffinity() + (player->ori / 10) >= 60 && 
-				temp_hero->rel[player->name]->getStrength() + (player->ori / 10) >= 50)
+				temp_hero->rel[player->name]->getStrength() + (player->ori / 10) >= 60)
 				accepted_action = true;
 			else
 				accepted_action = false;
@@ -707,7 +764,33 @@ void DialogueController::PlayerResponse()
 			}
 
 		}
+		if (choice[1] == "Boast In Response" || choice[1] == "Intimidate In Response" || choice[1] == "Insult In Response" || choice[1] == "Compliment In Response" || choice[1] == "Offer Praise In Response") {
+			std::string::size_type reply_end = choice[1].find_last_of(' ');
+			std::string act_name = choice[1].substr(0, reply_end);
+			reply_end = act_name.find_last_of(' ');
+			act_name = choice[1].substr(0, reply_end);
 
+			bool react_positively = true; 
+			for (auto precond : Containers::conv_point_table[act_name]->req_preconds) {
+				int temp1 = precond->get_cost(temp_hero, player);
+				//the ori stuff means that the higher the ori the more likely it is for the hero to respond
+				//positivly to what whatever it is you are saying
+				if (precond->get_cost(temp_hero, player) - (player->ori / 10) <= 0) {
+					std::cout << "a string: " << precond->get_cost(temp_hero, player) << std::endl;
+				}
+				else {
+					react_positively = false;
+				}
+				if (react_positively) {
+					Containers::conv_point_table[act_name]->apply_postconditions(true,player,temp_hero);
+				}
+				else {
+					Containers::conv_point_table[act_name]->apply_postconditions(false, player, temp_hero);
+				}
+
+				
+			}
+		}
 		//get a sentence to say based on player's reply option selection
 		std::string reply_pt_sentence = dialogue.gen_dialog(choice, player);
 
@@ -942,7 +1025,7 @@ void DialogueController::otherConversationPoint(dialogue_point line)
 	
 
 
-	/*skips the player's reply point if the npc does not say a conversationwwwwwwwwwwwwwwwwdwwwwwwwwwwwwwwssssssssssssssssssswdssssssssssssssssawasae
+	/*skips the player's reply point if the npc does not say a conversation
 	point, if the npc tells the player that they already asked them something,
 	if an npc runs out of relevant conversation points to say, or if an NPC tells
 	the player that they do not have a quest for them.
@@ -1278,6 +1361,7 @@ void DialogueController::otherResponse(std::string info, std::string hero_topic)
 				std::string reply_pt_sentence = dialogue.gen_dialog(diog_pt, temp_hero);
 				replace_all(reply_pt_sentence, "HERO", curr_hero_topic);
 				message = check_if_known(reply_pt_sentence, "");
+				dynamic_cast<Hero*>(other)->rel[1]->addStrength(10);
 				//state = 12;
 				
 			}
@@ -1298,7 +1382,7 @@ void DialogueController::otherResponse(std::string info, std::string hero_topic)
 
 		else if (replyString == "Accept Bribe") {
 			//calls action start if the question is asked at all
-			PlayerActExecFunctions::execute_start("Bribe", temp_hero);
+			//PlayerActExecFunctions::execute_start("Bribe", temp_hero);
 
 			//check if I want to accept
 			if (accepted_action) {
@@ -1322,7 +1406,7 @@ void DialogueController::otherResponse(std::string info, std::string hero_topic)
 
 		else if (replyString == "Defend Self") {
 			//calls action start if the question is asked at all
-			PlayerActExecFunctions::execute_start("Insult", temp_hero);
+			//PlayerActExecFunctions::execute_start("Insult", temp_hero);
 
 			//check if I want to accept
 			if (accepted_action) {
@@ -1346,7 +1430,7 @@ void DialogueController::otherResponse(std::string info, std::string hero_topic)
 
 		else if (replyString == "Thank") {
 			//calls action start if the question is asked at all
-			PlayerActExecFunctions::execute_start("Compliment", temp_hero);
+			//PlayerActExecFunctions::execute_start("Compliment", temp_hero);
 
 			//check if I want to accept
 			if (accepted_action) {
@@ -1369,7 +1453,7 @@ void DialogueController::otherResponse(std::string info, std::string hero_topic)
 		}
 		else if (replyString == "Congratulate") {
 			//calls action start if the question is asked at all
-			PlayerActExecFunctions::execute_start("Boast", temp_hero);
+			//PlayerActExecFunctions::execute_start("Boast", temp_hero);
 
 			//check if I want to accept
 			if (accepted_action) {
@@ -1392,7 +1476,7 @@ void DialogueController::otherResponse(std::string info, std::string hero_topic)
 		}
 		else if (replyString == "Accept Plea") {
 			//calls action start if the question is asked at all
-			PlayerActExecFunctions::execute_start("Grovel", temp_hero);
+			//PlayerActExecFunctions::execute_start("Grovel", temp_hero);
 
 			//check if I want to accept
 			if (accepted_action) {
@@ -1415,7 +1499,7 @@ void DialogueController::otherResponse(std::string info, std::string hero_topic)
 		}
 		else if (replyString == "Talk Back") {
 			//calls action start if the question is asked at all
-			PlayerActExecFunctions::execute_start("Intimidate", temp_hero);
+			//PlayerActExecFunctions::execute_start("Intimidate", temp_hero);
 
 			//check if I want to accept
 			if (accepted_action) {
@@ -1865,6 +1949,8 @@ void DialogueController::other_response_babalawo(std::string info, std::string h
 	dialogue_point line = dialogue.choose_reply_pt(info, optionsIndex, curr_conversation_log, temp_hero);
 	replyString = line[ConvPointName];
 
+	//
+
 	/*avoids setting a topic when npc replies with "You already asked me that"
 	or if npc says any other special case reply. Special case replies are
 	typically vectors with a size of only 2.*/
@@ -1946,6 +2032,14 @@ void DialogueController::other_response_babalawo(std::string info, std::string h
 
 
 	message = other->getName() + ": " + reply_pt_sentence + "\n\n";
+	/*if(replyString == "Response Ask For Divination"){
+	      if(some_check)
+			  //give shrine blessing
+			player->addHealth(300);//regenerate to full he
+			player->ori+= 20;//boost ori by 30
+	}
+	else if(replyString == "Response Inquire About Ifa"){
+	}*/
 
 	state = 1;
 	//otherConversationPoint(line);
@@ -2799,7 +2893,14 @@ bool DialogueController::check_advice_acceptance(Player* p, Hero* npc) {
 
 }
 bool DialogueController::check_acceptance(Player* p, Hero* npc) {
+	std::string::size_type name_end = p->cur_action->getName().find_last_of('_');
+	std::string act_name = p->cur_action->getName().substr(0, name_end);
+
 	int range_cap = npc->get_range_cap(p->cur_action);
+	for (auto i : curr_conversation_log) {
+		if (i->get_who() == SHANGO && i->get_conv_point()->get_name() == act_name)
+			range_cap = range_cap / 2;
+	}
 	int result = rand() % 101;//get random number between 0 and 100
 	if (result <= range_cap)
 	{

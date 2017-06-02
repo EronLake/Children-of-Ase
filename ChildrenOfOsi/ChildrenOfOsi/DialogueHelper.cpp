@@ -238,7 +238,7 @@ dialogue_point DialogueHelper::choose_conv_pt(std::vector<ConversationLogObj*> c
 		//for every reply
 	for (auto itor = possible_replies.begin(); itor != possible_replies.end(); itor++) {
 		//+ relationship_appeal(itor->second, relationship)
-			appeal = personality_appeal(itor->second, personality);
+			appeal = personality_appeal(itor->second, personality) + relationship_appeal(itor->second, relationship);
 				temp.push_back(make_pair(appeal, itor->second));//push onto temp vector with appeal
 	}
 	possible_replies = temp;//replace possible replies with temp
@@ -352,11 +352,11 @@ std::vector<dialogue_point> DialogueHelper::get_possible_reply_pts(std::string p
 		}
 	}
 	else {
-		reply.push_back({ "Boast Back", "Boast Back","","","1","0" });
-		reply.push_back({ "Intimidate Back", "Intimidate  Back","","","1","0" });
-		reply.push_back({ "Compliment Back", "Compliment Back","","","1","0" });
-		reply.push_back({ "Offer Praise Back", "Offer Praise Back","","","1","0" });
-		reply.push_back({ "Insult Back", "Insult Back","","","1","0" });
+		reply.push_back({ "Boast In Response", "Boast In Response","","","1","0" });
+		reply.push_back({ "Intimidate In Response", "Intimidate In Response","","","1","0" });
+		reply.push_back({ "Compliment In Response", "Compliment In Response","","","1","0" });
+		reply.push_back({ "Offer Praise In Response", "Offer Praise In Response","","","1","0" });
+		reply.push_back({ "Insult In Response", "Insult In Response","","","1","0" });
 	}
 	if (point.find(" _Quest", 0) != string::npos) {
 		/*reply.push_back({ "Accept_Quest", "Accept_Quest","","","1" });
