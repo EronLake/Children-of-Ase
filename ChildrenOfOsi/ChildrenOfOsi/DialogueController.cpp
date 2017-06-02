@@ -364,7 +364,8 @@ void DialogueController::PlayerConversationPoint()
 				player_conv_point_choice == "Insult" || player_conv_point_choice == "Boast" || player_conv_point_choice == "Advise To Fight"
 				|| player_conv_point_choice == "Advise To Conquer" || player_conv_point_choice == "Advise To Send Peace Offering To" ||
 				player_conv_point_choice == "Advise To Ally With" || player_conv_point_choice == "Intimidate")
-			{
+			{ 
+				//accepted_action = check_acceptance(player, temp_hero);
 				if (accepted_action) {
 					Containers::conv_point_table[player_conv_point_choice]->apply_postconditions(true, player, temp_hero);
 				}
@@ -2688,6 +2689,19 @@ bool DialogueController::check_advice_acceptance(Player* p, Hero* npc) {
 	int range_cap = 60 + (npc->rel[p->name]->getNotoriety() - 70) + p->ori/10;
 	int result = rand() % 101;//get random number between 0 and 100
 	if(result <= range_cap)
+	{
+		return true;
+	}
+	else
+	{
+		return false;
+	}
+
+}
+bool DialogueController::check_acceptance(Player* p, Hero* npc) {
+	int range_cap = npc->get_range_cap(p->cur_action);
+	int result = rand() % 101;//get random number between 0 and 100
+	if (result <= range_cap)
 	{
 		return true;
 	}

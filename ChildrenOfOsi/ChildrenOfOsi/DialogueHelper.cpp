@@ -89,6 +89,18 @@ int DialogueHelper::personality_appeal(ConversationPoint* point, Personality* pe
 	(personality->getRecklessness() *point->multipliers->getRecklessness())+
 	(personality->getExtroversion() *point->multipliers->getExtroversion()));
 };
+int DialogueHelper::relationship_appeal(ConversationPoint* point, Relationship* my_rel) {
+	int appeal = 0;
+	int str_mult = point->rel_multipliers->getAffinity();
+	int aff_mult = point->rel_multipliers->getAffinity();
+	int noto_mult = point->rel_multipliers->getAffinity();
+
+	appeal += my_rel->getStrength() * str_mult;
+	appeal += my_rel->getAffinity() * aff_mult;
+	appeal += my_rel->getNotoriety() * noto_mult;
+	return appeal;
+}
+
 
 /*Runs the heuristic that npc's use to select a conversation point to say.*/
 dialogue_point DialogueHelper::choose_conv_pt(std::vector<ConversationLogObj*> curr_conversation_log, Hero* other,Player* player)
@@ -177,8 +189,9 @@ dialogue_point DialogueHelper::choose_conv_pt(std::vector<ConversationLogObj*> c
 				}
 				else {
 						//only add it in if it fuffills the prereqs. 
-					if(relationship->getAffinity()>= k->rel_multipliers->getAffinity() && relationship->getNotoriety() >= k->rel_multipliers->getNotoriety() && relationship->getStrength() >= k->rel_multipliers->getStrength()){
-					possible_replies.push_back(std::make_pair(0,k));}//push it with a utility of 0 for now
+					//if(relationship->getAffinity()>= k->rel_multipliers->getAffinity() && relationship->getNotoriety() >= k->rel_multipliers->getNotoriety() && relationship->getStrength() >= k->rel_multipliers->getStrength()){
+					possible_replies.push_back(std::make_pair(0,k));
+				//}//push it with a utility of 0 for now
 				}
 			
 			
@@ -224,6 +237,7 @@ dialogue_point DialogueHelper::choose_conv_pt(std::vector<ConversationLogObj*> c
 	//prioritize, possible replies vector
 		//for every reply
 	for (auto itor = possible_replies.begin(); itor != possible_replies.end(); itor++) {
+		//+ relationship_appeal(itor->second, relationship)
 			appeal = personality_appeal(itor->second, personality);
 				temp.push_back(make_pair(appeal, itor->second));//push onto temp vector with appeal
 	}
