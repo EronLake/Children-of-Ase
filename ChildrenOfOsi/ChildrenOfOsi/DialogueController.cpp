@@ -19,6 +19,7 @@ constexpr int ConvPointName = 1;
 constexpr int CorrespondingConvPt = 2;
 constexpr int Topic = 3;
 constexpr int IsSelectable = 4;
+constexpr int IsHeroReply = 5;
 
 /*Used in an attempt to clarify what indices of the
 possible reply and conversation point vectors represent
@@ -122,8 +123,11 @@ point*/
 void DialogueController::PlayerChoose()
 {
 	Hero* temp_hero = CheckClass::isHero(other);
-	if (temp_hero)
+	if (temp_hero) {
 		player->filter_move_to(temp_hero);
+		//set_selectable(false,"Bribe",AffinityIcon);
+		unselectable_to_bottom();
+	}
 
 	options = dialogue.get_possible_conv_pts();
 	if (temp_hero) {
@@ -141,6 +145,27 @@ void DialogueController::PlayerChoose()
 			set_selectable(true, "Ask_To_Spar", StrengthIcon);
 		else
 			set_selectable(false, "Ask_To_Spar", StrengthIcon);
+
+		if(temp_hero->getVillage()->get_alliance() == player->getVillage()->get_alliance())
+			set_selectable(true, "Recruit_For_Party", StrengthIcon);
+		else
+			set_selectable(false, "Recruit_For_Party", StrengthIcon);
+
+		if (temp_hero->rel[player->name]->getAffinity() + (player->ori / 10) >= 60 &&
+			temp_hero->rel[player->name]->getStrength() + (player->ori / 10) >= 50)
+			set_selectable(true, "Request_Teaching", StrengthIcon);
+		else
+			set_selectable(false, "Request_Teaching", StrengthIcon);
+
+		if (temp_hero->rel[player->name]->getAffinity() >= 85)
+			set_selectable(true, "Ask_To_Form_Alliance", AffinityIcon);
+		else
+			set_selectable(false, "Ask_To_Form_Alliance", AffinityIcon);
+
+		unselectable_to_bottom();
+		options = dialogue.get_possible_conv_pts();
+
+
 	}
 
 	if (first_call) {
@@ -1081,7 +1106,7 @@ void DialogueController::otherResponse(std::string info, std::string hero_topic)
 		return;
 	}
 
-	if (state != 8 && state != 12) {
+	if (state != 8 && state != 12 && state != 7) {
 		dialogue_point line = dialogue.choose_reply_pt(info, optionsIndex, curr_conversation_log,temp_hero);
 		replyString = line[ConvPointName];
 
@@ -1282,6 +1307,7 @@ void DialogueController::otherResponse(std::string info, std::string hero_topic)
 				std::string reply_pt_sentence = dialogue.gen_dialog(diog_pt, temp_hero);
 				replace_all(reply_pt_sentence, "HERO", curr_hero_topic);
 				message = check_if_known(reply_pt_sentence, "");
+				PlayerActExecFunctions::execute_end(true);
 			}
 			else {
 				/////////////need to be changed to correct calls/dialog if not accepted///////////////////
@@ -1289,6 +1315,7 @@ void DialogueController::otherResponse(std::string info, std::string hero_topic)
 				std::string reply_pt_sentence = dialogue.gen_dialog_negative(diog_pt, temp_hero);
 				replace_all(reply_pt_sentence, "HERO", curr_hero_topic);
 				message = check_if_known(reply_pt_sentence, "");
+				PlayerActExecFunctions::execute_end(false);
 			}
 			state = 3;
 			otherConversationPoint(line);
@@ -1304,6 +1331,7 @@ void DialogueController::otherResponse(std::string info, std::string hero_topic)
 				std::string reply_pt_sentence = dialogue.gen_dialog(diog_pt, temp_hero);
 				replace_all(reply_pt_sentence, "HERO", curr_hero_topic);
 				message = check_if_known(reply_pt_sentence, "");
+				PlayerActExecFunctions::execute_end(true);
 			}
 			else {
 				/////////////need to be changed to correct calls/dialog if not accepted///////////////////
@@ -1311,6 +1339,7 @@ void DialogueController::otherResponse(std::string info, std::string hero_topic)
 				std::string reply_pt_sentence = dialogue.gen_dialog_negative(diog_pt, temp_hero);
 				replace_all(reply_pt_sentence, "HERO", curr_hero_topic);
 				message = check_if_known(reply_pt_sentence, "");
+				PlayerActExecFunctions::execute_end(false);
 			}
 			state = 3;
 			otherConversationPoint(line);
@@ -1326,6 +1355,7 @@ void DialogueController::otherResponse(std::string info, std::string hero_topic)
 				std::string reply_pt_sentence = dialogue.gen_dialog(diog_pt, temp_hero);
 				replace_all(reply_pt_sentence, "HERO", curr_hero_topic);
 				message = check_if_known(reply_pt_sentence, "");
+				PlayerActExecFunctions::execute_end(true);
 			}
 			else {
 				/////////////need to be changed to correct calls/dialog if not accepted///////////////////
@@ -1333,6 +1363,7 @@ void DialogueController::otherResponse(std::string info, std::string hero_topic)
 				std::string reply_pt_sentence = dialogue.gen_dialog_negative(diog_pt, temp_hero);
 				replace_all(reply_pt_sentence, "HERO", curr_hero_topic);
 				message = check_if_known(reply_pt_sentence, "");
+				PlayerActExecFunctions::execute_end(true);
 			}
 			state = 3;
 			otherConversationPoint(line);
@@ -1347,6 +1378,7 @@ void DialogueController::otherResponse(std::string info, std::string hero_topic)
 				std::string reply_pt_sentence = dialogue.gen_dialog(diog_pt, temp_hero);
 				replace_all(reply_pt_sentence, "HERO", curr_hero_topic);
 				message = check_if_known(reply_pt_sentence, "");
+				PlayerActExecFunctions::execute_end(true);
 			}
 			else {
 				/////////////need to be changed to correct calls/dialog if not accepted///////////////////
@@ -1354,6 +1386,7 @@ void DialogueController::otherResponse(std::string info, std::string hero_topic)
 				std::string reply_pt_sentence = dialogue.gen_dialog_negative(diog_pt, temp_hero);
 				replace_all(reply_pt_sentence, "HERO", curr_hero_topic);
 				message = check_if_known(reply_pt_sentence, "");
+				PlayerActExecFunctions::execute_end(false);
 			}
 			state = 3;
 			otherConversationPoint(line);
@@ -1368,6 +1401,7 @@ void DialogueController::otherResponse(std::string info, std::string hero_topic)
 				std::string reply_pt_sentence = dialogue.gen_dialog(diog_pt, temp_hero);
 				replace_all(reply_pt_sentence, "HERO", curr_hero_topic);
 				message = check_if_known(reply_pt_sentence, "");
+				PlayerActExecFunctions::execute_end(true);
 			}
 			else {
 				/////////////need to be changed to correct calls/dialog if not accepted///////////////////
@@ -1375,6 +1409,7 @@ void DialogueController::otherResponse(std::string info, std::string hero_topic)
 				std::string reply_pt_sentence = dialogue.gen_dialog_negative(diog_pt, temp_hero);
 				replace_all(reply_pt_sentence, "HERO", curr_hero_topic);
 				message = check_if_known(reply_pt_sentence, "");
+				PlayerActExecFunctions::execute_end(false);
 			}
 			state = 3;
 			otherConversationPoint(line);
@@ -1389,6 +1424,7 @@ void DialogueController::otherResponse(std::string info, std::string hero_topic)
 				std::string reply_pt_sentence = dialogue.gen_dialog(diog_pt, temp_hero);
 				replace_all(reply_pt_sentence, "HERO", curr_hero_topic);
 				message = check_if_known(reply_pt_sentence, "");
+				PlayerActExecFunctions::execute_end(true);
 			}
 			else {
 				/////////////need to be changed to correct calls/dialog if not accepted///////////////////
@@ -1396,9 +1432,32 @@ void DialogueController::otherResponse(std::string info, std::string hero_topic)
 				std::string reply_pt_sentence = dialogue.gen_dialog_negative(diog_pt, temp_hero);
 				replace_all(reply_pt_sentence, "HERO", curr_hero_topic);
 				message = check_if_known(reply_pt_sentence, "");
+				PlayerActExecFunctions::execute_end(false);
 			}
 			state = 3;
 			otherConversationPoint(line);
+		}
+		else if (replyString == "Response_Recruit_For_Party") {
+			if (temp_hero->getVillage()->get_alliance() == player->getVillage()->get_alliance()) {
+				player->getVillage()->barracks->addToParty(temp_hero, false);
+				//soldier->getParty()->setAlliance(player->getParty()->getAlliance());
+				temp_hero->setCurrentLeader(player);
+				temp_hero->setParty(player->getParty());
+				std::string reply_pt_sentence = dialogue.gen_dialog(line, temp_hero);
+
+				//adds all of the hero's party members to the player's party
+				std::vector<Soldier*> heroes_soldiers = temp_hero->getParty()->getMembers();
+				for (int i = 0; i < heroes_soldiers.size(); ++i) {
+					player->getVillage()->barracks->addToParty(heroes_soldiers[i], false);
+					heroes_soldiers[i]->setCurrentLeader(player);
+					heroes_soldiers[i]->setParty(player->getParty());
+				}
+
+			}
+			else { //they will say no if not part of same alliance as you
+				std::string reply_pt_sentence = dialogue.gen_dialog_negative(line, temp_hero);
+			}
+			state = 7;
 		}
 		else {
 			state = 3;
@@ -2016,17 +2075,55 @@ void DialogueController::startConversation(WorldObj* n, bool playerTalk)
 	std::string start_message = "";
 	optionsIndex = 0;
 
+	if (temp_hero) {
+			remove_dialog_option("Ask_To_Duel", NotorietyIcon);
+			remove_dialog_option("Ask_To_Spar", StrengthIcon);
+			add_dialog_option("Ask_To_Duel", NotorietyIcon);
+			add_dialog_option("Ask_To_Spar", StrengthIcon);
+
+			if (temp_hero->rel[player->name]->getAffinity() <= 30 && temp_hero->rel[player->name]->getStrength() <= 60)
+				set_selectable(true, "Ask_To_Duel", NotorietyIcon);
+			else
+				set_selectable(false, "Ask_To_Duel", NotorietyIcon);
+
+			if (temp_hero->rel[player->name]->getStrength() >= 50 && temp_hero->rel[player->name]->getAffinity() <= 85 && temp_hero->rel[player->name]->getNotoriety() <= 75)
+				set_selectable(true, "Ask_To_Spar", StrengthIcon);
+			else
+				set_selectable(false, "Ask_To_Spar", StrengthIcon);
+
+			if (temp_hero->getVillage()->get_alliance() == player->getVillage()->get_alliance())
+				set_selectable(true, "Recruit_For_Party", StrengthIcon);
+			else
+				set_selectable(false, "Recruit_For_Party", StrengthIcon);
+
+			if (temp_hero->rel[player->name]->getAffinity() + (player->ori / 10) >= 60 &&
+				temp_hero->rel[player->name]->getStrength() + (player->ori / 10) >= 50)
+				set_selectable(true, "Request_Teaching", StrengthIcon);
+			else
+				set_selectable(false, "Request_Teaching", StrengthIcon);
+
+			if (temp_hero->rel[player->name]->getAffinity() >= 85)
+				set_selectable(true, "Ask_To_Form_Alliance", NotorietyIcon);
+			else
+				set_selectable(false, "Ask_To_Form_Alliance", NotorietyIcon);
+
+			unselectable_to_bottom();
+			options = dialogue.get_possible_conv_pts();
+
+
+		
+		player->filter_move_to(temp_hero);
+		unselectable_to_bottom();
+		//if (first_buff) {
+			//temp_hero->rel[player->name]->addNotoriety(50);
+			//temp_hero->rel[player->name]->addStrength(50);
+			//temp_hero->rel[player->name]->addAffinity(50);
+		//}
+		//first_buff = false;
+	}
 	/*handles what the greeting phrase should be based on whether or not the player
 	has taken or completed a quest from the npc*/
 		if (temp_hero) {
-      player->filter_move_to(temp_hero);
-      /*if (first_buff) {
-      temp_hero->rel[player->name]->addNotoriety(50);
-      temp_hero->rel[player->name]->addStrength(50);
-      temp_hero->rel[player->name]->addAffinity(50);
-      }
-      first_buff = false;*/
-
 			Planner* planner = AIController::get_plan(CheckClass::isHero(other)->name);
 			bool player_doing_quest = false;
 			bool quest_complete = false;
@@ -2035,7 +2132,8 @@ void DialogueController::startConversation(WorldObj* n, bool playerTalk)
 				if (planner->quests_given[i]->getDoer()->name == SHANGO && planner->quests_given[i]->executed == false) {
 					player_doing_quest = true;
 				}
-				if (planner->quests_given[i]->getDoer()->name == SHANGO && planner->quests_given[i]->executed == true) {
+				if (planner->quests_given[i]->getDoer()->name == SHANGO && (planner->quests_given[i]->executed == true || 
+					(player->quest_status[temp_hero->name] == Player::SUCC_QUEST || player->quest_status[temp_hero->name] == Player::SUCC_QUEST))) {
 					quest_complete = true;
 				}
 			}
@@ -2045,7 +2143,7 @@ void DialogueController::startConversation(WorldObj* n, bool playerTalk)
 					player->quest_status[temp_hero->name] = Player::NOT_QUEST;
 					quest_complete = false;
 					for (int i = 0; i < planner->quests_given.size();) {
-						if (planner->quests_given[i]->getDoer()->name == SHANGO && planner->quests_given[i]->executed == true)
+						if (planner->quests_given[i]->getDoer()->name == SHANGO /*&& planner->quests_given[i]->executed == true*/)
 							planner->quests_given.erase(planner->quests_given.begin() + i);//erase from npc's quests log
 						else
 							++i;
@@ -2064,7 +2162,7 @@ void DialogueController::startConversation(WorldObj* n, bool playerTalk)
 					player->quest_status[temp_hero->name] = Player::NOT_QUEST;
 					quest_complete = false;
 					for (int i = 0; i < planner->quests_given.size();) {
-						if (planner->quests_given[i]->getDoer()->name == SHANGO && planner->quests_given[i]->executed == true)
+						if (planner->quests_given[i]->getDoer()->name == SHANGO /*&& planner->quests_given[i]->executed == true*/)
 							planner->quests_given.erase(planner->quests_given.begin() + i);
 						else
 							++i;
@@ -2575,14 +2673,14 @@ void DialogueController::move_to_selectable_down() {
 	if (temp_hero && state != 2) {
 		for (int i = 0; (DialogueController::scroll_control + i) < DialogueController::getOptions().size(); ++i) {
 			if (DialogueController::getOptions()[DialogueController::scroll_control + i][4] == "1") {
-				if (i != 0 || (DialogueController::getOptions().size() == 2 && DialogueController::getOptions()[1][4] == "1")) {
+				if ((i != 0) || (DialogueController::getOptions().size() == 2 && DialogueController::getOptions()[1][4] == "1")) {
 					scroll_counter++;
 					break;
 				}
 			}
 			else {
 				scroll_counter++;
-				if (i == DialogueController::getOptions().size() - 2)
+				if (i == DialogueController::getOptions().size() - 1)
 					scroll_counter = 0;
 			}
 		}
@@ -2597,7 +2695,7 @@ void DialogueController::move_to_selectable_down() {
 			}
 			else {
 				scroll_counter++;
-				if (i == DialogueController::getOptions().size() - 2)
+				if (i == DialogueController::getOptions().size() - 1)
 					scroll_counter = 0;
 			}
 		}
@@ -2655,6 +2753,8 @@ void DialogueController::set_selectable(bool is_selectable, std::string option_n
 				dialogue.get_possible_conv_pts_ref()[icon][i][IsSelectable] = "1";
 			else
 				dialogue.get_possible_conv_pts_ref()[icon][i][IsSelectable] = "0";
+
+			break;
 		}
 	}
 	options = dialogue.get_possible_conv_pts();
@@ -2953,4 +3053,21 @@ void DialogueController::apply_post_from_response(std::string rep_choice, Action
 			act->getDoer()->rel[SHANGO]->setNotoriety(act->getDoer()->rel[SHANGO]->getNotoriety() - 7);
 		}
 	}
+}
+
+/*Makes it so no unselectable options are the first option in the list for any icon*/
+void DialogueController::unselectable_to_bottom() {
+	for (int i = 0; i < 4; ++i) {
+		for (int j = 0; j < dialogue.get_possible_conv_pts_ref()[i].size(); ++j) {
+			if (dialogue.get_possible_conv_pts_ref()[i][j][IsSelectable] == "0") {
+				dialogue_point dpoint = dialogue.get_possible_conv_pts_ref()[i][j];
+				dialogue.get_possible_conv_pts_ref()[i].erase(dialogue.get_possible_conv_pts_ref()[i].begin() + j);
+				dialogue.get_possible_conv_pts_ref()[i].push_back(dpoint);
+			}
+			else//dialog option at top of list is selectable so do nothing
+				break;
+		}
+		
+	}
+
 }
