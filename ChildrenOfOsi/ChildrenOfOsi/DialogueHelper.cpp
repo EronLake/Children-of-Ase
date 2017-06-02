@@ -343,10 +343,11 @@ std::vector<dialogue_point> DialogueHelper::get_possible_reply_pts(std::string p
 	std::vector<dialogue_point> reply;
 	//reply.push_back({"Decline_To_Answer","Decline_To_Answer","","","1"});
 	if (point != "Boast" && point != "Insult" && point != "Intimidate" && point != "Compliment" && point != "Offer Praise") {
-		reply.push_back({ "Refuse","Refuse","","","1","0" });
+		if(point.find("_Quest") == string::npos)
+		    reply.push_back({ "Refuse","Refuse","","","1","0" });
 		for (int i = 0; i < possible_reply_pts[opts_inx].size(); i++) {
 			if ((/*possible_reply_pts[opts_inx][i][CorrespondingConvPt].compare("Decline_To_Answer") == 0 ||*/ possible_reply_pts[opts_inx][i][CorrespondingConvPt].compare(point) == 0)
-				&& point.find("_Quest", 0) == string::npos) {
+				&& point.find("_Quest") == string::npos) {
 				reply.push_back({ possible_reply_pts[opts_inx][i] });
 			}
 
@@ -361,9 +362,9 @@ std::vector<dialogue_point> DialogueHelper::get_possible_reply_pts(std::string p
 		reply.push_back({ "Offer Praise In Response", "Offer Praise In Response","","","1","0" });
 		reply.push_back({ "Insult In Response", "Insult In Response","","","1","0" });
 	}
-	if (point.find(" _Quest", 0) != string::npos) {
-		reply.push_back({ "Accept_Quest", "Accept_Quest","","","1" });
-		reply.push_back({ "Decline_Quest", "Decline_Quest","","","1" });
+	if (point.find("_Quest") != string::npos) {
+		reply.push_back({ "Accept_Quest", "Accept_Quest","","","1","0" });
+		reply.push_back({ "Decline_Quest", "Decline_Quest","","","1","0" });
 	}
 	
 	return reply;
@@ -589,6 +590,7 @@ dialogue_point DialogueHelper::get_dialog(std::string name, dialogue_point diog_
 		}
 	}
 	else {
+		phrase_picker = (rand() % 5 + 1);//pick Shango flavor text randomly
 		dpoint.push_back(root[diog_pt[ConvPointName]][to_string(phrase_picker)]
 			.asString());
 	}
