@@ -778,8 +778,8 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	if (PRELOAD_TEX) {
 		tm.join();
 		t0.join();
-		//t1.join();
-		//t2.join();
+		t1.join();
+		t2.join();
 	}
 	//oya->set_busy(0);
 	//yemoja->set_busy(0);
@@ -914,7 +914,10 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 			}
 			else {
 				//_QuadTree->clear();
-				grid_worldobj->clear_and_reinsert(movVec);
+				grid_worldobj->clear();
+				grid_worldobj->insert_worldobj_to_grid(recVec);
+				grid_worldobj->insert_worldobj_to_grid(movVec);
+				//grid_worldobj->clear_and_reinsert(movVec);
 				//grid_worldobj->clear();
 			}
 

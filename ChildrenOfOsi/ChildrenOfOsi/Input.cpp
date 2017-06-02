@@ -108,12 +108,12 @@ void Input::add_object() {
 	Json::Value root;
 	Json::Reader reader;
 
-	std::ifstream in_file("config.json");
+	std::ifstream in_file("config_oasis.json");
 	in_file >> root;
 	in_file.close();
 
 	std::ofstream file;
-	file.open("config.json");
+	file.open("config_oasis.json");
 
 
 	//populate 'value_obj' with the objects, arrays etc.
@@ -230,12 +230,12 @@ void Input::duplicate_object(std::string collide_with) {
 	Json::Value root;
 	Json::Reader reader;
 
-	std::ifstream in_file("config.json");
+	std::ifstream in_file("config_oasis.json");
 	in_file >> root;
 	in_file.close();
 
 	std::ofstream file;
-	file.open("config.json");
+	file.open("config_oasis.json");
 
 	int dup_num;
 	int row_size;
@@ -338,12 +338,12 @@ void Input::delete_object(std::string collide_with)
 	Json::Value root;
 	Json::Reader reader;
 
-	std::ifstream in_file("config.json");
+	std::ifstream in_file("config_oasis.json");
 	in_file >> root;
 	in_file.close();
 
 	std::ofstream file;
-	file.open("config.json");
+	file.open("config_oasis.json");
 
 
 	//populate 'value_obj' with the objects, arrays etc.
@@ -449,8 +449,14 @@ void Input::edit_object() {
 		}
 	}
 
-	if (collide_with != "" && onscreen && collide_with != "JungleVillage" && collide_with != "Oasis_Platform")
+	if (collide_with != "" && onscreen && collide_with != "JungleVillage" && collide_with != "Oasis_Platform" && collide_with != "mb1" && (collide_with != "mb2"
+		&& collide_with != "mb2-2" &&
+		collide_with != "mb3" &&
+		collide_with != "mb4" &&
+		collide_with != "mh1" && collide_with != "mh1-0"
+		&& collide_with != "mh2"))
 	{
+
 		if (!H)
 		{
 			Containers::worldObj_table[collide_with]->setX(mouseX - (Containers::worldObj_table[collide_with]->getWidth()) / 2);
@@ -500,12 +506,12 @@ void Input::edit_object() {
 		Json::Value root;
 		Json::Reader reader;
 
-		std::ifstream in_file("config.json");
+		std::ifstream in_file("config_oasis.json");
 		in_file >> root;
 		in_file.close();
 
 		std::ofstream file;
-		file.open("config.json");
+		file.open("config_oasis.json");
 
 
 		//populate 'value_obj' with the objects, arrays etc.
