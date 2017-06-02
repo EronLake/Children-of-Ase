@@ -1877,7 +1877,7 @@
     }
    },
 
-   "conversation_point_21" : {
+   /*"conversation_point_21" : {
 	      "name" : "Advise To Send Peace Offering To",
           "icon" : "",
 	      "template" : "Advise To Send Peace Offering To",
@@ -1950,7 +1950,7 @@
       }
     
 	}
-	},
+	},*/
 
 	"conversation_point_5" : {
 	      "name" : "Boast",
