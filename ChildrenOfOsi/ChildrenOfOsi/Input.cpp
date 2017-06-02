@@ -887,9 +887,13 @@ void Input::InputCheck()
 
 		}
 		if (DialogueController::getState() > 0) {
-			if (count > 0) {
-				count--;
-			}
+      if(!Tutorial::isStageComplete(Tutorial::Stage::DIALOGUE)) {
+        Tutorial::launchStage(Tutorial::Stage::DIALOGUE, *this, true);
+      }
+
+			if (count > 0)
+				--count;
+
 			/*if (SHIFT && Q && count == 0) {
 				WorldObj* other = DialogueController::getOther();
 				if (other->getType() > WorldObj::TYPE_NPC) {
@@ -1260,10 +1264,22 @@ void Input::InputCheck()
     }
 	}
   else if(current_game_state == game_state::tutorial_pause) {
-    if(!this->locked && ENTER && Tutorial::isStageActive(Tutorial::Stage::INTRO01) || Tutorial::isStageActive(Tutorial::Stage::INTRO02)) {
-      Tutorial::completeStage(*this);
-      current_game_state = game_state::in_game;
-      this->locked = true;
+    if(!this->locked) {
+      if(ENTER && Tutorial::isStageActive(Tutorial::Stage::INTRO01)) {
+        Tutorial::completeStage(*this);
+        current_game_state = game_state::in_game;
+        this->locked = true;
+      }
+      else if((W || A || S || D) && Tutorial::isStageActive(Tutorial::Stage::INTRO02)) {
+        Tutorial::completeStage(*this);
+        current_game_state = game_state::in_game;
+        this->locked = true;
+      }
+      else if(E && Tutorial::isStageActive(Tutorial::Stage::DIALOGUE)) {
+        Tutorial::completeStage(*this);
+        current_game_state = game_state::in_game;
+        this->locked = true;
+      }
     }
   }
   else if(current_game_state == game_state::victory_menu) {
