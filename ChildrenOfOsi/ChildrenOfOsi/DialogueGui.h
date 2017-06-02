@@ -45,12 +45,12 @@ class DialogueGui
   static constexpr int LINE_SPACING = 18;
 
   static constexpr float SPEAKER_LEFT_X = 15.0F;
-  static constexpr float SPEAKER_LEFT_Y = 20.0F;
+  static constexpr float SPEAKER_LEFT_Y = 22.5F;
   static constexpr float SPEAKER_LEFT_WIDTH = 300.0F;
   static constexpr float SPEAKER_LEFT_HEIGHT = 300.0F;
 
   static constexpr float SPEAKER_RIGHT_X = 645.0F;
-  static constexpr float SPEAKER_RIGHT_Y = 20.0F;
+  static constexpr float SPEAKER_RIGHT_Y = 22.5F;
   static constexpr float SPEAKER_RIGHT_WIDTH = 300.0F;
   static constexpr float SPEAKER_RIGHT_HEIGHT = 300.0F;
 
