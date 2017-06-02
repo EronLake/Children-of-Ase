@@ -172,6 +172,7 @@ int RenderHelper::draw_frame(WorldObj * obj)
 	//	rivObj->getLines()[i]->getP2().drawObjRiv(camera->getX(), camera->getY());
 
 	//}
+
 	//convoGui->drawGui();
 	drawHUD(obj);
 	GameWindow::refresh();
