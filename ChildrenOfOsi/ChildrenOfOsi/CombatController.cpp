@@ -15,7 +15,7 @@ CombatController::~CombatController()
 
 void CombatController::fight(Soldier* sold1, int state) {
 	if (sold1->getCurrentEnemy() != nullptr) {
-		if (sold1->getStamina() > 120) {
+		if (sold1->getStamina() > sold1->melee->getStaminaCost()) {
 			sold1->setEvade(false);
 		}
 		else if (sold1->destination == sold1->getLoc() || sold1->destination == Vector2f(0, 0)) {
@@ -66,6 +66,7 @@ void CombatController::fight(Soldier* sold1, int state) {
 					if (!(*it)->getCanCancel()) {
 						if (sold1->getCool((*it)->get_name())) {
 							if (shot_ligned_up(sold1->body[0].get_mid_loc(), sold2->body[0].get_mid_loc())) {
+								sold1->face(sold2);
 								switch ((*it)->get_name()) {
 								case Attack::FIREBALL:
 									gameplay_functions->special(sold1, Attack::FIREBALL);
@@ -270,14 +271,14 @@ void CombatController::checkParties() {
 			vector<Party*> partiesA = (*i)->getParties();
 			vector<Party*> partiesB = (*j)->getParties();
 			for (auto a = partiesA.begin(); a != partiesA.end(); ++a) {
-				if ((*a)->getMembers().size() == 0) {
+				if ((*a)->getMembers().size() == 0 || (*a)->get_hide()) {
 					if (!(*a)->get_perm()) {
 						(*i)->remove_party((*a));
 						delete (*a);
 					}
 				} else if ((*a)->getMode() != Party::MODE_FLEE && !(*a)->getLeader()->getInCombat()) {
 					for (auto b = partiesB.begin(); b != partiesB.end(); ++b) {
-						if ((*b)->getMembers().size() == 0 ) {
+						if ((*b)->getMembers().size() == 0 || (*b)->get_hide()) {
 							if (!(*b)->get_perm()) {
 								(*j)->remove_party((*b));
 								delete (*b);

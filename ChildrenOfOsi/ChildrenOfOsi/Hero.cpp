@@ -184,3 +184,7 @@ void Hero::decrement_quest_time() {
 		}
 	}
 }
+int Hero::get_range_cap(Action* a) 
+{ 
+	return trait_vec[a->name]; 
+};

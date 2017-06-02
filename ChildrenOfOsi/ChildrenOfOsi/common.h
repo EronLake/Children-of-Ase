@@ -103,7 +103,7 @@ this zooms is used in renderHelper.cpp GameWindow.cpp and Input.cpp
 also specified to zoom for the map editor mode
 */
 #if MAP_EDITOR 
-#define map_zoom 4
+#define map_zoom 6
 #else 
 #define map_zoom 1
 
