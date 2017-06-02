@@ -37,8 +37,10 @@ public:
 	bool can_fire;
 
 	int ori = 30;
-	int can_activate_ex = 1;
+	int can_activate_ex = 0;
 	int exalted_form = 0;
+	//so that you don't swich back and forth too rapidly
+	int exalted_form_trans_count = 0;
 
 	void activate_exalted_form();
 	void deactivate_exalted_form();

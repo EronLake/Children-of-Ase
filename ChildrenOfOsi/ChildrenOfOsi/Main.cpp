@@ -196,7 +196,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	//PartyManager* partyM = new PartyManager(gameplay_functions, Alex);
 	memManager* memM = new memManager(mLog, tBuffer);
 	TestManager* TestM = new TestManager(mLog, tBuffer);
-	//AudioManager* AudM = new AudioManager(mLog, tBuffer);
+	AudioManager* AudM = new AudioManager(mLog, tBuffer);
 	AIHelper* ai = new AIHelper();
 	AIManager* AIM = new AIManager(mLog, tBuffer, ai);
 	//AIController* AiController = new AIController();
@@ -210,7 +210,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	PhysM->register_manager();
 	memM->register_manager();
 
-	//AudM->register_manager();
+	AudM->register_manager();
 	//TestM->register_manager();
 	AIM->register_manager();
 
@@ -276,14 +276,34 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	Input* iController = new Input(gameplay_functions, Alex, RenM->renderHelper, tBuffer, recVec_ptr, movVec_ptr);
 
 	Hero* yemoja = Containers::hero_table["Yemoja"];
+	yemoja->trait_vec["Bribe"] = 202;  //hero likes/dislikes
+	yemoja->trait_vec["Compliment"] = 180;
+	yemoja->trait_vec["Insult"] = 120;
+	yemoja->trait_vec["Intimidate"] = 120;
+	yemoja->trait_vec["Offer Praise"] = 160;
+	yemoja->trait_vec["Boast"] = 160;
 	yemoja->song = "Music/HeroThemes/Yemoja.flac";
 	heroes.push_back(yemoja);
+	
+
 	yemoja->set_busy(0);//added for testing
 	Hero* oya = Containers::hero_table["Oya"];
+	oya->trait_vec["Bribe"] = 120;
+	oya->trait_vec["Compliment"] = 160;
+	oya->trait_vec["Insult"] = 120;
+	oya->trait_vec["Intimidate"] = 180;
+	oya->trait_vec["Offer Praise"] = 120;
+	oya->trait_vec["Boast"] = 202;
 	oya->song = "Music/HeroThemes/Oya.flac";
 	oya->set_busy(0);//added for testing
 	heroes.push_back(oya);
 	Hero* ogun = Containers::hero_table["Ogun"];
+	ogun->trait_vec["Bribe"] = 160;
+	ogun->trait_vec["Compliment"] = 120;
+	ogun->trait_vec["Insult"] = 202;
+	ogun->trait_vec["Intimidate"] = 120;
+	ogun->trait_vec["Offer Praise"] = 180;
+	ogun->trait_vec["Boast"] = 120;
 	ogun->song = "Music/HeroThemes/Oya.flac";
 	ogun->set_busy(0);//added for testing
 	heroes.push_back(ogun);
@@ -756,10 +776,10 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	for (auto it : *largeStruct) cout << (it)->getName() << endl;
 
 	if (PRELOAD_TEX) {
-		//tm.join();
+		tm.join();
 		t0.join();
-		//t1.join();
-		//t2.join();
+		t1.join();
+		t2.join();
 	}
 	//oya->set_busy(0);
 	//yemoja->set_busy(0);
@@ -811,11 +831,22 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 				start = !start;
 			}
 
-			//decrement ori 
-			if (frame_count - ori_counter >= 60 * 60 * .5) 
+			//decrement ori
+			if (Alex->ori > 100) {
+				Alex->ori = 100;
+			}
+			if (frame_count - ori_counter >= 60 * 60 * 2) 
 			{
 				Alex->ori--;
 				ori_counter = frame_count;
+			}
+			//used for the exhalted form transformation
+			if (Alex->exalted_form_trans_count != 0) {
+				Alex->exalted_form_trans_count--;
+			}
+			//just in case it somehow goes below zero
+			if (Alex->exalted_form_trans_count < 0) {
+				Alex->exalted_form_trans_count--;
 			}
 
 
@@ -1033,7 +1064,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 
 								if (curr_alliance != other_alliance && itor.second->SUGG_ACT_STATUS != 1)
 								{
-									AIController::reevaluate_state(YEMOJA, with_hero);
+									AIController::reevaluate_state(itor.second->name, with_hero);
 								}
 							}
 
@@ -1136,7 +1167,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 		while (current_game_state == game_state::victory_menu) {
 
 			if (iController->current_game_state != game_state::victory_menu) {
-				//iController->current_game_state = current_game_state;
+				iController->current_game_state = current_game_state;
 			}
 
 			if (shouldExit > 0) {

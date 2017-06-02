@@ -725,33 +725,33 @@
     }
   },
 
-  "Boast Back_Templates": {
+  "Boast In Response_Templates": {
     "1": {
-      "1": "Boast Back"
+      "1": "Boast In Response"
     }
   },
 
-  "Intimidate Back_Templates": {
+  "Intimidate In Response_Templates": {
     "1": {
-      "1": "Intimidate Back"
+      "1": "Intimidate In Response"
     }
   },
 
-   "Compliment Back_Templates": {
+   "Compliment In Response_Templates": {
     "1": {
-      "1": "Compliment Back"
+      "1": "Compliment In Response"
     }
   },
 
    "Offer Praise_Templates": {
     "1": {
-      "1": "Offer Praise Back"
+      "1": "Offer Praise In Response"
     }
   },
 
-   "Insult Back_Templates": {
+   "Insult In Response_Templates": {
     "1": {
-      "1": "Insult Back"
+      "1": "Insult In Response"
     }
   },
 
@@ -764,6 +764,18 @@
   "Offer Gift_Templates": {
     "1": {
       "1": "Offer Gift"
+    }
+  },
+
+  "Refuse_Templates": {
+    "1": {
+      "1": "Refuse"
+    }
+  },
+
+   "No Divination_Templates": {
+    "1": {
+      "1": "No Divination"
     }
   }
 }

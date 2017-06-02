@@ -55,7 +55,7 @@ bool GameWindow::init()
   GameWindow::setupWindow();
   GameWindow::stdShaderProgramId = GameWindow::setupShaders(STD_VERTEX_SHADER_PATH, STD_FRAGMENT_SHADER_PATH);
   GameWindow::fontShaderProgramId = GameWindow::setupShaders(FONT_VERTEX_SHADER_PATH, FONT_FRAGMENT_SHADER_PATH);
-  GameWindow::setupFont("Arial", 48);
+  GameWindow::setupFont("CormorantInfant-SemiBold", 48);
 
   glEnable(GL_TEXTURE_2D);
   glewExperimental = GL_TRUE;
