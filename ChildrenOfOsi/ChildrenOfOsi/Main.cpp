@@ -310,10 +310,13 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 
 	//yemoja->rel[1]->addNotoriety(50);
 	///yemoja->rel[1]->addStrength(50);
-	//yemoja->rel[1]->addAffinity(50);
+	yemoja->rel[1]->addAffinity(50);
 	//oya->rel[1]->addNotoriety(50);
 	///oya->rel[1]->addStrength(50);
-	//oya->rel[1]->addAffinity(50);
+	oya->rel[1]->addAffinity(50);
+	//yemoja->rel[1]->addNotoriety(50);
+	///yemoja->rel[1]->addStrength(50);
+	ogun->rel[1]->addAffinity(50);
 
 	vector<std::set<Texture*>> starting_location;
 	
@@ -1177,7 +1180,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 			start_tick = clock();
 
 			//draw
-			//gameplay_functions->drawTut(Alex);
+			gameplay_functions->drawTut(Alex);
 
 			//run task buffer
 			iController->InputCheck();
@@ -1187,6 +1190,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 			if (game_ended) {
 				break;
 			}
+
 
 			if ((1000 / fs) > (clock() - start_tick)) { //delta_ticks) {www
 				Sleep((1000 / fs) - (clock() - start_tick));
@@ -1206,7 +1210,36 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 
 		}
 		if (game_ended) {
-			break;
+			//RESET GAME
+			War::end_wars();// end all wars
+
+			HeroConfig::import_config(movVec_ptr, &ObjConfig::textureMap, gameplay_functions, tBuffer);
+			SoldierConfig::import_config(movVec_ptr, &ObjConfig::textureMap, gameplay_functions, tBuffer);
+			VillagerConfig::import_config(recVec_ptr, &ObjConfig::textureMap, gameplay_functions, tBuffer);
+			BabalawoConfig::import_config(recVec_ptr, &ObjConfig::textureMap, gameplay_functions, tBuffer);
+			ShrineConfig::import_config(recVec_ptr, &ObjConfig::textureMap, gameplay_functions, tBuffer);
+			Village::init_villages();
+			AIController::init_plans();
+
+			//set hero variables and flags back to starting values
+			//Alex->location
+
+			Alex->ori = 30;
+			Alex->can_spin = false;
+			Alex->can_fire = false;
+			Alex->can_fire = false;
+			Alex->can_activate_ex = 0;
+
+			DialogueController::talked_to_shrine_o = false;
+			DialogueController::talked_to_shrine_j = false;
+			DialogueController::talked_to_shrine_m = false;
+
+			//babalawo stuff
+			//DialogueController::talked_to_shrine_j = false;
+			//DialogueController::talked_to_shrine_m = false;
+
+			current_game_state = game_state::in_game;
+			iController->current_game_state = current_game_state;
 		}
 	}
 	GameWindow::terminate();

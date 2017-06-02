@@ -1,4 +1,4 @@
-Conversation Point Name: Ask_To_Duel Appeal 10280
-Conversation Point Name: Ask_To_Spar Appeal 10230
-Conversation Point Name: Boast Appeal 10090
-Conversation Point Name: Intimidate Appeal 9990
+Conversation Point Name: Compliment Appeal -2459870
+Conversation Point Name: Bribe Appeal -2460210
+Conversation Point Name: Grovel Appeal -2460230
+Conversation Point Name: Insult Appeal -2460320

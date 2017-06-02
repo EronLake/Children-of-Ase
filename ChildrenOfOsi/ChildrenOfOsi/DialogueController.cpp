@@ -117,6 +117,12 @@ Action* DialogueController::hero_act_toward_player = nullptr;
 DialogueController::DialogueController()
 {
 	srand(time(0));//seeds rand function to ensure good variety of random numbers
+
+	player_conv_point_choice = "";
+
+	//keeps track of the topic of the current conversation cycle
+	curr_hero_topic = "";
+
 }
 
 
@@ -2167,6 +2173,12 @@ void DialogueController::startConversation(WorldObj* n, bool playerTalk)
 	Hero* temp_hero = CheckClass::isHero(other);
 	std::string start_message = "";
 	optionsIndex = 0;
+
+	player_conv_point_choice = "";
+
+	//keeps track of the topic of the current conversation cycle
+	curr_hero_topic = "";
+
 
 	if (temp_hero) {
 			remove_dialog_option("Ask_To_Duel", NotorietyIcon);

@@ -41,8 +41,9 @@ public:
 	Vector2f waypoint;
 	vector<Vector2f> waypoints;
 
+	Village* village = nullptr;
 private:
-	Village* village;
+	
 	float speed;
 	int npc_type = 0; //0 = Hero/Soldier, 1 = villager, 2 = babalaow,  3 = shrine
 	float diagSpeed;

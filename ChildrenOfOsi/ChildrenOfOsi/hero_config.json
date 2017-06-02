@@ -126,7 +126,7 @@
 				"left": {"0":"FireBallTMPLeft", "1":3}
 			},
 			"set_name": 0,
-			"set_dmg": 25,
+			"set_dmg": 100,/*25,*/
 			"set_speed" : 5,
 			"set_base_dir" : 4,
 			"set_cool_down" : 35,

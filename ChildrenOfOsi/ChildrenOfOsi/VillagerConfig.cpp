@@ -39,7 +39,9 @@ void VillagerConfig::set_villager(vector<WorldObj*>* recVec_ptr, ChildrenOfOsi* 
 	float hight, std::string name, float bodyx1, float bodyx2, float bodyy1, float bodyy2, int health)
 {
 
-	gameplay_func->add_npc(name, 100 * x, 100 * y, true);
+	if (!Containers::npc_table[name]) {
+		gameplay_func->add_npc(name, 100 * x, 100 * y, true);
+	}
 
 	tBuffer->run();
 

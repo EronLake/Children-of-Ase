@@ -55,8 +55,9 @@ void SoldierConfig::set_soldier(vector<WorldObj*>* movVec, ChildrenOfOsi* gamepl
 	float hight, std::string name, float bodyx1, float bodyx2, float bodyy1, float bodyy2, int health, int max_stamina
 	,int sol_num)
 {
-
-	gameplay_func->add_soldier(name, 100 * x, 100 * y, true);
+	if (!Containers::soldier_table[name]) {
+		gameplay_func->add_soldier(name, 100 * x, 100 * y, true);
+	}
 
 	tBuffer->run();
 
@@ -249,7 +250,9 @@ void SoldierConfig::init_attacks(ChildrenOfOsi* gameplay_func, TaskBuffer* tBuff
 	}
 
 	//initialize melee attack
-	gameplay_func->add_Attack("melee_" + cur_soldier->getKey(), cur_soldier->body[0].getX(), cur_soldier->body[0].getY(), true, 10);
+	if (!Containers::Attack_table["melee_" + cur_soldier->getKey()]) {
+		gameplay_func->add_Attack("melee_" + cur_soldier->getKey(), cur_soldier->body[0].getX(), cur_soldier->body[0].getY(), true, 10);
+	}
 	tBuffer->run();
 
 	cur_soldier->melee = Containers::Attack_table["melee_" + cur_soldier->getKey()];

@@ -19,5 +19,6 @@ public:
 	static void endWar(Village* one, Village* two);
 	static std::vector<Village*> getWars(Village* vil);
 	bool static at_war(Village* one, Village* two);
+	static void end_wars();
 };
 
