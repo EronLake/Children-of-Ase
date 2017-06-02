@@ -607,19 +607,10 @@ void Input::InputCheck()
 	short TWO = GetKeyState('2') >> 15; //Removes you from party and puts party in flee mode
 	short THREE = GetKeyState('3') >> 15; // Remove self from party and put party in patrol mode
 	short FOUR = GetKeyState('4') >> 15; // coming soon
-
-  if(!W && !A && !S && !D && !Q && !E &&
-    !J && !K && !L && !SEMI && !F && !G && !H &&
-    !R && !T && !Y && !U && !P &&
-    !Z && !V && !M && !I&&
-    !ONE && !TWO && !THREE && !FOUR &&
-    !ENTER && !SHIFT)
-    this->locked = false;
 	
 	if (current_game_state == game_state::main_menu) {
-    if (!this->locked && ENTER) {
+    if (ENTER) {
       Tutorial::completeStage(*this);
-      this->locked = true;
 		}
 	}
 	else if (current_game_state == game_state::in_game) {
@@ -712,20 +703,23 @@ void Input::InputCheck()
 					}
 				}
 				else if (I) {
-					if (t->can_activate_ex == 1) {
+					if (t->can_activate_ex == 1 && t->exalted_form_trans_count == 0 && t->ori > 70) {
 						if (t->exalted_form == 0) {
 							t->activate_exalted_form();
 							t->exalted_form = 1;
+							t->exalted_form_trans_count = 60;
 						}
-						else if (t->exalted_form == 1) {
+						else if (t->exalted_form == 1 && t->exalted_form_trans_count == 0) {
 							t->deactivate_exalted_form();
 							t->exalted_form = 0;
+							t->exalted_form_trans_count = 60;
 						}
 					}
 
-					if (t->can_activate_ex == 0 && t->exalted_form == 1) {
+					if (t->can_activate_ex == 0 && t->exalted_form == 1 && t->exalted_form_trans_count == 0) {
 						t->deactivate_exalted_form();
 						t->exalted_form = 0;
+						t->exalted_form_trans_count = 120;
 					}
 				}
 				else if (J) {
@@ -1255,28 +1249,22 @@ void Input::InputCheck()
 		}
 	}
 	else if (current_game_state == game_state::pause_menu) {
-    if(!this->locked && ENTER) {
+    if(ENTER) {
       current_game_state = game_state::in_game;
-      this->locked = true;
     }
 	}
   else if(current_game_state == game_state::tutorial_pause) {
-    if(!this->locked) {
-      if(ENTER && Tutorial::isStageActive(Tutorial::Stage::INTRO01)) {
-        Tutorial::completeStage(*this);
-        current_game_state = game_state::in_game;
-        this->locked = true;
-      }
-      else if((W || A || S || D) && Tutorial::isStageActive(Tutorial::Stage::INTRO02)) {
-        Tutorial::completeStage(*this);
-        current_game_state = game_state::in_game;
-        this->locked = true;
-      }
-      else if(E && Tutorial::isStageActive(Tutorial::Stage::DIALOGUE)) {
-        Tutorial::completeStage(*this);
-        current_game_state = game_state::in_game;
-        this->locked = true;
-      }
+    if(ENTER && Tutorial::isStageActive(Tutorial::Stage::INTRO01)) {
+      Tutorial::completeStage(*this);
+      current_game_state = game_state::in_game;
+    }
+    else if((W || A || S || D) && Tutorial::isStageActive(Tutorial::Stage::INTRO02)) {
+      Tutorial::completeStage(*this);
+      current_game_state = game_state::in_game;
+    }
+    else if(E && Tutorial::isStageActive(Tutorial::Stage::DIALOGUE)) {
+      Tutorial::completeStage(*this);
+      current_game_state = game_state::in_game;
     }
   }
   else if(current_game_state == game_state::victory_menu) {

@@ -50,6 +50,10 @@ int Movement::move_up(WorldObj* obj) {
 			if (obj == objVec[i] || (my_type >= 2 && objVec[i]->getType() >= WorldObj::TYPE_NPC)) {
 				break;
 			}
+			Soldier* temp = CheckClass::isSoldier(objVec[i]);
+			if (temp) {
+				if (temp->getParty()->get_hide()) continue;
+			}
 			bool check = collision(objVec[i], obj);
 			if (check) {
 				//manager->createTask("Bump", "SOUND");
@@ -117,6 +121,10 @@ int Movement::move_up_left(WorldObj* obj) {
 		for (int i = 0; i < objVec.size(); i++) {
 			if (obj == objVec[i] || (my_type >= 2 && objVec[i]->getType() >= WorldObj::TYPE_NPC)) {
 				break;
+			}
+			Soldier* temp = CheckClass::isSoldier(objVec[i]);
+			if (temp) {
+				if (temp->getParty()->get_hide()) continue;
 			}
 			bool check = collision(objVec[i], obj);
 			if (check) {
@@ -207,6 +215,10 @@ int Movement::move_up_right(WorldObj* obj) {
 			if (obj == objVec[i] || (my_type >= 2 && objVec[i]->getType() >= WorldObj::TYPE_NPC)) {
 				break;
 			}
+			Soldier* temp = CheckClass::isSoldier(objVec[i]);
+			if (temp) {
+				if (temp->getParty()->get_hide()) continue;
+			}
 			if (collision(objVec[i], obj)) {
 				//manager->createTask("Bump", "SOUND");
 				LOG("failed to move up. collision.");
@@ -292,6 +304,10 @@ int Movement::move_down(WorldObj* obj) {
 			if (obj == objVec[i] || (my_type >= 2 && objVec[i]->getType() >= WorldObj::TYPE_NPC)) {
 				break;
 			}
+			Soldier* temp = CheckClass::isSoldier(objVec[i]);
+			if (temp) {
+				if (temp->getParty()->get_hide()) continue;
+			}
 			bool check = collision(objVec[i], obj);
 			if (check) {
 				LOG("failed to move down. collision.");
@@ -353,6 +369,10 @@ int Movement::move_down_left(WorldObj* obj) {
 		for (int i = 0; i < objVec.size(); i++) {
 			if (obj == objVec[i] || (my_type >= 2 && objVec[i]->getType() >= WorldObj::TYPE_NPC)) {
 				break;
+			}
+			Soldier* temp = CheckClass::isSoldier(objVec[i]);
+			if (temp) {
+				if (temp->getParty()->get_hide()) continue;
 			}
 			bool check = collision(objVec[i], obj);
 			if (check) {
@@ -445,6 +465,10 @@ int Movement::move_down_right(WorldObj* obj) {
 			if (obj == objVec[i] || (my_type >= 2 && objVec[i]->getType() >= WorldObj::TYPE_NPC)) {
 				break;
 			}
+			Soldier* temp = CheckClass::isSoldier(objVec[i]);
+			if (temp) {
+				if (temp->getParty()->get_hide()) continue;
+			}
 			bool check = collision(objVec[i], obj);
 			if (check) {
 				LOG("failed to move down. collision.");
@@ -530,6 +554,10 @@ int Movement::move_left(WorldObj* obj) {
 			if (obj == objVec[i] || (my_type >= 2 && objVec[i]->getType() >= WorldObj::TYPE_NPC)) {
 				break;
 			}
+			Soldier* temp = CheckClass::isSoldier(objVec[i]);
+			if (temp) {
+				if (temp->getParty()->get_hide()) continue;
+			}
 			bool check = collision(objVec[i], obj);
 			if (check) {
 				LOG("failed to move left. collision.");
@@ -595,6 +623,10 @@ int Movement::move_right(WorldObj* obj) {
 				break;
 				
 			}
+			Soldier* temp = CheckClass::isSoldier(objVec[i]);
+			if (temp) {
+				if (temp->getParty()->get_hide()) continue;
+			}
 			bool check = collision(objVec[i], obj);
 			if (check) {
 				LOG("failed to move right. collision.");
@@ -646,6 +678,10 @@ int Movement::talk(WorldObj* obj) {
 				if (obj == objVec[i]) {
 					//break;
 					continue;
+				}
+				Soldier* temp = CheckClass::isSoldier(objVec[i]);
+				if (temp) {
+					if (temp->getParty()->get_hide()) continue;
 				}
 				if (objVec[i]->getInteractable()) {
 					if (interaction(d, objVec[i])) {
@@ -701,6 +737,10 @@ int Movement::attack(WorldObj* obj) {
 			//cout << "Attack compared to: " << objVec.size() << endl;
 			//std::////cout << "Attack Collidable" << std::endl;
 			for (int i = 0; i < objVec.size(); i++) {
+				Soldier* temp = CheckClass::isSoldier(objVec[i]);
+				if (temp) {
+					if (temp->getParty()->get_hide()) continue;
+				}
 				if (objVec[i]->getType() > WorldObj::TYPE_WORLDOBJ) {
 					LivingObj* liv = CheckClass::isLiving(objVec[i]);
 					if (liv) {

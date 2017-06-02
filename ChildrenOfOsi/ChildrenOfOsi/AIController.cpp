@@ -56,7 +56,7 @@ void AIController::set_plan(int id, Planner* plan) {
 
 void AIController::generate_end_state(int me, int them)
 {
-	if (!(me > 3 || them > 3)) {
+	if (!(me == 4 || them == 4)) {
 		get_plan(me)->choose_end_with(them);
 	}
 
@@ -155,7 +155,7 @@ void AIController::reevaluate_state(int me, int them) {
 	Planner* planner = get_plan(me);
 
 	Action* state = planner->get_end_state_map()->at(them);  //Point to the current end_state for them 
-	planner->get_milestone_map()->erase(state);           //Delete the old end_state entry in the milestone list
+	planner->get_milestone_map()->erase(state);            //Delete the old end_state entry in the milestone list
 	generate_end_state(me, them);                          //Generate a new end_state for them, which updates state pointer
 
 

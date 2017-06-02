@@ -778,8 +778,8 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	if (PRELOAD_TEX) {
 		tm.join();
 		t0.join();
-		t1.join();
-		t2.join();
+		//t1.join();
+		//t2.join();
 	}
 	//oya->set_busy(0);
 	//yemoja->set_busy(0);
@@ -821,6 +821,8 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 				iController->current_game_state = current_game_state;
 			}
 
+			//rivObj->initialize_lines();
+
 			if (shouldExit > 0) {
 				_CrtDumpMemoryLeaks();
 				return;
@@ -831,11 +833,22 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 				start = !start;
 			}
 
-			//decrement ori 
-			if (frame_count - ori_counter >= 60 * 60 * .5) 
+			//decrement ori
+			if (Alex->ori > 100) {
+				Alex->ori = 100;
+			}
+			if (frame_count - ori_counter >= 60 * 60 * 2) 
 			{
 				Alex->ori--;
 				ori_counter = frame_count;
+			}
+			//used for the exhalted form transformation
+			if (Alex->exalted_form_trans_count != 0) {
+				Alex->exalted_form_trans_count--;
+			}
+			//just in case it somehow goes below zero
+			if (Alex->exalted_form_trans_count < 0) {
+				Alex->exalted_form_trans_count--;
 			}
 
 
@@ -1053,7 +1066,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 
 								if (curr_alliance != other_alliance && itor.second->SUGG_ACT_STATUS != 1)
 								{
-									AIController::reevaluate_state(YEMOJA, with_hero);
+									AIController::reevaluate_state(itor.second->name, with_hero);
 								}
 							}
 
@@ -1156,7 +1169,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 		while (current_game_state == game_state::victory_menu) {
 
 			if (iController->current_game_state != game_state::victory_menu) {
-				//iController->current_game_state = current_game_state;
+				iController->current_game_state = current_game_state;
 			}
 
 			if (shouldExit > 0) {

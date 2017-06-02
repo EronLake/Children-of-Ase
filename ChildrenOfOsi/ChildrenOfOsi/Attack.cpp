@@ -44,13 +44,27 @@ Attack::Attack(float x, float y, bool col) : WorldObj(x, y, col)
 	 }
 
 	 Soldier* attacker = dynamic_cast<Soldier*>(this->get_creator());
+	 //gives party an ori boost if the leader is the player
 	 if (CheckClass::isPlayer(attacker->getParty()->getLeader())) 
 	 {
 		 Player* player = dynamic_cast<Player*>(attacker->getParty()->getLeader());
-		 (*target).addHealth(-dmg + (player->ori/10));
+		 (*target).addHealth(-(dmg + ((player->get_strength() - 50)/10) + ((player->ori-50)/10)));
+	 } else if (CheckClass::isHero(attacker->getParty()->getLeader()))
+	 {
+		Hero* hero = dynamic_cast<Hero*>(attacker->getParty()->getLeader());
+		 (*target).addHealth(-(dmg + (hero->get_strength() - 50) / 10));
 	 } else {
 		 (*target).addHealth(-dmg);
 	 }
+
+	 //gives player a boost if in exhalted form
+	 if (CheckClass::isPlayer(attacker)) {
+		 Player* player = dynamic_cast<Player*>(attacker);
+		 if (player->exalted_form == 1) {
+			 (*target).addHealth(-dmg/3);
+		 }
+	 }
+		 
 
 	 hitObjs.push_back(target);
 }

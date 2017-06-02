@@ -83,6 +83,10 @@ public:
 	std::unordered_map<std::string, int> trait_vec;
 	int get_range_cap(Action* a);
 
+	int get_strength() { return strength; };
+	void add_strength(int s) { strength += s; if (strength > 100)strength = 100; if (strength < 0)strength = 0; };
+	void set_strength(int s) { strength = s; };
+
 private:
 
 	std::unordered_map<Action*,int> quests;
@@ -90,6 +94,7 @@ private:
 	int action_timer;
 
 	int busy;
+	int strength;
 	//now in the action config
 	//void init_act_pools(ChildrenOfOsi* gameplay_func, TaskBuffer* tBuffer);
 };

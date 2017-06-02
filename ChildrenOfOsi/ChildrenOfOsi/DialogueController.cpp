@@ -7,6 +7,13 @@
 #include "ActionExecFunctions.h"
 #include "Tutorial.h"
 
+
+
+//to keep you from repeatedly talking to shrines 
+bool DialogueController::talked_to_shrine_o = false;
+bool DialogueController::talked_to_shrine_j = false;
+bool DialogueController::talked_to_shrine_m = false;
+
 Player* DialogueController::player;
 WorldObj* DialogueController::other; //the npc speaking with the player
 int DialogueController::state = 0;
@@ -228,6 +235,29 @@ void DialogueController::player_choose_babalawo()
 /*Is called instead of player_choose_soldier() and player_choose() functions if the player interacts with shrine.*/
 void DialogueController::shrine_interact()
 {
+	if (other->getName().find("Oasis") != string::npos) 
+	{
+		if (DialogueController::talked_to_shrine_o) 
+		{
+			state = 0;
+			return;
+		}
+	}else if (other->getName().find("Jungle") != string::npos)
+	{
+		if (DialogueController::talked_to_shrine_j)
+		{
+			state = 0;
+			return;
+		}
+	}else if (other->getName().find("Mountain") != string::npos)
+	{
+		if (DialogueController::talked_to_shrine_m)
+		{
+			state = 0;
+			return;
+		}
+	}
+
 	dialogue_point dpoint;
 	switch (shrine_talk_counter) {
 	case 0:
@@ -241,6 +271,32 @@ void DialogueController::shrine_interact()
 		break;
 	case 3:
 		dpoint = {"Shrine Talk 4","Shrine Talk 4"};
+
+		//give shrine blessing
+		player->addHealth(300);//regenerate to full health
+		player->ori+= 30;//boost ori by 30
+		//Containers::hero_table["Shango"]->setAse;//regenerate to full ase
+
+		for (auto hero : Containers::hero_table) 
+		{
+			if (hero.second->name != SHANGO) {
+				if (other->getName().find("Oasis") != string::npos) {
+					hero.second->rel[SHANGO]->addAffinity(10);
+					DialogueController::talked_to_shrine_o = true;
+
+				}
+				else if ((other->getName().find("Jungle")) != string::npos) {
+					hero.second->rel[SHANGO]->addNotoriety(10);
+					DialogueController::talked_to_shrine_j = true;
+				}
+				else if ((other->getName().find("Mountain")) != string::npos) {
+					hero.second->rel[SHANGO]->addStrength(10);
+					DialogueController::talked_to_shrine_m = true;
+					player->can_activate_ex = 1;
+				}
+			}	
+		}
+		
 		break;
 	}
 	
@@ -406,7 +462,7 @@ void DialogueController::PlayerConversationPoint()
 			//the ori variable is to increase the chance of teaching based on
 			//how high the ori is 
 			if (temp_hero->rel[player->name]->getAffinity() + (player->ori / 10) >= 60 && 
-				temp_hero->rel[player->name]->getStrength() + (player->ori / 10) >= 50)
+				temp_hero->rel[player->name]->getStrength() + (player->ori / 10) >= 60)
 				accepted_action = true;
 			else
 				accepted_action = false;
@@ -969,7 +1025,7 @@ void DialogueController::otherConversationPoint(dialogue_point line)
 	
 
 
-	/*skips the player's reply point if the npc does not say a conversationwwwwwwwwwwwwwwwwdwwwwwwwwwwwwwwssssssssssssssssssswdssssssssssssssssawasae
+	/*skips the player's reply point if the npc does not say a conversation
 	point, if the npc tells the player that they already asked them something,
 	if an npc runs out of relevant conversation points to say, or if an NPC tells
 	the player that they do not have a quest for them.
@@ -1305,6 +1361,7 @@ void DialogueController::otherResponse(std::string info, std::string hero_topic)
 				std::string reply_pt_sentence = dialogue.gen_dialog(diog_pt, temp_hero);
 				replace_all(reply_pt_sentence, "HERO", curr_hero_topic);
 				message = check_if_known(reply_pt_sentence, "");
+				dynamic_cast<Hero*>(other)->rel[1]->addStrength(10);
 				//state = 12;
 				
 			}
@@ -1892,6 +1949,8 @@ void DialogueController::other_response_babalawo(std::string info, std::string h
 	dialogue_point line = dialogue.choose_reply_pt(info, optionsIndex, curr_conversation_log, temp_hero);
 	replyString = line[ConvPointName];
 
+	//
+
 	/*avoids setting a topic when npc replies with "You already asked me that"
 	or if npc says any other special case reply. Special case replies are
 	typically vectors with a size of only 2.*/
@@ -1973,6 +2032,14 @@ void DialogueController::other_response_babalawo(std::string info, std::string h
 
 
 	message = other->getName() + ": " + reply_pt_sentence + "\n\n";
+	/*if(replyString == "Response Ask For Divination"){
+	      if(some_check)
+			  //give shrine blessing
+			player->addHealth(300);//regenerate to full he
+			player->ori+= 20;//boost ori by 30
+	}
+	else if(replyString == "Response Inquire About Ifa"){
+	}*/
 
 	state = 1;
 	//otherConversationPoint(line);

@@ -74,6 +74,21 @@ class HUD
   static constexpr float KEYBIND_DISPLAY_WIDTH = 175.0F;
   static constexpr float KEYBIND_DISPLAY_HEIGHT = 175.0F;
 
+
+  //Eron: definitly need to change all this so it uses proportions
+
+  static constexpr float ORI_FLAME_X = 0.0F;
+  static constexpr float ORI_FLAME_Y = 355.0F;
+  static constexpr float ORI_CROWN_X = 0.0F;
+  static constexpr float ORI_CROWN_Y = 355.0F;
+
+  static constexpr float ORI_FLAME_WIDTH = 50.0F;
+  static constexpr float ORI_FLAME_HEIGHT = 50.0F;
+  static constexpr float ORI_CROWN_WIDTH = 150.0F;
+  static constexpr float ORI_CROWN_HEIGHT = 150.0F;
+
+  static bool if_animating;
+
   static bool show_active_quests;
 
   Rectangle *healthbar_empty_rect;
@@ -90,6 +105,9 @@ class HUD
   Rectangle *minimap_cursor_rect;
   Rectangle *keybind_display_rect;
 
+  Rectangle *ori_flame_rect;
+  Rectangle *ori_crown_rect;
+
   Texture *healthbar_empty_tex;
   Texture *healthbar_full_tex;
   Texture *healthbar_decor_segment_tex;
@@ -105,7 +123,12 @@ class HUD
   Texture *minimap_cursor_tex;
   Texture *keybind_display_tex;
 
+  Texture *ori_flame_tex;
+  Texture *ori_crown_tex;
+
+
   void drawMainHUD(Player *player);
-  void drawMinimap(Player* player, Hero* yemoja, Hero* oya);
+  void drawMinimap(Player* player, Hero* yemoja, Hero* oya, Hero* ogun);
+  void drawOri(Player* player);
   void drawKeybindDisplay();
 };
