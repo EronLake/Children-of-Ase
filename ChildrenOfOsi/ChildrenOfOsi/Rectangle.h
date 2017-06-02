@@ -67,6 +67,7 @@ public:
 	void setHeight(float h) { height=h; }
 	void setLoc(Vector2f l) { topLeft=l; }
 	Sprite getSprite() { return sprite; }
+	Sprite* get_sprite_ref() { return &sprite; }
 	void setSprite(Sprite s) { sprite = s; }
 	void drawObj(float _x, float _y)
 	{

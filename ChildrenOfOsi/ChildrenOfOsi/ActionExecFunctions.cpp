@@ -60,7 +60,7 @@ void ActionExecFunctions::execute_train(Action* train) {
 		train->getDoer()->getParty()->form_attack_party(train->getDoer()->getVillage()->barracks, false);
 		//std::cout << (train->getDoer()->destination).getXloc() << ":" << (train->getDoer()->destination).getXloc() << std::endl;
 
-		train->getDoer()->set_action_destination(train->getDoer()->getVillage()->get_village_location()); //should select from set of pre-defined, stored in Hero, or village?
+		train->getDoer()->set_action_destination(train->getReceiver()->getLoc()); //should select from set of pre-defined, stored in Hero, or village?
 		train->getDoer()->set_max_dist_act(500);
 		cout << "dest is " << train->getDoer()->get_action_destination().getXloc() << ", " << train->getDoer()->get_action_destination().getYloc() << endl;
 		//ActionHelper::create_memory(train, train->getDoer());
@@ -86,6 +86,9 @@ void ActionExecFunctions::execute_train(Action* train) {
 			train->checkpoint++;
 			train->getDoer()->set_busy(Hero::BUSY_FIGHT);
 		}
+		else {
+			train->getDoer()->set_action_destination(train->getReceiver()->getLoc());
+		}
 		break;
 	case 2: //If timer is complete, set village as destination, apply postconds, update memory
 		cout << "---------------------CASE 2---------------------" << endl;
@@ -97,7 +100,7 @@ void ActionExecFunctions::execute_train(Action* train) {
 			//{
 			//	perror("something is wrong with the current hero memory creation function");
 			//}
-			train->getDoer()->set_action_destination(train->getDoer()->getVillage()->get_village_location()); //Also predefined, maybe as "home_location" in hero
+			train->getDoer()->set_action_destination(train->getReceiver()->getLoc()); //Also predefined, maybe as "home_location" in hero
 			train->getDoer()->set_max_dist_act(500);
 			//print stats before applying post cond 
 			//cout << train->getDoer()->name << "'s str of Shgango BEFORE train is " << train->getDoer()->rel[1]->getStrength() << endl;
@@ -141,7 +144,7 @@ void ActionExecFunctions::execute_train_with(Action* train_with) {
 
 		if (ActionHelper::hero_respond(train_with)) //Other hero agrees to train with you
 		{
-			train_with->getDoer()->set_action_destination(train_with->getReceiver()->getVillage()->get_village_location());
+			train_with->getDoer()->set_action_destination(train_with->getReceiver()->getLoc());
 			train_with->checkpoint++;
 		}
 		else
@@ -163,6 +166,9 @@ void ActionExecFunctions::execute_train_with(Action* train_with) {
 		if (train_with->getDoer()->get_action_destination() == Vector2f(NULL,NULL) && (train_with->getReceiver()->get_busy() == Hero::NOT_BUSY)) {
 			ActionHelper::set_timer(train_with, 1200);  //Wait 20 seconds for greetings (60 frames times 20 seconds)
 			train_with->checkpoint++;
+		}
+		else {
+			train_with->getDoer()->set_action_destination(train_with->getReceiver()->getLoc());
 		}
 		break;
 	case 2: //When greeting timer is complete, set train destination for both heros
@@ -224,7 +230,7 @@ void ActionExecFunctions::execute_form_alliance(Action* form_alliance) {
 			form_alliance->getDoer()->getVillage()->addToParties(p);
 		}
 
-		form_alliance->getDoer()->set_action_destination(form_alliance->getReceiver()->getVillage()->get_village_location());
+		form_alliance->getDoer()->set_action_destination(form_alliance->getReceiver()->getLoc());
 		form_alliance->getDoer()->set_max_dist_act(30);
 		form_alliance->checkpoint++;
 		ActionHelper::create_memory(form_alliance, form_alliance->getReceiver());
@@ -302,6 +308,9 @@ void ActionExecFunctions::execute_form_alliance(Action* form_alliance) {
 			form_alliance->getDoer()->set_action_destination(form_alliance->getDoer()->getVillage()->get_village_location());
 			break;
 		}
+		else {
+			form_alliance->getDoer()->set_action_destination(form_alliance->getReceiver()->getLoc());
+		}
 	case 2:
 		if (form_alliance->getDoer()->get_action_destination() == Vector2f(NULL, NULL)) {
 			form_alliance->getDoer()->getParty()->setMode(Party::MODE_FLEE);
@@ -343,7 +352,7 @@ void ActionExecFunctions::execute_fight(Action* fight)
 			fight->getDoer()->getVillage()->addToParties(p);
 		}
 		fight->getDoer()->getParty()->form_attack_party(fight->getDoer()->getVillage()->barracks,true);
-		fight->getDoer()->set_action_destination(fight->getReceiver()->getVillage()->get_village_location()); //need to somehow retrieve location of target village
+		fight->getDoer()->set_action_destination(fight->getReceiver()->getLoc()); //need to somehow retrieve location of target village
 		fight->getDoer()->set_max_dist_act(500);
 		//ActionHelper::create_memory(fight, fight->getDoer());
 		fight->checkpoint++;
@@ -365,6 +374,9 @@ void ActionExecFunctions::execute_fight(Action* fight)
 			}
 			ActionHelper::set_timer(fight, 5);  //Wait 1 minute (60 frames times 60 seconds) trying to find out the hero's location
 			fight->checkpoint++;
+		}
+		else {
+			fight->getDoer()->set_action_destination(fight->getReceiver()->getLoc());
 		}
 		break;
 	case 2: //If timer is complete, set village as destination to the location of the target hero 
@@ -556,13 +568,13 @@ void ActionExecFunctions::execute_conquer(Action* conq)
 		if (conq->getDoer()->getParty()->getMembers().size() == 0)
 		{
 			conq->checkpoint++;
-			ActionHelper::create_memory(conq, conq->getReceiver());
+			//ActionHelper::create_memory(conq, conq->getReceiver());
 		} else if (conq->getReceiver()->getVillage()->defenders->getMembers().size() == 
 			conq->getReceiver()->getVillage()->defenders->get_down_members().size()) {
 			conq->getReceiver()->getVillage()->add_to_village_health(conq->getDoer()->getParty()->getMembers().size()*(-10));
 			if (conq->getReceiver()->getVillage()->get_village_health() <= 0) {
 				conq->checkpoint++;
-				ActionHelper::create_memory(conq, conq->getReceiver());
+				//ActionHelper::create_memory(conq, conq->getReceiver());
 			}else {
 
 				//ActionHelper::set_timer(conq, 600);
@@ -701,7 +713,7 @@ void ActionExecFunctions::execute_duel(Action* duel)
 			duel->getDoer()->getVillage()->addToParties(p);
 		}
 		duel->getDoer()->getParty()->form_attack_party(duel->getDoer()->getVillage()->barracks, false);
-		duel->getDoer()->set_action_destination(duel->getReceiver()->getVillage()->get_village_location());
+		duel->getDoer()->set_action_destination(duel->getReceiver()->getLoc());
 		duel->getDoer()->set_max_dist_act(500);
 		//ActionHelper::create_memory(duel, duel->getDoer());
 		duel->checkpoint++;
@@ -718,6 +730,9 @@ void ActionExecFunctions::execute_duel(Action* duel)
 			}
 			ActionHelper::set_timer(duel, 5);  //Wait 1 minute (60 frames times 60 seconds) trying to find out the hero's location
 			duel->checkpoint++;
+		}
+		else {
+			duel->getDoer()->set_action_destination(duel->getReceiver()->getLoc());
 		}
 		break;
 	case 2: //If timer is complete, set village as destination to the location of the target hero 
@@ -744,6 +759,9 @@ void ActionExecFunctions::execute_duel(Action* duel)
 			duel->checkpoint++;
 			duel->getDoer()->set_busy(Hero::BUSY_FIGHT);
 			duel->getReceiver()->set_busy(Hero::BUSY_REC_FIGHT);
+		}
+		else {
+			duel->getDoer()->set_action_destination(duel->getReceiver()->getLoc());
 		}
 		//NEED TO SOMEHOW ACCOUNT FOR IF A PLAYER GETS CLOSE
 		break;
@@ -834,7 +852,7 @@ void ActionExecFunctions::execute_conversation(Action* conv)
 			conv->getDoer()->getVillage()->addToParties(p);
 		}
 		conv->getDoer()->getParty()->form_attack_party(conv->getDoer()->getVillage()->barracks, false);
-		conv->getDoer()->set_action_destination(conv->getReceiver()->getVillage()->get_village_location());
+		conv->getDoer()->set_action_destination(conv->getReceiver()->getLoc());
 		conv->getDoer()->set_max_dist_act(30);
 		conv->getDoer()->set_busy(Hero::BUSY_TRAVEL);
 		conv->checkpoint++;
@@ -844,6 +862,9 @@ void ActionExecFunctions::execute_conversation(Action* conv)
 		if (conv->getDoer()->get_action_destination() == Vector2f(NULL, NULL)) {
 			ActionHelper::set_timer(conv, 60);  
 			conv->checkpoint++;
+		}
+		else {
+			conv->getDoer()->set_action_destination(conv->getReceiver()->getLoc());
 		}
 		break;
 
@@ -863,6 +884,9 @@ void ActionExecFunctions::execute_conversation(Action* conv)
 			conv->getDoer()->set_busy(Hero::BUSY_TALK);
 			conv->getReceiver()->set_busy(Hero::BUSY_REC_TALK);
 			ActionHelper::create_memory(conv, conv->getReceiver());
+		}
+		else {
+			conv->getDoer()->set_action_destination(conv->getReceiver()->getLoc());
 		}
 		break;
 	case 4: //If timer is complete, set village as destination, apply postconds, update memory
@@ -951,7 +975,7 @@ void ActionExecFunctions::execute_bribe(Action* bribe)
 
 				//ActionHelper::create_memory(bribe, bribe->getDoer());
 
-				bribe->getDoer()->set_action_destination(bribe->getReceiver()->getVillage()->get_village_location());
+				bribe->getDoer()->set_action_destination(bribe->getReceiver()->getLoc());
 				bribe->getDoer()->set_max_dist_act(30);
 				bribe->checkpoint++;
 			}
@@ -965,6 +989,9 @@ void ActionExecFunctions::execute_bribe(Action* bribe)
 				bribe->getDoer()->set_busy(Hero::BUSY_TALK);
 				bribe->getReceiver()->set_busy(Hero::BUSY_REC_TALK);
 				bribe->checkpoint++;
+			}
+			else {
+				bribe->getDoer()->set_action_destination(bribe->getReceiver()->getLoc());
 			}
 			break;
 
@@ -1037,7 +1064,7 @@ void ActionExecFunctions::execute_compliment(Action* compliment)
 	switch (compliment->checkpoint) {
 	case 0: //Determine the location that the compliment is happening
 		//ActionHelper::create_memory(compliment, compliment->getDoer());
-		compliment->getDoer()->set_action_destination(compliment->getReceiver()->getVillage()->get_village_location());
+		compliment->getDoer()->set_action_destination(compliment->getReceiver()->getLoc());
 		compliment->checkpoint++;
 		break;
 
@@ -1048,6 +1075,9 @@ void ActionExecFunctions::execute_compliment(Action* compliment)
 			compliment->getReceiver()->set_busy(Hero::BUSY_REC_TALK);
 			compliment->checkpoint++;
 			ActionHelper::create_memory(compliment, compliment->getReceiver());
+		}
+		else {
+			compliment->getDoer()->set_action_destination(compliment->getReceiver()->getLoc());
 		}
 		break;
 	case 2:
