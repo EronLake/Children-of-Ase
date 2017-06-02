@@ -126,5 +126,10 @@ public:
 	static bool talked_to_shrine_j;
 	static bool talked_to_shrine_m;
 
+	//to keep you from repeatedly getting divination from babalawos
+	static bool talked_to_babalawo_o;
+	static bool talked_to_babalawo_j;
+	static bool talked_to_babalawo_m;
+
 };
 

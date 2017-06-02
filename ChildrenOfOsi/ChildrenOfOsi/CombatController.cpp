@@ -283,7 +283,7 @@ void CombatController::checkParties() {
 								(*j)->remove_party((*b));
 								delete (*b);
 							}
-						} else if (dist_by_center((*a)->getLeader(), (*b)->getLeader()) < 1000) {
+						} else if (dist_by_center((*a)->getLeader(), (*b)->getLeader()) < 1000 && ((*a)->getMembers().size()!=(*a)->get_down_members().size()) && ((*b)->getMembers().size() != (*b)->get_down_members().size())) {
 							if ((*b)->getMode() != Party::MODE_FLEE) {
 								if ((*b)->getLeader()->getInCombat()) {
 									(*b)->get_fight()->add_party((*b), (*a),true);

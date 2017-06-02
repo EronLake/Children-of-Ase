@@ -14,6 +14,11 @@ bool DialogueController::talked_to_shrine_o = false;
 bool DialogueController::talked_to_shrine_j = false;
 bool DialogueController::talked_to_shrine_m = false;
 
+//to keep you from repeatedly getting divination from babalawos 
+bool DialogueController::talked_to_babalawo_o = false;
+bool DialogueController::talked_to_babalawo_j = false;
+bool DialogueController::talked_to_babalawo_m = false;
+
 Player* DialogueController::player;
 WorldObj* DialogueController::other; //the npc speaking with the player
 int DialogueController::state = 0;
@@ -113,6 +118,7 @@ bool DialogueController::first_buff = true;
 bool DialogueController::is_hero_act = false;
 
 Action* DialogueController::hero_act_toward_player = nullptr;
+
 
 DialogueController::DialogueController()
 {
@@ -2032,14 +2038,59 @@ void DialogueController::other_response_babalawo(std::string info, std::string h
 
 
 	message = other->getName() + ": " + reply_pt_sentence + "\n\n";
-	/*if(replyString == "Response Ask For Divination"){
-	      if(some_check)
-			  //give shrine blessing
-			player->addHealth(300);//regenerate to full he
-			player->ori+= 20;//boost ori by 30
+
+	
+	if(replyString == "Response Ask For Divination"){
+		if (other->getName().find("Oasis") != string::npos)
+		{
+			if (!DialogueController::talked_to_babalawo_o)
+			{
+				//give shrine blessing
+				player->addHealth(300);//regenerate to full he
+				player->ori += 20;//boost ori by 30
+			}
+			else {
+				dialogue_point diog_pt = { "No Divination","No Divination","","","1","0" };
+				reply_pt_sentence = dialogue.gen_dialog_babalawo(diog_pt, other);
+				message = other->getName() + ": " + reply_pt_sentence + "\n\n";
+
+			}
+		}
+		else if (other->getName().find("Jungle") != string::npos)
+		{
+			if (!DialogueController::talked_to_babalawo_j)
+			{
+				//give shrine blessing
+				player->addHealth(300);//regenerate to full he
+				player->ori += 20;//boost ori by 30
+			}
+			else {
+				dialogue_point diog_pt = { "No Divination","No Divination","","","1","0" };
+				reply_pt_sentence = dialogue.gen_dialog_babalawo(diog_pt, other);
+				message = other->getName() + ": " + reply_pt_sentence + "\n\n";
+
+			}
+		}
+		else if (other->getName().find("Mountain") != string::npos)
+		{
+			if (!DialogueController::talked_to_babalawo_m)
+			{
+				//give shrine blessing
+				player->addHealth(300);//regenerate to full he
+				player->ori += 20;//boost ori by 30
+			}
+			else {
+				dialogue_point diog_pt = { "No Divination","No Divination","","","1","0" };
+				reply_pt_sentence = dialogue.gen_dialog_babalawo(diog_pt, other);
+				message = other->getName() + ": " + reply_pt_sentence + "\n\n";
+
+			}
+		}
+		
 	}
 	else if(replyString == "Response Inquire About Ifa"){
-	}*/
+
+	}
 
 	state = 1;
 	//otherConversationPoint(line);
@@ -2169,6 +2220,11 @@ void DialogueController::startConversation(WorldObj* n, bool playerTalk)
 	optionsIndex = 0;
 
 	if (temp_hero) {
+
+		//temp_hero->rel[player->name]->addNotoriety(50);
+		//temp_hero->rel[player->name]->addStrength(50);
+		//temp_hero->rel[player->name]->addAffinity(50);
+
 			remove_dialog_option("Ask_To_Duel", NotorietyIcon);
 			remove_dialog_option("Ask_To_Spar", StrengthIcon);
 			add_dialog_option("Ask_To_Duel", NotorietyIcon);
@@ -2190,7 +2246,7 @@ void DialogueController::startConversation(WorldObj* n, bool playerTalk)
 				set_selectable(false, "Recruit_For_Party", StrengthIcon);
 
 			if (temp_hero->rel[player->name]->getAffinity() + (player->ori / 10) >= 60 &&
-				temp_hero->rel[player->name]->getStrength() + (player->ori / 10) >= 50)
+				temp_hero->rel[player->name]->getStrength() + (player->ori / 10) >= 60)
 				set_selectable(true, "Request_Teaching", StrengthIcon);
 			else
 				set_selectable(false, "Request_Teaching", StrengthIcon);
@@ -2242,7 +2298,7 @@ void DialogueController::startConversation(WorldObj* n, bool playerTalk)
 							++i;
 					}
 					for (int i = 0; i < player->quests_log.size();) {
-						if (player->quests_log[i]->executed) {
+						if (player->quests_log[i]->getOwner()->name == temp_hero->name) {
 							player->remove_quest(player->quests_log[i]);//remove from "quests" map
 							player->quests_log.erase(player->quests_log.begin() + i);//erase from player's quests log
 						}
@@ -2899,7 +2955,7 @@ bool DialogueController::check_acceptance(Player* p, Hero* npc) {
 	int range_cap = npc->get_range_cap(p->cur_action);
 	for (auto i : curr_conversation_log) {
 		if (i->get_who() == SHANGO && i->get_conv_point()->get_name() == act_name)
-			range_cap = range_cap / 2;
+			range_cap = range_cap;// / 2;
 	}
 	int result = rand() % 101;//get random number between 0 and 100
 	if (result <= range_cap)
