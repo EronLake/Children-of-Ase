@@ -129,6 +129,9 @@ void PlayerActExecFunctions::execute_end(bool if_succ) {
 	}
 	else if (act_name == "Spar") {
 		DialogueController::spar_pop_up(cur_action);
+	} else if (player->get_incapacitated()) {
+		player->setLoc(player->getVillage()->get_village_location());
+		player->capacitate(0);
 	}
 
 	///////////////////////////////////////////////////////////////////////////////////

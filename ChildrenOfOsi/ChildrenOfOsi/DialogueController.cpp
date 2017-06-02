@@ -2955,7 +2955,7 @@ bool DialogueController::check_acceptance(Player* p, Hero* npc) {
 	int range_cap = npc->get_range_cap(p->cur_action);
 	for (auto i : curr_conversation_log) {
 		if (i->get_who() == SHANGO && i->get_conv_point()->get_name() == act_name)
-			range_cap = range_cap / 2;
+			range_cap = range_cap;// / 2;
 	}
 	int result = rand() % 101;//get random number between 0 and 100
 	if (result <= range_cap)
