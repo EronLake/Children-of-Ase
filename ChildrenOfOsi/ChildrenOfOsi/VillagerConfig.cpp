@@ -39,7 +39,9 @@ void VillagerConfig::set_villager(vector<WorldObj*>* recVec_ptr, ChildrenOfOsi* 
 	float hight, std::string name, float bodyx1, float bodyx2, float bodyy1, float bodyy2, int health)
 {
 
-	gameplay_func->add_npc(name, 100 * x, 100 * y, true);
+	if (!Containers::npc_table[name]) {
+		gameplay_func->add_npc(name, 100 * x, 100 * y, true);
+	}
 
 	tBuffer->run();
 
@@ -110,7 +112,7 @@ void VillagerConfig::init_sprites(ChildrenOfOsi* gameplay_func, TaskBuffer* tBuf
 	for (auto itor : sprites)
 	{
 		//create textures for the soldiers 
-		(*textureMap)[Containers::texture_table[itor["0"].asString()]] = pair<string, int>(SPRITES_PATH + itor["0"].asString() + ".png", itor["1"].asInt()/*frame_num*/);
+		(*textureMap)[Containers::texture_table[itor["0"].asString()]] = pair<string, int>(SHANGO_PATH + itor["0"].asString() + ".png", itor["1"].asInt()/*frame_num*/);
 		//push to appropreate region config
 		region_con->insert(Containers::texture_table[itor["0"].asString()]);
 	}

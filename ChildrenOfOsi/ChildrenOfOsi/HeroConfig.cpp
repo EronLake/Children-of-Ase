@@ -50,8 +50,10 @@ void HeroConfig::set_hero(vector<WorldObj*>* movVec, ChildrenOfOsi* gameplay_fun
 	float hight, std::string name, int hero_id, float bodyx1, float bodyx2, float bodyy1, float bodyy2, int health, int max_stamina,
 	int a, int k, int h, int p, int r, int e, int g)
 {
-
-	gameplay_func->add_hero(name, 100 * x, 100 * y, true);
+	if (!Containers::hero_table[name]) {
+		gameplay_func->add_hero(name, 100 * x, 100 * y, true);
+	}
+	
 
 	tBuffer->run();
 
@@ -266,7 +268,10 @@ void HeroConfig::init_attacks(ChildrenOfOsi* gameplay_func, TaskBuffer* tBuffer,
 	}
 
 	//initialize melee attack
-	gameplay_func->add_Attack("melee_" + cur_hero->getKey(), cur_hero->body[0].getX(), cur_hero->body[0].getY(), true, 10);
+	if (!Containers::Attack_table["melee_" + cur_hero->getKey()]) {
+		gameplay_func->add_Attack("melee_" + cur_hero->getKey(), cur_hero->body[0].getX(), cur_hero->body[0].getY(), true, 10);
+	}
+
 	tBuffer->run();
 
 	cur_hero->melee = Containers::Attack_table["melee_" + cur_hero->getKey()];
@@ -512,8 +517,11 @@ void HeroConfig::init_hero_planner(ChildrenOfOsi* gameplay_func, TaskBuffer* tBu
 	ActionConfig::import_config(gameplay_func, tBuffer, Containers::hero_table[name]);
 
 	//initializes planner for given hero
-	Planner* heroPlanner = new Planner(Containers::hero_table[name]);
-	AIController::set_plan(hero_id, heroPlanner);
+	if (AIController::get_plan(hero_id) == nullptr) {
+		Planner* heroPlanner = new Planner(Containers::hero_table[name]);
+		AIController::set_plan(hero_id, heroPlanner);
+	}
+	
 }
 
 /*

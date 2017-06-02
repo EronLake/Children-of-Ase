@@ -123,6 +123,12 @@ Action* DialogueController::hero_act_toward_player = nullptr;
 DialogueController::DialogueController()
 {
 	srand(time(0));//seeds rand function to ensure good variety of random numbers
+
+	player_conv_point_choice = "";
+
+	//keeps track of the topic of the current conversation cycle
+	curr_hero_topic = "";
+
 }
 
 
@@ -453,8 +459,11 @@ void DialogueController::PlayerConversationPoint()
 				|| player_conv_point_choice == "Advise To Conquer" || player_conv_point_choice == "Advise To Send Peace Offering To" ||
 				player_conv_point_choice == "Advise To Ally With" || player_conv_point_choice == "Intimidate")
 			{ 
-				PlayerActExecFunctions::execute_start(player_conv_point_choice, temp_hero);
-				accepted_action = check_acceptance(player, temp_hero);
+				if ((choice[ConvPointName].find("Advise To") == string::npos)) {
+					PlayerActExecFunctions::execute_start(player_conv_point_choice, temp_hero);
+					accepted_action = check_acceptance(player, temp_hero);
+				}
+				
 				if (accepted_action) {
 					Containers::conv_point_table[player_conv_point_choice]->apply_postconditions(true, player, temp_hero);
 				}
@@ -2218,6 +2227,12 @@ void DialogueController::startConversation(WorldObj* n, bool playerTalk)
 	Hero* temp_hero = CheckClass::isHero(other);
 	std::string start_message = "";
 	optionsIndex = 0;
+
+	player_conv_point_choice = "";
+
+	//keeps track of the topic of the current conversation cycle
+	curr_hero_topic = "";
+
 
 	if (temp_hero) {
 

@@ -2,6 +2,7 @@
 #include "ActionConfig.h"
 #include <ctime>
 
+bool ActionConfig::preloaded = false;
 
 ActionConfig::ActionConfig()
 {
@@ -38,7 +39,9 @@ void ActionConfig::import_config(ChildrenOfOsi* gameplay_func, TaskBuffer* tBuff
 					(*itr)["greed"].asInt());
 
 				//this is where the helper func should be called
-				import_conditions(itr, name);
+				if (!preloaded) {
+					import_conditions(itr, name);
+				}
 				owner->actionPool_map[i->second->name]->updateMiddle();
 
 			}
@@ -50,11 +53,17 @@ void ActionConfig::set_action_obj(ChildrenOfOsi* gameplay_func, TaskBuffer* tBuf
 	Hero* receiver, float utility, float why, std::string type, std::string name, std::string exe_name,
 	int a, int k, int h, int p, int r, int e, int g)
 {
+	//if already initialized then return (this is so reseting the game can work)
+	if (!Containers::action_table[name]) {
+		gameplay_func->add_action(name, utility, why, owner, receiver, owner, exe_name);
+		tBuffer->run();
 
-	gameplay_func->add_action(name, utility, why, owner, receiver, owner, exe_name);
-	tBuffer->run();
-
-	Containers::action_table[name]->setMultipliers(a, k, h, p, r, e, g);
+		Containers::action_table[name]->setMultipliers(a, k, h, p, r, e, g);
+		preloaded = false;
+	}
+	else {
+		preloaded = true;
+	}
 
 	//std:://cout << std::to_string(Containers::action_table[name]->multipliers->getAggression()) << std::endl;
 

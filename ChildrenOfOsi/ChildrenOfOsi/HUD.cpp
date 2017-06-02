@@ -256,7 +256,7 @@ void HUD::drawMinimap(Player *player,Hero* yemoja, Hero* oya, Hero* ogun)
 	  this->minimap_cursor_rect->getWidth(), this->minimap_cursor_rect->getHeight(), this->minimap_cursor_rect->getSprite());
   GameWindow::drawSprite(this->minimap_cursor_rect->getX() + minimapCoordOffset2.getXloc(), this->minimap_cursor_rect->getY() + minimapCoordOffset2.getYloc(),
 	  this->minimap_cursor_rect->getWidth(), this->minimap_cursor_rect->getHeight(), this->minimap_cursor_rect->getSprite());
-  GameWindow::drawSprite(this->minimap_cursor_rect->getX() + minimapCoordOffset3.getXloc(), this->minimap_cursor_rect->getY() + minimapCoordOffset2.getYloc(),
+  GameWindow::drawSprite(this->minimap_cursor_rect->getX() + minimapCoordOffset3.getXloc(), this->minimap_cursor_rect->getY() + minimapCoordOffset3.getYloc(),
 	  this->minimap_cursor_rect->getWidth(), this->minimap_cursor_rect->getHeight(), this->minimap_cursor_rect->getSprite());
 }
 

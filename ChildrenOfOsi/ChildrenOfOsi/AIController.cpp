@@ -175,9 +175,11 @@ void AIController::reevaluate_state(int me, int them) {
 
 void AIController::execute() {
 	int action_wait_time = 120; //2sec           //Wait time is approx. 2 minutes (7200)
-	for (int me = 2; me < 4; me++) {
-		Hero* hero = get_hero_object(me);
-		Planner* planner = get_plan(me);
+	for(auto me : Containers::hero_table){
+	//for (int me = 2; me < 4; me++) {
+		if (me.second->name == SHANGO) { continue; } //skip the player
+		Hero* hero = get_hero_object(me.second->name);
+		Planner* planner = get_plan(me.second->name);
 
 		// IN MAIN, DURING THE EXECUTION, WE DO NOT HAVE AN ACTION
 		Action* curr_action = planner->get_current_action();

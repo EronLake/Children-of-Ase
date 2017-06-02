@@ -40,6 +40,12 @@ void War::endWar(Village* one, Village* two) {
 	}
 }
 
+void War::end_wars() {
+	for (int i = 0; i < wars.size(); i++) {
+		endWar(wars[i]->warParties.first, wars[i]->warParties.second);
+	}
+}
+
 std::vector<Village*> War::getWars(Village* vil) {
 	std::vector<Village*> tmp;
 	for (auto i = wars.begin(); i != wars.end(); ++i) {
