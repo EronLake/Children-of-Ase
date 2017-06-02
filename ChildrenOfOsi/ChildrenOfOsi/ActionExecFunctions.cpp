@@ -57,7 +57,7 @@ void ActionExecFunctions::execute_train(Action* train) {
 			p->add_party_to_party(train->getDoer()->getParty());
 			train->getDoer()->getVillage()->addToParties(p);
 		}
-		train->getDoer()->getParty()->form_attack_party(train->getDoer()->getVillage()->barracks, false);
+		train->getDoer()->getParty()->form_attack_party(train->getDoer()->getVillage()->barracks, false,train->getDoer()->get_strength());
 		//std::cout << (train->getDoer()->destination).getXloc() << ":" << (train->getDoer()->destination).getXloc() << std::endl;
 
 		train->getDoer()->set_action_destination(train->getReceiver()->getLoc()); //should select from set of pre-defined, stored in Hero, or village?
@@ -351,7 +351,7 @@ void ActionExecFunctions::execute_fight(Action* fight)
 			p->add_party_to_party(fight->getDoer()->getParty());
 			fight->getDoer()->getVillage()->addToParties(p);
 		}
-		fight->getDoer()->getParty()->form_attack_party(fight->getDoer()->getVillage()->barracks,true);
+		fight->getDoer()->getParty()->form_attack_party(fight->getDoer()->getVillage()->barracks,true, fight->getDoer()->get_strength());
 		fight->getDoer()->set_action_destination(fight->getReceiver()->getLoc()); //need to somehow retrieve location of target village
 		fight->getDoer()->set_max_dist_act(500);
 		//ActionHelper::create_memory(fight, fight->getDoer());
@@ -427,6 +427,8 @@ void ActionExecFunctions::execute_fight(Action* fight)
 		if (fight->getReceiver()->getParty()->getMembers().size() == fight->getReceiver()->getParty()->get_down_members().size()) {
 			//Apply succ-post-conditions
 			fight->apply_postconditions(true);
+			fight->getDoer()->add_strength(5);
+			fight->getReceiver()->add_strength(-5);
 
 			if (fight->getDoer()->SUGG_ACT_STATUS == 1) {
 				//sets suggested action flag to success
@@ -452,6 +454,8 @@ void ActionExecFunctions::execute_fight(Action* fight)
 		{
 			//Apply fail-post-conditions
 			fight->apply_postconditions(false);
+			fight->getDoer()->add_strength(-5);
+			fight->getReceiver()->add_strength(5);
 
 			if (fight->getDoer()->SUGG_ACT_STATUS == 1) {
 				//sets suggested action flag to failure
@@ -606,6 +610,8 @@ void ActionExecFunctions::execute_conquer(Action* conq)
 		if (conq->getReceiver()->getVillage()->get_village_health() <= 0) {
 			//Apply succ-post-conditions
 			conq->apply_postconditions(true);
+			conq->getDoer()->add_strength(10);
+			conq->getReceiver()->add_strength(-10);
 
 			if (conq->getDoer()->SUGG_ACT_STATUS == 1) {
 				//sets suggested action flag to success
@@ -629,6 +635,8 @@ void ActionExecFunctions::execute_conquer(Action* conq)
 		{
 			//Apply fail-post-conditions
 			conq->apply_postconditions(false);
+			conq->getDoer()->add_strength(-10);
+			conq->getReceiver()->add_strength(10);
 
 			if (conq->getDoer()->SUGG_ACT_STATUS == 1) {
 				//sets suggested action flag to failure
@@ -712,7 +720,7 @@ void ActionExecFunctions::execute_duel(Action* duel)
 			p->add_party_to_party(duel->getDoer()->getParty());
 			duel->getDoer()->getVillage()->addToParties(p);
 		}
-		duel->getDoer()->getParty()->form_attack_party(duel->getDoer()->getVillage()->barracks, false);
+		duel->getDoer()->getParty()->form_attack_party(duel->getDoer()->getVillage()->barracks, false, duel->getDoer()->get_strength());
 		duel->getDoer()->set_action_destination(duel->getReceiver()->getLoc());
 		duel->getDoer()->set_max_dist_act(500);
 		//ActionHelper::create_memory(duel, duel->getDoer());
@@ -789,6 +797,8 @@ void ActionExecFunctions::execute_duel(Action* duel)
 		if (duel->getReceiver()->getParty()->getMembers().size() == duel->getReceiver()->getParty()->get_down_members().size()) {
 			//Apply succ-post-conditions
 			duel->apply_postconditions(true);
+			duel->getDoer()->add_strength(3);
+			duel->getReceiver()->add_strength(-3);
 			//update_memory category as a success 
 			//doer_mem->setCategory("success"); receiver_mem->setCategory("failure");
 			//update reason
@@ -799,6 +809,8 @@ void ActionExecFunctions::execute_duel(Action* duel)
 		{
 			//Apply fail-post-conditions
 			duel->apply_postconditions(false);
+			duel->getDoer()->add_strength(-3);
+			duel->getReceiver()->add_strength(3);
 			//update_memory as faiure
 			//doer_mem->setCategory("failure"); receiver_mem->setCategory("success");
 			//update reason
@@ -851,7 +863,7 @@ void ActionExecFunctions::execute_conversation(Action* conv)
 			p->add_party_to_party(conv->getDoer()->getParty());
 			conv->getDoer()->getVillage()->addToParties(p);
 		}
-		conv->getDoer()->getParty()->form_attack_party(conv->getDoer()->getVillage()->barracks, false);
+		conv->getDoer()->getParty()->form_attack_party(conv->getDoer()->getVillage()->barracks, false, conv->getDoer()->get_strength());
 		conv->getDoer()->set_action_destination(conv->getReceiver()->getLoc());
 		conv->getDoer()->set_max_dist_act(30);
 		conv->getDoer()->set_busy(Hero::BUSY_TRAVEL);

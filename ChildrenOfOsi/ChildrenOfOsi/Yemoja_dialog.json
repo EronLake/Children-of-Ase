@@ -639,5 +639,29 @@
         "3": "I am more than happy to join your party my great ally. Let us combine our strength as one.",
 		"4": "I am more than happy to join your party my great ally. Let us combine our strength as one.",
         "5": "I am more than happy to join your party my great ally. Let us combine our strength as one."
-	}
+	},
+
+	"Accept Gift":{
+	    "1": "Do you honesly think I would stoop to your level and accept a bribe.",
+        "2": "I hope you think better of me than to think I would be swayed so easily by a bribe.",
+        "3": "I do not usually accept bribes, but I suppose I could make an exception for you.",
+        "4": "I do not usually accept bribes, but I suppose I could make an exception for you.",
+        "5": "I do not usually accept bribes, but I suppose I could make an exception for you."
+	},
+
+   "Offer Praise": {
+        "1": "I am reluctant to do this, but I suppose I must beg for your mercy.",
+        "2": "Please know that I truly meant no harm to you and accept my apology.",
+        "3": "My friend, please know that I would never try to harm you. I truly meant no real harm.",
+		"4": "My friend, please know that I would never try to harm you. I truly meant no real harm.",
+        "5": "My friend, please know that I would never try to harm you. I truly meant no real harm."
+   },
+
+    "Accept Praise": {
+        "1": "That would actually be flattering if it wasn't coming from you.",
+        "2": "Oh...thanks...I suppose.",
+        "3": "Thank you.",
+        "4": "It is not often people flatter me. ",
+        "5": "Thanks so much, and I could say the same about you."
+   }
 }
