@@ -210,7 +210,7 @@ void Soldier::updateCD()
   if (stamina < maxStamina) {
 	  ++stamina;
   }
-  this->regenHealth();
+  if (!this->inCombat)this->regenHealth();
 }
 
 
