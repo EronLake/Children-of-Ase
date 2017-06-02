@@ -89,6 +89,18 @@ int DialogueHelper::personality_appeal(ConversationPoint* point, Personality* pe
 	(personality->getRecklessness() *point->multipliers->getRecklessness())+
 	(personality->getExtroversion() *point->multipliers->getExtroversion()));
 };
+int DialogueHelper::relationship_appeal(ConversationPoint* point, Relationship* my_rel) {
+	int appeal = 0;
+	int str_mult = point->rel_multipliers->getAffinity();
+	int aff_mult = point->rel_multipliers->getAffinity();
+	int noto_mult = point->rel_multipliers->getAffinity();
+
+	appeal += my_rel->getStrength() * str_mult;
+	appeal += my_rel->getAffinity() * aff_mult;
+	appeal += my_rel->getNotoriety() * noto_mult;
+	return appeal;
+}
+
 
 /*Runs the heuristic that npc's use to select a conversation point to say.*/
 dialogue_point DialogueHelper::choose_conv_pt(std::vector<ConversationLogObj*> curr_conversation_log, Hero* other,Player* player)
@@ -177,8 +189,9 @@ dialogue_point DialogueHelper::choose_conv_pt(std::vector<ConversationLogObj*> c
 				}
 				else {
 						//only add it in if it fuffills the prereqs. 
-					if(relationship->getAffinity()>= k->rel_multipliers->getAffinity() && relationship->getNotoriety() >= k->rel_multipliers->getNotoriety() && relationship->getStrength() >= k->rel_multipliers->getStrength()){
-					possible_replies.push_back(std::make_pair(0,k));}//push it with a utility of 0 for now
+					//if(relationship->getAffinity()>= k->rel_multipliers->getAffinity() && relationship->getNotoriety() >= k->rel_multipliers->getNotoriety() && relationship->getStrength() >= k->rel_multipliers->getStrength()){
+					possible_replies.push_back(std::make_pair(0,k));
+				//}//push it with a utility of 0 for now
 				}
 			
 			
@@ -224,7 +237,8 @@ dialogue_point DialogueHelper::choose_conv_pt(std::vector<ConversationLogObj*> c
 	//prioritize, possible replies vector
 		//for every reply
 	for (auto itor = possible_replies.begin(); itor != possible_replies.end(); itor++) {
-			appeal = personality_appeal(itor->second, personality);
+		//+ relationship_appeal(itor->second, relationship)
+			appeal = personality_appeal(itor->second, personality) + relationship_appeal(itor->second, relationship);
 				temp.push_back(make_pair(appeal, itor->second));//push onto temp vector with appeal
 	}
 	possible_replies = temp;//replace possible replies with temp
@@ -327,18 +341,28 @@ std::vector<std::vector<dialogue_point>>& DialogueHelper::get_possible_conv_pts_
 std::vector<dialogue_point> DialogueHelper::get_possible_reply_pts(std::string point, int opts_inx)
 {
 	std::vector<dialogue_point> reply;
-	reply.push_back({"Decline_To_Answer","Decline_To_Answer","","","1"});
-	for (int i = 0; i < possible_reply_pts[opts_inx].size(); i++) {
-		if ((/*possible_reply_pts[opts_inx][i][CorrespondingConvPt].compare("Decline_To_Answer") == 0 ||*/ possible_reply_pts[opts_inx][i][CorrespondingConvPt].compare(point) == 0)
-			&& point.find(" Quest", 0) == string::npos) {
-			reply.push_back({ possible_reply_pts[opts_inx][i] });
+	//reply.push_back({"Decline_To_Answer","Decline_To_Answer","","","1"});
+	if (point != "Boast" && point != "Insult" && point != "Intimidate" && point != "Compliment" && point != "Offer Praise") {
+		for (int i = 0; i < possible_reply_pts[opts_inx].size(); i++) {
+			if ((/*possible_reply_pts[opts_inx][i][CorrespondingConvPt].compare("Decline_To_Answer") == 0 ||*/ possible_reply_pts[opts_inx][i][CorrespondingConvPt].compare(point) == 0)
+				&& point.find(" Quest", 0) == string::npos) {
+				reply.push_back({ possible_reply_pts[opts_inx][i] });
+			}
+
 		}
-	 
 	}
-	if (point.find(" Quest", 0) != string::npos) {
-		reply.push_back({ "Accept_Quest", "Accept_Quest","","","1" });
-		reply.push_back({ "Decline_Quest", "Decline_Quest","","","1" });
+	else {
+		reply.push_back({ "Boast In Response", "Boast In Response","","","1","0" });
+		reply.push_back({ "Intimidate In Response", "Intimidate In Response","","","1","0" });
+		reply.push_back({ "Compliment In Response", "Compliment In Response","","","1","0" });
+		reply.push_back({ "Offer Praise In Response", "Offer Praise In Response","","","1","0" });
+		reply.push_back({ "Insult In Response", "Insult In Response","","","1","0" });
 	}
+	if (point.find(" _Quest", 0) != string::npos) {
+		/*reply.push_back({ "Accept_Quest", "Accept_Quest","","","1" });
+		reply.push_back({ "Decline_Quest", "Decline_Quest","","","1" });*/
+	}
+	
 	return reply;
 }
 

@@ -19,11 +19,15 @@ Sprite *Tutorial::screenFadeFilterSprite = nullptr;
 Sprite *Tutorial::stageGameStartPopupSprite = nullptr;
 Sprite *Tutorial::stageIntro01PopupSprite = nullptr;
 Sprite *Tutorial::stageIntro02PopupSprite = nullptr;
+Sprite *Tutorial::stageDialoguePopupSprite = nullptr;
+Sprite *Tutorial::stageCombatPopupSprite = nullptr;
 
 Texture *Tutorial::screenFaceFilterTex = nullptr;
 Texture *Tutorial::stageGameStartPopupTex = nullptr;
 Texture *Tutorial::stageIntro01PopupTex = nullptr;
 Texture *Tutorial::stageIntro02PopupTex = nullptr;
+Texture *Tutorial::stageDialoguePopupTex = nullptr;
+Texture *Tutorial::stageCombatPopupTex = nullptr;
 
 /**
  * Initializes the tutorial system.
@@ -49,6 +53,14 @@ void Tutorial::init()
   Tutorial::stageIntro02PopupTex = new Texture();
   Tutorial::stageIntro02PopupTex->setFile(SPRITES_PATH + "Tutorial_Intro02Popup.png", 1);
   Tutorial::stageIntro02PopupSprite->setTexture(Tutorial::stageIntro02PopupTex);
+
+  Tutorial::stageDialoguePopupSprite = new Sprite();
+  Tutorial::stageDialoguePopupTex = new Texture();
+  Tutorial::stageDialoguePopupTex->setFile(SPRITES_PATH + "Tutorial_DialoguePopup.png", 1);
+  Tutorial::stageDialoguePopupSprite->setTexture(Tutorial::stageDialoguePopupTex);
+
+  Tutorial::stageCombatPopupSprite = new Sprite();
+  Tutorial::stageCombatPopupTex = new Texture();
 }
 
 /**
@@ -71,8 +83,16 @@ void Tutorial::reset()
 void Tutorial::destroy()
 {
   delete Tutorial::stageGameStartPopupSprite;
+  delete Tutorial::stageIntro01PopupSprite;
+  delete Tutorial::stageIntro02PopupSprite;
+  delete Tutorial::stageDialoguePopupSprite;
+  delete Tutorial::stageCombatPopupSprite;
 
   delete Tutorial::stageGameStartPopupTex;
+  delete Tutorial::stageIntro01PopupTex;
+  delete Tutorial::stageIntro02PopupTex;
+  delete Tutorial::stageDialoguePopupTex;
+  delete Tutorial::stageCombatPopupTex;
 }
 
 /**
@@ -183,6 +203,8 @@ void Tutorial::drawTutorial()
     case Tutorial::Stage::DIALOGUE:
       GameWindow::drawSprite(Tutorial::SCREEN_FADE_FILTER_X, Tutorial::SCREEN_FADE_FILTER_Y,
         Tutorial::SCREEN_FADE_FILTER_WIDTH, Tutorial::SCREEN_FADE_FILTER_HEIGHT, *Tutorial::screenFadeFilterSprite);
+      GameWindow::drawSprite(Tutorial::DIALOGUE_POPUP_X, Tutorial::DIALOGUE_POPUP_Y,
+        Tutorial::DIALOGUE_POPUP_WIDTH, Tutorial::DIALOGUE_POPUP_HEIGHT, *Tutorial::stageDialoguePopupSprite);
       break;
     case Tutorial::Stage::COMBAT:
       GameWindow::drawSprite(Tutorial::SCREEN_FADE_FILTER_X, Tutorial::SCREEN_FADE_FILTER_Y,

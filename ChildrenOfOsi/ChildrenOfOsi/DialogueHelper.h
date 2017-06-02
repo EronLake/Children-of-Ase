@@ -47,6 +47,7 @@ public:
 	void fill_conversations();
 	bool give_quest();
 	int personality_appeal(ConversationPoint* point, Personality* personality);
+	int relationship_appeal(ConversationPoint* point, Relationship* relationship);
 	int hero_name_to_int(std::string hero);
 	int calc_text_choice_from_relationship(Hero* hero, std::pair<int, Memory*> topic);
 	std::string int_to_hero_name(int hero);

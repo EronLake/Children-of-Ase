@@ -607,19 +607,10 @@ void Input::InputCheck()
 	short TWO = GetKeyState('2') >> 15; //Removes you from party and puts party in flee mode
 	short THREE = GetKeyState('3') >> 15; // Remove self from party and put party in patrol mode
 	short FOUR = GetKeyState('4') >> 15; // coming soon
-
-  if(!W && !A && !S && !D && !Q && !E &&
-    !J && !K && !L && !SEMI && !F && !G && !H &&
-    !R && !T && !Y && !U && !P &&
-    !Z && !V && !M && !I&&
-    !ONE && !TWO && !THREE && !FOUR &&
-    !ENTER && !SHIFT)
-    this->locked = false;
 	
 	if (current_game_state == game_state::main_menu) {
-    if (!this->locked && ENTER) {
+    if (ENTER) {
       Tutorial::completeStage(*this);
-      this->locked = true;
 		}
 	}
 	else if (current_game_state == game_state::in_game) {
@@ -986,7 +977,7 @@ void Input::InputCheck()
 					int tmp = DialogueController::getOptionsIndex();
 					if (tmp > 0) {
 						DialogueController::setOptionsIndex(--tmp);
-						count = 5; //10 is too long!
+						count = 8; //10 is too long!
 						gameplay_functions->createTaskForAudio("PlaySound", "SOUND", "SFX/page.wav", nullptr, RegionState::soundType::sfx);
 						//////std:://cout << "OptionsIndex: " << tmp << std::endl;
 						switch (DialogueController::getOptionsIndex()) {
@@ -1007,7 +998,7 @@ void Input::InputCheck()
 						if (tmp < DialogueController::getOSize() - 1) {
 
 							DialogueController::setOptionsIndex(++tmp);
-							count = 5;
+							count = 8;
 							if (tmp <= DialogueController::getOSize() - 1)
 								gameplay_functions->createTaskForAudio("PlaySound", "SOUND", "SFX/page.wav", nullptr, RegionState::soundType::sfx);
 							//////std:://cout << "OptionsIndex: " << tmp << std::endl;
@@ -1023,7 +1014,7 @@ void Input::InputCheck()
 					else {
 						if (tmp < DialogueController::getOSize() - 1) {
 							DialogueController::setOptionsIndex(++tmp);
-							count = 5;
+							count = 8;
 							//////std:://cout << "OptionsIndex: " << tmp << std::endl;
 							switch (DialogueController::getOptionsIndex()) {
 							case 0: gameplay_functions->setSwordGlow(player); break;
@@ -1059,7 +1050,7 @@ void Input::InputCheck()
 							else
 								gameplay_functions->createTaskForAudio("PlaySound", "SOUND", "SFX/down.wav", nullptr, RegionState::soundType::sfx);
 
-							count = 5;
+							count = 8;
 							//////std:://cout << "Index: " << tmp << std::endl;
 						}
 						if (tmp >(DialogueController::getOptions().size() - 1)) {
@@ -1068,7 +1059,7 @@ void Input::InputCheck()
 							//DialogueController::scroll_control++;
 							if (DialogueController::scroll_control < 0)
 								DialogueController::scroll_control = 0;
-							count = 5;
+							count = 8;
 							//////std:://cout << "Index: " << tmp << std::endl;
 						}
 					}
@@ -1080,7 +1071,7 @@ void Input::InputCheck()
 								DialogueController::scroll_control = DialogueController::get_soldier_options().size() - 1;
 								gameplay_functions->createTaskForAudio("PlaySound", "SOUND", "SFX/down.wav", nullptr, RegionState::soundType::sfx);
 							}
-							count = 5;
+							count = 8;
 							//////std:://cout << "Index: " << tmp << std::endl;
 						}
 						if (tmp >(DialogueController::get_soldier_options().size() - 1)) {
@@ -1089,7 +1080,7 @@ void Input::InputCheck()
 							//DialogueController::scroll_control++;
 							if (DialogueController::scroll_control < 0)
 								DialogueController::scroll_control = 0;
-							count = 5;
+							count = 8;
 							//////std:://cout << "Index: " << tmp << std::endl;
 						}
 					}
@@ -1101,7 +1092,7 @@ void Input::InputCheck()
 								DialogueController::scroll_control = DialogueController::get_babalawo_options().size() - 1;
 								gameplay_functions->createTaskForAudio("PlaySound", "SOUND", "SFX/down.wav", nullptr, RegionState::soundType::sfx);
 							}
-							count = 10;
+							count = 8;
 							//////std:://cout << "Index: " << tmp << std::endl;
 						}
 						if (tmp >(DialogueController::get_babalawo_options().size() - 1)) {
@@ -1110,7 +1101,7 @@ void Input::InputCheck()
 							//DialogueController::scroll_control++;
 							if (DialogueController::scroll_control < 0)
 								DialogueController::scroll_control = 0;
-							count = 10;
+							count = 8;
 							//////std:://cout << "Index: " << tmp << std::endl;
 						}
 					}
@@ -1125,7 +1116,7 @@ void Input::InputCheck()
 
 
 
-							count = 5;
+							count = 8;
 							//////std:://cout << "Index: " << tmp << std::endl;
 						}
 						if (tmp >(DialogueController::getReplyOptions().size() - 1)) {
@@ -1134,7 +1125,7 @@ void Input::InputCheck()
 							//DialogueController::scroll_control++;
 							if (DialogueController::scroll_control < 0)
 								DialogueController::scroll_control = 0;
-							count = 5;
+							count = 8;
 							//////std:://cout << "Index: " << tmp << std::endl;
 						}
 					}
@@ -1152,7 +1143,7 @@ void Input::InputCheck()
 							gameplay_functions->createTaskForAudio("PlaySound", "SOUND", "SFX/up.wav", nullptr, RegionState::soundType::sfx);
 
 						//disable = true;
-						count = 5;
+						count = 8;
 						//////std:://cout << "Index: " << tmp << std::endl;
 					}
 				}
@@ -1160,7 +1151,7 @@ void Input::InputCheck()
 					gameplay_functions->createTaskForAudio("PlaySound", "SOUND", "SFX/talk.wav", nullptr, RegionState::soundType::sfx);
 					//////std:://cout << "ENTER" << std::endl;
 					if (DialogueController::getState() == 1) {
-						count = 5;
+						count = 8;
 						Hero* temp_hero;
 						if (temp_hero = CheckClass::isHero(DialogueController::getOther()))
                             DialogueController::PlayerConversationPoint();
@@ -1178,12 +1169,12 @@ void Input::InputCheck()
 						}
 					}
 					else if (DialogueController::getState() == 2) {
-						count = 5;
+						count = 8;
 						DialogueController::PlayerResponse();
 						//	DialogueController::prompted_quest = false;
 					}
 					else if (DialogueController::getState() == 5) {
-						count = 5;
+						count = 8;
 						Hero* temp_hero;
 						if(temp_hero = CheckClass::isHero(DialogueController::getOther()))
 						    DialogueController::PlayerConversationPoint();
@@ -1200,11 +1191,11 @@ void Input::InputCheck()
 						}
 					}
 					else if (DialogueController::getState() == 6) {
-						count = 5;
+						count = 8;
 						DialogueController::PlayerResponse();
 					}
 					else if (DialogueController::getState() == 7) {
-						count = 5;
+						count = 8;
 
 						Hero* temp_hero = CheckClass::isHero(DialogueController::getOther());
 						if(temp_hero)
@@ -1214,11 +1205,11 @@ void Input::InputCheck()
 						DialogueController::exitDialogue();
 					}
 					else if (DialogueController::getState() == 8) {
-						count = 5;
+						count = 8;
 						DialogueController::otherResponse("","");
 					}
 					else if (DialogueController::getState() == 9) {
-						count = 5;
+						count = 8;
 
 						Hero* temp_hero = CheckClass::isHero(DialogueController::getOther());
 						if (temp_hero)
@@ -1233,12 +1224,12 @@ void Input::InputCheck()
 						
 					}
 					else if (DialogueController::getState() == 10) {
-						count = 5;
+						count = 8;
 						DialogueController::create_farewell();
 						DialogueController::state = 7;
 					}
 					else if (DialogueController::getState() == 11) {
-						count = 5;
+						count = 8;
 						DialogueController::shrine_talk_counter++;
 						DialogueController::shrine_interact();
 						if (DialogueController::shrine_talk_counter == 3) {
@@ -1246,7 +1237,7 @@ void Input::InputCheck()
 						}
 					}
 					else if (DialogueController::getState() == 12) {
-						count = 5;
+						count = 8;
 						DialogueController::teach_move_counter++;
 						DialogueController::load_teach_dialog();
 						if (DialogueController::teach_move_counter == 3) {
@@ -1258,28 +1249,22 @@ void Input::InputCheck()
 		}
 	}
 	else if (current_game_state == game_state::pause_menu) {
-    if(!this->locked && ENTER) {
+    if(ENTER) {
       current_game_state = game_state::in_game;
-      this->locked = true;
     }
 	}
   else if(current_game_state == game_state::tutorial_pause) {
-    if(!this->locked) {
-      if(ENTER && Tutorial::isStageActive(Tutorial::Stage::INTRO01)) {
-        Tutorial::completeStage(*this);
-        current_game_state = game_state::in_game;
-        this->locked = true;
-      }
-      else if((W || A || S || D) && Tutorial::isStageActive(Tutorial::Stage::INTRO02)) {
-        Tutorial::completeStage(*this);
-        current_game_state = game_state::in_game;
-        this->locked = true;
-      }
-      else if(E && Tutorial::isStageActive(Tutorial::Stage::DIALOGUE)) {
-        Tutorial::completeStage(*this);
-        current_game_state = game_state::in_game;
-        this->locked = true;
-      }
+    if(ENTER && Tutorial::isStageActive(Tutorial::Stage::INTRO01)) {
+      Tutorial::completeStage(*this);
+      current_game_state = game_state::in_game;
+    }
+    else if((W || A || S || D) && Tutorial::isStageActive(Tutorial::Stage::INTRO02)) {
+      Tutorial::completeStage(*this);
+      current_game_state = game_state::in_game;
+    }
+    else if(E && Tutorial::isStageActive(Tutorial::Stage::DIALOGUE)) {
+      Tutorial::completeStage(*this);
+      current_game_state = game_state::in_game;
     }
   }
   else if(current_game_state == game_state::victory_menu) {

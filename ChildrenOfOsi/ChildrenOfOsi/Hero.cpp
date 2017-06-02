@@ -184,3 +184,9 @@ void Hero::decrement_quest_time() {
 		}
 	}
 }
+int Hero::get_range_cap(Action* a) 
+{	
+	std::string::size_type name_end = a->getName().find_last_of('_');
+	std::string act_name = a->getName().substr(0, name_end);
+	return trait_vec[act_name]; 
+};

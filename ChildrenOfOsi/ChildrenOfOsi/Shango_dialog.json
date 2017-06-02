@@ -591,35 +591,35 @@
     "4": "Oh great babalawo, please tell me about Ifa.",
     "5": "Oh great babalawo, please tell me about Ifa."
   },
-  "Boast Back": {
+  "Boast In Response": {
     "1": "You know, as a child, I once fought a gorilla off with my bare hands",
     "2": "You know, as a child, I once fought a gorilla off with my bare hands",
     "3": "You know, as a child, I once fought a gorilla off with my bare hands",
     "4": "You know, as a child, I once fought a gorilla off with my bare hands",
     "5": "You know, as a child, I once fought a gorilla off with my bare hands"
   },
-  "Intimidate Back": {
+  "Intimidate In Response": {
     "1": "If you know what's good for you, you should never cross me.",
     "2": "If you know what's good for you, you should never cross me.",
     "3": "If you know what's good for you, you should never cross me.",
     "4": "If you know what's good for you, you should never cross me.",
     "5": "If you know what's good for you, you should never cross me."
   },
-  "Compliment Back": {
+  "Compliment In Response": {
     "1": "You have quite a way with words.",
     "2": "You have quite a way with words.",
     "3": "You have quite a way with words.",
     "4": "You have quite a way with words.",
     "5": "You have quite a way with words."
   },
-   "Offer Praise Back": {
+   "Offer Praise In Response": {
         "1": "I've never met someone quite like you before, you are incredible!",
 		"2": "I've never met someone quite like you before, you are incredible!",
         "3": "I've never met someone quite like you before, you are incredible!",
 		"4": "I've never met someone quite like you before, you are incredible!",
         "5": "I've never met someone quite like you before, you are incredible!"
    },
-    "Insult Back": {
+    "Insult In Response": {
         "1": "Your actions are as meaningless to me as a small child's.",
 		"2": "Your actions are as meaningless to me as a small child's.",
         "3": "Your actions are as meaningless to me as a small child's.",

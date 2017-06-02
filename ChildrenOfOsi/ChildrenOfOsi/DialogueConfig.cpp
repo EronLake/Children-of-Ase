@@ -43,7 +43,7 @@ void DialogueConfig::import_config(ChildrenOfOsi* gameplay_func, TaskBuffer* tBu
 			relationship_vals.push_back((*itor)["NotorEstimate"].asInt());
 			relationship_vals.push_back((*itor)["StrEstimate"].asInt());
 
-			set_conv_point(gameplay_func, tBuffer, (*itor)["icon"].asString(), (*itor)["template"].asString(), (*itor)["name"].asString(), personality_mults, (*itor)["corresponding_conv_point"].asString(), relationship_vals, topic);
+			set_conv_point(gameplay_func, tBuffer, (*itor)["icon"].asString(), (*itor)["template"].asString(), (*itor)["name"].asString(), personality_mults, (*itor)["corresponding_conv_point"].asString(), relationship_vals, topic, (*itor)["hero_reply"].asString());
 			personality_mults.clear();
 			relationship_vals.clear();
 
@@ -69,7 +69,7 @@ void DialogueConfig::import_config(ChildrenOfOsi* gameplay_func, TaskBuffer* tBu
 			relationship_vals.push_back((*itor)["NotorEstimate"].asInt());
 			relationship_vals.push_back((*itor)["StrEstimate"].asInt());
 
-			set_conv_point(gameplay_func, tBuffer, (*itor)["icon"].asString(), (*itor)["template"].asString(), (*itor)["name"].asString(), personality_mults, (*itor)["corresponding_conv_point"].asString(), relationship_vals, topic);
+			set_conv_point(gameplay_func, tBuffer, (*itor)["icon"].asString(), (*itor)["template"].asString(), (*itor)["name"].asString(), personality_mults, (*itor)["corresponding_conv_point"].asString(), relationship_vals, topic, (*itor)["hero_reply"].asString());
 			personality_mults.clear();
 			relationship_vals.clear();
 
@@ -94,7 +94,7 @@ void DialogueConfig::import_config(ChildrenOfOsi* gameplay_func, TaskBuffer* tBu
 			relationship_vals.push_back((*itor)["NotorEstimate"].asInt());
 			relationship_vals.push_back((*itor)["StrEstimate"].asInt());
 
-			set_conv_point(gameplay_func, tBuffer, (*itor)["icon"].asString(), (*itor)["template"].asString(), (*itor)["name"].asString(), personality_mults, (*itor)["corresponding_conv_point"].asString(), relationship_vals, topic);
+			set_conv_point(gameplay_func, tBuffer, (*itor)["icon"].asString(), (*itor)["template"].asString(), (*itor)["name"].asString(), personality_mults, (*itor)["corresponding_conv_point"].asString(), relationship_vals, topic, (*itor)["hero_reply"].asString());
 			personality_mults.clear();
 			relationship_vals.clear();
 
@@ -119,7 +119,7 @@ void DialogueConfig::import_config(ChildrenOfOsi* gameplay_func, TaskBuffer* tBu
 			relationship_vals.push_back((*itor)["NotorEstimate"].asInt());
 			relationship_vals.push_back((*itor)["StrEstimate"].asInt());
 
-			set_conv_point(gameplay_func, tBuffer, (*itor)["icon"].asString(), (*itor)["template"].asString(), (*itor)["name"].asString(), personality_mults, (*itor)["corresponding_conv_point"].asString(), relationship_vals, topic);
+			set_conv_point(gameplay_func, tBuffer, (*itor)["icon"].asString(), (*itor)["template"].asString(), (*itor)["name"].asString(), personality_mults, (*itor)["corresponding_conv_point"].asString(), relationship_vals, topic, (*itor)["hero_reply"].asString());
 			personality_mults.clear();
 			relationship_vals.clear();
 
@@ -144,7 +144,7 @@ void DialogueConfig::import_config(ChildrenOfOsi* gameplay_func, TaskBuffer* tBu
 			relationship_vals.push_back((*itor)["NotorEstimate"].asInt());
 			relationship_vals.push_back((*itor)["StrEstimate"].asInt());
 
-			set_conv_point(gameplay_func, tBuffer, (*itor)["icon"].asString(), (*itor)["template"].asString(), (*itor)["name"].asString(), personality_mults, (*itor)["corresponding_conv_point"].asString(), relationship_vals, topic);
+			set_conv_point(gameplay_func, tBuffer, (*itor)["icon"].asString(), (*itor)["template"].asString(), (*itor)["name"].asString(), personality_mults, (*itor)["corresponding_conv_point"].asString(), relationship_vals, topic, (*itor)["hero_reply"].asString());
 			personality_mults.clear();
 			relationship_vals.clear();
 
@@ -169,7 +169,7 @@ void DialogueConfig::import_config(ChildrenOfOsi* gameplay_func, TaskBuffer* tBu
 			relationship_vals.push_back((*itor)["NotorEstimate"].asInt());
 			relationship_vals.push_back((*itor)["StrEstimate"].asInt());
 
-			set_conv_point(gameplay_func, tBuffer, (*itor)["icon"].asString(), (*itor)["template"].asString(), (*itor)["name"].asString(), personality_mults, (*itor)["corresponding_conv_point"].asString(), relationship_vals, topic);
+			set_conv_point(gameplay_func, tBuffer, (*itor)["icon"].asString(), (*itor)["template"].asString(), (*itor)["name"].asString(), personality_mults, (*itor)["corresponding_conv_point"].asString(), relationship_vals, topic, (*itor)["hero_reply"].asString());
 			personality_mults.clear();
 			relationship_vals.clear();
 
@@ -194,7 +194,7 @@ void DialogueConfig::import_config(ChildrenOfOsi* gameplay_func, TaskBuffer* tBu
 			relationship_vals.push_back((*itor)["NotorEstimate"].asInt());
 			relationship_vals.push_back((*itor)["StrEstimate"].asInt());
 
-			set_conv_point(gameplay_func, tBuffer, (*itor)["icon"].asString(), (*itor)["template"].asString(), (*itor)["name"].asString(), personality_mults, (*itor)["corresponding_conv_point"].asString(), relationship_vals, topic);
+			set_conv_point(gameplay_func, tBuffer, (*itor)["icon"].asString(), (*itor)["template"].asString(), (*itor)["name"].asString(), personality_mults, (*itor)["corresponding_conv_point"].asString(), relationship_vals, topic, (*itor)["hero_reply"].asString());
 			personality_mults.clear();
 			relationship_vals.clear();
 
@@ -219,7 +219,7 @@ void DialogueConfig::import_config(ChildrenOfOsi* gameplay_func, TaskBuffer* tBu
 			relationship_vals.push_back((*itor)["NotorEstimate"].asInt());
 			relationship_vals.push_back((*itor)["StrEstimate"].asInt());
 
-			set_conv_point(gameplay_func, tBuffer, (*itor)["icon"].asString(), (*itor)["template"].asString(), (*itor)["name"].asString(), personality_mults, (*itor)["corresponding_conv_point"].asString(), relationship_vals,topic);
+			set_conv_point(gameplay_func, tBuffer, (*itor)["icon"].asString(), (*itor)["template"].asString(), (*itor)["name"].asString(), personality_mults, (*itor)["corresponding_conv_point"].asString(), relationship_vals,topic, (*itor)["hero_reply"].asString());
 			personality_mults.clear();
 			relationship_vals.clear();
 
@@ -228,7 +228,7 @@ void DialogueConfig::import_config(ChildrenOfOsi* gameplay_func, TaskBuffer* tBu
 }
 
 void DialogueConfig::set_conv_point(ChildrenOfOsi* gameplay_func, TaskBuffer* tBuffer, std::string icon, 
-	std::string temp, std::string name, std::vector<int> personality_vals,std::string corresponding_conv_point, std::vector<int> relationship_vals, std::string topic)
+	std::string temp, std::string name, std::vector<int> personality_vals,std::string corresponding_conv_point, std::vector<int> relationship_vals, std::string topic, std::string hero_reply)
 {
 	gameplay_func->add_conv_point(icon, temp, name);
 	tBuffer->run();
@@ -252,6 +252,8 @@ void DialogueConfig::set_conv_point(ChildrenOfOsi* gameplay_func, TaskBuffer* tB
 	std::string is_selectable = "1";
 	Containers::conv_point_table[name]->dpoint.push_back(is_selectable);
 	Containers::conv_point_table[name]->set_is_selectable(is_selectable);
+
+	Containers::conv_point_table[name]->dpoint.push_back(hero_reply);
 
 	Containers::conv_point_table[name]->multipliers = new Personality();
 	

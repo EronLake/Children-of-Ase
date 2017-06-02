@@ -723,5 +723,47 @@
     "1": {
       "1": "Jungle_child_3"
     }
+  },
+
+  "Boast In Response_Templates": {
+    "1": {
+      "1": "Boast In Response"
+    }
+  },
+
+  "Intimidate In Response_Templates": {
+    "1": {
+      "1": "Intimidate In Response"
+    }
+  },
+
+   "Compliment In Response_Templates": {
+    "1": {
+      "1": "Compliment In Response"
+    }
+  },
+
+   "Offer Praise_Templates": {
+    "1": {
+      "1": "Offer Praise In Response"
+    }
+  },
+
+   "Insult In Response_Templates": {
+    "1": {
+      "1": "Insult In Response"
+    }
+  },
+
+  "Accept Gift_Templates": {
+    "1": {
+      "1": "Accept Gift"
+    }
+  },
+
+  "Offer Gift_Templates": {
+    "1": {
+      "1": "Offer Gift"
+    }
   }
 }

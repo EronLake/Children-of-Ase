@@ -1,7 +1,5 @@
 #pragma once
 
-
-
 #include <cstdint>
 
 #include "Input.h"
@@ -47,15 +45,20 @@ struct Tutorial
   static constexpr float GAME_START_POPUP_WIDTH = 960.0F;
   static constexpr float GAME_START_POPUP_HEIGHT = 540.0F;
 
-  static constexpr float INTRO01_POPUP_X = 460.0F;
-  static constexpr float INTRO01_POPUP_Y = 40.0F;
-  static constexpr float INTRO01_POPUP_WIDTH = 500.0F;
-  static constexpr float INTRO01_POPUP_HEIGHT = 500.0F;
+  static constexpr float INTRO01_POPUP_X = 0.0F;
+  static constexpr float INTRO01_POPUP_Y = 0.0F;
+  static constexpr float INTRO01_POPUP_WIDTH = 960.0F;
+  static constexpr float INTRO01_POPUP_HEIGHT = 540.0F;
 
-  static constexpr float INTRO02_POPUP_X = 460.0F;
-  static constexpr float INTRO02_POPUP_Y = 40.0F;
-  static constexpr float INTRO02_POPUP_WIDTH = 500.0F;
-  static constexpr float INTRO02_POPUP_HEIGHT = 500.0F;
+  static constexpr float INTRO02_POPUP_X = 0.0F;
+  static constexpr float INTRO02_POPUP_Y = 0.0F;
+  static constexpr float INTRO02_POPUP_WIDTH = 960.0F;
+  static constexpr float INTRO02_POPUP_HEIGHT = 540.0F;
+
+  static constexpr float DIALOGUE_POPUP_X = 0.0F;
+  static constexpr float DIALOGUE_POPUP_Y = 0.0F;
+  static constexpr float DIALOGUE_POPUP_WIDTH = 960.0F;
+  static constexpr float DIALOGUE_POPUP_HEIGHT = 540.0F;
 
   static Stage currentStage;
   static bool isPaused;
@@ -70,11 +73,15 @@ struct Tutorial
   static Sprite *stageGameStartPopupSprite;
   static Sprite *stageIntro01PopupSprite;
   static Sprite *stageIntro02PopupSprite;
+  static Sprite *stageDialoguePopupSprite;
+  static Sprite *stageCombatPopupSprite;
   
   static Texture *screenFaceFilterTex;
   static Texture *stageGameStartPopupTex;
   static Texture *stageIntro01PopupTex;
   static Texture *stageIntro02PopupTex;
+  static Texture *stageDialoguePopupTex;
+  static Texture *stageCombatPopupTex;
 
   Tutorial() = delete;
   Tutorial(const Tutorial  &) = delete;
