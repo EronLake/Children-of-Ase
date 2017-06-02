@@ -369,12 +369,14 @@ void DialogueGui::set_character_portrait_tex() {
 		this->speaker_left_rect->sprite.setTexture(this->shango_tex);
 		Hero* temp_hero = CheckClass::isHero(DialogueController::getOther());
 		if (temp_hero) {
-			if (DialogueController::getOther()->getName() == "Yemoja") {
-				this->speaker_right_rect->sprite.setTexture(this->yemoja_tex);
-			}
-			else if (DialogueController::getOther()->getName() == "Oya") {
-				this->speaker_right_rect->sprite.setTexture(this->oya_tex);
-			}
+      if(DialogueController::getOther()->getName() == "Yemoja")
+        this->speaker_right_rect->sprite.setTexture(this->yemoja_tex);
+      else if(DialogueController::getOther()->getName() == "Oya")
+        this->speaker_right_rect->sprite.setTexture(this->oya_tex);
+      else if(DialogueController::getOther()->getName() == "Oshosi")
+        this->speaker_right_rect->sprite.setTexture(this->ogun_tex);
+      else if(DialogueController::getOther()->getName() == "Ogun")
+        this->speaker_right_rect->sprite.setTexture(this->ogun_tex);
 		}
 		else if (DialogueController::quited_gui == false)
 			this->speaker_right_rect->sprite.setTexture(this->icon_question_tex);
