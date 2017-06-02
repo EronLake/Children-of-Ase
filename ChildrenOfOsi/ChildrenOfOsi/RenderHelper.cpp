@@ -166,12 +166,12 @@ int RenderHelper::draw_frame(WorldObj * obj)
 			//objVec[i]->WorldObj::animateObj();
 	}
 	// draw the points
-	//for (int i = 0; i < rivObj->getLines().size(); i++) {
-	//	//cout << "DRAWING POINTS" << endl;
-	//	rivObj->getLines()[i]->getP1().drawObjRiv(camera->getX(), camera->getY());
-	//	rivObj->getLines()[i]->getP2().drawObjRiv(camera->getX(), camera->getY());
+	for (int i = 0; i < rivObj->getLines().size(); i++) {
+		//cout << "DRAWING POINTS" << endl;
+		rivObj->getLines()[i]->getP1().drawObjRiv(camera->getX(), camera->getY());
+		rivObj->getLines()[i]->getP2().drawObjRiv(camera->getX(), camera->getY());
 
-	//}
+	}
 
 	//convoGui->drawGui();
 	drawHUD(obj);
