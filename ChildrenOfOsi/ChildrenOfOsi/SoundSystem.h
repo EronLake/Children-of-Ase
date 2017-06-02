@@ -31,6 +31,7 @@ public:
 	void createSound(SoundClass* const & pSound, std::string pFile);
 	void playSound(SoundClass pSound, bool bLoop, FMOD::Channel*& channel, bool ispaused,float volume);
 	void playMusic(SoundClass pSound, bool bLoop, FMOD::Channel*& channel, bool ispaused, float volume, RegionState::soundType type);
+	void playInitialMusic(SoundClass pSound, bool bLoop, FMOD::Channel*& channel, bool ispaused, float volume, RegionState::soundType type);
 	void playAmbient(SoundClass pSound, bool bLoop, FMOD::Channel*& channel, bool ispaused, float volume);
 	void releaseSound(SoundClass pSound);
 	int SoundSystem::pauseSound(std::string name);

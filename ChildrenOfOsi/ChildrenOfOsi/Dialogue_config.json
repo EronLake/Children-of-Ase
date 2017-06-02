@@ -871,9 +871,9 @@
     },
 
 	"reply_point_11" : {
-	      "name" : "Boast Back",
+	      "name" : "Boast In Response",
           "icon" : "srp",
-	      "template" : "Boast Back",
+	      "template" : "Boast In Response",
 		  "corresponding_conv_point": "",
 		  "hero_reply": "0",
 		  "honor" : 0,
@@ -892,9 +892,9 @@
     },
 
 	"reply_point_12" : {
-	      "name" : "Intimidate Back",
+	      "name" : "Intimidate In Response",
           "icon" : "srp",
-	      "template" : "Intimidate Back",
+	      "template" : "Intimidate In Response",
 		  "corresponding_conv_point": "",
 		  "hero_reply": "0",
 		  "honor" : 0,
@@ -913,9 +913,9 @@
     },
 
 	"reply_point_13" : {
-	      "name" : "Compliment Back",
+	      "name" : "Compliment In Response",
           "icon" : "srp",
-	      "template" : "Compliment Back",
+	      "template" : "Compliment In Response",
 		  "corresponding_conv_point": "",
 		  "hero_reply": "0",
 		  "honor" : 0,
@@ -933,9 +933,9 @@
 		  "StrEstimate": 50
     },
 	"reply_point_14" : {
-	      "name" : "Insult Back",
+	      "name" : "Insult In Response",
           "icon" : "srp",
-	      "template" : "Insult Back",
+	      "template" : "Insult In Response",
 		  "corresponding_conv_point": "",
 		  "hero_reply": "0",
 		  "honor" : 0,
@@ -954,9 +954,9 @@
     },
 
 	"reply_point_15" : {
-	      "name" : "Offer Praise Back",
+	      "name" : "Offer Praise In Response",
           "icon" : "srp",
-	      "template" : "Offer Praise Back",
+	      "template" : "Offer Praise In Response",
 		  "corresponding_conv_point": "",
 		  "hero_reply": "0",
 		  "honor" : 0,

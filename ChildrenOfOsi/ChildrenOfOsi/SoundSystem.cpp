@@ -8,7 +8,7 @@ using namespace std;
 #include <map>
 #include <string>
 
-
+bool start = true;
 
 typedef FMOD::Sound* SoundClass;
 FMOD_RESULT result;
@@ -199,6 +199,34 @@ FMOD_RESULT result;
 		}
 		//////cout << FMOD_ErrorString(result) << endl;
 	};
+	void SoundSystem::playInitialMusic(SoundClass pSound, bool bLoop, FMOD::Channel*& channel, bool ispaused, float volume, RegionState::soundType type)
+	{
+		if (!bLoop)
+			pSound->setMode(FMOD_LOOP_OFF | FMOD_CREATESTREAM | FMOD_LOWMEM);
+		else
+		{
+			pSound->setMode(FMOD_LOOP_NORMAL | FMOD_CREATESTREAM | FMOD_LOWMEM);
+			pSound->setLoopCount(-1);
+		}
+
+
+
+		result = m_pSystem->playSound(pSound, 0, ispaused, &channel); //fmod playsound takes  (FMOD::Sound *sound,FMOD::ChannelGroup *channelgroup, bool paused, FMOD::Channel **channel)
+		channel->setVolume(volume);
+		unsigned long long dspclock;
+		int rate;
+		result = channel->getSystemObject(&m_pSystem);                        // OPTIONAL : Get System object
+		result = m_pSystem->getSoftwareFormat(&rate, 0, 0);                // Get mixer rate
+		result = channel->getDSPClock(0, &dspclock);
+	
+
+		channel->setPaused(false);
+		channel->setPriority(0);
+		if (bLoop) {
+			channel->setLoopCount(-1);
+		}
+		//////cout << FMOD_ErrorString(result) << endl;
+	};
 	void SoundSystem::playAmbient(SoundClass pSound, bool bLoop, FMOD::Channel*& channel, bool ispaused, float volume)
 	{
 		if (!bLoop)
@@ -243,7 +271,13 @@ FMOD_RESULT result;
 			channels[name.c_str()] = &chnls[0];//assign the channel
 			SoundClass sound = nullptr;
 			this->createMusic(&sound, name);
-			playMusic(sounds[name], true, chnls[0], ispaused, 1,type);
+			if (!start) {
+				playMusic(sounds[name], true, chnls[0], ispaused, 1, type);
+			}
+			else {
+				playInitialMusic(sounds[name], true, chnls[0], ispaused, 1, type);
+				start = false;
+			}
 		}
 		else if (type == RegionState::soundType::theme_music) {
 			channels[name.c_str()] = &chnls[0];//assign the channel

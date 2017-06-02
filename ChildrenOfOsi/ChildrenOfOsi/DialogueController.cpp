@@ -708,7 +708,33 @@ void DialogueController::PlayerResponse()
 			}
 
 		}
+		if (choice[1] == "Boast In Response" || choice[1] == "Intimidate In Response" || choice[1] == "Insult In Response" || choice[1] == "Compliment In Response" || choice[1] == "Offer Praise In Response") {
+			std::string::size_type reply_end = choice[1].find_last_of(' ');
+			std::string act_name = choice[1].substr(0, reply_end);
+			reply_end = act_name.find_last_of(' ');
+			act_name = choice[1].substr(0, reply_end);
 
+			bool react_positively = true; 
+			for (auto precond : Containers::conv_point_table[act_name]->req_preconds) {
+				int temp1 = precond->get_cost(temp_hero, player);
+				//the ori stuff means that the higher the ori the more likely it is for the hero to respond
+				//positivly to what whatever it is you are saying
+				if (precond->get_cost(temp_hero, player) - (player->ori / 10) <= 0) {
+					std::cout << "a string: " << precond->get_cost(temp_hero, player) << std::endl;
+				}
+				else {
+					react_positively = false;
+				}
+				if (react_positively) {
+					Containers::conv_point_table[act_name]->apply_postconditions(true,player,temp_hero);
+				}
+				else {
+					Containers::conv_point_table[act_name]->apply_postconditions(false, player, temp_hero);
+				}
+
+				
+			}
+		}
 		//get a sentence to say based on player's reply option selection
 		std::string reply_pt_sentence = dialogue.gen_dialog(choice, player);
 
