@@ -22,7 +22,7 @@ public:
 	void clear();
 
 private:
-	std::vector<T*> grid[grid_size][grid_size];
+	std::vector<T*> grid[grid_size+1][grid_size+1];
 	int num_of_elements;
 };
 
@@ -30,8 +30,8 @@ template <class T>
 UniformGrid<T>::UniformGrid<T>()
 {
 	//clear the grid
-	for (int i = 0; i < grid_size; i++) {
-		for (int j = 0; j < grid_size; j++) {
+	for (int i = 0; i <= grid_size; i++) {
+		for (int j = 0; j <= grid_size; j++) {
 			grid[i][j].clear();
 		}
 	}

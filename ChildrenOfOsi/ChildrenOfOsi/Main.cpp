@@ -304,7 +304,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	ogun->trait_vec["Intimidate"] = 120;
 	ogun->trait_vec["Offer Praise"] = 180;
 	ogun->trait_vec["Boast"] = 120;
-	ogun->song = "Music/HeroThemes/Oya.flac";
+	ogun->song = "Music/HeroThemes/Ogun.flac";
 	ogun->set_busy(0);//added for testing
 	heroes.push_back(ogun);
 
@@ -778,11 +778,19 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	if (PRELOAD_TEX) {
 		tm.join();
 		t0.join();
-		t1.join();
-		t2.join();
+		//t1.join();
+		//t2.join();
 	}
 	//oya->set_busy(0);
 	//yemoja->set_busy(0);
+	bool can_switch = true;
+	bool dm = false;
+	bool dj = false;
+	bool mj = false;
+	bool md = false;
+	bool jm = false;
+	bool jd = false;
+
 	while (GameWindow::isRunning()) {
 		while (current_game_state == game_state::main_menu) {
 			cout << "Current game state: main_menu" << endl;
@@ -821,6 +829,8 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 				iController->current_game_state = current_game_state;
 			}
 
+			//rivObj->initialize_lines();
+
 			if (shouldExit > 0) {
 				_CrtDumpMemoryLeaks();
 				return;
@@ -831,11 +841,22 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 				start = !start;
 			}
 
-			//decrement ori 
-			if (frame_count - ori_counter >= 60 * 60 * .5) 
+			//decrement ori
+			if (Alex->ori > 100) {
+				Alex->ori = 100;
+			}
+			if (frame_count - ori_counter >= 60 * 60 * 2) 
 			{
 				Alex->ori--;
 				ori_counter = frame_count;
+			}
+			//used for the exhalted form transformation
+			if (Alex->exalted_form_trans_count != 0) {
+				Alex->exalted_form_trans_count--;
+			}
+			//just in case it somehow goes below zero
+			if (Alex->exalted_form_trans_count < 0) {
+				Alex->exalted_form_trans_count--;
 			}
 
 
@@ -845,31 +866,123 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
         else if(!Tutorial::isStageComplete(Tutorial::Stage::INTRO02))
           Tutorial::launchStage(Tutorial::Stage::INTRO02, *iController, true);
       }
+	  
+			//IGNORE THIS CODE, ITS HORRIBLE
+			if (Alex->getX() > 13544 && Alex->getX() < 16742) { 
+				if (RegionState::current_region == *RegionState::regions[RegionState::JUNGLE] || RegionState::current_region == *RegionState::regions[RegionState::MOUNTAIN]) {
+					if (Alex->getY() < 14779 && Alex->getY() > 13303) {
+						if (RegionState::current_region == *RegionState::regions[RegionState::JUNGLE]) {//JUNGLE MOUNTAIN
+							if (can_switch) {
+								RegionState::next_region = *RegionState::regions[RegionState::MOUNTAIN];
+								can_switch = false;
+								dm = false;
+								dj = false;
+								mj = true;
+								md = false;
+								jm = true;
+								jd = false;
+							}
+						}
+						else if (RegionState::current_region == *RegionState::regions[RegionState::MOUNTAIN]) {//MOUNTAIN JUNGLE
+							if (can_switch) {
+								RegionState::next_region = *RegionState::regions[RegionState::JUNGLE];
+								can_switch = false;
+								dm = false;
+								dj = false;
+								mj = true;
+								md = false;
+								jm = true;
+								jd = false;
+							}
+						}
 
-			//only 3 regions for demo
-			if (Alex->getX() > 660 && Alex->getX() < 25000) { //Ogun Desert
-				if (Alex->getY() < 3523.33) {
-					if (RegionState::current_region == *RegionState::regions[RegionState::DESERT])
-						RegionState::next_region = *RegionState::regions[RegionState::MARSH];
-
-				}
-				else {
-					if (RegionState::current_region == *RegionState::regions[RegionState::MARSH]) {
-						RegionState::next_region = *RegionState::regions[RegionState::DESERT];
+					}
+					else if ((Alex->getY() > 14779 || Alex->getY() < 12768) &&(jm&&mj)) {
+						can_switch = true;
 					}
 				}
 			}
-			if (Alex->getX() > 600 && Alex->getX() < 25000) {
-				if (Alex->getY() < 20000.7) {
-					if (RegionState::current_region == *RegionState::regions[RegionState::JUNGLE])
-						RegionState::next_region = *RegionState::regions[RegionState::DESERT];
-				}
-				else {
-					if (RegionState::current_region == *RegionState::regions[RegionState::DESERT]) {
-						RegionState::next_region = *RegionState::regions[RegionState::JUNGLE];
+				
+			
+			
+
+			if (Alex->getY() > 10496 && Alex->getY() < 10785) {
+				if (RegionState::current_region == *RegionState::regions[RegionState::DESERT] || RegionState::current_region == *RegionState::regions[RegionState::MOUNTAIN]) {
+					if (Alex->getX() > 14473 && Alex->getX() < 15241) {
+						if (RegionState::current_region == *RegionState::regions[RegionState::DESERT]) {
+							if (can_switch) {
+								RegionState::next_region = *RegionState::regions[RegionState::MOUNTAIN];
+								can_switch = false;
+								dm = true;
+								dj = false;
+								mj = false;
+								md = true;
+								jm = false;
+								jd = false;
+
+							}
+						}
+						else if (RegionState::current_region == *RegionState::regions[RegionState::MOUNTAIN]) {
+							if (can_switch) {
+								RegionState::next_region = *RegionState::regions[RegionState::DESERT];
+								can_switch = false;
+								dm = true;
+								dj = false;
+								mj = false;
+								md = true;
+								jm = false;
+								jd = false;
+							}
+						}
+
+					}
+					else if ((Alex->getX() > 15241 || Alex->getX() < 14473)&&(dm&&md)) {
+
+						can_switch = true;
 					}
 				}
 			}
+
+			
+			
+			
+
+			if (Alex->getY() > 13081&& Alex->getY() < 13308) {
+				if (RegionState::current_region == *RegionState::regions[RegionState::JUNGLE] || RegionState::current_region == *RegionState::regions[RegionState::DESERT]) {
+					if (Alex->getX() > 13838 && Alex->getX() < 14456) {
+						if (RegionState::current_region == *RegionState::regions[RegionState::DESERT])
+							if (can_switch) {
+								RegionState::next_region = *RegionState::regions[RegionState::JUNGLE];
+								can_switch = false;
+								dm = false;
+								dj = true;
+								mj = false;
+								md = false;
+								jm = false;
+								jd = true;
+							}
+							else if (RegionState::current_region == *RegionState::regions[RegionState::JUNGLE]) {
+								if (can_switch) {
+									RegionState::next_region = *RegionState::regions[RegionState::DESERT];
+									can_switch = false;
+									dm = false;
+									dj = true;
+									mj = false;
+									md = false;
+									jm = false;
+									jd = true;
+								}
+							}
+
+					}
+					else if ((Alex->getX() > 14456 || Alex->getX() < 13838)&&(jd&&dj)) {
+
+						can_switch = true;
+					}
+				}
+			}
+			
+			
 			if (!(RegionState::current_region == RegionState::next_region)) {
 				RegionState::switch_music = true;
 			}
@@ -1053,7 +1166,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 
 								if (curr_alliance != other_alliance && itor.second->SUGG_ACT_STATUS != 1)
 								{
-									AIController::reevaluate_state(YEMOJA, with_hero);
+									AIController::reevaluate_state(itor.second->name, with_hero);
 								}
 							}
 
@@ -1156,7 +1269,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 		while (current_game_state == game_state::victory_menu) {
 
 			if (iController->current_game_state != game_state::victory_menu) {
-				//iController->current_game_state = current_game_state;
+				iController->current_game_state = current_game_state;
 			}
 
 			if (shouldExit > 0) {

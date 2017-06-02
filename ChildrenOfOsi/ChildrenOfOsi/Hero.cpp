@@ -25,6 +25,7 @@ Hero::Hero()
 	action_timer = 0; //initialized to one so the check doesn't go below 0
 	set_killable(false);
 	busy = NOT_BUSY;
+	strength = 50;
 }
 
 Hero::Hero(int _name, float x, float y, bool col) :SplSoldier(x, y, col)
@@ -54,6 +55,7 @@ Hero::Hero(int _name, float x, float y, bool col) :SplSoldier(x, y, col)
 	action_timer = 0; //initialized to one so the check doesn't go below 0
 	set_killable(false);
 	busy = NOT_BUSY;
+	strength = 50;
 }
 
 
@@ -84,6 +86,7 @@ Hero::Hero(int _name, Vector2f p_topLeft, float p_width, float p_height):SplSold
 	action_timer = 0; //initialized to one so the check doesn't go below 0
 	set_killable(false);
 	busy = NOT_BUSY;
+	strength = 50;
 }
 
 Hero::~Hero()

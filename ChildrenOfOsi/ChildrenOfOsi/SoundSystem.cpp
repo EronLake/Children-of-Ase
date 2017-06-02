@@ -271,19 +271,20 @@ FMOD_RESULT result;
 			channels[name.c_str()] = &chnls[0];//assign the channel
 			SoundClass sound = nullptr;
 			this->createMusic(&sound, name);
-			if (!start) {
-				playMusic(sounds[name], true, chnls[0], ispaused, 1, type);
-			}
-			else {
+			if (start) {
 				playInitialMusic(sounds[name], true, chnls[0], ispaused, 1, type);
 				start = false;
+			}
+			else {
+				playMusic(sounds[name], true, chnls[0], ispaused, 1, type);
+				
 			}
 		}
 		else if (type == RegionState::soundType::theme_music) {
 			channels[name.c_str()] = &chnls[0];//assign the channel
 			SoundClass sound = nullptr;
 			this->createMusic(&sound, name);
-			playMusic(sounds[name], true, chnls[0], ispaused, .9,type);
+			playMusic(sounds[name], true, chnls[0], ispaused, 1,type);
 		}
 		else
 			return 1;
@@ -346,14 +347,17 @@ FMOD_RESULT result;
 	
 	int SoundSystem::changeSoundSource(char* from, char* to, RegionState::soundType type)
 	{
+
+
 		if (from == nullptr) {
 			playSong(to, type);
 			return 0;
 		}
 		if (type == RegionState::soundType::region_music) {
 			int t = stopSound(from);
-			releaseSound(sounds[from]);
+			
 			if (t ==  0) {
+				
 				playSong(to, type);
 				return 0;
 			}

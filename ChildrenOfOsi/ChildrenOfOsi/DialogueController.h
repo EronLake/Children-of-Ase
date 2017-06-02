@@ -121,5 +121,15 @@ public:
 	static bool is_hero_act;
 	static Action* hero_act_toward_player;
 
+	//to keep you from repeatedly talking to shrines 
+	static bool talked_to_shrine_o;
+	static bool talked_to_shrine_j;
+	static bool talked_to_shrine_m;
+
+	//to keep you from repeatedly getting divination from babalawos
+	static bool talked_to_babalawo_o;
+	static bool talked_to_babalawo_j;
+	static bool talked_to_babalawo_m;
+
 };
 

@@ -703,20 +703,23 @@ void Input::InputCheck()
 					}
 				}
 				else if (I) {
-					if (t->can_activate_ex == 1) {
+					if (t->can_activate_ex == 1 && t->exalted_form_trans_count == 0 && t->ori > 70) {
 						if (t->exalted_form == 0) {
 							t->activate_exalted_form();
 							t->exalted_form = 1;
+							t->exalted_form_trans_count = 60;
 						}
-						else if (t->exalted_form == 1) {
+						else if (t->exalted_form == 1 && t->exalted_form_trans_count == 0) {
 							t->deactivate_exalted_form();
 							t->exalted_form = 0;
+							t->exalted_form_trans_count = 60;
 						}
 					}
 
-					if (t->can_activate_ex == 0 && t->exalted_form == 1) {
+					if (t->can_activate_ex == 0 && t->exalted_form == 1 && t->exalted_form_trans_count == 0) {
 						t->deactivate_exalted_form();
 						t->exalted_form = 0;
+						t->exalted_form_trans_count = 120;
 					}
 				}
 				else if (J) {
