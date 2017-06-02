@@ -625,5 +625,13 @@
         "3": "Your actions are as meaningless to me as a small child's.",
 		"4": "Your actions are as meaningless to me as a small child's.",
         "5": "Your actions are as meaningless to me as a small child's."
+   },
+
+    "Refuse": {
+        "1": "I refuse.",
+		"2": "I refuse.",
+        "3": "I refuse.",
+		"4": "I refuse.",
+        "5": "I refuse."
    }
 }

@@ -765,5 +765,17 @@
     "1": {
       "1": "Offer Gift"
     }
+  },
+
+  "Refuse_Templates": {
+    "1": {
+      "1": "Refuse"
+    }
+  },
+
+   "No Divination_Templates": {
+    "1": {
+      "1": "No Divination"
+    }
   }
 }
