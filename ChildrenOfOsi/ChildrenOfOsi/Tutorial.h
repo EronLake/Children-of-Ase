@@ -47,15 +47,15 @@ struct Tutorial
   static constexpr float GAME_START_POPUP_WIDTH = 960.0F;
   static constexpr float GAME_START_POPUP_HEIGHT = 540.0F;
 
-  static constexpr float INTRO01_POPUP_X = 0.0F;
-  static constexpr float INTRO01_POPUP_Y = 0.0F;
-  static constexpr float INTRO01_POPUP_WIDTH = 960.0F;
-  static constexpr float INTRO01_POPUP_HEIGHT = 540.0F;
+  static constexpr float INTRO01_POPUP_X = 460.0F;
+  static constexpr float INTRO01_POPUP_Y = 40.0F;
+  static constexpr float INTRO01_POPUP_WIDTH = 500.0F;
+  static constexpr float INTRO01_POPUP_HEIGHT = 500.0F;
 
-  static constexpr float INTRO02_POPUP_X = 0.0F;
-  static constexpr float INTRO02_POPUP_Y = 0.0F;
-  static constexpr float INTRO02_POPUP_WIDTH = 960.0F;
-  static constexpr float INTRO02_POPUP_HEIGHT = 540.0F;
+  static constexpr float INTRO02_POPUP_X = 460.0F;
+  static constexpr float INTRO02_POPUP_Y = 40.0F;
+  static constexpr float INTRO02_POPUP_WIDTH = 500.0F;
+  static constexpr float INTRO02_POPUP_HEIGHT = 500.0F;
 
   static Stage currentStage;
   static bool isPaused;
