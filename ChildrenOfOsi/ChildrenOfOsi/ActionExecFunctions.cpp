@@ -427,6 +427,8 @@ void ActionExecFunctions::execute_fight(Action* fight)
 		if (fight->getReceiver()->getParty()->getMembers().size() == fight->getReceiver()->getParty()->get_down_members().size()) {
 			//Apply succ-post-conditions
 			fight->apply_postconditions(true);
+			fight->getDoer()->add_strength(5);
+			fight->getReceiver()->add_strength(-5);
 
 			if (fight->getDoer()->SUGG_ACT_STATUS == 1) {
 				//sets suggested action flag to success
@@ -452,6 +454,8 @@ void ActionExecFunctions::execute_fight(Action* fight)
 		{
 			//Apply fail-post-conditions
 			fight->apply_postconditions(false);
+			fight->getDoer()->add_strength(-5);
+			fight->getReceiver()->add_strength(5);
 
 			if (fight->getDoer()->SUGG_ACT_STATUS == 1) {
 				//sets suggested action flag to failure
@@ -606,6 +610,8 @@ void ActionExecFunctions::execute_conquer(Action* conq)
 		if (conq->getReceiver()->getVillage()->get_village_health() <= 0) {
 			//Apply succ-post-conditions
 			conq->apply_postconditions(true);
+			conq->getDoer()->add_strength(10);
+			conq->getReceiver()->add_strength(-10);
 
 			if (conq->getDoer()->SUGG_ACT_STATUS == 1) {
 				//sets suggested action flag to success
@@ -629,6 +635,8 @@ void ActionExecFunctions::execute_conquer(Action* conq)
 		{
 			//Apply fail-post-conditions
 			conq->apply_postconditions(false);
+			conq->getDoer()->add_strength(-10);
+			conq->getReceiver()->add_strength(10);
 
 			if (conq->getDoer()->SUGG_ACT_STATUS == 1) {
 				//sets suggested action flag to failure
@@ -789,6 +797,8 @@ void ActionExecFunctions::execute_duel(Action* duel)
 		if (duel->getReceiver()->getParty()->getMembers().size() == duel->getReceiver()->getParty()->get_down_members().size()) {
 			//Apply succ-post-conditions
 			duel->apply_postconditions(true);
+			duel->getDoer()->add_strength(3);
+			duel->getReceiver()->add_strength(-3);
 			//update_memory category as a success 
 			//doer_mem->setCategory("success"); receiver_mem->setCategory("failure");
 			//update reason
@@ -799,6 +809,8 @@ void ActionExecFunctions::execute_duel(Action* duel)
 		{
 			//Apply fail-post-conditions
 			duel->apply_postconditions(false);
+			duel->getDoer()->add_strength(-3);
+			duel->getReceiver()->add_strength(3);
 			//update_memory as faiure
 			//doer_mem->setCategory("failure"); receiver_mem->setCategory("success");
 			//update reason
