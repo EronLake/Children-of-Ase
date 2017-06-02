@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "PlayerActExecFunctions.h"
 
-
+bool doing_quest = false;
 PlayerActExecFunctions::PlayerActExecFunctions()
 {
 }
@@ -46,9 +46,11 @@ void PlayerActExecFunctions::execute_start(std::string act_name, Hero* receiver)
 	//set to current action 
 	if (!player->quests_log.empty()) {
 		for (auto i : player->quests_log) {
-			if(i->getReceiver() == receiver && i->getName() == act_name + "_" + std::to_string(i->getOwner()->name))
+			if (i->getReceiver() == receiver && i->getName() == act_name + "_" + std::to_string(i->getOwner()->name))
+			{
 				player->cur_action = i;
-
+				doing_quest = true;
+			}
 		}
 
 	}
@@ -202,14 +204,16 @@ void PlayerActExecFunctions::execute_end(bool if_succ) {
 	
 	//for multipliers and preconditions it points the the references' actual objects
 	//sets multipliers to references multipliers
-	cur_action->multipliers = nullptr;
-	cur_action->aff_mult = nullptr;
-	cur_action->str_mult = nullptr;
-	cur_action->noto_mult = nullptr;
-	//sets preconditions to references preconditions
+	if (doing_quest) {
+		cur_action->multipliers = nullptr;
+		cur_action->aff_mult = nullptr;
+		cur_action->str_mult = nullptr;
+		cur_action->noto_mult = nullptr;
+		//sets preconditions to references preconditions
 
-	// delete player->cur_action;
-	player->cur_action = nullptr;
+		// delete player->cur_action;
+		player->cur_action = nullptr;
+	}
 }
 
 void PlayerActExecFunctions::execute_dialog()

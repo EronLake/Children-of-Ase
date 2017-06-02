@@ -1,24 +1,24 @@
 {
     "Greeting": {
-        "1": "Oh... it's you. Let's just get this over with.",
-        "2": "I guess anyone nowadays thinks they can just walk in and talk to me.",
-        "3": "Hello traveler",
+        "1": "As unpleasant as this is for me, I will hear what you have to say.",
+        "2": "Oh... it's you. Please make it quick.",
+        "3": "Hello. Nice day we are having.",
         "4": "It is good to see you.",
         "5": "My friend, it is so good to see you. I hope you have been doing well."
     },
 
     "Farewell": {
-        "1": "Please just leave already.",
-        "2": "*tch*",
+        "1": "Goodbye. I would rather not meet with you again, but if our paths cross again, I will bear with you.",
+        "2": "I suppose this is goodbye... hopefully for awhile.",
         "3": "Until we meet again.",
         "4": "I hope to see you again soon.",
-        "5": "Feel free to come talk to me anytime."
+        "5": "Feel free to come talk to me again anytime."
     },
 
 	"Ask_Name": {
-		"1": "What do people call you?",
-        "2": "What do people call you?", 
-		"3": "What do people call you?",
+		"1": "What is your name?",
+        "2": "What is your name?", 
+		"3": "What is your name?",
 		"4": "What do you call yourself, friend?",
 		"5": "What do you call yourself, friend?"
 	
@@ -27,9 +27,9 @@
 	"Tell Name": {
 		"1": "My name is Yemoja.",
 		"2": "Nice to meet you. I am Yemoja.",
-		"3": "I am pleased to make your acquaintance. People know me as Yemoja. My purpose is to protect this desert and its inhabitants with my life.",
-        "4": "I am pleased to make your acquaintance. People know me as Yemoja. My purpose is to protect this desert and its inhabitants with my life.",
-        "5": "I am pleased to make your acquaintance. People know me as Yemoja. My purpose is to protect this desert and its inhabitants with my life."
+		"3": "I am pleased to make your acquaintance. People know me as Yemoja. My purpose is to protect the oasis village.",
+        "4": "I am pleased to make your acquaintance. People know me as Yemoja. My purpose is to protect the oasis village.",
+        "5": "I am pleased to make your acquaintance. People know me as Yemoja. My purpose is to protect the oasis village."
 	},
 
 	"Ask_Origin": {
@@ -41,20 +41,20 @@
 	},
 
 	"Tell Origin": {
-		"1": "If you knew anything, it would be obvious that I am from the Oasis village.",
-		"2": "Are you joking? I am from the Oasis village.",
-		"3": "I came from the village outskirts many years ago and have lived here ever since.",
-		"4": "I came from the village outskirts many years ago and have lived here ever since.",
-        "5": "I came from the village outskirts many years ago and have lived here ever since."
+		"1": "I am hesistant to tell you, but... I am from the oasis village.",
+		"2": "I have lived in the oasis village for as long as I can recall.",
+		"3": "I came from the oasis village outskirts many years ago and have lived in the desert ever since.",
+		"4": "I came from the oasis village outskirts many years ago and have lived in the desert ever since.",
+        "5": "I came from the oasis village outskirts many years ago and have lived in the desert ever since."
 		
 	},
 
 	"Ask About Strength Of": {
-        "1": "I know that someone like you probably knows nothing I already do not, but how strong is HERO",
-        "2": "I doubt you can enlighten me, but what do you know of the strength possesed by HERO",
-        "3": "What do you know of the strength possesed by HERO",
-        "4": "What do you know of the strength possesed by HERO",
-        "5": "What do you know of the strength possesed by HERO"
+        "1": "Tell me, how strong do you think that HERO is?",
+        "2": "Answer me this. What do you think of the strength of HERO?",
+        "3": "What do you know of the strength possesed by HERO?",
+        "4": "What do you know of the strength possesed by HERO?",
+        "5": "What do you know of the strength possesed by HERO?"
     },
 
 	"Tell About Strength Of": {
@@ -66,19 +66,19 @@
     },
 
     "Ask About Affinity Of": {
-        "1": "I know that someone like you probably knows nothing I already do not, but how likable is HERO",
-        "2": "I doubt you can enlighten me, but how friendly is HERO",
-        "3": "How much of an agreeable person is HERO",
-        "4": "How much of an agreeable person is HERO",
-        "5": "How much of an agreeable person is HERO"
+        "1": "Tell me. How likable do you find HERO to be?",
+        "2": "Do you think HERO is a friendly person?",
+        "3": "How much of an agreeable person do you think HERO is?",
+        "4": "How much of an agreeable person do you think HERO is?",
+        "5": "How much of an agreeable person do you think HERO is?"
     },
 
 	"Tell About Affinity Of": {
         "1": "HERO is that horrible person that is always up to no good.",
         "2": "HERO is someone that has made too many enemies for themself.",
         "3": "HERO is a person that is likable enough.",
-        "4": "HERO is someone that a multitude of people think well of. Myself included.",
-        "5": "HERO is someone that a multitude of people think well of. Myself included."
+        "4": "HERO is someone that I think well of.",
+        "5": "HERO is someone that I think well of."
     },
 
 	"Ask About Notoriety Of": {
@@ -94,45 +94,45 @@
         "2": "HERO is an individual of little importance with only a few minor accomplishments.",
         "3": "HERO is known as a capable person that has earned the favor of some.",
         "4": "HERO is known as a champion of the people and as a person of great strength and fortitude.",
-        "5": "HERO is known far and wide as a hero amongst heroes and many people sing of their achievements."
+        "5": "HERO is known far and wide as a hero among heroes and many people sing of their achievements."
     },
 
 	"Ask_To_Form_Alliance": {
-        "1": "How do you feel about forming and Alliance with me?",
-		"2": "How do you feel about forming and Alliance with me?",
-        "3": "How do you feel about forming and Alliance with me?",
-        "4": "How do you feel about forming and Alliance with me?",
-        "5": "How do you feel about forming and Alliance with me?"
+        "1": "How do you feel about forming an Alliance with me?",
+		"2": "How do you feel about forming an Alliance with me?",
+        "3": "How do you feel about forming an Alliance with me?",
+        "4": "How do you feel about forming an Alliance with me?",
+        "5": "How do you feel about forming an Alliance with me?"
     },
 
 	"Accept Alliance Offer": {
-        "1": "Why would I align with you of all people?",
-        "2": "I refuse.",
-        "3": "I think that forming an alliance with you is a situation that benefits the both of us. I accept.",
+        "1": "I refuse. I do not think that allying with you will benefit the oasis village.",
+        "2": "No thank you. Forming an alliance with you does not sound like a good idea.",
+        "3": "I think that forming an alliance with you would be mutually beneficial. I accept.",
         "4": "I am more than happy to ally with you. I know that you will help make this village safer.",
 		"5": "I am more than happy to ally with you. I know that you will help make this village safer."
     },
 
 	"Confirm Alliance": {
-        "1": "Let's get this paperwork out of the way then. Glad to have you aboard.",
-        "2": "Let's get this paperwork out of the way then. Glad to have you aboard.",
-        "3": "Let's get this paperwork out of the way then. Glad to have you aboard.",
-        "4": "Let's get this paperwork out of the way then. Glad to have you aboard.",
-		"5": "Let's get this paperwork out of the way then. Glad to have you aboard."
+        "1": "I am sorry to hear that you will not ally with me. Perhaps you will change your mind in the future.",
+        "2": "I am sorry to hear that you will not ally with me. Perhaps you will change your mind in the future.",
+        "3": "I am glad that you have accepted my offer. With our efforts combined, the oasis village will always be safe.",
+        "4": "I am glad that you have accepted my offer. With our efforts combined, the oasis village will always be safe.",
+		"5": "I am glad that you have accepted my offer. With our efforts combined, the oasis village will always be safe."
     },
 
 	"Advise To Conquer": {
-        "1": "I would like you to consider conquering HERO",
-        "2": "I think it would be greatly beneficial to you if you gained control over HERO",
-        "3": "My friend, I believe now would be a perfect opportunity to conquer HERO",
-		"4": "My friend, I believe now would be a perfect opportunity to conquer HERO",
-		"5": "My friend, I believe now would be a perfect opportunity to conquer HERO"
+        "1": "I would like you to consider conquering HERO.",
+        "2": "I think it would be greatly beneficial to you if you gained control over HERO.",
+        "3": "I believe now would be a perfect opportunity to conquer HERO.",
+		"4": "My friend, I believe now would be a perfect opportunity to conquer HERO.",
+		"5": "My friend, I believe now would be a perfect opportunity to conquer HERO."
     },
 
 	"Take Advice To Conquer": {
-        "1": "HERO hmm.I was considering conquering them but then you told me it was a good idea. Now I am not so sure. ",
-        "2": "HERO? Really? I don't feel like you should be giving me advice on such an important matter.",
-        "3": "HERO eh. I wasn't sure whether or not conquest was really required, but you're right. It's time to end this",
+        "1": "HERO hmm. I am not so sure. I am not one to stir up trouble. I must pass on your advice.",
+        "2": "HERO? Really? I don't feel like you should be giving me advice on such an important matter. I must decline.",
+        "3": "HERO eh. I was not certain whether or not conquest was necessary, but I understand what you mean. I will take your advice.",
         "4": "HERO as a conquering target? I think that moving to conquer is a risky move, but I'll trust your judgement this time.",
         "5": "HERO hmm. I respect your advice, HERO's conquest is my top priority."
     },
@@ -631,5 +631,13 @@
         "3": "Wait, don't leave just yet! There is a rogue squadron of rebels north of here. Would you help me protect my people from them",
 		"4": "Wait, don't leave just yet! There is a rogue squadron of rebels north of here. Would you help me protect my people from them",
         "5": "Wait, don't leave just yet! There is a rogue squadron of rebels north of here. Would you help me protect my people from them"
-   }
+   },
+
+   "Response_Recruit_For_Party":{
+	    "1": "No thank you.",
+        "2": "No thank you.",
+        "3": "I am more than happy to join your party my great ally. Let us combine our strength as one.",
+		"4": "I am more than happy to join your party my great ally. Let us combine our strength as one.",
+        "5": "I am more than happy to join your party my great ally. Let us combine our strength as one."
+	}
 }

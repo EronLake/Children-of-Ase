@@ -590,6 +590,46 @@
         "3": "Oh great babalawo, please tell me about Ifa.",
 		"4": "Oh great babalawo, please tell me about Ifa.",
         "5": "Oh great babalawo, please tell me about Ifa."
+   },
+
+    "Boast Back": {
+    "1": "As a child, I once fought a gorilla off with my bare hands",
+    "2": "As a child, I once fought a gorilla off with my bare hands",
+    "3": "As a child, I once fought a gorilla off with my bare hands",
+    "4": "As a child, I once fought a gorilla off with my bare hands",
+    "5": "As a child, I once fought a gorilla off with my bare hands"
+  },
+
+  "Intimidate Back": {
+    "1": "If you know what's good for you, you should never cross me.",
+    "2": "If you know what's good for you, you should never cross me.",
+    "3": "If you know what's good for you, you should never cross me.",
+    "4": "If you know what's good for you, you should never cross me.",
+    "5": "If you know what's good for you, you should never cross me."
+  },
+
+  "Compliment Back": {
+    "1": "You have quite a way with words.",
+    "2": "You have quite a way with words.",
+    "3": "You have quite a way with words.",
+    "4": "You have quite a way with words.",
+    "5": "You have quite a way with words."
+  },
+
+   "Offer Praise Back": {
+        "1": "I've never met someone quite like you before, you are incredible!",
+		"2": "I've never met someone quite like you before, you are incredible!",
+        "3": "I've never met someone quite like you before, you are incredible!",
+		"4": "I've never met someone quite like you before, you are incredible!",
+        "5": "I've never met someone quite like you before, you are incredible!"
+   },
+
+    "Insult Back": {
+        "1": "Your actions are as meaningless to me as a small child's.",
+		"2": "Your actions are as meaningless to me as a small child's.",
+        "3": "Your actions are as meaningless to me as a small child's.",
+		"4": "Your actions are as meaningless to me as a small child's.",
+        "5": "Your actions are as meaningless to me as a small child's."
    }
 
 }
