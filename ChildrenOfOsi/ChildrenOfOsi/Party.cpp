@@ -116,11 +116,12 @@ void Party::add_party_to_party(Party* s) {
 	}
 }
 
-void Party::form_attack_party(Party* s, bool combat) {
+void Party::form_attack_party(Party* s, bool combat, int p) {
+	float p2 = (p / 100);
 	vector<Soldier*> m = s->getMembers();
-	int saved = rand() % (m.size()-1);
+	int saved = (rand() % (m.size()-1))*p2;
 	if (!combat)saved = saved / 3;
-	if (saved == -1)saved = 0;
+	if (saved < 0)saved = 0;
 	for (auto i = m.begin(); i != (m.end()-saved); ++i) {
 		s->removeSoldier(*i, false);
 		addToParty(*i, false);

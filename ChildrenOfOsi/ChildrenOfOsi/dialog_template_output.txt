@@ -1,4 +1,3 @@
-Conversation Point Name: Ask_To_Duel Appeal 10280
-Conversation Point Name: Ask_To_Spar Appeal 10230
-Conversation Point Name: Boast Appeal 10090
-Conversation Point Name: Intimidate Appeal 9990
+Conversation Point Name: Ask_Name Appeal 8140
+Conversation Point Name: Ask_Origin Appeal 7460
+Conversation Point Name: Boast Appeal 7440

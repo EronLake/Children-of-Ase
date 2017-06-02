@@ -57,7 +57,7 @@ void ActionExecFunctions::execute_train(Action* train) {
 			p->add_party_to_party(train->getDoer()->getParty());
 			train->getDoer()->getVillage()->addToParties(p);
 		}
-		train->getDoer()->getParty()->form_attack_party(train->getDoer()->getVillage()->barracks, false);
+		train->getDoer()->getParty()->form_attack_party(train->getDoer()->getVillage()->barracks, false,train->getDoer()->get_strength());
 		//std::cout << (train->getDoer()->destination).getXloc() << ":" << (train->getDoer()->destination).getXloc() << std::endl;
 
 		train->getDoer()->set_action_destination(train->getReceiver()->getLoc()); //should select from set of pre-defined, stored in Hero, or village?
@@ -351,7 +351,7 @@ void ActionExecFunctions::execute_fight(Action* fight)
 			p->add_party_to_party(fight->getDoer()->getParty());
 			fight->getDoer()->getVillage()->addToParties(p);
 		}
-		fight->getDoer()->getParty()->form_attack_party(fight->getDoer()->getVillage()->barracks,true);
+		fight->getDoer()->getParty()->form_attack_party(fight->getDoer()->getVillage()->barracks,true, fight->getDoer()->get_strength());
 		fight->getDoer()->set_action_destination(fight->getReceiver()->getLoc()); //need to somehow retrieve location of target village
 		fight->getDoer()->set_max_dist_act(500);
 		//ActionHelper::create_memory(fight, fight->getDoer());
@@ -712,7 +712,7 @@ void ActionExecFunctions::execute_duel(Action* duel)
 			p->add_party_to_party(duel->getDoer()->getParty());
 			duel->getDoer()->getVillage()->addToParties(p);
 		}
-		duel->getDoer()->getParty()->form_attack_party(duel->getDoer()->getVillage()->barracks, false);
+		duel->getDoer()->getParty()->form_attack_party(duel->getDoer()->getVillage()->barracks, false, duel->getDoer()->get_strength());
 		duel->getDoer()->set_action_destination(duel->getReceiver()->getLoc());
 		duel->getDoer()->set_max_dist_act(500);
 		//ActionHelper::create_memory(duel, duel->getDoer());
@@ -851,7 +851,7 @@ void ActionExecFunctions::execute_conversation(Action* conv)
 			p->add_party_to_party(conv->getDoer()->getParty());
 			conv->getDoer()->getVillage()->addToParties(p);
 		}
-		conv->getDoer()->getParty()->form_attack_party(conv->getDoer()->getVillage()->barracks, false);
+		conv->getDoer()->getParty()->form_attack_party(conv->getDoer()->getVillage()->barracks, false, conv->getDoer()->get_strength());
 		conv->getDoer()->set_action_destination(conv->getReceiver()->getLoc());
 		conv->getDoer()->set_max_dist_act(30);
 		conv->getDoer()->set_busy(Hero::BUSY_TRAVEL);
