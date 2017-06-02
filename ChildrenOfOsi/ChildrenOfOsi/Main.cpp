@@ -304,7 +304,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	ogun->trait_vec["Intimidate"] = 120;
 	ogun->trait_vec["Offer Praise"] = 180;
 	ogun->trait_vec["Boast"] = 120;
-	ogun->song = "Music/HeroThemes/Oya.flac";
+	ogun->song = "Music/HeroThemes/Ogun.flac";
 	ogun->set_busy(0);//added for testing
 	heroes.push_back(ogun);
 

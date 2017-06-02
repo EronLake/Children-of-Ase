@@ -283,7 +283,7 @@ FMOD_RESULT result;
 			channels[name.c_str()] = &chnls[0];//assign the channel
 			SoundClass sound = nullptr;
 			this->createMusic(&sound, name);
-			playMusic(sounds[name], true, chnls[0], ispaused, .9,type);
+			playMusic(sounds[name], true, chnls[0], ispaused, 1,type);
 		}
 		else
 			return 1;

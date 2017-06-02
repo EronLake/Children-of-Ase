@@ -2175,7 +2175,7 @@ void DialogueController::startConversation(WorldObj* n, bool playerTalk)
 							++i;
 					}
 					for (int i = 0; i < player->quests_log.size();) {
-						if (player->quests_log[i]->executed) {
+						if (player->quests_log[i]->getOwner()->name == temp_hero->name) {
 							player->remove_quest(player->quests_log[i]);//remove from "quests" map
 							player->quests_log.erase(player->quests_log.begin() + i);//erase from player's quests log
 						}
