@@ -366,7 +366,8 @@ void DialogueController::PlayerConversationPoint()
 				|| player_conv_point_choice == "Advise To Conquer" || player_conv_point_choice == "Advise To Send Peace Offering To" ||
 				player_conv_point_choice == "Advise To Ally With" || player_conv_point_choice == "Intimidate")
 			{ 
-				//accepted_action = check_acceptance(player, temp_hero);
+				PlayerActExecFunctions::execute_start(player_conv_point_choice, temp_hero);
+				accepted_action = check_acceptance(player, temp_hero);
 				if (accepted_action) {
 					Containers::conv_point_table[player_conv_point_choice]->apply_postconditions(true, player, temp_hero);
 				}
@@ -1273,7 +1274,7 @@ void DialogueController::otherResponse(std::string info, std::string hero_topic)
 
 		else if (replyString == "Accept Bribe") {
 			//calls action start if the question is asked at all
-			PlayerActExecFunctions::execute_start("Bribe", temp_hero);
+			//PlayerActExecFunctions::execute_start("Bribe", temp_hero);
 
 			//check if I want to accept
 			if (accepted_action) {
@@ -1295,7 +1296,7 @@ void DialogueController::otherResponse(std::string info, std::string hero_topic)
 
 		else if (replyString == "Defend Self") {
 			//calls action start if the question is asked at all
-			PlayerActExecFunctions::execute_start("Insult", temp_hero);
+			//PlayerActExecFunctions::execute_start("Insult", temp_hero);
 
 			//check if I want to accept
 			if (accepted_action) {
@@ -1317,7 +1318,7 @@ void DialogueController::otherResponse(std::string info, std::string hero_topic)
 
 		else if (replyString == "Thank") {
 			//calls action start if the question is asked at all
-			PlayerActExecFunctions::execute_start("Compliment", temp_hero);
+			//PlayerActExecFunctions::execute_start("Compliment", temp_hero);
 
 			//check if I want to accept
 			if (accepted_action) {
@@ -1338,7 +1339,7 @@ void DialogueController::otherResponse(std::string info, std::string hero_topic)
 		}
 		else if (replyString == "Congratulate") {
 			//calls action start if the question is asked at all
-			PlayerActExecFunctions::execute_start("Boast", temp_hero);
+			//PlayerActExecFunctions::execute_start("Boast", temp_hero);
 
 			//check if I want to accept
 			if (accepted_action) {
@@ -1359,7 +1360,7 @@ void DialogueController::otherResponse(std::string info, std::string hero_topic)
 		}
 		else if (replyString == "Accept Plea") {
 			//calls action start if the question is asked at all
-			PlayerActExecFunctions::execute_start("Grovel", temp_hero);
+			//PlayerActExecFunctions::execute_start("Grovel", temp_hero);
 
 			//check if I want to accept
 			if (accepted_action) {
@@ -1380,7 +1381,7 @@ void DialogueController::otherResponse(std::string info, std::string hero_topic)
 		}
 		else if (replyString == "Talk Back") {
 			//calls action start if the question is asked at all
-			PlayerActExecFunctions::execute_start("Intimidate", temp_hero);
+			//PlayerActExecFunctions::execute_start("Intimidate", temp_hero);
 
 			//check if I want to accept
 			if (accepted_action) {
@@ -2699,7 +2700,14 @@ bool DialogueController::check_advice_acceptance(Player* p, Hero* npc) {
 
 }
 bool DialogueController::check_acceptance(Player* p, Hero* npc) {
+	std::string::size_type name_end = p->cur_action->getName().find_last_of('_');
+	std::string act_name = p->cur_action->getName().substr(0, name_end);
+
 	int range_cap = npc->get_range_cap(p->cur_action);
+	for (auto i : curr_conversation_log) {
+		if (i->get_who() == SHANGO && i->get_conv_point()->get_name() == act_name)
+			range_cap = range_cap / 2;
+	}
 	int result = rand() % 101;//get random number between 0 and 100
 	if (result <= range_cap)
 	{

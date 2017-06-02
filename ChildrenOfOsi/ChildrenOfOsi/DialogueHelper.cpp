@@ -238,7 +238,7 @@ dialogue_point DialogueHelper::choose_conv_pt(std::vector<ConversationLogObj*> c
 		//for every reply
 	for (auto itor = possible_replies.begin(); itor != possible_replies.end(); itor++) {
 		//+ relationship_appeal(itor->second, relationship)
-			appeal = personality_appeal(itor->second, personality);
+			appeal = personality_appeal(itor->second, personality) + relationship_appeal(itor->second, relationship);
 				temp.push_back(make_pair(appeal, itor->second));//push onto temp vector with appeal
 	}
 	possible_replies = temp;//replace possible replies with temp
