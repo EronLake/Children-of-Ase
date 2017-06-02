@@ -87,7 +87,7 @@ static Common* config = new Common();
 //toggles debug longging statements 
 
 #define DEBUG 1 //cant use json
-#define MAP_EDITOR 1 //cant use json
+#define MAP_EDITOR 0 //cant use json
 #define START_FULLSCREEN config->start_fullscreen
 #define MOUSE_VISIBLE config->mouse_visible
 #define LOAD_REGIONS config->load_regions //0==Load Config should be empty || 1==Load All || 2==Load Oasis || 3==Load Jungle
