@@ -1,5 +1,1 @@
-Conversation Point Name: Boast Appeal 12790
-Conversation Point Name: Bribe Appeal 12790
-Conversation Point Name: Grovel Appeal 12770
-Conversation Point Name: Ask_Name Appeal 8390
-Conversation Point Name: Ask_Origin Appeal 7710
+Conversation Point Name: Ask_Origin Appeal 4560
