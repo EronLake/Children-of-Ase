@@ -213,8 +213,17 @@ int RenderHelper::drawTut(WorldObj *obj)
 
   objVec = grid_game->retrieve_worldobj_in_grid(objVec, obj);
   for (int i = 0; i < objVec.size(); ++i) {
-  	objVec[i]->WorldObj::drawObj(camera->getX(), camera->getY());
-  	objVec[i]->WorldObj::animateObj();
+    Soldier *sold = CheckClass::isSoldier(objVec[i]);
+    if(sold) {
+      if(sold->get_incapacitated()) {
+        objVec[i]->WorldObj::drawObj(camera->getX(), camera->getY());
+        objVec[i]->WorldObj::animateObj();
+      }
+    }
+    else {
+      objVec[i]->WorldObj::drawObj(camera->getX(), camera->getY());
+      objVec[i]->WorldObj::animateObj();
+    }
   }
 
   TutGui->drawObj(camera->getX(), camera->getY());

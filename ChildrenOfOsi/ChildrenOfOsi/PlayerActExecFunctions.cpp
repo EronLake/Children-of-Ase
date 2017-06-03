@@ -150,7 +150,11 @@ void PlayerActExecFunctions::execute_end(bool if_succ) {
 	
 	cur_action->apply_postconditions(if_succ);	//Apply post-conditions based off if it was succesful or not
 	cur_action->executed = true;
-	player->ori += 5;
+
+	if (if_succ) {
+		player->ori += 5;
+	}
+	
 	
 	//if the action was successful check if the action was in the active quests
 	if (if_succ) { check_quest(); }
@@ -219,13 +223,16 @@ void PlayerActExecFunctions::execute_end(bool if_succ) {
 	for (auto i : player->quests_log) {
 
 		if (did_quest && i->getOwner() == cur_action->getOwner()) {
+			
+		}
+		else if (i->getOwner()->name == SHANGO) {
 			cur_action->multipliers = nullptr;
 			cur_action->aff_mult = nullptr;
 			cur_action->str_mult = nullptr;
 			cur_action->noto_mult = nullptr;
 			//sets preconditions to references preconditions
 
-			// delete player->cur_action;
+			delete player->cur_action;
 			player->cur_action = nullptr;
 		}
 	}

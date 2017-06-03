@@ -25,25 +25,11 @@ DialogueGui::DialogueGui()
   this->speaker_left_sprite = nullptr;
   this->speaker_right_sprite = nullptr;
 
- // this->shango_sprite = new Sprite();
-  //this->yemoja_sprite = new Sprite();
-  //this->oya_sprite = new Sprite();
-  //this->oshosi_sprite = new Sprite();
-  //this->ogun_sprite = new Sprite();
-
   this->shango_tex = new Texture();
   this->yemoja_tex = new Texture();
   this->oya_tex = new Texture();
   this->ogun_tex = new Texture();
   this->oshosi_tex = new Texture();
-
-  //this->shango_sprite->setTexture(shango_tex);
-  //this->yemoja_sprite->setTexture(yemoja_tex);
-  //this->oya_sprite->setTexture(oya_tex);
-  //this->oshosi_sprite->setTexture(oshosi_tex);
-  //this->ogun_sprite->setTexture(ogun_tex);
-
-
 
   text_color_default = glm::vec3(0, 0, 0);
   text_color_selected = glm::vec3(50, 0, 0);
@@ -98,16 +84,20 @@ void DialogueGui::loadTexture()
   this->icon_question_tex->setFile(SPRITES_PATH + "Dialogue_IconQuestion.png", 1);
   this->icon_question_glow_tex->setFile(SPRITES_PATH + "Dialogue_IconQuestion_Glow.png", 1);
 
-  this->yemoja_tex->setFile(SPRITES_PATH + "Dialogue_portrait_yemoja_1.png", 1);
-  this->shango_tex->setFile(SPRITES_PATH + "Dialogue_portrait_yemoja_1.png", 1);
-  this->oya_tex->setFile(SPRITES_PATH + "Dialogue_portrait_oya.png", 1);
+  this->shango_tex->setFile(SPRITES_PATH + "Dialogue_PortraitShango.png", 1);
+  this->yemoja_tex->setFile(SPRITES_PATH + "Dialogue_PortraitYemoja.png", 1);
+  this->oya_tex->setFile(SPRITES_PATH + "Dialogue_PortraitOya.png", 1);
+  this->oshosi_tex->setFile(SPRITES_PATH + "Dialogue_PortraitOgun.png", 1); // Placeholder until we have an Oshosi portrait
+  this->ogun_tex->setFile(SPRITES_PATH + "Dialogue_PortraitOgun.png", 1);
 }
 
+/**
+ * Initializes the sprites of the dialogue GUI.
+ */
 void DialogueGui::setSprite()
 {
   this->background_rect->sprite.setTexture(this->background_tex);
   this->header_rect->sprite.setTexture(this->header_tex);
-  //this->shango_sprite->setTexture(this->shango_tex);
   this->setSwordGlow();
 }
 
@@ -182,11 +172,10 @@ void DialogueGui::drawGui()
 {
   set_character_portrait_tex();
 
-  //Draws character portraits
+  // Draw character portraits
   GameWindow::drawSprite(this->speaker_left_rect->getX(), this->speaker_left_rect->getY(),
 	  this->speaker_left_rect->getWidth(), this->speaker_left_rect->getHeight(),
 	  this->speaker_left_rect->getSprite());
-
   GameWindow::drawSprite(this->speaker_right_rect->getX(), this->speaker_right_rect->getY(),
 	  this->speaker_right_rect->getWidth(), this->speaker_right_rect->getHeight(),
 	  this->speaker_right_rect->getSprite());
@@ -206,9 +195,8 @@ void DialogueGui::drawGui()
     this->icon_face_rect->getWidth(), this->icon_face_rect->getHeight(), this->icon_face_rect->getSprite());
   GameWindow::drawSprite(this->icon_question_rect->getX(), this->icon_question_rect->getY(),
     this->icon_question_rect->getWidth(), this->icon_question_rect->getHeight(), this->icon_question_rect->getSprite());
-
-
   
+  // Draw all of the text
   this->drawGuiText();
 }
 
@@ -398,12 +386,14 @@ void DialogueGui::set_character_portrait_tex() {
 		this->speaker_left_rect->sprite.setTexture(this->shango_tex);
 		Hero* temp_hero = CheckClass::isHero(DialogueController::getOther());
 		if (temp_hero) {
-			if (DialogueController::getOther()->getName() == "Yemoja") {
-				this->speaker_right_rect->sprite.setTexture(this->yemoja_tex);
-			}
-			else if (DialogueController::getOther()->getName() == "Oya") {
-				this->speaker_right_rect->sprite.setTexture(this->oya_tex);
-			}
+      if(DialogueController::getOther()->getName() == "Yemoja")
+        this->speaker_right_rect->sprite.setTexture(this->yemoja_tex);
+      else if(DialogueController::getOther()->getName() == "Oya")
+        this->speaker_right_rect->sprite.setTexture(this->oya_tex);
+      else if(DialogueController::getOther()->getName() == "Oshosi")
+        this->speaker_right_rect->sprite.setTexture(this->ogun_tex);
+      else if(DialogueController::getOther()->getName() == "Ogun")
+        this->speaker_right_rect->sprite.setTexture(this->ogun_tex);
 		}
 		else if (DialogueController::quited_gui == false)
 			this->speaker_right_rect->sprite.setTexture(this->icon_question_tex);
@@ -412,7 +402,7 @@ void DialogueGui::set_character_portrait_tex() {
 		if (DialogueController::quited_gui == true) {
 			DialogueController::started_conv = false;
 			DialogueController::quited_gui = false;
-			setSwordGlow();
+			this->setSwordGlow();
 		}
 	}
 }

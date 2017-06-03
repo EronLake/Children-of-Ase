@@ -116,6 +116,21 @@ void Alliance::update_enemies() {
 	}
 }
 
+
+void Alliance::clear_enemies() {
+	enemies.clear();
+	enemy_alliances.clear();
+}
+/*
+void Alliance::clear_enemy_alliances() {
+	if (enemy_alliances.size() > 0) {
+		for (auto enemy_all = enemy_alliances.begin(); enemy_all != enemy_alliances.end(); enemy_all++) {
+			enemy_alliances.erase(enemy_all);
+		}
+	}
+	
+}*/
+
 /*vector<Alliance*> Alliance::get_enemy_alliances() {
 	vector<Alliance*> ret;
 	unordered_map<Alliance*, int> mkshft;

@@ -559,8 +559,9 @@ void ObjConfig::set_world_obj(vector<WorldObj*>* recVec, ChildrenOfOsi* gameplay
 	}
 
 
-
-	gameplay_func->add_worldObj(name, 100 * x, 100 * y, true);
+	if (!Containers::worldObj_table[name]) {
+		gameplay_func->add_worldObj(name, 100 * x, 100 * y, true);
+	}
 
 	tBuffer->run();
 

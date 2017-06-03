@@ -32,7 +32,7 @@ void Relationship::setAffinity(int a)
 {
 	aff_counter += (a - affinity); 
 	changed += (a - affinity);
-	//affinity = a;
+	affinity = a;
 	/*if (aff_counter > aff_max_change) {
 		aff_counter = 0;
 		changed = true;
@@ -59,7 +59,7 @@ void Relationship::setNotoriety(int n)
 {
 	not_counter += (n - notoriety); 
 	changed += (n - notoriety);
-	//notoriety = n;
+	notoriety = n;
 	/*if (not_counter > not_max_change) {
 		not_counter = 0;
 		changed = true;
@@ -87,7 +87,7 @@ void Relationship::setStrength(int s)
 {
 	str_counter += (s - strength); 
 	changed += (s - strength);
-	//strength = s;
+	strength = s;
 	/*if (str_counter > str_max_change) {
 		str_counter = 0;
 		changed = true;

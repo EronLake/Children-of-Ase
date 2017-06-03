@@ -126,6 +126,12 @@ int DialogueController::feedback_timer = 100;
 DialogueController::DialogueController()
 {
 	srand(time(0));//seeds rand function to ensure good variety of random numbers
+
+	player_conv_point_choice = "";
+
+	//keeps track of the topic of the current conversation cycle
+	curr_hero_topic = "";
+
 }
 
 
@@ -457,8 +463,11 @@ void DialogueController::PlayerConversationPoint()
 				|| player_conv_point_choice == "Advise To Conquer" || player_conv_point_choice == "Advise To Send Peace Offering To" ||
 				player_conv_point_choice == "Advise To Ally With" || player_conv_point_choice == "Intimidate")
 			{ 
-				PlayerActExecFunctions::execute_start(player_conv_point_choice, temp_hero);
-				accepted_action = check_acceptance(player, temp_hero);
+				if ((choice[ConvPointName].find("Advise To") == string::npos)) {
+					PlayerActExecFunctions::execute_start(player_conv_point_choice, temp_hero);
+					accepted_action = check_acceptance(player, temp_hero);
+				}
+				
 				if (accepted_action) {
 					Containers::conv_point_table[player_conv_point_choice]->apply_postconditions(true, player, temp_hero);
 				}
@@ -759,6 +768,7 @@ void DialogueController::PlayerResponse()
 				quest->setDoer(player);
 				//quest->executed = true;
 				//player->quest = quest;
+				player->quest_status[quest->getOwner()->name] = 1;
 				int time_limit = 3600;
 				player->add_quest(quest, time_limit);
 				player->quests_log.push_back(quest);
@@ -2230,11 +2240,17 @@ void DialogueController::startConversation(WorldObj* n, bool playerTalk)
 	std::string start_message = "";
 	optionsIndex = 0;
 
+	player_conv_point_choice = "";
+
+	//keeps track of the topic of the current conversation cycle
+	curr_hero_topic = "";
+
+
 	if (temp_hero) {
 
-		//temp_hero->rel[player->name]->addNotoriety(50);
-		//temp_hero->rel[player->name]->addStrength(50);
-		//temp_hero->rel[player->name]->addAffinity(50);
+		temp_hero->rel[player->name]->addNotoriety(50);
+		temp_hero->rel[player->name]->addStrength(50);
+		temp_hero->rel[player->name]->addAffinity(50);
 
 			remove_dialog_option("Ask_To_Duel", NotorietyIcon);
 			remove_dialog_option("Ask_To_Spar", StrengthIcon);
@@ -2293,7 +2309,7 @@ void DialogueController::startConversation(WorldObj* n, bool playerTalk)
 					player_doing_quest = true;
 				}
 				if (planner->quests_given[i]->getDoer()->name == SHANGO && (planner->quests_given[i]->executed == true || 
-					(player->quest_status[temp_hero->name] == Player::SUCC_QUEST || player->quest_status[temp_hero->name] == Player::SUCC_QUEST))) {
+					(player->quest_status[temp_hero->name] == Player::SUCC_QUEST || player->quest_status[temp_hero->name] == Player::FAIL_QUEST))) {
 					quest_complete = true;
 				}
 			}
@@ -2328,7 +2344,7 @@ void DialogueController::startConversation(WorldObj* n, bool playerTalk)
 							++i;
 					}
 					for (int i = 0; i < player->quests_log.size();) {
-						if (player->quests_log[i]->executed) {
+						if (player->quests_log[i]->getOwner()->name == temp_hero->name) {
 							player->remove_quest(player->quests_log[i]);//remove from "quests" map
 							player->quests_log.erase(player->quests_log.begin() + i);//erase from player's quests log
 						}
@@ -2714,6 +2730,7 @@ void DialogueController::replace_all(std::string& str, const std::string& from, 
 a quest when they try to exit dialogue, but returns false if an NPC decides not
 to give the player a quest because they either don't want to or because the
 player is already working on a quest for that NPC.*/
+
 bool DialogueController::offer_quest_on_exit(Hero* temp_hero) {
 	bool offered_quest = false;
 	Planner* planner = AIController::get_plan(CheckClass::isHero(other)->name);
@@ -2728,9 +2745,13 @@ bool DialogueController::offer_quest_on_exit(Hero* temp_hero) {
 			if (planner->quests_given[i]->getDoer()->name == SHANGO && planner->quests_given[i]->executed == false)
 				has_quest = true;
 		}
+		for (auto i : player->quest_status) {
+			if (i.first == temp_hero->name && i.second == Player::IN_PROGRESS)
+				offered_quest = true;
+		}
 		//if (planner->quests_given.size() > 0)//stand in Bad!
 			//has_quest = true;//stand in Bad! dont wanna be checking the size of quest vector
-		if (has_quest == false && quest_declined == false) {
+		if (has_quest == false && quest_declined == false&& offered_quest == false) {
 
 			dialogue_point reply_diog_pt = { "Exit Quest","Exit Quest" };
 			dialogue_point con_diog_pt = { "Offer_Quest","Offer_Quest" };
@@ -2748,6 +2769,7 @@ bool DialogueController::offer_quest_on_exit(Hero* temp_hero) {
 
 			message = check_if_known(reply_pt_sentence, con_pt_sentence);
 			replyOptions = dialogue.get_possible_reply_pts("Offer_Quest", optionsIndex);
+			//player->quest_status[quest->getOwner()->name] = 1;
 
 			select = 0;
 			state = 2;
