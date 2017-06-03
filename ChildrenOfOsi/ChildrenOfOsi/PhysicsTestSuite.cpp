@@ -49,7 +49,8 @@ bool PhysicsTestSuite::test_movement() {
 	std::vector<Line*> l;
 	UniformGrid<Line>* grid = new UniformGrid<Line>();
 	UniformGrid<WorldObj>* grid2 = new UniformGrid<WorldObj>();
-	Movement* movetests = new Movement(t,grid,myriv, grid2);
+	ChildrenOfOsi* func = nullptr;
+	Movement* movetests = new Movement(t,grid,myriv, grid2, func);
 
 	bool up = false;
 	bool down = false;
@@ -162,7 +163,8 @@ bool PhysicsTestSuite::test_collision() {
 	std::vector<Line*> l;
 	UniformGrid<Line>* grid = new UniformGrid<Line>();
 	UniformGrid<WorldObj>* grid2 = new UniformGrid<WorldObj>();
-	Movement* movetests = new Movement(t,grid,rivObj, grid2);
+	ChildrenOfOsi* func = nullptr;
+	Movement* movetests = new Movement(t,grid,rivObj, grid2, nullptr);
 	bool result;
 
 	bool up = false;

@@ -7,13 +7,14 @@
 #include "RegionState.h"
 
 
-Movement::Movement(QuadTree* QT, UniformGrid<Line>* UG, RiverObj* _rivObj, UniformGrid<WorldObj>* _worldobj_grid) {
+Movement::Movement(QuadTree* QT, UniformGrid<Line>* UG, RiverObj* _rivObj, UniformGrid<WorldObj>* _worldobj_grid, ChildrenOfOsi* gameplay_func) {
 	tree = QT;
 	rivObj = _rivObj;
 	grid = UG;
 	world_grid = _worldobj_grid;
 	//rivObj->initialize_lines();
 	set_player_clone = false;
+	//gameplay_func = gameplay_func;
 }
 
 Movement::~Movement() {
@@ -23,6 +24,22 @@ Movement::~Movement() {
 //use speed variable instead of .1
 
 int Movement::move_up(WorldObj* obj) {
+	Player* temp = CheckClass::isPlayer(obj);
+	if (temp) {
+		cout << "can move is " << temp->can_move << endl;
+		if (temp->can_move == false) {
+			if (temp->can_move_counter > 0) {
+				temp->can_move_counter--;
+				gameplay_func->stop(obj);
+				return 0;
+			}
+			else {
+				temp->can_move_counter = 50;
+				temp->can_move = true;
+				return 0;
+			}	
+		}
+	}
 	//for (int i = 0; i < 10; i++) { cout << "MOVE UP IS BEING CALLED " << endl; }
 	if (obj->sprite.getLock())return 0;
 	int my_type = obj->getType();
@@ -46,14 +63,17 @@ int Movement::move_up(WorldObj* obj) {
 			set_player_clone = true;
 		}
 		obj->shiftY(-moveSpeed*speed_magnifier);
+		if (my_type != WorldObj::TYPE_PLAYER) return 0;
 		for (int i = 0; i < objVec.size(); i++) {
 			if (obj == objVec[i] || (my_type >= 2 && objVec[i]->getType() >= WorldObj::TYPE_NPC)) {
 				break;
 			}
+			if (objVec[i]->getName() == "rec_OT") cout << "FOUND REC OT IN THE MOVEMENT GRID" << endl;
 			Soldier* temp = CheckClass::isSoldier(objVec[i]);
 			if (temp) {
 				if (temp->getParty()->get_hide()) continue;
 			}
+			
 			bool check = collision(objVec[i], obj);
 			if (check) {
 				//manager->createTask("Bump", "SOUND");
@@ -86,6 +106,11 @@ int Movement::move_up(WorldObj* obj) {
 					LOG("failed to move up. collision.");
 					//obj->shiftY((moveSpeed*speed_magnifier));
 					obj->shiftY(moveSpeed*speed_magnifier*5);
+					Player* temp = CheckClass::isPlayer(obj);
+					if (temp) {
+						temp->can_move = false;
+						temp->can_move_counter--;
+					}
 					break;
 				}
 			//}
@@ -97,6 +122,22 @@ int Movement::move_up(WorldObj* obj) {
 	return 0;
 }
 int Movement::move_up_left(WorldObj* obj) {
+	Player* temp = CheckClass::isPlayer(obj);
+	if (temp) {
+		cout << "can move is " << temp->can_move << endl;
+		if (temp->can_move == false) {
+			if (temp->can_move_counter > 0) {
+				temp->can_move_counter--;
+				gameplay_func->stop(obj);
+				return 0;
+			}
+			else {
+				temp->can_move_counter = 50;
+				temp->can_move = true;
+				return 0;
+			}
+		}
+	}
 	if (obj->sprite.getLock())return 0;
 	int my_type = obj->getType();
 	Soldier* sold;
@@ -117,6 +158,11 @@ int Movement::move_up_left(WorldObj* obj) {
 		}
 		Line tempHori(Point(obj->body[0].getX(), 25000 - (obj->body[0].getY() + obj->body[0].getHeight())), Point(obj->body[0].getX() + 20, 25000 - (obj->body[0].getY() + obj->body[0].getHeight())));
 		Line tempVert(Point(obj->body[0].getX() + (obj->body[0].getWidth() / 2), 25000 - (obj->body[0].getY() + obj->body[0].getHeight())), Point(obj->body[0].getX() + (obj->body[0].getWidth() / 2), 25000 - (obj->body[0].getY() + obj->body[0].getHeight() - 20)));
+		if (my_type != WorldObj::TYPE_PLAYER) {
+			obj->shiftY(-diagYSpeed*speed_magnifier);
+			obj->shiftX(-diagXSpeed*speed_magnifier);
+			return 0;
+		}
 		obj->shiftY(-diagYSpeed*speed_magnifier);
 		for (int i = 0; i < objVec.size(); i++) {
 			if (obj == objVec[i] || (my_type >= 2 && objVec[i]->getType() >= WorldObj::TYPE_NPC)) {
@@ -149,6 +195,11 @@ int Movement::move_up_left(WorldObj* obj) {
 					//}
 					LOG("failed to move up. collision.");
 					obj->shiftY(diagYSpeed*speed_magnifier*5);
+					Player* temp = CheckClass::isPlayer(obj);
+					if (temp) {
+						temp->can_move = false;
+						temp->can_move_counter--;
+					}
 					break;
 				}
 			//}
@@ -181,6 +232,11 @@ int Movement::move_up_left(WorldObj* obj) {
 				//}
 				LOG("failed to move up. collision.");
 				obj->shiftX(diagXSpeed*speed_magnifier*5);
+				Player* temp = CheckClass::isPlayer(obj);
+				if (temp) {
+					temp->can_move = false;
+					temp->can_move_counter--;
+				}
 				break;
 			}
 		}
@@ -189,6 +245,22 @@ int Movement::move_up_left(WorldObj* obj) {
 	return 0;
 }
 int Movement::move_up_right(WorldObj* obj) {
+	Player* temp = CheckClass::isPlayer(obj);
+	if (temp) {
+		cout << "can move is " << temp->can_move << endl;
+		if (temp->can_move == false) {
+			if (temp->can_move_counter > 0) {
+				temp->can_move_counter--;
+				gameplay_func->stop(obj);
+				return 0;
+			}
+			else {
+				temp->can_move_counter = 50;
+				temp->can_move = true;
+				return 0;
+			}
+		}
+	}
 	if (obj->sprite.getLock())return 0;
 	int my_type = obj->getType();
 	Soldier* sold;
@@ -209,7 +281,11 @@ int Movement::move_up_right(WorldObj* obj) {
 		}
 		Line tempHori(Point(obj->body[0].getX() + obj->body[0].getWidth() - 20, 25000 - (obj->body[0].getY() + obj->body[0].getHeight())), Point(obj->body[0].getX() + obj->body[0].getWidth(), 25000 - (obj->body[0].getY() + obj->body[0].getHeight())));
 		Line tempVert(Point(obj->body[0].getX() + (obj->body[0].getWidth() / 2), 25000 - (obj->body[0].getY() + obj->body[0].getHeight())), Point(obj->body[0].getX() + (obj->body[0].getWidth() / 2), 25000 - (obj->body[0].getY() + obj->body[0].getHeight() - 20)));
-
+		if (my_type != WorldObj::TYPE_PLAYER) {
+			obj->shiftY(-diagYSpeed*speed_magnifier);
+			obj->shiftX(diagXSpeed*speed_magnifier);
+			return 0;
+		}
 		obj->shiftY(-diagYSpeed*speed_magnifier);
 		for (int i = 0; i < objVec.size(); i++) {
 			if (obj == objVec[i] || (my_type >= 2 && objVec[i]->getType() >= WorldObj::TYPE_NPC)) {
@@ -241,6 +317,11 @@ int Movement::move_up_right(WorldObj* obj) {
 					//}
 					LOG("failed to move up. collision.");
 					obj->shiftY(diagYSpeed*speed_magnifier*5);
+					Player* temp = CheckClass::isPlayer(obj);
+					if (temp) {
+						temp->can_move = false;
+						temp->can_move_counter--;
+					}
 					break;
 				}
 			//}
@@ -273,6 +354,11 @@ int Movement::move_up_right(WorldObj* obj) {
 					//}
 					LOG("failed to move up. collision.");
 					obj->shiftX(-diagXSpeed*speed_magnifier*5);
+					Player* temp = CheckClass::isPlayer(obj);
+					if (temp) {
+						temp->can_move = false;
+						temp->can_move_counter--;
+					}
 					break;
 				}
 		}
@@ -281,6 +367,22 @@ int Movement::move_up_right(WorldObj* obj) {
 	return 0;
 }
 int Movement::move_down(WorldObj* obj) {
+	Player* temp = CheckClass::isPlayer(obj);
+	if (temp) {
+		cout << "can move is " << temp->can_move << endl;
+		if (temp->can_move == false) {
+			if (temp->can_move_counter > 0) {
+				temp->can_move_counter--;
+				gameplay_func->stop(obj);
+				return 0;
+			}
+			else {
+				temp->can_move_counter = 50;
+				temp->can_move = true;
+				return 0;
+			}
+		}
+	}
 	if (obj->sprite.getLock())return 0;
 	int my_type = obj->getType();
 	Soldier* sold;
@@ -300,6 +402,7 @@ int Movement::move_down(WorldObj* obj) {
 		}
 
 		obj->shiftY(moveSpeed*speed_magnifier);
+		if (my_type != WorldObj::TYPE_PLAYER) return 0;
 		for (int i = 0; i < objVec.size(); i++) {
 			if (obj == objVec[i] || (my_type >= 2 && objVec[i]->getType() >= WorldObj::TYPE_NPC)) {
 				break;
@@ -336,6 +439,11 @@ int Movement::move_down(WorldObj* obj) {
 					cout << "collision" << endl;
 					LOG("failed to move up. collision.");
 					obj->shiftY(-moveSpeed*speed_magnifier*5);
+					Player* temp = CheckClass::isPlayer(obj);
+					if (temp) {
+						temp->can_move = false;
+						temp->can_move_counter--;
+					}
 					break;
 				}
 			//}
@@ -345,6 +453,22 @@ int Movement::move_down(WorldObj* obj) {
 	return 0;
 }
 int Movement::move_down_left(WorldObj* obj) {
+	Player* temp = CheckClass::isPlayer(obj);
+	if (temp) {
+		cout << "can move is " << temp->can_move << endl;
+		if (temp->can_move == false) {
+			if (temp->can_move_counter > 0) {
+				temp->can_move_counter--;
+				gameplay_func->stop(obj);
+				return 0;
+			}
+			else {
+				temp->can_move_counter = 50;
+				temp->can_move = true;
+				return 0;
+			}
+		}
+	}
 	if (obj->sprite.getLock())return 0;
 	int my_type = obj->getType();
 	Soldier* sold;
@@ -365,6 +489,12 @@ int Movement::move_down_left(WorldObj* obj) {
 		}
 		Line tempHori(Point(obj->body[0].getX(), 25000 - (obj->body[0].getY() + obj->body[0].getHeight())), Point(obj->body[0].getX() + 20, 25000 - (obj->body[0].getY() + obj->body[0].getHeight())));
 		Line tempVert(Point(obj->body[0].getX() + (obj->body[0].getWidth() / 2), 25000 - (obj->body[0].getY() + obj->body[0].getHeight())), Point(obj->body[0].getX() + (obj->body[0].getWidth() / 2), 25000 - (obj->body[0].getY() + obj->body[0].getHeight() - 20)));
+		if (my_type != WorldObj::TYPE_PLAYER) {
+			obj->shiftY(diagYSpeed*speed_magnifier);
+			obj->shiftX(-diagXSpeed*speed_magnifier);
+			return 0;
+		}
+		
 		obj->shiftY(diagYSpeed*speed_magnifier);
 		for (int i = 0; i < objVec.size(); i++) {
 			if (obj == objVec[i] || (my_type >= 2 && objVec[i]->getType() >= WorldObj::TYPE_NPC)) {
@@ -399,6 +529,11 @@ int Movement::move_down_left(WorldObj* obj) {
 					//}
 					LOG("failed to move up. collision.");
 					obj->shiftY(-diagYSpeed*speed_magnifier*5);
+					Player* temp = CheckClass::isPlayer(obj);
+					if (temp) {
+						temp->can_move = false;
+						temp->can_move_counter--;
+					}
 					break;
 				}
 			//}
@@ -432,6 +567,11 @@ int Movement::move_down_left(WorldObj* obj) {
 				//}
 				LOG("failed to move up. collision.");
 				obj->shiftX(diagXSpeed*speed_magnifier*5);
+				Player* temp = CheckClass::isPlayer(obj);
+				if (temp) {
+					temp->can_move = false;
+					temp->can_move_counter--;
+				}
 				break;
 			}
 		}
@@ -440,6 +580,22 @@ int Movement::move_down_left(WorldObj* obj) {
 	return 0;
 }
 int Movement::move_down_right(WorldObj* obj) {
+	Player* temp = CheckClass::isPlayer(obj);
+	if (temp) {
+		cout << "can move is " << temp->can_move << endl;
+		if (temp->can_move == false) {
+			if (temp->can_move_counter > 0) {
+				temp->can_move_counter--;
+				gameplay_func->stop(obj);
+				return 0;
+			}
+			else {
+				temp->can_move_counter = 50;
+				temp->can_move = true;
+				return 0;
+			}
+		}
+	}
 	if (obj->sprite.getLock())return 0;
 	int my_type = obj->getType();
 	Soldier* sold;
@@ -460,6 +616,11 @@ int Movement::move_down_right(WorldObj* obj) {
 		}
 		Line tempHori(Point(obj->body[0].getX() + obj->body[0].getWidth() - 20, 25000 - (obj->body[0].getY() + obj->body[0].getHeight())), Point(obj->body[0].getX() + obj->body[0].getWidth(), 25000 - (obj->body[0].getY() + obj->body[0].getHeight())));
 		Line tempVert(Point(obj->body[0].getX() + (obj->body[0].getWidth() / 2), 25000 - (obj->body[0].getY() + obj->body[0].getHeight())), Point(obj->body[0].getX() + (obj->body[0].getWidth() / 2), 25000 - (obj->body[0].getY() + obj->body[0].getHeight() - 20)));
+		if (my_type != WorldObj::TYPE_PLAYER) {
+			obj->shiftY(diagYSpeed*speed_magnifier);
+			obj->shiftX(diagXSpeed*speed_magnifier);
+			return 0;
+		}
 		obj->shiftY(diagYSpeed*speed_magnifier);
 		for (int i = 0; i < objVec.size(); i++) {
 			if (obj == objVec[i] || (my_type >= 2 && objVec[i]->getType() >= WorldObj::TYPE_NPC)) {
@@ -493,6 +654,11 @@ int Movement::move_down_right(WorldObj* obj) {
 					//}
 					LOG("failed to move up. collision.");
 					obj->shiftY(-diagYSpeed*speed_magnifier*5);
+					Player* temp = CheckClass::isPlayer(obj);
+					if (temp) {
+						temp->can_move = false;
+						temp->can_move_counter--;
+					}
 					break;
 				}
 			//}
@@ -524,6 +690,11 @@ int Movement::move_down_right(WorldObj* obj) {
 				//}
 				LOG("failed to move up. collision.");
 				obj->shiftX(-diagXSpeed*speed_magnifier*5);
+				Player* temp = CheckClass::isPlayer(obj);
+				if (temp) {
+					temp->can_move = false;
+					temp->can_move_counter--;
+				}
 				break;
 			}
 		}
@@ -532,6 +703,22 @@ int Movement::move_down_right(WorldObj* obj) {
 	return 0;
 }
 int Movement::move_left(WorldObj* obj) {
+	Player* temp = CheckClass::isPlayer(obj);
+	if (temp) {
+		cout << "can move is " << temp->can_move << endl;
+		if (temp->can_move == false) {
+			if (temp->can_move_counter > 0) {
+				temp->can_move_counter--;
+				gameplay_func->stop(obj);
+				return 0;
+			}
+			else {
+				temp->can_move_counter = 50;
+				temp->can_move = true;
+				return 0;
+			}
+		}
+	}
 	if (obj->sprite.getLock())return 0;
 	int my_type = obj->getType();
 	Soldier* sold;
@@ -550,6 +737,7 @@ int Movement::move_left(WorldObj* obj) {
 			float moveSpeed = npc->getSpeed();
 		}
 		obj->shiftX(-moveSpeed*speed_magnifier);
+		if (my_type != WorldObj::TYPE_PLAYER) return 0;
 		for (int i = 0; i < objVec.size(); i++) {
 			if (obj == objVec[i] || (my_type >= 2 && objVec[i]->getType() >= WorldObj::TYPE_NPC)) {
 				break;
@@ -589,6 +777,11 @@ int Movement::move_left(WorldObj* obj) {
 					cout << "collision" << endl;
 					LOG("failed to move up. collision.");
 					obj->shiftX(moveSpeed*speed_magnifier*5);
+					Player* temp = CheckClass::isPlayer(obj);
+					if (temp) {
+						temp->can_move = false;
+						temp->can_move_counter--;
+					}
 					break;
 				}
 			//}
@@ -598,6 +791,22 @@ int Movement::move_left(WorldObj* obj) {
 	return 0;
 }
 int Movement::move_right(WorldObj* obj) {
+	Player* temp = CheckClass::isPlayer(obj);
+	if (temp) {
+		cout << "can move is " << temp->can_move << endl;
+		if (temp->can_move == false) {
+			if (temp->can_move_counter > 0) {
+				temp->can_move_counter--;
+				gameplay_func->stop(obj);
+				return 0;
+			}
+			else {
+				temp->can_move_counter = 50;
+				temp->can_move = true;
+				return 0;
+			}
+		}
+	}
 	if (obj->sprite.getLock())return 0;
 	int my_type = obj->getType();
 	Soldier* sold;
@@ -617,6 +826,7 @@ int Movement::move_right(WorldObj* obj) {
 		}
 
 		obj->shiftX(moveSpeed*speed_magnifier);
+		if (my_type != WorldObj::TYPE_PLAYER) return 0;
 		for (int i = 0; i < objVec.size(); i++) {
 			if (obj == objVec[i] || (my_type >= 2 && objVec[i]->getType() >= WorldObj::TYPE_NPC)) {
 				//cout << "Skip check for"<< objVec[i]->getID() << endl;
@@ -654,6 +864,11 @@ int Movement::move_right(WorldObj* obj) {
 					cout << "collision" << endl;
 					LOG("failed to move up. collision.");
 					obj->shiftX(-(moveSpeed*speed_magnifier)*5);
+					Player* temp = CheckClass::isPlayer(obj);
+					if (temp) {
+						temp->can_move = false;
+						temp->can_move_counter--;
+					}
 					break;
 				}
 			//}
@@ -741,6 +956,7 @@ int Movement::attack(WorldObj* obj) {
 				if (temp) {
 					if (temp->getParty()->get_hide()) continue;
 				}
+				else { continue; }
 				if (objVec[i]->getType() > WorldObj::TYPE_WORLDOBJ) {
 					LivingObj* liv = CheckClass::isSoldier(objVec[i]); //dont want to hurt anybody but soldiers
 					if (liv) {
@@ -909,4 +1125,6 @@ bool Movement::col_thread(WorldObj* recA, WorldObj* recB)
 	bool check = future.get();
 	return check;
 }
+
+ChildrenOfOsi* Movement::gameplay_func;
 

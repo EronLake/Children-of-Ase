@@ -92,6 +92,7 @@ public:
 	static bool quest_declined;
 
 	static ConversationLogObj* entry;
+	static std::pair<bool, std::string> vis_feedback;
 
 	//States:
 	//0 is no conversation
@@ -130,6 +131,8 @@ public:
 	static bool talked_to_babalawo_o;
 	static bool talked_to_babalawo_j;
 	static bool talked_to_babalawo_m;
+
+	static int feedback_timer;
 
 };
 

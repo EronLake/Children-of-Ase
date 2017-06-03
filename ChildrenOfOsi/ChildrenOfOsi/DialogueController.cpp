@@ -118,6 +118,9 @@ bool DialogueController::first_buff = true;
 bool DialogueController::is_hero_act = false;
 
 Action* DialogueController::hero_act_toward_player = nullptr;
+std::pair<bool, std::string> DialogueController::vis_feedback;
+
+int DialogueController::feedback_timer = 100;
 
 
 DialogueController::DialogueController()
@@ -160,13 +163,14 @@ void DialogueController::PlayerChoose()
 		else
 			set_selectable(false, "Ask_To_Duel", NotorietyIcon);
 
-		if(temp_hero->rel[player->name]->getStrength() >= 50 && temp_hero->rel[player->name]->getAffinity() <= 85 && temp_hero->rel[player->name]->getNotoriety() <= 75)
+		if(temp_hero->rel[player->name]->getStrength() >= 50 && temp_hero->rel[player->name]->getAffinity() >= 60 && temp_hero->rel[player->name]->getNotoriety() >= 65)
 			set_selectable(true, "Ask_To_Spar", StrengthIcon);
 		else
 			set_selectable(false, "Ask_To_Spar", StrengthIcon);
 
 		if(temp_hero->getVillage()->get_alliance() == player->getVillage()->get_alliance())
-			set_selectable(true, "Recruit_For_Party", StrengthIcon);
+			//set_selectable(true, "Recruit_For_Party", StrengthIcon);
+			set_selectable(false, "Recruit_For_Party", StrengthIcon); // took off join party
 		else
 			set_selectable(false, "Recruit_For_Party", StrengthIcon);
 
@@ -176,7 +180,8 @@ void DialogueController::PlayerChoose()
 		else
 			set_selectable(false, "Request_Teaching", StrengthIcon);
 
-		if (temp_hero->rel[player->name]->getAffinity() >= 85)
+		if (temp_hero->rel[player->name]->getAffinity() >= 85 && temp_hero->getVillage()->get_alliance() != 
+																	player->getVillage()->get_alliance())
 			set_selectable(true, "Ask_To_Form_Alliance", AffinityIcon);
 		else
 			set_selectable(false, "Ask_To_Form_Alliance", AffinityIcon);
@@ -414,6 +419,7 @@ void DialogueController::PlayerConversationPoint()
 		}
 		player_conv_point_choice = choice[ConvPointName];
 
+		vis_feedback.second = player_conv_point_choice;
 		Hero* temp_hero = CheckClass::isHero(other);
 
 		/*handles applying of post conditions for select conversation
@@ -786,6 +792,9 @@ void DialogueController::PlayerResponse()
 			reply_end = act_name.find_last_of(' ');
 			act_name = choice[1].substr(0, reply_end);
 
+			if (act_name == "Offer Praise")
+				act_name = "Grovel";
+
 			bool react_positively = true; 
 			for (auto precond : Containers::conv_point_table[act_name]->req_preconds) {
 				int temp1 = precond->get_cost(temp_hero, player);
@@ -1008,6 +1017,30 @@ void DialogueController::otherConversationPoint(dialogue_point line)
 			else
 			    replace_all(con_pt_sentence, "HERO", hero_name);//receiver or doer here? ask Justin
 
+			if (act_name.find("Bribe") != string::npos) {
+				std::string gift = "offer a gift to";
+				replace_all(con_pt_sentence, "HERO", hero_name);
+				replace_all(con_pt_sentence, "ACTION", gift);
+			}
+			else
+				replace_all(con_pt_sentence, "HERO", hero_name);//receiver or doer here? ask Justin
+
+			if (act_name.find("Boast") != string::npos) {
+				std::string to = "to";
+				replace_all(con_pt_sentence, "HERO", hero_name);
+				replace_all(con_pt_sentence, "ACTION", act_name + to);
+			}
+			else
+				replace_all(con_pt_sentence, "HERO", hero_name);//receiver or doer here? ask Justin
+
+			if (act_name.find("Grovel") != string::npos) {
+				std::string praise = "offer praise to";
+				replace_all(con_pt_sentence, "HERO", hero_name);
+				replace_all(con_pt_sentence, "ACTION", praise);
+			}
+			else
+				replace_all(con_pt_sentence, "HERO", hero_name);//receiver or doer here? ask Justin
+
 
 			std::string with = "";
 			if (act_name.find("Train") != string::npos || act_name.find("Spar") != string::npos || act_name.find("Form_Alliance") != string::npos) {
@@ -1204,9 +1237,13 @@ void DialogueController::otherResponse(std::string info, std::string hero_topic)
 		return;
 	}
 
+	DialogueController::feedback_timer = 100;
+
 	if (state != 8 && state != 12 && state != 7) {
 		dialogue_point line = dialogue.choose_reply_pt(info, optionsIndex, curr_conversation_log,temp_hero);
 		replyString = line[ConvPointName];
+
+		vis_feedback.first = accepted_action;
 
 		/*avoids setting a topic when npc replies with "You already asked me that"
 		 or if npc says any other special case reply. Special case replies are
@@ -2740,7 +2777,7 @@ bool DialogueController::offer_quest_on_exit(Hero* temp_hero) {
 		}
 		//if (planner->quests_given.size() > 0)//stand in Bad!
 			//has_quest = true;//stand in Bad! dont wanna be checking the size of quest vector
-		if (has_quest == false && quest_declined == false&& offered_quest == false) {
+		if (has_quest == false && quest_declined == false && offered_quest == false) {
 
 			dialogue_point reply_diog_pt = { "Exit Quest","Exit Quest" };
 			dialogue_point con_diog_pt = { "Offer_Quest","Offer_Quest" };

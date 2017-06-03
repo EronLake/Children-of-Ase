@@ -11,6 +11,7 @@
 #include "AIController.h"
 #include "PlayerActExecFunctions.h"
 #include "UniformGrid.h"
+#include "ChildrenOfOsi.h"
 
 #include <thread>
 #include <future>
@@ -19,7 +20,7 @@ class PhysicsManager;
 
 class Movement {
 public:
-	Movement(QuadTree* QT, UniformGrid<Line>* _UG, RiverObj* _rivObj, UniformGrid<WorldObj>* _worldobj_grid);
+	Movement(QuadTree* QT, UniformGrid<Line>* _UG, RiverObj* _rivObj, UniformGrid<WorldObj>* _worldobj_grid, ChildrenOfOsi* gameplay_func);
 	~Movement();
 	//void playerAction(string task_name, WorldObj* player);
 	//static void initTree(WorldObj* screen);
@@ -44,6 +45,7 @@ public:
 	UniformGrid<WorldObj>* world_grid;
 	RiverObj* rivObj;
 	PhysicsManager* manager;
+	static ChildrenOfOsi* gameplay_func;
 
 	float speed_magnifier = 1.0f;
 	float moveSpeed;

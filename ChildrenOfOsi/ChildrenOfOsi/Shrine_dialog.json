@@ -1,124 +1,124 @@
 {
 	"Oasis_Shrine": {
 		"Shrine Talk 1": {
-			"1": "SoldierJungle_Idle_S",
-			"2": "SoldierJungle_Idle_S",
-			"3": "SoldierJungle_Idle_S",
-			"4": "SoldierOasis_Idle_S",
-			"5": "SoldierOasis_Idle_W"
+			"1": "Hello, young traveler. I am the orisha of this shrine.",
+			"2": "Hello, young traveler. I am the orisha of this shrine.",
+			"3": "Hello, young traveler. I am the orisha of this shrine.",
+			"4": "Hello, young traveler. I am the orisha of this shrine.",
+			"5": "Hello, young traveler. I am the orisha of this shrine."
 		},
 		"Shrine Talk 2": {
-			"1": "SoldierJungle_Idle_S",
-			"2": "SoldierJungle_Idle_S",
-			"3": "SoldierJungle_Idle_S",
-			"4": "SoldierOasis_Idle_S",
-			"5": "SoldierOasis_Idle_W"
+			"1": "I have deemed you worthy to receive my blessing.",
+			"2": "I have deemed you worthy to receive my blessing.",
+			"3": "I have deemed you worthy to receive my blessing.",
+			"4": "I have deemed you worthy to receive my blessing.",
+			"5": "I have deemed you worthy to receive my blessing."
 		},
 
 		"Shrine Talk 3": {
-			"1": "SoldierJungle_Idle_S",
-			"2": "SoldierJungle_Idle_S",
-			"3": "SoldierJungle_Idle_S",
-			"4": "SoldierOasis_Idle_S",
-			"5": "SoldierOasis_Idle_W"
+			"1": "I shall restore you to perfect health, deepen your connection with your ori and make it easier for you to get along with the others in the physical realm.",
+			"2": "I shall restore you to perfect health, deepen your connection with your ori and make it easier for you to get along with the others in the physical realm.",
+			"3": "I shall restore you to perfect health, deepen your connection with your ori and make it easier for you to get along with the others in the physical realm.",
+			"4": "I shall restore you to perfect health, deepen your connection with your ori and make it easier for you to get along with the others in the physical realm.",
+			"5": "I shall restore you to perfect health, deepen your connection with your ori and make it easier for you to get along with the others in the physical realm."
 		},
 
 		"Shrine Talk 4": {
-			"1": "SoldierJungle_Idle_S",
-			"2": "SoldierJungle_Idle_S",
-			"3": "SoldierJungle_Idle_S",
-			"4": "SoldierOasis_Idle_S",
-			"5": "SoldierOasis_Idle_W"
+			"1": "Now, go forth and bring peace to the land, young Shango.",
+			"2": "Now, go forth and bring peace to the land, young Shango.",
+			"3": "Now, go forth and bring peace to the land, young Shango.",
+			"4": "Now, go forth and bring peace to the land, young Shango.",
+			"5": "Now, go forth and bring peace to the land, young Shango."
 		},
 
 		"Shrine Not Worthy": {
-			"1": "SoldierJungle_Idle_S",
-			"2": "SoldierJungle_Idle_S",
-			"3": "SoldierJungle_Idle_S",
-			"4": "SoldierOasis_Idle_S",
-			"5": "SoldierOasis_Idle_W"
+			"1": "You have yet to earn the favor of the others and to foster kindness.",
+			"2": "You have yet to earn the favor of the others and to foster kindness.",
+			"3": "You have yet to earn the favor of the others and to foster kindness.",
+			"4": "You have yet to earn the favor of the others and to foster kindness.",
+			"5": "You have yet to earn the favor of the others and to foster kindness."
 		}
 	},
 
    "Jungle_Shrine": {
         "Shrine Talk 1": {
-			"1": "SoldierJungle_Idle_S",
-			"2": "SoldierJungle_Idle_S",
-			"3": "SoldierJungle_Idle_S",
-			"4": "SoldierOasis_Idle_S",
-			"5": "SoldierOasis_Idle_W"
+			"1": "Hello, young traveler. I am the orisha of this shrine.",
+			"2": "Hello, young traveler. I am the orisha of this shrine.",
+			"3": "Hello, young traveler. I am the orisha of this shrine.",
+			"4": "Hello, young traveler. I am the orisha of this shrine.",
+			"5": "Hello, young traveler. I am the orisha of this shrine."
 		},
 		"Shrine Talk 2": {
-			"1": "SoldierJungle_Idle_S",
-			"2": "SoldierJungle_Idle_S",
-			"3": "SoldierJungle_Idle_S",
-			"4": "SoldierOasis_Idle_S",
-			"5": "SoldierOasis_Idle_W"
+			"1": "I have deemed you worthy to receive my blessing.",
+			"2": "I have deemed you worthy to receive my blessing.",
+			"3": "I have deemed you worthy to receive my blessing.",
+			"4": "I have deemed you worthy to receive my blessing.",
+			"5": "I have deemed you worthy to receive my blessing."
 		},
 
 		"Shrine Talk 3": {
-			"1": "SoldierJungle_Idle_S",
-			"2": "SoldierJungle_Idle_S",
-			"3": "SoldierJungle_Idle_S",
-			"4": "SoldierOasis_Idle_S",
-			"5": "SoldierOasis_Idle_W"
+			"1": "I shall restore you to perfect health, deepen your connection with your ori and assist you in gaining the trust of others.",
+			"2": "I shall restore you to perfect health, deepen your connection with your ori and assist you in gaining the trust of others.",
+			"3": "I shall restore you to perfect health, deepen your connection with your ori and assist you in gaining the trust of others.",
+			"4": "I shall restore you to perfect health, deepen your connection with your ori and assist you in gaining the trust of others.",
+			"5": "I shall restore you to perfect health, deepen your connection with your ori and assist you in gaining the trust of others."
 		},
 
 		"Shrine Talk 4": {
-			"1": "SoldierJungle_Idle_S",
-			"2": "SoldierJungle_Idle_S",
-			"3": "SoldierJungle_Idle_S",
-			"4": "SoldierOasis_Idle_S",
-			"5": "SoldierOasis_Idle_W"
+			"1": "Now, go forth and bring peace to the land, young Shango.",
+			"2": "Now, go forth and bring peace to the land, young Shango.",
+			"3": "Now, go forth and bring peace to the land, young Shango.",
+			"4": "Now, go forth and bring peace to the land, young Shango.",
+			"5": "Now, go forth and bring peace to the land, young Shango."
 		},
 
 		"Shrine Not Worthy": {
-			"1": "SoldierJungle_Idle_S",
-			"2": "SoldierJungle_Idle_S",
-			"3": "SoldierJungle_Idle_S",
-			"4": "SoldierOasis_Idle_S",
-			"5": "SoldierOasis_Idle_W"
+			"1": "You have yet to make a name for yourself and build relationships through trust.",
+			"2": "You have yet to make a name for yourself and build relationships through trust.",
+			"3": "You have yet to make a name for yourself and build relationships through trust.",
+			"4": "You have yet to make a name for yourself and build relationships through trust.",
+			"5": "You have yet to make a name for yourself and build relationships through trust."
 		}
    },
 
     "Mountain_Shrine": {
         "Shrine Talk 1": {
-			"1": "SoldierJungle_Idle_S",
-			"2": "SoldierJungle_Idle_S",
-			"3": "SoldierJungle_Idle_S",
-			"4": "SoldierOasis_Idle_S",
-			"5": "SoldierOasis_Idle_W"
+			"1": "Hello, young traveler. I am the orisha of this shrine.",
+			"2": "Hello, young traveler. I am the orisha of this shrine.",
+			"3": "Hello, young traveler. I am the orisha of this shrine.",
+			"4": "Hello, young traveler. I am the orisha of this shrine.",
+			"5": "Hello, young traveler. I am the orisha of this shrine."
 		},
 		"Shrine Talk 2": {
-			"1": "SoldierJungle_Idle_S",
-			"2": "SoldierJungle_Idle_S",
-			"3": "SoldierJungle_Idle_S",
-			"4": "SoldierOasis_Idle_S",
-			"5": "SoldierOasis_Idle_W"
+			"1": "I have deemed you worthy to receive my blessing.",
+			"2": "I have deemed you worthy to receive my blessing.",
+			"3": "I have deemed you worthy to receive my blessing.",
+			"4": "I have deemed you worthy to receive my blessing.",
+			"5": "I have deemed you worthy to receive my blessing."
 		},
 
 		"Shrine Talk 3": {
-			"1": "SoldierJungle_Idle_S",
-			"2": "SoldierJungle_Idle_S",
-			"3": "SoldierJungle_Idle_S",
-			"4": "SoldierOasis_Idle_S",
-			"5": "SoldierOasis_Idle_W"
+			"1": "I shall restore you to perfect health, deepen your connection with your ori and give you a mighty boost in strength.",
+			"2": "I shall restore you to perfect health, deepen your connection with your ori and give you a mighty boost in strength.",
+			"3": "I shall restore you to perfect health, deepen your connection with your ori and give you a mighty boost in strength.",
+			"4": "I shall restore you to perfect health, deepen your connection with your ori and give you a mighty boost in strength.",
+			"5": "I shall restore you to perfect health, deepen your connection with your ori and give you a mighty boost in strength."
 		},
 
 		"Shrine Talk 4": {
-			"1": "SoldierJungle_Idle_S",
-			"2": "SoldierJungle_Idle_S",
-			"3": "SoldierJungle_Idle_S",
-			"4": "SoldierOasis_Idle_S",
-			"5": "SoldierOasis_Idle_W"
+			"1": "Now, go forth and bring peace to the land, young Shango.",
+			"2": "Now, go forth and bring peace to the land, young Shango.",
+			"3": "Now, go forth and bring peace to the land, young Shango.",
+			"4": "Now, go forth and bring peace to the land, young Shango.",
+			"5": "Now, go forth and bring peace to the land, young Shango."
 		},
 
 		"Shrine Not Worthy": {
-			"1": "SoldierJungle_Idle_S",
-			"2": "SoldierJungle_Idle_S",
-			"3": "SoldierJungle_Idle_S",
-			"4": "SoldierOasis_Idle_S",
-			"5": "SoldierOasis_Idle_W"
+			"1": "You have yet to prove your strength by defeating several others in combat.",
+			"2": "You have yet to prove your strength by defeating several others in combat.",
+			"3": "You have yet to prove your strength by defeating several others in combat.",
+			"4": "You have yet to prove your strength by defeating several others in combat.",
+			"5": "You have yet to prove your strength by defeating several others in combat."
 		}
    }
 }

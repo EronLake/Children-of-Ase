@@ -105,6 +105,11 @@ class HUD
   Rectangle *minimap_cursor_rect;
   Rectangle *keybind_display_rect;
 
+  Rectangle *keybind_attack01_rect;
+  Rectangle *keybind_attack02_rect;
+  Rectangle *keybind_attack03_rect;
+  Rectangle *keybind_attack04_rect;
+
   Rectangle *ori_flame_rect;
   Rectangle *ori_crown_rect;
 
@@ -123,6 +128,11 @@ class HUD
   Texture *minimap_cursor_tex;
   Texture *keybind_display_tex;
 
+  Texture *keybind_attack01_tex;
+  Texture *keybind_attack02_tex;
+  Texture *keybind_attack03_tex;
+  Texture *keybind_attack04_tex;
+
   Texture *ori_flame_tex;
   Texture *ori_crown_tex;
 
@@ -130,5 +140,5 @@ class HUD
   void drawMainHUD(Player *player);
   void drawMinimap(Player* player, Hero* yemoja, Hero* oya, Hero* ogun);
   void drawOri(Player* player);
-  void drawKeybindDisplay();
+  void drawKeybindDisplay(Player *player);
 };

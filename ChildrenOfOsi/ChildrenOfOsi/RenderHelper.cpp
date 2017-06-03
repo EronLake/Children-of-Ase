@@ -28,7 +28,7 @@ RenderHelper::RenderHelper(QuadTree * QT, RiverObj* _rivObj, std::vector<WorldOb
   hud_ptr->setSprite();
   gmap = new GameMap();
   TutGui = new Rectangle(Vector2f(cameraSize.xloc / 4, cameraSize.yloc / 8), cameraSize.xloc / 2, cameraSize.yloc / 1.5);
-  logo_gui = new Rectangle(Vector2f(cameraSize.xloc / 4, cameraSize.yloc / 8), cameraSize.xloc / 2, cameraSize.yloc / 1.5);
+  logo_gui = new Rectangle(Vector2f(0.0F, 0.0F), cameraSize.xloc, cameraSize.yloc);
   initTutGui();
   init_logo_gui();
   //fullVec = tree->retrieve(fullVec, fullBound);
@@ -67,7 +67,7 @@ void RenderHelper::initTutGui()
 void RenderHelper::init_logo_gui()
 {
   Texture* logo_tex = new Texture();
-  logo_tex->setFile("Assets/Sprites/Logo.png", 1);
+  logo_tex->setFile("Assets/Sprites/Logo_Loading.png", 1);
   logo_gui->sprite.setTexture(logo_tex);
 }
 
@@ -154,10 +154,18 @@ int RenderHelper::draw_frame(WorldObj * obj)
 		if (temp) {
 			if (temp->getParty()->get_hide()) continue;
 		}
+	//	if (objVec[i]->getName() == "rec_OT") {
+		//	cout << "found tower rec render!!!!!!!!!!!!!!!!!!!!!!!!!!!!!" << endl;
+			//system("PAUSE");
+	//	}
 			LOG("BEFORE DRAWING**");
 			////////cout << objVec[i]->getX() - camera->getX() << endl;
 			//LOG(objVec[i]->getX(), ", ", objVec[i]->getY());
 			objVec[i]->WorldObj::drawObj(camera->getX(), camera->getY());
+			//Player* player = CheckClass::isPlayer(objVec[i]);
+			//if (player) {
+			//	if (player->can_move == false) continue;
+			//}
 			//for (int j = 0; j < objVec[i]->body.size(); j++) {
 			objVec[i]->body[0].drawObj(camera->getX(), camera->getY());
 			objVec[i]->effect.drawObj(camera->getX(), camera->getY());
@@ -187,6 +195,10 @@ int RenderHelper::drawDiaGui(WorldObj* obj)
   //obj->WorldObj::animateObj();
   for(int i = 0; i < objVec.size(); i++) {
     LOG("BEFORE DRAWING**");
+	Soldier* temp = CheckClass::isSoldier(objVec[i]);
+	if (temp) {
+		if (temp->getParty()->get_hide()) continue;
+	}
     ////////cout << objVec[i]->getX() - camera->getX() << endl;
     //LOG(objVec[i]->getX(), ", ", objVec[i]->getY());
     objVec[i]->WorldObj::drawObj(camera->getX(), camera->getY());
@@ -213,8 +225,17 @@ int RenderHelper::drawTut(WorldObj *obj)
 
   objVec = grid_game->retrieve_worldobj_in_grid(objVec, obj);
   for (int i = 0; i < objVec.size(); ++i) {
-  	objVec[i]->WorldObj::drawObj(camera->getX(), camera->getY());
-  	objVec[i]->WorldObj::animateObj();
+    Soldier *sold = CheckClass::isSoldier(objVec[i]);
+    if(sold) {
+      if(sold->get_incapacitated()) {
+        objVec[i]->WorldObj::drawObj(camera->getX(), camera->getY());
+        objVec[i]->WorldObj::animateObj();
+      }
+    }
+    else {
+      objVec[i]->WorldObj::drawObj(camera->getX(), camera->getY());
+      objVec[i]->WorldObj::animateObj();
+    }
   }
 
   TutGui->drawObj(camera->getX(), camera->getY());

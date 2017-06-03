@@ -46,6 +46,7 @@ UniformGrid<T>::~UniformGrid<T>()
 template <class T>
 void UniformGrid<T>::insert_worldobj_to_grid(std::vector<T*> objs)
 {
+	
 	//iterate  thru all the objects
 	for (int i = 0; i < objs.size(); i++) {
 		//first find the cell that the obj belongs to on the grid
@@ -53,6 +54,8 @@ void UniformGrid<T>::insert_worldobj_to_grid(std::vector<T*> objs)
 		int j = xcoord / 1250;
 		int ycoord = objs[i]->body[0].getY();
 		int k = ycoord / 1250;
+
+		if (objs[i]->getName() == "rec_OT") cout << "FOUND THE RECOT IN GRID and j k are " << j << ", " << k << endl;
 
 		objs[i]->grid_location.first = j;
 		objs[i]->grid_location.second = k;
