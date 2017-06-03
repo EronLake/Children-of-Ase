@@ -613,10 +613,14 @@ void Input::InputCheck()
 	short TWO = GetKeyState('2') >> 15; //Removes you from party and puts party in flee mode
 	short THREE = GetKeyState('3') >> 15; // Remove self from party and put party in patrol mode
 	short FOUR = GetKeyState('4') >> 15; // coming soon
+
+  if(!ENTER)
+    this->key_lock = false;
 	
 	if (current_game_state == game_state::main_menu) {
     if (ENTER) {
       Tutorial::completeStage(*this);
+      this->key_lock = true;
 		}
 	}
 	else if (current_game_state == game_state::in_game) {
@@ -1260,7 +1264,7 @@ void Input::InputCheck()
     }
 	}
   else if(current_game_state == game_state::tutorial_pause) {
-    if(ENTER && Tutorial::isStageActive(Tutorial::Stage::INTRO01)) {
+    if(ENTER && Tutorial::isStageActive(Tutorial::Stage::INTRO01) && !this->key_lock) {
       Tutorial::completeStage(*this);
       current_game_state = game_state::in_game;
     }
