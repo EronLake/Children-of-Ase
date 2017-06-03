@@ -140,5 +140,5 @@ class HUD
   void drawMainHUD(Player *player);
   void drawMinimap(Player* player, Hero* yemoja, Hero* oya, Hero* ogun);
   void drawOri(Player* player);
-  void drawKeybindDisplay();
+  void drawKeybindDisplay(Player *player);
 };

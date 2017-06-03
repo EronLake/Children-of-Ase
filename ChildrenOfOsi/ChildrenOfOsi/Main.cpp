@@ -1268,9 +1268,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
         return;
       }
 
-      // gameplay_functions->draw_frame(Alex);
       gameplay_functions->drawTut(Alex);
-      // Tutorial::drawTutorial();
 
       start_tick = clock();
       iController->InputCheck();
