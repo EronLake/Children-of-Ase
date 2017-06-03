@@ -294,6 +294,8 @@ void DialogueGui::drawGuiText()
 
 		if (option_str.find("Accept Plea") != string::npos)
 			option_str = "Thank";
+		if (option_str.find("Accept Bribe") != string::npos)
+			option_str = "Accept Gift";
 
         GameWindow::createText(option_str,
           DialogueGui::OPTIONS_X, DialogueGui::OPTIONS_Y + (DialogueGui::LINE_SPACING * i),

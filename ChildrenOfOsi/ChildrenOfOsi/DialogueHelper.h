@@ -56,6 +56,7 @@ public:
 	static bool accepted_quest;
 
 	static Action* quest;
+	static bool state_is_8;
 };
 
 
