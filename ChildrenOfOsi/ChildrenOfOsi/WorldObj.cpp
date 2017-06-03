@@ -110,8 +110,8 @@ void WorldObj::setDirWithBase(int od, bool update)
 }
 
 void WorldObj::face(WorldObj* other) {
-	int f = WorldObj::DIRECTION_RIGHT;
-	if (body[0].getX() > other->body[0].getX()) {
+	//int f = WorldObj::DIRECTION_RIGHT;
+	/*if (body[0].getX() > other->body[0].getX()) {
 		if (body[0].getY() > other->body[0].getY()) {
 			if (body[0].getX() > other->body[0].getX() + other->body[0].getWidth()) {
 				f = WorldObj::DIRECTION_LEFT;
@@ -123,7 +123,28 @@ void WorldObj::face(WorldObj* other) {
 		else {
 			f = WorldObj::DIRECTION_DOWN;
 		}
+	}*/
+	int f;
+	int midX = this->body[0].getX() + (this->body[0].getWidth() / 2);
+	int midY = this->body[0].getY() + (this->body[0].getHeight() / 2);
+
+	int midX2 = other->body[0].getX() + (other->body[0].getWidth() / 2);
+	int midY2 = other->body[0].getY() + (other->body[0].getHeight() / 2);
+
+	int diffX = abs(midX - midX2);
+	int diffY = abs(midY - midY2);
+
+	if (diffX > diffY) {
+		if (midX2>midX) {
+			f = WorldObj::DIRECTION_RIGHT;
+		} else f = WorldObj::DIRECTION_LEFT;
 	}
+	else {
+		if (midY2>midY) {
+			f = WorldObj::DIRECTION_DOWN;
+		} else f = WorldObj::DIRECTION_UP;
+	}
+
 	setDirection(f);
 }
 /*
