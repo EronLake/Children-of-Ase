@@ -1,4 +1,2 @@
-Conversation Point Name: Compliment Appeal 9030
-Conversation Point Name: Bribe Appeal 8690
-Conversation Point Name: Grovel Appeal 8670
-Conversation Point Name: Insult Appeal 8580
+Conversation Point Name: Ask About Affinity Of Appeal 7660
+Conversation Point Name: Ask About Strength Of Appeal 7640
