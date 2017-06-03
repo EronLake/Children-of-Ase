@@ -1586,19 +1586,19 @@ void DialogueController::otherResponse(std::string info, std::string hero_topic)
 		}
 		else if (replyString == "Response_Recruit_For_Party") {
 			if (temp_hero->getVillage()->get_alliance() == player->getVillage()->get_alliance()) {
-				player->getVillage()->barracks->addToParty(temp_hero, false);
+				player->getParty()->add_party_to_party(temp_hero->getParty());
 				//soldier->getParty()->setAlliance(player->getParty()->getAlliance());
-				temp_hero->setCurrentLeader(player);
-				temp_hero->setParty(player->getParty());
+				//temp_hero->setCurrentLeader(player);
+				//temp_hero->setParty(player->getParty());
 				std::string reply_pt_sentence = dialogue.gen_dialog(line, temp_hero);
 
 				//adds all of the hero's party members to the player's party
-				std::vector<Soldier*> heroes_soldiers = temp_hero->getParty()->getMembers();
+				/*std::vector<Soldier*> heroes_soldiers = temp_hero->getParty()->getMembers();
 				for (int i = 0; i < heroes_soldiers.size(); ++i) {
 					player->getVillage()->barracks->addToParty(heroes_soldiers[i], false);
 					heroes_soldiers[i]->setCurrentLeader(player);
 					heroes_soldiers[i]->setParty(player->getParty());
-				}
+				}*/
 
 			}
 			else { //they will say no if not part of same alliance as you
@@ -1919,10 +1919,10 @@ void DialogueController::other_response_soldier(std::string info, std::string he
 		//eventually make it so NPC can refuse to join player's party
 		if (replyString == "Response_Recruit_For_Party") {
 			if (soldier->getVillage()->get_alliance() == player->getVillage()->get_alliance()) {
-				player->getVillage()->barracks->addToParty(soldier, false);
+				player->getParty()->addToParty(soldier, false);
 				//soldier->getParty()->setAlliance(player->getParty()->getAlliance());
-				soldier->setCurrentLeader(player);
-				soldier->setParty(player->getParty());
+				//soldier->setCurrentLeader(player);
+				//soldier->setParty(player->getParty());
 				reply_pt_sentence = dialogue.gen_dialog(line, temp_hero);
 			}
 			else { //they will say no if not part of same alliance as you
