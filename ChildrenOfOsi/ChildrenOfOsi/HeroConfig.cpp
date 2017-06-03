@@ -344,14 +344,10 @@ void HeroConfig::init_attacks(ChildrenOfOsi* gameplay_func, TaskBuffer* tBuffer,
 
 			for (auto itr2 : (*itor)["sprites"])
 			{
-				//checks if the texture is already loaded
-				if (!Containers::texture_table[itr2["0"].asString()])
-				{
-					//create textures for the heroes
-					(*textureMap)[Containers::texture_table[itr2["0"].asString()]] = pair<string, int>("Assets/Sprites/" + itr2["0"].asString() + ".png", itr2["1"].asInt()/*frame_num*/);
-					//push to appropreate region config
-					region_con->insert(Containers::texture_table[itr2["0"].asString()]);
-				}
+				//create textures for the heroes
+				(*textureMap)[Containers::texture_table[itr2["0"].asString()]] = pair<string, int>("Assets/Sprites/" + itr2["0"].asString() + ".png", itr2["1"].asInt()/*frame_num*/);
+				//push to appropreate region config
+				region_con->insert(Containers::texture_table[itr2["0"].asString()]);
 			}
 
 			//gameplay_func->add_Attack(attack.key().asString() + "_" + itor.key().asString() + cur_hero->getKey(), cur_hero->body[0].getX(), cur_hero->body[0].getY(), true, 10);

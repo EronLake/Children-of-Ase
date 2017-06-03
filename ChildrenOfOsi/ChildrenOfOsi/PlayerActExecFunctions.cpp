@@ -64,8 +64,7 @@ void PlayerActExecFunctions::execute_start(std::string act_name, Hero* receiver)
 	//creates the memory for the reciever as well
 	//ActionHelper::create_memory(cur_action, receiver);
 
-	receiver->set_busy(Hero::BUSY_REC_FIGHT);
-
+	
 	if (act_name == "Fight" && !War::at_war(player->getVillage(), receiver->getVillage())) {
 		new War(player->getVillage(), receiver->getVillage());
 	}
@@ -75,20 +74,24 @@ void PlayerActExecFunctions::execute_start(std::string act_name, Hero* receiver)
 	{
 		//we need to create a fight here if their action is a violent action
 		Fight* fight_obj = new Fight(player->getParty(), receiver->getParty(), 0);
+		receiver->set_busy(Hero::BUSY_REC_FIGHT);
 		//RegionState::in_combat = true;
 		//RegionState::switch_music = true;
 	} else if (act_name == "Duel") {
 		Fight* fight_obj = new Fight(player->getParty(), receiver->getParty(), 1);
+		receiver->set_busy(Hero::BUSY_REC_FIGHT);
 		//RegionState::in_combat = true;
 		//RegionState::switch_music = true;
 	}
 	else if (act_name == "Spar") {
 		Fight* fight_obj = new Fight(player->getParty(), receiver->getParty(), 2);
+		receiver->set_busy(Hero::BUSY_REC_FIGHT);
 		//RegionState::in_combat = true;
 		//RegionState::switch_music = true;
 	}
 	else if (act_name == "Train With") {
 		Fight* fight_obj = new Fight(player->getParty(), receiver->getParty(), 3);
+		receiver->set_busy(Hero::BUSY_REC_FIGHT);
 		//RegionState::in_combat = true;
 		//RegionState::switch_music = true;
 		
@@ -136,7 +139,8 @@ void PlayerActExecFunctions::execute_end(bool if_succ) {
 	if (act_name == "Duel") {
 		DialogueController::duel_pop_up(cur_action);
 		//RegionState::in_combat = false;
-		RegionState::switch_music = true;
+		//RegionState::switch_music = true;
+		cur_action->getReceiver()->set_busy(0);
 		LOG("print to the screen something that the person you were fighting would say then finish action");
 	}
 	else if (act_name == "Spar") {
@@ -144,18 +148,22 @@ void PlayerActExecFunctions::execute_end(bool if_succ) {
 		DialogueController::spar_pop_up(cur_action);
 		//RegionState::in_combat = false;
 		//RegionState::switch_music = true;
+		cur_action->getReceiver()->set_busy(0);
 	} 
 	else if (act_name == "Train With") {
 		//RegionState::in_combat = false;
 		//RegionState::switch_music = true;
+		cur_action->getReceiver()->set_busy(0);
 	}
 	else if (act_name == "Conquer") {
 		//RegionState::in_combat = false;
 		//RegionState::switch_music = true;
+		cur_action->getReceiver()->set_busy(0);
 	}
 	else if (act_name == "Fight") {
 		//RegionState::in_combat = false;
-		//RegionState::switch_music = true;
+		RegionState::switch_music = true;
+		cur_action->getReceiver()->set_busy(0);
 	}
 	
 	else if (player->get_incapacitated()) {
@@ -163,7 +171,7 @@ void PlayerActExecFunctions::execute_end(bool if_succ) {
 		player->capacitate(0);
 	}
 	
-
+	cur_action->getReceiver()->set_busy(0);
 	///////////////////////////////////////////////////////////////////////////////////
 
 
@@ -262,8 +270,8 @@ void PlayerActExecFunctions::execute_end(bool if_succ) {
 			//sets preconditions to references preconditions
 
 			delete player->cur_action;
-			player->cur_action = nullptr;
 		}
+		player->cur_action = nullptr;
 	}
 }
 
@@ -285,14 +293,14 @@ void PlayerActExecFunctions::execute_dialog()
 	if (!player->getInCombat())
 	{
 		if (act_name == "Duel") {
-			Fight* fight_obj = new Fight(player->getParty(), cur_action->getReceiver()->getParty(), 1);
+			//Fight* fight_obj = new Fight(player->getParty(), cur_action->getReceiver()->getParty(), 1);
 
 		}
 		else if (act_name == "Spar") {
-			Fight* fight_obj = new Fight(player->getParty(), cur_action->getReceiver()->getParty(), 2);
+			//Fight* fight_obj = new Fight(player->getParty(), cur_action->getReceiver()->getParty(), 2);
 		}
 		else if (act_name == "Train With") {
-			Fight* fight_obj = new Fight(player->getParty(), cur_action->getReceiver()->getParty(), 3);
+			//Fight* fight_obj = new Fight(player->getParty(), cur_action->getReceiver()->getParty(), 3);
 		}
 	}
 
