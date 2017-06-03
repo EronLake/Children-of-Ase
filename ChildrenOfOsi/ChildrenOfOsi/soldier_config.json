@@ -225,14 +225,14 @@
 			"atk2_right": {"0":"SoldierOgun_Attack_E","1":3},
 
 			"spin_up": {"0":"SoldierOgun_Attack_N","1":8},
-			"spin_down": {"0":"SoldierOgun_Attack_N","1":8},
-			"spin_left": {"0":"SoldierOgun_Attack_N","1":8},
-			"spin_right": {"0":"SoldierOgun_Attack_N","1":8},
+			"spin_down": {"0":"SoldierOgun_Attack_S","1":8},
+			"spin_left": {"0":"SoldierOgun_Attack_Q","1":8},
+			"spin_right": {"0":"SoldierOgun_Attack_E","1":8},
 
 			"breathe_up": {"0":"SoldierOgun_Attack_N","1":8},
-			"breathe_down": {"0":"SoldierOgun_Attack_N","1":8},
-			"breathe_left": {"0":"SoldierOgun_Attack_N","1":8},
-			"breathe_right": {"0":"SoldierOgun_Attack_N","1":8}
+			"breathe_down": {"0":"SoldierOgun_Attack_S","1":8},
+			"breathe_left": {"0":"SoldierOgun_Attack_W","1":8},
+			"breathe_right": {"0":"SoldierOgun_Attack_E","1":8}
 		},
 		"melee" : {
 			"sprites" : {
