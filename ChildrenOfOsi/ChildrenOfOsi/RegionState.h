@@ -15,6 +15,7 @@ public:
 	static region_list regions;
 	static bool switch_music;
 	static bool in_village;
+	static bool in_combat;
 	static Region current_region;
 	static Region next_region;
 	static enum soundType { region_music, theme_music, sfx, ambient_sfx, null_type };

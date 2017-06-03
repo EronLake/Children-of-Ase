@@ -34,7 +34,7 @@ int Movement::move_up(WorldObj* obj) {
 				return 0;
 			}
 			else {
-				temp->can_move_counter = 50;
+				temp->can_move_counter = 30;
 				temp->can_move = true;
 				return 0;
 			}	
@@ -132,7 +132,7 @@ int Movement::move_up_left(WorldObj* obj) {
 				return 0;
 			}
 			else {
-				temp->can_move_counter = 50;
+				temp->can_move_counter = 30;
 				temp->can_move = true;
 				return 0;
 			}
@@ -255,7 +255,7 @@ int Movement::move_up_right(WorldObj* obj) {
 				return 0;
 			}
 			else {
-				temp->can_move_counter = 50;
+				temp->can_move_counter = 30;
 				temp->can_move = true;
 				return 0;
 			}
@@ -377,7 +377,7 @@ int Movement::move_down(WorldObj* obj) {
 				return 0;
 			}
 			else {
-				temp->can_move_counter = 50;
+				temp->can_move_counter = 30;
 				temp->can_move = true;
 				return 0;
 			}
@@ -463,7 +463,7 @@ int Movement::move_down_left(WorldObj* obj) {
 				return 0;
 			}
 			else {
-				temp->can_move_counter = 50;
+				temp->can_move_counter = 30;
 				temp->can_move = true;
 				return 0;
 			}
@@ -590,7 +590,7 @@ int Movement::move_down_right(WorldObj* obj) {
 				return 0;
 			}
 			else {
-				temp->can_move_counter = 50;
+				temp->can_move_counter = 30;
 				temp->can_move = true;
 				return 0;
 			}
@@ -713,7 +713,7 @@ int Movement::move_left(WorldObj* obj) {
 				return 0;
 			}
 			else {
-				temp->can_move_counter = 50;
+				temp->can_move_counter = 30;
 				temp->can_move = true;
 				return 0;
 			}
@@ -801,7 +801,7 @@ int Movement::move_right(WorldObj* obj) {
 				return 0;
 			}
 			else {
-				temp->can_move_counter = 50;
+				temp->can_move_counter = 30;
 				temp->can_move = true;
 				return 0;
 			}

@@ -1,3 +1,4 @@
-Conversation Point Name: Ask About Notoriety Of Appeal 7740
-Conversation Point Name: Ask About Affinity Of Appeal 7660
-Conversation Point Name: Ask About Strength Of Appeal 7640
+Conversation Point Name: Ask_To_Form_Alliance Appeal 17500
+Conversation Point Name: Compliment Appeal 15380
+Conversation Point Name: Bribe Appeal 12540
+Conversation Point Name: Grovel Appeal 12520

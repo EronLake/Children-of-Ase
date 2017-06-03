@@ -14,7 +14,7 @@ Player::Player()
 	can_spin = false;
 	can_fire = false;
 	can_move = true;
-	can_move_counter = 50;
+	can_move_counter = 30;
 }
 
 Player::Player(int name, float x, float y, bool col) :Hero(name, x, y, col)
@@ -34,7 +34,7 @@ Player::Player(int name, float x, float y, bool col) :Hero(name, x, y, col)
 	can_spin= false;
 	can_fire= false;
 	can_move = true;
-	can_move_counter = 50;
+	can_move_counter = 30;
 }
 
 Player::Player(int name, Vector2f p_topLeft, float p_width, float p_height) :Hero(name, p_topLeft, p_width, p_height)
@@ -54,7 +54,7 @@ Player::Player(int name, Vector2f p_topLeft, float p_width, float p_height) :Her
 	can_spin = false;
 	can_fire = false;
 	can_move = true;
-	can_move_counter = 50;
+	can_move_counter = 30;
 }
 
 

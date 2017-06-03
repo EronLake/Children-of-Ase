@@ -873,7 +873,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
       }
 	  
 			//IGNORE THIS CODE, ITS HORRIBLE
-			if (Alex->getX() > 13544 && Alex->getX() < 16742) { 
+			/*if (Alex->getX() > 13544 && Alex->getX() < 16742) { 
 				if (RegionState::current_region == *RegionState::regions[RegionState::JUNGLE] || RegionState::current_region == *RegionState::regions[RegionState::MOUNTAIN]) {
 					if (Alex->getY() < 14779 && Alex->getY() > 13303) {
 						if (RegionState::current_region == *RegionState::regions[RegionState::JUNGLE]) {//JUNGLE MOUNTAIN
@@ -906,7 +906,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 						can_switch = true;
 					}
 				}
-			}
+			}*/
 				
 			
 			
@@ -996,6 +996,10 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 				if (RegionState::in_village) {
 
 					gameplay_functions->change_song("Change", RegionState::current_region.getRTheme(), RegionState::current_hero->song, RegionState::soundType::theme_music);
+					RegionState::switch_music = false;
+				}
+				else if (RegionState::in_combat) {
+					gameplay_functions->change_song("Change", RegionState::current_region.getRTheme(), "Music/RegionThemes/Combattheme.flac", RegionState::soundType::region_music);
 					RegionState::switch_music = false;
 				}
 				else {

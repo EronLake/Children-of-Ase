@@ -130,11 +130,11 @@
     },
 
 	"Take Advice To Conquer": {
-        "1": "HERO hmm. I was considering conquering them but then you told me it was a good idea. Now I am not so sure. ",
-        "2": "HERO? Really? I don't feel like you should be giving me advice on such an important matter.",
-        "3": "HERO eh. I wasn't sure whether or not conquest was really required, but you're right. It's time to end this",
-        "4": "HERO as a conquering target? I think that moving to conquer is a risky move, but I'll trust your judgement this time.",
-        "5": "HERO hmm. I respect your advice, HERO's conquest is my top priority."
+        "1": "Why should I take your advice? ",
+        "2": "I don't think conquest is a wise move at this juncture.",
+        "3": "If that's what it takes to bring this land peace, then so be it.",
+        "4": "I'll take your advice. Conquest seems like a viable stategy.",
+        "5": "Consider it done."
     },
 
 	"Advise To Ally With": {
@@ -148,9 +148,9 @@
 	"Take Advice To Ally With": {
         "1": "HERO!? I absolutely refuse. The very idea of being in an alliance with their village disgusts me.",
         "2": "HERO as an ally? An alliance can possibly help ensure the safety of this village, so I will definitely consider it.",
-        "3": "HERO as an ally? Truly, that sounds like an interesting prospect. I'll give it a try.",
-        "4": "HERO as an ally? Alright, I trust your opinion on matters like this, so I'll give it a try.",
-        "5": "HERO as an ally? Your advice always has my best interests in mind it seems, so I promise you I will deeply consider an alliance with them."
+        "3": "HERO as an ally? Alright, I'll give it a try... this time.",
+        "4": "An alliance with HERO seems like it would benefit us all. Ill take your advice.",
+        "5": "If you believe that that is the best course of action, then I will trust your judgement."
     },
 
 	"Advise To Revolt Against": {
@@ -194,51 +194,51 @@
     },
 
 	"Accept Duel": {
-        "1": "As the guardian of this village, I accept your challenge.",
-        "2": "As the guardian of this village, I accept your challenge.",
-        "3": "I have no time for games. Go and find someone else to fight.",
-        "4": "I refuse. I see no point in fighting you now.",
-        "5": "I refuse. I see no point in fighting you now."
+        "1": "I refuse.",
+        "2": "I refuse.",
+        "3": "Alright, lets see how strong you really are then.",
+        "4": "I accept your challenge.",
+        "5": "You will regret challenging me. I accept your duel."
     },
 
 	"Confirm Duel": {
-        "1": "Let us get this duel started then.",
-        "2": "Let us get this duel started then.",
-        "3": "Let us get this duel started then.",
-        "4": "Let us get this duel started then.",
-        "5": "Let us get this duel started then."
+        "1": "Come at me whenever you're ready.",
+        "2": "Come at me whenever you're ready.",
+        "3": "Come at me whenever you're ready.",
+        "4": "Come at me whenever you're ready.",
+        "5": "Come at me whenever you're ready."
     },
 
 	"Finish Duel": {
-        "1": "I hope you learned about what it means to challenge people to such serious matches.",
-        "2": "I hope you learned about what it means to challenge people to such serious matches.",
-        "3": "I hope you learned about what it means to challenge people to such serious matches.",
-        "4": "I hope you learned about what it means to challenge people to such serious matches.",
-        "5": "I hope you learned about what it means to challenge people to such serious matches."
+        "1": "Next time I won't be so lenient.",
+        "2": "Next time I won't be so lenient.",
+        "3": "Next time I won't be so lenient.",
+        "4": "Next time I won't be so lenient.",
+        "5": "Next time I won't be so lenient."
     },
 
 	"Ask_To_Spar": {
-        "1": "It won't help me improve my abilities much, but I think we should spar.",
-        "2": "I am looking for a sparring partner. Wanna spar?",
-        "3": "I need some sparring practice. Would you consider sparring with me?",
-        "4": "I would be grateful if you would spar with me.",
-		"5": "I would be grateful if you would spar with me."
+        "1": "I believe that sparring would be beneficial to the both of us. What say you?",
+        "2": "I believe that sparring would be beneficial to the both of us. What say you?",
+        "3": "I believe that sparring would be beneficial to the both of us. What say you?",
+        "4": "I believe that sparring would be beneficial to the both of us. What say you?",
+		"5": "I believe that sparring would be beneficial to the both of us. What say you?"
     },
 
 	"Accept Spar Request": {
-        "1": "I refuse to spar with the likes of you.",
-        "2": "You are not yet worthy.",
-        "3": "I suppose I could use some practice.",
-        "4": "A spar, huh? I suppose it really couldn't hurt to get some practice in with you.",
-        "5": "Sure, it'll be fun to face such a worthy opponent."
+        "1": "Sparring with you is akin to battling a toddler.cI refuse.",
+        "2": "I would rather not.",
+        "3": "Alright. I don't see why not.",
+        "4": "Sparring seems like a grand idea. I accept.",
+        "5": "Sparring seems like a grand idea. I accept."
     },
 
 	"Confirm Spar": {
-        "1": "Let us begin with this spar then. Don't hold back.",
-        "2": "Let us begin with this spar then. Don't hold back.",
-        "3": "Let us begin with this spar then. Don't hold back.",
-        "4": "Let us begin with this spar then. Don't hold back.",
-        "5": "Let us begin with this spar then. Don't hold back."
+        "1": "Don't hold back now. show your teeth.",
+        "2": "Don't hold back now. show your teeth.",
+        "3": "Don't hold back now. show your teeth.",
+        "4": "Don't hold back now. show your teeth.",
+        "5": "Don't hold back now. show your teeth."
     },
 
 	"Finish Spar": {
@@ -250,19 +250,19 @@
     },
 
 	"Bribe": {
-        "1": "I cannot believe I am asking you of all people, but would you accept this.",
-        "2": "Would you be interested in this gift.",
-        "3": "I decided to get this for you, hopefully you'll accept it.",
-		"4": "I decided to get this for you, hopefully you'll accept it.",
-        "5": "I decided to get this for you, hopefully you'll accept it."
+        "1": "Will you accept this gift?",
+        "2": "Will you accept this gift?",
+        "3": "Will you accept this gift?",
+		"4": "Will you accept this gift?",
+        "5": "Will you accept this gift?"
     },
 
 	"Accept Bribe": {
-        "1": "Do you honesly think I would stoop to your level and accept a bribe.",
-        "2": "I hope you think better of me than to think I would be swayed so easily by a bribe.",
-        "3": "I suppose I could consider your offer.",
-        "4": "I do not usually accept bribes, but I suppose I could make an exception for you.",
-        "5": "I gladly accept."
+        "1": "I refuse.",
+        "2": "No thank you.",
+        "3": "Interesting. I accept.",
+        "4": "Sure, I give you my thanks.",
+        "5": "If it's from you, then it must be an amazing gift indeed."
     },
 
 	"Ask_To_Join_Party":{
@@ -276,9 +276,9 @@
     "Accept Into Party":{
 	    "1": "I would rather group up with a toad.",
         "2": "I would rather not.",
-        "3": "With you on my side, we will be able to protect hundreds of people. Welcome aboard.",
-		"4": "With you on my side, we will be able to protect hundreds of people. Welcome aboard.",
-        "5": "With you on my side, we will be able to protect hundreds of people. Welcome aboard."
+        "3": "Sure, why not.",
+		"4": "By all means, join me.",
+        "5": "Of course. I would be honored for you to stand at my side."
 	},
 
 	"Recruit_For_Party":{
@@ -290,43 +290,43 @@
 	},
 
     "Join Party":{
-	    "1": "I will consider your offer, but I cannot say at the moment.",
-        "2": "I appreciate the offer and I gladly accept.",
-        "3": "Thank you so very much for allowing me to stand by your side. I wholeheartedly accept.",
-		"4": "Thank you so very much for allowing me to stand by your side. I wholeheartedly accept.",
-        "5": "Thank you so very much for allowing me to stand by your side. I wholeheartedly accept."
+	     "1": "I refuse to join your ranks.",
+        "2": "I would rather not.",
+        "3": "Alright. travelling together is not a bad idea.",
+		"4": "I will join, for the sake of both of our fates.",
+        "5": "Glady! Our might shall be unstoppable!"
 	},
 
 	"Compliment": {
         "1": "I can tell that you have many great qualities.",
-        "2": "I belive that you are a strong and wise individual.",
-        "3": "I can tell that you have many great qualities.",
-		"4": "I am glad to have met you. I truly believe knowing you has had a positive effect on me and this village.",
-        "5": "I am glad to have met you. I truly believe knowing you has had a positive effect on me and this village."
+        "2": "That's a nice sword you have there. Fit for a warrior.",
+        "3": "You seem like a capable individual.",
+		"4": "Your tenacity is admirable.",
+        "5": "Your ferocity and strength of will is unlike any I have seen."
     },
 
 	"Thank": {
-        "1": "Am I supposed to be flattered?",
-        "2": "If you say so.",
+        "1": "Your words do no move my heart in the slightest.",
+        "2": "Flattery will get you nowhere.",
         "3": "Thank you.",
-        "4": "It is not often people flatter me.",
-        "5": "Thanks so much, and I could say the same about you."
+        "4": "Your flattery is appreciated.",
+        "5": "I do not hold myself in such high regard, but your honesty is laudable."
     },
 
 	"Grovel": {
-        "1": "I am reluctant to do this, but I suppose I must beg for your mercy.",
-        "2": "Please know that I truly meant no harm to you and accept my apology.",
-        "3": "My friend, please know that I would never try to harm you. I truly meant no real harm.",
-		"4": "My friend, please know that I would never try to harm you. I truly meant no real harm.",
-        "5": "My friend, please know that I would never try to harm you. I truly meant no real harm."
+        "1": "You seem like the type of person whose charm attracks many followers.",
+        "2": "Your strength with a sword is admirable.",
+        "3": "You have the aura of a leader about you.",
+		"4": "Your strength is truly that of lightning and thunder incarnate.",
+        "5": "You, my friend, are truly worthy of all of the attention you garner."
     },
 
 	"Accept Plea": {
-        "1": "Oh please get off your knees you're making an absolute fool of yourself.",
-        "2": "I understand your situation, but it will take more than that to change my mind about you.",
-        "3": "I accept your apology.",
-        "4": "Please, get off of your knees you do not need to go that far simply to apolgize to me.",
-        "5": "My friend I would accept an apology from you anytime."
+        "1": "Do you think I am unaware of my own greatness?",
+        "2": "I suppose so.",
+        "3": "You words are too kind. I'm not that great.",
+        "4": "I appreciate your sense of respect." ,
+        "5": "Thank you, your praise honors me."
     },
 
 	"Advise To Train With": {
@@ -354,11 +354,11 @@
     },
 
 	"Take Advice To Fight": {
-        "1": "You expect me to take advice from you? No thank you.",
-        "2": "I understand where you are coming from, but I cannot trust your advice at present.",
-        "3": "A fight with HERO? Well, the village would be safer if I improved my skills. I will take your advice.",
-        "4": "You are suggesting I fight with HERO? Hmm. I do value your opinion... I will take your advice.",
-        "5": "Your advice is a boon to me my friend. I will act on it right away."
+        "1": "A fight with HERO would be unwise.",
+        "2": "I dont think that's a good idea right now.",
+        "3": "Fight HERO? I'll take your advice... this time.",
+        "4": "Alright, I will act on your advice.",
+        "5": "If you believe that fighting HERO is neccessary for peace, then I will trust your judgement."
     },
 
 	"Advise To Send Peace Offering To": {
@@ -372,9 +372,9 @@
 	"Take Advice To Send Peace Offering To": {
         "1": "My apologies, but I do not think your advice is worth acting on.",
         "2": "Your advice is not bad, but I am not sure that you are trustworthy so I won't act on your word.",
-        "3": "Hmm. Your words seem to be free of ill intent. I will try taking your advice.",
-        "4": "As an advocate of peace and as your friend, I will take your advice.",
-        "5": "If you truly believe that a peace offering will lessen tensions between our villages then I will believe in you and send one."
+        "3": "I suppose that is one way of achieving peace. I will try it.",
+        "4": "Alright, since you reccomend it, I will give diplomacy a shot.",
+        "5": "I will trust our judgement this."
     },
 
 	"Request_Teaching": {

@@ -580,8 +580,8 @@
 
 	"Jungle_Man_1" : {
 		"soldier_number": 5,
-		"x" : 176.05,
-		"y" : 230.70,
+		"x" : 196.05,
+		"y" : 150.70,
 		"width" : 150,
 		"hight" : 150,
 		"name" : "Jungle_Man_1",
@@ -592,11 +592,11 @@
 		"bodyy2" : 50.0,
 		"health": 80,
 		"sprites": {
-			"setTexture": {"0":"Shango_Idle_S", "1":22},
-			"setIdleTexture": {"0":"Shango_Idle_S", "1":22},
+			"setTexture": {"0":"SoldierJungle_Idle_S", "1":22},
+			"setIdleTexture": {"0":"SoldierJungle_Idle_S", "1":22},
 
 			"id_up": {"0":"SoldierJungle_Idle_N","1":22},
-			"id_down": {"0":"Shango_Idle_S","1":22},
+			"id_down": {"0":"SoldierJungle_Idle_S","1":22},
 			"id_left": {"0":"SoldierJungle_Idle_W","1":22},
 			"id_right": {"0":"SoldierJungle_Idle_E","1":22},
 
@@ -612,8 +612,8 @@
 		}
 	},
 	"Jungle_Man_2" : {
-		"x" : 186.05,
-		"y" : 230.70,
+		"x" : 196.05,
+		"y" : 150.70,
 		"width" : 150,
 		"hight" : 150,
 		"name" : "Jungle_Man_2",
@@ -624,11 +624,11 @@
 		"bodyy2" : 50.0,
 		"health": 80,
 		"sprites": {
-			"setTexture": {"0":"Shango_Idle_S", "1":22},
-			"setIdleTexture": {"0":"Shango_Idle_S", "1":22},
+			"setTexture": {"0":"SoldierJungle_Idle_S", "1":22},
+			"setIdleTexture": {"0":"SoldierJungle_Idle_S", "1":22},
 
 			"id_up": {"0":"SoldierJungle_Idle_N","1":22},
-			"id_down": {"0":"Shango_Idle_S","1":22},
+			"id_down": {"0":"SoldierJungle_Idle_S","1":22},
 			"id_left": {"0":"SoldierJungle_Idle_W","1":22},
 			"id_right": {"0":"SoldierJungle_Idle_E","1":22},
 
@@ -645,7 +645,7 @@
 	},
 	"Jungle_Man_3" : {
 		"x" : 196.05,
-		"y" : 230.70,
+		"y" : 150.70,
 		"width" : 150,
 		"hight" : 150,
 		"name" : "Jungle_Man_3",
@@ -656,11 +656,11 @@
 		"bodyy2" : 50.0,
 		"health": 80,
 		"sprites": {
-			"setTexture": {"0":"Shango_Idle_S", "1":22},
-			"setIdleTexture": {"0":"Shango_Idle_S", "1":22},
+			"setTexture": {"0":"SoldierJungle_Idle_S", "1":22},
+			"setIdleTexture": {"0":"SoldierJungle_Idle_S", "1":22},
 
 			"id_up": {"0":"SoldierJungle_Idle_N","1":22},
-			"id_down": {"0":"Shango_Idle_S","1":22},
+			"id_down": {"0":"SoldierJungle_Idle_S","1":22},
 			"id_left": {"0":"SoldierJungle_Idle_W","1":22},
 			"id_right": {"0":"SoldierJungle_Idle_E","1":22},
 
@@ -676,8 +676,8 @@
 		}
 	},
 	"Jungle_Woman_1" : {
-		"x" : 206.05,
-		"y" : 230.70,
+		"x" : 196.05,
+		"y" : 150.70,
 		"width" : 150,
 		"hight" : 150,
 		"name" : "Jungle_Woman_1",
@@ -688,11 +688,11 @@
 		"bodyy2" : 50.0,
 		"health": 80,
 		"sprites": {
-			"setTexture": {"0":"Shango_Idle_S", "1":22},
-			"setIdleTexture": {"0":"Shango_Idle_S", "1":22},
+			"setTexture": {"0":"SoldierJungle_Idle_S", "1":22},
+			"setIdleTexture": {"0":"SoldierJungle_Idle_S", "1":22},
 
 			"id_up": {"0":"SoldierJungle_Idle_N","1":22},
-			"id_down": {"0":"Shango_Idle_S","1":22},
+			"id_down": {"0":"SoldierJungle_Idle_S","1":22},
 			"id_left": {"0":"SoldierJungle_Idle_W","1":22},
 			"id_right": {"0":"SoldierJungle_Idle_E","1":22},
 
@@ -708,8 +708,8 @@
 		}
 	},
 	"Jungle_Woman_2" : {
-		"x" : 216.05,
-		"y" : 230.70,
+		"x" : 196.05,
+		"y" : 150.70,
 		"width" : 150,
 		"hight" : 150,
 		"name" : "Jungle_Woman_2",
@@ -720,11 +720,11 @@
 		"bodyy2" : 50.0,
 		"health": 80,
 		"sprites": {
-			"setTexture": {"0":"Shango_Idle_S", "1":22},
-			"setIdleTexture": {"0":"Shango_Idle_S", "1":22},
+			"setTexture": {"0":"SoldierJungle_Idle_S", "1":22},
+			"setIdleTexture": {"0":"SoldierJungle_Idle_S", "1":22},
 
 			"id_up": {"0":"SoldierJungle_Idle_N","1":22},
-			"id_down": {"0":"Shango_Idle_S","1":22},
+			"id_down": {"0":"SoldierJungle_S","1":22},
 			"id_left": {"0":"SoldierJungle_Idle_W","1":22},
 			"id_right": {"0":"SoldierJungle_Idle_E","1":22},
 
@@ -740,8 +740,8 @@
 		}
 	},
 	"Jungle_Woman_3" : {
-		"x" : 226.05,
-		"y" : 230.70,
+		"x" : 196.05,
+		"y" : 150.70,
 		"width" : 150,
 		"hight" : 150,
 		"name" : "Jungle_Woman_3",
@@ -752,11 +752,11 @@
 		"bodyy2" : 50.0,
 		"health": 80,
 		"sprites": {
-			"setTexture": {"0":"Shango_Idle_S", "1":22},
-			"setIdleTexture": {"0":"Shango_Idle_S", "1":22},
+			"setTexture": {"0":"SoldierJungle_S", "1":22},
+			"setIdleTexture": {"0":"SoldierJungle_S", "1":22},
 
 			"id_up": {"0":"SoldierJungle_Idle_N","1":22},
-			"id_down": {"0":"Shango_Idle_S","1":22},
+			"id_down": {"0":"SoldierJungle_S","1":22},
 			"id_left": {"0":"SoldierJungle_Idle_W","1":22},
 			"id_right": {"0":"SoldierJungle_Idle_E","1":22},
 
@@ -772,8 +772,8 @@
 		}
 	},
 	"Jungle_child_1" : {
-		"x" : 236.05,
-		"y" : 230.70,
+		"x" : 196.05,
+		"y" : 150.70,
 		"width" : 150,
 		"hight" : 150,
 		"name" : "Jungle_child_1",
@@ -784,11 +784,11 @@
 		"bodyy2" : 50.0,
 		"health": 80,
 		"sprites": {
-			"setTexture": {"0":"Shango_Idle_S", "1":22},
-			"setIdleTexture": {"0":"Shango_Idle_S", "1":22},
+			"setTexture": {"0":"SoldierJungle_Idle_S", "1":22},
+			"setIdleTexture": {"0":"SoldierJungle_Idle_S", "1":22},
 
 			"id_up": {"0":"SoldierJungle_Idle_N","1":22},
-			"id_down": {"0":"Shango_Idle_S","1":22},
+			"id_down": {"0":"SoldierJungle_Idle_S","1":22},
 			"id_left": {"0":"SoldierJungle_Idle_W","1":22},
 			"id_right": {"0":"SoldierJungle_Idle_E","1":22},
 
@@ -804,8 +804,8 @@
 		}
 	},
 	"Jungle_child_2" : {
-		"x" : 236.05,
-		"y" : 230.70,
+		"x" : 196.05,
+		"y" : 150.70,
 		"width" : 150,
 		"hight" : 150,
 		"name" : "Jungle_child_2",
@@ -816,11 +816,11 @@
 		"bodyy2" : 50.0,
 		"health": 80,
 		"sprites": {
-			"setTexture": {"0":"Shango_Idle_S", "1":22},
-			"setIdleTexture": {"0":"Shango_Idle_S", "1":22},
+			"setTexture": {"0":"SoldierJungle_Idle_S", "1":22},
+			"setIdleTexture": {"0":"SoldierJungle_Idle_S", "1":22},
 
 			"id_up": {"0":"SoldierJungle_Idle_N","1":22},
-			"id_down": {"0":"Shango_Idle_S","1":22},
+			"id_down": {"0":"SoldierJungle_Idle_S","1":22},
 			"id_left": {"0":"SoldierJungle_Idle_W","1":22},
 			"id_right": {"0":"SoldierJungle_Idle_E","1":22},
 
@@ -836,8 +836,8 @@
 		}
 	},
 	"Jungle_child_3" : {
-		"x" : 236.05,
-		"y" : 230.70,
+		"x" : 196.05,
+		"y" : 150.70,
 		"width" : 150,
 		"hight" : 150,
 		"name" : "Jungle_child_3",
@@ -848,11 +848,11 @@
 		"bodyy2" : 50.0,
 		"health": 80,
 		"sprites": {
-			"setTexture": {"0":"Shango_Idle_S", "1":22},
-			"setIdleTexture": {"0":"Shango_Idle_S", "1":22},
+			"setTexture": {"0":"SoldierJungle_Idle_S", "1":22},
+			"setIdleTexture": {"0":"SoldierJungle_Idle_S", "1":22},
 
 			"id_up": {"0":"SoldierJungle_Idle_N","1":22},
-			"id_down": {"0":"Shango_Idle_S","1":22},
+			"id_down": {"0":"SoldierJungle_Idle_S","1":22},
 			"id_left": {"0":"SoldierJungle_Idle_W","1":22},
 			"id_right": {"0":"SoldierJungle_Idle_E","1":22},
 
