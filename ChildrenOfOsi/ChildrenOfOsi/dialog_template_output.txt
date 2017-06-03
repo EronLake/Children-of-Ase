@@ -1,1 +1,4 @@
-Conversation Point Name: Ask_Origin Appeal 4560
+Conversation Point Name: Ask_To_Form_Alliance Appeal 17500
+Conversation Point Name: Compliment Appeal 15380
+Conversation Point Name: Bribe Appeal 12540
+Conversation Point Name: Grovel Appeal 12520

@@ -238,7 +238,7 @@ void ActionExecFunctions::execute_form_alliance(Action* form_alliance) {
 		break;
 
 	case 1:
-		if (form_alliance->getDoer()->get_action_destination() == Vector2f(NULL, NULL) && (form_alliance->getReceiver()->get_busy() == Hero::NOT_BUSY)) {
+		if (form_alliance->getDoer()->get_action_destination() == Vector2f(NULL, NULL) /* && (form_alliance->getReceiver()->get_busy() == Hero::NOT_BUSY*/) {
 			//Planner* hero_planner = ActionHelper::ai->get_plan(responder->name);
 			if(form_alliance->getReceiver()->name == SHANGO)
 			{
@@ -503,6 +503,7 @@ void ActionExecFunctions::execute_fight(Action* fight)
 		if (fight->getDoer()->get_action_destination() == Vector2f(NULL, NULL)) {
 			fight->getDoer()->getParty()->setMode(Party::MODE_FLEE);
 			fight->executed = true;
+			fight->checkpoint = 0;
 			std::cout << fight->getDoer()->getName() << " finished fight" << std::endl;
 		}
 		break;
@@ -677,6 +678,7 @@ void ActionExecFunctions::execute_conquer(Action* conq)
 		if (conq->getDoer()->get_action_destination() == Vector2f(NULL, NULL)) {
 			conq->getDoer()->getParty()->setMode(Party::MODE_FLEE);
 			conq->executed = true;
+			conq->checkpoint = 0;
 			std::cout << conq->getDoer()->getName() << " finished conquer" << std::endl;
 		}
 		break;
