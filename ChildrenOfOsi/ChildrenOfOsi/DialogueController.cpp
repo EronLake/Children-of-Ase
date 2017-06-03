@@ -118,6 +118,9 @@ bool DialogueController::first_buff = true;
 bool DialogueController::is_hero_act = false;
 
 Action* DialogueController::hero_act_toward_player = nullptr;
+std::pair<bool, std::string> DialogueController::vis_feedback;
+
+int DialogueController::feedback_timer = 100;
 
 
 DialogueController::DialogueController()
@@ -414,6 +417,7 @@ void DialogueController::PlayerConversationPoint()
 		}
 		player_conv_point_choice = choice[ConvPointName];
 
+		vis_feedback.second = player_conv_point_choice;
 		Hero* temp_hero = CheckClass::isHero(other);
 
 		/*handles applying of post conditions for select conversation
@@ -785,6 +789,9 @@ void DialogueController::PlayerResponse()
 			std::string act_name = choice[1].substr(0, reply_end);
 			reply_end = act_name.find_last_of(' ');
 			act_name = choice[1].substr(0, reply_end);
+
+			if (act_name == "Offer Praise")
+				act_name = "Grovel";
 
 			bool react_positively = true; 
 			for (auto precond : Containers::conv_point_table[act_name]->req_preconds) {
@@ -1204,9 +1211,13 @@ void DialogueController::otherResponse(std::string info, std::string hero_topic)
 		return;
 	}
 
+	DialogueController::feedback_timer = 100;
+
 	if (state != 8 && state != 12 && state != 7) {
 		dialogue_point line = dialogue.choose_reply_pt(info, optionsIndex, curr_conversation_log,temp_hero);
 		replyString = line[ConvPointName];
+
+		vis_feedback.first = accepted_action;
 
 		/*avoids setting a topic when npc replies with "You already asked me that"
 		 or if npc says any other special case reply. Special case replies are
