@@ -864,6 +864,7 @@
 			"set_turn" : false
 		},
 		"attacks": {
+		/*
 			"fireball" : {
 				"1" : {
 					"sprites" : {
@@ -982,7 +983,7 @@
 					"set_can_cancel" : true,
 					"set_turn" : true
 				}
-			}
+			}*/
 		}
 	}
 }
