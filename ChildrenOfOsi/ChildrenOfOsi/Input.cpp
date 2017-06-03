@@ -647,13 +647,16 @@ void Input::InputCheck()
 			
 
 				if (A) {          //Moving up and left
-					gameplay_functions->move_up_left(player);
+					
+						gameplay_functions->move_up_left(player);
 				}
 				else if (D) {     //Moving up and right
-					gameplay_functions->move_up_right(player);
+					
+						gameplay_functions->move_up_right(player);
 				}
 				else {
-					gameplay_functions->move_up(player);
+					
+						gameplay_functions->move_up(player);
 				}
 			}
 			else if (S)          //Moving down
@@ -663,14 +666,17 @@ void Input::InputCheck()
 				}
 				//gameplay_functions->pause_unpause("Unpause", "walk_loop.wav");
 				if (A) {         //Moving down and left
-					gameplay_functions->move_down_left(player);
+				
+						gameplay_functions->move_down_left(player);
 				}
 				else if (D) {    //Moving down and right
-					gameplay_functions->move_down_right(player);
+					
+						gameplay_functions->move_down_right(player);
 
 				}
 				else {
-					gameplay_functions->move_down(player);
+					
+						gameplay_functions->move_down(player);
 				}
 			}
 			else if (A) {      //Only moving left
@@ -678,7 +684,8 @@ void Input::InputCheck()
 				if (player->getSprite().index == 3 || player->getSprite().index == 11) {
 					gameplay_functions->play_sound("PlaySound", "SFX/walk_0.wav", RegionState::soundType::sfx);
 				}
-				gameplay_functions->move_left(player);
+				
+					gameplay_functions->move_left(player);
 			}
 			else if (D)        //Only moving right
 			{
@@ -686,7 +693,8 @@ void Input::InputCheck()
 				if (player->getSprite().index == 3 || player->getSprite().index == 11) {
 					gameplay_functions->play_sound("PlaySound", "SFX/walk_0.wav", RegionState::soundType::sfx);
 				}
-				gameplay_functions->move_right(player);
+				
+					gameplay_functions->move_right(player);
 			}
 			else {
 				//gameplay_functions->pause_unpause("Pause", "walk_loop.wav");

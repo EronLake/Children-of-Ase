@@ -35,6 +35,9 @@ public:
 
 	bool can_spin;
 	bool can_fire;
+	bool can_move;
+	
+	int can_move_counter;
 
 	int ori = 30;
 	int can_activate_ex = 0;
