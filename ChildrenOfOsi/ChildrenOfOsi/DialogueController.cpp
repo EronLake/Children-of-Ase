@@ -1015,6 +1015,30 @@ void DialogueController::otherConversationPoint(dialogue_point line)
 			else
 			    replace_all(con_pt_sentence, "HERO", hero_name);//receiver or doer here? ask Justin
 
+			if (act_name.find("Bribe") != string::npos) {
+				std::string gift = "offer a gift to";
+				replace_all(con_pt_sentence, "HERO", hero_name);
+				replace_all(con_pt_sentence, "ACTION", gift);
+			}
+			else
+				replace_all(con_pt_sentence, "HERO", hero_name);//receiver or doer here? ask Justin
+
+			if (act_name.find("Boast") != string::npos) {
+				std::string to = "to";
+				replace_all(con_pt_sentence, "HERO", hero_name);
+				replace_all(con_pt_sentence, "ACTION", act_name + to);
+			}
+			else
+				replace_all(con_pt_sentence, "HERO", hero_name);//receiver or doer here? ask Justin
+
+			if (act_name.find("Grovel") != string::npos) {
+				std::string praise = "offer praise to";
+				replace_all(con_pt_sentence, "HERO", hero_name);
+				replace_all(con_pt_sentence, "ACTION", praise);
+			}
+			else
+				replace_all(con_pt_sentence, "HERO", hero_name);//receiver or doer here? ask Justin
+
 
 			std::string with = "";
 			if (act_name.find("Train") != string::npos || act_name.find("Spar") != string::npos || act_name.find("Form_Alliance") != string::npos) {
@@ -2248,9 +2272,9 @@ void DialogueController::startConversation(WorldObj* n, bool playerTalk)
 
 	if (temp_hero) {
 
-		temp_hero->rel[player->name]->addNotoriety(50);
-		temp_hero->rel[player->name]->addStrength(50);
-		temp_hero->rel[player->name]->addAffinity(50);
+		//temp_hero->rel[player->name]->addNotoriety(50);
+		//temp_hero->rel[player->name]->addStrength(50);
+		//temp_hero->rel[player->name]->addAffinity(50);
 
 			remove_dialog_option("Ask_To_Duel", NotorietyIcon);
 			remove_dialog_option("Ask_To_Spar", StrengthIcon);
@@ -2751,7 +2775,7 @@ bool DialogueController::offer_quest_on_exit(Hero* temp_hero) {
 		}
 		//if (planner->quests_given.size() > 0)//stand in Bad!
 			//has_quest = true;//stand in Bad! dont wanna be checking the size of quest vector
-		if (has_quest == false && quest_declined == false&& offered_quest == false) {
+		if (has_quest == false && quest_declined == false && offered_quest == false) {
 
 			dialogue_point reply_diog_pt = { "Exit Quest","Exit Quest" };
 			dialogue_point con_diog_pt = { "Offer_Quest","Offer_Quest" };
