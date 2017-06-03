@@ -181,7 +181,7 @@
 					"set_base_dir" : 4,
 					"set_cool_down" : 60,
 					"set_stamina_cost" : 10,
-					"set_pause" : 18,
+					"set_pause" : 3,
 					"set_destroy" : false,
 					"set_Keep" : false,
 					"set_width" : "cur_hero->body[0].getWidth()",
@@ -204,7 +204,7 @@
 					"set_base_dir" : 4,
 					"set_cool_down" : 0,
 					"set_stamina_cost" : 10,
-					"set_pause" : 23,
+					"set_pause" : 8,
 					"set_destroy" : false,
 					"set_Keep" : false,
 					"set_width" : "cur_hero->body[0].getWidth()",
@@ -227,7 +227,7 @@
 					"set_base_dir" : 4,
 					"set_cool_down" : 0,
 					"set_stamina_cost" : 10,
-					"set_pause" : 28,
+					"set_pause" : 13,
 					"set_destroy" : false,
 					"set_Keep" : false,
 					"set_width" : "cur_hero->body[0].getWidth()",
@@ -250,7 +250,7 @@
 					"set_base_dir" : 4,
 					"set_cool_down" : 0,
 					"set_stamina_cost" : 10,
-					"set_pause" : 33,
+					"set_pause" : 18,
 					"set_destroy" : false,
 					"set_Keep" : false,
 					"set_width" : "cur_hero->body[0].getWidth()",
@@ -641,7 +641,7 @@
         "set_base_dir": 4,
         "set_cool_down": 60,
         "set_stamina_cost": 10,
-        "set_pause": 18,
+        "set_pause": 3,
         "set_destroy": false,
         "set_Keep": false,
         "set_width": "cur_hero->body[0].getWidth()",
@@ -676,7 +676,7 @@
         "set_base_dir": 4,
         "set_cool_down": 0,
         "set_stamina_cost": 10,
-        "set_pause": 23,
+        "set_pause": 8,
         "set_destroy": false,
         "set_Keep": false,
         "set_width": "cur_hero->body[0].getWidth()",
@@ -711,7 +711,7 @@
         "set_base_dir": 4,
         "set_cool_down": 0,
         "set_stamina_cost": 10,
-        "set_pause": 28,
+        "set_pause": 13,
         "set_destroy": false,
         "set_Keep": false,
         "set_width": "cur_hero->body[0].getWidth()",
@@ -742,7 +742,7 @@
         },
         "set_name": 24,
         "set_dmg": 7,
-        "set_speed": 15,
+        "set_speed": 18,
         "set_base_dir": 4,
         "set_cool_down": 0,
         "set_stamina_cost": 10,
@@ -864,6 +864,7 @@
 			"set_turn" : false
 		},
 		"attacks": {
+		/*
 			"fireball" : {
 				"1" : {
 					"sprites" : {
@@ -982,7 +983,7 @@
 					"set_can_cancel" : true,
 					"set_turn" : true
 				}
-			}
+			}*/
 		}
 	}
 }
