@@ -65,6 +65,7 @@ DialogueHelper dialogue;
 bool DialogueHelper::accepted_quest = false;
 bool DialogueHelper::prompted_quest = false;
 Action* DialogueHelper::quest = nullptr;
+bool DialogueHelper::state_is_8 = false;
 
 
 DialogueHelper::DialogueHelper()
@@ -599,11 +600,13 @@ dialogue_point DialogueHelper::get_dialog(std::string name, dialogue_point diog_
 		}
 	}
 	else {
-		phrase_picker = (rand() % 5 + 1);//pick Shango flavor text randomly
+		if(state_is_8 == false)
+	        phrase_picker = (rand() % 5 + 1);//pick Shango flavor text randomly
 		dpoint.push_back(root[diog_pt[ConvPointName]][to_string(phrase_picker)]
 			.asString());
 	}
-
+	if (state_is_8)
+		state_is_8 = false;
 	return dpoint;
 
 }
