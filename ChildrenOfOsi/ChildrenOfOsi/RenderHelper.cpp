@@ -28,7 +28,7 @@ RenderHelper::RenderHelper(QuadTree * QT, RiverObj* _rivObj, std::vector<WorldOb
   hud_ptr->setSprite();
   gmap = new GameMap();
   TutGui = new Rectangle(Vector2f(cameraSize.xloc / 4, cameraSize.yloc / 8), cameraSize.xloc / 2, cameraSize.yloc / 1.5);
-  logo_gui = new Rectangle(Vector2f(cameraSize.xloc / 4, cameraSize.yloc / 8), cameraSize.xloc / 2, cameraSize.yloc / 1.5);
+  logo_gui = new Rectangle(Vector2f(0.0F, 0.0F), cameraSize.xloc, cameraSize.yloc);
   initTutGui();
   init_logo_gui();
   //fullVec = tree->retrieve(fullVec, fullBound);
@@ -67,7 +67,7 @@ void RenderHelper::initTutGui()
 void RenderHelper::init_logo_gui()
 {
   Texture* logo_tex = new Texture();
-  logo_tex->setFile("Assets/Sprites/Logo.png", 1);
+  logo_tex->setFile("Assets/Sprites/Logo_Loading.png", 1);
   logo_gui->sprite.setTexture(logo_tex);
 }
 
