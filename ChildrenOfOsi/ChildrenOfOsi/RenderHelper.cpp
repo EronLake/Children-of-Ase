@@ -28,7 +28,7 @@ RenderHelper::RenderHelper(QuadTree * QT, RiverObj* _rivObj, std::vector<WorldOb
   hud_ptr->setSprite();
   gmap = new GameMap();
   TutGui = new Rectangle(Vector2f(cameraSize.xloc / 4, cameraSize.yloc / 8), cameraSize.xloc / 2, cameraSize.yloc / 1.5);
-  logo_gui = new Rectangle(Vector2f(cameraSize.xloc / 4, cameraSize.yloc / 8), cameraSize.xloc / 2, cameraSize.yloc / 1.5);
+  logo_gui = new Rectangle(Vector2f(0.0F, 0.0F), cameraSize.xloc, cameraSize.yloc);
   initTutGui();
   init_logo_gui();
   //fullVec = tree->retrieve(fullVec, fullBound);
@@ -67,7 +67,7 @@ void RenderHelper::initTutGui()
 void RenderHelper::init_logo_gui()
 {
   Texture* logo_tex = new Texture();
-  logo_tex->setFile("Assets/Sprites/Logo.png", 1);
+  logo_tex->setFile("Assets/Sprites/Logo_Loading.png", 1);
   logo_gui->sprite.setTexture(logo_tex);
 }
 
@@ -213,8 +213,17 @@ int RenderHelper::drawTut(WorldObj *obj)
 
   objVec = grid_game->retrieve_worldobj_in_grid(objVec, obj);
   for (int i = 0; i < objVec.size(); ++i) {
-  	objVec[i]->WorldObj::drawObj(camera->getX(), camera->getY());
-  	objVec[i]->WorldObj::animateObj();
+    Soldier *sold = CheckClass::isSoldier(objVec[i]);
+    if(sold) {
+      if(sold->get_incapacitated()) {
+        objVec[i]->WorldObj::drawObj(camera->getX(), camera->getY());
+        objVec[i]->WorldObj::animateObj();
+      }
+    }
+    else {
+      objVec[i]->WorldObj::drawObj(camera->getX(), camera->getY());
+      objVec[i]->WorldObj::animateObj();
+    }
   }
 
   TutGui->drawObj(camera->getX(), camera->getY());
