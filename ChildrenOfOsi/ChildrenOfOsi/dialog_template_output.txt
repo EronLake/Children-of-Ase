@@ -1,3 +1,3 @@
-Conversation Point Name: Bribe Appeal 10140
-Conversation Point Name: Grovel Appeal 10120
-Conversation Point Name: Insult Appeal 10030
+Conversation Point Name: Ask About Notoriety Of Appeal 7740
+Conversation Point Name: Ask About Affinity Of Appeal 7660
+Conversation Point Name: Ask About Strength Of Appeal 7640

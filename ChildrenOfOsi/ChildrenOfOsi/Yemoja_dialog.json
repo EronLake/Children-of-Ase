@@ -570,11 +570,11 @@
     },
 
 	"Quest_Complete": {
-        "1": "Thanks for completing my quest and helping me out.",
-        "2": "Thanks for completing my quest and helping me out.",
-        "3": "Thanks for completing my quest and helping me out.",
-        "4": "Thanks for completing my quest and helping me out.",
-        "5": "Thanks for completing my quest and helping me out."
+        "1": "Thanks for taking care of that for me. You were a big help.",
+        "2": "Thanks for taking care of that for me. You were a big help.",
+        "3": "Thanks for taking care of that for me. You were a big help.",
+        "4": "Thanks for taking care of that for me. You were a big help.",
+        "5": "Thanks for taking care of that for me. You were a big help."
     },
 
 	"Quest_Failed": {

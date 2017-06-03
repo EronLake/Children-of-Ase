@@ -144,6 +144,7 @@ the conversation state to wait for the player to select a conversation
 point*/
 void DialogueController::PlayerChoose()
 {
+	scroll_control = 0;
 	Hero* temp_hero = CheckClass::isHero(other);
 	if (temp_hero) {
 		player->filter_move_to(temp_hero);
@@ -2845,6 +2846,7 @@ bool DialogueController::offer_quest_on_exit(Hero* temp_hero) {
 			select = 0;
 			state = 2;
 			offered_quest = true;
+			scroll_control = 0;
 			//planner->quests_given.push_back(planner->get_current_action());
 		}
 	}
