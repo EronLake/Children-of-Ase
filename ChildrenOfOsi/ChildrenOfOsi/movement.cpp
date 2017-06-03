@@ -742,7 +742,7 @@ int Movement::attack(WorldObj* obj) {
 					if (temp->getParty()->get_hide()) continue;
 				}
 				if (objVec[i]->getType() > WorldObj::TYPE_WORLDOBJ) {
-					LivingObj* liv = CheckClass::isLiving(objVec[i]);
+					LivingObj* liv = CheckClass::isSoldier(objVec[i]); //dont want to hurt anybody but soldiers
 					if (liv) {
 						if (collision(a->second, liv) && !a->second->beenHit(liv) && (a->second->getDuration()!=0)) {
 							//std:://////cout << "Player hit " << liv->getName() << std::endl;

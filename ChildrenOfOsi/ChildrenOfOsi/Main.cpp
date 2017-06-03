@@ -311,13 +311,13 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 
 	//yemoja->rel[1]->addNotoriety(50);
 	///yemoja->rel[1]->addStrength(50);
-	yemoja->rel[1]->addAffinity(50);
+	//yemoja->rel[1]->addAffinity(50);
 	//oya->rel[1]->addNotoriety(50);
 	///oya->rel[1]->addStrength(50);
-	oya->rel[1]->addAffinity(50);
+	//oya->rel[1]->addAffinity(50);
 	//yemoja->rel[1]->addNotoriety(50);
 	///yemoja->rel[1]->addStrength(50);
-	ogun->rel[1]->addAffinity(50);
+	//ogun->rel[1]->addAffinity(50);
 
 	vector<std::set<Texture*>> starting_location;
 	
@@ -1068,6 +1068,19 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 				//cout << "inserted into tree " << movVec.size() << " movable objs" << endl;
 			}
 
+
+			std::vector<NPC*> talk_vec;
+
+			for (int i = 0; i < movVec.size(); i++) {
+				if (CheckClass::isNPC(movVec[i])) {
+					talk_vec.push_back(dynamic_cast<NPC*>(movVec[i]));
+				}
+			}
+			for (int i = 0; i < recVec.size(); i++) {
+				if (CheckClass::isNPC(recVec[i])) {
+					talk_vec.push_back(dynamic_cast<NPC*>(recVec[i]));
+				}
+			}
 			
 			//check if close enough to talk (needs to be moved to helper func)
 			//----------------------------------------------
@@ -1075,20 +1088,20 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 			if (state == 0 && Alex->getInCombat() == false) {
 				WorldObj* ot = nullptr;
 				int dist = 1000;
-				for (int i = 0; i < movVec.size(); i++) {
-					if (Alex == movVec[i]) {
+				for (int i = 0; i < talk_vec.size(); i++) {
+					if (Alex == talk_vec[i]) {
 						//break;
 						continue;
 					}
-					if (movVec[i]->getInteractable()) {
+					if (talk_vec[i]->getInteractable()) {
 						Alex->updateTalk();
-						if (Movement::interaction(Alex, movVec[i])) {
+						if (Movement::interaction(Alex, talk_vec[i])) {
 							if (in_talk_range == NOT_IN_RANGE) {
 								in_talk_range = READY_TO_START;
 							}
-							if (dist > Party::dist_location_to_location(movVec[i]->getLoc(), Alex->getLoc())) {
-								ot = movVec[i];
-								dist = Party::dist_location_to_location(movVec[i]->getLoc(), Alex->getLoc());
+							if (dist > Party::dist_location_to_location(talk_vec[i]->getLoc(), Alex->getLoc())) {
+								ot = talk_vec[i];
+								dist = Party::dist_location_to_location(talk_vec[i]->getLoc(), Alex->getLoc());
 							}
 						}
 					}

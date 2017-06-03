@@ -223,13 +223,16 @@ void PlayerActExecFunctions::execute_end(bool if_succ) {
 	for (auto i : player->quests_log) {
 
 		if (did_quest && i->getOwner() == cur_action->getOwner()) {
+			
+		}
+		else if (i->getOwner()->name == SHANGO) {
 			cur_action->multipliers = nullptr;
 			cur_action->aff_mult = nullptr;
 			cur_action->str_mult = nullptr;
 			cur_action->noto_mult = nullptr;
 			//sets preconditions to references preconditions
 
-			// delete player->cur_action;
+			delete player->cur_action;
 			player->cur_action = nullptr;
 		}
 	}

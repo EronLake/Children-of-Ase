@@ -50,12 +50,58 @@ void HeroConfig::set_hero(vector<WorldObj*>* movVec, ChildrenOfOsi* gameplay_fun
 	float hight, std::string name, int hero_id, float bodyx1, float bodyx2, float bodyy1, float bodyy2, int health, int max_stamina,
 	int a, int k, int h, int p, int r, int e, int g)
 {
+	bool pre_loaded = true;
 	if (!Containers::hero_table[name]) {
 		gameplay_func->add_hero(name, 100 * x, 100 * y, true);
-	}
-	
 
-	tBuffer->run();
+		tBuffer->run();
+
+		Containers::hero_table[name]->name = hero_id;
+		Containers::hero_table[name]->setName(name);
+		Containers::hero_table[name]->setWidth(width);
+		Containers::hero_table[name]->setHeight(hight);
+		Containers::hero_table[name]->offsetBody(0, bodyx1, bodyx2, bodyy1, bodyy2);
+		Containers::hero_table[name]->offset_effect(0, 100, 100, 100, 100);
+
+		//needs to be handled separately
+		//Containers::hero_table[name]->sprite.setTexture(Containers::texture_table[tex_file]);
+
+		Containers::hero_table[name]->setInteractable(true);
+		Containers::hero_table[name]->setPersonality(a, k, h, p, r, e, g);
+
+		Containers::hero_table[name]->setHealth(health);
+		Containers::hero_table[name]->setMaxStamina(max_stamina);
+
+		//Containers::npc_table[name]->set_npc_type(0);
+	}
+	else
+	{
+		Containers::hero_table[name]->setX(x * 100);
+		Containers::hero_table[name]->setY(y * 100);
+		Containers::hero_table[name]->offset_effect(0, 100, 100, 100, 100);
+
+		for (int i = 1; i < 6; i++) {
+			if (i != hero_id) {
+				Containers::hero_table[name]->rel[i]->setAffinity(50);
+				Containers::hero_table[name]->rel[i]->setNotoriety(50);
+				Containers::hero_table[name]->rel[i]->setStrength(50);
+				Containers::hero_table[name]->rel[i]->setAffEstimate(50);
+				Containers::hero_table[name]->rel[i]->setNotorEstimate(50);
+				Containers::hero_table[name]->rel[i]->setStrEstimate(50);
+
+				Containers::hero_table[name]->rel[i]->setChanged(0);
+
+				//aff_counter = 0;
+				//aff_max_change = 10;
+				//not_counter = 0;
+				//not_max_change = 10;
+				//str_counter = 0;
+				//str_max_change = 10;
+			}
+
+		}
+		
+	}
 
 	if (hero_id == SHANGO)
 	{
@@ -64,23 +110,6 @@ void HeroConfig::set_hero(vector<WorldObj*>* movVec, ChildrenOfOsi* gameplay_fun
 		DialogueController::setPlayer(player);
 	}
 
-	Containers::hero_table[name]->name = hero_id;
-	Containers::hero_table[name]->setName(name);
-	Containers::hero_table[name]->setWidth(width);
-	Containers::hero_table[name]->setHeight(hight);
-	Containers::hero_table[name]->offsetBody(0, bodyx1, bodyx2, bodyy1, bodyy2);
-	Containers::hero_table[name]->offset_effect(0, 100, 100, 100, 100);
-
-	//needs to be handled separately
-	//Containers::hero_table[name]->sprite.setTexture(Containers::texture_table[tex_file]);
-
-	Containers::hero_table[name]->setInteractable(true);
-	Containers::hero_table[name]->setPersonality(a, k, h, p, r, e, g);
-
-	Containers::hero_table[name]->setHealth(health);
-	Containers::hero_table[name]->setMaxStamina(max_stamina);
-
-	//Containers::npc_table[name]->set_npc_type(0);
 
 	//push to moveVec
 	movVec->push_back(Containers::hero_table[name]);

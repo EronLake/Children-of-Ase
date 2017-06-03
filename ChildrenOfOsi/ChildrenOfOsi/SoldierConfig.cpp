@@ -57,20 +57,28 @@ void SoldierConfig::set_soldier(vector<WorldObj*>* movVec, ChildrenOfOsi* gamepl
 {
 	if (!Containers::soldier_table[name]) {
 		gameplay_func->add_soldier(name, 100 * x, 100 * y, true);
+		tBuffer->run();
+
+		Containers::soldier_table[name]->offsetBody(0, bodyx1, bodyx2, bodyy1, bodyy2);
+		Containers::soldier_table[name]->offset_effect(0, 100, 100, 100, 100);
+
+		Containers::soldier_table[name]->setName(name);
+		Containers::soldier_table[name]->setWidth(width);
+		Containers::soldier_table[name]->setHeight(hight);
+
+
+		Containers::soldier_table[name]->setInteractable(true);
+
+		Containers::soldier_table[name]->setHealth(health);
+		Containers::soldier_table[name]->setMaxStamina(max_stamina);
+	}
+	else {
+		Containers::soldier_table[name]->setX(x * 100);
+		Containers::soldier_table[name]->setY(y * 100);
+		Containers::soldier_table[name]->offset_effect(0, 100, 100, 100, 100);
 	}
 
-	tBuffer->run();
-
-	Containers::soldier_table[name]->setName(name);
-	Containers::soldier_table[name]->setWidth(width);
-	Containers::soldier_table[name]->setHeight(hight);
-	Containers::soldier_table[name]->offsetBody(0, bodyx1, bodyx2, bodyy1, bodyy2);
-	Containers::soldier_table[name]->offset_effect(0, 100, 100, 100, 100);
-
-	Containers::soldier_table[name]->setInteractable(true);
-
-	Containers::soldier_table[name]->setHealth(health);
-	Containers::soldier_table[name]->setMaxStamina(max_stamina);
+	
 
 	//Containers::npc_table[name]->set_npc_type(0);
 
