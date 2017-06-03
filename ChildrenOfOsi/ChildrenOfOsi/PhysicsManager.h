@@ -17,7 +17,7 @@ private:
 
 public:
 	PhysicsManager(MessageLog* _mLog, TaskBuffer* _tBuffer);
-	PhysicsManager(MessageLog* _mLog, TaskBuffer* _tBuffer, QuadTree* _physicsQuadTree, UniformGrid<Line>* _uniformGrid, RiverObj* _rivObj, UniformGrid<WorldObj>* _worldobj_grid);
+	PhysicsManager(MessageLog* _mLog, TaskBuffer* _tBuffer, QuadTree* _physicsQuadTree, UniformGrid<Line>* _uniformGrid, RiverObj* _rivObj, UniformGrid<WorldObj>* _worldobj_grid, ChildrenOfOsi* gameplay_func);
 	~PhysicsManager();
 
 	virtual void register_manager() final;

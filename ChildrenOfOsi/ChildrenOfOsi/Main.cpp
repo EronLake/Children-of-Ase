@@ -193,7 +193,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 
 	RenderManager* RenM = new RenderManager(mLog, tBuffer, _QuadTree, gameplay_functions, rivObj, largeStruct, grid_worldobj);
 	DummyController* DumM = new DummyController(mLog, tBuffer);
-	PhysicsManager* PhysM = new PhysicsManager(mLog, tBuffer, _QuadTree, grid_line, rivObj, grid_worldobj);
+	PhysicsManager* PhysM = new PhysicsManager(mLog, tBuffer, _QuadTree, grid_line, rivObj, grid_worldobj, gameplay_functions);
 	//PartyManager* partyM = new PartyManager(gameplay_functions, Alex);
 	memManager* memM = new memManager(mLog, tBuffer);
 	TestManager* TestM = new TestManager(mLog, tBuffer);
@@ -203,6 +203,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	//AIController* AiController = new AIController();
 	//ActionHelper::ai = AiController;
 	ActionHelper::gameplay_func = gameplay_functions;
+	Movement::gameplay_func = gameplay_functions;
 	CombatController* combatControl = new CombatController(gameplay_functions);
 	QuestManager* questM = new QuestManager;
 
@@ -1026,8 +1027,10 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 			}
 
 			Alex->updateCD();
-			Alex->effect.sprite.animate();
-			Alex->WorldObj::animateObj();
+			
+				Alex->effect.sprite.animate();
+				Alex->WorldObj::animateObj();
+			
 			
 			if (MAP_EDITOR) {
 				for (int i = 0; i < recVec.size(); i++) {
@@ -1035,15 +1038,24 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 						recVec[i]->effect.sprite.animate();
 						recVec[i]->WorldObj::animateObj();
 					}
+					//cout << "name is " << recVec[i]->getName() << endl;
+					if (recVec[i]->getName() == "rec_OT") {
+						cout << "found tower rec" << endl;
+						//system("PAUSE");
+					}
 					// _QuadTree->Insert(recVec[i]);	//insert all obj into tree
 				}
 
 				for (int i = 0; i < movVec.size(); i++) {
-					cout << movVec[i]->getName() << endl;
+					//cout << "name is " << movVec[i]->getName() << endl;
 					//cout << "movevec item type is " << movVec[i]->getType() << endl;
 					if (movVec[i]->getType() != WorldObj::TYPE_WORLDOBJ) {
 						movVec[i]->effect.sprite.animate();
 						movVec[i]->WorldObj::animateObj();
+					}
+					if (recVec[i]->getName() == "rec_OT") {
+						cout << "found tower rec" << endl;
+						//system("PAUSE");
 					}
 					//_QuadTree->Insert(movVec[i]);	//insert all obj into tree
 				}
@@ -1057,6 +1069,10 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 					//_QuadTree->Insert(recVec[i]);	//insert all obj into tree
 				}
 				for (int i = 0; i < movVec.size(); i++) {
+					Player* temp = CheckClass::isPlayer(movVec[i]);
+					if (temp) {
+						if (temp->can_move == false) continue;
+					}
 					//if (movVec[i]->getName() == "Yemoja") cout << "Yemoja grid is "<< movVec[i]->grid_location.first << ", " << movVec[i]->grid_location.second << endl;
 					//if (movVec[i]->getName() == "Shango") cout << "Shango grid is " << movVec[i]->grid_location.first << ", " << movVec[i]->grid_location.second << endl;
 					if (movVec[i]->getType() != WorldObj::TYPE_WORLDOBJ) {

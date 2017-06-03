@@ -154,10 +154,18 @@ int RenderHelper::draw_frame(WorldObj * obj)
 		if (temp) {
 			if (temp->getParty()->get_hide()) continue;
 		}
+	//	if (objVec[i]->getName() == "rec_OT") {
+		//	cout << "found tower rec render!!!!!!!!!!!!!!!!!!!!!!!!!!!!!" << endl;
+			//system("PAUSE");
+	//	}
 			LOG("BEFORE DRAWING**");
 			////////cout << objVec[i]->getX() - camera->getX() << endl;
 			//LOG(objVec[i]->getX(), ", ", objVec[i]->getY());
 			objVec[i]->WorldObj::drawObj(camera->getX(), camera->getY());
+			//Player* player = CheckClass::isPlayer(objVec[i]);
+			//if (player) {
+			//	if (player->can_move == false) continue;
+			//}
 			//for (int j = 0; j < objVec[i]->body.size(); j++) {
 			objVec[i]->body[0].drawObj(camera->getX(), camera->getY());
 			objVec[i]->effect.drawObj(camera->getX(), camera->getY());
@@ -187,6 +195,10 @@ int RenderHelper::drawDiaGui(WorldObj* obj)
   //obj->WorldObj::animateObj();
   for(int i = 0; i < objVec.size(); i++) {
     LOG("BEFORE DRAWING**");
+	Soldier* temp = CheckClass::isSoldier(objVec[i]);
+	if (temp) {
+		if (temp->getParty()->get_hide()) continue;
+	}
     ////////cout << objVec[i]->getX() - camera->getX() << endl;
     //LOG(objVec[i]->getX(), ", ", objVec[i]->getY());
     objVec[i]->WorldObj::drawObj(camera->getX(), camera->getY());
