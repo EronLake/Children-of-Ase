@@ -177,8 +177,8 @@ void DialogueController::PlayerChoose()
 		else
 			set_selectable(false, "Request_Teaching", StrengthIcon);
 
-		if (temp_hero->rel[player->name]->getAffinity() >= 85 && temp_hero->getVillage()->get_alliance() !=
-																player->getVillage()->get_alliance())
+		if (temp_hero->rel[player->name]->getAffinity() >= 85 && temp_hero->getVillage()->get_alliance() != 
+																	player->getVillage()->get_alliance())
 			set_selectable(true, "Ask_To_Form_Alliance", AffinityIcon);
 		else
 			set_selectable(false, "Ask_To_Form_Alliance", AffinityIcon);
