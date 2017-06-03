@@ -259,11 +259,9 @@ void HUD::drawMinimap(Player *player, Hero* yemoja, Hero* oya, Hero* ogun)
     minimapCoordOffset.setXloc(HUD::MAP_WIDTH);
   else {
     minimapCoordOffset.setXloc(player->getX() / HUD::MAP_WIDTH * HUD::MINIMAP_WIDTH);
-    if(DEBUG) {
-      minimapCoordOffset1.setXloc(yemoja->getX() / HUD::MAP_WIDTH * HUD::MINIMAP_WIDTH);
-      minimapCoordOffset2.setXloc(oya->getX() / HUD::MAP_WIDTH * HUD::MINIMAP_WIDTH);
-      minimapCoordOffset3.setXloc(ogun->getX() / HUD::MAP_WIDTH * HUD::MINIMAP_WIDTH);
-    }
+    minimapCoordOffset1.setXloc(yemoja->getX() / HUD::MAP_WIDTH * HUD::MINIMAP_WIDTH);
+    minimapCoordOffset2.setXloc(oya->getX() / HUD::MAP_WIDTH * HUD::MINIMAP_WIDTH);
+    minimapCoordOffset3.setXloc(ogun->getX() / HUD::MAP_WIDTH * HUD::MINIMAP_WIDTH);
   }
 
   if(player->getY() < 0.0F) minimapCoordOffset.setYloc(0.0F);
