@@ -63,6 +63,7 @@ int Movement::move_up(WorldObj* obj) {
 			set_player_clone = true;
 		}
 		obj->shiftY(-moveSpeed*speed_magnifier);
+		if (my_type != WorldObj::TYPE_PLAYER) return 0;
 		for (int i = 0; i < objVec.size(); i++) {
 			if (obj == objVec[i] || (my_type >= 2 && objVec[i]->getType() >= WorldObj::TYPE_NPC)) {
 				break;
@@ -72,6 +73,7 @@ int Movement::move_up(WorldObj* obj) {
 			if (temp) {
 				if (temp->getParty()->get_hide()) continue;
 			}
+			
 			bool check = collision(objVec[i], obj);
 			if (check) {
 				//manager->createTask("Bump", "SOUND");
@@ -156,6 +158,11 @@ int Movement::move_up_left(WorldObj* obj) {
 		}
 		Line tempHori(Point(obj->body[0].getX(), 25000 - (obj->body[0].getY() + obj->body[0].getHeight())), Point(obj->body[0].getX() + 20, 25000 - (obj->body[0].getY() + obj->body[0].getHeight())));
 		Line tempVert(Point(obj->body[0].getX() + (obj->body[0].getWidth() / 2), 25000 - (obj->body[0].getY() + obj->body[0].getHeight())), Point(obj->body[0].getX() + (obj->body[0].getWidth() / 2), 25000 - (obj->body[0].getY() + obj->body[0].getHeight() - 20)));
+		if (my_type != WorldObj::TYPE_PLAYER) {
+			obj->shiftY(-diagYSpeed*speed_magnifier);
+			obj->shiftX(-diagXSpeed*speed_magnifier);
+			return 0;
+		}
 		obj->shiftY(-diagYSpeed*speed_magnifier);
 		for (int i = 0; i < objVec.size(); i++) {
 			if (obj == objVec[i] || (my_type >= 2 && objVec[i]->getType() >= WorldObj::TYPE_NPC)) {
@@ -274,7 +281,11 @@ int Movement::move_up_right(WorldObj* obj) {
 		}
 		Line tempHori(Point(obj->body[0].getX() + obj->body[0].getWidth() - 20, 25000 - (obj->body[0].getY() + obj->body[0].getHeight())), Point(obj->body[0].getX() + obj->body[0].getWidth(), 25000 - (obj->body[0].getY() + obj->body[0].getHeight())));
 		Line tempVert(Point(obj->body[0].getX() + (obj->body[0].getWidth() / 2), 25000 - (obj->body[0].getY() + obj->body[0].getHeight())), Point(obj->body[0].getX() + (obj->body[0].getWidth() / 2), 25000 - (obj->body[0].getY() + obj->body[0].getHeight() - 20)));
-
+		if (my_type != WorldObj::TYPE_PLAYER) {
+			obj->shiftY(-diagYSpeed*speed_magnifier);
+			obj->shiftX(diagXSpeed*speed_magnifier);
+			return 0;
+		}
 		obj->shiftY(-diagYSpeed*speed_magnifier);
 		for (int i = 0; i < objVec.size(); i++) {
 			if (obj == objVec[i] || (my_type >= 2 && objVec[i]->getType() >= WorldObj::TYPE_NPC)) {
@@ -391,6 +402,7 @@ int Movement::move_down(WorldObj* obj) {
 		}
 
 		obj->shiftY(moveSpeed*speed_magnifier);
+		if (my_type != WorldObj::TYPE_PLAYER) return 0;
 		for (int i = 0; i < objVec.size(); i++) {
 			if (obj == objVec[i] || (my_type >= 2 && objVec[i]->getType() >= WorldObj::TYPE_NPC)) {
 				break;
@@ -477,6 +489,12 @@ int Movement::move_down_left(WorldObj* obj) {
 		}
 		Line tempHori(Point(obj->body[0].getX(), 25000 - (obj->body[0].getY() + obj->body[0].getHeight())), Point(obj->body[0].getX() + 20, 25000 - (obj->body[0].getY() + obj->body[0].getHeight())));
 		Line tempVert(Point(obj->body[0].getX() + (obj->body[0].getWidth() / 2), 25000 - (obj->body[0].getY() + obj->body[0].getHeight())), Point(obj->body[0].getX() + (obj->body[0].getWidth() / 2), 25000 - (obj->body[0].getY() + obj->body[0].getHeight() - 20)));
+		if (my_type != WorldObj::TYPE_PLAYER) {
+			obj->shiftY(diagYSpeed*speed_magnifier);
+			obj->shiftX(-diagXSpeed*speed_magnifier);
+			return 0;
+		}
+		
 		obj->shiftY(diagYSpeed*speed_magnifier);
 		for (int i = 0; i < objVec.size(); i++) {
 			if (obj == objVec[i] || (my_type >= 2 && objVec[i]->getType() >= WorldObj::TYPE_NPC)) {
@@ -598,6 +616,11 @@ int Movement::move_down_right(WorldObj* obj) {
 		}
 		Line tempHori(Point(obj->body[0].getX() + obj->body[0].getWidth() - 20, 25000 - (obj->body[0].getY() + obj->body[0].getHeight())), Point(obj->body[0].getX() + obj->body[0].getWidth(), 25000 - (obj->body[0].getY() + obj->body[0].getHeight())));
 		Line tempVert(Point(obj->body[0].getX() + (obj->body[0].getWidth() / 2), 25000 - (obj->body[0].getY() + obj->body[0].getHeight())), Point(obj->body[0].getX() + (obj->body[0].getWidth() / 2), 25000 - (obj->body[0].getY() + obj->body[0].getHeight() - 20)));
+		if (my_type != WorldObj::TYPE_PLAYER) {
+			obj->shiftY(diagYSpeed*speed_magnifier);
+			obj->shiftX(diagXSpeed*speed_magnifier);
+			return 0;
+		}
 		obj->shiftY(diagYSpeed*speed_magnifier);
 		for (int i = 0; i < objVec.size(); i++) {
 			if (obj == objVec[i] || (my_type >= 2 && objVec[i]->getType() >= WorldObj::TYPE_NPC)) {
@@ -714,6 +737,7 @@ int Movement::move_left(WorldObj* obj) {
 			float moveSpeed = npc->getSpeed();
 		}
 		obj->shiftX(-moveSpeed*speed_magnifier);
+		if (my_type != WorldObj::TYPE_PLAYER) return 0;
 		for (int i = 0; i < objVec.size(); i++) {
 			if (obj == objVec[i] || (my_type >= 2 && objVec[i]->getType() >= WorldObj::TYPE_NPC)) {
 				break;
@@ -802,6 +826,7 @@ int Movement::move_right(WorldObj* obj) {
 		}
 
 		obj->shiftX(moveSpeed*speed_magnifier);
+		if (my_type != WorldObj::TYPE_PLAYER) return 0;
 		for (int i = 0; i < objVec.size(); i++) {
 			if (obj == objVec[i] || (my_type >= 2 && objVec[i]->getType() >= WorldObj::TYPE_NPC)) {
 				//cout << "Skip check for"<< objVec[i]->getID() << endl;
