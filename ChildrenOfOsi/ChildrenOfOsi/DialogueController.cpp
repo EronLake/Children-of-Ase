@@ -160,13 +160,14 @@ void DialogueController::PlayerChoose()
 		else
 			set_selectable(false, "Ask_To_Duel", NotorietyIcon);
 
-		if(temp_hero->rel[player->name]->getStrength() >= 50 && temp_hero->rel[player->name]->getAffinity() <= 85 && temp_hero->rel[player->name]->getNotoriety() <= 75)
+		if(temp_hero->rel[player->name]->getStrength() >= 50 && temp_hero->rel[player->name]->getAffinity() >= 60 && temp_hero->rel[player->name]->getNotoriety() >= 65)
 			set_selectable(true, "Ask_To_Spar", StrengthIcon);
 		else
 			set_selectable(false, "Ask_To_Spar", StrengthIcon);
 
 		if(temp_hero->getVillage()->get_alliance() == player->getVillage()->get_alliance())
-			set_selectable(true, "Recruit_For_Party", StrengthIcon);
+			//set_selectable(true, "Recruit_For_Party", StrengthIcon);
+			set_selectable(false, "Recruit_For_Party", StrengthIcon); // took off join party
 		else
 			set_selectable(false, "Recruit_For_Party", StrengthIcon);
 
@@ -176,7 +177,8 @@ void DialogueController::PlayerChoose()
 		else
 			set_selectable(false, "Request_Teaching", StrengthIcon);
 
-		if (temp_hero->rel[player->name]->getAffinity() >= 85)
+		if (temp_hero->rel[player->name]->getAffinity() >= 85 && temp_hero->getVillage()->get_alliance() !=
+																player->getVillage()->get_alliance())
 			set_selectable(true, "Ask_To_Form_Alliance", AffinityIcon);
 		else
 			set_selectable(false, "Ask_To_Form_Alliance", AffinityIcon);

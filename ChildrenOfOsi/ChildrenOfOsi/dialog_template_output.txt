@@ -1,5 +1,6 @@
-Conversation Point Name: Ask_To_Duel Appeal 13480
-Conversation Point Name: Ask_To_Spar Appeal 13430
-Conversation Point Name: Boast Appeal 13290
-Conversation Point Name: Intimidate Appeal 13190
-
+Conversation Point Name: Compliment Appeal 18380
+Conversation Point Name: Boast Appeal 15040
+Conversation Point Name: Bribe Appeal 15040
+Conversation Point Name: Intimidate Appeal 14940
+Conversation Point Name: Ask_Name Appeal 9740
+Conversation Point Name: Ask_Origin Appeal 9060
