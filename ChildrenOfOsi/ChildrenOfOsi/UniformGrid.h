@@ -57,7 +57,7 @@ void UniformGrid<T>::insert_worldobj_to_grid(std::vector<T*> objs)
 		objs[i]->grid_location.first = j;
 		objs[i]->grid_location.second = k;
 
-		cout << "j and k are " << j << ", " << k << endl;
+		//cout << "j and k are " << j << ", " << k << endl;
 		grid[j][k].push_back(objs[i]);
 		num_of_elements++;
 	}

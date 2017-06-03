@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "PlayerActExecFunctions.h"
 
-bool doing_quest = false;
+bool did_quest = false;
 PlayerActExecFunctions::PlayerActExecFunctions()
 {
 }
@@ -46,10 +46,11 @@ void PlayerActExecFunctions::execute_start(std::string act_name, Hero* receiver)
 	//set to current action 
 	if (!player->quests_log.empty()) {
 		for (auto i : player->quests_log) {
+			player->cur_action = cur_action;
 			if (i->getReceiver() == receiver && i->getName() == act_name + "_" + std::to_string(i->getOwner()->name))
 			{
 				player->cur_action = i;
-				doing_quest = true;
+				//doing_quest = true;
 			}
 		}
 
@@ -149,7 +150,11 @@ void PlayerActExecFunctions::execute_end(bool if_succ) {
 	
 	cur_action->apply_postconditions(if_succ);	//Apply post-conditions based off if it was succesful or not
 	cur_action->executed = true;
-	player->ori += 5;
+
+	if (if_succ) {
+		player->ori += 5;
+	}
+	
 	
 	//if the action was successful check if the action was in the active quests
 	if (if_succ) { check_quest(); }
@@ -160,8 +165,10 @@ void PlayerActExecFunctions::execute_end(bool if_succ) {
 		if (if_succ) {
 			if (!player->quests_log.empty()) {
 				for (auto i : player->quests_log) {
-					if (i->getReceiver() == cur_action->getReceiver() && i->getName() == cur_action->getName())
-						player->quest_status[i->getOwner()->name] = Player::SUCC_QUEST;// set shango to "succeeded quest"
+					if (i->getReceiver() == cur_action->getReceiver() && i->getName() == cur_action->getName()){
+						player->quest_status[i->getOwner()->name] = Player::SUCC_QUEST;
+						did_quest = true;// set shango to "succeeded quest"
+					}
 
 				}
 			}
@@ -172,9 +179,10 @@ void PlayerActExecFunctions::execute_end(bool if_succ) {
 		else {
 			if (!player->quests_log.empty()) {
 				for (auto i : player->quests_log) {
-					if (i->getReceiver() == cur_action->getReceiver() && i->getName() == cur_action->getName())
+					if (i->getReceiver() == cur_action->getReceiver() && i->getName() == cur_action->getName()) {
 						player->quest_status[i->getOwner()->name] = Player::FAIL_QUEST;// set shango to "failed quest"
-
+						did_quest = true;
+					}
 				}
 			}
 			
@@ -210,15 +218,23 @@ void PlayerActExecFunctions::execute_end(bool if_succ) {
 	
 	//for multipliers and preconditions it points the the references' actual objects
 	//sets multipliers to references multipliers
-	if (doing_quest) {
-		cur_action->multipliers = nullptr;
-		cur_action->aff_mult = nullptr;
-		cur_action->str_mult = nullptr;
-		cur_action->noto_mult = nullptr;
-		//sets preconditions to references preconditions
 
-		// delete player->cur_action;
-		player->cur_action = nullptr;
+	
+	for (auto i : player->quests_log) {
+
+		if (did_quest && i->getOwner() == cur_action->getOwner()) {
+			
+		}
+		else if (i->getOwner()->name == SHANGO) {
+			cur_action->multipliers = nullptr;
+			cur_action->aff_mult = nullptr;
+			cur_action->str_mult = nullptr;
+			cur_action->noto_mult = nullptr;
+			//sets preconditions to references preconditions
+
+			delete player->cur_action;
+			player->cur_action = nullptr;
+		}
 	}
 }
 

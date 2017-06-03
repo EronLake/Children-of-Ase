@@ -11,58 +11,48 @@ class DialogueGui
 {
   private:
 
-  static constexpr float BACKGROUND_X = 160.0F;
-  static constexpr float BACKGROUND_Y = 305.0F;
-  static constexpr float BACKGROUND_WIDTH = 640.0F;
-  static constexpr float BACKGROUND_HEIGHT = 225.0F;
+  static constexpr float BACKGROUND_X = 10.0F;
+  static constexpr float BACKGROUND_Y = 316.0F;
+  static constexpr float BACKGROUND_WIDTH = 940.0F;
+  static constexpr float BACKGROUND_HEIGHT = 220.0F;
 
-  static constexpr float HEADER_X = 169.0F;
-  static constexpr float HEADER_Y = 252.0F;
+  static constexpr float HEADER_X = 17.5F;
+  static constexpr float HEADER_Y = 257.5F;
   static constexpr float HEADER_WIDTH = 250.0F;
   static constexpr float HEADER_HEIGHT = 75.0F;
 
-  static constexpr float ICON_SWORD_X = 211.5F;
-  static constexpr float ICON_SWORD_Y = 274.5F;
-  static constexpr float ICON_HEART_X = 256.5F;
-  static constexpr float ICON_HEART_Y = 274.5;
-  static constexpr float ICON_FACE_X = 301.5F;
-  static constexpr float ICON_FACE_Y = 274.5;
-  static constexpr float ICON_QUESTION_X = 346.5F;
-  static constexpr float ICON_QUESTION_Y = 274.5;
+  static constexpr float ICON_SWORD_X = 60.0F;
+  static constexpr float ICON_SWORD_Y = 280.0F;
+  static constexpr float ICON_HEART_X = 105.0F;
+  static constexpr float ICON_HEART_Y = 280.0F;
+  static constexpr float ICON_FACE_X = 150.0F;
+  static constexpr float ICON_FACE_Y = 280.0F;
+  static constexpr float ICON_QUESTION_X = 195.0F;
+  static constexpr float ICON_QUESTION_Y = 280.0F;
   static constexpr float ICON_WIDTH = 30.0F;
   static constexpr float ICON_HEIGHT = 30.0F;
 
-  static constexpr float MESSAGE_X = 177.75F;
-  static constexpr float MESSAGE_Y = 330.0F;
-  static constexpr float MESSAGE_WIDTH = 565.0F;
+  static constexpr float MESSAGE_X = 32.5F;
+  static constexpr float MESSAGE_Y = 343.5F;
+  static constexpr float MESSAGE_WIDTH = 895.0F;
   static constexpr float MESSAGE_HEIGHT = -1.0F;
 
-  static constexpr float OPTIONS_X = 192.75F;
-  static constexpr float OPTIONS_Y = 411.25F;
+  static constexpr float OPTIONS_X = 52.5F;
+  static constexpr float OPTIONS_Y = 420.0F;
   static constexpr float OPTIONS_WIDTH = 575.0F;
   static constexpr float OPTIONS_HEIGHT = -1.0F;
 
   static constexpr int LINE_SPACING = 18;
 
-  static constexpr float SPEAKER_LEFT_X = 225.0F;
-  static constexpr float SPEAKER_LEFT_Y = 130.0F;
-  static constexpr float SPEAKER_LEFT_WIDTH = 200.0F;
-  static constexpr float SPEAKER_LEFT_HEIGHT = 200.0F;
+  static constexpr float SPEAKER_LEFT_X = 15.0F;
+  static constexpr float SPEAKER_LEFT_Y = 22.5F;
+  static constexpr float SPEAKER_LEFT_WIDTH = 300.0F;
+  static constexpr float SPEAKER_LEFT_HEIGHT = 300.0F;
 
-  static constexpr float SPEAKER_RIGHT_X = 575.0F;
-  static constexpr float SPEAKER_RIGHT_Y = 130.0F;
-  static constexpr float SPEAKER_RIGHT_WIDTH = 200.0F;
-  static constexpr float SPEAKER_RIGHT_HEIGHT = 200.0F;
-
-  //static constexpr float SPEAKER_LEFT_X = 410.0F;
-  //static constexpr float SPEAKER_LEFT_Y = 110.0F;
-  //static constexpr float SPEAKER_LEFT_WIDTH = 200.0F;
-  //static constexpr float SPEAKER_LEFT_HEIGHT = 200.0F;
-
-  //static constexpr float SPEAKER_RIGHT_X = 575.0F;
-  //static constexpr float SPEAKER_RIGHT_Y = 110.0F;
-  //static constexpr float SPEAKER_RIGHT_WIDTH = 200.0F;
-  //static constexpr float SPEAKER_RIGHT_HEIGHT = 200.0F;
+  static constexpr float SPEAKER_RIGHT_X = 645.0F;
+  static constexpr float SPEAKER_RIGHT_Y = 22.5F;
+  static constexpr float SPEAKER_RIGHT_WIDTH = 300.0F;
+  static constexpr float SPEAKER_RIGHT_HEIGHT = 300.0F;
 
   Rectangle *background_rect;
   Rectangle *header_rect;
@@ -119,13 +109,6 @@ class DialogueGui
 
   std::string remove_chars_from_string(string &str, char* charsToRemove);
   std::string replace_str_char(string str, const string& replace, char ch);
-
-  
-  //Sprite *shango_sprite;
-  //Sprite *yemoja_sprite;
-  //Sprite *oya_sprite;
-  //Sprite *ogun_sprite;
-  //Sprite *oshosi_sprite;
 
   //character portrait textures
   Texture* shango_tex;

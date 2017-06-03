@@ -184,19 +184,28 @@ dialogue_point DialogueHelper::choose_conv_pt(std::vector<ConversationLogObj*> c
 		for (auto j : (*i)->get_conv_point()->tag) {  
 				//for all conversation points related to each of those tags
 			for (auto k : j->conversation_point) {
-					//only consider it if it is not already in the vector of possible replies	
+				//only consider it if it is not already in the vector of possible replies	
 				if (std::find(possible_replies.begin(), possible_replies.end(), std::make_pair(0, k)) != possible_replies.end()) {
 				}
 				else {
-						//only add it in if it fuffills the prereqs. 
-					//if(relationship->getAffinity()>= k->rel_multipliers->getAffinity() && relationship->getNotoriety() >= k->rel_multipliers->getNotoriety() && relationship->getStrength() >= k->rel_multipliers->getStrength()){
-					possible_replies.push_back(std::make_pair(0,k));
-				//}//push it with a utility of 0 for now
-				}
-			
-			
-		      }
+					//only add it in if it fuffills the prereqs. 
+				//if(relationship->getAffinity()>= k->rel_multipliers->getAffinity() && relationship->getNotoriety() >= k->rel_multipliers->getNotoriety() && relationship->getStrength() >= k->rel_multipliers->getStrength()){
+					bool allowed = true;
+					for (auto precond : Containers::conv_point_table[k->dpoint[1]]->req_preconds) {
+						int temp1 = precond->get_cost(player, other);
+						//the ori stuff means that the higher the ori the more likely it is for the hero to respond
+						//positivly to what whatever it is you are saying
+						if (precond->get_cost(player, other) != 0) {
+							allowed = false;
+						}
 
+						//}//push it with a utility of 0 for now
+					}
+					if (allowed == true)
+						possible_replies.push_back(std::make_pair(0, k));
+
+				}
+			}
 
 	    }
 		
@@ -343,10 +352,11 @@ std::vector<dialogue_point> DialogueHelper::get_possible_reply_pts(std::string p
 	std::vector<dialogue_point> reply;
 	//reply.push_back({"Decline_To_Answer","Decline_To_Answer","","","1"});
 	if (point != "Boast" && point != "Insult" && point != "Intimidate" && point != "Compliment" && point != "Offer Praise") {
-		reply.push_back({ "Refuse","Refuse","","","1","0" });
+		if(point.find("_Quest") == string::npos)
+		    reply.push_back({ "Refuse","Refuse","","","1","0" });
 		for (int i = 0; i < possible_reply_pts[opts_inx].size(); i++) {
 			if ((/*possible_reply_pts[opts_inx][i][CorrespondingConvPt].compare("Decline_To_Answer") == 0 ||*/ possible_reply_pts[opts_inx][i][CorrespondingConvPt].compare(point) == 0)
-				&& point.find("_Quest", 0) == string::npos) {
+				&& point.find("_Quest") == string::npos) {
 				reply.push_back({ possible_reply_pts[opts_inx][i] });
 			}
 
@@ -361,9 +371,9 @@ std::vector<dialogue_point> DialogueHelper::get_possible_reply_pts(std::string p
 		reply.push_back({ "Offer Praise In Response", "Offer Praise In Response","","","1","0" });
 		reply.push_back({ "Insult In Response", "Insult In Response","","","1","0" });
 	}
-	if (point.find(" _Quest", 0) != string::npos) {
-		reply.push_back({ "Accept_Quest", "Accept_Quest","","","1" });
-		reply.push_back({ "Decline_Quest", "Decline_Quest","","","1" });
+	if (point.find("_Quest") != string::npos) {
+		reply.push_back({ "Accept_Quest", "Accept_Quest","","","1","0" });
+		reply.push_back({ "Decline_Quest", "Decline_Quest","","","1","0" });
 	}
 	
 	return reply;
@@ -589,6 +599,7 @@ dialogue_point DialogueHelper::get_dialog(std::string name, dialogue_point diog_
 		}
 	}
 	else {
+		phrase_picker = (rand() % 5 + 1);//pick Shango flavor text randomly
 		dpoint.push_back(root[diog_pt[ConvPointName]][to_string(phrase_picker)]
 			.asString());
 	}

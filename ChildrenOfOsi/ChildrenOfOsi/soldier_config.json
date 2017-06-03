@@ -209,10 +209,10 @@
 			"hurt_left": {"0":"SoldierOasis_Recoil_W","1":9},
 			"hurt_right": {"0":"SoldierOasis_Recoil_E","1":9},
 
-			"atk_up": {"0":"SoldierOasis_Attack_N","1":3},
-			"atk_down": {"0":"SoldierOasis_Attack_S","1":3},
-			"atk_left": {"0":"SoldierOasis_Attack_W","1":3},
-			"atk_right": {"0":"SoldierOasis_Attack_E","1":3},
+			"atk_up": {"0":"SoldierOgun_Attack_N","1":3},
+			"atk_down": {"0":"SoldierOgun_Attack_S","1":3},
+			"atk_left": {"0":"SoldierOgun_Attack_W","1":3},
+			"atk_right": {"0":"SoldierOgun_Attack_E","1":3},
 
 			"death_up": {"0":"SoldierOasis_Death_N","1":24},
 			"death_down": {"0":"SoldierOasis_Death_S","1":24},

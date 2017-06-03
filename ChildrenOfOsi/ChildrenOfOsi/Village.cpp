@@ -21,8 +21,13 @@ Village::Village()
 
 Village::~Village()
 {
-  delete this->barracks;
-  delete this->defenders;
+	//removes this from VillagesWorld
+	auto itr = std::find(Village::villagesWorld.begin(), Village::villagesWorld.end(), this);
+	if (itr != Village::villagesWorld.end())
+		Village::villagesWorld.erase(itr);
+
+	delete this->barracks;
+	delete this->defenders;
 }
 
 /*bool Village::isEnemyParty(Party* p)
@@ -81,8 +86,19 @@ void Village::init_villages()
 
 	//	Party* new_party = new Party();
 	//	new_party->addToParty(itr.second, true);
+		
+		if (itr.second->village != nullptr) {
+			if (itr.second->village->alliance->get_alligned_villages().size() > 0) {
+				//itr.second->village->alliance->clear_enemies();
+				//itr.second->village->alliance->clear_enemy_villages();
+				Alliance::remove_alliance(itr.second->village->alliance);
+				delete itr.second->village->alliance;
+			}
+			delete itr.second->village;
+		}
 
 		Village* new_village = new Village();
+
 		new_village->set_village_location(itr.second->getLoc());
 		new_village->add_member(itr.second);
 
@@ -109,7 +125,10 @@ void Village::init_villages()
 
 		}
 
+
 		Alliance* new_alliance = new Alliance(new_village);
+
+		//Alliance* new_alliance = new Alliance(new_village);
 
 		//new_village->addToParties(new_party);
 

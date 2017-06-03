@@ -1,4 +1,5 @@
-Conversation Point Name: Ask_To_Spar Appeal 12930
-Conversation Point Name: Grovel Appeal 12770
-Conversation Point Name: Intimidate Appeal 12690
-Conversation Point Name: Insult Appeal 12680
+Conversation Point Name: Ask_To_Duel Appeal 13480
+Conversation Point Name: Ask_To_Spar Appeal 13430
+Conversation Point Name: Boast Appeal 13290
+Conversation Point Name: Intimidate Appeal 13190
+

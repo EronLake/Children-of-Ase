@@ -633,5 +633,21 @@
         "3": "I refuse.",
 		"4": "I refuse.",
         "5": "I refuse."
+   },
+
+   "Offer Gift": {
+        "1": "I cannot believe I am asking you of all people, but would you accept this.",
+        "2": "Would you be interested in this gift.",
+        "3": "I decided to get this for you, hopefully you'll accept it.",
+		"4": "I decided to get this for you, hopefully you'll accept it.",
+        "5": "I decided to get this for you, hopefully you'll accept it."
+   },
+
+   "Offer Praise": {
+        "1": "I am reluctant to do this, but I suppose I must beg for your mercy.",
+        "2": "Please know that I truly meant no harm to you and accept my apology.",
+        "3": "My friend, please know that I would never try to harm you. I truly meant no real harm.",
+		"4": "My friend, please know that I would never try to harm you. I truly meant no real harm.",
+        "5": "My friend, please know that I would never try to harm you. I truly meant no real harm."
    }
 }

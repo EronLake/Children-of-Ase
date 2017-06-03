@@ -76,7 +76,7 @@ void Player::updateTalk()
 /*filters the move-to options that the player has available when speaking to heroes*/
 void Player::filter_move_to(Hero* npc) {
 	//turn off all move to flags if notoriety less than 60
-	if (npc->rel[this->name]->getNotoriety() < 60) {
+	if (npc->rel[this->name]->getNotoriety() < 55) {
 		for (auto itor = this->move_to_flags.begin(); itor != this->move_to_flags.end(); ++itor) {
 			itor->second = 0;
 		}
@@ -85,12 +85,12 @@ void Player::filter_move_to(Hero* npc) {
 		this->move_to_flags["Advise To Fight"] = 1; //turn fight flag on
 		this->move_to_flags["Advise To Send Peace Offering To"] = 1; //turn peace offering flag on
 		
-		if (npc->rel[this->name]->getNotoriety() > 70 &&
-			npc->rel[this->name]->getAffinity() > 70)
+		if (npc->rel[this->name]->getNotoriety() > 60 &&
+			npc->rel[this->name]->getAffinity() > 60)
 			this->move_to_flags["Advise To Ally With"] = 1; //turn on form alliance flag
 
-		if(npc->rel[this->name]->getNotoriety() > 70 &&
-			npc->rel[this->name]->getStrength() > 70)
+		if(npc->rel[this->name]->getNotoriety() > 60 &&
+			npc->rel[this->name]->getStrength() > 60)
 		{
 			this->move_to_flags["Advise To Conquer"] = 1;	//turn on conquer flag
 		}
