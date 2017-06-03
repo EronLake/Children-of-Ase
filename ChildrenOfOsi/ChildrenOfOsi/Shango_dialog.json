@@ -123,7 +123,7 @@
 	"Confirm Ally": {
         "1": "I wish you would trust me, but I guess it cannot be helped.",
         "2": "I wish you would trust me, but I guess it cannot be helped.",
-        "3": "I assure you that you will be glad that you took my advice.",
+        "3": "Welcome to thhe team",
         "4": "I assure you that you will be glad that you took my advice.",
 		"5": "I assure you that you will be glad that you took my advice."
     },
@@ -131,7 +131,7 @@
 	"Confirm Fight": {
         "1": "I wish you would trust me, but I guess it cannot be helped.",
         "2": "I wish you would trust me, but I guess it cannot be helped.",
-        "3": "I assure you that you will be glad that you took my advice.",
+        "3": "Lets do this then",
         "4": "I assure you that you will be glad that you took my advice.",
 		"5": "I assure you that you will be glad that you took my advice."
     },
@@ -273,7 +273,7 @@
     },
 
 	"Accept Bribe": {
-        "1": "Do you honesly think I would stoop to your level and accept a bribe.",
+        "1": "I hope you think better of me than to think I would be swayed so easily by a bribe.",
         "2": "I hope you think better of me than to think I would be swayed so easily by a bribe.",
         "3": "I do not usually accept bribes, but I suppose I could make an exception for you.",
         "4": "I do not usually accept bribes, but I suppose I could make an exception for you.",
@@ -329,35 +329,35 @@
 	},
 
 	"Compliment": {
-        "1": "I can tell that you have many great qualities.",
-        "2": "I belive that you are a strong and wise individual.",
-        "3": "I can tell that you have many great qualities.",
-		"4": "I am glad to have met you. I truly believe knowing you has had a positive effect on me and this village.",
-        "5": "I am glad to have met you. I truly believe knowing you has had a positive effect on me and this village."
+        "1": "You have quite a way with words.",
+    "2": "I can tell that you have many great qualities.",
+    "3": "I belive that you are a strong and wise individual.",
+    "4": "I belive that you are a strong and wise individual.",
+    "5": "You have quite a way with words."
     },
 
 	"Thank": {
         "1": "That would actually be flattering if it wasn't coming from you.",
         "2": "Oh...thanks...I suppose.",
         "3": "Thank you.",
-        "4": "It is not often people flatter me. ",
+        "4": "Many thanks. It is not often people flatter me. ",
         "5": "Thanks so much, and I could say the same about you."
     },
 
 	"Grovel": {
-        "1": "I am reluctant to do this, but I suppose I must beg for your mercy.",
-        "2": "Please know that I truly meant no harm to you and accept my apology.",
-        "3": "My friend, please know that I would never try to harm you. I truly meant no real harm.",
-		"4": "My friend, please know that I would never try to harm you. I truly meant no real harm.",
-        "5": "My friend, please know that I would never try to harm you. I truly meant no real harm."
+        "1": "Anybody could see just by looking at you that you are extremely capable",
+        "2": "Someone as amazing as you must be quite famous",
+        "3": "Anybody could see just by looking at you that you are extremely capable",
+		"4": "Someone as amazing as you must be quite famous",
+        "5": "I hope to one day be as prolific as you."
     },
 
 	"Accept Plea": {
-        "1": "Oh please get off your knees you're making an absolute fool of yourself.",
-        "2": "*Sigh* I suppose I can overlook your actions this one time.",
-        "3": "I accept your apology.",
-        "4": "Please, get off of your knees you do not need to go that far simply to apolgize to me.",
-        "5": "My friend I would accept an apology from you anytime."
+        "1": "Nothing I didn't already know",
+        "2": "I guess",
+        "3": "Thank you, your words are too much.",
+        "4": "Your praise makes me happy.",
+        "5": "Thank you for your kind words."
     },
 
 	"Advise To Train With": {
@@ -395,9 +395,9 @@
 	"Advise To Send Peace Offering To": {
         "1": "I believe it would be prudent of you to send a peace offering to HERO.",
         "2": "You should send a peace offering to HERO in order to earn their favor.",
-        "3": "I would hate to see you get into trouble with HERO. You should try sending them a peace offering.",
-        "4": "I would hate to see you get into trouble with HERO. You should try sending them a peace offering.",
-        "5": "I would hate to see you get into trouble with HERO. You should try sending them a peace offering."
+        "3": "I think it is wise to try and negotiate with HERO. You should try sending them a peace offering.",
+        "4": "I think it is wise to try and negotiate with HERO. You should try sending them a peace offering.",
+        "5": "I think it is wise to try and negotiate with HERO. You should try sending them a peace offering."
     },
 
 	"Take Advice To Send Peace Offering To": {
@@ -449,11 +449,12 @@
     },
 
 	"Boast": {
-        "1": "I am the epitome of strength!",
-        "2": "I once took down several bandits unarmed.",
-        "3":"If you're ever in need of any extra fighting strength, my skill with a blade is peerless",
-		"4": "If you're ever in need of any extra fighting strength, my skill with a blade is peerless",
-        "5": "If you're ever in need of any extra fighting strength, my skill with a blade is peerless"
+        "1":  "If you're ever in need of any extra fighting strength, my skill with a blade is peerless",
+        "2": "You could say that I have been blessed with the power of lighting itself",
+    "3": "You could say that I have been blessed with the power of lighting itself",
+    "4": "My strength is comparable to that of mountains",
+    "5": "I've never met someone whose sword I couldn't best."
+
     },
 
     "Congratulate": {
@@ -465,27 +466,28 @@
     },
 
 	"Intimidate": {
-        "1": "I am absolutely sick of you. If someone doesn't take you out soon I just might do it myself.",
-        "2": "You seem good at making enemies, so if I were you I would watch my back.",
-		"3": "You seem good at making enemies, so if I were you I would watch my back.",
-        "4": "You seem good at making enemies, so if I were you I would watch my back.",
-        "5": "You seem good at making enemies, so if I were you I would watch my back."
+        "1": "I hear that you're at making enemies, so if I were you I would watch my back.",
+        "2": "I've been know to always get my way, so if I were you, I woudn't cross me",
+    "3": "If you know what's good for you, you should never cross me.",
+    "4": "You better choose your future words very carefully.",
+    "5": "If you know what's good for you, you should never cross me."
+
     },
 
 	"Talk Back": {
-        "1": "Were you trying to scare me, because all you did is make me angry.",
+        "1": "I can hardly believe that your actions match up to your mouth.",
         "2": "You better choose your future words very carefully.",
-        "3": "Ah... I do not know if I offended you, but if you are mad at me just please leave the village out of it.",
+        "3": "Theres no need to posture. we're all friends here.",
         "4": "Have I done somehting to you? I thought we were on good terms.",
         "5": "My friend I do not know if I have done anything to make you say that but I am truly sorry if I have."
     },
 
 	"Insult": {
-        "1": "Your mother was a hamster and your father smelt of elderberries.",
-        "2": "The fact that you even think you can call yourself a 'Hero' is an absolute joke.",
-		"3": "The fact that you even think you can call yourself a 'Hero' is an absolute joke.",
-        "4": "The fact that you even think you can call yourself a 'Hero' is an absolute joke.",
-        "5": "The fact that you even think you can call yourself a 'Hero' is an absolute joke."
+        "1": "I've fought trees more tenacious than you.",
+        "2": "Your actions are as meaningless to me as a small child's.",
+		"3": "You're about as intimidating as small dog.",
+        "4": "The only worse than your skill with a blade is your ability to lead.",
+        "5": "I've fought trees more tenacious than you."
     },
 
 	"Defend Self": {
@@ -592,47 +594,47 @@
     "5": "Oh great babalawo, please tell me about Ifa."
   },
   "Boast In Response": {
-    "1": "You know, as a child, I once fought a gorilla off with my bare hands",
-    "2": "You know, as a child, I once fought a gorilla off with my bare hands",
-    "3": "You know, as a child, I once fought a gorilla off with my bare hands",
-    "4": "You know, as a child, I once fought a gorilla off with my bare hands",
-    "5": "You know, as a child, I once fought a gorilla off with my bare hands"
+    "1": "I've never met someone whose sword I couldn't best.",
+    "2": "You could say that I have been blessed with the power of lighting itself",
+    "3": "You could say that I have been blessed with the power of lighting itself",
+    "4": "My strength is comparable to that of mountains",
+    "5": "I've never met someone whose sword I couldn't best."
   },
   "Intimidate In Response": {
     "1": "If you know what's good for you, you should never cross me.",
-    "2": "If you know what's good for you, you should never cross me.",
+    "2": "I've been know to always get my way, so if I were you, I woudn't cross me",
     "3": "If you know what's good for you, you should never cross me.",
-    "4": "If you know what's good for you, you should never cross me.",
+    "4": "You better choose your future words very carefully.",
     "5": "If you know what's good for you, you should never cross me."
   },
   "Compliment In Response": {
     "1": "You have quite a way with words.",
-    "2": "You have quite a way with words.",
-    "3": "You have quite a way with words.",
-    "4": "You have quite a way with words.",
+    "2": "I can tell that you have many great qualities.",
+    "3": "I belive that you are a strong and wise individual.",
+    "4": "I belive that you are a strong and wise individual.",
     "5": "You have quite a way with words."
   },
    "Offer Praise In Response": {
         "1": "I've never met someone quite like you before, you are incredible!",
-		"2": "I've never met someone quite like you before, you are incredible!",
-        "3": "I've never met someone quite like you before, you are incredible!",
-		"4": "I've never met someone quite like you before, you are incredible!",
-        "5": "I've never met someone quite like you before, you are incredible!"
+		"2": "Someone as amazing as you must be quite famous",
+        "3": "Anybody could see just by looking at you that you are extremely capable",
+		"4": "Someone as amazing as you must be quite famous",
+        "5": "I hope to one day be as prolific as you."
    },
     "Insult In Response": {
-        "1": "Your actions are as meaningless to me as a small child's.",
-		"2": "Your actions are as meaningless to me as a small child's.",
-        "3": "Your actions are as meaningless to me as a small child's.",
-		"4": "Your actions are as meaningless to me as a small child's.",
-        "5": "Your actions are as meaningless to me as a small child's."
+        "1": "I've fought trees more tenacious than you.",
+        "2": "Your actions are as meaningless to me as a small child's.",
+		"3": "You're about as intimidating as small dog.",
+        "4": "The only worse than your skill with a blade is your ability to lead.",
+        "5": "I've fought trees more tenacious than you."
    },
 
     "Refuse": {
-        "1": "I refuse.",
-		"2": "I refuse.",
-        "3": "I refuse.",
-		"4": "I refuse.",
-        "5": "I refuse."
+        "1": "I refuse to comply.",
+		"2": "I refuse to comply.",
+        "3": "I refuse to comply.",
+		"4": "I refuse to comply.",
+        "5": "I refuse to comply."
    },
 
    "Offer Gift": {
@@ -644,10 +646,10 @@
    },
 
    "Offer Praise": {
-        "1": "I am reluctant to do this, but I suppose I must beg for your mercy.",
-        "2": "Please know that I truly meant no harm to you and accept my apology.",
-        "3": "My friend, please know that I would never try to harm you. I truly meant no real harm.",
-		"4": "My friend, please know that I would never try to harm you. I truly meant no real harm.",
-        "5": "My friend, please know that I would never try to harm you. I truly meant no real harm."
+        "1": "Anybody could see just by looking at you that you are extremely capable",
+        "2": "Someone as amazing as you must be quite famous",
+        "3": "Anybody could see just by looking at you that you are extremely capable",
+		"4": "Someone as amazing as you must be quite famous",
+        "5": "I hope to one day be as prolific as you."
    }
 }

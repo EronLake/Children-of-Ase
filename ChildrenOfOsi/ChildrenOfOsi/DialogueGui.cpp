@@ -276,12 +276,13 @@ void DialogueGui::drawGuiText()
           DialogueGui::OPTIONS_WIDTH, DialogueGui::OPTIONS_HEIGHT,
           (DialogueController::getSelect() == i) ? this->text_color_selected : avail_color);
 
-		
+		show_vis_feedback();
       }
 	  GameWindow::createText("Press 'Q' to Quit",
 		  450.50F, 475.50F,
 		  DialogueGui::OPTIONS_WIDTH, DialogueGui::OPTIONS_HEIGHT,
 		  text_color_default);
+	  
       break;
     case 2:
       for(int i = 0; i <= 4; ++i) {

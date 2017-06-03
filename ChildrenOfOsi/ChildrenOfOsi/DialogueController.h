@@ -76,6 +76,7 @@ public:
 	static bool DialogueController::check_acceptance(Player* p, Hero* npc);
 	static void DialogueController::unselectable_to_bottom();
 
+
 	static bool prompted_quest;
 	static bool accepted_quest;
 	
@@ -90,6 +91,7 @@ public:
 	static int state;
 	static std::string replyString;
 	static bool quest_declined;
+	static bool react_positively;
 
 	static ConversationLogObj* entry;
 	static std::pair<bool, std::string> vis_feedback;

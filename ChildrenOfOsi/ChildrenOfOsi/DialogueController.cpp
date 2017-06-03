@@ -18,7 +18,7 @@ bool DialogueController::talked_to_shrine_m = false;
 bool DialogueController::talked_to_babalawo_o = false;
 bool DialogueController::talked_to_babalawo_j = false;
 bool DialogueController::talked_to_babalawo_m = false;
-
+bool DialogueController::react_positively = true;
 Player* DialogueController::player;
 WorldObj* DialogueController::other; //the npc speaking with the player
 int DialogueController::state = 0;
@@ -150,7 +150,8 @@ void DialogueController::PlayerChoose()
 		//set_selectable(false,"Bribe",AffinityIcon);
 		unselectable_to_bottom();
 	}
-
+	DialogueController::feedback_timer = 100;
+	vis_feedback.first = react_positively;
 	options = dialogue.get_possible_conv_pts();
 	if (temp_hero) {
 		remove_dialog_option("Ask_To_Duel",NotorietyIcon);
@@ -795,7 +796,7 @@ void DialogueController::PlayerResponse()
 			if (act_name == "Offer Praise")
 				act_name = "Grovel";
 
-			bool react_positively = true; 
+		
 			for (auto precond : Containers::conv_point_table[act_name]->req_preconds) {
 				int temp1 = precond->get_cost(temp_hero, player);
 				//the ori stuff means that the higher the ori the more likely it is for the hero to respond
@@ -804,12 +805,17 @@ void DialogueController::PlayerResponse()
 					std::cout << "a string: " << precond->get_cost(temp_hero, player) << std::endl;
 				}
 				else {
-					react_positively = false;
+					DialogueController::react_positively = false;
 				}
-				if (react_positively) {
+				if (DialogueController::react_positively) {
+					vis_feedback.second = act_name;
+					
+					
 					Containers::conv_point_table[act_name]->apply_postconditions(true,player,temp_hero);
 				}
 				else {
+					vis_feedback.second = act_name;
+					
 					Containers::conv_point_table[act_name]->apply_postconditions(false, player, temp_hero);
 				}
 
