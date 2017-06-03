@@ -34,6 +34,8 @@ DialogueGui::DialogueGui()
   text_color_default = glm::vec3(0, 0, 0);
   text_color_selected = glm::vec3(50, 0, 0);
   text_color_unselectable = glm::vec3(50,50,50);
+  text_color_hide = glm::vec4(0, 0, 0, 0);
+  text_color_feedback = glm::vec4(0, 50, 0, 1);
   DialogueController::scroll_control = 0;
 }
 
@@ -257,6 +259,18 @@ void DialogueGui::drawGuiText()
 				avail_color = text_color_unselectable;
 		}
 
+		if (option_str.find("Bribe") != string::npos)
+			option_str = "Offer Gift";
+
+		if (option_str.find("Grovel") != string::npos)
+			option_str = "Offer Praise";
+
+		if (option_str.find("Ask To Spar") != string::npos)
+			option_str = "Request Friendly Spar";
+
+		if (option_str.find("Ask To Duel") != string::npos)
+			option_str = "Challenge To Duel";
+
         GameWindow::createText(option_str,
           DialogueGui::OPTIONS_X, DialogueGui::OPTIONS_Y + (DialogueGui::LINE_SPACING * i),
           DialogueGui::OPTIONS_WIDTH, DialogueGui::OPTIONS_HEIGHT,
@@ -278,12 +292,15 @@ void DialogueGui::drawGuiText()
         if(option_str.find("Take Advice", 0) != string::npos || option_str.find("Tell About", 0) != string::npos)
           option_str += (" " + DialogueController::getReplyOptions()[DialogueController::scroll_control + i][3]);
 
+		if (option_str.find("Accept Plea") != string::npos)
+			option_str = "Thank";
+
         GameWindow::createText(option_str,
           DialogueGui::OPTIONS_X, DialogueGui::OPTIONS_Y + (DialogueGui::LINE_SPACING * i),
           DialogueGui::OPTIONS_WIDTH, DialogueGui::OPTIONS_HEIGHT,
           (DialogueController::getSelect() == i) ? this->text_color_selected : text_color_default);
       }
-
+	  show_vis_feedback();
       break;
     case 5:
       GameWindow::createText("Next",
@@ -369,12 +386,14 @@ void DialogueGui::set_character_portrait_tex() {
 		this->speaker_left_rect->sprite.setTexture(this->shango_tex);
 		Hero* temp_hero = CheckClass::isHero(DialogueController::getOther());
 		if (temp_hero) {
-			if (DialogueController::getOther()->getName() == "Yemoja") {
-				this->speaker_right_rect->sprite.setTexture(this->yemoja_tex);
-			}
-			else if (DialogueController::getOther()->getName() == "Oya") {
-				this->speaker_right_rect->sprite.setTexture(this->oya_tex);
-			}
+      if(DialogueController::getOther()->getName() == "Yemoja")
+        this->speaker_right_rect->sprite.setTexture(this->yemoja_tex);
+      else if(DialogueController::getOther()->getName() == "Oya")
+        this->speaker_right_rect->sprite.setTexture(this->oya_tex);
+      else if(DialogueController::getOther()->getName() == "Oshosi")
+        this->speaker_right_rect->sprite.setTexture(this->ogun_tex);
+      else if(DialogueController::getOther()->getName() == "Ogun")
+        this->speaker_right_rect->sprite.setTexture(this->ogun_tex);
 		}
 		else if (DialogueController::quited_gui == false)
 			this->speaker_right_rect->sprite.setTexture(this->icon_question_tex);
@@ -386,4 +405,112 @@ void DialogueGui::set_character_portrait_tex() {
 			this->setSwordGlow();
 		}
 	}
+}
+
+/*displays visual feedback*/
+void DialogueGui::show_vis_feedback() {
+	std::pair<bool,std::string> p_conv_pt = DialogueController::vis_feedback;
+	std::string aff = "";
+	std::string notoriety = "";
+	std::string strength = "";
+	if (p_conv_pt.first) {
+		vector<std::shared_ptr<Postcondition>> tmp_succ_post;
+		p_conv_pt.second.append("_1");//append Shango
+		auto it = Containers::action_table.find(p_conv_pt.second);
+		if (it != Containers::action_table.end())
+		    tmp_succ_post = Containers::action_table[p_conv_pt.second]->doer_succ_postconds;
+		for (int i = 0; i < tmp_succ_post.size(); ++i) {
+			int type = tmp_succ_post[i]->get_rel_type();
+			//Postcondition* pos = tmp_succ_post[i].get();
+			float util = tmp_succ_post[i]->get_utility(DialogueController::player, DialogueController::player);
+			if (type == 7) {//affinity
+				if ((util * -1) > 0)
+					aff = "- Affinity";
+				else
+					aff = "+ Affinity";
+			}
+			else if (type == 6) {//strength
+			    if ((util * -1) > 0)
+			        strength = "- Strength";
+			    else
+			        strength = "+ Strength";
+			}
+			else if (type == 8) {//notoriety
+			    if ((util * -1) > 0)
+				    notoriety = "- Notoriety";
+				else
+			        notoriety = "+ Notoriety";
+			}
+		}
+	}
+	else {
+		vector<std::shared_ptr<Postcondition>> tmp_fail_post;
+		p_conv_pt.second.append("_1");//append Shango
+		auto it = Containers::action_table.find(p_conv_pt.second);
+		if (it != Containers::action_table.end())
+			tmp_fail_post = Containers::action_table[p_conv_pt.second]->doer_fail_postconds;
+		for (int i = 0; i < tmp_fail_post.size(); ++i) {
+			int type = tmp_fail_post[i]->get_rel_type();
+			//Postcondition* pos = tmp_fail_post[i].get();
+			float util = tmp_fail_post[i]->get_utility(DialogueController::player, DialogueController::player);
+			if (type == 7) {//affinity
+					aff = "+ Affinity";
+			}
+			else if (type == 6) {//strength
+					strength = "+ Strength";
+			}
+			else if (type == 8) {//notoriety
+					notoriety = "+ Notoriety";
+			}
+
+			else if (type == 9) {//strength
+					notoriety = "- Notoriety";
+			}
+
+			else if (type == 10) {//affinity
+				if ((util * -1) > 0)
+					notoriety = "- Notoriety";
+			}
+
+			else if (type == 11) {//notoriety
+					notoriety = "- Notoriety";
+			}
+		}
+
+	}
+	if (DialogueController::feedback_timer > 0) {
+		GameWindow::createText(aff,
+			510.50F, 425.50F,
+			DialogueGui::OPTIONS_WIDTH, DialogueGui::OPTIONS_HEIGHT,
+			text_color_feedback);
+
+		GameWindow::createText(notoriety,
+			510.50F, 450.50F,
+			DialogueGui::OPTIONS_WIDTH, DialogueGui::OPTIONS_HEIGHT,
+			text_color_feedback);
+
+		GameWindow::createText(strength,
+			510.50F, 475.50F,
+			DialogueGui::OPTIONS_WIDTH, DialogueGui::OPTIONS_HEIGHT,
+			text_color_feedback);
+
+		--DialogueController::feedback_timer;
+	}
+	else {
+		GameWindow::createText("",
+			450.50F, 475.50F,
+			DialogueGui::OPTIONS_WIDTH, DialogueGui::OPTIONS_HEIGHT,
+			text_color_hide);
+
+		GameWindow::createText("",
+			450.50F, 475.50F,
+			DialogueGui::OPTIONS_WIDTH, DialogueGui::OPTIONS_HEIGHT,
+			text_color_hide);
+
+		GameWindow::createText("",
+			450.50F, 475.50F,
+			DialogueGui::OPTIONS_WIDTH, DialogueGui::OPTIONS_HEIGHT,
+			text_color_hide);
+	}
+
 }

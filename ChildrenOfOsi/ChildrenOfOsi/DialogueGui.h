@@ -86,6 +86,8 @@ class DialogueGui
   glm::vec3 text_color_default;
   glm::vec3 text_color_selected;
   glm::vec3 text_color_unselectable;
+  glm::vec4 text_color_hide;
+  glm::vec4 text_color_feedback;
 
   void drawGuiText();
 
@@ -109,6 +111,14 @@ class DialogueGui
 
   std::string remove_chars_from_string(string &str, char* charsToRemove);
   std::string replace_str_char(string str, const string& replace, char ch);
+
+  void show_vis_feedback();
+
+  //Sprite *shango_sprite;
+  //Sprite *yemoja_sprite;
+  //Sprite *oya_sprite;
+  //Sprite *ogun_sprite;
+  //Sprite *oshosi_sprite;
 
   //character portrait textures
   Texture* shango_tex;

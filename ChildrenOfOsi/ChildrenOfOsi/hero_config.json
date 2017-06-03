@@ -181,7 +181,7 @@
 					"set_base_dir" : 4,
 					"set_cool_down" : 60,
 					"set_stamina_cost" : 10,
-					"set_pause" : 18,
+					"set_pause" : 3,
 					"set_destroy" : false,
 					"set_Keep" : false,
 					"set_width" : "cur_hero->body[0].getWidth()",
@@ -204,7 +204,7 @@
 					"set_base_dir" : 4,
 					"set_cool_down" : 0,
 					"set_stamina_cost" : 10,
-					"set_pause" : 23,
+					"set_pause" : 8,
 					"set_destroy" : false,
 					"set_Keep" : false,
 					"set_width" : "cur_hero->body[0].getWidth()",
@@ -227,7 +227,7 @@
 					"set_base_dir" : 4,
 					"set_cool_down" : 0,
 					"set_stamina_cost" : 10,
-					"set_pause" : 28,
+					"set_pause" : 13,
 					"set_destroy" : false,
 					"set_Keep" : false,
 					"set_width" : "cur_hero->body[0].getWidth()",
@@ -250,7 +250,7 @@
 					"set_base_dir" : 4,
 					"set_cool_down" : 0,
 					"set_stamina_cost" : 10,
-					"set_pause" : 33,
+					"set_pause" : 18,
 					"set_destroy" : false,
 					"set_Keep" : false,
 					"set_width" : "cur_hero->body[0].getWidth()",
@@ -641,7 +641,7 @@
         "set_base_dir": 4,
         "set_cool_down": 60,
         "set_stamina_cost": 10,
-        "set_pause": 18,
+        "set_pause": 3,
         "set_destroy": false,
         "set_Keep": false,
         "set_width": "cur_hero->body[0].getWidth()",
@@ -676,7 +676,7 @@
         "set_base_dir": 4,
         "set_cool_down": 0,
         "set_stamina_cost": 10,
-        "set_pause": 23,
+        "set_pause": 8,
         "set_destroy": false,
         "set_Keep": false,
         "set_width": "cur_hero->body[0].getWidth()",
@@ -711,7 +711,7 @@
         "set_base_dir": 4,
         "set_cool_down": 0,
         "set_stamina_cost": 10,
-        "set_pause": 28,
+        "set_pause": 13,
         "set_destroy": false,
         "set_Keep": false,
         "set_width": "cur_hero->body[0].getWidth()",
@@ -742,7 +742,7 @@
         },
         "set_name": 24,
         "set_dmg": 7,
-        "set_speed": 15,
+        "set_speed": 18,
         "set_base_dir": 4,
         "set_cool_down": 0,
         "set_stamina_cost": 10,
@@ -758,11 +758,12 @@
       }
     }
 	},
+
 	"Ogun" : {
 		"x" : 74.45,
 		"y" : 100.55,
-		"width" : 160,
-		"hight" : 160,
+		"width" : 180,
+		"hight" : 180,
 		"name" : "Ogun",
 		"hero_id" : 5,
 		"bodyx1" : 50.0,
@@ -807,10 +808,10 @@
 			"atk_left": {"0":"Ogun_Attack_W","1":3},
 			"atk_right": {"0":"Ogun_Attack_E","1":3},
 
-			"death_up": {"0":"Ogun_Death_N","1":24},
-			"death_down": {"0":"Ogun_Death_S","1":24},
-			"death_left": {"0":"Ogun_Death_W","1":24},
-			"death_right": {"0":"Ogun_Death_E","1":24},
+			"death_up": {"0":"Ogun_Death_N","1":21},
+			"death_down": {"0":"Ogun_Death_S","1":21},
+			"death_left": {"0":"Ogun_Death_W","1":21},
+			"death_right": {"0":"Ogun_Death_E","1":21},
 
 			"atk2_up": {"0":"Ogun_Attack_N","1":3},
 			"atk2_down": {"0":"Ogun_Attack_S","1":3},
@@ -863,6 +864,7 @@
 			"set_turn" : false
 		},
 		"attacks": {
+		/*
 			"fireball" : {
 				"1" : {
 					"sprites" : {
@@ -981,7 +983,7 @@
 					"set_can_cancel" : true,
 					"set_turn" : true
 				}
-			}
+			}*/
 		}
 	}
 }

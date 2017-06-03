@@ -931,6 +931,7 @@ int Movement::attack(WorldObj* obj) {
 				if (temp) {
 					if (temp->getParty()->get_hide()) continue;
 				}
+				else { continue; }
 				if (objVec[i]->getType() > WorldObj::TYPE_WORLDOBJ) {
 					LivingObj* liv = CheckClass::isSoldier(objVec[i]); //dont want to hurt anybody but soldiers
 					if (liv) {

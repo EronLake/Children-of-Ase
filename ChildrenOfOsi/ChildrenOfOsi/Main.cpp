@@ -226,10 +226,10 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	gameplay_functions->add_texture("rockTex2", 0, 0, 0);
 	tBuffer->run();
 
-	ObjConfig::textureMap[Containers::texture_table["rockTex1"]] = pair<string, int>("Assets/Sprites/rock_1.png", 1);
-	ObjConfig::textureMap[Containers::texture_table["rockTex2"]] = pair<string, int>("Assets/Sprites/rock_2.png", 1);
-	ObjConfig::standard_con.insert(Containers::texture_table["rockTex1"]);
-	ObjConfig::standard_con.insert(Containers::texture_table["rockTex2"]);
+	//ObjConfig::textureMap[Containers::texture_table["rockTex1"]] = pair<string, int>("Assets/Sprites/rock_1.png", 1);
+	//ObjConfig::textureMap[Containers::texture_table["rockTex2"]] = pair<string, int>("Assets/Sprites/rock_2.png", 1);
+	//ObjConfig::standard_con.insert(Containers::texture_table["rockTex1"]);
+	//ObjConfig::standard_con.insert(Containers::texture_table["rockTex2"]);
 
 	gameplay_functions->add_texture("blank", 0, 0, 0);
 	gameplay_functions->add_texture("border", 0, 0, 0);
@@ -1284,9 +1284,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
         return;
       }
 
-      // gameplay_functions->draw_frame(Alex);
       gameplay_functions->drawTut(Alex);
-      // Tutorial::drawTutorial();
 
       start_tick = clock();
       iController->InputCheck();

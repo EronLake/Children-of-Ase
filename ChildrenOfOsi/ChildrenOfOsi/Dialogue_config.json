@@ -612,19 +612,19 @@
 		  "req_preconds": {
 			  "1": {
 				"general_type": 0,
-				"rel_type": 10,
-				"desired_rel_val": 90
+				"rel_type": 7,
+				"desired_rel_val": 60
 			  },
 			  "2": {
 				"general_type": 0,
 				"rel_type": 6,
-				"desired_rel_val": 50
-			  },
-			  "3": {
+				"desired_rel_val": 55
+			  }
+			  /*"2": {
 				"general_type": 0,
 				"rel_type": 11,
 				"desired_rel_val": 85
-			  }
+			  }*/
 		}
      },
 	 "conversation_point_3" : {
@@ -1385,9 +1385,9 @@
 		  "NotorEstimate": 50,
 		  "StrEstimate": 50
 
-   },
+   }
 
-   "conversation_point_6" : {
+   /*"conversation_point_6" : {
 	      "name" : "Offer Gift",
           "icon" : "acp",
 	      "template" : "Offer Gift",
@@ -1450,7 +1450,7 @@
                 "utility": 5
               }
           }
-    }
+    }*/
   },
 
   "Affinity_Reply_Points": {
@@ -1553,9 +1553,9 @@
 		  "AffEstimate": 50,
 		  "NotorEstimate": 50,
 		  "StrEstimate": 50
-    },
+    }
 
-	"reply_point_6" : {
+	/*"reply_point_6" : {
 	      "name" : "Accept Gift",
           "icon" : "arp",
 	      "template" : "Accept Gift",
@@ -1574,7 +1574,7 @@
 		  "AffEstimate": 50,
 		  "NotorEstimate": 50,
 		  "StrEstimate": 50
-    }
+    }*/
 
    },
 
@@ -2155,7 +2155,7 @@
 		  
    },
 
-   "reply_point_21" : {
+   /*"reply_point_21" : {
 	      "name" : "Take Advice To Send Peace Offering To",
           "icon" : "nrp",
 	      "template" : "Take Advice To Send Peace Offering To",
@@ -2175,7 +2175,7 @@
 		  "NotorEstimate": 50,
 		  "StrEstimate": 50
 		  
-  },
+  },*/
 
   "reply_point_22" : {
 	      "name" : "Congratulate",
