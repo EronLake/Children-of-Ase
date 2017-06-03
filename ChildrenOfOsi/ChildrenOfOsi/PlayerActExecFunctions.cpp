@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "PlayerActExecFunctions.h"
+#include "RegionState.h"
 
 bool did_quest = false;
 PlayerActExecFunctions::PlayerActExecFunctions()
@@ -74,14 +75,22 @@ void PlayerActExecFunctions::execute_start(std::string act_name, Hero* receiver)
 	{
 		//we need to create a fight here if their action is a violent action
 		Fight* fight_obj = new Fight(player->getParty(), receiver->getParty(), 0);
+		//RegionState::in_combat = true;
+		//RegionState::switch_music = true;
 	} else if (act_name == "Duel") {
 		Fight* fight_obj = new Fight(player->getParty(), receiver->getParty(), 1);
+		//RegionState::in_combat = true;
+		//RegionState::switch_music = true;
 	}
 	else if (act_name == "Spar") {
 		Fight* fight_obj = new Fight(player->getParty(), receiver->getParty(), 2);
+		//RegionState::in_combat = true;
+		//RegionState::switch_music = true;
 	}
 	else if (act_name == "Train With") {
 		Fight* fight_obj = new Fight(player->getParty(), receiver->getParty(), 3);
+		//RegionState::in_combat = true;
+		//RegionState::switch_music = true;
 		
 	}
 
@@ -126,14 +135,34 @@ void PlayerActExecFunctions::execute_end(bool if_succ) {
 	//NEEDS TO BE IMPLIMENTED
 	if (act_name == "Duel") {
 		DialogueController::duel_pop_up(cur_action);
+		//RegionState::in_combat = false;
+		RegionState::switch_music = true;
 		LOG("print to the screen something that the person you were fighting would say then finish action");
 	}
 	else if (act_name == "Spar") {
+
 		DialogueController::spar_pop_up(cur_action);
-	} else if (player->get_incapacitated()) {
+		//RegionState::in_combat = false;
+		//RegionState::switch_music = true;
+	} 
+	else if (act_name == "Train With") {
+		//RegionState::in_combat = false;
+		//RegionState::switch_music = true;
+	}
+	else if (act_name == "Conquer") {
+		//RegionState::in_combat = false;
+		//RegionState::switch_music = true;
+	}
+	else if (act_name == "Fight") {
+		//RegionState::in_combat = false;
+		//RegionState::switch_music = true;
+	}
+	
+	else if (player->get_incapacitated()) {
 		player->setLoc(player->getVillage()->get_village_location());
 		player->capacitate(0);
 	}
+	
 
 	///////////////////////////////////////////////////////////////////////////////////
 
@@ -257,6 +286,7 @@ void PlayerActExecFunctions::execute_dialog()
 	{
 		if (act_name == "Duel") {
 			Fight* fight_obj = new Fight(player->getParty(), cur_action->getReceiver()->getParty(), 1);
+
 		}
 		else if (act_name == "Spar") {
 			Fight* fight_obj = new Fight(player->getParty(), cur_action->getReceiver()->getParty(), 2);

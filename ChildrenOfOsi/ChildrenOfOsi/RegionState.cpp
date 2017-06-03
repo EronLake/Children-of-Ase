@@ -15,6 +15,7 @@ std::vector<Region*> make_region_vector()
 
 bool RegionState::switch_music = false;
 bool RegionState::in_village = false;
+bool RegionState::in_combat = false;
 
 Region RegionState::current_region = Region("none", "none", "none",{0,0});
 Region RegionState::next_region = Region("none", "none", "none",{0, 0});
