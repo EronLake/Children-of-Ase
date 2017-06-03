@@ -170,9 +170,9 @@ void DialogueController::PlayerChoose()
 		else
 			set_selectable(false, "Ask_To_Spar", StrengthIcon);
 
-		if(temp_hero->getVillage()->get_alliance() == player->getVillage()->get_alliance())
+		if(temp_hero->getParty() != player->getParty())
 			//set_selectable(true, "Recruit_For_Party", StrengthIcon);
-			set_selectable(false, "Recruit_For_Party", StrengthIcon); // took off join party
+			set_selectable(true, "Recruit_For_Party", StrengthIcon); // took off join party
 		else
 			set_selectable(false, "Recruit_For_Party", StrengthIcon);
 
@@ -898,8 +898,11 @@ void DialogueController::PlayerResponse()
 			dialogue_point diog_pt = {"Confirm Alliance","Confirm Alliance"};
 			std::string reply_pt_sentence = dialogue.gen_dialog(diog_pt, temp_hero);
 			message = check_if_known(reply_pt_sentence, "");
-			if(temp_hero->getVillage()->get_alliance() != player->getVillage()->get_alliance())
-			    PlayerActExecFunctions::execute_start("Form_Alliance", temp_hero);
+			if (temp_hero->getVillage()->get_alliance() != player->getVillage()->get_alliance()) {
+				PlayerActExecFunctions::execute_start("Form_Alliance", temp_hero);
+				PlayerActExecFunctions::execute_end(true);
+
+			}
 		}
 		else if (player_conv_point_choice == "Accept Duel") {
 			dialogue_point diog_pt = { "Confirm Duel","Confirm Duel"};
@@ -1597,7 +1600,7 @@ void DialogueController::otherResponse(std::string info, std::string hero_topic)
 				//temp_hero->setCurrentLeader(player);
 				//temp_hero->setParty(player->getParty());
 				std::string reply_pt_sentence = dialogue.gen_dialog(line, temp_hero);
-
+				message = other->getName() + ": " + reply_pt_sentence + "\n\n";
 				//adds all of the hero's party members to the player's party
 				/*std::vector<Soldier*> heroes_soldiers = temp_hero->getParty()->getMembers();
 				for (int i = 0; i < heroes_soldiers.size(); ++i) {
@@ -1609,6 +1612,7 @@ void DialogueController::otherResponse(std::string info, std::string hero_topic)
 			}
 			else { //they will say no if not part of same alliance as you
 				std::string reply_pt_sentence = dialogue.gen_dialog_negative(line, temp_hero);
+				message = other->getName() + ": " + reply_pt_sentence + "\n\n";
 			}
 			state = 7;
 		}
@@ -2313,7 +2317,7 @@ void DialogueController::startConversation(WorldObj* n, bool playerTalk)
 			else
 				set_selectable(false, "Ask_To_Spar", StrengthIcon);
 
-			if (temp_hero->getVillage()->get_alliance() == player->getVillage()->get_alliance())
+			if (temp_hero->getParty() != player->getParty())
 				set_selectable(true, "Recruit_For_Party", StrengthIcon);
 			else
 				set_selectable(false, "Recruit_For_Party", StrengthIcon);

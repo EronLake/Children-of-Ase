@@ -693,10 +693,14 @@ void StatePost::apply_utility(Hero* curr_hero, Hero* other_hero)
 	
 	if (state_type == ALL)
 	{
-		//curr_hero and other_hero are put in the same alliance
-		Alliance* curr_alliance = curr_hero->getVillage()->get_alliance();
-		Alliance* other_alliance = other_hero->getVillage()->get_alliance();
-		curr_alliance->add_alliance_to_alliance(other_alliance);
+		Alliance* all_1 = curr_hero->getVillage()->get_alliance();
+		Alliance* all_2 = other_hero->getVillage()->get_alliance();
+		if (curr_hero->getVillage()->get_alliance() != other_hero->getVillage()->get_alliance()) {
+			//curr_hero and other_hero are put in the same alliance
+			Alliance* curr_alliance = curr_hero->getVillage()->get_alliance();
+			Alliance* other_alliance = other_hero->getVillage()->get_alliance();
+			curr_alliance->add_alliance_to_alliance(other_alliance);
+		}
 	}
 	else if (state_type == OCC)
 	{

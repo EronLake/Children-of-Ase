@@ -312,7 +312,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 
 	//yemoja->rel[1]->addNotoriety(50);
 	///yemoja->rel[1]->addStrength(50);
-	//yemoja->rel[1]->addAffinity(50);
+	//yemoja->rel[1]->addAffinity(40);
 	//oya->rel[1]->addNotoriety(50);
 	///oya->rel[1]->addStrength(50);
 	//oya->rel[1]->addAffinity(50);
