@@ -896,9 +896,12 @@ void Input::InputCheck()
 
 		}
 		if (DialogueController::getState() > 0) {
-      if(!Tutorial::isStageComplete(Tutorial::Stage::DIALOGUE)) {
-        Tutorial::launchStage(Tutorial::Stage::DIALOGUE, *this, true);
-      }
+      if(!Tutorial::isStageComplete(Tutorial::Stage::DIALOGUE01))
+        Tutorial::launchStage(Tutorial::Stage::DIALOGUE01, *this, true);
+      else if(!Tutorial::isStageComplete(Tutorial::Stage::DIALOGUE02))
+        Tutorial::launchStage(Tutorial::Stage::DIALOGUE02, *this, true);
+      else if(!Tutorial::isStageComplete(Tutorial::Stage::DIALOGUE03))
+        Tutorial::launchStage(Tutorial::Stage::DIALOGUE03, *this, true);
 
 			if (count > 0)
 				--count;
@@ -1280,7 +1283,15 @@ void Input::InputCheck()
       Tutorial::completeStage(*this);
       current_game_state = game_state::in_game;
     }
-    else if(E && Tutorial::isStageActive(Tutorial::Stage::DIALOGUE)) {
+    else if(D && Tutorial::isStageActive(Tutorial::Stage::DIALOGUE01)) {
+      Tutorial::completeStage(*this);
+      current_game_state = game_state::in_game;
+    }
+    else if(S && Tutorial::isStageActive(Tutorial::Stage::DIALOGUE02)) {
+      Tutorial::completeStage(*this);
+      current_game_state = game_state::in_game;
+    }
+    else if(ENTER && Tutorial::isStageActive(Tutorial::Stage::DIALOGUE03)) {
       Tutorial::completeStage(*this);
       current_game_state = game_state::in_game;
     }
