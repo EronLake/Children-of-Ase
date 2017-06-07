@@ -29,8 +29,10 @@ RenderHelper::RenderHelper(QuadTree * QT, RiverObj* _rivObj, std::vector<WorldOb
   gmap = new GameMap();
   TutGui = new Rectangle(Vector2f(cameraSize.xloc / 4, cameraSize.yloc / 8), cameraSize.xloc / 2, cameraSize.yloc / 1.5);
   logo_gui = new Rectangle(Vector2f(0.0F, 0.0F), cameraSize.xloc, cameraSize.yloc);
+  victory_menu = new Rectangle(Vector2f(0.0F, 0.0F), cameraSize.xloc, cameraSize.yloc);
   initTutGui();
   init_logo_gui();
+  init_victory_menu_gui();
   //fullVec = tree->retrieve(fullVec, fullBound);
   //	gmap->loadTexture();
   //	gmap->setSprite();
@@ -54,7 +56,9 @@ void RenderHelper::initCamera(WorldObj * player)
 
 void RenderHelper::initCameraFull(WorldObj * player)
 {
-
+	Texture* victory_menu_tex = new Texture();
+	victory_menu_tex->setFile("Assets/Sprites/Victory_Menu.png", 1);
+	victory_menu->sprite.setTexture(victory_menu_tex);
 }
 
 void RenderHelper::initTutGui()
@@ -69,6 +73,10 @@ void RenderHelper::init_logo_gui()
   Texture* logo_tex = new Texture();
   logo_tex->setFile("Assets/Sprites/Logo_Loading.png", 1);
   logo_gui->sprite.setTexture(logo_tex);
+}
+
+void RenderHelper::init_victory_menu_gui()
+{
 }
 
 int RenderHelper::init_map(WorldObj* obj)
@@ -250,6 +258,13 @@ int RenderHelper::draw_logo(WorldObj * obj)
   logo_gui->drawObj(camera->getX(), camera->getY());
   GameWindow::refresh();
   return 0;
+}
+
+int RenderHelper::draw_victory_menu(WorldObj * obj)
+{
+	victory_menu->drawObj(camera->getX(), camera->getY());
+	GameWindow::refresh();
+	return 0;
 }
 
 

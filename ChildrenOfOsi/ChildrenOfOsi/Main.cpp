@@ -142,16 +142,16 @@ int getFreeVideoMemory()
 }
 */
 
-void test(int i) { for(int i=0;i<100;i++) cout << "hello this is the thread running" << endl; }
+void test(int i) { for (int i = 0; i < 100; i++) cout << "hello this is the thread running" << endl; }
 
 int main() {
 	WorldObj* screen = new WorldObj(Vector2f(0.0, 0.0), 25000U, 25000U);	//init screen
 
 	QuadTree* collideTree = new QuadTree(0, *screen);
 	GameWindow::init();
-  Tutorial::init();
+	Tutorial::init();
 	GAMEPLAY_LOOP(collideTree);
-  Tutorial::destroy();
+	Tutorial::destroy();
 
 	return 0;
 }
@@ -170,7 +170,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	UniformGrid<Line>* grid_line = new UniformGrid<Line>();
 	UniformGrid<WorldObj>* grid_worldobj = new UniformGrid<WorldObj>();
 	grid_line->insert_objs_to_grid(rivObj->getLines());
-	
+
 	vector<WorldObj*> recVec;
 	vector<WorldObj*> movVec;
 	vector<WorldObj*>* largeStruct = new vector<WorldObj*>();
@@ -233,10 +233,10 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 
 	gameplay_functions->add_texture("blank", 0, 0, 0);
 	gameplay_functions->add_texture("border", 0, 0, 0);
-/*
-=======
-	gameplay_functions->add_hero("Shango", 5045, 10465, true);
-*/
+	/*
+	=======
+		gameplay_functions->add_hero("Shango", 5045, 10465, true);
+	*/
 	tBuffer->run();
 
 	ObjConfig::textureMap[Containers::texture_table["blank"]] = pair<string, int>("Assets/Sprites/blank.png", 1);
@@ -262,11 +262,11 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	tBuffer->run();
 
 	// Player* Alex = new Player(SHANGO, Vector2f(6445.0, 10155.0), 150.0, 150.0);	//init player
-	
+
 
 
 	std::vector<Region*> reg = RegionState::regions;
-	
+
 	Region current_region = *RegionState::regions[RegionState::DESERT];
 	Region next_region = *RegionState::regions[RegionState::DESERT];
 
@@ -286,7 +286,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	yemoja->trait_vec["Boast"] = 160;
 	yemoja->song = "Music/HeroThemes/Yemoja.flac";
 	heroes.push_back(yemoja);
-	
+
 
 	yemoja->set_busy(0);//added for testing
 	Hero* oya = Containers::hero_table["Oya"];
@@ -321,7 +321,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	//ogun->rel[1]->addAffinity(50);
 
 	vector<std::set<Texture*>> starting_location;
-	
+
 	ObjConfig::import_config(recVec_ptr, gameplay_functions, tBuffer);
 
 	DialogueConfig::import_config(gameplay_functions, tBuffer);
@@ -329,7 +329,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	TagConfig::import_config(gameplay_functions, tBuffer);
 
 	WorldObj* barrel = new WorldObj(Vector2f(5200, 3900), 75, 75);
-	
+
 	//added so loading the map is optional
 	if (LOAD_MAP) {
 
@@ -458,7 +458,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 		else if (reg[closest] == RegionState::regions[RegionState::MARSH]) {
 			starting_location.push_back(ObjConfig::marsh_con);
 		}
-		reg.erase(reg.begin()+closest);
+		reg.erase(reg.begin() + closest);
 	}
 
 	HGLRC loaderContext0 = wglCreateContext(hdc);
@@ -484,7 +484,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	wglShareLists(mainContext, loaderContext1);
 	std::thread t1([=]() {
 		wglMakeCurrent(hdc, loaderContext1);
-		for (auto itr :starting_location[0]) {
+		for (auto itr : starting_location[0]) {
 			set_file_with_thread(itr, &ObjConfig::textureMap.find(itr)->second);
 		}
 		for (auto it = recVec.begin(); it != recVec.end(); ++it) {
@@ -533,7 +533,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 		}
 		glFinish(); //Forces all gl calls to be completed before execution
 	});
-	
+
 
 
 	vector<Vector2f> vertices;
@@ -565,7 +565,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	ai->graph.vertices = vertices;
 	ai->graph.obstacles = edges;
 	for (Vector2f vert : ai->graph.vertices) {
-		
+
 		std::cout << "X: " << vert.getXloc() << " Y: " << vert.getYloc() << std::endl;
 	}
 	for (auto edge : ai->graph.obstacles) {
@@ -590,84 +590,84 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 			}
 		}
 	}
-/*
+	/*
 
-	yemoja->setName("Yemoja");
-	yemoja->setInteractable(true);
-	yemoja->setPersonality(30, 80, 80, 50, 50, 50, 80);// uncommented this
-	oya->setPersonality(80, 50, 80, 50, 80, 80, 50);// uncommented this
+		yemoja->setName("Yemoja");
+		yemoja->setInteractable(true);
+		yemoja->setPersonality(30, 80, 80, 50, 50, 50, 80);// uncommented this
+		oya->setPersonality(80, 50, 80, 50, 80, 80, 50);// uncommented this
 
-	//staticRec->rel[OYA]->setAffinity(60);// uncommented this
-	//staticRec->rel[OYA]->setNotoriety(40);// uncommented this
-	//staticRec->rel[OYA]->setStrength(80);// uncommented this
+		//staticRec->rel[OYA]->setAffinity(60);// uncommented this
+		//staticRec->rel[OYA]->setNotoriety(40);// uncommented this
+		//staticRec->rel[OYA]->setStrength(80);// uncommented this
 
-	//staticRec->rel[SHANGO]->setAffinity(60);//added this
-	//staticRec->rel[SHANGO]->setNotoriety(40);//added this
-	//staticRec->rel[SHANGO]->setStrength(80);//added this
+		//staticRec->rel[SHANGO]->setAffinity(60);//added this
+		//staticRec->rel[SHANGO]->setNotoriety(40);//added this
+		//staticRec->rel[SHANGO]->setStrength(80);//added this
 
-	//staticRec->rel[OYA]->setAffEstimate(60);// uncommented this
-	//staticRec->rel[OYA]->setNotorEstimate(70);// uncommented this
-	//staticRec->rel[OYA]->setStrEstimate(40);// uncommented this
+		//staticRec->rel[OYA]->setAffEstimate(60);// uncommented this
+		//staticRec->rel[OYA]->setNotorEstimate(70);// uncommented this
+		//staticRec->rel[OYA]->setStrEstimate(40);// uncommented this
 
-	//staticRec->rel[SHANGO]->setAffEstimate(60);//added this
-	//staticRec->rel[SHANGO]->setNotorEstimate(70);//added this
-	//staticRec->rel[SHANGO]->setStrEstimate(40);//added this
+		//staticRec->rel[SHANGO]->setAffEstimate(60);//added this
+		//staticRec->rel[SHANGO]->setNotorEstimate(70);//added this
+		//staticRec->rel[SHANGO]->setStrEstimate(40);//added this
 
 
-	//*oya = *staticRec;
-	//oya->setSpeed(5);
-	oya->setName("Oya");
-	oya->name = OYA;
-	oya->offsetBody(0, 60, 60, 75, 50);
-	yemoja->offsetBody(0, 60, 60, 75, 50);
+		//*oya = *staticRec;
+		//oya->setSpeed(5);
+		oya->setName("Oya");
+		oya->name = OYA;
+		oya->offsetBody(0, 60, 60, 75, 50);
+		yemoja->offsetBody(0, 60, 60, 75, 50);
 
-	// SET UP RELATIONSHIP REFERENCE FOR YEMOJA 
-	std::unordered_map<int, Relationship*> yemojaRelRef;
-	yemojaRelRef[1] = new Relationship();
-	yemojaRelRef[2] = new Relationship();
-	yemojaRelRef[3] = new Relationship();
+		// SET UP RELATIONSHIP REFERENCE FOR YEMOJA
+		std::unordered_map<int, Relationship*> yemojaRelRef;
+		yemojaRelRef[1] = new Relationship();
+		yemojaRelRef[2] = new Relationship();
+		yemojaRelRef[3] = new Relationship();
 
-	std::unordered_map<int, Relationship*> OyaRelRef;
-	OyaRelRef[1] = new Relationship();
-	OyaRelRef[2] = new Relationship();
-	OyaRelRef[3] = new Relationship();
+		std::unordered_map<int, Relationship*> OyaRelRef;
+		OyaRelRef[1] = new Relationship();
+		OyaRelRef[2] = new Relationship();
+		OyaRelRef[3] = new Relationship();
 
-	std::unordered_map<int, Relationship*> shangoRel;
-	shangoRel[1] = new Relationship();
-	shangoRel[2] = new Relationship();
-	shangoRel[3] = new Relationship();
+		std::unordered_map<int, Relationship*> shangoRel;
+		shangoRel[1] = new Relationship();
+		shangoRel[2] = new Relationship();
+		shangoRel[3] = new Relationship();
 
-	Alex->rel = shangoRel;
+		Alex->rel = shangoRel;
 
-	yemoja->rel = yemojaRelRef;
-	oya->rel = OyaRelRef;
+		yemoja->rel = yemojaRelRef;
+		oya->rel = OyaRelRef;
 
-	ActionConfig::import_config(gameplay_functions, tBuffer, yemoja);
-	ActionConfig::import_config(gameplay_functions, tBuffer, oya);
+		ActionConfig::import_config(gameplay_functions, tBuffer, yemoja);
+		ActionConfig::import_config(gameplay_functions, tBuffer, oya);
 
-	Planner* YemojaPlanner = new Planner(yemoja);
-	Planner* OyaPlanner = new Planner(oya);
-	AIController::set_plan(YEMOJA, YemojaPlanner);
-	AIController::set_plan(OYA, OyaPlanner);
-	
-	Action* test_ally = new Action(nullptr, nullptr, nullptr, 10, 1, "Create Alliance", "execute_train");
-	Action* test_train = new Action(yemoja, oya, nullptr, 10, 1, "Conquer", "execute_conquer");
+		Planner* YemojaPlanner = new Planner(yemoja);
+		Planner* OyaPlanner = new Planner(oya);
+		AIController::set_plan(YEMOJA, YemojaPlanner);
+		AIController::set_plan(OYA, OyaPlanner);
 
-	RelPrecon* prec = new RelPrecon(Preconditions::AFF, 60);
-	RelPost* post = new RelPost(Postcondition::STR, 10);
-	RelPrecon* prec1 = new RelPrecon(Preconditions::AFF, 30);
-	RelPost* post1 = new RelPost(Postcondition::STR, 15);
-	RelPost* post2 = new RelPost(Postcondition::AFF, 15);
-	
-	
-	test_ally->req_preconds.push_back(std::make_shared<RelPrecon>(*prec));
-	test_ally->doer_succ_postconds.push_back(std::make_shared<RelPost>(*post));
-	
-	test_train->req_preconds.push_back(std::make_shared<RelPrecon>(*prec1));
-	test_train->doer_succ_postconds.push_back(std::make_shared<RelPost>(*post1));
-	test_train->doer_succ_postconds.push_back(std::make_shared<RelPost>(*post2));
-*/
-	
+		Action* test_ally = new Action(nullptr, nullptr, nullptr, 10, 1, "Create Alliance", "execute_train");
+		Action* test_train = new Action(yemoja, oya, nullptr, 10, 1, "Conquer", "execute_conquer");
+
+		RelPrecon* prec = new RelPrecon(Preconditions::AFF, 60);
+		RelPost* post = new RelPost(Postcondition::STR, 10);
+		RelPrecon* prec1 = new RelPrecon(Preconditions::AFF, 30);
+		RelPost* post1 = new RelPost(Postcondition::STR, 15);
+		RelPost* post2 = new RelPost(Postcondition::AFF, 15);
+
+
+		test_ally->req_preconds.push_back(std::make_shared<RelPrecon>(*prec));
+		test_ally->doer_succ_postconds.push_back(std::make_shared<RelPost>(*post));
+
+		test_train->req_preconds.push_back(std::make_shared<RelPrecon>(*prec1));
+		test_train->doer_succ_postconds.push_back(std::make_shared<RelPost>(*post1));
+		test_train->doer_succ_postconds.push_back(std::make_shared<RelPost>(*post2));
+	*/
+
 	///////////////////////////////////////////////////////////////////////////////////////////
 	///////////////////////////////////////////////////////////////////////////////////////////
 	//////////////////                                                 ////////////////////////
@@ -675,9 +675,9 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	//////////////////                                                 ////////////////////////
 	///////////////////////////////////////////////////////////////////////////////////////////
 	///////////////////////////////////////////////////////////////////////////////////////////
-	
+
 	// THIS IS BEING RESET IN THE GAME LOOP. planner->get_current_action returns nullptr*/
-	
+
 	/*
 	AIController::generate_end_state(YEMOJA, OYA);
 	AIController::init_plans();
@@ -757,11 +757,11 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 		}
 	});*/
 
-/*
-	t0.join();
+	/*
+		t0.join();
 
-*/
-  Tutorial::launchStage(Tutorial::Stage::GAME_START, *iController, true);
+	*/
+	Tutorial::launchStage(Tutorial::Stage::GAME_START, *iController, true);
 	current_game_state = game_state::main_menu;
 
 	//insert all of the immovable objects into the quad tree
@@ -807,7 +807,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 				_CrtDumpMemoryLeaks();
 				return;
 			}
-			
+
 			start_tick = clock();
 			iController->InputCheck();
 			tBuffer->run();
@@ -821,15 +821,15 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 			}
 			HUD::FPS = fps;
 			//cout << "FPS: " << fps << endl;
-
+			//current_game_state = game_state::victory_menu;
 			current_game_state = iController->current_game_state;
 			//if(t0.joinable)t0.join();
 
-      gameplay_functions->drawTut(Alex);
-      Tutorial::drawTutorial();
+			gameplay_functions->drawTut(Alex);
+			Tutorial::drawTutorial();
 		}
 		while (current_game_state == game_state::in_game) {
-      cout << "Current game state: in_game" << endl;
+			cout << "Current game state: in_game" << endl;
 			if (iController->current_game_state != game_state::in_game) {
 				iController->current_game_state = current_game_state;
 			}
@@ -850,7 +850,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 			if (Alex->ori > 100) {
 				Alex->ori = 100;
 			}
-			if (frame_count - ori_counter >= 60 * 60 * .5) 
+			if (frame_count - ori_counter >= 60 * 60 * .5)
 			{
 				Alex->ori--;
 				ori_counter = frame_count;
@@ -865,15 +865,15 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 			}
 
 
-      if(!Tutorial::isAnyStageActive()) {
-        if(!Tutorial::isStageComplete(Tutorial::Stage::INTRO01))
-          Tutorial::launchStage(Tutorial::Stage::INTRO01, *iController, true);
-        else if(!Tutorial::isStageComplete(Tutorial::Stage::INTRO02))
-          Tutorial::launchStage(Tutorial::Stage::INTRO02, *iController, true);
-      }
-	  
+			if (!Tutorial::isAnyStageActive()) {
+				if (!Tutorial::isStageComplete(Tutorial::Stage::INTRO01))
+					Tutorial::launchStage(Tutorial::Stage::INTRO01, *iController, true);
+				else if (!Tutorial::isStageComplete(Tutorial::Stage::INTRO02))
+					Tutorial::launchStage(Tutorial::Stage::INTRO02, *iController, true);
+			}
+
 			//IGNORE THIS CODE, ITS HORRIBLE
-			/*if (Alex->getX() > 13544 && Alex->getX() < 16742) { 
+			/*if (Alex->getX() > 13544 && Alex->getX() < 16742) {
 				if (RegionState::current_region == *RegionState::regions[RegionState::JUNGLE] || RegionState::current_region == *RegionState::regions[RegionState::MOUNTAIN]) {
 					if (Alex->getY() < 14779 && Alex->getY() > 13303) {
 						if (RegionState::current_region == *RegionState::regions[RegionState::JUNGLE]) {//JUNGLE MOUNTAIN
@@ -907,9 +907,9 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 					}
 				}
 			}*/
-				
-			
-			
+
+
+
 
 			if (Alex->getY() > 10496 && Alex->getY() < 10785) {
 				if (RegionState::current_region == *RegionState::regions[RegionState::DESERT] || RegionState::current_region == *RegionState::regions[RegionState::MOUNTAIN]) {
@@ -941,18 +941,18 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 						}
 
 					}
-					else if ((Alex->getX() > 15241 || Alex->getX() < 14473)&&(dm&&md)) {
+					else if ((Alex->getX() > 15241 || Alex->getX() < 14473) && (dm&&md)) {
 
 						can_switch = true;
 					}
 				}
 			}
 
-			
-			
-			
 
-			if (Alex->getY() > 13081&& Alex->getY() < 13308) {
+
+
+
+			if (Alex->getY() > 13081 && Alex->getY() < 13308) {
 				if (RegionState::current_region == *RegionState::regions[RegionState::JUNGLE] || RegionState::current_region == *RegionState::regions[RegionState::DESERT]) {
 					if (Alex->getX() > 13838 && Alex->getX() < 14456) {
 						if (RegionState::current_region == *RegionState::regions[RegionState::DESERT])
@@ -980,14 +980,14 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 							}
 
 					}
-					else if ((Alex->getX() > 14456 || Alex->getX() < 13838)&&(jd&&dj)) {
+					else if ((Alex->getX() > 14456 || Alex->getX() < 13838) && (jd&&dj)) {
 
 						can_switch = true;
 					}
 				}
 			}
-			
-			
+
+
 			if (!(RegionState::current_region == RegionState::next_region)) {
 				RegionState::switch_music = true;
 			}
@@ -1031,11 +1031,11 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 			}
 
 			Alex->updateCD();
-			
-				Alex->effect.sprite.animate();
-				Alex->WorldObj::animateObj();
-			
-			
+
+			Alex->effect.sprite.animate();
+			Alex->WorldObj::animateObj();
+
+
 			if (MAP_EDITOR) {
 				for (int i = 0; i < recVec.size(); i++) {
 					if (recVec[i]->getType() != WorldObj::TYPE_WORLDOBJ) {
@@ -1101,7 +1101,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 					talk_vec.push_back(dynamic_cast<NPC*>(recVec[i]));
 				}
 			}
-			
+
 			//check if close enough to talk (needs to be moved to helper func)
 			//----------------------------------------------
 			//checks if the hero is in combat
@@ -1150,7 +1150,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 				}
 			}
 			//----------------------------------------------
-			
+
 
 			state = DialogueController::getState();
 
@@ -1221,16 +1221,16 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 			//setting give as quest to false so that the excute runs
 			//YemojaPlanner->give_as_quest = false;
 
-      //			cout << " first dest is " << staticRec->get_action_destination()->getXloc() << ", " << staticRec->get_action_destination()->getYloc() << endl;
-			
+	  //			cout << " first dest is " << staticRec->get_action_destination()->getXloc() << ", " << staticRec->get_action_destination()->getYloc() << endl;
+
 			//doesn't call execute if in dialog
 			if (state <= 0)
 			{
 				AIController::execute();
 			}
-//			cout << "after execute dest is " << staticRec->get_action_destination()->getXloc() << ", " << staticRec->get_action_destination()->getYloc() << endl;
-      //AI.join();
-//			cout << "after thread join dest is " << staticRec->get_action_destination()->getXloc() << ", " << staticRec->get_action_destination()->getYloc() << endl;
+			//			cout << "after execute dest is " << staticRec->get_action_destination()->getXloc() << ", " << staticRec->get_action_destination()->getYloc() << endl;
+				  //AI.join();
+			//			cout << "after thread join dest is " << staticRec->get_action_destination()->getXloc() << ", " << staticRec->get_action_destination()->getYloc() << endl;
 
 			if ((1000 / fs) > (clock() - start_tick)) { //delta_ticks)
 				Sleep((1000 / fs) - (clock() - start_tick));
@@ -1249,63 +1249,63 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 
 			GameState::check_if_end_game(&current_game_state);
 
-      Tutorial::drawTutorial();
+			Tutorial::drawTutorial();
 		}
 		while (current_game_state == game_state::pause_menu) {
 			if (iController->current_game_state != game_state::pause_menu) {
 				iController->current_game_state = current_game_state;
 			}
 
-      if(shouldExit > 0) {
-        _CrtDumpMemoryLeaks();
-        return;
-      }
+			if (shouldExit > 0) {
+				_CrtDumpMemoryLeaks();
+				return;
+			}
 
-      start_tick = clock();
-      iController->InputCheck();
-      tBuffer->run();
+			start_tick = clock();
+			iController->InputCheck();
+			tBuffer->run();
 
-      if((1000 / fs) > (clock() - start_tick))
-        Sleep((1000 / fs) - (clock() - start_tick));
-      delta_ticks = clock() - start_tick; //the time, in ms, that took to render the scene
-      if(delta_ticks > 0)
-        fps = CLOCKS_PER_SEC / delta_ticks;
-      HUD::FPS = fps;
-      HUD::AVG = total_fps / frame_count;
+			if ((1000 / fs) > (clock() - start_tick))
+				Sleep((1000 / fs) - (clock() - start_tick));
+			delta_ticks = clock() - start_tick; //the time, in ms, that took to render the scene
+			if (delta_ticks > 0)
+				fps = CLOCKS_PER_SEC / delta_ticks;
+			HUD::FPS = fps;
+			HUD::AVG = total_fps / frame_count;
 
-      current_game_state = iController->current_game_state;
-      gameplay_functions->drawTut(Alex);
-      Tutorial::drawTutorial();
-    }
-    while(current_game_state == game_state::tutorial_pause) {
-      cout << "Current game state: tutorial_pause" << endl;
-      if(iController->current_game_state != game_state::tutorial_pause) {
-        iController->current_game_state = current_game_state;
-      }
+			current_game_state = iController->current_game_state;
+			gameplay_functions->drawTut(Alex);
+			Tutorial::drawTutorial();
+		}
+		while (current_game_state == game_state::tutorial_pause) {
+			cout << "Current game state: tutorial_pause" << endl;
+			if (iController->current_game_state != game_state::tutorial_pause) {
+				iController->current_game_state = current_game_state;
+			}
 
-      if(shouldExit > 0) {
-        _CrtDumpMemoryLeaks();
-        return;
-      }
+			if (shouldExit > 0) {
+				_CrtDumpMemoryLeaks();
+				return;
+			}
 
-      gameplay_functions->drawTut(Alex);
+			gameplay_functions->drawTut(Alex);
 
-      start_tick = clock();
-      iController->InputCheck();
-      tBuffer->run();
+			start_tick = clock();
+			iController->InputCheck();
+			tBuffer->run();
 
-      if((1000 / fs) > (clock() - start_tick))
-        Sleep((1000 / fs) - (clock() - start_tick));
-      delta_ticks = clock() - start_tick; //the time, in ms, that took to render the scene
-      if(delta_ticks > 0)
-        fps = CLOCKS_PER_SEC / delta_ticks;
-      HUD::FPS = fps;
-      HUD::AVG = total_fps / frame_count;
+			if ((1000 / fs) > (clock() - start_tick))
+				Sleep((1000 / fs) - (clock() - start_tick));
+			delta_ticks = clock() - start_tick; //the time, in ms, that took to render the scene
+			if (delta_ticks > 0)
+				fps = CLOCKS_PER_SEC / delta_ticks;
+			HUD::FPS = fps;
+			HUD::AVG = total_fps / frame_count;
 
-      current_game_state = iController->current_game_state;
-    }
+			current_game_state = iController->current_game_state;
+		}
 		while (current_game_state == game_state::victory_menu) {
-
+			cout << "in victory menu" << endl;
 			if (iController->current_game_state != game_state::victory_menu) {
 				iController->current_game_state = current_game_state;
 			}
@@ -1319,17 +1319,17 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 			start_tick = clock();
 
 			//draw
-			gameplay_functions->drawTut(Alex);
-			Tutorial::drawTutorial();
+			gameplay_functions->draw_victory_menu(Alex);
+			//Tutorial::drawTutorial();
 
 			//run task buffer
 			if (victory_counter <= 0) {
 				iController->InputCheck();
 			}
-			
+
 
 			tBuffer->run();
-			
+
 			if (game_ended) {
 				break;
 			}
