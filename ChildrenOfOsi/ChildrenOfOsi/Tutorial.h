@@ -15,7 +15,9 @@ struct Tutorial
     GAME_START,
     INTRO01,
     INTRO02,
-    DIALOGUE,
+    DIALOGUE01,
+    DIALOGUE02,
+    DIALOGUE03,
     COMBAT,
     NONE
   };
@@ -55,10 +57,20 @@ struct Tutorial
   static constexpr float INTRO02_POPUP_WIDTH = 960.0F;
   static constexpr float INTRO02_POPUP_HEIGHT = 540.0F;
 
-  static constexpr float DIALOGUE_POPUP_X = 0.0F;
-  static constexpr float DIALOGUE_POPUP_Y = 0.0F;
-  static constexpr float DIALOGUE_POPUP_WIDTH = 960.0F;
-  static constexpr float DIALOGUE_POPUP_HEIGHT = 540.0F;
+  static constexpr float DIALOGUE01_POPUP_X = 0.0F;
+  static constexpr float DIALOGUE01_POPUP_Y = 0.0F;
+  static constexpr float DIALOGUE01_POPUP_WIDTH = 960.0F;
+  static constexpr float DIALOGUE01_POPUP_HEIGHT = 540.0F;
+
+  static constexpr float DIALOGUE02_POPUP_X = 0.0F;
+  static constexpr float DIALOGUE02_POPUP_Y = 0.0F;
+  static constexpr float DIALOGUE02_POPUP_WIDTH = 960.0F;
+  static constexpr float DIALOGUE02_POPUP_HEIGHT = 540.0F;
+  
+  static constexpr float DIALOGUE03_POPUP_X = 0.0F;
+  static constexpr float DIALOGUE03_POPUP_Y = 0.0F;
+  static constexpr float DIALOGUE03_POPUP_WIDTH = 960.0F;
+  static constexpr float DIALOGUE03_POPUP_HEIGHT = 540.0F;
 
   static Stage currentStage;
   static bool isPaused;
@@ -66,21 +78,27 @@ struct Tutorial
   static bool completedStageGameStart;
   static bool completedStageIntro01;
   static bool completedStageIntro02;
-  static bool completedStageDialogue;
+  static bool completedStageDialogue01;
+  static bool completedStageDialogue02;
+  static bool completedStageDialogue03;
   static bool completedStageCombat;
 
   static Sprite *screenFadeFilterSprite;
   static Sprite *stageGameStartPopupSprite;
   static Sprite *stageIntro01PopupSprite;
   static Sprite *stageIntro02PopupSprite;
-  static Sprite *stageDialoguePopupSprite;
+  static Sprite *stageDialogue01PopupSprite;
+  static Sprite *stageDialogue02PopupSprite;
+  static Sprite *stageDialogue03PopupSprite;
   static Sprite *stageCombatPopupSprite;
   
   static Texture *screenFaceFilterTex;
   static Texture *stageGameStartPopupTex;
   static Texture *stageIntro01PopupTex;
   static Texture *stageIntro02PopupTex;
-  static Texture *stageDialoguePopupTex;
+  static Texture *stageDialogue01PopupTex;
+  static Texture *stageDialogue02PopupTex;
+  static Texture *stageDialogue03PopupTex;
   static Texture *stageCombatPopupTex;
 
   Tutorial() = delete;

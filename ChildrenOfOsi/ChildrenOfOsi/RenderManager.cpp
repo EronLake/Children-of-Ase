@@ -30,6 +30,7 @@ RenderManager::RenderManager(MessageLog * _mLog, TaskBuffer * _tBuffer, QuadTree
 	task_map["Dialogue"] = &RenderHelper::drawDiaGui;
 	task_map["Tut"] = &RenderHelper::drawTut;
 	task_map["Logo"] = &RenderHelper::draw_logo;
+	task_map["Victory_Menu"] = &RenderHelper::draw_victory_menu;
 	task_map["HUD"] = &RenderHelper::drawHUD;
 	task_map["Melee"] = &RenderHelper::sprite_atk;
 	task_map["Spin"] = &RenderHelper::sprite_spin_atk;

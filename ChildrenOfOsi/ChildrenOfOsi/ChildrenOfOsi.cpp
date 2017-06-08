@@ -174,6 +174,11 @@ void ChildrenOfOsi::draw_talk(WorldObj * obj)
 	createTask("Draw_Talk", "DRAW", obj);
 }
 
+void ChildrenOfOsi::draw_victory_menu(WorldObj * obj)
+{
+	createTask("Victory_Menu", "Draw", obj);
+}
+
 ///////////////////////////////////////////////////
 ///////////////////////////////////////////////////
 

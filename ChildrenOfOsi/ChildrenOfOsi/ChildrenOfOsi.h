@@ -48,6 +48,7 @@ public:
 	void drawTut(WorldObj* obj);
 	void draw_logo(WorldObj* obj);
 	void draw_talk(WorldObj* obj);
+	void draw_victory_menu(WorldObj* obj);
 
 	//functions for creating objects in memory
 	void add_hero(std::string key, float x, float y, bool col);
