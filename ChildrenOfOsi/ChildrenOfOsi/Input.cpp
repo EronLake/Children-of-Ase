@@ -973,6 +973,9 @@ void Input::InputCheck()
 						//gameplay_functions->change_song("Change", RegionState::current_region.getRTheme(), RegionState::current_region.getRTheme());
 						RegionState::in_village = false;
 						DialogueController::first_q_press = true;
+						DialogueController::feedback_timer = 0;
+						DialogueController::feedback_timer_2 = 0;
+
 						DialogueController::exitDialogue();
 					}
 				//}

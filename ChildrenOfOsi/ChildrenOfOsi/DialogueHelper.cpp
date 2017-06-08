@@ -387,8 +387,8 @@ std::vector<dialogue_point> DialogueHelper::get_possible_reply_pts(std::string p
 		reply.push_back({ "Insult In Response", "Insult In Response","","","1","0" });
 	}
 	if (point.find("_Quest") != string::npos) {
-		reply.push_back({ "Accept_Quest", "Accept_Quest","","","1","0" });
 		reply.push_back({ "Decline_Quest", "Decline_Quest","","","1","0" });
+		reply.push_back({ "Accept_Quest", "Accept_Quest","","","1","0" });
 	}
 	
 	return reply;

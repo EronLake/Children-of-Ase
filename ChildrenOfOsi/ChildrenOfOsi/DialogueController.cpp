@@ -156,7 +156,10 @@ void DialogueController::PlayerChoose()
 	}
 	DialogueController::feedback_timer = 100;
 	//DialogueController::feedback_timer_2 = 0;
-	vis_feedback.first = react_positively;
+	if (curr_conversation_log.size() > 0) {
+		if (curr_conversation_log[curr_conversation_log.size() - 1]->get_conv_point()->get_name().find("In Response") != string::npos)
+			vis_feedback.first = react_positively;
+	}
 
 	options = dialogue.get_possible_conv_pts();
 	if (temp_hero) {
@@ -514,6 +517,8 @@ void DialogueController::PlayerConversationPoint()
 				accepted_action = false;
 			if(player->can_spin && temp_hero->name == OYA)//case where player already learned Oya's move
 				accepted_action = false;
+			if (player->can_shield && temp_hero->name == OGUN)//case where player already learned Ogun's move
+				accepted_action = false;
 		}
 		state = 5;
 	}
@@ -765,6 +770,16 @@ void DialogueController::PlayerResponse()
 
 		feedback_timer = 0;
 		feedback_timer_2 = 100;
+
+		vis_feedback.second = choice[ConvPointName];
+		if (choice[ConvPointName].find("In Response") == string::npos) {
+			if (DialogueController::scroll_control == 0)
+				accepted_action = false;
+			else
+				accepted_action = true;
+
+			vis_feedback.first = accepted_action;
+		}
 
 		/*quest dialog code that was done by Justin and Alessio. Is placeholder
 		and will be removed at some point.*/
@@ -1437,9 +1452,15 @@ void DialogueController::otherResponse(std::string info, std::string hero_topic)
 		else if (replyString == "Take Advice To Ally With") {
 			//calls action start if the question is asked at all
 			//PlayerActExecFunctions::execute_start("Spar", temp_hero);
-
-			//check if I want to accept
-			if (accepted_action) {
+			//checks if this hero is already allies with the hero that the player is suggesting an alliance with
+			if (Containers::hero_table[curr_hero_topic]->getVillage()->get_alliance() == temp_hero->getVillage()->get_alliance()) {
+				dialogue_point diog_pt = { "Already Allies","Already Allies","",curr_hero_topic,"1" };
+				std::string reply_pt_sentence = dialogue.gen_dialog(diog_pt, temp_hero);
+				replace_all(reply_pt_sentence, "HERO", curr_hero_topic);
+				message = check_if_known(reply_pt_sentence, "");
+			}
+				//check if I want to accept
+			else if (accepted_action) {
 				dialogue_point diog_pt = { "Take Advice To Ally With","Take Advice To Ally With","",curr_hero_topic,"1" };
 				std::string reply_pt_sentence = dialogue.gen_dialog(diog_pt, temp_hero);
 				replace_all(reply_pt_sentence, "HERO", curr_hero_topic);
@@ -1472,7 +1493,7 @@ void DialogueController::otherResponse(std::string info, std::string hero_topic)
 			else {
 				/////////////need to be changed to correct calls/dialog if not accepted///////////////////
 				dialogue_point diog_pt;
-				if((temp_hero->name == YEMOJA && player->can_fire) || (temp_hero->name == OYA && player->can_spin))
+				if((temp_hero->name == YEMOJA && player->can_fire) || (temp_hero->name == OYA && player->can_spin) || (temp_hero->name == OGUN && player->can_shield))
 					diog_pt = { "Already Taught","Already Taught","",curr_hero_topic,"1" };
 				else
 				    diog_pt = { "Teach","Teach","",curr_hero_topic,"1" };
@@ -1632,7 +1653,7 @@ void DialogueController::otherResponse(std::string info, std::string hero_topic)
 				//temp_hero->setCurrentLeader(player);
 				//temp_hero->setParty(player->getParty());
 				std::string reply_pt_sentence = dialogue.gen_dialog(line, temp_hero);
-				message = other->getName() + ": " + reply_pt_sentence + "\n\n";
+				message = check_if_known(reply_pt_sentence, "");
 				//adds all of the hero's party members to the player's party
 				/*std::vector<Soldier*> heroes_soldiers = temp_hero->getParty()->getMembers();
 				for (int i = 0; i < heroes_soldiers.size(); ++i) {
@@ -1644,7 +1665,7 @@ void DialogueController::otherResponse(std::string info, std::string hero_topic)
 			}
 			else { //they will say no if not part of same alliance as you
 				std::string reply_pt_sentence = dialogue.gen_dialog_negative(line, temp_hero);
-				message = other->getName() + ": " + reply_pt_sentence + "\n\n";
+				message = check_if_known(reply_pt_sentence, "");
 			}
 			state = 7;
 		}
@@ -1803,7 +1824,13 @@ void DialogueController::otherResponse(std::string info, std::string hero_topic)
 		}
 		else if (replyString == "Take Advice To Ally With") {
 			//choose different dialog if they denied the action
-			if (accepted_action) {
+			if (Containers::hero_table[curr_hero_topic]->getVillage()->get_alliance() == temp_hero->getVillage()->get_alliance()) {
+				dialogue_point diog_pt = { "Already Allies","Already Allies","",curr_hero_topic,"1" };
+				std::string reply_pt_sentence = dialogue.gen_dialog(diog_pt, temp_hero);
+				replace_all(reply_pt_sentence, "HERO", curr_hero_topic);
+				message = check_if_known(reply_pt_sentence, "");
+			}
+			else if (accepted_action) {
 				dialogue_point diog_pt = { "Confirm Ally","Confirm Ally","",curr_hero_topic,"1" };
 				std::string reply_pt_sentence = dialogue.gen_dialog(diog_pt, player);
 				message = player->getName() + ": " + reply_pt_sentence + "\n\n";
@@ -1849,7 +1876,11 @@ void DialogueController::otherResponse(std::string info, std::string hero_topic)
 				else if (temp_hero->name == OYA) {//if Oya is doing the teaching
 					diog_pt = { "Teach Spin","Teach Spin","",curr_hero_topic,"1" };
 					player->can_spin = true;//enable player to do spin slash
-				}	
+				}
+				else {//if Ogun is doing the teaching
+					diog_pt = { "Teach Shield","Teach Shield","",curr_hero_topic,"1" };
+					player->can_shield = true;//enable player to do flame shield
+				}
 				std::string reply_pt_sentence = dialogue.gen_dialog(diog_pt, temp_hero);
 				replace_all(reply_pt_sentence, "HERO", curr_hero_topic);
 				message = check_if_known(reply_pt_sentence, "");
@@ -3171,6 +3202,20 @@ void DialogueController::load_teach_dialog()
 			dpoint = { "Teach Spin 3","Teach Spin 3" };
 			break;
 		}
+	}
+	else {//Ogun case
+		switch (teach_move_counter) {
+		case 1:
+			dpoint = { "Teach Shield 1","Teach Shield 1" };
+			break;
+		case 2:
+			dpoint = { "Teach Shield 2","Teach Shield 2" };
+			break;
+		case 3:
+			dpoint = { "Teach Shield 3","Teach Shield 3" };
+			break;
+		}
+
 	}
 	std::string conversation_pt_sentence = dialogue.gen_dialog(dpoint,npc);
 	message = check_if_known(conversation_pt_sentence, "");
