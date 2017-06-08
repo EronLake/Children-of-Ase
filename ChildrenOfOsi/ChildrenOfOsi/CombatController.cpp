@@ -39,7 +39,6 @@ void CombatController::fight(Soldier* sold1, int state) {
 			if (dist_by_center(sold1, sold2) < (sold1->body[0].getWidth() / 2 + sold1->melee->getHeight())) {
 				sold1->destination = Vector2f(0, 0);
 				sold1->waypoint = Vector2f(0, 0);
-				sold1->face(sold2);
 				bool attacked = false;
 				for (auto it = sold1->attackTypes.begin(); it != sold1->attackTypes.end();++it) {
 					if ((*it)->getCanCancel()) {
@@ -62,7 +61,6 @@ void CombatController::fight(Soldier* sold1, int state) {
 				}
 			}
 			else {
-				sold1->face(sold2);
 				for (auto it = sold1->attackTypes.begin(); it != sold1->attackTypes.end(); ++it) {
 					if (!(*it)->getCanCancel()) {
 						if (sold1->getCool((*it)->get_name())) {
@@ -119,6 +117,7 @@ void CombatController::follow(Soldier* sold1, int state) {
 	}
 	//std::lock_guard<std::mutex> guard(mux);
 	move_to_target(sold1,state);
+	sold1->face(sold2);
 }
 
 void CombatController::find_closest_enemy(Soldier* sold1, int state) {
@@ -179,13 +178,13 @@ void CombatController::update_soldier(Soldier* sold1, int state) {
 	}
 	else {
 		///check if the soldier is supposed to hold position and if they are more than 500 away from the point
-		if ((sold1->getHold()) && (dist_soldier_to_location(sold1, sold1->getParty()->get_defend()) > sold1->getParty()->get_def_rad())) {
+		/*if ((sold1->getHold()) && (dist_soldier_to_location(sold1, sold1->getParty()->get_defend()) > sold1->getParty()->get_def_rad())) {
 			sold1->destination = sold1->getParty()->get_defend();
 			sold1->waypoint = sold1->getParty()->get_defend();
 		//	std::lock_guard<std::mutex> guard(mux);
 			move_to_target(sold1, state);
 		}
-		else {
+		else {*/
 			///check if the soldier is in combat and not 1000 away from the leader
 			//cout << dist_by_center(sold1, sold1->getCurrentLeader()) << endl;
 			if ((sold1->getInCombat()) && (dist_by_center(sold1, sold1->getCurrentLeader()) < 600)) {
@@ -217,7 +216,7 @@ void CombatController::update_soldier(Soldier* sold1, int state) {
 			else {
 				follow(sold1, state);
 			}
-		}
+	//	}
 	}
 }
 
