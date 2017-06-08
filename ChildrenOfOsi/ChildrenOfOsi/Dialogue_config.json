@@ -625,7 +625,60 @@
 				"rel_type": 11,
 				"desired_rel_val": 85
 			  }*/
-		}
+		},
+		"doer_succ_postconds": {
+      "1": {
+        "general_type": 0,
+        "rel_type": 6,
+        "utility": 5
+      },
+      "2": {
+        "general_type": 0,
+        "rel_type": 7,
+        "utility": 5
+      }
+    },
+    "doer_fail_postconds": {
+      "1": {
+        "general_type": 0,
+        "rel_type": 10,
+        "utility": 1
+      }
+    },
+    "receiver_succ_postconds": {
+      "1": {
+        "general_type": 0,
+        "rel_type": 6,
+        "utility": 10
+      },
+      "2": {
+        "general_type": 0,
+        "rel_type": 7,
+        "utility": 5
+      },
+      "3": {
+        "general_type": 0,
+        "rel_type": 8,
+        "utility": 5
+      }
+    },
+    "receiver_fail_postconds": {
+      "1": {
+        "general_type": 0,
+        "rel_type": 6,
+        "utility": 1
+      },
+      "2": {
+        "general_type": 0,
+        "rel_type": 10,
+        "utility": 1
+      },
+      "3": {
+        "general_type": 0,
+        "rel_type": 11,
+        "utility": 1
+      }
+    }
      },
 	 "conversation_point_3" : {
 	      "name" : "Recruit_For_Party",

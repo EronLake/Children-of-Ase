@@ -36,6 +36,8 @@ DialogueGui::DialogueGui()
   text_color_unselectable = glm::vec3(50,50,50);
   text_color_hide = glm::vec4(0, 0, 0, 0);
   text_color_feedback = glm::vec4(0, 50, 0, 1);
+  text_color_neg = glm::vec4(0, 50, 50, 1);
+  feed_col;
   DialogueController::scroll_control = 0;
 }
 
@@ -276,12 +278,16 @@ void DialogueGui::drawGuiText()
           DialogueGui::OPTIONS_WIDTH, DialogueGui::OPTIONS_HEIGHT,
           (DialogueController::getSelect() == i) ? this->text_color_selected : avail_color);
 
-		show_vis_feedback();
+		
       }
 	  GameWindow::createText("Press 'Q' to Quit",
-		  450.50F, 475.50F,
+		  400.50F, 475.50F,
 		  DialogueGui::OPTIONS_WIDTH, DialogueGui::OPTIONS_HEIGHT,
 		  text_color_default);
+	  if (DialogueController::show_advice_feedback)
+		  advise_feedback();
+	  else
+	      show_vis_feedback_2();
 	  
       break;
     case 2:
@@ -328,12 +334,16 @@ void DialogueGui::drawGuiText()
         DialogueGui::OPTIONS_X, DialogueGui::OPTIONS_Y + (DialogueGui::LINE_SPACING * 1),
         DialogueGui::OPTIONS_WIDTH, DialogueGui::OPTIONS_HEIGHT,
         text_color_selected);
+
+	  show_vis_feedback();
       break;
     case 9:
       GameWindow::createText("Exit",
         DialogueGui::OPTIONS_X, DialogueGui::OPTIONS_Y + (DialogueGui::LINE_SPACING * 1),
         DialogueGui::OPTIONS_WIDTH, DialogueGui::OPTIONS_HEIGHT,
         text_color_selected);
+
+
       break;
     case 10:
       GameWindow::createText("Next",
@@ -416,63 +426,76 @@ void DialogueGui::show_vis_feedback() {
 	std::string aff = "";
 	std::string notoriety = "";
 	std::string strength = "";
+
 	if (p_conv_pt.first) {
 		vector<std::shared_ptr<Postcondition>> tmp_succ_post;
+		std::string cpoint = p_conv_pt.second;
+		auto it_2 = Containers::conv_point_table.find(p_conv_pt.second);
 		p_conv_pt.second.append("_1");//append Shango
 		auto it = Containers::action_table.find(p_conv_pt.second);
-		if (it != Containers::action_table.end())
-		    tmp_succ_post = Containers::action_table[p_conv_pt.second]->doer_succ_postconds;
+		if (it != Containers::action_table.end())	
+			tmp_succ_post = Containers::action_table[p_conv_pt.second]->doer_succ_postconds;
+		else if(it_2 != Containers::conv_point_table.end())
+			tmp_succ_post = Containers::conv_point_table[cpoint]->doer_succ_postconds;
 		for (int i = 0; i < tmp_succ_post.size(); ++i) {
 			int type = tmp_succ_post[i]->get_rel_type();
 			//Postcondition* pos = tmp_succ_post[i].get();
 			float util = tmp_succ_post[i]->get_utility(DialogueController::player, DialogueController::player);
-			if (type == 7) {//affinity
-				if ((util * -1) > 0)
-					aff = "- Affinity";
-				else
-					aff = "+ Affinity";
+			if (type == 6) {//strength
+				strength = "+ Strength";
 			}
-			else if (type == 6) {//strength
-			    if ((util * -1) > 0)
-			        strength = "- Strength";
-			    else
-			        strength = "+ Strength";
+		    else if (type == 7) {//affinity
+				aff = "+ Affinity";
 			}
 			else if (type == 8) {//notoriety
-			    if ((util * -1) > 0)
-				    notoriety = "- Notoriety";
-				else
-			        notoriety = "+ Notoriety";
+				notoriety = "+ Notoriety";
+			}
+
+			else if (type == 9) {//strength
+				strength = "- Strength";
+			}
+
+			else if (type == 10) {//affinity
+								  //if ((util * -1) > 0)
+				aff = "- Affinity";
+			}
+
+			else if (type == 11) {//notoriety
+				notoriety = "- Notoriety";
 			}
 		}
 	}
 	else {
 		vector<std::shared_ptr<Postcondition>> tmp_fail_post;
+		std::string cpoint = p_conv_pt.second;
+		auto it_2 = Containers::conv_point_table.find(p_conv_pt.second);
 		p_conv_pt.second.append("_1");//append Shango
 		auto it = Containers::action_table.find(p_conv_pt.second);
 		if (it != Containers::action_table.end())
 			tmp_fail_post = Containers::action_table[p_conv_pt.second]->doer_fail_postconds;
+		else if (it_2 != Containers::conv_point_table.end())
+			tmp_fail_post = Containers::conv_point_table[cpoint]->doer_fail_postconds;
 		for (int i = 0; i < tmp_fail_post.size(); ++i) {
 			int type = tmp_fail_post[i]->get_rel_type();
 			//Postcondition* pos = tmp_fail_post[i].get();
 			float util = tmp_fail_post[i]->get_utility(DialogueController::player, DialogueController::player);
-			if (type == 7) {//affinity
-					aff = "+ Affinity";
+			if (type == 6) {//strength
+				strength = "+ Strength";
 			}
-			else if (type == 6) {//strength
-					strength = "+ Strength";
+		    else if (type == 7) {//affinity
+					aff = "+ Affinity";
 			}
 			else if (type == 8) {//notoriety
 					notoriety = "+ Notoriety";
 			}
 
 			else if (type == 9) {//strength
-					notoriety = "- Notoriety";
+					strength = "- Strength";
 			}
 
 			else if (type == 10) {//affinity
-				if ((util * -1) > 0)
-					notoriety = "- Notoriety";
+				//if ((util * -1) > 0)
+					aff = "- Affinity";
 			}
 
 			else if (type == 11) {//notoriety
@@ -482,20 +505,226 @@ void DialogueGui::show_vis_feedback() {
 
 	}
 	if (DialogueController::feedback_timer > 0) {
+		if(aff.find('+') != string::npos)
+			feed_col = glm::vec4(0, 50, 0, 1);
+		else 
+			feed_col = glm::vec4(0, 50, 50, 1);
 		GameWindow::createText(aff,
-			510.50F, 425.50F,
+			530.50F, 425.50F,
 			DialogueGui::OPTIONS_WIDTH, DialogueGui::OPTIONS_HEIGHT,
-			text_color_feedback);
+			feed_col);
 
+		if (notoriety.find('+') != string::npos)
+			feed_col = glm::vec4(0, 50, 0, 1);
+		else
+			feed_col = glm::vec4(0, 50, 50, 1);
 		GameWindow::createText(notoriety,
-			510.50F, 450.50F,
+			530.50F, 450.50F,
 			DialogueGui::OPTIONS_WIDTH, DialogueGui::OPTIONS_HEIGHT,
-			text_color_feedback);
+			feed_col);
 
+		if (strength.find('+') != string::npos)
+			feed_col = glm::vec4(0, 50, 0, 1);
+		else
+			feed_col = glm::vec4(0, 50, 50, 1);
 		GameWindow::createText(strength,
-			510.50F, 475.50F,
+			530.50F, 475.50F,
 			DialogueGui::OPTIONS_WIDTH, DialogueGui::OPTIONS_HEIGHT,
-			text_color_feedback);
+			feed_col);
+			--DialogueController::feedback_timer;
+	}
+	else {
+		GameWindow::createText("",
+			450.50F, 475.50F,
+			DialogueGui::OPTIONS_WIDTH, DialogueGui::OPTIONS_HEIGHT,
+			text_color_hide);
+
+		GameWindow::createText("",
+			450.50F, 475.50F,
+			DialogueGui::OPTIONS_WIDTH, DialogueGui::OPTIONS_HEIGHT,
+			text_color_hide);
+
+		GameWindow::createText("",
+			450.50F, 475.50F,
+			DialogueGui::OPTIONS_WIDTH, DialogueGui::OPTIONS_HEIGHT,
+			text_color_hide);
+	}
+}
+
+/*displays visual feedback*/
+void DialogueGui::show_vis_feedback_2() {
+	std::pair<bool, std::string> p_conv_pt = DialogueController::vis_feedback;
+	std::string aff = "";
+	std::string notoriety = "";
+	std::string strength = "";
+
+	if (p_conv_pt.first) {
+		vector<std::shared_ptr<Postcondition>> tmp_succ_post;
+		std::string cpoint = p_conv_pt.second;
+		auto it_2 = Containers::conv_point_table.find(p_conv_pt.second);
+		p_conv_pt.second.append("_1");//append Shango
+		auto it = Containers::action_table.find(p_conv_pt.second);
+		if (it != Containers::action_table.end())
+			tmp_succ_post = Containers::action_table[p_conv_pt.second]->doer_succ_postconds;
+		else if (it_2 != Containers::conv_point_table.end())
+			tmp_succ_post = Containers::conv_point_table[cpoint]->doer_succ_postconds;
+		for (int i = 0; i < tmp_succ_post.size(); ++i) {
+			int type = tmp_succ_post[i]->get_rel_type();
+			//Postcondition* pos = tmp_succ_post[i].get();
+			float util = tmp_succ_post[i]->get_utility(DialogueController::player, DialogueController::player);
+			if (type == 6) {//strength
+				strength = "+ Strength";
+			}
+			else if (type == 7) {//affinity
+				aff = "+ Affinity";
+			}
+			else if (type == 8) {//notoriety
+				notoriety = "+ Notoriety";
+			}
+
+			else if (type == 9) {//strength
+				strength = "- Strength";
+			}
+
+			else if (type == 10) {//affinity
+								  //if ((util * -1) > 0)
+				aff = "- Affinity";
+			}
+
+			else if (type == 11) {//notoriety
+				notoriety = "- Notoriety";
+			}
+		}
+	}
+	else {
+		vector<std::shared_ptr<Postcondition>> tmp_fail_post;
+		std::string cpoint = p_conv_pt.second;
+		auto it_2 = Containers::conv_point_table.find(p_conv_pt.second);
+		p_conv_pt.second.append("_1");//append Shango
+		auto it = Containers::action_table.find(p_conv_pt.second);
+		if (it != Containers::action_table.end())
+			tmp_fail_post = Containers::action_table[p_conv_pt.second]->doer_fail_postconds;
+		else if (it_2 != Containers::conv_point_table.end())
+			tmp_fail_post = Containers::conv_point_table[cpoint]->doer_fail_postconds;
+		for (int i = 0; i < tmp_fail_post.size(); ++i) {
+			int type = tmp_fail_post[i]->get_rel_type();
+			//Postcondition* pos = tmp_fail_post[i].get();
+			float util = tmp_fail_post[i]->get_utility(DialogueController::player, DialogueController::player);
+			if (type == 6) {//strength
+				strength = "+ Strength";
+			}
+			else if (type == 7) {//affinity
+				aff = "+ Affinity";
+			}
+			else if (type == 8) {//notoriety
+				notoriety = "+ Notoriety";
+			}
+
+			else if (type == 9) {//strength
+				strength = "- Strength";
+			}
+
+			else if (type == 10) {//affinity
+								  //if ((util * -1) > 0)
+				aff = "- Affinity";
+			}
+
+			else if (type == 11) {//notoriety
+				notoriety = "- Notoriety";
+			}
+		}
+
+	}
+	if (DialogueController::feedback_timer_2 > 0) {
+		if (aff.find('+') != string::npos)
+			feed_col = glm::vec4(0, 50, 0, 1);
+		else
+			feed_col = glm::vec4(0, 50, 50, 1);
+		GameWindow::createText(aff,
+			530.50F, 425.50F,
+			DialogueGui::OPTIONS_WIDTH, DialogueGui::OPTIONS_HEIGHT,
+			feed_col);
+
+		if (notoriety.find('+') != string::npos)
+			feed_col = glm::vec4(0, 50, 0, 1);
+		else
+			feed_col = glm::vec4(0, 50, 50, 1);
+		GameWindow::createText(notoriety,
+			530.50F, 450.50F,
+			DialogueGui::OPTIONS_WIDTH, DialogueGui::OPTIONS_HEIGHT,
+			feed_col);
+
+		if (strength.find('+') != string::npos)
+			feed_col = glm::vec4(0, 50, 0, 1);
+		else
+			feed_col = glm::vec4(0, 50, 50, 1);
+		GameWindow::createText(strength,
+			530.50F, 475.50F,
+			DialogueGui::OPTIONS_WIDTH, DialogueGui::OPTIONS_HEIGHT,
+			feed_col);
+		--DialogueController::feedback_timer_2;
+	}
+	else {
+		GameWindow::createText("",
+			450.50F, 475.50F,
+			DialogueGui::OPTIONS_WIDTH, DialogueGui::OPTIONS_HEIGHT,
+			text_color_hide);
+
+		GameWindow::createText("",
+			450.50F, 475.50F,
+			DialogueGui::OPTIONS_WIDTH, DialogueGui::OPTIONS_HEIGHT,
+			text_color_hide);
+
+		GameWindow::createText("",
+			450.50F, 475.50F,
+			DialogueGui::OPTIONS_WIDTH, DialogueGui::OPTIONS_HEIGHT,
+			text_color_hide);
+	}
+}
+
+void DialogueGui::advise_feedback() {
+	std::string aff = "";
+	std::string notoriety = "";
+	std::string strength = "";
+	//if failed advice
+	if (DialogueController::show_advice_feedback == 1) {
+		aff = "";
+		notoriety = "- Notoriety";
+		strength = "";
+	}
+	//if success advice
+	if (DialogueController::show_advice_feedback == 2) {
+		aff = "+ Affinity";
+		notoriety = "+ Notoriety";
+		strength = "+ Strength";
+	}
+	if (DialogueController::feedback_timer > 0 && DialogueController::getState() == 1) {
+		if (aff.find('+') != string::npos)
+			feed_col = glm::vec4(0, 50, 0, 1);
+		else
+			feed_col = glm::vec4(0, 50, 50, 1);
+		GameWindow::createText(aff,
+			530.50F, 425.50F,
+			DialogueGui::OPTIONS_WIDTH, DialogueGui::OPTIONS_HEIGHT,
+			feed_col);
+
+		if (notoriety.find('+') != string::npos)
+			feed_col = glm::vec4(0, 50, 0, 1);
+		else
+			feed_col = glm::vec4(0, 50, 50, 1);
+		GameWindow::createText(notoriety,
+			530.50F, 450.50F,
+			DialogueGui::OPTIONS_WIDTH, DialogueGui::OPTIONS_HEIGHT,
+			feed_col);
+
+		if (strength.find('+') != string::npos)
+			feed_col = glm::vec4(0, 50, 0, 1);
+		else
+			feed_col = glm::vec4(0, 50, 50, 1);
+		GameWindow::createText(strength,
+			530.50F, 475.50F,
+			DialogueGui::OPTIONS_WIDTH, DialogueGui::OPTIONS_HEIGHT,
+			feed_col);
 
 		--DialogueController::feedback_timer;
 	}
@@ -514,6 +743,8 @@ void DialogueGui::show_vis_feedback() {
 			450.50F, 475.50F,
 			DialogueGui::OPTIONS_WIDTH, DialogueGui::OPTIONS_HEIGHT,
 			text_color_hide);
+
+		DialogueController::show_advice_feedback = 0;
 	}
 
 }

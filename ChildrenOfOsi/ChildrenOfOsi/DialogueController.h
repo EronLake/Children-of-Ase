@@ -135,6 +135,10 @@ public:
 	static bool talked_to_babalawo_m;
 
 	static int feedback_timer;
+	static int feedback_timer_2;
+	static int feedback_timer_3;
+
+	static int show_advice_feedback;
 
 };
 

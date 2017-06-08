@@ -236,6 +236,20 @@ dialogue_point DialogueHelper::choose_conv_pt(std::vector<ConversationLogObj*> c
 
 		}
 	}
+
+	//remove "form alliance" conversation point from NPC's possible replies if they are already allied with the player 
+	for (int i = 0; i < possible_replies.size(); ++i) {
+		if (possible_replies[i].second->get_name() == "Ask_To_Form_Alliance")
+			possible_replies.erase(possible_replies.begin() + i);
+	}
+	//remove duel as reply if prereqs not met
+	for (int i = 0; i < possible_replies.size(); ++i) {
+		if (!(other->rel[player->name]->getAffinity() <= 30 && other->rel[player->name]->getStrength() <= 60)) {
+			if (possible_replies[i].second->get_name() == "Ask_To_Duel")
+				possible_replies.erase(possible_replies.begin() + i);
+		}
+	}
+
 	//relationship filtering
 	
 	//choose based on personality

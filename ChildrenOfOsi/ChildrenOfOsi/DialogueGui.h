@@ -88,6 +88,8 @@ class DialogueGui
   glm::vec3 text_color_unselectable;
   glm::vec4 text_color_hide;
   glm::vec4 text_color_feedback;
+  glm::vec4 text_color_neg;
+  glm::vec4 feed_col;
 
   void drawGuiText();
 
@@ -113,7 +115,8 @@ class DialogueGui
   std::string replace_str_char(string str, const string& replace, char ch);
 
   void show_vis_feedback();
-
+  void show_vis_feedback_2();
+  void advise_feedback();
   //Sprite *shango_sprite;
   //Sprite *yemoja_sprite;
   //Sprite *oya_sprite;
