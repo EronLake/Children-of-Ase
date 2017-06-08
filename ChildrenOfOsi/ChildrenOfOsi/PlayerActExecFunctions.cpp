@@ -166,7 +166,7 @@ void PlayerActExecFunctions::execute_end(bool if_succ) {
 		cur_action->getReceiver()->set_busy(0);
 	}
 	
-	else if (player->get_incapacitated()) {
+	if (player->get_incapacitated()) {
 		player->setLoc(player->getVillage()->get_village_location());
 		player->capacitate(0);
 	}

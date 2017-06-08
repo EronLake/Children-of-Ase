@@ -111,6 +111,12 @@ void Soldier::newAttack(int i, Attack* a)
 		  if (bd == 6)y -= (attackTypes[it]->getSpeed()*attackTypes[it]->getDuration() / 2);
 		  break;
   }
+  if (i==Attack::SHIELD) {
+	  x = this->getX();
+	  y = this->getY();
+	  w = this->getWidth();
+	  h = this->getHeight();
+  }
   p->setX(x);
   p->setY(y);
   p->setCollision(true);

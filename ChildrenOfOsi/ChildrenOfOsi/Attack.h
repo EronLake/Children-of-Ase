@@ -19,6 +19,7 @@ class Attack: public WorldObj
   static constexpr int MELEE = 0;
   static constexpr int FIREBALL = 1;
   static constexpr int SPIN = 2;
+  static constexpr int SHIELD = 3;
 
 
   Attack();

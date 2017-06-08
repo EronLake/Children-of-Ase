@@ -596,7 +596,7 @@ void Input::InputCheck()
 	short J = GetKeyState('J') >> 15; // Base attack
 	short K = GetKeyState('K') >> 15; // Projectile
 	short L = GetKeyState('L') >> 15; // Spin attack
-	short SEMI = GetKeyState(';') >> 15; // Fire
+	short SEMI = GetKeyState(186) >> 15; // Fire
 	short ENTER = GetKeyState(VK_RETURN) >> 15;
 	short SHIFT = GetKeyState(VK_LSHIFT) >> 15;
 	short ESC = GetKeyState(VK_ESCAPE) >> 15;
@@ -790,6 +790,15 @@ void Input::InputCheck()
 							//t->resetCD(2);
 							gameplay_functions->special(t, Attack::SPIN);
 							gameplay_functions->spin(t);
+						}
+					}
+				}
+				else if (SEMI) {
+					if (t) {
+						if (t->getCool(Attack::SHIELD)) {
+							//////std:://cout << "Pressed Shift+R" << std::endl;
+							gameplay_functions->special(t, Attack::SHIELD);
+							gameplay_functions->fire(t);
 						}
 					}
 				}
