@@ -51,6 +51,9 @@ struct GameWindow
   static const GLFWmonitor * const getPrimaryMonitor() { return GameWindow::primaryMonitor; }
   static const GLFWwindow * const getWindow() { return GameWindow::window; }
 
+  static bool isFullscreen() { return GameWindow::primaryMonitor != nullptr; }
+  static bool toggleFullscreen();
+
   static void drawSprite(float, float, float, float, Sprite);
   static void createText(std::string t, float xCord, float yCord, float w, float h, glm::ivec3 c) { text.push_back(TextObj(t, xCord, yCord, w, h, c)); };
   static void RenderText(std::string& text, GLfloat x, GLfloat y, GLfloat w, GLfloat h, GLfloat scale, glm::vec3 color);
@@ -83,6 +86,7 @@ struct GameWindow
   static GLuint fontShaderProgramId;
 
   static int numObjects;
+  static bool fullscreen;
 
   GameWindow() = delete;
   GameWindow(const GameWindow&) = delete;
