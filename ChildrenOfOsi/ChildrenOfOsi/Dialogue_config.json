@@ -760,8 +760,8 @@
     "receiver_succ_postconds": {
 		"1": {
 			"general_type": 0,
-				"rel_type" : 10,
-				"utility" : 1
+				"rel_type" : 7,
+				"utility" : 5
 		},
 		"2" : {
 			"general_type": 0,

@@ -439,9 +439,9 @@ void DialogueGui::show_vis_feedback() {
 		p_conv_pt.second.append("_1");//append Shango
 		auto it = Containers::action_table.find(p_conv_pt.second);
 	    if (it_2 != Containers::conv_point_table.end())
-		    tmp_succ_post = Containers::conv_point_table[cpoint]->doer_succ_postconds;
+		    tmp_succ_post = Containers::conv_point_table[cpoint]->receiver_succ_postconds;
 		else if (it != Containers::action_table.end())	
-			tmp_succ_post = Containers::action_table[p_conv_pt.second]->doer_succ_postconds;
+			tmp_succ_post = Containers::action_table[p_conv_pt.second]->receiver_succ_postconds;
 		
 		for (int i = 0; i < tmp_succ_post.size(); ++i) {
 			int type = tmp_succ_post[i]->get_rel_type();
@@ -478,9 +478,9 @@ void DialogueGui::show_vis_feedback() {
 		p_conv_pt.second.append("_1");//append Shango
 		auto it = Containers::action_table.find(p_conv_pt.second);
 		if (it_2 != Containers::conv_point_table.end())
-		    tmp_fail_post = Containers::conv_point_table[cpoint]->doer_fail_postconds;
+		    tmp_fail_post = Containers::conv_point_table[cpoint]->receiver_fail_postconds;
 		else if (it != Containers::action_table.end())
-			tmp_fail_post = Containers::action_table[p_conv_pt.second]->doer_fail_postconds;
+			tmp_fail_post = Containers::action_table[p_conv_pt.second]->receiver_fail_postconds;
 
 		for (int i = 0; i < tmp_fail_post.size(); ++i) {
 			int type = tmp_fail_post[i]->get_rel_type();
@@ -572,9 +572,9 @@ void DialogueGui::show_vis_feedback_2() {
 		p_conv_pt.second.append("_1");//append Shango
 		auto it = Containers::action_table.find(p_conv_pt.second);
 	    if (it_2 != Containers::conv_point_table.end())
-		    tmp_succ_post = Containers::conv_point_table[cpoint]->doer_succ_postconds;
+		    tmp_succ_post = Containers::conv_point_table[cpoint]->receiver_succ_postconds;
 		else if (it != Containers::action_table.end())
-			tmp_succ_post = Containers::action_table[p_conv_pt.second]->doer_succ_postconds;
+			tmp_succ_post = Containers::action_table[p_conv_pt.second]->receiver_succ_postconds;
 		
 		for (int i = 0; i < tmp_succ_post.size(); ++i) {
 			int type = tmp_succ_post[i]->get_rel_type();
@@ -611,9 +611,9 @@ void DialogueGui::show_vis_feedback_2() {
 		p_conv_pt.second.append("_1");//append Shango
 		auto it = Containers::action_table.find(p_conv_pt.second);
 		if (it_2 != Containers::conv_point_table.end())
-			tmp_fail_post = Containers::conv_point_table[cpoint]->doer_fail_postconds;
+			tmp_fail_post = Containers::conv_point_table[cpoint]->receiver_fail_postconds;
 		else if (it != Containers::action_table.end())
-			tmp_fail_post = Containers::action_table[p_conv_pt.second]->doer_fail_postconds;
+			tmp_fail_post = Containers::action_table[p_conv_pt.second]->receiver_fail_postconds;
 		for (int i = 0; i < tmp_fail_post.size(); ++i) {
 			int type = tmp_fail_post[i]->get_rel_type();
 			//Postcondition* pos = tmp_fail_post[i].get();
