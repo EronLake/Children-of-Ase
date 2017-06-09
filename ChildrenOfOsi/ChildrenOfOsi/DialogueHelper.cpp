@@ -236,6 +236,20 @@ dialogue_point DialogueHelper::choose_conv_pt(std::vector<ConversationLogObj*> c
 
 		}
 	}
+
+	//remove "form alliance" conversation point from NPC's possible replies if they are already allied with the player 
+	for (int i = 0; i < possible_replies.size(); ++i) {
+		if (possible_replies[i].second->get_name() == "Ask_To_Form_Alliance")
+			possible_replies.erase(possible_replies.begin() + i);
+	}
+	//remove duel as reply if prereqs not met
+	for (int i = 0; i < possible_replies.size(); ++i) {
+		if (!(other->rel[player->name]->getAffinity() <= 30 && other->rel[player->name]->getStrength() <= 60)) {
+			if (possible_replies[i].second->get_name() == "Ask_To_Duel")
+				possible_replies.erase(possible_replies.begin() + i);
+		}
+	}
+
 	//relationship filtering
 	
 	//choose based on personality
@@ -347,12 +361,12 @@ std::vector<std::vector<dialogue_point>>& DialogueHelper::get_possible_conv_pts_
 	return possible_conv_pts;
 }
 
-/**/
+/*gets player's possible replies to hero's conversation points*/
 std::vector<dialogue_point> DialogueHelper::get_possible_reply_pts(std::string point, int opts_inx)
 {
 	std::vector<dialogue_point> reply;
 	//reply.push_back({"Decline_To_Answer","Decline_To_Answer","","","1"});
-	if (point != "Boast" && point != "Insult" && point != "Intimidate" && point != "Compliment" && point != "Offer Praise") {
+	if (point != "Boast" && point != "Insult" && point != "Intimidate" && point != "Compliment" && point != "Offer Praise" && point != "Grovel") {
 		if(point.find("_Quest") == string::npos && point.find("Name") == string::npos && point.find("Ask About") == string::npos)
 		    reply.push_back({ "Refuse","Refuse","","","1","0" });
 		for (int i = 0; i < possible_reply_pts[opts_inx].size(); i++) {
@@ -373,8 +387,8 @@ std::vector<dialogue_point> DialogueHelper::get_possible_reply_pts(std::string p
 		reply.push_back({ "Insult In Response", "Insult In Response","","","1","0" });
 	}
 	if (point.find("_Quest") != string::npos) {
-		reply.push_back({ "Accept_Quest", "Accept_Quest","","","1","0" });
 		reply.push_back({ "Decline_Quest", "Decline_Quest","","","1","0" });
+		reply.push_back({ "Accept_Quest", "Accept_Quest","","","1","0" });
 	}
 	
 	return reply;

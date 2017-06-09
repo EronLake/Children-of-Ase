@@ -121,6 +121,9 @@ Action* DialogueController::hero_act_toward_player = nullptr;
 std::pair<bool, std::string> DialogueController::vis_feedback;
 
 int DialogueController::feedback_timer = 100;
+int DialogueController::feedback_timer_2 = 100;
+int DialogueController::feedback_timer_3 = 100;
+int DialogueController::show_advice_feedback = 0;
 
 
 DialogueController::DialogueController()
@@ -152,27 +155,38 @@ void DialogueController::PlayerChoose()
 		unselectable_to_bottom();
 	}
 	DialogueController::feedback_timer = 100;
-	vis_feedback.first = react_positively;
+	//DialogueController::feedback_timer_2 = 0;
+	if (curr_conversation_log.size() > 0) {
+		if (curr_conversation_log[curr_conversation_log.size() - 1]->get_conv_point()->get_name().find("In Response") != string::npos)
+			vis_feedback.first = react_positively;
+	}
+
 	options = dialogue.get_possible_conv_pts();
 	if (temp_hero) {
-		remove_dialog_option("Ask_To_Duel",NotorietyIcon);
-		remove_dialog_option("Ask_To_Spar", StrengthIcon);
-		add_dialog_option("Ask_To_Duel",NotorietyIcon);
-		add_dialog_option("Ask_To_Spar",StrengthIcon);
+		if (temp_hero->getVillage()->get_alliance() == player->getVillage()->get_alliance())
+			remove_dialog_option("Ask_To_Form_Alliance", NotorietyIcon);
 
-		if(temp_hero->rel[player->name]->getAffinity() <= 30 && temp_hero->rel[player->name]->getStrength() <= 60)
-		    set_selectable(true, "Ask_To_Duel",NotorietyIcon);
+		if (temp_hero->getParty() == player->getParty())
+			remove_dialog_option("Recruit_For_Party", StrengthIcon);
+
+
+		remove_dialog_option("Ask_To_Duel", NotorietyIcon);
+		remove_dialog_option("Ask_To_Spar", StrengthIcon);
+		add_dialog_option("Ask_To_Duel", NotorietyIcon);
+		add_dialog_option("Ask_To_Spar", StrengthIcon);
+
+		if (temp_hero->rel[player->name]->getAffinity() <= 30 && temp_hero->rel[player->name]->getStrength() <= 60)
+			set_selectable(true, "Ask_To_Duel", NotorietyIcon);
 		else
 			set_selectable(false, "Ask_To_Duel", NotorietyIcon);
 
-		if(temp_hero->rel[player->name]->getStrength() >= 50 && temp_hero->rel[player->name]->getAffinity() >= 60 && temp_hero->rel[player->name]->getNotoriety() >= 65)
+		if (temp_hero->rel[player->name]->getStrength() >= 55 && temp_hero->rel[player->name]->getAffinity() >= 60)
 			set_selectable(true, "Ask_To_Spar", StrengthIcon);
 		else
 			set_selectable(false, "Ask_To_Spar", StrengthIcon);
 
-		if(temp_hero->getParty() != player->getParty())
-			//set_selectable(true, "Recruit_For_Party", StrengthIcon);
-			set_selectable(true, "Recruit_For_Party", StrengthIcon); // took off join party
+		if (temp_hero->getParty() != player->getParty())
+			set_selectable(true, "Recruit_For_Party", StrengthIcon);
 		else
 			set_selectable(false, "Recruit_For_Party", StrengthIcon);
 
@@ -182,15 +196,20 @@ void DialogueController::PlayerChoose()
 		else
 			set_selectable(false, "Request_Teaching", StrengthIcon);
 
-		if (temp_hero->rel[player->name]->getAffinity() >= 85 && temp_hero->getVillage()->get_alliance() != 
-																	player->getVillage()->get_alliance())
-			set_selectable(true, "Ask_To_Form_Alliance", AffinityIcon);
+		if (temp_hero->rel[player->name]->getAffinity() >= 85)
+			set_selectable(true, "Ask_To_Form_Alliance", NotorietyIcon);
 		else
-			set_selectable(false, "Ask_To_Form_Alliance", AffinityIcon);
+			set_selectable(false, "Ask_To_Form_Alliance", NotorietyIcon);
 
 		unselectable_to_bottom();
 		options = dialogue.get_possible_conv_pts();
 
+
+
+		player->filter_move_to(temp_hero);
+		unselectable_to_bottom();
+
+		options = dialogue.get_possible_conv_pts();
 
 	}
 
@@ -360,6 +379,9 @@ void DialogueController::PlayerConversationPoint()
 	options = dialogue.get_possible_conv_pts();
 	dialogue_point choice;
 
+	DialogueController::feedback_timer = 100;
+	DialogueController::feedback_timer_2 = 0;
+
 	/*prevents the player's selection of the "Next" option from being stored
 	in the log for the current conversation. Uses the fact that we know
 	that the player's conversation point choice will not be empty if
@@ -494,6 +516,8 @@ void DialogueController::PlayerConversationPoint()
 			if (player->can_fire && temp_hero->name == YEMOJA)//case where player already learned Yemoja's move
 				accepted_action = false;
 			if(player->can_spin && temp_hero->name == OYA)//case where player already learned Oya's move
+				accepted_action = false;
+			if (player->can_shield && temp_hero->name == OGUN)//case where player already learned Ogun's move
 				accepted_action = false;
 		}
 		state = 5;
@@ -740,8 +764,22 @@ the current conversation, creates a sentence that the player will say based
 on their reply option selection.*/
 void DialogueController::PlayerResponse()
 {
+	
 	if (state != 6) {
 		dialogue_point choice = replyOptions[select + DialogueController::scroll_control];
+
+		feedback_timer = 0;
+		feedback_timer_2 = 100;
+
+		vis_feedback.second = choice[ConvPointName];
+		if (choice[ConvPointName].find("In Response") == string::npos) {
+			if (DialogueController::scroll_control == 0)
+				accepted_action = false;
+			else
+				accepted_action = true;
+
+			vis_feedback.first = accepted_action;
+		}
 
 		/*quest dialog code that was done by Justin and Alessio. Is placeholder
 		and will be removed at some point.*/
@@ -796,6 +834,8 @@ void DialogueController::PlayerResponse()
 
 			if (act_name == "Offer Praise")
 				act_name = "Grovel";
+
+			DialogueController::react_positively = true;
 
 		
 			for (auto precond : Containers::conv_point_table[act_name]->req_preconds) {
@@ -955,7 +995,12 @@ void DialogueController::otherConversationPoint(dialogue_point line)
 	    
 	replyString = point[ConvPointName];
 
-	std::string reply_pt_sentence = dialogue.gen_dialog(line, temp_hero);
+	std::string reply_pt_sentence = message;
+	if(accepted_action)
+	    reply_pt_sentence = dialogue.gen_dialog(line, temp_hero);
+	else
+        reply_pt_sentence = dialogue.gen_dialog_negative(line, temp_hero);
+
 	std::string con_pt_sentence = dialogue.gen_dialog(point, temp_hero);
 
 	/*Stores the npc's conversation and reply points as entries in the
@@ -1248,7 +1293,7 @@ void DialogueController::otherResponse(std::string info, std::string hero_topic)
 		return;
 	}
 
-	DialogueController::feedback_timer = 100;
+	DialogueController::feedback_timer_2 = 100;
 
 	if (state != 8 && state != 12 && state != 7) {
 		dialogue_point line = dialogue.choose_reply_pt(info, optionsIndex, curr_conversation_log,temp_hero);
@@ -1285,7 +1330,7 @@ void DialogueController::otherResponse(std::string info, std::string hero_topic)
 		}
 		else if (replyString == "Accept Duel") {
 			//calls action start if the question is asked at all
-			//PlayerActExecFunctions::execute_start("Duel", temp_hero);
+			PlayerActExecFunctions::execute_start("Duel", temp_hero);
 
 			//check if I want to accept
 			if (accepted_action) {
@@ -1299,6 +1344,8 @@ void DialogueController::otherResponse(std::string info, std::string hero_topic)
 				dialogue_point diog_pt = { "Accept Duel","Accept Duel","",curr_hero_topic,"1" };
 				std::string reply_pt_sentence = dialogue.gen_dialog(diog_pt, temp_hero);
 				message = check_if_known(reply_pt_sentence, "");
+
+				//PlayerActExecFunctions::execute_end(false);
 			}
 
 			state = 8;
@@ -1306,7 +1353,7 @@ void DialogueController::otherResponse(std::string info, std::string hero_topic)
 		}
 		else if (replyString == "Accept Spar Request") {
 			//calls action start if the question is asked at all
-			//PlayerActExecFunctions::execute_start("Spar", temp_hero);
+			PlayerActExecFunctions::execute_start("Spar", temp_hero);
 
 			//check if I want to accept
 			if (accepted_action) {
@@ -1405,9 +1452,15 @@ void DialogueController::otherResponse(std::string info, std::string hero_topic)
 		else if (replyString == "Take Advice To Ally With") {
 			//calls action start if the question is asked at all
 			//PlayerActExecFunctions::execute_start("Spar", temp_hero);
-
-			//check if I want to accept
-			if (accepted_action) {
+			//checks if this hero is already allies with the hero that the player is suggesting an alliance with
+			if (Containers::hero_table[curr_hero_topic]->getVillage()->get_alliance() == temp_hero->getVillage()->get_alliance()) {
+				dialogue_point diog_pt = { "Already Allies","Already Allies","",curr_hero_topic,"1" };
+				std::string reply_pt_sentence = dialogue.gen_dialog(diog_pt, temp_hero);
+				replace_all(reply_pt_sentence, "HERO", curr_hero_topic);
+				message = check_if_known(reply_pt_sentence, "");
+			}
+				//check if I want to accept
+			else if (accepted_action) {
 				dialogue_point diog_pt = { "Take Advice To Ally With","Take Advice To Ally With","",curr_hero_topic,"1" };
 				std::string reply_pt_sentence = dialogue.gen_dialog(diog_pt, temp_hero);
 				replace_all(reply_pt_sentence, "HERO", curr_hero_topic);
@@ -1440,7 +1493,7 @@ void DialogueController::otherResponse(std::string info, std::string hero_topic)
 			else {
 				/////////////need to be changed to correct calls/dialog if not accepted///////////////////
 				dialogue_point diog_pt;
-				if((temp_hero->name == YEMOJA && player->can_fire) || (temp_hero->name == OYA && player->can_spin))
+				if((temp_hero->name == YEMOJA && player->can_fire) || (temp_hero->name == OYA && player->can_spin) || (temp_hero->name == OGUN && player->can_shield))
 					diog_pt = { "Already Taught","Already Taught","",curr_hero_topic,"1" };
 				else
 				    diog_pt = { "Teach","Teach","",curr_hero_topic,"1" };
@@ -1519,7 +1572,7 @@ void DialogueController::otherResponse(std::string info, std::string hero_topic)
 				std::string reply_pt_sentence = dialogue.gen_dialog_negative(diog_pt, temp_hero);
 				replace_all(reply_pt_sentence, "HERO", curr_hero_topic);
 				message = check_if_known(reply_pt_sentence, "");
-				PlayerActExecFunctions::execute_end(true);
+				PlayerActExecFunctions::execute_end(false);
 			}
 			state = 3;
 			otherConversationPoint(line);
@@ -1600,7 +1653,7 @@ void DialogueController::otherResponse(std::string info, std::string hero_topic)
 				//temp_hero->setCurrentLeader(player);
 				//temp_hero->setParty(player->getParty());
 				std::string reply_pt_sentence = dialogue.gen_dialog(line, temp_hero);
-				message = other->getName() + ": " + reply_pt_sentence + "\n\n";
+				message = check_if_known(reply_pt_sentence, "");
 				//adds all of the hero's party members to the player's party
 				/*std::vector<Soldier*> heroes_soldiers = temp_hero->getParty()->getMembers();
 				for (int i = 0; i < heroes_soldiers.size(); ++i) {
@@ -1612,7 +1665,7 @@ void DialogueController::otherResponse(std::string info, std::string hero_topic)
 			}
 			else { //they will say no if not part of same alliance as you
 				std::string reply_pt_sentence = dialogue.gen_dialog_negative(line, temp_hero);
-				message = other->getName() + ": " + reply_pt_sentence + "\n\n";
+				message = check_if_known(reply_pt_sentence, "");
 			}
 			state = 7;
 		}
@@ -1650,7 +1703,7 @@ void DialogueController::otherResponse(std::string info, std::string hero_topic)
 				dialogue_point diog_pt = { "Confirm Duel","Confirm Duel","",curr_hero_topic,"1" };
 				std::string reply_pt_sentence = dialogue.gen_dialog(diog_pt, player);
 				message = player->getName() + ": " + reply_pt_sentence + "\n\n";
-				PlayerActExecFunctions::execute_start("Duel", temp_hero);
+				//PlayerActExecFunctions::execute_start("Duel", temp_hero);
 			}
 			else {
 				/////////////need to be changed to correct calls/dialog if not accepted///////////////////
@@ -1659,7 +1712,7 @@ void DialogueController::otherResponse(std::string info, std::string hero_topic)
 				message = player->getName() + ": " + reply_pt_sentence + "\n\n";
 
 				//calls action end if the question is denied otherwise called on cmpletion of the action
-				//PlayerActExecFunctions::execute_end(false);
+				PlayerActExecFunctions::execute_end(false);
 			}
 			state = 9;
 		}
@@ -1669,7 +1722,7 @@ void DialogueController::otherResponse(std::string info, std::string hero_topic)
 				dialogue_point diog_pt = { "Confirm Spar","Confirm Spar","",curr_hero_topic,"1" };
 				std::string reply_pt_sentence = dialogue.gen_dialog(diog_pt, player);
 				message = player->getName() + ": " + reply_pt_sentence + "\n\n";
-				PlayerActExecFunctions::execute_start("Spar", temp_hero);
+				//PlayerActExecFunctions::execute_start("Spar", temp_hero);
 			}
 			else {
 				/////////////need to be changed to correct calls/dialog if not accepted///////////////////
@@ -1678,7 +1731,7 @@ void DialogueController::otherResponse(std::string info, std::string hero_topic)
 				message = player->getName() + ": " + reply_pt_sentence + "\n\n";
 
 				//calls action end if the question is denied otherwise called on cmpletion of the action
-				//PlayerActExecFunctions::execute_end(false);
+				PlayerActExecFunctions::execute_end(false);
 			}
 			state = 9;
 		}
@@ -1771,7 +1824,13 @@ void DialogueController::otherResponse(std::string info, std::string hero_topic)
 		}
 		else if (replyString == "Take Advice To Ally With") {
 			//choose different dialog if they denied the action
-			if (accepted_action) {
+			if (Containers::hero_table[curr_hero_topic]->getVillage()->get_alliance() == temp_hero->getVillage()->get_alliance()) {
+				dialogue_point diog_pt = { "Already Allies","Already Allies","",curr_hero_topic,"1" };
+				std::string reply_pt_sentence = dialogue.gen_dialog(diog_pt, temp_hero);
+				replace_all(reply_pt_sentence, "HERO", curr_hero_topic);
+				message = check_if_known(reply_pt_sentence, "");
+			}
+			else if (accepted_action) {
 				dialogue_point diog_pt = { "Confirm Ally","Confirm Ally","",curr_hero_topic,"1" };
 				std::string reply_pt_sentence = dialogue.gen_dialog(diog_pt, player);
 				message = player->getName() + ": " + reply_pt_sentence + "\n\n";
@@ -1817,7 +1876,11 @@ void DialogueController::otherResponse(std::string info, std::string hero_topic)
 				else if (temp_hero->name == OYA) {//if Oya is doing the teaching
 					diog_pt = { "Teach Spin","Teach Spin","",curr_hero_topic,"1" };
 					player->can_spin = true;//enable player to do spin slash
-				}	
+				}
+				else {//if Ogun is doing the teaching
+					diog_pt = { "Teach Shield","Teach Shield","",curr_hero_topic,"1" };
+					player->can_shield = true;//enable player to do flame shield
+				}
 				std::string reply_pt_sentence = dialogue.gen_dialog(diog_pt, temp_hero);
 				replace_all(reply_pt_sentence, "HERO", curr_hero_topic);
 				message = check_if_known(reply_pt_sentence, "");
@@ -2291,7 +2354,7 @@ void DialogueController::startConversation(WorldObj* n, bool playerTalk)
 	optionsIndex = 0;
 
 	player_conv_point_choice = "";
-
+	DialogueController::feedback_timer = 0;
 	//keeps track of the topic of the current conversation cycle
 	curr_hero_topic = "";
 
@@ -2301,6 +2364,12 @@ void DialogueController::startConversation(WorldObj* n, bool playerTalk)
 		//temp_hero->rel[player->name]->addNotoriety(50);
 		//temp_hero->rel[player->name]->addStrength(50);
 		//temp_hero->rel[player->name]->addAffinity(50);
+		if (temp_hero->getVillage()->get_alliance() == player->getVillage()->get_alliance())
+			remove_dialog_option("Ask_To_Form_Alliance", NotorietyIcon);
+
+		if(temp_hero->getParty() == player->getParty())
+			remove_dialog_option("Recruit_For_Party", StrengthIcon);
+
 
 			remove_dialog_option("Ask_To_Duel", NotorietyIcon);
 			remove_dialog_option("Ask_To_Spar", StrengthIcon);
@@ -2340,12 +2409,19 @@ void DialogueController::startConversation(WorldObj* n, bool playerTalk)
 		
 		player->filter_move_to(temp_hero);
 		unselectable_to_bottom();
+
+		options = dialogue.get_possible_conv_pts();
 		//if (first_buff) {
 			//temp_hero->rel[player->name]->addNotoriety(50);
 			//temp_hero->rel[player->name]->addStrength(50);
 			//temp_hero->rel[player->name]->addAffinity(50);
 		//}
 		//first_buff = false;
+
+		if (temp_hero->SUGG_ACT_STATUS == 2)
+			show_advice_feedback = 1;
+		else if (temp_hero->SUGG_ACT_STATUS == 3)
+			show_advice_feedback = 2;
 	}
 	/*handles what the greeting phrase should be based on whether or not the player
 	has taken or completed a quest from the npc*/
@@ -2525,6 +2601,10 @@ void DialogueController::exitDialogue()
 			//temp_hero->rel[player->name]->addStrength(50);
 			//temp_hero->rel[player->name]->addAffinity(50);
 			//remove_ask_for_quest();
+			remove_dialog_option("Recruit_For_Party", StrengthIcon);
+			remove_dialog_option("Ask_To_Form_Alliance", NotorietyIcon);
+			add_dialog_option("Recruit_For_Party", StrengthIcon);
+			add_dialog_option("Ask_To_Form_Alliance", NotorietyIcon);
 		}
 		else {
 			Soldier* sold = dynamic_cast<Soldier*>(other);
@@ -2914,6 +2994,7 @@ void DialogueController::add_to_perm_storage(ConversationLogObj* log_entry) {
 are scrolling down. unselectable options are skipped.*/
 void DialogueController::move_to_selectable_down() {
 	int scroll_counter = 0;
+	bool selectable_found = false;
 	Hero* temp_hero = CheckClass::isHero(other);
 	if (temp_hero && DialogueController::getState() == 1) {
 		if (DialogueController::scroll_control == DialogueController::getOptions().size() - 1)
@@ -2939,6 +3020,7 @@ void DialogueController::move_to_selectable_down() {
 		for (int i = 0; (DialogueController::scroll_control + i) < DialogueController::getOptions().size(); ++i) {
 			if (DialogueController::getOptions()[DialogueController::scroll_control + i][4] == "1") {
 				if ((i != 0) || (DialogueController::getOptions().size() == 2 && DialogueController::getOptions()[1][4] == "1")) {
+					selectable_found = true;
 					scroll_counter++;
 					break;
 				}
@@ -2954,6 +3036,7 @@ void DialogueController::move_to_selectable_down() {
 		for (int i = 0; (DialogueController::scroll_control + i) < DialogueController::get_babalawo_options().size(); ++i) {
 			if (DialogueController::get_babalawo_options()[DialogueController::scroll_control + i][4] == "1") {
 				if (i != 0 || (DialogueController::get_babalawo_options().size() == 2 && DialogueController::get_babalawo_options()[1][4] == "1")) {
+					selectable_found = true;
 					scroll_counter++;
 					break;
 				}
@@ -2967,7 +3050,8 @@ void DialogueController::move_to_selectable_down() {
 	}
 	if (state == 2)
 		++scroll_counter;
-	DialogueController::scroll_control += scroll_counter;
+	if(selectable_found)
+	    DialogueController::scroll_control += scroll_counter;
 }
 
 /*used to cause player to scroll to nearest selectable option when they
@@ -3064,6 +3148,7 @@ bool DialogueController::check_advice_acceptance(Player* p, Hero* npc) {
 	}
 
 }
+/*Andrew's version of my check_advice_acceptance function. Used for social actions.*/
 bool DialogueController::check_acceptance(Player* p, Hero* npc) {
 	std::string::size_type name_end = p->cur_action->getName().find_last_of('_');
 	std::string act_name = p->cur_action->getName().substr(0, name_end);
@@ -3118,6 +3203,20 @@ void DialogueController::load_teach_dialog()
 			break;
 		}
 	}
+	else {//Ogun case
+		switch (teach_move_counter) {
+		case 1:
+			dpoint = { "Teach Shield 1","Teach Shield 1" };
+			break;
+		case 2:
+			dpoint = { "Teach Shield 2","Teach Shield 2" };
+			break;
+		case 3:
+			dpoint = { "Teach Shield 3","Teach Shield 3" };
+			break;
+		}
+
+	}
 	std::string conversation_pt_sentence = dialogue.gen_dialog(dpoint,npc);
 	message = check_if_known(conversation_pt_sentence, "");
 	if (teach_move_counter == 3)
@@ -3132,6 +3231,7 @@ void DialogueController::duel_pop_up(Action* act)
 	dialogue_point dpoint = {"Finish Duel","Finish Duel"};
 	std::string conversation_pt_sentence = dialogue.gen_dialog(dpoint, act->getReceiver());
 	message = act->getReceiver()->getName() + ": " + conversation_pt_sentence;
+	DialogueController::feedback_timer = 0;
 	state = 7;
 
 }
@@ -3142,6 +3242,7 @@ void DialogueController::spar_pop_up(Action* act)
 	dialogue_point dpoint = {"Finish Spar","Finish Spar"};
 	std::string conversation_pt_sentence = dialogue.gen_dialog(dpoint, act->getReceiver());
 	message = act->getReceiver()->getName() + ": " + conversation_pt_sentence;
+	DialogueController::feedback_timer_2 = 0;
 	state = 7;
 }
 

@@ -35,6 +35,7 @@ public:
 
 	bool can_spin;
 	bool can_fire;
+	bool can_shield;
 	bool can_move;
 	
 	int can_move_counter;

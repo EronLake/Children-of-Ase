@@ -664,5 +664,13 @@
         "3": "Thank you.",
         "4": "It is not often people flatter me. ",
         "5": "Thanks so much, and I could say the same about you."
+   },
+
+    "Already Allies": {
+        "1": "I am already allied with them.",
+        "2": "I am already allied with them.",
+        "3": "I am already allied with them.",
+        "4": "I am already allied with them.",
+        "5": "I am already allied with them."
    }
 }
