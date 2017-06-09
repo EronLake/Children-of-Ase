@@ -1,4 +1,4 @@
-Conversation Point Name: Boast Appeal 6790
-Conversation Point Name: Intimidate Appeal 6690
-Conversation Point Name: Ask_Name Appeal 4790
-Conversation Point Name: Ask_Origin Appeal 4110
+Conversation Point Name: Grovel Appeal 6370
+Conversation Point Name: Intimidate Appeal 6290
+Conversation Point Name: Ask_Name Appeal 4550
+Conversation Point Name: Ask_Origin Appeal 3870
