@@ -558,6 +558,9 @@
       <Filter>Game Objects\Configs</Filter>
     </ClInclude>
     <ClInclude Include="RegionState.h" />
+    <ClInclude Include="pfl.h">
+      <Filter>AI</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Text Include="audio_test.txt">
