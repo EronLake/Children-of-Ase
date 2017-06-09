@@ -4,6 +4,7 @@
 #include "Vector2f.h"
 #include "CheckClass.h"
 
+
 class AIManager;
 
 // Visibilty graph

@@ -75,6 +75,7 @@
 #include "threadManager.h"
 
 #include "QuestManager.h"
+#include "pfl.h"
 
 #define _CRTDBG_MAP_ALLOC
 #include <crtdbg.h>
@@ -146,6 +147,11 @@ void test(int i) { for (int i = 0; i < 100; i++) cout << "hello this is the thre
 
 int main() {
 	WorldObj* screen = new WorldObj(Vector2f(0.0, 0.0), 25000U, 25000U);	//init screen
+
+	//SquareGrid grid = make_diagram1();
+	//draw_grid(grid, 1);
+	//
+	//system("PAUSE");
 
 	QuadTree* collideTree = new QuadTree(0, *screen);
 	GameWindow::init();
