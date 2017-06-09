@@ -290,7 +290,7 @@ bool GameWindow::toggleFullscreen()
   else {
     glfwSetWindowMonitor(GameWindow::window, GameWindow::primaryMonitor,
       100, 100, GameWindow::DEFAULT_WINDOW_WIDTH, GameWindow::DEFAULT_WINDOW_HEIGHT, GLFW_DONT_CARE);
-    glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_NORMAL);
+    glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_HIDDEN);
     GameWindow::fullscreen = true;
     return true;
   }
