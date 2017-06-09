@@ -310,15 +310,15 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	ogun->set_busy(0);//added for testing
 	heroes.push_back(ogun);
 
-	//yemoja->rel[1]->addNotoriety(50);
-	///yemoja->rel[1]->addStrength(50);
-	//yemoja->rel[1]->addAffinity(40);
-	//oya->rel[1]->addNotoriety(50);
-	///oya->rel[1]->addStrength(50);
-	//oya->rel[1]->addAffinity(50);
-	//yemoja->rel[1]->addNotoriety(50);
-	///yemoja->rel[1]->addStrength(50);
-	//ogun->rel[1]->addAffinity(50);
+	/*yemoja->rel[1]->addNotoriety(50);
+	yemoja->rel[1]->addStrength(50);
+	yemoja->rel[1]->addAffinity(50);
+	oya->rel[1]->addNotoriety(50);
+	oya->rel[1]->addStrength(50);
+	oya->rel[1]->addAffinity(50);
+	yemoja->rel[1]->addNotoriety(50);
+	yemoja->rel[1]->addStrength(50);
+	ogun->rel[1]->addAffinity(50);*/
 
 	vector<std::set<Texture*>> starting_location;
 

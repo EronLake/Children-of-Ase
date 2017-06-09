@@ -233,7 +233,7 @@ void ActionExecFunctions::execute_form_alliance(Action* form_alliance) {
 		form_alliance->getDoer()->set_action_destination(form_alliance->getReceiver()->getLoc());
 		form_alliance->getDoer()->set_max_dist_act(30);
 		form_alliance->checkpoint++;
-		ActionHelper::create_memory(form_alliance, form_alliance->getReceiver());
+		//ActionHelper::create_memory(form_alliance, form_alliance->getReceiver());
 		form_alliance->getDoer()->set_busy(Hero::BUSY_TRAVEL);
 		break;
 
@@ -410,7 +410,7 @@ void ActionExecFunctions::execute_fight(Action* fight)
 		} else if (fight->getDoer()->getParty()->get_fight()->is_over())
 		{
 			fight->checkpoint++;
-			ActionHelper::create_memory(fight, fight->getReceiver());
+			//ActionHelper::create_memory(fight, fight->getReceiver());
 		}
 		break;
 	case 5: //If win update apply win-post else apply loss-post and update memory
@@ -779,7 +779,7 @@ void ActionExecFunctions::execute_duel(Action* duel)
 		if (duel->getDoer()->getParty()->get_fight()->is_over())
 		{
 			duel->checkpoint++;
-			ActionHelper::create_memory(duel, duel->getOwner());
+			//ActionHelper::create_memory(duel, duel->getOwner());
 			
 		}
 		break;
@@ -887,17 +887,18 @@ void ActionExecFunctions::execute_conversation(Action* conv)
 		{
 			conv->getDoer()->set_action_destination(conv->getReceiver()->getLoc());
 			conv->getDoer()->set_max_dist_act(30);
+			conv->getDoer()->set_busy(Hero::NOT_BUSY);
 			conv->checkpoint++;
 		}
 		break;
 	case 3:  //When train destination is reached, start a time for 1 minute
 		if (conv->getDoer()->get_action_destination() == Vector2f(NULL, NULL) && (conv->getReceiver()->get_busy() == Hero::NOT_BUSY))
 		{
-			ActionHelper::set_timer(conv, 3600); //Wait 1 minute for training (60 frames times 60 seconds)
+			ActionHelper::set_timer(conv, 600); //Wait 1 minute for training (60 frames times 60 seconds)
 			conv->checkpoint++;
 			conv->getDoer()->set_busy(Hero::BUSY_TALK);
 			conv->getReceiver()->set_busy(Hero::BUSY_REC_TALK);
-			ActionHelper::create_memory(conv, conv->getReceiver());
+			//ActionHelper::create_memory(conv, conv->getReceiver());
 		}
 		else {
 			conv->getDoer()->set_action_destination(conv->getReceiver()->getLoc());
@@ -973,7 +974,7 @@ void ActionExecFunctions::execute_bribe(Action* bribe)
 	if (!bribe->getDoer()->getInCombat()) {
 		switch (bribe->checkpoint) {
 		case 0: //Determine the location that the bribe is happening
-			ActionHelper::set_timer(bribe, 3600);
+			ActionHelper::set_timer(bribe, 600);
 			bribe->getDoer()->set_busy(Hero::BUSY_TALK);
 			//bribe->getReceiver()->set_busy(Hero::BUSY_REC_TALK);
 			bribe->checkpoint++;
@@ -985,6 +986,7 @@ void ActionExecFunctions::execute_bribe(Action* bribe)
 					Party* p = new Party();
 					p->add_party_to_party(bribe->getDoer()->getParty());
 					bribe->getDoer()->getVillage()->addToParties(p);
+					bribe->getDoer()->set_busy(Hero::NOT_BUSY);
 				}
 
 				//ActionHelper::create_memory(bribe, bribe->getDoer());
@@ -1015,7 +1017,7 @@ void ActionExecFunctions::execute_bribe(Action* bribe)
 				//bribe->getDoer()->set_action_destination(&bribe->getReceiver()->getLoc());
 				monopoly_money = monopoly_money - 50;//Taking away money
 				bribe->checkpoint++;
-				ActionHelper::create_memory(bribe, bribe->getReceiver());
+				//ActionHelper::create_memory(bribe, bribe->getReceiver());
 			}
 			break;
 		case 4: //If timer is complete, set village as destination, apply postconds, update memory
@@ -1088,7 +1090,7 @@ void ActionExecFunctions::execute_compliment(Action* compliment)
 			compliment->getDoer()->set_busy(Hero::BUSY_TALK);
 			compliment->getReceiver()->set_busy(Hero::BUSY_REC_TALK);
 			compliment->checkpoint++;
-			ActionHelper::create_memory(compliment, compliment->getReceiver());
+			//ActionHelper::create_memory(compliment, compliment->getReceiver());
 		}
 		else {
 			compliment->getDoer()->set_action_destination(compliment->getReceiver()->getLoc());
