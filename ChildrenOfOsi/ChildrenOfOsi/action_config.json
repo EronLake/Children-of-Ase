@@ -965,7 +965,7 @@
 		"doer_succ_postconds": {
 		"1": {
 			"general_type": 0,
-				"rel_type" : 9,
+				"rel_type" : 6,
 				"utility" : 5
 		}
 	},

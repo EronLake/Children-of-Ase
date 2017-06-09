@@ -388,6 +388,30 @@
 	 }
     },
 
+	"Teach Shield_Templates": {
+	 "1": {
+        "1": "Teach Shield"
+	 }
+    },
+
+	"Teach Shield 1_Templates": {
+	 "1": {
+        "1": "Teach Shield 1"
+	 }
+    },
+
+	"Teach Shield 2_Templates": {
+	 "1": {
+        "1": "Teach Shield 2"
+	 }
+    },
+
+	"Teach Shield 3_Templates": {
+	 "1": {
+        "1": "Teach Shield 3"
+	 }
+    },
+
     "Already Taught_Templates": {
 	 "1": {
         "1": "Already Taught"

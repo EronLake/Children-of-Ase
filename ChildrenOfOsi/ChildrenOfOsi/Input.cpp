@@ -596,7 +596,7 @@ void Input::InputCheck()
 	short J = GetKeyState('J') >> 15; // Base attack
 	short K = GetKeyState('K') >> 15; // Projectile
 	short L = GetKeyState('L') >> 15; // Spin attack
-	short SEMI = GetKeyState(';') >> 15; // Fire
+	short SEMI = GetKeyState(186) >> 15; // Fire
 	short ENTER = GetKeyState(VK_RETURN) >> 15;
 	short SHIFT = GetKeyState(VK_LSHIFT) >> 15;
 	short ESC = GetKeyState(VK_ESCAPE) >> 15;
@@ -793,6 +793,15 @@ void Input::InputCheck()
 						}
 					}
 				}
+				else if (SEMI) {
+					if (t) {
+						if (t->can_shield && t->getCool(Attack::SHIELD)) {
+							//////std:://cout << "Pressed Shift+R" << std::endl;
+							gameplay_functions->special(t, Attack::SHIELD);
+							gameplay_functions->fire(t);
+						}
+					}
+				}
 				float firstOld = 0;
 				float secondOld = 0;
 				if (Y) {
@@ -964,6 +973,9 @@ void Input::InputCheck()
 						//gameplay_functions->change_song("Change", RegionState::current_region.getRTheme(), RegionState::current_region.getRTheme());
 						RegionState::in_village = false;
 						DialogueController::first_q_press = true;
+						DialogueController::feedback_timer = 0;
+						DialogueController::feedback_timer_2 = 0;
+
 						DialogueController::exitDialogue();
 					}
 				//}

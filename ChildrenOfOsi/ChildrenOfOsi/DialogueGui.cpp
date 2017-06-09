@@ -362,6 +362,11 @@ void DialogueGui::drawGuiText()
 			DialogueGui::OPTIONS_X, DialogueGui::OPTIONS_Y + (DialogueGui::LINE_SPACING * 1),
 			DialogueGui::OPTIONS_WIDTH, DialogueGui::OPTIONS_HEIGHT,
 			text_color_selected);
+
+		GameWindow::createText("+ strength",
+			530.50F, 475.50F,
+			DialogueGui::OPTIONS_WIDTH, DialogueGui::OPTIONS_HEIGHT,
+			glm::vec4(0, 50, 0, 1));
 		break;
   }
 }
@@ -433,10 +438,11 @@ void DialogueGui::show_vis_feedback() {
 		auto it_2 = Containers::conv_point_table.find(p_conv_pt.second);
 		p_conv_pt.second.append("_1");//append Shango
 		auto it = Containers::action_table.find(p_conv_pt.second);
-		if (it != Containers::action_table.end())	
-			tmp_succ_post = Containers::action_table[p_conv_pt.second]->doer_succ_postconds;
-		else if(it_2 != Containers::conv_point_table.end())
-			tmp_succ_post = Containers::conv_point_table[cpoint]->doer_succ_postconds;
+	    if (it_2 != Containers::conv_point_table.end())
+		    tmp_succ_post = Containers::conv_point_table[cpoint]->receiver_succ_postconds;
+		else if (it != Containers::action_table.end())	
+			tmp_succ_post = Containers::action_table[p_conv_pt.second]->receiver_succ_postconds;
+		
 		for (int i = 0; i < tmp_succ_post.size(); ++i) {
 			int type = tmp_succ_post[i]->get_rel_type();
 			//Postcondition* pos = tmp_succ_post[i].get();
@@ -471,10 +477,11 @@ void DialogueGui::show_vis_feedback() {
 		auto it_2 = Containers::conv_point_table.find(p_conv_pt.second);
 		p_conv_pt.second.append("_1");//append Shango
 		auto it = Containers::action_table.find(p_conv_pt.second);
-		if (it != Containers::action_table.end())
-			tmp_fail_post = Containers::action_table[p_conv_pt.second]->doer_fail_postconds;
-		else if (it_2 != Containers::conv_point_table.end())
-			tmp_fail_post = Containers::conv_point_table[cpoint]->doer_fail_postconds;
+		if (it_2 != Containers::conv_point_table.end())
+		    tmp_fail_post = Containers::conv_point_table[cpoint]->receiver_fail_postconds;
+		else if (it != Containers::action_table.end())
+			tmp_fail_post = Containers::action_table[p_conv_pt.second]->receiver_fail_postconds;
+
 		for (int i = 0; i < tmp_fail_post.size(); ++i) {
 			int type = tmp_fail_post[i]->get_rel_type();
 			//Postcondition* pos = tmp_fail_post[i].get();
@@ -564,10 +571,11 @@ void DialogueGui::show_vis_feedback_2() {
 		auto it_2 = Containers::conv_point_table.find(p_conv_pt.second);
 		p_conv_pt.second.append("_1");//append Shango
 		auto it = Containers::action_table.find(p_conv_pt.second);
-		if (it != Containers::action_table.end())
-			tmp_succ_post = Containers::action_table[p_conv_pt.second]->doer_succ_postconds;
-		else if (it_2 != Containers::conv_point_table.end())
-			tmp_succ_post = Containers::conv_point_table[cpoint]->doer_succ_postconds;
+	    if (it_2 != Containers::conv_point_table.end())
+		    tmp_succ_post = Containers::conv_point_table[cpoint]->receiver_succ_postconds;
+		else if (it != Containers::action_table.end())
+			tmp_succ_post = Containers::action_table[p_conv_pt.second]->receiver_succ_postconds;
+		
 		for (int i = 0; i < tmp_succ_post.size(); ++i) {
 			int type = tmp_succ_post[i]->get_rel_type();
 			//Postcondition* pos = tmp_succ_post[i].get();
@@ -602,10 +610,10 @@ void DialogueGui::show_vis_feedback_2() {
 		auto it_2 = Containers::conv_point_table.find(p_conv_pt.second);
 		p_conv_pt.second.append("_1");//append Shango
 		auto it = Containers::action_table.find(p_conv_pt.second);
-		if (it != Containers::action_table.end())
-			tmp_fail_post = Containers::action_table[p_conv_pt.second]->doer_fail_postconds;
-		else if (it_2 != Containers::conv_point_table.end())
-			tmp_fail_post = Containers::conv_point_table[cpoint]->doer_fail_postconds;
+		if (it_2 != Containers::conv_point_table.end())
+			tmp_fail_post = Containers::conv_point_table[cpoint]->receiver_fail_postconds;
+		else if (it != Containers::action_table.end())
+			tmp_fail_post = Containers::action_table[p_conv_pt.second]->receiver_fail_postconds;
 		for (int i = 0; i < tmp_fail_post.size(); ++i) {
 			int type = tmp_fail_post[i]->get_rel_type();
 			//Postcondition* pos = tmp_fail_post[i].get();

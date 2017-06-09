@@ -4,9 +4,15 @@
 	"start_fullscreen" : false,
 	"mouse_visible" : true,
 	"load_regions" : 1, /*0==Load Config should be empty || 1==Load All || 2==Load Oasis || 3==Load Jungle*/
+<<<<<<< HEAD
 	"load_map" : 1,
 	"river_collide" : 1,
 	"preload_tex" : 1,
+=======
+	"load_map" : 0,
+	"river_collide" : 0,
+	"preload_tex" : 0,
+>>>>>>> ab5fbb785fa698767a997cec6c178d5baa10c3a9
 	"thread_physics" : 1,
 	"write_to_log" : 0,
 
