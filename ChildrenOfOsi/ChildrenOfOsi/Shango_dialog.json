@@ -265,7 +265,7 @@
     },
 
 	"Bribe": {
-        "1": "I cannot believe I am asking you of all people, but would you accept this.",
+        "1": "Would you be interested in this gift.",
         "2": "Would you be interested in this gift.",
         "3": "I decided to get this for you, hopefully you'll accept it.",
 		"4": "I decided to get this for you, hopefully you'll accept it.",
@@ -273,11 +273,11 @@
     },
 
 	"Accept Bribe": {
-        "1": "I hope you think better of me than to think I would be swayed so easily by a bribe.",
-        "2": "I hope you think better of me than to think I would be swayed so easily by a bribe.",
-        "3": "I do not usually accept bribes, but I suppose I could make an exception for you.",
-        "4": "I do not usually accept bribes, but I suppose I could make an exception for you.",
-        "5": "I do not usually accept bribes, but I suppose I could make an exception for you."
+        "1": "Thank you, I accept.",
+        "2": "Thank you, I accept.",
+        "3": "Many thanks, this will be of great use to me.",
+        "4": "Many thanks, this will be of great use to me.",
+        "5": "Many thanks, this will be of great use to me."
     },
 
 	"Ask_To_Join_Party":{

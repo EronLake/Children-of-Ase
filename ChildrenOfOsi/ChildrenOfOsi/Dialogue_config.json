@@ -760,7 +760,7 @@
     "receiver_succ_postconds": {
 		"1": {
 			"general_type": 0,
-				"rel_type" : 7,
+				"rel_type" : 10,
 				"utility" : 5
 		},
 		"2" : {
@@ -1310,7 +1310,7 @@
       "1": {
         "general_type": 0,
         "rel_type": 7,
-        "utility": 3
+        "utility": 5
       }
     },
     "doer_fail_postconds": {
@@ -1324,7 +1324,7 @@
       "1": {
         "general_type": 0,
         "rel_type": 7,
-        "utility": 5
+        "utility": 10
       },
       "2": {
         "general_type": 0,
@@ -1378,8 +1378,8 @@
     "doer_succ_postconds": {
       "1": {
         "general_type": 0,
-        "rel_type": 7,
-        "utility": 3
+        "rel_type": 10,
+        "utility": 5
       }
     },
     "doer_fail_postconds": {
@@ -1392,13 +1392,13 @@
     "receiver_succ_postconds": {
       "1": {
         "general_type": 0,
-        "rel_type": 7,
+        "rel_type": 10,
         "utility": 5
       },
       "2": {
         "general_type": 0,
         "rel_type": 8,
-        "utility": 5
+        "utility": 10
       }
     },
     "receiver_fail_postconds": {
