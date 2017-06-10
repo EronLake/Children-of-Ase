@@ -1070,41 +1070,56 @@ void DialogueController::otherConversationPoint(dialogue_point line)
 			if (act_name.find("Conquer") != string::npos || act_name.find("Occupy") != string::npos) {
 				replace_all(con_pt_sentence, "HERO", hero_name + village);
 			}
-			else
-			    replace_all(con_pt_sentence, "HERO", hero_name);//receiver or doer here? ask Justin
+			//else
+			    //replace_all(con_pt_sentence, "HERO", hero_name);//receiver or doer here? ask Justin
 
-			if (act_name.find("Bribe") != string::npos) {
-				std::string gift = "offer a gift to";
+			else if (act_name.find("Bribe") != string::npos) {
+				std::string gift = "offer a gift to ";
 				replace_all(con_pt_sentence, "HERO", hero_name);
 				replace_all(con_pt_sentence, "ACTION", gift);
 			}
-			else
-				replace_all(con_pt_sentence, "HERO", hero_name);//receiver or doer here? ask Justin
+			//else
+				//replace_all(con_pt_sentence, "HERO", hero_name);//receiver or doer here? ask Justin
 
-			if (act_name.find("Boast") != string::npos) {
-				std::string to = "to";
+			else if (act_name.find("Boast") != string::npos) {
+				std::string to = " to";
 				replace_all(con_pt_sentence, "HERO", hero_name);
 				replace_all(con_pt_sentence, "ACTION", act_name + to);
 			}
-			else
-				replace_all(con_pt_sentence, "HERO", hero_name);//receiver or doer here? ask Justin
+			//else
+				//replace_all(con_pt_sentence, "HERO", hero_name);//receiver or doer here? ask Justin
 
-			if (act_name.find("Grovel") != string::npos) {
-				std::string praise = "offer praise to";
+			else if (act_name.find("Grovel") != string::npos) {
+				std::string praise = "offer praise to ";
 				replace_all(con_pt_sentence, "HERO", hero_name);
 				replace_all(con_pt_sentence, "ACTION", praise);
 			}
-			else
-				replace_all(con_pt_sentence, "HERO", hero_name);//receiver or doer here? ask Justin
+			//else
+				//replace_all(con_pt_sentence, "HERO", hero_name);//receiver or doer here? ask Justin
 
+			else if (act_name.find("Form_Alliance") != string::npos) {
+				replace_all(con_pt_sentence, "HERO", hero_name);
+				replace_all(con_pt_sentence, "ACTION", "form an alliance with ");
+			}
+			//else
+			//	replace_all(con_pt_sentence, "HERO", hero_name);//receiver or doer here? ask Justin
 
-			std::string with = "";
-			if (act_name.find("Train") != string::npos || act_name.find("Spar") != string::npos || act_name.find("Form_Alliance") != string::npos) {
+			else if (act_name.find("Spar") != string::npos) {
+				replace_all(con_pt_sentence, "HERO", hero_name);
+				replace_all(con_pt_sentence, "ACTION", "spar with ");
+			}
+			//else
+			//	replace_all(con_pt_sentence, "HERO", hero_name);//receiver or doer here? ask Justin
+			else if (act_name.find("Train") != string::npos || act_name.find("Spar") != string::npos || act_name.find("Form_Alliance") != string::npos) {
+				std::string with = "";
 				with = " with ";
 				replace_all(con_pt_sentence, "ACTION", act_name + with);
 			}
 			else
-			    replace_all(con_pt_sentence, "ACTION", act_name + with);
+				replace_all(con_pt_sentence, "ACTION", act_name);
+
+			//else
+			   // replace_all(con_pt_sentence, "ACTION", act_name + with);
 			
 
 		}
@@ -2895,39 +2910,54 @@ bool DialogueController::offer_quest_on_exit(Hero* temp_hero) {
 			std::string::size_type name_end = quest->name.find_last_of('_');
 			std::string act_name = quest->name.substr(0, name_end);
 
-			if(act_name == "Bribe")
-				replace_all(con_pt_sentence, "ACTION", "offer a gift to");
-			else
-			    replace_all(con_pt_sentence, "ACTION", act_name);
+			
+			//else
+			   // replace_all(con_pt_sentence, "ACTION", act_name);
 
 			std::string village = "'s village";
 			std::string hero_name = dialogue.int_to_hero_name(quest->getReceiver()->name);
 
 			//player->quest_status[quest->getOwner()->name] = 1;// set shango to "doing quest"
+			if (act_name == "Bribe")
+				replace_all(con_pt_sentence, "ACTION", "offer a gift to");
 
-			if (act_name.find("Conquer") != string::npos || act_name.find("Occupy") != string::npos) {
+			else if (act_name.find("Conquer") != string::npos || act_name.find("Occupy") != string::npos) {
 				replace_all(con_pt_sentence, "HERO", hero_name + village);
 				replace_all(con_pt_sentence, "ACTION", act_name);
 
 			}
-			else
-				replace_all(con_pt_sentence, "HERO", hero_name);//receiver or doer here? ask Justin
+			//else
+				//replace_all(con_pt_sentence, "HERO", hero_name);//receiver or doer here? ask Justin
 
-			if (act_name.find("Boast") != string::npos) {
-				std::string to = "to";
+			else if (act_name.find("Boast") != string::npos) {
+				std::string to = " to";
 				replace_all(con_pt_sentence, "HERO", hero_name);
-				replace_all(con_pt_sentence, "ACTION", act_name + to);
+				replace_all(con_pt_sentence, "ACTION", (act_name + " to"));
 			}
-			else
-				replace_all(con_pt_sentence, "HERO", hero_name);//receiver or doer here? ask Justin
+			//else
+				//replace_all(con_pt_sentence, "HERO", hero_name);//receiver or doer here? ask Justin
 
-			if (act_name.find("Grovel") != string::npos) {
-				std::string praise = "offer praise to";
+			else if (act_name.find("Grovel") != string::npos) {
+				std::string praise = "offer praise to ";
 				replace_all(con_pt_sentence, "HERO", hero_name);
 				replace_all(con_pt_sentence, "ACTION", praise);
 			}
+			//else
+				//replace_all(con_pt_sentence, "HERO", hero_name);//receiver or doer here? ask Justin
+
+			else if (act_name.find("Form_Alliance") != string::npos) {
+				replace_all(con_pt_sentence, "HERO", hero_name);
+				replace_all(con_pt_sentence, "ACTION", "form an alliance with ");
+			}
+			//else
+				//replace_all(con_pt_sentence, "HERO", hero_name);//receiver or doer here? ask Justin
+
+			else if (act_name.find("Spar") != string::npos) {
+				replace_all(con_pt_sentence, "HERO", hero_name);
+				replace_all(con_pt_sentence, "ACTION", "spar with ");
+			}
 			else
-				replace_all(con_pt_sentence, "HERO", hero_name);//receiver or doer here? ask Justin
+				replace_all(con_pt_sentence, "ACTION", act_name);//receiver or doer here? ask Justin
 
 			message = check_if_known(reply_pt_sentence, con_pt_sentence);
 			replyOptions = dialogue.get_possible_reply_pts("Offer_Quest", optionsIndex);
