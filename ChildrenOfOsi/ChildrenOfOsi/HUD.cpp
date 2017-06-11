@@ -302,7 +302,7 @@ void HUD::drawKeybindDisplay(Player *player)
   if(player->can_spin)
     GameWindow::drawSprite(this->keybind_attack03_rect->getX(), this->keybind_attack03_rect->getY(),
       this->keybind_attack03_rect->getWidth(), this->keybind_attack03_rect->getHeight(), this->keybind_attack03_rect->getSprite());
-  if(false)
+  if(player->can_shield)
     GameWindow::drawSprite(this->keybind_attack04_rect->getX(), this->keybind_attack04_rect->getY(),
       this->keybind_attack04_rect->getWidth(), this->keybind_attack04_rect->getHeight(), this->keybind_attack04_rect->getSprite());
 }
