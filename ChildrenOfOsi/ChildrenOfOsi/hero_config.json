@@ -11,7 +11,7 @@
 		"bodyy1" : 50.0,
 		"bodyy2" : 50.0,
 		"health": 120,
-		"max_stamina": 300,
+		"max_stamina": 600,
 		"aggression": 30,
 		"kindness": 70,
 		"honor": 80,

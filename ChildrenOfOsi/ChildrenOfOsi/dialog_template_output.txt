@@ -1,4 +1,2 @@
-Conversation Point Name: Grovel Appeal 6370
-Conversation Point Name: Intimidate Appeal 6290
-Conversation Point Name: Ask_Name Appeal 4550
-Conversation Point Name: Ask_Origin Appeal 3870
+Conversation Point Name: Compliment Appeal 10040
+Conversation Point Name: Bribe Appeal 8090

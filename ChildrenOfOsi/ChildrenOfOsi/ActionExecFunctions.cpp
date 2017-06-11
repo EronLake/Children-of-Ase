@@ -576,7 +576,7 @@ void ActionExecFunctions::execute_conquer(Action* conq)
 			//ActionHelper::create_memory(conq, conq->getReceiver());
 		} else if (conq->getReceiver()->getVillage()->defenders->getMembers().size() == 
 			conq->getReceiver()->getVillage()->defenders->get_down_members().size()) {
-			conq->getReceiver()->getVillage()->add_to_village_health(conq->getDoer()->getParty()->getMembers().size()*(-10));
+			conq->getReceiver()->getVillage()->add_to_village_health(-35);
 			if (conq->getReceiver()->getVillage()->get_village_health() <= 0) {
 				conq->checkpoint++;
 				//ActionHelper::create_memory(conq, conq->getReceiver());

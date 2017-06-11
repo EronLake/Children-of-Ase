@@ -587,10 +587,10 @@ void Input::InputCheck()
 	short A = GetKeyState('A') >> 15;
 	short S = GetKeyState('S') >> 15;
 	short D = GetKeyState('D') >> 15;
+  short Q = GetKeyState('Q') >> 15;
+  short E = GetKeyState('E') >> 15;
 	short R = GetKeyState('R') >> 15;
 	short T = GetKeyState('T') >> 15;
-	short E = GetKeyState('E') >> 15;
-	short Q = GetKeyState('Q') >> 15;
 	short H = GetKeyState('H') >> 15; //set home point
 	short I = GetKeyState('I') >> 15; //sets exalted form, temporary location
 	short J = GetKeyState('J') >> 15; // Base attack
@@ -599,6 +599,7 @@ void Input::InputCheck()
 	short SEMI = GetKeyState(186) >> 15; // Fire
 	short ENTER = GetKeyState(VK_RETURN) >> 15;
 	short SHIFT = GetKeyState(VK_LSHIFT) >> 15;
+  short ALT = GetKeyState(VK_MENU) >> 15;
 	short ESC = GetKeyState(VK_ESCAPE) >> 15;
 	short V = GetKeyState('V') >> 15; //set patrol point
 	short F = GetKeyState('F') >> 15;
@@ -614,8 +615,13 @@ void Input::InputCheck()
 	short THREE = GetKeyState('3') >> 15; // Remove self from party and put party in patrol mode
 	short FOUR = GetKeyState('4') >> 15; // coming soon
 
-  if(!ENTER)
+  if(!ALT && !ENTER)
     this->key_lock = false;
+
+  // Alt+Enter to toggle fullscreen
+  if(ALT && ENTER) {
+    GameWindow::toggleFullscreen();
+  }
 	
 	if (current_game_state == game_state::main_menu) {
     if (ENTER) {
@@ -624,6 +630,14 @@ void Input::InputCheck()
 		}
 	}
 	else if (current_game_state == game_state::in_game) {
+    // If the player is in combat for the first time, launch the tutorial
+    Player *p = CheckClass::isPlayer(player);
+    if(p) {
+      if(DialogueController::getState() == 0 && p->getInCombat() && !Tutorial::isStageComplete(Tutorial::Stage::COMBAT)) {
+        Tutorial::launchStage(Tutorial::Stage::COMBAT, *this, true);
+      }
+    }
+
     if (DialogueController::getState() == 0) {
 			Player* t = CheckClass::isPlayer(player);
 			gameplay_functions->combat(player);
@@ -1304,6 +1318,10 @@ void Input::InputCheck()
       current_game_state = game_state::in_game;
     }
     else if(ENTER && Tutorial::isStageActive(Tutorial::Stage::DIALOGUE03)) {
+      Tutorial::completeStage(*this);
+      current_game_state = game_state::in_game;
+    }
+    else if(J && Tutorial::isStageActive(Tutorial::Stage::COMBAT)) {
       Tutorial::completeStage(*this);
       current_game_state = game_state::in_game;
     }

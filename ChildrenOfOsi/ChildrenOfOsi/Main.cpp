@@ -835,7 +835,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 			Tutorial::drawTutorial();
 		}
 		while (current_game_state == game_state::in_game) {
-			cout << "Current game state: in_game" << endl;
+			//cout << "Current game state: in_game" << endl;
 			if (iController->current_game_state != game_state::in_game) {
 				iController->current_game_state = current_game_state;
 			}

@@ -66,6 +66,7 @@ bool DialogueHelper::accepted_quest = false;
 bool DialogueHelper::prompted_quest = false;
 Action* DialogueHelper::quest = nullptr;
 bool DialogueHelper::state_is_8 = false;
+bool DialogueHelper::act_accepted = true;
 
 
 DialogueHelper::DialogueHelper()
@@ -935,6 +936,10 @@ int DialogueHelper::calc_text_choice_from_relationship(Hero* hero, std::pair<int
 			phrase_picker = 5;
 		}
 	}*/
+	if (act_accepted && topic.first == SHANGO && npc_relationship->getAffinity() < 40)
+		phrase_picker = 3;
+
+
 
 	return phrase_picker;
 }
