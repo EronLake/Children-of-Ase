@@ -1,2 +1,2 @@
-Conversation Point Name: Ask_Name Appeal 5240
-Conversation Point Name: Ask_Origin Appeal 4560
+Conversation Point Name: Compliment Appeal 10040
+Conversation Point Name: Bribe Appeal 8090
