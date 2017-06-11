@@ -162,7 +162,7 @@ void PlayerActExecFunctions::execute_end(bool if_succ) {
 	}
 	else if (act_name == "Fight") {
 		//RegionState::in_combat = false;
-		RegionState::switch_music = true;
+		//RegionState::switch_music = true;
 		cur_action->getReceiver()->set_busy(0);
 	}
 	
@@ -185,7 +185,7 @@ void PlayerActExecFunctions::execute_end(bool if_succ) {
 //		perror("something is wrong with the current hero memory creation function");
 	//}
 	
-	cur_action->apply_postconditions(if_succ);	//Apply post-conditions based off if it was succesful or not
+	//cur_action->apply_postconditions(if_succ);	//Apply post-conditions based off if it was succesful or not
 	cur_action->executed = true;
 
 	if (if_succ) {

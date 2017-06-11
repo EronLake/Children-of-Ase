@@ -361,12 +361,12 @@ std::vector<std::vector<dialogue_point>>& DialogueHelper::get_possible_conv_pts_
 	return possible_conv_pts;
 }
 
-/**/
+/*gets player's possible replies to hero's conversation points*/
 std::vector<dialogue_point> DialogueHelper::get_possible_reply_pts(std::string point, int opts_inx)
 {
 	std::vector<dialogue_point> reply;
 	//reply.push_back({"Decline_To_Answer","Decline_To_Answer","","","1"});
-	if (point != "Boast" && point != "Insult" && point != "Intimidate" && point != "Compliment" && point != "Offer Praise") {
+	if (point != "Boast" && point != "Insult" && point != "Intimidate" && point != "Compliment" && point != "Offer Praise" && point != "Grovel") {
 		if(point.find("_Quest") == string::npos && point.find("Name") == string::npos && point.find("Ask About") == string::npos)
 		    reply.push_back({ "Refuse","Refuse","","","1","0" });
 		for (int i = 0; i < possible_reply_pts[opts_inx].size(); i++) {

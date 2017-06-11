@@ -27,6 +27,7 @@ GLuint GameWindow::stdShaderProgramId = 0;
 GLuint GameWindow::fontShaderProgramId = 0;
 
 int GameWindow::numObjects = 0;
+bool GameWindow::fullscreen = START_FULLSCREEN;
 
 std::vector<TextObj> GameWindow::text;
 
@@ -271,6 +272,28 @@ void GameWindow::refresh()
   text.clear();
 
   glfwSwapBuffers(GameWindow::window);
+}
+
+/**
+ * Toggles whether the window is fullscreen. Returns true if the window, after
+ * this function has run its course, is fullscreen; otherwise, returns false.
+ */
+bool GameWindow::toggleFullscreen()
+{
+  if(GameWindow::fullscreen) {
+    glfwSetWindowMonitor(GameWindow::window, nullptr,
+      100, 100, GameWindow::DEFAULT_WINDOW_WIDTH, GameWindow::DEFAULT_WINDOW_HEIGHT, GLFW_DONT_CARE);
+    glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_NORMAL);
+    GameWindow::fullscreen = false;
+    return false;
+  }
+  else {
+    glfwSetWindowMonitor(GameWindow::window, GameWindow::primaryMonitor,
+      100, 100, GameWindow::DEFAULT_WINDOW_WIDTH, GameWindow::DEFAULT_WINDOW_HEIGHT, GLFW_DONT_CARE);
+    glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_HIDDEN);
+    GameWindow::fullscreen = true;
+    return true;
+  }
 }
 
 /**

@@ -1580,7 +1580,7 @@
       "frame_num" : 1,
       "hight" : 170.0,
       "name" : "rec1",
-      "tex_file" : "blank",
+      "tex_file" : "blankr",
       "width" : 170.0,
       "x" : 200.5785369873047,
       "y" : 81.247558593750
@@ -1593,7 +1593,7 @@
       "frame_num" : 1,
       "hight" : 170.0,
       "name" : "rec1-0",
-      "tex_file" : "blank",
+      "tex_file" : "blankr",
       "width" : 170.0,
       "x" : 202.1293029785156,
       "y" : 81.247558593750
@@ -1606,7 +1606,7 @@
       "frame_num" : 1,
       "hight" : 170.0,
       "name" : "rec1-1",
-      "tex_file" : "blank",
+      "tex_file" : "blankr",
       "width" : 170.0,
       "x" : 199.3379364013672,
       "y" : 81.29384613037109
@@ -1619,7 +1619,7 @@
       "frame_num" : 1,
       "hight" : 170.0,
       "name" : "rec1-2",
-      "tex_file" : "blank",
+      "tex_file" : "blankr",
       "width" : 170.0,
       "x" : 202.2622222900391,
       "y" : 84.58013916015625
@@ -1632,7 +1632,7 @@
       "frame_num" : 1,
       "hight" : 170.0,
       "name" : "rec1-3",
-      "tex_file" : "blank",
+      "tex_file" : "blankr",
       "width" : 170.0,
       "x" : 201.1102294921875,
       "y" : 84.58013916015625
@@ -1645,7 +1645,7 @@
       "frame_num" : 1,
       "hight" : 170.0,
       "name" : "rec1-4",
-      "tex_file" : "blank",
+      "tex_file" : "blankr",
       "width" : 170.0,
       "x" : 199.4265441894531,
       "y" : 84.58013916015625
@@ -1658,7 +1658,7 @@
       "frame_num" : 1,
       "hight" : 160.0,
       "name" : "rec2",
-      "tex_file" : "blank",
+      "tex_file" : "blankr",
       "width" : 160.0,
       "x" : 192.6104888916016,
       "y" : 83.44350433349609
@@ -1671,7 +1671,7 @@
       "frame_num" : 1,
       "hight" : 160.0,
       "name" : "rec2-0",
-      "tex_file" : "blank",
+      "tex_file" : "blankr",
       "width" : 160.0,
       "x" : 199.2459564208984,
       "y" : 82.09813690185547
@@ -1684,7 +1684,7 @@
       "frame_num" : 1,
       "hight" : 160.0,
       "name" : "rec2-1",
-      "tex_file" : "blank",
+      "tex_file" : "blankr",
       "width" : 160.0,
       "x" : 202.3475036621094,
       "y" : 83.57927703857422
@@ -1697,7 +1697,7 @@
       "frame_num" : 1,
       "hight" : 160.0,
       "name" : "rec2-2",
-      "tex_file" : "blank",
+      "tex_file" : "blankr",
       "width" : 160.0,
       "x" : 194.205566406250,
       "y" : 84.36921691894531
@@ -1710,7 +1710,7 @@
       "frame_num" : 1,
       "hight" : 160.0,
       "name" : "rec2-3",
-      "tex_file" : "blank",
+      "tex_file" : "blankr",
       "width" : 160.0,
       "x" : 194.1141052246094,
       "y" : 81.05506896972656
@@ -1723,7 +1723,7 @@
       "frame_num" : 1,
       "hight" : 160.0,
       "name" : "rec2-4",
-      "tex_file" : "blank",
+      "tex_file" : "blankr",
       "width" : 160.0,
       "x" : 192.654785156250,
       "y" : 84.36921691894531
@@ -1736,7 +1736,7 @@
       "frame_num" : 1,
       "hight" : 160.0,
       "name" : "rec2-5",
-      "tex_file" : "blank",
+      "tex_file" : "blankr",
       "width" : 160.0,
       "x" : 195.5347900390625,
       "y" : 84.36921691894531
@@ -1749,7 +1749,7 @@
       "frame_num" : 1,
       "hight" : 160.0,
       "name" : "rec2-6",
-      "tex_file" : "blank",
+      "tex_file" : "blankr",
       "width" : 160.0,
       "x" : 195.5531463623047,
       "y" : 81.84407806396484
@@ -1762,7 +1762,7 @@
       "frame_num" : 1,
       "hight" : 160.0,
       "name" : "rec2-6-0",
-      "tex_file" : "blank",
+      "tex_file" : "blankr",
       "width" : 160.0,
       "x" : 195.6125793457031,
       "y" : 81.00234222412109
@@ -1775,7 +1775,7 @@
       "frame_num" : 1,
       "hight" : 160.0,
       "name" : "rec2-6-1",
-      "tex_file" : "blank",
+      "tex_file" : "blankr",
       "width" : 160.0,
       "x" : 192.6882781982422,
       "y" : 81.04862976074219
@@ -1788,7 +1788,7 @@
       "frame_num" : 1,
       "hight" : 160.0,
       "name" : "rec2-6-2",
-      "tex_file" : "blank",
+      "tex_file" : "blankr",
       "width" : 160.0,
       "x" : 183.2937316894531,
       "y" : 84.89175415039063
@@ -1801,7 +1801,7 @@
       "frame_num" : 1,
       "hight" : 160.0,
       "name" : "rec2-6-3",
-      "tex_file" : "blank",
+      "tex_file" : "blankr",
       "width" : 160.0,
       "x" : 181.7109527587891,
       "y" : 84.87855529785156
@@ -1814,7 +1814,7 @@
       "frame_num" : 1,
       "hight" : 160.0,
       "name" : "rec2-6-4",
-      "tex_file" : "blank",
+      "tex_file" : "blankr",
       "width" : 160.0,
       "x" : 184.6739807128906,
       "y" : 83.36997222900391
@@ -1827,7 +1827,7 @@
       "frame_num" : 1,
       "hight" : 160.0,
       "name" : "rec2-6-5",
-      "tex_file" : "blank",
+      "tex_file" : "blankr",
       "width" : 160.0,
       "x" : 184.6739807128906,
       "y" : 82.30539703369141
@@ -1840,7 +1840,7 @@
       "frame_num" : 1,
       "hight" : 160.0,
       "name" : "rec2-6-6",
-      "tex_file" : "blank",
+      "tex_file" : "blankr",
       "width" : 160.0,
       "x" : 184.6436767578125,
       "y" : 81.48084259033203
@@ -1853,7 +1853,7 @@
       "frame_num" : 1,
       "hight" : 160.0,
       "name" : "rec2-6-7",
-      "tex_file" : "blank",
+      "tex_file" : "blankr",
       "width" : 160.0,
       "x" : 183.0789031982422,
       "y" : 81.51854705810547
@@ -1866,7 +1866,7 @@
       "frame_num" : 1,
       "hight" : 160.0,
       "name" : "rec2-6-8",
-      "tex_file" : "blank",
+      "tex_file" : "blankr",
       "width" : 160.0,
       "x" : 184.6672668457031,
       "y" : 84.84546661376953
@@ -1879,7 +1879,7 @@
       "frame_num" : 1,
       "hight" : 160.0,
       "name" : "rec2-6-9",
-      "tex_file" : "blank",
+      "tex_file" : "blankr",
       "width" : 160.0,
       "x" : 176.9388275146484,
       "y" : 82.33493804931641
@@ -1892,7 +1892,7 @@
       "frame_num" : 1,
       "hight" : 160.0,
       "name" : "rec2-6-9-0",
-      "tex_file" : "blank",
+      "tex_file" : "blankr",
       "width" : 160.0,
       "x" : 175.3993225097656,
       "y" : 84.92474365234375
@@ -1905,7 +1905,7 @@
       "frame_num" : 1,
       "hight" : 160.0,
       "name" : "rec2-6-9-1",
-      "tex_file" : "blank",
+      "tex_file" : "blankr",
       "width" : 160.0,
       "x" : 175.3549957275391,
       "y" : 81.54589080810547
@@ -1918,7 +1918,7 @@
       "frame_num" : 1,
       "hight" : 160.0,
       "name" : "rec2-6-9-2",
-      "tex_file" : "blank",
+      "tex_file" : "blankr",
       "width" : 160.0,
       "x" : 176.9670104980469,
       "y" : 84.94306945800781
@@ -1931,7 +1931,7 @@
       "frame_num" : 1,
       "hight" : 160.0,
       "name" : "rec2-6-9-3",
-      "tex_file" : "blank",
+      "tex_file" : "blankr",
       "width" : 160.0,
       "x" : 181.5307159423828,
       "y" : 82.30478668212891
@@ -1944,7 +1944,7 @@
       "frame_num" : 1,
       "hight" : 160.0,
       "name" : "rec2-6-9-4",
-      "tex_file" : "blank",
+      "tex_file" : "blankr",
       "width" : 160.0,
       "x" : 194.3103637695313,
       "y" : 70.12746429443359
@@ -1957,7 +1957,7 @@
       "frame_num" : 1,
       "hight" : 160.0,
       "name" : "rec2-6-9-4-0",
-      "tex_file" : "blank",
+      "tex_file" : "blankr",
       "width" : 160.0,
       "x" : 195.9054565429688,
       "y" : 70.08116912841797
@@ -1970,7 +1970,7 @@
       "frame_num" : 1,
       "hight" : 160.0,
       "name" : "rec2-6-9-4-1",
-      "tex_file" : "blank",
+      "tex_file" : "blankr",
       "width" : 160.0,
       "x" : 197.3675994873047,
       "y" : 70.08116912841797
@@ -1983,7 +1983,7 @@
       "frame_num" : 1,
       "hight" : 160.0,
       "name" : "rec2-6-9-4-2",
-      "tex_file" : "blank",
+      "tex_file" : "blankr",
       "width" : 160.0,
       "x" : 199.1794738769531,
       "y" : 71.67847442626953
@@ -1996,7 +1996,7 @@
       "frame_num" : 1,
       "hight" : 160.0,
       "name" : "rec2-6-9-4-3",
-      "tex_file" : "blank",
+      "tex_file" : "blankr",
       "width" : 160.0,
       "x" : 198.9626770019531,
       "y" : 70.08116912841797
@@ -2009,7 +2009,7 @@
       "frame_num" : 1,
       "hight" : 160.0,
       "name" : "rec2-6-9-4-4",
-      "tex_file" : "blank",
+      "tex_file" : "blankr",
       "width" : 160.0,
       "x" : 199.1351623535156,
       "y" : 73.25218200683594
@@ -2022,7 +2022,7 @@
       "frame_num" : 1,
       "hight" : 160.0,
       "name" : "rec2-6-9-4-5",
-      "tex_file" : "blank",
+      "tex_file" : "blankr",
       "width" : 160.0,
       "x" : 196.0323638916016,
       "y" : 70.85818481445313
@@ -2035,7 +2035,7 @@
       "frame_num" : 1,
       "hight" : 160.0,
       "name" : "rec2-6-9-4-6",
-      "tex_file" : "blank",
+      "tex_file" : "blankr",
       "width" : 160.0,
       "x" : 196.2095947265625,
       "y" : 73.40390777587891
@@ -2048,7 +2048,7 @@
       "frame_num" : 1,
       "hight" : 160.0,
       "name" : "rec2-6-9-4-7",
-      "tex_file" : "blank",
+      "tex_file" : "blankr",
       "width" : 160.0,
       "x" : 199.1782073974609,
       "y" : 70.02504730224609
@@ -2061,7 +2061,7 @@
       "frame_num" : 1,
       "hight" : 160.0,
       "name" : "rec2-6-9-5",
-      "tex_file" : "blank",
+      "tex_file" : "blankr",
       "width" : 160.0,
       "x" : 197.6215972900391,
       "y" : 73.39132690429688
@@ -2074,7 +2074,7 @@
       "frame_num" : 1,
       "hight" : 160.0,
       "name" : "rec2-6-9-6",
-      "tex_file" : "blank",
+      "tex_file" : "blankr",
       "width" : 160.0,
       "x" : 173.8741149902344,
       "y" : 84.27792358398438
@@ -2087,7 +2087,7 @@
       "frame_num" : 1,
       "hight" : 160.0,
       "name" : "rec2-6-9-7",
-      "tex_file" : "blank",
+      "tex_file" : "blankr",
       "width" : 160.0,
       "x" : 173.8485412597656,
       "y" : 81.45331573486328
@@ -2100,7 +2100,7 @@
       "frame_num" : 1,
       "hight" : 160.0,
       "name" : "rec2-6-9-8",
-      "tex_file" : "blank",
+      "tex_file" : "blankr",
       "width" : 160.0,
       "x" : 173.9076995849609,
       "y" : 84.94830322265625
@@ -2113,7 +2113,7 @@
       "frame_num" : 1,
       "hight" : 160.0,
       "name" : "rec2-6-9-9",
-      "tex_file" : "blank",
+      "tex_file" : "blankr",
       "width" : 160.0,
       "x" : 176.8501892089844,
       "y" : 81.50180053710938
@@ -2126,7 +2126,7 @@
       "frame_num" : 1,
       "hight" : 160.0,
       "name" : "rec2-6-9-9-0",
-      "tex_file" : "blank",
+      "tex_file" : "blankr",
       "width" : 160.0,
       "x" : 178.3566589355469,
       "y" : 81.54808807373047
@@ -2139,7 +2139,7 @@
       "frame_num" : 1,
       "hight" : 160.0,
       "name" : "rec2-6-9-9-1",
-      "tex_file" : "blank",
+      "tex_file" : "blankr",
       "width" : 160.0,
       "x" : 179.8188323974609,
       "y" : 81.50180053710938
@@ -2152,7 +2152,7 @@
       "frame_num" : 1,
       "hight" : 160.0,
       "name" : "rec2-6-9-9-2",
-      "tex_file" : "blank",
+      "tex_file" : "blankr",
       "width" : 160.0,
       "x" : 181.3252716064453,
       "y" : 81.50180053710938
@@ -2165,7 +2165,7 @@
       "frame_num" : 1,
       "hight" : 160.0,
       "name" : "rec2-6-9-9-3",
-      "tex_file" : "blank",
+      "tex_file" : "blankr",
       "width" : 160.0,
       "x" : 182.4329681396484,
       "y" : 81.54808807373047
@@ -2178,7 +2178,7 @@
       "frame_num" : 1,
       "hight" : 160.0,
       "name" : "rec2-6-9-9-4",
-      "tex_file" : "blank",
+      "tex_file" : "blankr",
       "width" : 160.0,
       "x" : 173.8769989013672,
       "y" : 82.828613281250

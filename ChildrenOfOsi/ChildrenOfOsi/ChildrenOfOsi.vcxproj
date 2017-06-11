@@ -185,6 +185,7 @@
     <ClInclude Include="Containers.h" />
     <ClInclude Include="ConversationLogObj.h" />
     <ClInclude Include="ConversationPoint.h" />
+    <ClInclude Include="pfl.h" />
     <ClInclude Include="ShrineConfig.h" />
     <ClInclude Include="SoldierConfig.h" />
     <ClInclude Include="Tutorial.h" />
