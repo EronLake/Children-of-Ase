@@ -1099,7 +1099,7 @@ void DialogueController::otherConversationPoint(dialogue_point line)
 			    //replace_all(con_pt_sentence, "HERO", hero_name);//receiver or doer here? ask Justin
 
 			else if (act_name.find("Bribe") != string::npos) {
-				std::string gift = "offer a gift to ";
+				std::string gift = "offer a gift to";
 				replace_all(con_pt_sentence, "HERO", hero_name);
 				replace_all(con_pt_sentence, "ACTION", gift);
 			}
@@ -2057,8 +2057,13 @@ void DialogueController::other_response_soldier(std::string info, std::string he
 			//std::cout << soldier->getCurrentLeader()->getName();
 		}
 
+		std::string name_str = other->getName();
+		std::string::size_type name_end = name_str.find_last_of('_');
+		std::string n_str = name_str.substr(0, name_end);
+		replace_all(n_str, "_", " ");
+		name_str = n_str;
 		
-		message = other->getName() + ": " + reply_pt_sentence + "\n\n";
+		message = name_str + ": " + reply_pt_sentence + "\n\n";
 
 		state = 7;
 			//otherConversationPoint(line);
@@ -2211,10 +2216,7 @@ void DialogueController::other_response_babalawo(std::string info, std::string h
 	reply_pt_sentence = dialogue.gen_dialog_babalawo(line,other);
 
 	std::string name_str = other->getName();
-	std::string::size_type name_end = name_str.find_last_of('_');
-	std::string n_str = name_str.substr(0, name_end);
-	replace_all(n_str, "_", " ");
-	name_str = n_str;
+	replace_all(name_str, "_", " ");
 
 
 	message = name_str + ": " + reply_pt_sentence + "\n\n";
@@ -2567,10 +2569,7 @@ void DialogueController::startConversation(WorldObj* n, bool playerTalk)
 					if (other->getName().find("Babalawo") != string::npos) {//if player interacting with babalawo
 						player_choose_babalawo();
 						std::string name_str = other->getName();
-						std::string::size_type name_end = name_str.find_last_of('_');
-						std::string n_str = name_str.substr(0, name_end);
-						replace_all(n_str, "_", " ");
-						name_str = n_str;
+						replace_all(name_str, "_", " ");
 						message = name_str + ": " + dialogue.gen_dialog_babalawo({ "Greeting","Greeting" }, other);
 					}
 					else if (other->getName().find("Shrine") != string::npos)//if player interacting with shrine
@@ -2690,9 +2689,11 @@ void DialogueController::exitDialogue()
 				state = 7;
 		}
 		else {
+			std::string name_str = other->getName();
+			replace_all(name_str, "_", " ");
 			Soldier* my_sol = dynamic_cast<Soldier*>(other);
 			if(!my_sol)//make babalawo farewell appear on exit
-                message = other->getName() + ": " + dialogue.gen_dialog_babalawo({ "Farewell","Farewell" }, other);
+                message = name_str + ": " + dialogue.gen_dialog_babalawo({ "Farewell","Farewell" }, other);
 			remove_soldier_opts();
 			remove_babalawo_opts();
 		}
