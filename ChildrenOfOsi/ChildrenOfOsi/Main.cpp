@@ -148,9 +148,6 @@ void test(int i) { for (int i = 0; i < 100; i++) cout << "hello this is the thre
 int main() {
 	WorldObj* screen = new WorldObj(Vector2f(0.0, 0.0), 25000U, 25000U);	//init screen
 
-	//SquareGrid grid = make_diagram1();
-	//draw_grid(grid, 1);
-	//
 	//system("PAUSE");
 
 	QuadTree* collideTree = new QuadTree(0, *screen);
@@ -167,8 +164,8 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 {
 	game_state current_game_state = game_state::load_game;
 	//threadmanager::thread_pool pool(5);
-	Rectangle::tex->setFile("Assets/Sprites/blankr.png", 1);
-	Point::tex->setFile("Assets/Sprites/point.png", 1);
+	Rectangle::tex->setFile("../ChildrenofOsi/Assets/Sprites/blankr.png", 1);
+	Point::tex->setFile("../ChildrenofOsi/Assets/Sprites/point.png", 1);
 
 	RiverObj* rivObj = new RiverObj();
 	rivObj->initialize_lines();
@@ -245,8 +242,8 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	*/
 	tBuffer->run();
 
-	ObjConfig::textureMap[Containers::texture_table["blank"]] = pair<string, int>("Assets/Sprites/blank.png", 1);
-	ObjConfig::textureMap[Containers::texture_table["border"]] = pair<string, int>("Assets/Sprites/border.png", 1);
+	ObjConfig::textureMap[Containers::texture_table["blank"]] = pair<string, int>("../ChildrenofOsi/Assets/Sprites/blank.png", 1);
+	ObjConfig::textureMap[Containers::texture_table["border"]] = pair<string, int>("../ChildrenofOsi/Assets/Sprites/border.png", 1);
 	ObjConfig::standard_con.insert(Containers::texture_table["blank"]);
 	ObjConfig::standard_con.insert(Containers::texture_table["border"]);
 
@@ -288,7 +285,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	yemoja->trait_vec["Compliment"] = 180;
 	yemoja->trait_vec["Insult"] = 120;
 	yemoja->trait_vec["Intimidate"] = 120;
-	yemoja->trait_vec["Offer Praise"] = 160;
+	yemoja->trait_vec["Grovel"] = 160;
 	yemoja->trait_vec["Boast"] = 160;
 	yemoja->song = "Music/HeroThemes/Yemoja.flac";
 	heroes.push_back(yemoja);
@@ -300,7 +297,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	oya->trait_vec["Compliment"] = 160;
 	oya->trait_vec["Insult"] = 120;
 	oya->trait_vec["Intimidate"] = 180;
-	oya->trait_vec["Offer Praise"] = 120;
+	oya->trait_vec["Grovel"] = 120;
 	oya->trait_vec["Boast"] = 202;
 	oya->song = "Music/HeroThemes/Oya.flac";
 	oya->set_busy(0);//added for testing
@@ -310,21 +307,21 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	ogun->trait_vec["Compliment"] = 120;
 	ogun->trait_vec["Insult"] = 202;
 	ogun->trait_vec["Intimidate"] = 120;
-	ogun->trait_vec["Offer Praise"] = 180;
+	ogun->trait_vec["Grovel"] = 180;
 	ogun->trait_vec["Boast"] = 120;
 	ogun->song = "Music/HeroThemes/Ogun.flac";
 	ogun->set_busy(0);//added for testing
 	heroes.push_back(ogun);
 
-	//yemoja->rel[1]->addNotoriety(50);
-	///yemoja->rel[1]->addStrength(50);
-	//yemoja->rel[1]->addAffinity(40);
-	//oya->rel[1]->addNotoriety(50);
-	///oya->rel[1]->addStrength(50);
-	//oya->rel[1]->addAffinity(50);
-	//yemoja->rel[1]->addNotoriety(50);
-	///yemoja->rel[1]->addStrength(50);
-	//ogun->rel[1]->addAffinity(50);
+	/*yemoja->rel[1]->addNotoriety(50);
+	yemoja->rel[1]->addStrength(50);
+	yemoja->rel[1]->addAffinity(50);
+	oya->rel[1]->addNotoriety(50);
+	oya->rel[1]->addStrength(50);
+	oya->rel[1]->addAffinity(50);
+	yemoja->rel[1]->addNotoriety(50);
+	yemoja->rel[1]->addStrength(50);
+	ogun->rel[1]->addAffinity(50);*/
 
 	vector<std::set<Texture*>> starting_location;
 
@@ -363,11 +360,11 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 		gameplay_functions->add_texture("map4_4", 0, 0, 0);
 		gameplay_functions->add_texture("map4_5", 0, 0, 0);
 
-		gameplay_functions->add_texture("map5_1", 0, 0, 0);
+		/*gameplay_functions->add_texture("map5_1", 0, 0, 0);
 		gameplay_functions->add_texture("map5_2", 0, 0, 0);
 		gameplay_functions->add_texture("map5_3", 0, 0, 0);
 		gameplay_functions->add_texture("map5_4", 0, 0, 0);
-		gameplay_functions->add_texture("map5_5", 0, 0, 0);
+		gameplay_functions->add_texture("map5_5", 0, 0, 0);*/
 
 		tBuffer->run();
 		RenderHelper::gmap->setTextures();
@@ -386,18 +383,18 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 		glFinish();
 	});
 
-	Rectangle::texRIGHT->setFile("Assets/Sprites/LeftRecoilSpark.png", 18);
-	Rectangle::texLEFT->setFile("Assets/Sprites/RightRecoilSpark.png", 18);
-	Rectangle::texUP->setFile("Assets/Sprites/ForwardRecoilSpark.png", 18);
-	Rectangle::texDOWN->setFile("Assets/Sprites/BackRecoilSpark.png", 18);
+	Rectangle::texRIGHT->setFile("../ChildrenofOsi/Assets/Sprites/LeftRecoilSpark.png", 18);
+	Rectangle::texLEFT->setFile("../ChildrenofOsi/Assets/Sprites/RightRecoilSpark.png", 18);
+	Rectangle::texUP->setFile("../ChildrenofOsi/Assets/Sprites/ForwardRecoilSpark.png", 18);
+	Rectangle::texDOWN->setFile("../ChildrenofOsi/Assets/Sprites/BackRecoilSpark.png", 18);
 
-	Rectangle::texAtkRIGHT->setFile("Assets/Sprites/LeftRecoilSpark.png", 18);
-	Rectangle::texAtkLEFT->setFile("Assets/Sprites/RightRecoilSpark.png", 18);
-	Rectangle::texAtkUP->setFile("Assets/Sprites/ForwardRecoilSpark.png", 18);
-	Rectangle::texAtkDOWN->setFile("Assets/Sprites/BackRecoilSpark.png", 18);
+	Rectangle::texAtkRIGHT->setFile("../ChildrenofOsi/Assets/Sprites/LeftRecoilSpark.png", 18);
+	Rectangle::texAtkLEFT->setFile("../ChildrenofOsi/Assets/Sprites/RightRecoilSpark.png", 18);
+	Rectangle::texAtkUP->setFile("../ChildrenofOsi/Assets/Sprites/ForwardRecoilSpark.png", 18);
+	Rectangle::texAtkDOWN->setFile("../ChildrenofOsi/Assets/Sprites/BackRecoilSpark.png", 18);
 
-	Rectangle::texTalk->setFile("Assets/Sprites/Talk_Bubble.png", 7);
-	Rectangle::texHeroTalk->setFile("Assets/Sprites/Talk_Bubble.png", 7);
+	Rectangle::texTalk->setFile("../ChildrenofOsi/Assets/Sprites/Talk_Bubble.png", 7);
+	Rectangle::texHeroTalk->setFile("../ChildrenofOsi/Assets/Sprites/Talk_Bubble.png", 7);
 
 	for (int i = 0; i < 100; i++) {
 		//std:://cout << "AT THE THREAD INITIALIZTION CALL!!!****** " << endl;
@@ -786,12 +783,28 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	cout << "size of largestruct is " << largeStruct->size() << endl;
 	for (auto it : *largeStruct) cout << (it)->getName() << endl;
 
+	//ASTAR
+	/*GridWithWeights grid = make_diagram4();
+	SquareGrid::Location start1{ 100,100 };
+	SquareGrid::Location end{ 249 , 249 };
+	unordered_map<SquareGrid::Location, SquareGrid::Location> came_from;
+	unordered_map<SquareGrid::Location, double> cost_so_far;
+	dijkstra_search(grid, start1, end, came_from, cost_so_far);
+	vector<SquareGrid::Location> path = reconstruct_path(start1, end, came_from);
+	auto size = path.size();
+	cout << "size of path is " << size << endl;
+	SquareGrid::Location goal = path[size - 1];
+	cout << "last element in path is " << std::get<0>(goal) << ", " << std::get<1>(goal) << endl;
+	if (path[size - 1] != end) cout << "CANT FIND PATH" << endl;
+	draw_grid(grid, 1, nullptr, nullptr, &path);*/
+
 	if (PRELOAD_TEX) {
 		tm.join();
 		t0.join();
 		t1.join();
 		t2.join();
 	}
+
 	//oya->set_busy(0);
 	//yemoja->set_busy(0);
 	bool can_switch = true;
@@ -1079,10 +1092,10 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 					//_QuadTree->Insert(recVec[i]);	//insert all obj into tree
 				}
 				for (int i = 0; i < movVec.size(); i++) {
-					Player* temp = CheckClass::isPlayer(movVec[i]);
+					/*Player* temp = CheckClass::isPlayer(movVec[i]);
 					if (temp) {
 						if (temp->can_move == false) continue;
-					}
+					}*/
 					//if (movVec[i]->getName() == "Yemoja") cout << "Yemoja grid is "<< movVec[i]->grid_location.first << ", " << movVec[i]->grid_location.second << endl;
 					//if (movVec[i]->getName() == "Shango") cout << "Shango grid is " << movVec[i]->grid_location.first << ", " << movVec[i]->grid_location.second << endl;
 					if (movVec[i]->getType() != WorldObj::TYPE_WORLDOBJ) {

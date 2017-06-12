@@ -771,7 +771,7 @@ int Movement::attack(WorldObj* obj) {
 							//std:://////cout << "Player hit " << liv->getName() << std::endl;
 							if (objVec[i]->getType() > WorldObj::TYPE_LIVINGOBJ) {
 								NPC* npc = CheckClass::isNPC(liv);
-								if (npc) {
+								if (npc && npc->getType()>WorldObj::TYPE_NPC) {
 									Soldier* s2 = CheckClass::isSoldier(a->second->get_creator());
 									bool friendly = (npc->getVillage()->get_alliance() == s2->getVillage()->get_alliance());
 									manager->createTaskForAudio("PlaySound", "SOUND", "SFX/hit.wav", nullptr, RegionState::soundType::sfx);

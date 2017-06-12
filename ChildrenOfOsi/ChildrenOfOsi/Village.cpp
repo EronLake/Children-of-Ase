@@ -116,11 +116,15 @@ void Village::init_villages()
 		new_village->defenders->addToParty(itr.second, true);
 
 		//adds soldiers to party
+		int bodyguards = 2;
 		for (auto itor : Containers::soldier_table)
 		{
 			if (itor.second->getName().find(party_name) != string::npos)
 			{
-				new_village->barracks->addToParty(itor.second, false);
+				if (bodyguards>0) {
+					new_village->defenders->addToParty(itor.second, false);
+					bodyguards--;
+				} else new_village->barracks->addToParty(itor.second, false);
 			}
 
 		}

@@ -90,11 +90,11 @@ GameMap::GameMap()
 	map4_4 = new Rectangle(Vector2f(15000, 15000.0), 5000.0, 5000.0);
 	map4_5 = new Rectangle(Vector2f(20000, 15000.0), 5000.0, 5000.0);
 
-	map5_1 = new Rectangle(Vector2f(0.0, 20000.0), 5000.0, 5000.0);
+	/*map5_1 = new Rectangle(Vector2f(0.0, 20000.0), 5000.0, 5000.0);
 	map5_2 = new Rectangle(Vector2f(5000.0, 20000.0), 5000.0, 5000.0);
 	map5_3 = new Rectangle(Vector2f(10000.0, 20000.0), 5000.0, 5000.0);
 	map5_4 = new Rectangle(Vector2f(15000, 20000.0), 5000.0, 5000.0);
-	map5_5 = new Rectangle(Vector2f(20000, 20000.0), 5000.0, 5000.0);
+	map5_5 = new Rectangle(Vector2f(20000, 20000.0), 5000.0, 5000.0);*/
 	
 
 	//river = new Rectangle(Vector2f(0.0, 0.0), 10000.0, 10000.0);
@@ -208,22 +208,22 @@ void GameMap::setSprite()
 		map1_4->sprite.setTexture(map1_4tex);
 		map1_5->sprite.setTexture(map1_5tex);
 
-		map_pieces.push_back({ map1_1 ,"Assets/Sprites/map1_1.png" });
-		map_pieces.push_back({ map1_2 ,"Assets/Sprites/map1_2.png" });
-		map_pieces.push_back({ map1_3 ,"Assets/Sprites/map1_3.png" });
-		map_pieces.push_back({ map1_4 ,"Assets/Sprites/map1_4.png" });
-		map_pieces.push_back({ map1_5 ,"Assets/Sprites/map1_5.png" });
+		map_pieces.push_back({ map1_1 , SPRITES_PATH + "map1_1.png" });
+		map_pieces.push_back({ map1_2 , SPRITES_PATH + "map1_2.png" });
+		map_pieces.push_back({ map1_3 , SPRITES_PATH + "map1_3.png" });
+		map_pieces.push_back({ map1_4 , SPRITES_PATH + "map1_4.png" });
+		map_pieces.push_back({ map1_5 , SPRITES_PATH + "map1_5.png" });
 
 		map2_1->sprite.setTexture(map2_1tex);
 		map2_2->sprite.setTexture(map2_2tex);
 		map2_3->sprite.setTexture(map2_3tex);
 		map2_4->sprite.setTexture(map2_4tex);
 		map2_5->sprite.setTexture(map2_5tex);
-		map_pieces.push_back({ map2_1 ,"Assets/Sprites/map2_1.png" });
-		map_pieces.push_back({ map2_2 ,"Assets/Sprites/map2_2.png" });
-		map_pieces.push_back({ map2_3 ,"Assets/Sprites/map2_3.png" });
-		map_pieces.push_back({ map2_4 ,"Assets/Sprites/map2_4.png" });
-		map_pieces.push_back({ map2_5 ,"Assets/Sprites/map2_5.png" });
+		map_pieces.push_back({ map2_1 , SPRITES_PATH + "map2_1.png" });
+		map_pieces.push_back({ map2_2 , SPRITES_PATH + "map2_2.png" });
+		map_pieces.push_back({ map2_3 , SPRITES_PATH + "map2_3.png" });
+		map_pieces.push_back({ map2_4 , SPRITES_PATH + "map2_4.png" });
+		map_pieces.push_back({ map2_5 , SPRITES_PATH + "map2_5.png" });
 
 		map3_1->sprite.setTexture(map3_1tex);
 		map3_2->sprite.setTexture(map3_2tex);
@@ -231,24 +231,24 @@ void GameMap::setSprite()
 		map3_4->sprite.setTexture(map3_4tex);
 
 		map3_5->sprite.setTexture(map3_5tex);
-		map_pieces.push_back({ map3_1 ,"Assets/Sprites/map3_1.png" });
-		map_pieces.push_back({ map3_2 ,"Assets/Sprites/map3_2.png" });
-		map_pieces.push_back({ map3_3 ,"Assets/Sprites/map3_3.png" });
-		map_pieces.push_back({ map3_4 ,"Assets/Sprites/map3_4.png" });
-		map_pieces.push_back({ map3_5 ,"Assets/Sprites/map3_5.png" });
+		map_pieces.push_back({ map3_1 , SPRITES_PATH + "map3_1.png" });
+		map_pieces.push_back({ map3_2 , SPRITES_PATH + "map3_2.png" });
+		map_pieces.push_back({ map3_3 , SPRITES_PATH + "map3_3.png" });
+		map_pieces.push_back({ map3_4 , SPRITES_PATH + "map3_4.png" });
+		map_pieces.push_back({ map3_5 , SPRITES_PATH + "map3_5.png" });
 
 		map4_1->sprite.setTexture(map4_1tex);
 		map4_2->sprite.setTexture(map4_2tex);
 		map4_3->sprite.setTexture(map4_3tex);
 		map4_4->sprite.setTexture(map4_4tex);
 		map4_5->sprite.setTexture(map4_5tex);
-		map_pieces.push_back({ map4_1 ,"Assets/Sprites/map4_1.png" });
-		map_pieces.push_back({ map4_2 ,"Assets/Sprites/map4_2.png" });
-		map_pieces.push_back({ map4_3 ,"Assets/Sprites/map4_3.png" });
-		map_pieces.push_back({ map4_4 ,"Assets/Sprites/map4_4.png" });
-		map_pieces.push_back({ map4_5 ,"Assets/Sprites/map4_5.png" });
+		map_pieces.push_back({ map4_1 , SPRITES_PATH + "map4_1.png" });
+		map_pieces.push_back({ map4_2 , SPRITES_PATH + "map4_2.png" });
+		map_pieces.push_back({ map4_3 , SPRITES_PATH + "map4_3.png" });
+		map_pieces.push_back({ map4_4 , SPRITES_PATH + "map4_4.png" });
+		map_pieces.push_back({ map4_5 , SPRITES_PATH + "map4_5.png" });
 
-		map5_1->sprite.setTexture(map5_1tex);
+		/*map5_1->sprite.setTexture(map5_1tex);
 		map5_2->sprite.setTexture(map5_2tex);
 		map5_3->sprite.setTexture(map5_3tex);
 		map5_4->sprite.setTexture(map5_4tex);
@@ -257,7 +257,7 @@ void GameMap::setSprite()
 		map_pieces.push_back({ map5_2 ,"Assets/Sprites/map5_2.png" });
 		map_pieces.push_back({ map5_3 ,"Assets/Sprites/map5_3.png" });
 		map_pieces.push_back({ map5_4 ,"Assets/Sprites/map5_4.png" });
-		map_pieces.push_back({ map5_5 ,"Assets/Sprites/map5_5.png" });
+		map_pieces.push_back({ map5_5 ,"Assets/Sprites/map5_5.png" });*/
 
 		//river->sprite.setTexture(riverTex);
 	}

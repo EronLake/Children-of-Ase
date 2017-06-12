@@ -56,13 +56,13 @@
       <Filter>Memory</Filter>
     </ClCompile>
     <ClCompile Include="Movement.cpp">
-      <Filter>Rendering\Physics</Filter>
+      <Filter>Physics</Filter>
     </ClCompile>
     <ClCompile Include="PhysicsManager.cpp">
-      <Filter>Rendering\Physics</Filter>
+      <Filter>Physics</Filter>
     </ClCompile>
     <ClCompile Include="PhysicsTestSuite.cpp">
-      <Filter>Rendering\Physics</Filter>
+      <Filter>Physics</Filter>
     </ClCompile>
     <ClCompile Include="MessageLog.cpp">
       <Filter>Task Manager</Filter>
@@ -80,7 +80,7 @@
       <Filter>Rendering</Filter>
     </ClCompile>
     <ClCompile Include="QuadTree.cpp">
-      <Filter>Rendering\Physics</Filter>
+      <Filter>Physics</Filter>
     </ClCompile>
     <ClCompile Include="Soldier.cpp">
       <Filter>Game Objects</Filter>
@@ -104,7 +104,7 @@
       <Filter>Rendering</Filter>
     </ClCompile>
     <ClCompile Include="Vector2f.cpp">
-      <Filter>Rendering\Physics</Filter>
+      <Filter>Physics</Filter>
     </ClCompile>
     <ClCompile Include="WorldObj.cpp">
       <Filter>Game Objects</Filter>
@@ -156,13 +156,13 @@
       <Filter>AI</Filter>
     </ClCompile>
     <ClCompile Include="Line.cpp">
-      <Filter>Rendering\Physics</Filter>
+      <Filter>Physics</Filter>
     </ClCompile>
     <ClCompile Include="Point.cpp">
-      <Filter>Rendering\Physics</Filter>
+      <Filter>Physics</Filter>
     </ClCompile>
     <ClCompile Include="RiverObj.cpp">
-      <Filter>Rendering\Physics</Filter>
+      <Filter>Physics</Filter>
     </ClCompile>
     <ClCompile Include="Village.cpp">
       <Filter>Game Objects</Filter>
@@ -269,6 +269,9 @@
       <Filter>Game Objects\Configs</Filter>
     </ClCompile>
     <ClCompile Include="RegionState.cpp" />
+    <ClCompile Include="..\External Dependencies\JSONCPP\src\lib_json\json_reader.cpp" />
+    <ClCompile Include="..\External Dependencies\JSONCPP\src\lib_json\json_value.cpp" />
+    <ClCompile Include="..\External Dependencies\JSONCPP\src\lib_json\json_writer.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AIHelper.h">
@@ -326,13 +329,13 @@
       <Filter>Memory</Filter>
     </ClInclude>
     <ClInclude Include="Movement.h">
-      <Filter>Rendering\Physics</Filter>
+      <Filter>Physics</Filter>
     </ClInclude>
     <ClInclude Include="PhysicsManager.h">
-      <Filter>Rendering\Physics</Filter>
+      <Filter>Physics</Filter>
     </ClInclude>
     <ClInclude Include="PhysicsTestSuite.h">
-      <Filter>Rendering\Physics</Filter>
+      <Filter>Physics</Filter>
     </ClInclude>
     <ClInclude Include="MessageLog.h">
       <Filter>Task Manager</Filter>
@@ -353,7 +356,7 @@
       <Filter>Game Objects</Filter>
     </ClInclude>
     <ClInclude Include="QuadTree.h">
-      <Filter>Rendering\Physics</Filter>
+      <Filter>Physics</Filter>
     </ClInclude>
     <ClInclude Include="Soldier.h">
       <Filter>Game Objects</Filter>
@@ -380,7 +383,7 @@
       <Filter>Rendering</Filter>
     </ClInclude>
     <ClInclude Include="Vector2f.h">
-      <Filter>Rendering\Physics</Filter>
+      <Filter>Physics</Filter>
     </ClInclude>
     <ClInclude Include="WorldObj.h">
       <Filter>Game Objects</Filter>
@@ -441,13 +444,13 @@
       <Filter>AI</Filter>
     </ClInclude>
     <ClInclude Include="Line.h">
-      <Filter>Rendering\Physics</Filter>
+      <Filter>Physics</Filter>
     </ClInclude>
     <ClInclude Include="Point.h">
-      <Filter>Rendering\Physics</Filter>
+      <Filter>Physics</Filter>
     </ClInclude>
     <ClInclude Include="RiverObj.h">
-      <Filter>Rendering\Physics</Filter>
+      <Filter>Physics</Filter>
     </ClInclude>
     <ClInclude Include="Village.h">
       <Filter>Game Objects</Filter>
@@ -524,7 +527,7 @@
       <Filter>Dialogue</Filter>
     </ClInclude>
     <ClInclude Include="UniformGrid.h">
-      <Filter>Rendering\Physics</Filter>
+      <Filter>Physics</Filter>
     </ClInclude>
     <ClInclude Include="Tag.h">
       <Filter>Dialogue</Filter>
@@ -570,7 +573,7 @@
       <Filter>Memory</Filter>
     </Text>
     <Text Include="physics_test.txt">
-      <Filter>Rendering\Physics</Filter>
+      <Filter>Physics</Filter>
     </Text>
     <Text Include="message_log.txt">
       <Filter>Task Manager</Filter>
@@ -628,7 +631,7 @@
     <Filter Include="Game Objects\Configs">
       <UniqueIdentifier>{24270986-095c-4d33-8df6-05fcf8c02246}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Rendering\Physics">
+    <Filter Include="Physics">
       <UniqueIdentifier>{6177734e-99ee-46b7-a873-608cea35423d}</UniqueIdentifier>
     </Filter>
   </ItemGroup>

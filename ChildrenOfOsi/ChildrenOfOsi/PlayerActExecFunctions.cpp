@@ -23,7 +23,7 @@ void PlayerActExecFunctions::execute_start(std::string act_name, Hero* receiver)
 	//note: act_name should corrispond to the action names in json so they can be looked up in action table
 	
 	// import action based off of an already exting action of the reciver
-	Action* ref_action = Containers::action_table[act_name + "_" + std::to_string(receiver->name)];
+	Action* ref_action = Containers::action_table[act_name + "_" + std::to_string(receiver->name) + "-1"];
 	
 	Action* cur_action = new Action(player, receiver, player, ref_action->getUtility(), ref_action->getWhy(),
 		ref_action->name, ref_action->exe_name);
@@ -77,7 +77,7 @@ void PlayerActExecFunctions::execute_start(std::string act_name, Hero* receiver)
 		receiver->set_busy(Hero::BUSY_REC_FIGHT);
 		//RegionState::in_combat = true;
 		//RegionState::switch_music = true;
-	} else if (act_name == "Duel") {
+	} /*else if (act_name == "Duel") {
 		Fight* fight_obj = new Fight(player->getParty(), receiver->getParty(), 1);
 		receiver->set_busy(Hero::BUSY_REC_FIGHT);
 		//RegionState::in_combat = true;
@@ -95,7 +95,7 @@ void PlayerActExecFunctions::execute_start(std::string act_name, Hero* receiver)
 		//RegionState::in_combat = true;
 		//RegionState::switch_music = true;
 		
-	}
+	}*/
 
 	//ADITIONAL FUNCTION act_name == "Conquer" || act_name == "Duel" ||act_name == "Spar" ||
 
@@ -166,7 +166,7 @@ void PlayerActExecFunctions::execute_end(bool if_succ) {
 		cur_action->getReceiver()->set_busy(0);
 	}
 	
-	if (player->get_incapacitated()) {
+	else if (player->get_incapacitated()) {
 		player->setLoc(player->getVillage()->get_village_location());
 		player->capacitate(0);
 	}
@@ -281,6 +281,8 @@ void PlayerActExecFunctions::execute_dialog()
 
 	Action* cur_action = player->cur_action;
 
+	Hero* receiver = cur_action->getReceiver();
+
 	//these two lines strip the number off the end of the name 
 	std::string::size_type name_end = cur_action->getName().find_last_of('_');
 	std::string act_name = cur_action->getName().substr(0, name_end);
@@ -294,13 +296,19 @@ void PlayerActExecFunctions::execute_dialog()
 	{
 		if (act_name == "Duel") {
 			//Fight* fight_obj = new Fight(player->getParty(), cur_action->getReceiver()->getParty(), 1);
+			Fight* fight_obj = new Fight(player->getParty(), receiver->getParty(), 1);
+			receiver->set_busy(Hero::BUSY_REC_FIGHT);
 
 		}
 		else if (act_name == "Spar") {
 			//Fight* fight_obj = new Fight(player->getParty(), cur_action->getReceiver()->getParty(), 2);
+			Fight* fight_obj = new Fight(player->getParty(), receiver->getParty(), 1);
+			receiver->set_busy(Hero::BUSY_REC_FIGHT);
 		}
 		else if (act_name == "Train With") {
 			//Fight* fight_obj = new Fight(player->getParty(), cur_action->getReceiver()->getParty(), 3);
+			Fight* fight_obj = new Fight(player->getParty(), receiver->getParty(), 1);
+			receiver->set_busy(Hero::BUSY_REC_FIGHT);
 		}
 	}
 

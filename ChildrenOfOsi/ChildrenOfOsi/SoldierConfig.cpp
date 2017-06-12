@@ -13,14 +13,26 @@ SoldierConfig::~SoldierConfig()
 
 void SoldierConfig::import_config(vector<WorldObj*>* movVec, unordered_map<Texture*, pair<string, int>>* textureMap, ChildrenOfOsi* gameplay_func, TaskBuffer* tBuffer)
 {
+	bool alive = true;
 	Json::Value root;
-	Json::Reader reader;
+	while (alive) {
 
+		Json::Reader reader;
+		Json::CharReaderBuilder builder;
+		//std::string test = 
+		std::ifstream test("../ChildrenofOsi/soldier_config.json", std::ifstream::binary);
+		std::string errs;
+		bool ok = reader.parse(test, root, false);
+		if (!ok)
+		{
+			// report to the user the failure and their locations in the document.
+			std::cout << errs.c_str() << "\n";
+		}
 
-	std::ifstream file("soldier_config.json");
-
-	file >> root;
-
+		std::string encoding = root.get("encoding", "UTF-8").asString();
+		std::cout << encoding << "\n";
+		alive = false;
+	}
 	for (auto itr = root.begin(); itr != root.end(); itr++)
 	{
 		for (int sol_num = 0; sol_num < (*itr)["soldier_number"].asInt(); sol_num++) {
@@ -59,14 +71,13 @@ void SoldierConfig::set_soldier(vector<WorldObj*>* movVec, ChildrenOfOsi* gamepl
 		gameplay_func->add_soldier(name, 100 * x, 100 * y, true);
 		tBuffer->run();
 
+		Containers::soldier_table[name]->setWidth(width);
+		Containers::soldier_table[name]->setHeight(hight);
+
 		Containers::soldier_table[name]->offsetBody(0, bodyx1, bodyx2, bodyy1, bodyy2);
 		Containers::soldier_table[name]->offset_effect(0, 100, 100, 100, 100);
 
 		Containers::soldier_table[name]->setName(name);
-		Containers::soldier_table[name]->setWidth(width);
-		Containers::soldier_table[name]->setHeight(hight);
-
-
 		Containers::soldier_table[name]->setInteractable(true);
 
 		Containers::soldier_table[name]->setHealth(health);
@@ -124,7 +135,7 @@ void SoldierConfig::init_sprites(ChildrenOfOsi* gameplay_func, TaskBuffer* tBuff
 	else //if (name.find("Shango_Soldier") != string::npos)
 	{
 		region_con = &ObjConfig::oasis_con;
-		path = SOLDIER_OGUN_PATH; 
+		path = SOLDIER_OASIS_PATH; 
 	}
 
 
@@ -177,7 +188,7 @@ void SoldierConfig::init_sprites(ChildrenOfOsi* gameplay_func, TaskBuffer* tBuff
 	Containers::soldier_table[name]->sprite.atk2_left = Containers::texture_table[sprites["atk2_left"]["0"].asString()];
 	Containers::soldier_table[name]->sprite.atk2_right = Containers::texture_table[sprites["atk2_right"]["0"].asString()];
 
-	Containers::soldier_table[name]->sprite.spin_up = Containers::texture_table[sprites["spin_up"]["0"].asString()];
+	/*Containers::soldier_table[name]->sprite.spin_up = Containers::texture_table[sprites["spin_up"]["0"].asString()];
 	Containers::soldier_table[name]->sprite.spin_down = Containers::texture_table[sprites["spin_down"]["0"].asString()];
 	Containers::soldier_table[name]->sprite.spin_left = Containers::texture_table[sprites["spin_left"]["0"].asString()];
 	Containers::soldier_table[name]->sprite.spin_right = Containers::texture_table[sprites["spin_right"]["0"].asString()];
@@ -186,7 +197,7 @@ void SoldierConfig::init_sprites(ChildrenOfOsi* gameplay_func, TaskBuffer* tBuff
 	Containers::soldier_table[name]->sprite.breathe_down = Containers::texture_table[sprites["breathe_down"]["0"].asString()];
 	Containers::soldier_table[name]->sprite.breathe_left = Containers::texture_table[sprites["breathe_left"]["0"].asString()];
 	Containers::soldier_table[name]->sprite.breathe_right = Containers::texture_table[sprites["breathe_right"]["0"].asString()];
-
+*/
 	Containers::soldier_table[name]->sprite.hurt_up = Containers::texture_table[sprites["hurt_up"]["0"].asString()];
 	Containers::soldier_table[name]->sprite.hurt_down = Containers::texture_table[sprites["hurt_down"]["0"].asString()];
 	Containers::soldier_table[name]->sprite.hurt_left = Containers::texture_table[sprites["hurt_left"]["0"].asString()];
@@ -252,7 +263,7 @@ void SoldierConfig::init_attacks(ChildrenOfOsi* gameplay_func, TaskBuffer* tBuff
 	for (auto itor : attacks["sprites"])
 	{
 		//create textures for the soldiers
-		(*textureMap)[Containers::texture_table[itor["0"].asString()]] = pair<string, int>("Assets/Sprites/" + itor["0"].asString() + ".png", itor["1"].asInt()/*frame_num*/);
+		(*textureMap)[Containers::texture_table[itor["0"].asString()]] = pair<string, int>(SPRITES_PATH + itor["0"].asString() + ".png", itor["1"].asInt()/*frame_num*/);
 		//push to appropreate region config
 		region_con->insert(Containers::texture_table[itor["0"].asString()]);
 	}
@@ -305,7 +316,7 @@ void SoldierConfig::init_attacks(ChildrenOfOsi* gameplay_func, TaskBuffer* tBuff
 			for (auto itr2 : (*itor)["sprites"])
 			{
 				//create textures for the soldiers
-				(*textureMap)[Containers::texture_table[itr2["0"].asString()]] = pair<string, int>("Assets/Sprites/" + itr2["0"].asString() + ".png", itr2["1"].asInt()/*frame_num*/);
+				(*textureMap)[Containers::texture_table[itr2["0"].asString()]] = pair<string, int>(SPRITES_PATH + itr2["0"].asString() + ".png", itr2["1"].asInt()/*frame_num*/);
 				//push to appropreate region config
 				region_con->insert(Containers::texture_table[itr2["0"].asString()]);
 			}

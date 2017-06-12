@@ -41,7 +41,7 @@
 #include <algorithm>
 #include <functional>
 
-#include "json.h"
+#include <json/json.h>
 
 
 class Common {
@@ -61,12 +61,25 @@ public:
 	float map_zoom_in_game;
 	
 	Common() {
-		Json::Value root;
+		//THIS IS THE CODE THAT NEEDS TO BE COPIED EVERYWHERE
+		Json::Value root;	
 		Json::Reader reader;
 
-		std::ifstream file("common_config.json");
+		Json::CharReaderBuilder builder;
+		//std::string test = 
+		std::ifstream test("../ChildrenofOsi/common_config.json", std::ifstream::binary);
+		std::string errs;
+		bool ok = reader.parse(test, root, false);
+		if (!ok)
+		{
+			// report to the user the failure and their locations in the document.
+			std::cout << errs.c_str() << "\n";
+		}
+		test.close();
+		//^THIS IS THE CODE THAT NEEDS TO BE COPIED EVERYWHERE
 
-		file >> root;
+		std::string encoding = root.get("encoding", "UTF-8").asString();
+		std::cout << encoding << "\n";
 
 		debug = root["debug"].asInt();
 		map_editor = root["map_editor"].asInt();

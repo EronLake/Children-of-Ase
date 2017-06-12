@@ -35,7 +35,7 @@ memManager::memManager(MessageLog* _mLog, TaskBuffer* _tBuffer)
 	npc_pool = memHelper->create_pool(sizeof(NPC) * 150);
 	npc_head = memHelper->init_pool(npc_pool, sizeof(NPC)*2);
 
-	texture_pool = memHelper->create_pool(sizeof(Texture) * 300);
+	texture_pool = memHelper->create_pool(sizeof(Texture) * 600);
 	texture_head = memHelper->init_pool(texture_pool, sizeof(Texture));
 
 	oya_memory_pool = memHelper->create_pool(sizeof(Memory) * 4);

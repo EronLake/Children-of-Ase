@@ -57,21 +57,21 @@ void RenderHelper::initCamera(WorldObj * player)
 void RenderHelper::initCameraFull(WorldObj * player)
 {
 	Texture* victory_menu_tex = new Texture();
-	victory_menu_tex->setFile("Assets/Sprites/Victory_Menu.png", 1);
+	victory_menu_tex->setFile(SPRITES_PATH + "Victory_Menu.png", 1);
 	victory_menu->sprite.setTexture(victory_menu_tex);
 }
 
 void RenderHelper::initTutGui()
 {
   Texture* tutTex = new Texture();
-  tutTex->setFile("Assets/Sprites/Tutorial.png", 1);
+  tutTex->setFile(SPRITES_PATH + "Tutorial.png", 1);
   TutGui->sprite.setTexture(tutTex);
 }
 
 void RenderHelper::init_logo_gui()
 {
   Texture* logo_tex = new Texture();
-  logo_tex->setFile("Assets/Sprites/Logo_Loading.png", 1);
+  logo_tex->setFile(SPRITES_PATH + "Logo_Loading.png", 1);
   logo_gui->sprite.setTexture(logo_tex);
 }
 
@@ -141,6 +141,7 @@ int RenderHelper::draw_frame(WorldObj * obj)
 	for (auto i = Containers::Attack_table.begin(); i != Containers::Attack_table.end(); ++i) {
 		if (i->second->getPause() == 0) {
 			objVec.push_back(i->second);
+			i->second->animateObj();
 		}
 	}
 	/*for (int i = 0; i < obj->body.size(); i++) {
@@ -186,7 +187,6 @@ int RenderHelper::draw_frame(WorldObj * obj)
 	//	//cout << "DRAWING POINTS" << endl;
 	//	rivObj->getLines()[i]->getP1().drawObjRiv(camera->getX(), camera->getY());
 	//	rivObj->getLines()[i]->getP2().drawObjRiv(camera->getX(), camera->getY());
-
 	//}
 
 	//convoGui->drawGui();
