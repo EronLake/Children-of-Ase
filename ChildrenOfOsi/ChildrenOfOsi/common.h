@@ -64,6 +64,7 @@ public:
 		//THIS IS THE CODE THAT NEEDS TO BE COPIED EVERYWHERE
 		Json::Value root;	
 		Json::Reader reader;
+
 		Json::CharReaderBuilder builder;
 		//std::string test = 
 		std::ifstream test("../ChildrenofOsi/common_config.json", std::ifstream::binary);

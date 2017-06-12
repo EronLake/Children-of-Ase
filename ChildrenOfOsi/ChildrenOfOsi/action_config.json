@@ -460,12 +460,12 @@
       "1": {
         "general_type": 0,
         "rel_type": 10,
-        "desired_rel_val": 30
+        "desired_rel_val": 45
       },
       "2": {
         "general_type": 0,
         "rel_type": 9,
-        "desired_rel_val": 60
+        "desired_rel_val": 80
       }
     },
     "doer_succ_postconds": {
@@ -559,7 +559,7 @@
 		"2": {
 			"general_type": 0,
 			"rel_type": 6,
-			"desired_rel_val": 55
+			"desired_rel_val": 30
 		}
 		/*"2": {
 			"general_type": 0,

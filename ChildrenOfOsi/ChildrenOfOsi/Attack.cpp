@@ -79,19 +79,29 @@ Attack::Attack(float x, float y, bool col) : WorldObj(x, y, col)
  }
 
  void Attack::move() {
-	 switch (getDirection()) {
-	 case WorldObj::DIRECTION_UP:
+	 if (this->name==Attack::SHIELD) {
+		 int x = this->getWidth()*(1 + (speed / 35)) - this->getWidth();
+		 int y = this->getHeight()*(1 + (speed / 35)) - this->getHeight();
+		 this->shiftX(-(x/2));
+		 this->shiftY(-(y/2));
+		 this->setWidth(this->getWidth()*(1+(speed/35)));
+		 this->setHeight(this->getHeight()*(1 + (speed / 35)));
+	 }
+	 else {
+		 switch (getDirection()) {
+		 case WorldObj::DIRECTION_UP:
 			 shiftY(-speed);
 			 break;
-	 case WorldObj::DIRECTION_DOWN:
+		 case WorldObj::DIRECTION_DOWN:
 			 shiftY(speed);
 			 break;
-	 case WorldObj::DIRECTION_LEFT:
+		 case WorldObj::DIRECTION_LEFT:
 			 shiftX(-speed);
 			 break;
-	 case WorldObj::DIRECTION_RIGHT:
+		 case WorldObj::DIRECTION_RIGHT:
 			 shiftX(speed);
 			 break;
+		 }
 	 }
  }
 

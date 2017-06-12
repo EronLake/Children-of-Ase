@@ -135,7 +135,7 @@ void SoldierConfig::init_sprites(ChildrenOfOsi* gameplay_func, TaskBuffer* tBuff
 	else //if (name.find("Shango_Soldier") != string::npos)
 	{
 		region_con = &ObjConfig::oasis_con;
-		path = SOLDIER_OGUN_PATH; 
+		path = SOLDIER_OASIS_PATH; 
 	}
 
 
@@ -188,7 +188,7 @@ void SoldierConfig::init_sprites(ChildrenOfOsi* gameplay_func, TaskBuffer* tBuff
 	Containers::soldier_table[name]->sprite.atk2_left = Containers::texture_table[sprites["atk2_left"]["0"].asString()];
 	Containers::soldier_table[name]->sprite.atk2_right = Containers::texture_table[sprites["atk2_right"]["0"].asString()];
 
-	Containers::soldier_table[name]->sprite.spin_up = Containers::texture_table[sprites["spin_up"]["0"].asString()];
+	/*Containers::soldier_table[name]->sprite.spin_up = Containers::texture_table[sprites["spin_up"]["0"].asString()];
 	Containers::soldier_table[name]->sprite.spin_down = Containers::texture_table[sprites["spin_down"]["0"].asString()];
 	Containers::soldier_table[name]->sprite.spin_left = Containers::texture_table[sprites["spin_left"]["0"].asString()];
 	Containers::soldier_table[name]->sprite.spin_right = Containers::texture_table[sprites["spin_right"]["0"].asString()];
@@ -197,7 +197,7 @@ void SoldierConfig::init_sprites(ChildrenOfOsi* gameplay_func, TaskBuffer* tBuff
 	Containers::soldier_table[name]->sprite.breathe_down = Containers::texture_table[sprites["breathe_down"]["0"].asString()];
 	Containers::soldier_table[name]->sprite.breathe_left = Containers::texture_table[sprites["breathe_left"]["0"].asString()];
 	Containers::soldier_table[name]->sprite.breathe_right = Containers::texture_table[sprites["breathe_right"]["0"].asString()];
-
+*/
 	Containers::soldier_table[name]->sprite.hurt_up = Containers::texture_table[sprites["hurt_up"]["0"].asString()];
 	Containers::soldier_table[name]->sprite.hurt_down = Containers::texture_table[sprites["hurt_down"]["0"].asString()];
 	Containers::soldier_table[name]->sprite.hurt_left = Containers::texture_table[sprites["hurt_left"]["0"].asString()];

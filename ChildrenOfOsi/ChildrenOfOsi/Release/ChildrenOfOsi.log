@@ -49,6 +49,10 @@ Alliance.cpp(106): warning C4018: '<': signed/unsigned mismatch
   Attack.cpp
 c:\cygwin64\home\anpbarr\gitrepos\children-of-ase\childrenofosi\childrenofosi\Attack.h(58): warning C4800: 'int': forcing value to bool 'true' or 'false' (performance warning)
 Attack.cpp(42): warning C4018: '<': signed/unsigned mismatch
+Attack.cpp(83): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+Attack.cpp(84): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+Attack.cpp(85): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+Attack.cpp(86): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
   AudioManager.cpp
 c:\cygwin64\home\anpbarr\gitrepos\children-of-ase\childrenofosi\childrenofosi\Attack.h(58): warning C4800: 'int': forcing value to bool 'true' or 'false' (performance warning)
 c:\cygwin64\home\anpbarr\gitrepos\children-of-ase\childrenofosi\childrenofosi\RegionState.h(21): warning C4091: 'static ': ignored on left of 'RegionState::soundType' when no variable is declared
@@ -72,9 +76,9 @@ c:\cygwin64\home\anpbarr\gitrepos\children-of-ase\childrenofosi\childrenofosi\At
 c:\cygwin64\home\anpbarr\gitrepos\children-of-ase\childrenofosi\childrenofosi\RegionState.h(21): warning C4091: 'static ': ignored on left of 'RegionState::soundType' when no variable is declared
 CombatController.cpp(23): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
 CombatController.cpp(25): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
-CombatController.cpp(126): warning C4101: 'sold2': unreferenced local variable
+CombatController.cpp(125): warning C4101: 'sold2': unreferenced local variable
+CombatController.cpp(154): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
 CombatController.cpp(155): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
-CombatController.cpp(156): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
   Conditions.cpp
 c:\cygwin64\home\anpbarr\gitrepos\children-of-ase\childrenofosi\childrenofosi\Attack.h(58): warning C4800: 'int': forcing value to bool 'true' or 'false' (performance warning)
 Conditions.cpp(204): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
@@ -94,9 +98,54 @@ Conditions.cpp(541): warning C4244: 'argument': conversion from 'double' to 'int
 Conditions.cpp(545): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
 Conditions.cpp(604): warning C4244: 'return': conversion from 'int' to 'float', possible loss of data
 Conditions.cpp(688): warning C4244: 'return': conversion from 'int' to 'float', possible loss of data
+  Containers.cpp
   DialogueConfig.cpp
 c:\cygwin64\home\anpbarr\gitrepos\children-of-ase\childrenofosi\childrenofosi\Attack.h(58): warning C4800: 'int': forcing value to bool 'true' or 'false' (performance warning)
 c:\cygwin64\home\anpbarr\gitrepos\children-of-ase\childrenofosi\childrenofosi\RegionState.h(21): warning C4091: 'static ': ignored on left of 'RegionState::soundType' when no variable is declared
+  DialogueController.cpp
+c:\cygwin64\home\anpbarr\gitrepos\children-of-ase\childrenofosi\childrenofosi\Attack.h(58): warning C4800: 'int': forcing value to bool 'true' or 'false' (performance warning)
+c:\cygwin64\home\anpbarr\gitrepos\children-of-ase\childrenofosi\childrenofosi\RegionState.h(21): warning C4091: 'static ': ignored on left of 'RegionState::soundType' when no variable is declared
+c:\cygwin64\home\anpbarr\gitrepos\children-of-ase\childrenofosi\childrenofosi\Point.h(27): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+c:\cygwin64\home\anpbarr\gitrepos\children-of-ase\childrenofosi\childrenofosi\Point.h(30): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+c:\cygwin64\home\anpbarr\gitrepos\children-of-ase\childrenofosi\childrenofosi\UniformGrid.h(30): warning C4812: obsolete declaration style: please use 'UniformGrid<T>::UniformGrid' instead
+c:\cygwin64\home\anpbarr\gitrepos\children-of-ase\childrenofosi\childrenofosi\UniformGrid.h(42): warning C4812: obsolete declaration style: please use 'UniformGrid<T>::~UniformGrid' instead
+DialogueController.cpp(131): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+DialogueController.cpp(239): warning C4018: '<': signed/unsigned mismatch
+DialogueController.cpp(247): warning C4018: '<': signed/unsigned mismatch
+DialogueController.cpp(263): warning C4018: '<': signed/unsigned mismatch
+DialogueController.cpp(561): warning C4018: '<': signed/unsigned mismatch
+DialogueController.cpp(2347): warning C4018: '<': signed/unsigned mismatch
+DialogueController.cpp(2358): warning C4018: '<': signed/unsigned mismatch
+DialogueController.cpp(2369): warning C4018: '<': signed/unsigned mismatch
+DialogueController.cpp(2380): warning C4018: '<': signed/unsigned mismatch
+DialogueController.cpp(2485): warning C4018: '<': signed/unsigned mismatch
+DialogueController.cpp(2499): warning C4018: '<': signed/unsigned mismatch
+DialogueController.cpp(2505): warning C4018: '<': signed/unsigned mismatch
+DialogueController.cpp(2518): warning C4018: '<': signed/unsigned mismatch
+DialogueController.cpp(2524): warning C4018: '<': signed/unsigned mismatch
+DialogueController.cpp(2629): warning C4018: '<': signed/unsigned mismatch
+DialogueController.cpp(2641): warning C4018: '<': signed/unsigned mismatch
+DialogueController.cpp(2765): warning C4018: '<': signed/unsigned mismatch
+DialogueController.cpp(2782): warning C4018: '<': signed/unsigned mismatch
+DialogueController.cpp(2807): warning C4018: '<': signed/unsigned mismatch
+DialogueController.cpp(2819): warning C4018: '<': signed/unsigned mismatch
+DialogueController.cpp(2831): warning C4018: '<': signed/unsigned mismatch
+DialogueController.cpp(2841): warning C4018: '<': signed/unsigned mismatch
+DialogueController.cpp(2936): warning C4018: '<': signed/unsigned mismatch
+DialogueController.cpp(3057): warning C4018: '<': signed/unsigned mismatch
+DialogueController.cpp(3097): warning C4018: '<': signed/unsigned mismatch
+DialogueController.cpp(3113): warning C4018: '<': signed/unsigned mismatch
+DialogueController.cpp(3176): warning C4018: '<': signed/unsigned mismatch
+DialogueController.cpp(3203): warning C4018: '<': signed/unsigned mismatch
+DialogueController.cpp(3331): warning C4018: '<': signed/unsigned mismatch
+DialogueController.cpp(3352): warning C4018: '<': signed/unsigned mismatch
+DialogueController.cpp(3373): warning C4018: '<': signed/unsigned mismatch
+DialogueController.cpp(3394): warning C4018: '<': signed/unsigned mismatch
+DialogueController.cpp(3415): warning C4018: '<': signed/unsigned mismatch
+DialogueController.cpp(3436): warning C4018: '<': signed/unsigned mismatch
+DialogueController.cpp(3457): warning C4018: '<': signed/unsigned mismatch
+DialogueController.cpp(3504): warning C4018: '<': signed/unsigned mismatch
+  Compiling...
   DialogueHelper.cpp
 c:\cygwin64\home\anpbarr\gitrepos\children-of-ase\childrenofosi\childrenofosi\Attack.h(58): warning C4800: 'int': forcing value to bool 'true' or 'false' (performance warning)
 DialogueHelper.cpp(74): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
@@ -118,7 +167,6 @@ DialogueHelper.cpp(855): warning C4018: '<': signed/unsigned mismatch
 DialogueHelper.cpp(859): warning C4018: '<': signed/unsigned mismatch
   DialougeTestSuite.cpp
 c:\cygwin64\home\anpbarr\gitrepos\children-of-ase\childrenofosi\childrenofosi\Attack.h(58): warning C4800: 'int': forcing value to bool 'true' or 'false' (performance warning)
-  Compiling...
   DummyController.cpp
 c:\cygwin64\home\anpbarr\gitrepos\children-of-ase\childrenofosi\childrenofosi\Attack.h(58): warning C4800: 'int': forcing value to bool 'true' or 'false' (performance warning)
 c:\cygwin64\home\anpbarr\gitrepos\children-of-ase\childrenofosi\childrenofosi\RegionState.h(21): warning C4091: 'static ': ignored on left of 'RegionState::soundType' when no variable is declared
@@ -154,10 +202,10 @@ Hero.cpp(124): warning C4018: '<': signed/unsigned mismatch
   HeroConfig.cpp
 c:\cygwin64\home\anpbarr\gitrepos\children-of-ase\childrenofosi\childrenofosi\Attack.h(58): warning C4800: 'int': forcing value to bool 'true' or 'false' (performance warning)
 c:\cygwin64\home\anpbarr\gitrepos\children-of-ase\childrenofosi\childrenofosi\RegionState.h(21): warning C4091: 'static ': ignored on left of 'RegionState::soundType' when no variable is declared
-HeroConfig.cpp(324): warning C4244: 'argument': conversion from 'Json::Value::Int' to 'float', possible loss of data
-HeroConfig.cpp(376): warning C4244: 'argument': conversion from 'Json::Value::Int' to 'float', possible loss of data
-HeroConfig.cpp(401): warning C4018: '<': signed/unsigned mismatch
-HeroConfig.cpp(403): warning C4018: '<': signed/unsigned mismatch
+HeroConfig.cpp(330): warning C4244: 'argument': conversion from 'Json::Value::Int' to 'float', possible loss of data
+HeroConfig.cpp(382): warning C4244: 'argument': conversion from 'Json::Value::Int' to 'float', possible loss of data
+HeroConfig.cpp(407): warning C4018: '<': signed/unsigned mismatch
+HeroConfig.cpp(409): warning C4018: '<': signed/unsigned mismatch
   Input.cpp
 c:\cygwin64\home\anpbarr\gitrepos\children-of-ase\childrenofosi\childrenofosi\Attack.h(58): warning C4800: 'int': forcing value to bool 'true' or 'false' (performance warning)
 c:\cygwin64\home\anpbarr\gitrepos\children-of-ase\childrenofosi\childrenofosi\RegionState.h(21): warning C4091: 'static ': ignored on left of 'RegionState::soundType' when no variable is declared
@@ -210,34 +258,35 @@ c:\cygwin64\home\anpbarr\gitrepos\children-of-ase\childrenofosi\childrenofosi\pf
 c:\cygwin64\home\anpbarr\gitrepos\children-of-ase\childrenofosi\childrenofosi\pfl.h(52): warning C4566: character represented by universal-character-name '\u2190' cannot be represented in the current code page (1252)
 c:\cygwin64\home\anpbarr\gitrepos\children-of-ase\childrenofosi\childrenofosi\pfl.h(53): warning C4566: character represented by universal-character-name '\u2193' cannot be represented in the current code page (1252)
 c:\cygwin64\home\anpbarr\gitrepos\children-of-ase\childrenofosi\childrenofosi\pfl.h(54): warning C4566: character represented by universal-character-name '\u2191' cannot be represented in the current code page (1252)
-Main.cpp(460): warning C4018: '<': signed/unsigned mismatch
-Main.cpp(461): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-Main.cpp(560): warning C4018: '<': signed/unsigned mismatch
-Main.cpp(788): warning C4018: '<': signed/unsigned mismatch
-Main.cpp(1058): warning C4018: '<': signed/unsigned mismatch
-Main.cpp(1071): warning C4018: '<': signed/unsigned mismatch
-Main.cpp(1086): warning C4018: '<': signed/unsigned mismatch
-Main.cpp(1093): warning C4018: '<': signed/unsigned mismatch
-Main.cpp(1112): warning C4018: '<': signed/unsigned mismatch
-Main.cpp(1117): warning C4018: '<': signed/unsigned mismatch
-Main.cpp(1129): warning C4018: '<': signed/unsigned mismatch
-Main.cpp(1142): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-Main.cpp(1177): warning C4018: '<': signed/unsigned mismatch
-Main.cpp(744): warning C4101: 'current_ticks': unreferenced local variable
-Main.cpp(1412): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+c:\cygwin64\home\anpbarr\gitrepos\children-of-ase\childrenofosi\childrenofosi\pfl.h(175): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+Main.cpp(445): warning C4018: '<': signed/unsigned mismatch
+Main.cpp(446): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+Main.cpp(545): warning C4018: '<': signed/unsigned mismatch
+Main.cpp(773): warning C4018: '<': signed/unsigned mismatch
+Main.cpp(1059): warning C4018: '<': signed/unsigned mismatch
+Main.cpp(1072): warning C4018: '<': signed/unsigned mismatch
+Main.cpp(1087): warning C4018: '<': signed/unsigned mismatch
+Main.cpp(1094): warning C4018: '<': signed/unsigned mismatch
+Main.cpp(1113): warning C4018: '<': signed/unsigned mismatch
+Main.cpp(1118): warning C4018: '<': signed/unsigned mismatch
+Main.cpp(1130): warning C4018: '<': signed/unsigned mismatch
+Main.cpp(1143): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+Main.cpp(1178): warning C4018: '<': signed/unsigned mismatch
+Main.cpp(729): warning C4101: 'current_ticks': unreferenced local variable
 Main.cpp(1413): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
 Main.cpp(1414): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+Main.cpp(1415): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
 c:\cygwin64\home\anpbarr\gitrepos\children-of-ase\childrenofosi\childrenofosi\UniformGrid.h(30): warning C4812: obsolete declaration style: please use 'UniformGrid<WorldObj>::UniformGrid' instead
   c:\cygwin64\home\anpbarr\gitrepos\children-of-ase\childrenofosi\childrenofosi\UniformGrid.h(31): note: while compiling class template member function 'UniformGrid<WorldObj>::UniformGrid(void)'
-  Main.cpp(189): note: see reference to function template instantiation 'UniformGrid<WorldObj>::UniformGrid(void)' being compiled
-  Main.cpp(189): note: see reference to class template instantiation 'UniformGrid<WorldObj>' being compiled
+  Main.cpp(174): note: see reference to function template instantiation 'UniformGrid<WorldObj>::UniformGrid(void)' being compiled
+  Main.cpp(174): note: see reference to class template instantiation 'UniformGrid<WorldObj>' being compiled
 c:\cygwin64\home\anpbarr\gitrepos\children-of-ase\childrenofosi\childrenofosi\UniformGrid.h(51): warning C4018: '<': signed/unsigned mismatch
   c:\cygwin64\home\anpbarr\gitrepos\children-of-ase\childrenofosi\childrenofosi\UniformGrid.h(48): note: while compiling class template member function 'void UniformGrid<WorldObj>::insert_worldobj_to_grid(std::vector<WorldObj *,std::allocator<_Ty>>)'
           with
           [
               _Ty=WorldObj *
           ]
-  Main.cpp(793): note: see reference to function template instantiation 'void UniformGrid<WorldObj>::insert_worldobj_to_grid(std::vector<WorldObj *,std::allocator<_Ty>>)' being compiled
+  Main.cpp(778): note: see reference to function template instantiation 'void UniformGrid<WorldObj>::insert_worldobj_to_grid(std::vector<WorldObj *,std::allocator<_Ty>>)' being compiled
           with
           [
               _Ty=WorldObj *
@@ -250,7 +299,7 @@ c:\cygwin64\home\anpbarr\gitrepos\children-of-ase\childrenofosi\childrenofosi\Un
           [
               _Ty=WorldObj *
           ]
-  Main.cpp(1038): note: see reference to function template instantiation 'void UniformGrid<WorldObj>::clear_and_reinsert(std::vector<WorldObj *,std::allocator<_Ty>>)' being compiled
+  Main.cpp(1039): note: see reference to function template instantiation 'void UniformGrid<WorldObj>::clear_and_reinsert(std::vector<WorldObj *,std::allocator<_Ty>>)' being compiled
           with
           [
               _Ty=WorldObj *
@@ -260,15 +309,15 @@ c:\cygwin64\home\anpbarr\gitrepos\children-of-ase\childrenofosi\childrenofosi\Un
 c:\cygwin64\home\anpbarr\gitrepos\children-of-ase\childrenofosi\childrenofosi\UniformGrid.h(121): warning C4018: '<': signed/unsigned mismatch
 c:\cygwin64\home\anpbarr\gitrepos\children-of-ase\childrenofosi\childrenofosi\UniformGrid.h(30): warning C4812: obsolete declaration style: please use 'UniformGrid<Line>::UniformGrid' instead
   c:\cygwin64\home\anpbarr\gitrepos\children-of-ase\childrenofosi\childrenofosi\UniformGrid.h(31): note: while compiling class template member function 'UniformGrid<Line>::UniformGrid(void)'
-  Main.cpp(188): note: see reference to function template instantiation 'UniformGrid<Line>::UniformGrid(void)' being compiled
-  Main.cpp(188): note: see reference to class template instantiation 'UniformGrid<Line>' being compiled
+  Main.cpp(173): note: see reference to function template instantiation 'UniformGrid<Line>::UniformGrid(void)' being compiled
+  Main.cpp(173): note: see reference to class template instantiation 'UniformGrid<Line>' being compiled
 c:\cygwin64\home\anpbarr\gitrepos\children-of-ase\childrenofosi\childrenofosi\UniformGrid.h(216): warning C4018: '<': signed/unsigned mismatch
   c:\cygwin64\home\anpbarr\gitrepos\children-of-ase\childrenofosi\childrenofosi\UniformGrid.h(214): note: while compiling class template member function 'void UniformGrid<Line>::insert_objs_to_grid(std::vector<Line *,std::allocator<_Ty>>)'
           with
           [
               _Ty=Line *
           ]
-  Main.cpp(190): note: see reference to function template instantiation 'void UniformGrid<Line>::insert_objs_to_grid(std::vector<Line *,std::allocator<_Ty>>)' being compiled
+  Main.cpp(175): note: see reference to function template instantiation 'void UniformGrid<Line>::insert_objs_to_grid(std::vector<Line *,std::allocator<_Ty>>)' being compiled
           with
           [
               _Ty=Line *
@@ -296,6 +345,7 @@ c:\cygwin64\home\anpbarr\gitrepos\children-of-ase\childrenofosi\childrenofosi\Re
 MemoryTestSuite.cpp(699): warning C4101: 'next': unreferenced local variable
 MemoryTestSuite.cpp(700): warning C4101: 'is_available': unreferenced local variable
 MemoryTestSuite.cpp(701): warning C4101: 'block_pointer': unreferenced local variable
+  Compiling...
   MessageLog.cpp
 c:\cygwin64\home\anpbarr\gitrepos\children-of-ase\childrenofosi\childrenofosi\Attack.h(58): warning C4800: 'int': forcing value to bool 'true' or 'false' (performance warning)
 c:\cygwin64\home\anpbarr\gitrepos\children-of-ase\childrenofosi\childrenofosi\RegionState.h(21): warning C4091: 'static ': ignored on left of 'RegionState::soundType' when no variable is declared
@@ -375,7 +425,6 @@ c:\cygwin64\home\anpbarr\gitrepos\children-of-ase\childrenofosi\childrenofosi\Un
           ]
   Movement.cpp(52): note: see reference to class template instantiation 'UniformGrid<WorldObj>' being compiled
 c:\cygwin64\home\anpbarr\gitrepos\children-of-ase\childrenofosi\childrenofosi\UniformGrid.h(138): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
-  Compiling...
   NPC.cpp
   ObjConfig.cpp
 c:\cygwin64\home\anpbarr\gitrepos\children-of-ase\childrenofosi\childrenofosi\Attack.h(58): warning C4800: 'int': forcing value to bool 'true' or 'false' (performance warning)
@@ -506,10 +555,10 @@ c:\cygwin64\home\anpbarr\gitrepos\children-of-ase\childrenofosi\childrenofosi\Un
 c:\cygwin64\home\anpbarr\gitrepos\children-of-ase\childrenofosi\childrenofosi\UniformGrid.h(42): warning C4812: obsolete declaration style: please use 'UniformGrid<T>::~UniformGrid' instead
 RenderHelper.cpp(30): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
 RenderHelper.cpp(111): warning C4018: '<': signed/unsigned mismatch
-RenderHelper.cpp(150): warning C4018: '<': signed/unsigned mismatch
-RenderHelper.cpp(160): warning C4018: '<': signed/unsigned mismatch
-RenderHelper.cpp(203): warning C4018: '<': signed/unsigned mismatch
-RenderHelper.cpp(234): warning C4018: '<': signed/unsigned mismatch
+RenderHelper.cpp(151): warning C4018: '<': signed/unsigned mismatch
+RenderHelper.cpp(161): warning C4018: '<': signed/unsigned mismatch
+RenderHelper.cpp(204): warning C4018: '<': signed/unsigned mismatch
+RenderHelper.cpp(235): warning C4018: '<': signed/unsigned mismatch
 c:\cygwin64\home\anpbarr\gitrepos\children-of-ase\childrenofosi\childrenofosi\UniformGrid.h(136): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
   c:\cygwin64\home\anpbarr\gitrepos\children-of-ase\childrenofosi\childrenofosi\UniformGrid.h(131): note: while compiling class template member function 'std::vector<WorldObj *,std::allocator<_Ty>> UniformGrid<WorldObj>::retrieve_worldobj_in_grid(std::vector<_Ty,std::allocator<_Ty>> &,T *)'
           with
@@ -535,6 +584,7 @@ c:\cygwin64\home\anpbarr\gitrepos\children-of-ase\childrenofosi\childrenofosi\Un
   RiverObj.cpp
 c:\cygwin64\home\anpbarr\gitrepos\children-of-ase\childrenofosi\childrenofosi\Point.h(27): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
 c:\cygwin64\home\anpbarr\gitrepos\children-of-ase\childrenofosi\childrenofosi\Point.h(30): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+  Compiling...
   ShrineConfig.cpp
 c:\cygwin64\home\anpbarr\gitrepos\children-of-ase\childrenofosi\childrenofosi\Attack.h(58): warning C4800: 'int': forcing value to bool 'true' or 'false' (performance warning)
 c:\cygwin64\home\anpbarr\gitrepos\children-of-ase\childrenofosi\childrenofosi\RegionState.h(21): warning C4091: 'static ': ignored on left of 'RegionState::soundType' when no variable is declared
@@ -560,7 +610,6 @@ Soldier.cpp(454): warning C4244: 'initializing': conversion from 'int' to 'float
 Soldier.cpp(455): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
 Soldier.cpp(467): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
 Soldier.cpp(470): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-  Compiling...
   SoldierConfig.cpp
 c:\cygwin64\home\anpbarr\gitrepos\children-of-ase\childrenofosi\childrenofosi\Attack.h(58): warning C4800: 'int': forcing value to bool 'true' or 'false' (performance warning)
 c:\cygwin64\home\anpbarr\gitrepos\children-of-ase\childrenofosi\childrenofosi\RegionState.h(21): warning C4091: 'static ': ignored on left of 'RegionState::soundType' when no variable is declared
@@ -625,6 +674,7 @@ WorldObj.cpp(131): warning C4244: 'initializing': conversion from 'float' to 'in
 WorldObj.cpp(132): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
   Wrapper.cpp
 c:\cygwin64\home\anpbarr\gitrepos\children-of-ase\childrenofosi\childrenofosi\Attack.h(58): warning C4800: 'int': forcing value to bool 'true' or 'false' (performance warning)
+  Compiling...
   memManager.cpp
 c:\cygwin64\home\anpbarr\gitrepos\children-of-ase\childrenofosi\childrenofosi\Attack.h(58): warning C4800: 'int': forcing value to bool 'true' or 'false' (performance warning)
 c:\cygwin64\home\anpbarr\gitrepos\children-of-ase\childrenofosi\childrenofosi\RegionState.h(21): warning C4091: 'static ': ignored on left of 'RegionState::soundType' when no variable is declared
@@ -632,9 +682,9 @@ SOIL.lib(SOIL.obj) : warning LNK4075: ignoring '/EDITANDCONTINUE' due to '/OPT:I
 LINK : warning LNK4098: defaultlib 'LIBCMT' conflicts with use of other libs; use /NODEFAULTLIB:library
 LINK : warning LNK4098: defaultlib 'MSVCRTD' conflicts with use of other libs; use /NODEFAULTLIB:library
   Generating code
-  2241 of 19548 functions (11.5%) were compiled, the rest were copied from previous compilation.
-    0 functions were new in current compilation
-    35 functions had inline decision re-evaluated but remain unchanged
+  2322 of 19574 functions (11.9%) were compiled, the rest were copied from previous compilation.
+    26 functions were new in current compilation
+    249 functions had inline decision re-evaluated but remain unchanged
   Finished generating code
 json_reader.obj : warning LNK4020: a type record in 'c:\cygwin64\home\anpbarr\gitrepos\children-of-ase\childrenofosi\childrenofosi\release\vc140.pdb' is corrupted; some symbols and types may not be accessible from the debugger
 json_value.obj : warning LNK4020: a type record in 'c:\cygwin64\home\anpbarr\gitrepos\children-of-ase\childrenofosi\childrenofosi\release\vc140.pdb' is corrupted; some symbols and types may not be accessible from the debugger
