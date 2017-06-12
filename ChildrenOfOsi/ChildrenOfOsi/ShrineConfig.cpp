@@ -13,14 +13,27 @@ ShrineConfig::~ShrineConfig()
 
 void ShrineConfig::import_config(vector<WorldObj*>* recVec_ptr, unordered_map<Texture*, pair<string, int>>* textureMap, ChildrenOfOsi* gameplay_func, TaskBuffer* tBuffer)
 {
+	bool alive = true;
 	Json::Value root;
-	Json::Reader reader;
+	while (alive) {
 
+		Json::Reader reader;
+		Json::CharReaderBuilder builder;
+		//std::string test = 
+		std::ifstream test("../ChildrenofOsi/ShrineConfig.json", std::ifstream::binary);
+		std::string errs;
+		bool ok = reader.parse(test, root, false);
+		if (!ok)
+		{
+			// report to the user the failure and their locations in the document.
+			std::cout << errs.c_str() << "\n";
+		}
 
-	std::ifstream file("shrine_config.json");
-
-	file >> root;
-
+		std::string encoding = root.get("encoding", "UTF-8").asString();
+		std::cout << encoding << "\n";
+		alive = false;
+		test.close();
+	}
 	for (auto itr = root.begin(); itr != root.end(); itr++)
 	{
 		set_shrine(recVec_ptr, gameplay_func, tBuffer, (*itr)["x"].asFloat(), (*itr)["y"].asFloat(),

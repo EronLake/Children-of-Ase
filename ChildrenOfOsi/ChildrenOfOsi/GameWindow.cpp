@@ -1,10 +1,10 @@
 #include "stdafx.h"
 #include "GameWindow.h"
 
-const std::string GameWindow::STD_VERTEX_SHADER_PATH = "./OpenGL Shaders/StdVertexShader.vert.glsl\0";
-const std::string GameWindow::STD_FRAGMENT_SHADER_PATH = "./OpenGL Shaders/StdFragmentShader.frag.glsl\0";
-const std::string GameWindow::FONT_VERTEX_SHADER_PATH = "./OpenGL Shaders/FontVertexShader.vert.glsl\0";
-const std::string GameWindow::FONT_FRAGMENT_SHADER_PATH = "./OpenGL Shaders/FontFragmentShader.frag.glsl\0";
+const std::string GameWindow::STD_VERTEX_SHADER_PATH = "../ChildrenofOsi/OpenGL Shaders/StdVertexShader.vert.glsl";
+const std::string GameWindow::STD_FRAGMENT_SHADER_PATH = "../ChildrenofOsi/OpenGL Shaders/StdFragmentShader.frag.glsl";
+const std::string GameWindow::FONT_VERTEX_SHADER_PATH = "../ChildrenofOsi/OpenGL Shaders/FontVertexShader.vert.glsl";
+const std::string GameWindow::FONT_FRAGMENT_SHADER_PATH = "../ChildrenofOsi/OpenGL Shaders/FontFragmentShader.frag.glsl";
 
 GLFWmonitor *GameWindow::primaryMonitor = nullptr;
 GLFWwindow *GameWindow::window = nullptr;
@@ -29,6 +29,8 @@ GLuint GameWindow::fontShaderProgramId = 0;
 int GameWindow::numObjects = 0;
 bool GameWindow::fullscreen = START_FULLSCREEN;
 
+unsigned int GameWindow::WINDOW_WIDTH_DP = 960U;
+unsigned int GameWindow::WINDOW_HEIGHT_DP = 540U;
 std::vector<TextObj> GameWindow::text;
 
 struct Character
@@ -52,6 +54,7 @@ bool GameWindow::init()
 {
   if(GameWindow::isActive())
     return false;
+  
 
   GameWindow::setupWindow();
   GameWindow::stdShaderProgramId = GameWindow::setupShaders(STD_VERTEX_SHADER_PATH, STD_FRAGMENT_SHADER_PATH);
@@ -324,7 +327,7 @@ void GameWindow::setupWindow()
   glfwInit();
   glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
   glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
-  glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_COMPAT_PROFILE);
+  glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
   glfwWindowHint(GLFW_RESIZABLE, GL_TRUE);
 
   GameWindow::primaryMonitor = glfwGetPrimaryMonitor();
@@ -368,9 +371,10 @@ void GameWindow::setupWindow()
       glViewport(0, 0, GameWindow::windowWidthPx, GameWindow::windowHeightPx);
     }
   }
-
-  GameWindow::dpScaleWidth = static_cast<double>(GameWindow::windowWidthPx) / static_cast<double>(GameWindow::WINDOW_WIDTH_DP);
-  GameWindow::dpScaleHeight = static_cast<double>(GameWindow::windowHeightPx) / static_cast<double>(GameWindow::WINDOW_HEIGHT_DP);
+  int temp1 = (int)GameWindow::WINDOW_WIDTH_DP;
+  int temp2 = (int)GameWindow::WINDOW_HEIGHT_DP;
+  GameWindow::dpScaleWidth = static_cast<double>(GameWindow::windowWidthPx / temp1);
+  GameWindow::dpScaleHeight = static_cast<double>(GameWindow::windowHeightPx / temp2);
 }
 
 /**
