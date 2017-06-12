@@ -57,21 +57,21 @@ void RenderHelper::initCamera(WorldObj * player)
 void RenderHelper::initCameraFull(WorldObj * player)
 {
 	Texture* victory_menu_tex = new Texture();
-	victory_menu_tex->setFile("Assets/Sprites/Victory_Menu.png", 1);
+	victory_menu_tex->setFile(SPRITES_PATH + "Victory_Menu.png", 1);
 	victory_menu->sprite.setTexture(victory_menu_tex);
 }
 
 void RenderHelper::initTutGui()
 {
   Texture* tutTex = new Texture();
-  tutTex->setFile("Assets/Sprites/Tutorial.png", 1);
+  tutTex->setFile(SPRITES_PATH + "Tutorial.png", 1);
   TutGui->sprite.setTexture(tutTex);
 }
 
 void RenderHelper::init_logo_gui()
 {
   Texture* logo_tex = new Texture();
-  logo_tex->setFile("Assets/Sprites/Logo_Loading.png", 1);
+  logo_tex->setFile(SPRITES_PATH + "Logo_Loading.png", 1);
   logo_gui->sprite.setTexture(logo_tex);
 }
 

@@ -1,6 +1,6 @@
 {
 	"Oasis_Soldier" : {
-		"soldier_number": 4,
+		"soldier_number": 6,
 		"x" : 85.58,
 		"y" : 79.23,
 		"width" : 150,
@@ -71,7 +71,7 @@
 		}
 	},
 	"Jungle_Soldier" : {
-		"soldier_number":  4,
+		"soldier_number":  6,
 		"x" : 201.61,
 		"y" : 157.86,
 		"width" : 150,
@@ -143,7 +143,7 @@
 		}
 	},
 	"Ogun_Soldier" : {
-		"soldier_number": 4,
+		"soldier_number": 6,
 		"x" : 201.25,
 		"y" : 59.57,
 		"width" : 150,

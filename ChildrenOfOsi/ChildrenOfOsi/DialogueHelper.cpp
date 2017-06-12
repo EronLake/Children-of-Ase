@@ -525,10 +525,22 @@ std::string DialogueHelper::gen_reply(dialogue_point diog_pt, Hero* hero, int re
 
 dialogue_template DialogueHelper::get_template(dialogue_point diog_pt) {
 	Json::Value root;
-	Json::Reader reader;
 
-	std::ifstream file("script_templates.json");
-	file >> root;
+
+	Json::Reader reader;
+	Json::CharReaderBuilder builder;
+	//std::string test = 
+	std::ifstream test("../ChildrenofOsi/script_templates.json", std::ifstream::binary);
+	std::string errs;
+	bool ok = reader.parse(test, root, false);
+	if (!ok)
+	{
+		// report to the user the failure and their locations in the document.
+		std::cout << errs.c_str() << "\n";
+	}
+	test.close();
+	std::string encoding = root.get("encoding", "UTF-8").asString();
+	std::cout << encoding << "\n";
 
 
 	dialogue_template dtemp;
@@ -567,10 +579,21 @@ dialogue_point DialogueHelper::get_dialog(std::string name, dialogue_point diog_
 
 	Json::Value root;
 
-	std::string dialogue_filename = my_name + "_dialog.json";
 
-	std::ifstream file(dialogue_filename);
-	file >> root;
+	Json::Reader reader;
+	Json::CharReaderBuilder builder;
+	//std::string test = 
+	std::ifstream test("../ChildrenofOsi/_dialog.json", std::ifstream::binary);
+	std::string errs;
+	bool ok = reader.parse(test, root, false);
+	if (!ok)
+	{
+		// report to the user the failure and their locations in the document.
+		std::cout << errs.c_str() << "\n";
+	}
+
+	std::string encoding = root.get("encoding", "UTF-8").asString();
+	std::cout << encoding << "\n";
 
 	dialogue_point dpoint;
 	
@@ -640,12 +663,32 @@ dialogue_point DialogueHelper::get_dialog_negative(std::string name, dialogue_po
 								   name basis*/
 								   //////////////////////////////////
 
+	bool alive = true;
 	Json::Value root;
 
 	std::string dialogue_filename = my_name + "_dialog.json";
 
-	std::ifstream file(dialogue_filename);
-	file >> root;
+	//std::ifstream file(dialogue_filename);
+	//file >> root;
+	while (alive) {
+
+		Json::Reader reader;
+		Json::CharReaderBuilder builder;
+		//std::string test = 
+		std::ifstream test("../ChildrenofOsi/" + dialogue_filename, std::ifstream::binary);
+		std::string errs;
+		bool ok = reader.parse(test, root, false);
+		if (!ok)
+		{
+			// report to the user the failure and their locations in the document.
+			std::cout << errs.c_str() << "\n";
+		}
+
+		std::string encoding = root.get("encoding", "UTF-8").asString();
+		std::cout << encoding << "\n";
+		alive = false;
+		test.close();
+	}
 
 	dialogue_point dpoint;
 

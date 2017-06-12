@@ -175,12 +175,12 @@ void DialogueController::PlayerChoose()
 		add_dialog_option("Ask_To_Duel", NotorietyIcon);
 		add_dialog_option("Ask_To_Spar", StrengthIcon);
 
-		if (temp_hero->rel[player->name]->getAffinity() <= 30 && temp_hero->rel[player->name]->getStrength() <= 60)
+		if (temp_hero->rel[player->name]->getAffinity() <= 45 && temp_hero->rel[player->name]->getStrength() <= 80)
 			set_selectable(true, "Ask_To_Duel", NotorietyIcon);
 		else
 			set_selectable(false, "Ask_To_Duel", NotorietyIcon);
 
-		if (temp_hero->rel[player->name]->getStrength() >= 55 && temp_hero->rel[player->name]->getAffinity() >= 60)
+		if (temp_hero->rel[player->name]->getStrength() >= 30 && temp_hero->rel[player->name]->getAffinity() >= 60)
 			set_selectable(true, "Ask_To_Spar", StrengthIcon);
 		else
 			set_selectable(false, "Ask_To_Spar", StrengthIcon);

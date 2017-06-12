@@ -21,12 +21,27 @@ void ActionConfig::import_config(ChildrenOfOsi* gameplay_func, TaskBuffer* tBuff
 	{
 		if (i->second->name != owner->name)
 		{
-			Json::Value root;
+			bool alive = true;
+		Json::Value root;
+		while (alive) {
+			
 			Json::Reader reader;
+			Json::CharReaderBuilder builder;
+			//std::string test = 
+			std::ifstream test("../ChildrenofOsi/action_config.json", std::ifstream::binary);
+			std::string errs;
+			bool ok = reader.parse(test, root, false);
+			if (!ok)
+			{
+				// report to the user the failure and their locations in the document.
+				std::cout << errs.c_str() << "\n";
+			}
 
-
-			std::ifstream file("action_config.json");
-			file >> root;
+			std::string encoding = root.get("encoding", "UTF-8").asString();
+			std::cout << encoding << "\n";
+			alive = false;
+			test.close();
+		}
 			for (auto itr = root.begin(); itr != root.end(); itr++)
 			{
 				std::string name = (*itr)["name"].asString() + "_" + to_string(owner->name) + "-" + to_string(i->second->name);

@@ -17,12 +17,26 @@ DialogueConfig::~DialogueConfig()
 void DialogueConfig::import_config(ChildrenOfOsi* gameplay_func, TaskBuffer* tBuffer)
 {
 
-		Json::Value root;
+	bool alive = true;
+	Json::Value root;
+
+
 		Json::Reader reader;
+		Json::CharReaderBuilder builder;
+		//std::string test = 
+		std::ifstream test("../ChildrenofOsi/Dialogue_config.json", std::ifstream::binary);
+		std::string errs;
+		bool ok = reader.parse(test, root, false);
+		if (!ok)
+		{
+			// report to the user the failure and their locations in the document.
+			std::cout << errs.c_str() << "\n";
+		}
 
+		std::string encoding = root.get("encoding", "UTF-8").asString();
+		std::cout << encoding << "\n";
+		alive = false;
 
-		std::ifstream file("Dialogue_config.json");
-		file >> root;
 		std::vector<int> personality_mults;
 		std::vector<int> relationship_vals;
 		std::string topic = "Shango"; //default topic for every conversation point

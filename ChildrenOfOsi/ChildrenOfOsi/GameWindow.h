@@ -36,8 +36,8 @@ struct GameWindow
 {
   public:
 
-  static constexpr unsigned int WINDOW_WIDTH_DP = 960U;
-  static constexpr unsigned int WINDOW_HEIGHT_DP = 540U;
+  static unsigned int WINDOW_WIDTH_DP;
+  static unsigned int WINDOW_HEIGHT_DP;
 
   static GLFWwindow *window;
 

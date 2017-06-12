@@ -13,13 +13,27 @@ HeroConfig::~HeroConfig()
 
 void HeroConfig::import_config(vector<WorldObj*>* movVec, unordered_map<Texture*, pair<string, int>>* textureMap, ChildrenOfOsi* gameplay_func, TaskBuffer* tBuffer)
 {
+	bool alive = true;
 	Json::Value root;
-	Json::Reader reader;
+	while (alive) {
 
+		Json::Reader reader;
+		Json::CharReaderBuilder builder;
+		//std::string test = 
+		std::ifstream test("../ChildrenofOsi/hero_config.json", std::ifstream::binary);
+		std::string errs;
+		bool ok = reader.parse(test, root, false);
+		if (!ok)
+		{
+			// report to the user the failure and their locations in the document.
+			std::cout << errs.c_str() << "\n";
+		}
 
-	std::ifstream file("hero_config.json");
-
-	file >> root;
+		std::string encoding = root.get("encoding", "UTF-8").asString();
+		std::cout << encoding << "\n";
+		alive = false;
+		test.close();
+	}
 
 	for (auto itr = root.begin(); itr != root.end(); itr++)
 	{
@@ -297,7 +311,7 @@ void HeroConfig::init_attacks(ChildrenOfOsi* gameplay_func, TaskBuffer* tBuffer,
 	for (auto itor : attacks["sprites"])
 	{
 		//create textures for the heroes
-		(*textureMap)[Containers::texture_table[itor["0"].asString()]] = pair<string, int>("Assets/Sprites/" + itor["0"].asString() + ".png", itor["1"].asInt()/*frame_num*/);
+		(*textureMap)[Containers::texture_table[itor["0"].asString()]] = pair<string, int>(SPRITES_PATH + itor["0"].asString() + ".png", itor["1"].asInt()/*frame_num*/);
 		//push to appropreate region config
 		region_con->insert(Containers::texture_table[itor["0"].asString()]);
 	}
@@ -351,7 +365,7 @@ void HeroConfig::init_attacks(ChildrenOfOsi* gameplay_func, TaskBuffer* tBuffer,
 			for (auto itr2 : (*itor)["sprites"])
 			{
 				//create textures for the heroes
-				(*textureMap)[Containers::texture_table[itr2["0"].asString()]] = pair<string, int>("Assets/Sprites/" + itr2["0"].asString() + ".png", itr2["1"].asInt()/*frame_num*/);
+				(*textureMap)[Containers::texture_table[itr2["0"].asString()]] = pair<string, int>(SPRITES_PATH + itr2["0"].asString() + ".png", itr2["1"].asInt()/*frame_num*/);
 				//push to appropreate region config
 				region_con->insert(Containers::texture_table[itr2["0"].asString()]);
 			}
