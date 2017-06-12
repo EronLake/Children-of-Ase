@@ -41,7 +41,7 @@
 #include <algorithm>
 #include <functional>
 
-#include "json.h"
+#include <json/json.h>
 
 
 class Common {
@@ -61,26 +61,38 @@ public:
 	float map_zoom_in_game;
 	
 	Common() {
-		Json::Value root;
+		//THIS IS THE CODE THAT NEEDS TO BE COPIED EVERYWHERE
+		Json::Value root;	
 		Json::Reader reader;
+		Json::CharReaderBuilder builder;
+		//std::string test = 
+		std::ifstream test("../ChildrenofOsi/common_config.json", std::ifstream::binary);
+		std::string errs;
+		bool ok = reader.parse(test, root, false);
+		if (!ok)
+		{
+			// report to the user the failure and their locations in the document.
+			std::cout << errs.c_str() << "\n";
+		}
+		test.close();
+		//^THIS IS THE CODE THAT NEEDS TO BE COPIED EVERYWHERE
 
-		std::ifstream file("common_config.json");
+		std::string encoding = root.get("encoding", "UTF-8").asString();
+		std::cout << encoding << "\n";
 
-		file >> root;
+		debug = root["debug"].asInt();
+		map_editor = root["map_editor"].asInt();
+		start_fullscreen = root["start_fullscreen"].asBool();
+		mouse_visible = root["mouse_visible"].asBool();
+		load_regions = root["load_regions"].asInt();
+		load_map = root["load_map"].asInt();
+		river_collide = root["river_collide"].asInt();
+		preload_tex = root["preload_tex"].asInt();
+		thread_physics = root["thread_physics"].asInt();
+		write_to_log = root["write_to_log"].asInt();
 
-		debug = root["debug/0"].asInt();
-		map_editor = root["map_editor/0"].asInt();
-		start_fullscreen = root["start_fullscreen/0"].asBool();
-		mouse_visible = root["mouse_visible/0"].asBool();
-		load_regions = root["load_regions/0"].asInt();
-		load_map = root["load_map/0"].asInt();
-		river_collide = root["river_collide/0"].asInt();
-		preload_tex = root["preload_tex/0"].asInt();
-		thread_physics = root["thread_physics/0"].asInt();
-		write_to_log = root["write_to_log/0"].asInt();
-
-		map_zoom_in_editor = root["map_zoom_in_editor/0"].asFloat();
-		map_zoom_in_game = root["map_zoom_in_game/0"].asFloat();
+		map_zoom_in_editor = root["map_zoom_in_editor"].asFloat();
+		map_zoom_in_game = root["map_zoom_in_game"].asFloat();
 	};
 };
 

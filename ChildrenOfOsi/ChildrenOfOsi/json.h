@@ -9,30 +9,23 @@
 The JsonCpp library's source code, including accompanying documentation, 
 tests and demonstration applications, are licensed under the following
 conditions...
-
 The author (Baptiste Lepilleur) explicitly disclaims copyright in all 
 jurisdictions which recognize such a disclaimer. In such jurisdictions, 
 this software is released into the Public Domain.
-
 In jurisdictions which do not recognize Public Domain property (e.g. Germany as of
 2010), this software is Copyright (c) 2007-2010 by Baptiste Lepilleur, and is
 released under the terms of the MIT License (see below).
-
 In jurisdictions which recognize Public Domain property, the user of this 
 software may choose to accept it either as 1) Public Domain, 2) under the 
 conditions of the MIT License (see below), or 3) under the terms of dual 
 Public Domain/MIT License conditions described here, as they choose.
-
 The MIT License is about as close to Public Domain as a license can get, and is
 described in clear, concise terms at:
-
    http://en.wikipedia.org/wiki/MIT_License
    
 The full text of the MIT License follows:
-
 ========================================================================
 Copyright (c) 2007-2010 Baptiste Lepilleur
-
 Permission is hereby granted, free of charge, to any person
 obtaining a copy of this software and associated documentation
 files (the "Software"), to deal in the Software without
@@ -40,10 +33,8 @@ restriction, including without limitation the rights to use, copy,
 modify, merge, publish, distribute, sublicense, and/or sell copies
 of the Software, and to permit persons to whom the Software is
 furnished to do so, subject to the following conditions:
-
 The above copyright notice and this permission notice shall be
 included in all copies or substantial portions of the Software.
-
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -54,14 +45,12 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 ========================================================================
 (END LICENSE TEXT)
-
 The MIT license is compatible with both the GPL and commercial
 software, affording one all of the rights of Public Domain with the
 minor nuisance of being required to keep the above copyright notice
 and license text in the source code. Note also that by accepting the
 Public Domain "license" you can re-license your copy using whatever
 license you like.
-
 */
 
 // //////////////////////////////////////////////////////////////////////
@@ -512,13 +501,11 @@ namespace Json {
 
    public:
       /** \brief Create a default Value of the given type.
-
         This is a very useful constructor.
         To create an empty array, pass arrayValue.
         To create an empty object, pass objectValue.
         Another Value can then be set to this one by assignment.
     This is useful since clear() and resize() will not alter types.
-
         Examples:
     \code
     Json::Value null_value; // null
@@ -537,7 +524,6 @@ namespace Json {
       Value( const char *value );
       Value( const char *beginValue, const char *endValue );
       /** \brief Constructs a value from a static string.
-
        * Like other value string constructor but do not duplicate the string for
        * internal storage. The given string must remain alive after the call to this
        * constructor.
@@ -667,7 +653,6 @@ namespace Json {
       /// Access an object value by name, returns null if there is no member with that name.
       const Value &operator[]( const std::string &key ) const;
       /** \brief Access an object value by name, create a null member if it does not exist.
-
        * If the object as no entry for that name, then the member name used to store
        * the new entry is not duplicated.
        * Example of use:
@@ -895,32 +880,26 @@ namespace Json {
          {
             return new ValueInternalMap();
          }
-
          virtual ValueInternalMap *newMapCopy( const ValueInternalMap &other )
          {
             return new ValueInternalMap( other );
          }
-
          virtual void destructMap( ValueInternalMap *map )
          {
             delete map;
          }
-
          virtual ValueInternalLink *allocateMapBuckets( unsigned int size )
          {
             return new ValueInternalLink[size];
          }
-
          virtual void releaseMapBuckets( ValueInternalLink *links )
          {
             delete [] links;
          }
-
          virtual ValueInternalLink *allocateMapLink()
          {
             return new ValueInternalLink();
          }
-
          virtual void releaseMapLink( ValueInternalLink *link )
          {
             delete link;
@@ -1144,22 +1123,18 @@ public: // overridden from ValueArrayAllocator
    virtual ~DefaultValueArrayAllocator()
    {
    }
-
    virtual ValueInternalArray *newArray()
    {
       return new ValueInternalArray();
    }
-
    virtual ValueInternalArray *newArrayCopy( const ValueInternalArray &other )
    {
       return new ValueInternalArray( other );
    }
-
    virtual void destruct( ValueInternalArray *array )
    {
       delete array;
    }
-
    virtual void reallocateArrayPageIndex( Value **&indexes, 
                                           ValueInternalArray::PageIndex &indexCount,
                                           ValueInternalArray::PageIndex minNewIndexCount )
@@ -1179,12 +1154,10 @@ public: // overridden from ValueArrayAllocator
       if ( indexes )
          free( indexes );
    }
-
    virtual Value *allocateArrayPage()
    {
       return static_cast<Value *>( malloc( sizeof(Value) * ValueInternalArray::itemsPerPage ) );
    }
-
    virtual void releaseArrayPage( Value *value )
    {
       if ( value )
@@ -1616,9 +1589,7 @@ namespace Json {
    };
 
    /** \brief Read from 'sin' into 'root'.
-
     Always keep comments from the input JSON.
-
     This can be used to read a file into a particular sub-object.
     For example:
     \code
@@ -1852,4 +1823,4 @@ namespace Json {
 
 
 
-#endif //ifndef JSON_AMALGATED_H_INCLUDED
+#endif //ifndef JSON_AMALGATED_H_INCLUDED#pragma once

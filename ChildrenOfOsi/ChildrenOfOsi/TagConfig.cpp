@@ -15,12 +15,27 @@ TagConfig::~TagConfig()
 void TagConfig::import_config(ChildrenOfOsi* gameplay_func, TaskBuffer* tBuffer)
 {
 	
+	bool alive = true;
 	Json::Value root;
-	Json::Reader reader;
+	while (alive) {
 
+		Json::Reader reader;
+		Json::CharReaderBuilder builder;
+		//std::string test = 
+		std::ifstream test("../ChildrenofOsi/tag_config.json", std::ifstream::binary);
+		std::string errs;
+		bool ok = reader.parse(test, root, false);
+		if (!ok)
+		{
+			// report to the user the failure and their locations in the document.
+			std::cout << errs.c_str() << "\n";
+		}
 
-	std::ifstream file("Tag_config.json");
-	file >> root;
+		std::string encoding = root.get("encoding", "UTF-8").asString();
+		std::cout << encoding << "\n";
+		alive = false;
+		test.close();
+	}
 
 	std::vector<std::string> conv_points;
 	for (auto itor = root["Info_About_Other_Heroes"].begin(); itor != root["Info_About_Other_Heroes"].end(); ++itor) {

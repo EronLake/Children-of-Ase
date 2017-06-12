@@ -2,7 +2,7 @@
 
 #include <string>
 
-const std::string ASSETS_PATH = "./Assets/";
+const std::string ASSETS_PATH = "../ChildrenofOsi/Assets/";
 
 const std::string FONTS_PATH = ASSETS_PATH + "Fonts/";
 

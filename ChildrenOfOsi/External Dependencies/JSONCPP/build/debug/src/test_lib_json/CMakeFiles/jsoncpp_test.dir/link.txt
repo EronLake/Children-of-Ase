@@ -1,0 +1,1 @@
+/usr/bin/c++.exe   -Wall -Wconversion -Wshadow -Wextra -pedantic -g  -Wl,--enable-auto-import CMakeFiles/jsoncpp_test.dir/jsontest.cpp.o CMakeFiles/jsoncpp_test.dir/main.cpp.o  -o jsoncpp_test.exe -Wl,--out-implib,libjsoncpp_test.dll.a -Wl,--major-image-version,0,--minor-image-version,0  ../lib_json/libjsoncpp.a 

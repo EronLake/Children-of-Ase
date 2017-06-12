@@ -59,14 +59,27 @@ void ObjConfig::import_config(vector<WorldObj*>* recVec, ChildrenOfOsi* gameplay
 	}
 	else {
 		if (LOAD_REGIONS == 0) {
-			WhichJson = "config.json";
+			bool alive = true;
 			Json::Value root;
-			Json::Reader reader;
+			while (alive) {
 
+				Json::Reader reader;
+				Json::CharReaderBuilder builder;
+				//std::string test = 
+				std::ifstream test("../ChildrenofOsi/config.json", std::ifstream::binary);
+				std::string errs;
+				bool ok = reader.parse(test, root, false);
+				if (!ok)
+				{
+					// report to the user the failure and their locations in the document.
+					std::cout << errs.c_str() << "\n";
+				}
 
-			std::ifstream file(WhichJson);
-
-			file >> root;
+				std::string encoding = root.get("encoding", "UTF-8").asString();
+				std::cout << encoding << "\n";
+				alive = false;
+				test.close();
+			}
 			for (auto itr = root.begin(); itr != root.end(); itr++)
 			{
 
@@ -81,14 +94,27 @@ void ObjConfig::import_config(vector<WorldObj*>* recVec, ChildrenOfOsi* gameplay
 		}
 		else if (LOAD_REGIONS == 1) {
 			for (int i = 0; i < 2; i++) {
-				WhichJson = ConfigFiles[i];
+				bool alive = true;
 				Json::Value root;
-				Json::Reader reader;
+				while (alive) {
 
+					Json::Reader reader;
+					Json::CharReaderBuilder builder;
+					//std::string test = 
+					std::ifstream test("../ChildrenofOsi/" + ConfigFiles[i], std::ifstream::binary);
+					std::string errs;
+					bool ok = reader.parse(test, root, false);
+					if (!ok)
+					{
+						// report to the user the failure and their locations in the document.
+						std::cout << errs.c_str() << "\n";
+					}
 
-				std::ifstream file(WhichJson);
-
-				file >> root;
+					std::string encoding = root.get("encoding", "UTF-8").asString();
+					std::cout << encoding << "\n";
+					alive = false;
+					test.close();
+				}
 
 				for (auto itr = root.begin(); itr != root.end(); itr++)
 				{
@@ -103,14 +129,27 @@ void ObjConfig::import_config(vector<WorldObj*>* recVec, ChildrenOfOsi* gameplay
 			}
 		}
 		else if (LOAD_REGIONS == 2) {
-			WhichJson = ConfigFiles[0];
+			bool alive = true;
 			Json::Value root;
-			Json::Reader reader;
+			while (alive) {
 
+				Json::Reader reader;
+				Json::CharReaderBuilder builder;
+				//std::string test = 
+				std::ifstream test("../ChildrenofOsi/" + ConfigFiles[0], std::ifstream::binary);
+				std::string errs;
+				bool ok = reader.parse(test, root, false);
+				if (!ok)
+				{
+					// report to the user the failure and their locations in the document.
+					std::cout << errs.c_str() << "\n";
+				}
 
-			std::ifstream file(WhichJson);
-
-			file >> root;
+				std::string encoding = root.get("encoding", "UTF-8").asString();
+				std::cout << encoding << "\n";
+				alive = false;
+				test.close();
+			}
 
 			for (auto itr = root.begin(); itr != root.end(); itr++)
 			{
@@ -125,14 +164,27 @@ void ObjConfig::import_config(vector<WorldObj*>* recVec, ChildrenOfOsi* gameplay
 		}
 		else if (LOAD_REGIONS == 3)
 		{
-			WhichJson = ConfigFiles[1];
+			bool alive = true;
 			Json::Value root;
-			Json::Reader reader;
+			while (alive) {
 
+				Json::Reader reader;
+				Json::CharReaderBuilder builder;
+				//std::string test = 
+				std::ifstream test("../ChildrenofOsi/" + ConfigFiles[1], std::ifstream::binary);
+				std::string errs;
+				bool ok = reader.parse(test, root, false);
+				if (!ok)
+				{
+					// report to the user the failure and their locations in the document.
+					std::cout << errs.c_str() << "\n";
+				}
 
-			std::ifstream file(WhichJson);
-
-			file >> root;
+				std::string encoding = root.get("encoding", "UTF-8").asString();
+				std::cout << encoding << "\n";
+				alive = false;
+				test.close();
+			}
 
 			for (auto itr = root.begin(); itr != root.end(); itr++)
 			{
@@ -165,12 +217,27 @@ void ObjConfig::make_stuff(vector<WorldObj*>* recVec, ChildrenOfOsi* gameplay_fu
 		WhichJson = "config.json";
 		region = OASIS;
 	}
+	bool alive = true;
 	Json::Value root;
-	Json::Reader reader;
+	while (alive) {
 
+		Json::Reader reader;
+		Json::CharReaderBuilder builder;
+		//std::string test = 
+		std::ifstream test("../ChildrenofOsi/"+WhichJson, std::ifstream::binary);
+		std::string errs;
+		bool ok = reader.parse(test, root, false);
+		if (!ok)
+		{
+			// report to the user the failure and their locations in the document.
+			std::cout << errs.c_str() << "\n";
+		}
 
-	std::ifstream file(WhichJson);
-	file >> root;
+		std::string encoding = root.get("encoding", "UTF-8").asString();
+		std::cout << encoding << "\n";
+		alive = false;
+		test.close();
+	}
 
 	for (auto itr = root.begin(); itr != root.end(); itr++)
 	{
@@ -210,12 +277,28 @@ void ObjConfig::make_stuff(vector<WorldObj*>* recVec, ChildrenOfOsi* gameplay_fu
 	////std:://cout << "done" << endl;
 	if (MakeForest || PlacePlant) {
 
+		bool alive = true;
 		Json::Value root;
-		Json::Reader reader;
-		std::ifstream in_file(WhichJson);
-		in_file >> root;
-		in_file.close();
+		while (alive) {
 
+			Json::Reader reader;
+			Json::CharReaderBuilder builder;
+			//std::string test = 
+			std::ifstream test("../ChildrenofOsi/"+WhichJson, std::ifstream::binary);
+			std::string errs;
+			bool ok = reader.parse(test, root, false);
+			if (!ok)
+			{
+				// report to the user the failure and their locations in the document.
+				std::cout << errs.c_str() << "\n";
+			}
+
+			std::string encoding = root.get("encoding", "UTF-8").asString();
+			std::cout << encoding << "\n";
+			alive = false;
+			test.close();
+		}
+	
 
 		////std:://cout << "Makeing Forest" << endl;
 		int XDistancs = abs(topLeftx - topRightx);
@@ -301,7 +384,7 @@ void ObjConfig::make_stuff(vector<WorldObj*>* recVec, ChildrenOfOsi* gameplay_fu
 					break;
 				}
 				std::ofstream file;
-				file.open(WhichJson);
+				file.open("../ChildrenofOsi/" + WhichJson);
 
 				//populate 'value_obj' with the objects, arrays etc.
 				Json::Value new_obj = {};
@@ -388,11 +471,27 @@ void ObjConfig::make_stuff(vector<WorldObj*>* recVec, ChildrenOfOsi* gameplay_fu
 
 	}
 	else {
+		bool alive = true;
 		Json::Value root;
-		Json::Reader reader;
-		std::ifstream in_file(WhichJson);
-		in_file >> root;
-		in_file.close();
+		while (alive) {
+
+			Json::Reader reader;
+			Json::CharReaderBuilder builder;
+			//std::string test = 
+			std::ifstream test("../ChildrenofOsi/" + WhichJson, std::ifstream::binary);
+			std::string errs;
+			bool ok = reader.parse(test, root, false);
+			if (!ok)
+			{
+				// report to the user the failure and their locations in the document.
+				std::cout << errs.c_str() << "\n";
+			}
+
+			std::string encoding = root.get("encoding", "UTF-8").asString();
+			std::cout << encoding << "\n";
+			alive = false;
+			test.close();
+		}
 
 		std::cout << "Makeing Oasis" << endl;
 		int XDistancs = abs(topLeftx - topRightx);
