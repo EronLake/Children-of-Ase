@@ -167,9 +167,11 @@ GridWithWeights make_diagram4() {
 
 	rivFile.close();
 	rivFile.clear();
-
+	int times = 0;
 	std::vector<std::vector<float>> tmp=Containers::getRects();
-	for (auto it = tmp.begin(); it != tmp.end(); ++it) {
+	for (auto it = (tmp).begin(); it != (tmp).end(); ++it) {
+		std::cout << times << std::endl;
+		times++;
 		add_rect(grid,(*it)[0], (*it)[1], (*it)[2], (*it)[3]);
 	}
 	//add_rect(grid, 1, 7, 4, 9);
