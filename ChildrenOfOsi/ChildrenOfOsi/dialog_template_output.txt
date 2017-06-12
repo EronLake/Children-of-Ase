@@ -1,2 +1,1 @@
-Conversation Point Name: Ask_Name Appeal 7190
-Conversation Point Name: Ask_Origin Appeal 6510
+Conversation Point Name: Intimidate Appeal 1640
