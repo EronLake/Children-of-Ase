@@ -370,6 +370,8 @@ std::vector<dialogue_point> DialogueHelper::get_possible_reply_pts(std::string p
 	if (point != "Boast" && point != "Insult" && point != "Intimidate" && point != "Compliment" && point != "Offer Praise" && point != "Grovel") {
 		if(point.find("_Quest") == string::npos && point.find("Name") == string::npos && point.find("Ask About") == string::npos)
 		    reply.push_back({ "Refuse","Refuse","","","1","0" });
+		else if(point.find("Ask") != string::npos)
+			reply.push_back({ "Decline_To_Answer","Decline_To_Answer","","","1","0" });
 		for (int i = 0; i < possible_reply_pts[opts_inx].size(); i++) {
 			if ((/*possible_reply_pts[opts_inx][i][CorrespondingConvPt].compare("Decline_To_Answer") == 0 ||*/ possible_reply_pts[opts_inx][i][CorrespondingConvPt].compare(point) == 0)
 				&& point.find("_Quest") == string::npos) {

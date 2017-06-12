@@ -1,5 +1,5 @@
 {
-    "Greeting": {
+    /*"Greeting": {
         "1": "Oh... it's you. Let's just get this over with.",
         "2": "I guess anyone nowadays thinks they can just walk in and talk to me.",
         "3": "Hello.",
@@ -13,7 +13,7 @@
         "3": "Goodbye.",
         "4": "I hope to see you again soon.",
         "5": "Feel free to come talk to me anytime."
-    },
+    },*/
 
 	"Ask_Name": {
 		"1": "What do people call you?",
@@ -49,51 +49,51 @@
 	},
 
 	"Ask About Strength Of": {
-        "1": "How strong is HERO",
-        "2": "What can you tell me about the strength of HERO",
-        "3": "What do you know of the strength possesed by HERO",
-        "4": "What do you know of the strength possesed by HERO",
-        "5": "What do you know of the strength possesed by HERO"
+        "1": "How strong is HERO?",
+        "2": "What can you tell me about the strength of HERO?",
+        "3": "What do you know of the strength possesed by HERO?",
+        "4": "What do you know of the strength possesed by HERO?",
+        "5": "What do you know of the strength possesed by HERO?"
     },
 
 	"Tell About Strength Of": {
-        "1": "HERO is a weakling that has no ability to defend themself or others.",
-        "2": "HERO is a weak person that can barely defend themself.",
-        "3": "HERO is a capable person who can defend themself and their people.",
-        "4": "HERO is a great individual with vast strength.",
-        "5": "HERO has enough strength to take down anyone, or to protect anybody."
+        "1": "I have heard that HERO is considerably strong, but I am not from around here so I cannot say for sure.",
+        "2": "I hear that HERO has been successful in several battles, but not much else.",
+        "3": "I have heard that HERO is strong in their own right.",
+        "4": "I have heard that HERO is considerably strong, but I am not from around here so I cannot say for sure.",
+        "5": "I have heard that HERO is considerably strong, but I am not from around here so I cannot say for sure."
     },
 
     "Ask About Affinity Of": {
-        "1": "How likable is HERO",
-        "2": "How friendly is HERO",
-        "3": "How much of an agreeable person is HERO",
-        "4": "How much of an agreeable person is HERO",
-        "5": "How much of an agreeable person is HERO"
+        "1": "How likable is HERO?",
+        "2": "How friendly is HERO?",
+        "3": "How much of an agreeable person is HERO?",
+        "4": "How much of an agreeable person is HERO?",
+        "5": "How much of an agreeable person is HERO?"
     },
 
 	"Tell About Affinity Of": {
-        "1": "HERO is that horrible person that is always up to no good.",
-        "2": "HERO is someone that has made too many enemies for themself.",
-        "3": "HERO is a person that is likable enough.",
-        "4": "HERO is someone that a multitude of people think well of. Myself included.",
-        "5": "HERO is someone that a multitude of people think well of. Myself included."
+        "1": "I have heard that HERO has their fair share of good and bad actions.",
+        "2": "I have heard that HERO has their fair share of good and bad actions.",
+        "3": "I have heard that HERO has their fair share of good and bad actions.",
+        "4": "I have heard that HERO has their fair share of good and bad actions.",
+        "5": "I have heard that HERO has their fair share of good and bad actions."
     },
 
 	"Ask About Notoriety Of": {
-        "1": "How well known is HERO",
-        "2": "What level of renown has been achieved by HERO",
-        "3": "I am interested in people who have made names for themselves. How well do people know HERO",
-        "4": "I am interested in people who have made names for themselves. How well do people know HERO",
-        "5": "I am interested in people who have made names for themselves. How well do people know HERO"
+        "1": "How well known is HERO?",
+        "2": "What level of renown has been achieved by HERO?",
+        "3": "I am interested in people who have made names for themselves. How well do people know HERO?",
+        "4": "I am interested in people who have made names for themselves. How well do people know HERO?",
+        "5": "I am interested in people who have made names for themselves. How well do people know HERO?"
     },
 
 	"Tell About Notoriety Of": {
-        "1": "HERO is a nobody with very few accomplishments.",
-        "2": "HERO is an individual of little importance with only a few minor accomplishments.",
-        "3": "HERO is known as a capable person that has earned the favor of some.",
-        "4": "HERO is known as a champion of the people and as a person of great strength and fortitude.",
-        "5": "HERO is known far and wide as a hero amongst heroes and many people sing of their achievements."
+        "1": "I can't say that I know about any of HERO's accomplishments because I am not from around here.",
+        "2": "I can't say that I know about any of HERO's accomplishments because I am not from around here.",
+        "3": "I can't say that I know about any of HERO's accomplishments because I am not from around here.",
+        "4": "I can't say that I know about any of HERO's accomplishments because I am not from around here.",
+        "5": "I can't say that I know about any of HERO's accomplishments because I am not from around here."
     },
 
 	"Ask_To_Form_Alliance": {
@@ -123,7 +123,7 @@
 	"Confirm Ally": {
         "1": "I wish you would trust me, but I guess it cannot be helped.",
         "2": "I wish you would trust me, but I guess it cannot be helped.",
-        "3": "Welcome to the team",
+        "3": "Welcome to the team.",
         "4": "I assure you that you will be glad that you took my advice.",
 		"5": "I assure you that you will be glad that you took my advice."
     },
@@ -131,7 +131,7 @@
 	"Confirm Fight": {
         "1": "I wish you would trust me, but I guess it cannot be helped.",
         "2": "I wish you would trust me, but I guess it cannot be helped.",
-        "3": "Lets do this then",
+        "3": "Lets do this then.",
         "4": "I assure you that you will be glad that you took my advice.",
 		"5": "I assure you that you will be glad that you took my advice."
     },
@@ -153,38 +153,38 @@
     },
 
 	"Advise To Conquer": {
-        "1": "I would like you to consider conquering HERO",
-        "2": "I think it would be greatly beneficial to you if you gained control over HERO",
-        "3": "My friend, I believe now would be a perfect opportunity to conquer HERO",
-		"4": "My friend, I believe now would be a perfect opportunity to conquer HERO",
-		"5": "My friend, I believe now would be a perfect opportunity to conquer HERO"
+        "1": "I would like you to consider conquering HERO.",
+        "2": "I think it would be greatly beneficial to you if you gained control over HERO.",
+        "3": "My friend, I believe now would be a perfect opportunity to conquer HERO.",
+		"4": "My friend, I believe now would be a perfect opportunity to conquer HERO.",
+		"5": "My friend, I believe now would be a perfect opportunity to conquer HERO."
     },
 
-	"Take Advice To Conquer": {
+	/*"Take Advice To Conquer": {
         "1": "HERO hmm.I was considering conquering them but then you told me it was a good idea. Now I am not so sure. ",
         "2": "HERO? Really? I don't feel like you should be giving me advice on such an important matter.",
         "3": "HERO eh.I am not sure that conquest is the best idea for ensuring the safety of this village, but I will keep it in mind.",
         "4": "HERO as a conquering target? I think that moving to conquer is a risky move, but I am glad that you gave me this advice.",
         "5": "HERO hmm. I respect your advice, and will definitely consider conquest as a powerful strategic move."
-    },
+    },*/
 
 	"Advise To Ally With": {
-        "1": "I believe it would be beneficial to you if you ally with HERO",
-        "2": "I feel like you would be a perfect candidate for an alliance with HERO",
-        "3": "My friend, I know that you are strong. You should share your strength with HERO",
-		"4": "My friend, I know that you are strong. You should share your strength with HERO",
-        "5": "My friend, I know that you are strong. You should share your strength with HERO"
+        "1": "I believe it would be beneficial to you if you ally with HERO.",
+        "2": "I feel like you would be a perfect candidate for an alliance with HERO.",
+        "3": "My friend, I know that you are strong. You should share your strength with HERO.",
+		"4": "My friend, I know that you are strong. You should share your strength with HERO.",
+        "5": "My friend, I know that you are strong. You should share your strength with HERO."
     },
 
-	"Take Advice To Ally With": {
+	/*"Take Advice To Ally With": {
         "1": "HERO!? I absolutely refuse. The very idea of being in an alliance with their village disgusts me.",
         "2": "HERO as an ally? An alliance can possibly help ensure the safety of this village, so I will definitely consider it.",
         "3": "HERO as an ally? I will have to think deeply as to whether or not an alliance with them would be a good idea.",
         "4": "HERO as an ally? Your advice always has my best interests in mind it seems, so I promise you I will deeply consider an alliance with them.",
         "5": "HERO as an ally? Your advice always has my best interests in mind it seems, so I promise you I will deeply consider an alliance with them."
-    },
+    },*/
 
-	"Advise To Revolt Against": {
+	/*"Advise To Revolt Against": {
         "1": "I think it would be in your best interests to revolt against HERO",
         "2": "I cannot stand see you under the oppression of another. You must break free of HERO",
 		"3": "I know that you are not the type of person to sit down, give up, and let others walk all over you. You must break free from HERO",
@@ -198,9 +198,9 @@
         "3": "HERO is not very tolerant and it seems very risky to even be talking about this, but I cannot say that I haven't considered revolt.",
         "4": "HERO being gone would help this village prosper, but it just seems so dangerous. I will have to think about this.",
         "5": "HERO will control my people no further! I know you are right. This tyranny can last no longer. The only possible solution I can think of is revolt."
-    },
+    },*/
 
-	"Advise To Destroy": {
+	/*"Advise To Destroy": {
         "1": "I feel like it would most certainly be in your best interests to destroy HERO",
         "2": "I feel like it is a good idea for you to destroy nuisances like HERO",
         "3": "You know me, I am not usually one to support such violence, but I feel like it should be one of your top priorities to destroy HERO",
@@ -214,7 +214,7 @@
         "3": "HERO has to go. I usually try to avoid such violence and destruction, but deep down I know that you are right.",
 		"4": "HERO has to go. I usually try to avoid such violence and destruction, but deep down I know that you are right.",
         "5": "HERO has to go. I usually try to avoid such violence and destruction, but deep down I know that you are right."
-    },
+    },*/
 
 	"Ask_To_Duel": {
         "1": "I am looking for an easy fight to loosen up a bit. I suppose you will do.",
@@ -345,22 +345,22 @@
     },
 
 	"Grovel": {
-        "1": "Anybody could see just by looking at you that you are extremely capable",
-        "2": "Someone as amazing as you must be quite famous",
-        "3": "Anybody could see just by looking at you that you are extremely capable",
-		"4": "Someone as amazing as you must be quite famous",
+        "1": "Anybody could see just by looking at you that you are extremely capable.",
+        "2": "Someone as amazing as you must be quite famous.",
+        "3": "Anybody could see just by looking at you that you are extremely capable.",
+		"4": "Someone as amazing as you must be quite famous.",
         "5": "I hope to one day be as prolific as you."
     },
 
 	"Accept Plea": {
-        "1": "Nothing I didn't already know",
-        "2": "I guess",
+        "1": "Nothing I didn't already know.",
+        "2": "I guess.",
         "3": "Thank you, your words are too much.",
         "4": "Your praise makes me happy.",
         "5": "Thank you for your kind words."
     },
 
-	"Advise To Train With": {
+	/*"Advise To Train With": {
         "1": "I belive that your village would be safer if you trained its troops with HERO",
         "2": "I think that it should be a high priority for you to train with HERO",
         "3": "I suggest that you bolster your defenses through training with HERO",
@@ -374,7 +374,7 @@
         "3": "HERO? Train me? Hmm. It cannot hurt to always be a bit more prepared. I will consider it.",
         "4": "HERO? Train me? I do worry about whether we are prepared for an attack or not. I will definitely consider training.",
         "5": "HERO? Train me? I know you're right. This village is vunerable in its current state. I will definitely think about training in order to bolster our defenses."
-    },
+    },*/
 
 	"Advise To Fight": {
         "1": "Please hear me out. I think fighting HERO would be in your best interest.",
@@ -384,15 +384,15 @@
         "5": "If there is one thing that I know it's that alot can be learned from a good fight. You should try fighting HERO."
     },
 
-	"Take Advice To Fight": {
+	/*"Take Advice To Fight": {
         "1": "A fight huh. I'll do it. I am always up for a fight.",
         "2": "A fight huh. I'll do it. I am always up for a fight.",
         "3": "A fight huh. I'll do it. I am always up for a fight.",
         "4": "A fight huh. I'll do it. I am always up for a fight.",
         "5": "A fight huh. I'll do it. I am always up for a fight."
-    },
+    },*/
 
-	"Advise To Send Peace Offering To": {
+	/*"Advise To Send Peace Offering To": {
         "1": "I believe it would be prudent of you to send a peace offering to HERO.",
         "2": "You should send a peace offering to HERO in order to earn their favor.",
         "3": "I think it is wise to try and negotiate with HERO. You should try sending them a peace offering.",
@@ -406,7 +406,7 @@
         "3": "Peace huh. Sounds attractive. I'm in. I'll do it.",
         "4": "Peace huh. Sounds attractive. I'm in. I'll do it.",
         "5": "Peace huh. Sounds attractive. I'm in. I'll do it."
-    },
+    },*/
 
 	"Request_Teaching": {
         "1": "Would you please teach me one of your skills so that I can be better prepared for the challenges to come?",
@@ -416,13 +416,13 @@
         "5": "Would you please teach me one of your skills so that I can be better prepared for the challenges to come?"
     },
 
-	"Teach": {
+	/*"Teach": {
         "1": "I would rather burn this village to the ground with my own hands than teach someone like you.",
         "2": "I really would rather not.",
         "3": "I suppose teaching you wouldn't hurt.",
         "4": "Of course I would be fine teaching you.",
         "5": "I would love to teach you. I can probably learn some things myself by teaching you."
-    },
+    },*/
 
 	"Confirm Teach": {
         "1": "I really wanted to learn from you, but I guess I will give up for now then.",
@@ -449,11 +449,11 @@
     },
 
 	"Boast": {
-        "1":  "If you're ever in need of any extra fighting strength, my skill with a blade is peerless",
-        "2": "You could say that I have been blessed with the power of lighting itself",
-    "3": "You could say that I have been blessed with the power of lighting itself",
-    "4": "My strength is comparable to that of mountains",
-    "5": "I've never met someone whose sword I couldn't best."
+        "1": "My skill with a blade is peerless.",
+        "2": "You could say that I have been blessed with the power of lighting itself.",
+        "3": "You could say that I have been blessed with the power of lighting itself.",
+        "4": "My strength is comparable to that of mountains.",
+        "5": "I've never met someone whose sword I couldn't best."
 
     },
 
@@ -466,11 +466,11 @@
     },
 
 	"Intimidate": {
-        "1": "I hear that you're at making enemies, so if I were you I would watch my back.",
-        "2": "I've been know to always get my way, so if I were you, I woudn't cross me",
-    "3": "If you know what's good for you, you should never cross me.",
-    "4": "You better choose your future words very carefully.",
-    "5": "If you know what's good for you, you should never cross me."
+        "1": "I hear that you're good at making enemies, so if I were you I would watch my back.",
+        "2": "I've been known to always get my way, so if I were you, I woudn't cross me.",
+        "3": "If you know what's good for you, you should never cross me.",
+        "4": "You better choose your future words very carefully.",
+        "5": "If you know what's good for you, you should never cross me."
 
     },
 
@@ -485,7 +485,7 @@
 	"Insult": {
         "1": "I've fought trees more tenacious than you.",
         "2": "Your actions are as meaningless to me as a small child's.",
-		"3": "You're about as intimidating as small dog.",
+		"3": "You're about as intimidating as a small dog.",
         "4": "The only worse than your skill with a blade is your ability to lead.",
         "5": "I've fought trees more tenacious than you."
     },
@@ -595,14 +595,14 @@
   },
   "Boast In Response": {
     "1": "I've never met someone whose sword I couldn't best.",
-    "2": "You could say that I have been blessed with the power of lighting itself",
-    "3": "You could say that I have been blessed with the power of lighting itself",
-    "4": "My strength is comparable to that of mountains",
+    "2": "You could say that I have been blessed with the power of lighting itself.",
+    "3": "You could say that I have been blessed with the power of lighting itself.",
+    "4": "My strength is comparable to that of mountains.",
     "5": "I've never met someone whose sword I couldn't best."
   },
   "Intimidate In Response": {
     "1": "If you know what's good for you, you should never cross me.",
-    "2": "I've been know to always get my way, so if I were you, I woudn't cross me",
+    "2": "I've been know to always get my way, so if I were you, I woudn't cross me.",
     "3": "If you know what's good for you, you should never cross me.",
     "4": "You better choose your future words very carefully.",
     "5": "If you know what's good for you, you should never cross me."
@@ -616,15 +616,15 @@
   },
    "Offer Praise In Response": {
         "1": "I've never met someone quite like you before, you are incredible!",
-		"2": "Someone as amazing as you must be quite famous",
-        "3": "Anybody could see just by looking at you that you are extremely capable",
-		"4": "Someone as amazing as you must be quite famous",
+		"2": "Someone as amazing as you must be quite famous.",
+        "3": "Anybody could see just by looking at you that you are extremely capable.",
+		"4": "Someone as amazing as you must be quite famous.",
         "5": "I hope to one day be as prolific as you."
    },
     "Insult In Response": {
         "1": "I've fought trees more tenacious than you.",
         "2": "Your actions are as meaningless to me as a small child's.",
-		"3": "You're about as intimidating as small dog.",
+		"3": "You're about as intimidating as a small dog.",
         "4": "The only worse than your skill with a blade is your ability to lead.",
         "5": "I've fought trees more tenacious than you."
    },
@@ -646,10 +646,10 @@
    },
 
    "Offer Praise": {
-        "1": "Anybody could see just by looking at you that you are extremely capable",
-        "2": "Someone as amazing as you must be quite famous",
-        "3": "Anybody could see just by looking at you that you are extremely capable",
-		"4": "Someone as amazing as you must be quite famous",
+        "1": "Anybody could see just by looking at you that you are extremely capable.",
+        "2": "Someone as amazing as you must be quite famous.",
+        "3": "Anybody could see just by looking at you that you are extremely capable.",
+		"4": "Someone as amazing as you must be quite famous.",
         "5": "I hope to one day be as prolific as you."
    }
 }

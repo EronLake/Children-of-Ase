@@ -8,7 +8,7 @@
     },
 
     "Farewell": {
-        "1": "Goodbye. I would rather not meet with you again, but if our paths cross again, I will bear with you.",
+        "1": "While I do not enjoy conversing with you, I wish you a good day.",
         "2": "I suppose this is goodbye... hopefully for awhile.",
         "3": "Until we meet again.",
         "4": "I hope to see you again soon.",
@@ -41,7 +41,7 @@
 	},
 
 	"Tell Origin": {
-		"1": "I am hesistant to tell you, but... I am from the oasis village.",
+		"1": "I am hesitant to tell you, but... I am from the oasis village.",
 		"2": "I have lived in the oasis village for as long as I can recall.",
 		"3": "I came from the oasis village outskirts many years ago and have lived in the desert ever since.",
 		"4": "I came from the oasis village outskirts many years ago and have lived in the desert ever since.",
@@ -82,11 +82,11 @@
     },
 
 	"Ask About Notoriety Of": {
-        "1": "I know that someone like you probably knows nothing I already do not, but how well known is HERO",
-        "2": "Since you so decided to show up in my presence unnanounced, how about you make yourself useful? What is the level of renown of HERO",
-        "3": "I am interested in people who have made names for themselves. How well do people know HERO",
-        "4": "I am interested in people who have made names for themselves. How well do people know HERO",
-        "5": "I am interested in people who have made names for themselves. How well do people know HERO"
+        "1": "I know that someone like you probably knows nothing I already do not, but how well known is HERO?",
+        "2": "Since you decided to show up in my presence unnanounced, how about you make yourself useful? What is the level of renown of HERO?",
+        "3": "I am curious. How well do you think people know HERO?",
+        "4": "I am curious. How well do you think people know HERO?",
+        "5": "I am curious. How well do you think people know HERO?"
     },
 
 	"Tell About Notoriety Of": {
@@ -98,11 +98,11 @@
     },
 
 	"Ask_To_Form_Alliance": {
-        "1": "How do you feel about forming an Alliance with me?",
-		"2": "How do you feel about forming an Alliance with me?",
-        "3": "How do you feel about forming an Alliance with me?",
-        "4": "How do you feel about forming an Alliance with me?",
-        "5": "How do you feel about forming an Alliance with me?"
+        "1": "How do you feel about forming an alliance with me?",
+		"2": "How do you feel about forming an alliance with me?",
+        "3": "How do you feel about forming an alliance with me?",
+        "4": "How do you feel about forming an alliance with me?",
+        "5": "How do you feel about forming an alliance with me?"
     },
 
 	"Accept Alliance Offer": {
@@ -121,36 +121,36 @@
 		"5": "I am glad that you have accepted my offer. With our efforts combined, the oasis village will always be safe."
     },
 
-	"Advise To Conquer": {
+	/*"Advise To Conquer": {
         "1": "I would like you to consider conquering HERO.",
-        "2": "I think it would be greatly beneficial to you if you gained control over HERO.",
-        "3": "I believe now would be a perfect opportunity to conquer HERO.",
+        "2": "I think it would be greatly beneficial to you if you gained control over HERO's village.",
+        "3": "I believe now would be a perfect opportunity to conquer HERO's village.",
 		"4": "My friend, I believe now would be a perfect opportunity to conquer HERO.",
 		"5": "My friend, I believe now would be a perfect opportunity to conquer HERO."
-    },
+    },*/
 
 	"Take Advice To Conquer": {
         "1": "HERO hmm. I am not so sure. I am not one to stir up trouble. I must pass on your advice.",
         "2": "HERO? Really? I don't feel like you should be giving me advice on such an important matter. I must decline.",
-        "3": "HERO eh. I was not certain whether or not conquest was necessary, but I understand what you mean. I will take your advice.",
+        "3": "HERO eh. I was not certain whether or not conquest was necessary, but I feel that you may be right. I will take your advice.",
         "4": "HERO as a conquering target? I think that moving to conquer is a risky move, but I'll trust your judgement this time.",
         "5": "HERO hmm. I will follow your advice and make it my top priority."
     },
 
-	"Advise To Ally With": {
+	/*"Advise To Ally With": {
         "1": "I believe it would be beneficial to you if you ally with HERO",
         "2": "I feel like you would be a perfect candidate for an alliance with HERO",
         "3": "My friend, may I suggest that you form an alliance with HERO? It would bring the world one step closer to peace.",
 		"4": "My friend, may I suggest that you form an alliance with HERO? It would bring the world one step closer to peace.",
         "5": "My friend, may I suggest that you form an alliance with HERO? It would bring the world one step closer to peace."
-    },
+    },*/
 
 	"Take Advice To Ally With": {
         "1": "No. I do not wish to become allies with HERO at the moment.",
         "2": "While an alliance with HERO could possibly help to ensure the safety of the oasis village, I am not yet convinced enough to take your advice.",
         "3": "HERO as an ally? Truly, that sounds like an interesting prospect. I'll give it a try.",
         "4": "HERO as an ally? Alright, I trust your opinion on this, so I'll give it a try.",
-        "5": "HERO as an ally? Your advice seems to be fairly credible, so I promise you I will deeply consider an alliance with them."
+        "5": "HERO as an ally? Your advice seems to be fairly credible, so I promise you I will seek an alliance with their village."
     },
 
 	/*"Advise To Revolt Against": {
@@ -186,7 +186,7 @@
     },*/
 
 	"Ask_To_Duel": {
-        "1": "While I typically do not like to stir up trouble, I ask that you please duel me and show me your strength.",
+        "1": "While I typically do not like to stir up trouble, I have grown tired of putting up with you. Duel me.",
         "2": "While I typically do not like to stir up trouble, I ask that you please duel me and show me your strength.",
         "3": "Please duel me and show me your true strength.",
         "4": "I would greatly appreciate if you would face me in a duel so that I may assess your strength.",
@@ -204,17 +204,17 @@
 	"Confirm Duel": {
         "1": "Ah. I am disappointed, but I understand and respect your decision to decline.",
         "2": "Ah. I am disappointed, but I understand and respect your decision to decline.",
-        "3": "I am glad that you have accepted my challenge. Let us do our best, but there is no need to get too serious.",
-        "4": "I am glad that you have accepted my challenge. Let us do our best, but there is no need to get too serious.",
-        "5": "I am glad that you have accepted my challenge. Let us do our best, but there is no need to get too serious."
+        "3": "I am glad that you have accepted my challenge. Please have no regrets about whatever happens.",
+        "4": "I am glad that you have accepted my challenge. Please have no regrets about whatever happens.",
+        "5": "I am glad that you have accepted my challenge. Please have no regrets about whatever happens."
     },
 
 	"Finish Duel": {
-        "1": "Thank you for a splendid challenge. I hope you have learned as much as I have from this.",
-        "2": "Thank you for a splendid challenge. I hope you have learned as much as I have from this.",
-        "3": "Thank you for a splendid challenge. I hope you have learned as much as I have from this.",
-        "4": "Thank you for a splendid challenge. I hope you have learned as much as I have from this.",
-        "5": "Thank you for a splendid challenge. I hope you have learned as much as I have from this."
+        "1": "I don't like you, but I suppose that we can leave our duel at this and both be on our way now.",
+        "2": "I don't like you, but I suppose that we can leave our duel at this and both be on our way now.",
+        "3": "I don't like you, but I suppose that we can leave our duel at this and both be on our way now.",
+        "4": "I don't like you, but I suppose that we can leave our duel at this and both be on our way now.",
+        "5": "I don't like you, but I suppose that we can leave our duel at this and both be on our way now."
     },
 
 	"Ask_To_Spar": {
@@ -229,8 +229,8 @@
         "1": "I am afraid that I must decline. I feel like sparring with you would only lead to trouble.",
         "2": "I am sorry, but I see no reason to spar with you.",
         "3": "I suppose a friendly spar could not hurt. Sure, I will be your opponent.",
-        "4": "A spar, huh? I suppose it really couldn't hurt to get some practice in with you.",
-        "5": "I feel that sparring with you would certainly improve my ability to protect the oasis village... Sure, I will spar with you."
+        "4": "A spar, huh? I suppose it really couldn't hurt to practice with you.",
+        "5": "Sure, I will spar with you. I feel that sparring with you would certainly improve my ability to protect the oasis village."
     },
 
 	"Confirm Spar": {
@@ -250,11 +250,11 @@
     },
 
 	"Bribe": {
-        "1": "While I am not inclined to do this, I offer you this small gift.",
-        "2": "While I am not inclined to do this, I offer you this small gift.",
-        "3": "I decided to get this for you, hopefully you'll accept it.",
-		"4": "I decided to get this for you, hopefully you'll accept it.",
-        "5": "I decided to get this for you, hopefully you'll accept it."
+        "1": "While I am not inclined to do this, I offer you this small gift in hopes that we may become friends.",
+        "2": "While I am not inclined to do this, I offer you this small gift in hopes that we may become friends.",
+        "3": "I decided to get you a gift, hopefully you will accept it.",
+		"4": "I decided to get you a gift, hopefully you will accept it.",
+        "5": "I decided to get you a gift, hopefully you will accept it."
     },
 
 	"Accept Bribe": {
@@ -309,7 +309,7 @@
         "1": "Am I supposed to be flattered?",
         "2": "If you say so.",
         "3": "Thank you.",
-        "4": "It is not often people flatter me.",
+        "4": "Thank you. I am happy to hear that you think that.",
         "5": "Thanks so much. It is kind words like those that keep people going."
     },
 
@@ -318,14 +318,14 @@
         "2": "You seem like a great man, young traveler.",
         "3": "I can tell that you are very kind to even your worst of enemies.",
 		"4": "Your excellent clothing sense is only rivaled by your strength.",
-        "5": "you are the kindest person that I know."
+        "5": "You are the kindest person that I know."
     },
 
 	"Accept Plea": {
         "1": "Despite the nature of your words, I am feeling mildly uncomfortable now.",
         "2": "Despite the nature of your words, I am feeling mildly uncomfortable now.",
-        "3": "You certainly have a way with words. I greatly appreciate it.",
-        "4": "You certainly have a way with words. I greatly appreciate it.",
+        "3": "I appreciate your praise.",
+        "4": "I greatly appreciate your praise.",
         "5": "Thank you. Thank you. Thank you. My good friend."
     },
 
@@ -460,24 +460,24 @@
     "Congratulate": {
         "1": "My apologies, but I do not see how that is worth boasting about.",
         "2": "My apologies, but I do not see how that is worth boasting about.",
-        "3": "I am happy for you.",
-        "4": "I already knew you were great, but not that great.",
-        "5": "I already knew you were great, but not that great."
+        "3": "That is impressive.",
+        "4": "That is very impressive.",
+        "5": "Wow. I am speachless."
     },
 
 	"Intimidate": {
         "1": "I must warn you to not go around stirring up trouble in the oasis village. Judging by your looks, my soldiers could defeat you with ease.",
-        "2": "You seem good at making enemies, so if I were you I would tread carefully.",
+        "2": "I must warn you to tread carefully whenever you are in my village.",
 		"3": "If you ever pose a threat to the safety of my village, keep in mind that I will not hesitate to use all of my strength to stop you.",
         "4": "If you ever pose a threat to the safety of my village, keep in mind that I will not hesitate to use all of my strength to stop you.",
         "5": "If you ever pose a threat to the safety of my village, keep in mind that I will not hesitate to use all of my strength to stop you."
     },
 
 	"Talk Back": {
-        "1": "Were you trying to scare me, because all you did is make me angry.",
-        "2": "Your attempt at intimidation is paltry, at best. ",
-        "3": "Ah... I do not know if I offended you, but if you are mad at me just please leave the village out of it.",
-        "4": "Have I done somehting to you? I thought we were on good terms.",
+        "1": "Were you trying to frighten me, because all you did is annoy me.",
+        "2": "Your attempt at intimidation is paltry, at best.",
+        "3": "If you ever become on bad terms with me just please leave the village out of it.",
+        "4": "Have I done something to you? I thought we were on good terms.",
         "5": "My friend I am confused by your words, but I will never attempt to upset you."
     },
 
@@ -485,8 +485,8 @@
         "1": "My apologies, but I find you to be insufferable.",
         "2": "I am sorry to say this, but I have difficulty speaking with you without remembering the bandits that once terrorized the oasis village.",
 		"3": "I am sorry to say this, but I have difficulty speaking with you without remembering the bandits that once terrorized the oasis village.",
-        "4": "I am sorry to say this, but I have difficulty speaking with you without remembering the bandits that once terrorized the oasis village.",
-        "5": "I am sorry to say this, but I have difficulty speaking with you without remembering the bandits that once terrorized the oasis village."
+        "4": "You do not seem like very much when it comes to strength and kindness.",
+        "5": "You do not seem like very much when it comes to strength and kindness."
     },
 
 	"Defend Self": {
@@ -586,11 +586,11 @@
     },
 
 	"Quest_In_Progress": {
-        "1": "I hope the quest I gave you is going smoothly.",
-        "2": "I hope the quest I gave you is going smoothly.",
-        "3": "I hope the quest I gave you is going smoothly.",
-        "4": "I hope the quest I gave you is going smoothly.",
-        "5": "I hope the quest I gave you is going smoothly."
+        "1": "I hope the task I gave you is going smoothly.",
+        "2": "I hope the task I gave you is going smoothly.",
+        "3": "I hope the task I gave you is going smoothly.",
+        "4": "I hope the task I gave you is going smoothly.",
+        "5": "I hope the task I gave you is going smoothly."
     },
 
 	"Terrible Advice": {
@@ -643,11 +643,11 @@
 
     //ignore. going to use accept bribe instead,  but manipulate dialog option text
 	"Accept Gift":{
-	    "1": "Do you honesly think I would stoop to your level and accept a bribe.",
-        "2": "I hope you think better of me than to think I would be swayed so easily by a bribe.",
-        "3": "I do not usually accept bribes, but I suppose I could make an exception for you.",
-        "4": "I do not usually accept bribes, but I suppose I could make an exception for you.",
-        "5": "I do not usually accept bribes, but I suppose I could make an exception for you."
+	    "1": "I hope you think better of me than to think I would be swayed so easily by gifts.",
+        "2": "I must decline.",
+        "3": "Although I question your intentions, I shall accept your gift.",
+        "4": "Thank you kindly. I gladly accept your gift.",
+        "5": "Thank you kindly. I gladly accept your gift."
 	},
 	//ignore. going to use grovel instead,  but manipulate dialog option text
    "Offer Praise": {
