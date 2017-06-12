@@ -21,11 +21,6 @@
 			"id_left": {"0":"SoldierOasis_Idle_W","1":22},
 			"id_right": {"0":"SoldierOasis_Idle_E","1":22},
 
-			"walk_up": {"0":"SoldierOasis_Walk_N","1":32},
-			"walk_down": {"0":"SoldierOasis_Walk_S","1":32},
-			"walk_left": {"0":"SoldierOasis_Walk_W","1":32},
-			"walk_right": {"0":"SoldierOasis_Walk_E","1":32},
-
 			"sprint_up": {"0":"SoldierOasis_Sprint_N","1":16},
 			"sprint_down": {"0":"SoldierOasis_Sprint_S","1":16},
 			"sprint_left": {"0":"SoldierOasis_Sprint_W","1":16},
@@ -49,17 +44,7 @@
 			"atk2_up": {"0":"SoldierOasis_Attack_N","1":3},
 			"atk2_down": {"0":"SoldierOasis_Attack_S","1":3},
 			"atk2_left": {"0":"SoldierOasis_Attack_W","1":3},
-			"atk2_right": {"0":"SoldierOasis_Attack_E","1":3},
-
-			"spin_up": {"0":"Yemoja_Spin_N","1":8},
-			"spin_down": {"0":"Yemoja_Spin_S","1":8},
-			"spin_left": {"0":"Yemoja_Spin_W","1":8},
-			"spin_right": {"0":"Yemoja_Spin_E","1":8},
-
-			"breathe_up": {"0":"Yemoja_Breath_N","1":8},
-			"breathe_down": {"0":"Yemoja_Breath_S","1":8},
-			"breathe_left": {"0":"Yemoja_Breath_W","1":8},
-			"breathe_right": {"0":"Yemoja_Breath_E","1":8}
+			"atk2_right": {"0":"SoldierOasis_Attack_E","1":3}
 		},
 		"melee" : {
 			"sprites" : {
@@ -108,11 +93,6 @@
 			"id_left": {"0":"SoldierJungle_Idle_W","1":22},
 			"id_right": {"0":"SoldierJungle_Idle_E","1":22},
 
-			"walk_up": {"0":"SoldierJungle_Walk_N","1":32},
-			"walk_down": {"0":"SoldierJungle_Walk_S","1":32},
-			"walk_left": {"0":"SoldierJungle_Walk_W","1":32},
-			"walk_right": {"0":"SoldierJungle_Walk_E","1":32},
-
 			"sprint_up": {"0":"SoldierJungle_Sprint_N","1":16},
 			"sprint_down": {"0":"SoldierJungle_Sprint_S","1":16},
 			"sprint_left": {"0":"SoldierJungle_Sprint_W","1":16},
@@ -136,17 +116,7 @@
 			"atk2_up": {"0":"SoldierJungle_Attack_N","1":3},
 			"atk2_down": {"0":"SoldierJungle_Attack_S","1":3},
 			"atk2_left": {"0":"SoldierJungle_Attack_W","1":3},
-			"atk2_right": {"0":"SoldierJungle_Attack_E","1":3},
-
-			"spin_up": {"0":"Oya_Spin_N","1":8},
-			"spin_down": {"0":"Oya_Spin_S","1":8},
-			"spin_left": {"0":"Oya_Spin_W","1":8},
-			"spin_right": {"0":"Oya_Spin_E","1":8},
-
-			"breathe_up": {"0":"Oya_Breath_N","1":8},
-			"breathe_down": {"0":"Oya_Breath_S","1":8},
-			"breathe_left": {"0":"Oya_Breath_W","1":8},
-			"breathe_right": {"0":"Oya_Breath_E","1":8}
+			"atk2_right": {"0":"SoldierJungle_Attack_E","1":3}
 		},
 		"melee" : {
 			"sprites" : {
@@ -186,53 +156,38 @@
 		"health": 80,
 		"max_stamina": 100,
 		"sprites": {
-			"setTexture": {"0":"SoldierOgun_Idle_S", "1":22},
-			"setIdleTexture": {"0":"SoldierOgun_Idle_S", "1":22},
+			"setTexture": {"0":"OgunSoldier_Idle_S", "1":22},
+			"setIdleTexture": {"0":"OgunSoldier_Idle_S", "1":22},
 
-			"id_up": {"0":"SoldierOgun_Idle_N","1":22},
-			"id_down": {"0":"SoldierOgun_Idle_S","1":22},
-			"id_left": {"0":"SoldierOgun_Idle_W","1":22},
-			"id_right": {"0":"SoldierOgun_Idle_E","1":22},
+			"id_up": {"0":"OgunSoldier_Idle_N","1":22},
+			"id_down": {"0":"OgunSoldier_Idle_S","1":22},
+			"id_left": {"0":"OgunSoldier_Idle_W","1":22},
+			"id_right": {"0":"OgunSoldier_Idle_E","1":22},
 
-			"walk_up": {"0":"SoldierOgun_Walk_N","1":32},
-			"walk_down": {"0":"SoldierOgun_Walk_S","1":32},
-			"walk_left": {"0":"SoldierOgun_Walk_W","1":32},
-			"walk_right": {"0":"SoldierOgun_Walk_E","1":32},
+			"sprint_up": {"0":"OgunSoldier_Sprint_N","1":16},
+			"sprint_down": {"0":"OgunSoldier_Sprint_S","1":16},
+			"sprint_left": {"0":"OgunSoldier_Sprint_W","1":16},
+			"sprint_right": {"0":"OgunSoldier_Sprint_E","1":16},
 
-			"sprint_up": {"0":"SoldierOgun_Sprint_N","1":16},
-			"sprint_down": {"0":"SoldierOgun_Sprint_S","1":16},
-			"sprint_left": {"0":"SoldierOgun_Sprint_W","1":16},
-			"sprint_right": {"0":"SoldierOgun_Sprint_E","1":16},
+			"hurt_up": {"0":"OgunSoldier_Recoil_N","1":9},
+			"hurt_down": {"0":"OgunSoldier_Recoil_S","1":9},
+			"hurt_left": {"0":"OgunSoldier_Recoil_W","1":9},
+			"hurt_right": {"0":"OgunSoldier_Recoil_E","1":9},
 
-			"hurt_up": {"0":"SoldierOgun_Recoil_N","1":9},
-			"hurt_down": {"0":"SoldierOgun_Recoil_S","1":9},
-			"hurt_left": {"0":"SoldierOgun_Recoil_W","1":9},
-			"hurt_right": {"0":"SoldierOgun_Recoil_E","1":9},
+			"atk_up": {"0":"OgunSoldier_Attack_N","1":3},
+			"atk_down": {"0":"OgunSoldier_Attack_S","1":3},
+			"atk_left": {"0":"OgunSoldier_Attack_W","1":3},
+			"atk_right": {"0":"OgunSoldier_Attack_E","1":3},
 
-			"atk_up": {"0":"SoldierOgun_Attack_N","1":3},
-			"atk_down": {"0":"SoldierOgun_Attack_S","1":3},
-			"atk_left": {"0":"SoldierOgun_Attack_W","1":3},
-			"atk_right": {"0":"SoldierOgun_Attack_E","1":3},
+			"death_up": {"0":"OgunSoldier_Death_N","1":24},
+			"death_down": {"0":"OgunSoldier_Death_S","1":24},
+			"death_left": {"0":"OgunSoldier_Death_W","1":24},
+			"death_right": {"0":"OgunSoldier_Death_E","1":24},
 
-			"death_up": {"0":"SoldierOgun_Death_N","1":24},
-			"death_down": {"0":"SoldierOgun_Death_S","1":24},
-			"death_left": {"0":"SoldierOgun_Death_W","1":24},
-			"death_right": {"0":"SoldierOgun_Death_E","1":24},
-
-			"atk2_up": {"0":"SoldierOgun_Attack_N","1":3},
-			"atk2_down": {"0":"SoldierOgun_Attack_S","1":3},
-			"atk2_left": {"0":"SoldierOgun_Attack_W","1":3},
-			"atk2_right": {"0":"SoldierOgun_Attack_E","1":3},
-
-			"spin_up": {"0":"Yemoja_Spin_N","1":8},
-			"spin_down": {"0":"Yemoja_Spin_S","1":8},
-			"spin_left": {"0":"Yemoja_Spin_W","1":8},
-			"spin_right": {"0":"Yemoja_Spin_E","1":8},
-
-			"breathe_up": {"0":"Yemoja_Breath_N","1":8},
-			"breathe_down": {"0":"Yemoja_Breath_S","1":8},
-			"breathe_left": {"0":"Yemoja_Breath_W","1":8},
-			"breathe_right": {"0":"Yemoja_Breath_E","1":8}
+			"atk2_up": {"0":"OgunSoldier_Attack_N","1":3},
+			"atk2_down": {"0":"OgunSoldier_Attack_S","1":3},
+			"atk2_left": {"0":"OgunSoldier_Attack_W","1":3},
+			"atk2_right": {"0":"OgunSoldier_Attack_E","1":3}
 		},
 		"melee" : {
 			"sprites" : {

@@ -375,11 +375,11 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 		gameplay_functions->add_texture("map4_4", 0, 0, 0);
 		gameplay_functions->add_texture("map4_5", 0, 0, 0);
 
-		gameplay_functions->add_texture("map5_1", 0, 0, 0);
+		/*gameplay_functions->add_texture("map5_1", 0, 0, 0);
 		gameplay_functions->add_texture("map5_2", 0, 0, 0);
 		gameplay_functions->add_texture("map5_3", 0, 0, 0);
 		gameplay_functions->add_texture("map5_4", 0, 0, 0);
-		gameplay_functions->add_texture("map5_5", 0, 0, 0);
+		gameplay_functions->add_texture("map5_5", 0, 0, 0);*/
 
 		tBuffer->run();
 		RenderHelper::gmap->setTextures();

@@ -76,17 +76,17 @@ void VillagerConfig::init_sprites(ChildrenOfOsi* gameplay_func, TaskBuffer* tBuf
 
 	//if statements check to see if the given soldier name(without the number) is in the name
 
-	if (name.find("Oasis_Villager") != string::npos)
+	if (name.find("Oasis") != string::npos)
 	{
 		region_con = &ObjConfig::oasis_con;
 		path = SOLDIER_OASIS_PATH;
 	}
-	else if (name.find("Jungle_Villager") != string::npos)
+	else if (name.find("Jungle") != string::npos)
 	{
 		region_con = &ObjConfig::jungle_con;
 		path = SOLDIER_JUNGLE_PATH;
 	}
-	else if (name.find("Mountain_Villager") != string::npos)
+	else if (name.find("Mountain") != string::npos)
 	{
 		region_con = &ObjConfig::mountain_con;
 		path = SOLDIER_MOUNTAIN_PATH;

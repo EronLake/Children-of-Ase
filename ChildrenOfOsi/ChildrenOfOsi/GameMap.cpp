@@ -90,11 +90,11 @@ GameMap::GameMap()
 	map4_4 = new Rectangle(Vector2f(15000, 15000.0), 5000.0, 5000.0);
 	map4_5 = new Rectangle(Vector2f(20000, 15000.0), 5000.0, 5000.0);
 
-	map5_1 = new Rectangle(Vector2f(0.0, 20000.0), 5000.0, 5000.0);
+	/*map5_1 = new Rectangle(Vector2f(0.0, 20000.0), 5000.0, 5000.0);
 	map5_2 = new Rectangle(Vector2f(5000.0, 20000.0), 5000.0, 5000.0);
 	map5_3 = new Rectangle(Vector2f(10000.0, 20000.0), 5000.0, 5000.0);
 	map5_4 = new Rectangle(Vector2f(15000, 20000.0), 5000.0, 5000.0);
-	map5_5 = new Rectangle(Vector2f(20000, 20000.0), 5000.0, 5000.0);
+	map5_5 = new Rectangle(Vector2f(20000, 20000.0), 5000.0, 5000.0);*/
 	
 
 	//river = new Rectangle(Vector2f(0.0, 0.0), 10000.0, 10000.0);
@@ -248,7 +248,7 @@ void GameMap::setSprite()
 		map_pieces.push_back({ map4_4 ,"Assets/Sprites/map4_4.png" });
 		map_pieces.push_back({ map4_5 ,"Assets/Sprites/map4_5.png" });
 
-		map5_1->sprite.setTexture(map5_1tex);
+		/*map5_1->sprite.setTexture(map5_1tex);
 		map5_2->sprite.setTexture(map5_2tex);
 		map5_3->sprite.setTexture(map5_3tex);
 		map5_4->sprite.setTexture(map5_4tex);
@@ -257,7 +257,7 @@ void GameMap::setSprite()
 		map_pieces.push_back({ map5_2 ,"Assets/Sprites/map5_2.png" });
 		map_pieces.push_back({ map5_3 ,"Assets/Sprites/map5_3.png" });
 		map_pieces.push_back({ map5_4 ,"Assets/Sprites/map5_4.png" });
-		map_pieces.push_back({ map5_5 ,"Assets/Sprites/map5_5.png" });
+		map_pieces.push_back({ map5_5 ,"Assets/Sprites/map5_5.png" });*/
 
 		//river->sprite.setTexture(riverTex);
 	}

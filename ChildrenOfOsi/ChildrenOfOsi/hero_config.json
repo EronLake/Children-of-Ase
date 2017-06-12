@@ -27,11 +27,6 @@
 			"id_down": {"0":"Shango_Idle_S","1":22},
 			"id_left": {"0":"Shango_Idle_W","1":22},
 			"id_right": {"0":"Shango_Idle_E","1":22},
-			
-			"walk_up": {"0":"Shango_Walk_N","1":32},
-			"walk_down": {"0":"Shango_Walk_S","1":32},
-			"walk_left": {"0":"Shango_Walk_W","1":32},
-			"walk_right": {"0":"Shango_Walk_E","1":32},
 
 			"sprint_up": {"0":"Shango_Sprint_N","1":16},
 			"sprint_down": {"0":"Shango_Sprint_S","1":16},
@@ -383,24 +378,7 @@
         "0": "Yemoja_Idle_E",
         "1": 22
       },
-
-      "walk_up": {
-        "0": "Yemoja_Walk_N",
-        "1": 32
-      },
-      "walk_down": {
-        "0": "Yemoja_Walk_S",
-        "1": 32
-      },
-      "walk_left": {
-        "0": "Yemoja_Walk_W",
-        "1": 32
-      },
-      "walk_right": {
-        "0": "Yemoja_Walk_E",
-        "1": 32
-      },
-
+      
       "sprint_up": {
         "0": "Yemoja_Sprint_N",
         "1": 16
@@ -436,19 +414,19 @@
       },
 
       "atk_up": {
-        "0": "Yemoja_Attack_N",
+        "0": "Yemoja_Breath_N",
         "1": 3
       },
       "atk_down": {
-        "0": "Yemoja_Attack_S",
+        "0": "Yemoja_Breath_S",
         "1": 3
       },
       "atk_left": {
-        "0": "Yemoja_Attack_W",
+        "0": "Yemoja_Breath_W",
         "1": 3
       },
       "atk_right": {
-        "0": "Yemoja_Attack_E",
+        "0": "Yemoja_Breath_E",
         "1": 3
       },
 
@@ -470,39 +448,21 @@
       },
 
       "atk2_up": {
-        "0": "Yemoja_Attack_N",
+        "0": "Yemoja_Breath_N",
         "1": 3
       },
       "atk2_down": {
-        "0": "Yemoja_Attack_S",
+        "0": "Yemoja_Breath_S",
         "1": 3
       },
       "atk2_left": {
-        "0": "Yemoja_Attack_W",
+        "0": "Yemoja_Breath_W",
         "1": 3
       },
       "atk2_right": {
-        "0": "Yemoja_Attack_E",
+        "0": "Yemoja_Breath_E",
         "1": 3
       },
-
-      "spin_up": {
-        "0": "Yemoja_Spin_N",
-        "1": 8
-      },
-      "spin_down": {
-        "0": "Yemoja_Spin_S",
-        "1": 8
-      },
-      "spin_left": {
-        "0": "Yemoja_Spin_W",
-        "1": 8
-      },
-      "spin_right": {
-        "0": "Yemoja_Spin_E",
-        "1": 8
-      },
-
       "breathe_up": {
         "0": "Yemoja_Breath_N",
         "1": 8
@@ -612,11 +572,6 @@
 			"id_down": {"0":"Oya_Idle_S","1":22},
 			"id_left": {"0":"Oya_Idle_W","1":22},
 			"id_right": {"0":"Oya_Idle_E","1":22},
-			
-			"walk_up": {"0":"Oya_Walk_N","1":32},
-			"walk_down": {"0":"Oya_Walk_S","1":32},
-			"walk_left": {"0":"Oya_Walk_W","1":32},
-			"walk_right": {"0":"Oya_Walk_E","1":32},
 
 			"sprint_up": {"0":"Oya_Sprint_N","1":16},
 			"sprint_down": {"0":"Oya_Sprint_S","1":16},
@@ -646,12 +601,7 @@
 			"spin_up": {"0":"Oya_Spin_N","1":8},
 			"spin_down": {"0":"Oya_Spin_S","1":8},
 			"spin_left": {"0":"Oya_Spin_W","1":8},
-			"spin_right": {"0":"Oya_Spin_E","1":8},
-
-			"breathe_up": {"0":"Oya_Breath_N","1":8},
-			"breathe_down": {"0":"Oya_Breath_S","1":8},
-			"breathe_left": {"0":"Oya_Breath_W","1":8},
-			"breathe_right": {"0":"Oya_Breath_E","1":8}
+			"spin_right": {"0":"Oya_Spin_E","1":8}
 		},
     "melee": {
       "sprites": {
@@ -860,11 +810,6 @@
 			"id_down": {"0":"Ogun_Idle_S","1":21},
 			"id_left": {"0":"Ogun_Idle_W","1":21},
 			"id_right": {"0":"Ogun_Idle_E","1":21},
-			
-			"walk_up": {"0":"Ogun_Walk_N","1":32},
-			"walk_down": {"0":"Ogun_Walk_S","1":32},
-			"walk_left": {"0":"Ogun_Walk_W","1":32},
-			"walk_right": {"0":"Ogun_Walk_E","1":32},
 
 			"sprint_up": {"0":"Ogun_Sprint_N","1":16},
 			"sprint_down": {"0":"Ogun_Sprint_S","1":16},
@@ -889,17 +834,7 @@
 			"atk2_up": {"0":"Ogun_Attack_N","1":3},
 			"atk2_down": {"0":"Ogun_Attack_S","1":3},
 			"atk2_left": {"0":"Ogun_Attack_W","1":3},
-			"atk2_right": {"0":"Ogun_Attack_E","1":3},
-
-			"spin_up": {"0":"Ogun_Spin_N","1":8},
-			"spin_down": {"0":"Ogun_Spin_S","1":8},
-			"spin_left": {"0":"Ogun_Spin_W","1":8},
-			"spin_right": {"0":"Ogun_Spin_E","1":8},
-
-			"breathe_up": {"0":"Ogun_Breath_N","1":8},
-			"breathe_down": {"0":"Ogun_Breath_S","1":8},
-			"breathe_left": {"0":"Ogun_Breath_W","1":8},
-			"breathe_right": {"0":"Ogun_Breath_E","1":8}
+			"atk2_right": {"0":"Ogun_Attack_E","1":3}
 		},
 		"melee" : {
 			"sprites" : {
