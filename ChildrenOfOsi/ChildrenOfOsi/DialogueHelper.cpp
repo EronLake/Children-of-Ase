@@ -583,7 +583,7 @@ dialogue_point DialogueHelper::get_dialog(std::string name, dialogue_point diog_
 	Json::Reader reader;
 	Json::CharReaderBuilder builder;
 	//std::string test = 
-	std::ifstream test("../ChildrenofOsi/_dialog.json", std::ifstream::binary);
+	std::ifstream test("../ChildrenofOsi/"+my_name+"_dialog.json", std::ifstream::binary);
 	std::string errs;
 	bool ok = reader.parse(test, root, false);
 	if (!ok)
@@ -670,7 +670,7 @@ dialogue_point DialogueHelper::get_dialog_negative(std::string name, dialogue_po
 
 	//std::ifstream file(dialogue_filename);
 	//file >> root;
-	while (alive) {
+	
 
 		Json::Reader reader;
 		Json::CharReaderBuilder builder;
@@ -688,8 +688,7 @@ dialogue_point DialogueHelper::get_dialog_negative(std::string name, dialogue_po
 		std::cout << encoding << "\n";
 		alive = false;
 		test.close();
-	}
-
+	
 	dialogue_point dpoint;
 
 	//sets phrase_picker to either 1 or 2, which reflects a negative/hateful response
@@ -730,14 +729,25 @@ dialogue_point DialogueHelper::get_dialog_shrine(std::string name,dialogue_point
 
 	dialogue_template dtemp = get_template(diog_pt);
 
-	std::string my_name = "Shrine";
-
 	Json::Value root;
 
-	std::string dialogue_filename = my_name + "_dialog.json";
 
-	std::ifstream file(dialogue_filename);
-	file >> root;
+		Json::Reader reader;
+		Json::CharReaderBuilder builder;
+		//std::string test = 
+		std::ifstream test("../ChildrenofOsi/Shrine_dialog.json", std::ifstream::binary);
+		std::string errs;
+		bool ok = reader.parse(test, root, false);
+		if (!ok)
+		{
+			// report to the user the failure and their locations in the document.
+			std::cout << errs.c_str() << "\n";
+		}
+
+		std::string encoding = root.get("encoding", "UTF-8").asString();
+		std::cout << encoding << "\n";
+	
+		test.close();
 
 	dialogue_point dpoint;
 
@@ -772,14 +782,25 @@ dialogue_point DialogueHelper::get_dialog_babalawo(std::string name, dialogue_po
 
 	dialogue_template dtemp = get_template(diog_pt);
 
-	std::string my_name = "Babalawo";
-
 	Json::Value root;
 
-	std::string dialogue_filename = my_name + "_dialog.json";
 
-	std::ifstream file(dialogue_filename);
-	file >> root;
+	Json::Reader reader;
+	Json::CharReaderBuilder builder;
+	//std::string test = 
+	std::ifstream test("../ChildrenofOsi/Babalawo_dialog.json", std::ifstream::binary);
+	std::string errs;
+	bool ok = reader.parse(test, root, false);
+	if (!ok)
+	{
+		// report to the user the failure and their locations in the document.
+		std::cout << errs.c_str() << "\n";
+	}
+
+	std::string encoding = root.get("encoding", "UTF-8").asString();
+	std::cout << encoding << "\n";
+
+	test.close();
 
 	dialogue_point dpoint;
 
@@ -814,14 +835,25 @@ dialogue_point DialogueHelper::get_dialog_villager(std::string name, dialogue_po
 
 	dialogue_template dtemp = get_template(diog_pt);
 
-	std::string my_name = "Villager";
-
 	Json::Value root;
 
-	std::string dialogue_filename = my_name + "_dialog.json";
 
-	std::ifstream file(dialogue_filename);
-	file >> root;
+	Json::Reader reader;
+	Json::CharReaderBuilder builder;
+	//std::string test = 
+	std::ifstream test("../ChildrenofOsi/Villager_dialog.json", std::ifstream::binary);
+	std::string errs;
+	bool ok = reader.parse(test, root, false);
+	if (!ok)
+	{
+		// report to the user the failure and their locations in the document.
+		std::cout << errs.c_str() << "\n";
+	}
+
+	std::string encoding = root.get("encoding", "UTF-8").asString();
+	std::cout << encoding << "\n";
+
+	test.close();
 
 	dialogue_point dpoint;
 

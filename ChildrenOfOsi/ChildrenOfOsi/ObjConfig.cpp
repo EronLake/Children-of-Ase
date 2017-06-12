@@ -61,7 +61,7 @@ void ObjConfig::import_config(vector<WorldObj*>* recVec, ChildrenOfOsi* gameplay
 		if (LOAD_REGIONS == 0) {
 			bool alive = true;
 			Json::Value root;
-			while (alive) {
+
 
 				Json::Reader reader;
 				Json::CharReaderBuilder builder;
@@ -79,7 +79,7 @@ void ObjConfig::import_config(vector<WorldObj*>* recVec, ChildrenOfOsi* gameplay
 				std::cout << encoding << "\n";
 				alive = false;
 				test.close();
-			}
+	
 			for (auto itr = root.begin(); itr != root.end(); itr++)
 			{
 
@@ -96,7 +96,7 @@ void ObjConfig::import_config(vector<WorldObj*>* recVec, ChildrenOfOsi* gameplay
 			for (int i = 0; i < 2; i++) {
 				bool alive = true;
 				Json::Value root;
-				while (alive) {
+	
 
 					Json::Reader reader;
 					Json::CharReaderBuilder builder;
@@ -114,7 +114,7 @@ void ObjConfig::import_config(vector<WorldObj*>* recVec, ChildrenOfOsi* gameplay
 					std::cout << encoding << "\n";
 					alive = false;
 					test.close();
-				}
+			
 
 				for (auto itr = root.begin(); itr != root.end(); itr++)
 				{
@@ -131,7 +131,7 @@ void ObjConfig::import_config(vector<WorldObj*>* recVec, ChildrenOfOsi* gameplay
 		else if (LOAD_REGIONS == 2) {
 			bool alive = true;
 			Json::Value root;
-			while (alive) {
+			
 
 				Json::Reader reader;
 				Json::CharReaderBuilder builder;
@@ -149,7 +149,7 @@ void ObjConfig::import_config(vector<WorldObj*>* recVec, ChildrenOfOsi* gameplay
 				std::cout << encoding << "\n";
 				alive = false;
 				test.close();
-			}
+			
 
 			for (auto itr = root.begin(); itr != root.end(); itr++)
 			{
@@ -166,7 +166,7 @@ void ObjConfig::import_config(vector<WorldObj*>* recVec, ChildrenOfOsi* gameplay
 		{
 			bool alive = true;
 			Json::Value root;
-			while (alive) {
+			
 
 				Json::Reader reader;
 				Json::CharReaderBuilder builder;
@@ -184,7 +184,7 @@ void ObjConfig::import_config(vector<WorldObj*>* recVec, ChildrenOfOsi* gameplay
 				std::cout << encoding << "\n";
 				alive = false;
 				test.close();
-			}
+			
 
 			for (auto itr = root.begin(); itr != root.end(); itr++)
 			{
@@ -219,7 +219,7 @@ void ObjConfig::make_stuff(vector<WorldObj*>* recVec, ChildrenOfOsi* gameplay_fu
 	}
 	bool alive = true;
 	Json::Value root;
-	while (alive) {
+	
 
 		Json::Reader reader;
 		Json::CharReaderBuilder builder;
@@ -237,7 +237,7 @@ void ObjConfig::make_stuff(vector<WorldObj*>* recVec, ChildrenOfOsi* gameplay_fu
 		std::cout << encoding << "\n";
 		alive = false;
 		test.close();
-	}
+	
 
 	for (auto itr = root.begin(); itr != root.end(); itr++)
 	{
@@ -279,7 +279,7 @@ void ObjConfig::make_stuff(vector<WorldObj*>* recVec, ChildrenOfOsi* gameplay_fu
 
 		bool alive = true;
 		Json::Value root;
-		while (alive) {
+	
 
 			Json::Reader reader;
 			Json::CharReaderBuilder builder;
@@ -297,7 +297,7 @@ void ObjConfig::make_stuff(vector<WorldObj*>* recVec, ChildrenOfOsi* gameplay_fu
 			std::cout << encoding << "\n";
 			alive = false;
 			test.close();
-		}
+
 	
 
 		////std:://cout << "Makeing Forest" << endl;
@@ -473,7 +473,7 @@ void ObjConfig::make_stuff(vector<WorldObj*>* recVec, ChildrenOfOsi* gameplay_fu
 	else {
 		bool alive = true;
 		Json::Value root;
-		while (alive) {
+
 
 			Json::Reader reader;
 			Json::CharReaderBuilder builder;
@@ -491,7 +491,7 @@ void ObjConfig::make_stuff(vector<WorldObj*>* recVec, ChildrenOfOsi* gameplay_fu
 			std::cout << encoding << "\n";
 			alive = false;
 			test.close();
-		}
+	
 
 		std::cout << "Makeing Oasis" << endl;
 		int XDistancs = abs(topLeftx - topRightx);
@@ -550,7 +550,7 @@ void ObjConfig::make_stuff(vector<WorldObj*>* recVec, ChildrenOfOsi* gameplay_fu
 					break;
 				}
 				std::ofstream file;
-				file.open(WhichJson);
+				file.open("../ChildrenofOsi/" + WhichJson);
 
 				//populate 'value_obj' with the objects, arrays etc.
 				Json::Value new_obj = {};
@@ -590,7 +590,7 @@ void ObjConfig::make_stuff(vector<WorldObj*>* recVec, ChildrenOfOsi* gameplay_fu
 				set_world_obj(recVec, gameplay_func, tBuffer, randomX, randomY, 70, 70, TreeName.str(), WhichSprite, 1, 70, 70, 70, 70, JUNGLE);
 
 				std::ofstream file;
-				file.open(WhichJson);
+				file.open("../ChildrenofOsi/" + WhichJson);
 
 				//populate 'value_obj' with the objects, arrays etc.
 				Json::Value new_obj = {};

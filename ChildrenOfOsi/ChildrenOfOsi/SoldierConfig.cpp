@@ -15,7 +15,7 @@ void SoldierConfig::import_config(vector<WorldObj*>* movVec, unordered_map<Textu
 {
 	bool alive = true;
 	Json::Value root;
-	while (alive) {
+	
 
 		Json::Reader reader;
 		Json::CharReaderBuilder builder;
@@ -32,7 +32,7 @@ void SoldierConfig::import_config(vector<WorldObj*>* movVec, unordered_map<Textu
 		std::string encoding = root.get("encoding", "UTF-8").asString();
 		std::cout << encoding << "\n";
 		alive = false;
-	}
+	
 	for (auto itr = root.begin(); itr != root.end(); itr++)
 	{
 		for (int sol_num = 0; sol_num < (*itr)["soldier_number"].asInt(); sol_num++) {

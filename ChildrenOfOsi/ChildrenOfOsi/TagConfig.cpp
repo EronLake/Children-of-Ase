@@ -17,7 +17,7 @@ void TagConfig::import_config(ChildrenOfOsi* gameplay_func, TaskBuffer* tBuffer)
 	
 	bool alive = true;
 	Json::Value root;
-	while (alive) {
+
 
 		Json::Reader reader;
 		Json::CharReaderBuilder builder;
@@ -35,7 +35,7 @@ void TagConfig::import_config(ChildrenOfOsi* gameplay_func, TaskBuffer* tBuffer)
 		std::cout << encoding << "\n";
 		alive = false;
 		test.close();
-	}
+
 
 	std::vector<std::string> conv_points;
 	for (auto itor = root["Info_About_Other_Heroes"].begin(); itor != root["Info_About_Other_Heroes"].end(); ++itor) {
