@@ -78,6 +78,8 @@ void Tutorial::init()
 
   Tutorial::stageCombatPopupSprite = new Sprite();
   Tutorial::stageCombatPopupTex = new Texture();
+  Tutorial::stageCombatPopupTex->setFile(SPRITES_PATH + "Tutorial_CombatPopup.png", 1);
+  Tutorial::stageCombatPopupSprite->setTexture(Tutorial::stageCombatPopupTex);
 }
 
 /**
@@ -253,6 +255,8 @@ void Tutorial::drawTutorial()
     case Tutorial::Stage::COMBAT:
       GameWindow::drawSprite(Tutorial::SCREEN_FADE_FILTER_X, Tutorial::SCREEN_FADE_FILTER_Y,
         Tutorial::SCREEN_FADE_FILTER_WIDTH, Tutorial::SCREEN_FADE_FILTER_HEIGHT, *Tutorial::screenFadeFilterSprite);
+      GameWindow::drawSprite(Tutorial::COMBAT_POPUP_X, Tutorial::COMBAT_POPUP_Y,
+        Tutorial::COMBAT_POPUP_WIDTH, Tutorial::COMBAT_POPUP_HEIGHT, *Tutorial::stageCombatPopupSprite);
       break;
   }
 }

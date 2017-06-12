@@ -353,7 +353,9 @@ void DialogueController::shrine_interact()
 	}
 
 	std::string conversation_pt_sentence = dialogue.gen_dialog_shrine(dpoint, other);
-	message = other->getName() + ": " + conversation_pt_sentence;
+	std::string name_str = other->getName();
+	replace_all(name_str, "_", " ");
+	message = name_str + ": " + conversation_pt_sentence;
 	if (shrine_talk_counter == 3 || dpoint[ConvPointName] == "Shrine Not Worthy")
 		state = 7;
 	else
@@ -364,7 +366,15 @@ void DialogueController::shrine_interact()
 void DialogueController::villager_interact() {
 	dialogue_point dpoint = { other->getName(), other->getName() };
 	std::string conversation_pt_sentence = dialogue.gen_dialog_villager(dpoint, other);
-	message = other->getName() + ": " + conversation_pt_sentence;
+	std::string name_str = other->getName();
+	std::string::size_type name_end = name_str.find_last_of('_');
+	std::string n_str = name_str.substr(0, name_end);
+	replace_all(n_str,"_"," ");
+	name_str = n_str;
+	message = name_str + ": " + conversation_pt_sentence;
+	//std::string::size_type name_end = message.find_last_of('_');
+	//std::string mess_str = message.substr(0, name_end);
+	//message = mess_str;
 	state = 7;
 }
 
@@ -457,12 +467,15 @@ void DialogueController::PlayerConversationPoint()
 			player_conv_point_choice == "Advise To Ally With" || player_conv_point_choice == "Intimidate") {
 	
 			accepted_action = true;
+			dialogue.act_accepted = accepted_action;
 			if (player_conv_point_choice == "Advise To Fight"
 				|| player_conv_point_choice == "Advise To Conquer" || player_conv_point_choice == "Advise To Send Peace Offering To" ||
 				player_conv_point_choice == "Advise To Ally With") {
 				accepted_action = check_advice_acceptance(player, temp_hero);
 				if (temp_hero->SUGG_ACT_STATUS == 1)
 					accepted_action = false;
+
+				dialogue.act_accepted = accepted_action;
 			}
 			for (auto precond : Containers::conv_point_table[player_conv_point_choice]->req_preconds) {
 				int temp1 = precond->get_cost(temp_hero, player);
@@ -474,6 +487,7 @@ void DialogueController::PlayerConversationPoint()
 				else {
 					accepted_action = false;
 				}
+				dialogue.act_accepted = accepted_action;
 			}
 			if ((player_conv_point_choice == "Advise To Fight"
 				|| player_conv_point_choice == "Advise To Conquer" || player_conv_point_choice == "Advise To Send Peace Offering To" ||
@@ -500,25 +514,36 @@ void DialogueController::PlayerConversationPoint()
 				else {
 					Containers::conv_point_table[player_conv_point_choice]->apply_postconditions(false, player, temp_hero);
 				}
+				dialogue.act_accepted = accepted_action;
 			}
 			
 		}
 		if (player_conv_point_choice == "Request_Teaching") {
 			//the ori variable is to increase the chance of teaching based on
 			//how high the ori is 
-			if (temp_hero->rel[player->name]->getAffinity() + (player->ori / 10) >= 55 && 
-				temp_hero->rel[player->name]->getStrength() + (player->ori / 10) >= 55)
+			if (temp_hero->rel[player->name]->getAffinity() + (player->ori / 10) >= 55 &&
+				temp_hero->rel[player->name]->getStrength() + (player->ori / 10) >= 55) {
 				accepted_action = true;
-			else
+				dialogue.act_accepted = accepted_action;
+			}
+			else {
 				accepted_action = false;
+				dialogue.act_accepted = accepted_action;
+			}
 			//handles the case where the player has already learned this hero's skill
 			//add more cases for more heros later
-			if (player->can_fire && temp_hero->name == YEMOJA)//case where player already learned Yemoja's move
+			if (player->can_fire && temp_hero->name == YEMOJA) {//case where player already learned Yemoja's move
 				accepted_action = false;
-			if(player->can_spin && temp_hero->name == OYA)//case where player already learned Oya's move
+				dialogue.act_accepted = accepted_action;
+			}
+			if (player->can_spin && temp_hero->name == OYA) {//case where player already learned Oya's move
 				accepted_action = false;
-			if (player->can_shield && temp_hero->name == OGUN)//case where player already learned Ogun's move
+				dialogue.act_accepted = accepted_action;
+			}
+			if (player->can_shield && temp_hero->name == OGUN) {//case where player already learned Ogun's move
 				accepted_action = false;
+				dialogue.act_accepted = accepted_action;
+			}
 		}
 		state = 5;
 	}
@@ -1070,41 +1095,56 @@ void DialogueController::otherConversationPoint(dialogue_point line)
 			if (act_name.find("Conquer") != string::npos || act_name.find("Occupy") != string::npos) {
 				replace_all(con_pt_sentence, "HERO", hero_name + village);
 			}
-			else
-			    replace_all(con_pt_sentence, "HERO", hero_name);//receiver or doer here? ask Justin
+			//else
+			    //replace_all(con_pt_sentence, "HERO", hero_name);//receiver or doer here? ask Justin
 
-			if (act_name.find("Bribe") != string::npos) {
-				std::string gift = "offer a gift to";
+			else if (act_name.find("Bribe") != string::npos) {
+				std::string gift = "offer a gift to ";
 				replace_all(con_pt_sentence, "HERO", hero_name);
 				replace_all(con_pt_sentence, "ACTION", gift);
 			}
-			else
-				replace_all(con_pt_sentence, "HERO", hero_name);//receiver or doer here? ask Justin
+			//else
+				//replace_all(con_pt_sentence, "HERO", hero_name);//receiver or doer here? ask Justin
 
-			if (act_name.find("Boast") != string::npos) {
-				std::string to = "to";
+			else if (act_name.find("Boast") != string::npos) {
+				std::string to = " to";
 				replace_all(con_pt_sentence, "HERO", hero_name);
 				replace_all(con_pt_sentence, "ACTION", act_name + to);
 			}
-			else
-				replace_all(con_pt_sentence, "HERO", hero_name);//receiver or doer here? ask Justin
+			//else
+				//replace_all(con_pt_sentence, "HERO", hero_name);//receiver or doer here? ask Justin
 
-			if (act_name.find("Grovel") != string::npos) {
-				std::string praise = "offer praise to";
+			else if (act_name.find("Grovel") != string::npos) {
+				std::string praise = "offer praise to ";
 				replace_all(con_pt_sentence, "HERO", hero_name);
 				replace_all(con_pt_sentence, "ACTION", praise);
 			}
-			else
-				replace_all(con_pt_sentence, "HERO", hero_name);//receiver or doer here? ask Justin
+			//else
+				//replace_all(con_pt_sentence, "HERO", hero_name);//receiver or doer here? ask Justin
 
+			else if (act_name.find("Form_Alliance") != string::npos) {
+				replace_all(con_pt_sentence, "HERO", hero_name);
+				replace_all(con_pt_sentence, "ACTION", "form an alliance with ");
+			}
+			//else
+			//	replace_all(con_pt_sentence, "HERO", hero_name);//receiver or doer here? ask Justin
 
-			std::string with = "";
-			if (act_name.find("Train") != string::npos || act_name.find("Spar") != string::npos || act_name.find("Form_Alliance") != string::npos) {
+			else if (act_name.find("Spar") != string::npos) {
+				replace_all(con_pt_sentence, "HERO", hero_name);
+				replace_all(con_pt_sentence, "ACTION", "spar with ");
+			}
+			//else
+			//	replace_all(con_pt_sentence, "HERO", hero_name);//receiver or doer here? ask Justin
+			else if (act_name.find("Train") != string::npos || act_name.find("Spar") != string::npos || act_name.find("Form_Alliance") != string::npos) {
+				std::string with = "";
 				with = " with ";
 				replace_all(con_pt_sentence, "ACTION", act_name + with);
 			}
 			else
-			    replace_all(con_pt_sentence, "ACTION", act_name + with);
+				replace_all(con_pt_sentence, "ACTION", act_name);
+
+			//else
+			   // replace_all(con_pt_sentence, "ACTION", act_name + with);
 			
 
 		}
@@ -1629,7 +1669,7 @@ void DialogueController::otherResponse(std::string info, std::string hero_topic)
 
 			//check if I want to accept
 			if (accepted_action) {
-				dialogue_point diog_pt = { "Intimidate","Intimidate","",curr_hero_topic,"1" };
+				dialogue_point diog_pt = { "Talk Back","Talk Back","",curr_hero_topic,"1" };
 				std::string reply_pt_sentence = dialogue.gen_dialog(diog_pt, temp_hero);
 				replace_all(reply_pt_sentence, "HERO", curr_hero_topic);
 				message = check_if_known(reply_pt_sentence, "");
@@ -1637,7 +1677,7 @@ void DialogueController::otherResponse(std::string info, std::string hero_topic)
 			}
 			else {
 				/////////////need to be changed to correct calls/dialog if not accepted///////////////////
-				dialogue_point diog_pt = { "Intimidate","Intimidate","",curr_hero_topic,"1" };
+				dialogue_point diog_pt = { "Talk Back","Talk Back","",curr_hero_topic,"1" };
 				std::string reply_pt_sentence = dialogue.gen_dialog_negative(diog_pt, temp_hero);
 				replace_all(reply_pt_sentence, "HERO", curr_hero_topic);
 				message = check_if_known(reply_pt_sentence, "");
@@ -2170,8 +2210,14 @@ void DialogueController::other_response_babalawo(std::string info, std::string h
 	//eventually make it so NPC can refuse to join player's party
 	reply_pt_sentence = dialogue.gen_dialog_babalawo(line,other);
 
+	std::string name_str = other->getName();
+	std::string::size_type name_end = name_str.find_last_of('_');
+	std::string n_str = name_str.substr(0, name_end);
+	replace_all(n_str, "_", " ");
+	name_str = n_str;
 
-	message = other->getName() + ": " + reply_pt_sentence + "\n\n";
+
+	message = name_str + ": " + reply_pt_sentence + "\n\n";
 
 	
 	if(replyString == "Response Ask For Divination"){
@@ -2186,7 +2232,7 @@ void DialogueController::other_response_babalawo(std::string info, std::string h
 			else {
 				dialogue_point diog_pt = { "No Divination","No Divination","","","1","0" };
 				reply_pt_sentence = dialogue.gen_dialog_babalawo(diog_pt, other);
-				message = other->getName() + ": " + reply_pt_sentence + "\n\n";
+				message = name_str + ": " + reply_pt_sentence + "\n\n";
 
 			}
 		}
@@ -2201,7 +2247,7 @@ void DialogueController::other_response_babalawo(std::string info, std::string h
 			else {
 				dialogue_point diog_pt = { "No Divination","No Divination","","","1","0" };
 				reply_pt_sentence = dialogue.gen_dialog_babalawo(diog_pt, other);
-				message = other->getName() + ": " + reply_pt_sentence + "\n\n";
+				message = name_str + ": " + reply_pt_sentence + "\n\n";
 
 			}
 		}
@@ -2216,7 +2262,7 @@ void DialogueController::other_response_babalawo(std::string info, std::string h
 			else {
 				dialogue_point diog_pt = { "No Divination","No Divination","","","1","0" };
 				reply_pt_sentence = dialogue.gen_dialog_babalawo(diog_pt, other);
-				message = other->getName() + ": " + reply_pt_sentence + "\n\n";
+				message = name_str + ": " + reply_pt_sentence + "\n\n";
 
 			}
 		}
@@ -2495,8 +2541,14 @@ void DialogueController::startConversation(WorldObj* n, bool playerTalk)
 				message = check_if_known(dialogue.gen_dialog({ "Greeting","Greeting" }, temp_hero),"");
 			}
 		}
-		else
-		    message = n->getName() + ": " + dialogue.gen_dialog({ "Greeting","Greeting" }, temp_hero);
+		else {
+			std::string name_str = other->getName();
+			std::string::size_type name_end = name_str.find_last_of('_');
+			std::string n_str = name_str.substr(0, name_end);
+			replace_all(n_str, "_", " ");
+			name_str = n_str;
+			message = name_str + ": " + dialogue.gen_dialog({ "Greeting","Greeting" }, temp_hero);
+		}
 		if (playerTalk && temp_hero) {
 			PlayerChoose();
 		}
@@ -2514,7 +2566,12 @@ void DialogueController::startConversation(WorldObj* n, bool playerTalk)
 				if (thing) {
 					if (other->getName().find("Babalawo") != string::npos) {//if player interacting with babalawo
 						player_choose_babalawo();
-						message = n->getName() + ": " + dialogue.gen_dialog_babalawo({ "Greeting","Greeting" }, other);
+						std::string name_str = other->getName();
+						std::string::size_type name_end = name_str.find_last_of('_');
+						std::string n_str = name_str.substr(0, name_end);
+						replace_all(n_str, "_", " ");
+						name_str = n_str;
+						message = name_str + ": " + dialogue.gen_dialog_babalawo({ "Greeting","Greeting" }, other);
 					}
 					else if (other->getName().find("Shrine") != string::npos)//if player interacting with shrine
 						shrine_interact();
@@ -2895,39 +2952,54 @@ bool DialogueController::offer_quest_on_exit(Hero* temp_hero) {
 			std::string::size_type name_end = quest->name.find_last_of('_');
 			std::string act_name = quest->name.substr(0, name_end);
 
-			if(act_name == "Bribe")
-				replace_all(con_pt_sentence, "ACTION", "offer a gift to");
-			else
-			    replace_all(con_pt_sentence, "ACTION", act_name);
+			
+			//else
+			   // replace_all(con_pt_sentence, "ACTION", act_name);
 
 			std::string village = "'s village";
 			std::string hero_name = dialogue.int_to_hero_name(quest->getReceiver()->name);
 
 			//player->quest_status[quest->getOwner()->name] = 1;// set shango to "doing quest"
+			if (act_name == "Bribe")
+				replace_all(con_pt_sentence, "ACTION", "offer a gift to");
 
-			if (act_name.find("Conquer") != string::npos || act_name.find("Occupy") != string::npos) {
+			else if (act_name.find("Conquer") != string::npos || act_name.find("Occupy") != string::npos) {
 				replace_all(con_pt_sentence, "HERO", hero_name + village);
 				replace_all(con_pt_sentence, "ACTION", act_name);
 
 			}
-			else
-				replace_all(con_pt_sentence, "HERO", hero_name);//receiver or doer here? ask Justin
+			//else
+				//replace_all(con_pt_sentence, "HERO", hero_name);//receiver or doer here? ask Justin
 
-			if (act_name.find("Boast") != string::npos) {
-				std::string to = "to";
+			else if (act_name.find("Boast") != string::npos) {
+				std::string to = " to";
 				replace_all(con_pt_sentence, "HERO", hero_name);
-				replace_all(con_pt_sentence, "ACTION", act_name + to);
+				replace_all(con_pt_sentence, "ACTION", (act_name + " to"));
 			}
-			else
-				replace_all(con_pt_sentence, "HERO", hero_name);//receiver or doer here? ask Justin
+			//else
+				//replace_all(con_pt_sentence, "HERO", hero_name);//receiver or doer here? ask Justin
 
-			if (act_name.find("Grovel") != string::npos) {
-				std::string praise = "offer praise to";
+			else if (act_name.find("Grovel") != string::npos) {
+				std::string praise = "offer praise to ";
 				replace_all(con_pt_sentence, "HERO", hero_name);
 				replace_all(con_pt_sentence, "ACTION", praise);
 			}
+			//else
+				//replace_all(con_pt_sentence, "HERO", hero_name);//receiver or doer here? ask Justin
+
+			else if (act_name.find("Form_Alliance") != string::npos) {
+				replace_all(con_pt_sentence, "HERO", hero_name);
+				replace_all(con_pt_sentence, "ACTION", "form an alliance with ");
+			}
+			//else
+				//replace_all(con_pt_sentence, "HERO", hero_name);//receiver or doer here? ask Justin
+
+			else if (act_name.find("Spar") != string::npos) {
+				replace_all(con_pt_sentence, "HERO", hero_name);
+				replace_all(con_pt_sentence, "ACTION", "spar with ");
+			}
 			else
-				replace_all(con_pt_sentence, "HERO", hero_name);//receiver or doer here? ask Justin
+				replace_all(con_pt_sentence, "ACTION", act_name);//receiver or doer here? ask Justin
 
 			message = check_if_known(reply_pt_sentence, con_pt_sentence);
 			replyOptions = dialogue.get_possible_reply_pts("Offer_Quest", optionsIndex);

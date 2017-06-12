@@ -156,7 +156,7 @@ int RenderHelper::draw_frame(WorldObj * obj)
 	}
 	//cout << "THE COORDINATES OF OBJ IS " << obj->getX() << ", " << obj->getY() << endl;
 	//cout << "******************************************SIZE OF THE OBJVEC TO RENDER IS " << objVec.size() << endl;
-	cout << "objvec size is " << objVec.size() << endl;
+	//cout << "objvec size is " << objVec.size() << endl;
 	for (int i = 0; i < objVec.size(); i++) {
 		Soldier* temp = CheckClass::isSoldier(objVec[i]);
 		if (temp) {

@@ -630,6 +630,14 @@ void Input::InputCheck()
 		}
 	}
 	else if (current_game_state == game_state::in_game) {
+    // If the player is in combat for the first time, launch the tutorial
+    Player *p = CheckClass::isPlayer(player);
+    if(p) {
+      if(DialogueController::getState() == 0 && p->getInCombat() && !Tutorial::isStageComplete(Tutorial::Stage::COMBAT)) {
+        Tutorial::launchStage(Tutorial::Stage::COMBAT, *this, true);
+      }
+    }
+
     if (DialogueController::getState() == 0) {
 			Player* t = CheckClass::isPlayer(player);
 			gameplay_functions->combat(player);
@@ -1310,6 +1318,10 @@ void Input::InputCheck()
       current_game_state = game_state::in_game;
     }
     else if(ENTER && Tutorial::isStageActive(Tutorial::Stage::DIALOGUE03)) {
+      Tutorial::completeStage(*this);
+      current_game_state = game_state::in_game;
+    }
+    else if(J && Tutorial::isStageActive(Tutorial::Stage::COMBAT)) {
       Tutorial::completeStage(*this);
       current_game_state = game_state::in_game;
     }

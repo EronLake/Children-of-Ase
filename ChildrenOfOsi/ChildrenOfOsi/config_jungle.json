@@ -2404,17 +2404,17 @@
       "x" : 227.1004638671875,
       "y" : 169.7595825195313
    },
-   "Jungle_Tree_3_2" : {
-      "bodyx1" : 0.0,
-      "bodyx2" : 0.0,
-      "bodyy1" : 0.0,
-      "bodyy2" : 0.0,
-      "frame_num" : 1,
-      "hight" : 500.0,
-      "name" : "Jungle_Tree_3_2",
-      "tex_file" : "Jungle_Tree_3",
-      "width" : 500.0,
-      "x" : 148.1593322753906,
-      "y" : 172.7248229980469
-   }
+  "Jungle_Tree_3_2": {
+    "bodyx1": 205.0,
+    "bodyx2": 225.0,
+    "bodyy1": 430.0,
+    "bodyy2": 30.0,
+    "frame_num": 1,
+    "hight": 500.0,
+    "name": "Jungle_Tree_3_2",
+    "tex_file": "Jungle_Tree_3",
+    "width": 500.0,
+    "x": 148.1593322753906,
+    "y": 172.7248229980469
+  }
 }

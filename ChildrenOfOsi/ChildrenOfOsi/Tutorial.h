@@ -66,11 +66,16 @@ struct Tutorial
   static constexpr float DIALOGUE02_POPUP_Y = 0.0F;
   static constexpr float DIALOGUE02_POPUP_WIDTH = 960.0F;
   static constexpr float DIALOGUE02_POPUP_HEIGHT = 540.0F;
-  
+
   static constexpr float DIALOGUE03_POPUP_X = 0.0F;
   static constexpr float DIALOGUE03_POPUP_Y = 0.0F;
   static constexpr float DIALOGUE03_POPUP_WIDTH = 960.0F;
   static constexpr float DIALOGUE03_POPUP_HEIGHT = 540.0F;
+
+  static constexpr float COMBAT_POPUP_X = 0.0F;
+  static constexpr float COMBAT_POPUP_Y = 0.0F;
+  static constexpr float COMBAT_POPUP_WIDTH = 960.0F;
+  static constexpr float COMBAT_POPUP_HEIGHT = 540.0F;
 
   static Stage currentStage;
   static bool isPaused;
