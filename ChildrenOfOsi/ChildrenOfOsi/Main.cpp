@@ -785,8 +785,8 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 
 	//ASTAR
 	/*GridWithWeights grid = make_diagram4();
-	SquareGrid::Location start1{ 1,1 };
-	SquareGrid::Location end{ 35,41 };
+	SquareGrid::Location start1{ 100,100 };
+	SquareGrid::Location end{ 249 , 249 };
 	unordered_map<SquareGrid::Location, SquareGrid::Location> came_from;
 	unordered_map<SquareGrid::Location, double> cost_so_far;
 	dijkstra_search(grid, start1, end, came_from, cost_so_far);

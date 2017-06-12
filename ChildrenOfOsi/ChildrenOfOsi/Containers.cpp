@@ -115,7 +115,7 @@ std::vector<std::vector<float>> Containers::getRects() {
 	Rectangle r;
 	for (auto it = Containers::worldObj_table.begin(); it != Containers::worldObj_table.end(); ++it) {
 		r = (*it).second->body[0];
-		ret.push_back({r.getX(),r.getY(),r.getX()+r.getWidth(),r.getY()+r.getHeight()});
+		ret.push_back({r.getX()/100,r.getY()/100,(r.getX()+r.getWidth())/100,(r.getY()+r.getHeight())/100});
 	}
 	return ret;
 }
