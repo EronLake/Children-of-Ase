@@ -912,7 +912,16 @@ void Input::InputCheck()
 
 				if ((GetKeyState(VK_LBUTTON) & 0x100) != 0)
 				{
-					edit_object();
+					double xpos;
+					double ypos;
+					glfwGetCursorPos(GameWindow::window, &xpos, &ypos);
+					double mouseX = rHelper->camera->getX() + (xpos * map_zoom) * GameWindow::WINDOW_WIDTH_DP / 1280;
+					double mouseY = 25000 - (rHelper->camera->getY() + (ypos * map_zoom) * GameWindow::WINDOW_HEIGHT_DP / 720);
+					//for (int i = 0; i < 10; i++) {
+					cout << "MOUSEX AND MOUSEY ARE " << mouseX << ", " << mouseY << endl;
+
+					cout << "XPOS AND YPOS ARE " << xpos << ", " << ypos << endl;
+					//edit_object();
 				}
 			}
 			////////////////////////////////////
