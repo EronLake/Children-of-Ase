@@ -913,7 +913,13 @@
 			"general_type": 0,
 			"rel_type" : 7,
 			"utility" : 4
+		},
+		"2": {
+			"general_type": 0,
+			"rel_type" : 6,
+			"utility" : 4
 		}
+
 	},
 		"doer_fail_postconds": {
 		"1": {

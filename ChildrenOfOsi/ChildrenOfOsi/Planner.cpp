@@ -62,14 +62,15 @@ int Planner::heuristic(Action* step, vector<std::shared_ptr<Preconditions>> prio
 void Planner::choose_end_with(int hero) {
 
 	//this line had to be added so missing heroes wouldn't cause an error
-	bool if_should_choose = false;
+	//bool if_should_choose = true;
 	//for (auto itr = Containers::hero_table.begin(); itr != Containers::hero_table.end(); itr++) {
-	if (hero < 4)  {
-		if_should_choose = true;
-	}
+	//so they don't plan for oshosi
+	//if (hero != 4)  {
+	//	if_should_choose = true;
+	//}
 
-	if (if_should_choose)
-	{
+	//if (if_should_choose)
+	//{
 		ActionPool* action_pool = evaluateHero->actionPool_map[hero];
 		Action* best_end_state = nullptr;
 		int value = 0;
@@ -100,7 +101,7 @@ void Planner::choose_end_with(int hero) {
 		std::cout << "///////////////////////////////////////////////////////" << std::endl;
 		std::cout << "BEST END STATE: " << best_end_state->getName() << std::endl;
 		std::cout << "///////////////////////////////////////////////////////" << std::endl;
-	}
+	//}
 }
 
 Action* Planner::choose_next_step(Action* goal, vector<Action*> goals) {

@@ -545,13 +545,13 @@
     "doer_succ_postconds": {
       "1": {
         "general_type": 0,
-        "rel_type": 6,
-        "utility": 5
+        "rel_type": 7,
+        "utility": 4
       },
       "2": {
         "general_type": 0,
-        "rel_type": 8,
-        "utility": 7
+        "rel_type": 6,
+        "utility": 4
       }
     },
     "doer_fail_postconds": {

@@ -29,7 +29,7 @@ void ActionConfig::import_config(ChildrenOfOsi* gameplay_func, TaskBuffer* tBuff
 			file >> root;
 			for (auto itr = root.begin(); itr != root.end(); itr++)
 			{
-				std::string name = (*itr)["name"].asString() + "_" + to_string(owner->name);
+				std::string name = (*itr)["name"].asString() + "_" + to_string(owner->name) + "-" + to_string(i->second->name);
 
 				set_action_obj(gameplay_func, tBuffer, owner, i->second,
 					(*itr)["utility"].asFloat(), (*itr)["why"].asFloat(), (*itr)["type"].asString(),
