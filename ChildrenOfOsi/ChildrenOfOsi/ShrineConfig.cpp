@@ -15,7 +15,7 @@ void ShrineConfig::import_config(vector<WorldObj*>* recVec_ptr, unordered_map<Te
 {
 	bool alive = true;
 	Json::Value root;
-	while (alive) {
+
 
 		Json::Reader reader;
 		Json::CharReaderBuilder builder;
@@ -33,7 +33,7 @@ void ShrineConfig::import_config(vector<WorldObj*>* recVec_ptr, unordered_map<Te
 		std::cout << encoding << "\n";
 		alive = false;
 		test.close();
-	}
+	
 	for (auto itr = root.begin(); itr != root.end(); itr++)
 	{
 		set_shrine(recVec_ptr, gameplay_func, tBuffer, (*itr)["x"].asFloat(), (*itr)["y"].asFloat(),

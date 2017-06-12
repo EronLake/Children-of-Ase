@@ -15,7 +15,7 @@ void HeroConfig::import_config(vector<WorldObj*>* movVec, unordered_map<Texture*
 {
 	bool alive = true;
 	Json::Value root;
-	while (alive) {
+
 
 		Json::Reader reader;
 		Json::CharReaderBuilder builder;
@@ -33,7 +33,7 @@ void HeroConfig::import_config(vector<WorldObj*>* movVec, unordered_map<Texture*
 		std::cout << encoding << "\n";
 		alive = false;
 		test.close();
-	}
+	
 
 	for (auto itr = root.begin(); itr != root.end(); itr++)
 	{

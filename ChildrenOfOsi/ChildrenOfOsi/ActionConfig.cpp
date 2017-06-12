@@ -23,7 +23,7 @@ void ActionConfig::import_config(ChildrenOfOsi* gameplay_func, TaskBuffer* tBuff
 		{
 			bool alive = true;
 		Json::Value root;
-		while (alive) {
+		
 			
 			Json::Reader reader;
 			Json::CharReaderBuilder builder;
@@ -41,7 +41,7 @@ void ActionConfig::import_config(ChildrenOfOsi* gameplay_func, TaskBuffer* tBuff
 			std::cout << encoding << "\n";
 			alive = false;
 			test.close();
-		}
+		
 			for (auto itr = root.begin(); itr != root.end(); itr++)
 			{
 				std::string name = (*itr)["name"].asString() + "_" + to_string(owner->name) + "-" + to_string(i->second->name);

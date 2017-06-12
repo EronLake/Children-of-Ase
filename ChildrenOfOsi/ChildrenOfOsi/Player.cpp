@@ -110,12 +110,24 @@ void Player::activate_exalted_form()
 {
 
 	Json::Value root;
+
+
 	Json::Reader reader;
+	Json::CharReaderBuilder builder;
+	//std::string test = 
+	std::ifstream test("../ChildrenofOsi/hero_config.json", std::ifstream::binary);
+	std::string errs;
+	bool ok = reader.parse(test, root, false);
+	if (!ok)
+	{
+		// report to the user the failure and their locations in the document.
+		std::cout << errs.c_str() << "\n";
+	}
 
+	std::string encoding = root.get("encoding", "UTF-8").asString();
+	std::cout << encoding << "\n";
 
-	std::ifstream file("hero_config.json");
-
-	file >> root;
+	test.close();
 
 	//these sprites all heroes have
 	auto sprites = root["Shango"]["sprites"];
@@ -175,13 +187,24 @@ void Player::deactivate_exalted_form()
 {
 
 	Json::Value root;
+
+
 	Json::Reader reader;
+	Json::CharReaderBuilder builder;
+	//std::string test = 
+	std::ifstream test("../ChildrenofOsi/hero_config.json", std::ifstream::binary);
+	std::string errs;
+	bool ok = reader.parse(test, root, false);
+	if (!ok)
+	{
+		// report to the user the failure and their locations in the document.
+		std::cout << errs.c_str() << "\n";
+	}
 
+	std::string encoding = root.get("encoding", "UTF-8").asString();
+	std::cout << encoding << "\n";
 
-	std::ifstream file("hero_config.json");
-
-	file >> root;
-
+	test.close();
 	//these sprites all heroes have
 	auto sprites = root["Shango"]["sprites"];
 

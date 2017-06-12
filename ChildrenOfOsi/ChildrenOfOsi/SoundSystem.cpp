@@ -73,14 +73,14 @@ FMOD_RESULT result;
 		sounds[Oya] = OyaAddress;
 		sounds[Oshosi] = OshosiAddress;*/
 
-		string bump = "SFX/bump_0.wav";
-		string walk = "SFX/walk_0.wav";
-		string swing = "SFX/swing.wav";
-		string hit = "SFX/hit.wav";
-		string up = "SFX/up.wav";
-		string down = "SFX/down.wav";
-		string page = "SFX/page.wav";
-		string talk = "SFX/talk.wav";
+		string bump = "../ChildrenofOsi/SFX/bump_0.wav";
+		string walk = "../ChildrenofOsi/SFX/walk_0.wav";
+		string swing = "../ChildrenofOsi/SFX/swing.wav";
+		string hit = "../ChildrenofOsi/SFX/hit.wav";
+		string up = "../ChildrenofOsi/SFX/up.wav";
+		string down = "../ChildrenofOsi/SFX/down.wav";
+		string page = "../ChildrenofOsi/SFX/page.wav";
+		string talk = "../ChildrenofOsi/SFX/talk.wav";
 		
 		SoundClass bumpAddress = nullptr;
 		SoundClass walkAddress = nullptr;

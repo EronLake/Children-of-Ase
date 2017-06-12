@@ -287,7 +287,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	yemoja->trait_vec["Intimidate"] = 120;
 	yemoja->trait_vec["Grovel"] = 160;
 	yemoja->trait_vec["Boast"] = 160;
-	yemoja->song = "Music/HeroThemes/Yemoja.flac";
+	yemoja->song = "../ChildrenofOsi/Music/HeroThemes/Yemoja.flac";
 	heroes.push_back(yemoja);
 
 
@@ -299,7 +299,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	oya->trait_vec["Intimidate"] = 180;
 	oya->trait_vec["Grovel"] = 120;
 	oya->trait_vec["Boast"] = 202;
-	oya->song = "Music/HeroThemes/Oya.flac";
+	oya->song = "../ChildrenofOsi/Music/HeroThemes/Oya.flac";
 	oya->set_busy(0);//added for testing
 	heroes.push_back(oya);
 	Hero* ogun = Containers::hero_table["Ogun"];
@@ -309,7 +309,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	ogun->trait_vec["Intimidate"] = 120;
 	ogun->trait_vec["Grovel"] = 180;
 	ogun->trait_vec["Boast"] = 120;
-	ogun->song = "Music/HeroThemes/Ogun.flac";
+	ogun->song = "../ChildrenofOsi/Music/HeroThemes/Ogun.flac";
 	ogun->set_busy(0);//added for testing
 	heroes.push_back(ogun);
 
