@@ -1,5 +1,7 @@
 #include "stdafx.h"
 #include "Containers.h"
+#include "Rectangle.h"
+#include "WorldObj.h"
 
 
 Containers::Containers()
@@ -107,3 +109,13 @@ std::unordered_map<std::string, Memory*> Containers::shango_memory_table;
 std::unordered_map<std::string, Action*> Containers::action_table;
 std::unordered_map<std::string, Tag*> Containers::tag_table;
 std::unordered_map<std::string, ConversationPoint*> Containers::conv_point_table;
+
+std::vector<std::vector<float>> Containers::getRects() {
+	std::vector<std::vector<float>> ret;
+	Rectangle r;
+	for (auto it = Containers::worldObj_table.begin(); it != Containers::worldObj_table.end(); ++it) {
+		r = (*it).second->body[0];
+		ret.push_back({r.getX(),r.getY(),r.getX()+r.getWidth(),r.getY()+r.getHeight()});
+	}
+	return ret;
+}

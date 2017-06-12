@@ -11,7 +11,7 @@
 		"bodyy1" : 50.0,
 		"bodyy2" : 50.0,
 		"health": 120,
-		"max_stamina": 600,
+		"max_stamina": 300,
 		"aggression": 30,
 		"kindness": 70,
 		"honor": 80,
@@ -27,11 +27,6 @@
 			"id_down": {"0":"Shango_Idle_S","1":22},
 			"id_left": {"0":"Shango_Idle_W","1":22},
 			"id_right": {"0":"Shango_Idle_E","1":22},
-			
-			"walk_up": {"0":"Shango_Walk_N","1":32},
-			"walk_down": {"0":"Shango_Walk_S","1":32},
-			"walk_left": {"0":"Shango_Walk_W","1":32},
-			"walk_right": {"0":"Shango_Walk_E","1":32},
 
 			"sprint_up": {"0":"Shango_Sprint_N","1":16},
 			"sprint_down": {"0":"Shango_Sprint_S","1":16},
@@ -126,11 +121,11 @@
 				"left": {"0":"FireBallTMPLeft", "1":3}
 			},
 			"set_name": 0,
-			"set_dmg": 25,
+			"set_dmg": 15,
 			"set_speed" : 5,
 			"set_base_dir" : 4,
 			"set_cool_down" : 35,
-			"set_stamina_cost" : 5,
+			"set_stamina_cost" : 15,
 			"set_pause" : -1,
 			"set_destroy" : false,
 			"set_Keep" : true,
@@ -151,10 +146,10 @@
 						"left": {"0":"FireBallTMPLeft", "1":3}
 					},
 					"set_name": 1,
-					"set_dmg": 20,
-					"set_speed" : 20,
+					"set_dmg": 22,
+					"set_speed" : 15,
 					"set_base_dir" : 3,
-					"set_cool_down" : 55,
+					"set_cool_down" : 70,
 					"set_stamina_cost" : 30,
 					"set_pause" : 16,
 					"set_destroy" : true,
@@ -312,19 +307,19 @@
       "fireshield" : {
 				"1" : {
 					"sprites" : {
-						"right": {"0":"FireBallTMP", "1":3},
-						"up": {"0":"FireBallTMP", "1":3},
-						"down": {"0":"FireBallTMP", "1":3},
-						"left": {"0":"FireBallTMP", "1":3}
+						"right": {"0":"fireshield", "1":3},
+						"up": {"0":"fireshield", "1":3},
+						"down": {"0":"fireshield", "1":3},
+						"left": {"0":"fireshield", "1":3}
 					},
 					"set_name": 3,
-					"set_dmg": 15,
-					"set_speed" : 0,
+					"set_dmg": 20,
+					"set_speed" : 1,
 					"set_base_dir" : 8,
-					"set_cool_down" : 55,
+					"set_cool_down" : 95,
 					"set_stamina_cost" : 30,
 					"set_pause" : 3,
-					"set_destroy" : true,
+					"set_destroy" : false,
 					"set_Keep" : false,
 					"set_width" : "cur_hero->body[0].getWidth()",
 					"set_height" : "cur_hero->body[0].getHeight()",
@@ -383,24 +378,7 @@
         "0": "Yemoja_Idle_E",
         "1": 22
       },
-
-      "walk_up": {
-        "0": "Yemoja_Walk_N",
-        "1": 32
-      },
-      "walk_down": {
-        "0": "Yemoja_Walk_S",
-        "1": 32
-      },
-      "walk_left": {
-        "0": "Yemoja_Walk_W",
-        "1": 32
-      },
-      "walk_right": {
-        "0": "Yemoja_Walk_E",
-        "1": 32
-      },
-
+      
       "sprint_up": {
         "0": "Yemoja_Sprint_N",
         "1": 16
@@ -436,19 +414,19 @@
       },
 
       "atk_up": {
-        "0": "Yemoja_Attack_N",
+        "0": "Yemoja_Breath_N",
         "1": 3
       },
       "atk_down": {
-        "0": "Yemoja_Attack_S",
+        "0": "Yemoja_Breath_S",
         "1": 3
       },
       "atk_left": {
-        "0": "Yemoja_Attack_W",
+        "0": "Yemoja_Breath_W",
         "1": 3
       },
       "atk_right": {
-        "0": "Yemoja_Attack_E",
+        "0": "Yemoja_Breath_E",
         "1": 3
       },
 
@@ -470,39 +448,21 @@
       },
 
       "atk2_up": {
-        "0": "Yemoja_Attack_N",
+        "0": "Yemoja_Breath_N",
         "1": 3
       },
       "atk2_down": {
-        "0": "Yemoja_Attack_S",
+        "0": "Yemoja_Breath_S",
         "1": 3
       },
       "atk2_left": {
-        "0": "Yemoja_Attack_W",
+        "0": "Yemoja_Breath_W",
         "1": 3
       },
       "atk2_right": {
-        "0": "Yemoja_Attack_E",
+        "0": "Yemoja_Breath_E",
         "1": 3
       },
-
-      "spin_up": {
-        "0": "Yemoja_Spin_N",
-        "1": 8
-      },
-      "spin_down": {
-        "0": "Yemoja_Spin_S",
-        "1": 8
-      },
-      "spin_left": {
-        "0": "Yemoja_Spin_W",
-        "1": 8
-      },
-      "spin_right": {
-        "0": "Yemoja_Spin_E",
-        "1": 8
-      },
-
       "breathe_up": {
         "0": "Yemoja_Breath_N",
         "1": 8
@@ -528,7 +488,7 @@
         "left": {"0": "FireBallTMPLeft","1": 3}
       },
       "set_name": 0,
-			"set_dmg": 10,
+			"set_dmg": 12,
 			"set_speed" : 5,
 			"set_base_dir" : 4,
 			"set_cool_down" : 35,
@@ -565,10 +525,10 @@
             }
           },
           "set_name": 1,
-          "set_dmg": 15,
-          "set_speed": 20,
+          "set_dmg": 22,
+          "set_speed": 12,
           "set_base_dir": 3,
-          "set_cool_down": 45,
+          "set_cool_down": 65,
           "set_stamina_cost": 30,
           "set_pause": 16,
           "set_destroy": true,
@@ -612,11 +572,6 @@
 			"id_down": {"0":"Oya_Idle_S","1":22},
 			"id_left": {"0":"Oya_Idle_W","1":22},
 			"id_right": {"0":"Oya_Idle_E","1":22},
-			
-			"walk_up": {"0":"Oya_Walk_N","1":32},
-			"walk_down": {"0":"Oya_Walk_S","1":32},
-			"walk_left": {"0":"Oya_Walk_W","1":32},
-			"walk_right": {"0":"Oya_Walk_E","1":32},
 
 			"sprint_up": {"0":"Oya_Sprint_N","1":16},
 			"sprint_down": {"0":"Oya_Sprint_S","1":16},
@@ -646,12 +601,7 @@
 			"spin_up": {"0":"Oya_Spin_N","1":8},
 			"spin_down": {"0":"Oya_Spin_S","1":8},
 			"spin_left": {"0":"Oya_Spin_W","1":8},
-			"spin_right": {"0":"Oya_Spin_E","1":8},
-
-			"breathe_up": {"0":"Oya_Breath_N","1":8},
-			"breathe_down": {"0":"Oya_Breath_S","1":8},
-			"breathe_left": {"0":"Oya_Breath_W","1":8},
-			"breathe_right": {"0":"Oya_Breath_E","1":8}
+			"spin_right": {"0":"Oya_Spin_E","1":8}
 		},
     "melee": {
       "sprites": {
@@ -673,20 +623,20 @@
         }
       },
       "set_name": 0,
-      "set_dmg": 20,
-      "set_speed": 5,
-      "set_base_dir": 4,
-      "set_cool_down": 80,
-      "set_stamina_cost": 45,
-      "set_pause": -1,
-      "set_destroy": false,
-      "set_Keep": true,
-      "set_width": "cur_hero->body[0].getWidth()",
-      "set_height": "cur_hero->body[0].getHeight()",
-      "set_duration": 7,
-      "set_ase_cost": 7,
-      "set_can_cancel": true,
-      "set_turn": false
+			"set_dmg": 15,
+			"set_speed" : 5,
+			"set_base_dir" : 4,
+			"set_cool_down" : 35,
+			"set_stamina_cost" : 30,
+			"set_pause" : -1,
+			"set_destroy" : false,
+			"set_Keep" : true,
+			"set_width" : "cur_hero->body[0].getWidth()",
+			"set_height" : "cur_hero->body[0].getHeight()",
+			"set_duration" : 7,
+			"set_ase_cost" : 0,
+			"set_can_cancel" : true,
+			"set_turn" : false
     },
     "spin": {
       "1": {
@@ -709,10 +659,10 @@
           }
         },
         "set_name": 2,
-        "set_dmg": 15,
+        "set_dmg": 7,
         "set_speed": 18,
         "set_base_dir": 4,
-        "set_cool_down": 60,
+        "set_cool_down": 55,
         "set_stamina_cost": 10,
         "set_pause": 3,
         "set_destroy": false,
@@ -860,11 +810,6 @@
 			"id_down": {"0":"Ogun_Idle_S","1":21},
 			"id_left": {"0":"Ogun_Idle_W","1":21},
 			"id_right": {"0":"Ogun_Idle_E","1":21},
-			
-			"walk_up": {"0":"Ogun_Walk_N","1":32},
-			"walk_down": {"0":"Ogun_Walk_S","1":32},
-			"walk_left": {"0":"Ogun_Walk_W","1":32},
-			"walk_right": {"0":"Ogun_Walk_E","1":32},
 
 			"sprint_up": {"0":"Ogun_Sprint_N","1":16},
 			"sprint_down": {"0":"Ogun_Sprint_S","1":16},
@@ -889,17 +834,7 @@
 			"atk2_up": {"0":"Ogun_Attack_N","1":3},
 			"atk2_down": {"0":"Ogun_Attack_S","1":3},
 			"atk2_left": {"0":"Ogun_Attack_W","1":3},
-			"atk2_right": {"0":"Ogun_Attack_E","1":3},
-
-			"spin_up": {"0":"Ogun_Spin_N","1":8},
-			"spin_down": {"0":"Ogun_Spin_S","1":8},
-			"spin_left": {"0":"Ogun_Spin_W","1":8},
-			"spin_right": {"0":"Ogun_Spin_E","1":8},
-
-			"breathe_up": {"0":"Ogun_Breath_N","1":8},
-			"breathe_down": {"0":"Ogun_Breath_S","1":8},
-			"breathe_left": {"0":"Ogun_Breath_W","1":8},
-			"breathe_right": {"0":"Ogun_Breath_E","1":8}
+			"atk2_right": {"0":"Ogun_Attack_E","1":3}
 		},
 		"melee" : {
 			"sprites" : {
@@ -921,7 +856,7 @@
           }
 			},
 			"set_name": 0,
-			"set_dmg": 30,
+			"set_dmg": 17,
 			"set_speed" : 5,
 			"set_base_dir" : 4,
 			"set_cool_down" : 35,
@@ -936,127 +871,32 @@
 			"set_can_cancel" : true,
 			"set_turn" : false
 		},
-		"attacks": {
-		/*
-			"fireball" : {
+    "attacks": {
+      "fireshield" : {
 				"1" : {
 					"sprites" : {
-						"right": {"0":"FireBallTMP", "1":3},
-						"up": {"0":"FireBallTMPUp", "1":3},
-						"down": {"0":"FireBallTMPDown", "1":3},
-						"left": {"0":"FireBallTMPLeft", "1":3}
+						"right": {"0":"fireshield", "1":3},
+						"up": {"0":"fireshield", "1":3},
+						"down": {"0":"fireshield", "1":3},
+						"left": {"0":"fireshield", "1":3}
 					},
-					"set_name": 1,
+					"set_name": 3,
 					"set_dmg": 20,
-					"set_speed" : 20,
-					"set_base_dir" : 3,
-					"set_cool_down" : 55,
+					"set_speed" : 1,
+					"set_base_dir" : 8,
+					"set_cool_down" : 95,
 					"set_stamina_cost" : 30,
-					"set_pause" : 16,
-					"set_destroy" : true,
+					"set_pause" : 3,
+					"set_destroy" : false,
 					"set_Keep" : false,
 					"set_width" : "cur_hero->body[0].getWidth()",
 					"set_height" : "cur_hero->body[0].getHeight()",
-					"set_duration" : 100,
-					"set_ase_cost" : 40,
+					"set_duration" : 12,
+					"set_ase_cost" : 50,
 					"set_can_cancel" : false,
 					"set_turn" : false
 				}
-			},
-			"spin" : {
-				"1" : {
-					"sprites" : {
-						"right": {"0":"border", "1":3},
-						"up": {"0":"border", "1":3},
-						"down": {"0":"border", "1":3},
-						"left": {"0":"border", "1":3}
-					},
-					"set_name": 2,
-					"set_dmg": 15,
-					"set_speed" : 18,
-					"set_base_dir" : 4,
-					"set_cool_down" : 60,
-					"set_stamina_cost" : 10,
-					"set_pause" : 18,
-					"set_destroy" : false,
-					"set_Keep" : false,
-					"set_width" : "cur_hero->body[0].getWidth()",
-					"set_height" : "cur_hero->body[0].getHeight()",
-					"set_duration" : 7,
-					"set_ase_cost" : 7,
-					"set_can_cancel" : true,
-					"set_turn" : true
-				},
-				"2" : {
-					"sprites" : {
-						"right": {"0":"border", "1":3},
-						"up": {"0":"border", "1":3},
-						"down": {"0":"border", "1":3},
-						"left": {"0":"border", "1":3}
-					},
-					"set_name": 22,
-					"set_dmg": 7,
-					"set_speed" : 15,
-					"set_base_dir" : 4,
-					"set_cool_down" : 0,
-					"set_stamina_cost" : 10,
-					"set_pause" : 23,
-					"set_destroy" : false,
-					"set_Keep" : false,
-					"set_width" : "cur_hero->body[0].getWidth()",
-					"set_height" : "cur_hero->body[0].getHeight()",
-					"set_duration" : 7,
-					"set_ase_cost" : 7,
-					"set_can_cancel" : true,
-					"set_turn" : true
-				},
-				"3" : {
-					"sprites" : {
-						"right": {"0":"border", "1":3},
-						"up": {"0":"border", "1":3},
-						"down": {"0":"border", "1":3},
-						"left": {"0":"border", "1":3}
-					},
-					"set_name": 23,
-					"set_dmg": 7,
-					"set_speed" : 15,
-					"set_base_dir" : 4,
-					"set_cool_down" : 0,
-					"set_stamina_cost" : 10,
-					"set_pause" : 28,
-					"set_destroy" : false,
-					"set_Keep" : false,
-					"set_width" : "cur_hero->body[0].getWidth()",
-					"set_height" : "cur_hero->body[0].getHeight()",
-					"set_duration" : 7,
-					"set_ase_cost" : 7,
-					"set_can_cancel" : true,
-					"set_turn" : true
-				},
-				"4" : {
-					"sprites" : {
-						"right": {"0":"border", "1":3},
-						"up": {"0":"border", "1":3},
-						"down": {"0":"border", "1":3},
-						"left": {"0":"border", "1":3}
-					},
-					"set_name": 24,
-					"set_dmg": 7,
-					"set_speed" : 15,
-					"set_base_dir" : 4,
-					"set_cool_down" : 0,
-					"set_stamina_cost" : 10,
-					"set_pause" : 33,
-					"set_destroy" : false,
-					"set_Keep" : false,
-					"set_width" : "cur_hero->body[0].getWidth()",
-					"set_height" : "cur_hero->body[0].getHeight()",
-					"set_duration" : 7,
-					"set_ase_cost" : 7,
-					"set_can_cancel" : true,
-					"set_turn" : true
-				}
-			}*/
-		}
+			}
+    }
 	}
 }

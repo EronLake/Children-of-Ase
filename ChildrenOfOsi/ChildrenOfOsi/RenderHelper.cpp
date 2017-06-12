@@ -141,6 +141,7 @@ int RenderHelper::draw_frame(WorldObj * obj)
 	for (auto i = Containers::Attack_table.begin(); i != Containers::Attack_table.end(); ++i) {
 		if (i->second->getPause() == 0) {
 			objVec.push_back(i->second);
+			i->second->animateObj();
 		}
 	}
 	/*for (int i = 0; i < obj->body.size(); i++) {

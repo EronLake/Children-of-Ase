@@ -41,17 +41,20 @@ void CombatController::fight(Soldier* sold1, int state) {
 				sold1->waypoint = Vector2f(0, 0);
 				bool attacked = false;
 				for (auto it = sold1->attackTypes.begin(); it != sold1->attackTypes.end();++it) {
-					if ((*it)->getCanCancel()) {
 						if (sold1->getCool((*it)->get_name())) {
 							switch ((*it)->get_name()) {
 							case Attack::SPIN:
 								gameplay_functions->special(sold1, Attack::SPIN);
 								gameplay_functions->spin(sold1);
+								attacked = true;
+								break;
+							case Attack::SHIELD:
+								gameplay_functions->special(sold1, Attack::SHIELD);
+								gameplay_functions->melee(sold1);
+								attacked = true;
 								break;
 							}
-							attacked = true;
 							break;
-						}
 					}
 				}
 				if (!attacked && sold1->getCool()) {
@@ -68,10 +71,6 @@ void CombatController::fight(Soldier* sold1, int state) {
 								switch ((*it)->get_name()) {
 								case Attack::FIREBALL:
 									gameplay_functions->special(sold1, Attack::FIREBALL);
-									gameplay_functions->fire(sold1);
-									break;
-								case Attack::SHIELD:
-									gameplay_functions->special(sold1, Attack::SHIELD);
 									gameplay_functions->fire(sold1);
 									break;
 								}

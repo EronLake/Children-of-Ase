@@ -148,21 +148,6 @@ void test(int i) { for (int i = 0; i < 100; i++) cout << "hello this is the thre
 int main() {
 	WorldObj* screen = new WorldObj(Vector2f(0.0, 0.0), 25000U, 25000U);	//init screen
 
-	// TESTING GRAPH WITH ASTAR
-	//GridWithWeights grid = make_diagram4();
-	//SquareGrid::Location start{ 1,1 };
-	//SquareGrid::Location end{ 35,41 };
-	//unordered_map<SquareGrid::Location, SquareGrid::Location> came_from;
-	//unordered_map<SquareGrid::Location, double> cost_so_far;
-	//dijkstra_search(grid, start, end, came_from, cost_so_far);
-	//vector<SquareGrid::Location> path = reconstruct_path(start, end, came_from);
-	//auto size = path.size();
-	//cout << "size of path is " << size << endl;
-	//SquareGrid::Location goal = path[size - 1];
-	//cout << "last element in path is " << std::get<0>(goal) << ", " << std::get<1>(goal) << endl;
-	//if (path[size - 1] != end) cout << "CANT FIND PATH" << endl;
-	//draw_grid(grid, 1, nullptr, nullptr, &path);
-
 	//system("PAUSE");
 
 	QuadTree* collideTree = new QuadTree(0, *screen);
@@ -375,11 +360,11 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 		gameplay_functions->add_texture("map4_4", 0, 0, 0);
 		gameplay_functions->add_texture("map4_5", 0, 0, 0);
 
-		gameplay_functions->add_texture("map5_1", 0, 0, 0);
+		/*gameplay_functions->add_texture("map5_1", 0, 0, 0);
 		gameplay_functions->add_texture("map5_2", 0, 0, 0);
 		gameplay_functions->add_texture("map5_3", 0, 0, 0);
 		gameplay_functions->add_texture("map5_4", 0, 0, 0);
-		gameplay_functions->add_texture("map5_5", 0, 0, 0);
+		gameplay_functions->add_texture("map5_5", 0, 0, 0);*/
 
 		tBuffer->run();
 		RenderHelper::gmap->setTextures();
@@ -798,12 +783,28 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	cout << "size of largestruct is " << largeStruct->size() << endl;
 	for (auto it : *largeStruct) cout << (it)->getName() << endl;
 
+	//ASTAR
+	/*GridWithWeights grid = make_diagram4();
+	SquareGrid::Location start1{ 1,1 };
+	SquareGrid::Location end{ 35,41 };
+	unordered_map<SquareGrid::Location, SquareGrid::Location> came_from;
+	unordered_map<SquareGrid::Location, double> cost_so_far;
+	dijkstra_search(grid, start1, end, came_from, cost_so_far);
+	vector<SquareGrid::Location> path = reconstruct_path(start1, end, came_from);
+	auto size = path.size();
+	cout << "size of path is " << size << endl;
+	SquareGrid::Location goal = path[size - 1];
+	cout << "last element in path is " << std::get<0>(goal) << ", " << std::get<1>(goal) << endl;
+	if (path[size - 1] != end) cout << "CANT FIND PATH" << endl;
+	draw_grid(grid, 1, nullptr, nullptr, &path);*/
+
 	if (PRELOAD_TEX) {
 		tm.join();
 		t0.join();
 		t1.join();
 		t2.join();
 	}
+
 	//oya->set_busy(0);
 	//yemoja->set_busy(0);
 	bool can_switch = true;

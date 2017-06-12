@@ -14,7 +14,7 @@ void Texture::load()
 	//std:://cout << "Texture Size: "<< Texture::textureSize<<std::endl;
     txId = Texture::textureSize;
 	unsigned char *image = SOIL_load_image(imageFile.c_str(), &(width), &(height), 0, SOIL_LOAD_RGBA);
-	if (image == NULL && SOIL_last_result()=="Out of memory") {
+	if (image == NULL) {
 		std::cout << "Couldn't Load: " << imageFile <<std::endl;
 	}
 	guard.unlock();
