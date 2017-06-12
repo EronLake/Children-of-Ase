@@ -9,3 +9,9 @@
 6/12/2017   10:21   Render manager unit test failed!
 6/12/2017   10:22   Render manager unit test failed!
 6/12/2017   10:24   Render manager unit test failed!
+6/12/2017   2:18   Render manager unit test failed!
+6/12/2017   2:23   Render manager unit test failed!
+6/12/2017   2:44   Render manager unit test failed!
+6/12/2017   2:56   Render manager unit test failed!
+6/12/2017   3:4   Render manager unit test failed!
+6/12/2017   3:33   Render manager unit test failed!

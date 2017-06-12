@@ -1025,7 +1025,7 @@ void DialogueController::otherConversationPoint(dialogue_point line)
 	replyString = point[ConvPointName];
 
 	std::string reply_pt_sentence = message;
-	if(accepted_action)
+	if(accepted_action || line[ConvPointName].find("Tell About") != string::npos)
 	    reply_pt_sentence = dialogue.gen_dialog(line, temp_hero);
 	else
         reply_pt_sentence = dialogue.gen_dialog_negative(line, temp_hero);
@@ -1351,6 +1351,11 @@ void DialogueController::otherResponse(std::string info, std::string hero_topic)
 		if (line.size() >= 4)
 			line[Topic] = hero_topic;
 
+		if (replyString.find("Tell About") != string::npos) {
+			int tmp = temp_hero->rel[dialogue.hero_name_to_int(curr_hero_topic)]->getAffinity();
+			int stop;
+
+		}
 
 		if (replyString == "Accept Alliance Offer") {
 			//calls action start if the question is asked at all

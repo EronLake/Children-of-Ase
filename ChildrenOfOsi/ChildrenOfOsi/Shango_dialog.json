@@ -630,11 +630,11 @@
    },
 
     "Refuse": {
-        "1": "I refuse to comply.",
-		"2": "I refuse to comply.",
-        "3": "I refuse to comply.",
-		"4": "I refuse to comply.",
-        "5": "I refuse to comply."
+        "1": "I'll pass.",
+		"2": "I'll pass.",
+        "3": "I'll pass.",
+		"4": "I'll pass.",
+        "5": "I'll pass."
    },
 
    "Offer Gift": {
