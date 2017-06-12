@@ -809,7 +809,7 @@ void Input::InputCheck()
 				}
 				else if (SEMI) {
 					if (t) {
-						if (t->can_shield && t->getCool(Attack::SHIELD)) {
+						if (t->getCool(Attack::SHIELD)) {
 							//////std:://cout << "Pressed Shift+R" << std::endl;
 							gameplay_functions->special(t, Attack::SHIELD);
 							gameplay_functions->fire(t);

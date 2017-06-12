@@ -11,7 +11,7 @@
 		"bodyy1" : 50.0,
 		"bodyy2" : 50.0,
 		"health": 120,
-		"max_stamina": 600,
+		"max_stamina": 300,
 		"aggression": 30,
 		"kindness": 70,
 		"honor": 80,
@@ -126,11 +126,11 @@
 				"left": {"0":"FireBallTMPLeft", "1":3}
 			},
 			"set_name": 0,
-			"set_dmg": 25,
+			"set_dmg": 15,
 			"set_speed" : 5,
 			"set_base_dir" : 4,
 			"set_cool_down" : 35,
-			"set_stamina_cost" : 5,
+			"set_stamina_cost" : 15,
 			"set_pause" : -1,
 			"set_destroy" : false,
 			"set_Keep" : true,
@@ -151,10 +151,10 @@
 						"left": {"0":"FireBallTMPLeft", "1":3}
 					},
 					"set_name": 1,
-					"set_dmg": 20,
-					"set_speed" : 20,
+					"set_dmg": 22,
+					"set_speed" : 15,
 					"set_base_dir" : 3,
-					"set_cool_down" : 55,
+					"set_cool_down" : 70,
 					"set_stamina_cost" : 30,
 					"set_pause" : 16,
 					"set_destroy" : true,
@@ -312,19 +312,19 @@
       "fireshield" : {
 				"1" : {
 					"sprites" : {
-						"right": {"0":"FireBallTMP", "1":3},
-						"up": {"0":"FireBallTMP", "1":3},
-						"down": {"0":"FireBallTMP", "1":3},
-						"left": {"0":"FireBallTMP", "1":3}
+						"right": {"0":"fireshield", "1":3},
+						"up": {"0":"fireshield", "1":3},
+						"down": {"0":"fireshield", "1":3},
+						"left": {"0":"fireshield", "1":3}
 					},
 					"set_name": 3,
-					"set_dmg": 15,
-					"set_speed" : 0,
+					"set_dmg": 20,
+					"set_speed" : 1,
 					"set_base_dir" : 8,
-					"set_cool_down" : 55,
+					"set_cool_down" : 95,
 					"set_stamina_cost" : 30,
 					"set_pause" : 3,
-					"set_destroy" : true,
+					"set_destroy" : false,
 					"set_Keep" : false,
 					"set_width" : "cur_hero->body[0].getWidth()",
 					"set_height" : "cur_hero->body[0].getHeight()",
@@ -528,7 +528,7 @@
         "left": {"0": "FireBallTMPLeft","1": 3}
       },
       "set_name": 0,
-			"set_dmg": 10,
+			"set_dmg": 12,
 			"set_speed" : 5,
 			"set_base_dir" : 4,
 			"set_cool_down" : 35,
@@ -565,10 +565,10 @@
             }
           },
           "set_name": 1,
-          "set_dmg": 15,
-          "set_speed": 20,
+          "set_dmg": 22,
+          "set_speed": 12,
           "set_base_dir": 3,
-          "set_cool_down": 45,
+          "set_cool_down": 65,
           "set_stamina_cost": 30,
           "set_pause": 16,
           "set_destroy": true,
@@ -673,20 +673,20 @@
         }
       },
       "set_name": 0,
-      "set_dmg": 20,
-      "set_speed": 5,
-      "set_base_dir": 4,
-      "set_cool_down": 80,
-      "set_stamina_cost": 45,
-      "set_pause": -1,
-      "set_destroy": false,
-      "set_Keep": true,
-      "set_width": "cur_hero->body[0].getWidth()",
-      "set_height": "cur_hero->body[0].getHeight()",
-      "set_duration": 7,
-      "set_ase_cost": 7,
-      "set_can_cancel": true,
-      "set_turn": false
+			"set_dmg": 15,
+			"set_speed" : 5,
+			"set_base_dir" : 4,
+			"set_cool_down" : 35,
+			"set_stamina_cost" : 30,
+			"set_pause" : -1,
+			"set_destroy" : false,
+			"set_Keep" : true,
+			"set_width" : "cur_hero->body[0].getWidth()",
+			"set_height" : "cur_hero->body[0].getHeight()",
+			"set_duration" : 7,
+			"set_ase_cost" : 0,
+			"set_can_cancel" : true,
+			"set_turn" : false
     },
     "spin": {
       "1": {
@@ -709,10 +709,10 @@
           }
         },
         "set_name": 2,
-        "set_dmg": 15,
+        "set_dmg": 7,
         "set_speed": 18,
         "set_base_dir": 4,
-        "set_cool_down": 60,
+        "set_cool_down": 55,
         "set_stamina_cost": 10,
         "set_pause": 3,
         "set_destroy": false,
@@ -921,7 +921,7 @@
           }
 			},
 			"set_name": 0,
-			"set_dmg": 30,
+			"set_dmg": 17,
 			"set_speed" : 5,
 			"set_base_dir" : 4,
 			"set_cool_down" : 35,
@@ -936,127 +936,32 @@
 			"set_can_cancel" : true,
 			"set_turn" : false
 		},
-		"attacks": {
-		/*
-			"fireball" : {
+    "attacks": {
+      "fireshield" : {
 				"1" : {
 					"sprites" : {
-						"right": {"0":"FireBallTMP", "1":3},
-						"up": {"0":"FireBallTMPUp", "1":3},
-						"down": {"0":"FireBallTMPDown", "1":3},
-						"left": {"0":"FireBallTMPLeft", "1":3}
+						"right": {"0":"fireshield", "1":3},
+						"up": {"0":"fireshield", "1":3},
+						"down": {"0":"fireshield", "1":3},
+						"left": {"0":"fireshield", "1":3}
 					},
-					"set_name": 1,
+					"set_name": 3,
 					"set_dmg": 20,
-					"set_speed" : 20,
-					"set_base_dir" : 3,
-					"set_cool_down" : 55,
+					"set_speed" : 1,
+					"set_base_dir" : 8,
+					"set_cool_down" : 95,
 					"set_stamina_cost" : 30,
-					"set_pause" : 16,
-					"set_destroy" : true,
+					"set_pause" : 3,
+					"set_destroy" : false,
 					"set_Keep" : false,
 					"set_width" : "cur_hero->body[0].getWidth()",
 					"set_height" : "cur_hero->body[0].getHeight()",
-					"set_duration" : 100,
-					"set_ase_cost" : 40,
+					"set_duration" : 12,
+					"set_ase_cost" : 50,
 					"set_can_cancel" : false,
 					"set_turn" : false
 				}
-			},
-			"spin" : {
-				"1" : {
-					"sprites" : {
-						"right": {"0":"border", "1":3},
-						"up": {"0":"border", "1":3},
-						"down": {"0":"border", "1":3},
-						"left": {"0":"border", "1":3}
-					},
-					"set_name": 2,
-					"set_dmg": 15,
-					"set_speed" : 18,
-					"set_base_dir" : 4,
-					"set_cool_down" : 60,
-					"set_stamina_cost" : 10,
-					"set_pause" : 18,
-					"set_destroy" : false,
-					"set_Keep" : false,
-					"set_width" : "cur_hero->body[0].getWidth()",
-					"set_height" : "cur_hero->body[0].getHeight()",
-					"set_duration" : 7,
-					"set_ase_cost" : 7,
-					"set_can_cancel" : true,
-					"set_turn" : true
-				},
-				"2" : {
-					"sprites" : {
-						"right": {"0":"border", "1":3},
-						"up": {"0":"border", "1":3},
-						"down": {"0":"border", "1":3},
-						"left": {"0":"border", "1":3}
-					},
-					"set_name": 22,
-					"set_dmg": 7,
-					"set_speed" : 15,
-					"set_base_dir" : 4,
-					"set_cool_down" : 0,
-					"set_stamina_cost" : 10,
-					"set_pause" : 23,
-					"set_destroy" : false,
-					"set_Keep" : false,
-					"set_width" : "cur_hero->body[0].getWidth()",
-					"set_height" : "cur_hero->body[0].getHeight()",
-					"set_duration" : 7,
-					"set_ase_cost" : 7,
-					"set_can_cancel" : true,
-					"set_turn" : true
-				},
-				"3" : {
-					"sprites" : {
-						"right": {"0":"border", "1":3},
-						"up": {"0":"border", "1":3},
-						"down": {"0":"border", "1":3},
-						"left": {"0":"border", "1":3}
-					},
-					"set_name": 23,
-					"set_dmg": 7,
-					"set_speed" : 15,
-					"set_base_dir" : 4,
-					"set_cool_down" : 0,
-					"set_stamina_cost" : 10,
-					"set_pause" : 28,
-					"set_destroy" : false,
-					"set_Keep" : false,
-					"set_width" : "cur_hero->body[0].getWidth()",
-					"set_height" : "cur_hero->body[0].getHeight()",
-					"set_duration" : 7,
-					"set_ase_cost" : 7,
-					"set_can_cancel" : true,
-					"set_turn" : true
-				},
-				"4" : {
-					"sprites" : {
-						"right": {"0":"border", "1":3},
-						"up": {"0":"border", "1":3},
-						"down": {"0":"border", "1":3},
-						"left": {"0":"border", "1":3}
-					},
-					"set_name": 24,
-					"set_dmg": 7,
-					"set_speed" : 15,
-					"set_base_dir" : 4,
-					"set_cool_down" : 0,
-					"set_stamina_cost" : 10,
-					"set_pause" : 33,
-					"set_destroy" : false,
-					"set_Keep" : false,
-					"set_width" : "cur_hero->body[0].getWidth()",
-					"set_height" : "cur_hero->body[0].getHeight()",
-					"set_duration" : 7,
-					"set_ase_cost" : 7,
-					"set_can_cancel" : true,
-					"set_turn" : true
-				}
-			}*/
-		}
+			}
+    }
 	}
 }

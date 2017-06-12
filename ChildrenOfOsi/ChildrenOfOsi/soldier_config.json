@@ -87,8 +87,8 @@
 	},
 	"Jungle_Soldier" : {
 		"soldier_number":  4,
-		"x" : 176.05,
-		"y" : 230.70,
+		"x" : 201.61,
+		"y" : 157.86,
 		"width" : 150,
 		"hight" : 150,
 		"name" : "Jungle_Soldier",
@@ -174,8 +174,8 @@
 	},
 	"Ogun_Soldier" : {
 		"soldier_number": 4,
-		"x" : 64.45,
-		"y" : 100.55,
+		"x" : 201.25,
+		"y" : 59.57,
 		"width" : 150,
 		"hight" : 150,
 		"name" : "Ogun_Soldier",

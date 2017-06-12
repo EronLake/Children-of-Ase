@@ -112,10 +112,10 @@ void Soldier::newAttack(int i, Attack* a)
 		  break;
   }
   if (i==Attack::SHIELD) {
-	  x = this->getX();
-	  y = this->getY();
-	  w = this->getWidth();
-	  h = this->getHeight();
+	  x = this->getX()-65;
+	  y = this->getY()-30;
+	  w = this->getWidth()+100;
+	  h = this->getHeight()+100;
   }
   p->setX(x);
   p->setY(y);
