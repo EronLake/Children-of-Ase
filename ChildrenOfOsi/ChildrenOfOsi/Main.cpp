@@ -300,7 +300,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	yemoja->trait_vec["Compliment"] = 180;
 	yemoja->trait_vec["Insult"] = 120;
 	yemoja->trait_vec["Intimidate"] = 120;
-	yemoja->trait_vec["Offer Praise"] = 160;
+	yemoja->trait_vec["Grovel"] = 160;
 	yemoja->trait_vec["Boast"] = 160;
 	yemoja->song = "Music/HeroThemes/Yemoja.flac";
 	heroes.push_back(yemoja);
@@ -312,7 +312,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	oya->trait_vec["Compliment"] = 160;
 	oya->trait_vec["Insult"] = 120;
 	oya->trait_vec["Intimidate"] = 180;
-	oya->trait_vec["Offer Praise"] = 120;
+	oya->trait_vec["Grovel"] = 120;
 	oya->trait_vec["Boast"] = 202;
 	oya->song = "Music/HeroThemes/Oya.flac";
 	oya->set_busy(0);//added for testing
@@ -322,7 +322,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	ogun->trait_vec["Compliment"] = 120;
 	ogun->trait_vec["Insult"] = 202;
 	ogun->trait_vec["Intimidate"] = 120;
-	ogun->trait_vec["Offer Praise"] = 180;
+	ogun->trait_vec["Grovel"] = 180;
 	ogun->trait_vec["Boast"] = 120;
 	ogun->song = "Music/HeroThemes/Ogun.flac";
 	ogun->set_busy(0);//added for testing

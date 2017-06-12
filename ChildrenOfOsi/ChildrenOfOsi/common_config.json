@@ -7,6 +7,7 @@
 	"load_map" : 1,
 	"river_collide" : 1,
   "preload_tex": 1,
+
 	"thread_physics" : 1,
 	"write_to_log" : 0,
 

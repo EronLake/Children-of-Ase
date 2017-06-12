@@ -447,7 +447,7 @@ void DialogueController::PlayerConversationPoint()
 
 		//limit the number of conversation log entries for the current conversation
 		//to a maximum of 8
-		if (curr_conversation_log.size() > 8) {
+		if (curr_conversation_log.size() > 32) {
 			delete curr_conversation_log[0];
 			curr_conversation_log.erase(curr_conversation_log.begin());
 		}
@@ -476,12 +476,19 @@ void DialogueController::PlayerConversationPoint()
 					accepted_action = false;
 
 				dialogue.act_accepted = accepted_action;
+			}if (player_conv_point_choice == "Bribe" || player_conv_point_choice == "Compliment" || player_conv_point_choice == "Grovel" ||
+				player_conv_point_choice == "Insult" || player_conv_point_choice == "Boast" || player_conv_point_choice == "Advise To Fight"
+				|| player_conv_point_choice == "Advise To Conquer" || player_conv_point_choice == "Advise To Send Peace Offering To" ||
+				player_conv_point_choice == "Advise To Ally With" || player_conv_point_choice == "Intimidate") {
+				if ((choice[ConvPointName].find("Advise To") == string::npos))
+					PlayerActExecFunctions::execute_start(player_conv_point_choice, temp_hero);
+					accepted_action = check_acceptance(player, temp_hero);
 			}
 			for (auto precond : Containers::conv_point_table[player_conv_point_choice]->req_preconds) {
 				int temp1 = precond->get_cost(temp_hero, player);
 				//the ori stuff means that the higher the ori the more likely it is for the hero to respond
 				//positivly to what whatever it is you are saying
-				if (precond->get_cost(temp_hero,player) - (player->ori/ 10) <= 0) {
+				if (precond->get_cost(temp_hero,player) - (player->ori/ 5) <= 0) {
 					std::cout << "a string: " << precond->get_cost(temp_hero, player) << std::endl;
 				}
 				else {
@@ -503,10 +510,7 @@ void DialogueController::PlayerConversationPoint()
 				|| player_conv_point_choice == "Advise To Conquer" || player_conv_point_choice == "Advise To Send Peace Offering To" ||
 				player_conv_point_choice == "Advise To Ally With" || player_conv_point_choice == "Intimidate")
 			{ 
-				if ((choice[ConvPointName].find("Advise To") == string::npos)) {
-					PlayerActExecFunctions::execute_start(player_conv_point_choice, temp_hero);
-					accepted_action = check_acceptance(player, temp_hero);
-				}
+			
 				
 				if (accepted_action) {
 					Containers::conv_point_table[player_conv_point_choice]->apply_postconditions(true, player, temp_hero);
@@ -867,7 +871,7 @@ void DialogueController::PlayerResponse()
 				int temp1 = precond->get_cost(temp_hero, player);
 				//the ori stuff means that the higher the ori the more likely it is for the hero to respond
 				//positivly to what whatever it is you are saying
-				if (precond->get_cost(temp_hero, player) - (player->ori / 10) <= 0) {
+				if (precond->get_cost(temp_hero, player) - (player->ori / 5) <= 0) {
 					std::cout << "a string: " << precond->get_cost(temp_hero, player) << std::endl;
 				}
 				else {
@@ -919,7 +923,7 @@ void DialogueController::PlayerResponse()
 
 		//limit the number of conversation log entries for the current conversation
 		//to a maximum of 8
-		if (curr_conversation_log.size() > 8) {
+		if (curr_conversation_log.size() > 32) {
 			delete curr_conversation_log[0];
 			curr_conversation_log.erase(curr_conversation_log.begin());
 		}
@@ -1060,7 +1064,7 @@ void DialogueController::otherConversationPoint(dialogue_point line)
 
 		//limit the number of conversation log entries for the current conversation
 		//to a maximum of 8
-		if (curr_conversation_log.size() > 8) {
+		if (curr_conversation_log.size() > 32) {
 			delete curr_conversation_log[0];
 			curr_conversation_log.erase(curr_conversation_log.begin());
 		}
@@ -1099,7 +1103,7 @@ void DialogueController::otherConversationPoint(dialogue_point line)
 			    //replace_all(con_pt_sentence, "HERO", hero_name);//receiver or doer here? ask Justin
 
 			else if (act_name.find("Bribe") != string::npos) {
-				std::string gift = "offer a gift to ";
+				std::string gift = "offer a gift to";
 				replace_all(con_pt_sentence, "HERO", hero_name);
 				replace_all(con_pt_sentence, "ACTION", gift);
 			}
@@ -1162,7 +1166,7 @@ void DialogueController::otherConversationPoint(dialogue_point line)
 
 		//limit the number of conversation log entries for the current conversation
 		//to a maximum of 8
-		if (curr_conversation_log.size() > 8) {
+		if (curr_conversation_log.size() > 32) {
 			delete curr_conversation_log[0];
 			curr_conversation_log.erase(curr_conversation_log.begin());
 		}
@@ -2057,8 +2061,13 @@ void DialogueController::other_response_soldier(std::string info, std::string he
 			//std::cout << soldier->getCurrentLeader()->getName();
 		}
 
+		std::string name_str = other->getName();
+		std::string::size_type name_end = name_str.find_last_of('_');
+		std::string n_str = name_str.substr(0, name_end);
+		replace_all(n_str, "_", " ");
+		name_str = n_str;
 		
-		message = other->getName() + ": " + reply_pt_sentence + "\n\n";
+		message = name_str + ": " + reply_pt_sentence + "\n\n";
 
 		state = 7;
 			//otherConversationPoint(line);
@@ -2211,10 +2220,7 @@ void DialogueController::other_response_babalawo(std::string info, std::string h
 	reply_pt_sentence = dialogue.gen_dialog_babalawo(line,other);
 
 	std::string name_str = other->getName();
-	std::string::size_type name_end = name_str.find_last_of('_');
-	std::string n_str = name_str.substr(0, name_end);
-	replace_all(n_str, "_", " ");
-	name_str = n_str;
+	replace_all(name_str, "_", " ");
 
 
 	message = name_str + ": " + reply_pt_sentence + "\n\n";
@@ -2567,10 +2573,7 @@ void DialogueController::startConversation(WorldObj* n, bool playerTalk)
 					if (other->getName().find("Babalawo") != string::npos) {//if player interacting with babalawo
 						player_choose_babalawo();
 						std::string name_str = other->getName();
-						std::string::size_type name_end = name_str.find_last_of('_');
-						std::string n_str = name_str.substr(0, name_end);
-						replace_all(n_str, "_", " ");
-						name_str = n_str;
+						replace_all(name_str, "_", " ");
 						message = name_str + ": " + dialogue.gen_dialog_babalawo({ "Greeting","Greeting" }, other);
 					}
 					else if (other->getName().find("Shrine") != string::npos)//if player interacting with shrine
@@ -2690,9 +2693,11 @@ void DialogueController::exitDialogue()
 				state = 7;
 		}
 		else {
+			std::string name_str = other->getName();
+			replace_all(name_str, "_", " ");
 			Soldier* my_sol = dynamic_cast<Soldier*>(other);
 			if(!my_sol)//make babalawo farewell appear on exit
-                message = other->getName() + ": " + dialogue.gen_dialog_babalawo({ "Farewell","Farewell" }, other);
+                message = name_str + ": " + dialogue.gen_dialog_babalawo({ "Farewell","Farewell" }, other);
 			remove_soldier_opts();
 			remove_babalawo_opts();
 		}
@@ -3228,7 +3233,7 @@ bool DialogueController::check_acceptance(Player* p, Hero* npc) {
 	int range_cap = npc->get_range_cap(p->cur_action);
 	for (auto i : curr_conversation_log) {
 		if (i->get_who() == SHANGO && i->get_conv_point()->get_name() == act_name)
-			range_cap = range_cap;// / 2;
+			range_cap = range_cap / 2;
 	}
 	int result = rand() % 101;//get random number between 0 and 100
 	if (result <= range_cap)

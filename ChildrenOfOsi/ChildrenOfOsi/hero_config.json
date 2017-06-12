@@ -130,7 +130,7 @@
 			"set_speed" : 5,
 			"set_base_dir" : 4,
 			"set_cool_down" : 35,
-			"set_stamina_cost" : 25,
+			"set_stamina_cost" : 5,
 			"set_pause" : -1,
 			"set_destroy" : false,
 			"set_Keep" : true,

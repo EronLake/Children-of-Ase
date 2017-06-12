@@ -59,14 +59,13 @@ void SoldierConfig::set_soldier(vector<WorldObj*>* movVec, ChildrenOfOsi* gamepl
 		gameplay_func->add_soldier(name, 100 * x, 100 * y, true);
 		tBuffer->run();
 
+		Containers::soldier_table[name]->setWidth(width);
+		Containers::soldier_table[name]->setHeight(hight);
+
 		Containers::soldier_table[name]->offsetBody(0, bodyx1, bodyx2, bodyy1, bodyy2);
 		Containers::soldier_table[name]->offset_effect(0, 100, 100, 100, 100);
 
 		Containers::soldier_table[name]->setName(name);
-		Containers::soldier_table[name]->setWidth(width);
-		Containers::soldier_table[name]->setHeight(hight);
-
-
 		Containers::soldier_table[name]->setInteractable(true);
 
 		Containers::soldier_table[name]->setHealth(health);
