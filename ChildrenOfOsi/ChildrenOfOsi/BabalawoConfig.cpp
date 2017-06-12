@@ -42,12 +42,12 @@ void BabalawoConfig::set_babalawo(vector<WorldObj*>* recVec_ptr, ChildrenOfOsi* 
 		gameplay_func->add_npc(name, 100 * x, 100 * y, true);
 		tBuffer->run();
 
+		Containers::npc_table[name]->setWidth(width);
+		Containers::npc_table[name]->setHeight(hight);
 		Containers::npc_table[name]->offsetBody(0, bodyx1, bodyx2, bodyy1, bodyy2);
 		Containers::npc_table[name]->offset_effect(0, 100, 100, 100, 100);
 
 		Containers::npc_table[name]->setName(name);
-		Containers::npc_table[name]->setWidth(width);
-		Containers::npc_table[name]->setHeight(hight);
 
 		Containers::npc_table[name]->setInteractable(true);
 
