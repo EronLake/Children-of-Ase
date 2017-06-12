@@ -123,7 +123,7 @@ void SoldierConfig::init_sprites(ChildrenOfOsi* gameplay_func, TaskBuffer* tBuff
 	else //if (name.find("Shango_Soldier") != string::npos)
 	{
 		region_con = &ObjConfig::oasis_con;
-		path = SOLDIER_OGUN_PATH; 
+		path = SOLDIER_OASIS_PATH; 
 	}
 
 
