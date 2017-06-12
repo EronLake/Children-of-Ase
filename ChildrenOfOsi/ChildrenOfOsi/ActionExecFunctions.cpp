@@ -230,6 +230,7 @@ void ActionExecFunctions::execute_form_alliance(Action* form_alliance) {
 			form_alliance->getDoer()->getVillage()->addToParties(p);
 		}
 
+		form_alliance->getDoer()->getParty()->form_attack_party(form_alliance->getDoer()->getVillage()->barracks, false, form_alliance->getDoer()->get_strength());
 		form_alliance->getDoer()->set_action_destination(form_alliance->getReceiver()->getLoc());
 		form_alliance->getDoer()->set_max_dist_act(30);
 		form_alliance->checkpoint++;
