@@ -366,7 +366,7 @@ bool MemoryTestSuite::execute_tests()
 	}
 
 	//---------------------------------------------------
-	if (destroy_pool_test() == true)
+	/*if (destroy_pool_test() == true)
 	{
 		LOG("destroy_pool_test: " << "PASS");
 	}
@@ -374,10 +374,10 @@ bool MemoryTestSuite::execute_tests()
 	{
 		LOG("destroy_pool_test: " << "FAIL");
 		pass = false;
-	}
+	}*/
 
 	//---------------------------------------------------
-	if (create_pool_test() == true)
+	/*if (create_pool_test() == true)
 	{
 		LOG("create_pool_test: " << "PASS");
 	}
@@ -385,7 +385,7 @@ bool MemoryTestSuite::execute_tests()
 	{
 		LOG("create_pool_test: " << "FAIL");
 		pass = false;
-	}
+	}*/
 
 	//---------------------------------------------------
 	if (destroy_MemNode_list_test() == true)
