@@ -480,9 +480,10 @@ void DialogueController::PlayerConversationPoint()
 				player_conv_point_choice == "Insult" || player_conv_point_choice == "Boast" || player_conv_point_choice == "Advise To Fight"
 				|| player_conv_point_choice == "Advise To Conquer" || player_conv_point_choice == "Advise To Send Peace Offering To" ||
 				player_conv_point_choice == "Advise To Ally With" || player_conv_point_choice == "Intimidate") {
-				if ((choice[ConvPointName].find("Advise To") == string::npos))
+				if ((choice[ConvPointName].find("Advise To") == string::npos)) {
 					PlayerActExecFunctions::execute_start(player_conv_point_choice, temp_hero);
 					accepted_action = check_acceptance(player, temp_hero);
+				}
 			}
 			for (auto precond : Containers::conv_point_table[player_conv_point_choice]->req_preconds) {
 				int temp1 = precond->get_cost(temp_hero, player);
@@ -1797,7 +1798,7 @@ void DialogueController::otherResponse(std::string info, std::string hero_topic)
 				int hero_num = dialogue.hero_name_to_int(curr_hero_topic);
 				//std::string hero_id = std::to_string(hero_num);
 				std::string hero_id = std::to_string(temp_hero->name);
-				std::string act_str = "Fight_" + hero_id;
+				std::string act_str = "Fight_" + hero_id+"-"+std::to_string(hero_num);
 				planner->set_current_action(Containers::action_table[act_str]);
 				planner->get_current_action()->setDoer(temp_hero);
 				planner->get_current_action()->setOwner(temp_hero);
@@ -1832,7 +1833,7 @@ void DialogueController::otherResponse(std::string info, std::string hero_topic)
 				int hero_num = dialogue.hero_name_to_int(curr_hero_topic);
 				//std::string hero_id = std::to_string(hero_num);
 				std::string hero_id = std::to_string(temp_hero->name);
-				std::string act_str = "Conquer_" + hero_id;
+				std::string act_str = "Conquer_" + hero_id + "-" + std::to_string(hero_num);
 				planner->set_current_action(Containers::action_table[act_str]);
 				planner->get_current_action()->setDoer(temp_hero);
 				planner->get_current_action()->setOwner(temp_hero);
@@ -1890,7 +1891,7 @@ void DialogueController::otherResponse(std::string info, std::string hero_topic)
 				int hero_num = dialogue.hero_name_to_int(curr_hero_topic);
 				//std::string hero_id = std::to_string(hero_num);
 				std::string hero_id = std::to_string(temp_hero->name);
-				std::string act_str = "Form_Alliance_" + hero_id;
+				std::string act_str = "Form_Alliance_" + hero_id + "-" + std::to_string(hero_num);
 				planner->set_current_action(Containers::action_table[act_str]);
 				planner->get_current_action()->setDoer(temp_hero);
 				planner->get_current_action()->setOwner(temp_hero);

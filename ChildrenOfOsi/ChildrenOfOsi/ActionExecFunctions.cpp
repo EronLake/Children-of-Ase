@@ -215,6 +215,7 @@ void ActionExecFunctions::execute_train_with(Action* train_with) {
 
 
 void ActionExecFunctions::execute_form_alliance(Action* form_alliance) {
+	
 	if (form_alliance->getDoer()->get_busy() == Hero::BUSY_REC_TALK || form_alliance->getDoer()->get_busy() == Hero::BUSY_REC_FIGHT)return;
 	std::cout << "/////////////////////////execute_form_alliance///////////////////////" << std::endl;
 	
@@ -222,6 +223,11 @@ void ActionExecFunctions::execute_form_alliance(Action* form_alliance) {
 	Hero* responder = form_alliance->getReceiver();
 	switch (form_alliance->checkpoint) {
 	case 0:
+		if (form_alliance->getDoer()->getVillage()->get_alliance() == form_alliance->getReceiver()->getVillage()->get_alliance()) {
+			form_alliance->executed = true;
+			form_alliance->checkpoint = 0;
+			break;
+		}
 		std::cout << form_alliance->getDoer()->getName() << " started alliance" << std::endl;
 		//ActionHelper::create_memory(form_alliance, doer);
 		if (form_alliance->getDoer()->getParty()->get_perm()) {
@@ -243,6 +249,7 @@ void ActionExecFunctions::execute_form_alliance(Action* form_alliance) {
 			//Planner* hero_planner = ActionHelper::ai->get_plan(responder->name);
 			if(form_alliance->getReceiver()->name == SHANGO)
 			{
+				
 				DialogueController::hero_act_alliance_pop_up(form_alliance);
 				/*form_alliance->apply_postconditions(false);
 

@@ -143,7 +143,9 @@ void AIController::init_plans() {
 			//Recursive function that continues to append actions to 
 			//"state"'s list of milestones until it reaches an action with no
 			//preconditions left
-			planner->generate_milestones(state, curr_milestone);
+			if (curr_milestone) {
+				planner->generate_milestones(state, curr_milestone);
+			}
 			
 		}
 
@@ -297,10 +299,12 @@ void AIController::execute() {
 					if(best_action == nullptr) {
 						best_action = itor;
 					}
-
-					if (itor->getUtility() > best_utility) {
-						best_utility = itor->getUtility();
-						best_action = itor;
+					//trash jerry rig edit
+					if (itor) {
+						if (itor->getUtility() > best_utility) {
+							best_utility = itor->getUtility();
+							best_action = itor;
+						}
 					}
 
 				}

@@ -117,7 +117,7 @@ void PlayerActExecFunctions::execute_end(bool if_succ) {
 	Action* cur_action = player->cur_action;
 
 	//these two lines strip the number off the end of the name 
-	std::string::size_type name_end = cur_action->getName().find_first_of('_');
+	std::string::size_type name_end = cur_action->getName().find_last_of('_');
 	std::string act_name = cur_action->getName().substr(0, name_end);
 
 	///////////////////////////////////////////////////////////////////////////////////
@@ -184,8 +184,9 @@ void PlayerActExecFunctions::execute_end(bool if_succ) {
 	//{
 //		perror("something is wrong with the current hero memory creation function");
 	//}
-	
-	//cur_action->apply_postconditions(if_succ);	//Apply post-conditions based off if it was succesful or not
+	if(act_name == "Form_Alliance" || act_name == "Fight" || act_name == "Duel" || act_name == "Spar"
+		|| act_name == "Conquer")
+	    cur_action->apply_postconditions(if_succ);	//Apply post-conditions based off if it was succesful or not
 	cur_action->executed = true;
 
 	if (if_succ) {

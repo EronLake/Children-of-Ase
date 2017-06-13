@@ -39,19 +39,19 @@
 
       "walk_up": {
         "0": "SoldierOasis_Sprint_N",
-        "1": 32
+        "1": 16
       },
       "walk_down": {
         "0": "SoldierOasis_Sprint_S",
-        "1": 32
+        "1": 16
       },
       "walk_left": {
         "0": "SoldierOasis_Sprint_W",
-        "1": 32
+        "1": 16
       },
       "walk_right": {
         "0": "SoldierOasis_Sprint_E",
-        "1": 32
+        "1": 16
       },
 
       "sprint_up": {
@@ -113,19 +113,19 @@
 
       "walk_up": {
         "0": "SoldierOasis_Sprint_N",
-        "1": 32
+        "1": 16
       },
       "walk_down": {
         "0": "SoldierOasis_Sprint_S",
-        "1": 32
+        "1": 16
       },
       "walk_left": {
         "0": "SoldierOasis_Sprint_W",
-        "1": 32
+        "1": 16
       },
       "walk_right": {
         "0": "SoldierOasis_Sprint_E",
-        "1": 32
+        "1": 16
       },
 
       "sprint_up": {
@@ -187,19 +187,19 @@
 
       "walk_up": {
         "0": "SoldierOasis_Sprint_N",
-        "1": 32
+        "1": 16
       },
       "walk_down": {
         "0": "SoldierOasis_Sprint_S",
-        "1": 32
+        "1": 16
       },
       "walk_left": {
         "0": "SoldierOasis_Sprint_W",
-        "1": 32
+        "1": 16
       },
       "walk_right": {
         "0": "SoldierOasis_Sprint_E",
-        "1": 32
+        "1": 16
       },
 
       "sprint_up": {
@@ -260,19 +260,19 @@
 
       "walk_up": {
         "0": "SoldierOasis_Sprint_N",
-        "1": 32
+        "1": 16
       },
       "walk_down": {
         "0": "SoldierOasis_Sprint_S",
-        "1": 32
+        "1": 16
       },
       "walk_left": {
         "0": "SoldierOasis_Sprint_W",
-        "1": 32
+        "1": 16
       },
       "walk_right": {
         "0": "SoldierOasis_Sprint_E",
-        "1": 32
+        "1": 16
       },
 
       "sprint_up": {
@@ -333,19 +333,19 @@
 
       "walk_up": {
         "0": "SoldierOasis_Sprint_N",
-        "1": 32
+        "1": 16
       },
       "walk_down": {
         "0": "SoldierOasis_Sprint_S",
-        "1": 32
+        "1": 16
       },
       "walk_left": {
         "0": "SoldierOasis_Sprint_W",
-        "1": 32
+        "1": 16
       },
       "walk_right": {
         "0": "SoldierOasis_Sprint_E",
-        "1": 32
+        "1": 16
       },
 
       "sprint_up": {
@@ -406,19 +406,19 @@
 
       "walk_up": {
         "0": "SoldierOasis_Sprint_N",
-        "1": 32
+        "1": 16
       },
       "walk_down": {
         "0": "SoldierOasis_Sprint_S",
-        "1": 32
+        "1": 16
       },
       "walk_left": {
         "0": "SoldierOasis_Sprint_W",
-        "1": 32
+        "1": 16
       },
       "walk_right": {
         "0": "SoldierOasis_Sprint_E",
-        "1": 32
+        "1": 16
       },
 
       "sprint_up": {
@@ -479,19 +479,19 @@
 
       "walk_up": {
         "0": "SoldierOasis_Sprint_N",
-        "1": 32
+        "1": 16
       },
       "walk_down": {
         "0": "SoldierOasis_Sprint_S",
-        "1": 32
+        "1": 16
       },
       "walk_left": {
         "0": "SoldierOasis_Sprint_W",
-        "1": 32
+        "1": 16
       },
       "walk_right": {
         "0": "SoldierOasis_Sprint_E",
-        "1": 32
+        "1": 16
       },
 
       "sprint_up": {
@@ -552,19 +552,19 @@
 
       "walk_up": {
         "0": "SoldierOasis_Sprint_N",
-        "1": 32
+        "1": 16
       },
       "walk_down": {
         "0": "SoldierOasis_Sprint_S",
-        "1": 32
+        "1": 16
       },
       "walk_left": {
         "0": "SoldierOasis_Sprint_W",
-        "1": 32
+        "1": 16
       },
       "walk_right": {
         "0": "SoldierOasis_Sprint_E",
-        "1": 32
+        "1": 16
       },
 
       "sprint_up": {
@@ -625,19 +625,19 @@
 
       "walk_up": {
         "0": "SoldierOasis_Sprint_N",
-        "1": 32
+        "1": 16
       },
       "walk_down": {
         "0": "SoldierOasis_Sprint_S",
-        "1": 32
+        "1": 16
       },
       "walk_left": {
         "0": "SoldierOasis_Sprint_W",
-        "1": 32
+        "1": 16
       },
       "walk_right": {
         "0": "SoldierOasis_Sprint_E",
-        "1": 32
+        "1": 16
       },
 
       "sprint_up": {
@@ -704,19 +704,19 @@
 
       "walk_up": {
         "0": "SoldierJungle_Sprint_N",
-        "1": 32
+        "1": 16
       },
       "walk_down": {
         "0": "SoldierJungle_Sprint_S",
-        "1": 32
+        "1": 16
       },
       "walk_left": {
         "0": "SoldierJungle_Sprint_W",
-        "1": 32
+        "1": 16
       },
       "walk_right": {
         "0": "SoldierJungle_Sprint_E",
-        "1": 32
+        "1": 16
       },
 
       "sprint_up": {
@@ -778,19 +778,19 @@
 
       "walk_up": {
         "0": "SoldierJungle_Sprint_N",
-        "1": 32
+        "1": 16
       },
       "walk_down": {
         "0": "SoldierJungle_Sprint_S",
-        "1": 32
+        "1": 16
       },
       "walk_left": {
         "0": "SoldierJungle_Sprint_W",
-        "1": 32
+        "1": 16
       },
       "walk_right": {
         "0": "SoldierJungle_Sprint_E",
-        "1": 32
+        "1": 16
       },
 
       "sprint_up": {
@@ -852,19 +852,19 @@
 
       "walk_up": {
         "0": "SoldierJungle_Sprint_N",
-        "1": 32
+        "1": 16
       },
       "walk_down": {
         "0": "SoldierJungle_Sprint_S",
-        "1": 32
+        "1": 16
       },
       "walk_left": {
         "0": "SoldierJungle_Sprint_W",
-        "1": 32
+        "1": 16
       },
       "walk_right": {
         "0": "SoldierJungle_Sprint_E",
-        "1": 32
+        "1": 16
       },
 
       "sprint_up": {
@@ -926,19 +926,19 @@
 
       "walk_up": {
         "0": "SoldierJungle_Sprint_N",
-        "1": 32
+        "1": 16
       },
       "walk_down": {
         "0": "SoldierJungle_Sprint_S",
-        "1": 32
+        "1": 16
       },
       "walk_left": {
         "0": "SoldierJungle_Sprint_W",
-        "1": 32
+        "1": 16
       },
       "walk_right": {
         "0": "SoldierJungle_Sprint_E",
-        "1": 32
+        "1": 16
       },
 
       "sprint_up": {
@@ -1000,19 +1000,19 @@
 
       "walk_up": {
         "0": "SoldierJungle_Sprint_N",
-        "1": 32
+        "1": 16
       },
       "walk_down": {
         "0": "SoldierJungle_Sprint_S",
-        "1": 32
+        "1": 16
       },
       "walk_left": {
         "0": "SoldierJungle_Sprint_W",
-        "1": 32
+        "1": 16
       },
       "walk_right": {
         "0": "SoldierJungle_Sprint_E",
-        "1": 32
+        "1": 16
       },
 
       "sprint_up": {
@@ -1074,19 +1074,19 @@
 
       "walk_up": {
         "0": "SoldierJungle_Sprint_N",
-        "1": 32
+        "1": 16
       },
       "walk_down": {
         "0": "SoldierJungle_Sprint_S",
-        "1": 32
+        "1": 16
       },
       "walk_left": {
         "0": "SoldierJungle_Sprint_W",
-        "1": 32
+        "1": 16
       },
       "walk_right": {
         "0": "SoldierJungle_Sprint_E",
-        "1": 32
+        "1": 16
       },
 
       "sprint_up": {
@@ -1148,19 +1148,19 @@
 
       "walk_up": {
         "0": "SoldierJungle_Sprint_N",
-        "1": 32
+        "1": 16
       },
       "walk_down": {
         "0": "SoldierJungle_Sprint_S",
-        "1": 32
+        "1": 16
       },
       "walk_left": {
         "0": "SoldierJungle_Sprint_W",
-        "1": 32
+        "1": 16
       },
       "walk_right": {
         "0": "SoldierJungle_Sprint_E",
-        "1": 32
+        "1": 16
       },
 
       "sprint_up": {
@@ -1222,19 +1222,19 @@
 
       "walk_up": {
         "0": "SoldierJungle_Sprint_N",
-        "1": 32
+        "1": 16
       },
       "walk_down": {
         "0": "SoldierJungle_Sprint_S",
-        "1": 32
+        "1": 16
       },
       "walk_left": {
         "0": "SoldierJungle_Sprint_W",
-        "1": 32
+        "1": 16
       },
       "walk_right": {
         "0": "SoldierJungle_Sprint_E",
-        "1": 32
+        "1": 16
       },
 
       "sprint_up": {
@@ -1296,19 +1296,19 @@
 
       "walk_up": {
         "0": "SoldierJungle_Sprint_N",
-        "1": 32
+        "1": 16
       },
       "walk_down": {
         "0": "SoldierJungle_Sprint_S",
-        "1": 32
+        "1": 16
       },
       "walk_left": {
         "0": "SoldierJungle_Sprint_W",
-        "1": 32
+        "1": 16
       },
       "walk_right": {
         "0": "SoldierJungle_Sprint_E",
-        "1": 32
+        "1": 16
       },
 
       "sprint_up": {
@@ -1372,19 +1372,19 @@
 
       "walk_up": {
         "0": "OgunSoldier_Sprint_N",
-        "1": 32
+        "1": 16
       },
       "walk_down": {
         "0": "OgunSoldier_Sprint_S",
-        "1": 32
+        "1": 16
       },
       "walk_left": {
         "0": "OgunSoldier_Sprint_W",
-        "1": 32
+        "1": 16
       },
       "walk_right": {
         "0": "OgunSoldier_Sprint_E",
-        "1": 32
+        "1": 16
       },
 
       "sprint_up": {
@@ -1446,19 +1446,19 @@
 
       "walk_up": {
         "0": "OgunSoldier_Sprint_N",
-        "1": 32
+        "1": 16
       },
       "walk_down": {
         "0": "OgunSoldier_Sprint_S",
-        "1": 32
+        "1": 16
       },
       "walk_left": {
         "0": "OgunSoldier_Sprint_W",
-        "1": 32
+        "1": 16
       },
       "walk_right": {
         "0": "OgunSoldier_Sprint_E",
-        "1": 32
+        "1": 16
       },
 
       "sprint_up": {
@@ -1520,19 +1520,19 @@
 
       "walk_up": {
         "0": "OgunSoldier_Sprint_N",
-        "1": 32
+        "1": 16
       },
       "walk_down": {
         "0": "OgunSoldier_Sprint_S",
-        "1": 32
+        "1": 16
       },
       "walk_left": {
         "0": "OgunSoldier_Sprint_W",
-        "1": 32
+        "1": 16
       },
       "walk_right": {
         "0": "OgunSoldier_Sprint_E",
-        "1": 32
+        "1": 16
       },
 
       "sprint_up": {
@@ -1594,19 +1594,19 @@
 
       "walk_up": {
         "0": "OgunSoldier_Sprint_N",
-        "1": 32
+        "1": 16
       },
       "walk_down": {
         "0": "OgunSoldier_Sprint_S",
-        "1": 32
+        "1": 16
       },
       "walk_left": {
         "0": "OgunSoldier_Sprint_W",
-        "1": 32
+        "1": 16
       },
       "walk_right": {
         "0": "OgunSoldier_Sprint_E",
-        "1": 32
+        "1": 16
       },
 
       "sprint_up": {
@@ -1668,19 +1668,19 @@
 
       "walk_up": {
         "0": "OgunSoldier_Sprint_N",
-        "1": 32
+        "1": 16
       },
       "walk_down": {
         "0": "OgunSoldier_Sprint_S",
-        "1": 32
+        "1": 16
       },
       "walk_left": {
         "0": "OgunSoldier_Sprint_W",
-        "1": 32
+        "1": 16
       },
       "walk_right": {
         "0": "OgunSoldier_Sprint_E",
-        "1": 32
+        "1": 16
       },
 
       "sprint_up": {
@@ -1742,19 +1742,19 @@
 
       "walk_up": {
         "0": "OgunSoldier_Sprint_N",
-        "1": 32
+        "1": 16
       },
       "walk_down": {
         "0": "OgunSoldier_Sprint_S",
-        "1": 32
+        "1": 16
       },
       "walk_left": {
         "0": "OgunSoldier_Sprint_W",
-        "1": 32
+        "1": 16
       },
       "walk_right": {
         "0": "OgunSoldier_Sprint_E",
-        "1": 32
+        "1": 16
       },
 
       "sprint_up": {
@@ -1816,19 +1816,19 @@
 
       "walk_up": {
         "0": "OgunSoldier_Sprint_N",
-        "1": 32
+        "1": 16
       },
       "walk_down": {
         "0": "OgunSoldier_Sprint_S",
-        "1": 32
+        "1": 16
       },
       "walk_left": {
         "0": "OgunSoldier_Sprint_W",
-        "1": 32
+        "1": 16
       },
       "walk_right": {
         "0": "OgunSoldier_Sprint_E",
-        "1": 32
+        "1": 16
       },
 
       "sprint_up": {
@@ -1890,19 +1890,19 @@
 
       "walk_up": {
         "0": "OgunSoldier_Sprint_N",
-        "1": 32
+        "1": 16
       },
       "walk_down": {
         "0": "OgunSoldier_Sprint_S",
-        "1": 32
+        "1": 16
       },
       "walk_left": {
         "0": "OgunSoldier_Sprint_W",
-        "1": 32
+        "1": 16
       },
       "walk_right": {
         "0": "OgunSoldier_Sprint_E",
-        "1": 32
+        "1": 16
       },
 
       "sprint_up": {
@@ -1964,19 +1964,19 @@
 
       "walk_up": {
         "0": "OgunSoldier_Sprint_N",
-        "1": 32
+        "1": 16
       },
       "walk_down": {
         "0": "OgunSoldier_Sprint_S",
-        "1": 32
+        "1": 16
       },
       "walk_left": {
         "0": "OgunSoldier_Sprint_W",
-        "1": 32
+        "1": 16
       },
       "walk_right": {
         "0": "OgunSoldier_Sprint_E",
-        "1": 32
+        "1": 16
       },
 
       "sprint_up": {
