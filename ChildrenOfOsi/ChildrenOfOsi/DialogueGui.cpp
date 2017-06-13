@@ -273,6 +273,9 @@ void DialogueGui::drawGuiText()
 		if (option_str.find("Ask To Duel") != string::npos)
 			option_str = "Challenge To Duel";
 
+		if (option_str.find("Conquer") != string::npos)
+			option_str.append("'s village");
+
         GameWindow::createText(option_str,
           DialogueGui::OPTIONS_X, DialogueGui::OPTIONS_Y + (DialogueGui::LINE_SPACING * i),
           DialogueGui::OPTIONS_WIDTH, DialogueGui::OPTIONS_HEIGHT,

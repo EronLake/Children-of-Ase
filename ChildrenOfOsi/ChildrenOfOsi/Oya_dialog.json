@@ -67,7 +67,7 @@
 
     "Ask About Affinity Of": {
         "1": "Let's here what you think of the likability of HERO?",
-        "2": "I doubt you could possibly have a view on this, but how do you view the likability of HERO",
+        "2": "I doubt you could possibly have a view on this, but how do you view the likability of HERO?",
         "3": "Do you find that HERO is an agreeable person?",
         "4": "Do you find that HERO is an agreeable person?",
         "5": "Do you find that HERO is an agreeable person?"
@@ -121,13 +121,13 @@
 		"5": "You'll soon realize just how wise a choice becoming my ally was."
     },
 
-	"Advise To Conquer": {
+	/*"Advise To Conquer": {
         "1": "I believe that you should consider conquering HERO.",
         "2": "It would be a wise and strategic move to conquer HERO.",
         "3": "The wisdom I have gathered has led me to advise you to conquer HERO.",
 		"4": "I offer you my advice and urge you to try your hand at conquering HERO.",
 		"5": "I offer you my advice and urge you to try your hand at conquering HERO."
-    },
+    },*/
 
 	"Take Advice To Conquer": {
         "1": "HERO hmm. Trying to conquer their village sounds like a terrible idea. I will have no part in that.",
@@ -137,13 +137,13 @@
         "5": "I highly respect and value your opinion and I will certainly act on your insightful advice."
     },
 
-	"Advise To Ally With": {
+	/*"Advise To Ally With": {
         "1": "The knowledge I have gathered tells me that you should become allies with HERO.",
         "2": "The knowledge I have gathered tells me that you should become allies with HERO.",
         "3": "The knowledge I have gathered tells me that you should become allies with HERO.",
 		"4": "The knowledge I have gathered tells me that you should become allies with HERO.",
         "5": "The knowledge I have gathered tells me that you should become allies with HERO."
-    },
+    },*/
 
 	"Take Advice To Ally With": {
         "1": "I can't trust you or their village at present. I won't take your advice.",
@@ -221,7 +221,7 @@
         "1": "I'd like to spar with you in hopes of improving my skills a little.",
         "2": "I'd like to spar with you in hopes of improving my skills a little.",
         "3": "Would you spar with me?",
-        "4": "Please spar with me. I feel like a could gain alot from facing you.",
+        "4": "Please spar with me. I feel like I could gain alot from facing you.",
 		"5": "Please allow me to see your greatness for myself through a spar."
     },
 
@@ -234,8 +234,8 @@
     },
 
 	"Confirm Spar": {
-        "1": "I hope that you will reconsider. I really feel that I could reach greater wisdom through doing serious battle with you.",
-        "2": "I hope that you will reconsider. I really feel that I could reach greater wisdom through doing serious battle with you.",
+        "1": "I hope that you will reconsider. I really feel that I could reach greater wisdom through doing battle with you.",
+        "2": "I hope that you will reconsider. I really feel that I could reach greater wisdom through doing battle with you.",
         "3": "Well alright then. Give it your all.",
         "4": "Well alright then. Give it your all.",
         "5": "Well alright then. Give it your all."
@@ -306,9 +306,9 @@
 	},*/
 
 	"Compliment": {
-        "1": "You seem like a capable person.",
-        "2": "You seem like a capable person.",
-        "3": "You seem like a capable person.",
+        "1": "You look like you have your wits about you.",
+        "2": "You look like you have your wits about you.",
+        "3": "You look like you have your wits about you.",
 		"4": "Wisdom and strength are two words that I feel describe you perfectly.",
         "5": "I have the utmost respect for you. You are one of the most brilliant people that I know."
     },
@@ -322,16 +322,16 @@
     },
 
 	"Grovel": {
-        "1": "You look really smart and your clothes are nice.",
-        "2": "You look really smart and your clothes are nice.",
+        "1": "You look really smart and your choice of dress reflects it.",
+        "2": "You look really smart and your choice of dress reflects it.",
         "3": "Please don't be embarassed when I say this, but you are one of the strongest and best dressed warriors that I have seen.",
 		"4": "Of the many traits that people can posses, I hold wisdom in the highest regard and you seem to be one of the wisest people that I have crossed paths with.",
         "5": "Of the many traits that people can posses, I hold wisdom in the highest regard and you seem to be one of the wisest people that I have crossed paths with."
     },
 
 	"Accept Plea": {
-        "1": "Well... I... don't know if it would be wise to take your words seriously.",
-        "2": "Well... I... don't know if it would be wise to take your words seriously.",
+        "1": "Well... I... don't think it would be wise to take your words seriously.",
+        "2": "Well... I... don't think it would be wise to take your words seriously.",
         "3": "Thanks traveler.",
         "4": "I'm humbled by your words.",
         "5": "I'm humbled by your words."
@@ -474,7 +474,7 @@
     },
 
 	"Intimidate": {
-        "1": "You think you are wise, but you will get into trouble with me until you expand your knowledge.",
+        "1": "You think you are wise, but you will get into trouble until you expand your knowledge.",
         "2": "Given my experience facing many large creatures in the jungle, I suggest that you try not to anger me.",
 		"3": "Given my experience facing many large creatures in the jungle, I suggest that you try not to anger me.",
         "4": "Given my experience facing many large creatures in the jungle, I suggest that you try not to anger me.",
@@ -493,8 +493,8 @@
         "1": "Your dullness amazes me.",
         "2": "You are a third rate warrior, with a fourth rate weapon.",
 		"3": "You are a third rate warrior, with a fourth rate weapon.",
-        "4": "You are a third rate warrior, with a fourth rate weapon.",
-        "5": "You are a third rate warrior, with a fourth rate weapon."
+        "4": "You seem like you have never made a wise decision in your life.",
+        "5": "You seem like you have never made a wise decision in your life."
     },
 
 	"Defend Self": {
