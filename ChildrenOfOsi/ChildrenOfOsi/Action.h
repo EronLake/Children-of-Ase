@@ -8,23 +8,27 @@ class ActionExecFunctions;
 
 class Action
 {
-	
+
 public:
 	Action();
-	Action(Hero* owner, Hero* receiver, Hero* doer, int utility,int why, std::string name, std::string _exe_name);
+	Action(Hero* owner, Hero* receiver, Hero* doer, int utility, int why, std::string name, std::string _exe_name);
 	~Action();
-	
+
 
 	vector<std::shared_ptr<Preconditions>> req_preconds;
 	vector<vector<std::shared_ptr<Preconditions>>> op_preconds;
 
-	vector<std::shared_ptr<Postcondition>> succ_postconds;
-	vector<std::shared_ptr<Postcondition>> fail_postconds;
+	vector<std::shared_ptr<Postcondition>> doer_succ_postconds;
+	vector<std::shared_ptr<Postcondition>> doer_fail_postconds;
 
-	void applyUtiliites(bool ifsucc);
+	//STILL NEED TO WRITE THE APPLY POSTCONDITIONS FUNCTION FOR THESE
+	vector<std::shared_ptr<Postcondition>> receiver_succ_postconds;
+	vector<std::shared_ptr<Postcondition>> receiver_fail_postconds;
+
+	void apply_postconditions(bool ifsucc);
 
 	void setUtility(int u) { utility = u; };
-	int getUtility() { return utility; }; //NEED TO CHANGE SO THAT IT USESES THE SUCC_POST CONDITIONS
+	int getUtility() { return utility; };
 	void setReceiver(Hero* h) { receiver = h; recieverName = h->name; };
 	Hero* getReceiver() { return receiver; };
 
@@ -40,10 +44,18 @@ public:
 	void setName(string n) { name = n; };
 	string getName() { return name; };
 
+
+
 	Personality* multipliers;
 	void setMultipliers(int a, int k, int h, int p, int r, int e, int g);
 
-	
+	Personality* str_mult;
+	void set_str_mult(int a, int k, int h, int p, int r, int e, int g);
+	Personality* aff_mult;
+	void set_aff_mult(int a, int k, int h, int p, int r, int e, int g);
+	Personality* noto_mult;
+	void set_noto_mult(int a, int k, int h, int p, int r, int e, int g);
+
 	bool operator==(const Action a) const;
 
 	void setWhy(int w) { why = w; };
@@ -57,10 +69,13 @@ public:
 
 	int time_stamp; // don't initialize here (get initialized when the action begins/memory gets created)
 
-	void (*execute_ptr)(Action* cur_action);
-	void execute() { execute_ptr(this); };
+	std::string exe_name; //need to store this value so the player can copy actions from hero's action tables
+	void(*execute_ptr)(Action* cur_action);	//points to a function im ActionExcFunctions.cpp
+	void execute() { execute_ptr(this);};	//this cals the function that execute ptr points to
 
 	bool executed = false;
+
+	bool optional_fufilled_check(Hero* o, Hero* h);
 
 private:
 	//std::string name;
@@ -71,6 +86,7 @@ private:
 	Hero* receiver;
 	Hero* doer;
 
+	vector<std::string> add_no_repeats(vector<std::string> v, string s);
 	//std::vector<RelPrerec*> rel_prerec_list;
 	//std::vector<RelAssumpPrerec*> rel_assump_prerec_list;
 	//std::vector<TimePrerec*> time_prerec_list;

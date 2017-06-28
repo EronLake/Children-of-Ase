@@ -5,6 +5,7 @@
 #include "MemoryHelper.h"
 #include "Containers.h"
 #include "ChildrenOfOsi.h"
+#include "Tag.h"
 
 
 class TagConfig
@@ -14,7 +15,7 @@ public:
 	~TagConfig();
 
 	static void import_config(ChildrenOfOsi* gameplay_func, TaskBuffer* tBuffer);
-	static void set_tag(ChildrenOfOsi* gameplay_func, TaskBuffer* tBuffer, std::string name, std::vector<std::string> topicVec);
+	static void set_tag(ChildrenOfOsi* gameplay_func, TaskBuffer* tBuffer, std::string name, std::vector<std::string> conv_points);
 
 };
 

@@ -71,8 +71,9 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>$(SolutionDir)\External Dependencies\GLEW\include;$(SolutionDir)\External Dependencies\GLFW\include;$(SolutionDir)\External Dependencies\SOIL\include;$(SolutionDir)\External Dependencies\FreeType\include;$(SolutionDir)\External Dependencies\FMOD\inc;$(SolutionDir)\External Dependencies\OpenGL Mathematics\include;$(IncludePath)</IncludePath>
-    <LibraryPath>$(SolutionDir)\External Dependencies\FMOD\lib;$(SolutionDir)\External Dependencies\GLEW\lib;$(SolutionDir)\External Dependencies\GLFW\lib;$(SolutionDir)\External Dependencies\FreeType\lib;$(SolutionDir)\External Dependencies\SOIL\lib;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(SolutionDir)\External Dependencies\JSONCPP\src\lib_json;$(SolutionDir)\External Dependencies\JSONCPP\include;$(SolutionDir)\External Dependencies\SOIL\include;$(SolutionDir)\External Dependencies\OpenGL Mathematics\include;$(SolutionDir)\External Dependencies\GLFW\include;$(SolutionDir)\External Dependencies\GLEW\include;$(SolutionDir)\External Dependencies\FreeType\include;$(SolutionDir)\External Dependencies\FMOD\inc;$(IncludePath)</IncludePath>
+    <LibraryPath>$(SolutionDir)\External Dependencies\JSONCPP\build\debug\src\lib_json;$(SolutionDir)\External Dependencies\FMOD\lib;$(SolutionDir)\External Dependencies\GLEW\lib;$(SolutionDir)\External Dependencies\GLFW\lib;$(SolutionDir)\External Dependencies\FreeType\lib;$(SolutionDir)\External Dependencies\SOIL\lib;$(LibraryPath)</LibraryPath>
+    <OutDir>$(SolutionDir)\$(Configuration)\</OutDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
@@ -81,6 +82,9 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
+    <IncludePath>$(SolutionDir)\External Dependencies\JSONCPP\src\lib_json;$(SolutionDir)\External Dependencies\JSONCPP\include;$(SolutionDir)\External Dependencies\SOIL\include;$(SolutionDir)\External Dependencies\OpenGL Mathematics\include;$(SolutionDir)\External Dependencies\GLFW\include;$(SolutionDir)\External Dependencies\GLEW\include;$(SolutionDir)\External Dependencies\FreeType\include;$(SolutionDir)\External Dependencies\FMOD\inc;$(IncludePath)</IncludePath>
+    <LibraryPath>$(SolutionDir)\External Dependencies\JSONCPP\build\debug\src\lib_json;$(SolutionDir)\External Dependencies\FMOD\lib;$(SolutionDir)\External Dependencies\GLEW\lib;$(SolutionDir)\External Dependencies\GLFW\lib;$(SolutionDir)\External Dependencies\FreeType\lib;$(SolutionDir)\External Dependencies\SOIL\lib;$(LibraryPath)</LibraryPath>
+    <OutDir>$(SolutionDir)\$(Configuration)\</OutDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
@@ -92,13 +96,14 @@
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>$(ProjectDir)\jsoncpp\json\json.h</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\boost_1_63_0;$(ProjectDir)\jsoncpp\json\json.h</AdditionalIncludeDirectories>
       <AdditionalUsingDirectories>$(ProjectDir)\json\json.h</AdditionalUsingDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>opengl32.lib;glew32s.lib;glfw3.lib;SOIL.lib;freetype271.lib;fmod_vc.lib;fmodL_vc.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>opengl32.lib;glew32s.lib;glfw3.lib;SOIL.lib;freetype271.lib;fmod_vc.lib;fmodL_vc.lib;libjsoncpp.a;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>C:\boost_1_63_0\stage\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -132,6 +137,7 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>opengl32.lib;glew32s.lib;glfw3.lib;SOIL.lib;freetype271.lib;fmod_vc.lib;fmodL_vc.lib;libjsoncpp.a;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -157,7 +163,6 @@
     <Text Include="memory_test.txt" />
     <Text Include="message_log.txt" />
     <Text Include="physics_test.txt" />
-    <Text Include="ReadMe.txt" />
     <Text Include="render_test.txt" />
     <Text Include="task_buffer_test.txt" />
   </ItemGroup>
@@ -173,32 +178,45 @@
     <ClInclude Include="Alliance.h" />
     <ClInclude Include="AudioManager.h" />
     <ClInclude Include="AudioTestSuite.h" />
+    <ClInclude Include="BabalawoConfig.h" />
     <ClInclude Include="CheckClass.h" />
     <ClInclude Include="ChildrenOfOsi.h" />
     <ClInclude Include="CombatController.h" />
     <ClInclude Include="common.h" />
     <ClInclude Include="Conditions.h" />
     <ClInclude Include="Containers.h" />
+    <ClInclude Include="ConversationLogObj.h" />
     <ClInclude Include="ConversationPoint.h" />
+    <ClInclude Include="pfl.h" />
+    <ClInclude Include="ShrineConfig.h" />
+    <ClInclude Include="SoldierConfig.h" />
+    <ClInclude Include="Tutorial.h" />
+    <ClInclude Include="ThreadManager.h" />
     <ClInclude Include="DialogueConfig.h" />
     <ClInclude Include="DialogueController.h" />
     <ClInclude Include="DialogueGui.h" />
     <ClInclude Include="DialogueHelper.h" />
     <ClInclude Include="DialougeTestSuite.h" />
     <ClInclude Include="DummyController.h" />
+    <ClInclude Include="Fight.h" />
+    <ClInclude Include="GameState.h" />
+    <ClInclude Include="HeroConfig.h" />
     <ClInclude Include="HUD.h" />
     <ClInclude Include="Party.h" />
     <ClInclude Include="PartyManager.h" />
+    <ClInclude Include="PlayerActExecFunctions.h" />
+    <ClInclude Include="QuestManager.h" />
     <ClInclude Include="Region.h" />
+    <ClInclude Include="RegionState.h" />
     <ClInclude Include="Tag.h" />
     <ClInclude Include="TagConfig.h" />
+    <ClInclude Include="UniformGrid.h" />
     <ClInclude Include="Village.h" />
     <ClInclude Include="GameMap.h" />
     <ClInclude Include="GameWindow.h" />
     <ClInclude Include="Line.h" />
     <ClInclude Include="Point.h" />
     <ClInclude Include="RiverObj.h" />
-    <ClInclude Include="Shader.h" />
     <ClInclude Include="Personality.h" />
     <ClInclude Include="Planner.h" />
     <ClInclude Include="json-forwards.h" />
@@ -241,11 +259,24 @@
     <ClInclude Include="TextObj.h" />
     <ClInclude Include="Texture.h" />
     <ClInclude Include="Vector2f.h" />
+    <ClInclude Include="VillagerConfig.h" />
     <ClInclude Include="War.h" />
     <ClInclude Include="WorldObj.h" />
     <ClInclude Include="Wrapper.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\External Dependencies\JSONCPP\src\lib_json\json_reader.cpp">
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">../../../ChildrenofOsi/stdafx.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">../../../ChildrenofOsi/stdafx.h</PrecompiledHeaderFile>
+    </ClCompile>
+    <ClCompile Include="..\External Dependencies\JSONCPP\src\lib_json\json_value.cpp">
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">../../../ChildrenofOsi/stdafx.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">../../../ChildrenofOsi/stdafx.h</PrecompiledHeaderFile>
+    </ClCompile>
+    <ClCompile Include="..\External Dependencies\JSONCPP\src\lib_json\json_writer.cpp">
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">../../../ChildrenofOsi/stdafx.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">../../../ChildrenofOsi/stdafx.h</PrecompiledHeaderFile>
+    </ClCompile>
     <ClCompile Include="Action.cpp" />
     <ClCompile Include="ActionConfig.cpp" />
     <ClCompile Include="ActionExecFunctions.cpp" />
@@ -257,11 +288,13 @@
     <ClCompile Include="Alliance.cpp" />
     <ClCompile Include="AudioManager.cpp" />
     <ClCompile Include="AudioTestSuite.cpp" />
+    <ClCompile Include="BabalawoConfig.cpp" />
     <ClCompile Include="CheckClass.cpp" />
     <ClCompile Include="ChildrenOfOsi.cpp" />
     <ClCompile Include="CombatController.cpp" />
     <ClCompile Include="Conditions.cpp" />
     <ClCompile Include="Containers.cpp" />
+    <ClCompile Include="ConversationLogObj.cpp" />
     <ClCompile Include="ConversationPoint.cpp" />
     <ClCompile Include="DialogueConfig.cpp" />
     <ClCompile Include="DialogueController.cpp" />
@@ -269,12 +302,21 @@
     <ClCompile Include="DialogueHelper.cpp" />
     <ClCompile Include="DialougeTestSuite.cpp" />
     <ClCompile Include="DummyController.cpp" />
+    <ClCompile Include="Fight.cpp" />
+    <ClCompile Include="HeroConfig.cpp" />
     <ClCompile Include="HUD.cpp" />
     <ClCompile Include="Party.cpp" />
     <ClCompile Include="PartyManager.cpp" />
+    <ClCompile Include="PlayerActExecFunctions.cpp" />
+    <ClCompile Include="QuestManager.cpp" />
     <ClCompile Include="Region.cpp" />
+    <ClCompile Include="RegionState.cpp" />
+    <ClCompile Include="GameState.cpp" />
+    <ClCompile Include="ShrineConfig.cpp" />
+    <ClCompile Include="SoldierConfig.cpp" />
     <ClCompile Include="Tag.cpp" />
     <ClCompile Include="TagConfig.cpp" />
+    <ClCompile Include="Tutorial.cpp" />
     <ClCompile Include="Village.cpp" />
     <ClCompile Include="GameMap.cpp" />
     <ClCompile Include="GameWindow.cpp" />
@@ -324,6 +366,7 @@
     <ClCompile Include="TextObj.cpp" />
     <ClCompile Include="Texture.cpp" />
     <ClCompile Include="Vector2f.cpp" />
+    <ClCompile Include="VillagerConfig.cpp" />
     <ClCompile Include="War.cpp" />
     <ClCompile Include="WorldObj.cpp" />
     <ClCompile Include="Wrapper.cpp" />
@@ -331,20 +374,34 @@
   <ItemGroup>
     <None Include="action_config.json" />
     <None Include="AssetInfo.h" />
+    <None Include="attack_config.json" />
+    <None Include="babalawo_config.json" />
+    <None Include="Babalawo_dialog.json" />
     <None Include="ClassDiagram.cd" />
+    <None Include="common_config.json" />
+    <None Include="config_jungle.json" />
+    <None Include="config_oasis.json" />
     <None Include="Dialogue_config.json" />
+    <None Include="hero_config.json" />
     <None Include="oasis_config.json" />
+    <None Include="Ogun_dialog.json" />
     <None Include="OpenGL Shaders\FontFragmentShader.frag.glsl" />
     <None Include="OpenGL Shaders\FontVertexShader.vert.glsl" />
     <None Include="OpenGL Shaders\StdFragmentShader.frag.glsl" />
     <None Include="OpenGL Shaders\StdVertexShader.vert.glsl" />
     <None Include="config.json" />
     <None Include="Oshosi_dialog.json" />
+    <None Include="Oya_dialog.json" />
     <None Include="script_templates.json" />
     <None Include="Shango_dialog.json" />
+    <None Include="shrine_config.json" />
+    <None Include="Shrine_dialog.json" />
     <None Include="SilverSoldier_dialog.json" />
+    <None Include="soldier_config.json" />
     <None Include="Tag_config.json" />
     <None Include="test.json" />
+    <None Include="villager_config.json" />
+    <None Include="Villager_dialog.json" />
     <None Include="Yemoja_dialog.json" />
   </ItemGroup>
   <ItemGroup>
@@ -353,4 +410,9 @@
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
+  <ProjectExtensions>
+    <VisualStudio>
+      <UserProperties config_3jungle_1json__JSONSchema="http://json.schemastore.org/config" />
+    </VisualStudio>
+  </ProjectExtensions>
 </Project>

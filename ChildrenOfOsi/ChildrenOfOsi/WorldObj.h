@@ -17,33 +17,49 @@ class WorldObj
     ID(idNum++), loc(0, 0), collision(false), type(0)
   {
 	  this->effect=Rectangle ({ 0.0F, 0.0F }, 1.0F, 1.0F );
+	  //offset_effect(0, 100, 100, 100, 100);
 	  this->body.push_back({ {0.0F, 0.0F}, 1.0F, 1.0F }); direction = 2;
 	  offset_x1 = 0.0;
 	  offset_x2 = 0.0;
 	  offset_y1 = 0.0;
 	  offset_y2 = 0.0;
+	  width = 0;
+	  height = 0;
+	  grid_location.first = -1;
+	  grid_location.second = -1;
+	//  mew = new std::mutex();
   };
 
   WorldObj(Vector2f p_topLeft, float p_width, float p_height):
     ID(idNum++), loc(p_topLeft), width(p_width), height(p_height), collision(false), type(0)
   {
 	  this->effect = Rectangle(loc, p_width, p_height);
+	  //offset_effect(0, 100, 100, 100, 100);
 	  this->body.push_back({ loc, p_width, p_height }); direction = 2;
 	  offset_x1 = 0.0;
 	  offset_x2 = 0.0;
 	  offset_y1 = 0.0;
 	  offset_y2 = 0.0;
+	  grid_location.first = -1;
+	  grid_location.second = -1;
+	  //mew = new std::mutex();
   }
 
   WorldObj(float x, float y, bool col):
     ID(idNum++), loc({x, y}), collision(col), type(0)
   {
 	  this->effect = Rectangle(loc, 1.0F, 1.0F);
+	  //offset_effect(0, 100, 100, 100, 100);
 	  this->body.push_back({ loc, 1.0F, 1.0F }); direction = 2;
 	  offset_x1 = 0.0;
 	  offset_x2 = 0.0;
 	  offset_y1 = 0.0;
 	  offset_y2 = 0.0;
+	  width = 0;
+	  height = 0;
+	  grid_location.first = -1;
+	  grid_location.second = -1;
+	  //mew = new std::mutex();
   }
 
   virtual ~WorldObj() = default;
@@ -82,8 +98,10 @@ class WorldObj
   void setRotY(float y) { this->rotation.setYloc(y); };
   void shiftRotX(float dist) { this->rotation.shiftXloc(dist); };
   void shiftRotY(float dist) { this->rotation.shiftYloc(dist); };
-  void setWidth(float w) { this->body[0].setWidth(this->width = w); this->effect.setWidth(w); };
-  void setHeight(float h) { this->body[0].setHeight(this->height = h); this->effect.setHeight(h);};
+  void setWidth(float w) { //std::lock_guard<std::mutex> guard(*this->mew); 
+	  this->body[0].setWidth(this->width = w); this->effect.setWidth(w); };
+  void setHeight(float h) { //std::lock_guard<std::mutex> guard(*this->mew);
+	  this->body[0].setHeight(this->height = h); this->effect.setHeight(h);};
 
   // Higher-level setter methods
   void setID(int i) { ID=i; };
@@ -96,6 +114,7 @@ class WorldObj
 
   // Higher-level setters cont.
   void offsetBody(int i, float x1, float x2, float y1, float y2);
+  void offset_effect(int i, float x1, float x2, float y1, float y2);
   void drawObj(float _x, float _y);
   void animateObj() { this->sprite.animate(); };
 
@@ -106,6 +125,7 @@ class WorldObj
   // String conversion
   void _print();
 
+  std::pair<int, int> grid_location;
   Sprite sprite;
   vector<Rectangle> body;
   Rectangle effect;
@@ -113,8 +133,6 @@ class WorldObj
   float offset_x2 = 0.0;
   float offset_y1 = 0.0;
   float offset_y2 = 0.0;
-
-  protected:
 
   static constexpr int TYPE_ATTACK = -1;
   static constexpr int TYPE_WORLDOBJ = 0;
@@ -132,6 +150,7 @@ class WorldObj
 
   private:
 
+ // std::mutex* mew;
   static int idNum;
 
   Vector2f loc;

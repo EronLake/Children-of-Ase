@@ -17,7 +17,7 @@ private:
 	int str_counter;
 	int str_max_change;
 
-	bool changed;
+	int changed;
 
 public:
 	Relationship();
@@ -32,17 +32,17 @@ public:
 	void setStrength(int s);
 	void addStrength(int s);
 	int getStrength();
-	bool isChanged() { return changed; };
-	void setChanged(bool c) { changed = c; };
+	int isChanged() { return changed; };
+	void setChanged(int c) { changed = c; };
 
 	
 	void setAffEstimate(int a) { affEstimate = a; };
-	void addAffEstimate(int a) { affEstimate += a; };
+	void addAffEstimate(int a) {affEstimate += a; if (affEstimate > 100) { affEstimate = 100; }else if (affEstimate < 0)affEstimate = 0;};
 	int getAffEstimate() { return affEstimate; };
 	void setNotorEstimate(int n) { notorEstimate = n; };
-	void addNotorEstimate(int n) { notorEstimate += n; };
+	void addNotorEstimate(int n) { notorEstimate += n; if (notorEstimate > 100) { notorEstimate = 100; }else if (notorEstimate < 0)notorEstimate = 0;};
 	int getNotorEstimate() { return notorEstimate; };
 	void setStrEstimate(int s) { strEstimate = s; };
-	void addStrEstimate(int s) { strEstimate += s; };
+	void addStrEstimate(int s) { strEstimate += s; if (strEstimate > 100) { strEstimate = 100; }else if (strEstimate < 0)strEstimate = 0;};
 	int getStrEstimate() { return strEstimate; };
 };

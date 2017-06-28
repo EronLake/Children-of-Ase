@@ -34,12 +34,23 @@ public:
 	//------------------------------------
 	//these functions are for initializing the memory pool
 	MemNode* init_pool(MemoryPool *p, size_t bsize);
+
+	static MemNode* s_init_pool(MemoryPool *p, size_t bsize);
+
 	size_t get_free_pool_size(MemoryPool* p);
+
+	static size_t s_get_free_pool_size(MemoryPool* p);
+
 	void destroy_pool(MemoryPool* p);
 	MemoryPool* create_pool(size_t sizeInBytes);
 	void destroy_MemNode_list(MemNode* head_ptr);
 	MemNode* make_Available(MemNode* head_ptr, MemoryPool* p, std::string key);
+	
 	void* find_available_block(MemNode* head_ptr, std::string str);
+	//static version so task.cpp can use it
+	static void* s_find_available_block(MemNode* head_ptr);
+	//helper function
+	static MemNode* make_all_available(MemNode* head_ptr);
 
 	void fill_mem_pool(MemNode* head_ptr, int hero_name);
 

@@ -72,8 +72,10 @@ license you like.
 
 
 
-
+#include "stdafx.h"
 #include "json.h"
+#include <json/json.h>
+#include <json/config.h>
 
 
 // //////////////////////////////////////////////////////////////////////
@@ -84,7 +86,7 @@ license you like.
 // Distributed under MIT license, or public domain if desired and
 // recognized in your jurisdiction.
 // See file LICENSE for detail or copy at http://jsoncpp.sourceforge.net/LICENSE
-
+#ifndef JSON_VALUE_INCLUDED
 #ifndef LIB_JSONCPP_JSON_TOOL_H_INCLUDED
 # define LIB_JSONCPP_JSON_TOOL_H_INCLUDED
 
@@ -1773,6 +1775,8 @@ Value::CZString::isStaticString() const
  * memset( this, 0, sizeof(Value) )
  * This optimization is used in ValueInternalMap fast allocator.
  */
+
+
 Value::Value( ValueType type )
    : type_( type )
    , allocated_( 0 )
@@ -1838,7 +1842,8 @@ Value::Value( Int value )
    value_.int_ = value;
 }
 
-#endif // if defined(JSON_HAS_INT64)
+
+// if defined(JSON_HAS_INT64)
 
 
 Value::Value( Int64 value )
@@ -1861,6 +1866,7 @@ Value::Value( UInt64 value )
 {
    value_.uint_ = value;
 }
+#endif 
 
 Value::Value( double value )
    : type_( realValue )
@@ -1893,8 +1899,7 @@ Value::Value( const char *beginValue,
    , itemIsUsed_( 0 )
 #endif
 {
-   value_.string_ = duplicateStringValue( beginValue, 
-                                          (unsigned int)(endValue - beginValue) );
+   value_.string_ = duplicateStringValue( beginValue, (unsigned int)(endValue - beginValue) );
 }
 
 
@@ -3157,6 +3162,7 @@ Value::end()
 }
 
 
+
 // class PathArgument
 // //////////////////////////////////////////////////////////////////
 
@@ -4224,7 +4230,7 @@ std::ostream& operator<<( std::ostream &sout, const Value &root )
 // End of content of file: src/lib_json/json_writer.cpp
 // //////////////////////////////////////////////////////////////////////
 
-
+#endif
 
 
 

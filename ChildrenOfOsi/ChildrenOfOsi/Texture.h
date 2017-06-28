@@ -12,6 +12,10 @@
 #include "GLEW\glew.h"
 #include "GLFW/glfw3.h"
 #include "SOIL/SOIL.h"
+#include <iostream>
+#include <chrono>
+#include <thread> 
+#include <mutex> 
 
 class Texture
 {
@@ -24,16 +28,14 @@ class Texture
     imageFile(fileName), width(w), height(h), frames(frames), frameWidth(width) {}
   ~Texture() = default;
 
-  static std::vector<GLuint> textureId;
   static int textureSize;
 
-  int getId() const { return this->txId; }
+  GLuint getId() const { return this->txId; }
   std::string getFile() const { return this->imageFile; }
   int getWidth() const { return this->width; }
   int getHeight() const { return this->height; }
   int getFrames() const { return this->frames; }
   int getFrameWidth() const { return this->frameWidth; }
-  unsigned char * getImage() const { return this->image; }
   bool getAnimated() const { return this->animated; }
 
   void setFile(const std::string& fileName, int f);
@@ -47,13 +49,12 @@ class Texture
 
   private:
 
-  int txId;
+  GLuint txId;
   std::string imageFile;
 
   int width, height;
   int frames, frameWidth;
 
-  unsigned char *image;
   bool animated;
 };
 

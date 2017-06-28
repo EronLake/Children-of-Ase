@@ -7,6 +7,9 @@ using namespace std;
 #include "SoundSystem.h"
 #include <map>
 #include <string>
+
+bool start = true;
+
 typedef FMOD::Sound* SoundClass;
 FMOD_RESULT result;
 
@@ -32,65 +35,109 @@ FMOD_RESULT result;
 		}
 		
 		// Initialize our Instance with 36 Channels
-		m_pSystem->init(36, FMOD_INIT_NORMAL, 0);
-		string oasis = "RegionThemes/DesertRegion.flac";
-		string jungle = "RegionThemes/JungleRegion.flac";
-		string mountain= "RegionThemes/MountainRegion.flac";
-		string ogun = "RegionThemes/OgunRegion.flac";
+		result = m_pSystem->init(32, FMOD_INIT_NORMAL, 0);
 
-		string bump = "SFX/bump_0.wav";
-		string walk = "SFX/walk_loop.wav";
-		string swing= "SFX/swing.wav";
-		string hit = "SFX/hit.wav";
-		
-		
-		
+		/*string Desert = "Music/RegionThemes/DesertRegion.flac";
+		string Jungle = "Music/RegionThemes/JungleRegion.flac";
+		string Mountain = "Music/RegionThemes/MountainRegion.flac";
+		string Marsh = "Music/RegionThemes/MarshRegion.flac";
+		string Yemoja = "Music/HeroThemes/Yemoja.flac";
+		string Oya = "Music/HeroThemes/Oya.flac";
+		string Ogun = "Music/HeroThemes/Ogun.flac";
+		string Oshosi = "Music/HeroThemes/Oshosi.flac";
 
-		SoundClass oasisAddress = nullptr;
-		SoundClass jungleAddress = nullptr;
-		SoundClass mountainAddress = nullptr;
-		SoundClass ogunAddress = nullptr;
+		SoundClass DesertAddress = nullptr;
+		SoundClass JungleAddress = nullptr;
+		SoundClass MountainAddress = nullptr;
+		SoundClass MarshAddress = nullptr;
+		SoundClass OgunAddress = nullptr;
+		SoundClass OyaAddress = nullptr;
+		SoundClass YemojaAddress = nullptr;
+		SoundClass OshosiAddress = nullptr;
 
+		this->createMusic(&DesertAddress, Desert);
+		this->createMusic(&JungleAddress, Jungle);
+		this->createMusic(&MountainAddress, Mountain);
+		this->createMusic(&MarshAddress, Marsh);
+		this->createMusic(&OgunAddress, Ogun);
+		this->createMusic(&OyaAddress, Oya);
+		this->createMusic(&YemojaAddress, Yemoja);
+		this->createMusic(&OshosiAddress, Oshosi);
+
+		sounds[Desert] = DesertAddress;
+		sounds[Jungle] = JungleAddress;
+		sounds[Mountain] = MountainAddress;
+		sounds[Marsh] = MarshAddress;
+		sounds[Yemoja] = YemojaAddress;
+		sounds[Ogun] = OgunAddress;
+		sounds[Oya] = OyaAddress;
+		sounds[Oshosi] = OshosiAddress;*/
+
+		string bump = "../ChildrenofOsi/SFX/bump_0.wav";
+		string walk = "../ChildrenofOsi/SFX/walk_0.wav";
+		string swing = "../ChildrenofOsi/SFX/swing.wav";
+		string hit = "../ChildrenofOsi/SFX/hit.wav";
+		string up = "../ChildrenofOsi/SFX/up.wav";
+		string down = "../ChildrenofOsi/SFX/down.wav";
+		string page = "../ChildrenofOsi/SFX/page.wav";
+		string talk = "../ChildrenofOsi/SFX/talk.wav";
+		
 		SoundClass bumpAddress = nullptr;
 		SoundClass walkAddress = nullptr;
 		SoundClass swingAddress = nullptr;
 		SoundClass hitAddress = nullptr;
-		
-
-		this->createSound(&oasisAddress, oasis);
-		this->createSound(&jungleAddress, jungle);
-		this->createSound(&mountainAddress, mountain);
-		this->createSound(&ogunAddress, ogun);
+		SoundClass upAddress = nullptr;
+		SoundClass downAddress = nullptr;
+		SoundClass pageAddress = nullptr;
+		SoundClass talkAddress = nullptr;
 
 		this->createSound(&bumpAddress, bump);
 		this->createSound(&walkAddress, walk);
 		this->createSound(&swingAddress, swing);
 		this->createSound(&hitAddress, hit);
-		
+		this->createSound(&upAddress, up);
+		this->createSound(&downAddress, down);
+		this->createSound(&pageAddress, page);
+		this->createSound(&talkAddress, talk);
 
-		sounds[oasis] = oasisAddress;
-		sounds[jungle] = jungleAddress;
-		sounds[mountain] = mountainAddress;
-		sounds[ogun] = ogunAddress;
+		
 
 		sounds[bump] = bumpAddress;
 		sounds[walk] = walkAddress;
 		sounds[swing] = swingAddress;
 		sounds[hit] = hitAddress;
-
+		sounds[up] = upAddress;
+		sounds[down] = downAddress;
+		sounds[page] = pageAddress;
+		sounds[talk] = talkAddress;
 	}
 
 	SoundSystem::~SoundSystem() {
 		LOG("SoundSystem Destructed");
 	}
 
-	void SoundSystem::createSound(SoundClass *pSound, string pFile)
+	void SoundSystem::createMusic(SoundClass* const & pSound, string pFile)
+	{
+		auto sound = sounds.find(pFile);
+		if (sound != sounds.end()) {
+			if (sounds[pFile] != nullptr)
+				return;
+		}; //Sound already loaded
+
+		result = m_pSystem->createSound(pFile.c_str(), FMOD_CREATESTREAM|FMOD_LOWMEM, 0, pSound);//fmod createSound takes (const char *name_or_data, FMOD_MODE mode, FMOD_CREATESOUNDEXINFO *exinfo, FMOD::Sound **sound)
+		//////cout << FMOD_ErrorString(result) << endl;
+
+		if (pSound) {
+			sounds[pFile] = *pSound;
+		}
+	}
+	void SoundSystem::createSound(SoundClass* const & pSound, string pFile)
 	{
 		auto sound = sounds.find(pFile);
 		if (sound != sounds.end()) return; //Sound already loaded
 
-		result = m_pSystem->createSound(pFile.c_str(), FMOD_DEFAULT, 0, pSound);//fmod createSound takes (const char *name_or_data, FMOD_MODE mode, FMOD_CREATESOUNDEXINFO *exinfo, FMOD::Sound **sound)
-		////cout << FMOD_ErrorString(result) << endl;
+		result = m_pSystem->createSound(pFile.c_str(), FMOD_DEFAULT | FMOD_LOWMEM, 0, pSound);//fmod createSound takes (const char *name_or_data, FMOD_MODE mode, FMOD_CREATESOUNDEXINFO *exinfo, FMOD::Sound **sound)
+																					 //////cout << FMOD_ErrorString(result) << endl;
 
 		if (pSound) {
 			sounds[pFile] = *pSound;
@@ -107,37 +154,78 @@ FMOD_RESULT result;
 			pSound->setLoopCount(-1);
 		}
 
-		
 
 		result = m_pSystem->playSound(pSound,0, ispaused, &channel); //fmod playsound takes  (FMOD::Sound *sound,FMOD::ChannelGroup *channelgroup, bool paused, FMOD::Channel **channel)
 		channel->setVolume(volume);
-		channel->setPaused(false);
 		
+		channel->setPaused(false);
+		channel->setPriority(255);
 		if (bLoop){
 		channel->setLoopCount(-1);
 		}
-		////cout << FMOD_ErrorString(result) << endl;
+		//////cout << FMOD_ErrorString(result) << endl;
 	};
-	void SoundSystem::playMusic(SoundClass pSound, bool bLoop, FMOD::Channel*& channel, bool ispaused, float volume)
+	void SoundSystem::playMusic(SoundClass pSound, bool bLoop, FMOD::Channel*& channel, bool ispaused, float volume, RegionState::soundType type)
 	{
 		if (!bLoop)
-			pSound->setMode(FMOD_LOOP_OFF);
+			pSound->setMode(FMOD_LOOP_OFF| FMOD_CREATESTREAM | FMOD_LOWMEM);
 		else
 		{
-			pSound->setMode(FMOD_LOOP_NORMAL);
+			pSound->setMode(FMOD_LOOP_NORMAL| FMOD_CREATESTREAM | FMOD_LOWMEM);
 			pSound->setLoopCount(-1);
 		}
 			
-
+	
 
 		result = m_pSystem->playSound(pSound, 0, ispaused, &channel); //fmod playsound takes  (FMOD::Sound *sound,FMOD::ChannelGroup *channelgroup, bool paused, FMOD::Channel **channel)
 		channel->setVolume(volume);
+		unsigned long long dspclock;
+		int rate;
+		result = channel->getSystemObject(&m_pSystem);                        // OPTIONAL : Get System object
+		result = m_pSystem->getSoftwareFormat(&rate, 0, 0);                // Get mixer rate
+		result = channel->getDSPClock(0, &dspclock);
+		if (type == RegionState::soundType::region_music) {
+			                  // Get the reference clock, which is the parent channel group   
+			// Add a fade point at 'now' with full volume.
+			result = channel->setDelay(dspclock + (rate * 3), 0, false);
+			result = channel->addFadePoint(dspclock + (rate * 3), 0.0f);
+			result = channel->addFadePoint(dspclock + (rate * 6), volume); // Add a fade point 5 seconds later at 0 volume.
+		}
+
 		channel->setPaused(false);
 		channel->setPriority(0);
 		if (bLoop) {
 			channel->setLoopCount(-1);
 		}
-		////cout << FMOD_ErrorString(result) << endl;
+		//////cout << FMOD_ErrorString(result) << endl;
+	};
+	void SoundSystem::playInitialMusic(SoundClass pSound, bool bLoop, FMOD::Channel*& channel, bool ispaused, float volume, RegionState::soundType type)
+	{
+		if (!bLoop)
+			pSound->setMode(FMOD_LOOP_OFF | FMOD_CREATESTREAM | FMOD_LOWMEM);
+		else
+		{
+			pSound->setMode(FMOD_LOOP_NORMAL | FMOD_CREATESTREAM | FMOD_LOWMEM);
+			pSound->setLoopCount(-1);
+		}
+
+
+
+		result = m_pSystem->playSound(pSound, 0, ispaused, &channel); //fmod playsound takes  (FMOD::Sound *sound,FMOD::ChannelGroup *channelgroup, bool paused, FMOD::Channel **channel)
+		channel->setVolume(volume);
+		unsigned long long dspclock;
+		int rate;
+		result = channel->getSystemObject(&m_pSystem);                        // OPTIONAL : Get System object
+		result = m_pSystem->getSoftwareFormat(&rate, 0, 0);                // Get mixer rate
+		result = channel->getDSPClock(0, &dspclock);
+	
+
+		channel->setPaused(false);
+		channel->setPriority(0);
+		if (bLoop) {
+			channel->setLoopCount(-1);
+		}
+		//////cout << FMOD_ErrorString(result) << endl;
 	};
 	void SoundSystem::playAmbient(SoundClass pSound, bool bLoop, FMOD::Channel*& channel, bool ispaused, float volume)
 	{
@@ -158,224 +246,69 @@ FMOD_RESULT result;
 		if (bLoop) {
 			channel->setLoopCount(-1);
 		}
-		////cout << FMOD_ErrorString(result) << endl;
+		//////cout << FMOD_ErrorString(result) << endl;
 	};
 	void SoundSystem::releaseSound(SoundClass pSound)
 	{
 		pSound->release();
+		for (auto it : sounds) {
+			if (it.second == pSound) {
+				SoundClass new_sound = nullptr;
+				sounds[it.first] = new_sound;
+			}
+		}
 	};
-	int SoundSystem::playSong1() {
-		foo::soundType type;
-		FMOD::Sound* soundSample;
-		const char* name;              //the variables required
 
-		chnls[0] = nullptr;
-		bool ispaused;
-		unsigned int time;
-
-		// Initialize our sound system
 	
+	int SoundSystem::playSong(std::string name, RegionState::soundType type) {
 		
-		type = foo::soundType::music;
-		std::string _name;
-		_name = "RegionThemes/DesertRegion.flac";
-		name = _name.c_str();
-		channels[name] = &chnls[0];//assign the channel
 		
-		ispaused = true;
-
-		//this->createSound(&soundSample, name);// Create the sound
-		//soundSample->getLength(&time, FMOD_TIMEUNIT_PCM);// Find the length
-
-														 //SoundObject* playable = new SoundObject("04.wav", &soundSample, type);
-														 //object stuff
-
-
-		playMusic(sounds[name], true, chnls[0], ispaused,.6);
-		
-		// Play the sound, with loop mode
-
-
-		//////cout << "Press return to quit." << endl;  // Do something meanwhile...
-		//cin.get();
-
-		//releaseSound(sounds[name]); 
-		return 0;// Release the sound
-	};
-	int SoundSystem::playSong2() {
-		foo::soundType type;
-		FMOD::Sound* soundSample;
-		const char* name;              //the variables required
-
-		chnls[0] = nullptr;
-		bool ispaused;
+		FMOD::Channel* channel = nullptr;
+		chnls[0] = channel;
+		bool ispaused = true;
 		unsigned int time;
-
-		// Initialize our sound system
-
-
-		type = foo::soundType::music;
-		name = "Children of Osi Sketch 2.mp3";
-		channels[name] = &chnls[0];//assign the channel
-
-		ispaused = true;
-
-		//this->createSound(&soundSample, name);// Create the sound
-		//soundSample->getLength(&time, FMOD_TIMEUNIT_PCM);// Find the length
-
-		//SoundObject* playable = new SoundObject("04.wav", &soundSample, type);
-		//object stuff
-
-
-		playMusic(sounds[name], true, chnls[0], ispaused, .6);
-
-		// Play the sound, with loop mode
-
-
-		//////cout << "Press return to quit." << endl;  // Do something meanwhile...
-		//cin.get();
-
-		//releaseSound(sounds[name]); 
-		return 0;// Release the sound
-	};
-	int SoundSystem::playSong(std::string _name) {
-		foo::soundType type;
-		FMOD::Sound* soundSample;
-		const char* name;              //the variables required
-
-		chnls[0] = nullptr;
-		bool ispaused;
-		unsigned int time;
-
-		// Initialize our sound system
-
-
-		type = foo::soundType::music;
-		name = _name.c_str();
-		channels[name] = &chnls[0];//assign the channel
-
-		ispaused = true;
-
-		//this->createSound(&soundSample, name);// Create the sound
-		//soundSample->getLength(&time, FMOD_TIMEUNIT_PCM);// Find the length
-
-		//SoundObject* playable = new SoundObject("04.wav", &soundSample, type);
-		//object stuff
-
-
-		playMusic(sounds[name], true, chnls[0], ispaused, .6);
-
-		// Play the sound, with loop mode
-
-
-		//////cout << "Press return to quit." << endl;  // Do something meanwhile...
-		//cin.get();
-
-		//releaseSound(sounds[name]); 
+		if (type == RegionState::soundType::region_music) {
+			channels[name.c_str()] = &chnls[0];//assign the channel
+			SoundClass sound = nullptr;
+			this->createMusic(&sound, name);
+			if (start) {
+				playInitialMusic(sounds[name], true, chnls[0], ispaused, 1, type);
+				start = false;
+			}
+			else {
+				playMusic(sounds[name], true, chnls[0], ispaused, 1, type);
+				
+			}
+		}
+		else if (type == RegionState::soundType::theme_music) {
+			channels[name.c_str()] = &chnls[0];//assign the channel
+			SoundClass sound = nullptr;
+			this->createMusic(&sound, name);
+			playMusic(sounds[name], true, chnls[0], ispaused, 1,type);
+		}
+		else
+			return 1;
 		return 0;// Release the sound
 	}
-	int SoundSystem::playSound(std::string _name) {
-		foo::soundType type;
-		FMOD::Sound* soundSample;
-		const char* name;              //the variables required
-
-		chnls[1] = nullptr;
-		bool ispaused;
+	int SoundSystem::playSound(std::string name, RegionState::soundType type) {
+		int channel = rand() %27 +5;
+		chnls[channel] = nullptr;
+		bool ispaused = true;
 		unsigned int time;
-
-		// Initialize our sound system
-
-
-		type = foo::soundType::music;
-		name = _name.c_str();
-		channels[name] = &chnls[1];//assign the channel
-
-		ispaused = false;
-
-		//this->createSound(&soundSample, name);// Create the sound
-		//soundSample->getLength(&time, FMOD_TIMEUNIT_PCM);// Find the length
-
-		//SoundObject* playable = new SoundObject("04.wav", &soundSample, type);
-		//object stuff
-
-
-		playSound(sounds[name], false, chnls[1], ispaused, 1.2);
-
-		// Play the sound, with loop mode
-
-
-		//////cout << "Press return to quit." << endl;  // Do something meanwhile...
-		//cin.get();
-
-		//releaseSound(sounds[name]); 
+		if (type == RegionState::soundType::sfx) {
+			channels[name.c_str()] = &chnls[channel];//assign the channel
+			playSound(sounds[name], false, chnls[channel], ispaused, .6);
+		}
+		else if (type == RegionState::soundType::ambient_sfx) {
+			channels[name.c_str()] = &chnls[channel];//assign the channel
+			playAmbient(sounds[name], false, chnls[channel], ispaused, .6);
+		}
+		else
+			return 1;
 		return 0;// Release the sound
 	}
-	int SoundSystem::playBump() {
-		foo::soundType type;
-		FMOD::Sound* soundSample;
-		const char* name;              //the variables required
-		chnls[1] = nullptr;
-		bool ispaused;
-		unsigned int time;
-
-		// Initialize our sound system
 	
-
-		type = foo::soundType::music;
-		name = "bump_0.wav";
-		channels[name] = &chnls[1];//assign the channel
-		ispaused = false;
-
-		//this->createSound(&soundSample, name);// Create the sound
-		//soundSample->getLength(&time, FMOD_TIMEUNIT_PCM);// Find the length
-
-		//SoundObject* playable = new SoundObject("04.wav", &soundSample, type);
-		//object stuff
-
-
-		playSound(sounds[name], false, chnls[1], ispaused,1.5); 	// Play the sound, with loop mode
-
-
-															//////cout << "Press return to quit." << endl;  // Do something meanwhile...
-															//cin.get();
-
-															//releaseSound(sounds[name]); 
-		return 0;// Release the sound
-	};
-	int SoundSystem::playWalk() {
-		foo::soundType type;
-		FMOD::Sound* soundSample;
-		const char* name;              //the variables required
-
-		chnls[2] = nullptr;
-		bool ispaused;
-		unsigned int time;
-
-		// Initialize our sound system
-
-
-		type = foo::soundType::music;
-		name = "SFX/walk_loop.wav";
-		channels[name] = &chnls[2];//assign the channel
-		ispaused = true;
-
-		//this->createSound(&soundSample, name);// Create the sound
-		//soundSample->getLength(&time, FMOD_TIMEUNIT_PCM);// Find the length
-
-		//SoundObject* playable = new SoundObject("04.wav", &soundSample, type);
-		//object stuff
-
-
-		playAmbient(sounds[name], true, chnls[2], ispaused,.4); 	
-// Play the sound, with loop mode
-
-
-															//////cout << "Press return to quit." << endl;  // Do something meanwhile...
-															//cin.get();
-
-															//releaseSound(sounds[name]); 
-		return 0;// Release the sound
-	};
+	
 	int SoundSystem::pauseSound(string name) {
 	            //the variables required
 
@@ -391,7 +324,7 @@ FMOD_RESULT result;
 
 		}
 		
-																//////cout << "Press return to quit." << endl;  // Do something meanwhile...
+																////////cout << "Press return to quit." << endl;  // Do something meanwhile...
 																//cin.get();
 
 																//releaseSound(sounds[name]); 
@@ -412,38 +345,54 @@ FMOD_RESULT result;
 		return 0;
 	};
 	
-	
-	/*void SoundSystem::playSoundObject(SoundObject sound)
+	int SoundSystem::changeSoundSource(char* from, char* to, RegionState::soundType type)
 	{
-		FMOD::Sound* soundSample = sound.getSound();
-		SoundSystem::createSound(&soundSample, sound.getName());
-		bool bLoop = false;
-		SoundSystem::playSound(sound.getSound(), bLoop);
-		if (bLoop == false){
-			// then wait until over and remove
-			SoundSystem::releaseSound(sound.getSound());
+
+
+		if (from == nullptr) {
+			playSong(to, type);
+			return 0;
 		}
-		
-
-	};*/
-	int SoundSystem::changeSoundSource(char* from, char* to)
-	{
-		
-		FMOD::Channel* channel;
-		string name = from;
-		if ((channels[from])) {
-			channel = *(channels[from]);
-			bool playing = false;
-			bool* isplaying = &playing;
-			channel->isPlaying(isplaying);
-			if (*isplaying) {
-				channel->stop();
-				playSong(to);
-
-			//then play new sound
+		if (type == RegionState::soundType::region_music) {
+			int t = stopSound(from);
+			
+			if (t ==  0) {
+				
+				playSong(to, type);
+				return 0;
+			}
+			else
+			{
+				return 1;
 			}
 		}
-		return 0;
+		else if (type == RegionState::soundType::theme_music) {
+
+			FMOD::Channel* channel;
+			string name = from;
+			if ((channels[from])) {
+				channel = *(channels[from]);
+				bool playing = false;
+				bool* isplaying = &playing;
+				channel->isPlaying(isplaying);
+				if (*isplaying) {
+					channel->stop();
+					releaseSound(sounds[name]);
+					playSong(to, type);
+
+
+					//then play new sound
+				}
+				else
+					return 1;
+			}
+			else
+				return 1;
+		}
+		else
+			return 1;
+		
+	
 	};
 	int SoundSystem::stopSound(string name)
 	{
@@ -454,31 +403,21 @@ FMOD_RESULT result;
 			bool* isplaying = &playing;
 			channel->isPlaying(isplaying);
 			if (*isplaying) {
-				channel->stop();
+				unsigned long long dspclock;
+				int rate;
+				result = channel->getSystemObject(&m_pSystem);                        // OPTIONAL : Get System object
+				result = m_pSystem->getSoftwareFormat(&rate, 0, 0);                // Get mixer rate
+				result = channel->getDSPClock(0, &dspclock);                    // Get the reference clock, which is the parent channel group
+				result = channel->addFadePoint(dspclock, 1.0f);                 // Add a fade point at 'now' with full volume.
+				result = channel->addFadePoint(dspclock + (rate * 3), 0.0f);    // Add a fade point 5 seconds later at 0 volume.
+				result = channel->setDelay(0, dspclock + (rate * 3), true);
+				return 0;
 			}
+			else
+				return 1;
 		}
-		return 0;
+		else
+			return 1;
+		
 	};
 	
-	int SoundSystem::playSixers() {
-		foo::soundType type;
-		FMOD::Sound* soundSample;
-		const char* name;              //the variables required
-
-		chnls[0] = nullptr;
-		bool ispaused;
-		unsigned int time;
-
-		// Initialize our sound system
-		SoundSystem soundsystem;
-
-		type = foo::soundType::music;
-		name = "76ersAnthem.mp3";
-		channels[name] = &chnls[0];//assign the channel
-
-		ispaused = true;
-		
-		playMusic(sounds[name], true, chnls[0], ispaused, .6);
-
-		return 0;// Release the sound
-	};

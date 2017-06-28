@@ -10,12 +10,12 @@ PhysicsManager::PhysicsManager(MessageLog* _mLog, TaskBuffer* _tBuffer)
 	LOG("PhysicsManager Object Constructed");
 }
 
-PhysicsManager::PhysicsManager(MessageLog * _mLog, TaskBuffer * _tBuffer, QuadTree * _physicsQuadTree)
+PhysicsManager::PhysicsManager(MessageLog * _mLog, TaskBuffer * _tBuffer, QuadTree * _physicsQuadTree, UniformGrid<Line>* _uniformGrid, RiverObj* _rivObj, UniformGrid<WorldObj>* _worldobj_grid, ChildrenOfOsi* gameplay_func)
 	: Manager(_mLog, _tBuffer)
 {
 	LOG("PhysicsManager W/QT Object Constructed");
 	//init a movement obj 
-	moveHelper = new Movement(_physicsQuadTree);
+	moveHelper = new Movement(_physicsQuadTree, _uniformGrid, _rivObj, _worldobj_grid, gameplay_func);
 	moveHelper->manager = this;
 	
 
@@ -29,9 +29,7 @@ PhysicsManager::PhysicsManager(MessageLog * _mLog, TaskBuffer * _tBuffer, QuadTr
 	task_map["Move_Left"] = &Movement::move_left;
 	task_map["Move_Right"] = &Movement::move_right;
 	task_map["Talk"] = &Movement::talk;
-	task_map["Melee"] = &Movement::melee;
 	task_map["Attack"] = &Movement::attack;
-	task_map["Special_Attack"] = &Movement::specialAttack;
 }
 
 
@@ -53,7 +51,7 @@ void PhysicsManager::execute_task(Task* current_task)
 {
 	int result;
 	NPC* obj;
-	if (current_task->objToUpdate->getType() >= 3) {
+	if (current_task->objToUpdate->getType() >= WorldObj::TYPE_SOLDIER) {
 		if (!(obj = CheckClass::isNPC(current_task->objToUpdate))) {
 			result = 1;
 			LOG("Error: No movable object");

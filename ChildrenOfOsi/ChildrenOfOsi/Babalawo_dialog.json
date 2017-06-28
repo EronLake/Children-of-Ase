@@ -1,0 +1,124 @@
+{
+	"Oasis_Babalawo": {
+		"Response Ask For Divination": {
+			"1": "Ah... I see your destiny. It is to bring balance to this land by peaceful means. I will now restore your health and deepen your connection with your Ori.",
+			"2": "Ah... I see your destiny. It is to bring balance to this land by peaceful means. I will now restore your health and deepen your connection with your Ori.",
+			"3": "Ah... I see your destiny. It is to bring balance to this land by peaceful means. I will now restore your health and deepen your connection with your Ori.",
+			"4": "Ah... I see your destiny. It is to bring balance to this land by peaceful means. I will now restore your health and deepen your connection with your Ori.",
+			"5": "Ah... I see your destiny. It is to bring balance to this land by peaceful means. I will now restore your health and deepen your connection with your Ori."
+		},
+		"Response Inquire About Ifa": {
+			"1": "Well young one... There are sixteen major books In the Oda Ifa literary corpus.",
+			"2": "Well young one... The ori is an orisha and a metaphysical concept. It refers to one's spiritual intuition and destiny.",
+			"3": "Well young one... The ori is an orisha and a metaphysical concept. It refers to one's spiritual intuition and destiny.",
+			"4": "Well young one... There are sixteen major books In the Oda Ifa literary corpus.",
+			"5": "Well young one... There are sixteen major books In the Oda Ifa literary corpus."
+		},
+
+		"Greeting": {
+            "1": "Good day young one.",
+            "2": "Good day young one.",
+            "3": "Good day young one.",
+            "4": "Good day young one.",
+            "5": "Good day young one."
+        },
+
+		"Farewell": {
+            "1": "Until next time you seek my guidance, young one.",
+            "2": "Until next time you seek my guidance, young one.",
+            "3": "Until next time you seek my guidance, young one.",
+            "4": "Until next time you seek my guidance, young one.",
+            "5": "Until next time you seek my guidance, young one."
+        },
+
+		"No Divination": {
+            "1": "I have nothing else to divine for you.",
+            "2": "I have nothing else to divine for you.",
+            "3": "I have nothing else to divine for you.",
+            "4": "I have nothing else to divine for you.",
+            "5": "I have nothing else to divine for you."
+        }
+	},
+
+   "Jungle_Babalawo": {
+        "Response Ask For Divination": {
+			"1": "Ah... I see your destiny. It is to bring balance to this land by making a name for yourself. I will now restore your health and deepen your connection with your Ori.",
+			"2": "Ah... I see your destiny. It is to bring balance to this land by making a name for yourself. I will now restore your health and deepen your connection with your Ori.",
+			"3": "Ah... I see your destiny. It is to bring balance to this land by making a name for yourself. I will now restore your health and deepen your connection with your Ori.",
+			"4": "Ah... I see your destiny. It is to bring balance to this land by making a name for yourself. I will now restore your health and deepen your connection with your Ori.",
+			"5": "Ah... I see your destiny. It is to bring balance to this land by making a name for yourself. I will now restore your health and deepen your connection with your Ori."
+		},
+		"Response Inquire About Ifa": {
+			"1": "Well young one... ase is a philosophical concept through which we conceive the power to make things happen.",
+			"2": "Well young one... It is believed that the thoughts and actions of each person in Aye, the physical realm, interact with all other living things.",
+			"3": "Well young one... ase is a philosophical concept through which we conceive the power to make things happen.",
+			"4": "Well young one... It is believed that the thoughts and actions of each person in Aye, the physical realm, interact with all other living things.",
+			"5": "Well young one... ase is a philosophical concept through which we conceive the power to make things happen."
+		},
+
+		"Greeting": {
+            "1": "Good day young one.",
+            "2": "Good day young one.",
+            "3": "Good day young one.",
+            "4": "Good day young one.",
+            "5": "Good day young one."
+        },
+
+		"Farewell": {
+            "1": "Until next time you seek my guidance, young one.",
+            "2": "Until next time you seek my guidance, young one.",
+            "3": "Until next time you seek my guidance, young one.",
+            "4": "Until next time you seek my guidance, young one.",
+            "5": "Until next time you seek my guidance, young one."
+        },
+
+		"No Divination": {
+            "1": "I have nothing else to divine for you.",
+            "2": "I have nothing else to divine for you.",
+            "3": "I have nothing else to divine for you.",
+            "4": "I have nothing else to divine for you.",
+            "5": "I have nothing else to divine for you."
+        }
+   },
+
+   "Mountain_Babalawo": {
+        "Response Ask For Divination": {
+			"1": "Ah... I see your destiny. It is to bring balance to this land through the use of physical force. I will now restore your health and deepen your connection with your Ori.",
+			"2": "Ah... I see your destiny. It is to bring balance to this land through the use of physical force. I will now restore your health and deepen your connection with your Ori.",
+			"3": "Ah... I see your destiny. It is to bring balance to this land through the use of physical force. I will now restore your health and deepen your connection with your Ori.",
+			"4": "Ah... I see your destiny. It is to bring balance to this land through the use of physical force. I will now restore your health and deepen your connection with your Ori.",
+			"5": "Ah... I see your destiny. It is to bring balance to this land through the use of physical force. I will now restore your health and deepen your connection with your Ori."
+		},
+		"Response Inquire About Ifa": {
+			"1": "Well young one... Olodumare is known as the principle agent of creation.",
+			"2": "Well young one... During divinations, we babalawos contact Orunmila, the orisha of wisdom, prophecy and ethics in order to aid us in giving guidance.",
+			"3": "Well young one... Olodumare is known as the principle agent of creation.",
+			"4": "Well young one... During divinations, we babalawos contact Orunmila, the orisha of wisdom, prophecy and ethics in order to aid us in giving guidance.",
+			"5": "Well young one... Olodumare is known as the principle agent of creation."
+		},
+
+		"Greeting": {
+            "1": "Good day young one.",
+            "2": "Good day young one.",
+            "3": "Good day young one.",
+            "4": "Good day young one.",
+            "5": "Good day young one."
+        },
+
+		"Farewell": {
+            "1": "Until next time you seek my guidance, young one.",
+            "2": "Until next time you seek my guidance, young one.",
+            "3": "Until next time you seek my guidance, young one.",
+            "4": "Until next time you seek my guidance, young one.",
+            "5": "Until next time you seek my guidance, young one."
+        },
+
+		"No Divination": {
+            "1": "I have nothing else to divine for you.",
+            "2": "I have nothing else to divine for you.",
+            "3": "I have nothing else to divine for you.",
+            "4": "I have nothing else to divine for you.",
+            "5": "I have nothing else to divine for you."
+        }
+   }
+}

@@ -1,5 +1,7 @@
 #include "stdafx.h"
 #include "Containers.h"
+#include "Rectangle.h"
+#include "WorldObj.h"
 
 
 Containers::Containers()
@@ -50,23 +52,23 @@ void Containers::add_texture(std::string key, Texture* value)
 
 void Containers::add_memory(std::string key, int hero_name, Memory* value)
 {
-	if (hero_name = OYA)
+	if (hero_name == OYA)
 	{
 		oya_memory_table[key] = value;
 	}
-	else if (hero_name = YEMOJA)
+	else if (hero_name == YEMOJA)
 	{
 		yemoja_memory_table[key] = value;
 	}
-	else if (hero_name = OSHOSI)
+	else if (hero_name == OSHOSI)
 	{
 		oshosi_memory_table[key] = value;
 	}
-	else if (hero_name = OGUN)
+	else if (hero_name == OGUN)
 	{
 		ogun_memory_table[key] = value;
 	}
-	else if (hero_name = SHANGO)
+	else if (hero_name == SHANGO)
 	{
 		shango_memory_table[key] = value;
 	}
@@ -107,3 +109,13 @@ std::unordered_map<std::string, Memory*> Containers::shango_memory_table;
 std::unordered_map<std::string, Action*> Containers::action_table;
 std::unordered_map<std::string, Tag*> Containers::tag_table;
 std::unordered_map<std::string, ConversationPoint*> Containers::conv_point_table;
+
+std::vector<std::vector<float>> Containers::getRects() {
+	std::vector<std::vector<float>> ret;
+	Rectangle r;
+	for (auto it = Containers::worldObj_table.begin(); it != Containers::worldObj_table.end(); ++it) {
+		r = (*it).second->body[0];
+		ret.push_back({r.getX()/100,r.getY()/100,(r.getX()+r.getWidth())/100,(r.getY()+r.getHeight())/100});
+	}
+	return ret;
+}

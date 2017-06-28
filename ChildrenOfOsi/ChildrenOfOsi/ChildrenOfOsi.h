@@ -5,6 +5,8 @@
 #include "MessageLog.h"
 #include "Player.h"
 
+class MemoryHelper;
+
 class ChildrenOfOsi
 {
 private:
@@ -43,6 +45,10 @@ public:
 	void drawDiaGui(WorldObj* player);
 	void drawHUD(WorldObj* player);
 	void init_map(WorldObj* obj);
+	void drawTut(WorldObj* obj);
+	void draw_logo(WorldObj* obj);
+	void draw_talk(WorldObj* obj);
+	void draw_victory_menu(WorldObj* obj);
 
 	//functions for creating objects in memory
 	void add_hero(std::string key, float x, float y, bool col);
@@ -56,14 +62,14 @@ public:
 	void add_memory(std::string key, int hero_name, int t, int frames, vector<NPC*> p, string cat, string cont, string where,
 					int why, int when);
 	void add_action(std::string key, int utility, int why, Hero* owner, Hero* receiver, Hero* doer, std::string exe_name);
-	void add_tag(std::vector<std::string> topicVec,std::string key);
-	void add_conv_point(std::string topic,std::string temp,std::string name);
+	void add_tag(std::string key);
+	void add_conv_point(std::string icon,std::string temp,std::string name);
 
 	//functions for audio
-	void play_sound(string name);
-	void change_song(string name,char* from, char* to);
+	void play_sound(string name, char* source, RegionState::soundType type);
+	void change_song(string name,char* from, char* to, RegionState::soundType type);
 	void pause_unpause(string name, char* source);
-	void createTaskForAudio(std::string _name,  std::string _type, char* _source = nullptr, char* _target = nullptr);
+	void createTaskForAudio(std::string _name, std::string _type, char* _source, char* _target, RegionState::soundType _soundType);
 	void createTask(std::string task_name, std::string type, WorldObj * objToUpdate = NULL);
 	void createTaskWithNum(std::string task_name, std::string type, WorldObj * objToUpdate,int num);
 	void ChildrenOfOsi::createTaskWithParams(std::string task_name, std::string type, std::string key, float x, float y, bool col);
@@ -72,7 +78,7 @@ public:
 	void ChildrenOfOsi::createTaskAddAct(std::string task_name, std::string type, std::string key, int utility, int why, 
 											Hero* owner, Hero* receiver, Hero* doer, std::string exe_name);
 	void ChildrenOfOsi::createTaskNoObj(std::string task_name, std::string type, std::string topic, std::string temp, std::string key);
-	void ChildrenOfOsi::createTaskTag(std::string task_name, std::string type, std::vector<std::string> topicVec, std::string key);
+	void ChildrenOfOsi::createTaskTag(std::string task_name, std::string type, std::string key);
 
 	//void ChildrenOfOsi::createTaskForAttack(std::string task_name, std::string type, float x, float y, bool col, int d);
 

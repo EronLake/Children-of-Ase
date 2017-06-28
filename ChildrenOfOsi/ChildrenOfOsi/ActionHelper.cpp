@@ -2,6 +2,7 @@
 #include "ActionHelper.h"
 
 AIController* ActionHelper::ai = nullptr;
+extern int frame_count;
 
 ActionHelper::ActionHelper()
 {
@@ -23,7 +24,11 @@ void ActionHelper::create_memory(Action* action, Hero* hero)
 	people.push_back(action->getReceiver());
 	people.push_back(action->getOwner());
 
-	action->time_stamp = frame_count;//int time = get world time
+	//checks if timestamp has already been initialized
+	if (action->time_stamp < 0) {
+		action->time_stamp = frame_count;//int time = get world time
+	}
+	
 	std::string category = "incomplete";
 	string where = "not yet defined";
 	int when = -1;
@@ -35,37 +40,36 @@ void ActionHelper::create_memory(Action* action, Hero* hero)
 	//int when;                //ACTIONS: when the event occured (incomplete: when it started, complete: when it completed)
 	//string reason;           //ACTIONS: reason for failure or success
 	//Memory(int t, int frames, vector<NPC*> p, string cat="",string cont="",string where="",int why=-1, int when=-1);
-	gameplay_func->add_memory(key, hero->name, type, action->time_stamp, people, category,action->getName() + std::to_string(action->time_stamp), where, action->getWhy(), when);
+	gameplay_func->add_memory(key, hero->name, type, action->time_stamp, people, category,action->getName() + "_" + std::to_string(action->time_stamp), where, action->getWhy(), when);
 	hero->mem_counter++;
 
-	if (hero->name = OYA)
+	if (hero->name == OYA)
 	{
 		hero->memories.push_back(Containers::oya_memory_table[key]);
-		bool the_same_ptr = hero->memories[0] = Containers::oya_memory_table[key];
 	}
-	else if (hero->name = YEMOJA)
+	else if (hero->name == YEMOJA)
 	{
 		hero->memories.push_back(Containers::yemoja_memory_table[key]);
 	}
-	else if (hero->name = OSHOSI)
+	else if (hero->name == OSHOSI)
 	{
 		hero->memories.push_back(Containers::oshosi_memory_table[key]);
 	}
-	else if (hero->name = OGUN)
+	else if (hero->name == OGUN)
 	{
 		hero->memories.push_back(Containers::ogun_memory_table[key]);
 	}
-	else if (hero->name = SHANGO)
+	else if (hero->name == SHANGO)
 	{
 		hero->memories.push_back(Containers::shango_memory_table[key]);
 	}
 }
 
-void ActionHelper::battle_sim(Action* battle)
+void ActionHelper::battle_sim(Action* battle, Party* p)
 {
 		//may we have offensive team attack first? Slightly randomized
-		Party* Attackers = battle->getDoer()->cur_party;
-		Party* Defenders = battle->getReceiver()->cur_party;
+		Party* Attackers = battle->getDoer()->getParty();
+		Party* Defenders = p;
 
 		vector<Soldier*> larger;
 		vector<Soldier*> smaller;
@@ -117,8 +121,10 @@ void ActionHelper::attack_helper(Soldier* attacker, Soldier* defender)
 	{
 		damage += attacker->attackTypes[a]->getDmg();
 	}
+	damage += attacker->melee->getDmg();
+	damage += rand() % (damage * 2) - damage;
 	//take average of all attacks
-	damage = damage / attacker->attackTypes.size();
+	damage = damage / attacker->attackTypes.size()+1;
 	//take off damage from the average of all their attacks AKA larger attack smaller
 	defender->addHealth(-damage);
 
@@ -126,13 +132,17 @@ void ActionHelper::attack_helper(Soldier* attacker, Soldier* defender)
 	if (defender->getHealth() <= 0)
 	{
 		//kill the soldier/incapacitate the Hero if they run out of health
-		defender->defeat();
+		defender->defeat(900);
+		if (defender->getType()<WorldObj::TYPE_HERO) {
+			defender->setLoc(defender->getVillage()->get_village_location());
+			defender->getVillage()->barracks->addToParty(defender, false);
+		}
 	}
 }
 
 void ActionHelper::if_kill(Hero* Doer, Hero* Receiver)
 {
-	if (Doer->rel[Receiver->name]->getAffinity() < 20) {
+	if (Doer->rel[Receiver->name]->getAffinity() < 10) {
 		Receiver->kill();
 
 		//need to add the memory to memories
@@ -169,15 +179,29 @@ bool ActionHelper::hero_respond(Action* action) {
 	int doer = action->getDoer()->name;
 	int responder = action->getReceiver()->name;
 
-	Planner* hero_planner = ai->hero_planners[responder];
+	vector<Hero*> leads = action->getReceiver()->getVillage()->get_alliance()->get_leaders();
+	int value = 0;
+	int cur_action_val = 0;
+	Planner* hero_planner;
 
-	int value = hero_planner->value_of(action);
+	if (action->getName().compare("Form Alliance") == 0) {
+		for (auto it = leads.begin(); it != leads.end(); ++it) {
+			hero_planner = AIController::get_plan((*it)->name);
+			value += hero_planner->value_of(action);
+			cur_action_val+=hero_planner->get_current_action_value();
+		}
+	}
+	else {
+		hero_planner = AIController::get_plan(responder);
+		value = hero_planner->value_of(action);
+		cur_action_val = hero_planner->get_current_action_value();
+	}
 
 	if (value < 0) {  //This action's cost outweights its benefit, no thanks
 		interact = false;
 	}
 	//The value of my current action is at least twice as big as this action's value. No thanks
-	else if (value < (hero_planner->get_current_action_value() - value)) 
+	else if (value < (cur_action_val - value))
 	{
 		interact = true;
 	}
@@ -185,5 +209,62 @@ bool ActionHelper::hero_respond(Action* action) {
 	return interact;
 }
 
+bool ActionHelper::conversation(Action* action) {
+	Relationship before = *action->getDoer()->rel[action->getReceiver()->name];
+
+	//conversation
+	dialogue_point point = { "Fake", "Response_" +action->getName()};
+	DialogueController::dialogue.gen_dialog(point,action->getReceiver());
+
+	int success_level = 0;
+	for (auto it = action->doer_succ_postconds.begin(); it != action->doer_succ_postconds.end(); ++it) {
+		if ((*it)->get_general_type() == Postcondition::REL) {
+			RelPost* con = dynamic_cast<RelPost*>((*it).get());
+			switch (con->get_rel_type()) {
+			case Postcondition::AFF:
+				success_level += action->getDoer()->rel[action->getReceiver()->name]->getAffinity()-before.getAffinity();
+				break;
+			case Postcondition::NOT:
+				success_level += action->getDoer()->rel[action->getReceiver()->name]->getNotoriety() - before.getNotoriety();
+				break;
+			case Postcondition::STR:
+				success_level += action->getDoer()->rel[action->getReceiver()->name]->getStrength() - before.getStrength();
+				break;
+			case Postcondition::BAFF:
+				success_level += before.getAffinity()-action->getDoer()->rel[action->getReceiver()->name]->getAffinity();
+				break;
+			case Postcondition::BNOT:
+				success_level += before.getNotoriety() - action->getDoer()->rel[action->getReceiver()->name]->getNotoriety();
+				break;
+			case Postcondition::BSTR:
+				success_level += before.getStrength() - action->getDoer()->rel[action->getReceiver()->name]->getStrength();
+				break;
+			}
+		} else if ((*it)->get_general_type() == Postcondition::REL_EST) {
+			RelEstimPost* con = dynamic_cast<RelEstimPost*>((*it).get());
+			switch (con->get_rel_type()) {
+			case Postcondition::AFF:
+				success_level += action->getDoer()->rel[action->getReceiver()->name]->getAffEstimate() - before.getAffEstimate();
+				break;
+			case Postcondition::NOT:
+				success_level += action->getDoer()->rel[action->getReceiver()->name]->getNotorEstimate() - before.getNotorEstimate();
+				break;
+			case Postcondition::STR:
+				success_level += action->getDoer()->rel[action->getReceiver()->name]->getStrEstimate() - before.getStrEstimate();
+				break;
+			case Postcondition::BAFF:
+				success_level += before.getAffEstimate() - action->getDoer()->rel[action->getReceiver()->name]->getAffEstimate();
+				break;
+			case Postcondition::BNOT:
+				success_level += before.getNotorEstimate() - action->getDoer()->rel[action->getReceiver()->name]->getNotorEstimate();
+				break;
+			case Postcondition::BSTR:
+				success_level += before.getStrEstimate() - action->getDoer()->rel[action->getReceiver()->name]->getStrEstimate();
+				break;
+			}
+		}
+	}
+	return (success_level>0);
+}
 
 ChildrenOfOsi* ActionHelper::gameplay_func;

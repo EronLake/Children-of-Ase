@@ -33,14 +33,19 @@ public:
 	void setMode(int m);
 	int getMode();
 
+	void set_npc_type(int _npc_type) { npc_type = _npc_type; };
+	int get_npc_type() { return npc_type; };
+
 
 	Vector2f destination;
 	Vector2f waypoint;
 	vector<Vector2f> waypoints;
 
+	Village* village = nullptr;
 private:
-	Village* village;
+	
 	float speed;
+	int npc_type = 0; //0 = Hero/Soldier, 1 = villager, 2 = babalaow,  3 = shrine
 	float diagSpeed;
 	float diagXSpeed;
 	float diagYSpeed;

@@ -1,127 +1,82 @@
 {
-    "Tag": {
-        "Tag_1": {
-            "name": "Strength",
-            "topics": {
-                "topic_1": "boast",
-                "topic_2": "duel",
-                "topic_3": "name"
-            }
-        },
-        "Tag_2": {
-            "name": "tag_2"
-        },
-
-        "Tag_3": {
-            "name": "tag_3"
-        },
-
-        "Tag_4": {
-            "name": "tag_4"
-        },
-
-        "Tag_5": {
-            "name": "tag_5"
-        },
-
-        "Tag_6": {
-            "name": "tag_6"
-        },
-
-        "Tag_7": {
-            "name": "tag_7"
-        },
-
-        "Tag_8": {
-            "name": "tag_8"
-        },
-
-        "Tag_9": {
-            "name": "tag_9"
-        },
-
-        "Tag_10": {
-            "name": "tag_10"
-        },
-
-        "Tag_11": {
-            "name": "tag_11"
-        },
-
-        "Tag_12": {
-            "name": "tag_12"
-        },
-
-        "Tag_13": {
-            "name": "tag_13"
-        },
-
-        "Tag_14": {
-            "name": "tag_14"
-        },
-
-        "Tag_15": {
-            "name": "tag_15"
-        },
-
-        "Tag_16": {
-            "name": "tag_16"
-        },
-
-        "Tag_17": {
-            "name": "tag_17"
-        },
-
-        "Tag_18": {
-            "name": "tag_18"
-        },
-
-        "Tag_19": {
-            "name": "tag_19"
-        },
-
-        "Tag_20": {
-            "name": "tag_20"
-        },
-
-        "Tag_21": {
-            "name": "tag_21"
-        },
-
-        "Tag_22": {
-            "name": "tag_22"
-        },
-
-        "Tag_23": {
-            "name": "tag_23"
-        },
-
-        "Tag_24": {
-            "name": "tag_24"
-        },
-
-        "Tag_25": {
-            "name": "tag_25"
-        },
-
-        "Tag_26": {
-            "name": "tag_26"
-        },
-
-        "Tag_27": {
-            "name": "tag_27"
-        },
-
-        "Tag_28": {
-            "name": "tag_28"
-        },
-
-        "Tag_29": {
-            "name": "tag_29"
-        },
-
-        "Tag_30": {
-            "name": "tag_30"
-        }
+  "Info_About_Other_Heroes": {
+    "conv_pts": {
+      "conv_pt_1": "Ask About Strength Of",
+      "conv_pt_2": "Ask About Affinity Of",
+      "conv_pt_3": "Ask About Notoriety Of"
     }
+  },
+
+  "Getting_To_Know_Each_Other": {
+    "conv_pts": {
+      "conv_pt_1": "Boast",
+      "conv_pt_2": "Ask_Name",
+      "conv_pt_3": "Ask_Origin"
     }
+  },
+
+  "Ask_About_Alliance": {
+    "conv_pts": {
+      "conv_pt_1": "Ask_To_Form_Alliance"
+    }
+
+  },
+
+  "Talk_About_Affinity": {
+    "conv_pts": {
+      //"conv_pt_1": "Advise To Conquer",
+      //"conv_pt_2": "Advise To Ally With",
+      //"conv_pt_3": "Advise To Revolt Against",
+      //"conv_pt_4": "Advise To Destroy",
+      "conv_pt_5": "Bribe",
+      "conv_pt_6": "Compliment",
+      "conv_pt_7": "Grovel"
+      //"conv_pt_8": "Offer_Teaching",
+     // "conv_pt_9": "Insult"
+
+    }
+  },
+
+  "Talk_About_Notoriety": {
+    "conv_pts": {
+      "conv_pt_1": "Ask_To_Form_Alliance",
+      "conv_pt_2": "Boast",
+      "conv_pt_3": "Compliment",
+      "conv_pt_4": "Bribe"
+      //"conv_pt_2": "Advise To Conquer",
+      //"conv_pt_3": "Advise To Ally With",
+      //"conv_pt_4": "Advise To Revolt Against",
+      //"conv_pt_5": "Advise To Destroy",
+      //"conv_pt_6": "Ask_To_Join_Party",
+      //"conv_pt_7": "Advise To Train With",
+      //"conv_pt_8": "Ask_For_Teaching"
+    }
+  },
+
+  "Talk_About_Strength": {
+    "conv_pts": {
+      "conv_pt_1": "Ask_To_Duel",
+      "conv_pt_2": "Ask_To_Spar",
+      //"conv_pt_3": "Recruit_For_Party",
+      //"conv_pt_4": "Advise To Train With",
+      //"conv_pt_5": "Ask_For_Teaching",
+      //"conv_pt_6": "Offer_Teaching",
+      "conv_pt_7": "Boast",
+      "conv_pt_8": "Intimidate"
+    }
+  },
+
+  "Talk_About_Action": {
+    "conv_pts": {
+      //"conv_pt_1": "Advise To Conquer",
+      //"conv_pt_2": "Advise To Ally With",
+      //"conv_pt_3": "Advise To Revolt Against",
+      //"conv_pt_4": "Advise To Destroy",
+      	"conv_pt_4": "Insult",
+      "conv_pt_5": "Ask_To_Duel",
+      "conv_pt_6": "Ask_To_Spar"
+      //"conv_pt_7": "Recruit_For_Party",
+      //"conv_pt_8": "Advise To Train With"
+    }
+  }
+}

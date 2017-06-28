@@ -4,11 +4,16 @@ using namespace std;
 
 LivingObj::LivingObj()
 {
+	health = 1;
+	max_health = 1;
+	alive = true;
+	setType(1);
 }
 
 LivingObj::LivingObj(float x, float y, bool col) : WorldObj(x, y, col)
 {
 	health = 1;
+	max_health = 1;
 	alive = true;
 	setType(1);
 }
@@ -16,6 +21,7 @@ LivingObj::LivingObj(float x, float y, bool col) : WorldObj(x, y, col)
 LivingObj::LivingObj(Vector2f p_topLeft, float p_width, float p_height):WorldObj(p_topLeft,p_width,p_height)
 {
 	health = 1;
+	max_health = 1;
 	alive = true;
 	setType(1);
 }
@@ -26,12 +32,14 @@ LivingObj::~LivingObj()
 
 int LivingObj::getHealth()
 {
-	return health;
+	return (health/health_multiplier);
 }
 
 void LivingObj::setHealth(int h)
 {
+	h = (h * health_multiplier);
 	health = h;
+	if (h > max_health)max_health = h;
 }
 
 bool LivingObj::getAlive()
@@ -46,5 +54,12 @@ void LivingObj::setAlive(bool v)
 
 void LivingObj::addHealth(int h)
 {
+	h = (h * health_multiplier);
 	health += h;
+	if (health > max_health)health = max_health;
+}
+
+void LivingObj::regenHealth()
+{
+	if (health < max_health && health>0)health++;
 }

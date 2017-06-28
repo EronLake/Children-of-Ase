@@ -87,6 +87,10 @@ public:
 	static MemoryPool* conv_point_pool;
 	static MemNode* conv_point_head;
 
+	//for tasks in the task buffer
+	static MemoryPool* task_pool;
+	static MemNode* task_head;
+
 	memManager(MessageLog* _mLog, TaskBuffer* _tBuffer);
 	~memManager();
 

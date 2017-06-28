@@ -5,9 +5,9 @@
 
 #include "ActionPool.h"
 
-typedef unordered_map<int, Action> EndStateList;
+typedef unordered_map<int, Action*> EndStateList;
 
-typedef unordered_map<Action, vector<Action>> MilestoneList;
+typedef unordered_map<Action*, vector<Action*>> MilestoneList;
 
 namespace std {
 	template <>
@@ -27,44 +27,52 @@ public:
 
 	void choose_end_with(int hero);
 
-	Action choose_next_step(Action goal, vector<Action> goals);
+	Action* choose_next_step(Action* goal, vector<Action*> goals);
 
-	EndStateList* get_end_state_map() { return end_states; }
-	vector<Action> get_end_states();
-	MilestoneList* get_milestone_map() { return milestones; }
+	EndStateList* get_end_state_map() { return &end_states; }
+	vector<Action*> get_end_states();
+	MilestoneList* get_milestone_map() { return &milestones; }
 	//vector<Action> get_milestones_for_goal(Action goal);
-	vector<Action> get_milestone_frontier();
+	vector<Action*> get_milestone_frontier();
 	Action* get_current_action() { return current_action; }
 	int get_current_action_value() { return current_action_value; }
-	Action get_current_end_state() { return current_end_state; }
+	Action* get_current_end_state() { return current_end_state; }
 	void set_current_action(Action* action) { current_action = action; current_action_value = action->getUtility(); }
-	void add_milestone(Action goal, Action milestone);
+	void add_milestone(Action* goal, Action* milestone);
 
-	void generate_milestones(Action state, Action* goal);
+	void generate_milestones(Action* state, Action* goal);
 
 	int value_of(Action* action);
 
 	bool give_as_quest;
+	void set_action_suggested(bool suggested);
+	bool get_action_suggested();
+
+
+	vector<Action*> quests_given;
 
 private:
 	Hero* evaluateHero;
 
 	//Map of hero numbers to the Action representing the desired end state with that hero
-	EndStateList* end_states;
+	EndStateList end_states;
 	//Map of end state Actions to the Action path (last element in path is the next milestone to complete)
-	MilestoneList* milestones;
+	MilestoneList milestones;
 
-	Action current_end_state;
+	Action* current_end_state;
 	Action* current_action = nullptr;
 	int current_action_value;
 
-	int heuristic(Action step, vector <std::shared_ptr<Preconditions>> priority_preconds, vector<Action> goals);
+	int heuristic(Action* step, vector <std::shared_ptr<Preconditions>> priority_preconds, vector<Action*> goals);
 	
-	int prereq_appeal(Action step, vector<std::shared_ptr<Preconditions>> priority_preconds);
-	int cost(Action step);
+	int relationship_appeal(Action* state);
+	int prereq_appeal(Action* step, vector<std::shared_ptr<Preconditions>> priority_preconds);
+	int cost(Action* step);
 
-	vector<std::shared_ptr<Preconditions>> prioritize_preconditions(Action goal);
+	vector<std::shared_ptr<Preconditions>> prioritize_preconditions(Action* goal);
 	int personality_appeal(Action* evaluateAction);
+
+	bool action_suggested = false;
 
 
 };

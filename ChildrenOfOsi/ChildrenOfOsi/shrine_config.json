@@ -1,0 +1,66 @@
+{
+	"Oasis_Shrine" : {
+		"x" : 50.45,
+		"y" : 74.65,
+		"width" : 300,
+		"hight" : 300,
+		"name" : "Oasis_Shrine",
+		"bodyx1" : 50.0,
+		"bodyx2" : 50.0,
+		"bodyy1" : 50.0,
+		"bodyy2" : 50.0,
+		"health": 80,
+		"sprites": {
+			"setTexture": {"0":"Osun_Shrine", "1":1},
+			"setIdleTexture": {"0":"Osun_Shrine", "1":1},
+
+			"id_up": {"0":"Osun_Shrine","1":1},
+			"id_down": {"0":"Osun_Shrine","1":1},
+			"id_left": {"0":"Osun_Shrine","1":1},
+			"id_right": {"0":"Osun_Shrine","1":1}
+		}
+	},
+	"Jungle_Shrine" : {
+		"x" : 60.45,
+		"y" : 74.65,
+		"width" : 300,
+		"hight" : 300,
+		"name" : "Jungle_Shrine",
+		"bodyx1" : 50.0,
+		"bodyx2" : 50.0,
+		"bodyy1" : 50.0,
+		"bodyy2" : 50.0,
+		"health": 80,
+		"sprites": {
+			"setTexture": {"0":"Egungun_Shrine", "1":1},
+			"setIdleTexture": {"0":"Egungun_Shrine", "1":1},
+
+			"id_up": {"0":"Egungun_Shrine","1":1},
+			"id_down": {"0":"Egungun_Shrine","1":1},
+			"id_left": {"0":"Egungun_Shrine","1":1},
+			"id_right": {"0":"Egungun_Shrine","1":1}
+		}
+	},
+	"Mountain_Shrine" : {
+		"x" : 70.45,
+		"y" : 74.65,
+		"width" : 300,
+		"hight" : 300,
+		"name" : "Mountain_Shrine",
+		"bodyx1" : 50.0,
+		"bodyx2" : 50.0,
+		"bodyy1" : 50.0,
+		"bodyy2" : 50.0,
+		"health": 80,
+		"sprites": {
+			"setTexture": {"0":"Orunmila_Shrine", "1":1},
+			"setIdleTexture": {"0":"Orunmila_Shrine", "1":1},
+
+			"id_up": {"0":"Orunmila_Shrine","1":1},
+			"id_down": {"0":"Orunmila_Shrine","1":1},
+			"id_left": {"0":"Orunmila_Shrine","1":1},
+			"id_right": {"0":"Orunmila_Shrine","1":1}
+		}
+	}
+	
+}

@@ -15,46 +15,46 @@ memManager::memManager(MessageLog* _mLog, TaskBuffer* _tBuffer)
 	memHelper = new MemoryHelper();
 
 	hero_pool = memHelper->create_pool(sizeof(Hero) * 32);
-	hero_head = memHelper->init_pool(hero_pool, sizeof(Hero)*2);
+	hero_head = memHelper->init_pool(hero_pool, sizeof(Hero)*4);
 
-	livingObj_pool = memHelper->create_pool(sizeof(LivingObj) * 64);
+	livingObj_pool = memHelper->create_pool(sizeof(LivingObj) * 4);
 	livingObj_head = memHelper->init_pool(livingObj_pool, sizeof(LivingObj)*2);
 
-	Attack_pool = memHelper->create_pool(sizeof(Attack) * 256);
+	Attack_pool = memHelper->create_pool(sizeof(Attack) * 256 * 4);
 	Attack_head = memHelper->init_pool(Attack_pool, sizeof(Attack)*4);
 
-	soldier_pool = memHelper->create_pool(sizeof(Soldier) * 64);
+	soldier_pool = memHelper->create_pool(sizeof(Soldier) * 128);
 	soldier_head = memHelper->init_pool(soldier_pool, sizeof(Soldier)*2);
 
-	spl_soldier_pool = memHelper->create_pool(sizeof(SplSoldier) * 64);
+	spl_soldier_pool = memHelper->create_pool(sizeof(SplSoldier) * 4);
 	spl_soldier_head = memHelper->init_pool(spl_soldier_pool, sizeof(SplSoldier)*2);
 
-	worldObj_pool = memHelper->create_pool(sizeof(WorldObj)*2000);
+	worldObj_pool = memHelper->create_pool(sizeof(WorldObj)*2048);
 	worldObj_head = memHelper->init_pool(worldObj_pool, sizeof(WorldObj)*2);
 
-	npc_pool = memHelper->create_pool(sizeof(NPC) * 64);
+	npc_pool = memHelper->create_pool(sizeof(NPC) * 150);
 	npc_head = memHelper->init_pool(npc_pool, sizeof(NPC)*2);
 
-	texture_pool = memHelper->create_pool(sizeof(Texture) * 128);
+	texture_pool = memHelper->create_pool(sizeof(Texture) * 600);
 	texture_head = memHelper->init_pool(texture_pool, sizeof(Texture));
 
-	oya_memory_pool = memHelper->create_pool(sizeof(Memory) * 40);
+	oya_memory_pool = memHelper->create_pool(sizeof(Memory) * 4);
 	oya_memory_head = memHelper->init_pool(oya_memory_pool, sizeof(Memory));
 	memHelper->fill_mem_pool(oya_memory_head, OYA);
 
-	yemoja_memory_pool = memHelper->create_pool(sizeof(Memory) * 40);
+	yemoja_memory_pool = memHelper->create_pool(sizeof(Memory) * 4);
 	yemoja_memory_head = memHelper->init_pool(yemoja_memory_pool, sizeof(Memory));
 	memHelper->fill_mem_pool(yemoja_memory_head, YEMOJA);
 
-	oshosi_memory_pool = memHelper->create_pool(sizeof(Memory) * 40);
+	oshosi_memory_pool = memHelper->create_pool(sizeof(Memory) * 4);
 	oshosi_memory_head = memHelper->init_pool(oshosi_memory_pool, sizeof(Memory));
 	memHelper->fill_mem_pool(oshosi_memory_head, OSHOSI);
 
-	ogun_memory_pool = memHelper->create_pool(sizeof(Memory) * 40);
+	ogun_memory_pool = memHelper->create_pool(sizeof(Memory) * 4);
 	ogun_memory_head = memHelper->init_pool(ogun_memory_pool, sizeof(Memory));
 	memHelper->fill_mem_pool(ogun_memory_head, OGUN);
 
-	shango_memory_pool = memHelper->create_pool(sizeof(Memory) * 40);
+	shango_memory_pool = memHelper->create_pool(sizeof(Memory) * 4);
 	shango_memory_head = memHelper->init_pool(shango_memory_pool, sizeof(Memory));
 	memHelper->fill_mem_pool(shango_memory_head, SHANGO);
 
@@ -64,8 +64,12 @@ memManager::memManager(MessageLog* _mLog, TaskBuffer* _tBuffer)
 	tag_pool = memHelper->create_pool(sizeof(Tag) * 32);
 	tag_head = memHelper->init_pool(tag_pool, sizeof(Tag) * 2);
 
-	conv_point_pool = memHelper->create_pool(sizeof(ConversationPoint) * 32);
+	conv_point_pool = memHelper->create_pool(sizeof(ConversationPoint) * 192);
 	conv_point_head = memHelper->init_pool(conv_point_pool, sizeof(ConversationPoint) * 2);
+
+	//for the task buffer
+	task_pool = memHelper->create_pool(sizeof(Task) * 300);
+	task_head = memHelper->init_pool(task_pool, sizeof(Task)*2);
 
 
 	task_map["Add_Hero"] = &MemoryHelper::store_hero;
@@ -137,7 +141,10 @@ memManager::~memManager()
 	memHelper->destroy_pool(tag_pool);
 	memHelper->destroy_MemNode_list(tag_head);
 
-	memHelper->destroy_pool(conv_point_pool);
+	memHelper->destroy_pool(task_pool);
+	memHelper->destroy_MemNode_list(conv_point_head);
+
+	memHelper->destroy_pool(task_pool);
 	memHelper->destroy_MemNode_list(conv_point_head);
 
 	LOG("memManager Object Destroyed");
@@ -359,3 +366,6 @@ MemNode* memManager::tag_head = nullptr;
 
 MemoryPool* memManager::conv_point_pool = nullptr;
 MemNode* memManager::conv_point_head = nullptr;
+
+MemoryPool* memManager::task_pool = nullptr;
+MemNode* memManager::task_head = nullptr;

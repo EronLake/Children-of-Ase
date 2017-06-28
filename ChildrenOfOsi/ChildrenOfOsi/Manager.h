@@ -4,6 +4,8 @@
 #include "Task.h"
 #include "MessageLog.h"
 
+class memManager;
+class MemoryHelper;
 
 class TaskBuffer;
 
@@ -28,7 +30,7 @@ public:
 
 	void createTaskWithParams(std::string task_name, std::string type, std::string key, float x, float y, bool col);
 
-	void createTaskForAudio(std::string _name, std::string _type, char* _source = nullptr, char* _target = nullptr);
+	void createTaskForAudio(std::string _name, std::string _type, char* _source = nullptr, char* _target = nullptr, RegionState::soundType _soundType = RegionState::soundType::null_type);
 
 	virtual void execute_task(Task* current_task);
 };

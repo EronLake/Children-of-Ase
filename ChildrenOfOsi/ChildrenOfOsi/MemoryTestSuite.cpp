@@ -366,7 +366,7 @@ bool MemoryTestSuite::execute_tests()
 	}
 
 	//---------------------------------------------------
-	if (destroy_pool_test() == true)
+	/*if (destroy_pool_test() == true)
 	{
 		LOG("destroy_pool_test: " << "PASS");
 	}
@@ -374,10 +374,10 @@ bool MemoryTestSuite::execute_tests()
 	{
 		LOG("destroy_pool_test: " << "FAIL");
 		pass = false;
-	}
+	}*/
 
 	//---------------------------------------------------
-	if (create_pool_test() == true)
+	/*if (create_pool_test() == true)
 	{
 		LOG("create_pool_test: " << "PASS");
 	}
@@ -385,7 +385,7 @@ bool MemoryTestSuite::execute_tests()
 	{
 		LOG("create_pool_test: " << "FAIL");
 		pass = false;
-	}
+	}*/
 
 	//---------------------------------------------------
 	if (destroy_MemNode_list_test() == true)
@@ -908,7 +908,7 @@ bool MemoryTestSuite::store_hero_test()
 	bool pass = true;
 	MemoryHelper* test_memory_helper = new MemoryHelper();
 
-	//std::////cout << "------------------------"<< test_memory_helper->store_hero("test_obj", 1, 2, true);
+	//std:://////cout << "------------------------"<< test_memory_helper->store_hero("test_obj", 1, 2, true);
 
 
 	if (Containers::hero_table.count("test_obj") != 1 ||

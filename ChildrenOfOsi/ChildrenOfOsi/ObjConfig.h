@@ -15,7 +15,19 @@ public:
 
 	static void import_config(vector<WorldObj*>* recVec, ChildrenOfOsi* gameplay_func, TaskBuffer* tBuffer);
 	static void set_world_obj(vector<WorldObj*>* recVec, ChildrenOfOsi* gameplay_func, TaskBuffer* tBuffer, float x, float y, float width, float hight,
-		std::string name, std::string tex_file, int frame_num, float bodyx1, float bodyx2, float bodyy1, float bodyy2);
-	static void make_stuff(vector<WorldObj*>* recVec, ChildrenOfOsi* gameplay_func, TaskBuffer* tBuffer);
+		std::string name, std::string tex_file, int frame_num, float bodyx1, float bodyx2, float bodyy1, float bodyy2, int region);
+	static void make_stuff(vector<WorldObj*>* recVec, ChildrenOfOsi* gameplay_func, TaskBuffer* tBuffer, int region);
+	static unordered_map<Texture*, pair<string, int>> textureMap;
+	static std::set<Texture*> standard_con;
+	static std::set<Texture*> oasis_con;
+	static std::set<Texture*> jungle_con;
+	static std::set<Texture*> mountain_con;
+	static std::set<Texture*> marsh_con;
+	static constexpr int STANDARD = 0;
+	static constexpr int OASIS = 1;
+	static constexpr int JUNGLE = 2;
+	static constexpr int MOUNTAIN = 3;
+	static constexpr int OGUNREG = 4;
+	
 };
 

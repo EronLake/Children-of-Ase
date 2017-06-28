@@ -3,6 +3,7 @@
 #include "Planner.h"
 #include "Containers.h"
 #include "ActionPool.h"
+#include "Village.h"
 
 class AIController {
 private:
@@ -11,23 +12,36 @@ private:
 	//planners[3] = oya
 	//planners[4] = oshosi
 	//planners[5] = ogun
-	
-
+	static Planner* yemoja_planner;
+	static Planner* oya_planner;
+	static Planner* oshosi_planner;
+	static Planner* ogun_planner;
+	//unordered_map<int, Planner*> planners;
 public:
 	AIController();
 	~AIController();
 
-	unordered_map<int, Planner*> hero_planners;
+	//static unordered_map<int, Planner*> hero_planners;
 
-	Hero* get_hero_object(int h);
+	static Planner* get_plan(int id);
 
-	void generate_end_state(int me, int them);
+	static void set_plan(int id, Planner* plan);
 
-	void init_plans();
+	static Hero* get_hero_object(int h);
 
-	void reevaluate_state(int me, int them);
+	static void generate_end_state(int me, int them);
 
-	void execute();
+	static void init_plans();
 
-	bool give_as_quest(Action* action);
+	static void reevaluate_state(int me, int them);
+
+	static void execute();
+
+	static bool give_as_quest(Action* action);
+
+	static bool quest_response(Hero* doer, Hero* asker);
+
+	static Hero* pick_quest_doer(Action* quest);
+
 };
+

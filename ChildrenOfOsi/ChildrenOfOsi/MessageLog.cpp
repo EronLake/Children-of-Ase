@@ -22,13 +22,14 @@ MessageLog::~MessageLog()
 
 void MessageLog::logMessage(Task* task_passed) 
 {
-
+    #if WRITE_TO_LOG
 	std::string message = task_passed->type +
 					":"	+ task_passed->name + 
 					":" + task_passed->status;
 
 	log_file << "MESSAGE-LOG:" << message << std::endl;
-	////std::////cout << "MESSAGE-LOG:" << message << std::endl;
+	#endif 
+	////std:://////cout << "MESSAGE-LOG:" << message << std::endl;
 }
 
 //------------------------------------------------------

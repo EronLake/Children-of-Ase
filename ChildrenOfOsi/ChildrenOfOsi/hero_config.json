@@ -1,0 +1,902 @@
+{
+	"Shango" : {
+		"x" : 42.07,
+		"y" : 136.1,
+		"width" : 150,
+		"hight" : 150,
+		"name" : "Shango",
+		"hero_id" : 1,
+		"bodyx1" : 50.0,
+		"bodyx2" : 50.0,
+		"bodyy1" : 50.0,
+		"bodyy2" : 50.0,
+		"health": 120,
+		"max_stamina": 300,
+		"aggression": 30,
+		"kindness": 70,
+		"honor": 80,
+		"pride": 60,
+		"recklessness": 30,
+		"extroversion": 30,
+		"greed": 50,
+		"sprites": {
+			"setTexture": {"0":"Shango_Idle_S", "1":22},
+			"setIdleTexture": {"0":"Shango_Idle_S", "1":22},
+
+			"id_up": {"0":"Shango_Idle_N","1":22},
+			"id_down": {"0":"Shango_Idle_S","1":22},
+			"id_left": {"0":"Shango_Idle_W","1":22},
+			"id_right": {"0":"Shango_Idle_E","1":22},
+
+			"sprint_up": {"0":"Shango_Sprint_N","1":16},
+			"sprint_down": {"0":"Shango_Sprint_S","1":16},
+			"sprint_left": {"0":"Shango_Sprint_W","1":16},
+			"sprint_right": {"0":"Shango_Sprint_E","1":16},
+
+			"hurt_up": {"0":"Shango_Recoil_N","1":9},
+			"hurt_down": {"0":"Shango_Recoil_S","1":9},
+			"hurt_left": {"0":"Shango_Recoil_W","1":9},
+			"hurt_right": {"0":"Shango_Recoil_E","1":9},
+
+			"atk_up": {"0":"Shango_Attack_N","1":3},
+			"atk_down": {"0":"Shango_Attack_S","1":3},
+			"atk_left": {"0":"Shango_Attack_W","1":3},
+			"atk_right": {"0":"Shango_Attack_E","1":3},
+
+			"death_up": {"0":"Shango_Death_N","1":24},
+			"death_down": {"0":"Shango_Death_S","1":24},
+			"death_left": {"0":"Shango_Death_W","1":24},
+			"death_right": {"0":"Shango_Death_E","1":24},
+
+			"atk2_up": {"0":"Shango_Attack_N","1":3},
+			"atk2_down": {"0":"Shango_Attack_S","1":3},
+			"atk2_left": {"0":"Shango_Attack_W","1":3},
+			"atk2_right": {"0":"Shango_Attack_E","1":3},
+
+			"spin_up": {"0":"Shango_Spin_N","1":8},
+			"spin_down": {"0":"Shango_Spin_S","1":8},
+			"spin_left": {"0":"Shango_Spin_W","1":8},
+			"spin_right": {"0":"Shango_Spin_E","1":8},
+
+			"breathe_up": {"0":"Shango_Breath_N","1":8},
+			"breathe_down": {"0":"Shango_Breath_S","1":8},
+			"breathe_left": {"0":"Shango_Breath_W","1":8},
+			"breathe_right": {"0":"Shango_Breath_E","1":8},
+
+			/*Exalted Form*/
+
+			"exalted_setTexture": {"0":"SoldierJungle_Idle_S", "1":22},
+			"exalted_setIdleTexture": {"0":"SoldierJungle_Idle_S", "1":22},
+
+			"exalted_id_up": {"0":"SoldierJungle_Idle_N","1":22},
+			"exalted_id_down": {"0":"SoldierJungle_Idle_S","1":22},
+			"exalted_id_left": {"0":"SoldierJungle_Idle_W","1":22},
+			"exalted_id_right": {"0":"SoldierJungle_Idle_E","1":22},
+			
+			"exalted_walk_up": {"0":"SoldierJungle_Walk_N","1":32},
+			"exalted_walk_down": {"0":"SoldierJungle_Walk_S","1":32},
+			"exalted_walk_left": {"0":"SoldierJungle_Walk_W","1":32},
+			"exalted_walk_right": {"0":"SoldierJungle_Walk_E","1":32},
+
+			"exalted_sprint_up": {"0":"SoldierJungle_Sprint_N","1":16},
+			"exalted_sprint_down": {"0":"SoldierJungle_Sprint_S","1":16},
+			"exalted_sprint_left": {"0":"SoldierJungle_Sprint_W","1":16},
+			"exalted_sprint_right": {"0":"SoldierJungle_Sprint_E","1":16},
+
+			"exalted_hurt_up": {"0":"SoldierJungle_Recoil_N","1":9},
+			"exalted_hurt_down": {"0":"SoldierJungle_Recoil_S","1":9},
+			"exalted_hurt_left": {"0":"SoldierJungle_Recoil_W","1":9},
+			"exalted_hurt_right": {"0":"SoldierJungle_Recoil_E","1":9},
+
+			"exalted_atk_up": {"0":"SoldierJungle_Attack_N","1":3},
+			"exalted_atk_down": {"0":"SoldierJungle_Attack_S","1":3},
+			"exalted_atk_left": {"0":"SoldierJungle_Attack_W","1":3},
+			"exalted_atk_right": {"0":"SoldierJungle_Attack_E","1":3},
+
+			"exalted_death_up": {"0":"Shango_Death_N","1":24},
+			"exalted_death_down": {"0":"Shango_Death_S","1":24},
+			"exalted_death_left": {"0":"Shango_Death_W","1":24},
+			"exalted_death_right": {"0":"Shango_Death_E","1":24},
+
+			"exalted_atk2_up": {"0":"Shango_Attack_N","1":3},
+			"exalted_atk2_down": {"0":"Shango_Attack_S","1":3},
+			"exalted_atk2_left": {"0":"Shango_Attack_W","1":3},
+			"exalted_atk2_right": {"0":"Shango_Attack_E","1":3},
+
+			"exalted_spin_up": {"0":"Shango_Spin_N","1":8},
+			"exalted_spin_down": {"0":"Shango_Spin_S","1":8},
+			"exalted_spin_left": {"0":"Shango_Spin_W","1":8},
+			"exalted_spin_right": {"0":"Shango_Spin_E","1":8},
+
+			"exalted_breathe_up": {"0":"Shango_Breath_N","1":8},
+			"exalted_breathe_down": {"0":"Shango_Breath_S","1":8},
+			"exalted_breathe_left": {"0":"Shango_Breath_W","1":8},
+			"exalted_breathe_right": {"0":"Shango_Breath_E","1":8}
+		},
+		"melee" : {
+			"sprites" : {
+				"right": {"0":"FireBallTMP", "1":3},
+				"up": {"0":"FireBallTMPUp", "1":3},
+				"down": {"0":"FireBallTMPDown", "1":3},
+				"left": {"0":"FireBallTMPLeft", "1":3}
+			},
+			"set_name": 0,
+			"set_dmg": 15,
+			"set_speed" : 5,
+			"set_base_dir" : 4,
+			"set_cool_down" : 35,
+			"set_stamina_cost" : 15,
+			"set_pause" : -1,
+			"set_destroy" : false,
+			"set_Keep" : true,
+			"set_width" : "cur_hero->body[0].getWidth()",
+			"set_height" : "cur_hero->body[0].getHeight()",
+			"set_duration" : 7,
+			"set_ase_cost" : 0,
+			"set_can_cancel" : true,
+			"set_turn" : false
+		},
+		"attacks": {
+			"fireball" : {
+				"1" : {
+					"sprites" : {
+						"right": {"0":"FireBallTMP", "1":3},
+						"up": {"0":"FireBallTMPUp", "1":3},
+						"down": {"0":"FireBallTMPDown", "1":3},
+						"left": {"0":"FireBallTMPLeft", "1":3}
+					},
+					"set_name": 1,
+					"set_dmg": 22,
+					"set_speed" : 15,
+					"set_base_dir" : 3,
+					"set_cool_down" : 70,
+					"set_stamina_cost" : 30,
+					"set_pause" : 16,
+					"set_destroy" : true,
+					"set_Keep" : false,
+					"set_width" : "cur_hero->body[0].getWidth()",
+					"set_height" : "cur_hero->body[0].getHeight()",
+					"set_duration" : 100,
+					"set_ase_cost" : 40,
+					"set_can_cancel" : false,
+					"set_turn" : false
+				}
+			},
+      "spin": {
+        "1": {
+          "sprites": {
+            "right": {
+              "0": "border",
+              "1": 1
+            },
+            "up": {
+              "0": "border",
+              "1": 1
+            },
+            "down": {
+              "0": "border",
+              "1": 1
+            },
+            "left": {
+              "0": "border",
+              "1": 1
+            }
+          },
+          "set_name": 2,
+          "set_dmg": 7,
+          "set_speed": 18,
+          "set_base_dir": 4,
+          "set_cool_down": 60,
+          "set_stamina_cost": 10,
+          "set_pause": 3,
+          "set_destroy": false,
+          "set_Keep": false,
+          "set_width": "cur_hero->body[0].getWidth()",
+          "set_height": "cur_hero->body[0].getHeight()",
+          "set_duration": 7,
+          "set_ase_cost": 7,
+          "set_can_cancel": true,
+          "set_turn": true
+        },
+        "2": {
+          "sprites": {
+            "right": {
+              "0": "border",
+              "1": 1
+            },
+            "up": {
+              "0": "border",
+              "1": 1
+            },
+            "down": {
+              "0": "border",
+              "1": 1
+            },
+            "left": {
+              "0": "border",
+              "1": 1
+            }
+          },
+          "set_name": 22,
+          "set_dmg": 7,
+          "set_speed": 15,
+          "set_base_dir": 4,
+          "set_cool_down": 0,
+          "set_stamina_cost": 10,
+          "set_pause": 8,
+          "set_destroy": false,
+          "set_Keep": false,
+          "set_width": "cur_hero->body[0].getWidth()",
+          "set_height": "cur_hero->body[0].getHeight()",
+          "set_duration": 7,
+          "set_ase_cost": 7,
+          "set_can_cancel": true,
+          "set_turn": true
+        },
+        "3": {
+          "sprites": {
+            "right": {
+              "0": "border",
+              "1": 1
+            },
+            "up": {
+              "0": "border",
+              "1": 1
+            },
+            "down": {
+              "0": "border",
+              "1": 1
+            },
+            "left": {
+              "0": "border",
+              "1": 1
+            }
+          },
+          "set_name": 23,
+          "set_dmg": 7,
+          "set_speed": 15,
+          "set_base_dir": 4,
+          "set_cool_down": 0,
+          "set_stamina_cost": 10,
+          "set_pause": 13,
+          "set_destroy": false,
+          "set_Keep": false,
+          "set_width": "cur_hero->body[0].getWidth()",
+          "set_height": "cur_hero->body[0].getHeight()",
+          "set_duration": 7,
+          "set_ase_cost": 7,
+          "set_can_cancel": true,
+          "set_turn": true
+        },
+        "4": {
+          "sprites": {
+            "right": {
+              "0": "border",
+              "1": 1
+            },
+            "up": {
+              "0": "border",
+              "1": 1
+            },
+            "down": {
+              "0": "border",
+              "1": 1
+            },
+            "left": {
+              "0": "border",
+              "1": 1
+            }
+          },
+          "set_name": 24,
+          "set_dmg": 7,
+          "set_speed": 15,
+          "set_base_dir": 4,
+          "set_cool_down": 0,
+          "set_stamina_cost": 10,
+          "set_pause": 18,
+          "set_destroy": false,
+          "set_Keep": false,
+          "set_width": "cur_hero->body[0].getWidth()",
+          "set_height": "cur_hero->body[0].getHeight()",
+          "set_duration": 7,
+          "set_ase_cost": 7,
+          "set_can_cancel": true,
+          "set_turn": true
+        }
+      },
+      "fireshield" : {
+				"1" : {
+					"sprites" : {
+						"right": {"0":"fireshield", "1":3},
+						"up": {"0":"fireshield", "1":3},
+						"down": {"0":"fireshield", "1":3},
+						"left": {"0":"fireshield", "1":3}
+					},
+					"set_name": 3,
+					"set_dmg": 20,
+					"set_speed" : 1,
+					"set_base_dir" : 8,
+					"set_cool_down" : 95,
+					"set_stamina_cost" : 30,
+					"set_pause" : 3,
+					"set_destroy" : false,
+					"set_Keep" : false,
+					"set_width" : "cur_hero->body[0].getWidth()",
+					"set_height" : "cur_hero->body[0].getHeight()",
+					"set_duration" : 12,
+					"set_ase_cost" : 50,
+					"set_can_cancel" : false,
+					"set_turn" : false
+				}
+			}
+		}
+	},
+
+  "Yemoja": {
+    "x": 85.58,
+    "y": 79.23,
+    "width": 150,
+    "hight": 150,
+    "name": "Yemoja",
+    "hero_id": 2,
+    "bodyx1": 50.0,
+    "bodyx2": 50.0,
+    "bodyy1": 50.0,
+    "bodyy2": 50.0,
+    "health": 150,
+    "max_stamina": 300,
+    "aggression": 30,
+    "kindness": 70,
+    "honor": 80,
+    "pride": 60,
+    "recklessness": 30,
+    "extroversion": 30,
+    "greed": 50,
+    "sprites": {
+      "setTexture": {
+        "0": "Yemoja_Idle_S",
+        "1": 22
+      },
+      "setIdleTexture": {
+        "0": "Yemoja_Idle_S",
+        "1": 22
+      },
+
+      "id_up": {
+        "0": "Yemoja_Idle_N",
+        "1": 22
+      },
+      "id_down": {
+        "0": "Yemoja_Idle_S",
+        "1": 22
+      },
+      "id_left": {
+        "0": "Yemoja_Idle_W",
+        "1": 22
+      },
+      "id_right": {
+        "0": "Yemoja_Idle_E",
+        "1": 22
+      },
+      
+      "sprint_up": {
+        "0": "Yemoja_Sprint_N",
+        "1": 16
+      },
+      "sprint_down": {
+        "0": "Yemoja_Sprint_S",
+        "1": 16
+      },
+      "sprint_left": {
+        "0": "Yemoja_Sprint_W",
+        "1": 16
+      },
+      "sprint_right": {
+        "0": "Yemoja_Sprint_E",
+        "1": 16
+      },
+
+      "hurt_up": {
+        "0": "Yemoja_Recoil_N",
+        "1": 9
+      },
+      "hurt_down": {
+        "0": "Yemoja_Recoil_S",
+        "1": 9
+      },
+      "hurt_left": {
+        "0": "Yemoja_Recoil_W",
+        "1": 9
+      },
+      "hurt_right": {
+        "0": "Yemoja_Recoil_E",
+        "1": 9
+      },
+
+      "atk_up": {
+        "0": "Yemoja_Breath_N",
+        "1": 3
+      },
+      "atk_down": {
+        "0": "Yemoja_Breath_S",
+        "1": 3
+      },
+      "atk_left": {
+        "0": "Yemoja_Breath_W",
+        "1": 3
+      },
+      "atk_right": {
+        "0": "Yemoja_Breath_E",
+        "1": 3
+      },
+
+      "death_up": {
+        "0": "Yemoja_Death_N",
+        "1": 24
+      },
+      "death_down": {
+        "0": "Yemoja_Death_S",
+        "1": 24
+      },
+      "death_left": {
+        "0": "Yemoja_Death_W",
+        "1": 24
+      },
+      "death_right": {
+        "0": "Yemoja_Death_E",
+        "1": 24
+      },
+
+      "atk2_up": {
+        "0": "Yemoja_Breath_N",
+        "1": 3
+      },
+      "atk2_down": {
+        "0": "Yemoja_Breath_S",
+        "1": 3
+      },
+      "atk2_left": {
+        "0": "Yemoja_Breath_W",
+        "1": 3
+      },
+      "atk2_right": {
+        "0": "Yemoja_Breath_E",
+        "1": 3
+      },
+      "breathe_up": {
+        "0": "Yemoja_Breath_N",
+        "1": 8
+      },
+      "breathe_down": {
+        "0": "Yemoja_Breath_S",
+        "1": 8
+      },
+      "breathe_left": {
+        "0": "Yemoja_Breath_W",
+        "1": 8
+      },
+      "breathe_right": {
+        "0": "Yemoja_Breath_E",
+        "1": 8
+      }
+    },
+    "melee": {
+      "sprites": {
+        "right": {"0": "FireBallTMP","1": 3},
+        "up": {"0": "FireBallTMPUp","1": 3},
+        "down": {"0": "FireBallTMPDown","1": 3},
+        "left": {"0": "FireBallTMPLeft","1": 3}
+      },
+      "set_name": 0,
+			"set_dmg": 12,
+			"set_speed" : 5,
+			"set_base_dir" : 4,
+			"set_cool_down" : 35,
+			"set_stamina_cost" : 30,
+			"set_pause" : -1,
+			"set_destroy" : false,
+			"set_Keep" : true,
+			"set_width" : "cur_hero->body[0].getWidth()",
+			"set_height" : "cur_hero->body[0].getHeight()",
+			"set_duration" : 7,
+			"set_ase_cost" : 0,
+			"set_can_cancel" : true,
+			"set_turn" : false
+    },
+    "attacks": {
+      "fireball": {
+        "1": {
+          "sprites": {
+            "right": {
+              "0": "FireBallTMP",
+              "1": 3
+            },
+            "up": {
+              "0": "FireBallTMPUp",
+              "1": 3
+            },
+            "down": {
+              "0": "FireBallTMPDown",
+              "1": 3
+            },
+            "left": {
+              "0": "FireBallTMPLeft",
+              "1": 3
+            }
+          },
+          "set_name": 1,
+          "set_dmg": 22,
+          "set_speed": 12,
+          "set_base_dir": 3,
+          "set_cool_down": 65,
+          "set_stamina_cost": 30,
+          "set_pause": 16,
+          "set_destroy": true,
+          "set_Keep": false,
+          "set_width": "cur_hero->body[0].getWidth()",
+          "set_height": "cur_hero->body[0].getHeight()",
+          "set_duration": 100,
+          "set_ase_cost": 25,
+          "set_can_cancel": false,
+          "set_turn": false
+        }
+      }
+    }
+  },
+
+	"Oya" : {
+		"x" : 201.61,
+		"y" : 157.86,
+		"width" : 150,
+		"hight" : 150,
+		"name" : "Oya",
+		"hero_id" : 3,
+		"bodyx1" : 50.0,
+		"bodyx2" : 50.0,
+		"bodyy1" : 50.0,
+		"bodyy2" : 50.0,
+		"health": 150,
+		"max_stamina": 300,
+		"aggression": 30,
+		"kindness": 70,
+		"honor": 80,
+		"pride": 60,
+		"recklessness": 30,
+		"extroversion": 30,
+		"greed": 50,
+		"sprites": {
+			"setTexture": {"0":"Oya_Idle_S", "1":22},
+			"setIdleTexture": {"0":"Oya_Idle_S", "1":22},
+
+			"id_up": {"0":"Oya_Idle_N","1":22},
+			"id_down": {"0":"Oya_Idle_S","1":22},
+			"id_left": {"0":"Oya_Idle_W","1":22},
+			"id_right": {"0":"Oya_Idle_E","1":22},
+
+			"sprint_up": {"0":"Oya_Sprint_N","1":16},
+			"sprint_down": {"0":"Oya_Sprint_S","1":16},
+			"sprint_left": {"0":"Oya_Sprint_W","1":16},
+			"sprint_right": {"0":"Oya_Sprint_E","1":16},
+
+			"hurt_up": {"0":"Oya_Recoil_N","1":9},
+			"hurt_down": {"0":"Oya_Recoil_S","1":9},
+			"hurt_left": {"0":"Oya_Recoil_W","1":9},
+			"hurt_right": {"0":"Oya_Recoil_E","1":9},
+
+			"atk_up": {"0":"Oya_Attack_N","1":3},
+			"atk_down": {"0":"Oya_Attack_S","1":3},
+			"atk_left": {"0":"Oya_Attack_W","1":3},
+			"atk_right": {"0":"Oya_Attack_E","1":3},
+
+			"death_up": {"0":"Oya_Death_N","1":24},
+			"death_down": {"0":"Oya_Death_S","1":24},
+			"death_left": {"0":"Oya_Death_W","1":24},
+			"death_right": {"0":"Oya_Death_E","1":24},
+
+			"atk2_up": {"0":"Oya_Attack_N","1":3},
+			"atk2_down": {"0":"Oya_Attack_S","1":3},
+			"atk2_left": {"0":"Oya_Attack_W","1":3},
+			"atk2_right": {"0":"Oya_Attack_E","1":3},
+
+			"spin_up": {"0":"Oya_Spin_N","1":8},
+			"spin_down": {"0":"Oya_Spin_S","1":8},
+			"spin_left": {"0":"Oya_Spin_W","1":8},
+			"spin_right": {"0":"Oya_Spin_E","1":8}
+		},
+    "melee": {
+      "sprites": {
+        "right": {
+          "0": "FireBallTMP",
+          "1": 3
+        },
+        "up": {
+          "0": "FireBallTMPUp",
+          "1": 3
+        },
+        "down": {
+          "0": "FireBallTMPDown",
+          "1": 3
+        },
+        "left": {
+          "0": "FireBallTMPLeft",
+          "1": 3
+        }
+      },
+      "set_name": 0,
+			"set_dmg": 15,
+			"set_speed" : 5,
+			"set_base_dir" : 4,
+			"set_cool_down" : 35,
+			"set_stamina_cost" : 30,
+			"set_pause" : -1,
+			"set_destroy" : false,
+			"set_Keep" : true,
+			"set_width" : "cur_hero->body[0].getWidth()",
+			"set_height" : "cur_hero->body[0].getHeight()",
+			"set_duration" : 7,
+			"set_ase_cost" : 0,
+			"set_can_cancel" : true,
+			"set_turn" : false
+    },
+    "spin": {
+      "1": {
+        "sprites": {
+          "right": {
+            "0": "border",
+            "1": 1
+          },
+          "up": {
+            "0": "border",
+            "1": 1
+          },
+          "down": {
+            "0": "border",
+            "1": 1
+          },
+          "left": {
+            "0": "border",
+            "1": 1
+          }
+        },
+        "set_name": 2,
+        "set_dmg": 7,
+        "set_speed": 18,
+        "set_base_dir": 4,
+        "set_cool_down": 55,
+        "set_stamina_cost": 10,
+        "set_pause": 3,
+        "set_destroy": false,
+        "set_Keep": false,
+        "set_width": "cur_hero->body[0].getWidth()",
+        "set_height": "cur_hero->body[0].getHeight()",
+        "set_duration": 7,
+        "set_ase_cost": 7,
+        "set_can_cancel": true,
+        "set_turn": true
+      },
+      "2": {
+        "sprites": {
+          "right": {
+            "0": "border",
+            "1": 1
+          },
+          "up": {
+            "0": "border",
+            "1": 1
+          },
+          "down": {
+            "0": "border",
+            "1": 1
+          },
+          "left": {
+            "0": "border",
+            "1": 1
+          }
+        },
+        "set_name": 22,
+        "set_dmg": 7,
+        "set_speed": 15,
+        "set_base_dir": 4,
+        "set_cool_down": 0,
+        "set_stamina_cost": 10,
+        "set_pause": 8,
+        "set_destroy": false,
+        "set_Keep": false,
+        "set_width": "cur_hero->body[0].getWidth()",
+        "set_height": "cur_hero->body[0].getHeight()",
+        "set_duration": 7,
+        "set_ase_cost": 7,
+        "set_can_cancel": true,
+        "set_turn": true
+      },
+      "3": {
+        "sprites": {
+          "right": {
+            "0": "border",
+            "1": 1
+          },
+          "up": {
+            "0": "border",
+            "1": 1
+          },
+          "down": {
+            "0": "border",
+            "1": 1
+          },
+          "left": {
+            "0": "border",
+            "1": 1
+          }
+        },
+        "set_name": 23,
+        "set_dmg": 7,
+        "set_speed": 15,
+        "set_base_dir": 4,
+        "set_cool_down": 0,
+        "set_stamina_cost": 10,
+        "set_pause": 13,
+        "set_destroy": false,
+        "set_Keep": false,
+        "set_width": "cur_hero->body[0].getWidth()",
+        "set_height": "cur_hero->body[0].getHeight()",
+        "set_duration": 7,
+        "set_ase_cost": 7,
+        "set_can_cancel": true,
+        "set_turn": true
+      },
+      "4": {
+        "sprites": {
+          "right": {
+            "0": "border",
+            "1": 1
+          },
+          "up": {
+            "0": "border",
+            "1": 1
+          },
+          "down": {
+            "0": "border",
+            "1": 1
+          },
+          "left": {
+            "0": "border",
+            "1": 1
+          }
+        },
+        "set_name": 24,
+        "set_dmg": 7,
+        "set_speed": 18,
+        "set_base_dir": 4,
+        "set_cool_down": 0,
+        "set_stamina_cost": 10,
+        "set_pause": 33,
+        "set_destroy": false,
+        "set_Keep": false,
+        "set_width": "cur_hero->body[0].getWidth()",
+        "set_height": "cur_hero->body[0].getHeight()",
+        "set_duration": 7,
+        "set_ase_cost": 7,
+        "set_can_cancel": true,
+        "set_turn": true
+      }
+    }
+	},
+
+	"Ogun" : {
+		"x" : 201.25,
+		"y" : 59.57,
+		"width" : 180,
+		"hight" : 180,
+		"name" : "Ogun",
+		"hero_id" : 5,
+		"bodyx1" : 50.0,
+		"bodyx2" : 50.0,
+		"bodyy1" : 50.0,
+		"bodyy2" : 50.0,
+		"health": 160,
+		"max_stamina": 300,
+		"aggression": 30,
+		"kindness": 70,
+		"honor": 80,
+		"pride": 60,
+		"recklessness": 30,
+		"extroversion": 30,
+		"greed": 50,
+		"sprites": {
+			"setTexture": {"0":"Ogun_Idle_S", "1":21},
+			"setIdleTexture": {"0":"Ogun_Idle_S", "1":21},
+
+			"id_up": {"0":"Ogun_Idle_N","1":21},
+			"id_down": {"0":"Ogun_Idle_S","1":21},
+			"id_left": {"0":"Ogun_Idle_W","1":21},
+			"id_right": {"0":"Ogun_Idle_E","1":21},
+
+			"sprint_up": {"0":"Ogun_Sprint_N","1":16},
+			"sprint_down": {"0":"Ogun_Sprint_S","1":16},
+			"sprint_left": {"0":"Ogun_Sprint_W","1":16},
+			"sprint_right": {"0":"Ogun_Sprint_E","1":16},
+
+			"hurt_up": {"0":"Ogun_Recoil_N","1":9},
+			"hurt_down": {"0":"Ogun_Recoil_S","1":9},
+			"hurt_left": {"0":"Ogun_Recoil_W","1":9},
+			"hurt_right": {"0":"Ogun_Recoil_E","1":9},
+
+			"atk_up": {"0":"Ogun_Attack_N","1":3},
+			"atk_down": {"0":"Ogun_Attack_S","1":3},
+			"atk_left": {"0":"Ogun_Attack_W","1":3},
+			"atk_right": {"0":"Ogun_Attack_E","1":3},
+
+			"death_up": {"0":"Ogun_Death_N","1":21},
+			"death_down": {"0":"Ogun_Death_S","1":21},
+			"death_left": {"0":"Ogun_Death_W","1":21},
+			"death_right": {"0":"Ogun_Death_E","1":21},
+
+			"atk2_up": {"0":"Ogun_Attack_N","1":3},
+			"atk2_down": {"0":"Ogun_Attack_S","1":3},
+			"atk2_left": {"0":"Ogun_Attack_W","1":3},
+			"atk2_right": {"0":"Ogun_Attack_E","1":3}
+		},
+		"melee" : {
+			"sprites" : {
+				"right": {
+            "0": "border",
+            "1": 1
+          },
+          "up": {
+            "0": "border",
+            "1": 1
+          },
+          "down": {
+            "0": "border",
+            "1": 1
+          },
+          "left": {
+            "0": "border",
+            "1": 1
+          }
+			},
+			"set_name": 0,
+			"set_dmg": 17,
+			"set_speed" : 5,
+			"set_base_dir" : 4,
+			"set_cool_down" : 35,
+			"set_stamina_cost" : 25,
+			"set_pause" : -1,
+			"set_destroy" : false,
+			"set_Keep" : true,
+			"set_width" : "cur_hero->body[0].getWidth()",
+			"set_height" : "cur_hero->body[0].getHeight()",
+			"set_duration" : 7,
+			"set_ase_cost" : 0,
+			"set_can_cancel" : true,
+			"set_turn" : false
+		},
+    "attacks": {
+      "fireshield" : {
+				"1" : {
+					"sprites" : {
+						"right": {"0":"fireshield", "1":3},
+						"up": {"0":"fireshield", "1":3},
+						"down": {"0":"fireshield", "1":3},
+						"left": {"0":"fireshield", "1":3}
+					},
+					"set_name": 3,
+					"set_dmg": 20,
+					"set_speed" : 1,
+					"set_base_dir" : 8,
+					"set_cool_down" : 95,
+					"set_stamina_cost" : 30,
+					"set_pause" : 3,
+					"set_destroy" : false,
+					"set_Keep" : false,
+					"set_width" : "cur_hero->body[0].getWidth()",
+					"set_height" : "cur_hero->body[0].getHeight()",
+					"set_duration" : 12,
+					"set_ase_cost" : 50,
+					"set_can_cancel" : false,
+					"set_turn" : false
+				}
+			}
+    }
+	}
+}

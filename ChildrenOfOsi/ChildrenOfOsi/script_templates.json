@@ -1,287 +1,817 @@
 {
-	"greeting_templates": {
-		"1": {
-			"1": "Greeting" ,
-			"2": "." ,
-			"3":"Extra_Dialogue",
-			"4": "."
-		},
+    "Greeting_Templates": {
+     "1": {
+        "1": "Greeting"
+	 }
+    },
 
-		"2": {
-			"1": "Greeting" ,
-			"2": "." 
-		}
+    "Farewell_Templates": {
+     "1": {
+        "1": "Farewell"
+	 }
+    },
+
+	"Ask_Name_Templates": {
+     "1": {
+        "1": "Ask_Name"
+	 }
 	},
 
-	"refute_question_templates": {
-
-		"1": {
-			"1": "Refute_Question" ,
-			"2": "." 
-		},
-
-		"2": {
-			"1": "Refute_Question" ,
-			"2":"Identifier",
-			"3": "."
-		}
+	"Tell Name_Templates": {
+     "1": {
+        "1": "Tell Name"
+	 }
 	},
 
-	"My name is Shango_templates": {
-
-		"1": {
-			"1": "Introduction" ,
-			"2": "."
-		},
-
-		"2": {
-			"1": "Introduction" ,
-			"2": ".",
-			"3": "Extra_Dialogue",
-			"4": "."
-		}
+	"Ask_Origin_Templates": {
+     "1": {
+        "1": "Ask_Origin"
+	 }
 	},
 
-	"response_name_templates": {
-
-		"1": {
-			"1": "Response_Name" ,
-			"2": ".",
-			"3": "Good_Intentions",
-			"4": "."
-		},
-
-		"2": {
-			"1": "Response_Name" ,
-			"2": "."
-		}
+	"Tell Origin_Templates": {
+     "1": {
+        "1": "Tell Origin"
+	 }
 	},
 
-	"I come from a place that you won't find on any map_templates": {
+	"Ask About Strength Of_Templates": {
+     "1": {
+        "1": "Ask About Strength Of"
+	 }
+    },
 
-		"1": {
-			"1": "Response_Origin" ,
-			"2": "." 
-		}
+	"Tell About Strength Of_Templates": {
+     "1": {
+        "1": "Tell About Strength Of"
+	 }
+    },
+
+    "Ask About Affinity Of_Templates": {
+     "1": {
+        "1": "Ask About Affinity Of"
+	 }
+    },
+
+	"Tell About Affinity Of_Templates": {
+     "1": {
+        "1": "Tell About Affinity Of"
+	 }
+    },
+
+	"Ask About Notoriety Of_Templates": {
+     "1": {
+        "1": "Ask About Notoriety Of"
+	 }
+    },
+
+	"Tell About Notoriety Of_Templates": {
+     "1": {
+        "1": "Tell About Notoriety Of"
+	 }
+    },
+
+	"Ask_To_Form_Alliance_Templates": {
+     "1": {
+        "1": "Ask_To_Form_Alliance"
+	 }
+    },
+
+	"Accept Alliance Offer_Templates": {
+     "1": {
+        "1": "Accept Alliance Offer"
+	 }
+    },
+
+	"Confirm Alliance_Templates": {
+     "1": {
+        "1": "Confirm Alliance"
+	 }
+    },
+
+	"Advise To Conquer_Templates": {
+     "1": {
+        "1": "Advise To Conquer"
+	 }
+    },
+
+	"Take Advice To Conquer_Templates": {
+     "1": {
+        "1": "Take Advice To Conquer"
+	 }
+    },
+
+	"Advise To Ally With_Templates": {
+     "1": {
+        "1": "Advise To Ally With"
+	 }
+    },
+
+	"Take Advice To Ally With_Templates": {
+     "1": {
+        "1": "Take Advice To Ally With"
+	 }
+    },
+
+	"Advise To Revolt Against_Templates": {
+     "1": {
+        "1": "Advise To Revolt"
+	 }
+    },
+
+	"Take Advice To Revolt Against_Templates": {
+     "1": {
+        "1": "Take Advice To Revolt Against"
+	 }
+    },
+
+	"Advise To Destroy_Templates": {
+     "1": {
+        "1": "Advise To Destroy"
+	 }
+    },
+
+    "Take Advice To Destroy_Templates": {
+     "1": {
+        "1": "Take Advice To Destroy"
+	 }
+    },
+
+	"Ask_To_Duel_Templates": {
+     "1": {
+        "1": "Ask_To_Duel"
+	 }
+    },
+
+	"Accept Duel_Templates": {
+     "1": {
+        "1": "Accept Duel"
+	 }
+    },
+
+	"Confirm Duel_Templates": {
+     "1": {
+        "1": "Confirm Duel"
+	 }
+    },
+
+	"Finish Duel_Templates": {
+     "1": {
+        "1": "Finish Duel"
+	 }
+    },
+
+	"Ask_To_Spar_Templates": {
+     "1": {
+        "1": "Ask_To_Spar"
+	 }
+    },
+
+	"Accept Spar Request_Templates": {
+     "1": {
+        "1": "Accept Spar Request"
+	 }
+    },
+
+	"Confirm Spar_Templates": {
+     "1": {
+        "1": "Confirm Spar"
+	 }
+    },
+
+	"Finish Spar_Templates": {
+     "1": {
+        "1": "Finish Spar"
+	 }
+    },
+	"Confirm Ally_Templates": {
+     "1": {
+        "1": "Confirm Ally"
+	 }
+    },
+
+	"Confirm Fight_Templates": {
+     "1": {
+        "1": "Confirm Fight"
+	 }
+    },
+
+	"Confirm Peace_Templates": {
+     "1": {
+        "1": "Confirm Peace"
+	 }
+    },
+
+	"Confirm Conquer_Templates": {
+     "1": {
+        "1": "Confirm Conquer"
+	 }
+    },
+
+	"Bribe_Templates": {
+     "1": {
+        "1": "Bribe"
+	 }
+    },
+
+	"Accept Bribe_Templates": {
+     "1": {
+        "1": "Accept Bribe"
+	 }
+    },
+
+	"Ask_To_Join_Party_Templates":{
+	 "1": {
+        "1": "Ask_To_Join_Party"
+	 }
 	},
 
-	"I am here to form a friendship with this village and its people_templates": {
-
-		"1": {
-			"1": "Friend_Reason" ,
-			"2": ".",
-			"3": "Good_Intentions",
-			"4": "."
-		},
-
-		"2": {
-			"1": "Friend_Reason" ,
-			"2": "."
-		}
+    "Accept Into Party_Templates":{
+	 "1": {
+        "1": "Accept Into Party"
+	 }
 	},
 
-	"bad_reason_templates": {
-
-		"1": {
-			"1": "Bad_Reason" ,
-			"2": "." 
-		}
+	"Recruit_For_Party_Templates":{
+	 "1": {
+        "1": "Recruit_For_Party"
+	 }
 	},
 
-	"village_response_templates": {
-
-		"1": {
-			"1": "Village_Response" ,
-			"2":"Village_1",
-			"3": "."
-		}
+	"Remove_From_Party_Templates":{
+	 "1": {
+        "1": "Remove_From_Party"
+	 }
 	},
 
-	"familiar_greet_templates": {
-		"1": {
-			"1": "Familiar_Greet" ,
-			"2": "." 
-		},
-
-		"2": {
-			"1": "Familiar_Greet" ,
-			"2": ".",
-			"3": "Good_Intentions",
-			"4": "."
-		}
+	"Response_Remove_From_Party_Templates":{
+	 "1": {
+        "1": "Response_Remove_From_Party"
+	 }
 	},
 
-	"I would rather not say_templates": {
-		"1": {
-			"1": "Question_Denied" ,
-			"2": "." 
-		}
-
+	"Response_Recruit_For_Party_Templates":{
+	 "1": {
+        "1": "Response_Recruit_For_Party"
+	 }
 	},
 
-	"question_name_templates": {
-	    "1": {
-			"1": "Ask_Name" ,
-			"2":"Identifier",
-			"3": "?"
-		},
-
-		"2": {
-			"1": "Ask_Name" ,
-			"2": "?" 
-		}
+    "Join Party_Templates":{
+	 "1": {
+        "1": "Join Party"
+	 }
 	},
 
-	"question_reason_templates": {
+	"Compliment_Templates": {
+	 "1": {
+        "1": "Compliment"
+	 }
+    },
 
-		"1": {
-			"1": "Ask_Reason" ,
-			"2": "Identifier",
-			"3": "?" 
-		},
+	"Thank_Templates": {
+	 "1": {
+        "1": "Thank"
+	 }
+    },
 
-		"2": {
-			"1": "Ask_Reason" ,
-			"2": "?" 
-		}
+	"Grovel_Templates": {
+	 "1": {
+        "1": "Grovel"
+	 }
+    },
+
+	"Accept Plea_Templates": {
+	 "1": {
+        "1": "Accept Plea"
+	 }
+    },
+
+	"Advise To Train With_Templates": {
+	 "1": {
+        "1": "Advise To Train With"
+	 }
+    },
+
+	"Take Advice To Train With_Templates": {
+	 "1": {
+        "1": "Take Advice To Train With"
+	 }
+    },
+
+	"Advise To Fight_Templates": {
+	 "1": {
+        "1": "Advise To Fight"
+	 }
+    },
+
+	"Take Advice To Fight_Templates": {
+	 "1": {
+        "1": "Take Advice To Fight"
+	 }
+    },
+
+	"Advise To Send Peace Offering To_Templates": {
+	 "1": {
+        "1": "Advise To Send Peace Offering To"
+	 }
+    },
+
+	"Take Advice To Send Peace Offering To_Templates": {
+	 "1": {
+        "1": "Take Advice To Send Peace Offering To"
+	 }
+    },
+
+	"Request_Teaching_Templates": {
+	 "1": {
+        "1": "Request_Teaching"
+	 }
+    },
+
+	"Teach_Templates": {
+	 "1": {
+        "1": "Teach"
+	 }
+    },
+
+	"Confirm Teach_Templates": {
+	 "1": {
+        "1": "Confirm Teach"
+	 }
+    },
+
+	"Teach Fireball_Templates": {
+	 "1": {
+        "1": "Teach Fireball"
+	 }
+    },
+
+	"Teach Fireball 1_Templates": {
+	 "1": {
+        "1": "Teach Fireball 1"
+	 }
+    },
+
+	"Teach Fireball 2_Templates": {
+	 "1": {
+        "1": "Teach Fireball 2"
+	 }
+    },
+
+	"Teach Fireball 3_Templates": {
+	 "1": {
+        "1": "Teach Fireball 3"
+	 }
+    },
+
+	"Teach Spin_Templates": {
+	 "1": {
+        "1": "Teach Spin"
+	 }
+    },
+
+	"Teach Spin 1_Templates": {
+	 "1": {
+        "1": "Teach Spin 1"
+	 }
+    },
+
+	"Teach Spin 2_Templates": {
+	 "1": {
+        "1": "Teach Spin 2"
+	 }
+    },
+
+	"Teach Spin 3_Templates": {
+	 "1": {
+        "1": "Teach Spin 3"
+	 }
+    },
+
+	"Teach Shield_Templates": {
+	 "1": {
+        "1": "Teach Shield"
+	 }
+    },
+
+	"Teach Shield 1_Templates": {
+	 "1": {
+        "1": "Teach Shield 1"
+	 }
+    },
+
+	"Teach Shield 2_Templates": {
+	 "1": {
+        "1": "Teach Shield 2"
+	 }
+    },
+
+	"Teach Shield 3_Templates": {
+	 "1": {
+        "1": "Teach Shield 3"
+	 }
+    },
+
+    "Already Taught_Templates": {
+	 "1": {
+        "1": "Already Taught"
+	 }
+    },
+
+	"Offer_Teaching_Templates": {
+	 "1": {
+        "1": "Offer_Teaching"
+	 }
+    },
+
+	"Accept Teaching_Templates": {
+	 "1": {
+        "1": "Accept Teaching"
+	 }
+    },
+
+	"Boast_Templates": {
+	 "1": {
+        "1": "Boast"
+	 }
+    },
+
+    "Congratulate_Templates": {
+	 "1": {
+        "1": "Congratulate"
+	 }
+    },
+
+	"Intimidate_Templates": {
+	 "1": {
+        "1": "Intimidate"
+	 }
+    },
+
+	"Talk Back_Templates": {
+	 "1": {
+        "1": "Talk Back"
+	 }
+    },
+
+	"Insult_Templates": {
+	 "1": {
+        "1": "Insult"
+	 }
+    },
+
+	"Defend Self_Templates": {
+	 "1": {
+        "1": "Defend Self"
+	 }
+    },
+
+	"No_More_Phrases_Templates": {
+	 "1": {
+        "1": "No_More_Phrases"
+	 }
+    },
+
+	"Response_No_More_Phrases_Templates": {
+	 "1": {
+        "1": "Response_No_More_Phrases"
+	 }
+    },
+
+	"Already_Asked_Templates": {
+	 "1": {
+        "1": "Already_Asked"
+	 }
+    },
+
+	"Response_Already_Asked_Templates": {
+	 "1": {
+        "1": "Response_Already_Asked"
+	 }
+    },
+
+	"Ask_For_Quest_Templates": {
+	 "1": {
+        "1": "Ask_For_Quest"
+	 }
+    },
+
+	"Response_Ask_For_Quest_Templates": {
+	 "1": {
+        "1": "Response_Ask_For_Quest"
+	 }
+    },
+
+	"Accept_Quest_Templates": {
+	 "1": {
+        "1": "Accept_Quest"
+	 }
+    },
+
+	"Decline_Quest_Templates": {
+	 "1": {
+        "1": "Decline_Quest"
+	 }
+    },
+
+	"Offer_Quest_Templates": {
+	 "1": {
+        "1": "Offer_Quest"
+	 }
+    },
+
+	"No Quest_Templates": {
+	 "1": {
+        "1": "No Quest"
+	 }
+    },
+
+	"Quest_Complete_Templates": {
+	 "1": {
+        "1": "Quest_Complete"
+	 }
+    },
+
+	"Quest_Failed_Templates": {
+	 "1": {
+        "1": "Quest_Failed"
+	 }
+    },
+
+	"Quest_In_Progress_Templates": {
+	 "1": {
+        "1": "Quest_In_Progress"
+	 }
+    },
+
+	"Exit Quest_Templates": {
+	 "1": {
+        "1": "Exit Quest"
+	 }
+    },
+
+	"Decline_To_Answer_Templates": {
+     "1": {
+        "1": "Decline_To_Answer"
+	 }
 	},
 
-  "question_origin_templates": {
-
-		"1": {
-			"1": "Ask_Origin" ,
-			"2":"Identifier",
-			"3": "?"
-		}
-	},
-
-	"action_boast_templates": {
-
-		"1": {
-			"1": "action_boast"
-		}
-	},
-
-	"action_intimidate_templates": {
-
-		"1": {
-			"1": "action_intimidate"
-		}
-	},
-
-	"request_spar_templates": {
-
-		"1": {
-			"1": "request_spar"
-		}
-	},
-
-	"Impressive_templates": {
-
-		"1": {
-			"1": "response_boast"
-		}
-	},
-
-	"You don't scare me_templates": {
-
-		"1": {
-			"1": "response_intimidate"
-		}
-	},
-
-	"response_spar_templates": {
-
-		"1": {
-			"1": "response_spar"
-		}
-	},
-
-	"action_compliment_templates": {
-
-		"1": {
-			"1": "action_compliment"
-		}
-	},
-
-	"action_bribe_templates": {
-
-		"1": {
-			"1": "action_bribe"
-		}
-	},
-
-	"action_grovel_templates": {
-
-		"1": {
-			"1": "action_grovel"
-		}
-	},
-
-	"Aww shucks!_templates": {
-
-		"1": {
-			"1": "response_compliment"
-		}
-	},
-
-	"response_bribe_templates": {
-
-		"1": {
-			"1": "response_bribe"
-		}
-	},
-
-	"response_grovel_templates": {
-
-		"1": {
-			"1": "response_grovel"
-		}
-	},
-
-	"suggest_alliance_templates": {
-
-		"1": {
-			"1": "question_alliance"
-		}
-	},
-
-	"response_alliance_templates": {
-
-		"1": {
-			"1": "response_alliance"
-		}
-	},
-
-		"question_experience_templates": {
-
-		"1": {
-			"1": "question_experience"
-		}
-	},
-  "I once fought off several bandits_templates": {
-
-    "1": {
-      "1": "response_experience"
-    }
-  },
-   "give_quest_hack_templates": {
+   "give_quest_hack_Templates": {
     "1": {
       "1": "give_quest_hack",
       "2": "?"
     }
   },
 
-  "quest_accept_templates": {
+  "quest_accept_Templates": {
     "1": {
       "1": "quest_accept"
     }
   },
 
-  "quest_deny_templates": {
+  "quest_deny_Templates": {
     "1": {
       "1": "quest_deny"
     }
-  }
+  },
 
+  "Shrine Talk 1_Templates": {
+    "1": {
+      "1": "Shrine Talk 1"
+    }
+  },
+
+  "Shrine Talk 2_Templates": {
+    "1": {
+      "1": "Shrine Talk 2"
+    }
+  },
+
+  "Shrine Talk 3_Templates": {
+    "1": {
+      "1": "Shrine Talk 3"
+    }
+  },
+
+  "Shrine Talk 4_Templates": {
+    "1": {
+      "1": "Shrine Talk 4"
+    }
+  },
+
+  "Shrine Not Worthy_Templates": {
+    "1": {
+      "1": "Shrine Not Worthy"
+    }
+  },
+
+   "Good Advice_Templates": {
+    "1": {
+      "1": "Good Advice"
+    }
+  },
+
+   "Terrible Advice_Templates": {
+    "1": {
+      "1": "Terrible Advice"
+    }
+  },
+
+  "Response Inquire About Ifa_Templates": {
+    "1": {
+      "1": "Response Inquire About Ifa"
+    }
+  },
+
+  "Response Ask For Divination_Templates": {
+    "1": {
+      "1": "Response Ask For Divination"
+    }
+  },
+
+  "Ask For Divination_Templates": {
+    "1": {
+      "1": "Ask For Divination"
+    }
+  },
+
+  "Ask About Ifa_Templates": {
+    "1": {
+      "1": "Ask About Ifa"
+    }
+  },
+
+  "Oasis_Man_1_Templates": {
+    "1": {
+      "1": "Oasis_Man_1"
+    }
+  },
+
+  "Oasis_Man_2_Templates": {
+    "1": {
+      "1": "Oasis_Man_2"
+    }
+  },
+
+  "Oasis_Man_3_Templates": {
+    "1": {
+      "1": "Oasis_Man_3"
+    }
+  },
+
+  "Oasis_Woman_1_Templates": {
+    "1": {
+      "1": "Oasis_Woman_1"
+    }
+  },
+
+  "Oasis_Woman_2_Templates": {
+    "1": {
+      "1": "Oasis_Woman_2"
+    }
+  },
+
+  "Oasis_Woman_3_Templates": {
+    "1": {
+      "1": "Oasis_Woman_3"
+    }
+  },
+
+  "Oasis_child_1_Templates": {
+    "1": {
+      "1": "Oasis_child_1"
+    }
+  },
+
+  "Oasis_child_2_Templates": {
+    "1": {
+      "1": "Oasis_child_2"
+    }
+  },
+
+  "Oasis_child_3_Templates": {
+    "1": {
+      "1": "Oasis_child_3"
+    }
+  },
+
+  "Jungle_Man_1_Templates": {
+    "1": {
+      "1": "Jungle_Man_1"
+    }
+  },
+
+  "Jungle_Man_2_Templates": {
+    "1": {
+      "1": "Jungle_Man_2"
+    }
+  },
+
+  "Jungle_Man_3_Templates": {
+    "1": {
+      "1": "Jungle_Man_3"
+    }
+  },
+
+  "Jungle_Woman_1_Templates": {
+    "1": {
+      "1": "Jungle_Woman_1"
+    }
+  },
+
+  "Jungle_Woman_2_Templates": {
+    "1": {
+      "1": "Jungle_Woman_2"
+    }
+  },
+
+  "Jungle_Woman_3_Templates": {
+    "1": {
+      "1": "Jungle_Woman_3"
+    }
+  },
+
+  "Jungle_child_1_Templates": {
+    "1": {
+      "1": "Jungle_child_1"
+    }
+  },
+
+  "Jungle_child_2_Templates": {
+    "1": {
+      "1": "Jungle_child_2"
+    }
+  },
+
+  "Jungle_child_3_Templates": {
+    "1": {
+      "1": "Jungle_child_3"
+    }
+  },
+
+  "Boast In Response_Templates": {
+    "1": {
+      "1": "Boast In Response"
+    }
+  },
+
+  "Intimidate In Response_Templates": {
+    "1": {
+      "1": "Intimidate In Response"
+    }
+  },
+
+   "Compliment In Response_Templates": {
+    "1": {
+      "1": "Compliment In Response"
+    }
+  },
+
+   "Offer Praise In Response_Templates": {
+    "1": {
+      "1": "Offer Praise In Response"
+    }
+  },
+
+   "Insult In Response_Templates": {
+    "1": {
+      "1": "Insult In Response"
+    }
+  },
+
+  "Accept Gift_Templates": {
+    "1": {
+      "1": "Accept Gift"
+    }
+  },
+
+  "Offer Gift_Templates": {
+    "1": {
+      "1": "Offer Gift"
+    }
+  },
+
+  "Refuse_Templates": {
+    "1": {
+      "1": "Refuse"
+    }
+  },
+
+   "No Divination_Templates": {
+    "1": {
+      "1": "No Divination"
+    }
+  },
+
+   "Offer Praise_Templates": {
+    "1": {
+      "1": "Offer Praise"
+    }
+  },
+
+   "Accept Praise_Templates": {
+    "1": {
+      "1": "Accept Praise"
+    }
+  }
 }

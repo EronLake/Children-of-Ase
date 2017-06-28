@@ -1,31 +1,49 @@
 #include "stdafx.h"
 #include "Sprite.h"
 
+std::mutex mut;
+
 /**
  * Changes this sprite to wrap the texture specified.
  */
 void Sprite::setTexture(Texture *t)
 {
-	if (tex == t || lock) return; 
-  tex = t;
-  index = 0;
-  start = 0;
-  stop = tex->getFrameWidth();
-  top = tex->getHeight();
-  bottom = 0;
-  tempTime = 0;
+	std::lock_guard<std::mutex> guard(*this->mut);
+	if (tex == t || lock) return;
+	tex = t;
+	index = 0;
+	start = 0;
+	stop = tex->getFrameWidth();
+	top = tex->getHeight();
+	bottom = 0;
+	tempTime = 0;
+}
+
+void Sprite::reset_texture()
+{
+	std::lock_guard<std::mutex> guard(*this->mut);
+	index = 0;
+	start = 0;
+	stop = tex->getFrameWidth();
+	top = tex->getHeight();
+	bottom = 0;
+	tempTime = 0;
 }
 
 void Sprite::setIdleTexture(Texture *t)
 {
-	if (idle == t || lock) return;
-	idle = t;
-	index = 0;
-	start = 0;
-	stop = idle->getFrameWidth();
-	top = idle->getHeight();
-	bottom = 0;
-	tempTime = 0;
+//	std::lock_guard<std::mutex> guard(*this->mut);
+  if(idle == t || lock)
+    return;
+  else {
+    idle = t;
+    index = 0;
+    start = 0;
+    stop = idle->getFrameWidth();
+    top = idle->getHeight();
+    bottom = 0;
+    tempTime = 0;
+  }
 }
 
 /**
@@ -33,9 +51,10 @@ void Sprite::setIdleTexture(Texture *t)
  */
 void Sprite::animate()
 {
+	//std::lock_guard<std::mutex> guard(mut);
   ++this->tempTime;
-  if(this->tempTime == 2) {
-    if(this->index < this->tex->getFrames()-1) {
+  if(this->tempTime == 5) {
+    if(this->index < this->tex->getFrames() - 1) {
       ++this->index;
       this->start = tex->getFrameWidth() * index;
       this->stop = tex->getFrameWidth() * (index + 1);
@@ -45,10 +64,11 @@ void Sprite::animate()
       this->index = 0;
       this->start = 0;
       this->stop = this->tex->getFrameWidth();
-	  if (lock) {
-		  lock = false;
-		  setTexture(idle);
-	  }
+      if(lock) {
+        lock = false;
+		dying = false; //now just dead if previously dying
+        setTexture(idle);
+      }
     }
 
     this->tempTime = 0;

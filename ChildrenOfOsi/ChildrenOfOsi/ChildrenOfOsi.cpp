@@ -2,6 +2,7 @@
 #include "ChildrenOfOsi.h"
 #include "MemoryPool.h"
 #include "memManager.h"
+#include "MemoryHelper.h"
 
 ChildrenOfOsi::ChildrenOfOsi(MessageLog* _mLog, TaskBuffer* _tBuffer)
 {
@@ -72,7 +73,7 @@ void ChildrenOfOsi::stop(WorldObj* player) {
 ////////////////////////////////////////////////////
 
 void ChildrenOfOsi::move_toward(WorldObj* obj) {
-	//std::////cout << obj->getName() << "MOVING TOWARD" << std::endl;
+	//std:://////cout << obj->getName() << "MOVING TOWARD" << std::endl;
 	createTask("Move", "AI", obj);
 }
 void ChildrenOfOsi::get_path(WorldObj* obj) {
@@ -147,6 +148,7 @@ void ChildrenOfOsi::drawDiaGui(WorldObj* player)
 	createTask("Dialogue", "DRAW", player);
 }
 
+
 void ChildrenOfOsi::drawHUD(WorldObj* player)
 {
 	createTask("HUD", "DRAW", player);
@@ -155,6 +157,26 @@ void ChildrenOfOsi::drawHUD(WorldObj* player)
 void ChildrenOfOsi::init_map(WorldObj* obj)
 {
 	createTask("Init_Map", "DRAW", obj);
+}
+
+void ChildrenOfOsi::drawTut(WorldObj * obj)
+{
+	createTask("Tut", "DRAW", obj);
+}
+
+void ChildrenOfOsi::draw_logo(WorldObj * obj)
+{
+	createTask("Logo", "DRAW", obj);
+}
+
+void ChildrenOfOsi::draw_talk(WorldObj * obj)
+{
+	createTask("Draw_Talk", "DRAW", obj);
+}
+
+void ChildrenOfOsi::draw_victory_menu(WorldObj * obj)
+{
+	createTask("Victory_Menu", "Draw", obj);
 }
 
 ///////////////////////////////////////////////////
@@ -200,36 +222,36 @@ void ChildrenOfOsi::add_action(std::string key, int utility, int why, Hero* owne
 	createTaskAddAct("Add_Action", "MODIFY_POOL", key, utility, why, owner, receiver, doer, exe_name);
 }
 
-void ChildrenOfOsi::add_tag(std::vector<std::string> topicVec, std::string key) {
-	createTaskTag("Add_Tag", "MODIFY_POOL", topicVec, key);
+void ChildrenOfOsi::add_tag(std::string key) {
+	createTaskTag("Add_Tag", "MODIFY_POOL",key);
 }
 
-void ChildrenOfOsi::add_conv_point(std::string topic, std::string temp, std::string key) {
-	createTaskNoObj("Add_Conv_Point", "MODIFY_POOL",topic,temp, key);
+void ChildrenOfOsi::add_conv_point(std::string icon, std::string temp, std::string key) {
+	createTaskNoObj("Add_Conv_Point", "MODIFY_POOL",icon,temp, key);
 }
 
 
 //////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////
 
-void ChildrenOfOsi::play_sound(string name) {
-	createTask(name, "SOUND");
+void ChildrenOfOsi::play_sound(string name, char* source, RegionState::soundType type) {
+	createTaskForAudio(name, "SOUND", source, nullptr, type);
 }
-void ChildrenOfOsi::change_song(string name, char* from, char* to) {
-	createTaskForAudio(name, "SOUND", from, to);
+void ChildrenOfOsi::change_song(string name, char* from, char* to, RegionState::soundType type) {
+	createTaskForAudio(name, "SOUND", from, to, type);
 
 };
 void ChildrenOfOsi::pause_unpause(string name, char* source) {
-	createTaskForAudio(name, "SOUND", source);
+	createTaskForAudio(name, "SOUND", source,nullptr,RegionState::soundType::null_type);
 
 };
 
 //----------------------------------------------------
 //----------------------------------------------------
-void ChildrenOfOsi::createTaskForAudio(std::string _name, std::string _type, char* _source , char* _target) {
+void ChildrenOfOsi::createTaskForAudio(std::string _name, std::string _type, char* _source, char* _target, RegionState::soundType _soundType) {
 	//maybe just pass in the string craeated
 	std::string task_status = "CREATED";
-	Task* new_task = new Task(_name, task_status, _type, _source, _target);
+	Task* new_task = new(MemoryHelper::s_find_available_block(memManager::task_head)) Task(_name, task_status, _type, _source, _target,_soundType);
 	tBuffer->push(new_task);
 	mLog->logMessage(new_task);
 }
@@ -241,9 +263,9 @@ void ChildrenOfOsi::createTask(std::string task_name, std::string type, WorldObj
 	if (objToUpdate == nullptr) {
 		LOG("childrenofosi createtask func, obj to update is a nullptr");
 	}
-	Task* new_task = new Task(task_name, task_status, type, objToUpdate);
+
+	Task* new_task = new(MemoryHelper::s_find_available_block(memManager::task_head)) Task(task_name, task_status, type, objToUpdate);
 	tBuffer->push(new_task);
-	mLog->logMessage(new_task);
 }
 
 void ChildrenOfOsi::createTaskWithNum(std::string task_name, std::string type, WorldObj * objToUpdate,int num)
@@ -253,27 +275,24 @@ void ChildrenOfOsi::createTaskWithNum(std::string task_name, std::string type, W
 	if (objToUpdate == nullptr) {
 		LOG("childrenofosi createtask func, obj to update is a nullptr");
 	}
-	Task* new_task = new Task(task_name, task_status, type, objToUpdate,num);
+	Task* new_task = new(MemoryHelper::s_find_available_block(memManager::task_head)) Task(task_name, task_status, type, objToUpdate,num);
 	tBuffer->push(new_task);
-	mLog->logMessage(new_task);
 }
 
 void ChildrenOfOsi::createTaskWithParams(std::string task_name, std::string type, std::string key, float x, float y, bool col)
 {
 	//maybe just pass in the string craeated
 	std::string task_status = "CREATED";
-	Task* new_task = new Task(task_name, task_status, type, key, x, y, col);
+	Task* new_task = new(MemoryHelper::s_find_available_block(memManager::task_head)) Task(task_name, task_status, type, key, x, y, col);
 	tBuffer->push(new_task);
-	mLog->logMessage(new_task);
 }
 
 void ChildrenOfOsi::createTaskAddMem(std::string task_name, std::string type, std::string key, int hero_name, int t, int frames, vector<NPC*> p, string cat, string cont, string where, int why, int when)
 {
 	//maybe just pass in the string craeated
 	std::string task_status = "CREATED";
-	Task* new_task = new Task(task_name, task_status, type, key, hero_name, t, frames, p, cat, cont, where, why,when);
+	Task* new_task = new(MemoryHelper::s_find_available_block(memManager::task_head)) Task(task_name, task_status, type, key, hero_name, t, frames, p, cat, cont, where, why,when);
 	tBuffer->push(new_task);
-	mLog->logMessage(new_task);
 }
 
 void ChildrenOfOsi::createTaskAddAct(std::string task_name, std::string type, std::string key, int utility, int why,
@@ -281,27 +300,25 @@ void ChildrenOfOsi::createTaskAddAct(std::string task_name, std::string type, st
 {
 	//maybe just pass in the string craeated
 	std::string task_status = "CREATED";
-	Task* new_task = new Task(task_name, task_status, type, key, utility, why, owner, receiver, doer, exe_name);
+	Task* new_task = new(MemoryHelper::s_find_available_block(memManager::task_head)) Task(task_name, task_status, type, key, utility, why, owner, receiver, doer, exe_name);
 	tBuffer->push(new_task);
-	mLog->logMessage(new_task);
 }
 
-void ChildrenOfOsi::createTaskNoObj(std::string task_name, std::string type, std::string topic, std::string temp, std::string key)
+//used for conversation points
+void ChildrenOfOsi::createTaskNoObj(std::string task_name, std::string type, std::string icon, std::string temp, std::string key)
 {
 	//maybe just pass in the string craeated
 	std::string task_status = "CREATED";
-	Task* new_task = new Task(task_name, task_status, type, topic, temp, key);
+	Task* new_task = new(MemoryHelper::s_find_available_block(memManager::task_head)) Task(task_name, task_status, type, icon, temp, key);
 	tBuffer->push(new_task);
-	mLog->logMessage(new_task);
 }
 
-void ChildrenOfOsi::createTaskTag(std::string task_name, std::string type, std::vector<std::string> topicVec, std::string key)
+void ChildrenOfOsi::createTaskTag(std::string task_name, std::string type, std::string key)
 {
 	//maybe just pass in the string craeated
 	std::string task_status = "CREATED";
-	Task* new_task = new Task(task_name, task_status, type, topicVec, key);
+	Task* new_task = new(MemoryHelper::s_find_available_block(memManager::task_head)) Task(task_name, task_status, type,key);
 	tBuffer->push(new_task);
-	mLog->logMessage(new_task);
 }
 
 /*void ChildrenOfOsi::createTaskForAttack(std::string task_name, std::string type, float x, float y, bool col, int d) {

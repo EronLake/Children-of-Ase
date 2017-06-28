@@ -4,6 +4,7 @@
 #include "Task.h"
 #include "MessageLog.h"
 #include "Manager.h"
+#include "ThreadManager.h"
 
 //class Manager;
 
@@ -18,14 +19,20 @@ public:
 	TaskBuffer(MessageLog* _mLog);
 	~TaskBuffer();
 	void run();
-	void assignTask(Task* current_task);
+	void assignTask(int id, Task* current_task);
 	void printBuffer();//////////////////////////NOT IMPLEMENTED
-	bool isEmpty();
+	bool isEmpty() const;
+	bool physics_buffer_isEmpty() const;
 	void empty();
+	void physics_buffer_empty();
 	void push(Task* new_task);
+	void push_physics(Task* new_task);
 	Task* pop();
+	Task* pop_physics();
+	void test() { return; }
 	void add_to_table(std::string type, Manager* manager);
-	std::priority_queue<Task*> queue_buffer;
+	std::deque<Task*> queue_buffer;
+	std::deque<Task*> physics_buffer;
 };
 
 
