@@ -43,3 +43,5 @@
 6/30/2017   0:14   Memory manager unit test failed!
 6/30/2017   0:32   Memory manager unit test failed!
 6/30/2017   0:36   Memory manager unit test failed!
+6/30/2017   0:45   Memory manager unit test failed!
+6/30/2017   0:53   Memory manager unit test failed!

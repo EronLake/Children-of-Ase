@@ -111,7 +111,7 @@ static Common* config = new Common();
 //Texture* rect = new Texture();
 //toggles debug longging statements 
 
-#define DEBUG 1 //cant use json
+#define DEBUG config->debug //cant use json
 #define MAP_EDITOR 0 //cant use json
 #define START_FULLSCREEN config->start_fullscreen
 #define MOUSE_VISIBLE config->mouse_visible
