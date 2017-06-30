@@ -266,6 +266,10 @@ void Fight::update_fight() {
 	bool ally_erased;
 	bool party_erased;
 
+	if (attackers.size() + defenders.size() > 10) {
+		cout << "broke" << endl;
+	}
+
 	Player* player = dynamic_cast<Player*>(Containers::hero_table["Shango"]);
 	for (auto it = attackers.begin(); it != attackers.end();) {
 		if ((*it)[0]->get_village()== NULL) {
@@ -388,7 +392,11 @@ void Fight::update_all_fights() {
 		}
 		else {
 			if (!(*it)->is_over())(*it)->update_fight();
-			++it;
+			if (!(*it)->is_over()) {
+				++it;
+			}else {
+				it = fights_world.erase(it);
+			}
 		}
 	}
 }
