@@ -45,3 +45,14 @@
 6/30/2017   0:36   Memory manager unit test failed!
 6/30/2017   0:45   Memory manager unit test failed!
 6/30/2017   0:53   Memory manager unit test failed!
+6/30/2017   1:18   Memory manager unit test failed!
+6/30/2017   1:31   Memory manager unit test failed!
+6/30/2017   1:39   Memory manager unit test failed!
+6/30/2017   1:44   Memory manager unit test failed!
+6/30/2017   1:45   Memory manager unit test failed!
+6/30/2017   1:56   Memory manager unit test failed!
+6/30/2017   1:59   Memory manager unit test failed!
+6/30/2017   2:7   Memory manager unit test failed!
+6/30/2017   2:10   Memory manager unit test failed!
+6/30/2017   2:16   Memory manager unit test failed!
+6/30/2017   2:16   Memory manager unit test failed!

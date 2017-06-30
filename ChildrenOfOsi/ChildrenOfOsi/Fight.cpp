@@ -435,7 +435,7 @@ void Fight::end_combat() {
 	}
 	for (auto itor = downed.begin(); itor != downed.end(); ++itor) {
 		(*itor)->set_in_combat(false);
-		(*itor)->setMode(Party::MODE_ATTACK);
+		(*itor)->setMode(Party::MODE_FLEE);
 		if ((type>0))(*itor)->capacitate_all(type);
 		if ((type>0))(*itor)->set_killable(true);
 	}

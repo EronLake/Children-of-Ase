@@ -817,7 +817,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 
 	while (GameWindow::isRunning()) {
 		while (current_game_state == game_state::main_menu) {
-			cout << "Current game state: main_menu" << endl;
+			//cout << "Current game state: main_menu" << endl;
 			if (iController->current_game_state != game_state::main_menu) {
 				iController->current_game_state = current_game_state;
 			}
@@ -1297,7 +1297,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 			Tutorial::drawTutorial();
 		}
 		while (current_game_state == game_state::tutorial_pause) {
-			cout << "Current game state: tutorial_pause" << endl;
+			//cout << "Current game state: tutorial_pause" << endl;
 			if (iController->current_game_state != game_state::tutorial_pause) {
 				iController->current_game_state = current_game_state;
 			}
@@ -1324,7 +1324,7 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 			current_game_state = iController->current_game_state;
 		}
 		while (current_game_state == game_state::victory_menu) {
-			cout << "in victory menu" << endl;
+			//cout << "in victory menu" << endl;
 			if (iController->current_game_state != game_state::victory_menu) {
 				iController->current_game_state = current_game_state;
 			}

@@ -786,9 +786,9 @@ int Movement::attack(WorldObj* obj) {
 												delAtk[j]->setDuration(0);
 											}
 											if (!friendly) {
+												s->setCurrentEnemy(s2);
 												if ((s2->getType() == WorldObj::TYPE_PLAYER) && (s->getParty()->getMode() != Party::MODE_FLEE) && (!s->get_incapacitated()) && (s->getHealth()>0)) {
 													if (s->get_warning() > 0) {
-														s->setCurrentEnemy(s2);
 														Hero* hero = dynamic_cast<Hero*>(s->getParty()->getLeader());
 														if ((!s->getInCombat()) && (!s2->getInCombat())) {
 															if (hero) {

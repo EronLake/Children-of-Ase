@@ -176,7 +176,7 @@ void AIController::reevaluate_state(int me, int them) {
 }
 
 void AIController::execute() {
-	int action_wait_time = 120; //2sec           //Wait time is approx. 2 minutes (7200)
+	int action_wait_time = rand()%6200+1000; //2sec           //Wait time is approx. 2 minutes (7200)
 	for(auto me : Containers::hero_table){
 	//for (int me = 2; me < 4; me++) {
 		if (me.second->name == SHANGO) { continue; } //skip the player
@@ -198,8 +198,7 @@ void AIController::execute() {
 		//if (me->get_action_timer() < 0)
 		//{
 
-		//}
-		//me->init_action_timer(action_wait_time);                    //Start a timer for approx. 2 minutes
+		//}                   //Start a timer for approx. 2 minutes
 
 	//	std::cout << "before: " << hero->update_action_timer() << endl;
 		if (hero->update_action_timer() == 0)
@@ -231,7 +230,7 @@ void AIController::execute() {
 				//**ERONS FIX**
 				curr_action->executed = false; //resets the execuded so action can be executed again
 				curr_action = nullptr;
-
+				hero->init_action_timer(action_wait_time);
 				if (milestones->at(curr_goal).size() > 0)
 				{
 

@@ -290,7 +290,7 @@ void CombatController::checkParties() {
 								if ((*b)->getLeader()->getInCombat()) {
 									(*b)->get_fight()->add_party((*b), (*a),true);
 								} else {
-									Fight* fight = new Fight((*a), (*b), 0);
+									//Fight* fight = new Fight((*a), (*b), 0);
 								}
 							}
 						}
