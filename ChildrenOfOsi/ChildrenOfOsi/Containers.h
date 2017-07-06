@@ -55,5 +55,5 @@ public:
 	static void add_tag(std::string, Tag*);
 	static void add_conv_point(std::string, ConversationPoint*);
 
-	static std::vector<std::vector<float>> getRects();
+	static std::vector<std::vector<float>> getRects(int node_size);
 };

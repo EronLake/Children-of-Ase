@@ -110,12 +110,12 @@ std::unordered_map<std::string, Action*> Containers::action_table;
 std::unordered_map<std::string, Tag*> Containers::tag_table;
 std::unordered_map<std::string, ConversationPoint*> Containers::conv_point_table;
 
-std::vector<std::vector<float>> Containers::getRects() {
+std::vector<std::vector<float>> Containers::getRects(int node_size) {
 	std::vector<std::vector<float>> ret;
 	Rectangle r;
 	for (auto it = Containers::worldObj_table.begin(); it != Containers::worldObj_table.end(); ++it) {
 		r = (*it).second->body[0];
-		ret.push_back({r.getX()/100,r.getY()/100,(r.getX()+r.getWidth())/100,(r.getY()+r.getHeight())/100});
+		ret.push_back({r.getX()/ node_size,r.getY()/ node_size,(r.getX()+r.getWidth())/ node_size,(r.getY()+r.getHeight())/ node_size });
 	}
 	return ret;
 }

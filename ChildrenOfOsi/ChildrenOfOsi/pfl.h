@@ -70,7 +70,7 @@ void draw_grid(const Graph& graph, int field_width,
 
 struct SquareGrid {
 	typedef tuple<int, int> Location;
-	static array<Location, 4> DIRS;
+	static array<Location, 8> DIRS;
 
 	int width, height;
 	unordered_set<Location> walls;
@@ -109,7 +109,8 @@ struct SquareGrid {
 	}
 };
 
-array<SquareGrid::Location, 4> SquareGrid::DIRS{ Location{ 1, 0 }, Location{ 0, -1 }, Location{ -1, 0 }, Location{ 0, 1 } };
+//Directions of neighbors
+array<SquareGrid::Location, 8> SquareGrid::DIRS{ Location{ 1, 0 }, Location{ 0, -1 }, Location{ -1, 0 }, Location{ 0, 1 }, Location{ 1, 1 }, Location{ 1, -1 }, Location{ -1, 1 }, Location{ -1, -1 } };
 
 void add_rect(SquareGrid& grid, int x1, int y1, int x2, int y2) {
 	
@@ -147,27 +148,26 @@ struct GridWithWeights : SquareGrid {
 };
 
 GridWithWeights make_diagram4() {
-	GridWithWeights grid(250, 250);
+	int n_size = 100;//node size of the grid
+	GridWithWeights grid(25000/ n_size, 25000/ n_size);
 	vector<Line*> lines;
 	std::ifstream rivFile;
 	rivFile.open("pfedges.txt");
 	int a, b, c, d;
 	while (rivFile >> a >> b >> c >> d) {
-		a = a/100 ;
-		b = (25000-b)/100;
-		c = c / 100;
-		d = (25000-d)/100;
+		a = a/ n_size;
+		b = (25000-b)/ n_size;
+		c = c / n_size;
+		d = (25000-d)/ n_size;
 		cout << "a: " << a << " b: " << b << " c: " << c << " d: " << d << endl;
 		
 		add_rect(grid, a, b, c, d);
 		
 	}
-	add_rect(grid, (6607/100), ((25000 - 17163) / 100), (10399/100), ((25000 - 14841) / 100));
-	delete_rec(grid, 6576/100, (25000 - 16546)/100, 10450/100, (25000 - 16446)/100);
 
 	rivFile.close();
 	rivFile.clear();
-	std::vector<std::vector<float>> tmp=Containers::getRects();
+	std::vector<std::vector<float>> tmp=Containers::getRects(50);
 	for (auto it = (tmp).begin(); it != (tmp).end(); ++it) {
 		add_rect(grid,(*it)[0], (*it)[1], (*it)[2], (*it)[3]);
 	}

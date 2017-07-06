@@ -36,6 +36,8 @@ void CombatController::fight(Soldier* sold1, int state) {
 
 			Soldier* sold2 = sold1->getCurrentEnemy();
 
+			sold1->face(sold2);
+
 			if (dist_by_center(sold1, sold2) < (sold1->body[0].getWidth() / 2 + sold1->melee->getHeight())) {
 				sold1->destination = Vector2f(0, 0);
 				sold1->waypoint = Vector2f(0, 0);
@@ -367,12 +369,12 @@ std::thread CombatController::threaded_update_soldier(Soldier* s, int n) {
 }
 
 bool CombatController::shot_ligned_up(Vector2f atkr, Vector2f target) {
-	if (atkr.getXloc() <= (target.getXloc() + 50) && atkr.getXloc() >= (target.getXloc() - 50)) {
-		if ((atkr.getYloc() <= (target.getYloc() + 500) && atkr.getYloc() >= (target.getYloc() - 500))) {
+	if (atkr.getXloc() <= (target.getXloc() + 25) && atkr.getXloc() >= (target.getXloc() - 25)) {
+		if ((atkr.getYloc() <= (target.getYloc() + 750) && atkr.getYloc() >= (target.getYloc() - 750))) {
 			return true;
 		}
-	} else if (atkr.getYloc() <= (target.getYloc() + 50) && atkr.getYloc() >= (target.getYloc() - 50)) {
-		if ((atkr.getXloc() <= (target.getXloc() + 500) && atkr.getXloc() >= (target.getXloc() - 500))) {
+	} else if (atkr.getYloc() <= (target.getYloc() + 25) && atkr.getYloc() >= (target.getYloc() - 25)) {
+		if ((atkr.getXloc() <= (target.getXloc() + 750) && atkr.getXloc() >= (target.getXloc() - 750))) {
 			return true;
 		}
 	}

@@ -175,6 +175,15 @@ bool PhysicsTestSuite::test_collision() {
 	//collide up
 	WorldObj* x = new WorldObj();
 	WorldObj* y = new WorldObj();
+
+	// face test
+	x->setX(rand()%1000);
+	x->setY(rand()%1000);
+	y->setX(rand()%1000);
+	y->setY(rand()%1000);
+	x->face(y);
+	y->face(x);
+
 	x->setX(.5);
 	x->setY(.5);
 	y->setX(.5);
@@ -202,6 +211,7 @@ bool PhysicsTestSuite::test_collision() {
 	x->setY(.5);
 	y->setX(.5);
 	y->setY(1);
+
 	result = movetests->move_down(x);
 	if (result) {
 		//////cout << endl;
