@@ -41,3 +41,5 @@
 6/12/2017   2:2   Render manager unit test failed!
 6/12/2017   2:5   Render manager unit test failed!
 6/12/2017   2:7   Render manager unit test failed!
+7/7/2017   11:42   Render manager unit test failed!
+7/7/2017   11:54   Render manager unit test failed!

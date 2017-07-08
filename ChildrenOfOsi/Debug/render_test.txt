@@ -91,3 +91,9 @@
 7/7/2017   10:20   Render manager unit test failed!
 7/7/2017   10:27   Render manager unit test failed!
 7/7/2017   10:41   Render manager unit test failed!
+7/7/2017   10:50   Render manager unit test failed!
+7/7/2017   10:58   Render manager unit test failed!
+7/7/2017   11:2   Render manager unit test failed!
+7/7/2017   11:46   Render manager unit test failed!
+7/7/2017   11:49   Render manager unit test failed!
+7/7/2017   11:52   Render manager unit test failed!

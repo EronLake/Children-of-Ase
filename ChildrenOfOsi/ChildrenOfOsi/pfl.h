@@ -152,15 +152,15 @@ GridWithWeights make_diagram4() {
 	GridWithWeights grid(25000/ n_size, 25000/ n_size);
 	vector<Line*> lines;
 	std::ifstream rivFile;
-	rivFile.open("pfedges.txt");
+	rivFile.open("rivLine.txt");
 	int a, b, c, d;
+	int total = 0;
 	while (rivFile >> a >> b >> c >> d) {
 		a = a/ n_size;
 		b = (25000-b)/ n_size;
 		c = c / n_size;
 		d = (25000-d)/ n_size;
-		cout << "a: " << a << " b: " << b << " c: " << c << " d: " << d << endl;
-		
+		cout << "Line "<<total<<" a: " << a << " b: " << b << " c: " << c << " d: " << d << endl;
 		add_rect(grid, a, b, c, d);
 		
 	}
