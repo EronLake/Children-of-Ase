@@ -74,3 +74,13 @@
 7/5/2017   10:59   Memory manager unit test failed!
 7/5/2017   11:1   Memory manager unit test failed!
 7/5/2017   11:18   Memory manager unit test failed!
+7/6/2017   3:52   Memory manager unit test failed!
+7/7/2017   8:49   Memory manager unit test failed!
+7/7/2017   8:51   Memory manager unit test failed!
+7/7/2017   8:57   Memory manager unit test failed!
+7/7/2017   8:59   Memory manager unit test failed!
+7/7/2017   9:5   Memory manager unit test failed!
+7/7/2017   9:42   Memory manager unit test failed!
+7/7/2017   9:44   Memory manager unit test failed!
+7/7/2017   9:48   Memory manager unit test failed!
+7/7/2017   9:52   Memory manager unit test failed!

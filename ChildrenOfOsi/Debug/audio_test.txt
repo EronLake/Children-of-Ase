@@ -74,3 +74,13 @@
 7/5/2017   10:59   Audio manager unit test passed!
 7/5/2017   11:1   Audio manager unit test passed!
 7/5/2017   11:18   Audio manager unit test passed!
+7/6/2017   3:52   Audio manager unit test passed!
+7/7/2017   8:49   Audio manager unit test passed!
+7/7/2017   8:51   Audio manager unit test passed!
+7/7/2017   8:57   Audio manager unit test passed!
+7/7/2017   8:59   Audio manager unit test passed!
+7/7/2017   9:5   Audio manager unit test passed!
+7/7/2017   9:42   Audio manager unit test passed!
+7/7/2017   9:44   Audio manager unit test passed!
+7/7/2017   9:48   Audio manager unit test passed!
+7/7/2017   9:52   Audio manager unit test passed!
