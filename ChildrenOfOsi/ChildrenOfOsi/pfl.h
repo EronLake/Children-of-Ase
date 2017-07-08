@@ -148,7 +148,7 @@ struct GridWithWeights : SquareGrid {
 };
 
 GridWithWeights make_diagram4() {
-	int n_size = 100;//node size of the grid
+	int n_size = 50;//node size of the grid
 	GridWithWeights grid(25000/ n_size, 25000/ n_size);
 	vector<Line*> lines;
 	std::ifstream rivFile;
@@ -217,30 +217,12 @@ void dijkstra_search
 			break;
 		}
 
-		//bool added = false;
-		PriorityQueue < tuple<Location,double>, int > valid_neighbors;
-		int diff;
 		for (auto next : graph.neighbors(current)) {
 			double new_cost = cost_so_far[current] + graph.cost(current, next);
 			if (!cost_so_far.count(next) || new_cost < cost_so_far[next]) {
-				diff = closer_to_goal(next, current, goal);
-				if (diff>=0) {//check if next node is closer to goal
-					cost_so_far[next] = new_cost;
-					came_from[next] = current;
-					valid_neighbors.put(tie(next, new_cost), -diff);
-				//	added = true;
-				}
-			}
-		}
-		//step back if the current node doesn't lead anywhere better
-		if (valid_neighbors.empty()) {
-			frontier.put(came_from[current], cost_so_far[came_from[current]]);
-		}else {
-			while (!valid_neighbors.empty()) {
-				Location one;
-				double two;
-				tie(one,two) = valid_neighbors.get();
-				frontier.put(one,two);
+				cost_so_far[next] = new_cost;
+				came_from[next] = current;
+				frontier.put(next, new_cost);
 			}
 		}
 	}
@@ -335,10 +317,4 @@ breadth_first_search(const Graph& graph,
 		}
 	}
 	return came_from;
-}
-
-
-inline int closer_to_goal(SquareGrid::Location next, SquareGrid::Location current, SquareGrid::Location goal) {
-	//returns the old distance from the goal minus the new distance
-	return (heuristic(current, goal) - heuristic(next, goal));
 }

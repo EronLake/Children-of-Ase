@@ -784,19 +784,19 @@ void GAMEPLAY_LOOP(QuadTree* _QuadTree)
 	for (auto it : *largeStruct) cout << (it)->getName() << endl;
 
 	//ASTAR
-	/*GridWithWeights grid = make_diagram4();
-	SquareGrid::Location start1{ 42,136 };//player starting location
-	SquareGrid::Location end{ 240 , 240 };//random end point
+	GridWithWeights grid = make_diagram4();
+	SquareGrid::Location start1{ 84,272 };//player starting location
+	SquareGrid::Location end{ 480 , 480 };//random end point
 	unordered_map<SquareGrid::Location, SquareGrid::Location> came_from;
 	unordered_map<SquareGrid::Location, double> cost_so_far;
-	dijkstra_search(grid, start1, end, came_from, cost_so_far);
+	a_star_search(grid, start1, end, came_from, cost_so_far);
 	vector<SquareGrid::Location> path = reconstruct_path(start1, end, came_from);
 	auto size = path.size();
 	cout << "size of path is " << size << endl;
 	SquareGrid::Location goal = path[size - 1];
 	cout << "last element in path is " << std::get<0>(goal) << ", " << std::get<1>(goal) << endl;
 	if (path[size - 1] != end) cout << "CANT FIND PATH" << endl;
-	draw_grid(grid, 1, nullptr, nullptr, &path);*/
+	draw_grid(grid, 1, nullptr, nullptr, &path);
 
 	if (PRELOAD_TEX) {
 		tm.join();
