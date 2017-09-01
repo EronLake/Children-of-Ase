@@ -82,7 +82,8 @@ void Player::updateTalk()
 	talk.setHeight((*this).getHeight() + (2 * distance));
 }
 
-/*filters the move-to options that the player has available when speaking to heroes*/
+/*Determines what move-to options are available to the player when player
+is speaking to a hero.*/
 void Player::filter_move_to(Hero* npc) {
 	//turn off all move to flags if notoriety less than 60
 	if (npc->rel[this->name]->getNotoriety() < 55) {

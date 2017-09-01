@@ -114,14 +114,6 @@ dialogue_point DialogueHelper::choose_conv_pt(std::vector<ConversationLogObj*> c
 	Personality* personality = other->traits;
 	Relationship* relationship = other->rel[1];
 
-	/*Hero* temp_hero = nullptr;
-	if (other->getType() >= WorldObj::TYPE_NPC) {
-		if (temp_hero = CheckClass::isHero(other))//added another equals was single equals before
-		{
-			perror("you cannot talk to this type of object");
-		}
-	}*/
-
 	/*commented out code below that uses the real personalities and relationships
 	because it caused Yemoja to stop having conversation points to say.*/
 	/*Personality* per = other->traits;
@@ -144,7 +136,7 @@ dialogue_point DialogueHelper::choose_conv_pt(std::vector<ConversationLogObj*> c
 	if (curr_conversation_log.size() > 0) {
 		if (curr_conversation_log[curr_conversation_log.size() - 1]->get_conv_point()->get_name() == "Ask_For_Quest") {
 			Planner* p = AIController::get_plan(other->name);
-			dialogue_point diog_pt = { "No Quest","No Quest" };
+			dialogue_point diog_pt = { "No Quest","No Quest","","","1" };
 			///////////////////////////////////////////////////////
 			/*Stand in stuff to check whether or not NPC wants to give quest
 			to player when the player asks for one. NPC currently always
@@ -158,7 +150,7 @@ dialogue_point DialogueHelper::choose_conv_pt(std::vector<ConversationLogObj*> c
 						has_quest = true;
 				}
 				if (!has_quest) {
-					diog_pt = { "Offer_Quest","Offer_Quest" };
+					diog_pt = { "Offer_Quest","Offer_Quest","","","1" };
 				}
 				
 			}
@@ -262,7 +254,6 @@ dialogue_point DialogueHelper::choose_conv_pt(std::vector<ConversationLogObj*> c
 	//prioritize, possible replies vector
 		//for every reply
 	for (auto itor = possible_replies.begin(); itor != possible_replies.end(); itor++) {
-		//+ relationship_appeal(itor->second, relationship)
 			appeal = personality_appeal(itor->second, personality) + relationship_appeal(itor->second, relationship);
 				temp.push_back(make_pair(appeal, itor->second));//push onto temp vector with appeal
 	}
@@ -290,7 +281,7 @@ dialogue_point DialogueHelper::choose_conv_pt(std::vector<ConversationLogObj*> c
 		return possible_replies[0].second->dpoint;
 	}
 	else {
-		return{ "No_More_Phrases","No_More_Phrases" };
+		return{ "No_More_Phrases","No_More_Phrases","","","1" };
 	}
 }
 
@@ -314,7 +305,7 @@ dialogue_point DialogueHelper::choose_reply_pt(std::string point, int optn_inx, 
 			if ((curr_conversation_log[i]->get_conv_point()->get_name() == player_just_said->get_conv_point()->get_name()) &&
 				(player_just_said->get_who() == curr_conversation_log[i]->get_who()) && (player_just_said->get_conv_point()->get_name().find("Ask", 0) != string::npos)) {
 				if (player_just_said->get_conv_point()->get_name().find("Ask_For_Quest", 0) == string::npos)
-					return{ "Already_Asked","Already_Asked" };
+					return{ "Already_Asked","Already_Asked","","","1"};
 			}
 		}
 		else
@@ -330,7 +321,7 @@ dialogue_point DialogueHelper::choose_reply_pt(std::string point, int optn_inx, 
 				if ((temp_hero->conversation_log[i]->get_conv_point()->get_name() == player_just_said->get_conv_point()->get_name()) &&
 					(player_just_said->get_who() == temp_hero->conversation_log[i]->get_who()) && (player_just_said->get_conv_point()->get_name().find("Ask", 0) != string::npos)) {
 					if (player_just_said->get_conv_point()->get_name().find("Ask_For_Quest", 0) == string::npos)
-						return{ "Already_Asked","Already_Asked" };
+						return{ "Already_Asked","Already_Asked","","","1" };
 				}
 			}
 			else
@@ -366,14 +357,13 @@ std::vector<std::vector<dialogue_point>>& DialogueHelper::get_possible_conv_pts_
 std::vector<dialogue_point> DialogueHelper::get_possible_reply_pts(std::string point, int opts_inx)
 {
 	std::vector<dialogue_point> reply;
-	//reply.push_back({"Decline_To_Answer","Decline_To_Answer","","","1"});
 	if (point != "Boast" && point != "Insult" && point != "Intimidate" && point != "Compliment" && point != "Offer Praise" && point != "Grovel") {
 		if(point.find("_Quest") == string::npos && point.find("Name") == string::npos && point.find("Ask About") == string::npos)
 		    reply.push_back({ "Refuse","Refuse","","","1","0" });
 		else if(point.find("Ask") != string::npos)
-			reply.push_back({ "Decline_To_Answer","Decline_To_Answer","","","1","0" });
+			reply.push_back({ "Decline_To_Answer","Decline_To_Answer","","","1"});
 		for (int i = 0; i < possible_reply_pts[opts_inx].size(); i++) {
-			if ((/*possible_reply_pts[opts_inx][i][CorrespondingConvPt].compare("Decline_To_Answer") == 0 ||*/ possible_reply_pts[opts_inx][i][CorrespondingConvPt].compare(point) == 0)
+			if ((possible_reply_pts[opts_inx][i][CorrespondingConvPt].compare(point) == 0)
 				&& point.find("_Quest") == string::npos) {
 				reply.push_back({ possible_reply_pts[opts_inx][i] });
 			}
@@ -383,15 +373,15 @@ std::vector<dialogue_point> DialogueHelper::get_possible_reply_pts(std::string p
 
 	}
 	else {
-		reply.push_back({ "Boast In Response", "Boast In Response","","","1","0" });
-		reply.push_back({ "Intimidate In Response", "Intimidate In Response","","","1","0" });
-		reply.push_back({ "Compliment In Response", "Compliment In Response","","","1","0" });
-		reply.push_back({ "Offer Praise In Response", "Offer Praise In Response","","","1","0" });
-		reply.push_back({ "Insult In Response", "Insult In Response","","","1","0" });
+		reply.push_back({ "Boast In Response", "Boast In Response","","","1"});
+		reply.push_back({ "Intimidate In Response", "Intimidate In Response","","","1"});
+		reply.push_back({ "Compliment In Response", "Compliment In Response","","","1"});
+		reply.push_back({ "Offer Praise In Response", "Offer Praise In Response","","","1"});
+		reply.push_back({ "Insult In Response", "Insult In Response","","","1"});
 	}
 	if (point.find("_Quest") != string::npos) {
-		reply.push_back({ "Decline_Quest", "Decline_Quest","","","1","0" });
-		reply.push_back({ "Accept_Quest", "Accept_Quest","","","1","0" });
+		reply.push_back({ "Decline_Quest", "Decline_Quest","","","1"});
+		reply.push_back({ "Accept_Quest", "Accept_Quest","","","1"});
 	}
 	
 	return reply;
@@ -400,10 +390,7 @@ std::vector<dialogue_point> DialogueHelper::get_possible_reply_pts(std::string p
 std::string DialogueHelper::gen_dialog(dialogue_point diog_pt, Hero* hero)
 {
 	std::string name = "";
-	//std::ofstream ofs;
-	//ofs.open("dialog_template_output.txt", std::ofstream::out | std::ofstream::app);
-	//ofs << "type name: " << typeid(hero).name() << std::endl;
-	//ofs.close();
+
 	if (hero != nullptr) {
 		if (hero->name == SHANGO)
 		{
@@ -437,10 +424,6 @@ std::string DialogueHelper::gen_dialog(dialogue_point diog_pt, Hero* hero)
 std::string DialogueHelper::gen_dialog_negative(dialogue_point diog_pt, Hero* hero)
 {
 	std::string name = "";
-	//std::ofstream ofs;
-	//ofs.open("dialog_template_output.txt", std::ofstream::out | std::ofstream::app);
-	//ofs << "type name: " << typeid(hero).name() << std::endl;
-	//ofs.close();
 	if (hero != nullptr) {
 		if (hero->name == SHANGO)
 		{
@@ -495,43 +478,13 @@ std::string DialogueHelper::gen_dialog_babalawo(dialogue_point diog_pt, WorldObj
 	return sentence;
 }
 
-//poientially don't need this function
-std::string DialogueHelper::gen_reply(dialogue_point diog_pt, Hero* hero, int relationship_phrase_picker, int relationship_phrase_picker_shango)
-{
-	std::string name;
-	if (hero->name == SHANGO)
-	{
-		name = "Shango";
-	}
-	else if (hero->name == YEMOJA)
-	{
-		name = "Yemoja";
-	}
-	else if (hero->name == OSHOSI)
-	{
-		name = "Oshosi";
-	}
-	else if (hero->name == OYA)
-	{
-		name = "Oya";
-	}
-	else if (hero->name == OGUN)
-	{
-		name = "Ogun";
-	}
-
-	std::string sentence = convert_to_sentence(get_dialog(name, diog_pt, hero));
-
-	return sentence;
-}
-
 dialogue_template DialogueHelper::get_template(dialogue_point diog_pt) {
 	Json::Value root;
 
 
 	Json::Reader reader;
 	Json::CharReaderBuilder builder;
-	//std::string test = 
+
 	std::ifstream test("../ChildrenofOsi/script_templates.json", std::ifstream::binary);
 	std::string errs;
 	bool ok = reader.parse(test, root, false);
@@ -566,8 +519,7 @@ dialogue_template DialogueHelper::get_template(dialogue_point diog_pt) {
 }
 
 dialogue_point DialogueHelper::get_dialog(std::string name, dialogue_point diog_pt, Hero* hero) {
-	//std::ofstream ofs;
-	//ofs.open("dialog_template_output.txt", std::ofstream::out | std::ofstream::app);
+
 	dialogue_template dtemp = get_template(diog_pt);
 
 	std::string my_name = name;
@@ -584,7 +536,7 @@ dialogue_point DialogueHelper::get_dialog(std::string name, dialogue_point diog_
 
 	Json::Reader reader;
 	Json::CharReaderBuilder builder;
-	//std::string test = 
+
 	std::ifstream test("../ChildrenofOsi/"+my_name+"_dialog.json", std::ifstream::binary);
 	std::string errs;
 	bool ok = reader.parse(test, root, false);
@@ -623,14 +575,10 @@ dialogue_point DialogueHelper::get_dialog(std::string name, dialogue_point diog_
 			tmp = dtemp[i - 1];
 			if (tmp != "?" && tmp != "," && tmp != "." &&
 				tmp != "!" && tmp != "_") {
-				//if (root[tmp].size() > 1)
-					//j = rand() % root[tmp].size() + 1;
-				//else
-					//j = 1;
+			
 				dpoint.push_back(root[tmp][to_string(phrase_picker)]
 					.asString());
-				//ofs << "dp: " << root[tmp][to_string(j)]
-					//.asString() << std::endl;
+
 			}
 			else {
 				dpoint.push_back(tmp);
@@ -652,8 +600,7 @@ dialogue_point DialogueHelper::get_dialog(std::string name, dialogue_point diog_
 }
 
 dialogue_point DialogueHelper::get_dialog_negative(std::string name, dialogue_point diog_pt, Hero* hero) {
-	//std::ofstream ofs;
-	//ofs.open("dialog_template_output.txt", std::ofstream::out | std::ofstream::app);
+
 	dialogue_template dtemp = get_template(diog_pt);
 
 	std::string my_name = name;
@@ -669,14 +616,10 @@ dialogue_point DialogueHelper::get_dialog_negative(std::string name, dialogue_po
 	Json::Value root;
 
 	std::string dialogue_filename = my_name + "_dialog.json";
-
-	//std::ifstream file(dialogue_filename);
-	//file >> root;
 	
-
 		Json::Reader reader;
 		Json::CharReaderBuilder builder;
-		//std::string test = 
+
 		std::ifstream test("../ChildrenofOsi/" + dialogue_filename, std::ifstream::binary);
 		std::string errs;
 		bool ok = reader.parse(test, root, false);
@@ -702,14 +645,10 @@ dialogue_point DialogueHelper::get_dialog_negative(std::string name, dialogue_po
 			tmp = dtemp[i - 1];
 			if (tmp != "?" && tmp != "," && tmp != "." &&
 				tmp != "!" && tmp != "_") {
-				//if (root[tmp].size() > 1)
-				//j = rand() % root[tmp].size() + 1;
-				//else
-				//j = 1;
+
 				dpoint.push_back(root[tmp][to_string(phrase_picker)]
 					.asString());
-				//ofs << "dp: " << root[tmp][to_string(j)]
-				//.asString() << std::endl;
+
 			}
 			else {
 				dpoint.push_back(tmp);
@@ -736,7 +675,7 @@ dialogue_point DialogueHelper::get_dialog_shrine(std::string name,dialogue_point
 
 		Json::Reader reader;
 		Json::CharReaderBuilder builder;
-		//std::string test = 
+
 		std::ifstream test("../ChildrenofOsi/Shrine_dialog.json", std::ifstream::binary);
 		std::string errs;
 		bool ok = reader.parse(test, root, false);
@@ -789,7 +728,7 @@ dialogue_point DialogueHelper::get_dialog_babalawo(std::string name, dialogue_po
 
 	Json::Reader reader;
 	Json::CharReaderBuilder builder;
-	//std::string test = 
+
 	std::ifstream test("../ChildrenofOsi/Babalawo_dialog.json", std::ifstream::binary);
 	std::string errs;
 	bool ok = reader.parse(test, root, false);
@@ -842,7 +781,7 @@ dialogue_point DialogueHelper::get_dialog_villager(std::string name, dialogue_po
 
 	Json::Reader reader;
 	Json::CharReaderBuilder builder;
-	//std::string test = 
+
 	std::ifstream test("../ChildrenofOsi/Villager_dialog.json", std::ifstream::binary);
 	std::string errs;
 	bool ok = reader.parse(test, root, false);
@@ -993,26 +932,7 @@ int DialogueHelper::calc_text_choice_from_relationship(Hero* hero, std::pair<int
 	else if (npc_relationship->getAffinity() >= 80) {
 			phrase_picker = 5;
 	}
-	//}
-	//here the topic is Oya so have Yemoja respond based on her relationship with Oya
-	//rather than her relationship with Shango
-	/*else {
-		if (yemoja_relationship_with_oya[0] <= 20) {
-			phrase_picker = 1;
-		}
-		else if (yemoja_relationship_with_oya[0] > 20 && yemoja_relationship_with_oya[0] < 40) {
-			phrase_picker = 2;
-		}
-		else if (yemoja_relationship_with_oya[0] >= 40 && yemoja_relationship_with_oya[0] < 60) {
-			phrase_picker = 3;
-		}
-		else if (yemoja_relationship_with_oya[0] >= 60 && yemoja_relationship_with_oya[0] < 80) {
-			phrase_picker = 4;
-		}
-		else if (yemoja_relationship_with_oya[0] >= 80) {
-			phrase_picker = 5;
-		}
-	}*/
+
 	if (act_accepted && topic.first == SHANGO && npc_relationship->getAffinity() < 40)
 		phrase_picker = 3;
 

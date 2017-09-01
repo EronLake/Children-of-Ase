@@ -34,8 +34,6 @@ public:
 	std::string gen_dialog_babalawo(dialogue_point diog_pt, WorldObj* babalawo);
 	std::string gen_dialog_villager(dialogue_point diog_pt, WorldObj* villager);
 
-	std::string gen_reply(dialogue_point diog_pt, Hero* hero, int relationship_int, int relationship_int_shango);
-
 	dialogue_template get_template(dialogue_point diog_pt);
 	dialogue_point get_dialog(std::string name, dialogue_point diog_pt, Hero* hero);
 	std::string DialogueHelper::gen_dialog_negative(dialogue_point diog_pt, Hero* hero);

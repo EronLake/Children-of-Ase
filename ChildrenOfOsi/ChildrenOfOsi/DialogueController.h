@@ -44,7 +44,6 @@ public:
 	static void player_choose_soldier();
 	static void player_choose_babalawo();
 	static void shrine_interact();
-	static void babalawo_interact();
 	static void villager_interact();
 	static void player_conversation_point_soldier();
 	static void player_conversation_point_babalawo();
@@ -55,7 +54,7 @@ public:
 	static vector<std::vector<std::string>> get_babalawo_options();
 	static void DialogueController::remove_soldier_opts();
 	static void DialogueController::remove_babalawo_opts();
-	static void DialogueController::add_to_perm_storage(ConversationLogObj* log_entry);
+	static void DialogueController::add_to_perm_storage(ConversationLogObj* log_entry, Hero* temp_hero);
 	static void DialogueController::move_to_selectable_down();
 	static void DialogueController::move_to_selectable_up();
 	static void DialogueController::set_selectable(bool is_selectable, std::string option_name, int icon);
@@ -76,6 +75,57 @@ public:
 	static bool DialogueController::check_acceptance(Player* p, Hero* npc);
 	static void DialogueController::unselectable_to_bottom();
 
+	//functions added during Summer 2017 for refactoring purposes
+	static ConversationLogObj* DialogueController::create_conv_log_entry(dialogue_point dp, int person, ConversationPoint* conv_point);
+	static void DialogueController::limit_log_size();
+	static void DialogueController::set_accepted_action(Hero* h, dialogue_point dp);
+	static void DialogueController::set_accepted_teaching(Hero* temp_hero);
+	static void DialogueController::add_known_hero();
+	static void DialogueController::start_event();
+	static void DialogueController::set_response_reaction(dialogue_point dp, Hero* temp_hero);
+	static void DialogueController::accept_quest(dialogue_point dp);
+	static void DialogueController::skip_player_reply(dialogue_point point, dialogue_point line, std::string reply, std::string conv, Hero* h);
+	static void DialogueController::format_quest_str(ConversationLogObj* conv_log_obj2, std::string& con_pt_sentence);
+	static void DialogueController::finish_alliance(Hero* temp_hero);
+	static void DialogueController::finish_duel();
+	static void DialogueController::finish_spar();
+	static void DialogueController::finish_fight_advice(Hero* h);
+	static void DialogueController::finish_conquer_advice(Hero* temp_hero);
+	static void DialogueController::finish_peace_advice();
+	static void DialogueController::finish_ally_advice(Hero* temp_hero);
+	static void DialogueController::finish_teach(Hero* temp_hero);
+	static void DialogueController::finish_recruit(Hero* temp_hero, dialogue_point dp);
+	static void DialogueController::resolve_talk_back(dialogue_point dp, Hero* temp_hero);
+	static void DialogueController::resolve_plea(dialogue_point dp, Hero* temp_hero);
+	static void DialogueController::resolve_congratulate(dialogue_point line, Hero* temp_hero);
+	static void DialogueController::resolve_thank(dialogue_point line, Hero* temp_hero);
+	static void DialogueController::resolve_defend(dialogue_point line, Hero* temp_hero);
+	static void DialogueController::resolve_bribe(dialogue_point line, Hero* temp_hero);
+	static void DialogueController::initiate_teach(Hero* temp_hero);
+	static void DialogueController::initiate_ally_advice(Hero* temp_hero);
+	static void DialogueController::initiate_peace(Hero* temp_hero);
+	static void DialogueController::initiate_conquer(Hero* temp_hero);
+	static void DialogueController::initiate_advice_fight(Hero* temp_hero);
+	static void DialogueController::initiate_spar(Hero* temp_hero);
+	static void DialogueController::initiate_duel(Hero* temp_hero);
+	static void DialogueController::initiate_alliance(Hero* temp_hero);
+	static void DialogueController::load_divination(std::string reply_pt_sentence, std::string  name_str);
+	static void DialogueController::talk_non_hero();
+	static void DialogueController::init_dialogue_options(Hero* h);
+	static void DialogueController::start_greeting(Hero* temp_hero);
+	static void DialogueController::initiate_quest_completion(bool quest_complete, bool player_doing_quest, Hero* temp_hero, Planner* planner);
+	static void DialogueController::clear_conversation_logs(Hero* temp_hero);
+	static void DialogueController::exit_non_hero();
+	static void DialogueController::reset_conversation_vars();
+	static void DialogueController::add_question_pts();
+	static void DialogueController::add_notoriety_pts();
+	static void DialogueController::remove_question_pts();
+	static void DialogueController::remove_notoriety_pts();
+	static void DialogueController::initiate_quest_offer(Hero* h);
+	static bool DialogueController::check_down_cases(Hero*  temp_hero);
+	static dialogue_point DialogueController::load_yemoja_lesson();
+	static dialogue_point DialogueController::load_oya_lesson();
+	static dialogue_point DialogueController::load_ogun_lesson();
 
 	static bool prompted_quest;
 	static bool accepted_quest;
@@ -112,7 +162,7 @@ public:
 	static std::string message;
 	static int optionsIndex;
 	static int select;
-	//static std::vector<int> heroes_player_knows;
+	
 	static std::vector<ConversationLogObj*> curr_conversation_log;
 	static bool started_conv;
 	static bool quited_gui;

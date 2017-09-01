@@ -267,7 +267,7 @@ void DialogueConfig::set_conv_point(ChildrenOfOsi* gameplay_func, TaskBuffer* tB
 	Containers::conv_point_table[name]->dpoint.push_back(is_selectable);
 	Containers::conv_point_table[name]->set_is_selectable(is_selectable);
 
-	Containers::conv_point_table[name]->dpoint.push_back(hero_reply);
+	//Containers::conv_point_table[name]->dpoint.push_back(hero_reply);
 
 	Containers::conv_point_table[name]->multipliers = new Personality();
 	
