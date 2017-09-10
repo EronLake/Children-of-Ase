@@ -73,8 +73,8 @@ std::vector<std::vector<dialogue_point>> DialogueController::soldier_options;
 std::vector<std::vector<dialogue_point>> DialogueController::babalawo_options;
 std::vector<dialogue_point> DialogueController::replyOptions;
 
-std::string DialogueController::message;   //text displayed on upper window of dialogue GUI
-std::string DialogueController::replyString;
+std::string DialogueController::message;    //text displayed on upper window of dialogue GUI
+std::string DialogueController::replyString;//stores npc reply or conversation point
 
 int DialogueController::optionsIndex=0;    //indicates icon the player has selected(heart,head,question mark etc.)
 int DialogueController::select = 0;        //indicates the position of the option selected by the player
@@ -110,7 +110,8 @@ bool first_call = true;
 
 bool DialogueController::quest_declined = false;
 
-//Holds most recent conversation log entry that was created
+/*Points to conversation log entry that corresponds to
+ player's most recent conversation point selection.*/
 ConversationLogObj* DialogueController::entry = nullptr;
 
 bool DialogueController::started_conv = false;
@@ -128,7 +129,7 @@ bool DialogueController::is_hero_act = false;
 
 Action* DialogueController::hero_act_toward_player = nullptr;
 
-/*Holds whether npc reacts + or - to action and what the action is.
+/*Holds whether npc or player reacts + or - to action and what the action is.
 Helps determine what visual feedback to display.*/
 std::pair<bool, std::string> DialogueController::vis_feedback;
 
@@ -509,17 +510,24 @@ void DialogueController::player_conversation_point_babalawo()
 }
 
 /*Identifies the player's reply point selection, stores it in the log for
-the current conversation, creates a sentence that the player will say based
-on their reply option selection.*/
+  the current conversation and creates a sentence that the player will say based
+  on their reply option selection. Calls function to apply postconditions if the
+  player is responding to an action that an npc approached them to perform.*/
 void DialogueController::PlayerResponse()
 {
 	if (state != 6) {
+
+		//player's reply point selection
 		dialogue_point choice = replyOptions[select + DialogueController::scroll_control];
 
 		feedback_timer = 0;
 		feedback_timer_2 = 100;
 
 		vis_feedback.second = choice[ConvPointName];
+
+		//assumes that the player's reply option associated with a negative response
+		//to the npc is at position 0 and that the option(s) asscoiated with a 
+		//positive response are not at position 0
 		if (choice[ConvPointName].find("In Response") == string::npos) {
 			if (DialogueController::scroll_control == 0)
 				accepted_action = false;
@@ -529,8 +537,6 @@ void DialogueController::PlayerResponse()
 			vis_feedback.first = accepted_action;
 		}
 
-		/*pushes quest onto npc's quests_given vector if the player accepts
-		their quest and sets player's current action to that quest*/
 		Hero* temp_hero = CheckClass::isHero(other);
 
 		if(temp_hero)
@@ -547,14 +553,12 @@ void DialogueController::PlayerResponse()
 
 		curr_conversation_log.push_back(conv_log_entry);
 
-		//add conversation point to NPC's permanent conversation log storage
 		ConversationLogObj* perm_log_entry = create_conv_log_entry(choice, SHANGO, cp);
-
 		add_to_perm_storage(perm_log_entry,temp_hero);
 
 		limit_log_size();
 
-		/*insert the topic at the beginning of the player's reply point sentence
+		/*insert the topic in the player's reply point sentence
 		if they are replying to a hero-related conversation point*/
 		unsigned int advice_found = choice[ConvPointName].find("Take Advice");
 		if (conv_log_entry->get_topic().first != NoTopic && ( advice_found != string::npos || 
@@ -565,8 +569,8 @@ void DialogueController::PlayerResponse()
 			
 		message = player->getName() + ": " + reply_pt_sentence + "\n\n";
 
-		/*If player replies accepting an alliance, duel or spar, enter
-		farewell state to force player to exit dialogue.*/
+		/*If player replies accepting an alliance, duel or spar, causes 
+		dialogue to enter farewell state to force player to exit dialogue.*/
 		if (choice[ConvPointName] == "Accept Alliance Offer"|| choice[ConvPointName] == "Accept Duel"|| 
 			choice[ConvPointName] == "Accept Spar Request") 
 		{
@@ -589,23 +593,25 @@ void DialogueController::PlayerResponse()
 }
 
 /*Calls functions from the DialogueHelper to handle generating the npc's
-conversation point and reply point. Creates log entries for the npc's
-conversation and reply points and stores the entries in the log
-for the current conversation.*/
+  conversation point and reply point. Creates log entries for the npc's
+  conversation and reply points and stores the entries in the log
+  for the current conversation and stores them in the npc's permanent
+  conversation log.*/
 void DialogueController::otherConversationPoint(dialogue_point line)
 {
 	Hero* temp_hero = CheckClass::isHero(other);
 
+	//stores the npc's conversation point
 	dialogue_point point = dialogue.choose_conv_pt(curr_conversation_log, temp_hero,player);
 
-	/*Does not set the topic of npc's conversation point if their
-	conversation point is the "no more phrases" case or "already asked" case.*/
-	if (point[0] != "No_More_Phrases" && point[0] != "Already_Asked")
-		point[Topic] = curr_hero_topic;
+	point[Topic] = curr_hero_topic;
 	    
 	replyString = point[ConvPointName];
 
 	std::string reply_pt_sentence = message;
+
+	//sets reply sentence to positive if npc reacts positively or to negative if
+	//npc replies negatively
 	if(accepted_action || line[ConvPointName].find("Tell About") != string::npos)
 	    reply_pt_sentence = dialogue.gen_dialog(line, temp_hero);
 	else
@@ -618,26 +624,25 @@ void DialogueController::otherConversationPoint(dialogue_point line)
 	conversation point is point[ConvPointName].*/
     if(line[ConvPointName] != "Already_Asked" && line[ConvPointName] != "No_More_Phrases"){
 		int person = dialogue.hero_name_to_int(other->getName());
+
+		//creation of conversation log entry for reply point
 		ConversationPoint* cp = Containers::conv_point_table[line[ConvPointName]];
 		ConversationLogObj* conv_log_obj = create_conv_log_entry(line, person,cp );
 
-		/*insert the topic at the beginning of the npc's reply point sentence
+		/*insert the topic in the npc's reply point sentence
 		if they are replying to a hero-related conversation point.*/
 		replace_all(reply_pt_sentence, "HERO", line[Topic]);
 
 	    curr_conversation_log.push_back(conv_log_obj);
 
-		//add conversation point to NPC's permanent conversation log storage
 		ConversationLogObj* perm_log_entry = create_conv_log_entry(line, person, cp);
-
 		add_to_perm_storage(perm_log_entry,temp_hero);
 
 		limit_log_size();
 
-	//initialization of conversation log entry for conversation point
+	    //Creation of conversation log entry for conversation point
 		ConversationPoint* cp2 = Containers::conv_point_table[point[ConvPointName]];
 		ConversationLogObj* conv_log_obj2 = create_conv_log_entry(point, person, cp2);
-
 
 		if (point[ConvPointName].find("Offer_Quest") != string::npos)
 			format_quest_str(conv_log_obj2, con_pt_sentence);
@@ -648,9 +653,7 @@ void DialogueController::otherConversationPoint(dialogue_point line)
 
 	    curr_conversation_log.push_back(conv_log_obj2);
 
-		//add conversation point to NPC's permanent conversation log storage
 		ConversationLogObj* perm_log_entry2 = create_conv_log_entry(point,person,cp2);
-
 		add_to_perm_storage(perm_log_entry2,temp_hero);
 
 		limit_log_size();
@@ -687,10 +690,9 @@ void DialogueController::other_conversation_point_soldier(dialogue_point line)
 	DialogueController::scroll_control = 0;
 }
 
-/*Handles the generation of the npc's reply point by calling functions from 
-DialogueHelper. Calls otherConversationPoint() function to generate the
-npc's conversation point and to display the npc's reply and conversation
-points.*/
+/*Calls functions to choose the npc reply point, to set the npc dialogue 
+  spoken to the player based on the reply point, and to call execution 
+  functions for actions that require them(execute_start(), execute_end() etc.).*/
 void DialogueController::otherResponse(std::string info, std::string hero_topic)
 {
 	Hero* temp_hero = CheckClass::isHero(other);
@@ -698,7 +700,7 @@ void DialogueController::otherResponse(std::string info, std::string hero_topic)
 	DialogueController::feedback_timer_2 = 100;
 
 	if (state != 8 && state != 12 && state != 7) {
-		dialogue_point line;
+		dialogue_point line; //NPC reply selection
 		line = dialogue.choose_reply_pt(info, optionsIndex, curr_conversation_log,temp_hero);
 		replyString = line[ConvPointName];
 
@@ -1481,6 +1483,9 @@ std::string DialogueController::check_if_known(std::string rep_str,std::string c
 	return ret_str;
 }
 
+/*Calls function to apply post conditions based on whether or not the player reacted
+  postively to the npc's action. If the action is a suggested action, it's status gets
+  set based on whether or not the player accepted the action.*/
 void DialogueController::apply_post_from_response(std::string rep_choice, Action* act) {
 	if (rep_choice.find("Accept") != string::npos || DialogueController::scroll_control > 0) {
 		if (act->getDoer()->SUGG_ACT_STATUS == 1) {
@@ -1566,6 +1571,8 @@ void DialogueController::limit_log_size() {
 	}
 }
 
+/*Sets whether or not an npc reacts positively to the player's action.
+  Calls appropriate functions to apply post conditions based on reaction.*/
 void DialogueController::set_accepted_action(Hero* temp_hero, dialogue_point choice) {
 	    accepted_action = true;
 
@@ -1620,6 +1627,7 @@ void DialogueController::set_accepted_action(Hero* temp_hero, dialogue_point cho
 		dialogue.act_accepted = accepted_action;
 }
 
+/*Sets whether or not an npc decides to teach the player a skill.*/
 void DialogueController::set_accepted_teaching(Hero* temp_hero) {
 	
 		//the ori variable is to increase the chance of teaching based on
@@ -1648,8 +1656,10 @@ void DialogueController::set_accepted_teaching(Hero* temp_hero) {
 		dialogue.act_accepted = accepted_action;
 }
 
+/*Adds a hero to the player's vector of heroes that the player knows if
+  the player asks for a hero's name and if the hero to be added is not
+  already present in the aforementioned vector.*/
 void DialogueController::add_known_hero() {
-	//adds hero to player's vector of known heroes if player asks hero's name
 		bool already_know = false;
 		for (int i = 0; i < player->heroes_player_knows.size(); ++i) {
 			if (dialogue.hero_name_to_int(DialogueController::getOther()->getName())
@@ -1662,6 +1672,8 @@ void DialogueController::add_known_hero() {
 		    player->heroes_player_knows.push_back(dialogue.hero_name_to_int(other->getName()));
 }
 
+/*Calls execution function(s) and sets npc dialogue based on whether the player 
+  replies accepting or declining an alliance offer, a duel, or a spar.*/
 void DialogueController::start_event() {
 	Hero* temp_hero = CheckClass::isHero(other);
 	dialogue_point diog_pt;
@@ -1689,15 +1701,17 @@ void DialogueController::start_event() {
 	}
 }
 
+/*Sets the npc's reaction to the player's response and calls functions to apply the
+  post conditions for the action. */
 void DialogueController::set_response_reaction(dialogue_point dp, Hero* temp_hero) {
 	if (dp[ConvPointName] == "Boast In Response" || dp[ConvPointName] == "Intimidate In Response" ||
 		dp[ConvPointName] == "Insult In Response"|| dp[ConvPointName] == "Compliment In Response" ||
 		dp[ConvPointName] == "Offer Praise In Response")
 	{
-		std::string::size_type reply_end = dp[1].find_last_of(' ');
-		std::string act_name = dp[1].substr(0, reply_end);
+		std::string::size_type reply_end = dp[ConvPointName].find_last_of(' ');
+		std::string act_name = dp[ConvPointName].substr(0, reply_end);
 		reply_end = act_name.find_last_of(' ');
-		act_name = dp[1].substr(0, reply_end);
+		act_name = dp[ConvPointName].substr(0, reply_end);
 
 		if (act_name == "Offer Praise")
 	        act_name = "Grovel";
@@ -1727,6 +1741,8 @@ void DialogueController::set_response_reaction(dialogue_point dp, Hero* temp_her
 	}
 }
 
+/*Calls function to add a quest to the player's quest log if they decide to accept
+  an npc's quest offer. */
 void DialogueController::accept_quest(dialogue_point dp) {
 		Planner* planner = AIController::get_plan(CheckClass::isHero(other)->name);
 		if (dp[ConvPointName] == "Accept_Quest") {
@@ -1738,7 +1754,9 @@ void DialogueController::accept_quest(dialogue_point dp) {
 			player->quests_log.push_back(quest);
 			planner->quests_given.push_back(quest); //gives npc record of what they gave player
 
-			first_q_press = false;//make sure player can still quit GUI if they accepted a quest when they were about to exit already
+            //make sure player can still quit GUI if they accepted a quest when they were about 
+			//to exit already
+			first_q_press = false;
 		}
 
 		if (dp[ConvPointName] == "Decline_Quest") {
@@ -1748,10 +1766,10 @@ void DialogueController::accept_quest(dialogue_point dp) {
 }
 
 /*skips the player's reply point if the npc does not say a conversation
-point, if the npc tells the player that they already asked them something,
-if an npc runs out of relevant conversation points to say, or if an NPC tells
-the player that they do not have a quest for them.
-*/
+  point, if the npc tells the player that they already asked them something,
+  if an npc runs out of relevant conversation points to say, or if an NPC tells
+  the player that they do not have a quest for them. If skipped, conversation
+  returns to playerConversationPoint.*/
 void DialogueController::skip_player_reply(dialogue_point point, dialogue_point line, std::string reply_pt_sentence, std::string con_pt_sentence, Hero* temp_hero) {
 	if (point[ConvPointName] != "No_More_Phrases" && line[ConvPointName] != 
 		"Already_Asked" && point[ConvPointName] != "" && point[ConvPointName] != 
@@ -1774,6 +1792,8 @@ void DialogueController::skip_player_reply(dialogue_point point, dialogue_point 
 	}
 }
 
+/*Formats the string for the npc's quest sentence based on the 
+  quest so that the sentence will be gramatically correct.*/
 void DialogueController::format_quest_str(ConversationLogObj* conv_log_obj2, std::string& con_pt_sentence ) {
 	Planner* planner = AIController::get_plan(CheckClass::isHero(other)->name);
 	DialogueController::quest = planner->get_current_action();
@@ -1828,6 +1848,8 @@ void DialogueController::format_quest_str(ConversationLogObj* conv_log_obj2, std
 		replace_all(con_pt_sentence, "ACTION", act_name);
 }
 
+/*Sets player dialogue based on whether or not the npc decided to accept the player's
+  alliance offer. Calls function to end "alliance" execution.*/
 void DialogueController::finish_alliance(Hero* temp_hero) {
 	//choose different dialog if they denied the action
 	if (accepted_action) {
@@ -1852,6 +1874,8 @@ void DialogueController::finish_alliance(Hero* temp_hero) {
 	state = 9;
 }
 
+/*Sets player dialogue based on whether or not the npc decided to accept the player's
+  challenge to a duel. Calls function to end "duel" execution.*/
 void DialogueController::finish_duel() {
 	//choose different dialog if they denied the action
 	if (accepted_action) {
@@ -1872,6 +1896,8 @@ void DialogueController::finish_duel() {
 	state = 9;
 }
 
+/*Sets player dialogue based on whether or not the npc decided to accept the player's
+  request to spar. Calls function to end "spar" execution.*/
 void DialogueController::finish_spar() {
 	//choose different dialog if they denied the action
 	if (accepted_action) {
@@ -1892,6 +1918,8 @@ void DialogueController::finish_spar() {
 	state = 9;
 }
 
+/*Sets player dialogue based on whether or not the npc decided to accept the player's
+  advice to fight another npc. Calls function to begin fight execution.*/
 void DialogueController::finish_fight_advice(Hero* temp_hero) {
 	//choose different dialog if they denied the action
 	if (accepted_action) {
@@ -1924,6 +1952,8 @@ void DialogueController::finish_fight_advice(Hero* temp_hero) {
 	state = 9;
 }
 
+/*Sets player dialogue based on whether or not the npc decided to accept the player's
+  advice to conquer another npc's village. Calls function to begin "conquer" execution.*/
 void DialogueController::finish_conquer_advice(Hero* temp_hero) {
 	//choose different dialog if they denied the action
 	if (accepted_action) {
@@ -1956,6 +1986,8 @@ void DialogueController::finish_conquer_advice(Hero* temp_hero) {
 	state = 9;
 }
 
+/*Sets player dialogue based on whether or not the npc decided to accept the player's
+  advice to send a peace offering to another npc. */
 void DialogueController::finish_peace_advice() {
 	//choose different dialog if they denied the action
 	if (accepted_action) {
@@ -1974,6 +2006,8 @@ void DialogueController::finish_peace_advice() {
 	state = 9;
 }
 
+/*Sets player dialogue based on whether or not the npc decided to accept the player's
+  advice to ally with another npc. Calls function to begin "alliance" execution.*/
 void DialogueController::finish_ally_advice(Hero* temp_hero) {
 	//choose different dialog if they denied the action
 	if (Containers::hero_table[curr_hero_topic]->getVillage()->get_alliance() == 
@@ -2015,6 +2049,9 @@ void DialogueController::finish_ally_advice(Hero* temp_hero) {
 	state = 9;
 }
 
+/*Sets player and npc dialogue based on whether or not the npc decided to accept 
+  the player's request for teaching. Enables the player to use new skill if the npc
+  decided to teach them.*/
 void DialogueController::finish_teach(Hero* temp_hero) {
 	//check if I want to accept
 	if (accepted_action) {
@@ -2046,6 +2083,7 @@ void DialogueController::finish_teach(Hero* temp_hero) {
 	}
 }
 
+/*Sets npc dialogue for joining the player's party.*/
 void DialogueController::finish_recruit(Hero* temp_hero, dialogue_point dp){
 	if (temp_hero->getVillage()->get_alliance() == player->getVillage()->get_alliance()) {
 		player->getParty()->add_party_to_party(temp_hero->getParty());
@@ -2059,6 +2097,8 @@ void DialogueController::finish_recruit(Hero* temp_hero, dialogue_point dp){
 	state = 7;
 }
 
+/*Sets npc dialogue based on whether or not they react positively to the player's 
+  intimidation. Calls function to end "intimidation" execution.*/
 void DialogueController::resolve_talk_back(dialogue_point line, Hero* temp_hero) {
 	//check if I want to accept
 	if (accepted_action) {
@@ -2081,6 +2121,8 @@ void DialogueController::resolve_talk_back(dialogue_point line, Hero* temp_hero)
 	otherConversationPoint(line);
 }
 
+/*Sets npc dialogue based on whether or not they decide to react positively to the player's
+  praise. Calls function to end "offer praise" execution.*/
 void DialogueController::resolve_plea(dialogue_point line, Hero* temp_hero) {
 	//check if I want to accept
 	if (accepted_action) {
@@ -2103,6 +2145,8 @@ void DialogueController::resolve_plea(dialogue_point line, Hero* temp_hero) {
 	otherConversationPoint(line);
 }
 
+/*Sets npc dialogue based on whether or not they react positively to the player's
+  boast. Calls function to end "boast" execution.*/
 void DialogueController::resolve_congratulate(dialogue_point line, Hero* temp_hero) {
 	
 			//check if I want to accept
@@ -2126,7 +2170,8 @@ void DialogueController::resolve_congratulate(dialogue_point line, Hero* temp_he
 			otherConversationPoint(line);
 }
 
-
+/*Sets npc dialogue based on whether or not they react positively to the player's
+  compliment. Calls funciton to end "compliment" execution.*/
 void DialogueController::resolve_thank(dialogue_point line, Hero* temp_hero) {
 	//check if I want to accept
 	if (accepted_action) {
@@ -2149,6 +2194,8 @@ void DialogueController::resolve_thank(dialogue_point line, Hero* temp_hero) {
 	otherConversationPoint(line);
 }
 
+/*Sets npc dialogue based on whether or not they react postively to the player's
+  insult. Calls function to end "insult" execution.*/
 void DialogueController::resolve_defend(dialogue_point line, Hero* temp_hero) {
 
 	//check if I want to accept
@@ -2172,6 +2219,8 @@ void DialogueController::resolve_defend(dialogue_point line, Hero* temp_hero) {
 	otherConversationPoint(line);
 }
 
+/*Sets npc dialogue based on whether or not they react positively to the player's
+  gift. Calls function to end the "offer gift" execution.*/
 void DialogueController::resolve_bribe(dialogue_point line, Hero* temp_hero) {
 	//check if I want to accept
 	if (accepted_action) {
@@ -2194,6 +2243,8 @@ void DialogueController::resolve_bribe(dialogue_point line, Hero* temp_hero) {
 	otherConversationPoint(line);
 }
 
+/*Sets npc dialogue based on whether or not they decide to teach the player
+  a skill. Increases the player's strength if the npc chooses to teach them.*/
 void DialogueController::initiate_teach(Hero* temp_hero) {
 	//check if I want to accept
 	if (accepted_action) {
@@ -2225,6 +2276,8 @@ void DialogueController::initiate_teach(Hero* temp_hero) {
 	dialogue.state_is_8 = true;
 }
 
+/*Sets npc dialogue based on whether or not they decide to take the player's
+  advice to ally with another npc.*/
 void DialogueController::initiate_ally_advice(Hero* temp_hero) {
 
 	//checks if this hero is already allies with the hero that the player is suggesting an alliance with
@@ -2253,6 +2306,8 @@ void DialogueController::initiate_ally_advice(Hero* temp_hero) {
 	dialogue.state_is_8 = true;
 }
 
+/*Sets npc dialogue based on whether or not they decide to take the player's
+  advice to conquer another npc's village.*/
 void DialogueController::initiate_conquer(Hero* temp_hero) {
 	//check if I want to accept
 	if (accepted_action) {
@@ -2275,6 +2330,8 @@ void DialogueController::initiate_conquer(Hero* temp_hero) {
 	dialogue.state_is_8 = true;
 }
 
+/*Sets npc dialogue based on whether or not they decide to take the player's
+  advice to fight another npc.*/
 void DialogueController::initiate_advice_fight(Hero* temp_hero) {
 	//check if I want to accept
 	if (accepted_action) {
@@ -2296,6 +2353,8 @@ void DialogueController::initiate_advice_fight(Hero* temp_hero) {
 	dialogue.state_is_8 = true;
 }
 
+/*Sets npc dialogue based on whether or not they decide to accept the player's
+  request to spar. Calls function to execute the spar.*/
 void DialogueController::initiate_spar(Hero* temp_hero) {
 	//calls action start if the question is asked at all
 	PlayerActExecFunctions::execute_start("Spar", temp_hero);
@@ -2319,6 +2378,8 @@ void DialogueController::initiate_spar(Hero* temp_hero) {
 	dialogue.state_is_8 = true;
 }
 
+/*Sets npc dialogue based on whether or not they decide to accept the player's
+  challenge to a duel. Calls function to execute the duel.*/
 void DialogueController::initiate_duel(Hero* temp_hero) {
 	//calls action start if the question is asked at all
 	PlayerActExecFunctions::execute_start("Duel", temp_hero);
@@ -2342,6 +2403,8 @@ void DialogueController::initiate_duel(Hero* temp_hero) {
 	dialogue.state_is_8 = true;
 }
 
+/*Sets npc dialogue based on whether or not they decide to accept the player's 
+  alliance offer. Calls function to execute the alliance.*/
 void DialogueController::initiate_alliance(Hero* temp_hero) {
 	if (temp_hero->getVillage()->get_alliance() != player->getVillage()->get_alliance())
 		PlayerActExecFunctions::execute_start("Form_Alliance", temp_hero);
