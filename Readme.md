@@ -1,4 +1,4 @@
-### What is Children of Ase
+### What is Children of Àṣẹ
 
 Children of Osi is a top down 2D interactive narrative/adventure game. I am acted as the lead of a team of 9 Programmer/Designers and 14 artists. The game was developed in C++ using a custom engine built by the development team. The game is based of of Yoruba beliefs and traditions and is trying to educate players on what is beautiful culture.
 
